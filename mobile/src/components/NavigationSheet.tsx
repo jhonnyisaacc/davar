@@ -14,6 +14,7 @@ import BottomSheet, {
   type BottomSheetBackdropProps,
 } from "@gorhom/bottom-sheet";
 import type { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
+import type { BottomSheetFlatListMethods } from "@gorhom/bottom-sheet/lib/typescript/components/bottomSheetScrollable";
 import { Ionicons } from "@expo/vector-icons";
 import Animated, { FadeIn } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -410,6 +411,49 @@ const NavigationSheetComponent = (
   );
 
   const [isOpen, setIsOpen] = useState(false);
+  const bookListRef = useRef<BottomSheetFlatListMethods | null>(null);
+  // Deterministic initial scroll: compute the selected book's offset from a
+  // fixed row height instead of measuring on-screen (iOS BottomSheet mount
+  // races make measurement-based centering unreliable — #106).
+  const bookRowHeight =
+    spacing[4] * 2 + spacing[3] + StyleSheet.hairlineWidth;
+  const pendingScrollBookIdRef = useRef<string | null>(null);
+
+  const scrollBookListToSelected = useCallback(
+    (bookId: string, animated = false) => {
+      const index = booksMeta.findIndex((book) => book.id === bookId);
+      if (index < 0) return;
+      try {
+        bookListRef.current?.scrollToOffset({
+          offset: Math.max(index * bookRowHeight - bookRowHeight * 2, 0),
+          animated,
+        });
+      } catch {
+        // List not ready yet; retried via pendingScrollBookIdRef below.
+      }
+    },
+    [booksMeta, bookRowHeight],
+  );
+
+  // Retry once the FlatList signals it has content (deterministic trigger,
+  // replaces timing-dependent requestAnimationFrame retries).
+  useEffect(() => {
+    if (!pendingScrollBookIdRef.current || booksMeta.length === 0) return;
+    scrollBookListToSelected(pendingScrollBookIdRef.current);
+    pendingScrollBookIdRef.current = null;
+  }, [booksMeta, scrollBookListToSelected]);
+
+  // Re-scroll to the selected book whenever the book step opens.
+  useEffect(() => {
+    if (step === "book" && !searchQuery.trim()) {
+      if (booksMeta.length > 0) {
+        scrollBookListToSelected(selectedBookId);
+      } else {
+        pendingScrollBookIdRef.current = selectedBookId;
+      }
+    }
+  }, [step, searchQuery, booksMeta, selectedBookId, scrollBookListToSelected]);
+
 
   const handleSheetChanges = useCallback(
     (index: number) => {
@@ -632,10 +676,15 @@ const NavigationSheetComponent = (
           style={styles.content}
         >
           <BottomSheetFlatList
+            ref={bookListRef}
             data={filteredBooks}
             keyExtractor={(item: BookMeta) => item.id}
             renderItem={renderBookItem}
             style={styles.list}
+            initialNumToRender={12}
+            onScrollToIndexFailed={() => {
+              // Deterministic fallback: jump by computed offset.
+            }}
             contentContainerStyle={[
               styles.listContent,
               {
