@@ -12,7 +12,10 @@ Usage:
 import json
 import argparse
 import logging
+import sys
+import hashlib
 from pathlib import Path
+from datetime import datetime, timezone
 from typing import Dict, List, Any, Optional
 
 # Configure logging
@@ -24,11 +27,12 @@ logger = logging.getLogger(__name__)
 
 # Paths - use absolute path from the project root
 # File: scripts/delitzsch/strongs/v2/merge_strongs.py
-# parent chain: v2 -> strongs -> delitzsch -> scripts -> project_root
+# parent chain: v2 -> strong/s -> delitzsch -> scripts -> project_root
 PROJECT_ROOT = Path(__file__).parent.parent.parent.parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
 PARSED_DIR = DATA_DIR / "delitzsch_parsed"
 V2_DIR = PARSED_DIR / "strongs" / "v2"
+REPORT_DIR = DATA_DIR / "delitzsch_review" / "reports"
 
 # All 27 NT books
 ALL_BOOKS = [
@@ -77,6 +81,36 @@ def create_assignment_map(v2_data: Dict[str, Any]) -> Dict[int, Dict[int, Dict[s
                 }
     
     return assignment_map
+
+
+def compose_strong(strong: Optional[str], prefixes: Optional[List[str]]) -> Optional[str]:
+    """
+    Compose a Strong reference with its prefix codes.
+
+    When a word carries one or more Hebrew prefix bits (e.g. the definite article
+    ``Hd``, conjunction ``Hc``, preposition ``Hb``/``Hl``/``Hk``), the stored
+    Strong reference is composed as ``<prefix codes>/<H####>`` so the lexical
+    root remains addressable while the surface morphosyntax is preserved.
+
+    Examples:
+        compose_strong('H7223', ['Hd'])         -> 'Hd/H7223'
+        compose_strong('H5826', ['Hc', 'Hd'])   -> 'Hc/Hd/H5826'
+        compose_strong('H120', []) / None       -> 'H120' / None
+
+    Args:
+        strong: The base Strong reference (e.g. 'H7223') or None.
+        prefixes: List of Hebrew prefix codes attached to the surface word.
+
+    Returns:
+        The composed reference, the bare reference when no prefix codes exist,
+        or None when ``strong`` is falsy.
+    """
+    if not strong:
+        return None
+    codes = [code for code in (prefixes or []) if code]
+    if not codes:
+        return strong
+    return "/".join(codes + [strong])
 
 
 def merge_strongs_for_book(book_name: str, dry_run: bool = False) -> Dict[str, int]:
@@ -150,10 +184,12 @@ def merge_strongs_for_book(book_name: str, dry_run: bool = False) -> Dict[str, i
                     
                     # Only update if current strong is null
                     if word.get('strong') is None:
-                        word['strong'] = assignment['strong']
+                        word['strong'] = compose_strong(
+                            assignment['strong'], assignment.get('prefixes', [])
+                        )
                         words_updated += 1
                         verse_updated = True
-                        logger.debug(f"    Verse {verse_num}, word {word_idx}: '{assignment['text']}' -> {assignment['strong']}")
+                        logger.debug(f"    Verse {verse_num}, word {word_idx}: '{assignment['text']}' -> {word['strong']}")
             
             if verse_updated:
                 verses_modified += 1
@@ -173,6 +209,95 @@ def merge_strongs_for_book(book_name: str, dry_run: bool = False) -> Dict[str, i
     return stats
 
 
+def run_post_merge_validation(books: List[str]) -> Dict[str, Any]:
+    """
+    Validate merged verse data with the existing ``scan_issues`` review gate.
+
+    Reuses the shared Delitzsch review workflow so the merge step reports the
+    same quality signals (null Strongs, suspicious assignments) that the review
+    pipeline itself uses. This is the "quality gate" that must pass before
+    refreshed Besorah mappings are considered shippable.
+
+    Returns:
+        A deterministic summary keyed by issue type, with per-book counts.
+    """
+    sys.path.insert(0, str(PROJECT_ROOT))
+    try:
+        from scripts.delitzsch.review.workflow import LexiconIndex, scan_issues
+    except ImportError as exc:  # pragma: no cover - defensive
+        logger.error(f"Could not import review workflow for validation: {exc}")
+        return {"error": "import_failed"}
+
+    lexicon = LexiconIndex(DATA_DIR / "dict" / "lexicon" / "words")
+    issues = scan_issues(PARSED_DIR, lexicon, books=books or None)
+
+    by_type: Dict[str, int] = {}
+    by_book: Dict[str, Dict[str, int]] = {}
+    for issue in issues:
+        by_type[issue.issue_type] = by_type.get(issue.issue_type, 0) + 1
+        book_counts = by_book.setdefault(issue.occurrence.book, {})
+        book_counts[issue.issue_type] = book_counts.get(issue.issue_type, 0) + 1
+
+    return {
+        "total_issues": len(issues),
+        "by_type": dict(sorted(by_type.items())),
+        "by_book": {book: dict(sorted(counts.items())) for book, counts in sorted(by_book.items())},
+    }
+
+
+def _report_payload(
+    total_stats: Dict[str, int],
+    validation: Dict[str, Any],
+    books: List[str],
+    dry_run: bool,
+) -> Dict[str, Any]:
+    """
+    Build a deterministic report payload independent of clock/ordering.
+
+    The report is intentionally free of wall-clock timestamps so that re-running
+    the merge on identical inputs produces byte-identical output (deterministic
+    rerun report). A content hash over the stats and validation is included as a
+    stable fingerprint.
+    """
+    books_sorted = sorted(books)
+    payload = {
+        "books": books_sorted,
+        "dry_run": dry_run,
+        "stats": {key: total_stats[key] for key in sorted(total_stats)},
+        "post_merge_validation": {
+            "total_issues": validation.get("total_issues", 0),
+            "by_type": validation.get("by_type", {}),
+            "by_book": validation.get("by_book", {}),
+        },
+    }
+    fingerprint = hashlib.sha256(
+        json.dumps(payload, sort_keys=True, ensure_ascii=False).encode("utf-8")
+    ).hexdigest()[:16]
+    payload["report_hash"] = fingerprint
+    return payload
+
+
+def write_deterministic_report(
+    total_stats: Dict[str, int],
+    validation: Dict[str, Any],
+    books: List[str],
+    dry_run: bool,
+) -> Path:
+    """
+    Write the deterministic post-merge report to ``data/delitzsch_review/reports/``.
+
+    Returns the path of the written report file.
+    """
+    REPORT_DIR.mkdir(parents=True, exist_ok=True)
+    payload = _report_payload(total_stats, validation, books, dry_run)
+    report_path = REPORT_DIR / "merge_strongs_report.json"
+    with report_path.open("w", encoding="utf-8") as handle:
+        json.dump(payload, handle, ensure_ascii=False, indent=2)
+        handle.write("\n")
+    logger.info(f"Deterministic report written to {report_path}")
+    return report_path
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Merge Strong's numbers from v2 analysis into verse data"
@@ -186,6 +311,17 @@ def main():
         '--dry-run', 
         action='store_true',
         help='Show what would be updated without making changes'
+    )
+    parser.add_argument(
+        '--no-validate',
+        action='store_true',
+        help='Skip the post-merge scan_issues validation gate'
+    )
+    parser.add_argument(
+        '--report',
+        type=str,
+        default=None,
+        help='Path to write the deterministic report (default: data/delitzsch_review/reports/merge_strongs_report.json)'
     )
     
     args = parser.parse_args()
@@ -225,6 +361,22 @@ def main():
     logger.info(f"  Skipped (no v2 data): {total_stats['skipped']}")
     logger.info(f"  Failed: {total_stats['failed']}")
     
+    validation = {} if args.no_validate else run_post_merge_validation(books_to_process)
+    if not args.no_validate:
+        logger.info(f"\n  Post-merge validation: {validation.get('total_issues', 0)} issues flagged")
+
+    if args.report or not args.dry_run:
+        target = Path(args.report) if args.report else None
+        if target and not target.is_absolute():
+            target = PROJECT_ROOT / target
+        report_path = write_deterministic_report(
+            total_stats, validation or {}, books_to_process, dry_run=args.dry_run
+        )
+        if target:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(report_path.read_text(encoding="utf-8"), encoding="utf-8")
+            report_path = target
+
     if args.dry_run:
         logger.info("\n  [DRY RUN COMPLETE - No files were modified]")
     else:
