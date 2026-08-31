@@ -1536,6 +1536,11 @@ export interface WordAnalysis {
 	root_translit_es?: string;
 	occurrences_count: number;
 	instances?: Array<string | { verse: string; text: string }>;
+	instance_policy_version?: string;
+	instance_total?: number;
+	instance_surface_count?: number;
+	instance_tier?: "low" | "medium" | "high";
+	instance_omitted_count?: number;
 }
 
 type RawDefinition = {
@@ -1568,6 +1573,10 @@ type RawCustomInstance = {
 	book: string;
 	chapter: number;
 	verse: number;
+	word_positions?: number[] | number;
+	stable_id?: string;
+	confidence?: number;
+	[key: string]: unknown;
 };
 
 type RawCustomEntry = {
@@ -1582,6 +1591,13 @@ type RawCustomEntry = {
 	manual_instances?: string[];
 	oe_instances?: RawCustomInstance[];
 	nt_instances?: RawCustomInstance[];
+	instances?: RawCustomInstance[];
+	surface_instances?: RawCustomInstance[];
+	instance_policy_version?: string;
+	instance_total?: number;
+	instance_surface_count?: number;
+	instance_tier?: "low" | "medium" | "high";
+	instance_omitted_count?: number;
 };
 
 let wordsPromise: Promise<Record<string, RawWordEntry>> | null = null;
@@ -1632,6 +1648,13 @@ const formatOccurrenceReference = (reference: string): string => {
 
 const formatCustomOccurrence = (instance: RawCustomInstance): string =>
 	`${instance.book} ${instance.chapter}:${instance.verse}`;
+
+const getPolicyInstances = (entry: RawCustomEntry): RawCustomInstance[] =>
+	entry.instances ??
+	entry.surface_instances ?? [
+		...(entry.oe_instances ?? []),
+		...(entry.nt_instances ?? []),
+	];
 
 const mapDefinitions = (
 	definitions: RawDefinition[] | undefined,
@@ -1751,14 +1774,11 @@ const toWordAnalysis = (
 		dictionaryEntry?.occurrences?.references?.map(formatOccurrenceReference) ??
 		[];
 	const manualInstances = customEntry?.manual_instances ?? [];
-	const oeInstances =
-		customEntry?.oe_instances?.map(formatCustomOccurrence) ?? [];
-	const ntInstances =
-		customEntry?.nt_instances?.map(formatCustomOccurrence) ?? [];
+	const policyInstances = customEntry ? getPolicyInstances(customEntry) : [];
+	const customInstances = policyInstances.map(formatCustomOccurrence);
 	const instances = [
 		...manualInstances,
-		...oeInstances,
-		...ntInstances,
+		...customInstances,
 		...occurrenceReferences,
 	];
 
@@ -1789,6 +1809,11 @@ const toWordAnalysis = (
 			: rootEntry?.transliteration_es,
 		occurrences_count: occurrencesCount,
 		instances: instances.length > 0 ? instances : undefined,
+		instance_policy_version: customEntry?.instance_policy_version,
+		instance_total: customEntry?.instance_total,
+		instance_surface_count: customEntry?.instance_surface_count,
+		instance_tier: customEntry?.instance_tier,
+		instance_omitted_count: customEntry?.instance_omitted_count,
 	};
 };
 

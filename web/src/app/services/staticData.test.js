@@ -12,6 +12,50 @@ const readJson = async (relativePath) => {
 };
 
 describe("static data integrity", () => {
+	test("lexicon consumes versioned policy instances and metadata", async () => {
+		const originalFetch = globalThis.fetch;
+		const customEntry = {
+			strong_number: "D9999",
+			hebrew: "דוגמה",
+			instances: [
+				{ book: "john", chapter: 1, verse: 2, stable_id: "full-instance" },
+			],
+			// This deliberately differs from instances: the client must use the
+			// complete set for export/background consumers, not the bounded surface.
+			surface_instances: [],
+			instance_policy_version: "1.1",
+			instance_total: 1,
+			instance_surface_count: 0,
+			instance_tier: "high",
+			instance_omitted_count: 1,
+		};
+		globalThis.fetch = async (input) => {
+			const url = String(input);
+			const payload = url.includes("words.json")
+				? {}
+				: url.includes("roots.json")
+					? {}
+					: { D9999: customEntry };
+			return new Response(JSON.stringify(payload), {
+				headers: { "content-type": "application/json" },
+			});
+		};
+
+		try {
+			const entry = await loadLexiconEntry("D9999", "en");
+			expect(entry).toMatchObject({
+				instance_policy_version: "1.1",
+				instance_total: 1,
+				instance_surface_count: 0,
+				instance_tier: "high",
+				instance_omitted_count: 1,
+				instances: ["john 1:2"],
+			});
+		} finally {
+			globalThis.fetch = originalFetch;
+		}
+	});
+
 	test("core metadata has books and chapter map", async () => {
 		const metadata = await readJson("data/metadata.json");
 
