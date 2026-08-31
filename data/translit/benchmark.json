@@ -1,0 +1,8 @@
+[
+  {"id": "genesis-1-1", "hebrew": "בְּרֵאשִׁית", "expected_en": "bereshiyt", "expected_es": "bereshiyt"},
+  {"id": "prefix-conjunction-preposition", "hebrew": "וּבְ", "expected_en": "uve", "expected_es": "uve"},
+  {"id": "proper-name-david", "hebrew": "דָּוִד", "expected_en": "david", "expected_es": "david"},
+  {"id": "sacred-name", "hebrew": "יְהוָה", "expected_en": "yehvah", "expected_es": "yehvah"},
+  {"id": "mitzvah", "hebrew": "מִצְוָה", "expected_en": "mitzevah", "expected_es": "mitzevah"},
+  {"id": "shabbat", "hebrew": "שַׁבָּת", "expected_en": "shabat", "expected_es": "shabat"}
+]
