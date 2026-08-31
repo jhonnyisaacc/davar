@@ -248,8 +248,12 @@ type TabPressEvent = {
   preventDefault: () => void;
 };
 
-const createStyles = (colors: ReturnType<typeof getColors>) =>
-  StyleSheet.create({
+const createStyles = (colors: ReturnType<typeof getColors>, screenWidth: number) => {
+  const isTablet = screenWidth >= 768;
+  const readingHorizontalPadding = isTablet ? 48 : spacing[6];
+  const readingMaxWidth = isTablet ? 960 : undefined;
+
+  return StyleSheet.create({
     safeArea: {
       flex: 1,
       backgroundColor: colors.background,
@@ -282,15 +286,18 @@ const createStyles = (colors: ReturnType<typeof getColors>) =>
     },
     chapterTranslationScroll: {
       flex: 1,
-      paddingHorizontal: spacing[6],
+      paddingHorizontal: readingHorizontalPadding,
       paddingBottom: spacing[8],
     },
     chapterTranslationContent: {
       paddingTop: spacing[16],
       paddingBottom: spacing[16],
+      width: "100%",
+      maxWidth: readingMaxWidth,
+      alignSelf: "center",
     },
     chapterVerseList: {
-      rowGap: spacing[8],
+      rowGap: isTablet ? spacing[10] : spacing[8],
     },
     chapterTranslationFlowText: {
       fontFamily: typography.families.latinUI,
@@ -309,7 +316,7 @@ const createStyles = (colors: ReturnType<typeof getColors>) =>
     },
     chapterHebrewFlowText: {
       fontFamily: typography.families.hebrewScripture,
-      fontSize: typography.sizes.hebrewVerseMedium * 1.06,
+      fontSize: typography.sizes.hebrewVerseMedium * (isTablet ? 1.14 : 1.06),
       lineHeight:
         typography.sizes.hebrewVerseMedium * typography.lineHeights.hebrewScripture,
       color: colors.textPrimary,
@@ -428,6 +435,7 @@ const createStyles = (colors: ReturnType<typeof getColors>) =>
       color: colors.textPrimary,
     },
   });
+};
 
 type VersePageProps = {
   item: DisplayVerse;
@@ -715,9 +723,9 @@ const VersePage = memo(
 export const VerseDetailContent = () => {
   const themeMode = useAppStore((state: AppState) => state.themeMode);
   const colors = getColors(themeMode);
-  const styles = useMemo(() => createStyles(colors), [colors]);
+  const { height: screenHeight, width: screenWidth } = useWindowDimensions();
+  const styles = useMemo(() => createStyles(colors, screenWidth), [colors, screenWidth]);
   const { t } = useTranslation();
-  const { height: screenHeight } = useWindowDimensions();
   const insets = useSafeAreaInsets();
   const tabBarHeight = useContext(BottomTabBarHeightContext) ?? 0;
   const [measuredHeight, setMeasuredHeight] = useState(0);
