@@ -333,7 +333,8 @@ const createStyles = (colors: ReturnType<typeof getColors>) =>
     },
     chapterFootnoteCard: {
       width: "100%",
-      maxWidth: 420,
+      // Percentage width prevents phone-sized dialogs on iPad and split view.
+      maxWidth: "90%",
       borderRadius: 14,
       paddingHorizontal: spacing[5],
       paddingVertical: spacing[4],
@@ -350,7 +351,8 @@ const createStyles = (colors: ReturnType<typeof getColors>) =>
     },
     hutterAnnouncementCard: {
       width: "100%",
-      maxWidth: 420,
+      // Percentage width prevents phone-sized dialogs on iPad and split view.
+      maxWidth: "90%",
       borderRadius: 28,
       borderWidth: 1,
       borderColor: colors.border,

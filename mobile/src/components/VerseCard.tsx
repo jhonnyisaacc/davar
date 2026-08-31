@@ -275,7 +275,8 @@ const createStyles = (
     },
     footnoteModalCard: {
       width: "100%",
-      maxWidth: 420,
+      // Keep footnote cards responsive on iPad and resizable split view.
+      maxWidth: "90%",
       borderRadius: 14,
       paddingHorizontal: spacing[5],
       paddingVertical: spacing[4],
