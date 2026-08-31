@@ -23,6 +23,18 @@ Each book produces a `book.json` file in [data/translit](data/translit):
 - Besorah: [data/delitzsch_parsed](data/delitzsch_parsed)
 - DSS variants: [data/dss/books](data/dss/books) (differences only)
 
+DSS output fields
+
+DSS variants are emitted with `dss_translit_en`, `dss_translit_es`,
+`dss_translit_source`, and `dss_translit_confidence`. Resolution is
+deterministic: complete editorial fields win (`editorial`/`high`), otherwise
+the local transliterator runs on the DSS surface form (`local_rule`/`medium`),
+with `low` confidence reserved for an empty baseline. The legacy
+`translit_en`/`translit_es` aliases remain so existing web and offline clients
+continue to read the output. Pass `--use-xai-vocalization` to add a cached AI
+vocalization stage before the same deterministic output step; unavailable AI
+falls back to the unpointed DSS form.
+
 ## Files
 
 - `config.py` - paths, model, pricing, batching defaults
