@@ -1,0 +1,232 @@
+  console.log("[davar-static-data] phase=generate start");
+
+  await rm(WEB_PUBLIC_DATA_ROOT, { recursive: true, force: true });
+  await mkdir(WEB_PUBLIC_DATA_ROOT, { recursive: true });
+
+  const tanaj = await generateHebrewChapters(
+    join(DATA_ROOT, "oe"),
+    join(WEB_PUBLIC_DATA_ROOT, "oe"),
+    "oe",
+  );
+
+  const besorah = await generateHebrewChapters(
+    join(DATA_ROOT, "delitzsch_parsed"),
+    join(WEB_PUBLIC_DATA_ROOT, "besorah"),
+    "delitzsch",
+  );
+  const hutter = await generateHutterChapters();
+
+  const tthBundle = await copyFolderJsonFiles(
+    join(DATA_ROOT, "tth_2", "json"),
+    join(WEB_PUBLIC_DATA_ROOT, "tth"),
+  );
+
+  const besBundle = await copyFolderJsonFiles(
+    join(DATA_ROOT, "bes", "json"),
+    join(WEB_PUBLIC_DATA_ROOT, "bes"),
+  );
+
+  const translitBundle = await copyFolderJsonFiles(
+    join(DATA_ROOT, "translit"),
+    join(WEB_PUBLIC_DATA_ROOT, "translit"),
+  );
+
+  // Publish DSS transliteration variants for web Qumran mode.
+  try {
+    await copyFolderJsonFiles(
+      join(DATA_ROOT, "translit", "dss"),
+      join(WEB_PUBLIC_DATA_ROOT, "translit", "dss"),
+    );
+  } catch {
+    // DSS transliteration files are optional in some environments.
+  }
+
+  const { dictionaryBundle } = await generateDictionary();
+
+  const booksDir = join(DATA_ROOT, "dss", "books");
+  const dssFiles = await listJsonFiles(booksDir);
+  const dssBooks: Record<string, JsonValue> = {};
+  await mkdir(join(WEB_PUBLIC_DATA_ROOT, "dss"), { recursive: true });
+  for (const file of dssFiles) {
+    const stem = file.replace(/\.json$/i, "");
+    const dssBookData = await readJson<JsonValue>(join(booksDir, file));
+    const enrichedDssBook = enrichDssBookForSpanReplacement(dssBookData);
+    dssBooks[stem] = enrichedDssBook;
+    await writeFile(
+      join(WEB_PUBLIC_DATA_ROOT, "dss", file),
+      JSON.stringify(enrichedDssBook),
+      "utf-8",
+    );
+  }
+  const dssBundle = dssBooks as JsonValue;
+
+  const canonicalBookLabels = await loadCanonicalBookLabels();
+  const metadata = generateMetadata(tanaj.counts, besorah.counts, canonicalBookLabels);
+  await writeFile(
+    join(WEB_PUBLIC_DATA_ROOT, "metadata.json"),
+    JSON.stringify(metadata),
+    "utf-8",
+  );
+
+  const bundlesDir = join(WEB_PUBLIC_DATA_ROOT, "bundles");
+  await mkdir(bundlesDir, { recursive: true });
+
+  const tanajSplitDir = join(bundlesDir, "tanaj");
+  await mkdir(tanajSplitDir, { recursive: true });
+
+  const tanajBookIds = Object.keys(tanaj.bundle.books).sort((a, b) =>
+    a.localeCompare(b, "en"),
+  );
+  const tanajParts: Record<string, SplitBundlePart> = {};
+  let tanajTotalSize = 0;
+
+  for (const bookId of tanajBookIds) {
+    const bookBundle = tanaj.bundle.books[bookId] as JsonValue;
+    const relativePath = `data/bundles/tanaj/${bookId}.json`;
+    const size = getJsonSize(bookBundle);
+    assertBundleFileSize(relativePath, size);
+
+    tanajTotalSize += size;
+    tanajParts[bookId] = {
+      size,
+      checksum: sha256OfJson(bookBundle),
+    };
+
+    await writeFile(
+      join(tanajSplitDir, `${bookId}.json`),
+      JSON.stringify(bookBundle),
+      "utf-8",
+    );
+  }
+
+  const tanajIndex: TanajSplitIndex = {
+    format: "split-by-book-v1",
+    books: tanajBookIds,
+    parts: tanajParts,
+    total_size: tanajTotalSize,
+  };
+  assertBundleFileSize("data/bundles/tanaj.json", getJsonSize(tanajIndex as unknown as JsonValue));
+  await writeFile(
+    join(bundlesDir, "tanaj.json"),
+    JSON.stringify(tanajIndex),
+    "utf-8",
+  );
+  await writeFile(
+    join(bundlesDir, "besorah.json"),
+    JSON.stringify(besorah.bundle),
+    "utf-8",
+  );
+  await writeFile(
+    join(bundlesDir, "hutter.json"),
+    JSON.stringify({ books: hutter.books }),
+    "utf-8",
+  );
+  await writeFile(join(bundlesDir, "tth.json"), JSON.stringify(tthBundle), "utf-8");
+  const ts2009Bundle = shouldExportTs2009Static
+    ? await generateTs2009Chapters()
+    : null;
+  if (ts2009Bundle) {
+    await writeFile(
+      join(bundlesDir, "ts2009.json"),
+      JSON.stringify(ts2009Bundle.bundle),
+      "utf-8",
+    );
+  }
+  await writeFile(
+    join(bundlesDir, "dictionary.json"),
+    JSON.stringify(dictionaryBundle),
+    "utf-8",
+  );
+  await writeFile(join(bundlesDir, "dss.json"), JSON.stringify(dssBundle), "utf-8");
+  await writeFile(
+    join(bundlesDir, "versions.json"),
+    JSON.stringify(BUNDLE_VERSIONS),
+    "utf-8",
+  );
+
+  const manifest = {
+    version: `${new Date().toISOString().slice(0, 10).replace(/-/g, ".")}-1`,
+    generated_at: new Date().toISOString(),
+    bundles: {
+      metadata: {
+        size: getJsonSize(metadata),
+        checksum: sha256OfJson(metadata),
+      },
+      tanaj: {
+        size: tanajTotalSize,
+        checksum: sha256OfJson(tanajIndex as unknown as JsonValue),
+      },
+      besorah: {
+        size: getJsonSize(besorah.bundle),
+        checksum: sha256OfJson(besorah.bundle),
+      },
+      hutter: {
+        size: getJsonSize({ books: hutter.books } as unknown as JsonValue),
+        checksum: sha256OfJson({ books: hutter.books } as unknown as JsonValue),
+      },
+      tth: {
+        size: getJsonSize(tthBundle as unknown as JsonValue),
+        checksum: sha256OfJson(tthBundle as unknown as JsonValue),
+      },
+      bes: {
+        size: getJsonSize(besBundle as unknown as JsonValue),
+        checksum: sha256OfJson(besBundle as unknown as JsonValue),
+      },
+      translit: {
+        size: getJsonSize(translitBundle as unknown as JsonValue),
+        checksum: sha256OfJson(translitBundle as unknown as JsonValue),
+      },
+      dictionary: {
+        size: getJsonSize(dictionaryBundle),
+        checksum: sha256OfJson(dictionaryBundle),
+      },
+      dss: {
+        size: getJsonSize(dssBundle),
+        checksum: sha256OfJson(dssBundle),
+      },
+      versions: {
+        size: getJsonSize(BUNDLE_VERSIONS as unknown as JsonValue),
+        checksum: sha256OfJson(BUNDLE_VERSIONS as unknown as JsonValue),
+      },
+      ...(ts2009Bundle
+        ? {
+            ts2009: {
+              size: getJsonSize(ts2009Bundle.bundle as unknown as JsonValue),
+              checksum: sha256OfJson(ts2009Bundle.bundle as unknown as JsonValue),
+            },
+          }
+        : {}),
+    },
+  };
+
+  await writeFile(
+    join(WEB_PUBLIC_DATA_ROOT, "manifest.json"),
+    JSON.stringify(manifest),
+    "utf-8",
+  );
+
+  console.log("Generated static data in web/public/data");
+  console.log(`books: tanaj=${Object.keys(tanaj.bundle.books).length}, besorah=${Object.keys(besorah.bundle.books).length}`);
+  if (!shouldExportTs2009Static) {
+    console.log("ts2009: static export disabled; serving through private API only");
+  }
+  if (ts2009Bundle) {
+    console.log(
+      `ts2009: books=${ts2009Bundle.stats.books}, chapters=${ts2009Bundle.stats.chapters}, verses=${ts2009Bundle.stats.verses}`,
+    );
+    if (ts2009Bundle.stats.skippedBooks.length > 0) {
+      console.warn(
+        `ts2009 skipped books: ${ts2009Bundle.stats.skippedBooks.join(", ")}`,
+      );
+    }
+  }
+  console.log(`bundles: ${Object.keys(manifest.bundles).join(", ")}`);
+  console.log(
+    `[davar-static-data] phase=generate done duration=${((Date.now() - generationStartedAt) / 1000).toFixed(1)}s`,
+  );
+};
+
+main().catch((error) => {
+  console.error("generate-static-data failed", error);
+  process.exit(1);
+});

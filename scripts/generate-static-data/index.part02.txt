@@ -1,0 +1,235 @@
+    const chapterFiles = await listJsonFiles(join(sourceDir, folderName));
+
+    const chapters: Record<string, JsonValue> = {};
+    const chapterVerseCounts: Record<string, number> = {};
+
+    for (const chapterFile of chapterFiles) {
+      const chapterNum = chapterFile.replace(/\.json$/i, "");
+      const inputPath = join(sourceDir, folderName, chapterFile);
+      const data = await readJson<JsonValue>(inputPath);
+
+      // Delitzsch parsed chapters are wrapped in an array with {chapter, verses}.
+      const normalized =
+        source === "delitzsch" && Array.isArray(data)
+          ? (data as Array<{ verses?: JsonValue[] }>)[0]?.verses ?? []
+          : data;
+
+      chapters[chapterNum] = normalized;
+
+      const versesLength = Array.isArray(normalized) ? normalized.length : 0;
+      chapterVerseCounts[chapterNum] = versesLength;
+
+      await mkdir(join(outDir, bookId), { recursive: true });
+      await writeFile(
+        join(outDir, bookId, `${chapterNum}.json`),
+        JSON.stringify(normalized),
+        "utf-8",
+      );
+    }
+
+    booksBundle[bookId] = { chapters };
+    verseCounts[canonical] = chapterVerseCounts;
+  }
+
+  return {
+    bundle: { books: booksBundle },
+    counts: verseCounts,
+  };
+};
+
+type HutterVerse = {
+  number?: number;
+  text_nikud?: string;
+};
+
+type HutterChapter = {
+  number?: number;
+  verses?: HutterVerse[];
+};
+
+type HutterBook = {
+  chapters?: HutterChapter[];
+};
+
+type HutterMappedWord = {
+  text?: string;
+  translit_en?: string;
+  translit_es?: string;
+  strong?: string;
+  prefixes?: string[];
+};
+
+type HutterMappedVerse = {
+  chapter?: number;
+  verse?: number;
+  hebrew?: string;
+  words?: HutterMappedWord[];
+};
+
+type HutterMappedChapter = {
+  chapter?: number;
+  verses?: HutterMappedVerse[];
+};
+
+type HutterMappingBook = {
+  chapters?: HutterMappedChapter[];
+};
+
+const generateHutterChapters = async (): Promise<{
+  books: Record<string, { chapters: Record<string, JsonValue> }>;
+}> => {
+  const sourceDir = join(DATA_ROOT, "hutter", "staging", "output");
+  const mappingsDir = join(DATA_ROOT, "hutter", "strong_mappings");
+  const outDir = join(WEB_PUBLIC_DATA_ROOT, "hutter");
+  const files = await listJsonFiles(sourceDir);
+  const books: Record<string, { chapters: Record<string, JsonValue> }> = {};
+
+  for (const file of files) {
+    const sourceBookId = file.replace(/\.json$/i, "").toLowerCase();
+    const canonical = DELITZSCH_TO_ENGLISH[sourceBookId];
+    if (!canonical) {
+      continue;
+    }
+
+    const bookId = canonical.toLowerCase();
+    const data = await readJson<HutterBook>(join(sourceDir, file));
+    const mapping = await readJson<HutterMappingBook>(
+      join(mappingsDir, file),
+    );
+    const chapters: Record<string, JsonValue> = {};
+
+    const sourceChapterNumbers = new Set(
+      (data.chapters ?? []).map((chapter) => Number(chapter.number)),
+    );
+
+    for (const chapter of mapping.chapters ?? []) {
+      const chapterNumber = Number(chapter.chapter);
+      if (!Number.isFinite(chapterNumber) || chapterNumber <= 0) {
+        continue;
+      }
+      if (!sourceChapterNumbers.has(chapterNumber)) {
+        throw new Error(
+          `Hutter mapping chapter ${sourceBookId} ${chapterNumber} is not present in the source text`,
+        );
+      }
+
+      const verses = (chapter.verses ?? [])
+        .map((verse) => {
+          const verseNumber = Number(verse.verse);
+          const hebrew = verse.hebrew?.trim() ?? "";
+          if (!Number.isFinite(verseNumber) || verseNumber <= 0 || !hebrew) {
+            return null;
+          }
+
+          return {
+            chapter: chapterNumber,
+            verse: verseNumber,
+            hebrew,
+            words: (verse.words ?? [])
+              .filter((word) => Boolean(word.text?.trim()))
+              .map((word) => ({
+                text: word.text!.trim(),
+                ...(word.translit_en
+                  ? { translit_en: word.translit_en }
+                  : {}),
+                ...(word.translit_es
+                  ? { translit_es: word.translit_es }
+                  : {}),
+                ...(word.strong ? { strong: word.strong } : {}),
+                prefixes: word.prefixes ?? [],
+              })),
+          };
+        })
+        .filter((verse): verse is NonNullable<typeof verse> => verse !== null);
+
+      chapters[String(chapterNumber)] = verses as unknown as JsonValue;
+      await mkdir(join(outDir, bookId), { recursive: true });
+      await writeFile(
+        join(outDir, bookId, `${chapterNumber}.json`),
+        JSON.stringify(verses),
+        "utf-8",
+      );
+    }
+
+    books[bookId] = { chapters };
+  }
+
+  return { books };
+};
+
+const generateDictionary = async (): Promise<{
+  dictionaryBundle: JsonValue;
+  prefixesById: JsonValue;
+}> => {
+  const customDefinitions = await readJson<JsonValue>(
+    join(DATA_ROOT, "dict", "lexicon", "custom_definitions.json"),
+  );
+  const roots = await readJson<JsonValue>(
+    join(DATA_ROOT, "dict", "lexicon", "roots.json"),
+  );
+  const words = await readJson<JsonValue>(
+    join(DATA_ROOT, "dict", "lexicon", "words.json"),
+  );
+  if (words && typeof words === "object" && !Array.isArray(words)) {
+    const entry = (words as { [k: string]: JsonValue }).H3068;
+    if (entry && typeof entry === "object" && !Array.isArray(entry)) {
+      delete (entry as { [k: string]: JsonValue }).translit_en;
+      delete (entry as { [k: string]: JsonValue }).translit_es;
+    }
+  }
+
+  const prefixEntriesDir = join(DATA_ROOT, "dict", "prefixes", "entries");
+  const prefixFiles = await listJsonFiles(prefixEntriesDir);
+  const prefixes: Record<string, JsonValue> = {};
+
+  for (const file of prefixFiles) {
+    const id = file.replace(/\.json$/i, "");
+    prefixes[id] = await readJson<JsonValue>(join(prefixEntriesDir, file));
+  }
+
+  const dictOutDir = join(WEB_PUBLIC_DATA_ROOT, "dict");
+  await mkdir(dictOutDir, { recursive: true });
+  await writeFile(
+    join(dictOutDir, "custom_definitions.json"),
+    JSON.stringify(customDefinitions),
+    "utf-8",
+  );
+  await writeFile(join(dictOutDir, "roots.json"), JSON.stringify(roots), "utf-8");
+  await writeFile(join(dictOutDir, "words.json"), JSON.stringify(words), "utf-8");
+
+  const prefixesById = prefixes as JsonValue;
+  await writeFile(
+    join(WEB_PUBLIC_DATA_ROOT, "prefixes.json"),
+    JSON.stringify(prefixesById),
+    "utf-8",
+  );
+
+  return {
+    dictionaryBundle: {
+      custom_definitions: customDefinitions,
+      roots,
+      prefixes,
+    },
+    prefixesById,
+  };
+};
+
+const copyFolderJsonFiles = async (sourceDir: string, outDir: string): Promise<{ books: Record<string, JsonValue> }> => {
+  await mkdir(outDir, { recursive: true });
+  const files = await listJsonFiles(sourceDir);
+  const books: Record<string, JsonValue> = {};
+
+  for (const file of files) {
+    const data = await readJson<JsonValue>(join(sourceDir, file));
+    const stem = file.replace(/\.json$/i, "");
+    books[stem] = data;
+    await writeFile(join(outDir, file), JSON.stringify(data), "utf-8");
+  }
+
+  return { books };
+};
+
+const generateMetadata = (
+  tanajVerseCounts: Record<string, Record<string, number>>,
+  besorahVerseCounts: Record<string, Record<string, number>>,
+  bookLabels: Record<string, CanonicalBookLabels>,

@@ -910,8 +910,6 @@ const WordAnalysisBottomSheetComponent = (
   const wordTransliteration = useMemo(() => {
     // Determine which strong number is currently active
     const checkStrong = activeTab === "qumran" ? dssStrongNumber : strongNumber;
-    // Hide transliteration for YHVH (H3068)
-    if (checkStrong === "H3068") return undefined;
 
     const masoreticTranslit =
       language === "en"

@@ -1,0 +1,239 @@
+  // Only renumber if the data looks Hebrew-numbered:
+  // total verses = englishVerseCount + superscriptionCount
+  if (existingKeys.length !== englishVerseCount + superscriptionCount) {
+    return verseMap;
+  }
+
+  // Renumber: drop the first superscriptionCount verses, re-key from 1
+  const normalized: Record<string, string> = {};
+  const realVerseKeys = existingKeys.slice(superscriptionCount);
+  for (const [index, hebrewKey] of realVerseKeys.entries()) {
+    const englishVerse = index + 1;
+    const text = verseMap[String(hebrewKey)];
+    if (text !== undefined) {
+      normalized[String(englishVerse)] = text;
+    }
+  }
+  return normalized;
+};
+
+const generateTs2009Chapters = async (): Promise<{
+  bundle: { books: Record<string, { chapters: number; verses: number }> };
+  stats: Ts2009ExportStats;
+} | null> => {
+  const supabaseUrl = process.env.SUPABASE_URL ?? process.env.PUBLIC_SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const hasSupabaseBuildAccess = Boolean(supabaseUrl && serviceRoleKey);
+
+  if (!hasSupabaseBuildAccess) {
+    console.warn(
+      "TS2009 static export running from local data files only (missing SUPABASE_URL/PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY)",
+    );
+  }
+
+  const ts2009OutDir = join(WEB_PUBLIC_DATA_ROOT, "ts2009");
+  await mkdir(ts2009OutDir, { recursive: true });
+
+  const stats: Ts2009ExportStats = {
+    books: 0,
+    chapters: 0,
+    verses: 0,
+    skippedBooks: [],
+  };
+
+  const bundleBooks: Record<string, { chapters: number; verses: number }> = {};
+
+  for (const canonicalBook of CANONICAL_BOOK_ORDER) {
+    const bookId = canonicalBook.toLowerCase();
+    const candidates = getTs2009BookFileCandidates(bookId);
+    let payload: Ts2009BookPayload | null = null;
+
+    for (const candidate of candidates) {
+      try {
+        payload = await readLocalTs2009BookPayload(candidate);
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        console.warn(
+          `Skipping TS2009 static export due to local file parse/access error: ${message}`,
+        );
+        return null;
+      }
+
+      if (payload) break;
+    }
+
+    if (!payload && hasSupabaseBuildAccess) {
+      for (const candidate of candidates) {
+        try {
+          payload = await downloadTs2009BookPayload(
+            supabaseUrl as string,
+            serviceRoleKey as string,
+            candidate,
+          );
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          console.warn(
+            `Skipping TS2009 static export due to Supabase access error: ${message}`,
+          );
+          return null;
+        }
+        if (payload) break;
+      }
+    }
+
+    if (!payload) {
+      stats.skippedBooks.push(bookId);
+      continue;
+    }
+
+    const mappedBookFile = TS2009_BOOK_FILE_MAP[bookId] ?? bookId;
+    await writeFile(
+      join(ts2009OutDir, `${mappedBookFile}.json`),
+      JSON.stringify(payload),
+      "utf-8",
+    );
+
+    const chapters = extractTs2009Chapters(payload.chapters);
+    const chapterNumbers = Object.keys(chapters)
+      .map((value) => Number(value))
+      .filter((value) => Number.isFinite(value))
+      .sort((a, b) => a - b);
+
+    let bookVerseCount = 0;
+    let writtenChapterCount = 0;
+    for (const chapterNumber of chapterNumbers) {
+      const verses = chapters[chapterNumber] ?? [];
+      const verseMap: Record<string, string> = {};
+
+      for (const [index, verseEntry] of verses.entries()) {
+        const verseNumber = Number(
+          verseEntry.number ?? verseEntry.verse ?? index + 1,
+        );
+        if (!Number.isFinite(verseNumber)) continue;
+        const text = parseTs2009VerseText(verseEntry);
+        if (!text) continue;
+        verseMap[String(verseNumber)] = text;
+      }
+
+      if (Object.keys(verseMap).length === 0) {
+        continue;
+      }
+
+      // For Psalms, normalize Hebrew-numbered verses to English numbering
+      const normalizedVerseMap = bookId === "psalms"
+        ? normalizePsalmsVerseMap(chapterNumber, verseMap)
+        : verseMap;
+
+      const chapterPayload: Ts2009ChapterFile = {
+        book: bookId,
+        chapter: chapterNumber,
+        verses: normalizedVerseMap,
+      };
+
+      await mkdir(join(ts2009OutDir, bookId), { recursive: true });
+      await writeFile(
+        join(ts2009OutDir, bookId, `${chapterNumber}.json`),
+        JSON.stringify(chapterPayload),
+        "utf-8",
+      );
+
+      const verseCount = Object.keys(normalizedVerseMap).length;
+      stats.chapters += 1;
+      stats.verses += verseCount;
+      bookVerseCount += verseCount;
+      writtenChapterCount += 1;
+    }
+
+    if (bookVerseCount > 0) {
+      stats.books += 1;
+      bundleBooks[bookId] = {
+        chapters: writtenChapterCount,
+        verses: bookVerseCount,
+      };
+    }
+  }
+
+  return {
+    bundle: { books: bundleBooks },
+    stats,
+  };
+};
+
+const DSS_WORD_TOKEN_SPLIT_RE = /[\s\u05BE/-]+/u;
+
+const tokenizeDssWords = (value: unknown): string[] => {
+  if (typeof value !== "string") return [];
+
+  return value
+    .trim()
+    .replace(/[\u05C3.,;:!?()[\]{}'"`]/g, " ")
+    .split(DSS_WORD_TOKEN_SPLIT_RE)
+    .filter(Boolean);
+};
+
+const enrichDssBookForSpanReplacement = (bookData: JsonValue): JsonValue => {
+  if (!isRecord(bookData) || !isRecord(bookData.chapters)) {
+    return bookData;
+  }
+
+  const chapters = bookData.chapters as Record<string, unknown>;
+  const nextChapters: Record<string, unknown> = {};
+
+  for (const [chapterKey, chapterValue] of Object.entries(chapters)) {
+    if (!isRecord(chapterValue) || !isRecord(chapterValue.verses)) {
+      nextChapters[chapterKey] = chapterValue;
+      continue;
+    }
+
+    const verses = chapterValue.verses as Record<string, unknown>;
+    const nextVerses: Record<string, unknown> = {};
+
+    for (const [verseKey, verseValue] of Object.entries(verses)) {
+      if (!isRecord(verseValue) || !Array.isArray(verseValue.differences)) {
+        nextVerses[verseKey] = verseValue;
+        continue;
+      }
+
+      const nextDifferences = verseValue.differences.map((difference) => {
+        if (!isRecord(difference)) {
+          return difference;
+        }
+
+        const masoreticTokenCount = tokenizeDssWords(
+          difference.masoretic_word,
+        ).length;
+        const tokenCount = tokenizeDssWords(difference.dss_word).length;
+        const replacementSpan = Math.max(
+          masoreticTokenCount > 0 ? masoreticTokenCount : tokenCount,
+          1,
+        );
+
+        return {
+          ...difference,
+          token_count: tokenCount,
+          masoretic_token_count: masoreticTokenCount,
+          replacement_span: replacementSpan,
+        };
+      });
+
+      nextVerses[verseKey] = {
+        ...verseValue,
+        differences: nextDifferences,
+      };
+    }
+
+    nextChapters[chapterKey] = {
+      ...chapterValue,
+      verses: nextVerses,
+    };
+  }
+
+  return {
+    ...bookData,
+    chapters: nextChapters,
+  } as JsonValue;
+};
+
+const main = async (): Promise<void> => {
+  const generationStartedAt = Date.now();
+  const shouldExportTs2009Static = process.env.EXPORT_TS2009_STATIC === "1";

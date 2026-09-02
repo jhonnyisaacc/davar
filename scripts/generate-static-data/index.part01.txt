@@ -1,0 +1,262 @@
+/// <reference path="../../web/node_modules/@types/node/index.d.ts" />
+
+import { createHash } from "crypto";
+import { mkdir, readdir, readFile, rm, writeFile } from "fs/promises";
+import { extname, join } from "path";
+import {
+  BUNDLE_VERSIONS,
+  CANONICAL_BOOK_ORDER,
+  DATA_ROOT,
+  DELITZSCH_TO_ENGLISH,
+  OE_TO_ENGLISH,
+  WEB_PUBLIC_DATA_ROOT,
+} from "./config";
+import { VERSIFICATION_DATA } from "../../shared/versificationData";
+
+type Ts2009BookPayload = {
+  chapters?: unknown;
+};
+
+type Ts2009BookVerse = {
+  number?: number;
+  verse?: number;
+  translation?: unknown;
+  text?: unknown;
+};
+
+type Ts2009ChapterFile = {
+  book: string;
+  chapter: number;
+  verses: Record<string, string>;
+};
+
+type Ts2009ExportStats = {
+  books: number;
+  chapters: number;
+  verses: number;
+  skippedBooks: string[];
+};
+
+const TS2009_BOOK_FILE_MAP: Record<string, string> = {
+  genesis: "bereshit",
+  exodus: "shemoth",
+  leviticus: "wayyiqra",
+  numbers: "bemidbar",
+  deuteronomy: "debarim",
+  joshua: "yehoshua",
+  judges: "shophetim",
+  samuel1: "samuel_1",
+  samuel2: "samuel_2",
+  kings1: "kings_1",
+  kings2: "kings_2",
+  chronicles1: "chronicles_1",
+  chronicles2: "chronicles_2",
+  nehemiah: "nehemyah",
+  esther: "ester",
+  job: "iyob",
+  psalms: "tehillim",
+  ecclesiastes: "qoheleth",
+  songofsolomon: "shir_hashirim",
+  isaiah: "yeshayahu",
+  jeremiah: "yirmeyahu",
+  lamentations: "ekah",
+  ezekiel: "yehezqel",
+  obadiah: "obadyah",
+  jonah: "yonah",
+  ruth: "ruth",
+  ezra: "ezra",
+  proverbs: "mishlei",
+  daniel: "daniel",
+  hosea: "hosea",
+  joel: "yoel",
+  amos: "amos",
+  micah: "micah",
+  nahum: "nahum",
+  habakkuk: "habakkuk",
+  zephaniah: "zephaniah",
+  haggai: "haggai",
+  zechariah: "zechariah",
+  malachi: "malachi",
+  matthew: "mattithyahu",
+  mark: "marqos",
+  luke: "lugqas",
+  john: "yohanan",
+  acts: "maasei",
+  romans: "romiyim",
+  corinthians1: "corinthians_1",
+  corinthians2: "corinthians_2",
+  galatians: "galatiyim",
+  ephesians: "ephsiyim",
+  philippians: "pilipiyim",
+  colossians: "qolasim",
+  thessalonians1: "thessalonians_1",
+  thessalonians2: "thessalonians_2",
+  timothy1: "timothy_1",
+  timothy2: "timothy_2",
+  titus: "titos",
+  philemon: "pileymon",
+  hebrews: "ibrim",
+  james: "yaaqob",
+  peter1: "peter_1",
+  peter2: "peter_2",
+  john1: "john_1",
+  john2: "john_2",
+  john3: "john_3",
+  jude: "yehudah",
+  revelation: "hazon",
+};
+
+const TS2009_LEGACY_BOOK_FILE_MAP: Record<string, string> = {
+  genesis: "bereshit_genesis",
+  exodus: "shemoth_exodus",
+  leviticus: "wayyiqra_leviticus",
+  numbers: "bemidbar_numbers",
+  deuteronomy: "debarim_deuteronomy",
+  joshua: "yehoshua_joshua",
+  judges: "shophetim_judges",
+  ruth: "ruth",
+  samuel1: "shemuel_aleph_1_samuel",
+  samuel2: "shemuel_bet_2_samuel",
+  kings1: "melakim_aleph_1_kings",
+  kings2: "melakim_bet_2_kings",
+  chronicles1: "dibre_hayamim_aleph_1_chronicles",
+  chronicles2: "dibre_hayamim_bet_2_chronicles",
+  ezra: "ezra",
+  nehemiah: "nehemyah_nehemiah",
+  esther: "ester_esther",
+  job: "iyob_job",
+  psalms: "tehillim_psalms",
+  proverbs: "mishle_proverbs",
+  ecclesiastes: "qoheleth_ecclesiastes",
+  songofsolomon: "shir_hashirim_song_of_songs",
+  isaiah: "yeshayahu_isaiah",
+  jeremiah: "yirmeyahu_jeremiah",
+  lamentations: "ekah_lamentations",
+  ezekiel: "yehezqel_ezekiel",
+  daniel: "daniel_daniel",
+  hosea: "hoshea_hosea",
+  joel: "yoel_joel",
+  amos: "amos",
+  obadiah: "obadyah_obadiah",
+  jonah: "yonah_jonah",
+  micah: "mikah_micah",
+  nahum: "nahum_nahum",
+  habakkuk: "habaqqugq_habakkuk",
+  zephaniah: "tsephanyah_zephaniah",
+  haggai: "haggai_haggai",
+  zechariah: "zekaryah_zechariah",
+  malachi: "malaki_malachi",
+};
+
+type JsonValue =
+  | null
+  | boolean
+  | number
+  | string
+  | JsonValue[]
+  | { [k: string]: JsonValue };
+
+type BookMetadata = {
+  id: string;
+  name: string;
+  section: "torah" | "neviim" | "ketuvim" | "besorah";
+  chapters: number;
+  order: number;
+  hebrew_name: string;
+  hebrew_transliteration: string;
+  spanish_name: string;
+};
+
+type CanonicalBookLabels = {
+  hebrew_name: string;
+  hebrew_transliteration: string;
+  spanish_name: string;
+};
+
+const readJson = async <T>(path: string): Promise<T> => {
+  const raw = await readFile(path, "utf-8");
+  return JSON.parse(raw) as T;
+};
+
+const loadCanonicalBookLabels = async (): Promise<Record<string, CanonicalBookLabels>> => {
+  const sourcePath = join(DATA_ROOT, "..", "scripts", "bes", "config.py");
+  const source = await readFile(sourcePath, "utf-8");
+
+  const mapping: Record<string, CanonicalBookLabels> = {};
+
+  // Parse the mirrored backend BOOK_METADATA entries from scripts/bes/config.py.
+  const entryPattern = /"([^"]+)":\s*\{[^}]*"hebrew_name":\s*"([^"]+)",\s*"hebrew_transliteration":\s*"([^"]+)",\s*"spanish_name":\s*"([^"]+)"[^}]*\}/g;
+
+  for (const match of source.matchAll(entryPattern)) {
+    const [, bookName, hebrewName, hebrewTransliteration, spanishName] = match;
+    mapping[bookName] = {
+      hebrew_name: hebrewName,
+      hebrew_transliteration: hebrewTransliteration,
+      spanish_name: spanishName,
+    };
+  }
+
+  return mapping;
+};
+
+const sha256OfJson = (value: JsonValue): string => {
+  const payload = JSON.stringify(value);
+  const hash = createHash("sha256").update(payload).digest("hex");
+  return `sha256:${hash}`;
+};
+
+const listJsonFiles = async (dir: string): Promise<string[]> => {
+  const entries = await readdir(dir, { withFileTypes: true });
+  return entries
+    .filter((entry) => entry.isFile() && extname(entry.name) === ".json")
+    .map((entry) => entry.name)
+    .sort((a, b) => a.localeCompare(b, "en"));
+};
+
+const asSection = (order: number): BookMetadata["section"] => {
+  if (order <= 5) return "torah";
+  if (order <= 26) return "neviim";
+  if (order <= 39) return "ketuvim";
+  return "besorah";
+};
+
+const toCanonicalBook = (name: string, source: "oe" | "delitzsch"): string => {
+  const lower = name.toLowerCase();
+  if (source === "oe") return OE_TO_ENGLISH[lower] ?? name;
+  return DELITZSCH_TO_ENGLISH[lower] ?? name;
+};
+
+const hasCanonicalBook = (name: string, source: "oe" | "delitzsch"): boolean => {
+  const lower = name.toLowerCase();
+  if (source === "oe") return Boolean(OE_TO_ENGLISH[lower]);
+  return Boolean(DELITZSCH_TO_ENGLISH[lower]);
+};
+
+const bookOrderMap = CANONICAL_BOOK_ORDER.reduce<Record<string, number>>(
+  (acc, name, index) => {
+    acc[name] = index + 1;
+    return acc;
+  },
+  {},
+);
+
+const generateHebrewChapters = async (
+  sourceDir: string,
+  outDir: string,
+  source: "oe" | "delitzsch",
+): Promise<{ bundle: { books: Record<string, { chapters: Record<string, JsonValue> }> }; counts: Record<string, Record<string, number>> }> => {
+  const folderNames = (await readdir(sourceDir, { withFileTypes: true }))
+    .filter((entry) => entry.isDirectory())
+    .map((entry) => entry.name)
+    .sort((a, b) => a.localeCompare(b, "en"));
+
+  const booksBundle: Record<string, { chapters: Record<string, JsonValue> }> = {};
+  const verseCounts: Record<string, Record<string, number>> = {};
+
+  for (const folderName of folderNames) {
+    if (!hasCanonicalBook(folderName, source)) {
+      continue;
+    }
+
+    const canonical = toCanonicalBook(folderName, source);
+    const bookId = canonical.toLowerCase();

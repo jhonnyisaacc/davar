@@ -1,0 +1,228 @@
+): { books: BookMetadata[]; chapter_counts: Record<string, number[]>; verse_counts: Record<string, Record<string, number>> } => {
+  const verseCounts = { ...tanajVerseCounts, ...besorahVerseCounts };
+
+  const books = Object.keys(verseCounts)
+    .map((bookName) => {
+      const order = bookOrderMap[bookName] ?? 999;
+      const chapterCount = Object.keys(verseCounts[bookName] ?? {}).length;
+      const section = asSection(order);
+      const id = bookName.toLowerCase();
+      const canonicalLabels = bookLabels[bookName];
+
+      return {
+        id,
+        name: bookName,
+        section,
+        chapters: chapterCount,
+        order,
+        hebrew_name: canonicalLabels?.hebrew_name ?? bookName,
+        hebrew_transliteration: canonicalLabels?.hebrew_transliteration ?? bookName,
+        spanish_name: canonicalLabels?.spanish_name ?? bookName,
+      } satisfies BookMetadata;
+    })
+    .sort((a, b) => a.order - b.order);
+
+  const chapterCounts: Record<string, number[]> = {};
+  for (const [bookName, perChapter] of Object.entries(verseCounts)) {
+    chapterCounts[bookName] = Object.keys(perChapter)
+      .map((n) => Number(n))
+      .sort((a, b) => a - b);
+  }
+
+  return {
+    books,
+    chapter_counts: chapterCounts,
+    verse_counts: verseCounts,
+  };
+};
+
+const getJsonSize = (value: JsonValue): number => Buffer.byteLength(JSON.stringify(value), "utf-8");
+
+const MAX_CLOUDFLARE_PAGES_ASSET_SIZE_BYTES = 25 * 1024 * 1024;
+
+type SplitBundlePart = {
+  size: number;
+  checksum: string;
+};
+
+type TanajSplitIndex = {
+  format: "split-by-book-v1";
+  books: string[];
+  parts: Record<string, SplitBundlePart>;
+  total_size: number;
+};
+
+const assertBundleFileSize = (relativePath: string, size: number): void => {
+  if (size <= MAX_CLOUDFLARE_PAGES_ASSET_SIZE_BYTES) {
+    return;
+  }
+
+  const limitMiB = (MAX_CLOUDFLARE_PAGES_ASSET_SIZE_BYTES / (1024 * 1024)).toFixed(0);
+  const actualMiB = (size / (1024 * 1024)).toFixed(1);
+  throw new Error(
+    `Generated bundle file exceeds Cloudflare Pages ${limitMiB} MiB limit: ${relativePath} (${actualMiB} MiB)`,
+  );
+};
+
+const parseTs2009VerseText = (verse: Ts2009BookVerse): string | null => {
+  if (typeof verse.translation === "string") return verse.translation;
+  if (typeof verse.text === "string") return verse.text;
+  return null;
+};
+
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  typeof value === "object" && value !== null;
+
+const extractTs2009Chapters = (chaptersRaw: unknown): Record<number, Ts2009BookVerse[]> => {
+  const chapters: Record<number, Ts2009BookVerse[]> = {};
+
+  if (Array.isArray(chaptersRaw)) {
+    for (const [index, chapterEntry] of chaptersRaw.entries()) {
+      const chapterNumberFromIndex = index + 1;
+
+      if (Array.isArray(chapterEntry)) {
+        chapters[chapterNumberFromIndex] = chapterEntry as Ts2009BookVerse[];
+        continue;
+      }
+
+      if (!isRecord(chapterEntry)) continue;
+
+      const chapterNumber = Number(
+        chapterEntry.number ?? chapterEntry.chapter ?? chapterNumberFromIndex,
+      );
+      if (!Number.isFinite(chapterNumber)) continue;
+
+      if (Array.isArray(chapterEntry.verses)) {
+        chapters[chapterNumber] = chapterEntry.verses as Ts2009BookVerse[];
+      }
+    }
+
+    return chapters;
+  }
+
+  if (!isRecord(chaptersRaw)) {
+    return chapters;
+  }
+
+  for (const [chapterKey, chapterEntry] of Object.entries(chaptersRaw)) {
+    const chapterNumber = Number(chapterKey);
+    if (!Number.isFinite(chapterNumber)) continue;
+
+    if (Array.isArray(chapterEntry)) {
+      chapters[chapterNumber] = chapterEntry as Ts2009BookVerse[];
+      continue;
+    }
+
+    if (isRecord(chapterEntry) && Array.isArray(chapterEntry.verses)) {
+      chapters[chapterNumber] = chapterEntry.verses as Ts2009BookVerse[];
+    }
+  }
+
+  return chapters;
+};
+
+const getTs2009BookFileCandidates = (bookId: string): string[] => {
+  const mapped = TS2009_BOOK_FILE_MAP[bookId];
+  const legacyMapped = TS2009_LEGACY_BOOK_FILE_MAP[bookId];
+  const underscoreVariant = bookId.replace(/(\D)(\d+)$/, "$1_$2");
+  const stems = [mapped, legacyMapped, bookId, underscoreVariant].filter(
+    (value): value is string => Boolean(value),
+  );
+
+  const candidates: string[] = [];
+  for (const stem of stems) {
+    candidates.push(`${stem}.json`);
+    candidates.push(`ts2009/${stem}.json`);
+  }
+
+  return [...new Set(candidates)];
+};
+
+const downloadTs2009BookPayload = async (
+  supabaseUrl: string,
+  serviceRoleKey: string,
+  path: string,
+): Promise<Ts2009BookPayload | null> => {
+  const endpoint = `${supabaseUrl.replace(/\/$/, "")}/storage/v1/object/ts2009/${path}`;
+  const response = await fetch(endpoint, {
+    headers: {
+      apikey: serviceRoleKey,
+      Authorization: `Bearer ${serviceRoleKey}`,
+    },
+  });
+
+  if (!response.ok) {
+    if (response.status === 404) {
+      return null;
+    }
+    throw new Error(
+      `TS2009 download failed for ${path} (status ${response.status})`,
+    );
+  }
+
+  const payload = (await response.json()) as Ts2009BookPayload;
+  return payload;
+};
+
+const readLocalTs2009BookPayload = async (
+  path: string,
+): Promise<Ts2009BookPayload | null> => {
+  const normalizedPath = path.replace(/^ts2009\//, "");
+  const localPath = join(DATA_ROOT, "ts2009", normalizedPath);
+
+  try {
+    return await readJson<Ts2009BookPayload>(localPath);
+  } catch (error) {
+    const code =
+      typeof error === "object" &&
+      error !== null &&
+      "code" in error &&
+      typeof (error as { code?: unknown }).code === "string"
+        ? (error as { code: string }).code
+        : "";
+
+    if (code === "ENOENT") {
+      return null;
+    }
+
+    throw error;
+  }
+};
+
+/**
+ * For Psalms chapters that have superscription verses in the Hebrew text,
+ * the TS2009 Supabase data stores verses with Hebrew numbering (superscription
+ * as verse 1, first real verse as verse 2, etc.). The versification system
+ * expects English numbering (verse 1 = first real verse). This function
+ * detects and corrects Hebrew-numbered verse maps for Psalms chapters.
+ */
+const normalizePsalmsVerseMap = (
+  chapter: number,
+  verseMap: Record<string, string>,
+): Record<string, string> => {
+  const psaMap = VERSIFICATION_DATA["PSA"]?.simple_map;
+  if (!psaMap) return verseMap;
+
+  const chapterMap = (psaMap as Record<string, Record<string, string>>)[String(chapter)];
+  if (!chapterMap) return verseMap;
+
+  // Find the target Hebrew verse for English verse 1 (source key "1")
+  const targetForEnglishVerse1 = chapterMap["1"];
+  if (!targetForEnglishVerse1) return verseMap;
+
+  const [, targetVerseToken] = targetForEnglishVerse1.split(":");
+  const firstRealHebrewVerse = Number(targetVerseToken);
+  if (!Number.isFinite(firstRealHebrewVerse) || firstRealHebrewVerse <= 1) return verseMap;
+
+  // superscriptionCount = number of leading Hebrew verses that are superscriptions
+  const superscriptionCount = firstRealHebrewVerse - 1;
+
+  // Count expected English verses (source keys > 0)
+  const englishVerseCount = Object.keys(chapterMap).filter(
+    (k) => Number(k) > 0,
+  ).length;
+
+  const existingKeys = Object.keys(verseMap)
+    .map(Number)
+    .filter((n) => Number.isFinite(n))
+    .sort((a, b) => a - b);
