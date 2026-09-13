@@ -16,8 +16,8 @@ import { useAppStore, type AppState } from "@/src/store/useAppStore";
 import { useTranslation } from "@/src/i18n/useTranslation";
 
 const DONATION_CONFIG = {
-  githubSponsor: "https://github.com/sponsors/edyehoshua",
-  kofi: "https://ko-fi.com/edyehoshua",
+  githubSponsor: "https://github.com/sponsors/jhonnyisaacc",
+  kofi: "https://ko-fi.com/jhonnyisaacc",
   telegram: "https://t.me/jhonnyisaacc",
   telegramHandle: "@jhonnyisaacc",
 };

@@ -48,7 +48,7 @@ Currently, the App does not allow saving or submitting content. If features like
 
 ## 5. Open-Source Nature
 
-Davar is an open-source project. The source code is publicly available on GitHub[](https://github.com/edyehoshua/davar). Use of the source code is governed by the specific open-source license in the repository (e.g., MIT, GPL, etc.). These Terms apply only to the official App and Website distributed by us.
+Davar is an open-source project. The source code is publicly available on GitHub[](https://github.com/jhonnyisaacc/davar). Use of the source code is governed by the specific open-source license in the repository (e.g., MIT, GPL, etc.). These Terms apply only to the official App and Website distributed by us.
 
 While the Davar code is open-source, certain biblical texts and data (e.g., TS2009, TTH) are included under separate restricted licenses and may not be freely redistributed. Forks must respect these by excluding or obtaining separate permissions for restricted content.
 
@@ -56,7 +56,7 @@ While the Davar code is open-source, certain biblical texts and data (e.g., TS20
 
 The Hebrew Bible text, morphological data, lexicons, and other resources are sourced from public domain or permissively licensed materials. We claim no ownership over the biblical texts themselves.
 
-For copyrighted translations (TS2009, TTH), we operate under specific agreements requiring notices and restricting uses. The App interface, design elements, and original code not covered by third-party licenses are © Davar Project (Jhonny / @edyehoshua), all rights reserved, except as expressly licensed.
+For copyrighted translations (TS2009, TTH), we operate under specific agreements requiring notices and restricting uses. The App interface, design elements, and original code not covered by third-party licenses are © Davar Project (Jhonny / @jhonnyisaacc), all rights reserved, except as expressly licensed.
 
 **Key Sources and Licenses:**
 

@@ -2,7 +2,7 @@ import { type AppLanguage, useTranslation } from "../hooks/useTranslation";
 import { KoFiWidget } from "./KoFiWidget";
 
 const DONATION_CONFIG = {
-	githubSponsor: "https://github.com/sponsors/edyehoshua",
+	githubSponsor: "https://github.com/sponsors/jhonnyisaacc",
 } as const;
 
 const GithubSponsorsIcon = ({ className }: { className?: string }) => (
