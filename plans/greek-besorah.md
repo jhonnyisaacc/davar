@@ -166,5 +166,7 @@ https://jhonny.work
 | Milestones and issues | Created (#161–#173) |
 | `plans/greek-besorah.md` | This file |
 | #161 license and coverage report | Done in #174. Report: `docs/greek-besorah-source-licenses.md` |
-| #162–#169 implementation | Not started |
+| #162 reproducible importer | Implemented as `python -m scripts.greek` |
+| #163 multilingual definitions | Implemented as `python -m scripts.greek define` |
+| #164–#169 implementation | Not started |
 | #170 inquiry sent | No. Waiting for an explicit send instruction. |

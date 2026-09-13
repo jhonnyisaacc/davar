@@ -1,0 +1,13 @@
+# Official TAGNT excerpts (STEP Bible, www.STEPBible.org, CC BY 4.0).
+# Columns follow the official header: Word & Type, Greek, English, dStrong, lemma, editions, meaning, spelling.
+Word & Type	Greek	English translation	dStrongs = Grammar	Dictionary form = Gloss	editions	Meaning variants	Spelling variants
+Mat.1.1#01=NKO	Βίβλος (Biblos)	[The] book	G0976=N-NSF	βίβλος=book	NA28+NA27+Tyn+SBL+WH+Treg+TR+Byz		
+Mat.1.1#02=NKO	γενέσεως (geneseōs)	of [the] genealogy	G1078=N-GSF	γένεσις=origin	NA28+NA27+Tyn+SBL+WH+Treg+TR+Byz		
+Mat.1.1#03=NKO	Ἰησοῦ (Iēsou)	of Jesus	G2424G=N-GSM-P	Ἰησοῦς=Jesus/Joshua	NA28+NA27+Tyn+SBL+WH+Treg+TR+Byz		
+Mat.8.18#05=KO	πολλοὺς (pollous)	great	G4183=A-APM	πολύς=much	Tyn+SBL+Treg+TR+Byz		
+Mat.8.18#06=N(k)O	ὄχλον (ochlon)	crowd	G3793=N-ASM	ὄχλος=crowd	NA28+NA27+WH		
+Mat.17.21#01=KO	Τοῦτο (Touto)	This	G5124=D-NSN	τοῦτο=this	Treg+TR+Byz		
+Mat.27.46#12=NK(o)	ηλι (ēli)	Eli	G2241=N-VSM-ARAM	ἠλί=Eli	NA28+NA27+Tyn+SBL+Treg+TR+Byz		Tyn: ἠλεὶ ; +Byz+TR+Treg+SBL: Ἠλὶ ;
+Rom.16.24#01=KO	Ἡ (Hē)	The	G3588=T-NSF	ὁ=the/this/who	SBL+TR+Byz		
+Rom.16.25{14.24}#01=NKO	Τῷ (Tō)	To	G3588=T-DSM	ὁ=the/this/who	NA28+NA27+Tyn+WH+Treg+TR+Byz«14.24		
+Jhn.19.34#05=NKO	αἷμα (haima)	blood	G0129G=N-NSN	αἷμα=blood	NA28+NA27+Tyn+SBL+WH+Treg+TR+Byz		

@@ -4,7 +4,7 @@ on:
     branches: [main]
     paths:
       - "scripts/greek/**"
-      - "tests/test_greek_tagnt_edition.py"
+      - "tests/test_greek_*.py"
       - "tests/fixtures/greek/**"
       - "docs/greek-besorah-source-licenses.md"
       - ".github/workflows/greek-source-quality.yml"
@@ -12,7 +12,7 @@ on:
     branches: [main]
     paths:
       - "scripts/greek/**"
-      - "tests/test_greek_tagnt_edition.py"
+      - "tests/test_greek_*.py"
       - "tests/fixtures/greek/**"
       - "docs/greek-besorah-source-licenses.md"
       - ".github/workflows/greek-source-quality.yml"
@@ -27,6 +27,6 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pytest
-      - run: python -m pytest -q tests/test_greek_tagnt_edition.py
+      - run: python -m pytest -q tests/test_greek_tagnt_edition.py tests/test_greek_importer.py tests/test_greek_definitions.py
         env:
           PYTHONPATH: .
