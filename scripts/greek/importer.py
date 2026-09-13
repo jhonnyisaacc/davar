@@ -27,27 +27,48 @@ from scripts.greek.sources import (
     TAGNT_SOURCES,
 )
 from scripts.greek.stable_json import dumps, write_json
+from scripts.greek.transliteration import RULE_VERSION, transliterations
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_OUTPUT = ROOT / "data" / "greek" / "sblgnt-tagnt" / STEPBIBLE_COMMIT
 
 
-def _word_payload(token: TagntToken) -> dict:
+def _word_payload(token: TagntToken, lexicon: dict[str, dict]) -> dict:
     assert_greek_strong(token.strong)
+    lemma_entry = lexicon.get(token.strong, {})
+    lemma = lemma_entry.get("lemma") or token.lemma
+    form_translit = transliterations(token.text, supplied_english=token.translit_en)
+    lemma_translit = transliterations(
+        lemma,
+        supplied_english=lemma_entry.get("translit_en"),
+    )
     return {
         "index": token.index,
-        "lemma": token.lemma,
+        "lemma": lemma,
+        "lemma_translit_en": lemma_translit["en"],
+        "lemma_translit_es": lemma_translit["es"],
+        "lemma_translit_he": lemma_translit["he"],
         "morph": token.morph,
         "ref": token.ref,
         "strong": token.strong,
         "strong_lookup": token.strong_lookup,
         "text": token.text,
-        "translit_en": token.translit_en,
+        "translit_en": form_translit["en"],
+        "translit_es": form_translit["es"],
+        "translit_he": form_translit["he"],
+        "transliteration": {
+            "form": form_translit,
+            "lemma": lemma_translit,
+            "rule_version": RULE_VERSION,
+        },
         "word_type": token.word_type,
     }
 
 
-def group_verses(tokens: Iterable[TagntToken]) -> dict[str, list[dict]]:
+def group_verses(
+    tokens: Iterable[TagntToken],
+    lexicon: dict[str, dict],
+) -> dict[str, list[dict]]:
     books: dict[str, dict[tuple[int, str], dict]] = defaultdict(dict)
     for token in tokens:
         verse_key = (token.chapter, token.verse_id)
@@ -61,7 +82,7 @@ def group_verses(tokens: Iterable[TagntToken]) -> dict[str, list[dict]]:
                 "words": [],
             },
         )
-        verse["words"].append(_word_payload(token))
+        verse["words"].append(_word_payload(token, lexicon))
     grouped: dict[str, list[dict]] = {}
     for book_id, verses in books.items():
         grouped[book_id] = [verses[key] for key in sorted(verses)]
@@ -107,6 +128,10 @@ def build_occurrences(tokens: Iterable[TagntToken]) -> dict[str, dict]:
 def lexicon_payload(entries: list[TbesgEntry]) -> dict[str, dict]:
     lexicon: dict[str, dict] = {}
     for entry in entries:
+        generated = transliterations(
+            entry.lemma,
+            supplied_english=entry.translit_en,
+        )
         lexicon[entry.dstrong] = {
             "estrong": entry.estrong,
             "fuller": entry.fuller,
@@ -116,7 +141,10 @@ def lexicon_payload(entries: list[TbesgEntry]) -> dict[str, dict]:
             "related": entry.related,
             "short": entry.short,
             "strong": entry.dstrong,
-            "translit_en": entry.translit_en,
+            "translit_en": generated["en"],
+            "translit_es": generated["es"],
+            "translit_he": generated["he"],
+            "transliteration_rule_version": RULE_VERSION,
         }
     return lexicon
 
@@ -137,6 +165,7 @@ def source_record() -> dict:
         "stepbible_commit": STEPBIBLE_COMMIT,
         "stepbible_repo": STEPBIBLE_REPO,
         "tagging_source": TAGGING_SOURCE,
+        "transliteration_rule_version": RULE_VERSION,
     }
 
 
@@ -211,12 +240,13 @@ def build_bundle(tagnt_texts: list[str], tbesg_text: str) -> dict:
             amalgam_rows.append({"ref": cols[0], "editions": cols[5]})
     detected_absent = verses_without_sbl(amalgam_rows) if amalgam_rows else []
     absent = list(dict.fromkeys([*TAGNT_SBL_ABSENT_VERSES, *detected_absent]))
-    books = group_verses(tokens)
     entries = parse_tbesg_file(tbesg_text)
+    lexicon = lexicon_payload(entries)
+    books = group_verses(tokens, lexicon)
     return {
         "books": books,
         "coverage": coverage_payload(tokens, absent, books),
-        "lexicon": lexicon_payload(entries),
+        "lexicon": lexicon,
         "modifications": modifications_markdown(absent, list(books)),
         "occurrences": build_occurrences(tokens),
         "source": source_record(),
