@@ -172,5 +172,6 @@ https://jhonny.work
 | #165 data interfaces, cache, offline | Implemented with revision-namespaced web/mobile loaders and staged SQLite activation |
 | #166 Hebrew/Greek setting | Implemented on web/mobile with persisted, preview-gated selection and a New badge |
 | #167 Greek reading + word details | Implemented on web/mobile with LTR source text, clickable words, translated text, and explicit absent-verse state |
-| #168–#169 implementation | Not started |
+| #168 upstream checks + validated releases | Implemented with scheduled source reports, complete-tree validation, staged activation, and rollback retention |
+| #169 QA + public enablement | Preview is implemented; production remains fail-closed pending the documented QA matrix and named Spanish/Hebrew reviewer approvals |
 | #170 inquiry sent | No. Waiting for an explicit send instruction. |

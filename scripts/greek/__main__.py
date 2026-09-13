@@ -28,9 +28,16 @@ from scripts.greek.publish import (
     DEFAULT_PUBLIC_DIR,
     DEFAULT_SOURCE_DIR,
     build_and_publish_preview,
+    validate_release_tree,
 )
 from scripts.greek.sources import STEPBIBLE_COMMIT
 from scripts.greek.stable_json import read_json
+from scripts.greek.release_gate import validate_public_enablement
+from scripts.greek.upstream import (
+    check_upstream,
+    write_github_output,
+    write_upstream_report,
+)
 
 
 def cmd_fetch(args: argparse.Namespace) -> int:
@@ -128,6 +135,44 @@ def cmd_publish_preview(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_validate_release(args: argparse.Namespace) -> int:
+    public_data_dir = Path(args.public_data_dir)
+    manifest = read_json(public_data_dir / "greek" / "manifest.json")
+    release_dir = (
+        public_data_dir
+        / "greek"
+        / "releases"
+        / manifest["edition"]
+        / manifest["revision"]
+    )
+    validate_release_tree(release_dir, manifest)
+    print(release_dir)
+    return 0
+
+
+def cmd_upstream(args: argparse.Namespace) -> int:
+    report = check_upstream()
+    write_upstream_report(
+        report,
+        Path(args.output),
+        Path(args.markdown_output) if args.markdown_output else None,
+    )
+    if args.github_output:
+        write_github_output(report, Path(args.github_output))
+    print(Path(args.output))
+    return 2 if args.fail_on_change and report["has_changes"] else 0
+
+
+def cmd_public_gate(args: argparse.Namespace) -> int:
+    result = validate_public_enablement(
+        Path(args.public_data_dir),
+        Path(args.approvals),
+        Path(args.qa_report),
+    )
+    print(result)
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m scripts.greek")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -161,6 +206,32 @@ def build_parser() -> argparse.ArgumentParser:
     preview.add_argument("--source-dir", default=str(DEFAULT_SOURCE_DIR))
     preview.add_argument("--public-data-dir", default=str(DEFAULT_PUBLIC_DIR))
     preview.set_defaults(func=cmd_publish_preview)
+
+    release = sub.add_parser(
+        "validate-release",
+        help="Validate every file in an already published Greek release",
+    )
+    release.add_argument("--public-data-dir", default=str(DEFAULT_PUBLIC_DIR))
+    release.set_defaults(func=cmd_validate_release)
+
+    upstream = sub.add_parser(
+        "upstream",
+        help="Compare recorded Greek source revisions with upstream",
+    )
+    upstream.add_argument("--output", default="greek-upstream-report.json")
+    upstream.add_argument("--markdown-output")
+    upstream.add_argument("--github-output")
+    upstream.add_argument("--fail-on-change", action="store_true")
+    upstream.set_defaults(func=cmd_upstream)
+
+    public_gate = sub.add_parser(
+        "public-gate",
+        help="Require approved definitions, human review, and completed QA",
+    )
+    public_gate.add_argument("--public-data-dir", default=str(DEFAULT_PUBLIC_DIR))
+    public_gate.add_argument("--approvals", required=True)
+    public_gate.add_argument("--qa-report", required=True)
+    public_gate.set_defaults(func=cmd_public_gate)
     return parser
 
 

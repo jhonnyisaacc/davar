@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import shutil
 from pathlib import Path
 
 from scripts.greek.books import BESORAH_BOOK_COUNT
@@ -94,6 +95,60 @@ def validate_preview_bundle(bundle: dict, definitions: dict) -> None:
             raise ValueError(f"Greek occurrence index mismatch: {strong}")
 
 
+def validate_release_tree(release_dir: Path, manifest: dict | None = None) -> dict:
+    release_manifest = manifest or read_json(release_dir / "manifest.json")
+    if release_manifest.get("schema") != "davar-greek-release-v1":
+        raise ValueError("Unsupported Greek release manifest")
+    if not release_manifest.get("complete") or not release_manifest.get("validated"):
+        raise ValueError("Greek release is not marked complete and validated")
+    books = release_manifest.get("books", [])
+    if len(books) != BESORAH_BOOK_COUNT or len(set(books)) != BESORAH_BOOK_COUNT:
+        raise ValueError("Greek release manifest must contain 27 distinct books")
+    revision = release_manifest["revision"]
+    if release_manifest.get("edition") != "sblgnt":
+        raise ValueError("Greek release edition must be sblgnt")
+    for book_id in books:
+        book_data = release_manifest["book_index"].get(book_id)
+        if not book_data or not book_data.get("chapters"):
+            raise ValueError(f"Greek release is missing chapter index: {book_id}")
+        for chapter in book_data["chapters"]:
+            chapter_path = release_dir / "books" / book_id / f"{chapter}.json"
+            if not chapter_path.is_file():
+                raise ValueError(f"Greek release is missing {book_id} {chapter}")
+            payload = read_json(chapter_path)
+            if (
+                payload.get("book") != book_id
+                or payload.get("chapter") != chapter
+                or payload.get("revision") != revision
+                or payload.get("edition") != "sblgnt"
+                or payload.get("source_language") != "greek"
+                or not payload.get("complete")
+            ):
+                raise ValueError(f"Greek chapter identity mismatch: {book_id} {chapter}")
+            if checksum(payload) != book_data["checksums"].get(str(chapter)):
+                raise ValueError(f"Greek chapter checksum mismatch: {book_id} {chapter}")
+            for verse in payload["verses"]:
+                for word in verse["words"]:
+                    if not word["strong"].startswith("G"):
+                        raise ValueError(
+                            f"Non-G Strong in {book_id} {chapter}: {word['strong']}"
+                        )
+    lexicon = read_json(release_dir / "lexicon.json")
+    if checksum(lexicon) != release_manifest["lexicon_checksum"]:
+        raise ValueError("Greek lexicon checksum mismatch")
+    if any(not strong.startswith("G") for strong in lexicon):
+        raise ValueError("Greek lexicon contains a non-G Strong identifier")
+    occurrences = read_json(release_dir / "occurrences.json")
+    for strong, bucket in occurrences.items():
+        if (
+            not strong.startswith("G")
+            or bucket.get("namespace") != "G"
+            or bucket.get("count") != len(bucket.get("references", []))
+        ):
+            raise ValueError(f"Greek occurrence index mismatch: {strong}")
+    return release_manifest
+
+
 def publish_preview(
     bundle: dict,
     definitions: dict,
@@ -107,7 +162,11 @@ def publish_preview(
         / "sblgnt"
         / STEPBIBLE_COMMIT
     )
-    release_dir.mkdir(parents=True, exist_ok=True)
+    staging_dir = (
+        public_data_dir / ".greek-staging" / "sblgnt" / STEPBIBLE_COMMIT
+    )
+    shutil.rmtree(staging_dir, ignore_errors=True)
+    staging_dir.mkdir(parents=True, exist_ok=True)
 
     book_index: dict[str, dict] = {}
     mobile_books_dir = (
@@ -127,7 +186,7 @@ def publish_preview(
         chapter_checksums: dict[str, str] = {}
         for chapter, chapter_verses in sorted(chapters.items()):
             payload = _chapter_payload(book_id, chapter, chapter_verses)
-            write_json(release_dir / "books" / book_id / f"{chapter}.json", payload)
+            write_json(staging_dir / "books" / book_id / f"{chapter}.json", payload)
             mobile_book["chapters"][str(chapter)] = payload["verses"]
             chapter_checksums[str(chapter)] = checksum(payload)
         write_json(mobile_books_dir / f"{book_id}.json", mobile_book)
@@ -142,14 +201,19 @@ def publish_preview(
         bundle["lexicon"],
         bundle["occurrences"],
     )
-    write_json(release_dir / "lexicon.json", lexicon)
-    write_json(release_dir / "occurrences.json", bundle["occurrences"])
-    write_json(release_dir / "source.json", bundle["source"])
-    (release_dir / "MODIFICATIONS.md").write_text(
+    write_json(staging_dir / "lexicon.json", lexicon)
+    write_json(staging_dir / "occurrences.json", bundle["occurrences"])
+    write_json(staging_dir / "source.json", bundle["source"])
+    (staging_dir / "MODIFICATIONS.md").write_text(
         bundle["modifications"],
         encoding="utf-8",
     )
 
+    active_manifest_path = public_data_dir / "greek" / "manifest.json"
+    active_manifest = (
+        read_json(active_manifest_path) if active_manifest_path.is_file() else {}
+    )
+    previous_revision = active_manifest.get("revision")
     manifest = {
         "books": sorted(bundle["books"]),
         "book_index": book_index,
@@ -162,9 +226,18 @@ def publish_preview(
         "taggingRevision": STEPBIBLE_COMMIT,
         "transliterationVersion": RULE_VERSION,
         "validated": True,
+        **(
+            {"previousRevision": previous_revision}
+            if previous_revision and previous_revision != STEPBIBLE_COMMIT
+            else {}
+        ),
     }
-    write_json(release_dir / "manifest.json", manifest)
-    write_json(public_data_dir / "greek" / "manifest.json", manifest)
+    write_json(staging_dir / "manifest.json", manifest)
+    validate_release_tree(staging_dir, manifest)
+    shutil.rmtree(release_dir, ignore_errors=True)
+    release_dir.parent.mkdir(parents=True, exist_ok=True)
+    staging_dir.replace(release_dir)
+    write_json(active_manifest_path, manifest)
     write_json(
         public_data_dir / "bundles" / "greek-sblgnt.json",
         {
