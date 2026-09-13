@@ -17,6 +17,24 @@ Checked against official notices on 13 September 2026. Recheck URLs before each 
 
 SBLGNT is the reading edition. STEPBible is the tagging and English-lexicon source. Do not present TAGNT as if it were NA28.
 
+## Required attribution text
+
+Later screens and data bundles must retain at least this wording, plus a link to each license. `web/ATTRIBUTIONS.md` is extended when Greek ships, not in this issue.
+
+**STEPBible TAGNT and TBESG (CC BY 4.0)**
+
+> Greek word tags and English lexical data are from STEP Bible (www.STEPBible.org), based on work at Tyndale House, Cambridge, licensed under CC BY 4.0. Source: https://github.com/STEPBible/STEPBible-Data. Modifications, if any, are recorded with the data revision.
+
+**SBLGNT (CC BY 4.0)**
+
+> The displayed Greek reading is the SBL Greek New Testament, edited by Michael W. Holmes. Copyright © 2010 Society of Biblical Literature and Logos Bible Software. Licensed under CC BY 4.0. https://sblgnt.com/license/
+
+**UBS Dictionary of the Greek New Testament (CC BY-SA 4.0)**
+
+> Spanish lexical entries adapted from the UBS Dictionary of the Greek New Testament © United Bible Societies, licensed under CC BY-SA 4.0. https://github.com/ubsicap/ubs-open-license. Adaptations of this material must remain CC BY-SA 4.0.
+
+Offline copies of TAGNT, TBESG, and SBLGNT are permitted under CC BY 4.0 if attribution and modification records travel with the bundle. Offline copies of UBS adaptations are permitted under CC BY-SA 4.0 and impose share-alike on those adapted definition files. Hebrew translations of TBESG are Davar work and do not inherit UBS share-alike unless a UBS sense was the source.
+
 ## STEPBible TAGNT and TBESG
 
 ### License and attribution
@@ -165,7 +183,7 @@ Verses that have TAGNT rows but **zero** `SBL` tokens at this revision (do not f
 - Acts 8:37; 15:34; 24:7; 28:29
 - Romans 16:25{14.24}; 16:26{14.25}; 16:27{14.26}
 
-Keep book/chapter/verse identity stable. A missing Greek verse is unavailable in this edition, not a hole to patch with Delitzsch or Hutter.
+Keep book/chapter/verse identity stable. A missing Greek verse is unavailable in this edition, not a hole to patch with Delitzsch or Hutter. The same list is encoded as `TAGNT_SBL_ABSENT_VERSES` in `scripts/greek/books.py`. Davar book IDs match `web/data/metadata.json`, which mobile also loads.
 
 ## SBLGNT license
 
@@ -205,4 +223,5 @@ Adaptations of UBS material, including translations and reformatting, must remai
 - Walked Matthew 8:18 as a verse with alternative TAGNT readings and confirmed a single SBL token sequence (`πολλοὺς`, not `ὄχλον`).
 - Counted `SBL` tokens in all 27 TAGNT NT books at the recorded revision.
 - Listed verse identities with zero `SBL` tokens.
-- Encoded the selector and book map in `scripts/greek/` with tests in `tests/test_greek_tagnt_edition.py`.
+- Encoded the selector, book map, and absent-verse catalog in `scripts/greek/` with tests in `tests/test_greek_tagnt_edition.py`.
+- Confirmed the 27 mapped IDs are exactly the Besorah IDs in `web/data/metadata.json`.

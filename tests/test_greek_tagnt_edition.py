@@ -3,7 +3,9 @@ from pathlib import Path
 from scripts.greek.books import (
     BESORAH_BOOK_COUNT,
     DAVAR_TO_TAGNT,
+    TAGNT_SBL_ABSENT_VERSES,
     TAGNT_TO_DAVAR,
+    davar_besorah_ids_from_metadata,
     davar_book_id,
     tagnt_book_code,
 )
@@ -43,6 +45,21 @@ def test_maps_all_27_besorah_books_to_tagnt_codes():
     assert davar_book_id("Mat") == "matthew"
     assert davar_book_id("1Co") == "corinthians1"
     assert tagnt_book_code("revelation") == "Rev"
+
+
+def test_tagnt_map_matches_web_and_mobile_besorah_ids():
+    published = davar_besorah_ids_from_metadata()
+    assert published == list(TAGNT_TO_DAVAR.values())
+    assert len(published) == BESORAH_BOOK_COUNT
+
+
+def test_absent_verse_catalog_keeps_tagnt_identities():
+    assert "Mat.17.21" in TAGNT_SBL_ABSENT_VERSES
+    assert "Act.8.37" in TAGNT_SBL_ABSENT_VERSES
+    assert "Jhn.7.53{8.1}" in TAGNT_SBL_ABSENT_VERSES
+    assert "Rom.16.25{14.24}" in TAGNT_SBL_ABSENT_VERSES
+    assert "Mat.1.1" not in TAGNT_SBL_ABSENT_VERSES
+    assert len(TAGNT_SBL_ABSENT_VERSES) == 41
 
 
 def test_edition_tokens_ignore_displacement_notes():
@@ -88,6 +105,9 @@ def test_absent_verses_are_recorded_not_filled():
     assert "Act.8.37" in absent
     assert "Mat.1.1" not in absent
     assert "Rom.16.24" not in absent
+    for row in rows:
+        if row["note"] == "absent_verse":
+            assert parse_word_ref(row["ref"]).display_verse in TAGNT_SBL_ABSENT_VERSES
 
 
 def test_parses_versification_brackets_without_shifting_identity():
