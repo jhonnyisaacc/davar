@@ -60,7 +60,7 @@ def _chapter_payload(book_id: str, chapter: int, verses: list[dict]) -> dict:
 
 def _definition_payload(store: dict, lexicon: dict, occurrences: dict) -> dict:
     published: dict[str, dict] = {}
-    for strong, lexical in lexicon.items():
+    for strong in sorted(set(occurrences) | set(store.get("entries", {})) | set(lexicon)):
         definition_entry = store["entries"].get(strong)
         definitions = (
             definition_entry["senses"][0]["definitions"]
@@ -68,6 +68,7 @@ def _definition_payload(store: dict, lexicon: dict, occurrences: dict) -> dict:
             else {}
         )
         occurrence = occurrences.get(strong, {})
+        lexical = lexicon.get(strong, {"strong": strong})
         published[strong] = {
             **lexical,
             "definitions": definitions,

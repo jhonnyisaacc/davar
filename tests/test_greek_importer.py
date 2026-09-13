@@ -80,6 +80,21 @@ def test_preserves_accents_final_sigma_and_disambiguated_strongs(tmp_path):
     assert "ae39711d7843b2902d54993e432de9c12d6a4b9a" in source
 
 
+def test_lexicon_aliases_displayed_tagnt_stems():
+    bundle = load_bundle()
+    assert bundle["lexicon"]["G0256"]["tbesg_dstrong"] == "G0256G"
+    assert bundle["lexicon"]["G2453"]["tbesg_dstrong"] == "G2453G"
+    assert bundle["lexicon"]["G3700G"]["tbesg_dstrong"] == "G3700"
+    assert bundle["lexicon"]["G3708"]["tbesg_dstrong"] == "G3708G"
+    alphaeus = next(
+        word
+        for verse in bundle["books"]["matthew"]
+        for word in verse["words"]
+        if word["strong"] == "G0256"
+    )
+    assert alphaeus["lemma"] == "Ἀλφαῖος"
+
+
 def test_tbesg_keeps_short_and_fuller_distinct():
     entries = parse_tbesg_file((FIXTURES / "tbesg_sample.tsv").read_text(encoding="utf-8"))
     book = next(item for item in entries if item.dstrong == "G0976")

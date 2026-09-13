@@ -4,7 +4,8 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from scripts.greek.parse_tbesg import TbesgEntry
+from scripts.greek.parse_tagnt import strong_lookup
+from scripts.greek.parse_tbesg import TbesgEntry, resolve_tbesg_entries
 from scripts.greek.parse_ubs import (
     UbsSense,
     index_senses,
@@ -107,31 +108,38 @@ def build_definitions(
     entries: dict[str, dict] = {}
     leftovers: list[dict] = []
     ubs_index = index_senses(ubs_senses)
-    for item in tbesg_entries:
-        if item.dstrong not in displayed_strongs:
+    for displayed in sorted(displayed_strongs):
+        resolved = resolve_tbesg_entries(displayed, tbesg_entries)
+        if not resolved:
             continue
-        spanish, leftover = match_ubs(item, ubs_senses, index=ubs_index)
-        if leftover is not None:
-            leftovers.append(leftover)
-        key = definition_key(item.dstrong)
-        entries[key] = {
-            "id": key,
-            "lemma": item.lemma,
-            "occurrence_translation": None,
-            "senses": [
+        senses: list[dict] = []
+        for item in resolved:
+            spanish, leftover = match_ubs(item, ubs_senses, index=ubs_index)
+            if leftover is not None:
+                leftovers.append({**leftover, "displayed": displayed})
+            senses.append(
                 {
                     "definitions": {
                         "en": english_definition(item),
                         "es": spanish
-                        or draft_definition("es", leftover["reason"] if leftover else "unmapped"),
+                        or draft_definition(
+                            "es", leftover["reason"] if leftover else "unmapped"
+                        ),
                         "he": draft_definition("he", "hebrew_from_english_baseline"),
                     },
                     "sense_id": item.dstrong,
                     "short_en": item.short,
                 }
-            ],
-            "strong": item.dstrong,
-            "strong_lookup": item.dstrong,
+            )
+        key = definition_key(displayed)
+        entries[key] = {
+            "id": key,
+            "lemma": resolved[0].lemma,
+            "occurrence_translation": None,
+            "senses": senses,
+            "strong": displayed,
+            "strong_lookup": strong_lookup(displayed),
+            "tbesg_dstrongs": [item.dstrong for item in resolved],
         }
     return {
         "entries": entries,

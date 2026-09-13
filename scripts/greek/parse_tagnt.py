@@ -94,6 +94,23 @@ def strong_lookup(strong: str) -> str:
     return compact
 
 
+def strong_family(strong: str) -> str:
+    """Padded numeric stem, ignoring any G/H disambiguation suffix."""
+    compact = strong.replace(" ", "")
+    if compact.startswith("G"):
+        digits = "".join(ch for ch in compact[1:] if ch.isdigit())
+        if digits:
+            return f"G{int(digits):04d}"
+    return compact
+
+
+def strong_suffix(strong: str) -> str:
+    compact = strong.replace(" ", "")
+    if compact.startswith("G"):
+        return "".join(ch for ch in compact[1:] if ch.isalpha())
+    return ""
+
+
 def verse_number(verse_id: str) -> int | None:
     digits = verse_id.split("{", 1)[0]
     return int(digits) if digits.isdigit() else None

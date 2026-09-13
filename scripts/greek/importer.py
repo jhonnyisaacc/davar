@@ -19,7 +19,7 @@ from scripts.greek.edition import (
     verses_without_sbl,
 )
 from scripts.greek.parse_tagnt import TagntToken, assert_greek_strong, parse_tagnt_file
-from scripts.greek.parse_tbesg import TbesgEntry, parse_tbesg_file
+from scripts.greek.parse_tbesg import TbesgEntry, parse_tbesg_file, resolve_tbesg_entries
 from scripts.greek.sources import (
     ALL_SOURCES,
     STEPBIBLE_COMMIT,
@@ -125,27 +125,41 @@ def build_occurrences(tokens: Iterable[TagntToken]) -> dict[str, dict]:
     return dict(sorted(occurrences.items()))
 
 
-def lexicon_payload(entries: list[TbesgEntry]) -> dict[str, dict]:
+def _lexicon_entry_payload(entry: TbesgEntry, displayed: str | None = None) -> dict:
+    generated = transliterations(
+        entry.lemma,
+        supplied_english=entry.translit_en,
+    )
+    return {
+        "estrong": entry.estrong,
+        "fuller": entry.fuller,
+        "fuller_html": entry.fuller_html,
+        "lemma": entry.lemma,
+        "morph": entry.morph,
+        "related": entry.related,
+        "short": entry.short,
+        "strong": displayed or entry.dstrong,
+        "tbesg_dstrong": entry.dstrong,
+        "translit_en": generated["en"],
+        "translit_es": generated["es"],
+        "translit_he": generated["he"],
+        "transliteration_rule_version": RULE_VERSION,
+    }
+
+
+def lexicon_payload(
+    entries: list[TbesgEntry],
+    displayed_strongs: set[str] | None = None,
+) -> dict[str, dict]:
     lexicon: dict[str, dict] = {}
     for entry in entries:
-        generated = transliterations(
-            entry.lemma,
-            supplied_english=entry.translit_en,
-        )
-        lexicon[entry.dstrong] = {
-            "estrong": entry.estrong,
-            "fuller": entry.fuller,
-            "fuller_html": entry.fuller_html,
-            "lemma": entry.lemma,
-            "morph": entry.morph,
-            "related": entry.related,
-            "short": entry.short,
-            "strong": entry.dstrong,
-            "translit_en": generated["en"],
-            "translit_es": generated["es"],
-            "translit_he": generated["he"],
-            "transliteration_rule_version": RULE_VERSION,
-        }
+        lexicon[entry.dstrong] = _lexicon_entry_payload(entry)
+    for displayed in displayed_strongs or ():
+        if displayed in lexicon:
+            continue
+        resolved = resolve_tbesg_entries(displayed, entries)
+        if resolved:
+            lexicon[displayed] = _lexicon_entry_payload(resolved[0], displayed)
     return lexicon
 
 
@@ -241,14 +255,15 @@ def build_bundle(tagnt_texts: list[str], tbesg_text: str) -> dict:
     detected_absent = verses_without_sbl(amalgam_rows) if amalgam_rows else []
     absent = list(dict.fromkeys([*TAGNT_SBL_ABSENT_VERSES, *detected_absent]))
     entries = parse_tbesg_file(tbesg_text)
-    lexicon = lexicon_payload(entries)
+    occurrences = build_occurrences(tokens)
+    lexicon = lexicon_payload(entries, set(occurrences))
     books = group_verses(tokens, lexicon)
     return {
         "books": books,
         "coverage": coverage_payload(tokens, absent, books),
         "lexicon": lexicon,
         "modifications": modifications_markdown(absent, list(books)),
-        "occurrences": build_occurrences(tokens),
+        "occurrences": occurrences,
         "source": source_record(),
         "tokens": tokens,
     }

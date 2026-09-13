@@ -66,10 +66,22 @@ def test_hebrew_and_unmapped_spanish_are_drafts():
         assert hebrew["short"] is None
         assert hebrew["source"] == "english-baseline"
     report = coverage_report(store)
-    assert report["languages"]["en"]["approved"] == report["entry_count"]
-    assert report["languages"]["he"]["draft"] == report["entry_count"]
+    assert report["languages"]["en"]["missing"] == 0
+    assert report["languages"]["en"]["approved"] >= report["entry_count"]
+    assert report["languages"]["he"]["draft"] >= report["entry_count"]
     assert report["languages"]["es"]["imported"] >= 2
     assert report["languages"]["es"]["draft"] >= 1
     assert report["languages"]["en"]["missing"] == 0
     assert store["missing_displayed"] == []
     assert "G3793" not in store["entries"]
+
+
+def test_tagnt_stems_alias_to_tbesg_family_entries():
+    store = load_store()
+    assert store["entries"]["G0256"]["tbesg_dstrongs"] == ["G0256G", "G0256H"]
+    assert store["entries"]["G2453"]["tbesg_dstrongs"] == ["G2453G"]
+    assert store["entries"]["G3700G"]["tbesg_dstrongs"] == ["G3700"]
+    assert store["entries"]["G3700H"]["tbesg_dstrongs"] == ["G3700"]
+    assert store["entries"]["G3708"]["tbesg_dstrongs"] == ["G3708G", "G3708H"]
+    assert store["entries"]["G0256"]["senses"][0]["definitions"]["en"]["short"] == "Alphaeus"
+    assert store["entries"]["G3708"]["senses"][0]["definitions"]["en"]["short"] == "to see: see"
