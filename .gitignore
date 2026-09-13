@@ -144,8 +144,9 @@ keys/
 # ID
 *.code-workspace
 
-# plans
-plans/
+# Local planning notes. Approved execution plans may be tracked explicitly.
+plans/*
+!plans/greek-besorah.md
 
 # Python virtual environments
 .venv/
