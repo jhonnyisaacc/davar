@@ -168,5 +168,7 @@ https://jhonny.work
 | #161 license and coverage report | Done in #174. Report: `docs/greek-besorah-source-licenses.md` |
 | #162 reproducible importer | Implemented as `python -m scripts.greek` |
 | #163 multilingual definitions | Implemented as `python -m scripts.greek define` |
-| #164–#169 implementation | Not started |
+| #164 transliteration | Implemented in `scripts/greek/transliteration.py` |
+| #165 data interfaces, cache, offline | Implemented with revision-namespaced web/mobile loaders and staged SQLite activation |
+| #166–#169 implementation | Not started |
 | #170 inquiry sent | No. Waiting for an explicit send instruction. |

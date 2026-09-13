@@ -4,6 +4,8 @@ declare const process: {
 
 interface ImportMetaEnv {
 	readonly PUBLIC_NODE_ENV?: string;
+	readonly PUBLIC_GREEK_PREVIEW_ENABLED?: string;
+	readonly PUBLIC_GREEK_PUBLIC_ENABLED?: string;
 	[key: string]: string | undefined;
 }
 

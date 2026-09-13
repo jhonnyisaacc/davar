@@ -11,6 +11,7 @@ export const BUNDLE_VERSIONS: Record<string, number> = {
   dictionary: 1,
   tth: 1,
   ts2009: 1,
+  hutter: 1,
 };
 
 // Canonical 66-book order for deterministic metadata sorting.

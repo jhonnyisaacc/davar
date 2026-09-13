@@ -1,10 +1,17 @@
 import { selectDssTransliteration } from "@davar/shared/dssTransliteration";
+import {
+  GREEK_RECORDED_REVISION,
+  greekChapterPath,
+  greekSourceIdentity,
+} from "@davar/shared/greekBesorah";
 import { staticDataRequest, ts2009Request } from "@/src/services/api";
 import type { TranslationFootnote, WordResponse } from "@/src/types/api";
 import {
   fetchHebrewVerses,
   fetchTranslationVerses,
   fetchDssVariants,
+  fetchSourceVerses,
+  getActiveSourceRevision,
   type HebrewVerseRow,
   type TranslationRow,
   type DssVariantRow,
@@ -251,6 +258,12 @@ export type DisplayWord = {
   morph?: string;
   translit_en?: string;
   translit_es?: string;
+  translit_he?: string;
+  lemma?: string;
+  lemma_translit_en?: string;
+  lemma_translit_es?: string;
+  lemma_translit_he?: string;
+  source_language?: "hebrew" | "greek";
   dss_translit_en?: string;
   dss_translit_es?: string;
   dssWord?: string;
@@ -269,6 +282,11 @@ export type DisplayVerse = {
   sourceChapter: number;
   sourceVerse: number;
   hebrew: string;
+  text?: string;
+  sourceLanguage?: "hebrew" | "greek";
+  edition?: string;
+  revision?: string;
+  available?: boolean;
   translation: string;
   words: DisplayWord[];
   qumranVariants?: { position: number; dssWord: string }[];
@@ -1424,4 +1442,147 @@ export const fetchChapterVerses = async (
       );
     }
   }
+};
+
+type GreekChapterPayload = {
+  book: string;
+  chapter: number;
+  complete: boolean;
+  edition: "sblgnt";
+  revision: string;
+  source_language: "greek";
+  verses: Array<{
+    chapter: number;
+    verse: number | null;
+    verse_id: string;
+    text: string;
+    words: DisplayWord[];
+  }>;
+};
+
+export const isGreekBesorahEnabled = (): boolean =>
+  __DEV__ || process.env.EXPO_PUBLIC_GREEK_PREVIEW_ENABLED === "1";
+
+export const fetchGreekChapterVerses = async (
+  bookId: string,
+  chapter: number,
+  options?: {
+    language?: "en" | "es";
+    isConnected?: boolean;
+    revision?: string;
+  },
+): Promise<DisplayVerse[]> => {
+  if (!isGreekBesorahEnabled()) return [];
+  const revision = options?.revision ?? GREEK_RECORDED_REVISION;
+  const identity = greekSourceIdentity(revision);
+  let sourceVerses: Array<{
+    chapter: number;
+    verse: number;
+    verseId: string;
+    text: string;
+    words: DisplayWord[];
+  }> = [];
+
+  if (options?.isConnected === false) {
+    const active = await getActiveSourceRevision("greek", "sblgnt");
+    if (active !== revision) {
+      throw new Error(`Greek release ${revision} is not available offline`);
+    }
+    sourceVerses = (await fetchSourceVerses(identity, bookId, chapter)).map(
+      (verse) => ({
+        ...verse,
+        words: verse.words as DisplayWord[],
+      }),
+    );
+  } else {
+    try {
+      const payload = await staticDataRequest<GreekChapterPayload>(
+        greekChapterPath(bookId, chapter, revision),
+      );
+      if (
+        !payload.complete ||
+        payload.revision !== revision ||
+        payload.source_language !== "greek"
+      ) {
+        throw new Error(`Invalid Greek chapter identity: ${bookId} ${chapter}`);
+      }
+      sourceVerses = payload.verses
+        .filter((verse) => Number.isInteger(verse.verse))
+        .map((verse) => ({
+          ...verse,
+          verse: Number(verse.verse),
+          verseId: verse.verse_id,
+        }));
+    } catch (onlineError) {
+      const active = await getActiveSourceRevision("greek", "sblgnt");
+      if (active !== revision) throw onlineError;
+      sourceVerses = (await fetchSourceVerses(identity, bookId, chapter)).map(
+        (verse) => ({
+          ...verse,
+          words: verse.words as DisplayWord[],
+        }),
+      );
+    }
+  }
+
+  const translatedVerses = await fetchChapterVerses(bookId, chapter, {
+    isConnected: options?.isConnected,
+    language: options?.language,
+  });
+  const translations = new Map(
+    translatedVerses.map((verse) => [verse.verse, verse]),
+  );
+  return sourceVerses.map((verse) => {
+    const translated = translations.get(verse.verse);
+    return {
+      available: true,
+      book: formatBookName(bookId),
+      bookId,
+      chapter: verse.chapter,
+      edition: "sblgnt",
+      hebrew: "",
+      id: verse.verseId,
+      revision,
+      sourceChapter: verse.chapter,
+      sourceLanguage: "greek",
+      sourceVerse: verse.verse,
+      text: verse.text,
+      translation: translated?.translation ?? "",
+      translation_footnotes: translated?.translation_footnotes,
+      verse: verse.verse,
+      words: verse.words.map((word) => ({
+        ...word,
+        prefixes: [],
+        source_language: "greek",
+      })),
+    };
+  });
+};
+
+export const fetchGreekVerse = async (
+  bookId: string,
+  chapter: number,
+  verse: number,
+  options?: Parameters<typeof fetchGreekChapterVerses>[2],
+): Promise<DisplayVerse> => {
+  const verses = await fetchGreekChapterVerses(bookId, chapter, options);
+  return (
+    verses.find((item) => item.verse === verse) ?? {
+      available: false,
+      book: formatBookName(bookId),
+      bookId,
+      chapter,
+      edition: "sblgnt",
+      hebrew: "",
+      id: `${bookId}-${chapter}-${verse}-sblgnt-unavailable`,
+      revision: options?.revision ?? GREEK_RECORDED_REVISION,
+      sourceChapter: chapter,
+      sourceLanguage: "greek",
+      sourceVerse: verse,
+      text: "",
+      translation: "",
+      verse,
+      words: [],
+    }
+  );
 };

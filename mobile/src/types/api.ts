@@ -1,12 +1,20 @@
+import type { ScriptureSourceLanguage } from "@davar/shared/greekBesorah";
+
 export type WordResponse = {
   position: number;
   text: string;
+  lemma?: string;
   strong?: string;
   morph?: string;
   prefixes: string[];
   has_dss_variant: boolean;
   translit_en?: string;
   translit_es?: string;
+  translit_he?: string;
+  lemma_translit_en?: string;
+  lemma_translit_es?: string;
+  lemma_translit_he?: string;
+  source_language?: ScriptureSourceLanguage;
 };
 
 export type DssVariant = {
@@ -35,6 +43,11 @@ export type VerseResponse = {
   sourceChapter?: number;
   sourceVerse?: number;
   hebrew: string;
+  text?: string;
+  source_language?: ScriptureSourceLanguage;
+  edition?: string;
+  revision?: string;
+  available?: boolean;
   words: WordResponse[];
   translation?: string;
   translation_language?: string;
@@ -46,13 +59,26 @@ export type DefinitionItem = {
   text: string;
   source: string;
   language: string;
+  review_status?: "approved" | "imported" | "draft";
+  license?: string;
 };
 
 export type LexiconResponse = {
   strong_number: string;
   hebrew?: string;
+  greek?: string;
+  source_language?: ScriptureSourceLanguage;
+  edition?: string;
+  revision?: string;
+  lemma?: string;
   translit_en?: string;
   translit_es?: string;
+  translit_he?: string;
+  lemma_translit_en?: string;
+  lemma_translit_es?: string;
+  lemma_translit_he?: string;
+  short_meaning?: string;
+  full_definition?: string;
   definitions: DefinitionItem[];
   root?: string;
   root_strong?: string;

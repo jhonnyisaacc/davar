@@ -24,6 +24,11 @@ from scripts.greek.importer import (
 )
 from scripts.greek.parse_tbesg import parse_tbesg_file
 from scripts.greek.parse_ubs import parse_ubs_file
+from scripts.greek.publish import (
+    DEFAULT_PUBLIC_DIR,
+    DEFAULT_SOURCE_DIR,
+    build_and_publish_preview,
+)
 from scripts.greek.sources import STEPBIBLE_COMMIT
 from scripts.greek.stable_json import read_json
 
@@ -114,6 +119,15 @@ def cmd_check(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_publish_preview(args: argparse.Namespace) -> int:
+    output = build_and_publish_preview(
+        source_dir=Path(args.source_dir),
+        public_data_dir=Path(args.public_data_dir),
+    )
+    print(output)
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m scripts.greek")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -139,6 +153,14 @@ def build_parser() -> argparse.ArgumentParser:
     check = sub.add_parser("check", help="Validate a built import directory")
     check.add_argument("--import-dir", required=True)
     check.set_defaults(func=cmd_check)
+
+    preview = sub.add_parser(
+        "publish-preview",
+        help="Build a complete revision-namespaced web/mobile preview bundle",
+    )
+    preview.add_argument("--source-dir", default=str(DEFAULT_SOURCE_DIR))
+    preview.add_argument("--public-data-dir", default=str(DEFAULT_PUBLIC_DIR))
+    preview.set_defaults(func=cmd_publish_preview)
     return parser
 
 
