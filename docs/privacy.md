@@ -32,7 +32,7 @@ Any limited information (e.g., voluntary emails) is used solely to provide suppo
 
 ## 3. Information Sharing and Disclosure
 
-We do not share, sell, or disclose any user information because we do not collect personal data automatically. As an open-source project on GitHub[](https://github.com/edyehoshua/davar), any contributions or issues you submit follow GitHub's privacy practices.
+We do not share, sell, or disclose any user information because we do not collect personal data automatically. As an open-source project on GitHub[](https://github.com/jhonnyisaacc/davar), any contributions or issues you submit follow GitHub's privacy practices.
 
 If cloud features are added, notes would be processed by service providers (e.g., cloud storage like AWS or Google Cloud) under strict data processing agreements ensuring they act only on our instructions, with equivalent protection, and no further use.
 
@@ -66,6 +66,6 @@ Continued use after changes means acceptance of the updated Policy.
 
 For questions about this Policy or privacy, contact us at: hi@davar.bible
 
-**Open-Source Note**: Davar is open source. The code is available on GitHub[](https://github.com/edyehoshua/davar). This does not involve personal data collection through the repository.
+**Open-Source Note**: Davar is open source. The code is available on GitHub[](https://github.com/jhonnyisaacc/davar). This does not involve personal data collection through the repository.
 
 May Davar be a tool to draw you closer to YHVH’s Word in its pure form.

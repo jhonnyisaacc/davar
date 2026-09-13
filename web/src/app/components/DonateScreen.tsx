@@ -2,7 +2,7 @@ import { type AppLanguage, useTranslation } from "../hooks/useTranslation";
 import { KoFiWidget } from "./KoFiWidget";
 
 const DONATION_CONFIG = {
-	githubSponsor: "https://github.com/sponsors/edyehoshua",
+	githubSponsor: "https://github.com/sponsors/jhonnyisaacc",
 } as const;
 
 const GithubSponsorsIcon = ({ className }: { className?: string }) => (
@@ -65,12 +65,12 @@ export function DonateScreen({ language }: DonateScreenProps) {
 								{t("donate.telegramLabel")}
 							</span>
 							<a
-								href="https://t.me/edyehoshua"
+								href="https://t.me/jhonnyisaacc"
 								target="_blank"
 								rel="noopener noreferrer"
 								className="inline-flex items-baseline underline underline-offset-2 hover:text-[var(--text-primary)] transition-colors"
 							>
-								@edyehoshua
+								@jhonnyisaacc
 							</a>
 						</span>
 					</p>
