@@ -302,8 +302,8 @@
     "emptyState": "Save verses to revisit them here."
   },
   "feedback": {
-    "telegramReminder": "For comments and feedback, please join our Telegram group:",
-    "telegramLink": "Join our Telegram group"
+    "telegramReminder": "For comments and feedback, please chat with me on Telegram:",
+    "telegramLink": "Chat with me on Telegram"
   },
   "tabs": {
     "home": "Home",
