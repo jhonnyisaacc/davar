@@ -135,6 +135,7 @@ google-genai>=0.2.0  # Gemini API client for lexicon translations (recommended)
 
 # xAI Grok API for translations (alternative to Gemini)
 openai>=1.0.0  # OpenAI-compatible SDK for Grok API
+httpx>=0.27.0  # Pooled HTTP client for OpenRouter (scripts.translate)
 
 # Logging and monitoring
 structlog>=23.1.0          # Structured logging

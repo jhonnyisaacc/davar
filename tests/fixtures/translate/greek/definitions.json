@@ -1,0 +1,23 @@
+{
+  "entries": {
+    "G1": {
+      "id": "G1",
+      "lemma": "α",
+      "senses": [
+        {
+          "sense_id": "G1",
+          "definitions": {
+            "en": {
+              "short": "one",
+              "fuller": "number one"
+            },
+            "es": {
+              "short": null,
+              "fuller": null
+            }
+          }
+        }
+      ]
+    }
+  }
+}
