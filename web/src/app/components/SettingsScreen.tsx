@@ -544,33 +544,24 @@ export function SettingsScreen({
 									{t("settings.besorahLanguage.title")}
 								</div>
 							</div>
-							<div
-								className="flex rounded-[16px] border-2 border-[var(--border)] bg-[var(--muted)] p-1"
-								role="radiogroup"
+							<select
+								value={besorahLanguage}
+								onChange={(event) =>
+									onBesorahLanguageChange(
+										event.target.value as BesorahLanguage,
+									)
+								}
 								aria-label={t("settings.besorahLanguage.title")}
+								className="min-w-[140px] rounded-[16px] border-2 border-[var(--border)] bg-[var(--muted)] px-4 py-2 text-base font-medium text-[var(--foreground)]"
+								style={{ fontFamily: "'Inter', sans-serif" }}
 							>
-								{(["hebrew", "greek"] as const).map((source) => (
-									<button
-										type="button"
-										role="radio"
-										aria-checked={besorahLanguage === source}
-										key={source}
-										onClick={() => onBesorahLanguageChange(source)}
-										className={`flex items-center gap-1.5 rounded-[11px] px-3 py-1.5 text-sm font-semibold transition-all ${
-											besorahLanguage === source
-												? "bg-[var(--background)] text-[var(--primary)] shadow-sm"
-												: "text-[var(--text-secondary)]"
-										}`}
-									>
-										{t(`settings.besorahLanguage.${source}`)}
-										{source === "greek" && (
-											<span className="rounded-full bg-[var(--primary)] px-1.5 py-0.5 text-[9px] uppercase tracking-wide text-white">
-												{t("settings.besorahLanguage.new")}
-											</span>
-										)}
-									</button>
-								))}
-							</div>
+								<option value="hebrew">
+									{t("settings.besorahLanguage.hebrew")}
+								</option>
+								<option value="greek">
+									{t("settings.besorahLanguage.greek")}
+								</option>
+							</select>
 						</div>
 					</div>
 				);
@@ -783,33 +774,31 @@ export function SettingsScreen({
 
 			{/* Design System Button */}
 			{onDesignSystemClick && (
-				<>
-					<button
-						type="button"
-						onClick={onDesignSystemClick}
-						className="px-6 py-6 flex items-center justify-between w-full hover:bg-[var(--muted)] transition-all"
-					>
-						<div className="flex items-center gap-4">
-							<div className="text-[var(--text-secondary)]">
-								<RetroIcons.DesignSystem />
+				<button
+					type="button"
+					onClick={onDesignSystemClick}
+					className="px-6 py-6 flex items-center justify-between w-full hover:bg-[var(--muted)] transition-all"
+				>
+					<div className="flex items-center gap-4">
+						<div className="text-[var(--text-secondary)]">
+							<RetroIcons.DesignSystem />
+						</div>
+						<div>
+							<div
+								className="text-lg font-semibold text-[var(--text-primary)]"
+								style={{ fontFamily: "'Inter', sans-serif" }}
+							>
+								{t("settings.designSystemTitle")}
 							</div>
-							<div>
-								<div
-									className="text-lg font-semibold text-[var(--text-primary)]"
-									style={{ fontFamily: "'Inter', sans-serif" }}
-								>
-									{t("settings.designSystemTitle")}
-								</div>
-								<div
-									className="text-sm text-[var(--text-secondary)] mt-0.5"
-									style={{ fontFamily: "'Inter', sans-serif" }}
-								>
-									{t("settings.designSystemDescription")}
-								</div>
+							<div
+								className="text-sm text-[var(--text-secondary)] mt-0.5"
+								style={{ fontFamily: "'Inter', sans-serif" }}
+							>
+								{t("settings.designSystemDescription")}
 							</div>
 						</div>
-					</button>
-				</>
+					</div>
+				</button>
 			)}
 
 			{/* Mobile Design Guide Button */}

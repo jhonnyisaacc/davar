@@ -404,7 +404,7 @@ const loadTs2009BookFile = (
 				try {
 					return await fetchJson<RawTs2009BookPayload>(candidatePath);
 				} catch {
-					continue;
+					// Try the next published location.
 				}
 			}
 
