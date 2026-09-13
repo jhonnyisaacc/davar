@@ -65,12 +65,12 @@ export function DonateScreen({ language }: DonateScreenProps) {
 								{t("donate.telegramLabel")}
 							</span>
 							<a
-								href="https://t.me/edyehoshua"
+								href="https://t.me/jhonnyisaacc"
 								target="_blank"
 								rel="noopener noreferrer"
 								className="inline-flex items-baseline underline underline-offset-2 hover:text-[var(--text-primary)] transition-colors"
 							>
-								@edyehoshua
+								@jhonnyisaacc
 							</a>
 						</span>
 					</p>
