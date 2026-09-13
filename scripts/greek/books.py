@@ -2,15 +2,20 @@
 
 from __future__ import annotations
 
-import json
+import re
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-WEB_METADATA = ROOT / "web" / "data" / "metadata.json"
+STATIC_CONFIG = ROOT / "scripts" / "generate-static-data" / "config.ts"
+_DELITZSCH_KEYS = re.compile(
+    r"export const DELITZSCH_TO_ENGLISH: Record<string, string> = \{([^}]+)\}",
+    re.S,
+)
+_KEY = re.compile(r"^\s*([A-Za-z0-9]+):", re.M)
 
 # TAGNT uses UBS-style abbreviations from the STEPBible-Data README.
-# Davar Besorah IDs match web/data/metadata.json and
-# scripts/generate-static-data/config.py DELITZSCH_TO_ENGLISH.
+# Davar Besorah IDs match scripts/generate-static-data/config.ts DELITZSCH_TO_ENGLISH,
+# which is the public-repo source of truth for web and mobile book IDs.
 TAGNT_TO_DAVAR: dict[str, str] = {
     "Mat": "matthew",
     "Mrk": "mark",
@@ -60,11 +65,13 @@ def tagnt_book_code(davar_book_id_value: str) -> str:
         raise KeyError(f"Unknown Davar Besorah book id: {davar_book_id_value}") from exc
 
 
-def davar_besorah_ids_from_metadata(metadata_path: Path | None = None) -> list[str]:
-    """Read Besorah book IDs from the shared web metadata used by web and mobile."""
-    path = metadata_path or WEB_METADATA
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    return [book["id"] for book in payload["books"] if book.get("section") == "besorah"]
+def davar_besorah_ids_from_metadata(config_path: Path | None = None) -> list[str]:
+    """Read Besorah book IDs from the committed static-data config."""
+    path = config_path or STATIC_CONFIG
+    match = _DELITZSCH_KEYS.search(path.read_text(encoding="utf-8"))
+    if not match:
+        raise ValueError(f"DELITZSCH_TO_ENGLISH not found in {path}")
+    return _KEY.findall(match.group(1))
 
 
 # TAGNT verse identities with rows but no SBL edition token at

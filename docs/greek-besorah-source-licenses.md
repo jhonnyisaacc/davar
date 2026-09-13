@@ -183,7 +183,7 @@ Verses that have TAGNT rows but **zero** `SBL` tokens at this revision (do not f
 - Acts 8:37; 15:34; 24:7; 28:29
 - Romans 16:25{14.24}; 16:26{14.25}; 16:27{14.26}
 
-Keep book/chapter/verse identity stable. A missing Greek verse is unavailable in this edition, not a hole to patch with Delitzsch or Hutter. The same list is encoded as `TAGNT_SBL_ABSENT_VERSES` in `scripts/greek/books.py`. Davar book IDs match `web/data/metadata.json`, which mobile also loads.
+Keep book/chapter/verse identity stable. A missing Greek verse is unavailable in this edition, not a hole to patch with Delitzsch or Hutter. The same list is encoded as `TAGNT_SBL_ABSENT_VERSES` in `scripts/greek/books.py`. Davar book IDs match `scripts/generate-static-data/config.ts` `DELITZSCH_TO_ENGLISH`, which web and mobile also use.
 
 ## SBLGNT license
 
