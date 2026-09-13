@@ -57,6 +57,12 @@
     "language": {
       "title": "שפה"
     },
+    "besorahLanguage": {
+      "title": "מקור הבשורה",
+      "hebrew": "עברית",
+      "greek": "יוונית",
+      "new": "חדש"
+    },
     "besorahTextVersion": {
       "title": "תרגום הבשורה",
       "delitzsch": "דליטש",
@@ -240,6 +246,7 @@
     "loading": "טוען פסוקים...",
     "prefixLabel": "תחילית: {prefix}",
     "missingSpanishTranslation": "אין לנו כרגע תרגום לספרדית לטקסט זה, אנחנו עובדים על כך...",
+    "greekUnavailable": "אינו מופיע בטקסט המוצג של SBLGNT 2011.",
     "besorahDisclaimer": {
       "short": "לעיון בלבד: מיפוי Strong בבשורה עשוי לכלול רשומות חסרות או שלא נבדקו.",
       "modalTitle": "הודעה על מיפוי הבשורה",

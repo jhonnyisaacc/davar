@@ -943,6 +943,25 @@ export const fetchSourceVerses = async (
   });
 };
 
+export const fetchSourceLexiconEntry = async (
+  identity: SourceIdentity,
+  strong: string,
+): Promise<Record<string, unknown> | null> => {
+  const result = await executeRead(
+    `SELECT data FROM source_lexicon
+     WHERE source_language = ? AND edition = ? AND revision = ?
+       AND strong = ? LIMIT 1;`,
+    [
+      identity.sourceLanguage,
+      identity.edition,
+      identity.revision,
+      strong,
+    ],
+  );
+  const row = result[0] as Record<string, unknown> | undefined;
+  return row?.data ? JSON.parse(String(row.data)) : null;
+};
+
 // ── Clear all offline data ─────────────────────────────────────────────────
 
 export const clearAllOfflineData = async () => {

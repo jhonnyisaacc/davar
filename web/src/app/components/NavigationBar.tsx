@@ -10,6 +10,7 @@ import { FaThList } from "react-icons/fa";
 import { LuLightbulb } from "react-icons/lu";
 import { TbAlphabetHebrew, TbLanguageHiragana } from "react-icons/tb";
 import { useTranslation } from "../hooks/useTranslation";
+import type { BesorahLanguage } from "@davar/shared/greekBesorah";
 import { formatBookDisplayName } from "../utils/bookNameFormatter";
 import { NeumorphCard } from "./NeumorphCard";
 import { NeumorphicToggle } from "./NeumorphicToggle";
@@ -32,6 +33,9 @@ interface NavigationBarProps {
 	onThemeChange: (theme: "light" | "dark") => void;
 	language: "en" | "es" | "he";
 	onLanguageChange: (language: "en" | "es" | "he") => void;
+	besorahLanguage: BesorahLanguage;
+	onBesorahLanguageChange: (language: BesorahLanguage) => void;
+	greekAvailable: boolean;
 	besorahTextVersion: "delitzsch" | "hutter";
 	onBesorahTextVersionChange: (version: "delitzsch" | "hutter") => void;
 	showQumran: boolean;
@@ -68,6 +72,9 @@ export function NavigationBar({
 	onThemeChange,
 	language,
 	onLanguageChange,
+	besorahLanguage,
+	onBesorahLanguageChange,
+	greekAvailable,
 	besorahTextVersion,
 	onBesorahTextVersionChange,
 	showQumran,
@@ -294,7 +301,49 @@ export function NavigationBar({
 						</select>
 					</div>
 				);
+			case "besorahLanguage":
+				if (!greekAvailable) return null;
+				return (
+					<div className="flex items-center justify-between gap-4">
+						<div className="flex items-center gap-3">
+							<ScrollText className="w-4 h-4 text-[var(--text-secondary)]" />
+							<div className="flex items-center gap-2">
+								<span
+									className="text-sm text-[var(--text-primary)]"
+									style={{ fontFamily: "'Inter', sans-serif" }}
+								>
+									{t("settings.besorahLanguage.title")}
+								</span>
+								<span className="rounded-full bg-[var(--primary)] px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-white">
+									{t("settings.besorahLanguage.new")}
+								</span>
+							</div>
+						</div>
+						<select
+							value={besorahLanguage}
+							onChange={(event) =>
+								onBesorahLanguageChange(
+									event.target.value as BesorahLanguage,
+								)
+							}
+							className="rounded-full px-3 py-2 text-base md:text-xs text-[var(--text-primary)]"
+							style={{
+								backgroundColor: "var(--neomorph-bg)",
+								border: "1px solid var(--neomorph-border)",
+								fontFamily: "'Inter', sans-serif",
+							}}
+						>
+							<option value="hebrew">
+								{t("settings.besorahLanguage.hebrew")}
+							</option>
+							<option value="greek">
+								{t("settings.besorahLanguage.greek")}
+							</option>
+						</select>
+					</div>
+				);
 			case "besorahTextVersion":
+				if (besorahLanguage === "greek") return null;
 				return (
 					<div className="flex items-center justify-between gap-4">
 						<div className="flex items-center gap-3">

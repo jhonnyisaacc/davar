@@ -1648,25 +1648,32 @@ export const getGreekChapterVerses = async (
 	const translationByVerse = new Map(
 		translations.map((verse) => [verse.verse, verse]),
 	);
-	return payload.verses
-		.filter((verse) => Number.isInteger(verse.verse))
-		.map((verse) => {
-			const translated = translationByVerse.get(verse.verse ?? -1);
+	const sourceByVerse = new Map(
+		payload.verses
+			.filter((verse) => Number.isInteger(verse.verse))
+			.map((verse) => [verse.verse as number, verse]),
+	);
+	const verseNumbers = [
+		...new Set([...sourceByVerse.keys(), ...translationByVerse.keys()]),
+	].sort((left, right) => left - right);
+	return verseNumbers.map((verseNumber) => {
+			const verse = sourceByVerse.get(verseNumber);
+			const translated = translationByVerse.get(verseNumber);
 			return {
-				available: true,
-				chapter: verse.chapter,
+				available: Boolean(verse),
+				chapter,
 				edition: payload.edition,
 				hebrew: "",
 				revision,
-				sourceChapter: verse.chapter,
-				sourceVerse: verse.verse ?? 0,
+				sourceChapter: chapter,
+				sourceVerse: verseNumber,
 				source_language: "greek",
-				text: verse.text,
+				text: verse?.text ?? "",
 				translation: translated?.translation,
 				translation_footnotes: translated?.translation_footnotes,
 				translation_language: translated?.translation_language,
-				verse: verse.verse ?? 0,
-				words: verse.words.map((word) => ({
+				verse: verseNumber,
+				words: (verse?.words ?? []).map((word) => ({
 					...word,
 					has_dss_variant: false,
 					prefixes: [],

@@ -3,6 +3,7 @@
  */
 
 import type { BesorahTextVersion } from "../../../../shared/translationConfig";
+import type { BesorahLanguage } from "../../../../shared/greekBesorah";
 
 export interface ReadingStateV2 {
 	version: 2;
@@ -10,6 +11,7 @@ export interface ReadingStateV2 {
 	chapter: number;
 	verse: number;
 	language: "en" | "es" | "he";
+	besorahLanguage: BesorahLanguage;
 	besorahTextVersion: BesorahTextVersion;
 	hutterAnnouncementRelease: string;
 	theme: "light" | "dark";
@@ -67,6 +69,7 @@ function migrateV1toV2(v1Data: ReadingStateV1): ReadingStateV2 {
 		chapter: v1Data.chapter ?? 1,
 		verse: v1Data.verse ?? 1,
 		language: v1Data.language ?? resolveDefaultLanguage(),
+		besorahLanguage: "hebrew",
 		besorahTextVersion: "delitzsch",
 		hutterAnnouncementRelease: "",
 		theme: "light",
@@ -173,6 +176,7 @@ export function createDefaultReadingState(): ReadingStateV2 {
 		chapter: 1,
 		verse: 1,
 		language: resolveDefaultLanguage(),
+		besorahLanguage: "hebrew",
 		besorahTextVersion: "delitzsch",
 		hutterAnnouncementRelease: "",
 		theme: "light",

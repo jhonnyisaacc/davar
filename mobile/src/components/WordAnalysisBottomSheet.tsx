@@ -1,4 +1,9 @@
 import { instanceSurface } from "@davar/shared/instanceSurface";
+import {
+  GREEK_RECORDED_REVISION,
+  greekLexiconPath,
+  greekSourceIdentity,
+} from "@davar/shared/greekBesorah";
 import React, {
   useCallback,
   useEffect,
@@ -43,7 +48,11 @@ import {
 import { staticDataRequest } from "@/src/services/api";
 import type { LexiconResponse } from "@/src/types/api";
 import { useTranslation } from "@/src/i18n/useTranslation";
-import { fetchLexiconEntry, fetchPrefixEntry } from "@/src/services/database";
+import {
+  fetchLexiconEntry,
+  fetchPrefixEntry,
+  fetchSourceLexiconEntry,
+} from "@/src/services/database";
 import { getDssCommentaryForLanguage } from "@/src/utils/translationConfig";
 
 type PrefixResponse = {
@@ -360,6 +369,107 @@ const loadLexiconEntryFromStatic = async (
     occurrences_count: surface.total,
     instances,
   };
+};
+
+type GreekLexiconEntry = {
+  strong?: string;
+  lemma?: string;
+  translit_en?: string;
+  translit_es?: string;
+  translit_he?: string;
+  definitions?: Partial<
+    Record<
+      "en" | "es" | "he",
+      {
+        short?: string | null;
+        fuller?: string | null;
+        source?: string;
+        review_status?: "approved" | "imported" | "draft";
+        license?: string;
+      }
+    >
+  >;
+  occurrences_count?: number;
+  instances?: Array<{
+    book: string;
+    chapter: number;
+    verse?: number | null;
+    verse_id?: string;
+    index: number;
+  }>;
+};
+
+const toGreekLexiconResponse = (
+  entry: GreekLexiconEntry,
+  strong: string,
+  language: "en" | "es" | "he",
+): LexiconResponse => {
+  const localized = entry.definitions?.[language];
+  const english = entry.definitions?.en;
+  const selected =
+    localized &&
+    (localized.review_status === "approved" ||
+      localized.review_status === "imported")
+      ? localized
+      : english;
+  const definitions: LexiconResponse["definitions"] = [];
+  if (selected?.short) {
+    definitions.push({
+      language: selected === localized ? language : "en",
+      license: selected.license,
+      review_status: selected.review_status,
+      source: selected.source ?? "stepbible-tbesg",
+      text: selected.short,
+    });
+  }
+  if (selected?.fuller && selected.fuller !== selected.short) {
+    definitions.push({
+      language: selected === localized ? language : "en",
+      license: selected.license,
+      review_status: selected.review_status,
+      source: selected.source ?? "stepbible-tbesg",
+      text: selected.fuller,
+    });
+  }
+  return {
+    definitions,
+    greek: entry.lemma,
+    instances:
+      entry.instances?.map(
+        (instance) =>
+          `${instance.book} ${instance.chapter}:${instance.verse ?? instance.verse_id ?? "?"}#${instance.index}`,
+      ) ?? [],
+    lemma: entry.lemma,
+    lemma_translit_en: entry.translit_en,
+    lemma_translit_es: entry.translit_es,
+    lemma_translit_he: entry.translit_he,
+    occurrences_count: entry.occurrences_count ?? 0,
+    source_language: "greek",
+    strong_number: entry.strong ?? strong,
+    translit_en: entry.translit_en,
+    translit_es: entry.translit_es,
+    translit_he: entry.translit_he,
+  };
+};
+
+const loadGreekLexiconEntry = async (
+  strong: string,
+  language: "en" | "es" | "he",
+): Promise<LexiconResponse | null> => {
+  const revision = GREEK_RECORDED_REVISION;
+  try {
+    const lexicon = await staticDataRequest<Record<string, GreekLexiconEntry>>(
+      greekLexiconPath(revision),
+    );
+    const entry = lexicon[strong];
+    return entry ? toGreekLexiconResponse(entry, strong, language) : null;
+  } catch {
+    const offline = (await fetchSourceLexiconEntry(
+      greekSourceIdentity(revision),
+      strong,
+    )) as GreekLexiconEntry | null;
+    return offline ? toGreekLexiconResponse(offline, strong, language) : null;
+  }
 };
 
 const loadPrefixEntryFromStatic = async (
@@ -905,7 +1015,7 @@ const WordAnalysisBottomSheetComponent = (
         ? (word?.translit_en ?? lexiconEntry?.translit_en)
         : language === "es"
           ? (word?.translit_es ?? lexiconEntry?.translit_es)
-          : undefined;
+          : (word?.translit_he ?? lexiconEntry?.translit_he);
 
     if (activeTab === "qumran") {
       const qumranTranslitFromWord =
@@ -934,10 +1044,12 @@ const WordAnalysisBottomSheetComponent = (
     language,
     word?.translit_en,
     word?.translit_es,
+    word?.translit_he,
     word?.dss_translit_en,
     word?.dss_translit_es,
     lexiconEntry?.translit_en,
     lexiconEntry?.translit_es,
+    lexiconEntry?.translit_he,
     dssLexiconEntry?.translit_en,
     dssLexiconEntry?.translit_es,
     strongNumber,
@@ -957,9 +1069,12 @@ const WordAnalysisBottomSheetComponent = (
       base = stripCantillation(base);
     }
     base = stripMeteg(base);
-    base = removeMaqafForDisplay(
-      normalizeHebrewDisplay(base).replace(/\//g, ""),
-    );
+    base =
+      word?.source_language === "greek"
+        ? base.replace(/\//g, "")
+        : removeMaqafForDisplay(
+            normalizeHebrewDisplay(base).replace(/\//g, ""),
+          );
     if (isBesorah) {
       base = removeSofPasukForDisplay(base);
     }
@@ -970,6 +1085,7 @@ const WordAnalysisBottomSheetComponent = (
     lexiconEntry?.hebrew,
     word?.dssWord,
     word?.text,
+    word?.source_language,
     showNikud,
     showCantillation,
   ]);
@@ -1001,7 +1117,10 @@ const WordAnalysisBottomSheetComponent = (
       try {
         let entry: LexiconResponse | null = null;
         try {
-          entry = await loadLexiconEntryFromStatic(strongNumber, language);
+          entry =
+            word?.source_language === "greek"
+              ? await loadGreekLexiconEntry(strongNumber, language)
+              : await loadLexiconEntryFromStatic(strongNumber, language);
         } catch {
           entry = null;
         }
@@ -1040,7 +1159,7 @@ const WordAnalysisBottomSheetComponent = (
       }
     };
     loadLexicon();
-  }, [strongNumber, language, word?.text]);
+  }, [strongNumber, language, word?.source_language, word?.text]);
 
   useEffect(() => {
     const loadDssLexicon = async () => {

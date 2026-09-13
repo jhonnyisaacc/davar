@@ -57,6 +57,12 @@
     "language": {
       "title": "Idioma"
     },
+    "besorahLanguage": {
+      "title": "Fuente de la Besorah",
+      "hebrew": "Hebreo",
+      "greek": "Griego",
+      "new": "Nuevo"
+    },
     "besorahTextVersion": {
       "title": "Traducción del Evangelio",
       "delitzsch": "Delitzsch",
@@ -240,6 +246,7 @@
     "loading": "Cargando versículos...",
     "prefixLabel": "Prefijo: {prefix}",
     "missingSpanishTranslation": "Por el momento no contamos con traducción al español de este texto, estamos trabajando en ello...",
+    "greekUnavailable": "No está presente en el texto mostrado de SBLGNT 2011.",
     "besorahDisclaimer": {
       "short": "Solo referencia: el mapeo Strong de la Besorah puede tener entradas no revisadas o faltantes.",
       "modalTitle": "Aviso de mapeo de Besorah",

@@ -4,6 +4,7 @@ import {
   HUTTER_ANNOUNCEMENT_RELEASE,
   type BesorahTextVersion,
 } from "@davar/shared/translationConfig";
+import type { BesorahLanguage } from "@davar/shared/greekBesorah";
 
 const STORAGE_KEYS = {
   themeMode: "davar.themeMode",
@@ -11,6 +12,7 @@ const STORAGE_KEYS = {
   bookmarks: "davar.bookmarks",
   language: "davar.language",
   besorahTextVersion: "davar.besorahTextVersion",
+  besorahLanguage: "davar.besorahLanguage",
   hutterAnnouncementSeen: "davar.hutterAnnouncementSeen",
   showQumran: "davar.showQumran",
   showFullChapter: "davar.showFullChapter",
@@ -110,6 +112,15 @@ export const loadBesorahTextVersion = async (): Promise<BesorahTextVersion> => {
 
 export const saveBesorahTextVersion = async (value: BesorahTextVersion) => {
   await AsyncStorage.setItem(STORAGE_KEYS.besorahTextVersion, value);
+};
+
+export const loadBesorahLanguage = async (): Promise<BesorahLanguage> => {
+  const value = await AsyncStorage.getItem(STORAGE_KEYS.besorahLanguage);
+  return value === "greek" ? "greek" : "hebrew";
+};
+
+export const saveBesorahLanguage = async (value: BesorahLanguage) => {
+  await AsyncStorage.setItem(STORAGE_KEYS.besorahLanguage, value);
 };
 
 export const loadHutterAnnouncementSeen = async (): Promise<boolean> => {

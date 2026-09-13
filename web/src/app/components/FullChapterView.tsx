@@ -51,6 +51,9 @@ export function FullChapterView({
 	isBesorah = false,
 }: FullChapterViewProps) {
 	const { t } = useTranslation(language);
+	const isGreekSource = verses.some(
+		(verse) => verse.source_language === "greek",
+	);
 	const shouldShowSefer = seferMode && (hebrewOnly || translationOnly);
 	const spanishMissingTranslation = t("verse.missingSpanishTranslation");
 	const hideSuperscripts = shouldHideSuperscripts(getTranslationKey(language));
@@ -100,6 +103,16 @@ export function FullChapterView({
 		});
 
 	const renderVerseWords = (verse: VerseResponse) => {
+		if (verse.available === false) {
+			return (
+				<span
+					className="rounded-full border border-[var(--border)] px-3 py-1 text-sm text-[var(--text-secondary)]"
+					style={{ direction: "ltr", fontFamily: "'Inter', sans-serif" }}
+				>
+					{t("verse.greekUnavailable")}
+				</span>
+			);
+		}
 		const dssMap = new Map<
 			number,
 			{
@@ -269,7 +282,7 @@ export function FullChapterView({
 							style={{
 								fontFamily: "'Cardo', serif",
 								fontSize: "48px",
-								direction: "rtl",
+								direction: isGreekSource ? "ltr" : "rtl",
 								color: "var(--text-hebrew)",
 								lineHeight: 1.9,
 								letterSpacing: "0.01em",
@@ -307,7 +320,8 @@ export function FullChapterView({
 									style={{
 										fontFamily: "'Cardo', serif",
 										fontSize: "48px",
-										direction: "rtl",
+										direction:
+											verse.source_language === "greek" ? "ltr" : "rtl",
 										color: "var(--text-hebrew)",
 										lineHeight: 1.85,
 									}}

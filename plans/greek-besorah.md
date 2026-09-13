@@ -170,5 +170,7 @@ https://jhonny.work
 | #163 multilingual definitions | Implemented as `python -m scripts.greek define` |
 | #164 transliteration | Implemented in `scripts/greek/transliteration.py` |
 | #165 data interfaces, cache, offline | Implemented with revision-namespaced web/mobile loaders and staged SQLite activation |
-| #166–#169 implementation | Not started |
+| #166 Hebrew/Greek setting | Implemented on web/mobile with persisted, preview-gated selection and a New badge |
+| #167 Greek reading + word details | Implemented on web/mobile with LTR source text, clickable words, translated text, and explicit absent-verse state |
+| #168–#169 implementation | Not started |
 | #170 inquiry sent | No. Waiting for an explicit send instruction. |

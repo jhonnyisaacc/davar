@@ -500,6 +500,10 @@ export const VerseCard = ({
     hebrewOnly && !translationOnly,
   );
   const showHebrewText = !translationOnly;
+  const isGreekSource = verse.sourceLanguage === "greek";
+  const sourceWordStyle: StyleProp<TextStyle> = isGreekSource
+    ? { textAlign: "left", writingDirection: "ltr" }
+    : undefined;
   const translationFootnoteLookup = useMemo(
     () => createFootnoteLookup(verse.translation_footnotes),
     [verse.translation_footnotes],
@@ -519,8 +523,22 @@ export const VerseCard = ({
   const content = (
     <View style={variant === "detail" ? styles.containerDetail : undefined}>
       {showHebrewText ? (
-        <View style={styles.hebrewRow}>
+        <View
+          style={[
+            styles.hebrewRow,
+            isGreekSource
+              ? { flexDirection: "row" }
+              : undefined,
+          ]}
+        >
           {(() => {
+            if (verse.available === false) {
+              return (
+                <Text style={[styles.translation, { color: colors.textSecondary }]}>
+                  {t("verse.greekUnavailable")}
+                </Text>
+              );
+            }
             let skipUntilIndex = -1;
             return verse.words.map((word, index) => {
             // Multi-word Qumran variants replace the following N-1 Masoretic
@@ -591,12 +609,20 @@ export const VerseCard = ({
                 return (
                   <View style={styles.hebrewPrefixRow}>
                     <Text
-                      style={[styles.hebrewWord, { color: colors.textSecondary }]}
+                      style={[
+                        styles.hebrewWord,
+                        sourceWordStyle,
+                        { color: colors.textSecondary },
+                      ]}
                     >
                       {prefixSegments.prefixes.join("")}
                     </Text>
                     <Text
-                      style={[styles.hebrewWord, { color: colors.textPrimary }]}
+                      style={[
+                        styles.hebrewWord,
+                        sourceWordStyle,
+                        { color: colors.textPrimary },
+                      ]}
                     >
                       {prefixSegments.root}
                     </Text>
@@ -607,8 +633,12 @@ export const VerseCard = ({
                 <Text
                   style={
                     hasVisibleQumranVariant
-                      ? [styles.hebrewWord, styles.hebrewWordQumran]
-                      : styles.hebrewWord
+                      ? [
+                          styles.hebrewWord,
+                          sourceWordStyle,
+                          styles.hebrewWordQumran,
+                        ]
+                      : [styles.hebrewWord, sourceWordStyle]
                   }
                 >
                   {displayText}

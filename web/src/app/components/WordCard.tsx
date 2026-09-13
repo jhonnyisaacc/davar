@@ -21,6 +21,7 @@ interface WordInstance {
 
 interface WordCardProps {
 	word: string;
+	sourceLanguage?: "hebrew" | "greek";
 	wordFromVerse?: string;
 	strongNumber?: string;
 	qumranWord?: string;
@@ -82,6 +83,7 @@ const loadPrefixesData = async (): Promise<Record<string, PrefixEntry>> => {
 
 export function WordCard({
 	word,
+	sourceLanguage = "hebrew",
 	wordFromVerse,
 	strongNumber,
 	qumranWord,
@@ -440,7 +442,7 @@ export function WordCard({
 					style={{
 						fontFamily: isQumranTab ? qumranFontFamily : "'Cardo', serif",
 						fontSize: isQumranTab ? qumranWordFontSize : masoreticWordFontSize,
-						direction: "rtl",
+						direction: sourceLanguage === "greek" ? "ltr" : "rtl",
 						lineHeight: isQumranTab && hasMultiWordDisplay ? 1.35 : 1.8,
 						letterSpacing:
 							isQumranTab && hasMultiWordDisplay ? "0.015em" : "0.05em",
@@ -464,7 +466,9 @@ export function WordCard({
 								color: isQumranTab ? qumranTextColor : "var(--text-hebrew)",
 							}}
 						>
-							{normalizeHebrewDisplay(displayWord.replace(/\//g, ""))}
+							{sourceLanguage === "greek"
+								? displayWord.replace(/\//g, "")
+								: normalizeHebrewDisplay(displayWord.replace(/\//g, ""))}
 						</span>
 					)}
 				</div>

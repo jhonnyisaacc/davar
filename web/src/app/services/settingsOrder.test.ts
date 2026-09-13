@@ -20,7 +20,7 @@ const CONSUMERS = [
 ] as const;
 
 const SHARED_ID_PATTERN =
-	"theme|language|besorahTextVersion|fullChapter|seferStyle|hebrewOnly|qumran";
+	"theme|language|besorahLanguage|besorahTextVersion|fullChapter|seferStyle|hebrewOnly|qumran";
 
 // Extract settings.* i18n keys in render order from a source file.
 function extractOrder(path: string): string[] {

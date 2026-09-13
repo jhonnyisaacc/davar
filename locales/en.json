@@ -57,6 +57,12 @@
     "language": {
       "title": "Language"
     },
+    "besorahLanguage": {
+      "title": "Besorah source",
+      "hebrew": "Hebrew",
+      "greek": "Greek",
+      "new": "New"
+    },
     "besorahTextVersion": {
       "title": "Gospel translation",
       "delitzsch": "Delitzsch",
@@ -240,6 +246,7 @@
     "loading": "Loading verses...",
     "prefixLabel": "Prefix: {prefix}",
     "missingSpanishTranslation": "We don't have a Spanish translation for this text yet, we're working on it...",
+    "greekUnavailable": "Not present in the SBLGNT 2011 displayed text.",
     "besorahDisclaimer": {
       "short": "Reference only: Besorah Strong mapping may contain unreviewed or missing entries.",
       "modalTitle": "Besorah mapping notice",

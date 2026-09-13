@@ -6,12 +6,16 @@ import {
 	type SharedSettingId,
 } from "@davar/shared/settingsOrder";
 import { useTranslation } from "../hooks/useTranslation";
+import type { BesorahLanguage } from "@davar/shared/greekBesorah";
 
 interface SettingsScreenProps {
 	theme: "light" | "dark";
 	onThemeChange: (theme: "light" | "dark") => void;
 	language: "en" | "es" | "he";
 	onLanguageChange: (language: "en" | "es" | "he") => void;
+	besorahLanguage: BesorahLanguage;
+	onBesorahLanguageChange: (language: BesorahLanguage) => void;
+	greekAvailable: boolean;
 	besorahTextVersion: "delitzsch" | "hutter";
 	onBesorahTextVersionChange: (version: "delitzsch" | "hutter") => void;
 	showQumran: boolean;
@@ -344,6 +348,9 @@ export function SettingsScreen({
 	onThemeChange,
 	language,
 	onLanguageChange,
+	besorahLanguage,
+	onBesorahLanguageChange,
+	greekAvailable,
 	besorahTextVersion,
 	onBesorahTextVersionChange,
 	showQumran,
@@ -521,7 +528,54 @@ export function SettingsScreen({
 						</div>
 					</div>
 				);
+			case "besorahLanguage":
+				if (!greekAvailable) return null;
+				return (
+					<div className="px-6 py-6">
+						<div className="flex items-center justify-between gap-4">
+							<div className="flex items-center gap-4">
+								<div className="text-[var(--text-secondary)]">
+									<RetroIcons.Qumran />
+								</div>
+								<div
+									className="text-lg font-semibold text-[var(--text-primary)]"
+									style={{ fontFamily: "'Inter', sans-serif" }}
+								>
+									{t("settings.besorahLanguage.title")}
+								</div>
+							</div>
+							<div
+								className="flex rounded-[16px] border-2 border-[var(--border)] bg-[var(--muted)] p-1"
+								role="radiogroup"
+								aria-label={t("settings.besorahLanguage.title")}
+							>
+								{(["hebrew", "greek"] as const).map((source) => (
+									<button
+										type="button"
+										role="radio"
+										aria-checked={besorahLanguage === source}
+										key={source}
+										onClick={() => onBesorahLanguageChange(source)}
+										className={`flex items-center gap-1.5 rounded-[11px] px-3 py-1.5 text-sm font-semibold transition-all ${
+											besorahLanguage === source
+												? "bg-[var(--background)] text-[var(--primary)] shadow-sm"
+												: "text-[var(--text-secondary)]"
+										}`}
+									>
+										{t(`settings.besorahLanguage.${source}`)}
+										{source === "greek" && (
+											<span className="rounded-full bg-[var(--primary)] px-1.5 py-0.5 text-[9px] uppercase tracking-wide text-white">
+												{t("settings.besorahLanguage.new")}
+											</span>
+										)}
+									</button>
+								))}
+							</div>
+						</div>
+					</div>
+				);
 			case "besorahTextVersion":
+				if (besorahLanguage === "greek") return null;
 				return (
 					<div className="px-6 py-6">
 						<div className="flex items-center justify-between gap-4">
