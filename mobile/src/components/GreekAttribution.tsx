@@ -29,7 +29,7 @@ function AttributionNotice({
   const parts = text.split(ATTRIBUTION_URL);
   return (
     <Text style={[styles.notice, { color }]}>
-      {parts.map((part, index) => {
+      {parts.map((part) => {
         const isUrl = part.startsWith("http") || part.startsWith("www.");
         if (!isUrl) {
           return part;
@@ -37,7 +37,7 @@ function AttributionNotice({
         const visible = part.replace(/[),.;]+$/u, "");
         const trailing = part.slice(visible.length);
         return (
-          <Text key={`${part}-${index}`}>
+          <Text key={visible}>
             <Text onPress={() => openAttributionUrl(visible)} style={styles.link}>
               {visible}
             </Text>

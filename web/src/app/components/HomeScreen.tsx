@@ -23,7 +23,7 @@ function attributionHref(part: string) {
 }
 
 function linkifyAttribution(text: string) {
-	return text.split(ATTRIBUTION_URL).map((part, index) => {
+	return text.split(ATTRIBUTION_URL).map((part) => {
 		const isUrl = part.startsWith("http") || part.startsWith("www.");
 		if (!isUrl) {
 			return part;
@@ -32,7 +32,7 @@ function linkifyAttribution(text: string) {
 		const visible = part.replace(/[),.;]+$/u, "");
 		const trailing = part.slice(visible.length);
 		return (
-			<span key={`${href}-${index}`}>
+			<span key={href}>
 				<a
 					href={href}
 					target="_blank"
