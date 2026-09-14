@@ -147,6 +147,7 @@ content/sqlite/
 secrets.json
 config/secrets/
 keys/
+mobile/secrets/
 
 # ID
 *.code-workspace
