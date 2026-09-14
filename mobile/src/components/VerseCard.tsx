@@ -321,6 +321,9 @@ const createStyles = (
       flexDirection: "row-reverse",
       alignItems: "center",
     },
+    firstWordRowGreek: {
+      flexDirection: "row",
+    },
     hebrewPrefixRow: {
       flexDirection: "row-reverse",
       alignItems: "center",
@@ -652,7 +655,13 @@ export const VerseCard = ({
 
             if (isFirst) {
               return (
-                <View key={wordKey} style={styles.firstWordRow}>
+                <View
+                  key={wordKey}
+                  style={[
+                    styles.firstWordRow,
+                    isGreekSource ? styles.firstWordRowGreek : undefined,
+                  ]}
+                >
                   <Pressable
                     onPressIn={onHebrewPressIn}
                     onPress={onVersePress}
