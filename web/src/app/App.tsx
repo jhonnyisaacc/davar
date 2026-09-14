@@ -33,6 +33,10 @@ import {
 	type WordAnalysis,
 	type WordResponse,
 } from "./services/staticData";
+import {
+	GREEK_BESORAH_BOOK_NAMES,
+	parseSourceStrong,
+} from "@davar/shared/greekBesorah";
 import { formatBookDisplayName } from "./utils/bookNameFormatter";
 import { stripCantillation, stripMeteg } from "./utils/hebrew";
 import {
@@ -45,6 +49,7 @@ import {
 import {
 	getDssCommentaryForLanguage,
 	HUTTER_ANNOUNCEMENT_RELEASE,
+	resolveGreekOverlayLanguage,
 } from "./utils/translationConfig";
 import { useVerseScrollNavigation } from "./utils/useVerseScrollNavigation";
 
@@ -491,9 +496,16 @@ export default function App() {
 			const found = books.find(
 				(item) => item.name.toLowerCase() === book.toLowerCase(),
 			);
+			if (
+				besorahLanguage === "greek" &&
+				found?.section === "besorah" &&
+				GREEK_BESORAH_BOOK_NAMES[found.id]
+			) {
+				return GREEK_BESORAH_BOOK_NAMES[found.id];
+			}
 			return found?.hebrew_name ?? book;
 		},
-		[books],
+		[besorahLanguage, books],
 	);
 
 	const getDisplayBookName = useCallback(
@@ -818,6 +830,8 @@ export default function App() {
 					name: book.name,
 					hebrew: book.hebrew_name,
 					spanish: book.spanish_name,
+					greek: GREEK_BESORAH_BOOK_NAMES[book.id],
+					section: book.section,
 				})),
 		[books],
 	);
@@ -950,19 +964,21 @@ export default function App() {
 		const loadChapterData = async () => {
 			setIsLoading(true);
 			setErrorMessage(null);
-			const translationLanguage = translationOnly
-				? language === "es"
-					? "es"
-					: "en"
-				: language === "he"
-					? undefined
-					: language;
+			const useGreekSource =
+				greekAvailable &&
+				isBesorah &&
+				besorahLanguage === "greek" &&
+				!translationOnly;
+			const translationLanguage = useGreekSource
+				? resolveGreekOverlayLanguage(language, translationOnly)
+				: translationOnly
+					? language === "es"
+						? "es"
+						: "en"
+					: language === "he"
+						? undefined
+						: language;
 			try {
-				const useGreekSource =
-					greekAvailable &&
-					isBesorah &&
-					besorahLanguage === "greek" &&
-					!translationOnly;
 				const [chapterCountValue, verseCountValue, loadedVerses] =
 					await Promise.all([
 					getChapterCount(currentBook.toLowerCase()),
@@ -1149,10 +1165,7 @@ export default function App() {
 				return;
 			}
 
-			const strongPart = selectedWord.strong
-				.split("/")
-				.map((part) => part.trim())
-				.find((part) => /^[HGD]\d+$/.test(part));
+			const strongPart = parseSourceStrong(selectedWord.strong);
 
 			if (!strongPart) {
 				logWordDebug("analysis-skip-invalid-strong", {

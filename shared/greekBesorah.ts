@@ -22,6 +22,11 @@ export type LocalizedLexicalText = {
   he?: string;
 };
 
+export type GreekOccurrenceShard = {
+  checksum: string;
+  path: string;
+};
+
 export type GreekReleaseManifest = {
   schema: "davar-greek-release-v1";
   edition: GreekEdition;
@@ -32,6 +37,7 @@ export type GreekReleaseManifest = {
   validated: boolean;
   publicEnabled: boolean;
   books: string[];
+  occurrence_shards?: Record<string, GreekOccurrenceShard>;
   previousRevision?: string;
 };
 
@@ -69,6 +75,17 @@ export const greekLexiconPath = (
   revision = GREEK_RECORDED_REVISION,
 ): string => `${greekReleaseBasePath(revision)}/lexicon.json`;
 
+export const greekOccurrenceShardKey = (strong: string): string => {
+  const digits = (strong.match(/\d+/)?.[0] ?? "0").padStart(4, "0");
+  return `G${digits.slice(0, 2)}`;
+};
+
+export const greekOccurrencesShardPath = (
+  strong: string,
+  revision = GREEK_RECORDED_REVISION,
+): string =>
+  `${greekReleaseBasePath(revision)}/occurrences/${greekOccurrenceShardKey(strong)}.json`;
+
 export const greekOccurrencesPath = (
   revision = GREEK_RECORDED_REVISION,
 ): string => `${greekReleaseBasePath(revision)}/occurrences.json`;
@@ -76,6 +93,51 @@ export const greekOccurrencesPath = (
 export const greekBundleKey = (
   revision = GREEK_RECORDED_REVISION,
 ): string => `greek:${GREEK_EDITION}:${revision}`;
+
+export const GREEK_BESORAH_BOOK_NAMES: Record<string, string> = {
+  matthew: "Κατὰ Μαθθαῖον",
+  mark: "Κατὰ Μᾶρκον",
+  luke: "Κατὰ Λουκᾶν",
+  john: "Κατὰ Ἰωάννην",
+  acts: "Πράξεις",
+  romans: "Πρὸς Ῥωμαίους",
+  corinthians1: "Πρὸς Κορινθίους Αʹ",
+  corinthians2: "Πρὸς Κορινθίους Βʹ",
+  galatians: "Πρὸς Γαλάτας",
+  ephesians: "Πρὸς Ἐφεσίους",
+  philippians: "Πρὸς Φιλιππησίους",
+  colossians: "Πρὸς Κολοσσαεῖς",
+  thessalonians1: "Πρὸς Θεσσαλονικεῖς Αʹ",
+  thessalonians2: "Πρὸς Θεσσαλονικεῖς Βʹ",
+  timothy1: "Πρὸς Τιμόθεον Αʹ",
+  timothy2: "Πρὸς Τιμόθεον Βʹ",
+  titus: "Πρὸς Τίτον",
+  philemon: "Πρὸς Φιλήμονα",
+  hebrews: "Πρὸς Ἑβραίους",
+  james: "Ἰακώβου",
+  peter1: "Πέτρου Αʹ",
+  peter2: "Πέτρου Βʹ",
+  john1: "Ἰωάννου Αʹ",
+  john2: "Ἰωάννου Βʹ",
+  john3: "Ἰωάννου Γʹ",
+  jude: "Ἰούδα",
+  revelation: "Ἀποκάλυψις",
+};
+
+export const SOURCE_STRONG_PATTERN = /^[HGD]\d+[A-Za-z]?$/;
+
+export const parseSourceStrong = (
+  value?: string | null,
+): string | undefined =>
+  value
+    ?.split("/")
+    .map((part) => part.trim())
+    .find((part) => SOURCE_STRONG_PATTERN.test(part));
+
+export const greekStrongFamily = (strong: string): string => {
+  const digits = strong.match(/\d+/)?.[0];
+  return digits ? `G${digits.padStart(4, "0")}` : strong;
+};
 
 export const strongNamespace = (
   strong: string | null | undefined,

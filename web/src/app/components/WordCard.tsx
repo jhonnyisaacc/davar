@@ -708,6 +708,7 @@ export function WordCard({
 
 					{/* Root Section */}
 					{/* Root Section — always show; if no root, show ALREADY ROOT */}
+					{sourceLanguage !== "greek" && (
 					<div className="pb-6">
 						<h3
 							className="mb-4"
@@ -820,6 +821,7 @@ export function WordCard({
 							)}
 						</div>
 					</div>
+					)}
 				</div>
 			) : activeTab === "qumran" ? (
 				<div className="space-y-6 text-center">

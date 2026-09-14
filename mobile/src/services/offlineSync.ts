@@ -3,8 +3,10 @@ import {
   GREEK_RECORDED_REVISION,
   greekBundleKey,
   greekLexiconPath,
+  greekReleaseBasePath,
   greekSourceIdentity,
   type BesorahLanguage,
+  type GreekReleaseManifest,
 } from "@davar/shared/greekBesorah";
 import {
   staticBundlePathRequest,
@@ -576,9 +578,26 @@ export const downloadGreekBundle = async (
         })),
       );
     }
-    const lexicon = await staticDataRequest<Record<string, unknown>>(
+    const lexicon = await staticDataRequest<Record<string, Record<string, unknown>>>(
       greekLexiconPath(revision),
     );
+    const releaseManifest = await staticDataRequest<GreekReleaseManifest>(
+      `${greekReleaseBasePath(revision)}/manifest.json`,
+    );
+    for (const meta of Object.values(releaseManifest.occurrence_shards ?? {})) {
+      const payload = await staticDataRequest<
+        Record<string, { count?: number; references?: unknown[] }>
+      >(`${greekReleaseBasePath(revision)}/${meta.path}`);
+      for (const [strong, bucket] of Object.entries(payload)) {
+        const entry = lexicon[strong];
+        if (!entry) continue;
+        lexicon[strong] = {
+          ...entry,
+          instances: bucket.references,
+          occurrences_count: bucket.count ?? entry.occurrences_count,
+        };
+      }
+    }
     await insertSourceLexicon(identity, lexicon);
     await validateSourceRelease(identity, 27);
     await activateSourceRelease(identity);

@@ -43,6 +43,10 @@ export function HomeScreen({
 			label: t("home.sources.besorahLabel"),
 			value: t("home.sources.besorahValue"),
 		},
+		{
+			label: t("home.sources.greekTextLabel"),
+			value: t("home.sources.greekTextValue"),
+		},
 	];
 	const aboutItems = [
 		{ label: t("home.aboutItems.terms"), Icon: FileText, href: "/terms" },

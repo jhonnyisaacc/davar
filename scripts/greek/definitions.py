@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from scripts.greek.parse_tagnt import strong_lookup
-from scripts.greek.parse_tbesg import TbesgEntry, resolve_tbesg_entries
+from scripts.greek.parse_tbesg import TbesgEntry, index_tbesg, resolve_tbesg_entries
 from scripts.greek.parse_ubs import (
     UbsSense,
     index_senses,
@@ -108,8 +108,19 @@ def build_definitions(
     entries: dict[str, dict] = {}
     leftovers: list[dict] = []
     ubs_index = index_senses(ubs_senses)
-    for displayed in sorted(displayed_strongs):
-        resolved = resolve_tbesg_entries(displayed, tbesg_entries)
+    tbesg_index = index_tbesg(tbesg_entries)
+    displayed_list = sorted(displayed_strongs)
+    for index, displayed in enumerate(displayed_list, start=1):
+        if index == 1 or index % 1000 == 0 or index == len(displayed_list):
+            print(
+                f"[davar-greek] mapping definitions {index}/{len(displayed_list)}",
+                flush=True,
+            )
+        resolved = resolve_tbesg_entries(
+            displayed,
+            tbesg_entries,
+            index=tbesg_index,
+        )
         if not resolved:
             continue
         senses: list[dict] = []
@@ -158,9 +169,30 @@ def build_definitions(
 
 def coverage_report(store: dict) -> dict:
     counts = {
-        "en": {"approved": 0, "draft": 0, "imported": 0, "missing": 0},
-        "es": {"approved": 0, "draft": 0, "imported": 0, "missing": 0},
-        "he": {"approved": 0, "draft": 0, "imported": 0, "missing": 0},
+        "en": {
+            "approved": 0,
+            "draft": 0,
+            "imported": 0,
+            "missing": 0,
+            "needs_prose": 0,
+            "script_gloss": 0,
+        },
+        "es": {
+            "approved": 0,
+            "draft": 0,
+            "imported": 0,
+            "missing": 0,
+            "needs_prose": 0,
+            "script_gloss": 0,
+        },
+        "he": {
+            "approved": 0,
+            "draft": 0,
+            "imported": 0,
+            "missing": 0,
+            "needs_prose": 0,
+            "script_gloss": 0,
+        },
     }
     for entry in store["entries"].values():
         for sense in entry["senses"]:
@@ -174,6 +206,10 @@ def coverage_report(store: dict) -> dict:
                     counts[language]["draft"] += 1
                 else:
                     counts[language][status] += 1
+                if definition.get("source") == "script-gloss":
+                    counts[language]["script_gloss"] += 1
+                if definition.get("needs_prose"):
+                    counts[language]["needs_prose"] += 1
     return {
         "entry_count": len(store["entries"]),
         "languages": counts,
@@ -195,7 +231,7 @@ def write_definitions(store: dict, output_dir: Path) -> Path:
 
 English short meanings and fuller definitions are TBESG (CC BY 4.0), stored once per dStrong sense. They are not occurrence-specific translations (`occurrence_translation` is always null).
 
-Spanish text is taken from UBSGreekNTDic-v1.0-es.JSON only when the Greek lemma matches and sense evidence exists. Unverified UBS rows are leftovers. Leftover Spanish and all Hebrew entries are `draft` until a reviewer approves them.
+Spanish text is taken from UBSGreekNTDic-v1.0-es.JSON only when the Greek lemma matches and sense evidence exists. Unverified UBS rows are leftovers. Leftover Spanish and all Hebrew entries are `draft` until a reviewer approves them. OpenRouter fills those drafts from TBESG English (`openrouter-tbesg`) without replacing UBS.
 
 UBS adaptations remain CC BY-SA 4.0.
 

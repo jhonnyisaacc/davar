@@ -8,6 +8,8 @@ import unicodedata
 from dataclasses import dataclass
 from typing import Any
 
+from scripts.greek.text_clean import clean_lexical_text
+
 _PUNCT = re.compile(r"[^\w\s]+", re.UNICODE)
 
 
@@ -54,9 +56,17 @@ def _senses_from_entry(entry: dict[str, Any]) -> list[UbsSense]:
                         entry_code=str(meaning.get("LEXEntryCode") or ""),
                         lemma=lemma,
                         strongs=strongs,
-                        glosses=tuple(str(item) for item in sense.get("Glosses") or []),
-                        definition_short=str(sense.get("DefinitionShort") or ""),
-                        definition_long=str(sense.get("DefinitionLong") or ""),
+                        glosses=tuple(
+                            clean_lexical_text(str(item))
+                            for item in sense.get("Glosses") or []
+                            if str(item).strip()
+                        ),
+                        definition_short=clean_lexical_text(
+                            str(sense.get("DefinitionShort") or "")
+                        ),
+                        definition_long=clean_lexical_text(
+                            str(sense.get("DefinitionLong") or "")
+                        ),
                         domain=domain,
                     )
                 )

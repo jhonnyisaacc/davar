@@ -343,6 +343,117 @@ const languages = [
 	{ code: "he" as const, name: "Hebrew", nativeName: "\u05e2\u05d1\u05e8\u05d9\u05ea" },
 ];
 
+function SettingsPillSelect<T extends string>({
+	value,
+	options,
+	onChange,
+	ariaLabel,
+}: {
+	value: T;
+	options: Array<{ value: T; label: string }>;
+	onChange: (value: T) => void;
+	ariaLabel: string;
+}) {
+	const [open, setOpen] = React.useState(false);
+	const ref = React.useRef<HTMLDivElement>(null);
+	const selected =
+		options.find((option) => option.value === value) ?? options[0];
+	if (!selected) return null;
+
+	React.useEffect(() => {
+		const handleClickOutside = (event: MouseEvent) => {
+			if (ref.current && !ref.current.contains(event.target as Node)) {
+				setOpen(false);
+			}
+		};
+		if (open) document.addEventListener("mousedown", handleClickOutside);
+		return () => document.removeEventListener("mousedown", handleClickOutside);
+	}, [open]);
+
+	return (
+		<div
+			className={`relative flex-shrink-0 ${open ? "z-50" : "z-10"}`}
+			ref={ref}
+			style={{ minWidth: "140px" }}
+		>
+			<button
+				type="button"
+				aria-expanded={open}
+				aria-haspopup="listbox"
+				aria-label={ariaLabel}
+				onClick={() => setOpen((current) => !current)}
+				className="w-full bg-[var(--muted)] border-2 border-[var(--border)] rounded-[16px] px-4 py-2 flex items-center justify-between hover:bg-[var(--primary)]/10 transition-all"
+			>
+				<span
+					className="text-base text-[var(--foreground)] font-medium"
+					style={{ fontFamily: "'Inter', sans-serif" }}
+				>
+					{selected.label}
+				</span>
+				<svg
+					aria-hidden="true"
+					className={`w-4 h-4 text-[var(--text-secondary)] transition-transform ${open ? "rotate-180" : ""}`}
+					fill="none"
+					stroke="currentColor"
+					viewBox="0 0 24 24"
+				>
+					<path
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						strokeWidth={2}
+						d="M19 9l-7 7-7-7"
+					/>
+				</svg>
+			</button>
+			{open && (
+				<div
+					className="absolute top-full left-0 right-0 mt-2 bg-[var(--background)] border-2 border-[var(--border)] rounded-[16px] shadow-lg overflow-hidden z-[100]"
+					role="listbox"
+				>
+					{options.map((option) => (
+						<button
+							type="button"
+							key={option.value}
+							role="option"
+							aria-selected={option.value === value}
+							onClick={() => {
+								onChange(option.value);
+								setOpen(false);
+							}}
+							className={`w-full px-4 py-3 flex items-center justify-between hover:bg-[var(--muted)] transition-all ${
+								option.value === value ? "bg-[var(--muted)]" : ""
+							}`}
+						>
+							<span
+								className="text-base text-[var(--foreground)] font-medium"
+								style={{ fontFamily: "'Inter', sans-serif" }}
+							>
+								{option.label}
+							</span>
+							{option.value === value && (
+								<svg
+									aria-hidden="true"
+									className="w-4 h-4 text-[var(--primary)]"
+									fill="none"
+									stroke="currentColor"
+									viewBox="0 0 24 24"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth={2}
+										d="M5 13l4 4L19 7"
+									/>
+								</svg>
+							)}
+						</button>
+					))}
+				</div>
+			)}
+		</div>
+	);
+}
+
 export function SettingsScreen({
 	theme,
 	onThemeChange,
@@ -365,10 +476,6 @@ export function SettingsScreen({
 	onDesignSystemClick,
 	onMobileDesignGuideClick,
 }: SettingsScreenProps) {
-	const [isLanguageOpen, setIsLanguageOpen] = React.useState(false);
-	const selectedLanguage =
-		languages.find((lang) => lang.code === language) || languages[0];
-	const dropdownRef = React.useRef<HTMLDivElement>(null);
 	const { t } = useTranslation(language);
 	const seferEnabled = canUseSeferStyle({
 		showFullChapter,
@@ -376,26 +483,6 @@ export function SettingsScreen({
 		translationOnly,
 	});
 	const seferDisabled = !seferEnabled;
-
-
-	// Close dropdown when clicking outside
-	React.useEffect(() => {
-		const handleClickOutside = (event: MouseEvent) => {
-			if (
-				dropdownRef.current &&
-				!dropdownRef.current.contains(event.target as Node)
-			) {
-				setIsLanguageOpen(false);
-			}
-		};
-
-		if (isLanguageOpen) {
-			document.addEventListener("mousedown", handleClickOutside);
-			return () =>
-				document.removeEventListener("mousedown", handleClickOutside);
-		}
-	}, [isLanguageOpen]);
-
 
 	const renderSharedSetting = (id: SharedSettingId): ReactNode => {
 		switch (id) {
@@ -433,105 +520,35 @@ export function SettingsScreen({
 				);
 			case "language":
 				return (
-					<div
-						className={`px-6 py-6 relative ${isLanguageOpen ? "z-50" : "z-10"}`}
-					>
+					<div className="px-6 py-6 relative">
 						<div className="flex items-center justify-between gap-4">
 							<div className="flex items-center gap-4">
 								<div className="text-[var(--text-secondary)]">
 									<RetroIcons.Language />
 								</div>
-								<div>
-									<div
-										className="text-lg font-semibold text-[var(--text-primary)]"
-										style={{ fontFamily: "'Inter', sans-serif" }}
-									>
-										{t("settings.language.title")}
-									</div>
+								<div
+									className="text-lg font-semibold text-[var(--text-primary)]"
+									style={{ fontFamily: "'Inter', sans-serif" }}
+								>
+									{t("settings.language.title")}
 								</div>
 							</div>
-
-							{/* Custom Dropdown */}
-							<div
-								className="relative flex-shrink-0"
-								ref={dropdownRef}
-								style={{ minWidth: "140px" }}
-							>
-								<button
-									type="button"
-									onClick={() => setIsLanguageOpen(!isLanguageOpen)}
-									className="w-full bg-[var(--muted)] border-2 border-[var(--border)] rounded-[16px] px-4 py-2 flex items-center justify-between hover:bg-[var(--primary)]/10 transition-all"
-								>
-									<span
-										className="text-base text-[var(--foreground)] font-medium"
-										style={{ fontFamily: "'Inter', sans-serif" }}
-									>
-										{selectedLanguage.nativeName}
-									</span>
-									<svg
-										aria-hidden="true"
-										className={`w-4 h-4 text-[var(--text-secondary)] transition-transform ${isLanguageOpen ? "rotate-180" : ""}`}
-										fill="none"
-										stroke="currentColor"
-										viewBox="0 0 24 24"
-									>
-										<path
-											strokeLinecap="round"
-											strokeLinejoin="round"
-											strokeWidth={2}
-											d="M19 9l-7 7-7-7"
-										/>
-									</svg>
-								</button>
-
-								{isLanguageOpen && (
-									<div className="absolute top-full left-0 right-0 mt-2 bg-[var(--background)] border-2 border-[var(--border)] rounded-[16px] shadow-lg overflow-hidden z-[100]">
-										{languages.map((lang) => (
-											<button
-												type="button"
-												key={lang.code}
-												onClick={() => {
-													onLanguageChange(lang.code);
-													setIsLanguageOpen(false);
-												}}
-												className={`w-full px-4 py-3 flex items-center justify-between hover:bg-[var(--muted)] transition-all ${
-													lang.code === language ? "bg-[var(--muted)]" : ""
-												}`}
-											>
-												<span
-													className="text-base text-[var(--foreground)] font-medium"
-													style={{ fontFamily: "'Inter', sans-serif" }}
-												>
-													{lang.nativeName}
-												</span>
-												{lang.code === language && (
-													<svg
-														aria-hidden="true"
-														className="w-4 h-4 text-[var(--primary)]"
-														fill="none"
-														stroke="currentColor"
-														viewBox="0 0 24 24"
-													>
-														<path
-															strokeLinecap="round"
-															strokeLinejoin="round"
-															strokeWidth={2}
-															d="M5 13l4 4L19 7"
-														/>
-													</svg>
-												)}
-											</button>
-										))}
-									</div>
-								)}
-							</div>
+							<SettingsPillSelect
+								value={language}
+								ariaLabel={t("settings.language.title")}
+								onChange={onLanguageChange}
+								options={languages.map((lang) => ({
+									value: lang.code,
+									label: lang.nativeName,
+								}))}
+							/>
 						</div>
 					</div>
 				);
 			case "besorahLanguage":
 				if (!greekAvailable) return null;
 				return (
-					<div className="px-6 py-6">
+					<div className="px-6 py-6 relative">
 						<div className="flex items-center justify-between gap-4">
 							<div className="flex items-center gap-4">
 								<div className="text-[var(--text-secondary)]">
@@ -544,65 +561,55 @@ export function SettingsScreen({
 									{t("settings.besorahLanguage.title")}
 								</div>
 							</div>
-							<select
+							<SettingsPillSelect
 								value={besorahLanguage}
-								onChange={(event) =>
-									onBesorahLanguageChange(
-										event.target.value as BesorahLanguage,
-									)
-								}
-								aria-label={t("settings.besorahLanguage.title")}
-								className="min-w-[140px] rounded-[16px] border-2 border-[var(--border)] bg-[var(--muted)] px-4 py-2 text-base font-medium text-[var(--foreground)]"
-								style={{ fontFamily: "'Inter', sans-serif" }}
-							>
-								<option value="hebrew">
-									{t("settings.besorahLanguage.hebrew")}
-								</option>
-								<option value="greek">
-									{t("settings.besorahLanguage.greek")}
-								</option>
-							</select>
+								ariaLabel={t("settings.besorahLanguage.title")}
+								onChange={onBesorahLanguageChange}
+								options={[
+									{
+										value: "hebrew",
+										label: t("settings.besorahLanguage.hebrew"),
+									},
+									{
+										value: "greek",
+										label: t("settings.besorahLanguage.greek"),
+									},
+								]}
+							/>
 						</div>
 					</div>
 				);
 			case "besorahTextVersion":
 				if (besorahLanguage === "greek") return null;
 				return (
-					<div className="px-6 py-6">
+					<div className="px-6 py-6 relative">
 						<div className="flex items-center justify-between gap-4">
 							<div className="flex items-center gap-4">
 								<div className="text-[var(--text-secondary)]">
 									<RetroIcons.Qumran />
 								</div>
-								<div className="flex items-center gap-2">
-									<div
-										className="text-lg font-semibold text-[var(--text-primary)]"
-										style={{ fontFamily: "'Inter', sans-serif" }}
-									>
-										{t("settings.besorahTextVersion.title")}
-									</div>
-									<span className="rounded-full bg-[var(--primary)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
-										{t("settings.besorahTextVersion.new")}
-									</span>
+								<div
+									className="text-lg font-semibold text-[var(--text-primary)]"
+									style={{ fontFamily: "'Inter', sans-serif" }}
+								>
+									{t("settings.besorahTextVersion.title")}
 								</div>
 							</div>
-							<select
+							<SettingsPillSelect
 								value={besorahTextVersion}
-								onChange={(event) =>
-									onBesorahTextVersionChange(
-										event.target.value as "delitzsch" | "hutter",
-									)
-								}
-								className="min-w-[140px] rounded-[16px] border-2 border-[var(--border)] bg-[var(--muted)] px-4 py-2 text-base font-medium text-[var(--foreground)]"
-								style={{ fontFamily: "'Inter', sans-serif" }}
-							>
-								<option value="delitzsch">
-									{t("settings.besorahTextVersion.delitzsch")}
-								</option>
-								<option value="hutter">
-									{t("settings.besorahTextVersion.hutter")}
-								</option>
-							</select>
+								ariaLabel={t("settings.besorahTextVersion.title")}
+								onChange={onBesorahTextVersionChange}
+								options={[
+									{
+										value: "delitzsch",
+										label: t("settings.besorahTextVersion.delitzsch"),
+									},
+									{
+										value: "hutter",
+										label: t("settings.besorahTextVersion.hutter"),
+									},
+								]}
+							/>
 						</div>
 					</div>
 				);

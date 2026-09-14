@@ -6,6 +6,7 @@ import re
 from dataclasses import dataclass
 
 from scripts.greek.books import TAGNT_TO_DAVAR, davar_book_id
+from scripts.greek.text_clean import clean_greek_surface_text
 from scripts.greek.edition import (
     SBL_EDITION_TOKEN,
     edition_tokens,
@@ -49,8 +50,8 @@ def extract_greek_and_translit(cell: str) -> tuple[str, str]:
     cleaned = cell.strip().lstrip("[")
     match = _GREEK_CELL.match(cleaned)
     if match:
-        return match.group("text"), match.group("translit")
-    return cleaned, ""
+        return clean_greek_surface_text(match.group("text")), match.group("translit")
+    return clean_greek_surface_text(cleaned), ""
 
 
 def spelling_for_sbl(main_cell: str, variants: str) -> str:
@@ -64,7 +65,7 @@ def spelling_for_sbl(main_cell: str, variants: str) -> str:
             continue
         editions, form = part.split(":", 1)
         if SBL_EDITION_TOKEN in edition_tokens(editions):
-            return form.strip() or default_text
+            return clean_greek_surface_text(form) or default_text
     return default_text
 
 

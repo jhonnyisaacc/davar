@@ -78,7 +78,9 @@ import {
   resolveFootnoteForMarker,
   formatMarkerForDisplay,
 } from "@/src/utils/footnoteUtils";
+import { GREEK_BESORAH_BOOK_NAMES } from "@davar/shared/greekBesorah";
 import { stripCantillation, stripMeteg, stripNikud } from "@/src/utils/hebrew";
+import { resolveGreekOverlayLanguage } from "@/src/utils/translationConfig";
 
 const SWIPE_HINT_MAX_SHOWS = 5;
 
@@ -1380,20 +1382,23 @@ export const VerseDetailContent = () => {
       sheetRef.current?.close();
 
       try {
-        const hideTranslations = !translationOnly && language === "he";
-        const translationLanguage: "en" | "es" | undefined = translationOnly
-          ? language === "es"
-            ? "es"
-            : "en"
-          : hideTranslations
-            ? undefined
-            : language === "es"
-              ? "es"
-              : "en";
         const useGreekSource =
           isBesorah &&
           besorahLanguage === "greek" &&
           !translationOnly;
+        const hideTranslations =
+          !useGreekSource && !translationOnly && language === "he";
+        const translationLanguage = useGreekSource
+          ? resolveGreekOverlayLanguage(language, translationOnly)
+          : translationOnly
+            ? language === "es"
+              ? "es"
+              : "en"
+            : hideTranslations
+              ? undefined
+              : language === "es"
+                ? "es"
+                : "en";
         const verses = useGreekSource
           ? await fetchGreekChapterVerses(bookId, chapter, {
               language: translationLanguage,
@@ -1504,7 +1509,20 @@ export const VerseDetailContent = () => {
                     ? (bookMeta?.spanish_name ?? t("common.loading"))
                     : (bookMeta?.name ?? t("common.loading")),
                 )}
-                hebrewLabel={bookMeta?.hebrew_name ?? ""}
+                hebrewLabel={
+                  besorahLanguage === "greek" && bookMeta?.id
+                    ? (GREEK_BESORAH_BOOK_NAMES[bookMeta.id] ??
+                      bookMeta.hebrew_name ??
+                      "")
+                    : (bookMeta?.hebrew_name ?? "")
+                }
+                nativeLabelScript={
+                  besorahLanguage === "greek" &&
+                  bookMeta?.id &&
+                  GREEK_BESORAH_BOOK_NAMES[bookMeta.id]
+                    ? "greek"
+                    : "hebrew"
+                }
                 chapter={verse?.chapter ?? chapter}
                 onBookPress={() => navigationSheetRef.current?.snapToIndex(0)}
                 onChapterPress={() =>

@@ -58,7 +58,12 @@ export function FullChapterView({
 	const spanishMissingTranslation = t("verse.missingSpanishTranslation");
 	const hideSuperscripts = shouldHideSuperscripts(getTranslationKey(language));
 	const hideTranslationText =
-		shouldHideTranslationText(language, hebrewOnly) && !translationOnly;
+		shouldHideTranslationText(
+			language,
+			hebrewOnly,
+			isGreekSource ? "greek" : "hebrew",
+		) && !translationOnly;
+	const isHebrewOverlay = language === "he" && isGreekSource;
 	const isRenderableDssWord = (value?: string): value is string => {
 		if (!value) return false;
 		const normalized = value.trim();
@@ -344,12 +349,15 @@ export function FullChapterView({
 								<div
 									className="leading-relaxed"
 									style={{
-										fontFamily: "'Inter', sans-serif",
+										fontFamily: isHebrewOverlay
+											? "'Cardo', serif"
+											: "'Inter', sans-serif",
 										fontSize: translationOnly ? "22px" : "15px",
 										color: translationOnly
 											? "var(--text-hebrew)"
 											: "var(--text-secondary)",
 										opacity: 1,
+										direction: isHebrewOverlay ? "rtl" : undefined,
 									}}
 								>
 									{translationOnly ? (

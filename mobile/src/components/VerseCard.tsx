@@ -494,13 +494,17 @@ export const VerseCard = ({
     translation: verse.translation,
     missingTranslationText: missingSpanishTranslation,
     hebrewOnly: hebrewOnly && !translationOnly,
+    sourceLanguage: verse.sourceLanguage ?? "hebrew",
   });
   const hideTranslationText = shouldHideTranslationText(
     effectiveTranslationLanguage,
     hebrewOnly && !translationOnly,
+    verse.sourceLanguage ?? "hebrew",
   );
   const showHebrewText = !translationOnly;
   const isGreekSource = verse.sourceLanguage === "greek";
+  const isHebrewOverlay =
+    (verse.translation_language ?? language) === "he" && isGreekSource;
   const sourceWordStyle: StyleProp<TextStyle> = isGreekSource
     ? { textAlign: "left", writingDirection: "ltr" }
     : undefined;
@@ -695,7 +699,18 @@ export const VerseCard = ({
       ) : null}
 
       {hideTranslationText ? null : (
-        <Text style={[styles.translation, translationStyleOverrides]}>
+        <Text
+          style={[
+            styles.translation,
+            translationStyleOverrides,
+            isHebrewOverlay
+              ? {
+                  fontFamily: typography.families.hebrewScripture,
+                  writingDirection: "rtl",
+                }
+              : null,
+          ]}
+        >
           {translationOnly ? `[${verse.verse}] ` : ""}
           {renderTranslationWithItalics(translationText, {
             italicStyle: styles.translationItalic,

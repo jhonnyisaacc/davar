@@ -17,9 +17,20 @@ def git_blob_sha(data: bytes) -> str:
     return hashlib.sha1(b"blob " + str(len(data)).encode("ascii") + b"\x00" + data).hexdigest()
 
 
+def existing_if_valid(source: OfficialSource, dest_dir: Path) -> Path | None:
+    path = dest_dir / source.filename
+    if not path.is_file():
+        return None
+    digest = git_blob_sha(path.read_bytes())
+    if digest != source.blob_sha:
+        return None
+    return path
+
+
 def fetch_source(source: OfficialSource, dest_dir: Path, timeout: int = 60) -> Path:
     dest_dir.mkdir(parents=True, exist_ok=True)
     path = dest_dir / source.filename
+    print(f"[davar-greek] fetching {source.filename}", flush=True)
     with urllib.request.urlopen(source.url, timeout=timeout) as response:
         data = response.read()
     digest = git_blob_sha(data)
@@ -28,6 +39,7 @@ def fetch_source(source: OfficialSource, dest_dir: Path, timeout: int = 60) -> P
             f"{source.filename} blob {digest} does not match recorded {source.blob_sha}"
         )
     path.write_bytes(data)
+    print(f"[davar-greek] fetched {source.filename}", flush=True)
     return path
 
 
@@ -57,10 +69,18 @@ def fetch_all(
     search = local_dirs or []
     for source in ALL_SOURCES:
         copied = copy_if_present(source, search, dest) if search else None
-        found[source.key] = copied or fetch_source(source, dest)
+        cached = existing_if_valid(source, dest)
+        if copied or cached:
+            print(f"[davar-greek] using cached {source.filename}", flush=True)
+        found[source.key] = copied or cached or fetch_source(source, dest)
     if include_ubs:
         ubs_path = dest / "UBSGreekNTDic-v1.0-es.JSON"
-        with urllib.request.urlopen(UBS_ES_URL, timeout=60) as response:
-            ubs_path.write_bytes(response.read())
+        if ubs_path.is_file() and ubs_path.stat().st_size > 0:
+            print("[davar-greek] using cached UBS Spanish lexicon", flush=True)
+        else:
+            print("[davar-greek] fetching UBS Spanish lexicon", flush=True)
+            with urllib.request.urlopen(UBS_ES_URL, timeout=60) as response:
+                ubs_path.write_bytes(response.read())
+            print("[davar-greek] fetched UBS Spanish lexicon", flush=True)
         found["ubs-es"] = ubs_path
     return found

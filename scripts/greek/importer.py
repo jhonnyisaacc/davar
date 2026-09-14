@@ -19,7 +19,12 @@ from scripts.greek.edition import (
     verses_without_sbl,
 )
 from scripts.greek.parse_tagnt import TagntToken, assert_greek_strong, parse_tagnt_file
-from scripts.greek.parse_tbesg import TbesgEntry, parse_tbesg_file, resolve_tbesg_entries
+from scripts.greek.parse_tbesg import (
+    TbesgEntry,
+    index_tbesg,
+    parse_tbesg_file,
+    resolve_tbesg_entries,
+)
 from scripts.greek.sources import (
     ALL_SOURCES,
     STEPBIBLE_COMMIT,
@@ -152,12 +157,13 @@ def lexicon_payload(
     displayed_strongs: set[str] | None = None,
 ) -> dict[str, dict]:
     lexicon: dict[str, dict] = {}
+    catalog = index_tbesg(entries)
     for entry in entries:
         lexicon[entry.dstrong] = _lexicon_entry_payload(entry)
     for displayed in displayed_strongs or ():
         if displayed in lexicon:
             continue
-        resolved = resolve_tbesg_entries(displayed, entries)
+        resolved = resolve_tbesg_entries(displayed, entries, index=catalog)
         if resolved:
             lexicon[displayed] = _lexicon_entry_payload(resolved[0], displayed)
     return lexicon

@@ -241,16 +241,9 @@ export default function SettingsScreen() {
                 <AppIcon name="scroll" size={18} color={colors.textSecondary} />
               </View>
               <View style={styles.textContainer}>
-                <View style={styles.labelRow}>
-                  <Text style={styles.label}>
-                    {t("settings.besorahLanguage.title")}
-                  </Text>
-                  <View style={styles.newBadge}>
-                    <Text style={styles.newBadgeText}>
-                      {t("settings.besorahLanguage.new")}
-                    </Text>
-                  </View>
-                </View>
+                <Text style={styles.label}>
+                  {t("settings.besorahLanguage.title")}
+                </Text>
               </View>
             </View>
             <SettingsDropdown
@@ -280,16 +273,9 @@ export default function SettingsScreen() {
                 <AppIcon name="scroll" size={18} color={colors.textSecondary} />
               </View>
               <View style={styles.textContainer}>
-                <View style={styles.labelRow}>
-                  <Text style={styles.label}>
-                    {t("settings.besorahTextVersion.title")}
-                  </Text>
-                  <View style={styles.newBadge}>
-                    <Text style={styles.newBadgeText}>
-                      {t("settings.besorahTextVersion.new")}
-                    </Text>
-                  </View>
-                </View>
+                <Text style={styles.label}>
+                  {t("settings.besorahTextVersion.title")}
+                </Text>
               </View>
             </View>
             <SettingsDropdown

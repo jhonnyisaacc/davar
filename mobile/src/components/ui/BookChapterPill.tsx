@@ -15,6 +15,7 @@ import { useAppStore, type AppState } from "@/src/store/useAppStore";
 type BookChapterPillProps = {
   bookLabel: string;
   hebrewLabel: string;
+  nativeLabelScript?: "hebrew" | "greek";
   chapter: number;
   onBookPress?: () => void;
   onChapterPress?: () => void;
@@ -80,6 +81,7 @@ const createStyles = (colors: ReturnType<typeof getColors>, tablet: boolean) =>
 export const BookChapterPill = ({
   bookLabel,
   hebrewLabel,
+  nativeLabelScript = "hebrew",
   chapter,
   onBookPress,
   onChapterPress,
@@ -90,8 +92,9 @@ export const BookChapterPill = ({
   const { isTablet } = getResponsiveLayout(width, height);
   const styles = useMemo(() => createStyles(colors, isTablet), [colors, isTablet]);
   const hebrewLabelPlain = useMemo(
-    () => stripNikud(hebrewLabel),
-    [hebrewLabel],
+    () =>
+      nativeLabelScript === "greek" ? hebrewLabel : stripNikud(hebrewLabel),
+    [hebrewLabel, nativeLabelScript],
   );
 
   return (
@@ -109,7 +112,16 @@ export const BookChapterPill = ({
         <View pointerEvents="none" style={styles.bookRow}>
           <Text style={styles.bookLabel}>{bookLabel}</Text>
           <Text style={styles.separator}>|</Text>
-          <Text style={styles.hebrewLabel}>{hebrewLabelPlain}</Text>
+          <Text
+            style={[
+              styles.hebrewLabel,
+              nativeLabelScript === "greek"
+                ? { fontFamily: typography.families.hebrewScripture }
+                : null,
+            ]}
+          >
+            {hebrewLabelPlain}
+          </Text>
         </View>
       </Pressable>
       <Pressable

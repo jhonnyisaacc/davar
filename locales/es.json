@@ -164,7 +164,9 @@
       "spanishTranslationLabel": "Traducción al español",
       "spanishTranslationValue": "TTH (principal), BES (alternativo)",
       "besorahLabel": "Besorah",
-      "besorahValue": "Traducción de Delitzsch"
+      "besorahValue": "Delitzsch (1877), Hutter (1599–1602)",
+      "greekTextLabel": "Texto griego",
+      "greekTextValue": "SBLGNT (2010)"
     },
     "aboutTitle": "Acerca de",
     "aboutItems": {

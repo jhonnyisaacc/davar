@@ -2,8 +2,11 @@ import { instanceSurface } from "@davar/shared/instanceSurface";
 import {
   GREEK_RECORDED_REVISION,
   greekLexiconPath,
+  greekOccurrencesShardPath,
   greekSourceIdentity,
+  greekStrongFamily,
 } from "@davar/shared/greekBesorah";
+import { cleanLexicalText } from "@davar/shared/greekText";
 import React, {
   useCallback,
   useEffect,
@@ -407,11 +410,7 @@ const toGreekLexiconResponse = (
   const localized = entry.definitions?.[language];
   const english = entry.definitions?.en;
   const selected =
-    localized &&
-    (localized.review_status === "approved" ||
-      localized.review_status === "imported")
-      ? localized
-      : english;
+    localized && (localized.short || localized.fuller) ? localized : english;
   const definitions: LexiconResponse["definitions"] = [];
   if (selected?.short) {
     definitions.push({
@@ -419,7 +418,7 @@ const toGreekLexiconResponse = (
       license: selected.license,
       review_status: selected.review_status,
       source: selected.source ?? "stepbible-tbesg",
-      text: selected.short,
+      text: cleanLexicalText(selected.short),
     });
   }
   if (selected?.fuller && selected.fuller !== selected.short) {
@@ -428,22 +427,22 @@ const toGreekLexiconResponse = (
       license: selected.license,
       review_status: selected.review_status,
       source: selected.source ?? "stepbible-tbesg",
-      text: selected.fuller,
+      text: cleanLexicalText(selected.fuller),
     });
   }
+  const surface = instanceSurface({
+    instance_total: entry.occurrences_count,
+    instances: entry.instances,
+  });
   return {
     definitions,
     greek: entry.lemma,
-    instances:
-      entry.instances?.map(
-        (instance) =>
-          `${instance.book} ${instance.chapter}:${instance.verse ?? instance.verse_id ?? "?"}#${instance.index}`,
-      ) ?? [],
+    instances: surface.instances,
     lemma: entry.lemma,
     lemma_translit_en: entry.translit_en,
     lemma_translit_es: entry.translit_es,
     lemma_translit_he: entry.translit_he,
-    occurrences_count: entry.occurrences_count ?? 0,
+    occurrences_count: surface.total,
     source_language: "greek",
     strong_number: entry.strong ?? strong,
     translit_en: entry.translit_en,
@@ -461,8 +460,30 @@ const loadGreekLexiconEntry = async (
     const lexicon = await staticDataRequest<Record<string, GreekLexiconEntry>>(
       greekLexiconPath(revision),
     );
-    const entry = lexicon[strong];
-    return entry ? toGreekLexiconResponse(entry, strong, language) : null;
+    const family = greekStrongFamily(strong);
+    const entry =
+      lexicon[strong] ??
+      lexicon[family] ??
+      Object.values(lexicon).find(
+        (item) => greekStrongFamily(item.strong) === family,
+      );
+    if (!entry) return null;
+    if (!entry.instances?.length) {
+      const shard = await staticDataRequest<
+        Record<string, { count?: number; references?: GreekLexiconEntry["instances"] }>
+      >(greekOccurrencesShardPath(entry.strong ?? strong, revision));
+      const bucket = shard[strong] ?? shard[entry.strong];
+      return toGreekLexiconResponse(
+        {
+          ...entry,
+          instances: bucket?.references,
+          occurrences_count: bucket?.count ?? entry.occurrences_count,
+        },
+        strong,
+        language,
+      );
+    }
+    return toGreekLexiconResponse(entry, strong, language);
   } catch {
     const offline = (await fetchSourceLexiconEntry(
       greekSourceIdentity(revision),
@@ -1647,6 +1668,8 @@ const WordAnalysisBottomSheetComponent = (
                   </>
                 ) : null}
 
+                {word?.source_language !== "greek" && (
+                  <>
                 <View style={styles.sectionDivider} />
                 {/* Root section */}
                 <View style={styles.rootSection}>
@@ -1692,6 +1715,8 @@ const WordAnalysisBottomSheetComponent = (
                     </Text>
                   )}
                 </View>
+                  </>
+                )}
               </>
             ) : activeTab === "qumran" ? (
               <>

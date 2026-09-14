@@ -15,6 +15,14 @@ from pathlib import Path
 
 from scripts.greek.definitions import build_definitions, coverage_report, write_definitions
 from scripts.greek.fetch import SOURCE_DIR, fetch_all
+from scripts.greek.translate import (
+    DEFAULT_DEFINITIONS_DIR,
+    apply_translation_cache,
+    default_cache_path,
+    load_cache,
+    load_settings,
+    run_translation,
+)
 from scripts.greek.importer import (
     DEFAULT_OUTPUT,
     bundle_bytes,
@@ -100,6 +108,7 @@ def cmd_define(args: argparse.Namespace) -> int:
         entries = parse_tbesg_file(tbesg_text)
     ubs = parse_ubs_file(Path(args.ubs).read_text(encoding="utf-8"))
     store = build_definitions(entries, set(occurrences), ubs)
+    apply_translation_cache(store, load_cache(default_cache_path()))
     output = Path(args.output_dir)
     write_definitions(store, output)
     report = coverage_report(store)
@@ -163,6 +172,42 @@ def cmd_upstream(args: argparse.Namespace) -> int:
     return 2 if args.fail_on_change and report["has_changes"] else 0
 
 
+def cmd_translate(args: argparse.Namespace) -> int:
+    targets = tuple(
+        language
+        for language, enabled in (("es", args.es), ("he", args.he))
+        if enabled
+    ) or ("es", "he")
+    definitions_dir = Path(args.definitions_dir)
+    store_path = definitions_dir / "definitions.json"
+    if not store_path.is_file():
+        raise SystemExit(
+            f"Missing {store_path}. Run `python -m scripts.greek define` first."
+        )
+    store = read_json(store_path)
+    settings = (
+        None
+        if args.dry_run or args.script_only
+        else load_settings(model=args.model, concurrency=args.concurrency)
+    )
+    result = run_translation(
+        store,
+        targets,
+        Path(args.cache) if args.cache else default_cache_path(),
+        settings=settings,
+        dry_run=args.dry_run,
+        script_only=args.script_only,
+        force=args.force,
+        limit=args.limit,
+    )
+    if not args.dry_run:
+        write_definitions(result["store"], definitions_dir)
+    report = coverage_report(result["store"])
+    print(definitions_dir)
+    print(report)
+    return 0
+
+
 def cmd_public_gate(args: argparse.Namespace) -> int:
     result = validate_public_enablement(
         Path(args.public_data_dir),
@@ -194,6 +239,37 @@ def build_parser() -> argparse.ArgumentParser:
     define.add_argument("--tbesg")
     define.add_argument("--output-dir", required=True)
     define.set_defaults(func=cmd_define)
+
+    translate = sub.add_parser(
+        "translate",
+        help="Fill leftover Spanish and all Hebrew drafts via OpenRouter",
+    )
+    translate.add_argument(
+        "--definitions-dir",
+        default=str(DEFAULT_DEFINITIONS_DIR),
+    )
+    translate.add_argument("--cache", help="Content-addressed translation cache")
+    translate.add_argument("--es", action="store_true", help="Missing Spanish only")
+    translate.add_argument("--he", action="store_true", help="Missing Hebrew only")
+    translate.add_argument("--model", help="Override OPENROUTER_MODEL")
+    translate.add_argument("--concurrency", type=int, help="Parallel OpenRouter requests")
+    translate.add_argument("--limit", type=int, help="Translate at most N rows")
+    translate.add_argument(
+        "--force",
+        action="store_true",
+        help="Retranslate even if the cache already has a row",
+    )
+    translate.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="Count unique rows and batches without calling OpenRouter",
+    )
+    translate.add_argument(
+        "--script-only",
+        action="store_true",
+        help="Apply verse-ref and abbreviation maps without calling OpenRouter",
+    )
+    translate.set_defaults(func=cmd_translate)
 
     check = sub.add_parser("check", help="Validate a built import directory")
     check.add_argument("--import-dir", required=True)

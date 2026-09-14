@@ -4,6 +4,7 @@ from scripts.greek.books import TAGNT_SBL_ABSENT_VERSES
 from scripts.greek.importer import bundle_bytes, build_bundle, write_bundle
 from scripts.greek.parse_tagnt import parse_tagnt_file, spelling_for_sbl
 from scripts.greek.parse_tbesg import html_to_text, parse_tbesg_file
+from scripts.greek.text_clean import clean_greek_surface_text, clean_lexical_text
 
 FIXTURES = Path(__file__).parent / "fixtures" / "greek"
 
@@ -93,6 +94,22 @@ def test_lexicon_aliases_displayed_tagnt_stems():
         if word["strong"] == "G0256"
     )
     assert alphaeus["lemma"] == "Ἀλφαῖος"
+
+
+def test_strips_tagnt_paragraph_marks_and_lexical_markup():
+    assert clean_greek_surface_text("Χριστοῦ.¶") == "Χριστοῦ."
+    assert clean_greek_surface_text("μαργαρίτου.¶ Καὶ") == "μαργαρίτου. Καὶ"
+    cleaned = clean_lexical_text(
+        "Καί, conj., and __I. Copulative. __1. In general __(a) also"
+    )
+    assert "__" not in cleaned
+    assert "I. Copulative." in cleaned
+    assert "1. In general (a) also" in cleaned
+    assert (
+        clean_lexical_text("{L:σῴζω<SDBG:σῴζω:000000>}[a] the")
+        == "σῴζω the"
+    )
+    assert "{D:" not in clean_lexical_text("from {L:ἅγιος<SDBG:ἅγιος:000000>}[a], {D:88.24}")
 
 
 def test_tbesg_keeps_short_and_fuller_distinct():

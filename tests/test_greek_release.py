@@ -102,6 +102,13 @@ def test_complete_release_is_published_and_revalidated(tmp_path: Path):
     manifest = validate_release_tree(release_dir)
     assert manifest["revision"] == STEPBIBLE_COMMIT
     assert len(manifest["books"]) == 27
+    lexicon = read_json(release_dir / "lexicon.json")
+    assert "instances" not in lexicon["G3056"]
+    assert lexicon["G3056"]["occurrences_count"] == 27
+    assert not (release_dir / "occurrences.json").exists()
+    shard = read_json(release_dir / "occurrences" / "G30.json")
+    assert shard["G3056"]["count"] == 27
+    assert len(shard["G3056"]["references"]) == 27
 
 
 def test_incomplete_candidate_does_not_replace_active_release(tmp_path: Path):

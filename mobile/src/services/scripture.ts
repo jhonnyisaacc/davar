@@ -4,6 +4,8 @@ import {
   greekChapterPath,
   greekSourceIdentity,
 } from "@davar/shared/greekBesorah";
+import { cleanGreekSurfaceText } from "@davar/shared/greekText";
+import { joinHebrewPrefixSlashes } from "@davar/shared/hebrewText";
 import { staticDataRequest, ts2009Request } from "@/src/services/api";
 import type { TranslationFootnote, WordResponse } from "@/src/types/api";
 import {
@@ -288,6 +290,7 @@ export type DisplayVerse = {
   revision?: string;
   available?: boolean;
   translation: string;
+  translation_language?: "en" | "es" | "he";
   words: DisplayWord[];
   qumranVariants?: { position: number; dssWord: string }[];
   translation_footnotes?: TranslationFootnote[];
@@ -1467,7 +1470,7 @@ export const fetchGreekChapterVerses = async (
   bookId: string,
   chapter: number,
   options?: {
-    language?: "en" | "es";
+    language?: "en" | "es" | "he";
     isConnected?: boolean;
     revision?: string;
   },
@@ -1525,10 +1528,22 @@ export const fetchGreekChapterVerses = async (
     }
   }
 
-  const translatedVerses = await fetchChapterVerses(bookId, chapter, {
-    isConnected: options?.isConnected,
-    language: options?.language,
-  });
+  const translatedVerses =
+    options?.language === "he"
+      ? (
+          await fetchChapterVerses(bookId, chapter, {
+            isConnected: options?.isConnected,
+            besorahTextVersion: "delitzsch",
+          })
+        ).map((verse) => ({
+          ...verse,
+          translation: joinHebrewPrefixSlashes(verse.hebrew),
+          translation_language: "he" as const,
+        }))
+      : await fetchChapterVerses(bookId, chapter, {
+          isConnected: options?.isConnected,
+          language: options?.language,
+        });
   const translations = new Map(
     translatedVerses.map((verse) => [verse.verse, verse]),
   );
@@ -1551,14 +1566,16 @@ export const fetchGreekChapterVerses = async (
       sourceChapter: chapter,
       sourceLanguage: "greek",
       sourceVerse: verseNumber,
-      text: verse?.text ?? "",
+      text: cleanGreekSurfaceText(verse?.text ?? ""),
       translation: translated?.translation ?? "",
+      translation_language: translated?.translation_language,
       translation_footnotes: translated?.translation_footnotes,
       verse: verseNumber,
       words: (verse?.words ?? []).map((word) => ({
         ...word,
         prefixes: [],
         source_language: "greek",
+        text: cleanGreekSurfaceText(word.text),
       })),
     };
   });

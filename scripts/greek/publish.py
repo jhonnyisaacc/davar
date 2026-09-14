@@ -14,11 +14,47 @@ from scripts.greek.parse_tbesg import parse_tbesg_file
 from scripts.greek.parse_ubs import parse_ubs_file
 from scripts.greek.sources import STEPBIBLE_COMMIT
 from scripts.greek.stable_json import dumps, read_json, write_json
+from scripts.greek.translate import apply_translation_cache, default_cache_path, load_cache
 from scripts.greek.transliteration import RULE_VERSION
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_SOURCE_DIR = ROOT / "data" / "greek" / "source" / STEPBIBLE_COMMIT
 DEFAULT_PUBLIC_DIR = ROOT / "web" / "public" / "data"
+PAGES_FILE_LIMIT_BYTES = 24 * 1024 * 1024
+
+
+def occurrence_shard_key(strong: str) -> str:
+    digits = "".join(ch for ch in strong if ch.isdigit()) or "0"
+    return f"G{digits.zfill(4)[:2]}"
+
+
+def assert_public_file_size(path: Path) -> None:
+    size = path.stat().st_size
+    if size > PAGES_FILE_LIMIT_BYTES:
+        raise ValueError(
+            f"{path} is {size / (1024 * 1024):.1f} MiB; Cloudflare Pages limit is 25 MiB"
+        )
+
+
+def occurrence_shards(occurrences: dict[str, dict]) -> dict[str, dict[str, dict]]:
+    shards: dict[str, dict[str, dict]] = {}
+    for strong, bucket in occurrences.items():
+        shards.setdefault(occurrence_shard_key(strong), {})[strong] = {
+            "count": bucket["count"],
+            "namespace": bucket["namespace"],
+            "references": [
+                {
+                    "book": item["book"],
+                    "chapter": item["chapter"],
+                    "index": item["index"],
+                    "verse": item.get("verse"),
+                    "verse_id": item.get("verse_id"),
+                }
+                for item in bucket.get("references", [])
+            ],
+            "strong": strong,
+        }
+    return dict(sorted(shards.items()))
 
 
 def checksum(payload: object) -> str:
@@ -70,11 +106,14 @@ def _definition_payload(store: dict, lexicon: dict, occurrences: dict) -> dict:
         occurrence = occurrences.get(strong, {})
         lexical = lexicon.get(strong, {"strong": strong})
         published[strong] = {
-            **lexical,
             "definitions": definitions,
+            "lemma": lexical.get("lemma", ""),
             "occurrences_count": occurrence.get("count", 0),
-            "instances": occurrence.get("references", []),
             "source_language": "greek",
+            "strong": lexical.get("strong", strong),
+            "translit_en": lexical.get("translit_en"),
+            "translit_es": lexical.get("translit_es"),
+            "translit_he": lexical.get("translit_he"),
         }
     return published
 
@@ -134,19 +173,35 @@ def validate_release_tree(release_dir: Path, manifest: dict | None = None) -> di
                         raise ValueError(
                             f"Non-G Strong in {book_id} {chapter}: {word['strong']}"
                         )
-    lexicon = read_json(release_dir / "lexicon.json")
+    lexicon_path = release_dir / "lexicon.json"
+    lexicon = read_json(lexicon_path)
     if checksum(lexicon) != release_manifest["lexicon_checksum"]:
         raise ValueError("Greek lexicon checksum mismatch")
     if any(not strong.startswith("G") for strong in lexicon):
         raise ValueError("Greek lexicon contains a non-G Strong identifier")
-    occurrences = read_json(release_dir / "occurrences.json")
-    for strong, bucket in occurrences.items():
-        if (
-            not strong.startswith("G")
-            or bucket.get("namespace") != "G"
-            or bucket.get("count") != len(bucket.get("references", []))
-        ):
-            raise ValueError(f"Greek occurrence index mismatch: {strong}")
+    if any(entry.get("instances") for entry in lexicon.values()):
+        raise ValueError("Published Greek lexicon must not embed occurrence instances")
+    assert_public_file_size(lexicon_path)
+    shards = release_manifest.get("occurrence_shards") or {}
+    if not shards:
+        raise ValueError("Greek release is missing occurrence shards")
+    for key, meta in shards.items():
+        shard_path = release_dir / meta["path"]
+        if not shard_path.is_file():
+            raise ValueError(f"Missing occurrence shard: {key}")
+        payload = read_json(shard_path)
+        if checksum(payload) != meta.get("checksum"):
+            raise ValueError(f"Occurrence shard checksum mismatch: {key}")
+        assert_public_file_size(shard_path)
+        for strong, bucket in payload.items():
+            if occurrence_shard_key(strong) != key:
+                raise ValueError(f"Strong {strong} is in the wrong shard {key}")
+            if (
+                not strong.startswith("G")
+                or bucket.get("namespace") != "G"
+                or bucket.get("count") != len(bucket.get("references", []))
+            ):
+                raise ValueError(f"Greek occurrence index mismatch: {strong}")
     return release_manifest
 
 
@@ -203,7 +258,16 @@ def publish_preview(
         bundle["occurrences"],
     )
     write_json(staging_dir / "lexicon.json", lexicon)
-    write_json(staging_dir / "occurrences.json", bundle["occurrences"])
+    assert_public_file_size(staging_dir / "lexicon.json")
+    shard_index: dict[str, dict[str, str]] = {}
+    for key, payload in occurrence_shards(bundle["occurrences"]).items():
+        shard_path = staging_dir / "occurrences" / f"{key}.json"
+        write_json(shard_path, payload)
+        assert_public_file_size(shard_path)
+        shard_index[key] = {
+            "checksum": checksum(payload),
+            "path": f"occurrences/{key}.json",
+        }
     write_json(staging_dir / "source.json", bundle["source"])
     (staging_dir / "MODIFICATIONS.md").write_text(
         bundle["modifications"],
@@ -221,6 +285,7 @@ def publish_preview(
         "complete": True,
         "edition": "sblgnt",
         "lexicon_checksum": checksum(lexicon),
+        "occurrence_shards": shard_index,
         "publicEnabled": False,
         "revision": STEPBIBLE_COMMIT,
         "schema": "davar-greek-release-v1",
@@ -268,16 +333,23 @@ def build_and_publish_preview(
     source_dir: Path = DEFAULT_SOURCE_DIR,
     public_data_dir: Path = DEFAULT_PUBLIC_DIR,
 ) -> Path:
+    print("[davar-greek] publish-preview start", flush=True)
     sources = fetch_all(dest_dir=source_dir, include_ubs=True)
     tagnt_paths, tbesg_path = default_source_paths(source_dir)
+    print("[davar-greek] importing TAGNT/TBESG", flush=True)
     tbesg_text = tbesg_path.read_text(encoding="utf-8")
     bundle = build_bundle(
         [path.read_text(encoding="utf-8") for path in tagnt_paths],
         tbesg_text,
     )
+    print("[davar-greek] mapping TBESG/UBS definitions", flush=True)
     definitions = build_definitions(
         parse_tbesg_file(tbesg_text),
         set(bundle["occurrences"]),
         parse_ubs_file(sources["ubs-es"].read_text(encoding="utf-8")),
     )
-    return publish_preview(bundle, definitions, public_data_dir)
+    apply_translation_cache(definitions, load_cache(default_cache_path()))
+    print("[davar-greek] writing preview bundle", flush=True)
+    output = publish_preview(bundle, definitions, public_data_dir)
+    print(f"[davar-greek] publish-preview ready {output}", flush=True)
+    return output

@@ -8,6 +8,7 @@ from collections import defaultdict
 from dataclasses import dataclass
 
 from scripts.greek.parse_tagnt import strong_family, strong_lookup, strong_suffix
+from scripts.greek.text_clean import clean_lexical_text
 
 _ENTRY = re.compile(r"^G\d+")
 _BR = re.compile(r"<br\s*/?>", re.I)
@@ -34,7 +35,7 @@ def html_to_text(value: str) -> str:
     text = _TAG.sub("", text)
     text = html.unescape(text)
     lines = [_SPACE.sub(" ", line).strip() for line in text.splitlines()]
-    return "\n".join(line for line in lines if line)
+    return clean_lexical_text("\n".join(line for line in lines if line))
 
 
 def parse_dstrong_cell(cell: str) -> str:
@@ -58,7 +59,7 @@ def parse_tbesg_line(line: str) -> TbesgEntry | None:
         lemma=cols[3].strip(),
         translit_en=cols[4].strip(),
         morph=cols[5].strip(),
-        short=cols[6].strip(),
+        short=clean_lexical_text(cols[6].strip()),
         fuller_html=fuller_html,
         fuller=html_to_text(fuller_html),
     )

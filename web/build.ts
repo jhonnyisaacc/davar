@@ -84,11 +84,18 @@ if (greekPreviewEnabled || greekPublicEnabled) {
 		console.error(
 			`[davar-web] phase=greek-preview failed duration=${formatSeconds(greekPreviewStartedAt)}`,
 		);
-		runtimeExit(greekPreview.exitCode ?? 1);
+		if (process.env.CF_PAGES === "1") {
+			console.warn(
+				"[davar-web] continuing Pages build without Greek preview (sources are not in the git clone)",
+			);
+		} else {
+			runtimeExit(greekPreview.exitCode ?? 1);
+		}
+	} else {
+		console.log(
+			`[davar-web] phase=greek-preview done duration=${formatSeconds(greekPreviewStartedAt)}`,
+		);
 	}
-	console.log(
-		`[davar-web] phase=greek-preview done duration=${formatSeconds(greekPreviewStartedAt)}`,
-	);
 
 	if (greekPublicEnabled) {
 		const publicGate = Bun.spawnSync(

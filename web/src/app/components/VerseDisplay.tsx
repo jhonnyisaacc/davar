@@ -98,7 +98,9 @@ export function VerseDisplay({
 	const spanishMissingTranslation = t("verse.missingSpanishTranslation");
 	const hideSuperscripts = shouldHideSuperscripts(getTranslationKey(language));
 	const hideTranslationText =
-		shouldHideTranslationText(language, hebrewOnly) && !translationOnly;
+		shouldHideTranslationText(language, hebrewOnly, sourceLanguage) &&
+		!translationOnly;
+	const isHebrewOverlay = language === "he" && sourceLanguage === "greek";
 	const translationRenderOptions = {
 		hideSuperscripts,
 		footnotes: translation_footnotes ?? [],
@@ -383,13 +385,16 @@ export function VerseDisplay({
 					<div
 						className="text-center leading-relaxed px-4 transition-all duration-500 text-[var(--text-primary)]"
 						style={{
-							fontFamily: "'Inter', sans-serif",
+							fontFamily: isHebrewOverlay
+								? "'Cardo', serif"
+								: "'Inter', sans-serif",
 							fontSize: translationOnly ? "26px" : "17px",
 							color: translationOnly
 								? "var(--text-hebrew)"
 								: "var(--text-primary)",
 							opacity: 1,
 							fontWeight: translationOnly ? 400 : undefined,
+							direction: isHebrewOverlay ? "rtl" : undefined,
 						}}
 					>
 						{translationOnly && (
