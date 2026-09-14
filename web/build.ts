@@ -58,11 +58,8 @@ const greekPreviewEnabled =
 const greekPublicEnabled =
 	process.env.PUBLIC_GREEK_PUBLIC_ENABLED === "1";
 
-const greekSourceDir = join(import.meta.dir, "..", "data", "greek", "source");
-const hasGreekSources = existsSync(greekSourceDir);
-
 if (greekPreviewEnabled || greekPublicEnabled) {
-	if (process.env.CF_PAGES === "1" && !hasGreekSources) {
+	if (process.env.CF_PAGES === "1") {
 		console.warn(
 			"[davar-web] skipping greek-preview on Pages (licensed sources are not in the git clone)",
 		);
