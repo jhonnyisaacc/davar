@@ -57,6 +57,12 @@
     "language": {
       "title": "Idioma"
     },
+    "besorahLanguage": {
+      "title": "Fuente de la Besorah",
+      "hebrew": "Hebreo",
+      "greek": "Griego",
+      "new": "Nuevo"
+    },
     "besorahTextVersion": {
       "title": "Traducción del Evangelio",
       "delitzsch": "Delitzsch",
@@ -158,7 +164,9 @@
       "spanishTranslationLabel": "Traducción al español",
       "spanishTranslationValue": "TTH (principal), BES (alternativo)",
       "besorahLabel": "Besorah",
-      "besorahValue": "Traducción de Delitzsch"
+      "besorahValue": "Delitzsch (1877), Hutter (1599–1602)",
+      "greekTextLabel": "Texto griego",
+      "greekTextValue": "SBLGNT (2010)"
     },
     "aboutTitle": "Acerca de",
     "aboutItems": {
@@ -240,6 +248,7 @@
     "loading": "Cargando versículos...",
     "prefixLabel": "Prefijo: {prefix}",
     "missingSpanishTranslation": "Por el momento no contamos con traducción al español de este texto, estamos trabajando en ello...",
+    "greekUnavailable": "No está presente en el texto mostrado de SBLGNT 2011.",
     "besorahDisclaimer": {
       "short": "Solo referencia: el mapeo Strong de la Besorah puede tener entradas no revisadas o faltantes.",
       "modalTitle": "Aviso de mapeo de Besorah",
@@ -302,8 +311,8 @@
     "emptyState": "Guarda versículos para revisarlos aquí."
   },
   "feedback": {
-    "telegramReminder": "Para comentarios y sugerencias, únete a nuestro grupo de Telegram:",
-    "telegramLink": "Únete a nuestro grupo de Telegram"
+    "telegramReminder": "Para comentarios y sugerencias, escríbeme por Telegram:",
+    "telegramLink": "Escríbeme por Telegram"
   },
   "tabs": {
     "home": "Inicio",

@@ -29,7 +29,7 @@ export function FeaturesScreen({ language }: FeaturesScreenProps) {
 				<div className="mt-6 flex items-center justify-center gap-2 text-sm text-[var(--text-secondary-muted)]">
 					<FaGithub className="w-4 h-4" />
 					<a
-						href="https://github.com/edyehoshua/davar"
+						href="https://github.com/jhonnyisaacc/davar"
 						target="_blank"
 						rel="noopener noreferrer"
 						className="underline underline-offset-2 hover:text-[var(--text-primary)]"

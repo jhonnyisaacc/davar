@@ -1,5 +1,6 @@
 import * as SQLite from "expo-sqlite";
 import type { LexiconResponse } from "@/src/types/api";
+import type { SourceIdentity } from "@davar/shared/greekBesorah";
 
 export type TranslationRow = {
   chapter: number;
@@ -10,7 +11,7 @@ export type TranslationRow = {
 
 const db = SQLite.openDatabaseSync("davar.db");
 
-const CURRENT_SCHEMA_VERSION = 3;
+const CURRENT_SCHEMA_VERSION = 4;
 
 // ── Custom error for better debugging ──────────────────────────────────────
 
@@ -257,6 +258,56 @@ export const initializeDatabase = async () => {
         bundle TEXT PRIMARY KEY,
         version INTEGER NOT NULL,
         downloaded_at TEXT NOT NULL
+      );`,
+    );
+  }
+
+  // ── Schema v4: edition/revision-namespaced source staging and rollback ──
+  if (currentVersion < 4) {
+    await executeWrite(
+      `CREATE TABLE IF NOT EXISTS source_verses (
+        source_language TEXT NOT NULL,
+        edition TEXT NOT NULL,
+        revision TEXT NOT NULL,
+        book TEXT NOT NULL,
+        chapter INTEGER NOT NULL,
+        verse INTEGER NOT NULL,
+        verse_id TEXT NOT NULL,
+        text TEXT NOT NULL,
+        words TEXT NOT NULL,
+        PRIMARY KEY (
+          source_language, edition, revision, book, chapter, verse_id
+        )
+      );`,
+    );
+    await executeWrite(
+      `CREATE INDEX IF NOT EXISTS idx_source_verses_release_chapter
+       ON source_verses(
+         source_language, edition, revision, book, chapter
+       );`,
+    );
+    await executeWrite(
+      `CREATE TABLE IF NOT EXISTS source_lexicon (
+        source_language TEXT NOT NULL,
+        edition TEXT NOT NULL,
+        revision TEXT NOT NULL,
+        strong TEXT NOT NULL,
+        data TEXT NOT NULL,
+        PRIMARY KEY (
+          source_language, edition, revision, strong
+        )
+      );`,
+    );
+    await executeWrite(
+      `CREATE TABLE IF NOT EXISTS source_release_state (
+        source_language TEXT NOT NULL,
+        edition TEXT NOT NULL,
+        active_revision TEXT,
+        previous_revision TEXT,
+        staging_revision TEXT,
+        staging_complete INTEGER NOT NULL DEFAULT 0,
+        updated_at TEXT NOT NULL,
+        PRIMARY KEY (source_language, edition)
       );`,
     );
   }
@@ -621,6 +672,296 @@ export const setLocalBundleVersion = async (
   );
 };
 
+// ── Edition/revision source releases ──────────────────────────────────────
+
+export type SourceVerseRow = {
+  book: string;
+  chapter: number;
+  verse: number;
+  verseId: string;
+  text: string;
+  words: unknown[];
+};
+
+export const beginSourceRelease = async (
+  identity: SourceIdentity,
+): Promise<void> => {
+  const now = new Date().toISOString();
+  await executeWrite("BEGIN TRANSACTION;");
+  try {
+    await executeWrite(
+      `INSERT OR IGNORE INTO source_release_state (
+        source_language, edition, active_revision, previous_revision,
+        staging_revision, staging_complete, updated_at
+      ) VALUES (?, ?, '', '', '', 0, ?);`,
+      [identity.sourceLanguage, identity.edition, now],
+    );
+    await executeWrite(
+      `UPDATE source_release_state
+       SET staging_revision = ?, staging_complete = 0, updated_at = ?
+       WHERE source_language = ? AND edition = ?;`,
+      [
+        identity.revision,
+        now,
+        identity.sourceLanguage,
+        identity.edition,
+      ],
+    );
+    await executeWrite(
+      `DELETE FROM source_verses
+       WHERE source_language = ? AND edition = ? AND revision = ?;`,
+      [identity.sourceLanguage, identity.edition, identity.revision],
+    );
+    await executeWrite(
+      `DELETE FROM source_lexicon
+       WHERE source_language = ? AND edition = ? AND revision = ?;`,
+      [identity.sourceLanguage, identity.edition, identity.revision],
+    );
+    await executeWrite("COMMIT;");
+  } catch (error) {
+    await executeWrite("ROLLBACK;");
+    throw error;
+  }
+};
+
+export const insertSourceVerses = async (
+  identity: SourceIdentity,
+  verses: SourceVerseRow[],
+): Promise<void> => {
+  for (let index = 0; index < verses.length; index += BATCH_SIZE) {
+    const batch = verses.slice(index, index + BATCH_SIZE);
+    await executeWrite("BEGIN TRANSACTION;");
+    try {
+      for (const verse of batch) {
+        await executeWrite(
+          `INSERT OR REPLACE INTO source_verses (
+            source_language, edition, revision, book, chapter, verse,
+            verse_id, text, words
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);`,
+          [
+            identity.sourceLanguage,
+            identity.edition,
+            identity.revision,
+            verse.book,
+            verse.chapter,
+            verse.verse,
+            verse.verseId,
+            verse.text,
+            JSON.stringify(verse.words),
+          ],
+        );
+      }
+      await executeWrite("COMMIT;");
+    } catch (error) {
+      await executeWrite("ROLLBACK;");
+      throw error;
+    }
+  }
+};
+
+export const insertSourceLexicon = async (
+  identity: SourceIdentity,
+  entries: Record<string, unknown>,
+): Promise<void> => {
+  const rows = Object.entries(entries);
+  for (let index = 0; index < rows.length; index += BATCH_SIZE) {
+    const batch = rows.slice(index, index + BATCH_SIZE);
+    await executeWrite("BEGIN TRANSACTION;");
+    try {
+      for (const [strong, data] of batch) {
+        if (
+          identity.sourceLanguage === "greek" &&
+          !/^G\d+[A-Za-z]?$/.test(strong)
+        ) {
+          throw new Error(`Greek source contains non-G Strong: ${strong}`);
+        }
+        await executeWrite(
+          `INSERT OR REPLACE INTO source_lexicon (
+            source_language, edition, revision, strong, data
+          ) VALUES (?, ?, ?, ?, ?);`,
+          [
+            identity.sourceLanguage,
+            identity.edition,
+            identity.revision,
+            strong,
+            JSON.stringify(data),
+          ],
+        );
+      }
+      await executeWrite("COMMIT;");
+    } catch (error) {
+      await executeWrite("ROLLBACK;");
+      throw error;
+    }
+  }
+};
+
+export const validateSourceRelease = async (
+  identity: SourceIdentity,
+  expectedBookCount: number,
+): Promise<void> => {
+  const summary = await executeRead(
+    `SELECT COUNT(DISTINCT book) AS books, COUNT(*) AS verses
+     FROM source_verses
+     WHERE source_language = ? AND edition = ? AND revision = ?;`,
+    [identity.sourceLanguage, identity.edition, identity.revision],
+  );
+  const row = summary[0] as Record<string, unknown> | undefined;
+  if (
+    Number(row?.books ?? 0) !== expectedBookCount ||
+    Number(row?.verses ?? 0) === 0
+  ) {
+    throw new Error(
+      `Incomplete ${identity.edition} release ${identity.revision}`,
+    );
+  }
+  const state = await executeRead(
+    `SELECT staging_revision
+     FROM source_release_state
+     WHERE source_language = ? AND edition = ? LIMIT 1;`,
+    [identity.sourceLanguage, identity.edition],
+  );
+  if (
+    String(
+      (state[0] as Record<string, unknown> | undefined)?.staging_revision ?? "",
+    ) !== identity.revision
+  ) {
+    throw new Error(`Release ${identity.revision} is not the staged revision`);
+  }
+  await executeWrite(
+    `UPDATE source_release_state
+     SET staging_complete = 1, updated_at = ?
+     WHERE source_language = ? AND edition = ? AND staging_revision = ?;`,
+    [
+      new Date().toISOString(),
+      identity.sourceLanguage,
+      identity.edition,
+      identity.revision,
+    ],
+  );
+};
+
+export const activateSourceRelease = async (
+  identity: SourceIdentity,
+): Promise<void> => {
+  const state = await executeRead(
+    `SELECT active_revision, staging_revision, staging_complete
+     FROM source_release_state
+     WHERE source_language = ? AND edition = ? LIMIT 1;`,
+    [identity.sourceLanguage, identity.edition],
+  );
+  const row = state[0] as Record<string, unknown> | undefined;
+  if (
+    String(row?.staging_revision ?? "") !== identity.revision ||
+    Number(row?.staging_complete ?? 0) !== 1
+  ) {
+    throw new Error(`Cannot activate incomplete release ${identity.revision}`);
+  }
+  await executeWrite(
+    `UPDATE source_release_state
+     SET previous_revision = active_revision,
+         active_revision = staging_revision,
+         staging_revision = '',
+         staging_complete = 0,
+         updated_at = ?
+     WHERE source_language = ? AND edition = ?;`,
+    [
+      new Date().toISOString(),
+      identity.sourceLanguage,
+      identity.edition,
+    ],
+  );
+};
+
+export const rollbackSourceRelease = async (
+  sourceLanguage: SourceIdentity["sourceLanguage"],
+  edition: string,
+): Promise<string> => {
+  const state = await executeRead(
+    `SELECT active_revision, previous_revision
+     FROM source_release_state
+     WHERE source_language = ? AND edition = ? LIMIT 1;`,
+    [sourceLanguage, edition],
+  );
+  const row = state[0] as Record<string, unknown> | undefined;
+  const previous = String(row?.previous_revision ?? "");
+  const active = String(row?.active_revision ?? "");
+  if (!previous) throw new Error(`No previous ${edition} release to restore`);
+  await executeWrite(
+    `UPDATE source_release_state
+     SET active_revision = ?, previous_revision = ?, updated_at = ?
+     WHERE source_language = ? AND edition = ?;`,
+    [previous, active, new Date().toISOString(), sourceLanguage, edition],
+  );
+  return previous;
+};
+
+export const getActiveSourceRevision = async (
+  sourceLanguage: SourceIdentity["sourceLanguage"],
+  edition: string,
+): Promise<string | null> => {
+  const result = await executeRead(
+    `SELECT active_revision FROM source_release_state
+     WHERE source_language = ? AND edition = ? LIMIT 1;`,
+    [sourceLanguage, edition],
+  );
+  const revision = String(
+    (result[0] as Record<string, unknown> | undefined)?.active_revision ?? "",
+  );
+  return revision || null;
+};
+
+export const fetchSourceVerses = async (
+  identity: SourceIdentity,
+  book: string,
+  chapter: number,
+): Promise<SourceVerseRow[]> => {
+  const result = await executeRead(
+    `SELECT book, chapter, verse, verse_id, text, words
+     FROM source_verses
+     WHERE source_language = ? AND edition = ? AND revision = ?
+       AND book = ? AND chapter = ?
+     ORDER BY verse ASC;`,
+    [
+      identity.sourceLanguage,
+      identity.edition,
+      identity.revision,
+      book,
+      chapter,
+    ],
+  );
+  return result.map((raw) => {
+    const row = raw as Record<string, unknown>;
+    return {
+      book: String(row.book),
+      chapter: Number(row.chapter),
+      verse: Number(row.verse),
+      verseId: String(row.verse_id),
+      text: String(row.text),
+      words: JSON.parse(String(row.words || "[]")),
+    };
+  });
+};
+
+export const fetchSourceLexiconEntry = async (
+  identity: SourceIdentity,
+  strong: string,
+): Promise<Record<string, unknown> | null> => {
+  const result = await executeRead(
+    `SELECT data FROM source_lexicon
+     WHERE source_language = ? AND edition = ? AND revision = ?
+       AND strong = ? LIMIT 1;`,
+    [
+      identity.sourceLanguage,
+      identity.edition,
+      identity.revision,
+      strong,
+    ],
+  );
+  const row = result[0] as Record<string, unknown> | undefined;
+  return row?.data ? JSON.parse(String(row.data)) : null;
+};
+
 // ── Clear all offline data ─────────────────────────────────────────────────
 
 export const clearAllOfflineData = async () => {
@@ -630,4 +971,7 @@ export const clearAllOfflineData = async () => {
   await executeWrite("DELETE FROM dss_variants;");
   await executeWrite("DELETE FROM prefixes;");
   await executeWrite("DELETE FROM bundle_versions;");
+  await executeWrite("DELETE FROM source_verses;");
+  await executeWrite("DELETE FROM source_lexicon;");
+  await executeWrite("DELETE FROM source_release_state;");
 };

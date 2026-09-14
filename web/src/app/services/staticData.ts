@@ -1,4 +1,19 @@
 import { selectDssTransliteration } from "../../../../shared/dssTransliteration";
+import {
+	GREEK_RECORDED_REVISION,
+	canActivateGreekRelease,
+	greekChapterPath,
+	greekLexiconPath,
+	greekOccurrencesShardPath,
+	greekStrongFamily,
+	type GreekReleaseManifest,
+	type ScriptureSourceLanguage,
+} from "../../../../shared/greekBesorah";
+import {
+	cleanGreekSurfaceText,
+	cleanLexicalText,
+} from "../../../../shared/greekText";
+import { joinHebrewPrefixSlashes } from "../../../../shared/hebrewText";
 import { instanceSurface } from "../../../../shared/instanceSurface";
 import {
 	type BesorahTextVersion,
@@ -15,12 +30,18 @@ import { VERSIFICATION_DATA } from "../../../../shared/versificationData";
 export interface WordResponse {
 	position: number;
 	text: string;
+	lemma?: string;
 	strong?: string;
 	morph?: string;
 	prefixes: string[];
 	has_dss_variant: boolean;
 	translit_en?: string;
 	translit_es?: string;
+	translit_he?: string;
+	lemma_translit_en?: string;
+	lemma_translit_es?: string;
+	lemma_translit_he?: string;
+	source_language?: ScriptureSourceLanguage;
 	dss_translit_en?: string;
 	dss_translit_es?: string;
 }
@@ -51,6 +72,11 @@ export interface VerseResponse {
 	sourceChapter: number;
 	sourceVerse: number;
 	hebrew: string;
+	text?: string;
+	source_language?: ScriptureSourceLanguage;
+	edition?: string;
+	revision?: string;
+	available?: boolean;
 	words: WordResponse[];
 	translation?: string;
 	translation_language?: string;
@@ -385,7 +411,7 @@ const loadTs2009BookFile = (
 				try {
 					return await fetchJson<RawTs2009BookPayload>(candidatePath);
 				} catch {
-					continue;
+					// Try the next published location.
 				}
 			}
 
@@ -1519,19 +1545,330 @@ export const getVerse = async (
 	return verses.find((item) => item.verse === verse) ?? null;
 };
 
+type GreekChapterPayload = {
+	book: string;
+	chapter: number;
+	complete: boolean;
+	edition: "sblgnt";
+	revision: string;
+	source_language: "greek";
+	verses: Array<{
+		chapter: number;
+		verse: number | null;
+		verse_id: string;
+		source_ref: string;
+		text: string;
+		words: WordResponse[];
+	}>;
+};
+
+type GreekDefinition = {
+	short?: string | null;
+	fuller?: string | null;
+	source?: string;
+	review_status?: "approved" | "imported" | "draft";
+	license?: string;
+};
+
+type GreekLexiconEntry = {
+	strong: string;
+	lemma: string;
+	translit_en?: string;
+	translit_es?: string;
+	translit_he?: string;
+	definitions?: Partial<Record<"en" | "es" | "he", GreekDefinition>>;
+	occurrences_count?: number;
+	instances?: Array<{
+		book: string;
+		chapter: number;
+		verse?: number | null;
+		verse_id?: string;
+		index: number;
+		text?: string;
+	}>;
+};
+
+const greekManifestPromises = new Map<
+	string,
+	Promise<GreekReleaseManifest>
+>();
+const greekLexiconPromises = new Map<
+	string,
+	Promise<Record<string, GreekLexiconEntry>>
+>();
+const greekOccurrenceShardPromises = new Map<
+	string,
+	Promise<Record<string, GreekOccurrenceBucket>>
+>();
+
+type GreekOccurrenceBucket = {
+	count?: number;
+	namespace?: "G";
+	references?: NonNullable<GreekLexiconEntry["instances"]>;
+};
+
+export const isGreekPreviewEnabled = (): boolean => {
+	try {
+		return (
+			import.meta.env.PUBLIC_GREEK_PREVIEW_ENABLED === "1" ||
+			import.meta.env.PUBLIC_GREEK_PUBLIC_ENABLED === "1" ||
+			import.meta.env.PUBLIC_NODE_ENV === "development"
+		);
+	} catch {
+		// bun dev serves modules without the production `define` inlines.
+		return true;
+	}
+};
+
+export const loadGreekReleaseManifest = async (
+	revision = GREEK_RECORDED_REVISION,
+): Promise<GreekReleaseManifest> => {
+	let promise = greekManifestPromises.get(revision);
+	if (!promise) {
+		promise = fetchJson<GreekReleaseManifest>("/data/greek/manifest.json").then(
+			(manifest) => {
+				if (manifest.revision !== revision) {
+					throw new Error(
+						`Greek release mismatch: requested ${revision}, active ${manifest.revision}`,
+					);
+				}
+				if (!canActivateGreekRelease(manifest)) {
+					throw new Error(`Greek release ${revision} is incomplete`);
+				}
+				return manifest;
+			},
+		);
+		greekManifestPromises.set(revision, promise);
+	}
+	return promise;
+};
+
+export const getGreekChapterVerses = async (
+	book: string,
+	chapter: number,
+	options?: {
+		language?: "en" | "es" | "he";
+		includeTranslation?: boolean;
+		revision?: string;
+	},
+): Promise<VerseResponse[]> => {
+	if (!isGreekPreviewEnabled()) return [];
+	const revision = options?.revision ?? GREEK_RECORDED_REVISION;
+	await loadGreekReleaseManifest(revision);
+	const payload = await fetchJson<GreekChapterPayload>(
+		`/data/${greekChapterPath(book.toLowerCase(), chapter, revision)}`,
+	);
+	if (
+		!payload.complete ||
+		payload.revision !== revision ||
+		payload.source_language !== "greek"
+	) {
+		throw new Error(`Invalid Greek chapter bundle: ${book} ${chapter}`);
+	}
+	const translations =
+		options?.includeTranslation === false
+			? []
+			: options?.language === "he"
+				? (
+						await getChapterVerses(book, chapter, {
+							besorahTextVersion: "delitzsch",
+						})
+					).map((verse) => ({
+						...verse,
+						translation: joinHebrewPrefixSlashes(verse.hebrew),
+						translation_language: "he" as const,
+					}))
+				: await getChapterVerses(book, chapter, {
+						language: options?.language,
+					});
+	const translationByVerse = new Map(
+		translations.map((verse) => [verse.verse, verse]),
+	);
+	const sourceByVerse = new Map(
+		payload.verses
+			.filter((verse) => Number.isInteger(verse.verse))
+			.map((verse) => [verse.verse as number, verse]),
+	);
+	const verseNumbers = [
+		...new Set([...sourceByVerse.keys(), ...translationByVerse.keys()]),
+	].sort((left, right) => left - right);
+	return verseNumbers.map((verseNumber) => {
+			const verse = sourceByVerse.get(verseNumber);
+			const translated = translationByVerse.get(verseNumber);
+			return {
+				available: Boolean(verse),
+				chapter,
+				edition: payload.edition,
+				hebrew: "",
+				revision,
+				sourceChapter: chapter,
+				sourceVerse: verseNumber,
+				source_language: "greek",
+				text: cleanGreekSurfaceText(verse?.text ?? ""),
+				translation: translated?.translation,
+				translation_footnotes: translated?.translation_footnotes,
+				translation_language: translated?.translation_language,
+				verse: verseNumber,
+				words: (verse?.words ?? []).map((word) => ({
+					...word,
+					has_dss_variant: false,
+					prefixes: [],
+					source_language: "greek",
+					text: cleanGreekSurfaceText(word.text),
+				})),
+			};
+		});
+};
+
+export const getGreekVerse = async (
+	book: string,
+	chapter: number,
+	verse: number,
+	options?: {
+		language?: "en" | "es" | "he";
+		revision?: string;
+	},
+): Promise<VerseResponse> => {
+	const verses = await getGreekChapterVerses(book, chapter, options);
+	return (
+		verses.find((item) => item.verse === verse) ?? {
+			available: false,
+			chapter,
+			edition: "sblgnt",
+			hebrew: "",
+			revision: options?.revision ?? GREEK_RECORDED_REVISION,
+			sourceChapter: chapter,
+			sourceVerse: verse,
+			source_language: "greek",
+			text: "",
+			verse,
+			words: [],
+		}
+	);
+};
+
+export const loadGreekLexiconEntry = async (
+	strong?: string,
+	language: "en" | "es" | "he" = "en",
+	revision = GREEK_RECORDED_REVISION,
+): Promise<WordAnalysis | null> => {
+	if (!isGreekPreviewEnabled() || !strong?.startsWith("G")) return null;
+	await loadGreekReleaseManifest(revision);
+	let promise = greekLexiconPromises.get(revision);
+	if (!promise) {
+		promise = fetchJson<Record<string, GreekLexiconEntry>>(
+			`/data/${greekLexiconPath(revision)}`,
+		);
+		greekLexiconPromises.set(revision, promise);
+	}
+	const lexicon = await promise;
+	const family = greekStrongFamily(strong);
+	const entry =
+		lexicon[strong] ??
+		lexicon[family] ??
+		Object.values(lexicon).find(
+			(item) => greekStrongFamily(item.strong) === family,
+		);
+	if (!entry) return null;
+	const occurrences =
+		(await loadGreekOccurrenceBucket(strong, revision)) ??
+		(await loadGreekOccurrenceBucket(entry.strong, revision));
+	const localized = entry.definitions?.[language];
+	const english = entry.definitions?.en;
+	const usable = (definition?: GreekDefinition) =>
+		Boolean(definition?.short || definition?.fuller);
+	const selected = localized && usable(localized) ? localized : english;
+	const definitions: DefinitionItem[] = [];
+	if (selected?.short) {
+		definitions.push({
+			language: selected === localized ? language : "en",
+			license: selected.license,
+			review_status: selected.review_status,
+			source: selected.source ?? "stepbible-tbesg",
+			text: cleanLexicalText(selected.short),
+		});
+	}
+	if (selected?.fuller && selected.fuller !== selected.short) {
+		definitions.push({
+			language: selected === localized ? language : "en",
+			license: selected.license,
+			review_status: selected.review_status,
+			source: selected.source ?? "stepbible-tbesg",
+			text: cleanLexicalText(selected.fuller),
+		});
+	}
+	const surface = instanceSurface(
+		{
+			instance_total: entry.occurrences_count ?? occurrences?.count,
+			instances: occurrences?.references ?? entry.instances,
+		},
+	);
+	return {
+		definitions,
+		edition: "sblgnt",
+		full_definition: selected?.fuller
+			? cleanLexicalText(selected.fuller)
+			: undefined,
+		greek: entry.lemma,
+		instances: surface.instances,
+		lemma: entry.lemma,
+		lemma_translit_en: entry.translit_en,
+		lemma_translit_es: entry.translit_es,
+		lemma_translit_he: entry.translit_he,
+		occurrences_count: surface.total,
+		revision,
+		short_meaning: selected?.short
+			? cleanLexicalText(selected.short)
+			: undefined,
+		source_language: "greek",
+		strong_number: entry.strong,
+		translit_en: entry.translit_en,
+		translit_es: entry.translit_es,
+		translit_he: entry.translit_he,
+	};
+};
+
+const loadGreekOccurrenceBucket = async (
+	strong: string,
+	revision = GREEK_RECORDED_REVISION,
+): Promise<GreekOccurrenceBucket | undefined> => {
+	const path = greekOccurrencesShardPath(strong, revision);
+	let promise = greekOccurrenceShardPromises.get(path);
+	if (!promise) {
+		promise = fetchJson<Record<string, GreekOccurrenceBucket>>(
+			`/data/${path}`,
+		).catch(() => ({}));
+		greekOccurrenceShardPromises.set(path, promise);
+	}
+	return (await promise)[strong];
+};
+
 // ── Lexicon Service ───────────────────────────────────────────────────────
 
 export interface DefinitionItem {
 	text: string;
 	source: "custom" | "strong" | "bdb" | string;
-	language: "en" | "es" | string;
+	language: "en" | "es" | "he" | string;
+	review_status?: "approved" | "imported" | "draft";
+	license?: string;
 }
 
 export interface WordAnalysis {
 	strong_number: string;
 	hebrew?: string;
+	greek?: string;
+	source_language?: ScriptureSourceLanguage;
+	edition?: string;
+	revision?: string;
+	lemma?: string;
 	translit_en?: string;
 	translit_es?: string;
+	translit_he?: string;
+	lemma_translit_en?: string;
+	lemma_translit_es?: string;
+	lemma_translit_he?: string;
+	short_meaning?: string;
+	full_definition?: string;
 	definitions: DefinitionItem[];
 	root?: string;
 	root_strong?: string;

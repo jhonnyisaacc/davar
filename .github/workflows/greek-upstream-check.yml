@@ -1,0 +1,49 @@
+name: Greek upstream check
+
+on:
+  schedule:
+    - cron: "17 8 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  upstream:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - id: check
+        run: |
+          python -m scripts.greek upstream \
+            --output greek-upstream-report.json \
+            --markdown-output greek-upstream-report.md \
+            --github-output "$GITHUB_OUTPUT"
+        env:
+          PYTHONPATH: .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: greek-upstream-report
+          path: |
+            greek-upstream-report.json
+            greek-upstream-report.md
+      - if: steps.check.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          issue_number="$(gh issue list \
+            --state open \
+            --search 'Greek upstream sources changed in:title' \
+            --json number \
+            --jq '.[0].number // empty')"
+          if [ -n "$issue_number" ]; then
+            gh issue comment "$issue_number" --body-file greek-upstream-report.md
+          else
+            gh issue create \
+              --title "Greek upstream sources changed" \
+              --body-file greek-upstream-report.md
+          fi

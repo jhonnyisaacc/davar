@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-OWNER="edyhvh"
+OWNER="jhonnyisaacc"
 REPO="davar"
 FULL_REPO="${OWNER}/${REPO}"
 

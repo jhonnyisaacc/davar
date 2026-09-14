@@ -23,13 +23,20 @@ import {
 	getBooks,
 	getChapterCount,
 	getChapterVerses,
+	getGreekChapterVerses,
 	getVerseCount,
+	isGreekPreviewEnabled,
+	loadGreekLexiconEntry,
 	loadLexiconEntry,
 	lookupBook,
 	type VerseResponse,
 	type WordAnalysis,
 	type WordResponse,
 } from "./services/staticData";
+import {
+	GREEK_BESORAH_BOOK_NAMES,
+	parseSourceStrong,
+} from "@davar/shared/greekBesorah";
 import { formatBookDisplayName } from "./utils/bookNameFormatter";
 import { stripCantillation, stripMeteg } from "./utils/hebrew";
 import {
@@ -42,6 +49,7 @@ import {
 import {
 	getDssCommentaryForLanguage,
 	HUTTER_ANNOUNCEMENT_RELEASE,
+	resolveGreekOverlayLanguage,
 } from "./utils/translationConfig";
 import { useVerseScrollNavigation } from "./utils/useVerseScrollNavigation";
 
@@ -155,6 +163,11 @@ export default function App() {
 		"besorahTextVersion",
 		initialState.besorahTextVersion,
 	);
+	const [besorahLanguage, setBesorahLanguage] = usePersistedState(
+		"besorahLanguage",
+		initialState.besorahLanguage,
+	);
+	const greekAvailable = isGreekPreviewEnabled();
 	const [hutterAnnouncementRelease, setHutterAnnouncementRelease] =
 		usePersistedState(
 			"hutterAnnouncementRelease",
@@ -268,7 +281,7 @@ export default function App() {
 			if (!word) return undefined;
 			if (language === "en") return word.translit_en;
 			if (language === "es") return word.translit_es;
-			return undefined;
+			return word.translit_he;
 		},
 		[language],
 	);
@@ -278,7 +291,7 @@ export default function App() {
 			if (!analysis) return undefined;
 			if (language === "en") return analysis.translit_en;
 			if (language === "es") return analysis.translit_es;
-			return undefined;
+			return analysis.translit_he;
 		},
 		[language],
 	);
@@ -483,9 +496,16 @@ export default function App() {
 			const found = books.find(
 				(item) => item.name.toLowerCase() === book.toLowerCase(),
 			);
+			if (
+				besorahLanguage === "greek" &&
+				found?.section === "besorah" &&
+				GREEK_BESORAH_BOOK_NAMES[found.id]
+			) {
+				return GREEK_BESORAH_BOOK_NAMES[found.id];
+			}
 			return found?.hebrew_name ?? book;
 		},
-		[books],
+		[besorahLanguage, books],
 	);
 
 	const getDisplayBookName = useCallback(
@@ -810,6 +830,8 @@ export default function App() {
 					name: book.name,
 					hebrew: book.hebrew_name,
 					spanish: book.spanish_name,
+					greek: GREEK_BESORAH_BOOK_NAMES[book.id],
+					section: book.section,
 				})),
 		[books],
 	);
@@ -827,11 +849,17 @@ export default function App() {
 		if (
 			currentScreen === "verse" &&
 			isBesorah &&
+			besorahLanguage === "hebrew" &&
 			hutterAnnouncementRelease !== HUTTER_ANNOUNCEMENT_RELEASE
 		) {
 			setShowHutterAnnouncement(true);
 		}
-	}, [currentScreen, hutterAnnouncementRelease, isBesorah]);
+	}, [
+		besorahLanguage,
+		currentScreen,
+		hutterAnnouncementRelease,
+		isBesorah,
+	]);
 
 	const dismissHutterAnnouncement = useCallback(() => {
 		setShowHutterAnnouncement(false);
@@ -936,31 +964,70 @@ export default function App() {
 		const loadChapterData = async () => {
 			setIsLoading(true);
 			setErrorMessage(null);
-			const translationLanguage = translationOnly
+			const useGreekSource =
+				greekAvailable &&
+				isBesorah &&
+				besorahLanguage === "greek" &&
+				!translationOnly;
+			const greekOverlayLanguage = useGreekSource
+				? resolveGreekOverlayLanguage(language, translationOnly)
+				: undefined;
+			const hebrewTranslationLanguage: "en" | "es" | undefined = translationOnly
 				? language === "es"
 					? "es"
 					: "en"
 				: language === "he"
 					? undefined
-					: language;
+					: language === "es"
+						? "es"
+						: "en";
 			try {
-				const [chapterCountValue, verses] = await Promise.all([
+				const [chapterCountValue, verseCountValue, loadedVerses] =
+					await Promise.all([
 					getChapterCount(currentBook.toLowerCase()),
-					getChapterVerses(currentBook.toLowerCase(), currentChapter, {
-						language: translationLanguage,
-						showDss: showQumran,
-						hebrewOnly: false, // Always load translations; UI will control display
-						referenceMode: translationOnly ? "translation" : "source",
-						besorahTextVersion,
-					}),
+					getVerseCount(currentBook.toLowerCase(), currentChapter),
+					useGreekSource
+						? getGreekChapterVerses(
+								currentBook.toLowerCase(),
+								currentChapter,
+								{
+									language: greekOverlayLanguage,
+								},
+							)
+						: getChapterVerses(currentBook.toLowerCase(), currentChapter, {
+								language: hebrewTranslationLanguage,
+								showDss: showQumran,
+								hebrewOnly: false,
+								referenceMode: translationOnly ? "translation" : "source",
+								besorahTextVersion,
+							}),
 				]);
-
-				const verseCountValue = translationOnly
+				const verses = useGreekSource
+					? Array.from({ length: verseCountValue }, (_, index) => {
+							const verseNumber = index + 1;
+							return (
+								loadedVerses.find((verse) => verse.verse === verseNumber) ?? {
+									available: false,
+									chapter: currentChapter,
+									edition: "sblgnt",
+									hebrew: "",
+									revision: undefined,
+									sourceChapter: currentChapter,
+									sourceVerse: verseNumber,
+									source_language: "greek" as const,
+									text: "",
+									verse: verseNumber,
+									words: [],
+								}
+							);
+						})
+					: loadedVerses;
+				const displayedVerseCount = translationOnly
 					? verses.length
-					: await getVerseCount(currentBook.toLowerCase(), currentChapter);
+					: verseCountValue;
 				if (!isMounted) return;
 				setChapterCount(chapterCountValue);
-				setVerseCount(verseCountValue);
+				setVerseCount(displayedVerseCount);
 				setChapterVerses(verses);
 				if (verses.length > 0) {
 					const availableVerseNumbers = verses
@@ -996,12 +1063,15 @@ export default function App() {
 			isMounted = false;
 		};
 	}, [
+		besorahLanguage,
 		besorahTextVersion,
 		currentBook,
 		currentChapter,
 		language,
 		showQumran,
 		translationOnly,
+		isBesorah,
+		greekAvailable,
 	]);
 
 	useEffect(() => {
@@ -1098,10 +1168,7 @@ export default function App() {
 				return;
 			}
 
-			const strongPart = selectedWord.strong
-				.split("/")
-				.map((part) => part.trim())
-				.find((part) => /^[HGD]\d+$/.test(part));
+			const strongPart = parseSourceStrong(selectedWord.strong);
 
 			if (!strongPart) {
 				logWordDebug("analysis-skip-invalid-strong", {
@@ -1119,10 +1186,13 @@ export default function App() {
 				language,
 			});
 			try {
-				const analysis = await loadLexiconEntry(
-					strongPart,
-					language === "he" ? "en" : language,
-				);
+				const analysis =
+					selectedWord.source_language === "greek"
+						? await loadGreekLexiconEntry(strongPart, language)
+						: await loadLexiconEntry(
+								strongPart,
+								language === "he" ? "en" : language,
+							);
 				if (isMounted) {
 					setSelectedWordAnalysis(analysis);
 					setIsWordAnalysisLoading(false);
@@ -1657,6 +1727,9 @@ export default function App() {
 						onThemeChange={setTheme}
 						language={language}
 						onLanguageChange={setLanguage}
+						besorahLanguage={besorahLanguage}
+						onBesorahLanguageChange={setBesorahLanguage}
+						greekAvailable={greekAvailable}
 						besorahTextVersion={besorahTextVersion}
 						onBesorahTextVersionChange={handleBesorahTextVersionChange}
 						showQumran={showQumran}
@@ -1779,6 +1852,9 @@ export default function App() {
 							onThemeChange={setTheme}
 							language={language}
 							onLanguageChange={setLanguage}
+							besorahLanguage={besorahLanguage}
+							onBesorahLanguageChange={setBesorahLanguage}
+							greekAvailable={greekAvailable}
 							besorahTextVersion={besorahTextVersion}
 							onBesorahTextVersionChange={handleBesorahTextVersionChange}
 							showQumran={showQumran}
@@ -1833,7 +1909,15 @@ export default function App() {
 								<div className="verse-panel-inner relative">
 									{currentVerseData ? (
 										<VerseDisplay
-											hebrewText={currentVerseData.hebrew}
+											hebrewText={
+												currentVerseData.source_language === "greek"
+													? (currentVerseData.text ?? "")
+													: currentVerseData.hebrew
+											}
+											sourceLanguage={
+												currentVerseData.source_language ?? "hebrew"
+											}
+											sourceAvailable={currentVerseData.available !== false}
 											translation={currentVerseData.translation ?? ""}
 											verseRef={`${currentBook} ${currentChapter}:${currentVerse}`}
 											verseNumber={currentVerseData.verse}
@@ -1844,7 +1928,10 @@ export default function App() {
 											language={language}
 											onWordClick={handleWordClick}
 											showOnboardingHint={showWordHint}
-											showQumran={showQumran}
+											showQumran={
+												showQumran &&
+												currentVerseData.source_language !== "greek"
+											}
 											showFullChapter={showFullChapter}
 											seferMode={seferMode}
 											hebrewOnly={hebrewOnly}
@@ -2004,6 +2091,9 @@ export default function App() {
 												) : wordForCard && isWordPanelVisible ? (
 													<WordCard
 														word={wordForCard.text}
+														sourceLanguage={
+															wordForCard.source_language ?? "hebrew"
+														}
 														wordFromVerse={wordForCard.text}
 														strongNumber={wordAnalysisForCard?.strong_number}
 														qumranWord={qumranWordForCard}
@@ -2165,6 +2255,7 @@ export default function App() {
 						return (
 							<WordCard
 								word={selectedWord.text}
+								sourceLanguage={selectedWord.source_language ?? "hebrew"}
 								wordFromVerse={selectedWord.text}
 								strongNumber={selectedWordAnalysis?.strong_number}
 								qumranWord={qumranWordForCard}

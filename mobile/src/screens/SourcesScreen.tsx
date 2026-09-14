@@ -85,6 +85,10 @@ export function SourcesScreen() {
           label: t("home.sources.besorahLabel"),
           value: t("home.sources.besorahValue"),
         },
+        {
+          label: t("home.sources.greekTextLabel"),
+          value: t("home.sources.greekTextValue"),
+        },
       ],
     },
     {

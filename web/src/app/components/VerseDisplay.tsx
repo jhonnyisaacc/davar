@@ -26,6 +26,8 @@ import { SwipeIndicator } from "./SwipeIndicator";
 
 interface VerseDisplayProps {
 	hebrewText: string;
+	sourceLanguage?: "hebrew" | "greek";
+	sourceAvailable?: boolean;
 	translation: string;
 	verseRef: string;
 	verseNumber: number;
@@ -63,6 +65,8 @@ interface VerseDisplayProps {
 
 export function VerseDisplay({
 	hebrewText,
+	sourceLanguage = "hebrew",
+	sourceAvailable = true,
 	translation,
 	verseNumber,
 	bookName,
@@ -94,12 +98,14 @@ export function VerseDisplay({
 	const spanishMissingTranslation = t("verse.missingSpanishTranslation");
 	const hideSuperscripts = shouldHideSuperscripts(getTranslationKey(language));
 	const hideTranslationText =
-		shouldHideTranslationText(language, hebrewOnly) && !translationOnly;
+		shouldHideTranslationText(language, hebrewOnly, sourceLanguage) &&
+		!translationOnly;
+	const isHebrewOverlay = language === "he" && sourceLanguage === "greek";
 	const translationRenderOptions = {
 		hideSuperscripts,
 		footnotes: translation_footnotes ?? [],
 	};
-	const showHebrewText = !translationOnly;
+	const showSourceText = !translationOnly;
 	const dssInlineFontScale = "1.70em";
 	const dssInlineBaselineShift = "-0.08em";
 	const isRenderableDssWord = (value?: string): value is string => {
@@ -339,16 +345,16 @@ export function VerseDisplay({
 	return (
 		<div className="space-y-10 relative pt-12 sm:pt-14">
 			{/* Hebrew Text with Verse Number and Onboarding Hint - Large and Centered */}
-			{showHebrewText && (
+			{showSourceText && (
 				<div
 					className="text-center leading-[2] tracking-[0.01em] relative"
 					style={{
 						fontFamily: "'Cardo', serif",
 						fontSize: "48px",
-						direction: "rtl",
+						direction: sourceLanguage === "greek" ? "ltr" : "rtl",
 						color: "var(--text-hebrew)",
 						lineHeight: 1.85,
-						wordSpacing: "0.24em",
+						wordSpacing: sourceLanguage === "greek" ? "0.12em" : "0.24em",
 					}}
 				>
 					<span
@@ -360,7 +366,16 @@ export function VerseDisplay({
 					>
 						[{verseNumber}]
 					</span>
-					{renderHebrewText()}
+					{sourceAvailable ? (
+						renderHebrewText()
+					) : (
+						<span
+							className="inline-block rounded-full border border-[var(--border)] px-4 py-2 text-base text-[var(--text-secondary)]"
+							style={{ direction: "ltr", fontFamily: "'Inter', sans-serif" }}
+						>
+							{t("verse.greekUnavailable")}
+						</span>
+					)}
 				</div>
 			)}
 
@@ -370,13 +385,16 @@ export function VerseDisplay({
 					<div
 						className="text-center leading-relaxed px-4 transition-all duration-500 text-[var(--text-primary)]"
 						style={{
-							fontFamily: "'Inter', sans-serif",
+							fontFamily: isHebrewOverlay
+								? "'Cardo', serif"
+								: "'Inter', sans-serif",
 							fontSize: translationOnly ? "26px" : "17px",
 							color: translationOnly
 								? "var(--text-hebrew)"
 								: "var(--text-primary)",
 							opacity: 1,
 							fontWeight: translationOnly ? 400 : undefined,
+							direction: isHebrewOverlay ? "rtl" : undefined,
 						}}
 					>
 						{translationOnly && (

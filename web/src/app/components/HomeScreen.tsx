@@ -43,6 +43,10 @@ export function HomeScreen({
 			label: t("home.sources.besorahLabel"),
 			value: t("home.sources.besorahValue"),
 		},
+		{
+			label: t("home.sources.greekTextLabel"),
+			value: t("home.sources.greekTextValue"),
+		},
 	];
 	const aboutItems = [
 		{ label: t("home.aboutItems.terms"), Icon: FileText, href: "/terms" },
@@ -56,13 +60,13 @@ export function HomeScreen({
 		{
 			label: t("home.aboutItems.bug"),
 			Icon: Bug,
-			href: "https://github.com/edyehoshua/davar/issues/new",
+			href: "https://github.com/jhonnyisaacc/davar/issues/new",
 			target: "_blank",
 		},
 		{
 			label: t("home.aboutItems.github"),
 			Icon: FaGithub,
-			href: "https://github.com/edyehoshua/davar",
+			href: "https://github.com/jhonnyisaacc/davar",
 			target: "_blank",
 		},
 		{

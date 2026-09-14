@@ -1,0 +1,14 @@
+{
+  "H430": {
+    "strong_number": "H430",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "MIGHTY ONE (majestic plural)",
+        "text_es": "PODEROSO (plural mayestático)",
+        "order": 1
+      }
+    ]
+  }
+}

@@ -52,6 +52,87 @@ if (generation.exitCode !== 0) {
 	runtimeExit(generation.exitCode ?? 1);
 }
 
+const greekPreviewEnabled =
+	process.env.PUBLIC_GREEK_PREVIEW_ENABLED === "1" ||
+	process.env.CF_PAGES_BRANCH === "feat/greek_besorah";
+const greekPublicEnabled =
+	process.env.PUBLIC_GREEK_PUBLIC_ENABLED === "1";
+
+if (greekPreviewEnabled || greekPublicEnabled) {
+	if (process.env.CF_PAGES === "1") {
+		console.warn(
+			"[davar-web] skipping greek-preview on Pages (licensed sources are not in the git clone)",
+		);
+	} else {
+		console.log("[davar-web] phase=greek-preview start");
+		const greekPreviewStartedAt = Date.now();
+		const greekPreview = Bun.spawnSync(
+			[
+				"python3",
+				"-m",
+				"scripts.greek",
+				"publish-preview",
+				"--public-data-dir",
+				join(publicDir, "data"),
+			],
+			{
+				cwd: join(import.meta.dir, ".."),
+				env: {
+					...process.env,
+					PYTHONPATH: ".",
+				},
+				stdout: "inherit",
+				stderr: "inherit",
+			},
+		);
+		if (greekPreview.exitCode !== 0) {
+			console.error(
+				`[davar-web] phase=greek-preview failed duration=${formatSeconds(greekPreviewStartedAt)}`,
+			);
+			if (process.env.CF_PAGES === "1") {
+				console.warn(
+					"[davar-web] continuing Pages build without Greek preview (sources are not in the git clone)",
+				);
+			} else {
+				runtimeExit(greekPreview.exitCode ?? 1);
+			}
+		} else {
+			console.log(
+				`[davar-web] phase=greek-preview done duration=${formatSeconds(greekPreviewStartedAt)}`,
+			);
+		}
+	}
+
+	if (greekPublicEnabled) {
+		const publicGate = Bun.spawnSync(
+			[
+				"python3",
+				"-m",
+				"scripts.greek",
+				"public-gate",
+				"--public-data-dir",
+				join(publicDir, "data"),
+				"--approvals",
+				process.env.GREEK_REVIEW_APPROVALS_PATH ??
+					join(import.meta.dir, "..", "data", "greek", "review-approvals.json"),
+				"--qa-report",
+				process.env.GREEK_QA_REPORT_PATH ??
+					join(import.meta.dir, "..", "data", "greek", "qa-report.json"),
+			],
+			{
+				cwd: join(import.meta.dir, ".."),
+				env: { ...process.env, PYTHONPATH: "." },
+				stdout: "inherit",
+				stderr: "inherit",
+			},
+		);
+		if (publicGate.exitCode !== 0) {
+			console.error("[davar-web] Greek public gate rejected the release");
+			runtimeExit(publicGate.exitCode ?? 1);
+		}
+	}
+}
+
 console.log("[davar-web] phase=bundle start");
 const bundleStartedAt = Date.now();
 rmSync(distDir, { recursive: true, force: true });
@@ -71,6 +152,12 @@ const result = await Bun.build({
 		),
 		"import.meta.env.PUBLIC_STATIC_URL": JSON.stringify(
 			process.env.PUBLIC_STATIC_URL ?? "",
+		),
+		"import.meta.env.PUBLIC_GREEK_PREVIEW_ENABLED": JSON.stringify(
+			greekPreviewEnabled ? "1" : "0",
+		),
+		"import.meta.env.PUBLIC_GREEK_PUBLIC_ENABLED": JSON.stringify(
+			greekPublicEnabled ? "1" : "0",
 		),
 	},
 	plugins: [tailwind],

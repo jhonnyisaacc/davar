@@ -28,7 +28,7 @@ A minimalist Bible study app focused on Hebrew Scriptures.
 ### 1) Clone and install
 
 ```bash
-git clone https://github.com/edyehoshua/davar.git
+git clone https://github.com/jhonnyisaacc/davar.git
 cd davar
 ```
 

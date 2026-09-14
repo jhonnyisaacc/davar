@@ -18,6 +18,7 @@
 export type SharedSettingId =
 	| "theme"
 	| "language"
+	| "besorahLanguage"
 	| "besorahTextVersion"
 	| "fullChapter"
 	| "seferStyle"
@@ -27,6 +28,7 @@ export type SharedSettingId =
 export const SHARED_SETTINGS_ORDER: readonly SharedSettingId[] = [
 	"theme",
 	"language",
+	"besorahLanguage",
 	"besorahTextVersion",
 	"fullChapter",
 	"seferStyle",

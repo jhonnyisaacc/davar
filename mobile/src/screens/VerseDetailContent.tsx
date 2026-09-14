@@ -55,6 +55,7 @@ import { fetchMetadata } from "@/src/services/metadata";
 import type { BookResponse, TranslationFootnote } from "@/src/types/api";
 import {
   fetchChapterVerses,
+  fetchGreekChapterVerses,
   type DisplayVerse,
 } from "@/src/services/scripture";
 import { useAppStore, type AppState } from "@/src/store/useAppStore";
@@ -77,7 +78,9 @@ import {
   resolveFootnoteForMarker,
   formatMarkerForDisplay,
 } from "@/src/utils/footnoteUtils";
+import { GREEK_BESORAH_BOOK_NAMES } from "@davar/shared/greekBesorah";
 import { stripCantillation, stripMeteg, stripNikud } from "@/src/utils/hebrew";
+import { resolveGreekOverlayLanguage } from "@/src/utils/translationConfig";
 
 const SWIPE_HINT_MAX_SHOWS = 5;
 
@@ -746,6 +749,9 @@ export const VerseDetailContent = () => {
   const besorahTextVersion = useAppStore(
     (state: AppState) => state.besorahTextVersion,
   );
+  const besorahLanguage = useAppStore(
+    (state: AppState) => state.besorahLanguage,
+  );
   const setBesorahTextVersion = useAppStore(
     (state: AppState) => state.setBesorahTextVersion,
   );
@@ -863,7 +869,11 @@ export const VerseDetailContent = () => {
   const previousBookSectionRef = useRef<string | null>(null);
 
   useEffect(() => {
-    if (!isBesorah || hutterAnnouncementHandledRef.current) {
+    if (
+      !isBesorah ||
+      besorahLanguage === "greek" ||
+      hutterAnnouncementHandledRef.current
+    ) {
       return;
     }
 
@@ -879,7 +889,7 @@ export const VerseDetailContent = () => {
     return () => {
       isMounted = false;
     };
-  }, [isBesorah]);
+  }, [besorahLanguage, isBesorah]);
 
   const dismissHutterAnnouncement = useCallback(() => {
     hutterAnnouncementHandledRef.current = true;
@@ -1333,6 +1343,7 @@ export const VerseDetailContent = () => {
     showQumran: false,
     translationOnly: false,
     besorahTextVersion: "delitzsch" as AppState["besorahTextVersion"],
+    besorahLanguage: "hebrew" as AppState["besorahLanguage"],
     isConnected: true,
   });
   useEffect(() => {
@@ -1344,6 +1355,7 @@ export const VerseDetailContent = () => {
       currentLoadRef.current.showQumran === showQumran &&
       currentLoadRef.current.translationOnly === translationOnly &&
       currentLoadRef.current.besorahTextVersion === besorahTextVersion &&
+      currentLoadRef.current.besorahLanguage === besorahLanguage &&
       currentLoadRef.current.isConnected === isConnected
     ) {
       return;
@@ -1357,6 +1369,7 @@ export const VerseDetailContent = () => {
       showQumran,
       translationOnly,
       besorahTextVersion,
+      besorahLanguage,
       isConnected,
     };
 
@@ -1369,8 +1382,16 @@ export const VerseDetailContent = () => {
       sheetRef.current?.close();
 
       try {
-        const hideTranslations = !translationOnly && language === "he";
-        const translationLanguage: "en" | "es" | undefined = translationOnly
+        const useGreekSource =
+          isBesorah &&
+          besorahLanguage === "greek" &&
+          !translationOnly;
+        const hideTranslations =
+          !useGreekSource && !translationOnly && language === "he";
+        const greekOverlayLanguage = useGreekSource
+          ? resolveGreekOverlayLanguage(language, translationOnly)
+          : undefined;
+        const hebrewTranslationLanguage: "en" | "es" | undefined = translationOnly
           ? language === "es"
             ? "es"
             : "en"
@@ -1379,14 +1400,19 @@ export const VerseDetailContent = () => {
             : language === "es"
               ? "es"
               : "en";
-        const verses = await fetchChapterVerses(bookId, chapter, {
-          language: translationLanguage,
-          showDss: showQumran,
-          hebrewOnly: hideTranslations,
-          isConnected,
-          referenceMode: translationOnly ? "translation" : "source",
-          besorahTextVersion,
-        });
+        const verses = useGreekSource
+          ? await fetchGreekChapterVerses(bookId, chapter, {
+              language: greekOverlayLanguage,
+              isConnected,
+            })
+          : await fetchChapterVerses(bookId, chapter, {
+              language: hebrewTranslationLanguage,
+              showDss: showQumran,
+              hebrewOnly: hideTranslations,
+              isConnected,
+              referenceMode: translationOnly ? "translation" : "source",
+              besorahTextVersion,
+            });
         if (!isMounted) return;
         if (
           currentLoadRef.current.bookId !== bookId ||
@@ -1395,6 +1421,7 @@ export const VerseDetailContent = () => {
           currentLoadRef.current.showQumran !== showQumran ||
           currentLoadRef.current.translationOnly !== translationOnly ||
           currentLoadRef.current.besorahTextVersion !== besorahTextVersion ||
+          currentLoadRef.current.besorahLanguage !== besorahLanguage ||
           currentLoadRef.current.isConnected !== isConnected
         ) {
           return;
@@ -1434,12 +1461,14 @@ export const VerseDetailContent = () => {
     };
   }, [
     besorahTextVersion,
+    besorahLanguage,
     bookId,
     chapter,
     language,
     showQumran,
     translationOnly,
     isConnected,
+    isBesorah,
     t,
   ]);
 
@@ -1481,7 +1510,20 @@ export const VerseDetailContent = () => {
                     ? (bookMeta?.spanish_name ?? t("common.loading"))
                     : (bookMeta?.name ?? t("common.loading")),
                 )}
-                hebrewLabel={bookMeta?.hebrew_name ?? ""}
+                hebrewLabel={
+                  besorahLanguage === "greek" && bookMeta?.id
+                    ? (GREEK_BESORAH_BOOK_NAMES[bookMeta.id] ??
+                      bookMeta.hebrew_name ??
+                      "")
+                    : (bookMeta?.hebrew_name ?? "")
+                }
+                nativeLabelScript={
+                  besorahLanguage === "greek" &&
+                  bookMeta?.id &&
+                  GREEK_BESORAH_BOOK_NAMES[bookMeta.id]
+                    ? "greek"
+                    : "hebrew"
+                }
                 chapter={verse?.chapter ?? chapter}
                 onBookPress={() => navigationSheetRef.current?.snapToIndex(0)}
                 onChapterPress={() =>
@@ -1506,7 +1548,7 @@ export const VerseDetailContent = () => {
             !isLoading && orderedVerses[0]?.id.startsWith(`${bookId}-${chapter}-`) && (
             <FullChapterView
               verses={orderedVerses}
-              locationKey={`${bookId}-${chapter}:${screenWidth}:${hebrewFontScale}:${hebrewOnly}:${translationOnly}:${language}:${besorahTextVersion}:${showNikud}:${showCantillation}`}
+              locationKey={`${bookId}-${chapter}:${screenWidth}:${hebrewFontScale}:${hebrewOnly}:${translationOnly}:${language}:${besorahLanguage}:${besorahTextVersion}:${showNikud}:${showCantillation}`}
               targetId={effectiveVerseId}
               offsets={chapterScrollOffsets.current}
               measurements={chapterMeasurements.current}
@@ -1553,9 +1595,17 @@ export const VerseDetailContent = () => {
                             hebrewFontScale * layout.textScale *
                             typography.lineHeights.hebrewScripture,
                         },
+                        besorahLanguage === "greek"
+                          ? {
+                              textAlign: "left",
+                              writingDirection: "ltr",
+                            }
+                          : undefined,
                       ]}
                     >
-                      {flowItems.flatMap(item => item.words.length
+                      {flowItems.flatMap(item => item.available === false
+                        ? <Text key={item.id}>{t("verse.greekUnavailable")} </Text>
+                        : item.words.length
                         ? item.words.map((word, wordIndex) => (
                           <Text key={`${item.id}-${word.position}-${wordIndex}`}
                             testID={`sefer-${item.id}-${word.position}`}

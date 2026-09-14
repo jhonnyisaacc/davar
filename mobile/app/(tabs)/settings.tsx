@@ -127,6 +127,14 @@ export default function SettingsScreen() {
   const besorahTextVersion = useAppStore(
     (state: AppState) => state.besorahTextVersion,
   );
+  const besorahLanguage = useAppStore(
+    (state: AppState) => state.besorahLanguage,
+  );
+  const setBesorahLanguage = useAppStore(
+    (state: AppState) => state.setBesorahLanguage,
+  );
+  const greekAvailable =
+    __DEV__ || process.env.EXPO_PUBLIC_GREEK_PREVIEW_ENABLED === "1";
   const setBesorahTextVersion = useAppStore(
     (state: AppState) => state.setBesorahTextVersion,
   );
@@ -224,7 +232,8 @@ export default function SettingsScreen() {
             />
           </View>
         );
-      case "besorahTextVersion":
+      case "besorahLanguage":
+        if (!greekAvailable) return null;
         return (
           <View style={styles.row}>
             <View style={styles.rowContent}>
@@ -232,16 +241,41 @@ export default function SettingsScreen() {
                 <AppIcon name="scroll" size={18} color={colors.textSecondary} />
               </View>
               <View style={styles.textContainer}>
-                <View style={styles.labelRow}>
-                  <Text style={styles.label}>
-                    {t("settings.besorahTextVersion.title")}
-                  </Text>
-                  <View style={styles.newBadge}>
-                    <Text style={styles.newBadgeText}>
-                      {t("settings.besorahTextVersion.new")}
-                    </Text>
-                  </View>
-                </View>
+                <Text style={styles.label}>
+                  {t("settings.besorahLanguage.title")}
+                </Text>
+              </View>
+            </View>
+            <SettingsDropdown
+              value={besorahLanguage}
+              onChange={(value) =>
+                setBesorahLanguage(value as AppState["besorahLanguage"])
+              }
+              options={[
+                {
+                  label: t("settings.besorahLanguage.hebrew"),
+                  value: "hebrew",
+                },
+                {
+                  label: t("settings.besorahLanguage.greek"),
+                  value: "greek",
+                },
+              ]}
+            />
+          </View>
+        );
+      case "besorahTextVersion":
+        if (besorahLanguage === "greek") return null;
+        return (
+          <View style={styles.row}>
+            <View style={styles.rowContent}>
+              <View style={styles.iconContainer}>
+                <AppIcon name="scroll" size={18} color={colors.textSecondary} />
+              </View>
+              <View style={styles.textContainer}>
+                <Text style={styles.label}>
+                  {t("settings.besorahTextVersion.title")}
+                </Text>
               </View>
             </View>
             <SettingsDropdown

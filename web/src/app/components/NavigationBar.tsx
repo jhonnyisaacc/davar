@@ -10,6 +10,7 @@ import { FaThList } from "react-icons/fa";
 import { LuLightbulb } from "react-icons/lu";
 import { TbAlphabetHebrew, TbLanguageHiragana } from "react-icons/tb";
 import { useTranslation } from "../hooks/useTranslation";
+import type { BesorahLanguage } from "@davar/shared/greekBesorah";
 import { formatBookDisplayName } from "../utils/bookNameFormatter";
 import { NeumorphCard } from "./NeumorphCard";
 import { NeumorphicToggle } from "./NeumorphicToggle";
@@ -20,7 +21,13 @@ interface NavigationBarProps {
 	bookHebrew: string;
 	chapter: number;
 	verse: number;
-	books: { name: string; hebrew: string; spanish: string }[];
+	books: {
+		name: string;
+		hebrew: string;
+		spanish: string;
+		greek?: string;
+		section?: string;
+	}[];
 	chapterCount: number;
 	verseCount: number;
 	onBookChange: (book: string) => void;
@@ -32,6 +39,9 @@ interface NavigationBarProps {
 	onThemeChange: (theme: "light" | "dark") => void;
 	language: "en" | "es" | "he";
 	onLanguageChange: (language: "en" | "es" | "he") => void;
+	besorahLanguage: BesorahLanguage;
+	onBesorahLanguageChange: (language: BesorahLanguage) => void;
+	greekAvailable: boolean;
 	besorahTextVersion: "delitzsch" | "hutter";
 	onBesorahTextVersionChange: (version: "delitzsch" | "hutter") => void;
 	showQumran: boolean;
@@ -68,6 +78,9 @@ export function NavigationBar({
 	onThemeChange,
 	language,
 	onLanguageChange,
+	besorahLanguage,
+	onBesorahLanguageChange,
+	greekAvailable,
 	besorahTextVersion,
 	onBesorahTextVersionChange,
 	showQumran,
@@ -186,7 +199,7 @@ export function NavigationBar({
 	const normalizedBookSearch = bookSearch.trim().toLowerCase();
 	const filteredBooks = normalizedBookSearch
 		? books.filter((item) => {
-				const haystack = [item.name, item.spanish, item.hebrew]
+				const haystack = [item.name, item.spanish, item.hebrew, item.greek]
 					.filter(Boolean)
 					.join(" ")
 					.toLowerCase();
@@ -294,22 +307,56 @@ export function NavigationBar({
 						</select>
 					</div>
 				);
+			case "besorahLanguage":
+				if (!greekAvailable) return null;
+				return (
+					<div className="flex items-center justify-between gap-4">
+						<div className="flex items-center gap-3">
+							<ScrollText className="w-4 h-4 text-[var(--text-secondary)]" />
+							<span
+								className="text-sm text-[var(--text-primary)]"
+								style={{ fontFamily: "'Inter', sans-serif" }}
+							>
+								{t("settings.besorahLanguage.title")}
+							</span>
+						</div>
+						<select
+							value={besorahLanguage}
+							onChange={(event) =>
+								onBesorahLanguageChange(
+									event.target.value as BesorahLanguage,
+								)
+							}
+							className="rounded-full px-3 py-2 text-base md:text-xs text-[var(--text-primary)]"
+							style={{
+								fontFamily: "'Inter', sans-serif",
+								backgroundColor: "var(--neomorph-bg)",
+								border: "1px solid var(--neomorph-border)",
+								boxShadow:
+									"inset 3px 3px 6px var(--neomorph-inset-shadow-dark), inset -3px -3px 6px var(--neomorph-inset-shadow-light)",
+							}}
+						>
+							<option value="hebrew">
+								{t("settings.besorahLanguage.hebrew")}
+							</option>
+							<option value="greek">
+								{t("settings.besorahLanguage.greek")}
+							</option>
+						</select>
+					</div>
+				);
 			case "besorahTextVersion":
+				if (besorahLanguage === "greek") return null;
 				return (
 					<div className="flex items-center justify-between gap-4">
 						<div className="flex items-center gap-3">
 							<ScrollText className="w-4 h-4 text-[var(--text-secondary)]" />
 							<div>
-								<div className="flex items-center gap-2">
-									<div
-										className="text-sm text-[var(--text-primary)]"
-										style={{ fontFamily: "'Inter', sans-serif" }}
-									>
-										{t("settings.besorahTextVersion.title")}
-									</div>
-									<span className="rounded-full bg-[var(--primary)] px-2 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-white">
-										{t("settings.besorahTextVersion.new")}
-									</span>
+								<div
+									className="text-sm text-[var(--text-primary)]"
+									style={{ fontFamily: "'Inter', sans-serif" }}
+								>
+									{t("settings.besorahTextVersion.title")}
 								</div>
 							</div>
 						</div>
@@ -474,7 +521,13 @@ export function NavigationBar({
 								<span className="hidden md:inline">{bookDisplayName} | </span>
 								<span
 									className="hidden md:inline"
-									style={{ fontFamily: "'Suez One', serif" }}
+									style={{
+										fontFamily:
+											besorahLanguage === "greek" &&
+											books.find((item) => item.name === book)?.greek
+												? "'Cardo', serif"
+												: "'Suez One', serif",
+									}}
 								>
 									{bookHebrew}
 								</span>
@@ -698,9 +751,16 @@ export function NavigationBar({
 								</span>
 								<span
 									className="text-sm"
-									style={{ fontFamily: "'Suez One', serif" }}
+									style={{
+										fontFamily:
+											besorahLanguage === "greek" && item.greek
+												? "'Cardo', serif"
+												: "'Suez One', serif",
+									}}
 								>
-									{item.hebrew}
+									{besorahLanguage === "greek" && item.greek
+										? item.greek
+										: item.hebrew}
 								</span>
 							</button>
 						))}

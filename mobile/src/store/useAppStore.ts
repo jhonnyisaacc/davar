@@ -3,6 +3,7 @@ import { create } from "zustand";
 import type { MockVerse } from "@/src/constants/mockData";
 import type { ThemeMode } from "@/src/theme";
 import type { BesorahTextVersion } from "@davar/shared/translationConfig";
+import type { BesorahLanguage } from "@davar/shared/greekBesorah";
 import {
   getDefaultLanguage,
   type AppLanguage,
@@ -24,6 +25,8 @@ export type AppState = {
   setLanguage: (language: AppLanguage) => void;
   besorahTextVersion: BesorahTextVersion;
   setBesorahTextVersion: (version: BesorahTextVersion) => void;
+  besorahLanguage: BesorahLanguage;
+  setBesorahLanguage: (language: BesorahLanguage) => void;
   showQumran: boolean;
   setShowQumran: (value: boolean) => void;
   showFullChapter: boolean;
@@ -74,6 +77,8 @@ export const useAppStore = create<AppState>((set) => ({
   setLanguage: (language) => set({ language }),
   besorahTextVersion: "delitzsch",
   setBesorahTextVersion: (besorahTextVersion) => set({ besorahTextVersion }),
+  besorahLanguage: "hebrew",
+  setBesorahLanguage: (besorahLanguage) => set({ besorahLanguage }),
   showQumran: false,
   setShowQumran: (value) =>
     set((state) => ({

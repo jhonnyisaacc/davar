@@ -57,6 +57,12 @@
     "language": {
       "title": "שפה"
     },
+    "besorahLanguage": {
+      "title": "מקור הבשורה",
+      "hebrew": "עברית",
+      "greek": "יוונית",
+      "new": "חדש"
+    },
     "besorahTextVersion": {
       "title": "תרגום הבשורה",
       "delitzsch": "דליטש",
@@ -158,7 +164,9 @@
       "spanishTranslationLabel": "תרגום ספרדי",
       "spanishTranslationValue": "TTH (ראשי), BES (משני)",
       "besorahLabel": "בשורה",
-      "besorahValue": "תרגום דליץש"
+      "besorahValue": "דליץש (1877), הוטר (1599–1602)",
+      "greekTextLabel": "טקסט יווני",
+      "greekTextValue": "SBLGNT (2010)"
     },
     "aboutTitle": "אודות",
     "aboutItems": {
@@ -240,6 +248,7 @@
     "loading": "טוען פסוקים...",
     "prefixLabel": "תחילית: {prefix}",
     "missingSpanishTranslation": "אין לנו כרגע תרגום לספרדית לטקסט זה, אנחנו עובדים על כך...",
+    "greekUnavailable": "אינו מופיע בטקסט המוצג של SBLGNT 2011.",
     "besorahDisclaimer": {
       "short": "לעיון בלבד: מיפוי Strong בבשורה עשוי לכלול רשומות חסרות או שלא נבדקו.",
       "modalTitle": "הודעה על מיפוי הבשורה",
@@ -302,8 +311,8 @@
     "emptyState": "שמור פסוקים כדי לחזור אליהם כאן."
   },
   "feedback": {
-    "telegramReminder": "לתגובות ומשוב, הצטרף לקבוצת הטלגרם שלנו:",
-    "telegramLink": "הצטרף לקבוצת הטלגרם שלנו"
+    "telegramReminder": "לתגובות ומשוב, כתבו לי בטלגרם:",
+    "telegramLink": "כתבו לי בטלגרם"
   },
   "tabs": {
     "home": "בית",

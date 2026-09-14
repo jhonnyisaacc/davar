@@ -36,9 +36,9 @@ Then run:
 ## Useful verification commands
 
 ```bash
-gh api repos/edyehoshua/davar/environments --jq '.environments[].name'
-gh api repos/edyehoshua/davar/environments/production
-gh api repos/edyehoshua/davar/environments/mobile-production
+gh api repos/jhonnyisaacc/davar/environments --jq '.environments[].name'
+gh api repos/jhonnyisaacc/davar/environments/production
+gh api repos/jhonnyisaacc/davar/environments/mobile-production
 ```
 
 ## Notes
@@ -48,6 +48,6 @@ gh api repos/edyehoshua/davar/environments/mobile-production
 - If `EXPO_TOKEN` was not set before running the script, add it later:
 
 ```bash
-gh secret set EXPO_TOKEN --repo edyehoshua/davar --env mobile-preview
-gh secret set EXPO_TOKEN --repo edyehoshua/davar --env mobile-production
+gh secret set EXPO_TOKEN --repo jhonnyisaacc/davar --env mobile-preview
+gh secret set EXPO_TOKEN --repo jhonnyisaacc/davar --env mobile-production
 ```

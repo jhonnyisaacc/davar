@@ -51,11 +51,19 @@ export function FullChapterView({
 	isBesorah = false,
 }: FullChapterViewProps) {
 	const { t } = useTranslation(language);
+	const isGreekSource = verses.some(
+		(verse) => verse.source_language === "greek",
+	);
 	const shouldShowSefer = seferMode && (hebrewOnly || translationOnly);
 	const spanishMissingTranslation = t("verse.missingSpanishTranslation");
 	const hideSuperscripts = shouldHideSuperscripts(getTranslationKey(language));
 	const hideTranslationText =
-		shouldHideTranslationText(language, hebrewOnly) && !translationOnly;
+		shouldHideTranslationText(
+			language,
+			hebrewOnly,
+			isGreekSource ? "greek" : "hebrew",
+		) && !translationOnly;
+	const isHebrewOverlay = language === "he" && isGreekSource;
 	const isRenderableDssWord = (value?: string): value is string => {
 		if (!value) return false;
 		const normalized = value.trim();
@@ -100,6 +108,16 @@ export function FullChapterView({
 		});
 
 	const renderVerseWords = (verse: VerseResponse) => {
+		if (verse.available === false) {
+			return (
+				<span
+					className="rounded-full border border-[var(--border)] px-3 py-1 text-sm text-[var(--text-secondary)]"
+					style={{ direction: "ltr", fontFamily: "'Inter', sans-serif" }}
+				>
+					{t("verse.greekUnavailable")}
+				</span>
+			);
+		}
 		const dssMap = new Map<
 			number,
 			{
@@ -269,7 +287,7 @@ export function FullChapterView({
 							style={{
 								fontFamily: "'Cardo', serif",
 								fontSize: "48px",
-								direction: "rtl",
+								direction: isGreekSource ? "ltr" : "rtl",
 								color: "var(--text-hebrew)",
 								lineHeight: 1.9,
 								letterSpacing: "0.01em",
@@ -307,7 +325,8 @@ export function FullChapterView({
 									style={{
 										fontFamily: "'Cardo', serif",
 										fontSize: "48px",
-										direction: "rtl",
+										direction:
+											verse.source_language === "greek" ? "ltr" : "rtl",
 										color: "var(--text-hebrew)",
 										lineHeight: 1.85,
 									}}
@@ -330,12 +349,15 @@ export function FullChapterView({
 								<div
 									className="leading-relaxed"
 									style={{
-										fontFamily: "'Inter', sans-serif",
+										fontFamily: isHebrewOverlay
+											? "'Cardo', serif"
+											: "'Inter', sans-serif",
 										fontSize: translationOnly ? "22px" : "15px",
 										color: translationOnly
 											? "var(--text-hebrew)"
 											: "var(--text-secondary)",
 										opacity: 1,
+										direction: isHebrewOverlay ? "rtl" : undefined,
 									}}
 								>
 									{translationOnly ? (

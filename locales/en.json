@@ -57,6 +57,12 @@
     "language": {
       "title": "Language"
     },
+    "besorahLanguage": {
+      "title": "Besorah source",
+      "hebrew": "Hebrew",
+      "greek": "Greek",
+      "new": "New"
+    },
     "besorahTextVersion": {
       "title": "Gospel translation",
       "delitzsch": "Delitzsch",
@@ -158,7 +164,9 @@
       "spanishTranslationLabel": "Spanish translation",
       "spanishTranslationValue": "TTH (primary), BES (fallback)",
       "besorahLabel": "Besorah",
-      "besorahValue": "Delitzsch translation"
+      "besorahValue": "Delitzsch (1877), Hutter (1599–1602)",
+      "greekTextLabel": "Greek text",
+      "greekTextValue": "SBLGNT (2010)"
     },
     "aboutTitle": "About",
     "aboutItems": {
@@ -240,6 +248,7 @@
     "loading": "Loading verses...",
     "prefixLabel": "Prefix: {prefix}",
     "missingSpanishTranslation": "We don't have a Spanish translation for this text yet, we're working on it...",
+    "greekUnavailable": "Not present in the SBLGNT 2011 displayed text.",
     "besorahDisclaimer": {
       "short": "Reference only: Besorah Strong mapping may contain unreviewed or missing entries.",
       "modalTitle": "Besorah mapping notice",
@@ -302,8 +311,8 @@
     "emptyState": "Save verses to revisit them here."
   },
   "feedback": {
-    "telegramReminder": "For comments and feedback, please join our Telegram group:",
-    "telegramLink": "Join our Telegram group"
+    "telegramReminder": "For comments and feedback, please chat with me on Telegram:",
+    "telegramLink": "Chat with me on Telegram"
   },
   "tabs": {
     "home": "Home",

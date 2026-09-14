@@ -18,6 +18,7 @@ import { getBooks } from "@/src/services/api";
 import type { BookResponse } from "@/src/types/api";
 import { useAppStore, type AppState } from "@/src/store/useAppStore";
 import { useTranslation } from "@/src/i18n/useTranslation";
+import { GREEK_BESORAH_BOOK_NAMES } from "@davar/shared/greekBesorah";
 import { formatBookDisplayName } from "../utils/bookNameFormatter";
 
 type BookSelectorSheetProps = {
@@ -139,6 +140,7 @@ export const BookSelectorSheet = ({
 }: BookSelectorSheetProps) => {
   const themeMode = useAppStore((state: AppState) => state.themeMode);
   const language = useAppStore((state: AppState) => state.language);
+  const besorahLanguage = useAppStore((state: AppState) => state.besorahLanguage);
   const colors = getColors(themeMode);
   const styles = useMemo(() => createStyles(colors), [colors]);
   const snapPoints = useMemo(() => ["75%"], []);
@@ -238,11 +240,22 @@ export const BookSelectorSheet = ({
           ]}
         >
           <Text style={styles.bookEnglish}>{displayName}</Text>
-          <Text style={styles.bookHebrew}>{item.hebrew_name}</Text>
+          <Text
+            style={[
+              styles.bookHebrew,
+              besorahLanguage === "greek" && GREEK_BESORAH_BOOK_NAMES[item.id]
+                ? { fontFamily: typography.families.hebrewScripture }
+                : null,
+            ]}
+          >
+            {besorahLanguage === "greek" && GREEK_BESORAH_BOOK_NAMES[item.id]
+              ? GREEK_BESORAH_BOOK_NAMES[item.id]
+              : item.hebrew_name}
+          </Text>
         </Pressable>
       );
     },
-    [currentBookId, handleSelectBook, styles, colors, language],
+    [currentBookId, handleSelectBook, styles, colors, language, besorahLanguage],
   );
 
   const renderListEmpty = useCallback(

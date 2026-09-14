@@ -1,0 +1,16 @@
+{
+  "H1": {
+    "strong_number": "H1",
+    "definitions": [
+      {
+        "text_en": "father",
+        "order": 1,
+        "text_es": "padre"
+      },
+      {
+        "text_en": "ancestor",
+        "order": 2
+      }
+    ]
+  }
+}

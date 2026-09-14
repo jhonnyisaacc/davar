@@ -182,11 +182,26 @@ export const resolveTranslationLookupKey = (
   return `${target.reference.chapter}-${target.reference.verse}`;
 };
 
+export const resolveGreekOverlayLanguage = (
+  language: AppLanguage,
+  translationOnly = false,
+): Exclude<AppLanguage, "he"> | "he" | undefined => {
+  if (translationOnly) {
+    return language === "es" ? "es" : "en";
+  }
+  if (language === "he") return "he";
+  if (language === "es") return "es";
+  return "en";
+};
+
 export const shouldHideTranslationText = (
   language: AppLanguage,
   hebrewOnly = false,
+  sourceLanguage: "hebrew" | "greek" = "hebrew",
 ): boolean => {
-  return hebrewOnly || language === "he";
+  if (hebrewOnly) return true;
+  if (sourceLanguage === "greek") return false;
+  return language === "he";
 };
 
 export const getDssCommentaryForLanguage = (
