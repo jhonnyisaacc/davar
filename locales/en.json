@@ -264,12 +264,6 @@
       "modalTitle": "Besorah mapping notice",
       "modalMessage": "Besorah Strong mappings are provided for reference only. Some mappings may be unreviewed, incomplete, or unresolved.",
       "modalConfirm": "Understood"
-    },
-    "hutterAnnouncement": {
-      "title": "Elias Hutter is now available",
-      "message": "You can now read New Testament verses in Elias Hutter's Hebrew translation. Delitzsch remains the default, and you can change this anytime in Settings.",
-      "activate": "Activate Hutter",
-      "close": "Keep Delitzsch"
     }
   },
   "legal": {
