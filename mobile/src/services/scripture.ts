@@ -30,6 +30,7 @@ import {
   TTH_BOOK_MAPPING,
 } from "@davar/shared/translationConfig";
 import { getSourceChaptersForTranslationChapter } from "@davar/shared/versification";
+import { toDisplayVerseId } from "@/src/services/verseIdentity";
 
 // Chapter-level cache for TS2009 static JSON (matches web approach)
 const ts2009ChapterCache = new Map<string, Promise<Map<number, string> | null>>();
@@ -1565,7 +1566,7 @@ export const fetchGreekChapterVerses = async (
       chapter,
       edition: "sblgnt",
       hebrew: "",
-      id: verse?.verseId ?? `${bookId}-${chapter}-${verseNumber}-sblgnt-unavailable`,
+      id: toDisplayVerseId(bookId, chapter, verseNumber),
       revision,
       sourceChapter: chapter,
       sourceLanguage: "greek",
