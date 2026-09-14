@@ -1232,6 +1232,7 @@ export const VerseDetailContent = () => {
     translationOnly: false,
     besorahTextVersion: "delitzsch" as AppState["besorahTextVersion"],
     besorahLanguage: "hebrew" as AppState["besorahLanguage"],
+    isBesorah: false,
     isConnected: true,
   });
   useEffect(() => {
@@ -1244,6 +1245,7 @@ export const VerseDetailContent = () => {
       currentLoadRef.current.translationOnly === translationOnly &&
       currentLoadRef.current.besorahTextVersion === besorahTextVersion &&
       currentLoadRef.current.besorahLanguage === besorahLanguage &&
+      currentLoadRef.current.isBesorah === isBesorah &&
       currentLoadRef.current.isConnected === isConnected
     ) {
       return;
@@ -1258,6 +1260,7 @@ export const VerseDetailContent = () => {
       translationOnly,
       besorahTextVersion,
       besorahLanguage,
+      isBesorah,
       isConnected,
     };
 
@@ -1310,6 +1313,7 @@ export const VerseDetailContent = () => {
           currentLoadRef.current.translationOnly !== translationOnly ||
           currentLoadRef.current.besorahTextVersion !== besorahTextVersion ||
           currentLoadRef.current.besorahLanguage !== besorahLanguage ||
+          currentLoadRef.current.isBesorah !== isBesorah ||
           currentLoadRef.current.isConnected !== isConnected
         ) {
           return;
