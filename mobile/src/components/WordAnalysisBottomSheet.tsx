@@ -432,7 +432,11 @@ const toGreekLexiconResponse = (
   }
   const surface = instanceSurface({
     instance_total: entry.occurrences_count,
-    instances: entry.instances,
+    instances: entry.instances?.map((row) => ({
+      book: row.book,
+      chapter: row.chapter,
+      verse: row.verse ?? undefined,
+    })),
   });
   return {
     definitions,
@@ -465,14 +469,15 @@ const loadGreekLexiconEntry = async (
       lexicon[strong] ??
       lexicon[family] ??
       Object.values(lexicon).find(
-        (item) => greekStrongFamily(item.strong) === family,
+        (item) =>
+          item.strong != null && greekStrongFamily(item.strong) === family,
       );
     if (!entry) return null;
     if (!entry.instances?.length) {
       const shard = await staticDataRequest<
         Record<string, { count?: number; references?: GreekLexiconEntry["instances"] }>
       >(greekOccurrencesShardPath(entry.strong ?? strong, revision));
-      const bucket = shard[strong] ?? shard[entry.strong];
+      const bucket = shard[strong] ?? (entry.strong ? shard[entry.strong] : undefined);
       return toGreekLexiconResponse(
         {
           ...entry,

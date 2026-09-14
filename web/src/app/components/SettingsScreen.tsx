@@ -358,7 +358,6 @@ function SettingsPillSelect<T extends string>({
 	const ref = React.useRef<HTMLDivElement>(null);
 	const selected =
 		options.find((option) => option.value === value) ?? options[0];
-	if (!selected) return null;
 
 	React.useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
@@ -369,6 +368,8 @@ function SettingsPillSelect<T extends string>({
 		if (open) document.addEventListener("mousedown", handleClickOutside);
 		return () => document.removeEventListener("mousedown", handleClickOutside);
 	}, [open]);
+
+	if (!selected) return null;
 
 	return (
 		<div

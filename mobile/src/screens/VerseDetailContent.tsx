@@ -1388,24 +1388,25 @@ export const VerseDetailContent = () => {
           !translationOnly;
         const hideTranslations =
           !useGreekSource && !translationOnly && language === "he";
-        const translationLanguage = useGreekSource
+        const greekOverlayLanguage = useGreekSource
           ? resolveGreekOverlayLanguage(language, translationOnly)
-          : translationOnly
-            ? language === "es"
+          : undefined;
+        const hebrewTranslationLanguage: "en" | "es" | undefined = translationOnly
+          ? language === "es"
+            ? "es"
+            : "en"
+          : hideTranslations
+            ? undefined
+            : language === "es"
               ? "es"
-              : "en"
-            : hideTranslations
-              ? undefined
-              : language === "es"
-                ? "es"
-                : "en";
+              : "en";
         const verses = useGreekSource
           ? await fetchGreekChapterVerses(bookId, chapter, {
-              language: translationLanguage,
+              language: greekOverlayLanguage,
               isConnected,
             })
           : await fetchChapterVerses(bookId, chapter, {
-              language: translationLanguage,
+              language: hebrewTranslationLanguage,
               showDss: showQumran,
               hebrewOnly: hideTranslations,
               isConnected,

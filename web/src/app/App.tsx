@@ -969,15 +969,18 @@ export default function App() {
 				isBesorah &&
 				besorahLanguage === "greek" &&
 				!translationOnly;
-			const translationLanguage = useGreekSource
+			const greekOverlayLanguage = useGreekSource
 				? resolveGreekOverlayLanguage(language, translationOnly)
-				: translationOnly
-					? language === "es"
+				: undefined;
+			const hebrewTranslationLanguage: "en" | "es" | undefined = translationOnly
+				? language === "es"
+					? "es"
+					: "en"
+				: language === "he"
+					? undefined
+					: language === "es"
 						? "es"
-						: "en"
-					: language === "he"
-						? undefined
-						: language;
+						: "en";
 			try {
 				const [chapterCountValue, verseCountValue, loadedVerses] =
 					await Promise.all([
@@ -988,11 +991,11 @@ export default function App() {
 								currentBook.toLowerCase(),
 								currentChapter,
 								{
-									language: translationLanguage,
+									language: greekOverlayLanguage,
 								},
 							)
 						: getChapterVerses(currentBook.toLowerCase(), currentChapter, {
-								language: translationLanguage,
+								language: hebrewTranslationLanguage,
 								showDss: showQumran,
 								hebrewOnly: false,
 								referenceMode: translationOnly ? "translation" : "source",
