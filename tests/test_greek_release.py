@@ -3,7 +3,12 @@ from pathlib import Path
 import pytest
 
 from scripts.greek.books import davar_besorah_ids_from_metadata
-from scripts.greek.publish import publish_preview, validate_release_tree
+from scripts.greek.publish import (
+    build_and_publish_preview,
+    existing_preview_release,
+    publish_preview,
+    validate_release_tree,
+)
 from scripts.greek.release_gate import validate_public_enablement
 from scripts.greek.sources import STEPBIBLE_COMMIT
 from scripts.greek.stable_json import read_json, write_json
@@ -165,3 +170,51 @@ def test_public_gate_fails_closed_without_reviewed_languages(tmp_path: Path):
     )
     with pytest.raises(ValueError, match="not publishable"):
         validate_public_enablement(tmp_path, approvals, qa_report)
+
+
+def test_existing_preview_is_reused_when_revision_is_unchanged(tmp_path, monkeypatch):
+    bundle, definitions = release_fixture()
+    public = tmp_path / "public"
+    published = publish_preview(bundle, definitions, public)
+
+    def boom(*_args, **_kwargs):
+        raise AssertionError("should not fetch when the recorded revision is already published")
+
+    monkeypatch.setattr("scripts.greek.publish.fetch_all", boom)
+    reused = build_and_publish_preview(
+        source_dir=tmp_path / "missing",
+        public_data_dir=public,
+        allow_fetch=False,
+    )
+    assert reused == published
+    assert existing_preview_release(public) == published
+
+
+def test_stale_preview_revision_is_not_reused(tmp_path):
+    bundle, definitions = release_fixture()
+    publish_preview(bundle, definitions, tmp_path)
+    manifest_path = tmp_path / "greek" / "manifest.json"
+    manifest = read_json(manifest_path)
+    manifest["revision"] = "stale"
+    write_json(manifest_path, manifest)
+    assert existing_preview_release(tmp_path) is None
+
+
+def test_forced_preview_rebuild_does_not_use_cache(tmp_path, monkeypatch):
+    bundle, definitions = release_fixture()
+    publish_preview(bundle, definitions, tmp_path)
+    called = []
+
+    def fake_fetch(*_args, **_kwargs):
+        called.append(True)
+        raise FileNotFoundError("no sources")
+
+    monkeypatch.setattr("scripts.greek.publish.fetch_all", fake_fetch)
+    with pytest.raises(FileNotFoundError, match="no sources"):
+        build_and_publish_preview(
+            source_dir=tmp_path / "missing",
+            public_data_dir=tmp_path,
+            force=True,
+            allow_fetch=False,
+        )
+    assert called

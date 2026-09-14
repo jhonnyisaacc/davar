@@ -329,12 +329,45 @@ def publish_preview(
     return release_dir
 
 
+def existing_preview_release(public_data_dir: Path) -> Path | None:
+    """Return the published release if it already matches the recorded revision."""
+    release_dir = (
+        public_data_dir / "greek" / "releases" / "sblgnt" / STEPBIBLE_COMMIT
+    )
+    active_path = public_data_dir / "greek" / "manifest.json"
+    if not release_dir.is_dir() or not active_path.is_file():
+        return None
+    try:
+        active = read_json(active_path)
+        if active.get("revision") != STEPBIBLE_COMMIT:
+            return None
+        validate_release_tree(release_dir)
+    except (OSError, ValueError, KeyError, TypeError):
+        return None
+    return release_dir
+
+
 def build_and_publish_preview(
     source_dir: Path = DEFAULT_SOURCE_DIR,
     public_data_dir: Path = DEFAULT_PUBLIC_DIR,
+    force: bool = False,
+    allow_fetch: bool = True,
 ) -> Path:
+    if not force:
+        existing = existing_preview_release(public_data_dir)
+        if existing is not None:
+            print(
+                f"[davar-greek] using existing preview {existing} "
+                f"revision={STEPBIBLE_COMMIT}",
+                flush=True,
+            )
+            return existing
     print("[davar-greek] publish-preview start", flush=True)
-    sources = fetch_all(dest_dir=source_dir, include_ubs=True)
+    sources = fetch_all(
+        dest_dir=source_dir,
+        include_ubs=True,
+        allow_network=allow_fetch,
+    )
     tagnt_paths, tbesg_path = default_source_paths(source_dir)
     print("[davar-greek] importing TAGNT/TBESG", flush=True)
     tbesg_text = tbesg_path.read_text(encoding="utf-8")

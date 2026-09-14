@@ -314,10 +314,13 @@ export function NavigationBar({
 						<div className="flex items-center gap-3">
 							<ScrollText className="w-4 h-4 text-[var(--text-secondary)]" />
 							<span
-								className="text-sm text-[var(--text-primary)]"
+								className="flex items-center gap-2 text-sm text-[var(--text-primary)]"
 								style={{ fontFamily: "'Inter', sans-serif" }}
 							>
 								{t("settings.besorahLanguage.title")}
+								<span className="rounded-full bg-[var(--copper-base)] px-1.5 py-0.5 text-[9px] font-semibold uppercase leading-3 text-white">
+									{t("settings.besorahLanguage.new")}
+								</span>
 							</span>
 						</div>
 						<select

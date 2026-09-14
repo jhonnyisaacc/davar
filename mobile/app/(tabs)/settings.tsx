@@ -10,6 +10,7 @@ import { getColors, radii, spacing, typography } from "@/src/theme";
 import { useAppStore, type AppState } from "@/src/store/useAppStore";
 import { clearStorage } from "@/src/services/storage";
 import { useTranslation } from "@/src/i18n/useTranslation";
+import { isGreekBesorahEnabled } from "@davar/shared/greekBesorah";
 import {
   SHARED_SETTINGS_ORDER,
   canUseSeferStyle,
@@ -133,8 +134,10 @@ export default function SettingsScreen() {
   const setBesorahLanguage = useAppStore(
     (state: AppState) => state.setBesorahLanguage,
   );
-  const greekAvailable =
-    __DEV__ || process.env.EXPO_PUBLIC_GREEK_PREVIEW_ENABLED === "1";
+  const greekAvailable = isGreekBesorahEnabled({
+    EXPO_PUBLIC_GREEK_PREVIEW_ENABLED:
+      process.env.EXPO_PUBLIC_GREEK_PREVIEW_ENABLED,
+  });
   const setBesorahTextVersion = useAppStore(
     (state: AppState) => state.setBesorahTextVersion,
   );
@@ -241,9 +244,16 @@ export default function SettingsScreen() {
                 <AppIcon name="scroll" size={18} color={colors.textSecondary} />
               </View>
               <View style={styles.textContainer}>
-                <Text style={styles.label}>
-                  {t("settings.besorahLanguage.title")}
-                </Text>
+                <View style={styles.labelRow}>
+                  <Text style={styles.label}>
+                    {t("settings.besorahLanguage.title")}
+                  </Text>
+                  <View style={styles.newBadge}>
+                    <Text style={styles.newBadgeText}>
+                      {t("settings.besorahLanguage.new")}
+                    </Text>
+                  </View>
+                </View>
               </View>
             </View>
             <SettingsDropdown

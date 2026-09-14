@@ -15,6 +15,11 @@ import {
   OE_TO_ENGLISH,
   WEB_PUBLIC_DATA_ROOT,
 } from "./config";
+import {
+  mergeGreekBundleVersion,
+  restoreGreekPublicData,
+  stashCurrentGreekPublicData,
+} from "./greek-public-data";
 import { VERSIFICATION_DATA } from "../../shared/versificationData";
 
 type Ts2009BookPayload = {
@@ -963,6 +968,7 @@ const main = async (): Promise<void> => {
   const shouldExportTs2009Static = process.env.EXPORT_TS2009_STATIC === "1";
   console.log("[davar-static-data] phase=generate start");
 
+  const greekStash = stashCurrentGreekPublicData();
   await rm(WEB_PUBLIC_DATA_ROOT, { recursive: true, force: true });
   await mkdir(WEB_PUBLIC_DATA_ROOT, { recursive: true });
 
@@ -1103,9 +1109,10 @@ const main = async (): Promise<void> => {
     "utf-8",
   );
   await writeFile(join(bundlesDir, "dss.json"), JSON.stringify(dssBundle), "utf-8");
+  const bundleVersions = mergeGreekBundleVersion(BUNDLE_VERSIONS, greekStash);
   await writeFile(
     join(bundlesDir, "versions.json"),
-    JSON.stringify(BUNDLE_VERSIONS),
+    JSON.stringify(bundleVersions),
     "utf-8",
   );
 
@@ -1150,8 +1157,8 @@ const main = async (): Promise<void> => {
         checksum: sha256OfJson(dssBundle),
       },
       versions: {
-        size: getJsonSize(BUNDLE_VERSIONS as unknown as JsonValue),
-        checksum: sha256OfJson(BUNDLE_VERSIONS as unknown as JsonValue),
+        size: getJsonSize(bundleVersions as unknown as JsonValue),
+        checksum: sha256OfJson(bundleVersions as unknown as JsonValue),
       },
       ...(ts2009Bundle
         ? {
@@ -1169,6 +1176,7 @@ const main = async (): Promise<void> => {
     JSON.stringify(manifest),
     "utf-8",
   );
+  restoreGreekPublicData(greekStash);
 
   console.log("Generated static data in web/public/data");
   console.log(`books: tanaj=${Object.keys(tanaj.bundle.books).length}, besorah=${Object.keys(besorah.bundle.books).length}`);

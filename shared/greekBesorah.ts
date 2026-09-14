@@ -8,7 +8,6 @@ export const GREEK_TAGGING_SOURCE = "stepbible-tagnt";
 export const GREEK_RECORDED_REVISION =
   "ae39711d7843b2902d54993e432de9c12d6a4b9a";
 export const GREEK_TRANSLITERATION_VERSION = "greek-transliteration-v1";
-export const GREEK_PREVIEW_BRANCH = "feat/greek_besorah";
 
 export type SourceIdentity = {
   sourceLanguage: ScriptureSourceLanguage;
@@ -171,9 +170,16 @@ export const canActivateGreekRelease = (
   manifest.validated &&
   manifest.books.length === 27;
 
-export const isGreekPreviewBuild = (env: {
+export const isGreekBesorahEnabled = (env: {
   PUBLIC_GREEK_PREVIEW_ENABLED?: string;
-  CF_PAGES_BRANCH?: string;
-}): boolean =>
-  env.PUBLIC_GREEK_PREVIEW_ENABLED === "1" ||
-  env.CF_PAGES_BRANCH === GREEK_PREVIEW_BRANCH;
+  EXPO_PUBLIC_GREEK_PREVIEW_ENABLED?: string;
+  PUBLIC_GREEK_PUBLIC_ENABLED?: string;
+} = {}): boolean => {
+  if (env.PUBLIC_GREEK_PUBLIC_ENABLED === "1") return true;
+  const flag =
+    env.PUBLIC_GREEK_PREVIEW_ENABLED ??
+    env.EXPO_PUBLIC_GREEK_PREVIEW_ENABLED;
+  return flag !== "0";
+};
+
+export const isGreekPreviewBuild = isGreekBesorahEnabled;

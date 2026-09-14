@@ -7,6 +7,7 @@ import {
 } from "node:fs";
 import { join } from "node:path";
 import tailwind from "bun-plugin-tailwind";
+import { isGreekBesorahEnabled } from "../shared/greekBesorah";
 
 type RuntimeProcess = {
 	env: Record<string, string | undefined>;
@@ -52,55 +53,51 @@ if (generation.exitCode !== 0) {
 	runtimeExit(generation.exitCode ?? 1);
 }
 
-const greekPreviewEnabled =
-	process.env.PUBLIC_GREEK_PREVIEW_ENABLED === "1" ||
-	process.env.CF_PAGES_BRANCH === "feat/greek_besorah";
+const greekPreviewEnabled = isGreekBesorahEnabled({
+	PUBLIC_GREEK_PREVIEW_ENABLED: process.env.PUBLIC_GREEK_PREVIEW_ENABLED,
+	PUBLIC_GREEK_PUBLIC_ENABLED: process.env.PUBLIC_GREEK_PUBLIC_ENABLED,
+});
 const greekPublicEnabled =
 	process.env.PUBLIC_GREEK_PUBLIC_ENABLED === "1";
 
 if (greekPreviewEnabled || greekPublicEnabled) {
-	if (process.env.CF_PAGES === "1") {
-		console.warn(
-			"[davar-web] skipping greek-preview on Pages (licensed sources are not in the git clone)",
-		);
-	} else {
-		console.log("[davar-web] phase=greek-preview start");
-		const greekPreviewStartedAt = Date.now();
-		const greekPreview = Bun.spawnSync(
-			[
-				"python3",
-				"-m",
-				"scripts.greek",
-				"publish-preview",
-				"--public-data-dir",
-				join(publicDir, "data"),
-			],
-			{
-				cwd: join(import.meta.dir, ".."),
-				env: {
-					...process.env,
-					PYTHONPATH: ".",
-				},
-				stdout: "inherit",
-				stderr: "inherit",
+	console.log("[davar-web] phase=greek-preview start");
+	const greekPreviewStartedAt = Date.now();
+	const greekPreview = Bun.spawnSync(
+		[
+			"python3",
+			"-m",
+			"scripts.greek",
+			"publish-preview",
+			"--public-data-dir",
+			join(publicDir, "data"),
+		],
+		{
+			cwd: join(import.meta.dir, ".."),
+			env: {
+				...process.env,
+				PYTHONPATH: ".",
+				PYTHONUNBUFFERED: "1",
 			},
+			stdout: "inherit",
+			stderr: "inherit",
+		},
+	);
+	if (greekPreview.exitCode !== 0) {
+		console.error(
+			`[davar-web] phase=greek-preview failed duration=${formatSeconds(greekPreviewStartedAt)}`,
 		);
-		if (greekPreview.exitCode !== 0) {
-			console.error(
-				`[davar-web] phase=greek-preview failed duration=${formatSeconds(greekPreviewStartedAt)}`,
+		if (process.env.CF_PAGES === "1") {
+			console.warn(
+				"[davar-web] continuing Pages build without rebuilding Greek preview (no current release and fetch failed)",
 			);
-			if (process.env.CF_PAGES === "1") {
-				console.warn(
-					"[davar-web] continuing Pages build without Greek preview (sources are not in the git clone)",
-				);
-			} else {
-				runtimeExit(greekPreview.exitCode ?? 1);
-			}
 		} else {
-			console.log(
-				`[davar-web] phase=greek-preview done duration=${formatSeconds(greekPreviewStartedAt)}`,
-			);
+			runtimeExit(greekPreview.exitCode ?? 1);
 		}
+	} else {
+		console.log(
+			`[davar-web] phase=greek-preview done duration=${formatSeconds(greekPreviewStartedAt)}`,
+		);
 	}
 
 	if (greekPublicEnabled) {
