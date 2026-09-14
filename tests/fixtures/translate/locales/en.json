@@ -1,0 +1,9 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "appName": "Davar"
+  },
+  "wordCard": {
+    "appearsCount": "Appears {count} times"
+  }
+}
