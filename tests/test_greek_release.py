@@ -7,6 +7,7 @@ from scripts.greek.publish import (
     build_and_publish_preview,
     existing_preview_release,
     publish_preview,
+    translations_missing_from_preview,
     validate_release_tree,
 )
 from scripts.greek.release_gate import validate_public_enablement
@@ -185,6 +186,7 @@ def test_existing_preview_is_reused_when_revision_is_unchanged(tmp_path, monkeyp
         source_dir=tmp_path / "missing",
         public_data_dir=public,
         allow_fetch=False,
+        definitions_dir=tmp_path / "no-defs",
     )
     assert reused == published
     assert existing_preview_release(public) == published
@@ -216,5 +218,48 @@ def test_forced_preview_rebuild_does_not_use_cache(tmp_path, monkeypatch):
             public_data_dir=tmp_path,
             force=True,
             allow_fetch=False,
+            definitions_dir=tmp_path / "no-defs",
         )
     assert called
+
+
+def test_preview_is_not_reused_when_translated_drafts_are_missing(tmp_path):
+    bundle, definitions = release_fixture()
+    publish_preview(bundle, definitions, tmp_path)
+    filled = {
+        "entries": {
+            "G3056": {
+                "senses": [
+                    {
+                        "definitions": {
+                            "en": {
+                                "short": "word",
+                                "fuller": "a word",
+                                "review_status": "approved",
+                            },
+                            "es": {
+                                "short": "palabra",
+                                "fuller": "una palabra",
+                                "review_status": "draft",
+                            },
+                            "he": {
+                                "short": "דבר",
+                                "fuller": "מילה",
+                                "review_status": "draft",
+                            },
+                        }
+                    }
+                ]
+            }
+        }
+    }
+    assert translations_missing_from_preview(tmp_path, filled)
+    assert existing_preview_release(tmp_path, store=filled) is None
+
+
+def test_collapse_runaway_gloss_keeps_unique_head():
+    from scripts.greek.publish import collapse_runaway_gloss
+
+    looping = "מביש, חרפה, גנאי, תועבה, תועבה, תועבה, תועבה"
+    assert collapse_runaway_gloss(looping) == "מביש, חרפה, גנאי, תועבה"
+    assert collapse_runaway_gloss("תהום") == "תהום"

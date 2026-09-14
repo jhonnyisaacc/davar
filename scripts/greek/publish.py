@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import re
 import shutil
 from pathlib import Path
 
@@ -14,13 +15,69 @@ from scripts.greek.parse_tbesg import parse_tbesg_file
 from scripts.greek.parse_ubs import parse_ubs_file
 from scripts.greek.sources import STEPBIBLE_COMMIT
 from scripts.greek.stable_json import dumps, read_json, write_json
-from scripts.greek.translate import apply_translation_cache, default_cache_path, load_cache
+from scripts.greek.translate import (
+    DEFAULT_DEFINITIONS_DIR,
+    apply_translation_cache,
+    default_cache_path,
+    load_cache,
+    usable_text,
+)
 from scripts.greek.transliteration import RULE_VERSION
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_SOURCE_DIR = ROOT / "data" / "greek" / "source" / STEPBIBLE_COMMIT
 DEFAULT_PUBLIC_DIR = ROOT / "web" / "public" / "data"
 PAGES_FILE_LIMIT_BYTES = 24 * 1024 * 1024
+PUBLISHED_SHORT_LIMIT = 120
+PUBLISHED_FULLER_LIMIT = 6000
+_GLOSS_SPLIT = re.compile(r"[,/;|]+")
+
+
+def collapse_runaway_gloss(text: str | None, *, limit: int = PUBLISHED_SHORT_LIMIT) -> str | None:
+    """Keep the unique head of a looping model gloss; drop the rest."""
+    if not text:
+        return None
+    cleaned = " ".join(str(text).split()).strip()
+    if not cleaned:
+        return None
+    seen: list[str] = []
+    seen_set: set[str] = set()
+    for part in _GLOSS_SPLIT.split(cleaned):
+        token = part.strip()
+        if not token:
+            continue
+        if token in seen_set:
+            break
+        seen.append(token)
+        seen_set.add(token)
+        if len(", ".join(seen)) > limit:
+            seen.pop()
+            break
+    if seen:
+        return ", ".join(seen)
+    if len(cleaned) <= limit:
+        return cleaned
+    return cleaned[:limit].rsplit(" ", 1)[0] or None
+
+
+def sanitize_published_definitions(definitions: dict) -> dict:
+    cleaned: dict = {}
+    for language, block in (definitions or {}).items():
+        if not isinstance(block, dict):
+            cleaned[language] = block
+            continue
+        item = dict(block)
+        short = item.get("short")
+        fuller = item.get("fuller")
+        if language in {"es", "he"}:
+            if isinstance(short, str):
+                item["short"] = collapse_runaway_gloss(short)
+            if isinstance(fuller, str) and len(fuller) > PUBLISHED_FULLER_LIMIT:
+                item["fuller"] = None
+            if not item.get("short") and isinstance(fuller, str):
+                item["short"] = collapse_runaway_gloss(fuller)
+        cleaned[language] = item
+    return cleaned
 
 
 def occurrence_shard_key(strong: str) -> str:
@@ -106,7 +163,7 @@ def _definition_payload(store: dict, lexicon: dict, occurrences: dict) -> dict:
         occurrence = occurrences.get(strong, {})
         lexical = lexicon.get(strong, {"strong": strong})
         published[strong] = {
-            "definitions": definitions,
+            "definitions": sanitize_published_definitions(definitions),
             "lemma": lexical.get("lemma", ""),
             "occurrences_count": occurrence.get("count", 0),
             "source_language": "greek",
@@ -329,7 +386,62 @@ def publish_preview(
     return release_dir
 
 
-def existing_preview_release(public_data_dir: Path) -> Path | None:
+def _store_definition_map(store: dict) -> dict[str, dict]:
+    mapped: dict[str, dict] = {}
+    for strong, entry in store.get("entries", {}).items():
+        senses = entry.get("senses") or []
+        if not senses:
+            continue
+        mapped[strong] = senses[0].get("definitions") or {}
+    return mapped
+
+
+def _usable_language_counts(definitions_by_strong: dict) -> dict[str, int]:
+    counts = {"es": 0, "he": 0}
+    for block in definitions_by_strong.values():
+        for language in counts:
+            if usable_text(block.get(language)):
+                counts[language] += 1
+    return counts
+
+
+def translations_missing_from_preview(
+    public_data_dir: Path,
+    store: dict | None,
+) -> bool:
+    """True when the store has Spanish/Hebrew drafts the published lexicon lacks."""
+    if not store:
+        return False
+    lexicon_path = (
+        public_data_dir
+        / "greek"
+        / "releases"
+        / "sblgnt"
+        / STEPBIBLE_COMMIT
+        / "lexicon.json"
+    )
+    if not lexicon_path.is_file():
+        return True
+    store_counts = _usable_language_counts(_store_definition_map(store))
+    if store_counts["es"] == 0 and store_counts["he"] == 0:
+        return False
+    lexicon = read_json(lexicon_path)
+    published_counts = _usable_language_counts(
+        {
+            strong: row.get("definitions") or {}
+            for strong, row in lexicon.items()
+        }
+    )
+    return any(
+        published_counts[language] < store_counts[language]
+        for language in ("es", "he")
+    )
+
+
+def existing_preview_release(
+    public_data_dir: Path,
+    store: dict | None = None,
+) -> Path | None:
     """Return the published release if it already matches the recorded revision."""
     release_dir = (
         public_data_dir / "greek" / "releases" / "sblgnt" / STEPBIBLE_COMMIT
@@ -344,6 +456,8 @@ def existing_preview_release(public_data_dir: Path) -> Path | None:
         validate_release_tree(release_dir)
     except (OSError, ValueError, KeyError, TypeError):
         return None
+    if translations_missing_from_preview(public_data_dir, store):
+        return None
     return release_dir
 
 
@@ -352,9 +466,14 @@ def build_and_publish_preview(
     public_data_dir: Path = DEFAULT_PUBLIC_DIR,
     force: bool = False,
     allow_fetch: bool = True,
+    definitions_dir: Path | None = None,
 ) -> Path:
+    store_path = (definitions_dir or DEFAULT_DEFINITIONS_DIR) / "definitions.json"
+    store = read_json(store_path) if store_path.is_file() else None
+    if store is not None:
+        apply_translation_cache(store, load_cache(default_cache_path()))
     if not force:
-        existing = existing_preview_release(public_data_dir)
+        existing = existing_preview_release(public_data_dir, store=store)
         if existing is not None:
             print(
                 f"[davar-greek] using existing preview {existing} "
@@ -375,14 +494,17 @@ def build_and_publish_preview(
         [path.read_text(encoding="utf-8") for path in tagnt_paths],
         tbesg_text,
     )
-    print("[davar-greek] mapping TBESG/UBS definitions", flush=True)
-    definitions = build_definitions(
-        parse_tbesg_file(tbesg_text),
-        set(bundle["occurrences"]),
-        parse_ubs_file(sources["ubs-es"].read_text(encoding="utf-8")),
-    )
-    apply_translation_cache(definitions, load_cache(default_cache_path()))
+    if store is None:
+        print("[davar-greek] mapping TBESG/UBS definitions", flush=True)
+        store = build_definitions(
+            parse_tbesg_file(tbesg_text),
+            set(bundle["occurrences"]),
+            parse_ubs_file(sources["ubs-es"].read_text(encoding="utf-8")),
+        )
+        apply_translation_cache(store, load_cache(default_cache_path()))
+    else:
+        print("[davar-greek] using translated definition drafts", flush=True)
     print("[davar-greek] writing preview bundle", flush=True)
-    output = publish_preview(bundle, definitions, public_data_dir)
+    output = publish_preview(bundle, store, public_data_dir)
     print(f"[davar-greek] publish-preview ready {output}", flush=True)
     return output
