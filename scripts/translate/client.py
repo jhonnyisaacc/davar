@@ -14,6 +14,7 @@ DEFAULT_MODEL = "google/gemini-2.5-flash"
 DEFAULT_PROVIDER_SORT = "latency"
 DEFAULT_TIMEOUT = 180
 BUDGET_HTTP_CODES = frozenset({402, 429})
+FATAL_HTTP_CODES = frozenset({401, 403})
 HTTP_RETRIES = 3
 REFERER = "https://github.com/jhonnyisaacc/davar"
 TITLE = "Davar translations"
@@ -74,6 +75,7 @@ def build_request_body(
     response_healing: bool = False,
     reasoning_effort: str | None = None,
     temperature: float = 0,
+    max_tokens: int | None = None,
 ) -> dict[str, Any]:
     use_structured = (
         supports_structured_output(model) if structured is None else structured
@@ -88,6 +90,8 @@ def build_request_body(
     }
     if session_id:
         payload["session_id"] = session_id
+    if max_tokens:
+        payload["max_tokens"] = max_tokens
     if reasoning_effort:
         payload["reasoning"] = {"effort": reasoning_effort, "exclude": True}
     if use_structured:
@@ -239,6 +243,11 @@ def is_budget_error(error: Exception) -> bool:
     return any(f"HTTP {code}" in text for code in BUDGET_HTTP_CODES)
 
 
+def is_fatal_error(error: Exception) -> bool:
+    text = str(error)
+    return any(f"HTTP {code}" in text for code in FATAL_HTTP_CODES)
+
+
 def load_env_files(*paths: Path) -> None:
     for path in paths:
         if not path.is_file():
@@ -378,6 +387,10 @@ class LiveTransport:
                 if body.get("stream"):
                     return self._stream(url, body, merged)
                 response = self._http().post(url, json=body, headers=merged)
+                if response.status_code in FATAL_HTTP_CODES:
+                    raise RuntimeError(
+                        f"OpenRouter HTTP {response.status_code}: {response.text[:500]}"
+                    )
                 if response.status_code in BUDGET_HTTP_CODES:
                     wait = retry_after_seconds(
                         response.headers, attempt, response.text
@@ -437,6 +450,7 @@ def complete(
     response_healing: bool = False,
     reasoning_effort: str | None = None,
     extra_headers: dict[str, str] | None = None,
+    max_tokens: int | None = None,
 ) -> CompletionResult:
     body = build_request_body(
         messages,
@@ -448,5 +462,6 @@ def complete(
         json_schema=json_schema,
         response_healing=response_healing,
         reasoning_effort=reasoning_effort,
+        max_tokens=max_tokens,
     )
     return transport.complete(body, extra_headers or {})

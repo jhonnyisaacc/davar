@@ -16,6 +16,7 @@ from scripts.translate.client import (
     Transport,
     complete,
     is_budget_error,
+    is_fatal_error,
 )
 
 DEFAULT_CONCURRENCY = 8
@@ -242,6 +243,8 @@ def _translate_batch(
             return parsed, skipped, result.usage
         except Exception as error:  # noqa: BLE001 — retry then split
             last_error = error
+            if is_fatal_error(error):
+                raise
             if is_budget_error(error) and attempt + 1 < MAX_RETRIES:
                 continue
             if len(jobs) > 1 and attempt >= 1:
