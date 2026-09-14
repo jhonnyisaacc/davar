@@ -9,8 +9,9 @@
 # License: One verse per screen, visible attribution required
 data/ts2009/
 
-# Official STEPBible/UBS downloads and generated Greek artifacts.
-# Tests use committed fixtures; do not vendor the 30 MB source files.
+# Official STEPBible/UBS downloads (~48 MB) and generated importer artifacts.
+# Tests use committed fixtures; do not vendor the official source files.
+# The compact runtime preview in data/greek/preview/ is committed so Pages can copy it.
 data/greek/source/
 data/greek/sblgnt-tagnt/
 data/greek/definitions/

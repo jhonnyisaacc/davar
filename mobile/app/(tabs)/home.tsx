@@ -33,6 +33,7 @@ import {
   useTranslation,
   getSupportTelegramUrl,
 } from "@/src/i18n/useTranslation";
+import { GreekAttribution } from "@/src/components/GreekAttribution";
 
 const createStyles = (colors: ReturnType<typeof getColors>) =>
   StyleSheet.create({
@@ -214,6 +215,14 @@ const createStyles = (colors: ReturnType<typeof getColors>) =>
       fontSize: 11,
       color: colors.textSecondary,
       opacity: 0.7,
+    },
+    attributionCard: {
+      borderRadius: radii.xl,
+      padding: spacing[5],
+      backgroundColor: colors.surface,
+      borderWidth: 1,
+      borderColor: colors.border,
+      marginTop: spacing[4],
     },
   });
 
@@ -580,6 +589,13 @@ export default function HomeScreen() {
                 </Pressable>
               ))}
             </View>
+          </View>
+
+          <View style={styles.attributionCard}>
+            <GreekAttribution
+              titleColor={colors.textPrimary}
+              mutedColor={colors.textSecondary}
+            />
           </View>
 
           <View style={styles.versionMetaContainer}>

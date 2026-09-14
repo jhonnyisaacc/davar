@@ -17,8 +17,8 @@ import {
 } from "./config";
 import {
   mergeGreekBundleVersion,
+  resolveGreekPublicData,
   restoreGreekPublicData,
-  stashCurrentGreekPublicData,
 } from "./greek-public-data";
 import { VERSIFICATION_DATA } from "../../shared/versificationData";
 
@@ -968,7 +968,7 @@ const main = async (): Promise<void> => {
   const shouldExportTs2009Static = process.env.EXPORT_TS2009_STATIC === "1";
   console.log("[davar-static-data] phase=generate start");
 
-  const greekStash = stashCurrentGreekPublicData();
+  const greekStash = resolveGreekPublicData();
   await rm(WEB_PUBLIC_DATA_ROOT, { recursive: true, force: true });
   await mkdir(WEB_PUBLIC_DATA_ROOT, { recursive: true });
 

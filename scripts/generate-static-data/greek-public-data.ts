@@ -2,11 +2,18 @@ import { cpSync, existsSync, mkdtempSync, readFileSync, rmSync } from "fs";
 import { tmpdir } from "os";
 import { join } from "path";
 import { GREEK_RECORDED_REVISION } from "../../shared/greekBesorah";
-import { WEB_PUBLIC_DATA_ROOT } from "./config";
+import { DATA_ROOT, WEB_PUBLIC_DATA_ROOT } from "./config";
+
+export const COMMITTED_GREEK_PREVIEW_ROOT = join(
+  DATA_ROOT,
+  "greek",
+  "preview",
+);
 
 export type GreekPublicStash = {
   dir: string;
   revision: string;
+  ephemeral?: boolean;
 };
 
 type GreekManifest = {
@@ -23,22 +30,42 @@ export const shouldKeepGreekPublicData = (
   manifest.complete === true &&
   manifest.validated === true;
 
-export const stashCurrentGreekPublicData = (): GreekPublicStash | null => {
-  const greekDir = join(WEB_PUBLIC_DATA_ROOT, "greek");
+const readGreekManifest = (greekDir: string): GreekManifest | null => {
   const manifestPath = join(greekDir, "manifest.json");
   if (!existsSync(manifestPath)) {
     return null;
   }
-  let manifest: GreekManifest;
   try {
-    manifest = JSON.parse(readFileSync(manifestPath, "utf-8")) as GreekManifest;
+    return JSON.parse(readFileSync(manifestPath, "utf-8")) as GreekManifest;
   } catch {
     return null;
   }
-  if (!shouldKeepGreekPublicData(manifest) || !manifest.revision) {
-    console.log(
-      `[davar-static-data] greek-preview=stale revision=${manifest.revision ?? "missing"} recorded=${GREEK_RECORDED_REVISION}`,
-    );
+};
+
+const copyGreekTree = (sourceDir: string, destDir: string): void => {
+  const greekDir = join(sourceDir, "greek");
+  if (existsSync(greekDir)) {
+    cpSync(greekDir, join(destDir, "greek"), { recursive: true });
+  }
+  const bundleDir = join(sourceDir, "greek-sblgnt");
+  if (existsSync(bundleDir)) {
+    cpSync(bundleDir, join(destDir, "greek-sblgnt"), { recursive: true });
+  }
+  const bundleIndex = join(sourceDir, "greek-sblgnt.json");
+  if (existsSync(bundleIndex)) {
+    cpSync(bundleIndex, join(destDir, "greek-sblgnt.json"));
+  }
+};
+
+export const stashCurrentGreekPublicData = (): GreekPublicStash | null => {
+  const greekDir = join(WEB_PUBLIC_DATA_ROOT, "greek");
+  const manifest = readGreekManifest(greekDir);
+  if (!manifest || !shouldKeepGreekPublicData(manifest) || !manifest.revision) {
+    if (existsSync(join(greekDir, "manifest.json"))) {
+      console.log(
+        `[davar-static-data] greek-preview=stale revision=${manifest?.revision ?? "missing"} recorded=${GREEK_RECORDED_REVISION}`,
+      );
+    }
     return null;
   }
   const dir = mkdtempSync(join(tmpdir(), "davar-greek-public-"));
@@ -54,8 +81,27 @@ export const stashCurrentGreekPublicData = (): GreekPublicStash | null => {
   console.log(
     `[davar-static-data] greek-preview=keep revision=${manifest.revision}`,
   );
-  return { dir, revision: manifest.revision };
+  return { dir, revision: manifest.revision, ephemeral: true };
 };
+
+export const loadCommittedGreekPreview = (): GreekPublicStash | null => {
+  const greekDir = join(COMMITTED_GREEK_PREVIEW_ROOT, "greek");
+  const manifest = readGreekManifest(greekDir);
+  if (!manifest || !shouldKeepGreekPublicData(manifest) || !manifest.revision) {
+    return null;
+  }
+  console.log(
+    `[davar-static-data] greek-preview=committed revision=${manifest.revision}`,
+  );
+  return {
+    dir: COMMITTED_GREEK_PREVIEW_ROOT,
+    revision: manifest.revision,
+    ephemeral: false,
+  };
+};
+
+export const resolveGreekPublicData = (): GreekPublicStash | null =>
+  stashCurrentGreekPublicData() ?? loadCommittedGreekPreview();
 
 export const restoreGreekPublicData = (
   stash: GreekPublicStash | null,
@@ -82,7 +128,9 @@ export const restoreGreekPublicData = (
       );
     }
   } finally {
-    rmSync(stash.dir, { recursive: true, force: true });
+    if (stash.ephemeral) {
+      rmSync(stash.dir, { recursive: true, force: true });
+    }
   }
 };
 
