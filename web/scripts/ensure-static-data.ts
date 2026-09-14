@@ -1,5 +1,6 @@
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { GREEK_RECORDED_REVISION } from "@davar/shared/greekBesorah";
 
 const webRoot = join(import.meta.dir, "..");
 const publicDataDir = join(webRoot, "public", "data");
@@ -51,11 +52,27 @@ if (
 }
 
 const greekManifestPath = join(publicDataDir, "greek", "manifest.json");
+const isCurrentGreekPreview = (): boolean => {
+	if (!existsSync(greekManifestPath)) return false;
+	try {
+		const manifest = JSON.parse(readFileSync(greekManifestPath, "utf-8")) as {
+			revision?: string;
+			complete?: boolean;
+			validated?: boolean;
+		};
+		return (
+			manifest.revision === GREEK_RECORDED_REVISION &&
+			manifest.complete === true &&
+			manifest.validated === true
+		);
+	} catch {
+		return false;
+	}
+};
 const shouldPublishGreekPreview =
-	process.env.PUBLIC_GREEK_PREVIEW_ENABLED === "1" ||
-	process.env.PUBLIC_NODE_ENV === "development";
+	process.env.PUBLIC_GREEK_PREVIEW_ENABLED !== "0";
 
-if (shouldPublishGreekPreview && !existsSync(greekManifestPath)) {
+if (shouldPublishGreekPreview && !isCurrentGreekPreview()) {
 	console.log("[davar-web] greek-preview=missing generating");
 	const greekPreview = Bun.spawnSync(
 		[

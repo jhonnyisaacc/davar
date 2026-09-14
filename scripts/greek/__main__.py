@@ -139,6 +139,8 @@ def cmd_publish_preview(args: argparse.Namespace) -> int:
     output = build_and_publish_preview(
         source_dir=Path(args.source_dir),
         public_data_dir=Path(args.public_data_dir),
+        force=args.force,
+        allow_fetch=not args.no_fetch,
     )
     print(output)
     return 0
@@ -281,6 +283,16 @@ def build_parser() -> argparse.ArgumentParser:
     )
     preview.add_argument("--source-dir", default=str(DEFAULT_SOURCE_DIR))
     preview.add_argument("--public-data-dir", default=str(DEFAULT_PUBLIC_DIR))
+    preview.add_argument(
+        "--force",
+        action="store_true",
+        help="Rebuild even when the recorded revision is already published",
+    )
+    preview.add_argument(
+        "--no-fetch",
+        action="store_true",
+        help="Reuse cached sources or an existing preview; never download",
+    )
     preview.set_defaults(func=cmd_publish_preview)
 
     release = sub.add_parser(

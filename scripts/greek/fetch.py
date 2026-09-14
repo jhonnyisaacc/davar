@@ -63,6 +63,7 @@ def fetch_all(
     dest_dir: Path | None = None,
     local_dirs: list[Path] | None = None,
     include_ubs: bool = False,
+    allow_network: bool = True,
 ) -> dict[str, Path]:
     dest = dest_dir or SOURCE_DIR / STEPBIBLE_COMMIT
     found: dict[str, Path] = {}
@@ -72,11 +73,22 @@ def fetch_all(
         cached = existing_if_valid(source, dest)
         if copied or cached:
             print(f"[davar-greek] using cached {source.filename}", flush=True)
-        found[source.key] = copied or cached or fetch_source(source, dest)
+            found[source.key] = copied or cached
+            continue
+        if not allow_network:
+            raise FileNotFoundError(
+                f"Missing cached {source.filename} in {dest}; network fetch is disabled"
+            )
+        found[source.key] = fetch_source(source, dest)
     if include_ubs:
+        dest.mkdir(parents=True, exist_ok=True)
         ubs_path = dest / "UBSGreekNTDic-v1.0-es.JSON"
         if ubs_path.is_file() and ubs_path.stat().st_size > 0:
             print("[davar-greek] using cached UBS Spanish lexicon", flush=True)
+        elif not allow_network:
+            raise FileNotFoundError(
+                f"Missing cached UBS Spanish lexicon in {dest}; network fetch is disabled"
+            )
         else:
             print("[davar-greek] fetching UBS Spanish lexicon", flush=True)
             with urllib.request.urlopen(UBS_ES_URL, timeout=60) as response:

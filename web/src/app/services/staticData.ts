@@ -6,6 +6,7 @@ import {
 	greekLexiconPath,
 	greekOccurrencesShardPath,
 	greekStrongFamily,
+	isGreekBesorahEnabled,
 	type GreekReleaseManifest,
 	type ScriptureSourceLanguage,
 } from "../../../../shared/greekBesorah";
@@ -1609,11 +1610,11 @@ type GreekOccurrenceBucket = {
 
 export const isGreekPreviewEnabled = (): boolean => {
 	try {
-		return (
-			import.meta.env.PUBLIC_GREEK_PREVIEW_ENABLED === "1" ||
-			import.meta.env.PUBLIC_GREEK_PUBLIC_ENABLED === "1" ||
-			import.meta.env.PUBLIC_NODE_ENV === "development"
-		);
+		return isGreekBesorahEnabled({
+			PUBLIC_GREEK_PREVIEW_ENABLED:
+				import.meta.env.PUBLIC_GREEK_PREVIEW_ENABLED,
+			PUBLIC_GREEK_PUBLIC_ENABLED: import.meta.env.PUBLIC_GREEK_PUBLIC_ENABLED,
+		});
 	} catch {
 		// bun dev serves modules without the production `define` inlines.
 		return true;

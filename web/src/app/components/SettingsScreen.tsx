@@ -556,10 +556,13 @@ export function SettingsScreen({
 									<RetroIcons.Qumran />
 								</div>
 								<div
-									className="text-lg font-semibold text-[var(--text-primary)]"
+									className="flex items-center gap-2 text-lg font-semibold text-[var(--text-primary)]"
 									style={{ fontFamily: "'Inter', sans-serif" }}
 								>
 									{t("settings.besorahLanguage.title")}
+									<span className="rounded-full bg-[var(--copper-base)] px-2 py-0.5 text-[10px] font-semibold uppercase leading-3 text-white">
+										{t("settings.besorahLanguage.new")}
+									</span>
 								</div>
 							</div>
 							<SettingsPillSelect

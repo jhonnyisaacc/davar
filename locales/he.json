@@ -166,7 +166,17 @@
       "besorahLabel": "בשורה",
       "besorahValue": "דליץש (1877), הוטר (1599–1602)",
       "greekTextLabel": "טקסט יווני",
-      "greekTextValue": "SBLGNT (2010)"
+      "greekTextValue": "SBLGNT (Holmes 2010)",
+      "greekTagsLabel": "תיוג יווני",
+      "greekTagsValue": "STEPBible TAGNT",
+      "greekLexiconLabel": "לקסיקון יווני",
+      "greekLexiconValue": "TBESG (אנגלית), UBS (ספרדית)"
+    },
+    "attributionTitle": "ייחוס",
+    "attribution": {
+      "stepbible": "תגיות המילים ביוונית והנתונים הלקסיקליים באנגלית הם מ-STEP Bible (www.STEPBible.org), על בסיס עבודה ב-Tyndale House, Cambridge, ברישיון CC BY 4.0. מקור: https://github.com/STEPBible/STEPBible-Data. שינויים, אם ישנם, מתועדים עם גרסת הנתונים.",
+      "sblgnt": "הקריאה היוונית המוצגת היא ה-SBL Greek New Testament, בעריכת Michael W. Holmes. Copyright © 2010 Society of Biblical Literature ו-Logos Bible Software. ברישיון CC BY 4.0. https://sblgnt.com/license/",
+      "ubs": "ערכים לקסיקליים בספרדית עובדו ממילון UBS של הברית החדשה היוונית © United Bible Societies, ברישיון CC BY-SA 4.0. https://github.com/ubsicap/ubs-open-license. עיבודים של חומר זה חייבים להישאר תחת CC BY-SA 4.0."
     },
     "aboutTitle": "אודות",
     "aboutItems": {

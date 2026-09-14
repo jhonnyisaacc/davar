@@ -15,6 +15,38 @@ interface HomeScreenProps {
 	onDonateClick: () => void;
 }
 
+const ATTRIBUTION_URL = /(https?:\/\/[^\s]+|www\.[^\s]+)/g;
+
+function attributionHref(part: string) {
+	const trimmed = part.replace(/[),.;]+$/u, "");
+	return trimmed.startsWith("http") ? trimmed : `https://${trimmed}`;
+}
+
+function linkifyAttribution(text: string) {
+	return text.split(ATTRIBUTION_URL).map((part) => {
+		const isUrl = part.startsWith("http") || part.startsWith("www.");
+		if (!isUrl) {
+			return part;
+		}
+		const href = attributionHref(part);
+		const visible = part.replace(/[),.;]+$/u, "");
+		const trailing = part.slice(visible.length);
+		return (
+			<span key={href}>
+				<a
+					href={href}
+					target="_blank"
+					rel="noopener noreferrer"
+					className="underline decoration-[var(--copper-highlight)] underline-offset-2 hover:text-[var(--copper-highlight)]"
+				>
+					{visible}
+				</a>
+				{trailing}
+			</span>
+		);
+	});
+}
+
 export function HomeScreen({
 	language,
 	onFeaturesClick,
@@ -47,6 +79,19 @@ export function HomeScreen({
 			label: t("home.sources.greekTextLabel"),
 			value: t("home.sources.greekTextValue"),
 		},
+		{
+			label: t("home.sources.greekTagsLabel"),
+			value: t("home.sources.greekTagsValue"),
+		},
+		{
+			label: t("home.sources.greekLexiconLabel"),
+			value: t("home.sources.greekLexiconValue"),
+		},
+	];
+	const attributionItems = [
+		t("home.attribution.stepbible"),
+		t("home.attribution.sblgnt"),
+		t("home.attribution.ubs"),
 	];
 	const aboutItems = [
 		{ label: t("home.aboutItems.terms"), Icon: FileText, href: "/terms" },
@@ -95,6 +140,20 @@ export function HomeScreen({
 									{item.note ?? ""}
 								</span>
 							</div>
+						))}
+					</div>
+					<div className="mx-auto mt-8 max-w-xl space-y-3 px-4">
+						<div className="text-sm tracking-[0.3em] uppercase text-[var(--copper-highlight)]">
+							{t("home.attributionTitle")}
+						</div>
+						{attributionItems.map((notice) => (
+							<p
+								key={notice.slice(0, 48)}
+								className="text-xs leading-relaxed text-[var(--text-secondary-muted)]"
+								style={{ fontFamily: "'Inter', sans-serif" }}
+							>
+								{linkifyAttribution(notice)}
+							</p>
 						))}
 					</div>
 				</div>

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import re
 import shutil
 from pathlib import Path
 
@@ -14,13 +15,75 @@ from scripts.greek.parse_tbesg import parse_tbesg_file
 from scripts.greek.parse_ubs import parse_ubs_file
 from scripts.greek.sources import STEPBIBLE_COMMIT
 from scripts.greek.stable_json import dumps, read_json, write_json
-from scripts.greek.translate import apply_translation_cache, default_cache_path, load_cache
+from scripts.greek.translate import (
+    DEFAULT_DEFINITIONS_DIR,
+    apply_translation_cache,
+    default_cache_path,
+    load_cache,
+    usable_text,
+)
 from scripts.greek.transliteration import RULE_VERSION
 
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_SOURCE_DIR = ROOT / "data" / "greek" / "source" / STEPBIBLE_COMMIT
 DEFAULT_PUBLIC_DIR = ROOT / "web" / "public" / "data"
+DEFAULT_PREVIEW_DIR = ROOT / "data" / "greek" / "preview"
 PAGES_FILE_LIMIT_BYTES = 24 * 1024 * 1024
+PUBLISHED_SHORT_LIMIT = 120
+PUBLISHED_FULLER_LIMIT = 6000
+PUBLISHED_DEFINITION_KEYS = ("fuller", "license", "review_status", "short", "source")
+_GLOSS_SPLIT = re.compile(r"[,/;|]+")
+
+
+def collapse_runaway_gloss(text: str | None, *, limit: int = PUBLISHED_SHORT_LIMIT) -> str | None:
+    """Keep the unique head of a looping model gloss; drop the rest."""
+    if not text:
+        return None
+    cleaned = " ".join(str(text).split()).strip()
+    if not cleaned:
+        return None
+    seen: list[str] = []
+    seen_set: set[str] = set()
+    for part in _GLOSS_SPLIT.split(cleaned):
+        token = part.strip()
+        if not token:
+            continue
+        if token in seen_set:
+            break
+        seen.append(token)
+        seen_set.add(token)
+        if len(", ".join(seen)) > limit:
+            seen.pop()
+            break
+    if seen:
+        return ", ".join(seen)
+    if len(cleaned) <= limit:
+        return cleaned
+    return cleaned[:limit].rsplit(" ", 1)[0] or None
+
+
+def sanitize_published_definitions(definitions: dict) -> dict:
+    cleaned: dict = {}
+    for language, block in (definitions or {}).items():
+        if not isinstance(block, dict):
+            cleaned[language] = block
+            continue
+        item = dict(block)
+        short = item.get("short")
+        fuller = item.get("fuller")
+        if language in {"es", "he"}:
+            if isinstance(short, str):
+                item["short"] = collapse_runaway_gloss(short)
+            if isinstance(fuller, str) and len(fuller) > PUBLISHED_FULLER_LIMIT:
+                item["fuller"] = None
+            if not item.get("short") and isinstance(fuller, str):
+                item["short"] = collapse_runaway_gloss(fuller)
+        cleaned[language] = {
+            key: item[key]
+            for key in PUBLISHED_DEFINITION_KEYS
+            if key in item and item[key] not in (None, "")
+        }
+    return cleaned
 
 
 def occurrence_shard_key(strong: str) -> str:
@@ -58,28 +121,56 @@ def occurrence_shards(occurrences: dict[str, dict]) -> dict[str, dict[str, dict]
 
 
 def checksum(payload: object) -> str:
-    return hashlib.sha256(dumps(payload).encode("utf-8")).hexdigest()
+    return hashlib.sha256(dumps(payload, compact=True).encode("utf-8")).hexdigest()
+
+
+def write_published_json(path: Path, payload: object) -> None:
+    write_json(path, payload, compact=True)
+
+
+def _published_word(word: dict, position: int) -> dict:
+    published = {
+        "index": word["index"],
+        "lemma": word.get("lemma", ""),
+        "morph": word.get("morph"),
+        "position": position,
+        "ref": word.get("ref"),
+        "strong": word["strong"],
+        "text": word["text"],
+        "word_type": word.get("word_type"),
+    }
+    for key in (
+        "lemma_translit_en",
+        "lemma_translit_es",
+        "lemma_translit_he",
+        "translit_en",
+        "translit_es",
+        "translit_he",
+    ):
+        if word.get(key):
+            published[key] = word[key]
+    lookup = word.get("strong_lookup")
+    if lookup and lookup != word["strong"]:
+        published["strong_lookup"] = lookup
+    if word.get("index") != position:
+        published["tagnt_index"] = word["index"]
+    return {key: value for key, value in published.items() if value is not None}
 
 
 def _chapter_payload(book_id: str, chapter: int, verses: list[dict]) -> dict:
     normalized_verses: list[dict] = []
     for verse in verses:
-        words = []
-        for position, word in enumerate(verse["words"], start=1):
-            words.append(
-                {
-                    **word,
-                    "position": position,
-                    "tagnt_index": word["index"],
-                }
-            )
+        words = [
+            _published_word(word, position)
+            for position, word in enumerate(verse["words"], start=1)
+        ]
         normalized_verses.append(
             {
-                **verse,
-                "source_language": "greek",
-                "edition": "sblgnt",
-                "revision": STEPBIBLE_COMMIT,
+                "chapter": verse["chapter"],
+                "source_ref": verse.get("source_ref"),
                 "text": " ".join(word["text"] for word in words),
+                "verse": verse["verse"],
+                "verse_id": verse["verse_id"],
                 "words": words,
             }
         )
@@ -106,10 +197,9 @@ def _definition_payload(store: dict, lexicon: dict, occurrences: dict) -> dict:
         occurrence = occurrences.get(strong, {})
         lexical = lexicon.get(strong, {"strong": strong})
         published[strong] = {
-            "definitions": definitions,
+            "definitions": sanitize_published_definitions(definitions),
             "lemma": lexical.get("lemma", ""),
             "occurrences_count": occurrence.get("count", 0),
-            "source_language": "greek",
             "strong": lexical.get("strong", strong),
             "translit_en": lexical.get("translit_en"),
             "translit_es": lexical.get("translit_es"),
@@ -242,10 +332,10 @@ def publish_preview(
         chapter_checksums: dict[str, str] = {}
         for chapter, chapter_verses in sorted(chapters.items()):
             payload = _chapter_payload(book_id, chapter, chapter_verses)
-            write_json(staging_dir / "books" / book_id / f"{chapter}.json", payload)
+            write_published_json(staging_dir / "books" / book_id / f"{chapter}.json", payload)
             mobile_book["chapters"][str(chapter)] = payload["verses"]
             chapter_checksums[str(chapter)] = checksum(payload)
-        write_json(mobile_books_dir / f"{book_id}.json", mobile_book)
+        write_published_json(mobile_books_dir / f"{book_id}.json", mobile_book)
         book_index[book_id] = {
             "chapters": sorted(chapters),
             "checksums": chapter_checksums,
@@ -257,18 +347,18 @@ def publish_preview(
         bundle["lexicon"],
         bundle["occurrences"],
     )
-    write_json(staging_dir / "lexicon.json", lexicon)
+    write_published_json(staging_dir / "lexicon.json", lexicon)
     assert_public_file_size(staging_dir / "lexicon.json")
     shard_index: dict[str, dict[str, str]] = {}
     for key, payload in occurrence_shards(bundle["occurrences"]).items():
         shard_path = staging_dir / "occurrences" / f"{key}.json"
-        write_json(shard_path, payload)
+        write_published_json(shard_path, payload)
         assert_public_file_size(shard_path)
         shard_index[key] = {
             "checksum": checksum(payload),
             "path": f"occurrences/{key}.json",
         }
-    write_json(staging_dir / "source.json", bundle["source"])
+    write_published_json(staging_dir / "source.json", bundle["source"])
     (staging_dir / "MODIFICATIONS.md").write_text(
         bundle["modifications"],
         encoding="utf-8",
@@ -298,13 +388,13 @@ def publish_preview(
             else {}
         ),
     }
-    write_json(staging_dir / "manifest.json", manifest)
+    write_published_json(staging_dir / "manifest.json", manifest)
     validate_release_tree(staging_dir, manifest)
     shutil.rmtree(release_dir, ignore_errors=True)
     release_dir.parent.mkdir(parents=True, exist_ok=True)
     staging_dir.replace(release_dir)
-    write_json(active_manifest_path, manifest)
-    write_json(
+    write_published_json(active_manifest_path, manifest)
+    write_published_json(
         public_data_dir / "bundles" / "greek-sblgnt.json",
         {
             "books": sorted(bundle["books"]),
@@ -325,16 +415,150 @@ def publish_preview(
     versions_path = public_data_dir / "bundles" / "versions.json"
     versions = read_json(versions_path) if versions_path.is_file() else {}
     versions[f"greek:sblgnt:{STEPBIBLE_COMMIT}"] = 1
-    write_json(versions_path, versions)
+    write_published_json(versions_path, versions)
+    sync_committed_preview(public_data_dir)
+    return release_dir
+
+
+def sync_committed_preview(public_data_dir: Path) -> None:
+    """Mirror the published runtime tree into the committed preview directory."""
+    if public_data_dir.resolve() != DEFAULT_PUBLIC_DIR.resolve():
+        return
+    greek_src = public_data_dir / "greek"
+    if not greek_src.is_dir():
+        return
+    DEFAULT_PREVIEW_DIR.mkdir(parents=True, exist_ok=True)
+    dest_greek = DEFAULT_PREVIEW_DIR / "greek"
+    if dest_greek.exists():
+        shutil.rmtree(dest_greek)
+    shutil.copytree(greek_src, dest_greek)
+    bundle_src = public_data_dir / "bundles" / "greek-sblgnt"
+    dest_bundle = DEFAULT_PREVIEW_DIR / "greek-sblgnt"
+    if bundle_src.is_dir():
+        if dest_bundle.exists():
+            shutil.rmtree(dest_bundle)
+        shutil.copytree(bundle_src, dest_bundle)
+    index_src = public_data_dir / "bundles" / "greek-sblgnt.json"
+    if index_src.is_file():
+        shutil.copy2(index_src, DEFAULT_PREVIEW_DIR / "greek-sblgnt.json")
+
+
+def _store_definition_map(store: dict) -> dict[str, dict]:
+    mapped: dict[str, dict] = {}
+    for strong, entry in store.get("entries", {}).items():
+        senses = entry.get("senses") or []
+        if not senses:
+            continue
+        mapped[strong] = senses[0].get("definitions") or {}
+    return mapped
+
+
+def _usable_language_counts(definitions_by_strong: dict) -> dict[str, int]:
+    counts = {"es": 0, "he": 0}
+    for block in definitions_by_strong.values():
+        for language in counts:
+            if usable_text(block.get(language)):
+                counts[language] += 1
+    return counts
+
+
+def translations_missing_from_preview(
+    public_data_dir: Path,
+    store: dict | None,
+) -> bool:
+    """True when the store has Spanish/Hebrew drafts the published lexicon lacks."""
+    if not store:
+        return False
+    lexicon_path = (
+        public_data_dir
+        / "greek"
+        / "releases"
+        / "sblgnt"
+        / STEPBIBLE_COMMIT
+        / "lexicon.json"
+    )
+    if not lexicon_path.is_file():
+        return True
+    store_counts = _usable_language_counts(_store_definition_map(store))
+    if store_counts["es"] == 0 and store_counts["he"] == 0:
+        return False
+    lexicon = read_json(lexicon_path)
+    published_counts = _usable_language_counts(
+        {
+            strong: row.get("definitions") or {}
+            for strong, row in lexicon.items()
+        }
+    )
+    return any(
+        published_counts[language] < store_counts[language]
+        for language in ("es", "he")
+    )
+
+
+def _published_payload_is_current(release_dir: Path) -> bool:
+    sample = next(release_dir.glob("books/*/*.json"), None)
+    if sample is None:
+        return False
+    raw = sample.read_text(encoding="utf-8")
+    if raw.startswith("{\n"):
+        return False
+    payload = read_json(sample)
+    verses = payload.get("verses") or []
+    words = (verses[0].get("words") or []) if verses else []
+    return not (words and "transliteration" in words[0])
+
+
+def existing_preview_release(
+    public_data_dir: Path,
+    store: dict | None = None,
+) -> Path | None:
+    """Return the published release if it already matches the recorded revision."""
+    release_dir = (
+        public_data_dir / "greek" / "releases" / "sblgnt" / STEPBIBLE_COMMIT
+    )
+    active_path = public_data_dir / "greek" / "manifest.json"
+    if not release_dir.is_dir() or not active_path.is_file():
+        return None
+    try:
+        active = read_json(active_path)
+        if active.get("revision") != STEPBIBLE_COMMIT:
+            return None
+        if not _published_payload_is_current(release_dir):
+            return None
+        validate_release_tree(release_dir)
+    except (OSError, ValueError, KeyError, TypeError):
+        return None
+    if translations_missing_from_preview(public_data_dir, store):
+        return None
     return release_dir
 
 
 def build_and_publish_preview(
     source_dir: Path = DEFAULT_SOURCE_DIR,
     public_data_dir: Path = DEFAULT_PUBLIC_DIR,
+    force: bool = False,
+    allow_fetch: bool = True,
+    definitions_dir: Path | None = None,
 ) -> Path:
+    store_path = (definitions_dir or DEFAULT_DEFINITIONS_DIR) / "definitions.json"
+    store = read_json(store_path) if store_path.is_file() else None
+    if store is not None:
+        apply_translation_cache(store, load_cache(default_cache_path()))
+    if not force:
+        existing = existing_preview_release(public_data_dir, store=store)
+        if existing is not None:
+            print(
+                f"[davar-greek] using existing preview {existing} "
+                f"revision={STEPBIBLE_COMMIT}",
+                flush=True,
+            )
+            return existing
     print("[davar-greek] publish-preview start", flush=True)
-    sources = fetch_all(dest_dir=source_dir, include_ubs=True)
+    sources = fetch_all(
+        dest_dir=source_dir,
+        include_ubs=True,
+        allow_network=allow_fetch,
+    )
     tagnt_paths, tbesg_path = default_source_paths(source_dir)
     print("[davar-greek] importing TAGNT/TBESG", flush=True)
     tbesg_text = tbesg_path.read_text(encoding="utf-8")
@@ -342,14 +566,17 @@ def build_and_publish_preview(
         [path.read_text(encoding="utf-8") for path in tagnt_paths],
         tbesg_text,
     )
-    print("[davar-greek] mapping TBESG/UBS definitions", flush=True)
-    definitions = build_definitions(
-        parse_tbesg_file(tbesg_text),
-        set(bundle["occurrences"]),
-        parse_ubs_file(sources["ubs-es"].read_text(encoding="utf-8")),
-    )
-    apply_translation_cache(definitions, load_cache(default_cache_path()))
+    if store is None:
+        print("[davar-greek] mapping TBESG/UBS definitions", flush=True)
+        store = build_definitions(
+            parse_tbesg_file(tbesg_text),
+            set(bundle["occurrences"]),
+            parse_ubs_file(sources["ubs-es"].read_text(encoding="utf-8")),
+        )
+        apply_translation_cache(store, load_cache(default_cache_path()))
+    else:
+        print("[davar-greek] using translated definition drafts", flush=True)
     print("[davar-greek] writing preview bundle", flush=True)
-    output = publish_preview(bundle, definitions, public_data_dir)
+    output = publish_preview(bundle, store, public_data_dir)
     print(f"[davar-greek] publish-preview ready {output}", flush=True)
     return output

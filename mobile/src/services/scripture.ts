@@ -3,6 +3,7 @@ import {
   GREEK_RECORDED_REVISION,
   greekChapterPath,
   greekSourceIdentity,
+  isGreekBesorahEnabled as isGreekBesorahFlagEnabled,
 } from "@davar/shared/greekBesorah";
 import { cleanGreekSurfaceText } from "@davar/shared/greekText";
 import { joinHebrewPrefixSlashes } from "@davar/shared/hebrewText";
@@ -1464,7 +1465,10 @@ type GreekChapterPayload = {
 };
 
 export const isGreekBesorahEnabled = (): boolean =>
-  __DEV__ || process.env.EXPO_PUBLIC_GREEK_PREVIEW_ENABLED === "1";
+  isGreekBesorahFlagEnabled({
+    EXPO_PUBLIC_GREEK_PREVIEW_ENABLED:
+      process.env.EXPO_PUBLIC_GREEK_PREVIEW_ENABLED,
+  });
 
 export const fetchGreekChapterVerses = async (
   bookId: string,

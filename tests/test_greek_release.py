@@ -3,7 +3,13 @@ from pathlib import Path
 import pytest
 
 from scripts.greek.books import davar_besorah_ids_from_metadata
-from scripts.greek.publish import publish_preview, validate_release_tree
+from scripts.greek.publish import (
+    build_and_publish_preview,
+    existing_preview_release,
+    publish_preview,
+    translations_missing_from_preview,
+    validate_release_tree,
+)
 from scripts.greek.release_gate import validate_public_enablement
 from scripts.greek.sources import STEPBIBLE_COMMIT
 from scripts.greek.stable_json import read_json, write_json
@@ -42,6 +48,19 @@ def release_fixture() -> tuple[dict, dict]:
                         "translit_en": "logos",
                         "translit_es": "logos",
                         "translit_he": "לוגוס",
+                        "transliteration": {
+                            "form": {
+                                "en": "logos",
+                                "es": "logos",
+                                "he": "לוגוס",
+                            },
+                            "lemma": {
+                                "en": "logos",
+                                "es": "logos",
+                                "he": "לוגוס",
+                            },
+                            "rule_version": "greek-transliteration-v1",
+                        },
                         "word_type": "word",
                     }
                 ],
@@ -105,10 +124,21 @@ def test_complete_release_is_published_and_revalidated(tmp_path: Path):
     lexicon = read_json(release_dir / "lexicon.json")
     assert "instances" not in lexicon["G3056"]
     assert lexicon["G3056"]["occurrences_count"] == 27
+    assert "source_language" not in lexicon["G3056"]
     assert not (release_dir / "occurrences.json").exists()
     shard = read_json(release_dir / "occurrences" / "G30.json")
     assert shard["G3056"]["count"] == 27
     assert len(shard["G3056"]["references"]) == 27
+    chapter_path = release_dir / "books" / manifest["books"][0] / "1.json"
+    chapter_text = chapter_path.read_text(encoding="utf-8")
+    assert chapter_text.startswith("{")
+    assert not chapter_text.startswith("{\n")
+    chapter = read_json(chapter_path)
+    word = chapter["verses"][0]["words"][0]
+    assert "transliteration" not in word
+    assert "edition" not in chapter["verses"][0]
+    assert word["translit_en"] == "logos"
+    assert existing_preview_release(tmp_path) == release_dir
 
 
 def test_incomplete_candidate_does_not_replace_active_release(tmp_path: Path):
@@ -165,3 +195,113 @@ def test_public_gate_fails_closed_without_reviewed_languages(tmp_path: Path):
     )
     with pytest.raises(ValueError, match="not publishable"):
         validate_public_enablement(tmp_path, approvals, qa_report)
+
+
+def test_existing_preview_is_reused_when_revision_is_unchanged(tmp_path, monkeypatch):
+    bundle, definitions = release_fixture()
+    public = tmp_path / "public"
+    published = publish_preview(bundle, definitions, public)
+
+    def boom(*_args, **_kwargs):
+        raise AssertionError("should not fetch when the recorded revision is already published")
+
+    monkeypatch.setattr("scripts.greek.publish.fetch_all", boom)
+    reused = build_and_publish_preview(
+        source_dir=tmp_path / "missing",
+        public_data_dir=public,
+        allow_fetch=False,
+        definitions_dir=tmp_path / "no-defs",
+    )
+    assert reused == published
+    assert existing_preview_release(public) == published
+
+
+def test_stale_preview_revision_is_not_reused(tmp_path):
+    bundle, definitions = release_fixture()
+    publish_preview(bundle, definitions, tmp_path)
+    manifest_path = tmp_path / "greek" / "manifest.json"
+    manifest = read_json(manifest_path)
+    manifest["revision"] = "stale"
+    write_json(manifest_path, manifest)
+    assert existing_preview_release(tmp_path) is None
+
+
+def test_forced_preview_rebuild_does_not_use_cache(tmp_path, monkeypatch):
+    bundle, definitions = release_fixture()
+    publish_preview(bundle, definitions, tmp_path)
+    called = []
+
+    def fake_fetch(*_args, **_kwargs):
+        called.append(True)
+        raise FileNotFoundError("no sources")
+
+    monkeypatch.setattr("scripts.greek.publish.fetch_all", fake_fetch)
+    with pytest.raises(FileNotFoundError, match="no sources"):
+        build_and_publish_preview(
+            source_dir=tmp_path / "missing",
+            public_data_dir=tmp_path,
+            force=True,
+            allow_fetch=False,
+            definitions_dir=tmp_path / "no-defs",
+        )
+    assert called
+
+
+def test_preview_is_not_reused_when_translated_drafts_are_missing(tmp_path):
+    bundle, definitions = release_fixture()
+    publish_preview(bundle, definitions, tmp_path)
+    filled = {
+        "entries": {
+            "G3056": {
+                "senses": [
+                    {
+                        "definitions": {
+                            "en": {
+                                "short": "word",
+                                "fuller": "a word",
+                                "review_status": "approved",
+                            },
+                            "es": {
+                                "short": "palabra",
+                                "fuller": "una palabra",
+                                "review_status": "draft",
+                            },
+                            "he": {
+                                "short": "דבר",
+                                "fuller": "מילה",
+                                "review_status": "draft",
+                            },
+                        }
+                    }
+                ]
+            }
+        }
+    }
+    assert translations_missing_from_preview(tmp_path, filled)
+    assert existing_preview_release(tmp_path, store=filled) is None
+
+
+def test_pretty_published_payload_is_not_reused(tmp_path: Path):
+    bundle, definitions = release_fixture()
+    release_dir = publish_preview(bundle, definitions, tmp_path)
+    chapter_path = next(release_dir.glob("books/*/*.json"))
+    payload = read_json(chapter_path)
+    write_json(chapter_path, payload)
+    assert existing_preview_release(tmp_path) is None
+
+
+def test_sync_committed_preview_skips_temp_public_dir(tmp_path: Path):
+    from scripts.greek.publish import DEFAULT_PREVIEW_DIR, publish_preview
+
+    marker = DEFAULT_PREVIEW_DIR / ".pytest-should-not-write"
+    marker.parent.mkdir(parents=True, exist_ok=True)
+    marker.write_text("keep\n", encoding="utf-8")
+    bundle, definitions = release_fixture()
+    publish_preview(bundle, definitions, tmp_path)
+    assert marker.read_text(encoding="utf-8") == "keep\n"
+    marker.unlink()
+    from scripts.greek.publish import collapse_runaway_gloss
+
+    looping = "מביש, חרפה, גנאי, תועבה, תועבה, תועבה, תועבה"
+    assert collapse_runaway_gloss(looping) == "מביש, חרפה, גנאי, תועבה"
+    assert collapse_runaway_gloss("תהום") == "תהום"

@@ -166,7 +166,17 @@
       "besorahLabel": "Besorah",
       "besorahValue": "Delitzsch (1877), Hutter (1599–1602)",
       "greekTextLabel": "Texto griego",
-      "greekTextValue": "SBLGNT (2010)"
+      "greekTextValue": "SBLGNT (Holmes 2010)",
+      "greekTagsLabel": "Etiquetado griego",
+      "greekTagsValue": "STEPBible TAGNT",
+      "greekLexiconLabel": "Léxico griego",
+      "greekLexiconValue": "TBESG (inglés), UBS (español)"
+    },
+    "attributionTitle": "Atribución",
+    "attribution": {
+      "stepbible": "Las etiquetas de palabras griegas y los datos léxicos en inglés proceden de STEP Bible (www.STEPBible.org), a partir del trabajo de Tyndale House, Cambridge, con licencia CC BY 4.0. Fuente: https://github.com/STEPBible/STEPBible-Data. Las modificaciones, si las hay, quedan registradas con la revisión de los datos.",
+      "sblgnt": "La lectura griega mostrada es el SBL Greek New Testament, editado por Michael W. Holmes. Copyright © 2010 Society of Biblical Literature y Logos Bible Software. Licencia CC BY 4.0. https://sblgnt.com/license/",
+      "ubs": "Entradas léxicas en español adaptadas del UBS Dictionary of the Greek New Testament © United Bible Societies, con licencia CC BY-SA 4.0. https://github.com/ubsicap/ubs-open-license. Las adaptaciones de este material deben permanecer bajo CC BY-SA 4.0."
     },
     "aboutTitle": "Acerca de",
     "aboutItems": {

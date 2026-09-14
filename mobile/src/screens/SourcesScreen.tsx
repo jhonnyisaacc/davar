@@ -5,6 +5,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { getColors, radii, spacing, typography } from "@/src/theme";
 import { useAppStore, type AppState } from "@/src/store/useAppStore";
 import { useTranslation } from "@/src/i18n/useTranslation";
+import { GreekAttribution } from "@/src/components/GreekAttribution";
 
 const createStyles = (colors: ReturnType<typeof getColors>) =>
   StyleSheet.create({
@@ -89,6 +90,14 @@ export function SourcesScreen() {
           label: t("home.sources.greekTextLabel"),
           value: t("home.sources.greekTextValue"),
         },
+        {
+          label: t("home.sources.greekTagsLabel"),
+          value: t("home.sources.greekTagsValue"),
+        },
+        {
+          label: t("home.sources.greekLexiconLabel"),
+          value: t("home.sources.greekLexiconValue"),
+        },
       ],
     },
     {
@@ -142,6 +151,12 @@ export function SourcesScreen() {
                 ))}
               </View>
             ))}
+            <View style={styles.categoryCard}>
+              <GreekAttribution
+                titleColor={colors.textPrimary}
+                mutedColor={colors.textSecondary}
+              />
+            </View>
           </View>
         </ScrollView>
       </View>
