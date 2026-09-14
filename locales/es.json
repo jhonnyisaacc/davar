@@ -264,12 +264,6 @@
       "modalTitle": "Aviso de mapeo de Besorah",
       "modalMessage": "Los mapeos Strong de la Besorah se ofrecen solo como referencia. Algunos mapeos pueden estar sin revisar, incompletos o sin resolver.",
       "modalConfirm": "Entendido"
-    },
-    "hutterAnnouncement": {
-      "title": "Elias Hutter ya está disponible",
-      "message": "Ahora puedes leer los versículos del Nuevo Testamento en la traducción hebrea de Elias Hutter. Delitzsch sigue siendo la opción predeterminada y puedes cambiarla cuando quieras en Ajustes.",
-      "activate": "Activar Hutter",
-      "close": "Mantener Delitzsch"
     }
   },
   "legal": {

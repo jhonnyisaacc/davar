@@ -10,9 +10,6 @@ export type BesorahTextVersion = "delitzsch" | "hutter";
 export type TranslationKey = "ts2009" | "tth" | "delitzsch";
 export type TranslationSource = "ts2009" | "tth" | "bes";
 
-// Bump this value when an OTA/web release should announce Hutter again.
-export const HUTTER_ANNOUNCEMENT_RELEASE = "hutter-launch-2026-07-v2";
-
 export type TranslationTarget = {
   reference: VerseReference | null;
   usesPsalmTitle: boolean;

@@ -13,7 +13,6 @@ export interface ReadingStateV2 {
 	language: "en" | "es" | "he";
 	besorahLanguage: BesorahLanguage;
 	besorahTextVersion: BesorahTextVersion;
-	hutterAnnouncementRelease: string;
 	theme: "light" | "dark";
 	showQumran: boolean;
 	hebrewOnly: boolean;
@@ -71,7 +70,6 @@ function migrateV1toV2(v1Data: ReadingStateV1): ReadingStateV2 {
 		language: v1Data.language ?? resolveDefaultLanguage(),
 		besorahLanguage: "hebrew",
 		besorahTextVersion: "delitzsch",
-		hutterAnnouncementRelease: "",
 		theme: "light",
 		showQumran: false,
 		hebrewOnly: false,
@@ -178,7 +176,6 @@ export function createDefaultReadingState(): ReadingStateV2 {
 		language: resolveDefaultLanguage(),
 		besorahLanguage: "hebrew",
 		besorahTextVersion: "delitzsch",
-		hutterAnnouncementRelease: "",
 		theme: "light",
 		showQumran: false,
 		hebrewOnly: false,

@@ -48,7 +48,6 @@ import {
 } from "./utils/storageHelpers";
 import {
 	getDssCommentaryForLanguage,
-	HUTTER_ANNOUNCEMENT_RELEASE,
 	resolveGreekOverlayLanguage,
 } from "./utils/translationConfig";
 import { useVerseScrollNavigation } from "./utils/useVerseScrollNavigation";
@@ -168,13 +167,7 @@ export default function App() {
 		initialState.besorahLanguage,
 	);
 	const greekAvailable = isGreekPreviewEnabled();
-	const [hutterAnnouncementRelease, setHutterAnnouncementRelease] =
-		usePersistedState(
-			"hutterAnnouncementRelease",
-			initialState.hutterAnnouncementRelease,
-		);
 	const { t, isRTL } = useTranslation(language);
-	const [showHutterAnnouncement, setShowHutterAnnouncement] = useState(false);
 
 	useEffect(() => {
 		currentScreenRef.current = currentScreen;
@@ -844,32 +837,6 @@ export default function App() {
 	);
 	const isBesorah = currentBookMeta?.section === "besorah";
 	const besorahDisclaimerText = t("verse.besorahDisclaimer.short");
-
-	useEffect(() => {
-		if (
-			currentScreen === "verse" &&
-			isBesorah &&
-			besorahLanguage === "hebrew" &&
-			hutterAnnouncementRelease !== HUTTER_ANNOUNCEMENT_RELEASE
-		) {
-			setShowHutterAnnouncement(true);
-		}
-	}, [
-		besorahLanguage,
-		currentScreen,
-		hutterAnnouncementRelease,
-		isBesorah,
-	]);
-
-	const dismissHutterAnnouncement = useCallback(() => {
-		setShowHutterAnnouncement(false);
-		setHutterAnnouncementRelease(HUTTER_ANNOUNCEMENT_RELEASE);
-	}, [setHutterAnnouncementRelease]);
-
-	const activateHutter = useCallback(() => {
-		setBesorahTextVersion("hutter");
-		dismissHutterAnnouncement();
-	}, [dismissHutterAnnouncement, setBesorahTextVersion]);
 
 	const handleBesorahTextVersionChange = useCallback(
 		(version: "delitzsch" | "hutter") => {
@@ -1760,56 +1727,6 @@ export default function App() {
 					}}
 				>
 					{besorahDisclaimerText}
-				</div>
-			)}
-
-			{showHutterAnnouncement && (
-				<div
-					className="fixed inset-0 z-[120] flex items-center justify-center px-5"
-					style={{ background: "rgba(20, 16, 12, 0.45)" }}
-					role="dialog"
-					aria-modal="true"
-					aria-labelledby="hutter-announcement-title"
-				>
-					<div
-						className="relative w-full max-w-md rounded-[28px] border p-7"
-						style={{
-							background: "var(--neomorph-bg)",
-							borderColor: "var(--neomorph-border)",
-							boxShadow:
-								"12px 12px 28px var(--neomorph-shadow-dark), -8px -8px 24px var(--neomorph-shadow-light)",
-						}}
-					>
-						<button
-							type="button"
-							onClick={dismissHutterAnnouncement}
-							aria-label={t("verse.hutterAnnouncement.close")}
-							className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-xl text-[var(--text-secondary)] hover:bg-[var(--muted)]"
-						>
-							×
-						</button>
-						<h2
-							id="hutter-announcement-title"
-							className="pr-8 text-2xl font-semibold text-[var(--text-primary)]"
-							style={{ fontFamily: "'Inter', sans-serif" }}
-						>
-							{t("verse.hutterAnnouncement.title")}
-						</h2>
-						<p
-							className="mt-3 text-sm leading-6 text-[var(--text-secondary)]"
-							style={{ fontFamily: "'Inter', sans-serif" }}
-						>
-							{t("verse.hutterAnnouncement.message")}
-						</p>
-						<button
-							type="button"
-							onClick={activateHutter}
-							className="mt-6 w-full rounded-full bg-[var(--primary)] px-5 py-3.5 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-[1.01] active:scale-[0.99]"
-							style={{ fontFamily: "'Inter', sans-serif" }}
-						>
-							{t("verse.hutterAnnouncement.activate")}
-						</button>
-					</div>
 				</div>
 			)}
 
