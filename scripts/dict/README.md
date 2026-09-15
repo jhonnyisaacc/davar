@@ -70,6 +70,25 @@ scripts/dict/
 └── sync_translations_to_individual.py  # Sync translations
 ```
 
+### 6. TCY Site Dictionary Import
+
+`import_tcysite.py` imports the permitted Torah con Yehoshua' dictionary JSON
+assets without scraping rendered pages. It preserves each Eric source row,
+resolves exact Greek/Hebrew matches to canonical Strong IDs, and assigns
+unmatched rows stable `D1000000+` fallback IDs.
+
+```bash
+python scripts/dict/import_tcysite.py --fetch
+python scripts/dict/test_import_tcysite.py
+```
+
+Source snapshots, checksums, attribution, and permission notes are stored in
+`data/dict/raw/tcysite/`. Imported definitions are Spanish-only until their
+English and Hebrew translations receive a separate human review. Each manifest
+file entry includes its SHA-256 checksum, byte size, and record count. Running
+`--fetch` preserves the prior retrieval timestamp when all source content and
+manifest metadata are unchanged, so repeated fetches remain deterministic.
+
 ## 🏗️ Core Operations
 
 ### 1. Lexicon Building
@@ -687,5 +706,3 @@ python build_lexicon.py lexicon_100_percent_list.json
 ---
 
 *This modular architecture ensures maintainable, testable, and scalable Hebrew Scripture processing.*
-
-

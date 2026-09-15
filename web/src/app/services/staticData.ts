@@ -1762,7 +1762,7 @@ export const loadGreekLexiconEntry = async (
 		);
 		greekLexiconPromises.set(revision, promise);
 	}
-	const lexicon = await promise;
+	const [lexicon, custom] = await Promise.all([promise, loadCustomDefinitions()]);
 	const family = greekStrongFamily(strong);
 	const entry =
 		lexicon[strong] ??
@@ -1780,6 +1780,8 @@ export const loadGreekLexiconEntry = async (
 		Boolean(definition?.short || definition?.fuller);
 	const selected = localized && usable(localized) ? localized : english;
 	const definitions: DefinitionItem[] = [];
+	const customDefinitions = mapDefinitions(custom[entry.strong]?.definitions, language);
+	definitions.push(...customDefinitions);
 	if (selected?.short) {
 		definitions.push({
 			language: selected === localized ? language : "en",
@@ -1889,7 +1891,15 @@ type RawDefinition = {
 	text?: string;
 	text_en?: string;
 	text_es?: string;
+	text_he?: string;
 	source?: string;
+	review_status?: "approved" | "imported" | "draft";
+	license?: string;
+	term_language?: "greek" | "hebrew" | "unknown";
+	source_file?: string;
+	source_row?: string;
+	source_url?: string;
+	context?: string;
 };
 
 type RawOccurrence = {
@@ -1928,6 +1938,9 @@ type RawCustomEntry = {
 	hebrew?: string;
 	transliteration_en?: string;
 	transliteration_es?: string;
+	term_language?: "greek" | "hebrew" | "unknown";
+	canonical_strong?: string | null;
+	imported_by?: string;
 	definitions?: RawDefinition[];
 	root?: string;
 	root_strong?: string;
@@ -1992,15 +2005,17 @@ export const getPolicyInstances = (entry: RawCustomEntry): RawCustomInstance[] =
 
 const mapDefinitions = (
 	definitions: RawDefinition[] | undefined,
-	language: "en" | "es",
+	language: "en" | "es" | "he",
 ): DefinitionItem[] => {
 	if (!definitions?.length) return [];
 
 	const mapped: Array<DefinitionItem | null> = definitions.map((definition) => {
 		const text =
 			language === "es"
-				? (definition.text_es ?? definition.text)
-				: (definition.text_en ?? definition.text);
+				? definition.text_es
+				: language === "he"
+					? definition.text_he
+					: definition.text_en;
 
 		if (!text) return null;
 
@@ -2008,6 +2023,8 @@ const mapDefinitions = (
 			text,
 			source: definition.source ?? "strong",
 			language,
+			review_status: definition.review_status,
+			license: definition.license,
 		};
 	});
 

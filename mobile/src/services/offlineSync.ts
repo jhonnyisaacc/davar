@@ -17,7 +17,6 @@ import {
   getBundleUpdatePlan,
   type BundleVersions,
 } from "@/src/services/offlinePlan";
-import type { LexiconResponse } from "@/src/types/api";
 import type { TranslationRow } from "@/src/services/database";
 import {
   deleteTranslationBookEntries,
@@ -36,6 +35,10 @@ import {
   insertSourceVerses,
   validateSourceRelease,
 } from "@/src/services/database";
+import {
+  buildLexiconEntries,
+  type DictionaryBundle,
+} from "@/src/services/dictionaryBundle";
 
 export type { BundleVersions } from "@/src/services/offlinePlan";
 
@@ -46,40 +49,6 @@ export type DownloadProgress = {
 };
 
 export type ProgressCallback = (progress: DownloadProgress) => void;
-
-// ── Dictionary Bundle Types ────────────────────────────────────────────────
-
-interface DefinitionItem {
-  text_en?: string;
-  text_es?: string;
-  source?: string;
-}
-
-interface CustomDefinitionEntry {
-  strong_number: string;
-  hebrew?: string;
-  transliteration_en?: string;
-  transliteration_es?: string;
-  definitions: DefinitionItem[];
-  root?: string;
-  root_strong?: string;
-}
-
-interface RootEntry {
-  strong_number: string;
-  lemma: string;
-  transliteration: string;
-  definitions: DefinitionItem[];
-  root?: string;
-  root_strong?: string;
-  occurrences_count?: number;
-}
-
-interface DictionaryBundle {
-  custom_definitions: Record<string, CustomDefinitionEntry>;
-  roots: Record<string, RootEntry>;
-  prefixes: Record<string, unknown>; // can be refined later if needed
-}
 
 // ── Translation Bundle Types ───────────────────────────────────────────────
 
@@ -207,99 +176,6 @@ export const fetchRemoteBundleVersions = async (): Promise<BundleVersions> => {
 };
 
 export { getAllLocalBundleVersions };
-
-// ── Lexicon builder ────────────────────────────────────────────────────────
-
-const buildLexiconEntries = (bundle: DictionaryBundle): LexiconResponse[] => {
-  const entries: LexiconResponse[] = [];
-
-  // Custom definitions
-  Object.values(bundle.custom_definitions ?? {}).forEach(
-    (entry: CustomDefinitionEntry) => {
-      const definitions = (entry.definitions ?? []).flatMap(
-        (item: DefinitionItem) => {
-          const defs: LexiconResponse["definitions"] = [];
-          if (item.text_en) {
-            defs.push({
-              text: item.text_en,
-              source: item.source ?? "custom",
-              language: "en",
-            });
-          }
-          if (item.text_es) {
-            defs.push({
-              text: item.text_es,
-              source: item.source ?? "custom",
-              language: "es",
-            });
-          }
-          return defs;
-        },
-      );
-
-      entries.push({
-        strong_number:
-          entry.strong_number != null ? String(entry.strong_number) : "",
-        hebrew: entry.hebrew != null ? String(entry.hebrew) : undefined,
-        definitions,
-        root: entry.root != null ? String(entry.root) : undefined,
-        root_strong:
-          entry.root_strong != null ? String(entry.root_strong) : undefined,
-        root_definitions: [],
-        occurrences_count: 0,
-        instances: [],
-      });
-    },
-  );
-
-  // Roots lexicon
-  Object.values(bundle.roots ?? {}).forEach((entry: RootEntry) => {
-    const definitions = (entry.definitions ?? []).flatMap(
-      (item: DefinitionItem) => {
-        const defs: LexiconResponse["definitions"] = [];
-        if (item.text_en) {
-          defs.push({
-            text: item.text_en,
-            source: item.source ?? "bdb",
-            language: "en",
-          });
-        }
-        if (item.text_es) {
-          defs.push({
-            text: item.text_es,
-            source: item.source ?? "bdb",
-            language: "es",
-          });
-        }
-        return defs;
-      },
-    );
-
-    entries.push({
-      strong_number:
-        entry.strong_number != null ? String(entry.strong_number) : "",
-      hebrew: entry.lemma != null ? String(entry.lemma) : undefined,
-      definitions,
-      root:
-        entry.root != null
-          ? String(entry.root)
-          : entry.lemma != null
-            ? String(entry.lemma)
-            : undefined,
-      root_strong:
-        entry.root_strong != null
-          ? String(entry.root_strong)
-          : entry.strong_number != null
-            ? String(entry.strong_number)
-            : undefined,
-      root_definitions: [],
-      occurrences_count: entry.occurrences_count ?? 0,
-      instances: [],
-    });
-  });
-
-  return entries.filter((entry) => entry.strong_number.trim() !== "");
-};
 
 export const downloadDictionaryBundle = async (remoteVersion?: number) => {
   await initializeDatabase();

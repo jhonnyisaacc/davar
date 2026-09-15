@@ -1,0 +1,1983 @@
+[
+  {
+    "id": 1,
+    "texto_hebreo": "יהושע",
+    "transliteracion": "Yehoshua'",
+    "equivalencia_espanol": "Salvador; Josué; Jesús",
+    "observacion": "Nombre del Mashiaj cuya revelación es el eje central del estudio del profesor Eric Rodríguez."
+  },
+  {
+    "id": 2,
+    "texto_hebreo": "המשיח",
+    "transliteracion": "Hamashiaj",
+    "equivalencia_espanol": "El Mesías; el ungido",
+    "observacion": "Título que, junto a Yehoshua', identifica al ser divino en la literatura de Juan, a diferencia de otros textos apócrifos."
+  },
+  {
+    "id": 3,
+    "texto_hebreo": "בָּרָא",
+    "transliteracion": "Bará",
+    "equivalencia_espanol": "Crear; poner orden",
+    "observacion": "Verbo utilizado en Génesis que no refiere a la creación ex nihilo, sino a la organización del caos."
+  },
+  {
+    "id": 4,
+    "texto_hebreo": "חֲנוֹךְ",
+    "transliteracion": "Janoj",
+    "equivalencia_espanol": "Enoc",
+    "observacion": "Referencia al libro más antiguo de la literatura apocalíptica judía del siglo segundo a.C."
+  },
+  {
+    "id": 5,
+    "texto_hebreo": "חֲנֻכָּה",
+    "transliteracion": "Janukáh",
+    "equivalencia_espanol": "Dedicación; inauguración",
+    "observacion": "Festividad que conmemora el fin de la era selúcida y la purificación del Templo."
+  },
+  {
+    "id": 6,
+    "texto_hebreo": "יִשְׂרָאֵל",
+    "transliteracion": "Yisra'el",
+    "equivalencia_espanol": "Israel, hijo; primogénito [cite: 529, 530]",
+    "observacion": "Nación que experimenta los periodos de exilio en Babilonia y las eras helenista y hasmonea. Nación que nace simbólicamente de Egipto cuando se abre el mar, comparado con abrir la matriz."
+  },
+  {
+    "id": 7,
+    "texto_hebreo": "ἀποκάλυψις",
+    "transliteracion": "Apokálypsis",
+    "equivalencia_espanol": "Revelación; quitar el velo",
+    "observacion": "Término griego que originalmente no se utilizaba para designar una revelación de carácter divino."
+  },
+  {
+    "id": 8,
+    "texto_hebreo": "חֲסִידִים",
+    "transliteracion": "Jasidim",
+    "equivalencia_espanol": "Piadosos",
+    "observacion": "Movimiento nacionalista judío surgido antes de la consolidación de fariseos y esenios."
+  },
+  {
+    "id": 9,
+    "texto_hebreo": "פֵּשֶׁר",
+    "transliteracion": "Pesher",
+    "equivalencia_espanol": "Interpretación; comentario",
+    "observacion": "Género literario de los rollos de Qumram, aplicado por ejemplo al libro del profeta Jabaquq."
+  },
+  {
+    "id": 10,
+    "texto_hebreo": "מָשִׁיחַ",
+    "transliteracion": "Mashiaj",
+    "equivalencia_espanol": "Mesías; ungido, dueño de los atributos de la deidad",
+    "observacion": "En la literatura de Qumram se describe bajo una faceta de guerrero humano, distinta a la naturaleza divina en el Evangelio. Aquel que posee el amor ('Elohim) y cuyos atributos le pertenecen en propiedad."
+  },
+  {
+    "id": 11,
+    "texto_hebreo": "בָּבֶל",
+    "transliteracion": "Babel, Bavel",
+    "equivalencia_espanol": "Babilonia, Babel; Babilonia; confusión",
+    "observacion": "Imperio cuya incursión en la tierra de Yisra'el marca el inicio de la redacción de los primeros capítulos de Daniel. Término utilizado por Moisés como una ridiculización del nombre original; representa la confusión de lenguas y el juicio divino."
+  },
+  {
+    "id": 12,
+    "texto_hebreo": "יְרוּשָׁלַיִם",
+    "transliteracion": "Yerushalayim",
+    "equivalencia_espanol": "Jerusalén",
+    "observacion": "Ciudad donde se reinaugura el Segundo Templo en el año 515 a.C. durante la época persa."
+  },
+  {
+    "id": 13,
+    "texto_hebreo": "Πύθων",
+    "transliteracion": "Pýthon",
+    "equivalencia_espanol": "Pitón; serpiente",
+    "observacion": "En la mitología griega, dragón que perseguía a Leto; metalenguaje comparativo con el dragón de Apocalipsis 12."
+  },
+  {
+    "id": 14,
+    "texto_hebreo": "Λητώ",
+    "transliteracion": "Letó",
+    "equivalencia_espanol": "Leto",
+    "observacion": "Figura mitológica de una virgen encinta de un dios, utilizada como contraste o metalenguaje de la época."
+  },
+  {
+    "id": 15,
+    "texto_hebreo": "Απόλλων",
+    "transliteracion": "Apóllon",
+    "equivalencia_espanol": "Apolo",
+    "observacion": "Hijo de Leto que en el mito vence a la serpiente antigua, sirviendo como figura de metalenguaje cultural."
+  },
+  {
+    "id": 16,
+    "texto_hebreo": "Σημαίνει",
+    "transliteracion": "Semainein",
+    "equivalencia_espanol": "Significar; señalar; acertijo",
+    "observacion": "Término griego utilizado para los oráculos, donde se colocan señales como acertijos del hombre hacia Dios."
+  },
+  {
+    "id": 17,
+    "texto_hebreo": "מָסַר",
+    "transliteracion": "Masar",
+    "equivalencia_espanol": "Entregar; transmitir",
+    "observacion": "Concepto de entrega que indica igualdad y constituye la base de la transmisión de la tradición."
+  },
+  {
+    "id": 18,
+    "texto_hebreo": "קִבֵּל",
+    "transliteracion": "Qivel",
+    "equivalencia_espanol": "Recibir",
+    "observacion": "Acción de recepción que completa el ciclo de la transmisión de la sabiduría o la Torah."
+  },
+  {
+    "id": 19,
+    "texto_hebreo": "מָסוֹרֶת",
+    "transliteracion": "Masóret",
+    "equivalencia_espanol": "Tradición",
+    "observacion": "Término derivado de la raíz Masar, referente a lo que ha sido entregado a través del tiempo."
+  },
+  {
+    "id": 20,
+    "texto_hebreo": "קַבָּלָה",
+    "transliteracion": "Qabalah",
+    "equivalencia_espanol": "Recepción",
+    "observacion": "Término derivado de la raíz Qivel, que describe el acto de recibir la enseñanza transmitida."
+  },
+  {
+    "id": 21,
+    "texto_hebreo": "מְסוֹרָה",
+    "transliteracion": "Mesorah",
+    "equivalencia_espanol": "Cadena de transmisión",
+    "observacion": "Estructura de transmisión y recepción continua de la revelación divina."
+  },
+  {
+    "id": 22,
+    "texto_hebreo": "λόγος",
+    "transliteracion": "Logos",
+    "equivalencia_espanol": "Palabra; expresión; verbo",
+    "observacion": "Para el entorno griego era una expresión divina invisible; en Juan, es la expresión de vida que se puede palpar."
+  },
+  {
+    "id": 23,
+    "texto_hebreo": "ἀρχή",
+    "transliteracion": "Arje",
+    "equivalencia_espanol": "Origen; principio, origen común de todas las cosas; principio",
+    "observacion": "Concepto filosófico del origen común de todas las cosas que antes era desconocido. Término griego utilizado para describir el principio de la creación de Dios."
+  },
+  {
+    "id": 24,
+    "texto_hebreo": "מימרא",
+    "transliteracion": "Memyra",
+    "equivalencia_espanol": "Palabra; manifestación corpórea",
+    "observacion": "Expresión utilizada en los Targumim arameos para referirse a la manifestación tangible y visible de la deidad."
+  },
+  {
+    "id": 25,
+    "texto_hebreo": "אַבָּא",
+    "transliteracion": "Abá",
+    "equivalencia_espanol": "Padre, Padre; tribunal",
+    "observacion": "Representa el origen de todas las cosas y la sabiduría que aún no había sido revelada al mundo. Título que designa el tribunal de justicia de la deidad dentro de la estructura de la Torah. Término íntimo para referirse a la fuente del trono donde se sienta el vencedor."
+  },
+  {
+    "id": 26,
+    "texto_hebreo": "רוּחוֹת",
+    "transliteracion": "Rujot",
+    "equivalencia_espanol": "Espíritus, Mensajeros; espíritus, poderes manifiestos; espíritus",
+    "observacion": "Referencia a los siete atributos o poderes de Dios manifestados delante de su trono. Representación simbólica de los líderes que llevan la palabra a todas las naciones. Los siete poderes que testifican sobre la identidad, el perdón y el sacerdocio del Mesías."
+  },
+  {
+    "id": 27,
+    "texto_hebreo": "מַלְאָךְ",
+    "transliteracion": "Mal'aj",
+    "equivalencia_espanol": "Mensajero, ángel; mensajero",
+    "observacion": "Término que designa a quien está al servicio de la congregación, no limitado exclusivamente a seres celestiales. Mencionado como el Malaj Adonay que interviene ante el acusador en favor de Jerusalén e instruye el cambio de vestiduras."
+  },
+  {
+    "id": 28,
+    "texto_hebreo": "אֵל עֶלְיוֹן",
+    "transliteracion": "El Elyon",
+    "equivalencia_espanol": "Dios Altísimo; Soberano",
+    "observacion": "Atributo de Mashiaj que lo posiciona por encima de todos los reyes de la tierra."
+  },
+  {
+    "id": 29,
+    "texto_hebreo": "χῖ",
+    "transliteracion": "Ji",
+    "equivalencia_espanol": "Chi",
+    "observacion": "Letra griega de la cual deriva el término quiasmo, refiriéndose a la estructura literaria de repetición invertida."
+  },
+  {
+    "id": 30,
+    "texto_hebreo": "קָהָל",
+    "transliteracion": "Qahal",
+    "equivalencia_espanol": "Congregación; asamblea",
+    "observacion": "Término para referirse a las siete congregaciones de Asia Menor donde se leía la profecía."
+  },
+  {
+    "id": 31,
+    "texto_hebreo": "συναγωγή",
+    "transliteracion": "Sinagogue",
+    "equivalencia_espanol": "Sinagoga; reunión",
+    "observacion": "Término griego equivalente a la congregación local situada en las costas de Anatolia."
+  },
+  {
+    "id": 32,
+    "texto_hebreo": "אֱלֹהִים",
+    "transliteracion": "’Elohim",
+    "equivalencia_espanol": "Dios; el amor entrañable, deidad; juez; superior; amor",
+    "observacion": "Término que denota la naturaleza de amor profundo y familiar de la deidad al reunir a los que durmieron. Su primer atributo es el amor. Se usa para referirse a ángeles, profetas, jueces y sumos sacerdotes que portan la palabra."
+  },
+  {
+    "id": 33,
+    "texto_hebreo": "ἁρπαγησόμεθα",
+    "transliteracion": "Arpayesometa",
+    "equivalencia_espanol": "Arrebatados; transformados",
+    "observacion": "Término griego que indica la transformación de los vivientes para recibir al Señor."
+  },
+  {
+    "id": 34,
+    "texto_hebreo": "חֲטַק",
+    "transliteracion": "Jataq",
+    "equivalencia_espanol": "Anticipar; ganar un lugar",
+    "observacion": "Concepto de anticiparse a la muerte mediante la transformación en un cuerpo incorruptible."
+  },
+  {
+    "id": 35,
+    "texto_hebreo": "אֲוִיר",
+    "transliteracion": "’Avir",
+    "equivalencia_espanol": "Aire, aire; corona; gloria de Dios",
+    "observacion": "En la cosmovisión hebrea es equivalente al Kéter o corona de gloria, superando el límite de la atmósfera física. Elemento que es oscurecido por el humo de la indignación; representa la corona o la gloria de la deidad en el contexto del juicio."
+  },
+  {
+    "id": 36,
+    "texto_hebreo": "כֶּתֶר",
+    "transliteracion": "Kéter",
+    "equivalencia_espanol": "Corona de gloria",
+    "observacion": "Estado o lugar espiritual equivalente al aire puro donde se recibe al Señor."
+  },
+  {
+    "id": 37,
+    "texto_hebreo": "Ἄλφα",
+    "transliteracion": "Alfa",
+    "equivalencia_espanol": "Alfa; primera letra",
+    "observacion": "Parte del título que designa a Yehoshua' como el principio y el origen de todas las cosas."
+  },
+  {
+    "id": 38,
+    "texto_hebreo": "Ὦ",
+    "transliteracion": "O",
+    "equivalencia_espanol": "Omega; O; fin",
+    "observacion": "Referencia a la última letra disponible en la época para señalar el cumplimiento o finalidad en Mashiaj."
+  },
+  {
+    "id": 39,
+    "texto_hebreo": "שַׁחַר",
+    "transliteracion": "Shájar",
+    "equivalencia_espanol": "Alba",
+    "observacion": "Identificado con Yehoshua' Hamashiaj como la luz que libra del ataque de la oscuridad; fundamento de la ley y el testimonio."
+  },
+  {
+    "id": 40,
+    "texto_hebreo": "רוּחַ",
+    "transliteracion": "Rúaj",
+    "equivalencia_espanol": "Espíritu; poder, Espíritu; viento",
+    "observacion": "Estado en el que Juan recibe la visión, indicando estar bajo la influencia del poder divino. Agente de la inmersión espiritual que purifica y guía a los creyentes junto con el fuego."
+  },
+  {
+    "id": 41,
+    "texto_hebreo": "שׁוֹפָר",
+    "transliteracion": "Shofar",
+    "equivalencia_espanol": "Trompeta, trompeta; símbolo de la palabra de Dios",
+    "observacion": "Instrumento que emite la gran voz que Juan oye, anunciando la presencia del Primero y el Último. Representa la voz con la que se habló a las naciones y a las siete iglesias; símbolo de alarma en el monte santo."
+  },
+  {
+    "id": 42,
+    "texto_hebreo": "רִאשׁוֹן",
+    "transliteracion": "Rishon",
+    "equivalencia_espanol": "Primero; cabeza",
+    "observacion": "Designa a Mashiaj como la cabeza y primicia santa que santifica al resto de la masa."
+  },
+  {
+    "id": 43,
+    "texto_hebreo": "אַחֲרוֹן",
+    "transliteracion": "’Ajaron",
+    "equivalencia_espanol": "Último; cuerpo",
+    "observacion": "Representa a la congregación o cuerpo unido a la cabeza, completando la unidad de Mashiaj."
+  },
+  {
+    "id": 44,
+    "texto_hebreo": "יהוה",
+    "transliteracion": "YHWH",
+    "equivalencia_espanol": "El Señor; Jehová, Nombre de la Ciudad; Sion, juicio",
+    "observacion": "Nombre sagrado cuya palabra vino al sacerdote Ezequiel en la tierra de los caldeos. Nombre sagrado asociado a la Ciudad de Sion y al Santo de Isra'el. El nombre de las cuatro letras conlleva la connotación de ejecución de juicio."
+  },
+  {
+    "id": 45,
+    "texto_hebreo": "אֲרִיאֵל",
+    "transliteracion": "Ariel",
+    "equivalencia_espanol": "León de Dios",
+    "observacion": "Nombre de la ciudad donde habitó David; metalenguaje para referirse al Templo por su forma física."
+  },
+  {
+    "id": 46,
+    "texto_hebreo": "אריה",
+    "transliteracion": "Aryeh",
+    "equivalencia_espanol": "León",
+    "observacion": "En oriente tendían a ser de color rojizo; símbolo de la tribu de Judá y diseño arquitectónico del templo."
+  },
+  {
+    "id": 47,
+    "texto_hebreo": "שאול",
+    "transliteracion": "Sh'ol",
+    "equivalencia_espanol": "Sepulcro",
+    "observacion": "Término hebreo para el lugar de los muertos, del cual el Mashiaj tiene las llaves."
+  },
+  {
+    "id": 48,
+    "texto_hebreo": "ᾍδης",
+    "transliteracion": "Hades",
+    "equivalencia_espanol": "Muerte; sepulcro",
+    "observacion": "Equivalente griego utilizado en las traducciones para el concepto hebreo de Sh'ol."
+  },
+  {
+    "id": 49,
+    "texto_hebreo": "נְחֹשֶׁת",
+    "transliteracion": "Nejoshet",
+    "equivalencia_espanol": "Bronce; cobre, bronce",
+    "observacion": "Metal refulgente de color rojizo que describe los pies del Hijo del Hombre y las ruedas del trono. Metal que compone las uñas de la cuarta bestia, símbolo de su capacidad destructora."
+  },
+  {
+    "id": 50,
+    "texto_hebreo": "ἄγγελος",
+    "transliteracion": "Angelos",
+    "equivalencia_espanol": "Mensajero; ángel",
+    "observacion": "Representa a los líderes o estrellas de las siete congregaciones en la diestra del Mashiaj."
+  },
+  {
+    "id": 51,
+    "texto_hebreo": "μετάνοια",
+    "transliteracion": "Metanoia",
+    "equivalencia_espanol": "Arrepentimiento",
+    "observacion": "Acción necesaria para volver a las primeras obras y evitar que el candelero sea quitado."
+  },
+  {
+    "id": 52,
+    "texto_hebreo": "Νικολαΐτης",
+    "transliteracion": "Nikolaïtes",
+    "equivalencia_espanol": "Nicolaítas",
+    "observacion": "Grupo cuyas obras y enseñanzas son aborrecidas por el Mashiaj en el mensaje a Éfeso."
+  },
+  {
+    "id": 53,
+    "texto_hebreo": "חיה",
+    "transliteracion": "Hayah",
+    "equivalencia_espanol": "Ser viviente; animal",
+    "observacion": "Figuras con semejanza de hombre que aparecen en la visión profética de Ezequiel."
+  },
+  {
+    "id": 54,
+    "texto_hebreo": "ῥομφαία",
+    "transliteracion": "Rhomphaia",
+    "equivalencia_espanol": "Espada",
+    "observacion": "Arma aguda de dos filos que sale de la boca del Mashiaj en la visión de Juan."
+  },
+  {
+    "id": 55,
+    "texto_hebreo": "ἥλιος",
+    "transliteracion": "Helios",
+    "equivalencia_espanol": "Sol",
+    "observacion": "Utilizado para describir el rostro del Mashiaj cuando resplandece en su fuerza."
+  },
+  {
+    "id": 56,
+    "texto_hebreo": "מְנוֹרָה",
+    "transliteracion": "Menorah, Mnoráh",
+    "equivalencia_espanol": "Candelero; lámpara, candelabro",
+    "observacion": "Símbolo que representa a las siete iglesias o congregaciones en medio de las cuales anda el Mashiaj. Representación de los siete atributos del Señor y sus siete ojos que recorren la tierra."
+  },
+  {
+    "id": 57,
+    "texto_hebreo": "Ἄρτεμις",
+    "transliteracion": "Artemis",
+    "equivalencia_espanol": "Artemisa; Diana",
+    "observacion": "Deidad griega cuyo templo principal se encontraba en la ciudad de Éfeso."
+  },
+  {
+    "id": 58,
+    "texto_hebreo": "νίκη",
+    "transliteracion": "Nikē",
+    "equivalencia_espanol": "Victoria",
+    "observacion": "Componente del nombre Nikolaos que hace referencia a la acción de vencer."
+  },
+  {
+    "id": 59,
+    "texto_hebreo": "λαός",
+    "transliteracion": "Laos",
+    "equivalencia_espanol": "Pueblo",
+    "observacion": "Término griego que designa al pueblo, utilizado para componer el nombre de los nicolaítas."
+  },
+  {
+    "id": 60,
+    "texto_hebreo": "Νικόλαος",
+    "transliteracion": "Nikolaos",
+    "equivalencia_espanol": "El que venció al pueblo",
+    "observacion": "Nombre griego que se considera la traducción funcional del nombre hebreo Balaam."
+  },
+  {
+    "id": 61,
+    "texto_hebreo": "בִּל",
+    "transliteracion": "Bil",
+    "equivalencia_espanol": "Tragó",
+    "observacion": "Raíz hebrea que forma parte del nombre de Balaam, indicando la acción de consumir o destruir."
+  },
+  {
+    "id": 62,
+    "texto_hebreo": "עַם",
+    "transliteracion": "Am",
+    "equivalencia_espanol": "Pueblo",
+    "observacion": "Término hebreo para referirse a la nación o colectivo de personas."
+  },
+  {
+    "id": 63,
+    "texto_hebreo": "בִּלְעָם",
+    "transliteracion": "Bil'am",
+    "equivalencia_espanol": "Balaam; el que tragó al pueblo, Balaam; doctrina de tropiezo",
+    "observacion": "Figura que enseñó a poner tropiezo a los hijos de Yisra'el; su doctrina es vinculada a la de los nicolaítas. Referencia al liderazgo que enseña a poner tropiezo y a participar de la idolatría."
+  },
+  {
+    "id": 64,
+    "texto_hebreo": "יהודי",
+    "transliteracion": "Yehudi",
+    "equivalencia_espanol": "Judío; el que profesa al único Dios",
+    "observacion": "Derivado de yahidi, identifica a quien mantiene la fidelidad doctrinal, en contraste con quienes dicen serlo y no lo son."
+  },
+  {
+    "id": 65,
+    "texto_hebreo": "יְהוּדִין",
+    "transliteracion": "Yehudin",
+    "equivalencia_espanol": "Judíos",
+    "observacion": "Plural utilizado para referirse a quienes se identifican con el pueblo, evaluados según su práctica de la Torah."
+  },
+  {
+    "id": 66,
+    "texto_hebreo": "διάβολος",
+    "transliteracion": "Diábolos",
+    "equivalencia_espanol": "Diablo; destructor; adversario, destructor",
+    "observacion": "Término griego que describe al ente que pone a prueba a los creyentes mediante la tribulación. Término griego que define la función de destruir."
+  },
+  {
+    "id": 67,
+    "texto_hebreo": "δόγμα",
+    "transliteracion": "Dogma",
+    "equivalencia_espanol": "Dogma; doctrina de hombres",
+    "observacion": "Principios establecidos por hombres que suelen imponerse por encima de la Torah y la verdad."
+  },
+  {
+    "id": 68,
+    "texto_hebreo": "עֵץ",
+    "transliteracion": "Etz",
+    "equivalencia_espanol": "Árbol, árboles; hombres",
+    "observacion": "Referencia al objeto espiritual de vida que es otorgado al que venciere en el paraíso. Utilizado metafóricamente para representar a los hombres que no escucharon las palabras del Señor."
+  },
+  {
+    "id": 69,
+    "texto_hebreo": "חַיִּים",
+    "transliteracion": "Jayim",
+    "equivalencia_espanol": "Vida",
+    "observacion": "Atributo de la corona y del árbol prometido a los que mantienen la fidelidad hasta la muerte."
+  },
+  {
+    "id": 70,
+    "texto_hebreo": "עָשָׂר",
+    "transliteracion": "Asar",
+    "equivalencia_espanol": "Diez",
+    "observacion": "Número que determina el tiempo de prueba o el periodo de espera para recibir respuesta a la oración."
+  },
+  {
+    "id": 71,
+    "texto_hebreo": "יוֹם",
+    "transliteracion": "Yom",
+    "equivalencia_espanol": "Día",
+    "observacion": "Unidad de tiempo que define la duración de la tribulación en la congregación de Esmirna. Se asocia tanto al tiempo de la reconciliación como al día de tinieblas y de YHWH que está cercano. Unidad de tiempo divina; se menciona que mil años delante de los ojos del Creador son como el día de ayer que pasó."
+  },
+  {
+    "id": 72,
+    "texto_hebreo": "יָשַׁב",
+    "transliteracion": "Yáshav",
+    "equivalencia_espanol": "Asentarse; sentarse; vivir",
+    "observacion": "Verbo que describe la acción de establecerse en un lugar o tomar asiento en una cátedra."
+  },
+  {
+    "id": 73,
+    "texto_hebreo": "יְשִׁיבָה",
+    "transliteracion": "Yeshivá",
+    "equivalencia_espanol": "Asentamiento; cátedra",
+    "observacion": "Referencia al sistema o lugar de gobierno rabínico desde donde se emitían sentencias."
+  },
+  {
+    "id": 74,
+    "texto_hebreo": "Ἀντίπας",
+    "transliteracion": "Antipas",
+    "equivalencia_espanol": "En lugar del Padre; contra el Padre",
+    "observacion": "Nombre del testigo fiel en Pérgamo; su significado alude a una posición respecto a la figura paterna."
+  },
+  {
+    "id": 75,
+    "texto_hebreo": "בֵּן",
+    "transliteracion": "Ben",
+    "equivalencia_espanol": "Hijo; heredero, hijo",
+    "observacion": "Título de Mashiaj como dueño de la creación por haberla comprado mediante su sacrificio. Referencia a los dos olivos o ungidos denominados como hijos del aceite."
+  },
+  {
+    "id": 76,
+    "texto_hebreo": "אִיזֶבֶל",
+    "transliteracion": "Izével",
+    "equivalencia_espanol": "Jezabel; la no morada",
+    "observacion": "Figura que representa a quien conoce la palabra pero actúa como tropiezo y ejerce autoridad indebida."
+  },
+  {
+    "id": 77,
+    "texto_hebreo": "בַּעַל",
+    "transliteracion": "Baal",
+    "equivalencia_espanol": "Amo; señor; deidad",
+    "observacion": "Ídolo cananeo cuyo culto y altar fueron establecidos en Samaria provocando la ira divina."
+  },
+  {
+    "id": 78,
+    "texto_hebreo": "אֲשֵׁרָה",
+    "transliteracion": "Ashera",
+    "equivalencia_espanol": "Asera; imagen",
+    "observacion": "Símbolo de culto en forma de árbol o botella tallada con figura de mujer, considerada esposa de Baal."
+  },
+  {
+    "id": 79,
+    "texto_hebreo": "מָן",
+    "transliteracion": "Man",
+    "equivalencia_espanol": "Maná",
+    "observacion": "Referencia al alimento escondido y al rocío celestial identificado con la persona de Yehoshua'."
+  },
+  {
+    "id": 80,
+    "texto_hebreo": "אֶבֶן",
+    "transliteracion": "Even",
+    "equivalencia_espanol": "Piedra",
+    "observacion": "Objeto blanco entregado al vencedor que contiene un nombre nuevo conocido solo por quien lo recibe."
+  },
+  {
+    "id": 81,
+    "texto_hebreo": "Νίκη",
+    "transliteracion": "Nikē",
+    "equivalencia_espanol": "Victoria; Nike",
+    "observacion": "Diosa alada de la mitología griega presente en la palma de la deidad Artemisa en Éfeso."
+  },
+  {
+    "id": 82,
+    "texto_hebreo": "סְפָרַד",
+    "transliteracion": "Sefarad",
+    "equivalencia_espanol": "Sardis",
+    "observacion": "Nombre hebreo para la ciudad de Sardis; el profesor aclara que en este contexto bíblico no se refiere a España."
+  },
+  {
+    "id": 83,
+    "texto_hebreo": "גּוֹי",
+    "transliteracion": "Goy",
+    "equivalencia_espanol": "Gentil; hombre; nación",
+    "observacion": "Término utilizado para referirse al hombre que no puede ver el rostro de Dios y vivir."
+  },
+  {
+    "id": 84,
+    "texto_hebreo": "Φιλαδέλφεια",
+    "transliteracion": "Philadélpheia, Philadelphia",
+    "equivalencia_espanol": "Filadelfia",
+    "observacion": "Congregación que se caracteriza por ser intachable y haber guardado la palabra sin negar el nombre. Nombre de la iglesia asociada al sellamiento de los 144,000 y al remanente fiel que ofrece sacrificios de alabanza."
+  },
+  {
+    "id": 85,
+    "texto_hebreo": "צִיּוֹן",
+    "transliteracion": "Tziyón",
+    "equivalencia_espanol": "Sion, Sion; monte santo",
+    "observacion": "Lugar de la conquista de David, anteriormente conocido como parte de la fortaleza de la ciudad. Lugar desde donde se da la alarma y se toca la trompeta ante la proximidad del terrible día de YHWH."
+  },
+  {
+    "id": 86,
+    "texto_hebreo": "מְצֻדָה",
+    "transliteracion": "Mitzudah",
+    "equivalencia_espanol": "Fortaleza",
+    "observacion": "Término que describe la estructura defensiva de Sion antes de ser denominada Ciudad de David."
+  },
+  {
+    "id": 87,
+    "texto_hebreo": "עִיר",
+    "transliteracion": "Ir",
+    "equivalencia_espanol": "Ciudad",
+    "observacion": "Componente del nombre dado a Jerusalén tras la conquista de David. Utilizado para referirse a la ubicación santa que es hollada por los gentiles durante cuarenta y dos meses."
+  },
+  {
+    "id": 88,
+    "texto_hebreo": "דָּוִד",
+    "transliteracion": "David",
+    "equivalencia_espanol": "David",
+    "observacion": "Rey cuyo linaje y llaves representan el reinado sobre las doce tribus de Israel."
+  },
+  {
+    "id": 89,
+    "texto_hebreo": "אָמֵן",
+    "transliteracion": "Amén",
+    "equivalencia_espanol": "Verdadero; palabra fiel, fiel; verdadero",
+    "observacion": "Su repetición enfática (Amén, Amén) indica en el texto que es Dios mismo quien está hablando. Utilizado como un sinónimo de los atributos de fidelidad y veracidad del testigo."
+  },
+  {
+    "id": 90,
+    "texto_hebreo": "יָהּ",
+    "transliteracion": "Yah",
+    "equivalencia_espanol": "Yah; Dios",
+    "observacion": "Forma abreviada del nombre divino asociada a la puerta de justicia por donde entran los justos."
+  },
+  {
+    "id": 91,
+    "texto_hebreo": "יְבוּס",
+    "transliteracion": "Yevus",
+    "equivalencia_espanol": "Jebús",
+    "observacion": "Nombre antiguo de Jerusalén antes de la conquista y el establecimiento del reinado de David."
+  },
+  {
+    "id": 92,
+    "texto_hebreo": "תּוֹרָה",
+    "transliteracion": "Torah",
+    "equivalencia_espanol": "Instrucción; Ley, el rollo; la ley",
+    "observacion": "Referencia a la palabra de Moisés y los profetas que la congregación de Filadelfia ha guardado. Identificada como el libro de los siete sellos que trata sobre la obra de la redención de Mashiaj."
+  },
+  {
+    "id": 93,
+    "texto_hebreo": "שַׁעַר",
+    "transliteracion": "Sha'ar",
+    "equivalencia_espanol": "Puerta",
+    "observacion": "Entrada de justicia mencionada en los Salmos; Mashiaj es identificado como la puerta de la salvación."
+  },
+  {
+    "id": 94,
+    "texto_hebreo": "πειράζειν",
+    "transliteracion": "Pirázin",
+    "equivalencia_espanol": "experiencia; experimentar",
+    "observacion": "Traducido erróneamente como tentación o pirasmo; se refiere a la experiencia que viene sobre el mundo."
+  },
+  {
+    "id": 95,
+    "texto_hebreo": "πειρασμός",
+    "transliteracion": "Pirasmo",
+    "equivalencia_espanol": "experiencia",
+    "observacion": "A menudo traducido como tentación, pero en el contexto del escrito se define como una experiencia."
+  },
+  {
+    "id": 96,
+    "texto_hebreo": "πειραζόμενος",
+    "transliteracion": "Pirazómenos",
+    "equivalencia_espanol": "el que se mete por propia experiencia en sus concupiscencias",
+    "observacion": "Se refiere a la persona que es atraída y seducida por su propio deseo."
+  },
+  {
+    "id": 97,
+    "texto_hebreo": "אֱלָהִין",
+    "transliteracion": "'Elahin",
+    "equivalencia_espanol": "dioses de las naciones",
+    "observacion": "Término en arameo, utilizado en plural para referirse a deidades ajenas."
+  },
+  {
+    "id": 98,
+    "texto_hebreo": "אֱלוֹהַּ",
+    "transliteracion": "'Elo'ah",
+    "equivalencia_espanol": "Dios",
+    "observacion": "Término para referirse a la Deidad."
+  },
+  {
+    "id": 99,
+    "texto_hebreo": "אֵל",
+    "transliteracion": "'El",
+    "equivalencia_espanol": "Nombre propio",
+    "observacion": "Nombre propio que no debe ser traducido genéricamente como Dios."
+  },
+  {
+    "id": 100,
+    "texto_hebreo": "θεός",
+    "transliteracion": "Theos",
+    "equivalencia_espanol": "Dios",
+    "observacion": "Término de origen griego para designar a la deidad."
+  },
+  {
+    "id": 101,
+    "texto_hebreo": "לַשֶּׁד",
+    "transliteracion": "Shel",
+    "equivalencia_espanol": "destruir",
+    "observacion": "Raíz hebrea que da origen al término para demonio."
+  },
+  {
+    "id": 102,
+    "texto_hebreo": "לַשֶּׁדִים",
+    "transliteracion": "Lashedim",
+    "equivalencia_espanol": "los demonios",
+    "observacion": "Seres o fuerzas espirituales asociadas a la destrucción."
+  },
+  {
+    "id": 103,
+    "texto_hebreo": "תַּרְגּוּם",
+    "transliteracion": "Targum",
+    "equivalencia_espanol": "interpretación; traducción aramea",
+    "observacion": "Referencia a las versiones arameas de las escrituras citadas por el Mesías en el sacrificio."
+  },
+  {
+    "id": 104,
+    "texto_hebreo": "בָּשָׁן",
+    "transliteracion": "Bashán",
+    "equivalencia_espanol": "serpientes; potestades",
+    "observacion": "Mencionado en relación a los 'toros' o fuerzas espirituales que rodearon al sufriente."
+  },
+  {
+    "id": 105,
+    "texto_hebreo": "דֶּשֶׁן",
+    "transliteracion": "Deshen",
+    "equivalencia_espanol": "remanente del sacrificio acepto a Dios",
+    "observacion": "Se refiere a los poderosos de la tierra que son parte del sacrificio aceptado."
+  },
+  {
+    "id": 106,
+    "texto_hebreo": "בְּכוֹר",
+    "transliteracion": "Bjar",
+    "equivalencia_espanol": "el primer heredero; primogénito",
+    "observacion": "Referido al que está por encima de los reyes de la tierra."
+  },
+  {
+    "id": 107,
+    "texto_hebreo": "עֶלְיוֹן",
+    "transliteracion": "'Elyon",
+    "equivalencia_espanol": "el más excelso; de arriba",
+    "observacion": "Atributo que indica una procedencia que no es de esta creación."
+  },
+  {
+    "id": 108,
+    "texto_hebreo": "בְּרִית",
+    "transliteracion": "Brit",
+    "equivalencia_espanol": "pacto",
+    "observacion": "Convenio firme que se mantiene con el Amado."
+  },
+  {
+    "id": 109,
+    "texto_hebreo": "חֻקִּים",
+    "transliteracion": "Juqim",
+    "equivalencia_espanol": "juicios",
+    "observacion": "Leyes o decretos en los que el pueblo debe andar."
+  },
+  {
+    "id": 110,
+    "texto_hebreo": "מִשְׁפָּטִים",
+    "transliteracion": "Mishpatim",
+    "equivalencia_espanol": "estatutos",
+    "observacion": "Regulaciones sagradas que no deben ser profanadas."
+  },
+  {
+    "id": 111,
+    "texto_hebreo": "דּוֹד",
+    "transliteracion": "Dod",
+    "equivalencia_espanol": "el amado",
+    "observacion": "Nombre que se asocia a David y a la simiente prometida."
+  },
+  {
+    "id": 112,
+    "texto_hebreo": "מֶרְכָּבָה",
+    "transliteracion": "Merkaváh",
+    "equivalencia_espanol": "carroza; trono",
+    "observacion": "Concepto teológico relacionado con la manifestación del trono celestial."
+  },
+  {
+    "id": 113,
+    "texto_hebreo": "אָדָם",
+    "transliteracion": "'Adam",
+    "equivalencia_espanol": "postrer 'Adam; hombre sin pecado",
+    "observacion": "Referido al 'Adam del cielo, el único capaz de pagar el rescate por sus hermanos, a diferencia del hombre humano."
+  },
+  {
+    "id": 114,
+    "texto_hebreo": "כִּסֵּא",
+    "transliteracion": "Kisé",
+    "equivalencia_espanol": "trono",
+    "observacion": "Lenguaje figurado que representa la perfección de los justos y la culminación del sacrificio del Mesías."
+  },
+  {
+    "id": 115,
+    "texto_hebreo": "מַלְכָּא",
+    "transliteracion": "Malká",
+    "equivalencia_espanol": "majestad; rey",
+    "observacion": "Término arameo que forma parte de la expresión del trono de la majestad en el sistema de justificación."
+  },
+  {
+    "id": 116,
+    "texto_hebreo": "מְנוֹרוֹת",
+    "transliteracion": "Menorot",
+    "equivalencia_espanol": "candelabros; lámparas",
+    "observacion": "Símbolo de lo que es visible y revelado por Dios a este mundo."
+  },
+  {
+    "id": 117,
+    "texto_hebreo": "חַיּוֹת",
+    "transliteracion": "Jayot",
+    "equivalencia_espanol": "seres vivientes; animales",
+    "observacion": "Estructuras representativas de la gloria de Dios manifestada mediante el sacrificio (león, toro, hombre, águila)."
+  },
+  {
+    "id": 118,
+    "texto_hebreo": "מִשְׁכָּן",
+    "transliteracion": "Mishkan",
+    "equivalencia_espanol": "tabernáculo",
+    "observacion": "Lugar central de la habitación divina, alrededor del cual se organizaba el campamento y las clases sacerdotales."
+  },
+  {
+    "id": 119,
+    "texto_hebreo": "שָׂרָף",
+    "transliteracion": "Saraf",
+    "equivalencia_espanol": "serafín; expresión máxima de santidad",
+    "observacion": "Representación de la santidad divina que vino a morir en el madero, venciendo a la serpiente."
+  },
+  {
+    "id": 120,
+    "texto_hebreo": "קַדְמוֹן",
+    "transliteracion": "Katmon",
+    "equivalencia_espanol": "anterior; antes de todas las cosas",
+    "observacion": "Atributo del 'Adam primordial que existe desde antes de la fundación del mundo."
+  },
+  {
+    "id": 121,
+    "texto_hebreo": "אוֹפַן",
+    "transliteracion": "Ofan",
+    "equivalencia_espanol": "rueda; los sacerdotes",
+    "observacion": "Equivale a los 24 ancianos o clases sacerdotales; el espíritu de los seres vivientes reside en ellas."
+  },
+  {
+    "id": 122,
+    "texto_hebreo": "רָקִיעַ",
+    "transliteracion": "Raqia",
+    "equivalencia_espanol": "expansión; cristal maravilloso",
+    "observacion": "Representa la nube que acompañaba al campamento de Yisra'el, situada sobre las cabezas de los seres vivientes."
+  },
+  {
+    "id": 123,
+    "texto_hebreo": "עַתִּיק",
+    "transliteracion": "Atik",
+    "equivalencia_espanol": "anciano; antiguo",
+    "observacion": "Asociado al Anciano de Días y al León de la tribu de Judá, cuya cabeza se describe como fuego o antorcha."
+  },
+  {
+    "id": 124,
+    "texto_hebreo": "חַשְׁמַל",
+    "transliteracion": "Jashmal",
+    "equivalencia_espanol": "bronce refulgente; chispas",
+    "observacion": "Referente a la apariencia del fuego envolvente en medio de la visión de la gloria de YHWH."
+  },
+  {
+    "id": 125,
+    "texto_hebreo": "שָׂטָן",
+    "transliteracion": "Satan",
+    "equivalencia_espanol": "el acusador; el que está en la contra",
+    "observacion": "Entidad que acusa a los hermanos delante de Dios día y noche, situada a la diestra para señalar el pecado."
+  },
+  {
+    "id": 126,
+    "texto_hebreo": "צָנִיף",
+    "transliteracion": "Tsanif",
+    "equivalencia_espanol": "mitra; diadema",
+    "observacion": "Vestidura limpia colocada sobre la cabeza del sumo sacerdote como parte de su restauración y purificación."
+  },
+  {
+    "id": 127,
+    "texto_hebreo": "קֶרֶן",
+    "transliteracion": "Keren, Qeren",
+    "equivalencia_espanol": "rayo de luz, cuerno; rey, rayos de luz; cuernos",
+    "observacion": "En el contexto del Cordero, no se refiere a cuernos físicos sino a rayos de luz manifestados. En el contexto de las bestias de Daniel, representa a los reyes o poderes monárquicos. Representa los reinados de rey y sumo sacerdote; se asocia al resplandor de Moisés al hablar con Adonay."
+  },
+  {
+    "id": 128,
+    "texto_hebreo": "סוּס",
+    "transliteracion": "Sus",
+    "equivalencia_espanol": "caballo",
+    "observacion": "Símbolo utilizado para representar guerra, confrontación y la era de los imperios."
+  },
+  {
+    "id": 129,
+    "texto_hebreo": "לָבָן",
+    "transliteracion": "Lavan",
+    "equivalencia_espanol": "blanco; paz",
+    "observacion": "Asociado al primer caballo y a periodos de paz, como el de Alejandro Magno eximiendo de tributos a Yisra'el."
+  },
+  {
+    "id": 130,
+    "texto_hebreo": "צְבָאוֹת",
+    "transliteracion": "Tzva'ot",
+    "equivalencia_espanol": "de los ejércitos",
+    "observacion": "Título de YHWH que enfatiza Su soberanía sobre las huestes celestiales y terrenales."
+  },
+  {
+    "id": 131,
+    "texto_hebreo": "שְׁבָט",
+    "transliteracion": "Sebat",
+    "equivalencia_espanol": "undécimo mes",
+    "observacion": "Mes del calendario hebreo mencionado en las visiones nocturnas del profeta Zacarías."
+  },
+  {
+    "id": 132,
+    "texto_hebreo": "אָדֹם",
+    "transliteracion": "Adom",
+    "equivalencia_espanol": "rojo; bermejo",
+    "observacion": "Relacionado con la muerte, la sangre y el imperio de los caldeos o babilonios."
+  },
+  {
+    "id": 133,
+    "texto_hebreo": "שָׁחוֹר",
+    "transliteracion": "Shajor",
+    "equivalencia_espanol": "negro; oscuro",
+    "observacion": "Color del tercer caballo en Apocalipsis y el segundo carro en Zacarías."
+  },
+  {
+    "id": 134,
+    "texto_hebreo": "בְּרֻדִּים",
+    "transliteracion": "Brudin",
+    "equivalencia_espanol": "manchados; overos",
+    "observacion": "Término para describir caballos con manchas, específicamente una mezcla de blanco y rojo."
+  },
+  {
+    "id": 135,
+    "texto_hebreo": "שְׂרֻקִּים",
+    "transliteracion": "Sruqim",
+    "equivalencia_espanol": "manchados; overos",
+    "observacion": "Sinónimo de brudin, utilizado para identificar a los caballos del cuarto carro."
+  },
+  {
+    "id": 136,
+    "texto_hebreo": "ᾅδης",
+    "transliteracion": "Hades",
+    "equivalencia_espanol": "lugar de los muertos",
+    "observacion": "Entidad o lugar que sigue al jinete del caballo amarillo llamado Muerte."
+  },
+  {
+    "id": 137,
+    "texto_hebreo": "δηνάριον",
+    "transliteracion": "Denárion",
+    "equivalencia_espanol": "denario; salario diario [cite: 468]",
+    "observacion": "Representa el pago de un jornalero por un día de trabajo, asociado a tiempos de hambre y escasez."
+  },
+  {
+    "id": 138,
+    "texto_hebreo": "χλωρός",
+    "transliteracion": "Khlorós",
+    "equivalencia_espanol": "pizqueado; amarillo [cite: 457, 477]",
+    "observacion": "Color del cuarto caballo que simboliza la enfermedad y la muerte."
+  },
+  {
+    "id": 139,
+    "texto_hebreo": "שְׁאוֹל",
+    "transliteracion": "Sh'ol",
+    "equivalencia_espanol": "sepulcro; Sh'ol [cite: 479]",
+    "observacion": "Término hebreo para el sepulcro, aclarando que no se refiere al concepto de infierno."
+  },
+  {
+    "id": 140,
+    "texto_hebreo": "שַׂק",
+    "transliteracion": "Saq",
+    "equivalencia_espanol": "cilicio; tela negra [cite: 492]",
+    "observacion": "Material con el que se compara el oscurecimiento del sol en la apertura del sexto sello."
+  },
+  {
+    "id": 141,
+    "texto_hebreo": "נָסַךְ",
+    "transliteracion": "Nasak",
+    "equivalencia_espanol": "libar; preparar libación [cite: 470, 471]",
+    "observacion": "Acción de preparar una ofrenda líquida para el sacrificio al rey."
+  },
+  {
+    "id": 142,
+    "texto_hebreo": "ψυχή",
+    "transliteracion": "Psykhe",
+    "equivalencia_espanol": "pescuezos; vidas",
+    "observacion": "Referido a los degollados bajo el altar que murieron por causa de la palabra y el testimonio."
+  },
+  {
+    "id": 143,
+    "texto_hebreo": "עִמָּנוּאֵל",
+    "transliteracion": "Imanuel",
+    "equivalencia_espanol": "remanente fiel [cite: 532, 533]",
+    "observacion": "Identificado como el pueblo establecido y la virgen que pare un pueblo del cual nace un Mashiaj."
+  },
+  {
+    "id": 144,
+    "texto_hebreo": "רָעַשׁ",
+    "transliteracion": "Ra'ash",
+    "equivalencia_espanol": "temblar; conmover [cite: 521, 523]",
+    "observacion": "Representa la conmoción de Dios sobre la tierra y el cielo para remover lo movible."
+  },
+  {
+    "id": 145,
+    "texto_hebreo": "δυνάμεις",
+    "transliteracion": "Dynameis",
+    "equivalencia_espanol": "potencias; huestes [cite: 502, 522]",
+    "observacion": "Se refiere a las fuerzas de las regiones celestes que serán conmovidas en la venida de Mashiaj."
+  },
+  {
+    "id": 146,
+    "texto_hebreo": "תָּו",
+    "transliteracion": "Tav",
+    "equivalencia_espanol": "señal; marca; pacto; palabra",
+    "observacion": "Marca puesta en la frente del remanente que gime por las abominaciones; representa el pacto que libra de la destrucción."
+  },
+  {
+    "id": 147,
+    "texto_hebreo": "סְאָה",
+    "transliteracion": "Seah",
+    "equivalencia_espanol": "medida de capacidad bíblica",
+    "observacion": "Medida de volumen equivalente a 144,000 huevos, cifra que simboliza al pueblo constituido como un altar de sacrificio vivo."
+  },
+  {
+    "id": 148,
+    "texto_hebreo": "ταῦ",
+    "transliteracion": "Tau",
+    "equivalencia_espanol": "letra T; marca",
+    "observacion": "Letra griega que se originó como una copia del alfabeto fenicio, derivada de la señal hebrea de pacto."
+  },
+  {
+    "id": 149,
+    "texto_hebreo": "אֲרָמִית",
+    "transliteracion": "Aramit",
+    "equivalencia_espanol": "arameo; escritura cuadrada",
+    "observacion": "Escritura adoptada por los judíos en el siglo segundo d.C. para diferenciarse de los samaritanos; no es propiamente hebreo."
+  },
+  {
+    "id": 150,
+    "texto_hebreo": "עֵדֶן",
+    "transliteracion": "'Eden",
+    "equivalencia_espanol": "huerto del Edén",
+    "observacion": "Referencia al estado de la tierra delante del ejército de YHWH antes de ser convertida en desierto asolado."
+  },
+  {
+    "id": 151,
+    "texto_hebreo": "כִּפּוּרִים",
+    "transliteracion": "Kipurim",
+    "equivalencia_espanol": "reconciliación; expiación",
+    "observacion": "Contexto del servicio en el templo donde se utilizaba el altar de incienso de oro una vez al año."
+  },
+  {
+    "id": 152,
+    "texto_hebreo": "θλῖψις",
+    "transliteracion": "Thlipsis",
+    "equivalencia_espanol": "tribulación",
+    "observacion": "Corresponde al escenario del quinto y sexto sello; tiempo de maltrato y vituperio por el cual pasa el remanente."
+  },
+  {
+    "id": 153,
+    "texto_hebreo": "πίστις",
+    "transliteracion": "Pistis",
+    "equivalencia_espanol": "fidelidad",
+    "observacion": "Atributo por el cual los santos conquistaron promesas, se sostuvieron viendo al Invisible y celebraron la pascua."
+  },
+  {
+    "id": 154,
+    "texto_hebreo": "θυμιατήριον",
+    "transliteracion": "Thumiaterion",
+    "equivalencia_espanol": "incensario",
+    "observacion": "Instrumento de oro utilizado para añadir incienso a las oraciones de los santos sobre el altar delante del trono."
+  },
+  {
+    "id": 155,
+    "texto_hebreo": "σάλπιγξ",
+    "transliteracion": "Salpinx",
+    "equivalencia_espanol": "trompeta",
+    "observacion": "Voz potente que anuncia los juicios de los ángeles; símbolo de la palabra de Dios entregada a los mensajeros."
+  },
+  {
+    "id": 156,
+    "texto_hebreo": "מִזְבֵּחַ",
+    "transliteracion": "Mizbeaj",
+    "equivalencia_espanol": "altar",
+    "observacion": "El perfecto altar es Yehoshua' Hamashiaj; bajo él se encuentran los que murieron por el testimonio."
+  },
+  {
+    "id": 157,
+    "texto_hebreo": "לְבָנָה",
+    "transliteracion": "Levanah",
+    "equivalencia_espanol": "luna; Mashiaj",
+    "observacion": "En el contexto de los sellos, representa al Mesías; su oscurecimiento señala el fin de la misericordia."
+  },
+  {
+    "id": 158,
+    "texto_hebreo": "שֵׂעָר",
+    "transliteracion": "Se'ar",
+    "equivalencia_espanol": "cabellos; población",
+    "observacion": "Los cabellos del profeta representan simbólicamente a la población de Yisra'el en el juicio de división por tercias."
+  },
+  {
+    "id": 159,
+    "texto_hebreo": "יָם",
+    "transliteracion": "Yam",
+    "equivalencia_espanol": "mar; muchedumbre, mar",
+    "observacion": "Representa a la multitud o muchedumbre sobre la cual cae el juicio de la segunda trompeta. Elemento que en la nueva creación deja de existir; anteriormente asociado al lavatorio sacerdotal."
+  },
+  {
+    "id": 160,
+    "texto_hebreo": "אֳנִיּוֹת",
+    "transliteracion": "Oniyot",
+    "equivalencia_espanol": "naves; comercio; riquezas",
+    "observacion": "Asociadas al tráfico de la palabra y a las riquezas de las naciones que son destruidas."
+  },
+  {
+    "id": 161,
+    "texto_hebreo": "קָדִים",
+    "transliteracion": "Kadim",
+    "equivalencia_espanol": "viento solano; viento del este",
+    "observacion": "Fuerza con la cual el Señor quiebra las naves de Tarsis."
+  },
+  {
+    "id": 162,
+    "texto_hebreo": "מַיִם",
+    "transliteracion": "Mayim",
+    "equivalencia_espanol": "aguas; la palabra de Dios",
+    "observacion": "Representan la palabra que se contamina al ser mezclada con falsas doctrinas."
+  },
+  {
+    "id": 163,
+    "texto_hebreo": "עָשָׁן",
+    "transliteracion": "Ashan",
+    "equivalencia_espanol": "humo; indignación de Dios; juicio divino",
+    "observacion": "Representa las fosas nasales de la deidad y la remoción de la misericordia cuando sube como de un gran horno."
+  },
+  {
+    "id": 164,
+    "texto_hebreo": "אַרְבֶּה",
+    "transliteracion": "Arbeh",
+    "equivalencia_espanol": "langostas; ejército de Dios",
+    "observacion": "Simboliza la palabra que juzga; aquello que antes servía de alimento se convierte en juicio para quien no tiene el sello."
+  },
+  {
+    "id": 165,
+    "texto_hebreo": "עַקְרָב",
+    "transliteracion": "Aqrav",
+    "equivalencia_espanol": "escorpiones; tormento",
+    "observacion": "Poder dado para herir; representa el daño que causa la palabra de Dios sobre aquel que la consume en mal estado espiritual."
+  },
+  {
+    "id": 166,
+    "texto_hebreo": "אֲבַדּוֹן",
+    "transliteracion": "Abaddon",
+    "equivalencia_espanol": "Abadón; perecimiento; destructor",
+    "observacion": "Nombre hebreo del ángel del abismo; representa un juicio final y eterno donde no media la misericordia."
+  },
+  {
+    "id": 167,
+    "texto_hebreo": "פְּרָת",
+    "transliteracion": "Perat",
+    "equivalencia_espanol": "Éufrates",
+    "observacion": "Gran río donde estaban atados los cuatro mensajeros de los imperios encargados de ejecutar el juicio sobre la tercera parte."
+  },
+  {
+    "id": 168,
+    "texto_hebreo": "רְבָבָה",
+    "transliteracion": "Revavah",
+    "equivalencia_espanol": "miríada; veintenas de millares",
+    "observacion": "Término para designar los ejércitos celestiales e incontables que acompañan al Señor para ejecutar juicio y bendición."
+  },
+  {
+    "id": 169,
+    "texto_hebreo": "סוֹד",
+    "transliteracion": "Sod",
+    "equivalencia_espanol": "misterio; secreto",
+    "observacion": "Se refiere al misterio de Dios consumado en su pueblo, específicamente respecto a Cristo y la iglesia."
+  },
+  {
+    "id": 170,
+    "texto_hebreo": "הֵיכָל",
+    "transliteracion": "Hekal",
+    "equivalencia_espanol": "templo",
+    "observacion": "El lugar sagrado abierto en el cielo donde se hace visible el arca de su pacto."
+  },
+  {
+    "id": 171,
+    "texto_hebreo": "קֹדֶשׁ",
+    "transliteracion": "Qodesh",
+    "equivalencia_espanol": "santidad; santo",
+    "observacion": "Atributo que define a la ciudad de Jerusalén y al templo como apartados para la deidad."
+  },
+  {
+    "id": 172,
+    "texto_hebreo": "זַיִת",
+    "transliteracion": "Zait",
+    "equivalencia_espanol": "olivo",
+    "observacion": "Representa a los dos testigos que están en pie delante del Dios de la tierra."
+  },
+  {
+    "id": 173,
+    "texto_hebreo": "קָנֶה",
+    "transliteracion": "Qaneh",
+    "equivalencia_espanol": "caña; vara de medir",
+    "observacion": "Instrumento entregado para medir el templo de Dios, el altar y a los adoradores."
+  },
+  {
+    "id": 174,
+    "texto_hebreo": "מַסְוֶה",
+    "transliteracion": "Masveh",
+    "equivalencia_espanol": "velo",
+    "observacion": "Cobertura que Moisés ponía sobre su rostro para ocultar el resplandor de la gloria tras hablar con YHWH."
+  },
+  {
+    "id": 175,
+    "texto_hebreo": "מֹשֶׁה",
+    "transliteracion": "Moshe",
+    "equivalencia_espanol": "Moisés",
+    "observacion": "Siervo enviado de Dios cuyo rostro resplandecía al descender del Sinaí con las tablas del testimonio."
+  },
+  {
+    "id": 176,
+    "texto_hebreo": "אֶרֶץ",
+    "transliteracion": "Eretz",
+    "equivalencia_espanol": "tierra; territorio",
+    "observacion": "Específicamente referido a la tierra de Yisra'el donde el mensajero pone su pie izquierdo."
+  },
+  {
+    "id": 177,
+    "texto_hebreo": "בֶּטֶן",
+    "transliteracion": "Beten",
+    "equivalencia_espanol": "vientre",
+    "observacion": "Lugar profundo donde la palabra causa amargura al confrontar el interior del hombre."
+  },
+  {
+    "id": 178,
+    "texto_hebreo": "נָבִיא",
+    "transliteracion": "Navi",
+    "equivalencia_espanol": "profeta",
+    "observacion": "Aquel cuya labor consiste en hablar la Torah para edificar al pueblo de Dios."
+  },
+  {
+    "id": 179,
+    "texto_hebreo": "גֻּלָּה",
+    "transliteracion": "Gullah",
+    "equivalencia_espanol": "tazón; tazón de aceite",
+    "observacion": "Uno de los nombres de Mashiaj; depósito que vierte aceite hacia las lámparas de la Mnoráh."
+  },
+  {
+    "id": 180,
+    "texto_hebreo": "שֶׁמֶן",
+    "transliteracion": "Shemen",
+    "equivalencia_espanol": "aceite",
+    "observacion": "Sustancia que fluye de los dos olivos hacia el tazón para mantener encendida la revelación."
+  },
+  {
+    "id": 181,
+    "texto_hebreo": "מִצְוָה",
+    "transliteracion": "Mitzvah",
+    "equivalencia_espanol": "mandamiento",
+    "observacion": "Simbolizados por el rey (relación hombre-prójimo) y el sacerdote (relación hombre-Dios)."
+  },
+  {
+    "id": 182,
+    "texto_hebreo": "אֶחָד",
+    "transliteracion": "Ejad",
+    "equivalencia_espanol": "uno",
+    "observacion": "Atributo de YHWH y Su nombre en aquel día sobre toda la tierra."
+  },
+  {
+    "id": 183,
+    "texto_hebreo": "סְדוֹם",
+    "transliteracion": "Sedom",
+    "equivalencia_espanol": "Sodoma; aberración sexual",
+    "observacion": "Nombre espiritual para la Jerusalén terrenal, asociada a la tolerancia del mal y la desobediencia."
+  },
+  {
+    "id": 184,
+    "texto_hebreo": "מִצְרַיִם",
+    "transliteracion": "Mitzrayim",
+    "equivalencia_espanol": "Egipto; madre de la idolatría, Egipto",
+    "observacion": "Nombre espiritual para la Jerusalén terrenal que tiene hijos para esclavitud. Territorio donde YHWH alzará Su mano por segunda vez para recobrar el remanente de Su pueblo."
+  },
+  {
+    "id": 185,
+    "texto_hebreo": "πτῶμα",
+    "transliteracion": "Ptoma",
+    "equivalencia_espanol": "cuerpo caído; ruinas",
+    "observacion": "Se refiere al templo destruido o al cuerpo del sacerdote que cayó con él."
+  },
+  {
+    "id": 186,
+    "texto_hebreo": "סִימָן",
+    "transliteracion": "Siman",
+    "equivalencia_espanol": "señal",
+    "observacion": "Equivalente hebreo para referirse a un símbolo o representación profética."
+  },
+  {
+    "id": 187,
+    "texto_hebreo": "מִשְׁקֶלֶת",
+    "transliteracion": "Mishqelet",
+    "equivalencia_espanol": "plomada",
+    "observacion": "Instrumento en la mano de Zorobabel asociado al cimiento y la terminación de la casa."
+  },
+  {
+    "id": 188,
+    "texto_hebreo": "תַּנִּין",
+    "transliteracion": "Tanin",
+    "equivalencia_espanol": "dragón; faraón; Egipto, dragón; leviatán",
+    "observacion": "Símbolo del pecado y de Egipto; se usa para referirse al gran dragón que yace en medio de los ríos. Símbolo vinculado a la serpiente de Egipto; representa al sistema de oposición que es arrojado al abismo."
+  },
+  {
+    "id": 189,
+    "texto_hebreo": "נָחָשׁ",
+    "transliteracion": "Najash",
+    "equivalencia_espanol": "serpiente; signo de fertilidad",
+    "observacion": "Asociado a la forma serpenteante del río Nilo y utilizado como símbolo de Egipto."
+  },
+  {
+    "id": 190,
+    "texto_hebreo": "בָּרִיחַ",
+    "transliteracion": "Bariaj",
+    "equivalencia_espanol": "veloz; huidora",
+    "observacion": "Atributo que califica a la serpiente o leviatán en el contexto del castigo divino."
+  },
+  {
+    "id": 191,
+    "texto_hebreo": "לִוְיָתָן",
+    "transliteracion": "Livyatan",
+    "equivalencia_espanol": "leviatán; serpiente tortuosa",
+    "observacion": "Entidad que será castigada con la espada dura de YHWH."
+  },
+  {
+    "id": 192,
+    "texto_hebreo": "גָּדוֹל",
+    "transliteracion": "Gadol",
+    "equivalencia_espanol": "gran; grande",
+    "observacion": "Adjetivo utilizado para describir al gran dragón o faraón de Egipto."
+  },
+  {
+    "id": 193,
+    "texto_hebreo": "חֲצִי",
+    "transliteracion": "Jatsi",
+    "equivalencia_espanol": "medio",
+    "observacion": "Utilizado para definir el periodo de tiempo de persecución (medio tiempo)."
+  },
+  {
+    "id": 194,
+    "texto_hebreo": "עִדָּן",
+    "transliteracion": "Idan",
+    "equivalencia_espanol": "tiempo",
+    "observacion": "Término arameo para designar los periodos proféticos en la visión de Daniel."
+  },
+  {
+    "id": 195,
+    "texto_hebreo": "בַּרְזֶל",
+    "transliteracion": "Barzel",
+    "equivalencia_espanol": "hierro; tributo; impuestos",
+    "observacion": "Asociado a los dientes de la cuarta bestia; representa el cobro de impuestos y la fuerza opresora."
+  },
+  {
+    "id": 196,
+    "texto_hebreo": "שֶׁמֶשׁ",
+    "transliteracion": "Shemesh",
+    "equivalencia_espanol": "sol; protección; fuego",
+    "observacion": "Representa el revestimiento de fuego y la protección divina sobre la mujer."
+  },
+  {
+    "id": 197,
+    "texto_hebreo": "עֲטָרָה",
+    "transliteracion": "Atarah",
+    "equivalencia_espanol": "corona; las doce tribus",
+    "observacion": "Símbolo de las doce tribus de Yisra'el puestas sobre la cabeza de la mujer."
+  },
+  {
+    "id": 198,
+    "texto_hebreo": "מִיכָאֵל",
+    "transliteracion": "Mikha'el",
+    "equivalencia_espanol": "Miguel",
+    "observacion": "Mensajero celestial que lidera la batalla en el cielo contra el dragón y sus ángeles."
+  },
+  {
+    "id": 199,
+    "texto_hebreo": "מַתִּתְיָהוּ",
+    "transliteracion": "Matiyahu",
+    "equivalencia_espanol": "Matatías",
+    "observacion": "Sacerdote que inició la revuelta hasmonea para derrotar a los seleúcidas y restaurar el culto."
+  },
+  {
+    "id": 200,
+    "texto_hebreo": "חַשְׁמוֹנָאִים",
+    "transliteracion": "Jashmonaim",
+    "equivalencia_espanol": "Hasmoneos",
+    "observacion": "Dinastía sacerdotal que gobernó tras derrotar al imperio seleúcida en la tierra de Yisra'el."
+  },
+  {
+    "id": 201,
+    "texto_hebreo": "הַפּוּךְ",
+    "transliteracion": "Hapuc",
+    "equivalencia_espanol": "cambio de suerte; suerte",
+    "observacion": "Relacionado con el nombre de la hija de Job, simbolizando una transformación en el destino."
+  },
+  {
+    "id": 202,
+    "texto_hebreo": "תָּסוּר",
+    "transliteracion": "Tasur",
+    "equivalencia_espanol": "tú serás un apóstata; tú serás hecho un apóstata",
+    "observacion": "Palabra que se forma del valor numérico 666 en hebreo, indicando el destino de quien se aparta de la ley."
+  },
+  {
+    "id": 203,
+    "texto_hebreo": "אָל",
+    "transliteracion": "Al",
+    "equivalencia_espanol": "no",
+    "observacion": "Partícula de negación utilizada en la expresión 'no te apartes' (al tasur)."
+  },
+  {
+    "id": 204,
+    "texto_hebreo": "ת",
+    "transliteracion": "Tav",
+    "equivalencia_espanol": "400",
+    "observacion": "Letra hebrea utilizada como valor numérico en el cálculo de la gematría del nombre de la bestia."
+  },
+  {
+    "id": 205,
+    "texto_hebreo": "ר",
+    "transliteracion": "Reish",
+    "equivalencia_espanol": "200",
+    "observacion": "Letra hebrea utilizada como valor numérico en el cálculo de la gematría del nombre de la bestia."
+  },
+  {
+    "id": 206,
+    "texto_hebreo": "ס",
+    "transliteracion": "Samej",
+    "equivalencia_espanol": "60",
+    "observacion": "Letra hebrea utilizada como valor numérico en el cálculo de la gematría del nombre de la bestia."
+  },
+  {
+    "id": 207,
+    "texto_hebreo": "ו",
+    "transliteracion": "Vav",
+    "equivalencia_espanol": "6",
+    "observacion": "Letra hebrea utilizada como valor numérico en el cálculo de la gematría del nombre de la bestia."
+  },
+  {
+    "id": 208,
+    "texto_hebreo": "בָּבִי-לוּ",
+    "transliteracion": "Babi-lu",
+    "equivalencia_espanol": "puerta de dios",
+    "observacion": "Significado etimológico del nombre Babilonia en lengua acadia."
+  },
+  {
+    "id": 209,
+    "texto_hebreo": "קִי-דִינְגִּיר-רָא-קִי",
+    "transliteracion": "Ki-dingir-ra-ki",
+    "equivalencia_espanol": "puerta del cielo",
+    "observacion": "Significado del nombre Babilonia en lengua sumeria; concepto que Jerusalem se atribuye exclusivamente."
+  },
+  {
+    "id": 210,
+    "texto_hebreo": "אָהֳלָה",
+    "transliteracion": "Ahola",
+    "equivalencia_espanol": "Samaria; su tienda",
+    "observacion": "Nombre simbólico dado a Samaria en las profecías de Ezequiel respecto a su infidelidad espiritual."
+  },
+  {
+    "id": 211,
+    "texto_hebreo": "אָהֳלִיבָה",
+    "transliteracion": "Aholiba",
+    "equivalencia_espanol": "Jerusalén; mi tienda está en ella",
+    "observacion": "Nombre simbólico para Jerusalén, indicando la presencia del santuario en medio de su apostasía."
+  },
+  {
+    "id": 212,
+    "texto_hebreo": "בִּכּוּרִים",
+    "transliteracion": "Bikurim",
+    "equivalencia_espanol": "primicias",
+    "observacion": "Referencia a los 144,000 redimidos de entre los hombres como los primeros frutos para Dios y el Cordero."
+  },
+  {
+    "id": 213,
+    "texto_hebreo": "צוֹר",
+    "transliteracion": "Tsor",
+    "equivalencia_espanol": "Tiro; roca",
+    "observacion": "Ciudad mercantil llamada puerta de las naciones, sentenciada a ser dejada como peña lisa y tendedero de redes."
+  },
+  {
+    "id": 214,
+    "texto_hebreo": "נִינְוֵה",
+    "transliteracion": "Ninive",
+    "equivalencia_espanol": "Nínive",
+    "observacion": "Ciudad asiria descrita como ramera de hermosa gracia y maestra en hechizos que seduce a los pueblos."
+  },
+  {
+    "id": 215,
+    "texto_hebreo": "אֱדוֹם",
+    "transliteracion": "Edom",
+    "equivalencia_espanol": "Edom; pueblo del anatema",
+    "observacion": "Nación sobre la cual desciende el juicio y la espada de YHWH en una gran matanza."
+  },
+  {
+    "id": 216,
+    "texto_hebreo": "בָּצְרָה",
+    "transliteracion": "Bosra",
+    "equivalencia_espanol": "Bosra",
+    "observacion": "Lugar mencionado en relación a los sacrificios y la indignación divina en la tierra de Edom."
+  },
+  {
+    "id": 217,
+    "texto_hebreo": "מָדַי",
+    "transliteracion": "Madhay",
+    "equivalencia_espanol": "Media",
+    "observacion": "Reino cuyo espíritu es despertado por YHWH para destruir a Babilonia como acto de venganza por Su templo."
+  },
+  {
+    "id": 218,
+    "texto_hebreo": "כַּשְׂדִּים",
+    "transliteracion": "Kasdim",
+    "equivalencia_espanol": "Caldeos",
+    "observacion": "Pueblo y tierra donde caen los muertos bajo el juicio de la gran Babilonia."
+  },
+  {
+    "id": 219,
+    "texto_hebreo": "זוֹנָה",
+    "transliteracion": "Zonah",
+    "equivalencia_espanol": "ramera; prostituta",
+    "observacion": "Calificativo espiritual para las ciudades que abandonan el pacto y seducen a las naciones con doctrinas corruptas."
+  },
+  {
+    "id": 220,
+    "texto_hebreo": "עוּץ",
+    "transliteracion": "Uz",
+    "equivalencia_espanol": "Uz",
+    "observacion": "Tierra cuyos reyes son obligados a beber de la copa del ardor de la ira divina."
+  },
+  {
+    "id": 221,
+    "texto_hebreo": "פְּלֶשֶׁת",
+    "transliteracion": "Peleshet",
+    "equivalencia_espanol": "Filistea",
+    "observacion": "Región que forma parte de la mezcla de naciones juzgadas junto a Jerusalén y Judá."
+  },
+  {
+    "id": 222,
+    "texto_hebreo": "מוֹאָב",
+    "transliteracion": "Moav",
+    "equivalencia_espanol": "Moab",
+    "observacion": "Nación descendiente de Lot que figura en la lista de reinos que beben el vino de la fornicación y el juicio."
+  },
+  {
+    "id": 223,
+    "texto_hebreo": "עַמּוֹן",
+    "transliteracion": "Ammon",
+    "equivalencia_espanol": "Amón",
+    "observacion": "Pueblo mencionado junto a Edom y Moab como destinatario de la copa de la mano de YHWH."
+  },
+  {
+    "id": 224,
+    "texto_hebreo": "צִידוֹן",
+    "transliteracion": "Tsidon",
+    "equivalencia_espanol": "Sidón",
+    "observacion": "Ciudad costera cuyos reyes son sentenciados junto a los de Tiro en el tiempo de la venganza."
+  },
+  {
+    "id": 225,
+    "texto_hebreo": "עֵילָם",
+    "transliteracion": "Elam, Eylam",
+    "equivalencia_espanol": "Elam",
+    "observacion": "Reino oriental que participa de la embriaguez espiritual y el posterior castigo de las naciones. Uno de los puntos geográficos de la dispersión del pueblo hebreo mencionados por el profeta Isaías."
+  },
+  {
+    "id": 226,
+    "texto_hebreo": "שָׁבוּעוֹת",
+    "transliteracion": "Shavu'ot",
+    "equivalencia_espanol": "fiesta de la ciega; cosecha",
+    "observacion": "Tiempo en que se separa el trigo de la cizaña; el Señor guarda a su pueblo."
+  },
+  {
+    "id": 227,
+    "texto_hebreo": "סֻכּוֹת",
+    "transliteracion": "Sukot",
+    "equivalencia_espanol": "fiesta de las cosechas; vendimia",
+    "observacion": "Periodo de siete días en el que se realizaban sacrificios por las naciones; asociado al lagar de la ira."
+  },
+  {
+    "id": 228,
+    "texto_hebreo": "גּוֹג",
+    "transliteracion": "Gog",
+    "equivalencia_espanol": "Gog",
+    "observacion": "Relacionado con la guerra final del séptimo día de Sukot contra los santos."
+  },
+  {
+    "id": 229,
+    "texto_hebreo": "מָגוֹג",
+    "transliteracion": "Magog",
+    "equivalencia_espanol": "Magog",
+    "observacion": "Naciones reunidas por satanás para la confrontación final contra el remanente."
+  },
+  {
+    "id": 230,
+    "texto_hebreo": "גַּת",
+    "transliteracion": "Gat",
+    "equivalencia_espanol": "lagar",
+    "observacion": "Espacio donde se pisan las uvas que representan a las naciones apóstatas; coincide con la séptima plaga."
+  },
+  {
+    "id": 231,
+    "texto_hebreo": "צֹעַן",
+    "transliteracion": "Tso'an",
+    "equivalencia_espanol": "Zoán",
+    "observacion": "Campo en Egipto donde fueron puestas señales y maravillas antes de la redención."
+  },
+  {
+    "id": 232,
+    "texto_hebreo": "עֶבְרָה",
+    "transliteracion": "Evráh",
+    "equivalencia_espanol": "ira; traspaso de la tolerancia",
+    "observacion": "Expresión del enojo divino cuando se sobrepasa el límite de Su paciencia."
+  },
+  {
+    "id": 233,
+    "texto_hebreo": "מַלְאָכִי",
+    "transliteracion": "Mal'aj",
+    "equivalencia_espanol": "mensajero; plaga",
+    "observacion": "Las plagas son consideradas mensajeros destructores enviados por la deidad."
+  },
+  {
+    "id": 234,
+    "texto_hebreo": "רָעִים",
+    "transliteracion": "Raim",
+    "equivalencia_espanol": "malos; cosas malas",
+    "observacion": "Calificativo de los mensajeros o plagas encargados de ejecutar la indignación y la angustia."
+  },
+  {
+    "id": 235,
+    "texto_hebreo": "פַּתְרוֹס",
+    "transliteracion": "Patros",
+    "equivalencia_espanol": "Tebas",
+    "observacion": "Lugar geográfico mencionado en relación a la reunión de los desterrados de Yisra'el."
+  },
+  {
+    "id": 236,
+    "texto_hebreo": "כּוּשׁ",
+    "transliteracion": "Kush",
+    "equivalencia_espanol": "Etiopía",
+    "observacion": "Nación de donde será recobrado el remanente de Judá en los cuatro confines de la tierra."
+  },
+  {
+    "id": 237,
+    "texto_hebreo": "אַשּׁוּר",
+    "transliteracion": "Ashur",
+    "equivalencia_espanol": "Siria; Asiria",
+    "observacion": "Región de la cual quedará un camino para el remanente, similar al día en que subieron de Egipto."
+  },
+  {
+    "id": 238,
+    "texto_hebreo": "שִׁנְעָר",
+    "transliteracion": "Shinar",
+    "equivalencia_espanol": "Sinar; Shim'ar",
+    "observacion": "Territorio histórico de cautividad desde donde el remanente regresará a su tierra."
+  },
+  {
+    "id": 239,
+    "texto_hebreo": "חֲמָת",
+    "transliteracion": "Jamat",
+    "equivalencia_espanol": "Hamat",
+    "observacion": "Localidad citada en la profecía de restauración y reunión de los esparcidos de Judá."
+  },
+  {
+    "id": 240,
+    "texto_hebreo": "נֵס",
+    "transliteracion": "Nes",
+    "equivalencia_espanol": "pendón; asta; señal",
+    "observacion": "Referencia al objeto que levantó Moisés en el desierto, utilizado ahora para convocar a las naciones."
+  },
+  {
+    "id": 241,
+    "texto_hebreo": "נַעֲלַיִם",
+    "transliteracion": "Na'alayim",
+    "equivalencia_espanol": "sandalias",
+    "observacion": "Calzado con el que pasarán por los siete brazos del río herido por el poder del Espíritu."
+  },
+  {
+    "id": 242,
+    "texto_hebreo": "הַר",
+    "transliteracion": "Har",
+    "equivalencia_espanol": "monte",
+    "observacion": "Componente del nombre Armagedón, refiriéndose al monte de la rebeldía o monte opuesto."
+  },
+  {
+    "id": 243,
+    "texto_hebreo": "מְגִדּוֹן",
+    "transliteracion": "Megiddon",
+    "equivalencia_espanol": "Meguido; Armeguido",
+    "observacion": "Lugar geográfico relacionado con el valle de Yisra'el y la reunión para la batalla final."
+  },
+  {
+    "id": 244,
+    "texto_hebreo": "כַּרְמֶל",
+    "transliteracion": "Karmel",
+    "equivalencia_espanol": "Carmelo",
+    "observacion": "Monte que se encuentra frente al valle de Yisra'el, asociado a la ubicación de Armeguido."
+  },
+  {
+    "id": 245,
+    "texto_hebreo": "זְנוּנִים",
+    "transliteracion": "Znumin",
+    "equivalencia_espanol": "promiscuidad; fornicaciones",
+    "observacion": "Expresión que denota la conducta espiritual corrupta de la gran ramera y las naciones."
+  },
+  {
+    "id": 246,
+    "texto_hebreo": "זְנוּת",
+    "transliteracion": "Znut",
+    "equivalencia_espanol": "promiscuidad",
+    "observacion": "Término hebreo para describir la desviación y fornicación doctrinal."
+  },
+  {
+    "id": 247,
+    "texto_hebreo": "תַּזְנוּת",
+    "transliteracion": "Taznut",
+    "equivalencia_espanol": "promiscuidad",
+    "observacion": "Variante lingüística que indica la embriaguez de los moradores de la tierra con el vino de la ramera."
+  },
+  {
+    "id": 248,
+    "texto_hebreo": "אִי",
+    "transliteracion": "I",
+    "equivalencia_espanol": "costa; isla",
+    "observacion": "Se refiere a las regiones costeras del mar de donde YHWH recobrará a los desterrados."
+  },
+  {
+    "id": 249,
+    "texto_hebreo": "פְּלִשְׁתִּים",
+    "transliteracion": "Pelishtim",
+    "equivalencia_espanol": "filisteos",
+    "observacion": "Pueblo del occidente sobre cuyos hombros volarán Efraín y Judá en el tiempo de la restauración."
+  },
+  {
+    "id": 250,
+    "texto_hebreo": "אֶפְרַיִם",
+    "transliteracion": "Efrayim",
+    "equivalencia_espanol": "Efraín",
+    "observacion": "Tribu que disipará su celo contra Judá, uniéndose para saquear a los enemigos del oriente."
+  },
+  {
+    "id": 251,
+    "texto_hebreo": "מִדְבָּר",
+    "transliteracion": "Midbar",
+    "equivalencia_espanol": "desierto; ausencia de palabra",
+    "observacion": "Lugar simbólico donde se sitúa a la mujer; se define por la falta de crecimiento y la carencia de la palabra divina."
+  },
+  {
+    "id": 252,
+    "texto_hebreo": "הַצּוֹפִים",
+    "transliteracion": "Hatzofin",
+    "equivalencia_espanol": "Atalaya",
+    "observacion": "Primera de las siete montañas de Jerusalén (Har Hatzofin)."
+  },
+  {
+    "id": 253,
+    "texto_hebreo": "שְׁנֶלֶר",
+    "transliteracion": "Shmeter",
+    "equivalencia_espanol": "Shneler",
+    "observacion": "Segunda de las siete montañas de Jerusalén (Har Shmeter)."
+  },
+  {
+    "id": 254,
+    "texto_hebreo": "הַפְּלָצָה",
+    "transliteracion": "Haplazáh",
+    "equivalencia_espanol": "La plaza",
+    "observacion": "Tercera de las siete montañas de Jerusalén (Har Haplazáh)."
+  },
+  {
+    "id": 255,
+    "texto_hebreo": "אבוטור",
+    "transliteracion": "Abutor",
+    "equivalencia_espanol": "El padre de la montaña",
+    "observacion": "Cuarta de las siete montañas de Jerusalén (Har Abutor)."
+  },
+  {
+    "id": 256,
+    "texto_hebreo": "הַמּוֹעָצָה",
+    "transliteracion": "Hamo'atzor",
+    "equivalencia_espanol": "consejos",
+    "observacion": "Componente de la quinta montaña relacionada con las decisiones erradas (Hamo'atzor hara'ot)."
+  },
+  {
+    "id": 257,
+    "texto_hebreo": "הָרָעוֹת",
+    "transliteracion": "Hara'ot",
+    "equivalencia_espanol": "malos",
+    "observacion": "Componente que califica los consejos en la quinta montaña de Jerusalén."
+  },
+  {
+    "id": 258,
+    "texto_hebreo": "אבודיס",
+    "transliteracion": "Abudis",
+    "equivalencia_espanol": "Abudis",
+    "observacion": "Sexta de las siete montañas de Jerusalén (Har Abudis)."
+  },
+  {
+    "id": 259,
+    "texto_hebreo": "הַזֵּיתִים",
+    "transliteracion": "Hazeytim",
+    "equivalencia_espanol": "Olivos",
+    "observacion": "Séptima de las siete montañas de Jerusalén (Har Hazeytim)."
+  },
+  {
+    "id": 260,
+    "texto_hebreo": "יַבְנֶה",
+    "transliteracion": "Yavne",
+    "equivalencia_espanol": "Yavne",
+    "observacion": "Lugar del concilio (96-98 d.C.) donde se establecieron los primeros rabinos e inició el judaísmo rabínico."
+  },
+  {
+    "id": 261,
+    "texto_hebreo": "בְּתוּלָה",
+    "transliteracion": "Bethulah",
+    "equivalencia_espanol": "virgen",
+    "observacion": "Calificativo para la hija de Babilonia en el contexto de su descenso al polvo y pérdida del trono."
+  },
+  {
+    "id": 262,
+    "texto_hebreo": "בַּת",
+    "transliteracion": "Bath",
+    "equivalencia_espanol": "hija; heredera; portadora",
+    "observacion": "Utilizado para referirse a la heredera de la confusión (Bab ilu) o portadora de doctrinas erradas."
+  },
+  {
+    "id": 263,
+    "texto_hebreo": "מֵצַח",
+    "transliteracion": "Metzaj",
+    "equivalencia_espanol": "frente",
+    "observacion": "Mencionado como frente de bronce para describir la dureza y obstinación del pueblo apóstata."
+  },
+  {
+    "id": 264,
+    "texto_hebreo": "צָרָה",
+    "transliteracion": "Tsarah",
+    "equivalencia_espanol": "angustia; opresión",
+    "observacion": "Lectura interpretativa de Tiro en Ezequiel; representa a la ciudad de la opresión o la Jerusalén terrenal."
+  },
+  {
+    "id": 265,
+    "texto_hebreo": "אָצַל",
+    "transliteracion": "Atzal",
+    "equivalencia_espanol": "Azal",
+    "observacion": "Lugar geográfico hasta el cual llegará el valle de los montes durante la división del monte de los Olivos."
+  },
+  {
+    "id": 266,
+    "texto_hebreo": "כְּשָׁפִים",
+    "transliteracion": "Kishufim",
+    "equivalencia_espanol": "hechicerías",
+    "observacion": "Medio por el cual fueron engañadas todas las naciones en el sistema mercantil de la gran ciudad."
+  },
+  {
+    "id": 267,
+    "texto_hebreo": "נֶפֶשׁ",
+    "transliteracion": "Nefesh",
+    "equivalencia_espanol": "vida; la vida de hombres",
+    "observacion": "Mercadería contada entre los objetos del templo apóstata, esclavizada por el sistema corrupto."
+  },
+  {
+    "id": 268,
+    "texto_hebreo": "עֻזִּיָּהוּ",
+    "transliteracion": "Uziyahu",
+    "equivalencia_espanol": "Uzías",
+    "observacion": "Rey de Judá en cuyos días ocurrió un terremoto que sirve de referencia para la huida en el día de YHWH."
+  },
+  {
+    "id": 269,
+    "texto_hebreo": "גַּיְא",
+    "transliteracion": "Gai",
+    "equivalencia_espanol": "valle",
+    "observacion": "El valle de los montes creado por la partición del monte de los Olivos, sirviendo de refugio."
+  },
+  {
+    "id": 270,
+    "texto_hebreo": "שַׁלְמָא",
+    "transliteracion": "Shalma",
+    "equivalencia_espanol": "paz",
+    "observacion": "Referencia a lo que la ciudad no conoció por ignorar el tiempo de su visitación."
+  },
+  {
+    "id": 271,
+    "texto_hebreo": "אֶלֶף",
+    "transliteracion": "'Elef",
+    "equivalencia_espanol": "mil",
+    "observacion": "Representa los años de la Torah ('Alef shanim). Se asocia a la palabra mandada para mil generaciones y al tiempo de instrucción donde el opositor es restringido."
+  },
+  {
+    "id": 272,
+    "texto_hebreo": "א",
+    "transliteracion": "'Alef",
+    "equivalencia_espanol": "primera letra",
+    "observacion": "Letra con la que inicia la Torah; simboliza el fundamento de la ley que permanece vigente hasta que todo se haya cumplido."
+  },
+  {
+    "id": 273,
+    "texto_hebreo": "תְּהוֹם",
+    "transliteracion": "Tehom",
+    "equivalencia_espanol": "abismo",
+    "observacion": "Identificado como la tierra o el universo físico en su totalidad; lugar donde es confinado el dragón bajo sello divino."
+  },
+  {
+    "id": 274,
+    "texto_hebreo": "שָׂטָנָא",
+    "transliteracion": "Sataná",
+    "equivalencia_espanol": "el opositor",
+    "observacion": "Término en arameo para designar al adversario que es atado durante el periodo de vigencia de la instrucción de la Torah."
+  },
+  {
+    "id": 275,
+    "texto_hebreo": "חַי",
+    "transliteracion": "Jai",
+    "equivalencia_espanol": "vivieron; resucitaron",
+    "observacion": "Relativo a la primera resurrección; implica el acto de morir simbólicamente a las cosas del mundo para vivir según el espíritu."
+  },
+  {
+    "id": 276,
+    "texto_hebreo": "סֵפֶר",
+    "transliteracion": "Sefer",
+    "equivalencia_espanol": "libro",
+    "observacion": "Refiere a los registros de las obras y al libro de la vida, instrumentos mediante los cuales se ejecuta el juicio ante el gran trono blanco."
+  },
+  {
+    "id": 277,
+    "texto_hebreo": "נְאֻם",
+    "transliteracion": "Neum",
+    "equivalencia_espanol": "dicho; declaración; oráculo",
+    "observacion": "Expresión utilizada para introducir un decreto o palabra judicial emitida directamente por YHWH."
+  },
+  {
+    "id": 278,
+    "texto_hebreo": "אָדוֹנִי",
+    "transliteracion": "Adoni",
+    "equivalencia_espanol": "mi Señor",
+    "observacion": "Término judicial aplicado a Mashiaj dentro del contexto del tribunal donde se le ordena sentarse a la diestra."
+  },
+  {
+    "id": 279,
+    "texto_hebreo": "מִנְחָה",
+    "transliteracion": "Minjáh",
+    "equivalencia_espanol": "ofrenda; presente",
+    "observacion": "Tipo de sacrificio u oblación que se distingue de la obediencia total a la voluntad divina expresada en el rollo."
+  },
+  {
+    "id": 280,
+    "texto_hebreo": "חֹק",
+    "transliteracion": "Joq",
+    "equivalencia_espanol": "decreto; estatuto",
+    "observacion": "Mandamiento o ley inamovible emitida por la deidad como parte de su plan eterno."
+  },
+  {
+    "id": 281,
+    "texto_hebreo": "קֶדֶם",
+    "transliteracion": "Qeden",
+    "equivalencia_espanol": "eternidad; antiguo",
+    "observacion": "Se vincula a la cifra 144,000 para denotar la naturaleza eterna y perpetua de la Torah."
+  },
+  {
+    "id": 282,
+    "texto_hebreo": "הַקֹּדֶשׁ",
+    "transliteracion": "Haqódesh",
+    "equivalencia_espanol": "el Santo; la Santidad",
+    "observacion": "Atributo que califica al Espíritu y a la ciudad, separándolos para el servicio exclusivo de Dios."
+  },
+  {
+    "id": 283,
+    "texto_hebreo": "יְהוֹשֻׁעַ",
+    "transliteracion": "Yehoshua'",
+    "equivalencia_espanol": "Salvación; Jesús",
+    "observacion": "Nombre del Mesías, raíz y linaje de David, que actúa como el templo y la lumbrera de la nueva ciudad."
+  }
+]
