@@ -160,6 +160,31 @@ def test_checkpoint_and_summary_ignore_errors_as_completed(tmp_path: Path):
     assert summary["status_counts"] == {"abstain": 1, "error": 1}
 
 
+def test_summary_uses_latest_retry_result_per_item(tmp_path: Path):
+    output = tmp_path / "proposals.jsonl"
+    output.write_text(
+        "\n".join(
+            [
+                json.dumps({"item": "אביר", "status": "error"}, ensure_ascii=False),
+                json.dumps(
+                    {"item": "אביר", "status": "proposed", "choice": "H46"},
+                    ensure_ascii=False,
+                ),
+                json.dumps({"item": "אבוד", "status": "error"}, ensure_ascii=False),
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    summary = summary_for(
+        output, model="test/model", queue_sha256="abc", planned_count=2
+    )
+    assert summary["checkpoint_rows"] == 2
+    assert summary["completed_items"] == 1
+    assert summary["proposal_count"] == 1
+    assert summary["status_counts"] == {"error": 1, "proposed": 1}
+
+
 def test_post_batch_uses_chat_completions_and_returns_raw_payload():
     class Response:
         status_code = 200

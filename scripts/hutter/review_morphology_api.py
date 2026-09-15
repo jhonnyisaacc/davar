@@ -337,8 +337,7 @@ def post_batch(
 def summary_for(
     path: Path, *, model: str, queue_sha256: str, planned_count: int
 ) -> dict[str, Any]:
-    counts: Counter[str] = Counter()
-    choices = rows = 0
+    latest: dict[str, dict[str, Any]] = {}
     if path.exists():
         for line in path.read_text(encoding="utf-8", errors="ignore").splitlines():
             if not line.strip():
@@ -347,14 +346,18 @@ def summary_for(
                 row = json.loads(line)
             except json.JSONDecodeError:
                 continue
-            rows += 1
-            counts[str(row.get("status") or "error")] += 1
-            choices += row.get("choice") is not None
+            item = str(row.get("item") or "").strip()
+            if item:
+                latest[item] = row
+    counts: Counter[str] = Counter(
+        str(row.get("status") or "error") for row in latest.values()
+    )
+    choices = sum(row.get("choice") is not None for row in latest.values())
     return {
         "model": model,
         "queue_sha256": queue_sha256,
         "planned_items": planned_count,
-        "checkpoint_rows": rows,
+        "checkpoint_rows": len(latest),
         "completed_items": counts["proposed"] + counts["abstain"],
         "proposal_count": choices,
         "abstention_count": counts["abstain"],
