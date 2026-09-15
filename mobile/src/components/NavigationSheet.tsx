@@ -31,6 +31,7 @@ import {
 import { fetchMetadata } from "@/src/services/metadata";
 import { useAppStore, type AppState } from "@/src/store/useAppStore";
 import { useTranslation } from "@/src/i18n/useTranslation";
+import { GREEK_BESORAH_BOOK_NAMES } from "@davar/shared/greekBesorah";
 import { formatBookDisplayName } from "../utils/bookNameFormatter";
 
 type NavigationSheetProps = {
@@ -283,6 +284,7 @@ const NavigationSheetComponent = (
   );
   const themeMode = useAppStore((state: AppState) => state.themeMode);
   const language = useAppStore((state: AppState) => state.language);
+  const besorahLanguage = useAppStore((state: AppState) => state.besorahLanguage);
   const colors = getColors(themeMode);
   const { width, height, fontScale } = useWindowDimensions();
   const layout = useMemo(() => getResponsiveLayout(width, height), [width, height]);
@@ -361,7 +363,10 @@ const NavigationSheetComponent = (
         formatBookDisplayName(book.name).toLowerCase().includes(query) ||
         formatBookDisplayName(book.spanishName).toLowerCase().includes(query) ||
         stripNikud(book.hebrewName).includes(query) ||
-        book.hebrewName.includes(query),
+        book.hebrewName.includes(query) ||
+        (GREEK_BESORAH_BOOK_NAMES[book.id] ?? "")
+          .toLowerCase()
+          .includes(query),
     );
   }, [booksMeta, searchQuery, getBookDisplayName]);
 
@@ -545,11 +550,22 @@ const NavigationSheetComponent = (
           ]}
         >
           <Text style={styles.bookEnglish}>{getBookDisplayName(item)}</Text>
-          <Text style={styles.bookHebrew}>{stripNikud(item.hebrewName)}</Text>
+          <Text
+            style={[
+              styles.bookHebrew,
+              besorahLanguage === "greek" && GREEK_BESORAH_BOOK_NAMES[item.id]
+                ? { fontFamily: typography.families.hebrewScripture }
+                : null,
+            ]}
+          >
+            {besorahLanguage === "greek" && GREEK_BESORAH_BOOK_NAMES[item.id]
+              ? GREEK_BESORAH_BOOK_NAMES[item.id]
+              : stripNikud(item.hebrewName)}
+          </Text>
         </Pressable>
       );
     },
-    [selectedBookId, handleSelectBook, styles, colors, getBookDisplayName, bookItemHeight],
+    [selectedBookId, handleSelectBook, styles, colors, getBookDisplayName, bookItemHeight, besorahLanguage],
   );
 
   const renderNumberGrid = useCallback(

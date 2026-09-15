@@ -1,0 +1,41 @@
+{
+  "examples": [
+    {
+      "en": "Biblos",
+      "es": "Biblos",
+      "greek": "Βίβλος",
+      "he": "ביבלוס",
+      "note": "STEPBible English form and final sigma"
+    },
+    {
+      "en": "haima",
+      "es": "haima",
+      "greek": "αἷμα",
+      "he": "האימא",
+      "note": "rough breathing on a vowel combination"
+    },
+    {
+      "en": "Mōusēs",
+      "es": "Moises",
+      "greek": "Μωϋσῆς",
+      "he": "מויסיס",
+      "note": "diaeresis prevents an upsilon combination"
+    },
+    {
+      "en": "angelos",
+      "es": "angelos",
+      "greek": "ἄγγελος",
+      "he": "אנגאלוס",
+      "note": "gamma combination"
+    },
+    {
+      "en": "Abraam",
+      "es": "Abraam",
+      "greek": "Ἀβραάμ",
+      "he": "אבראאם",
+      "note": "Hebrew final letter"
+    }
+  ],
+  "review_status": "reviewed_examples",
+  "version": "greek-transliteration-v1"
+}

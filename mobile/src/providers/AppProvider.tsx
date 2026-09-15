@@ -4,6 +4,7 @@ import { getColors } from "@/src/theme";
 import { useAppStore, type AppState } from "@/src/store/useAppStore";
 import {
   type AppLanguage,
+  loadBesorahLanguage,
   loadBesorahTextVersion,
   loadBookmarks,
   loadCurrentVerseId,
@@ -17,6 +18,7 @@ import {
   loadThemeMode,
   saveBookmarks,
   saveBesorahTextVersion,
+  saveBesorahLanguage,
   saveCurrentVerseId,
   saveHebrewFontScale,
   saveHebrewOnly,
@@ -66,6 +68,12 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   );
   const setBesorahTextVersion = useAppStore(
     (state: AppState) => state.setBesorahTextVersion,
+  );
+  const besorahLanguage = useAppStore(
+    (state: AppState) => state.besorahLanguage,
+  );
+  const setBesorahLanguage = useAppStore(
+    (state: AppState) => state.setBesorahLanguage,
   );
   const showQumran = useAppStore((state: AppState) => state.showQumran);
   const setShowQumran = useAppStore((state: AppState) => state.setShowQumran);
@@ -124,6 +132,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
           savedBookmarks,
           savedLanguage,
           savedBesorahTextVersion,
+          savedBesorahLanguage,
           savedShowQumran,
           savedShowFullChapter,
           savedSeferMode,
@@ -136,6 +145,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
           loadBookmarks(),
           loadLanguage(),
           loadBesorahTextVersion(),
+          loadBesorahLanguage(),
           loadShowQumran(),
           loadShowFullChapter(),
           loadSeferMode(),
@@ -148,6 +158,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         setBookmarks(savedBookmarks);
         setLanguage(savedLanguage as AppLanguage);
         setBesorahTextVersion(savedBesorahTextVersion);
+        setBesorahLanguage(savedBesorahLanguage);
         // Translation-only has cascading defaults. Restore it before the
         // explicitly saved chapter and Sefer preferences.
         setTranslationOnly(savedTranslationOnly);
@@ -170,6 +181,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     setBookmarks,
     setLanguage,
     setBesorahTextVersion,
+    setBesorahLanguage,
     setShowQumran,
     setShowFullChapter,
     setSeferMode,
@@ -250,6 +262,13 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     }
     saveBesorahTextVersion(besorahTextVersion);
   }, [besorahTextVersion]);
+
+  useEffect(() => {
+    if (!shouldPersistSettings()) {
+      return;
+    }
+    saveBesorahLanguage(besorahLanguage);
+  }, [besorahLanguage]);
 
   useEffect(() => {
     if (!shouldPersistSettings()) {

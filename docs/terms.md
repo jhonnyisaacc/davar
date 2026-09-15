@@ -1,7 +1,7 @@
 # Terms of Service for Davar
 
 **Effective Date:** February 8, 2026  
-**Last Updated:** April 1, 2026
+**Last Updated:** September 14, 2026
 
 Welcome to Davar, an open-source project providing access to the Hebrew Bible (Tanakh) in its original language and hebrew translations of the Besorah, along with select translations and study resources. The Davar mobile application (the "App") is available on the Apple App Store and Google Play Store, and the associated website is located at https://davar.bible (collectively, the "Services").
 
@@ -48,7 +48,7 @@ Currently, the App does not allow saving or submitting content. If features like
 
 ## 5. Open-Source Nature
 
-Davar is an open-source project. The source code is publicly available on GitHub[](https://github.com/edyehoshua/davar). Use of the source code is governed by the specific open-source license in the repository (e.g., MIT, GPL, etc.). These Terms apply only to the official App and Website distributed by us.
+Davar is an open-source project. The source code is publicly available on GitHub[](https://github.com/jhonnyisaacc/davar). Use of the source code is governed by the specific open-source license in the repository (e.g., MIT, GPL, etc.). These Terms apply only to the official App and Website distributed by us.
 
 While the Davar code is open-source, certain biblical texts and data (e.g., TS2009, TTH) are included under separate restricted licenses and may not be freely redistributed. Forks must respect these by excluding or obtaining separate permissions for restricted content.
 
@@ -56,7 +56,7 @@ While the Davar code is open-source, certain biblical texts and data (e.g., TS20
 
 The Hebrew Bible text, morphological data, lexicons, and other resources are sourced from public domain or permissively licensed materials. We claim no ownership over the biblical texts themselves.
 
-For copyrighted translations (TS2009, TTH), we operate under specific agreements requiring notices and restricting uses. The App interface, design elements, and original code not covered by third-party licenses are © Davar Project (Jhonny / @edyehoshua), all rights reserved, except as expressly licensed.
+For copyrighted translations (TS2009, TTH), we operate under specific agreements requiring notices and restricting uses. The App interface, design elements, and original code not covered by third-party licenses are © Davar Project (Jhonny / @jhonnyisaacc), all rights reserved, except as expressly licensed.
 
 **Key Sources and Licenses:**
 
@@ -68,6 +68,9 @@ For copyrighted translations (TS2009, TTH), we operate under specific agreements
 | English Translation (TS2009) | Licensed from Institute for Scripture Research (agreement July 15, 2025)     | Custom non-exclusive, non-commercial                        | Display: "Scripture taken from The Scriptures, Copyright by Institute for Scripture Research. Used by permission." in every display | Non-commercial only; API ≤100 verses, emails/RSS ≤250, SMS ≤10; no broad redistribution; error corrections required |
 | Spanish Translation (TTH)    | Licensed from Natanael Doldan (agreement ~January 2026)                      | Custom non-exclusive, non-commercial                        | Display: "Texto tomado de la Traducción Textual del Hebreo, Copyright por Natanael Doldan. Usado con permiso." in every display     | Non-commercial only; similar limits to TS2009; error corrections; donations to licensor voluntary                   |
 | Spanish Translation (SPABES) | https://ebible.org/spabes/                                                   | CC BY 4.0                                                   | Credit "AudioBiblia.org / Irma Flores (info@audiobiblia.org)"; note changes if modified                                             | Redistribution ok with attribution; indicate if modified                                                            |
+| Greek text (SBLGNT)          | https://sblgnt.com/license/                                                  | CC BY 4.0                                                   | Display Holmes 2010 SBL/Logos notice; link the license                                                                              | Redistribution ok with attribution                                                                                  |
+| Greek tagging / English lexicon (STEPBible TAGNT, TBESG) | https://github.com/STEPBible/STEPBible-Data                    | CC BY 4.0                                                   | Credit STEP Bible (www.STEPBible.org); record modifications                                                                         | Prefer the official repository; send corrections to STEPBible                                                       |
+| Spanish Greek lexicon (UBS)  | https://github.com/ubsicap/ubs-open-license                                  | CC BY-SA 4.0                                                | Credit United Bible Societies; share-alike on adapted Spanish entries                                                               | Only lemma/sense-mapped UBS; leftover ES/HE are TBESG translations                                                  |
 | Delitzsch Strong's           | https://www.ph4.org/b4_1.php?l=iw                                            | Unclear (site ©2005-2026 Ph4)                               | None specified; recommend crediting source                                                                                          | Initial mapping references were sourced from internet files; license unclear—use cautiously or consider alternatives |
 | Qumran Differences/Data      | https://codeberg.org/dandeto/deadseainsights + document from Natanael Doldan | No license specified (treat as restricted)                  | Credit repository/author or Natanael Doldan if applicable                                                                           | Unclear permissions—contact for explicit license; treat as non-redistributable                                      |
 | Fonts (SBL Hebrew)           | https://www.sbl-site.org/educational/BiblicalFonts_SBLHebrew.aspx            | SIL Open Font License 1.1                                   | Font credit not required but recommended                                                                                            | Free for personal and commercial use; modifications allowed                                                         |

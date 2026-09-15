@@ -1,0 +1,14 @@
+# Official TAGNT excerpts (STEP Bible, www.STEPBible.org, CC BY 4.0).
+# Source: STEPBible-Data TAGNT Mat-Jhn / TAGNT Act-Rev, Holmes 2010 = SBL.
+# These rows document edition selection. They are not a complete verse corpus.
+# Columns: ref	greek	editions	note
+Mat.1.1#01=NKO	Βίβλος (Biblos)	NA28+NA27+Tyn+SBL+WH+Treg+TR+Byz	shared_sbl
+Mat.1.25#08=k	τὸν (ton)	TR+Byz	tr_only_omit
+Mat.8.18#05=KO	πολλοὺς (pollous)	Tyn+SBL+Treg+TR+Byz	sbl_without_na
+Mat.8.18#06=N(k)O	ὄχλον (ochlon)	NA28+NA27+WH	na_without_sbl
+Mat.17.21#01=KO	Τοῦτο (Touto)	Treg+TR+Byz	absent_verse
+Mat.17.21#12=KO	νηστείᾳ.¶ (nēsteia)	Treg+TR+Byz	absent_verse
+Mrk.11.31#06=O	τί (ti)	SBL	sbl_only
+Act.8.37#01=K	εἶπε (eipe)	TR	absent_verse
+Rom.16.24#01=KO	Ἡ (Hē)	SBL+TR+Byz	sbl_without_na
+Rom.16.25{14.24}#01=NKO	Τῷ (Tō)	NA28+NA27+Tyn+WH+Treg+TR+Byz«14.24	na_without_sbl

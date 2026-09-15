@@ -1,10 +1,22 @@
 import { offlineDssPayload } from "@davar/shared/dssTransliteration";
-import { staticBundlePathRequest, staticBundleRequest } from "@/src/services/api";
+import {
+  GREEK_RECORDED_REVISION,
+  greekBundleKey,
+  greekLexiconPath,
+  greekReleaseBasePath,
+  greekSourceIdentity,
+  type BesorahLanguage,
+  type GreekReleaseManifest,
+} from "@davar/shared/greekBesorah";
+import {
+  staticBundlePathRequest,
+  staticBundleRequest,
+  staticDataRequest,
+} from "@/src/services/api";
 import {
   getBundleUpdatePlan,
   type BundleVersions,
 } from "@/src/services/offlinePlan";
-import type { LexiconResponse } from "@/src/types/api";
 import type { TranslationRow } from "@/src/services/database";
 import {
   deleteTranslationBookEntries,
@@ -17,7 +29,16 @@ import {
   initializeDatabase,
   setLocalBundleVersion,
   getAllLocalBundleVersions,
+  activateSourceRelease,
+  beginSourceRelease,
+  insertSourceLexicon,
+  insertSourceVerses,
+  validateSourceRelease,
 } from "@/src/services/database";
+import {
+  buildLexiconEntries,
+  type DictionaryBundle,
+} from "@/src/services/dictionaryBundle";
 
 export type { BundleVersions } from "@/src/services/offlinePlan";
 
@@ -28,40 +49,6 @@ export type DownloadProgress = {
 };
 
 export type ProgressCallback = (progress: DownloadProgress) => void;
-
-// ── Dictionary Bundle Types ────────────────────────────────────────────────
-
-interface DefinitionItem {
-  text_en?: string;
-  text_es?: string;
-  source?: string;
-}
-
-interface CustomDefinitionEntry {
-  strong_number: string;
-  hebrew?: string;
-  transliteration_en?: string;
-  transliteration_es?: string;
-  definitions: DefinitionItem[];
-  root?: string;
-  root_strong?: string;
-}
-
-interface RootEntry {
-  strong_number: string;
-  lemma: string;
-  transliteration: string;
-  definitions: DefinitionItem[];
-  root?: string;
-  root_strong?: string;
-  occurrences_count?: number;
-}
-
-interface DictionaryBundle {
-  custom_definitions: Record<string, CustomDefinitionEntry>;
-  roots: Record<string, RootEntry>;
-  prefixes: Record<string, unknown>; // can be refined later if needed
-}
 
 // ── Translation Bundle Types ───────────────────────────────────────────────
 
@@ -157,6 +144,31 @@ interface DssBookData {
 
 type DssBundle = Record<string, DssBookData>;
 
+interface GreekBundleIndex {
+  schema: "davar-greek-split-bundle-v1";
+  edition: "sblgnt";
+  revision: string;
+  books: string[];
+  parts: Record<string, { path: string; checksum: string }>;
+}
+
+interface GreekBookBundle {
+  book: string;
+  edition: "sblgnt";
+  revision: string;
+  source_language: "greek";
+  chapters: Record<
+    string,
+    Array<{
+      chapter: number;
+      verse: number | null;
+      verse_id: string;
+      text: string;
+      words: Array<{ strong?: string }>;
+    }>
+  >;
+}
+
 // ── Remote versions ────────────────────────────────────────────────────────
 
 export const fetchRemoteBundleVersions = async (): Promise<BundleVersions> => {
@@ -164,99 +176,6 @@ export const fetchRemoteBundleVersions = async (): Promise<BundleVersions> => {
 };
 
 export { getAllLocalBundleVersions };
-
-// ── Lexicon builder ────────────────────────────────────────────────────────
-
-const buildLexiconEntries = (bundle: DictionaryBundle): LexiconResponse[] => {
-  const entries: LexiconResponse[] = [];
-
-  // Custom definitions
-  Object.values(bundle.custom_definitions ?? {}).forEach(
-    (entry: CustomDefinitionEntry) => {
-      const definitions = (entry.definitions ?? []).flatMap(
-        (item: DefinitionItem) => {
-          const defs: LexiconResponse["definitions"] = [];
-          if (item.text_en) {
-            defs.push({
-              text: item.text_en,
-              source: item.source ?? "custom",
-              language: "en",
-            });
-          }
-          if (item.text_es) {
-            defs.push({
-              text: item.text_es,
-              source: item.source ?? "custom",
-              language: "es",
-            });
-          }
-          return defs;
-        },
-      );
-
-      entries.push({
-        strong_number:
-          entry.strong_number != null ? String(entry.strong_number) : "",
-        hebrew: entry.hebrew != null ? String(entry.hebrew) : undefined,
-        definitions,
-        root: entry.root != null ? String(entry.root) : undefined,
-        root_strong:
-          entry.root_strong != null ? String(entry.root_strong) : undefined,
-        root_definitions: [],
-        occurrences_count: 0,
-        instances: [],
-      });
-    },
-  );
-
-  // Roots lexicon
-  Object.values(bundle.roots ?? {}).forEach((entry: RootEntry) => {
-    const definitions = (entry.definitions ?? []).flatMap(
-      (item: DefinitionItem) => {
-        const defs: LexiconResponse["definitions"] = [];
-        if (item.text_en) {
-          defs.push({
-            text: item.text_en,
-            source: item.source ?? "bdb",
-            language: "en",
-          });
-        }
-        if (item.text_es) {
-          defs.push({
-            text: item.text_es,
-            source: item.source ?? "bdb",
-            language: "es",
-          });
-        }
-        return defs;
-      },
-    );
-
-    entries.push({
-      strong_number:
-        entry.strong_number != null ? String(entry.strong_number) : "",
-      hebrew: entry.lemma != null ? String(entry.lemma) : undefined,
-      definitions,
-      root:
-        entry.root != null
-          ? String(entry.root)
-          : entry.lemma != null
-            ? String(entry.lemma)
-            : undefined,
-      root_strong:
-        entry.root_strong != null
-          ? String(entry.root_strong)
-          : entry.strong_number != null
-            ? String(entry.strong_number)
-            : undefined,
-      root_definitions: [],
-      occurrences_count: entry.occurrences_count ?? 0,
-      instances: [],
-    });
-  });
-
-  return entries.filter((entry) => entry.strong_number.trim() !== "");
-};
 
 export const downloadDictionaryBundle = async (remoteVersion?: number) => {
   await initializeDatabase();
@@ -480,6 +399,97 @@ export const downloadDssBundle = async (remoteVersion?: number) => {
   }
 };
 
+export const downloadGreekBundle = async (
+  revision = GREEK_RECORDED_REVISION,
+  remoteVersion?: number,
+) => {
+  await initializeDatabase();
+  const identity = greekSourceIdentity(revision);
+  const bundleKey = greekBundleKey(revision);
+  const index =
+    await staticBundleRequest<GreekBundleIndex>("greek-sblgnt");
+  if (
+    index.schema !== "davar-greek-split-bundle-v1" ||
+    index.edition !== identity.edition ||
+    index.revision !== revision ||
+    index.books.length !== 27
+  ) {
+    throw new Error(`Invalid or incomplete Greek bundle index: ${revision}`);
+  }
+
+  await beginSourceRelease(identity);
+  try {
+    for (const bookId of index.books) {
+      const part = index.parts[bookId];
+      if (!part?.path) throw new Error(`Missing Greek bundle part: ${bookId}`);
+      const book = await staticBundlePathRequest<GreekBookBundle>(part.path);
+      if (
+        book.book !== bookId ||
+        book.revision !== revision ||
+        book.source_language !== "greek"
+      ) {
+        throw new Error(`Greek bundle identity mismatch: ${bookId}`);
+      }
+      const verses = Object.values(book.chapters)
+        .flat()
+        .filter((verse) => Number.isInteger(verse.verse));
+      for (const verse of verses) {
+        for (const word of verse.words) {
+          if (word.strong && !/^G\d+[A-Za-z]?$/.test(word.strong)) {
+            throw new Error(
+              `Greek verse ${bookId} ${verse.chapter}:${verse.verse} contains ${word.strong}`,
+            );
+          }
+        }
+      }
+      await insertSourceVerses(
+        identity,
+        verses.map((verse) => ({
+          book: bookId,
+          chapter: verse.chapter,
+          verse: Number(verse.verse),
+          verseId: verse.verse_id,
+          text: verse.text,
+          words: verse.words,
+        })),
+      );
+    }
+    const lexicon = await staticDataRequest<Record<string, Record<string, unknown>>>(
+      greekLexiconPath(revision),
+    );
+    const releaseManifest = await staticDataRequest<GreekReleaseManifest>(
+      `${greekReleaseBasePath(revision)}/manifest.json`,
+    );
+    for (const meta of Object.values(releaseManifest.occurrence_shards ?? {})) {
+      const payload = await staticDataRequest<
+        Record<string, { count?: number; references?: unknown[] }>
+      >(`${greekReleaseBasePath(revision)}/${meta.path}`);
+      for (const [strong, bucket] of Object.entries(payload)) {
+        const entry = lexicon[strong];
+        if (!entry) continue;
+        lexicon[strong] = {
+          ...entry,
+          instances: bucket.references,
+          occurrences_count: bucket.count ?? entry.occurrences_count,
+        };
+      }
+    }
+    await insertSourceLexicon(identity, lexicon);
+    await validateSourceRelease(identity, 27);
+    await activateSourceRelease(identity);
+    if (remoteVersion != null) {
+      await setLocalBundleVersion(bundleKey, remoteVersion);
+    }
+  } catch (error) {
+    // The active revision is unchanged until validation and activation succeed.
+    throw new Error(
+      `Failed to stage Greek release ${revision}: ${
+        error instanceof Error ? error.message : String(error)
+      }`,
+    );
+  }
+};
+
 // ── Orchestrator ───────────────────────────────────────────────────────────
 
 type BundleStep = {
@@ -491,6 +501,10 @@ type BundleStep = {
 export const downloadAllForOffline = async (
   language: "es" | "en",
   onProgress?: ProgressCallback,
+  options?: {
+    besorahLanguage?: BesorahLanguage;
+    greekRevision?: string;
+  },
 ) => {
   await initializeDatabase();
 
@@ -498,7 +512,12 @@ export const downloadAllForOffline = async (
   const remoteVersions = await fetchRemoteBundleVersions();
   const localVersions = await getAllLocalBundleVersions();
 
-  const plan = getBundleUpdatePlan(language, localVersions, remoteVersions);
+  const plan = getBundleUpdatePlan(
+    language,
+    localVersions,
+    remoteVersions,
+    options,
+  );
   // Define download steps — each checks if it needs updating
   const steps: BundleStep[] = [
     {
@@ -549,6 +568,22 @@ export const downloadAllForOffline = async (
         }
       },
     },
+    ...(plan.greekDataset
+      ? [
+          {
+            name: "greek",
+            bundles: [plan.greekDataset],
+            download: async (rv: BundleVersions) => {
+              if (plan.needs.greek) {
+                await downloadGreekBundle(
+                  options?.greekRevision ?? GREEK_RECORDED_REVISION,
+                  rv[plan.greekDataset!] ?? 0,
+                );
+              }
+            },
+          },
+        ]
+      : []),
   ];
 
   const totalSteps = steps.length;

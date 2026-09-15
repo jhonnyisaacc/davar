@@ -28,7 +28,7 @@ A minimalist Bible study app focused on Hebrew Scriptures.
 ### 1) Clone and install
 
 ```bash
-git clone https://github.com/edyehoshua/davar.git
+git clone https://github.com/jhonnyisaacc/davar.git
 cd davar
 ```
 
@@ -70,6 +70,9 @@ Data in this project comes from public-domain, permissive, and licensed sources.
 - Qumran differences/data reference: https://codeberg.org/dandeto/deadseainsights
 - SBL Hebrew font source: https://www.sbl-site.org/educational/BiblicalFonts_SBLHebrew.aspx
 - Google Fonts: https://fonts.google.com
+- STEP Bible TAGNT and TBESG (Tyndale House, Cambridge): https://www.STEPBible.org / https://github.com/STEPBible/STEPBible-Data
+- SBL Greek New Testament (Holmes 2010): https://sblgnt.com/license/
+- UBS Dictionary of the Greek New Testament (Spanish): https://github.com/ubsicap/ubs-open-license
 
 Licensed translation credits used by permission:
 
@@ -77,6 +80,17 @@ Licensed translation credits used by permission:
   "Scripture taken from The Scriptures, Copyright by Institute for Scripture Research. Used by permission."
 - TTH (Natanael Doldan):
   "Texto tomado de la Traducción Textual del Hebreo, Copyright por Natanael Doldan. Usado con permiso."
+
+Greek Besorah sources (CC BY / CC BY-SA; required notices):
+
+- STEPBible TAGNT and TBESG (CC BY 4.0):
+  "Greek word tags and English lexical data are from STEP Bible (www.STEPBible.org), based on work at Tyndale House, Cambridge, licensed under CC BY 4.0. Source: https://github.com/STEPBible/STEPBible-Data. Modifications, if any, are recorded with the data revision."
+- SBLGNT (CC BY 4.0):
+  "The displayed Greek reading is the SBL Greek New Testament, edited by Michael W. Holmes. Copyright © 2010 Society of Biblical Literature and Logos Bible Software. Licensed under CC BY 4.0. https://sblgnt.com/license/"
+- UBS Dictionary of the Greek New Testament (CC BY-SA 4.0):
+  "Spanish lexical entries adapted from the UBS Dictionary of the Greek New Testament © United Bible Societies, licensed under CC BY-SA 4.0. https://github.com/ubsicap/ubs-open-license. Adaptations of this material must remain CC BY-SA 4.0."
+
+Official STEPBible/UBS source files are not committed. Davar rebuilds a compact runtime bundle from those downloads.
 
 Special thanks:
 

@@ -1,4 +1,12 @@
 import { instanceSurface } from "@davar/shared/instanceSurface";
+import {
+  GREEK_RECORDED_REVISION,
+  greekLexiconPath,
+  greekOccurrencesShardPath,
+  greekSourceIdentity,
+  greekStrongFamily,
+} from "@davar/shared/greekBesorah";
+import { cleanLexicalText } from "@davar/shared/greekText";
 import React, {
   useCallback,
   useEffect,
@@ -43,7 +51,11 @@ import {
 import { staticDataRequest } from "@/src/services/api";
 import type { LexiconResponse } from "@/src/types/api";
 import { useTranslation } from "@/src/i18n/useTranslation";
-import { fetchLexiconEntry, fetchPrefixEntry } from "@/src/services/database";
+import {
+  fetchLexiconEntry,
+  fetchPrefixEntry,
+  fetchSourceLexiconEntry,
+} from "@/src/services/database";
 import { getDssCommentaryForLanguage } from "@/src/utils/translationConfig";
 
 type PrefixResponse = {
@@ -90,7 +102,15 @@ type StaticDictionaryDefinition = {
   text?: string;
   text_en?: string;
   text_es?: string;
+  text_he?: string;
   source?: string;
+  review_status?: "approved" | "imported" | "draft";
+  license?: string;
+  term_language?: "greek" | "hebrew" | "unknown";
+  source_file?: string;
+  source_row?: string;
+  source_url?: string;
+  context?: string;
 };
 
 type StaticDictionaryEntry = {
@@ -119,6 +139,9 @@ type StaticCustomDefinition = {
   hebrew?: string;
   transliteration_en?: string;
   transliteration_es?: string;
+  term_language?: "greek" | "hebrew" | "unknown";
+  canonical_strong?: string | null;
+  imported_by?: string;
   definitions?: StaticDictionaryDefinition[];
   root?: string;
   root_strong?: string;
@@ -199,17 +222,27 @@ const resolveStrongKey = <T,>(
   return null;
 };
 
+type MappedDefinition = {
+  text: string;
+  source: string;
+  language: "en" | "es" | "he";
+  review_status?: "approved" | "imported" | "draft";
+  license?: string;
+};
+
 const mapStaticDefinitions = (
   definitions: StaticDictionaryDefinition[] | undefined,
   language: "en" | "es" | "he",
-) => {
-  const definitionLanguage = language === "es" ? "es" : "en";
+): MappedDefinition[] => {
+  const definitionLanguage = language;
   return (definitions ?? [])
-    .map((definition) => {
+    .map((definition): MappedDefinition | null => {
       const text =
         definitionLanguage === "es"
-          ? (definition.text_es ?? definition.text_en ?? definition.text)
-          : (definition.text_en ?? definition.text_es ?? definition.text);
+          ? definition.text_es
+          : definitionLanguage === "he"
+            ? definition.text_he
+            : definition.text_en;
       if (!text) {
         return null;
       }
@@ -217,11 +250,11 @@ const mapStaticDefinitions = (
         text,
         source: definition.source ?? "static",
         language: definitionLanguage,
+        review_status: definition.review_status,
+        license: definition.license,
       };
     })
-    .filter((value): value is { text: string; source: string; language: string } =>
-      value !== null,
-    );
+    .filter((value): value is MappedDefinition => value !== null);
 };
 
 const mergeUniqueDefinitions = (
@@ -360,6 +393,174 @@ const loadLexiconEntryFromStatic = async (
     occurrences_count: surface.total,
     instances,
   };
+};
+
+type GreekLexiconEntry = {
+  strong?: string;
+  lemma?: string;
+  translit_en?: string;
+  translit_es?: string;
+  translit_he?: string;
+  definitions?: Partial<
+    Record<
+      "en" | "es" | "he",
+      {
+        short?: string | null;
+        fuller?: string | null;
+        source?: string;
+        review_status?: "approved" | "imported" | "draft";
+        license?: string;
+      }
+    >
+  >;
+  occurrences_count?: number;
+  instances?: Array<{
+    book: string;
+    chapter: number;
+    verse?: number | null;
+    verse_id?: string;
+    index: number;
+  }>;
+};
+
+const toGreekLexiconResponse = (
+  entry: GreekLexiconEntry,
+  strong: string,
+  language: "en" | "es" | "he",
+  customEntry?: StaticCustomDefinition,
+): LexiconResponse => {
+  const localized = entry.definitions?.[language];
+  const english = entry.definitions?.en;
+  const selected =
+    localized && (localized.short || localized.fuller) ? localized : english;
+  const definitions: LexiconResponse["definitions"] = [
+    ...mapStaticDefinitions(customEntry?.definitions, language),
+  ];
+  if (selected?.short) {
+    definitions.push({
+      language: selected === localized ? language : "en",
+      license: selected.license,
+      review_status: selected.review_status,
+      source: selected.source ?? "stepbible-tbesg",
+      text: cleanLexicalText(selected.short),
+    });
+  }
+  if (selected?.fuller && selected.fuller !== selected.short) {
+    definitions.push({
+      language: selected === localized ? language : "en",
+      license: selected.license,
+      review_status: selected.review_status,
+      source: selected.source ?? "stepbible-tbesg",
+      text: cleanLexicalText(selected.fuller),
+    });
+  }
+  const surface = instanceSurface({
+    instance_total: entry.occurrences_count,
+    instances: entry.instances?.map((row) => ({
+      book: row.book,
+      chapter: row.chapter,
+      verse: row.verse ?? undefined,
+    })),
+  });
+  return {
+    definitions,
+    greek: entry.lemma,
+    instances: surface.instances,
+    lemma: entry.lemma,
+    lemma_translit_en: entry.translit_en,
+    lemma_translit_es: entry.translit_es,
+    lemma_translit_he: entry.translit_he,
+    occurrences_count: surface.total,
+    source_language: "greek",
+    strong_number: entry.strong ?? strong,
+    translit_en: entry.translit_en,
+    translit_es: entry.translit_es,
+    translit_he: entry.translit_he,
+  };
+};
+
+const loadGreekLexiconEntry = async (
+  strong: string,
+  language: "en" | "es" | "he",
+): Promise<LexiconResponse | null> => {
+  const revision = GREEK_RECORDED_REVISION;
+  try {
+    const [lexicon, custom] = await Promise.all([
+      staticDataRequest<Record<string, GreekLexiconEntry>>(
+        greekLexiconPath(revision),
+      ),
+      staticDataRequest<Record<string, StaticCustomDefinition>>(
+        "dict/custom_definitions.json",
+      ),
+    ]);
+    const family = greekStrongFamily(strong);
+    const entry =
+      lexicon[strong] ??
+      lexicon[family] ??
+      Object.values(lexicon).find(
+        (item) =>
+          item.strong != null && greekStrongFamily(item.strong) === family,
+      );
+    if (!entry) return null;
+    if (!entry.instances?.length) {
+      const shard = await staticDataRequest<
+        Record<string, { count?: number; references?: GreekLexiconEntry["instances"] }>
+      >(greekOccurrencesShardPath(entry.strong ?? strong, revision));
+      const bucket = shard[strong] ?? (entry.strong ? shard[entry.strong] : undefined);
+      return toGreekLexiconResponse(
+        {
+          ...entry,
+          instances: bucket?.references,
+          occurrences_count: bucket?.count ?? entry.occurrences_count,
+        },
+        strong,
+        language,
+        custom[entry.strong ?? strong],
+      );
+    }
+    return toGreekLexiconResponse(entry, strong, language, custom[entry.strong ?? strong]);
+  } catch {
+    const offline = (await fetchSourceLexiconEntry(
+      greekSourceIdentity(revision),
+      strong,
+    )) as GreekLexiconEntry | null;
+    const offlineCustom = await fetchLexiconEntry(strong);
+    const customEntry: StaticCustomDefinition | undefined = offlineCustom
+      ? {
+          definitions: (offlineCustom.definitions as Record<string, unknown>[]).reduce<
+            StaticDictionaryDefinition[]
+          >((definitions, definition) => {
+            const text = typeof definition.text === "string" ? definition.text : "";
+            const language = String(definition.language ?? "");
+            if (!text) return definitions;
+            definitions.push({
+              ...(language === "es" ? { text_es: text } : {}),
+              ...(language === "he" ? { text_he: text } : {}),
+              ...(language === "en" ? { text_en: text } : {}),
+              source: typeof definition.source === "string" ? definition.source : undefined,
+              review_status:
+                definition.review_status === "approved" ||
+                definition.review_status === "imported" ||
+                definition.review_status === "draft"
+                  ? definition.review_status
+                  : undefined,
+              license: typeof definition.license === "string" ? definition.license : undefined,
+            });
+            return definitions;
+          }, []),
+        }
+      : undefined;
+    return offline
+      ? toGreekLexiconResponse(offline, strong, language, customEntry)
+      : customEntry
+        ? toGreekLexiconResponse(
+            { strong, lemma: "", definitions: {} },
+            strong,
+            language,
+            customEntry,
+          )
+        : null;
+  }
 };
 
 const loadPrefixEntryFromStatic = async (
@@ -905,7 +1106,7 @@ const WordAnalysisBottomSheetComponent = (
         ? (word?.translit_en ?? lexiconEntry?.translit_en)
         : language === "es"
           ? (word?.translit_es ?? lexiconEntry?.translit_es)
-          : undefined;
+          : (word?.translit_he ?? lexiconEntry?.translit_he);
 
     if (activeTab === "qumran") {
       const qumranTranslitFromWord =
@@ -934,10 +1135,12 @@ const WordAnalysisBottomSheetComponent = (
     language,
     word?.translit_en,
     word?.translit_es,
+    word?.translit_he,
     word?.dss_translit_en,
     word?.dss_translit_es,
     lexiconEntry?.translit_en,
     lexiconEntry?.translit_es,
+    lexiconEntry?.translit_he,
     dssLexiconEntry?.translit_en,
     dssLexiconEntry?.translit_es,
     strongNumber,
@@ -957,9 +1160,12 @@ const WordAnalysisBottomSheetComponent = (
       base = stripCantillation(base);
     }
     base = stripMeteg(base);
-    base = removeMaqafForDisplay(
-      normalizeHebrewDisplay(base).replace(/\//g, ""),
-    );
+    base =
+      word?.source_language === "greek"
+        ? base.replace(/\//g, "")
+        : removeMaqafForDisplay(
+            normalizeHebrewDisplay(base).replace(/\//g, ""),
+          );
     if (isBesorah) {
       base = removeSofPasukForDisplay(base);
     }
@@ -970,6 +1176,7 @@ const WordAnalysisBottomSheetComponent = (
     lexiconEntry?.hebrew,
     word?.dssWord,
     word?.text,
+    word?.source_language,
     showNikud,
     showCantillation,
   ]);
@@ -1001,7 +1208,10 @@ const WordAnalysisBottomSheetComponent = (
       try {
         let entry: LexiconResponse | null = null;
         try {
-          entry = await loadLexiconEntryFromStatic(strongNumber, language);
+          entry =
+            word?.source_language === "greek"
+              ? await loadGreekLexiconEntry(strongNumber, language)
+              : await loadLexiconEntryFromStatic(strongNumber, language);
         } catch {
           entry = null;
         }
@@ -1016,7 +1226,9 @@ const WordAnalysisBottomSheetComponent = (
                   ? String(offlineEntry.hebrew)
                   : undefined,
                 definitions: Array.isArray(offlineEntry.definitions)
-                  ? (offlineEntry.definitions as LexiconResponse["definitions"])
+                  ? (offlineEntry.definitions as LexiconResponse["definitions"]).filter(
+                      (definition) => definition.language === language,
+                    )
                   : [],
                 root: offlineEntry.root ? String(offlineEntry.root) : undefined,
                 root_strong: offlineEntry.root_strong
@@ -1040,7 +1252,7 @@ const WordAnalysisBottomSheetComponent = (
       }
     };
     loadLexicon();
-  }, [strongNumber, language, word?.text]);
+  }, [strongNumber, language, word?.source_language, word?.text]);
 
   useEffect(() => {
     const loadDssLexicon = async () => {
@@ -1528,6 +1740,8 @@ const WordAnalysisBottomSheetComponent = (
                   </>
                 ) : null}
 
+                {word?.source_language !== "greek" && (
+                  <>
                 <View style={styles.sectionDivider} />
                 {/* Root section */}
                 <View style={styles.rootSection}>
@@ -1573,6 +1787,8 @@ const WordAnalysisBottomSheetComponent = (
                     </Text>
                   )}
                 </View>
+                  </>
+                )}
               </>
             ) : activeTab === "qumran" ? (
               <>

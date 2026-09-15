@@ -3,6 +3,7 @@ import es from "../../../locales/es.json";
 import he from "../../../locales/he.json";
 import { useAppStore, type AppState } from "@/src/store/useAppStore";
 import type { AppLanguage } from "@/src/services/storage";
+import { useCallback } from "react";
 
 type TranslationValue =
   | string
@@ -85,10 +86,16 @@ export const getTranslationValue = <T = TranslationValue>(
 
 export const useTranslation = () => {
   const language = useAppStore((state: AppState) => state.language);
-  const t = (key: string, params?: Record<string, string | number>) =>
-    translate(language, key, params);
-  const get = <T = TranslationValue>(key: string, fallback?: T) =>
-    getTranslationValue<T>(language, key, fallback);
+  const t = useCallback(
+    (key: string, params?: Record<string, string | number>) =>
+      translate(language, key, params),
+    [language],
+  );
+  const get = useCallback(
+    <T = TranslationValue>(key: string, fallback?: T) =>
+      getTranslationValue<T>(language, key, fallback),
+    [language],
+  );
 
   return {
     t,
@@ -99,5 +106,5 @@ export const useTranslation = () => {
 };
 
 export const getSupportTelegramUrl = (language: AppLanguage): string => {
-  return "https://t.me/davarbible";
+  return "https://t.me/jhonnyisaacc";
 };

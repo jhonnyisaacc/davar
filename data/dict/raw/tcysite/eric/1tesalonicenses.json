@@ -1,0 +1,1248 @@
+[
+  {
+    "id": 1,
+    "texto_hebreo": "אֱמוּנָה",
+    "transliteracion": "’Emunáh",
+    "equivalencia_espanol": "fidelidad, Fe, Certeza",
+    "observacion": "Se usa como fidelidad/inmutabilidad de Dios y no solo como creencia subjetiva. Considerada un don de Dios. Yehoshua' Hamashiaj es el autor y consumador de esta fidelidad, la cual produce obras en el creyente. Se presenta como la raíz de la cual brota el fruto del Rúaj Haqódesh y la esperanza de la resurrección. Mencionada como aquello que recibieron los grupos en Tesalónica, ciudad hostil al Evangelio."
+  },
+  {
+    "id": 2,
+    "texto_hebreo": "אַבָּא",
+    "transliteracion": "’Abá",
+    "equivalencia_espanol": "Padre, nivel/atributo superior en la deidad (en la exposición)",
+    "observacion": "Aparece en fórmulas como 'Elohim y Abá dentro de una lectura atributiva."
+  },
+  {
+    "id": 3,
+    "texto_hebreo": "אֱלֹהִים וְאַבָּא",
+    "transliteracion": "’Elohim ve’Abá",
+    "equivalencia_espanol": "‘Elohim y Padre, ‘Elohim, es decir, ‘Abá",
+    "observacion": "Se explica con matiz conjuntivo y también explicativo según el contexto."
+  },
+  {
+    "id": 4,
+    "texto_hebreo": "יְהוָה",
+    "transliteracion": "YHWH",
+    "equivalencia_espanol": "atributo del juicio",
+    "observacion": "Se contrasta con ’Elohim en la explicación de Génesis y la creación."
+  },
+  {
+    "id": 5,
+    "texto_hebreo": "רַחֲמִים",
+    "transliteracion": "Rajamim, Rajamin",
+    "equivalencia_espanol": "amor entrañable, misericordia compasiva",
+    "observacion": "Se usa para explicar el matiz amoroso de ’Elohim."
+  },
+  {
+    "id": 6,
+    "texto_hebreo": "אָדָם",
+    "transliteracion": "’Adam",
+    "equivalencia_espanol": "Adam, humanidad (según contexto)",
+    "observacion": "Se usa en la explicación de caída, expulsión y restauración."
+  },
+  {
+    "id": 7,
+    "texto_hebreo": "גַּן־עֵדֶן",
+    "transliteracion": "Gan Eden",
+    "equivalencia_espanol": "huerto de Edén",
+    "observacion": "Se menciona en la lectura de Génesis sobre el acceso al árbol de la vida."
+  },
+  {
+    "id": 8,
+    "texto_hebreo": "בְּרָא",
+    "transliteracion": "Brá’ (arameo)",
+    "equivalencia_espanol": "hijo, portador, depositario",
+    "observacion": "Se enfatiza la idea de portar/traer/depositar, no solo parentesco biológico."
+  },
+  {
+    "id": 9,
+    "texto_hebreo": "בְּרָא דְאֱנָשָׁא",
+    "transliteracion": "Brá’ de’enasha’ (arameo)",
+    "equivalencia_espanol": "Hijo del Hombre",
+    "observacion": "Se usa con matiz de quien vino a buscar lo perdido, conectado al árbol de la vida."
+  },
+  {
+    "id": 10,
+    "texto_hebreo": "זֶרַע",
+    "transliteracion": "Zera’",
+    "equivalencia_espanol": "semilla, depositario",
+    "observacion": "Se precisa que no se limita a descendencia física, sino al depositario de promesas. Se entiende como depositario por contener la información necesaria para reproducirse, se identifica directamente con Mashiaj como el único depositario de las promesas."
+  },
+  {
+    "id": 11,
+    "texto_hebreo": "בֵּן",
+    "transliteracion": "Ben",
+    "equivalencia_espanol": "portador, heredero",
+    "observacion": "Se repite como clave de lectura en 'Hijo' y 'hijos del día/luz'."
+  },
+  {
+    "id": 12,
+    "texto_hebreo": "חַיִּים",
+    "transliteracion": "Jayim, Jaim (Jayyim)",
+    "equivalencia_espanol": "vida",
+    "observacion": "Aparece en expresiones como vida y verdad (Jayim ve’emet) dentro de la exposición."
+  },
+  {
+    "id": 13,
+    "texto_hebreo": "אֱמֶת",
+    "transliteracion": "’Emet",
+    "equivalencia_espanol": "verdad",
+    "observacion": "Usada en fórmulas que destacan vida/verdad como títulos descriptivos. Utilizado en la expresión 'YHWH ’Elohim ’Emet' para designar al Dios que es verdad absoluta y Rey eterno, ante cuyo furor tiembla la tierra."
+  },
+  {
+    "id": 14,
+    "texto_hebreo": "יוֹרֵשׁ",
+    "transliteracion": "Yoresh",
+    "equivalencia_espanol": "heredero que reparte, Heredero, Repartidor",
+    "observacion": "Se precisa que el primogénito reparte la herencia, por eso se conecta con repartición. En el contexto del primogénito, es quien tiene el derecho de repartir la herencia. Yehoshua' es el único con derecho de repartir la promesa del amor incondicional."
+  },
+  {
+    "id": 15,
+    "texto_hebreo": "רוּחַ",
+    "transliteracion": "Rúaj,",
+    "equivalencia_espanol": "ánimo, motor, poder",
+    "observacion": "Se usa con matices funcionales (ánimo, impulso, poder) según el pasaje."
+  },
+  {
+    "id": 16,
+    "texto_hebreo": "רוּחַ הַקֹּדֶשׁ",
+    "transliteracion": "Rúaj Haqódesh",
+    "equivalencia_espanol": "Espíritu de santidad, rúaj santo",
+    "observacion": "Se vincula con restauración, consuelo y corrección, no como entidad separada en sentido trinitario."
+  },
+  {
+    "id": 17,
+    "texto_hebreo": "רוּחַ אֱלֹהִים",
+    "transliteracion": "Rúaj ’Elohim",
+    "equivalencia_espanol": "rúaj del atributo del amor",
+    "observacion": "Se presenta como rúaj propio del atributo ’Elohim."
+  },
+  {
+    "id": 18,
+    "texto_hebreo": "רוּחַ יְהוָה",
+    "transliteracion": "Rúaj YHWH",
+    "equivalencia_espanol": "rúaj del atributo del juicio",
+    "observacion": "Se menciona junto a otros atributos para diferenciar matices."
+  },
+  {
+    "id": 19,
+    "texto_hebreo": "רוּחַ אֲדֹנָי",
+    "transliteracion": "Rúaj Adonay",
+    "equivalencia_espanol": "rúaj de Adonai",
+    "observacion": "Se enumera junto a Rúaj ’Elohim y Rúaj YHWH en esquema atributivo."
+  },
+  {
+    "id": 20,
+    "texto_hebreo": "רוּחַ חָכְמָה",
+    "transliteracion": "Rúaj jojmáh",
+    "equivalencia_espanol": "rúaj de sabiduría",
+    "observacion": "Se cita como ejemplo de rúaj con atributo específico."
+  },
+  {
+    "id": 21,
+    "texto_hebreo": "רוּחַ בִּינָה",
+    "transliteracion": "Rúaj bináh",
+    "equivalencia_espanol": "rúaj de entendimiento",
+    "observacion": "Se cita dentro de la serie de rúajot atributivas."
+  },
+  {
+    "id": 22,
+    "texto_hebreo": "רוּחוֹת",
+    "transliteracion": "Rujot,",
+    "equivalencia_espanol": "rúajot, plural de rúaj",
+    "observacion": "Se usa para discutir la multiplicidad de atributos, no seres separados."
+  },
+  {
+    "id": 23,
+    "texto_hebreo": "אַהֲבָה",
+    "transliteracion": "’Ahaváh",
+    "equivalencia_espanol": "amor, ejecución incondicional y práctica de la voluntad de Dios, ejecución incondicional",
+    "observacion": "Se define de forma activa y mandamental, no meramente emocional. Definido como la ejecución incondicional y desinteresada práctica de la voluntad de Dios, que se manifiesta incluso hacia el enemigo o quien hace oposición."
+  },
+  {
+    "id": 24,
+    "texto_hebreo": "תָּמֵא",
+    "transliteracion": "tamé’",
+    "equivalencia_espanol": "incompatible con la santidad",
+    "observacion": "Se usa para corregir 'cosa impura' con énfasis de incompatibilidad cultual/moral."
+  },
+  {
+    "id": 25,
+    "texto_hebreo": "טֻמְאָה",
+    "transliteracion": "Tum’ah",
+    "equivalencia_espanol": "inmundicia, incompatibilidad con la santidad, Impureza ritual/espiritual",
+    "observacion": "Se presenta como equivalente hebreo de akatharsia. Equivalente hebreo de Akatharsia, es el estado opuesto a la santidad al que Dios no nos ha llamado."
+  },
+  {
+    "id": 26,
+    "texto_hebreo": "עָוֹן",
+    "transliteracion": "’avón,,",
+    "equivalencia_espanol": "iniquidad, transgresión a sabiendas, dolo",
+    "observacion": "Se asocia a dolo y premeditación en la transgresión. Concepto cercano al dolo jurídico: es la transgresión de la Torah a sabiendas, con premeditación o intención de engañar."
+  },
+  {
+    "id": 27,
+    "texto_hebreo": "בְּנֵי הָאֱלֹהִים",
+    "transliteracion": "beney ha’elohim",
+    "equivalencia_espanol": "hijos de Dios",
+    "observacion": "Se usa con matiz de dignidad restaurada por la ’Emunáh."
+  },
+  {
+    "id": 28,
+    "texto_hebreo": "תּוֹרָה",
+    "transliteracion": "Toráh",
+    "equivalencia_espanol": "Torah, instrucción, luz (en la exposición), camino, dirección",
+    "observacion": "Frecuentemente se contrasta con anomía/no-Torah y con la idea de suplantación. Establece el patrón y las direcciones para reconocer la dignidad humana, se vuelve un camino 'cómodo' solo tras la restauración interna del Rúaj."
+  },
+  {
+    "id": 29,
+    "texto_hebreo": "פֹּעֲלֵי אָוֶן",
+    "transliteracion": "Po’aley ’aven",
+    "equivalencia_espanol": "obradores/activistas de la no-Torah",
+    "observacion": "Se usa para quienes sustituyen la palabra por tradición aunque aparenten tener Torah."
+  },
+  {
+    "id": 30,
+    "texto_hebreo": "אָוֶן",
+    "transliteracion": "’Aven",
+    "equivalencia_espanol": "no-Torah, suplantación, inaplicación de la Torah",
+    "observacion": "Se presenta como trasfondo hebreo de anomía en esta línea interpretativa."
+  },
+  {
+    "id": 31,
+    "texto_hebreo": "אִישׁ אָוֶן",
+    "transliteracion": "’Ish ’aven",
+    "equivalencia_espanol": "hombre de iniquidad, hombre de la suplantación",
+    "observacion": "Se conecta con apostasía y rechazo del Evangelio."
+  },
+  {
+    "id": 32,
+    "texto_hebreo": "מִשְׁנָה",
+    "transliteracion": "Mishnáh",
+    "equivalencia_espanol": "tradición codificada",
+    "observacion": "Se menciona en crítica a la sustitución de la palabra escrita."
+  },
+  {
+    "id": 33,
+    "texto_hebreo": "שַׁבָּתוֹת",
+    "transliteracion": "Shabatot",
+    "equivalencia_espanol": "Shabats, días de reposo",
+    "observacion": "Se usa al narrar que Pablo discutía en sinagoga por tres Shabatot."
+  },
+  {
+    "id": 34,
+    "texto_hebreo": "מִשְׁפָּט",
+    "transliteracion": "Mishpat",
+    "equivalencia_espanol": "el correcto proceso",
+    "observacion": "Un Mishpat es un procedimiento para la defensa del derecho, Cuando hacemos mishpat, hacemos la voluntad de Dios, Lo han traducido el pectoral del juicio pero no es correcto porque ahí no se está hablando del juicio se está hablando del procedimiento correcto entre un hijo de Yisra’el y otro, entre una tribu y otra como cuando dice habla verdad cada uno con su prójimo, no mintáis unos a los otros."
+  },
+  {
+    "id": 35,
+    "texto_hebreo": "שָׁלוֹם",
+    "transliteracion": "Shalom",
+    "equivalencia_espanol": "paz, ausencia de deudas",
+    "observacion": "Se define de forma ética/jurídica, no como paz interior abstracta."
+  },
+  {
+    "id": 36,
+    "texto_hebreo": "שַׁלְוָה",
+    "transliteracion": "Shalva",
+    "equivalencia_espanol": "tranquilidad",
+    "observacion": "Se explica que presupone seguridad para que exista verdadera tranquilidad."
+  },
+  {
+    "id": 37,
+    "texto_hebreo": "מָכוֹן",
+    "transliteracion": "Majón,",
+    "equivalencia_espanol": "establecimiento, base",
+    "observacion": "Se menciona en discusión de equivalencias semánticas con 'seguridad' en LXX."
+  },
+  {
+    "id": 38,
+    "texto_hebreo": "שֶׁקֶץ",
+    "transliteracion": "Shéqetz",
+    "equivalencia_espanol": "término citado como paralelo/relación léxica en la discusión",
+    "observacion": "Se menciona dentro de una cadena comparativa ligada a 'paz y seguridad'."
+  },
+  {
+    "id": 39,
+    "texto_hebreo": "סָמַךְ",
+    "transliteracion": "Samaj",
+    "equivalencia_espanol": "apoyar, sostener, establecer",
+    "observacion": "Se cita como verbo relacionado en el campo semántico de seguridad/establecimiento."
+  },
+  {
+    "id": 40,
+    "texto_hebreo": "לַיְלָה",
+    "transliteracion": "Layla",
+    "equivalencia_espanol": "noche",
+    "observacion": "Se amplía como sistema de oscuridad/oposición a la luz y suplantación de Torah."
+  },
+  {
+    "id": 41,
+    "texto_hebreo": "הֵילֵל",
+    "transliteracion": "Heylel, Jeylel",
+    "equivalencia_espanol": "nombre vinculado a satán (en la exposición)",
+    "observacion": "Se lo correlaciona con Layla por inversión de letras/lectura simbólica."
+  },
+  {
+    "id": 42,
+    "texto_hebreo": "יוֹם",
+    "transliteracion": "Yom",
+    "equivalencia_espanol": "día, luz (como concepto general)",
+    "observacion": "Se usa para contrastar con Layla como noche/no luz."
+  },
+  {
+    "id": 43,
+    "texto_hebreo": "יוֹם תְּרוּעָה",
+    "transliteracion": "Yom Tru’áh",
+    "equivalencia_espanol": "día de aclamación/trompeta",
+    "observacion": "Se presenta como una de las fiestas de otoño y aspecto de la venida, no fecha fija obligatoria."
+  },
+  {
+    "id": 44,
+    "texto_hebreo": "יוֹם הַכִּפֻּרִים",
+    "transliteracion": "Yom Hakipurim",
+    "equivalencia_espanol": "día de las expiaciones",
+    "observacion": "Se enumera entre las festividades otoñales en la argumentación."
+  },
+  {
+    "id": 45,
+    "texto_hebreo": "סֻכּוֹת",
+    "transliteracion": "Sukot",
+    "equivalencia_espanol": "cabañas, tabernáculos",
+    "observacion": "Se enumera dentro de las cuatro festividades del otoño."
+  },
+  {
+    "id": 46,
+    "texto_hebreo": "שְׁמִינִי עֲצֶרֶת",
+    "transliteracion": "Shmini ‘atzéret",
+    "equivalencia_espanol": "octavo día de asamblea",
+    "observacion": "Se menciona como parte de las festividades del otoño."
+  },
+  {
+    "id": 47,
+    "texto_hebreo": "אֵתָנִים",
+    "transliteracion": "Etanim",
+    "equivalencia_espanol": "mes de Etanim",
+    "observacion": "Se menciona como marco de las fiestas otoñales."
+  },
+  {
+    "id": 48,
+    "texto_hebreo": "הַשָּׂטָן",
+    "transliteracion": "hasatán",
+    "equivalencia_espanol": "el adversario, satán",
+    "observacion": "Se usa como figura opuesta a Mashiaj y asociada a suplantación."
+  },
+  {
+    "id": 49,
+    "texto_hebreo": "שְׁאוֹל",
+    "transliteracion": "Sh’ol,",
+    "equivalencia_espanol": "Sheol",
+    "observacion": "Se cita en Job 7:9 en discusión sobre descenso y no subida."
+  },
+  {
+    "id": 50,
+    "texto_hebreo": "אֲוִיר",
+    "transliteracion": "’Avir",
+    "equivalencia_espanol": "aire",
+    "observacion": "Se menciona como traducción hebrea de 'aire', pero se amplía simbólicamente en la exposición."
+  },
+  {
+    "id": 51,
+    "texto_hebreo": "אֲוִירָא",
+    "transliteracion": "’Avira (arameo)",
+    "equivalencia_espanol": "corona de gloria, inmortalidad (uso midráshico citado)",
+    "observacion": "Se usa para ampliar el sentido más allá de 'aire' literal."
+  },
+  {
+    "id": 52,
+    "texto_hebreo": "אוֹר",
+    "transliteracion": "’Or",
+    "equivalencia_espanol": "luz",
+    "observacion": "Se relaciona con revelación, presencia divina y oposición a la noche."
+  },
+  {
+    "id": 53,
+    "texto_hebreo": "יוֹד",
+    "transliteracion": "Yud",
+    "equivalencia_espanol": "letra yod",
+    "observacion": "Se menciona simbólicamente en una explicación midráshica sobre manifestación."
+  },
+  {
+    "id": 54,
+    "texto_hebreo": "תִּקְוָה",
+    "transliteracion": "Tiqvah",
+    "equivalencia_espanol": "esperanza (vida eterna, en lenguaje bíblico)",
+    "observacion": "Se precisa que la esperanza apunta a resurrección/vida eterna."
+  },
+  {
+    "id": 55,
+    "texto_hebreo": "מַאֲמִינִים",
+    "transliteracion": "Ma’aminin, Ma’aminim",
+    "equivalencia_espanol": "creyentes",
+    "observacion": "Se define como quienes exhiben la ’Emunáh de Dios."
+  },
+  {
+    "id": 56,
+    "texto_hebreo": "בָּרוּךְ",
+    "transliteracion": "Baruj",
+    "equivalencia_espanol": "bendito",
+    "observacion": "En 1Ts 5:18 se usa como proclamación ('proclamen que es Baruj')."
+  },
+  {
+    "id": 57,
+    "texto_hebreo": "בָּרוּךְ הַשֵּׁם",
+    "transliteracion": "Baruj Hashem",
+    "equivalencia_espanol": "bendito sea el Nombre",
+    "observacion": "Se menciona como fórmula confesional/reverente en la exposición."
+  },
+  {
+    "id": 58,
+    "texto_hebreo": "מִקְרָא",
+    "transliteracion": "Miqrá",
+    "equivalencia_espanol": "lectura",
+    "observacion": "Aparece en la fórmula 'Miqrá Mesorah' con un uso técnico dentro del estudio."
+  },
+  {
+    "id": 59,
+    "texto_hebreo": "מְסוֹרָה",
+    "transliteracion": "Mesorah",
+    "equivalencia_espanol": "tradición, transmisión",
+    "observacion": "Se combina con Miqrá en una expresión metodológica del estudio."
+  },
+  {
+    "id": 60,
+    "texto_hebreo": "מִקְרָא מְסוֹרָה",
+    "transliteracion": "Miqrá Mesorah",
+    "equivalencia_espanol": "lectura inversa (según el uso del estudio)",
+    "observacion": "Se emplea para leer el bloque 16-19 en sentido retrospectivo dentro del argumento."
+  },
+  {
+    "id": 61,
+    "texto_hebreo": "עוֹלָם",
+    "transliteracion": "‘olam",
+    "equivalencia_espanol": "camino perdurable, antiguo (según la cita usada)",
+    "observacion": "Se menciona en 'camino del ‘olam' como ruta que debe preguntarse y recorrerse."
+  },
+  {
+    "id": 62,
+    "texto_hebreo": "שִׂמְחוּ",
+    "transliteracion": "Simjuh, Simjū",
+    "equivalencia_espanol": "alégrense",
+    "observacion": "Se usa para reforzar 'siempre gócense' con imperativo hebreo."
+  },
+  {
+    "id": 63,
+    "texto_hebreo": "אֹרֶךְ רוּחַ",
+    "transliteracion": "oreg rúaj, oréj",
+    "equivalencia_espanol": "paciencia, largo ánimo",
+    "observacion": "Se explica como conservar el mismo ánimo por largo tiempo."
+  },
+  {
+    "id": 64,
+    "texto_hebreo": "קוֹרֵא",
+    "transliteracion": "qore’",
+    "equivalencia_espanol": "leer, llamar, ocurrir, poner",
+    "observacion": "Se expone como verbo con varios valores útiles en la pedagogía del texto."
+  },
+  {
+    "id": 65,
+    "texto_hebreo": "תְּשׁוּבָה",
+    "transliteracion": "Tshuvah, Teshuváh",
+    "equivalencia_espanol": "arrepentimiento, retorno",
+    "observacion": "Se diferencia de la forma completa/restaurativa (Tshuvah Shlemah)."
+  },
+  {
+    "id": 66,
+    "texto_hebreo": "תְּשׁוּבָה שְׁלֵמָה",
+    "transliteracion": "Tshuvah Shlemah",
+    "equivalencia_espanol": "arrepentimiento completo",
+    "observacion": "Se define como retorno con restitución y saneamiento del daño causado."
+  },
+  {
+    "id": 67,
+    "texto_hebreo": "הַשֵּׁם",
+    "transliteracion": "Hashem",
+    "equivalencia_espanol": "el Nombre",
+    "observacion": "Se usa reverencialmente en fórmulas de oración, juicio y exhortación práctica."
+  },
+  {
+    "id": 68,
+    "texto_hebreo": "בְּלִיַּעַל",
+    "transliteracion": "Beliya’al",
+    "equivalencia_espanol": "Belial",
+    "observacion": "Se cita en oposición a Mashiaj al contrastar luz y tinieblas."
+  },
+  {
+    "id": 69,
+    "texto_hebreo": "בְּרֵאשִׁית",
+    "transliteracion": "Breshit, Bereshit",
+    "equivalencia_espanol": "En el principio, nombre de la parashá",
+    "observacion": "Se menciona al explicar creación y atributos en Génesis."
+  },
+  {
+    "id": 70,
+    "texto_hebreo": "רֹאשׁ",
+    "transliteracion": "Rosh",
+    "equivalencia_espanol": "cabeza, principal",
+    "observacion": "Se menciona junto a Re’shit al explicar preeminencia."
+  },
+  {
+    "id": 71,
+    "texto_hebreo": "רֵאשִׁית",
+    "transliteracion": "Re’shit",
+    "equivalencia_espanol": "lo mejor, lo óptimo, principio",
+    "observacion": "Se usa en 'Re’shit del Evangelio' con énfasis de excelencia/origen."
+  },
+  {
+    "id": 72,
+    "texto_hebreo": "פֶּסַח",
+    "transliteracion": "Pésaj",
+    "equivalencia_espanol": "Pascua",
+    "observacion": "Se menciona en un ejemplo de deseo positivo (sobre-anhelo) en Lc 22:15."
+  },
+  {
+    "id": 73,
+    "texto_hebreo": "אֱלוֹהַּ",
+    "transliteracion": "’Elóah",
+    "equivalencia_espanol": "deidad, ser supremo",
+    "observacion": "Se distingue de ’Elohim para evitar leer como dos seres separados."
+  },
+  {
+    "id": 74,
+    "texto_hebreo": "בָּרוּךְ אֱלֹהִים וְאַבָּא",
+    "transliteracion": "Baruj ’Elohim ve’Abá",
+    "equivalencia_espanol": "bendito ‘Elohim y Abá",
+    "observacion": "Fórmula citada para subrayar unidad atributiva en la deidad."
+  },
+  {
+    "id": 75,
+    "texto_hebreo": "Σιλουανός",
+    "transliteracion": "Silvanós",
+    "equivalencia_espanol": "del bosque",
+    "observacion": "Se explica como sobrenombre/apodo (Silas) y se comenta su asociación etimológica con lo silvestre."
+  },
+  {
+    "id": 76,
+    "texto_hebreo": "Τιμόθεος",
+    "transliteracion": "Timoteos",
+    "equivalencia_espanol": "gloria de Dios",
+    "observacion": "Se menciona como significado del nombre, dentro de la explicación sobre apodos/nombres romanos y griegos."
+  },
+  {
+    "id": 77,
+    "texto_hebreo": "Ἑλλήνων",
+    "transliteracion": "Helenon, Hellēnōn",
+    "equivalencia_espanol": "griegos (griegos propiamente dichos)",
+    "observacion": "Se usa para distinguirlos de judíos helenistas, se enfatiza que eran griegos, no helenistas."
+  },
+  {
+    "id": 78,
+    "texto_hebreo": "κύριος",
+    "transliteracion": "Kirios,,",
+    "equivalencia_espanol": "Señor",
+    "observacion": "Aparece como correspondencia griega en la discusión de YHWH y en la fórmula kirios theos. Equivalencia griega para el atributo de juicio (YHWH) mencionada en el contexto de la divulgación de la palabra."
+  },
+  {
+    "id": 79,
+    "texto_hebreo": "θεός",
+    "transliteracion": "Theós",
+    "equivalencia_espanol": "Dios, deidad",
+    "observacion": "Se menciona en la combinación griega kirios theos como paralelo de YHWH ‘Elohim."
+  },
+  {
+    "id": 80,
+    "texto_hebreo": "χρόνων",
+    "transliteracion": "Jronos, Chronos",
+    "equivalencia_espanol": "tiempos cronológicos",
+    "observacion": "Se diferencia del tiempo circunstancial (kairos/keros) en 1 Tes 5:1."
+  },
+  {
+    "id": 81,
+    "texto_hebreo": "καιρῶν",
+    "transliteracion": "Keros, Kairos",
+    "equivalencia_espanol": "tiempo circunstancial, ocasión",
+    "observacion": "Se contrasta con chronos como el tiempo de circunstancia y no solo tiempo lineal."
+  },
+  {
+    "id": 82,
+    "texto_hebreo": "ἀκριβῶς",
+    "transliteracion": "Akribós",
+    "equivalencia_espanol": "con precisión, muy exacto",
+    "observacion": "Se explica con la idea de algo fino/puntiagudo para remarcar exactitud."
+  },
+  {
+    "id": 83,
+    "texto_hebreo": "ἀσφάλεια",
+    "transliteracion": "Asfáleia",
+    "equivalencia_espanol": "seguridad, estabilidad",
+    "observacion": "Se relaciona con la idea de establecimiento/estabilidad y se pone en diálogo con Shalom, Shalva, Majón y Samaj."
+  },
+  {
+    "id": 84,
+    "texto_hebreo": "πορνεία",
+    "transliteracion": "Pornía, Porneía,",
+    "equivalencia_espanol": "fornicación (término discutido etimológicamente), Fornicación, prostitución, impureza mental",
+    "observacion": "Se prefiere mantener el término para ampliar el sentido más allá de una traducción reducida. Deriva del término 'Fornix' (arco de los puentes), donde las prostitutas romanas ejercían su actividad. Se asocia con el mundo carnal fantasioso y la pornografía que daña la mente."
+  },
+  {
+    "id": 85,
+    "texto_hebreo": "τέλος",
+    "transliteracion": "Telós",
+    "equivalencia_espanol": "fin, lo último, último recurso",
+    "observacion": "Además de 'fin', se enfatiza el matiz de último recurso en la explicación. En el contexto de Yehoshua', se interpreta como el 'último recurso' disponible para el hombre."
+  },
+  {
+    "id": 86,
+    "texto_hebreo": "מֶכֶס",
+    "transliteracion": "Méjes",
+    "equivalencia_espanol": "fondo de reserva, recurso remanente",
+    "observacion": "Se usa como paralelo explicativo de 'último recurso' al comentar Telós. Término hebreo que el profesor vincula con la idea de un remanente o fondo que queda en reserva, relacionado conceptualmente con el Telós griego."
+  },
+  {
+    "id": 87,
+    "texto_hebreo": "ἀναμένειν",
+    "transliteracion": "Anaménîn, Anamenein,",
+    "equivalencia_espanol": "esperar permaneciendo arriba, esperar, permanecer arriba",
+    "observacion": "Se descompone como ana + meno para expresar una espera con permanencia en 'lo de arriba'. Compuesto por 'Ana' (arriba) y 'Meno' (permanecer). Describe la actitud de los Tesalonicenses de poner la mira y permanecer en las cosas celestiales."
+  },
+  {
+    "id": 88,
+    "texto_hebreo": "μένω",
+    "transliteracion": "Meno",
+    "equivalencia_espanol": "permanecer",
+    "observacion": "Se usa como componente verbal en la explicación de anameno/anamenein."
+  },
+  {
+    "id": 89,
+    "texto_hebreo": "ἀνά",
+    "transliteracion": "Ana",
+    "equivalencia_espanol": "arriba",
+    "observacion": "Se usa como prefijo/componente en la explicación de anameno/anamenein."
+  },
+  {
+    "id": 90,
+    "texto_hebreo": "ἡμῶν",
+    "transliteracion": "Jemōs, Hēmōn",
+    "equivalencia_espanol": "nosotros, nuestro",
+    "observacion": "Se menciona como lectura discutida, luego se contrasta con una lectura alternativa del aparato crítico."
+  },
+  {
+    "id": 91,
+    "texto_hebreo": "ὑμῶν",
+    "transliteracion": "Hymōn",
+    "equivalencia_espanol": "vosotros, vuestro",
+    "observacion": "Se señala como lectura sugerida por el aparato crítico en contraste con Jemōs/Hēmōn."
+  },
+  {
+    "id": 92,
+    "texto_hebreo": "ἐπιθυμία",
+    "transliteracion": "Ephitimia, Epithymía",
+    "equivalencia_espanol": "sobre-anhelo",
+    "observacion": "Se presenta como alternativa de precisión frente a la traducción usual 'concupiscencia'."
+  },
+  {
+    "id": 93,
+    "texto_hebreo": "ἐπί",
+    "transliteracion": "Ephi, Epi",
+    "equivalencia_espanol": "sobre",
+    "observacion": "Se usa como primer componente en la explicación de epithymia."
+  },
+  {
+    "id": 94,
+    "texto_hebreo": "τιμή",
+    "transliteracion": "Timé",
+    "equivalencia_espanol": "anhelo, raíz de deseo",
+    "observacion": "Se toma como raíz/componente en la descomposición explicativa de epithymia (según la exposición). Es la raíz de la palabra Ephitimia. Representa el anhelo o deseo básico antes de ser calificado por el prefijo 'Ephi'."
+  },
+  {
+    "id": 95,
+    "texto_hebreo": "καί",
+    "transliteracion": "Kai, Kē, Kē, Kaí",
+    "equivalencia_espanol": "y, también, es decir",
+    "observacion": "Se explica como conjunción que puede leerse no solo copulativa, sino también explicativa ('es decir'). Conjunción que en ciertos contextos debe leerse como 'es decir' para entender que en Yehoshua' habitan los atributos de la Deidad."
+  },
+  {
+    "id": 96,
+    "texto_hebreo": "ὁλοτελής",
+    "transliteracion": "Jolotelés, Holotelés",
+    "equivalencia_espanol": "integridad, totalidad integrada",
+    "observacion": "Se define como la parte integral, si se quita una parte, deja de ser íntegro."
+  },
+  {
+    "id": 97,
+    "texto_hebreo": "πνεῦμα",
+    "transliteracion": "Nefma, Pneúma",
+    "equivalencia_espanol": "pensamientos, ánimo, motor de la razón",
+    "observacion": "Se explica funcionalmente como el impulso/motor de lo que se piensa y se hace."
+  },
+  {
+    "id": 98,
+    "texto_hebreo": "ψυχή",
+    "transliteracion": "Psijé, Psujé",
+    "equivalencia_espanol": "vida como vivencia, experiencia",
+    "observacion": "Se entiende como vida en el sentido de vivencia/experiencia, no como entidad separada."
+  },
+  {
+    "id": 99,
+    "texto_hebreo": "σῶμα",
+    "transliteracion": "Soma,",
+    "equivalencia_espanol": "cuerpo",
+    "observacion": "Se integra con pneuma y psyjé como una unidad de integridad, no como compartimentos aislados."
+  },
+  {
+    "id": 100,
+    "texto_hebreo": "χαίρω, χαίρετε",
+    "transliteracion": "Jaíro, Jairete",
+    "equivalencia_espanol": "alegrarse, alégrense",
+    "observacion": "Se pone en paralelo con Simjuh para explicar el imperativo de gozo en medio de tribulación."
+  },
+  {
+    "id": 101,
+    "texto_hebreo": "Ἰησοῦς",
+    "transliteracion": "Iēsoũs",
+    "equivalencia_espanol": "forma griega del nombre Yeshua",
+    "observacion": "Se menciona al explicar Yason/Jasón como una forma griega relacionada con el nombre Yeshua."
+  },
+  {
+    "id": 102,
+    "texto_hebreo": "Ἰάσων",
+    "transliteracion": "Yason, Iásōn",
+    "equivalencia_espanol": "forma griega relacionada con Yeshua (según la explicación)",
+    "observacion": "Se presenta como una de las formas griegas vinculadas al nombre hebreo Yeshua."
+  },
+  {
+    "id": 103,
+    "texto_hebreo": "חֶסֶד",
+    "transliteracion": "Jesed, Ḥésed,",
+    "equivalencia_espanol": "solidaridad, Gracia",
+    "observacion": "Se usa al explicar \"gracia y paz\" (1Ts 1:1) como solidaridad de Dios con la vida. Se define como la solidaridad que Dios tiene con toda la creación y la vida, es lo que sostiene a los creyentes en medio del sufrimiento."
+  },
+  {
+    "id": 104,
+    "texto_hebreo": "δύναμις",
+    "transliteracion": "Dýnamis, Dinámis,",
+    "equivalencia_espanol": "potencia, poder",
+    "observacion": "En 1Ts 1:5 se emplea para precisar que el Evangelio no vino solo en palabras sino en potencia. Parte de la tripleta (junto a Rúaj Haqódesh y suprema llenura) que describe la forma en que el Evangelio se manifiesta en los creyentes."
+  },
+  {
+    "id": 105,
+    "texto_hebreo": "τροφός",
+    "transliteracion": "Trofós,, Trophós",
+    "equivalencia_espanol": "la que da de comer, nodriza, lactante",
+    "observacion": "En 1Ts 2:7 se explica la imagen de la nodriza como quien nutre, cuida y consuela. Término griego usado para describir la ternura con la que Pablo trató a los creyentes, comparándola con una madre lactante que acaricia a su hijo."
+  },
+  {
+    "id": 106,
+    "texto_hebreo": "εὐαγγέλιον",
+    "transliteracion": "Euangélion, Evangelion, Euanyelium",
+    "equivalencia_espanol": "evangelio, anuncio del que es bueno",
+    "observacion": "Se descompone como eu + angelion para resaltar el matiz de \"anuncio\" y \"bien/bueno\". Definido no solo como un mensaje, sino como el anuncio de Dios, quien es esencialmente bueno. Se enfatiza que este anuncio incluye el recordatorio de Su promesa de salvación."
+  },
+  {
+    "id": 107,
+    "texto_hebreo": "εὖ",
+    "transliteracion": "Eu",
+    "equivalencia_espanol": "bien, bueno, El bien, lo bueno",
+    "observacion": "Se presenta como componente de \"evangelio\" (Evanyelium) con sentido de bien/bondad. Componente griego del término Evangelio que califica la naturaleza del mensaje."
+  },
+  {
+    "id": 108,
+    "texto_hebreo": "ἀγγέλιον",
+    "transliteracion": "Angelion",
+    "equivalencia_espanol": "mensaje, anuncio",
+    "observacion": "Se presenta como componente de \"evangelio\" con el sentido de mensaje/anuncio."
+  },
+  {
+    "id": 109,
+    "texto_hebreo": "παράκλησις",
+    "transliteracion": "Paráklisis, Paráclisis,",
+    "equivalencia_espanol": "consolación, llamado al lado, exhortación",
+    "observacion": "En 1Ts 2:3 se usa para corregir \"exhortación\" y se relaciona con restauración y dignidad. Relacionado con la acción de confortar y restituir la dignidad al mundo a través del Evangelio."
+  },
+  {
+    "id": 110,
+    "texto_hebreo": "παράκλητος",
+    "transliteracion": "Paráklitos,,",
+    "equivalencia_espanol": "consolador, abogado",
+    "observacion": "Se explica como derivado de paráklisis: \"el que está al lado en el llamado\". Título aplicado tanto al Rúaj Haqódesh como a Mashiaj, se define como 'el que está al lado en el llamado'."
+  },
+  {
+    "id": 111,
+    "texto_hebreo": "ὑπέρ",
+    "transliteracion": "Jupér, Hupér",
+    "equivalencia_espanol": "por encima, en gran medida",
+    "observacion": "En 1Ts 5:13 se cita dentro de la explicación de \"mucha estima\"."
+  },
+  {
+    "id": 112,
+    "texto_hebreo": "περισσότερος",
+    "transliteracion": "Perissóteros",
+    "equivalencia_espanol": "más, mayor abundancia, muy",
+    "observacion": "En 1Ts 5:13 se cita junto a ὑπέρ para matizar la idea de gran estima."
+  },
+  {
+    "id": 113,
+    "texto_hebreo": "ἐρωτάω",
+    "transliteracion": "Erotáo",
+    "equivalencia_espanol": "pedir, gestionar",
+    "observacion": "En 1Ts 5:12 se comenta para matizar \"rogamos\" como una gestión/disposición, no solo súplica."
+  },
+  {
+    "id": 114,
+    "texto_hebreo": "אבא",
+    "transliteracion": "'Abá",
+    "equivalencia_espanol": "Padre, Amor no manifestado",
+    "observacion": "Representa un atributo de la deidad, es el amor que aún no se ha manifestado y constituye un grado superior al trono de 'Elohim."
+  },
+  {
+    "id": 115,
+    "texto_hebreo": "אֱלֹהִים",
+    "transliteracion": "'Elohim",
+    "equivalencia_espanol": "Dios, Amor manifestado, Dios (Atributo de Amor), Atributo del Amor entrañable, Amor Vivo",
+    "observacion": "Atributo del amor ya manifestado. En el Génesis indica que todo fue creado en amor incondicional, también funciona como un tribunal de justicia. Representa el atributo del amor divino (rajamin) e incondicional que sustenta todas las cosas y bajo el cual todo fue creado. Tiene tres sentidos principales: 1. Cuando se refiere al único y sabio Dios, expresa el atributo del amor. 2. Cuando no se refiere al único y sabio Dios, sino a uno de sus mensajeros celestiales, también significa ‘Elohim y puede traducirse como ángel. 3. En tercer lugar, la palabra ‘Elohim designa a los jueces de Yisra’el."
+  },
+  {
+    "id": 116,
+    "texto_hebreo": "יהוה",
+    "transliteracion": "YHWH",
+    "equivalencia_espanol": "El Eterno, Atributo del juicio, El Eterno (Atributo de Juicio)",
+    "observacion": "Representa el atributo del juicio. Su unión con 'Elohim en Génesis 2 teje las promesas y juramentos divinos, equilibrando juicio y amor incondicional. En la creación se combina con ’Elohim para enseñar que, tras el juicio, prevalece el amor."
+  },
+  {
+    "id": 117,
+    "texto_hebreo": "יהושע המשיח",
+    "transliteracion": "Yehoshua' Hamashiaj",
+    "equivalencia_espanol": "Jesucristo, El Salvador Ungido",
+    "observacion": "Es la tripleta conformada por 'Abá, 'Elohim y YHWH. En Él convergen plenamente el amor y el juicio."
+  },
+  {
+    "id": 118,
+    "texto_hebreo": "שָׁלוֹם",
+    "transliteracion": "Shalom",
+    "equivalencia_espanol": "Paz",
+    "observacion": "La paz que sobrepasa todo entendimiento. Se especifica que esta viene únicamente a los escogidos, a Yisra'el."
+  },
+  {
+    "id": 119,
+    "texto_hebreo": "κύριος θεός",
+    "transliteracion": "Kirios theos",
+    "equivalencia_espanol": "Señor Dios",
+    "observacion": "Combinación griega utilizada para traducir el binomio hebreo YHWH 'Elohim, uniendo el juicio con el amor incondicional."
+  },
+  {
+    "id": 120,
+    "texto_hebreo": "תקוה",
+    "transliteracion": "Tikvah (Esperanza)",
+    "equivalencia_espanol": "Esperanza de la resurrección",
+    "observacion": "Se refiere específicamente a la resurrección de los muertos de Yehoshua' Hamashiaj. Es la única obra capaz de llenar la demanda del trono del amor, la gracia y la misericordia."
+  },
+  {
+    "id": 121,
+    "texto_hebreo": "ידע",
+    "transliteracion": "Saber (Yadá)",
+    "equivalencia_espanol": "Experiencia, Comunión",
+    "observacion": "En el contexto de 1Ts 1:4-5, no es un saber intelectual, sino una comunión profunda con Dios y una experiencia diaria."
+  },
+  {
+    "id": 122,
+    "texto_hebreo": "רוח הקודש",
+    "transliteracion": "Rúaj Haqódesh",
+    "equivalencia_espanol": "Espíritu Santo",
+    "observacion": "Se define como la potencia y suprema llenura que permite derramar los tesoros de los cielos sobre nosotros mediante la obra de Yehoshua'."
+  },
+  {
+    "id": 123,
+    "texto_hebreo": "ראש",
+    "transliteracion": "Rosh",
+    "equivalencia_espanol": "Cabeza",
+    "observacion": "Designa a Mashiaj como la cabeza de todo principado y potestad."
+  },
+  {
+    "id": 124,
+    "texto_hebreo": "ראשית",
+    "transliteracion": "Re'shit",
+    "equivalencia_espanol": "Principio, Primicias",
+    "observacion": "Concepto entrelazado con 'Rosh' para explicar la preeminencia y posición de Mashiaj sobre toda autoridad."
+  },
+  {
+    "id": 125,
+    "texto_hebreo": "רוּחַ הַקֹּדֶשׁ",
+    "transliteracion": "Rúaj Haqódesh",
+    "equivalencia_espanol": "Espíritu Santo",
+    "observacion": "Definido como el fruto de la 'Emunah y de la esperanza (resurrección) de Yehoshua' Hamashiaj, es su suprema llenura en el creyente. Su recepción es sinónimo de restauración interna y es lo que permite al creyente abandonar la idolatría y la inmoralidad."
+  },
+  {
+    "id": 126,
+    "texto_hebreo": "בּר אנשׁא",
+    "transliteracion": "Bra' de'enasha'",
+    "equivalencia_espanol": "Hijo del Hombre",
+    "observacion": "Identificado como el 'Árbol de la Vida' que sale a buscar y salvar lo que se había perdido (la humanidad fuera del Gan Eden)."
+  },
+  {
+    "id": 127,
+    "texto_hebreo": "גַּן עֵדֶן",
+    "transliteracion": "Gan Eden",
+    "equivalencia_espanol": "Huerto del Edén",
+    "observacion": "Estado original al cual la promesa del amor condicional (restauración) busca hacer volver al hombre."
+  },
+  {
+    "id": 128,
+    "texto_hebreo": "מָשִׁיחַ",
+    "transliteracion": "Mashiaj",
+    "equivalencia_espanol": "Mesías, Ungido",
+    "observacion": "Cuyas palabras instruyen sobre el trato a los adversarios mediante el buen testimonio para generar un impacto en ellos."
+  },
+  {
+    "id": 129,
+    "texto_hebreo": "הַשֵּׁם",
+    "transliteracion": "Hashem",
+    "equivalencia_espanol": "El Nombre (Dios)",
+    "observacion": "Utilizado para referirse al Eterno, para quien el creyente trabaja y de quien se espera la corona de recompensa."
+  },
+  {
+    "id": 130,
+    "texto_hebreo": "ἡμεῖς",
+    "transliteracion": "Jemōs",
+    "equivalencia_espanol": "nosotros",
+    "observacion": "Variante pronominal en 1Ts 1:9. El aparato crítico sugiere que pudo ser un error de escriba en lugar de 'vosotros'."
+  },
+  {
+    "id": 131,
+    "texto_hebreo": "ὑמῶν",
+    "transliteracion": "Hymōn",
+    "equivalencia_espanol": "vosotros, de ustedes",
+    "observacion": "Lectura alternativa propuesta para 1Ts 1:9, que identifica a los creyentes de Tesalónica como los sujetos de la acción."
+  },
+  {
+    "id": 132,
+    "texto_hebreo": "תַּלְמוּד",
+    "transliteracion": "Talmud",
+    "equivalencia_espanol": "Talmud (Estudio/Enseñanza)",
+    "observacion": "Citado para explicar que la retribución de los justificados (justos) pertenece al mundo venidero y no necesariamente al presente."
+  },
+  {
+    "id": 133,
+    "texto_hebreo": "אֲשֵׁרָה",
+    "transliteracion": "Ashera",
+    "equivalencia_espanol": "Asera, Deidad pagana",
+    "observacion": "Mencionada como parte de los cultos de deidades antiguas (borrada sea su memoria) que generaban cautividad y perversión en la conducta humana."
+  },
+  {
+    "id": 134,
+    "texto_hebreo": "מֹלֶךְ",
+    "transliteracion": "Molec",
+    "equivalencia_espanol": "Moloc, Deidad de sacrificio",
+    "observacion": "Representa el extremo de la perversión idolátrica que exigía la entrega de hijos en sacrificio, en contraste, el Dios verdadero se entregó a sí mismo por la humanidad."
+  },
+  {
+    "id": 135,
+    "texto_hebreo": "אֱלֹהִים חַיִּים",
+    "transliteracion": "’Elohim Jayim (o Hayim)",
+    "equivalencia_espanol": "Dios Viviente, Amor Vivo",
+    "observacion": "Atributo del amor divino que no consume ni devora, sino que transforma y restaura al ser humano, como se manifestó en la zarza mora."
+  },
+  {
+    "id": 136,
+    "texto_hebreo": "הֶבֶל",
+    "transliteracion": "Hével",
+    "equivalencia_espanol": "vanidad, pasajero",
+    "observacion": "Utilizado para describir las costumbres de los pueblos, las cuales son vanas en contraste con la palabra de Hashem que permanece para siempre."
+  },
+  {
+    "id": 137,
+    "texto_hebreo": "אֱלֹהִים אֱמֶת",
+    "transliteracion": "’Elohim ’Emet",
+    "equivalencia_espanol": "Dios Verdad",
+    "observacion": "Define a Dios como aquel en quien no hay sombra de variación ni mudanza, es la verdad absoluta que no cambia."
+  },
+  {
+    "id": 138,
+    "texto_hebreo": "חַיִּים",
+    "transliteracion": "Jayim",
+    "equivalencia_espanol": "Vida, Viviente",
+    "observacion": "Atributo de lo que nunca muere y nunca deja de ser, se identifica con el Evangelio al afirmar que 'el amor nunca deja de ser'."
+  },
+  {
+    "id": 139,
+    "texto_hebreo": "בֵּן",
+    "transliteracion": "Ben",
+    "equivalencia_espanol": "Hijo, Portador",
+    "observacion": "Entendido como el portador de la herencia, aquel que lleva los títulos de 'Jayim' y '’Emet' para compartirlos con los coherederos. Se define como aquel que porta la herencia o simplemente como 'portador'."
+  },
+  {
+    "id": 140,
+    "texto_hebreo": "חָכְמָה",
+    "transliteracion": "Jojmáh",
+    "equivalencia_espanol": "Sabiduría",
+    "observacion": "Mencionado como uno de los atributos o manifestaciones del Rúaj (Rúaj jojmáh)."
+  },
+  {
+    "id": 141,
+    "texto_hebreo": "בִּינָה",
+    "transliteracion": "Bináh",
+    "equivalencia_espanol": "Entendimiento, Inteligencia",
+    "observacion": "Mencionado como uno de los atributos o manifestaciones del Rúaj (Rúaj bináh)."
+  },
+  {
+    "id": 142,
+    "texto_hebreo": "יְהוֹשֻׁוּעַ",
+    "transliteracion": "Yehoshua'",
+    "equivalencia_espanol": "Jesús",
+    "observacion": "Nombre hebreo utilizado para referirse a aquel que 'Elohim (el atributo del amor) resucitó."
+  },
+  {
+    "id": 143,
+    "texto_hebreo": "בְּרָא",
+    "transliteracion": "Brá'",
+    "equivalencia_espanol": "Hijo, portador, depositario",
+    "observacion": "Término arameo que define al hijo como el portador, el que trae o el depositario en quien habita la plenitud de la Deidad."
+  },
+  {
+    "id": 144,
+    "texto_hebreo": "θεότης",
+    "transliteracion": "Theotēs",
+    "equivalencia_espanol": "Deidad",
+    "observacion": "Se cita en relación a Col 2:9 para indicar que en él habita corporalmente toda la plenitud de la Deidad, incluyendo a 'Elohim."
+  },
+  {
+    "id": 145,
+    "texto_hebreo": "טָמֵא",
+    "transliteracion": "Tamé'",
+    "equivalencia_espanol": "Impureza, contaminado",
+    "observacion": "Se describe como algo incompatible con la Santidad. Es una de las acusaciones lanzadas contra el Evangelio que Pablo desmiente."
+  },
+  {
+    "id": 146,
+    "texto_hebreo": "בְּנֵי הָאֱלֹהִים",
+    "transliteracion": "Beney ha'elohim",
+    "equivalencia_espanol": "Hijos de Dios",
+    "observacion": "Dignidad que el hombre perdió en el Edén y que es restaurada a todos los que reciben la 'Emunáh en Mashiaj."
+  },
+  {
+    "id": 147,
+    "texto_hebreo": "יִשְׂרָאֵל",
+    "transliteracion": "Yisra'el",
+    "equivalencia_espanol": "Israel",
+    "observacion": "Mencionado en el contexto de la esperanza de Simeón por la restauración del pueblo mediante el Rúaj Haqódesh."
+  },
+  {
+    "id": 148,
+    "texto_hebreo": "שַׁבָּת",
+    "transliteracion": "Shabat",
+    "equivalencia_espanol": "Reposo, conmemoración del Evangelio",
+    "observacion": "Se define como un mensaje de liberación para los cautivos y restauración. El profesor enfatiza que vivir el Shabat es vivir el Evangelio, diferenciándolo de un cumplimiento puramente rítual o rabínico."
+  },
+  {
+    "id": 149,
+    "texto_hebreo": "עֹנֶג",
+    "transliteracion": "Oneg",
+    "equivalencia_espanol": "Deleite, delicia",
+    "observacion": "Es la esencia con la que se debe llamar y vivir el día de reposo, dejando de lado la voluntad propia y los caminos personales para encontrar el deleite en el Señor."
+  },
+  {
+    "id": 150,
+    "texto_hebreo": "בּוֹחֵן",
+    "transliteracion": "Bojen",
+    "equivalencia_espanol": "Testear, refinar, examinar",
+    "observacion": "Alude al proceso del joyero que verifica la autenticidad de un metal precioso. Se utiliza para describir cómo Dios confronta y refina el corazón para evidenciar nuestra pertenencia a Él."
+  },
+  {
+    "id": 151,
+    "texto_hebreo": "לֵב",
+    "transliteracion": "Leb",
+    "equivalencia_espanol": "Corazón",
+    "observacion": "Es el objeto de la refinación divina. El profesor señala que Dios lo está refinando constantemente para que seamos hechos aptos y fieles para el Evangelio."
+  },
+  {
+    "id": 152,
+    "texto_hebreo": "כְּלָיוֹת",
+    "transliteracion": "Kolayot",
+    "equivalencia_espanol": "Riñones, entrañas, conciencia",
+    "observacion": "Aparece en la expresión 'Bojen kolayot valed'. Representa lo más profundo del ser que Dios escudriña para probar la rectitud y la espontaneidad del creyente."
+  },
+  {
+    "id": 153,
+    "texto_hebreo": "גָּמוּל",
+    "transliteracion": "Gamul",
+    "equivalencia_espanol": "Lactante, niño destetado",
+    "observacion": "Referencia al Salmo 131:2 para ilustrar el estado de sosiego y humildad del alma ante la presencia de Dios."
+  },
+  {
+    "id": 154,
+    "texto_hebreo": "צָרַף",
+    "transliteracion": "Tsaraf",
+    "equivalencia_espanol": "Refinar, acrisolar, testear",
+    "observacion": "Proceso mediante el cual Hashem enriquece los riñones y el corazón a través de tribulaciones, permitiendo que el creyente exponga lo que hay en su interior para bien."
+  },
+  {
+    "id": 155,
+    "texto_hebreo": "מִילָה",
+    "transliteracion": "Milah",
+    "equivalencia_espanol": "Circuncisión (del corazón)",
+    "observacion": "Acto espiritual que permite que, al ser puesto a prueba por Hashem, el corazón muestre su verdadera identidad y pertenencia a Él."
+  },
+  {
+    "id": 156,
+    "texto_hebreo": "ἀπόστολος",
+    "transliteracion": "Apóstolos",
+    "equivalencia_espanol": "Apóstol, enviado",
+    "observacion": "En el contexto de 1Ts 2:6, se destaca que, aunque los apóstoles tenían autoridad (peso), renunciaron a buscar gloria humana o ser una carga pesada."
+  },
+  {
+    "id": 157,
+    "texto_hebreo": "רֵאשִׁית",
+    "transliteracion": "Re'shit",
+    "equivalencia_espanol": "Principio, lo mejor, lo óptimo",
+    "observacion": "Utilizado para corregir Marcos 1:1. No se refiere simplemente a un inicio cronológico, sino a la calidad de lo que es mejor o superior."
+  },
+  {
+    "id": 158,
+    "texto_hebreo": "אַבָּא",
+    "transliteracion": "'Abá",
+    "equivalencia_espanol": "Padre",
+    "observacion": "Mencionado en la corrección de Gálatas 1:1 como aquel que resucitó a Mashiaj de los muertos."
+  },
+  {
+    "id": 159,
+    "texto_hebreo": "ἀγγελία",
+    "transliteracion": "Angelion",
+    "equivalencia_espanol": "Mensaje, anuncio",
+    "observacion": "Componente griego que, junto con 'eu', conforma la palabra Evangelio como un anuncio de bondad."
+  },
+  {
+    "id": 160,
+    "texto_hebreo": "ὁ νόμος",
+    "transliteracion": "Hónomos",
+    "equivalencia_espanol": "La ley",
+    "observacion": "Utilizado en la corrección de Mateo 12:21 para indicar que es la ley de Mashiaj lo que los gentiles esperarán."
+  },
+  {
+    "id": 161,
+    "texto_hebreo": "קֹדֶשׁ",
+    "transliteracion": "Qodesh",
+    "equivalencia_espanol": "Santidad",
+    "observacion": "Una de las tres características (junto a la justicia e integridad) que definieron la conducta de los apóstoles hacia los creyentes."
+  },
+  {
+    "id": 162,
+    "texto_hebreo": "צֶדֶק",
+    "transliteracion": "Tzédeq",
+    "equivalencia_espanol": "Justicia",
+    "observacion": "Atributo de la conducta apostólica mencionado en la corrección de 1Ts 2:10 para describir cómo se condujeron en integridad."
+  },
+  {
+    "id": 163,
+    "texto_hebreo": "תֹּם",
+    "transliteracion": "Tom",
+    "equivalencia_espanol": "Integridad",
+    "observacion": "Término que describe la rectitud y honestidad total con la que Pablo y sus compañeros se comportaron ante la comunidad."
+  },
+  {
+    "id": 164,
+    "texto_hebreo": "נֹחַ",
+    "transliteracion": "Nóaj",
+    "equivalencia_espanol": "Noé",
+    "observacion": "Se menciona para criticar la doctrina de los 'siete mandamientos de Nóaj' como un invento para alejar a los gentiles de la Torah completa y del pueblo de Yisra'el."
+  },
+  {
+    "id": 165,
+    "texto_hebreo": "דָּבָר",
+    "transliteracion": "Davar",
+    "equivalencia_espanol": "Asunto, esencia, propósito, plan",
+    "observacion": "Se define como el fondo o la esencia de lo que trata un mensaje. Pablo enfatiza que los creyentes captaron el 'asunto' como algo proveniente de Dios y no de hombres."
+  },
+  {
+    "id": 166,
+    "texto_hebreo": "ἐκκλησία",
+    "transliteracion": "Ekklesia",
+    "equivalencia_espanol": "Asamblea",
+    "observacion": "Se refiere a las asambleas de personas transformadas por el poder de Dios. El profesor aclara que estas no deben ser imitadoras del judaísmo institucional, sino del testimonio de Mashiaj."
+  },
+  {
+    "id": 167,
+    "texto_hebreo": "אֲמֵן",
+    "transliteracion": "Amén",
+    "equivalencia_espanol": "En verdad, ciertamente",
+    "observacion": "Utilizado por Yehoshua' para dar firmeza a la enseñanza sobre la necesidad de nacer del Rúaj para entrar en el reino de Dios."
+  },
+  {
+    "id": 168,
+    "texto_hebreo": "επιθυμία",
+    "transliteracion": "Ephitimia",
+    "equivalencia_espanol": "Sobre anhelo, deseo desbordado",
+    "observacion": "Traducida frecuentemente como concupiscencia, el profesor aclara que es un deseo grande que puede ser positivo (hermandad) o negativo (carne) según el discernimiento."
+  },
+  {
+    "id": 169,
+    "texto_hebreo": "הַשָּׂטָן",
+    "transliteracion": "Hasatán",
+    "equivalencia_espanol": "El opositor, el adversario",
+    "observacion": "Aquel que hace resistencia. El profesor señala que utiliza instrumentos humanos (sistemas o personas cercanas) para impedir que los gentiles sean salvos."
+  },
+  {
+    "id": 170,
+    "texto_hebreo": "σκεῦος",
+    "transliteracion": "Skevós",
+    "equivalencia_espanol": "Vaso, recipiente, cuerpo",
+    "observacion": "En 1Ts 4:4 se refiere al propio cuerpo como un recipiente que debe mantenerse en santidad e integridad. No se refiere necesariamente a la esposa, sino al autocuidado del 'vaso de barro' que contiene el Rúaj Haqódesh."
+  },
+  {
+    "id": 171,
+    "texto_hebreo": "עֶרְוַת דָּבָר",
+    "transliteracion": "'Ervat davar",
+    "equivalencia_espanol": "Inmundicia, desnudez de la palabra",
+    "observacion": "Concepto elevado de Levítico 18 que regula las relaciones familiares y conductas sexuales deplorables. Es un término más profundo que la simple promiscuidad."
+  },
+  {
+    "id": 172,
+    "texto_hebreo": "זְנוּנִים",
+    "transliteracion": "Zenunim",
+    "equivalencia_espanol": "Promiscuidad sexual",
+    "observacion": "Relacionado con la idea de prostitución y conductas sexuales desordenadas."
+  },
+  {
+    "id": 173,
+    "texto_hebreo": "זוֹנָה",
+    "transliteracion": "Zonah",
+    "equivalencia_espanol": "Prostituta",
+    "observacion": "Término hebreo para referirse a quien ejerce la prostitución, derivado de la raíz de zenunim."
+  },
+  {
+    "id": 174,
+    "texto_hebreo": "πράγματι",
+    "transliteracion": "Pragmati",
+    "equivalencia_espanol": "Asunto, negocio, carga",
+    "observacion": "En 1Ts 4:6, advierte no pasar por encima del hermano ni sacar provecho en el 'asunto', el cual puede referirse a confidencias privadas o a la carga de la congregación."
+  },
+  {
+    "id": 175,
+    "texto_hebreo": "ἀκαθαρσία",
+    "transliteracion": "Akatharsia",
+    "equivalencia_espanol": "Inmundicia, impureza",
+    "observacion": "Define aquello que es incompatible con la santidad. Equivale al término hebreo Tum'ah."
+  },
+  {
+    "id": 176,
+    "texto_hebreo": "θεοδίδακτοι",
+    "transliteracion": "Theo didaktis",
+    "equivalencia_espanol": "Instruidos por Dios",
+    "observacion": "Término usado en 1Ts 4:9 que equivale a Isaías 54:13 ('todos tus hijos son instruidos de YHWH')."
+  },
+  {
+    "id": 177,
+    "texto_hebreo": "κοιμωμένων",
+    "transliteracion": "Kimómeno",
+    "equivalencia_espanol": "Los que están acostados, durmientes",
+    "observacion": "Se refiere a los fallecidos en la fe. La raíz primitiva se conecta con el lugar de descanso."
+  },
+  {
+    "id": 178,
+    "texto_hebreo": "κοιμητήριον",
+    "transliteracion": "Koimētérion",
+    "equivalencia_espanol": "Dormitorio, cementerio",
+    "observacion": "De aquí proviene la palabra 'cementerio'. Originalmente significa dormitorio, reflejando la esperanza de la resurrección en lugar de una muerte definitiva."
+  }
+]

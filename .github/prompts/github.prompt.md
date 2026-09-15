@@ -31,7 +31,7 @@ Required files to create:
 
 3. .github/CODEOWNERS
    • Use GitHub's CODEOWNERS syntax
-   • Default owner = @edyhvh for everything
+   • Default owner = @jhonnyisaacc for everything
    • Add more specific paths when they clearly exist in the project (frontend/, src/, data/, scripts/, notebooks/, docs/, tests/, etc.)
    • Keep it clean and logical — don't invent paths that don't exist
 
@@ -44,7 +44,7 @@ Required files to create:
    • Link to issues and (when relevant) to external source material
 
 5. .github/FUNDING.yml
-   • Simple GitHub Sponsors entry → github: [edyhvh]
+   • Simple GitHub Sponsors entry → github: [jhonnyisaacc]
    • Add other platforms only if the project has them
 
 6. .github/SECURITY.md
@@ -59,7 +59,7 @@ Rules & style guidelines:
 • Use modern markdown (tables, callouts, emojis sparingly but tastefully)
 • Prefer clarity over length — busy readers should understand the project in < 60 seconds
 • Use inclusive, professional, friendly tone
-• Default copyright holder / maintainer = Jhonny / @edyhvh
+• Default copyright holder / maintainer = Jhonny / @jhonnyisaacc
 • License = usually MIT unless told otherwise
 • Paths & filenames = case-sensitive and match real repo structure
 

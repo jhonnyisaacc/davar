@@ -57,6 +57,12 @@
     "language": {
       "title": "Language"
     },
+    "besorahLanguage": {
+      "title": "Besorah source",
+      "hebrew": "Hebrew",
+      "greek": "Greek",
+      "new": "New"
+    },
     "besorahTextVersion": {
       "title": "Gospel translation",
       "delitzsch": "Delitzsch",
@@ -158,7 +164,19 @@
       "spanishTranslationLabel": "Spanish translation",
       "spanishTranslationValue": "TTH (primary), BES (fallback)",
       "besorahLabel": "Besorah",
-      "besorahValue": "Delitzsch translation"
+      "besorahValue": "Delitzsch (1877), Hutter (1599–1602)",
+      "greekTextLabel": "Greek text",
+      "greekTextValue": "SBLGNT (Holmes 2010)",
+      "greekTagsLabel": "Greek tagging",
+      "greekTagsValue": "STEPBible TAGNT",
+      "greekLexiconLabel": "Greek lexicon",
+      "greekLexiconValue": "TBESG (English), UBS (Spanish)"
+    },
+    "attributionTitle": "Attribution",
+    "attribution": {
+      "stepbible": "Greek word tags and English lexical data are from STEP Bible (www.STEPBible.org), based on work at Tyndale House, Cambridge, licensed under CC BY 4.0. Source: https://github.com/STEPBible/STEPBible-Data. Modifications, if any, are recorded with the data revision.",
+      "sblgnt": "The displayed Greek reading is the SBL Greek New Testament, edited by Michael W. Holmes. Copyright © 2010 Society of Biblical Literature and Logos Bible Software. Licensed under CC BY 4.0. https://sblgnt.com/license/",
+      "ubs": "Spanish lexical entries adapted from the UBS Dictionary of the Greek New Testament © United Bible Societies, licensed under CC BY-SA 4.0. https://github.com/ubsicap/ubs-open-license. Adaptations of this material must remain CC BY-SA 4.0."
     },
     "aboutTitle": "About",
     "aboutItems": {
@@ -240,17 +258,12 @@
     "loading": "Loading verses...",
     "prefixLabel": "Prefix: {prefix}",
     "missingSpanishTranslation": "We don't have a Spanish translation for this text yet, we're working on it...",
+    "greekUnavailable": "Not present in the SBLGNT 2011 displayed text.",
     "besorahDisclaimer": {
       "short": "Reference only: Besorah Strong mapping may contain unreviewed or missing entries.",
       "modalTitle": "Besorah mapping notice",
       "modalMessage": "Besorah Strong mappings are provided for reference only. Some mappings may be unreviewed, incomplete, or unresolved.",
       "modalConfirm": "Understood"
-    },
-    "hutterAnnouncement": {
-      "title": "Elias Hutter is now available",
-      "message": "You can now read New Testament verses in Elias Hutter's Hebrew translation. Delitzsch remains the default, and you can change this anytime in Settings.",
-      "activate": "Activate Hutter",
-      "close": "Keep Delitzsch"
     }
   },
   "legal": {
@@ -302,8 +315,8 @@
     "emptyState": "Save verses to revisit them here."
   },
   "feedback": {
-    "telegramReminder": "For comments and feedback, please join our Telegram group:",
-    "telegramLink": "Join our Telegram group"
+    "telegramReminder": "For comments and feedback, please chat with me on Telegram:",
+    "telegramLink": "Chat with me on Telegram"
   },
   "tabs": {
     "home": "Home",

@@ -23,13 +23,20 @@ import {
 	getBooks,
 	getChapterCount,
 	getChapterVerses,
+	getGreekChapterVerses,
 	getVerseCount,
+	isGreekPreviewEnabled,
+	loadGreekLexiconEntry,
 	loadLexiconEntry,
 	lookupBook,
 	type VerseResponse,
 	type WordAnalysis,
 	type WordResponse,
 } from "./services/staticData";
+import {
+	GREEK_BESORAH_BOOK_NAMES,
+	parseSourceStrong,
+} from "@davar/shared/greekBesorah";
 import { formatBookDisplayName } from "./utils/bookNameFormatter";
 import { stripCantillation, stripMeteg } from "./utils/hebrew";
 import {
@@ -41,28 +48,18 @@ import {
 } from "./utils/storageHelpers";
 import {
 	getDssCommentaryForLanguage,
-	HUTTER_ANNOUNCEMENT_RELEASE,
+	resolveGreekOverlayLanguage,
 } from "./utils/translationConfig";
 import { useVerseScrollNavigation } from "./utils/useVerseScrollNavigation";
+import {
+	buildRoutePath,
+	findCanonicalBook,
+	parseRoutePath,
+	type RouteScreen,
+	type RouteState,
+} from "./utils/routeState";
 
-type Screen =
-	| "home"
-	| "verse"
-	| "settings"
-	| "donate"
-	| "features"
-	| "terms"
-	| "privacy"
-	| "feedback"
-	| "notFound"
-	| "connectionError";
-
-type RouteState = {
-	screen: Screen;
-	book?: string;
-	chapter?: number;
-	verse?: number;
-};
+type Screen = RouteScreen;
 
 type WordSelectionContext = {
 	chapter: number;
@@ -155,13 +152,12 @@ export default function App() {
 		"besorahTextVersion",
 		initialState.besorahTextVersion,
 	);
-	const [hutterAnnouncementRelease, setHutterAnnouncementRelease] =
-		usePersistedState(
-			"hutterAnnouncementRelease",
-			initialState.hutterAnnouncementRelease,
-		);
+	const [besorahLanguage, setBesorahLanguage] = usePersistedState(
+		"besorahLanguage",
+		initialState.besorahLanguage,
+	);
+	const greekAvailable = isGreekPreviewEnabled();
 	const { t, isRTL } = useTranslation(language);
-	const [showHutterAnnouncement, setShowHutterAnnouncement] = useState(false);
 
 	useEffect(() => {
 		currentScreenRef.current = currentScreen;
@@ -268,7 +264,7 @@ export default function App() {
 			if (!word) return undefined;
 			if (language === "en") return word.translit_en;
 			if (language === "es") return word.translit_es;
-			return undefined;
+			return word.translit_he;
 		},
 		[language],
 	);
@@ -278,7 +274,7 @@ export default function App() {
 			if (!analysis) return undefined;
 			if (language === "en") return analysis.translit_en;
 			if (language === "es") return analysis.translit_es;
-			return undefined;
+			return analysis.translit_he;
 		},
 		[language],
 	);
@@ -409,83 +405,25 @@ export default function App() {
 		],
 	);
 
-	const buildRoutePath = useCallback((route: RouteState) => {
-		switch (route.screen) {
-			case "home":
-				return "/home";
-			case "terms":
-				return "/terms";
-			case "privacy":
-				return "/privacy";
-			case "feedback":
-				return "/feedback";
-			case "donate":
-				return "/donate";
-			case "features":
-				return "/features";
-			case "settings":
-				return "/settings";
-			case "verse": {
-				const book = route.book ? encodeURIComponent(route.book) : "";
-				const chapter = route.chapter ?? 1;
-				const verse = route.verse ?? 1;
-				return book ? `/verse/${book}/${chapter}/${verse}` : "/";
-			}
-			default:
-				return "/";
-		}
-	}, []);
-
-	const parseRoutePath = useCallback((pathname: string): RouteState | null => {
-		const trimmed = pathname.replace(/\/+$/, "") || "/";
-		const parts = trimmed.split("/").filter(Boolean);
-
-		if (parts.length === 0) {
-			return { screen: "verse" };
-		}
-
-		const [root, book, chapter, verse] = parts;
-		if (root === "home") return { screen: "home" };
-		if (root === "terms") return { screen: "terms" };
-		if (root === "privacy") return { screen: "privacy" };
-		if (root === "feedback") return { screen: "feedback" };
-		if (root === "donate") return { screen: "donate" };
-		if (root === "features") return { screen: "features" };
-		if (root === "settings") return { screen: "settings" };
-
-		if (root === "verse") {
-			const decodedBook = book ? decodeURIComponent(book) : undefined;
-			const parsedChapter = chapter ? Number.parseInt(chapter, 10) : undefined;
-			const parsedVerse = verse ? Number.parseInt(verse, 10) : undefined;
-			return {
-				screen: "verse",
-				book: decodedBook,
-				chapter: Number.isNaN(parsedChapter) ? undefined : parsedChapter,
-				verse: Number.isNaN(parsedVerse) ? undefined : parsedVerse,
-			};
-		}
-
-		// Handle invalid routes - return null to trigger 404
-		return null;
-	}, []);
-	const parseRoutePathRef = useRef(parseRoutePath);
-
 	useEffect(() => {
 		booksRef.current = books;
 	}, [books]);
-
-	useEffect(() => {
-		parseRoutePathRef.current = parseRoutePath;
-	}, [parseRoutePath]);
 
 	const getHebrewBookName = useCallback(
 		(book: string): string => {
 			const found = books.find(
 				(item) => item.name.toLowerCase() === book.toLowerCase(),
 			);
+			if (
+				besorahLanguage === "greek" &&
+				found?.section === "besorah" &&
+				GREEK_BESORAH_BOOK_NAMES[found.id]
+			) {
+				return GREEK_BESORAH_BOOK_NAMES[found.id];
+			}
 			return found?.hebrew_name ?? book;
 		},
-		[books],
+		[besorahLanguage, books],
 	);
 
 	const getDisplayBookName = useCallback(
@@ -547,9 +485,11 @@ export default function App() {
 
 	useEffect(() => {
 		if (typeof window === "undefined") return;
-		pendingRouteRef.current = parseRoutePathRef.current(
-			window.location.pathname,
-		);
+		const pathname = window.location.pathname;
+		pendingRouteRef.current = parseRoutePath(pathname);
+		// Keep an incoming deep link from being replaced by persisted state
+		// before the book list is available to apply the pending route.
+		lastUrlRef.current = pathname;
 	}, []);
 
 	useEffect(() => {
@@ -810,6 +750,8 @@ export default function App() {
 					name: book.name,
 					hebrew: book.hebrew_name,
 					spanish: book.spanish_name,
+					greek: GREEK_BESORAH_BOOK_NAMES[book.id],
+					section: book.section,
 				})),
 		[books],
 	);
@@ -822,26 +764,6 @@ export default function App() {
 	);
 	const isBesorah = currentBookMeta?.section === "besorah";
 	const besorahDisclaimerText = t("verse.besorahDisclaimer.short");
-
-	useEffect(() => {
-		if (
-			currentScreen === "verse" &&
-			isBesorah &&
-			hutterAnnouncementRelease !== HUTTER_ANNOUNCEMENT_RELEASE
-		) {
-			setShowHutterAnnouncement(true);
-		}
-	}, [currentScreen, hutterAnnouncementRelease, isBesorah]);
-
-	const dismissHutterAnnouncement = useCallback(() => {
-		setShowHutterAnnouncement(false);
-		setHutterAnnouncementRelease(HUTTER_ANNOUNCEMENT_RELEASE);
-	}, [setHutterAnnouncementRelease]);
-
-	const activateHutter = useCallback(() => {
-		setBesorahTextVersion("hutter");
-		dismissHutterAnnouncement();
-	}, [dismissHutterAnnouncement, setBesorahTextVersion]);
 
 	const handleBesorahTextVersionChange = useCallback(
 		(version: "delitzsch" | "hutter") => {
@@ -906,9 +828,7 @@ export default function App() {
 		}
 
 		if (pending.book) {
-			const matchedBook = books.find(
-				(item) => item.name.toLowerCase() === pending.book?.toLowerCase(),
-			);
+			const matchedBook = findCanonicalBook(books, pending.book);
 			if (matchedBook) {
 				setCurrentBook(matchedBook.name);
 			} else {
@@ -936,31 +856,70 @@ export default function App() {
 		const loadChapterData = async () => {
 			setIsLoading(true);
 			setErrorMessage(null);
-			const translationLanguage = translationOnly
+			const useGreekSource =
+				greekAvailable &&
+				isBesorah &&
+				besorahLanguage === "greek" &&
+				!translationOnly;
+			const greekOverlayLanguage = useGreekSource
+				? resolveGreekOverlayLanguage(language, translationOnly)
+				: undefined;
+			const hebrewTranslationLanguage: "en" | "es" | undefined = translationOnly
 				? language === "es"
 					? "es"
 					: "en"
 				: language === "he"
 					? undefined
-					: language;
+					: language === "es"
+						? "es"
+						: "en";
 			try {
-				const [chapterCountValue, verses] = await Promise.all([
+				const [chapterCountValue, verseCountValue, loadedVerses] =
+					await Promise.all([
 					getChapterCount(currentBook.toLowerCase()),
-					getChapterVerses(currentBook.toLowerCase(), currentChapter, {
-						language: translationLanguage,
-						showDss: showQumran,
-						hebrewOnly: false, // Always load translations; UI will control display
-						referenceMode: translationOnly ? "translation" : "source",
-						besorahTextVersion,
-					}),
+					getVerseCount(currentBook.toLowerCase(), currentChapter),
+					useGreekSource
+						? getGreekChapterVerses(
+								currentBook.toLowerCase(),
+								currentChapter,
+								{
+									language: greekOverlayLanguage,
+								},
+							)
+						: getChapterVerses(currentBook.toLowerCase(), currentChapter, {
+								language: hebrewTranslationLanguage,
+								showDss: showQumran,
+								hebrewOnly: false,
+								referenceMode: translationOnly ? "translation" : "source",
+								besorahTextVersion,
+							}),
 				]);
-
-				const verseCountValue = translationOnly
+				const verses = useGreekSource
+					? Array.from({ length: verseCountValue }, (_, index) => {
+							const verseNumber = index + 1;
+							return (
+								loadedVerses.find((verse) => verse.verse === verseNumber) ?? {
+									available: false,
+									chapter: currentChapter,
+									edition: "sblgnt",
+									hebrew: "",
+									revision: undefined,
+									sourceChapter: currentChapter,
+									sourceVerse: verseNumber,
+									source_language: "greek" as const,
+									text: "",
+									verse: verseNumber,
+									words: [],
+								}
+							);
+						})
+					: loadedVerses;
+				const displayedVerseCount = translationOnly
 					? verses.length
-					: await getVerseCount(currentBook.toLowerCase(), currentChapter);
+					: verseCountValue;
 				if (!isMounted) return;
 				setChapterCount(chapterCountValue);
-				setVerseCount(verseCountValue);
+				setVerseCount(displayedVerseCount);
 				setChapterVerses(verses);
 				if (verses.length > 0) {
 					const availableVerseNumbers = verses
@@ -996,19 +955,22 @@ export default function App() {
 			isMounted = false;
 		};
 	}, [
+		besorahLanguage,
 		besorahTextVersion,
 		currentBook,
 		currentChapter,
 		language,
 		showQumran,
 		translationOnly,
+		isBesorah,
+		greekAvailable,
 	]);
 
 	useEffect(() => {
 		if (typeof window === "undefined") return;
 		const handlePopState = () => {
 			isHandlingPopStateRef.current = true;
-			const route = parseRoutePathRef.current(window.location.pathname);
+			const route = parseRoutePath(window.location.pathname);
 
 			// Handle invalid routes (null)
 			if (!route) {
@@ -1029,9 +991,7 @@ export default function App() {
 					setCurrentScreen("home");
 				} else {
 					if (route.book) {
-						const matchedBook = booksRef.current.find(
-							(item) => item.name.toLowerCase() === route.book?.toLowerCase(),
-						);
+						const matchedBook = findCanonicalBook(booksRef.current, route.book);
 						if (matchedBook) {
 							setCurrentBook(matchedBook.name);
 						} else {
@@ -1076,7 +1036,6 @@ export default function App() {
 		window.history.pushState(null, "", path);
 		lastUrlRef.current = path;
 	}, [
-		buildRoutePath,
 		currentBook,
 		currentChapter,
 		currentScreen,
@@ -1098,10 +1057,7 @@ export default function App() {
 				return;
 			}
 
-			const strongPart = selectedWord.strong
-				.split("/")
-				.map((part) => part.trim())
-				.find((part) => /^[HGD]\d+$/.test(part));
+			const strongPart = parseSourceStrong(selectedWord.strong);
 
 			if (!strongPart) {
 				logWordDebug("analysis-skip-invalid-strong", {
@@ -1119,10 +1075,13 @@ export default function App() {
 				language,
 			});
 			try {
-				const analysis = await loadLexiconEntry(
-					strongPart,
-					language === "he" ? "en" : language,
-				);
+				const analysis =
+					selectedWord.source_language === "greek"
+						? await loadGreekLexiconEntry(strongPart, language)
+						: await loadLexiconEntry(
+								strongPart,
+								language === "he" ? "en" : language,
+							);
 				if (isMounted) {
 					setSelectedWordAnalysis(analysis);
 					setIsWordAnalysisLoading(false);
@@ -1657,6 +1616,9 @@ export default function App() {
 						onThemeChange={setTheme}
 						language={language}
 						onLanguageChange={setLanguage}
+						besorahLanguage={besorahLanguage}
+						onBesorahLanguageChange={setBesorahLanguage}
+						greekAvailable={greekAvailable}
 						besorahTextVersion={besorahTextVersion}
 						onBesorahTextVersionChange={handleBesorahTextVersionChange}
 						showQumran={showQumran}
@@ -1687,56 +1649,6 @@ export default function App() {
 					}}
 				>
 					{besorahDisclaimerText}
-				</div>
-			)}
-
-			{showHutterAnnouncement && (
-				<div
-					className="fixed inset-0 z-[120] flex items-center justify-center px-5"
-					style={{ background: "rgba(20, 16, 12, 0.45)" }}
-					role="dialog"
-					aria-modal="true"
-					aria-labelledby="hutter-announcement-title"
-				>
-					<div
-						className="relative w-full max-w-md rounded-[28px] border p-7"
-						style={{
-							background: "var(--neomorph-bg)",
-							borderColor: "var(--neomorph-border)",
-							boxShadow:
-								"12px 12px 28px var(--neomorph-shadow-dark), -8px -8px 24px var(--neomorph-shadow-light)",
-						}}
-					>
-						<button
-							type="button"
-							onClick={dismissHutterAnnouncement}
-							aria-label={t("verse.hutterAnnouncement.close")}
-							className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-xl text-[var(--text-secondary)] hover:bg-[var(--muted)]"
-						>
-							×
-						</button>
-						<h2
-							id="hutter-announcement-title"
-							className="pr-8 text-2xl font-semibold text-[var(--text-primary)]"
-							style={{ fontFamily: "'Inter', sans-serif" }}
-						>
-							{t("verse.hutterAnnouncement.title")}
-						</h2>
-						<p
-							className="mt-3 text-sm leading-6 text-[var(--text-secondary)]"
-							style={{ fontFamily: "'Inter', sans-serif" }}
-						>
-							{t("verse.hutterAnnouncement.message")}
-						</p>
-						<button
-							type="button"
-							onClick={activateHutter}
-							className="mt-6 w-full rounded-full bg-[var(--primary)] px-5 py-3.5 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-[1.01] active:scale-[0.99]"
-							style={{ fontFamily: "'Inter', sans-serif" }}
-						>
-							{t("verse.hutterAnnouncement.activate")}
-						</button>
-					</div>
 				</div>
 			)}
 
@@ -1779,6 +1691,9 @@ export default function App() {
 							onThemeChange={setTheme}
 							language={language}
 							onLanguageChange={setLanguage}
+							besorahLanguage={besorahLanguage}
+							onBesorahLanguageChange={setBesorahLanguage}
+							greekAvailable={greekAvailable}
 							besorahTextVersion={besorahTextVersion}
 							onBesorahTextVersionChange={handleBesorahTextVersionChange}
 							showQumran={showQumran}
@@ -1833,7 +1748,15 @@ export default function App() {
 								<div className="verse-panel-inner relative">
 									{currentVerseData ? (
 										<VerseDisplay
-											hebrewText={currentVerseData.hebrew}
+											hebrewText={
+												currentVerseData.source_language === "greek"
+													? (currentVerseData.text ?? "")
+													: currentVerseData.hebrew
+											}
+											sourceLanguage={
+												currentVerseData.source_language ?? "hebrew"
+											}
+											sourceAvailable={currentVerseData.available !== false}
 											translation={currentVerseData.translation ?? ""}
 											verseRef={`${currentBook} ${currentChapter}:${currentVerse}`}
 											verseNumber={currentVerseData.verse}
@@ -1844,7 +1767,10 @@ export default function App() {
 											language={language}
 											onWordClick={handleWordClick}
 											showOnboardingHint={showWordHint}
-											showQumran={showQumran}
+											showQumran={
+												showQumran &&
+												currentVerseData.source_language !== "greek"
+											}
 											showFullChapter={showFullChapter}
 											seferMode={seferMode}
 											hebrewOnly={hebrewOnly}
@@ -2004,6 +1930,9 @@ export default function App() {
 												) : wordForCard && isWordPanelVisible ? (
 													<WordCard
 														word={wordForCard.text}
+														sourceLanguage={
+															wordForCard.source_language ?? "hebrew"
+														}
 														wordFromVerse={wordForCard.text}
 														strongNumber={wordAnalysisForCard?.strong_number}
 														qumranWord={qumranWordForCard}
@@ -2165,6 +2094,7 @@ export default function App() {
 						return (
 							<WordCard
 								word={selectedWord.text}
+								sourceLanguage={selectedWord.source_language ?? "hebrew"}
 								wordFromVerse={selectedWord.text}
 								strongNumber={selectedWordAnalysis?.strong_number}
 								qumranWord={qumranWordForCard}

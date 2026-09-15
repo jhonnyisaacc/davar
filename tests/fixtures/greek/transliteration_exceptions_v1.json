@@ -1,0 +1,10 @@
+{
+  "exceptions": {
+    "Ἰησοῦς": {
+      "en": "Iēsous",
+      "es": "Iesous",
+      "he": "איסוס"
+    }
+  },
+  "version": "greek-transliteration-v1"
+}

@@ -10,9 +10,6 @@ export type BesorahTextVersion = "delitzsch" | "hutter";
 export type TranslationKey = "ts2009" | "tth" | "delitzsch";
 export type TranslationSource = "ts2009" | "tth" | "bes";
 
-// Bump this value when an OTA/web release should announce Hutter again.
-export const HUTTER_ANNOUNCEMENT_RELEASE = "hutter-launch-2026-07-v2";
-
 export type TranslationTarget = {
   reference: VerseReference | null;
   usesPsalmTitle: boolean;
@@ -182,11 +179,26 @@ export const resolveTranslationLookupKey = (
   return `${target.reference.chapter}-${target.reference.verse}`;
 };
 
+export const resolveGreekOverlayLanguage = (
+  language: AppLanguage,
+  translationOnly = false,
+): Exclude<AppLanguage, "he"> | "he" | undefined => {
+  if (translationOnly) {
+    return language === "es" ? "es" : "en";
+  }
+  if (language === "he") return "he";
+  if (language === "es") return "es";
+  return "en";
+};
+
 export const shouldHideTranslationText = (
   language: AppLanguage,
   hebrewOnly = false,
+  sourceLanguage: "hebrew" | "greek" = "hebrew",
 ): boolean => {
-  return hebrewOnly || language === "he";
+  if (hebrewOnly) return true;
+  if (sourceLanguage === "greek") return false;
+  return language === "he";
 };
 
 export const getDssCommentaryForLanguage = (

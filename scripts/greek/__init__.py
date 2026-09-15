@@ -1,0 +1,1 @@
+"""Greek Besorah source rules. Reading edition is SBLGNT; tagging source is STEPBible."""

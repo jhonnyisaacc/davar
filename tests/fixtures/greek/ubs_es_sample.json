@@ -1,0 +1,148 @@
+[
+  {
+    "MainId": "book",
+    "Lemma": "βίβλος",
+    "StrongCodes": ["G0976"],
+    "BaseForms": [
+      {
+        "LEXMeanings": [
+          {
+            "LEXID": "biblos-1",
+            "LEXEntryCode": "6.64",
+            "LEXDomains": [{"Domain": "Escritos"}],
+            "LEXSenses": [
+              {
+                "LanguageCode": "es",
+                "DefinitionShort": "rollo o libro escrito",
+                "DefinitionLong": "un rollo o libro, especialmente uno tratado con respeto",
+                "Glosses": ["libro"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "MainId": "aaron",
+    "Lemma": "Ἀαρών",
+    "StrongCodes": ["G0002"],
+    "BaseForms": [
+      {
+        "LEXMeanings": [
+          {
+            "LEXID": "aaron-1",
+            "LEXEntryCode": "93.1",
+            "LEXDomains": [{"Domain": "Nombres"}],
+            "LEXSenses": [
+              {
+                "LanguageCode": "es",
+                "DefinitionShort": "el hermano mayor de Moisés",
+                "DefinitionLong": "",
+                "Glosses": ["Aarón"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "MainId": "haima",
+    "Lemma": "αἷμα",
+    "StrongCodes": ["G0129"],
+    "BaseForms": [
+      {
+        "LEXMeanings": [
+          {
+            "LEXID": "haima-1",
+            "LEXEntryCode": "8.64",
+            "LEXDomains": [{"Domain": "Cuerpo"}],
+            "LEXSenses": [
+              {
+                "LanguageCode": "es",
+                "DefinitionShort": "el líquido rojo del cuerpo",
+                "DefinitionLong": "",
+                "Glosses": ["sangre"]
+              }
+            ]
+          },
+          {
+            "LEXID": "haima-2",
+            "LEXEntryCode": "93.400",
+            "LEXDomains": [{"Domain": "Nombres"}],
+            "LEXSenses": [
+              {
+                "LanguageCode": "es",
+                "DefinitionShort": "el campo comprado con el dinero de Judas",
+                "DefinitionLong": "",
+                "Glosses": ["Campo de Sangre"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "MainId": "false-strong",
+    "Lemma": "ψευδής",
+    "StrongCodes": ["G0976"],
+    "BaseForms": [
+      {
+        "LEXMeanings": [
+          {
+            "LEXID": "false-1",
+            "LEXEntryCode": "00.0",
+            "LEXDomains": [{"Domain": "Trampa"}],
+            "LEXSenses": [
+              {
+                "LanguageCode": "es",
+                "DefinitionShort": "no es βίβλος",
+                "DefinitionLong": "",
+                "Glosses": ["falso"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "MainId": "dokime",
+    "Lemma": "δοκιμή",
+    "StrongCodes": ["G1383"],
+    "BaseForms": [
+      {
+        "LEXMeanings": [
+          {
+            "LEXID": "dokime-1",
+            "LEXEntryCode": "27.45",
+            "LEXDomains": [{"Domain": "Pensar"}],
+            "LEXSenses": [
+              {
+                "LanguageCode": "es",
+                "DefinitionShort": "una prueba o test",
+                "DefinitionLong": "",
+                "Glosses": ["test"]
+              }
+            ]
+          },
+          {
+            "LEXID": "dokime-2",
+            "LEXEntryCode": "27.46",
+            "LEXDomains": [{"Domain": "Pensar"}],
+            "LEXSenses": [
+              {
+                "LanguageCode": "es",
+                "DefinitionShort": "carácter aprobado",
+                "DefinitionLong": "",
+                "Glosses": ["carácter"]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

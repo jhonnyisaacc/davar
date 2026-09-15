@@ -1,0 +1,2011 @@
+[
+  {
+    "id": 1,
+    "texto_hebreo": "שָׁלוֹם",
+    "transliteracion": "Shalom",
+    "equivalencia_espanol": "paz, completitud, deuda pagada",
+    "observacion": "Se explica como estado de integridad, completitud y provisión de lo faltante."
+  },
+  {
+    "id": 2,
+    "texto_hebreo": "נֶפֶשׁ חַיָּה",
+    "transliteracion": "Néfesh jayáh",
+    "equivalencia_espanol": "ser viviente",
+    "observacion": "Se menciona en el proceso del hombre dentro de las explicaciones de Génesis."
+  },
+  {
+    "id": 3,
+    "texto_hebreo": "אֱלֹהִים",
+    "transliteracion": "‘Elohim",
+    "equivalencia_espanol": "plenitud de la deidad (según la formulación del estudio)",
+    "observacion": "Se emplea como 'campo' del cual se explica la salida del Re’shit en la exposición."
+  },
+  {
+    "id": 4,
+    "texto_hebreo": "רֵאשִׁית",
+    "transliteracion": "Re’shit",
+    "equivalencia_espanol": "primicia, muestra principal, origen",
+    "observacion": "Se usa con fuerte carga agrícola (muestra bendecida que comunica sus cualidades a la cosecha)."
+  },
+  {
+    "id": 5,
+    "texto_hebreo": "בְּרֵאשִׁית",
+    "transliteracion": "Bereshit",
+    "equivalencia_espanol": "en, con el principio, por medio del Re’shit (según la explicación)",
+    "observacion": "Se desarrolla con énfasis en el valor de בְּ como 'en, con, por' según el argumento del estudio."
+  },
+  {
+    "id": 6,
+    "texto_hebreo": "בָּרָא",
+    "transliteracion": "Bará’",
+    "equivalencia_espanol": "organizar, preparar",
+    "observacion": "Se usa con matiz de organizar, preparar, no solo 'crear' en sentido absoluto."
+  },
+  {
+    "id": 7,
+    "texto_hebreo": "מֵימְרָא",
+    "transliteracion": "Meymrá",
+    "equivalencia_espanol": "expresión corpórea de la divinidad",
+    "observacion": "Se explica como tecnicismo teológico arameo para la manifestación, expresión."
+  },
+  {
+    "id": 8,
+    "texto_hebreo": "אֲוִיר",
+    "transliteracion": "’Avir",
+    "equivalencia_espanol": "aire, ámbito aéreo",
+    "observacion": "Se relaciona con préstamo conceptual y uso teológico en la explicación."
+  },
+  {
+    "id": 9,
+    "texto_hebreo": "כֶּתֶר",
+    "transliteracion": "Kéter",
+    "equivalencia_espanol": "corona, plenitud, gloria",
+    "observacion": "Se usa como imagen de plenitud y corona de gloria."
+  },
+  {
+    "id": 10,
+    "texto_hebreo": "תְּמוּנָה",
+    "transliteracion": "Temunáh",
+    "equivalencia_espanol": "representación visible",
+    "observacion": "Se distingue como forma, imagen visible."
+  },
+  {
+    "id": 11,
+    "texto_hebreo": "הַנְּפִלִים",
+    "transliteracion": "HaNefilim",
+    "equivalencia_espanol": "los caídos",
+    "observacion": "Se glosa como 'caídos' en el comentario de Génesis 6."
+  },
+  {
+    "id": 12,
+    "texto_hebreo": "שָׁב",
+    "transliteracion": "Shav",
+    "equivalencia_espanol": "volver, retornar",
+    "observacion": "Se presenta como raíz relacionada con arrepentimiento, retorno."
+  },
+  {
+    "id": 13,
+    "texto_hebreo": "תְּשׁוּבָה",
+    "transliteracion": "Teshuváh",
+    "equivalencia_espanol": "retorno, arrepentimiento",
+    "observacion": "Se conecta con la raíz שׁוּב, שָׁב."
+  },
+  {
+    "id": 14,
+    "texto_hebreo": "נָּחַ ם",
+    "transliteracion": "es Najam",
+    "equivalencia_espanol": "consolación",
+    "observacion": "Qué es consoló la raíz es Najam, ‫נָּחַ ם‬."
+  },
+  {
+    "id": 15,
+    "texto_hebreo": "תַּנְחוּמָה",
+    "transliteracion": "Tanjumáh",
+    "equivalencia_espanol": "consolación",
+    "observacion": "Se presenta como derivado del campo de נחם."
+  },
+  {
+    "id": 16,
+    "texto_hebreo": "חֲנוֹךְ",
+    "transliteracion": "Janoj",
+    "equivalencia_espanol": "Enoc (nombre)",
+    "observacion": "Se aclara la forma hebrea del nombre."
+  },
+  {
+    "id": 17,
+    "texto_hebreo": "לְזַרְעֲךָ",
+    "transliteracion": "Lezar‘aja",
+    "equivalencia_espanol": "a tu semilla",
+    "observacion": "Se enfatiza lectura en singular."
+  },
+  {
+    "id": 18,
+    "texto_hebreo": "חֶמְלָה",
+    "transliteracion": "Jemláh",
+    "equivalencia_espanol": "compasión, lástima",
+    "observacion": "Se vincula con la raíz גמל, jamal en el comentario."
+  },
+  {
+    "id": 19,
+    "texto_hebreo": "אַב־הֲמוֹן גּוֹיִם",
+    "transliteracion": "’Av hamón goyim",
+    "equivalencia_espanol": "padre de multitud de gentiles",
+    "observacion": "Se cita en la explicación del cambio de nombre de Abraham."
+  },
+  {
+    "id": 20,
+    "texto_hebreo": "הִמּוֹל לָכֶם זָכָר",
+    "transliteracion": "Himol lajem zajar",
+    "equivalencia_espanol": "circuncídese para ustedes todo varón",
+    "observacion": "Se comenta con énfasis en alcance general ('todo, cualquier varón')."
+  },
+  {
+    "id": 21,
+    "texto_hebreo": "עַלְמָה",
+    "transliteracion": "‘Almáh",
+    "equivalencia_espanol": "muchacha, virgen (según el uso discutido)",
+    "observacion": "Se discute su equivalencia frente a נַעֲרָה y בְּתוּלָה."
+  },
+  {
+    "id": 22,
+    "texto_hebreo": "נַעֲרָה",
+    "transliteracion": "Na‘aráh",
+    "equivalencia_espanol": "muchacha",
+    "observacion": "Se presenta como intercambiable en el argumento con ‘almáh, betuláh."
+  },
+  {
+    "id": 23,
+    "texto_hebreo": "בְּתוּלָה",
+    "transliteracion": "Betuláh",
+    "equivalencia_espanol": "virgen",
+    "observacion": "Se usa en contraste, comparación con ‘almáh y na‘aráh."
+  },
+  {
+    "id": 24,
+    "texto_hebreo": "שְׁבָא",
+    "transliteracion": "Shevá’",
+    "equivalencia_espanol": "Sebá, Saba (topónimo, nombre)",
+    "observacion": "Aparece en genealogías y referencias históricas."
+  },
+  {
+    "id": 25,
+    "texto_hebreo": "נְבָיוֹת",
+    "transliteracion": "Nebayot",
+    "equivalencia_espanol": "Nebayot (nombre propio)",
+    "observacion": "Forma de nombre genealógico."
+  },
+  {
+    "id": 26,
+    "texto_hebreo": "תּוֹלְדוֹת",
+    "transliteracion": "Toldot",
+    "equivalencia_espanol": "generaciones, descendencias",
+    "observacion": "Se usa como encabezado temático, genealógico."
+  },
+  {
+    "id": 27,
+    "texto_hebreo": "עָתַר",
+    "transliteracion": "‘Atar",
+    "equivalencia_espanol": "rogar, suplicar",
+    "observacion": "Se menciona como verbo de súplica, oración."
+  },
+  {
+    "id": 28,
+    "texto_hebreo": "לְהִתְפַּלֵּל",
+    "transliteracion": "Lejitpalel",
+    "equivalencia_espanol": "orar",
+    "observacion": "Se señala como una de varias palabras para orar."
+  },
+  {
+    "id": 29,
+    "texto_hebreo": "עֵשָׂו",
+    "transliteracion": "‘Esav",
+    "equivalencia_espanol": "Esaú (nombre)",
+    "observacion": "Se comenta con matiz de nombre, sentido asociado."
+  },
+  {
+    "id": 30,
+    "texto_hebreo": "יַעֲקֹב",
+    "transliteracion": "Ya‘aqov",
+    "equivalencia_espanol": "Jacob (nombre)",
+    "observacion": "Se conecta con עָקֵב, talón-huella."
+  },
+  {
+    "id": 31,
+    "texto_hebreo": "תָּם",
+    "transliteracion": "Tam",
+    "equivalencia_espanol": "íntegro, completo",
+    "observacion": "Se aplica como cualidad de integridad."
+  },
+  {
+    "id": 32,
+    "texto_hebreo": "אָדֹם",
+    "transliteracion": "Adom",
+    "equivalencia_espanol": "rojo",
+    "observacion": "Se explica como descriptor de color."
+  },
+  {
+    "id": 33,
+    "texto_hebreo": "אֱדוֹם",
+    "transliteracion": "Edom",
+    "equivalencia_espanol": "Edom (sobrenombre, topónimo)",
+    "observacion": "Se distingue del adjetivo אָדוֹם."
+  },
+  {
+    "id": 34,
+    "texto_hebreo": "נְבָלָה",
+    "transliteracion": "Nevaláh",
+    "equivalencia_espanol": "carroña, cosa muerta",
+    "observacion": "Se relaciona con la idea de descomposición, cadáver."
+  },
+  {
+    "id": 35,
+    "texto_hebreo": "מִרְמָה",
+    "transliteracion": "Mirmáh",
+    "equivalencia_espanol": "engaño, fraude",
+    "observacion": "Se contrasta con otros términos y glosas contextuales."
+  },
+  {
+    "id": 36,
+    "texto_hebreo": "רִמָּה",
+    "transliteracion": "Rimáh",
+    "equivalencia_espanol": "gusano",
+    "observacion": "Se usa con matiz de corrupción, putrefacción."
+  },
+  {
+    "id": 37,
+    "texto_hebreo": "חֶרְפָּה",
+    "transliteracion": "Jerpáh",
+    "equivalencia_espanol": "afrenta, vergüenza",
+    "observacion": "Se comenta como oprobio, deshonra."
+  },
+  {
+    "id": 38,
+    "texto_hebreo": "שְׁלָמִים",
+    "transliteracion": "Shelamim",
+    "equivalencia_espanol": "íntegros, ofrendas de paz",
+    "observacion": "Se glosa con idea de integridad, completitud."
+  },
+  {
+    "id": 39,
+    "texto_hebreo": "וַיֵּשֶׁב",
+    "transliteracion": "Vayéshev",
+    "equivalencia_espanol": "y se sentó, y se asentó",
+    "observacion": "Se conserva la precisión verbal usada en el estudio."
+  },
+  {
+    "id": 40,
+    "texto_hebreo": "נַעַר",
+    "transliteracion": "Na‘ar",
+    "equivalencia_espanol": "joven, siervo, subordinado",
+    "observacion": "El contexto determina si se enfatiza edad o función."
+  },
+  {
+    "id": 41,
+    "texto_hebreo": "פַּסִּים",
+    "transliteracion": "Pasím",
+    "equivalencia_espanol": "de piezas, franjas (túnica)",
+    "observacion": "Se comenta en la expresión de la túnica de José."
+  },
+  {
+    "id": 42,
+    "texto_hebreo": "זוֹנָה",
+    "transliteracion": "Zonáh",
+    "equivalencia_espanol": "prostituta",
+    "observacion": "Se distingue de קְדֵשָׁה en el comentario."
+  },
+  {
+    "id": 43,
+    "texto_hebreo": "קְדֵשָׁה",
+    "transliteracion": "Qedesháh",
+    "equivalencia_espanol": "prostituta cultual, dedicada",
+    "observacion": "Se diferencia de zonáh por el matiz cultual."
+  },
+  {
+    "id": 44,
+    "texto_hebreo": "קָשׁוֹת",
+    "transliteracion": "Qashot",
+    "equivalencia_espanol": "duras, difíciles",
+    "observacion": "Aparece en plural femenino en el comentario."
+  },
+  {
+    "id": 45,
+    "texto_hebreo": "מָשַׁל",
+    "transliteracion": "Mashal",
+    "equivalencia_espanol": "gobernar, regir",
+    "observacion": "Se presenta como verbo de dominio, gobierno."
+  },
+  {
+    "id": 46,
+    "texto_hebreo": "מָלַךְ",
+    "transliteracion": "Malaj",
+    "equivalencia_espanol": "reinar",
+    "observacion": "Se distingue de otros verbos de gobierno."
+  },
+  {
+    "id": 47,
+    "texto_hebreo": "שָׁלַט",
+    "transliteracion": "Shalat",
+    "equivalencia_espanol": "gobernar, ejercer señorío",
+    "observacion": "Se usa como verbo de dominio, autoridad."
+  },
+  {
+    "id": 48,
+    "texto_hebreo": "חָכְמָה",
+    "transliteracion": "Jojmáh",
+    "equivalencia_espanol": "sabiduría",
+    "observacion": "Se define con énfasis práctico (dominio de emociones, sentidos)."
+  },
+  {
+    "id": 49,
+    "texto_hebreo": "מִנְחָה",
+    "transliteracion": "Minjáh",
+    "equivalencia_espanol": "ofrenda",
+    "observacion": "Forma usada en contextos de ofrenda, presente."
+  },
+  {
+    "id": 50,
+    "texto_hebreo": "רַחוּם",
+    "transliteracion": "Rajum",
+    "equivalencia_espanol": "compasivo",
+    "observacion": "Se comenta con relación al vientre, compasión."
+  },
+  {
+    "id": 51,
+    "texto_hebreo": "וּבָחַרְתָּ בַּחַיִּים",
+    "transliteracion": "Uvajartá bajayim",
+    "equivalencia_espanol": "escogerás la vida",
+    "observacion": "Se conserva la formulación deuteronómica citada."
+  },
+  {
+    "id": 52,
+    "texto_hebreo": "פְּלֵיטָה",
+    "transliteracion": "Pleitáh",
+    "equivalencia_espanol": "escape, sobreviviente",
+    "observacion": "Se usa con matiz de remanente, vida preservada."
+  },
+  {
+    "id": 53,
+    "texto_hebreo": "בָּצְרָה",
+    "transliteracion": "Botzrah",
+    "equivalencia_espanol": "fortalecimiento, Bosra",
+    "observacion": "Se conserva el matiz explicado en el estudio. Topónimo asociado con Babilonia y el juicio que el Mesías ejecutará sobre el reino de Edom."
+  },
+  {
+    "id": 54,
+    "texto_hebreo": "מַטֶּה",
+    "transliteracion": "Matéh",
+    "equivalencia_espanol": "vara, bastón, tribu",
+    "observacion": "Se comenta por su continuidad semántica en varios pasajes."
+  },
+  {
+    "id": 55,
+    "texto_hebreo": "מִצְרַיִם",
+    "transliteracion": "Mitzráyim",
+    "equivalencia_espanol": "Egipto",
+    "observacion": "Se enfatiza la terminación dual en la explicación."
+  },
+  {
+    "id": 56,
+    "texto_hebreo": "מִדְיָן",
+    "transliteracion": "Midián",
+    "equivalencia_espanol": "Madián (topónimo, pueblo)",
+    "observacion": "Se menciona en el relato de huida de Moshé y en contextos genealógicos."
+  },
+  {
+    "id": 57,
+    "texto_hebreo": "כֹּהֵן",
+    "transliteracion": "Kohén",
+    "equivalencia_espanol": "ministro, sacerdote",
+    "observacion": "Se glosa como ministro, delegado según contexto."
+  },
+  {
+    "id": 58,
+    "texto_hebreo": "מְחֹלָל",
+    "transliteracion": "Mejolal",
+    "equivalencia_espanol": "perforado, horadado, profanado (según contexto)",
+    "observacion": "Se comenta como 'hacer huecos' en el pasaje trabajado."
+  },
+  {
+    "id": 59,
+    "texto_hebreo": "הַיּוֹם",
+    "transliteracion": "Hayom",
+    "equivalencia_espanol": "hoy",
+    "observacion": "Se subraya el valor enfático, contextual del 'hoy'."
+  },
+  {
+    "id": 60,
+    "texto_hebreo": "יְהוָה",
+    "transliteracion": "YHWH",
+    "equivalencia_espanol": "Hashem, nombre divino",
+    "observacion": "Se conserva la forma tetragramática según el estudio."
+  },
+  {
+    "id": 61,
+    "texto_hebreo": "שַׁדַּי",
+    "transliteracion": "Shaday",
+    "equivalencia_espanol": "Shaddai (nombre, título)",
+    "observacion": "Forma citada en la explicación del nombre."
+  },
+  {
+    "id": 62,
+    "texto_hebreo": "וְיַעַבְדֻנִי",
+    "transliteracion": "Veya‘avduni",
+    "equivalencia_espanol": "y me servirán",
+    "observacion": "Se explica en clave de servicio, ‘avodáh."
+  },
+  {
+    "id": 63,
+    "texto_hebreo": "הִקְשָׁה",
+    "transliteracion": "Hiqshah",
+    "equivalencia_espanol": "endureció, mostró dureza",
+    "observacion": "Se usa en la discusión del corazón de Faraón. Acción propia del Faraón, él mismo endureció su corazón al no querer escuchar."
+  },
+  {
+    "id": 64,
+    "texto_hebreo": "קָשֶׁה",
+    "transliteracion": "Qasheh",
+    "equivalencia_espanol": "duro, difícil",
+    "observacion": "Variante repetida en explicaciones de endurecimiento."
+  },
+  {
+    "id": 65,
+    "texto_hebreo": "חֹזֶק יָד",
+    "transliteracion": "Józeq yad",
+    "equivalencia_espanol": "mano fuerte, rigidez de mano",
+    "observacion": "Se comenta como fuerza, rigidez ejercida."
+  },
+  {
+    "id": 66,
+    "texto_hebreo": "אֶת־לֵב פַּרְעֹה",
+    "transliteracion": "’Et lev Par‘oh",
+    "equivalencia_espanol": "el corazón de Faraón (marca de objeto directo)",
+    "observacion": "Frase usada al explicar el endurecimiento, se mantiene como unidad de análisis."
+  },
+  {
+    "id": 67,
+    "texto_hebreo": "אֵת",
+    "transliteracion": "’Et",
+    "equivalencia_espanol": "marca de objeto directo, con",
+    "observacion": "Se explica por su doble uso contextual."
+  },
+  {
+    "id": 68,
+    "texto_hebreo": "רִאשׁוֹן",
+    "transliteracion": "Ri’shon",
+    "equivalencia_espanol": "primero, principal",
+    "observacion": "Se aplica al principal de los meses."
+  },
+  {
+    "id": 69,
+    "texto_hebreo": "עֵדָה",
+    "transliteracion": "‘Edáh",
+    "equivalencia_espanol": "asamblea (grupo definido)",
+    "observacion": "Se glosa como asamblea con número definido en la explicación."
+  },
+  {
+    "id": 70,
+    "texto_hebreo": "אֲגֻדָּה",
+    "transliteracion": "Agudáh",
+    "equivalencia_espanol": "grupo, agrupación",
+    "observacion": "Se comenta como unidad, agrupación."
+  },
+  {
+    "id": 71,
+    "texto_hebreo": "פֶּסַח",
+    "transliteracion": "Pésaj",
+    "equivalencia_espanol": "paso por alto",
+    "observacion": "Se glosa desde el sentido de 'pasar por encima'."
+  },
+  {
+    "id": 72,
+    "texto_hebreo": "בְּשַׁלַּח",
+    "transliteracion": "Beshalaj",
+    "equivalencia_espanol": "cuando envió (parasháh)",
+    "observacion": "Se conserva como encabezado de parasháh."
+  },
+  {
+    "id": 73,
+    "texto_hebreo": "חֲמֻשִׁים",
+    "transliteracion": "Jamushim",
+    "equivalencia_espanol": "en grupos, armados (según lectura), de a cincuenta",
+    "observacion": "Se registra el matiz explicado en el estudio."
+  },
+  {
+    "id": 74,
+    "texto_hebreo": "וְאִכָּבְדָה",
+    "transliteracion": "Ve’ikavdáh",
+    "equivalencia_espanol": "me haré pesado, seré glorificado",
+    "observacion": "Se conserva el matiz verbal trabajado."
+  },
+  {
+    "id": 75,
+    "texto_hebreo": "תֵאָמַנָה",
+    "transliteracion": "Te’amenáh",
+    "equivalencia_espanol": "serán afirmados, serán firmes",
+    "observacion": "Se conecta con la raíz אמן."
+  },
+  {
+    "id": 76,
+    "texto_hebreo": "אָמַן",
+    "transliteracion": "Amán",
+    "equivalencia_espanol": "afirmar, sostener, ser fiel",
+    "observacion": "Se trabaja en relación con fidelidad, afirmación."
+  },
+  {
+    "id": 77,
+    "texto_hebreo": "שָׁמַע",
+    "transliteracion": "Shamá‘",
+    "equivalencia_espanol": "escuchar, obedecer",
+    "observacion": "Se enfatiza que incluye comprensión, obediencia según contexto."
+  },
+  {
+    "id": 78,
+    "texto_hebreo": "סְגֻלָּה מִכָּל הָעַמִּים",
+    "transliteracion": "Seguláh mikol ha‘amim",
+    "equivalencia_espanol": "tesoro especial de entre todos los pueblos",
+    "observacion": "Se glosa como prototipo, tesoro especial en medio de los pueblos."
+  },
+  {
+    "id": 79,
+    "texto_hebreo": "גּוֹי קָדוֹשׁ",
+    "transliteracion": "Goy qadosh",
+    "equivalencia_espanol": "gentil, nación santa",
+    "observacion": "Se mantiene la formulación compuesta."
+  },
+  {
+    "id": 80,
+    "texto_hebreo": "גּוֹי",
+    "transliteracion": "Goy",
+    "equivalencia_espanol": "gentil, nación (según contexto)",
+    "observacion": "Se comenta con matiz de identidad, no-identidad según el discurso."
+  },
+  {
+    "id": 81,
+    "texto_hebreo": "שׁוֹר תַּחַת הַשּׁוֹר",
+    "transliteracion": "Shor tajat ha’shor",
+    "equivalencia_espanol": "buey en lugar del buey, sustitución equivalente",
+    "observacion": "Frase legal citada, se deja como expresión completa."
+  },
+  {
+    "id": 82,
+    "texto_hebreo": "קֹדֶשׁ תִּהְיוּן לִי",
+    "transliteracion": "Qodesh tihyun li",
+    "equivalencia_espanol": "serán para mí santidad, santos para mí",
+    "observacion": "Se conserva la frase con énfasis posesivo."
+  },
+  {
+    "id": 83,
+    "texto_hebreo": "דְּבָרִים",
+    "transliteracion": "Devarim",
+    "equivalencia_espanol": "palabras",
+    "observacion": "Se relaciona con las 'diez palabras'."
+  },
+  {
+    "id": 84,
+    "texto_hebreo": "דִּבְרוֹת",
+    "transliteracion": "Divrot",
+    "equivalencia_espanol": "dichos, palabras",
+    "observacion": "Se explica como plural en el campo de 'palabras, juramentos'."
+  },
+  {
+    "id": 85,
+    "texto_hebreo": "סֵפֶר הַבְּרִית",
+    "transliteracion": "Séfer habrit",
+    "equivalencia_espanol": "libro, rollo del pacto",
+    "observacion": "Se comenta como texto del pacto escrito."
+  },
+  {
+    "id": 86,
+    "texto_hebreo": "לֻחוֹת הָאֶבֶן",
+    "transliteracion": "Lujot ha’éven",
+    "equivalencia_espanol": "tablas de piedra",
+    "observacion": "Se conserva la expresión de Éxodo."
+  },
+  {
+    "id": 87,
+    "texto_hebreo": "וְשָׁכַנְתִּי בְּתוֹכָם",
+    "transliteracion": "Veshajantí betojam",
+    "equivalencia_espanol": "y habitaré en medio de ellos",
+    "observacion": "Se mantiene la frase completa citada."
+  },
+  {
+    "id": 88,
+    "texto_hebreo": "תְּחָשִׁים",
+    "transliteracion": "Tejashim",
+    "equivalencia_espanol": "tejashim (pieles, cobertura)",
+    "observacion": "Se menciona como material de cubierta del tabernáculo."
+  },
+  {
+    "id": 89,
+    "texto_hebreo": "מְנוֹרָה",
+    "transliteracion": "Menoráh",
+    "equivalencia_espanol": "candelabro",
+    "observacion": "Se relaciona con נֵר (lámpara, candela)."
+  },
+  {
+    "id": 90,
+    "texto_hebreo": "בִּגְדֵי קֹדֶשׁ",
+    "transliteracion": "Bigdé qódesh",
+    "equivalencia_espanol": "vestiduras de santidad",
+    "observacion": "Se conserva la expresión técnica sacerdotal."
+  },
+  {
+    "id": 91,
+    "texto_hebreo": "כֶּחָתָן יְכַהֵן פְּאֵר",
+    "transliteracion": "Kejatán yejahén pe’er",
+    "equivalencia_espanol": "como novio se adorna, inviste de hermosura",
+    "observacion": "Se conserva la frase poética citada en el comentario."
+  },
+  {
+    "id": 92,
+    "texto_hebreo": "יְכַהֵן",
+    "transliteracion": "Yejahén",
+    "equivalencia_espanol": "ejercerá sacerdocio",
+    "observacion": "Se conecta con כֹּהֵן."
+  },
+  {
+    "id": 93,
+    "texto_hebreo": "שׁוֹק",
+    "transliteracion": "Shoq",
+    "equivalencia_espanol": "pierna, muslo",
+    "observacion": "Se glosa como parte anatómica en leyes sacrificiales."
+  },
+  {
+    "id": 94,
+    "texto_hebreo": "מִלֻּאִים",
+    "transliteracion": "Milu’im",
+    "equivalencia_espanol": "consagraciones, llenuras, capacitación, manos llenas",
+    "observacion": "Se relaciona con מלא (llenar). Referido al proceso donde Dios dota al sacerdote de recursos y competencia para servir."
+  },
+  {
+    "id": 95,
+    "texto_hebreo": "מָלֵא",
+    "transliteracion": "Malé’",
+    "equivalencia_espanol": "lleno, llenura",
+    "observacion": "Se relaciona con Milu’im (consagraciones, llenuras)."
+  },
+  {
+    "id": 96,
+    "texto_hebreo": "כִּפֶּר",
+    "transliteracion": "Kipper",
+    "equivalencia_espanol": "reconciliar, expiar",
+    "observacion": "Se conecta con כִּפּוּרִים y כֹּפֶר."
+  },
+  {
+    "id": 97,
+    "texto_hebreo": "כִּפּוּרִים",
+    "transliteracion": "Kipurim",
+    "equivalencia_espanol": "reconciliaciones, expiaciones",
+    "observacion": "Se registra según la glosa del estudio."
+  },
+  {
+    "id": 98,
+    "texto_hebreo": "כֹּפֶר",
+    "transliteracion": "Kófer",
+    "equivalencia_espanol": "pago de rescate, cobertura",
+    "observacion": "Se asocia a pago y reconciliación."
+  },
+  {
+    "id": 99,
+    "texto_hebreo": "נֶגֶף",
+    "transliteracion": "Négef",
+    "equivalencia_espanol": "toque, golpe, plaga",
+    "observacion": "Se matiza como reprensión, toque, no solo mortandad."
+  },
+  {
+    "id": 100,
+    "texto_hebreo": "שֶׁקֶל הַקֹּדֶשׁ",
+    "transliteracion": "Shéqel haqódesh",
+    "equivalencia_espanol": "siclo de la santidad",
+    "observacion": "Se usa en contexto de medidas sagradas."
+  },
+  {
+    "id": 101,
+    "texto_hebreo": "חֹק",
+    "transliteracion": "Joq",
+    "equivalencia_espanol": "estatuto, decreto",
+    "observacion": "Se comenta como procedimiento, ordenanza infaltable."
+  },
+  {
+    "id": 102,
+    "texto_hebreo": "מִשְׁחַת־קֹדֶשׁ",
+    "transliteracion": "Mishjat-qódesh",
+    "equivalencia_espanol": "unción de la santidad",
+    "observacion": "Expresión técnica de aceite de unción."
+  },
+  {
+    "id": 103,
+    "texto_hebreo": "בְּכֹל מוֹשְׁבֹתֵיכֶם בְּיוֹם הַשַּׁבָּת",
+    "transliteracion": "Bejol moshvoteijem beyom haShabat",
+    "equivalencia_espanol": "en todos sus asentamientos en el día de Shabat",
+    "observacion": "Se conserva la frase legal completa citada."
+  },
+  {
+    "id": 104,
+    "texto_hebreo": "מֹשְׁבֹתֵיכֶם",
+    "transliteracion": "Moshvoteijem",
+    "equivalencia_espanol": "asentamientos, moradas",
+    "observacion": "Se conserva el matiz de lugares de habitación."
+  },
+  {
+    "id": 105,
+    "texto_hebreo": "חָכָם",
+    "transliteracion": "Jajam",
+    "equivalencia_espanol": "capaz o tiene la virtud o el don de someter sus sentidos y sus pensamientos a la voluntad",
+    "observacion": "Se explica como capacidad dada para someter sentidos y pensamientos a la voluntad, aplicado a artesanos llenados para ejecutar conforme al diseño recibido."
+  },
+  {
+    "id": 106,
+    "texto_hebreo": "תְּבוּנָה",
+    "transliteracion": "Tvunáh",
+    "equivalencia_espanol": "entendimiento, lógica",
+    "observacion": "Se explica con énfasis metodológico, lógico."
+  },
+  {
+    "id": 107,
+    "texto_hebreo": "דַּעַת",
+    "transliteracion": "Da‘at",
+    "equivalencia_espanol": "conocimiento",
+    "observacion": "Se glosa como conocimiento íntimo, preciso."
+  },
+  {
+    "id": 108,
+    "texto_hebreo": "אָזְנַיִם כָּרִיתָ לִּי",
+    "transliteracion": "Oznáyim karíta li",
+    "equivalencia_espanol": "oídos abriste, perforaste para mí",
+    "observacion": "Se conserva la frase citada del salmo."
+  },
+  {
+    "id": 109,
+    "texto_hebreo": "חָטָא",
+    "transliteracion": "Jatá’",
+    "equivalencia_espanol": "errar, pecar",
+    "observacion": "Se aclara como falta por error, culpa según contexto."
+  },
+  {
+    "id": 110,
+    "texto_hebreo": "תּוֹרַת הָעֹלָה",
+    "transliteracion": "Torát ha‘oláh",
+    "equivalencia_espanol": "instrucción de la ofrenda de ascensión",
+    "observacion": "Se mantiene la expresión legal."
+  },
+  {
+    "id": 111,
+    "texto_hebreo": "יִקְדַּשׁ",
+    "transliteracion": "Yiqdash",
+    "equivalencia_espanol": "será, queda santo (forma activa-contextual)",
+    "observacion": "Se distingue de una lectura pasiva propuesta."
+  },
+  {
+    "id": 112,
+    "texto_hebreo": "יִקַּדֵשׁ",
+    "transliteracion": "Yiqadesh",
+    "equivalencia_espanol": "santificará",
+    "observacion": "Se marca la diferencia verbal frente a יִקְדַּשׁ."
+  },
+  {
+    "id": 113,
+    "texto_hebreo": "מָשׁוּחַ",
+    "transliteracion": "Mashúaj",
+    "equivalencia_espanol": "ungido",
+    "observacion": "Se comenta como aquello sobre lo que se derramó aceite."
+  },
+  {
+    "id": 114,
+    "texto_hebreo": "מַלְאַךְ הַבְּרִית",
+    "transliteracion": "Mal’áj habrit",
+    "equivalencia_espanol": "mensajero del pacto",
+    "observacion": "Se señala precisión traductiva de la expresión."
+  },
+  {
+    "id": 115,
+    "texto_hebreo": "נִדַּת דְּוֹתָהּ",
+    "transliteracion": "Nidat devotátah",
+    "equivalencia_espanol": "separación de su flujo, dolencia",
+    "observacion": "Se explica en contexto de pureza, impureza femenina."
+  },
+  {
+    "id": 116,
+    "texto_hebreo": "דָּם",
+    "transliteracion": "Dam",
+    "equivalencia_espanol": "sangre",
+    "observacion": "Se mantiene la glosa básica contextual."
+  },
+  {
+    "id": 117,
+    "texto_hebreo": "טָהֳרָה",
+    "transliteracion": "Tohoráh",
+    "equivalencia_espanol": "purificación, reconstitución",
+    "observacion": "Se usa con matiz de proceso de restauración."
+  },
+  {
+    "id": 118,
+    "texto_hebreo": "מְצֹרָע",
+    "transliteracion": "Metzoráh",
+    "equivalencia_espanol": "leproso, afectado por tzara‘at",
+    "observacion": "Se glosa en relación con צָרַעַת."
+  },
+  {
+    "id": 119,
+    "texto_hebreo": "צָרַעַת",
+    "transliteracion": "Tzara‘at",
+    "equivalencia_espanol": "afectación, lepra ritual",
+    "observacion": "Se matiza con connotación espiritual en el estudio."
+  },
+  {
+    "id": 120,
+    "texto_hebreo": "אֵזוֹב",
+    "transliteracion": "Ezob",
+    "equivalencia_espanol": "hisopo, orégano (según explicación)",
+    "observacion": "Se comenta por su uso ritual y asociaciones tipológicas."
+  },
+  {
+    "id": 121,
+    "texto_hebreo": "נָצַח",
+    "transliteracion": "Nátzaj",
+    "equivalencia_espanol": "victoria, permanencia, eternidad",
+    "observacion": "Se comenta junto a מְנַצֵּחַ."
+  },
+  {
+    "id": 122,
+    "texto_hebreo": "הַקֹּדֶשׁ",
+    "transliteracion": "Haqódesh",
+    "equivalencia_espanol": "la santidad",
+    "observacion": "Se glosa como origen, santidad en el comentario."
+  },
+  {
+    "id": 123,
+    "texto_hebreo": "פָּרֹכֶת",
+    "transliteracion": "Parójet",
+    "equivalencia_espanol": "velo",
+    "observacion": "Término técnico del tabernáculo, santuario."
+  },
+  {
+    "id": 124,
+    "texto_hebreo": "כַּפֹּרֶת",
+    "transliteracion": "Kapóret",
+    "equivalencia_espanol": "propiciatorio",
+    "observacion": "Se conserva la glosa técnica del arca."
+  },
+  {
+    "id": 125,
+    "texto_hebreo": "חַטָּאת",
+    "transliteracion": "Jatát",
+    "equivalencia_espanol": "ofrenda por el pecado",
+    "observacion": "Se explica como sacrificio por el pecado."
+  },
+  {
+    "id": 126,
+    "texto_hebreo": "עֹלָה",
+    "transliteracion": "‘Oláh",
+    "equivalencia_espanol": "ofrenda de ascensión",
+    "observacion": "Se registra como tipo de sacrificio."
+  },
+  {
+    "id": 127,
+    "texto_hebreo": "עֲזָאזֵל",
+    "transliteracion": "‘Az’azel",
+    "equivalencia_espanol": "Azazel",
+    "observacion": "Se comenta a partir de la segmentación ‘ez + az en la explicación."
+  },
+  {
+    "id": 128,
+    "texto_hebreo": "מֹלֶךְ",
+    "transliteracion": "Mólej",
+    "equivalencia_espanol": "Moloc, Molej",
+    "observacion": "Se refiere a la deidad cananea mencionada."
+  },
+  {
+    "id": 129,
+    "texto_hebreo": "לֹא תְקַלֵּל",
+    "transliteracion": "Lo teqalel",
+    "equivalencia_espanol": "no maldecirás, no disminuirás la honra (según contexto)",
+    "observacion": "Se conserva la precisión contextual ofrecida."
+  },
+  {
+    "id": 130,
+    "texto_hebreo": "עָוֶל",
+    "transliteracion": "‘Avel",
+    "equivalencia_espanol": "injusticia, perversidad",
+    "observacion": "Se contrapone a fidelidad, rectitud en la explicación."
+  },
+  {
+    "id": 131,
+    "texto_hebreo": "מוֹעֲדֵי יְהוָה",
+    "transliteracion": "Mo‘adey YHWH",
+    "equivalencia_espanol": "citas, tiempos señalados de YHWH",
+    "observacion": "Se glosa como citas del Nombre."
+  },
+  {
+    "id": 132,
+    "texto_hebreo": "מִקְרָאֵי קֹדֶשׁ",
+    "transliteracion": "Miqra’ey qódesh",
+    "equivalencia_espanol": "llamamientos de santidad",
+    "observacion": "Se explica como convocatorias santas."
+  },
+  {
+    "id": 133,
+    "texto_hebreo": "לִצְמִתֻת",
+    "transliteracion": "Litzmitut",
+    "equivalencia_espanol": "para destrucción, ruina",
+    "observacion": "Se conserva el matiz fuerte de pérdida total."
+  },
+  {
+    "id": 134,
+    "texto_hebreo": "בְּרִית רִאשֹׁנִים",
+    "transliteracion": "Brit ri’shonim",
+    "equivalencia_espanol": "pacto de los primeros",
+    "observacion": "Se registra la expresión tal como se comenta."
+  },
+  {
+    "id": 135,
+    "texto_hebreo": "מַשָּׂא",
+    "transliteracion": "Masá’",
+    "equivalencia_espanol": "carga, encargo",
+    "observacion": "Se glosa con matiz de servicio, peso sobre alguien."
+  },
+  {
+    "id": 136,
+    "texto_hebreo": "נֵזֶר",
+    "transliteracion": "Nézer",
+    "equivalencia_espanol": "corona, consagración",
+    "observacion": "Se comenta como corona de consagración."
+  },
+  {
+    "id": 137,
+    "texto_hebreo": "נָשִׂיא",
+    "transliteracion": "Nasí’",
+    "equivalencia_espanol": "príncipe, levantado",
+    "observacion": "Se conecta con la idea de elevación."
+  },
+  {
+    "id": 138,
+    "texto_hebreo": "נְשִׂיאֵי",
+    "transliteracion": "Nesi’éy",
+    "equivalencia_espanol": "príncipes de, jefes de",
+    "observacion": "Se aclara como plural constructo de נָשִׂיא."
+  },
+  {
+    "id": 139,
+    "texto_hebreo": "אָבִיב",
+    "transliteracion": "Aviv",
+    "equivalencia_espanol": "espiga tierna, mes Aviv",
+    "observacion": "Se conserva el término calendárico, agrícola."
+  },
+  {
+    "id": 140,
+    "texto_hebreo": "אָבִיךָ",
+    "transliteracion": "’Avija",
+    "equivalencia_espanol": "tu padre",
+    "observacion": "Aparece en frase compuesta dentro del comentario."
+  },
+  {
+    "id": 141,
+    "texto_hebreo": "אָרוּר",
+    "transliteracion": "’Arur",
+    "equivalencia_espanol": "maldito",
+    "observacion": "Se explica con matiz de exclusión, maldición."
+  },
+  {
+    "id": 142,
+    "texto_hebreo": "יָדוֹן",
+    "transliteracion": "Yadón",
+    "equivalencia_espanol": "juzgará, contendrá (según lectura)",
+    "observacion": "Se vincula con la raíz דין."
+  },
+  {
+    "id": 143,
+    "texto_hebreo": "דָּן",
+    "transliteracion": "Dan",
+    "equivalencia_espanol": "juzgar",
+    "observacion": "Se usa como referencia a la raíz דין."
+  },
+  {
+    "id": 144,
+    "texto_hebreo": "עֲנָק",
+    "transliteracion": "‘Anaq",
+    "equivalencia_espanol": "Anac (nombre, clan)",
+    "observacion": "Se menciona en relación con gigantes, Nefilim."
+  },
+  {
+    "id": 145,
+    "texto_hebreo": "נִאַץ",
+    "transliteracion": "Ni’atz",
+    "equivalencia_espanol": "despreciar, provocar",
+    "observacion": "Se conserva el valor de desprecio, provocación."
+  },
+  {
+    "id": 146,
+    "texto_hebreo": "נִאֲצוּ",
+    "transliteracion": "Ni’atzu",
+    "equivalencia_espanol": "despreciaron",
+    "observacion": "Forma verbal plural del mismo campo."
+  },
+  {
+    "id": 147,
+    "texto_hebreo": "נָסָה",
+    "transliteracion": "Nasáh",
+    "equivalencia_espanol": "probar, tentar",
+    "observacion": "Se comenta junto con formas relacionadas (נִסָּה, מַסָּה) en la explicación."
+  },
+  {
+    "id": 148,
+    "texto_hebreo": "נִסָּה",
+    "transliteracion": "Nisáh",
+    "equivalencia_espanol": "probó, puso a prueba",
+    "observacion": "Forma verbal comentada junto a נָסָה, מַסָּה."
+  },
+  {
+    "id": 149,
+    "texto_hebreo": "מַסָּה",
+    "transliteracion": "Masáh, Massáh",
+    "equivalencia_espanol": "prueba, provocación (topónimo, nombre del episodio)",
+    "observacion": "Se conecta con el episodio de provocación en el desierto (Massá y Merivá)."
+  },
+  {
+    "id": 150,
+    "texto_hebreo": "נֵס",
+    "transliteracion": "Nes",
+    "equivalencia_espanol": "señal, estandarte, milagro",
+    "observacion": "Se comenta también como asta, estandarte."
+  },
+  {
+    "id": 151,
+    "texto_hebreo": "סֶלַע",
+    "transliteracion": "Sela‘",
+    "equivalencia_espanol": "roca",
+    "observacion": "Se matiza como roca porosa en el estudio."
+  },
+  {
+    "id": 152,
+    "texto_hebreo": "צוּר",
+    "transliteracion": "Tzur",
+    "equivalencia_espanol": "roca sólida",
+    "observacion": "Se distingue de סֶלַע por el tipo de roca."
+  },
+  {
+    "id": 153,
+    "texto_hebreo": "אֶבֶן",
+    "transliteracion": "Éven",
+    "equivalencia_espanol": "piedra",
+    "observacion": "Se explica también con uso arquitectónico."
+  },
+  {
+    "id": 154,
+    "texto_hebreo": "כֵּיפָא",
+    "transliteracion": "Keipá",
+    "equivalencia_espanol": "roca, piedra (arameo)",
+    "observacion": "Se usa para explicar la equivalencia aramea mencionada."
+  },
+  {
+    "id": 155,
+    "texto_hebreo": "קָהָל",
+    "transliteracion": "Qahal",
+    "equivalencia_espanol": "asamblea",
+    "observacion": "Se distingue de otros términos de congregación."
+  },
+  {
+    "id": 156,
+    "texto_hebreo": "קְסָמִים",
+    "transliteracion": "Qesamim",
+    "equivalencia_espanol": "adivinaciones, objetos, actos de adivinación",
+    "observacion": "Se comenta que no eran regalos sino elementos de adivinación."
+  },
+  {
+    "id": 157,
+    "texto_hebreo": "קַנָּא",
+    "transliteracion": "Qaná’",
+    "equivalencia_espanol": "celoso",
+    "observacion": "Se usa en la fórmula 'El celoso'."
+  },
+  {
+    "id": 158,
+    "texto_hebreo": "לְעַנּוֹת נֶפֶשׁ",
+    "transliteracion": "Le‘anot néfesh",
+    "equivalencia_espanol": "afligir el ser, negar placeres",
+    "observacion": "Se glosa como abstención, aflicción en contexto ritual."
+  },
+  {
+    "id": 159,
+    "texto_hebreo": "אֶתְחַנַּן",
+    "transliteracion": "Etjanán",
+    "equivalencia_espanol": "suplicar por gracia",
+    "observacion": "Se relaciona explícitamente con חֵן (gracia)."
+  },
+  {
+    "id": 160,
+    "texto_hebreo": "חֵן",
+    "transliteracion": "Jen",
+    "equivalencia_espanol": "gracia",
+    "observacion": "Se usa como clave semántica de favor, gracia."
+  },
+  {
+    "id": 161,
+    "texto_hebreo": "לְבָנוֹן",
+    "transliteracion": "Levanón",
+    "equivalencia_espanol": "Líbano",
+    "observacion": "Se comenta por su asociación con blancura, cedro."
+  },
+  {
+    "id": 162,
+    "texto_hebreo": "וַיִּתְעַבַּר",
+    "transliteracion": "Vayit‘abar",
+    "equivalencia_espanol": "se airó, se indignó, pasó al otro lado (según explicación)",
+    "observacion": "Se conserva el matiz contextual dado."
+  },
+  {
+    "id": 163,
+    "texto_hebreo": "עָבַר",
+    "transliteracion": "‘Abar",
+    "equivalencia_espanol": "pasar, atravesar",
+    "observacion": "Se explica con imagen de atravesar, saltar un río."
+  },
+  {
+    "id": 164,
+    "texto_hebreo": "חָלַק",
+    "transliteracion": "Jalaq",
+    "equivalencia_espanol": "repartir, dividir",
+    "observacion": "Se glosa en contexto de porciones dadas."
+  },
+  {
+    "id": 165,
+    "texto_hebreo": "לָקַח",
+    "transliteracion": "Laqaj",
+    "equivalencia_espanol": "tomar",
+    "observacion": "Se conserva la glosa verbal básica con matiz de asir, tomar."
+  },
+  {
+    "id": 166,
+    "texto_hebreo": "וּבִקַּשְׁתֶּם",
+    "transliteracion": "Uviqashtem",
+    "equivalencia_espanol": "y buscarán",
+    "observacion": "Forma futura, plural comentada en el estudio."
+  },
+  {
+    "id": 167,
+    "texto_hebreo": "בִּקֵּשׁ",
+    "transliteracion": "Biqesh",
+    "equivalencia_espanol": "buscar, procurar",
+    "observacion": "Se matiza como persecución de un objetivo."
+  },
+  {
+    "id": 168,
+    "texto_hebreo": "תִּדְרְשֶׁנּוּ",
+    "transliteracion": "Tidreshénu",
+    "equivalencia_espanol": "lo buscarás, lo inquirirás",
+    "observacion": "Se explica en relación con דרש."
+  },
+  {
+    "id": 169,
+    "texto_hebreo": "דָּרַשׁ",
+    "transliteracion": "Darash",
+    "equivalencia_espanol": "buscar, inquirir, escudriñar",
+    "observacion": "Se destaca como verbo técnico de búsqueda, investigación."
+  },
+  {
+    "id": 170,
+    "texto_hebreo": "עֵקֶב",
+    "transliteracion": "‘Éqev",
+    "equivalencia_espanol": "talón, huella",
+    "observacion": "Se resalta la idea de huella, resultado que deja el talón."
+  },
+  {
+    "id": 171,
+    "texto_hebreo": "עָקֵב",
+    "transliteracion": "‘Aqev",
+    "equivalencia_espanol": "talón",
+    "observacion": "Se vincula con el nombre Ya‘aqov."
+  },
+  {
+    "id": 172,
+    "texto_hebreo": "דֹּרֵשׁ",
+    "transliteracion": "Dorésh",
+    "equivalencia_espanol": "el que escudriña, busca, el que investiga, escudriña hacia adentro",
+    "observacion": "Participio de דרש. Describe la acción de Dios de vigilar la conducta interna del pueblo dentro de la tierra."
+  },
+  {
+    "id": 173,
+    "texto_hebreo": "זָכָר",
+    "transliteracion": "Zajár",
+    "equivalencia_espanol": "varón, macho",
+    "observacion": "Se distingue del verbo 'recordar' por vocalización."
+  },
+  {
+    "id": 174,
+    "texto_hebreo": "קְלָלָה",
+    "transliteracion": "Qlaláh",
+    "equivalencia_espanol": "maldición",
+    "observacion": "Se identifica explícitamente como la palabra qlaláh en el comentario."
+  },
+  {
+    "id": 175,
+    "texto_hebreo": "שֹׁטְרִים",
+    "transliteracion": "Shotrim",
+    "equivalencia_espanol": "oficiales",
+    "observacion": "Se explica junto con jueces como autoridades del pueblo."
+  },
+  {
+    "id": 176,
+    "texto_hebreo": "שֹׁטֵר",
+    "transliteracion": "Shoter",
+    "equivalencia_espanol": "oficial",
+    "observacion": "Se explica el uso traducido a veces como policía."
+  },
+  {
+    "id": 177,
+    "texto_hebreo": "צֶדֶק צֶדֶק תִּרְדֹּף",
+    "transliteracion": "Tzédeq tirdof",
+    "equivalencia_espanol": "justicia, justicia perseguirás",
+    "observacion": "Se conserva la cita legal en forma fija."
+  },
+  {
+    "id": 178,
+    "texto_hebreo": "תּוֹעֵבָה",
+    "transliteracion": "To‘eváh",
+    "equivalencia_espanol": "abominación",
+    "observacion": "Se matiza desde especificaciones, divergencia del orden dado."
+  },
+  {
+    "id": 179,
+    "texto_hebreo": "וּבִעַרְתָּ",
+    "transliteracion": "Uvi‘artá",
+    "equivalencia_espanol": "consumirás, quitarás quemando",
+    "observacion": "Se usa en fórmulas legales de remoción del mal."
+  },
+  {
+    "id": 180,
+    "texto_hebreo": "כְּלִי",
+    "transliteracion": "Kelí",
+    "equivalencia_espanol": "utensilio, vaso, instrumento",
+    "observacion": "Se amplía a objetos de uso y ornamento."
+  },
+  {
+    "id": 181,
+    "texto_hebreo": "הַמָּקוֹם",
+    "transliteracion": "Hamaqom",
+    "equivalencia_espanol": "el lugar",
+    "observacion": "Se comenta también como título, imagen referencial."
+  },
+  {
+    "id": 182,
+    "texto_hebreo": "שָׁלֵם",
+    "transliteracion": "Shalém",
+    "equivalencia_espanol": "completo, íntegro",
+    "observacion": "Se relaciona con shalom, shelamim."
+  },
+  {
+    "id": 183,
+    "texto_hebreo": "שְׁלָמִין",
+    "transliteracion": "Shlamín",
+    "equivalencia_espanol": "completos, paz (forma aramea, plural)",
+    "observacion": "Se conserva según la explicación del estudio."
+  },
+  {
+    "id": 184,
+    "texto_hebreo": "אֵילֵי הַצֶּדֶק",
+    "transliteracion": "’Eyley hatzédeq",
+    "equivalencia_espanol": "carneros de justicia",
+    "observacion": "Expresión compuesta citada en el estudio."
+  },
+  {
+    "id": 185,
+    "texto_hebreo": "שִׁקּוּצֵיהֶם",
+    "transliteracion": "Shiqutzeihem",
+    "equivalencia_espanol": "abominaciones (de ellos)",
+    "observacion": "Se usa para las abominaciones, se amplía a lo abominable en comida y en el cuerpo dentro del comentario."
+  },
+  {
+    "id": 186,
+    "texto_hebreo": "אֲדֹנָי",
+    "transliteracion": "Adonai",
+    "equivalencia_espanol": "Señor",
+    "observacion": "Se mantiene como título reverencial en el estudio."
+  },
+  {
+    "id": 187,
+    "texto_hebreo": "תְּפִלָּה",
+    "transliteracion": "Tefiláh",
+    "equivalencia_espanol": "oración",
+    "observacion": "Se lista entre varias palabras relacionadas con la oración en la explicación de Génesis 25."
+  },
+  {
+    "id": 188,
+    "texto_hebreo": "שַׁוְעָה",
+    "transliteracion": "Shav‘áh",
+    "equivalencia_espanol": "clamor, súplica",
+    "observacion": "Se enumera como término del campo semántico de la oración, clamor."
+  },
+  {
+    "id": 189,
+    "texto_hebreo": "זְעָקָה",
+    "transliteracion": "Ze‘aqáh",
+    "equivalencia_espanol": "grito, clamor",
+    "observacion": "Se enumera entre las palabras de oración con matiz de clamor."
+  },
+  {
+    "id": 190,
+    "texto_hebreo": "הִתְפַּלֵּל",
+    "transliteracion": "Hitpalel",
+    "equivalencia_espanol": "orar",
+    "observacion": "Se añade como forma verbal base además del infinitivo con prefijo ל־ ya registrado."
+  },
+  {
+    "id": 191,
+    "texto_hebreo": "תָּמִים",
+    "transliteracion": "Tamim",
+    "equivalencia_espanol": "íntegro, sin defecto, completo",
+    "observacion": "Se diferencia de תָּם como forma, adjetivo más extendido en contextos de integridad o perfección."
+  },
+  {
+    "id": 192,
+    "texto_hebreo": "רִיב",
+    "transliteracion": "Riv",
+    "equivalencia_espanol": "contienda, pleito",
+    "observacion": "Aparece en contextos legales y de controversia, útil para distinguir del simple ‘discutir’."
+  },
+  {
+    "id": 193,
+    "texto_hebreo": "דָּבָר",
+    "transliteracion": "Davar",
+    "equivalencia_espanol": "palabra, asunto",
+    "observacion": "Se contrasta explícitamente con דִּבְרָה (femenino) en el bloque sobre Devarim, Divrot."
+  },
+  {
+    "id": 194,
+    "texto_hebreo": "דִּבְרָה",
+    "transliteracion": "Divráh",
+    "equivalencia_espanol": "juramento",
+    "observacion": "Se presenta como femenino y se contrasta con דָּבָר para mostrar giro idiomático y cambio de sentido."
+  },
+  {
+    "id": 195,
+    "texto_hebreo": "אֹהֶל מוֹעֵד",
+    "transliteracion": "’Óhel Mo‘ed",
+    "equivalencia_espanol": "tienda de la cita",
+    "observacion": "Se glosa así en la explicación del velo y la disposición de las lámparas."
+  },
+  {
+    "id": 196,
+    "texto_hebreo": "אֵלֶּה הֵם מוֹעֲדָי",
+    "transliteracion": "’Eleh hem mo‘aday",
+    "equivalencia_espanol": "estas son mis citas",
+    "observacion": "Frase citada para enfatizar que las citas pertenecen a la Santidad de Dios."
+  },
+  {
+    "id": 197,
+    "texto_hebreo": "לַמְנַצֵּחַ",
+    "transliteracion": "LaMenatzeaj",
+    "equivalencia_espanol": "para el victorioso",
+    "observacion": "Se explica en relación con נָצַח y con el encabezado de ciertos salmos."
+  },
+  {
+    "id": 198,
+    "texto_hebreo": "מְנַצֵּחַ",
+    "transliteracion": "Menatzeaj",
+    "equivalencia_espanol": "el que logra la victoria, el victorioso",
+    "observacion": "Se deriva del campo de נָצַח con matiz de quien alcanza victoria, permanencia."
+  },
+  {
+    "id": 199,
+    "texto_hebreo": "עֲבֹדָה",
+    "transliteracion": "‘Avodáh",
+    "equivalencia_espanol": "servicio",
+    "observacion": "Se usa junto con מַשָּׂא para distinguir responsabilidades: carga y servicio."
+  },
+  {
+    "id": 200,
+    "texto_hebreo": "נָבִיא",
+    "transliteracion": "Naví",
+    "equivalencia_espanol": "profeta, portavoz",
+    "observacion": "Se precisa que la profecía no se reduce a predicción del futuro sino a manifestar y confrontar."
+  },
+  {
+    "id": 201,
+    "texto_hebreo": "צָרוּעַ",
+    "transliteracion": "Tzaru‘a",
+    "equivalencia_espanol": "lleno de tzara‘at, afectado por tzara‘at",
+    "observacion": "Se distingue de Metzoráh en la exposición de Levítico 14."
+  },
+  {
+    "id": 202,
+    "texto_hebreo": "בְּנֵי הָאֱלֹהִים",
+    "transliteracion": "Bney ha’Elohim",
+    "equivalencia_espanol": "hijos de ‘elohim (en la lectura discutida: de otro, otros ‘elohim)",
+    "observacion": "Se trabaja explícitamente en el comentario de Génesis 6 con énfasis en el artículo הַ."
+  },
+  {
+    "id": 203,
+    "texto_hebreo": "עֲנָקִי",
+    "transliteracion": "‘Anaqí",
+    "equivalencia_espanol": "anaceo, gigante (denominativo)",
+    "observacion": "Se explica como denominativo relativo a ‘Anaq, no necesariamente filiación biológica."
+  },
+  {
+    "id": 204,
+    "texto_hebreo": "פַּלּוּא",
+    "transliteracion": "Palú, Falú",
+    "equivalencia_espanol": "Falú (nombre propio)",
+    "observacion": "Se usa para conciliar la mención de Pelet con Falú en las genealogías de Rubén."
+  },
+  {
+    "id": 205,
+    "texto_hebreo": "סֶלָה",
+    "transliteracion": "Seláh",
+    "equivalencia_espanol": "pausa, elevación (marca litúrgica, según uso)",
+    "observacion": "Se distingue de סֶלַע (roca) cuando aparece en contextos de salmos, cánticos."
+  },
+  {
+    "id": 206,
+    "texto_hebreo": "הַצִּרְעָה",
+    "transliteracion": "HaTzir‘áh, Tzirh’ab,",
+    "equivalencia_espanol": "tzir‘ah (traducido como avispa, leído también con relación a lepra en la explicación), la lepra, avispa (según la discusión lingüística)",
+    "observacion": "Se desarrolla ampliamente en la discusión de Deuteronomio 7:20 y su raíz comparada con צָרַעַת. El estudio asocia este término con enfermedades de origen espiritual (tzara'at) enviadas para destruir a los enemigos."
+  },
+  {
+    "id": 207,
+    "texto_hebreo": "חַיִל",
+    "transliteracion": "Jáil, Jayil",
+    "equivalencia_espanol": "ejército, proeza, valentía",
+    "observacion": "Se explica como obra, fuerza de ejército, no solo riqueza o poder abstracto."
+  },
+  {
+    "id": 208,
+    "texto_hebreo": "אֶעְבְּרָה",
+    "transliteracion": "’E‘vrah",
+    "equivalencia_espanol": "pase yo, pasaré al otro lado",
+    "observacion": "Se comenta en la súplica de Deuteronomio 3:25 con énfasis en ‘pasar al otro lado’."
+  },
+  {
+    "id": 209,
+    "texto_hebreo": "אֲבָנִים שְׁלֵמוֹת",
+    "transliteracion": "’Avanim shelemot",
+    "equivalencia_espanol": "piedras perfectas",
+    "observacion": "Se usa para el altar sin labrado de hierro, se conecta con שָׁלֵם."
+  },
+  {
+    "id": 210,
+    "texto_hebreo": "שְׁלֵמוֹת",
+    "transliteracion": "Shelemot",
+    "equivalencia_espanol": "perfectas, completas",
+    "observacion": "Forma femenina plural explicada en el bloque de ‘piedras perfectas’."
+  },
+  {
+    "id": 211,
+    "texto_hebreo": "שִׁקּוּץ",
+    "transliteracion": "Shiqút",
+    "equivalencia_espanol": "abominación, ídolo que asquea",
+    "observacion": "Se usa para abominaciones (comida, cuerpo) y se desarrolla su efecto de enceguecimiento en el comentario. Se asocia con la idolatría que produce una mancha tanto en la comida como en el cuerpo."
+  },
+  {
+    "id": 212,
+    "texto_hebreo": "גִּלּוּל",
+    "transliteracion": "Guilúl",
+    "equivalencia_espanol": "ídolo, rollo que envuelve, excremento",
+    "observacion": "Se explica como aquello que envuelve, enceguece, con imagen fuerte de envoltura impura. Metáfora de aquello que envuelve y enceguece la conciencia del hombre, alejándolo de la sensibilidad espiritual."
+  },
+  {
+    "id": 213,
+    "texto_hebreo": "גִּלּוּלֵיהֶם",
+    "transliteracion": "Giluleihem",
+    "equivalencia_espanol": "sus ídolos",
+    "observacion": "Se glosa en paralelo con שִׁקּוּצֵיהֶם dentro de Deuteronomio 29."
+  },
+  {
+    "id": 214,
+    "texto_hebreo": "אֵל אֱמוּנָה",
+    "transliteracion": "’El ’Emunáh",
+    "equivalencia_espanol": "Dios es la fidelidad",
+    "observacion": "Se enfatiza como formulación positiva de la fidelidad divina en Deuteronomio 32:4."
+  },
+  {
+    "id": 215,
+    "texto_hebreo": "אֱמוּנָה",
+    "transliteracion": "’Emunáh",
+    "equivalencia_espanol": "fidelidad",
+    "observacion": "Se usa como sustantivo clave, complementando el campo de אָמַן y formas afines ya trabajadas."
+  },
+  {
+    "id": 216,
+    "texto_hebreo": "רֵיקָם",
+    "transliteracion": "Reiqam, Reqam",
+    "equivalencia_espanol": "vacío, en vano",
+    "observacion": "Se explica en el bloque de Deuteronomio 32:47 al comentar ‘palabra vacía’."
+  },
+  {
+    "id": 217,
+    "texto_hebreo": "דָּבָר רֵיקָם",
+    "transliteracion": "Davar reiqam",
+    "equivalencia_espanol": "palabra vacía",
+    "observacion": "Expresión compuesta destacada en la corrección y su aplicación interpretativa."
+  },
+  {
+    "id": 218,
+    "texto_hebreo": "נָבָל",
+    "transliteracion": "Navál",
+    "equivalencia_espanol": "insensato, contaminado (según el matiz explicado)",
+    "observacion": "Se retoma en Deuteronomio 32:21 con precisión semántica propia del estudio."
+  },
+  {
+    "id": 219,
+    "texto_hebreo": "תְּבַעֲרוּ אֵשׁ",
+    "transliteracion": "Teva‘aru ’esh",
+    "equivalencia_espanol": "harán arder con fuego, quemarán con fuego",
+    "observacion": "Se separa de la lectura unitaria ‘encender fuego’ para resaltar el matiz de consumir, incinerar."
+  },
+  {
+    "id": 220,
+    "texto_hebreo": "εἰς",
+    "transliteracion": "eis",
+    "equivalencia_espanol": "en, para",
+    "observacion": "Término griego que equivale al hebreo 'Le' o 'La'. Indica dirección o propósito, no compañía física."
+  },
+  {
+    "id": 221,
+    "texto_hebreo": "πρὸς",
+    "transliteracion": "pros",
+    "equivalencia_espanol": "para, hacia, con relación a",
+    "observacion": "Se corrige la traducción tradicional 'con' en Juan 1:1, ya que 'con' sugiere dos personas distintas, mientras que 'pros' indica una relación de pertenencia o dirección hacia la plenitud."
+  },
+  {
+    "id": 222,
+    "texto_hebreo": "λόγος",
+    "transliteracion": "Lógos",
+    "equivalencia_espanol": "palabra, corporeidad de Dios, origen común",
+    "observacion": "Concepto griego que Juan utiliza para referirse al Re’shit hebreo. Es el factor de creación que los griegos llamaban 'arjé'."
+  },
+  {
+    "id": 223,
+    "texto_hebreo": "ἀρχή",
+    "transliteracion": "arjé",
+    "equivalencia_espanol": "origen, principio rector",
+    "observacion": "Término usado por los filósofos presocráticos para el origen común de las cosas, el cual Juan identifica como el Lógos, Re’shit."
+  },
+  {
+    "id": 224,
+    "texto_hebreo": "בֶּן־הָאָדָם",
+    "transliteracion": "Ben ha’adam",
+    "equivalencia_espanol": "Hijo del Hombre, heredero de los derechos legales",
+    "observacion": "Indica que el Mesías posee los derechos legales de la deidad en una expresión disminuida. En arameo es 'Bar ’enash'."
+  },
+  {
+    "id": 225,
+    "texto_hebreo": "מלכות שמיא",
+    "transliteracion": "Maljut hayamain",
+    "equivalencia_espanol": "reino de los cielos, disminución mínima",
+    "observacion": "Tecnicismo arameo que se refiere a la disminución mínima de algo para manifestarse en la tierra."
+  },
+  {
+    "id": 226,
+    "texto_hebreo": "ἀήρ",
+    "transliteracion": "Aer",
+    "equivalencia_espanol": "aire, gloria insondable",
+    "observacion": "Préstamo griego que dio origen al término teológico 'avir'. No se refiere a la atmósfera, sino a la gloria de Dios."
+  },
+  {
+    "id": 227,
+    "texto_hebreo": "הָיָה",
+    "transliteracion": "Jayáh",
+    "equivalencia_espanol": "fue, llegó a ser",
+    "observacion": "Verbo usado para cosas que simplemente llegaron a existir por orden divina sin un proceso de 'hechura' manual inmediata."
+  },
+  {
+    "id": 228,
+    "texto_hebreo": "עָשָׂה",
+    "transliteracion": "’Asá",
+    "equivalencia_espanol": "hacer, completar, hechura",
+    "observacion": "Se diferencia de 'Bará' en que '’Asá' implica trabajar sobre algo que ya tiene forma o contextura (ej: cocinar un cabrito)."
+  },
+  {
+    "id": 229,
+    "texto_hebreo": "יָצַר",
+    "transliteracion": "Yatzar",
+    "equivalencia_espanol": "formar, dar características",
+    "observacion": "Etapa intermedia entre organizar y hacer. Implica el proceso de formación y educación del carácter (ej: Dios 'formó' a Adán)."
+  },
+  {
+    "id": 230,
+    "texto_hebreo": "דְּמוּת",
+    "transliteracion": "Demut",
+    "equivalencia_espanol": "semejanza",
+    "observacion": "A diferencia del Tzélem (resplandor inicial), la semejanza es un proyecto a futuro para el mundo venidero cuando la obra sea terminada."
+  },
+  {
+    "id": 231,
+    "texto_hebreo": "נִשְׁמַת חַיִּים",
+    "transliteracion": "Nishmat Jayim",
+    "equivalencia_espanol": "espíritu vivificante, soplo de vida",
+    "observacion": "El poder incorruptible (Mashiaj) que Dios introduce desde fuera de la creación para perfeccionarla."
+  },
+  {
+    "id": 232,
+    "texto_hebreo": "תֹּהוּ וָבֹהוּ",
+    "transliteracion": "Tohu v’vohu",
+    "equivalencia_espanol": "desconectada y sin forma",
+    "observacion": "Estado de la tierra tras la expulsión de satán, representa el desorden previo a la organización divina."
+  },
+  {
+    "id": 233,
+    "texto_hebreo": "אֶרֶץ",
+    "transliteracion": "’Eretz",
+    "equivalencia_espanol": "tierra (general)",
+    "observacion": "Se refiere a la tierra organizada de forma general, distinta a la 'Adamáh' que es el suelo específico para el hombre."
+  },
+  {
+    "id": 234,
+    "texto_hebreo": "אֲדָמָה",
+    "transliteracion": "’Adamáh",
+    "equivalencia_espanol": "suelo organizado, preparación para el Edén",
+    "observacion": "Suelo específico del cual fue formado Adán, es el lugar de las promesas y la educación divina."
+  },
+  {
+    "id": 235,
+    "texto_hebreo": "ψυχικόν",
+    "transliteracion": "Psykon",
+    "equivalencia_espanol": "cuerpo animal",
+    "observacion": "Término griego usado por Pablo para el cuerpo animal (Nefesh), en contraste con el espiritual."
+  },
+  {
+    "id": 236,
+    "texto_hebreo": "πνευματικόν",
+    "transliteracion": "Nefmaticon",
+    "equivalencia_espanol": "cuerpo espiritual",
+    "observacion": "Término griego para el cuerpo espiritual (Rúaj) relacionado con la eternidad."
+  },
+  {
+    "id": 237,
+    "texto_hebreo": "קֶדֶם",
+    "transliteracion": "Quéden",
+    "equivalencia_espanol": "eternidad, tiempo escondido",
+    "observacion": "Se refiere a lo que está antes de la existencia del 'eretz', las salidas de Mashiaj son desde el Quéden."
+  },
+  {
+    "id": 238,
+    "texto_hebreo": "גַּן",
+    "transliteracion": "Gan",
+    "equivalencia_espanol": "jardín, huerto",
+    "observacion": "Estructura plantada por Dios en la Adamáh, traída desde la eternidad."
+  },
+  {
+    "id": 239,
+    "texto_hebreo": "עֵדֶן",
+    "transliteracion": "’Éden",
+    "equivalencia_espanol": "delicia, placer",
+    "observacion": "Cualidad del jardín divino que representa el rostro de Hashem."
+  },
+  {
+    "id": 240,
+    "texto_hebreo": "אִשָּׁה",
+    "transliteracion": "Isháh",
+    "equivalencia_espanol": "mujer, Varona, edificio espiritual",
+    "observacion": "Representa a la iglesia, edificada a partir del 'costado' (herida) del Varón perfecto."
+  },
+  {
+    "id": 241,
+    "texto_hebreo": "אִישׁ",
+    "transliteracion": "Ish",
+    "equivalencia_espanol": "varón, varón perfecto",
+    "observacion": "Se asocia con Yehoshúa’ Hamashiaj, el modelo del cual la mujer es tomada y edificada."
+  },
+  {
+    "id": 242,
+    "texto_hebreo": "רוּחַ הַיּוֹם",
+    "transliteracion": "Rúaj Hayom",
+    "equivalencia_espanol": "espíritu del día",
+    "observacion": "Voz de Dios que se paseaba en el huerto, momento de confrontación tras el pecado."
+  },
+  {
+    "id": 243,
+    "texto_hebreo": "לשון כבוד",
+    "transliteracion": "Leshon kavod",
+    "equivalencia_espanol": "lengua de honra, plural mayestático",
+    "observacion": "Uso del plural ('hagamos', 'uno de nosotros') para denotar la convocatoria de todo el poder y las huestes celestiales."
+  },
+  {
+    "id": 244,
+    "texto_hebreo": "שְׁלַח־לְךָ",
+    "transliteracion": "Shelaj lejá",
+    "equivalencia_espanol": "envía para ti",
+    "observacion": "Expresión que denota que el acto de enviar traerá un beneficio personal al que envía."
+  },
+  {
+    "id": 245,
+    "texto_hebreo": "בְּרִית מִילָה",
+    "transliteracion": "Brit miláh",
+    "equivalencia_espanol": "pacto de la circuncisión (término extra-bíblico)",
+    "observacion": "Concepto acuñado por el judaísmo que el profesor señala como ausente en la Biblia en ese formato legalista."
+  },
+  {
+    "id": 246,
+    "texto_hebreo": "צַדִּיק",
+    "transliteracion": "Tzadiq",
+    "equivalencia_espanol": "justificado",
+    "observacion": "No significa 'bueno' por mérito propio, sino alguien que ha sido declarado justo por Dios."
+  },
+  {
+    "id": 247,
+    "texto_hebreo": "מרא דאתרא",
+    "transliteracion": "Mará de atrá",
+    "equivalencia_espanol": "marido de la ciudad, rabino patrono",
+    "observacion": "Concepto arameo usado para ilustrar la 'Jerusalén que tiene marido' (ataduras a disposiciones humanas)."
+  },
+  {
+    "id": 248,
+    "texto_hebreo": "חָמַל",
+    "transliteracion": "Jamal",
+    "equivalencia_espanol": "tener lástima, compadecerse",
+    "observacion": "Raíz de 'Jemláh'. Se asocia con la compasión que Dios siente por el esfuerzo humano perdido."
+  },
+  {
+    "id": 249,
+    "texto_hebreo": "שָׁמַר",
+    "transliteracion": "Shamar",
+    "equivalencia_espanol": "vigilar, estar pendiente",
+    "observacion": "Se aclara que 'guardar' el pacto es vigilarlo para que no se filtre nada extraño, no 'esconderlo'."
+  },
+  {
+    "id": 250,
+    "texto_hebreo": "חָזַק",
+    "transliteracion": "Jasaq",
+    "equivalencia_espanol": "rígido, a la defensiva",
+    "observacion": "Estado del corazón cuando se cierra y no quiere escuchar razones."
+  },
+  {
+    "id": 251,
+    "texto_hebreo": "כָּבֵד",
+    "transliteracion": "Kaved",
+    "equivalencia_espanol": "pesado, cuando ataca o persigue",
+    "observacion": "Matiz de dureza que implica una acción agresiva o de persecución."
+  },
+  {
+    "id": 252,
+    "texto_hebreo": "מַלְאָכִים",
+    "transliteracion": "Malajim",
+    "equivalencia_espanol": "mensajeros",
+    "observacion": "Se prefiere sobre 'ángeles' para resaltar su función de portadores de un mensaje o decreto."
+  },
+  {
+    "id": 253,
+    "texto_hebreo": "מַצּוֹת",
+    "transliteracion": "Matzot",
+    "equivalencia_espanol": "panes sin leudar, oxidar",
+    "observacion": "Pan preparado con premura que simboliza la urgencia del juicio y la pureza."
+  },
+  {
+    "id": 254,
+    "texto_hebreo": "יַלְדוּת",
+    "transliteracion": "Yaldut",
+    "equivalencia_espanol": "juventud, servidumbre",
+    "observacion": "Nombre mesiánico que aparece en el Salmo 110:3, asociado con el rocío y el servicio voluntario."
+  },
+  {
+    "id": 255,
+    "texto_hebreo": "יֶלֶד",
+    "transliteracion": "Yeled",
+    "equivalencia_espanol": "niño, subordinado",
+    "observacion": "Denota la calidad de siervo o alguien bajo autoridad, independientemente de la edad física."
+  },
+  {
+    "id": 256,
+    "texto_hebreo": "פָּגַע",
+    "transliteracion": "Pagá",
+    "equivalencia_espanol": "poner en contacto, hacer contacto",
+    "observacion": "Verbo usado para describir el acto de mediar o interceder (poner en contacto a dos partes)."
+  },
+  {
+    "id": 257,
+    "texto_hebreo": "מַעֲשֵׂר שֵׁנִי",
+    "transliteracion": "Ma’aser sheni",
+    "equivalencia_espanol": "segundo diezmo",
+    "observacion": "Diezmo recolectado cada tres años destinado al levita, el extranjero, el huérfano y la viuda."
+  },
+  {
+    "id": 258,
+    "texto_hebreo": "שְׁמִטָּה",
+    "transliteracion": "Shemitáh",
+    "equivalencia_espanol": "reposo de la tierra, remisión",
+    "observacion": "Año séptimo de descanso obligatorio para la tierra, que enseña la dependencia absoluta de Dios."
+  },
+  {
+    "id": 259,
+    "texto_hebreo": "שַׁחַר",
+    "transliteracion": "Shájar",
+    "equivalencia_espanol": "alba, despuntar del sol",
+    "observacion": "Nombre del Mesías. Es la luz que vence a las tinieblas y libera al hombre (ej: Jacob en Peniel)."
+  },
+  {
+    "id": 260,
+    "texto_hebreo": "בּוֹר",
+    "transliteracion": "Bor",
+    "equivalencia_espanol": "hueco, cisterna, calabozo",
+    "observacion": "Lugar de cautiverio donde la presencia de Dios prospera al justo (caso de José)."
+  },
+  {
+    "id": 261,
+    "texto_hebreo": "אֱמֶת",
+    "transliteracion": "’Emet",
+    "equivalencia_espanol": "verdad, inmutable, lo que permanece",
+    "observacion": "Relacionado con la fidelidad ('Emunáh). Es lo absoluto que no tiene sombra de variación."
+  },
+  {
+    "id": 262,
+    "texto_hebreo": "צָפְנַת פַּעְנֵחַ",
+    "transliteracion": "Tzofnat Paneaj",
+    "equivalencia_espanol": "decodificador de códigos",
+    "observacion": "Nombre egipcio dado a José por Faraón tras interpretar los sueños."
+  },
+  {
+    "id": 263,
+    "texto_hebreo": "נָגִיד",
+    "transliteracion": "Nagid",
+    "equivalencia_espanol": "gobernador, príncipe",
+    "observacion": "Título del Mesías como el que gobierna las doce tribus bajo el cetro de Judá."
+  },
+  {
+    "id": 264,
+    "texto_hebreo": "אֶהְיֶה אֲשֶׁר אֶהְיֶה",
+    "transliteracion": "’Ehyeh Asher",
+    "equivalencia_espanol": "Yo seré el que estaré",
+    "observacion": "Traducción corregida del nombre revelado a Moisés, enfatizando presencia futura y constante."
+  },
+  {
+    "id": 265,
+    "texto_hebreo": "גְּאוּלָּה",
+    "transliteracion": "Ge’uláh",
+    "equivalencia_espanol": "redención, liberación absoluta",
+    "observacion": "Proceso de reclamo legal por lo que ya fue comprado, liberación final de toda opresión."
+  },
+  {
+    "id": 266,
+    "texto_hebreo": "רֹאשׁ חֳדָשִׁים",
+    "transliteracion": "Ro’sh jodashim",
+    "equivalencia_espanol": "cabeza de meses",
+    "observacion": "El principal de los meses en eminencia (Nisán, Aviv)."
+  },
+  {
+    "id": 267,
+    "texto_hebreo": "רֹאשׁ הַשָּׁנָה",
+    "transliteracion": "Ro’sh hashanáh",
+    "equivalencia_espanol": "cabeza del año",
+    "observacion": "Inicio del ciclo anual en el mes séptimo (Tishrei)."
+  },
+  {
+    "id": 268,
+    "texto_hebreo": "מֶכֶס",
+    "transliteracion": "Mejes",
+    "equivalencia_espanol": "tesoro de la Torah, tributo",
+    "observacion": "Término asociado con Mashiaj como el tesoro de la instrucción divina."
+  },
+  {
+    "id": 269,
+    "texto_hebreo": "פְּרַקְלִיט",
+    "transliteracion": "Praqlit",
+    "equivalencia_espanol": "abogado preventivo",
+    "observacion": "Del griego 'parákletos'. Es el que previene el pecado antes de que ocurra, a diferencia del que saca del lío."
+  },
+  {
+    "id": 270,
+    "texto_hebreo": "גָּדוֹל",
+    "transliteracion": "Gadol",
+    "equivalencia_espanol": "grande, el que ha crecido más",
+    "observacion": "Se emplea para distinguir al hijo mayor o al de mayor rango en las bendiciones patriarcales."
+  },
+  {
+    "id": 271,
+    "texto_hebreo": "קָטָן",
+    "transliteracion": "Qatán",
+    "equivalencia_espanol": "pequeño, menor",
+    "observacion": "Se usa en contraste con 'Gadol' para referirse al hijo menor o de menor estatura en los relatos de Toldot."
+  },
+  {
+    "id": 272,
+    "texto_hebreo": "סֻלָּם",
+    "transliteracion": "Sulam",
+    "equivalencia_espanol": "escalera, Mashiaj como el gran día",
+    "observacion": "Su valor guematria (130) equivale a 'Yom Adonay Hagadol' (El gran día del Señor). Representa a Mashiaj como el puente entre cielo y tierra."
+  },
+  {
+    "id": 273,
+    "texto_hebreo": "יֵשׁ",
+    "transliteracion": "Yesh",
+    "equivalencia_espanol": "hay, existencia, salvación (forma corta)",
+    "observacion": "Se señala como una alusión a la salvación (Yehoshúa) presente en un lugar específico."
+  },
+  {
+    "id": 274,
+    "texto_hebreo": "הַמַּעֲשֵׂר",
+    "transliteracion": "Hamar ‘aser",
+    "equivalencia_espanol": "el diezmo, cerco de la riqueza",
+    "observacion": "Se define como un mandamiento con objetivos sociales diseñado para evitar el egoísmo y asegurar el bienestar de la congregación."
+  },
+  {
+    "id": 275,
+    "texto_hebreo": "נֵר תָּמִיד",
+    "transliteracion": "Ner tamid",
+    "equivalencia_espanol": "luz continua, candela incesante",
+    "observacion": "Representa la luz del Mesías que ilumina el camino hacia el testimonio en el lugar santísimo."
+  },
+  {
+    "id": 276,
+    "texto_hebreo": "מִכְסֶה",
+    "transliteracion": "Mijseh",
+    "equivalencia_espanol": "cubierta, cobertor",
+    "observacion": "Se refiere a las capas de pieles de animales que cubrían el Tabernáculo, simbolizando protección."
+  },
+  {
+    "id": 277,
+    "texto_hebreo": "קִנְאָה",
+    "transliteracion": "Qin’ah",
+    "equivalencia_espanol": "celo, envidia, intolerancia al pecado",
+    "observacion": "Atributo de Dios (Qaná). Se define como la intolerancia absoluta al abandono del pacto."
+  },
+  {
+    "id": 278,
+    "texto_hebreo": "קֶרֶן",
+    "transliteracion": "Qéren",
+    "equivalencia_espanol": "cuerno, rayo de luz, poder",
+    "observacion": "Se aclara que en el Tabernáculo se refiere a los rayos de luz que emanan de las esquinas del altar o del rostro de Moisés."
+  },
+  {
+    "id": 279,
+    "texto_hebreo": "סְגֻלָּה",
+    "transliteracion": "Sguláh",
+    "equivalencia_espanol": "pueblo prototipo, propiedad exclusiva",
+    "observacion": "Define a Israel como el modelo de sociedad que Dios distingue en medio de las naciones."
+  },
+  {
+    "id": 280,
+    "texto_hebreo": "עֹנֶג",
+    "transliteracion": "Oneg",
+    "equivalencia_espanol": "deleite espiritual",
+    "observacion": "Se aplica al placer que se experimenta en Shabat al estar en comunión con Dios."
+  },
+  {
+    "id": 281,
+    "texto_hebreo": "לֶקַח טוֹב",
+    "transliteracion": "Léqaj tov",
+    "equivalencia_espanol": "buena enseñanza, lo que se retiene",
+    "observacion": "Instrucción divina que el poder de Dios planta en el hombre para que sea fructífera."
+  },
+  {
+    "id": 282,
+    "texto_hebreo": "טְרֵפָה",
+    "transliteracion": "Trefáh",
+    "equivalencia_espanol": "animal desgarrado, crueldad",
+    "observacion": "Carne prohibida por implicar violencia o tortura en la muerte del animal, incompatible con la santidad."
+  },
+  {
+    "id": 283,
+    "texto_hebreo": "שְׂאֹר",
+    "transliteracion": "Se’or",
+    "equivalencia_espanol": "levadura vieja, fermento",
+    "observacion": "Elemento prohibido en ciertas ofrendas vegetales por representar el proceso de oxidación o pecado."
+  },
+  {
+    "id": 284,
+    "texto_hebreo": "חָלָל",
+    "transliteracion": "Jalál",
+    "equivalencia_espanol": "atravesado de espada, muerto en guerra",
+    "observacion": "Término específico para alguien que muere violentamente y produce inhabilitación ritual."
+  },
+  {
+    "id": 285,
+    "texto_hebreo": "חֹמֶר",
+    "transliteracion": "Homer",
+    "equivalencia_espanol": "carga, unidad de medida",
+    "observacion": "Relacionado con la raíz del asno (Jamor), indicando la pesadez de una tarea o responsabilidad."
+  },
+  {
+    "id": 286,
+    "texto_hebreo": "גֶּפֶן",
+    "transliteracion": "Gefen",
+    "equivalencia_espanol": "vid, pueblo de Israel",
+    "observacion": "Representa al pueblo en general sobre el cual Mashiaj realiza su obra de limpieza."
+  },
+  {
+    "id": 287,
+    "texto_hebreo": "שֹׂרֵקָה",
+    "transliteracion": "Sorekáh",
+    "equivalencia_espanol": "vid escogida, el remanente",
+    "observacion": "Se refiere al grupo de escogidos dentro de la vid general, con quienes Mashiaj trabaja íntimamente."
+  }
+]

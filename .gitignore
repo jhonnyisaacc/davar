@@ -9,6 +9,13 @@
 # License: One verse per screen, visible attribution required
 data/ts2009/
 
+# Official STEPBible/UBS downloads (~48 MB) and generated importer artifacts.
+# Tests use committed fixtures; do not vendor the official source files.
+# The compact runtime preview in data/greek/preview/ is committed so Pages can copy it.
+data/greek/source/
+data/greek/sblgnt-tagnt/
+data/greek/definitions/
+
 # Dead Sea Scrolls Insights Repository (cloned for parsing)
 # License: CC BY-SA 4.0 - We commit parsed data, not the source repo
 data/dss/deadseainsights/
@@ -140,12 +147,14 @@ content/sqlite/
 secrets.json
 config/secrets/
 keys/
+mobile/secrets/
 
 # ID
 *.code-workspace
 
-# plans
-plans/
+# Local planning notes. Approved execution plans may be tracked explicitly.
+plans/*
+!plans/greek-besorah.md
 
 # Python virtual environments
 .venv/

@@ -19,6 +19,7 @@ type TranslationDisplayInput = {
   translation?: string | null;
   missingTranslationText: string;
   hebrewOnly?: boolean;
+  sourceLanguage?: "hebrew" | "greek";
 };
 
 export const getTranslationDisplayText = ({
@@ -26,8 +27,9 @@ export const getTranslationDisplayText = ({
   translation,
   missingTranslationText,
   hebrewOnly = false,
+  sourceLanguage = "hebrew",
 }: TranslationDisplayInput): string => {
-  if (shouldHideTranslationText(language, hebrewOnly)) {
+  if (shouldHideTranslationText(language, hebrewOnly, sourceLanguage)) {
     return "";
   }
 
