@@ -329,7 +329,7 @@ def test_image_reviewed_titus_names_use_custom_mappings() -> None:
 def test_short_custom_clitics_map_exactly_without_leaking_into_longer_words() -> None:
     assert mapped_words("acts", 1, 6)["לוֹ"] == "D0266"
     assert mapped_words("romans", 2, 12)["בְּלִי"] == "H1097"
-    assert mapped_words("romans", 12, 1)["לוֹבָה"] is None
+    assert mapped_words("romans", 12, 1)["לוֹבָה"] == "Hl/Hc/D0271"
 
 
 def test_image_reviewed_pronominal_forms_use_exact_custom_mappings() -> None:
@@ -632,7 +632,7 @@ def test_reviewed_regeneration_preserves_other_verses_and_rejects_stale_baseline
 def test_image_reviewed_hardship_and_hiphil_forms_keep_correct_lexemes():
     assert mapped_words('corinthians2', 11, 27)['בְּקֹר'] == 'Hb/H7120'
     assert mapped_words('corinthians2', 11, 27)['בְּעֵירוֹם'] == 'Hb/H5903'
-    assert mapped_words('corinthians2', 11, 27)['בִּשְׁקֵדוֹת'] is None
+    assert mapped_words('corinthians2', 11, 27)['בִּשְׁקֵדוֹת'] == 'Hb/H8245'
     assert mapped_words('revelation', 17, 3)['וַיוֹלִיכֵנִי'] == 'Hc/H3212'
     mapping = json.loads(Path('data/hutter/strong_mappings/revelation.json').read_text())
     verse = next(v for c in mapping['chapters'] if c['chapter'] == 17

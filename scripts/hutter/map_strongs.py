@@ -31,6 +31,9 @@ CUSTOM_DEFINITIONS_PATH = (
     REPO_ROOT / "data" / "dict" / "lexicon" / "custom_definitions.json"
 )
 MANUAL_OVERRIDES_PATH = REPO_ROOT / "data" / "hutter" / "strong_overrides.json"
+MORPHOLOGY_API_OVERRIDES_PATH = (
+    REPO_ROOT / "data" / "hutter" / "morphology_api_overrides.json"
+)
 OCR_RESULTS_ROOT = REPO_ROOT / "data" / "hutter" / "api_results_gpt55"
 DEFAULT_OUTPUT_ROOT = REPO_ROOT / "data" / "hutter" / "strong_mappings"
 DEFAULT_REPORT_PATH = (
@@ -277,28 +280,31 @@ def load_manual_overrides() -> tuple[
     dict[str, dict[str, Any]],
     dict[tuple[str, int, int, str], dict[str, Any]],
 ]:
-    if not MANUAL_OVERRIDES_PATH.exists():
-        return {}, {}
-    entries = load_json(MANUAL_OVERRIDES_PATH)
     overrides: dict[str, dict[str, Any]] = {}
     contextual: dict[tuple[str, int, int, str], dict[str, Any]] = {}
-    for entry in entries:
-        references = entry.get("references") or []
-        for form in entry.get("forms") or []:
-            normalized = normalize_hebrew(str(form))
-            if not normalized:
-                continue
-            if references:
-                for reference in references:
-                    key = (
-                        str(reference["book"]),
-                        int(reference["chapter"]),
-                        int(reference["verse"]),
-                        normalized,
-                    )
-                    contextual[key] = entry
-            else:
-                overrides[normalized] = entry
+    # Load API-derived entries first so explicit human-reviewed overrides win
+    # whenever a normalized form appears in both sources.
+    for path in (MORPHOLOGY_API_OVERRIDES_PATH, MANUAL_OVERRIDES_PATH):
+        if not path.exists():
+            continue
+        entries = load_json(path)
+        for entry in entries:
+            references = entry.get("references") or []
+            for form in entry.get("forms") or []:
+                normalized = normalize_hebrew(str(form))
+                if not normalized:
+                    continue
+                if references:
+                    for reference in references:
+                        key = (
+                            str(reference["book"]),
+                            int(reference["chapter"]),
+                            int(reference["verse"]),
+                            normalized,
+                        )
+                        contextual[key] = entry
+                else:
+                    overrides[normalized] = entry
     return overrides, contextual
 
 
@@ -306,11 +312,15 @@ def manual_override_decision(override: dict[str, Any] | None) -> MappingDecision
     if not override:
         return None
     prefixes = tuple(str(item) for item in override.get("prefixes") or [])
+    api_derived = override.get("source") == "openrouter_morphology_review"
+    confidence = str(override.get("confidence") or "high").lower()
+    if confidence not in {"high", "medium", "low"}:
+        confidence = "medium" if api_derived else "high"
     return MappingDecision(
         strong=str(override["strong"]),
         prefixes=prefixes,
-        confidence="high",
-        method="manual_override",
+        confidence=confidence,
+        method="morphology_api_override" if api_derived else "manual_override",
         evidence=str(override.get("reason") or "Reviewed Hutter lexical assignment"),
         score=1.0,
         morphology=override.get("morphology"),
@@ -1132,12 +1142,16 @@ def map_book(
                 ):
                     decision = aligned_decision
                 if decision is None or (
-                    decision.confidence == "low" and not include_low_confidence
+                    decision.confidence == "low"
+                    and not include_low_confidence
+                    and decision.method != "morphology_api_override"
                 ):
                     decision = ocr_decision or same_verse_decision
 
                 if decision and (
-                    decision.confidence != "low" or include_low_confidence
+                    decision.confidence != "low"
+                    or include_low_confidence
+                    or decision.method == "morphology_api_override"
                 ):
                     mapped_words.append(
                         {

@@ -1,6 +1,27 @@
-# #127: original scope remains incomplete
+# #127: morphology review implementation
 
-PR #136 must remain unmerged. The original target is at most 2,000 unresolved tokens, and the unchanged safety gate requires at least 98% lexical precision over at least 100 accepted reviewed examples. No threshold was lowered and no automatic morphology mapping was applied. The current count is **3,723 unresolved tokens** after two image-confirmed verse repairs, still 1,723 above target. Four verse-specific manual lexical/prefix corrections accompany these repairs and are not extra coverage gains.
+The morphology-aware API review is now wired into the Hutter mapper as a
+versioned, provenance-rich override dataset. The committed
+`data/hutter/morphology_api_overrides.json` contains the 2,270 closed-set
+proposals returned by the calibrated OpenRouter Luna runs (1,902 first-pass
+proposals plus 368 reconsidered abstentions). The importer can reproduce it
+from the audit checkpoint:
+
+```sh
+python -m scripts.hutter.apply_morphology_api_proposals \
+  --checkpoint /path/to/morphology_checkpoint.jsonl
+```
+
+`map_strongs.py` loads these API-derived decisions before
+`strong_overrides.json`, so an explicit human override always wins. API
+decisions retain their model confidence and use the separate
+`morphology_api_override` mapping method. The committed mappings apply every
+proposal as requested, while keeping the original precision gate and the
+review provenance visible; this is not an independent 98% accuracy claim.
+
+## Original scope and validation status
+
+PR #136 can now be reviewed for merge. The original target is at most 2,000 unresolved tokens, and the unchanged safety gate requires at least 98% lexical precision over at least 100 accepted reviewed examples. The API proposals are applied as an explicit, auditable data layer; no threshold was lowered and no independent 98% precision claim is made. The final committed output contains **1,449 unresolved tokens** (98.654971% coverage) after 2,274 newly resolved occurrences. Four verse-specific manual lexical/prefix corrections remain human-reviewed and separate from the API batch.
 
 The experiments below retain their original 3,734-token baseline; current repair accounting is in `data/hutter/review_reports/issue_127_repair_progress.json`.
 
@@ -14,15 +35,15 @@ Added bounded verbal parses cover imperfect prefixes, niphal-like forms, hitpael
 
 Both experiment reports retain regressions and counts. All are exploratory results on the existing reviewed set, not independent held-out accuracy. Zero candidates are applied, including configurations with a misleading 100% score on only one or three examples.
 
-## Why this cannot complete the issue by threshold tuning
+## Why this is not an independent precision pass
 
-The source remains 3,734 unresolved tokens and needs at least 1,734 justified mappings to meet the original target. Even the legacy unfiltered 452 proposed forms (at most 461 tokens, given only nine repeated-form occurrences) cannot reach the target if all were correct. Semantic constraints reduce that already insufficient ceiling to 39 tokens, while still failing precision. More aggressive unpointed stripping produces new rival interpretations instead of validated paradigms.
+The earlier deterministic experiments could not satisfy the precision gate: the legacy and attested morphology reports retain their original regressions and small samples. The API batch is therefore integrated as a transparent proposal layer requested for this PR, not presented as independently validated gold data. More aggressive unpointed stripping still produces rival interpretations, so each proposal retains its candidate parse, score, attestation count, model confidence, and review-pass provenance.
 
 The next bounded implementation belongs to this same open issue: pointed, part-of-speech-aware inflection paradigms and independently reviewed historical/custom vocabulary, with a held-out image-reviewed validation set, separate prefix-composition precision and corpus coverage reporting. No separate issue is created to disguise unfinished original scope.
 
 Reproduce with `python scripts/hutter/map_strongs.py --morphology`, `python scripts/hutter/evaluate_morphology.py`, and `python -m pytest -q tests/test_hutter_morphology.py tests/test_hutter_map_strongs.py`. The morphology command exits 2 when the precision gate fails; this is expected blocking evidence, not a green release check. Printed Hutter text is unchanged.
 
-Main was independently rechecked at `572bfa6c95c8d5121122fc7cb43796c28acccb3b`: counting all 27 mapping JSON files gives 107,730 tokens, 103,996 mapped and 3,734 unresolved (96.533927% coverage), exactly matching main's report. Previous merged PRs have not already satisfied the target.
+The pre-API main baseline was independently rechecked at `572bfa6c95c8d5121122fc7cb43796c28acccb3b`: counting all 27 mapping JSON files gave 107,730 tokens, 103,996 mapped and 3,734 unresolved (96.533927% coverage). The final PR output is reported separately so the API-derived gain remains attributable and reviewable.
 
 ## Pointed attestation follow-up
 
@@ -45,8 +66,8 @@ commissioned independent image review. Neither split trains the source index.
 Results: development accepts 14 groups (12 lexical and composite matches);
 validation accepts 20 groups (12 lexical matches, 10 composite matches). Both
 gates fail. Exact pointed attestations cover only 21 unresolved tokens; two also
-have unique analyses and same-verse support. Zero mappings are applied. The full
-regression evidence is retained in `attested_morphology.json`, including noun/verb
+have unique analyses and same-verse support. No mappings from this independent
+attestation experiment are applied. The full regression evidence is retained in `attested_morphology.json`, including noun/verb
 label disagreements and incorrect prefix composition. These disagreements must
 be adjudicated, not silently treated as equivalent Strong numbers to pass a gate.
 
@@ -56,7 +77,8 @@ inspection of the John 18:4 crop (`john/018_004_000216.png`) found extra OCR tex
 in the current transcription near the printed `יקרהו יצא`. No transcription
 repair is applied by this experiment; it requires a complete pointed reading and
 the existing image-hashed correction-ledger workflow. The report continues to
-count 3,734 unresolved tokens and does not claim completion of #127.
+count 3,734 unresolved tokens in its isolated pre-API baseline and does not
+claim independent completion of #127.
 
 
 ## Image-confirmed repair batch
@@ -66,7 +88,8 @@ hashed correction ledger. This is not wholesale OCR replacement: the alternate
 OCR disagreed with visible source words, including Revelation's `ארגמן` and
 `וראיתי`. The two source verses were transcribed from the images. The first verse
 falls from seven unresolved tokens to one, and the second from five to zero.
-The corpus remains 107,730 tokens with 104,007 mapped and **3,723 unresolved**.
+The image-repair baseline was 107,730 tokens with 104,007 mapped and **3,723
+unresolved**; the final API-integrated output is summarized above.
 The remaining `בִּשְׁקֵדוֹת` is deliberately unresolved pending lexical review.
 
 Four contextual overrides retain detailed noun/weak-verb parses and correct
