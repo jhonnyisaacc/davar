@@ -74,6 +74,11 @@ def parse_args() -> argparse.Namespace:
         help="Reprocess items already in the JSONL checkpoint.",
     )
     parser.add_argument(
+        "--reconsider-abstentions",
+        action="store_true",
+        help="Reconsider items whose latest checkpoint status is abstain.",
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="Print the planned request without calling the API.",
@@ -162,7 +167,10 @@ def compact_item(item: dict[str, Any], max_occurrences: int = 4) -> dict[str, An
 
 
 def build_messages(
-    items: list[dict[str, Any]], max_occurrences: int = 4
+    items: list[dict[str, Any]],
+    max_occurrences: int = 4,
+    *,
+    reconsider_abstentions: bool = False,
 ) -> list[dict[str, str]]:
     system = (
         "You are a cautious reviewer for a historical Hebrew Strong's-number queue. "
@@ -180,6 +188,16 @@ def build_messages(
         "using exactly these keys: item, choice, confidence, reason. confidence must be high, medium, "
         "low, or abstain. Use abstain when choice is null. Keep reason under 30 words."
     )
+    if reconsider_abstentions:
+        system += (
+            " This is a second-pass review of items previously abstained by another model pass. "
+            "The previous abstention is not evidence and must not be repeated automatically. "
+            "Reconsider each item from the supplied evidence. You may select a low-confidence "
+            "candidate when it is the best supported supplied option. Do not abstain merely "
+            "because direct corpus attestation is absent, Hutter pointing or spelling differs, or an alternative "
+            "parse exists; abstain only for a true tie or near-tie, contradictory evidence, or an "
+            "unexplained prefix/suffix composition."
+        )
     user = (
         "Review these independent queue items. Do not infer an answer for one item from another.\n"
         + json.dumps(
@@ -281,10 +299,10 @@ def validate_response(
     return validated
 
 
-def completed_items(path: Path) -> set[str]:
+def checkpoint_statuses(path: Path) -> dict[str, str]:
     if not path.exists():
-        return set()
-    completed: set[str] = set()
+        return {}
+    statuses: dict[str, str] = {}
     for line in path.read_text(encoding="utf-8", errors="ignore").splitlines():
         if not line.strip():
             continue
@@ -292,9 +310,18 @@ def completed_items(path: Path) -> set[str]:
             row = json.loads(line)
         except json.JSONDecodeError:
             continue
-        if row.get("status") in {"proposed", "abstain"} and row.get("item"):
-            completed.add(str(row["item"]))
-    return completed
+        item = str(row.get("item") or "").strip()
+        if item:
+            statuses[item] = str(row.get("status") or "error")
+    return statuses
+
+
+def completed_items(path: Path) -> set[str]:
+    return {
+        item
+        for item, status in checkpoint_statuses(path).items()
+        if status in {"proposed", "abstain"}
+    }
 
 
 def write_jsonl(path: Path, rows: Iterable[dict[str, Any]]) -> None:
@@ -383,6 +410,8 @@ def main() -> int:
         raise SystemExit(
             "retries must be non-negative and max occurrences must be positive"
         )
+    if args.reconsider_abstentions and args.force:
+        raise SystemExit("--reconsider-abstentions cannot be combined with --force")
 
     load_dotenv(REPO_ROOT / ".env")
     queue, queue_sha256 = load_queue(args.queue.expanduser().resolve())
@@ -390,7 +419,16 @@ def main() -> int:
     if args.limit is not None:
         selected = selected[: args.limit]
     output_path = args.output.expanduser().resolve()
-    done = completed_items(output_path) if not args.force else set()
+    statuses = checkpoint_statuses(output_path)
+    if args.reconsider_abstentions:
+        selected = [
+            item
+            for item in selected
+            if statuses.get(str(item.get("normalized") or "")) == "abstain"
+        ]
+        done = set()
+    else:
+        done = completed_items(output_path) if not args.force else set()
     pending = [
         item for item in selected if str(item.get("normalized") or "") not in done
     ]
@@ -409,7 +447,11 @@ def main() -> int:
         if planned:
             print(
                 json.dumps(
-                    build_messages(planned[0], args.max_occurrences),
+                    build_messages(
+                        planned[0],
+                        args.max_occurrences,
+                        reconsider_abstentions=args.reconsider_abstentions,
+                    ),
                     ensure_ascii=False,
                     indent=2,
                 )
@@ -438,7 +480,11 @@ def main() -> int:
                 response_text, raw_response = post_batch(
                     client,
                     model=args.model,
-                    messages=build_messages(batch, args.max_occurrences),
+                    messages=build_messages(
+                        batch,
+                        args.max_occurrences,
+                        reconsider_abstentions=args.reconsider_abstentions,
+                    ),
                     max_output_tokens=args.max_output_tokens,
                     reasoning_effort=args.reasoning_effort,
                     retries=args.retries,
@@ -462,6 +508,11 @@ def main() -> int:
                             "candidate_ids": candidate_ids(item),
                             "occurrence_count": item.get("occurrence_count"),
                             "model": args.model,
+                            "review_pass": (
+                                "reconsider_abstentions"
+                                if args.reconsider_abstentions
+                                else "initial"
+                            ),
                             "batch_id": batch_id,
                             "elapsed_seconds": round(time.monotonic() - started, 3),
                             "queue_sha256": queue_sha256,
@@ -483,6 +534,11 @@ def main() -> int:
                             "error": str(exc),
                             "candidate_ids": candidate_ids(item),
                             "model": args.model,
+                            "review_pass": (
+                                "reconsider_abstentions"
+                                if args.reconsider_abstentions
+                                else "initial"
+                            ),
                             "batch_id": batch_id,
                             "queue_sha256": queue_sha256,
                             "created_at": utc_now(),

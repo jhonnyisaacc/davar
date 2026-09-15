@@ -8,6 +8,7 @@ import pytest
 from scripts.hutter.review_morphology_api import (
     build_messages,
     candidate_ids,
+    checkpoint_statuses,
     compact_item,
     completed_items,
     parse_json_response,
@@ -67,6 +68,15 @@ def test_prompt_contains_closed_set_and_no_positional_alignment_instruction():
     assert "even without direct corpus attestation" in messages[0]["content"]
     assert "tied or nearly tied" in messages[0]["content"]
     assert '"H46"' in messages[1]["content"]
+
+
+def test_second_pass_prompt_reconsiders_abstentions_with_calibrated_selection():
+    messages = build_messages([queue_item()], reconsider_abstentions=True)
+    prompt = messages[0]["content"]
+    assert "second-pass review" in prompt
+    assert "previous abstention is not evidence" in prompt
+    assert "low-confidence candidate" in prompt
+    assert "true tie or near-tie" in prompt
 
 
 def test_parse_json_response_accepts_fenced_and_wrapped_json():
@@ -154,6 +164,7 @@ def test_checkpoint_and_summary_ignore_errors_as_completed(tmp_path: Path):
         + "\n",
         encoding="utf-8",
     )
+    assert checkpoint_statuses(output) == {"אביר": "error", "אבוד": "abstain"}
     assert completed_items(output) == {"אבוד"}
     summary = summary_for(
         output, model="test/model", queue_sha256="abc", planned_count=2
