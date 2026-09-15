@@ -63,6 +63,9 @@ def test_prompt_contains_closed_set_and_no_positional_alignment_instruction():
     messages = build_messages([queue_item()])
     assert "candidate list is closed" in messages[0]["content"]
     assert "word position" in messages[0]["content"]
+    assert "calibrated selection" in messages[0]["content"]
+    assert "even without direct corpus attestation" in messages[0]["content"]
+    assert "tied or nearly tied" in messages[0]["content"]
     assert '"H46"' in messages[1]["content"]
 
 
