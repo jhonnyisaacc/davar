@@ -84,7 +84,10 @@ python scripts/dict/test_import_tcysite.py
 
 Source snapshots, checksums, attribution, and permission notes are stored in
 `data/dict/raw/tcysite/`. Imported definitions are Spanish-only until their
-English and Hebrew translations receive a separate human review.
+English and Hebrew translations receive a separate human review. Each manifest
+file entry includes its SHA-256 checksum, byte size, and record count. Running
+`--fetch` preserves the prior retrieval timestamp when all source content and
+manifest metadata are unchanged, so repeated fetches remain deterministic.
 
 ## 🏗️ Core Operations
 
@@ -703,4 +706,3 @@ python build_lexicon.py lexicon_100_percent_list.json
 ---
 
 *This modular architecture ensures maintainable, testable, and scalable Hebrew Scripture processing.*
-

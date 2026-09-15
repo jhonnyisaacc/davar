@@ -1,9 +1,9 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "source": "Torah con Yehoshua' Hamashiaj",
   "attribution": "Eric de Jesus Rodríguez, Diccionario Teológico Bíblico por contextos",
   "permission": "Permission to use the definitions and dictionary content was provided to the Davar project owner.",
-  "retrieved_at": "2026-09-15T14:03:59.994840+00:00",
+  "retrieved_at": "2026-09-15T16:54:02.192930+00:00",
   "urls": {
     "eric": {
       "parashot": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_parashot.json",
@@ -23,117 +23,140 @@
     {
       "path": "eric/1tesalonicenses.json",
       "sha256": "sha256:6d5c40f0c10ae05f45913db89eb20a5763a7604a722ec3c24279e0b48a038bdc",
-      "bytes": 53025
+      "bytes": 53025,
+      "record_count": 178
     },
     {
       "path": "eric/2tesalonicenses.json",
       "sha256": "sha256:11b218e8870582e0830ad89824017723a56e209ca097bf6df2addd5dd654efb8",
-      "bytes": 33631
+      "bytes": 33631,
+      "record_count": 108
     },
     {
       "path": "eric/apocalipsis.json",
       "sha256": "sha256:488abbfa1fd3abf75bdaf7fde49d961aebd8a4e6576b2d64847589fb8718c769",
-      "bytes": 76439
+      "bytes": 76439,
+      "record_count": 283
     },
     {
       "path": "eric/efesios.json",
       "sha256": "sha256:01e8d232a405a1f5762453d9f669ad08c1fa05b512678d2f09ba6fcd95ad2d79",
-      "bytes": 88303
+      "bytes": 88303,
+      "record_count": 317
     },
     {
       "path": "eric/juan.json",
       "sha256": "sha256:26684ad723e73ce43885cb45ee70192f833da7b7ba23fbee394b81a72cb7dc42",
-      "bytes": 264145
+      "bytes": 264145,
+      "record_count": 849
     },
     {
       "path": "eric/parashot.json",
       "sha256": "sha256:fc975a12ef37f473b6155b5941a1753c7162fe2a778e49b83537e006a3cdc6b9",
-      "bytes": 70702
+      "bytes": 70702,
+      "record_count": 287
     },
     {
       "path": "eric/qohelet.json",
       "sha256": "sha256:87ba9169fa76d6f48f351e083f5f6488672e24bce8284c2412b2b6bb3bf54549",
-      "bytes": 95553
+      "bytes": 95553,
+      "record_count": 304
     },
     {
       "path": "eric/salmos.json",
       "sha256": "sha256:445435d7c053e6196243db44a77cab2ccd2e82f0113287f18455fa29a2250f84",
-      "bytes": 421719
+      "bytes": 421719,
+      "record_count": 1226
     },
     {
       "path": "eric/shir_hashirim.json",
       "sha256": "sha256:52bc263976f1ea10c1aedbc2bf68e00214f7a7ccc95bec5c07fd89d93d71eefb",
-      "bytes": 109109
+      "bytes": 109109,
+      "record_count": 367
     },
     {
       "path": "greek/masterdiccionario.json",
       "sha256": "sha256:3870614123bb0f7f8637a71f69014597e61e2100db9747ccc2401784e03e1430",
-      "bytes": 1032653
+      "bytes": 1032653,
+      "record_count": 5461
     },
     {
       "path": "greek/shards/g0001.min.json",
       "sha256": "sha256:cae3dbc6f9299eff53a1dbbf62f9f59f719448dae57ea0bdb4b0df161f24df64",
-      "bytes": 1108875
+      "bytes": 1108875,
+      "record_count": 500
     },
     {
       "path": "greek/shards/g0501.min.json",
       "sha256": "sha256:24b475dc3e3039697d4a3d3f7e12ed743ce42e0bc7ab89138c85e527f87b9224",
-      "bytes": 1137410
+      "bytes": 1137410,
+      "record_count": 500
     },
     {
       "path": "greek/shards/g1001.min.json",
       "sha256": "sha256:ac0008e9d6b4dc00af31a39fc9dd7578b4aef76e048642bc5dddca6b71b1775d",
-      "bytes": 1278861
+      "bytes": 1278861,
+      "record_count": 500
     },
     {
       "path": "greek/shards/g1501.min.json",
       "sha256": "sha256:c3082ea9bd5317f4deb37cb8aad32e3f07b487604a8f5918e39b9b1dae9bad03",
-      "bytes": 1193051
+      "bytes": 1193051,
+      "record_count": 500
     },
     {
       "path": "greek/shards/g2001.min.json",
       "sha256": "sha256:0508e4482205f751d282663cb704bfcf10c6336152904d0e1081f9a4ea3a1a22",
-      "bytes": 1248325
+      "bytes": 1248325,
+      "record_count": 500
     },
     {
       "path": "greek/shards/g2501.min.json",
       "sha256": "sha256:f35d63abb445992b66f4e1f6e1708841e2f1b24a2520292d9f30f8d5dd930cdd",
-      "bytes": 1211361
+      "bytes": 1211361,
+      "record_count": 500
     },
     {
       "path": "greek/shards/g3001.min.json",
       "sha256": "sha256:3f0117ad3ecba5f3ea805486dcc4af8e28ddaddb5401c50426424b34f63a64c5",
-      "bytes": 875882
+      "bytes": 875882,
+      "record_count": 400
     },
     {
       "path": "greek/shards/g3501.min.json",
       "sha256": "sha256:a161cb6e7b2caf032938906843d3df90141c520ba79272e462bc6acb8f005b9a",
-      "bytes": 1288014
+      "bytes": 1288014,
+      "record_count": 500
     },
     {
       "path": "greek/shards/g4001.min.json",
       "sha256": "sha256:324fdbe3a1f4509271cae372d74f2befff9f1760cc848f937941df5560e62988",
-      "bytes": 1242020
+      "bytes": 1242020,
+      "record_count": 500
     },
     {
       "path": "greek/shards/g4501.min.json",
       "sha256": "sha256:c6965c6466d95c973a545b3df290bc6d7cd42dd5411b91da2d31f640512635dd",
-      "bytes": 1025172
+      "bytes": 1025172,
+      "record_count": 500
     },
     {
       "path": "greek/shards/g5001.min.json",
       "sha256": "sha256:7a3329cb435266e9b658ce8702dd0463894290a6c045b501d347a7d779cffab1",
-      "bytes": 1154310
+      "bytes": 1154310,
+      "record_count": 500
     },
     {
       "path": "greek/shards/g5501.min.json",
       "sha256": "sha256:c19169a7943220cc82544fe16c5355296e99d3b0490ebdddd0b0f019f3ff12f5",
-      "bytes": 283209
+      "bytes": 283209,
+      "record_count": 124
     },
     {
       "path": "greek/strongs-greek-chavez.index.min.json",
       "sha256": "sha256:ced189faf3ba2e95903748e331cad1c65b6409fb5987f357d0d575ab73933c04",
-      "bytes": 1590633
+      "bytes": 1590633,
+      "record_count": 5524
     }
   ]
 }

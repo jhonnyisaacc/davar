@@ -51,25 +51,15 @@ import {
 	resolveGreekOverlayLanguage,
 } from "./utils/translationConfig";
 import { useVerseScrollNavigation } from "./utils/useVerseScrollNavigation";
+import {
+	buildRoutePath,
+	findCanonicalBook,
+	parseRoutePath,
+	type RouteScreen,
+	type RouteState,
+} from "./utils/routeState";
 
-type Screen =
-	| "home"
-	| "verse"
-	| "settings"
-	| "donate"
-	| "features"
-	| "terms"
-	| "privacy"
-	| "feedback"
-	| "notFound"
-	| "connectionError";
-
-type RouteState = {
-	screen: Screen;
-	book?: string;
-	chapter?: number;
-	verse?: number;
-};
+type Screen = RouteScreen;
 
 type WordSelectionContext = {
 	chapter: number;
@@ -415,74 +405,9 @@ export default function App() {
 		],
 	);
 
-	const buildRoutePath = useCallback((route: RouteState) => {
-		switch (route.screen) {
-			case "home":
-				return "/home";
-			case "terms":
-				return "/terms";
-			case "privacy":
-				return "/privacy";
-			case "feedback":
-				return "/feedback";
-			case "donate":
-				return "/donate";
-			case "features":
-				return "/features";
-			case "settings":
-				return "/settings";
-			case "verse": {
-				const book = route.book ? encodeURIComponent(route.book) : "";
-				const chapter = route.chapter ?? 1;
-				const verse = route.verse ?? 1;
-				return book ? `/verse/${book}/${chapter}/${verse}` : "/";
-			}
-			default:
-				return "/";
-		}
-	}, []);
-
-	const parseRoutePath = useCallback((pathname: string): RouteState | null => {
-		const trimmed = pathname.replace(/\/+$/, "") || "/";
-		const parts = trimmed.split("/").filter(Boolean);
-
-		if (parts.length === 0) {
-			return { screen: "verse" };
-		}
-
-		const [root, book, chapter, verse] = parts;
-		if (root === "home") return { screen: "home" };
-		if (root === "terms") return { screen: "terms" };
-		if (root === "privacy") return { screen: "privacy" };
-		if (root === "feedback") return { screen: "feedback" };
-		if (root === "donate") return { screen: "donate" };
-		if (root === "features") return { screen: "features" };
-		if (root === "settings") return { screen: "settings" };
-
-		if (root === "verse") {
-			const decodedBook = book ? decodeURIComponent(book) : undefined;
-			const parsedChapter = chapter ? Number.parseInt(chapter, 10) : undefined;
-			const parsedVerse = verse ? Number.parseInt(verse, 10) : undefined;
-			return {
-				screen: "verse",
-				book: decodedBook,
-				chapter: Number.isNaN(parsedChapter) ? undefined : parsedChapter,
-				verse: Number.isNaN(parsedVerse) ? undefined : parsedVerse,
-			};
-		}
-
-		// Handle invalid routes - return null to trigger 404
-		return null;
-	}, []);
-	const parseRoutePathRef = useRef(parseRoutePath);
-
 	useEffect(() => {
 		booksRef.current = books;
 	}, [books]);
-
-	useEffect(() => {
-		parseRoutePathRef.current = parseRoutePath;
-	}, [parseRoutePath]);
 
 	const getHebrewBookName = useCallback(
 		(book: string): string => {
@@ -560,9 +485,11 @@ export default function App() {
 
 	useEffect(() => {
 		if (typeof window === "undefined") return;
-		pendingRouteRef.current = parseRoutePathRef.current(
-			window.location.pathname,
-		);
+		const pathname = window.location.pathname;
+		pendingRouteRef.current = parseRoutePath(pathname);
+		// Keep an incoming deep link from being replaced by persisted state
+		// before the book list is available to apply the pending route.
+		lastUrlRef.current = pathname;
 	}, []);
 
 	useEffect(() => {
@@ -901,9 +828,7 @@ export default function App() {
 		}
 
 		if (pending.book) {
-			const matchedBook = books.find(
-				(item) => item.name.toLowerCase() === pending.book?.toLowerCase(),
-			);
+			const matchedBook = findCanonicalBook(books, pending.book);
 			if (matchedBook) {
 				setCurrentBook(matchedBook.name);
 			} else {
@@ -1045,7 +970,7 @@ export default function App() {
 		if (typeof window === "undefined") return;
 		const handlePopState = () => {
 			isHandlingPopStateRef.current = true;
-			const route = parseRoutePathRef.current(window.location.pathname);
+			const route = parseRoutePath(window.location.pathname);
 
 			// Handle invalid routes (null)
 			if (!route) {
@@ -1066,9 +991,7 @@ export default function App() {
 					setCurrentScreen("home");
 				} else {
 					if (route.book) {
-						const matchedBook = booksRef.current.find(
-							(item) => item.name.toLowerCase() === route.book?.toLowerCase(),
-						);
+						const matchedBook = findCanonicalBook(booksRef.current, route.book);
 						if (matchedBook) {
 							setCurrentBook(matchedBook.name);
 						} else {
@@ -1113,7 +1036,6 @@ export default function App() {
 		window.history.pushState(null, "", path);
 		lastUrlRef.current = path;
 	}, [
-		buildRoutePath,
 		currentBook,
 		currentChapter,
 		currentScreen,

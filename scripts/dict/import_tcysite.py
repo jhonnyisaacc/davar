@@ -74,7 +74,22 @@ def download(url: str, path: Path) -> None:
     path.write_bytes(payload)
 
 
-def source_manifest(source_root: Path) -> dict[str, Any]:
+def source_record_count(path: Path) -> int:
+    payload = read_json(path)
+    if isinstance(payload, list):
+        return len(payload)
+    if isinstance(payload, dict):
+        for key in ("items", "e"):
+            value = payload.get(key)
+            if isinstance(value, (dict, list)):
+                return len(value)
+        return len(payload)
+    return 0
+
+
+def source_manifest(
+    source_root: Path, retrieved_at: str | None = None
+) -> dict[str, Any]:
     files = []
     for path in sorted(source_root.rglob("*.json")):
         if path.name == "source_manifest.json":
@@ -84,17 +99,32 @@ def source_manifest(source_root: Path) -> dict[str, Any]:
                 "path": str(path.relative_to(source_root)),
                 "sha256": sha256(path),
                 "bytes": path.stat().st_size,
+                "record_count": source_record_count(path),
             }
         )
     return {
-        "schema_version": 1,
+        "schema_version": 2,
         "source": "Torah con Yehoshua' Hamashiaj",
         "attribution": "Eric de Jesus Rodríguez, Diccionario Teológico Bíblico por contextos",
         "permission": "Permission to use the definitions and dictionary content was provided to the Davar project owner.",
-        "retrieved_at": datetime.now(timezone.utc).isoformat(),
+        "retrieved_at": retrieved_at or datetime.now(timezone.utc).isoformat(),
         "urls": {"eric": ERIC_URLS, "greek_master": GREEK_MASTER_URL, "greek_index": GREEK_INDEX_URL},
         "files": files,
     }
+
+
+def manifest_identity(manifest: dict[str, Any]) -> dict[str, Any]:
+    return {key: value for key, value in manifest.items() if key != "retrieved_at"}
+
+
+def write_source_manifest(source_root: Path) -> dict[str, Any]:
+    manifest_path = source_root / "source_manifest.json"
+    previous = read_json(manifest_path) if manifest_path.exists() else None
+    current = source_manifest(source_root)
+    if isinstance(previous, dict) and manifest_identity(previous) == manifest_identity(current):
+        current["retrieved_at"] = previous.get("retrieved_at")
+    write_json(manifest_path, current)
+    return current
 
 
 def fetch_sources(source_root: Path, refresh: bool = False) -> None:
@@ -123,7 +153,7 @@ def fetch_sources(source_root: Path, refresh: bool = False) -> None:
         if refresh or not path.exists():
             download(f"{GREEK_SHARD_BASE_URL}/{shard}.min.json", path)
 
-    write_json(source_root / "source_manifest.json", source_manifest(source_root))
+    write_source_manifest(source_root)
 
 
 def normalize_term(value: Any) -> str:
