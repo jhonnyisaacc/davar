@@ -89,6 +89,23 @@ file entry includes its SHA-256 checksum, byte size, and record count. Running
 `--fetch` preserves the prior retrieval timestamp when all source content and
 manifest metadata are unchanged, so repeated fetches remain deterministic.
 
+#### Attribution for imported custom definitions
+
+The newly imported custom dictionary definitions are attributed to the [Torah
+con Yehoshua' Hamashiaj site](https://www.torah-con-yehoshua-hamashiaj.com/),
+including its Greek and Hebrew dictionary content. The site describes the
+Eric de Jesús Rodríguez Mendoza notes used in this import as follows:
+
+> Diccionario lingüístico y comentarios anexados elaborados con base en
+> estudios y líneas académicas del profesor y especialista en estudios bíblicos
+> Eric de Jesús Rodríguez Mendoza. Su mención no implica afiliación oficial,
+> patrocinio ni cesión de derechos.
+
+This attribution travels with the imported data and does not imply official
+affiliation, sponsorship, or transfer of rights. See the committed source
+manifest for the source URLs, permission note, checksums, and retrieval
+metadata.
+
 ## 🏗️ Core Operations
 
 ### 1. Lexicon Building
