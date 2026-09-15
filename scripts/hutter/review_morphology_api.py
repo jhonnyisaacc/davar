@@ -79,6 +79,11 @@ def parse_args() -> argparse.Namespace:
         help="Reconsider items whose latest checkpoint status is abstain.",
     )
     parser.add_argument(
+        "--retry-errors",
+        action="store_true",
+        help="Retry items whose latest checkpoint status is error.",
+    )
+    parser.add_argument(
         "--dry-run",
         action="store_true",
         help="Print the planned request without calling the API.",
@@ -410,8 +415,12 @@ def main() -> int:
         raise SystemExit(
             "retries must be non-negative and max occurrences must be positive"
         )
-    if args.reconsider_abstentions and args.force:
-        raise SystemExit("--reconsider-abstentions cannot be combined with --force")
+    if (args.reconsider_abstentions or args.retry_errors) and args.force:
+        raise SystemExit("checkpoint selectors cannot be combined with --force")
+    if args.reconsider_abstentions and args.retry_errors:
+        raise SystemExit(
+            "--reconsider-abstentions and --retry-errors are mutually exclusive"
+        )
 
     load_dotenv(REPO_ROOT / ".env")
     queue, queue_sha256 = load_queue(args.queue.expanduser().resolve())
@@ -420,11 +429,12 @@ def main() -> int:
         selected = selected[: args.limit]
     output_path = args.output.expanduser().resolve()
     statuses = checkpoint_statuses(output_path)
-    if args.reconsider_abstentions:
+    if args.reconsider_abstentions or args.retry_errors:
+        target_status = "abstain" if args.reconsider_abstentions else "error"
         selected = [
             item
             for item in selected
-            if statuses.get(str(item.get("normalized") or "")) == "abstain"
+            if statuses.get(str(item.get("normalized") or "")) == target_status
         ]
         done = set()
     else:
@@ -511,7 +521,7 @@ def main() -> int:
                             "review_pass": (
                                 "reconsider_abstentions"
                                 if args.reconsider_abstentions
-                                else "initial"
+                                else "retry_errors" if args.retry_errors else "initial"
                             ),
                             "batch_id": batch_id,
                             "elapsed_seconds": round(time.monotonic() - started, 3),
@@ -537,7 +547,7 @@ def main() -> int:
                             "review_pass": (
                                 "reconsider_abstentions"
                                 if args.reconsider_abstentions
-                                else "initial"
+                                else "retry_errors" if args.retry_errors else "initial"
                             ),
                             "batch_id": batch_id,
                             "queue_sha256": queue_sha256,
