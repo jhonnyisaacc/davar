@@ -60,6 +60,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--timeout", type=float, default=30.0)
     parser.add_argument("--retries", type=int, default=2)
     parser.add_argument("--max-output-tokens", type=int, default=1200)
+    parser.add_argument(
+        "--reasoning-effort",
+        choices=["none", "minimal", "low", "medium", "high", "xhigh", "max"],
+        default="none",
+        help="OpenRouter reasoning effort; none is the fast default for this review task.",
+    )
     parser.add_argument("--max-occurrences", type=int, default=4)
     parser.add_argument("--sleep", type=float, default=0.0)
     parser.add_argument(
@@ -298,13 +304,15 @@ def post_batch(
     model: str,
     messages: list[dict[str, str]],
     max_output_tokens: int,
+    reasoning_effort: str,
     retries: int,
 ) -> tuple[str, dict[str, Any]]:
-    request = {
+    request: dict[str, Any] = {
         "model": model,
         "messages": messages,
         "temperature": 0,
         "max_tokens": max_output_tokens,
+        "reasoning": {"effort": reasoning_effort, "exclude": True},
     }
     last_error: Exception | None = None
     for attempt in range(retries + 1):
@@ -423,6 +431,7 @@ def main() -> int:
                     model=args.model,
                     messages=build_messages(batch, args.max_occurrences),
                     max_output_tokens=args.max_output_tokens,
+                    reasoning_effort=args.reasoning_effort,
                     retries=args.retries,
                 )
                 validated = validate_response(parse_json_response(response_text), batch)

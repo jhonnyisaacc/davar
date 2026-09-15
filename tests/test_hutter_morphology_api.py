@@ -187,6 +187,7 @@ def test_post_batch_uses_chat_completions_and_returns_raw_payload():
         model="test/model",
         messages=[{"role": "user", "content": "test"}],
         max_output_tokens=10,
+        reasoning_effort="none",
         retries=0,
     )
     assert content == "[]"
@@ -194,3 +195,4 @@ def test_post_batch_uses_chat_completions_and_returns_raw_payload():
     assert client.request[0] == "/chat/completions"
     assert client.request[1]["model"] == "test/model"
     assert client.request[1]["temperature"] == 0
+    assert client.request[1]["reasoning"] == {"effort": "none", "exclude": True}
