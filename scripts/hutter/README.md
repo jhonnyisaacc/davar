@@ -153,3 +153,39 @@ that other verses are unchanged, and checks all repaired verses in mappings,
 web chapter JSON and the mobile offline Hutter bundle. Generated bundles are
 not tracked; regenerate them before running the verifier. Source images are
 local archive assets and are needed for applying corrections, not CI fixture tests.
+
+## API morphology review (audit-only)
+
+The deterministic queue can be sent to an OpenAI-compatible endpoint for a
+closed-set second opinion. The model may select only a candidate already in
+`morphology_review_queue.json`, or abstain. The runner never writes Hutter
+mappings and records raw responses in a checkpoint JSONL file.
+
+Inspect the first request without network access:
+
+```bash
+python -m scripts.hutter.review_morphology_api --limit 8 --dry-run
+```
+
+Run a small OpenRouter pilot with the cost-conscious DeepSeek model:
+
+```bash
+OPENROUTER_API_KEY=... \\
+python -m scripts.hutter.review_morphology_api \\
+  --model deepseek/deepseek-v4-flash-0731 --limit 100 --batch-size 8
+```
+
+Use MiMo as a second opinion on disagreements rather than on the whole queue:
+
+```bash
+OPENROUTER_API_KEY=... \\
+python -m scripts.hutter.review_morphology_api \\
+  --model xiaomi/mimo-v2.5 --limit 100 --batch-size 4 \\
+  --output data/hutter/review_reports/morphology_mimo_proposals.jsonl \\
+  --summary data/hutter/review_reports/morphology_mimo_summary.json
+```
+
+`proposed` rows are suggestions for a later validation step; `abstain` and
+`error` rows must not be treated as mappings. Evaluate proposals against a
+held-out reviewed set before applying anything to the corpus. The prompt and
+parser enforce the closed candidate set, JSON shape, and explicit abstention.
