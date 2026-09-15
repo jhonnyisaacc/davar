@@ -6,6 +6,7 @@ import {
 import {
 	getChapterVerses,
 	loadLexiconEntry,
+	loadGreekLexiconEntry,
 	getPolicyInstances,
 } from "./staticData";
 
@@ -232,6 +233,33 @@ describe("static data integrity", () => {
 		expect(entry).toBeDefined();
 		expect(entry.definitions[0].text_en).toContain("in him");
 		expect(entry.definitions[0].text_es).toContain("en él");
+	});
+
+	test("TCY Greek definitions layer over the canonical Greek lexicon", async () => {
+		const originalFetch = globalThis.fetch;
+		globalThis.fetch = async (input) => {
+			const url = String(input);
+			const path = url.startsWith("/") ? url.slice(1) : url;
+			const filePath = new URL(`../../../public/${path}`, import.meta.url);
+			const file = Bun.file(filePath);
+			return new Response(await file.text(), {
+				headers: { "content-type": "application/json" },
+			});
+		};
+
+		try {
+			const spanish = await loadGreekLexiconEntry("G0976", "es");
+			expect(spanish?.definitions[0]).toMatchObject({
+				source: "tcysite-greek-strong",
+				language: "es",
+				review_status: "imported",
+			});
+			const english = await loadGreekLexiconEntry("G0976", "en");
+			expect(english?.definitions.every((definition) => definition.language === "en")).toBe(true);
+			expect(english?.definitions.some((definition) => definition.source.startsWith("tcysite-"))).toBe(false);
+		} finally {
+			globalThis.fetch = originalFetch;
+		}
 	});
 
 	test("targeted proper names resolve to custom definitions", async () => {

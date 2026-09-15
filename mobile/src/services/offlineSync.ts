@@ -52,7 +52,10 @@ export type ProgressCallback = (progress: DownloadProgress) => void;
 interface DefinitionItem {
   text_en?: string;
   text_es?: string;
+  text_he?: string;
   source?: string;
+  review_status?: "approved" | "imported" | "draft";
+  license?: string;
 }
 
 interface CustomDefinitionEntry {
@@ -224,6 +227,8 @@ const buildLexiconEntries = (bundle: DictionaryBundle): LexiconResponse[] => {
               text: item.text_en,
               source: item.source ?? "custom",
               language: "en",
+              review_status: item.review_status,
+              license: item.license,
             });
           }
           if (item.text_es) {
@@ -231,6 +236,17 @@ const buildLexiconEntries = (bundle: DictionaryBundle): LexiconResponse[] => {
               text: item.text_es,
               source: item.source ?? "custom",
               language: "es",
+              review_status: item.review_status,
+              license: item.license,
+            });
+          }
+          if (item.text_he) {
+            defs.push({
+              text: item.text_he,
+              source: item.source ?? "custom",
+              language: "he",
+              review_status: item.review_status,
+              license: item.license,
             });
           }
           return defs;

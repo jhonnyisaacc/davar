@@ -1,0 +1,758 @@
+[
+  {
+    "id": 1,
+    "texto_hebreo": "ἐκκλησία",
+    "transliteracion": "Ekklesia",
+    "equivalencia_espanol": "Iglesia, Congregación",
+    "observacion": "Se refiere a la comunidad de creyentes en Tesalónica que está definida 'en Elohim'."
+  },
+  {
+    "id": 2,
+    "texto_hebreo": "מַפְגִּיעַ",
+    "transliteracion": "Mafgia",
+    "equivalencia_espanol": "Mediador, Contacto",
+    "observacion": "Se define como aquel que une dos partes que están separadas. En el contexto de Yehoshua', él es quien hace de contacto entre la deidad y la humanidad."
+  },
+  {
+    "id": 3,
+    "texto_hebreo": "מַלְכוּת הַשָּׁמַיִם",
+    "transliteracion": "Maljut Hashamayim",
+    "equivalencia_espanol": "Reino de los Cielos",
+    "observacion": "Sinónimo del término 'Hijo'. Se refiere a la manifestación inferior de la deidad en la tierra, comparada con una semilla que contiene toda la capacidad vital y codificación de la plenitud divina."
+  },
+  {
+    "id": 4,
+    "texto_hebreo": "עַתִּיק, עַתִּיק יוֹמִין",
+    "transliteracion": "Atiq, yomin",
+    "equivalencia_espanol": "Anciano de días",
+    "observacion": "Representa la cualidad de la plenitud y honra de la deidad. Es el estado de gloria que el Mesías retoma tras vencer la muerte y el punto máximo de su 'metamorfosis' hacia adelante."
+  },
+  {
+    "id": 5,
+    "texto_hebreo": "הָדָר",
+    "transliteracion": "Hadar",
+    "equivalencia_espanol": "Esplendor, Desarrollo máximo",
+    "observacion": "Se utiliza para describir lo máximo que el cuerpo puede dar y desarrollarse según su codificación, como la barba en un hombre."
+  },
+  {
+    "id": 6,
+    "texto_hebreo": "μεταμόρφωσις",
+    "transliteracion": "Metamórfosis",
+    "equivalencia_espanol": "Transfiguración, Transformación",
+    "observacion": "Término griego que indica un cambio de forma. Se explica que el Mesías mostró a sus discípulos su estado futuro como Atiq yomin mediante este proceso."
+  },
+  {
+    "id": 7,
+    "texto_hebreo": "אֱמוּנָה",
+    "transliteracion": "’Emunáh",
+    "equivalencia_espanol": "Fidelidad, Educación de Hashem, fe",
+    "observacion": "No se trata de un pensamiento positivista, sino de la fidelidad recibida y la educación de parte de Hashem que debe crecer, multiplicarse y especializarse ante la presión. Se menciona como el atributo que crece y se desborda para entender que la oposición es proporcional a la dignidad del representante."
+  },
+  {
+    "id": 8,
+    "texto_hebreo": "πλεονάζω",
+    "transliteracion": "Pleonasi",
+    "equivalencia_espanol": "Sobreabundar, Multiplicarse",
+    "observacion": "Concepto griego que indica que algo se extiende y desborda. Se aplica a cómo la emunáh y el amor deben crecer en la comunidad."
+  },
+  {
+    "id": 9,
+    "texto_hebreo": "ὑπομονή",
+    "transliteracion": "Hypomonē, Jupomoné",
+    "equivalencia_espanol": "paciencia, constancia, resistencia, perseverancia",
+    "observacion": "Se describe no como una espera pasiva, sino como la capacidad de resistir, luchar y mantenerse firme bajo presión mientras la 'emunáh se solidifica [pág. 1, 2]. Estado de firmeza y resistencia bajo la guía de Mashiaj, asentando el corazón en el amor divino."
+  },
+  {
+    "id": 10,
+    "texto_hebreo": "θλῖψις",
+    "transliteracion": "Thlipsis",
+    "equivalencia_espanol": "tribulación, presión, persecución",
+    "observacion": "Se refiere a las circunstancias externas que presionan al creyente, el texto destaca que estas padecidas por los tesalonicenses son evidencia del juicio de Dios [pág. 2, 3]."
+  },
+  {
+    "id": 11,
+    "texto_hebreo": "ἔνδειγμα",
+    "transliteracion": "Éndeigma",
+    "equivalencia_espanol": "demostración, indicio, señal",
+    "observacion": "Utilizado para explicar que la resistencia en el sufrimiento es la prueba o evidencia palpable del justo juicio de Dios [pág. 3, 15]."
+  },
+  {
+    "id": 12,
+    "texto_hebreo": "δικαία κρίσις",
+    "transliteracion": "Dikaía krísis",
+    "equivalencia_espanol": "justo juicio",
+    "observacion": "Concepto que alude a la balanza objetiva de Dios, donde la retribución es proporcional y justa, incluso si no se ve de inmediato en el plano físico [pág. 15]."
+  },
+  {
+    "id": 13,
+    "texto_hebreo": "καταξιόω",
+    "transliteracion": "Kataxióo",
+    "equivalencia_espanol": "ser tenido por digno",
+    "observacion": "En el contexto de 2 Ts 1:5, indica que el padecimiento por el Reino es lo que acredita o confirma que el creyente es apto para dicho Reino [pág. 4, 15]."
+  },
+  {
+    "id": 14,
+    "texto_hebreo": "ἄνεσις",
+    "transliteracion": "Ánesis",
+    "equivalencia_espanol": "reposo, alivio, soltar",
+    "observacion": "Representa el descanso o la liberación de la presión que Dios otorgará a los atribulados en el momento de la manifestación del Mesías [pág. 10]."
+  },
+  {
+    "id": 15,
+    "texto_hebreo": "ἀποκάλυψις",
+    "transliteracion": "Apokálupsis",
+    "equivalencia_espanol": "manifestación, revelación, quitar el velo",
+    "observacion": "Se refiere al evento donde el Señor Yehoshua' se hace visible desde el cielo, quitando el velo de lo que estaba oculto a los ojos humanos [pág. 11]."
+  },
+  {
+    "id": 16,
+    "texto_hebreo": "ἐκδίκησις",
+    "transliteracion": "Ekdíkēsis",
+    "equivalencia_espanol": "vindicación, retribución, dar justicia",
+    "observacion": "No se entiende como una venganza emocional humana, sino como la acción legal de Dios para poner las cosas en su lugar y dar el pago correspondiente [pág. 13]."
+  },
+  {
+    "id": 17,
+    "texto_hebreo": "ὄλεθρος",
+    "transliteracion": "Ólethros, Óledsros",
+    "equivalencia_espanol": "destrucción, ruina, perdición, pena",
+    "observacion": "Describe el estado de ruina o castigo de quienes no conocieron a Dios, marcando una separación de Su presencia [pág. 14]. En 2Ts 1:9 señala una sentencia de destrucción masiva para quienes se opusieron al Evangelio."
+  },
+  {
+    "id": 18,
+    "texto_hebreo": "ἄξιος",
+    "transliteracion": "Áxios",
+    "equivalencia_espanol": "digno, ser digno",
+    "observacion": "En 2Ts 1:5 se vincula la dignidad a la nitidez de la imagen de Dios transmitida durante el padecimiento por causa de Mashiaj."
+  },
+  {
+    "id": 19,
+    "texto_hebreo": "αποκαλυψει",
+    "transliteracion": "Apokalýpsei",
+    "equivalencia_espanol": "revelación, desvelación, descubrimiento",
+    "observacion": "Referido a la manifestación del Señor Yehoshua' desde el cielo, un evento escatológico de juicio y entronización."
+  },
+  {
+    "id": 20,
+    "texto_hebreo": "עוֹלָם",
+    "transliteracion": "Olam",
+    "equivalencia_espanol": "mundo, eternidad, duración",
+    "observacion": "Utilizado para describir tanto el sistema actual de oscuridad (hajóshej) como la duración de la sentencia o el reino de Mashiaj."
+  },
+  {
+    "id": 21,
+    "texto_hebreo": "חֹשֶׁךְ",
+    "transliteracion": "Hóshej",
+    "equivalencia_espanol": "oscuridad, tinieblas",
+    "observacion": "En el contexto de 'olam hajóshej', se refiere a este mundo en el cual Yehoshua' vendrá a ser Coronado."
+  },
+  {
+    "id": 22,
+    "texto_hebreo": "αἰώνιος",
+    "transliteracion": "Aiónios",
+    "equivalencia_espanol": "eterna, de larga duración",
+    "observacion": "Califica la destrucción (óledsros) como un estado perpetuo o de una era completa."
+  },
+  {
+    "id": 23,
+    "texto_hebreo": "שִׁמְמוֹת",
+    "transliteracion": "Shimemot",
+    "equivalencia_espanol": "asolamiento, desierto, destrucción",
+    "observacion": "Término profético de Jeremías y Ezequiel aplicado a Babilonia y Edom como castigo por ensañarse con el pueblo de Dios."
+  },
+  {
+    "id": 24,
+    "texto_hebreo": "מָשִׁיחַ",
+    "transliteracion": "Mashiaj",
+    "equivalencia_espanol": "Ungido, Mesías",
+    "observacion": "El ejecutor del juicio justo y quien recibirá la corona de Rey de reyes en la creación."
+  },
+  {
+    "id": 25,
+    "texto_hebreo": "Ερωτωμεν",
+    "transliteracion": "Ehrōtōmem",
+    "equivalencia_espanol": "disponer, ordenar",
+    "observacion": "Aunque comúnmente traducido como 'rogar', este verbo implica dar una disposición u orden específica en el contexto de la instrucción apostólica."
+  },
+  {
+    "id": 26,
+    "texto_hebreo": "παρουσιας",
+    "transliteracion": "Parhousias",
+    "equivalencia_espanol": "presencia, aparición, manifestación",
+    "observacion": "Se refiere a la presencia física y tangible de Yehoshua' Hamashiaj como un evento real, no meramente espiritual o invisible."
+  },
+  {
+    "id": 27,
+    "texto_hebreo": "ἐπισυναγωγή",
+    "transliteracion": "Episunagogué",
+    "equivalencia_espanol": "asamblea, reunión",
+    "observacion": "Define la reunión de los creyentes junto a Mashiaj, el término ha perdido su matiz original al ser limitado exclusivamente al edificio o templo judío."
+  },
+  {
+    "id": 28,
+    "texto_hebreo": "קָהָל",
+    "transliteracion": "Kahal",
+    "equivalencia_espanol": "asamblea, congregación",
+    "observacion": "Equivalente hebreo de la 'episunagogué', denotando la reunión del pueblo a la derecha o izquierda del Señor en aquel día."
+  },
+  {
+    "id": 29,
+    "texto_hebreo": "Νοῦς",
+    "transliteracion": "Noús",
+    "equivalencia_espanol": "mente, pensamiento",
+    "observacion": "En el contexto de 2Ts 2:2, se vincula estrechamente con la estabilidad del Rúaj para evitar que el creyente sea movido fácilmente por argumentos engañosos."
+  },
+  {
+    "id": 30,
+    "texto_hebreo": "רוּחַ",
+    "transliteracion": "Rúaj",
+    "equivalencia_espanol": "espíritu, viento, iniciativa, poder",
+    "observacion": "Utilizado para describir corrientes de pensamiento, impulsos proféticos o manifestaciones de poder que pueden usarse para perturbar o engañar."
+  },
+  {
+    "id": 31,
+    "texto_hebreo": "ενεστηκεν",
+    "transliteracion": "Enesteken",
+    "equivalencia_espanol": "haber ocurrido, estar vigente, levantarse",
+    "observacion": "Verbo que indica que algo ya es una realidad o ha tenido lugar, funcionando como un hebraísmo para indicar vigencia."
+  },
+  {
+    "id": 32,
+    "texto_hebreo": "קָם",
+    "transliteracion": "Qam",
+    "equivalencia_espanol": "levantarse, estar vigente",
+    "observacion": "Hebraísmo detrás del término griego 'enesteken', empleado para asegurar falsamente que el día del Señor ya había acontecido."
+  },
+  {
+    "id": 33,
+    "texto_hebreo": "ἀποστασία",
+    "transliteracion": "Apostasía",
+    "equivalencia_espanol": "apostasía, abandono del camino",
+    "observacion": "Evento necesario que actúa como una 'calzada' o preparación para la manifestación del hombre de anomía."
+  },
+  {
+    "id": 34,
+    "texto_hebreo": "ἀνομία",
+    "transliteracion": "Anomía",
+    "equivalencia_espanol": "sin ley, infracción de la Torah",
+    "observacion": "Estado de rebelión caracterizado por la inaplicación o desprecio de la instrucción divina (Torah)."
+  },
+  {
+    "id": 35,
+    "texto_hebreo": "אָוֶן",
+    "transliteracion": "Aven",
+    "equivalencia_espanol": "iniquidad, maldad, anomía",
+    "observacion": "Término hebreo equivalente a 'anomía', referido específicamente a la vida llevada al margen de los mandamientos de Dios."
+  },
+  {
+    "id": 36,
+    "texto_hebreo": "αποκαλυπτη",
+    "transliteracion": "Apokaleptey",
+    "equivalencia_espanol": "revelarse, manifestarse",
+    "observacion": "Acción de quitar el velo o dar a conocer al hombre de pecado antes de la venida del Señor."
+  },
+  {
+    "id": 37,
+    "texto_hebreo": "הַקֹּדֶשׁ",
+    "transliteracion": "Haqódesh",
+    "equivalencia_espanol": "lo apartado, santidad",
+    "observacion": "Componente del Rúaj Haqódesh que, según el análisis, solo debe reconocerse si existe confesión de Yehoshua' como Señor y Dios."
+  },
+  {
+    "id": 38,
+    "texto_hebreo": "אִישׁ",
+    "transliteracion": "Ish",
+    "equivalencia_espanol": "hombre, varón",
+    "observacion": "Utilizado para identificar al 'Ish 'aven o varón de la anomía que se manifiesta como resultado de la apostasía."
+  },
+  {
+    "id": 39,
+    "texto_hebreo": "ἀπό",
+    "transliteracion": "Apo",
+    "equivalencia_espanol": "desde, alejamiento",
+    "observacion": "Prefijo griego que, en la palabra apostasía, indica la acción de alejarse o moverse del lugar donde se debía estar."
+  },
+  {
+    "id": 40,
+    "texto_hebreo": "στάσις",
+    "transliteracion": "Stasis",
+    "equivalencia_espanol": "lugar, posición",
+    "observacion": "Indica el lugar o la postura original que se abandona durante el proceso de la apostasía."
+  },
+  {
+    "id": 41,
+    "texto_hebreo": "עַוְלָה",
+    "transliteracion": "Avlah",
+    "equivalencia_espanol": "torcedura, desviación, iniquidad",
+    "observacion": "Define una desviación moral o de la Torah, término hallado en hasatán que caracteriza al portador de la destrucción."
+  },
+  {
+    "id": 42,
+    "texto_hebreo": "בֶּן",
+    "transliteracion": "Ben",
+    "equivalencia_espanol": "hijo, portador",
+    "observacion": "Indica relación o descendencia, usado tanto en títulos mesiánicos (Ben David) como en designaciones de juicio (Ben 'avlah)."
+  },
+  {
+    "id": 43,
+    "texto_hebreo": "ἀπώλεια",
+    "transliteracion": "Apóleia",
+    "equivalencia_espanol": "destrucción, perdición",
+    "observacion": "Estado final y sentencia que recae sobre el hombre de anomía y aquellos que abandonan la fidelidad a Mashiaj."
+  },
+  {
+    "id": 44,
+    "texto_hebreo": "יְכָנְיָה",
+    "transliteracion": "Yekonyah",
+    "equivalencia_espanol": "Jeconías",
+    "observacion": "Último rey de Yehudáh sobre cuya descendencia biológica pesa un decreto profético que impide su acceso al trono de David."
+  },
+  {
+    "id": 45,
+    "texto_hebreo": "שְׁאַלְתִּיאֵל",
+    "transliteracion": "Shaltiel",
+    "equivalencia_espanol": "Sealtiel",
+    "observacion": "Mencionado como parte de la línea que regresó de Babilonia pero que no restauró el ejercicio real sobre las doce tribus de Yisra'el."
+  },
+  {
+    "id": 46,
+    "texto_hebreo": "זְרֻבָּבֶל",
+    "transliteracion": "Zerubbabel",
+    "equivalencia_espanol": "Zorobabel",
+    "observacion": "Líder del retorno de la cautividad cuyo análisis refuerza la necesidad de una ruptura con la línea genealógica biológica para el cumplimiento del trono mesiánico."
+  },
+  {
+    "id": 47,
+    "texto_hebreo": "לֹּגֹס",
+    "transliteracion": "Logos",
+    "equivalencia_espanol": "palabra, discurso, argumento",
+    "observacion": "Referido a la persuasión o argumentación que, junto al rúaj y la epístola, busca convencer de que el día del Señor ya ocurrió."
+  },
+  {
+    "id": 48,
+    "texto_hebreo": "רָשָׁע",
+    "transliteracion": "Rashá'",
+    "equivalencia_espanol": "impío, malvado",
+    "observacion": "En la relectura de Is 55:7, se identifica como una referencia a Satanás, quien no abandonará su camino ni sus pensamientos para volverse a Dios."
+  },
+  {
+    "id": 49,
+    "texto_hebreo": "בְּלִיַּעַל",
+    "transliteracion": "Bliya'al",
+    "equivalencia_espanol": "depravado, malvado, sin provecho",
+    "observacion": "Nombre aplicado a Satanás en el contexto del 'Adam Bliya'al, se describe como alguien que se conduce por el atrevimiento de boca y siembra discordia."
+  },
+  {
+    "id": 50,
+    "texto_hebreo": "אָדָם",
+    "transliteracion": "Adam",
+    "equivalencia_espanol": "hombre, ser, espécimen",
+    "observacion": "Término genérico que puede describir tanto a Dios como al ser humano o a Satanás, dependiendo de la calificación que le acompañe."
+  },
+  {
+    "id": 51,
+    "texto_hebreo": "עִקְּשׁוּת",
+    "transliteracion": "Iqshut",
+    "equivalencia_espanol": "violencia, atrevimiento de boca, perversidad",
+    "observacion": "Característica del hombre depravado mencionada en Pr 6:12, referida a la distorsión o violencia en el hablar."
+  },
+  {
+    "id": 52,
+    "texto_hebreo": "Αντικειμενος",
+    "transliteracion": "Antikeimenos",
+    "equivalencia_espanol": "suplantador, oponente, el que se pone en lugar de",
+    "observacion": "Define al 'Ish 'aven como alguien que busca sustituir a Dios, poniéndose o nombrándose por encima de todo objeto de culto."
+  },
+  {
+    "id": 53,
+    "texto_hebreo": "הֵיכָל",
+    "transliteracion": "Heyjal",
+    "equivalencia_espanol": "templo, palacio",
+    "observacion": "En Mal 3:1, se refiere al lugar donde entrará el Señor, el profesor aclara que no es necesariamente un edificio físico, sino el pueblo mismo."
+  },
+  {
+    "id": 54,
+    "texto_hebreo": "בְּרִית",
+    "transliteracion": "Brit",
+    "equivalencia_espanol": "pacto",
+    "observacion": "Mencionado en relación al 'Mensajero del Pacto' (Ángel de la Brit) que el pueblo desea y que vendrá súbitamente."
+  },
+  {
+    "id": 55,
+    "texto_hebreo": "טָמֵא",
+    "transliteracion": "Tamé'",
+    "equivalencia_espanol": "inmundo, inhabilitado, impuro",
+    "observacion": "Término usado en Hag 2:13-14 para describir el estado del pueblo y sus ofrendas cuando están desconectados de la santidad interior."
+  },
+  {
+    "id": 56,
+    "texto_hebreo": "εἰς",
+    "transliteracion": "Eis",
+    "equivalencia_espanol": "hacia, para, en contra de",
+    "observacion": "Preposición griega en 2Ts 2:4 que indica que el hombre de anomía se sienta 'en contra' o 'hacia' el templo de Dios (los creyentes)."
+  },
+  {
+    "id": 57,
+    "texto_hebreo": "ἄνομος",
+    "transliteracion": "Ánomos",
+    "equivalencia_espanol": "inicuo, sin ley",
+    "observacion": "Sujeto que personifica la anomía y que será aniquilado por el Rúaj de la boca de Yehoshua' en su manifestación."
+  },
+  {
+    "id": 58,
+    "texto_hebreo": "מִשְׁפָּט",
+    "transliteracion": "Mishpat",
+    "equivalencia_espanol": "juicio, el deber ser",
+    "observacion": "Concepto de justicia que el Mesías aplicará con rectitud hacia los humildes y pobres de la tierra que se someten a Dios."
+  },
+  {
+    "id": 59,
+    "texto_hebreo": "צֶדֶק",
+    "transliteracion": "Tzédeq",
+    "equivalencia_espanol": "justicia, rectitud",
+    "observacion": "Atributo de integridad moral que acompaña al Mishpat en el juicio mesiánico profetizado en Isaías."
+  },
+  {
+    "id": 60,
+    "texto_hebreo": "אַרְמִילוֹס",
+    "transliteracion": "Armilos",
+    "equivalencia_espanol": "Armilos, figura de desviación",
+    "observacion": "Término del Targum arameo basado en Rómulo, se aclara que limitar la identidad del antimesías a Roma es una interpretación de desviación."
+  },
+  {
+    "id": 61,
+    "texto_hebreo": "שָׂטָנָא",
+    "transliteracion": "Sataná",
+    "equivalencia_espanol": "Satanás",
+    "observacion": "Variante que señala la actividad y el poder sobrenatural que operan detrás de la aparición física del inicuo."
+  },
+  {
+    "id": 62,
+    "texto_hebreo": "Τερασιν",
+    "transliteracion": "Therasin",
+    "equivalencia_espanol": "monstruo, espectacular, colosal",
+    "observacion": "Se refiere a prodigios o mentiras tan espectaculares que buscan condicionar la percepción sensorial y distorsionar el Evangelio."
+  },
+  {
+    "id": 63,
+    "texto_hebreo": "תַּרְגּוּם",
+    "transliteracion": "Targum",
+    "equivalencia_espanol": "traducción, interpretación",
+    "observacion": "Versiones arameas de las escrituras que ofrecen un trasfondo tradicional sobre el juicio y las figuras escatológicas."
+  },
+  {
+    "id": 64,
+    "texto_hebreo": "ἐν",
+    "transliteracion": "En",
+    "equivalencia_espanol": "en, dentro",
+    "observacion": "Preposición que indica interioridad, el profesor la contrasta con 'Is' para enfatizar que el inicuo se posiciona 'contra' el templo."
+  },
+  {
+    "id": 65,
+    "texto_hebreo": "ἀλήθεια",
+    "transliteracion": "Alétheia",
+    "equivalencia_espanol": "verdad",
+    "observacion": "Identificada con Yehoshua' Hamashiaj, su 'amor' es lo que protege al creyente de la distorsión de los sentidos."
+  },
+  {
+    "id": 66,
+    "texto_hebreo": "ἐνέργεια",
+    "transliteracion": "Enérgeia",
+    "equivalencia_espanol": "actividad, operación",
+    "observacion": "Describe tanto la actividad de Satanás como la 'operación de error' que Dios permite sobre quienes rechazan la verdad."
+  },
+  {
+    "id": 67,
+    "texto_hebreo": "אֶצְבַּע",
+    "transliteracion": "Etzba",
+    "equivalencia_espanol": "dedo",
+    "observacion": "Metáfora del poder de Dios que graba la Torah en el corazón y realiza una transformación inimitable, tal como ocurrió con las tablas en el Sinaí."
+  },
+  {
+    "id": 68,
+    "texto_hebreo": "גּוּפָנִי",
+    "transliteracion": "Gufaní",
+    "equivalencia_espanol": "corpóreamente, en cuerpo",
+    "observacion": "Condición indispensable de la confesión sobre la venida de Yehoshua', negar su realidad física es la característica distintiva del anticristo."
+  },
+  {
+    "id": 69,
+    "texto_hebreo": "חֲדָשָׁה",
+    "transliteracion": "Jadashah",
+    "equivalencia_espanol": "nueva",
+    "observacion": "Califica a la Brit (Pacto) que Dios establece en el interior del ser humano, modificando su esencia y no solo sus hábitos externos."
+  },
+  {
+    "id": 70,
+    "texto_hebreo": "שֶׁקֶר",
+    "transliteracion": "Sheqer",
+    "equivalencia_espanol": "mentira",
+    "observacion": "Elemento al que son entregados quienes rechazan la verdad, resultando en una fidelidad ciega hacia lo falso y una actividad mental errante."
+  },
+  {
+    "id": 71,
+    "texto_hebreo": "צֶלֶם",
+    "transliteracion": "Tzelem",
+    "equivalencia_espanol": "imagen, forma",
+    "observacion": "Se refiere a la constitución original y la luz proyectada por Dios sobre el hombre, la Verdad vino en 'forma' de hombre para restaurar esta esencia."
+  },
+  {
+    "id": 72,
+    "texto_hebreo": "עֶבֶד",
+    "transliteracion": "Eved",
+    "equivalencia_espanol": "siervo",
+    "observacion": "La forma en que la Verdad se manifestó al mundo, fue rechazada por la humanidad que buscaba un fondo distinto al diseño establecido por Dios."
+  },
+  {
+    "id": 73,
+    "texto_hebreo": "אֱמֶת",
+    "transliteracion": "Emet",
+    "equivalencia_espanol": "verdad",
+    "observacion": "Más que un concepto abstracto o relativo, se define como la persona misma de Dios y Su palabra inmutable, encarnada en Yehoshua'."
+  },
+  {
+    "id": 74,
+    "texto_hebreo": "לֵב",
+    "transliteracion": "Lev",
+    "equivalencia_espanol": "corazón",
+    "observacion": "Sede de la regeneración irreversible donde Dios quita la 'piedra' para poner 'carne', permitiendo la exhibición de la educación divina."
+  },
+  {
+    "id": 75,
+    "texto_hebreo": "ἀδικία",
+    "transliteracion": "Adikía",
+    "equivalencia_espanol": "injusticia",
+    "observacion": "En el contexto de 2Ts 2:12, se refiere a lo que se opone directamente a Dios y busca trastornar Sus caminos, más allá de la injusticia social."
+  },
+  {
+    "id": 76,
+    "texto_hebreo": "רֵאשִׁית",
+    "transliteracion": "Re'shit",
+    "equivalencia_espanol": "principio, lo primero",
+    "observacion": "En 2Ts 2:13, no se refiere a un punto cronológico, sino a la persona de Yehoshua' como el origen y fundamento de la salvación."
+  },
+  {
+    "id": 77,
+    "texto_hebreo": "קִנְיָן",
+    "transliteracion": "Kinyan",
+    "equivalencia_espanol": "adquisición, posesión, compra",
+    "observacion": "Término hebreo para la adquisición legal, en el contexto del Evangelio, se vincula a la materialización de la gloria y la redención por pago."
+  },
+  {
+    "id": 78,
+    "texto_hebreo": "κτήση",
+    "transliteracion": "Ktísi",
+    "equivalencia_espanol": "adquisición, posesión",
+    "observacion": "Equivalente griego para expresar la noción de adquirir o poseer, utilizado para describir al pueblo como una adquisición de Dios."
+  },
+  {
+    "id": 79,
+    "texto_hebreo": "הַגָּדָה",
+    "transliteracion": "Hagadah",
+    "equivalencia_espanol": "leyenda, historia, teoría",
+    "observacion": "Se menciona como parte del marco del judaísmo tradicional que ofrece historias y teorías, contrastándolo con el poder práctico y transformador del Evangelio."
+  },
+  {
+    "id": 80,
+    "texto_hebreo": "הֲלָכָה",
+    "transliteracion": "Halajáh",
+    "equivalencia_espanol": "conducta, ley aplicada, camino",
+    "observacion": "Refiere a la normativa conductual dentro del judaísmo, el profesor recalca que el Evangelio penetra más allá de estas estructuras teóricas."
+  },
+  {
+    "id": 81,
+    "texto_hebreo": "שַׁבָּת",
+    "transliteracion": "Shabat",
+    "equivalencia_espanol": "reposo, sábado",
+    "observacion": "Citado como el mandamiento que a menudo es invalidado por 'pegatinas' o tradiciones humanas que priorizan obras propias sobre la ordenanza divina."
+  },
+  {
+    "id": 82,
+    "texto_hebreo": "תּוֹרָה",
+    "transliteracion": "Torah",
+    "equivalencia_espanol": "instrucción, enseñanza, ley",
+    "observacion": "La forma de la ciencia y la verdad, el profesor advierte que invalidarla mediante tradiciones constituye una oposición directa a Dios."
+  },
+  {
+    "id": 83,
+    "texto_hebreo": "שִׁיר הַשִּׁירִים",
+    "transliteracion": "Shir HaShirim",
+    "equivalencia_espanol": "Cantar de los Cantares",
+    "observacion": "Mencionado para ejemplificar cómo una lectura superficial o 'erótica' distorsiona el propósito espiritual profundo de la escritura."
+  },
+  {
+    "id": 84,
+    "texto_hebreo": "παραδοσεις",
+    "transliteracion": "Paradosis",
+    "equivalencia_espanol": "entrega al lado de, instrucción",
+    "observacion": "Traducido frecuentemente como 'tradición', se refiere a lo que se entrega al lado de un maestro. El profesor enfatiza que el Evangelio no es una tradición de hombres, sino una entrega de la verdad directamente de Dios."
+  },
+  {
+    "id": 85,
+    "texto_hebreo": "מסורת",
+    "transliteracion": "Masoret",
+    "equivalencia_espanol": "entrega, tradición",
+    "observacion": "Término hebreo para la entrega de enseñanzas. En el contexto del judaísmo, adquiere la connotación de tradiciones humanas de los sabios (como el Talmud), por lo que se debe distinguir del estatus del Evangelio como 'emunat ha'emet'."
+  },
+  {
+    "id": 86,
+    "texto_hebreo": "תיקון",
+    "transliteracion": "Tiqun",
+    "equivalencia_espanol": "corrección, reparación",
+    "observacion": "En el concepto de 'Tiqun olam', el judaísmo lo aplica a acciones humanas para corregir el mundo. El profesor aclara que la verdadera restauración es la materialización del peso de Mashiaj en el creyente."
+  },
+  {
+    "id": 87,
+    "texto_hebreo": "נחמה",
+    "transliteracion": "Nejamah",
+    "equivalencia_espanol": "consuelo, consolación",
+    "observacion": "Referido a la 'consolación eterna' que implica la restauración de todas las cosas a su estado original. Se vincula a la promesa de Dios en Isaías como el consolador que rescata personalmente a Su pueblo."
+  },
+  {
+    "id": 88,
+    "texto_hebreo": "מדרש",
+    "transliteracion": "Midrash",
+    "equivalencia_espanol": "comentario, explicación, relato",
+    "observacion": "Literatura exegética citada para explicar el concepto de la doble consolación y la relación de Jerusalén con el mundo venidero."
+  },
+  {
+    "id": 89,
+    "texto_hebreo": "כָּבוֹד",
+    "transliteracion": "Kavod",
+    "equivalencia_espanol": "gloria, peso, importancia",
+    "observacion": "Relacionado con la 'materialización de la gloria', donde el peso de Mashiaj se vuelve tangible en la vida, pensamiento y acciones del creyente. Es un proceso de transformación de 'gloria en gloria'."
+  },
+  {
+    "id": 90,
+    "texto_hebreo": "ירושלים",
+    "transliteracion": "Yerushalayim",
+    "equivalencia_espanol": "Jerusalén",
+    "observacion": "Personificada como la que se niega a ser consolada por medios humanos y reconoce que pertenece únicamente a Dios y no a este mundo o a la carne."
+  },
+  {
+    "id": 91,
+    "texto_hebreo": "לְהִתְפַּלֵּל",
+    "transliteracion": "Lehitplel",
+    "equivalencia_espanol": "orar, presentarse en juicio",
+    "observacion": "Implica hacer un reconocimiento de la justicia divina y del pecado propio (Viduy), es participar activamente en un proceso judicial espiritual."
+  },
+  {
+    "id": 92,
+    "texto_hebreo": "לְהִתְחַנֵּן",
+    "transliteracion": "Lehitjanen",
+    "equivalencia_espanol": "suplicar gracia, buscar oportunidad",
+    "observacion": "Se define como la búsqueda de un 'chance' o una oportunidad de favor ante Dios."
+  },
+  {
+    "id": 93,
+    "texto_hebreo": "לְעָתַר",
+    "transliteracion": "Le'etar",
+    "equivalencia_espanol": "solicitar remoción de obstáculos",
+    "observacion": "Presentar una petición persistente para quitar impedimentos, aplicada aquí para que la palabra 'corra' sin oposición."
+  },
+  {
+    "id": 94,
+    "texto_hebreo": "לְשַׁוַּע",
+    "transliteracion": "Leshavea'",
+    "equivalencia_espanol": "clamar por salvación",
+    "observacion": "Específicamente usado ante una tragedia o fatalidad inminente para pedir amparo y liberación."
+  },
+  {
+    "id": 95,
+    "texto_hebreo": "לְבַקֵּשׁ",
+    "transliteracion": "Levaqesh",
+    "equivalencia_espanol": "gestionar, pedir",
+    "observacion": "Se refiere al acto de realizar un pedido formal o gestionar una necesidad."
+  },
+  {
+    "id": 96,
+    "texto_hebreo": "לִדְרֹשׁ",
+    "transliteracion": "Lidrosh",
+    "equivalencia_espanol": "consultar, investigar",
+    "observacion": "Raíz del término 'Midrash', implica una investigación o consulta profunda, como la realizada por Rebeca ante Hashem."
+  },
+  {
+    "id": 97,
+    "texto_hebreo": "λόγος",
+    "transliteracion": "Logos",
+    "equivalencia_espanol": "asunto, objeto, palabra",
+    "observacion": "En el contexto de 2Ts 3:1, representa el objetivo central que es el Evangelio."
+  },
+  {
+    "id": 98,
+    "texto_hebreo": "ἄτοπος",
+    "transliteracion": "Atópos",
+    "equivalencia_espanol": "fuera de lugar, ilegal, ilícito",
+    "observacion": "Equivalente griego de 'aven', describe a personas que actúan al margen de la ley divina o en contra del Evangelio."
+  },
+  {
+    "id": 99,
+    "texto_hebreo": "πονηρός",
+    "transliteracion": "Poneros",
+    "equivalencia_espanol": "malo, dañino",
+    "observacion": "Refiere a la maldad que busca causar daño activamente, vinculada a los que se oponen a la 'emunáh."
+  },
+  {
+    "id": 100,
+    "texto_hebreo": "παραγγέλλομεν",
+    "transliteracion": "Parangellomen",
+    "equivalencia_espanol": "mensajear de lado, ordenar",
+    "observacion": "Acción de entregar un mensaje al lado de otro, similar a la parádosis, es un mensaje que acompaña e instruye."
+  },
+  {
+    "id": 101,
+    "texto_hebreo": "ἀτάκτως",
+    "transliteracion": "Ataktōs",
+    "equivalencia_espanol": "fuera de táctica, desordenado",
+    "observacion": "Término de origen militar que describe a quien no ocupa su posición ni sigue el orden establecido por la parádosis."
+  },
+  {
+    "id": 102,
+    "texto_hebreo": "περιεργαζομενους",
+    "transliteracion": "Periergazómenus",
+    "equivalencia_espanol": "sobre-actuar, hacerse el mártir",
+    "observacion": "Término acuñado por Pablo para describir a quienes fingen un sufrimiento o trabajo superior para evitar el sacrificio real de renunciar a sus derechos o intereses."
+  },
+  {
+    "id": 103,
+    "texto_hebreo": "επιστολης",
+    "transliteracion": "Epistolēs",
+    "equivalencia_espanol": "carta, epístola",
+    "observacion": "Documento que porta la palabra apostólica, su desobediencia es motivo de señalamiento para preservar la pureza de la comunión."
+  },
+  {
+    "id": 104,
+    "texto_hebreo": "טומאה",
+    "transliteracion": "Tum'ah",
+    "equivalencia_espanol": "incompatibilidad, impureza",
+    "observacion": "Citada en el contexto de Levítico para ilustrar la incapacidad de estar en comunión cuando no existe respeto por la instrucción escrita de los apóstoles."
+  },
+  {
+    "id": 105,
+    "texto_hebreo": "תשובה",
+    "transliteracion": "Tshuváh",
+    "equivalencia_espanol": "arrepentimiento",
+    "observacion": "El objetivo final de la disciplina comunitaria: lograr que la persona recapacite y retorne al diseño original."
+  },
+  {
+    "id": 106,
+    "texto_hebreo": "בושה",
+    "transliteracion": "Bushah",
+    "equivalencia_espanol": "vergüenza, pérdida de dignidad",
+    "observacion": "Estado de conciencia provocado por el entendimiento de haber perdido la cobertura espiritual o la identidad frente a la verdad."
+  },
+  {
+    "id": 107,
+    "texto_hebreo": "בושת",
+    "transliteracion": "Bóshet",
+    "equivalencia_espanol": "vergüenza profunda",
+    "observacion": "Variante que implica una afectación interna y esencial de la dignidad, asociada a la desnudez espiritual tras el pecado."
+  },
+  {
+    "id": 108,
+    "texto_hebreo": "כלימה",
+    "transliteracion": "Klimah",
+    "equivalencia_espanol": "censura social, bochorno",
+    "observacion": "Tipo de vergüenza externa o social producida por el juicio de los demás, a diferencia de la afectación interna de la dignidad."
+  }
+]

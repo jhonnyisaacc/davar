@@ -102,7 +102,15 @@ type StaticDictionaryDefinition = {
   text?: string;
   text_en?: string;
   text_es?: string;
+  text_he?: string;
   source?: string;
+  review_status?: "approved" | "imported" | "draft";
+  license?: string;
+  term_language?: "greek" | "hebrew" | "unknown";
+  source_file?: string;
+  source_row?: string;
+  source_url?: string;
+  context?: string;
 };
 
 type StaticDictionaryEntry = {
@@ -131,6 +139,9 @@ type StaticCustomDefinition = {
   hebrew?: string;
   transliteration_en?: string;
   transliteration_es?: string;
+  term_language?: "greek" | "hebrew" | "unknown";
+  canonical_strong?: string | null;
+  imported_by?: string;
   definitions?: StaticDictionaryDefinition[];
   root?: string;
   root_strong?: string;
@@ -211,17 +222,27 @@ const resolveStrongKey = <T,>(
   return null;
 };
 
+type MappedDefinition = {
+  text: string;
+  source: string;
+  language: "en" | "es" | "he";
+  review_status?: "approved" | "imported" | "draft";
+  license?: string;
+};
+
 const mapStaticDefinitions = (
   definitions: StaticDictionaryDefinition[] | undefined,
   language: "en" | "es" | "he",
-) => {
-  const definitionLanguage = language === "es" ? "es" : "en";
+): MappedDefinition[] => {
+  const definitionLanguage = language;
   return (definitions ?? [])
-    .map((definition) => {
+    .map((definition): MappedDefinition | null => {
       const text =
         definitionLanguage === "es"
-          ? (definition.text_es ?? definition.text_en ?? definition.text)
-          : (definition.text_en ?? definition.text_es ?? definition.text);
+          ? definition.text_es
+          : definitionLanguage === "he"
+            ? definition.text_he
+            : definition.text_en;
       if (!text) {
         return null;
       }
@@ -229,11 +250,11 @@ const mapStaticDefinitions = (
         text,
         source: definition.source ?? "static",
         language: definitionLanguage,
+        review_status: definition.review_status,
+        license: definition.license,
       };
     })
-    .filter((value): value is { text: string; source: string; language: string } =>
-      value !== null,
-    );
+    .filter((value): value is MappedDefinition => value !== null);
 };
 
 const mergeUniqueDefinitions = (
@@ -406,12 +427,15 @@ const toGreekLexiconResponse = (
   entry: GreekLexiconEntry,
   strong: string,
   language: "en" | "es" | "he",
+  customEntry?: StaticCustomDefinition,
 ): LexiconResponse => {
   const localized = entry.definitions?.[language];
   const english = entry.definitions?.en;
   const selected =
     localized && (localized.short || localized.fuller) ? localized : english;
-  const definitions: LexiconResponse["definitions"] = [];
+  const definitions: LexiconResponse["definitions"] = [
+    ...mapStaticDefinitions(customEntry?.definitions, language),
+  ];
   if (selected?.short) {
     definitions.push({
       language: selected === localized ? language : "en",
@@ -461,9 +485,14 @@ const loadGreekLexiconEntry = async (
 ): Promise<LexiconResponse | null> => {
   const revision = GREEK_RECORDED_REVISION;
   try {
-    const lexicon = await staticDataRequest<Record<string, GreekLexiconEntry>>(
-      greekLexiconPath(revision),
-    );
+    const [lexicon, custom] = await Promise.all([
+      staticDataRequest<Record<string, GreekLexiconEntry>>(
+        greekLexiconPath(revision),
+      ),
+      staticDataRequest<Record<string, StaticCustomDefinition>>(
+        "dict/custom_definitions.json",
+      ),
+    ]);
     const family = greekStrongFamily(strong);
     const entry =
       lexicon[strong] ??
@@ -486,15 +515,51 @@ const loadGreekLexiconEntry = async (
         },
         strong,
         language,
+        custom[entry.strong ?? strong],
       );
     }
-    return toGreekLexiconResponse(entry, strong, language);
+    return toGreekLexiconResponse(entry, strong, language, custom[entry.strong ?? strong]);
   } catch {
     const offline = (await fetchSourceLexiconEntry(
       greekSourceIdentity(revision),
       strong,
     )) as GreekLexiconEntry | null;
-    return offline ? toGreekLexiconResponse(offline, strong, language) : null;
+    const offlineCustom = await fetchLexiconEntry(strong);
+    const customEntry: StaticCustomDefinition | undefined = offlineCustom
+      ? {
+          definitions: (offlineCustom.definitions as Record<string, unknown>[]).reduce<
+            StaticDictionaryDefinition[]
+          >((definitions, definition) => {
+            const text = typeof definition.text === "string" ? definition.text : "";
+            const language = String(definition.language ?? "");
+            if (!text) return definitions;
+            definitions.push({
+              ...(language === "es" ? { text_es: text } : {}),
+              ...(language === "he" ? { text_he: text } : {}),
+              ...(language === "en" ? { text_en: text } : {}),
+              source: typeof definition.source === "string" ? definition.source : undefined,
+              review_status:
+                definition.review_status === "approved" ||
+                definition.review_status === "imported" ||
+                definition.review_status === "draft"
+                  ? definition.review_status
+                  : undefined,
+              license: typeof definition.license === "string" ? definition.license : undefined,
+            });
+            return definitions;
+          }, []),
+        }
+      : undefined;
+    return offline
+      ? toGreekLexiconResponse(offline, strong, language, customEntry)
+      : customEntry
+        ? toGreekLexiconResponse(
+            { strong, lemma: "", definitions: {} },
+            strong,
+            language,
+            customEntry,
+          )
+        : null;
   }
 };
 
@@ -1161,7 +1226,9 @@ const WordAnalysisBottomSheetComponent = (
                   ? String(offlineEntry.hebrew)
                   : undefined,
                 definitions: Array.isArray(offlineEntry.definitions)
-                  ? (offlineEntry.definitions as LexiconResponse["definitions"])
+                  ? (offlineEntry.definitions as LexiconResponse["definitions"]).filter(
+                      (definition) => definition.language === language,
+                    )
                   : [],
                 root: offlineEntry.root ? String(offlineEntry.root) : undefined,
                 root_strong: offlineEntry.root_strong
