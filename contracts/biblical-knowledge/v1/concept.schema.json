@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://davar.bible/contracts/biblical-knowledge/v1/concept.schema.json",
+  "title": "concept",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "enum": [
+        "concept",
+        "expression"
+      ]
+    },
+    "owner": {
+      "const": "shaul"
+    },
+    "upstream_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "names": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "source_record": {
+      "type": "object"
+    },
+    "provenance": {
+      "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/provenance"
+    }
+  },
+  "required": [
+    "id",
+    "kind",
+    "owner",
+    "upstream_id",
+    "names",
+    "source_record",
+    "provenance"
+  ],
+  "additionalProperties": false
+}

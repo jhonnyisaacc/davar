@@ -1,0 +1,43 @@
+[
+  {
+    "key": "bar-enash",
+    "edition_id": "oe",
+    "book_id": "daniel",
+    "chapter": 7,
+    "verse_label": "13",
+    "start_ordinal": 9,
+    "end_ordinal": 10,
+    "expected_texts": [
+      "כְּ/בַ֥ר",
+      "אֱנָ֖שׁ"
+    ]
+  },
+  {
+    "key": "ben-ha-adam",
+    "edition_id": "delitzsch",
+    "book_id": "john",
+    "chapter": 1,
+    "verse_label": "51",
+    "start_ordinal": 17,
+    "end_ordinal": 18,
+    "expected_texts": [
+      "בֶּן־",
+      "הָאָדָם׃"
+    ]
+  },
+  {
+    "key": "son-of-man-greek",
+    "edition_id": "sblgnt-tagnt",
+    "book_id": "john",
+    "chapter": 1,
+    "verse_label": "51",
+    "start_ordinal": 21,
+    "end_ordinal": 24,
+    "expected_texts": [
+      "τὸν",
+      "υἱὸν",
+      "τοῦ",
+      "ἀνθρώπου."
+    ]
+  }
+]

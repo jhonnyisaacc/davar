@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://davar.bible/contracts/biblical-knowledge/v1/source.schema.json",
+  "title": "source",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "owner": {
+      "enum": [
+        "davar",
+        "shaul"
+      ]
+    },
+    "kind": {
+      "enum": [
+        "dataset",
+        "lexicon",
+        "published_note",
+        "knowledge_record",
+        "authored_mapping",
+        "transcript",
+        "video"
+      ]
+    },
+    "repository": {
+      "type": "string",
+      "minLength": 1
+    },
+    "revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "visibility": {
+      "enum": [
+        "public",
+        "private",
+        "restricted"
+      ]
+    },
+    "upstream_id": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "id",
+    "owner",
+    "kind",
+    "repository",
+    "revision",
+    "path",
+    "sha256",
+    "visibility"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://davar.bible/contracts/biblical-knowledge/v1/passage.schema.json",
+  "title": "passage",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "edition_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "book_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "native_reference": {
+      "type": "object",
+      "properties": {
+        "chapter": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "verse_label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "chapter",
+        "verse_label"
+      ],
+      "additionalProperties": false
+    },
+    "mapping": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "mapped",
+            "unresolved",
+            "unmapped"
+          ]
+        },
+        "targets": {
+          "type": "array",
+          "items": {
+            "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/reference.schema.json"
+          }
+        }
+      },
+      "required": [
+        "status",
+        "targets"
+      ],
+      "additionalProperties": false
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "text_snapshot": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "tokenization_policy": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provenance": {
+      "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/provenance"
+    }
+  },
+  "required": [
+    "id",
+    "edition_id",
+    "book_id",
+    "native_reference",
+    "mapping",
+    "text",
+    "text_snapshot",
+    "tokenization_policy",
+    "provenance"
+  ],
+  "additionalProperties": false
+}

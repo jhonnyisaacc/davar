@@ -1,0 +1,1020 @@
+{
+  "contract_version": "1.0.0",
+  "coverage": [
+    {
+      "edition_id": "delitzsch",
+      "reason": "Outside this pilot selection",
+      "status": "not_requested"
+    },
+    {
+      "edition_id": "oe",
+      "reason": "Pinned pilot passage",
+      "status": "present"
+    },
+    {
+      "edition_id": "sblgnt-tagnt",
+      "reason": "Outside this pilot selection",
+      "status": "not_requested"
+    },
+    {
+      "edition_id": "tth-es",
+      "reason": "No Daniel book in the existing TTH mapping",
+      "status": "absent"
+    }
+  ],
+  "diagnostics": [],
+  "input_manifest_digest": "258f6b80e6047d2b7f8a92f2f57e21cda5eba6bb1bd6776fe7a7533db4fbdad9",
+  "records": {
+    "concepts": [
+      {
+        "id": "shaul:concept:son-of-man",
+        "kind": "concept",
+        "names": {
+          "es": "Hijo del Hombre"
+        },
+        "owner": "shaul",
+        "provenance": {
+          "locator": {
+            "kind": "yaml",
+            "pointer": ""
+          },
+          "origin": "authored",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:shaul-son-of-man",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_record": {
+          "aliases": [
+            "Hijo del Hombre",
+            "Ben Ha'Adam",
+            "Ben HaAdam",
+            "Bar Enash"
+          ],
+          "articles": [
+            {
+              "path": "besorah/marcos_ben_adam_metamorfosis_glosario",
+              "title": "Marcos: Ben Adam, metamorfosis y glosario mesiánico"
+            },
+            {
+              "path": "besorah/marcos_hijo_elohim_hijo_hombre_herencia",
+              "title": "Marcos: Hijo de Elohim, Hijo del Hombre y herencia"
+            },
+            {
+              "path": "besorah/marcos_14_pesaj_pacto_getsemani_juicio",
+              "title": "Marcos 14: Pésaj, pacto renovado, Getsemaní y el juicio"
+            },
+            {
+              "path": "temas/ben_hijo_titulos_mesias",
+              "title": "Ben, Adam y el Hijo dado al Mesías"
+            }
+          ],
+          "description": "Un concepto experimental que reúne formas lingüísticas y menciones intertextuales sin borrar su especificidad léxica.",
+          "forms": [
+            {
+              "role": "aramaic_expression",
+              "word": "word:bar-enash-ar"
+            },
+            {
+              "role": "hebrew_expression",
+              "word": "word:ben-ha-adam-he"
+            }
+          ],
+          "id": "son-of-man",
+          "names": {
+            "es": "Hijo del Hombre"
+          },
+          "related_concepts": [
+            "concept:son"
+          ],
+          "summary": {
+            "what_it_is": "Hijo del Hombre reúne el בן האדם — Ben HaAdam de Marcos con el בר אנש — Bar Enash de Daniel 7. Daniel ve a uno como hijo de hombre después de las bestias y le son dados dominio, honra y reino; Marcos une el Ben HaAdam con padecimiento, muerte, resurrección y venida en nubes. El concepto también se lee dentro de la pregunta adámica: el Mesías es el Hombre de arriba, en quien la vocación y el dominio destinados al hombre llegan a su cumplimiento.",
+            "what_it_is_not": "No es simplemente una manera de decir que Yeshua era humano, ni una etiqueta que pueda separarse de Daniel 7, del reino, del padecimiento y de la resurrección. Tampoco es correcto convertir בן — ben en «heredero» o «repartidor» como si esa fuera su traducción fija en todas sus apariciones; las notas presentan esa relación como una lectura contextual y pedagógica."
+          },
+          "type": "concept"
+        },
+        "upstream_id": "concept:son-of-man"
+      },
+      {
+        "id": "shaul:expression:bar-enash-ar",
+        "kind": "expression",
+        "names": {
+          "und": "בר אנש"
+        },
+        "owner": "shaul",
+        "provenance": {
+          "locator": {
+            "kind": "yaml",
+            "pointer": ""
+          },
+          "origin": "authored",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:shaul-bar-enash-ar",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_record": {
+          "aliases": [
+            "bar enash"
+          ],
+          "id": "bar-enash-ar",
+          "language": "aramaic",
+          "script": "בר אנש",
+          "transliteration": "Bar Enash",
+          "type": "word"
+        },
+        "upstream_id": "word:bar-enash-ar"
+      }
+    ],
+    "editions": [
+      {
+        "attribution": "Existing Davar OE dataset; retain its original source notices. Aramaic morphology is preserved.",
+        "id": "oe",
+        "language": "he",
+        "name": "OE Hebrew/Aramaic source",
+        "owner": "davar",
+        "reference_system_id": "davar-v1",
+        "source_kind": "biblical_text",
+        "source_revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602"
+      }
+    ],
+    "evidence": [
+      {
+        "content": {
+          "lemma": "בַּר",
+          "source_entry_id": "H1247"
+        },
+        "id": "evidence:bdb:H1247",
+        "kind": "lexical_entry",
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/H1247"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:bdb",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "targets": [
+          {
+            "kind": "external_lexical",
+            "reference": {
+              "code": "H1247",
+              "namespace": "strong"
+            }
+          }
+        ]
+      },
+      {
+        "content": {
+          "lemma": "אֱנָשׁ",
+          "source_entry_id": "H606"
+        },
+        "id": "evidence:bdb:H606",
+        "kind": "lexical_entry",
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/H606"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:bdb",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "targets": [
+          {
+            "kind": "external_lexical",
+            "reference": {
+              "code": "H606",
+              "namespace": "strong"
+            }
+          }
+        ]
+      },
+      {
+        "content": {
+          "entities": [
+            "concept:son-of-man",
+            "word:bar-enash-ar",
+            "verse:daniel-7-13",
+            "verse:daniel-7-14",
+            "concept:ancient-of-days"
+          ],
+          "id": "mention-son-of-man-daniel",
+          "location": {
+            "heading": "Daniel 7:13-14"
+          },
+          "note": "besorah/marcos_ben_adam_metamorfosis_glosario",
+          "text": "El Bar Enash que llega ante el Anciano de días recibe dominio, honra y reino."
+        },
+        "id": "shaul:evidence:mention-son-of-man-daniel",
+        "kind": "mention",
+        "provenance": {
+          "locator": {
+            "kind": "yaml",
+            "pointer": ""
+          },
+          "origin": "authored",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:shaul-son-of-man-daniel",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "targets": [
+          {
+            "kind": "reference",
+            "reference": {
+              "book_id": "daniel",
+              "chapter": 7,
+              "kind": "verse",
+              "system_id": "davar-v1",
+              "verse": 13
+            }
+          }
+        ]
+      }
+    ],
+    "passages": [
+      {
+        "book_id": "daniel",
+        "edition_id": "oe",
+        "id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "mapping": {
+          "status": "mapped",
+          "targets": [
+            {
+              "book_id": "daniel",
+              "chapter": 7,
+              "kind": "verse",
+              "system_id": "davar-v1",
+              "verse": 13
+            }
+          ]
+        },
+        "native_reference": {
+          "chapter": 7,
+          "verse_label": "13"
+        },
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/12"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:oe",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "text": "חָזֵ֤ה הֲוֵית֙ בְּ/חֶזְוֵ֣י לֵֽילְיָ֔/א וַ/אֲרוּ֙ עִם עֲנָנֵ֣י שְׁמַיָּ֔/א כְּ/בַ֥ר אֱנָ֖שׁ אָתֵ֣ה הֲוָ֑ה וְ/עַד עַתִּ֤יק יֽוֹמַיָּ/א֙ מְטָ֔ה וּ/קְדָמ֖וֹ/הִי הַקְרְבֽוּ/הִי",
+        "text_snapshot": "69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "tokenization_policy": "source-array-v1"
+      }
+    ],
+    "relations": [
+      {
+        "evidence_ids": [
+          "shaul:evidence:mention-son-of-man-daniel"
+        ],
+        "id": "davar:relation:daniel-7-13-bar-enash",
+        "object": {
+          "id": "shaul:concept:son-of-man",
+          "kind": "concept"
+        },
+        "owner": "davar",
+        "predicate": "expresses_concept",
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0"
+          },
+          "origin": "authored",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:authored-relations",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "scope": {
+          "book_id": "daniel",
+          "chapter": 7,
+          "kind": "verse",
+          "system_id": "davar-v1",
+          "verse": 13
+        },
+        "subject": {
+          "id": "span:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:9-10",
+          "kind": "span"
+        }
+      },
+      {
+        "evidence_ids": [
+          "shaul:evidence:mention-son-of-man-daniel"
+        ],
+        "id": "shaul:relation:bar-enash-expresses-son-of-man",
+        "object": {
+          "id": "shaul:concept:son-of-man",
+          "kind": "concept"
+        },
+        "owner": "shaul",
+        "predicate": "expresses_concept",
+        "provenance": {
+          "locator": {
+            "kind": "yaml",
+            "pointer": ""
+          },
+          "origin": "authored",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:shaul-bar-enash-expresses-son-of-man",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "subject": {
+          "id": "shaul:expression:bar-enash-ar",
+          "kind": "expression"
+        },
+        "upstream_id": "bar-enash-expresses-son-of-man",
+        "upstream_status": "confirmed"
+      }
+    ],
+    "sources": [
+      {
+        "id": "source:authored-relations",
+        "kind": "authored_mapping",
+        "owner": "davar",
+        "path": "data/knowledge/authored/pilots/relations.json",
+        "repository": "https://github.com/jhonnyisaacc/davar",
+        "revision": "sha256:b266d1bc19f4bb21115bfb3a034bc2d3cf5ada0d2c7241a6aaa0547553147d5e",
+        "sha256": "b266d1bc19f4bb21115bfb3a034bc2d3cf5ada0d2c7241a6aaa0547553147d5e",
+        "visibility": "public"
+      },
+      {
+        "id": "source:authored-spans",
+        "kind": "authored_mapping",
+        "owner": "davar",
+        "path": "data/knowledge/authored/pilots/spans.json",
+        "repository": "https://github.com/jhonnyisaacc/davar",
+        "revision": "sha256:6ac1fe0ef33c6667937e0f6d5b83438759f13a05ca29b8639cce4c8c5e2ce425",
+        "sha256": "6ac1fe0ef33c6667937e0f6d5b83438759f13a05ca29b8639cce4c8c5e2ce425",
+        "visibility": "public"
+      },
+      {
+        "id": "source:bdb",
+        "kind": "lexicon",
+        "owner": "davar",
+        "path": "data/dict/lexicon/words.json",
+        "repository": "https://github.com/jhonnyisaacc/davar",
+        "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
+        "sha256": "f940146b0f4cd917286da893fa5b7b783c8dd110dd386d29e1b8d3bc07550034",
+        "visibility": "public"
+      },
+      {
+        "id": "source:oe",
+        "kind": "dataset",
+        "owner": "davar",
+        "path": "data/oe/daniel/7.json",
+        "repository": "https://github.com/jhonnyisaacc/davar",
+        "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
+        "sha256": "c7a7f5aa460b695a23addde487090f39d6d8aee9aa4b51e5576f39b63e6a92d1",
+        "visibility": "public"
+      },
+      {
+        "id": "source:shaul-bar-enash-ar",
+        "kind": "knowledge_record",
+        "owner": "shaul",
+        "path": "knowledge/words/bar-enash-ar.yml",
+        "repository": "https://github.com/jhonnyisaacc/shaul",
+        "revision": "8c94b0fe9eca817e22340430309801d0ef76125b",
+        "sha256": "f311c24a6d9fa2cd4c9ec1781f09a9e466c19e423b3444f1de6ce9a502894819",
+        "visibility": "public"
+      },
+      {
+        "id": "source:shaul-bar-enash-expresses-son-of-man",
+        "kind": "knowledge_record",
+        "owner": "shaul",
+        "path": "knowledge/relations/bar-enash-expresses-son-of-man.yml",
+        "repository": "https://github.com/jhonnyisaacc/shaul",
+        "revision": "8c94b0fe9eca817e22340430309801d0ef76125b",
+        "sha256": "7342af11f85f0b61631da9cecd4a0b7445ca75a6670f1ae66d17096f01603751",
+        "visibility": "public"
+      },
+      {
+        "id": "source:shaul-son-of-man",
+        "kind": "knowledge_record",
+        "owner": "shaul",
+        "path": "knowledge/concepts/son-of-man.yml",
+        "repository": "https://github.com/jhonnyisaacc/shaul",
+        "revision": "8c94b0fe9eca817e22340430309801d0ef76125b",
+        "sha256": "2149ef22e2ab22af9957ddf7c260960081616827af4f5bdb270a9f5aaf43c701",
+        "visibility": "public"
+      },
+      {
+        "id": "source:shaul-son-of-man-daniel",
+        "kind": "knowledge_record",
+        "owner": "shaul",
+        "path": "knowledge/mentions/son-of-man-daniel.yml",
+        "repository": "https://github.com/jhonnyisaacc/shaul",
+        "revision": "8c94b0fe9eca817e22340430309801d0ef76125b",
+        "sha256": "caa060c91b8821474782efa606b0b570c1dd3540411d91c83e78cf032ff4e597",
+        "visibility": "public"
+      }
+    ],
+    "spans": [
+      {
+        "end_ordinal": 10,
+        "id": "span:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:9-10",
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0"
+          },
+          "origin": "authored",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:authored-spans",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "start_ordinal": 9
+      }
+    ],
+    "tokens": [
+      {
+        "annotations": {
+          "lemma": "H2370",
+          "morph": "AVqrmsa",
+          "text_no_nikud": "חזה"
+        },
+        "id": "token:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:1",
+        "lexical_refs": [
+          {
+            "code": "H2370",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 1,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/12/words/0"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:oe",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "text": "חָזֵ֤ה"
+      },
+      {
+        "annotations": {
+          "lemma": "H606",
+          "morph": "ANcmsa",
+          "text_no_nikud": "אנש"
+        },
+        "id": "token:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:10",
+        "lexical_refs": [
+          {
+            "code": "H606",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 10,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/12/words/9"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:oe",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "text": "אֱנָ֖שׁ"
+      },
+      {
+        "annotations": {
+          "lemma": "H858",
+          "morph": "AVqrmsa",
+          "text_no_nikud": "אתה"
+        },
+        "id": "token:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:11",
+        "lexical_refs": [
+          {
+            "code": "H858",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 11,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/12/words/10"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:oe",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "text": "אָתֵ֣ה"
+      },
+      {
+        "annotations": {
+          "lemma": "H1934",
+          "morph": "AVqp3ms",
+          "text_no_nikud": "הוה"
+        },
+        "id": "token:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:12",
+        "lexical_refs": [
+          {
+            "code": "H1934",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 12,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/12/words/11"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:oe",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "text": "הֲוָ֑ה"
+      },
+      {
+        "annotations": {
+          "lemma": "Hc/H5705",
+          "morph": "AC/R",
+          "prefixes": [
+            "Hc"
+          ],
+          "text_no_nikud": "ו/עד"
+        },
+        "id": "token:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:13",
+        "lexical_refs": [
+          {
+            "code": "Hc",
+            "namespace": "davar-prefix"
+          },
+          {
+            "code": "H5705",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 13,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/12/words/12"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:oe",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "text": "וְ/עַד"
+      },
+      {
+        "annotations": {
+          "lemma": "H6268",
+          "morph": "AAamsc",
+          "text_no_nikud": "עתיק"
+        },
+        "id": "token:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:14",
+        "lexical_refs": [
+          {
+            "code": "H6268",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 14,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/12/words/13"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:oe",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "text": "עַתִּ֤יק"
+      },
+      {
+        "annotations": {
+          "lemma": "H3118",
+          "morph": "ANcmpd/Td",
+          "text_no_nikud": "יומי/א"
+        },
+        "id": "token:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:15",
+        "lexical_refs": [
+          {
+            "code": "H3118",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 15,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/12/words/14"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:oe",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "text": "יֽוֹמַיָּ/א֙"
+      },
+      {
+        "annotations": {
+          "lemma": "H4291",
+          "morph": "AVqp3ms",
+          "text_no_nikud": "מטה"
+        },
+        "id": "token:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:16",
+        "lexical_refs": [
+          {
+            "code": "H4291",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 16,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/12/words/15"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:oe",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "text": "מְטָ֔ה"
+      },
+      {
+        "annotations": {
+          "lemma": "Hc/H6925",
+          "morph": "AC/R/Sp3ms",
+          "prefixes": [
+            "Hc"
+          ],
+          "text_no_nikud": "ו/קדמו/הי"
+        },
+        "id": "token:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:17",
+        "lexical_refs": [
+          {
+            "code": "Hc",
+            "namespace": "davar-prefix"
+          },
+          {
+            "code": "H6925",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 17,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/12/words/16"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:oe",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "text": "וּ/קְדָמ֖וֹ/הִי"
+      },
+      {
+        "annotations": {
+          "lemma": "H7127",
+          "morph": "AVhp3mp/Sp3ms",
+          "text_no_nikud": "הקרבו/הי"
+        },
+        "id": "token:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:18",
+        "lexical_refs": [
+          {
+            "code": "H7127",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 18,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/12/words/17"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:oe",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "text": "הַקְרְבֽוּ/הִי"
+      },
+      {
+        "annotations": {
+          "lemma": "H1934",
+          "morph": "AVqp1cs",
+          "text_no_nikud": "הוית"
+        },
+        "id": "token:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:2",
+        "lexical_refs": [
+          {
+            "code": "H1934",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 2,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/12/words/1"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:oe",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "text": "הֲוֵית֙"
+      },
+      {
+        "annotations": {
+          "lemma": "Hb/H2376",
+          "morph": "AR/Ncmpc",
+          "prefixes": [
+            "Hb"
+          ],
+          "text_no_nikud": "ב/חזוי"
+        },
+        "id": "token:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:3",
+        "lexical_refs": [
+          {
+            "code": "Hb",
+            "namespace": "davar-prefix"
+          },
+          {
+            "code": "H2376",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 3,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/12/words/2"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:oe",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "text": "בְּ/חֶזְוֵ֣י"
+      },
+      {
+        "annotations": {
+          "lemma": "H3916",
+          "morph": "ANcmsd/Td",
+          "text_no_nikud": "לילי/א"
+        },
+        "id": "token:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:4",
+        "lexical_refs": [
+          {
+            "code": "H3916",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 4,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/12/words/3"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:oe",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "text": "לֵֽילְיָ֔/א"
+      },
+      {
+        "annotations": {
+          "lemma": "Hc/H718",
+          "morph": "AC/Tm",
+          "prefixes": [
+            "Hc"
+          ],
+          "text_no_nikud": "ו/ארו"
+        },
+        "id": "token:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:5",
+        "lexical_refs": [
+          {
+            "code": "Hc",
+            "namespace": "davar-prefix"
+          },
+          {
+            "code": "H718",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 5,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/12/words/4"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:oe",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "text": "וַ/אֲרוּ֙"
+      },
+      {
+        "annotations": {
+          "lemma": "H5974",
+          "morph": "AR",
+          "text_no_nikud": "עם"
+        },
+        "id": "token:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:6",
+        "lexical_refs": [
+          {
+            "code": "H5974",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 6,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/12/words/5"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:oe",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "text": "עִם"
+      },
+      {
+        "annotations": {
+          "lemma": "H6050",
+          "morph": "ANcmpc",
+          "text_no_nikud": "ענני"
+        },
+        "id": "token:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:7",
+        "lexical_refs": [
+          {
+            "code": "H6050",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 7,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/12/words/6"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:oe",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "text": "עֲנָנֵ֣י"
+      },
+      {
+        "annotations": {
+          "lemma": "H8065",
+          "morph": "ANcmpd/Td",
+          "text_no_nikud": "שמי/א"
+        },
+        "id": "token:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:8",
+        "lexical_refs": [
+          {
+            "code": "H8065",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 8,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/12/words/7"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:oe",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "text": "שְׁמַיָּ֔/א"
+      },
+      {
+        "annotations": {
+          "lemma": "Hk/H1247",
+          "morph": "AR/Ncmsc",
+          "prefixes": [
+            "Hk"
+          ],
+          "text_no_nikud": "כ/בר"
+        },
+        "id": "token:passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9:9",
+        "lexical_refs": [
+          {
+            "code": "Hk",
+            "namespace": "davar-prefix"
+          },
+          {
+            "code": "H1247",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 9,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/12/words/8"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:oe",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+        "text": "כְּ/בַ֥ר"
+      }
+    ]
+  },
+  "reference": {
+    "book_id": "daniel",
+    "chapter": 7,
+    "kind": "verse",
+    "system_id": "davar-v1",
+    "verse": 13
+  }
+}

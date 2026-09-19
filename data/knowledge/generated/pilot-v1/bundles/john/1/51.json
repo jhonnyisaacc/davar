@@ -1,0 +1,2135 @@
+{
+  "contract_version": "1.0.0",
+  "coverage": [
+    {
+      "edition_id": "delitzsch",
+      "reason": "Pinned pilot passage",
+      "status": "present"
+    },
+    {
+      "edition_id": "oe",
+      "reason": "Outside this pilot selection",
+      "status": "not_requested"
+    },
+    {
+      "edition_id": "sblgnt-tagnt",
+      "reason": "Pinned pilot passage",
+      "status": "present"
+    },
+    {
+      "edition_id": "tth-es",
+      "reason": "Pinned pilot passage",
+      "status": "present"
+    }
+  ],
+  "diagnostics": [
+    "#bereshit_28_12: reference_system_not_verified",
+    "#devarim_18_15: reference_system_not_verified",
+    "#juan_1_19-27: reference_system_not_verified",
+    "#juan_1_29: reference_system_not_verified",
+    "#juan_1_32-34: reference_system_not_verified",
+    "#juan_1_35-42: reference_system_not_verified",
+    "#juan_1_43-51: reference_system_not_verified",
+    "#malaji_3_1: reference_system_not_verified",
+    "#malaji_4_5: reference_system_not_verified",
+    "#yeshayahu_40_3: reference_system_not_verified"
+  ],
+  "input_manifest_digest": "258f6b80e6047d2b7f8a92f2f57e21cda5eba6bb1bd6776fe7a7533db4fbdad9",
+  "records": {
+    "concepts": [
+      {
+        "id": "shaul:concept:son-of-man",
+        "kind": "concept",
+        "names": {
+          "es": "Hijo del Hombre"
+        },
+        "owner": "shaul",
+        "provenance": {
+          "locator": {
+            "kind": "yaml",
+            "pointer": ""
+          },
+          "origin": "authored",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:shaul-son-of-man",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_record": {
+          "aliases": [
+            "Hijo del Hombre",
+            "Ben Ha'Adam",
+            "Ben HaAdam",
+            "Bar Enash"
+          ],
+          "articles": [
+            {
+              "path": "besorah/marcos_ben_adam_metamorfosis_glosario",
+              "title": "Marcos: Ben Adam, metamorfosis y glosario mesiánico"
+            },
+            {
+              "path": "besorah/marcos_hijo_elohim_hijo_hombre_herencia",
+              "title": "Marcos: Hijo de Elohim, Hijo del Hombre y herencia"
+            },
+            {
+              "path": "besorah/marcos_14_pesaj_pacto_getsemani_juicio",
+              "title": "Marcos 14: Pésaj, pacto renovado, Getsemaní y el juicio"
+            },
+            {
+              "path": "temas/ben_hijo_titulos_mesias",
+              "title": "Ben, Adam y el Hijo dado al Mesías"
+            }
+          ],
+          "description": "Un concepto experimental que reúne formas lingüísticas y menciones intertextuales sin borrar su especificidad léxica.",
+          "forms": [
+            {
+              "role": "aramaic_expression",
+              "word": "word:bar-enash-ar"
+            },
+            {
+              "role": "hebrew_expression",
+              "word": "word:ben-ha-adam-he"
+            }
+          ],
+          "id": "son-of-man",
+          "names": {
+            "es": "Hijo del Hombre"
+          },
+          "related_concepts": [
+            "concept:son"
+          ],
+          "summary": {
+            "what_it_is": "Hijo del Hombre reúne el בן האדם — Ben HaAdam de Marcos con el בר אנש — Bar Enash de Daniel 7. Daniel ve a uno como hijo de hombre después de las bestias y le son dados dominio, honra y reino; Marcos une el Ben HaAdam con padecimiento, muerte, resurrección y venida en nubes. El concepto también se lee dentro de la pregunta adámica: el Mesías es el Hombre de arriba, en quien la vocación y el dominio destinados al hombre llegan a su cumplimiento.",
+            "what_it_is_not": "No es simplemente una manera de decir que Yeshua era humano, ni una etiqueta que pueda separarse de Daniel 7, del reino, del padecimiento y de la resurrección. Tampoco es correcto convertir בן — ben en «heredero» o «repartidor» como si esa fuera su traducción fija en todas sus apariciones; las notas presentan esa relación como una lectura contextual y pedagógica."
+          },
+          "type": "concept"
+        },
+        "upstream_id": "concept:son-of-man"
+      }
+    ],
+    "editions": [
+      {
+        "attribution": "Existing Davar Delitzsch parsed dataset; retain original source notices.",
+        "id": "delitzsch",
+        "language": "he",
+        "name": "Delitzsch parsed Hebrew",
+        "owner": "davar",
+        "reference_system_id": "davar-v1",
+        "source_kind": "biblical_text",
+        "source_revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602"
+      },
+      {
+        "attribution": "SBLGNT / STEPBible TAGNT. Derived from Davar's committed preview. See docs/greek-besorah-source-licenses.md and data/greek/preview; existing notices and release restrictions continue to apply.",
+        "id": "sblgnt-tagnt",
+        "language": "grc",
+        "name": "SBLGNT with TAGNT annotation",
+        "owner": "davar",
+        "reference_system_id": "tagnt-native",
+        "source_kind": "biblical_text",
+        "source_revision": "ae39711d7843b2902d54993e432de9c12d6a4b9a"
+      },
+      {
+        "attribution": "Original TTH text and footnotes from data/tth_2/json; existing attribution and permissions apply.",
+        "id": "tth-es",
+        "language": "es",
+        "name": "TTH Spanish",
+        "owner": "davar",
+        "reference_system_id": "translation-legacy",
+        "source_kind": "translation",
+        "source_revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602"
+      }
+    ],
+    "evidence": [
+      {
+        "content": {
+          "lemma": "אֱלֹהִים",
+          "source_entry_id": "H430"
+        },
+        "id": "evidence:bdb:H430",
+        "kind": "lexical_entry",
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/H430"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:bdb",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "targets": [
+          {
+            "kind": "external_lexical",
+            "reference": {
+              "code": "H430",
+              "namespace": "strong"
+            }
+          }
+        ]
+      },
+      {
+        "content": {
+          "explanation": "Hijo del Hombre; un título para el Mesías.",
+          "marker": "²³",
+          "number": "23",
+          "word": "Ben Ha'Adam"
+        },
+        "id": "evidence:passage:tth-es:john:1:375cb7332358a19359cbe69dbb94a68680e888cb0bbf60f1fda964a3c4318f55:footnote:0",
+        "kind": "footnote",
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/chapters/0/verses/50/footnotes/0"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:tth",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "targets": [
+          {
+            "id": "passage:tth-es:john:1:375cb7332358a19359cbe69dbb94a68680e888cb0bbf60f1fda964a3c4318f55",
+            "kind": "passage"
+          }
+        ]
+      },
+      {
+        "content": {
+          "lemma": "ἄνθρωπος",
+          "source_entry_id": "G0444"
+        },
+        "id": "evidence:tagnt:G0444",
+        "kind": "lexical_entry",
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/G0444"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek-lexicon",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "targets": [
+          {
+            "kind": "external_lexical",
+            "reference": {
+              "code": "G0444",
+              "namespace": "strong"
+            }
+          }
+        ]
+      },
+      {
+        "content": {
+          "lemma": "λέγω",
+          "source_entry_id": "G3004G"
+        },
+        "id": "evidence:tagnt:G3004G",
+        "kind": "lexical_entry",
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/G3004G"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek-lexicon",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "targets": [
+          {
+            "kind": "external_lexical",
+            "reference": {
+              "code": "G3004G",
+              "namespace": "tagnt"
+            }
+          }
+        ]
+      },
+      {
+        "content": {
+          "lemma": "υἱός",
+          "source_entry_id": "G5207"
+        },
+        "id": "evidence:tagnt:G5207",
+        "kind": "lexical_entry",
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/G5207"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek-lexicon",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "targets": [
+          {
+            "kind": "external_lexical",
+            "reference": {
+              "code": "G5207",
+              "namespace": "strong"
+            }
+          }
+        ]
+      },
+      {
+        "content": {
+          "metadata": {
+            "date": "2026-07-26",
+            "description": "Lectura canónica de Juan 1:19-51: el testimonio de Juan, el Cordero de Elohim, el llamado de los primeros discípulos y la alusión a la escalera de Yaakov.",
+            "references": [
+              "#juan_1_19-27",
+              "#juan_1_29",
+              "#juan_1_32-34",
+              "#juan_1_35-42",
+              "#juan_1_43-51",
+              "#yeshayahu_40_3",
+              "#malaji_3_1",
+              "#malaji_4_5",
+              "#devarim_18_15",
+              "#bereshit_28_12"
+            ],
+            "source_ids": [
+              "youtube:FrxD1V5awcM",
+              "youtube:1MoxwBR4bg4",
+              "youtube:2C6YJnz5fKs",
+              "youtube:ppIWbKD97T0"
+            ],
+            "sources": [
+              "https://www.youtube.com/watch?v=FrxD1V5awcM",
+              "https://www.youtube.com/watch?v=1MoxwBR4bg4",
+              "https://www.youtube.com/watch?v=2C6YJnz5fKs",
+              "https://www.youtube.com/watch?v=ppIWbKD97T0",
+              "docs/scriptures/tth/json/yojanan.json",
+              "docs/scriptures/delitzsch/json/john.json",
+              "docs/scriptures/oe/json/isaiah/40.json",
+              "docs/scriptures/oe/json/deuteronomy/18.json",
+              "docs/scriptures/oe/json/genesis/28.json"
+            ],
+            "tags": [
+              "juan",
+              "juan_1",
+              "testimonio",
+              "iojanan_hamatbil",
+              "cordero_de_elohim",
+              "discipulos",
+              "ben_haadam",
+              "sulam"
+            ],
+            "title": "Juan 1: el testigo, el Cordero y los primeros discípulos",
+            "translation": "[TTH, Delitzsch, OE]"
+          },
+          "references": [
+            {
+              "book_id": "john",
+              "raw": "#juan_1_19-27",
+              "reason": "reference_system_not_verified",
+              "status": "unresolved"
+            },
+            {
+              "book_id": "john",
+              "raw": "#juan_1_29",
+              "reason": "reference_system_not_verified",
+              "status": "unresolved"
+            },
+            {
+              "book_id": "john",
+              "raw": "#juan_1_32-34",
+              "reason": "reference_system_not_verified",
+              "status": "unresolved"
+            },
+            {
+              "book_id": "john",
+              "raw": "#juan_1_35-42",
+              "reason": "reference_system_not_verified",
+              "status": "unresolved"
+            },
+            {
+              "book_id": "john",
+              "raw": "#juan_1_43-51",
+              "reason": "reference_system_not_verified",
+              "status": "unresolved"
+            },
+            {
+              "book_id": "isaiah",
+              "raw": "#yeshayahu_40_3",
+              "reason": "reference_system_not_verified",
+              "status": "unresolved"
+            },
+            {
+              "book_id": "malachi",
+              "raw": "#malaji_3_1",
+              "reason": "reference_system_not_verified",
+              "status": "unresolved"
+            },
+            {
+              "book_id": "malachi",
+              "raw": "#malaji_4_5",
+              "reason": "reference_system_not_verified",
+              "status": "unresolved"
+            },
+            {
+              "book_id": "deuteronomy",
+              "raw": "#devarim_18_15",
+              "reason": "reference_system_not_verified",
+              "status": "unresolved"
+            },
+            {
+              "book_id": "genesis",
+              "raw": "#bereshit_28_12",
+              "reason": "reference_system_not_verified",
+              "status": "unresolved"
+            }
+          ],
+          "section": "Yehoshua describe a Netanel como un israelita sin engaño y declara haberlo visto bajo la higuera. Netanel responde con dos títulos textuales: «Hijo de Elohim» y «Rey de Israel» (#juan_1_47-49). La narración no explica por sí sola todos los alcances doctrinales posteriores de esos títulos; sí presenta esta confesión como respuesta a la palabra y al conocimiento que Netanel recibe.\n\nLa parte 6 discute el uso de nombres, **Rabí**, «Hijo de Elohim» y «Ben Ha’Adam». Conviene conservar una distinción: que una traducción española sea insuficiente para agotar una expresión semítica no prueba que deba sustituirse por una única paráfrasis teológica. Las equivalencias entre griego, hebreo y arameo requieren cotejo gramatical y contextual caso por caso.",
+          "upstream_id": "content/besorah/juan_1_testigo_cordero"
+        },
+        "id": "shaul:evidence:juan_1_testigo_cordero",
+        "kind": "note",
+        "provenance": {
+          "locator": {
+            "heading": "Netanel y las confesiones del final",
+            "kind": "markdown"
+          },
+          "origin": "authored",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:shaul-juan_1_testigo_cordero",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "targets": [
+          {
+            "kind": "reference",
+            "reference": {
+              "book_id": "john",
+              "chapter": 1,
+              "kind": "verse",
+              "system_id": "davar-v1",
+              "verse": 51
+            }
+          }
+        ]
+      }
+    ],
+    "passages": [
+      {
+        "book_id": "john",
+        "edition_id": "delitzsch",
+        "id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "mapping": {
+          "status": "mapped",
+          "targets": [
+            {
+              "book_id": "john",
+              "chapter": 1,
+              "kind": "verse",
+              "system_id": "davar-v1",
+              "verse": 51
+            }
+          ]
+        },
+        "native_reference": {
+          "chapter": 1,
+          "verse_label": "51"
+        },
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0/verses/50"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:delitzsch",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "text": "וַ/יֹּאמֶר אֵלָיו אָמֵן אָמֵן אֲנִי אֹמֵר לָ/כֶם מֵעַתָּה תִּרְאוּ הַ/שָּׁמַיִם נִפְתָּחִים וּ/מַלְאֲכֵי אֱלֹהִים עֹלִים וְ/יֹרְדִים עַל בֶּן־הָ/אָדָם׃",
+        "text_snapshot": "3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "tokenization_policy": "source-array-v1"
+      },
+      {
+        "book_id": "john",
+        "edition_id": "sblgnt-tagnt",
+        "id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "mapping": {
+          "status": "mapped",
+          "targets": [
+            {
+              "book_id": "john",
+              "chapter": 1,
+              "kind": "verse",
+              "system_id": "davar-v1",
+              "verse": 51
+            }
+          ]
+        },
+        "native_reference": {
+          "chapter": 1,
+          "source_ref": "Jhn.1.51",
+          "verse_label": "51"
+        },
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "text": "καὶ λέγει αὐτῷ· ἀμὴν ἀμὴν λέγω ὑμῖν ὄψεσθε τὸν οὐρανὸν ἀνεῳγότα καὶ τοὺς ἀγγέλους τοῦ θεοῦ ἀναβαίνοντας καὶ καταβαίνοντας ἐπὶ τὸν υἱὸν τοῦ ἀνθρώπου.",
+        "text_snapshot": "13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "tokenization_policy": "source-array-v1"
+      },
+      {
+        "book_id": "john",
+        "edition_id": "tth-es",
+        "id": "passage:tth-es:john:1:375cb7332358a19359cbe69dbb94a68680e888cb0bbf60f1fda964a3c4318f55",
+        "mapping": {
+          "status": "mapped",
+          "targets": [
+            {
+              "book_id": "john",
+              "chapter": 1,
+              "kind": "verse",
+              "system_id": "davar-v1",
+              "verse": 51
+            }
+          ]
+        },
+        "native_reference": {
+          "chapter": 1,
+          "verse_label": "51"
+        },
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/chapters/0/verses/50"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:tth",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "text": "Y le dijo: Amén, amén, les digo: “Desde ahora verán los cielos abiertos, y los ángeles de Elohim subiendo y bajando sobre el Ben Ha'Adam²³”.",
+        "text_snapshot": "375cb7332358a19359cbe69dbb94a68680e888cb0bbf60f1fda964a3c4318f55",
+        "tokenization_policy": "untokenized-v1"
+      }
+    ],
+    "relations": [
+      {
+        "evidence_ids": [
+          "shaul:evidence:juan_1_testigo_cordero"
+        ],
+        "id": "davar:relation:john-1-51-ben-ha-adam",
+        "object": {
+          "id": "shaul:concept:son-of-man",
+          "kind": "concept"
+        },
+        "owner": "davar",
+        "predicate": "expresses_concept",
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/1"
+          },
+          "origin": "authored",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:authored-relations",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "scope": {
+          "book_id": "john",
+          "chapter": 1,
+          "kind": "verse",
+          "system_id": "davar-v1",
+          "verse": 51
+        },
+        "subject": {
+          "id": "span:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:17-18",
+          "kind": "span"
+        }
+      }
+    ],
+    "sources": [
+      {
+        "id": "source:authored-relations",
+        "kind": "authored_mapping",
+        "owner": "davar",
+        "path": "data/knowledge/authored/pilots/relations.json",
+        "repository": "https://github.com/jhonnyisaacc/davar",
+        "revision": "sha256:b266d1bc19f4bb21115bfb3a034bc2d3cf5ada0d2c7241a6aaa0547553147d5e",
+        "sha256": "b266d1bc19f4bb21115bfb3a034bc2d3cf5ada0d2c7241a6aaa0547553147d5e",
+        "visibility": "public"
+      },
+      {
+        "id": "source:authored-spans",
+        "kind": "authored_mapping",
+        "owner": "davar",
+        "path": "data/knowledge/authored/pilots/spans.json",
+        "repository": "https://github.com/jhonnyisaacc/davar",
+        "revision": "sha256:6ac1fe0ef33c6667937e0f6d5b83438759f13a05ca29b8639cce4c8c5e2ce425",
+        "sha256": "6ac1fe0ef33c6667937e0f6d5b83438759f13a05ca29b8639cce4c8c5e2ce425",
+        "visibility": "public"
+      },
+      {
+        "id": "source:bdb",
+        "kind": "lexicon",
+        "owner": "davar",
+        "path": "data/dict/lexicon/words.json",
+        "repository": "https://github.com/jhonnyisaacc/davar",
+        "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
+        "sha256": "f940146b0f4cd917286da893fa5b7b783c8dd110dd386d29e1b8d3bc07550034",
+        "visibility": "public"
+      },
+      {
+        "id": "source:delitzsch",
+        "kind": "dataset",
+        "owner": "davar",
+        "path": "data/delitzsch_parsed/john/1.json",
+        "repository": "https://github.com/jhonnyisaacc/davar",
+        "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
+        "sha256": "af360e54d2eb3874b3319fd330ea5a5b30a706fd4f3351d8198f77b72abfdf5f",
+        "visibility": "public"
+      },
+      {
+        "id": "source:greek",
+        "kind": "dataset",
+        "owner": "davar",
+        "path": "data/greek/preview/greek/releases/sblgnt/ae39711d7843b2902d54993e432de9c12d6a4b9a/books/john/1.json",
+        "repository": "https://github.com/jhonnyisaacc/davar",
+        "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
+        "sha256": "263c2adfacffef25bbd80e7f6268c9cdf5986c1fc90d4220ecde02f2d6df16b2",
+        "visibility": "public"
+      },
+      {
+        "id": "source:greek-lexicon",
+        "kind": "lexicon",
+        "owner": "davar",
+        "path": "data/greek/preview/greek/releases/sblgnt/ae39711d7843b2902d54993e432de9c12d6a4b9a/lexicon.json",
+        "repository": "https://github.com/jhonnyisaacc/davar",
+        "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
+        "sha256": "54fa36644dc9f58b51e66d313a9292ea593c897ba3f77a71ca1d49f29a34699c",
+        "visibility": "public"
+      },
+      {
+        "id": "source:shaul-juan_1_testigo_cordero",
+        "kind": "published_note",
+        "owner": "shaul",
+        "path": "content/besorah/juan_1_testigo_cordero.md",
+        "repository": "https://github.com/jhonnyisaacc/shaul",
+        "revision": "8c94b0fe9eca817e22340430309801d0ef76125b",
+        "sha256": "3145ac300d932f7a1a9d4f2f8a61fe4c41b4a6d1334bd3574fa9ed7f10a1a3be",
+        "visibility": "public"
+      },
+      {
+        "id": "source:shaul-son-of-man",
+        "kind": "knowledge_record",
+        "owner": "shaul",
+        "path": "knowledge/concepts/son-of-man.yml",
+        "repository": "https://github.com/jhonnyisaacc/shaul",
+        "revision": "8c94b0fe9eca817e22340430309801d0ef76125b",
+        "sha256": "2149ef22e2ab22af9957ddf7c260960081616827af4f5bdb270a9f5aaf43c701",
+        "visibility": "public"
+      },
+      {
+        "id": "source:tth",
+        "kind": "dataset",
+        "owner": "davar",
+        "path": "data/tth_2/json/iojanan.json",
+        "repository": "https://github.com/jhonnyisaacc/davar",
+        "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
+        "sha256": "3ceea9322f3706b119da0f9434dedadd3fbdae619df3a10c8669f6634f2cb3f0",
+        "visibility": "public"
+      }
+    ],
+    "spans": [
+      {
+        "end_ordinal": 18,
+        "id": "span:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:17-18",
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/1"
+          },
+          "origin": "authored",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:authored-spans",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "start_ordinal": 17
+      },
+      {
+        "end_ordinal": 24,
+        "id": "span:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:21-24",
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/2"
+          },
+          "origin": "authored",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:authored-spans",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "start_ordinal": 21
+      }
+    ],
+    "tokens": [
+      {
+        "annotations": {
+          "prefixes": [
+            "Hc"
+          ]
+        },
+        "id": "token:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:1",
+        "lexical_refs": [
+          {
+            "code": "Hc",
+            "namespace": "davar-prefix"
+          },
+          {
+            "code": "H559",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 1,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0/verses/50/words/0"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:delitzsch",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "text": "וַיֹּאמֶר"
+      },
+      {
+        "annotations": {
+          "prefixes": [
+            "Hd"
+          ]
+        },
+        "id": "token:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:10",
+        "lexical_refs": [
+          {
+            "code": "Hd",
+            "namespace": "davar-prefix"
+          },
+          {
+            "code": "H8064",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 10,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0/verses/50/words/9"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:delitzsch",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "text": "הַשָּׁמַיִם"
+      },
+      {
+        "annotations": {
+          "prefixes": []
+        },
+        "id": "token:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:11",
+        "lexical_refs": [
+          {
+            "code": "H5320",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 11,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0/verses/50/words/10"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:delitzsch",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "text": "נִפְתָּחִים"
+      },
+      {
+        "annotations": {
+          "prefixes": [
+            "Hc"
+          ]
+        },
+        "id": "token:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:12",
+        "lexical_refs": [
+          {
+            "code": "H4401",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 12,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0/verses/50/words/11"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:delitzsch",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "text": "וּמַלְאֲכֵי"
+      },
+      {
+        "annotations": {
+          "prefixes": []
+        },
+        "id": "token:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:13",
+        "lexical_refs": [
+          {
+            "code": "H430",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 13,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0/verses/50/words/12"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:delitzsch",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "text": "אֱלֹהִים"
+      },
+      {
+        "annotations": {
+          "prefixes": []
+        },
+        "id": "token:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:14",
+        "lexical_refs": [
+          {
+            "code": "H5927",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 14,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0/verses/50/words/13"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:delitzsch",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "text": "עֹלִים"
+      },
+      {
+        "annotations": {
+          "prefixes": [
+            "Hc"
+          ]
+        },
+        "id": "token:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:15",
+        "lexical_refs": [
+          {
+            "code": "Hc",
+            "namespace": "davar-prefix"
+          },
+          {
+            "code": "H3381",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 15,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0/verses/50/words/14"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:delitzsch",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "text": "וְיֹרְדִים"
+      },
+      {
+        "annotations": {
+          "prefixes": []
+        },
+        "id": "token:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:16",
+        "lexical_refs": [
+          {
+            "code": "H5921",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 16,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0/verses/50/words/15"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:delitzsch",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "text": "עַל"
+      },
+      {
+        "annotations": {
+          "prefixes": []
+        },
+        "id": "token:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:17",
+        "lexical_refs": [
+          {
+            "code": "H1121",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 17,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0/verses/50/words/16"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:delitzsch",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "text": "בֶּן־"
+      },
+      {
+        "annotations": {
+          "prefixes": [
+            "Hd"
+          ]
+        },
+        "id": "token:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:18",
+        "lexical_refs": [
+          {
+            "code": "Hd",
+            "namespace": "davar-prefix"
+          },
+          {
+            "code": "H120",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 18,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0/verses/50/words/17"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:delitzsch",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "text": "הָאָדָם׃"
+      },
+      {
+        "annotations": {
+          "prefixes": []
+        },
+        "id": "token:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:2",
+        "lexical_refs": [
+          {
+            "code": "H413",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 2,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0/verses/50/words/1"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:delitzsch",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "text": "אֵלָיו"
+      },
+      {
+        "annotations": {
+          "prefixes": []
+        },
+        "id": "token:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:3",
+        "lexical_refs": [
+          {
+            "code": "H543",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 3,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0/verses/50/words/2"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:delitzsch",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "text": "אָמֵן"
+      },
+      {
+        "annotations": {
+          "prefixes": []
+        },
+        "id": "token:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:4",
+        "lexical_refs": [
+          {
+            "code": "H543",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 4,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0/verses/50/words/3"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:delitzsch",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "text": "אָמֵן"
+      },
+      {
+        "annotations": {
+          "prefixes": []
+        },
+        "id": "token:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:5",
+        "lexical_refs": [
+          {
+            "code": "H589",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 5,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0/verses/50/words/4"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:delitzsch",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "text": "אֲנִי"
+      },
+      {
+        "annotations": {
+          "prefixes": []
+        },
+        "id": "token:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:6",
+        "lexical_refs": [
+          {
+            "code": "H559",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 6,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0/verses/50/words/5"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:delitzsch",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "text": "אֹמֵר"
+      },
+      {
+        "annotations": {
+          "prefixes": [
+            "Hl"
+          ]
+        },
+        "id": "token:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:7",
+        "lexical_refs": [
+          {
+            "code": "H3642",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 7,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0/verses/50/words/6"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:delitzsch",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "text": "לָכֶם"
+      },
+      {
+        "annotations": {
+          "prefixes": []
+        },
+        "id": "token:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:8",
+        "lexical_refs": [
+          {
+            "code": "H6258",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 8,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0/verses/50/words/7"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:delitzsch",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "text": "מֵעַתָּה"
+      },
+      {
+        "annotations": {
+          "prefixes": []
+        },
+        "id": "token:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:9",
+        "lexical_refs": [
+          {
+            "code": "H7200",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 9,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/0/verses/50/words/8"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:delitzsch",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_passage_id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "text": "תִּרְאוּ"
+      },
+      {
+        "annotations": {
+          "lemma": "καί",
+          "lemma_translit_en": "kai",
+          "lemma_translit_es": "kai",
+          "lemma_translit_he": "קאי",
+          "morph": "CONJ",
+          "translit_en": "kai",
+          "translit_es": "kai",
+          "translit_he": "קאי",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:1",
+        "lexical_refs": [
+          {
+            "code": "G2532",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 1,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/0"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 1,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#01=NKO",
+        "text": "καὶ"
+      },
+      {
+        "annotations": {
+          "lemma": "οὐρανός",
+          "lemma_translit_en": "ouranos",
+          "lemma_translit_es": "uranos",
+          "lemma_translit_he": "וראנוס",
+          "morph": "N-ASM",
+          "tagnt_index": 12,
+          "translit_en": "ouranon",
+          "translit_es": "uranon",
+          "translit_he": "וראנון",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:10",
+        "lexical_refs": [
+          {
+            "code": "G3772",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 10,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/9"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 12,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#12=NKO",
+        "text": "οὐρανὸν"
+      },
+      {
+        "annotations": {
+          "lemma": "ἀνοίγω",
+          "lemma_translit_en": "anoigō",
+          "lemma_translit_es": "anoigo",
+          "lemma_translit_he": "אנויגו",
+          "morph": "V-2RAP-ASM",
+          "tagnt_index": 13,
+          "translit_en": "aneōgota",
+          "translit_es": "aneoigota",
+          "translit_he": "אנאויגוטא",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:11",
+        "lexical_refs": [
+          {
+            "code": "G0455",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 11,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/10"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 13,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#13=NKO",
+        "text": "ἀνεῳγότα"
+      },
+      {
+        "annotations": {
+          "lemma": "καί",
+          "lemma_translit_en": "kai",
+          "lemma_translit_es": "kai",
+          "lemma_translit_he": "קאי",
+          "morph": "CONJ",
+          "tagnt_index": 14,
+          "translit_en": "kai",
+          "translit_es": "kai",
+          "translit_he": "קאי",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:12",
+        "lexical_refs": [
+          {
+            "code": "G2532",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 12,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/11"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 14,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#14=NKO",
+        "text": "καὶ"
+      },
+      {
+        "annotations": {
+          "lemma": "ὁ",
+          "lemma_translit_en": "ho",
+          "lemma_translit_es": "ho",
+          "lemma_translit_he": "הו",
+          "morph": "T-APM",
+          "tagnt_index": 15,
+          "translit_en": "tous",
+          "translit_es": "tus",
+          "translit_he": "טוס",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:13",
+        "lexical_refs": [
+          {
+            "code": "G3588",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 13,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/12"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 15,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#15=NKO",
+        "text": "τοὺς"
+      },
+      {
+        "annotations": {
+          "lemma": "ἄγγελος",
+          "lemma_translit_en": "angelos",
+          "lemma_translit_es": "angelos",
+          "lemma_translit_he": "אנגאלוס",
+          "morph": "N-APM",
+          "tagnt_index": 16,
+          "translit_en": "angelous",
+          "translit_es": "angelus",
+          "translit_he": "אנגאלוס",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:14",
+        "lexical_refs": [
+          {
+            "code": "G0032G",
+            "namespace": "tagnt"
+          }
+        ],
+        "ordinal": 14,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/13"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 16,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#16=NKO",
+        "text": "ἀγγέλους"
+      },
+      {
+        "annotations": {
+          "lemma": "ὁ",
+          "lemma_translit_en": "ho",
+          "lemma_translit_es": "ho",
+          "lemma_translit_he": "הו",
+          "morph": "T-GSM",
+          "tagnt_index": 17,
+          "translit_en": "tou",
+          "translit_es": "tu",
+          "translit_he": "טו",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:15",
+        "lexical_refs": [
+          {
+            "code": "G3588",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 15,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/14"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 17,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#17=NKO",
+        "text": "τοῦ"
+      },
+      {
+        "annotations": {
+          "lemma": "θεός",
+          "lemma_translit_en": "theos",
+          "lemma_translit_es": "teos",
+          "lemma_translit_he": "תאוס",
+          "morph": "N-GSM-T",
+          "tagnt_index": 18,
+          "translit_en": "theou",
+          "translit_es": "teu",
+          "translit_he": "תאו",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:16",
+        "lexical_refs": [
+          {
+            "code": "G2316",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 16,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/15"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 18,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#18=NKO",
+        "text": "θεοῦ"
+      },
+      {
+        "annotations": {
+          "lemma": "ἀναβαίνω",
+          "lemma_translit_en": "anabainō",
+          "lemma_translit_es": "anabaino",
+          "lemma_translit_he": "אנאבאינו",
+          "morph": "V-PAP-APM",
+          "tagnt_index": 19,
+          "translit_en": "anabainontas",
+          "translit_es": "anabainontas",
+          "translit_he": "אנאבאינונטאס",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:17",
+        "lexical_refs": [
+          {
+            "code": "G0305",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 17,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/16"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 19,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#19=NKO",
+        "text": "ἀναβαίνοντας"
+      },
+      {
+        "annotations": {
+          "lemma": "καί",
+          "lemma_translit_en": "kai",
+          "lemma_translit_es": "kai",
+          "lemma_translit_he": "קאי",
+          "morph": "CONJ",
+          "tagnt_index": 20,
+          "translit_en": "kai",
+          "translit_es": "kai",
+          "translit_he": "קאי",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:18",
+        "lexical_refs": [
+          {
+            "code": "G2532",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 18,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/17"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 20,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#20=NKO",
+        "text": "καὶ"
+      },
+      {
+        "annotations": {
+          "lemma": "καταβαίνω",
+          "lemma_translit_en": "katabainō",
+          "lemma_translit_es": "katabaino",
+          "lemma_translit_he": "קאטאבאינו",
+          "morph": "V-PAP-APM",
+          "tagnt_index": 21,
+          "translit_en": "katabainontas",
+          "translit_es": "katabainontas",
+          "translit_he": "קאטאבאינונטאס",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:19",
+        "lexical_refs": [
+          {
+            "code": "G2597",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 19,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/18"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 21,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#21=NKO",
+        "text": "καταβαίνοντας"
+      },
+      {
+        "annotations": {
+          "lemma": "λέγω",
+          "lemma_translit_en": "legō",
+          "lemma_translit_es": "lego",
+          "lemma_translit_he": "לאגו",
+          "morph": "V-PAI-3S",
+          "translit_en": "legei",
+          "translit_es": "legei",
+          "translit_he": "לאגי",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:2",
+        "lexical_refs": [
+          {
+            "code": "G3004G",
+            "namespace": "tagnt"
+          }
+        ],
+        "ordinal": 2,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/1"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 2,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#02=NKO",
+        "text": "λέγει"
+      },
+      {
+        "annotations": {
+          "lemma": "ἐπί",
+          "lemma_translit_en": "epi",
+          "lemma_translit_es": "epi",
+          "lemma_translit_he": "אפי",
+          "morph": "PREP",
+          "tagnt_index": 22,
+          "translit_en": "epi",
+          "translit_es": "epi",
+          "translit_he": "אפי",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:20",
+        "lexical_refs": [
+          {
+            "code": "G1909",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 20,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/19"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 22,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#22=NKO",
+        "text": "ἐπὶ"
+      },
+      {
+        "annotations": {
+          "lemma": "ὁ",
+          "lemma_translit_en": "ho",
+          "lemma_translit_es": "ho",
+          "lemma_translit_he": "הו",
+          "morph": "T-ASM",
+          "tagnt_index": 23,
+          "translit_en": "ton",
+          "translit_es": "ton",
+          "translit_he": "טון",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:21",
+        "lexical_refs": [
+          {
+            "code": "G3588",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 21,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/20"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 23,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#23=NKO",
+        "text": "τὸν"
+      },
+      {
+        "annotations": {
+          "lemma": "υἱός",
+          "lemma_translit_en": "uhios",
+          "lemma_translit_es": "huios",
+          "lemma_translit_he": "הויוס",
+          "morph": "N-ASM-T",
+          "tagnt_index": 24,
+          "translit_en": "huion",
+          "translit_es": "huion",
+          "translit_he": "הויון",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:22",
+        "lexical_refs": [
+          {
+            "code": "G5207",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 22,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/21"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 24,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#24=NKO",
+        "text": "υἱὸν"
+      },
+      {
+        "annotations": {
+          "lemma": "ὁ",
+          "lemma_translit_en": "ho",
+          "lemma_translit_es": "ho",
+          "lemma_translit_he": "הו",
+          "morph": "T-GSM",
+          "tagnt_index": 25,
+          "translit_en": "tou",
+          "translit_es": "tu",
+          "translit_he": "טו",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:23",
+        "lexical_refs": [
+          {
+            "code": "G3588",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 23,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/22"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 25,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#25=NKO",
+        "text": "τοῦ"
+      },
+      {
+        "annotations": {
+          "lemma": "ἄνθρωπος",
+          "lemma_translit_en": "anthrōpos",
+          "lemma_translit_es": "antropos",
+          "lemma_translit_he": "אנתרופוס",
+          "morph": "N-GSM-T",
+          "tagnt_index": 26,
+          "translit_en": "anthrōpou",
+          "translit_es": "antropu",
+          "translit_he": "אנתרופו",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:24",
+        "lexical_refs": [
+          {
+            "code": "G0444",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 24,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/23"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 26,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#26=NKO",
+        "text": "ἀνθρώπου."
+      },
+      {
+        "annotations": {
+          "lemma": "αὐτός",
+          "lemma_translit_en": "autos",
+          "lemma_translit_es": "autos",
+          "lemma_translit_he": "אוטוס",
+          "morph": "P-DSM",
+          "translit_en": "autō",
+          "translit_es": "autoi",
+          "translit_he": "אוטוי",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:3",
+        "lexical_refs": [
+          {
+            "code": "G0846",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 3,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/2"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 3,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#03=NKO",
+        "text": "αὐτῷ·"
+      },
+      {
+        "annotations": {
+          "lemma": "ἀμήν",
+          "lemma_translit_en": "amēn",
+          "lemma_translit_es": "amen",
+          "lemma_translit_he": "אמין",
+          "morph": "INJ-HEB",
+          "translit_en": "amēn",
+          "translit_es": "amen",
+          "translit_he": "אמין",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:4",
+        "lexical_refs": [
+          {
+            "code": "G0281",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 4,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/3"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 4,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#04=NKO",
+        "text": "ἀμὴν"
+      },
+      {
+        "annotations": {
+          "lemma": "ἀμήν",
+          "lemma_translit_en": "amēn",
+          "lemma_translit_es": "amen",
+          "lemma_translit_he": "אמין",
+          "morph": "INJ-HEB",
+          "translit_en": "amēn",
+          "translit_es": "amen",
+          "translit_he": "אמין",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:5",
+        "lexical_refs": [
+          {
+            "code": "G0281",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 5,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/4"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 5,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#05=NKO",
+        "text": "ἀμὴν"
+      },
+      {
+        "annotations": {
+          "lemma": "λέγω",
+          "lemma_translit_en": "legō",
+          "lemma_translit_es": "lego",
+          "lemma_translit_he": "לאגו",
+          "morph": "V-PAI-1S",
+          "translit_en": "legō",
+          "translit_es": "lego",
+          "translit_he": "לאגו",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:6",
+        "lexical_refs": [
+          {
+            "code": "G3004G",
+            "namespace": "tagnt"
+          }
+        ],
+        "ordinal": 6,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/5"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 6,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#06=NKO",
+        "text": "λέγω"
+      },
+      {
+        "annotations": {
+          "lemma": "σύ",
+          "lemma_translit_en": "su",
+          "lemma_translit_es": "si",
+          "lemma_translit_he": "סי",
+          "morph": "P-2DP",
+          "translit_en": "humin",
+          "translit_es": "himin",
+          "translit_he": "הימין",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:7",
+        "lexical_refs": [
+          {
+            "code": "G4771",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 7,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/6"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 7,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#07=NKO",
+        "text": "ὑμῖν"
+      },
+      {
+        "annotations": {
+          "lemma": "ὀπτάνομαι",
+          "lemma_translit_en": "optanomai",
+          "lemma_translit_es": "optanomai",
+          "lemma_translit_he": "ופטאנומאי",
+          "morph": "V-FDI-2P",
+          "tagnt_index": 10,
+          "translit_en": "opsesthe",
+          "translit_es": "opseste",
+          "translit_he": "ופסאסתא",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:8",
+        "lexical_refs": [
+          {
+            "code": "G3700G",
+            "namespace": "tagnt"
+          }
+        ],
+        "ordinal": 8,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/7"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 10,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#10=NKO",
+        "text": "ὄψεσθε"
+      },
+      {
+        "annotations": {
+          "lemma": "ὁ",
+          "lemma_translit_en": "ho",
+          "lemma_translit_es": "ho",
+          "lemma_translit_he": "הו",
+          "morph": "T-ASM",
+          "tagnt_index": 11,
+          "translit_en": "ton",
+          "translit_es": "ton",
+          "translit_he": "טון",
+          "word_type": "NKO"
+        },
+        "id": "token:passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6:9",
+        "lexical_refs": [
+          {
+            "code": "G3588",
+            "namespace": "strong"
+          }
+        ],
+        "ordinal": 9,
+        "provenance": {
+          "locator": {
+            "kind": "json",
+            "pointer": "/verses/46/words/8"
+          },
+          "origin": "source",
+          "publication": "draft",
+          "review": "unreviewed",
+          "source_id": "source:greek",
+          "transformation": "normalized",
+          "visibility": "public"
+        },
+        "source_index": 11,
+        "source_passage_id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "source_token_ref": "Jhn.1.51#11=NKO",
+        "text": "τὸν"
+      }
+    ]
+  },
+  "reference": {
+    "book_id": "john",
+    "chapter": 1,
+    "kind": "verse",
+    "system_id": "davar-v1",
+    "verse": 51
+  }
+}

@@ -1,0 +1,877 @@
+[
+  {
+    "namespace": "davar",
+    "alias": "Genesis",
+    "book_id": "genesis"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Exodus",
+    "book_id": "exodus"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Leviticus",
+    "book_id": "leviticus"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Numbers",
+    "book_id": "numbers"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Deuteronomy",
+    "book_id": "deuteronomy"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Joshua",
+    "book_id": "joshua"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Judges",
+    "book_id": "judges"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Samuel1",
+    "book_id": "samuel1"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Samuel2",
+    "book_id": "samuel2"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Kings1",
+    "book_id": "kings1"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Kings2",
+    "book_id": "kings2"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Isaiah",
+    "book_id": "isaiah"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Jeremiah",
+    "book_id": "jeremiah"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Ezekiel",
+    "book_id": "ezekiel"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Hosea",
+    "book_id": "hosea"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Joel",
+    "book_id": "joel"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Amos",
+    "book_id": "amos"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Obadiah",
+    "book_id": "obadiah"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Jonah",
+    "book_id": "jonah"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Micah",
+    "book_id": "micah"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Nahum",
+    "book_id": "nahum"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Habakkuk",
+    "book_id": "habakkuk"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Zephaniah",
+    "book_id": "zephaniah"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Haggai",
+    "book_id": "haggai"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Zechariah",
+    "book_id": "zechariah"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Malachi",
+    "book_id": "malachi"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Psalms",
+    "book_id": "psalms"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Proverbs",
+    "book_id": "proverbs"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Job",
+    "book_id": "job"
+  },
+  {
+    "namespace": "davar",
+    "alias": "SongOfSolomon",
+    "book_id": "songofsolomon"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Ruth",
+    "book_id": "ruth"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Lamentations",
+    "book_id": "lamentations"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Ecclesiastes",
+    "book_id": "ecclesiastes"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Esther",
+    "book_id": "esther"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Daniel",
+    "book_id": "daniel"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Ezra",
+    "book_id": "ezra"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Nehemiah",
+    "book_id": "nehemiah"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Chronicles1",
+    "book_id": "chronicles1"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Chronicles2",
+    "book_id": "chronicles2"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Matthew",
+    "book_id": "matthew"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Mark",
+    "book_id": "mark"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Luke",
+    "book_id": "luke"
+  },
+  {
+    "namespace": "davar",
+    "alias": "John",
+    "book_id": "john"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Acts",
+    "book_id": "acts"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Romans",
+    "book_id": "romans"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Corinthians1",
+    "book_id": "corinthians1"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Corinthians2",
+    "book_id": "corinthians2"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Galatians",
+    "book_id": "galatians"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Ephesians",
+    "book_id": "ephesians"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Philippians",
+    "book_id": "philippians"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Colossians",
+    "book_id": "colossians"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Thessalonians1",
+    "book_id": "thessalonians1"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Thessalonians2",
+    "book_id": "thessalonians2"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Timothy1",
+    "book_id": "timothy1"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Timothy2",
+    "book_id": "timothy2"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Titus",
+    "book_id": "titus"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Philemon",
+    "book_id": "philemon"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Hebrews",
+    "book_id": "hebrews"
+  },
+  {
+    "namespace": "davar",
+    "alias": "James",
+    "book_id": "james"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Peter1",
+    "book_id": "peter1"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Peter2",
+    "book_id": "peter2"
+  },
+  {
+    "namespace": "davar",
+    "alias": "John1",
+    "book_id": "john1"
+  },
+  {
+    "namespace": "davar",
+    "alias": "John2",
+    "book_id": "john2"
+  },
+  {
+    "namespace": "davar",
+    "alias": "John3",
+    "book_id": "john3"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Jude",
+    "book_id": "jude"
+  },
+  {
+    "namespace": "davar",
+    "alias": "Revelation",
+    "book_id": "revelation"
+  },
+  {
+    "namespace": "oe",
+    "alias": "genesis",
+    "book_id": "genesis"
+  },
+  {
+    "namespace": "oe",
+    "alias": "exodus",
+    "book_id": "exodus"
+  },
+  {
+    "namespace": "oe",
+    "alias": "leviticus",
+    "book_id": "leviticus"
+  },
+  {
+    "namespace": "oe",
+    "alias": "numbers",
+    "book_id": "numbers"
+  },
+  {
+    "namespace": "oe",
+    "alias": "deuteronomy",
+    "book_id": "deuteronomy"
+  },
+  {
+    "namespace": "oe",
+    "alias": "joshua",
+    "book_id": "joshua"
+  },
+  {
+    "namespace": "oe",
+    "alias": "judges",
+    "book_id": "judges"
+  },
+  {
+    "namespace": "oe",
+    "alias": "isamuel",
+    "book_id": "samuel1"
+  },
+  {
+    "namespace": "oe",
+    "alias": "iisamuel",
+    "book_id": "samuel2"
+  },
+  {
+    "namespace": "oe",
+    "alias": "ikings",
+    "book_id": "kings1"
+  },
+  {
+    "namespace": "oe",
+    "alias": "iikings",
+    "book_id": "kings2"
+  },
+  {
+    "namespace": "oe",
+    "alias": "isaiah",
+    "book_id": "isaiah"
+  },
+  {
+    "namespace": "oe",
+    "alias": "jeremiah",
+    "book_id": "jeremiah"
+  },
+  {
+    "namespace": "oe",
+    "alias": "ezekiel",
+    "book_id": "ezekiel"
+  },
+  {
+    "namespace": "oe",
+    "alias": "hosea",
+    "book_id": "hosea"
+  },
+  {
+    "namespace": "oe",
+    "alias": "joel",
+    "book_id": "joel"
+  },
+  {
+    "namespace": "oe",
+    "alias": "amos",
+    "book_id": "amos"
+  },
+  {
+    "namespace": "oe",
+    "alias": "obadiah",
+    "book_id": "obadiah"
+  },
+  {
+    "namespace": "oe",
+    "alias": "jonah",
+    "book_id": "jonah"
+  },
+  {
+    "namespace": "oe",
+    "alias": "micah",
+    "book_id": "micah"
+  },
+  {
+    "namespace": "oe",
+    "alias": "nahum",
+    "book_id": "nahum"
+  },
+  {
+    "namespace": "oe",
+    "alias": "habakkuk",
+    "book_id": "habakkuk"
+  },
+  {
+    "namespace": "oe",
+    "alias": "zephaniah",
+    "book_id": "zephaniah"
+  },
+  {
+    "namespace": "oe",
+    "alias": "haggai",
+    "book_id": "haggai"
+  },
+  {
+    "namespace": "oe",
+    "alias": "zechariah",
+    "book_id": "zechariah"
+  },
+  {
+    "namespace": "oe",
+    "alias": "malachi",
+    "book_id": "malachi"
+  },
+  {
+    "namespace": "oe",
+    "alias": "psalms",
+    "book_id": "psalms"
+  },
+  {
+    "namespace": "oe",
+    "alias": "proverbs",
+    "book_id": "proverbs"
+  },
+  {
+    "namespace": "oe",
+    "alias": "job",
+    "book_id": "job"
+  },
+  {
+    "namespace": "oe",
+    "alias": "songofsolomon",
+    "book_id": "songofsolomon"
+  },
+  {
+    "namespace": "oe",
+    "alias": "ruth",
+    "book_id": "ruth"
+  },
+  {
+    "namespace": "oe",
+    "alias": "lamentations",
+    "book_id": "lamentations"
+  },
+  {
+    "namespace": "oe",
+    "alias": "ecclesiastes",
+    "book_id": "ecclesiastes"
+  },
+  {
+    "namespace": "oe",
+    "alias": "esther",
+    "book_id": "esther"
+  },
+  {
+    "namespace": "oe",
+    "alias": "daniel",
+    "book_id": "daniel"
+  },
+  {
+    "namespace": "oe",
+    "alias": "ezra",
+    "book_id": "ezra"
+  },
+  {
+    "namespace": "oe",
+    "alias": "nehemiah",
+    "book_id": "nehemiah"
+  },
+  {
+    "namespace": "oe",
+    "alias": "ichronicles",
+    "book_id": "chronicles1"
+  },
+  {
+    "namespace": "oe",
+    "alias": "iichronicles",
+    "book_id": "chronicles2"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "matthew",
+    "book_id": "matthew"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "mark",
+    "book_id": "mark"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "luke",
+    "book_id": "luke"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "john",
+    "book_id": "john"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "acts",
+    "book_id": "acts"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "romans",
+    "book_id": "romans"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "corinthians1",
+    "book_id": "corinthians1"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "corinthians2",
+    "book_id": "corinthians2"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "galatians",
+    "book_id": "galatians"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "ephesians",
+    "book_id": "ephesians"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "philippians",
+    "book_id": "philippians"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "colossians",
+    "book_id": "colossians"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "thessalonians1",
+    "book_id": "thessalonians1"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "thessalonians2",
+    "book_id": "thessalonians2"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "timothy1",
+    "book_id": "timothy1"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "timothy2",
+    "book_id": "timothy2"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "titus",
+    "book_id": "titus"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "philemon",
+    "book_id": "philemon"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "hebrews",
+    "book_id": "hebrews"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "james",
+    "book_id": "james"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "peter1",
+    "book_id": "peter1"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "peter2",
+    "book_id": "peter2"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "john1",
+    "book_id": "john1"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "john2",
+    "book_id": "john2"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "john3",
+    "book_id": "john3"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "jude",
+    "book_id": "jude"
+  },
+  {
+    "namespace": "delitzsch",
+    "alias": "revelation",
+    "book_id": "revelation"
+  },
+  {
+    "namespace": "tth",
+    "alias": "bereshit",
+    "book_id": "genesis"
+  },
+  {
+    "namespace": "tth",
+    "alias": "shemot",
+    "book_id": "exodus"
+  },
+  {
+    "namespace": "tth",
+    "alias": "vaikra",
+    "book_id": "leviticus"
+  },
+  {
+    "namespace": "tth",
+    "alias": "bamidbar",
+    "book_id": "numbers"
+  },
+  {
+    "namespace": "tth",
+    "alias": "devarim",
+    "book_id": "deuteronomy"
+  },
+  {
+    "namespace": "tth",
+    "alias": "iehoshua",
+    "book_id": "joshua"
+  },
+  {
+    "namespace": "tth",
+    "alias": "shoftim",
+    "book_id": "judges"
+  },
+  {
+    "namespace": "tth",
+    "alias": "shemuel_alef",
+    "book_id": "samuel1"
+  },
+  {
+    "namespace": "tth",
+    "alias": "shemuel_bet",
+    "book_id": "samuel2"
+  },
+  {
+    "namespace": "tth",
+    "alias": "melajim_alef",
+    "book_id": "kings1"
+  },
+  {
+    "namespace": "tth",
+    "alias": "melajim_bet",
+    "book_id": "kings2"
+  },
+  {
+    "namespace": "tth",
+    "alias": "ieshaiahu",
+    "book_id": "isaiah"
+  },
+  {
+    "namespace": "tth",
+    "alias": "irmeiahu",
+    "book_id": "jeremiah"
+  },
+  {
+    "namespace": "tth",
+    "alias": "iejezkel",
+    "book_id": "ezekiel"
+  },
+  {
+    "namespace": "tth",
+    "alias": "hoshea",
+    "book_id": "hosea"
+  },
+  {
+    "namespace": "tth",
+    "alias": "ioel",
+    "book_id": "joel"
+  },
+  {
+    "namespace": "tth",
+    "alias": "amos",
+    "book_id": "amos"
+  },
+  {
+    "namespace": "tth",
+    "alias": "ionah",
+    "book_id": "jonah"
+  },
+  {
+    "namespace": "tth",
+    "alias": "micah",
+    "book_id": "micah"
+  },
+  {
+    "namespace": "tth",
+    "alias": "najum",
+    "book_id": "nahum"
+  },
+  {
+    "namespace": "tth",
+    "alias": "jabakuk",
+    "book_id": "habakkuk"
+  },
+  {
+    "namespace": "tth",
+    "alias": "tzefaniah",
+    "book_id": "zephaniah"
+  },
+  {
+    "namespace": "tth",
+    "alias": "jagai",
+    "book_id": "haggai"
+  },
+  {
+    "namespace": "tth",
+    "alias": "zejariah",
+    "book_id": "zechariah"
+  },
+  {
+    "namespace": "tth",
+    "alias": "malaji",
+    "book_id": "malachi"
+  },
+  {
+    "namespace": "tth",
+    "alias": "tehilim",
+    "book_id": "psalms"
+  },
+  {
+    "namespace": "tth",
+    "alias": "mishlei",
+    "book_id": "proverbs"
+  },
+  {
+    "namespace": "tth",
+    "alias": "shir_hashirim",
+    "book_id": "songofsolomon"
+  },
+  {
+    "namespace": "tth",
+    "alias": "matityahu",
+    "book_id": "matthew"
+  },
+  {
+    "namespace": "tth",
+    "alias": "markos",
+    "book_id": "mark"
+  },
+  {
+    "namespace": "tth",
+    "alias": "lukas",
+    "book_id": "luke"
+  },
+  {
+    "namespace": "tth",
+    "alias": "iojanan",
+    "book_id": "john"
+  },
+  {
+    "namespace": "tth",
+    "alias": "maasei_hashlijim",
+    "book_id": "acts"
+  },
+  {
+    "namespace": "tth",
+    "alias": "romanos",
+    "book_id": "romans"
+  },
+  {
+    "namespace": "tth",
+    "alias": "galatas",
+    "book_id": "galatians"
+  },
+  {
+    "namespace": "tth",
+    "alias": "sodot",
+    "book_id": "revelation"
+  },
+  {
+    "namespace": "shaul",
+    "alias": "daniel",
+    "book_id": "daniel"
+  },
+  {
+    "namespace": "shaul",
+    "alias": "juan",
+    "book_id": "john"
+  },
+  {
+    "namespace": "shaul",
+    "alias": "iojanan",
+    "book_id": "john"
+  },
+  {
+    "namespace": "shaul",
+    "alias": "bereshit",
+    "book_id": "genesis"
+  },
+  {
+    "namespace": "shaul",
+    "alias": "yeshayahu",
+    "book_id": "isaiah"
+  },
+  {
+    "namespace": "shaul",
+    "alias": "malaji",
+    "book_id": "malachi"
+  },
+  {
+    "namespace": "shaul",
+    "alias": "devarim",
+    "book_id": "deuteronomy"
+  }
+]

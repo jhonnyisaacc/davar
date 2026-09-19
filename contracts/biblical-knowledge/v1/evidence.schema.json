@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://davar.bible/contracts/biblical-knowledge/v1/evidence.schema.json",
+  "title": "evidence",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "enum": [
+        "note",
+        "footnote",
+        "lexical_entry",
+        "mention"
+      ]
+    },
+    "targets": {
+      "type": "array",
+      "items": {
+        "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/target"
+      }
+    },
+    "content": {
+      "type": "object"
+    },
+    "provenance": {
+      "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/provenance"
+    }
+  },
+  "required": [
+    "id",
+    "kind",
+    "targets",
+    "content",
+    "provenance"
+  ],
+  "additionalProperties": false
+}

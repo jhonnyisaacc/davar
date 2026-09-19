@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://davar.bible/contracts/biblical-knowledge/v1/span.schema.json",
+  "title": "span",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_passage_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "start_ordinal": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "end_ordinal": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "provenance": {
+      "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/provenance"
+    }
+  },
+  "required": [
+    "id",
+    "source_passage_id",
+    "start_ordinal",
+    "end_ordinal",
+    "provenance"
+  ],
+  "additionalProperties": false
+}

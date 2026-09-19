@@ -1,0 +1,135 @@
+{
+  "contract_version": "1.0.0",
+  "files": [
+    {
+      "path": "bundles/daniel/7/13.json",
+      "sha256": "1f687fee80ad90ca2cbc0e71395e47b04182455f90a7e27d60b6ccf9b78ef41e"
+    },
+    {
+      "path": "bundles/john/1/1.json",
+      "sha256": "1e1cec4919312a337eb438d04bb18561c322158f4976d3355e284d7d471e4459"
+    },
+    {
+      "path": "bundles/john/1/51.json",
+      "sha256": "ebb7de2c06cc2dd6b0a5c26d032b1272a6a831572653249c86bdc473741cd675"
+    },
+    {
+      "path": "records/records.json",
+      "sha256": "f6c53eed62b2ec175d3ad9865958b578be9638e7f1aa19cbe2c86d91ec6df68b"
+    }
+  ],
+  "generator_version": "1.0.0",
+  "input_manifest_digest": "258f6b80e6047d2b7f8a92f2f57e21cda5eba6bb1bd6776fe7a7533db4fbdad9",
+  "inputs": [
+    {
+      "id": "greek-lexicon",
+      "owner": "davar",
+      "path": "data/greek/preview/greek/releases/sblgnt/ae39711d7843b2902d54993e432de9c12d6a4b9a/lexicon.json",
+      "repository": "https://github.com/jhonnyisaacc/davar",
+      "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
+      "sha256": "54fa36644dc9f58b51e66d313a9292ea593c897ba3f77a71ca1d49f29a34699c"
+    },
+    {
+      "id": "oe",
+      "owner": "davar",
+      "path": "data/oe/daniel/7.json",
+      "repository": "https://github.com/jhonnyisaacc/davar",
+      "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
+      "sha256": "c7a7f5aa460b695a23addde487090f39d6d8aee9aa4b51e5576f39b63e6a92d1"
+    },
+    {
+      "id": "delitzsch",
+      "owner": "davar",
+      "path": "data/delitzsch_parsed/john/1.json",
+      "repository": "https://github.com/jhonnyisaacc/davar",
+      "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
+      "sha256": "af360e54d2eb3874b3319fd330ea5a5b30a706fd4f3351d8198f77b72abfdf5f"
+    },
+    {
+      "id": "greek",
+      "owner": "davar",
+      "path": "data/greek/preview/greek/releases/sblgnt/ae39711d7843b2902d54993e432de9c12d6a4b9a/books/john/1.json",
+      "repository": "https://github.com/jhonnyisaacc/davar",
+      "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
+      "sha256": "263c2adfacffef25bbd80e7f6268c9cdf5986c1fc90d4220ecde02f2d6df16b2"
+    },
+    {
+      "id": "tth",
+      "owner": "davar",
+      "path": "data/tth_2/json/iojanan.json",
+      "repository": "https://github.com/jhonnyisaacc/davar",
+      "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
+      "sha256": "3ceea9322f3706b119da0f9434dedadd3fbdae619df3a10c8669f6634f2cb3f0"
+    },
+    {
+      "id": "bdb",
+      "owner": "davar",
+      "path": "data/dict/lexicon/words.json",
+      "repository": "https://github.com/jhonnyisaacc/davar",
+      "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
+      "sha256": "f940146b0f4cd917286da893fa5b7b783c8dd110dd386d29e1b8d3bc07550034"
+    },
+    {
+      "id": "custom",
+      "owner": "davar",
+      "path": "data/dict/lexicon/custom_definitions.json",
+      "repository": "https://github.com/jhonnyisaacc/davar",
+      "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
+      "sha256": "856e063a90c18b529a75e39e2a6d53693eaed6afec8027e57b5f842abe6aa992"
+    },
+    {
+      "fixture_path": "tests/fixtures/knowledge/shaul/knowledge/concepts/son-of-man.yml",
+      "id": "shaul-son-of-man",
+      "owner": "shaul",
+      "path": "knowledge/concepts/son-of-man.yml",
+      "repository": "https://github.com/jhonnyisaacc/shaul",
+      "revision": "8c94b0fe9eca817e22340430309801d0ef76125b",
+      "sha256": "2149ef22e2ab22af9957ddf7c260960081616827af4f5bdb270a9f5aaf43c701"
+    },
+    {
+      "fixture_path": "tests/fixtures/knowledge/shaul/knowledge/words/bar-enash-ar.yml",
+      "id": "shaul-bar-enash-ar",
+      "owner": "shaul",
+      "path": "knowledge/words/bar-enash-ar.yml",
+      "repository": "https://github.com/jhonnyisaacc/shaul",
+      "revision": "8c94b0fe9eca817e22340430309801d0ef76125b",
+      "sha256": "f311c24a6d9fa2cd4c9ec1781f09a9e466c19e423b3444f1de6ce9a502894819"
+    },
+    {
+      "fixture_path": "tests/fixtures/knowledge/shaul/knowledge/words/ben-ha-adam-he.yml",
+      "id": "shaul-ben-ha-adam-he",
+      "owner": "shaul",
+      "path": "knowledge/words/ben-ha-adam-he.yml",
+      "repository": "https://github.com/jhonnyisaacc/shaul",
+      "revision": "8c94b0fe9eca817e22340430309801d0ef76125b",
+      "sha256": "f507de3eb1221e3cd049a4bde306d8b22ad3ad878bf7e203dcdb4aa3b79e442a"
+    },
+    {
+      "fixture_path": "tests/fixtures/knowledge/shaul/knowledge/relations/bar-enash-expresses-son-of-man.yml",
+      "id": "shaul-bar-enash-expresses-son-of-man",
+      "owner": "shaul",
+      "path": "knowledge/relations/bar-enash-expresses-son-of-man.yml",
+      "repository": "https://github.com/jhonnyisaacc/shaul",
+      "revision": "8c94b0fe9eca817e22340430309801d0ef76125b",
+      "sha256": "7342af11f85f0b61631da9cecd4a0b7445ca75a6670f1ae66d17096f01603751"
+    },
+    {
+      "fixture_path": "tests/fixtures/knowledge/shaul/knowledge/mentions/son-of-man-daniel.yml",
+      "id": "shaul-son-of-man-daniel",
+      "owner": "shaul",
+      "path": "knowledge/mentions/son-of-man-daniel.yml",
+      "repository": "https://github.com/jhonnyisaacc/shaul",
+      "revision": "8c94b0fe9eca817e22340430309801d0ef76125b",
+      "sha256": "caa060c91b8821474782efa606b0b570c1dd3540411d91c83e78cf032ff4e597"
+    },
+    {
+      "fixture_path": "tests/fixtures/knowledge/shaul/content/besorah/juan_1_testigo_cordero.md",
+      "id": "shaul-juan_1_testigo_cordero",
+      "owner": "shaul",
+      "path": "content/besorah/juan_1_testigo_cordero.md",
+      "repository": "https://github.com/jhonnyisaacc/shaul",
+      "revision": "8c94b0fe9eca817e22340430309801d0ef76125b",
+      "sha256": "3145ac300d932f7a1a9d4f2f8a61fe4c41b4a6d1334bd3574fa9ed7f10a1a3be"
+    }
+  ]
+}
