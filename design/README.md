@@ -33,7 +33,14 @@ The original Qahal Pen file must stay byte-for-byte untouched. Assemblies screen
 
 ## How `davar.pen` is organized
 
-Horizontal rows read left to right as user stories.
+Each product section has **two lanes**, not two libraries:
+
+- **Mobile · 390×844** — phone device frames, liquid-glass nav pinned to the bottom
+- **Web · 1280×800** — desktop panes, top chrome
+
+Lanes sit one under the other (Mobile, then Web, then notes). Screens in both lanes **instance the same reusable components**. Only chrome and density change: `Nav/LiquidGlass` on phones, `Nav/Desktop` (or shipping `Nav/CurrentTopDesktop` on baseline) on web.
+
+Reusable masters live as a column to the right of the sections (`x ≈ 6400`). Do not duplicate them per platform.
 
 | Section | Contents |
 | --- | --- |
@@ -103,6 +110,20 @@ Stable IDs for implementation issues/PRs:
 
 Example: `DAVAR-COMMENTARY-02 — Verse commentary list`
 
+Web counterparts (same components, desktop chrome):
+
+| ID | Role |
+| --- | --- |
+| `DAVAR-BASE-09` | Shipping web reading (current top bar) |
+| `DAVAR-NAV-07` | Unified web · Scripture |
+| `DAVAR-NAV-08` | Unified web · Commentary |
+| `DAVAR-READ-06` | Scripture library + verse + word |
+| `DAVAR-COMMENTARY-07` | Verse + notas columns |
+| `DAVAR-CALENDAR-06` | Today + date detail |
+| `DAVAR-ASSEMBLIES-39` | Discover list + congregation |
+| `DAVAR-ASSEMBLIES-40` | Lead / manage |
+| `DAVAR-CROSS-03` | Scripture + commentary / calendar side pane |
+
 ## Light and dark
 
 Every foundational token is themed (`mode: light | dark`) where it changes.
@@ -111,8 +132,9 @@ Major proof points: foundations pair, `DAVAR-BASE-08`, `DAVAR-NAV-06`, `DAVAR-AS
 
 ## Mobile and desktop
 
-- Phone frames are 390 wide, content stacked, liquid-glass nav last in the stack.
-- Desktop frames are ~1100×640–700 with `Nav/Desktop`.
+- **Phone:** `390×844`, `clip: true`. Status bar, body (`height: fill_container`), then a 96px nav pad with `Nav/LiquidGlass` (374×72). This is a device frame, not a content-height card.
+- **Web:** `1280×800`, `clip: true`. `Nav/Desktop` (unified IA) or `Nav/CurrentTopDesktop` (shipping baseline), then a multi-column desk body.
+- Both platforms share Verse/Block, Word/Token, Commentary/Card, Calendar/Card, Congregation/Row, buttons, chips, tabs, and states.
 - Tablet is not specified unless a flow already forces it.
 
 ## Audit notes (do not skip)
