@@ -43,7 +43,10 @@ Bun.serve({
 			}
 
 			return new Response(file, {
-				headers: { "Content-Type": "application/json; charset=utf-8" },
+				headers: {
+					"Content-Type": "application/json; charset=utf-8",
+					"Cache-Control": "public, max-age=300, must-revalidate",
+				},
 			});
 		}
 
@@ -51,7 +54,17 @@ Bun.serve({
 			const assetPath = pathname.startsWith("/") ? pathname.slice(1) : pathname;
 			const file = Bun.file(new URL(assetPath, distDir));
 			if (await file.exists()) {
-				return new Response(file);
+				const isVersionDocument =
+					pathname === "/data/version.json" ||
+					pathname === "/data/manifest.json" ||
+					pathname === "/data/metadata.json";
+				return new Response(file, {
+					headers: {
+						"Cache-Control": isVersionDocument
+							? "public, max-age=60, must-revalidate"
+							: "public, max-age=31536000, immutable",
+					},
+				});
 			}
 			return new Response("Not Found", { status: 404 });
 		}
@@ -67,7 +80,10 @@ Bun.serve({
 
 		const htmlFile = Bun.file(new URL("index.html", distDir));
 		return new Response(htmlFile, {
-			headers: { "Content-Type": "text/html; charset=utf-8" },
+			headers: {
+				"Content-Type": "text/html; charset=utf-8",
+				"Cache-Control": "public, max-age=0, must-revalidate",
+			},
 		});
 	},
 });

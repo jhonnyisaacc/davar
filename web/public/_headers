@@ -1,0 +1,20 @@
+/data/version.json
+  Cache-Control: public, max-age=60, must-revalidate
+
+/data/manifest.json
+  Cache-Control: public, max-age=60, must-revalidate
+
+/data/metadata.json
+  Cache-Control: public, max-age=60, must-revalidate
+
+/data/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/api/*
+  Cache-Control: public, max-age=300, must-revalidate
+
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate

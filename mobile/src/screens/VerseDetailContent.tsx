@@ -1291,34 +1291,48 @@ export const VerseDetailContent = () => {
             : language === "es"
               ? "es"
               : "en";
+        const chapterOptions = {
+          language: hebrewTranslationLanguage,
+          hebrewOnly: hideTranslations,
+          isConnected,
+          referenceMode: translationOnly
+            ? ("translation" as const)
+            : ("source" as const),
+          besorahTextVersion,
+        };
         const verses = useGreekSource
           ? await fetchGreekChapterVerses(bookId, chapter, {
               language: greekOverlayLanguage,
               isConnected,
             })
           : await fetchChapterVerses(bookId, chapter, {
-              language: hebrewTranslationLanguage,
-              showDss: showQumran,
-              hebrewOnly: hideTranslations,
-              isConnected,
-              referenceMode: translationOnly ? "translation" : "source",
-              besorahTextVersion,
+              ...chapterOptions,
+              showDss: false,
             });
         if (!isMounted) return;
-        if (
-          currentLoadRef.current.bookId !== bookId ||
-          currentLoadRef.current.chapter !== chapter ||
-          currentLoadRef.current.language !== language ||
-          currentLoadRef.current.showQumran !== showQumran ||
-          currentLoadRef.current.translationOnly !== translationOnly ||
-          currentLoadRef.current.besorahTextVersion !== besorahTextVersion ||
-          currentLoadRef.current.besorahLanguage !== besorahLanguage ||
-          currentLoadRef.current.isBesorah !== isBesorah ||
-          currentLoadRef.current.isConnected !== isConnected
-        ) {
+        const isCurrentLoad = () =>
+          currentLoadRef.current.bookId === bookId &&
+          currentLoadRef.current.chapter === chapter &&
+          currentLoadRef.current.language === language &&
+          currentLoadRef.current.showQumran === showQumran &&
+          currentLoadRef.current.translationOnly === translationOnly &&
+          currentLoadRef.current.besorahTextVersion === besorahTextVersion &&
+          currentLoadRef.current.besorahLanguage === besorahLanguage &&
+          currentLoadRef.current.isBesorah === isBesorah &&
+          currentLoadRef.current.isConnected === isConnected;
+        if (!isCurrentLoad()) {
           return;
         }
         setChapterVerses(verses);
+        if (isMounted) setIsLoading(false);
+        if (!useGreekSource && showQumran) {
+          const enriched = await fetchChapterVerses(bookId, chapter, {
+            ...chapterOptions,
+            showDss: true,
+          });
+          if (!isMounted || !isCurrentLoad()) return;
+          setChapterVerses(enriched);
+        }
         // Scroll to the pending target verse after cross-book/chapter navigation
         if (pendingScrollVerseRef.current !== null) {
           const targetVerse = pendingScrollVerseRef.current;

@@ -3,10 +3,10 @@ name: Web CI
 on:
   push:
     branches: [main, apocalipsis]
-    paths: ["web/**", "shared/**", ".github/workflows/web-ci.yml"]
+    paths: ["web/**", "shared/**", "scripts/generate-static-data/**", ".github/workflows/web-ci.yml"]
   pull_request:
     branches: [main, apocalipsis]
-    paths: ["web/**", "shared/**", ".github/workflows/web-ci.yml"]
+    paths: ["web/**", "shared/**", "scripts/generate-static-data/**", ".github/workflows/web-ci.yml"]
 
 permissions:
   contents: read
@@ -54,6 +54,11 @@ jobs:
         run: |
           cd web
           bun run lint
+
+      - name: Run static-data loader tests
+        run: |
+          cd web
+          bun test src/app/services/staticData.loading.test.ts ../scripts/generate-static-data/lexicon-entries.test.ts
 
       - name: Run build
         run: |

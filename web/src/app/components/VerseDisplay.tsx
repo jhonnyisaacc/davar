@@ -40,6 +40,7 @@ interface VerseDisplayProps {
 		word: WordResponse,
 		context?: { chapter: number; verse: number },
 	) => void;
+	onWordHover?: (word: WordResponse) => void;
 	previousVerseSnippet?: string;
 	nextVerseSnippet?: string;
 	showOnboardingHint?: boolean;
@@ -74,6 +75,7 @@ export function VerseDisplay({
 	chapter,
 	language,
 	onWordClick,
+	onWordHover,
 	showOnboardingHint = false,
 	showQumran = false,
 	showFullChapter = false,
@@ -271,6 +273,7 @@ export function VerseDisplay({
 				<span key={word.position}>
 					<button
 						type="button"
+						onMouseEnter={() => onWordHover?.(word)}
 						onClick={() =>
 							onWordClick(word, {
 								chapter,
@@ -330,6 +333,7 @@ export function VerseDisplay({
 					translationOnly={translationOnly}
 					seferMode={seferMode}
 					onWordClick={onWordClick}
+					onWordHover={onWordHover}
 					showQumran={showQumran}
 					selectedWord={selectedWord}
 					selectedWordContext={selectedWordContext}

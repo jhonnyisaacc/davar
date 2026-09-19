@@ -7,6 +7,13 @@ import { createHash } from "crypto";
 import { existsSync } from "fs";
 import { mkdir, readdir, readFile, rm, writeFile } from "fs/promises";
 import { extname, join } from "path";
+import { buildLexiconAssets } from "../../shared/lexiconAssets";
+import {
+  canonicalBookIdFromTranslitStem,
+  splitDssBook,
+  splitDssTranslitBook,
+  splitTranslitBook,
+} from "./chapter-assets";
 import {
   BUNDLE_VERSIONS,
   CANONICAL_BOOK_ORDER,
@@ -429,9 +436,38 @@ const generateHutterChapters = async (): Promise<{
   return { books };
 };
 
+const writeChapterScopedBooks = async (
+  outRoot: string,
+  books: Record<string, JsonValue>,
+  split: (book: unknown) => Record<string, unknown>,
+  resolveBookId: (stem: string) => string | null = (stem) => stem,
+): Promise<number> => {
+  let written = 0;
+
+  for (const [stem, book] of Object.entries(books)) {
+    const bookId = resolveBookId(stem);
+    if (!bookId) continue;
+
+    const chapters = split(book);
+    for (const [chapter, payload] of Object.entries(chapters)) {
+      await mkdir(join(outRoot, bookId), { recursive: true });
+      await writeFile(
+        join(outRoot, bookId, `${chapter}.json`),
+        JSON.stringify(payload),
+        "utf-8",
+      );
+      written += 1;
+    }
+  }
+
+  return written;
+};
+
 const generateDictionary = async (): Promise<{
   dictionaryBundle: JsonValue;
   prefixesById: JsonValue;
+  lexiconShards: number;
+  lexiconInstances: number;
 }> => {
   const customDefinitions = await readJson<JsonValue>(
     join(DATA_ROOT, "dict", "lexicon", "custom_definitions.json"),
@@ -469,6 +505,48 @@ const generateDictionary = async (): Promise<{
     "utf-8",
   );
 
+  const lexiconAssets = buildLexiconAssets(
+    words as unknown as Parameters<typeof buildLexiconAssets>[0],
+    roots as unknown as Parameters<typeof buildLexiconAssets>[1],
+    customDefinitions as unknown as Parameters<typeof buildLexiconAssets>[2],
+  );
+  if (lexiconAssets.duplicateKeys.length > 0) {
+    throw new Error(
+      `Duplicate normalized Strong keys while generating lexicon entries: ${lexiconAssets.duplicateKeys.join(", ")}`,
+    );
+  }
+  if (lexiconAssets.missingStrong.length > 0) {
+    throw new Error(
+      `Missing lexicon content for normalized Strong keys: ${lexiconAssets.missingStrong.join(", ")}`,
+    );
+  }
+
+  const entriesOutDir = join(dictOutDir, "entries");
+  const instancesOutDir = join(dictOutDir, "instances");
+  await mkdir(entriesOutDir, { recursive: true });
+  await mkdir(instancesOutDir, { recursive: true });
+
+  for (const [shardKey, shard] of Object.entries(lexiconAssets.shards)) {
+    await writeFile(
+      join(entriesOutDir, `${shardKey}.json`),
+      JSON.stringify(shard),
+      "utf-8",
+    );
+  }
+  for (const [strong, payload] of Object.entries(lexiconAssets.instances)) {
+    await writeFile(
+      join(instancesOutDir, `${strong}.json`),
+      JSON.stringify(payload),
+      "utf-8",
+    );
+  }
+
+  if (lexiconAssets.skippedKeys.length > 0) {
+    console.warn(
+      `[davar-static-data] skipped ${lexiconAssets.skippedKeys.length} non-normalized Strong keys`,
+    );
+  }
+
   return {
     dictionaryBundle: {
       custom_definitions: customDefinitions,
@@ -476,6 +554,8 @@ const generateDictionary = async (): Promise<{
       prefixes,
     },
     prefixesById,
+    lexiconShards: Object.keys(lexiconAssets.shards).length,
+    lexiconInstances: Object.keys(lexiconAssets.instances).length,
   };
 };
 
@@ -498,7 +578,13 @@ const generateMetadata = (
   tanajVerseCounts: Record<string, Record<string, number>>,
   besorahVerseCounts: Record<string, Record<string, number>>,
   bookLabels: Record<string, CanonicalBookLabels>,
-): { books: BookMetadata[]; chapter_counts: Record<string, number[]>; verse_counts: Record<string, Record<string, number>> } => {
+  dataVersion: string,
+): {
+  books: BookMetadata[];
+  chapter_counts: Record<string, number[]>;
+  verse_counts: Record<string, Record<string, number>>;
+  data_version: string;
+} => {
   const verseCounts = { ...tanajVerseCounts, ...besorahVerseCounts };
 
   const books = Object.keys(verseCounts)
@@ -533,6 +619,7 @@ const generateMetadata = (
     books,
     chapter_counts: chapterCounts,
     verse_counts: verseCounts,
+    data_version: dataVersion,
   };
 };
 
@@ -966,6 +1053,7 @@ const enrichDssBookForSpanReplacement = (bookData: JsonValue): JsonValue => {
 const main = async (): Promise<void> => {
   const generationStartedAt = Date.now();
   const shouldExportTs2009Static = process.env.EXPORT_TS2009_STATIC === "1";
+  const dataVersion = `${new Date().toISOString().slice(0, 10).replace(/-/g, ".")}-1`;
   console.log("[davar-static-data] phase=generate start");
 
   const greekStash = resolveGreekPublicData();
@@ -999,18 +1087,32 @@ const main = async (): Promise<void> => {
     join(DATA_ROOT, "translit"),
     join(WEB_PUBLIC_DATA_ROOT, "translit"),
   );
+  const translitChapterCount = await writeChapterScopedBooks(
+    join(WEB_PUBLIC_DATA_ROOT, "translit"),
+    translitBundle.books,
+    splitTranslitBook,
+    canonicalBookIdFromTranslitStem,
+  );
 
   // Publish DSS transliteration variants for web Qumran mode.
+  let dssTranslitBooks: Record<string, JsonValue> = {};
   try {
-    await copyFolderJsonFiles(
+    const copied = await copyFolderJsonFiles(
       join(DATA_ROOT, "translit", "dss"),
       join(WEB_PUBLIC_DATA_ROOT, "translit", "dss"),
+    );
+    dssTranslitBooks = copied.books;
+    await writeChapterScopedBooks(
+      join(WEB_PUBLIC_DATA_ROOT, "translit", "dss"),
+      dssTranslitBooks,
+      splitDssTranslitBook,
     );
   } catch {
     // DSS transliteration files are optional in some environments.
   }
 
-  const { dictionaryBundle } = await generateDictionary();
+  const { dictionaryBundle, lexiconShards, lexiconInstances } =
+    await generateDictionary();
 
   const booksDir = join(DATA_ROOT, "dss", "books");
   const dssFiles = await listJsonFiles(booksDir);
@@ -1029,10 +1131,20 @@ const main = async (): Promise<void> => {
       "utf-8",
     );
   }
+  const dssChapterCount = await writeChapterScopedBooks(
+    join(WEB_PUBLIC_DATA_ROOT, "dss"),
+    dssBooks,
+    splitDssBook,
+  );
   const dssBundle = dssBooks as JsonValue;
 
   const canonicalBookLabels = await loadCanonicalBookLabels();
-  const metadata = generateMetadata(tanaj.counts, besorah.counts, canonicalBookLabels);
+  const metadata = generateMetadata(
+    tanaj.counts,
+    besorah.counts,
+    canonicalBookLabels,
+    dataVersion,
+  );
   await writeFile(
     join(WEB_PUBLIC_DATA_ROOT, "metadata.json"),
     JSON.stringify(metadata),
@@ -1117,7 +1229,7 @@ const main = async (): Promise<void> => {
   );
 
   const manifest = {
-    version: `${new Date().toISOString().slice(0, 10).replace(/-/g, ".")}-1`,
+    version: dataVersion,
     generated_at: new Date().toISOString(),
     bundles: {
       metadata: {
@@ -1176,10 +1288,24 @@ const main = async (): Promise<void> => {
     JSON.stringify(manifest),
     "utf-8",
   );
+  await writeFile(
+    join(WEB_PUBLIC_DATA_ROOT, "version.json"),
+    JSON.stringify({
+      version: dataVersion,
+      generated_at: manifest.generated_at,
+    }),
+    "utf-8",
+  );
   restoreGreekPublicData(greekStash);
 
   console.log("Generated static data in web/public/data");
   console.log(`books: tanaj=${Object.keys(tanaj.bundle.books).length}, besorah=${Object.keys(besorah.bundle.books).length}`);
+  console.log(
+    `chapter assets: translit=${translitChapterCount}, dss=${dssChapterCount}`,
+  );
+  console.log(
+    `lexicon assets: shards=${lexiconShards}, instances=${lexiconInstances}`,
+  );
   if (!shouldExportTs2009Static) {
     console.log("ts2009: static export disabled; serving through private API only");
   }

@@ -1,5 +1,24 @@
 import { selectDssTransliteration } from "../../../../shared/dssTransliteration";
 import {
+	mapLexiconDefinitions,
+	type LexiconEntryAsset,
+	type LexiconEntryShard,
+	type LexiconInstancesAsset,
+} from "../../../../shared/lexiconAssets";
+import {
+	appendStaticDataVersion,
+	dssBookAssetPath,
+	dssChapterAssetPath,
+	dssTranslitBookAssetPath,
+	dssTranslitChapterAssetPath,
+	lexiconEntryAssetPath,
+	lexiconInstancesAssetPath,
+	shouldVersionStaticPath,
+	translitBookAssetPath,
+	translitChapterAssetPath,
+	ts2009ChapterAssetPath,
+} from "../../../../shared/staticDataPaths";
+import {
 	GREEK_RECORDED_REVISION,
 	canActivateGreekRelease,
 	greekChapterPath,
@@ -206,8 +225,9 @@ type RawDssTranslitBook = {
 	variants?: RawDssTranslitVariant[];
 };
 
-const MAX_CACHE_SIZE = 100;
+const MAX_CACHE_SIZE = 400;
 const jsonCache = new Map<string, Promise<unknown>>();
+let staticDataVersionPromise: Promise<string | null> | null = null;
 
 // In-memory cache for TS2009 translations to avoid repeated private API reads.
 // Keys: `${bookId}:${chapter}:${verse}`, Values: string | null
@@ -424,10 +444,37 @@ const loadTs2009BookFile = (
 	return bookPromise;
 };
 
+const loadTs2009ChapterFromChapterFile = async (
+	bookId: string,
+	chapter: number,
+): Promise<Map<number, string> | null> => {
+	try {
+		const staticChapter = await fetchJson<{
+			verses?: Record<string, string>;
+		}>(`/data/${ts2009ChapterAssetPath(bookId, chapter)}`);
+		const verses = staticChapter.verses ?? {};
+		const verseMap = new Map<number, string>();
+		for (const [verseKey, translation] of Object.entries(verses)) {
+			const verseNumber = Number(verseKey);
+			if (Number.isFinite(verseNumber) && typeof translation === "string") {
+				verseMap.set(verseNumber, translation);
+			}
+		}
+		return verseMap.size > 0 ? verseMap : null;
+	} catch {
+		return null;
+	}
+};
+
 const loadTs2009ChapterFromBookFile = async (
 	bookId: string,
 	chapter: number,
 ): Promise<Map<number, string> | null> => {
+	const chapterFile = await loadTs2009ChapterFromChapterFile(bookId, chapter);
+	if (chapterFile) {
+		return chapterFile;
+	}
+
 	for (const fileStem of getTs2009BookFileCandidates(bookId)) {
 		const staticBook = await loadTs2009BookFile(fileStem);
 		if (!staticBook) {
@@ -579,7 +626,28 @@ const parseStaticJson = async <T>(
 	}
 };
 
-const fetchJson = async <T>(path: string): Promise<T> => {
+const loadStaticDataVersion = async (): Promise<string | null> => {
+	if (!staticDataVersionPromise) {
+		staticDataVersionPromise = (async () => {
+			try {
+				const payload = await fetchJson<{
+					version?: string;
+					data_version?: string;
+				}>("/data/version.json", { versioned: false, cache: "no-cache" });
+				return payload.version ?? payload.data_version ?? null;
+			} catch {
+				return null;
+			}
+		})();
+	}
+
+	return staticDataVersionPromise;
+};
+
+const fetchJson = async <T>(
+	path: string,
+	options?: { versioned?: boolean; cache?: RequestCache },
+): Promise<T> => {
 	// If already cached, move to end (mark as recently used)
 	if (jsonCache.has(path)) {
 		// biome-ignore lint/style/noNonNullAssertion: safe — guarded by .has() check above
@@ -591,13 +659,21 @@ const fetchJson = async <T>(path: string): Promise<T> => {
 
 	const promise = (async () => {
 		const errors: string[] = [];
-		const troubleshootingHint = normalizeStaticPath(path).startsWith("/api/")
+		const isApi = normalizeStaticPath(path).startsWith("/api/");
+		const troubleshootingHint = isApi
 			? "Verify the local Bun server or deployed Pages Function serves this API route."
 			: "Verify the web app is launched from the web/ directory (bun run dev) or served from a build that includes copied public data.";
+		const cacheMode =
+			options?.cache ?? (isApi ? "no-cache" : "force-cache");
+		const shouldVersion =
+			options?.versioned ??
+			(!isApi && shouldVersionStaticPath(normalizeStaticPath(path).slice(1)));
+		const version = shouldVersion ? await loadStaticDataVersion() : null;
 
 		for (const resolvedPath of buildCandidatePaths(path)) {
 			try {
-				const response = await fetch(resolvedPath, { cache: "no-cache" });
+				const requestPath = appendStaticDataVersion(resolvedPath, version);
+				const response = await fetch(requestPath, { cache: cacheMode });
 				const parsed = await parseStaticJson<T>(response, resolvedPath);
 				preferredStaticBase = inferStaticBaseFromResolvedPath(
 					resolvedPath,
@@ -722,17 +798,6 @@ const resolveTthBookId = (bookId: string): string | undefined => {
 	}
 
 	return TTH_BOOK_MAPPING[canonicalKey];
-};
-
-const toDssBookKey = (bookId: string): string => {
-	const dssMap: Record<string, string> = {
-		samuel1: "1samuel",
-		samuel2: "2samuel",
-		songofsolomon: "songs",
-		hosea: "hoseah",
-	};
-
-	return dssMap[bookId] ?? bookId;
 };
 
 const HEBREW_MARKS_RE = /[\u0591-\u05C7]/g;
@@ -1049,28 +1114,55 @@ const loadTranslationChapter = async (
 	}
 };
 
+const indexDssChapterVerses = (
+	chapter: number,
+	verses?: Record<string, RawDssVerse>,
+): Record<string, RawDssVerse> => {
+	if (!verses) return {};
+
+	return Object.entries(verses).reduce(
+		(acc, [verseKey, verseValue]) => {
+			acc[`${chapter}:${Number.parseInt(verseKey, 10)}`] = verseValue;
+			return acc;
+		},
+		{} as Record<string, RawDssVerse>,
+	);
+};
+
 const loadDssChapter = async (
 	bookId: string,
 	chapter: number,
 ): Promise<Record<string, RawDssVerse>> => {
-	const dssBookKey = toDssBookKey(bookId);
-
 	try {
-		const dssBook = await fetchJson<RawDssBook>(`/data/dss/${dssBookKey}.json`);
-		const chapterData = dssBook.chapters?.[String(chapter)];
-
-		if (!chapterData?.verses) return {};
-
-		return Object.entries(chapterData.verses).reduce(
-			(acc, [verseKey, verseValue]) => {
-				acc[`${chapter}:${Number.parseInt(verseKey, 10)}`] = verseValue;
-				return acc;
-			},
-			{} as Record<string, RawDssVerse>,
-		);
+		const chapterData = await fetchJson<{
+			verses?: Record<string, RawDssVerse>;
+		}>(`/data/${dssChapterAssetPath(bookId, chapter)}`);
+		return indexDssChapterVerses(chapter, chapterData.verses);
 	} catch {
-		return {};
+		try {
+			const dssBook = await fetchJson<RawDssBook>(
+				`/data/${dssBookAssetPath(bookId)}`,
+			);
+			return indexDssChapterVerses(
+				chapter,
+				dssBook.chapters?.[String(chapter)]?.verses,
+			);
+		} catch {
+			return {};
+		}
 	}
+};
+
+const indexTranslitVerses = (
+	chapter: number,
+	verses?: RawTranslitBook["verses"],
+): Record<string, RawTranslitWord[]> => {
+	const verseMap: Record<string, RawTranslitWord[]> = {};
+	for (const verseEntry of verses ?? []) {
+		if (verseEntry.chapter !== chapter) continue;
+		verseMap[`${chapter}:${verseEntry.verse}`] = verseEntry.words ?? [];
+	}
+	return verseMap;
 };
 
 const loadTranslitChapter = async (
@@ -1078,59 +1170,67 @@ const loadTranslitChapter = async (
 	chapter: number,
 ): Promise<Record<string, RawTranslitWord[]>> => {
 	try {
-		const translitBook = await fetchJson<RawTranslitBook>(
-			`/data/translit/${bookId}.json`,
+		const translitChapter = await fetchJson<RawTranslitBook>(
+			`/data/${translitChapterAssetPath(bookId, chapter)}`,
 		);
+		return indexTranslitVerses(chapter, translitChapter.verses);
+	} catch {
+		try {
+			const translitBook = await fetchJson<RawTranslitBook>(
+				`/data/${translitBookAssetPath(bookId)}`,
+			);
+			return indexTranslitVerses(chapter, translitBook.verses);
+		} catch {
+			return {};
+		}
+	}
+};
 
-		const verseMap: Record<string, RawTranslitWord[]> = {};
-		for (const verseEntry of translitBook.verses ?? []) {
-			if (verseEntry.chapter !== chapter) continue;
-			verseMap[`${chapter}:${verseEntry.verse}`] = verseEntry.words ?? [];
+const indexDssTranslitVariants = (
+	chapter: number,
+	variants?: RawDssTranslitVariant[],
+): Record<string, Record<number, RawDssTranslitVariant>> => {
+	const verseMap: Record<string, Record<number, RawDssTranslitVariant>> = {};
+
+	for (const variant of variants ?? []) {
+		if (variant.chapter !== chapter) continue;
+
+		const verse = Number(variant.verse);
+		const position = Number(variant.position);
+		if (!Number.isFinite(verse) || !Number.isFinite(position) || position <= 0) {
+			continue;
 		}
 
-		return verseMap;
-	} catch {
-		return {};
+		const key = `${chapter}:${verse}`;
+		if (!verseMap[key]) {
+			verseMap[key] = {};
+		}
+
+		// Align with WordResponse.position which is zero-based on web.
+		verseMap[key][position - 1] = variant;
 	}
+
+	return verseMap;
 };
 
 const loadDssTranslitChapter = async (
 	bookId: string,
 	chapter: number,
 ): Promise<Record<string, Record<number, RawDssTranslitVariant>>> => {
-	const dssBookKey = toDssBookKey(bookId);
-
 	try {
-		const translitBook = await fetchJson<RawDssTranslitBook>(
-			`/data/translit/dss/${dssBookKey}.json`,
+		const translitChapter = await fetchJson<RawDssTranslitBook>(
+			`/data/${dssTranslitChapterAssetPath(bookId, chapter)}`,
 		);
-		const verseMap: Record<string, Record<number, RawDssTranslitVariant>> = {};
-
-		for (const variant of translitBook.variants ?? []) {
-			if (variant.chapter !== chapter) continue;
-
-			const verse = Number(variant.verse);
-			const position = Number(variant.position);
-			if (
-				!Number.isFinite(verse) ||
-				!Number.isFinite(position) ||
-				position <= 0
-			) {
-				continue;
-			}
-
-			const key = `${chapter}:${verse}`;
-			if (!verseMap[key]) {
-				verseMap[key] = {};
-			}
-
-			// Align with WordResponse.position which is zero-based on web.
-			verseMap[key][position - 1] = variant;
-		}
-
-		return verseMap;
+		return indexDssTranslitVariants(chapter, translitChapter.variants);
 	} catch {
-		return {};
+		try {
+			const translitBook = await fetchJson<RawDssTranslitBook>(
+				`/data/${dssTranslitBookAssetPath(bookId)}`,
+			);
+			return indexDssTranslitVariants(chapter, translitBook.variants);
+		} catch {
+			return {};
+		}
 	}
 };
 
@@ -1762,7 +1862,10 @@ export const loadGreekLexiconEntry = async (
 		);
 		greekLexiconPromises.set(revision, promise);
 	}
-	const [lexicon, custom] = await Promise.all([promise, loadCustomDefinitions()]);
+	const [lexicon, customAsset] = await Promise.all([
+		promise,
+		loadLexiconEntryAsset(strong),
+	]);
 	const family = greekStrongFamily(strong);
 	const entry =
 		lexicon[strong] ??
@@ -1780,7 +1883,21 @@ export const loadGreekLexiconEntry = async (
 		Boolean(definition?.short || definition?.fuller);
 	const selected = localized && usable(localized) ? localized : english;
 	const definitions: DefinitionItem[] = [];
-	const customDefinitions = mapDefinitions(custom[entry.strong]?.definitions, language);
+	let customDefinitions = mapLexiconDefinitions(
+		customAsset?.definitions,
+		language,
+	);
+	if (customDefinitions.length === 0) {
+		try {
+			const custom = await loadCustomDefinitions();
+			customDefinitions = mapDefinitions(
+				custom[entry.strong]?.definitions ?? custom[strong]?.definitions,
+				language === "he" ? "en" : language,
+			);
+		} catch {
+			customDefinitions = [];
+		}
+	}
 	definitions.push(...customDefinitions);
 	if (selected?.short) {
 		definitions.push({
@@ -1885,6 +2002,7 @@ export interface WordAnalysis {
 	instance_surface_count?: number;
 	instance_tier?: "low" | "medium" | "high";
 	instance_omitted_count?: number;
+	has_instances_asset?: boolean;
 }
 
 type RawDefinition = {
@@ -2153,6 +2271,70 @@ const toWordAnalysis = (
 	};
 };
 
+const toWordAnalysisFromAsset = (
+	entry: LexiconEntryAsset,
+	language: "en" | "es",
+): WordAnalysis => ({
+	strong_number: entry.strong_number,
+	hebrew: entry.hebrew,
+	translit_en: entry.translit_en,
+	translit_es: entry.translit_es,
+	definitions: mapLexiconDefinitions(entry.definitions, language),
+	root: entry.root,
+	root_strong: entry.root_strong,
+	root_definitions: entry.root_definitions
+		? mapLexiconDefinitions(entry.root_definitions, language)
+		: undefined,
+	root_translit_en: entry.root_translit_en,
+	root_translit_es: entry.root_translit_es,
+	occurrences_count: entry.occurrences_count,
+	instances: entry.instances,
+	has_instances_asset: entry.has_instances_asset,
+	instance_policy_version: entry.instance_policy_version,
+	instance_total: entry.instance_total,
+	instance_surface_count: entry.instance_surface_count,
+	instance_tier: entry.instance_tier,
+	instance_omitted_count: entry.instance_omitted_count,
+});
+
+const loadLexiconEntryAsset = async (
+	strong: string,
+): Promise<LexiconEntryAsset | null> => {
+	try {
+		const shard = await fetchJson<LexiconEntryShard>(
+			`/data/${lexiconEntryAssetPath(strong)}`,
+		);
+		return shard[strong] ?? null;
+	} catch {
+		return null;
+	}
+};
+
+export const loadLexiconInstances = async (
+	strong?: string,
+): Promise<Partial<WordAnalysis> | null> => {
+	const normalizedStrong = normalizeStrong(strong);
+	if (!normalizedStrong) return null;
+
+	try {
+		const payload = await fetchJson<LexiconInstancesAsset>(
+			`/data/${lexiconInstancesAssetPath(normalizedStrong)}`,
+		);
+		return {
+			instances: payload.instances,
+			occurrences_count: payload.occurrences_count,
+			instance_policy_version: payload.instance_policy_version,
+			instance_total: payload.instance_total,
+			instance_surface_count: payload.instance_surface_count,
+			instance_tier: payload.instance_tier,
+			instance_omitted_count: payload.instance_omitted_count,
+			has_instances_asset: false,
+		};
+	} catch {
+		return null;
+	}
+};
+
 export const loadLexiconEntry = async (
 	strong?: string,
 	language?: "en" | "es",
@@ -2161,19 +2343,46 @@ export const loadLexiconEntry = async (
 	if (!normalizedStrong) return null;
 
 	const selectedLanguage = language ?? "en";
-	const [words, roots, custom] = await Promise.all([
-		loadWords(),
-		loadRoots(),
-		loadCustomDefinitions(),
-	]);
+	const asset = await loadLexiconEntryAsset(normalizedStrong);
+	if (asset) {
+		return toWordAnalysisFromAsset(asset, selectedLanguage);
+	}
 
-	return toWordAnalysis(
-		normalizedStrong,
-		selectedLanguage,
-		words,
-		roots,
-		custom,
-	);
+	try {
+		const [words, roots, custom] = await Promise.all([
+			loadWords(),
+			loadRoots(),
+			loadCustomDefinitions(),
+		]);
+
+		return toWordAnalysis(
+			normalizedStrong,
+			selectedLanguage,
+			words,
+			roots,
+			custom,
+		);
+	} catch {
+		return null;
+	}
+};
+
+export const prefetchChapterResources = (
+	book: string,
+	chapter: number,
+	options?: Parameters<typeof getChapterVerses>[2],
+): void => {
+	if (!Number.isFinite(chapter) || chapter <= 0) return;
+	void getChapterVerses(book, chapter, {
+		...options,
+		showDss: false,
+	}).catch(() => undefined);
+};
+
+export const prefetchLexiconEntry = (strong?: string): void => {
+	const normalizedStrong = normalizeStrong(strong);
+	if (!normalizedStrong) return;
+	void loadLexiconEntryAsset(normalizedStrong);
 };
 
 export const searchLexicon = async (
@@ -2249,4 +2458,21 @@ const loadPrefixes = async (): Promise<Record<string, unknown>> => {
 export const loadPrefix = async (prefixId: string): Promise<unknown> => {
 	const prefixes = await loadPrefixes();
 	return prefixes[prefixId] ?? null;
+};
+
+export const resetStaticDataCachesForTests = (): void => {
+	jsonCache.clear();
+	staticDataVersionPromise = null;
+	metadataPromise = null;
+	booksPromise = null;
+	wordsPromise = null;
+	rootsPromise = null;
+	customPromise = null;
+	prefixesPromise = null;
+	greekManifestPromises.clear();
+	greekLexiconPromises.clear();
+	greekOccurrenceShardPromises.clear();
+	ts2009Cache.clear();
+	ts2009ChapterCache.clear();
+	ts2009BookFileCache.clear();
 };
