@@ -21,6 +21,8 @@
 		"scripts/**/*.ts",
 		"server.ts",
 		"build.ts",
+		"shared/**/*.ts",
+		"functions/**/*.ts",
 		"../shared/**/*.ts"
 	]
 }

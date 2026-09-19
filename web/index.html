@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Davar | Hebrew Scriptures Bible Study App</title>
+    <title>Davar | Hebrew Scriptures</title>
     <link
       rel="icon"
       type="image/png"
@@ -56,12 +56,12 @@
     />
     <meta
       name="description"
-      content="Read Hebrew Scriptures with trusted translations, Strong's tools, and Qumran variants in Davar. Start free on App Store or Google Play today."
+      content="Davar is a place to read, explore, and study Scripture with the original languages and context close at hand."
       id="meta-description"
     />
     <meta
       name="keywords"
-      content="Hebrew Bible, Biblia en Hebreo, Bible study app, app de estudio bíblico, Tanakh study, Torah reading, Strong's concordance, Qumran manuscripts, Delitzsch Hebrew New Testament, biblical Hebrew learning, scripture study tools, Davar app"
+      content="Hebrew Bible, Biblia en Hebreo, Bible study app, app de estudio bíblico, Tanakh study, Torah reading, Hebrew Scriptures, Qumran manuscripts, biblical Hebrew learning, scripture study, Davar"
       id="meta-keywords"
     />
     <meta
@@ -78,20 +78,23 @@
     <!-- Open Graph Meta Tags -->
     <meta
       property="og:title"
-      content="Davar | Hebrew Scriptures Bible Study App"
+      content="Davar | Hebrew Scriptures"
+      id="og-title"
     />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://davar.bible" id="og-url" />
+    <meta property="og:site_name" content="Davar" />
+    <meta property="og:url" content="https://davar.bible/" id="og-url" />
     <meta
       property="og:image"
-      content="https://davar.bible/og-image.png"
+      content="https://davar.bible/og-preview-genesis-1-1.png"
       id="og-image"
     />
+    <meta property="og:image:alt" content="Genesis 1:1 in Davar" />
     <meta property="og:image:width" content="1280" />
     <meta property="og:image:height" content="630" />
     <meta
       property="og:description"
-      content="Read Hebrew Scriptures with trusted translations, Strong's tools, and Qumran variants in Davar. Start free on App Store or Google Play today."
+      content="Davar is a place to read, explore, and study Scripture with the original languages and context close at hand."
       id="og-description"
     />
     <meta property="og:locale" content="en_US" id="og-locale" />
@@ -100,16 +103,17 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Davar | Hebrew Scriptures Bible Study App"
+      content="Davar | Hebrew Scriptures"
+      id="twitter-title"
     />
     <meta
       name="twitter:description"
-      content="Read Hebrew Scriptures with trusted translations, Strong's tools, and Qumran variants in Davar. Start free on App Store or Google Play today."
+      content="Davar is a place to read, explore, and study Scripture with the original languages and context close at hand."
       id="twitter-description"
     />
     <meta
       name="twitter:image"
-      content="https://davar.bible/og-image.png"
+      content="https://davar.bible/og-preview-genesis-1-1.png"
       id="twitter-image"
     />
 
@@ -120,7 +124,7 @@
         "@id": "https://davar.bible/#website",
         "url": "https://davar.bible/",
         "name": "Davar",
-        "description": "Read Hebrew Scriptures with trusted translations, Strong's tools, and Qumran variants in Davar.",
+        "description": "Davar is a place to read, explore, and study Scripture with the original languages and context close at hand.",
         "inLanguage": ["en", "es", "he"]
       }
     </script>
@@ -150,7 +154,7 @@
         "url": "https://davar.bible/",
         "applicationCategory": "EducationApplication",
         "operatingSystem": "iOS, Android, Web",
-        "description": "Minimalist Hebrew Scriptures Bible study app with Hebrew text, lexical tools, and Qumran variants.",
+        "description": "A place to read, explore, and study Scripture with the original languages and context close at hand.",
         "inLanguage": ["en", "es", "he"],
         "downloadUrl": "https://play.google.com/store/apps/details?id=bible.davar",
         "offers": {
@@ -164,104 +168,6 @@
       }
     </script>
 
-    <!-- Language Detection and Dynamic Meta Tag Setting -->
-    <script>
-      (function () {
-        // Get user's preferred language
-        const userLang = navigator.language;
-        const primaryLang = userLang.split("-")[0];
-
-        // Define descriptions by language
-        const descriptions = {
-          es: "Lee las Escrituras Hebreas con traducciones confiables y herramientas léxicas en Davar. Empieza gratis en App Store o Google Play hoy.",
-          he: "קראו כתבי קודש בעברית עם תרגומים וכלי לקסיקון אמינים בדבר. התחילו בחינם ב-App Store או ב-Google Play היום.",
-          en: "Read Hebrew Scriptures with trusted translations, Strong's tools, and Qumran variants in Davar. Start free on App Store or Google Play today.",
-        };
-
-        const keywords = {
-          en: [
-            "Hebrew Bible",
-            "Bible study app",
-            "Tanakh study",
-            "Torah reading",
-            "Strong's concordance",
-            "Qumran manuscripts",
-            "Delitzsch Hebrew New Testament",
-            "biblical Hebrew learning",
-            "scripture study tools",
-            "Davar app",
-          ],
-          es: [
-            "Biblia en Hebreo",
-            "Biblia Hebrea",
-            "app de estudio bíblico",
-            "estudio del Tanaj",
-            "lectura de la Torah",
-            "concordancia Strong",
-            "manuscritos de Qumrán",
-            "Nuevo Testamento hebreo Delitzsch",
-            "aprender hebreo bíblico",
-            "herramientas de estudio bíblico",
-            "app Davar",
-          ],
-          he: [
-            "תנ״ך",
-            "אפליקציית לימוד מקרא",
-            "לימוד תנ״ך",
-            "קריאת תורה",
-            "קונקורדנציה סטרונג",
-            "מגילות קומראן",
-            "ברית חדשה דליטש",
-            "לימוד עברית מקראית",
-            "כלי לימוד כתבי הקודש",
-            "אפליקציית דבר",
-          ],
-        };
-
-        // Determine description based on language
-        const description = descriptions[primaryLang] || descriptions.en;
-        const keywordContent = (keywords[primaryLang] || keywords.en).join(", ");
-        const locale =
-          primaryLang === "es"
-            ? "es_ES"
-            : primaryLang === "he"
-              ? "he_IL"
-              : "en_US";
-
-        // Get the image URL dynamically
-        const imageUrl = window.location.origin + "/og-image.png";
-
-        // Set standard SEO tags
-        document
-          .getElementById("meta-description")
-          .setAttribute("content", description);
-        document
-          .getElementById("meta-keywords")
-          .setAttribute("content", keywordContent);
-
-        // Set Open Graph meta tags
-        document
-          .getElementById("og-description")
-          .setAttribute("content", description);
-        document.getElementById("og-image").setAttribute("content", imageUrl);
-        document
-          .getElementById("og-url")
-          .setAttribute("content", window.location.origin);
-        document.getElementById("og-locale").setAttribute("content", locale);
-
-        // Set Twitter Card meta tags
-        document
-          .getElementById("twitter-description")
-          .setAttribute("content", description);
-        document
-          .getElementById("twitter-image")
-          .setAttribute("content", imageUrl);
-
-        document
-          .getElementById("canonical-url")
-          .setAttribute("href", window.location.origin + "/");
-      })();
-    </script>
   </head>
 
   <body>

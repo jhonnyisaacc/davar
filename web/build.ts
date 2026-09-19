@@ -174,7 +174,7 @@ console.log(
 	`[davar-web] phase=bundle done duration=${formatSeconds(bundleStartedAt)} outputs=${result.outputs.length}`,
 );
 
-// Copy public assets that aren't referenced in HTML/CSS (og-image, etc.)
+// Copy public assets that aren't referenced in HTML/CSS (OG preview image, etc.)
 if (existsSync(publicDir)) {
 	cpSync(publicDir, distDir, { recursive: true, force: true });
 }
