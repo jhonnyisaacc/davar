@@ -232,6 +232,14 @@ describe("chapter and lexicon loaders", () => {
 		).toBe(false);
 	});
 
+	test("does not hydrate every BES book when metadata already has labels", async () => {
+		const { getBooks } = await import("./staticData");
+		await getBooks();
+		expect(
+			requestedPaths().some((path) => path.startsWith("/data/bes/")),
+		).toBe(false);
+	});
+
 	test("appends a data version to immutable static URLs", async () => {
 		await loadLexiconEntry("H430", "en");
 		expect(

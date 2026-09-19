@@ -1378,9 +1378,8 @@ export const getBooks = async (): Promise<BookResponse[]> => {
 
 			const hasPlaceholderLabels = books.some(
 				(book) =>
-					book.hebrew_name === book.name ||
-					book.spanish_name === book.name ||
-					book.hebrew_transliteration === book.name,
+					book.hebrew_name === book.name &&
+					book.spanish_name === book.name,
 			);
 
 			if (!hasPlaceholderLabels) {
