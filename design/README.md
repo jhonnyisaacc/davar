@@ -64,7 +64,7 @@ Extracted from the **running Davar web UI**, especially `web/src/styles/theme.cs
 - **Surfaces:** parchment `#FAF6F0` (light), Shafan brown `#3C3836` (dark)
 - **Accent:** tekhelet `#7AA0D6` / `#92B5E8` — the only brand accent
 - **Copper:** Qumran / word highlight only (`#C68F55`), not a second brand
-- **Type:** Cardo (scripture), Inter (UI Latin), Suez One (wordmark / book names), Arimo (UI Hebrew)
+- **Type:** Cardo (scripture), Inter (UI Latin), Suez One (wordmark / book names), Arimo (UI Hebrew), DeadSeaScrolls-Regular (Qumran / DSS — licensed; Pen previews the sample in Cardo + copper)
 - **Cards / actions:** neumorph dual shadows from current Davar
 - **Glass:** reserved for floating chrome (today’s dropdowns; unified mobile nav)
 
@@ -118,7 +118,8 @@ Web counterparts (same components, desktop chrome):
 | `DAVAR-NAV-07` | Unified web · Scripture |
 | `DAVAR-NAV-08` | Unified web · Commentary |
 | `DAVAR-READ-06` | Scripture library + verse + word |
-| `DAVAR-COMMENTARY-07` | Verse + notas columns |
+| `DAVAR-COMMENTARY-07` | Centered verse + nota list (tap a row) |
+| `DAVAR-COMMENTARY-08` | Same verse, one nota open in full |
 | `DAVAR-CALENDAR-06` | Today + date detail |
 | `DAVAR-ASSEMBLIES-39` | Discover list + congregation |
 | `DAVAR-ASSEMBLIES-40` | Lead / manage |
@@ -133,7 +134,13 @@ Major proof points: foundations pair, `DAVAR-BASE-08`, `DAVAR-NAV-06`, `DAVAR-AS
 ## Mobile and desktop
 
 - **Phone:** `390×844`, `clip: true`. Status bar, body (`height: fill_container`), then a 96px nav pad with `Nav/LiquidGlass` (374×72). This is a device frame, not a content-height card.
-- **Web:** `1280×800`, `clip: true`. `Nav/Desktop` (unified IA) or `Nav/CurrentTopDesktop` (shipping baseline), then a multi-column desk body.
+- **Web:** `1280×800`, `clip: true`. Shipping chrome is `Nav/CurrentTopDesktop` (centered neumorph: Home, Book | Hebrew, CH, VS, Settings + tekhelet dot). Unified chrome is the same card family with the five destinations. Not a full-bleed bar.
+- **Verse:** `Verse/Block` is centered horizontally and vertically in the reading well on every screen that shows a verse (shipping 40px Cardo, translation 17px). The verse number sits **before the first Hebrew word in RTL** — visually to the **right** of the first word on the first line (`[1] בראשית…`). Pen has no `direction`; the master uses an RTL isolate so the marker previews correctly.
+- **Full chapter (mobile):** `DAVAR-READ-05` is **sefer / book style** — one flowing RTL paragraph with inline `[n]` markers, not one verse per row.
+- **Location (mobile):** tappable `Chip/Location` (`Bereshit · 1:1`) opens `Selector/BCV` — three vertical scroll columns (Book · Chapter · Verse), chapters and verses scoped to the selected book (`DAVAR-READ-01` / `DAVAR-READ-02`).
+- **Skeletons:** `State/Skeleton` is **centered** (default one-verse). `State/SkeletonChapter` is **RTL / align end** (full chapter). Both on `DAVAR-READ-07`.
+- **Settings:** Shared order from `shared/settingsOrder.ts` (theme, language, Besorah language/version, full chapter, sefer, Hebrew only, Qumran) plus mobile extras (translation only, nikud, cantillation, clear storage) on `DAVAR-SETTINGS-01` / `DAVAR-NAV-05`.
+- **Word (mobile):** tap opens `Sheet/Bottom` — a rounded sheet over the still-centered verse. Web keeps the word column.
 - Both platforms share Verse/Block, Word/Token, Commentary/Card, Calendar/Card, Congregation/Row, buttons, chips, tabs, and states.
 - Tablet is not specified unless a flow already forces it.
 
