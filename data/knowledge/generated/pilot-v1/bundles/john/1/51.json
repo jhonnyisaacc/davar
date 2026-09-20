@@ -34,7 +34,7 @@
     "#malaji_4_5: reference_system_not_verified",
     "#yeshayahu_40_3: reference_system_not_verified"
   ],
-  "input_manifest_digest": "258f6b80e6047d2b7f8a92f2f57e21cda5eba6bb1bd6776fe7a7533db4fbdad9",
+  "input_manifest_digest": "58d2b6dbf92a796e021c076e6fda32fb693a0b0a94210e8ee1158f5b4edf4fe7",
   "records": {
     "concepts": [
       {
@@ -430,6 +430,7 @@
         "book_id": "john",
         "edition_id": "delitzsch",
         "id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+        "language": "he",
         "mapping": {
           "status": "mapped",
           "targets": [
@@ -466,6 +467,7 @@
         "book_id": "john",
         "edition_id": "sblgnt-tagnt",
         "id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+        "language": "grc",
         "mapping": {
           "status": "mapped",
           "targets": [
@@ -503,6 +505,7 @@
         "book_id": "john",
         "edition_id": "tth-es",
         "id": "passage:tth-es:john:1:375cb7332358a19359cbe69dbb94a68680e888cb0bbf60f1fda964a3c4318f55",
+        "language": "es",
         "mapping": {
           "status": "mapped",
           "targets": [

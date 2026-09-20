@@ -148,7 +148,7 @@
     {
       "attribution": "Existing Davar OE dataset; retain its original source notices. Aramaic morphology is preserved.",
       "id": "oe",
-      "language": "he",
+      "language": "mul",
       "name": "OE Hebrew/Aramaic source",
       "owner": "davar",
       "reference_system_id": "davar-v1",
@@ -681,6 +681,7 @@
       "book_id": "john",
       "edition_id": "delitzsch",
       "id": "passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e",
+      "language": "he",
       "mapping": {
         "status": "mapped",
         "targets": [
@@ -717,6 +718,7 @@
       "book_id": "john",
       "edition_id": "delitzsch",
       "id": "passage:delitzsch:john:1:9dd59bc7fb3555524b3b4659567a7795d893413140537fa65c409af63954615e",
+      "language": "he",
       "mapping": {
         "status": "mapped",
         "targets": [
@@ -753,6 +755,7 @@
       "book_id": "daniel",
       "edition_id": "oe",
       "id": "passage:oe:daniel:7:69846562721f2e1a8c26e28111b2f8c8fe47dcffcba5ca602e4fd0b21ef732b9",
+      "language": "arc",
       "mapping": {
         "status": "mapped",
         "targets": [
@@ -789,6 +792,7 @@
       "book_id": "john",
       "edition_id": "sblgnt-tagnt",
       "id": "passage:sblgnt-tagnt:john:1:13b45ad77428a17bd86a53943a4721f5364614ec88d43c88efb6e9aeafa633d6",
+      "language": "grc",
       "mapping": {
         "status": "mapped",
         "targets": [
@@ -826,6 +830,7 @@
       "book_id": "john",
       "edition_id": "sblgnt-tagnt",
       "id": "passage:sblgnt-tagnt:john:1:207a241ccb4dc599addbbe022bb57c8e35d685393eefd3af1f34651d3bd351a6",
+      "language": "grc",
       "mapping": {
         "status": "mapped",
         "targets": [
@@ -863,6 +868,7 @@
       "book_id": "john",
       "edition_id": "tth-es",
       "id": "passage:tth-es:john:1:375cb7332358a19359cbe69dbb94a68680e888cb0bbf60f1fda964a3c4318f55",
+      "language": "es",
       "mapping": {
         "status": "mapped",
         "targets": [
@@ -899,6 +905,7 @@
       "book_id": "john",
       "edition_id": "tth-es",
       "id": "passage:tth-es:john:1:8b7e01bd10442fcd11e0ef04c9887fe9a7bdd611dd6dc80f5d04973aa9e988d2",
+      "language": "es",
       "mapping": {
         "status": "mapped",
         "targets": [

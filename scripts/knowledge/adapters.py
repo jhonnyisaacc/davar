@@ -39,13 +39,40 @@ def greek_passage(verse: dict, book: str, pointer: str, mappings: dict):
         pointer,
         mappings,
         verse.get("source_ref"),
+        language="grc",
+    )
+
+
+def oe_passage(verse: dict, book: str, pointer: str, mappings: dict):
+    """Normalize OE's explicit H/A morphology language markers once at ingestion."""
+    languages = []
+    for word in verse["words"]:
+        marker = word.get("morph", "")[:1]
+        if marker not in ("H", "A"):
+            raise ValueError("OE word lacks a supported source language marker")
+        languages.append({"H": "he", "A": "arc"}[marker])
+    if not languages:
+        raise ValueError("OE passage has no language-bearing words")
+    language = languages[0] if len(set(languages)) == 1 else "mul"
+    return make_passage(
+        "oe",
+        book,
+        verse["chapter"],
+        str(verse["verse"]),
+        verse["hebrew"],
+        verse["words"],
+        "source:oe",
+        pointer,
+        mappings,
+        language=language,
+        token_languages=languages,
     )
 
 
 def scripture(blobs: dict, mappings: dict):
     passages, tokens, evidence = [], [], []
 
-    def add(edition, book, chapter, verse, text, words, sid, pointer, source_ref=None):
+    def add(edition, book, chapter, verse, text, words, sid, pointer, *, language):
         p, t = make_passage(
             edition,
             book,
@@ -56,7 +83,7 @@ def scripture(blobs: dict, mappings: dict):
             f"source:{sid}",
             pointer,
             mappings,
-            source_ref,
+            language=language,
         )
         passages.append(p)
         tokens.extend(t)
@@ -64,7 +91,9 @@ def scripture(blobs: dict, mappings: dict):
 
     for i, verse in enumerate(json.loads(blobs["oe"])):
         if verse["verse"] == 13:
-            add("oe", "daniel", 7, 13, verse["hebrew"], verse["words"], "oe", f"/{i}")
+            p, t = oe_passage(verse, "daniel", f"/{i}", mappings)
+            passages.append(p)
+            tokens.extend(t)
     for c, chapter in enumerate(json.loads(blobs["delitzsch"])):
         for i, verse in enumerate(chapter["verses"]):
             if verse["verse"] in (1, 51):
@@ -77,6 +106,7 @@ def scripture(blobs: dict, mappings: dict):
                     verse["words"],
                     "delitzsch",
                     f"/{c}/verses/{i}",
+                    language="he",
                 )
     for i, verse in enumerate(json.loads(blobs["greek"])["verses"]):
         if verse["verse"] in (1, 51):
@@ -91,7 +121,15 @@ def scripture(blobs: dict, mappings: dict):
                 continue
             pointer = f"/chapters/{c}/verses/{i}"
             p = add(
-                "tth-es", "john", 1, verse["verse"], verse["tth"], [], "tth", pointer
+                "tth-es",
+                "john",
+                1,
+                verse["verse"],
+                verse["tth"],
+                [],
+                "tth",
+                pointer,
+                language="es",
             )
             for j, note in enumerate(verse.get("footnotes", [])):
                 evidence.append(

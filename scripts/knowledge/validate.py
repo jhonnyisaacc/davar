@@ -120,6 +120,12 @@ class Validator:
                 and record["visibility"] != "public"
             ):
                 raise ValueError("Private source in public records")
+        for concept in records["concepts"]:
+            source = require(concept["provenance"]["source_id"], "source")
+            if concept["owner"] != source["owner"]:
+                raise ValueError(
+                    "Concept owner differs from its provenance source owner"
+                )
         for p in records["passages"]:
             require(p["edition_id"], "edition")
             if p["book_id"] not in self.books:
@@ -132,6 +138,12 @@ class Validator:
             )
             if [t["ordinal"] for t in ts] != list(range(1, len(ts) + 1)):
                 raise ValueError("Token ordinals must be consecutive and unique")
+            if p["language"] == "mul" and (
+                not ts or any("language" not in t for t in ts)
+            ):
+                raise ValueError(
+                    "Mixed-language passages require explicit token languages"
+                )
             identity = dict(
                 edition_id=p["edition_id"],
                 book_id=p["book_id"],

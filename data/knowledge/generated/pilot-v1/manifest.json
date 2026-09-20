@@ -3,23 +3,23 @@
   "files": [
     {
       "path": "bundles/daniel/7/13.json",
-      "sha256": "1f687fee80ad90ca2cbc0e71395e47b04182455f90a7e27d60b6ccf9b78ef41e"
+      "sha256": "e131c6e7a45fc66c2cbc0b1b2462a069c5eb73af1d9b05e3c9e5be8d004a088e"
     },
     {
       "path": "bundles/john/1/1.json",
-      "sha256": "1e1cec4919312a337eb438d04bb18561c322158f4976d3355e284d7d471e4459"
+      "sha256": "0242b10ec8bda73cbcbe3179bf132568785541175436005c747c57c57051b60d"
     },
     {
       "path": "bundles/john/1/51.json",
-      "sha256": "ebb7de2c06cc2dd6b0a5c26d032b1272a6a831572653249c86bdc473741cd675"
+      "sha256": "428ab43418224d52a4b1a750254d12cc3b95505216e3067ad74cec511145c705"
     },
     {
       "path": "records/records.json",
-      "sha256": "f6c53eed62b2ec175d3ad9865958b578be9638e7f1aa19cbe2c86d91ec6df68b"
+      "sha256": "9949de665509ce5ad7a816c9b5dc13b7de5d08e26636f8261a11653459d8734f"
     }
   ],
   "generator_version": "1.0.0",
-  "input_manifest_digest": "258f6b80e6047d2b7f8a92f2f57e21cda5eba6bb1bd6776fe7a7533db4fbdad9",
+  "input_manifest_digest": "58d2b6dbf92a796e021c076e6fda32fb693a0b0a94210e8ee1158f5b4edf4fe7",
   "inputs": [
     {
       "id": "greek-lexicon",

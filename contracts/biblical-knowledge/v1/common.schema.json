@@ -3,6 +3,11 @@
   "$id": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json",
   "title": "common",
   "$defs": {
+    "sourceLanguage": {
+      "type": "string",
+      "pattern": "^[a-z]{2,8}(-[A-Za-z0-9]{1,8})*$",
+      "description": "Stable BCP-47 language tags such as he, arc, grc, es or pt-BR; mul denotes multiple languages. This checks common tag syntax, not IANA registration."
+    },
     "externalLexicalReference": {
       "type": "object",
       "properties": {

@@ -16,8 +16,8 @@
       "minLength": 1
     },
     "language": {
-      "type": "string",
-      "minLength": 1
+      "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/sourceLanguage",
+      "description": "Edition-wide language metadata, not a passage default. mul denotes a multilingual edition."
     },
     "source_kind": {
       "enum": [

@@ -12,6 +12,10 @@
       "type": "string",
       "minLength": 1
     },
+    "language": {
+      "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/sourceLanguage",
+      "description": "Actual source language; mul requires explicit language on each token. Tokens otherwise inherit this value."
+    },
     "book_id": {
       "type": "string",
       "minLength": 1
@@ -80,6 +84,7 @@
   "required": [
     "id",
     "edition_id",
+    "language",
     "book_id",
     "native_reference",
     "mapping",

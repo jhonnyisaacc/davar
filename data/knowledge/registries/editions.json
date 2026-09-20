@@ -3,7 +3,7 @@
     "id": "oe",
     "owner": "davar",
     "name": "OE Hebrew/Aramaic source",
-    "language": "he",
+    "language": "mul",
     "source_kind": "biblical_text",
     "reference_system_id": "davar-v1",
     "source_revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",

@@ -178,6 +178,7 @@ def test_identity_policy_and_nonnumeric_label():
             "source:oe",
             "/0",
             mapping,
+            language="he",
         )
 
     original, tokens = make()

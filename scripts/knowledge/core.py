@@ -152,7 +152,18 @@ def make_passage(
     pointer: str,
     mappings: dict,
     source_ref: str | None = None,
+    *,
+    language: str,
+    token_languages: list[str] | None = None,
 ):
+    if token_languages is not None and len(token_languages) != len(words):
+        raise ValueError("Token language count must match source words")
+    if language == "mul" and (
+        not words or token_languages is None or "mul" in token_languages
+    ):
+        raise ValueError(
+            "Mixed-language passages require a concrete language for every token"
+        )
     native = {"chapter": chapter, "verse_label": label}
     if source_ref:
         native["source_ref"] = source_ref
@@ -180,6 +191,7 @@ def make_passage(
         book_id=book,
         native_reference=native,
         mapping={"status": "mapped" if targets else "unresolved", "targets": targets},
+        language=language,
         text=text,
         text_snapshot=snapshot,
         tokenization_policy=policy,
@@ -204,6 +216,8 @@ def make_passage(
         )
         if "index" in word:
             token["source_index"] = word["index"]
+        if token_languages is not None and token_languages[ordinal - 1] != language:
+            token["language"] = token_languages[ordinal - 1]
         if "ref" in word:
             token["source_token_ref"] = word["ref"]
         tokens.append(token)

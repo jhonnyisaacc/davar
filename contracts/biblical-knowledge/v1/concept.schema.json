@@ -15,7 +15,7 @@
       ]
     },
     "owner": {
-      "const": "shaul"
+      "enum": ["davar", "shaul"]
     },
     "upstream_id": {
       "type": "string",
@@ -39,10 +39,23 @@
     "id",
     "kind",
     "owner",
-    "upstream_id",
     "names",
-    "source_record",
     "provenance"
+  ],
+  "allOf": [
+    {
+      "if": {"properties": {"owner": {"const": "shaul"}}},
+      "then": {
+        "required": ["upstream_id", "source_record"],
+        "properties": {"id": {"pattern": "^shaul:(concept|expression):[^:]+$"}}
+      },
+      "else": {"properties": {"id": {"pattern": "^davar:(concept|expression):[^:]+$"}}}
+    },
+    {
+      "if": {"properties": {"kind": {"const": "concept"}}},
+      "then": {"properties": {"id": {"pattern": "^[^:]+:concept:"}}},
+      "else": {"properties": {"id": {"pattern": "^[^:]+:expression:"}}}
+    }
   ],
   "additionalProperties": false
 }

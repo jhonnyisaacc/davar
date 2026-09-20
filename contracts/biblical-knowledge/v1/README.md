@@ -42,6 +42,12 @@ by their existing datasets. Shaul owns its notes, concepts, expressions, mention
 and relations. Imported records retain their owner, upstream identifiers and source
 metadata. Davar authors only the exact pilot span/integration mappings.
 
+The portable concept/expression contract permits `owner: davar` or `owner: shaul`.
+IDs must agree with their owner and kind, and the provenance source must have the
+same owner. Shaul records still require `upstream_id` and `source_record`; a native
+Davar record need not invent upstream metadata. This pilot creates no Davar-owned
+concepts or expressions and does not transfer ownership of any Shaul record.
+
 The Greek input is the committed revision-pinned preview, NOT the ignored importer
 directory. Its cleaned text and consecutive positions are used verbatim, alongside
 the upstream TAGNT index/ref. Preserve the original notices documented in
@@ -69,6 +75,16 @@ it is an attributed, unreviewed paraphrase, not a published definition.
   The ID includes that full SHA-256 digest. Text, pointing, punctuation, spelling or
   segmentation changes create a new snapshot. Strong, morphology, transliteration
   or git-revision-only changes do not. Source file digests separately track annotations.
+- Every source passage declares its actual `language` (`he`, `arc`, `grc`, `es`,
+  etc.). Edition language is descriptive, never an implicit passage default: OE
+  remains the same `oe` edition and uses `mul` for its Hebrew/Aramaic corpus.
+  Daniel 7:13 explicitly declares `arc`. The OE adapter maps the source's H/A
+  language markers to tags during ingestion; consumers do not interpret morphology.
+  A homogeneous passage's tokens inherit its language without duplicating it.
+  OE Daniel 2:4 is a real mixed-language verse: the contract permits passage `mul`
+  with a concrete language on every token. Token overrides are optional otherwise.
+  Language annotations are excluded from text snapshot identity, preserving all
+  existing passage, token and span IDs when only language metadata is corrected.
 - Tokens identify the passage snapshot and consecutive one-based ordinal. Upstream
   `source_index` and `source_token_ref` remain separate; John 1:51 proves index gaps.
 - Spans use inclusive one-based endpoints in one passage. Their IDs derive from the
@@ -121,6 +137,9 @@ Schema releases are immutable once published. Strict validation rejects unknown
 fields: even additive fields require a coordinated new schema release, and semantic
 or incompatible changes require a major contract version. TypeScript types may be
 generated one-way later; they must never become the authority.
+
+The passage-language and concept-ownership amendments finalize this still-unmerged
+initial v1 contract. They are not a migration of an already released contract.
 
 Rails can import editions, passages, tokens, spans, evidence and semantic records
 using these external IDs; internal primary keys may differ. References are value

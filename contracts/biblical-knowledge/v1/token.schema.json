@@ -12,6 +12,11 @@
       "type": "string",
       "minLength": 1
     },
+    "language": {
+      "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/sourceLanguage",
+      "not": {"const": "mul"},
+      "description": "Optional override of the passage language; required for tokens in a mul passage."
+    },
     "ordinal": {
       "type": "integer",
       "minimum": 1
