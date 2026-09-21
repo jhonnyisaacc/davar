@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://davar.bible/contracts/biblical-knowledge/v1/manifest.schema.json",
+  "title": "manifest",
+  "type": "object",
+  "properties": {
+    "contract_version": {
+      "const": "1.0.0"
+    },
+    "generator_version": {
+      "const": "1.0.0"
+    },
+    "input_manifest_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "required": [
+          "path",
+          "sha256"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "owner": {
+            "enum": [
+              "davar",
+              "shaul"
+            ]
+          },
+          "kind": {
+            "enum": ["dataset", "lexicon", "knowledge_record", "published_note"]
+          },
+          "repository": {
+            "type": "string",
+            "minLength": 1
+          },
+          "revision": {
+            "type": "string",
+            "minLength": 1
+          },
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "fixture_path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          }
+        },
+        "required": [
+          "id",
+          "owner",
+          "repository",
+          "revision",
+          "path",
+          "sha256"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "contract_version",
+    "generator_version",
+    "input_manifest_digest",
+    "files",
+    "inputs"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,267 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json",
+  "title": "common",
+  "$defs": {
+    "sourceLanguage": {
+      "type": "string",
+      "pattern": "^[a-z]{2,8}(-[A-Za-z0-9]{1,8})*$",
+      "description": "Stable BCP-47 language tags such as he, arc, grc, es or pt-BR; mul denotes multiple languages. This checks common tag syntax, not IANA registration."
+    },
+    "externalLexicalReference": {
+      "type": "object",
+      "properties": {
+        "namespace": {
+          "enum": [
+            "strong",
+            "tagnt",
+            "davar-prefix",
+            "davar-custom"
+          ]
+        },
+        "code": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "namespace",
+        "code"
+      ],
+      "additionalProperties": false
+    },
+    "target": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "enum": [
+                "edition",
+                "passage",
+                "token",
+                "span",
+                "source",
+                "evidence",
+                "concept",
+                "expression",
+                "relation",
+                "claim"
+              ]
+            },
+            "id": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "kind",
+            "id"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "reference"
+            },
+            "reference": {
+              "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/reference.schema.json"
+            }
+          },
+          "required": [
+            "kind",
+            "reference"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "external_lexical"
+            },
+            "reference": {
+              "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/externalLexicalReference"
+            }
+          },
+          "required": [
+            "kind",
+            "reference"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "locator": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "json"
+            },
+            "pointer": {
+              "type": "string",
+              "pattern": "^(/|$)"
+            }
+          },
+          "required": [
+            "kind",
+            "pointer"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "yaml"
+            },
+            "pointer": {
+              "type": "string",
+              "pattern": "^(/|$)"
+            }
+          },
+          "required": [
+            "kind",
+            "pointer"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "markdown"
+            },
+            "heading": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "kind",
+            "heading"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "media"
+            },
+            "media_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "start_ms": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "end_ms": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "precision": {
+              "enum": [
+                "caption",
+                "approximate",
+                "verified"
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "media_id",
+            "start_ms",
+            "precision"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "locator": {
+          "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/locator"
+        },
+        "origin": {
+          "enum": [
+            "source",
+            "authored"
+          ]
+        },
+        "transformation": {
+          "enum": [
+            "imported",
+            "normalized",
+            "generated",
+            "extracted",
+            "inferred"
+          ]
+        },
+        "review": {
+          "enum": [
+            "unreviewed",
+            "approved",
+            "rejected"
+          ]
+        },
+        "publication": {
+          "enum": [
+            "draft",
+            "published",
+            "withdrawn"
+          ]
+        },
+        "visibility": {
+          "enum": [
+            "public",
+            "private",
+            "restricted"
+          ]
+        }
+      },
+      "required": [
+        "source_id",
+        "locator",
+        "origin",
+        "transformation",
+        "review",
+        "publication",
+        "visibility"
+      ],
+      "additionalProperties": false
+    },
+    "localizedText": {
+      "type": "object",
+      "properties": {
+        "language": {
+          "type": "string",
+          "minLength": 1
+        },
+        "text": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "language",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

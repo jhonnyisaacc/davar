@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://davar.bible/contracts/biblical-knowledge/v1/records.schema.json",
+  "title": "records",
+  "type": "object",
+  "properties": {
+    "editions": {
+      "type": "array",
+      "items": {
+        "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/edition.schema.json"
+      }
+    },
+    "passages": {
+      "type": "array",
+      "items": {
+        "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/passage.schema.json"
+      }
+    },
+    "tokens": {
+      "type": "array",
+      "items": {
+        "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/token.schema.json"
+      }
+    },
+    "spans": {
+      "type": "array",
+      "items": {
+        "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/span.schema.json"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/source.schema.json"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/evidence.schema.json"
+      }
+    },
+    "concepts": {
+      "type": "array",
+      "items": {
+        "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/concept.schema.json"
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/relation.schema.json"
+      }
+    }
+  },
+  "required": [
+    "editions",
+    "passages",
+    "tokens",
+    "spans",
+    "sources",
+    "evidence",
+    "concepts",
+    "relations"
+  ],
+  "additionalProperties": false
+}

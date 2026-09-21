@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://davar.bible/contracts/biblical-knowledge/v1/reference.schema.json",
+  "title": "reference",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "system_id": {
+          "const": "davar-v1"
+        },
+        "book_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "const": "verse"
+        },
+        "chapter": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "verse": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "system_id",
+        "book_id",
+        "kind",
+        "chapter",
+        "verse"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "system_id": {
+          "const": "davar-v1"
+        },
+        "book_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "const": "chapter"
+        },
+        "chapter": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "required": [
+        "system_id",
+        "book_id",
+        "kind",
+        "chapter"
+      ],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "system_id": {
+          "const": "davar-v1"
+        },
+        "book_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "const": "range"
+        },
+        "start": {
+          "type": "object",
+          "properties": {
+            "chapter": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "verse": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "chapter",
+            "verse"
+          ],
+          "additionalProperties": false
+        },
+        "end": {
+          "type": "object",
+          "properties": {
+            "chapter": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "verse": {
+              "type": "integer",
+              "minimum": 1
+            }
+          },
+          "required": [
+            "chapter",
+            "verse"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "system_id",
+        "book_id",
+        "kind",
+        "start",
+        "end"
+      ],
+      "additionalProperties": false
+    }
+  ]
+}

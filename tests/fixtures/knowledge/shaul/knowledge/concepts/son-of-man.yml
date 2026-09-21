@@ -1,0 +1,40 @@
+id: son-of-man
+type: concept
+names:
+  es: Hijo del Hombre
+forms:
+  - word: word:bar-enash-ar
+    role: aramaic_expression
+  - word: word:ben-ha-adam-he
+    role: hebrew_expression
+related_concepts:
+  - concept:son
+aliases:
+  - Hijo del Hombre
+  - Ben Ha'Adam
+  - Ben HaAdam
+  - Bar Enash
+description: Un concepto experimental que reúne formas lingüísticas y menciones intertextuales sin borrar su especificidad léxica.
+summary:
+  what_it_is: >-
+    Hijo del Hombre reúne el בן האדם — Ben HaAdam de Marcos con el בר אנש — Bar
+    Enash de Daniel 7. Daniel ve a uno como hijo de hombre después de las bestias
+    y le son dados dominio, honra y reino; Marcos une el Ben HaAdam con
+    padecimiento, muerte, resurrección y venida en nubes. El concepto también se
+    lee dentro de la pregunta adámica: el Mesías es el Hombre de arriba, en quien
+    la vocación y el dominio destinados al hombre llegan a su cumplimiento.
+  what_it_is_not: >-
+    No es simplemente una manera de decir que Yeshua era humano, ni una etiqueta
+    que pueda separarse de Daniel 7, del reino, del padecimiento y de la
+    resurrección. Tampoco es correcto convertir בן — ben en «heredero» o
+    «repartidor» como si esa fuera su traducción fija en todas sus apariciones;
+    las notas presentan esa relación como una lectura contextual y pedagógica.
+articles:
+  - path: besorah/marcos_ben_adam_metamorfosis_glosario
+    title: "Marcos: Ben Adam, metamorfosis y glosario mesiánico"
+  - path: besorah/marcos_hijo_elohim_hijo_hombre_herencia
+    title: "Marcos: Hijo de Elohim, Hijo del Hombre y herencia"
+  - path: besorah/marcos_14_pesaj_pacto_getsemani_juicio
+    title: "Marcos 14: Pésaj, pacto renovado, Getsemaní y el juicio"
+  - path: temas/ben_hijo_titulos_mesias
+    title: Ben, Adam y el Hijo dado al Mesías

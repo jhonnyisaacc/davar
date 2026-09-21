@@ -1,0 +1,332 @@
+[
+  {
+    "id": "genesis",
+    "order": 1,
+    "name": "Genesis"
+  },
+  {
+    "id": "exodus",
+    "order": 2,
+    "name": "Exodus"
+  },
+  {
+    "id": "leviticus",
+    "order": 3,
+    "name": "Leviticus"
+  },
+  {
+    "id": "numbers",
+    "order": 4,
+    "name": "Numbers"
+  },
+  {
+    "id": "deuteronomy",
+    "order": 5,
+    "name": "Deuteronomy"
+  },
+  {
+    "id": "joshua",
+    "order": 6,
+    "name": "Joshua"
+  },
+  {
+    "id": "judges",
+    "order": 7,
+    "name": "Judges"
+  },
+  {
+    "id": "samuel1",
+    "order": 8,
+    "name": "Samuel1"
+  },
+  {
+    "id": "samuel2",
+    "order": 9,
+    "name": "Samuel2"
+  },
+  {
+    "id": "kings1",
+    "order": 10,
+    "name": "Kings1"
+  },
+  {
+    "id": "kings2",
+    "order": 11,
+    "name": "Kings2"
+  },
+  {
+    "id": "isaiah",
+    "order": 12,
+    "name": "Isaiah"
+  },
+  {
+    "id": "jeremiah",
+    "order": 13,
+    "name": "Jeremiah"
+  },
+  {
+    "id": "ezekiel",
+    "order": 14,
+    "name": "Ezekiel"
+  },
+  {
+    "id": "hosea",
+    "order": 15,
+    "name": "Hosea"
+  },
+  {
+    "id": "joel",
+    "order": 16,
+    "name": "Joel"
+  },
+  {
+    "id": "amos",
+    "order": 17,
+    "name": "Amos"
+  },
+  {
+    "id": "obadiah",
+    "order": 18,
+    "name": "Obadiah"
+  },
+  {
+    "id": "jonah",
+    "order": 19,
+    "name": "Jonah"
+  },
+  {
+    "id": "micah",
+    "order": 20,
+    "name": "Micah"
+  },
+  {
+    "id": "nahum",
+    "order": 21,
+    "name": "Nahum"
+  },
+  {
+    "id": "habakkuk",
+    "order": 22,
+    "name": "Habakkuk"
+  },
+  {
+    "id": "zephaniah",
+    "order": 23,
+    "name": "Zephaniah"
+  },
+  {
+    "id": "haggai",
+    "order": 24,
+    "name": "Haggai"
+  },
+  {
+    "id": "zechariah",
+    "order": 25,
+    "name": "Zechariah"
+  },
+  {
+    "id": "malachi",
+    "order": 26,
+    "name": "Malachi"
+  },
+  {
+    "id": "psalms",
+    "order": 27,
+    "name": "Psalms"
+  },
+  {
+    "id": "proverbs",
+    "order": 28,
+    "name": "Proverbs"
+  },
+  {
+    "id": "job",
+    "order": 29,
+    "name": "Job"
+  },
+  {
+    "id": "songofsolomon",
+    "order": 30,
+    "name": "SongOfSolomon"
+  },
+  {
+    "id": "ruth",
+    "order": 31,
+    "name": "Ruth"
+  },
+  {
+    "id": "lamentations",
+    "order": 32,
+    "name": "Lamentations"
+  },
+  {
+    "id": "ecclesiastes",
+    "order": 33,
+    "name": "Ecclesiastes"
+  },
+  {
+    "id": "esther",
+    "order": 34,
+    "name": "Esther"
+  },
+  {
+    "id": "daniel",
+    "order": 35,
+    "name": "Daniel"
+  },
+  {
+    "id": "ezra",
+    "order": 36,
+    "name": "Ezra"
+  },
+  {
+    "id": "nehemiah",
+    "order": 37,
+    "name": "Nehemiah"
+  },
+  {
+    "id": "chronicles1",
+    "order": 38,
+    "name": "Chronicles1"
+  },
+  {
+    "id": "chronicles2",
+    "order": 39,
+    "name": "Chronicles2"
+  },
+  {
+    "id": "matthew",
+    "order": 40,
+    "name": "Matthew"
+  },
+  {
+    "id": "mark",
+    "order": 41,
+    "name": "Mark"
+  },
+  {
+    "id": "luke",
+    "order": 42,
+    "name": "Luke"
+  },
+  {
+    "id": "john",
+    "order": 43,
+    "name": "John"
+  },
+  {
+    "id": "acts",
+    "order": 44,
+    "name": "Acts"
+  },
+  {
+    "id": "romans",
+    "order": 45,
+    "name": "Romans"
+  },
+  {
+    "id": "corinthians1",
+    "order": 46,
+    "name": "Corinthians1"
+  },
+  {
+    "id": "corinthians2",
+    "order": 47,
+    "name": "Corinthians2"
+  },
+  {
+    "id": "galatians",
+    "order": 48,
+    "name": "Galatians"
+  },
+  {
+    "id": "ephesians",
+    "order": 49,
+    "name": "Ephesians"
+  },
+  {
+    "id": "philippians",
+    "order": 50,
+    "name": "Philippians"
+  },
+  {
+    "id": "colossians",
+    "order": 51,
+    "name": "Colossians"
+  },
+  {
+    "id": "thessalonians1",
+    "order": 52,
+    "name": "Thessalonians1"
+  },
+  {
+    "id": "thessalonians2",
+    "order": 53,
+    "name": "Thessalonians2"
+  },
+  {
+    "id": "timothy1",
+    "order": 54,
+    "name": "Timothy1"
+  },
+  {
+    "id": "timothy2",
+    "order": 55,
+    "name": "Timothy2"
+  },
+  {
+    "id": "titus",
+    "order": 56,
+    "name": "Titus"
+  },
+  {
+    "id": "philemon",
+    "order": 57,
+    "name": "Philemon"
+  },
+  {
+    "id": "hebrews",
+    "order": 58,
+    "name": "Hebrews"
+  },
+  {
+    "id": "james",
+    "order": 59,
+    "name": "James"
+  },
+  {
+    "id": "peter1",
+    "order": 60,
+    "name": "Peter1"
+  },
+  {
+    "id": "peter2",
+    "order": 61,
+    "name": "Peter2"
+  },
+  {
+    "id": "john1",
+    "order": 62,
+    "name": "John1"
+  },
+  {
+    "id": "john2",
+    "order": 63,
+    "name": "John2"
+  },
+  {
+    "id": "john3",
+    "order": 64,
+    "name": "John3"
+  },
+  {
+    "id": "jude",
+    "order": 65,
+    "name": "Jude"
+  },
+  {
+    "id": "revelation",
+    "order": 66,
+    "name": "Revelation"
+  }
+]

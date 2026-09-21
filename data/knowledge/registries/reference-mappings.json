@@ -1,0 +1,176 @@
+{
+  "passages": [
+    {
+      "edition_id": "oe",
+      "book_id": "daniel",
+      "chapter": 7,
+      "verse_label": "13",
+      "target": {
+        "system_id": "davar-v1",
+        "book_id": "daniel",
+        "kind": "verse",
+        "chapter": 7,
+        "verse": 13
+      }
+    },
+    {
+      "edition_id": "delitzsch",
+      "book_id": "john",
+      "chapter": 1,
+      "verse_label": "1",
+      "target": {
+        "system_id": "davar-v1",
+        "book_id": "john",
+        "kind": "verse",
+        "chapter": 1,
+        "verse": 1
+      }
+    },
+    {
+      "edition_id": "delitzsch",
+      "book_id": "john",
+      "chapter": 1,
+      "verse_label": "51",
+      "target": {
+        "system_id": "davar-v1",
+        "book_id": "john",
+        "kind": "verse",
+        "chapter": 1,
+        "verse": 51
+      }
+    },
+    {
+      "edition_id": "sblgnt-tagnt",
+      "book_id": "john",
+      "chapter": 1,
+      "verse_label": "1",
+      "target": {
+        "system_id": "davar-v1",
+        "book_id": "john",
+        "kind": "verse",
+        "chapter": 1,
+        "verse": 1
+      }
+    },
+    {
+      "edition_id": "sblgnt-tagnt",
+      "book_id": "john",
+      "chapter": 1,
+      "verse_label": "51",
+      "target": {
+        "system_id": "davar-v1",
+        "book_id": "john",
+        "kind": "verse",
+        "chapter": 1,
+        "verse": 51
+      }
+    },
+    {
+      "edition_id": "tth-es",
+      "book_id": "john",
+      "chapter": 1,
+      "verse_label": "1",
+      "target": {
+        "system_id": "davar-v1",
+        "book_id": "john",
+        "kind": "verse",
+        "chapter": 1,
+        "verse": 1
+      }
+    },
+    {
+      "edition_id": "tth-es",
+      "book_id": "john",
+      "chapter": 1,
+      "verse_label": "51",
+      "target": {
+        "system_id": "davar-v1",
+        "book_id": "john",
+        "kind": "verse",
+        "chapter": 1,
+        "verse": 51
+      }
+    }
+  ],
+  "legacy_translation_cases": [
+    {
+      "book_id": "psalms",
+      "chapter": 3,
+      "verse": 1,
+      "target": null,
+      "uses_title": true
+    },
+    {
+      "book_id": "psalms",
+      "chapter": 3,
+      "verse": 2,
+      "target": {
+        "chapter": 3,
+        "verse": 1
+      },
+      "uses_title": false
+    },
+    {
+      "book_id": "exodus",
+      "chapter": 7,
+      "verse": 26,
+      "target": {
+        "chapter": 8,
+        "verse": 1
+      },
+      "uses_title": false
+    },
+    {
+      "book_id": "daniel",
+      "chapter": 3,
+      "verse": 31,
+      "target": {
+        "chapter": 4,
+        "verse": 1
+      },
+      "uses_title": false
+    },
+    {
+      "book_id": "malachi",
+      "chapter": 3,
+      "verse": 19,
+      "target": {
+        "chapter": 4,
+        "verse": 1
+      },
+      "uses_title": false
+    }
+  ],
+  "shaul_verified": [
+    {
+      "tag": "#daniel_7_13",
+      "reference": {
+        "system_id": "davar-v1",
+        "book_id": "daniel",
+        "kind": "verse",
+        "chapter": 7,
+        "verse": 13
+      }
+    },
+    {
+      "tag": "#juan_1_1",
+      "reference": {
+        "system_id": "davar-v1",
+        "book_id": "john",
+        "kind": "verse",
+        "chapter": 1,
+        "verse": 1
+      }
+    },
+    {
+      "tag": "#juan_1_51",
+      "reference": {
+        "system_id": "davar-v1",
+        "book_id": "john",
+        "kind": "verse",
+        "chapter": 1,
+        "verse": 51
+      }
+    }
+  ]
+}

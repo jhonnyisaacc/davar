@@ -1,0 +1,16 @@
+[
+  {
+    "id": "davar:relation:daniel-7-13-bar-enash",
+    "span_key": "bar-enash",
+    "expression_id": "shaul:expression:bar-enash-ar",
+    "concept_id": "shaul:concept:son-of-man",
+    "evidence_id": "shaul:evidence:mention-son-of-man-daniel"
+  },
+  {
+    "id": "davar:relation:john-1-51-ben-ha-adam",
+    "span_key": "ben-ha-adam",
+    "expression_id": "shaul:expression:ben-ha-adam-he",
+    "concept_id": "shaul:concept:son-of-man",
+    "evidence_id": "shaul:evidence:juan_1_testigo_cordero"
+  }
+]

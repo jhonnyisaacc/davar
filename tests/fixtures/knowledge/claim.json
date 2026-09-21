@@ -1,0 +1,21 @@
+{
+  "id": "fixture:claim:ben-ha-adam-context",
+  "owner": "davar",
+  "kind": "contextual_meaning",
+  "statement": {
+    "language": "en",
+    "text": "The cited Shaul note cautions against replacing Ben Ha'Adam with a single fixed theological paraphrase. This is a review fixture, not an approved lexical definition."
+  },
+  "asserted_by": "Shaul note: content/besorah/juan_1_testigo_cordero",
+  "targets": [{"kind": "reference", "reference": {"system_id": "davar-v1", "book_id": "john", "kind": "verse", "chapter": 1, "verse": 51}}],
+  "evidence_ids": ["shaul:evidence:juan_1_testigo_cordero"],
+  "provenance": {
+    "source_id": "source:shaul-juan_1_testigo_cordero",
+    "locator": {"kind": "markdown", "heading": "Netanel y las confesiones del final"},
+    "origin": "authored",
+    "transformation": "extracted",
+    "review": "unreviewed",
+    "publication": "draft",
+    "visibility": "public"
+  }
+}

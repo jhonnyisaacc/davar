@@ -1,0 +1,294 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://davar.bible/contracts/biblical-knowledge/v1/profile.schema.json",
+  "title": "Read-only knowledge build profile",
+  "type": "object",
+  "properties": {
+    "contract_version": {
+      "const": "1.0.0"
+    },
+    "input_manifest": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reference_mappings": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authored": {
+      "type": "object",
+      "properties": {
+        "spans": {
+          "type": "string",
+          "minLength": 1
+        },
+        "relations": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    },
+    "scripture": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "input_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "adapter": {
+            "enum": [
+              "oe",
+              "delitzsch",
+              "greek",
+              "tth"
+            ]
+          },
+          "edition_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "book_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "passages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "chapter": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "verse_label": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "chapter",
+                "verse_label"
+              ],
+              "additionalProperties": false
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "input_id",
+          "adapter",
+          "edition_id",
+          "book_id",
+          "passages"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "lexical": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "input_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "id_namespace": {
+            "type": "string",
+            "minLength": 1
+          },
+          "codes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          }
+        },
+        "required": [
+          "input_id",
+          "id_namespace",
+          "codes"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "shaul": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "adapter": {
+                "const": "entity"
+              },
+              "input_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "adapter",
+              "input_id"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "adapter": {
+                "const": "mention"
+              },
+              "input_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "targets": {
+                "type": "array",
+                "items": {
+                  "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/target"
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "adapter",
+              "input_id",
+              "targets"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "adapter": {
+                "const": "note"
+              },
+              "input_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "upstream_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "heading": {
+                "type": "string",
+                "minLength": 1
+              },
+              "targets": {
+                "type": "array",
+                "items": {
+                  "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/target"
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "adapter",
+              "input_id",
+              "id",
+              "upstream_id",
+              "heading",
+              "targets"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "adapter": {
+                "const": "relation"
+              },
+              "input_id": {
+                "type": "string",
+                "minLength": 1
+              },
+              "evidence_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "minItems": 1,
+                "uniqueItems": true
+              }
+            },
+            "required": [
+              "adapter",
+              "input_id",
+              "evidence_ids"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "coverage": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/reference.schema.json"
+          },
+          "edition_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "present",
+              "absent",
+              "not_requested"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "reference",
+          "edition_id",
+          "status",
+          "reason"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "contract_version",
+    "input_manifest",
+    "reference_mappings",
+    "authored",
+    "scripture",
+    "lexical",
+    "shaul",
+    "coverage"
+  ],
+  "additionalProperties": false
+}

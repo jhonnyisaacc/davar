@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://davar.bible/contracts/biblical-knowledge/v1/token.schema.json",
+  "title": "token",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_passage_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "language": {
+      "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/sourceLanguage",
+      "not": {"const": "mul"},
+      "description": "Optional override of the passage language; required for tokens in a mul passage."
+    },
+    "ordinal": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lexical_refs": {
+      "type": "array",
+      "items": {
+        "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/externalLexicalReference"
+      }
+    },
+    "source_index": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "source_token_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "annotations": {
+      "type": "object"
+    },
+    "provenance": {
+      "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/provenance"
+    }
+  },
+  "required": [
+    "id",
+    "source_passage_id",
+    "ordinal",
+    "text",
+    "lexical_refs",
+    "annotations",
+    "provenance"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://davar.bible/contracts/biblical-knowledge/v1/bundle.schema.json",
+  "title": "bundle",
+  "type": "object",
+  "properties": {
+    "contract_version": {
+      "const": "1.0.0"
+    },
+    "reference": {
+      "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/reference.schema.json"
+    },
+    "input_manifest_digest": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "records": {
+      "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/records.schema.json"
+    },
+    "coverage": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "edition_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "present",
+              "absent",
+              "not_requested"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "edition_id",
+          "status",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "contract_version",
+    "reference",
+    "input_manifest_digest",
+    "records",
+    "coverage",
+    "diagnostics"
+  ],
+  "additionalProperties": false
+}

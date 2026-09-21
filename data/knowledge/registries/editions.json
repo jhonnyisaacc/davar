@@ -1,0 +1,42 @@
+[
+  {
+    "id": "oe",
+    "owner": "davar",
+    "name": "OE Hebrew/Aramaic source",
+    "language": "mul",
+    "source_kind": "biblical_text",
+    "reference_system_id": "davar-v1",
+    "source_revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
+    "attribution": "Existing Davar OE dataset; retain its original source notices. Aramaic morphology is preserved."
+  },
+  {
+    "id": "delitzsch",
+    "owner": "davar",
+    "name": "Delitzsch parsed Hebrew",
+    "language": "he",
+    "source_kind": "biblical_text",
+    "reference_system_id": "davar-v1",
+    "source_revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
+    "attribution": "Existing Davar Delitzsch parsed dataset; retain original source notices."
+  },
+  {
+    "id": "sblgnt-tagnt",
+    "owner": "davar",
+    "name": "SBLGNT with TAGNT annotation",
+    "language": "grc",
+    "source_kind": "biblical_text",
+    "reference_system_id": "tagnt-native",
+    "source_revision": "ae39711d7843b2902d54993e432de9c12d6a4b9a",
+    "attribution": "SBLGNT / STEPBible TAGNT. Derived from Davar's committed preview. See docs/greek-besorah-source-licenses.md and data/greek/preview; existing notices and release restrictions continue to apply."
+  },
+  {
+    "id": "tth-es",
+    "owner": "davar",
+    "name": "TTH Spanish",
+    "language": "es",
+    "source_kind": "translation",
+    "reference_system_id": "translation-legacy",
+    "source_revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
+    "attribution": "Original TTH text and footnotes from data/tth_2/json; existing attribution and permissions apply."
+  }
+]

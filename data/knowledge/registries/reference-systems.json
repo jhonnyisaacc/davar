@@ -1,0 +1,18 @@
+[
+  {
+    "id": "davar-v1",
+    "description": "Existing Davar OE/Tanakh and Besorah chapter/verse coordinates; only explicitly verified edition mappings are asserted."
+  },
+  {
+    "id": "translation-legacy",
+    "description": "Legacy Davar translation lookup coordinates; not a claim about all editions."
+  },
+  {
+    "id": "tagnt-native",
+    "description": "Native TAGNT source labels, including nonnumeric labels."
+  },
+  {
+    "id": "shaul-unspecified",
+    "description": "Source note tags do not identify their numbering system."
+  }
+]

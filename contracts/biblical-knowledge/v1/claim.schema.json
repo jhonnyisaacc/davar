@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://davar.bible/contracts/biblical-knowledge/v1/claim.schema.json",
+  "title": "claim",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "owner": {
+      "enum": [
+        "davar",
+        "shaul"
+      ]
+    },
+    "kind": {
+      "enum": [
+        "lexical_meaning",
+        "contextual_meaning",
+        "translation_preference",
+        "concept_interpretation"
+      ]
+    },
+    "statement": {
+      "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/localizedText"
+    },
+    "asserted_by": {
+      "type": "string",
+      "minLength": 1
+    },
+    "targets": {
+      "type": "array",
+      "items": {
+        "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/target"
+      }
+    },
+    "evidence_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "provenance": {
+      "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/provenance"
+    }
+  },
+  "required": [
+    "id",
+    "owner",
+    "kind",
+    "statement",
+    "asserted_by",
+    "targets",
+    "evidence_ids",
+    "provenance"
+  ],
+  "additionalProperties": false
+}

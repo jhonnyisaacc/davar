@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://davar.bible/contracts/biblical-knowledge/v1/edition.schema.json",
+  "title": "edition",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "owner": {
+      "const": "davar"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "language": {
+      "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/sourceLanguage",
+      "description": "Edition-wide language metadata, not a passage default. mul denotes a multilingual edition."
+    },
+    "source_kind": {
+      "enum": [
+        "biblical_text",
+        "translation"
+      ]
+    },
+    "reference_system_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "attribution": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "id",
+    "owner",
+    "name",
+    "language",
+    "source_kind",
+    "reference_system_id",
+    "source_revision",
+    "attribution"
+  ],
+  "additionalProperties": false
+}
