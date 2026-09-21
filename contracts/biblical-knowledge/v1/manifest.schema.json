@@ -50,6 +50,9 @@
               "shaul"
             ]
           },
+          "kind": {
+            "enum": ["dataset", "lexicon", "knowledge_record", "published_note"]
+          },
           "repository": {
             "type": "string",
             "minLength": 1

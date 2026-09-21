@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://davar.bible/contracts/biblical-knowledge/v1/input-manifest.schema.json",
-  "title": "Pilot input manifest",
+  "title": "Pinned input manifest",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -27,6 +27,9 @@
               "davar",
               "shaul"
             ]
+          },
+          "kind": {
+            "enum": ["dataset", "lexicon", "knowledge_record", "published_note"]
           },
           "repository": {
             "type": "string",
@@ -62,8 +65,7 @@
     },
     "pilots": {
       "type": "array",
-      "minItems": 3,
-      "maxItems": 3,
+      "minItems": 1,
       "uniqueItems": true,
       "items": {
         "type": "array",

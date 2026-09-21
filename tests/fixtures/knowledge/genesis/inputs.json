@@ -1,0 +1,20 @@
+{
+  "contract_version": "1.0.0",
+  "inputs": [
+    {
+      "id": "oe-genesis",
+      "owner": "davar",
+      "repository": "https://github.com/jhonnyisaacc/davar",
+      "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
+      "path": "data/oe/genesis/1.json",
+      "sha256": "60c96ceae7af135b115cc027edfc82ba23337ca31fb7cfe6e824ab4dd6f79fed"
+    }
+  ],
+  "pilots": [
+    [
+      "genesis",
+      1,
+      1
+    ]
+  ]
+}

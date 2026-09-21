@@ -15,20 +15,23 @@ def main():
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--shaul-root", type=Path)
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--profile", help="Repository-relative JSON build profile")
     args = parser.parse_args()
     root = args.root.resolve()
+    if args.command == "validate" and args.profile:
+        parser.error("--profile applies only to build and check")
     if args.command == "build":
         if args.output is None:
             parser.error("build requires --output (new or empty directory)")
-        build(args.output.absolute(), root, args.shaul_root)
+        build(args.output.absolute(), root, args.shaul_root, args.profile)
     elif args.command == "validate":
         validate_tree(args.output or root / OUTPUT, root)
     else:
-        expected = root / OUTPUT
+        expected = args.output or root / OUTPUT
         validate_tree(expected, root)
         with tempfile.TemporaryDirectory(prefix="davar-knowledge-check-") as temp:
             actual = Path(temp).resolve() / "output"
-            build(actual, root, args.shaul_root)
+            build(actual, root, args.shaul_root, args.profile)
 
             def paths(directory):
                 return {

@@ -3,10 +3,11 @@
 from __future__ import annotations
 
 import json
+import re
 
 import yaml
 
-from .core import lexical_refs, make_passage, normalize_tag, provenance, reference
+from .core import lexical_refs, make_passage, normalize_tag, provenance
 
 
 class SourceLoader(yaml.SafeLoader):
@@ -26,16 +27,24 @@ def load_yaml(data):
     return yaml.load(data, Loader=SourceLoader)
 
 
-def greek_passage(verse: dict, book: str, pointer: str, mappings: dict):
+def greek_passage(
+    verse: dict,
+    book: str,
+    pointer: str,
+    mappings: dict,
+    *,
+    edition="sblgnt-tagnt",
+    source_id="source:greek",
+):
     """Preserve nonnumeric native labels; never infer a canonical verse from them."""
     return make_passage(
-        "sblgnt-tagnt",
+        edition,
         book,
         verse["chapter"],
         verse["verse_id"],
         verse["text"],
         verse["words"],
-        "source:greek",
+        source_id,
         pointer,
         mappings,
         verse.get("source_ref"),
@@ -43,7 +52,15 @@ def greek_passage(verse: dict, book: str, pointer: str, mappings: dict):
     )
 
 
-def oe_passage(verse: dict, book: str, pointer: str, mappings: dict):
+def oe_passage(
+    verse: dict,
+    book: str,
+    pointer: str,
+    mappings: dict,
+    *,
+    edition="oe",
+    source_id="source:oe",
+):
     """Normalize OE's explicit H/A morphology language markers once at ingestion."""
     languages = []
     for word in verse["words"]:
@@ -55,13 +72,13 @@ def oe_passage(verse: dict, book: str, pointer: str, mappings: dict):
         raise ValueError("OE passage has no language-bearing words")
     language = languages[0] if len(set(languages)) == 1 else "mul"
     return make_passage(
-        "oe",
+        edition,
         book,
         verse["chapter"],
         str(verse["verse"]),
         verse["hebrew"],
         verse["words"],
-        "source:oe",
+        source_id,
         pointer,
         mappings,
         language=language,
@@ -69,197 +86,203 @@ def oe_passage(verse: dict, book: str, pointer: str, mappings: dict):
     )
 
 
-def scripture(blobs: dict, mappings: dict):
+def scripture(blobs: dict, mappings: dict, selections: list):
     passages, tokens, evidence = [], [], []
-
-    def add(edition, book, chapter, verse, text, words, sid, pointer, *, language):
-        p, t = make_passage(
-            edition,
-            book,
-            chapter,
-            str(verse),
-            text,
-            words,
-            f"source:{sid}",
-            pointer,
-            mappings,
-            language=language,
-        )
-        passages.append(p)
-        tokens.extend(t)
-        return p
-
-    for i, verse in enumerate(json.loads(blobs["oe"])):
-        if verse["verse"] == 13:
-            p, t = oe_passage(verse, "daniel", f"/{i}", mappings)
-            passages.append(p)
-            tokens.extend(t)
-    for c, chapter in enumerate(json.loads(blobs["delitzsch"])):
-        for i, verse in enumerate(chapter["verses"]):
-            if verse["verse"] in (1, 51):
-                add(
-                    "delitzsch",
-                    "john",
-                    1,
-                    verse["verse"],
-                    verse["hebrew"],
-                    verse["words"],
-                    "delitzsch",
-                    f"/{c}/verses/{i}",
-                    language="he",
+    for spec in selections:
+        data = json.loads(blobs[spec["input_id"]])
+        adapter = spec["adapter"]
+        if adapter == "oe":
+            rows = [
+                (v["chapter"], str(v["verse"]), f"/{i}", v) for i, v in enumerate(data)
+            ]
+        elif adapter == "greek":
+            rows = [
+                (v["chapter"], v["verse_id"], f"/verses/{i}", v)
+                for i, v in enumerate(data["verses"])
+            ]
+        elif adapter in ("delitzsch", "tth"):
+            chapters = data if adapter == "delitzsch" else data["chapters"]
+            prefix = "" if adapter == "delitzsch" else "/chapters"
+            rows = [
+                (c["chapter"], str(v["verse"]), f"{prefix}/{j}/verses/{i}", v)
+                for j, c in enumerate(chapters)
+                for i, v in enumerate(c["verses"])
+            ]
+        else:
+            raise ValueError("Unsupported scripture adapter: " + adapter)
+        for selected in spec["passages"]:
+            matches = [
+                row
+                for row in rows
+                if row[:2] == (selected["chapter"], selected["verse_label"])
+            ]
+            if len(matches) != 1:
+                raise ValueError(
+                    "Requested passage missing or ambiguous: " + str(selected)
                 )
-    for i, verse in enumerate(json.loads(blobs["greek"])["verses"]):
-        if verse["verse"] in (1, 51):
-            p, t = greek_passage(verse, "john", f"/verses/{i}", mappings)
+            chapter, label, pointer, verse = matches[0]
+            sid = "source:" + spec["input_id"]
+            kwargs = dict(edition=spec["edition_id"], source_id=sid)
+            if adapter == "oe":
+                p, t = oe_passage(verse, spec["book_id"], pointer, mappings, **kwargs)
+            elif adapter == "greek":
+                p, t = greek_passage(
+                    verse, spec["book_id"], pointer, mappings, **kwargs
+                )
+            else:
+                p, t = make_passage(
+                    spec["edition_id"],
+                    spec["book_id"],
+                    chapter,
+                    label,
+                    verse["hebrew"] if adapter == "delitzsch" else verse["tth"],
+                    verse["words"] if adapter == "delitzsch" else [],
+                    sid,
+                    pointer,
+                    mappings,
+                    language="he" if adapter == "delitzsch" else "es",
+                )
             passages.append(p)
             tokens.extend(t)
-    for c, chapter in enumerate(json.loads(blobs["tth"])["chapters"]):
-        if chapter["chapter"] != 1:
-            continue
-        for i, verse in enumerate(chapter["verses"]):
-            if verse["verse"] not in (1, 51):
-                continue
-            pointer = f"/chapters/{c}/verses/{i}"
-            p = add(
-                "tth-es",
-                "john",
-                1,
-                verse["verse"],
-                verse["tth"],
-                [],
-                "tth",
-                pointer,
-                language="es",
-            )
-            for j, note in enumerate(verse.get("footnotes", [])):
-                evidence.append(
-                    dict(
-                        id=f"evidence:{p['id']}:footnote:{j}",
-                        kind="footnote",
-                        targets=[{"kind": "passage", "id": p["id"]}],
-                        content=note,
-                        provenance=provenance("source:tth", f"{pointer}/footnotes/{j}"),
+            if adapter == "tth":
+                for j, note in enumerate(verse.get("footnotes", [])):
+                    evidence.append(
+                        dict(
+                            id=f"evidence:{p['id']}:footnote:{j}",
+                            kind="footnote",
+                            targets=[{"kind": "passage", "id": p["id"]}],
+                            content=note,
+                            provenance=provenance(sid, f"{pointer}/footnotes/{j}"),
+                        )
                     )
-                )
     return passages, tokens, evidence
 
 
-def lexical(blobs: dict):
+def lexical(blobs: dict, selections: list):
     records = []
-    words = json.loads(blobs["bdb"])
-    for code in ("H1247", "H606", "H1697", "H430"):
-        entry = words[code]
-        records.append(
-            dict(
-                id=f"evidence:bdb:{code}",
-                kind="lexical_entry",
-                targets=[
-                    {
-                        "kind": "external_lexical",
-                        "reference": {"namespace": "strong", "code": code},
-                    }
-                ],
-                content={"source_entry_id": code, "lemma": entry["lemma"]},
-                provenance=provenance("source:bdb", f"/{code}"),
+    for spec in selections:
+        entries = json.loads(blobs[spec["input_id"]])
+        for code in spec["codes"]:
+            if code not in entries:
+                raise ValueError("Requested lexical entry missing: " + code)
+            entry = entries[code]
+            refs = lexical_refs(code)
+            if len(refs) != 1:
+                raise ValueError("Lexical selection must identify one entry")
+            pointer = "/" + code.replace("~", "~0").replace("/", "~1")
+            records.append(
+                dict(
+                    id=f"evidence:{spec['id_namespace']}:{code}",
+                    kind="lexical_entry",
+                    targets=[{"kind": "external_lexical", "reference": refs[0]}],
+                    content={"source_entry_id": code, "lemma": entry["lemma"]},
+                    provenance=provenance("source:" + spec["input_id"], pointer),
+                )
             )
-        )
-    greek = json.loads(blobs["greek-lexicon"])
-    for code in ("G3056", "G3004G", "G5207", "G0444"):
-        entry = greek[code]
-        records.append(
-            dict(
-                id=f"evidence:tagnt:{code}",
-                kind="lexical_entry",
-                targets=[
-                    {"kind": "external_lexical", "reference": lexical_refs(code)[0]}
-                ],
-                content={"source_entry_id": code, "lemma": entry["lemma"]},
-                provenance=provenance("source:greek-lexicon", f"/{code}"),
-            )
-        )
     return records
 
 
-def public_note(data: bytes):
+def public_note(data: bytes, heading: str):
     text = data.decode("utf-8")
     if not text.startswith("---\n"):
         raise ValueError("Public note needs YAML frontmatter")
     header, body = text[4:].split("\n---", 1)
     metadata = load_yaml(header)
-    heading = "Netanel y las confesiones del final"
-    marker = "## " + heading
-    section = body.split(marker, 1)[1].split("\n## ", 1)[0].strip()
-    return metadata, heading, section
+    # Match complete second-level headings, not prefixes or headings in fenced code.
+    lines = body.splitlines(keepends=True)
+    headings, fence = [], None
+    for i, line in enumerate(lines):
+        match = re.match(r"^\s{0,3}(`{3,}|~{3,})", line)
+        if match:
+            marker = match[1]
+            if fence is None:
+                fence = marker
+            elif marker[0] == fence[0] and len(marker) >= len(fence):
+                fence = None
+        elif fence is None and line.startswith("## "):
+            headings.append((i, line[3:].strip()))
+    matches = [i for i, title in headings if title == heading]
+    if len(matches) != 1:
+        raise ValueError("Requested Markdown section missing or ambiguous")
+    start = matches[0]
+    end = next((i for i, _ in headings if i > start), len(lines))
+    return metadata, heading, "".join(lines[start + 1 : end]).strip()
 
 
-def shaul(blobs: dict, aliases: list, mappings: dict):
+def shaul_target(raw: str):
+    kind, key = raw.split(":", 1)
+    if kind not in ("concept", "word") or not key:
+        raise ValueError("Unsupported Shaul entity reference: " + raw)
+    kind = "expression" if kind == "word" else kind
+    return {"kind": kind, "id": f"shaul:{kind}:{key}"}
+
+
+def shaul(blobs: dict, aliases: list, mappings: dict, selections: list):
     concepts, evidence, relations = [], [], []
-    for key in ("son-of-man", "bar-enash-ar", "ben-ha-adam-he"):
-        data = load_yaml(blobs["shaul-" + key])
-        kind = "concept" if data["type"] == "concept" else "expression"
-        concepts.append(
-            dict(
-                id=f"shaul:{kind}:{data['id']}",
-                kind=kind,
-                owner="shaul",
-                upstream_id=f"{data['type']}:{data['id']}",
-                names=data.get("names", {"und": data.get("script", data["id"])}),
-                source_record=data,
-                provenance=provenance(
-                    "source:shaul-" + key, kind="yaml", authored=True
-                ),
+    for spec in selections:
+        sid = "source:" + spec["input_id"]
+        adapter = spec["adapter"]
+        if adapter == "note":
+            note, heading, section = public_note(
+                blobs[spec["input_id"]], spec["heading"]
             )
-        )
-    mention = load_yaml(blobs["shaul-son-of-man-daniel"])
-    evidence.append(
-        dict(
-            id="shaul:evidence:" + mention["id"],
-            kind="mention",
-            targets=[{"kind": "reference", "reference": reference("daniel", 7, 13)}],
-            content=mention,
-            provenance=provenance(
-                "source:shaul-son-of-man-daniel", kind="yaml", authored=True
-            ),
-        )
-    )
-    note, heading, section = public_note(blobs["shaul-juan_1_testigo_cordero"])
-    evidence.append(
-        dict(
-            id="shaul:evidence:juan_1_testigo_cordero",
-            kind="note",
-            targets=[{"kind": "reference", "reference": reference("john", 1, 51)}],
-            content={
-                "upstream_id": "content/besorah/juan_1_testigo_cordero",
-                "metadata": note,
-                "section": section,
-                "references": [
-                    normalize_tag(x, aliases, mappings) for x in note["references"]
-                ],
-            },
-            provenance=provenance(
-                "source:shaul-juan_1_testigo_cordero",
-                heading,
-                kind="markdown",
-                authored=True,
-            ),
-        )
-    )
-    relation = load_yaml(blobs["shaul-bar-enash-expresses-son-of-man"])
-    relations.append(
-        dict(
-            id="shaul:relation:" + relation["id"],
-            owner="shaul",
-            subject={"kind": "expression", "id": "shaul:expression:bar-enash-ar"},
-            predicate="expresses_concept",
-            object={"kind": "concept", "id": "shaul:concept:son-of-man"},
-            evidence_ids=["shaul:evidence:" + mention["id"]],
-            upstream_id=relation["id"],
-            upstream_status=relation["status"],
-            provenance=provenance(
-                "source:shaul-bar-enash-expresses-son-of-man",
-                kind="yaml",
-                authored=True,
-            ),
-        )
-    )
+            evidence.append(
+                dict(
+                    id=spec["id"],
+                    kind="note",
+                    targets=spec["targets"],
+                    content={
+                        "upstream_id": spec["upstream_id"],
+                        "metadata": note,
+                        "section": section,
+                        "references": [
+                            normalize_tag(x, aliases, mappings)
+                            for x in note.get("references", [])
+                        ],
+                    },
+                    provenance=provenance(sid, heading, kind="markdown", authored=True),
+                )
+            )
+            continue
+        data = load_yaml(blobs[spec["input_id"]])
+        if adapter == "entity":
+            target = shaul_target(f"{data['type']}:{data['id']}")
+            concepts.append(
+                dict(
+                    **target,
+                    owner="shaul",
+                    upstream_id=f"{data['type']}:{data['id']}",
+                    names=data.get("names", {"und": data.get("script", data["id"])}),
+                    source_record=data,
+                    provenance=provenance(sid, kind="yaml", authored=True),
+                )
+            )
+        elif adapter == "mention":
+            evidence.append(
+                dict(
+                    id="shaul:evidence:" + data["id"],
+                    kind="mention",
+                    targets=spec["targets"],
+                    content=data,
+                    provenance=provenance(sid, kind="yaml", authored=True),
+                )
+            )
+        elif adapter == "relation":
+            if data["type"] != "expresses":
+                raise ValueError("Unsupported Shaul relation type: " + data["type"])
+            relations.append(
+                dict(
+                    id="shaul:relation:" + data["id"],
+                    owner="shaul",
+                    subject=shaul_target(data["source"]),
+                    predicate="expresses_concept",
+                    object=shaul_target(data["target"]),
+                    evidence_ids=spec["evidence_ids"],
+                    upstream_id=data["id"],
+                    upstream_status=data["status"],
+                    provenance=provenance(sid, kind="yaml", authored=True),
+                )
+            )
+        else:
+            raise ValueError("Unsupported Shaul adapter: " + adapter)
     return concepts, evidence, relations

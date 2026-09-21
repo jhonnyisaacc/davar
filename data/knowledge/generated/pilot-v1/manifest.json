@@ -3,15 +3,15 @@
   "files": [
     {
       "path": "bundles/daniel/7/13.json",
-      "sha256": "e131c6e7a45fc66c2cbc0b1b2462a069c5eb73af1d9b05e3c9e5be8d004a088e"
+      "sha256": "34768ff14a0e5536cec58fb2823363cdf76976955732042d2fc3a737850924af"
     },
     {
       "path": "bundles/john/1/1.json",
-      "sha256": "0242b10ec8bda73cbcbe3179bf132568785541175436005c747c57c57051b60d"
+      "sha256": "3c330142c1002a64f311b7228986e12088fdbce2262554e0a6deeb33b2c29286"
     },
     {
       "path": "bundles/john/1/51.json",
-      "sha256": "428ab43418224d52a4b1a750254d12cc3b95505216e3067ad74cec511145c705"
+      "sha256": "2a2a0b9468d2e0b8e2fc947b0f6efbe60a7c94aaf0e339a2380c6db8dbfa79b3"
     },
     {
       "path": "records/records.json",
@@ -19,7 +19,7 @@
     }
   ],
   "generator_version": "1.0.0",
-  "input_manifest_digest": "58d2b6dbf92a796e021c076e6fda32fb693a0b0a94210e8ee1158f5b4edf4fe7",
+  "input_manifest_digest": "dc942d523a6312c8fe2b42a58099bff62630402186daa8628aa3d3d4e01ad765",
   "inputs": [
     {
       "id": "greek-lexicon",
@@ -71,6 +71,7 @@
     },
     {
       "id": "custom",
+      "kind": "lexicon",
       "owner": "davar",
       "path": "data/dict/lexicon/custom_definitions.json",
       "repository": "https://github.com/jhonnyisaacc/davar",

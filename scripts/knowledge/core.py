@@ -46,8 +46,13 @@ def contained(root: Path, relative: str) -> Path:
     return path
 
 
-def pinned_inputs(root: Path, shaul_root: Path | None = None):
-    manifest = read_json(root / KNOWLEDGE / "pilot-inputs.json")
+def pinned_inputs(root: Path, shaul_root: Path | None = None, manifest_path=None):
+    manifest = read_json(
+        contained(root, manifest_path or "data/knowledge/pilot-inputs.json")
+    )
+    from .validate import Validator
+
+    Validator(root).schema("input-manifest", manifest)
     blobs = {}
     for item in manifest["inputs"]:
         if item["id"] in blobs:

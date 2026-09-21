@@ -34,6 +34,84 @@ The dedicated CI also runs the legacy generator in disposable archives and the
 existing public Shaul tests at its pinned revision. The regular foundation build
 does not require Bun, Rails, a Shaul checkout, or application dependencies.
 
+## Reusable build profiles
+
+The default profile is `data/knowledge/profiles/pilot-v1.json`. The three pilots
+are data selections, not branches in the adapters. A profile references a pinned
+input manifest, verified reference mappings, optional authored span/relation files,
+scripture selections, lexical entry selections, public Shaul records and coverage.
+The manifest's historical `pilots` key now accepts any nonempty unique list of
+verse queries; it is not restricted to three. Profile and manifest paths are
+repository-relative, resolved against `--root`, never against the profile's folder.
+
+For a working, independent example using existing OE Genesis 1:1:
+
+```sh
+python -m scripts.knowledge build --profile tests/fixtures/knowledge/genesis/profile.json --output /absolute/temporary/directory/genesis
+python -m scripts.knowledge check --profile tests/fixtures/knowledge/genesis/profile.json --output /absolute/temporary/directory/genesis
+python -m scripts.knowledge validate --output /absolute/temporary/directory/genesis
+```
+
+`check --output` reads the expected artifact tree; it does not overwrite it.
+`--profile` applies to `build` and `check`; `validate` validates artifacts alone.
+All previous defaults and output-write restrictions remain unchanged. Profiles
+cannot specify output paths, commands, modules, network access or permissions.
+
+To extend a profile without changing generator code:
+
+1. Add input files to its manifest with unique IDs, repository, source revision and
+   verified SHA-256 digests. Shaul inputs additionally need committed public fixtures
+   for offline builds. No directory scanning, automatic download or source refresh
+   occurs. Optional input `kind` explicitly classifies an otherwise unselected source;
+   this metadata is also retained in the artifact manifest.
+2. Add scripture selections with `input_id`, fixed adapter (`oe`, `delitzsch`,
+   `greek`, `tth`), registered edition/book IDs and native chapter/verse labels.
+   Multiple inputs may use the same adapter. Add only verified reference mappings.
+3. For lexical evidence, select `input_id`, stable evidence `id_namespace` and exact
+   source `codes`. The adapter copies entry identifiers/lemmas, never definitions
+   or new lexical identities. Missing requested entries are errors.
+4. For public Shaul data, select `entity`, `mention`, `note` or `relation`. Entities
+   and relation endpoints use upstream IDs. Notes require an exact, unique level-two
+   heading, stable evidence/upstream IDs and explicit targets. Mention targets and
+   relation evidence links are also explicit. These selections are Davar-authored,
+   unreviewed integration assertions, not additional approval by Shaul. The profile
+   is included in the input digest; original Shaul payloads/provenance remain intact.
+5. Add bundle queries to the manifest and one coverage declaration per query and
+   registered edition. `present` must resolve to a normalized passage; `absent`
+   requires a verified absence reason; `not_requested` makes no coverage claim.
+   Missing files, records, ambiguous sections and broken dependencies fail closed.
+
+Profile, registry, mapping and schema content participates in the deterministic
+input digest. The domain record schemas and identity rules are unchanged. Relations
+enter a bundle only through relevant targets/scopes/evidence, with public endpoints
+and complete evidence dependencies. No cross-language semantic alignment is inferred.
+
+## Downstream handoff and remaining connectors
+
+| Capability | Available now | Remaining owner |
+| --- | --- | --- |
+| OE / Delitzsch / committed Greek / TTH | Selected, pinned passages; original tokens or un-tokenized TTH | Corpus expansion: #200 |
+| Lexical references | Selected entry locators and lemmas; Strong/BDB unchanged | Coverage: #200; adjudication/definitions: existing #159/#42/#125 work |
+| Public Shaul | Selected concepts, expressions, mentions, notes and expresses relations | Broader public records/adapters: #200 |
+| Evidence alignment | Exact selections and authored spans, no inferred alignment | Categories, many-to-many evidence units and Romans evidence: #198 |
+| Workflow execution | None | Pipeline: #188; architecture: #187 |
+| Translation/review pilots | None | Romans #193, Peter #191, John pt-BR #190, generalization #192 |
+| Definition localization / contextual relationships | No new population or adjudication | #183 / #184 |
+
+TS2009 is exercised only by compatibility checks (synthetic export data); this
+foundation does not ingest or distribute licensed TS2009 text. LXX, Hutter, DSS and
+teaching/transcript connectors are not implemented. NA28/NA29 remain subject to the
+permission/data work in #170–#173. Ignored Greek downloads are not inputs. Private
+transcripts and local-only Shaul records are excluded. Public availability alone
+does not grant redistribution permission or bypass an edition's release gates.
+
+Corpus-wide normalization is tracked separately in
+https://github.com/jhonnyisaacc/davar/issues/200. It is not a merge prerequisite
+for this foundation and does not block #198's bounded Romans fixture. UI, calendar,
+performance and store-release issues are independent. No downstream issue is closed
+by these fixtures. Future consumers preserve external IDs; they must not depend on
+pilot paths, assume full coverage, or treat generated bundles as authored authority.
+
 ## Ownership and source selection
 
 `data/knowledge/pilot-inputs.json` records repository, revision, relative source

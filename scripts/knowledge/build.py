@@ -21,22 +21,23 @@ from .core import (
     reference,
 )
 from .validate import Validator, validate_locators, validate_tree
+from .profiles import load_profile, validate_selections
 
 
-def source_record(item: dict):
+def source_record(item: dict, lexical_inputs=()):
     kind = (
         "published_note"
         if item["path"].endswith(".md")
         else "knowledge_record"
         if item["owner"] == "shaul"
         else "lexicon"
-        if item["id"] in ("bdb", "custom", "greek-lexicon")
+        if item["id"] in lexical_inputs
         else "dataset"
     )
     return dict(
         id="source:" + item["id"],
         owner=item["owner"],
-        kind=kind,
+        kind=item.get("kind", kind),
         repository=item["repository"],
         revision=item["revision"],
         path=item["path"],
@@ -45,7 +46,7 @@ def source_record(item: dict):
     )
 
 
-def project(records: dict, query: dict, inputs_digest: str):
+def project(records: dict, query: dict, inputs_digest: str, coverage=None):
     sources = {s["id"]: s for s in records["sources"]}
 
     def public(record):
@@ -67,6 +68,7 @@ def project(records: dict, query: dict, inputs_digest: str):
         s for s in records["spans"] if s["source_passage_id"] in pids and public(s)
     ]
     sids = {s["id"] for s in result["spans"]}
+    tids = {t["id"] for t in result["tokens"]}
     lexical = {
         (r["namespace"], r["code"]) for t in result["tokens"] for r in t["lexical_refs"]
     }
@@ -75,6 +77,8 @@ def project(records: dict, query: dict, inputs_digest: str):
         return (
             (t["kind"] == "reference" and t["reference"] == query)
             or (t["kind"] == "passage" and t["id"] in pids)
+            or (t["kind"] == "token" and t["id"] in tids)
+            or (t["kind"] == "span" and t["id"] in sids)
             or (
                 t["kind"] == "external_lexical"
                 and (t["reference"]["namespace"], t["reference"]["code"]) in lexical
@@ -87,14 +91,31 @@ def project(records: dict, query: dict, inputs_digest: str):
         if public(e) and any(relevant(t) for t in e["targets"])
     ]
     eids = {e["id"] for e in result["evidence"]}
+    public_concepts = {c["id"] for c in records["concepts"] if public(c)}
+
+    def endpoint_available(target):
+        if target["kind"] in ("concept", "expression"):
+            return target["id"] in public_concepts
+        if target["kind"] == "evidence":
+            return target["id"] in eids
+        return relevant(target)
+
     result["relations"] = [
         r
         for r in records["relations"]
         if public(r)
         and set(r["evidence_ids"]) <= eids
+        and all(endpoint_available(t) for t in (r["subject"], r["object"]))
         and (
-            (r["subject"].get("id") in sids and r.get("scope") == query)
-            or (r["owner"] == "shaul" and query == reference("daniel", 7, 13))
+            r.get("scope") == query
+            or (
+                "scope" not in r
+                and (
+                    relevant(r["subject"])
+                    or relevant(r["object"])
+                    or bool(r["evidence_ids"])
+                )
+            )
         )
     ]
     cids = {
@@ -116,25 +137,17 @@ def project(records: dict, query: dict, inputs_digest: str):
     result["editions"] = [e for e in records["editions"] if e["id"] in editions]
     for rs in result.values():
         rs.sort(key=lambda r: r["id"])
-    coverage = []
-    for e in records["editions"]:
-        present = e["id"] in editions
-        absent = e["id"] == "tth-es" and query["book_id"] == "daniel"
-        coverage.append(
+    if coverage is None:
+        coverage = [
             dict(
                 edition_id=e["id"],
-                status="present"
-                if present
-                else "absent"
-                if absent
-                else "not_requested",
-                reason="Pinned pilot passage"
-                if present
-                else "No Daniel book in the existing TTH mapping"
-                if absent
-                else "Outside this pilot selection",
+                status="present" if e["id"] in editions else "not_requested",
+                reason="Selected passage" if e["id"] in editions else "Not requested",
             )
-        )
+            for e in records["editions"]
+        ]
+    if {c["edition_id"] for c in coverage if c["status"] == "present"} != editions:
+        raise ValueError("Requested coverage differs from normalized passages")
     diagnostics = sorted(
         {
             f"{r['raw']}: {r['reason']}"
@@ -148,20 +161,24 @@ def project(records: dict, query: dict, inputs_digest: str):
         reference=query,
         input_manifest_digest=inputs_digest,
         records=result,
-        coverage=coverage,
+        coverage=sorted(coverage, key=lambda item: item["edition_id"]),
         diagnostics=diagnostics,
     )
 
 
-def artifacts(root: Path = ROOT, shaul_root: Path | None = None):
-    manifest, blobs = pinned_inputs(root, shaul_root)
+def artifacts(root: Path = ROOT, shaul_root: Path | None = None, profile=None):
+    profile = load_profile(root, profile)
+    manifest, blobs = pinned_inputs(root, shaul_root, profile["input_manifest"])
     registries = {
         p.stem: read_json(p)
         for p in sorted((root / KNOWLEDGE / "registries").glob("*.json"))
     }
+    registries["reference-mappings"] = read_json(
+        contained(root, profile["reference_mappings"])
+    )
     authored = {
-        p.stem: read_json(p)
-        for p in sorted((root / KNOWLEDGE / "authored/pilots").glob("*.json"))
+        key: read_json(contained(root, path))
+        for key, path in profile["authored"].items()
     }
     schema_hashes = {
         p.name: digest(p.read_bytes())
@@ -170,10 +187,12 @@ def artifacts(root: Path = ROOT, shaul_root: Path | None = None):
     validator = Validator(root)
     validator.registries(registries)
     validator.schema("input-manifest", manifest)
+    validate_selections(profile, manifest, registries)
     input_digest = digest(
         encoded(
             dict(
                 manifest=manifest,
+                profile=profile,
                 registries=registries,
                 authored=authored,
                 schemas=schema_hashes,
@@ -182,17 +201,18 @@ def artifacts(root: Path = ROOT, shaul_root: Path | None = None):
     )
     records = {k: [] for k in COLLECTIONS}
     records["editions"] = registries["editions"]
-    records["sources"] = [source_record(i) for i in manifest["inputs"]]
+    lexical_inputs = {s["input_id"] for s in profile["lexical"]}
+    records["sources"] = [source_record(i, lexical_inputs) for i in manifest["inputs"]]
     records["passages"], records["tokens"], records["evidence"] = adapters.scripture(
-        blobs, registries["reference-mappings"]
+        blobs, registries["reference-mappings"], profile["scripture"]
     )
-    records["evidence"].extend(adapters.lexical(blobs))
+    records["evidence"].extend(adapters.lexical(blobs, profile["lexical"]))
     records["concepts"], evidence, records["relations"] = adapters.shaul(
-        blobs, registries["aliases"], registries["reference-mappings"]
+        blobs, registries["aliases"], registries["reference-mappings"], profile["shaul"]
     )
     records["evidence"].extend(evidence)
-    for name in ("spans", "relations"):
-        path = KNOWLEDGE / "authored/pilots" / (name + ".json")
+    for name, selected_path in profile["authored"].items():
+        path = Path(selected_path)
         checksum = digest((root / path).read_bytes())
         records["sources"].append(
             dict(
@@ -207,7 +227,9 @@ def artifacts(root: Path = ROOT, shaul_root: Path | None = None):
             )
         )
     spans = {}
-    for i, spec in enumerate(authored["spans"]):
+    for i, spec in enumerate(authored.get("spans", [])):
+        if spec["key"] in spans:
+            raise ValueError("Duplicate authored span key: " + spec["key"])
         matches = [
             p
             for p in records["passages"]
@@ -225,7 +247,7 @@ def artifacts(root: Path = ROOT, shaul_root: Path | None = None):
             )
         ]
         if len(matches) != 1:
-            raise ValueError("Pilot span passage is missing or ambiguous")
+            raise ValueError("Authored span passage is missing or ambiguous")
         passage = matches[0]
         selected = [
             t["text"]
@@ -234,7 +256,7 @@ def artifacts(root: Path = ROOT, shaul_root: Path | None = None):
             and spec["start_ordinal"] <= t["ordinal"] <= spec["end_ordinal"]
         ]
         if selected != spec["expected_texts"]:
-            raise ValueError("Pilot span text precondition failed: " + spec["key"])
+            raise ValueError("Authored span text precondition failed: " + spec["key"])
         span = dict(
             id=f"span:{passage['id']}:{spec['start_ordinal']}-{spec['end_ordinal']}",
             source_passage_id=passage["id"],
@@ -244,8 +266,10 @@ def artifacts(root: Path = ROOT, shaul_root: Path | None = None):
         )
         records["spans"].append(span)
         spans[spec["key"]] = (span, passage)
-    for i, spec in enumerate(authored["relations"]):
+    for i, spec in enumerate(authored.get("relations", [])):
         span, passage = spans[spec["span_key"]]
+        if len(passage["mapping"]["targets"]) != 1:
+            raise ValueError("Authored relation needs one verified canonical scope")
         if not any(c["id"] == spec["expression_id"] for c in records["concepts"]):
             raise ValueError("Unknown expression in authored mapping")
         records["relations"].append(
@@ -272,7 +296,7 @@ def artifacts(root: Path = ROOT, shaul_root: Path | None = None):
             data.decode()
             if item["path"].endswith(".md")
             else adapters.load_yaml(data)
-            if item["path"].endswith(".yml")
+            if item["path"].endswith((".yml", ".yaml"))
             else json.loads(data)
         )
     payloads.update({"source:authored-" + k: v for k, v in authored.items()})
@@ -280,7 +304,12 @@ def artifacts(root: Path = ROOT, shaul_root: Path | None = None):
     files = {"records/records.json": encoded(records)}
     for book, chapter, verse in manifest["pilots"]:
         query = reference(book, chapter, verse)
-        bundle = project(records, query, input_digest)
+        coverage = [
+            {k: v for k, v in entry.items() if k != "reference"}
+            for entry in profile["coverage"]
+            if entry["reference"] == query
+        ]
+        bundle = project(records, query, input_digest, coverage)
         validator.bundle(bundle)
         files[f"bundles/{book}/{chapter}/{verse}.json"] = encoded(bundle)
     artifact_manifest = dict(
@@ -317,14 +346,16 @@ def output_guard(output: Path, root: Path):
         raise ValueError("Output must be a new or empty directory")
 
 
-def build(output: Path, root: Path = ROOT, shaul_root: Path | None = None):
+def build(
+    output: Path, root: Path = ROOT, shaul_root: Path | None = None, profile=None
+):
     output_guard(output, root)
     if shaul_root and (
         output.resolve().is_relative_to(shaul_root.resolve())
         or shaul_root.resolve().is_relative_to(output.resolve())
     ):
         raise ValueError("Output overlaps Shaul inputs")
-    files = artifacts(root, shaul_root)
+    files = artifacts(root, shaul_root, profile)
     output.mkdir(parents=True, exist_ok=True)
     for name, data in files.items():
         path = contained(output, name)

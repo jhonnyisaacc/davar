@@ -1,0 +1,18 @@
+{
+  "passages": [
+    {
+      "edition_id": "oe",
+      "book_id": "genesis",
+      "chapter": 1,
+      "verse_label": "1",
+      "target": {
+        "system_id": "davar-v1",
+        "book_id": "genesis",
+        "kind": "verse",
+        "chapter": 1,
+        "verse": 1
+      }
+    }
+  ],
+  "shaul_verified": []
+}

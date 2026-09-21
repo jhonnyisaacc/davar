@@ -1,0 +1,295 @@
+{
+  "contract_version": "1.0.0",
+  "input_manifest": "data/knowledge/pilot-inputs.json",
+  "reference_mappings": "data/knowledge/registries/reference-mappings.json",
+  "authored": {
+    "spans": "data/knowledge/authored/pilots/spans.json",
+    "relations": "data/knowledge/authored/pilots/relations.json"
+  },
+  "scripture": [
+    {
+      "input_id": "oe",
+      "adapter": "oe",
+      "edition_id": "oe",
+      "book_id": "daniel",
+      "passages": [
+        {
+          "chapter": 7,
+          "verse_label": "13"
+        }
+      ]
+    },
+    {
+      "input_id": "delitzsch",
+      "adapter": "delitzsch",
+      "edition_id": "delitzsch",
+      "book_id": "john",
+      "passages": [
+        {
+          "chapter": 1,
+          "verse_label": "1"
+        },
+        {
+          "chapter": 1,
+          "verse_label": "51"
+        }
+      ]
+    },
+    {
+      "input_id": "greek",
+      "adapter": "greek",
+      "edition_id": "sblgnt-tagnt",
+      "book_id": "john",
+      "passages": [
+        {
+          "chapter": 1,
+          "verse_label": "1"
+        },
+        {
+          "chapter": 1,
+          "verse_label": "51"
+        }
+      ]
+    },
+    {
+      "input_id": "tth",
+      "adapter": "tth",
+      "edition_id": "tth-es",
+      "book_id": "john",
+      "passages": [
+        {
+          "chapter": 1,
+          "verse_label": "1"
+        },
+        {
+          "chapter": 1,
+          "verse_label": "51"
+        }
+      ]
+    }
+  ],
+  "lexical": [
+    {
+      "input_id": "bdb",
+      "id_namespace": "bdb",
+      "codes": [
+        "H1247",
+        "H606",
+        "H1697",
+        "H430"
+      ]
+    },
+    {
+      "input_id": "greek-lexicon",
+      "id_namespace": "tagnt",
+      "codes": [
+        "G3056",
+        "G3004G",
+        "G5207",
+        "G0444"
+      ]
+    }
+  ],
+  "shaul": [
+    {
+      "adapter": "entity",
+      "input_id": "shaul-son-of-man"
+    },
+    {
+      "adapter": "entity",
+      "input_id": "shaul-bar-enash-ar"
+    },
+    {
+      "adapter": "entity",
+      "input_id": "shaul-ben-ha-adam-he"
+    },
+    {
+      "adapter": "mention",
+      "input_id": "shaul-son-of-man-daniel",
+      "targets": [
+        {
+          "kind": "reference",
+          "reference": {
+            "system_id": "davar-v1",
+            "book_id": "daniel",
+            "kind": "verse",
+            "chapter": 7,
+            "verse": 13
+          }
+        }
+      ]
+    },
+    {
+      "adapter": "note",
+      "input_id": "shaul-juan_1_testigo_cordero",
+      "id": "shaul:evidence:juan_1_testigo_cordero",
+      "upstream_id": "content/besorah/juan_1_testigo_cordero",
+      "heading": "Netanel y las confesiones del final",
+      "targets": [
+        {
+          "kind": "reference",
+          "reference": {
+            "system_id": "davar-v1",
+            "book_id": "john",
+            "kind": "verse",
+            "chapter": 1,
+            "verse": 51
+          }
+        }
+      ]
+    },
+    {
+      "adapter": "relation",
+      "input_id": "shaul-bar-enash-expresses-son-of-man",
+      "evidence_ids": [
+        "shaul:evidence:mention-son-of-man-daniel"
+      ]
+    }
+  ],
+  "coverage": [
+    {
+      "reference": {
+        "system_id": "davar-v1",
+        "book_id": "daniel",
+        "kind": "verse",
+        "chapter": 7,
+        "verse": 13
+      },
+      "edition_id": "oe",
+      "status": "present",
+      "reason": "Pinned pilot passage"
+    },
+    {
+      "reference": {
+        "system_id": "davar-v1",
+        "book_id": "daniel",
+        "kind": "verse",
+        "chapter": 7,
+        "verse": 13
+      },
+      "edition_id": "delitzsch",
+      "status": "not_requested",
+      "reason": "Outside this pilot selection"
+    },
+    {
+      "reference": {
+        "system_id": "davar-v1",
+        "book_id": "daniel",
+        "kind": "verse",
+        "chapter": 7,
+        "verse": 13
+      },
+      "edition_id": "sblgnt-tagnt",
+      "status": "not_requested",
+      "reason": "Outside this pilot selection"
+    },
+    {
+      "reference": {
+        "system_id": "davar-v1",
+        "book_id": "daniel",
+        "kind": "verse",
+        "chapter": 7,
+        "verse": 13
+      },
+      "edition_id": "tth-es",
+      "status": "absent",
+      "reason": "No Daniel book in the existing TTH mapping"
+    },
+    {
+      "reference": {
+        "system_id": "davar-v1",
+        "book_id": "john",
+        "kind": "verse",
+        "chapter": 1,
+        "verse": 1
+      },
+      "edition_id": "oe",
+      "status": "not_requested",
+      "reason": "Outside this pilot selection"
+    },
+    {
+      "reference": {
+        "system_id": "davar-v1",
+        "book_id": "john",
+        "kind": "verse",
+        "chapter": 1,
+        "verse": 1
+      },
+      "edition_id": "delitzsch",
+      "status": "present",
+      "reason": "Pinned pilot passage"
+    },
+    {
+      "reference": {
+        "system_id": "davar-v1",
+        "book_id": "john",
+        "kind": "verse",
+        "chapter": 1,
+        "verse": 1
+      },
+      "edition_id": "sblgnt-tagnt",
+      "status": "present",
+      "reason": "Pinned pilot passage"
+    },
+    {
+      "reference": {
+        "system_id": "davar-v1",
+        "book_id": "john",
+        "kind": "verse",
+        "chapter": 1,
+        "verse": 1
+      },
+      "edition_id": "tth-es",
+      "status": "present",
+      "reason": "Pinned pilot passage"
+    },
+    {
+      "reference": {
+        "system_id": "davar-v1",
+        "book_id": "john",
+        "kind": "verse",
+        "chapter": 1,
+        "verse": 51
+      },
+      "edition_id": "oe",
+      "status": "not_requested",
+      "reason": "Outside this pilot selection"
+    },
+    {
+      "reference": {
+        "system_id": "davar-v1",
+        "book_id": "john",
+        "kind": "verse",
+        "chapter": 1,
+        "verse": 51
+      },
+      "edition_id": "delitzsch",
+      "status": "present",
+      "reason": "Pinned pilot passage"
+    },
+    {
+      "reference": {
+        "system_id": "davar-v1",
+        "book_id": "john",
+        "kind": "verse",
+        "chapter": 1,
+        "verse": 51
+      },
+      "edition_id": "sblgnt-tagnt",
+      "status": "present",
+      "reason": "Pinned pilot passage"
+    },
+    {
+      "reference": {
+        "system_id": "davar-v1",
+        "book_id": "john",
+        "kind": "verse",
+        "chapter": 1,
+        "verse": 51
+      },
+      "edition_id": "tth-es",
+      "status": "present",
+      "reason": "Pinned pilot passage"
+    }
+  ]
+}
