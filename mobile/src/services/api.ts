@@ -150,6 +150,9 @@ const buildStaticBundlesBaseCandidates = (
   return uniqueUrls(candidates);
 };
 
+let preferredStaticDataBase: string | null = null;
+let preferredTs2009Base: string | null = null;
+
 const STATIC_DATA_BASE_URL = resolveStaticDataBaseUrl();
 const STATIC_BUNDLES_BASE_URL = resolveStaticBundlesBaseUrl(STATIC_DATA_BASE_URL);
 const STATIC_DATA_BASE_CANDIDATES = buildStaticDataBaseCandidates();
@@ -299,6 +302,8 @@ export const resetStaticDataRequestCachesForTests = (): void => {
   staticDataCache.clear();
   staticDataInflight.clear();
   staticDataVersionPromise = null;
+  preferredStaticDataBase = null;
+  preferredTs2009Base = null;
 };
 
 export const staticDataRequest = async <T>(
@@ -326,7 +331,11 @@ export const staticDataRequest = async <T>(
         ? await loadStaticDataVersion()
         : null;
 
-    for (const baseUrl of STATIC_DATA_BASE_CANDIDATES) {
+    const baseCandidates = preferredStaticDataBase
+      ? [preferredStaticDataBase]
+      : STATIC_DATA_BASE_CANDIDATES;
+
+    for (const baseUrl of baseCandidates) {
       const encodedPath = encodeURIComponent(normalizedPath).replace(
         /%2F/g,
         "/",
@@ -362,6 +371,7 @@ export const staticDataRequest = async <T>(
         `data ${normalizedPath}`,
       );
       staticDataCache.set(cacheKey, parsed as unknown);
+      preferredStaticDataBase = baseUrl;
       return parsed;
     }
 
@@ -388,7 +398,11 @@ export const ts2009Request = async <T>(relativePath: string): Promise<T> => {
 
   const errors: string[] = [];
 
-  for (const baseUrl of TS2009_BASE_CANDIDATES) {
+  const baseCandidates = preferredTs2009Base
+    ? [preferredTs2009Base]
+    : TS2009_BASE_CANDIDATES;
+
+  for (const baseUrl of baseCandidates) {
     const requestUrl = `${baseUrl}/${encodeURIComponent(normalizedPath).replace(/%2F/g, "/")}`;
     let response: Response;
     try {
@@ -418,6 +432,7 @@ export const ts2009Request = async <T>(relativePath: string): Promise<T> => {
       `TS2009 ${normalizedPath}`,
     );
     staticDataCache.set(cacheKey, parsed as unknown);
+    preferredTs2009Base = baseUrl;
     return parsed;
   }
 

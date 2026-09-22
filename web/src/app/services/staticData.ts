@@ -462,6 +462,8 @@ const loadTs2009ChapterFromChapterFile = async (
 		}
 		return verseMap.size > 0 ? verseMap : null;
 	} catch {
+		// Chapter files are unpublished. Later chapters go straight to the book file.
+		ts2009ChapterFilesUnavailable = true;
 		return null;
 	}
 };
@@ -470,9 +472,11 @@ const loadTs2009ChapterFromBookFile = async (
 	bookId: string,
 	chapter: number,
 ): Promise<Map<number, string> | null> => {
-	const chapterFile = await loadTs2009ChapterFromChapterFile(bookId, chapter);
-	if (chapterFile) {
-		return chapterFile;
+	if (!ts2009ChapterFilesUnavailable) {
+		const chapterFile = await loadTs2009ChapterFromChapterFile(bookId, chapter);
+		if (chapterFile) {
+			return chapterFile;
+		}
 	}
 
 	for (const fileStem of getTs2009BookFileCandidates(bookId)) {
@@ -534,6 +538,8 @@ const staticUrlPrefix = (
 ).replace(/\/+$/, "");
 
 let preferredStaticBase: StaticBase = "";
+let staticBaseResolved = false;
+let ts2009ChapterFilesUnavailable = false;
 const STATIC_BASE_CANDIDATES: StaticBase[] = [
 	"",
 	"/public",
@@ -550,10 +556,14 @@ const buildCandidatePaths = (path: string): string[] => {
 		return [normalizedPath];
 	}
 
-	const orderedBases = [
-		preferredStaticBase,
-		...STATIC_BASE_CANDIDATES.filter((base) => base !== preferredStaticBase),
-	];
+	const orderedBases = staticBaseResolved
+		? [preferredStaticBase]
+		: [
+				preferredStaticBase,
+				...STATIC_BASE_CANDIDATES.filter(
+					(base) => base !== preferredStaticBase,
+				),
+			];
 	const localPaths = orderedBases.map((base) => `${base}${normalizedPath}`);
 
 	if (!staticUrlPrefix) {
@@ -679,6 +689,7 @@ const fetchJson = async <T>(
 					resolvedPath,
 					path,
 				);
+				staticBaseResolved = true;
 				return parsed;
 			} catch (error) {
 				const message = error instanceof Error ? error.message : String(error);
@@ -1065,6 +1076,23 @@ const loadTranslationChapter = async (
 				for (const verse of verses) {
 					translationMap[`${translationChapter}-${verse.verse}`] = verse;
 				}
+			}
+
+			const tthCoversRequiredChapters = requiredChapters.every(
+				(translationChapter) =>
+					translationBook.chapters?.some(
+						(item) =>
+							item.chapter === translationChapter &&
+							(item.verses ?? []).some((verse) =>
+								hasTranslationText(verse),
+							),
+					),
+			);
+			if (requiredChapters.length > 0 && tthCoversRequiredChapters) {
+				return {
+					verses: translationMap,
+					titles: translationTitles,
+				};
 			}
 		} catch {
 			// TTH_2 not available for this book, try BES fallback below
@@ -1470,110 +1498,159 @@ export const getChapterVerses = async (
 
 	if (!bookEntry) return [];
 	const referenceMode = options?.referenceMode ?? "source";
+	const besorahTextVersion = options?.besorahTextVersion ?? "delitzsch";
 	const sourceChapters = getSourceChaptersForRequest(
 		bookEntry.id,
 		chapter,
 		options?.language,
 		referenceMode,
 	);
-	const coreVerseChunks = await Promise.all(
+	const needsEnglishTranslation =
+		!options?.hebrewOnly && options?.language === "en";
+	const needsSpanishTranslation =
+		!options?.hebrewOnly && options?.language === "es";
+	const emptyTranslations: LoadedTranslationChapter = { verses: {}, titles: {} };
+
+	const corePromise = Promise.all(
 		sourceChapters.map((sourceChapter) =>
-			loadCoreChapter(
-				bookEntry,
-				sourceChapter,
-				options?.besorahTextVersion ?? "delitzsch",
-			),
+			loadCoreChapter(bookEntry, sourceChapter, besorahTextVersion),
 		),
 	);
+	const transliterationPromise = Promise.all(
+		sourceChapters.map((sourceChapter) =>
+			loadTranslitChapter(bookEntry.id, sourceChapter),
+		),
+	).then((records) => Object.assign({}, ...records));
+	const dssPromise = options?.showDss
+		? Promise.all(
+				sourceChapters.map((sourceChapter) =>
+					loadDssChapter(bookEntry.id, sourceChapter),
+				),
+			).then((records) => Object.assign({}, ...records))
+		: Promise.resolve<Record<string, RawDssVerse>>({});
+	const dssTransliterationPromise = options?.showDss
+		? Promise.all(
+				sourceChapters.map((sourceChapter) =>
+					loadDssTranslitChapter(bookEntry.id, sourceChapter),
+				),
+			).then(
+				(records) =>
+					Object.assign(
+						{},
+						...records,
+					) as Record<string, Record<number, RawDssTranslitVariant>>,
+			)
+		: Promise.resolve<Record<string, Record<number, RawDssTranslitVariant>>>(
+				{},
+			);
+
+	if (needsEnglishTranslation) {
+		const guessedChapters =
+			referenceMode === "translation" ? [chapter] : sourceChapters;
+		for (const guessedChapter of guessedChapters) {
+			void fetchCachedTs2009Translation(
+				bookEntry.id,
+				guessedChapter,
+				1,
+			).catch(() => null);
+		}
+	}
+
+	if (needsSpanishTranslation) {
+		const tthBookId = resolveTthBookId(bookEntry.id);
+		if (tthBookId) {
+			void fetchJson(`/data/tth/${tthBookId}.json`).catch(() => undefined);
+		}
+	}
+
+	const translationPromise = needsSpanishTranslation
+		? corePromise.then(async (coreVerseChunks) => {
+				const loadedCoreVerses = coreVerseChunks.flat();
+				if (loadedCoreVerses.length === 0) {
+					return emptyTranslations;
+				}
+				return loadTranslationChapter(
+					bookEntry.id,
+					getRequiredTranslationChapters(
+						bookEntry.id,
+						loadedCoreVerses.map((verse) => ({
+							chapter: verse.chapter,
+							verse: verse.verse,
+						})),
+						"es",
+					),
+				);
+			})
+		: Promise.resolve(emptyTranslations);
+
+	const ts2009Promise = needsEnglishTranslation
+		? corePromise.then(async (coreVerseChunks) => {
+				const loadedCoreVerses = coreVerseChunks.flat();
+				const uniqueTranslationKeys = [
+					...new Set(
+						loadedCoreVerses
+							.map((verse) =>
+								getTranslationLookupKey(
+									bookEntry.id,
+									verse.chapter,
+									verse.verse,
+									"en",
+								),
+							)
+							.filter((key): key is string => Boolean(key)),
+					),
+				];
+				const ts2009Results = await Promise.all(
+					uniqueTranslationKeys.map(async (translationKey) => {
+						const [mappedChapterToken, mappedVerseToken] =
+							translationKey.split("-");
+						const mappedChapter = Number(mappedChapterToken);
+						const mappedVerse = Number(mappedVerseToken);
+
+						if (
+							!Number.isFinite(mappedChapter) ||
+							!Number.isFinite(mappedVerse)
+						) {
+							return [translationKey, null] as const;
+						}
+
+						const translation = await fetchCachedTs2009Translation(
+							bookEntry.id,
+							mappedChapter,
+							mappedVerse,
+						);
+
+						return [translationKey, translation] as const;
+					}),
+				);
+
+				return Object.fromEntries(
+					ts2009Results.flatMap(([translationKey, translation]) =>
+						translation === null ? [] : [[translationKey, translation]],
+					),
+				) as Record<string, string>;
+			})
+		: Promise.resolve<Record<string, string>>({});
+
+	const [
+		coreVerseChunks,
+		translations,
+		dssVerses,
+		transliterations,
+		dssTransliterations,
+		ts2009Translations,
+	] = await Promise.all([
+		corePromise,
+		translationPromise,
+		dssPromise,
+		transliterationPromise,
+		dssTransliterationPromise,
+		ts2009Promise,
+	]);
 	const coreVerses = coreVerseChunks.flat();
 
 	if (coreVerses.length === 0) {
 		return [];
-	}
-
-	const requiredTranslationChapters = options?.hebrewOnly
-		? []
-		: getRequiredTranslationChapters(
-				bookEntry.id,
-				coreVerses.map((verse) => ({
-					chapter: verse.chapter,
-					verse: verse.verse,
-				})),
-				options?.language,
-			);
-
-	const [translations, dssVerses, transliterations, dssTransliterations] =
-		await Promise.all([
-			options?.hebrewOnly
-				? Promise.resolve<LoadedTranslationChapter>({ verses: {}, titles: {} })
-				: loadTranslationChapter(bookEntry.id, requiredTranslationChapters),
-			options?.showDss
-				? Promise.all(
-						sourceChapters.map((sourceChapter) =>
-							loadDssChapter(bookEntry.id, sourceChapter),
-						),
-					).then((records) => Object.assign({}, ...records))
-				: Promise.resolve<Record<string, RawDssVerse>>({}),
-			Promise.all(
-				sourceChapters.map((sourceChapter) =>
-					loadTranslitChapter(bookEntry.id, sourceChapter),
-				),
-			).then((records) => Object.assign({}, ...records)),
-			options?.showDss
-				? Promise.all(
-						sourceChapters.map((sourceChapter) =>
-							loadDssTranslitChapter(bookEntry.id, sourceChapter),
-						),
-					).then((records) => Object.assign({}, ...records))
-				: Promise.resolve<
-						Record<string, Record<number, RawDssTranslitVariant>>
-					>({}),
-		]);
-
-	// If language is English, load TS2009 translations from the private API.
-	let ts2009Translations: Record<string, string> = {};
-	if (options?.language === "en") {
-		const uniqueTranslationKeys = [
-			...new Set(
-				coreVerses
-					.map((verse) =>
-						getTranslationLookupKey(
-							bookEntry.id,
-							verse.chapter,
-							verse.verse,
-							"en",
-						),
-					)
-					.filter((key): key is string => Boolean(key)),
-			),
-		];
-
-		const ts2009Results = await Promise.all(
-			uniqueTranslationKeys.map(async (translationKey) => {
-				const [mappedChapterToken, mappedVerseToken] =
-					translationKey.split("-");
-				const mappedChapter = Number(mappedChapterToken);
-				const mappedVerse = Number(mappedVerseToken);
-
-				if (!Number.isFinite(mappedChapter) || !Number.isFinite(mappedVerse)) {
-					return [translationKey, null] as const;
-				}
-
-				const translation = await fetchCachedTs2009Translation(
-					bookEntry.id,
-					mappedChapter,
-					mappedVerse,
-				);
-
-				return [translationKey, translation] as const;
-			}),
-		);
-
-		ts2009Translations = Object.fromEntries(
-			ts2009Results.flatMap(([translationKey, translation]) =>
-				translation === null ? [] : [[translationKey, translation]],
-			),
-		);
 	}
 
 	const mappedVerses = coreVerses.map((rawVerse) => {
@@ -2462,6 +2539,9 @@ export const loadPrefix = async (prefixId: string): Promise<unknown> => {
 export const resetStaticDataCachesForTests = (): void => {
 	jsonCache.clear();
 	staticDataVersionPromise = null;
+	preferredStaticBase = "";
+	staticBaseResolved = false;
+	ts2009ChapterFilesUnavailable = false;
 	metadataPromise = null;
 	booksPromise = null;
 	wordsPromise = null;

@@ -42,6 +42,7 @@ import { toDisplayVerseId } from "@/src/services/verseIdentity";
 
 // Chapter-level cache for TS2009 static JSON (matches web approach)
 const ts2009ChapterCache = new Map<string, Promise<Map<number, string> | null>>();
+let ts2009ChapterFilesUnavailable = false;
 
 const TS2009_BOOK_FILE_MAP: Record<string, string> = {
   genesis: "bereshit",
@@ -227,29 +228,28 @@ const fetchTs2009ChapterStatic = (
   }
 
   const promise = (async (): Promise<Map<number, string> | null> => {
-    let chapterMap: Map<number, string> | null = null;
+    if (!ts2009ChapterFilesUnavailable) {
+      try {
+        const staticChapter = await staticDataRequest<{
+          verses?: Record<string, string>;
+        }>(`ts2009/${bookId}/${chapter}.json`);
 
-    try {
-      const staticChapter = await staticDataRequest<{
-        verses?: Record<string, string>;
-      }>(`ts2009/${bookId}/${chapter}.json`);
-
-      const verses = staticChapter.verses ?? {};
-      const verseMap = new Map<number, string>();
-      for (const [verseKey, translation] of Object.entries(verses)) {
-        const verseNumber = Number(verseKey);
-        if (Number.isFinite(verseNumber) && typeof translation === "string") {
-          verseMap.set(verseNumber, translation);
+        const verses = staticChapter.verses ?? {};
+        const verseMap = new Map<number, string>();
+        for (const [verseKey, translation] of Object.entries(verses)) {
+          const verseNumber = Number(verseKey);
+          if (Number.isFinite(verseNumber) && typeof translation === "string") {
+            verseMap.set(verseNumber, translation);
+          }
         }
+
+        if (verseMap.size > 0) {
+          return verseMap;
+        }
+      } catch {
+        // Chapter files are unpublished. Later chapters go straight to the book file.
+        ts2009ChapterFilesUnavailable = true;
       }
-
-      chapterMap = verseMap.size > 0 ? verseMap : null;
-    } catch {
-      // Fall back to TS2009 book files below.
-    }
-
-    if (chapterMap) {
-      return chapterMap;
     }
 
     return fetchTs2009ChapterFromBookFile(bookId, chapter);
@@ -704,6 +704,21 @@ const loadStaticTranslationsForChapter = async (
             });
           }
         }
+
+        const tthCoversRequiredChapters = requiredTranslationChapters.every(
+          (translationChapter) =>
+            (translationBook.chapters ?? []).some(
+              (item) =>
+                item.chapter === translationChapter &&
+                (item.verses ?? []).some((verse) => (verse.tth ?? verse.bes ?? "").trim()),
+            ),
+        );
+        if (tthCoversRequiredChapters) {
+          return {
+            verses: translationMap,
+            titles: translationTitleMap,
+          };
+        }
       } catch {
         // TTH_2 not available for this book, try BES fallback below
       }
@@ -1140,62 +1155,75 @@ const fetchChapterVersesStatic = async (
     referenceMode,
   );
 
-  const sourceVerseChunks = await Promise.all(
+  const besorahTextVersion = options?.besorahTextVersion ?? "delitzsch";
+  const sourcePromise = Promise.all(
     sourceChapters.map((sourceChapter) =>
-      loadStaticSourceChapterVerses(
-        bookId,
-        sourceChapter,
-        options?.besorahTextVersion ?? "delitzsch",
-      ),
+      loadStaticSourceChapterVerses(bookId, sourceChapter, besorahTextVersion),
     ),
   );
+  const translitPromise = Promise.all(
+    sourceChapters.map((sourceChapter) =>
+      loadStaticTranslitForChapter(bookId, sourceChapter),
+    ),
+  );
+  const dssPromise = Promise.all(
+    sourceChapters.map((sourceChapter) =>
+      loadStaticDssForChapter(bookId, sourceChapter, options?.showDss),
+    ),
+  );
+  const dssTranslitPromise = Promise.all(
+    sourceChapters.map((sourceChapter) =>
+      loadStaticDssTranslitForChapter(bookId, sourceChapter, options?.showDss),
+    ),
+  );
+
+  if (!options?.hebrewOnly && options?.language === "en") {
+    const guessedChapters =
+      referenceMode === "translation" ? [chapter] : sourceChapters;
+    for (const guessedChapter of guessedChapters) {
+      void fetchTs2009ChapterStatic(bookId, guessedChapter);
+    }
+  }
+
+  if (!options?.hebrewOnly && options?.language === "es") {
+    const tthBookId = resolveTthBookId(bookId);
+    if (tthBookId) {
+      void staticDataRequest(`tth/${tthBookId}.json`).catch(() => undefined);
+    }
+  }
+
+  const sourceVerseChunks = await sourcePromise;
   const sourceVerses = sourceVerseChunks.flat();
 
-  const [translations, dssMap, translitMap, dssTranslitMap] = await Promise.all([
+  const [translations, dssMaps, translitMaps, dssTranslitMaps] = await Promise.all([
     loadStaticTranslationsForChapter(
       bookId,
       sourceVerses,
       options?.language,
       options?.hebrewOnly,
     ),
-    Promise.all(
-      sourceChapters.map((sourceChapter) =>
-        loadStaticDssForChapter(bookId, sourceChapter, options?.showDss),
-      ),
-    ).then((maps) => {
-      const merged = new Map<string, StaticDssDifference[]>();
-      for (const map of maps) {
-        for (const [key, value] of map.entries()) {
-          merged.set(key, value);
-        }
-      }
-      return merged;
-    }),
-    Promise.all(
-      sourceChapters.map((sourceChapter) => loadStaticTranslitForChapter(bookId, sourceChapter)),
-    ).then((maps) => {
-      const merged = new Map<string, StaticTranslitWord[]>();
-      for (const map of maps) {
-        for (const [key, value] of map.entries()) {
-          merged.set(key, value);
-        }
-      }
-      return merged;
-    }),
-    Promise.all(
-      sourceChapters.map((sourceChapter) =>
-        loadStaticDssTranslitForChapter(bookId, sourceChapter, options?.showDss),
-      ),
-    ).then((maps) => {
-      const merged = new Map<string, StaticDssTranslitVariant>();
-      for (const map of maps) {
-        for (const [key, value] of map.entries()) {
-          merged.set(key, value);
-        }
-      }
-      return merged;
-    }),
+    dssPromise,
+    translitPromise,
+    dssTranslitPromise,
   ]);
+  const dssMap = dssMaps.reduce((merged, map) => {
+    for (const [key, value] of map.entries()) {
+      merged.set(key, value);
+    }
+    return merged;
+  }, new Map<string, StaticDssDifference[]>());
+  const translitMap = translitMaps.reduce((merged, map) => {
+    for (const [key, value] of map.entries()) {
+      merged.set(key, value);
+    }
+    return merged;
+  }, new Map<string, StaticTranslitWord[]>());
+  const dssTranslitMap = dssTranslitMaps.reduce((merged, map) => {
+    for (const [key, value] of map.entries()) {
+      merged.set(key, value);
+    }
+    return merged;
+  }, new Map<string, StaticDssTranslitVariant>());
 
   const { verses: translationMap, titles: translationTitleMap } = translations;
 

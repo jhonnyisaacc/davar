@@ -119,6 +119,26 @@ beforeEach(() => {
 				verses: { "1": "In the beginning" },
 			});
 		}
+		if (path.endsWith("/data/tth/bereshit.json")) {
+			return jsonResponse({
+				chapters: [
+					{
+						chapter: 1,
+						verses: [{ verse: 1, tth: "En el principio" }],
+					},
+				],
+			});
+		}
+		if (path.endsWith("/data/bes/genesis.json")) {
+			return jsonResponse({
+				chapters: [
+					{
+						chapter: 1,
+						verses: [{ verse: 1, bes: "BES fallback" }],
+					},
+				],
+			});
+		}
 
 		return jsonResponse({ error: path }, 404);
 	};
@@ -229,6 +249,101 @@ describe("chapter and lexicon loaders", () => {
 		expect(requestedPaths()).toContain("/data/ts2009/genesis/1.json");
 		expect(
 			requestedPaths().some((path) => path === "/data/ts2009/genesis.json"),
+		).toBe(false);
+		expect(
+			requestedPaths().some(
+				(path) => path.includes("/data/tth/") || path.includes("/data/bes/"),
+			),
+		).toBe(false);
+	});
+
+	test("loads Spanish from TTH and skips BES when that chapter is present", async () => {
+		const verses = await getChapterVerses("genesis", 1, { language: "es" });
+		expect(verses[0]?.translation).toBe("En el principio");
+		expect(requestedPaths()).toContain("/data/tth/bereshit.json");
+		expect(requestedPaths().some((path) => path.includes("/data/bes/"))).toBe(
+			false,
+		);
+		expect(requestedPaths().some((path) => path.includes("ts2009"))).toBe(
+			false,
+		);
+	});
+
+	test("falls back to the TS2009 book once and remembers that chapter files are missing", async () => {
+		globalThis.fetch = async (input) => {
+			const url = String(input);
+			recordedRequests.push(url);
+			const path = new URL(url, "https://davar.test").pathname;
+
+			if (path.endsWith("/data/version.json")) {
+				return jsonResponse({ version: "test-1" });
+			}
+			if (path.endsWith("/data/metadata.json")) {
+				return jsonResponse({
+					books: [
+						{
+							id: "genesis",
+							name: "Genesis",
+							section: "torah",
+							chapters: 50,
+							order: 1,
+							hebrew_name: "בראשית",
+							hebrew_transliteration: "Bereshit",
+							spanish_name: "Génesis",
+						},
+					],
+				});
+			}
+			if (path.endsWith("/data/oe/genesis/1.json")) {
+				return jsonResponse([
+					{
+						chapter: 1,
+						verse: 1,
+						hebrew: "בְּרֵאשִׁית",
+						words: [],
+					},
+				]);
+			}
+			if (path.endsWith("/data/translit/genesis/1.json")) {
+				return jsonResponse({ verses: [] });
+			}
+			if (path === "/api/ts2009/bereshit.json") {
+				return jsonResponse({
+					chapters: [
+						{
+							number: 1,
+							verses: [{ number: 1, text: "In the beginning Elohim" }],
+						},
+						{
+							number: 2,
+							verses: [{ number: 1, text: "The heavens were finished" }],
+						},
+					],
+				});
+			}
+
+			return jsonResponse({ error: path }, 404);
+		};
+
+		const verses = await getChapterVerses("genesis", 1, { language: "en" });
+		expect(verses[0]?.translation).toBe("In the beginning Elohim");
+		expect(
+			requestedPaths().filter((path) => path === "/data/ts2009/genesis/1.json"),
+		).toHaveLength(1);
+		expect(
+			requestedPaths().some(
+				(path) => path.startsWith("/public/") || path.startsWith("/web/"),
+			),
+		).toBe(false);
+		expect(requestedPaths()).toContain("/api/ts2009/bereshit.json");
+
+		recordedRequests = [];
+		await getChapterVerses("genesis", 2, { language: "en" });
+		expect(
+			requestedPaths().some((path) => path.includes("/data/ts2009/")),
+		).toBe(false);
+		expect(
+			requestedPaths().some((path) => path.startsWith("/api/ts2009/")),
 		).toBe(false);
 	});
 
