@@ -7,7 +7,7 @@
 **Completion Date:** March 2025
 
 **Key Changes:**
-- Backend FastAPI server archived to `archive/backend/`
+- The FastAPI server is gone from this tree. Git history keeps the old code.
 - All public data served as static JSON from Cloudflare Pages
 - TS2009 licensed content moved to Supabase Storage
 - Web app uses static data service layer with caching
@@ -390,11 +390,11 @@ Each function uses a simple in-memory `Map` cache and returns the same types as 
 
 If issues arise after deployment:
 
-1. **Immediate (minutes)**: Revert the Cloudflare Pages deploy to previous version (Cloudflare dashboard → Deployments → rollback). Backend is still archived and can be redeployed.
+1. **Immediate (minutes)**: Revert the Cloudflare Pages deploy to the previous version in the Cloudflare dashboard (Deployments, then rollback). The FastAPI server is not in this tree. Restore it from git history before a redeploy.
 2. **Short-term (hours)**: Re-enable backend proxy by restoring `web/functions/api/[[path]].ts` and redeploying. Old env vars (`PUBLIC_API_BASE_URL`, `PUBLIC_API_KEY`) can be re-added to Cloudflare Pages.
 3. **Mobile**: Mobile app downloads are idempotent — if new URLs fail, the app falls back to its existing SQLite cache. Users who already synced continue working offline.
 
-The backend code is archived (not deleted), so full rollback to the original architecture is always possible.
+Git history keeps the FastAPI server, so a rollback to that architecture is still possible.
 
 ---
 
