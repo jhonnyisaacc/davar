@@ -30,6 +30,12 @@ describe("route state", () => {
     expect(parseRoutePath("/not-a-route")).toBeNull();
   });
 
+  test("an unknown path is not the verse screen", () => {
+    const route = parseRoutePath("/not-a-real-page");
+    expect(route).toBeNull();
+    expect(route?.screen).not.toBe("verse");
+  });
+
   test("round-trips each static screen path", () => {
     const cases = [
       ["/home", "home"],

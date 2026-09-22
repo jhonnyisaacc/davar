@@ -153,7 +153,10 @@ export default function App() {
 	const initialState = getStoredReadingState() ?? createDefaultReadingState();
 
 	// Use persisted state hooks for all settings
-	const [currentScreen, setCurrentScreen] = useState<Screen>("verse");
+	const [currentScreen, setCurrentScreen] = useState<Screen>(() => {
+		if (typeof window === "undefined") return "verse";
+		return parseRoutePath(window.location.pathname)?.screen ?? "notFound";
+	});
 	const currentScreenRef = useRef(currentScreen);
 	const [theme, setTheme] = usePersistedState("theme", initialState.theme);
 	const [language, setLanguage] = usePersistedState(
@@ -264,7 +267,7 @@ export default function App() {
 		useState<WordAnalysis | null>(null);
 	const [isDssAnalysisLoading, setIsDssAnalysisLoading] = useState(false);
 	const lastUrlRef = useRef<string | null>(null);
-	const pendingRouteRef = useRef<RouteState | null>(null);
+	const pendingRouteRef = useRef<RouteState | null | undefined>(undefined);
 	const isHandlingPopStateRef = useRef(false);
 	const preserveWordRef = useRef(false);
 	const pendingWordTextRef = useRef<string | null>(null);
@@ -825,18 +828,16 @@ export default function App() {
 
 	useEffect(() => {
 		const pending = pendingRouteRef.current;
-		if (!pending) return;
-
-		// Handle invalid routes (null)
+		if (pending === undefined) return;
 		if (pending === null) {
 			setCurrentScreen("notFound");
-			pendingRouteRef.current = null;
+			pendingRouteRef.current = undefined;
 			return;
 		}
 
 		if (pending.screen !== "verse") {
 			setCurrentScreen(pending.screen);
-			pendingRouteRef.current = null;
+			pendingRouteRef.current = undefined;
 			return;
 		}
 
@@ -853,7 +854,7 @@ export default function App() {
 			} else {
 				// Book not found - show 404 page
 				setCurrentScreen("notFound");
-				pendingRouteRef.current = null;
+				pendingRouteRef.current = undefined;
 				return;
 			}
 		}
@@ -867,7 +868,7 @@ export default function App() {
 		}
 
 		setCurrentScreen("verse");
-		pendingRouteRef.current = null;
+		pendingRouteRef.current = undefined;
 	}, [books]);
 
 	useEffect(() => {
@@ -1093,6 +1094,13 @@ export default function App() {
 			chapter: currentChapter,
 			verse: currentVerse,
 		});
+
+		if (
+			currentScreen === "notFound" &&
+			parseRoutePath(window.location.pathname) === null
+		) {
+			return;
+		}
 
 		if (lastUrlRef.current === path) return;
 		window.history.pushState(null, "", path);
