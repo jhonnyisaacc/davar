@@ -13,10 +13,9 @@ from scripts.dict.config import Config
 
 config = Config()
 
-# Paths
 PARSED_DIR = config.DATA_DIR / "delitzsch_parsed"
 OUTPUT_DIR = PARSED_DIR / "strongs" / "v2"
-DICTIONARY_PATH = config.DATA_DIR / "dict" / "raw" / "dict_backup" / "raw" / "strongs_hebrew_dict_en.json"
+DICTIONARY_PATH = config.STRONGS_FILE
 
 # All 27 NT books in Delitzsch translation
 ALL_BOOKS = [
