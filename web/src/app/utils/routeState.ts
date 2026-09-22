@@ -3,7 +3,7 @@ import {
   destinationById,
   type Destination,
   type DestinationId,
-} from "../destinations";
+} from "@davar/shared/destinations";
 
 export type RouteScreen = DestinationId;
 
