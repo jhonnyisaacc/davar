@@ -65,9 +65,7 @@ AMOS_1_5_TTH = (
     "desterrado el pueblo de Aram a Kir –ha dicho יהוה."
 )
 
-# Convert + postprocess currently extracts section titles and drops spaces
-# before closing quotes. Those seven verses no longer match committed amos.json.
-AMOS_CONVERTER_VERSES = {
+AMOS_VERSES_CURRENT_CONVERT_NOT_COMMITTED = {
     (2, 12): {
         "verse": 12,
         "tth": (
@@ -196,8 +194,8 @@ def test_amos_markdown_converts_to_json_with_literal_verses(tmp_path):
             chapter["verses"], committed_chapter["verses"], strict=True
         ):
             key = (chapter["chapter"], verse["verse"])
-            if key in AMOS_CONVERTER_VERSES:
-                assert verse == AMOS_CONVERTER_VERSES[key]
+            if key in AMOS_VERSES_CURRENT_CONVERT_NOT_COMMITTED:
+                assert verse == AMOS_VERSES_CURRENT_CONVERT_NOT_COMMITTED[key]
             else:
                 assert verse == committed_verse
 
