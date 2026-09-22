@@ -27,8 +27,12 @@ import {
 	getVerseCount,
 	isGreekPreviewEnabled,
 	loadGreekLexiconEntry,
+	loadGreekLexiconInstances,
 	loadLexiconEntry,
+	loadLexiconInstances,
 	lookupBook,
+	prefetchChapterResources,
+	prefetchLexiconEntry,
 	type VerseResponse,
 	type WordAnalysis,
 	type WordResponse,
@@ -37,6 +41,7 @@ import {
 	GREEK_BESORAH_BOOK_NAMES,
 	parseSourceStrong,
 } from "@davar/shared/greekBesorah";
+import { isCurrentLexiconResult } from "@davar/shared/lexiconAssets";
 import { formatBookDisplayName } from "./utils/bookNameFormatter";
 import { stripCantillation, stripMeteg } from "./utils/hebrew";
 import {
@@ -243,6 +248,9 @@ export default function App() {
 	const [selectedWordAnalysis, setSelectedWordAnalysis] =
 		useState<WordAnalysis | null>(null);
 	const [isWordAnalysisLoading, setIsWordAnalysisLoading] = useState(false);
+	const wordAnalysisRequestRef = useRef(0);
+	const dssAnalysisRequestRef = useRef(0);
+	const chapterLoadRequestRef = useRef(0);
 	const [selectedDssAnalysis, setSelectedDssAnalysis] =
 		useState<WordAnalysis | null>(null);
 	const [lastSelectedDssAnalysis, setLastSelectedDssAnalysis] =
@@ -611,6 +619,10 @@ export default function App() {
 			setIsWordPanelDismissed(false);
 			setSelectedWord(word);
 			setSelectedWordContext(resolvedContext);
+			setSelectedWordAnalysis(null);
+			setSelectedDssAnalysis(null);
+			setIsWordAnalysisLoading(Boolean(parseSourceStrong(word.strong)));
+			setIsDssAnalysisLoading(false);
 			logWordDebug("click-select-word", {
 				text: word.text,
 				strong: word.strong ?? null,
@@ -853,6 +865,9 @@ export default function App() {
 
 	useEffect(() => {
 		let isMounted = true;
+		const loadRequestId = ++chapterLoadRequestRef.current;
+		const isCurrentLoad = () =>
+			isMounted && loadRequestId === chapterLoadRequestRef.current;
 		const loadChapterData = async () => {
 			setIsLoading(true);
 			setErrorMessage(null);
@@ -873,6 +888,14 @@ export default function App() {
 					: language === "es"
 						? "es"
 						: "en";
+			const chapterOptions = {
+				language: hebrewTranslationLanguage,
+				hebrewOnly: false,
+				referenceMode: translationOnly
+					? ("translation" as const)
+					: ("source" as const),
+				besorahTextVersion,
+			};
 			try {
 				const [chapterCountValue, verseCountValue, loadedVerses] =
 					await Promise.all([
@@ -887,11 +910,8 @@ export default function App() {
 								},
 							)
 						: getChapterVerses(currentBook.toLowerCase(), currentChapter, {
-								language: hebrewTranslationLanguage,
-								showDss: showQumran,
-								hebrewOnly: false,
-								referenceMode: translationOnly ? "translation" : "source",
-								besorahTextVersion,
+								...chapterOptions,
+								showDss: false,
 							}),
 				]);
 				const verses = useGreekSource
@@ -917,7 +937,7 @@ export default function App() {
 				const displayedVerseCount = translationOnly
 					? verses.length
 					: verseCountValue;
-				if (!isMounted) return;
+				if (!isCurrentLoad()) return;
 				setChapterCount(chapterCountValue);
 				setVerseCount(displayedVerseCount);
 				setChapterVerses(verses);
@@ -936,8 +956,43 @@ export default function App() {
 						);
 					}
 				}
+				if (isCurrentLoad()) setIsLoading(false);
+
+				if (!useGreekSource && showQumran) {
+					const enrichedVerses = await getChapterVerses(
+						currentBook.toLowerCase(),
+						currentChapter,
+						{
+							...chapterOptions,
+							showDss: true,
+						},
+					);
+					if (!isCurrentLoad()) return;
+					setChapterVerses(enrichedVerses);
+				}
+
+				const scheduleIdle =
+					typeof window !== "undefined" &&
+					"requestIdleCallback" in window
+						? window.requestIdleCallback.bind(window)
+						: (callback: () => void) => window.setTimeout(callback, 200);
+				scheduleIdle(() => {
+					if (!isCurrentLoad()) return;
+					prefetchChapterResources(
+						currentBook.toLowerCase(),
+						currentChapter + 1,
+						chapterOptions,
+					);
+					if (currentChapter > 1) {
+						prefetchChapterResources(
+							currentBook.toLowerCase(),
+							currentChapter - 1,
+							chapterOptions,
+						);
+					}
+				});
 			} catch (error) {
-				if (!isMounted) return;
+				if (!isCurrentLoad()) return;
 				console.error("Failed to load chapter data", error);
 				if (error instanceof Error && error.name === "NetworkError") {
 					setCurrentScreen("connectionError");
@@ -945,7 +1000,7 @@ export default function App() {
 					setErrorMessage(translate(language, "errors.loadVerses"));
 				}
 			} finally {
-				if (isMounted) setIsLoading(false);
+				if (isCurrentLoad()) setIsLoading(false);
 			}
 		};
 		if (currentBook) {
@@ -1044,6 +1099,9 @@ export default function App() {
 
 	useEffect(() => {
 		let isMounted = true;
+		const requestId = ++wordAnalysisRequestRef.current;
+		const isCurrentRequest = () =>
+			isMounted && requestId === wordAnalysisRequestRef.current;
 		const loadWordAnalysis = async () => {
 			if (!selectedWord?.strong) {
 				logWordDebug("analysis-skip-no-strong", {
@@ -1069,6 +1127,7 @@ export default function App() {
 				return;
 			}
 
+			setSelectedWordAnalysis(null);
 			setIsWordAnalysisLoading(true);
 			logWordDebug("analysis-load-start", {
 				strong: strongPart,
@@ -1082,16 +1141,40 @@ export default function App() {
 								strongPart,
 								language === "he" ? "en" : language,
 							);
-				if (isMounted) {
-					setSelectedWordAnalysis(analysis);
+				if (!isCurrentRequest()) {
+					return;
+				}
+				if (
+					analysis &&
+					!isCurrentLexiconResult(strongPart, analysis.strong_number)
+				) {
 					setIsWordAnalysisLoading(false);
-					logWordDebug("analysis-load-success", {
-						strong: strongPart,
-						hasDefinitions: Boolean(analysis?.definitions?.length),
-					});
+					return;
+				}
+				setSelectedWordAnalysis(analysis);
+				setIsWordAnalysisLoading(false);
+				logWordDebug("analysis-load-success", {
+					strong: strongPart,
+					hasDefinitions: Boolean(analysis?.definitions?.length),
+				});
+				if (analysis?.has_instances_asset) {
+					const instances =
+						analysis.source_language === "greek"
+							? await loadGreekLexiconInstances(
+									analysis.strong_number,
+									analysis.revision,
+								)
+							: await loadLexiconInstances(analysis.strong_number);
+					if (!isCurrentRequest() || !instances) return;
+					setSelectedWordAnalysis((current) =>
+						current &&
+						isCurrentLexiconResult(strongPart, current.strong_number)
+							? { ...current, ...instances }
+							: current,
+					);
 				}
 			} catch (error) {
-				if (isMounted) {
+				if (isCurrentRequest()) {
 					logWordDebug("analysis-load-error", {
 						strong: strongPart,
 						error,
@@ -1111,6 +1194,9 @@ export default function App() {
 
 	useEffect(() => {
 		let isMounted = true;
+		const requestId = ++dssAnalysisRequestRef.current;
+		const isCurrentRequest = () =>
+			isMounted && requestId === dssAnalysisRequestRef.current;
 		const loadDssAnalysis = async () => {
 			const dssStrong = selectedDssVariant?.dss_strong ?? null;
 			if (!dssStrong) {
@@ -1132,18 +1218,27 @@ export default function App() {
 				return;
 			}
 
+			setSelectedDssAnalysis(null);
 			setIsDssAnalysisLoading(true);
 			try {
 				const analysis = await loadLexiconEntry(
 					strongPart,
 					language === "he" ? "en" : language,
 				);
-				if (isMounted) {
-					setSelectedDssAnalysis(analysis);
-					setIsDssAnalysisLoading(false);
+				if (!isCurrentRequest()) {
+					return;
 				}
+				if (
+					analysis &&
+					!isCurrentLexiconResult(strongPart, analysis.strong_number)
+				) {
+					setIsDssAnalysisLoading(false);
+					return;
+				}
+				setSelectedDssAnalysis(analysis);
+				setIsDssAnalysisLoading(false);
 			} catch (error) {
-				if (isMounted) {
+				if (isCurrentRequest()) {
 					console.error("Failed to load DSS analysis", error);
 					setSelectedDssAnalysis(null);
 					setLastSelectedDssAnalysis(null);
@@ -1766,6 +1861,9 @@ export default function App() {
 											chapter={currentChapter}
 											language={language}
 											onWordClick={handleWordClick}
+											onWordHover={(word) => {
+												prefetchLexiconEntry(parseSourceStrong(word.strong));
+											}}
 											showOnboardingHint={showWordHint}
 											showQumran={
 												showQumran &&
@@ -1929,12 +2027,16 @@ export default function App() {
 													</div>
 												) : wordForCard && isWordPanelVisible ? (
 													<WordCard
+														key={`${parseSourceStrong(wordForCard.strong) ?? wordForCard.text}-${wordForCard.position}-${wordContextForCard?.chapter ?? ""}-${wordContextForCard?.verse ?? ""}`}
 														word={wordForCard.text}
 														sourceLanguage={
 															wordForCard.source_language ?? "hebrew"
 														}
 														wordFromVerse={wordForCard.text}
-														strongNumber={wordAnalysisForCard?.strong_number}
+														strongNumber={
+															parseSourceStrong(wordForCard.strong) ??
+															wordAnalysisForCard?.strong_number
+														}
 														qumranWord={qumranWordForCard}
 														qumranStrong={dssVariantForCard?.dss_strong}
 														qumranTransliteration={qumranTransliteration}
@@ -2093,10 +2195,14 @@ export default function App() {
 
 						return (
 							<WordCard
+								key={`${parseSourceStrong(selectedWord.strong) ?? selectedWord.text}-${selectedWord.position}`}
 								word={selectedWord.text}
 								sourceLanguage={selectedWord.source_language ?? "hebrew"}
 								wordFromVerse={selectedWord.text}
-								strongNumber={selectedWordAnalysis?.strong_number}
+								strongNumber={
+									parseSourceStrong(selectedWord.strong) ??
+									selectedWordAnalysis?.strong_number
+								}
 								qumranWord={qumranWordForCard}
 								qumranStrong={dssVariantForCard?.dss_strong}
 								qumranTransliteration={qumranTransliteration}

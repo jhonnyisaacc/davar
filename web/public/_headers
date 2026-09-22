@@ -1,0 +1,53 @@
+/data/version.json
+  Cache-Control: public, max-age=60, must-revalidate
+
+/data/manifest.json
+  Cache-Control: public, max-age=60, must-revalidate
+
+/data/metadata.json
+  Cache-Control: public, max-age=60, must-revalidate
+
+/data/oe/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/data/besorah/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/data/hutter/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/data/translit/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/data/dss/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/data/dict/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/data/tth/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/data/bes/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/data/ts2009/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/data/greek/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/data/bundles/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/data/prefixes.json
+  Cache-Control: public, max-age=31536000, immutable
+
+/api/*
+  Cache-Control: public, max-age=300, must-revalidate
+
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate

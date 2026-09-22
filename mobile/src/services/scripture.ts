@@ -8,6 +8,14 @@ import {
 import { cleanGreekSurfaceText } from "@davar/shared/greekText";
 import { joinHebrewPrefixSlashes } from "@davar/shared/hebrewText";
 import { staticDataRequest, ts2009Request } from "@/src/services/api";
+import {
+  dssBookAssetPath,
+  dssChapterAssetPath,
+  dssTranslitBookAssetPath,
+  dssTranslitChapterAssetPath,
+  translitBookAssetPath,
+  translitChapterAssetPath,
+} from "@davar/shared/staticDataPaths";
 import type { TranslationFootnote, WordResponse } from "@/src/types/api";
 import {
   fetchHebrewVerses,
@@ -34,6 +42,7 @@ import { toDisplayVerseId } from "@/src/services/verseIdentity";
 
 // Chapter-level cache for TS2009 static JSON (matches web approach)
 const ts2009ChapterCache = new Map<string, Promise<Map<number, string> | null>>();
+let ts2009ChapterFilesUnavailable = false;
 
 const TS2009_BOOK_FILE_MAP: Record<string, string> = {
   genesis: "bereshit",
@@ -219,29 +228,28 @@ const fetchTs2009ChapterStatic = (
   }
 
   const promise = (async (): Promise<Map<number, string> | null> => {
-    let chapterMap: Map<number, string> | null = null;
+    if (!ts2009ChapterFilesUnavailable) {
+      try {
+        const staticChapter = await staticDataRequest<{
+          verses?: Record<string, string>;
+        }>(`ts2009/${bookId}/${chapter}.json`);
 
-    try {
-      const staticChapter = await staticDataRequest<{
-        verses?: Record<string, string>;
-      }>(`ts2009/${bookId}/${chapter}.json`);
-
-      const verses = staticChapter.verses ?? {};
-      const verseMap = new Map<number, string>();
-      for (const [verseKey, translation] of Object.entries(verses)) {
-        const verseNumber = Number(verseKey);
-        if (Number.isFinite(verseNumber) && typeof translation === "string") {
-          verseMap.set(verseNumber, translation);
+        const verses = staticChapter.verses ?? {};
+        const verseMap = new Map<number, string>();
+        for (const [verseKey, translation] of Object.entries(verses)) {
+          const verseNumber = Number(verseKey);
+          if (Number.isFinite(verseNumber) && typeof translation === "string") {
+            verseMap.set(verseNumber, translation);
+          }
         }
+
+        if (verseMap.size > 0) {
+          return verseMap;
+        }
+      } catch {
+        // Chapter files are unpublished. Later chapters go straight to the book file.
+        ts2009ChapterFilesUnavailable = true;
       }
-
-      chapterMap = verseMap.size > 0 ? verseMap : null;
-    } catch {
-      // Fall back to TS2009 book files below.
-    }
-
-    if (chapterMap) {
-      return chapterMap;
     }
 
     return fetchTs2009ChapterFromBookFile(bookId, chapter);
@@ -598,17 +606,6 @@ const getSourceChaptersForRequest = (
   return chapters.length > 0 ? chapters : [chapter];
 };
 
-const toDssBookKey = (bookId: string): string => {
-  const dssMap: Record<string, string> = {
-    samuel1: "1samuel",
-    samuel2: "2samuel",
-    songofsolomon: "songs",
-    hosea: "hoseah",
-  };
-
-  return dssMap[bookId] ?? bookId;
-};
-
 const parseTranslationFootnotes = (
   rawFootnotes: unknown,
 ): TranslationFootnote[] | undefined => {
@@ -706,6 +703,21 @@ const loadStaticTranslationsForChapter = async (
               footnotes: parseTranslationFootnotes(verse.footnotes),
             });
           }
+        }
+
+        const tthCoversRequiredChapters = requiredTranslationChapters.every(
+          (translationChapter) =>
+            (translationBook.chapters ?? []).some(
+              (item) =>
+                item.chapter === translationChapter &&
+                (item.verses ?? []).some((verse) => (verse.tth ?? verse.bes ?? "").trim()),
+            ),
+        );
+        if (tthCoversRequiredChapters) {
+          return {
+            verses: translationMap,
+            titles: translationTitleMap,
+          };
         }
       } catch {
         // TTH_2 not available for this book, try BES fallback below
@@ -819,11 +831,18 @@ const loadStaticDssForChapter = async (
   }
 
   try {
-    const dssBook = await staticDataRequest<StaticDssBook>(
-      `dss/${toDssBookKey(bookId)}.json`,
-    );
-    const chapterData = dssBook.chapters?.[String(chapter)];
-    const verseEntries = chapterData?.verses ?? {};
+    let verseEntries: Record<string, { differences?: StaticDssDifference[] }> = {};
+    try {
+      const chapterData = await staticDataRequest<{
+        verses?: Record<string, { differences?: StaticDssDifference[] }>;
+      }>(dssChapterAssetPath(bookId, chapter));
+      verseEntries = chapterData.verses ?? {};
+    } catch {
+      const dssBook = await staticDataRequest<StaticDssBook>(
+        dssBookAssetPath(bookId),
+      );
+      verseEntries = dssBook.chapters?.[String(chapter)]?.verses ?? {};
+    }
 
     for (const [verseKey, verseData] of Object.entries(verseEntries)) {
       const verseNumber = Number(verseKey);
@@ -851,12 +870,21 @@ const loadStaticTranslitForChapter = async (
   chapter: number,
 ): Promise<Map<string, StaticTranslitWord[]>> => {
   try {
-    const translitBook = await staticDataRequest<StaticTranslitBook>(
-      `translit/${bookId}.json`,
-    );
+    let verses: StaticTranslitBook["verses"] = [];
+    try {
+      const translitChapter = await staticDataRequest<StaticTranslitBook>(
+        translitChapterAssetPath(bookId, chapter),
+      );
+      verses = translitChapter.verses ?? [];
+    } catch {
+      const translitBook = await staticDataRequest<StaticTranslitBook>(
+        translitBookAssetPath(bookId),
+      );
+      verses = translitBook.verses ?? [];
+    }
 
     const translitMap = new Map<string, StaticTranslitWord[]>();
-    for (const verseEntry of translitBook.verses ?? []) {
+    for (const verseEntry of verses) {
       if (verseEntry.chapter !== chapter) {
         continue;
       }
@@ -881,11 +909,20 @@ const loadStaticDssTranslitForChapter = async (
   }
 
   try {
-    const translitBook = await staticDataRequest<StaticDssTranslitBook>(
-      `translit/dss/${toDssBookKey(bookId)}.json`,
-    );
+    let variants: StaticDssTranslitBook["variants"] = [];
+    try {
+      const translitChapter = await staticDataRequest<StaticDssTranslitBook>(
+        dssTranslitChapterAssetPath(bookId, chapter),
+      );
+      variants = translitChapter.variants ?? [];
+    } catch {
+      const translitBook = await staticDataRequest<StaticDssTranslitBook>(
+        dssTranslitBookAssetPath(bookId),
+      );
+      variants = translitBook.variants ?? [];
+    }
 
-    for (const variant of translitBook.variants ?? []) {
+    for (const variant of variants) {
       if (variant.chapter !== chapter) {
         continue;
       }
@@ -1118,62 +1155,75 @@ const fetchChapterVersesStatic = async (
     referenceMode,
   );
 
-  const sourceVerseChunks = await Promise.all(
+  const besorahTextVersion = options?.besorahTextVersion ?? "delitzsch";
+  const sourcePromise = Promise.all(
     sourceChapters.map((sourceChapter) =>
-      loadStaticSourceChapterVerses(
-        bookId,
-        sourceChapter,
-        options?.besorahTextVersion ?? "delitzsch",
-      ),
+      loadStaticSourceChapterVerses(bookId, sourceChapter, besorahTextVersion),
     ),
   );
+  const translitPromise = Promise.all(
+    sourceChapters.map((sourceChapter) =>
+      loadStaticTranslitForChapter(bookId, sourceChapter),
+    ),
+  );
+  const dssPromise = Promise.all(
+    sourceChapters.map((sourceChapter) =>
+      loadStaticDssForChapter(bookId, sourceChapter, options?.showDss),
+    ),
+  );
+  const dssTranslitPromise = Promise.all(
+    sourceChapters.map((sourceChapter) =>
+      loadStaticDssTranslitForChapter(bookId, sourceChapter, options?.showDss),
+    ),
+  );
+
+  if (!options?.hebrewOnly && options?.language === "en") {
+    const guessedChapters =
+      referenceMode === "translation" ? [chapter] : sourceChapters;
+    for (const guessedChapter of guessedChapters) {
+      void fetchTs2009ChapterStatic(bookId, guessedChapter);
+    }
+  }
+
+  if (!options?.hebrewOnly && options?.language === "es") {
+    const tthBookId = resolveTthBookId(bookId);
+    if (tthBookId) {
+      void staticDataRequest(`tth/${tthBookId}.json`).catch(() => undefined);
+    }
+  }
+
+  const sourceVerseChunks = await sourcePromise;
   const sourceVerses = sourceVerseChunks.flat();
 
-  const [translations, dssMap, translitMap, dssTranslitMap] = await Promise.all([
+  const [translations, dssMaps, translitMaps, dssTranslitMaps] = await Promise.all([
     loadStaticTranslationsForChapter(
       bookId,
       sourceVerses,
       options?.language,
       options?.hebrewOnly,
     ),
-    Promise.all(
-      sourceChapters.map((sourceChapter) =>
-        loadStaticDssForChapter(bookId, sourceChapter, options?.showDss),
-      ),
-    ).then((maps) => {
-      const merged = new Map<string, StaticDssDifference[]>();
-      for (const map of maps) {
-        for (const [key, value] of map.entries()) {
-          merged.set(key, value);
-        }
-      }
-      return merged;
-    }),
-    Promise.all(
-      sourceChapters.map((sourceChapter) => loadStaticTranslitForChapter(bookId, sourceChapter)),
-    ).then((maps) => {
-      const merged = new Map<string, StaticTranslitWord[]>();
-      for (const map of maps) {
-        for (const [key, value] of map.entries()) {
-          merged.set(key, value);
-        }
-      }
-      return merged;
-    }),
-    Promise.all(
-      sourceChapters.map((sourceChapter) =>
-        loadStaticDssTranslitForChapter(bookId, sourceChapter, options?.showDss),
-      ),
-    ).then((maps) => {
-      const merged = new Map<string, StaticDssTranslitVariant>();
-      for (const map of maps) {
-        for (const [key, value] of map.entries()) {
-          merged.set(key, value);
-        }
-      }
-      return merged;
-    }),
+    dssPromise,
+    translitPromise,
+    dssTranslitPromise,
   ]);
+  const dssMap = dssMaps.reduce((merged, map) => {
+    for (const [key, value] of map.entries()) {
+      merged.set(key, value);
+    }
+    return merged;
+  }, new Map<string, StaticDssDifference[]>());
+  const translitMap = translitMaps.reduce((merged, map) => {
+    for (const [key, value] of map.entries()) {
+      merged.set(key, value);
+    }
+    return merged;
+  }, new Map<string, StaticTranslitWord[]>());
+  const dssTranslitMap = dssTranslitMaps.reduce((merged, map) => {
+    for (const [key, value] of map.entries()) {
+      merged.set(key, value);
+    }
+    return merged;
+  }, new Map<string, StaticDssTranslitVariant>());
 
   const { verses: translationMap, titles: translationTitleMap } = translations;
 

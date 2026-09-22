@@ -118,7 +118,7 @@ export function WordCard({
 	const [activeTab, setActiveTab] = useState<
 		"masoretic" | "qumran" | "instances"
 	>("masoretic");
-	const [isTransitioning, setIsTransitioning] = useState(false);
+	const isTransitioning = false;
 	const [displayedData, setDisplayedData] = useState({
 		word,
 		wordFromVerse,
@@ -293,11 +293,12 @@ export function WordCard({
 	}, [displayedData.prefixes]);
 
 	useEffect(() => {
-		const hasChanged =
+		const identityChanged =
 			displayedData.word !== word ||
 			displayedData.wordFromVerse !== wordFromVerse ||
 			displayedData.transliteration !== transliteration ||
-			displayedData.qumranTransliteration !== qumranTransliteration ||
+			(displayedData.prefixes ?? []).join("|") !== (prefixes ?? []).join("|");
+		const enrichmentChanged =
 			displayedData.root !== root ||
 			displayedData.rootMeaning !== rootMeaning ||
 			displayedData.rootTransliteration !== rootTransliteration ||
@@ -310,66 +311,67 @@ export function WordCard({
 			displayedData.qumranRootMeaning !== qumranRootMeaning ||
 			displayedData.qumranRootTransliteration !== qumranRootTransliteration ||
 			displayedData.qumranCommentary !== qumranCommentary ||
-			(displayedData.prefixes ?? []).join("|") !== (prefixes ?? []).join("|") ||
+			displayedData.qumranTransliteration !== qumranTransliteration ||
 			displayedData.instances
 				.map((item) => `${item.verse}:${item.text}`)
 				.join("|") !==
 				instances.map((item) => `${item.verse}:${item.text}`).join("|");
 
-		if (!hasChanged) return undefined;
+		if (!identityChanged && !enrichmentChanged) return undefined;
 
-		if (isLoading) {
-			// Only transition when loading new word analysis
-			setIsTransitioning(true);
-			const timeout = window.setTimeout(() => {
-				setDisplayedData({
-					word,
-					wordFromVerse,
-					transliteration,
-					meanings,
-					root,
-					rootTransliteration,
-					rootMeaning,
-					prefixes,
-					instances,
-					qumranWord,
-					qumranStrong,
-					qumranTransliteration,
-					qumranMeanings,
-					qumranRoot,
-					qumranRootTransliteration,
-					qumranRootMeaning,
-					qumranCommentary,
-				});
-				setIsTransitioning(false);
-			}, 140);
-			return () => window.clearTimeout(timeout);
-		} else {
-			// Update immediately without transition for word switching
+		if (identityChanged) {
 			setDisplayedData({
 				word,
 				wordFromVerse,
 				transliteration,
-				meanings,
-				root,
-				rootTransliteration,
-				rootMeaning,
+				meanings: isLoading ? [] : meanings,
+				root: isLoading ? undefined : root,
+				rootTransliteration: isLoading ? undefined : rootTransliteration,
+				rootMeaning: isLoading ? undefined : rootMeaning,
 				prefixes,
-				instances,
+				instances: isLoading ? [] : instances,
 				qumranWord,
 				qumranStrong,
 				qumranTransliteration,
-				qumranMeanings,
-				qumranRoot,
-				qumranRootTransliteration,
-				qumranRootMeaning,
+				qumranMeanings: isQumranLoading ? [] : qumranMeanings,
+				qumranRoot: isQumranLoading ? undefined : qumranRoot,
+				qumranRootTransliteration: isQumranLoading
+					? undefined
+					: qumranRootTransliteration,
+				qumranRootMeaning: isQumranLoading ? undefined : qumranRootMeaning,
 				qumranCommentary,
 			});
+			return undefined;
 		}
+
+		if (isLoading) {
+			return undefined;
+		}
+
+		setDisplayedData({
+			word,
+			wordFromVerse,
+			transliteration,
+			meanings,
+			root,
+			rootTransliteration,
+			rootMeaning,
+			prefixes,
+			instances,
+			qumranWord,
+			qumranStrong,
+			qumranTransliteration,
+			qumranMeanings,
+			qumranRoot,
+			qumranRootTransliteration,
+			qumranRootMeaning,
+			qumranCommentary,
+		});
 	}, [
 		displayedData,
 		instances,
 		isLoading,
+		isQumranLoading,
 		meanings,
 		qumranMeanings,
 		prefixes,
@@ -601,7 +603,9 @@ export function WordCard({
 							}}
 							className="dark:text-[var(--text-secondary)]"
 						>
-							{displayedData.meanings.length > 0 ? (
+							{isLoading && displayedData.meanings.length === 0 ? (
+								t("wordCard.loadingDefinitions")
+							) : displayedData.meanings.length > 0 ? (
 								<div className="space-y-2 text-center">
 									{meaningItems.map((item) => (
 										<div key={item.key} style={{ whiteSpace: "normal" }}>

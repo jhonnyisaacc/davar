@@ -28,6 +28,7 @@ interface FullChapterViewProps {
 		word: WordResponse,
 		context?: { chapter: number; verse: number },
 	) => void;
+	onWordHover?: (word: WordResponse) => void;
 	showQumran?: boolean;
 	selectedWord?: Pick<WordResponse, "text" | "position" | "strong"> | null;
 	selectedWordContext?: { chapter: number; verse: number } | null;
@@ -43,6 +44,7 @@ export function FullChapterView({
 	translationOnly = false,
 	seferMode = false,
 	onWordClick,
+	onWordHover,
 	showQumran,
 	selectedWord,
 	selectedWordContext,
@@ -201,6 +203,7 @@ export function FullChapterView({
 				<span key={`${verse.chapter}-${verse.verse}-${word.position}`}>
 					<button
 						type="button"
+						onMouseEnter={() => onWordHover?.(word)}
 						onClick={() =>
 							onWordClick(word, {
 								chapter: verse.chapter,

@@ -1,5 +1,9 @@
 import type { BookResponse } from "@/src/types/api";
 import { NativeModules, Platform } from "react-native";
+import {
+  appendStaticDataVersion,
+  shouldVersionStaticPath,
+} from "@davar/shared/staticDataPaths";
 
 const DEV_STATIC_DATA_BASE_URL = "http://127.0.0.1:3002/data";
 const PROD_STATIC_DATA_BASE_URL = "https://davar.bible/data";
@@ -7,6 +11,8 @@ const DEV_TS2009_BASE_URL = "http://127.0.0.1:3002/api/ts2009";
 const PROD_TS2009_BASE_URL = "https://davar.bible/api/ts2009";
 
 const staticDataCache = new Map<string, unknown>();
+const staticDataInflight = new Map<string, Promise<unknown>>();
+let staticDataVersionPromise: Promise<string | null> | null = null;
 
 const STATIC_FETCH_TIMEOUT_MS = Number.parseInt(
   process.env.EXPO_PUBLIC_STATIC_FETCH_TIMEOUT_MS?.trim() ||
@@ -144,6 +150,9 @@ const buildStaticBundlesBaseCandidates = (
   return uniqueUrls(candidates);
 };
 
+let preferredStaticDataBase: string | null = null;
+let preferredTs2009Base: string | null = null;
+
 const STATIC_DATA_BASE_URL = resolveStaticDataBaseUrl();
 const STATIC_BUNDLES_BASE_URL = resolveStaticBundlesBaseUrl(STATIC_DATA_BASE_URL);
 const STATIC_DATA_BASE_CANDIDATES = buildStaticDataBaseCandidates();
@@ -272,6 +281,31 @@ export const getBooks = async (): Promise<BookResponse[]> => {
   return metadata.books;
 };
 
+const loadStaticDataVersion = async (): Promise<string | null> => {
+  if (!staticDataVersionPromise) {
+    staticDataVersionPromise = (async () => {
+      try {
+        const payload = await staticDataRequest<{
+          version?: string;
+          data_version?: string;
+        }>("version.json");
+        return payload.version ?? payload.data_version ?? null;
+      } catch {
+        return null;
+      }
+    })();
+  }
+  return staticDataVersionPromise;
+};
+
+export const resetStaticDataRequestCachesForTests = (): void => {
+  staticDataCache.clear();
+  staticDataInflight.clear();
+  staticDataVersionPromise = null;
+  preferredStaticDataBase = null;
+  preferredTs2009Base = null;
+};
+
 export const staticDataRequest = async <T>(
   relativePath: string,
 ): Promise<T> => {
@@ -284,46 +318,74 @@ export const staticDataRequest = async <T>(
     return staticDataCache.get(cacheKey) as T;
   }
 
-  const errors: string[] = [];
-
-  for (const baseUrl of STATIC_DATA_BASE_CANDIDATES) {
-    const requestUrl = `${baseUrl}/${encodeURIComponent(normalizedPath).replace(/%2F/g, "/")}`;
-    let response: Response;
-    try {
-      response = await fetchWithTimeout(requestUrl);
-    } catch (error) {
-      errors.push(
-        wrapFetchNetworkError(requestUrl, `data ${normalizedPath}`, error)
-          .message,
-      );
-      continue;
-    }
-
-    const contentType = response.headers.get("content-type") || "";
-    const payload = await response.text();
-
-    if (!response.ok) {
-      const contentTypeLabel = contentType || "unknown";
-      const preview = truncateForError(payload) || "[empty]";
-      errors.push(
-        `Static data request failed for ${normalizedPath} with status ${response.status} (url: ${requestUrl}, content-type: ${contentTypeLabel}, preview: ${preview})`,
-      );
-      continue;
-    }
-
-    const parsed = parseStaticJsonPayload<T>(
-      payload,
-      requestUrl,
-      contentType,
-      `data ${normalizedPath}`,
-    );
-    staticDataCache.set(cacheKey, parsed as unknown);
-    return parsed;
+  const inflight = staticDataInflight.get(cacheKey);
+  if (inflight) {
+    return inflight as Promise<T>;
   }
 
-  throw new Error(
-    `Static data request failed for ${normalizedPath} on all candidates: ${errors.join(" | ")}`,
-  );
+  const requestPromise = (async () => {
+    const errors: string[] = [];
+    const version =
+      normalizedPath !== "version.json" &&
+      shouldVersionStaticPath(normalizedPath)
+        ? await loadStaticDataVersion()
+        : null;
+
+    const baseCandidates = preferredStaticDataBase
+      ? [preferredStaticDataBase]
+      : STATIC_DATA_BASE_CANDIDATES;
+
+    for (const baseUrl of baseCandidates) {
+      const encodedPath = encodeURIComponent(normalizedPath).replace(
+        /%2F/g,
+        "/",
+      );
+      const requestUrl = `${baseUrl}/${appendStaticDataVersion(encodedPath, version)}`;
+      let response: Response;
+      try {
+        response = await fetchWithTimeout(requestUrl);
+      } catch (error) {
+        errors.push(
+          wrapFetchNetworkError(requestUrl, `data ${normalizedPath}`, error)
+            .message,
+        );
+        continue;
+      }
+
+      const contentType = response.headers.get("content-type") || "";
+      const payload = await response.text();
+
+      if (!response.ok) {
+        const contentTypeLabel = contentType || "unknown";
+        const preview = truncateForError(payload) || "[empty]";
+        errors.push(
+          `Static data request failed for ${normalizedPath} with status ${response.status} (url: ${requestUrl}, content-type: ${contentTypeLabel}, preview: ${preview})`,
+        );
+        continue;
+      }
+
+      const parsed = parseStaticJsonPayload<T>(
+        payload,
+        requestUrl,
+        contentType,
+        `data ${normalizedPath}`,
+      );
+      staticDataCache.set(cacheKey, parsed as unknown);
+      preferredStaticDataBase = baseUrl;
+      return parsed;
+    }
+
+    throw new Error(
+      `Static data request failed for ${normalizedPath} on all candidates: ${errors.join(" | ")}`,
+    );
+  })();
+
+  staticDataInflight.set(cacheKey, requestPromise);
+  try {
+    return (await requestPromise) as T;
+  } finally {
+    staticDataInflight.delete(cacheKey);
+  }
 };
 
 export const ts2009Request = async <T>(relativePath: string): Promise<T> => {
@@ -336,7 +398,11 @@ export const ts2009Request = async <T>(relativePath: string): Promise<T> => {
 
   const errors: string[] = [];
 
-  for (const baseUrl of TS2009_BASE_CANDIDATES) {
+  const baseCandidates = preferredTs2009Base
+    ? [preferredTs2009Base]
+    : TS2009_BASE_CANDIDATES;
+
+  for (const baseUrl of baseCandidates) {
     const requestUrl = `${baseUrl}/${encodeURIComponent(normalizedPath).replace(/%2F/g, "/")}`;
     let response: Response;
     try {
@@ -366,6 +432,7 @@ export const ts2009Request = async <T>(relativePath: string): Promise<T> => {
       `TS2009 ${normalizedPath}`,
     );
     staticDataCache.set(cacheKey, parsed as unknown);
+    preferredTs2009Base = baseUrl;
     return parsed;
   }
 

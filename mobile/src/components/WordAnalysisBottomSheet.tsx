@@ -49,6 +49,12 @@ import {
   splitLeadingHebrewCluster,
 } from "@/src/utils/hebrew";
 import { staticDataRequest } from "@/src/services/api";
+import {
+  loadLexiconEntryFromStatic,
+  loadLexiconInstances,
+} from "@/src/services/lexicon";
+import { lexiconEntryAssetPath } from "@davar/shared/staticDataPaths";
+import { isCurrentLexiconResult } from "@davar/shared/lexiconAssets";
 import type { LexiconResponse } from "@/src/types/api";
 import { useTranslation } from "@/src/i18n/useTranslation";
 import {
@@ -113,23 +119,6 @@ type StaticDictionaryDefinition = {
   context?: string;
 };
 
-type StaticDictionaryEntry = {
-  strong_number?: string;
-  lemma?: string;
-  translit_en?: string;
-  translit_es?: string;
-  transliteration_en?: string;
-  transliteration_es?: string;
-  definitions?: StaticDictionaryDefinition[];
-  root_ref?: string;
-  root_strong?: string;
-  occurrences?: {
-    total?: number;
-    references?: string[];
-    surface_references?: string[];
-  };
-};
-
 type StaticCustomDefinition = {
   instance_total?: number;
   surface_instances?: { book?: string; chapter?: number; verse?: number; text?: string }[];
@@ -152,12 +141,6 @@ type StaticCustomDefinition = {
     verse?: number;
     text?: string;
   }[];
-};
-
-type StaticDictionaryData = {
-  words: Record<string, StaticDictionaryEntry>;
-  roots: Record<string, StaticDictionaryEntry>;
-  custom: Record<string, StaticCustomDefinition>;
 };
 
 const SUFFIX_MORPH_TO_STRONG: Record<string, string> = {
@@ -201,27 +184,6 @@ const resolveStrongNumber = (
   return SUFFIX_MORPH_TO_STRONG[suffixPart] ?? null;
 };
 
-const normalizeStrongKey = (value: string): string =>
-  value.toUpperCase().replace(/\s+/g, "");
-
-const resolveStrongKey = <T,>(
-  dictionary: Record<string, T>,
-  lookup: string,
-): string | null => {
-  if (lookup in dictionary) {
-    return lookup;
-  }
-
-  const target = normalizeStrongKey(lookup);
-  for (const key of Object.keys(dictionary)) {
-    if (normalizeStrongKey(key) === target) {
-      return key;
-    }
-  }
-
-  return null;
-};
-
 type MappedDefinition = {
   text: string;
   source: string;
@@ -255,144 +217,6 @@ const mapStaticDefinitions = (
       };
     })
     .filter((value): value is MappedDefinition => value !== null);
-};
-
-const mergeUniqueDefinitions = (
-  ...groups: { text: string; source: string; language: string }[][]
-): { text: string; source: string; language: string }[] => {
-  const seen = new Set<string>();
-  const merged: { text: string; source: string; language: string }[] = [];
-
-  for (const group of groups) {
-    for (const definition of group) {
-      const key = `${definition.source}:${definition.text.toLowerCase()}`;
-      if (seen.has(key)) {
-        continue;
-      }
-      seen.add(key);
-      merged.push(definition);
-    }
-  }
-
-  return merged;
-};
-
-const isRawDictionaryEntry = (
-  value: StaticDictionaryEntry | StaticCustomDefinition | undefined,
-): value is StaticDictionaryEntry =>
-  Boolean(value && ("lemma" in value || "root_ref" in value));
-
-const loadStaticDictionaryData = async (): Promise<StaticDictionaryData> => {
-  const [words, roots, custom] = await Promise.all([
-    staticDataRequest<Record<string, StaticDictionaryEntry>>("dict/words.json"),
-    staticDataRequest<Record<string, StaticDictionaryEntry>>("dict/roots.json"),
-    staticDataRequest<Record<string, StaticCustomDefinition>>(
-      "dict/custom_definitions.json",
-    ),
-  ]);
-
-  return { words, roots, custom };
-};
-
-const loadLexiconEntryFromStatic = async (
-  strong: string,
-  language: "en" | "es" | "he",
-): Promise<LexiconResponse | null> => {
-  const dictionary = await loadStaticDictionaryData();
-
-  const customKey = resolveStrongKey(dictionary.custom, strong);
-  const customEntry = customKey ? dictionary.custom[customKey] : undefined;
-
-  const wordKey = resolveStrongKey(dictionary.words, strong);
-  const rootDictionaryKey = resolveStrongKey(dictionary.roots, strong);
-  const dictionaryEntry = wordKey
-    ? dictionary.words[wordKey]
-    : rootDictionaryKey
-      ? dictionary.roots[rootDictionaryKey]
-      : undefined;
-
-  if (!customEntry && !dictionaryEntry) {
-    return null;
-  }
-
-  const rootStrong =
-    customEntry?.root_strong ??
-    dictionaryEntry?.root_ref ??
-    dictionaryEntry?.root_strong ??
-    (dictionaryEntry
-      ? (customEntry?.strong_number ?? dictionaryEntry?.strong_number ?? strong)
-      : undefined);
-
-  const rootEntry = rootStrong
-    ? (() => {
-        const rootKey = resolveStrongKey(dictionary.roots, rootStrong);
-        if (rootKey) {
-          return dictionary.roots[rootKey] as
-            | StaticDictionaryEntry
-            | StaticCustomDefinition;
-        }
-        const wordRootKey = resolveStrongKey(dictionary.words, rootStrong);
-        if (wordRootKey) {
-          return dictionary.words[wordRootKey] as
-            | StaticDictionaryEntry
-            | StaticCustomDefinition;
-        }
-        const customRootKey = resolveStrongKey(dictionary.custom, rootStrong);
-        if (customRootKey) {
-          return dictionary.custom[customRootKey] as
-            | StaticDictionaryEntry
-            | StaticCustomDefinition;
-        }
-        return undefined;
-      })()
-    : undefined;
-
-  const dictionaryDefinitions = mapStaticDefinitions(
-    dictionaryEntry?.definitions,
-    language,
-  );
-  const customDefinitions = mapStaticDefinitions(customEntry?.definitions, language);
-  const definitions = mergeUniqueDefinitions(customDefinitions, dictionaryDefinitions);
-
-  const surface = instanceSurface(customEntry, dictionaryEntry?.occurrences);
-  const instances = surface.instances;
-
-  const rootText = rootEntry
-    ? "lemma" in rootEntry
-      ? rootEntry.lemma
-      : "hebrew" in rootEntry
-        ? rootEntry.hebrew
-        : undefined
-    : undefined;
-
-  const rootTranslitEn = isRawDictionaryEntry(rootEntry)
-    ? rootEntry.translit_en
-    : rootEntry?.transliteration_en;
-
-  const rootTranslitEs = isRawDictionaryEntry(rootEntry)
-    ? rootEntry.translit_es
-    : rootEntry?.transliteration_es;
-
-  return {
-    strong_number: customEntry?.strong_number ?? dictionaryEntry?.strong_number ?? strong,
-    hebrew: customEntry?.hebrew ?? dictionaryEntry?.lemma,
-    translit_en:
-      customEntry?.transliteration_en ??
-      dictionaryEntry?.translit_en ??
-      dictionaryEntry?.transliteration_en,
-    translit_es:
-      customEntry?.transliteration_es ??
-      dictionaryEntry?.translit_es ??
-      dictionaryEntry?.transliteration_es,
-    definitions,
-    root: customEntry?.root ?? rootText,
-    root_strong: rootStrong,
-    root_translit_en: rootTranslitEn,
-    root_translit_es: rootTranslitEs,
-    root_definitions: mapStaticDefinitions(rootEntry?.definitions, language),
-    occurrences_count: surface.total,
-    instances,
-  };
 };
 
 type GreekLexiconEntry = {
@@ -479,18 +303,47 @@ const toGreekLexiconResponse = (
   };
 };
 
+const loadGreekOccurrenceInstances = async (
+  strong: string,
+): Promise<Partial<LexiconResponse> | null> => {
+  const family = greekStrongFamily(strong);
+  const shard = await staticDataRequest<
+    Record<string, { count?: number; references?: GreekLexiconEntry["instances"] }>
+  >(greekOccurrencesShardPath(family, GREEK_RECORDED_REVISION));
+  const bucket = shard[strong] ?? shard[family];
+  if (!bucket) return null;
+  const surface = instanceSurface({
+    instance_total: bucket.count,
+    instances: bucket.references?.map((row) => ({
+      book: row.book,
+      chapter: row.chapter,
+      verse: row.verse ?? undefined,
+    })),
+  });
+  return {
+    instances: surface.instances,
+    occurrences_count: surface.total,
+  };
+};
+
 const loadGreekLexiconEntry = async (
   strong: string,
   language: "en" | "es" | "he",
 ): Promise<LexiconResponse | null> => {
   const revision = GREEK_RECORDED_REVISION;
   try {
-    const [lexicon, custom] = await Promise.all([
+    const [lexicon, customShard] = await Promise.all([
       staticDataRequest<Record<string, GreekLexiconEntry>>(
         greekLexiconPath(revision),
       ),
-      staticDataRequest<Record<string, StaticCustomDefinition>>(
-        "dict/custom_definitions.json",
+      staticDataRequest<
+        Record<string, { definitions?: StaticDictionaryDefinition[] }>
+      >(lexiconEntryAssetPath(strong)).catch(
+        () =>
+          ({}) as Record<
+            string,
+            { definitions?: StaticDictionaryDefinition[] }
+          >,
       ),
     ]);
     const family = greekStrongFamily(strong);
@@ -502,23 +355,12 @@ const loadGreekLexiconEntry = async (
           item.strong != null && greekStrongFamily(item.strong) === family,
       );
     if (!entry) return null;
-    if (!entry.instances?.length) {
-      const shard = await staticDataRequest<
-        Record<string, { count?: number; references?: GreekLexiconEntry["instances"] }>
-      >(greekOccurrencesShardPath(entry.strong ?? strong, revision));
-      const bucket = shard[strong] ?? (entry.strong ? shard[entry.strong] : undefined);
-      return toGreekLexiconResponse(
-        {
-          ...entry,
-          instances: bucket?.references,
-          occurrences_count: bucket?.count ?? entry.occurrences_count,
-        },
-        strong,
-        language,
-        custom[entry.strong ?? strong],
-      );
-    }
-    return toGreekLexiconResponse(entry, strong, language, custom[entry.strong ?? strong]);
+    return toGreekLexiconResponse(
+      entry,
+      strong,
+      language,
+      customShard[entry.strong ?? strong] ?? customShard[family],
+    );
   } catch {
     const offline = (await fetchSourceLexiconEntry(
       greekSourceIdentity(revision),
@@ -1199,29 +1041,32 @@ const WordAnalysisBottomSheetComponent = (
   }, [isBesorah, showNikud, word?.text, word?.prefixes]);
 
   useEffect(() => {
+    let cancelled = false;
+    const requestedStrong = strongNumber;
     const loadLexicon = async () => {
-      if (!strongNumber) {
+      if (!requestedStrong) {
         setLexiconEntry(null);
         return;
       }
+      setLexiconEntry(null);
       setIsLoading(true);
       try {
         let entry: LexiconResponse | null = null;
         try {
           entry =
             word?.source_language === "greek"
-              ? await loadGreekLexiconEntry(strongNumber, language)
-              : await loadLexiconEntryFromStatic(strongNumber, language);
+              ? await loadGreekLexiconEntry(requestedStrong, language)
+              : await loadLexiconEntryFromStatic(requestedStrong, language);
         } catch {
           entry = null;
         }
         if (!entry) {
           try {
-            const offlineEntry = await fetchLexiconEntry(strongNumber);
+            const offlineEntry = await fetchLexiconEntry(requestedStrong);
             if (offlineEntry) {
               const instances = normalizeOfflineInstances(offlineEntry.occurrences);
               entry = {
-                strong_number: String(offlineEntry.strong ?? strongNumber),
+                strong_number: String(offlineEntry.strong ?? requestedStrong),
                 hebrew: offlineEntry.hebrew
                   ? String(offlineEntry.hebrew)
                   : undefined,
@@ -1246,20 +1091,55 @@ const WordAnalysisBottomSheetComponent = (
             entry = null;
           }
         }
+        if (
+          cancelled ||
+          (entry &&
+            !isCurrentLexiconResult(requestedStrong, entry.strong_number))
+        ) {
+          return;
+        }
         setLexiconEntry(entry);
+        if (!cancelled) {
+          setIsLoading(false);
+        }
+        const shouldLoadInstances = entry
+          ? word?.source_language === "greek"
+            ? entry.instances.length === 0
+            : entry.occurrences_count > entry.instances.length
+          : false;
+        if (entry && shouldLoadInstances) {
+          const instances =
+            word?.source_language === "greek"
+              ? await loadGreekOccurrenceInstances(entry.strong_number)
+              : await loadLexiconInstances(entry.strong_number);
+          if (cancelled || !instances) return;
+          setLexiconEntry((current) =>
+            current &&
+            isCurrentLexiconResult(requestedStrong, current.strong_number)
+              ? { ...current, ...instances, instances: instances.instances ?? [] }
+              : current,
+          );
+        }
       } finally {
-        setIsLoading(false);
+        if (!cancelled) {
+          setIsLoading(false);
+        }
       }
     };
     loadLexicon();
+    return () => {
+      cancelled = true;
+    };
   }, [strongNumber, language, word?.source_language, word?.text]);
 
   useEffect(() => {
+    let cancelled = false;
     const loadDssLexicon = async () => {
       if (!dssStrongNumber) {
         setDssLexiconEntry(null);
         return;
       }
+      setDssLexiconEntry(null);
       setIsDssLoading(true);
       try {
         let entry: LexiconResponse | null = null;
@@ -1297,12 +1177,19 @@ const WordAnalysisBottomSheetComponent = (
             entry = null;
           }
         }
-        setDssLexiconEntry(entry);
+        if (!cancelled) {
+          setDssLexiconEntry(entry);
+        }
       } finally {
-        setIsDssLoading(false);
+        if (!cancelled) {
+          setIsDssLoading(false);
+        }
       }
     };
     loadDssLexicon();
+    return () => {
+      cancelled = true;
+    };
   }, [dssStrongNumber, language, word?.dssWord]);
 
   useEffect(() => {
