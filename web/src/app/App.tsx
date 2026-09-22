@@ -1,27 +1,13 @@
-import {
-	useCallback,
-	useEffect,
-	useMemo,
-	useRef,
-	useState,
-	type ReactNode,
-} from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { BottomSheet } from "./components/BottomSheet";
-import { ConnectionErrorPage } from "./components/ConnectionErrorPage";
 import { DesignSystemExport } from "./components/DesignSystemExport";
-import { DonateScreen } from "./components/DonateScreen";
-import { FeaturesScreen } from "./components/FeaturesScreen";
-import { FeedbackScreen } from "./components/FeedbackScreen";
-import { HomeScreen } from "./components/HomeScreen";
-import { LegalScreen } from "./components/LegalScreen";
 import { MobileDesignSystemGuide } from "./components/MobileDesignSystemGuide";
 import { NavigationBar } from "./components/NavigationBar";
 import { NeumorphCard } from "./components/NeumorphCard";
-import { NotFoundPage } from "./components/NotFoundPage";
-import { SettingsScreen } from "./components/SettingsScreen";
 import { Skeleton } from "./components/ui/skeleton";
 import { VerseDisplay } from "./components/VerseDisplay";
 import { WordCard } from "./components/WordCard";
+import { renderNonVerseScreen } from "./nonVerseScreens";
 import { useDocumentTitle } from "./hooks/useDocumentTitle";
 import { usePersistedState } from "./hooks/usePersistedState";
 import { translate, useTranslation } from "./hooks/useTranslation";
@@ -1671,70 +1657,6 @@ export default function App() {
 		onNavigateFeedback: triggerScrollJump,
 	});
 
-	const nonVerseScreens: Record<Exclude<Screen, "verse">, () => ReactNode> = {
-		home: () => (
-			<HomeScreen
-				language={language}
-				onFeaturesClick={() => setCurrentScreen("features")}
-				onDonateClick={() => setCurrentScreen("donate")}
-			/>
-		),
-		terms: () => (
-			<LegalScreen
-				kind="terms"
-				language={language}
-				onBack={() => setCurrentScreen("home")}
-			/>
-		),
-		privacy: () => (
-			<LegalScreen
-				kind="privacy"
-				language={language}
-				onBack={() => setCurrentScreen("home")}
-			/>
-		),
-		feedback: () => (
-			<FeedbackScreen
-				language={language}
-				onBack={() => setCurrentScreen("home")}
-			/>
-		),
-		donate: () => <DonateScreen language={language} />,
-		features: () => <FeaturesScreen language={language} />,
-		settings: () => (
-			<SettingsScreen
-				theme={theme}
-				onThemeChange={setTheme}
-				language={language}
-				onLanguageChange={setLanguage}
-				besorahLanguage={besorahLanguage}
-				onBesorahLanguageChange={setBesorahLanguage}
-				greekAvailable={greekAvailable}
-				besorahTextVersion={besorahTextVersion}
-				onBesorahTextVersionChange={handleBesorahTextVersionChange}
-				showQumran={showQumran}
-				onQumranChange={setShowQumran}
-				showFullChapter={showFullChapter}
-				onFullChapterChange={setShowFullChapter}
-				seferMode={seferMode}
-				onSeferModeChange={handleSeferModeChange}
-				hebrewOnly={hebrewOnly}
-				onHebrewOnlyChange={handleHebrewOnlyChange}
-				onDesignSystemClick={() => setShowDesignSystem(true)}
-				onMobileDesignGuideClick={() => setShowMobileDesignGuide(true)}
-			/>
-		),
-		notFound: () => (
-			<NotFoundPage
-				language={language}
-				onGoBack={() => setCurrentScreen("verse")}
-			/>
-		),
-		connectionError: () => (
-			<ConnectionErrorPage onRetry={() => window.location.reload()} />
-		),
-	};
-
 	return (
 		<div
 			className="min-h-screen"
@@ -1828,7 +1750,30 @@ export default function App() {
 
 			<div className="px-6 pb-10 md:pb-32 pt-6">
 				<div className="max-w-7xl mx-auto">
-					{currentScreen !== "verse" && nonVerseScreens[currentScreen]()}
+					{currentScreen !== "verse" &&
+						renderNonVerseScreen({
+							screen: currentScreen,
+							language,
+							theme,
+							onThemeChange: setTheme,
+							onLanguageChange: setLanguage,
+							besorahLanguage,
+							onBesorahLanguageChange: setBesorahLanguage,
+							greekAvailable,
+							besorahTextVersion,
+							onBesorahTextVersionChange: handleBesorahTextVersionChange,
+							showQumran,
+							onQumranChange: setShowQumran,
+							showFullChapter,
+							onFullChapterChange: setShowFullChapter,
+							seferMode,
+							onSeferModeChange: handleSeferModeChange,
+							hebrewOnly,
+							onHebrewOnlyChange: handleHebrewOnlyChange,
+							onOpenScreen: setCurrentScreen,
+							onOpenDesignSystem: () => setShowDesignSystem(true),
+							onOpenMobileDesignGuide: () => setShowMobileDesignGuide(true),
+						})}
 
 					{currentScreen === "verse" && (
 						<div className="grid gap-6 items-start md:grid-cols-[7fr_3fr]">
