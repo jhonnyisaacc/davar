@@ -14,7 +14,7 @@ class BesorahLoader(DataLoader):
 
     def __init__(self, data_path: Optional[str] = None):
         super().__init__(data_path)
-        self.delitzsch_path = self.data_path / "delitzsch_parsed"
+        self.delitzsch_path = self.data_path / "delitzsch" / "parsed"
 
     def get_book_chapters(self, book_name: str) -> List[int]:
         """Get list of available chapters for a book"""
@@ -37,7 +37,7 @@ class BesorahLoader(DataLoader):
         if cache_key in self._cache:
             return self._cache[cache_key]
 
-        file_path = f"delitzsch_parsed/{book_name}/{chapter}.json"
+        file_path = f"delitzsch/parsed/{book_name}/{chapter}.json"
         try:
             chapter_data = self.load_json(file_path)
             # Delitzsch structure: [{"chapter": 1, "verses": [...]}]

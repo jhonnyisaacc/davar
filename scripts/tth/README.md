@@ -7,40 +7,40 @@ Simple pipeline to convert TTH DOCX files into JSON for Davar.
 ```bash
 cd ~/davar
 pip install mammoth tqdm
-python scripts/tth_2/main.py all
+python scripts/tth/main.py all
 ```
 
-Output: `data/tth_2/json/`
+Output: `data/tth/json/`
 
 ## Main Commands
 
 ```bash
 # List supported book keys
-python scripts/tth_2/main.py books
+python scripts/tth/main.py books
 
 # Full pipeline (split + convert + postprocess)
-python scripts/tth_2/main.py all
+python scripts/tth/main.py all
 
 # Step-by-step
-python scripts/tth_2/main.py split
-python scripts/tth_2/main.py convert all
-python scripts/tth_2/main.py postprocess all
+python scripts/tth/main.py split
+python scripts/tth/main.py convert all
+python scripts/tth/main.py postprocess all
 ```
 
 ## Process One Book
 
 ```bash
 # Apocalipsis (book key is sodot)
-python scripts/tth_2/main.py process data/tth_2/raw/apocalipsis.docx --books sodot
+python scripts/tth/main.py process data/tth/raw/apocalipsis.docx --books sodot
 
 # Generic single-book example
-python scripts/tth_2/main.py process data/tth_2/raw/romanos.docx --books romanos
+python scripts/tth/main.py process data/tth/raw/romanos.docx --books romanos
 ```
 
 If filename and book key are the same, you can omit `--books`:
 
 ```bash
-python scripts/tth_2/main.py process data/tth_2/raw/romanos.docx
+python scripts/tth/main.py process data/tth/raw/romanos.docx
 ```
 
 Note: for Apocalipsis, keep `--books sodot` because filename is `apocalipsis` but the registered key is `sodot`.
@@ -49,28 +49,28 @@ Note: for Apocalipsis, keep `--books sodot` because filename is `apocalipsis` bu
 
 ```bash
 # Convert one already-split markdown book
-python scripts/tth_2/main.py convert amos
+python scripts/tth/main.py convert amos
 
 # Postprocess one book
-python scripts/tth_2/main.py postprocess lukas
+python scripts/tth/main.py postprocess lukas
 
 # Validate one book or all
-python scripts/tth_2/main.py validate sodot
-python scripts/tth_2/main.py validate all
+python scripts/tth/main.py validate sodot
+python scripts/tth/main.py validate all
 
 # Help
-python scripts/tth_2/main.py --help
+python scripts/tth/main.py --help
 ```
 
 ## Folder Layout
 
 ```text
-data/tth_2/
+data/tth/
   raw/        # source DOCX files
   markdown/   # per-book markdown files
   json/       # final JSON files
 
-scripts/tth_2/
+scripts/tth/
   main.py
   config.py
   docx_to_md.py
@@ -112,6 +112,6 @@ Each book is a single JSON file:
 
 ## Notes
 
-- Book availability and extraction rules come from `scripts/tth_2/config.py` (`BOOKS_INFO`).
+- Book availability and extraction rules come from `scripts/tth/config.py` (`BOOKS_INFO`).
 - Add new books there first, then run `books` to confirm they are registered.
 - `postprocess` converts markdown italics to `<em>` and fixes common formatting artifacts.

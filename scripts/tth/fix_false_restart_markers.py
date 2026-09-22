@@ -14,7 +14,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-MARKDOWN_DIR = ROOT / "data" / "tth_2" / "markdown"
+MARKDOWN_DIR = ROOT / "data" / "tth" / "markdown"
 
 CHAPTER_RE = re.compile(r"^\*\*(\d+)\*\*\s*$")
 VERSE_RE = re.compile(r"^\*\*(\d+)\*\*\s+(.+)$")

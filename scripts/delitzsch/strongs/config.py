@@ -35,7 +35,7 @@ XAI_API_KEY = os.getenv('XAI_API_KEY')
 GROK_MODEL = 'grok-4-1-fast-non-reasoning'  # Non-reasoning model: faster for mechanical lexicographic tasks
 
 # Paths
-PARSED_DIR = config.DATA_DIR / "delitzsch_parsed"
+PARSED_DIR = config.DATA_DIR / "delitzsch" / "parsed"
 OUTPUT_DIR = PARSED_DIR / "strongs"
 
 # All 27 NT books in Delitzsch translation

@@ -15,14 +15,14 @@ class TranslationMappingTests(unittest.TestCase):
     def _json_stems(self, directory: Path) -> set[str]:
         return {path.stem for path in directory.glob("*.json")}
 
-    def test_tth_2_mapping_matches_files(self):
-        tth_json_dir = self.data_root / "tth_2" / "json"
+    def test_tth_mapping_matches_files(self):
+        tth_json_dir = self.data_root / "tth" / "json"
         tth_files = self._json_stems(tth_json_dir)
         mapping_values = set(TTH_BOOK_MAPPING.values())
         self.assertEqual(
             tth_files,
             mapping_values,
-            "tth_2 mapping must match JSON filenames exactly"
+            "tth mapping must match JSON filenames exactly"
         )
 
     def test_ts2009_mapping_matches_files(self):
@@ -35,8 +35,8 @@ class TranslationMappingTests(unittest.TestCase):
             "ts2009 mapping must match JSON filenames exactly"
         )
 
-    def test_tth_2_roundtrip_mapping(self):
-        tth_json_dir = self.data_root / "tth_2" / "json"
+    def test_tth_roundtrip_mapping(self):
+        tth_json_dir = self.data_root / "tth" / "json"
         for path in tth_json_dir.glob("*.json"):
             english_name = self.book_mapper.to_english(path.stem)
             self.assertIsNotNone(english_name, f"No English mapping for {path.stem}")

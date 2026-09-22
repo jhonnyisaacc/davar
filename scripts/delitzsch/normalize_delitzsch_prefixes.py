@@ -35,12 +35,12 @@ def project_root() -> Path:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Normalize duplicate prefixes in delitzsch_parsed")
+    parser = argparse.ArgumentParser(description="Normalize duplicate prefixes in delitzsch/parsed")
     parser.add_argument(
         "--books",
         nargs="+",
         default=DEFAULT_BOOKS,
-        help="Book folder names under data/delitzsch_parsed",
+        help="Book folder names under data/delitzsch/parsed",
     )
     parser.add_argument(
         "--dry-run",
@@ -166,7 +166,7 @@ def process_file(path: Path, dry_run: bool) -> Tuple[bool, int]:
 def main() -> int:
     args = parse_args()
     root = project_root()
-    parsed_dir = root / "data" / "delitzsch_parsed"
+    parsed_dir = root / "data" / "delitzsch" / "parsed"
 
     changed_files = 0
     changed_words = 0

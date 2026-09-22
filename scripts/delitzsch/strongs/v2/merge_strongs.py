@@ -32,9 +32,9 @@ logger = logging.getLogger(__name__)
 # parent chain: v2 -> strong/s -> delitzsch -> scripts -> project_root
 PROJECT_ROOT = Path(__file__).parent.parent.parent.parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
-PARSED_DIR = DATA_DIR / "delitzsch_parsed"
+PARSED_DIR = DATA_DIR / "delitzsch" / "parsed"
 V2_DIR = PARSED_DIR / "strongs" / "v2"
-REPORT_DIR = DATA_DIR / "delitzsch_review" / "reports"
+REPORT_DIR = DATA_DIR / "delitzsch" / "review" / "reports"
 
 # All 27 NT books
 ALL_BOOKS = [
@@ -214,7 +214,7 @@ def write_deterministic_report(
     dry_run: bool,
 ) -> Path:
     """
-    Write the deterministic post-merge report to ``data/delitzsch_review/reports/``.
+    Write the deterministic post-merge report to ``data/delitzsch/review/reports/``.
 
     Returns the path of the written report file.
     """
@@ -246,7 +246,7 @@ def main():
         '--report',
         type=str,
         default=None,
-        help='Path to write the deterministic report (default: data/delitzsch_review/reports/merge_strongs_report.json)'
+        help='Path to write the deterministic report (default: data/delitzsch/review/reports/merge_strongs_report.json)'
     )
     
     args = parser.parse_args()

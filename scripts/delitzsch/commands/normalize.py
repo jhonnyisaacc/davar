@@ -23,7 +23,7 @@ def register_subcommand(subparsers: argparse._SubParsersAction) -> argparse.Argu
         "--books",
         nargs="+",
         default=normalizer.DEFAULT_BOOKS,
-        help="Book folder names under data/delitzsch_parsed",
+        help="Book folder names under data/delitzsch/parsed",
     )
     parser.add_argument(
         "--dry-run",
@@ -36,7 +36,7 @@ def register_subcommand(subparsers: argparse._SubParsersAction) -> argparse.Argu
 
 def handle(args: argparse.Namespace) -> int:
     root = normalizer.project_root()
-    parsed_dir = root / "data" / "delitzsch_parsed"
+    parsed_dir = root / "data" / "delitzsch" / "parsed"
 
     changed_files = 0
     changed_words = 0
@@ -56,13 +56,13 @@ def handle(args: argparse.Namespace) -> int:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        description="Normalize duplicate prefixes in delitzsch_parsed",
+        description="Normalize duplicate prefixes in delitzsch/parsed",
     )
     parser.add_argument(
         "--books",
         nargs="+",
         default=normalizer.DEFAULT_BOOKS,
-        help="Book folder names under data/delitzsch_parsed",
+        help="Book folder names under data/delitzsch/parsed",
     )
     parser.add_argument(
         "--dry-run",

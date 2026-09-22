@@ -40,7 +40,7 @@
     {
       "id": "delitzsch",
       "owner": "davar",
-      "path": "data/delitzsch_parsed/john/1.json",
+      "path": "data/delitzsch/parsed/john/1.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
       "sha256": "af360e54d2eb3874b3319fd330ea5a5b30a706fd4f3351d8198f77b72abfdf5f"
@@ -56,7 +56,7 @@
     {
       "id": "tth",
       "owner": "davar",
-      "path": "data/tth_2/json/iojanan.json",
+      "path": "data/tth/json/iojanan.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
       "sha256": "3ceea9322f3706b119da0f9434dedadd3fbdae619df3a10c8669f6634f2cb3f0"

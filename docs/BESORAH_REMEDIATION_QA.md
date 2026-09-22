@@ -4,7 +4,7 @@ The v2 merger previously lost verse identity and confidence and retained stale f
 
 ## Corpus corrections and review
 
-The immutable report `data/delitzsch_review/reports/besorah_remediation_v1.json.gz` records every before/after value, source identity, rationale, file hash and review candidate. Baseline Git revision: `5542a23aa6ece89962e4ffbed4875b8b4c459c6b`.
+The immutable report `data/delitzsch/review/reports/besorah_remediation_v1.json.gz` records every before/after value, source identity, rationale, file hash and review candidate. Baseline Git revision: `5542a23aa6ece89962e4ffbed4875b8b4c459c6b`.
 
 All 1,105 mapping corrections were mechanically checked against narrow rules. The first and last two examples in each grammar category were inspected alongside their existing bilingual dictionary definitions and prior references:
 

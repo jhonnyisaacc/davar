@@ -17,7 +17,7 @@ def analyze_failures():
     """Analyze the failed matches from jude.json output."""
     
     # Load the output
-    output_path = Path(__file__).parent.parent.parent.parent / "data" / "delitzsch_parsed" / "strongs" / "v2" / "jude.json"
+    output_path = Path(__file__).parent.parent.parent.parent / "data" / "delitzsch" / "parsed" / "strongs" / "v2" / "jude.json"
     
     with open(output_path, 'r', encoding='utf-8') as f:
         data = json.load(f)

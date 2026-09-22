@@ -23,7 +23,7 @@ OUTPUT_DIR = DATA_DIR / "translit"
 RULES_PATH = SCRIPTS_DIR / "RULES.md"
 
 TANAKH_DIR = DATA_DIR / "oe"
-BESORAH_DIR = DATA_DIR / "delitzsch_parsed"
+BESORAH_DIR = DATA_DIR / "delitzsch" / "parsed"
 DSS_BOOKS_DIR = DATA_DIR / "dss" / "books"
 DSS_TRANSLIT_DIR = DATA_DIR / "translit" / "dss"
 LEXICON_ROOTS_DIR = DATA_DIR / "dict" / "lexicon" / "roots"

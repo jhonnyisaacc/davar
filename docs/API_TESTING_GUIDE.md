@@ -559,8 +559,8 @@ Every API response includes an `X-Request-ID` header for tracing.
 Check if data files exist:
 ```bash
 ls -la data/oe/genesis/
-ls -la data/delitzsch_parsed/matthew/
-ls -la data/tth_2/json/
+ls -la data/delitzsch/parsed/matthew/
+ls -la data/tth/json/
 ls -la data/ts2009/
 ```
 

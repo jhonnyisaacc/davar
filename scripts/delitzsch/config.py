@@ -23,7 +23,7 @@ PREFIX_FORMS_JSON = DICT_DIR / "prefixes" / "forms_lookup.json"
 PREFIX_ENTRIES_DIR = DICT_DIR / "prefixes" / "entries"
 
 # Output directory
-OUTPUT_DIR = DATA_DIR / "delitzsch_parsed"
+OUTPUT_DIR = DATA_DIR / "delitzsch" / "parsed"
 
 # Log file
 UNMATCHED_WORDS_LOG = PROJECT_ROOT / "scripts" / \

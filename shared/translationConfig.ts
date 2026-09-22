@@ -64,11 +64,11 @@ export const TTH_BOOK_MAPPING: Record<string, string> = {
   "Haggai": "jagai",
   "Zechariah": "zejariah",
   "Malachi": "malaji",
-  // KETUVIM (partial in tth_2)
+  // KETUVIM (partial in tth)
   "Psalms": "tehilim",
   "Proverbs": "mishlei",
   "SongOfSolomon": "shir_hashirim",
-  // BESORAH (tth_2 format)
+  // BESORAH (tth format)
   "Matthew": "matityahu",
   "Mark": "markos",
   "Luke": "lukas",

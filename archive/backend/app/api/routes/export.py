@@ -143,7 +143,7 @@ async def export_bundle(dataset: str, api_key: str = Depends(require_api_key)):
 
     if dataset_key == "tth":
         data = _load_translation_bundle(
-            translation_loader.tth_path, "tth_2/json")
+            translation_loader.tth_path, "tth/json")
         return ORJSONResponse(content=data, headers=_bundle_headers(dataset_key))
 
     if dataset_key == "ts2009":

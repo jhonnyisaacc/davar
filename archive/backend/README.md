@@ -56,12 +56,12 @@ The backend serves data from the `../data` directory containing:
 
 - OE Hebrew texts (Tanaj)
 - Delitzsch Hebrew texts (Besorah)
-- TTH Spanish translations (tth_2 format: one JSON file per book with hierarchical structure)
+- TTH Spanish translations (tth format: one JSON file per book with hierarchical structure)
 - TS2009 English translations
 - DSS variants
 - Custom lexicon and prefixes
 
-### TTH Data Structure (tth_2)
+### TTH Data Structure (tth)
 
 The TTH Spanish translations now use an optimized format with one JSON file per book:
 
@@ -100,7 +100,7 @@ The TTH Spanish translations now use an optimized format with one JSON file per 
 }
 ```
 
-**Benefits of tth_2 format:**
+**Benefits of tth format:**
 
 - 67% smaller file sizes
 - Single file per book (38 total) vs multiple chapter files

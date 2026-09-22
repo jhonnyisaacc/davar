@@ -20,7 +20,7 @@ Each book produces a `book.json` file in [data/translit](data/translit):
 ## Input Sources
 
 - Tanakh: [data/oe](data/oe)
-- Besorah: [data/delitzsch_parsed](data/delitzsch_parsed)
+- Besorah: [data/delitzsch/parsed](data/delitzsch/parsed)
 - DSS variants: [data/dss/books](data/dss/books) (differences only)
 
 DSS output fields

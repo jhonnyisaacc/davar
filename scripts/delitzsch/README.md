@@ -127,7 +127,7 @@ Produces JSON files structured as:
 ## Output Structure
 
 ```
-data/delitzsch_parsed/
+data/delitzsch/parsed/
 ├── acts/
 │   ├── 1.json
 │   ├── 2.json

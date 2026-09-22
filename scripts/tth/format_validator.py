@@ -20,7 +20,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
 DEFAULT_JSON_DIR = Path(__file__).parent.parent.parent / \
-    "data" / "tth_2" / "json"
+    "data" / "tth" / "json"
 DEFAULT_REFERENCE_JSON_DIR = Path(__file__).parent.parent.parent / \
     "web" / "public" / "data" / "tth"
 
