@@ -30,8 +30,7 @@
     "build:all:local": "eas build --platform all --profile preview --local",
     "update:dev": "eas update --channel development",
     "update:preview": "eas update --channel preview",
-    "update:prod": "eas update --channel production",
-    "reset-project": "bun ./scripts/reset-project.js"
+    "update:prod": "eas update --channel production"
   },
   "dependencies": {
     "@expo-google-fonts/arimo": "^0.4.2",
