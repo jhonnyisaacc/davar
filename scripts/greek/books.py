@@ -2,49 +2,11 @@
 
 from __future__ import annotations
 
-import re
-from pathlib import Path
-
-ROOT = Path(__file__).resolve().parents[2]
-STATIC_CONFIG = ROOT / "scripts" / "generate-static-data" / "config.ts"
-_DELITZSCH_KEYS = re.compile(
-    r"export const DELITZSCH_TO_ENGLISH: Record<string, string> = \{([^}]+)\}",
-    re.S,
-)
-_KEY = re.compile(r"^\s*([A-Za-z0-9]+):", re.M)
+from scripts.books import besorah_ids, tagnt_to_davar
 
 # TAGNT uses UBS-style abbreviations from the STEPBible-Data README.
-# Davar Besorah IDs match scripts/generate-static-data/config.ts DELITZSCH_TO_ENGLISH,
-# which is the public-repo source of truth for web and mobile book IDs.
-TAGNT_TO_DAVAR: dict[str, str] = {
-    "Mat": "matthew",
-    "Mrk": "mark",
-    "Luk": "luke",
-    "Jhn": "john",
-    "Act": "acts",
-    "Rom": "romans",
-    "1Co": "corinthians1",
-    "2Co": "corinthians2",
-    "Gal": "galatians",
-    "Eph": "ephesians",
-    "Php": "philippians",
-    "Col": "colossians",
-    "1Th": "thessalonians1",
-    "2Th": "thessalonians2",
-    "1Ti": "timothy1",
-    "2Ti": "timothy2",
-    "Tit": "titus",
-    "Phm": "philemon",
-    "Heb": "hebrews",
-    "Jas": "james",
-    "1Pe": "peter1",
-    "2Pe": "peter2",
-    "1Jn": "john1",
-    "2Jn": "john2",
-    "3Jn": "john3",
-    "Jud": "jude",
-    "Rev": "revelation",
-}
+# Davar Besorah IDs are the registry ids in data/knowledge/registries/books.json.
+TAGNT_TO_DAVAR: dict[str, str] = tagnt_to_davar()
 
 DAVAR_TO_TAGNT: dict[str, str] = {value: key for key, value in TAGNT_TO_DAVAR.items()}
 
@@ -65,13 +27,9 @@ def tagnt_book_code(davar_book_id_value: str) -> str:
         raise KeyError(f"Unknown Davar Besorah book id: {davar_book_id_value}") from exc
 
 
-def davar_besorah_ids_from_metadata(config_path: Path | None = None) -> list[str]:
-    """Read Besorah book IDs from the committed static-data config."""
-    path = config_path or STATIC_CONFIG
-    match = _DELITZSCH_KEYS.search(path.read_text(encoding="utf-8"))
-    if not match:
-        raise ValueError(f"DELITZSCH_TO_ENGLISH not found in {path}")
-    return _KEY.findall(match.group(1))
+def davar_besorah_ids_from_metadata() -> list[str]:
+    """Besorah book ids in registry order."""
+    return besorah_ids()
 
 
 # TAGNT verse identities with rows but no SBL edition token at
