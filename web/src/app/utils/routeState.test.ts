@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { DESTINATIONS } from "../destinations";
 import {
   buildRoutePath,
   findCanonicalBook,
@@ -41,27 +42,33 @@ describe("route state", () => {
     ] as const;
 
     for (const [path, screen] of cases) {
-      expect(parseRoutePath(path)).toEqual({ screen });
+      const route = parseRoutePath(path);
+      expect(route).toEqual({ screen });
       expect(buildRoutePath({ screen })).toBe(path);
-      expect(buildRoutePath(parseRoutePath(path)!)).toBe(path);
+      if (!route) throw new Error(`Expected ${path} to parse`);
+      expect(buildRoutePath(route)).toBe(path);
     }
   });
 
   test("round-trips the root path as the verse screen", () => {
-    expect(parseRoutePath("/")).toEqual({ screen: "verse" });
+    const route = parseRoutePath("/");
+    expect(route).toEqual({ screen: "verse" });
     expect(buildRoutePath({ screen: "verse" })).toBe("/");
-    expect(buildRoutePath(parseRoutePath("/")!)).toBe("/");
+    if (!route) throw new Error("Expected / to parse");
+    expect(buildRoutePath(route)).toBe("/");
   });
 
   test("round-trips a Genesis verse path", () => {
     const path = "/verse/Genesis/1/1";
-    expect(parseRoutePath(path)).toEqual({
+    const route = parseRoutePath(path);
+    expect(route).toEqual({
       screen: "verse",
       book: "Genesis",
       chapter: 1,
       verse: 1,
     });
-    expect(buildRoutePath(parseRoutePath(path)!)).toBe(path);
+    if (!route) throw new Error(`Expected ${path} to parse`);
+    expect(buildRoutePath(route)).toBe(path);
   });
 
   test("writes a slash for screens that have no address", () => {
@@ -71,5 +78,15 @@ describe("route state", () => {
 
   test("strips a trailing slash before matching a screen", () => {
     expect(parseRoutePath("/settings/")).toEqual({ screen: "settings" });
+  });
+
+  test("round-trips every destination path", () => {
+    for (const destination of DESTINATIONS) {
+      const path =
+        destination.id === "verse" ? "/verse/Genesis/1/1" : destination.path;
+      const route = parseRoutePath(path);
+      if (!route) throw new Error(`Expected ${path} to parse`);
+      expect(buildRoutePath(route)).toBe(path);
+    }
   });
 });

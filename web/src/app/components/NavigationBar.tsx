@@ -9,11 +9,15 @@ import {
 import { FaThList } from "react-icons/fa";
 import { LuLightbulb } from "react-icons/lu";
 import { TbAlphabetHebrew, TbLanguageHiragana } from "react-icons/tb";
+import { destinationById } from "../destinations";
 import { useTranslation } from "../hooks/useTranslation";
 import type { BesorahLanguage } from "@davar/shared/greekBesorah";
 import { formatBookDisplayName } from "../utils/bookNameFormatter";
 import { NeumorphCard } from "./NeumorphCard";
 import { NeumorphicToggle } from "./NeumorphicToggle";
+
+const homeDestination = destinationById("home");
+const settingsDestination = destinationById("settings");
 
 interface NavigationBarProps {
 	book: string;
@@ -33,7 +37,7 @@ interface NavigationBarProps {
 	onBookChange: (book: string) => void;
 	onChapterChange: (chapter: number) => void;
 	onVerseChange: (verse: number) => void;
-	onHomeClick: () => void;
+	onHomeClick: (screen: typeof homeDestination.id) => void;
 	onDesignSystemClick?: () => void;
 	theme: "light" | "dark";
 	onThemeChange: (theme: "light" | "dark") => void;
@@ -99,7 +103,7 @@ export function NavigationBar({
 	onTranslationOnlyChange,
 }: NavigationBarProps) {
 	const [openMenu, setOpenMenu] = useState<
-		"settings" | "book" | "chapter" | "verse" | null
+		typeof settingsDestination.id | "book" | "chapter" | "verse" | null
 	>(null);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	const bookListRef = useRef<HTMLDivElement>(null);
@@ -492,7 +496,7 @@ export function NavigationBar({
 					<div className="flex min-w-0 flex-1 items-center gap-1 md:gap-2">
 						<button
 							type="button"
-							onClick={onHomeClick}
+							onClick={() => onHomeClick(homeDestination.id)}
 							className="shrink-0 rounded-full p-2 transition-all md:hover:scale-[1.02] md:active:scale-[0.98]"
 							style={{
 								fontFamily: "'Inter', sans-serif",
@@ -605,7 +609,11 @@ export function NavigationBar({
 						<button
 							type="button"
 							onClick={() =>
-								setOpenMenu(openMenu === "settings" ? null : "settings")
+								setOpenMenu(
+									openMenu === settingsDestination.id
+										? null
+										: settingsDestination.id,
+								)
 							}
 							className="relative shrink-0 rounded-full p-2 transition-all md:hover:scale-[1.05] md:active:scale-[0.98]"
 							style={{
@@ -626,7 +634,7 @@ export function NavigationBar({
 				</div>
 			</NeumorphCard>
 
-			{openMenu === "settings" && (
+			{openMenu === settingsDestination.id && (
 				<div className="absolute right-0 mt-4 w-[320px] rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] backdrop-blur-[16px] shadow-[0_8px_32px_0_var(--glass-shadow)] p-5 z-30">
 					<div className="space-y-5">
 						{SHARED_SETTINGS_ORDER.map((id) => {
