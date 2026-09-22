@@ -11,7 +11,7 @@ For Cloudflare Pages, this package is intended to build with Bun from the
 `web/` directory. Set your Pages project's **Build command** to `bun run build`
 and **Root directory** to `web`. Set the environment variable `SKIP_DEPENDENCY_INSTALL=1`
 so Pages does not run its own npm install (the `build` script installs dependencies itself). Do not pin `BUN_VERSION` by default.
-See [CLOUDFLARE_DEPLOYMENT_GUIDE.md](../CLOUDFLARE_DEPLOYMENT_GUIDE.md) for the
+See [CLOUDFLARE_DEPLOYMENT_GUIDE.md](../docs/CLOUDFLARE_DEPLOYMENT_GUIDE.md) for the
 full required dashboard settings and the exact troubleshooting for
 "Could not resolve: react-dom/client" build failures.
 
