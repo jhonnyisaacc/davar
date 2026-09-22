@@ -12,6 +12,11 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import Constants from "expo-constants";
 import * as Updates from "expo-updates";
+import {
+  destinationById,
+  type Destination,
+  type DestinationId,
+} from "@davar/shared/destinations";
 
 import { AnimatedCircularProgress } from "react-native-circular-progress";
 import { AppIcon } from "@/src/components/ui/AppIcon";
@@ -34,6 +39,9 @@ import {
   getSupportTelegramUrl,
 } from "@/src/i18n/useTranslation";
 import { GreekAttribution } from "@/src/components/GreekAttribution";
+
+const destinationPath = <T extends DestinationId>(id: T) =>
+  destinationById(id).path as Extract<Destination, { id: T }>["path"];
 
 const createStyles = (colors: ReturnType<typeof getColors>) =>
   StyleSheet.create({
@@ -495,7 +503,7 @@ export default function HomeScreen() {
               styles.actionSecondary,
               pressed && styles.downloadRowPressed,
             ]}
-            onPress={() => router.push("/donate")}
+            onPress={() => router.push(destinationPath("donate"))}
           >
             <View>
               <Text
@@ -539,12 +547,12 @@ export default function HomeScreen() {
                   {
                     label: t("home.about.items.terms"),
                     icon: "file",
-                    onPress: () => router.push("/terms"),
+                    onPress: () => router.push(destinationPath("terms")),
                   },
                   {
                     label: t("home.about.items.privacy"),
                     icon: "shield",
-                    onPress: () => router.push("/privacy"),
+                    onPress: () => router.push(destinationPath("privacy")),
                   },
                   {
                     label: t("home.about.items.support"),

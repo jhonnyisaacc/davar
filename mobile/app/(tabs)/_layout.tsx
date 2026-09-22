@@ -3,11 +3,39 @@ import { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import {
+  DESTINATIONS,
+  type Destination,
+  type DestinationId,
+} from "@davar/shared/destinations";
 import { HapticTab } from "@/components/haptic-tab";
 import { AppIcon } from "@/src/components/ui/AppIcon";
 import { getColors } from "@/src/theme";
 import { useAppStore, type AppState } from "@/src/store/useAppStore";
 import { useTranslation } from "@/src/i18n/useTranslation";
+
+const TAB_DESTINATION_IDS = [
+  "home",
+  "verse",
+  "settings",
+] as const satisfies readonly DestinationId[];
+
+type TabDestinationId = (typeof TAB_DESTINATION_IDS)[number];
+type TabDestination = Extract<Destination, { id: TabDestinationId }>;
+
+const tabDestinationIds = new Set<string>(TAB_DESTINATION_IDS);
+
+const tabDestinations = DESTINATIONS.filter(
+  (destination): destination is TabDestination =>
+    tabDestinationIds.has(destination.id),
+);
+
+const HIDDEN_TAB_ROUTES = [
+  "index",
+  "search",
+  "bookmarks",
+  "explore",
+] as const;
 
 const createStyles = (
   colors: ReturnType<typeof getColors>,
@@ -85,48 +113,44 @@ export default function TabLayout() {
       }}
       initialRouteName="index"
     >
-      <Tabs.Screen
-        name="home"
-        options={{
-          title: t("tabs.home"),
-          tabBarIcon: ({ color }) => (
-            <AppIcon name="home" color={color} size={24} />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="verse"
-        options={{
-          title: t("tabs.verse"),
-          tabBarIcon: ({ focused }) => (
-            <View style={styles.centerIconWrapper}>
-              <View style={styles.centerIcon}>
-                <AppIcon
-                  name={focused ? "search" : "book"}
-                  color={colors.background}
-                  size={22}
-                />
-              </View>
-            </View>
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          title: t("tabs.settings"),
-          tabBarIcon: ({ color }) => (
-            <View style={styles.settingsIconWrapper}>
-              <AppIcon name="settings" color={color} size={24} />
-              <View style={styles.settingsNewDot} />
-            </View>
-          ),
-        }}
-      />
-      <Tabs.Screen name="index" options={{ href: null }} />
-      <Tabs.Screen name="search" options={{ href: null }} />
-      <Tabs.Screen name="bookmarks" options={{ href: null }} />
-      <Tabs.Screen name="explore" options={{ href: null }} />
+      {tabDestinations.map((destination) => (
+        <Tabs.Screen
+          key={destination.id}
+          name={destination.id}
+          options={{
+            title: t(`tabs.${destination.id}`),
+            tabBarIcon: ({ color, focused }) => {
+              if (destination.id === "verse") {
+                return (
+                  <View style={styles.centerIconWrapper}>
+                    <View style={styles.centerIcon}>
+                      <AppIcon
+                        name={focused ? "search" : "book"}
+                        color={colors.background}
+                        size={22}
+                      />
+                    </View>
+                  </View>
+                );
+              }
+
+              if (destination.id === "settings") {
+                return (
+                  <View style={styles.settingsIconWrapper}>
+                    <AppIcon name="settings" color={color} size={24} />
+                    <View style={styles.settingsNewDot} />
+                  </View>
+                );
+              }
+
+              return <AppIcon name="home" color={color} size={24} />;
+            },
+          }}
+        />
+      ))}
+      {HIDDEN_TAB_ROUTES.map((name) => (
+        <Tabs.Screen key={name} name={name} options={{ href: null }} />
+      ))}
     </Tabs>
   );
 }

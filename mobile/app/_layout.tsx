@@ -19,9 +19,14 @@ import { SuezOne_400Regular } from "@expo-google-fonts/suez-one";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
+import { destinationById } from "@davar/shared/destinations";
 import { AppProvider } from "@/src/providers/AppProvider";
 import { ErrorBoundary } from "@/src/components/ErrorBoundary";
 import { useTranslation } from "@/src/i18n/useTranslation";
+
+const homeDestination = destinationById("home");
+const verseDestination = destinationById("verse");
+const settingsDestination = destinationById("settings");
 
 export const unstable_settings = {
   anchor: "(tabs)",
@@ -92,11 +97,12 @@ export default function RootLayout() {
                 <Stack.Screen
                   name="(tabs)"
                   options={({ route }) => {
-                    const focusedTab = getFocusedRouteName(route) ?? "home";
+                    const focusedTab =
+                      getFocusedRouteName(route) ?? homeDestination.id;
                     const tabTitles: Record<string, string> = {
-                      home: t("tabs.home"),
-                      verse: t("tabs.verse"),
-                      settings: t("tabs.settings"),
+                      [homeDestination.id]: t("tabs.home"),
+                      [verseDestination.id]: t("tabs.verse"),
+                      [settingsDestination.id]: t("tabs.settings"),
                     };
 
                     return {
