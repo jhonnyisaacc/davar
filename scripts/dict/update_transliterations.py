@@ -110,13 +110,21 @@ def update_strong_entry(data: Dict[str, Any]) -> Dict[str, Any]:
 def regenerate_bani_fields(data: Dict[str, Any]) -> Dict[str, Any]:
     """Regenerate display fields from pointed Hebrew, retaining source metadata."""
     sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-    from tools.bani.transliterate import BaniTransliterator
+    from tools.bani.apply import Transliterator, load_jsonc
     updated = dict(data)
     hebrew = data.get("lemma") or data.get("hebrew")
     if hebrew:
         strong = data.get("strong_number", "")
-        updated.update({"translit_" + language: BaniTransliterator(language).transliterate_detailed(hebrew, strong)["translit"]
-                        for language in ("en", "es")})
+        if hebrew.strip():
+            schema_dir = Path(__file__).resolve().parents[2] / "tools" / "bani" / "schemas"
+            updated.update({
+                "translit_" + language: Transliterator(
+                    load_jsonc(schema_dir / f"{language}.json")
+                ).transliterate_word(hebrew, strong)["translit"]
+                for language in ("en", "es")
+            })
+        else:
+            updated.update({"translit_en": "", "translit_es": ""})
     return apply_transliteration_policy(updated)
 
 

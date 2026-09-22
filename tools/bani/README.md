@@ -28,7 +28,7 @@ This system provides a comprehensive academic framework for Hebrew and Aramaic t
 ### 1. **Navigate to Transliteration Tools**
    ```bash
    # This is part of the Davar project
-   cd davar/tools/transliteration
+   cd davar/tools/bani
    ```
 
 ### 2. **Review the Architecture**
@@ -65,7 +65,7 @@ This system provides a comprehensive academic framework for Hebrew and Aramaic t
 ## Project Structure
 
 ```
-davar/tools/transliteration/
+davar/tools/bani/
 ├── data/                 # Strong's concordance datasets
 │   ├── strongs.json      # Complete Strong's Hebrew dictionary
 │   └── strong_es.json    # Spanish translations + Strong's data

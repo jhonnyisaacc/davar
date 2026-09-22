@@ -134,14 +134,18 @@ def bani_transliteration(lemma: str, strong: str) -> dict[str, str]:
     if not lemma:
         return {"en": "", "es": ""}
 
-    bani_dir = PROJECT_ROOT / "tools" / "bani"
-    if str(bani_dir) not in sys.path:
-        sys.path.insert(0, str(bani_dir))
-
     try:
-        from transliterate import BaniTransliterator
+        from tools.bani.apply import Transliterator, load_jsonc
 
-        return BaniTransliterator.for_all_languages(lemma, strong)
+        schema_dir = PROJECT_ROOT / "tools" / "bani" / "schemas"
+        guides: dict[str, str] = {}
+        for language in ("en", "es"):
+            if not lemma.strip():
+                guides[language] = ""
+                continue
+            engine = Transliterator(load_jsonc(schema_dir / f"{language}.json"))
+            guides[language] = engine.transliterate_word(lemma, strong).get("guide", "")
+        return guides
     except Exception:
         return {"en": "", "es": ""}
 
