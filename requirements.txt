@@ -34,6 +34,9 @@ PyMuPDF>=1.23.0            # PDF text extraction (fitz)
 pdfplumber>=0.10.0         # Advanced PDF text extraction
 pypdf>=3.15.0              # Alternative PDF processing
 
+# TTH source in this repo is DOCX under data/tth_2/raw, read with mammoth
+mammoth>=1.6.0             # DOCX to Markdown for scripts/tth_2
+
 # Text-Fabric DSS corpus integration
 text-fabric>=12.0.0        # ETCBC DSS corpus access and analysis
 
