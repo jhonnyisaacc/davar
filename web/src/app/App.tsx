@@ -27,6 +27,7 @@ import {
 	getVerseCount,
 	isGreekPreviewEnabled,
 	loadGreekLexiconEntry,
+	loadGreekLexiconInstances,
 	loadLexiconEntry,
 	loadLexiconInstances,
 	lookupBook,
@@ -1140,11 +1141,14 @@ export default function App() {
 								strongPart,
 								language === "he" ? "en" : language,
 							);
+				if (!isCurrentRequest()) {
+					return;
+				}
 				if (
-					!isCurrentRequest() ||
-					(analysis &&
-						!isCurrentLexiconResult(strongPart, analysis.strong_number))
+					analysis &&
+					!isCurrentLexiconResult(strongPart, analysis.strong_number)
 				) {
+					setIsWordAnalysisLoading(false);
 					return;
 				}
 				setSelectedWordAnalysis(analysis);
@@ -1154,7 +1158,13 @@ export default function App() {
 					hasDefinitions: Boolean(analysis?.definitions?.length),
 				});
 				if (analysis?.has_instances_asset) {
-					const instances = await loadLexiconInstances(analysis.strong_number);
+					const instances =
+						analysis.source_language === "greek"
+							? await loadGreekLexiconInstances(
+									analysis.strong_number,
+									analysis.revision,
+								)
+							: await loadLexiconInstances(analysis.strong_number);
 					if (!isCurrentRequest() || !instances) return;
 					setSelectedWordAnalysis((current) =>
 						current &&
@@ -1215,11 +1225,14 @@ export default function App() {
 					strongPart,
 					language === "he" ? "en" : language,
 				);
+				if (!isCurrentRequest()) {
+					return;
+				}
 				if (
-					!isCurrentRequest() ||
-					(analysis &&
-						!isCurrentLexiconResult(strongPart, analysis.strong_number))
+					analysis &&
+					!isCurrentLexiconResult(strongPart, analysis.strong_number)
 				) {
+					setIsDssAnalysisLoading(false);
 					return;
 				}
 				setSelectedDssAnalysis(analysis);

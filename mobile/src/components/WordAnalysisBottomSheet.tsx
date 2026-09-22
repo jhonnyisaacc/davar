@@ -303,6 +303,25 @@ const toGreekLexiconResponse = (
   };
 };
 
+const loadGreekOccurrenceInstances = async (
+  strong: string,
+): Promise<Partial<LexiconResponse> | null> => {
+  const family = greekStrongFamily(strong);
+  const shard = await staticDataRequest<
+    Record<string, { count?: number; references?: GreekLexiconEntry["instances"] }>
+  >(greekOccurrencesShardPath(family, GREEK_RECORDED_REVISION));
+  const bucket = shard[strong] ?? shard[family];
+  if (!bucket) return null;
+  const surface = instanceSurface({
+    instance_total: bucket.count,
+    instances: bucket.references,
+  });
+  return {
+    instances: surface.instances,
+    occurrences_count: surface.total,
+  };
+};
+
 const loadGreekLexiconEntry = async (
   strong: string,
   language: "en" | "es" | "he",
@@ -332,27 +351,11 @@ const loadGreekLexiconEntry = async (
           item.strong != null && greekStrongFamily(item.strong) === family,
       );
     if (!entry) return null;
-    if (!entry.instances?.length) {
-      const shard = await staticDataRequest<
-        Record<string, { count?: number; references?: GreekLexiconEntry["instances"] }>
-      >(greekOccurrencesShardPath(entry.strong ?? strong, revision));
-      const bucket = shard[strong] ?? (entry.strong ? shard[entry.strong] : undefined);
-      return toGreekLexiconResponse(
-        {
-          ...entry,
-          instances: bucket?.references,
-          occurrences_count: bucket?.count ?? entry.occurrences_count,
-        },
-        strong,
-        language,
-        customShard[entry.strong ?? strong],
-      );
-    }
     return toGreekLexiconResponse(
       entry,
       strong,
       language,
-      customShard[entry.strong ?? strong],
+      customShard[entry.strong ?? strong] ?? customShard[family],
     );
   } catch {
     const offline = (await fetchSourceLexiconEntry(
@@ -1092,8 +1095,19 @@ const WordAnalysisBottomSheetComponent = (
           return;
         }
         setLexiconEntry(entry);
-        if (entry && entry.occurrences_count > entry.instances.length) {
-          const instances = await loadLexiconInstances(entry.strong_number);
+        if (!cancelled) {
+          setIsLoading(false);
+        }
+        const shouldLoadInstances = entry
+          ? word?.source_language === "greek"
+            ? entry.instances.length === 0
+            : entry.occurrences_count > entry.instances.length
+          : false;
+        if (entry && shouldLoadInstances) {
+          const instances =
+            word?.source_language === "greek"
+              ? await loadGreekOccurrenceInstances(entry.strong_number)
+              : await loadLexiconInstances(entry.strong_number);
           if (cancelled || !instances) return;
           setLexiconEntry((current) =>
             current &&

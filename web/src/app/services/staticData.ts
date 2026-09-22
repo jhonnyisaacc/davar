@@ -1938,11 +1938,13 @@ export const loadGreekLexiconEntry = async (
 		);
 		greekLexiconPromises.set(revision, promise);
 	}
+	const family = greekStrongFamily(strong);
 	const [lexicon, customAsset] = await Promise.all([
 		promise,
-		loadLexiconEntryAsset(strong),
+		loadLexiconEntryAsset(family).then(
+			(asset) => asset ?? (family === strong ? null : loadLexiconEntryAsset(strong)),
+		),
 	]);
-	const family = greekStrongFamily(strong);
 	const entry =
 		lexicon[strong] ??
 		lexicon[family] ??
@@ -1950,31 +1952,15 @@ export const loadGreekLexiconEntry = async (
 			(item) => greekStrongFamily(item.strong) === family,
 		);
 	if (!entry) return null;
-	const occurrences =
-		(await loadGreekOccurrenceBucket(strong, revision)) ??
-		(await loadGreekOccurrenceBucket(entry.strong, revision));
 	const localized = entry.definitions?.[language];
 	const english = entry.definitions?.en;
 	const usable = (definition?: GreekDefinition) =>
 		Boolean(definition?.short || definition?.fuller);
 	const selected = localized && usable(localized) ? localized : english;
-	const definitions: DefinitionItem[] = [];
-	let customDefinitions = mapLexiconDefinitions(
+	const definitions: DefinitionItem[] = mapLexiconDefinitions(
 		customAsset?.definitions,
 		language,
 	);
-	if (customDefinitions.length === 0) {
-		try {
-			const custom = await loadCustomDefinitions();
-			customDefinitions = mapDefinitions(
-				custom[entry.strong]?.definitions ?? custom[strong]?.definitions,
-				language === "he" ? "en" : language,
-			);
-		} catch {
-			customDefinitions = [];
-		}
-	}
-	definitions.push(...customDefinitions);
 	if (selected?.short) {
 		definitions.push({
 			language: selected === localized ? language : "en",
@@ -1993,12 +1979,11 @@ export const loadGreekLexiconEntry = async (
 			text: cleanLexicalText(selected.fuller),
 		});
 	}
-	const surface = instanceSurface(
-		{
-			instance_total: entry.occurrences_count ?? occurrences?.count,
-			instances: occurrences?.references ?? entry.instances,
-		},
-	);
+	const inlineInstances = entry.instances ?? [];
+	const surface = instanceSurface({
+		instance_total: entry.occurrences_count,
+		instances: inlineInstances,
+	});
 	return {
 		definitions,
 		edition: "sblgnt",
@@ -2006,6 +1991,7 @@ export const loadGreekLexiconEntry = async (
 			? cleanLexicalText(selected.fuller)
 			: undefined,
 		greek: entry.lemma,
+		has_instances_asset: inlineInstances.length === 0,
 		instances: surface.instances,
 		lemma: entry.lemma,
 		lemma_translit_en: entry.translit_en,
@@ -2021,6 +2007,27 @@ export const loadGreekLexiconEntry = async (
 		translit_en: entry.translit_en,
 		translit_es: entry.translit_es,
 		translit_he: entry.translit_he,
+	};
+};
+
+export const loadGreekLexiconInstances = async (
+	strong?: string,
+	revision = GREEK_RECORDED_REVISION,
+): Promise<Partial<WordAnalysis> | null> => {
+	if (!strong) return null;
+	const family = greekStrongFamily(strong);
+	const occurrences =
+		(await loadGreekOccurrenceBucket(strong, revision)) ??
+		(await loadGreekOccurrenceBucket(family, revision));
+	if (!occurrences) return null;
+	const surface = instanceSurface({
+		instance_total: occurrences.count,
+		instances: occurrences.references,
+	});
+	return {
+		has_instances_asset: false,
+		instances: surface.instances,
+		occurrences_count: surface.total,
 	};
 };
 

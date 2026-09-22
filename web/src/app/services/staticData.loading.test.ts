@@ -1,7 +1,12 @@
 import { afterEach, beforeEach, describe, expect, test } from "bun:test";
+import {
+	GREEK_RECORDED_REVISION,
+	greekLexiconPath,
+} from "../../../../shared/greekBesorah";
 import { isCurrentLexiconResult } from "../../../../shared/lexiconAssets";
 import {
 	getChapterVerses,
+	loadGreekLexiconEntry,
 	loadLexiconEntry,
 	resetStaticDataCachesForTests,
 } from "./staticData";
@@ -241,6 +246,58 @@ describe("chapter and lexicon loaders", () => {
 	test("stale Strong results do not replace a newer selection", () => {
 		expect(isCurrentLexiconResult("H7225", "H430")).toBe(false);
 		expect(isCurrentLexiconResult("H7225", "H7225")).toBe(true);
+		expect(isCurrentLexiconResult("G2424G", "G2424")).toBe(true);
+	});
+
+	test("returns a Greek gloss without the custom dictionary or occurrence shard", async () => {
+		globalThis.fetch = async (input) => {
+			const url = String(input);
+			recordedRequests.push(url);
+			const path = new URL(url, "https://davar.test").pathname;
+
+			if (path.endsWith("/data/version.json")) {
+				return jsonResponse({ version: "test-1" });
+			}
+			if (path.endsWith("/data/greek/manifest.json")) {
+				return jsonResponse({
+					schema: "davar-greek-release-v1",
+					edition: "sblgnt",
+					revision: GREEK_RECORDED_REVISION,
+					taggingRevision: "test",
+					transliterationVersion: "test",
+					complete: true,
+					validated: true,
+					publicEnabled: true,
+					books: Array.from({ length: 27 }, (_, index) => `book${index}`),
+				});
+			}
+			if (path.endsWith(`/data/${greekLexiconPath()}`)) {
+				return jsonResponse({
+					G2424: {
+						strong: "G2424",
+						lemma: "Ἰησοῦς",
+						translit_en: "Iēsous",
+						definitions: { en: { short: "Jesus" } },
+						occurrences_count: 917,
+					},
+				});
+			}
+
+			return jsonResponse({ error: path }, 404);
+		};
+
+		const entry = await loadGreekLexiconEntry("G2424G", "en");
+		expect(entry?.strong_number).toBe("G2424");
+		expect(entry?.definitions.map((definition) => definition.text)).toContain(
+			"Jesus",
+		);
+		expect(entry?.has_instances_asset).toBe(true);
+		expect(
+			requestedPaths().some((path) => path.includes("custom_definitions")),
+		).toBe(false);
+		expect(requestedPaths().some((path) => path.includes("/occurrences/"))).toBe(
+			false,
+		);
 	});
 
 	test("prefers chapter-scoped TS2009 files over the full book file", async () => {

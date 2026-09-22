@@ -1,3 +1,4 @@
+import { greekStrongFamily } from "./greekBesorah";
 import { instanceSurface } from "./instanceSurface";
 import {
 	lexiconEntryShardKey,
@@ -395,5 +396,15 @@ export const isCurrentLexiconResult = (
 ): boolean => {
 	const requested = normalizeStrongNumber(requestedStrong);
 	const result = normalizeStrongNumber(resultStrong);
-	return Boolean(requested && result && requested === result);
+	if (requested && result && requested === result) {
+		return true;
+	}
+
+	const requestedRaw = requestedStrong?.trim().toUpperCase();
+	const resultRaw = resultStrong?.trim().toUpperCase();
+	if (requestedRaw?.startsWith("G") && resultRaw?.startsWith("G")) {
+		return greekStrongFamily(requestedRaw) === greekStrongFamily(resultRaw);
+	}
+
+	return false;
 };
