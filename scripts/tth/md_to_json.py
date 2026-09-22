@@ -15,18 +15,54 @@ Features:
 Author: Davar Project
 """
 
-import json
+import copy
 import re
-from datetime import datetime
-from typing import Dict, List, Any, Tuple, Optional
-from pathlib import Path
+from typing import Dict, List, Any, Optional, Tuple
+
+_PATTERN_NAMES = (
+    "BOLD_LINE",
+    "BOLD_NUMBER",
+    "BOLD_NUMBER_LINE",
+    "BOLD_NUMBER_PREFIX",
+    "BOLD_NUMBER_PREFIX_LINE",
+    "BOLD_SPAN",
+    "BOOK_HEADER_BOUNDARY",
+    "CHAPTER_MARKER_LINE",
+    "COMPOUND_FOOTNOTE_TERMS",
+    "DIGITS",
+    "FOOTNOTE_DEFINITION",
+    "FOOTNOTE_DEF_LINE",
+    "FOOTNOTE_MARKER",
+    "FOOTNOTE_MARKER_LOOSE",
+    "FOOTNOTE_SECTION",
+    "INLINE_PUNCT",
+    "INLINE_VERSE_MARKER",
+    "ITALIC_SPAN",
+    "LATIN_LETTER",
+    "LATIN_WORD",
+    "LEADING_DIGITS",
+    "LOWERCASE_CONTINUATION",
+    "MALFORMED_VERSE_LINE",
+    "MALFORMED_VERSE_MARKER",
+    "NUMBERED_MARKER_LINE",
+    "PLAIN_INLINE_VERSE",
+    "SECTION_HEADER_PATTERN",
+    "TRAILING_PUNCT",
+    "TRAILING_SPACE",
+    "TRAILING_WORD",
+    "VERSE_MARKER_CAPTURE",
+    "VERSE_MARKER_LINE",
+    "WHITESPACE",
+)
 
 try:
     from .config import BOOKS_INFO, HEBREW_TERMS
-    from .patterns import SECTION_HEADER_PATTERN
+    from . import patterns as _patterns
 except ImportError:
     from config import BOOKS_INFO, HEBREW_TERMS
-    from patterns import SECTION_HEADER_PATTERN
+    import patterns as _patterns
+
+globals().update({name: getattr(_patterns, name) for name in _PATTERN_NAMES})
 
 try:
     from .text_cleaner import get_cleaner
@@ -59,30 +95,25 @@ class TTH2MdToJson:
             raise ValueError(
                 f"Book key '{book_key}' not found in books database")
 
-    def read_markdown(self, file_path: str) -> str:
-        """Read markdown file content."""
-        with open(file_path, 'r', encoding='utf-8') as f:
-            return f.read()
-
     def extract_footnote_definitions(self, text: str):
         """Extract footnote definitions from document."""
         footnote_section_match = re.search(
-            r'##\s*Footnotes\s*\n', text, re.IGNORECASE)
+            FOOTNOTE_SECTION, text, re.IGNORECASE)
         if footnote_section_match:
             footnote_section = text[footnote_section_match.end():]
         else:
             footnote_section = text
 
-        footnote_pattern = r'\[\^(\d+)\]:\s*(.+?)(?=\n\[|\n\n|$)'
+        footnote_pattern = FOOTNOTE_DEFINITION
         matches = re.finditer(
             footnote_pattern, footnote_section, re.MULTILINE | re.DOTALL)
 
         for match in matches:
             footnote_num = match.group(1)
             footnote_def = match.group(2).strip()
-            footnote_def = re.sub(r'\*([^*]+)\*', r'\1', footnote_def)
-            footnote_def = re.sub(r'\*\*([^*]+)\*\*', r'\1', footnote_def)
-            footnote_def = re.sub(r'\s+', ' ', footnote_def).strip()
+            footnote_def = re.sub(ITALIC_SPAN, r'\1', footnote_def)
+            footnote_def = re.sub(BOLD_SPAN, r'\1', footnote_def)
+            footnote_def = re.sub(WHITESPACE, ' ', footnote_def).strip()
             self.footnote_definitions[footnote_num] = footnote_def
 
     def filter_section_headers(self, text: str) -> str:
@@ -126,14 +157,14 @@ class TTH2MdToJson:
             # Remove standalone bold section headers leaked from source docs.
             # Keep numeric markers (chapter/verse labels) and any digit-led
             # labels to avoid removing legitimate verse numbering content.
-            bold_match = re.match(r'^\*\*([^*]+)\*\*$', stripped)
+            bold_match = re.match(BOLD_LINE, stripped)
             if bold_match:
                 potential_bold_header = bold_match.group(1).strip()
                 if potential_bold_header:
-                    if re.fullmatch(r'\d+', potential_bold_header):
+                    if re.fullmatch(DIGITS, potential_bold_header):
                         filtered_lines.append(line)
                         continue
-                    if re.match(r'^\d+\b', potential_bold_header):
+                    if re.match(LEADING_DIGITS, potential_bold_header):
                         filtered_lines.append(line)
                         continue
 
@@ -283,35 +314,30 @@ class TTH2MdToJson:
         footnotes = []
         seen_source_numbers = set()
 
-        footnote_pattern = r'\[\^(\d+)\]'
+        footnote_pattern = FOOTNOTE_MARKER
         matches = list(re.finditer(footnote_pattern, text))
 
         def extract_associated_word(text_before_marker: str) -> str:
             """Extract word associated with footnote."""
             text_before = text_before_marker.rstrip()
 
-            compound_terms = [
-                (r"Rúaj\s+Ha['']Kódesh", "Rúaj Ha'Kódesh"),
-                (r"Ben\s+Ha['']Adam", "Ben Ha'Adam"),
-                (r"Bet\s+Léjem", "Bet Léjem"),
-                (r"Bet\s+Aniah", "Bet Aniah"),
-            ]
+            compound_terms = COMPOUND_FOOTNOTE_TERMS
 
             # Check for compound terms
             search_text = text_before[-50:] if len(
                 text_before) > 50 else text_before
             for term_pattern, term_name in compound_terms:
-                pattern = term_pattern + r'\s*$'
+                pattern = term_pattern + TRAILING_SPACE
                 match = re.search(pattern, search_text, re.IGNORECASE)
                 if match:
                     return term_name
 
-            simple_word_pattern = r'([\w\'-]+)\s*$'
+            simple_word_pattern = TRAILING_WORD
             match = re.search(simple_word_pattern, text_before)
 
             if match:
                 word = match.group(1).strip()
-                word = re.sub(r'[.,;:!?]+$', '', word)
+                word = re.sub(TRAILING_PUNCT, '', word)
                 return word if word else ''
 
             return ''
@@ -364,7 +390,7 @@ class TTH2MdToJson:
         modified_text = text
 
         # Remove verse markers that may remain
-        modified_text = re.sub(r'\*\*(\d+)\*\*', r'\1', modified_text)
+        modified_text = re.sub(BOLD_NUMBER, r'\1', modified_text)
 
         # Apply advanced text cleaning (this is the core functionality)
         modified_text = self.text_cleaner.clean_verse_text(modified_text)
@@ -387,14 +413,14 @@ class TTH2MdToJson:
         stripped = line.strip()
 
         # Numbered marker line followed by a footnote definition line.
-        if re.match(r'^\d+\.\s*$', stripped):
+        if re.match(NUMBERED_MARKER_LINE, stripped):
             if index + 1 < len(lines):
                 next_line = lines[index + 1].strip()
-                if re.match(r'^\[\^\d+\]:', next_line):
+                if re.match(FOOTNOTE_DEF_LINE, next_line):
                     return True
 
         # A standalone footnote definition inside chapter flow is also a leak.
-        if re.match(r'^\[\^\d+\]:', stripped):
+        if re.match(FOOTNOTE_DEF_LINE, stripped):
             return True
 
         return False
@@ -417,9 +443,9 @@ class TTH2MdToJson:
             return False
         if stripped.startswith('*'):
             return False
-        if re.match(r'^\*\*(\d+)\*\*(?:\s+.+)?$', stripped):
+        if re.match(BOLD_NUMBER_LINE, stripped):
             return False
-        if re.match(r'^\[\^\d+\]:', stripped):
+        if re.match(FOOTNOTE_DEF_LINE, stripped):
             return False
 
         # Titles in this corpus appear isolated by blank lines.
@@ -444,18 +470,18 @@ class TTH2MdToJson:
                 next_nonempty = candidate
                 break
 
-        if not re.match(r'^\*\*\d+\*\*', prev_nonempty):
+        if not re.match(BOLD_NUMBER_PREFIX, prev_nonempty):
             return False
-        if not re.match(r'^\*\*\d+\*\*(?:\s+.+)?$', next_nonempty):
+        if not re.match(BOLD_NUMBER_PREFIX_LINE, next_nonempty):
             return False
 
         # Keep heuristic strict to avoid dropping legitimate wrapped verse prose.
-        if re.search(r'[,;:!?]', stripped):
+        if re.search(INLINE_PUNCT, stripped):
             return False
-        if re.search(r'\[\^\d+\]', stripped):
+        if re.search(FOOTNOTE_MARKER_LOOSE, stripped):
             return False
 
-        words = re.findall(r"[A-Za-zÁÉÍÓÚÜÑáéíóúüñ'’-]+", stripped)
+        words = re.findall(LATIN_WORD, stripped)
         if len(words) < 2 or len(words) > 10:
             return False
 
@@ -485,14 +511,14 @@ class TTH2MdToJson:
             return False
 
         marker_match = re.match(
-            r'^__([^_\n]{2,})__\s*([\u0590-\u05FF][\u0590-\u05FF\s]*)$', stripped)
+            BOOK_HEADER_BOUNDARY, stripped)
         if not marker_match:
             return False
 
         latin_title = marker_match.group(1).strip()
         hebrew_title = marker_match.group(2).strip()
 
-        if not re.search(r'[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]', latin_title):
+        if not re.search(LATIN_LETTER, latin_title):
             return False
 
         own_latin_candidates = [
@@ -524,7 +550,7 @@ class TTH2MdToJson:
 
         # Handle patterns where the closing marker became escaped stars.
         text = re.sub(
-            r'\*\*(\d+)(?:\\\*\s+\\\*|\*\s+\*)\*\*',
+            MALFORMED_VERSE_MARKER,
             r'**\1**',
             text,
         )
@@ -541,7 +567,7 @@ class TTH2MdToJson:
         remaining = self.normalize_malformed_verse_markers(verse_text)
 
         while True:
-            marker_match = re.search(r'\*\*(\d+)\*\*\s*', remaining)
+            marker_match = re.search(INLINE_VERSE_MARKER, remaining)
             if not marker_match:
                 final_text = remaining.strip()
                 if final_text:
@@ -583,7 +609,7 @@ class TTH2MdToJson:
 
         while True:
             match = re.search(
-                r'\s+(\d{1,3})\s+([A-ZÁÉÍÓÚÜÑ\u0590-\u05FF])',
+                PLAIN_INLINE_VERSE,
                 remaining,
             )
             if not match:
@@ -718,7 +744,7 @@ class TTH2MdToJson:
             return False
 
         # Continuation fragments usually start with lowercase narrative text.
-        return bool(re.match(r'^[a-záéíóúñü]', trimmed, re.IGNORECASE))
+        return bool(re.match(LOWERCASE_CONTINUATION, trimmed, re.IGNORECASE))
 
     def parse_chapters_and_verses(self, book_text: str, verbose: bool = False) -> List[Dict[str, Any]]:
         """Parse chapters and verses from the book text."""
@@ -751,14 +777,14 @@ class TTH2MdToJson:
 
             # Skip malformed inline footnote blocks until the next verse/chapter marker.
             if skipping_inline_footnote_blob:
-                if re.match(r'^\*\*(\d+)\*\*\s*$', line) or re.match(r'^\*\*(\d+)\*\*\s+.+$', line):
+                if re.match(CHAPTER_MARKER_LINE, line) or re.match(VERSE_MARKER_LINE, line):
                     skipping_inline_footnote_blob = False
                 else:
                     i += 1
                     continue
 
             # Check for chapter markers
-            chapter_match = re.match(r'^\*\*(\d+)\*\*\s*$', line)
+            chapter_match = re.match(CHAPTER_MARKER_LINE, line)
             if chapter_match:
                 next_chapter = int(chapter_match.group(1))
 
@@ -791,7 +817,7 @@ class TTH2MdToJson:
                     continue
 
                 # Look for verse markers
-                verse_match = re.match(r'^\*\*(\d+)\*\*\s*(.+)$', line)
+                verse_match = re.match(VERSE_MARKER_CAPTURE, line)
                 if verse_match:
                     verse_num = int(verse_match.group(1))
                     verse_text = verse_match.group(2).strip()
@@ -844,7 +870,7 @@ class TTH2MdToJson:
                 # Handle malformed lines where verse number and initial content
                 # were wrapped together in one bold span (e.g., "**32 y** ...").
                 malformed_verse_match = re.match(
-                    r'^\*\*(\d+)\s+(.+?)\*\*\s*(.*)$', line)
+                    MALFORMED_VERSE_LINE, line)
                 if malformed_verse_match:
                     verse_num = int(malformed_verse_match.group(1))
                     verse_head = malformed_verse_match.group(2).strip()
@@ -897,7 +923,7 @@ class TTH2MdToJson:
                 # Continue accumulating verse text (multi-line verses)
                 elif current_verses and line:
                     # Never append what looks like a new verse/chapter marker.
-                    if re.match(r'^\*\*\d+\*\*', line):
+                    if re.match(BOLD_NUMBER_PREFIX, line):
                         i += 1
                         continue
 
@@ -994,41 +1020,20 @@ class TTH2MdToJson:
             'chapters': chapters_structure
         }
 
-    def convert_markdown_to_json(self, input_file: str, output_file: Optional[str] = None, verbose: bool = False) -> str:
-        """
-        Convert a book markdown file to JSON.
-
-        Args:
-            input_file: Path to markdown file
-            output_file: Path to output JSON file (auto-generated if None)
-            verbose: If True, print detailed progress messages
-
-        Returns:
-            Path to the output JSON file
-        """
-        # Generate output filename if not provided
-        if output_file is None:
-            input_path = Path(input_file)
-            output_file = str(input_path.with_suffix('.json'))
-
-        # Read and process markdown
-        markdown_text = self.read_markdown(input_file)
-
-        # Filter out section headers before processing
+    def convert_markdown_to_json(self, markdown_text: str, verbose: bool = False) -> Dict[str, Any]:
+        """Convert markdown text for this book into a JSON-ready dict."""
         if verbose:
             print(f"    Filtering section headers...", end=' ', flush=True)
         markdown_text = self.filter_section_headers(markdown_text)
         if verbose:
             print(f"✓")
 
-        # Extract footnote definitions
         if verbose:
             print(f"    Extracting footnotes...", end=' ', flush=True)
         self.extract_footnote_definitions(markdown_text)
         if verbose:
             print(f"✓ ({len(self.footnote_definitions)} found)")
 
-        # Parse chapters and verses (show progress for large books)
         if verbose:
             print(f"    Parsing chapters and verses...", end=' ', flush=True)
         self.reset_book_footnote_numbering()
@@ -1038,33 +1043,36 @@ class TTH2MdToJson:
         if verbose:
             print(f"✓")
 
-        # Create JSON structure
         json_data = self.create_json_structure(chapters)
 
-        # Write JSON file
-        with open(output_file, 'w', encoding='utf-8') as f:
-            json.dump(json_data, f, ensure_ascii=False, indent=2)
-
         if verbose:
-            print(f"✓ Saved JSON to {output_file}")
             print(f"  Chapters: {json_data['book_info']['total_chapters']}")
             print(f"  Verses: {json_data['book_info']['total_verses']}")
 
-        return output_file
+        return json_data
 
 
-def convert_book_markdown_to_json(book_key: str, input_file: str, output_file: Optional[str] = None, verbose: bool = False) -> str:
+def _markdown_text_from_source(source: Any) -> str:
+    """Accept markdown text or a dict that carries markdown text."""
+    if isinstance(source, str):
+        return source
+    if isinstance(source, dict):
+        if isinstance(source.get("markdown"), str):
+            return source["markdown"]
+        if isinstance(source.get("text"), str):
+            return source["text"]
+    raise TypeError("markdown source must be text or a dict with 'markdown' or 'text'")
+
+
+def convert_book_markdown_to_json(book_key: str, source: Any, verbose: bool = False) -> Dict[str, Any]:
     """
-    Convenience function to convert a book markdown file to JSON.
+    Convert one book's markdown into a dict.
 
-    Args:
-        book_key: Book identifier
-        input_file: Path to markdown file
-        output_file: Path to output JSON file (optional)
-        verbose: If True, print detailed progress messages
-
-    Returns:
-        Path to the output JSON file
+    ``source`` may be markdown text, a dict with ``markdown`` or ``text``,
+    or a dict that already has ``chapters`` (returned as a copy).
     """
+    if isinstance(source, dict) and "chapters" in source and "markdown" not in source and "text" not in source:
+        return copy.deepcopy(source)
+    markdown_text = _markdown_text_from_source(source)
     converter = TTH2MdToJson(book_key)
-    return converter.convert_markdown_to_json(input_file, output_file, verbose)
+    return converter.convert_markdown_to_json(markdown_text, verbose=verbose)
