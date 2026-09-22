@@ -4,19 +4,15 @@ from __future__ import annotations
 
 import importlib.util
 import json
-import sys
 from pathlib import Path
 
 import pytest
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-TTH2_DIR = REPO_ROOT / "scripts" / "tth_2"
-if str(TTH2_DIR) not in sys.path:
-    sys.path.insert(0, str(TTH2_DIR))
+from scripts.tth_2.docx_to_md import convert_docx
+from scripts.tth_2.json_postprocess import get_postprocessor
+from scripts.tth_2.md_to_json import convert_book_markdown_to_json
 
-from docx_to_md import convert_docx
-from json_postprocess import get_postprocessor
-from md_to_json import convert_book_markdown_to_json
+REPO_ROOT = Path(__file__).resolve().parents[1]
 
 AMOS_MARKDOWN = REPO_ROOT / "data" / "tth_2" / "markdown" / "amos.md"
 AMOS_JSON = REPO_ROOT / "data" / "tth_2" / "json" / "amos.json"
