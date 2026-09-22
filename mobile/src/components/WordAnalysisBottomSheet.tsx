@@ -314,7 +314,11 @@ const loadGreekOccurrenceInstances = async (
   if (!bucket) return null;
   const surface = instanceSurface({
     instance_total: bucket.count,
-    instances: bucket.references,
+    instances: bucket.references?.map((row) => ({
+      book: row.book,
+      chapter: row.chapter,
+      verse: row.verse ?? undefined,
+    })),
   });
   return {
     instances: surface.instances,
