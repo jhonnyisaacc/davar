@@ -18,9 +18,9 @@
 		"serve:mobile": "BUN_IDLE_TIMEOUT=0 bun --env-file=.env ./server.ts",
 		"test": "bun test",
 		"test:static-data": "bun test src/app/services/staticData.test.js",
-		"lint": "bunx --bun @biomejs/biome lint build.ts server.ts src scripts package.json tsconfig.json biome.json",
-		"format": "bunx --bun @biomejs/biome format --write build.ts server.ts src scripts package.json tsconfig.json biome.json",
-		"format:check": "bunx --bun @biomejs/biome format build.ts server.ts src scripts package.json tsconfig.json biome.json"
+		"lint": "bunx --bun @biomejs/biome lint build.ts server.ts src scripts shared functions package.json tsconfig.json biome.json",
+		"format": "bunx --bun @biomejs/biome format --write build.ts server.ts src scripts shared functions package.json tsconfig.json biome.json",
+		"format:check": "bunx --bun @biomejs/biome format build.ts server.ts src scripts shared functions package.json tsconfig.json biome.json"
 	},
 	"dependencies": {
 		"@emotion/react": "11.14.0",
