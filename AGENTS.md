@@ -18,7 +18,7 @@ JavaScript installs, scripts, and tests use Bun from the surface directory (`web
 - Hebrew UI is RTL. Keep the neumorphic, contemplative layout.
 - Do not modify licensed content, remove required attributions, or commit secrets, tokens, or private datasets.
 - Public code may ship with mock data. Licensed texts stay off the public branch.
-- Preserve current reading behavior when refactoring. Do not add Shaul, Bore, or Qahal features in a cleanup change.
+- Preserve current reading behavior when refactoring.
 
 ## Releases
 
