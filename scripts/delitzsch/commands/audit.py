@@ -4,16 +4,9 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
 from dataclasses import asdict
-from pathlib import Path
 
-if __package__ in (None, ""):
-    scripts_dir = Path(__file__).resolve().parents[2]
-    sys.path.insert(0, str(scripts_dir))
-    from delitzsch import audit_delitzsch_parsing as auditor
-else:
-    from .. import audit_delitzsch_parsing as auditor
+from .. import audit_delitzsch_parsing as auditor
 
 
 def register_subcommand(subparsers: argparse._SubParsersAction) -> argparse.ArgumentParser:

@@ -11,10 +11,8 @@ import argparse
 import json
 import time
 from pathlib import Path
-import sys
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
-from instance_policy import process_instances  # noqa: E402
+from .instance_policy import process_instances  # noqa: E402
 
 
 def make_instances(count: int) -> list[dict[str, object]]:

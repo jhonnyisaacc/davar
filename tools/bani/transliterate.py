@@ -8,15 +8,10 @@ Provides a clean API for generating pronunciation guides from Hebrew text.
 from pathlib import Path
 from typing import Dict, Any, Optional
 import json
-import sys
 from pathlib import Path
 
-# Add the current directory to the path for imports
-current_dir = Path(__file__).parent
-if str(current_dir) not in sys.path:
-    sys.path.insert(0, str(current_dir))
 
-from apply import Transliterator
+from .apply import Transliterator
 
 
 class BaniTransliterator:

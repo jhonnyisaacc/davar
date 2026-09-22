@@ -12,10 +12,8 @@ import sys
 from pathlib import Path
 from typing import Dict, List, NamedTuple
 
-# Add parent directory to path for utils import
-sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from utils import load_json, save_json, create_backup, ProgressTracker
+from ..utils import load_json, save_json, create_backup, ProgressTracker
 
 logger = logging.getLogger(__name__)
 

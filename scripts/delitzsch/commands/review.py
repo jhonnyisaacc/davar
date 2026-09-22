@@ -4,16 +4,10 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
 from dataclasses import asdict
 from pathlib import Path
 
-if __package__ in (None, ""):
-    scripts_dir = Path(__file__).resolve().parents[2]
-    sys.path.insert(0, str(scripts_dir))
-    from delitzsch.review import workflow
-else:
-    from ..review import workflow
+from ..review import workflow
 
 
 def register_subcommand(subparsers: argparse._SubParsersAction) -> argparse.ArgumentParser:

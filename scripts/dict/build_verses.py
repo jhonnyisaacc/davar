@@ -9,19 +9,15 @@ This is the main entry point for the verse generation pipeline.
 import argparse
 import json
 import logging
-import sys
-from pathlib import Path
 from typing import Optional, Dict
 
-# Add current directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent))
 
-from config import config
-from book_mappings import BookMapper
-from strong_processor import StrongProcessor
-from morphhb import MorphusLoader
-from verse_processor import VerseProcessor
-from utils import save_json_minified
+from .config import config
+from .book_mappings import BookMapper
+from .strong_processor import StrongProcessor
+from .morphhb import MorphusLoader
+from .verse_processor import VerseProcessor
+from .utils import save_json_minified
 
 # Configure logging
 logging.basicConfig(

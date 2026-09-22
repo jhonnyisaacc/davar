@@ -12,16 +12,13 @@ from __future__ import annotations
 import argparse
 import json
 import re
-import sys
 from pathlib import Path
 from typing import Any
 
 
 HERE = Path(__file__).resolve().parent
-if str(HERE) not in sys.path:
-    sys.path.insert(0, str(HERE))
 
-from transliterate import BaniTransliterator  # noqa: E402
+from .transliterate import BaniTransliterator  # noqa: E402
 
 
 def pron_syllables(pron: str) -> list[str]:

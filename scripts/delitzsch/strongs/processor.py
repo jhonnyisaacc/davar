@@ -8,12 +8,9 @@ with Strong's number assignments.
 import asyncio
 import json
 import logging
-import sys
 from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
 
-# Add project root to path before importing project-local modules
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from scripts.dict.utils import load_json, save_json, ProgressTracker, create_backup
 from .pronominal_lookup import lookup_pronominal, is_pronominal_form

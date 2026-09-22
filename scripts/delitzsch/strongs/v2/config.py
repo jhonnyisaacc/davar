@@ -2,12 +2,8 @@
 Configuration module for v2 Strong's assignment system.
 """
 
-import sys
-from pathlib import Path
 from typing import List
 
-# Add parent directories to path for imports
-sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
 
 from scripts.dict.config import Config
 

@@ -3,11 +3,9 @@ Debug script to analyze matching failures and improve the algorithm.
 """
 
 import json
-import sys
 from pathlib import Path
 from collections import Counter
 
-sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
 
 from .dictionary_index import DictionaryIndex
 from .normalizer import normalize_hebrew, strip_prefixes, extract_stem

@@ -29,7 +29,7 @@ The starting backtest contains 2,948 explicit manual overrides: 102 TP / 66 FP =
 
 ## Bounded experiments
 
-`python scripts/hutter/evaluate_morphology.py --legacy-parses` measures the existing parses with independent same-verse Strong *sets*, not positional alignment. Semantic support improves to 48 TP / 4 FP = 92.31%, proposing only 39 unresolved tokens. Minimum-three-letter stems do not remove those four false positives. Requiring both semantic support and lexicon-lemma evidence leaves 3 TP / 0 FP and two proposed unresolved tokens: far below the unchanged minimum sample, so this does not constitute a passing precision result. Score thresholds .90/.94/.98 likewise fail the safety/sample gates.
+`python -m scripts.hutter.evaluate_morphology --legacy-parses` measures the existing parses with independent same-verse Strong *sets*, not positional alignment. Semantic support improves to 48 TP / 4 FP = 92.31%, proposing only 39 unresolved tokens. Minimum-three-letter stems do not remove those four false positives. Requiring both semantic support and lexicon-lemma evidence leaves 3 TP / 0 FP and two proposed unresolved tokens: far below the unchanged minimum sample, so this does not constitute a passing precision result. Score thresholds .90/.94/.98 likewise fail the safety/sample gates.
 
 Added bounded verbal parses cover imperfect prefixes, niphal-like forms, hitpael, participles and weak final-he candidates. Conjugation markers are kept separate from actual preposition/conjunction prefix codes. Tests cover ויכבדום, נצדקים and ויתחנקו. These unvalidated parses are review-only, capped below auto-accept score, and remain visible as competing analyses. They expose additional ambiguity rather than increasing accepted coverage: direct backtest 63 TP / 54 FP (53.85%); with same-verse support 34 TP / 3 FP (91.89%), only 22 proposed unresolved tokens. This is not claimed as a precision improvement; it is retained as useful candidate coverage with a failed application gate.
 
@@ -41,13 +41,13 @@ The earlier deterministic experiments could not satisfy the precision gate: the 
 
 The next bounded implementation belongs to this same open issue: pointed, part-of-speech-aware inflection paradigms and independently reviewed historical/custom vocabulary, with a held-out image-reviewed validation set, separate prefix-composition precision and corpus coverage reporting. No separate issue is created to disguise unfinished original scope.
 
-Reproduce with `python scripts/hutter/map_strongs.py --morphology`, `python scripts/hutter/evaluate_morphology.py`, and `python -m pytest -q tests/test_hutter_morphology.py tests/test_hutter_map_strongs.py`. The morphology command exits 2 when the precision gate fails; this is expected blocking evidence, not a green release check. Printed Hutter text is unchanged.
+Reproduce with `python -m scripts.hutter.map_strongs --morphology`, `python -m scripts.hutter.evaluate_morphology`, and `python -m pytest -q tests/test_hutter_morphology.py tests/test_hutter_map_strongs.py`. The morphology command exits 2 when the precision gate fails; this is expected blocking evidence, not a green release check. Printed Hutter text is unchanged.
 
 The pre-API main baseline was independently rechecked at `572bfa6c95c8d5121122fc7cb43796c28acccb3b`: counting all 27 mapping JSON files gave 107,730 tokens, 103,996 mapped and 3,734 unresolved (96.533927% coverage). The final PR output is reported separately so the API-derived gain remains attributable and reviewable.
 
 ## Pointed attestation follow-up
 
-`python scripts/hutter/evaluate_attested_morphology.py` now measures a separate
+`python -m scripts.hutter.evaluate_attested_morphology` now measures a separate
 source-annotated approach using the checked-in Open Scriptures Hebrew Bible XML
 (CC BY 4.0). The analyzer retains exact pointing, part-of-speech/morphology codes,
 explicit prefix boundaries and attached pronominal suffixes. It does not guess
@@ -109,10 +109,10 @@ unresolved evidence. This mode does not approve general corpus regeneration.
 Reproduce this batch with:
 
 ```sh
-python scripts/hutter/map_strongs.py --reviewed-transcriptions-only --write
+python -m scripts.hutter.map_strongs --reviewed-transcriptions-only --write
 bun run --cwd web generate-data
-python scripts/hutter/verify_transcription.py
-python scripts/hutter/map_strongs.py --reviewed-transcriptions-only --morphology
+python -m scripts.hutter.verify_transcription
+python -m scripts.hutter.map_strongs --reviewed-transcriptions-only --morphology
 ```
 
 Two regeneration runs were byte-identical across all 27 mapping files and the

@@ -6,14 +6,11 @@ Handles loading, processing, and updating lexicon JSON files with translations.
 
 import json
 import logging
-import sys
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, NamedTuple
 
-# Add parent directory to path for utils import
-sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from utils import load_json, save_json, validate_translation_field, ProgressTracker
+from ..utils import load_json, save_json, validate_translation_field, ProgressTracker
 
 logger = logging.getLogger(__name__)
 

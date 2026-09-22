@@ -4,15 +4,8 @@
 from __future__ import annotations
 
 import argparse
-import sys
-from pathlib import Path
 
-if __package__ in (None, ""):
-    scripts_dir = Path(__file__).resolve().parents[1]
-    sys.path.insert(0, str(scripts_dir))
-    from delitzsch.commands import audit, normalize, normalize_holem, review, run
-else:
-    from .commands import audit, normalize, normalize_holem, review, run
+from .commands import audit, normalize, normalize_holem, review, run
 
 
 def build_parser() -> argparse.ArgumentParser:

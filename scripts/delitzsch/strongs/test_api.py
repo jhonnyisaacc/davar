@@ -7,11 +7,6 @@ import httpx
 from openai import OpenAI
 from scripts.delitzsch.strongs.config import XAI_API_KEY, GROK_MODEL, GROK_BASE_URL
 import json
-import sys
-from pathlib import Path
-
-# Add parent directory to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 
 def test_grok_api():

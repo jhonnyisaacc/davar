@@ -3,10 +3,10 @@
 Pre-generate transliterations for dictionary data.
 
 Usage:
-    python tools/bani/build.py --lexicon --prefixes
-    python tools/bani/build.py --lexicon-only
-    python tools/bani/build.py --prefixes-only
-    python tools/bani/build.py --test  # Dry run
+    python -m tools.bani.build --lexicon --prefixes
+    python -m tools.bani.build --lexicon-only
+    python -m tools.bani.build --prefixes-only
+    python -m tools.bani.build --test  # Dry run
 """
 
 import argparse
@@ -17,12 +17,8 @@ from typing import Dict, Any, List, Optional
 import sys
 from pathlib import Path
 
-# Add the tools directory to the path so we can import
-tools_dir = Path(__file__).parent
-if str(tools_dir) not in sys.path:
-    sys.path.insert(0, str(tools_dir))
 
-from transliterate import BaniTransliterator
+from .transliterate import BaniTransliterator
 
 
 def load_json_file(path: Path) -> Dict[str, Any]:

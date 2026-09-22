@@ -1,7 +1,4 @@
-import sys
-from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from scripts.delitzsch.hebrew_utils import normalize_delitzsch_holem
 from scripts.delitzsch.normalize_delitzsch_holem import normalize_book_data

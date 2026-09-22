@@ -4,15 +4,10 @@ Test parser on 2 Samuel to verify group variant handling
 """
 
 import sys
-from pathlib import Path
 
-# Add scripts directory to path
-scripts_dir = Path(__file__).parent.parent
-if str(scripts_dir) not in sys.path:
-    sys.path.insert(0, str(scripts_dir))
 
-from dss.xml_parsers import parse_dss_book
-from dss.config import DSS_DIR
+from .xml_parsers import parse_dss_book
+from .config import DSS_DIR
 
 # Parse 2 Samuel
 dss_file = DSS_DIR / "DSS_-_TC_2Samuel.xml"

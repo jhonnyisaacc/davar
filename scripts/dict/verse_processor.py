@@ -9,12 +9,10 @@ import json
 import re
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
-import sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent))
-from config import config
-from book_mappings import BookMapper
-from strong_processor import StrongProcessor
+from .config import config
+from .book_mappings import BookMapper
+from .strong_processor import StrongProcessor
 from morphus_loader import MorphusLoader
 
 

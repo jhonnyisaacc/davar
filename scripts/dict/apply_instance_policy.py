@@ -4,7 +4,7 @@ import argparse
 import gzip
 import json
 from pathlib import Path
-from instance_policy import process_instances, MANIFEST
+from .instance_policy import process_instances, MANIFEST
 
 ROOT = Path(__file__).resolve().parents[2]
 

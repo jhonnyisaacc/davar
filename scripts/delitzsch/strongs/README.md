@@ -198,7 +198,7 @@ python -m scripts.delitzsch.strongs --book jude --verbose
 Run the test script to verify API connectivity:
 
 ```bash
-python scripts/delitzsch/strongs/test_api.py
+python -m scripts.delitzsch.strongs.test_api
 ```
 
 ### Code Structure

@@ -6,15 +6,10 @@ Strong's numbers to Hebrew words in Delitzsch NT translation.
 """
 
 import os
-import sys
-from pathlib import Path
 from typing import List
 from dotenv import load_dotenv
 
-# Add parent directory to path for config import
-sys.path.insert(0, str(Path(__file__).parent.parent))
 
-# Import from parent config module
 from scripts.dict.config import Config
 config = Config()
 

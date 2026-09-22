@@ -12,7 +12,6 @@ Usage:
 import json
 import argparse
 import logging
-import sys
 import hashlib
 import math
 import re
@@ -144,7 +143,6 @@ def run_post_merge_validation(books: List[str]) -> Dict[str, Any]:
     Returns:
         A deterministic summary keyed by issue type, with per-book counts.
     """
-    sys.path.insert(0, str(PROJECT_ROOT))
     try:
         from scripts.delitzsch.review.workflow import LexiconIndex, scan_issues
     except ImportError as exc:  # pragma: no cover - defensive
