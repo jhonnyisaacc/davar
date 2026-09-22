@@ -2,10 +2,10 @@ name: Mobile CI
 
 on:
   push:
-    branches: [main, apocalipsis]
+    branches: [main]
     paths: ["mobile/**", "shared/**", ".github/workflows/mobile-ci.yml"]
   pull_request:
-    branches: [main, apocalipsis]
+    branches: [main]
     paths: ["mobile/**", "shared/**", ".github/workflows/mobile-ci.yml"]
 
 permissions:
