@@ -20,18 +20,32 @@ ALLOWED = (
     "tests/test_knowledge_",
 )
 WORKFLOW = ".github/workflows/knowledge-foundation.yml"
+SHAUL_REVISION = "8c94b0fe9eca817e22340430309801d0ef76125b"
+SHAUL_ORIGIN = "https://github.com/jhonnyisaacc/shaul.git"
+KNOWLEDGE_CODE = "scripts/knowledge/"
 
 
 def run(args, cwd=ROOT, env=None):
     subprocess.run(args, cwd=cwd, env=env, check=True)
 
 
-def boundary(base: str, root=ROOT):
+def fetch_shaul(destination: Path):
+    run(["git", "init", "--quiet", str(destination)])
+    run(["git", "remote", "add", "origin", SHAUL_ORIGIN], cwd=destination)
+    run(["git", "fetch", "--depth", "1", "origin", SHAUL_REVISION], cwd=destination)
+    run(["git", "checkout", "--quiet", "FETCH_HEAD"], cwd=destination)
+
+
+def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
     changes = subprocess.check_output(
         ["git", "diff", "--name-status", base, "--"], cwd=root, text=True
     )
+    knowledge_edits = False
     for line in changes.splitlines():
         status, path = line.split("\t", 1)
+        if path.startswith(KNOWLEDGE_CODE) and status != "A":
+            knowledge_edits = True
+            continue
         if status != "A" or not (path.startswith(ALLOWED) or path == WORKFLOW):
             raise ValueError("Non-additive or out-of-scope change: " + line)
     untracked = subprocess.check_output(
@@ -55,7 +69,17 @@ def boundary(base: str, root=ROOT):
                         "Legacy dependency on foundation: "
                         + str(path.relative_to(root))
                     )
-    print("Additive file boundary and legacy import isolation: OK")
+    if knowledge_edits:
+        if shaul_root is None:
+            with tempfile.TemporaryDirectory(prefix="davar-shaul-pin-") as temp:
+                checkout = Path(temp) / "shaul"
+                fetch_shaul(checkout)
+                shaul(checkout, root)
+        else:
+            shaul(shaul_root, root)
+        print("Shaul output unchanged and legacy import isolation: OK")
+    else:
+        print("Additive file boundary and legacy import isolation: OK")
 
 
 def tree(path: Path, *, legacy_clock=False):
@@ -181,7 +205,7 @@ def shaul(root: Path, davar=ROOT):
     revision = subprocess.check_output(
         ["git", "rev-parse", "HEAD"], cwd=root, text=True
     ).strip()
-    if revision != "8c94b0fe9eca817e22340430309801d0ef76125b":
+    if revision != SHAUL_REVISION:
         raise ValueError("Shaul regression checkout must be at the pinned revision")
     before = {
         p: tree(root / p)
@@ -202,7 +226,12 @@ def main():
         parser.add_argument(row["cli_flag"], type=Path)
     args = parser.parse_args()
     if args.command == "boundary":
-        boundary(args.base)
+        checkout = None
+        for row in SOURCES.values():
+            value = getattr(args, cli_dest(row["cli_flag"]))
+            if value is not None:
+                checkout = value.resolve()
+        boundary(args.base, shaul_root=checkout)
     elif args.command == "legacy":
         legacy(args.base)
     elif args.command in SOURCES:
