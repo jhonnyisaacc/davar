@@ -10,7 +10,7 @@ import tempfile
 from pathlib import Path
 
 from .build import build
-from .core import ROOT, digest, encoded, read_json
+from .core import ROOT, SOURCES, cli_dest, digest, encoded, read_json
 
 ALLOWED = (
     "contracts/biblical-knowledge/v1/",
@@ -188,7 +188,7 @@ def shaul(root: Path, davar=ROOT):
         for p in ("content", "knowledge", "generated", "static/api/v1/verse-notes")
     }
     with tempfile.TemporaryDirectory(prefix="davar-shaul-compat-") as temp:
-        build(Path(temp).resolve() / "output", davar, root)
+        build(Path(temp).resolve() / "output", davar, shaul_root=root)
     if before != {p: tree(root / p) for p in before}:
         raise ValueError("Shaul files changed during read-only adapter execution")
     print("Pinned Shaul source and artifact non-interference: OK")
@@ -198,16 +198,19 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("command", choices=["boundary", "legacy", "shaul"])
     parser.add_argument("--base", default="origin/main")
-    parser.add_argument("--shaul-root", type=Path)
+    for row in SOURCES.values():
+        parser.add_argument(row["cli_flag"], type=Path)
     args = parser.parse_args()
     if args.command == "boundary":
         boundary(args.base)
     elif args.command == "legacy":
         legacy(args.base)
-    elif args.shaul_root:
-        shaul(args.shaul_root.resolve())
-    else:
-        parser.error("shaul requires --shaul-root")
+    elif args.command in SOURCES:
+        row = SOURCES[args.command]
+        checkout = getattr(args, cli_dest(row["cli_flag"]))
+        if checkout is None:
+            parser.error(f"{args.command} requires {row['cli_flag']}")
+        shaul(checkout.resolve())
 
 
 if __name__ == "__main__":
