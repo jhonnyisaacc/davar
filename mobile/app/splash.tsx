@@ -11,6 +11,7 @@ import Animated, {
   withSequence,
   withTiming,
 } from "react-native-reanimated";
+import { destinationById } from "@davar/shared/destinations";
 
 import { getColors, spacing, typography } from "../src/theme";
 import { useAppStore, type AppState } from "../src/store/useAppStore";
@@ -78,7 +79,7 @@ export default function SplashScreen() {
     }, 2500);
 
     const navigateTimeout = setTimeout(() => {
-      router.replace("/(tabs)/verse");
+      router.replace(`/(tabs)/${destinationById("verse").id as "verse"}`);
     }, 3000);
 
     return () => {
