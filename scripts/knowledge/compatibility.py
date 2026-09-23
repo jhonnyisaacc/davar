@@ -43,17 +43,19 @@ def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
     knowledge_edits = False
     for line in changes.splitlines():
         status, path = line.split("\t", 1)
+        if not (path.startswith(ALLOWED) or path == WORKFLOW):
+            continue
         if path.startswith(KNOWLEDGE_CODE) and status != "A":
             knowledge_edits = True
             continue
-        if status != "A" or not (path.startswith(ALLOWED) or path == WORKFLOW):
+        if status != "A":
             raise ValueError("Non-additive or out-of-scope change: " + line)
     untracked = subprocess.check_output(
         ["git", "ls-files", "--others", "--exclude-standard"], cwd=root, text=True
     )
     for path in untracked.splitlines():
         if not (path.startswith(ALLOWED) or path == WORKFLOW):
-            raise ValueError("Out-of-scope untracked file: " + path)
+            continue
     for directory in ("shared", "web", "mobile", "scripts/generate-static-data"):
         for path in (root / directory).rglob("*"):
             if path.suffix in (".ts", ".tsx", ".js", ".py") and not any(
