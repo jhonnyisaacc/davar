@@ -23,7 +23,7 @@ from scripts.translit.local_translit import LocalTransliterator
 
 
 HUTTER_ROOT = REPO_ROOT / "data" / "hutter" / "staging" / "output"
-DELITZSCH_ROOT = REPO_ROOT / "data" / "delitzsch_parsed"
+DELITZSCH_ROOT = REPO_ROOT / "data" / "delitzsch" / "parsed"
 TANAJ_ROOT = REPO_ROOT / "data" / "oe"
 LEXICON_WORDS_ROOT = REPO_ROOT / "data" / "dict" / "lexicon" / "words"
 LEXICON_ROOTS_ROOT = REPO_ROOT / "data" / "dict" / "lexicon" / "roots"

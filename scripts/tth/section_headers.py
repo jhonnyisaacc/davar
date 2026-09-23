@@ -195,7 +195,7 @@ def main():
         '--json-dir',
         type=Path,
         default=Path(__file__).parent.parent.parent /
-        "data" / "tth_2" / "json",
+        "data" / "tth" / "json",
         help='Path to JSON directory'
     )
     parser.add_argument(

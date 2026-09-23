@@ -80,7 +80,7 @@ The tool supports all 27 books of the New Testament:
 
 ## Output Format
 
-The tool generates JSON files in `data/delitzsch_parsed/strongs/` with the following structure:
+The tool generates JSON files in `data/delitzsch/parsed/strongs/` with the following structure:
 
 ```json
 {

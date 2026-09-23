@@ -25,7 +25,7 @@ def register_subcommand(subparsers: argparse._SubParsersAction) -> argparse.Argu
         "--books",
         nargs="+",
         default=auditor.DEFAULT_BOOKS,
-        help="Book folder names under data/delitzsch_parsed",
+        help="Book folder names under data/delitzsch/parsed",
     )
     parser.add_argument(
         "--output-dir",
@@ -44,7 +44,7 @@ def register_subcommand(subparsers: argparse._SubParsersAction) -> argparse.Argu
 
 def handle(args: argparse.Namespace) -> int:
     root = auditor.project_root()
-    parsed_dir = root / "data" / "delitzsch_parsed"
+    parsed_dir = root / "data" / "delitzsch" / "parsed"
     output_dir = root / args.output_dir
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -85,7 +85,7 @@ def main(argv: list[str] | None = None) -> int:
         "--books",
         nargs="+",
         default=auditor.DEFAULT_BOOKS,
-        help="Book folder names under data/delitzsch_parsed",
+        help="Book folder names under data/delitzsch/parsed",
     )
     parser.add_argument(
         "--output-dir",

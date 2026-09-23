@@ -32,7 +32,7 @@ except ImportError:
 
 # Default paths
 DEFAULT_JSON_DIR = Path(__file__).parent.parent.parent / \
-    "data" / "tth_2" / "json"
+    "data" / "tth" / "json"
 
 # Singleton instances
 _postprocessor_instances = {}

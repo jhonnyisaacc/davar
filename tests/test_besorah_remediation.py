@@ -77,7 +77,7 @@ def test_checked_in_repairs_match_narrow_rules_and_preserve_scripture():
     import gzip
     from collections import Counter
     from scripts.delitzsch.review.remediate import GRAMMAR
-    plan=json.load(gzip.open('data/delitzsch_review/reports/besorah_remediation_v1.json.gz'))
+    plan=json.load(gzip.open('data/delitzsch/review/reports/besorah_remediation_v1.json.gz'))
     mappings=[c for c in plan['changes'] if c['kind']=='mapping']
     assert Counter(c['after']['strong'] for c in mappings)=={'D0208':271,'D0265':196,'D0266':539,'D0271':50,'D0277':48,'H1058':1}
     for change in mappings:

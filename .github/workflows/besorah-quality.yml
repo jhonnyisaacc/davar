@@ -4,8 +4,8 @@ on:
     branches: [main]
     paths:
       - 'scripts/delitzsch/**'
-      - 'data/delitzsch_parsed/**'
-      - 'data/delitzsch_review/**'
+      - 'data/delitzsch/parsed/**'
+      - 'data/delitzsch/review/**'
       - 'tests/test_besorah_remediation.py'
       - 'tests/test_merge_strongs.py'
       - '.github/workflows/besorah-quality.yml'
@@ -13,8 +13,8 @@ on:
     branches: [main]
     paths:
       - 'scripts/delitzsch/**'
-      - 'data/delitzsch_parsed/**'
-      - 'data/delitzsch_review/**'
+      - 'data/delitzsch/parsed/**'
+      - 'data/delitzsch/review/**'
       - 'tests/test_besorah_remediation.py'
       - 'tests/test_merge_strongs.py'
 permissions:

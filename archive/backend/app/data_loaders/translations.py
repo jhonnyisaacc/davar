@@ -40,10 +40,10 @@ TTH_BOOK_MAPPING = {
     "Haggai": "jagai",
     "Zechariah": "zejariah",
     "Malachi": "malaji",
-    # KETUVIM (partial in tth_2)
+    # KETUVIM (partial in tth)
     "Psalms": "tehilim",
     "Proverbs": "mishlei",
-    # BESORAH (tth_2 format)
+    # BESORAH (tth format)
     "Matthew": "matityahu",
     "Mark": "markos",
     "Luke": "lukas",
@@ -209,13 +209,13 @@ class TranslationLoader(DataLoader):
 
     def __init__(self, data_path: Optional[str] = None):
         super().__init__(data_path)
-        self.tth_path = self.data_path / "tth_2" / "json"
+        self.tth_path = self.data_path / "tth" / "json"
         self.ts2009_path = self.data_path / "ts2009"
         self.bes_path = self.data_path / "bes" / "json"
 
     def load_tth_verse(self, book_name: str, chapter: int, verse: int, language: str = "es") -> Optional[dict]:
         """Load TTH translation for a specific verse"""
-        # TTH (tth_2) uses transliterated book names, map from English
+        # TTH (tth) uses transliterated book names, map from English
         tth_book_name = self._english_to_tth_book_name(book_name)
         if not tth_book_name:
             return None
@@ -224,8 +224,8 @@ class TranslationLoader(DataLoader):
         if cache_key in self._cache:
             return self._cache[cache_key]
 
-        # Load entire book JSON (tth_2 format)
-        file_path = f"tth_2/json/{tth_book_name}.json"
+        # Load entire book JSON (tth format)
+        file_path = f"tth/json/{tth_book_name}.json"
         try:
             book_data = self.load_json(file_path)
             if "chapters" not in book_data:
@@ -381,7 +381,7 @@ class TranslationLoader(DataLoader):
         return TS2009_BOOK_MAPPING.get(english_name)
 
     def _english_to_tth_book_name(self, english_name: str) -> Optional[str]:
-        """Map English book names to TTH (tth_2) JSON filenames"""
+        """Map English book names to TTH (tth) JSON filenames"""
         return TTH_BOOK_MAPPING.get(english_name)
 
     def _english_to_bes_book_name(self, english_name: str) -> Optional[str]:

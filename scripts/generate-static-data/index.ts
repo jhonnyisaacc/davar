@@ -1067,14 +1067,14 @@ const main = async (): Promise<void> => {
   );
 
   const besorah = await generateHebrewChapters(
-    join(DATA_ROOT, "delitzsch_parsed"),
+    join(DATA_ROOT, "delitzsch", "parsed"),
     join(WEB_PUBLIC_DATA_ROOT, "besorah"),
     "delitzsch",
   );
   const hutter = await generateHutterChapters();
 
   const tthBundle = await copyFolderJsonFiles(
-    join(DATA_ROOT, "tth_2", "json"),
+    join(DATA_ROOT, "tth", "json"),
     join(WEB_PUBLIC_DATA_ROOT, "tth"),
   );
 

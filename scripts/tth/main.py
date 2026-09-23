@@ -102,7 +102,7 @@ except ImportError:
 
 
 # Default directories
-DATA_DIR = Path.home() / "davar" / "data" / "tth_2"
+DATA_DIR = Path.home() / "davar" / "data" / "tth"
 RAW_DIR = DATA_DIR / "raw"
 MARKDOWN_DIR = DATA_DIR / "markdown"
 JSON_DIR = DATA_DIR / "json"
@@ -136,13 +136,13 @@ USAGE:
   python main.py --help                   Show this help
 
 EXAMPLES:
-  python scripts/tth_2/main.py split             # Split all DOCX to markdown/
-  python scripts/tth_2/main.py convert amos      # Convert amos.md to amos.json
-  python scripts/tth_2/main.py postprocess lukas # Fix formatting in lukas.json
-  python scripts/tth_2/main.py validate amos     # Check amos.json for issues
-  python scripts/tth_2/main.py validate all      # Check all JSON files
-  python scripts/tth_2/main.py process data/tth_2/raw/romanos.docx --books romanos  # Process specific book
-  python scripts/tth_2/main.py all               # Complete workflow
+  python scripts/tth/main.py split             # Split all DOCX to markdown/
+  python scripts/tth/main.py convert amos      # Convert amos.md to amos.json
+  python scripts/tth/main.py postprocess lukas # Fix formatting in lukas.json
+  python scripts/tth/main.py validate amos     # Check amos.json for issues
+  python scripts/tth/main.py validate all      # Check all JSON files
+  python scripts/tth/main.py process data/tth/raw/romanos.docx --books romanos  # Process specific book
+  python scripts/tth/main.py all               # Complete workflow
 
 OPTIONS FOR POSTPROCESS:
   --dry-run                               Show changes without modifying files
@@ -153,9 +153,9 @@ VALIDATE-FORMAT NOTES:
     Checks chapter count and per-chapter verse counts in addition to formatting
 
 DIRECTORIES:
-  Raw DOCX files:     data/tth_2/raw/
-  Markdown files:     data/tth_2/markdown/
-  JSON files:         data/tth_2/json/
+  Raw DOCX files:     data/tth/raw/
+  Markdown files:     data/tth/markdown/
+  JSON files:         data/tth/json/
 
 AVAILABLE BOOKS:
 """ + "\n".join(f"  {book}" for book in sorted(BOOKS_INFO.keys())))
@@ -654,7 +654,7 @@ def process_docx_books(docx_path: str, book_keys: List[str]):
             print(
                 f"❌ Failed to extract requested books: {', '.join(missing_books)}")
             print(
-                "Check book headers/patterns in DOCX and scripts/tth_2/config.py for those books.")
+                "Check book headers/patterns in DOCX and scripts/tth/config.py for those books.")
             temp_md_file.unlink(missing_ok=True)
             return False
         print(f"✓ Extracted {len(extracted)} books")

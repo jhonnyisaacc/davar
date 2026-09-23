@@ -286,7 +286,7 @@ class BiblicalScanner:
 
     def __init__(self):
         self.oe_dir = config.OE_DIR
-        self.delitzsch_dir = config.DATA_DIR / 'delitzsch_parsed'
+        self.delitzsch_dir = config.DATA_DIR / 'delitzsch' / 'parsed'
 
     def extract_base_strong(self, strong_field) -> Optional[str]:
         """Extract base Strong number from 'Hc/Hd/H776' -> 'H776'."""

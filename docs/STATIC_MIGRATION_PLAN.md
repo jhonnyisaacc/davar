@@ -152,8 +152,8 @@ scripts/generate-static-data/
 | `manifest.json` | Generated | Version, checksums, sizes for all bundles |
 | `metadata.json` | All book folders + chapter files | Books list, chapter counts, verse counts |
 | `oe/{book}/{chapter}.json` | `data/oe/{book}/{chapter}.json` | Per-chapter Hebrew verses with word data |
-| `besorah/{book}/{chapter}.json` | `data/delitzsch_parsed/` | Per-chapter Delitzsch verses |
-| `tth/{book}.json` | `data/tth_2/json/` | Per-book TTH Spanish translation |
+| `besorah/{book}/{chapter}.json` | `data/delitzsch/parsed/` | Per-chapter Delitzsch verses |
+| `tth/{book}.json` | `data/tth/json/` | Per-book TTH Spanish translation |
 | `bes/{book}.json` | `data/bes/json/` | Per-book BES Spanish fallback |
 | `dss/{book}.json` | `data/dss/books/` | Per-book DSS variants |
 | `dict/words.json` | `data/dict/lexicon/words.json` | Full dictionary (minified) |
