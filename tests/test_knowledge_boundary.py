@@ -5,7 +5,8 @@ from pathlib import Path
 
 import pytest
 
-from scripts.knowledge.compatibility import SHAUL_REVISION, boundary
+from scripts.knowledge.compatibility import SHAUL_REVISION, boundary, tree
+from scripts.knowledge.core import encoded
 
 
 def git(repo: Path, *args: str):
@@ -47,6 +48,29 @@ def unpinned_shaul(path: Path):
     git(path, "add", ".")
     git(path, "commit", "-q", "-m", "unpinned")
     return path
+
+
+def test_legacy_version_clock_values_are_ignored(tmp_path):
+    (tmp_path / "version.json").write_bytes(
+        encoded({"version": "2026.09.23-1", "generated_at": "old"})
+    )
+    initial = tree(tmp_path, legacy_clock=True)
+    exact = tree(tmp_path)
+    (tmp_path / "version.json").write_bytes(
+        encoded({"version": "2026.09.24-1", "generated_at": "new"})
+    )
+    assert initial == tree(tmp_path, legacy_clock=True)
+    assert exact != tree(tmp_path)
+    (tmp_path / "version.json").write_bytes(
+        encoded(
+            {
+                "version": "2026.09.24-1",
+                "generated_at": "new",
+                "extra": "kept",
+            }
+        )
+    )
+    assert initial != tree(tmp_path, legacy_clock=True)
 
 
 def test_boundary_ignores_paths_outside_the_allowlist(tmp_path):

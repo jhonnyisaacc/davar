@@ -91,12 +91,12 @@ def tree(path: Path, *, legacy_clock=False):
             continue
         name = file.relative_to(path).as_posix()
         data = file.read_bytes()
-        if legacy_clock and name == "manifest.json":
-            manifest = read_json(file)
+        if legacy_clock and name in ("manifest.json", "version.json"):
+            payload = read_json(file)
             # Exactly the two pre-existing clock-derived values are excluded.
             for key in ("version", "generated_at"):
-                manifest.pop(key)
-            data = encoded(manifest)
+                payload.pop(key)
+            data = encoded(payload)
         result[name] = digest(data)
     return result
 
