@@ -1,0 +1,153 @@
+# Publish mobile to EAS from main only.
+# Push to main (mobile/**) and workflow_dispatch. Never pull_request.
+# JS-only diffs run `eas update` and skip build/submit.
+# Native paths, runtimeVersion, app version, ios/, android/, or eas.json
+# run `eas build` then `eas submit` and skip the OTA update.
+# Requires the repository secret EXPO_TOKEN. No token is stored in this file.
+
+name: Mobile EAS
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "mobile/**"
+  workflow_dispatch:
+
+concurrency:
+  group: mobile-eas-main
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: mobile-eas
+    runs-on: ubuntu-latest
+    env:
+      EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+      BEFORE_SHA: ${{ github.event.before }}
+      AFTER_SHA: ${{ github.sha }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Require main and EXPO_TOKEN, then classify the diff
+        id: classify
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [ "${GITHUB_REF}" != "refs/heads/main" ]; then
+            echo "::error::EAS commands run only on refs/heads/main (current: ${GITHUB_REF}). No Expo command was called."
+            exit 1
+          fi
+
+          if [ -z "${EXPO_TOKEN:-}" ]; then
+            echo "::error::Repository secret EXPO_TOKEN is missing. Create an Expo access token and save it as the GitHub repository secret EXPO_TOKEN. Do not commit the token."
+            exit 1
+          fi
+
+          if [ "${GITHUB_EVENT_NAME}" = "push" ]; then
+            before="${BEFORE_SHA}"
+            after="${AFTER_SHA}"
+            if [ "${before}" = "0000000000000000000000000000000000000000" ]; then
+              before="$(git rev-parse "${after}^")"
+            fi
+          else
+            before="$(git rev-parse HEAD^)"
+            after="$(git rev-parse HEAD)"
+          fi
+
+          echo "Classifying ${before}..${after}"
+          files=()
+          while IFS= read -r line; do
+            if [ -n "${line}" ]; then
+              files+=("${line}")
+            fi
+          done < <(git diff --name-only "${before}" "${after}" -- mobile)
+
+          native=0
+          js=0
+          for file in "${files[@]+"${files[@]}"}"; do
+            case "${file}" in
+              mobile/ios/*|mobile/android/*|mobile/eas.json)
+                native=1
+                ;;
+              mobile/app.json|mobile/package.json|mobile/app.config.js|mobile/app.config.ts)
+                js=1
+                ;;
+              *.m|*.mm|*.swift|*.kt|*.kts|*.java|*.gradle|*.pbxproj)
+                native=1
+                ;;
+              *.md)
+                ;;
+              mobile/*)
+                js=1
+                ;;
+            esac
+            base="$(basename "${file}")"
+            case "${base}" in
+              Podfile|Podfile.lock|AndroidManifest.xml|Info.plist|Expo.plist)
+                native=1
+                ;;
+            esac
+          done
+
+          if git diff -U0 "${before}" "${after}" -- mobile/app.json mobile/app.config.js mobile/app.config.ts | grep -Eq '^[+-][[:space:]]*"(version|runtimeVersion)"[[:space:]]*:'; then
+            native=1
+          fi
+          if git diff -U0 "${before}" "${after}" -- mobile/package.json | grep -Eq '^[+-][[:space:]]*"version"[[:space:]]*:'; then
+            native=1
+          fi
+
+          if [ "${native}" -eq 1 ]; then
+            mode="build"
+          elif [ "${js}" -eq 1 ]; then
+            mode="update"
+          else
+            mode="skip"
+          fi
+
+          echo "Changed mobile files: ${files[*]:-none}"
+          echo "Selected mode: ${mode}"
+          echo "mode=${mode}" >> "${GITHUB_OUTPUT}"
+
+      - name: Setup Bun
+        if: steps.classify.outputs.mode != 'skip'
+        uses: oven-sh/setup-bun@v1
+
+      - name: Setup Expo and EAS
+        if: steps.classify.outputs.mode != 'skip'
+        uses: expo/expo-github-action@v8
+        with:
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Install mobile dependencies
+        if: steps.classify.outputs.mode != 'skip'
+        working-directory: mobile
+        run: bun install --frozen-lockfile
+
+      - name: Publish an OTA update
+        if: steps.classify.outputs.mode == 'update'
+        working-directory: mobile
+        run: |
+          echo "JS-only mobile diff. Running eas update. Skipping eas build and eas submit."
+          eas update --channel production --auto --non-interactive
+
+      - name: Build and submit a native binary
+        if: steps.classify.outputs.mode == 'build'
+        working-directory: mobile
+        run: |
+          echo "Native, runtimeVersion, app version, ios/, android/, or eas.json diff. Running eas build and eas submit. Skipping eas update."
+          eas build --platform all --profile production --non-interactive --wait
+          eas submit --platform all --profile production --latest --non-interactive
+
+      - name: Skip both Expo commands
+        if: steps.classify.outputs.mode == 'skip'
+        run: echo "No JS or native mobile change in this diff. Skipping eas update, eas build, and eas submit."
