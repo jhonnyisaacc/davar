@@ -20,6 +20,40 @@ COLLECTIONS = {
     "concepts": "concept",
     "relations": "relation",
 }
+SOURCES = {
+    "shaul": {
+        "adapter": "shaul",
+        "owner": "shaul",
+        "profile_group": "shaul",
+        "cli_flag": "--shaul-root",
+        "alias_namespace": "shaul",
+        "verified_mappings": "shaul_verified",
+        "path_prefixes": ("content/", "knowledge/"),
+        "record_kind": "knowledge_record",
+    }
+}
+
+
+def cli_dest(flag: str) -> str:
+    return flag.removeprefix("--").replace("-", "_")
+
+
+def resolve_roots(source_roots: dict) -> dict[str, Path]:
+    by_dest = {cli_dest(row["cli_flag"]): kind for kind, row in SOURCES.items()}
+    resolved = {}
+    for name, path in source_roots.items():
+        if name not in by_dest:
+            raise TypeError(f"Unexpected source root: {name}")
+        if path is not None:
+            resolved[by_dest[name]] = path
+    return resolved
+
+
+def source_for_owner(owner: str):
+    for kind, row in SOURCES.items():
+        if row["owner"] == owner:
+            return kind, row
+    return None, None
 
 
 def encoded(value: object) -> bytes:
@@ -46,23 +80,28 @@ def contained(root: Path, relative: str) -> Path:
     return path
 
 
-def pinned_inputs(root: Path, shaul_root: Path | None = None, manifest_path=None):
+def pinned_inputs(root: Path, manifest_path=None, **source_roots):
     manifest = read_json(
         contained(root, manifest_path or "data/knowledge/pilot-inputs.json")
     )
     from .validate import Validator
 
     Validator(root).schema("input-manifest", manifest)
+    roots = resolve_roots(source_roots)
     blobs = {}
     for item in manifest["inputs"]:
         if item["id"] in blobs:
             raise ValueError("Duplicate input ID")
-        if item["owner"] == "shaul":
-            if not item["path"].startswith(("content/", "knowledge/")):
-                raise ValueError("Only public Shaul notes and knowledge are allowed")
+        kind, row = source_for_owner(item["owner"])
+        if row is not None:
+            if not item["path"].startswith(row["path_prefixes"]):
+                raise ValueError(
+                    f"Only public {row['owner'].title()} notes and knowledge are allowed"
+                )
+            external = roots.get(kind)
             path = (
-                contained(shaul_root, item["path"])
-                if shaul_root
+                contained(external, item["path"])
+                if external is not None
                 else contained(root, item["fixture_path"])
             )
         else:
@@ -117,10 +156,11 @@ def normalize_tag(tag: str, aliases: list, mappings: dict) -> dict:
     parsed = match or chapter_match
     if parsed is None:
         return {"raw": tag, "status": "unresolved", "reason": "unsupported_tag"}
+    namespaces = {row["alias_namespace"] for row in SOURCES.values()}
     books = {
         x["book_id"]
         for x in aliases
-        if x["namespace"] == "shaul" and x["alias"] == parsed[1]
+        if x["namespace"] in namespaces and x["alias"] == parsed[1]
     }
     if len(books) != 1:
         return {
@@ -133,9 +173,18 @@ def normalize_tag(tag: str, aliases: list, mappings: dict) -> dict:
         match and (int(match[3]) < 1 or (match[4] and int(match[4]) < int(match[3])))
     ):
         raise ValueError(f"Invalid reference: {tag}")
-    verified = next(
-        (x["reference"] for x in mappings["shaul_verified"] if x["tag"] == tag), None
-    )
+    verified = None
+    for row in SOURCES.values():
+        verified = next(
+            (
+                x["reference"]
+                for x in mappings[row["verified_mappings"]]
+                if x["tag"] == tag
+            ),
+            None,
+        )
+        if verified:
+            break
     if verified:
         return {"raw": tag, "status": "mapped", "reference": verified}
     return {
