@@ -14,13 +14,46 @@ Author: Davar Project
 import json
 from pathlib import Path
 
-# Book metadata lives in data/tth/books.json so another language can read it.
+from scripts.books import book_by_tth_code
+
+# Pipeline fields live in data/tth/books.json. Names and codes load from
+# data/knowledge/registries/books.json and must match the copies in this file.
 # BOOKS_INFO and DOCX_BOOKS keep the attribute names callers already use.
 _BOOKS_PATH = Path(__file__).resolve().parents[2] / "data" / "tth" / "books.json"
+_NAME_FIELDS = ("tth_name", "hebrew_name", "english_name", "spanish_name", "book_code")
 with _BOOKS_PATH.open(encoding="utf-8") as _books_file:
     _BOOKS = json.load(_books_file)
 
-BOOKS_INFO = _BOOKS["BOOKS_INFO"]
+
+def _books_info(file_books: dict) -> dict:
+    composed = {}
+    for code, info in file_books.items():
+        record = book_by_tth_code(code)
+        names = record["tth"]
+        for field in _NAME_FIELDS:
+            registry_value = names[field]
+            file_value = info.get(field)
+            if file_value != registry_value:
+                raise ValueError(
+                    f"{code}.{field} in data/tth/books.json is {file_value!r}; "
+                    f"registry has {registry_value!r}"
+                )
+        if info.get("section") != record["section"]:
+            raise ValueError(
+                f"{code}.section in data/tth/books.json is {info.get('section')!r}; "
+                f"registry has {record['section']!r}"
+            )
+        entry = dict(info)
+        entry["tth_name"] = names["tth_name"]
+        entry["hebrew_name"] = names["hebrew_name"]
+        entry["english_name"] = names["english_name"]
+        entry["spanish_name"] = names["spanish_name"]
+        entry["book_code"] = names["book_code"]
+        composed[code] = entry
+    return composed
+
+
+BOOKS_INFO = _books_info(_BOOKS["BOOKS_INFO"])
 DOCX_BOOKS = _BOOKS["DOCX_BOOKS"]
 
 # Hebrew terms dictionary

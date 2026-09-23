@@ -2,331 +2,2206 @@
   {
     "id": "genesis",
     "order": 1,
-    "name": "Genesis"
+    "name": "Genesis",
+    "section": "torah",
+    "chapters": 50,
+    "hebrew_name": "בראשית",
+    "hebrew_transliteration": "Bereshit",
+    "spanish_name": "Génesis",
+    "usfx": "GEN",
+    "ts2009": {
+      "number": 1,
+      "anglicized": "bereshit",
+      "hebrew": "בראשית",
+      "english": "Genesis",
+      "spanish": "Génesis",
+      "section": "torah",
+      "expected_chapters": 50
+    },
+    "oe": "genesis",
+    "dict": {
+      "normalized": "gen",
+      "book_id": "genesis",
+      "es": "Génesis",
+      "en": "Genesis",
+      "ts2009": "bereshit_genesis",
+      "tth": "bereshit",
+      "morphhb": "Gen.xml"
+    },
+    "dss": {
+      "xml": "Genesis",
+      "name": "Genesis",
+      "index": 13
+    },
+    "tth": {
+      "code": "bereshit",
+      "tth_name": "Bereshit",
+      "hebrew_name": "בראשית",
+      "english_name": "Genesis",
+      "spanish_name": "Génesis",
+      "book_code": "genesis"
+    }
   },
   {
     "id": "exodus",
     "order": 2,
-    "name": "Exodus"
+    "name": "Exodus",
+    "section": "torah",
+    "chapters": 40,
+    "hebrew_name": "שמות",
+    "hebrew_transliteration": "Shemot",
+    "spanish_name": "Éxodo",
+    "usfx": "EXO",
+    "ts2009": {
+      "number": 2,
+      "anglicized": "shemoth",
+      "hebrew": "שמות",
+      "english": "Exodus",
+      "spanish": "Éxodo",
+      "section": "torah",
+      "expected_chapters": 40
+    },
+    "oe": "exodus",
+    "dict": {
+      "normalized": "exod",
+      "book_id": "exodus",
+      "es": "Éxodo",
+      "en": "Exodus",
+      "ts2009": "shemoth_exodus",
+      "tth": "shemot",
+      "morphhb": "Exod.xml"
+    },
+    "dss": {
+      "xml": "Exodus",
+      "name": "Exodus",
+      "index": 10
+    },
+    "tth": {
+      "code": "shemot",
+      "tth_name": "Shemot",
+      "hebrew_name": "שמות",
+      "english_name": "Exodus",
+      "spanish_name": "Éxodo",
+      "book_code": "exodus"
+    }
   },
   {
     "id": "leviticus",
     "order": 3,
-    "name": "Leviticus"
+    "name": "Leviticus",
+    "section": "torah",
+    "chapters": 27,
+    "hebrew_name": "ויקרא",
+    "hebrew_transliteration": "Vaikra",
+    "spanish_name": "Levítico",
+    "usfx": "LEV",
+    "ts2009": {
+      "number": 3,
+      "anglicized": "wayyiqra",
+      "hebrew": "ויקרא",
+      "english": "Leviticus",
+      "spanish": "Levítico",
+      "section": "torah",
+      "expected_chapters": 27
+    },
+    "oe": "leviticus",
+    "dict": {
+      "normalized": "lev",
+      "book_id": "leviticus",
+      "es": "Levítico",
+      "en": "Leviticus",
+      "ts2009": "wayyiqra_leviticus",
+      "tth": "vaikra",
+      "morphhb": "Lev.xml"
+    },
+    "dss": {
+      "xml": "Leviticus",
+      "name": "Leviticus",
+      "index": 25
+    },
+    "tth": {
+      "code": "vaikra",
+      "tth_name": "Vaikra",
+      "hebrew_name": "ויקרא",
+      "english_name": "Leviticus",
+      "spanish_name": "Levítico",
+      "book_code": "leviticus"
+    }
   },
   {
     "id": "numbers",
     "order": 4,
-    "name": "Numbers"
+    "name": "Numbers",
+    "section": "torah",
+    "chapters": 36,
+    "hebrew_name": "במדבר",
+    "hebrew_transliteration": "Bamidbar",
+    "spanish_name": "Números",
+    "usfx": "NUM",
+    "ts2009": {
+      "number": 4,
+      "anglicized": "bemidbar",
+      "hebrew": "במדבר",
+      "english": "Numbers",
+      "spanish": "Números",
+      "section": "torah",
+      "expected_chapters": 36
+    },
+    "oe": "numbers",
+    "dict": {
+      "normalized": "num",
+      "book_id": "numbers",
+      "es": "Números",
+      "en": "Numbers",
+      "ts2009": "bemidbar_numbers",
+      "tth": "bamidbar",
+      "morphhb": "Num.xml"
+    },
+    "dss": {
+      "xml": "Numbers",
+      "name": "Numbers",
+      "index": 29
+    },
+    "tth": {
+      "code": "bamidbar",
+      "tth_name": "Bamidbar",
+      "hebrew_name": "במדבר",
+      "english_name": "Numbers",
+      "spanish_name": "Números",
+      "book_code": "numbers"
+    }
   },
   {
     "id": "deuteronomy",
     "order": 5,
-    "name": "Deuteronomy"
+    "name": "Deuteronomy",
+    "section": "torah",
+    "chapters": 34,
+    "hebrew_name": "דברים",
+    "hebrew_transliteration": "Devarim",
+    "spanish_name": "Deuteronomio",
+    "usfx": "DEU",
+    "ts2009": {
+      "number": 5,
+      "anglicized": "debarim",
+      "hebrew": "דברים",
+      "english": "Deuteronomy",
+      "spanish": "Deuteronomio",
+      "section": "torah",
+      "expected_chapters": 34
+    },
+    "oe": "deuteronomy",
+    "dict": {
+      "normalized": "deut",
+      "book_id": "deuteronomy",
+      "es": "Deuteronomio",
+      "en": "Deuteronomy",
+      "ts2009": "debarim_deuteronomy",
+      "tth": "devarim",
+      "morphhb": "Deut.xml"
+    },
+    "dss": {
+      "xml": "Deuteronomy",
+      "name": "Deuteronomy",
+      "index": 8
+    },
+    "tth": {
+      "code": "devarim",
+      "tth_name": "Devarim",
+      "hebrew_name": "דברים",
+      "english_name": "Deuteronomy",
+      "spanish_name": "Deuteronomio",
+      "book_code": "deuteronomy"
+    }
   },
   {
     "id": "joshua",
     "order": 6,
-    "name": "Joshua"
+    "name": "Joshua",
+    "section": "neviim",
+    "chapters": 24,
+    "hebrew_name": "יהושע",
+    "hebrew_transliteration": "Yehoshua",
+    "spanish_name": "Josué",
+    "usfx": "JOS",
+    "ts2009": {
+      "number": 6,
+      "anglicized": "yehoshua",
+      "hebrew": "יהושע",
+      "english": "Joshua",
+      "spanish": "Josué",
+      "section": "neviim",
+      "expected_chapters": 24
+    },
+    "oe": "joshua",
+    "dict": {
+      "normalized": "josh",
+      "book_id": "joshua",
+      "es": "Josué",
+      "en": "Joshua",
+      "ts2009": "yehoshua_joshua",
+      "tth": "iehosua",
+      "morphhb": "Josh.xml"
+    },
+    "dss": {
+      "xml": "Joshua",
+      "name": "Joshua",
+      "index": 22
+    },
+    "tth": {
+      "code": "iehoshua",
+      "tth_name": "Iehoshúa",
+      "hebrew_name": "יהושע",
+      "english_name": "Joshua",
+      "spanish_name": "Josué",
+      "book_code": "joshua"
+    }
   },
   {
     "id": "judges",
     "order": 7,
-    "name": "Judges"
+    "name": "Judges",
+    "section": "neviim",
+    "chapters": 21,
+    "hebrew_name": "שופטים",
+    "hebrew_transliteration": "Shoftim",
+    "spanish_name": "Jueces",
+    "usfx": "JDG",
+    "ts2009": {
+      "number": 7,
+      "anglicized": "shophetim",
+      "hebrew": "שופטים",
+      "english": "Judges",
+      "spanish": "Jueces",
+      "section": "neviim",
+      "expected_chapters": 21
+    },
+    "oe": "judges",
+    "dict": {
+      "normalized": "judg",
+      "book_id": "judges",
+      "es": "Jueces",
+      "en": "Judges",
+      "ts2009": "shophetim_judges",
+      "tth": "shoftim",
+      "morphhb": "Judg.xml"
+    },
+    "dss": {
+      "xml": "Judges",
+      "name": "Judges",
+      "index": 23
+    },
+    "tth": {
+      "code": "shoftim",
+      "tth_name": "Shoftim",
+      "hebrew_name": "שפטים",
+      "english_name": "Judges",
+      "spanish_name": "Jueces",
+      "book_code": "judges"
+    }
   },
   {
     "id": "samuel1",
     "order": 8,
-    "name": "Samuel1"
+    "name": "Samuel1",
+    "section": "neviim",
+    "chapters": 31,
+    "hebrew_name": "שמואל א",
+    "hebrew_transliteration": "Shemuel Alef",
+    "spanish_name": "Samuel 1",
+    "usfx": "1SA",
+    "ts2009": {
+      "number": 9,
+      "anglicized": "samuel_1",
+      "hebrew": "שמואל א",
+      "english": "samuel_1",
+      "spanish": "1 Samuel",
+      "section": "neviim",
+      "expected_chapters": 31
+    },
+    "oe": "isamuel",
+    "dict": {
+      "normalized": "1sam",
+      "book_id": "samuel_1",
+      "es": "1 Samuel",
+      "en": "1 Samuel",
+      "ts2009": "shemuel_aleph_1_samuel",
+      "tth": "shemuel_alef",
+      "morphhb": "1Sam.xml"
+    },
+    "dss": {
+      "xml": "1Samuel",
+      "name": "1 Samuel",
+      "index": 2
+    },
+    "tth": {
+      "code": "shemuel_alef",
+      "tth_name": "Shemuel Alef",
+      "hebrew_name": "א שמואל",
+      "english_name": "1 Samuel",
+      "spanish_name": "1 Samuel",
+      "book_code": "1_samuel"
+    }
   },
   {
     "id": "samuel2",
     "order": 9,
-    "name": "Samuel2"
+    "name": "Samuel2",
+    "section": "neviim",
+    "chapters": 24,
+    "hebrew_name": "שמואל ב",
+    "hebrew_transliteration": "Shemuel Bet",
+    "spanish_name": "Samuel 2",
+    "usfx": "2SA",
+    "ts2009": {
+      "number": 10,
+      "anglicized": "samuel_2",
+      "hebrew": "שמואל ב",
+      "english": "samuel_2",
+      "spanish": "2 Samuel",
+      "section": "neviim",
+      "expected_chapters": 24
+    },
+    "oe": "iisamuel",
+    "dict": {
+      "normalized": "2sam",
+      "book_id": "samuel_2",
+      "es": "2 Samuel",
+      "en": "2 Samuel",
+      "ts2009": "shemuel_bet_2_samuel",
+      "tth": "shemuel_bet",
+      "morphhb": "2Sam.xml"
+    },
+    "dss": {
+      "xml": "2Samuel",
+      "name": "2 Samuel",
+      "index": 3
+    },
+    "tth": {
+      "code": "shemuel_bet",
+      "tth_name": "Shemuel Bet",
+      "hebrew_name": "ב שמואל",
+      "english_name": "2 Samuel",
+      "spanish_name": "2 Samuel",
+      "book_code": "2_samuel"
+    }
   },
   {
     "id": "kings1",
     "order": 10,
-    "name": "Kings1"
+    "name": "Kings1",
+    "section": "neviim",
+    "chapters": 22,
+    "hebrew_name": "מלכים א",
+    "hebrew_transliteration": "Melajim Alef",
+    "spanish_name": "Reyes 1",
+    "usfx": "1KI",
+    "ts2009": {
+      "number": 11,
+      "anglicized": "kings_1",
+      "hebrew": "מלכים א",
+      "english": "kings_1",
+      "spanish": "1 Reyes",
+      "section": "neviim",
+      "expected_chapters": 22
+    },
+    "oe": "ikings",
+    "dict": {
+      "normalized": "1kgs",
+      "book_id": "kings_1",
+      "es": "1 Reyes",
+      "en": "1 Kings",
+      "ts2009": "melakim_aleph_1_kings",
+      "tth": "melajim_alef",
+      "morphhb": "1Kgs.xml"
+    },
+    "dss": {
+      "xml": "1Kings",
+      "name": "1 Kings",
+      "index": 0
+    },
+    "tth": {
+      "code": "melajim_alef",
+      "tth_name": "Melajim Alef",
+      "hebrew_name": "א מלכים",
+      "english_name": "1 Kings",
+      "spanish_name": "1 Reyes",
+      "book_code": "1_kings"
+    }
   },
   {
     "id": "kings2",
     "order": 11,
-    "name": "Kings2"
+    "name": "Kings2",
+    "section": "neviim",
+    "chapters": 25,
+    "hebrew_name": "מלכים ב",
+    "hebrew_transliteration": "Melajim Bet",
+    "spanish_name": "Reyes 2",
+    "usfx": "2KI",
+    "ts2009": {
+      "number": 12,
+      "anglicized": "kings_2",
+      "hebrew": "מלכים ב",
+      "english": "kings_2",
+      "spanish": "2 Reyes",
+      "section": "neviim",
+      "expected_chapters": 25
+    },
+    "oe": "iikings",
+    "dict": {
+      "normalized": "2kgs",
+      "book_id": "kings_2",
+      "es": "2 Reyes",
+      "en": "2 Kings",
+      "ts2009": "melakim_bet_2_kings",
+      "tth": "melajim_bet",
+      "morphhb": "2Kgs.xml"
+    },
+    "dss": {
+      "xml": "2Kings",
+      "name": "2 Kings",
+      "index": 1
+    },
+    "tth": {
+      "code": "melajim_bet",
+      "tth_name": "Melajim Bet",
+      "hebrew_name": "ב מלכים",
+      "english_name": "2 Kings",
+      "spanish_name": "2 Reyes",
+      "book_code": "2_kings"
+    }
   },
   {
     "id": "isaiah",
     "order": 12,
-    "name": "Isaiah"
+    "name": "Isaiah",
+    "section": "neviim",
+    "chapters": 66,
+    "hebrew_name": "ישעיהו",
+    "hebrew_transliteration": "Yeshaiahu",
+    "spanish_name": "Isaías",
+    "usfx": "ISA",
+    "ts2009": {
+      "number": 23,
+      "anglicized": "yeshayahu",
+      "hebrew": "ישעיהו",
+      "english": "Isaiah",
+      "spanish": "Isaías",
+      "section": "neviim",
+      "expected_chapters": 66
+    },
+    "oe": "isaiah",
+    "dict": {
+      "normalized": "isa",
+      "book_id": "isaiah",
+      "es": "Isaías",
+      "en": "Isaiah",
+      "ts2009": "yeshayahu_isaiah",
+      "tth": "ieshaiahu",
+      "morphhb": "Isa.xml"
+    },
+    "dss": {
+      "xml": "Isaiah",
+      "name": "Isaiah",
+      "index": 17
+    },
+    "tth": {
+      "code": "ieshaiahu",
+      "tth_name": "Ieshaiáhu",
+      "hebrew_name": "ישעיהו",
+      "english_name": "Isaiah",
+      "spanish_name": "Isaías",
+      "book_code": "isaiah"
+    }
   },
   {
     "id": "jeremiah",
     "order": 13,
-    "name": "Jeremiah"
+    "name": "Jeremiah",
+    "section": "neviim",
+    "chapters": 52,
+    "hebrew_name": "ירמיהו",
+    "hebrew_transliteration": "Yrmeiahu",
+    "spanish_name": "Jeremías",
+    "usfx": "JER",
+    "ts2009": {
+      "number": 24,
+      "anglicized": "yirmeyahu",
+      "hebrew": "ירמיהו",
+      "english": "Jeremiah",
+      "spanish": "Jeremías",
+      "section": "neviim",
+      "expected_chapters": 52
+    },
+    "oe": "jeremiah",
+    "dict": {
+      "normalized": "jer",
+      "book_id": "jeremiah",
+      "es": "Jeremías",
+      "en": "Jeremiah",
+      "ts2009": "yirmeyahu_jeremiah",
+      "tth": "irmeiahu",
+      "morphhb": "Jer.xml"
+    },
+    "dss": {
+      "xml": "Jeremiah",
+      "name": "Jeremiah",
+      "index": 18
+    },
+    "tth": {
+      "code": "irmeiahu",
+      "tth_name": "Irmeiáhu",
+      "hebrew_name": "ירמיהו",
+      "english_name": "Jeremiah",
+      "spanish_name": "Jeremías",
+      "book_code": "jeremiah"
+    }
   },
   {
     "id": "ezekiel",
     "order": 14,
-    "name": "Ezekiel"
+    "name": "Ezekiel",
+    "section": "neviim",
+    "chapters": 48,
+    "hebrew_name": "יחזקאל",
+    "hebrew_transliteration": "Yejezkel",
+    "spanish_name": "Ezequiel",
+    "usfx": "EZK",
+    "ts2009": {
+      "number": 26,
+      "anglicized": "yehezqel",
+      "hebrew": "יחזקאל",
+      "english": "Ezekiel",
+      "spanish": "Ezequiel",
+      "section": "neviim",
+      "expected_chapters": 48
+    },
+    "oe": "ezekiel",
+    "dict": {
+      "normalized": "ezek",
+      "book_id": "ezekiel",
+      "es": "Ezequiel",
+      "en": "Ezekiel",
+      "ts2009": "yehezqel_ezekiel",
+      "tth": "iejezkel",
+      "morphhb": "Ezek.xml"
+    },
+    "dss": {
+      "xml": "Ezekiel",
+      "name": "Ezekiel",
+      "index": 11
+    },
+    "tth": {
+      "code": "iejezkel",
+      "tth_name": "Iejezkel",
+      "hebrew_name": "יחזקאל",
+      "english_name": "Ezekiel",
+      "spanish_name": "Ezequiel",
+      "book_code": "ezekiel"
+    }
   },
   {
     "id": "hosea",
     "order": 15,
-    "name": "Hosea"
+    "name": "Hosea",
+    "section": "neviim",
+    "chapters": 14,
+    "hebrew_name": "הושע",
+    "hebrew_transliteration": "Hoshea",
+    "spanish_name": "Oseas",
+    "usfx": "HOS",
+    "ts2009": {
+      "number": 28,
+      "anglicized": "hosea",
+      "hebrew": "הושע",
+      "english": "Hosea",
+      "spanish": "Oseas",
+      "section": "neviim",
+      "expected_chapters": 14
+    },
+    "oe": "hosea",
+    "dict": {
+      "normalized": "hos",
+      "book_id": "hosea",
+      "es": "Oseas",
+      "en": "Hosea",
+      "ts2009": "hoshea_hosea",
+      "tth": "hoshea",
+      "morphhb": "Hos.xml"
+    },
+    "dss": {
+      "xml": "Hosea",
+      "name": "Hosea",
+      "index": 16
+    },
+    "tth": {
+      "code": "hoshea",
+      "tth_name": "Hoshea",
+      "hebrew_name": "הושע",
+      "english_name": "Hosea",
+      "spanish_name": "Oseas",
+      "book_code": "hosea"
+    }
   },
   {
     "id": "joel",
     "order": 16,
-    "name": "Joel"
+    "name": "Joel",
+    "section": "neviim",
+    "chapters": 4,
+    "hebrew_name": "יואל",
+    "hebrew_transliteration": "Yoel",
+    "spanish_name": "Joel",
+    "usfx": "JOL",
+    "ts2009": {
+      "number": 29,
+      "anglicized": "yoel",
+      "hebrew": "יואל",
+      "english": "Joel",
+      "spanish": "Joel",
+      "section": "neviim",
+      "expected_chapters": 3
+    },
+    "oe": "joel",
+    "dict": {
+      "normalized": "joel",
+      "book_id": "joel",
+      "es": "Joel",
+      "en": "Joel",
+      "ts2009": "yoel_joel",
+      "tth": "ioel",
+      "morphhb": "Joel.xml"
+    },
+    "dss": {
+      "xml": "Joel",
+      "name": "Joel",
+      "index": 20
+    },
+    "tth": {
+      "code": "ioel",
+      "tth_name": "Ioel",
+      "hebrew_name": "יואל",
+      "english_name": "Joel",
+      "spanish_name": "Joel",
+      "book_code": "joel"
+    }
   },
   {
     "id": "amos",
     "order": 17,
-    "name": "Amos"
+    "name": "Amos",
+    "section": "neviim",
+    "chapters": 9,
+    "hebrew_name": "עמוס",
+    "hebrew_transliteration": "Amos",
+    "spanish_name": "Amós",
+    "usfx": "AMO",
+    "ts2009": {
+      "number": 30,
+      "anglicized": "amos",
+      "hebrew": "עמוס",
+      "english": "Amos",
+      "spanish": "Amós",
+      "section": "neviim",
+      "expected_chapters": 9
+    },
+    "oe": "amos",
+    "dict": {
+      "normalized": "amos",
+      "book_id": "amos",
+      "es": "Amós",
+      "en": "Amos",
+      "ts2009": "amos",
+      "tth": "amos",
+      "morphhb": "Amos.xml"
+    },
+    "dss": {
+      "xml": "Amos",
+      "name": "Amos",
+      "index": 5
+    },
+    "tth": {
+      "code": "amos",
+      "tth_name": "Amós",
+      "hebrew_name": "עמוס",
+      "english_name": "Amos",
+      "spanish_name": "Amós",
+      "book_code": "amos"
+    }
   },
   {
     "id": "obadiah",
     "order": 18,
-    "name": "Obadiah"
+    "name": "Obadiah",
+    "section": "neviim",
+    "chapters": 1,
+    "hebrew_name": "עובדיה",
+    "hebrew_transliteration": "Ovadiah",
+    "spanish_name": "Abdías",
+    "usfx": "OBA",
+    "ts2009": {
+      "number": 31,
+      "anglicized": "obadyah",
+      "hebrew": "עובדיה",
+      "english": "Obadiah",
+      "spanish": "Abdías",
+      "section": "neviim",
+      "expected_chapters": 1
+    },
+    "oe": "obadiah",
+    "dict": {
+      "normalized": "obad",
+      "book_id": "obadiah",
+      "es": "Abdías",
+      "en": "Obadiah",
+      "ts2009": "obadyah_obadiah",
+      "tth": null,
+      "morphhb": "Obad.xml"
+    },
+    "dss": {
+      "xml": "Obadiah",
+      "name": "Obadiah",
+      "index": 30
+    }
   },
   {
     "id": "jonah",
     "order": 19,
-    "name": "Jonah"
+    "name": "Jonah",
+    "section": "neviim",
+    "chapters": 4,
+    "hebrew_name": "יונה",
+    "hebrew_transliteration": "Yonah",
+    "spanish_name": "Jonás",
+    "usfx": "JON",
+    "ts2009": {
+      "number": 32,
+      "anglicized": "yonah",
+      "hebrew": "יונה",
+      "english": "Jonah",
+      "spanish": "Jonás",
+      "section": "neviim",
+      "expected_chapters": 4
+    },
+    "oe": "jonah",
+    "dict": {
+      "normalized": "jonah",
+      "book_id": "jonah",
+      "es": "Jonás",
+      "en": "Jonah",
+      "ts2009": "yonah_jonah",
+      "tth": "ionah",
+      "morphhb": "Jonah.xml"
+    },
+    "dss": {
+      "xml": "Jonah",
+      "name": "Jonah",
+      "index": 21
+    },
+    "tth": {
+      "code": "ionah",
+      "tth_name": "Ionah",
+      "hebrew_name": "יונה",
+      "english_name": "Jonah",
+      "spanish_name": "Jonás",
+      "book_code": "jonah"
+    }
   },
   {
     "id": "micah",
     "order": 20,
-    "name": "Micah"
+    "name": "Micah",
+    "section": "neviim",
+    "chapters": 7,
+    "hebrew_name": "מיכה",
+    "hebrew_transliteration": "Mijah",
+    "spanish_name": "Miqueas",
+    "usfx": "MIC",
+    "ts2009": {
+      "number": 33,
+      "anglicized": "micah",
+      "hebrew": "מיכה",
+      "english": "Micah",
+      "spanish": "Miqueas",
+      "section": "neviim",
+      "expected_chapters": 7
+    },
+    "oe": "micah",
+    "dict": {
+      "normalized": "mic",
+      "book_id": "micah",
+      "es": "Miqueas",
+      "en": "Micah",
+      "ts2009": "mikah_micah",
+      "tth": "micah",
+      "morphhb": "Mic.xml"
+    },
+    "dss": {
+      "xml": "Micah",
+      "name": "Micah",
+      "index": 27
+    },
+    "tth": {
+      "code": "micah",
+      "tth_name": "Micah",
+      "hebrew_name": "מיכה",
+      "english_name": "Micah",
+      "spanish_name": "Miqueas",
+      "book_code": "micah"
+    }
   },
   {
     "id": "nahum",
     "order": 21,
-    "name": "Nahum"
+    "name": "Nahum",
+    "section": "neviim",
+    "chapters": 3,
+    "hebrew_name": "נחום",
+    "hebrew_transliteration": "Najum",
+    "spanish_name": "Nahúm",
+    "usfx": "NAM",
+    "ts2009": {
+      "number": 34,
+      "anglicized": "nahum",
+      "hebrew": "נחום",
+      "english": "Nahum",
+      "spanish": "Nahúm",
+      "section": "neviim",
+      "expected_chapters": 3
+    },
+    "oe": "nahum",
+    "dict": {
+      "normalized": "nah",
+      "book_id": "nahum",
+      "es": "Nahúm",
+      "en": "Nahum",
+      "ts2009": "nahum_nahum",
+      "tth": "najum",
+      "morphhb": "Nah.xml"
+    },
+    "dss": {
+      "xml": "Nahum",
+      "name": "Nahum",
+      "index": 28
+    },
+    "tth": {
+      "code": "najum",
+      "tth_name": "Najum",
+      "hebrew_name": "נחום",
+      "english_name": "Nahum",
+      "spanish_name": "Nahúm",
+      "book_code": "nahum"
+    }
   },
   {
     "id": "habakkuk",
     "order": 22,
-    "name": "Habakkuk"
+    "name": "Habakkuk",
+    "section": "neviim",
+    "chapters": 3,
+    "hebrew_name": "חבקוק",
+    "hebrew_transliteration": "Jabaquq",
+    "spanish_name": "Habacuc",
+    "usfx": "HAB",
+    "ts2009": {
+      "number": 35,
+      "anglicized": "habakkuk",
+      "hebrew": "חבקוק",
+      "english": "Habakkuk",
+      "spanish": "Habacuc",
+      "section": "neviim",
+      "expected_chapters": 3
+    },
+    "oe": "habakkuk",
+    "dict": {
+      "normalized": "hab",
+      "book_id": "habakkuk",
+      "es": "Habacuc",
+      "en": "Habakkuk",
+      "ts2009": "habaqqugq_habakkuk",
+      "tth": "jabakuk",
+      "morphhb": "Hab.xml"
+    },
+    "dss": {
+      "xml": "Habakkuk",
+      "name": "Habakkuk",
+      "index": 14
+    },
+    "tth": {
+      "code": "jabakuk",
+      "tth_name": "Jabakuk",
+      "hebrew_name": "חבקוק",
+      "english_name": "Habakkuk",
+      "spanish_name": "Habacuc",
+      "book_code": "habakkuk"
+    }
   },
   {
     "id": "zephaniah",
     "order": 23,
-    "name": "Zephaniah"
+    "name": "Zephaniah",
+    "section": "neviim",
+    "chapters": 3,
+    "hebrew_name": "צפניה",
+    "hebrew_transliteration": "Tzufaniah",
+    "spanish_name": "Sofonías",
+    "usfx": "ZEP",
+    "ts2009": {
+      "number": 36,
+      "anglicized": "zephaniah",
+      "hebrew": "צפניה",
+      "english": "Zephaniah",
+      "spanish": "Sofonías",
+      "section": "neviim",
+      "expected_chapters": 3
+    },
+    "oe": "zephaniah",
+    "dict": {
+      "normalized": "zeph",
+      "book_id": "zephaniah",
+      "es": "Sofonías",
+      "en": "Zephaniah",
+      "ts2009": "tsephanyah_zephaniah",
+      "tth": "tzefaniah",
+      "morphhb": "Zeph.xml"
+    },
+    "dss": {
+      "xml": "Zephaniah",
+      "name": "Zephaniah",
+      "index": 35
+    },
+    "tth": {
+      "code": "tzefaniah",
+      "tth_name": "Tzefaniah",
+      "hebrew_name": "צפניה",
+      "english_name": "Zephaniah",
+      "spanish_name": "Sofonías",
+      "book_code": "zephaniah"
+    }
   },
   {
     "id": "haggai",
     "order": 24,
-    "name": "Haggai"
+    "name": "Haggai",
+    "section": "neviim",
+    "chapters": 2,
+    "hebrew_name": "חגי",
+    "hebrew_transliteration": "Jagai",
+    "spanish_name": "Hageo",
+    "usfx": "HAG",
+    "ts2009": {
+      "number": 37,
+      "anglicized": "haggai",
+      "hebrew": "חגי",
+      "english": "Haggai",
+      "spanish": "Hageo",
+      "section": "neviim",
+      "expected_chapters": 2
+    },
+    "oe": "haggai",
+    "dict": {
+      "normalized": "hag",
+      "book_id": "haggai",
+      "es": "Hageo",
+      "en": "Haggai",
+      "ts2009": "haggai_haggai",
+      "tth": "jagai",
+      "morphhb": "Hag.xml"
+    },
+    "dss": {
+      "xml": "Haggai",
+      "name": "Haggai",
+      "index": 15
+    },
+    "tth": {
+      "code": "jagai",
+      "tth_name": "Jagai",
+      "hebrew_name": "חגי",
+      "english_name": "Haggai",
+      "spanish_name": "Hageo",
+      "book_code": "haggai"
+    }
   },
   {
     "id": "zechariah",
     "order": 25,
-    "name": "Zechariah"
+    "name": "Zechariah",
+    "section": "neviim",
+    "chapters": 14,
+    "hebrew_name": "זכריה",
+    "hebrew_transliteration": "Zejariah",
+    "spanish_name": "Zacarías",
+    "usfx": "ZEC",
+    "ts2009": {
+      "number": 38,
+      "anglicized": "zechariah",
+      "hebrew": "זכריה",
+      "english": "Zechariah",
+      "spanish": "Zacarías",
+      "section": "neviim",
+      "expected_chapters": 14
+    },
+    "oe": "zechariah",
+    "dict": {
+      "normalized": "zech",
+      "book_id": "zechariah",
+      "es": "Zacarías",
+      "en": "Zechariah",
+      "ts2009": "zekaryah_zechariah",
+      "tth": "zejariah",
+      "morphhb": "Zech.xml"
+    },
+    "dss": {
+      "xml": "Zechariah",
+      "name": "Zechariah",
+      "index": 34
+    },
+    "tth": {
+      "code": "zejariah",
+      "tth_name": "Zejariah",
+      "hebrew_name": "זכריה",
+      "english_name": "Zechariah",
+      "spanish_name": "Zacarías",
+      "book_code": "zechariah"
+    }
   },
   {
     "id": "malachi",
     "order": 26,
-    "name": "Malachi"
+    "name": "Malachi",
+    "section": "neviim",
+    "chapters": 3,
+    "hebrew_name": "מלאכי",
+    "hebrew_transliteration": "Malaji",
+    "spanish_name": "Malaquías",
+    "usfx": "MAL",
+    "ts2009": {
+      "number": 39,
+      "anglicized": "malachi",
+      "hebrew": "מלאכי",
+      "english": "Malachi",
+      "spanish": "Malaquías",
+      "section": "neviim",
+      "expected_chapters": 4
+    },
+    "oe": "malachi",
+    "dict": {
+      "normalized": "mal",
+      "book_id": "malachi",
+      "es": "Malaquías",
+      "en": "Malachi",
+      "ts2009": "malaki_malachi",
+      "tth": "malaji",
+      "morphhb": "Mal.xml"
+    },
+    "dss": {
+      "xml": "Malachi",
+      "name": "Malachi",
+      "index": 26
+    },
+    "tth": {
+      "code": "malaji",
+      "tth_name": "Malaji",
+      "hebrew_name": "מלאכי",
+      "english_name": "Malachi",
+      "spanish_name": "Malaquías",
+      "book_code": "malachi"
+    }
   },
   {
     "id": "psalms",
     "order": 27,
-    "name": "Psalms"
+    "name": "Psalms",
+    "section": "ketuvim",
+    "chapters": 150,
+    "hebrew_name": "תהלים",
+    "hebrew_transliteration": "Tehilim",
+    "spanish_name": "Salmos",
+    "usfx": "PSA",
+    "ts2009": {
+      "number": 19,
+      "anglicized": "tehillim",
+      "hebrew": "תהלים",
+      "english": "Psalms",
+      "spanish": "Salmos",
+      "section": "ketuvim",
+      "expected_chapters": 150
+    },
+    "oe": "psalms",
+    "dict": {
+      "normalized": "ps",
+      "book_id": "psalms",
+      "es": "Salmos",
+      "en": "Psalms",
+      "ts2009": "tehillim_psalms",
+      "tth": "tehilim",
+      "morphhb": "Ps.xml"
+    },
+    "dss": {
+      "xml": "Psalms",
+      "name": "Psalms",
+      "index": 32
+    },
+    "tth": {
+      "code": "tehilim",
+      "tth_name": "Tehilim",
+      "hebrew_name": "תהלים",
+      "english_name": "Psalms",
+      "spanish_name": "Salmos",
+      "book_code": "psalms"
+    }
   },
   {
     "id": "proverbs",
     "order": 28,
-    "name": "Proverbs"
+    "name": "Proverbs",
+    "section": "ketuvim",
+    "chapters": 31,
+    "hebrew_name": "משלי",
+    "hebrew_transliteration": "Mishlei",
+    "spanish_name": "Proverbios",
+    "usfx": "PRO",
+    "ts2009": {
+      "number": 20,
+      "anglicized": "mishlei",
+      "hebrew": "משלי",
+      "english": "Proverbs",
+      "spanish": "Proverbios",
+      "section": "ketuvim",
+      "expected_chapters": 31
+    },
+    "oe": "proverbs",
+    "dict": {
+      "normalized": "prov",
+      "book_id": "proverbs",
+      "es": "Proverbios",
+      "en": "Proverbs",
+      "ts2009": "mishle_proverbs",
+      "tth": "mishlei",
+      "morphhb": "Prov.xml"
+    },
+    "dss": {
+      "xml": "Proverbs",
+      "name": "Proverbs",
+      "index": 31
+    },
+    "tth": {
+      "code": "mishlei",
+      "tth_name": "Mishlei",
+      "hebrew_name": "משלי",
+      "english_name": "Proverbs",
+      "spanish_name": "Proverbios",
+      "book_code": "proverbs"
+    }
   },
   {
     "id": "job",
     "order": 29,
-    "name": "Job"
+    "name": "Job",
+    "section": "ketuvim",
+    "chapters": 42,
+    "hebrew_name": "איוב",
+    "hebrew_transliteration": "Iyov",
+    "spanish_name": "Job",
+    "usfx": "JOB",
+    "ts2009": {
+      "number": 18,
+      "anglicized": "iyob",
+      "hebrew": "איוב",
+      "english": "Job",
+      "spanish": "Job",
+      "section": "ketuvim",
+      "expected_chapters": 42
+    },
+    "oe": "job",
+    "dict": {
+      "normalized": "job",
+      "book_id": "job",
+      "es": "Job",
+      "en": "Job",
+      "ts2009": "iyob_job",
+      "tth": null,
+      "morphhb": "Job.xml"
+    },
+    "dss": {
+      "xml": "Job",
+      "name": "Job",
+      "index": 19
+    }
   },
   {
     "id": "songofsolomon",
     "order": 30,
-    "name": "SongOfSolomon"
+    "name": "SongOfSolomon",
+    "section": "ketuvim",
+    "chapters": 8,
+    "hebrew_name": "שיר השירים",
+    "hebrew_transliteration": "Shir Hashirim",
+    "spanish_name": "Cantares",
+    "usfx": "SNG",
+    "ts2009": {
+      "number": 22,
+      "anglicized": "shir_hashirim",
+      "hebrew": "שיר השירים",
+      "english": "Song of Songs",
+      "spanish": "Cantares",
+      "section": "ketuvim",
+      "expected_chapters": 8
+    },
+    "oe": "songofsolomon",
+    "dict": {
+      "normalized": "song",
+      "book_id": "songofsolomon",
+      "es": "Cantares",
+      "en": "Song of Solomon",
+      "ts2009": "shir_hashirim_song_of_songs",
+      "tth": null,
+      "morphhb": "Song.xml"
+    },
+    "dss": {
+      "xml": "Canticles",
+      "name": "Song of Songs",
+      "index": 6
+    },
+    "tth": {
+      "code": "shir_hashirim",
+      "tth_name": "Shir Hashirim",
+      "hebrew_name": "שיר השירים",
+      "english_name": "Song of Songs",
+      "spanish_name": "Cantares",
+      "book_code": "song_of_songs"
+    }
   },
   {
     "id": "ruth",
     "order": 31,
-    "name": "Ruth"
+    "name": "Ruth",
+    "section": "ketuvim",
+    "chapters": 4,
+    "hebrew_name": "רות",
+    "hebrew_transliteration": "Rut",
+    "spanish_name": "Rut",
+    "usfx": "RUT",
+    "ts2009": {
+      "number": 8,
+      "anglicized": "ruth",
+      "hebrew": "רות",
+      "english": "Ruth",
+      "spanish": "Rut",
+      "section": "ketuvim",
+      "expected_chapters": 4
+    },
+    "oe": "ruth",
+    "dict": {
+      "normalized": "ruth",
+      "book_id": "ruth",
+      "es": "Rut",
+      "en": "Ruth",
+      "ts2009": "ruth",
+      "tth": null,
+      "morphhb": "Ruth.xml"
+    },
+    "dss": {
+      "xml": "Ruth",
+      "name": "Ruth",
+      "index": 33
+    }
   },
   {
     "id": "lamentations",
     "order": 32,
-    "name": "Lamentations"
+    "name": "Lamentations",
+    "section": "ketuvim",
+    "chapters": 5,
+    "hebrew_name": "איכה",
+    "hebrew_transliteration": "Eijah",
+    "spanish_name": "Lamentaciones",
+    "usfx": "LAM",
+    "ts2009": {
+      "number": 25,
+      "anglicized": "ekah",
+      "hebrew": "איכה",
+      "english": "Lamentations",
+      "spanish": "Lamentaciones",
+      "section": "ketuvim",
+      "expected_chapters": 5
+    },
+    "oe": "lamentations",
+    "dict": {
+      "normalized": "lam",
+      "book_id": "lamentations",
+      "es": "Lamentaciones",
+      "en": "Lamentations",
+      "ts2009": "ekah_lamentations",
+      "tth": null,
+      "morphhb": "Lam.xml"
+    },
+    "dss": {
+      "xml": "Lamentations",
+      "name": "Lamentations",
+      "index": 24
+    }
   },
   {
     "id": "ecclesiastes",
     "order": 33,
-    "name": "Ecclesiastes"
+    "name": "Ecclesiastes",
+    "section": "ketuvim",
+    "chapters": 12,
+    "hebrew_name": "קהלת",
+    "hebrew_transliteration": "Kohelet",
+    "spanish_name": "Eclesiastés",
+    "usfx": "ECC",
+    "ts2009": {
+      "number": 21,
+      "anglicized": "qoheleth",
+      "hebrew": "קהלת",
+      "english": "Ecclesiastes",
+      "spanish": "Eclesiastés",
+      "section": "ketuvim",
+      "expected_chapters": 12
+    },
+    "oe": "ecclesiastes",
+    "dict": {
+      "normalized": "eccl",
+      "book_id": "ecclesiastes",
+      "es": "Eclesiastés",
+      "en": "Ecclesiastes",
+      "ts2009": "qoheleth_ecclesiastes",
+      "tth": null,
+      "morphhb": "Eccl.xml"
+    },
+    "dss": {
+      "xml": "Ecclesiastes",
+      "name": "Ecclesiastes",
+      "index": 9
+    }
   },
   {
     "id": "esther",
     "order": 34,
-    "name": "Esther"
+    "name": "Esther",
+    "section": "ketuvim",
+    "chapters": 10,
+    "hebrew_name": "אסתר",
+    "hebrew_transliteration": "Ester",
+    "spanish_name": "Ester",
+    "usfx": "EST",
+    "ts2009": {
+      "number": 17,
+      "anglicized": "ester",
+      "hebrew": "אסתר",
+      "english": "Esther",
+      "spanish": "Ester",
+      "section": "ketuvim",
+      "expected_chapters": 10
+    },
+    "oe": "esther",
+    "dict": {
+      "normalized": "esth",
+      "book_id": "esther",
+      "es": "Ester",
+      "en": "Esther",
+      "ts2009": "ester_esther",
+      "tth": null,
+      "morphhb": "Esth.xml"
+    }
   },
   {
     "id": "daniel",
     "order": 35,
-    "name": "Daniel"
+    "name": "Daniel",
+    "section": "ketuvim",
+    "chapters": 12,
+    "hebrew_name": "דניאל",
+    "hebrew_transliteration": "Daniel",
+    "spanish_name": "Daniel",
+    "usfx": "DAN",
+    "ts2009": {
+      "number": 27,
+      "anglicized": "daniel",
+      "hebrew": "דניאל",
+      "english": "Daniel",
+      "spanish": "Daniel",
+      "section": "neviim",
+      "expected_chapters": 12
+    },
+    "oe": "daniel",
+    "dict": {
+      "normalized": "dan",
+      "book_id": "daniel",
+      "es": "Daniel",
+      "en": "Daniel",
+      "ts2009": "daniel_daniel",
+      "tth": null,
+      "morphhb": "Dan.xml"
+    },
+    "dss": {
+      "xml": "Daniel",
+      "name": "Daniel",
+      "index": 7
+    }
   },
   {
     "id": "ezra",
     "order": 36,
-    "name": "Ezra"
+    "name": "Ezra",
+    "section": "ketuvim",
+    "chapters": 10,
+    "hebrew_name": "עזרא",
+    "hebrew_transliteration": "Ezra",
+    "spanish_name": "Esdras",
+    "usfx": "EZR",
+    "ts2009": {
+      "number": 15,
+      "anglicized": "ezra",
+      "hebrew": "עזרא",
+      "english": "Ezra",
+      "spanish": "Esdras",
+      "section": "ketuvim",
+      "expected_chapters": 10
+    },
+    "oe": "ezra",
+    "dict": {
+      "normalized": "ezra",
+      "book_id": "ezra",
+      "es": "Esdras",
+      "en": "Ezra",
+      "ts2009": "ezra",
+      "tth": null,
+      "morphhb": "Ezra.xml"
+    },
+    "dss": {
+      "xml": "Ezra",
+      "name": "Ezra",
+      "index": 12
+    }
   },
   {
     "id": "nehemiah",
     "order": 37,
-    "name": "Nehemiah"
+    "name": "Nehemiah",
+    "section": "ketuvim",
+    "chapters": 13,
+    "hebrew_name": "נחמיה",
+    "hebrew_transliteration": "Nejemiyah",
+    "spanish_name": "Nehemías",
+    "usfx": "NEH",
+    "ts2009": {
+      "number": 16,
+      "anglicized": "nehemyah",
+      "hebrew": "נחמיה",
+      "english": "Nehemiah",
+      "spanish": "Nehemías",
+      "section": "ketuvim",
+      "expected_chapters": 13
+    },
+    "oe": "nehemiah",
+    "dict": {
+      "normalized": "neh",
+      "book_id": "nehemiah",
+      "es": "Nehemías",
+      "en": "Nehemiah",
+      "ts2009": "nehemyah_nehemiah",
+      "tth": null,
+      "morphhb": "Neh.xml"
+    }
   },
   {
     "id": "chronicles1",
     "order": 38,
-    "name": "Chronicles1"
+    "name": "Chronicles1",
+    "section": "ketuvim",
+    "chapters": 29,
+    "hebrew_name": "דברי הימים א",
+    "hebrew_transliteration": "Divrei Hayamim Alef",
+    "spanish_name": "Crónicas 1",
+    "usfx": "1CH",
+    "ts2009": {
+      "number": 13,
+      "anglicized": "chronicles_1",
+      "hebrew": "דברי הימים א",
+      "english": "chronicles_1",
+      "spanish": "1 Crónicas",
+      "section": "ketuvim",
+      "expected_chapters": 29
+    },
+    "oe": "ichronicles",
+    "dict": {
+      "normalized": "1chr",
+      "book_id": "chronicles_1",
+      "es": "1 Crónicas",
+      "en": "1 Chronicles",
+      "ts2009": "dibre_hayamim_aleph_1_chronicles",
+      "tth": null,
+      "morphhb": "1Chr.xml"
+    }
   },
   {
     "id": "chronicles2",
     "order": 39,
-    "name": "Chronicles2"
+    "name": "Chronicles2",
+    "section": "ketuvim",
+    "chapters": 36,
+    "hebrew_name": "דברי הימים ב",
+    "hebrew_transliteration": "Divrei Hayamim Bet",
+    "spanish_name": "Crónicas 2",
+    "usfx": "2CH",
+    "ts2009": {
+      "number": 14,
+      "anglicized": "chronicles_2",
+      "hebrew": "דברי הימים ב",
+      "english": "chronicles_2",
+      "spanish": "2 Crónicas",
+      "section": "ketuvim",
+      "expected_chapters": 36
+    },
+    "oe": "iichronicles",
+    "dict": {
+      "normalized": "2chr",
+      "book_id": "chronicles_2",
+      "es": "2 Crónicas",
+      "en": "2 Chronicles",
+      "ts2009": "dibre_hayamim_bet_2_chronicles",
+      "tth": null,
+      "morphhb": "2Chr.xml"
+    },
+    "dss": {
+      "xml": "2Chronicles",
+      "name": "2 Chronicles",
+      "index": 4
+    }
   },
   {
     "id": "matthew",
     "order": 40,
-    "name": "Matthew"
+    "name": "Matthew",
+    "section": "besorah",
+    "chapters": 28,
+    "hebrew_name": "מתתיהו",
+    "hebrew_transliteration": "Mattityahu",
+    "spanish_name": "Mateo",
+    "usfx": "MAT",
+    "ts2009": {
+      "number": 40,
+      "anglicized": "mattithyahu",
+      "hebrew": "מתתיהו",
+      "english": "Matthew",
+      "spanish": "Mateo",
+      "section": "besorah",
+      "expected_chapters": 28
+    },
+    "tagnt": "Mat",
+    "tth": {
+      "code": "matityahu",
+      "tth_name": "Matityáhu",
+      "hebrew_name": "מתתיהו",
+      "english_name": "Matthew",
+      "spanish_name": "Mateo",
+      "book_code": "matthew"
+    }
   },
   {
     "id": "mark",
     "order": 41,
-    "name": "Mark"
+    "name": "Mark",
+    "section": "besorah",
+    "chapters": 16,
+    "hebrew_name": "מרקוס",
+    "hebrew_transliteration": "Markos",
+    "spanish_name": "Marcos",
+    "usfx": "MRK",
+    "ts2009": {
+      "number": 41,
+      "anglicized": "marqos",
+      "hebrew": "מרקוס",
+      "english": "Mark",
+      "spanish": "Marcos",
+      "section": "besorah",
+      "expected_chapters": 16
+    },
+    "tagnt": "Mrk",
+    "tth": {
+      "code": "markos",
+      "tth_name": "Markos",
+      "hebrew_name": "מרקוס",
+      "english_name": "Mark",
+      "spanish_name": "Marcos",
+      "book_code": "mark"
+    }
   },
   {
     "id": "luke",
     "order": 42,
-    "name": "Luke"
+    "name": "Luke",
+    "section": "besorah",
+    "chapters": 24,
+    "hebrew_name": "לוקאס",
+    "hebrew_transliteration": "Lukas",
+    "spanish_name": "Lucas",
+    "usfx": "LUK",
+    "ts2009": {
+      "number": 42,
+      "anglicized": "lugqas",
+      "hebrew": "לוקס",
+      "english": "Luke",
+      "spanish": "Lucas",
+      "section": "besorah",
+      "expected_chapters": 24
+    },
+    "tagnt": "Luk",
+    "tth": {
+      "code": "lukas",
+      "tth_name": "Lukas",
+      "hebrew_name": "לוקס",
+      "english_name": "Luke",
+      "spanish_name": "Lucas",
+      "book_code": "luke"
+    }
   },
   {
     "id": "john",
     "order": 43,
-    "name": "John"
+    "name": "John",
+    "section": "besorah",
+    "chapters": 21,
+    "hebrew_name": "יוחנן",
+    "hebrew_transliteration": "Yojanan",
+    "spanish_name": "Juan",
+    "usfx": "JHN",
+    "ts2009": {
+      "number": 43,
+      "anglicized": "yohanan",
+      "hebrew": "יוחנן",
+      "english": "John",
+      "spanish": "Juan",
+      "section": "besorah",
+      "expected_chapters": 21
+    },
+    "tagnt": "Jhn",
+    "tth": {
+      "code": "iojanan",
+      "tth_name": "Iojanán",
+      "hebrew_name": "יוחנן",
+      "english_name": "John",
+      "spanish_name": "Juan",
+      "book_code": "john"
+    }
   },
   {
     "id": "acts",
     "order": 44,
-    "name": "Acts"
+    "name": "Acts",
+    "section": "besorah",
+    "chapters": 28,
+    "hebrew_name": "מעשי השליחים",
+    "hebrew_transliteration": "Maasei Hashlichim",
+    "spanish_name": "Hechos",
+    "usfx": "ACT",
+    "ts2009": {
+      "number": 44,
+      "anglicized": "maasei",
+      "hebrew": "מעשי השליחים",
+      "english": "Acts",
+      "spanish": "Hechos",
+      "section": "besorah",
+      "expected_chapters": 28
+    },
+    "tagnt": "Act",
+    "tth": {
+      "code": "maasei_hashlijim",
+      "tth_name": "Maasei Hash'lijim",
+      "hebrew_name": "מעשי השליחים",
+      "english_name": "Acts",
+      "spanish_name": "Hechos",
+      "book_code": "acts"
+    }
   },
   {
     "id": "romans",
     "order": 45,
-    "name": "Romans"
+    "name": "Romans",
+    "section": "besorah",
+    "chapters": 16,
+    "hebrew_name": "רומים",
+    "hebrew_transliteration": "Romaim",
+    "spanish_name": "Romanos",
+    "usfx": "ROM",
+    "ts2009": {
+      "number": 45,
+      "anglicized": "romiyim",
+      "hebrew": "רומים",
+      "english": "Romans",
+      "spanish": "Romanos",
+      "section": "besorah",
+      "expected_chapters": 16
+    },
+    "tagnt": "Rom",
+    "tth": {
+      "code": "romanos",
+      "tth_name": "Romanos",
+      "hebrew_name": "רומאים",
+      "english_name": "Romans",
+      "spanish_name": "Romanos",
+      "book_code": "romans"
+    }
   },
   {
     "id": "corinthians1",
     "order": 46,
-    "name": "Corinthians1"
+    "name": "Corinthians1",
+    "section": "besorah",
+    "chapters": 16,
+    "hebrew_name": "קורינתים א",
+    "hebrew_transliteration": "Korintiym Alef",
+    "spanish_name": "Corintios 1",
+    "usfx": "1CO",
+    "ts2009": {
+      "number": 46,
+      "anglicized": "corinthians_1",
+      "hebrew": "קורינתיים א",
+      "english": "corinthians_1",
+      "spanish": "1 Corintios",
+      "section": "besorah",
+      "expected_chapters": 16
+    },
+    "tagnt": "1Co"
   },
   {
     "id": "corinthians2",
     "order": 47,
-    "name": "Corinthians2"
+    "name": "Corinthians2",
+    "section": "besorah",
+    "chapters": 13,
+    "hebrew_name": "קורינתים ב",
+    "hebrew_transliteration": "Korintiym Bet",
+    "spanish_name": "Corintios 2",
+    "usfx": "2CO",
+    "ts2009": {
+      "number": 47,
+      "anglicized": "corinthians_2",
+      "hebrew": "קורינתיים ב",
+      "english": "corinthians_2",
+      "spanish": "2 Corintios",
+      "section": "besorah",
+      "expected_chapters": 13
+    },
+    "tagnt": "2Co"
   },
   {
     "id": "galatians",
     "order": 48,
-    "name": "Galatians"
+    "name": "Galatians",
+    "section": "besorah",
+    "chapters": 6,
+    "hebrew_name": "גלטים",
+    "hebrew_transliteration": "Galatiym",
+    "spanish_name": "Gálatas",
+    "usfx": "GAL",
+    "ts2009": {
+      "number": 48,
+      "anglicized": "galatiyim",
+      "hebrew": "גלטיים",
+      "english": "Galatians",
+      "spanish": "Gálatas",
+      "section": "besorah",
+      "expected_chapters": 6
+    },
+    "tagnt": "Gal",
+    "tth": {
+      "code": "galatas",
+      "tth_name": "Gálatas",
+      "hebrew_name": "גלטים",
+      "english_name": "Galatians",
+      "spanish_name": "Gálatas",
+      "book_code": "galatians"
+    }
   },
   {
     "id": "ephesians",
     "order": 49,
-    "name": "Ephesians"
+    "name": "Ephesians",
+    "section": "besorah",
+    "chapters": 6,
+    "hebrew_name": "אפסים",
+    "hebrew_transliteration": "Efesiym",
+    "spanish_name": "Efesios",
+    "usfx": "EPH",
+    "ts2009": {
+      "number": 49,
+      "anglicized": "ephsiyim",
+      "hebrew": "אפסיים",
+      "english": "Ephesians",
+      "spanish": "Efesios",
+      "section": "besorah",
+      "expected_chapters": 6
+    },
+    "tagnt": "Eph"
   },
   {
     "id": "philippians",
     "order": 50,
-    "name": "Philippians"
+    "name": "Philippians",
+    "section": "besorah",
+    "chapters": 4,
+    "hebrew_name": "פיליפים",
+    "hebrew_transliteration": "Filipiyim",
+    "spanish_name": "Filipenses",
+    "usfx": "PHP",
+    "ts2009": {
+      "number": 50,
+      "anglicized": "pilipiyim",
+      "hebrew": "פיליפיים",
+      "english": "Philippians",
+      "spanish": "Filipenses",
+      "section": "besorah",
+      "expected_chapters": 4
+    },
+    "tagnt": "Php"
   },
   {
     "id": "colossians",
     "order": 51,
-    "name": "Colossians"
+    "name": "Colossians",
+    "section": "besorah",
+    "chapters": 4,
+    "hebrew_name": "קלוסים",
+    "hebrew_transliteration": "Kolosiym",
+    "spanish_name": "Colosenses",
+    "usfx": "COL",
+    "ts2009": {
+      "number": 51,
+      "anglicized": "qolasim",
+      "hebrew": "קולסים",
+      "english": "Colossians",
+      "spanish": "Colosenses",
+      "section": "besorah",
+      "expected_chapters": 4
+    },
+    "tagnt": "Col"
   },
   {
     "id": "thessalonians1",
     "order": 52,
-    "name": "Thessalonians1"
+    "name": "Thessalonians1",
+    "section": "besorah",
+    "chapters": 5,
+    "hebrew_name": "תסלוניקים א",
+    "hebrew_transliteration": "Tesalonikim Alef",
+    "spanish_name": "Tesalonicenses 1",
+    "usfx": "1TH",
+    "ts2009": {
+      "number": 52,
+      "anglicized": "thessalonians_1",
+      "hebrew": "תסלוניקים א",
+      "english": "thessalonians_1",
+      "spanish": "1 Tesalonicenses",
+      "section": "besorah",
+      "expected_chapters": 5
+    },
+    "tagnt": "1Th"
   },
   {
     "id": "thessalonians2",
     "order": 53,
-    "name": "Thessalonians2"
+    "name": "Thessalonians2",
+    "section": "besorah",
+    "chapters": 3,
+    "hebrew_name": "תסלוניקים ב",
+    "hebrew_transliteration": "Tesalonikim Bet",
+    "spanish_name": "Tesalonicenses 2",
+    "usfx": "2TH",
+    "ts2009": {
+      "number": 53,
+      "anglicized": "thessalonians_2",
+      "hebrew": "תסלוניקים ב",
+      "english": "thessalonians_2",
+      "spanish": "2 Tesalonicenses",
+      "section": "besorah",
+      "expected_chapters": 3
+    },
+    "tagnt": "2Th"
   },
   {
     "id": "timothy1",
     "order": 54,
-    "name": "Timothy1"
+    "name": "Timothy1",
+    "section": "besorah",
+    "chapters": 6,
+    "hebrew_name": "טימותי א",
+    "hebrew_transliteration": "Timotiyos Alef",
+    "spanish_name": "Timoteo 1",
+    "usfx": "1TI",
+    "ts2009": {
+      "number": 54,
+      "anglicized": "timothy_1",
+      "hebrew": "טימותיוס א",
+      "english": "timothy_1",
+      "spanish": "1 Timoteo",
+      "section": "besorah",
+      "expected_chapters": 6
+    },
+    "tagnt": "1Ti"
   },
   {
     "id": "timothy2",
     "order": 55,
-    "name": "Timothy2"
+    "name": "Timothy2",
+    "section": "besorah",
+    "chapters": 4,
+    "hebrew_name": "טימותי ב",
+    "hebrew_transliteration": "Timotiyos Bet",
+    "spanish_name": "Timoteo 2",
+    "usfx": "2TI",
+    "ts2009": {
+      "number": 55,
+      "anglicized": "timothy_2",
+      "hebrew": "טימותיוס ב",
+      "english": "timothy_2",
+      "spanish": "2 Timoteo",
+      "section": "besorah",
+      "expected_chapters": 4
+    },
+    "tagnt": "2Ti"
   },
   {
     "id": "titus",
     "order": 56,
-    "name": "Titus"
+    "name": "Titus",
+    "section": "besorah",
+    "chapters": 3,
+    "hebrew_name": "טיטוס",
+    "hebrew_transliteration": "Titos",
+    "spanish_name": "Tito",
+    "usfx": "TIT",
+    "ts2009": {
+      "number": 56,
+      "anglicized": "titos",
+      "hebrew": "טיטוס",
+      "english": "Titus",
+      "spanish": "Tito",
+      "section": "besorah",
+      "expected_chapters": 3
+    },
+    "tagnt": "Tit"
   },
   {
     "id": "philemon",
     "order": 57,
-    "name": "Philemon"
+    "name": "Philemon",
+    "section": "besorah",
+    "chapters": 1,
+    "hebrew_name": "פילימון",
+    "hebrew_transliteration": "Pilimon",
+    "spanish_name": "Filemón",
+    "usfx": "PHM",
+    "ts2009": {
+      "number": 57,
+      "anglicized": "pileymon",
+      "hebrew": "פילמון",
+      "english": "Philemon",
+      "spanish": "Filemón",
+      "section": "besorah",
+      "expected_chapters": 1
+    },
+    "tagnt": "Phm"
   },
   {
     "id": "hebrews",
     "order": 58,
-    "name": "Hebrews"
+    "name": "Hebrews",
+    "section": "besorah",
+    "chapters": 13,
+    "hebrew_name": "עברים",
+    "hebrew_transliteration": "Ivrym",
+    "spanish_name": "Hebreos",
+    "usfx": "HEB",
+    "ts2009": {
+      "number": 58,
+      "anglicized": "ibrim",
+      "hebrew": "עברים",
+      "english": "Hebrews",
+      "spanish": "Hebreos",
+      "section": "besorah",
+      "expected_chapters": 13
+    },
+    "tagnt": "Heb"
   },
   {
     "id": "james",
     "order": 59,
-    "name": "James"
+    "name": "James",
+    "section": "besorah",
+    "chapters": 5,
+    "hebrew_name": "יעקב",
+    "hebrew_transliteration": "Yaakov",
+    "spanish_name": "Santiago",
+    "usfx": "JAS",
+    "ts2009": {
+      "number": 59,
+      "anglicized": "yaaqob",
+      "hebrew": "יעקב",
+      "english": "James",
+      "spanish": "Santiago",
+      "section": "besorah",
+      "expected_chapters": 5
+    },
+    "tagnt": "Jas"
   },
   {
     "id": "peter1",
     "order": 60,
-    "name": "Peter1"
+    "name": "Peter1",
+    "section": "besorah",
+    "chapters": 5,
+    "hebrew_name": "כפא א",
+    "hebrew_transliteration": "kefa Alef",
+    "spanish_name": "Pedro 1",
+    "usfx": "1PE",
+    "ts2009": {
+      "number": 60,
+      "anglicized": "peter_1",
+      "hebrew": "כיפא א",
+      "english": "peter_1",
+      "spanish": "1 Pedro",
+      "section": "besorah",
+      "expected_chapters": 5
+    },
+    "tagnt": "1Pe"
   },
   {
     "id": "peter2",
     "order": 61,
-    "name": "Peter2"
+    "name": "Peter2",
+    "section": "besorah",
+    "chapters": 3,
+    "hebrew_name": "כפא ב",
+    "hebrew_transliteration": "Kefa Bet",
+    "spanish_name": "Pedro 2",
+    "usfx": "2PE",
+    "ts2009": {
+      "number": 61,
+      "anglicized": "peter_2",
+      "hebrew": "כיפא ב",
+      "english": "peter_2",
+      "spanish": "2 Pedro",
+      "section": "besorah",
+      "expected_chapters": 3
+    },
+    "tagnt": "2Pe"
   },
   {
     "id": "john1",
     "order": 62,
-    "name": "John1"
+    "name": "John1",
+    "section": "besorah",
+    "chapters": 5,
+    "hebrew_name": "יוחנן א",
+    "hebrew_transliteration": "Yojanan Alef",
+    "spanish_name": "Juan 1",
+    "usfx": "1JN",
+    "ts2009": {
+      "number": 62,
+      "anglicized": "john_1",
+      "hebrew": "יוחנן א",
+      "english": "john_1",
+      "spanish": "1 Juan",
+      "section": "besorah",
+      "expected_chapters": 5
+    },
+    "tagnt": "1Jn"
   },
   {
     "id": "john2",
     "order": 63,
-    "name": "John2"
+    "name": "John2",
+    "section": "besorah",
+    "chapters": 1,
+    "hebrew_name": "יוחנן ב",
+    "hebrew_transliteration": "Yojanan Bet",
+    "spanish_name": "Juan 2",
+    "usfx": "2JN",
+    "ts2009": {
+      "number": 63,
+      "anglicized": "john_2",
+      "hebrew": "יוחנן ב",
+      "english": "john_2",
+      "spanish": "2 Juan",
+      "section": "besorah",
+      "expected_chapters": 1
+    },
+    "tagnt": "2Jn"
   },
   {
     "id": "john3",
     "order": 64,
-    "name": "John3"
+    "name": "John3",
+    "section": "besorah",
+    "chapters": 1,
+    "hebrew_name": "יוחנן ג",
+    "hebrew_transliteration": "Yojanan Gimel",
+    "spanish_name": "Juan 3",
+    "usfx": "3JN",
+    "ts2009": {
+      "number": 64,
+      "anglicized": "john_3",
+      "hebrew": "יוחנן ג",
+      "english": "john_3",
+      "spanish": "3 Juan",
+      "section": "besorah",
+      "expected_chapters": 1
+    },
+    "tagnt": "3Jn"
   },
   {
     "id": "jude",
     "order": 65,
-    "name": "Jude"
+    "name": "Jude",
+    "section": "besorah",
+    "chapters": 1,
+    "hebrew_name": "יהודה",
+    "hebrew_transliteration": "Yehudah",
+    "spanish_name": "Judas",
+    "usfx": "JUD",
+    "ts2009": {
+      "number": 65,
+      "anglicized": "yehudah",
+      "hebrew": "יהודה",
+      "english": "Jude",
+      "spanish": "Judas",
+      "section": "besorah",
+      "expected_chapters": 1
+    },
+    "tagnt": "Jud"
   },
   {
     "id": "revelation",
     "order": 66,
-    "name": "Revelation"
+    "name": "Revelation",
+    "section": "besorah",
+    "chapters": 22,
+    "hebrew_name": "סודות",
+    "hebrew_transliteration": "Sodot",
+    "spanish_name": "Apocalipsis",
+    "usfx": "REV",
+    "ts2009": {
+      "number": 66,
+      "anglicized": "hazon",
+      "hebrew": "חזון",
+      "english": "Revelation",
+      "spanish": "Apocalipsis",
+      "section": "besorah",
+      "expected_chapters": 22
+    },
+    "tagnt": "Rev",
+    "tth": {
+      "code": "sodot",
+      "tth_name": "Sodot",
+      "hebrew_name": "סודות",
+      "english_name": "Revelation",
+      "spanish_name": "Apocalipsis",
+      "book_code": "revelation"
+    }
   }
 ]

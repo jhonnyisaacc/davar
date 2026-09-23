@@ -54,7 +54,8 @@ def test_books_json_loads_and_config_has_no_book_literal():
     assert loaded["DOCX_BOOKS"] == DOCX_BOOKS
     source = CONFIG_PATH.read_text(encoding="utf-8")
     assert "BOOKS_INFO = {" not in source
-    assert 'BOOKS_INFO = _BOOKS["BOOKS_INFO"]' in source
+    assert "book_by_tth_code" in source
+    assert 'BOOKS_INFO = _books_info(_BOOKS["BOOKS_INFO"])' in source
     assert 'DOCX_BOOKS = _BOOKS["DOCX_BOOKS"]' in source
 
 
