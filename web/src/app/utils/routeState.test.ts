@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { DESTINATIONS } from "../destinations";
+import { DESTINATIONS } from "@davar/shared/destinations";
 import {
   buildRoutePath,
   findCanonicalBook,
