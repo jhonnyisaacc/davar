@@ -560,7 +560,7 @@ Check if data files exist:
 ```bash
 ls -la data/oe/genesis/
 ls -la data/delitzsch_parsed/matthew/
-ls -la data/tth/draft/
+ls -la data/tth_2/json/
 ls -la data/ts2009/
 ```
 
