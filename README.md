@@ -51,6 +51,34 @@ bun install
 bun expo start
 ```
 
+### Test baseline
+
+Run the Python suite from the repository root:
+
+```bash
+PYTHONPATH=. python -m pytest -q tests tools/bani/tests
+```
+
+Web checks from `.github/workflows/web-ci.yml`:
+
+```bash
+cd web
+bun install
+bun run lint
+bun test src/app/services/staticData.loading.test.ts ../scripts/generate-static-data/lexicon-entries.test.ts
+bun run build
+```
+
+Mobile checks from `.github/workflows/mobile-ci.yml`:
+
+```bash
+cd mobile
+bun install --frozen-lockfile
+bun run lint
+bun test src/services/*.test.ts
+bun run typecheck
+```
+
 ## Project Structure
 
 - web: Web app
