@@ -1,7 +1,6 @@
 """Release audit for image-confirmed Hutter repairs; run from repository root after static generation."""
-import json,hashlib,subprocess,tempfile,gzip,sys
+import json,hashlib,subprocess,tempfile,gzip
 from pathlib import Path
-sys.path.insert(0,str(Path.cwd()))
 from scripts.hutter.audit_transcription import audit,write,ROOT
 base='2fdb23cad'
 with tempfile.TemporaryDirectory(prefix='davar-hutter-baseline-',dir='/tmp') as td:

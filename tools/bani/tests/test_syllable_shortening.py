@@ -1,11 +1,7 @@
 """Regression tests for conservative Hebrew syllable shortening."""
 
-import sys
-from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).parents[1]))
-
-from transliterate import BaniTransliterator
+from tools.bani.transliterate import BaniTransliterator
 
 
 def test_medial_sheva_is_silent_in_miqveh():
@@ -72,7 +68,7 @@ def test_hebrew_context_rules_and_stress_metadata():
 
 
 def test_audit_counts_separate_words_and_reports_every_mismatch():
-    from audit_phonology import audit, pron_syllables
+    from tools.bani.audit_phonology import audit, pron_syllables
     assert pron_syllables("ab-ee' ghib-one'") == ["ab", "ee", "ghib", "one"]
     report = audit([{"id": str(i), "hebrew": "אָב", "pron": "a-ba"} for i in range(101)])
     assert len(report["mismatch_examples"]) == 101

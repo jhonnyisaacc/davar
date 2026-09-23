@@ -79,7 +79,7 @@ unmatched rows stable `D1000000+` fallback IDs.
 
 ```bash
 python scripts/dict/import_tcysite.py --fetch
-python scripts/dict/test_import_tcysite.py
+python -m scripts.dict.test_import_tcysite
 ```
 
 Source snapshots, checksums, attribution, and permission notes are stored in
@@ -417,19 +417,19 @@ scripts/dict/
 
 ```bash
 # Build complete lexicon (production)
-python scripts/dict/build_lexicon.py lexicon_100_percent_list.json
+python -m scripts.dict.build_lexicon lexicon_100_percent_list.json
 
 # Build complete lexicon (update existing)
-python scripts/dict/build_lexicon.py lexicon_100_percent_list.json --update
+python -m scripts.dict.build_lexicon lexicon_100_percent_list.json --update
 
 # Testing mode (1% sample for development)
-python scripts/dict/build_lexicon.py lexicon_100_percent_list.json --testing
+python -m scripts.dict.build_lexicon lexicon_100_percent_list.json --testing
 
 # Single entry
-python scripts/dict/build_lexicon.py H7965
+python -m scripts.dict.build_lexicon H7965
 
 # Fill missing definitions
-python scripts/dict/build_lexicon.py --fill-missing
+python -m scripts.dict.build_lexicon --fill-missing
 ```
 
 **Features:**
@@ -445,16 +445,16 @@ python scripts/dict/build_lexicon.py --fill-missing
 
 ```bash
 # Build all books
-python scripts/dict/build_verses.py
+python -m scripts.dict.build_verses
 
 # Build specific book
-python scripts/dict/build_verses.py --book genesis
+python -m scripts.dict.build_verses --book genesis
 
 # Build specific chapter
-python scripts/dict/build_verses.py --book exodus --chapter 1
+python -m scripts.dict.build_verses --book exodus --chapter 1
 
 # Verbose output
-python scripts/dict/build_verses.py --verbose
+python -m scripts.dict.build_verses --verbose
 ```
 
 **Features:**
@@ -614,7 +614,7 @@ python -m scripts.dict.translation.main --strong H1 --language es
 python -m scripts.dict.translation.main --language es --batch-size 500 --dry-run
 
 # Fix missing translations with large batches
-python scripts/dict/translation/fix_mismatches.py --language es --batch-size 500
+python -m scripts.dict.translation.fix_mismatches --language es --batch-size 500
 ```
 
 ### Batch Size Recommendations

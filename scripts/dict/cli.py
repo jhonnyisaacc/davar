@@ -8,13 +8,10 @@ processing operations, replacing the previous collection of individual scripts.
 
 import argparse
 import sys
-from pathlib import Path
 
-# Add the scripts/dict directory to Python path for imports
-sys.path.insert(0, str(Path(__file__).parent))
 
-from config import Config, config
-from utils import ProgressTracker
+from .config import Config, config
+from .utils import ProgressTracker
 
 
 def create_parser():
@@ -372,7 +369,7 @@ def handle_lexicon_command(args):
 def handle_lexicon_build(args):
     """Handle lexicon build command."""
     # Import here to avoid circular imports
-    from build_lexicon import main as build_main
+    from .build_lexicon import main as build_main
 
     # Convert args to sys.argv format for compatibility
     sys.argv = ['build_lexicon.py', args.input]
@@ -394,7 +391,7 @@ def handle_lexicon_build(args):
 def handle_lexicon_consolidate(args):
     """Handle lexicon consolidate command."""
     # Import here to avoid circular imports
-    from lexicon.consolidate import consolidate_lexicon
+    from .lexicon.consolidate import consolidate_lexicon
 
     return consolidate_lexicon(
         preserve_translations=args.preserve_translations,
@@ -407,7 +404,7 @@ def handle_lexicon_consolidate(args):
 def handle_lexicon_custom(args):
     """Handle lexicon custom command."""
     # Import here to avoid circular imports
-    from integrate_custom_dict import main as custom_main
+    from .integrate_custom_dict import main as custom_main
 
     # Convert args to sys.argv format for compatibility
     sys.argv = ['integrate_custom_dict.py']
@@ -423,7 +420,7 @@ def handle_lexicon_custom(args):
 def handle_lexicon_transliterate(args):
     """Handle lexicon transliterate command."""
     # Import here to avoid circular imports
-    from update_transliterations import main as transliterate_main
+    from .update_transliterations import main as transliterate_main
 
     # Convert args to sys.argv format for compatibility
     sys.argv = ['update_transliterations.py']
@@ -470,7 +467,7 @@ def handle_verses_command(args):
 def handle_verses_build(args):
     """Handle verses build command."""
     # Import here to avoid circular imports
-    from build_verses import main as verses_main
+    from .build_verses import main as verses_main
 
     # Convert args to sys.argv format for compatibility
     sys.argv = ['build_verses.py']
@@ -490,7 +487,7 @@ def handle_verses_build(args):
 def handle_validate_command(args):
     """Handle validate command."""
     # Import here to avoid circular imports
-    from validator import main as validate_main
+    from .validator import main as validate_main
 
     # Convert args to sys.argv format for compatibility
     sys.argv = ['validator.py']
@@ -519,7 +516,7 @@ def handle_translate_command(args):
 def handle_translate_run(args):
     """Handle translate run command."""
     # Import here to avoid circular imports
-    from translation.main import main as translate_main
+    from .translation.main import main as translate_main
 
     # Convert args to sys.argv format for compatibility
     sys.argv = ['translation/main.py']
@@ -543,7 +540,7 @@ def handle_translate_run(args):
 def handle_translate_fix(args):
     """Handle translate fix command."""
     # Import here to avoid circular imports
-    from translation.fix_mismatches import main as fix_main
+    from .translation.fix_mismatches import main as fix_main
 
     # Convert args to sys.argv format for compatibility
     sys.argv = ['translation/fix_mismatches.py']
@@ -576,7 +573,7 @@ def handle_sync_command(args):
 def handle_sync_to_individual(args):
     """Handle sync to-individual command."""
     # Import here to avoid circular imports
-    from sync_translations_to_individual import main as sync_main
+    from .sync_translations_to_individual import main as sync_main
 
     # Convert args to sys.argv format for compatibility
     sys.argv = ['sync_translations_to_individual.py']
@@ -594,7 +591,7 @@ def handle_sync_to_individual(args):
 def handle_sync_export_translations(args):
     """Handle sync export-translations command."""
     # Import here to avoid circular imports
-    from sync_translations_to_individual import export_translations_backup
+    from .sync_translations_to_individual import export_translations_backup
 
     return export_translations_backup(
         output_file=args.output,

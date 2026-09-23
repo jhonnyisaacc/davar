@@ -20,8 +20,8 @@ from typing import Dict, List, Optional, Tuple, Any
 from dataclasses import dataclass
 from glob import glob
 
-from config import config
-from instance_policy import process_instances
+from .config import config
+from .instance_policy import process_instances
 
 
 @dataclass

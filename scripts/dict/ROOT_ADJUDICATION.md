@@ -11,7 +11,7 @@ root change. No external AI service was invoked for the source-grounded pass.
 
 ```bash
 .venv/bin/python scripts/dict/adjudicate_roots.py --report data/dict/reports/root_adjudication.json --apply
-.venv/bin/python scripts/dict/validator.py
+.venv/bin/python -m scripts.dict.validator
 .venv/bin/python -m pytest tests/test_adjudicate_roots.py tests/test_build_lexicon_bdb.py -q
 cd web && bun run build
 ```

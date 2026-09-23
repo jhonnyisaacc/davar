@@ -1,10 +1,7 @@
 """Tests for Besorah Strong merge_strongs prefix composition and post-merge validation."""
 
 import json
-import sys
-from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from scripts.delitzsch.strongs.v2.merge_strongs import (
     _report_payload,

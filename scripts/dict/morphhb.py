@@ -7,12 +7,9 @@ Open Scriptures MorphHB XML files.
 
 import xml.etree.ElementTree as ET
 from typing import Dict, Optional
-import sys
-from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent))
-from config import config
-from book_mappings import BookMapper
-from strong_processor import StrongProcessor
+from .config import config
+from .book_mappings import BookMapper
+from .strong_processor import StrongProcessor
 
 
 class MorphusLoader:

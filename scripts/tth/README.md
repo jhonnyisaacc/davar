@@ -5,9 +5,8 @@ Simple pipeline to convert TTH DOCX files into JSON for Davar.
 ## Quick Start
 
 ```bash
-cd ~/davar
 pip install mammoth tqdm
-python scripts/tth/main.py all
+python -m scripts.tth.main all
 ```
 
 Output: `data/tth/json/`
@@ -16,31 +15,31 @@ Output: `data/tth/json/`
 
 ```bash
 # List supported book keys
-python scripts/tth/main.py books
+python -m scripts.tth.main books
 
 # Full pipeline (split + convert + postprocess)
-python scripts/tth/main.py all
+python -m scripts.tth.main all
 
 # Step-by-step
-python scripts/tth/main.py split
-python scripts/tth/main.py convert all
-python scripts/tth/main.py postprocess all
+python -m scripts.tth.main split
+python -m scripts.tth.main convert all
+python -m scripts.tth.main postprocess all
 ```
 
 ## Process One Book
 
 ```bash
 # Apocalipsis (book key is sodot)
-python scripts/tth/main.py process data/tth/raw/apocalipsis.docx --books sodot
+python -m scripts.tth.main process data/tth/raw/apocalipsis.docx --books sodot
 
 # Generic single-book example
-python scripts/tth/main.py process data/tth/raw/romanos.docx --books romanos
+python -m scripts.tth.main process data/tth/raw/romanos.docx --books romanos
 ```
 
 If filename and book key are the same, you can omit `--books`:
 
 ```bash
-python scripts/tth/main.py process data/tth/raw/romanos.docx
+python -m scripts.tth.main process data/tth/raw/romanos.docx
 ```
 
 Note: for Apocalipsis, keep `--books sodot` because filename is `apocalipsis` but the registered key is `sodot`.
@@ -49,17 +48,17 @@ Note: for Apocalipsis, keep `--books sodot` because filename is `apocalipsis` bu
 
 ```bash
 # Convert one already-split markdown book
-python scripts/tth/main.py convert amos
+python -m scripts.tth.main convert amos
 
 # Postprocess one book
-python scripts/tth/main.py postprocess lukas
+python -m scripts.tth.main postprocess lukas
 
 # Validate one book or all
-python scripts/tth/main.py validate sodot
-python scripts/tth/main.py validate all
+python -m scripts.tth.main validate sodot
+python -m scripts.tth.main validate all
 
 # Help
-python scripts/tth/main.py --help
+python -m scripts.tth.main --help
 ```
 
 ## Folder Layout

@@ -9,8 +9,6 @@ import json
 import time
 import logging
 import re
-import sys
-from pathlib import Path
 from typing import Dict, List, Optional, Any
 
 # Strong's number validation: H followed by 1-5 digits, no H0000
@@ -19,8 +17,6 @@ _VALID_STRONG_RE = re.compile(r'^H[1-9]\d{0,4}$')
 # Prefix code → Hebrew consonant (for display in prompts)
 _PREFIX_CONSONANT = {'Hl': 'ל', 'Hb': 'ב', 'Hk': 'כ', 'Hc': 'ו', 'Hd': 'ה'}
 
-# Add parent directory to path for utils import
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 try:
     import asyncio

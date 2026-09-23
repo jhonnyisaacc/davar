@@ -22,7 +22,7 @@ No special installation required. Ensure Python 3.8+ is available and run from t
 
 ```bash
 cd ~/davar
-python scripts/delitzsch/cli.py --help
+python -m scripts.delitzsch.cli --help
 ```
 
 ## Usage
@@ -30,33 +30,33 @@ python scripts/delitzsch/cli.py --help
 ### Canonical CLI
 
 ```bash
-python scripts/delitzsch/cli.py run --help
-python scripts/delitzsch/cli.py audit --help
-python scripts/delitzsch/cli.py normalize --help
+python -m scripts.delitzsch.cli run --help
+python -m scripts.delitzsch.cli audit --help
+python -m scripts.delitzsch.cli normalize --help
 ```
 
 ### Process All Books
 
 ```bash
-python scripts/delitzsch/cli.py run
+python -m scripts.delitzsch.cli run
 ```
 
 ### Process Specific Book
 
 ```bash
-python scripts/delitzsch/cli.py run --book acts
+python -m scripts.delitzsch.cli run --book acts
 ```
 
 ### Dry Run (Preview Only)
 
 ```bash
-python scripts/delitzsch/cli.py run --dry-run
+python -m scripts.delitzsch.cli run --dry-run
 ```
 
 ### Verbose Output
 
 ```bash
-python scripts/delitzsch/cli.py run --verbose
+python -m scripts.delitzsch.cli run --verbose
 ```
 
 ### Script Entrypoints
@@ -64,7 +64,7 @@ python scripts/delitzsch/cli.py run --verbose
 Direct script entrypoints are available in this folder:
 
 ```bash
-python scripts/delitzsch/run_matcher.py --help
+python -m scripts.delitzsch.run_matcher --help
 python scripts/delitzsch/audit_delitzsch_parsing.py --help
 python scripts/delitzsch/normalize_delitzsch_prefixes.py --help
 ```

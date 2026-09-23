@@ -5,11 +5,9 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
-import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(ROOT))
 
 from scripts.hutter.attested_morphology import SOURCE, load_attestations, propose
 from scripts.hutter.map_strongs import DEFAULT_OUTPUT_ROOT, base_strong, load_delitzsch_verses

@@ -12,8 +12,6 @@ import logging
 import sys
 from pathlib import Path
 
-# Add project root to path
-sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
 
 from .processor import StrongsProcessorV2
 from .config import ALL_BOOKS, validate_dictionary

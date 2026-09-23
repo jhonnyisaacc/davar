@@ -7,10 +7,7 @@ including morphological analysis and lexicon validation.
 
 import re
 from typing import Dict, List, Optional, Set
-import sys
-from pathlib import Path
-sys.path.insert(0, str(Path(__file__).parent))
-from config import config
+from .config import config
 
 
 class StrongProcessor:

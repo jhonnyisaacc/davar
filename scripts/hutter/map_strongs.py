@@ -4,7 +4,6 @@ import argparse
 import hashlib
 import json
 import re
-import sys
 import unicodedata
 from collections import Counter, defaultdict
 from dataclasses import dataclass
@@ -16,8 +15,6 @@ from typing import Any, Iterable, TypeVar
 T = TypeVar("T")
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-if str(REPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(REPO_ROOT))
 
 from scripts.translit.local_translit import LocalTransliterator
 

@@ -5,15 +5,11 @@ Loads API keys and configures Grok-specific translation settings.
 """
 
 import os
-import sys
 from pathlib import Path
 from typing import Dict, Optional
 from dotenv import load_dotenv
 
-# Ensure project root is importable before importing project-local modules
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-if str(PROJECT_ROOT) not in sys.path:
-    sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.dict.config import config as dict_config
 

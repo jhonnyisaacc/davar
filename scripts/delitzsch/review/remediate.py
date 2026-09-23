@@ -11,7 +11,6 @@ import gzip
 import hashlib
 import json
 import re
-import sys
 import io
 import subprocess
 import tarfile
@@ -20,7 +19,6 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
-sys.path.insert(0, str(ROOT))
 from scripts.delitzsch.review.workflow import LexiconIndex, load_latest_decisions, _refresh_verse_prefix_separators
 
 PARSED = ROOT / "data/delitzsch/parsed"

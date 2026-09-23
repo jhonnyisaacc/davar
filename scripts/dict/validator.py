@@ -12,17 +12,12 @@ from typing import Dict, List, Set, Optional
 from collections import defaultdict
 import xml.etree.ElementTree as ET
 
-# Add current directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent))
 
-from config import config
-from utils import load_json, validate_lexicon_entry, StatisticsCollector, load_strongs_data, load_strong_refs, load_bdb_xml
-from instance_policy import POLICY_VERSION, process_instances
+from .config import config
+from .utils import load_json, validate_lexicon_entry, StatisticsCollector, load_strongs_data, load_strong_refs, load_bdb_xml
+from .instance_policy import POLICY_VERSION, process_instances
 
 NS = {'bdb': 'http://openscriptures.github.com/morphhb/namespace'}
-
-
-
 
 
 def validate_file_structure(filepath: Path, is_root: bool) -> Dict:
@@ -286,7 +281,7 @@ def check_incomplete_sense_hierarchy() -> Dict:
     senses also exist elsewhere in the same mapped Strong's entry. Validate
     against the source BDB paths instead of guessing from the generated values.
     """
-    from build_lexicon import find_bdb_entry_by_id, load_lexical_index
+    from .build_lexicon import find_bdb_entry_by_id, load_lexical_index
 
     lexical_index = load_lexical_index()
     strong_to_bdb = lexical_index.get("strong_to_bdb", {})
@@ -349,7 +344,7 @@ def check_incomplete_sense_hierarchy() -> Dict:
 
 def check_fragmented_main_bdb_definitions() -> Dict:
     """Check for sense 0 BDB definitions that are only single-word fragments."""
-    from build_lexicon import find_bdb_entry_by_id, load_lexical_index
+    from .build_lexicon import find_bdb_entry_by_id, load_lexical_index
 
     lexical_index = load_lexical_index()
     strong_to_bdb = lexical_index.get("strong_to_bdb", {})
@@ -431,7 +426,7 @@ def check_fragmented_main_bdb_definitions() -> Dict:
 
 def check_etymological_definitions(bdb_root) -> Dict:
     """Check for entries with etymological-looking definitions"""
-    from build_lexicon import find_bdb_entry_by_id, load_lexical_index
+    from .build_lexicon import find_bdb_entry_by_id, load_lexical_index
 
     lexical_index = load_lexical_index()
     strong_to_bdb = lexical_index.get("strong_to_bdb", {})

@@ -3,15 +3,8 @@
 Quick test to verify the enhanced filtering (spelling exclusion + substantive inclusion)
 """
 
-import sys
-from pathlib import Path
 
-# Add scripts directory to path
-scripts_dir = Path(__file__).parent.parent
-if str(scripts_dir) not in sys.path:
-    sys.path.insert(0, str(scripts_dir))
-
-from dss.notes_parser import is_fragment_to_fragment_difference
+from .notes_parser import is_fragment_to_fragment_difference
 
 # Test cases
 test_cases = [

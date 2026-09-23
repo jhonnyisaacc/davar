@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from import_tcysite import (
+from .import_tcysite import (
     build_greek_key_index,
     canonical_greek_key,
     clean_html,

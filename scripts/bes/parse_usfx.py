@@ -9,7 +9,7 @@ import logging
 import re
 from pathlib import Path
 from typing import Dict, List, Any, Optional
-from config import USFX_TO_ENGLISH, BOOK_METADATA, get_book_metadata
+from .config import USFX_TO_ENGLISH, BOOK_METADATA, get_book_metadata
 
 logger = logging.getLogger(__name__)
 

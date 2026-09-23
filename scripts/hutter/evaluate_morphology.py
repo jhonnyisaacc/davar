@@ -1,9 +1,8 @@
 """Bounded, read-only morphology experiments; never applies candidates."""
-import sys,json,argparse
+import json,argparse
 from collections import Counter
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
-sys.path.insert(0,str(ROOT))
 from scripts.hutter.map_strongs import build_indexes,load_delitzsch_verses,DEFAULT_OUTPUT_ROOT,base_strong
 from scripts.hutter.morphology import morphology_decision
 parser=argparse.ArgumentParser(description=__doc__)

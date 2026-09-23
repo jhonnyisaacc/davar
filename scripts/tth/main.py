@@ -6,10 +6,10 @@ TTH2 Main CLI
 Main entry point for the TTH2 processing system.
 
 Usage:
-    python main.py split        # Split all DOCX files into per-book markdown
-    python main.py convert <book> # Convert single book markdown to JSON
-    python main.py all          # Full pipeline: split all + convert all
-    python main.py books        # List available books
+    python -m scripts.tth.main split        # Split all DOCX files into per-book markdown
+    python -m scripts.tth.main convert <book> # Convert single book markdown to JSON
+    python -m scripts.tth.main all          # Full pipeline: split all + convert all
+    python -m scripts.tth.main books        # List available books
 
 Author: Davar Project
 """
@@ -20,6 +20,8 @@ import logging
 import json
 from pathlib import Path
 from typing import List, Optional
+
+from ..paths import DATA
 
 # Try to import tqdm for progress bars
 try:
@@ -60,8 +62,6 @@ except ImportError:
         def __exit__(self, *args):
             pass
 
-# Add current directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent))
 
 # Configure logging
 logging.basicConfig(
@@ -70,39 +70,18 @@ logging.basicConfig(
 )
 logger = logging.getLogger('tth2')
 
-try:
-    from docx_to_md import convert_docx
-    from book_splitter import split_markdown, TTH2BookSplitter
-    from md_to_json import convert_book_markdown_to_json
-    from json_postprocess import get_postprocessor
-    from format_validator import get_format_validator, print_book_report
-    from config import BOOKS_INFO
-    from section_headers import detect_section_headers_in_json
-    from fix_false_restart_markers import repair_books
-except ImportError:
-    # Fallback for direct execution
-    import docx_to_md
-    import book_splitter
-    import md_to_json
-    import json_postprocess
-    import format_validator
-    import config
-    import section_headers
-    import fix_false_restart_markers
-    convert_docx = docx_to_md.convert_docx
-    split_markdown = book_splitter.split_markdown
-    TTH2BookSplitter = book_splitter.TTH2BookSplitter
-    convert_book_markdown_to_json = md_to_json.convert_book_markdown_to_json
-    get_postprocessor = json_postprocess.get_postprocessor
-    get_format_validator = format_validator.get_format_validator
-    print_book_report = format_validator.print_book_report
-    BOOKS_INFO = config.BOOKS_INFO
-    detect_section_headers_in_json = section_headers.detect_section_headers_in_json
-    repair_books = fix_false_restart_markers.repair_books
+from .docx_to_md import convert_docx
+from .book_splitter import split_markdown, TTH2BookSplitter
+from .md_to_json import convert_book_markdown_to_json
+from .json_postprocess import get_postprocessor
+from .format_validator import get_format_validator, print_book_report
+from .config import BOOKS_INFO
+from .section_headers import detect_section_headers_in_json
+from .fix_false_restart_markers import repair_books
 
 
 # Default directories
-DATA_DIR = Path.home() / "davar" / "data" / "tth"
+DATA_DIR = DATA / "tth"
 RAW_DIR = DATA_DIR / "raw"
 MARKDOWN_DIR = DATA_DIR / "markdown"
 JSON_DIR = DATA_DIR / "json"
@@ -121,28 +100,28 @@ def show_help():
     """Show help information."""
     print("""
 USAGE:
-  python main.py split                    Split all DOCX files into per-book markdown
-  python main.py convert <book>           Convert single book markdown to JSON
-  python main.py convert all              Convert all markdown files to JSON
-  python main.py postprocess <book>       Post-process JSON (fix italics, convert to <em>)
-  python main.py postprocess all          Post-process all JSON files
-  python main.py validate <book>          Validate single book JSON file
-  python main.py validate all             Validate all JSON files
-    python main.py validate-format <book>   Validate formatting + structure for one JSON
-    python main.py validate-format all      Validate formatting + structure for all JSON
-  python main.py process <docx> [--books <book1> <book2> ...]  Process specific DOCX file for specific books
-  python main.py all                      Full pipeline: split + convert + postprocess
-  python main.py books                    List available books
-  python main.py --help                   Show this help
+  python -m scripts.tth.main split                    Split all DOCX files into per-book markdown
+  python -m scripts.tth.main convert <book>           Convert single book markdown to JSON
+  python -m scripts.tth.main convert all              Convert all markdown files to JSON
+  python -m scripts.tth.main postprocess <book>       Post-process JSON (fix italics, convert to <em>)
+  python -m scripts.tth.main postprocess all          Post-process all JSON files
+  python -m scripts.tth.main validate <book>          Validate single book JSON file
+  python -m scripts.tth.main validate all             Validate all JSON files
+    python -m scripts.tth.main validate-format <book>   Validate formatting + structure for one JSON
+    python -m scripts.tth.main validate-format all      Validate formatting + structure for all JSON
+  python -m scripts.tth.main process <docx> [--books <book1> <book2> ...]  Process specific DOCX file for specific books
+  python -m scripts.tth.main all                      Full pipeline: split + convert + postprocess
+  python -m scripts.tth.main books                    List available books
+  python -m scripts.tth.main --help                   Show this help
 
 EXAMPLES:
-  python scripts/tth/main.py split             # Split all DOCX to markdown/
-  python scripts/tth/main.py convert amos      # Convert amos.md to amos.json
-  python scripts/tth/main.py postprocess lukas # Fix formatting in lukas.json
-  python scripts/tth/main.py validate amos     # Check amos.json for issues
-  python scripts/tth/main.py validate all      # Check all JSON files
-  python scripts/tth/main.py process data/tth/raw/romanos.docx --books romanos  # Process specific book
-  python scripts/tth/main.py all               # Complete workflow
+  python -m scripts.tth.main split             # Split all DOCX to markdown/
+  python -m scripts.tth.main convert amos      # Convert amos.md to amos.json
+  python -m scripts.tth.main postprocess lukas # Fix formatting in lukas.json
+  python -m scripts.tth.main validate amos     # Check amos.json for issues
+  python -m scripts.tth.main validate all      # Check all JSON files
+  python -m scripts.tth.main process data/tth/raw/romanos.docx --books romanos  # Process specific book
+  python -m scripts.tth.main all               # Complete workflow
 
 OPTIONS FOR POSTPROCESS:
   --dry-run                               Show changes without modifying files
@@ -300,14 +279,14 @@ def convert_book_to_json(book_key: str, verbose: bool = True):
     if book_key not in BOOKS_INFO:
         if verbose:
             print(f"❌ Unknown book: {book_key}")
-            print("Use 'python main.py books' to see available books")
+            print("Use 'python -m scripts.tth.main books' to see available books")
         return False
 
     markdown_file = MARKDOWN_DIR / f"{book_key}.md"
     if not markdown_file.exists():
         if verbose:
             print(f"❌ Markdown file not found: {markdown_file}")
-            print("Run 'python main.py split' first to generate markdown files")
+            print("Run 'python -m scripts.tth.main split' first to generate markdown files")
         return False
 
     json_file = JSON_DIR / f"{book_key}.json"
@@ -364,13 +343,13 @@ def convert_all_books():
 
     if not MARKDOWN_DIR.exists():
         print(f"❌ Markdown directory not found: {MARKDOWN_DIR}")
-        print("Run 'python main.py split' first")
+        print("Run 'python -m scripts.tth.main split' first")
         return False
 
     markdown_files = list(MARKDOWN_DIR.glob("*.md"))
     if not markdown_files:
         print("❌ No markdown files found")
-        print("Run 'python main.py split' first")
+        print("Run 'python -m scripts.tth.main split' first")
         return False
 
     # Global pre-convert repair to keep future reruns deterministic.
@@ -414,7 +393,7 @@ def postprocess_book(book_key: str, dry_run: bool = False, backup: bool = False,
     if not json_file.exists():
         if verbose:
             print(f"❌ JSON file not found: {json_file}")
-            print("Run 'python main.py convert' first to generate JSON files")
+            print("Run 'python -m scripts.tth.main convert' first to generate JSON files")
         return False
 
     try:
@@ -436,7 +415,7 @@ def postprocess_all_books(dry_run: bool = False, backup: bool = False):
 
     if not JSON_DIR.exists():
         print(f"❌ JSON directory not found: {JSON_DIR}")
-        print("Run 'python main.py convert' first")
+        print("Run 'python -m scripts.tth.main convert' first")
         return False
 
     processor = get_postprocessor(verbose=False)
@@ -625,7 +604,7 @@ def process_docx_books(docx_path: str, book_keys: List[str]):
     invalid_books = [book for book in book_keys if book not in BOOKS_INFO]
     if invalid_books:
         print(f"❌ Unknown books: {', '.join(invalid_books)}")
-        print("Use 'python main.py books' to see available books")
+        print("Use 'python -m scripts.tth.main books' to see available books")
         return False
 
     splitter = TTH2BookSplitter()
@@ -778,7 +757,7 @@ def main():
     elif command == 'convert':
         if len(sys.argv) < 3:
             print(
-                "Usage: python main.py convert <book_key> or python main.py convert all")
+                "Usage: python -m scripts.tth.main convert <book_key> or python -m scripts.tth.main convert all")
             sys.exit(1)
 
         book_key = sys.argv[2]
@@ -792,7 +771,7 @@ def main():
     elif command == 'postprocess':
         if len(sys.argv) < 3:
             print(
-                "Usage: python main.py postprocess <book_key> or python main.py postprocess all")
+                "Usage: python -m scripts.tth.main postprocess <book_key> or python -m scripts.tth.main postprocess all")
             print("Options: --dry-run, --backup")
             sys.exit(1)
 
@@ -811,7 +790,7 @@ def main():
     elif command == 'validate':
         if len(sys.argv) < 3:
             print(
-                "Usage: python main.py validate <book_key> or python main.py validate all")
+                "Usage: python -m scripts.tth.main validate <book_key> or python -m scripts.tth.main validate all")
             sys.exit(1)
 
         book_key = sys.argv[2]
@@ -821,7 +800,7 @@ def main():
         else:
             if book_key not in BOOKS_INFO:
                 print(f"Unknown book: {book_key}")
-                print("Use 'python main.py books' to see available books")
+                print("Use 'python -m scripts.tth.main books' to see available books")
                 sys.exit(1)
             success = validate_book(book_key)
             sys.exit(0 if success else 1)
@@ -829,7 +808,7 @@ def main():
     elif command == 'validate-format':
         if len(sys.argv) < 3:
             print(
-                "Usage: python main.py validate-format <book_key> or python main.py validate-format all")
+                "Usage: python -m scripts.tth.main validate-format <book_key> or python -m scripts.tth.main validate-format all")
             sys.exit(1)
 
         book_key = sys.argv[2]
@@ -839,7 +818,7 @@ def main():
         else:
             if book_key not in BOOKS_INFO:
                 print(f"Unknown book: {book_key}")
-                print("Use 'python main.py books' to see available books")
+                print("Use 'python -m scripts.tth.main books' to see available books")
                 sys.exit(1)
             success = validate_format_book(book_key)
             sys.exit(0 if success else 1)
@@ -847,7 +826,7 @@ def main():
     elif command == 'process':
         if len(sys.argv) < 3:
             print(
-                "Usage: python main.py process <docx_path> [--books <book1> <book2> ...]")
+                "Usage: python -m scripts.tth.main process <docx_path> [--books <book1> <book2> ...]")
             print(
                 "If --books is not specified, attempts to infer book from DOCX filename")
             sys.exit(1)

@@ -17,10 +17,8 @@ import sys
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-# Add current directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent.parent))
-from config import Config
-from instance_policy import process_instances
+from ..config import Config
+from ..instance_policy import process_instances
 
 
 def consolidate_lexicon(

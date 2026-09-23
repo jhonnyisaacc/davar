@@ -4,17 +4,13 @@ Basic test script for Delitzsch Strong's Matcher
 Tests the new modular architecture with separate components
 """
 
-from book_processor import BookProcessor
-from word_matcher import WordMatcher
-from result_formatter import ResultFormatter
-from prefix_detector import PrefixDetector
-from dictionary_loader import get_dictionary_loader
-from hebrew_utils import strip_nikud, tokenize_verse, normalize_for_matching
-import sys
+from .book_processor import BookProcessor
+from .word_matcher import WordMatcher
+from .result_formatter import ResultFormatter
+from .prefix_detector import PrefixDetector
+from .dictionary_loader import get_dictionary_loader
+from .hebrew_utils import strip_nikud, tokenize_verse, normalize_for_matching
 import os
-
-# Add the scripts directory to Python path for imports
-sys.path.insert(0, os.path.dirname(__file__))
 
 
 def test_hebrew_utils():

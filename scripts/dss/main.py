@@ -3,18 +3,11 @@
 Main entry point for DSS differences parser
 """
 
-import sys
-from pathlib import Path
 
-# Add scripts directory to path for imports
-scripts_dir = Path(__file__).parent.parent
-if str(scripts_dir) not in sys.path:
-    sys.path.insert(0, str(scripts_dir))
-
-from dss.config import BOOK_NAMES, NOTES_FILE
-from dss.notes_parser import parse_notes_file
-from dss.book_processor import BookProcessor
-from dss.output_writer import OutputWriter
+from .config import BOOK_NAMES, NOTES_FILE
+from .notes_parser import parse_notes_file
+from .book_processor import BookProcessor
+from .output_writer import OutputWriter
 
 
 def main():

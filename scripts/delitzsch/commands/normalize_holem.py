@@ -3,15 +3,8 @@
 from __future__ import annotations
 
 import argparse
-import sys
-from pathlib import Path
 
-if __package__ in (None, ""):
-    scripts_dir = Path(__file__).resolve().parents[2]
-    sys.path.insert(0, str(scripts_dir))
-    from delitzsch import normalize_delitzsch_holem as normalizer
-else:
-    from .. import normalize_delitzsch_holem as normalizer
+from .. import normalize_delitzsch_holem as normalizer
 
 
 def register_subcommand(subparsers: argparse._SubParsersAction) -> argparse.ArgumentParser:
