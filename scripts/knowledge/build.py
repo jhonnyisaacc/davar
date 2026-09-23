@@ -12,6 +12,7 @@ from .core import (
     KNOWLEDGE,
     OUTPUT,
     ROOT,
+    SOURCES,
     contained,
     digest,
     encoded,
@@ -19,21 +20,23 @@ from .core import (
     provenance,
     read_json,
     reference,
+    resolve_roots,
+    source_for_owner,
 )
 from .validate import Validator, validate_locators, validate_tree
 from .profiles import load_profile, validate_selections
 
 
 def source_record(item: dict, lexical_inputs=()):
-    kind = (
-        "published_note"
-        if item["path"].endswith(".md")
-        else "knowledge_record"
-        if item["owner"] == "shaul"
-        else "lexicon"
-        if item["id"] in lexical_inputs
-        else "dataset"
-    )
+    _, external = source_for_owner(item["owner"])
+    if item["path"].endswith(".md"):
+        kind = "published_note"
+    elif external is not None:
+        kind = external["record_kind"]
+    elif item["id"] in lexical_inputs:
+        kind = "lexicon"
+    else:
+        kind = "dataset"
     return dict(
         id="source:" + item["id"],
         owner=item["owner"],
@@ -166,9 +169,9 @@ def project(records: dict, query: dict, inputs_digest: str, coverage=None):
     )
 
 
-def artifacts(root: Path = ROOT, shaul_root: Path | None = None, profile=None):
+def artifacts(root: Path = ROOT, profile=None, **source_roots):
     profile = load_profile(root, profile)
-    manifest, blobs = pinned_inputs(root, shaul_root, profile["input_manifest"])
+    manifest, blobs = pinned_inputs(root, profile["input_manifest"], **source_roots)
     registries = {
         p.stem: read_json(p)
         for p in sorted((root / KNOWLEDGE / "registries").glob("*.json"))
@@ -207,10 +210,16 @@ def artifacts(root: Path = ROOT, shaul_root: Path | None = None, profile=None):
         blobs, registries["reference-mappings"], profile["scripture"]
     )
     records["evidence"].extend(adapters.lexical(blobs, profile["lexical"]))
-    records["concepts"], evidence, records["relations"] = adapters.shaul(
-        blobs, registries["aliases"], registries["reference-mappings"], profile["shaul"]
-    )
-    records["evidence"].extend(evidence)
+    for row in SOURCES.values():
+        concepts, evidence, relations = getattr(adapters, row["adapter"])(
+            blobs,
+            registries["aliases"],
+            registries["reference-mappings"],
+            profile[row["profile_group"]],
+        )
+        records["concepts"].extend(concepts)
+        records["evidence"].extend(evidence)
+        records["relations"].extend(relations)
     for name, selected_path in profile["authored"].items():
         path = Path(selected_path)
         checksum = digest((root / path).read_bytes())
@@ -346,16 +355,17 @@ def output_guard(output: Path, root: Path):
         raise ValueError("Output must be a new or empty directory")
 
 
-def build(
-    output: Path, root: Path = ROOT, shaul_root: Path | None = None, profile=None
-):
+def build(output: Path, root: Path = ROOT, profile=None, **source_roots):
     output_guard(output, root)
-    if shaul_root and (
-        output.resolve().is_relative_to(shaul_root.resolve())
-        or shaul_root.resolve().is_relative_to(output.resolve())
-    ):
-        raise ValueError("Output overlaps Shaul inputs")
-    files = artifacts(root, shaul_root, profile)
+    for kind, external in resolve_roots(source_roots).items():
+        resolved = external.resolve()
+        if output.resolve().is_relative_to(resolved) or resolved.is_relative_to(
+            output.resolve()
+        ):
+            raise ValueError(
+                f"Output overlaps {SOURCES[kind]['owner'].title()} inputs"
+            )
+    files = artifacts(root, profile, **source_roots)
     output.mkdir(parents=True, exist_ok=True)
     for name, data in files.items():
         path = contained(output, name)

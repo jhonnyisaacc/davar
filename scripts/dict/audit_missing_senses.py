@@ -16,7 +16,6 @@ from __future__ import annotations
 import argparse
 import json
 import re
-import sys
 import xml.etree.ElementTree as ET
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -24,8 +23,6 @@ from typing import Any
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parent.parent
-if str(PROJECT_ROOT) not in sys.path:
-    sys.path.insert(0, str(PROJECT_ROOT))
 
 from scripts.dict.config import config
 
@@ -134,14 +131,18 @@ def bani_transliteration(lemma: str, strong: str) -> dict[str, str]:
     if not lemma:
         return {"en": "", "es": ""}
 
-    bani_dir = PROJECT_ROOT / "tools" / "bani"
-    if str(bani_dir) not in sys.path:
-        sys.path.insert(0, str(bani_dir))
-
     try:
-        from transliterate import BaniTransliterator
+        from tools.bani.apply import Transliterator, load_jsonc
 
-        return BaniTransliterator.for_all_languages(lemma, strong)
+        schema_dir = PROJECT_ROOT / "tools" / "bani" / "schemas"
+        guides: dict[str, str] = {}
+        for language in ("en", "es"):
+            if not lemma.strip():
+                guides[language] = ""
+                continue
+            engine = Transliterator(load_jsonc(schema_dir / f"{language}.json"))
+            guides[language] = engine.transliterate_word(lemma, strong).get("guide", "")
+        return guides
     except Exception:
         return {"en": "", "es": ""}
 

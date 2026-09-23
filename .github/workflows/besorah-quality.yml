@@ -4,8 +4,8 @@ on:
     branches: [main]
     paths:
       - 'scripts/delitzsch/**'
-      - 'data/delitzsch_parsed/**'
-      - 'data/delitzsch_review/**'
+      - 'data/delitzsch/parsed/**'
+      - 'data/delitzsch/review/**'
       - 'tests/test_besorah_remediation.py'
       - 'tests/test_merge_strongs.py'
       - '.github/workflows/besorah-quality.yml'
@@ -13,8 +13,8 @@ on:
     branches: [main]
     paths:
       - 'scripts/delitzsch/**'
-      - 'data/delitzsch_parsed/**'
-      - 'data/delitzsch_review/**'
+      - 'data/delitzsch/parsed/**'
+      - 'data/delitzsch/review/**'
       - 'tests/test_besorah_remediation.py'
       - 'tests/test_merge_strongs.py'
 permissions:
@@ -29,4 +29,4 @@ jobs:
           python-version: '3.12'
       - run: pip install pytest python-dotenv
       - run: python -m pytest -q tests/test_besorah_remediation.py tests/test_merge_strongs.py tests/test_delitzsch_review.py
-      - run: python scripts/delitzsch/review/remediate.py check
+      - run: python -m scripts.delitzsch.review.remediate check

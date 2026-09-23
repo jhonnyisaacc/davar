@@ -4,16 +4,10 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
 from dataclasses import asdict
 from pathlib import Path
 
-if __package__ in (None, ""):
-    scripts_dir = Path(__file__).resolve().parents[2]
-    sys.path.insert(0, str(scripts_dir))
-    from delitzsch.review import workflow
-else:
-    from ..review import workflow
+from ..review import workflow
 
 
 def register_subcommand(subparsers: argparse._SubParsersAction) -> argparse.ArgumentParser:
@@ -27,7 +21,7 @@ def register_subcommand(subparsers: argparse._SubParsersAction) -> argparse.Argu
     add_common_scan_args(scan)
     scan.add_argument(
         "--output",
-        default="data/delitzsch_review/scan.json",
+        default="data/delitzsch/review/scan.json",
         help="Output JSON path relative to project root",
     )
     scan.set_defaults(handler=handle_scan)
@@ -42,7 +36,7 @@ def register_subcommand(subparsers: argparse._SubParsersAction) -> argparse.Argu
     )
     batch.add_argument(
         "--output-dir",
-        default="data/delitzsch_review/batches",
+        default="data/delitzsch/review/batches",
         help="Output directory for --all, relative to project root",
     )
     batch.add_argument(
@@ -52,7 +46,7 @@ def register_subcommand(subparsers: argparse._SubParsersAction) -> argparse.Argu
     )
     batch.add_argument(
         "--output",
-        help="Output JSON path. Defaults to data/delitzsch_review/batches/<timestamp>.json",
+        help="Output JSON path. Defaults to data/delitzsch/review/batches/<timestamp>.json",
     )
     batch.set_defaults(handler=handle_batch)
 
@@ -72,7 +66,7 @@ def add_common_scan_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--books",
         nargs="+",
-        help="Book folder names under data/delitzsch_parsed",
+        help="Book folder names under data/delitzsch/parsed",
     )
     parser.add_argument(
         "--no-suspicious",
@@ -224,7 +218,7 @@ def resolve_decisions_file(value: str, root: Path, review: Path) -> Path:
             )
 
     raise FileNotFoundError(
-        f"Decision file not found: {value}. Try data/delitzsch_review/batches/{raw.name}"
+        f"Decision file not found: {value}. Try data/delitzsch/review/batches/{raw.name}"
     )
 
 

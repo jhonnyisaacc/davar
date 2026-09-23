@@ -3,18 +3,13 @@
 Output file writing utilities
 """
 
-import sys
 import json
 from datetime import datetime
 from pathlib import Path
 from typing import Dict
 
-# Add scripts directory to path for imports
-scripts_dir = Path(__file__).parent.parent
-if str(scripts_dir) not in sys.path:
-    sys.path.insert(0, str(scripts_dir))
 
-from dss.config import OUTPUT_DIR, SOURCE_URL, LICENSE
+from .config import OUTPUT_DIR, SOURCE_URL, LICENSE
 
 
 class OutputWriter:

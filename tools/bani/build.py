@@ -3,10 +3,10 @@
 Pre-generate transliterations for dictionary data.
 
 Usage:
-    python tools/bani/build.py --lexicon --prefixes
-    python tools/bani/build.py --lexicon-only
-    python tools/bani/build.py --prefixes-only
-    python tools/bani/build.py --test  # Dry run
+    python -m tools.bani.build --lexicon --prefixes
+    python -m tools.bani.build --lexicon-only
+    python -m tools.bani.build --prefixes-only
+    python -m tools.bani.build --test  # Dry run
 """
 
 import argparse
@@ -17,12 +17,19 @@ from typing import Dict, Any, List, Optional
 import sys
 from pathlib import Path
 
-# Add the tools directory to the path so we can import
-tools_dir = Path(__file__).parent
-if str(tools_dir) not in sys.path:
-    sys.path.insert(0, str(tools_dir))
 
-from transliterate import BaniTransliterator
+from .apply import Transliterator, load_jsonc
+
+
+def _engine(language: str) -> Transliterator:
+    schema_path = Path(__file__).parent / "schemas" / f"{language}.json"
+    return Transliterator(load_jsonc(schema_path))
+
+
+def _guide(engine: Transliterator, hebrew: str, strongs: str = "") -> str:
+    if not hebrew or not hebrew.strip():
+        return ""
+    return engine.transliterate_word(hebrew, strongs).get("guide", "")
 
 
 def load_json_file(path: Path) -> Dict[str, Any]:
@@ -52,8 +59,8 @@ def build_lexicon_transliterations(test_mode: bool = False, limit: Optional[int]
     print(f"Loaded {len(lexicon)} lexicon entries")
 
     # Initialize transliterators
-    en_transliterator = BaniTransliterator("en")
-    es_transliterator = BaniTransliterator("es")
+    en_transliterator = _engine("en")
+    es_transliterator = _engine("es")
 
     # Process entries
     processed = 0
@@ -66,8 +73,8 @@ def build_lexicon_transliterations(test_mode: bool = False, limit: Optional[int]
             continue
 
         # Generate transliterations
-        translit_en = en_transliterator.transliterate(hebrew, strongs_num)
-        translit_es = es_transliterator.transliterate(hebrew, strongs_num)
+        translit_en = _guide(en_transliterator, hebrew, strongs_num)
+        translit_es = _guide(es_transliterator, hebrew, strongs_num)
 
         # Add to entry
         entry['transliteration_en'] = translit_en
@@ -98,8 +105,8 @@ def build_prefix_transliterations(test_mode: bool = False) -> None:
         return
 
     # Initialize transliterators
-    en_transliterator = BaniTransliterator("en")
-    es_transliterator = BaniTransliterator("es")
+    en_transliterator = _engine("en")
+    es_transliterator = _engine("es")
 
     # Process each prefix file
     prefix_files = list(prefixes_dir.glob("*.json"))
@@ -115,8 +122,8 @@ def build_prefix_transliterations(test_mode: bool = False) -> None:
             continue
 
         # Generate transliterations
-        translit_en = en_transliterator.transliterate(hebrew, prefix_data.get('id', ''))
-        translit_es = es_transliterator.transliterate(hebrew, prefix_data.get('id', ''))
+        translit_en = _guide(en_transliterator, hebrew, prefix_data.get('id', ''))
+        translit_es = _guide(es_transliterator, hebrew, prefix_data.get('id', ''))
 
         # Add to prefix data
         prefix_data['transliteration_en'] = translit_en

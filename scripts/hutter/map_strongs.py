@@ -4,7 +4,6 @@ import argparse
 import hashlib
 import json
 import re
-import sys
 import unicodedata
 from collections import Counter, defaultdict
 from dataclasses import dataclass
@@ -16,14 +15,12 @@ from typing import Any, Iterable, TypeVar
 T = TypeVar("T")
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-if str(REPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(REPO_ROOT))
 
 from scripts.translit.local_translit import LocalTransliterator
 
 
 HUTTER_ROOT = REPO_ROOT / "data" / "hutter" / "staging" / "output"
-DELITZSCH_ROOT = REPO_ROOT / "data" / "delitzsch_parsed"
+DELITZSCH_ROOT = REPO_ROOT / "data" / "delitzsch" / "parsed"
 TANAJ_ROOT = REPO_ROOT / "data" / "oe"
 LEXICON_WORDS_ROOT = REPO_ROOT / "data" / "dict" / "lexicon" / "words"
 LEXICON_ROOTS_ROOT = REPO_ROOT / "data" / "dict" / "lexicon" / "roots"

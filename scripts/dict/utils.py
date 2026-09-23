@@ -582,7 +582,7 @@ def load_strongs_data() -> Dict:
     Returns:
         Dictionary of Strong's entries keyed by Strong's number
     """
-    from config import Config
+    from .config import Config
     config = Config()
     
     if config.STRONGS_FILE.exists():
@@ -597,7 +597,7 @@ def load_strong_refs() -> Dict:
     Returns:
         Dictionary of Strong's references keyed by Strong's number
     """
-    from config import Config
+    from .config import Config
     config = Config()
     
     if config.STRONG_REFS_FILE.exists():
@@ -613,7 +613,7 @@ def load_bdb_xml():
     Returns:
         XML root element or None if file not found/unparseable
     """
-    from config import Config
+    from .config import Config
     config = Config()
     
     if not config.BDB_XML.exists():

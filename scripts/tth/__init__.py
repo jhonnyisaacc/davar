@@ -1,19 +1,21 @@
+#!/usr/bin/env python3
 """
-TTH (Textual Translation of Hebrew) Processing System
-====================================================
+TTH2 Processing Module
+======================
 
-A modular system for processing Hebrew Scriptures from DOCX/Markdown to JSON format.
+Simplified TTH (Textual Translation of Hebrew) processing system for Davar app.
 
-Modules:
-- converter: DOCX to Markdown conversion
-- extractor: Book section extraction from complete documents
-- processor: Markdown to JSON processing
-- validator: Quality assurance and validation
-- cli: Command-line interface
+This module provides a streamlined workflow for converting DOCX files to
+individual per-book markdown files, then processing them into JSON format.
+
+Features:
+- Clean separation between conversion steps
+- Simplified JSON output structure
+- Better error handling and validation
+- Reusable components from the original TTH processor
 
 Author: Davar Project
-License: Project-specific (see project rules)
 """
 
-__version__ = "1.0.0"
+__version__ = "2.0.0"
 __author__ = "Davar Project"

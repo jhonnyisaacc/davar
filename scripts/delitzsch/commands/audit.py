@@ -4,16 +4,9 @@ from __future__ import annotations
 
 import argparse
 import json
-import sys
 from dataclasses import asdict
-from pathlib import Path
 
-if __package__ in (None, ""):
-    scripts_dir = Path(__file__).resolve().parents[2]
-    sys.path.insert(0, str(scripts_dir))
-    from delitzsch import audit_delitzsch_parsing as auditor
-else:
-    from .. import audit_delitzsch_parsing as auditor
+from .. import audit_delitzsch_parsing as auditor
 
 
 def register_subcommand(subparsers: argparse._SubParsersAction) -> argparse.ArgumentParser:
@@ -25,7 +18,7 @@ def register_subcommand(subparsers: argparse._SubParsersAction) -> argparse.Argu
         "--books",
         nargs="+",
         default=auditor.DEFAULT_BOOKS,
-        help="Book folder names under data/delitzsch_parsed",
+        help="Book folder names under data/delitzsch/parsed",
     )
     parser.add_argument(
         "--output-dir",
@@ -44,7 +37,7 @@ def register_subcommand(subparsers: argparse._SubParsersAction) -> argparse.Argu
 
 def handle(args: argparse.Namespace) -> int:
     root = auditor.project_root()
-    parsed_dir = root / "data" / "delitzsch_parsed"
+    parsed_dir = root / "data" / "delitzsch" / "parsed"
     output_dir = root / args.output_dir
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -85,7 +78,7 @@ def main(argv: list[str] | None = None) -> int:
         "--books",
         nargs="+",
         default=auditor.DEFAULT_BOOKS,
-        help="Book folder names under data/delitzsch_parsed",
+        help="Book folder names under data/delitzsch/parsed",
     )
     parser.add_argument(
         "--output-dir",

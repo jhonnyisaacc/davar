@@ -1,20 +1,13 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { BottomSheet } from "./components/BottomSheet";
-import { ConnectionErrorPage } from "./components/ConnectionErrorPage";
 import { DesignSystemExport } from "./components/DesignSystemExport";
-import { DonateScreen } from "./components/DonateScreen";
-import { FeaturesScreen } from "./components/FeaturesScreen";
-import { FeedbackScreen } from "./components/FeedbackScreen";
-import { HomeScreen } from "./components/HomeScreen";
-import { LegalScreen } from "./components/LegalScreen";
 import { MobileDesignSystemGuide } from "./components/MobileDesignSystemGuide";
 import { NavigationBar } from "./components/NavigationBar";
 import { NeumorphCard } from "./components/NeumorphCard";
-import { NotFoundPage } from "./components/NotFoundPage";
-import { SettingsScreen } from "./components/SettingsScreen";
 import { Skeleton } from "./components/ui/skeleton";
 import { VerseDisplay } from "./components/VerseDisplay";
 import { WordCard } from "./components/WordCard";
+import { renderNonVerseScreen } from "./nonVerseScreens";
 import { useDocumentTitle } from "./hooks/useDocumentTitle";
 import { usePersistedState } from "./hooks/usePersistedState";
 import { translate, useTranslation } from "./hooks/useTranslation";
@@ -146,7 +139,10 @@ export default function App() {
 	const initialState = getStoredReadingState() ?? createDefaultReadingState();
 
 	// Use persisted state hooks for all settings
-	const [currentScreen, setCurrentScreen] = useState<Screen>("verse");
+	const [currentScreen, setCurrentScreen] = useState<Screen>(() => {
+		if (typeof window === "undefined") return "verse";
+		return parseRoutePath(window.location.pathname)?.screen ?? "notFound";
+	});
 	const currentScreenRef = useRef(currentScreen);
 	const [theme, setTheme] = usePersistedState("theme", initialState.theme);
 	const [language, setLanguage] = usePersistedState(
@@ -257,7 +253,7 @@ export default function App() {
 		useState<WordAnalysis | null>(null);
 	const [isDssAnalysisLoading, setIsDssAnalysisLoading] = useState(false);
 	const lastUrlRef = useRef<string | null>(null);
-	const pendingRouteRef = useRef<RouteState | null>(null);
+	const pendingRouteRef = useRef<RouteState | null | undefined>(undefined);
 	const isHandlingPopStateRef = useRef(false);
 	const preserveWordRef = useRef(false);
 	const pendingWordTextRef = useRef<string | null>(null);
@@ -818,18 +814,16 @@ export default function App() {
 
 	useEffect(() => {
 		const pending = pendingRouteRef.current;
-		if (!pending) return;
-
-		// Handle invalid routes (null)
+		if (pending === undefined) return;
 		if (pending === null) {
 			setCurrentScreen("notFound");
-			pendingRouteRef.current = null;
+			pendingRouteRef.current = undefined;
 			return;
 		}
 
 		if (pending.screen !== "verse") {
 			setCurrentScreen(pending.screen);
-			pendingRouteRef.current = null;
+			pendingRouteRef.current = undefined;
 			return;
 		}
 
@@ -846,7 +840,7 @@ export default function App() {
 			} else {
 				// Book not found - show 404 page
 				setCurrentScreen("notFound");
-				pendingRouteRef.current = null;
+				pendingRouteRef.current = undefined;
 				return;
 			}
 		}
@@ -860,7 +854,7 @@ export default function App() {
 		}
 
 		setCurrentScreen("verse");
-		pendingRouteRef.current = null;
+		pendingRouteRef.current = undefined;
 	}, [books]);
 
 	useEffect(() => {
@@ -1086,6 +1080,13 @@ export default function App() {
 			chapter: currentChapter,
 			verse: currentVerse,
 		});
+
+		if (
+			currentScreen === "notFound" &&
+			parseRoutePath(window.location.pathname) === null
+		) {
+			return;
+		}
 
 		if (lastUrlRef.current === path) return;
 		window.history.pushState(null, "", path);
@@ -1705,7 +1706,7 @@ export default function App() {
 							setCurrentVerse(1);
 						}}
 						onVerseChange={(verse) => setCurrentVerse(verse)}
-						onHomeClick={() => setCurrentScreen("home")}
+						onHomeClick={(screen) => setCurrentScreen(screen)}
 						onDesignSystemClick={() => setShowDesignSystem(true)}
 						theme={theme}
 						onThemeChange={setTheme}
@@ -1749,71 +1750,30 @@ export default function App() {
 
 			<div className="px-6 pb-10 md:pb-32 pt-6">
 				<div className="max-w-7xl mx-auto">
-					{currentScreen === "home" && (
-						<HomeScreen
-							language={language}
-							onFeaturesClick={() => setCurrentScreen("features")}
-							onDonateClick={() => setCurrentScreen("donate")}
-						/>
-					)}
-					{currentScreen === "terms" && (
-						<LegalScreen
-							kind="terms"
-							language={language}
-							onBack={() => setCurrentScreen("home")}
-						/>
-					)}
-					{currentScreen === "privacy" && (
-						<LegalScreen
-							kind="privacy"
-							language={language}
-							onBack={() => setCurrentScreen("home")}
-						/>
-					)}
-					{currentScreen === "feedback" && (
-						<FeedbackScreen
-							language={language}
-							onBack={() => setCurrentScreen("home")}
-						/>
-					)}
-					{currentScreen === "donate" && <DonateScreen language={language} />}
-					{currentScreen === "features" && (
-						<FeaturesScreen language={language} />
-					)}
-					{currentScreen === "settings" && (
-						<SettingsScreen
-							theme={theme}
-							onThemeChange={setTheme}
-							language={language}
-							onLanguageChange={setLanguage}
-							besorahLanguage={besorahLanguage}
-							onBesorahLanguageChange={setBesorahLanguage}
-							greekAvailable={greekAvailable}
-							besorahTextVersion={besorahTextVersion}
-							onBesorahTextVersionChange={handleBesorahTextVersionChange}
-							showQumran={showQumran}
-							onQumranChange={setShowQumran}
-							showFullChapter={showFullChapter}
-							onFullChapterChange={setShowFullChapter}
-							seferMode={seferMode}
-							onSeferModeChange={handleSeferModeChange}
-							hebrewOnly={hebrewOnly}
-							onHebrewOnlyChange={handleHebrewOnlyChange}
-							onDesignSystemClick={() => setShowDesignSystem(true)}
-							onMobileDesignGuideClick={() => setShowMobileDesignGuide(true)}
-						/>
-					)}
-
-					{currentScreen === "notFound" && (
-						<NotFoundPage
-							language={language}
-							onGoBack={() => setCurrentScreen("verse")}
-						/>
-					)}
-
-					{currentScreen === "connectionError" && (
-						<ConnectionErrorPage onRetry={() => window.location.reload()} />
-					)}
+					{currentScreen !== "verse" &&
+						renderNonVerseScreen({
+							screen: currentScreen,
+							language,
+							theme,
+							onThemeChange: setTheme,
+							onLanguageChange: setLanguage,
+							besorahLanguage,
+							onBesorahLanguageChange: setBesorahLanguage,
+							greekAvailable,
+							besorahTextVersion,
+							onBesorahTextVersionChange: handleBesorahTextVersionChange,
+							showQumran,
+							onQumranChange: setShowQumran,
+							showFullChapter,
+							onFullChapterChange: setShowFullChapter,
+							seferMode,
+							onSeferModeChange: handleSeferModeChange,
+							hebrewOnly,
+							onHebrewOnlyChange: handleHebrewOnlyChange,
+							onOpenScreen: setCurrentScreen,
+							onOpenDesignSystem: () => setShowDesignSystem(true),
+							onOpenMobileDesignGuide: () => setShowMobileDesignGuide(true),
+						})}
 
 					{currentScreen === "verse" && (
 						<div className="grid gap-6 items-start md:grid-cols-[7fr_3fr]">

@@ -4,19 +4,10 @@ from __future__ import annotations
 
 import argparse
 import logging
-import sys
-from pathlib import Path
 
-if __package__ in (None, ""):
-    scripts_dir = Path(__file__).resolve().parents[2]
-    sys.path.insert(0, str(scripts_dir))
-    from delitzsch import matcher_runner as matcher
-    from delitzsch.config import OUTPUT_DIR, ensure_output_dirs
-    from delitzsch.sqlite_loader import get_sqlite_loader
-else:
-    from .. import matcher_runner as matcher
-    from ..config import OUTPUT_DIR, ensure_output_dirs
-    from ..sqlite_loader import get_sqlite_loader
+from .. import matcher_runner as matcher
+from ..config import OUTPUT_DIR, ensure_output_dirs
+from ..sqlite_loader import get_sqlite_loader
 
 
 def register_subcommand(subparsers: argparse._SubParsersAction) -> argparse.ArgumentParser:

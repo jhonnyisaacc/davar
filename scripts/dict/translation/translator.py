@@ -9,12 +9,8 @@ import json
 import time
 import logging
 import re
-import sys
-from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-# Add parent directory to path for utils import
-sys.path.insert(0, str(Path(__file__).parent.parent))
 
 try:
     import httpx
@@ -37,7 +33,7 @@ from .config import (
 )
 
 # Import utilities from parent module
-from utils import extract_json_array_robust
+from ..utils import extract_json_array_robust
 
 logger = logging.getLogger(__name__)
 

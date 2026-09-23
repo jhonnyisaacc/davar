@@ -8,7 +8,7 @@ import logging
 import re
 from pathlib import Path
 from typing import Dict, List, Tuple
-from config import BOOK_METADATA
+from .config import BOOK_METADATA
 
 logger = logging.getLogger(__name__)
 

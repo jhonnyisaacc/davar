@@ -4,16 +4,12 @@ Orchestrator script for BES processing pipeline
 Downloads USFX XML, parses to JSON, and validates output
 """
 
-import sys
 import logging
-from pathlib import Path
 
-# Add current directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent))
 
-from download import download_bes_usfx
-from parse_usfx import parse_usfx_file
-from validate import validate_bes_output, print_validation_report
+from .download import download_bes_usfx
+from .parse_usfx import parse_usfx_file
+from .validate import validate_bes_output, print_validation_report
 
 logger = logging.getLogger(__name__)
 

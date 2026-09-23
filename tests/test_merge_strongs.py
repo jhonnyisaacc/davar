@@ -1,10 +1,7 @@
 """Tests for Besorah Strong merge_strongs prefix composition and post-merge validation."""
 
 import json
-import sys
-from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from scripts.delitzsch.strongs.v2.merge_strongs import (
     _report_payload,
@@ -45,7 +42,7 @@ def test_compose_strong_none_or_empty_strong():
 # merge_strongs_for_book composes prefixes on write
 # --------------------------------------------------------------------------- #
 def test_merge_strongs_for_book_composes_prefixes(tmp_path, monkeypatch):
-    parsed_dir = tmp_path / "data" / "delitzsch_parsed"
+    parsed_dir = tmp_path / "data" / "delitzsch" / "parsed"
     v2_dir = parsed_dir / "strongs" / "v2"
 
     chapter_path = parsed_dir / "philemon" / "1.json"
@@ -132,7 +129,7 @@ def test_merge_strongs_for_book_composes_prefixes(tmp_path, monkeypatch):
 
 
 def test_merge_strongs_for_book_dry_run_does_not_modify(tmp_path, monkeypatch):
-    parsed_dir = tmp_path / "data" / "delitzsch_parsed"
+    parsed_dir = tmp_path / "data" / "delitzsch" / "parsed"
     v2_dir = parsed_dir / "strongs" / "v2"
 
     chapter_path = parsed_dir / "philemon" / "1.json"

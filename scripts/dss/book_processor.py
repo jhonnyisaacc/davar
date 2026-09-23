@@ -3,18 +3,12 @@
 Book processing logic for extracting DSS differences
 """
 
-import sys
 from typing import Dict, Optional
-from pathlib import Path
 
-# Add scripts directory to path for imports
-scripts_dir = Path(__file__).parent.parent
-if str(scripts_dir) not in sys.path:
-    sys.path.insert(0, str(scripts_dir))
 
-from dss.xml_parsers import parse_dss_book, parse_wlc_book
-from dss.notes_parser import extract_masoretic_dss_words, is_fragment_to_fragment_difference
-from dss.config import DSS_DIR, WLC_DIR, BOOK_NAMES
+from .xml_parsers import parse_dss_book, parse_wlc_book
+from .notes_parser import extract_masoretic_dss_words, is_fragment_to_fragment_difference
+from .config import DSS_DIR, WLC_DIR, BOOK_NAMES
 
 
 class BookProcessor:

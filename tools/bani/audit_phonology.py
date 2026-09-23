@@ -12,16 +12,13 @@ from __future__ import annotations
 import argparse
 import json
 import re
-import sys
 from pathlib import Path
 from typing import Any
 
 
 HERE = Path(__file__).resolve().parent
-if str(HERE) not in sys.path:
-    sys.path.insert(0, str(HERE))
 
-from transliterate import BaniTransliterator  # noqa: E402
+from .apply import Transliterator, load_jsonc  # noqa: E402
 
 
 def pron_syllables(pron: str) -> list[str]:
@@ -30,7 +27,7 @@ def pron_syllables(pron: str) -> list[str]:
 
 
 def audit(data: list[dict[str, Any]], language: str = "en") -> dict[str, Any]:
-    transliterator = BaniTransliterator(language)
+    transliterator = Transliterator(load_jsonc(HERE / "schemas" / f"{language}.json"))
     eligible = 0
     matches = 0
     excluded = 0
@@ -46,8 +43,11 @@ def audit(data: list[dict[str, Any]], language: str = "en") -> dict[str, Any]:
             continue
 
         eligible += 1
-        translit = transliterator.transliterate(hebrew, strongs)
-        actual = transliterator.transliterator.split_into_syllables(translit.lower())
+        if hebrew.strip():
+            translit = transliterator.transliterate_word(hebrew, strongs).get("guide", "")
+        else:
+            translit = ""
+        actual = transliterator.split_into_syllables(translit.lower())
         expected_count = len(syllables)
         actual_count = len(actual)
         if expected_count == actual_count:

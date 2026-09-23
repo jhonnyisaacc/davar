@@ -1,8 +1,6 @@
 import json
-import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from scripts.delitzsch.review.workflow import (
     LexiconIndex,
@@ -21,7 +19,7 @@ def write_json(path: Path, data):
 
 
 def test_occurrence_identity_includes_verse(tmp_path):
-    parsed = tmp_path / "data" / "delitzsch_parsed"
+    parsed = tmp_path / "data" / "delitzsch" / "parsed"
     write_json(
         parsed / "matthew" / "1.json",
         [
@@ -53,9 +51,9 @@ def test_occurrence_identity_includes_verse(tmp_path):
 
 
 def test_apply_dry_run_does_not_modify_chapter_or_write_log(tmp_path):
-    parsed = tmp_path / "data" / "delitzsch_parsed"
+    parsed = tmp_path / "data" / "delitzsch" / "parsed"
     lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
-    log_dir = tmp_path / "data" / "delitzsch_review" / "decisions"
+    log_dir = tmp_path / "data" / "delitzsch" / "review" / "decisions"
     chapter_path = parsed / "matthew" / "1.json"
     write_json(
         chapter_path,
@@ -118,9 +116,9 @@ def test_apply_dry_run_does_not_modify_chapter_or_write_log(tmp_path):
 
 
 def test_apply_set_strong_updates_reviewed_word_metadata(tmp_path):
-    parsed = tmp_path / "data" / "delitzsch_parsed"
+    parsed = tmp_path / "data" / "delitzsch" / "parsed"
     lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
-    log_dir = tmp_path / "data" / "delitzsch_review" / "decisions"
+    log_dir = tmp_path / "data" / "delitzsch" / "review" / "decisions"
     chapter_path = parsed / "matthew" / "1.json"
     write_json(
         chapter_path,
@@ -195,10 +193,10 @@ def test_apply_set_strong_updates_reviewed_word_metadata(tmp_path):
 
 
 def test_apply_create_custom_entry_updates_word_and_custom_dictionary(tmp_path):
-    parsed = tmp_path / "data" / "delitzsch_parsed"
+    parsed = tmp_path / "data" / "delitzsch" / "parsed"
     lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
     custom_path = tmp_path / "data" / "dict" / "lexicon" / "custom_definitions.json"
-    log_dir = tmp_path / "data" / "delitzsch_review" / "decisions"
+    log_dir = tmp_path / "data" / "delitzsch" / "review" / "decisions"
     chapter_path = parsed / "acts" / "1.json"
     write_json(
         chapter_path,
@@ -265,10 +263,10 @@ def test_apply_create_custom_entry_updates_word_and_custom_dictionary(tmp_path):
 
 
 def test_apply_upsert_custom_definition_for_existing_strong(tmp_path):
-    parsed = tmp_path / "data" / "delitzsch_parsed"
+    parsed = tmp_path / "data" / "delitzsch" / "parsed"
     lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
     custom_path = tmp_path / "data" / "dict" / "lexicon" / "custom_definitions.json"
-    log_dir = tmp_path / "data" / "delitzsch_review" / "decisions"
+    log_dir = tmp_path / "data" / "delitzsch" / "review" / "decisions"
     write_json(
         lexicon_dir / "H3442.json",
         {
@@ -334,9 +332,9 @@ def test_custom_entry_hebrew_is_available_as_normalized_lemma(tmp_path):
 
 
 def test_reviewed_manual_flags_are_not_remaining_issues(tmp_path):
-    parsed = tmp_path / "data" / "delitzsch_parsed"
+    parsed = tmp_path / "data" / "delitzsch" / "parsed"
     lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
-    log_dir = tmp_path / "data" / "delitzsch_review" / "decisions"
+    log_dir = tmp_path / "data" / "delitzsch" / "review" / "decisions"
     write_json(
         parsed / "acts" / "1.json",
         [
@@ -420,7 +418,7 @@ def test_issue_119_grammar_policy_resolves_safe_null_forms():
         assert custom[key]["mapping_scope"] == "exact"
 
     issues = scan_issues(
-        root / "data" / "delitzsch_parsed",
+        root / "data" / "delitzsch" / "parsed",
         LexiconIndex(root / "data" / "dict" / "lexicon" / "words"),
     )
     nulls = [issue.occurrence.text for issue in issues if issue.issue_type == "null_strong"]
@@ -437,9 +435,9 @@ def test_issue_119_grammar_policy_resolves_safe_null_forms():
 
 def test_issue_119_proper_name_review_has_no_remaining_scan_flags():
     root = Path(__file__).resolve().parents[1]
-    parsed = root / "data" / "delitzsch_parsed"
+    parsed = root / "data" / "delitzsch" / "parsed"
     lexicon = LexiconIndex(root / "data" / "dict" / "lexicon" / "words")
-    log_dir = root / "data" / "delitzsch_review" / "decisions"
+    log_dir = root / "data" / "delitzsch" / "review" / "decisions"
 
     issues = scan_issues(parsed, lexicon)
     remaining, reviewed = partition_reviewed_issues(
@@ -456,7 +454,7 @@ def test_issue_119_false_name_assignments_use_contextual_lexemes():
 
     def word(book, chapter, verse_number, word_index):
         chapter_data = json.loads(
-            (root / "data" / "delitzsch_parsed" / book / f"{chapter}.json").read_text(
+            (root / "data" / "delitzsch" / "parsed" / book / f"{chapter}.json").read_text(
                 encoding="utf-8"
             )
         )[0]
@@ -492,7 +490,7 @@ def test_issue_119_genuine_name_entries_have_definitions():
 
 def test_john1_has_no_null_strongs_after_custom_grammar_pass():
     root = Path(__file__).resolve().parents[1]
-    parsed_dir = root / "data" / "delitzsch_parsed" / "john1"
+    parsed_dir = root / "data" / "delitzsch" / "parsed" / "john1"
     nulls = []
 
     for chapter_path in sorted(parsed_dir.glob("*.json"), key=lambda path: int(path.stem)):
@@ -519,12 +517,12 @@ def test_targeted_proper_names_use_custom_definitions():
     custom = json.loads(custom_path.read_text(encoding="utf-8"))
 
     john3 = json.loads(
-        (root / "data" / "delitzsch_parsed" / "john3" / "1.json").read_text(
+        (root / "data" / "delitzsch" / "parsed" / "john3" / "1.json").read_text(
             encoding="utf-8"
         )
     )
     ephesians = json.loads(
-        (root / "data" / "delitzsch_parsed" / "ephesians" / "1.json").read_text(
+        (root / "data" / "delitzsch" / "parsed" / "ephesians" / "1.json").read_text(
             encoding="utf-8"
         )
     )

@@ -39,7 +39,7 @@ def normalize_hebrew(text: str) -> str:
 
 @dataclass(frozen=True)
 class Occurrence:
-    """A stable word occurrence identity from data/delitzsch_parsed."""
+    """A stable word occurrence identity from data/delitzsch/parsed."""
 
     book: str
     chapter: int
@@ -178,11 +178,11 @@ def project_root() -> Path:
 
 
 def parsed_dir(root: Path | None = None) -> Path:
-    return (root or project_root()) / "data" / "delitzsch_parsed"
+    return (root or project_root()) / "data" / "delitzsch" / "parsed"
 
 
 def review_dir(root: Path | None = None) -> Path:
-    return (root or project_root()) / "data" / "delitzsch_review"
+    return (root or project_root()) / "data" / "delitzsch" / "review"
 
 
 def lexicon_words_dir(root: Path | None = None) -> Path:

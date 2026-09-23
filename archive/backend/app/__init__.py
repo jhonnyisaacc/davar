@@ -1,1 +1,0 @@
-# Davar FastAPI Backend Application

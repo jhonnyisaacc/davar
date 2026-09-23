@@ -37,6 +37,6 @@
     "source_kind": "translation",
     "reference_system_id": "translation-legacy",
     "source_revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-    "attribution": "Original TTH text and footnotes from data/tth_2/json; existing attribution and permissions apply."
+    "attribution": "Original TTH text and footnotes from data/tth/json; existing attribution and permissions apply."
   }
 ]

@@ -8,9 +8,11 @@ from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
+from ..paths import ROOT
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_SOURCE_ROOT = Path.home() / "shafan"
+
+REPO_ROOT = ROOT
+DEFAULT_SOURCE_ROOT = ROOT.parent / "shafan"
 DEFAULT_DEST_ROOT = REPO_ROOT / "data" / "hutter" / "staging"
 EXCLUDED_NAMES = {".DS_Store", "__pycache__"}
 

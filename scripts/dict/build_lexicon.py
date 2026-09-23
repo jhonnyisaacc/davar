@@ -8,10 +8,7 @@ This is the main entry point for the lexicon generation pipeline.
 Supports testing mode with 1% of data for development and validation.
 """
 
-if __package__:
-    from .transliteration_policy import apply_transliteration_policy
-else:
-    from transliteration_policy import apply_transliteration_policy
+from .transliteration_policy import apply_transliteration_policy
 
 import argparse
 import json
@@ -22,21 +19,34 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 import xml.etree.ElementTree as ET
 
-# Add current directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent))
 
-from config import config
-from utils import save_json, load_json, load_strongs_data, load_strong_refs, load_bdb_xml
+from .config import config
+from .utils import save_json, load_json, load_strongs_data, load_strong_refs, load_bdb_xml
 
-# Import extraction functions
-sys.path.insert(0, str(config.OE_DIR))
-try:
-    from extract_word_osb import extract_from_strongs, extract_from_bdb
-    EXTRACTION_AVAILABLE = True
-except ImportError:
+import importlib.util
+
+def _load_osb_extractors():
+    """Load data/oe/extract_word_osb.py when that optional helper exists."""
+    path = config.OE_DIR / "extract_word_osb.py"
+    if not path.is_file():
+        return None
+    spec = importlib.util.spec_from_file_location("extract_word_osb", path)
+    if spec is None or spec.loader is None:
+        return None
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+_osb = _load_osb_extractors()
+if _osb is None:
     EXTRACTION_AVAILABLE = False
     extract_from_strongs = None
     extract_from_bdb = None
+else:
+    EXTRACTION_AVAILABLE = True
+    extract_from_strongs = _osb.extract_from_strongs
+    extract_from_bdb = _osb.extract_from_bdb
 
 NS = {'bdb': 'http://openscriptures.github.com/morphhb/namespace'}
 
@@ -95,9 +105,6 @@ def create_definition(text_en: str, source: str, order: int, sense: Optional[str
         definition["sense"] = sense
 
     return definition
-
-
-
 
 
 def load_lexical_index() -> Dict:
@@ -909,7 +916,7 @@ def build_lexicon_entry(strong_number: str, bdb_root, update_existing: bool = Fa
             entry["root_ref"] = root_number
 
     if not is_root and config.LEXICON_ROOTS_DIR.exists():
-        from adjudicate_roots import audit_from_derivations
+        from .adjudicate_roots import audit_from_derivations
         root_index = {path.stem: {} for path in config.LEXICON_ROOTS_DIR.glob("H*.json")}
         decision = audit_from_derivations({strong_number: entry}, root_index, strongs_data)[0]
         if decision.proposed_root_ref:

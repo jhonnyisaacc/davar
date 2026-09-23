@@ -15,5 +15,5 @@ jobs:
           python-version: '3.12'
       - run: pip install pytest
       - run: python -m pytest -q tools/bani/tests
-      - run: python tools/bani/audit_phonology.py
-      - run: python tools/bani/audit_phonology.py --language es
+      - run: python -m tools.bani.audit_phonology
+      - run: python -m tools.bani.audit_phonology --language es

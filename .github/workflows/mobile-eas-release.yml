@@ -28,11 +28,12 @@ on:
           - build
           - build-and-submit
 
-# Never overlap two publishes for the same EAS target. Keeping the older run
-# alive lets EAS finish the already-authorized operation; the second run waits
-# instead of creating a duplicate OTA/build concurrently.
+# Production shares `mobile-eas-main` with the automatic EAS workflow so this
+# manual run waits instead of publishing production while that workflow is
+# already publishing it. Preview keeps a separate group. The older run stays
+# alive.
 concurrency:
-  group: mobile-eas-${{ inputs.profile }}-${{ inputs.platform }}-${{ inputs.release_kind }}
+  group: ${{ inputs.profile == 'production' && 'mobile-eas-main' || format('mobile-eas-{0}-{1}-{2}', inputs.profile, inputs.platform, inputs.release_kind) }}
   cancel-in-progress: false
 
 permissions:

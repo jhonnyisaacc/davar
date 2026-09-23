@@ -11,7 +11,6 @@ import gzip
 import hashlib
 import json
 import re
-import sys
 import io
 import subprocess
 import tarfile
@@ -20,11 +19,10 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
-sys.path.insert(0, str(ROOT))
 from scripts.delitzsch.review.workflow import LexiconIndex, load_latest_decisions, _refresh_verse_prefix_separators
 
-PARSED = ROOT / "data/delitzsch_parsed"
-REPORTS = ROOT / "data/delitzsch_review/reports"
+PARSED = ROOT / "data/delitzsch/parsed"
+REPORTS = ROOT / "data/delitzsch/review/reports"
 PREFIXES = {"Hb", "Hl", "Hk", "Hc", "Hd", "Hm"}
 # Fully pointed forms only. בי is deliberately excluded: H994 is a real homograph.
 GRAMMAR = {"בּוֹ": "D0208", "בוֹ": "D0208", "לִי": "D0265", "לוֹ": "D0266", "בָּהּ": "D0271", "בָּהֶם": "D0277"}
@@ -160,7 +158,7 @@ def build_plan(corpus, lexicon, decisions, include_legacy=False):
             if len(form)>=4 and len(lemma)>=3 and len(form & lemma)<=1: reasons.append("lexical_plausibility")
         if reasons:
             queue.append(dict(location=key, book=path.split('/')[0],chapter=chapter(after[path])["chapter"],verse=verse["verse"],word_index=index,text=word["text"],strong=strong,
-                reasons=reasons, confidence=0, prior_review_status=decisions.get(key,{}).get("status"), evidence=f"data/delitzsch_parsed/{path}; heuristic only, no automatic lexical change"))
+                reasons=reasons, confidence=0, prior_review_status=decisions.get(key,{}).get("status"), evidence=f"data/delitzsch/parsed/{path}; heuristic only, no automatic lexical change"))
     files = {path:{"before_sha256":digest(corpus[path]),"after_sha256":digest(payload),"after":payload} for path,payload in after.items() if payload != corpus[path]}
     errors = publication_errors(after,lexicon)
     return dict(schema_version=1,method="besorah_remediation_v1",baseline=metrics(corpus),final=metrics(after),changes=changes,files=files,
@@ -210,12 +208,12 @@ def main():
     if args.command=="plan":
         corpus = load_corpus()
         if args.baseline_ref:
-            archive = subprocess.check_output(["git", "archive", args.baseline_ref, "data/delitzsch_parsed"], cwd=ROOT)
+            archive = subprocess.check_output(["git", "archive", args.baseline_ref, "data/delitzsch/parsed"], cwd=ROOT)
             with tarfile.open(fileobj=io.BytesIO(archive)) as tar:
-                corpus = {str(Path(m.name).relative_to("data/delitzsch_parsed")):json.load(tar.extractfile(m)) for m in tar.getmembers()
+                corpus = {str(Path(m.name).relative_to("data/delitzsch/parsed")):json.load(tar.extractfile(m)) for m in tar.getmembers()
                     if m.isfile() and len(Path(m.name).parts)==4 and Path(m.name).stem.isdigit() and m.name.endswith(".json")}
             corpus = dict(sorted(corpus.items()))
-        plan=build_plan(corpus,lexicon,load_latest_decisions(ROOT/"data/delitzsch_review/decisions"),include_legacy=True)
+        plan=build_plan(corpus,lexicon,load_latest_decisions(ROOT/"data/delitzsch/review/decisions"),include_legacy=True)
         args.plan.parent.mkdir(parents=True,exist_ok=True)
         args.plan.write_bytes(gzip.compress(encoded(plan),mtime=0))
         print(json.dumps({k:plan[k] for k in ['baseline','final','quality_gate']},indent=2));print('changes',len(plan['changes']),'review',len(plan['review_queue']))

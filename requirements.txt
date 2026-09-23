@@ -1,8 +1,6 @@
 # Davar Project Requirements
 #
-# Comprehensive Python dependencies for the Davar Bible study application.
-# This file covers all project components: DSS processing, dictionary building,
-# text processing, and development tools.
+# Pins that the repository still imports, or that a config or workflow still names.
 #
 # Install with: pip install -r requirements.txt
 
@@ -11,16 +9,11 @@
 # =============================================================================
 
 # Data processing and manipulation
-pandas>=2.0.0              # Data analysis and manipulation
 numpy>=1.24.0              # Numerical computing
 requests>=2.31.0           # HTTP requests for API integrations
 
 # JSON and YAML processing
 pyyaml>=6.0                # YAML configuration files
-ujson>=5.8.0               # Fast JSON processing (optional optimization)
-
-# Path and file operations
-pathlib2>=2.3.7            # Enhanced pathlib (Python < 3.4 compatibility)
 
 # =============================================================================
 # DSS PROCESSING MODULE
@@ -29,28 +22,8 @@ pathlib2>=2.3.7            # Enhanced pathlib (Python < 3.4 compatibility)
 # xAI Grok API client for commentary generation
 xai-sdk>=0.1.0
 
-# PDF processing libraries
-PyMuPDF>=1.23.0            # PDF text extraction (fitz)
-pdfplumber>=0.10.0         # Advanced PDF text extraction
-pypdf>=3.15.0              # Alternative PDF processing
-
-# Text-Fabric DSS corpus integration
-text-fabric>=12.0.0        # ETCBC DSS corpus access and analysis
-
-# =============================================================================
-# TEXT PROCESSING AND ANALYSIS
-# =============================================================================
-
-# Natural Language Processing
-nltk>=3.8.1                # Natural language processing toolkit
-spacy>=3.7.0               # Advanced NLP processing
-
-# Hebrew text processing (optional)
-python-bidi>=0.4.2         # Bidirectional text support for Hebrew
-# hebphon>=1.0.0             # Hebrew phonological analysis (if available)
-
-# Regular expressions and text manipulation
-regex>=2023.8.8            # Enhanced regex support
+# TTH source in this repo is DOCX under data/tth/raw, read with mammoth
+mammoth>=1.6.0             # DOCX to Markdown for scripts/tth
 
 # =============================================================================
 # DEVELOPMENT AND TESTING
@@ -58,45 +31,6 @@ regex>=2023.8.8            # Enhanced regex support
 
 # Testing framework
 pytest>=7.4.0              # Testing framework
-pytest-cov>=4.1.0          # Coverage reporting
-pytest-mock>=3.11.0        # Mocking utilities for tests
-pytest-xdist>=3.3.0        # Parallel test execution
-
-# Code quality and linting
-black>=23.7.0              # Code formatting
-isort>=5.12.0              # Import sorting
-flake8>=6.0.0              # Linting and style checking
-mypy>=1.5.0                # Type checking
-pre-commit>=3.4.0          # Git hooks for code quality
-
-# Documentation
-sphinx>=7.0.0              # Documentation generator
-sphinx-rtd-theme>=1.3.0    # Read the Docs theme
-myst-parser>=1.0.0         # Markdown support for Sphinx
-
-# Development tools
-jupyter>=1.0.0             # Interactive development
-notebook>=7.0.0            # Jupyter notebook support
-ipython>=8.14.0            # Enhanced Python shell
-
-# Debugging and profiling
-pdbpp>=0.10.3              # Enhanced PDB
-line-profiler>=4.1.0       # Line-by-line profiling
-memory-profiler>=0.61.0    # Memory profiling
-
-# Mock and fixtures
-responses>=0.24.0          # Mock HTTP responses
-freezegun>=1.2.0           # Mock datetime
-
-# Development utilities
-tox>=4.8.0                 # Testing automation
-bump2version>=1.0.1        # Version management
-pip-tools>=7.3.0           # Dependency management
-
-# Type checking extras
-types-requests>=2.31.0     # Type stubs for requests
-types-PyYAML>=6.0.12       # Type stubs for PyYAML
-# types-all>=1.0.0           # All type stubs
 
 # =============================================================================
 # DATA VALIDATION AND SCHEMAS
@@ -110,15 +44,7 @@ pydantic>=2.3.0            # Data validation and parsing
 # OPTIONAL DEPENDENCIES
 # =============================================================================
 
-# Performance optimization
-numba>=0.57.0              # JIT compilation for performance
-cython>=3.0.0              # C extensions for critical sections
-
-# Database interactions (future SQLite/AES-256 encryption)
-cryptography>=41.0.0       # Cryptographic operations
-sqlalchemy>=2.0.0          # Database ORM (if needed)
-
-# Web framework (for future API endpoints)
+# Web framework (archived backend)
 fastapi>=0.103.0           # Modern web API framework
 uvicorn>=0.23.0            # ASGI server
 
@@ -130,35 +56,18 @@ python-dotenv>=1.0.0       # Environment variable management
 # =============================================================================
 
 # Google Gemini API for translations
-google-genai>=0.2.0  # Gemini API client for lexicon translations (recommended)
 # google-generativeai>=0.3.0  # Deprecated - keep as fallback only if needed
 
 # xAI Grok API for translations (alternative to Gemini)
 openai>=1.0.0  # OpenAI-compatible SDK for Grok API
 httpx>=0.27.0  # Pooled HTTP client for OpenRouter (scripts.translate)
 
-# Logging and monitoring
-structlog>=23.1.0          # Structured logging
-rich>=13.5.0               # Rich terminal output
-
 # =============================================================================
 # COMPATIBILITY AND BACKPORTS
 # =============================================================================
 
-# Python version compatibility
-dataclasses>=0.6            # Backport for Python < 3.7
-typing-extensions>=4.7.0    # Enhanced typing support
+# Hebrew text processing (optional)
+# hebphon>=1.0.0             # Hebrew phonological analysis (if available)
 
-# =============================================================================
-# NOTES
-# =============================================================================
-#
-# - Core functionality works with standard library only
-# - DSS processing requires PyMuPDF or pdfplumber
-# - ETCBC integration requires text-fabric and internet connection
-# - NLP features require spacy with Hebrew language model
-# - Optional dependencies can be installed as needed
-# - For production deployment, consider using pip-tools for lock files
-#
-# Install Hebrew language model for spaCy:
-# python -m spacy download xx_ent_wiki_sm  # or hebrew-specific if available
+# Type checking extras
+# types-all>=1.0.0           # All type stubs

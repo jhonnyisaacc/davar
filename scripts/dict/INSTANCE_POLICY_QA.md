@@ -13,8 +13,8 @@ Run:
 
 ```bash
 .venv/bin/python -m pytest tests/test_instance_policy.py tests/test_delitzsch_review.py -q
-.venv/bin/python scripts/dict/apply_instance_policy.py --write
-.venv/bin/python scripts/dict/benchmark_instance_policy.py
+.venv/bin/python -m scripts.dict.apply_instance_policy --write
+.venv/bin/python -m scripts.dict.benchmark_instance_policy
 ```
 
 The export updater reads original individual lexicon references so repeated

@@ -195,20 +195,21 @@ const readJson = async <T>(path: string): Promise<T> => {
 };
 
 const loadCanonicalBookLabels = async (): Promise<Record<string, CanonicalBookLabels>> => {
-  const sourcePath = join(DATA_ROOT, "..", "scripts", "bes", "config.py");
+  const sourcePath = join(DATA_ROOT, "knowledge", "registries", "books.json");
   const source = await readFile(sourcePath, "utf-8");
+  const books = JSON.parse(source) as Array<{
+    name: string;
+    hebrew_name: string;
+    hebrew_transliteration: string;
+    spanish_name: string;
+  }>;
 
   const mapping: Record<string, CanonicalBookLabels> = {};
-
-  // Parse the mirrored backend BOOK_METADATA entries from scripts/bes/config.py.
-  const entryPattern = /"([^"]+)":\s*\{[^}]*"hebrew_name":\s*"([^"]+)",\s*"hebrew_transliteration":\s*"([^"]+)",\s*"spanish_name":\s*"([^"]+)"[^}]*\}/g;
-
-  for (const match of source.matchAll(entryPattern)) {
-    const [, bookName, hebrewName, hebrewTransliteration, spanishName] = match;
-    mapping[bookName] = {
-      hebrew_name: hebrewName,
-      hebrew_transliteration: hebrewTransliteration,
-      spanish_name: spanishName,
+  for (const book of books) {
+    mapping[book.name] = {
+      hebrew_name: book.hebrew_name,
+      hebrew_transliteration: book.hebrew_transliteration,
+      spanish_name: book.spanish_name,
     };
   }
 
@@ -1067,14 +1068,14 @@ const main = async (): Promise<void> => {
   );
 
   const besorah = await generateHebrewChapters(
-    join(DATA_ROOT, "delitzsch_parsed"),
+    join(DATA_ROOT, "delitzsch", "parsed"),
     join(WEB_PUBLIC_DATA_ROOT, "besorah"),
     "delitzsch",
   );
   const hutter = await generateHutterChapters();
 
   const tthBundle = await copyFolderJsonFiles(
-    join(DATA_ROOT, "tth_2", "json"),
+    join(DATA_ROOT, "tth", "json"),
     join(WEB_PUBLIC_DATA_ROOT, "tth"),
   );
 

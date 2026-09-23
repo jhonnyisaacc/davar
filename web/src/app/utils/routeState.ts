@@ -1,14 +1,11 @@
-export type RouteScreen =
-  | "home"
-  | "verse"
-  | "settings"
-  | "donate"
-  | "features"
-  | "terms"
-  | "privacy"
-  | "feedback"
-  | "notFound"
-  | "connectionError";
+import {
+  DESTINATIONS,
+  destinationById,
+  type Destination,
+  type DestinationId,
+} from "@davar/shared/destinations";
+
+export type RouteScreen = DestinationId;
 
 export type RouteState = {
   screen: RouteScreen;
@@ -16,6 +13,19 @@ export type RouteState = {
   chapter?: number;
   verse?: number;
 };
+
+const verseDestination = destinationById("verse");
+const verseRoot = verseDestination.path.split("/").filter(Boolean)[0] ?? "";
+
+const destinationsByRoot = new Map<string, Destination>(
+  DESTINATIONS.flatMap((destination) => {
+    if (destination.id === verseDestination.id) return [];
+    const segments = destination.path.split("/").filter(Boolean);
+    const root = segments[0];
+    if (!root || segments.length !== 1) return [];
+    return [[root, destination]];
+  }),
+);
 
 export const findCanonicalBook = <T extends { name: string }>(
   books: T[],
@@ -27,53 +37,32 @@ export const findCanonicalBook = <T extends { name: string }>(
 };
 
 export const buildRoutePath = (route: RouteState): string => {
-  switch (route.screen) {
-    case "home":
-      return "/home";
-    case "terms":
-      return "/terms";
-    case "privacy":
-      return "/privacy";
-    case "feedback":
-      return "/feedback";
-    case "donate":
-      return "/donate";
-    case "features":
-      return "/features";
-    case "settings":
-      return "/settings";
-    case "verse": {
-      const book = route.book ? encodeURIComponent(route.book) : "";
-      const chapter = route.chapter ?? 1;
-      const verse = route.verse ?? 1;
-      return book ? `/verse/${book}/${chapter}/${verse}` : "/";
-    }
-    default:
-      return "/";
+  if (route.screen === verseDestination.id) {
+    const book = route.book ? encodeURIComponent(route.book) : "";
+    const chapter = route.chapter ?? 1;
+    const verse = route.verse ?? 1;
+    return book ? `${verseDestination.path}/${book}/${chapter}/${verse}` : "/";
   }
+
+  return destinationById(route.screen).path;
 };
 
 export const parseRoutePath = (pathname: string): RouteState | null => {
   const trimmed = pathname.replace(/\/+$/, "") || "/";
   const parts = trimmed.split("/").filter(Boolean);
 
-  if (parts.length === 0) return { screen: "verse" };
+  if (parts.length === 0) return { screen: verseDestination.id };
 
   const [root, book, chapter, verse] = parts;
-  if (root === "home") return { screen: "home" };
-  if (root === "terms") return { screen: "terms" };
-  if (root === "privacy") return { screen: "privacy" };
-  if (root === "feedback") return { screen: "feedback" };
-  if (root === "donate") return { screen: "donate" };
-  if (root === "features") return { screen: "features" };
-  if (root === "settings") return { screen: "settings" };
+  const destination = root ? destinationsByRoot.get(root) : undefined;
+  if (destination) return { screen: destination.id };
 
-  if (root === "verse") {
+  if (root === verseRoot) {
     const decodedBook = book ? decodeURIComponent(book) : undefined;
     const parsedChapter = chapter ? Number.parseInt(chapter, 10) : undefined;
     const parsedVerse = verse ? Number.parseInt(verse, 10) : undefined;
     return {
-      screen: "verse",
+      screen: verseDestination.id,
       book: decodedBook,
       chapter: Number.isNaN(parsedChapter) ? undefined : parsedChapter,
       verse: Number.isNaN(parsedVerse) ? undefined : parsedVerse,

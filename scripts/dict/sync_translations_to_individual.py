@@ -9,13 +9,10 @@ Use this before running transliteration or other operations that modify individu
 """
 
 import json
-import sys
 from pathlib import Path
 from typing import Dict, Optional
 
-# Add current directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent))
-from config import config
+from .config import config
 
 
 def sync_translations_to_individual_files(file_type: str = "both") -> None:

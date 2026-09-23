@@ -1,18 +1,15 @@
-import sys
 import hashlib
 import json
 import unicodedata
-from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts" / "dict"))
 
-from instance_policy import (  # noqa: E402
+from scripts.dict.instance_policy import (  # noqa: E402
     InstancePolicyConfig,
     classify_tier,
     process_instances,
     resolve_conflict,
 )
-from instance_policy import MISSING_POSITION, _stable_id  # noqa: E402
+from scripts.dict.instance_policy import MISSING_POSITION, _stable_id  # noqa: E402
 
 
 def instance(number, confidence=0.5, signal=0, source_priority=0):

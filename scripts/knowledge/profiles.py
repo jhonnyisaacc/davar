@@ -1,6 +1,6 @@
 """Declarative build selection; no executable extensions or network discovery."""
 
-from .core import contained, read_json
+from .core import SOURCES, contained, read_json
 from .validate import Validator
 
 DEFAULT_PROFILE = "data/knowledge/profiles/pilot-v1.json"
@@ -22,11 +22,16 @@ def validate_selections(profile, manifest, registries):
     inputs = {item["id"]: item for item in manifest["inputs"]}
     editions = {e["id"] for e in registries["editions"]}
     books = {b["id"] for b in registries["books"]}
-    for group in ("scripture", "lexical", "shaul"):
+    external = {row["profile_group"]: row["owner"] for row in SOURCES.values()}
+    owners = set(external.values())
+    for group in ("scripture", "lexical", *external):
         for spec in profile[group]:
             if spec["input_id"] not in inputs:
                 raise ValueError("Unknown selected input: " + spec["input_id"])
-            if (group == "shaul") != (inputs[spec["input_id"]]["owner"] == "shaul"):
+            owner = inputs[spec["input_id"]]["owner"]
+            expected = external.get(group)
+            disagrees = owner != expected if expected is not None else owner in owners
+            if disagrees:
                 raise ValueError("Adapter and source owner disagree")
     for spec in profile["scripture"]:
         if spec["edition_id"] not in editions or spec["book_id"] not in books:

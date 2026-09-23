@@ -1,9 +1,7 @@
 import json
-import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from scripts.dict.build_lexicon import (
     extract_bdb_definitions_with_sense,
