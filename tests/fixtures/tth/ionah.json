@@ -1,0 +1,142 @@
+{
+  "book_info": {
+    "book_id": "ionah",
+    "tth_name": "Ionah",
+    "hebrew_name": "יונה",
+    "english_name": "Jonah",
+    "spanish_name": "Jonás",
+    "section": "neviim",
+    "total_chapters": 1,
+    "total_verses": 17
+  },
+  "chapters": [
+    {
+      "chapter": 1,
+      "verses": [
+        {
+          "verse": 1,
+          "tth": "Y fue palabra de יהוה a Yonáh, hijo de Amitai, diciendo:",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 2,
+          "tth": "Levántate, ve a Ninevéh, la gran ciudad, y proclama sobre ella, porque ha subido su maldad delante de Mí.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 3,
+          "tth": "Y se levantó Yonáh para huir a Tarshísh de delante de יהוה. Y descendió a Iafó y halló un barco que iba a Tarshísh, y dio su pago y descendió en él para ir con ellos a Tarshísh de delante de יהוה.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 4,
+          "tth": "Y יהוה arrojó un gran viento hacia el mar, y hubo una gran tempestad en el mar, y el barco estuvo a punto de romperse.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 5,
+          "tth": "Y temieron los marineros, y clamaron cada hombre a su dios; y arrojaron los utensilios que estaban en el barco al mar para aligerar la carga de sobre ellos. Pero Yonáh había bajado a las partes extremas de la embarcación, y se había acostado y estaba profundamente dormido.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 6,
+          "tth": "Y se le acercó el marinero jefe, y le dijo: ¿Qué tienes, dormilón? ¡Levántate y llama a tu Elohim! Quizá Elohim piense en nosotros y no pereceremos.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 7,
+          "tth": "Y dijeron cada hombre a su compañero: Vengan, hagamos caer piedrecitas¹ y conozcamos por quién vino este mal a nosotros. E hicieron caer las piedrecitas, y cayó la piedrecita sobre Yonáh.",
+          "footnotes": [
+            {
+              "marker": "¹",
+              "number": "1",
+              "word": "piedrecitas",
+              "explanation": "Heb.: Goralot; unas piedras pequeñas lanzadas para tomar decisiones."
+            }
+          ],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 8,
+          "tth": "Y le dijeron: ¡Danos a conocer por favor por causa de quién este mal vino a nosotros! ¿Cuál es tu trabajo, y de dónde vienes? ¿Cuál es tu tierra y de qué pueblo eres?",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 9,
+          "tth": "Y les dijo: Yo soy ivrí², y a יהוה, Elohim de los cielos, yo temo, que hizo el mar y la tierra seca.",
+          "footnotes": [
+            {
+              "marker": "²",
+              "number": "2",
+              "word": "ivrí",
+              "explanation": "Hebreo."
+            }
+          ],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 10,
+          "tth": "Y temieron los hombre con gran temor, y le dijeron: ¿Qué es esto que has hecho? Porque sabían los hombres que de delante de יהוה él huía, porque él les había dado a conocer.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 11,
+          "tth": "Y le dijeron: ¿Qué te haremos?, y se aquietará el mar de sobre nosotros. Porque el mar iba e irrumpía.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 12,
+          "tth": "Y él les dijo: Álcenme y arrójenme al mar, y se aquietará el mar de sobre ustedes, porque yo sé que a causa de mí vino esta gran tempestad sobre ustedes.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 13,
+          "tth": "Y remaron los hombres para volver a la tierra seca, y no pudieron, porque el mar iba e irrumpía sobre ellos.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 14,
+          "tth": "Y llamaron a יהוה, y dijeron: ¡Te rogamos, יהוה! Por favor, no perezcamos nosotros por la vida de este hombre, ni des sobre nosotros sangre inocente; porque Tú, יהוה, como te ha placido has hecho.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 15,
+          "tth": "Y alzaron a Yonáh y lo arrojaron al mar; y paró el mar de su furor.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 16,
+          "tth": "Y temieron los hombres con gran temor a יהוה, e hicieron³ un sacrificio para יהוה y prometieron votos.",
+          "footnotes": [
+            {
+              "marker": "³",
+              "number": "3",
+              "word": "hicieron",
+              "explanation": "Lit.: sacrificaron."
+            }
+          ],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 17,
+          "tth": "Y designó יהוה un gran pez para tragarse a Yonáh; Y estuvo Yonáh en las entrañas del pez tres días y tres noches. Tefilah de Yonáh",
+          "footnotes": [],
+          "hebrew_terms": []
+        }
+      ]
+    }
+  ]
+}

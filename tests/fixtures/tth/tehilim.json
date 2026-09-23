@@ -1,0 +1,187 @@
+{
+  "book_info": {
+    "book_id": "tehilim",
+    "tth_name": "Tehilim",
+    "hebrew_name": "תהלים",
+    "english_name": "Psalms",
+    "spanish_name": "Salmos",
+    "section": "ketuvim",
+    "total_chapters": 3,
+    "total_verses": 20
+  },
+  "chapters": [
+    {
+      "chapter": 1,
+      "verses": [
+        {
+          "verse": 1,
+          "tth": "¡Felicidades del hombre que no anduvo en consejo de condenados, y en camino de pecadores no se paró, y en asiento de burladores no se sentó,",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 2,
+          "tth": "sino que en la Torah de יהוה <em>está</em> su deleite, y en su Torah medita de día y de noche!",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 3,
+          "tth": "Y será como árbol plantado sobre corrientes de aguas, que su fruto dará en su tiempo y su hoja no se marchitará; y todo lo que hará, prosperará.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 4,
+          "tth": "No así los condenados, sino que <em>son</em> como la paja que la conduce el viento.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 5,
+          "tth": "Por eso no se levantarán los condenados en el juicio, ni los pecadores en la congregación de los justificados.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 6,
+          "tth": "Porque conoce יהוה el camino de los justificados, pero el camino de los condenados se perderá.",
+          "footnotes": [],
+          "hebrew_terms": [],
+          "subtitle": "Para el vencedor. Cántico de David."
+        }
+      ],
+      "book_division": "LIBRO PRIMERO"
+    },
+    {
+      "chapter": 41,
+      "verses": [
+        {
+          "verse": 1,
+          "tth": "Feliz es el que considera al pobre, en el día malo lo rescatará יהוה.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 2,
+          "tth": "יהוה lo guardará y hará que viva, será feliz¹ en la tierra; y no lo dejarás a la voluntad de sus enemigos.",
+          "footnotes": [
+            {
+              "marker": "¹",
+              "number": "1",
+              "word": "feliz",
+              "explanation": "O, caminará recto."
+            }
+          ],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 3,
+          "tth": "יהוה lo sostendrá en el lecho de enfermedad; toda su cama diste vuelta en su enfermedad.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 4,
+          "tth": "Yo dije: יהוה, inclínate con favor a mí; sana mi ser, porque he pecado contra ti.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 5,
+          "tth": "Mis enemigos dirán mal para mí: ¿Cuándo morirá y perecerá su nombre?",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 6,
+          "tth": "Y si <em>uno</em> viene a ver <em>me</em>, falsedad habla; su corazón reúne iniquidad para sí;<em>y</em> saldrá afuera <em>y</em> hablará.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 7,
+          "tth": "Juntos acerca de mí susurran todos mis aborrecedores, acerca de mí piensan un mal para mí.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 8,
+          "tth": "Palabra² de Belial³ fue derramada sobre él, y el que se acueste, no volverá a levantarse.",
+          "footnotes": [
+            {
+              "marker": "²",
+              "number": "2",
+              "word": "Palabra",
+              "explanation": "O, asunto; o, plaga."
+            },
+            {
+              "marker": "³",
+              "number": "3",
+              "word": "Belial",
+              "explanation": "Sin provecho."
+            }
+          ],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 9,
+          "tth": "Incluso el hombre de mi shalom⁴, en quien yo confiaba, el que comía de mi pan, ha engrandecido sobre mí <em>su</em> talón.",
+          "footnotes": [
+            {
+              "marker": "⁴",
+              "number": "4",
+              "word": "shalom",
+              "explanation": "Plenitud, ausencia de deudas."
+            }
+          ],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 10,
+          "tth": "Pero Tú, יהוה, inclínate con favor a mí y levántame, y yo les retribuiré.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 11,
+          "tth": "En esto sé que te deleitas en mí, que no gritará en triunfo mi enemigo contra mí.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 12,
+          "tth": "Y yo, en mi integridad me has sostenido, y me afirmarás ante tu rostro para siempre.",
+          "footnotes": [],
+          "hebrew_terms": []
+        },
+        {
+          "verse": 13,
+          "tth": "¡Bendito יהוה, Elohim de Israel, desde el olam⁵ hasta el olam! Amén y amén.",
+          "footnotes": [
+            {
+              "marker": "⁵",
+              "number": "5",
+              "word": "olam",
+              "explanation": "Tiempo oculto, solo conocido por Elohim."
+            }
+          ],
+          "hebrew_terms": [],
+          "subtitle": "Para el vencedor. Masquil de los hijos de Koraj."
+        }
+      ]
+    },
+    {
+      "chapter": 42,
+      "verses": [
+        {
+          "verse": 1,
+          "tth": "Como el ciervo anhela por los canales de aguas, así mi garganta anhela por ti, Elohim.",
+          "footnotes": [],
+          "hebrew_terms": []
+        }
+      ],
+      "book_division": "LIBRO SEGUNDO"
+    }
+  ]
+}

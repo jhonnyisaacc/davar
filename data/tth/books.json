@@ -1,0 +1,671 @@
+{
+  "BOOKS_INFO": {
+    "bereshit": {
+      "tth_name": "Bereshit",
+      "hebrew_name": "בראשית",
+      "english_name": "Genesis",
+      "spanish_name": "Génesis",
+      "book_code": "genesis",
+      "expected_chapters": 50,
+      "section": "torah",
+      "section_hebrew": "תורה",
+      "section_english": "Torah",
+      "section_spanish": "Torá",
+      "patterns": [
+        "TORAH\\s*-\\s*BERESHIT.*?בראשית",
+        "__TORAH\\s*-\\s*BERESHIT.*?בראשית__",
+        "BERESHIT.*?בראשית",
+        "בראשית"
+      ]
+    },
+    "shemot": {
+      "tth_name": "Shemot",
+      "hebrew_name": "שמות",
+      "english_name": "Exodus",
+      "spanish_name": "Éxodo",
+      "book_code": "exodus",
+      "expected_chapters": 40,
+      "section": "torah",
+      "section_hebrew": "תורה",
+      "section_english": "Torah",
+      "section_spanish": "Torá",
+      "patterns": [
+        "SHEMOT.*?שמות",
+        "__SHEMOT.*?שמות__",
+        "שמות"
+      ]
+    },
+    "vaikra": {
+      "tth_name": "Vaikra",
+      "hebrew_name": "ויקרא",
+      "english_name": "Leviticus",
+      "spanish_name": "Levítico",
+      "book_code": "leviticus",
+      "expected_chapters": 27,
+      "section": "torah",
+      "section_hebrew": "תורה",
+      "section_english": "Torah",
+      "section_spanish": "Torá",
+      "patterns": [
+        "VAIKRÁ.*?ויקרא",
+        "__VAIKRÁ.*?ויקרא__",
+        "ויקרא"
+      ]
+    },
+    "bamidbar": {
+      "tth_name": "Bamidbar",
+      "hebrew_name": "במדבר",
+      "english_name": "Numbers",
+      "spanish_name": "Números",
+      "book_code": "numbers",
+      "expected_chapters": 36,
+      "section": "torah",
+      "section_hebrew": "תורה",
+      "section_english": "Torah",
+      "section_spanish": "Torá",
+      "patterns": [
+        "BAMIDBAR.*?במדבר",
+        "__BAMIDBAR.*?במדבר__",
+        "במדבר"
+      ]
+    },
+    "devarim": {
+      "tth_name": "Devarim",
+      "hebrew_name": "דברים",
+      "english_name": "Deuteronomy",
+      "spanish_name": "Deuteronomio",
+      "book_code": "deuteronomy",
+      "expected_chapters": 34,
+      "section": "torah",
+      "section_hebrew": "תורה",
+      "section_english": "Torah",
+      "section_spanish": "Torá",
+      "patterns": [
+        "DEVARIM.*?דברים",
+        "__DEVARIM.*?דברים__",
+        "דברים"
+      ]
+    },
+    "iehoshua": {
+      "tth_name": "Iehoshúa",
+      "hebrew_name": "יהושע",
+      "english_name": "Joshua",
+      "spanish_name": "Josué",
+      "book_code": "joshua",
+      "expected_chapters": 24,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "IEHOSHÚA.*?יהושע",
+        "NEVIÍM\\s*-\\s*IEHOSHÚA.*?יהושע",
+        "__NEVIÍM\\s*-\\s*IEHOSHÚA.*?יהושע__",
+        "יהושע"
+      ]
+    },
+    "shoftim": {
+      "tth_name": "Shoftim",
+      "hebrew_name": "שפטים",
+      "english_name": "Judges",
+      "spanish_name": "Jueces",
+      "book_code": "judges",
+      "expected_chapters": 21,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "SHOFTÍM.*?שפטים",
+        "__SHOFTÍM.*?שפטים__",
+        "שפטים"
+      ]
+    },
+    "shemuel_alef": {
+      "tth_name": "Shemuel Alef",
+      "hebrew_name": "א שמואל",
+      "english_name": "1 Samuel",
+      "spanish_name": "1 Samuel",
+      "book_code": "1_samuel",
+      "expected_chapters": 31,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "SHEMUEL\\s*ALEF.*?א\\s*שמואל",
+        "__SHEMUEL\\s*ALEF.*?א\\s*שמואל__",
+        "א\\s*שמואל"
+      ]
+    },
+    "shemuel_bet": {
+      "tth_name": "Shemuel Bet",
+      "hebrew_name": "ב שמואל",
+      "english_name": "2 Samuel",
+      "spanish_name": "2 Samuel",
+      "book_code": "2_samuel",
+      "expected_chapters": 24,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "SHEMUEL\\s*BET.*?ב\\s*שמואל",
+        "__SHEMUEL\\s*BET.*?ב\\s*שמואל__",
+        "ב\\s*שמואל"
+      ]
+    },
+    "melajim_alef": {
+      "tth_name": "Melajim Alef",
+      "hebrew_name": "א מלכים",
+      "english_name": "1 Kings",
+      "spanish_name": "1 Reyes",
+      "book_code": "1_kings",
+      "expected_chapters": 22,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "MELAJIM\\s*ALEF.*?א\\s*מלכים",
+        "__MELAJIM\\s*ALEF.*?א\\s*מלכים__",
+        "א\\s*מלכים"
+      ]
+    },
+    "melajim_bet": {
+      "tth_name": "Melajim Bet",
+      "hebrew_name": "ב מלכים",
+      "english_name": "2 Kings",
+      "spanish_name": "2 Reyes",
+      "book_code": "2_kings",
+      "expected_chapters": 25,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "MELAJIM\\s*BET.*?ב\\s*מלכים",
+        "__MELAJIM\\s+BET.*?ב\\s*מלכים__",
+        "ב\\s*מלכים"
+      ]
+    },
+    "ieshaiahu": {
+      "tth_name": "Ieshaiáhu",
+      "hebrew_name": "ישעיהו",
+      "english_name": "Isaiah",
+      "spanish_name": "Isaías",
+      "book_code": "isaiah",
+      "expected_chapters": 66,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "IESHAIÁHU.*?ישעיהו",
+        "__IESHAIÁHU.*?ישעיהו__",
+        "ישעיהו"
+      ]
+    },
+    "irmeiahu": {
+      "tth_name": "Irmeiáhu",
+      "hebrew_name": "ירמיהו",
+      "english_name": "Jeremiah",
+      "spanish_name": "Jeremías",
+      "book_code": "jeremiah",
+      "expected_chapters": 52,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "IRMEIÁHU.*?ירמיהו",
+        "__IRMEIÁHU.*?ירמיהו__",
+        "ירמיהו"
+      ]
+    },
+    "iejezkel": {
+      "tth_name": "Iejezkel",
+      "hebrew_name": "יחזקאל",
+      "english_name": "Ezekiel",
+      "spanish_name": "Ezequiel",
+      "book_code": "ezekiel",
+      "expected_chapters": 48,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "IEJEZKEL.*?יחזקאל",
+        "__IEJEZKEL.*?יחזקאל__",
+        "יחזקאל"
+      ]
+    },
+    "hoshea": {
+      "tth_name": "Hoshea",
+      "hebrew_name": "הושע",
+      "english_name": "Hosea",
+      "spanish_name": "Oseas",
+      "book_code": "hosea",
+      "expected_chapters": 14,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "HOSHEA.*?הושע",
+        "__HOSHEA.*?הושע__",
+        "(?<![\\u0590-\\u05FF])הושע(?![\\u0590-\\u05FF])"
+      ]
+    },
+    "ioel": {
+      "tth_name": "Ioel",
+      "hebrew_name": "יואל",
+      "english_name": "Joel",
+      "spanish_name": "Joel",
+      "book_code": "joel",
+      "expected_chapters": 3,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "IOEL.*?יואל",
+        "__IOEL.*?יואל__",
+        "יואל"
+      ]
+    },
+    "amos": {
+      "tth_name": "Amós",
+      "hebrew_name": "עמוס",
+      "english_name": "Amos",
+      "spanish_name": "Amós",
+      "book_code": "amos",
+      "expected_chapters": 9,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "AMÓS.*?עמוס",
+        "__AMÓS.*?עמוס__",
+        "עמוס"
+      ]
+    },
+    "ionah": {
+      "tth_name": "Ionah",
+      "hebrew_name": "יונה",
+      "english_name": "Jonah",
+      "spanish_name": "Jonás",
+      "book_code": "jonah",
+      "expected_chapters": 4,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "IONAH.*?יונה",
+        "__IONAH.*?יונה__",
+        "יונה"
+      ]
+    },
+    "micah": {
+      "tth_name": "Micah",
+      "hebrew_name": "מיכה",
+      "english_name": "Micah",
+      "spanish_name": "Miqueas",
+      "book_code": "micah",
+      "expected_chapters": 7,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "MICAH.*?מיכה",
+        "__MICAH.*?מיכה__",
+        "מיכה"
+      ]
+    },
+    "najum": {
+      "tth_name": "Najum",
+      "hebrew_name": "נחום",
+      "english_name": "Nahum",
+      "spanish_name": "Nahúm",
+      "book_code": "nahum",
+      "expected_chapters": 3,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "NAJUM.*?נחום",
+        "__NAJUM.*?נחום__",
+        "נחום"
+      ]
+    },
+    "jabakuk": {
+      "tth_name": "Jabakuk",
+      "hebrew_name": "חבקוק",
+      "english_name": "Habakkuk",
+      "spanish_name": "Habacuc",
+      "book_code": "habakkuk",
+      "expected_chapters": 3,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "JABAKUK.*?חבקוק",
+        "__JABAKUK.*?חבקוק__",
+        "חבקוק"
+      ]
+    },
+    "tzefaniah": {
+      "tth_name": "Tzefaniah",
+      "hebrew_name": "צפניה",
+      "english_name": "Zephaniah",
+      "spanish_name": "Sofonías",
+      "book_code": "zephaniah",
+      "expected_chapters": 3,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "TZEFANIAH.*?צפניה",
+        "__TZEFANIAH.*?צפניה__",
+        "צפניה"
+      ]
+    },
+    "jagai": {
+      "tth_name": "Jagai",
+      "hebrew_name": "חגי",
+      "english_name": "Haggai",
+      "spanish_name": "Hageo",
+      "book_code": "haggai",
+      "expected_chapters": 2,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "JAGAI.*?חגי",
+        "__JAGAI.*?חגי__",
+        "חגי"
+      ]
+    },
+    "zejariah": {
+      "tth_name": "Zejariah",
+      "hebrew_name": "זכריה",
+      "english_name": "Zechariah",
+      "spanish_name": "Zacarías",
+      "book_code": "zechariah",
+      "expected_chapters": 14,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "ZEJARIAH.*?זכריה",
+        "__ZEJARIAH.*?זכריה__",
+        "זכריה"
+      ]
+    },
+    "malaji": {
+      "tth_name": "Malaji",
+      "hebrew_name": "מלאכי",
+      "english_name": "Malachi",
+      "spanish_name": "Malaquías",
+      "book_code": "malachi",
+      "expected_chapters": 4,
+      "section": "neviim",
+      "section_hebrew": "נביאים",
+      "section_english": "Prophets",
+      "section_spanish": "Profetas",
+      "patterns": [
+        "MALAJI.*?מלאכי",
+        "__MALAJI.*?מלאכי__",
+        "מלאכי"
+      ]
+    },
+    "tehilim": {
+      "tth_name": "Tehilim",
+      "hebrew_name": "תהלים",
+      "english_name": "Psalms",
+      "spanish_name": "Salmos",
+      "book_code": "psalms",
+      "expected_chapters": 150,
+      "section": "ketuvim",
+      "section_hebrew": "כתובים",
+      "section_english": "Writings",
+      "section_spanish": "Escritos",
+      "patterns": [
+        "KETUVIM\\s*-\\s*TEHILIM.*?תהלים",
+        "TEHILIM.*?תהלים",
+        "__KETUVIM\\s*-\\s*TEHILIM.*?תהלים__",
+        "__TEHILIM.*?תהלים__",
+        "תהלים"
+      ]
+    },
+    "mishlei": {
+      "tth_name": "Mishlei",
+      "hebrew_name": "משלי",
+      "english_name": "Proverbs",
+      "spanish_name": "Proverbios",
+      "book_code": "proverbs",
+      "expected_chapters": 31,
+      "section": "ketuvim",
+      "section_hebrew": "כתובים",
+      "section_english": "Writings",
+      "section_spanish": "Escritos",
+      "patterns": [
+        "MISHLEI.*?משלי",
+        "__MISHLEI.*?משלי__",
+        "משלי"
+      ]
+    },
+    "shir_hashirim": {
+      "tth_name": "Shir Hashirim",
+      "hebrew_name": "שיר השירים",
+      "english_name": "Song of Songs",
+      "spanish_name": "Cantares",
+      "book_code": "song_of_songs",
+      "expected_chapters": 8,
+      "section": "ketuvim",
+      "section_hebrew": "כתובים",
+      "section_english": "Writings",
+      "section_spanish": "Escritos",
+      "patterns": [
+        "KETUVIM\\s*-\\s*SHIR\\s*HASHIRIM.*?שיר\\s*השירים",
+        "SHIR\\s*HASHIRIM.*?שיר\\s*השירים",
+        "__SHIR\\s*HASHIRIM.*?שיר\\s*השירים__",
+        "CANTAR\\s*DE\\s*LOS\\s*CANTARES.*?שיר\\s*השירים",
+        "CANTARES.*?שיר\\s*השירים",
+        "שיר\\s*השירים"
+      ]
+    },
+    "matityahu": {
+      "tth_name": "Matityáhu",
+      "hebrew_name": "מתתיהו",
+      "english_name": "Matthew",
+      "spanish_name": "Mateo",
+      "book_code": "matthew",
+      "expected_chapters": 28,
+      "section": "besorah",
+      "section_hebrew": "בשורה",
+      "section_english": "Gospel",
+      "section_spanish": "Evangelio",
+      "patterns": [
+        "Matityáhu.*?מתתיהו",
+        "Matityahu.*?מתתיהו",
+        "__MATITYÁHU.*?מתתיהו__",
+        "MATEO.*?מתתיהו",
+        "מתתיהו"
+      ]
+    },
+    "markos": {
+      "tth_name": "Markos",
+      "hebrew_name": "מרקוס",
+      "english_name": "Mark",
+      "spanish_name": "Marcos",
+      "book_code": "mark",
+      "expected_chapters": 16,
+      "section": "besorah",
+      "section_hebrew": "בשורה",
+      "section_english": "Gospel",
+      "section_spanish": "Evangelio",
+      "patterns": [
+        "__MARKO\\s*\\(MARCOS\\)__",
+        "Markos.*?מרקוס",
+        "Marko.*?מרקו",
+        "__MARKOS.*?מרקוס__",
+        "MARCOS.*?מרקוס",
+        "מרקוס",
+        "מרקו"
+      ]
+    },
+    "lukas": {
+      "tth_name": "Lukas",
+      "hebrew_name": "לוקס",
+      "english_name": "Luke",
+      "spanish_name": "Lucas",
+      "book_code": "luke",
+      "expected_chapters": 24,
+      "section": "besorah",
+      "section_hebrew": "בשורה",
+      "section_english": "Gospel",
+      "section_spanish": "Evangelio",
+      "patterns": [
+        "__LUKAH\\s*\\(LUCAS\\)__",
+        "Lukas.*?לוקס",
+        "Lukah.*?לוקה",
+        "__LUKAS.*?לוקס__",
+        "LUCAS.*?לוקס",
+        "לוקס",
+        "לוקה"
+      ]
+    },
+    "iojanan": {
+      "tth_name": "Iojanán",
+      "hebrew_name": "יוחנן",
+      "english_name": "John",
+      "spanish_name": "Juan",
+      "book_code": "john",
+      "expected_chapters": 21,
+      "section": "besorah",
+      "section_hebrew": "בשורה",
+      "section_english": "Gospel",
+      "section_spanish": "Evangelio",
+      "patterns": [
+        "\\*\\*IOJANÁN\\s*\\(JUAN\\)\\*\\*",
+        "__IOJANÁN\\s*\\(JUAN\\)__",
+        "IOJANÁN\\s*\\(JUAN\\)"
+      ]
+    },
+    "maasei_hashlijim": {
+      "tth_name": "Maasei Hash'lijim",
+      "hebrew_name": "מעשי השליחים",
+      "english_name": "Acts",
+      "spanish_name": "Hechos",
+      "book_code": "acts",
+      "expected_chapters": 28,
+      "section": "besorah",
+      "section_hebrew": "בשורה",
+      "section_english": "Gospel",
+      "section_spanish": "Evangelio",
+      "patterns": [
+        "^\\s*(?:__|\\*\\*)\\s*MAASEI\\s+HASH[\\'’]LIJIM\\s*\\(?HECHOS\\)?\\s*(?:__|\\*\\*)\\s*$",
+        "^\\s*(?:__|\\*\\*)\\s*MAASEI\\s+HASH[\\'’]LIJIM\\s*(?:__|\\*\\*)\\s*$",
+        "^\\s*(?:__|\\*\\*)\\s*HECHOS\\s*\\(?MAASEI\\s+HASH[\\'’]LIJIM\\)?\\s*(?:__|\\*\\*)\\s*$",
+        "^\\s*MAASEI\\s+HASH[\\'’]LIJIM\\s*\\(?HECHOS\\)?\\s*$",
+        "^\\s*HECHOS\\s*\\(?MAASEI\\s+HASH[\\'’]LIJIM\\)?\\s*$"
+      ]
+    },
+    "romanos": {
+      "tth_name": "Romanos",
+      "hebrew_name": "רומאים",
+      "english_name": "Romans",
+      "spanish_name": "Romanos",
+      "book_code": "romans",
+      "expected_chapters": 16,
+      "section": "besorah",
+      "section_hebrew": "בשורה",
+      "section_english": "Gospel",
+      "section_spanish": "Evangelio",
+      "patterns": [
+        "ROMANOS.*?רומאים",
+        "רומאים"
+      ]
+    },
+    "galatas": {
+      "tth_name": "Gálatas",
+      "hebrew_name": "גלטים",
+      "english_name": "Galatians",
+      "spanish_name": "Gálatas",
+      "book_code": "galatians",
+      "expected_chapters": 6,
+      "section": "besorah",
+      "section_hebrew": "בשורה",
+      "section_english": "Gospel",
+      "section_spanish": "Evangelio",
+      "patterns": [
+        "G[ÁA]LATAS.*?גלטים",
+        "GALATIANS.*?גלטים",
+        "גלטים"
+      ]
+    },
+    "sodot": {
+      "tth_name": "Sodot",
+      "hebrew_name": "סודות",
+      "english_name": "Revelation",
+      "spanish_name": "Apocalipsis",
+      "book_code": "revelation",
+      "expected_chapters": 22,
+      "section": "besorah",
+      "section_hebrew": "בשורה",
+      "section_english": "Gospel",
+      "section_spanish": "Evangelio",
+      "patterns": [
+        "^\\*\\*\\s*SODOT\\s*\\\\?\\(APOCALIPSIS\\\\?\\)\\s*\\*\\*\\s*סודות.*$",
+        "^__\\s*SODOT\\s*\\\\?\\(APOCALIPSIS\\\\?\\)\\s*__\\s*סודות.*$",
+        "^\\*\\*\\s*APOCALIPSIS\\s*\\\\?\\(SODOT\\\\?\\)\\s*\\*\\*\\s*סודות.*$",
+        "^__\\s*APOCALIPSIS\\s*\\\\?\\(SODOT\\\\?\\)\\s*__\\s*סודות.*$",
+        "^\\*\\*\\s*SODOT\\s*\\\\?\\(APOCALIPSIS\\\\?\\)\\s*\\*\\*.*$",
+        "^__\\s*SODOT\\s*\\\\?\\(APOCALIPSIS\\\\?\\)\\s*__.*$",
+        "^Sodot\\s*\\\\?-\\s*סודות\\\\?\\(Apocalipsis\\\\?\\)\\s*$"
+      ]
+    }
+  },
+  "DOCX_BOOKS": {
+    "apocalipsis": {
+      "books": [
+        "sodot"
+      ]
+    },
+    "romanos": {
+      "books": [
+        "romanos"
+      ]
+    },
+    "galatas": {
+      "books": [
+        "galatas"
+      ]
+    },
+    "besorah": {
+      "books": [
+        "matityahu",
+        "markos",
+        "lukas",
+        "iojanan",
+        "maasei_hashlijim"
+      ]
+    },
+    "tanaj": {
+      "sections": [
+        "torah",
+        "neviim",
+        "ketuvim"
+      ]
+    }
+  }
+}

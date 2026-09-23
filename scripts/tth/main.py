@@ -18,6 +18,7 @@ import sys
 import os
 import logging
 import json
+import shutil
 from pathlib import Path
 from typing import List, Optional
 
@@ -75,7 +76,7 @@ from .book_splitter import split_markdown, TTH2BookSplitter
 from .md_to_json import convert_book_markdown_to_json
 from .json_postprocess import get_postprocessor
 from .format_validator import get_format_validator, print_book_report
-from .config import BOOKS_INFO
+from .config import BOOKS_INFO, DOCX_BOOKS
 from .section_headers import detect_section_headers_in_json
 from .fix_false_restart_markers import repair_books
 
@@ -164,24 +165,13 @@ def infer_books_for_docx(docx_file: Path) -> List[str]:
     overwriting markdown files for books that do not belong to that source.
     """
     stem = docx_file.stem.lower()
-
-    # Explicit single-book sources
-    explicit_map = {
-        'apocalipsis': ['sodot'],
-        'romanos': ['romanos'],
-        'galatas': ['galatas'],
-        'besorah': ['matityahu', 'markos', 'lukas', 'iojanan', 'maasei_hashlijim'],
-    }
-    if stem in explicit_map:
-        return explicit_map[stem]
-
-    # Section-scoped sources
-    if stem == 'tanaj':
-        allowed_sections = {'torah', 'neviim', 'ketuvim'}
-    else:
+    spec = DOCX_BOOKS.get(stem)
+    if spec is None:
         # Unknown source name: keep current broad behavior for compatibility.
         return list(BOOKS_INFO.keys())
-
+    if "books" in spec:
+        return list(spec["books"])
+    allowed_sections = set(spec.get("sections", ()))
     return [
         key for key, info in BOOKS_INFO.items()
         if info.get('section') in allowed_sections
@@ -274,6 +264,12 @@ def split_all_docx():
     return True
 
 
+def write_book_json(path: Path, data: dict) -> None:
+    """Write one book dict with the pipeline's canonical JSON bytes."""
+    with open(path, 'w', encoding='utf-8') as handle:
+        json.dump(data, handle, ensure_ascii=False, indent=2)
+
+
 def convert_book_to_json(book_key: str, verbose: bool = True):
     """Convert a single book markdown file to JSON."""
     if book_key not in BOOKS_INFO:
@@ -298,12 +294,12 @@ def convert_book_to_json(book_key: str, verbose: bool = True):
             f"ℹ️  Auto-repaired {repaired_markers} false verse restart marker(s) in {book_key}.md")
 
     try:
-        convert_book_markdown_to_json(book_key, str(
-            markdown_file), str(json_file), verbose=verbose)
+        markdown_text = markdown_file.read_text(encoding='utf-8')
+        data = convert_book_markdown_to_json(
+            book_key, markdown_text, verbose=verbose)
+        write_book_json(json_file, data)
 
         # Hard guard: converted JSON must never contain non-increasing verse order.
-        with open(json_file, 'r', encoding='utf-8') as f:
-            data = json.load(f)
 
         regressions = []
         for chapter_data in data.get('chapters', []):
@@ -398,14 +394,18 @@ def postprocess_book(book_key: str, dry_run: bool = False, backup: bool = False,
 
     try:
         processor = get_postprocessor(verbose=verbose)
-        success, file_stats = processor.process_json_file(
-            json_file, dry_run=dry_run, backup=backup)
-        if success and verbose:
-            processor.print_summary(dry_run)
-        return success
-    except Exception as e:
+        with open(json_file, 'r', encoding='utf-8') as handle:
+            data = json.load(handle)
+        processor.process_book(data, book_key)
+        if not dry_run:
+            if backup:
+                shutil.copy2(json_file, json_file.with_suffix('.json.bak'))
+            write_book_json(json_file, data)
         if verbose:
-            print(f"❌ Failed to post-process {book_key}: {e}")
+            processor.print_summary(dry_run)
+        return True
+    except Exception as e:
+        print(f"Error processing {json_file}: {e}")
         return False
 
 
@@ -418,10 +418,32 @@ def postprocess_all_books(dry_run: bool = False, backup: bool = False):
         print("Run 'python -m scripts.tth.main convert' first")
         return False
 
+    json_files = sorted(JSON_DIR.glob('*.json'))
+    if not json_files:
+        print(f"No JSON files found in {JSON_DIR}")
+        return False
+
     processor = get_postprocessor(verbose=False)
-    success = processor.process_all_files(
-        JSON_DIR, dry_run=dry_run, backup=backup)
-    return success
+    print(
+        f"{'[DRY RUN] ' if dry_run else ''}Processing {len(json_files)} JSON files...")
+    print("=" * 60)
+    for json_file in json_files:
+        book_name = json_file.stem
+        try:
+            with open(json_file, 'r', encoding='utf-8') as handle:
+                data = json.load(handle)
+            processor.process_book(data, book_name)
+            if not dry_run:
+                if backup:
+                    shutil.copy2(json_file, json_file.with_suffix('.json.bak'))
+                write_book_json(json_file, data)
+            processor.print_file_result(book_name, processor.last_file_stats, True)
+        except Exception as exc:
+            print(f"Error processing {json_file}: {exc}")
+            processor.print_file_result(book_name, {}, False)
+    print("=" * 60)
+    processor.print_summary(dry_run)
+    return True
 
 
 def validate_book(book_key: str, verbose: bool = True) -> bool:
@@ -633,7 +655,7 @@ def process_docx_books(docx_path: str, book_keys: List[str]):
             print(
                 f"❌ Failed to extract requested books: {', '.join(missing_books)}")
             print(
-                "Check book headers/patterns in DOCX and scripts/tth/config.py for those books.")
+                "Check book headers/patterns in the DOCX and data/tth/books.json for those books.")
             temp_md_file.unlink(missing_ok=True)
             return False
         print(f"✓ Extracted {len(extracted)} books")

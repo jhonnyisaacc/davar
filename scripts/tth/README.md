@@ -111,6 +111,6 @@ Each book is a single JSON file:
 
 ## Notes
 
-- Book availability and extraction rules come from `scripts/tth/config.py` (`BOOKS_INFO`).
-- Add new books there first, then run `books` to confirm they are registered.
+- Book availability and the DOCX-to-books map live in `data/tth/books.json`. `scripts/tth/config.py` loads them as `BOOKS_INFO` and `DOCX_BOOKS`.
+- Add new books in that file first, then run `books` to confirm they are registered.
 - `postprocess` converts markdown italics to `<em>` and fixes common formatting artifacts.
