@@ -51,6 +51,7 @@ Reusable masters live as a column to the right of the sections (`x ≈ 6400`). D
 | **04 — Unified Navigation** | Mobile liquid glass + desktop segmented IA |
 | **05 — Scripture Flows** | Library → book → chapter → verse → word |
 | **06 — Commentary / Shaul** | Verse → notas → detail → source (happy path only) |
+| **06b — Commentary / Shaul v2** | Chat-first grounded answers, provider connection, and source context |
 | **07 — Widgets / Biblical Calendar** | Widgets → today → date / moed / pending |
 | **08 — Assemblies / Qahal** | Full Qahal-derived experience in Davar chrome |
 | **09 — Cross-feature + Open Questions** | Scripture ↔ commentary / calendar; unresolved decisions |
@@ -64,7 +65,7 @@ Extracted from the **running Davar web UI**, especially `web/src/styles/theme.cs
 - **Surfaces:** parchment `#FAF6F0` (light), Shafan brown `#3C3836` (dark)
 - **Accent:** tekhelet `#7AA0D6` / `#92B5E8` — the only brand accent
 - **Copper:** Qumran / word highlight only (`#C68F55`), not a second brand
-- **Type:** Cardo (scripture), Inter (UI Latin), Suez One (wordmark / book names), Arimo (UI Hebrew), DeadSeaScrolls-Regular (Qumran / DSS — licensed; Pen previews the sample in Cardo + copper)
+- **Type:** Manrope (titles), Inter (UI Latin), Cardo (scripture), Suez One (Hebrew wordmark / legacy book mark only), Arimo (UI Hebrew), DeadSeaScrolls-Regular (Qumran / DSS — licensed; Pen previews the sample in Cardo + copper)
 - **Cards / actions:** neumorph dual shadows from current Davar
 - **Glass:** reserved for floating chrome (today’s dropdowns; unified mobile nav)
 
@@ -76,7 +77,7 @@ Where the current app is inconsistent, the Pen file follows the **most used prod
 2. **Settings** in the unified IA is a first-class destination (mobile full page + desktop segment). The current nav dropdown remains documented as the shipping baseline.
 3. **Mobile primary nav is new:** a floating **liquid-glass** capsule (frost, rim, sheen, Scripture centered). The unused `BottomNavBar` (Home + Search FAB) is not the model.
 4. **Desktop** keeps a top bar (current philosophy) with the same five areas in a centered segment. It is not a stretched phone and not a new sidebar product.
-5. **Assemblies** uses Davar Inter / tekhelet / parchment. Qahal Manrope, Purple 800, and the Qof mark are not carried over as Davar identity.
+5. **Assemblies** uses Davar Inter / Manrope titles / tekhelet / parchment. Qahal’s Manrope title scale is adopted as a shared Davar title treatment; Qahal Purple 800 and the Qof mark are not carried over as Davar identity.
 6. **Widgets** never say “Bore”. The widget name is **Biblical Calendar**.
 7. **Commentary** is the Davar label; the unit remains Shaul’s **nota**.
 
@@ -93,6 +94,32 @@ Intended IA:
 
 Do not invent a different IA per platform.
 
+## Typography and title scale
+
+Titles use the shared `font-display` token, currently **Manrope**. Inter remains the UI and body font; Cardo remains the scripture font. Do not use Suez One for new Latin titles. Keep Suez One only where the existing Hebrew wordmark or legacy book mark requires it.
+
+Use the existing size tokens instead of introducing one-off title sizes:
+
+| Token | Size | Use |
+| --- | ---: | --- |
+| `type-assembly-title` | 34 | Large section and desktop titles |
+| `type-h1` | 28 | Primary mobile page titles |
+| `type-h2` | 22 | Secondary mobile titles and focused states |
+| `type-list-title` | 22 | List and card headings |
+
+Use a 600 weight for primary titles when the screen needs a stronger anchor. Keep supporting copy in Inter at the existing body sizes and line heights.
+
+## Chat-first commentary v2
+
+The `06b — Commentary / Shaul v2 (Chat-first)` section is the reference for the LLM-style commentary flow. Stable screen IDs are `DAVAR-CHATV2-01` through `DAVAR-CHATV2-05`.
+
+- The mobile flow uses the shared status bar and the liquid-glass app navigation at the bottom of each 390×844 device frame.
+- The welcome state presents four starter questions and a single free-consult badge. Keep the ask field and send action anchored above the app navigation.
+- The thread state shows a user prompt, one grounded answer, source chips, and a follow-up composer. Source context stays concise and visible near the answer.
+- Follow-up access is gated by a provider connection. The providers are Claude, Muse, Grok, ChatGPT, and Gemini; provider marks sit in leading logo tiles inside the connection rows.
+- The desktop state uses the same five-area app navigation, with history, chat, and grounded sources kept in separate columns.
+- Provider connections power response generation only. The answer corpus remains Shaul material plus translation, Targum, and Midrash; Talmud is reference-only.
+
 ## Screen IDs
 
 Stable IDs for implementation issues/PRs:
@@ -107,6 +134,7 @@ Stable IDs for implementation issues/PRs:
 | `DAVAR-ASSEMBLIES-*` | Qahal-derived assemblies |
 | `DAVAR-SETTINGS-*` | Settings |
 | `DAVAR-CROSS-*` | Cross-feature |
+| `DAVAR-CHATV2-*` | Chat-first Commentary / Shaul v2 |
 
 Example: `DAVAR-COMMENTARY-02 — Verse commentary list`
 

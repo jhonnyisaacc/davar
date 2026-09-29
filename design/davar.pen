@@ -41,7 +41,7 @@
               "textGrowth": "fixed-width",
               "width": "fill_container",
               "content": "Davar — Unified Biblical Experience",
-              "fontFamily": "Suez One",
+              "fontFamily": "$font-display",
               "fontSize": 56,
               "fontWeight": "normal"
             },
@@ -105,7 +105,7 @@
                   "name": "Scripture title",
                   "fill": "#FAF4E6",
                   "content": "Scripture",
-                  "fontFamily": "Suez One",
+                  "fontFamily": "$font-display",
                   "fontSize": 24,
                   "fontWeight": "normal"
                 },
@@ -152,7 +152,7 @@
                   "name": "Commentary title",
                   "fill": "#FAF4E6",
                   "content": "Commentary",
-                  "fontFamily": "Suez One",
+                  "fontFamily": "$font-display",
                   "fontSize": 24,
                   "fontWeight": "normal"
                 },
@@ -199,7 +199,7 @@
                   "name": "Assemblies title",
                   "fill": "#FAF4E6",
                   "content": "Assemblies",
-                  "fontFamily": "Suez One",
+                  "fontFamily": "$font-display",
                   "fontSize": 24,
                   "fontWeight": "normal"
                 },
@@ -246,7 +246,7 @@
                   "name": "Widgets title",
                   "fill": "#FAF4E6",
                   "content": "Widgets",
-                  "fontFamily": "Suez One",
+                  "fontFamily": "$font-display",
                   "fontSize": 24,
                   "fontWeight": "normal"
                 },
@@ -293,7 +293,7 @@
                   "name": "Settings title",
                   "fill": "#FAF4E6",
                   "content": "Settings",
-                  "fontFamily": "Suez One",
+                  "fontFamily": "$font-display",
                   "fontSize": 24,
                   "fontWeight": "normal"
                 },
@@ -414,7 +414,7 @@
           "name": "F title",
           "fill": "$text-primary",
           "content": "Extracted from the running Davar UI",
-          "fontFamily": "Suez One",
+          "fontFamily": "$font-display",
           "fontSize": 36,
           "fontWeight": "normal"
         },
@@ -3452,7 +3452,7 @@
           "name": "C title",
           "fill": "$text-primary",
           "content": "Reusable library",
-          "fontFamily": "Suez One",
+          "fontFamily": "$font-display",
           "fontSize": 36,
           "fontWeight": "normal"
         },
@@ -5612,7 +5612,7 @@
           "name": "B title",
           "fill": "$text-primary",
           "content": "What ships today",
-          "fontFamily": "Suez One",
+          "fontFamily": "$font-display",
           "fontSize": 36,
           "fontWeight": "normal"
         },
@@ -7138,7 +7138,7 @@
           "name": "N title",
           "fill": "$text-primary",
           "content": "Scripture at the center",
-          "fontFamily": "Suez One",
+          "fontFamily": "$font-display",
           "fontSize": 36,
           "fontWeight": "normal"
         },
@@ -7445,7 +7445,7 @@
                               "name": "H",
                               "fill": "$text-primary",
                               "content": "Assemblies",
-                              "fontFamily": "Suez One",
+                              "fontFamily": "$font-display",
                               "fontSize": 28,
                               "fontWeight": "normal"
                             },
@@ -7572,7 +7572,7 @@
                               "name": "H",
                               "fill": "$text-primary",
                               "content": "Widgets",
-                              "fontFamily": "Suez One",
+                              "fontFamily": "$font-display",
                               "fontSize": 28,
                               "fontWeight": "normal"
                             },
@@ -7675,7 +7675,7 @@
                               "name": "H",
                               "fill": "$text-primary",
                               "content": "Settings",
-                              "fontFamily": "Suez One",
+                              "fontFamily": "$font-display",
                               "fontSize": 32,
                               "fontWeight": "normal"
                             },
@@ -8462,7 +8462,7 @@
           "name": "S title",
           "fill": "$text-primary",
           "content": "Library → Book → Chapter → Verse → Word",
-          "fontFamily": "Suez One",
+          "fontFamily": "$font-display",
           "fontSize": 32,
           "fontWeight": "normal"
         },
@@ -9039,7 +9039,7 @@
                                   "width": "fill_container",
                                   "content": "Bereshit 1",
                                   "textAlign": "right",
-                                  "fontFamily": "Suez One",
+                                  "fontFamily": "$font-display",
                                   "fontSize": 18,
                                   "fontWeight": "normal"
                                 },
@@ -9500,7 +9500,7 @@
           "name": "C title",
           "fill": "$text-primary",
           "content": "Verse → Notas → Detail → Source",
-          "fontFamily": "Suez One",
+          "fontFamily": "$font-display",
           "fontSize": 32,
           "fontWeight": "normal"
         },
@@ -10130,7 +10130,7 @@
                               "name": "H",
                               "fill": "$text-primary",
                               "content": "Créditos",
-                              "fontFamily": "Suez One",
+                              "fontFamily": "$font-display",
                               "fontSize": 26,
                               "fontWeight": "normal"
                             },
@@ -11604,7 +11604,7 @@
           "name": "W title",
           "fill": "$text-primary",
           "content": "One calendar · Today and appointed times",
-          "fontFamily": "Suez One",
+          "fontFamily": "$font-display",
           "fontSize": 32,
           "fontWeight": "normal"
         },
@@ -11708,7 +11708,7 @@
                               "name": "H",
                               "fill": "$text-primary",
                               "content": "Widgets",
-                              "fontFamily": "Suez One",
+                              "fontFamily": "$font-display",
                               "fontSize": 28,
                               "fontWeight": "normal"
                             },
@@ -13160,7 +13160,7 @@
           "name": "A title",
           "fill": "$text-primary",
           "content": "Qahal UX · Davar language",
-          "fontFamily": "Suez One",
+          "fontFamily": "$font-display",
           "fontSize": 32,
           "fontWeight": "normal"
         },
@@ -15938,7 +15938,7 @@
                               "content": "Assemblies",
                               "lineHeight": 1.12,
                               "textAlign": "center",
-                              "fontFamily": "Suez One",
+                              "fontFamily": "$font-display",
                               "fontSize": "$type-assembly-title",
                               "fontWeight": "normal"
                             },
@@ -16622,7 +16622,7 @@
                               "content": "Assemblies",
                               "lineHeight": 1.12,
                               "textAlign": "center",
-                              "fontFamily": "Suez One",
+                              "fontFamily": "$font-display",
                               "fontSize": "$type-assembly-title",
                               "fontWeight": "normal"
                             },
@@ -16851,7 +16851,7 @@
                               "content": "Assemblies",
                               "lineHeight": 1.12,
                               "textAlign": "center",
-                              "fontFamily": "Suez One",
+                              "fontFamily": "$font-display",
                               "fontSize": "$type-assembly-title",
                               "fontWeight": "normal"
                             },
@@ -17744,7 +17744,7 @@
                               "content": "Assemblies",
                               "lineHeight": 1.12,
                               "textAlign": "center",
-                              "fontFamily": "Suez One",
+                              "fontFamily": "$font-display",
                               "fontSize": "$type-assembly-title",
                               "fontWeight": "normal"
                             },
@@ -17970,7 +17970,7 @@
                               "content": "Assemblies",
                               "lineHeight": 1.12,
                               "textAlign": "center",
-                              "fontFamily": "Suez One",
+                              "fontFamily": "$font-display",
                               "fontSize": "$type-assembly-title",
                               "fontWeight": "normal"
                             },
@@ -20421,7 +20421,7 @@
                               "content": "Assemblies",
                               "lineHeight": 1.12,
                               "textAlign": "center",
-                              "fontFamily": "Suez One",
+                              "fontFamily": "$font-display",
                               "fontSize": "$type-assembly-title",
                               "fontWeight": "normal"
                             },
@@ -20826,7 +20826,7 @@
                               "name": "H",
                               "fill": "$text-primary",
                               "content": "Settings",
-                              "fontFamily": "Suez One",
+                              "fontFamily": "$font-display",
                               "fontSize": 32,
                               "fontWeight": "normal"
                             },
@@ -23883,7 +23883,7 @@
           "name": "X title",
           "fill": "$text-primary",
           "content": "Scripture connects the rest",
-          "fontFamily": "Suez One",
+          "fontFamily": "$font-display",
           "fontSize": 32,
           "fontWeight": "normal"
         },
@@ -25100,7 +25100,7 @@
                   "fill": "$accent-deep",
                   "content": "Bereshit",
                   "textAlign": "center",
-                  "fontFamily": "Suez One",
+                  "fontFamily": "$font-display",
                   "fontSize": 12,
                   "fontWeight": "normal"
                 }
@@ -26321,6 +26321,2666 @@
           "fontWeight": "normal"
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "hW1mU",
+      "x": 0,
+      "y": 25450,
+      "name": "06b — Commentary / Shaul v2 (Chat-first)",
+      "width": 5200,
+      "fill": "$canvas",
+      "layout": "vertical",
+      "gap": "$space-32",
+      "padding": "$space-48",
+      "children": [
+        {
+          "type": "text",
+          "id": "KrDRN",
+          "name": "C eyebrow v2",
+          "fill": "$accent-deep",
+          "content": "06b — COMMENTARY / SHAUL v2 · CHAT-FIRST",
+          "fontFamily": "$font-ui",
+          "fontSize": "$type-caption",
+          "fontWeight": "600",
+          "letterSpacing": 1.4
+        },
+        {
+          "type": "text",
+          "id": "f24hCj",
+          "name": "C title v2",
+          "fill": "$text-primary",
+          "content": "Ask → Grounded answer → Connect to continue",
+          "fontFamily": "$font-display",
+          "fontSize": "$type-assembly-title",
+          "fontWeight": "600"
+        },
+        {
+          "type": "text",
+          "id": "MqtPh",
+          "name": "C intro v2",
+          "fill": "$text-secondary",
+          "textGrowth": "fixed-width",
+          "width": "fill_container",
+          "content": "v2 redesign: chat-first LLM. First consult is free with 4 starters. Follow-ups require connecting Claude, Muse, Grok, ChatGPT or Gemini to power responses. Answers ground only in Shaul: Eric + Somos el Cuerpo del Mesias videos, transcription, notes — plus translation, Targum, Midrash, Talmud (reference only). Minimal top bar: articles + history.",
+          "lineHeight": 1.5,
+          "fontFamily": "$font-ui",
+          "fontSize": 15,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "frame",
+          "id": "DNGzy",
+          "name": "FLOW — Chat v2 · Mobile",
+          "layout": "vertical",
+          "gap": "$space-12",
+          "children": [
+            {
+              "type": "text",
+              "id": "G6dudr",
+              "name": "Lane",
+              "fill": "$text-secondary",
+              "content": "MOBILE · 390",
+              "fontFamily": "$font-ui",
+              "fontSize": "$type-caption",
+              "fontWeight": "600",
+              "letterSpacing": 1.2
+            },
+            {
+              "type": "frame",
+              "id": "b6Zo4",
+              "name": "Screens",
+              "gap": "$space-24",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "KJxHi",
+                  "name": "DAVAR-CHATV2-01",
+                  "width": 390,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "w6MJ78",
+                      "name": "Black screen header",
+                      "width": "fill_container",
+                      "fill": "$text-primary",
+                      "layout": "vertical",
+                      "gap": 1,
+                      "padding": [
+                        4,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "XPZU1",
+                          "name": "id",
+                          "fill": "$accent-primary",
+                          "content": "DAVAR-CHATV2-01",
+                          "fontFamily": "$font-ui",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "CNseM",
+                          "name": "t",
+                          "fill": "$text-on-accent",
+                          "content": "Welcome · first consult free",
+                          "fontFamily": "$font-ui",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "GVvwM",
+                      "name": "screen",
+                      "clip": true,
+                      "width": 390,
+                      "height": 844,
+                      "fill": "$surface-primary",
+                      "cornerRadius": 40,
+                      "layout": "vertical",
+                      "children": [
+                        {
+                          "id": "R06vH",
+                          "type": "ref",
+                          "ref": "Dv0Ob",
+                          "name": "StatusBar"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "UlBfs",
+                          "name": "TopBar",
+                          "width": "fill_container",
+                          "padding": [
+                            12,
+                            16
+                          ],
+                          "justifyContent": "space_between",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "YIABH",
+                              "name": "Greet",
+                              "fill": "$text-secondary",
+                              "content": "Davar · Chat",
+                              "fontFamily": "$font-ui",
+                              "fontSize": 13,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "Y4Xx1w",
+                              "name": "TopIcons",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "jmJpL",
+                                  "name": "Articles",
+                                  "width": 20,
+                                  "height": 20,
+                                  "icon": "book-open",
+                                  "library": "lucide",
+                                  "fill": "$text-secondary"
+                                },
+                                {
+                                  "type": "icon",
+                                  "id": "vBSbH",
+                                  "name": "History",
+                                  "width": 20,
+                                  "height": 20,
+                                  "icon": "history",
+                                  "library": "lucide",
+                                  "fill": "$text-secondary"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "RR48G",
+                          "name": "Body",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 12,
+                          "padding": 16,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "bmW97",
+                              "name": "Title",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "What do you want to understand today?",
+                              "lineHeight": 1.2,
+                              "fontFamily": "$font-display",
+                              "fontSize": "$type-h1",
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "biqSH",
+                              "name": "FreeBadge",
+                              "fill": "$accent-glow",
+                              "cornerRadius": "$radius-pill",
+                              "gap": 6,
+                              "padding": [
+                                6,
+                                10
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "cpuHA",
+                                  "name": "Spark",
+                                  "width": 14,
+                                  "height": 14,
+                                  "icon": "sparkles",
+                                  "library": "lucide",
+                                  "fill": "$accent-deep"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "R8oSbd",
+                                  "name": "FreeT",
+                                  "fill": "$accent-deep",
+                                  "content": "1 free consult · no login needed",
+                                  "fontFamily": "$font-ui",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "F3lFhI",
+                              "name": "Starters",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "ZQ0lC",
+                                  "name": "Q",
+                                  "width": "fill_container",
+                                  "fill": "$surface-elevated",
+                                  "cornerRadius": "$radius-md",
+                                  "stroke": "$border-subtle",
+                                  "strokeWidth": 1,
+                                  "gap": 10,
+                                  "padding": 14,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "icon",
+                                      "id": "UDv79",
+                                      "name": "Qi",
+                                      "width": 18,
+                                      "height": 18,
+                                      "icon": "scroll-text",
+                                      "library": "lucide",
+                                      "fill": "$accent-deep"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "tNV4W",
+                                      "name": "Qt",
+                                      "fill": "$text-primary",
+                                      "textGrowth": "fixed-width",
+                                      "width": "fill_container",
+                                      "content": "What is the Son of Man?",
+                                      "fontFamily": "$font-ui",
+                                      "fontSize": 14,
+                                      "fontWeight": "500"
+                                    },
+                                    {
+                                      "type": "icon",
+                                      "id": "wZJ83",
+                                      "name": "Go",
+                                      "width": 16,
+                                      "height": 16,
+                                      "icon": "arrow-right",
+                                      "library": "lucide",
+                                      "fill": "$text-secondary"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "orH0s",
+                                  "name": "Q",
+                                  "width": "fill_container",
+                                  "fill": "$surface-elevated",
+                                  "cornerRadius": "$radius-md",
+                                  "stroke": "$border-subtle",
+                                  "strokeWidth": 1,
+                                  "gap": 10,
+                                  "padding": 14,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "icon",
+                                      "id": "PpmY8",
+                                      "name": "Qi",
+                                      "width": 18,
+                                      "height": 18,
+                                      "icon": "crown",
+                                      "library": "lucide",
+                                      "fill": "$accent-deep"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "nRdPe",
+                                      "name": "Qt",
+                                      "fill": "$text-primary",
+                                      "textGrowth": "fixed-width",
+                                      "width": "fill_container",
+                                      "content": "What is the Son of God?",
+                                      "fontFamily": "$font-ui",
+                                      "fontSize": 14,
+                                      "fontWeight": "500"
+                                    },
+                                    {
+                                      "type": "icon",
+                                      "id": "Y9aPL",
+                                      "name": "Go",
+                                      "width": 16,
+                                      "height": 16,
+                                      "icon": "arrow-right",
+                                      "library": "lucide",
+                                      "fill": "$text-secondary"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "W0xoE2",
+                                  "name": "Q",
+                                  "width": "fill_container",
+                                  "fill": "$surface-elevated",
+                                  "cornerRadius": "$radius-md",
+                                  "stroke": "$border-subtle",
+                                  "strokeWidth": 1,
+                                  "gap": 10,
+                                  "padding": 14,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "icon",
+                                      "id": "sqGSJ",
+                                      "name": "Qi",
+                                      "width": 18,
+                                      "height": 18,
+                                      "icon": "users",
+                                      "library": "lucide",
+                                      "fill": "$accent-deep"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "jzkkC",
+                                      "name": "Qt",
+                                      "fill": "$text-primary",
+                                      "textGrowth": "fixed-width",
+                                      "width": "fill_container",
+                                      "content": "What is the Father?",
+                                      "fontFamily": "$font-ui",
+                                      "fontSize": 14,
+                                      "fontWeight": "500"
+                                    },
+                                    {
+                                      "type": "icon",
+                                      "id": "eSggw",
+                                      "name": "Go",
+                                      "width": 16,
+                                      "height": 16,
+                                      "icon": "arrow-right",
+                                      "library": "lucide",
+                                      "fill": "$text-secondary"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "SMvC2",
+                                  "name": "Q",
+                                  "width": "fill_container",
+                                  "fill": "$surface-elevated",
+                                  "cornerRadius": "$radius-md",
+                                  "stroke": "$border-subtle",
+                                  "strokeWidth": 1,
+                                  "gap": 10,
+                                  "padding": 14,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "icon",
+                                      "id": "hsEUs",
+                                      "name": "Qi",
+                                      "width": 18,
+                                      "height": 18,
+                                      "icon": "sparkles",
+                                      "library": "lucide",
+                                      "fill": "$accent-deep"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "hVWzc",
+                                      "name": "Qt",
+                                      "fill": "$text-primary",
+                                      "textGrowth": "fixed-width",
+                                      "width": "fill_container",
+                                      "content": "What is the meaning of faith?",
+                                      "fontFamily": "$font-ui",
+                                      "fontSize": 14,
+                                      "fontWeight": "500"
+                                    },
+                                    {
+                                      "type": "icon",
+                                      "id": "F0osk",
+                                      "name": "Go",
+                                      "width": 16,
+                                      "height": 16,
+                                      "icon": "arrow-right",
+                                      "library": "lucide",
+                                      "fill": "$text-secondary"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "OeNJw",
+                          "name": "Composer",
+                          "width": "fill_container",
+                          "fill": "$surface-primary",
+                          "stroke": "$border-subtle",
+                          "strokeWidth": {
+                            "top": 1
+                          },
+                          "gap": 8,
+                          "padding": 12,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "TXISP",
+                              "name": "Field",
+                              "width": "fill_container",
+                              "fill": "$surface-elevated",
+                              "cornerRadius": "$radius-pill",
+                              "padding": [
+                                12,
+                                14
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "X2v7GU",
+                                  "name": "Ph",
+                                  "fill": "$text-secondary",
+                                  "content": "Ask about Shaul…",
+                                  "fontFamily": "$font-ui",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "btaG7",
+                              "name": "Send",
+                              "width": 44,
+                              "height": 44,
+                              "fill": "$accent-primary",
+                              "cornerRadius": 22,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "X4qdN",
+                                  "name": "SendI",
+                                  "width": 20,
+                                  "height": 20,
+                                  "icon": "arrow-up",
+                                  "library": "lucide",
+                                  "fill": "$text-on-accent"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "msQEo",
+                          "name": "App navigation dock",
+                          "width": "fill_container",
+                          "height": 82,
+                          "padding": [
+                            0,
+                            8,
+                            8,
+                            8
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "id": "NNCZp",
+                              "type": "ref",
+                              "ref": "P95PS",
+                              "name": "Commentary app navigation"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "WCl8K",
+                  "name": "DAVAR-CHATV2-02",
+                  "width": 390,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "gwf1O",
+                      "name": "Black screen header",
+                      "width": "fill_container",
+                      "fill": "$text-primary",
+                      "layout": "vertical",
+                      "gap": 1,
+                      "padding": [
+                        4,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "rNlyM",
+                          "name": "id",
+                          "fill": "$accent-primary",
+                          "content": "DAVAR-CHATV2-02",
+                          "fontFamily": "$font-ui",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Cb7pM",
+                          "name": "t",
+                          "fill": "$text-on-accent",
+                          "content": "Thread · grounded answer",
+                          "fontFamily": "$font-ui",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "EBep1",
+                      "name": "screen",
+                      "clip": true,
+                      "width": 390,
+                      "height": 844,
+                      "fill": "$surface-primary",
+                      "cornerRadius": 40,
+                      "layout": "vertical",
+                      "children": [
+                        {
+                          "id": "jnhFD",
+                          "type": "ref",
+                          "ref": "Dv0Ob",
+                          "name": "StatusBar"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "pd1na",
+                          "name": "TopBar",
+                          "width": "fill_container",
+                          "padding": [
+                            12,
+                            16
+                          ],
+                          "justifyContent": "space_between",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon",
+                              "id": "xdP9e",
+                              "name": "Back",
+                              "width": 20,
+                              "height": 20,
+                              "icon": "chevron-left",
+                              "library": "lucide",
+                              "fill": "$text-secondary"
+                            },
+                            {
+                              "type": "text",
+                              "id": "aE4jn",
+                              "name": "T",
+                              "fill": "$text-primary",
+                              "content": "Son of Man",
+                              "fontFamily": "$font-ui",
+                              "fontSize": 15,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "AyI55",
+                              "name": "TopIcons",
+                              "gap": 12,
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "V4ZEb",
+                                  "name": "Articles",
+                                  "width": 20,
+                                  "height": 20,
+                                  "icon": "book-open",
+                                  "library": "lucide",
+                                  "fill": "$text-secondary"
+                                },
+                                {
+                                  "type": "icon",
+                                  "id": "xirt5",
+                                  "name": "History",
+                                  "width": 20,
+                                  "height": 20,
+                                  "icon": "history",
+                                  "library": "lucide",
+                                  "fill": "$text-secondary"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "N00ZP",
+                          "name": "Body",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 12,
+                          "padding": 16,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "exll0",
+                              "name": "UserMsg",
+                              "width": "fill_container",
+                              "justifyContent": "end",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "SYg9r",
+                                  "name": "Bubble",
+                                  "fill": "$accent-primary",
+                                  "cornerRadius": 18,
+                                  "padding": [
+                                    10,
+                                    14
+                                  ],
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "AFSum",
+                                      "name": "Uq",
+                                      "fill": "$text-on-accent",
+                                      "content": "What is the Son of Man?",
+                                      "fontFamily": "$font-ui",
+                                      "fontSize": 14,
+                                      "fontWeight": "500"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "P83Sbr",
+                              "name": "AiMsg",
+                              "width": "fill_container",
+                              "fill": "$surface-elevated",
+                              "cornerRadius": "$radius-md",
+                              "stroke": "$border-subtle",
+                              "strokeWidth": 1,
+                              "layout": "vertical",
+                              "gap": 10,
+                              "padding": 14,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "kfErD",
+                                  "name": "At",
+                                  "fill": "$text-primary",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "The Son of Man is the human-veil of the Messiah — he comes in flesh, suffers, and is then given dominion. Dan 7:13–14 read with the videos.",
+                                  "lineHeight": 1.5,
+                                  "fontFamily": "$font-ui",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "bJ2wM",
+                                  "name": "SrcChips",
+                                  "width": "fill_container",
+                                  "gap": 6,
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "iZhwt",
+                                      "name": "Chip",
+                                      "fill": "$surface-primary",
+                                      "cornerRadius": "$radius-pill",
+                                      "stroke": "$border-subtle",
+                                      "strokeWidth": 1,
+                                      "padding": [
+                                        6,
+                                        10
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "ySxDp",
+                                          "name": "Ct",
+                                          "fill": "$copper-base",
+                                          "content": "Eric 12:04",
+                                          "fontFamily": "$font-ui",
+                                          "fontSize": 11,
+                                          "fontWeight": "600"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "k5A98d",
+                                      "name": "Chip",
+                                      "fill": "$surface-primary",
+                                      "cornerRadius": "$radius-pill",
+                                      "stroke": "$border-subtle",
+                                      "strokeWidth": 1,
+                                      "padding": [
+                                        6,
+                                        10
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "yyBM4",
+                                          "name": "Ct",
+                                          "fill": "$copper-base",
+                                          "content": "Transcription §3",
+                                          "fontFamily": "$font-ui",
+                                          "fontSize": 11,
+                                          "fontWeight": "600"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "SAURR",
+                                      "name": "Chip",
+                                      "fill": "$surface-primary",
+                                      "cornerRadius": "$radius-pill",
+                                      "stroke": "$border-subtle",
+                                      "strokeWidth": 1,
+                                      "padding": [
+                                        6,
+                                        10
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "W7txE4",
+                                          "name": "Ct",
+                                          "fill": "$copper-base",
+                                          "content": "Note · Dan 7",
+                                          "fontFamily": "$font-ui",
+                                          "fontSize": 11,
+                                          "fontWeight": "600"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "CnUwb",
+                          "name": "Composer",
+                          "width": "fill_container",
+                          "stroke": "$border-subtle",
+                          "strokeWidth": {
+                            "top": 1
+                          },
+                          "gap": 8,
+                          "padding": 12,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "bk8M0",
+                              "name": "Field",
+                              "width": "fill_container",
+                              "fill": "$surface-elevated",
+                              "cornerRadius": "$radius-pill",
+                              "padding": [
+                                12,
+                                14
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "uq3yd",
+                                  "name": "Ph",
+                                  "fill": "$text-secondary",
+                                  "content": "Ask a follow-up…",
+                                  "fontFamily": "$font-ui",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "b9Z1V8",
+                              "name": "Send",
+                              "width": 44,
+                              "height": 44,
+                              "fill": "$accent-primary",
+                              "cornerRadius": 22,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "G1oaQ",
+                                  "name": "SendI",
+                                  "width": 20,
+                                  "height": 20,
+                                  "icon": "arrow-up",
+                                  "library": "lucide",
+                                  "fill": "$text-on-accent"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "whPh4",
+                          "name": "App navigation dock",
+                          "width": "fill_container",
+                          "height": 82,
+                          "padding": [
+                            0,
+                            8,
+                            8,
+                            8
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "id": "aNTI3",
+                              "type": "ref",
+                              "ref": "P95PS",
+                              "name": "Commentary app navigation"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ruL6v",
+                  "name": "DAVAR-CHATV2-03",
+                  "width": 390,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "kMiBa",
+                      "name": "Black screen header",
+                      "width": "fill_container",
+                      "fill": "$text-primary",
+                      "layout": "vertical",
+                      "gap": 1,
+                      "padding": [
+                        4,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "EjaaZ",
+                          "name": "id",
+                          "fill": "$accent-primary",
+                          "content": "DAVAR-CHATV2-03",
+                          "fontFamily": "$font-ui",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "lA80N",
+                          "name": "t",
+                          "fill": "$text-on-accent",
+                          "content": "Connect to continue",
+                          "fontFamily": "$font-ui",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "t51qp",
+                      "name": "screen",
+                      "clip": true,
+                      "width": 390,
+                      "height": 844,
+                      "fill": "$surface-primary",
+                      "cornerRadius": 40,
+                      "layout": "vertical",
+                      "children": [
+                        {
+                          "id": "uL0kG",
+                          "type": "ref",
+                          "ref": "Dv0Ob",
+                          "name": "StatusBar"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "gnHHR",
+                          "name": "Body",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 12,
+                          "padding": 20,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "HfDfI",
+                              "name": "Lock",
+                              "width": 56,
+                              "height": 56,
+                              "fill": "$accent-glow",
+                              "cornerRadius": 28,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "eU4vI",
+                                  "name": "LockI",
+                                  "width": 24,
+                                  "height": 24,
+                                  "icon": "lock",
+                                  "library": "lucide",
+                                  "fill": "$accent-deep"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "h3kHI",
+                              "name": "Title",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "To continue, connect your AI",
+                              "textAlign": "center",
+                              "fontFamily": "$font-display",
+                              "fontSize": "$type-h2",
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "text",
+                              "id": "F9scsm",
+                              "name": "Sub",
+                              "fill": "$text-secondary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Your connected AI only powers the response. Answers remain grounded in Shaul: Eric, Somos el Cuerpo del Mesias, translation, Targum, and Midrash. Talmud is reference-only.",
+                              "lineHeight": 1.5,
+                              "textAlign": "center",
+                              "fontFamily": "$font-ui",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "y2OwhX",
+                              "name": "Providers",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "gap": 10,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "d0BP6",
+                                  "name": "P",
+                                  "width": "fill_container",
+                                  "fill": "$surface-elevated",
+                                  "cornerRadius": "$radius-md",
+                                  "stroke": "$border-subtle",
+                                  "strokeWidth": 1,
+                                  "gap": 12,
+                                  "padding": [
+                                    9,
+                                    12
+                                  ],
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "vLExq",
+                                      "name": "Claude logo tile",
+                                      "width": 30,
+                                      "height": 30,
+                                      "fill": "$accent-glow",
+                                      "cornerRadius": 10,
+                                      "stroke": "$border-subtle",
+                                      "strokeWidth": 1,
+                                      "justifyContent": "center",
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "icon",
+                                          "id": "igR58",
+                                          "name": "Pi",
+                                          "width": 20,
+                                          "height": 20,
+                                          "icon": "asterisk",
+                                          "library": "lucide",
+                                          "fill": "#CC785C"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "CPIfy",
+                                      "name": "Pt",
+                                      "fill": "$text-primary",
+                                      "textGrowth": "fixed-width",
+                                      "width": "fill_container",
+                                      "content": "Connect Claude",
+                                      "fontFamily": "$font-ui",
+                                      "fontSize": 14,
+                                      "fontWeight": "600"
+                                    },
+                                    {
+                                      "type": "icon",
+                                      "id": "lTVT9",
+                                      "name": "Go",
+                                      "width": 16,
+                                      "height": 16,
+                                      "icon": "chevron-right",
+                                      "library": "lucide",
+                                      "fill": "$text-secondary"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "m2n4G0",
+                                  "name": "P",
+                                  "width": "fill_container",
+                                  "fill": "$surface-elevated",
+                                  "cornerRadius": "$radius-md",
+                                  "stroke": "$border-subtle",
+                                  "strokeWidth": 1,
+                                  "gap": 12,
+                                  "padding": [
+                                    9,
+                                    12
+                                  ],
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "yrWE4",
+                                      "name": "Muse logo tile",
+                                      "width": 30,
+                                      "height": 30,
+                                      "fill": "$accent-glow",
+                                      "cornerRadius": 10,
+                                      "stroke": "$border-subtle",
+                                      "strokeWidth": 1,
+                                      "justifyContent": "center",
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "icon",
+                                          "id": "C8HJfw",
+                                          "name": "Pi",
+                                          "width": 20,
+                                          "height": 20,
+                                          "icon": "audio-lines",
+                                          "library": "lucide",
+                                          "fill": "#D27954"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "DSxUn",
+                                      "name": "Pt",
+                                      "fill": "$text-primary",
+                                      "textGrowth": "fixed-width",
+                                      "width": "fill_container",
+                                      "content": "Connect Muse",
+                                      "fontFamily": "$font-ui",
+                                      "fontSize": 14,
+                                      "fontWeight": "600"
+                                    },
+                                    {
+                                      "type": "icon",
+                                      "id": "JKI1g",
+                                      "name": "Go",
+                                      "width": 16,
+                                      "height": 16,
+                                      "icon": "chevron-right",
+                                      "library": "lucide",
+                                      "fill": "$text-secondary"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "X6T411",
+                                  "name": "P",
+                                  "width": "fill_container",
+                                  "fill": "$surface-elevated",
+                                  "cornerRadius": "$radius-md",
+                                  "stroke": "$border-subtle",
+                                  "strokeWidth": 1,
+                                  "gap": 12,
+                                  "padding": [
+                                    9,
+                                    12
+                                  ],
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "HMOK5",
+                                      "name": "Grok logo tile",
+                                      "width": 30,
+                                      "height": 30,
+                                      "fill": "$surface-primary",
+                                      "cornerRadius": 10,
+                                      "stroke": "$border-subtle",
+                                      "strokeWidth": 1,
+                                      "justifyContent": "center",
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "icon",
+                                          "id": "MTFWc",
+                                          "name": "Pi",
+                                          "width": 20,
+                                          "height": 20,
+                                          "icon": "x",
+                                          "library": "lucide",
+                                          "fill": "$text-primary"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "cGg5m",
+                                      "name": "Pt",
+                                      "fill": "$text-primary",
+                                      "textGrowth": "fixed-width",
+                                      "width": "fill_container",
+                                      "content": "Connect Grok",
+                                      "fontFamily": "$font-ui",
+                                      "fontSize": 14,
+                                      "fontWeight": "600"
+                                    },
+                                    {
+                                      "type": "icon",
+                                      "id": "gE6k7",
+                                      "name": "Go",
+                                      "width": 16,
+                                      "height": 16,
+                                      "icon": "chevron-right",
+                                      "library": "lucide",
+                                      "fill": "$text-secondary"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "nttwM",
+                                  "name": "P",
+                                  "width": "fill_container",
+                                  "fill": "$surface-elevated",
+                                  "cornerRadius": "$radius-md",
+                                  "stroke": "$border-subtle",
+                                  "strokeWidth": 1,
+                                  "gap": 12,
+                                  "padding": [
+                                    9,
+                                    12
+                                  ],
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "fMp2C",
+                                      "name": "ChatGPT logo tile",
+                                      "width": 30,
+                                      "height": 30,
+                                      "fill": "$accent-glow",
+                                      "cornerRadius": 10,
+                                      "stroke": "$border-subtle",
+                                      "strokeWidth": 1,
+                                      "justifyContent": "center",
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "icon",
+                                          "id": "dG0sn",
+                                          "name": "Pi",
+                                          "width": 20,
+                                          "height": 20,
+                                          "icon": "infinity",
+                                          "library": "lucide",
+                                          "fill": "#16856B"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "L26TMQ",
+                                      "name": "Pt",
+                                      "fill": "$text-primary",
+                                      "textGrowth": "fixed-width",
+                                      "width": "fill_container",
+                                      "content": "Connect ChatGPT",
+                                      "fontFamily": "$font-ui",
+                                      "fontSize": 14,
+                                      "fontWeight": "600"
+                                    },
+                                    {
+                                      "type": "icon",
+                                      "id": "m7q1u",
+                                      "name": "Go",
+                                      "width": 16,
+                                      "height": 16,
+                                      "icon": "chevron-right",
+                                      "library": "lucide",
+                                      "fill": "$text-secondary"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "z8PkQM",
+                                  "name": "P",
+                                  "width": "fill_container",
+                                  "fill": "$surface-elevated",
+                                  "cornerRadius": "$radius-md",
+                                  "stroke": "$border-subtle",
+                                  "strokeWidth": 1,
+                                  "gap": 12,
+                                  "padding": [
+                                    9,
+                                    12
+                                  ],
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "OgA0z",
+                                      "name": "Gemini logo tile",
+                                      "width": 30,
+                                      "height": 30,
+                                      "fill": "$accent-glow",
+                                      "cornerRadius": 10,
+                                      "stroke": "$border-subtle",
+                                      "strokeWidth": 1,
+                                      "justifyContent": "center",
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "icon",
+                                          "id": "Sz4MA",
+                                          "name": "Pi",
+                                          "width": 20,
+                                          "height": 20,
+                                          "icon": "sparkles",
+                                          "library": "lucide",
+                                          "fill": "#5276D3"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "Y8P0cv",
+                                      "name": "Pt",
+                                      "fill": "$text-primary",
+                                      "textGrowth": "fixed-width",
+                                      "width": "fill_container",
+                                      "content": "Connect Gemini",
+                                      "fontFamily": "$font-ui",
+                                      "fontSize": 14,
+                                      "fontWeight": "600"
+                                    },
+                                    {
+                                      "type": "icon",
+                                      "id": "y1g0e",
+                                      "name": "Go",
+                                      "width": 16,
+                                      "height": 16,
+                                      "icon": "chevron-right",
+                                      "library": "lucide",
+                                      "fill": "$text-secondary"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "ajyBZ",
+                              "name": "Sec",
+                              "fill": "$text-secondary",
+                              "content": "Secure OAuth · never trains on your chats",
+                              "textAlign": "center",
+                              "fontFamily": "$font-ui",
+                              "fontSize": 11,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "uGqVS",
+                          "name": "Composer",
+                          "width": "fill_container",
+                          "stroke": "$border-subtle",
+                          "strokeWidth": {
+                            "top": 1
+                          },
+                          "gap": 8,
+                          "padding": 12,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "LEM3T",
+                              "name": "Field",
+                              "width": "fill_container",
+                              "fill": "$surface-elevated",
+                              "cornerRadius": "$radius-pill",
+                              "padding": [
+                                12,
+                                14
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "ktims",
+                                  "name": "Ph",
+                                  "fill": "$text-secondary",
+                                  "content": "Connect to keep asking…",
+                                  "fontFamily": "$font-ui",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "untve",
+                              "name": "Send",
+                              "width": 44,
+                              "height": 44,
+                              "fill": "$muted",
+                              "cornerRadius": 22,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "bK6SJ",
+                                  "name": "SendI",
+                                  "width": 18,
+                                  "height": 18,
+                                  "icon": "lock",
+                                  "library": "lucide",
+                                  "fill": "$text-secondary"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "zJCyh",
+                          "name": "App navigation dock",
+                          "width": "fill_container",
+                          "height": 82,
+                          "padding": [
+                            0,
+                            8,
+                            8,
+                            8
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "id": "ejOpM",
+                              "type": "ref",
+                              "ref": "P95PS",
+                              "name": "Commentary app navigation"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "EHYl7",
+                  "name": "DAVAR-CHATV2-04",
+                  "width": 390,
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "T4Gvs9",
+                      "name": "Black screen header",
+                      "width": "fill_container",
+                      "fill": "$text-primary",
+                      "layout": "vertical",
+                      "gap": 1,
+                      "padding": [
+                        4,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "AaSEe",
+                          "name": "id",
+                          "fill": "$accent-primary",
+                          "content": "DAVAR-CHATV2-04",
+                          "fontFamily": "$font-ui",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "SMKYI",
+                          "name": "t",
+                          "fill": "$text-on-accent",
+                          "content": "Connected · minimal",
+                          "fontFamily": "$font-ui",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ElCPl",
+                      "name": "screen",
+                      "clip": true,
+                      "width": 390,
+                      "height": 844,
+                      "fill": "$surface-primary",
+                      "cornerRadius": 40,
+                      "layout": "vertical",
+                      "children": [
+                        {
+                          "id": "v3U1C",
+                          "type": "ref",
+                          "ref": "Dv0Ob",
+                          "name": "StatusBar"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "c3KIj7",
+                          "name": "TopBar",
+                          "width": "fill_container",
+                          "padding": [
+                            12,
+                            16
+                          ],
+                          "justifyContent": "space_between",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "p9Bqp4",
+                              "name": "Live",
+                              "fill": "$status-success",
+                              "content": "● Claude connected",
+                              "fontFamily": "$font-ui",
+                              "fontSize": 12,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "rA6hM",
+                              "name": "TopIcons",
+                              "gap": 12,
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "t4Aobr",
+                                  "name": "Articles",
+                                  "width": 20,
+                                  "height": 20,
+                                  "icon": "book-open",
+                                  "library": "lucide",
+                                  "fill": "$text-secondary"
+                                },
+                                {
+                                  "type": "icon",
+                                  "id": "YHLIr",
+                                  "name": "History",
+                                  "width": 20,
+                                  "height": 20,
+                                  "icon": "history",
+                                  "library": "lucide",
+                                  "fill": "$text-secondary"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "NYUgH",
+                          "name": "Body",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "layout": "vertical",
+                          "gap": 12,
+                          "padding": 16,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "x8w13N",
+                              "name": "AiMsg",
+                              "width": "fill_container",
+                              "fill": "$surface-elevated",
+                              "cornerRadius": "$radius-md",
+                              "stroke": "$border-subtle",
+                              "strokeWidth": 1,
+                              "layout": "vertical",
+                              "gap": 8,
+                              "padding": 14,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "vRjYl",
+                                  "name": "At",
+                                  "fill": "$text-primary",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Faith (emunah) is steadfast trust that acts — Avraham believed and it was counted. See transcription §7 + note.",
+                                  "lineHeight": 1.5,
+                                  "fontFamily": "$font-ui",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "Y1msi",
+                              "name": "UserMsg",
+                              "width": "fill_container",
+                              "justifyContent": "end",
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "zBrSS",
+                                  "name": "Bubble",
+                                  "fill": "$accent-primary",
+                                  "cornerRadius": 18,
+                                  "padding": [
+                                    10,
+                                    14
+                                  ],
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "T9wy84",
+                                      "name": "Uq",
+                                      "fill": "$text-on-accent",
+                                      "content": "And the Father?",
+                                      "fontFamily": "$font-ui",
+                                      "fontSize": 14,
+                                      "fontWeight": "500"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ARRwg",
+                          "name": "Composer",
+                          "width": "fill_container",
+                          "stroke": "$border-subtle",
+                          "strokeWidth": {
+                            "top": 1
+                          },
+                          "gap": 8,
+                          "padding": 12,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "KKRQE",
+                              "name": "Field",
+                              "width": "fill_container",
+                              "fill": "$surface-primary",
+                              "cornerRadius": "$radius-pill",
+                              "stroke": "$accent-primary",
+                              "strokeWidth": 1.5,
+                              "padding": [
+                                12,
+                                14
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "kug9j",
+                                  "name": "Ph",
+                                  "fill": "$text-primary",
+                                  "content": "Ask about the Father…",
+                                  "fontFamily": "$font-ui",
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "Y9F2GF",
+                              "name": "Send",
+                              "width": 44,
+                              "height": 44,
+                              "fill": "$accent-deep",
+                              "cornerRadius": 22,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "qpQjM",
+                                  "name": "SendI",
+                                  "width": 20,
+                                  "height": 20,
+                                  "icon": "arrow-up",
+                                  "library": "lucide",
+                                  "fill": "$text-on-accent"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "aQBAG",
+                          "name": "App navigation dock",
+                          "width": "fill_container",
+                          "height": 82,
+                          "padding": [
+                            0,
+                            8,
+                            8,
+                            8
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "id": "YTeSF",
+                              "type": "ref",
+                              "ref": "P95PS",
+                              "name": "Commentary app navigation"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "v56BZ9",
+          "name": "FLOW — Chat v2 · Web",
+          "layout": "vertical",
+          "gap": "$space-12",
+          "children": [
+            {
+              "type": "text",
+              "id": "r8lJJg",
+              "name": "Lane",
+              "fill": "$text-secondary",
+              "content": "WEB · 1280",
+              "fontFamily": "$font-ui",
+              "fontSize": "$type-caption",
+              "fontWeight": "600",
+              "letterSpacing": 1.2
+            },
+            {
+              "type": "frame",
+              "id": "bNq2t",
+              "name": "Screens",
+              "layout": "vertical",
+              "gap": "$space-24",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "H8CKM9",
+                  "name": "DAVAR-CHATV2-05",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "TzUn3",
+                      "name": "id",
+                      "fill": "$text-secondary",
+                      "content": "DAVAR-CHATV2-05",
+                      "fontFamily": "$font-ui",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "k48Fg9",
+                      "name": "t",
+                      "fill": "$text-primary",
+                      "content": "Desktop · chat + sources + connect",
+                      "fontFamily": "$font-ui",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "v4mngm",
+                      "name": "screen",
+                      "clip": true,
+                      "width": 1280,
+                      "height": 800,
+                      "fill": "$surface-primary",
+                      "cornerRadius": 24,
+                      "layout": "vertical",
+                      "children": [
+                        {
+                          "id": "YbO70",
+                          "type": "ref",
+                          "ref": "k1nmfo",
+                          "name": "Davar app navigation",
+                          "width": "fill_container",
+                          "descendants": {
+                            "w4YKH": {
+                              "fill": "$accent-glow"
+                            },
+                            "jYjil": {
+                              "fill": "$accent-deep",
+                              "fontWeight": "600"
+                            },
+                            "a0GvK": {
+                              "fill": "$accent-glow"
+                            },
+                            "B9ZX0f": {
+                              "fill": "$text-secondary",
+                              "fontWeight": "normal"
+                            },
+                            "BDEyb": {
+                              "enabled": false
+                            }
+                          }
+                        },
+                        {
+                          "type": "frame",
+                          "id": "HG5bi",
+                          "name": "TopBar",
+                          "width": "fill_container",
+                          "stroke": "$border-subtle",
+                          "strokeWidth": {
+                            "bottom": 1
+                          },
+                          "padding": [
+                            14,
+                            24
+                          ],
+                          "justifyContent": "space_between",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "aRhJx",
+                              "name": "Brand",
+                              "fill": "$text-primary",
+                              "content": "Davar · Chat",
+                              "fontFamily": "$font-display",
+                              "fontSize": 18,
+                              "fontWeight": "600"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "MXOj0",
+                              "name": "Mid",
+                              "fill": "$accent-glow",
+                              "cornerRadius": "$radius-pill",
+                              "gap": 8,
+                              "padding": [
+                                6,
+                                12
+                              ],
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "e7Ugwc",
+                                  "name": "Mi",
+                                  "width": 14,
+                                  "height": 14,
+                                  "icon": "sparkles",
+                                  "library": "lucide",
+                                  "fill": "$accent-deep"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "nG3lf",
+                                  "name": "Mt",
+                                  "fill": "$accent-deep",
+                                  "content": "1 free consult · then connect Claude / Muse / Grok / ChatGPT / Gemini",
+                                  "fontFamily": "$font-ui",
+                                  "fontSize": 12,
+                                  "fontWeight": "600"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "kO4Nd",
+                              "name": "Right",
+                              "gap": 16,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon",
+                                  "id": "M4FCPx",
+                                  "name": "Articles",
+                                  "width": 20,
+                                  "height": 20,
+                                  "icon": "book-open",
+                                  "library": "lucide",
+                                  "fill": "$text-secondary"
+                                },
+                                {
+                                  "type": "icon",
+                                  "id": "UZJUT",
+                                  "name": "History",
+                                  "width": 20,
+                                  "height": 20,
+                                  "icon": "history",
+                                  "library": "lucide",
+                                  "fill": "$text-secondary"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "xLRJa",
+                                  "name": "Avatar",
+                                  "fill": "$accent-deep",
+                                  "content": "E",
+                                  "fontFamily": "$font-ui",
+                                  "fontSize": 14,
+                                  "fontWeight": "700"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "W7YrG",
+                          "name": "Cols",
+                          "width": "fill_container",
+                          "height": "fill_container",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "A3cPho",
+                              "name": "History",
+                              "width": 260,
+                              "height": "fill_container",
+                              "stroke": "$border-subtle",
+                              "strokeWidth": {
+                                "right": 1
+                              },
+                              "layout": "vertical",
+                              "gap": 8,
+                              "padding": 16,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "fMcUx",
+                                  "name": "Hh",
+                                  "fill": "$text-secondary",
+                                  "content": "HISTORY",
+                                  "fontFamily": "$font-ui",
+                                  "fontSize": 11,
+                                  "fontWeight": "700",
+                                  "letterSpacing": 1
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "eVIHr",
+                                  "name": "Hrow",
+                                  "width": "fill_container",
+                                  "fill": "$surface-elevated",
+                                  "cornerRadius": 10,
+                                  "padding": 10,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "S79D4i",
+                                      "name": "Ht",
+                                      "fill": "$text-primary",
+                                      "textGrowth": "fixed-width",
+                                      "width": "fill_container",
+                                      "content": "Son of Man",
+                                      "fontFamily": "$font-ui",
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "BuP0G",
+                                  "name": "Hrow",
+                                  "width": "fill_container",
+                                  "fill": "$surface-elevated",
+                                  "cornerRadius": 10,
+                                  "padding": 10,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "a74xzV",
+                                      "name": "Ht",
+                                      "fill": "$text-primary",
+                                      "textGrowth": "fixed-width",
+                                      "width": "fill_container",
+                                      "content": "Son of God",
+                                      "fontFamily": "$font-ui",
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "Z5GxGg",
+                                  "name": "Hrow",
+                                  "width": "fill_container",
+                                  "fill": "$surface-elevated",
+                                  "cornerRadius": 10,
+                                  "padding": 10,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "xISb7",
+                                      "name": "Ht",
+                                      "fill": "$text-primary",
+                                      "textGrowth": "fixed-width",
+                                      "width": "fill_container",
+                                      "content": "The Father",
+                                      "fontFamily": "$font-ui",
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "nKFYy",
+                                  "name": "Hrow",
+                                  "width": "fill_container",
+                                  "fill": "$surface-elevated",
+                                  "cornerRadius": 10,
+                                  "padding": 10,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "T7XpHu",
+                                      "name": "Ht",
+                                      "fill": "$text-primary",
+                                      "textGrowth": "fixed-width",
+                                      "width": "fill_container",
+                                      "content": "Meaning of faith",
+                                      "fontFamily": "$font-ui",
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "ZHGDV",
+                              "name": "Chat",
+                              "width": "fill_container",
+                              "height": "fill_container",
+                              "layout": "vertical",
+                              "gap": 12,
+                              "padding": 24,
+                              "children": [
+                                {
+                                  "type": "frame",
+                                  "id": "pezKF",
+                                  "name": "StarterRow",
+                                  "width": "fill_container",
+                                  "gap": 10,
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "GN8Wa",
+                                      "name": "SC",
+                                      "fill": "$surface-elevated",
+                                      "cornerRadius": "$radius-pill",
+                                      "stroke": "$border-subtle",
+                                      "strokeWidth": 1,
+                                      "padding": [
+                                        10,
+                                        14
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "nuwnG",
+                                          "name": "ST",
+                                          "fill": "$accent-deep",
+                                          "content": "Son of Man?",
+                                          "fontFamily": "$font-ui",
+                                          "fontSize": 13,
+                                          "fontWeight": "600"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "DJsfy",
+                                      "name": "SC",
+                                      "fill": "$surface-elevated",
+                                      "cornerRadius": "$radius-pill",
+                                      "stroke": "$border-subtle",
+                                      "strokeWidth": 1,
+                                      "padding": [
+                                        10,
+                                        14
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "ESi4u",
+                                          "name": "ST",
+                                          "fill": "$accent-deep",
+                                          "content": "Son of God?",
+                                          "fontFamily": "$font-ui",
+                                          "fontSize": 13,
+                                          "fontWeight": "600"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "FHwe7",
+                                      "name": "SC",
+                                      "fill": "$surface-elevated",
+                                      "cornerRadius": "$radius-pill",
+                                      "stroke": "$border-subtle",
+                                      "strokeWidth": 1,
+                                      "padding": [
+                                        10,
+                                        14
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "lZIU2",
+                                          "name": "ST",
+                                          "fill": "$accent-deep",
+                                          "content": "The Father?",
+                                          "fontFamily": "$font-ui",
+                                          "fontSize": 13,
+                                          "fontWeight": "600"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "S8tDPv",
+                                      "name": "SC",
+                                      "fill": "$surface-elevated",
+                                      "cornerRadius": "$radius-pill",
+                                      "stroke": "$border-subtle",
+                                      "strokeWidth": 1,
+                                      "padding": [
+                                        10,
+                                        14
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "Aeycd",
+                                          "name": "ST",
+                                          "fill": "$accent-deep",
+                                          "content": "Faith?",
+                                          "fontFamily": "$font-ui",
+                                          "fontSize": 13,
+                                          "fontWeight": "600"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "YiVfC",
+                                  "name": "Answer",
+                                  "width": "fill_container",
+                                  "fill": "$surface-elevated",
+                                  "cornerRadius": "$radius-md",
+                                  "stroke": "$border-subtle",
+                                  "strokeWidth": 1,
+                                  "layout": "vertical",
+                                  "gap": 10,
+                                  "padding": 18,
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "mthX6",
+                                      "name": "Ab",
+                                      "fill": "$text-primary",
+                                      "textGrowth": "fixed-width",
+                                      "width": "fill_container",
+                                      "content": "The Son of God is the eternal Word made flesh — declared at the immersion, vindicated in resurrection. Eric vol. 2 + Somos el Cuerpo transcription §4; Targum Onkelos + Midrash Rabbah complete it.",
+                                      "lineHeight": 1.55,
+                                      "fontFamily": "$font-ui",
+                                      "fontSize": 15,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "ZCEew",
+                                  "name": "SrcRow",
+                                  "width": "fill_container",
+                                  "gap": 8,
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "X4KVim",
+                                      "name": "C",
+                                      "fill": "$surface-primary",
+                                      "cornerRadius": "$radius-pill",
+                                      "stroke": "$border-subtle",
+                                      "strokeWidth": 1,
+                                      "padding": [
+                                        6,
+                                        10
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "E9cYII",
+                                          "name": "Ct",
+                                          "fill": "$copper-base",
+                                          "content": "▶ Eric 12:04",
+                                          "fontFamily": "$font-ui",
+                                          "fontSize": 11,
+                                          "fontWeight": "600"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "P6kkZ",
+                                      "name": "C",
+                                      "fill": "$surface-primary",
+                                      "cornerRadius": "$radius-pill",
+                                      "stroke": "$border-subtle",
+                                      "strokeWidth": 1,
+                                      "padding": [
+                                        6,
+                                        10
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "yxTdd",
+                                          "name": "Ct",
+                                          "fill": "$copper-base",
+                                          "content": "Transcription §4",
+                                          "fontFamily": "$font-ui",
+                                          "fontSize": 11,
+                                          "fontWeight": "600"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "T6uep",
+                                      "name": "C",
+                                      "fill": "$surface-primary",
+                                      "cornerRadius": "$radius-pill",
+                                      "stroke": "$border-subtle",
+                                      "strokeWidth": 1,
+                                      "padding": [
+                                        6,
+                                        10
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "vr8wq",
+                                          "name": "Ct",
+                                          "fill": "$copper-base",
+                                          "content": "Note · Jn 1",
+                                          "fontFamily": "$font-ui",
+                                          "fontSize": 11,
+                                          "fontWeight": "600"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "qtqwL",
+                                      "name": "C",
+                                      "fill": "$surface-primary",
+                                      "cornerRadius": "$radius-pill",
+                                      "stroke": "$border-subtle",
+                                      "strokeWidth": 1,
+                                      "padding": [
+                                        6,
+                                        10
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "mzjiI",
+                                          "name": "Ct",
+                                          "fill": "$copper-base",
+                                          "content": "Targum",
+                                          "fontFamily": "$font-ui",
+                                          "fontSize": 11,
+                                          "fontWeight": "600"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "gDJlF",
+                                      "name": "C",
+                                      "fill": "$surface-primary",
+                                      "cornerRadius": "$radius-pill",
+                                      "stroke": "$border-subtle",
+                                      "strokeWidth": 1,
+                                      "padding": [
+                                        6,
+                                        10
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "a8QtC",
+                                          "name": "Ct",
+                                          "fill": "$copper-base",
+                                          "content": "Midrash",
+                                          "fontFamily": "$font-ui",
+                                          "fontSize": 11,
+                                          "fontWeight": "600"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "u8CWtF",
+                                  "name": "Composer",
+                                  "width": "fill_container",
+                                  "gap": 10,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "frame",
+                                      "id": "dPYVk",
+                                      "name": "Field",
+                                      "width": "fill_container",
+                                      "fill": "$surface-elevated",
+                                      "cornerRadius": "$radius-pill",
+                                      "padding": [
+                                        14,
+                                        18
+                                      ],
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "cyRwc",
+                                          "name": "Ph",
+                                          "fill": "$text-secondary",
+                                          "content": "Ask a follow-up — connecting Claude powers the next answer…",
+                                          "fontFamily": "$font-ui",
+                                          "fontSize": 14,
+                                          "fontWeight": "normal"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "y6KVM4",
+                                      "name": "Send",
+                                      "width": 48,
+                                      "height": 48,
+                                      "fill": "$accent-primary",
+                                      "cornerRadius": 24,
+                                      "justifyContent": "center",
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "icon",
+                                          "id": "PyU7d",
+                                          "name": "Si",
+                                          "width": 20,
+                                          "height": 20,
+                                          "icon": "arrow-up",
+                                          "library": "lucide",
+                                          "fill": "$text-on-accent"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "Co0mv",
+                              "name": "Sources",
+                              "width": 300,
+                              "height": "fill_container",
+                              "fill": "$surface-elevated",
+                              "layout": "vertical",
+                              "gap": 10,
+                              "padding": 16,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "L1PSv7",
+                                  "name": "Sh",
+                                  "fill": "$text-secondary",
+                                  "content": "GROUNDED IN",
+                                  "fontFamily": "$font-ui",
+                                  "fontSize": 11,
+                                  "fontWeight": "700",
+                                  "letterSpacing": 1
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "J39mIz",
+                                  "name": "Sb",
+                                  "fill": "$text-secondary",
+                                  "textGrowth": "fixed-width",
+                                  "width": "fill_container",
+                                  "content": "Eric · Somos el Cuerpo videos, transcription, notes. Translation + Targum + Midrash. Talmud reference only.",
+                                  "lineHeight": 1.5,
+                                  "fontFamily": "$font-ui",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "IxBaV",
+                                  "name": "Connect",
+                                  "width": "fill_container",
+                                  "fill": "$surface-primary",
+                                  "cornerRadius": "$radius-md",
+                                  "stroke": "$border-subtle",
+                                  "strokeWidth": 1,
+                                  "layout": "vertical",
+                                  "gap": 8,
+                                  "padding": 14,
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "GSDoT",
+                                      "name": "Ct2",
+                                      "fill": "$text-primary",
+                                      "content": "Connect to continue",
+                                      "fontFamily": "$font-ui",
+                                      "fontSize": 13,
+                                      "fontWeight": "700"
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "T3s8m7",
+                                      "name": "LLM provider logos",
+                                      "gap": 8,
+                                      "justifyContent": "center",
+                                      "alignItems": "center",
+                                      "children": [
+                                        {
+                                          "type": "frame",
+                                          "id": "saigd",
+                                          "name": "Claude logo tile",
+                                          "width": 30,
+                                          "height": 30,
+                                          "fill": "$surface-elevated",
+                                          "cornerRadius": 9,
+                                          "stroke": "$border-subtle",
+                                          "strokeWidth": 1,
+                                          "justifyContent": "center",
+                                          "alignItems": "center",
+                                          "children": [
+                                            {
+                                              "type": "icon",
+                                              "id": "bY3a8",
+                                              "name": "Claude logo mark",
+                                              "width": 16,
+                                              "height": 16,
+                                              "icon": "asterisk",
+                                              "library": "lucide",
+                                              "fill": "#CC785C"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "L7J5SD",
+                                          "name": "Muse logo tile",
+                                          "width": 30,
+                                          "height": 30,
+                                          "fill": "$surface-elevated",
+                                          "cornerRadius": 9,
+                                          "stroke": "$border-subtle",
+                                          "strokeWidth": 1,
+                                          "justifyContent": "center",
+                                          "alignItems": "center",
+                                          "children": [
+                                            {
+                                              "type": "icon",
+                                              "id": "UOHiz",
+                                              "name": "Muse logo mark",
+                                              "width": 16,
+                                              "height": 16,
+                                              "icon": "audio-lines",
+                                              "library": "lucide",
+                                              "fill": "#D27954"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "QyfvS",
+                                          "name": "Grok logo tile",
+                                          "width": 30,
+                                          "height": 30,
+                                          "fill": "$surface-elevated",
+                                          "cornerRadius": 9,
+                                          "stroke": "$border-subtle",
+                                          "strokeWidth": 1,
+                                          "justifyContent": "center",
+                                          "alignItems": "center",
+                                          "children": [
+                                            {
+                                              "type": "icon",
+                                              "id": "r9uMc",
+                                              "name": "Grok logo mark",
+                                              "width": 16,
+                                              "height": 16,
+                                              "icon": "x",
+                                              "library": "lucide",
+                                              "fill": "$text-primary"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "rPs5g",
+                                          "name": "ChatGPT logo tile",
+                                          "width": 30,
+                                          "height": 30,
+                                          "fill": "$surface-elevated",
+                                          "cornerRadius": 9,
+                                          "stroke": "$border-subtle",
+                                          "strokeWidth": 1,
+                                          "justifyContent": "center",
+                                          "alignItems": "center",
+                                          "children": [
+                                            {
+                                              "type": "icon",
+                                              "id": "z61SA",
+                                              "name": "ChatGPT logo mark",
+                                              "width": 16,
+                                              "height": 16,
+                                              "icon": "infinity",
+                                              "library": "lucide",
+                                              "fill": "#16856B"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "type": "frame",
+                                          "id": "e6kHJ1",
+                                          "name": "Gemini logo tile",
+                                          "width": 30,
+                                          "height": 30,
+                                          "fill": "$surface-elevated",
+                                          "cornerRadius": 9,
+                                          "stroke": "$border-subtle",
+                                          "strokeWidth": 1,
+                                          "justifyContent": "center",
+                                          "alignItems": "center",
+                                          "children": [
+                                            {
+                                              "type": "icon",
+                                              "id": "dNxNU",
+                                              "name": "Gemini logo mark",
+                                              "width": 16,
+                                              "height": 16,
+                                              "icon": "sparkles",
+                                              "library": "lucide",
+                                              "fill": "#5276D3"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "o3CU9e",
+                                      "name": "Cp",
+                                      "fill": "$text-secondary",
+                                      "textGrowth": "fixed-width",
+                                      "width": "fill_container",
+                                      "content": "Claude · Muse · Grok · ChatGPT · Gemini",
+                                      "textAlign": "center",
+                                      "fontFamily": "$font-ui",
+                                      "fontSize": 11,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "frame",
+                                      "id": "crUV3",
+                                      "name": "CBtn",
+                                      "fill": "$accent-deep",
+                                      "cornerRadius": "$radius-pill",
+                                      "padding": [
+                                        10,
+                                        16
+                                      ],
+                                      "children": [
+                                        {
+                                          "type": "text",
+                                          "id": "YfCEi",
+                                          "name": "CbT",
+                                          "fill": "$text-on-accent",
+                                          "content": "Connect AI",
+                                          "fontFamily": "$font-ui",
+                                          "fontSize": 13,
+                                          "fontWeight": "700"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "IENdY",
+          "name": "CQ v2",
+          "fill": "$text-secondary",
+          "textGrowth": "fixed-width",
+          "width": "fill_container",
+          "content": "OPEN QUESTIONS v2: free-consult counter + abuse guard; OAuth scopes per provider (Claude, Muse, Grok, ChatGPT, Gemini); which provider is default; how source-pinning is enforced in the prompt; articles + history entry points from chat header.",
+          "lineHeight": 1.45,
+          "fontFamily": "$font-ui",
+          "fontSize": 13,
+          "fontWeight": "normal"
+        }
+      ]
     }
   ],
   "themes": {
@@ -26819,7 +29479,7 @@
     },
     "font-display": {
       "type": "string",
-      "value": "Suez One"
+      "value": "Manrope"
     },
     "font-hebrew-ui": {
       "type": "string",
