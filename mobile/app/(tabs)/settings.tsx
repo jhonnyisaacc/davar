@@ -1,3 +1,4 @@
+import { AccountControls } from "@/src/features/account/AccountControls";
 import { Fragment, useCallback, useMemo, type ReactNode } from "react";
 import { Alert, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -409,6 +410,7 @@ export default function SettingsScreen() {
   return (
     <SafeAreaView style={styles.safeArea} edges={["top"]}>
       <ScrollView contentContainerStyle={styles.container}>
+        <AccountControls />
         {/* Header */}
         <View style={styles.header}>
           <Text style={styles.title}>{t("settings.title")}</Text>

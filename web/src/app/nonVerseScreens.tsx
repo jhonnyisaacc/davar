@@ -1,3 +1,6 @@
+import { AccountSettings } from "./components/AccountSettings";
+import type { CommentaryContext } from "@davar/shared/productContracts";
+import { ProductScreen } from "./components/ProductScreen";
 import type { ReactNode } from "react";
 import type { BesorahLanguage } from "@davar/shared/greekBesorah";
 import { ConnectionErrorPage } from "./components/ConnectionErrorPage";
@@ -13,6 +16,7 @@ import type { RouteScreen } from "./utils/routeState";
 type NonVerseScreen = Exclude<RouteScreen, "verse">;
 
 export type NonVerseScreenProps = {
+	commentaryContext?: CommentaryContext | null;
 	screen: NonVerseScreen;
 	language: "en" | "es" | "he";
 	theme: "light" | "dark";
@@ -37,6 +41,7 @@ export type NonVerseScreenProps = {
 };
 
 export function renderNonVerseScreen({
+	commentaryContext,
 	screen,
 	language,
 	theme,
@@ -60,6 +65,16 @@ export function renderNonVerseScreen({
 	onOpenMobileDesignGuide,
 }: NonVerseScreenProps): ReactNode {
 	switch (screen) {
+		case "widgets":
+		case "assemblies":
+		case "commentary":
+			return (
+				<ProductScreen
+					screen={screen}
+					language={language}
+					context={commentaryContext}
+				/>
+			);
 		case "home":
 			return (
 				<HomeScreen
@@ -97,27 +112,48 @@ export function renderNonVerseScreen({
 			return <FeaturesScreen language={language} />;
 		case "settings":
 			return (
-				<SettingsScreen
-					theme={theme}
-					onThemeChange={onThemeChange}
-					language={language}
-					onLanguageChange={onLanguageChange}
-					besorahLanguage={besorahLanguage}
-					onBesorahLanguageChange={onBesorahLanguageChange}
-					greekAvailable={greekAvailable}
-					besorahTextVersion={besorahTextVersion}
-					onBesorahTextVersionChange={onBesorahTextVersionChange}
-					showQumran={showQumran}
-					onQumranChange={onQumranChange}
-					showFullChapter={showFullChapter}
-					onFullChapterChange={onFullChapterChange}
-					seferMode={seferMode}
-					onSeferModeChange={onSeferModeChange}
-					hebrewOnly={hebrewOnly}
-					onHebrewOnlyChange={onHebrewOnlyChange}
-					onDesignSystemClick={onOpenDesignSystem}
-					onMobileDesignGuideClick={onOpenMobileDesignGuide}
-				/>
+				<>
+					<SettingsScreen
+						theme={theme}
+						onThemeChange={onThemeChange}
+						language={language}
+						onLanguageChange={onLanguageChange}
+						besorahLanguage={besorahLanguage}
+						onBesorahLanguageChange={onBesorahLanguageChange}
+						greekAvailable={greekAvailable}
+						besorahTextVersion={besorahTextVersion}
+						onBesorahTextVersionChange={onBesorahTextVersionChange}
+						showQumran={showQumran}
+						onQumranChange={onQumranChange}
+						showFullChapter={showFullChapter}
+						onFullChapterChange={onFullChapterChange}
+						seferMode={seferMode}
+						onSeferModeChange={onSeferModeChange}
+						hebrewOnly={hebrewOnly}
+						onHebrewOnlyChange={onHebrewOnlyChange}
+						onDesignSystemClick={onOpenDesignSystem}
+						onMobileDesignGuideClick={onOpenMobileDesignGuide}
+					/>
+					<AccountSettings
+						theme={theme}
+						onThemeChange={onThemeChange}
+						language={language}
+						onLanguageChange={onLanguageChange}
+						besorahLanguage={besorahLanguage}
+						onBesorahLanguageChange={onBesorahLanguageChange}
+						greekAvailable={greekAvailable}
+						besorahTextVersion={besorahTextVersion}
+						onBesorahTextVersionChange={onBesorahTextVersionChange}
+						showQumran={showQumran}
+						onQumranChange={onQumranChange}
+						showFullChapter={showFullChapter}
+						onFullChapterChange={onFullChapterChange}
+						seferMode={seferMode}
+						onSeferModeChange={onSeferModeChange}
+						hebrewOnly={hebrewOnly}
+						onHebrewOnlyChange={onHebrewOnlyChange}
+					/>
+				</>
 			);
 		case "notFound":
 			return (
@@ -127,8 +163,6 @@ export function renderNonVerseScreen({
 				/>
 			);
 		case "connectionError":
-			return (
-				<ConnectionErrorPage onRetry={() => window.location.reload()} />
-			);
+			return <ConnectionErrorPage onRetry={() => window.location.reload()} />;
 	}
 }

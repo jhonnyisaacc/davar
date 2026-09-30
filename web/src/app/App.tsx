@@ -1,3 +1,7 @@
+import {
+	scriptureContext,
+	type CommentaryContext,
+} from "@davar/shared/productContracts";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { BottomSheet } from "./components/BottomSheet";
 import { DesignSystemExport } from "./components/DesignSystemExport";
@@ -211,6 +215,8 @@ export default function App() {
 	const [isWordPanelHovered, setIsWordPanelHovered] = useState(false);
 	const versePanelRef = useRef<HTMLDivElement | null>(null);
 
+	const [commentaryContext, setCommentaryContext] =
+		useState<CommentaryContext | null>(null);
 	const [selectedWord, setSelectedWord] = useState<WordResponse | null>(null);
 	const [selectedWordContext, setSelectedWordContext] =
 		useState<WordSelectionContext | null>(null);
@@ -893,21 +899,21 @@ export default function App() {
 			try {
 				const [chapterCountValue, verseCountValue, loadedVerses] =
 					await Promise.all([
-					getChapterCount(currentBook.toLowerCase()),
-					getVerseCount(currentBook.toLowerCase(), currentChapter),
-					useGreekSource
-						? getGreekChapterVerses(
-								currentBook.toLowerCase(),
-								currentChapter,
-								{
-									language: greekOverlayLanguage,
-								},
-							)
-						: getChapterVerses(currentBook.toLowerCase(), currentChapter, {
-								...chapterOptions,
-								showDss: false,
-							}),
-				]);
+						getChapterCount(currentBook.toLowerCase()),
+						getVerseCount(currentBook.toLowerCase(), currentChapter),
+						useGreekSource
+							? getGreekChapterVerses(
+									currentBook.toLowerCase(),
+									currentChapter,
+									{
+										language: greekOverlayLanguage,
+									},
+								)
+							: getChapterVerses(currentBook.toLowerCase(), currentChapter, {
+									...chapterOptions,
+									showDss: false,
+								}),
+					]);
 				const verses = useGreekSource
 					? Array.from({ length: verseCountValue }, (_, index) => {
 							const verseNumber = index + 1;
@@ -966,8 +972,7 @@ export default function App() {
 				}
 
 				const scheduleIdle =
-					typeof window !== "undefined" &&
-					"requestIdleCallback" in window
+					typeof window !== "undefined" && "requestIdleCallback" in window
 						? window.requestIdleCallback.bind(window)
 						: (callback: () => void) => window.setTimeout(callback, 200);
 				scheduleIdle(() => {
@@ -1091,12 +1096,7 @@ export default function App() {
 		if (lastUrlRef.current === path) return;
 		window.history.pushState(null, "", path);
 		lastUrlRef.current = path;
-	}, [
-		currentBook,
-		currentChapter,
-		currentScreen,
-		currentVerse,
-	]);
+	}, [currentBook, currentChapter, currentScreen, currentVerse]);
 
 	useEffect(() => {
 		let isMounted = true;
@@ -1168,8 +1168,7 @@ export default function App() {
 							: await loadLexiconInstances(analysis.strong_number);
 					if (!isCurrentRequest() || !instances) return;
 					setSelectedWordAnalysis((current) =>
-						current &&
-						isCurrentLexiconResult(strongPart, current.strong_number)
+						current && isCurrentLexiconResult(strongPart, current.strong_number)
 							? { ...current, ...instances }
 							: current,
 					);
@@ -1676,6 +1675,8 @@ export default function App() {
 			>
 				<div className="mx-auto flex justify-center">
 					<NavigationBar
+						activeDestination={currentScreen}
+						onDestinationClick={setCurrentScreen}
 						book={currentBook}
 						bookDisplayName={getDisplayBookName(currentBook)}
 						bookHebrew={getHebrewBookName(currentBook)}
@@ -1752,6 +1753,7 @@ export default function App() {
 				<div className="max-w-7xl mx-auto">
 					{currentScreen !== "verse" &&
 						renderNonVerseScreen({
+							commentaryContext,
 							screen: currentScreen,
 							language,
 							theme,
@@ -1801,6 +1803,45 @@ export default function App() {
 								}
 							>
 								<div className="verse-panel-inner relative">
+									{currentVerseData ? (
+										<button
+											type="button"
+											className="rounded-full px-3 py-2 text-xs text-[var(--accent-deep)] border border-[var(--neomorph-border)]"
+											onClick={() => {
+												const verse =
+													selectedWord && selectedWordContext
+														? chapterVerses?.find(
+																(v) =>
+																	v.chapter === selectedWordContext.chapter &&
+																	v.verse === selectedWordContext.verse,
+															) || currentVerseData
+														: currentVerseData;
+												const index = selectedWord
+													? verse.words.findIndex(
+															(w) => w.position === selectedWord.position,
+														)
+													: -1;
+												setCommentaryContext(
+													scriptureContext({
+														bookId: currentBook,
+														chapter: verse.sourceChapter,
+														verse: verse.sourceVerse,
+														edition:
+															verse.edition ||
+															(isBesorah ? besorahTextVersion : "oe"),
+														...(selectedWord && index >= 0
+															? { word: { index, text: selectedWord.text } }
+															: {}),
+													}),
+												);
+												setCurrentScreen("commentary");
+											}}
+										>
+											{selectedWord
+												? "Ask Commentary about this word"
+												: "Ask Commentary about this verse"}
+										</button>
+									) : null}
 									{currentVerseData ? (
 										<VerseDisplay
 											hebrewText={

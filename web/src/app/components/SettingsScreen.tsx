@@ -8,7 +8,7 @@ import {
 import { useTranslation } from "../hooks/useTranslation";
 import type { BesorahLanguage } from "@davar/shared/greekBesorah";
 
-interface SettingsScreenProps {
+export interface SettingsScreenProps {
 	theme: "light" | "dark";
 	onThemeChange: (theme: "light" | "dark") => void;
 	language: "en" | "es" | "he";

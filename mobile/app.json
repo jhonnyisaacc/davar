@@ -57,9 +57,10 @@
       "expo-font",
       "expo-mail-composer",
       "expo-sqlite",
-      "expo-web-browser"
+      "expo-web-browser",
+      "expo-secure-store"
     ],
-    "runtimeVersion": "1.0.1",
+    "runtimeVersion": "1.0.2",
     "updates": {
       "url": "https://u.expo.dev/232e7627-d0c9-4b88-976e-b4855beb322e",
       "enabled": true,

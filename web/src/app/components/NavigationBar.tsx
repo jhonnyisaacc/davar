@@ -20,6 +20,10 @@ const homeDestination = destinationById("home");
 const settingsDestination = destinationById("settings");
 
 interface NavigationBarProps {
+	activeDestination?: string;
+	onDestinationClick?: (
+		screen: "assemblies" | "commentary" | "verse" | "widgets" | "settings",
+	) => void;
 	book: string;
 	bookDisplayName: string;
 	bookHebrew: string;
@@ -65,6 +69,8 @@ interface NavigationBarProps {
 }
 
 export function NavigationBar({
+	activeDestination,
+	onDestinationClick,
 	book,
 	bookDisplayName,
 	bookHebrew,
@@ -253,7 +259,6 @@ export function NavigationBar({
 		}
 	}, [seferMode, openMenu]);
 
-
 	const renderSharedSetting = (id: SharedSettingId): ReactNode => {
 		switch (id) {
 			case "theme":
@@ -330,9 +335,7 @@ export function NavigationBar({
 						<select
 							value={besorahLanguage}
 							onChange={(event) =>
-								onBesorahLanguageChange(
-									event.target.value as BesorahLanguage,
-								)
+								onBesorahLanguageChange(event.target.value as BesorahLanguage)
 							}
 							className="rounded-full px-3 py-2 text-base md:text-xs text-[var(--text-primary)]"
 							style={{
@@ -491,6 +494,41 @@ export function NavigationBar({
 
 	return (
 		<div className="relative" ref={dropdownRef}>
+			{onDestinationClick ? (
+				<nav
+					aria-label="Davar"
+					className="flex justify-center flex-wrap items-center gap-4 mb-3 px-[14px] py-2 rounded-2xl border border-[var(--neomorph-border)] bg-[var(--neomorph-bg)] shadow-[6px_6px_12px_var(--neomorph-shadow-dark),-6px_-6px_12px_var(--neomorph-shadow-light)]"
+				>
+					<span className="text-xl" style={{ fontFamily: "Suez One" }}>
+						דבר
+					</span>
+					<div className="flex flex-wrap gap-1 p-1 rounded-full bg-[var(--border)]">
+						{(
+							[
+								"assemblies",
+								"commentary",
+								"verse",
+								"widgets",
+								"settings",
+							] as const
+						).map((id) => (
+							<button
+								key={id}
+								type="button"
+								onClick={() => onDestinationClick(id)}
+								aria-current={activeDestination === id ? "page" : undefined}
+								className={`px-[14px] py-2 rounded-full text-[13px] text-[var(--text-primary)] ${activeDestination === id ? "bg-[var(--accent-glow)]" : ""}`}
+							>
+								{id === "verse"
+									? "Scripture"
+									: id === "widgets"
+										? "Widgets"
+										: id[0].toUpperCase() + id.slice(1)}
+							</button>
+						))}
+					</div>
+				</nav>
+			) : null}
 			<NeumorphCard className="w-full md:w-auto px-2 py-2 md:px-3">
 				<div className="flex w-full items-center gap-1 md:gap-2">
 					<div className="flex min-w-0 flex-1 items-center gap-1 md:gap-2">

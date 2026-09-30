@@ -1,156 +1,149 @@
 import { Tabs } from "expo-router";
-import { useMemo } from "react";
-import { StyleSheet, View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
-
 import {
-  DESTINATIONS,
-  type Destination,
-  type DestinationId,
-} from "@davar/shared/destinations";
-import { HapticTab } from "@/components/haptic-tab";
-import { AppIcon } from "@/src/components/ui/AppIcon";
-import { getColors } from "@/src/theme";
-import { useAppStore, type AppState } from "@/src/store/useAppStore";
-import { useTranslation } from "@/src/i18n/useTranslation";
+	Pressable,
+	StyleSheet,
+	Text,
+	View,
+	useWindowDimensions,
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { BlurView } from "expo-blur";
+import {
+	BookOpen,
+	Calendar,
+	ScrollText,
+	Settings,
+	Users,
+} from "lucide-react-native";
+import { useAppStore } from "@/src/store/useAppStore";
 
-const TAB_DESTINATION_IDS = [
-  "home",
-  "verse",
-  "settings",
-] as const satisfies readonly DestinationId[];
-
-type TabDestinationId = (typeof TAB_DESTINATION_IDS)[number];
-type TabDestination = Extract<Destination, { id: TabDestinationId }>;
-
-const tabDestinationIds = new Set<string>(TAB_DESTINATION_IDS);
-
-const tabDestinations = DESTINATIONS.filter(
-  (destination): destination is TabDestination =>
-    tabDestinationIds.has(destination.id),
-);
-
-const HIDDEN_TAB_ROUTES = [
-  "index",
-  "search",
-  "bookmarks",
-  "explore",
-] as const;
-
-const createStyles = (
-  colors: ReturnType<typeof getColors>,
-  bottomInset: number,
-) =>
-  StyleSheet.create({
-    tabBar: {
-      backgroundColor: colors.surface,
-      borderTopColor: "#999999",
-      borderTopWidth: 0.4,
-      height: 70 + bottomInset,
-      paddingTop: 18,
-      paddingBottom: bottomInset,
-    },
-    centerIconWrapper: {
-      flex: 1,
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    centerIcon: {
-      width: 44,
-      height: 44,
-      borderRadius: 22,
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: colors.primary,
-      shadowColor: colors.primary,
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.2,
-      shadowRadius: 4,
-    },
-    tabItem: {
-      flex: 1,
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    settingsIconWrapper: {
-      position: "relative",
-    },
-    settingsNewDot: {
-      position: "absolute",
-      right: -3,
-      top: -2,
-      width: 7,
-      height: 7,
-      borderRadius: 4,
-      backgroundColor: colors.accentCopper,
-      borderWidth: 1,
-      borderColor: colors.surface,
-    },
-  });
-
+const destinations = [
+	{ id: "assemblies", label: "Assemblies", icon: Users },
+	{ id: "commentary", label: "Commentary", icon: ScrollText },
+	{ id: "verse", label: "Scripture", icon: BookOpen },
+	{ id: "widgets", label: "Widgets", icon: Calendar },
+	{ id: "settings", label: "Settings", icon: Settings },
+];
+const hidden = ["home", "index", "search", "bookmarks", "explore"];
 export default function TabLayout() {
-  const themeMode = useAppStore((state: AppState) => state.themeMode);
-  const colors = getColors(themeMode);
-  const insets = useSafeAreaInsets();
-  // Use safe area inset for both iOS and Android to properly handle navigation bars
-  const bottomInset = insets.bottom;
-  const { t } = useTranslation();
-  const styles = useMemo(
-    () => createStyles(colors, bottomInset),
-    [colors, bottomInset],
-  );
-
-  return (
-    <Tabs
-      screenOptions={{
-        headerShown: false,
-        tabBarActiveTintColor: colors.primary,
-        tabBarInactiveTintColor: colors.textSecondary,
-        tabBarStyle: styles.tabBar,
-        tabBarButton: HapticTab,
-        tabBarShowLabel: false,
-        tabBarItemStyle: styles.tabItem,
-      }}
-      initialRouteName="index"
-    >
-      {tabDestinations.map((destination) => (
-        <Tabs.Screen
-          key={destination.id}
-          name={destination.id}
-          options={{
-            title: t(`tabs.${destination.id}`),
-            tabBarIcon: ({ color, focused }) => {
-              if (destination.id === "verse") {
-                return (
-                  <View style={styles.centerIconWrapper}>
-                    <View style={styles.centerIcon}>
-                      <AppIcon
-                        name={focused ? "search" : "book"}
-                        color={colors.background}
-                        size={22}
-                      />
-                    </View>
-                  </View>
-                );
-              }
-
-              if (destination.id === "settings") {
-                return (
-                  <View style={styles.settingsIconWrapper}>
-                    <AppIcon name="settings" color={color} size={24} />
-                    <View style={styles.settingsNewDot} />
-                  </View>
-                );
-              }
-
-              return <AppIcon name="home" color={color} size={24} />;
-            },
-          }}
-        />
-      ))}
-      {HIDDEN_TAB_ROUTES.map((name) => (
-        <Tabs.Screen key={name} name={name} options={{ href: null }} />
-      ))}
-    </Tabs>
-  );
+	const dark = useAppStore((s) => s.themeMode === "dark");
+	const insets = useSafeAreaInsets();
+	const { width } = useWindowDimensions();
+	const dockWidth = Math.min(374, width - 16);
+	return (
+		<Tabs
+			initialRouteName="index"
+			screenOptions={{ headerShown: false }}
+			tabBar={({ state, navigation }) => (
+				<View
+					style={{
+						position: "absolute",
+						left: "50%",
+						transform: [{ translateX: -dockWidth / 2 }],
+						bottom: Math.max(insets.bottom, 8),
+						width: dockWidth,
+						height: 72,
+						borderRadius: 32,
+						shadowColor: "#000000",
+						shadowOffset: { width: 0, height: 10 },
+						shadowOpacity: 0.15,
+						shadowRadius: 14,
+						elevation: 6,
+					}}
+				>
+					<View
+						style={{
+							flex: 1,
+							overflow: "hidden",
+							borderRadius: 32,
+							borderWidth: 1,
+							borderColor: dark ? "#FFFFFF26" : "#FFFFFFCC",
+						}}
+					>
+						<BlurView
+							tint={dark ? "dark" : "light"}
+							intensity={28}
+							style={StyleSheet.absoluteFill}
+						/>
+						<View
+							style={{
+								flex: 1,
+								flexDirection: "row",
+								alignItems: "center",
+								padding: 6,
+								gap: 2,
+								backgroundColor: dark ? "#3C3836B3" : "#FDF8F2B3",
+							}}
+						>
+							{destinations.map(({ id, label, icon: Icon }) => {
+								const route = state.routes.find((route) => route.name === id)!;
+								const selected = state.routes[state.index].key === route.key;
+								const color = selected
+									? dark
+										? "#BCD8FF"
+										: "#4C72A8"
+									: dark
+										? "#A89A7F"
+										: "#707070";
+								return (
+									<Pressable
+										key={id}
+										accessibilityRole="tab"
+										accessibilityLabel={label}
+										accessibilityState={{ selected }}
+										style={{
+											flex: 1,
+											height: 56,
+											borderRadius: 20,
+											alignItems: "center",
+											justifyContent: "center",
+											gap: 3,
+											backgroundColor: selected
+												? dark
+													? "#92B5E81A"
+													: "#7AA0D61F"
+												: "transparent",
+										}}
+										onPress={() => {
+											const event = navigation.emit({
+												type: "tabPress",
+												target: route.key,
+												canPreventDefault: true,
+											});
+											if (!selected && !event.defaultPrevented)
+												navigation.navigate(route.name, route.params);
+										}}
+									>
+										<Icon
+											size={selected ? 22 : 20}
+											color={color}
+											strokeWidth={1.7}
+										/>
+										<Text
+											style={{
+												fontFamily: selected
+													? "Inter_600SemiBold"
+													: "Inter_400Regular",
+												fontSize: 9,
+												color,
+											}}
+										>
+											{label}
+										</Text>
+									</Pressable>
+								);
+							})}
+						</View>
+					</View>
+				</View>
+			)}
+		>
+			{destinations.map(({ id, label }) => (
+				<Tabs.Screen key={id} name={id} options={{ title: label }} />
+			))}
+			{hidden.map((name) => (
+				<Tabs.Screen key={name} name={name} options={{ href: null }} />
+			))}
+		</Tabs>
+	);
 }

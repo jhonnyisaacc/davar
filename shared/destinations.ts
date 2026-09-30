@@ -1,5 +1,8 @@
 export const DESTINATIONS = [
   { id: "home", path: "/home" },
+  { id: "assemblies", path: "/assemblies" },
+  { id: "commentary", path: "/commentary" },
+  { id: "widgets", path: "/widgets" },
   { id: "verse", path: "/verse", primary: true },
   { id: "settings", path: "/settings" },
   { id: "donate", path: "/donate" },
