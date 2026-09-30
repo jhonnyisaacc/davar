@@ -20,7 +20,7 @@ Living report, 2026-09-30. Statuses distinguish real blockers from unfinished wo
 | Temporary connectivity | Accepted | Account-scoped in-memory cache with 24-hour stale bound. Existing Scripture SQLite behavior preserved; no new full offline sync. |
 | Notification delivery | Mitigated | Durable outbox and Telegram dispatch task; requires bot configuration and scheduler. At-least-once delivery may duplicate after a crash. |
 | Web baseline typing | Confirmed existing issue | bunx tsc --noEmit reports identical existing errors in primary checkout: process.exit, Bun fetch mocks, nullable instances, narrowed test expectations. New v2 files introduce no observed type errors. |
-| Web static fixtures | Mitigated locally | Fresh worktree lacks generated public/data. Existing local generated assets can be copied into ignored build data for validation; never committed. |
+| Web static fixtures | Resolved locally | Fresh worktree lacks generated public/data. Existing local assets initially had a stale TCY fixture; bun ./build.ts regenerated ignored static data, then all 69 web tests passed. Assets are not committed. |
 | Native release | Deferred by scope | SecureStore changes native runtime to 1.0.2. Requires future eas build/eas submit; no PR publication. |
 | Licensed NA28/NA29 | Blocked in owning issues | Publisher permission/dataset prerequisites remain external; no content imported. |
 | Pen/native device fidelity | Partially validated | Actual design/davar.pen inspected through Pen MCP: variables, chat/assembly/calendar frames, LiquidGlass and Desktop navigation. Exported Commentary visually compared through MCP. Native safe areas, keyboard, dark/RTL and live auth still require device QA. |

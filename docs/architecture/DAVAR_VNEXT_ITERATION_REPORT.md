@@ -125,10 +125,10 @@ Actual local commands/results, run from the indicated directory:
 | mobile/ | bun run lint | Pass; five pre-existing array-type warnings |
 | mobile/ | EXPO_PUBLIC_API_URL=http://127.0.0.1:3000 bunx expo export --platform web | Pass; 31 static routes |
 | web/ | bun run lint | Pass |
-| web/ | bun test | 68 passed, one existing TCY Greek fixture failure, also reproduced in original checkout |
+| web/ | bun test | Final run: 69 passed / 389 assertions after regenerating static assets; earlier stale TCY fixture failure reproduced in original checkout |
 | web/ | bun ./build.ts | Pass; static TS2009 export disabled |
 | web/ | bunx tsc --noEmit | Existing baseline errors in ensure-static-data, staticData/test fetch typing and transliteration test expectations; no new product file errors observed |
-| root | python -m pytest tests/test_knowledge_boundary.py tests/test_knowledge_compatibility.py tests/test_knowledge_profiles.py tests/test_knowledge_foundation.py tests/test_knowledge_modeling.py tests/test_v2_publication_contract.py -q | 77 passed |
+| root | python -m pytest tests/test_knowledge_*.py tests/test_v2_publication_contract.py -q | 80 passed |
 | root | git diff --check | Pass |
 
 Rails commands used Ruby 3.4.9, PostgreSQL 17 on isolated port 55432 and
@@ -192,7 +192,18 @@ full translation and native visual/accessibility review remain outstanding.
 ## Recommended continuation
 
 Configure and validate external integrations, review production import manifests,
-complete native/design/RTL/accessibility acceptance and resolve the existing web
-TCY fixture mismatch. Keep the canonical PR draft until these material checks are
+complete native/design/RTL/accessibility acceptance and keep static fixtures
+regenerated before validating web tests. Keep the canonical PR draft until these material checks are
 resolved. Revisit ready-for-review with actual evidence; do not treat architecture
 extension points as completion of the linked backlog.
+
+## CI follow-up
+
+Initial PR checks passed mobile, web, Python, policy, foundation and read-only
+Shaul compatibility. Two new CI failures were repaired: the Bundler lockfile now
+includes x86_64-linux, and the foundation boundary accepts only the exact optional
+manifest artifact field, append-only contract documentation and generated metadata
+hash refreshes. Three new guard tests prove changes to existing schema requirements,
+reading payloads, input revisions and unrelated paths remain rejected. The pinned
+Shaul non-interference boundary passed locally. Legacy generator comparison remains
+part of the existing required workflow; final remote results are reported on the PR.
