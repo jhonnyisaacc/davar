@@ -1,0 +1,56 @@
+{
+  "editions": [
+    {
+      "id": "fixture-na28",
+      "owner": "davar",
+      "name": "fixture-na28",
+      "language": "grc",
+      "source_kind": "biblical_text",
+      "reference_system_id": "davar-v1",
+      "source_revision": "metadata-only-fixture",
+      "attribution": "Metadata only; contains no licensed text."
+    },
+    {
+      "id": "fixture-na29",
+      "owner": "davar",
+      "name": "fixture-na29",
+      "language": "grc",
+      "source_kind": "biblical_text",
+      "reference_system_id": "davar-v1",
+      "source_revision": "metadata-only-fixture",
+      "attribution": "Metadata only; contains no licensed text."
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "fixture:text",
+      "kind": "text",
+      "version": "2.0",
+      "locale": "pt-BR",
+      "edition_id": "fixture-na29",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "review": "unreviewed",
+      "publication": "draft",
+      "permissions": {
+        "public_distribution": false,
+        "ai_processing": false,
+        "attribution": "Metadata-only test fixture"
+      }
+    },
+    {
+      "id": "fixture:definitions",
+      "kind": "definitions",
+      "version": "1.3",
+      "locale": "pt-BR",
+      "edition_id": "fixture-na29",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "review": "unreviewed",
+      "publication": "draft",
+      "permissions": {
+        "public_distribution": false,
+        "ai_processing": false,
+        "attribution": "Metadata-only test fixture"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+Bore domain adopted from jhonnyisaacc/bore at 5e2593e. Domain algorithms are preserved; source_entry.py has only trailing EOF whitespace normalized. Rails owns persistence and APIs; bridge.py is the adapter. No manual Aviv anchor is supplied.

@@ -51,7 +51,12 @@
             ]
           },
           "kind": {
-            "enum": ["dataset", "lexicon", "knowledge_record", "published_note"]
+            "enum": [
+              "dataset",
+              "lexicon",
+              "knowledge_record",
+              "published_note"
+            ]
           },
           "repository": {
             "type": "string",
@@ -83,6 +88,12 @@
           "sha256"
         ],
         "additionalProperties": false
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/artifact.schema.json"
       }
     }
   },

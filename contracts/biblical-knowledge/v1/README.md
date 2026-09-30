@@ -240,3 +240,5 @@ No licensed TS2009 data is fetched. Shaul compatibility hashes public source and
 artifact trees before/after adapter execution and runs its existing reference and
 knowledge tests. AI, dictionary population, translations, LXX ingestion, application
 integration, Rails and database migrations are outside this foundation.
+
+`manifest.artifacts` optionally carries independently versioned text/definition publication metadata. `artifact.schema.json` uses existing edition IDs and review/publication vocabulary. A published artifact requires approved review and explicit public distribution permission; AI processing permission is independent. Existing manifests without artifacts remain valid. Fixtures contain metadata only and grant no source license.
