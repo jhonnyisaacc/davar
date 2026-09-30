@@ -128,7 +128,7 @@ Actual local commands/results, run from the indicated directory:
 | web/ | bun test | Final run: 69 passed / 389 assertions after regenerating static assets; earlier stale TCY fixture failure reproduced in original checkout |
 | web/ | bun ./build.ts | Pass; static TS2009 export disabled |
 | web/ | bunx tsc --noEmit | Existing baseline errors in ensure-static-data, staticData/test fetch typing and transliteration test expectations; no new product file errors observed |
-| root | python -m pytest tests/test_knowledge_*.py tests/test_v2_publication_contract.py -q | 80 passed |
+| root | python -m pytest tests/test_knowledge_*.py -q | 80 passed |
 | root | git diff --check | Pass |
 
 Rails commands used Ruby 3.4.9, PostgreSQL 17 on isolated port 55432 and
@@ -206,4 +206,5 @@ manifest artifact field, append-only contract documentation and generated metada
 hash refreshes. Three new guard tests prove changes to existing schema requirements,
 reading payloads, input revisions and unrelated paths remain rejected. The pinned
 Shaul non-interference boundary passed locally. Legacy generator comparison remains
-part of the existing required workflow; final remote results are reported on the PR.
+part of the existing required workflow; final remote results are reported on the PR. Publication fixtures use the
+existing test_knowledge_ discovery prefix so the foundation workflow runs them.
