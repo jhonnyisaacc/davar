@@ -168,3 +168,13 @@ new native runtime. No deployment or native publication has been performed here.
 
 The iteration's actual validation and remaining prerequisites are recorded in
 `../docs/architecture/DAVAR_VNEXT_ITERATION_REPORT.md`.
+
+## Credential-free local sandbox
+
+Follow [the manual-testing guide](../docs/architecture/DAVAR_V2_MANUAL_TESTING.md).
+From the repository root, `api/bin/dev-sandbox setup` prepares an isolated PostgreSQL
+cluster and synthetic fixtures; `api/bin/dev-sandbox start` runs Rails, web and Expo.
+The launcher sets `DAVAR_DEV_SANDBOX=1` only in development. Staging and production
+reject the flag. The local inbox/status routes exist only in sandbox development
+and require loopback requests. No external AI, geocoder, email or Telegram calls
+are made by the simulated integrations. OAuth adapters remain unchanged.

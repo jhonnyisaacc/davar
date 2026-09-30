@@ -4,6 +4,7 @@ class CommentaryProvider
   end
   def self.generate(provider:, credential:, model:, system:, messages:)
     raise DomainError.new("provider_not_supported", 503) unless supported?(provider)
+    return DevelopmentSandbox.generate(messages: messages) if DevelopmentSandbox.enabled?
     case provider
     when "claude"
       result = ProviderHttp.json("https://api.anthropic.com/v1/messages", method: :post,

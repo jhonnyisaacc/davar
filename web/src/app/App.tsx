@@ -1,3 +1,4 @@
+import { SandboxBanner } from "./components/SandboxBanner";
 import {
 	scriptureContext,
 	type CommentaryContext,
@@ -1673,6 +1674,7 @@ export default function App() {
 						: "translate-y-0 opacity-100"
 				}`}
 			>
+				<SandboxBanner />
 				<div className="mx-auto flex justify-center">
 					<NavigationBar
 						activeDestination={currentScreen}

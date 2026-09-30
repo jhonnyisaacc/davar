@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  if Rails.env.development? && ENV["DAVAR_DEV_SANDBOX"] == "1"
+    get "development/mailbox", to: "development#mailbox"
+    get "api/v1/development/status", to: "development#status"
+  end
   get "up" => "rails/health#show", as: :rails_health_check
   namespace :api do
     namespace :v1 do

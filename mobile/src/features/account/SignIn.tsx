@@ -1,3 +1,5 @@
+import { authReturnUri } from "@davar/shared/authReturnUri";
+import { Platform } from "react-native";
 import { useState } from "react";
 import * as WebBrowser from "expo-web-browser";
 import {
@@ -20,6 +22,10 @@ export function SignIn({
 		setBusy(true);
 		setStatus("");
 		try {
+			const returnUri = authReturnUri(
+				Platform.OS,
+				Platform.OS === "web" ? globalThis.location.origin : undefined,
+			);
 			const result = await productApi.request<{
 				authorization_url?: string;
 				email_sent?: boolean;
@@ -27,7 +33,7 @@ export function SignIn({
 				method: "POST",
 				public: !link,
 				body: {
-					return_uri: "davar://auth/callback",
+					return_uri: returnUri,
 					email,
 					link,
 					notification_consent: telegramNotifications,
@@ -40,7 +46,7 @@ export function SignIn({
 			if (result.authorization_url) {
 				const auth = await WebBrowser.openAuthSessionAsync(
 					result.authorization_url,
-					"davar://auth/callback",
+					returnUri,
 				);
 				if (auth.type === "success") {
 					const code = new URL(auth.url).searchParams.get("code");

@@ -218,3 +218,59 @@ boot tests verify production-style SSL/eager-loading/error settings, environment
 selection, database configuration and rejection of missing secrets/databases or
 HTTP API URLs. Tests do not connect to a hosted database. Infrastructure
 provisioning and live provider configuration remain operator prerequisites.
+
+## Local sandbox follow-up (2026-09-30)
+
+Development now has an opt-in sandbox with a loopback-only inbox and status API.
+Email uses normal identity creation, session issuance, callback exchange and
+admission. Staging and production boot rejects the sandbox flag. Six repeatable
+accounts, two leader assemblies, membership requests, an invitation and an
+attributed synthetic article support manual testing. Signed city fixtures,
+deterministic labeled AI responses and no outbound Telegram delivery require no
+external credentials. Consultation limits, failed-request refunds, ownership and
+provider connection checks still use the normal Rails services. Calendar scenarios
+supply synthetic evidence to pinned Bore, retaining unresolved Aviv.
+
+`api/bin/dev-sandbox` manages its own PostgreSQL cluster on 55433 and recorded
+Rails/web/Expo process groups; occupied ports stop startup. Expo uses 8086 because
+8082 belongs to another checkout. Reset removes fixture-owned records, including
+assemblies created during testing, and leaves unrelated users intact. The
+[manual-testing guide](DAVAR_V2_MANUAL_TESTING.md) contains commands, accounts,
+URLs and an unchecked acceptance checklist. Browser and native return URLs are
+separate; Expo web uses its origin rather than a native scheme.
+
+Automated validation after this follow-up:
+
+| Directory | Command | Result |
+| --- | --- | --- |
+| api/ | `bundle exec rails test` | 39 tests, 170 assertions passed |
+| api/ | `PYTHONPATH=lib/bore python -m pytest test/bore -q` | 12 passed |
+| root | `python -m pytest tests/test_knowledge_*.py -q` | 80 passed |
+| mobile/ | `bun test` | 20 passed |
+| mobile/ | `bun run typecheck` | Passed; generated Expo route typing repaired |
+| mobile/ | `bun run lint` | Passed; five existing warnings |
+| web/ | `bun test` | 69 passed |
+| web/ | `bun run lint` | Passed |
+| root | `api/bin/dev-sandbox setup` | Passed, frozen installs, Python dependencies, PostgreSQL, fixtures and web build |
+| root | `api/bin/dev-sandbox start`, `reset`, `stop`, `calendar confirmed`, `calendar pending` | Passed setup smoke tests; ports released and services restarted |
+| mobile/ | `EXPO_PUBLIC_API_URL=http://127.0.0.1:3000 EXPO_PUBLIC_DEV_SANDBOX=1 bunx expo run:ios --device 'iPhone 17' --no-bundler` | Local iOS 26.4 simulator build installed/launched; zero errors, three build warnings |
+
+Rails checks used mise Ruby 3.4.9, PostgreSQL test port 55432, and the Python 3.13
+validation virtualenv; the launcher creates a separate development virtualenv.
+Initial checks found and repaired missing mailer autoload registration, fixture
+reset foreign-key cleanup, browser callback selection and generated Expo route
+typing. Bore tests require `PYTHONPATH=lib/bore`; combined discovery without that
+path failed collection and was rerun correctly. Tests keep mailbox filesystem
+cleanup in a temporary directory and never remove the live inbox.
+
+Setup smoke evidence: browser Assemblies rendered the sandbox indicator; email
+link sign-in and invitation redemption reached onboarding. Simulator Scripture
+rendered; simulator Safari opened the local inbox and returned through the native
+magic link to authenticated Assemblies showing Sandbox Buenos Aires. Expo web
+also rendered Scripture and completed browser email sign-in to authenticated
+Assemblies using its browser callback. These are setup smoke
+checks, not acceptance of the full user checklist. Simulated provider tests cover
+quota, persistence, failure/refund and dummy provider connection; no live OAuth,
+AI, email or notification provider was contacted. Existing credentials, authorized
+imports, production theology decisions and full visual/device acceptance remain
+separate draft prerequisites. No Docker, deployment or EAS publication occurred.

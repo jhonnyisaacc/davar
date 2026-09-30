@@ -1,6 +1,7 @@
 class CitySearch
   def self.search(query)
     raise DomainError.new("invalid_city_query") unless query.is_a?(String) && query.length.between?(2, 100)
+    return DevelopmentSandbox.cities(query) if DevelopmentSandbox.enabled?
     payload = Rails.cache.fetch("cities/#{Digest::SHA256.hexdigest(query.downcase)}", expires_in: 1.day) {
       ProviderHttp.json("https://photon.komoot.io/api/?#{URI.encode_www_form(q: query, limit: 30)}")
     }

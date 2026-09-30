@@ -47,3 +47,14 @@ For changes touching these boundaries, update this matrix, add a contract or
 behavior regression, verify source licenses and publication state, and record
 migration/consumer compatibility. Do not close an issue based solely on an
 extension point existing.
+
+## Development sandbox alignment
+
+Local fixtures preserve the Qahal admission, consent and hidden-discovery
+boundaries while exercising the provider-neutral email identity flow. Synthetic
+articles explicitly retain attribution/permissions and do not claim Shaul coverage.
+Deterministic Commentary transport is development-only and keeps provenance,
+quota and lifecycle checks; it is not a translation workflow or evidence. Bore
+fixture confirmation carries synthetic source provenance and does not resolve
+Bore #1 Aviv policy. Native callback smoke testing covers the local simulator
+portion of #160; live provider apps and publication remain outside this work.

@@ -1,5 +1,6 @@
 class TelegramNotificationsJob < ApplicationJob
   def perform
+    return if DevelopmentSandbox.enabled?
     return if ENV["TELEGRAM_BOT_TOKEN"].blank?
     Notification.where(delivered_at: nil).where("delivery_attempts < 5").includes(user: :identities).find_each do |notification|
       notification.with_lock do

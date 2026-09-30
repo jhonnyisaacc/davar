@@ -59,4 +59,13 @@ class EnvironmentConfigTest < ActiveSupport::TestCase
     end
   end
 
+  test "staging and production reject sandbox configuration" do
+    %w[staging production].each do |name|
+      env = hosted_environment(name).merge("DAVAR_DEV_SANDBOX" => "1")
+      _, error, status = Open3.capture3(env, RbConfig.ruby, Rails.root.join("bin/rails").to_s, "runner", "puts 'unexpected boot'")
+      assert_not status.success?
+      assert_includes error, "DAVAR_DEV_SANDBOX is development-only"
+    end
+  end
+
 end

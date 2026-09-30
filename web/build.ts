@@ -143,6 +143,9 @@ const result = await Bun.build({
 	// that import.meta.env.PUBLIC_X is guaranteed to be inlined even in Bun
 	// versions that only replace direct AST-node patterns.
 	define: {
+		"process.env.PUBLIC_DEV_SANDBOX": JSON.stringify(
+			process.env.PUBLIC_DEV_SANDBOX ?? "",
+		),
 		"process.env.PUBLIC_API_URL": JSON.stringify(
 			process.env.PUBLIC_API_URL ?? "",
 		),

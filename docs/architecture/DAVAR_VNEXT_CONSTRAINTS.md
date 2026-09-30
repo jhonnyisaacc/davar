@@ -28,3 +28,13 @@ Living report, 2026-09-30. Statuses distinguish real blockers from unfinished wo
 
 Each blocked integration has executable independent architecture around it.
 No unavailable credential is stored as a placeholder secret or silently bypassed.
+
+## Local sandbox boundary
+
+The development-only sandbox supports manual testing without provider credentials.
+It rejects hosted use, limits inbox/diagnostics to loopback and clearly labels
+synthetic content/evidence. It does not relax authentication, identity linking,
+admission, session revocation, membership authorization or consultation quotas.
+Only simulator loopback URLs are prepared; physical-device LAN testing needs
+explicit callback/CORS configuration. Full manual acceptance and live integrations
+remain outstanding. See DAVAR_V2_MANUAL_TESTING.md.

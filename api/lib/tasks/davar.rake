@@ -32,3 +32,16 @@ namespace :davar do
     user.update!(leader_verified: true)
   end
 end
+namespace :davar do
+  namespace :sandbox do
+    task seed: :environment do
+      puts JSON.pretty_generate(DevelopmentFixtures.seed!)
+    end
+    task reset: :environment do
+      puts JSON.pretty_generate(DevelopmentFixtures.reset!)
+    end
+    task calendar: :environment do
+      puts JSON.pretty_generate(DevelopmentFixtures.calendar!(ENV.fetch("SCENARIO", "pending")))
+    end
+  end
+end

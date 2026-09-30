@@ -1,0 +1,116 @@
+#!/usr/bin/env ruby
+require "json"
+require "fileutils"
+require "open3"
+require "rbconfig"
+require "socket"
+if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("3.4")
+  ruby = ENV["RUBY_BIN"] || Dir.glob(File.join(Dir.home,".local/share/mise/installs/ruby/3.4.*/bin/ruby")).sort.last
+  abort "Ruby 3.4+ required; set RUBY_BIN" unless ruby && File.executable?(ruby)
+  exec ruby, __FILE__, *ARGV
+end
+ENV["PATH"] = "#{File.dirname(RbConfig.ruby)}:#{ENV['PATH']}"
+API_ROOT = File.expand_path("..", __dir__)
+ROOT = File.dirname(API_ROOT)
+STATE = File.join(API_ROOT, "tmp/sandbox")
+PG_DATA = File.join(STATE, "postgres")
+PG_PORT = 55433
+PG_BIN = ENV.fetch("PG_BIN", "/opt/homebrew/opt/postgresql@17/bin")
+BUN = ENV.fetch("BUN_BIN", "bun")
+ENVIRONMENT = {"PYTHON_BIN"=>File.join(STATE,"venv/bin/python"), "RAILS_ENV"=>"development", "DAVAR_DEV_SANDBOX"=>"1", "DATABASE_URL"=>"postgresql://127.0.0.1:#{PG_PORT}/davar_v2_sandbox", "API_PUBLIC_URL"=>"http://127.0.0.1:3000", "API_HOSTS"=>"localhost,127.0.0.1", "WEB_ORIGINS"=>"http://localhost:3002,http://127.0.0.1:3002,http://localhost:8086,http://127.0.0.1:8086", "AUTH_RETURN_URIS"=>"davar://auth/callback,http://localhost:3002/assemblies,http://localhost:3002/commentary,http://127.0.0.1:3002/assemblies,http://127.0.0.1:3002/commentary,http://localhost:8086/auth/callback,http://127.0.0.1:8086/auth/callback", "INVITE_GATE_ENABLED"=>"true", "EXPO_PUBLIC_API_URL"=>"http://127.0.0.1:3000", "EXPO_PUBLIC_DEV_SANDBOX"=>"1", "PUBLIC_API_URL"=>"http://127.0.0.1:3000", "PUBLIC_DEV_SANDBOX"=>"1", "HOST"=>"127.0.0.1"}.freeze
+
+def run(*command, directory: API_ROOT)
+  system(ENVIRONMENT, *command, chdir: directory, exception: true)
+end
+
+def postgres
+  raise "PostgreSQL 17 binaries not found; set PG_BIN" unless File.executable?(File.join(PG_BIN, "pg_ctl"))
+  FileUtils.mkdir_p(STATE)
+  run(File.join(PG_BIN, "initdb"), "-D", PG_DATA, "--auth-local=trust", "--auth-host=trust") unless File.exist?(File.join(PG_DATA, "PG_VERSION"))
+  unless system(File.join(PG_BIN, "pg_ctl"), "-D", PG_DATA, "status", out: File::NULL, err: File::NULL)
+    run(File.join(PG_BIN, "pg_ctl"), "-D", PG_DATA, "-l", File.join(STATE,"postgres.log"), "-o", "-p #{PG_PORT} -h 127.0.0.1 -k #{STATE}", "start")
+  end
+end
+
+def rails(*args)
+  run(RbConfig.ruby, File.join(API_ROOT, "bin/rails"), *args)
+end
+
+def process_signature(pid)
+  output, status = Open3.capture2("ps", "-p", pid.to_s, "-o", "lstart=")
+  status.success? ? output.strip : nil
+end
+
+def stop_services
+  path = File.join(STATE,"processes.json")
+  return unless File.exist?(path)
+  claimed = "#{path}.stopping-#{Process.pid}"
+  begin
+    File.rename(path, claimed)
+  rescue Errno::ENOENT
+    return
+  end
+  JSON.parse(File.read(claimed)).each do |entry|
+    next unless entry["signature"] && process_signature(entry["pid"]) == entry["signature"]
+    Process.kill("TERM", -entry["pid"]) rescue Errno::ESRCH
+  end
+  File.delete(claimed)
+end
+
+case ARGV.first
+when "setup"
+  raise "Ruby 3.4 or newer is required" if Gem::Version.new(RUBY_VERSION) < Gem::Version.new("3.4")
+  run("bundle", "install") unless system("bundle", "check", chdir: API_ROOT, out: File::NULL)
+  %w[web mobile].each { |directory| run(BUN,"install","--frozen-lockfile",directory: File.join(ROOT,directory)) }
+  FileUtils.mkdir_p(STATE)
+  python = ENV["PYTHON_BIN"] || Dir.glob(File.join(Dir.home,".local/share/mise/installs/python/3.13.*/bin/python3")).sort.last || "python3"
+  run(python,"-m","venv",File.join(STATE,"venv")) unless File.exist?(ENVIRONMENT["PYTHON_BIN"])
+  run(ENVIRONMENT["PYTHON_BIN"],"-m","pip","install","-r",File.join(API_ROOT,"requirements.txt"))
+  postgres
+  rails("db:prepare", "davar:sandbox:seed")
+  run(BUN, "./build.ts", directory: File.join(ROOT,"web"))
+  puts "Ready. Run api/bin/dev-sandbox start. Inbox: http://127.0.0.1:3000/development/mailbox"
+when "start"
+  postgres
+  raise "Run setup first" unless File.directory?(File.join(ROOT,"mobile/node_modules"))
+  [3000,3002,3003,8086].each do |port|
+    begin
+      socket = TCPSocket.new("127.0.0.1",port); socket.close
+      raise "Port #{port} is already occupied; stop its existing service first"
+    rescue Errno::ECONNREFUSED
+    end
+  end
+  entries = []
+  commands = [ ["api",API_ROOT,[RbConfig.ruby,File.join(API_ROOT,"bin/rails"),"server","-b","127.0.0.1","-p","3000"]], ["web",File.join(ROOT,"web"),[BUN,"run","dev"]], ["mobile",File.join(ROOT,"mobile"),[BUN,"run","start","--dev-client","--localhost","--port","8086"]] ]
+  commands.each do |name,directory,command|
+    log = File.open(File.join(STATE,"#{name}.log"),"a")
+    pid = Process.spawn(ENVIRONMENT.merge("CI"=>"1"),*command,chdir: directory,pgroup: true,out: log,err: log)
+    entries << {pid: pid, signature: process_signature(pid), service: name}
+    log.close
+  end
+  File.write(File.join(STATE,"processes.json"),JSON.generate(entries))
+  %w[INT TERM].each { |signal| Signal.trap(signal) { stop_services; exit } }
+  puts "Web: http://127.0.0.1:3002/assemblies | Inbox: http://127.0.0.1:3000/development/mailbox | Expo: localhost:8086"
+  puts "Logs: #{STATE}; Ctrl+C stops app services. 'stop' also stops the sandbox PostgreSQL cluster."
+  begin
+    Process.wait
+    warn "A sandbox service exited; inspect the logs"
+  ensure
+    stop_services
+  end
+when "reset"
+  postgres
+  rails("davar:sandbox:reset")
+when "calendar"
+  postgres
+  ENV["SCENARIO"] = ARGV.fetch(1,"pending")
+  rails("davar:sandbox:calendar")
+when "ios"
+  run(BUN, "x", "expo", "run:ios", "--device", "iPhone 17", "--no-bundler", directory: File.join(ROOT,"mobile"))
+  run("xcrun", "simctl", "openurl", "booted", "exp+davar://expo-development-client/?url=http%3A%2F%2F127.0.0.1%3A8086")
+when "stop"
+  stop_services
+  run(File.join(PG_BIN,"pg_ctl"),"-D",PG_DATA,"stop","-m","fast") if File.exist?(File.join(PG_DATA,"postmaster.pid"))
+else
+  abort "Usage: api/bin/dev-sandbox setup|start|ios|reset|calendar [pending|confirmed]|stop"
+end

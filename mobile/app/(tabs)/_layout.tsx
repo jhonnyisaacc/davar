@@ -1,3 +1,4 @@
+import { SandboxBanner } from "@/src/features/product/SandboxBanner";
 import { Tabs } from "expo-router";
 import {
 	Pressable,
@@ -33,7 +34,10 @@ export default function TabLayout() {
 	return (
 		<Tabs
 			initialRouteName="index"
-			screenOptions={{ headerShown: false }}
+			screenOptions={{
+				headerShown: process.env.EXPO_PUBLIC_DEV_SANDBOX === "1",
+				header: () => <SandboxBanner />,
+			}}
 			tabBar={({ state, navigation }) => (
 				<View
 					style={{
