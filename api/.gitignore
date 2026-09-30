@@ -5,3 +5,4 @@
 /config/master.key
 /.env*
 !/.env.example
+!/.env.*.example

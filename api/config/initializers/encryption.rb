@@ -1,5 +1,5 @@
-# Production keys are required; never fall back to development keys there.
-if Rails.env.production?
+# Hosted environments require their own keys; local defaults are development/test only.
+if Rails.env.production? || Rails.env.staging?
   %w[ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT].each do |key|
     raise "#{key} is required" if ENV[key].blank?
   end

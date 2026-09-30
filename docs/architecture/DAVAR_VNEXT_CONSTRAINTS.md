@@ -5,6 +5,7 @@ Living report, 2026-09-30. Statuses distinguish real blockers from unfinished wo
 | Area | Status | Evidence / impact / next action |
 | --- | --- | --- |
 | Rails/PostgreSQL runtime | Resolved | Installed Ruby 3.4.9/Rails 8.1; isolated PostgreSQL 17 on port 55432 used for tests. No production database touched. |
+| Deployment environments | Configured; provisioning pending | Development/staging/production are distinct Rails environments. Hosted boot requires separate database/secrets/domain configuration. Staging shares production runtime protections; no hosted resources deployed. |
 | Rails JSON compatibility | Resolved | JSON 3.0.2 broke Rails 8.1 default decoding/schema dumps; pinned JSON <3 and regenerated schema. |
 | Sign-in provider configuration | Blocked | No v2 provider app configuration is supplied. Adapters and callback flows exist; register HTTPS callback URIs and provide client IDs/secrets for live tests. |
 | Email delivery | Blocked for production | Magic links and single-use redemption tested through ActionMailer test delivery. Production SMTP/from domain must be configured. |

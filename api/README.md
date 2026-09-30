@@ -24,6 +24,38 @@ From mobile/: `EXPO_PUBLIC_API_URL=http://YOUR_LAN_HOST:3000 bun run start`.
 From web/: `PUBLIC_API_URL=http://localhost:3000 bun run dev`.
 JavaScript commands run with Bun in the relevant surface directory.
 
+## Development, staging and production
+
+Rails has distinct `development`, `staging`, and `production` environments,
+plus `test` for automated checks. Staging loads production runtime settings:
+HTTPS is required, code is eagerly loaded, reloading is disabled, detailed error
+pages are hidden, and logs go to stdout. Only configuration and data differ.
+
+| Environment | Database | Configuration example |
+| --- | --- | --- |
+| Development | davar_v2_development | .env.development.example |
+| Staging | davar_v2_staging via its own DATABASE_URL | .env.staging.example |
+| Production | davar_v2_production via its own DATABASE_URL | .env.production.example |
+
+Examples contain no credentials and are not automatically loaded by Rails. Inject
+them through your local environment manager or host secret manager. From api/,
+start with `RAILS_ENV=development bundle exec rails server`,
+`RAILS_ENV=staging bundle exec rails server`, or
+`RAILS_ENV=production bundle exec rails server` after configuring the environment.
+Run migrations with the same explicit RAILS_ENV and its database credentials.
+
+Provision separate staging and production databases and database users, encryption
+keys, SECRET_KEY_BASE, OAuth apps/callbacks, allowed hosts/origins, SMTP and AI/bot
+credentials. Never point staging at production or copy production personal data
+into staging. Use fixtures or approved anonymized data and sandbox integrations.
+Staging and production fail at boot if database/security/domain configuration is
+missing; neither falls back to the development encryption keys. Native return
+allowlists must match the configured application build; a staging native build may
+require its own scheme/provider app configuration before live callback validation.
+
+This PR configures and tests these environments; hosted resources have not been
+provisioned or deployed.
+
 ## Authentication
 
 Register each provider's HTTPS callback:

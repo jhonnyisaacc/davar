@@ -118,7 +118,7 @@ Actual local commands/results, run from the indicated directory:
 | --- | --- | --- |
 | api/ | bundle exec rails db:migrate | Applied all five migrations to isolated local development PostgreSQL; test schema prepared separately |
 | api/ | bundle exec rails zeitwerk:check | Pass |
-| api/ | bundle exec rails test | 30 tests, 105 assertions, zero failures/errors/skips |
+| api/ | bundle exec rails test | 33 tests, 137 assertions, zero failures/errors/skips |
 | api/ | PYTHONPATH=lib/bore python -m pytest test/bore -q | 12 passed |
 | mobile/ | bun test | 19 passed, 85 assertions |
 | mobile/ | bun run typecheck | Pass |
@@ -208,3 +208,13 @@ reading payloads, input revisions and unrelated paths remain rejected. The pinne
 Shaul non-interference boundary passed locally. Legacy generator comparison remains
 part of the existing required workflow; final remote results are reported on the PR. Publication fixtures use the
 existing test_knowledge_ discovery prefix so the foundation workflow runs them.
+
+## Environment follow-up
+
+Development, staging and production are explicit Rails environments with separate
+database names and configuration examples. Staging reuses production runtime
+protections and requires its own injected database, domains and secrets. Hosted
+boot tests verify production-style SSL/eager-loading/error settings, environment
+selection, database configuration and rejection of missing secrets/databases or
+HTTP API URLs. Tests do not connect to a hosted database. Infrastructure
+provisioning and live provider configuration remain operator prerequisites.
