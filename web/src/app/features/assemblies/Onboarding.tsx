@@ -2,10 +2,12 @@ import { useState, type ReactNode } from "react";
 import type { Account } from "@davar/shared/productContracts";
 import {
 	qahalQuestionIds,
+	type qahalOnboardingStep,
 	QAHAL_QUESTIONS,
 } from "@davar/shared/qahalQuestions";
 import type { AssemblyButton } from "./types";
 export function AssemblyOnboarding({
+	step,
 	account,
 	busy,
 	run,
@@ -13,6 +15,7 @@ export function AssemblyOnboarding({
 	city,
 	button,
 }: {
+	step: NonNullable<ReturnType<typeof qahalOnboardingStep>>;
 	account: Account;
 	busy: boolean;
 	city: ReactNode;
@@ -27,7 +30,7 @@ export function AssemblyOnboarding({
 	const keys = qahalQuestionIds(profile.experience);
 	const next = keys.find((key) => profile.answers?.[key] === undefined);
 	let body: ReactNode = null;
-	if (!profile.experience)
+	if (step === "experience")
 		body = (
 			<>
 				<h2 className="text-[34px] text-center font-semibold">Your path</h2>
@@ -45,7 +48,7 @@ export function AssemblyOnboarding({
 				))}
 			</>
 		);
-	else if (next)
+	else if (step === "questions" && next)
 		body = (
 			<>
 				<h2 className="text-[28px] font-semibold text-center">
@@ -62,7 +65,7 @@ export function AssemblyOnboarding({
 				)}
 			</>
 		);
-	else if (!profile.gender)
+	else if (step === "name")
 		body = (
 			<>
 				<h2 className="text-[34px] text-center font-semibold">Your name</h2>
@@ -86,14 +89,14 @@ export function AssemblyOnboarding({
 				)}
 			</>
 		);
-	else if (!profile.city)
+	else if (step === "city")
 		body = (
 			<>
 				<p>Choose your city. Discovery uses an approximate area.</p>
 				{city}
 			</>
 		);
-	else if (!account.onboarding_complete)
+	else if (step === "visibility")
 		body = (
 			<>
 				<h2 className="text-[34px] text-center font-semibold">

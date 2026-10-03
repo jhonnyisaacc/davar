@@ -144,10 +144,12 @@ export function AssembliesWorkspace({
 			}}
 		/>
 	);
+	const onboardingStep = qahalOnboardingStep(account);
 	let body: ReactNode = null;
-	if (qahalOnboardingStep(account))
+	if (onboardingStep)
 		body = (
 			<AssemblyOnboarding
+				step={onboardingStep}
 				account={account}
 				busy={busy}
 				run={run}
