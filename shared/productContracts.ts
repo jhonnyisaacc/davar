@@ -69,6 +69,26 @@ export type MembershipRequest = {
 		contact_url?: string | null;
 	};
 };
+export type AssemblyPerson = {
+	id: string;
+	name: string;
+	area: string;
+	contact_url?: string | null;
+};
+export type AssemblyLeader = { id: string; name: string; city: string | null };
+export type AssemblyDiscovery = {
+	assemblies: Assembly[];
+	people: AssemblyPerson[];
+};
+export type Endorsement = {
+	id: string;
+	state: string;
+	applicant_name: string;
+	leader_name: string;
+	can_decide: boolean;
+};
+export type AccountNotification = { id: string; kind: string };
+
 export type Article = {
 	id: string;
 	source_id: string;
