@@ -77,10 +77,10 @@ jobs:
           cd mobile
           bun run lint
 
-      - name: Run service regression tests
+      - name: Run mobile regression tests
         run: |
           cd mobile
-          bun test src/services/*.test.ts
+          bun run test
 
       - name: Check TypeScript
         run: |

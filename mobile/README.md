@@ -1,21 +1,19 @@
-# Welcome to your Expo app 👋
+# Davar mobile
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+The React Native app uses Expo and Bun. Run all commands below from `mobile/`.
 
 ## Get started
 
 1. Install dependencies
 
    ```bash
-   bun install
+   bun install --frozen-lockfile
    ```
-
-   (Bun creates/updates a `bun.lockb` lockfile — much faster than npm!)
 
 2. Start the app
 
    ```bash
-   bun expo start
+   bun run start
    ```
 
    In the output, you'll find options to open the app in a
@@ -28,8 +26,8 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    You can also run platform-specific commands directly:
 
    ```bash
-   bun run ios     # or: bun expo run:ios
-   bun run android # or: bun expo run:android
+   bun run ios
+   bun run android
    ```
 
    You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
@@ -42,18 +40,38 @@ To learn more about developing your project with Expo, look at the following res
 - [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 - [Using Bun with Expo](https://docs.expo.dev/guides/using-bun): Official guide for Bun + Expo workflows
 
-## Join the community
+## Commands
 
-Join our community of developers creating universal apps.
+Development commands share Metro port `8082`. Pass additional Expo flags after
+the script name, for example `bun run ios --device "iPhone 18 Pro"`.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+| Purpose | Command |
+| --- | --- |
+| Start Metro | `bun run start` |
+| Clear Metro cache | `bun run start:clear` |
+| Android development client on localhost | `bun run start:android:localhost` |
+| Build and launch locally | `bun run ios` / `bun run android` |
+| Regenerate a native project and rebuild | `bun run ios:clean` / `bun run android:clean` |
+| Forward Metro and static data to an Android USB device | `bun run android:reverse` |
+| View Android logs | `bun run android:logs` |
+| Start Expo web | `bun run web` |
+| TypeScript, lint, and all mobile tests | `bun run preflight` |
+| Run individual checks | `bun run typecheck` / `bun run lint` / `bun run test` |
+| Format / check formatting | `bun run format` / `bun run format:check` |
+| Production EAS builds | `bun run build:ios` / `bun run build:android` / `bun run build:all` |
+| Local preview EAS builds | `bun run build:ios:local` / `bun run build:android:local` |
+| EAS updates | `bun run update:dev` / `bun run update:preview` / `bun run update:prod` |
 
+Biome is installed locally and versioned in `bun.lock`. EAS commands share the
+`eas` helper, which runs a pinned CLI version through Bun; use
+`bun run eas <command>` for other EAS operations.
+`build:*:prod` duplicates have been removed; the regular `build:*` commands
+already use the production profile. EAS local builds support one platform per
+invocation, so there is no `build:all:local` command. The `*:clean` commands
+replace generated native projects; keep native customization in config plugins.
 
-### Quick notes
-- Use `bun expo install <package>` (instead of `npx expo install`) when adding Expo-managed libraries — it picks the right compatible version automatically.
-- If you ever need to force Bun explicitly: `bun expo start --bun`
-- Bun is usually 4–25× faster than npm for installs, so you'll notice the difference right away.
+Install Expo-managed libraries with `bun x expo install <package> --bun`, and
+check SDK compatibility with `bun x expo-doctor`.
 
 ## iOS development with Xcode 27
 
@@ -68,11 +86,11 @@ commands from `mobile/`:
 ```bash
 bun install --frozen-lockfile
 bun x expo prebuild --clean --platform ios --no-install
-bun run ios --device "iPhone 18 Pro" --port 8082
+bun run ios --device "iPhone 18 Pro"
 ```
 
 The first build installs CocoaPods dependencies and compiles a new development
-client. Subsequent launches use `bun run ios --port 8082`. The OTA runtime version
+client. Subsequent launches use `bun run ios`. The OTA runtime version
 is `1.0.3`; this SDK upgrade requires a new native build before publishing updates
 to that runtime. EAS Update commands explicitly select their EAS environment.
 
@@ -83,8 +101,12 @@ unsupported components until those patterns are migrated.
 
 ## Formatting
 
-- This repository uses Biome as the formatter/linter source of truth for JS/TS files.
-- Use `bunx biome format --write .` from this `mobile/` directory when you want to format files manually.
+- Biome handles formatting; Expo ESLint handles lint checks.
+- Use `bun run format` to format files or `bun run format:check` to check them.
+- Add paths to either command to target specific files, for example
+  `bun run format:check package.json biome.json`.
+- The Biome config limits formatting to app sources and configuration, and
+  respects Git ignores for generated native projects and dependencies.
 - Prettier is intentionally not configured at project level in this workspace.
 
 ## Static Data Environment Setup
