@@ -1,12 +1,16 @@
-import React, { type ReactNode } from "react";
+import { Fragment, type ReactNode } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import {
 	SHARED_SETTINGS_ORDER,
 	canUseSeferStyle,
 	isSeferStyleVisible,
 	type SharedSettingId,
 } from "@davar/shared/settingsOrder";
-import { useTranslation } from "../hooks/useTranslation";
 import type { BesorahLanguage } from "@davar/shared/greekBesorah";
+import { useTranslation } from "../hooks/useTranslation";
+import { productApi } from "../services/productApi";
+import { SettingsResources } from "./SettingsResources";
+import type { RouteScreen } from "../utils/routeState";
 
 export interface SettingsScreenProps {
 	theme: "light" | "dark";
@@ -29,856 +33,232 @@ export interface SettingsScreenProps {
 	hebrewOnly: boolean;
 	onHebrewOnlyChange: (show: boolean) => void;
 	translationOnly?: boolean;
+	onTranslationOnlyChange?: (show: boolean) => void;
+	onAccountClick?: () => void;
 	onDesignSystemClick?: () => void;
 	onMobileDesignGuideClick?: () => void;
 }
 
-// 2D Retro Pill Toggle inspired by the copper toggle switch
-function RetroPillToggle({
-	isOn,
-	onToggle,
-}: {
-	isOn: boolean;
-	onToggle: () => void;
-}) {
-	return (
-		<button
-			type="button"
-			onClick={onToggle}
-			className="relative bg-[var(--border)] rounded-full p-0.5 transition-all duration-300 flex-shrink-0"
-			style={{
-				width: "80px",
-				height: "40px",
-				boxShadow: "inset 0 2px 4px rgba(0,0,0,0.15)",
-			}}
-		>
-			{/* Sliding pill */}
-			<div
-				className={`
-          absolute top-0.5 h-[36px] w-[38px] rounded-full transition-all duration-300
-          ${
-						isOn
-							? "translate-x-[40px] bg-[var(--primary)]"
-							: "translate-x-0.5 bg-[var(--muted)]"
-					}
-        `}
-				style={{
-					boxShadow: isOn
-						? "0 2px 8px var(--accent-glow), inset 0 -2px 4px rgba(0,0,0,0.2)"
-						: "0 2px 4px rgba(0,0,0,0.1), inset 0 -2px 4px rgba(0,0,0,0.1)",
-					border: isOn
-						? "2px solid var(--accent-deep)"
-						: "2px solid var(--border)",
-				}}
-			/>
-		</button>
-	);
-}
-
-// Retro On/Off Button Component inspired by vintage audio equipment
-function RetroOnOffButton({
-	isOn,
-	onToggle,
-	onLabel,
-	offLabel,
-	disabled = false,
-	disabledReason,
-}: {
-	isOn: boolean;
-	onToggle: () => void;
-	onLabel: string;
-	offLabel: string;
-	disabled?: boolean;
-	disabledReason?: string;
-}) {
-	return (
-		<button
-			type="button"
-			onClick={disabled ? undefined : onToggle}
-			disabled={disabled}
-			aria-disabled={disabled}
-			title={disabled ? disabledReason : undefined}
-			className={`relative flex flex-col items-center justify-center gap-2 group ${disabled ? "cursor-not-allowed opacity-60" : ""}`}
-			style={{ width: "64px" }}
-		>
-			{/* Large circular button with light indicator */}
-			<div
-				className={`
-          relative w-14 h-14 rounded-full border-3 transition-all duration-300
-          ${
-						isOn
-							? "bg-[var(--primary)] border-[var(--accent-deep)] shadow-lg"
-							: "bg-[var(--muted)] border-[var(--border)] shadow-sm"
-					}
-        `}
-				style={{
-					boxShadow: isOn
-						? "0 0 20px var(--accent-glow), inset 0 2px 4px rgba(0,0,0,0.2)"
-						: "inset 0 2px 4px rgba(0,0,0,0.1)",
-					borderWidth: "3px",
-				}}
-			>
-				{/* Inner light indicator - glows when on */}
-				<div
-					className={`
-            absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
-            w-6 h-6 rounded-full transition-all duration-300
-            ${
-							isOn
-								? "bg-white opacity-90"
-								: "bg-[var(--text-secondary)] opacity-20"
-						}
-          `}
-					style={{
-						boxShadow: isOn
-							? "0 0 12px rgba(255,255,255,0.8), 0 0 24px var(--accent-glow)"
-							: "none",
-					}}
-				/>
-			</div>
-
-			{/* ON/OFF label */}
-			<div
-				className="text-xs font-bold tracking-wide uppercase"
-				style={{
-					fontFamily: "'Inter', sans-serif",
-					color: isOn ? "var(--primary)" : "var(--text-secondary)",
-				}}
-			>
-				{isOn ? onLabel : offLabel}
-			</div>
-		</button>
-	);
-}
-
-// Simple retro-style SVG icons
-const RetroIcons = {
-	Theme: () => (
-		<svg
-			aria-hidden="true"
-			width="24"
-			height="24"
-			viewBox="0 0 24 24"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-		>
-			<circle cx="12" cy="12" r="8" fill="currentColor" opacity="0.3" />
-			<path d="M12 4 L12 12 L16 8 Z" fill="currentColor" />
-		</svg>
-	),
-	Language: () => (
-		<svg
-			aria-hidden="true"
-			width="24"
-			height="24"
-			viewBox="0 0 24 24"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-		>
-			<circle
-				cx="12"
-				cy="12"
-				r="8"
-				stroke="currentColor"
-				strokeWidth="2"
-				fill="none"
-			/>
-			<path
-				d="M4 12 H20 M12 4 C14 8 14 16 12 20 M12 4 C10 8 10 16 12 20"
-				stroke="currentColor"
-				strokeWidth="2"
-				fill="none"
-			/>
-		</svg>
-	),
-	Qumran: () => (
-		<svg
-			aria-hidden="true"
-			width="24"
-			height="24"
-			viewBox="0 0 24 24"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-		>
-			<rect
-				x="6"
-				y="4"
-				width="12"
-				height="16"
-				stroke="currentColor"
-				strokeWidth="2"
-				fill="none"
-				rx="1"
-			/>
-			<line
-				x1="9"
-				y1="8"
-				x2="15"
-				y2="8"
-				stroke="currentColor"
-				strokeWidth="2"
-			/>
-			<line
-				x1="9"
-				y1="12"
-				x2="15"
-				y2="12"
-				stroke="currentColor"
-				strokeWidth="2"
-			/>
-			<line
-				x1="9"
-				y1="16"
-				x2="13"
-				y2="16"
-				stroke="currentColor"
-				strokeWidth="2"
-			/>
-		</svg>
-	),
-	Chapter: () => (
-		<svg
-			aria-hidden="true"
-			width="24"
-			height="24"
-			viewBox="0 0 24 24"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-		>
-			<path
-				d="M7 4 L7 20 M7 4 L14 4 C16 4 17 6 17 8 C17 10 16 12 14 12 L7 12 M7 12 L15 12 C17 12 18 14 18 16 C18 18 17 20 15 20 L7 20"
-				stroke="currentColor"
-				strokeWidth="2"
-				fill="none"
-			/>
-		</svg>
-	),
-	Hebrew: () => (
-		<svg
-			aria-hidden="true"
-			width="24"
-			height="24"
-			viewBox="0 0 24 24"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-		>
-			<path
-				d="M8 6 L8 18 M12 6 L12 18 M16 6 L16 12 M8 12 L16 12"
-				stroke="currentColor"
-				strokeWidth="2"
-				strokeLinecap="round"
-			/>
-		</svg>
-	),
-	Sefer: () => (
-		<svg
-			aria-hidden="true"
-			width="24"
-			height="24"
-			viewBox="0 0 24 24"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-		>
-			<path
-				d="M5 4 H17 C18.5 4 19 5 19 6.5 V19 C19 17.5 18.5 16.5 17 16.5 H5"
-				stroke="currentColor"
-				strokeWidth="2"
-				fill="none"
-			/>
-			<path d="M5 4 V19" stroke="currentColor" strokeWidth="2" />
-			<path d="M8 8 H15" stroke="currentColor" strokeWidth="2" />
-			<path d="M8 12 H15" stroke="currentColor" strokeWidth="2" />
-		</svg>
-	),
-	DesignSystem: () => (
-		<svg
-			aria-hidden="true"
-			width="24"
-			height="24"
-			viewBox="0 0 24 24"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-		>
-			<rect
-				x="4"
-				y="4"
-				width="7"
-				height="7"
-				stroke="currentColor"
-				strokeWidth="2"
-				fill="none"
-			/>
-			<rect
-				x="13"
-				y="4"
-				width="7"
-				height="7"
-				stroke="currentColor"
-				strokeWidth="2"
-				fill="none"
-			/>
-			<rect
-				x="4"
-				y="13"
-				width="7"
-				height="7"
-				stroke="currentColor"
-				strokeWidth="2"
-				fill="none"
-			/>
-			<rect
-				x="13"
-				y="13"
-				width="7"
-				height="7"
-				stroke="currentColor"
-				strokeWidth="2"
-				fill="none"
-			/>
-		</svg>
-	),
-};
-
-const languages = [
-	{ code: "en" as const, name: "English", nativeName: "English" },
-	{ code: "es" as const, name: "Spanish", nativeName: "Espa\u00f1ol" },
-	{
-		code: "he" as const,
-		name: "Hebrew",
-		nativeName: "\u05e2\u05d1\u05e8\u05d9\u05ea",
-	},
-];
-
-function SettingsPillSelect<T extends string>({
-	value,
-	options,
-	onChange,
-	ariaLabel,
-}: {
-	value: T;
-	options: Array<{ value: T; label: string }>;
-	onChange: (value: T) => void;
-	ariaLabel: string;
-}) {
-	const [open, setOpen] = React.useState(false);
-	const ref = React.useRef<HTMLDivElement>(null);
-	const selected =
-		options.find((option) => option.value === value) ?? options[0];
-
-	React.useEffect(() => {
-		const handleClickOutside = (event: MouseEvent) => {
-			if (ref.current && !ref.current.contains(event.target as Node)) {
-				setOpen(false);
-			}
-		};
-		if (open) document.addEventListener("mousedown", handleClickOutside);
-		return () => document.removeEventListener("mousedown", handleClickOutside);
-	}, [open]);
-
-	if (!selected) return null;
-
-	return (
-		<div
-			className={`relative flex-shrink-0 ${open ? "z-50" : "z-10"}`}
-			ref={ref}
-			style={{ minWidth: "140px" }}
-		>
+export function SettingsScreen(
+	props: SettingsScreenProps & { onOpenScreen?: (screen: RouteScreen) => void },
+) {
+	const { t } = useTranslation(props.language);
+	const rtl = props.language === "he";
+	const Chevron = rtl ? ChevronLeft : ChevronRight;
+	const translationOnly = props.translationOnly ?? false;
+	const rowClass =
+		"flex min-h-[50px] items-center justify-between gap-3 py-2.5";
+	const toggle = (
+		label: string,
+		checked: boolean,
+		change: ((value: boolean) => void) | undefined,
+		disabled = false,
+		reason?: string,
+	) => (
+		<div className={`${rowClass} ${disabled ? "opacity-45" : ""}`}>
+			<span className="text-[15px]">{label}</span>
 			<button
 				type="button"
-				aria-expanded={open}
-				aria-haspopup="listbox"
-				aria-label={ariaLabel}
-				onClick={() => setOpen((current) => !current)}
-				className="w-full bg-[var(--muted)] border-2 border-[var(--border)] rounded-[16px] px-4 py-2 flex items-center justify-between hover:bg-[var(--primary)]/10 transition-all"
+				role="switch"
+				aria-label={label}
+				aria-checked={checked}
+				disabled={disabled || !change}
+				title={reason}
+				onClick={() => change?.(!checked)}
+				className={`relative h-[30px] w-[52px] shrink-0 rounded-full transition-colors disabled:cursor-not-allowed ${checked ? "bg-[var(--primary)]" : "bg-[var(--muted)]"}`}
 			>
 				<span
-					className="text-base text-[var(--foreground)] font-medium"
-					style={{ fontFamily: "'Inter', sans-serif" }}
-				>
-					{selected.label}
-				</span>
-				<svg
-					aria-hidden="true"
-					className={`w-4 h-4 text-[var(--text-secondary)] transition-transform ${open ? "rotate-180" : ""}`}
-					fill="none"
-					stroke="currentColor"
-					viewBox="0 0 24 24"
-				>
-					<path
-						strokeLinecap="round"
-						strokeLinejoin="round"
-						strokeWidth={2}
-						d="M19 9l-7 7-7-7"
-					/>
-				</svg>
+					className={`absolute top-[3px] size-6 rounded-full bg-white shadow-sm transition-all ${checked ? "left-[25px]" : "left-[3px]"}`}
+				/>
 			</button>
-			{open && (
-				<div
-					className="absolute top-full left-0 right-0 mt-2 bg-[var(--background)] border-2 border-[var(--border)] rounded-[16px] shadow-lg overflow-hidden z-[100]"
-					role="listbox"
-				>
-					{options.map((option) => (
-						<button
-							type="button"
-							key={option.value}
-							role="option"
-							aria-selected={option.value === value}
-							onClick={() => {
-								onChange(option.value);
-								setOpen(false);
-							}}
-							className={`w-full px-4 py-3 flex items-center justify-between hover:bg-[var(--muted)] transition-all ${
-								option.value === value ? "bg-[var(--muted)]" : ""
-							}`}
-						>
-							<span
-								className="text-base text-[var(--foreground)] font-medium"
-								style={{ fontFamily: "'Inter', sans-serif" }}
-							>
-								{option.label}
-							</span>
-							{option.value === value && (
-								<svg
-									aria-hidden="true"
-									className="w-4 h-4 text-[var(--primary)]"
-									fill="none"
-									stroke="currentColor"
-									viewBox="0 0 24 24"
-								>
-									<path
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										strokeWidth={2}
-										d="M5 13l4 4L19 7"
-									/>
-								</svg>
-							)}
-						</button>
-					))}
-				</div>
-			)}
 		</div>
 	);
-}
-
-export function SettingsScreen({
-	theme,
-	onThemeChange,
-	language,
-	onLanguageChange,
-	besorahLanguage,
-	onBesorahLanguageChange,
-	greekAvailable,
-	besorahTextVersion,
-	onBesorahTextVersionChange,
-	showQumran,
-	onQumranChange,
-	showFullChapter,
-	onFullChapterChange,
-	showCalendarDayPill = false,
-	onCalendarDayPillChange,
-	seferMode,
-	onSeferModeChange,
-	hebrewOnly,
-	onHebrewOnlyChange,
-	translationOnly = false,
-	onDesignSystemClick,
-	onMobileDesignGuideClick,
-}: SettingsScreenProps) {
-	const { t } = useTranslation(language);
-	const seferEnabled = canUseSeferStyle({
-		showFullChapter,
-		hebrewOnly,
-		translationOnly,
-	});
-	const seferDisabled = !seferEnabled;
-
-	const renderSharedSetting = (id: SharedSettingId): ReactNode => {
+	const select = <T extends string>(
+		label: string,
+		value: T,
+		change: (value: T) => void,
+		options: { value: T; label: string }[],
+	) => (
+		<div className={rowClass}>
+			<span className="text-[15px]">{label}</span>
+			<select
+				aria-label={label}
+				value={value}
+				onChange={(event) => change(event.target.value as T)}
+				className="min-h-[30px] max-w-[50%] cursor-pointer border-0 bg-transparent text-[13px] text-[var(--text-secondary)] focus-visible:outline-[var(--primary)]"
+			>
+				{options.map((option) => (
+					<option key={option.value} value={option.value}>
+						{option.label}
+					</option>
+				))}
+			</select>
+		</div>
+	);
+	const renderSetting = (id: SharedSettingId): ReactNode => {
 		switch (id) {
 			case "theme":
-				return (
-					<div className="px-6 py-6">
-						<div className="flex items-center justify-between">
-							<div className="flex items-center gap-4">
-								<div className="text-[var(--text-secondary)]">
-									<RetroIcons.Theme />
-								</div>
-								<div>
-									<div
-										className="text-lg font-semibold text-[var(--text-primary)]"
-										style={{ fontFamily: "'Inter', sans-serif" }}
-									>
-										{t("settings.theme.title")}
-									</div>
-									<div
-										className="text-sm text-[var(--text-secondary)] mt-0.5"
-										style={{ fontFamily: "'Inter', sans-serif" }}
-									>
-										{t("settings.theme.subtitle")}
-									</div>
-								</div>
-							</div>
-							<RetroPillToggle
-								isOn={theme === "dark"}
-								onToggle={() =>
-									onThemeChange(theme === "light" ? "dark" : "light")
-								}
-							/>
-						</div>
-					</div>
+				return toggle(
+					t("settings.theme.title"),
+					props.theme === "dark",
+					(dark) => props.onThemeChange(dark ? "dark" : "light"),
 				);
 			case "language":
-				return (
-					<div className="px-6 py-6 relative">
-						<div className="flex items-center justify-between gap-4">
-							<div className="flex items-center gap-4">
-								<div className="text-[var(--text-secondary)]">
-									<RetroIcons.Language />
-								</div>
-								<div
-									className="text-lg font-semibold text-[var(--text-primary)]"
-									style={{ fontFamily: "'Inter', sans-serif" }}
-								>
-									{t("settings.language.title")}
-								</div>
-							</div>
-							<SettingsPillSelect
-								value={language}
-								ariaLabel={t("settings.language.title")}
-								onChange={onLanguageChange}
-								options={languages.map((lang) => ({
-									value: lang.code,
-									label: lang.nativeName,
-								}))}
-							/>
-						</div>
-					</div>
+				return select(
+					t("settings.language.title"),
+					props.language,
+					props.onLanguageChange,
+					[
+						{ value: "en", label: "English" },
+						{ value: "es", label: "Español" },
+						{ value: "he", label: "עברית" },
+					],
 				);
 			case "besorahLanguage":
-				if (!greekAvailable) return null;
-				return (
-					<div className="px-6 py-6 relative">
-						<div className="flex items-center justify-between gap-4">
-							<div className="flex items-center gap-4">
-								<div className="text-[var(--text-secondary)]">
-									<RetroIcons.Qumran />
-								</div>
-								<div
-									className="flex items-center gap-2 text-lg font-semibold text-[var(--text-primary)]"
-									style={{ fontFamily: "'Inter', sans-serif" }}
-								>
-									{t("settings.besorahLanguage.title")}
-									<span className="rounded-full bg-[var(--copper-base)] px-2 py-0.5 text-[10px] font-semibold uppercase leading-3 text-white">
-										{t("settings.besorahLanguage.new")}
-									</span>
-								</div>
-							</div>
-							<SettingsPillSelect
-								value={besorahLanguage}
-								ariaLabel={t("settings.besorahLanguage.title")}
-								onChange={onBesorahLanguageChange}
-								options={[
-									{
-										value: "hebrew",
-										label: t("settings.besorahLanguage.hebrew"),
-									},
-									{
-										value: "greek",
-										label: t("settings.besorahLanguage.greek"),
-									},
-								]}
-							/>
-						</div>
-					</div>
-				);
+				return props.greekAvailable
+					? select(
+							t("settings.besorahLanguage.title"),
+							props.besorahLanguage,
+							props.onBesorahLanguageChange,
+							[
+								{
+									value: "hebrew",
+									label: t("settings.besorahLanguage.hebrew"),
+								},
+								{ value: "greek", label: t("settings.besorahLanguage.greek") },
+							],
+						)
+					: null;
 			case "besorahTextVersion":
-				if (besorahLanguage === "greek") return null;
-				return (
-					<div className="px-6 py-6 relative">
-						<div className="flex items-center justify-between gap-4">
-							<div className="flex items-center gap-4">
-								<div className="text-[var(--text-secondary)]">
-									<RetroIcons.Qumran />
-								</div>
-								<div
-									className="text-lg font-semibold text-[var(--text-primary)]"
-									style={{ fontFamily: "'Inter', sans-serif" }}
-								>
-									{t("settings.besorahTextVersion.title")}
-								</div>
-							</div>
-							<SettingsPillSelect
-								value={besorahTextVersion}
-								ariaLabel={t("settings.besorahTextVersion.title")}
-								onChange={onBesorahTextVersionChange}
-								options={[
-									{
-										value: "delitzsch",
-										label: t("settings.besorahTextVersion.delitzsch"),
-									},
-									{
-										value: "hutter",
-										label: t("settings.besorahTextVersion.hutter"),
-									},
-								]}
-							/>
-						</div>
-					</div>
-				);
+				return props.besorahLanguage === "greek"
+					? null
+					: select(
+							t("settings.besorahTextVersion.title"),
+							props.besorahTextVersion,
+							props.onBesorahTextVersionChange,
+							[
+								{
+									value: "delitzsch",
+									label: t("settings.besorahTextVersion.delitzsch"),
+								},
+								{
+									value: "hutter",
+									label: t("settings.besorahTextVersion.hutter"),
+								},
+							],
+						);
 			case "fullChapter":
 				return (
-					<div className="px-6 py-6">
-						<div className="flex items-center justify-between">
-							<div className="flex items-center gap-4">
-								<div className="text-[var(--text-secondary)]">
-									<RetroIcons.Chapter />
-								</div>
-								<div>
-									<div
-										className="text-lg font-semibold text-[var(--text-primary)]"
-										style={{ fontFamily: "'Inter', sans-serif" }}
-									>
-										{t("settings.fullChapter.title")}
-									</div>
-									<div
-										className="text-sm text-[var(--text-secondary)] mt-0.5"
-										style={{ fontFamily: "'Inter', sans-serif" }}
-									>
-										{t("settings.fullChapter.subtitle")}
-									</div>
-								</div>
-							</div>
-							<RetroOnOffButton
-								isOn={showFullChapter}
-								onToggle={() => onFullChapterChange(!showFullChapter)}
-								onLabel={t("common.on")}
-								offLabel={t("common.off")}
-							/>
-						</div>
-					</div>
+					<>
+						{toggle(
+							t("settings.fullChapter.title"),
+							props.showFullChapter,
+							props.onFullChapterChange,
+						)}
+						{toggle(
+							t("settings.translationOnly.title"),
+							translationOnly,
+							props.onTranslationOnlyChange,
+						)}
+					</>
 				);
 			case "calendarDayPill":
 				return (
-					<div className="px-6 py-5 flex items-center justify-between gap-4">
-						<div>
-							<div className="text-base text-[var(--text-primary)]">
-								{t("settings.calendarDayPill.title")}
-							</div>
-							<p className="mt-1 text-xs text-[var(--text-secondary)]">
-								{t("settings.calendarDayPill.subtitle")}
-							</p>
-						</div>
-						<button
-							type="button"
-							role="switch"
-							aria-checked={showCalendarDayPill}
-							aria-label={t("settings.calendarDayPill.title")}
-							disabled={!onCalendarDayPillChange}
-							onClick={() => onCalendarDayPillChange?.(!showCalendarDayPill)}
-							className={`relative h-8 w-14 shrink-0 rounded-full transition-colors ${showCalendarDayPill ? "bg-[var(--primary)]" : "bg-[var(--muted)]"}`}
-						>
-							<span
-								className={`absolute top-1 size-6 rounded-full bg-white shadow-sm transition-all ${showCalendarDayPill ? "left-7" : "left-1"}`}
-							/>
-						</button>
+					<div>
+						{toggle(
+							t("settings.calendarDayPill.title"),
+							props.showCalendarDayPill ?? false,
+							props.onCalendarDayPillChange,
+						)}
+						<p className="-mt-1 mb-2 text-xs text-[var(--text-secondary)]">
+							{t("settings.calendarDayPill.subtitle")}
+						</p>
 					</div>
 				);
 			case "seferStyle":
-				if (!isSeferStyleVisible(showFullChapter)) return null;
-				return (
-					<div className="px-6 py-6">
-						<div className="flex items-center justify-between">
-							<div className="flex items-center gap-4">
-								<div className="text-[var(--text-secondary)]">
-									<RetroIcons.Sefer />
-								</div>
-								<div>
-									<div
-										className="text-lg font-semibold text-[var(--text-primary)]"
-										style={{ fontFamily: "'Inter', sans-serif" }}
-									>
-										{t("settings.seferStyle.title")}
-									</div>
-									<div
-										className="text-sm text-[var(--text-secondary)] mt-0.5"
-										style={{ fontFamily: "'Inter', sans-serif" }}
-									>
-										{t("settings.seferStyle.subtitle")}
-									</div>
-								</div>
-							</div>
-							<div className="relative group">
-								<RetroOnOffButton
-									isOn={seferMode}
-									onToggle={() => onSeferModeChange(!seferMode)}
-									onLabel={t("common.on")}
-									offLabel={t("common.off")}
-									disabled={seferDisabled}
-									disabledReason={t("settings.seferStyle.warningMessage")}
-								/>
-								{seferDisabled && (
-									<div className="absolute right-0 mt-2 w-48 rounded-lg bg-[var(--background)] border border-[var(--border)] px-3 py-2 text-[10px] text-[var(--text-secondary)] shadow-lg opacity-0 group-hover:opacity-100 transition-opacity">
-										{t("settings.seferStyle.warningMessage")}
-									</div>
-								)}
-							</div>
-						</div>
-					</div>
-				);
+				return isSeferStyleVisible(props.showFullChapter)
+					? toggle(
+							t("settings.seferStyle.title"),
+							props.seferMode,
+							props.onSeferModeChange,
+							!canUseSeferStyle({
+								showFullChapter: props.showFullChapter,
+								hebrewOnly: props.hebrewOnly,
+								translationOnly,
+							}),
+							t("settings.seferStyle.warningMessage"),
+						)
+					: null;
 			case "hebrewOnly":
-				return (
-					<div className="px-6 py-6">
-						<div className="flex items-center justify-between">
-							<div className="flex items-center gap-4">
-								<div className="text-[var(--text-secondary)]">
-									<RetroIcons.Hebrew />
-								</div>
-								<div>
-									<div
-										className="text-lg font-semibold text-[var(--text-primary)]"
-										style={{ fontFamily: "'Inter', sans-serif" }}
-									>
-										{t("settings.hebrewOnly.title")}
-									</div>
-									<div
-										className="text-sm text-[var(--text-secondary)] mt-0.5"
-										style={{ fontFamily: "'Inter', sans-serif" }}
-									>
-										{t("settings.hebrewOnly.subtitle")}
-									</div>
-								</div>
-							</div>
-							<RetroOnOffButton
-								isOn={hebrewOnly}
-								onToggle={() => onHebrewOnlyChange(!hebrewOnly)}
-								onLabel={t("common.on")}
-								offLabel={t("common.off")}
-							/>
-						</div>
-					</div>
+				return toggle(
+					t("settings.hebrewOnly.title"),
+					props.hebrewOnly,
+					props.onHebrewOnlyChange,
+					translationOnly,
+					t("settings.translationOnly.disablesHebrewFeatures"),
 				);
 			case "qumran":
-				return (
-					<div className="px-6 py-6">
-						<div className="flex items-center justify-between">
-							<div className="flex items-center gap-4">
-								<div className="text-[var(--text-secondary)]">
-									<RetroIcons.Qumran />
-								</div>
-								<div>
-									<div
-										className="text-lg font-semibold text-[var(--text-primary)]"
-										style={{ fontFamily: "'Inter', sans-serif" }}
-									>
-										{t("settings.qumran.title")}
-									</div>
-									<div
-										className="text-sm text-[var(--text-secondary)] mt-0.5"
-										style={{ fontFamily: "'Inter', sans-serif" }}
-									>
-										{t("settings.qumran.subtitle")}
-									</div>
-								</div>
-							</div>
-							<RetroOnOffButton
-								isOn={showQumran}
-								onToggle={() => onQumranChange(!showQumran)}
-								onLabel={t("common.on")}
-								offLabel={t("common.off")}
-							/>
-						</div>
-					</div>
+				return toggle(
+					t("settings.qumran.title"),
+					props.showQumran,
+					props.onQumranChange,
+					translationOnly,
+					t("settings.translationOnly.disablesHebrewFeatures"),
 				);
-			default: {
-				const _exhaustive: never = id;
-				return _exhaustive;
-			}
 		}
 	};
-
 	return (
-		<div className="pb-24">
-			{/* General Section Header */}
-			<h3
-				className="text-base text-[var(--text-secondary)] px-6 py-4 uppercase tracking-wider font-bold"
-				style={{ fontFamily: "'Inter', sans-serif" }}
+		<main
+			dir={rtl ? "rtl" : "ltr"}
+			className="mx-auto max-w-2xl space-y-1 pb-32 text-[var(--text-primary)]"
+			style={{ fontFamily: "Inter, sans-serif" }}
+		>
+			<h1
+				className="mb-2 text-[32px] font-normal"
+				style={{ fontFamily: "Manrope, sans-serif" }}
 			>
-				{t("settings.sections.general")}
-			</h3>
-
-			{SHARED_SETTINGS_ORDER.map((id) => {
-				const row = renderSharedSetting(id);
-				if (!row) return null;
-				return (
-					<React.Fragment key={id}>
-						{row}
-						<div className="border-t border-[var(--border)]" />
-					</React.Fragment>
-				);
-			})}
-
-			{/* Design System Button */}
-			{onDesignSystemClick && (
-				<button
-					type="button"
-					onClick={onDesignSystemClick}
-					className="px-6 py-6 flex items-center justify-between w-full hover:bg-[var(--muted)] transition-all"
-				>
-					<div className="flex items-center gap-4">
-						<div className="text-[var(--text-secondary)]">
-							<RetroIcons.DesignSystem />
-						</div>
-						<div>
-							<div
-								className="text-lg font-semibold text-[var(--text-primary)]"
-								style={{ fontFamily: "'Inter', sans-serif" }}
-							>
-								{t("settings.designSystemTitle")}
-							</div>
-							<div
-								className="text-sm text-[var(--text-secondary)] mt-0.5"
-								style={{ fontFamily: "'Inter', sans-serif" }}
-							>
-								{t("settings.designSystemDescription")}
-							</div>
-						</div>
-					</div>
-				</button>
-			)}
-
-			{/* Mobile Design Guide Button */}
-			{onMobileDesignGuideClick && (
-				<>
-					{/* Divider */}
-					<div className="border-t border-[var(--border)]" />
-
+				{t("settings.title")}
+			</h1>
+			<button
+				type="button"
+				className={`${rowClass} w-full text-start`}
+				onClick={props.onAccountClick}
+			>
+				<span className="text-[15px]">{t("settings.account.title")}</span>
+				<span className="inline-flex items-center gap-1 text-[13px] text-[var(--accent-deep)]">
+					{t(
+						productApi.authenticated()
+							? "settings.account.manage"
+							: "settings.account.signIn",
+					)}
+					<Chevron size={16} />
+				</span>
+			</button>
+			{SHARED_SETTINGS_ORDER.map((id) => (
+				<Fragment key={id}>{renderSetting(id)}</Fragment>
+			))}
+			{[
+				["settings.designSystemTitle", props.onDesignSystemClick],
+				["settings.mobileDesignGuideTitle", props.onMobileDesignGuideClick],
+			].map(([label, action]) =>
+				typeof action === "function" ? (
 					<button
+						key={String(label)}
 						type="button"
-						onClick={onMobileDesignGuideClick}
-						className="px-6 py-6 flex items-center justify-between w-full hover:bg-[var(--muted)] transition-all"
+						className={`${rowClass} w-full text-start text-[15px]`}
+						onClick={action}
 					>
-						<div className="flex items-center gap-4">
-							<div className="text-[var(--text-secondary)]">
-								<RetroIcons.DesignSystem />
-							</div>
-							<div>
-								<div
-									className="text-lg font-semibold text-[var(--text-primary)]"
-									style={{ fontFamily: "'Inter', sans-serif" }}
-								>
-									{t("settings.mobileDesignGuideTitle")}
-								</div>
-								<div
-									className="text-sm text-[var(--text-secondary)] mt-0.5"
-									style={{ fontFamily: "'Inter', sans-serif" }}
-								>
-									{t("settings.mobileDesignGuideDescription")}
-								</div>
-							</div>
-						</div>
+						{t(String(label))}
+						<Chevron size={18} />
 					</button>
-				</>
+				) : null,
 			)}
-		</div>
+			{props.onOpenScreen ? (
+				<SettingsResources
+					language={props.language}
+					onOpenScreen={props.onOpenScreen}
+				/>
+			) : null}
+		</main>
 	);
 }

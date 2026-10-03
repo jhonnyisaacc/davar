@@ -6,7 +6,8 @@
     "appName": "Davar",
     "downloadOnAppStore": "Descargar en el App Store",
     "getOnGooglePlay": "Disponible en Google Play",
-    "serverWaking": "Iniciando servidor, la primera solicitud puede tardar un momento."
+    "serverWaking": "Iniciando servidor, la primera solicitud puede tardar un momento.",
+    "retry": "Reintentar"
   },
   "assemblies": {
     "splashLabel": "ASAMBLEAS",
@@ -65,7 +66,18 @@
     "account": {
       "title": "Cuenta",
       "signIn": "Iniciar sesión",
-      "manage": "Administrar cuenta"
+      "manage": "Administrar cuenta",
+      "description": "Las Escrituras siempre están disponibles sin una cuenta.",
+      "linkDescription": "Vincula una identidad verificada a esta cuenta.",
+      "emailLabel": "Correo electrónico",
+      "emailAction": "Enviar enlace de acceso",
+      "emailSent": "Revisa tu correo para encontrar el enlace de acceso.",
+      "unavailable": "No se pudo iniciar sesión. Inténtalo de nuevo.",
+      "signOut": "Cerrar sesión",
+      "save": "Guardar ajustes de lectura",
+      "load": "Cargar ajustes de la cuenta",
+      "saved": "Ajustes de lectura guardados.",
+      "loaded": "Ajustes de la cuenta cargados."
     },
     "theme": {
       "title": "Tema oscuro",
@@ -132,6 +144,16 @@
     "calendarDayPill": {
       "title": "Día del calendario siempre",
       "subtitle": "Desactivado: mostrar solo en moadim."
+    },
+    "links": {
+      "title": "Acerca de Davar",
+      "textSources": "Fuentes de los textos",
+      "commentarySources": "Fuentes de comentarios",
+      "donate": "Donar",
+      "terms": "Términos",
+      "privacy": "Privacidad",
+      "support": "Soporte",
+      "github": "GitHub"
     }
   },
   "home": {
@@ -408,5 +430,18 @@
       "aviv": "Aviv",
       "etanim": "Etanim"
     }
+  },
+  "support": {
+    "description": "¿Necesitas ayuda o quieres compartir comentarios? Contáctanos.",
+    "emailLabel": "Correo electrónico",
+    "emailAction": "Escribir a soporte",
+    "creator": "Contactar al creador",
+    "telegramAction": "Abrir Telegram"
+  },
+  "commentarySources": {
+    "description": "Comentarios publicados y enlaces a las fuentes originales.",
+    "openSource": "Abrir fuente",
+    "empty": "Todavía no se han publicado fuentes de comentarios.",
+    "unavailable": "El catálogo de artículos no está disponible. Puedes visitar la fuente de arriba."
   }
 }

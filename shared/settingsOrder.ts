@@ -5,8 +5,8 @@
  * shared between web and mobile. Platform-specific options can sit
  * beside related shared controls:
  *
- *   - Mobile only: Translation Only after Full Chapter; Nikud,
- *                  Cantillation, and Clear Storage at the end
+ *   - Both settings screens: Translation Only after Full Chapter
+ *   - Mobile only: Nikud, Cantillation, and Clear Storage at the end
  *   - Web only:    Design System, Mobile Design Guide
  *
  * Dependency rules (rendered state may gate visibility/disabled):

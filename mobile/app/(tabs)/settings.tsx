@@ -15,6 +15,7 @@ import {
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 
+import { SettingsResources } from "@/src/components/SettingsResources";
 import { PillToggle } from "@/src/components/ui/PillToggle";
 import { SettingsDropdown } from "@/src/components/ui/SettingsDropdown";
 import { getNavigationDockContentPadding } from "@/src/constants/navigationDock";
@@ -397,6 +398,7 @@ export default function SettingsScreen() {
             {t("settings.clearStorage.title")}
           </Text>
         </Pressable>
+        <SettingsResources />
       </ScrollView>
     </SafeAreaView>
   );

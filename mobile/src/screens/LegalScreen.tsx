@@ -1,11 +1,6 @@
+import { ResourceHeader } from "@/src/components/ResourcePage";
 import { useMemo } from "react";
-import {
-  Linking,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Linking, ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Markdown from "react-native-markdown-display";
 
@@ -101,6 +96,9 @@ export function LegalScreen({ kind }: LegalScreenProps) {
   const markdownStyles = useMemo(
     () => ({
       body: {
+        textAlign: language === "he" ? ("right" as const) : ("left" as const),
+        writingDirection:
+          language === "he" ? ("rtl" as const) : ("ltr" as const),
         fontFamily: "Arimo_400Regular",
         fontSize: typography.sizes.body,
         lineHeight: 26,
@@ -156,11 +154,12 @@ export function LegalScreen({ kind }: LegalScreenProps) {
         padding: spacing[2],
       },
     }),
-    [colors, themeMode],
+    [colors, themeMode, language],
   );
 
   return (
-    <SafeAreaView style={styles.safeArea} edges={["top"]}>
+    <SafeAreaView style={styles.safeArea} edges={["bottom"]}>
+      <ResourceHeader title={t(`settings.links.${kind}`)} />
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.content}>
           <View style={styles.header}>

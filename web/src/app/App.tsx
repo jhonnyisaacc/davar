@@ -1784,6 +1784,8 @@ export default function App() {
 							onSeferModeChange: handleSeferModeChange,
 							hebrewOnly,
 							onHebrewOnlyChange: handleHebrewOnlyChange,
+							translationOnly,
+							onTranslationOnlyChange: handleTranslationOnlyChange,
 							onOpenScreen: setCurrentScreen,
 							onOpenDesignSystem: () => setShowDesignSystem(true),
 							onOpenMobileDesignGuide: () => setShowMobileDesignGuide(true),

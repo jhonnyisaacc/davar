@@ -6,7 +6,8 @@
     "appName": "Davar",
     "downloadOnAppStore": "Download on the App Store",
     "getOnGooglePlay": "Get it on Google Play",
-    "serverWaking": "Waking server, first request may take a moment."
+    "serverWaking": "Waking server, first request may take a moment.",
+    "retry": "Retry"
   },
   "assemblies": {
     "splashLabel": "ASSEMBLIES",
@@ -65,7 +66,18 @@
     "account": {
       "title": "Account",
       "signIn": "Sign In",
-      "manage": "Manage account"
+      "manage": "Manage account",
+      "description": "Scripture is always available without an account.",
+      "linkDescription": "Link a verified identity to this account.",
+      "emailLabel": "Email",
+      "emailAction": "Send sign-in link",
+      "emailSent": "Check your email for a sign-in link.",
+      "unavailable": "Unable to sign in. Please try again.",
+      "signOut": "Sign out",
+      "save": "Save reading settings",
+      "load": "Load account settings",
+      "saved": "Reading settings saved.",
+      "loaded": "Account settings loaded."
     },
     "theme": {
       "title": "Dark theme",
@@ -132,6 +144,16 @@
     "calendarDayPill": {
       "title": "Day pill on all days",
       "subtitle": "Off: show only on moadim."
+    },
+    "links": {
+      "title": "About Davar",
+      "textSources": "Text Sources",
+      "commentarySources": "Commentary Sources",
+      "donate": "Donate",
+      "terms": "Terms",
+      "privacy": "Privacy",
+      "support": "Support",
+      "github": "GitHub"
     }
   },
   "home": {
@@ -408,5 +430,18 @@
       "aviv": "Aviv",
       "etanim": "Etanim"
     }
+  },
+  "support": {
+    "description": "Need help or want to share feedback? Get in touch.",
+    "emailLabel": "Email",
+    "emailAction": "Email support",
+    "creator": "Contact the creator",
+    "telegramAction": "Open Telegram"
+  },
+  "commentarySources": {
+    "description": "Published commentary and original source links.",
+    "openSource": "Open source",
+    "empty": "No commentary sources have been published yet.",
+    "unavailable": "The article catalog is unavailable. You can still visit the source above."
   }
 }

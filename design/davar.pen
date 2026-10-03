@@ -21266,10 +21266,10 @@
                       "type": "frame",
                       "id": "CvoMv",
                       "name": "DAVAR-SETTINGS-01 screen",
-                      "context": "Day pill on all days defaults to off. Off still shows the day pill on confirmed moadim. On shows it on every confirmed day in the reading screen, above the book/chapter pill.",
+                      "context": "Day pill on all days defaults to off. Off still shows the day pill on confirmed moadim. On shows it on every confirmed day in the reading screen, above the book/chapter pill. Scrollable settings. Sign In opens the account screen. Translation only follows Full chapter. About Davar links are the last rows, with clearance above the navigation dock.",
                       "clip": true,
                       "width": 390,
-                      "height": 900,
+                      "height": 1380,
                       "fill": "$surface-primary",
                       "layout": "vertical",
                       "children": [
@@ -21298,6 +21298,37 @@
                               "fontFamily": "$font-display",
                               "fontSize": 32,
                               "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "gJn28",
+                              "name": "Sign In CTA",
+                              "width": "fill_container",
+                              "height": 50,
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "TvYeE",
+                                  "name": "Sign In label",
+                                  "fill": "$text-primary",
+                                  "content": "Account",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 15,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "bKIRU",
+                                  "name": "Open account",
+                                  "fill": "$accent-deep",
+                                  "content": "Sign In  ›",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 13,
+                                  "fontWeight": "normal"
+                                }
+                              ]
                             },
                             {
                               "type": "frame",
@@ -21463,6 +21494,36 @@
                             },
                             {
                               "type": "frame",
+                              "id": "TY1YU",
+                              "name": "Translation only",
+                              "width": "fill_container",
+                              "padding": [
+                                10,
+                                0
+                              ],
+                              "justifyContent": "space_between",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "t7FNI",
+                                  "name": "Translation only t",
+                                  "fill": "$text-primary",
+                                  "content": "Translation only",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 15,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "id": "FmC9g",
+                                  "type": "ref",
+                                  "ref": "e4wMhp",
+                                  "name": "Translation only sw"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
                               "id": "q7xOvK",
                               "name": "Day pill on all days setting",
                               "width": "fill_container",
@@ -21609,36 +21670,6 @@
                             },
                             {
                               "type": "frame",
-                              "id": "TY1YU",
-                              "name": "Translation only",
-                              "width": "fill_container",
-                              "padding": [
-                                10,
-                                0
-                              ],
-                              "justifyContent": "space_between",
-                              "alignItems": "center",
-                              "children": [
-                                {
-                                  "type": "text",
-                                  "id": "t7FNI",
-                                  "name": "Translation only t",
-                                  "fill": "$text-primary",
-                                  "content": "Translation only",
-                                  "fontFamily": "Inter",
-                                  "fontSize": 15,
-                                  "fontWeight": "normal"
-                                },
-                                {
-                                  "id": "FmC9g",
-                                  "type": "ref",
-                                  "ref": "e4wMhp",
-                                  "name": "Translation only sw"
-                                }
-                              ]
-                            },
-                            {
-                              "type": "frame",
                               "id": "hgNCi",
                               "name": "Nikud",
                               "width": "fill_container",
@@ -21706,6 +21737,248 @@
                               "fontFamily": "Inter",
                               "fontSize": 15,
                               "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "krK8J",
+                              "name": "About Davar — Settings CTAs",
+                              "width": "fill_container",
+                              "layout": "vertical",
+                              "padding": [
+                                20,
+                                0,
+                                12,
+                                0
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Lotem",
+                                  "name": "About heading",
+                                  "fill": "$text-secondary",
+                                  "content": "About Davar",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 13,
+                                  "fontWeight": "500"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "a55hYO",
+                                  "name": "Text Sources CTA",
+                                  "width": "fill_container",
+                                  "height": 50,
+                                  "justifyContent": "space_between",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "D4r5f",
+                                      "name": "Text Sources label",
+                                      "fill": "$text-primary",
+                                      "content": "Text Sources",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 15,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "l61JB",
+                                      "name": "Text Sources destination",
+                                      "fill": "$text-secondary",
+                                      "content": "›",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 20,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "Yt1jj",
+                                  "name": "Commentary Sources CTA",
+                                  "width": "fill_container",
+                                  "height": 50,
+                                  "justifyContent": "space_between",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "KcRwH",
+                                      "name": "Commentary Sources label",
+                                      "fill": "$text-primary",
+                                      "content": "Commentary Sources",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 15,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "aJqNv",
+                                      "name": "Commentary Sources destination",
+                                      "fill": "$text-secondary",
+                                      "content": "›",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 20,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "S0wpv",
+                                  "name": "Donate CTA",
+                                  "width": "fill_container",
+                                  "height": 50,
+                                  "justifyContent": "space_between",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "ZtVUV",
+                                      "name": "Donate label",
+                                      "fill": "$text-primary",
+                                      "content": "Donate",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 15,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "ddjre",
+                                      "name": "Donate destination",
+                                      "fill": "$text-secondary",
+                                      "content": "›",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 20,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "ovMSC",
+                                  "name": "Terms CTA",
+                                  "width": "fill_container",
+                                  "height": 50,
+                                  "justifyContent": "space_between",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "Iamhp",
+                                      "name": "Terms label",
+                                      "fill": "$text-primary",
+                                      "content": "Terms",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 15,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "XYK1g",
+                                      "name": "Terms destination",
+                                      "fill": "$text-secondary",
+                                      "content": "›",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 20,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "vmzYb",
+                                  "name": "Privacy CTA",
+                                  "width": "fill_container",
+                                  "height": 50,
+                                  "justifyContent": "space_between",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "AdWUA",
+                                      "name": "Privacy label",
+                                      "fill": "$text-primary",
+                                      "content": "Privacy",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 15,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "GM1Go",
+                                      "name": "Privacy destination",
+                                      "fill": "$text-secondary",
+                                      "content": "›",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 20,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "fXRSa",
+                                  "name": "Support CTA",
+                                  "width": "fill_container",
+                                  "height": 50,
+                                  "justifyContent": "space_between",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "DtqSX",
+                                      "name": "Support label",
+                                      "fill": "$text-primary",
+                                      "content": "Support",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 15,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "Ctjj9",
+                                      "name": "Support destination",
+                                      "fill": "$text-secondary",
+                                      "content": "›",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 20,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "WnCjQ",
+                                  "name": "GitHub CTA",
+                                  "width": "fill_container",
+                                  "height": 50,
+                                  "justifyContent": "space_between",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "DlE1G",
+                                      "name": "GitHub label",
+                                      "fill": "$text-primary",
+                                      "content": "GitHub",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 15,
+                                      "fontWeight": "normal"
+                                    },
+                                    {
+                                      "type": "text",
+                                      "id": "XBFER",
+                                      "name": "GitHub destination",
+                                      "fill": "$text-secondary",
+                                      "content": "↗",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 20,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                }
+                              ]
                             }
                           ]
                         },
@@ -29507,6 +29780,2815 @@
           "fontFamily": "$font-ui",
           "fontSize": 13,
           "fontWeight": "normal"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "wNwzW",
+      "x": 0,
+      "y": 27697,
+      "name": "10 — Settings resources · mobile and web",
+      "width": 5780,
+      "fill": "$surface-elevated",
+      "layout": "vertical",
+      "gap": 32,
+      "padding": 32,
+      "children": [
+        {
+          "type": "text",
+          "id": "pYsc7",
+          "name": "Resources flow title",
+          "fill": "$text-primary",
+          "content": "Settings → Sources, Giving, Legal & Support",
+          "fontFamily": "Manrope",
+          "fontSize": 32,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "frame",
+          "id": "KO7Ux",
+          "name": "Mobile destination screens",
+          "width": "fill_container",
+          "height": 1790,
+          "gap": 24,
+          "children": [
+            {
+              "type": "frame",
+              "id": "Zqgpr",
+              "name": "DAVAR-SOURCES-MOBILE-01",
+              "context": "Opened from Settings. Back returns to Settings. Content scrolls; the complete existing attribution and legal documents are preserved in the app.",
+              "clip": true,
+              "width": 390,
+              "height": 1790,
+              "fill": "$surface-primary",
+              "layout": "vertical",
+              "gap": 20,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Tm7yL",
+                  "name": "Back to Settings",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "‹  Settings",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "I58Du",
+                  "name": "Text Sources heading",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Text Sources",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 32,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "QAdkY",
+                  "name": "hebrewText source",
+                  "width": "fill_container",
+                  "fill": "$surface-secondary",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "bXPlz",
+                      "name": "hebrewText label",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Hebrew text",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "rkqDb",
+                      "name": "hebrewText value",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Masoretic & Qumran",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "o31LI",
+                  "name": "besorah source",
+                  "width": "fill_container",
+                  "fill": "$surface-secondary",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "KGR3I",
+                      "name": "besorah label",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Besorah",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "L0i9Aj",
+                      "name": "besorah value",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Delitzsch (1877), Hutter (1599–1602)",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Vjqcb",
+                      "name": "greekText label",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Greek text",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Qgu1q",
+                      "name": "greekText value",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "SBLGNT (Holmes 2010)",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "KJKZi",
+                      "name": "greekTags label",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Greek tagging",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "v8Pcg",
+                      "name": "greekTags value",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "STEPBible TAGNT",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "H0sTf",
+                      "name": "greekLexicon label",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Greek lexicon",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "fRLvv",
+                      "name": "greekLexicon value",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "TBESG (English), UBS (Spanish)",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "cv9k3",
+                  "name": "spanishTranslation source",
+                  "width": "fill_container",
+                  "fill": "$surface-secondary",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "VPSuV",
+                      "name": "spanishTranslation label",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Spanish translation",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "KbHIy",
+                      "name": "spanishTranslation value",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "TTH (primary), BES (fallback)",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "CX3Ux",
+                  "name": "englishTranslation source",
+                  "width": "fill_container",
+                  "fill": "$surface-secondary",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "IEPhz",
+                      "name": "englishTranslation label",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "English translation",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "T3RpzP",
+                      "name": "englishTranslation value",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "TS2009",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "X9aEz",
+                  "name": "dictionary source",
+                  "width": "fill_container",
+                  "fill": "$surface-secondary",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "u376XM",
+                      "name": "dictionary label",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Dictionary",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "yhTIL",
+                      "name": "dictionary value",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Strong, BDB, custom (selected words)",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "c5VOP",
+                  "name": "Attribution",
+                  "width": "fill_container",
+                  "fill": "$surface-secondary",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "xR45H",
+                      "name": "Attribution heading",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Attribution",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "peCiu",
+                      "name": "stepbible attribution",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Greek word tags and English lexical data are from STEP Bible (www.STEPBible.org), based on work at Tyndale House, Cambridge, licensed under CC BY 4.0. Source: https://github.com/STEPBible/STEPBible-Data. Modifications, if any, are recorded with the data revision.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "LT6Xr",
+                      "name": "sblgnt attribution",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "The displayed Greek reading is the SBL Greek New Testament, edited by Michael W. Holmes. Copyright © 2010 Society of Biblical Literature and Logos Bible Software. Licensed under CC BY 4.0. https://sblgnt.com/license/",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "AT8pl",
+                      "name": "ubs attribution",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Spanish lexical entries adapted from the UBS Dictionary of the Greek New Testament © United Bible Societies, licensed under CC BY-SA 4.0. https://github.com/ubsicap/ubs-open-license. Adaptations of this material must remain CC BY-SA 4.0.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "xMWNR",
+              "name": "DAVAR-COMMENTARY-SOURCES-MOBILE-01",
+              "context": "Opened from Settings. Back returns to Settings. Content scrolls; the complete existing attribution and legal documents are preserved in the app.",
+              "clip": true,
+              "width": 390,
+              "height": 900,
+              "fill": "$surface-primary",
+              "layout": "vertical",
+              "gap": 20,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "F9omnY",
+                  "name": "Back to Settings",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "‹  Settings",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "Cvgb3",
+                  "name": "Commentary Sources heading",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Commentary Sources",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 32,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "ujZkf",
+                  "name": "Commentary introduction",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Published commentary and original source links.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "VfFAb",
+                  "name": "Commentary source",
+                  "width": "fill_container",
+                  "fill": "$surface-secondary",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "yRt8L",
+                      "name": "Source name",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Shaul",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 20,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "JJfxX",
+                      "name": "Source URL",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "shaul.vercel.app",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Q5oey",
+                      "name": "Published source attribution",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Each published article includes its original source link and attribution.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "id": "cJ4dy",
+                      "type": "ref",
+                      "ref": "zQiQh",
+                      "name": "Open commentary source",
+                      "width": "fill_container",
+                      "descendants": {
+                        "f8cF5q": {
+                          "content": "Open source"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "r44TC",
+                  "name": "Empty catalog state",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "No commentary sources have been published yet.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Bwr7j",
+              "name": "DAVAR-DONATE-MOBILE-01",
+              "context": "Opened from Settings. Back returns to Settings. Content scrolls; the complete existing attribution and legal documents are preserved in the app.",
+              "clip": true,
+              "width": 390,
+              "height": 900,
+              "fill": "$surface-primary",
+              "layout": "vertical",
+              "gap": 20,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "EpJnN",
+                  "name": "Back to Settings",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "‹  Settings",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "ly9r9",
+                  "name": "Donate heading",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Donate",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 32,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "lkOwz",
+                  "name": "Giving introduction",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Support the development of Davar.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "iFkGM",
+                  "name": "Giving options",
+                  "width": "fill_container",
+                  "fill": "$surface-secondary",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "id": "qMSk9",
+                      "type": "ref",
+                      "ref": "zQiQh",
+                      "name": "Support on Ko-fi button",
+                      "width": "fill_container",
+                      "descendants": {
+                        "f8cF5q": {
+                          "content": "Support on Ko-fi"
+                        }
+                      }
+                    },
+                    {
+                      "id": "SSjzz",
+                      "type": "ref",
+                      "ref": "zQiQh",
+                      "name": "GitHub Sponsors button",
+                      "width": "fill_container",
+                      "descendants": {
+                        "f8cF5q": {
+                          "content": "GitHub Sponsors"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "x1C51",
+              "name": "DAVAR-TERMS-MOBILE-01",
+              "context": "Opened from Settings. Back returns to Settings. Content scrolls; the complete existing attribution and legal documents are preserved in the app.",
+              "clip": true,
+              "width": 390,
+              "height": 900,
+              "fill": "$surface-primary",
+              "layout": "vertical",
+              "gap": 20,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "O3E1H",
+                  "name": "Back to Settings",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "‹  Settings",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "p0xNBC",
+                  "name": "Terms heading",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Terms",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 32,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "yVbWi",
+                  "name": "Terms document",
+                  "width": "fill_container",
+                  "fill": "$surface-secondary",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "S1AZbk",
+                      "name": "Document title",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Terms of Use",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 24,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "wnZ8l",
+                      "name": "Document content",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Davar is a non-commercial, open-source project created to facilitate reading, studying, and meditating on the Hebrew Scriptures. The Services are provided \"as is\" without any warranty of accuracy, completeness, or fitness for any particular purpose beyond personal, non-commercial use.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "m8aTK",
+                      "name": "Legal contact",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "For questions: hi@davar.bible",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "sX9Fa",
+              "name": "DAVAR-PRIVACY-MOBILE-01",
+              "context": "Opened from Settings. Back returns to Settings. Content scrolls; the complete existing attribution and legal documents are preserved in the app.",
+              "clip": true,
+              "width": 390,
+              "height": 900,
+              "fill": "$surface-primary",
+              "layout": "vertical",
+              "gap": 20,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "xCTpy",
+                  "name": "Back to Settings",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "‹  Settings",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "NBl8c",
+                  "name": "Privacy heading",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Privacy",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 32,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "F59AaU",
+                  "name": "Privacy document",
+                  "width": "fill_container",
+                  "fill": "$surface-secondary",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "l5pJ8f",
+                      "name": "Document title",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Privacy Policy",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 24,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "fK3Yv",
+                      "name": "Document content",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Davar (the \"App\" and \"Website\") is an open-source project providing access to the Hebrew Bible (Tanakh) in its original language. The App is available on the Apple App Store and Google Play Store, and the Website is hosted at https://davar.bible. This Privacy Policy explains our practices regarding any information when you use the App or visit the Website.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "nwInf",
+                      "name": "Legal contact",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "For questions: hi@davar.bible",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "pZSIt",
+              "name": "DAVAR-SUPPORT-MOBILE-01",
+              "context": "Opened from Settings. Back returns to Settings. Content scrolls; the complete existing attribution and legal documents are preserved in the app.",
+              "clip": true,
+              "width": 390,
+              "height": 900,
+              "fill": "$surface-primary",
+              "layout": "vertical",
+              "gap": 20,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "n0DHQ4",
+                  "name": "Back to Settings",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "‹  Settings",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "fcM9C",
+                  "name": "Support heading",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Support",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 32,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "CGrM4",
+                  "name": "Support introduction",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Need help or want to share feedback? Get in touch.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "lPE5k",
+                  "name": "Contact support",
+                  "width": "fill_container",
+                  "fill": "$surface-secondary",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "hoB7K",
+                      "name": "Email label",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Email",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "veX4M",
+                      "name": "Support email",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "hi@davar.bible",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 20,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "id": "j7Uai",
+                      "type": "ref",
+                      "ref": "zQiQh",
+                      "name": "Email support CTA",
+                      "width": "fill_container",
+                      "descendants": {
+                        "f8cF5q": {
+                          "content": "Email support"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "w82GXR",
+                  "name": "Creator Telegram",
+                  "width": "fill_container",
+                  "fill": "$surface-secondary",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "bfrAd",
+                      "name": "Creator label",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Contact the creator",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "hlTLU",
+                      "name": "Telegram handle",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "@jhonnyisaacc",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "id": "K9jrau",
+                      "type": "ref",
+                      "ref": "zQiQh",
+                      "name": "Telegram CTA",
+                      "width": "fill_container",
+                      "descendants": {
+                        "f8cF5q": {
+                          "content": "Open Telegram"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "FIsiA",
+          "name": "Web destination screens",
+          "width": "fill_container",
+          "height": 1380,
+          "gap": 24,
+          "children": [
+            {
+              "type": "frame",
+              "id": "l4Ajtc",
+              "name": "DAVAR-SOURCES-WEB-01",
+              "context": "Opened from Settings. Back returns to Settings. Content scrolls; the complete existing attribution and legal documents are preserved in the app.",
+              "clip": true,
+              "width": 900,
+              "height": 1380,
+              "fill": "$surface-primary",
+              "layout": "vertical",
+              "gap": 20,
+              "padding": 40,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Um9Vt",
+                  "name": "Back to Settings",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "‹  Settings",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "pQBpL",
+                  "name": "Text Sources heading",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Text Sources",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 32,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "zC91B",
+                  "name": "Text source grid",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "PGBzy",
+                      "name": "Source row 1",
+                      "width": "fill_container",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "nehfU",
+                          "name": "hebrewText source",
+                          "width": "fill_container",
+                          "fill": "$surface-secondary",
+                          "cornerRadius": 20,
+                          "layout": "vertical",
+                          "gap": 12,
+                          "padding": 20,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Es6xL",
+                              "name": "hebrewText label",
+                              "fill": "$text-secondary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Hebrew text",
+                              "lineHeight": 1.5,
+                              "fontFamily": "Inter",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "p4dN3e",
+                              "name": "hebrewText value",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Masoretic & Qumran",
+                              "lineHeight": 1.5,
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "OmSzJ",
+                          "name": "besorah source",
+                          "width": "fill_container",
+                          "fill": "$surface-secondary",
+                          "cornerRadius": 20,
+                          "layout": "vertical",
+                          "gap": 12,
+                          "padding": 20,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "cXFhU",
+                              "name": "besorah label",
+                              "fill": "$text-secondary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Besorah",
+                              "lineHeight": 1.5,
+                              "fontFamily": "Inter",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "KA8NB",
+                              "name": "besorah value",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Delitzsch (1877), Hutter (1599–1602)",
+                              "lineHeight": 1.5,
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "KHsek",
+                      "name": "Source row 2",
+                      "width": "fill_container",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "E19vRa",
+                          "name": "greekText source",
+                          "width": "fill_container",
+                          "fill": "$surface-secondary",
+                          "cornerRadius": 20,
+                          "layout": "vertical",
+                          "gap": 12,
+                          "padding": 20,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "ad85x",
+                              "name": "greekText label",
+                              "fill": "$text-secondary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Greek text",
+                              "lineHeight": 1.5,
+                              "fontFamily": "Inter",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "R5SBE",
+                              "name": "greekText value",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "SBLGNT (Holmes 2010)",
+                              "lineHeight": 1.5,
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "rvrip",
+                          "name": "greekTags source",
+                          "width": "fill_container",
+                          "fill": "$surface-secondary",
+                          "cornerRadius": 20,
+                          "layout": "vertical",
+                          "gap": 12,
+                          "padding": 20,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "k1ikia",
+                              "name": "greekTags label",
+                              "fill": "$text-secondary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Greek tagging",
+                              "lineHeight": 1.5,
+                              "fontFamily": "Inter",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "aheC2",
+                              "name": "greekTags value",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "STEPBible TAGNT",
+                              "lineHeight": 1.5,
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "NSOxf",
+                      "name": "Source row 3",
+                      "width": "fill_container",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "K4olfB",
+                          "name": "greekLexicon source",
+                          "width": "fill_container",
+                          "fill": "$surface-secondary",
+                          "cornerRadius": 20,
+                          "layout": "vertical",
+                          "gap": 12,
+                          "padding": 20,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "WetSf",
+                              "name": "greekLexicon label",
+                              "fill": "$text-secondary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Greek lexicon",
+                              "lineHeight": 1.5,
+                              "fontFamily": "Inter",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "fHLDL",
+                              "name": "greekLexicon value",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "TBESG (English), UBS (Spanish)",
+                              "lineHeight": 1.5,
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "CaZ6T",
+                          "name": "spanishTranslation source",
+                          "width": "fill_container",
+                          "fill": "$surface-secondary",
+                          "cornerRadius": 20,
+                          "layout": "vertical",
+                          "gap": 12,
+                          "padding": 20,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "GNlUF",
+                              "name": "spanishTranslation label",
+                              "fill": "$text-secondary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Spanish translation",
+                              "lineHeight": 1.5,
+                              "fontFamily": "Inter",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "CpjYU",
+                              "name": "spanishTranslation value",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "TTH (primary), BES (fallback)",
+                              "lineHeight": 1.5,
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "RGK9l",
+                      "name": "Source row 4",
+                      "width": "fill_container",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Y2Sj2",
+                          "name": "englishTranslation source",
+                          "width": "fill_container",
+                          "fill": "$surface-secondary",
+                          "cornerRadius": 20,
+                          "layout": "vertical",
+                          "gap": 12,
+                          "padding": 20,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "B97y4",
+                              "name": "englishTranslation label",
+                              "fill": "$text-secondary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "English translation",
+                              "lineHeight": 1.5,
+                              "fontFamily": "Inter",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "e1go2C",
+                              "name": "englishTranslation value",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "TS2009",
+                              "lineHeight": 1.5,
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "qhhj4",
+                          "name": "dictionary source",
+                          "width": "fill_container",
+                          "fill": "$surface-secondary",
+                          "cornerRadius": 20,
+                          "layout": "vertical",
+                          "gap": 12,
+                          "padding": 20,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "PzlHs",
+                              "name": "dictionary label",
+                              "fill": "$text-secondary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Dictionary",
+                              "lineHeight": 1.5,
+                              "fontFamily": "Inter",
+                              "fontSize": 13,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "text",
+                              "id": "CM5GY",
+                              "name": "dictionary value",
+                              "fill": "$text-primary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Strong, BDB, custom (selected words)",
+                              "lineHeight": 1.5,
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "PP8ex",
+                  "name": "Attribution",
+                  "width": "fill_container",
+                  "fill": "$surface-secondary",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "zYKks",
+                      "name": "Attribution heading",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Attribution",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "OQvmR",
+                      "name": "stepbible attribution",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Greek word tags and English lexical data are from STEP Bible (www.STEPBible.org), based on work at Tyndale House, Cambridge, licensed under CC BY 4.0. Source: https://github.com/STEPBible/STEPBible-Data. Modifications, if any, are recorded with the data revision.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "GKuf1",
+                      "name": "sblgnt attribution",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "The displayed Greek reading is the SBL Greek New Testament, edited by Michael W. Holmes. Copyright © 2010 Society of Biblical Literature and Logos Bible Software. Licensed under CC BY 4.0. https://sblgnt.com/license/",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "TGF7E",
+                      "name": "ubs attribution",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Spanish lexical entries adapted from the UBS Dictionary of the Greek New Testament © United Bible Societies, licensed under CC BY-SA 4.0. https://github.com/ubsicap/ubs-open-license. Adaptations of this material must remain CC BY-SA 4.0.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "HoCsh",
+              "name": "DAVAR-COMMENTARY-SOURCES-WEB-01",
+              "context": "Opened from Settings. Back returns to Settings. Content scrolls; the complete existing attribution and legal documents are preserved in the app.",
+              "clip": true,
+              "width": 900,
+              "height": 900,
+              "fill": "$surface-primary",
+              "layout": "vertical",
+              "gap": 20,
+              "padding": 40,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "nuWSH",
+                  "name": "Back to Settings",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "‹  Settings",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "EzJ3I",
+                  "name": "Commentary Sources heading",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Commentary Sources",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 32,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "DqdMG",
+                  "name": "Commentary introduction",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Published commentary and original source links.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "QdppJ",
+                  "name": "Commentary source",
+                  "width": "fill_container",
+                  "fill": "$surface-secondary",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Jwt5s",
+                      "name": "Source name",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Shaul",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 20,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "yL01p",
+                      "name": "Source URL",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "shaul.vercel.app",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "cc7xx",
+                      "name": "Published source attribution",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Each published article includes its original source link and attribution.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "id": "zVfHM",
+                      "type": "ref",
+                      "ref": "zQiQh",
+                      "name": "Open commentary source",
+                      "width": "fill_container",
+                      "descendants": {
+                        "f8cF5q": {
+                          "content": "Open source"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "aX1jx",
+                  "name": "Empty catalog state",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "No commentary sources have been published yet.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "bZkqe",
+              "name": "DAVAR-DONATE-WEB-01",
+              "context": "Opened from Settings. Back returns to Settings. Content scrolls; the complete existing attribution and legal documents are preserved in the app.",
+              "clip": true,
+              "width": 900,
+              "height": 900,
+              "fill": "$surface-primary",
+              "layout": "vertical",
+              "gap": 20,
+              "padding": 40,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "nMyTG",
+                  "name": "Back to Settings",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "‹  Settings",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "BdqOp",
+                  "name": "Donate heading",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Donate",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 32,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "Coi3C",
+                  "name": "Giving introduction",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Support the development of Davar.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "ZpxUN",
+                  "name": "Giving options",
+                  "width": "fill_container",
+                  "fill": "$surface-secondary",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "id": "y9gSl",
+                      "type": "ref",
+                      "ref": "zQiQh",
+                      "name": "Support on Ko-fi button",
+                      "width": "fill_container",
+                      "descendants": {
+                        "f8cF5q": {
+                          "content": "Support on Ko-fi"
+                        }
+                      }
+                    },
+                    {
+                      "id": "Q2Yhs2",
+                      "type": "ref",
+                      "ref": "zQiQh",
+                      "name": "GitHub Sponsors button",
+                      "width": "fill_container",
+                      "descendants": {
+                        "f8cF5q": {
+                          "content": "GitHub Sponsors"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "fDNBh",
+              "name": "DAVAR-TERMS-WEB-01",
+              "context": "Opened from Settings. Back returns to Settings. Content scrolls; the complete existing attribution and legal documents are preserved in the app.",
+              "clip": true,
+              "width": 900,
+              "height": 900,
+              "fill": "$surface-primary",
+              "layout": "vertical",
+              "gap": 20,
+              "padding": 40,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "e2pxP",
+                  "name": "Back to Settings",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "‹  Settings",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "L7opt",
+                  "name": "Terms heading",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Terms",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 32,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "tQdFf",
+                  "name": "Terms document",
+                  "width": "fill_container",
+                  "fill": "$surface-secondary",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "gSCGd",
+                      "name": "Document title",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Terms of Use",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 24,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dKBzl",
+                      "name": "Document content",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Davar is a non-commercial, open-source project created to facilitate reading, studying, and meditating on the Hebrew Scriptures. The Services are provided \"as is\" without any warranty of accuracy, completeness, or fitness for any particular purpose beyond personal, non-commercial use.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "usYXO",
+                      "name": "Legal contact",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "For questions: hi@davar.bible",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "oMDYO",
+              "name": "DAVAR-PRIVACY-WEB-01",
+              "context": "Opened from Settings. Back returns to Settings. Content scrolls; the complete existing attribution and legal documents are preserved in the app.",
+              "clip": true,
+              "width": 900,
+              "height": 900,
+              "fill": "$surface-primary",
+              "layout": "vertical",
+              "gap": 20,
+              "padding": 40,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "y8OrzP",
+                  "name": "Back to Settings",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "‹  Settings",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "nuHkX",
+                  "name": "Privacy heading",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Privacy",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 32,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "fkrO6",
+                  "name": "Privacy document",
+                  "width": "fill_container",
+                  "fill": "$surface-secondary",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "bGmgt",
+                      "name": "Document title",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Privacy Policy",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 24,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "c4zK2",
+                      "name": "Document content",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Davar (the \"App\" and \"Website\") is an open-source project providing access to the Hebrew Bible (Tanakh) in its original language. The App is available on the Apple App Store and Google Play Store, and the Website is hosted at https://davar.bible. This Privacy Policy explains our practices regarding any information when you use the App or visit the Website.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "P5QCr",
+                      "name": "Legal contact",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "For questions: hi@davar.bible",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "t5Ehj",
+              "name": "DAVAR-SUPPORT-WEB-01",
+              "context": "Opened from Settings. Back returns to Settings. Content scrolls; the complete existing attribution and legal documents are preserved in the app.",
+              "clip": true,
+              "width": 900,
+              "height": 900,
+              "fill": "$surface-primary",
+              "layout": "vertical",
+              "gap": 20,
+              "padding": 40,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "XgJ7Z",
+                  "name": "Back to Settings",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "‹  Settings",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "pPFPQ",
+                  "name": "Support heading",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Support",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 32,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "RsQBa",
+                  "name": "Support introduction",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Need help or want to share feedback? Get in touch.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "Y4Mad",
+                  "name": "Contact support",
+                  "width": "fill_container",
+                  "fill": "$surface-secondary",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "HrYe2",
+                      "name": "Email label",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Email",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "wnrgC",
+                      "name": "Support email",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "hi@davar.bible",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 20,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "id": "mP7Ih",
+                      "type": "ref",
+                      "ref": "zQiQh",
+                      "name": "Email support CTA",
+                      "width": "fill_container",
+                      "descendants": {
+                        "f8cF5q": {
+                          "content": "Email support"
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "cNCEp",
+                  "name": "Creator Telegram",
+                  "width": "fill_container",
+                  "fill": "$surface-secondary",
+                  "cornerRadius": 20,
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "PJG99",
+                      "name": "Creator label",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Contact the creator",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "z8iYOb",
+                      "name": "Telegram handle",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "@jhonnyisaacc",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "id": "tLesr",
+                      "type": "ref",
+                      "ref": "zQiQh",
+                      "name": "Telegram CTA",
+                      "width": "fill_container",
+                      "descendants": {
+                        "f8cF5q": {
+                          "content": "Open Telegram"
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "oJUAi",
+      "x": 5860,
+      "y": 27697,
+      "name": "DAVAR-SETTINGS-WEB-01",
+      "context": "Settings use the same order as mobile. Account opens a separate sign-in screen. About Davar links appear at the end, with bottom navigation clearance.",
+      "clip": true,
+      "width": 900,
+      "height": 1280,
+      "fill": "$surface-primary",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "RQV54",
+          "name": "Settings content",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "gap": 4,
+          "padding": 40,
+          "children": [
+            {
+              "type": "text",
+              "id": "Ks0Va",
+              "name": "H",
+              "fill": "$text-primary",
+              "content": "Settings",
+              "fontFamily": "$font-display",
+              "fontSize": 32,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "O9149",
+              "name": "Sign In CTA",
+              "width": "fill_container",
+              "height": 50,
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "wTfKp",
+                  "name": "Sign In label",
+                  "fill": "$text-primary",
+                  "content": "Account",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "bJbpU",
+                  "name": "Open account",
+                  "fill": "$accent-deep",
+                  "content": "Sign In  ›",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "a04JSm",
+              "name": "Dark theme",
+              "width": "fill_container",
+              "padding": [
+                10,
+                0
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "npOit",
+                  "name": "Dark theme t",
+                  "fill": "$text-primary",
+                  "content": "Dark theme",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                },
+                {
+                  "id": "o8sljz",
+                  "type": "ref",
+                  "ref": "e4wMhp",
+                  "name": "Dark theme sw"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "z8EMB2",
+              "name": "Language",
+              "width": "fill_container",
+              "padding": [
+                10,
+                0
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ETGJC",
+                  "name": "Language t",
+                  "fill": "$text-primary",
+                  "content": "Language",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "xWGq1",
+                  "name": "Language v",
+                  "fill": "$text-secondary",
+                  "content": "English",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "n1tyPh",
+              "name": "Besorah language",
+              "width": "fill_container",
+              "padding": [
+                10,
+                0
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "DXMGc",
+                  "name": "Besorah language t",
+                  "fill": "$text-primary",
+                  "content": "Besorah language",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "d7Q9Ld",
+                  "name": "Besorah language v",
+                  "fill": "$text-secondary",
+                  "content": "Hebrew",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "qb44i",
+              "name": "Besorah text",
+              "width": "fill_container",
+              "padding": [
+                10,
+                0
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "BQHTx",
+                  "name": "Besorah text t",
+                  "fill": "$text-primary",
+                  "content": "Besorah text",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "bAUqX",
+                  "name": "Besorah text v",
+                  "fill": "$text-secondary",
+                  "content": "Delitzsch",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "kNlIQ",
+              "name": "Full chapter",
+              "width": "fill_container",
+              "padding": [
+                10,
+                0
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "KtbcO",
+                  "name": "Full chapter t",
+                  "fill": "$text-primary",
+                  "content": "Full chapter",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                },
+                {
+                  "id": "YCHpC",
+                  "type": "ref",
+                  "ref": "e4wMhp",
+                  "name": "Full chapter sw"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "VkrvE",
+              "name": "Translation only",
+              "width": "fill_container",
+              "padding": [
+                10,
+                0
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "s8Ndt",
+                  "name": "Translation only t",
+                  "fill": "$text-primary",
+                  "content": "Translation only",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                },
+                {
+                  "id": "m3T2yU",
+                  "type": "ref",
+                  "ref": "e4wMhp",
+                  "name": "Translation only sw"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "YNJcb",
+              "name": "Day pill on all days setting",
+              "width": "fill_container",
+              "gap": 12,
+              "padding": [
+                10,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "NNzZ9",
+                  "name": "Day pill preference text",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "F9BS8",
+                      "name": "Day pill setting label",
+                      "fill": "$text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Day pill on all days",
+                      "fontFamily": "$font-ui",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "T5RAuJ",
+                      "name": "Day pill setting explanation",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Off: show only on moadim.",
+                      "lineHeight": 1.4,
+                      "fontFamily": "$font-ui",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "id": "Umrj7",
+                  "type": "ref",
+                  "ref": "e4wMhp",
+                  "name": "Day pill on all days · off by default",
+                  "context": "Default false. When enabled, the reading day pill is shown on all confirmed days."
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "qaFhY",
+              "name": "Sefer style",
+              "width": "fill_container",
+              "padding": [
+                10,
+                0
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "cWkdI",
+                  "name": "Sefer style t",
+                  "fill": "$text-primary",
+                  "content": "Sefer style",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                },
+                {
+                  "id": "AiU2o",
+                  "type": "ref",
+                  "ref": "e4wMhp",
+                  "name": "Sefer style sw"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "P9gB0g",
+              "name": "Hebrew only",
+              "width": "fill_container",
+              "padding": [
+                10,
+                0
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "sf7a5",
+                  "name": "Hebrew only t",
+                  "fill": "$text-primary",
+                  "content": "Hebrew only",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                },
+                {
+                  "id": "XD6jt",
+                  "type": "ref",
+                  "ref": "e4wMhp",
+                  "name": "Hebrew only sw"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "P3PPUo",
+              "name": "Qumran",
+              "width": "fill_container",
+              "padding": [
+                10,
+                0
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "D88m2",
+                  "name": "Qumran t",
+                  "fill": "$text-primary",
+                  "content": "Qumran",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                },
+                {
+                  "id": "Mo08Y",
+                  "type": "ref",
+                  "ref": "DPYm8",
+                  "name": "Qumran sw"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "rnOqt",
+              "x": 20,
+              "y": 743,
+              "name": "Clear",
+              "enabled": false,
+              "fill": "$destructive",
+              "content": "Clear storage",
+              "fontFamily": "Inter",
+              "fontSize": 15,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "uonwz",
+              "name": "About Davar — Settings CTAs",
+              "width": "fill_container",
+              "layout": "vertical",
+              "padding": [
+                20,
+                0,
+                12,
+                0
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "j7yfF3",
+                  "name": "About heading",
+                  "fill": "$text-secondary",
+                  "content": "About Davar",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "frame",
+                  "id": "LMLAO",
+                  "name": "Text Sources CTA",
+                  "width": "fill_container",
+                  "height": 50,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "W1Odxz",
+                      "name": "Text Sources label",
+                      "fill": "$text-primary",
+                      "content": "Text Sources",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "UXnw6",
+                      "name": "Text Sources destination",
+                      "fill": "$text-secondary",
+                      "content": "›",
+                      "fontFamily": "Inter",
+                      "fontSize": 20,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "l4EK1",
+                  "name": "Commentary Sources CTA",
+                  "width": "fill_container",
+                  "height": 50,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "eONcK",
+                      "name": "Commentary Sources label",
+                      "fill": "$text-primary",
+                      "content": "Commentary Sources",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "crcSI",
+                      "name": "Commentary Sources destination",
+                      "fill": "$text-secondary",
+                      "content": "›",
+                      "fontFamily": "Inter",
+                      "fontSize": 20,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "LrZOr",
+                  "name": "Donate CTA",
+                  "width": "fill_container",
+                  "height": 50,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "rza6g",
+                      "name": "Donate label",
+                      "fill": "$text-primary",
+                      "content": "Donate",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "M8035",
+                      "name": "Donate destination",
+                      "fill": "$text-secondary",
+                      "content": "›",
+                      "fontFamily": "Inter",
+                      "fontSize": 20,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "GavBj",
+                  "name": "Terms CTA",
+                  "width": "fill_container",
+                  "height": 50,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "YqGJA",
+                      "name": "Terms label",
+                      "fill": "$text-primary",
+                      "content": "Terms",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Ce9bV",
+                      "name": "Terms destination",
+                      "fill": "$text-secondary",
+                      "content": "›",
+                      "fontFamily": "Inter",
+                      "fontSize": 20,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "akky5",
+                  "name": "Privacy CTA",
+                  "width": "fill_container",
+                  "height": 50,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "m8tn97",
+                      "name": "Privacy label",
+                      "fill": "$text-primary",
+                      "content": "Privacy",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "bGy7v",
+                      "name": "Privacy destination",
+                      "fill": "$text-secondary",
+                      "content": "›",
+                      "fontFamily": "Inter",
+                      "fontSize": 20,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "rYGDu",
+                  "name": "Support CTA",
+                  "width": "fill_container",
+                  "height": 50,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "t2SHL3",
+                      "name": "Support label",
+                      "fill": "$text-primary",
+                      "content": "Support",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "H3r3pO",
+                      "name": "Support destination",
+                      "fill": "$text-secondary",
+                      "content": "›",
+                      "fontFamily": "Inter",
+                      "fontSize": 20,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "i9ReTe",
+                  "name": "GitHub CTA",
+                  "width": "fill_container",
+                  "height": 50,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "BR8oj",
+                      "name": "GitHub label",
+                      "fill": "$text-primary",
+                      "content": "GitHub",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "bpsFb",
+                      "name": "GitHub destination",
+                      "fill": "$text-secondary",
+                      "content": "↗",
+                      "fontFamily": "Inter",
+                      "fontSize": 20,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "L5MFH",
+      "x": 6840,
+      "y": 27697,
+      "name": "DAVAR-ACCOUNT-WEB-01",
+      "clip": true,
+      "width": 900,
+      "height": 900,
+      "fill": "$surface-primary",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 40,
+      "children": [
+        {
+          "type": "text",
+          "id": "IJoXF",
+          "name": "‹  Settings",
+          "fill": "$text-primary",
+          "content": "‹  Settings",
+          "fontFamily": "Inter",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "N7aF8",
+          "name": "Sign In",
+          "fill": "$text-primary",
+          "content": "Sign In",
+          "fontFamily": "Inter",
+          "fontSize": 32,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "text",
+          "id": "EaFXk",
+          "name": "Scripture is always available without an account.",
+          "fill": "$text-primary",
+          "content": "Scripture is always available without an account.",
+          "fontFamily": "Inter",
+          "fontSize": 14,
+          "fontWeight": "normal"
+        },
+        {
+          "id": "O3HWq4",
+          "type": "ref",
+          "ref": "zQiQh",
+          "name": "Google sign-in",
+          "width": "fill_container",
+          "descendants": {
+            "f8cF5q": {
+              "content": "Google"
+            }
+          }
+        },
+        {
+          "id": "MUOgR",
+          "type": "ref",
+          "ref": "zQiQh",
+          "name": "Apple sign-in",
+          "width": "fill_container",
+          "descendants": {
+            "f8cF5q": {
+              "content": "Apple"
+            }
+          }
+        },
+        {
+          "id": "nRzQ1",
+          "type": "ref",
+          "ref": "zQiQh",
+          "name": "Facebook sign-in",
+          "width": "fill_container",
+          "descendants": {
+            "f8cF5q": {
+              "content": "Facebook"
+            }
+          }
+        },
+        {
+          "id": "B9SOEr",
+          "type": "ref",
+          "ref": "zQiQh",
+          "name": "Telegram sign-in",
+          "width": "fill_container",
+          "descendants": {
+            "f8cF5q": {
+              "content": "Telegram"
+            }
+          }
+        },
+        {
+          "id": "W8wjvZ",
+          "type": "ref",
+          "ref": "zQiQh",
+          "name": "X sign-in",
+          "width": "fill_container",
+          "descendants": {
+            "f8cF5q": {
+              "content": "X"
+            }
+          }
+        },
+        {
+          "id": "Scnvv",
+          "type": "ref",
+          "ref": "G4Jogc",
+          "name": "Email address",
+          "width": "fill_container",
+          "descendants": {
+            "d7w1M": {
+              "enabled": false
+            },
+            "S1MfU": {
+              "content": "Email"
+            }
+          }
+        },
+        {
+          "id": "Tcmwy",
+          "type": "ref",
+          "ref": "zQiQh",
+          "name": "Send sign-in link",
+          "width": "fill_container",
+          "descendants": {
+            "f8cF5q": {
+              "content": "Send sign-in link"
+            }
+          }
         }
       ]
     }

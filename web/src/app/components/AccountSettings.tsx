@@ -1,8 +1,10 @@
+import { useTranslation } from "../hooks/useTranslation";
 import { useState } from "react";
 import type { Account } from "@davar/shared/productContracts";
 import type { SettingsScreenProps } from "./SettingsScreen";
 import { productApi } from "../services/productApi";
 export function AccountSettings(props: SettingsScreenProps) {
+	const { t } = useTranslation(props.language);
 	const [status, setStatus] = useState("");
 	const [busy, setBusy] = useState(false);
 	async function sync(load: boolean) {
@@ -52,7 +54,7 @@ export function AccountSettings(props: SettingsScreenProps) {
 					},
 				});
 			}
-			setStatus(load ? "Account settings loaded." : "Reading settings saved.");
+			setStatus(t(load ? "settings.account.loaded" : "settings.account.saved"));
 		} catch (e) {
 			setStatus(e instanceof Error ? e.message : "Unavailable");
 		} finally {
@@ -61,7 +63,7 @@ export function AccountSettings(props: SettingsScreenProps) {
 	}
 	return (
 		<section className="max-w-2xl mx-auto px-6 pb-12 space-y-3">
-			<h2>Account settings</h2>
+			<h2>{t("settings.account.title")}</h2>
 			{productApi.authenticated() ? (
 				<>
 					<button
@@ -70,7 +72,7 @@ export function AccountSettings(props: SettingsScreenProps) {
 						onClick={() => void sync(false)}
 						className="rounded-full px-5 py-3 border border-[var(--neomorph-border)]"
 					>
-						Save reading settings
+						{t("settings.account.save")}
 					</button>
 					<button
 						type="button"
@@ -78,7 +80,7 @@ export function AccountSettings(props: SettingsScreenProps) {
 						onClick={() => void sync(true)}
 						className="rounded-full px-5 py-3 border border-[var(--neomorph-border)]"
 					>
-						Load account settings
+						{t("settings.account.load")}
 					</button>
 				</>
 			) : (
