@@ -1,4 +1,5 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useCalendarWorkspace } from "../hooks/useCalendarWorkspace";
+import { useState, type ReactNode } from "react";
 import {
 	ArrowLeft,
 	ArrowRight,
@@ -21,11 +22,7 @@ import {
 	Wheat,
 	type LucideIcon,
 } from "lucide-react";
-import type { CalendarCity } from "@davar/shared/calendarClient";
-import type {
-	CalendarDay,
-	CalendarResponse,
-} from "@davar/shared/productContracts";
+import type { CalendarDay } from "@davar/shared/productContracts";
 import {
 	annualMoadim,
 	calendarSources,
@@ -122,23 +119,35 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 	const { t, isRTL } = useTranslation(language);
 	const [screen, setScreen] = useState<Screen>("calendar");
 	const [query, setQuery] = useState("");
-	const [cities, setCities] = useState<CalendarCity[]>([]);
-	const [searching, setSearching] = useState(false);
-	const [searched, setSearched] = useState(false);
-	const [searchError, setSearchError] = useState(false);
 	const [offset, setOffset] = useState(0);
-	const [selected, setSelected] = useState<CalendarResponse | null>(null);
-	const [dayBusy, setDayBusy] = useState(false);
-	const [dayError, setDayError] = useState(false);
-	const [annual, setAnnual] = useState<CalendarResponse | null>(null);
-	const [annualBusy, setAnnualBusy] = useState(false);
-	const [annualError, setAnnualError] = useState(false);
 	const [annualAttempt, setAnnualAttempt] = useState(0);
 	const view = !city ? "city" : screen;
+	const year = calendarYear(timezone);
+	const requests = useCalendarWorkspace({
+		city,
+		calendar,
+		view: view,
+		query,
+		offset,
+		year,
+		annualAttempt,
+	});
+	const {
+		data: cities,
+		busy: searching,
+		searched,
+		error: searchError,
+	} = requests.cities;
+	const { data: selected, busy: dayBusy, error: dayError } = requests.day;
+	const {
+		data: annual,
+		busy: annualBusy,
+		error: annualError,
+	} = requests.annual;
 	const current = offset === 0 ? calendar : selected;
 	const day = current?.days[0];
 	const moadim = confirmedMoadim(day);
-	const year = calendarYear(timezone);
+
 	const rows = annualMoadim(annual, year);
 	const monthLabel = (id: string) => {
 		const value = t(`calendar.months.${id}`);
@@ -172,90 +181,6 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 			</h1>
 		</header>
 	);
-
-	useEffect(() => {
-		if (view !== "city" || query.trim().length < 2) {
-			setCities([]);
-			setSearched(false);
-			setSearching(false);
-			setSearchError(false);
-			return;
-		}
-		let cancelled = false;
-		setCities([]);
-		setSearching(true);
-		setSearchError(false);
-		setSearched(false);
-		const timer = setTimeout(() => {
-			void calendarClient
-				.searchCities(query)
-				.then((result) => {
-					if (!cancelled) {
-						setCities(result);
-						setSearched(true);
-					}
-				})
-				.catch(() => {
-					if (!cancelled) setSearchError(true);
-				})
-				.finally(() => {
-					if (!cancelled) setSearching(false);
-				});
-		}, 600);
-		return () => {
-			cancelled = true;
-			clearTimeout(timer);
-		};
-	}, [query, view]);
-	// biome-ignore lint/correctness/useExhaustiveDependencies: Refresh the selected day when today's calendar refreshes.
-	useEffect(() => {
-		if (!city || offset === 0) {
-			setSelected(null);
-			setDayError(false);
-			setDayBusy(false);
-			return;
-		}
-		let cancelled = false;
-		setSelected(null);
-		setDayBusy(true);
-		setDayError(false);
-		void calendarClient
-			.day(offset)
-			.then((result) => {
-				if (!cancelled) setSelected(result);
-			})
-			.catch(() => {
-				if (!cancelled) setDayError(true);
-			})
-			.finally(() => {
-				if (!cancelled) setDayBusy(false);
-			});
-		return () => {
-			cancelled = true;
-		};
-	}, [city, offset, calendar]);
-	// biome-ignore lint/correctness/useExhaustiveDependencies: A retry must request the annual dates again.
-	useEffect(() => {
-		if (!city || view !== "moadim") return;
-		let cancelled = false;
-		setAnnual(null);
-		setAnnualBusy(true);
-		setAnnualError(false);
-		void calendarClient
-			.year(year)
-			.then((result) => {
-				if (!cancelled) setAnnual(result);
-			})
-			.catch(() => {
-				if (!cancelled) setAnnualError(true);
-			})
-			.finally(() => {
-				if (!cancelled) setAnnualBusy(false);
-			});
-		return () => {
-			cancelled = true;
-		};
-	}, [city, view, year, annualAttempt]);
 
 	const moedRow = (row: (typeof rows)[number]) => (
 		<Row
