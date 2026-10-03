@@ -13,6 +13,7 @@ const STORAGE_KEYS = {
   showQumran: "davar.showQumran",
   showFullChapter: "davar.showFullChapter",
   seferMode: "davar.seferMode",
+  showCalendarDayPill: "davar.showCalendarDayPill",
   hebrewOnly: "davar.hebrewOnly",
   translationOnly: "davar.translationOnly",
   wordHintCount: "davar.wordHintCount",
@@ -62,7 +63,9 @@ export const saveBookmarks = async (bookmarks: string[]) => {
 
 export type AppLanguage = "en" | "es" | "he";
 
-const normalizeLanguage = (value: string | null | undefined): AppLanguage | null => {
+const normalizeLanguage = (
+  value: string | null | undefined,
+): AppLanguage | null => {
   if (!value) {
     return null;
   }
@@ -237,4 +240,13 @@ export const clearStorage = async () => {
   await Promise.all(
     Object.values(STORAGE_KEYS).map((key) => AsyncStorage.removeItem(key)),
   );
+};
+
+export const loadShowCalendarDayPill = async () =>
+  parseBoolean(
+    await AsyncStorage.getItem(STORAGE_KEYS.showCalendarDayPill),
+    false,
+  );
+export const saveShowCalendarDayPill = async (value: boolean) => {
+  await AsyncStorage.setItem(STORAGE_KEYS.showCalendarDayPill, String(value));
 };

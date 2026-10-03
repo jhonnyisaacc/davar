@@ -4,10 +4,7 @@ import type { MockVerse } from "@/src/constants/mockData";
 import type { ThemeMode } from "@/src/theme";
 import type { BesorahTextVersion } from "@davar/shared/translationConfig";
 import type { BesorahLanguage } from "@davar/shared/greekBesorah";
-import {
-  getDefaultLanguage,
-  type AppLanguage,
-} from "@/src/services/storage";
+import { getDefaultLanguage, type AppLanguage } from "@/src/services/storage";
 import type {
   DownloadProgress,
   BundleVersions,
@@ -31,6 +28,8 @@ export type AppState = {
   setShowQumran: (value: boolean) => void;
   showFullChapter: boolean;
   setShowFullChapter: (value: boolean) => void;
+  showCalendarDayPill: boolean;
+  setShowCalendarDayPill: (value: boolean) => void;
   seferMode: boolean;
   setSeferMode: (value: boolean) => void;
   hebrewOnly: boolean;
@@ -90,11 +89,15 @@ export const useAppStore = create<AppState>((set) => ({
       showFullChapter: value,
       seferMode: value ? state.seferMode : false,
     })),
+  showCalendarDayPill: false,
+  setShowCalendarDayPill: (value) => set({ showCalendarDayPill: value }),
   seferMode: false,
   setSeferMode: (value) =>
     set((state) => ({
       seferMode:
-        value && state.showFullChapter && (state.hebrewOnly || state.translationOnly),
+        value &&
+        state.showFullChapter &&
+        (state.hebrewOnly || state.translationOnly),
     })),
   hebrewOnly: false,
   setHebrewOnly: (value) =>

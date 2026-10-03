@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 import { productApi } from "../services/productApi";
+function isDevelopmentSandbox() {
+	try {
+		return process.env.PUBLIC_DEV_SANDBOX === "1";
+	} catch {
+		return false;
+	}
+}
 export function SandboxBanner() {
 	const [mailbox, setMailbox] = useState<string | null>(null);
 	useEffect(() => {
-		if (process.env.PUBLIC_DEV_SANDBOX !== "1") return;
+		if (!isDevelopmentSandbox()) return;
 		void productApi
 			.request<{ sandbox: boolean; mailbox_url: string }>(
 				"/development/status",

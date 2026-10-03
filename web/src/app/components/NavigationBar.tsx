@@ -1,4 +1,11 @@
-import { BookOpen, Home, Paintbrush, ScrollText, Settings } from "lucide-react";
+import {
+	CalendarDays,
+	BookOpen,
+	Home,
+	Paintbrush,
+	ScrollText,
+	Settings,
+} from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import {
 	SHARED_SETTINGS_ORDER,
@@ -56,6 +63,8 @@ interface NavigationBarProps {
 	onQumranChange: (show: boolean) => void;
 	showFullChapter: boolean;
 	onFullChapterChange: (show: boolean) => void;
+	showCalendarDayPill?: boolean;
+	onCalendarDayPillChange?: (show: boolean) => void;
 	seferMode: boolean;
 	onSeferModeChange: (show: boolean) => void;
 	hebrewOnly: boolean;
@@ -97,6 +106,8 @@ export function NavigationBar({
 	onQumranChange,
 	showFullChapter,
 	onFullChapterChange,
+	showCalendarDayPill = false,
+	onCalendarDayPillChange,
 	seferMode,
 	onSeferModeChange,
 	hebrewOnly,
@@ -413,6 +424,28 @@ export function NavigationBar({
 						/>
 					</div>
 				);
+			case "calendarDayPill":
+				return (
+					<div className="flex items-center justify-between gap-3">
+						<div className="flex items-center gap-3">
+							<CalendarDays className="size-4 text-[var(--text-secondary)]" />
+							<div>
+								<span className="text-sm text-[var(--text-primary)]">
+									{t("settings.calendarDayPill.title")}
+								</span>
+								<p className="text-xs text-[var(--text-secondary)]">
+									{t("settings.calendarDayPill.subtitle")}
+								</p>
+							</div>
+						</div>
+						<NeumorphicToggle
+							enabled={showCalendarDayPill}
+							onToggle={() => onCalendarDayPillChange?.(!showCalendarDayPill)}
+							ariaLabel={t("settings.calendarDayPill.title")}
+							disabled={!onCalendarDayPillChange}
+						/>
+					</div>
+				);
 			case "seferStyle":
 				if (!isSeferStyleVisible(showFullChapter)) return null;
 				return (
@@ -522,7 +555,7 @@ export function NavigationBar({
 								{id === "verse"
 									? "Scripture"
 									: id === "widgets"
-										? "Widgets"
+										? t("calendar.nav")
 										: id[0].toUpperCase() + id.slice(1)}
 							</button>
 						))}

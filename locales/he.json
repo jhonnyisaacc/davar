@@ -128,7 +128,11 @@
     "designSystemTitle": "מערכת עיצוב",
     "designSystemDescription": "צפה ברכיבי עיצוב",
     "mobileDesignGuideTitle": "מדריך עיצוב לנייד",
-    "mobileDesignGuideDescription": "צפה ברכיבי עיצוב לנייד"
+    "mobileDesignGuideDescription": "צפה ברכיבי עיצוב לנייד",
+    "calendarDayPill": {
+      "title": "הצגת היום בכל יום",
+      "subtitle": "כבוי: הצגה רק במועדים."
+    }
   },
   "home": {
     "todayIs": "היום הוא",
@@ -339,5 +343,70 @@
     "home": "בית",
     "verse": "פסוק",
     "settings": "הגדרות"
+  },
+  "calendar": {
+    "title": "לוח השנה המקראי",
+    "nav": "לוח שנה",
+    "chooseCity": "בחרו את\nהעיר שלכם",
+    "cityExplanation": "נשתמש בה לשעת השקיעה המקומית.",
+    "searchCity": "חיפוש עיר",
+    "cityHint": "אפשר לשנות את העיר בכל עת בנגיעה בשמה בלוח השנה.",
+    "noCities": "לא נמצאו ערים. נסו שם אחר.",
+    "searchUnavailable": "חיפוש הערים אינו זמין. נסו שוב.",
+    "back": "חזרה ללוח השנה",
+    "today": "היום",
+    "previousDay": "היום הקודם",
+    "nextDay": "היום הבא",
+    "dayOfMonth": "היום בחודש הנוכחי",
+    "awaitingMoon": "ממתינים לירח החדש",
+    "localSunset": "שקיעה מקומית",
+    "moonConfirmed": "הירח החדש אושר",
+    "sightedIsrael": "נצפה בישראל",
+    "moonPending": "ממתינים לאישור",
+    "waitingIsrael": "ממתינים לתצפית בישראל.",
+    "source": "מקור",
+    "sourceSubtitle": "תצפיות ומקורות",
+    "sources": "מקורות",
+    "sourcesIntroduction": "התצפיות שעליהן מבוסס לוח השנה.",
+    "sourceDescription": "תצפיות בירח החדש בישראל.",
+    "observationReport": "דוח תצפית",
+    "defaultBrowser": "הקישורים נפתחים בדפדפן ברירת המחדל.",
+    "noSources": "המקורות יופיעו בעדכון התצפיות הבא.",
+    "appointedTimes": "מועדים",
+    "moadim": "מועדים",
+    "currentYear": "השנה הנוכחית",
+    "sunsetBoundary": "כל תאריך מתחיל בשקיעה המקומית.",
+    "awaitingYear": "ממתינים לאישור השנה.",
+    "awaitingDates": "ממתינים לתאריכים",
+    "awaitingConfirmation": "ממתינים לאישור",
+    "noAppointment": "אין מועד היום.",
+    "unavailable": "לוח השנה אינו זמין. נסו שוב.",
+    "refresh": "רענון לוח השנה",
+    "loading": "טוען…",
+    "cached": "מוצג לוח שנה שמור. התחברו לעדכון היום.",
+    "stale": "עדכוני התצפיות אינם זמינים. מוצגות התצפיות האחרונות.",
+    "firstUpdate": "ממתינים לעדכון התצפיות הראשון.",
+    "fixture": "תרחיש פיתוח — תצפיות לדוגמה.",
+    "checked": "התצפיות נבדקו: {date}",
+    "review": "חלק מהדוחות ההיסטוריים ממתינים לבדיקה. משתמשים רק בתצפיות מאושרות.",
+    "observed": "נצפה בתאריך {date}",
+    "day": "יום {day}",
+    "dayWithMonth": "{day} {month}",
+    "yearUnavailable": "הרשימה השנתית אינה זמינה. נסו שוב.",
+    "monthRange": "{first}–{last} {month}",
+    "events": {
+      "pesach": "פסח",
+      "hag_hamatzot": "חג המצות",
+      "bikurim": "ביכורים",
+      "shavuot": "שבועות",
+      "yom_teruah": "יום תרועה",
+      "yom_hakipurim": "יום הכיפורים",
+      "sukkot": "סוכות",
+      "shemini_atzeret": "שמיני עצרת"
+    },
+    "months": {
+      "aviv": "אביב",
+      "etanim": "איתנים"
+    }
   }
 }

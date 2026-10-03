@@ -49,6 +49,9 @@ import {
   NavigationSheet,
   type NavigationSheetMethods,
 } from "@/src/components/NavigationSheet";
+import { CalendarDayPill } from "@/src/features/calendar/CalendarDayPill";
+import { useCalendar } from "@/src/features/calendar/useCalendar";
+import { readingCalendarDay } from "@davar/shared/calendarPresentation";
 import { BookChapterPill } from "@/src/components/ui/BookChapterPill";
 import { getColors, getResponsiveLayout, spacing, typography } from "@/src/theme";
 import { fetchMetadata } from "@/src/services/metadata";
@@ -594,6 +597,7 @@ const VersePageComponent = ({
         pointerEvents={pillVisible ? "auto" : "none"}
         style={{ opacity: pillVisibility }}
       >
+        <CalendarDayPill />
         <BookChapterPill
           bookLabel={bookLabel}
           chapter={item.chapter}
@@ -763,10 +767,17 @@ export const VerseDetailContent = () => {
   });
 
   const verseId = effectiveVerseId;
+  const { calendar: readingCalendar } = useCalendar();
+  const showCalendarDayPill = useAppStore((state) => state.showCalendarDayPill);
+  const hasCalendarDayPill = !!readingCalendarDay(
+    readingCalendar,
+    showCalendarDayPill,
+  );
   const navigationRowTop = isStandaloneVerseDetailRoute
     ? spacing[1]
     : spacing[16];
-  const contentTopPadding = navigationRowTop + layout.controlHeight + spacing[6];
+  const contentTopPadding =
+    navigationRowTop + layout.controlHeight + spacing[6] + (hasCalendarDayPill ? 40 : 0);
 
   const chapterScrollOffsets = useRef(new Map<string, number>());
   const chapterMeasurements = useRef(new Map<string, Map<number, number>>());
@@ -1451,6 +1462,7 @@ export const VerseDetailContent = () => {
                   ],
                 }}
               >
+                <CalendarDayPill />
                 <BookChapterPill
                   bookLabel={locationBookLabel}
                   chapter={verse?.chapter ?? chapter}

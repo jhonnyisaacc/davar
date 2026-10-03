@@ -1,3 +1,4 @@
+import { useTranslation } from "@/src/i18n/useTranslation";
 import { SandboxBanner } from "@/src/features/product/SandboxBanner";
 import { Tabs } from "expo-router";
 import type { BottomTabBarProps } from "expo-router/js-tabs";
@@ -35,12 +36,13 @@ const destinations = [
   { id: "assemblies", label: "Assemblies", icon: Users },
   { id: "commentary", label: "Commentary", icon: ScrollText },
   { id: "verse", label: "Scripture", icon: BookOpen },
-  { id: "widgets", label: "Widgets", icon: Calendar },
+  { id: "widgets", label: "Calendar", icon: Calendar },
   { id: "settings", label: "Settings", icon: Settings },
 ];
 const hidden = ["home", "index", "search", "bookmarks", "explore"];
 
 function NavigationDock({ state, navigation }: BottomTabBarProps) {
+  const { t } = useTranslation();
   const dark = useAppStore((s) => s.themeMode === "dark");
   const insets = useSafeAreaInsets();
   const { width } = useWindowDimensions();
@@ -140,7 +142,8 @@ function NavigationDock({ state, navigation }: BottomTabBarProps) {
               indicatorStyle,
             ]}
           />
-          {destinations.map(({ id, label, icon: Icon }) => {
+          {destinations.map(({ id, label: defaultLabel, icon: Icon }) => {
+            const label = id === "widgets" ? t("calendar.nav") : defaultLabel;
             const route = state.routes.find((route) => route.name === id)!;
             const selected = state.routes[state.index].key === route.key;
             const color = selected

@@ -1,0 +1,108 @@
+import { calendarIsOutdated } from "./calendarRefresh";
+import type { CalendarDay, CalendarResponse } from "./productContracts";
+
+export const MOADIM = [
+	{ id: "pesach", icon: "flame" },
+	{ id: "hag_hamatzot", icon: "wheat" },
+	{ id: "bikurim", icon: "sprout" },
+	{ id: "shavuot", icon: "book-open" },
+	{ id: "yom_teruah", icon: "megaphone" },
+	{ id: "yom_hakipurim", icon: "heart" },
+	{ id: "sukkot", icon: "tent" },
+	{ id: "shemini_atzeret", icon: "users" },
+] as const;
+export type MoedId = (typeof MOADIM)[number]["id"];
+export type CalendarIcon = (typeof MOADIM)[number]["icon"];
+
+export function normalizeMoed(event: string): MoedId | null {
+	const id =
+		event === "hag_hamatzot_last"
+			? "hag_hamatzot"
+			: event === "sukkot_last"
+				? "sukkot"
+				: event;
+	return MOADIM.find((moed) => moed.id === id)?.id ?? null;
+}
+
+export function confirmedMoadim(day: CalendarDay | undefined): MoedId[] {
+	if (
+		!day ||
+		day.biblical.day === null ||
+		day.month_status !== "confirmed" ||
+		day.year_start_status !== "confirmed"
+	)
+		return [];
+	return [
+		...new Set(
+			day.events.map(normalizeMoed).filter((id): id is MoedId => id !== null),
+		),
+	];
+}
+
+export function readingCalendarDay(
+	calendar: CalendarResponse | null,
+	showEveryDay: boolean,
+	now = Date.now(),
+): CalendarDay | null {
+	const day = calendar?.days[0];
+	if (
+		!calendar ||
+		calendarIsOutdated(calendar, now) ||
+		!day ||
+		day.biblical.day === null ||
+		day.month_status !== "confirmed"
+	)
+		return null;
+	return showEveryDay || confirmedMoadim(day).length > 0 ? day : null;
+}
+
+export function annualMoadim(calendar: CalendarResponse | null, year: number) {
+	return MOADIM.map((moed) => ({
+		...moed,
+		days:
+			calendar?.days.filter(
+				(day) =>
+					day.civil_date.startsWith(`${year}-`) &&
+					confirmedMoadim(day).includes(moed.id),
+			) ?? [],
+	}));
+}
+
+export function calendarYear(timezone: string, now = new Date()): number {
+	return Number(
+		new Intl.DateTimeFormat("en", {
+			timeZone: timezone,
+			year: "numeric",
+		}).format(now),
+	);
+}
+
+export function calendarUrl(value: string | null | undefined): string | null {
+	if (!value) return null;
+	try {
+		const url = new URL(value);
+		return url.protocol === "https:" || url.protocol === "http:"
+			? url.href
+			: null;
+	} catch {
+		return null;
+	}
+}
+
+export function calendarSources(
+	calendar: CalendarResponse | null,
+	day = calendar?.days[0],
+) {
+	const sources: { id: string; name: string; url: string }[] = [];
+	const site = calendarUrl(calendar?.source?.url);
+	if (site && !calendar?.source?.development_fixture)
+		sources.push({ id: "provider", name: calendar!.source!.name, url: site });
+	const report = calendarUrl(day?.observation?.source_url);
+	if (
+		report &&
+		!day?.observation?.development_fixture &&
+		!sources.some((source) => source.url === report)
+	)
+		sources.push({ id: "observation", name: "observation", url: report });
+	return sources;
+}

@@ -1,3 +1,4 @@
+import { CalendarDayPill } from "./CalendarDayPill";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useTranslation } from "../hooks/useTranslation";
 import type {
@@ -46,6 +47,8 @@ interface VerseDisplayProps {
 	showOnboardingHint?: boolean;
 	showQumran?: boolean;
 	showFullChapter?: boolean;
+	showCalendarDayPill?: boolean;
+	onOpenCalendar?: () => void;
 	seferMode?: boolean;
 	hebrewOnly?: boolean;
 	translationOnly?: boolean;
@@ -79,6 +82,8 @@ export function VerseDisplay({
 	showOnboardingHint = false,
 	showQumran = false,
 	showFullChapter = false,
+	showCalendarDayPill = false,
+	onOpenCalendar,
 	seferMode = false,
 	hebrewOnly = false,
 	translationOnly = false,
@@ -319,10 +324,29 @@ export function VerseDisplay({
 		});
 	};
 
+	const readingPills = (
+		<div className="flex flex-col items-center gap-3 pb-5">
+			{onOpenCalendar ? (
+				<CalendarDayPill
+					language={language}
+					showEveryDay={showCalendarDayPill}
+					onOpenCalendar={onOpenCalendar}
+				/>
+			) : null}
+			<span
+				className="rounded-full bg-[var(--muted)] px-3 py-1.5 text-xs text-[var(--text-primary)]"
+				style={{ fontFamily: "Inter, sans-serif" }}
+			>
+				{language === "he" ? bookNameHebrew : bookName} · {chapter}
+			</span>
+		</div>
+	);
+
 	// If full chapter mode is enabled and we have verses, show the full chapter view
 	if (showFullChapter && chapterVerses && chapterVerses.length > 0) {
 		return (
 			<div className="transition-opacity duration-500">
+				{readingPills}
 				<FullChapterView
 					verses={chapterVerses}
 					bookName={bookName}
@@ -348,6 +372,7 @@ export function VerseDisplay({
 	// Otherwise show the single verse view
 	return (
 		<div className="space-y-10 relative pt-12 sm:pt-14">
+			{readingPills}
 			{/* Hebrew Text with Verse Number and Onboarding Hint - Large and Centered */}
 			{showSourceText && (
 				<div

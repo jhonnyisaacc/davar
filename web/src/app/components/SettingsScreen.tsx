@@ -22,6 +22,8 @@ export interface SettingsScreenProps {
 	onQumranChange: (show: boolean) => void;
 	showFullChapter: boolean;
 	onFullChapterChange: (show: boolean) => void;
+	showCalendarDayPill?: boolean;
+	onCalendarDayPillChange?: (show: boolean) => void;
 	seferMode: boolean;
 	onSeferModeChange: (show: boolean) => void;
 	hebrewOnly: boolean;
@@ -340,7 +342,11 @@ const RetroIcons = {
 const languages = [
 	{ code: "en" as const, name: "English", nativeName: "English" },
 	{ code: "es" as const, name: "Spanish", nativeName: "Espa\u00f1ol" },
-	{ code: "he" as const, name: "Hebrew", nativeName: "\u05e2\u05d1\u05e8\u05d9\u05ea" },
+	{
+		code: "he" as const,
+		name: "Hebrew",
+		nativeName: "\u05e2\u05d1\u05e8\u05d9\u05ea",
+	},
 ];
 
 function SettingsPillSelect<T extends string>({
@@ -469,6 +475,8 @@ export function SettingsScreen({
 	onQumranChange,
 	showFullChapter,
 	onFullChapterChange,
+	showCalendarDayPill = false,
+	onCalendarDayPillChange,
 	seferMode,
 	onSeferModeChange,
 	hebrewOnly,
@@ -647,6 +655,32 @@ export function SettingsScreen({
 								offLabel={t("common.off")}
 							/>
 						</div>
+					</div>
+				);
+			case "calendarDayPill":
+				return (
+					<div className="px-6 py-5 flex items-center justify-between gap-4">
+						<div>
+							<div className="text-base text-[var(--text-primary)]">
+								{t("settings.calendarDayPill.title")}
+							</div>
+							<p className="mt-1 text-xs text-[var(--text-secondary)]">
+								{t("settings.calendarDayPill.subtitle")}
+							</p>
+						</div>
+						<button
+							type="button"
+							role="switch"
+							aria-checked={showCalendarDayPill}
+							aria-label={t("settings.calendarDayPill.title")}
+							disabled={!onCalendarDayPillChange}
+							onClick={() => onCalendarDayPillChange?.(!showCalendarDayPill)}
+							className={`relative h-8 w-14 shrink-0 rounded-full transition-colors ${showCalendarDayPill ? "bg-[var(--primary)]" : "bg-[var(--muted)]"}`}
+						>
+							<span
+								className={`absolute top-1 size-6 rounded-full bg-white shadow-sm transition-all ${showCalendarDayPill ? "left-7" : "left-1"}`}
+							/>
+						</button>
 					</div>
 				);
 			case "seferStyle":

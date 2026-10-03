@@ -101,6 +101,8 @@ export default function SettingsScreen() {
       setBesorahTextVersion: store.setBesorahTextVersion,
       showFullChapter: store.showFullChapter,
       setShowFullChapter: store.setShowFullChapter,
+      showCalendarDayPill: store.showCalendarDayPill,
+      setShowCalendarDayPill: store.setShowCalendarDayPill,
       seferMode: store.seferMode,
       setSeferMode: store.setSeferMode,
       hebrewOnly: store.hebrewOnly,
@@ -248,6 +250,30 @@ export default function SettingsScreen() {
             )}
           </>
         );
+      case "calendarDayPill":
+        return (
+          <View style={styles.row}>
+            <View style={{ flex: 1, gap: 4 }}>
+              <Text style={styles.label}>
+                {t("settings.calendarDayPill.title")}
+              </Text>
+              <Text
+                style={{
+                  color: colors.textSecondary,
+                  fontSize: 12,
+                  textAlign: isRTL ? "right" : "left",
+                }}
+              >
+                {t("settings.calendarDayPill.subtitle")}
+              </Text>
+            </View>
+            <PillToggle
+              label={t("settings.calendarDayPill.title")}
+              value={state.showCalendarDayPill}
+              onChange={state.setShowCalendarDayPill}
+            />
+          </View>
+        );
       case "seferStyle":
         if (!isSeferStyleVisible(state.showFullChapter)) return null;
         return toggleRow(
@@ -296,6 +322,7 @@ export default function SettingsScreen() {
             current.setShowQumran(false);
             current.setShowFullChapter(false);
             current.setSeferMode(false);
+            current.setShowCalendarDayPill(false);
             current.setHebrewOnly(false);
             current.setTranslationOnly(false);
             current.setLanguage("en");

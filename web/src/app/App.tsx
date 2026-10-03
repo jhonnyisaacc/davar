@@ -1,3 +1,4 @@
+import { useCalendarLifecycle } from "./hooks/useCalendar";
 import { SandboxBanner } from "./components/SandboxBanner";
 import {
 	scriptureContext,
@@ -140,6 +141,7 @@ const BOOK_ABBREVIATIONS: Record<string, string> = {
 };
 
 export default function App() {
+	useCalendarLifecycle();
 	// Initialize persisted state from localStorage or defaults
 	const initialState = getStoredReadingState() ?? createDefaultReadingState();
 
@@ -175,6 +177,10 @@ export default function App() {
 	const [showFullChapter, setShowFullChapter] = usePersistedState(
 		"showFullChapter",
 		initialState.showFullChapter,
+	);
+	const [showCalendarDayPill, setShowCalendarDayPill] = usePersistedState(
+		"showCalendarDayPill",
+		initialState.showCalendarDayPill ?? false,
 	);
 	const [seferMode, setSeferMode] = usePersistedState(
 		"seferMode",
@@ -1724,6 +1730,8 @@ export default function App() {
 						onQumranChange={setShowQumran}
 						showFullChapter={showFullChapter}
 						onFullChapterChange={setShowFullChapter}
+						showCalendarDayPill={showCalendarDayPill}
+						onCalendarDayPillChange={setShowCalendarDayPill}
 						seferMode={seferMode}
 						onSeferModeChange={handleSeferModeChange}
 						hebrewOnly={hebrewOnly}
@@ -1770,6 +1778,8 @@ export default function App() {
 							onQumranChange: setShowQumran,
 							showFullChapter,
 							onFullChapterChange: setShowFullChapter,
+							showCalendarDayPill,
+							onCalendarDayPillChange: setShowCalendarDayPill,
 							seferMode,
 							onSeferModeChange: handleSeferModeChange,
 							hebrewOnly,
@@ -1873,6 +1883,8 @@ export default function App() {
 												currentVerseData.source_language !== "greek"
 											}
 											showFullChapter={showFullChapter}
+											showCalendarDayPill={showCalendarDayPill}
+											onOpenCalendar={() => setCurrentScreen("widgets")}
 											seferMode={seferMode}
 											hebrewOnly={hebrewOnly}
 											showNikud={showNikud}

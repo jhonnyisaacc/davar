@@ -1,5 +1,6 @@
 import { AccountSettings } from "./components/AccountSettings";
 import type { CommentaryContext } from "@davar/shared/productContracts";
+import { CalendarPanel } from "./components/CalendarPanel";
 import { ProductScreen } from "./components/ProductScreen";
 import type { ReactNode } from "react";
 import type { BesorahLanguage } from "@davar/shared/greekBesorah";
@@ -31,6 +32,8 @@ export type NonVerseScreenProps = {
 	onQumranChange: (show: boolean) => void;
 	showFullChapter: boolean;
 	onFullChapterChange: (show: boolean) => void;
+	showCalendarDayPill?: boolean;
+	onCalendarDayPillChange?: (show: boolean) => void;
 	seferMode: boolean;
 	onSeferModeChange: (show: boolean) => void;
 	hebrewOnly: boolean;
@@ -56,6 +59,8 @@ export function renderNonVerseScreen({
 	onQumranChange,
 	showFullChapter,
 	onFullChapterChange,
+	showCalendarDayPill = false,
+	onCalendarDayPillChange,
 	seferMode,
 	onSeferModeChange,
 	hebrewOnly,
@@ -66,6 +71,7 @@ export function renderNonVerseScreen({
 }: NonVerseScreenProps): ReactNode {
 	switch (screen) {
 		case "widgets":
+			return <CalendarPanel language={language} />;
 		case "assemblies":
 		case "commentary":
 			return (
@@ -127,6 +133,8 @@ export function renderNonVerseScreen({
 						onQumranChange={onQumranChange}
 						showFullChapter={showFullChapter}
 						onFullChapterChange={onFullChapterChange}
+						showCalendarDayPill={showCalendarDayPill}
+						onCalendarDayPillChange={onCalendarDayPillChange}
 						seferMode={seferMode}
 						onSeferModeChange={onSeferModeChange}
 						hebrewOnly={hebrewOnly}
@@ -148,6 +156,8 @@ export function renderNonVerseScreen({
 						onQumranChange={onQumranChange}
 						showFullChapter={showFullChapter}
 						onFullChapterChange={onFullChapterChange}
+						showCalendarDayPill={showCalendarDayPill}
+						onCalendarDayPillChange={onCalendarDayPillChange}
 						seferMode={seferMode}
 						onSeferModeChange={onSeferModeChange}
 						hebrewOnly={hebrewOnly}

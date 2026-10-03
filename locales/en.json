@@ -128,7 +128,11 @@
     "designSystemTitle": "Design System",
     "designSystemDescription": "View design components",
     "mobileDesignGuideTitle": "Mobile Design Guide",
-    "mobileDesignGuideDescription": "View mobile design components"
+    "mobileDesignGuideDescription": "View mobile design components",
+    "calendarDayPill": {
+      "title": "Day pill on all days",
+      "subtitle": "Off: show only on moadim."
+    }
   },
   "home": {
     "todayIs": "Today is",
@@ -339,5 +343,70 @@
     "home": "Home",
     "verse": "Verse",
     "settings": "Settings"
+  },
+  "calendar": {
+    "title": "Biblical Calendar",
+    "nav": "Calendar",
+    "chooseCity": "Choose your\ncity",
+    "cityExplanation": "We’ll use it for your local sunset.",
+    "searchCity": "Search city",
+    "cityHint": "You can change your city anytime by tapping its name in the calendar.",
+    "noCities": "No cities found. Try another name.",
+    "searchUnavailable": "City search is unavailable. Try again.",
+    "back": "Back to calendar",
+    "today": "Today",
+    "previousDay": "Previous day",
+    "nextDay": "Next day",
+    "dayOfMonth": "Day of the current month",
+    "awaitingMoon": "Awaiting the new moon",
+    "localSunset": "Local sunset",
+    "moonConfirmed": "New moon confirmed",
+    "sightedIsrael": "Sighted in Israel",
+    "moonPending": "Awaiting confirmation",
+    "waitingIsrael": "Waiting for a sighting in Israel.",
+    "source": "Source",
+    "sourceSubtitle": "Observations and references",
+    "sources": "Sources",
+    "sourcesIntroduction": "The observations behind your calendar.",
+    "sourceDescription": "New moon observations in Israel.",
+    "observationReport": "Observation report",
+    "defaultBrowser": "Links open in your default browser.",
+    "noSources": "Sources will appear with the next observation update.",
+    "appointedTimes": "Appointed times",
+    "moadim": "Moadim",
+    "currentYear": "Current year",
+    "sunsetBoundary": "Each date begins at local sunset.",
+    "awaitingYear": "Awaiting year confirmation.",
+    "awaitingDates": "Awaiting dates",
+    "awaitingConfirmation": "Awaiting confirmation",
+    "noAppointment": "No appointed time today.",
+    "unavailable": "Calendar is unavailable. Try again.",
+    "refresh": "Refresh calendar",
+    "loading": "Loading…",
+    "cached": "Showing a cached calendar. Reconnect to update the day.",
+    "stale": "Observation updates are unavailable. Showing the last imported evidence.",
+    "firstUpdate": "Awaiting the first observation update.",
+    "fixture": "Development scenario — synthetic observations.",
+    "checked": "Observations checked: {date}",
+    "review": "Some historical reports need review. Only confirmed evidence is used.",
+    "observed": "Sighted on {date}",
+    "day": "Day {day}",
+    "dayWithMonth": "{month} {day}",
+    "yearUnavailable": "The yearly list is unavailable. Try again.",
+    "monthRange": "{month} {first}–{last}",
+    "events": {
+      "pesach": "Pesach",
+      "hag_hamatzot": "Unleavened Bread",
+      "bikurim": "Bikurim",
+      "shavuot": "Shavuot",
+      "yom_teruah": "Yom Teruah",
+      "yom_hakipurim": "Yom HaKippurim",
+      "sukkot": "Sukkot",
+      "shemini_atzeret": "Shemini Atzeret"
+    },
+    "months": {
+      "aviv": "Aviv",
+      "etanim": "Etanim"
+    }
   }
 }

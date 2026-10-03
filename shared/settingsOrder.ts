@@ -22,6 +22,7 @@ export type SharedSettingId =
 	| "besorahLanguage"
 	| "besorahTextVersion"
 	| "fullChapter"
+	| "calendarDayPill"
 	| "seferStyle"
 	| "hebrewOnly"
 	| "qumran";
@@ -32,6 +33,7 @@ export const SHARED_SETTINGS_ORDER: readonly SharedSettingId[] = [
 	"besorahLanguage",
 	"besorahTextVersion",
 	"fullChapter",
+	"calendarDayPill",
 	"seferStyle",
 	"hebrewOnly",
 	"qumran",

@@ -128,7 +128,11 @@
     "designSystemTitle": "Sistema de diseño",
     "designSystemDescription": "Ver componentes de diseño",
     "mobileDesignGuideTitle": "Guía de diseño móvil",
-    "mobileDesignGuideDescription": "Ver componentes de diseño móvil"
+    "mobileDesignGuideDescription": "Ver componentes de diseño móvil",
+    "calendarDayPill": {
+      "title": "Día del calendario siempre",
+      "subtitle": "Desactivado: mostrar solo en moadim."
+    }
   },
   "home": {
     "todayIs": "Hoy es",
@@ -339,5 +343,70 @@
     "home": "Inicio",
     "verse": "Versículo",
     "settings": "Ajustes"
+  },
+  "calendar": {
+    "title": "Calendario bíblico",
+    "nav": "Calendario",
+    "chooseCity": "Elige tu\nciudad",
+    "cityExplanation": "La usaremos para tu puesta de sol local.",
+    "searchCity": "Buscar ciudad",
+    "cityHint": "Puedes cambiar tu ciudad tocando su nombre en el calendario.",
+    "noCities": "No se encontraron ciudades. Prueba otro nombre.",
+    "searchUnavailable": "La búsqueda no está disponible. Inténtalo de nuevo.",
+    "back": "Volver al calendario",
+    "today": "Hoy",
+    "previousDay": "Día anterior",
+    "nextDay": "Día siguiente",
+    "dayOfMonth": "Día del mes actual",
+    "awaitingMoon": "Esperando la luna nueva",
+    "localSunset": "Puesta de sol local",
+    "moonConfirmed": "Luna nueva confirmada",
+    "sightedIsrael": "Avistada en Israel",
+    "moonPending": "Esperando confirmación",
+    "waitingIsrael": "Esperando un avistamiento en Israel.",
+    "source": "Fuente",
+    "sourceSubtitle": "Observaciones y referencias",
+    "sources": "Fuentes",
+    "sourcesIntroduction": "Las observaciones detrás de tu calendario.",
+    "sourceDescription": "Observaciones de la luna nueva en Israel.",
+    "observationReport": "Informe de observación",
+    "defaultBrowser": "Los enlaces se abren en tu navegador predeterminado.",
+    "noSources": "Las fuentes aparecerán con la próxima actualización.",
+    "appointedTimes": "Tiempos señalados",
+    "moadim": "Moadim",
+    "currentYear": "Año actual",
+    "sunsetBoundary": "Cada fecha comienza con la puesta de sol local.",
+    "awaitingYear": "Esperando confirmación del año.",
+    "awaitingDates": "Fechas pendientes",
+    "awaitingConfirmation": "Esperando confirmación",
+    "noAppointment": "Hoy no hay tiempo señalado.",
+    "unavailable": "El calendario no está disponible. Inténtalo de nuevo.",
+    "refresh": "Actualizar calendario",
+    "loading": "Cargando…",
+    "cached": "Mostrando un calendario guardado. Conéctate para actualizar.",
+    "stale": "No hay actualizaciones. Mostrando la última evidencia importada.",
+    "firstUpdate": "Esperando la primera actualización de observaciones.",
+    "fixture": "Escenario de desarrollo — observaciones sintéticas.",
+    "checked": "Observaciones revisadas: {date}",
+    "review": "Algunos informes históricos necesitan revisión. Solo se usa evidencia confirmada.",
+    "observed": "Avistada el {date}",
+    "day": "Día {day}",
+    "dayWithMonth": "{month} {day}",
+    "yearUnavailable": "La lista anual no está disponible. Inténtalo de nuevo.",
+    "monthRange": "{month} {first}–{last}",
+    "events": {
+      "pesach": "Pésaj",
+      "hag_hamatzot": "Panes sin levadura",
+      "bikurim": "Bikurim",
+      "shavuot": "Shavuot",
+      "yom_teruah": "Yom Teruá",
+      "yom_hakipurim": "Yom HaKipurim",
+      "sukkot": "Sucot",
+      "shemini_atzeret": "Sheminí Atzéret"
+    },
+    "months": {
+      "aviv": "Aviv",
+      "etanim": "Etanim"
+    }
   }
 }
