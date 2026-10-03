@@ -33,11 +33,11 @@ import {
 } from "@/src/constants/navigationDock";
 
 const destinations = [
-  { id: "assemblies", label: "Assemblies", icon: Users },
-  { id: "commentary", label: "Commentary", icon: ScrollText },
-  { id: "verse", label: "Scripture", icon: BookOpen },
-  { id: "widgets", label: "Calendar", icon: Calendar },
-  { id: "settings", label: "Settings", icon: Settings },
+  { id: "assemblies", labelKey: "tabs.assemblies", icon: Users },
+  { id: "commentary", labelKey: "tabs.commentary", icon: ScrollText },
+  { id: "verse", labelKey: "tabs.scripture", icon: BookOpen },
+  { id: "widgets", labelKey: "calendar.nav", icon: Calendar },
+  { id: "settings", labelKey: "tabs.settings", icon: Settings },
 ];
 const hidden = ["home", "index", "search", "bookmarks", "explore"];
 
@@ -142,8 +142,8 @@ function NavigationDock({ state, navigation }: BottomTabBarProps) {
               indicatorStyle,
             ]}
           />
-          {destinations.map(({ id, label: defaultLabel, icon: Icon }) => {
-            const label = id === "widgets" ? t("calendar.nav") : defaultLabel;
+          {destinations.map(({ id, labelKey, icon: Icon }) => {
+            const label = t(labelKey);
             const route = state.routes.find((route) => route.name === id)!;
             const selected = state.routes[state.index].key === route.key;
             const color = selected
@@ -217,6 +217,8 @@ function NavigationDock({ state, navigation }: BottomTabBarProps) {
 }
 
 export default function TabLayout() {
+  const { t } = useTranslation();
+
   return (
     <Tabs
       initialRouteName="index"
@@ -226,8 +228,8 @@ export default function TabLayout() {
       }}
       tabBar={(props) => <NavigationDock {...props} />}
     >
-      {destinations.map(({ id, label }) => (
-        <Tabs.Screen key={id} name={id} options={{ title: label }} />
+      {destinations.map(({ id, labelKey }) => (
+        <Tabs.Screen key={id} name={id} options={{ title: t(labelKey) }} />
       ))}
       {hidden.map((name) => (
         <Tabs.Screen key={name} name={name} options={{ href: null }} />

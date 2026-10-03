@@ -4,6 +4,7 @@ import type { MockVerse } from "@/src/constants/mockData";
 import type { ThemeMode } from "@/src/theme";
 import type { BesorahTextVersion } from "@davar/shared/translationConfig";
 import type { BesorahLanguage } from "@davar/shared/greekBesorah";
+import { canUseSeferStyle } from "@davar/shared/settingsOrder";
 import { getDefaultLanguage, type AppLanguage } from "@/src/services/storage";
 import type {
   DownloadProgress,
@@ -93,12 +94,19 @@ export const useAppStore = create<AppState>((set) => ({
   setShowCalendarDayPill: (value) => set({ showCalendarDayPill: value }),
   seferMode: false,
   setSeferMode: (value) =>
-    set((state) => ({
-      seferMode:
-        value &&
-        state.showFullChapter &&
-        (state.hebrewOnly || state.translationOnly),
-    })),
+    set((state) => {
+      const seferMode = value && canUseSeferStyle(state);
+      if (seferMode && !state.hebrewOnly && !state.translationOnly) {
+        return {
+          seferMode,
+          translationOnly: true,
+          showQumran: false,
+          showCantillation: false,
+          showNikud: false,
+        };
+      }
+      return { seferMode };
+    }),
   hebrewOnly: false,
   setHebrewOnly: (value) =>
     set((state) => ({

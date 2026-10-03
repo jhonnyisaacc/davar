@@ -238,21 +238,6 @@ export default function SettingsScreen() {
             />
           </View>
         );
-      case "fullChapter":
-        return (
-          <>
-            {toggleRow(
-              t("settings.fullChapter.title"),
-              state.showFullChapter,
-              state.setShowFullChapter,
-            )}
-            {toggleRow(
-              t("settings.translationOnly.title"),
-              state.translationOnly,
-              state.setTranslationOnly,
-            )}
-          </>
-        );
       case "calendarDayPill":
         return (
           <View>
@@ -316,6 +301,21 @@ export default function SettingsScreen() {
               </View>
             ) : null}
           </View>
+        );
+      case "fullChapter":
+        return (
+          <>
+            {toggleRow(
+              t("settings.fullChapter.title"),
+              state.showFullChapter,
+              state.setShowFullChapter,
+            )}
+            {toggleRow(
+              t("settings.translationOnly.title"),
+              state.translationOnly,
+              state.setTranslationOnly,
+            )}
+          </>
         );
       case "seferStyle":
         if (!isSeferStyleVisible(state.showFullChapter)) return null;

@@ -303,6 +303,7 @@
     "selectBookPrompt": "Selecciona un libro para comenzar.",
     "loading": "Cargando versículos...",
     "prefixLabel": "Prefijo: {prefix}",
+    "translationUnavailable": "La traducción no está disponible en este momento. Inténtalo de nuevo más tarde.",
     "missingSpanishTranslation": "Por el momento no contamos con traducción al español de este texto, estamos trabajando en ello...",
     "greekUnavailable": "No está presente en el texto mostrado de SBLGNT 2011.",
     "besorahDisclaimer": {
@@ -367,6 +368,9 @@
   "tabs": {
     "home": "Inicio",
     "verse": "Versículo",
+    "scripture": "Escrituras",
+    "assemblies": "Asambleas",
+    "commentary": "Comentario",
     "settings": "Ajustes"
   },
   "calendar": {

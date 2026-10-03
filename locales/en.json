@@ -303,6 +303,7 @@
     "selectBookPrompt": "Select a book to begin.",
     "loading": "Loading verses...",
     "prefixLabel": "Prefix: {prefix}",
+    "translationUnavailable": "Translation is unavailable right now. Please try again later.",
     "missingSpanishTranslation": "We don't have a Spanish translation for this text yet, we're working on it...",
     "greekUnavailable": "Not present in the SBLGNT 2011 displayed text.",
     "besorahDisclaimer": {
@@ -367,6 +368,9 @@
   "tabs": {
     "home": "Home",
     "verse": "Verse",
+    "scripture": "Scripture",
+    "assemblies": "Assemblies",
+    "commentary": "Commentary",
     "settings": "Settings"
   },
   "calendar": {

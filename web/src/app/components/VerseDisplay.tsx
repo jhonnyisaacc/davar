@@ -103,11 +103,14 @@ export function VerseDisplay({
 }: VerseDisplayProps) {
 	const { t } = useTranslation(language);
 	const spanishMissingTranslation = t("verse.missingSpanishTranslation");
-	const hideSuperscripts = shouldHideSuperscripts(getTranslationKey(language));
+	const hideSuperscripts = shouldHideSuperscripts(
+		getTranslationKey(translationOnly && language === "he" ? "en" : language),
+	);
 	const hideTranslationText =
 		shouldHideTranslationText(language, hebrewOnly, sourceLanguage) &&
 		!translationOnly;
-	const isHebrewOverlay = language === "he" && sourceLanguage === "greek";
+	const isHebrewOverlay =
+		!translationOnly && language === "he" && sourceLanguage === "greek";
 	const translationRenderOptions = {
 		hideSuperscripts,
 		footnotes: translation_footnotes ?? [],
@@ -324,29 +327,21 @@ export function VerseDisplay({
 		});
 	};
 
-	const readingPills = (
-		<div className="flex flex-col items-center gap-3 pb-5">
-			{onOpenCalendar ? (
-				<CalendarDayPill
-					language={language}
-					showEveryDay={showCalendarDayPill}
-					onOpenCalendar={onOpenCalendar}
-				/>
-			) : null}
-			<span
-				className="rounded-full bg-[var(--muted)] px-3 py-1.5 text-xs text-[var(--text-primary)]"
-				style={{ fontFamily: "Inter, sans-serif" }}
-			>
-				{language === "he" ? bookNameHebrew : bookName} · {chapter}
-			</span>
+	const calendarDayPill = onOpenCalendar ? (
+		<div className="pb-5 text-center empty:hidden">
+			<CalendarDayPill
+				language={language}
+				showEveryDay={showCalendarDayPill}
+				onOpenCalendar={onOpenCalendar}
+			/>
 		</div>
-	);
+	) : null;
 
 	// If full chapter mode is enabled and we have verses, show the full chapter view
 	if (showFullChapter && chapterVerses && chapterVerses.length > 0) {
 		return (
 			<div className="transition-opacity duration-500">
-				{readingPills}
+				{calendarDayPill}
 				<FullChapterView
 					verses={chapterVerses}
 					bookName={bookName}
@@ -372,7 +367,7 @@ export function VerseDisplay({
 	// Otherwise show the single verse view
 	return (
 		<div className="space-y-10 relative pt-12 sm:pt-14">
-			{readingPills}
+			{calendarDayPill}
 			{/* Hebrew Text with Verse Number and Onboarding Hint - Large and Centered */}
 			{showSourceText && (
 				<div
@@ -441,9 +436,11 @@ export function VerseDisplay({
 								[{verseNumber}]
 							</div>
 						)}
-						{language === "es" && !translation.trim()
-							? spanishMissingTranslation
-							: renderTranslation(translation || "", translationRenderOptions)}
+						{!translation.trim()
+							? language === "es"
+								? spanishMissingTranslation
+								: t("verse.translationUnavailable")
+							: renderTranslation(translation, translationRenderOptions)}
 					</div>
 				</SwipeIndicator>
 			)}

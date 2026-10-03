@@ -11,6 +11,7 @@ import { useTranslation } from "../hooks/useTranslation";
 import { productApi } from "../services/productApi";
 import { SettingsResources } from "./SettingsResources";
 import { CalendarCityNotice } from "./CalendarCityNotice";
+import { PillToggle } from "./PillToggle";
 import type { RouteScreen } from "../utils/routeState";
 
 export interface SettingsScreenProps {
@@ -56,22 +57,17 @@ export function SettingsScreen(
 		disabled = false,
 		reason?: string,
 	) => (
-		<div className={`${rowClass} ${disabled ? "opacity-45" : ""}`}>
-			<span className="text-[15px]">{label}</span>
-			<button
-				type="button"
-				role="switch"
-				aria-label={label}
-				aria-checked={checked}
+		<div className={rowClass}>
+			<span className={`flex-1 text-[15px] ${disabled ? "opacity-55" : ""}`}>
+				{label}
+			</span>
+			<PillToggle
+				label={label}
+				value={checked}
+				onChange={(value) => change?.(value)}
 				disabled={disabled || !change}
-				title={reason}
-				onClick={() => change?.(!checked)}
-				className={`relative h-[30px] w-[52px] shrink-0 rounded-full transition-colors disabled:cursor-not-allowed ${checked ? "bg-[var(--primary)]" : "bg-[var(--muted)]"}`}
-			>
-				<span
-					className={`absolute top-[3px] size-6 rounded-full bg-white shadow-sm transition-all ${checked ? "left-[25px]" : "left-[3px]"}`}
-				/>
-			</button>
+				disabledReason={reason}
+			/>
 		</div>
 	);
 	const select = <T extends string>(
@@ -81,7 +77,7 @@ export function SettingsScreen(
 		options: { value: T; label: string }[],
 	) => (
 		<div className={rowClass}>
-			<span className="text-[15px]">{label}</span>
+			<span className="flex-1 text-[15px]">{label}</span>
 			<select
 				aria-label={label}
 				value={value}
@@ -110,9 +106,9 @@ export function SettingsScreen(
 					props.language,
 					props.onLanguageChange,
 					[
-						{ value: "en", label: "English" },
-						{ value: "es", label: "Español" },
-						{ value: "he", label: "עברית" },
+						{ value: "en", label: t("languages.en") },
+						{ value: "es", label: t("languages.es") },
+						{ value: "he", label: t("languages.he") },
 					],
 				);
 			case "besorahLanguage":
@@ -148,6 +144,36 @@ export function SettingsScreen(
 								},
 							],
 						);
+			case "calendarDayPill":
+				return (
+					<div>
+						<div className={rowClass}>
+							<div className="flex-1 space-y-1">
+								<span className="text-[15px]">
+									{t("settings.calendarDayPill.title")}
+								</span>
+								<p className="text-xs text-[var(--text-secondary)]">
+									{t("settings.calendarDayPill.subtitle")}
+								</p>
+							</div>
+							<PillToggle
+								label={t("settings.calendarDayPill.title")}
+								value={props.showCalendarDayPill ?? false}
+								onChange={(value) => props.onCalendarDayPillChange?.(value)}
+								disabled={!props.onCalendarDayPillChange}
+							/>
+						</div>
+						<CalendarCityNotice
+							enabled={props.showCalendarDayPill ?? false}
+							language={props.language}
+							onChooseCity={
+								props.onOpenScreen
+									? () => props.onOpenScreen?.("widgets")
+									: undefined
+							}
+						/>
+					</div>
+				);
 			case "fullChapter":
 				return (
 					<>
@@ -162,28 +188,6 @@ export function SettingsScreen(
 							props.onTranslationOnlyChange,
 						)}
 					</>
-				);
-			case "calendarDayPill":
-				return (
-					<div>
-						{toggle(
-							t("settings.calendarDayPill.title"),
-							props.showCalendarDayPill ?? false,
-							props.onCalendarDayPillChange,
-						)}
-						<p className="-mt-1 mb-2 text-xs text-[var(--text-secondary)]">
-							{t("settings.calendarDayPill.subtitle")}
-						</p>
-						<CalendarCityNotice
-							enabled={props.showCalendarDayPill ?? false}
-							language={props.language}
-							onChooseCity={
-								props.onOpenScreen
-									? () => props.onOpenScreen?.("widgets")
-									: undefined
-							}
-						/>
-					</div>
 				);
 			case "seferStyle":
 				return isSeferStyleVisible(props.showFullChapter)

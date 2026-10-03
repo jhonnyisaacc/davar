@@ -303,6 +303,7 @@
     "selectBookPrompt": "בחר ספר כדי להתחיל.",
     "loading": "טוען פסוקים...",
     "prefixLabel": "תחילית: {prefix}",
+    "translationUnavailable": "התרגום אינו זמין כרגע. נסו שוב מאוחר יותר.",
     "missingSpanishTranslation": "אין לנו כרגע תרגום לספרדית לטקסט זה, אנחנו עובדים על כך...",
     "greekUnavailable": "אינו מופיע בטקסט המוצג של SBLGNT 2011.",
     "besorahDisclaimer": {
@@ -367,6 +368,9 @@
   "tabs": {
     "home": "בית",
     "verse": "פסוק",
+    "scripture": "כתובים",
+    "assemblies": "קהילות",
+    "commentary": "פרשנות",
     "settings": "הגדרות"
   },
   "calendar": {

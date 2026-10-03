@@ -68,7 +68,7 @@ describe("shared settings order", () => {
 });
 
 describe("canUseSeferStyle", () => {
-	test("requires full chapter and single-text mode", () => {
+	test("is available with full chapter in every text mode", () => {
 		expect(
 			canUseSeferStyle({
 				showFullChapter: true,
@@ -89,11 +89,28 @@ describe("canUseSeferStyle", () => {
 				hebrewOnly: false,
 				translationOnly: false,
 			}),
-		).toBe(false);
+		).toBe(true);
+	});
+
+	test("requires full chapter", () => {
 		expect(
 			canUseSeferStyle({
 				showFullChapter: false,
 				hebrewOnly: true,
+				translationOnly: false,
+			}),
+		).toBe(false);
+		expect(
+			canUseSeferStyle({
+				showFullChapter: false,
+				hebrewOnly: false,
+				translationOnly: true,
+			}),
+		).toBe(false);
+		expect(
+			canUseSeferStyle({
+				showFullChapter: false,
+				hebrewOnly: false,
 				translationOnly: false,
 			}),
 		).toBe(false);

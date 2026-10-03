@@ -58,14 +58,14 @@ export function FullChapterView({
 	);
 	const shouldShowSefer = seferMode && (hebrewOnly || translationOnly);
 	const spanishMissingTranslation = t("verse.missingSpanishTranslation");
-	const hideSuperscripts = shouldHideSuperscripts(getTranslationKey(language));
 	const hideTranslationText =
 		shouldHideTranslationText(
 			language,
 			hebrewOnly,
 			isGreekSource ? "greek" : "hebrew",
 		) && !translationOnly;
-	const isHebrewOverlay = language === "he" && isGreekSource;
+	const isHebrewOverlay =
+		!translationOnly && language === "he" && isGreekSource;
 	const isRenderableDssWord = (value?: string): value is string => {
 		if (!value) return false;
 		const normalized = value.trim();
@@ -103,11 +103,27 @@ export function FullChapterView({
 		? normalizeForMatch(selectedWord.text)
 		: null;
 
-	const renderVerseTranslation = (verse: VerseResponse) =>
-		renderTranslation(verse.translation ?? "", {
-			hideSuperscripts,
+	const renderVerseTranslation = (verse: VerseResponse) => {
+		if (!verse.translation?.trim()) {
+			return language === "es"
+				? spanishMissingTranslation
+				: t("verse.translationUnavailable");
+		}
+		const translationLanguage =
+			verse.translation_language === "en" ||
+			verse.translation_language === "es" ||
+			verse.translation_language === "he"
+				? verse.translation_language
+				: translationOnly && language === "he"
+					? "en"
+					: language;
+		return renderTranslation(verse.translation, {
+			hideSuperscripts: shouldHideSuperscripts(
+				getTranslationKey(translationLanguage),
+			),
 			footnotes: verse.translation_footnotes ?? [],
 		});
+	};
 
 	const renderVerseWords = (verse: VerseResponse) => {
 		if (verse.available === false) {
@@ -276,9 +292,7 @@ export function FullChapterView({
 											direction: "ltr",
 										}}
 									>
-										{language === "es" && !(verse.translation ?? "").trim()
-											? spanishMissingTranslation
-											: renderVerseTranslation(verse)}
+										{renderVerseTranslation(verse)}
 									</span>
 									{idx < verses.length - 1 && "\u200E "}
 								</span>
@@ -305,7 +319,7 @@ export function FullChapterView({
 											fontSize: "14px",
 										}}
 									>
-										[{idx + 1}]
+										[{verse.verse}]
 									</span>
 									{renderVerseWords(verse)}
 									{idx < verses.length - 1 && " "}
@@ -316,7 +330,7 @@ export function FullChapterView({
 				</div>
 			) : (
 				<div className="space-y-8 px-2">
-					{verses.map((verse, idx) => (
+					{verses.map((verse) => (
 						<div
 							key={verse.verse}
 							className="space-y-3 transition-all duration-300 verse-block"
@@ -341,7 +355,7 @@ export function FullChapterView({
 											fontSize: "14px",
 										}}
 									>
-										[{idx + 1}]
+										[{verse.verse}]
 									</span>
 									{renderVerseWords(verse)}
 								</div>
@@ -377,12 +391,8 @@ export function FullChapterView({
 											>
 												[{verse.verse}]
 											</span>
-											{language === "es" && !(verse.translation ?? "").trim()
-												? spanishMissingTranslation
-												: renderVerseTranslation(verse)}
+											{renderVerseTranslation(verse)}
 										</>
-									) : language === "es" && !(verse.translation ?? "").trim() ? (
-										spanishMissingTranslation
 									) : (
 										renderVerseTranslation(verse)
 									)}

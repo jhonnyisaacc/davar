@@ -11,8 +11,8 @@
  *
  * Dependency rules (rendered state may gate visibility/disabled):
  *   - Sefer Style requires Full Chapter enabled.
- *   - Sefer Style is enabled only in single-text mode
- *     (Hebrew Only or Translation Only).
+ *   - Sefer Style is available in every Full Chapter display mode.
+ *     Enabling it in bilingual mode selects Translation Only.
  *   - Hebrew-dependent controls (Qumran, Hebrew Only, Cantillation,
  *     Nikud) are dimmed/disabled when Translation Only is active.
  */
@@ -21,8 +21,8 @@ export type SharedSettingId =
 	| "language"
 	| "besorahLanguage"
 	| "besorahTextVersion"
-	| "fullChapter"
 	| "calendarDayPill"
+	| "fullChapter"
 	| "seferStyle"
 	| "hebrewOnly"
 	| "qumran";
@@ -32,8 +32,8 @@ export const SHARED_SETTINGS_ORDER: readonly SharedSettingId[] = [
 	"language",
 	"besorahLanguage",
 	"besorahTextVersion",
-	"fullChapter",
 	"calendarDayPill",
+	"fullChapter",
 	"seferStyle",
 	"hebrewOnly",
 	"qumran",
@@ -51,14 +51,9 @@ export function isSeferStyleVisible(showFullChapter: boolean): boolean {
 }
 
 /**
- * Canonical Sefer enablement: full-chapter single-text mode.
- * Matches locale copy ("Hebrew Only or Translation Only") and the
- * mobile store gate.
+ * Full Chapter is the only prerequisite for enabling Sefer Style.
+ * The reader selects a single-text mode when Sefer is enabled.
  */
-export function canUseSeferStyle({
-	showFullChapter,
-	hebrewOnly,
-	translationOnly,
-}: SeferStyleGate): boolean {
-	return showFullChapter && (hebrewOnly || translationOnly);
+export function canUseSeferStyle({ showFullChapter }: SeferStyleGate): boolean {
+	return showFullChapter;
 }
