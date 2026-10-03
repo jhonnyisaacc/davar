@@ -42,7 +42,7 @@ To learn more about developing your project with Expo, look at the following res
 
 ## Commands
 
-Development commands share Metro port `8082`. Pass additional Expo flags after
+Development commands share Metro port `8081`. Pass additional Expo flags after
 the script name, for example `bun run ios --device "iPhone 18 Pro"`.
 
 | Purpose | Command |
@@ -52,7 +52,7 @@ the script name, for example `bun run ios --device "iPhone 18 Pro"`.
 | Android development client on localhost | `bun run start:android:localhost` |
 | Build and launch locally | `bun run ios` / `bun run android` |
 | Regenerate a native project and rebuild | `bun run ios:clean` / `bun run android:clean` |
-| Forward Metro and static data to an Android USB device | `bun run android:reverse` |
+| Forward Metro, static data, and the API to an Android USB device | `bun run android:reverse` |
 | View Android logs | `bun run android:logs` |
 | Start Expo web | `bun run web` |
 | TypeScript, lint, and all mobile tests | `bun run preflight` |
@@ -123,6 +123,11 @@ unsupported components until those patterns are migrated.
 
 ## Static Data Environment Setup
 
+Local services use Rails on `3000`, web/static data on `5173`, and Expo/Metro
+on its default port `8081`. Commentary requires a running Rails server; start it
+from `api/` with `bundle exec rails server` after following [the API setup](../api/README.md).
+Start the static data server from `web/` with `bun run dev`.
+
 Mobile static data endpoints are controlled by Expo public env vars:
 
 - `EXPO_PUBLIC_STATIC_DATA_BASE_URL`
@@ -132,7 +137,7 @@ Resolution order in app code:
 
 1. If `EXPO_PUBLIC_*` vars are set, those values are used.
 2. If not set:
-   - Development (`__DEV__`): `http://127.0.0.1:3002/data`
+   - Development (`__DEV__`): `http://127.0.0.1:5173/data`
    - Production: `https://davar.bible/data`
 
 Local setup:
@@ -186,10 +191,10 @@ Checklist:
 
 1. Ensure phone and development machine are on the same Wi-Fi network.
 2. Use LAN-IP endpoints in local env values for physical-device testing:
-   - `EXPO_PUBLIC_STATIC_DATA_BASE_URL=http://<YOUR_LAN_IP>:3002/data`
-   - `EXPO_PUBLIC_STATIC_BUNDLES_BASE_URL=http://<YOUR_LAN_IP>:3002/data/bundles`
+   - `EXPO_PUBLIC_STATIC_DATA_BASE_URL=http://<YOUR_LAN_IP>:5173/data`
+   - `EXPO_PUBLIC_STATIC_BUNDLES_BASE_URL=http://<YOUR_LAN_IP>:5173/data/bundles`
 3. Do not use `127.0.0.1` or `localhost` for physical devices.
-4. Confirm `http://<YOUR_LAN_IP>:3002/data/metadata.json` opens in the phone browser.
+4. Confirm `http://<YOUR_LAN_IP>:5173/data/metadata.json` opens in the phone browser.
 5. Verify your local static server is running and bound to a non-loopback interface.
 
 The app now prints a dev diagnostic line with resolved static URLs and Metro host, and network errors include actionable hints for Android physical-device setup.

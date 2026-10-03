@@ -216,6 +216,11 @@ openssl rand -hex 32
 
 ## 🧪 Manual Testing Commands
 
+These commands document the retired Python Scripture API on port 2220. For the
+current Rails product API on port 3000, use [api/README.md](../api/README.md).
+Scripture now uses the static endpoints described above; the current local web
+and static-data server runs on port 5173, and Expo/Metro runs on port 8081.
+
 ### 1. Health Check
 
 Test that the server is running:

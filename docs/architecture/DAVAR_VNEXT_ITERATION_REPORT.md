@@ -231,7 +231,11 @@ external credentials. Consultation limits, failed-request refunds, ownership and
 provider connection checks still use the normal Rails services. Calendar scenarios
 supply synthetic evidence to pinned Bore, retaining unresolved Aviv.
 
-`api/bin/dev-sandbox` manages its own PostgreSQL cluster on 55433 and recorded
+The ports below record the original validation run. Current development and
+sandbox defaults are Rails 3000, web 5173, Expo 8081, and PostgreSQL 5432 with
+a separate sandbox database; see `DAVAR_V2_MANUAL_TESTING.md`.
+
+`api/bin/dev-sandbox` managed its own PostgreSQL cluster on 55433 and recorded
 Rails/web/Expo process groups; occupied ports stop startup. Expo uses 8086 because
 8082 belongs to another checkout. Reset removes fixture-owned records, including
 assemblies created during testing, and leaves unrelated users intact. The

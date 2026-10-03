@@ -16,8 +16,9 @@ full required dashboard settings and the exact troubleshooting for
 "Could not resolve: react-dom/client" build failures.
 
 Run `bun run dev` for Bun HTML hot-reload mode without running `build.ts`.
-It keeps the app on `http://localhost:3002`, checks static data, runs Bun HTML mode on an internal port, and serves `/data/*.json` through a local gateway.
-The gateway listens on `0.0.0.0` by default so mobile devices on the same LAN can use `http://<your-machine-ip>:3002`.
+It keeps the app on `http://localhost:5173`, checks static data, runs Bun HTML mode on an internal port, and serves `/data/*.json` through a local gateway.
+The hot-reload upstream at `http://localhost:5174` also serves `/data/*` and `/api/ts2009/*`, so verse links opened directly on either port work.
+The gateway listens on `0.0.0.0` by default so mobile devices on the same LAN can use `http://<your-machine-ip>:5173`.
 
 Run `bun run dev:static` for production-parity local serving (builds `dist/` once, then serves it).
 

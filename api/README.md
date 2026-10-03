@@ -7,6 +7,12 @@ lib/bore/UPSTREAM.md. No client calculates Biblical dates.
 
 ## Local development
 
+The root `../mise.toml` declares Ruby and Python. With Mise activated in your
+shell, run `mise trust` and `mise install` from the repository root to select and
+install the project runtimes. For Zsh, add `eval "$(mise activate zsh)"` once to `~/.zshrc`
+and open a new terminal. Verify `ruby --version` reports 3.4.9.
+If shell activation is unavailable, prefix the commands below with `mise exec --`.
+
 From api/:
 - `bundle install`
 - `cp .env.development.example .env.development` and fill in local settings.
@@ -24,6 +30,11 @@ credentials for a hosted database. No production migration has been run.
 From mobile/: `EXPO_PUBLIC_API_URL=http://YOUR_LAN_HOST:3000 bun run start`.
 From web/: `PUBLIC_API_URL=http://localhost:3000 bun run dev`.
 JavaScript commands run with Bun in the relevant surface directory.
+
+The project uses Rails on 3000, web/static data on 5173, Expo/Metro on 8081,
+and PostgreSQL on 5432. Keep Rails running alongside Expo: Commentary questions
+first create or restore an API session, then submit messages to Rails. Starting
+Expo alone does not start the API.
 
 ## Development, staging and production
 
@@ -247,8 +258,10 @@ The iteration's actual validation and remaining prerequisites are recorded in
 ## Credential-free local sandbox
 
 Follow [the manual-testing guide](../docs/architecture/DAVAR_V2_MANUAL_TESTING.md).
-From the repository root, `api/bin/dev-sandbox setup` prepares an isolated PostgreSQL
-cluster and synthetic fixtures; `api/bin/dev-sandbox start` runs Rails, web and Expo.
+Start local PostgreSQL on its default port 5432. From the repository root,
+`api/bin/dev-sandbox setup` prepares a separate `davar_v2_sandbox` database and
+synthetic fixtures; `api/bin/dev-sandbox start` runs Rails, web and Expo on the
+same project ports as normal development. Stopping the sandbox leaves PostgreSQL running.
 The launcher sets `DAVAR_DEV_SANDBOX=1` only in development. Staging and production
 reject the flag. The local inbox/status routes exist only in sandbox development
 and require loopback requests. By default no external AI, geocoder, email or

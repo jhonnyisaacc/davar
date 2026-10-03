@@ -9,10 +9,10 @@ without that flag the normal authentication and integration behavior remains.
 
 ## Setup and launch
 
-Use this checkout: `/Users/jhonny/.codex/worktrees/davar-v2/davar`.
+Use the checkout you are currently developing in.
 Prerequisites: Bun, Ruby 3.4+, PostgreSQL 17, Python 3.13+, Xcode with iPhone 17
-simulator, and CocoaPods for native builds. The launcher locates installed mise
-Ruby/Python runtimes and Homebrew PostgreSQL; `RUBY_BIN`, `PYTHON_BIN`, `PG_BIN`
+simulator, and CocoaPods for native builds. Start PostgreSQL on port 5432 before
+running setup. The launcher locates installed mise Ruby/Python runtimes; `RUBY_BIN`, `PYTHON_BIN`
 and `BUN_BIN` can select alternatives. JavaScript commands use Bun.
 
 From the repository root:
@@ -32,17 +32,17 @@ api/bin/dev-sandbox ios
 This builds/installs locally and opens the development client on iPhone 17. The
 simulator build is already installed on this machine. No EAS commands are used.
 If the installed client opens an old server, open the following URL in simulator
-Safari: `exp+davar://expo-development-client/?url=http%3A%2F%2F127.0.0.1%3A8086`.
+Safari: `exp+davar://expo-development-client/?url=http%3A%2F%2Flocalhost%3A8081`.
 Metro runs in CI mode under the launcher; restart services after changing mobile
 source rather than expecting hot reload.
 
 | Surface | URL / port |
 | --- | --- |
-| Browser app | http://127.0.0.1:3002/assemblies |
+| Browser app | http://127.0.0.1:5173/assemblies |
 | Rails inbox (also simulator Safari) | http://127.0.0.1:3000/development/mailbox |
 | Development diagnostics | http://127.0.0.1:3000/api/v1/development/status |
-| Expo / optional Expo web | http://127.0.0.1:8086 |
-| Isolated PostgreSQL | 127.0.0.1:55433, database `davar_v2_sandbox` |
+| Expo / optional Expo web | http://127.0.0.1:8081 |
+| PostgreSQL | 127.0.0.1:5432, separate database `davar_v2_sandbox` |
 
 The browser callback returns to its current Commentary/Assemblies route. Native
 returns to `davar://auth/callback`; Expo web returns to its browser origin plus
@@ -138,7 +138,7 @@ Seeding is idempotent and preserves testing progress; use reset for a clean run.
 Rate limits still apply; wait for their window if repeated sign-in attempts are
 throttled. Stop targets only processes recorded by this launcher (with matching
 start signatures) and its own PostgreSQL cluster. Ctrl+C stops app services;
-`stop` also stops PostgreSQL. Runtime state/logs/mail are ignored under `api/tmp/`.
+`stop` leaves the shared PostgreSQL service running. Runtime state/logs/mail are ignored under `api/tmp/`.
 Do not share runtime logs or inbox links. No private corpus is required.
 
 ## Manual acceptance checklist (user performed)

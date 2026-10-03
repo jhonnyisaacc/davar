@@ -1,6 +1,6 @@
 import { join } from "node:path";
 
-const port = Number(process.env.PORT ?? 3002);
+const port = Number(process.env.PORT ?? 5173);
 const hostname = process.env.HOST ?? "0.0.0.0";
 const runtimeEnv =
 	process.env.PUBLIC_NODE_ENV ?? process.env.NODE_ENV ?? "production";
@@ -16,7 +16,10 @@ const getTs2009LocalFilePath = (pathname: string): string | null => {
 	}
 
 	const segments = relativePath.split("/").filter(Boolean);
-	if (segments.length === 0 || segments.some((segment) => segment === "." || segment === "..")) {
+	if (
+		segments.length === 0 ||
+		segments.some((segment) => segment === "." || segment === "..")
+	) {
 		return null;
 	}
 
