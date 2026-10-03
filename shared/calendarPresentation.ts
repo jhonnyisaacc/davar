@@ -1,3 +1,4 @@
+import type { CalendarState } from "./calendarClient";
 import { calendarIsOutdated } from "./calendarRefresh";
 import type { CalendarDay, CalendarResponse } from "./productContracts";
 
@@ -54,6 +55,40 @@ export function readingCalendarDay(
 	)
 		return null;
 	return showEveryDay || confirmedMoadim(day).length > 0 ? day : null;
+}
+
+export type ReadingCalendarPill =
+	| { kind: "day"; day: CalendarDay }
+	| {
+			kind: "status";
+			messageKey:
+				| "calendar.loading"
+				| "calendar.chooseCityPill"
+				| "calendar.dayUnavailable"
+				| "calendar.awaitingConfirmation";
+	  };
+
+export function readingCalendarPill(
+	state: Pick<CalendarState, "calendar" | "city" | "restored" | "busy" | "error">,
+	showEveryDay: boolean,
+	now = Date.now(),
+): ReadingCalendarPill | null {
+	const day = readingCalendarDay(state.calendar, showEveryDay, now);
+	if (day) return { kind: "day", day };
+	if (!showEveryDay) return null;
+	if (!state.restored)
+		return { kind: "status", messageKey: "calendar.loading" };
+	if (!state.city)
+		return { kind: "status", messageKey: "calendar.chooseCityPill" };
+	if (state.busy)
+		return { kind: "status", messageKey: "calendar.loading" };
+	if (
+		state.error ||
+		!state.calendar?.days[0] ||
+		calendarIsOutdated(state.calendar, now)
+	)
+		return { kind: "status", messageKey: "calendar.dayUnavailable" };
+	return { kind: "status", messageKey: "calendar.awaitingConfirmation" };
 }
 
 export function annualMoadim(calendar: CalendarResponse | null, year: number) {

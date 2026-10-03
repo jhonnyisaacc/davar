@@ -51,7 +51,7 @@ import {
 } from "@/src/components/NavigationSheet";
 import { CalendarDayPill } from "@/src/features/calendar/CalendarDayPill";
 import { useCalendar } from "@/src/features/calendar/useCalendar";
-import { readingCalendarDay } from "@davar/shared/calendarPresentation";
+import { readingCalendarPill } from "@davar/shared/calendarPresentation";
 import { BookChapterPill } from "@/src/components/ui/BookChapterPill";
 import { getColors, getResponsiveLayout, spacing, typography } from "@/src/theme";
 import { fetchMetadata } from "@/src/services/metadata";
@@ -767,10 +767,10 @@ export const VerseDetailContent = () => {
   });
 
   const verseId = effectiveVerseId;
-  const { calendar: readingCalendar } = useCalendar();
+  const readingCalendarState = useCalendar();
   const showCalendarDayPill = useAppStore((state) => state.showCalendarDayPill);
-  const hasCalendarDayPill = !!readingCalendarDay(
-    readingCalendar,
+  const hasCalendarDayPill = !!readingCalendarPill(
+    readingCalendarState,
     showCalendarDayPill,
   );
   const navigationRowTop = isStandaloneVerseDetailRoute

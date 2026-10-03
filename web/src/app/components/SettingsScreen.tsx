@@ -10,6 +10,7 @@ import type { BesorahLanguage } from "@davar/shared/greekBesorah";
 import { useTranslation } from "../hooks/useTranslation";
 import { productApi } from "../services/productApi";
 import { SettingsResources } from "./SettingsResources";
+import { CalendarCityNotice } from "./CalendarCityNotice";
 import type { RouteScreen } from "../utils/routeState";
 
 export interface SettingsScreenProps {
@@ -173,6 +174,15 @@ export function SettingsScreen(
 						<p className="-mt-1 mb-2 text-xs text-[var(--text-secondary)]">
 							{t("settings.calendarDayPill.subtitle")}
 						</p>
+						<CalendarCityNotice
+							enabled={props.showCalendarDayPill ?? false}
+							language={props.language}
+							onChooseCity={
+								props.onOpenScreen
+									? () => props.onOpenScreen?.("widgets")
+									: undefined
+							}
+						/>
 					</div>
 				);
 			case "seferStyle":

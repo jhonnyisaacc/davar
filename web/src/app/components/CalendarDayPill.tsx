@@ -1,7 +1,7 @@
 import { CalendarDays } from "lucide-react";
 import {
 	confirmedMoadim,
-	readingCalendarDay,
+	readingCalendarPill,
 } from "@davar/shared/calendarPresentation";
 import { useCalendar } from "../hooks/useCalendar";
 import { useTranslation, type AppLanguage } from "../hooks/useTranslation";
@@ -15,18 +15,23 @@ export function CalendarDayPill({
 	showEveryDay: boolean;
 	onOpenCalendar: () => void;
 }) {
-	const { calendar } = useCalendar();
+	const calendarState = useCalendar();
 	const { t } = useTranslation(language);
-	const day = readingCalendarDay(calendar, showEveryDay);
-	if (!day) return null;
-	const month = day.biblical.month_id;
+	const pill = readingCalendarPill(calendarState, showEveryDay);
+	if (!pill) return null;
+	const day = pill.kind === "day" ? pill.day : undefined;
+	const month = day?.biblical.month_id;
+	const dayNumber = day?.biblical.day ?? "";
 	const translated = month ? t(`calendar.months.${month}`) : "";
-	const label = month
-		? t("calendar.dayWithMonth", {
-				month: translated.startsWith("calendar.") ? month : translated,
-				day: day.biblical.day!,
-			})
-		: t("calendar.day", { day: day.biblical.day! });
+	const label =
+		pill.kind === "status"
+			? t(pill.messageKey)
+			: month
+				? t("calendar.dayWithMonth", {
+						month: translated.startsWith("calendar.") ? month : translated,
+						day: dayNumber,
+					})
+				: t("calendar.day", { day: dayNumber });
 	return (
 		<button
 			type="button"

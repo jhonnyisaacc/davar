@@ -3,7 +3,7 @@ import { CalendarDays } from "lucide-react-native";
 import { Pressable, Text } from "react-native";
 import {
   confirmedMoadim,
-  readingCalendarDay,
+  readingCalendarPill,
 } from "@davar/shared/calendarPresentation";
 import { useAppStore } from "@/src/store/useAppStore";
 import { useTranslation } from "@/src/i18n/useTranslation";
@@ -11,22 +11,27 @@ import { useProductStyle } from "../product/ui";
 import { useCalendar } from "./useCalendar";
 
 export function CalendarDayPill() {
-  const { calendar } = useCalendar();
+  const calendarState = useCalendar();
   const everyDay = useAppStore((state) => state.showCalendarDayPill);
   const dark = useAppStore((state) => state.themeMode === "dark");
   const { t, isRTL } = useTranslation();
   const { colors } = useProductStyle();
   const color = dark ? colors.primary : colors.primaryDeep;
-  const day = readingCalendarDay(calendar, everyDay);
-  if (!day) return null;
-  const month = day.biblical.month_id;
+  const pill = readingCalendarPill(calendarState, everyDay);
+  if (!pill) return null;
+  const day = pill.kind === "day" ? pill.day : undefined;
+  const month = day?.biblical.month_id;
+  const dayNumber = day?.biblical.day ?? "";
   const translated = month ? t(`calendar.months.${month}`) : "";
-  const label = month
-    ? t("calendar.dayWithMonth", {
-        month: translated.startsWith("calendar.") ? month : translated,
-        day: day.biblical.day!,
-      })
-    : t("calendar.day", { day: day.biblical.day! });
+  const label =
+    pill.kind === "status"
+      ? t(pill.messageKey)
+      : month
+        ? t("calendar.dayWithMonth", {
+            month: translated.startsWith("calendar.") ? month : translated,
+            day: dayNumber,
+          })
+        : t("calendar.day", { day: dayNumber });
   const moadim = confirmedMoadim(day).map((id) => t(`calendar.events.${id}`));
   return (
     <Pressable

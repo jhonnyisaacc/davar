@@ -5,10 +5,12 @@ import {
   calendarSources,
   confirmedMoadim,
   readingCalendarDay,
+  readingCalendarPill,
 } from "@davar/shared/calendarPresentation";
 import {
   createCalendarClient,
   parseCalendarLocation,
+  type CalendarState,
 } from "@davar/shared/calendarClient";
 import type {
   CalendarDay,
@@ -42,8 +44,95 @@ const location = JSON.stringify({
   city,
   timezone: "America/Argentina/Buenos_Aires",
 });
+const calendarState = (
+  overrides: Partial<CalendarState> = {},
+): CalendarState => ({
+  city,
+  timezone: "America/Argentina/Buenos_Aires",
+  calendar: calendar(),
+  restored: true,
+  busy: false,
+  error: null,
+  ...overrides,
+});
 
 describe("calendar presentation", () => {
+  test("always-on reading pill asks for a city after location restoration", () => {
+    const state = calendarState({ city: null, calendar: null });
+    expect(readingCalendarPill(state, true)).toEqual({
+      kind: "status",
+      messageKey: "calendar.chooseCityPill",
+    });
+    expect(readingCalendarPill({ ...state, restored: false }, true)).toEqual({
+      kind: "status",
+      messageKey: "calendar.loading",
+    });
+    expect(readingCalendarPill(state, false)).toBeNull();
+  });
+  test("selecting a city changes the reading pill from loading to the confirmed day", () => {
+    expect(
+      readingCalendarPill(calendarState({ calendar: null, busy: true }), true),
+    ).toEqual({ kind: "status", messageKey: "calendar.loading" });
+    const state = calendarState();
+    expect(readingCalendarPill(state, true)).toEqual({
+      kind: "day",
+      day: state.calendar!.days[0],
+    });
+    expect(readingCalendarPill({ ...state, busy: true }, true)?.kind).toBe(
+      "day",
+    );
+  });
+  test("always-on pill explains missing and stale data without displaying a date", () => {
+    const unavailable = {
+      kind: "status",
+      messageKey: "calendar.dayUnavailable",
+    } as const;
+    expect(
+      readingCalendarPill(calendarState({ calendar: null }), true),
+    ).toEqual(unavailable);
+    expect(
+      readingCalendarPill(
+        calendarState({ calendar: null, error: "network_error" }),
+        true,
+      ),
+    ).toEqual(unavailable);
+    const expired = {
+      ...calendar(),
+      next_sunset_at: new Date(Date.now() - 1000).toISOString(),
+    };
+    expect(
+      readingCalendarPill(calendarState({ calendar: expired }), true),
+    ).toEqual(unavailable);
+    expect(
+      readingCalendarPill(calendarState({ calendar: expired }), false),
+    ).toBeNull();
+    expect(
+      readingCalendarPill(
+        calendarState({ calendar: { ...calendar(), days: [] } }),
+        true,
+      ),
+    ).toEqual(unavailable);
+  });
+  test("always-on pill shows pending confirmation instead of an unconfirmed date", () => {
+    const pending = calendar(
+      day({
+        month_status: "pending",
+        biblical: { day: null, month_id: null, month_ordinal: null },
+      }),
+    );
+    const state = calendarState({ calendar: pending });
+    expect(readingCalendarPill(state, true)).toEqual({
+      kind: "status",
+      messageKey: "calendar.awaitingConfirmation",
+    });
+    expect(readingCalendarPill(state, false)).toBeNull();
+  });
+  test("reading pill preserves the default moadim-only behavior", () => {
+    expect(readingCalendarPill(calendarState(), false)?.kind).toBe("day");
+    const ordinary = calendarState({ calendar: calendar(day({ events: [] })) });
+    expect(readingCalendarPill(ordinary, false)).toBeNull();
+    expect(readingCalendarPill(ordinary, true)?.kind).toBe("day");
+  });
   test("shows the reading pill on moadim by default, with an opt-in for ordinary days", () => {
     expect(readingCalendarDay(calendar(), false)?.biblical.day).toBe(14);
     const ordinary = calendar(day({ events: ["shabbat"] }));

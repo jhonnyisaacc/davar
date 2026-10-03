@@ -143,7 +143,8 @@
     "mobileDesignGuideDescription": "Ver componentes de diseño móvil",
     "calendarDayPill": {
       "title": "Día del calendario siempre",
-      "subtitle": "Desactivado: mostrar solo en moadim."
+      "subtitle": "Desactivado: mostrar solo en moadim.",
+      "cityRequired": "Elige tu ciudad en Calendario para mostrar el día. La usaremos para la puesta de sol local."
     },
     "links": {
       "title": "Acerca de Davar",
@@ -370,6 +371,8 @@
     "title": "Calendario bíblico",
     "nav": "Calendario",
     "chooseCity": "Elige tu\nciudad",
+    "chooseCityPill": "Elegir ciudad",
+    "dayUnavailable": "Calendario no disponible",
     "cityExplanation": "La usaremos para tu puesta de sol local.",
     "searchCity": "Buscar ciudad",
     "cityHint": "Puedes cambiar tu ciudad tocando su nombre en el calendario.",

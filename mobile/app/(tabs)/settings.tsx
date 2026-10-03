@@ -20,6 +20,7 @@ import { PillToggle } from "@/src/components/ui/PillToggle";
 import { SettingsDropdown } from "@/src/components/ui/SettingsDropdown";
 import { getNavigationDockContentPadding } from "@/src/constants/navigationDock";
 import { useSession } from "@/src/features/account/session";
+import { useCalendar } from "@/src/features/calendar/useCalendar";
 import { getColors, spacing, typography } from "@/src/theme";
 import { useAppStore } from "@/src/store/useAppStore";
 import { clearStorage } from "@/src/services/storage";
@@ -119,6 +120,7 @@ export default function SettingsScreen() {
     })),
   );
   const account = useSession((session) => session.account);
+  const { city: calendarCity, restored: calendarRestored } = useCalendar();
   const hasLinkedAccount = !!account?.providers.length;
   const insets = useSafeAreaInsets();
   const colors = getColors(state.themeMode);
@@ -253,26 +255,66 @@ export default function SettingsScreen() {
         );
       case "calendarDayPill":
         return (
-          <View style={styles.row}>
-            <View style={{ flex: 1, gap: 4 }}>
-              <Text style={styles.label}>
-                {t("settings.calendarDayPill.title")}
-              </Text>
-              <Text
+          <View>
+            <View style={styles.row}>
+              <View style={{ flex: 1, gap: 4 }}>
+                <Text style={styles.label}>
+                  {t("settings.calendarDayPill.title")}
+                </Text>
+                <Text
+                  style={{
+                    color: colors.textSecondary,
+                    fontSize: 12,
+                    textAlign: isRTL ? "right" : "left",
+                  }}
+                >
+                  {t("settings.calendarDayPill.subtitle")}
+                </Text>
+              </View>
+              <PillToggle
+                label={t("settings.calendarDayPill.title")}
+                value={state.showCalendarDayPill}
+                onChange={state.setShowCalendarDayPill}
+              />
+            </View>
+            {state.showCalendarDayPill && calendarRestored && !calendarCity ? (
+              <View
+                accessibilityRole="alert"
+                accessibilityLiveRegion="polite"
                 style={{
-                  color: colors.textSecondary,
-                  fontSize: 12,
-                  textAlign: isRTL ? "right" : "left",
+                  backgroundColor: colors.primary + "1F",
+                  borderRadius: 12,
+                  paddingHorizontal: 12,
+                  paddingTop: 10,
+                  marginBottom: 8,
                 }}
               >
-                {t("settings.calendarDayPill.subtitle")}
-              </Text>
-            </View>
-            <PillToggle
-              label={t("settings.calendarDayPill.title")}
-              value={state.showCalendarDayPill}
-              onChange={state.setShowCalendarDayPill}
-            />
+                <Text
+                  style={{
+                    color: colors.textPrimary,
+                    fontSize: 12,
+                    textAlign: isRTL ? "right" : "left",
+                    writingDirection: isRTL ? "rtl" : "ltr",
+                  }}
+                >
+                  {t("settings.calendarDayPill.cityRequired")}
+                </Text>
+                <Pressable
+                  accessibilityRole="button"
+                  onPress={() => router.navigate("/(tabs)/widgets")}
+                  style={({ pressed }) => ({
+                    minHeight: 44,
+                    justifyContent: "center",
+                    alignSelf: isRTL ? "flex-end" : "flex-start",
+                    opacity: pressed ? 0.65 : 1,
+                  })}
+                >
+                  <Text style={styles.accountActionText}>
+                    {t("calendar.chooseCityPill")}
+                  </Text>
+                </Pressable>
+              </View>
+            ) : null}
           </View>
         );
       case "seferStyle":

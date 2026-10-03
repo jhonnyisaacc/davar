@@ -22,6 +22,7 @@ import type { BesorahLanguage } from "@davar/shared/greekBesorah";
 import { formatBookDisplayName } from "../utils/bookNameFormatter";
 import { NeumorphCard } from "./NeumorphCard";
 import { NeumorphicToggle } from "./NeumorphicToggle";
+import { CalendarCityNotice } from "./CalendarCityNotice";
 
 const homeDestination = destinationById("home");
 const settingsDestination = destinationById("settings");
@@ -426,23 +427,37 @@ export function NavigationBar({
 				);
 			case "calendarDayPill":
 				return (
-					<div className="flex items-center justify-between gap-3">
-						<div className="flex items-center gap-3">
-							<CalendarDays className="size-4 text-[var(--text-secondary)]" />
-							<div>
-								<span className="text-sm text-[var(--text-primary)]">
-									{t("settings.calendarDayPill.title")}
-								</span>
-								<p className="text-xs text-[var(--text-secondary)]">
-									{t("settings.calendarDayPill.subtitle")}
-								</p>
+					<div>
+						<div className="flex items-center justify-between gap-3">
+							<div className="flex items-center gap-3">
+								<CalendarDays className="size-4 text-[var(--text-secondary)]" />
+								<div>
+									<span className="text-sm text-[var(--text-primary)]">
+										{t("settings.calendarDayPill.title")}
+									</span>
+									<p className="text-xs text-[var(--text-secondary)]">
+										{t("settings.calendarDayPill.subtitle")}
+									</p>
+								</div>
 							</div>
+							<NeumorphicToggle
+								enabled={showCalendarDayPill}
+								onToggle={() => onCalendarDayPillChange?.(!showCalendarDayPill)}
+								ariaLabel={t("settings.calendarDayPill.title")}
+								disabled={!onCalendarDayPillChange}
+							/>
 						</div>
-						<NeumorphicToggle
+						<CalendarCityNotice
 							enabled={showCalendarDayPill}
-							onToggle={() => onCalendarDayPillChange?.(!showCalendarDayPill)}
-							ariaLabel={t("settings.calendarDayPill.title")}
-							disabled={!onCalendarDayPillChange}
+							language={language}
+							onChooseCity={
+								onDestinationClick
+									? () => {
+											setOpenMenu(null);
+											onDestinationClick("widgets");
+										}
+									: undefined
+							}
 						/>
 					</div>
 				);
