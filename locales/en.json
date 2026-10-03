@@ -6,13 +6,28 @@
     "appName": "Davar",
     "downloadOnAppStore": "Download on the App Store",
     "getOnGooglePlay": "Get it on Google Play",
-    "serverWaking": "Waking server, first request may take a moment."
+    "serverWaking": "Waking server, first request may take a moment.",
+    "retry": "Retry"
+  },
+  "assemblies": {
+    "splashLabel": "ASSEMBLIES",
+    "welcome": "Welcome",
+    "invitationCopy": "Enter the code from your congregation leader.",
+    "accessCode": "Access code",
+    "continue": "Continue",
+    "paste": "Paste",
+    "back": "Back",
+    "invalidCode": "This code could not be verified. Confirm it with your leader and try again.",
+    "accessUnavailable": "Access is unavailable right now. Please try again.",
+    "clipboardUnavailable": "Could not read your clipboard. Enter the code manually or try again."
   },
   "navigation": {
     "goHome": "Go to home",
     "selectBook": "Book",
     "selectChapter": "Chapter",
     "selectVerse": "Verse",
+    "selectLocation": "Book · chapter · verse",
+    "closePicker": "Close scripture picker",
     "previousVerse": "Previous verse",
     "nextVerse": "Next verse",
     "openFeatures": "Open features",
@@ -50,45 +65,61 @@
       "general": "General",
       "offline": "Offline"
     },
+    "account": {
+      "title": "Account",
+      "signIn": "Sign In",
+      "manage": "Manage account",
+      "description": "Scripture is always available without an account.",
+      "linkDescription": "Link a verified identity to this account.",
+      "emailLabel": "Email",
+      "emailAction": "Send sign-in link",
+      "emailSent": "Check your email for a sign-in link.",
+      "unavailable": "Unable to sign in. Please try again.",
+      "signOut": "Sign out",
+      "save": "Save reading settings",
+      "load": "Load account settings",
+      "saved": "Reading settings saved.",
+      "loaded": "Account settings loaded."
+    },
     "theme": {
-      "title": "Theme",
+      "title": "Dark theme",
       "subtitle": "Dark Mode"
     },
     "language": {
       "title": "Language"
     },
     "besorahLanguage": {
-      "title": "Besorah source",
+      "title": "Besorah language",
       "hebrew": "Hebrew",
       "greek": "Greek",
       "new": "New"
     },
     "besorahTextVersion": {
-      "title": "Gospel translation",
+      "title": "Besorah text",
       "delitzsch": "Delitzsch",
       "hutter": "Hutter",
       "new": "New"
     },
     "qumran": {
-      "title": "Qumran Variants",
+      "title": "Qumran",
       "subtitle": "Show Dead Sea Scrolls text"
     },
     "fullChapter": {
-      "title": "Full Chapter",
+      "title": "Full chapter",
       "subtitle": "Show full chapter text"
     },
     "seferStyle": {
-      "title": "Book Style",
+      "title": "Sefer style",
       "subtitle": "Continuous Hebrew scroll layout",
       "warningTitle": "Book requires Hebrew Only",
       "warningMessage": "Enable Hebrew Only or Translation Only to use Book style."
     },
     "hebrewOnly": {
-      "title": "Hebrew Only",
+      "title": "Hebrew only",
       "subtitle": "Show text in Hebrew only"
     },
     "translationOnly": {
-      "title": "Translation Only",
+      "title": "Translation only",
       "subtitle": "Show translation without Hebrew",
       "disablesHebrewFeatures": "Disable Translation Only to use Hebrew display options."
     },
@@ -101,7 +132,7 @@
       "subtitle": "Show vowel pointing"
     },
     "clearStorage": {
-      "title": "Clear Storage",
+      "title": "Clear storage",
       "subtitle": "Reset all settings and data",
       "alertTitle": "Clear Storage",
       "alertMessage": "This will reset all settings and data. The app will reload.",
@@ -111,7 +142,22 @@
     "designSystemTitle": "Design System",
     "designSystemDescription": "View design components",
     "mobileDesignGuideTitle": "Mobile Design Guide",
-    "mobileDesignGuideDescription": "View mobile design components"
+    "mobileDesignGuideDescription": "View mobile design components",
+    "calendarDayPill": {
+      "title": "Day pill on all days",
+      "subtitle": "Off: show only on moadim.",
+      "cityRequired": "Choose your city in Calendar to show the day. We’ll use it for your local sunset."
+    },
+    "links": {
+      "title": "About Davar",
+      "textSources": "Text Sources",
+      "commentarySources": "Commentary Sources",
+      "donate": "Donate",
+      "terms": "Terms",
+      "privacy": "Privacy",
+      "support": "Support",
+      "github": "GitHub"
+    }
   },
   "home": {
     "todayIs": "Today is",
@@ -257,6 +303,7 @@
     "selectBookPrompt": "Select a book to begin.",
     "loading": "Loading verses...",
     "prefixLabel": "Prefix: {prefix}",
+    "translationUnavailable": "Translation is unavailable right now. Please try again later.",
     "missingSpanishTranslation": "We don't have a Spanish translation for this text yet, we're working on it...",
     "greekUnavailable": "Not present in the SBLGNT 2011 displayed text.",
     "besorahDisclaimer": {
@@ -321,6 +368,89 @@
   "tabs": {
     "home": "Home",
     "verse": "Verse",
+    "scripture": "Scripture",
+    "assemblies": "Assemblies",
+    "commentary": "Commentary",
     "settings": "Settings"
+  },
+  "calendar": {
+    "title": "Biblical Calendar",
+    "nav": "Calendar",
+    "chooseCity": "Choose your\ncity",
+    "chooseCityPill": "Choose city",
+    "dayUnavailable": "Calendar unavailable",
+    "cityExplanation": "We’ll use it for your local sunset.",
+    "searchCity": "Search city",
+    "cityHint": "You can change your city anytime by tapping its name in the calendar.",
+    "noCities": "No cities found. Try another name.",
+    "searchUnavailable": "City search is unavailable. Try again.",
+    "back": "Back to calendar",
+    "today": "Today",
+    "previousDay": "Previous day",
+    "nextDay": "Next day",
+    "dayOfMonth": "Day of the current month",
+    "awaitingMoon": "Awaiting the new moon",
+    "localSunset": "Local sunset",
+    "moonConfirmed": "New moon confirmed",
+    "sightedIsrael": "Sighted in Israel",
+    "moonPending": "Awaiting confirmation",
+    "waitingIsrael": "Waiting for a sighting in Israel.",
+    "source": "Source",
+    "sourceSubtitle": "Observations and references",
+    "sources": "Sources",
+    "sourcesIntroduction": "The observations behind your calendar.",
+    "sourceDescription": "New moon observations in Israel.",
+    "observationReport": "Observation report",
+    "defaultBrowser": "Links open in your default browser.",
+    "noSources": "Sources will appear with the next observation update.",
+    "appointedTimes": "Appointed times",
+    "moadim": "Moadim",
+    "currentYear": "Current year",
+    "sunsetBoundary": "Each date begins at local sunset.",
+    "awaitingYear": "Awaiting year confirmation.",
+    "awaitingDates": "Awaiting dates",
+    "awaitingConfirmation": "Awaiting confirmation",
+    "noAppointment": "No appointed time today.",
+    "unavailable": "Calendar is unavailable. Try again.",
+    "refresh": "Refresh calendar",
+    "loading": "Loading…",
+    "cached": "Showing a cached calendar. Reconnect to update the day.",
+    "stale": "Observation updates are unavailable. Showing the last imported evidence.",
+    "firstUpdate": "Awaiting the first observation update.",
+    "fixture": "Development scenario — synthetic observations.",
+    "checked": "Observations checked: {date}",
+    "review": "Some historical reports need review. Only confirmed evidence is used.",
+    "observed": "Sighted on {date}",
+    "day": "Day {day}",
+    "dayWithMonth": "{month} {day}",
+    "yearUnavailable": "The yearly list is unavailable. Try again.",
+    "monthRange": "{month} {first}–{last}",
+    "events": {
+      "pesach": "Pesach",
+      "hag_hamatzot": "Unleavened Bread",
+      "bikurim": "Bikurim",
+      "shavuot": "Shavuot",
+      "yom_teruah": "Yom Teruah",
+      "yom_hakipurim": "Yom HaKippurim",
+      "sukkot": "Sukkot",
+      "shemini_atzeret": "Shemini Atzeret"
+    },
+    "months": {
+      "aviv": "Aviv",
+      "etanim": "Etanim"
+    }
+  },
+  "support": {
+    "description": "Need help or want to share feedback? Get in touch.",
+    "emailLabel": "Email",
+    "emailAction": "Email support",
+    "creator": "Contact the creator",
+    "telegramAction": "Open Telegram"
+  },
+  "commentarySources": {
+    "description": "Published commentary and original source links.",
+    "openSource": "Open source",
+    "empty": "No commentary sources have been published yet.",
+    "unavailable": "The article catalog is unavailable. You can still visit the source above."
   }
 }

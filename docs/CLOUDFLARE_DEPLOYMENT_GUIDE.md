@@ -129,7 +129,7 @@ Static data is automatically served from `/data/` paths on your domain. No addit
 Example:
 
 ```bash
-DAVAR_ALLOWED_ORIGINS=["http://localhost:3002","http://localhost:3003","http://localhost:8082","https://app.yourdomain.com"]
+DAVAR_ALLOWED_ORIGINS=["http://localhost:5173","http://localhost:5174","http://localhost:8081","https://app.yourdomain.com"]
 ```
 
 Then redeploy backend.

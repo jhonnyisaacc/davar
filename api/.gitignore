@@ -1,0 +1,11 @@
+/log/*
+!/log/.keep
+/tmp/*
+!/tmp/.keep
+/config/master.key
+/.bundle/
+/vendor/gems/
+/vendor/bundle/
+/.env*
+!/.env.example
+!/.env.*.example

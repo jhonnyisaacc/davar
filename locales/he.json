@@ -6,13 +6,28 @@
     "appName": "דבר",
     "downloadOnAppStore": "הורד ב-App Store",
     "getOnGooglePlay": "זמין ב-Google Play",
-    "serverWaking": "מאתחל שרת, הבקשה הראשונה עשויה להימשך רגע."
+    "serverWaking": "מאתחל שרת, הבקשה הראשונה עשויה להימשך רגע.",
+    "retry": "ניסיון נוסף"
+  },
+  "assemblies": {
+    "splashLabel": "קהילות",
+    "welcome": "ברוכים הבאים",
+    "invitationCopy": "הזינו את הקוד שקיבלתם ממנהיג הקהילה.",
+    "accessCode": "קוד גישה",
+    "continue": "המשך",
+    "paste": "הדבקה",
+    "back": "חזרה",
+    "invalidCode": "לא ניתן לאמת את הקוד. בדקו אותו עם מנהיג הקהילה ונסו שוב.",
+    "accessUnavailable": "הגישה אינה זמינה כרגע. נסו שוב.",
+    "clipboardUnavailable": "לא ניתן לקרוא את הלוח. הזינו את הקוד ידנית או נסו שוב."
   },
   "navigation": {
     "goHome": "לדף הבית",
     "selectBook": "ספר",
     "selectChapter": "פרק",
     "selectVerse": "פסוק",
+    "selectLocation": "ספר · פרק · פסוק",
+    "closePicker": "סגור בחירת כתובים",
     "previousVerse": "פסוק קודם",
     "nextVerse": "פסוק הבא",
     "openFeatures": "פתח תכונות",
@@ -50,27 +65,43 @@
       "general": "כללי",
       "offline": "לא מקוון"
     },
+    "account": {
+      "title": "חשבון",
+      "signIn": "התחברות",
+      "manage": "ניהול חשבון",
+      "description": "כתבי הקודש זמינים תמיד גם ללא חשבון.",
+      "linkDescription": "קשרו זהות מאומתת לחשבון זה.",
+      "emailLabel": "דואר אלקטרוני",
+      "emailAction": "שליחת קישור להתחברות",
+      "emailSent": "בדקו את המייל לקבלת קישור להתחברות.",
+      "unavailable": "לא ניתן להתחבר. נסו שוב.",
+      "signOut": "התנתקות",
+      "save": "שמירת הגדרות הקריאה",
+      "load": "טעינת הגדרות החשבון",
+      "saved": "הגדרות הקריאה נשמרו.",
+      "loaded": "הגדרות החשבון נטענו."
+    },
     "theme": {
-      "title": "ערכת נושא",
+      "title": "ערכת נושא כהה",
       "subtitle": "מצב כהה"
     },
     "language": {
       "title": "שפה"
     },
     "besorahLanguage": {
-      "title": "מקור הבשורה",
+      "title": "שפת הבשורה",
       "hebrew": "עברית",
       "greek": "יוונית",
       "new": "חדש"
     },
     "besorahTextVersion": {
-      "title": "תרגום הבשורה",
+      "title": "נוסח הבשורה",
       "delitzsch": "דליטש",
       "hutter": "Hutter",
       "new": "חדש"
     },
     "qumran": {
-      "title": "גרסאות קומראן",
+      "title": "קומראן",
       "subtitle": "הצג טקסט מגילות מדבר יהודה"
     },
     "fullChapter": {
@@ -111,7 +142,22 @@
     "designSystemTitle": "מערכת עיצוב",
     "designSystemDescription": "צפה ברכיבי עיצוב",
     "mobileDesignGuideTitle": "מדריך עיצוב לנייד",
-    "mobileDesignGuideDescription": "צפה ברכיבי עיצוב לנייד"
+    "mobileDesignGuideDescription": "צפה ברכיבי עיצוב לנייד",
+    "calendarDayPill": {
+      "title": "הצגת היום בכל יום",
+      "subtitle": "כבוי: הצגה רק במועדים.",
+      "cityRequired": "בחרו את העיר שלכם בלוח השנה כדי להציג את היום. נשתמש בה לשעת השקיעה המקומית."
+    },
+    "links": {
+      "title": "אודות דבר",
+      "textSources": "מקורות הטקסטים",
+      "commentarySources": "מקורות הפרשנות",
+      "donate": "תרומה",
+      "terms": "תנאי שימוש",
+      "privacy": "פרטיות",
+      "support": "תמיכה",
+      "github": "GitHub"
+    }
   },
   "home": {
     "todayIs": "היום הוא",
@@ -257,6 +303,7 @@
     "selectBookPrompt": "בחר ספר כדי להתחיל.",
     "loading": "טוען פסוקים...",
     "prefixLabel": "תחילית: {prefix}",
+    "translationUnavailable": "התרגום אינו זמין כרגע. נסו שוב מאוחר יותר.",
     "missingSpanishTranslation": "אין לנו כרגע תרגום לספרדית לטקסט זה, אנחנו עובדים על כך...",
     "greekUnavailable": "אינו מופיע בטקסט המוצג של SBLGNT 2011.",
     "besorahDisclaimer": {
@@ -321,6 +368,89 @@
   "tabs": {
     "home": "בית",
     "verse": "פסוק",
+    "scripture": "כתובים",
+    "assemblies": "קהילות",
+    "commentary": "פרשנות",
     "settings": "הגדרות"
+  },
+  "calendar": {
+    "title": "לוח השנה המקראי",
+    "nav": "לוח שנה",
+    "chooseCity": "בחרו את\nהעיר שלכם",
+    "chooseCityPill": "בחירת עיר",
+    "dayUnavailable": "לוח השנה אינו זמין",
+    "cityExplanation": "נשתמש בה לשעת השקיעה המקומית.",
+    "searchCity": "חיפוש עיר",
+    "cityHint": "אפשר לשנות את העיר בכל עת בנגיעה בשמה בלוח השנה.",
+    "noCities": "לא נמצאו ערים. נסו שם אחר.",
+    "searchUnavailable": "חיפוש הערים אינו זמין. נסו שוב.",
+    "back": "חזרה ללוח השנה",
+    "today": "היום",
+    "previousDay": "היום הקודם",
+    "nextDay": "היום הבא",
+    "dayOfMonth": "היום בחודש הנוכחי",
+    "awaitingMoon": "ממתינים לירח החדש",
+    "localSunset": "שקיעה מקומית",
+    "moonConfirmed": "הירח החדש אושר",
+    "sightedIsrael": "נצפה בישראל",
+    "moonPending": "ממתינים לאישור",
+    "waitingIsrael": "ממתינים לתצפית בישראל.",
+    "source": "מקור",
+    "sourceSubtitle": "תצפיות ומקורות",
+    "sources": "מקורות",
+    "sourcesIntroduction": "התצפיות שעליהן מבוסס לוח השנה.",
+    "sourceDescription": "תצפיות בירח החדש בישראל.",
+    "observationReport": "דוח תצפית",
+    "defaultBrowser": "הקישורים נפתחים בדפדפן ברירת המחדל.",
+    "noSources": "המקורות יופיעו בעדכון התצפיות הבא.",
+    "appointedTimes": "מועדים",
+    "moadim": "מועדים",
+    "currentYear": "השנה הנוכחית",
+    "sunsetBoundary": "כל תאריך מתחיל בשקיעה המקומית.",
+    "awaitingYear": "ממתינים לאישור השנה.",
+    "awaitingDates": "ממתינים לתאריכים",
+    "awaitingConfirmation": "ממתינים לאישור",
+    "noAppointment": "אין מועד היום.",
+    "unavailable": "לוח השנה אינו זמין. נסו שוב.",
+    "refresh": "רענון לוח השנה",
+    "loading": "טוען…",
+    "cached": "מוצג לוח שנה שמור. התחברו לעדכון היום.",
+    "stale": "עדכוני התצפיות אינם זמינים. מוצגות התצפיות האחרונות.",
+    "firstUpdate": "ממתינים לעדכון התצפיות הראשון.",
+    "fixture": "תרחיש פיתוח — תצפיות לדוגמה.",
+    "checked": "התצפיות נבדקו: {date}",
+    "review": "חלק מהדוחות ההיסטוריים ממתינים לבדיקה. משתמשים רק בתצפיות מאושרות.",
+    "observed": "נצפה בתאריך {date}",
+    "day": "יום {day}",
+    "dayWithMonth": "{day} {month}",
+    "yearUnavailable": "הרשימה השנתית אינה זמינה. נסו שוב.",
+    "monthRange": "{first}–{last} {month}",
+    "events": {
+      "pesach": "פסח",
+      "hag_hamatzot": "חג המצות",
+      "bikurim": "ביכורים",
+      "shavuot": "שבועות",
+      "yom_teruah": "יום תרועה",
+      "yom_hakipurim": "יום הכיפורים",
+      "sukkot": "סוכות",
+      "shemini_atzeret": "שמיני עצרת"
+    },
+    "months": {
+      "aviv": "אביב",
+      "etanim": "איתנים"
+    }
+  },
+  "support": {
+    "description": "צריכים עזרה או רוצים לשתף משוב? צרו קשר.",
+    "emailLabel": "דואר אלקטרוני",
+    "emailAction": "פנייה לתמיכה במייל",
+    "creator": "יצירת קשר עם היוצר",
+    "telegramAction": "פתיחת Telegram"
+  },
+  "commentarySources": {
+    "description": "פרשנות שפורסמה וקישורים למקורות המקוריים.",
+    "openSource": "פתיחת המקור",
+    "empty": "טרם פורסמו מקורות פרשנות.",
+    "unavailable": "קטלוג המאמרים אינו זמין. ניתן לבקר במקור שלמעלה."
   }
 }

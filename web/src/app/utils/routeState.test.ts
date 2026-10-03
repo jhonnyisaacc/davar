@@ -45,6 +45,10 @@ describe("route state", () => {
       ["/donate", "donate"],
       ["/features", "features"],
       ["/settings", "settings"],
+      ["/sources", "sources"],
+      ["/commentary-sources", "commentarySources"],
+      ["/support", "support"],
+      ["/account", "account"],
     ] as const;
 
     for (const [path, screen] of cases) {

@@ -1,4 +1,3 @@
-import { selectedBookScroll, centeredBookOffset } from "@/src/services/navigationPositioning";
 import React, {
   useCallback,
   useEffect,
@@ -7,32 +6,42 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Pressable, StyleSheet, Text, TextInput, View, useWindowDimensions } from "react-native";
-import BottomSheet, {
-  BottomSheetBackdrop,
-  BottomSheetFlatList,
-  BottomSheetScrollView,
-  type BottomSheetBackdropProps,
-} from "@gorhom/bottom-sheet";
-import type { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
-import type { BottomSheetFlatListMethods } from "@gorhom/bottom-sheet/lib/typescript/components/bottomSheetScrollable";
-import { Ionicons } from "@expo/vector-icons";
-import Animated, { FadeIn } from "react-native-reanimated";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import {
+  BackHandler,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  useWindowDimensions,
+} from "react-native";
+import { Search, X } from "lucide-react-native";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
+import Animated, {
+  Easing,
+  FadeInDown,
+  ReduceMotion,
+} from "react-native-reanimated";
 
 import {
   getColors,
   getResponsiveLayout,
-  getNeumorphShadowStyle,
   radii,
   spacing,
   typography,
 } from "@/src/theme";
 import { fetchMetadata } from "@/src/services/metadata";
-import { useAppStore, type AppState } from "@/src/store/useAppStore";
+import { centeredBookOffset } from "@/src/services/navigationPositioning";
+import { getNavigationVerseNumbers } from "@/src/services/navigationSelection";
+import { useAppStore } from "@/src/store/useAppStore";
 import { useTranslation } from "@/src/i18n/useTranslation";
 import { GREEK_BESORAH_BOOK_NAMES } from "@davar/shared/greekBesorah";
 import { formatBookDisplayName } from "../utils/bookNameFormatter";
+import { stripNikud } from "../utils/hebrew";
 
 type NavigationSheetProps = {
   currentBookId: string;
@@ -40,208 +49,237 @@ type NavigationSheetProps = {
   currentVerse: number;
   translationOnly?: boolean;
   currentChapterVerseNumbers?: number[];
+  hasNavigationDock?: boolean;
   onSelectVerse: (bookId: string, chapter: number, verse: number) => void;
   onClose?: () => void;
 };
 
-type Step = "book" | "chapter" | "verse";
-
-export type NavigationSheetMethods = BottomSheetMethods & {
-  openAtChapter: () => void;
+export type NavigationSheetMethods = {
+  open: () => void;
+  close: () => void;
 };
 
-type BookMeta = {
-  id: string;
-  name: string;
-  spanishName: string;
-  hebrewName: string;
-};
+type Metadata = Awaited<ReturnType<typeof fetchMetadata>>;
+type SelectionItem = { id: string; label: string };
 
+const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
+const pickerEntrance = FadeInDown.duration(220)
+  .easing(Easing.out(Easing.cubic))
+  .withInitialValues({ opacity: 0, transform: [{ translateY: 12 }] })
+  .reduceMotion(ReduceMotion.System);
 
-const stripNikud = (value: string) =>
-  value.normalize("NFD").replace(/[\u0591-\u05C7]/g, "");
-
-const createStyles = (colors: ReturnType<typeof getColors>, layout: ReturnType<typeof getResponsiveLayout>) =>
+const createStyles = (
+  colors: ReturnType<typeof getColors>,
+  rtl: boolean,
+  accentColor: string,
+) =>
   StyleSheet.create({
-    sheetBackground: {
-      backgroundColor: colors.surface,
-      borderTopLeftRadius: radii.xl,
-      borderTopRightRadius: radii.xl,
+    screen: {
+      ...StyleSheet.absoluteFill,
+      backgroundColor: colors.background,
+      zIndex: 20,
+      elevation: 20,
     },
-    sheetHandle: {
-      backgroundColor: colors.border,
+    body: {
+      flex: 1,
+      width: "100%",
+      alignSelf: "center",
+      paddingHorizontal: spacing[5],
+      paddingTop: spacing[4],
+      gap: spacing[3],
     },
     header: {
-      width: "100%",
-      maxWidth: layout.navigationWidth,
-      alignSelf: "center",
-      paddingHorizontal: spacing[6],
-      paddingTop: spacing[4],
-      paddingBottom: spacing[4],
-    },
-    titleRow: {
-      flexDirection: "row",
+      flexDirection: rtl ? "row-reverse" : "row",
       alignItems: "center",
       justifyContent: "space-between",
-      marginBottom: spacing[4],
+      minHeight: 28,
     },
-    backButton: {
-      width: 32,
-      height: 32,
-      borderRadius: 16,
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: colors.surface,
-      borderWidth: 1,
-      borderColor: colors.border,
-    },
-    backButtonHidden: {
-      opacity: 0,
-    },
-    title: {
+    hint: {
       flex: 1,
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.h3,
-      color: colors.textPrimary,
-      fontWeight: typography.weights.semibold,
-      textAlign: "center",
+      color: accentColor,
+      fontFamily: rtl ? "Arimo_400Regular" : typography.families.latinUI,
+      fontSize: typography.sizes.caption,
+      letterSpacing: rtl ? 0 : 1.2,
+      textAlign: rtl ? "right" : "left",
     },
-    closeButton: {
-      width: 32,
-      height: 32,
-      borderRadius: 16,
+    actions: {
+      flexDirection: "row",
+      gap: spacing[2],
+    },
+    iconButton: {
+      width: 28,
+      height: 28,
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: colors.surface,
-      borderWidth: 1,
-      borderColor: colors.border,
-    },
-    searchContainer: {
-      flexDirection: "row",
-      alignItems: "center",
-      backgroundColor: colors.neomorphBg,
-      borderRadius: radii.full,
-      paddingHorizontal: spacing[4],
-      minHeight: 48,
-      borderWidth: 1,
-      borderColor: colors.neomorphBorder,
-    },
-    searchIcon: {
-      marginRight: spacing[2],
     },
     searchInput: {
-      flex: 1,
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.body,
+      backgroundColor: colors.surfaceElevated,
+      borderRadius: radii.sm,
+      paddingHorizontal: spacing[3],
+      paddingVertical: spacing[2],
+      fontFamily: rtl ? "Arimo_400Regular" : typography.families.latinUI,
+      fontSize: typography.sizes.bodySmall,
       color: colors.textPrimary,
-      paddingVertical: spacing[3],
+      textAlign: rtl ? "right" : "left",
     },
-    clearButton: {
-      padding: spacing[1],
-    },
-    content: {
+    picker: {
       flex: 1,
+      minHeight: 0,
+      flexDirection: rtl ? "row-reverse" : "row",
+      backgroundColor: colors.surfaceElevated,
+      borderRadius: radii.lg,
+      borderWidth: 1,
+      borderColor: colors.border,
+      padding: spacing[2],
+      overflow: "hidden",
+    },
+    column: {
+      flex: 1,
+      minWidth: 0,
+      paddingHorizontal: spacing[1],
+      paddingTop: spacing[2],
+      gap: spacing[1],
+    },
+    divider: {
+      borderLeftWidth: rtl ? 1 : 0,
+      borderRightWidth: rtl ? 0 : 1,
+      borderColor: colors.border,
+    },
+    columnHeading: {
+      color: accentColor,
+      fontFamily: rtl ? "Arimo_700Bold" : typography.families.latinUISemiBold,
+      fontSize: 10,
+      letterSpacing: rtl ? 0 : 1.4,
+      textAlign: "center",
     },
     list: {
       flex: 1,
     },
     listContent: {
-      width: "100%",
-      maxWidth: layout.navigationWidth,
-      alignSelf: "center",
-      paddingHorizontal: spacing[6],
-      paddingBottom: spacing[8],
+      gap: spacing[1],
+      paddingBottom: spacing[2],
     },
-    bookItem: {
-      flexDirection: "row",
+    row: {
+      borderRadius: radii.sm,
+      paddingHorizontal: spacing[1],
       alignItems: "center",
-      justifyContent: "space-between",
-      paddingVertical: spacing[4],
-      paddingHorizontal: spacing[4],
-      marginBottom: spacing[3],
-      backgroundColor: colors.surface,
-      borderRadius: radii.lg,
-      borderWidth: 1,
-      borderColor: colors.border,
+      justifyContent: "center",
     },
-    bookItemSelected: {
-      backgroundColor: colors.primaryDeep,
-      borderColor: colors.primary,
+    selectedRow: {
+      backgroundColor: `${colors.primary}1F`,
     },
-    bookEnglish: {
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.body,
+    rowLabel: {
+      fontFamily: rtl ? "Arimo_400Regular" : typography.families.latinUI,
+      fontSize: 13,
       color: colors.textPrimary,
-      fontWeight: typography.weights.medium,
-    },
-    bookHebrew: {
-      fontFamily: typography.families.hebrewUI,
-      fontSize: typography.sizes.h3,
-      color: colors.textPrimary,
-      textAlign: "right",
-      writingDirection: "rtl",
-    },
-    gridScroll: {
-      flex: 1,
-    },
-    gridContainer: {
-      width: "100%",
-      maxWidth: layout.navigationWidth,
-      alignSelf: "center",
-      paddingHorizontal: spacing[6],
-      paddingBottom: spacing[8],
-    },
-    gridTitle: {
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.bodySmall,
-      color: colors.textSecondary,
-      letterSpacing: 1,
-      textTransform: "uppercase",
       textAlign: "center",
-      marginBottom: spacing[4],
     },
-    grid: {
-      flexDirection: "row",
-      flexWrap: "wrap",
-      justifyContent: "center",
-      gap: spacing[3],
+    bookLabel: {
+      fontSize: typography.sizes.caption,
     },
-    cell: {
-      width: layout.isTablet ? Math.floor((layout.navigationWidth - 48 - spacing[3] * (layout.gridColumns - 1)) / layout.gridColumns) : 52,
-      height: layout.isTablet ? 60 : 52,
-      borderRadius: radii.md,
-      alignItems: "center",
-      justifyContent: "center",
-      borderWidth: 1,
-      borderColor: colors.border,
-      backgroundColor: colors.surface,
+    selectedLabel: {
+      color: accentColor,
     },
-    cellPlaceholder: {
-      opacity: 0,
-    },
-    cellSelected: {
-      backgroundColor: colors.primaryDeep,
-      borderColor: colors.primaryDeep,
-    },
-    cellLabel: {
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.body,
-      color: colors.textPrimary,
-    },
-    cellLabelSelected: {
-      color: colors.background,
-      fontWeight: typography.weights.medium,
-    },
-    emptyContainer: {
-      alignItems: "center",
-      paddingVertical: spacing[8],
+    selectedBookLabel: {
+      fontFamily: rtl ? "Arimo_400Regular" : "Manrope_600SemiBold",
     },
     emptyText: {
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.body,
       color: colors.textSecondary,
+      fontFamily: rtl ? "Arimo_400Regular" : typography.families.latinUI,
+      fontSize: typography.sizes.caption,
+      textAlign: "center",
+      paddingVertical: spacing[4],
     },
   });
+
+function SelectionColumn({
+  title,
+  items,
+  selectedId,
+  onSelect,
+  emptyLabel,
+  bookColumn = false,
+  divider = false,
+  styles,
+  rowHeight,
+}: {
+  title: string;
+  items: SelectionItem[];
+  selectedId: string;
+  onSelect: (id: string) => void;
+  emptyLabel: string;
+  bookColumn?: boolean;
+  divider?: boolean;
+  styles: ReturnType<typeof createStyles>;
+  rowHeight: number;
+}) {
+  const scrollRef = useRef<ScrollView>(null);
+  const [viewportHeight, setViewportHeight] = useState(0);
+  const [contentHeight, setContentHeight] = useState(0);
+  const selectedIndex = items.findIndex((item) => item.id === selectedId);
+
+  useEffect(() => {
+    if (selectedIndex < 0 || viewportHeight <= 0 || contentHeight <= 0) return;
+    scrollRef.current?.scrollTo({
+      y: centeredBookOffset(
+        selectedIndex,
+        rowHeight + spacing[1],
+        viewportHeight,
+      ),
+      animated: false,
+    });
+  }, [selectedIndex, rowHeight, viewportHeight, contentHeight]);
+
+  return (
+    <View style={[styles.column, divider && styles.divider]}>
+      <Text accessibilityRole="header" style={styles.columnHeading}>
+        {title}
+      </Text>
+      <ScrollView
+        ref={scrollRef}
+        accessibilityLabel={title}
+        style={styles.list}
+        contentContainerStyle={styles.listContent}
+        onLayout={(event) => setViewportHeight(event.nativeEvent.layout.height)}
+        onContentSizeChange={(_width, height) => setContentHeight(height)}
+        showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
+        nestedScrollEnabled
+      >
+        {items.map((item) => {
+          const selected = item.id === selectedId;
+          return (
+            <Pressable
+              key={item.id}
+              accessibilityRole="button"
+              accessibilityLabel={`${title} ${item.label}`}
+              accessibilityState={{ selected }}
+              onPress={() => onSelect(item.id)}
+              style={({ pressed }) => [
+                styles.row,
+                { height: rowHeight, opacity: pressed ? 0.65 : 1 },
+                selected && styles.selectedRow,
+              ]}
+            >
+              <Text
+                numberOfLines={2}
+                style={[
+                  styles.rowLabel,
+                  bookColumn && styles.bookLabel,
+                  selected && styles.selectedLabel,
+                  selected && bookColumn && styles.selectedBookLabel,
+                ]}
+              >
+                {item.label}
+              </Text>
+            </Pressable>
+          );
+        })}
+        {!items.length && <Text style={styles.emptyText}>{emptyLabel}</Text>}
+      </ScrollView>
+    </View>
+  );
+}
 
 const NavigationSheetComponent = (
   {
@@ -250,587 +288,242 @@ const NavigationSheetComponent = (
     currentVerse,
     translationOnly = false,
     currentChapterVerseNumbers,
+    hasNavigationDock = true,
     onSelectVerse,
     onClose,
   }: NavigationSheetProps,
   ref: React.ForwardedRef<NavigationSheetMethods>,
 ) => {
-  const sheetRef = useRef<BottomSheetMethods | null>(null);
-  const insets = useSafeAreaInsets();
-  const [step, setStep] = useState<Step>("book");
-  const directionRef = useRef<"forward" | "back">("forward");
+  const [isOpen, setIsOpen] = useState(false);
   const [selectedBookId, setSelectedBookId] = useState(currentBookId);
+  const [selectedChapter, setSelectedChapter] = useState(currentChapter);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchVisible, setSearchVisible] = useState(false);
+  const [metadata, setMetadata] = useState<Metadata | null>(null);
+  const [loadError, setLoadError] = useState(false);
+  const themeMode = useAppStore((state) => state.themeMode);
+  const language = useAppStore((state) => state.language);
+  const colors = getColors(themeMode);
+  const { t, isRTL } = useTranslation();
+  const { width, height, fontScale } = useWindowDimensions();
+  const layout = getResponsiveLayout(width, height);
+  const insets = useSafeAreaInsets();
+  const accentColor =
+    themeMode === "dark" ? colors.primaryLight : colors.primaryDeep;
+  const styles = useMemo(
+    () => createStyles(colors, isRTL, accentColor),
+    [colors, isRTL, accentColor],
+  );
+  const rowHeight = Math.max(36, Math.ceil(36 * fontScale));
+
+  const close = useCallback(() => {
+    setIsOpen(false);
+    onClose?.();
+  }, [onClose]);
 
   useImperativeHandle(
     ref,
     () => ({
-      expand: () => sheetRef.current?.expand(),
-      collapse: () => sheetRef.current?.collapse(),
-      close: () => sheetRef.current?.close(),
-      forceClose: () => sheetRef.current?.forceClose(),
-      // BottomSheet locks scroll offsets at non-extended snap points. Open
-      // the book list at the existing extended snap so native scrolling owns it.
-      snapToIndex: (index: number) => sheetRef.current?.snapToIndex(index >= 0 && step === "book" ? 1 : index),
-      snapToPosition: (position: number | string) =>
-        sheetRef.current?.snapToPosition(position),
-      openAtChapter: () => {
+      open: () => {
         setSelectedBookId(currentBookId);
         setSelectedChapter(currentChapter);
-        setStep("chapter");
-        sheetRef.current?.snapToIndex(0);
+        setSearchQuery("");
+        setSearchVisible(false);
+        setIsOpen(true);
       },
+      close,
     }),
-    [currentBookId, currentChapter, step],
+    [close, currentBookId, currentChapter],
   );
-  const themeMode = useAppStore((state: AppState) => state.themeMode);
-  const language = useAppStore((state: AppState) => state.language);
-  const besorahLanguage = useAppStore((state: AppState) => state.besorahLanguage);
-  const colors = getColors(themeMode);
-  const { width, height, fontScale } = useWindowDimensions();
-  const layout = useMemo(() => getResponsiveLayout(width, height), [width, height]);
-  const styles = useMemo(() => createStyles(colors, layout), [colors, layout]);
-  const contentBottomPadding = spacing[8] + spacing[4] + insets.bottom;
-  const snapPoints = useMemo(() => ["60%", "80%"], []);
-  const { t } = useTranslation();
-
-  const [selectedChapter, setSelectedChapter] = useState(currentChapter);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [booksMeta, setBooksMeta] = useState<BookMeta[]>([]);
-  const [loadError, setLoadError] = useState<string | null>(null);
-  const [chapterCounts, setChapterCounts] = useState<Record<string, number[]>>(
-    {},
-  );
-  const [verseCounts, setVerseCounts] = useState<
-    Record<string, Record<string, number>>
-  >({});
 
   useEffect(() => {
-    let isMounted = true;
-    const loadMetadata = async () => {
-      try {
-        const metadata = await fetchMetadata();
-        if (!isMounted) return;
-        const mappedBooks = metadata.books.map((book) => ({
-          id: book.id,
-          name: book.name,
-          spanishName: book.spanish_name,
-          hebrewName: book.hebrew_name,
-        }));
-        setBooksMeta(mappedBooks);
-        setLoadError(null);
-        setChapterCounts(metadata.chapter_counts ?? {});
-        setVerseCounts(metadata.verse_counts ?? {});
-      } catch {
-        if (!isMounted) return;
-        setBooksMeta([]);
-        setChapterCounts({});
-        setVerseCounts({});
-        setLoadError(t("errors.loadBooks"));
-      }
-    };
-    loadMetadata();
+    let mounted = true;
+    fetchMetadata()
+      .then((value) => {
+        if (mounted) {
+          setMetadata(value);
+          setLoadError(false);
+        }
+      })
+      .catch(() => {
+        if (mounted) setLoadError(true);
+      });
     return () => {
-      isMounted = false;
+      mounted = false;
     };
-  }, [t]);
+  }, [isOpen]);
 
-  // Get selected book info
-  const selectedBook = useMemo(
-    () => booksMeta.find((b) => b.id === selectedBookId),
-    [booksMeta, selectedBookId],
-  );
+  useEffect(() => {
+    if (!isOpen) return;
+    const subscription = BackHandler.addEventListener(
+      "hardwareBackPress",
+      () => {
+        close();
+        return true;
+      },
+    );
+    return () => subscription.remove();
+  }, [close, isOpen]);
 
   const getBookDisplayName = useCallback(
-    (book: BookMeta) => {
-      const localizedName =
-        language === "es" && book.spanishName.trim().length > 0
-          ? book.spanishName
-          : book.name;
-      return formatBookDisplayName(localizedName);
+    (book: Metadata["books"][number]) => {
+      if (language === "he") return stripNikud(book.hebrew_name);
+      return formatBookDisplayName(
+        language === "es" && book.spanish_name.trim()
+          ? book.spanish_name
+          : book.name,
+      );
     },
     [language],
   );
 
-  // Filter books by search
-  const filteredBooks = useMemo(() => {
-    if (!searchQuery.trim()) {
-      return booksMeta;
-    }
-    const query = searchQuery.toLowerCase();
-    return booksMeta.filter(
-      (book) =>
-        getBookDisplayName(book).toLowerCase().includes(query) ||
-        formatBookDisplayName(book.name).toLowerCase().includes(query) ||
-        formatBookDisplayName(book.spanishName).toLowerCase().includes(query) ||
-        stripNikud(book.hebrewName).includes(query) ||
-        book.hebrewName.includes(query) ||
-        (GREEK_BESORAH_BOOK_NAMES[book.id] ?? "")
-          .toLowerCase()
-          .includes(query),
-    );
-  }, [booksMeta, searchQuery, getBookDisplayName]);
-
-  // Get chapters for selected book
-  const chapterNumbers = useMemo(() => {
-    const chapters = chapterCounts[selectedBookId];
-    if (chapters?.length) return chapters;
-    return [];
-  }, [chapterCounts, selectedBookId]);
-
-  // Get verses for selected chapter
-  const verseNumbers = useMemo(() => {
-    if (
-      translationOnly &&
-      selectedBookId === currentBookId &&
-      selectedChapter === currentChapter &&
-      Array.isArray(currentChapterVerseNumbers) &&
-      currentChapterVerseNumbers.length > 0
-    ) {
-      return Array.from(
-        new Set(
-          currentChapterVerseNumbers.filter(
-            (value) => Number.isFinite(value) && value > 0,
+  const books = useMemo(() => {
+    const query = stripNikud(searchQuery.trim()).toLowerCase();
+    return (metadata?.books ?? [])
+      .filter(
+        (book) =>
+          !query ||
+          [
+            book.name,
+            book.spanish_name,
+            stripNikud(book.hebrew_name),
+            GREEK_BESORAH_BOOK_NAMES[book.id] ?? "",
+          ].some((name) =>
+            formatBookDisplayName(name).toLowerCase().includes(query),
           ),
-        ),
-      ).sort((a, b) => a - b);
-    }
+      )
+      .map((book) => ({ id: book.id, label: getBookDisplayName(book) }));
+  }, [getBookDisplayName, metadata, searchQuery]);
 
-    const count = verseCounts[selectedBookId]?.[String(selectedChapter)];
-    if (count) return Array.from({ length: count }, (_, i) => i + 1);
-    return [];
-  }, [
+  const chapters = metadata?.chapter_counts[selectedBookId] ?? [];
+  const verseNumbers = getNavigationVerseNumbers({
+    bookId: selectedBookId,
+    chapter: selectedChapter,
     currentBookId,
     currentChapter,
-    currentChapterVerseNumbers,
-    selectedBookId,
-    selectedChapter,
     translationOnly,
-    verseCounts,
-  ]);
+    currentChapterVerseNumbers,
+    verseCounts: metadata?.verse_counts ?? {},
+  });
+  const selectedVerse =
+    selectedBookId === currentBookId && selectedChapter === currentChapter
+      ? currentVerse
+      : verseNumbers[0];
 
-  // Pad numbers for grid
-  const padNumbers = useCallback((numbers: number[]) => {
-    const remainder = numbers.length % layout.gridColumns;
-    if (remainder === 0) return numbers;
-    const fillerCount = layout.gridColumns - remainder;
-    return numbers.concat(Array.from({ length: fillerCount }, () => -1));
-  }, [layout.gridColumns]);
-
-  const renderBackdrop = useCallback(
-    (props: BottomSheetBackdropProps) => (
-      <BottomSheetBackdrop
-        {...props}
-        appearsOnIndex={0}
-        disappearsOnIndex={-1}
-        opacity={0.5}
-        pressBehavior="close"
-      />
-    ),
-    [],
-  );
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [sheetReady, setSheetReady] = useState(false);
-  const bookListRef = useRef<BottomSheetFlatListMethods | null>(null);
-  useEffect(() => {
-    if (!isOpen) {
-      setSelectedBookId(currentBookId);
-      setSelectedChapter(currentChapter);
-    }
-  }, [currentBookId, currentChapter, isOpen]);
-  const bookItemHeight = Math.ceil(Math.max(typography.sizes.h3, typography.sizes.body) * fontScale * 1.4) + spacing[4] * 2 + 2;
-  const bookRowHeight = bookItemHeight + spacing[3];
-  const [listViewport, setListViewport] = useState(0);
-  const [listContent, setListContent] = useState(0);
-  const [listPositioned, setListPositioned] = useState(false);
-  const fallbackUsed = useRef(false);
-  const selectedBookIndex = filteredBooks.findIndex(book => book.id === selectedBookId);
-
-  useEffect(() => {
-    if (!isOpen || step !== "book") {
-      setListPositioned(false);
-      setListViewport(0);
-      setListContent(0);
-      fallbackUsed.current = false;
-    }
-  }, [isOpen, step]);
-
-  useEffect(() => {
-    // A resized native sheet has stale snap/scroll geometry. Close the transient
-    // picker; the current reading location is retained and reopening remeasures.
-    setIsOpen(false);
-    setSheetReady(false);
-    setListPositioned(false);
-    fallbackUsed.current = false;
-  }, [width, height]);
-
-  useEffect(() => {
-    const index = selectedBookScroll({
-      open: sheetReady,
-      bookStep: step === "book",
-      query: searchQuery,
-      viewport: listViewport,
-      content: listContent,
-      selectedIndex: selectedBookIndex,
-      positioned: listPositioned,
-    });
-    if (index === null || !bookListRef.current) return;
-    bookListRef.current.scrollToIndex({index, viewPosition: 0.5, animated: false});
-    setListPositioned(true);
-  }, [sheetReady, step, searchQuery, listViewport, listContent, selectedBookIndex, listPositioned]);
-
-
-  const handleSheetChanges = useCallback(
-    (index: number) => {
-      setSheetReady(index >= 0);
-      if (index === -1) {
-        // Reset state when closed
-        setStep("book");
-        setSearchQuery("");
-        setSelectedBookId(currentBookId);
-        setSelectedChapter(currentChapter);
-        setIsOpen(false);
-        onClose?.();
-      } else {
-        setIsOpen(true);
-      }
-    },
-    [onClose, currentBookId, currentChapter],
-  );
-
-  const handleBack = useCallback(() => {
-    directionRef.current = "back";
-    if (step === "verse") {
-      setStep("chapter");
-    } else if (step === "chapter") {
-      setStep("book");
-      sheetRef.current?.expand();
-    }
-  }, [step]);
-
-  const handleSelectBook = useCallback(
-    (bookId: string) => {
-      const firstChapter = chapterCounts[bookId]?.[0] ?? 1;
-      setSelectedBookId(bookId);
-      setSelectedChapter(firstChapter);
-      setSearchQuery("");
-      directionRef.current = "forward";
-      setStep("chapter");
-    },
-    [chapterCounts],
-  );
-
-  const handleSelectChapter = useCallback((chapter: number) => {
-    setSelectedChapter(chapter);
-    directionRef.current = "forward";
-    setStep("verse");
-  }, []);
-
-  const handleSelectVerse = useCallback(
-    (verse: number) => {
-      onSelectVerse(selectedBookId, selectedChapter, verse);
-      sheetRef.current?.close();
-    },
-    [selectedBookId, selectedChapter, onSelectVerse],
-  );
-
-  const renderBookItem = useCallback(
-    ({ item }: { item: BookMeta }) => {
-      const isSelected = item.id === selectedBookId;
-      return (
-        <Pressable
-          onPress={() => handleSelectBook(item.id)}
-          style={({ pressed }) => [
-            styles.bookItem,
-            { height: bookItemHeight },
-            isSelected && styles.bookItemSelected,
-            pressed
-              ? getNeumorphShadowStyle("pressed", colors)
-              : getNeumorphShadowStyle("raised", colors),
-          ]}
-        >
-          <Text style={styles.bookEnglish}>{getBookDisplayName(item)}</Text>
-          <Text
-            style={[
-              styles.bookHebrew,
-              besorahLanguage === "greek" && GREEK_BESORAH_BOOK_NAMES[item.id]
-                ? { fontFamily: typography.families.hebrewScripture }
-                : null,
-            ]}
-          >
-            {besorahLanguage === "greek" && GREEK_BESORAH_BOOK_NAMES[item.id]
-              ? GREEK_BESORAH_BOOK_NAMES[item.id]
-              : stripNikud(item.hebrewName)}
-          </Text>
-        </Pressable>
-      );
-    },
-    [selectedBookId, handleSelectBook, styles, colors, getBookDisplayName, bookItemHeight, besorahLanguage],
-  );
-
-  const renderNumberGrid = useCallback(
-    (numbers: number[], selected: number, onSelect: (n: number) => void) => {
-      const paddedNumbers = padNumbers(numbers);
-      return (
-        <View style={styles.grid}>
-          {paddedNumbers.map((value, index) => {
-            if (value === -1) {
-              return (
-                <View
-                  key={`empty-${index}`}
-                  style={[styles.cell, styles.cellPlaceholder]}
-                />
-              );
-            }
-            const isSelected = value === selected;
-            return (
-              <Pressable
-                key={value}
-                onPress={() => onSelect(value)}
-                style={[styles.cell, isSelected && styles.cellSelected]}
-              >
-                <Text
-                  style={[
-                    styles.cellLabel,
-                    isSelected && styles.cellLabelSelected,
-                  ]}
-                >
-                  {value}
-                </Text>
-              </Pressable>
-            );
-          })}
-        </View>
-      );
-    },
-    [padNumbers, styles],
-  );
-
-  const getTitle = () => {
-    const selectedBookName = selectedBook
-      ? getBookDisplayName(selectedBook)
-      : "";
-
-    switch (step) {
-      case "book":
-        return t("navigation.selectBook");
-      case "chapter":
-        return selectedBookName || t("navigation.selectChapter");
-      case "verse":
-        return `${selectedBookName} ${selectedChapter}`;
-    }
-  };
-
-  const enteringAnim =
-    directionRef.current === "forward" ? FadeIn.duration(200) : undefined;
+  if (!isOpen) return null;
 
   return (
-    <BottomSheet
-      key={`${width}-${height}`}
-      ref={sheetRef}
-      index={-1}
-      snapPoints={snapPoints}
-      enableDynamicSizing={false}
-      enablePanDownToClose
-      backgroundStyle={styles.sheetBackground}
-      handleIndicatorStyle={styles.sheetHandle}
-      onChange={handleSheetChanges}
-      onAnimate={(_from, to) => {
-        setSheetReady(false);
-        if (to >= 0) setIsOpen(true);
-      }}
-      backdropComponent={renderBackdrop}
-      keyboardBehavior="interactive"
-      keyboardBlurBehavior="restore"
-      animateOnMount={false}
+    <AnimatedSafeAreaView
+      edges={["top", "left", "right"]}
+      entering={pickerEntrance}
+      style={styles.screen}
+      testID="navigation-bcv-picker"
     >
-      <View style={styles.header}>
-        <View style={styles.titleRow}>
-          <Pressable
-            style={[
-              styles.backButton,
-              step === "book" && styles.backButtonHidden,
-            ]}
-            onPress={handleBack}
-            disabled={step === "book"}
-          >
-            <Ionicons
-              name="arrow-back"
-              size={18}
-              color={colors.textSecondary}
-            />
-          </Pressable>
-          <Text style={styles.title}>{getTitle()}</Text>
-          {isOpen && (
+      <View
+        style={[
+          styles.body,
+          {
+            maxWidth: layout.navigationWidth,
+            paddingBottom: hasNavigationDock
+              ? 72 + Math.max(insets.bottom, 8) + spacing[4]
+              : insets.bottom + spacing[4],
+          },
+        ]}
+      >
+        <View style={styles.header}>
+          <Text style={styles.hint}>{t("navigation.selectLocation")}</Text>
+          <View style={styles.actions}>
             <Pressable
-              style={styles.closeButton}
-              onPress={() => sheetRef.current?.close()}
+              accessibilityRole="button"
+              accessibilityLabel={t("navigation.searchBooks")}
+              accessibilityState={{ expanded: searchVisible }}
+              style={styles.iconButton}
+              onPress={() => {
+                setSearchVisible(!searchVisible);
+                setSearchQuery("");
+              }}
+            >
+              <Search size={16} color={colors.textSecondary} />
+            </Pressable>
+            <Pressable
+              accessibilityRole="button"
+              accessibilityLabel={t("navigation.closePicker")}
+              style={styles.iconButton}
+              onPress={close}
               testID="navigation-close-button"
             >
-              <Ionicons name="close" size={18} color={colors.textSecondary} />
+              <X size={18} color={colors.textSecondary} />
             </Pressable>
-          )}
-        </View>
-
-        {/* Search - only for books */}
-        {step === "book" && (
-          <View
-            style={[
-              styles.searchContainer,
-              getNeumorphShadowStyle("pressed", colors),
-            ]}
-          >
-            <Ionicons
-              name="search"
-              size={18}
-              color={colors.textSecondary}
-              style={styles.searchIcon}
-            />
-            <TextInput
-              style={styles.searchInput}
-              placeholder={t("navigation.searchBooks")}
-              placeholderTextColor={colors.textSecondary}
-              value={searchQuery}
-              onChangeText={setSearchQuery}
-              autoCorrect={false}
-              autoCapitalize="none"
-              returnKeyType="search"
-            />
-            {searchQuery.length > 0 && (
-              <Pressable
-                style={styles.clearButton}
-                onPress={() => setSearchQuery("")}
-              >
-                <Ionicons
-                  name="close-circle"
-                  size={18}
-                  color={colors.textSecondary}
-                />
-              </Pressable>
-            )}
           </View>
-        )}
-      </View>
-
-      {/* Content based on step */}
-      {step === "book" && isOpen && (
-        <Animated.View
-          key="book-list"
-          entering={enteringAnim}
-          style={styles.content}
-        >
-          <BottomSheetFlatList
-            ref={bookListRef}
-            data={filteredBooks}
-            keyExtractor={(item: BookMeta) => item.id}
-            renderItem={renderBookItem}
-            style={[styles.list, { opacity: listPositioned || searchQuery.trim() || !filteredBooks.length ? 1 : 0 }]}
-            initialNumToRender={12}
-            initialScrollIndex={!searchQuery.trim() && selectedBookIndex >= 0 ? Math.max(0, selectedBookIndex - 2) : undefined}
-            getItemLayout={(_data, index) => ({length: bookRowHeight, offset: bookRowHeight * index, index})}
-            onLayout={event => setListViewport(event.nativeEvent.layout.height)}
-            onContentSizeChange={(_width, height) => setListContent(height)}
-            onScrollBeginDrag={() => setListPositioned(true)}
-            onScrollToIndexFailed={({index}) => {
-              if (fallbackUsed.current || searchQuery.trim() || !isOpen) return;
-              fallbackUsed.current = true;
-              bookListRef.current?.scrollToOffset({offset: centeredBookOffset(index, bookRowHeight, listViewport), animated: false});
-              setListPositioned(true);
-            }}
-            contentContainerStyle={[
-              styles.listContent,
-              {
-                paddingBottom: contentBottomPadding,
-              },
-            ]}
-            showsVerticalScrollIndicator={false}
-            ListEmptyComponent={
-              <View style={styles.emptyContainer}>
-                <Text style={styles.emptyText}>
-                  {loadError ?? t("navigation.noBooksFound")}
-                </Text>
-              </View>
-            }
-            keyboardShouldPersistTaps="handled"
+        </View>
+        {searchVisible && (
+          <TextInput
+            autoFocus
+            style={styles.searchInput}
+            accessibilityLabel={t("navigation.searchBooks")}
+            placeholder={t("navigation.searchBooks")}
+            placeholderTextColor={colors.textSecondary}
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            autoCorrect={false}
+            autoCapitalize="none"
+            returnKeyType="search"
           />
-        </Animated.View>
-      )}
-
-      {step === "chapter" && (
-        <Animated.View
-          key="chapter-grid"
-          entering={enteringAnim}
-          style={styles.content}
-        >
-          <BottomSheetScrollView
-            style={styles.gridScroll}
-            contentContainerStyle={[
-              styles.gridContainer,
-              {
-                paddingBottom: contentBottomPadding,
-              },
-            ]}
-            nestedScrollEnabled
-            keyboardShouldPersistTaps="handled"
-            showsVerticalScrollIndicator={false}
-          >
-            <Text style={styles.gridTitle}>
-              {t("navigation.selectChapter")}
-            </Text>
-            {chapterNumbers.length ? (
-              renderNumberGrid(
-                chapterNumbers,
-                selectedChapter,
-                handleSelectChapter,
-              )
-            ) : (
-              <View style={styles.emptyContainer}>
-                <Text style={styles.emptyText}>
-                  {t("navigation.noChapters")}
-                </Text>
-              </View>
-            )}
-          </BottomSheetScrollView>
-        </Animated.View>
-      )}
-
-      {step === "verse" && (
-        <Animated.View
-          key="verse-grid"
-          entering={enteringAnim}
-          style={styles.content}
-        >
-          <BottomSheetScrollView
-            style={styles.gridScroll}
-            contentContainerStyle={[
-              styles.gridContainer,
-              {
-                paddingBottom: contentBottomPadding,
-              },
-            ]}
-            nestedScrollEnabled
-            keyboardShouldPersistTaps="handled"
-            showsVerticalScrollIndicator={false}
-          >
-            <Text style={styles.gridTitle}>{t("navigation.selectVerse")}</Text>
-            {verseNumbers.length ? (
-              renderNumberGrid(
-                verseNumbers,
-                currentBookId === selectedBookId &&
-                  currentChapter === selectedChapter
-                  ? currentVerse
-                  : 0,
-                handleSelectVerse,
-              )
-            ) : (
-              <View style={styles.emptyContainer}>
-                <Text style={styles.emptyText}>{t("navigation.noVerses")}</Text>
-              </View>
-            )}
-          </BottomSheetScrollView>
-        </Animated.View>
-      )}
-    </BottomSheet>
+        )}
+        <View style={styles.picker}>
+          <SelectionColumn
+            title={t("navigation.selectBook")}
+            items={books}
+            selectedId={selectedBookId}
+            onSelect={(bookId) => {
+              if (bookId !== selectedBookId) {
+                setSelectedBookId(bookId);
+                setSelectedChapter(metadata?.chapter_counts[bookId]?.[0] ?? 1);
+              }
+            }}
+            emptyLabel={
+              loadError
+                ? t("errors.loadBooks")
+                : metadata
+                  ? t("navigation.noBooksFound")
+                  : t("navigation.loadingBooks")
+            }
+            bookColumn
+            divider
+            styles={styles}
+            rowHeight={rowHeight}
+          />
+          <SelectionColumn
+            title={t("navigation.selectChapter")}
+            items={chapters.map((chapter) => ({
+              id: String(chapter),
+              label: String(chapter),
+            }))}
+            selectedId={String(selectedChapter)}
+            onSelect={(id) => setSelectedChapter(Number(id))}
+            emptyLabel={t("navigation.noChapters")}
+            divider
+            styles={styles}
+            rowHeight={rowHeight}
+          />
+          <SelectionColumn
+            title={t("navigation.selectVerse")}
+            items={verseNumbers.map((verse) => ({
+              id: String(verse),
+              label: String(verse),
+            }))}
+            selectedId={String(selectedVerse)}
+            onSelect={(id) => {
+              onSelectVerse(selectedBookId, selectedChapter, Number(id));
+              close();
+            }}
+            emptyLabel={t("navigation.noVerses")}
+            styles={styles}
+            rowHeight={rowHeight}
+          />
+        </View>
+      </View>
+    </AnimatedSafeAreaView>
   );
 };
 

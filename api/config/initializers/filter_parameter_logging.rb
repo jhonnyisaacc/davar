@@ -1,0 +1,1 @@
+Rails.application.config.filter_parameters += %i[token access_token refresh_token code state secret credential verifier email subject profile message content context citations memory latitude longitude]

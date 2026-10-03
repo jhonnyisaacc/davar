@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://davar.bible/contracts/biblical-knowledge/v1/artifact.schema.json",
+  "title": "Independently versioned publication artifact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "kind",
+    "version",
+    "locale",
+    "edition_id",
+    "sha256",
+    "review",
+    "publication",
+    "permissions"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "enum": [
+        "text",
+        "definitions"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "locale": {
+      "type": "string",
+      "minLength": 1
+    },
+    "edition_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sha256": {
+      "$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/digest"
+    },
+    "review": {
+      "enum": [
+        "unreviewed",
+        "approved",
+        "rejected"
+      ]
+    },
+    "publication": {
+      "enum": [
+        "draft",
+        "published",
+        "withdrawn"
+      ]
+    },
+    "permissions": {
+      "type": "object",
+      "required": [
+        "public_distribution",
+        "ai_processing",
+        "attribution"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "public_distribution": {
+          "type": "boolean"
+        },
+        "ai_processing": {
+          "type": "boolean"
+        },
+        "attribution": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "publication": {
+            "const": "published"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "review": {
+            "const": "approved"
+          },
+          "permissions": {
+            "properties": {
+              "public_distribution": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

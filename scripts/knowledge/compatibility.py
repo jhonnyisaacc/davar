@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import subprocess
 import tarfile
@@ -36,6 +37,30 @@ def fetch_shaul(destination: Path):
     run(["git", "checkout", "--quiet", "FETCH_HEAD"], cwd=destination)
 
 
+def publication_compatible(path: str, before: bytes, after: bytes) -> bool:
+    """Permit only the optional publication extension and metadata-only rehashes."""
+    if path == "contracts/biblical-knowledge/v1/README.md":
+        return after.startswith(before)
+    schema = "contracts/biblical-knowledge/v1/manifest.schema.json"
+    pilot = "data/knowledge/generated/pilot-v1/"
+    if path != schema and not (path.startswith(pilot + "bundles/") or path == pilot + "manifest.json"):
+        return False
+    try:
+        old, new = json.loads(before), json.loads(after)
+        if path == schema:
+            extension = new.get("properties", {}).pop("artifacts", None)
+            expected = {"type": "array", "items": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/artifact.schema.json"}}
+            return extension == expected and new == old
+        for payload in (old, new):
+            payload.pop("input_manifest_digest", None)
+            if path == pilot + "manifest.json":
+                for entry in payload.get("files", []):
+                    entry.pop("sha256", None)
+        return old == new
+    except (ValueError, TypeError, AttributeError):
+        return False
+
+
 def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
     changes = subprocess.check_output(
         ["git", "diff", "--name-status", base, "--"], cwd=root, text=True
@@ -48,6 +73,10 @@ def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
         if path.startswith(KNOWLEDGE_CODE) and status != "A":
             knowledge_edits = True
             continue
+        if status == "M":
+            before = subprocess.check_output(["git", "show", f"{base}:{path}"], cwd=root)
+            if publication_compatible(path, before, (root / path).read_bytes()):
+                continue
         if status != "A":
             raise ValueError("Non-additive or out-of-scope change: " + line)
     untracked = subprocess.check_output(

@@ -6,13 +6,28 @@
     "appName": "Davar",
     "downloadOnAppStore": "Descargar en el App Store",
     "getOnGooglePlay": "Disponible en Google Play",
-    "serverWaking": "Iniciando servidor, la primera solicitud puede tardar un momento."
+    "serverWaking": "Iniciando servidor, la primera solicitud puede tardar un momento.",
+    "retry": "Reintentar"
+  },
+  "assemblies": {
+    "splashLabel": "ASAMBLEAS",
+    "welcome": "Bienvenido",
+    "invitationCopy": "Introduce el código de tu líder de congregación.",
+    "accessCode": "Código de acceso",
+    "continue": "Continuar",
+    "paste": "Pegar",
+    "back": "Volver",
+    "invalidCode": "No se pudo verificar este código. Confírmalo con tu líder e inténtalo de nuevo.",
+    "accessUnavailable": "El acceso no está disponible ahora. Inténtalo de nuevo.",
+    "clipboardUnavailable": "No se pudo leer el portapapeles. Introduce el código manualmente o inténtalo de nuevo."
   },
   "navigation": {
     "goHome": "Ir al inicio",
     "selectBook": "Libro",
     "selectChapter": "Capítulo",
     "selectVerse": "Versículo",
+    "selectLocation": "Libro · capítulo · versículo",
+    "closePicker": "Cerrar selector de Escrituras",
     "previousVerse": "Versículo anterior",
     "nextVerse": "Siguiente versículo",
     "openFeatures": "Abrir funciones",
@@ -50,27 +65,43 @@
       "general": "General",
       "offline": "Sin conexión"
     },
+    "account": {
+      "title": "Cuenta",
+      "signIn": "Iniciar sesión",
+      "manage": "Administrar cuenta",
+      "description": "Las Escrituras siempre están disponibles sin una cuenta.",
+      "linkDescription": "Vincula una identidad verificada a esta cuenta.",
+      "emailLabel": "Correo electrónico",
+      "emailAction": "Enviar enlace de acceso",
+      "emailSent": "Revisa tu correo para encontrar el enlace de acceso.",
+      "unavailable": "No se pudo iniciar sesión. Inténtalo de nuevo.",
+      "signOut": "Cerrar sesión",
+      "save": "Guardar ajustes de lectura",
+      "load": "Cargar ajustes de la cuenta",
+      "saved": "Ajustes de lectura guardados.",
+      "loaded": "Ajustes de la cuenta cargados."
+    },
     "theme": {
-      "title": "Tema",
+      "title": "Tema oscuro",
       "subtitle": "Modo oscuro"
     },
     "language": {
       "title": "Idioma"
     },
     "besorahLanguage": {
-      "title": "Fuente de la Besorah",
+      "title": "Idioma de la Besorah",
       "hebrew": "Hebreo",
       "greek": "Griego",
       "new": "Nuevo"
     },
     "besorahTextVersion": {
-      "title": "Traducción del Evangelio",
+      "title": "Texto de la Besorah",
       "delitzsch": "Delitzsch",
       "hutter": "Hutter",
       "new": "Nuevo"
     },
     "qumran": {
-      "title": "Variantes de Qumrán",
+      "title": "Qumrán",
       "subtitle": "Mostrar texto de los Rollos del Mar Muerto"
     },
     "fullChapter": {
@@ -78,7 +109,7 @@
       "subtitle": "Mostrar texto completo del capítulo"
     },
     "seferStyle": {
-      "title": "Estilo de libro",
+      "title": "Estilo Sefer",
       "subtitle": "Diseño continuo de rollo hebreo",
       "warningTitle": "Sefer requiere Solo hebreo",
       "warningMessage": "Activa Solo hebreo o Solo traducción para usar el estilo Sefer."
@@ -111,7 +142,22 @@
     "designSystemTitle": "Sistema de diseño",
     "designSystemDescription": "Ver componentes de diseño",
     "mobileDesignGuideTitle": "Guía de diseño móvil",
-    "mobileDesignGuideDescription": "Ver componentes de diseño móvil"
+    "mobileDesignGuideDescription": "Ver componentes de diseño móvil",
+    "calendarDayPill": {
+      "title": "Día del calendario siempre",
+      "subtitle": "Desactivado: mostrar solo en moadim.",
+      "cityRequired": "Elige tu ciudad en Calendario para mostrar el día. La usaremos para la puesta de sol local."
+    },
+    "links": {
+      "title": "Acerca de Davar",
+      "textSources": "Fuentes de los textos",
+      "commentarySources": "Fuentes de comentarios",
+      "donate": "Donar",
+      "terms": "Términos",
+      "privacy": "Privacidad",
+      "support": "Soporte",
+      "github": "GitHub"
+    }
   },
   "home": {
     "todayIs": "Hoy es",
@@ -257,6 +303,7 @@
     "selectBookPrompt": "Selecciona un libro para comenzar.",
     "loading": "Cargando versículos...",
     "prefixLabel": "Prefijo: {prefix}",
+    "translationUnavailable": "La traducción no está disponible en este momento. Inténtalo de nuevo más tarde.",
     "missingSpanishTranslation": "Por el momento no contamos con traducción al español de este texto, estamos trabajando en ello...",
     "greekUnavailable": "No está presente en el texto mostrado de SBLGNT 2011.",
     "besorahDisclaimer": {
@@ -321,6 +368,89 @@
   "tabs": {
     "home": "Inicio",
     "verse": "Versículo",
+    "scripture": "Escrituras",
+    "assemblies": "Asambleas",
+    "commentary": "Comentario",
     "settings": "Ajustes"
+  },
+  "calendar": {
+    "title": "Calendario bíblico",
+    "nav": "Calendario",
+    "chooseCity": "Elige tu\nciudad",
+    "chooseCityPill": "Elegir ciudad",
+    "dayUnavailable": "Calendario no disponible",
+    "cityExplanation": "La usaremos para tu puesta de sol local.",
+    "searchCity": "Buscar ciudad",
+    "cityHint": "Puedes cambiar tu ciudad tocando su nombre en el calendario.",
+    "noCities": "No se encontraron ciudades. Prueba otro nombre.",
+    "searchUnavailable": "La búsqueda no está disponible. Inténtalo de nuevo.",
+    "back": "Volver al calendario",
+    "today": "Hoy",
+    "previousDay": "Día anterior",
+    "nextDay": "Día siguiente",
+    "dayOfMonth": "Día del mes actual",
+    "awaitingMoon": "Esperando la luna nueva",
+    "localSunset": "Puesta de sol local",
+    "moonConfirmed": "Luna nueva confirmada",
+    "sightedIsrael": "Avistada en Israel",
+    "moonPending": "Esperando confirmación",
+    "waitingIsrael": "Esperando un avistamiento en Israel.",
+    "source": "Fuente",
+    "sourceSubtitle": "Observaciones y referencias",
+    "sources": "Fuentes",
+    "sourcesIntroduction": "Las observaciones detrás de tu calendario.",
+    "sourceDescription": "Observaciones de la luna nueva en Israel.",
+    "observationReport": "Informe de observación",
+    "defaultBrowser": "Los enlaces se abren en tu navegador predeterminado.",
+    "noSources": "Las fuentes aparecerán con la próxima actualización.",
+    "appointedTimes": "Tiempos señalados",
+    "moadim": "Moadim",
+    "currentYear": "Año actual",
+    "sunsetBoundary": "Cada fecha comienza con la puesta de sol local.",
+    "awaitingYear": "Esperando confirmación del año.",
+    "awaitingDates": "Fechas pendientes",
+    "awaitingConfirmation": "Esperando confirmación",
+    "noAppointment": "Hoy no hay tiempo señalado.",
+    "unavailable": "El calendario no está disponible. Inténtalo de nuevo.",
+    "refresh": "Actualizar calendario",
+    "loading": "Cargando…",
+    "cached": "Mostrando un calendario guardado. Conéctate para actualizar.",
+    "stale": "No hay actualizaciones. Mostrando la última evidencia importada.",
+    "firstUpdate": "Esperando la primera actualización de observaciones.",
+    "fixture": "Escenario de desarrollo — observaciones sintéticas.",
+    "checked": "Observaciones revisadas: {date}",
+    "review": "Algunos informes históricos necesitan revisión. Solo se usa evidencia confirmada.",
+    "observed": "Avistada el {date}",
+    "day": "Día {day}",
+    "dayWithMonth": "{month} {day}",
+    "yearUnavailable": "La lista anual no está disponible. Inténtalo de nuevo.",
+    "monthRange": "{month} {first}–{last}",
+    "events": {
+      "pesach": "Pésaj",
+      "hag_hamatzot": "Panes sin levadura",
+      "bikurim": "Bikurim",
+      "shavuot": "Shavuot",
+      "yom_teruah": "Yom Teruá",
+      "yom_hakipurim": "Yom HaKipurim",
+      "sukkot": "Sucot",
+      "shemini_atzeret": "Sheminí Atzéret"
+    },
+    "months": {
+      "aviv": "Aviv",
+      "etanim": "Etanim"
+    }
+  },
+  "support": {
+    "description": "¿Necesitas ayuda o quieres compartir comentarios? Contáctanos.",
+    "emailLabel": "Correo electrónico",
+    "emailAction": "Escribir a soporte",
+    "creator": "Contactar al creador",
+    "telegramAction": "Abrir Telegram"
+  },
+  "commentarySources": {
+    "description": "Comentarios publicados y enlaces a las fuentes originales.",
+    "openSource": "Abrir fuente",
+    "empty": "Todavía no se han publicado fuentes de comentarios.",
+    "unavailable": "El catálogo de artículos no está disponible. Puedes visitar la fuente de arriba."
   }
 }

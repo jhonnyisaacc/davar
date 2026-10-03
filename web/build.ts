@@ -57,8 +57,7 @@ const greekPreviewEnabled = isGreekBesorahEnabled({
 	PUBLIC_GREEK_PREVIEW_ENABLED: process.env.PUBLIC_GREEK_PREVIEW_ENABLED,
 	PUBLIC_GREEK_PUBLIC_ENABLED: process.env.PUBLIC_GREEK_PUBLIC_ENABLED,
 });
-const greekPublicEnabled =
-	process.env.PUBLIC_GREEK_PUBLIC_ENABLED === "1";
+const greekPublicEnabled = process.env.PUBLIC_GREEK_PUBLIC_ENABLED === "1";
 
 if (greekPreviewEnabled || greekPublicEnabled) {
 	console.log("[davar-web] phase=greek-preview start");
@@ -144,6 +143,12 @@ const result = await Bun.build({
 	// that import.meta.env.PUBLIC_X is guaranteed to be inlined even in Bun
 	// versions that only replace direct AST-node patterns.
 	define: {
+		"process.env.PUBLIC_DEV_SANDBOX": JSON.stringify(
+			process.env.PUBLIC_DEV_SANDBOX ?? "",
+		),
+		"process.env.PUBLIC_API_URL": JSON.stringify(
+			process.env.PUBLIC_API_URL ?? "",
+		),
 		"import.meta.env.PUBLIC_NODE_ENV": JSON.stringify(
 			process.env.PUBLIC_NODE_ENV ?? "production",
 		),

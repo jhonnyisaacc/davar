@@ -138,7 +138,7 @@ jobs:
         working-directory: mobile
         run: |
           echo "JS-only mobile diff. Running eas update. Skipping eas build and eas submit."
-          eas update --channel production --auto --non-interactive
+          eas update --channel production --environment production --auto --non-interactive
 
       - name: Build and submit a native binary
         if: steps.classify.outputs.mode == 'build'
