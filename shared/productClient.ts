@@ -3,6 +3,18 @@ export interface CacheStorage {
 	set(key: string, value: string): Promise<void>;
 	remove(key: string): Promise<void>;
 }
+export function createMemoryCacheStorage(): CacheStorage {
+	const values = new Map<string, string>();
+	return {
+		get: async (key) => values.get(key) ?? null,
+		set: async (key, value) => {
+			values.set(key, value);
+		},
+		remove: async (key) => {
+			values.delete(key);
+		},
+	};
+}
 export class ProductApiError extends Error {
 	constructor(
 		public code: string,

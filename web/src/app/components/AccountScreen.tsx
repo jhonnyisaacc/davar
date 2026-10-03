@@ -1,9 +1,7 @@
+import { useWebSession } from "../features/account/useWebSession";
 import { useCallback, useEffect, useState } from "react";
-import {
-	SIGN_IN_PROVIDERS,
-	type Account,
-} from "@davar/shared/productContracts";
-import { acceptSignIn, productApi } from "../services/productApi";
+import { SIGN_IN_PROVIDERS } from "@davar/shared/productContracts";
+import { webSession, productApi } from "../services/productApi";
 import { useTranslation } from "../hooks/useTranslation";
 import { ResourcePage } from "./ResourcePage";
 import { NeumorphCard } from "./NeumorphCard";
@@ -16,7 +14,7 @@ export function AccountScreen({
 }: SettingsScreenProps & { onBack: () => void }) {
 	const { t } = useTranslation(props.language);
 	const unavailable = t("settings.account.unavailable");
-	const [account, setAccount] = useState<Account | null>(null);
+	const { account, error: sessionError } = useWebSession();
 	const [email, setEmail] = useState("");
 	const [busy, setBusy] = useState(false);
 	const [status, setStatus] = useState("");
@@ -35,25 +33,8 @@ export function AccountScreen({
 		[unavailable],
 	);
 	useEffect(() => {
-		let active = true;
-		const code = new URLSearchParams(window.location.search).get("code");
-		if (code) window.history.replaceState(null, "", window.location.pathname);
-		if (code || productApi.authenticated()) {
-			const request = code
-				? acceptSignIn(code)
-				: productApi.request<Account>("/account", { cache: true });
-			request
-				.then((result) => {
-					if (active) setAccount(result);
-				})
-				.catch(() => {
-					if (active) setStatus(unavailable);
-				});
-		}
-		return () => {
-			active = false;
-		};
-	}, [unavailable]);
+		if (sessionError) setStatus(unavailable);
+	}, [sessionError, unavailable]);
 	const actionClass =
 		"min-h-11 rounded-full border border-[var(--primary)] px-5 py-3 disabled:opacity-50";
 	return (
@@ -147,14 +128,7 @@ export function AccountScreen({
 						className={actionClass}
 						onClick={() =>
 							void run(async () => {
-								try {
-									await productApi.request("/auth/session", {
-										method: "DELETE",
-									});
-								} finally {
-									await productApi.setSession(null, null);
-									setAccount(null);
-								}
+								await webSession.logout();
 							})
 						}
 					>
