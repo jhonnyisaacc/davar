@@ -108,8 +108,11 @@ export function AssembliesEntry({
 	);
 
 	useEffect(() => {
-		if (hasAccess) clearPendingAssemblyCode();
-		else if (
+		if (hasAccess) {
+			clearPendingAssemblyCode();
+			if (code) setCode("");
+			if (stage === "signIn") setStage("home");
+		} else if (
 			stage === "signIn" &&
 			sessionReady &&
 			hasIdentity &&

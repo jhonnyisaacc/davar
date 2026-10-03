@@ -51,7 +51,7 @@ class AssembliesTest < ActionDispatch::IntegrationTest
     headers = login("fresh")
     code = AccessCode.find_by!(code_digest: AccessCode.digest(DevelopmentFixtures::INVITATION))
     2.times do
-      post "/api/v1/account/admission", params: {code: " dav-ar01 "}, headers: headers, as: :json
+      post "/api/v1/account/admission", params: {code: " 123-4567 "}, headers: headers, as: :json
       assert_response :success
       assert response.parsed_body["admitted"]
     end
@@ -224,6 +224,17 @@ class AssembliesTest < ActionDispatch::IntegrationTest
     error "leader_cannot_leave", :conflict
   end
 
+  test "account membership identifies the active assembly and clears when leaving" do
+    headers = login("member")
+    get "/api/v1/account", headers: headers
+    assert_response :success
+    assert_equal local_assembly.id, response.parsed_body["active_assembly_id"]
+    delete "/api/v1/assemblies/#{local_assembly.id}/leave", headers: headers
+    assert_response :success
+    get "/api/v1/account", headers: headers
+    assert_response :success
+    assert_nil response.parsed_body["active_assembly_id"]
+  end
   test "a member cannot join or be accepted elsewhere" do
     user = persona("member")
     post "/api/v1/assemblies/#{online_assembly.id}/join", headers: login(user)

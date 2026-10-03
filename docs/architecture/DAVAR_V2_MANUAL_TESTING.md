@@ -63,15 +63,37 @@ delivery backend accepts only `@example.test` addresses.
 
 | Email | Initial fixture state |
 | --- | --- |
-| fresh@example.test | Not admitted, no onboarding answers |
-| starting@example.test | Admitted, Starting, answers 1 and 3 |
-| reader@example.test | Admitted, Experienced, all answers; local membership requested |
-| applicant@example.test | Admitted leader applicant, awaiting endorsements |
-| leader-one@example.test | Verified leader of Sandbox Buenos Aires |
-| leader-two@example.test | Verified leader of Sandbox Online |
+| fresh@example.test | Invitation required; no onboarding |
+| onboarding-path@example.test | Admitted; choose a path |
+| onboarding-questions@example.test | Experienced path; resume after question 2 |
+| onboarding-name@example.test | Answers complete; name and gender required |
+| onboarding-city@example.test | Name and gender complete; city required |
+| onboarding-visibility@example.test | City selected; visibility review required |
+| starting@example.test | Starting path; may browse but cannot join |
+| reader@example.test | Join request pending in local assembly |
+| female-reader@example.test | Experienced female reader; eligible to join |
+| disagreed@example.test | One negative answer; excluded from people discovery |
+| member@example.test | Local member; meeting access; cannot join elsewhere |
+| declined@example.test | Declined local request; may request again |
+| left@example.test | Left local assembly; may request again |
+| pending-online@example.test | Online request pending |
+| legacy-city@example.test | City label without coordinates; must select a city |
+| applicant@example.test | Unverified leader; request two endorsements |
+| applicant-pending@example.test | Two pending endorsements |
+| applicant-one@example.test | One accepted and one pending endorsement |
+| applicant-declined@example.test | Declined endorsement; support required |
+| leader-one@example.test | Verified local leader with members and requests |
+| leader-two@example.test | Verified online leader with requests |
+| leader-create@example.test | Verified leader without an assembly; can create |
+| nearby-hidden@example.test | Jerusalem; hidden from people discovery |
+| nearby-visible@example.test | Jerusalem; discoverable name and city only |
+| nearby-contact@example.test | Jerusalem; discoverable with synthetic Telegram contact |
 
-Invitation code: **DAVAR-LOCAL** (100 uses, thirty-day fixture expiry).
-All accounts start hidden from discovery. Two independent verified leaders can
+Invitation code: **1234567** (seven digits, 100 uses, thirty-day fixture expiry).
+Invalid-code fixtures: **7654321** expired, **7654322** revoked, **7654323** exhausted.
+Only `nearby-visible` and `nearby-contact` start discoverable; the latter explicitly
+shares a synthetic Telegram identifier. All other accounts start hidden.
+Two independent verified leaders can
 endorse the applicant; discovery choices must remain explicit. Use separate
 browser sessions or sign out to switch accounts. Native credentials use
 SecureStore; browser sessions intentionally end on full reload. After fixture
@@ -130,7 +152,7 @@ api/bin/dev-sandbox reset
 api/bin/dev-sandbox stop
 ```
 
-Reset recreates the six accounts, their sessions/conversations/settings,
+Reset recreates the 25 accounts, their sessions/conversations/settings,
 fixture-owned assemblies (including ones created by those accounts), memberships,
 endorsements, invitation, article and inbox. It removes sandbox observations;
 select a calendar scenario again. Other accounts and imports remain intact.
@@ -141,7 +163,7 @@ start signatures) and its own PostgreSQL cluster. Ctrl+C stops app services;
 `stop` leaves the shared PostgreSQL service running. Runtime state/logs/mail are ignored under `api/tmp/`.
 Do not share runtime logs or inbox links. No private corpus is required.
 
-## Manual acceptance checklist (user performed)
+## Broader product acceptance checklist
 
 - [ ] Fresh sign-in, invitation gating, Starting/Experienced paths, resume answers,
   city selection and hidden-by-default disclosure; invalid/replayed links rejected.
@@ -161,6 +183,7 @@ Do not share runtime logs or inbox links. No private corpus is required.
   scrolling, accessible labels and tap targets against `davar.pen`.
 
 Automated checks and setup smoke tests are reported separately in
-`DAVAR_VNEXT_ITERATION_REPORT.md`. This checklist has not been accepted on the
-user's behalf. Live Google/Apple/Facebook/Telegram/X, external AI/email delivery,
+`DAVAR_VNEXT_ITERATION_REPORT.md`. Assemblies QA evidence and remaining platform limits are recorded in
+[ASSEMBLIES_QA.md](../qa/ASSEMBLIES_QA.md). Other product acceptance items
+remain separate. Live Google/Apple/Facebook/Telegram/X, external AI/email delivery,
 production imports and release QA still need their own credentials and review.

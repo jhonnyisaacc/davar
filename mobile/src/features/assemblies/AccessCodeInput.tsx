@@ -23,7 +23,7 @@ export function AccessCodeInput({
   const [focused, setFocused] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [selection, setSelection] = useState<{ start: number; end: number }>();
-  // The API ignores hyphens and letter case. Keep those separators out of the slots.
+  // The slot row displays digits; the full-size input stays available to assistive technology.
   const displayValue = normalizeAccessCode(value).slice(0, ACCESS_CODE_LENGTH);
   const characters = Array.from(displayValue);
 
@@ -58,6 +58,7 @@ export function AccessCodeInput({
         autoCapitalize="characters"
         autoCorrect={false}
         spellCheck={false}
+        caretHidden
         keyboardType="number-pad"
         inputMode="numeric"
         editable={editable}
@@ -122,9 +123,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 0,
     left: 0,
-    width: 1,
-    height: 1,
-    opacity: 0,
+    width: "100%",
+    height: "100%",
+    color: "transparent",
   },
   row: { flexDirection: "row", direction: "ltr", gap: SLOT_GAP },
   slot: {

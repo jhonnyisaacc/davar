@@ -11,5 +11,16 @@ class Assembly < ApplicationRecord
   validates :city, presence: true, if: -> { kind == "in_person" }
   validates :latitude, numericality: {in: -90..90}, allow_nil: true
   validates :longitude, numericality: {in: -180..180}, allow_nil: true
-  validates :meeting_url, format: {with: /\Ahttps:\/\//}, allow_blank: true
+  validates :meeting_url, length: {maximum: 2048}
+  validate :valid_meeting_url
+
+  private
+
+  def valid_meeting_url
+    return if meeting_url.blank?
+    uri = URI.parse(meeting_url)
+    errors.add(:meeting_url, "must be a complete HTTPS URL") unless uri.is_a?(URI::HTTPS) && uri.host.present?
+  rescue URI::InvalidURIError
+    errors.add(:meeting_url, "must be a complete HTTPS URL")
+  end
 end

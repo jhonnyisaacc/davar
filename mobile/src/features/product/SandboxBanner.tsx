@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Linking, Pressable, Text, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { productApi } from "../account/session";
 export function SandboxBanner() {
+  const insets = useSafeAreaInsets();
   const [mailbox, setMailbox] = useState<string | null>(null);
   const [liveAi, setLiveAi] = useState(false);
   useEffect(() => {
@@ -25,6 +27,7 @@ export function SandboxBanner() {
     <View
       style={{
         padding: 8,
+        paddingTop: insets.top + 8,
         backgroundColor: "#FDF8F2",
         borderBottomWidth: 1,
         borderColor: "#7AA0D6",

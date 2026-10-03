@@ -121,7 +121,17 @@ export function AssembliesEntry({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (hasAccess) {
-      void clearPendingAssemblyCode().catch(() => {});
+      let active = true;
+      void clearPendingAssemblyCode()
+        .catch(() => {})
+        .then(() => {
+          if (!active) return;
+          if (code) setCode("");
+          if (stage === "signIn") setStage("home");
+        });
+      return () => {
+        active = false;
+      };
     } else if (stage === "signIn" && hasIdentity && code && focused) {
       let active = true;
       void loadPendingAssemblyCode()

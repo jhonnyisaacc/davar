@@ -28,8 +28,8 @@ class DevelopmentFixtures
     "nearby-contact" => "Jerusalem; discoverable with synthetic Telegram contact"
   }.freeze
   EMAILS = ASSEMBLIES_SCENARIOS.keys.map { |name| "#{name}@example.test" }.freeze
-  INVALID_INVITATIONS = {"EXPIRE1" => :expired, "REVOKE1" => :revoked, "USED001" => :exhausted}.freeze
-  INVITATION = "DAVAR01"
+  INVALID_INVITATIONS = {"7654321" => :expired, "7654322" => :revoked, "7654323" => :exhausted}.freeze
+  INVITATION = "1234567"
   def self.reset!
     DevelopmentSandbox.require_enabled!
     User.transaction do

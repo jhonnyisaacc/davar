@@ -3,9 +3,22 @@ import type {
 	Assembly,
 	MembershipRequest,
 } from "@davar/shared/productContracts";
+import {
+	assemblyMembershipLabel,
+	assembliesErrorMessage,
+	canCreateAssembly,
+	canRequestAssembly,
+	hasAssemblyLocation,
+} from "@davar/shared/assembliesPresentation";
 import { QAHAL_QUESTIONS } from "@davar/shared/qahalQuestions";
 import { ChevronRight, Users } from "lucide-react";
-import { type ReactNode, useState } from "react";
+import {
+	type ReactNode,
+	useCallback,
+	useEffect,
+	useRef,
+	useState,
+} from "react";
 import { productApi } from "../services/productApi";
 import { CityChooser } from "./CityChooser";
 
@@ -23,6 +36,12 @@ export function AssembliesWorkspace({
 	account: Account;
 	onAccount: (a: Account) => void;
 }) {
+	const searchVersion = useRef(0);
+	const actionPending = useRef(false);
+	const [searched, setSearched] = useState(false);
+	const [searching, setSearching] = useState(false);
+	const [creationName, setCreationName] = useState("");
+	const [creationMeeting, setCreationMeeting] = useState("");
 	const [busy, setBusy] = useState(false);
 	const [error, setError] = useState("");
 	const [name, setName] = useState(
@@ -48,13 +67,16 @@ export function AssembliesWorkspace({
 		{ id: string; kind: string }[]
 	>([]);
 	async function run(action: () => Promise<void>) {
+		if (actionPending.current) return;
+		actionPending.current = true;
 		setBusy(true);
 		setError("");
 		try {
 			await action();
 		} catch (e) {
-			setError(e instanceof Error ? e.message : "Unavailable");
+			setError(assembliesErrorMessage(e));
 		} finally {
+			actionPending.current = false;
 			setBusy(false);
 		}
 	}
@@ -77,31 +99,54 @@ export function AssembliesWorkspace({
 			await productApi.request<Account>("/account", { method: "PATCH", body }),
 		);
 	}
-	async function search() {
-		const query = new URLSearchParams({
-			kind,
-			radius_km: radius,
-			latitude: String(account.profile.latitude ?? ""),
-			longitude: String(account.profile.longitude ?? ""),
-		});
-		const result = await productApi.request<{
-			assemblies: Assembly[];
-			people: typeof people;
-		}>(`/assemblies?${query}`);
-		setAssemblies(result.assemblies);
-		setPeople(result.people);
-	}
+	const search = useCallback(async () => {
+		const version = ++searchVersion.current;
+		setSearching(true);
+		setSearched(false);
+		setAssemblies([]);
+		setPeople([]);
+		setError("");
+		try {
+			const query = new URLSearchParams({
+				kind,
+				radius_km: radius,
+				latitude: String(account.profile.latitude ?? ""),
+				longitude: String(account.profile.longitude ?? ""),
+			});
+			const result = await productApi.request<{
+				assemblies: Assembly[];
+				people: typeof people;
+			}>(`/assemblies?${query}`);
+			if (version === searchVersion.current) {
+				setAssemblies(result.assemblies);
+				setPeople(result.people);
+				setSearched(true);
+			}
+		} catch (cause) {
+			if (version === searchVersion.current)
+				setError(assembliesErrorMessage(cause));
+		} finally {
+			if (version === searchVersion.current) setSearching(false);
+		}
+	}, [kind, radius, account.profile.latitude, account.profile.longitude]);
+	const hasLocation = hasAssemblyLocation(account.profile);
+	useEffect(() => {
+		if (account.onboarding_complete && (kind === "online" || hasLocation))
+			void search();
+		return () => {
+			searchVersion.current++;
+		};
+	}, [account.onboarding_complete, kind, hasLocation, search]);
 	async function manage(assembly: Assembly) {
+		const result = (
+			await productApi.request<{ memberships: MembershipRequest[] }>(
+				`/assemblies/${assembly.id}/members`,
+			)
+		).memberships;
 		setManaged(assembly);
 		setAssemblyName(assembly.name);
 		setMeeting(assembly.meeting_url || "");
-		setMembers(
-			(
-				await productApi.request<{ memberships: MembershipRequest[] }>(
-					`/assemblies/${assembly.id}/members`,
-				)
-			).memberships,
-		);
+		setMembers(result);
 	}
 	const profile = account.profile;
 	const keys =
@@ -197,6 +242,7 @@ export function AssembliesWorkspace({
 				<label>
 					<input
 						type="checkbox"
+						disabled={busy}
 						checked={account.discoverable}
 						onChange={(e) =>
 							void run(() => save({ discoverable: e.target.checked }))
@@ -215,14 +261,24 @@ export function AssembliesWorkspace({
 				<div className="flex gap-3 justify-center">
 					<button
 						type="button"
-						onClick={() => setKind("in_person")}
+						aria-pressed={kind === "in_person"}
+						disabled={busy}
+						onClick={() => {
+							setKind("in_person");
+							setManaged(null);
+						}}
 						className={`rounded-full px-5 py-2 ${kind === "in_person" ? "bg-[var(--accent-glow)]" : ""}`}
 					>
 						Local
 					</button>
 					<button
 						type="button"
-						onClick={() => setKind("online")}
+						aria-pressed={kind === "online"}
+						disabled={busy}
+						onClick={() => {
+							setKind("online");
+							setManaged(null);
+						}}
 						className={`rounded-full px-5 py-2 ${kind === "online" ? "bg-[var(--accent-glow)]" : ""}`}
 					>
 						Online
@@ -253,8 +309,20 @@ export function AssembliesWorkspace({
 				{button(
 					"Find assemblies",
 					search,
-					kind === "in_person" && profile.latitude === undefined,
+					searching || (kind === "in_person" && !hasAssemblyLocation(profile)),
 				)}
+				{searching ? <p role="status">Loading assemblies…</p> : null}
+				{searched && !assemblies.length ? (
+					<p role="status">No assemblies found for this search.</p>
+				) : null}
+				{kind === "in_person" && !hasAssemblyLocation(profile) ? (
+					<p>Select your city to search nearby assemblies.</p>
+				) : null}
+				{profile.experience === "starting" ? (
+					<p>
+						You can explore assemblies. Joining requires the Experienced path.
+					</p>
+				) : null}
 				{assemblies.map((assembly) => (
 					<section
 						key={assembly.id}
@@ -265,27 +333,29 @@ export function AssembliesWorkspace({
 							<div className="flex-1">
 								<h2 className="text-[22px]">{assembly.name}</h2>
 								<p className="text-sm">
-									{assembly.city || "Online"} · {assembly.member_state}
+									{assembly.city || "Online"} ·{" "}
+									{assemblyMembershipLabel(assembly.member_state)}
 									{assembly.distance_km !== null
 										? ` · ${assembly.distance_km} km`
 										: ""}
 								</p>
 							</div>
-							<ChevronRight size={18} />
+							<ChevronRight size={18} className="rtl:rotate-180" />
 						</div>
 						{assembly.meeting_url ? (
 							<a href={assembly.meeting_url} target="_blank" rel="noreferrer">
 								Meeting link
 							</a>
 						) : null}
-						{assembly.member_state === "not_member"
+						{canRequestAssembly(account, assembly)
 							? button("Request to join", async () => {
 									await productApi.request(`/assemblies/${assembly.id}/join`, {
 										method: "POST",
 									});
 									await search();
+									onAccount(await productApi.request<Account>("/account"));
 								})
-							: !assembly.can_manage
+							: !assembly.can_manage && assembly.member_state !== "not_member"
 								? button(
 										assembly.member_state === "requested"
 											? "Cancel request"
@@ -296,6 +366,7 @@ export function AssembliesWorkspace({
 												{ method: "DELETE" },
 											);
 											await search();
+											onAccount(await productApi.request<Account>("/account"));
 										},
 									)
 								: null}
@@ -333,17 +404,29 @@ export function AssembliesWorkspace({
 								className="block p-3 rounded-xl bg-[var(--neomorph-bg)]"
 							/>
 						</label>
-						{button("Save", async () => {
-							await productApi.request(`/assemblies/${managed.id}`, {
-								method: "PATCH",
-								body: { name: assemblyName, meeting_url: meeting },
-							});
-							await search();
-						})}
+						{button(
+							"Save",
+							async () => {
+								const updated = await productApi.request<Assembly>(
+									`/assemblies/${managed.id}`,
+									{
+										method: "PATCH",
+										body: {
+											name: assemblyName.trim(),
+											meeting_url: meeting.trim(),
+										},
+									},
+								);
+								setManaged(updated);
+								await search();
+							},
+							!assemblyName.trim(),
+						)}
 						{members.map((member) => (
 							<div key={member.id} className="space-y-2">
 								<p>
-									{member.user.name} · {member.state}
+									{member.user.name} ·{" "}
+									{member.state === "requested" ? "Request pending" : "Member"}
 									{member.user.age ? ` · ${member.user.age}` : ""}{" "}
 									{member.user.gender || ""}
 								</p>
@@ -353,13 +436,17 @@ export function AssembliesWorkspace({
 								{member.state === "requested"
 									? ["accepted", "declined"].map((decision) => (
 											<span key={decision}>
-												{button(decision, async () => {
-													await productApi.request(
-														`/assemblies/${managed.id}/memberships/${member.id}/decision`,
-														{ method: "POST", body: { decision } },
-													);
-													await manage(managed);
-												})}
+												{button(
+													decision === "accepted" ? "Accept" : "Decline",
+													async () => {
+														await productApi.request(
+															`/assemblies/${managed.id}/memberships/${member.id}/decision`,
+															{ method: "POST", body: { decision } },
+														);
+														await manage(managed);
+														await search();
+													},
+												)}
 											</span>
 										))
 									: null}
@@ -367,22 +454,22 @@ export function AssembliesWorkspace({
 						))}
 					</section>
 				) : null}
-				{account.leader_verified ? (
+				{canCreateAssembly(account) ? (
 					<details>
 						<summary>Create an assembly</summary>
 						<label>
 							Name
 							<input
-								value={assemblyName}
-								onChange={(e) => setAssemblyName(e.target.value)}
+								value={creationName}
+								onChange={(e) => setCreationName(e.target.value)}
 								className="block p-3 rounded-xl bg-[var(--neomorph-bg)]"
 							/>
 						</label>
 						<label>
 							Meeting link
 							<input
-								value={meeting}
-								onChange={(e) => setMeeting(e.target.value)}
+								value={creationMeeting}
+								onChange={(e) => setCreationMeeting(e.target.value)}
 								className="block p-3 rounded-xl bg-[var(--neomorph-bg)]"
 							/>
 						</label>
@@ -391,15 +478,22 @@ export function AssembliesWorkspace({
 							async () => {
 								await productApi.request("/assemblies", {
 									method: "POST",
-									body: { name: assemblyName, kind, meeting_url: meeting },
+									body: {
+										name: creationName.trim(),
+										kind,
+										meeting_url: creationMeeting.trim(),
+									},
 								});
+								setCreationName("");
+								setCreationMeeting("");
+								onAccount(await productApi.request<Account>("/account"));
 								await search();
 							},
-							!assemblyName.trim(),
+							!creationName.trim(),
 						)}
 					</details>
 				) : null}
-				{profile.experience === "leader" ? (
+				{profile.experience === "leader" && !account.leader_verified ? (
 					<details>
 						<summary>Leader verification</summary>
 						<p>
@@ -422,6 +516,9 @@ export function AssembliesWorkspace({
 										method: "POST",
 										body: { leader_id: leader.id },
 									});
+									setLeaders((rows) =>
+										rows.filter((row) => row.id !== leader.id),
+									);
 								})}
 							</div>
 						))}
@@ -444,19 +541,27 @@ export function AssembliesWorkspace({
 						{item.can_decide
 							? ["accepted", "declined"].map((state) => (
 									<span key={state}>
-										{button(state, async () => {
-											await productApi.request(`/endorsements/${item.id}`, {
-												method: "PATCH",
-												body: { state },
-											});
-											setEndorsements(
-												(
-													await productApi.request<{
-														endorsements: Endorsement[];
-													}>("/endorsements")
-												).endorsements,
-											);
-										})}
+										{button(
+											state === "accepted"
+												? "Accept endorsement"
+												: "Decline endorsement",
+											async () => {
+												await productApi.request(`/endorsements/${item.id}`, {
+													method: "PATCH",
+													body: { state },
+												});
+												setEndorsements(
+													(
+														await productApi.request<{
+															endorsements: Endorsement[];
+														}>("/endorsements")
+													).endorsements,
+												);
+												onAccount(
+													await productApi.request<Account>("/account"),
+												);
+											},
+										)}
 									</span>
 								))
 							: null}
@@ -465,6 +570,7 @@ export function AssembliesWorkspace({
 				<label className="block">
 					<input
 						type="checkbox"
+						disabled={busy}
 						checked={account.discoverable}
 						onChange={(e) =>
 							void run(() => save({ discoverable: e.target.checked }))
@@ -476,7 +582,7 @@ export function AssembliesWorkspace({
 					<input
 						type="checkbox"
 						checked={account.contact_visible}
-						disabled={!account.providers.includes("telegram")}
+						disabled={busy || !account.providers.includes("telegram")}
 						onChange={(e) =>
 							void run(() => save({ contact_visible: e.target.checked }))
 						}
@@ -498,8 +604,8 @@ export function AssembliesWorkspace({
 			</>
 		);
 	return (
-		<div className="space-y-5">
-			{error ? <p role="status">{error}</p> : null}
+		<div className="space-y-5" aria-busy={busy || searching}>
+			{error ? <p role="alert">{error}</p> : null}
 			{body}
 		</div>
 	);

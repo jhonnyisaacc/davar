@@ -24,7 +24,7 @@ module Api
           if rows.empty?
             people = User.where(discoverable: true).where.not(id: current_user.id).includes(:identities).limit(500).filter_map do |user|
               profile = user.profile || {}
-              next unless user.completed_onboarding? && user.doctrinal_agreement? && profile["latitude"] && profile["longitude"]
+              next unless user.identities.any? && (!Admissions.required? || user.admitted_at) && user.completed_onboarding? && user.doctrinal_agreement? && profile["latitude"] && profile["longitude"]
               next if distance_km(lat, lon, profile["latitude"].to_f, profile["longitude"].to_f) > radius
               {id: user.id, name: user.display_name, area: profile["city"], contact_url: user.contact_visible ? user.telegram_contact : nil}
             end
@@ -76,7 +76,7 @@ module Api
       def members
         assembly = managed!
         render json: {memberships: assembly.memberships.where(state: %w[member requested]).includes(user: :identities).map { |m|
-          {id: m.id, state: m.state, user: {id: m.user_id, name: m.user.display_name, gender: m.state == "requested" ? m.user.profile&.fetch("gender", nil) : nil, age: m.user.age, contact_url: m.user.telegram_contact}}
+          {id: m.id, state: m.state, user: {id: m.user_id, name: m.user.display_name, gender: m.state == "requested" ? m.user.profile&.fetch("gender", nil) : nil, age: m.user.age, contact_url: m.user.contact_visible ? m.user.telegram_contact : nil}}
         }}
       end
       def decide
