@@ -268,3 +268,20 @@ and require loopback requests. By default no external AI, geocoder, email or
 Telegram calls are made by the simulated integrations. Configuring both
 `OPENROUTER_API_KEY` and `OPENROUTER_MODEL` opts commentary into live AI as described
 above. OAuth adapters remain unchanged.
+
+
+Assemblies testing includes 25 synthetic personas covering admission, resumable
+onboarding, membership, leader endorsements and contact consent. The seven-digit
+sandbox invitation is **1234567**. See the [account matrix and sign-in guide](../docs/architecture/DAVAR_V2_MANUAL_TESTING.md#accounts-and-email-sign-in)
+and [Assemblies QA report](../docs/qa/ASSEMBLIES_QA.md).
+
+To add the fixtures to an existing local development database without resetting
+other data, run from `api/` with the development environment configured:
+
+```sh
+DAVAR_DEV_SANDBOX=1 bundle exec rails runner 'DevelopmentFixtures.seed!'
+```
+
+Seeding preserves existing persona progress. `api/bin/dev-sandbox reset` resets
+fixture-owned records in the launcher's sandbox database; use it only when a
+fresh scenario run is needed.

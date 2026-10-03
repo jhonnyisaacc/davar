@@ -19,6 +19,13 @@ const requestedPaths = (): string[] =>
 
 let recordedRequests: string[] = [];
 let originalFetch: typeof fetch;
+function setTestFetch(
+	handler: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>,
+) {
+	globalThis.fetch = Object.assign(handler, {
+		preconnect: originalFetch.preconnect,
+	});
+}
 
 const jsonResponse = (body: unknown, status = 200): Response =>
 	new Response(JSON.stringify(body), {
@@ -30,7 +37,7 @@ beforeEach(() => {
 	recordedRequests = [];
 	resetStaticDataCachesForTests();
 	originalFetch = globalThis.fetch;
-	globalThis.fetch = async (input) => {
+	setTestFetch(async (input) => {
 		const url = String(input);
 		recordedRequests.push(url);
 		const path = new URL(url, "https://davar.test").pathname;
@@ -78,7 +85,9 @@ beforeEach(() => {
 					{
 						chapter: 1,
 						verse: 1,
-						words: [{ text: "בְּרֵאשִׁית", strong: "H7225", translit_en: "bereshit" }],
+						words: [
+							{ text: "בְּרֵאשִׁית", strong: "H7225", translit_en: "bereshit" },
+						],
 					},
 				],
 			});
@@ -146,7 +155,7 @@ beforeEach(() => {
 		}
 
 		return jsonResponse({ error: path }, 404);
-	};
+	});
 });
 
 afterEach(() => {
@@ -162,8 +171,8 @@ describe("chapter and lexicon loaders", () => {
 			const metadataRequest = fetchSpy.mock.calls.find(
 				([input]) => String(input) === "/data/metadata.json",
 			);
-			const chapterRequest = fetchSpy.mock.calls.find(
-				([input]) => String(input).startsWith("/data/oe/genesis/1.json?v="),
+			const chapterRequest = fetchSpy.mock.calls.find(([input]) =>
+				String(input).startsWith("/data/oe/genesis/1.json?v="),
 			);
 			expect(metadataRequest?.[1]?.cache).toBe("no-cache");
 			expect(chapterRequest?.[1]?.cache).toBe("force-cache");
@@ -200,9 +209,11 @@ describe("chapter and lexicon loaders", () => {
 		expect(requestedPaths()).toContain("/data/dict/entries/H04.json");
 		expect(
 			requestedPaths().some((path) =>
-				["/data/dict/words.json", "/data/dict/roots.json", "/data/dict/custom_definitions.json"].includes(
-					path,
-				),
+				[
+					"/data/dict/words.json",
+					"/data/dict/roots.json",
+					"/data/dict/custom_definitions.json",
+				].includes(path),
 			),
 		).toBe(false);
 	});
@@ -229,7 +240,7 @@ describe("chapter and lexicon loaders", () => {
 	test("failed requests can retry", async () => {
 		let attempts = 0;
 		let shouldFail = true;
-		globalThis.fetch = async (input) => {
+		setTestFetch(async (input) => {
 			const url = String(input);
 			recordedRequests.push(url);
 			const path = new URL(url, "https://davar.test").pathname;
@@ -250,7 +261,7 @@ describe("chapter and lexicon loaders", () => {
 				});
 			}
 			return jsonResponse({}, 404);
-		};
+		});
 
 		expect(await loadLexiconEntry("H430", "en")).toBeNull();
 		shouldFail = false;
@@ -267,7 +278,7 @@ describe("chapter and lexicon loaders", () => {
 	});
 
 	test("returns a Greek gloss without the custom dictionary or occurrence shard", async () => {
-		globalThis.fetch = async (input) => {
+		setTestFetch(async (input) => {
 			const url = String(input);
 			recordedRequests.push(url);
 			const path = new URL(url, "https://davar.test").pathname;
@@ -301,7 +312,7 @@ describe("chapter and lexicon loaders", () => {
 			}
 
 			return jsonResponse({ error: path }, 404);
-		};
+		});
 
 		const entry = await loadGreekLexiconEntry("G2424G", "en");
 		expect(entry?.strong_number).toBe("G2424");
@@ -312,9 +323,9 @@ describe("chapter and lexicon loaders", () => {
 		expect(
 			requestedPaths().some((path) => path.includes("custom_definitions")),
 		).toBe(false);
-		expect(requestedPaths().some((path) => path.includes("/occurrences/"))).toBe(
-			false,
-		);
+		expect(
+			requestedPaths().some((path) => path.includes("/occurrences/")),
+		).toBe(false);
 	});
 
 	test("prefers chapter-scoped TS2009 files over the full book file", async () => {
@@ -344,7 +355,7 @@ describe("chapter and lexicon loaders", () => {
 	});
 
 	test("falls back to the TS2009 book once and remembers that chapter files are missing", async () => {
-		globalThis.fetch = async (input) => {
+		setTestFetch(async (input) => {
 			const url = String(input);
 			recordedRequests.push(url);
 			const path = new URL(url, "https://davar.test").pathname;
@@ -397,7 +408,7 @@ describe("chapter and lexicon loaders", () => {
 			}
 
 			return jsonResponse({ error: path }, 404);
-		};
+		});
 
 		const verses = await getChapterVerses("genesis", 1, { language: "en" });
 		expect(verses[0]?.translation).toBe("In the beginning Elohim");
@@ -424,15 +435,17 @@ describe("chapter and lexicon loaders", () => {
 	test("does not hydrate every BES book when metadata already has labels", async () => {
 		const { getBooks } = await import("./staticData");
 		await getBooks();
-		expect(
-			requestedPaths().some((path) => path.startsWith("/data/bes/")),
-		).toBe(false);
+		expect(requestedPaths().some((path) => path.startsWith("/data/bes/"))).toBe(
+			false,
+		);
 	});
 
 	test("appends a data version to immutable static URLs", async () => {
 		await loadLexiconEntry("H430", "en");
 		expect(
-			recordedRequests.some((url) => url.includes("/data/dict/entries/H04.json?v=test-1")),
+			recordedRequests.some((url) =>
+				url.includes("/data/dict/entries/H04.json?v=test-1"),
+			),
 		).toBe(true);
 	});
 });

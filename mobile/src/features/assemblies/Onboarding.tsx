@@ -8,7 +8,7 @@ import { QAHAL_QUESTIONS } from "@davar/shared/qahalQuestions";
 export function Onboarding() {
 	const account = useSession((s) => s.account)!;
 	const refresh = useSession((s) => s.refresh);
-	const { colors } = useProductStyle();
+	const { colors, rtl } = useProductStyle();
 	const [name, setName] = useState(
 		account.display_name === "Reader" ? "" : account.display_name,
 	);
@@ -59,7 +59,7 @@ export function Onboarding() {
 					borderWidth: 1,
 					borderColor: colors.border,
 					backgroundColor: colors.surface,
-					flexDirection: "row",
+					flexDirection: rtl ? "row-reverse" : "row",
 					gap: 12,
 					alignItems: "center",
 					opacity: disabled || busy ? 0.5 : 1,
@@ -71,6 +71,8 @@ export function Onboarding() {
 							fontFamily: "Inter_600SemiBold",
 							fontSize: 14,
 							color: colors.textPrimary,
+							textAlign: rtl ? "right" : "left",
+							writingDirection: rtl ? "rtl" : "ltr",
 						}}
 					>
 						{label}
@@ -185,7 +187,13 @@ export function Onboarding() {
 			) : (
 				<>
 					<Copy>Choose when nearby people can find you.</Copy>
-					<View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
+					<View
+						style={{
+							flexDirection: rtl ? "row-reverse" : "row",
+							alignItems: "center",
+							gap: 12,
+						}}
+					>
 						<View style={{ flex: 1 }}>
 							<Copy>Visible nearby</Copy>
 							<Text style={{ fontSize: 12, color: colors.textSecondary }}>
@@ -194,6 +202,7 @@ export function Onboarding() {
 						</View>
 						<Switch
 							accessibilityLabel="Visible nearby"
+							disabled={busy}
 							value={account.discoverable}
 							onValueChange={(value) => void save({ discoverable: value })}
 						/>

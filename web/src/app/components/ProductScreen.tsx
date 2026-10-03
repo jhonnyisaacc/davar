@@ -488,7 +488,7 @@ export function ProductScreen({
 			) : null}
 			{screen === "assemblies" ? (
 				account ? (
-					<AssembliesWorkspace account={account} onAccount={setAccount} />
+					<AssembliesWorkspace key={account.id} account={account} onAccount={setAccount} />
 				) : (
 					signIn
 				)

@@ -34,9 +34,48 @@ class DevelopmentSandboxTest < ActiveSupport::TestCase
       end
       assert User.exists?(unrelated.id)
       assert_not Session.exists?(session.id)
-      assert_equal 6, Identity.where(subject: DevelopmentFixtures::EMAILS).count
+      assert_equal DevelopmentFixtures::EMAILS.length, Identity.where(subject: DevelopmentFixtures::EMAILS).count
       assert_equal 2, Assembly.where("source_id LIKE ?", "sandbox:%").count
       assert_equal "live", CalendarFeedState.current.development_scenario
+    end
+  end
+  test "Assemblies personas cover resumable onboarding membership leadership and privacy" do
+    with_method(DevelopmentSandbox, :enabled?, true) do
+      DevelopmentFixtures.seed!
+      users = DevelopmentFixtures::EMAILS.to_h do |email|
+        [email.split("@").first, Identity.find_by!(provider: "email", subject: email).user]
+      end
+      assert_equal 25, users.size
+      %w[onboarding-path onboarding-questions onboarding-name onboarding-city onboarding-visibility].each do |name|
+        assert users.fetch(name).admitted_at
+        assert_not users.fetch(name).completed_onboarding?, name
+      end
+      assert_equal false, users.fetch("onboarding-questions").profile.fetch("answers").fetch("2")
+      assert_equal "female", users.fetch("female-reader").profile.fetch("gender")
+      assert users.fetch("legacy-city").completed_onboarding?
+      assert_nil users.fetch("legacy-city").profile["latitude"]
+      {"reader" => "requested", "member" => "member", "declined" => "declined", "left" => "left", "pending-online" => "requested"}.each do |name, state|
+        assert_equal state, users.fetch(name).memberships.sole.state
+      end
+      assert_equal %w[accepted requested], Endorsement.where(applicant: users.fetch("applicant-one")).order(:state).pluck(:state)
+      assert_equal %w[declined requested], Endorsement.where(applicant: users.fetch("applicant-declined")).order(:state).pluck(:state)
+      assert users.fetch("leader-create").leader_verified
+      assert_empty users.fetch("leader-create").memberships
+      assert_not users.fetch("nearby-hidden").discoverable
+      assert users.fetch("nearby-visible").discoverable
+      assert_not users.fetch("nearby-visible").contact_visible
+      assert users.fetch("nearby-contact").contact_visible
+      assert users.fetch("nearby-contact").identities.exists?(provider: "telegram")
+      DevelopmentFixtures::INVALID_INVITATIONS.each_key do |code|
+        assert_raises(DomainError, code) { Admissions.redeem!(users.fetch("fresh"), code) }
+        assert_nil users.fetch("fresh").reload.admitted_at
+      end
+      Admissions.redeem!(users.fetch("fresh"), DevelopmentFixtures::INVITATION)
+      assert users.fetch("fresh").reload.admitted_at
+      users.fetch("female-reader").update!(display_name: "Changed during QA", discoverable: true)
+      DevelopmentFixtures.seed!
+      assert_equal "Changed during QA", users.fetch("female-reader").reload.display_name
+      assert users.fetch("female-reader").discoverable
     end
   end
   test "local mailbox captures synthetic mail and rejects real recipients" do

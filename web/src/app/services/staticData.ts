@@ -1984,7 +1984,10 @@ export const loadGreekLexiconEntry = async (
 	const inlineInstances = entry.instances ?? [];
 	const surface = instanceSurface({
 		instance_total: entry.occurrences_count,
-		instances: inlineInstances,
+		instances: inlineInstances.map((instance) => ({
+			...instance,
+			verse: instance.verse ?? undefined,
+		})),
 	});
 	return {
 		definitions,
@@ -2024,7 +2027,10 @@ export const loadGreekLexiconInstances = async (
 	if (!occurrences) return null;
 	const surface = instanceSurface({
 		instance_total: occurrences.count,
-		instances: occurrences.references,
+		instances: (occurrences.references ?? []).map((instance) => ({
+			...instance,
+			verse: instance.verse ?? undefined,
+		})),
 	});
 	return {
 		has_instances_asset: false,

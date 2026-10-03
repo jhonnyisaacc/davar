@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths: ["mobile/**", "shared/**", ".github/workflows/mobile-ci.yml"]
   pull_request:
-    branches: [main]
+    branches: [main, feat/davar-v2]
     paths: ["mobile/**", "shared/**", ".github/workflows/mobile-ci.yml"]
 
 permissions:

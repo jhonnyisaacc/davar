@@ -26,6 +26,7 @@ export const SIGN_IN_PROVIDERS = [
 ] as const;
 export type SignInProvider = (typeof SIGN_IN_PROVIDERS)[number];
 export type Account = {
+	active_assembly_id?: string | null;
 	consultations_remaining: number;
 	id: string;
 	display_name: string;

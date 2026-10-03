@@ -1,6 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Linking, Pressable, Switch, Text, View } from "react-native";
 import { ChevronRight, Users } from "lucide-react-native";
+import {
+	assemblyMembershipLabel,
+	assembliesErrorMessage,
+	canCreateAssembly,
+	canRequestAssembly,
+	hasAssemblyLocation,
+} from "@davar/shared/assembliesPresentation";
 import { CityPicker } from "./CityPicker";
 import type {
 	Assembly,
@@ -10,6 +17,7 @@ import { productApi, useSession } from "../account/session";
 import { SignIn } from "../account/SignIn";
 import {
 	Action,
+	Busy,
 	Card,
 	Copy,
 	Field,
@@ -20,15 +28,21 @@ import { Onboarding } from "./Onboarding";
 import { AssembliesEntry } from "./AssembliesEntry";
 
 export default function AssembliesScreen() {
+	const accountId = useSession((s) => s.account?.id);
 	return (
 		<AssembliesEntry>
-			<AssembliesContent />
+			<AssembliesContent key={accountId || "guest"} />
 		</AssembliesEntry>
 	);
 }
 
 function AssembliesContent() {
-	const { colors } = useProductStyle();
+	const { colors, rtl } = useProductStyle();
+	const searchVersion = useRef(0);
+	const actionPending = useRef(false);
+	const [searching, setSearching] = useState(false);
+	const [searched, setSearched] = useState(false);
+	const [creationName, setCreationName] = useState("");
 	const [changeCity, setChangeCity] = useState(false);
 	const account = useSession((s) => s.account);
 	const refresh = useSession((s) => s.refresh);
@@ -37,13 +51,12 @@ function AssembliesContent() {
 	const [radius, setRadius] = useState("25");
 	const [assemblies, setAssemblies] = useState<Assembly[]>([]);
 	const [people, setPeople] = useState<
-		{ id: string; name: string; area: string }[]
+		{ id: string; name: string; area: string; contact_url?: string | null }[]
 	>([]);
 	const [selected, setSelected] = useState<Assembly | null>(null);
 	const [members, setMembers] = useState<MembershipRequest[]>([]);
 	const [tab, setTab] = useState<"qahal" | "people" | "requests">("qahal");
 	const [name, setName] = useState("");
-	const [city, setCity] = useState("");
 	const [meeting, setMeeting] = useState("");
 	const [endorser, setEndorser] = useState("");
 	const [leaders, setLeaders] = useState<
@@ -64,51 +77,74 @@ function AssembliesContent() {
 	const [error, setError] = useState("");
 	const [busy, setBusy] = useState(false);
 	async function run(action: () => Promise<void>) {
+		if (actionPending.current) return;
+		actionPending.current = true;
 		setBusy(true);
 		setError("");
 		try {
 			await action();
 		} catch (e) {
-			setError(e instanceof Error ? e.message : "Unavailable");
+			setError(assembliesErrorMessage(e));
 		} finally {
+			actionPending.current = false;
 			setBusy(false);
 		}
 	}
+	const searchLatitude = account?.profile.latitude;
+	const searchLongitude = account?.profile.longitude;
+	const searchCity = account?.profile.city;
 	const load = useCallback(async () => {
-		const query = new URLSearchParams({
-			kind,
-			latitude: String(account?.profile.latitude ?? ""),
-			longitude: String(account?.profile.longitude ?? ""),
-			radius_km: radius,
-			city: account?.profile.city || "",
-		});
-		const result = await productApi.request<{
-			assemblies: Assembly[];
-			people: { id: string; name: string; area: string }[];
-		}>(`/assemblies?${query}`, { cache: true });
-		setAssemblies(result.assemblies);
-		setPeople(result.people);
+		const version = ++searchVersion.current;
+		setSearching(true);
+		setSearched(false);
+		setAssemblies([]);
+		setPeople([]);
+		setError("");
+		try {
+			const query = new URLSearchParams({
+				kind,
+				latitude: String(searchLatitude ?? ""),
+				longitude: String(searchLongitude ?? ""),
+				radius_km: radius,
+				city: searchCity || "",
+			});
+			const result = await productApi.request<{
+				assemblies: Assembly[];
+				people: {
+					id: string;
+					name: string;
+					area: string;
+					contact_url?: string | null;
+				}[];
+			}>(`/assemblies?${query}`, { cache: true });
+			if (version === searchVersion.current) {
+				setAssemblies(result.assemblies);
+				setPeople(result.people);
+				setSearched(true);
+			}
+		} catch (cause) {
+			if (version === searchVersion.current)
+				setError(assembliesErrorMessage(cause));
+		} finally {
+			if (version === searchVersion.current) setSearching(false);
+		}
 	}, [
 		kind,
 		radius,
-		account?.profile.city,
-		account?.profile.latitude,
-		account?.profile.longitude,
+		searchCity,
+		searchLatitude,
+		searchLongitude,
 	]);
-	useEffect(() => {
-		setSelected(null);
-		setAssemblies([]);
-		setMembers([]);
-		setPeople([]);
-		setNotifications([]);
-	}, [account?.id]);
 	useEffect(() => {
 		if (
 			account?.admitted &&
 			account.onboarding_complete &&
-			(kind === "online" || !!account.profile.latitude)
+			(kind === "online" || hasAssemblyLocation(account.profile))
 		)
-			void run(load);
+			void load();
+		return () => {
+			searchVersion.current++;
+		};
 	}, [
 		account?.id,
 		account?.admitted,
@@ -121,16 +157,17 @@ function AssembliesContent() {
 		const detail = await productApi.request<Assembly>(
 			`/assemblies/${assembly.id}`,
 		);
-		setSelected(detail);
-		setName(detail.name);
-		setMeeting(detail.meeting_url || "");
-		setCity(detail.city || "");
 		if (detail.can_manage) {
 			const result = await productApi.request<{
 				memberships: MembershipRequest[];
 			}>(`/assemblies/${detail.id}/members`);
 			setMembers(result.memberships);
+		} else {
+			setMembers([]);
 		}
+		setSelected(detail);
+		setName(detail.name);
+		setMeeting(detail.meeting_url || "");
 	}
 	return (
 		<Page
@@ -138,7 +175,18 @@ function AssembliesContent() {
 				account?.admitted && !account.onboarding_complete ? "" : "Assemblies"
 			}
 		>
-			{error ? <Copy>{error}</Copy> : null}
+			{error ? (
+				<Text
+					accessibilityRole="alert"
+					style={{
+						color: colors.textPrimary,
+						writingDirection: rtl ? "rtl" : "ltr",
+					}}
+				>
+					{error}
+				</Text>
+			) : null}
+			{busy || searching ? <Busy /> : null}
 			{!account || !account.providers.length ? (
 				<SignIn link={!!account} />
 			) : !account.admitted ? (
@@ -172,19 +220,22 @@ function AssembliesContent() {
 							<Card>
 								<Copy>{selected.name}</Copy>
 								<Copy>
-									{selected.city || "Online"} · {selected.member_state}
+									{selected.city || "Online"} ·{" "}
+									{assemblyMembershipLabel(selected.member_state)}
 								</Copy>
 								{selected.meeting_url ? (
 									<Action
 										label="Open meeting link"
-										onPress={() => void Linking.openURL(selected.meeting_url!)}
+										disabled={busy}
+										onPress={() =>
+											void run(() => Linking.openURL(selected.meeting_url!))
+										}
 									/>
 								) : null}
-								{!selected.can_manage &&
-								selected.member_state === "not_member" ? (
+								{canRequestAssembly(account, selected) ? (
 									<Action
 										label="Request to join"
-										disabled={busy || account.profile.experience === "starting"}
+										disabled={busy}
 										onPress={() =>
 											void run(async () => {
 												await productApi.request(
@@ -192,6 +243,8 @@ function AssembliesContent() {
 													{ method: "POST" },
 												);
 												await open(selected);
+												await load();
+												await refresh();
 											})
 										}
 									/>
@@ -199,6 +252,7 @@ function AssembliesContent() {
 								{!selected.can_manage &&
 								selected.member_state !== "not_member" ? (
 									<Action
+										disabled={busy}
 										label={
 											selected.member_state === "requested"
 												? "Cancel request"
@@ -211,6 +265,8 @@ function AssembliesContent() {
 													{ method: "DELETE" },
 												);
 												await open(selected);
+												await load();
+												await refresh();
 											})
 										}
 									/>
@@ -247,13 +303,17 @@ function AssembliesContent() {
 											/>
 											<Action
 												label="Save assembly"
+												disabled={busy || !name.trim()}
 												onPress={() =>
 													void run(async () => {
 														await productApi.request(
 															`/assemblies/${selected.id}`,
 															{
 																method: "PATCH",
-																body: { name, city, meeting_url: meeting },
+																body: {
+																	name: name.trim(),
+																	meeting_url: meeting.trim(),
+																},
 															},
 														);
 														await open(selected);
@@ -321,12 +381,19 @@ function AssembliesContent() {
 						</>
 					) : (
 						<>
-							<View style={{ flexDirection: "row", gap: 8 }}>
+							<View
+								style={{
+									flexDirection: rtl ? "row-reverse" : "row",
+									flexWrap: "wrap",
+									gap: 8,
+								}}
+							>
 								{(["in_person", "online"] as const).map((value) => (
 									<Pressable
 										key={value}
 										accessibilityRole="tab"
 										accessibilityState={{ selected: kind === value }}
+										disabled={busy}
 										onPress={() => setKind(value)}
 										style={{
 											paddingVertical: 8,
@@ -369,7 +436,13 @@ function AssembliesContent() {
 									{changeCity ? (
 										<>
 											<CityPicker />
-											<View style={{ flexDirection: "row", gap: 8 }}>
+											<View
+												style={{
+													flexDirection: rtl ? "row-reverse" : "row",
+													flexWrap: "wrap",
+													gap: 8,
+												}}
+											>
 												{["10", "25", "50", "100"].map((r) => (
 													<Pressable
 														key={r}
@@ -403,6 +476,22 @@ function AssembliesContent() {
 									) : null}
 								</>
 							) : null}
+							{kind === "online" ? (
+								<Action
+									label="Refresh assemblies"
+									disabled={busy || searching}
+									onPress={() => void load()}
+								/>
+							) : null}
+							{account.profile.experience === "starting" ? (
+								<Copy>
+									You can explore assemblies. Joining requires the Experienced
+									path.
+								</Copy>
+							) : null}
+							{kind === "in_person" && !hasAssemblyLocation(account.profile) ? (
+								<Copy>Select your city to search nearby assemblies.</Copy>
+							) : null}
 							<View>
 								{assemblies.map((assembly) => (
 									<Pressable
@@ -411,7 +500,7 @@ function AssembliesContent() {
 										accessibilityLabel={assembly.name}
 										onPress={() => void run(() => open(assembly))}
 										style={{
-											flexDirection: "row",
+											flexDirection: rtl ? "row-reverse" : "row",
 											gap: 16,
 											alignItems: "center",
 											paddingVertical: 18,
@@ -452,7 +541,7 @@ function AssembliesContent() {
 									</Pressable>
 								))}
 							</View>
-							{!assemblies.length ? (
+							{searched && !assemblies.length ? (
 								<Copy>No assemblies found for this search.</Copy>
 							) : null}
 							{people.map((person) => (
@@ -460,30 +549,54 @@ function AssembliesContent() {
 									<Copy>
 										{person.name} · {person.area}
 									</Copy>
+									{person.contact_url ? (
+										<Action
+											label="Contact on Telegram"
+											disabled={busy}
+											onPress={() =>
+												void run(() => Linking.openURL(person.contact_url!))
+											}
+										/>
+									) : null}
 								</Card>
 							))}
-							{account.leader_verified ? (
+							{canCreateAssembly(account) ? (
 								<Card>
 									<Copy>Create your Qahal</Copy>
-									<Field label="Name" value={name} onChange={setName} />
+									<Field
+										label="Name"
+										value={creationName}
+										onChange={setCreationName}
+									/>
 									<Copy>
 										{account.profile.city || "Select your city in onboarding."}
 									</Copy>
 									<Action
-										label={"Create " + kind + " assembly"}
-										disabled={busy || !name}
+										label={
+											kind === "online"
+												? "Create online assembly"
+												: "Create local assembly"
+										}
+										disabled={busy || !creationName.trim()}
 										onPress={() =>
 											void run(async () => {
 												const created = await productApi.request<Assembly>(
 													"/assemblies",
-													{ method: "POST", body: { name, kind, city } },
+													{
+														method: "POST",
+														body: { name: creationName.trim(), kind },
+													},
 												);
+												setCreationName("");
+												await refresh();
+												await load();
 												await open(created);
 											})
 										}
 									/>
 								</Card>
-							) : account.profile.experience === "leader" ? (
+							) : account.profile.experience === "leader" &&
+								!account.leader_verified ? (
 								<Card>
 									<Copy>
 										Creation requires endorsement or operator verification.
@@ -495,6 +608,7 @@ function AssembliesContent() {
 									/>
 									<Action
 										label="Find leader"
+										disabled={busy}
 										onPress={() =>
 											void run(async () => {
 												setLeaders(
@@ -512,6 +626,7 @@ function AssembliesContent() {
 									{leaders.map((leader) => (
 										<Action
 											key={leader.id}
+											disabled={busy}
 											label={"Ask " + leader.name + " to endorse"}
 											onPress={() =>
 												void run(async () => {
@@ -534,6 +649,7 @@ function AssembliesContent() {
 						</Copy>
 						<Switch
 							accessibilityLabel="Discoverable"
+							disabled={busy}
 							value={account.discoverable}
 							onValueChange={(value) =>
 								void run(async () => {
@@ -546,8 +662,34 @@ function AssembliesContent() {
 							}
 						/>
 					</Card>
+					<Card>
+						<Copy>
+							Share your Telegram contact with nearby people and your assembly
+							leader.
+						</Copy>
+						<Switch
+							accessibilityLabel="Share my Telegram contact"
+							disabled={busy || !account.providers.includes("telegram")}
+							value={account.contact_visible}
+							onValueChange={(contact_visible) =>
+								void run(async () => {
+									await productApi.request("/account", {
+										method: "PATCH",
+										body: { contact_visible },
+									});
+									await refresh();
+								})
+							}
+						/>
+						{!account.providers.includes("telegram") ? (
+							<Copy>
+								Link Telegram in your account before sharing your contact.
+							</Copy>
+						) : null}
+					</Card>
 					<Action
 						label="Endorsements"
+						disabled={busy}
 						onPress={() =>
 							void run(async () => {
 								setEndorsements(
@@ -572,6 +714,7 @@ function AssembliesContent() {
 								? (["accepted", "declined"] as const).map((state) => (
 										<Action
 											key={state}
+											disabled={busy}
 											label={
 												state === "accepted"
 													? "Accept endorsement"
@@ -601,6 +744,7 @@ function AssembliesContent() {
 					{account.settings.telegram_notifications === true ? (
 						<Action
 							label="Disable Telegram notifications"
+							disabled={busy}
 							onPress={() =>
 								void run(async () => {
 									await productApi.request(
@@ -616,6 +760,7 @@ function AssembliesContent() {
 					)}
 					<Action
 						label="Notifications"
+						disabled={busy}
 						onPress={() =>
 							void run(async () => {
 								const result = await productApi.request<{

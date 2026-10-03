@@ -1,7 +1,7 @@
 name: Davar API
 on:
   pull_request:
-    branches: [main]
+    branches: [main, feat/davar-v2]
     paths: ["api/**", "shared/product*.ts", "contracts/biblical-knowledge/**", "data/knowledge/registries/**", ".github/workflows/davar-api-ci.yml"]
   push:
     branches: [main]
