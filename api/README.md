@@ -130,6 +130,49 @@ Observations: schema_version=1 and observations using Bore's persisted shape.
 Verified unaided INMS sightings in Israel can confirm months. Source hash changes
 update observations; retracted confirmation is removed while evidence persists.
 
+### Live calendar
+
+Development, staging and production use the same public INMS RSS feed, pinned
+Bore parser and Rails import. From `api/`, after `bundle exec rails db:migrate`:
+
+```sh
+bundle exec rails davar:sync_calendar
+```
+
+The initial sync imports the latest 50 reports (currently several years of history).
+Run the same command every 15 minutes through the host scheduler with that
+environment's database and `PYTHON_BIN`. Alternatively, supervise this process:
+
+```sh
+bundle exec rails davar:watch_calendar
+```
+
+The development sandbox runs this watcher alongside the API. `setup` imports real
+reports; `api/bin/dev-sandbox calendar live` restores live mode after explicit
+`confirmed` or `pending` test scenarios. Real observations survive scenario changes
+and sandbox resets. Synthetic witnesses never enter the live calendar.
+
+Feed hashes make repeated syncs idempotent. Multiple witnesses and repeated reports
+produce one confirmation for an observed evening; later sightings within the same
+report do not start another month. Corrections retain retracted witnesses with
+`verified=false`; remaining evidence can continue supporting the confirmation.
+An absent older post in the rolling feed is not a retraction. Malformed feeds,
+unavailable sources and uncertain tables retain the last valid evidence. Uncertain
+reports are stored in `calendar_source_entries` with their source, raw report, hash
+and review reason. Only an unambiguous changed report replaces its prior witnesses.
+
+The API adds `generated_at`, `next_sunset_at`, `timezone`, source freshness and
+per-day observation provenance. Clients refresh at the supplied sunset boundary,
+every 15 minutes and on resume. A cached response retains its original timestamp
+and day; the UI identifies an outdated response instead of calculating a new date.
+The selected city/timezone stay on the device. No account is required.
+
+Check `CalendarFeedState.current` for the last attempt/success and review count.
+Source freshness becomes stale after two hours without a successful sync or after
+a failed fetch. Historical reports awaiting review do not suppress confirmed dates.
+Aviv, Biblical month identity and dependent festivals remain unresolved under the
+pinned policy; neither INMS month titles nor forecast text supply an Aviv anchor.
+
 Schedule `bundle exec rails davar:deliver_notifications` for the durable outbox.
 Delivery is at least once: a crash after Telegram accepts a message but before
 the database commits may cause a duplicate. No production notifications were sent.

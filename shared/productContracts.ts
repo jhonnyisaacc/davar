@@ -119,11 +119,32 @@ export type CalendarDay = {
 	month_status: string;
 	year_start_status: string;
 	confirmation_id: string | null;
+	observation?: {
+		observed_on: string;
+		source_url: string;
+		observers: string[];
+		locations: string[];
+		unaided: boolean;
+		development_fixture: boolean;
+	} | null;
 };
 export type CalendarResponse = {
 	schema_version: 1;
 	days: CalendarDay[];
 	year_start_status: string;
+	generated_at?: string;
+	next_sunset_at?: string;
+	timezone?: string;
+	source?: {
+		name: string;
+		url: string | null;
+		status: string;
+		last_checked_at: string | null;
+		last_synced_at: string | null;
+		stale: boolean;
+		review_count: number;
+		development_fixture: boolean;
+	};
 };
 export type ProviderConnection = {
 	id: string;

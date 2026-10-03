@@ -6,6 +6,7 @@ from calendar.models.month_confirmation import MonthConfirmation
 from calendar.services.calendar_builder import CalendarBuilder
 from calendar.services.biblical_clock import biblical_lookup_date
 from calendar.services.rabbinic_calendar import gregorian_to_rabbinic
+from calendar.services.sunset import next_sunset_after
 
 payload = json.load(sys.stdin)
 instant = datetime.fromisoformat(payload["instant"].replace("Z", "+00:00"))
@@ -29,4 +30,6 @@ for offset in range(payload["count"]):
         "year_start_status": decision.status.value,
         "confirmation_id": day.confirmation_id if day else None,
     })
-json.dump({"schema_version": 1, "days": result, "year_start_status": decision.status.value}, sys.stdout)
+json.dump({"schema_version": 1, "days": result, "year_start_status": decision.status.value,
+           "next_sunset_at": next_sunset_after(instant, payload["latitude"], payload["longitude"], payload["timezone"]).isoformat(),
+           "timezone": payload["timezone"]}, sys.stdout)

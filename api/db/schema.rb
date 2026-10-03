@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_30_000005) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_03_000000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -56,7 +56,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_30_000005) do
     t.datetime "updated_at", null: false
     t.index ["leader_id"], name: "index_assemblies_on_leader_id", unique: true
     t.index ["source_id"], name: "index_assemblies_on_source_id", unique: true
-    t.check_constraint "kind::text = ANY (ARRAY['in_person'::character varying, 'online'::character varying]::text[])", name: "assembly_kind"
+    t.check_constraint "kind::text = ANY (ARRAY['in_person'::character varying::text, 'online'::character varying::text])", name: "assembly_kind"
   end
 
   create_table "auth_attempts", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -74,6 +74,34 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_30_000005) do
     t.text "verifier"
     t.index ["state_digest"], name: "index_auth_attempts_on_state_digest", unique: true
     t.index ["user_id"], name: "index_auth_attempts_on_user_id"
+  end
+
+  create_table "calendar_feed_states", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.jsonb "details", default: {}, null: false
+    t.string "development_scenario", default: "live", null: false
+    t.datetime "last_attempt_at"
+    t.datetime "last_success_at"
+    t.string "source", null: false
+    t.string "status", default: "never_synced", null: false
+    t.datetime "updated_at", null: false
+    t.index ["source"], name: "index_calendar_feed_states_on_source", unique: true
+  end
+
+  create_table "calendar_source_entries", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "content_hash", null: false
+    t.datetime "created_at", null: false
+    t.datetime "last_parsed_at", null: false
+    t.datetime "last_seen_at", null: false
+    t.string "parse_status", null: false
+    t.text "raw_content", null: false
+    t.string "reason"
+    t.string "source", null: false
+    t.string "source_entry_id", null: false
+    t.string "source_url", null: false
+    t.string "title", null: false
+    t.datetime "updated_at", null: false
+    t.index ["source", "source_entry_id"], name: "index_calendar_source_entries_on_source_and_source_entry_id", unique: true
   end
 
   create_table "conversations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -127,7 +155,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_30_000005) do
     t.index ["user_id", "assembly_id"], name: "index_memberships_on_user_id_and_assembly_id", unique: true
     t.index ["user_id"], name: "index_memberships_on_user_id"
     t.index ["user_id"], name: "one_active_membership", unique: true, where: "((state)::text = 'member'::text)"
-    t.check_constraint "state::text = ANY (ARRAY['requested'::character varying, 'member'::character varying, 'declined'::character varying, 'left'::character varying]::text[])", name: "membership_state"
+    t.check_constraint "state::text = ANY (ARRAY['requested'::character varying::text, 'member'::character varying::text, 'declined'::character varying::text, 'left'::character varying::text])", name: "membership_state"
   end
 
   create_table "messages", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

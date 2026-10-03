@@ -1,4 +1,20 @@
 namespace :davar do
+  desc "Synchronize public INMS reports using the same ingestion in every environment"
+  task sync_calendar: :environment do
+    puts JSON.generate(SyncCalendarObservationsJob.perform_now)
+  end
+  desc "Keep calendar observations current; run as a supervised process"
+  task watch_calendar: :environment do
+    loop do
+      begin
+        puts JSON.generate(SyncCalendarObservationsJob.perform_now)
+      rescue StandardError => error
+        warn "Calendar synchronization failed (#{error.class.name})"
+      end
+      $stdout.flush
+      sleep 15.minutes
+    end
+  end
   desc "Release consultations interrupted by process termination"
   task recover_consultations: :environment do
     RecoverConsultationsJob.perform_now

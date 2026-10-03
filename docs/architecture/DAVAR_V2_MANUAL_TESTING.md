@@ -95,18 +95,23 @@ reset, sign out/stale-session recovery and sign in again.
   other external notifications occur. Synthetic meeting/source URLs under
   `example.test` intentionally do not lead to real content.
 - Calendar: Rails invokes pinned Bore logic; clients calculate no calendar rules.
-  Synthetic confirmation remains labeled by observation provenance and the
-  sandbox banner; unresolved Aviv remains unresolved in both scenarios.
+  Real public INMS reports are imported by default and refreshed every 15 minutes.
+  Explicit synthetic scenarios remain labeled by provenance and the sandbox
+  banner; unresolved Aviv remains explicit in all modes.
 
 From repository root, select a scenario and refresh the calendar consumer:
 
 ```sh
 api/bin/dev-sandbox calendar confirmed
 api/bin/dev-sandbox calendar pending
+api/bin/dev-sandbox calendar live
 ```
 
 `confirmed` creates synthetic qualifying evidence four days before today;
-`pending` removes only sandbox observations. No real observation is asserted.
+`pending` shows a pending calendar while preserving the imported real observations.
+`live` restores the real calendar and refreshes the public feed. These scenarios
+do not overwrite real evidence. Check source links and next-sunset time in the UI;
+reload/reopen the calendar to verify the selected city stays on the device.
 
 ## Reset and stop
 

@@ -28,6 +28,7 @@ class DevelopmentSandboxTest < ActiveSupport::TestCase
       unrelated = User.create!
       Assembly.create!(leader: fresh, name: "Created during testing", kind: "online")
       session, = Session.issue!(fresh)
+      DevelopmentFixtures.calendar!("confirmed")
       Dir.mktmpdir do |directory|
         with_method(Rails, :root, Pathname.new(directory)) { DevelopmentFixtures.reset! }
       end
@@ -35,6 +36,7 @@ class DevelopmentSandboxTest < ActiveSupport::TestCase
       assert_not Session.exists?(session.id)
       assert_equal 6, Identity.where(subject: DevelopmentFixtures::EMAILS).count
       assert_equal 2, Assembly.where("source_id LIKE ?", "sandbox:%").count
+      assert_equal "live", CalendarFeedState.current.development_scenario
     end
   end
   test "local mailbox captures synthetic mail and rejects real recipients" do

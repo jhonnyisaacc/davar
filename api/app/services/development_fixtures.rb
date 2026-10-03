@@ -11,6 +11,7 @@ class DevelopmentFixtures
       users.each { |user| Endorsement.where("applicant_id = ? OR leader_id = ?", user.id, user.id).delete_all; user.destroy! }
       Article.where("source_id LIKE ?", "sandbox:%").destroy_all
       NewMoonObservation.where("source_id LIKE ?", "sandbox:%").destroy_all
+      CalendarFeedState.current.update!(development_scenario: "live")
       AccessCode.where(code_digest: AccessCode.digest(INVITATION)).delete_all
     end
     Rails.root.join("tmp/sandbox-mail").glob("*.json").each(&:delete)
@@ -46,13 +47,13 @@ class DevelopmentFixtures
   end
   def self.calendar!(scenario)
     DevelopmentSandbox.require_enabled!
-    raise "Choose pending or confirmed" unless scenario.in?(%w[pending confirmed])
+    raise "Choose live, pending or confirmed" unless scenario.in?(%w[live pending confirmed])
+    CalendarFeedState.current.update!(development_scenario: scenario)
     NewMoonObservation.where("source_id LIKE ?", "sandbox:%").destroy_all
     if scenario == "confirmed"
       day = Date.current - 4
       observation = NewMoonObservation.create!(source_id: "sandbox:synthetic-observation", source: "israeli_new_moon_society", source_url: "https://example.test/synthetic-observation", observed_on: day, country: "IL", visibility_method: "unaided", verified: true, input_hash: Digest::SHA256.hexdigest(day.iso8601), provenance: {development_fixture: true, observer: "Synthetic fixture — not a real INMS observation"})
-      MonthConfirmation.create!(new_moon_observation: observation, starts_on_evening: day)
     end
-    {scenario: scenario, synthetic: true, aviv: "unresolved"}
+    {scenario: scenario, synthetic: scenario != "live", aviv: "unresolved"}
   end
 end

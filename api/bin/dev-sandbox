@@ -68,6 +68,7 @@ when "setup"
   run(ENVIRONMENT["PYTHON_BIN"],"-m","pip","install","-r",File.join(API_ROOT,"requirements.txt"))
   postgres
   rails("db:prepare", "davar:sandbox:seed")
+  rails("davar:sync_calendar")
   run(BUN, "./build.ts", directory: File.join(ROOT,"web"))
   puts "Ready. Run api/bin/dev-sandbox start. Inbox: http://127.0.0.1:3000/development/mailbox"
 when "start"
@@ -81,7 +82,7 @@ when "start"
     end
   end
   entries = []
-  commands = [ ["api",API_ROOT,[RbConfig.ruby,File.join(API_ROOT,"bin/rails"),"server","-b","127.0.0.1","-p","3000"]], ["web",File.join(ROOT,"web"),[BUN,"run","dev"]], ["mobile",File.join(ROOT,"mobile"),[BUN,"run","start","--dev-client","--localhost","--port","8086"]] ]
+  commands = [ ["api",API_ROOT,[RbConfig.ruby,File.join(API_ROOT,"bin/rails"),"server","-b","127.0.0.1","-p","3000"]], ["calendar",API_ROOT,[RbConfig.ruby,File.join(API_ROOT,"bin/rails"),"davar:watch_calendar"]], ["web",File.join(ROOT,"web"),[BUN,"run","dev"]], ["mobile",File.join(ROOT,"mobile"),[BUN,"run","start","--dev-client","--localhost","--port","8086"]] ]
   commands.each do |name,directory,command|
     log = File.open(File.join(STATE,"#{name}.log"),"a")
     pid = Process.spawn(ENVIRONMENT.merge("CI"=>"1"),*command,chdir: directory,pgroup: true,out: log,err: log)
@@ -103,8 +104,9 @@ when "reset"
   rails("davar:sandbox:reset")
 when "calendar"
   postgres
-  ENV["SCENARIO"] = ARGV.fetch(1,"pending")
+  ENV["SCENARIO"] = ARGV.fetch(1,"live")
   rails("davar:sandbox:calendar")
+  rails("davar:sync_calendar") if ENV["SCENARIO"] == "live"
 when "ios"
   run(BUN, "x", "expo", "run:ios", "--device", "iPhone 17", "--no-bundler", directory: File.join(ROOT,"mobile"))
   run("xcrun", "simctl", "openurl", "booted", "exp+davar://expo-development-client/?url=http%3A%2F%2F127.0.0.1%3A8086")
@@ -112,5 +114,5 @@ when "stop"
   stop_services
   run(File.join(PG_BIN,"pg_ctl"),"-D",PG_DATA,"stop","-m","fast") if File.exist?(File.join(PG_DATA,"postmaster.pid"))
 else
-  abort "Usage: api/bin/dev-sandbox setup|start|ios|reset|calendar [pending|confirmed]|stop"
+  abort "Usage: api/bin/dev-sandbox setup|start|ios|reset|calendar [live|pending|confirmed]|stop"
 end
