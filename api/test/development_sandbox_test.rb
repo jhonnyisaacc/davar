@@ -34,7 +34,7 @@ class DevelopmentSandboxTest < ActiveSupport::TestCase
       end
       assert User.exists?(unrelated.id)
       assert_not Session.exists?(session.id)
-      assert_equal 6, Identity.where(subject: DevelopmentFixtures::EMAILS).count
+      assert_equal DevelopmentFixtures::EMAILS.length, Identity.where(subject: DevelopmentFixtures::EMAILS).count
       assert_equal 2, Assembly.where("source_id LIKE ?", "sandbox:%").count
       assert_equal "live", CalendarFeedState.current.development_scenario
     end
