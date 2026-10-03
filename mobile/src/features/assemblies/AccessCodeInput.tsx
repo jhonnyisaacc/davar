@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { useProductStyle } from "../product/ui";
+import { ACCESS_CODE_LENGTH, normalizeAccessCode } from "./accessCode";
 
-const CODE_LENGTH = 7;
 const SLOT_GAP = 4;
 
 export function AccessCodeInput({
@@ -24,10 +24,7 @@ export function AccessCodeInput({
   const [activeIndex, setActiveIndex] = useState(0);
   const [selection, setSelection] = useState<{ start: number; end: number }>();
   // The API ignores hyphens and letter case. Keep those separators out of the slots.
-  const displayValue = value
-    .replaceAll("-", "")
-    .toUpperCase()
-    .slice(0, CODE_LENGTH);
+  const displayValue = normalizeAccessCode(value).slice(0, ACCESS_CODE_LENGTH);
   const characters = Array.from(displayValue);
 
   return (
@@ -49,9 +46,7 @@ export function AccessCodeInput({
         value={displayValue}
         onChangeText={(text) => {
           setSelection(undefined);
-          onChange(
-            text.replaceAll("-", "").toUpperCase().slice(0, CODE_LENGTH),
-          );
+          onChange(normalizeAccessCode(text).slice(0, ACCESS_CODE_LENGTH));
         }}
         selection={selection}
         onSelectionChange={({ nativeEvent }) => {
@@ -63,15 +58,17 @@ export function AccessCodeInput({
         autoCapitalize="characters"
         autoCorrect={false}
         spellCheck={false}
+        keyboardType="number-pad"
+        inputMode="numeric"
         editable={editable}
         returnKeyType="go"
         onSubmitEditing={onSubmit}
         style={styles.input}
       />
       <View style={styles.row}>
-        {Array.from({ length: CODE_LENGTH }, (_, index) => {
+        {Array.from({ length: ACCESS_CODE_LENGTH }, (_, index) => {
           const active =
-            focused && index === Math.min(activeIndex, CODE_LENGTH - 1);
+            focused && index === Math.min(activeIndex, ACCESS_CODE_LENGTH - 1);
           return (
             <Pressable
               key={index}

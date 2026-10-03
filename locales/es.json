@@ -15,9 +15,11 @@
     "invitationCopy": "Introduce el código de tu líder de congregación.",
     "accessCode": "Código de acceso",
     "continue": "Continuar",
+    "paste": "Pegar",
     "back": "Volver",
     "invalidCode": "No se pudo verificar este código. Confírmalo con tu líder e inténtalo de nuevo.",
-    "accessUnavailable": "El acceso no está disponible ahora. Inténtalo de nuevo."
+    "accessUnavailable": "El acceso no está disponible ahora. Inténtalo de nuevo.",
+    "clipboardUnavailable": "No se pudo leer el portapapeles. Introduce el código manualmente o inténtalo de nuevo."
   },
   "navigation": {
     "goHome": "Ir al inicio",

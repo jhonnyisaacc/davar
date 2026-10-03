@@ -1,24 +1,25 @@
-import { AssembliesWorkspace } from "./AssembliesWorkspace";
-import { CalendarPanel } from "./CalendarPanel";
-import { useCallback, useEffect, useState } from "react";
-import { User, type LucideIcon } from "lucide-react";
 import {
-	commentaryAccessLabel,
 	type CommentaryRuntime,
+	commentaryAccessLabel,
 } from "@davar/shared/commentaryPresentation";
 import type {
 	Account,
-	CommentaryContext,
 	Article,
+	CommentaryContext,
 	Conversation,
 	ProviderConnection,
 } from "@davar/shared/productContracts";
 import { SIGN_IN_PROVIDERS } from "@davar/shared/productContracts";
+import { type LucideIcon, User } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
 import {
-	productApi,
-	acceptSignIn,
 	acceptSessionToken,
+	acceptSignIn,
+	productApi,
 } from "../services/productApi";
+import { AssembliesEntry } from "./AssembliesEntry";
+import { AssembliesWorkspace } from "./AssembliesWorkspace";
+import { CalendarPanel } from "./CalendarPanel";
 import { NeumorphCard } from "./NeumorphCard";
 export function ProductScreen({
 	screen,
@@ -30,6 +31,7 @@ export function ProductScreen({
 	language: "en" | "es" | "he";
 }) {
 	const [account, setAccount] = useState<Account | null>(null);
+	const [sessionReady, setSessionReady] = useState(false);
 	const [error, setError] = useState("");
 	const [busy, setBusy] = useState(false);
 	const [email, setEmail] = useState("");
@@ -57,18 +59,24 @@ export function ProductScreen({
 		}
 	}, []);
 	useEffect(() => {
-		if (productApi.authenticated())
-			void run(async () =>
-				setAccount(
-					await productApi.request<Account>("/account", { cache: true }),
-				),
-			);
 		const query = new URLSearchParams(window.location.search);
 		const handoff = query.get("code");
 		if (handoff) {
 			window.history.replaceState(null, "", window.location.pathname);
-			void run(async () => setAccount(await acceptSignIn(handoff)));
 		}
+		if (handoff || productApi.authenticated()) {
+			void run(async () => {
+				try {
+					setAccount(
+						handoff
+							? await acceptSignIn(handoff)
+							: await productApi.request<Account>("/account", { cache: true }),
+					);
+				} finally {
+					setSessionReady(true);
+				}
+			});
+		} else setSessionReady(true);
 	}, [run]);
 	useEffect(() => {
 		if (mode === "articles")
@@ -190,7 +198,7 @@ export function ProductScreen({
 			)}
 		</NeumorphCard>
 	);
-	return (
+	const content = (
 		<main
 			dir={language === "he" ? "rtl" : "ltr"}
 			className="max-w-4xl mx-auto px-6 pb-24 space-y-5 text-[var(--text-primary)]"
@@ -515,5 +523,19 @@ export function ProductScreen({
 					)
 				: null}
 		</main>
+	);
+	return screen === "assemblies" ? (
+		<AssembliesEntry
+			language={language}
+			account={account}
+			onAccount={setAccount}
+			sessionReady={sessionReady}
+			sessionError={error}
+			signIn={signIn}
+		>
+			{content}
+		</AssembliesEntry>
+	) : (
+		content
 	);
 }

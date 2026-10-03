@@ -7,6 +7,7 @@ import {
 } from "react";
 import {
   ActivityIndicator,
+  Keyboard,
   KeyboardAvoidingView,
   Modal,
   Platform,
@@ -30,6 +31,7 @@ import { productApi, useSession } from "../account/session";
 import { SignIn } from "../account/SignIn";
 import { Action, Page, useProductStyle } from "../product/ui";
 import { AccessCodeInput } from "./AccessCodeInput";
+import { isCompleteAccessCode, normalizeAccessCode } from "./accessCode";
 import {
   clearPendingAssemblyCode,
   hasSeenAssembliesSplash,
@@ -51,11 +53,13 @@ export function AssembliesEntry({ children }: { children: ReactNode }) {
   const [stage, setStage] = useState<EntryStage>("loading");
   const [code, setCode] = useState("");
   const [busy, setBusy] = useState(false);
+  const [pasting, setPasting] = useState(false);
   const [error, setError] = useState("");
   const redeeming = useRef(false);
+  const readingClipboard = useRef(false);
   const hasIdentity = !!account?.providers.length;
   const hasAccess = hasIdentity && !!account?.admitted;
-  const hasCompleteCode = code.replaceAll("-", "").trim().length === 7;
+  const working = busy || pasting;
 
   useEffect(() => {
     let active = true;
@@ -84,33 +88,36 @@ export function AssembliesEntry({ children }: { children: ReactNode }) {
     return () => clearTimeout(timer);
   }, [stage, focused, finishSplash]);
 
-  const redeem = useCallback(async () => {
-    if (redeeming.current) return;
-    redeeming.current = true;
-    setBusy(true);
-    setError("");
-    try {
-      await productApi.request("/account/admission", {
-        method: "POST",
-        body: { code: code.trim() },
-      });
-      await clearPendingAssemblyCode();
-      await refresh();
-      setCode("");
-      setStage("home");
-    } catch (cause) {
-      await clearPendingAssemblyCode().catch(() => {});
-      setError(
-        cause instanceof ProductApiError && cause.code === "invalid_code"
-          ? t("assemblies.invalidCode")
-          : t("assemblies.accessUnavailable"),
-      );
-      setStage("home");
-    } finally {
-      redeeming.current = false;
-      setBusy(false);
-    }
-  }, [code, refresh, t]);
+  const redeem = useCallback(
+    async (invitationCode = code) => {
+      if (redeeming.current) return;
+      redeeming.current = true;
+      setBusy(true);
+      setError("");
+      try {
+        await productApi.request("/account/admission", {
+          method: "POST",
+          body: { code: normalizeAccessCode(invitationCode) },
+        });
+        await clearPendingAssemblyCode();
+        await refresh();
+        setCode("");
+        setStage("home");
+      } catch (cause) {
+        await clearPendingAssemblyCode().catch(() => {});
+        setError(
+          cause instanceof ProductApiError && cause.code === "invalid_code"
+            ? t("assemblies.invalidCode")
+            : t("assemblies.accessUnavailable"),
+        );
+        setStage("home");
+      } finally {
+        redeeming.current = false;
+        setBusy(false);
+      }
+    },
+    [code, refresh, t],
+  );
 
   useEffect(() => {
     if (hasAccess) {
@@ -132,21 +139,51 @@ export function AssembliesEntry({ children }: { children: ReactNode }) {
     }
   }, [stage, hasAccess, hasIdentity, code, focused, redeem, t]);
 
-  async function continueFromHome() {
-    if (!hasCompleteCode || busy || !sessionReady) return;
+  async function continueFromHome(value = code) {
+    if (busy || !sessionReady) return;
+    const invitationCode = normalizeAccessCode(value);
+    if (!isCompleteAccessCode(invitationCode)) {
+      setError(t("assemblies.invalidCode"));
+      return;
+    }
+    Keyboard.dismiss();
     if (hasIdentity) {
-      await redeem();
+      await redeem(invitationCode);
       return;
     }
     setBusy(true);
     setError("");
     try {
-      await savePendingAssemblyCode(code.trim());
+      await savePendingAssemblyCode(invitationCode);
       setStage("signIn");
     } catch {
       setError(t("assemblies.accessUnavailable"));
     } finally {
       setBusy(false);
+    }
+  }
+
+  async function pasteFromClipboard() {
+    if (working || readingClipboard.current || !sessionReady) return;
+    readingClipboard.current = true;
+    setPasting(true);
+    setError("");
+    try {
+      const Clipboard = await import("expo-clipboard");
+      const invitationCode = normalizeAccessCode(
+        await Clipboard.getStringAsync(),
+      );
+      if (!isCompleteAccessCode(invitationCode)) {
+        setError(t("assemblies.invalidCode"));
+        return;
+      }
+      setCode(invitationCode);
+      await continueFromHome(invitationCode);
+    } catch {
+      setError(t("assemblies.clipboardUnavailable"));
+    } finally {
+      readingClipboard.current = false;
+      setPasting(false);
     }
   }
 
@@ -257,8 +294,9 @@ export function AssembliesEntry({ children }: { children: ReactNode }) {
               onChange={(value) => {
                 setCode(value);
                 setError("");
+                if (isCompleteAccessCode(value)) void continueFromHome(value);
               }}
-              editable={!busy}
+              editable={!working && sessionReady}
               onSubmit={() => void continueFromHome()}
             />
             {error ? (
@@ -271,18 +309,18 @@ export function AssembliesEntry({ children }: { children: ReactNode }) {
             ) : null}
             <Pressable
               accessibilityRole="button"
-              accessibilityLabel={t("assemblies.continue")}
+              accessibilityLabel={t("assemblies.paste")}
               accessibilityState={{
-                disabled: busy || !sessionReady || !hasCompleteCode,
-                busy,
+                disabled: working || !sessionReady,
+                busy: working,
               }}
-              disabled={busy || !sessionReady || !hasCompleteCode}
-              onPress={() => void continueFromHome()}
+              disabled={working || !sessionReady}
+              onPress={() => void pasteFromClipboard()}
               style={({ pressed }) => [
                 styles.button,
                 {
                   shadowColor: colors.shadowDark,
-                  opacity: pressed || busy ? 0.7 : 1,
+                  opacity: pressed || working ? 0.7 : 1,
                 },
               ]}
             >
@@ -292,11 +330,11 @@ export function AssembliesEntry({ children }: { children: ReactNode }) {
                 end={{ x: 1, y: 1 }}
                 style={styles.gradient}
               >
-                {busy ? (
+                {working ? (
                   <ActivityIndicator color="#FFFFFF" />
                 ) : (
                   <Text style={styles.buttonLabel}>
-                    {t("assemblies.continue")}
+                    {t("assemblies.paste")}
                   </Text>
                 )}
               </LinearGradient>

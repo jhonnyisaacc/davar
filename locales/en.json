@@ -15,9 +15,11 @@
     "invitationCopy": "Enter the code from your congregation leader.",
     "accessCode": "Access code",
     "continue": "Continue",
+    "paste": "Paste",
     "back": "Back",
     "invalidCode": "This code could not be verified. Confirm it with your leader and try again.",
-    "accessUnavailable": "Access is unavailable right now. Please try again."
+    "accessUnavailable": "Access is unavailable right now. Please try again.",
+    "clipboardUnavailable": "Could not read your clipboard. Enter the code manually or try again."
   },
   "navigation": {
     "goHome": "Go to home",

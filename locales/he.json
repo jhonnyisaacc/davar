@@ -15,9 +15,11 @@
     "invitationCopy": "הזינו את הקוד שקיבלתם ממנהיג הקהילה.",
     "accessCode": "קוד גישה",
     "continue": "המשך",
+    "paste": "הדבקה",
     "back": "חזרה",
     "invalidCode": "לא ניתן לאמת את הקוד. בדקו אותו עם מנהיג הקהילה ונסו שוב.",
-    "accessUnavailable": "הגישה אינה זמינה כרגע. נסו שוב."
+    "accessUnavailable": "הגישה אינה זמינה כרגע. נסו שוב.",
+    "clipboardUnavailable": "לא ניתן לקרוא את הלוח. הזינו את הקוד ידנית או נסו שוב."
   },
   "navigation": {
     "goHome": "לדף הבית",

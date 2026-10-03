@@ -1,13 +1,13 @@
-import { useState, type ReactNode } from "react";
 import type {
 	Account,
 	Assembly,
 	MembershipRequest,
 } from "@davar/shared/productContracts";
 import { QAHAL_QUESTIONS } from "@davar/shared/qahalQuestions";
+import { ChevronRight, Users } from "lucide-react";
+import { type ReactNode, useState } from "react";
 import { productApi } from "../services/productApi";
 import { CityChooser } from "./CityChooser";
-import { Users, ChevronRight } from "lucide-react";
 
 type Endorsement = {
 	id: string;
@@ -25,7 +25,6 @@ export function AssembliesWorkspace({
 }) {
 	const [busy, setBusy] = useState(false);
 	const [error, setError] = useState("");
-	const [code, setCode] = useState("");
 	const [name, setName] = useState(
 		account.display_name === "Reader" ? "" : account.display_name,
 	);
@@ -123,32 +122,7 @@ export function AssembliesWorkspace({
 		/>
 	);
 	let body: ReactNode = null;
-	if (!account.providers.length)
-		body = <p>Sign in below to join Assemblies.</p>;
-	else if (!account.admitted)
-		body = (
-			<>
-				<h2 className="text-[34px] text-center font-semibold">Welcome</h2>
-				<p>Enter the invitation code from your leader.</p>
-				<label>
-					Invitation code
-					<input
-						value={code}
-						onChange={(e) => setCode(e.target.value)}
-						className="block p-3 rounded-xl bg-[var(--neomorph-bg)]"
-					/>
-				</label>
-				{button("Continue", async () =>
-					onAccount(
-						await productApi.request<Account>("/account/admission", {
-							method: "POST",
-							body: { code },
-						}),
-					),
-				)}
-			</>
-		);
-	else if (!profile.experience)
+	if (!profile.experience)
 		body = (
 			<>
 				<h2 className="text-[34px] text-center font-semibold">Your path</h2>
