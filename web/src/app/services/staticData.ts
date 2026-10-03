@@ -673,11 +673,13 @@ const fetchJson = async <T>(
 		const troubleshootingHint = isApi
 			? "Verify the local Bun server or deployed Pages Function serves this API route."
 			: "Verify the web app is launched from the web/ directory (bun run dev) or served from a build that includes copied public data.";
-		const cacheMode =
-			options?.cache ?? (isApi ? "no-cache" : "force-cache");
 		const shouldVersion =
 			options?.versioned ??
 			(!isApi && shouldVersionStaticPath(normalizeStaticPath(path).slice(1)));
+		// Revalidate metadata and manifests because their URLs have no data version.
+		// This also replaces stale HTML cached before a local data route was fixed.
+		const cacheMode =
+			options?.cache ?? (isApi || !shouldVersion ? "no-cache" : "force-cache");
 		const version = shouldVersion ? await loadStaticDataVersion() : null;
 
 		for (const resolvedPath of buildCandidatePaths(path)) {

@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, test } from "bun:test";
+import { afterEach, beforeEach, describe, expect, spyOn, test } from "bun:test";
 import {
 	GREEK_RECORDED_REVISION,
 	greekLexiconPath,
@@ -155,6 +155,23 @@ afterEach(() => {
 });
 
 describe("chapter and lexicon loaders", () => {
+	test("revalidates unversioned metadata while caching versioned chapter data", async () => {
+		const fetchSpy = spyOn(globalThis, "fetch");
+		try {
+			await getChapterVerses("genesis", 1, { hebrewOnly: true });
+			const metadataRequest = fetchSpy.mock.calls.find(
+				([input]) => String(input) === "/data/metadata.json",
+			);
+			const chapterRequest = fetchSpy.mock.calls.find(
+				([input]) => String(input).startsWith("/data/oe/genesis/1.json?v="),
+			);
+			expect(metadataRequest?.[1]?.cache).toBe("no-cache");
+			expect(chapterRequest?.[1]?.cache).toBe("force-cache");
+		} finally {
+			fetchSpy.mockRestore();
+		}
+	});
+
 	test("uses chapter-scoped transliteration instead of the full book file", async () => {
 		const verses = await getChapterVerses("genesis", 1, { hebrewOnly: true });
 		expect(verses).toHaveLength(1);
