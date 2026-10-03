@@ -2,10 +2,11 @@
  * Canonical cross-platform settings order (#107).
  *
  * Single source of truth for the sequence of settings options that are
- * shared between web and mobile. Platform-specific options live in
- * clearly separated platform sections at the end of each screen:
+ * shared between web and mobile. Platform-specific options can sit
+ * beside related shared controls:
  *
- *   - Mobile only: Translation Only, Cantillation, Nikud, Clear Storage
+ *   - Mobile only: Translation Only after Full Chapter; Nikud,
+ *                  Cantillation, and Clear Storage at the end
  *   - Web only:    Design System, Mobile Design Guide
  *
  * Dependency rules (rendered state may gate visibility/disabled):

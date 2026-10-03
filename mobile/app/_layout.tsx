@@ -1,4 +1,4 @@
-import { Manrope_600SemiBold } from "@expo-google-fonts/manrope";
+import { Manrope_400Regular, Manrope_600SemiBold } from "@expo-google-fonts/manrope";
 import { useSession } from "@/src/features/account/session";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -54,6 +54,7 @@ const getFocusedRouteName = (route: unknown) => {
 export default function RootLayout() {
   useEffect(() => { void useSession.getState().restore(); }, []);
   const [fontsLoaded, fontError] = useFonts({
+    Manrope_400Regular,
     Manrope_600SemiBold,
     Cardo_400Regular,
     Inter_400Regular,

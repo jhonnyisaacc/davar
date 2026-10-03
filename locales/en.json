@@ -52,45 +52,50 @@
       "general": "General",
       "offline": "Offline"
     },
+    "account": {
+      "title": "Account",
+      "signIn": "Sign In",
+      "manage": "Manage account"
+    },
     "theme": {
-      "title": "Theme",
+      "title": "Dark theme",
       "subtitle": "Dark Mode"
     },
     "language": {
       "title": "Language"
     },
     "besorahLanguage": {
-      "title": "Besorah source",
+      "title": "Besorah language",
       "hebrew": "Hebrew",
       "greek": "Greek",
       "new": "New"
     },
     "besorahTextVersion": {
-      "title": "Gospel translation",
+      "title": "Besorah text",
       "delitzsch": "Delitzsch",
       "hutter": "Hutter",
       "new": "New"
     },
     "qumran": {
-      "title": "Qumran Variants",
+      "title": "Qumran",
       "subtitle": "Show Dead Sea Scrolls text"
     },
     "fullChapter": {
-      "title": "Full Chapter",
+      "title": "Full chapter",
       "subtitle": "Show full chapter text"
     },
     "seferStyle": {
-      "title": "Book Style",
+      "title": "Sefer style",
       "subtitle": "Continuous Hebrew scroll layout",
       "warningTitle": "Book requires Hebrew Only",
       "warningMessage": "Enable Hebrew Only or Translation Only to use Book style."
     },
     "hebrewOnly": {
-      "title": "Hebrew Only",
+      "title": "Hebrew only",
       "subtitle": "Show text in Hebrew only"
     },
     "translationOnly": {
-      "title": "Translation Only",
+      "title": "Translation only",
       "subtitle": "Show translation without Hebrew",
       "disablesHebrewFeatures": "Disable Translation Only to use Hebrew display options."
     },
@@ -103,7 +108,7 @@
       "subtitle": "Show vowel pointing"
     },
     "clearStorage": {
-      "title": "Clear Storage",
+      "title": "Clear storage",
       "subtitle": "Reset all settings and data",
       "alertTitle": "Clear Storage",
       "alertMessage": "This will reset all settings and data. The app will reload.",

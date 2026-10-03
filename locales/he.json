@@ -52,27 +52,32 @@
       "general": "כללי",
       "offline": "לא מקוון"
     },
+    "account": {
+      "title": "חשבון",
+      "signIn": "התחברות",
+      "manage": "ניהול חשבון"
+    },
     "theme": {
-      "title": "ערכת נושא",
+      "title": "ערכת נושא כהה",
       "subtitle": "מצב כהה"
     },
     "language": {
       "title": "שפה"
     },
     "besorahLanguage": {
-      "title": "מקור הבשורה",
+      "title": "שפת הבשורה",
       "hebrew": "עברית",
       "greek": "יוונית",
       "new": "חדש"
     },
     "besorahTextVersion": {
-      "title": "תרגום הבשורה",
+      "title": "נוסח הבשורה",
       "delitzsch": "דליטש",
       "hutter": "Hutter",
       "new": "חדש"
     },
     "qumran": {
-      "title": "גרסאות קומראן",
+      "title": "קומראן",
       "subtitle": "הצג טקסט מגילות מדבר יהודה"
     },
     "fullChapter": {

@@ -52,27 +52,32 @@
       "general": "General",
       "offline": "Sin conexión"
     },
+    "account": {
+      "title": "Cuenta",
+      "signIn": "Iniciar sesión",
+      "manage": "Administrar cuenta"
+    },
     "theme": {
-      "title": "Tema",
+      "title": "Tema oscuro",
       "subtitle": "Modo oscuro"
     },
     "language": {
       "title": "Idioma"
     },
     "besorahLanguage": {
-      "title": "Fuente de la Besorah",
+      "title": "Idioma de la Besorah",
       "hebrew": "Hebreo",
       "greek": "Griego",
       "new": "Nuevo"
     },
     "besorahTextVersion": {
-      "title": "Traducción del Evangelio",
+      "title": "Texto de la Besorah",
       "delitzsch": "Delitzsch",
       "hutter": "Hutter",
       "new": "Nuevo"
     },
     "qumran": {
-      "title": "Variantes de Qumrán",
+      "title": "Qumrán",
       "subtitle": "Mostrar texto de los Rollos del Mar Muerto"
     },
     "fullChapter": {
@@ -80,7 +85,7 @@
       "subtitle": "Mostrar texto completo del capítulo"
     },
     "seferStyle": {
-      "title": "Estilo de libro",
+      "title": "Estilo Sefer",
       "subtitle": "Diseño continuo de rollo hebreo",
       "warningTitle": "Sefer requiere Solo hebreo",
       "warningMessage": "Activa Solo hebreo o Solo traducción para usar el estilo Sefer."
