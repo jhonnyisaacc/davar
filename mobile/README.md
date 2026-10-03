@@ -73,6 +73,18 @@ replace generated native projects; keep native customization in config plugins.
 Install Expo-managed libraries with `bun x expo install <package> --bun`, and
 check SDK compatibility with `bun x expo-doctor`.
 
+### Browser preview
+
+The mobile app uses `web.output: "single"` for its client-rendered browser
+preview. Expo SDK 57's static page renderer tries to serialize SQLite's worker
+from a lazy development graph, where the worker is absent, and fails with
+`Worker chunk not found`. Client rendering keeps Metro's separate worker
+requests working. Mobile web exports also produce a single-page app; the
+public website is built separately from `web/`.
+
+After changing the web output mode, stop Metro and run `bun run start:clear`
+from `mobile/`, then press `w` to open the browser preview.
+
 ## iOS development with Xcode 27
 
 The mobile app uses Expo SDK 57 and React Native 0.86. The
