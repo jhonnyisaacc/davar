@@ -13,6 +13,8 @@
     "selectBook": "Libro",
     "selectChapter": "Capítulo",
     "selectVerse": "Versículo",
+    "selectLocation": "Libro · capítulo · versículo",
+    "closePicker": "Cerrar selector de Escrituras",
     "previousVerse": "Versículo anterior",
     "nextVerse": "Siguiente versículo",
     "openFeatures": "Abrir funciones",

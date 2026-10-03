@@ -13,6 +13,8 @@
     "selectBook": "Book",
     "selectChapter": "Chapter",
     "selectVerse": "Verse",
+    "selectLocation": "Book · chapter · verse",
+    "closePicker": "Close scripture picker",
     "previousVerse": "Previous verse",
     "nextVerse": "Next verse",
     "openFeatures": "Open features",

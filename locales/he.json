@@ -13,6 +13,8 @@
     "selectBook": "ספר",
     "selectChapter": "פרק",
     "selectVerse": "פסוק",
+    "selectLocation": "ספר · פרק · פסוק",
+    "closePicker": "סגור בחירת כתובים",
     "previousVerse": "פסוק קודם",
     "nextVerse": "פסוק הבא",
     "openFeatures": "פתח תכונות",

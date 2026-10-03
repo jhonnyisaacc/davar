@@ -76,7 +76,6 @@ import {
   resolveFootnoteForMarker,
   formatMarkerForDisplay,
 } from "@/src/utils/footnoteUtils";
-import { GREEK_BESORAH_BOOK_NAMES } from "@davar/shared/greekBesorah";
 import { stripCantillation, stripMeteg, stripNikud } from "@/src/utils/hebrew";
 import { resolveGreekOverlayLanguage } from "@/src/utils/translationConfig";
 
@@ -372,6 +371,9 @@ const createStyles = (colors: ReturnType<typeof getColors>, layout: ReturnType<t
 
 type VersePageProps = {
   item: DisplayVerse;
+  bookLabel: string;
+  pillVisibility: Animated.Value;
+  pillVisible: boolean;
   pageHeight: number;
   topPadding: number;
   showWordHint: boolean;
@@ -407,6 +409,9 @@ const HEBREW_PRESS_SUPPRESSION_MS = 250;
 
 const VersePageComponent = ({
   item,
+  bookLabel,
+  pillVisibility,
+  pillVisible,
   pageHeight,
   topPadding,
   showWordHint,
@@ -581,9 +586,20 @@ const VersePageComponent = ({
         paddingHorizontal: horizontalPadding,
         paddingTop: effectiveTopPadding,
         paddingBottom: bottomPadding,
+        gap: spacing[5],
       }}
       onTouchEnd={handleNonHebrewAreaPress}
     >
+      <Animated.View
+        pointerEvents={pillVisible ? "auto" : "none"}
+        style={{ opacity: pillVisibility }}
+      >
+        <BookChapterPill
+          bookLabel={bookLabel}
+          chapter={item.chapter}
+          onPress={onVersePress}
+        />
+      </Animated.View>
       <VerseCard
         verse={item}
         variant="detail"
@@ -641,6 +657,9 @@ const VersePage = memo(
   VersePageComponent,
   (prevProps, nextProps) =>
     prevProps.item.id === nextProps.item.id &&
+    prevProps.bookLabel === nextProps.bookLabel &&
+    prevProps.pillVisibility === nextProps.pillVisibility &&
+    prevProps.pillVisible === nextProps.pillVisible &&
     prevProps.pageHeight === nextProps.pageHeight &&
     prevProps.showWordHint === nextProps.showWordHint &&
     prevProps.isActive === nextProps.isActive &&
@@ -908,11 +927,17 @@ export const VerseDetailContent = () => {
           e.preventDefault();
           // Close word analysis sheet if it's open
           sheetRef.current?.close();
-          navigationSheetRef.current?.snapToIndex(0);
+          navigationSheetRef.current?.open();
         }
       },
     );
     return unsubscribe;
+  }, [navigation]);
+
+  useEffect(() => {
+    return navigation.addListener("blur", () =>
+      navigationSheetRef.current?.close(),
+    );
   }, [navigation]);
 
   useEffect(() => {
@@ -1066,7 +1091,8 @@ export const VerseDetailContent = () => {
   }, []);
 
   const handleOpenNavigationSheet = useCallback(() => {
-    navigationSheetRef.current?.snapToIndex(0);
+    sheetRef.current?.close();
+    navigationSheetRef.current?.open();
   }, []);
 
   const showBoundaryToast = useCallback(
@@ -1162,6 +1188,14 @@ export const VerseDetailContent = () => {
     [],
   );
   const shouldShowSwipeHint = swipeHintCount < SWIPE_HINT_MAX_SHOWS;
+  const locationBookLabel =
+    language === "he"
+      ? stripNikud(bookMeta?.hebrew_name ?? t("common.loading"))
+      : formatBookDisplayName(
+          language === "es"
+            ? (bookMeta?.spanish_name ?? t("common.loading"))
+            : (bookMeta?.name ?? t("common.loading")),
+        );
 
   const renderVersePage = useCallback(
     ({
@@ -1173,6 +1207,9 @@ export const VerseDetailContent = () => {
     }) => (
       <VersePage
         item={item}
+        bookLabel={locationBookLabel}
+        pillVisibility={pillVisibility}
+        pillVisible={pillVisible}
         pageHeight={pageHeight}
         topPadding={contentTopPadding}
         showWordHint={showWordHint}
@@ -1191,6 +1228,9 @@ export const VerseDetailContent = () => {
       />
     ),
     [
+      locationBookLabel,
+      pillVisibility,
+      pillVisible,
       pageHeight,
       contentTopPadding,
       showWordHint,
@@ -1392,52 +1432,33 @@ export const VerseDetailContent = () => {
             );
           }}
         >
-          <View
-            style={[styles.navigationRow, { top: navigationRowTop }]}
-            pointerEvents="box-none"
-          >
-            <Animated.View
-              pointerEvents={pillVisible ? "auto" : "none"}
-              style={{
-                opacity: pillVisibility,
-                transform: [
-                  {
-                    translateY: pillVisibility.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [-12, 0],
-                    }),
-                  },
-                ],
-              }}
+          {showFullChapter && (
+            <View
+              style={[styles.navigationRow, { top: navigationRowTop }]}
+              pointerEvents="box-none"
             >
-              <BookChapterPill
-                bookLabel={formatBookDisplayName(
-                  language === "es"
-                    ? (bookMeta?.spanish_name ?? t("common.loading"))
-                    : (bookMeta?.name ?? t("common.loading")),
-                )}
-                hebrewLabel={
-                  besorahLanguage === "greek" && bookMeta?.id
-                    ? (GREEK_BESORAH_BOOK_NAMES[bookMeta.id] ??
-                      bookMeta.hebrew_name ??
-                      "")
-                    : (bookMeta?.hebrew_name ?? "")
-                }
-                nativeLabelScript={
-                  besorahLanguage === "greek" &&
-                  bookMeta?.id &&
-                  GREEK_BESORAH_BOOK_NAMES[bookMeta.id]
-                    ? "greek"
-                    : "hebrew"
-                }
-                chapter={verse?.chapter ?? chapter}
-                onBookPress={() => navigationSheetRef.current?.snapToIndex(0)}
-                onChapterPress={() =>
-                  navigationSheetRef.current?.openAtChapter()
-                }
-              />
-            </Animated.View>
-          </View>
+              <Animated.View
+                pointerEvents={pillVisible ? "auto" : "none"}
+                style={{
+                  opacity: pillVisibility,
+                  transform: [
+                    {
+                      translateY: pillVisibility.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [-12, 0],
+                      }),
+                    },
+                  ],
+                }}
+              >
+                <BookChapterPill
+                  bookLabel={locationBookLabel}
+                  chapter={verse?.chapter ?? chapter}
+                  onPress={handleOpenNavigationSheet}
+                />
+              </Animated.View>
+            </View>
+          )}
           {isLoading ? <VerseCardSkeleton pageHeight={pageHeight} /> : null}
           {errorMessage ? (
             <View
@@ -1584,6 +1605,7 @@ export const VerseDetailContent = () => {
         currentVerse={verse?.verse ?? verseNumber}
         translationOnly={translationOnly}
         currentChapterVerseNumbers={orderedVerses.map((item) => item.verse)}
+        hasNavigationDock={!isStandaloneVerseDetailRoute}
         onSelectVerse={handleNavigationSelect}
       />
       <Modal
