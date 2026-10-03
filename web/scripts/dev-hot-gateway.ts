@@ -1,4 +1,5 @@
 import { join } from "node:path";
+import { serveLocalTs2009 } from "../shared/localTs2009";
 
 const gatewayPort = Number(process.env.PORT ?? 5173);
 const gatewayHost = process.env.HOST ?? "0.0.0.0";
@@ -7,42 +8,11 @@ const htmlHost = process.env.HOT_HTML_HOST ?? "localhost";
 const dataRoot = join(import.meta.dir, "..", "public", "data");
 const ts2009DataRoot = join(import.meta.dir, "..", "..", "data", "ts2009");
 
-const getTs2009LocalFilePath = (pathname: string): string | null => {
-	const relativePath = pathname.slice("/api/ts2009/".length);
-	if (!relativePath || relativePath.includes("\0")) {
-		return null;
-	}
-
-	const segments = relativePath.split("/").filter(Boolean);
-	if (
-		segments.length === 0 ||
-		segments.some((segment) => segment === "." || segment === "..")
-	) {
-		return null;
-	}
-
-	return join(ts2009DataRoot, ...segments);
-};
-
 export const serveDevData = async (req: Request): Promise<Response | null> => {
+	const translationResponse = await serveLocalTs2009(req, ts2009DataRoot);
+	if (translationResponse) return translationResponse;
 	const url = new URL(req.url);
 	const pathname = decodeURIComponent(url.pathname);
-
-	if (pathname.startsWith("/api/ts2009/")) {
-		const localFilePath = getTs2009LocalFilePath(pathname);
-		if (!localFilePath) {
-			return new Response("Not Found", { status: 404 });
-		}
-
-		const file = Bun.file(localFilePath);
-		if (!(await file.exists())) {
-			return new Response("Not Found", { status: 404 });
-		}
-
-		return new Response(file, {
-			headers: { "Content-Type": "application/json; charset=utf-8" },
-		});
-	}
 
 	if (pathname.startsWith("/data/")) {
 		const relativePath = pathname.slice("/data/".length);
