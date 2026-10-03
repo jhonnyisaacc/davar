@@ -21,6 +21,11 @@ import {
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
+import Animated, {
+  Easing,
+  FadeInDown,
+  ReduceMotion,
+} from "react-native-reanimated";
 
 import {
   getColors,
@@ -56,6 +61,12 @@ export type NavigationSheetMethods = {
 
 type Metadata = Awaited<ReturnType<typeof fetchMetadata>>;
 type SelectionItem = { id: string; label: string };
+
+const AnimatedSafeAreaView = Animated.createAnimatedComponent(SafeAreaView);
+const pickerEntrance = FadeInDown.duration(220)
+  .easing(Easing.out(Easing.cubic))
+  .withInitialValues({ opacity: 0, transform: [{ translateY: 12 }] })
+  .reduceMotion(ReduceMotion.System);
 
 const createStyles = (
   colors: ReturnType<typeof getColors>,
@@ -402,8 +413,9 @@ const NavigationSheetComponent = (
   if (!isOpen) return null;
 
   return (
-    <SafeAreaView
+    <AnimatedSafeAreaView
       edges={["top", "left", "right"]}
+      entering={pickerEntrance}
       style={styles.screen}
       testID="navigation-bcv-picker"
     >
@@ -511,7 +523,7 @@ const NavigationSheetComponent = (
           />
         </View>
       </View>
-    </SafeAreaView>
+    </AnimatedSafeAreaView>
   );
 };
 
