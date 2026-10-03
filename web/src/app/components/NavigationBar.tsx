@@ -1,12 +1,19 @@
 import {
 	CalendarDays,
 	BookOpen,
-	Home,
+	ChevronLeft,
+	ChevronRight,
 	Paintbrush,
 	ScrollText,
-	Settings,
+	UserRound,
 } from "lucide-react";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import {
+	useCallback,
+	useEffect,
+	useRef,
+	useState,
+	type ReactNode,
+} from "react";
 import {
 	SHARED_SETTINGS_ORDER,
 	canUseSeferStyle,
@@ -16,22 +23,20 @@ import {
 import { FaThList } from "react-icons/fa";
 import { LuLightbulb } from "react-icons/lu";
 import { TbAlphabetHebrew, TbLanguageHiragana } from "react-icons/tb";
-import { destinationById } from "@davar/shared/destinations";
 import { useTranslation } from "../hooks/useTranslation";
 import type { BesorahLanguage } from "@davar/shared/greekBesorah";
 import { formatBookDisplayName } from "../utils/bookNameFormatter";
-import { NeumorphCard } from "./NeumorphCard";
 import { NeumorphicToggle } from "./NeumorphicToggle";
 import { CalendarCityNotice } from "./CalendarCityNotice";
-
-const homeDestination = destinationById("home");
-const settingsDestination = destinationById("settings");
+import { SettingsResources } from "./SettingsResources";
+import { productApi } from "../services/productApi";
+import type { RouteScreen } from "../utils/routeState";
 
 interface NavigationBarProps {
-	activeDestination?: string;
-	onDestinationClick?: (
-		screen: "assemblies" | "commentary" | "verse" | "widgets" | "settings",
-	) => void;
+	activeDestination: RouteScreen;
+	onDestinationClick: (screen: RouteScreen) => void;
+	settingsOpen: boolean;
+	onSettingsOpenChange: (open: boolean) => void;
 	book: string;
 	bookDisplayName: string;
 	bookHebrew: string;
@@ -49,8 +54,8 @@ interface NavigationBarProps {
 	onBookChange: (book: string) => void;
 	onChapterChange: (chapter: number) => void;
 	onVerseChange: (verse: number) => void;
-	onHomeClick: (screen: typeof homeDestination.id) => void;
 	onDesignSystemClick?: () => void;
+	onMobileDesignGuideClick?: () => void;
 	theme: "light" | "dark";
 	onThemeChange: (theme: "light" | "dark") => void;
 	language: "en" | "es" | "he";
@@ -81,6 +86,8 @@ interface NavigationBarProps {
 export function NavigationBar({
 	activeDestination,
 	onDestinationClick,
+	settingsOpen,
+	onSettingsOpenChange,
 	book,
 	bookDisplayName,
 	bookHebrew,
@@ -92,8 +99,8 @@ export function NavigationBar({
 	onBookChange,
 	onChapterChange,
 	onVerseChange,
-	onHomeClick,
 	onDesignSystemClick,
+	onMobileDesignGuideClick,
 	theme,
 	onThemeChange,
 	language,
@@ -120,9 +127,17 @@ export function NavigationBar({
 	translationOnly,
 	onTranslationOnlyChange,
 }: NavigationBarProps) {
-	const [openMenu, setOpenMenu] = useState<
-		typeof settingsDestination.id | "book" | "chapter" | "verse" | null
+	const [selectionMenu, setSelectionMenu] = useState<
+		"book" | "chapter" | "verse" | null
 	>(null);
+	const openMenu = settingsOpen ? "settings" : selectionMenu;
+	const setOpenMenu = useCallback(
+		(menu: typeof openMenu) => {
+			setSelectionMenu(menu === "settings" ? null : menu);
+			onSettingsOpenChange(menu === "settings");
+		},
+		[onSettingsOpenChange],
+	);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	const bookListRef = useRef<HTMLDivElement>(null);
 	const bookSearchRef = useRef<HTMLInputElement>(null);
@@ -133,6 +148,8 @@ export function NavigationBar({
 	const [verseSearch, setVerseSearch] = useState("");
 	const { t } = useTranslation(language);
 	const isRTL = language === "he";
+	const isScripture = activeDestination === "verse";
+	const Chevron = isRTL ? ChevronLeft : ChevronRight;
 	const env =
 		(
 			import.meta as ImportMeta & {
@@ -157,12 +174,14 @@ export function NavigationBar({
 			return () =>
 				document.removeEventListener("pointerdown", handleClickOutside);
 		}
-	}, [openMenu]);
+	}, [openMenu, setOpenMenu]);
 
 	useEffect(() => {
-		const isSelectionMenuOpen =
-			openMenu === "book" || openMenu === "chapter" || openMenu === "verse";
-		if (!isSelectionMenuOpen) return;
+		if (!isScripture) setSelectionMenu(null);
+	}, [isScripture]);
+
+	useEffect(() => {
+		if (!openMenu) return;
 
 		const previousOverflow = document.body.style.overflow;
 		const previousOverscrollBehavior = document.body.style.overscrollBehavior;
@@ -187,7 +206,7 @@ export function NavigationBar({
 
 		document.addEventListener("keydown", handleEscape);
 		return () => document.removeEventListener("keydown", handleEscape);
-	}, [openMenu]);
+	}, [openMenu, setOpenMenu]);
 
 	useEffect(() => {
 		if (!openMenu) return;
@@ -269,7 +288,7 @@ export function NavigationBar({
 		if (seferMode && openMenu === "verse") {
 			setOpenMenu(null);
 		}
-	}, [seferMode, openMenu]);
+	}, [seferMode, openMenu, setOpenMenu]);
 
 	const renderSharedSetting = (id: SharedSettingId): ReactNode => {
 		switch (id) {
@@ -307,6 +326,7 @@ export function NavigationBar({
 							</span>
 						</div>
 						<select
+							aria-label={t("settings.language.title")}
 							value={language}
 							onChange={(event) =>
 								onLanguageChange(event.target.value as "en" | "es" | "he")
@@ -345,6 +365,7 @@ export function NavigationBar({
 							</span>
 						</div>
 						<select
+							aria-label={t("settings.besorahLanguage.title")}
 							value={besorahLanguage}
 							onChange={(event) =>
 								onBesorahLanguageChange(event.target.value as BesorahLanguage)
@@ -383,6 +404,7 @@ export function NavigationBar({
 							</div>
 						</div>
 						<select
+							aria-label={t("settings.besorahTextVersion.title")}
 							value={besorahTextVersion}
 							onChange={(event) =>
 								onBesorahTextVersionChange(
@@ -541,16 +563,20 @@ export function NavigationBar({
 	};
 
 	return (
-		<div className="relative" ref={dropdownRef}>
-			{onDestinationClick ? (
+		<div
+			className="app-navigation relative w-full max-w-[620px]"
+			ref={dropdownRef}
+			dir={isRTL ? "rtl" : "ltr"}
+		>
+			<div className="main-navigation relative z-10 rounded-2xl border border-[var(--neomorph-border)] shadow-[6px_6px_12px_var(--neomorph-shadow-dark),-6px_-6px_12px_var(--neomorph-shadow-light)]">
 				<nav
 					aria-label="Davar"
-					className="flex justify-center flex-wrap items-center gap-4 mb-3 px-[14px] py-2 rounded-2xl border border-[var(--neomorph-border)] bg-[var(--neomorph-bg)] shadow-[6px_6px_12px_var(--neomorph-shadow-dark),-6px_-6px_12px_var(--neomorph-shadow-light)]"
+					className="flex justify-center flex-wrap items-center gap-2 px-2 py-2 sm:gap-4 sm:px-[14px]"
 				>
 					<span className="text-xl" style={{ fontFamily: "Suez One" }}>
 						דבר
 					</span>
-					<div className="flex flex-wrap gap-1 p-1 rounded-full bg-[var(--border)]">
+					<div className="flex w-full justify-center gap-0.5 p-1 rounded-full bg-[var(--navigation-bg)] sm:w-auto sm:gap-1">
 						{(
 							[
 								"assemblies",
@@ -563,50 +589,57 @@ export function NavigationBar({
 							<button
 								key={id}
 								type="button"
-								onClick={() => onDestinationClick(id)}
-								aria-current={activeDestination === id ? "page" : undefined}
-								className={`px-[14px] py-2 rounded-full text-[13px] text-[var(--text-primary)] ${activeDestination === id ? "bg-[var(--accent-glow)]" : ""}`}
+								onClick={() => {
+									if (id === "settings") {
+										setOpenMenu(openMenu === "settings" ? null : "settings");
+									} else {
+										setOpenMenu(null);
+										onDestinationClick(id);
+									}
+								}}
+								aria-current={
+									id !== "settings" && activeDestination === id
+										? "page"
+										: undefined
+								}
+								aria-expanded={id === "settings" ? settingsOpen : undefined}
+								aria-controls={
+									id === "settings" ? "navigation-settings" : undefined
+								}
+								className={`flex-1 px-1 py-2 rounded-full text-[10px] sm:flex-none sm:px-[14px] sm:text-[13px] text-[var(--text-primary)] ${(id === "settings" ? settingsOpen : activeDestination === id) ? "bg-[var(--accent-glow)]" : ""}`}
 							>
 								{id === "verse"
 									? "Scripture"
 									: id === "widgets"
 										? t("calendar.nav")
-										: id[0].toUpperCase() + id.slice(1)}
+										: id === "settings"
+											? t("settings.title")
+											: id[0].toUpperCase() + id.slice(1)}
 							</button>
 						))}
 					</div>
 				</nav>
-			) : null}
-			<NeumorphCard className="w-full md:w-auto px-2 py-2 md:px-3">
-				<div className="flex w-full items-center gap-1 md:gap-2">
-					<div className="flex min-w-0 flex-1 items-center gap-1 md:gap-2">
-						<button
-							type="button"
-							onClick={() => onHomeClick(homeDestination.id)}
-							className="shrink-0 rounded-full p-2 transition-all md:hover:scale-[1.02] md:active:scale-[0.98]"
-							style={{
-								fontFamily: "'Inter', sans-serif",
-								backgroundColor: "var(--neomorph-bg)",
-								border: "1px solid var(--neomorph-border)",
-								boxShadow:
-									"6px 6px 12px var(--neomorph-shadow-dark), -6px -6px 12px var(--neomorph-shadow-light)",
-							}}
-							aria-label={t("navigation.goHome")}
-						>
-							<Home className="w-3 h-3 text-[var(--text-primary)]" />
-						</button>
-
+			</div>
+			<div
+				className="scripture-navigation rounded-b-2xl shadow-[6px_6px_12px_var(--neomorph-shadow-dark),-6px_-6px_12px_var(--neomorph-shadow-light)]"
+				data-open={isScripture}
+				aria-hidden={!isScripture}
+				inert={!isScripture}
+			>
+				<div className="min-h-0 overflow-hidden">
+					<div className="scripture-navigation-content flex w-fit max-w-full items-center gap-1 rounded-b-2xl border border-t-0 border-[var(--neomorph-border)] px-3 py-2 sm:gap-2 sm:px-4">
 						<button
 							type="button"
 							onClick={() => setOpenMenu(openMenu === "book" ? null : "book")}
-							className="flex min-w-0 flex-1 items-center gap-1 rounded-full px-2 py-1.5 md:gap-2 md:px-3 transition-all md:hover:scale-[1.02] md:active:scale-[0.98]"
+							className="flex min-w-0 items-center gap-1 rounded-full px-2 py-1.5 md:gap-2 md:px-3 transition-all md:hover:scale-[1.02] md:active:scale-[0.98]"
 							style={{
 								fontFamily: "'Inter', sans-serif",
 								boxShadow:
 									"inset 3px 3px 6px var(--neomorph-inset-shadow-dark), inset -3px -3px 6px var(--neomorph-inset-shadow-light)",
-								backgroundColor: "var(--neomorph-bg)",
+								backgroundColor: "var(--navigation-bg)",
 							}}
 							aria-label={t("navigation.selectBook")}
+							aria-expanded={openMenu === "book"}
 						>
 							<BookOpen className="hidden md:block w-3 h-3 text-[var(--text-primary)]" />
 							<span className="min-w-0 truncate text-[10px] md:text-[11px] text-[var(--text-primary)]">
@@ -627,6 +660,9 @@ export function NavigationBar({
 							</span>
 						</button>
 
+						<span aria-hidden="true" className="text-[var(--text-secondary)]">
+							|
+						</span>
 						<button
 							type="button"
 							onClick={() =>
@@ -637,9 +673,10 @@ export function NavigationBar({
 								fontFamily: "'Inter', sans-serif",
 								boxShadow:
 									"inset 3px 3px 6px var(--neomorph-inset-shadow-dark), inset -3px -3px 6px var(--neomorph-inset-shadow-light)",
-								backgroundColor: "var(--neomorph-bg)",
+								backgroundColor: "var(--navigation-bg)",
 							}}
 							aria-label={t("navigation.selectChapter")}
+							aria-expanded={openMenu === "chapter"}
 						>
 							<span className="text-[9px] md:text-[10px] tracking-[0.15em] md:tracking-[0.2em] uppercase text-[var(--text-primary)]">
 								{t("navigation.chapterShort")}
@@ -650,79 +687,75 @@ export function NavigationBar({
 						</button>
 
 						{!seferMode && (
-							<button
-								type="button"
-								onClick={() =>
-									setOpenMenu(openMenu === "verse" ? null : "verse")
-								}
-								className="flex shrink-0 items-center gap-1 rounded-full px-2 py-1.5 md:gap-2 md:px-3 transition-all md:hover:scale-[1.02] md:active:scale-[0.98]"
-								style={{
-									fontFamily: "'Inter', sans-serif",
-									boxShadow:
-										"inset 3px 3px 6px var(--neomorph-inset-shadow-dark), inset -3px -3px 6px var(--neomorph-inset-shadow-light)",
-									backgroundColor: "var(--neomorph-bg)",
-								}}
-								aria-label={t("navigation.selectVerse")}
-							>
-								<span className="text-[9px] md:text-[10px] tracking-[0.15em] md:tracking-[0.2em] uppercase text-[var(--text-primary)]">
-									{t("navigation.verseShort")}
+							<>
+								<span
+									aria-hidden="true"
+									className="text-[var(--text-secondary)]"
+								>
+									|
 								</span>
-								<span className="text-[10px] md:text-[11px] text-[var(--text-primary)]">
-									{verse}
-								</span>
-							</button>
+								<button
+									type="button"
+									onClick={() =>
+										setOpenMenu(openMenu === "verse" ? null : "verse")
+									}
+									className="flex shrink-0 items-center gap-1 rounded-full px-2 py-1.5 md:gap-2 md:px-3 transition-all md:hover:scale-[1.02] md:active:scale-[0.98]"
+									style={{
+										fontFamily: "'Inter', sans-serif",
+										boxShadow:
+											"inset 3px 3px 6px var(--neomorph-inset-shadow-dark), inset -3px -3px 6px var(--neomorph-inset-shadow-light)",
+										backgroundColor: "var(--navigation-bg)",
+									}}
+									aria-label={t("navigation.selectVerse")}
+									aria-expanded={openMenu === "verse"}
+								>
+									<span className="text-[9px] md:text-[10px] tracking-[0.15em] md:tracking-[0.2em] uppercase text-[var(--text-primary)]">
+										{t("navigation.verseShort")}
+									</span>
+									<span className="text-[10px] md:text-[11px] text-[var(--text-primary)]">
+										{verse}
+									</span>
+								</button>
+							</>
 						)}
-					</div>
-
-					<div className="flex shrink-0 items-center gap-1 md:gap-2">
-						{isDev && onDesignSystemClick && (
-							<button
-								type="button"
-								onClick={onDesignSystemClick}
-								className="shrink-0 rounded-full p-2 transition-all md:hover:scale-[1.05] md:active:scale-[0.98]"
-								style={{
-									backgroundColor: "var(--neomorph-bg)",
-									boxShadow:
-										"6px 6px 12px var(--neomorph-shadow-dark), -6px -6px 12px var(--neomorph-shadow-light)",
-									border: "1px solid var(--neomorph-border)",
-								}}
-								aria-label="Design System"
-							>
-								<Paintbrush className="w-3 h-3 text-[var(--text-primary)]" />
-							</button>
-						)}
-
-						<button
-							type="button"
-							onClick={() =>
-								setOpenMenu(
-									openMenu === settingsDestination.id
-										? null
-										: settingsDestination.id,
-								)
-							}
-							className="relative shrink-0 rounded-full p-2 transition-all md:hover:scale-[1.05] md:active:scale-[0.98]"
-							style={{
-								backgroundColor: "var(--neomorph-bg)",
-								boxShadow:
-									"6px 6px 12px var(--neomorph-shadow-dark), -6px -6px 12px var(--neomorph-shadow-light)",
-								border: "1px solid var(--neomorph-border)",
-							}}
-							aria-label={t("navigation.openSettings")}
-						>
-							<Settings className="w-3 h-3 text-[var(--text-primary)]" />
-							<span
-								aria-hidden="true"
-								className="absolute right-0.5 top-0.5 h-2 w-2 rounded-full border border-[var(--neomorph-bg)] bg-[var(--primary)]"
-							/>
-						</button>
 					</div>
 				</div>
-			</NeumorphCard>
+			</div>
 
-			{openMenu === settingsDestination.id && (
-				<div className="absolute right-0 mt-4 w-[320px] rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] backdrop-blur-[16px] shadow-[0_8px_32px_0_var(--glass-shadow)] p-5 z-30">
+			{openMenu === "settings" && (
+				<section
+					id="navigation-settings"
+					aria-label={t("settings.title")}
+					className="absolute end-0 top-full mt-3 w-[360px] max-w-[calc(100vw-32px)] max-h-[calc(100dvh-180px)] overflow-y-auto overscroll-contain rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] backdrop-blur-[16px] shadow-[0_8px_32px_0_var(--glass-shadow)] p-5 z-30"
+					onWheelCapture={(event) => {
+						event.stopPropagation();
+					}}
+					onTouchMoveCapture={(event) => {
+						event.stopPropagation();
+					}}
+				>
 					<div className="space-y-5">
+						<button
+							type="button"
+							className="flex w-full items-center justify-between gap-3 text-sm text-[var(--text-primary)]"
+							onClick={() => {
+								setOpenMenu(null);
+								onDestinationClick("account");
+							}}
+						>
+							<span className="flex items-center gap-3">
+								<UserRound className="size-4 text-[var(--text-secondary)]" />
+								{t("settings.account.title")}
+							</span>
+							<span className="flex items-center gap-1 text-xs text-[var(--accent-deep)]">
+								{t(
+									productApi.authenticated()
+										? "settings.account.manage"
+										: "settings.account.signIn",
+								)}
+								<Chevron size={16} />
+							</span>
+						</button>
 						{SHARED_SETTINGS_ORDER.map((id) => {
 							const row = renderSharedSetting(id);
 							if (!row) return null;
@@ -792,7 +825,37 @@ export function NavigationBar({
 							/>
 						</div>
 					</div>
-				</div>
+					{isDev &&
+						[
+							["settings.designSystemTitle", onDesignSystemClick],
+							["settings.mobileDesignGuideTitle", onMobileDesignGuideClick],
+						].map(([label, action]) =>
+							typeof action === "function" ? (
+								<button
+									key={String(label)}
+									type="button"
+									className="mt-5 flex w-full items-center justify-between text-sm text-[var(--text-primary)]"
+									onClick={() => {
+										setOpenMenu(null);
+										action();
+									}}
+								>
+									<span className="flex items-center gap-3">
+										<Paintbrush className="size-4 text-[var(--text-secondary)]" />
+										{t(String(label))}
+									</span>
+									<Chevron size={16} />
+								</button>
+							) : null,
+						)}
+					<SettingsResources
+						language={language}
+						onOpenScreen={(screen) => {
+							setOpenMenu(null);
+							onDestinationClick(screen);
+						}}
+					/>
+				</section>
 			)}
 
 			{openMenu === "book" && (

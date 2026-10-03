@@ -1,9 +1,5 @@
 import { useCalendarLifecycle } from "./hooks/useCalendar";
 import { SandboxBanner } from "./components/SandboxBanner";
-import {
-	scriptureContext,
-	type CommentaryContext,
-} from "@davar/shared/productContracts";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { BottomSheet } from "./components/BottomSheet";
 import { DesignSystemExport } from "./components/DesignSystemExport";
@@ -148,8 +144,19 @@ export default function App() {
 	// Use persisted state hooks for all settings
 	const [currentScreen, setCurrentScreen] = useState<Screen>(() => {
 		if (typeof window === "undefined") return "verse";
-		return parseRoutePath(window.location.pathname)?.screen ?? "notFound";
+		const screen =
+			parseRoutePath(window.location.pathname)?.screen ?? "notFound";
+		return screen === "settings" ? "verse" : screen;
 	});
+	const [settingsOpen, setSettingsOpen] = useState(
+		() =>
+			typeof window !== "undefined" &&
+			parseRoutePath(window.location.pathname)?.screen === "settings",
+	);
+	const handleOpenScreen = useCallback((screen: Screen) => {
+		setSettingsOpen(screen === "settings");
+		if (screen !== "settings") setCurrentScreen(screen);
+	}, []);
 	const currentScreenRef = useRef(currentScreen);
 	const [theme, setTheme] = usePersistedState("theme", initialState.theme);
 	const [language, setLanguage] = usePersistedState(
@@ -222,8 +229,6 @@ export default function App() {
 	const [isWordPanelHovered, setIsWordPanelHovered] = useState(false);
 	const versePanelRef = useRef<HTMLDivElement | null>(null);
 
-	const [commentaryContext, setCommentaryContext] =
-		useState<CommentaryContext | null>(null);
 	const [selectedWord, setSelectedWord] = useState<WordResponse | null>(null);
 	const [selectedWordContext, setSelectedWordContext] =
 		useState<WordSelectionContext | null>(null);
@@ -835,7 +840,7 @@ export default function App() {
 		}
 
 		if (pending.screen !== "verse") {
-			setCurrentScreen(pending.screen);
+			handleOpenScreen(pending.screen);
 			pendingRouteRef.current = undefined;
 			return;
 		}
@@ -868,7 +873,7 @@ export default function App() {
 
 		setCurrentScreen("verse");
 		pendingRouteRef.current = undefined;
-	}, [books]);
+	}, [books, handleOpenScreen]);
 
 	useEffect(() => {
 		let isMounted = true;
@@ -1032,6 +1037,7 @@ export default function App() {
 		const handlePopState = () => {
 			isHandlingPopStateRef.current = true;
 			const route = parseRoutePath(window.location.pathname);
+			setSettingsOpen(route?.screen === "settings");
 
 			// Handle invalid routes (null)
 			if (!route) {
@@ -1043,7 +1049,7 @@ export default function App() {
 			}
 
 			if (route.screen !== "verse") {
-				setCurrentScreen(route.screen);
+				handleOpenScreen(route.screen);
 			} else {
 				// If we're coming back from terms/privacy/feedback, go to home instead of verse
 				if (
@@ -1080,7 +1086,7 @@ export default function App() {
 
 		window.addEventListener("popstate", handlePopState);
 		return () => window.removeEventListener("popstate", handlePopState);
-	}, []);
+	}, [handleOpenScreen]);
 
 	useEffect(() => {
 		if (typeof window === "undefined") return;
@@ -1655,7 +1661,7 @@ export default function App() {
 	useVerseScrollNavigation({
 		containerRef: versePanelRef,
 		isEnabled: isScrollNavigationActive,
-		isBlocked: isWordPanelHovered,
+		isBlocked: isWordPanelHovered || settingsOpen,
 		threshold: 36,
 		cooldownMs: 500,
 		onNavigateNext: handleNextVerse,
@@ -1684,7 +1690,9 @@ export default function App() {
 				<div className="mx-auto flex justify-center">
 					<NavigationBar
 						activeDestination={currentScreen}
-						onDestinationClick={setCurrentScreen}
+						onDestinationClick={handleOpenScreen}
+						settingsOpen={settingsOpen}
+						onSettingsOpenChange={setSettingsOpen}
 						book={currentBook}
 						bookDisplayName={getDisplayBookName(currentBook)}
 						bookHebrew={getHebrewBookName(currentBook)}
@@ -1715,8 +1723,8 @@ export default function App() {
 							setCurrentVerse(1);
 						}}
 						onVerseChange={(verse) => setCurrentVerse(verse)}
-						onHomeClick={(screen) => setCurrentScreen(screen)}
 						onDesignSystemClick={() => setShowDesignSystem(true)}
+						onMobileDesignGuideClick={() => setShowMobileDesignGuide(true)}
 						theme={theme}
 						onThemeChange={setTheme}
 						language={language}
@@ -1763,7 +1771,6 @@ export default function App() {
 				<div className="max-w-7xl mx-auto">
 					{currentScreen !== "verse" &&
 						renderNonVerseScreen({
-							commentaryContext,
 							screen: currentScreen,
 							language,
 							theme,
@@ -1786,7 +1793,7 @@ export default function App() {
 							onHebrewOnlyChange: handleHebrewOnlyChange,
 							translationOnly,
 							onTranslationOnlyChange: handleTranslationOnlyChange,
-							onOpenScreen: setCurrentScreen,
+							onOpenScreen: handleOpenScreen,
 							onOpenDesignSystem: () => setShowDesignSystem(true),
 							onOpenMobileDesignGuide: () => setShowMobileDesignGuide(true),
 						})}
@@ -1817,45 +1824,6 @@ export default function App() {
 								}
 							>
 								<div className="verse-panel-inner relative">
-									{currentVerseData ? (
-										<button
-											type="button"
-											className="rounded-full px-3 py-2 text-xs text-[var(--accent-deep)] border border-[var(--neomorph-border)]"
-											onClick={() => {
-												const verse =
-													selectedWord && selectedWordContext
-														? chapterVerses?.find(
-																(v) =>
-																	v.chapter === selectedWordContext.chapter &&
-																	v.verse === selectedWordContext.verse,
-															) || currentVerseData
-														: currentVerseData;
-												const index = selectedWord
-													? verse.words.findIndex(
-															(w) => w.position === selectedWord.position,
-														)
-													: -1;
-												setCommentaryContext(
-													scriptureContext({
-														bookId: currentBook,
-														chapter: verse.sourceChapter,
-														verse: verse.sourceVerse,
-														edition:
-															verse.edition ||
-															(isBesorah ? besorahTextVersion : "oe"),
-														...(selectedWord && index >= 0
-															? { word: { index, text: selectedWord.text } }
-															: {}),
-													}),
-												);
-												setCurrentScreen("commentary");
-											}}
-										>
-											{selectedWord
-												? "Ask Commentary about this word"
-												: "Ask Commentary about this verse"}
-										</button>
-									) : null}
 									{currentVerseData ? (
 										<VerseDisplay
 											hebrewText={
