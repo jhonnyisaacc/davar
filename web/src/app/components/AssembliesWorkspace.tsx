@@ -1,17 +1,22 @@
+import { DiscoveryResults } from "../features/assemblies/DiscoveryResults";
+import { AssemblyManagement } from "../features/assemblies/AssemblyManagement";
+import { AssemblyOnboarding } from "../features/assemblies/Onboarding";
+import { createAssembliesClient } from "@davar/shared/assembliesClient";
 import type {
 	Account,
 	Assembly,
 	MembershipRequest,
+	AssemblyPerson,
+	AssemblyLeader,
+	Endorsement,
+	AccountNotification,
 } from "@davar/shared/productContracts";
 import {
-	assemblyMembershipLabel,
 	assembliesErrorMessage,
 	canCreateAssembly,
-	canRequestAssembly,
 	hasAssemblyLocation,
 } from "@davar/shared/assembliesPresentation";
-import { QAHAL_QUESTIONS } from "@davar/shared/qahalQuestions";
-import { ChevronRight, Users } from "lucide-react";
+import { qahalOnboardingStep } from "@davar/shared/qahalQuestions";
 import {
 	type ReactNode,
 	useCallback,
@@ -22,13 +27,8 @@ import {
 import { productApi } from "../services/productApi";
 import { CityChooser } from "./CityChooser";
 
-type Endorsement = {
-	id: string;
-	state: string;
-	applicant_name: string;
-	leader_name: string;
-	can_decide: boolean;
-};
+const assembliesApi = createAssembliesClient(productApi);
+
 export function AssembliesWorkspace({
 	account,
 	onAccount,
@@ -44,28 +44,19 @@ export function AssembliesWorkspace({
 	const [creationMeeting, setCreationMeeting] = useState("");
 	const [busy, setBusy] = useState(false);
 	const [error, setError] = useState("");
-	const [name, setName] = useState(
-		account.display_name === "Reader" ? "" : account.display_name,
-	);
 	const [kind, setKind] = useState<"in_person" | "online">(
 		account.profile.city ? "in_person" : "online",
 	);
 	const [radius, setRadius] = useState("25");
 	const [assemblies, setAssemblies] = useState<Assembly[]>([]);
-	const [people, setPeople] = useState<
-		{ id: string; name: string; area: string; contact_url?: string }[]
-	>([]);
+	const [people, setPeople] = useState<AssemblyPerson[]>([]);
 	const [managed, setManaged] = useState<Assembly | null>(null);
 	const [members, setMembers] = useState<MembershipRequest[]>([]);
 	const [assemblyName, setAssemblyName] = useState("");
 	const [meeting, setMeeting] = useState("");
-	const [leaders, setLeaders] = useState<
-		{ id: string; name: string; city: string }[]
-	>([]);
+	const [leaders, setLeaders] = useState<AssemblyLeader[]>([]);
 	const [endorsements, setEndorsements] = useState<Endorsement[]>([]);
-	const [notifications, setNotifications] = useState<
-		{ id: string; kind: string }[]
-	>([]);
+	const [notifications, setNotifications] = useState<AccountNotification[]>([]);
 	async function run(action: () => Promise<void>) {
 		if (actionPending.current) return;
 		actionPending.current = true;
@@ -107,16 +98,12 @@ export function AssembliesWorkspace({
 		setPeople([]);
 		setError("");
 		try {
-			const query = new URLSearchParams({
+			const result = await assembliesApi.search({
 				kind,
-				radius_km: radius,
-				latitude: String(account.profile.latitude ?? ""),
-				longitude: String(account.profile.longitude ?? ""),
+				radius,
+				latitude: account.profile.latitude,
+				longitude: account.profile.longitude,
 			});
-			const result = await productApi.request<{
-				assemblies: Assembly[];
-				people: typeof people;
-			}>(`/assemblies?${query}`);
 			if (version === searchVersion.current) {
 				setAssemblies(result.assemblies);
 				setPeople(result.people);
@@ -138,22 +125,13 @@ export function AssembliesWorkspace({
 		};
 	}, [account.onboarding_complete, kind, hasLocation, search]);
 	async function manage(assembly: Assembly) {
-		const result = (
-			await productApi.request<{ memberships: MembershipRequest[] }>(
-				`/assemblies/${assembly.id}/members`,
-			)
-		).memberships;
+		const result = await assembliesApi.members(assembly.id);
 		setManaged(assembly);
 		setAssemblyName(assembly.name);
 		setMeeting(assembly.meeting_url || "");
 		setMembers(result);
 	}
 	const profile = account.profile;
-	const keys =
-		profile.experience === "starting"
-			? ["1", "3"]
-			: ["1", "2", "3", "4", "5", "6", "7"];
-	const next = keys.find((k) => profile.answers?.[k] === undefined);
 	const city = (
 		<CityChooser
 			authenticated
@@ -166,94 +144,19 @@ export function AssembliesWorkspace({
 			}}
 		/>
 	);
+	const onboardingStep = qahalOnboardingStep(account);
 	let body: ReactNode = null;
-	if (!profile.experience)
+	if (onboardingStep)
 		body = (
-			<>
-				<h2 className="text-[34px] text-center font-semibold">Your path</h2>
-				{(["starting", "experienced", "leader"] as const).map((experience) => (
-					<div key={experience}>
-						{button(
-							experience === "starting"
-								? "Starting"
-								: experience === "leader"
-									? "Leader"
-									: "Experienced",
-							() => save({ profile: { experience } }),
-						)}
-					</div>
-				))}
-			</>
-		);
-	else if (next)
-		body = (
-			<>
-				<h2 className="text-[28px] font-semibold text-center">
-					{QAHAL_QUESTIONS[Number(next) - 1]}
-				</h2>
-				<p>
-					Question {keys.indexOf(next) + 1} of {keys.length} · Progress saved
-				</p>
-				{button("Yes", () =>
-					save({ profile: { answers: { ...profile.answers, [next]: true } } }),
-				)}
-				{button("No", () =>
-					save({ profile: { answers: { ...profile.answers, [next]: false } } }),
-				)}
-			</>
-		);
-	else if (!profile.gender)
-		body = (
-			<>
-				<h2 className="text-[34px] text-center font-semibold">Your name</h2>
-				<label>
-					Your name
-					<input
-						value={name}
-						onChange={(e) => setName(e.target.value)}
-						className="block p-3 rounded-xl bg-[var(--neomorph-bg)]"
-					/>
-				</label>
-				{button(
-					"Male",
-					() => save({ display_name: name, profile: { gender: "male" } }),
-					!name.trim(),
-				)}
-				{button(
-					"Female",
-					() => save({ display_name: name, profile: { gender: "female" } }),
-					!name.trim() || profile.experience === "leader",
-				)}
-			</>
-		);
-	else if (!profile.city)
-		body = (
-			<>
-				<p>Choose your city. Discovery uses an approximate area.</p>
-				{city}
-			</>
-		);
-	else if (!account.onboarding_complete)
-		body = (
-			<>
-				<h2 className="text-[34px] text-center font-semibold">
-					Hidden by default
-				</h2>
-				<label>
-					<input
-						type="checkbox"
-						disabled={busy}
-						checked={account.discoverable}
-						onChange={(e) =>
-							void run(() => save({ discoverable: e.target.checked }))
-						}
-					/>{" "}
-					Share my name and city with nearby believers
-				</label>
-				{button("Continue", () =>
-					save({ profile: { visibility_reviewed: true } }),
-				)}
-			</>
+			<AssemblyOnboarding
+				step={onboardingStep}
+				account={account}
+				busy={busy}
+				run={run}
+				save={save}
+				city={city}
+				button={button}
+			/>
 		);
 	else
 		body = (
@@ -323,136 +226,53 @@ export function AssembliesWorkspace({
 						You can explore assemblies. Joining requires the Experienced path.
 					</p>
 				) : null}
-				{assemblies.map((assembly) => (
-					<section
-						key={assembly.id}
-						className="py-5 border-b border-[var(--neomorph-border)] space-y-3"
-					>
-						<div className="flex items-center gap-4">
-							<Users size={28} />
-							<div className="flex-1">
-								<h2 className="text-[22px]">{assembly.name}</h2>
-								<p className="text-sm">
-									{assembly.city || "Online"} ·{" "}
-									{assemblyMembershipLabel(assembly.member_state)}
-									{assembly.distance_km !== null
-										? ` · ${assembly.distance_km} km`
-										: ""}
-								</p>
-							</div>
-							<ChevronRight size={18} className="rtl:rotate-180" />
-						</div>
-						{assembly.meeting_url ? (
-							<a href={assembly.meeting_url} target="_blank" rel="noreferrer">
-								Meeting link
-							</a>
-						) : null}
-						{canRequestAssembly(account, assembly)
-							? button("Request to join", async () => {
-									await productApi.request(`/assemblies/${assembly.id}/join`, {
-										method: "POST",
-									});
-									await search();
-									onAccount(await productApi.request<Account>("/account"));
-								})
-							: !assembly.can_manage && assembly.member_state !== "not_member"
-								? button(
-										assembly.member_state === "requested"
-											? "Cancel request"
-											: "Leave assembly",
-										async () => {
-											await productApi.request(
-												`/assemblies/${assembly.id}/leave`,
-												{ method: "DELETE" },
-											);
-											await search();
-											onAccount(await productApi.request<Account>("/account"));
-										},
-									)
-								: null}
-						{assembly.can_manage
-							? button("Manage", () => manage(assembly))
-							: null}
-					</section>
-				))}
-				{people.map((person) => (
-					<div key={person.id}>
-						<p>
-							{person.name} · {person.area}
-						</p>
-						{person.contact_url ? (
-							<a href={person.contact_url}>Contact</a>
-						) : null}
-					</div>
-				))}
+				<DiscoveryResults
+					account={account}
+					assemblies={assemblies}
+					people={people}
+					button={button}
+					onManage={manage}
+					onJoin={async (assembly) => {
+						await productApi.request(`/assemblies/${assembly.id}/join`, {
+							method: "POST",
+						});
+						await search();
+						onAccount(await productApi.request<Account>("/account"));
+					}}
+					onLeave={async (assembly) => {
+						await productApi.request(`/assemblies/${assembly.id}/leave`, {
+							method: "DELETE",
+						});
+						await search();
+						onAccount(await productApi.request<Account>("/account"));
+					}}
+				/>
 				{managed ? (
-					<section className="space-y-3">
-						<h2>Manage {managed.name}</h2>
-						<label>
-							Assembly name
-							<input
-								value={assemblyName}
-								onChange={(e) => setAssemblyName(e.target.value)}
-								className="block p-3 rounded-xl bg-[var(--neomorph-bg)]"
-							/>
-						</label>
-						<label>
-							Meeting link
-							<input
-								value={meeting}
-								onChange={(e) => setMeeting(e.target.value)}
-								className="block p-3 rounded-xl bg-[var(--neomorph-bg)]"
-							/>
-						</label>
-						{button(
-							"Save",
-							async () => {
-								const updated = await productApi.request<Assembly>(
-									`/assemblies/${managed.id}`,
-									{
-										method: "PATCH",
-										body: {
-											name: assemblyName.trim(),
-											meeting_url: meeting.trim(),
-										},
-									},
-								);
-								setManaged(updated);
-								await search();
-							},
-							!assemblyName.trim(),
-						)}
-						{members.map((member) => (
-							<div key={member.id} className="space-y-2">
-								<p>
-									{member.user.name} ·{" "}
-									{member.state === "requested" ? "Request pending" : "Member"}
-									{member.user.age ? ` · ${member.user.age}` : ""}{" "}
-									{member.user.gender || ""}
-								</p>
-								{member.user.contact_url ? (
-									<a href={member.user.contact_url}>Contact for admission</a>
-								) : null}
-								{member.state === "requested"
-									? ["accepted", "declined"].map((decision) => (
-											<span key={decision}>
-												{button(
-													decision === "accepted" ? "Accept" : "Decline",
-													async () => {
-														await productApi.request(
-															`/assemblies/${managed.id}/memberships/${member.id}/decision`,
-															{ method: "POST", body: { decision } },
-														);
-														await manage(managed);
-														await search();
-													},
-												)}
-											</span>
-										))
-									: null}
-							</div>
-						))}
-					</section>
+					<AssemblyManagement
+						managed={managed}
+						members={members}
+						assemblyName={assemblyName}
+						setAssemblyName={setAssemblyName}
+						meeting={meeting}
+						setMeeting={setMeeting}
+						button={button}
+						onSave={async (name, meeting_url) => {
+							const updated = await productApi.request<Assembly>(
+								`/assemblies/${managed.id}`,
+								{ method: "PATCH", body: { name, meeting_url } },
+							);
+							setManaged(updated);
+							await search();
+						}}
+						onDecide={async (memberId, decision) => {
+							await productApi.request(
+								`/assemblies/${managed.id}/memberships/${memberId}/decision`,
+								{ method: "POST", body: { decision } },
+							);
+							await manage(managed);
+							await search();
+						}}
+					/>
 				) : null}
 				{canCreateAssembly(account) ? (
 					<details>

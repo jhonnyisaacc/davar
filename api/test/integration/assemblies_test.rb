@@ -69,6 +69,26 @@ class AssembliesTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test "seven-digit invitations retain leading zeroes across repeated redemption" do
+    headers = login("fresh")
+    code = AccessCode.create!(code_digest: AccessCode.digest("0000427"), expires_at: 1.day.from_now, max_uses: 2)
+    2.times do
+      post "/api/v1/account/admission", params: {code: "0000427"}, headers: headers, as: :json
+      assert_response :success
+      assert response.parsed_body["admitted"]
+    end
+    assert_equal 1, code.reload.uses
+  end
+
+  test "a false profile payload preserves the profile while updating account attributes" do
+    reader = persona("reader")
+    profile = reader.profile
+    patch "/api/v1/account", params: {profile: false, display_name: "Updated Reader"}, headers: login(reader), as: :json
+    assert_response :success
+    assert_equal profile, reader.reload.profile
+    assert_equal "Updated Reader", reader.display_name
+  end
+
   test "onboarding saves a negative answer and resumes before city and visibility" do
     user = persona("onboarding-path")
     headers = login(user)

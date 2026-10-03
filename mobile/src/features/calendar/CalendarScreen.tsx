@@ -1,4 +1,5 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useCalendarWorkspace } from "./useCalendarWorkspace";
+import { useState, type ReactNode } from "react";
 import {
   ActivityIndicator,
   Linking,
@@ -30,11 +31,7 @@ import {
   Wheat,
   type LucideIcon,
 } from "lucide-react-native";
-import type { CalendarCity } from "@davar/shared/calendarClient";
-import type {
-  CalendarDay,
-  CalendarResponse,
-} from "@davar/shared/productContracts";
+import type { CalendarDay } from "@davar/shared/productContracts";
 import {
   annualMoadim,
   calendarSources,
@@ -207,22 +204,37 @@ export default function CalendarScreen() {
   const { height } = useWindowDimensions();
   const [screen, setScreen] = useState<Screen>("calendar");
   const [query, setQuery] = useState("");
-  const [cities, setCities] = useState<CalendarCity[]>([]);
-  const [searching, setSearching] = useState(false);
-  const [searched, setSearched] = useState(false);
-  const [searchError, setSearchError] = useState(false);
   const [offset, setOffset] = useState(0);
-  const [selectedCalendar, setSelectedCalendar] =
-    useState<CalendarResponse | null>(null);
-  const [dayBusy, setDayBusy] = useState(false);
-  const [dayError, setDayError] = useState(false);
-  const [annual, setAnnual] = useState<CalendarResponse | null>(null);
-  const [annualBusy, setAnnualBusy] = useState(false);
-  const [annualError, setAnnualError] = useState(false);
   const [annualAttempt, setAnnualAttempt] = useState(0);
   const [linkError, setLinkError] = useState(false);
   const currentScreen = !city ? "city" : screen;
+
   const year = calendarYear(timezone);
+  const requests = useCalendarWorkspace({
+    city,
+    calendar,
+    view: currentScreen,
+    query,
+    offset,
+    year,
+    annualAttempt,
+  });
+  const {
+    data: cities,
+    busy: searching,
+    searched,
+    error: searchError,
+  } = requests.cities;
+  const {
+    data: selectedCalendar,
+    busy: dayBusy,
+    error: dayError,
+  } = requests.day;
+  const {
+    data: annual,
+    busy: annualBusy,
+    error: annualError,
+  } = requests.annual;
   const selected = offset === 0 ? calendar : selectedCalendar;
   const day = selected?.days[0];
   const moadim = confirmedMoadim(day);
@@ -238,88 +250,6 @@ export default function CalendarScreen() {
         })
       : t("calendar.day", { day: value.biblical.day! });
   const yearRows = annualMoadim(annual, year);
-
-  useEffect(() => {
-    if (currentScreen !== "city" || query.trim().length < 2) {
-      setCities([]);
-      setSearched(false);
-      setSearching(false);
-      setSearchError(false);
-      return;
-    }
-    let cancelled = false;
-    setCities([]);
-    setSearching(true);
-    setSearchError(false);
-    setSearched(false);
-    const timer = setTimeout(() => {
-      void calendarClient
-        .searchCities(query)
-        .then((result) => {
-          if (!cancelled) {
-            setCities(result);
-            setSearched(true);
-          }
-        })
-        .catch(() => {
-          if (!cancelled) setSearchError(true);
-        })
-        .finally(() => {
-          if (!cancelled) setSearching(false);
-        });
-    }, 600);
-    return () => {
-      cancelled = true;
-      clearTimeout(timer);
-    };
-  }, [currentScreen, query]);
-  useEffect(() => {
-    if (!city || offset === 0) {
-      setSelectedCalendar(null);
-      setDayBusy(false);
-      setDayError(false);
-      return;
-    }
-    let cancelled = false;
-    setSelectedCalendar(null);
-    setDayBusy(true);
-    setDayError(false);
-    void calendarClient
-      .day(offset)
-      .then((result) => {
-        if (!cancelled) setSelectedCalendar(result);
-      })
-      .catch(() => {
-        if (!cancelled) setDayError(true);
-      })
-      .finally(() => {
-        if (!cancelled) setDayBusy(false);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [city, offset, calendar]);
-  useEffect(() => {
-    if (!city || currentScreen !== "moadim") return;
-    let cancelled = false;
-    setAnnual(null);
-    setAnnualBusy(true);
-    setAnnualError(false);
-    void calendarClient
-      .year(year)
-      .then((result) => {
-        if (!cancelled) setAnnual(result);
-      })
-      .catch(() => {
-        if (!cancelled) setAnnualError(true);
-      })
-      .finally(() => {
-        if (!cancelled) setAnnualBusy(false);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [city, currentScreen, year, annualAttempt]);
 
   const back = () => {
     setScreen("calendar");

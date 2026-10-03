@@ -24,7 +24,7 @@ Object.defineProperty(globalThis, "IS_REACT_ACT_ENVIRONMENT", {
 	writable: true,
 	value: true,
 });
-const { render, cleanup, fireEvent, waitFor } = await import(
+const { act, render, cleanup, fireEvent, waitFor } = await import(
 	"@testing-library/react"
 );
 const { AssembliesWorkspace } = await import("./AssembliesWorkspace");
@@ -443,4 +443,96 @@ describe("Assemblies invitation UI", () => {
 		ui.rerender(entry({ ...reader, admitted: false }));
 		expect(request).not.toHaveBeenCalled();
 	});
+});
+
+test("Starting onboarding preserves negative answers and progresses through name, city and visibility", async () => {
+	let current: Account = {
+		...reader,
+		display_name: "Reader",
+		profile: {},
+		onboarding_complete: false,
+	};
+	const ui = render(
+		<AssembliesWorkspace account={current} onAccount={updated} />,
+	);
+	function updated(account: Account) {
+		current = account;
+		ui.rerender(<AssembliesWorkspace account={current} onAccount={updated} />);
+	}
+	request.mockImplementation(async (path, options) => {
+		if (path !== "/account") throw new Error("Unexpected request");
+		const body = options?.body as Partial<Account>;
+		return {
+			...current,
+			...body,
+			profile: { ...current.profile, ...body.profile },
+		} as never;
+	});
+	fireEvent.click(ui.getByRole("button", { name: "Starting" }));
+	await waitFor(() =>
+		expect(ui.getByText("Question 1 of 2 · Progress saved")).toBeTruthy(),
+	);
+	fireEvent.click(ui.getByRole("button", { name: "No" }));
+	await waitFor(() =>
+		expect(ui.getByText("Question 2 of 2 · Progress saved")).toBeTruthy(),
+	);
+	expect(current.profile.answers?.["1"]).toBe(false);
+	fireEvent.click(ui.getByRole("button", { name: "Yes" }));
+	await waitFor(() =>
+		expect(ui.getByRole("button", { name: "Male" })).toBeTruthy(),
+	);
+	fireEvent.change(ui.getByRole("textbox", { name: "Your name" }), {
+		target: { value: "New Reader" },
+	});
+	fireEvent.click(ui.getByRole("button", { name: "Male" }));
+	await waitFor(() =>
+		expect(
+			ui.getByText("Choose your city. Discovery uses an approximate area."),
+		).toBeTruthy(),
+	);
+	act(() =>
+		updated({
+			...current,
+			profile: { ...current.profile, city: "Buenos Aires" },
+		}),
+	);
+	expect(ui.getByText("Hidden by default")).toBeTruthy();
+	fireEvent.click(ui.getByRole("button", { name: "Continue" }));
+	await waitFor(() => expect(current.profile.visibility_reviewed).toBe(true));
+	expect(current.profile.answers).toEqual({ "1": false, "3": true });
+});
+
+test("leading-zero invitations remain seven-digit strings through persistence and redemption", async () => {
+	const entry = (account: Account | null) => (
+		<AssembliesEntry
+			language="en"
+			account={account}
+			onAccount={accountChanged}
+			sessionReady
+			sessionError=""
+			signIn={<button type="button">Sign in</button>}
+		>
+			<p>Assemblies opened</p>
+		</AssembliesEntry>
+	);
+	const ui = render(entry(null));
+	fireEvent.change(ui.getByRole("textbox", { name: "Access code" }), {
+		target: { value: "0000427" },
+	});
+	await waitFor(() =>
+		expect(ui.getByRole("button", { name: "Sign in" })).toBeTruthy(),
+	);
+	expect(dom.sessionStorage.getItem("davar.assemblies.pendingCode")).toBe(
+		"0000427",
+	);
+	request.mockResolvedValueOnce(reader as never);
+	ui.rerender(entry({ ...reader, admitted: false }));
+	await waitFor(() => expect(request.mock.calls).toHaveLength(1));
+	expect(request.mock.calls[0][0]).toBe("/account/admission");
+	expect(request.mock.calls[0][1]?.body).toEqual({ code: "0000427" });
+	await waitFor(() =>
+		expect(
+			dom.sessionStorage.getItem("davar.assemblies.pendingCode"),
+		).toBeNull(),
+	);
 });

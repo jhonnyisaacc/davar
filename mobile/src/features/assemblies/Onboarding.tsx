@@ -4,7 +4,10 @@ import { Pressable, Switch, Text, View } from "react-native";
 import { ChevronRight } from "lucide-react-native";
 import { productApi, useSession } from "../account/session";
 import { Action, Copy, Field, useProductStyle } from "../product/ui";
-import { QAHAL_QUESTIONS } from "@davar/shared/qahalQuestions";
+import {
+	qahalQuestionIds,
+	QAHAL_QUESTIONS,
+} from "@davar/shared/qahalQuestions";
 export function Onboarding() {
 	const account = useSession((s) => s.account)!;
 	const refresh = useSession((s) => s.refresh);
@@ -15,10 +18,7 @@ export function Onboarding() {
 	const [error, setError] = useState("");
 	const [busy, setBusy] = useState(false);
 	const profile = account.profile;
-	const questions =
-		profile.experience === "starting"
-			? ["1", "3"]
-			: ["1", "2", "3", "4", "5", "6", "7"];
+	const questions = qahalQuestionIds(profile.experience);
 	const next = questions.find((key) => profile.answers?.[key] === undefined);
 	async function save(body: unknown) {
 		setBusy(true);

@@ -1,21 +1,15 @@
 import { create } from "zustand";
 import * as SecureStore from "expo-secure-store";
 import { Platform } from "react-native";
-import { ProductClient } from "@davar/shared/productClient";
+import {
+	createMemoryCacheStorage,
+	ProductClient,
+} from "@davar/shared/productClient";
 import type { Account } from "@davar/shared/productContracts";
 // Private cache is in memory. It survives brief network loss, never device logout.
-const cache = new Map<string, string>();
 export const productApi = new ProductClient(
 	process.env.EXPO_PUBLIC_API_URL || "http://127.0.0.1:3000",
-	{
-		get: async (key) => cache.get(key) || null,
-		set: async (key, value) => {
-			cache.set(key, value);
-		},
-		remove: async (key) => {
-			cache.delete(key);
-		},
-	},
+	createMemoryCacheStorage(),
 );
 const SESSION_KEY = "davar_v2_session";
 export const useSession = create<{

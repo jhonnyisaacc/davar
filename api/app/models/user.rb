@@ -10,7 +10,7 @@ class User < ApplicationRecord
   validates :display_name, length: {maximum: 100}
   def doctrinal_agreement?
     data = profile || {}
-    data["experience"] != "starting" && %w[1 2 3 4 5 6 7].all? { |key| data.fetch("answers", {})[key] == true }
+    data["experience"] != "starting" && QahalProfile::EXPERIENCED_QUESTIONS.all? { |key| data.fetch("answers", {})[key] == true }
   end
   def age
     born = Date.iso8601(profile.fetch("birth_date"))
@@ -25,7 +25,7 @@ class User < ApplicationRecord
   end
   def completed_onboarding?
     data = profile || {}
-    required = data["experience"] == "starting" ? %w[1 3] : %w[1 2 3 4 5 6 7]
+    required = QahalProfile.question_ids(data["experience"])
     data["city"].present? && data["gender"].in?(%w[male female]) &&
       data["experience"].in?(%w[starting experienced leader]) &&
       data.fetch("answers", {}).keys.sort == required.sort && data["visibility_reviewed"] == true
