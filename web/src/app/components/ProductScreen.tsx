@@ -1,11 +1,10 @@
 import { AssembliesWorkspace } from "./AssembliesWorkspace";
-import { CityChooser } from "./CityChooser";
+import { CalendarPanel } from "./CalendarPanel";
 import { useCallback, useEffect, useState } from "react";
 import type {
 	Account,
 	CommentaryContext,
 	Article,
-	CalendarResponse,
 	Conversation,
 	ProviderConnection,
 } from "@davar/shared/productContracts";
@@ -29,12 +28,6 @@ export function ProductScreen({
 	const [error, setError] = useState("");
 	const [busy, setBusy] = useState(false);
 	const [email, setEmail] = useState("");
-	const [latitude, setLatitude] = useState("");
-	const [longitude, setLongitude] = useState("");
-	const [timezone, setTimezone] = useState(
-		Intl.DateTimeFormat().resolvedOptions().timeZone,
-	);
-	const [calendar, setCalendar] = useState<CalendarResponse | null>(null);
 	const [articles, setArticles] = useState<Article[]>([]);
 	const [article, setArticle] = useState<Article | null>(null);
 	const [mode, setMode] = useState<"chat" | "articles">("chat");
@@ -178,65 +171,7 @@ export function ProductScreen({
 				</p>
 			) : null}
 			{error ? <p role="status">{error}</p> : null}
-			{screen === "widgets" ? (
-				<>
-					<p>
-						The Biblical day changes at your local sunset. Your location is not
-						saved.
-					</p>
-					<CityChooser
-						onChoose={async (city) => {
-							setLatitude(String(city.latitude));
-							setLongitude(String(city.longitude));
-						}}
-					/>
-					{field("Timezone", timezone, setTimezone)}
-					{button(
-						"Today and upcoming days",
-						() =>
-							void run(async () => {
-								const query = new URLSearchParams({
-									latitude,
-									longitude,
-									timezone,
-									instant: new Date().toISOString(),
-									days: "14",
-								});
-								setCalendar(
-									await productApi.request<CalendarResponse>(
-										`/calendar/upcoming?${query}`,
-										{
-											public: true,
-											cache: true,
-											cacheKey: `calendar/${latitude}/${longitude}/${timezone}`,
-										},
-									),
-								);
-							}),
-					)}
-					{calendar ? (
-						<p>Aviv determination: {calendar.year_start_status}</p>
-					) : null}
-					{calendar?.days.map((day) => (
-						<NeumorphCard key={day.civil_date} className="p-6 space-y-2">
-							<h2>{day.civil_date}</h2>
-							<p>
-								{day.biblical.day === null
-									? "Awaiting confirmed observation"
-									: "Biblical day " +
-										day.biblical.day +
-										" · " +
-										(day.biblical.month_id || "Month identity unresolved")}
-							</p>
-							<p>
-								Rabbinic: {day.rabbinic.day} {day.rabbinic.month_id}{" "}
-								{day.rabbinic.year}
-							</p>
-							<p>{day.events.join(", ")}</p>
-						</NeumorphCard>
-					))}
-				</>
-			) : null}
+			{screen === "widgets" ? <CalendarPanel language={language} /> : null}
 			{screen === "commentary" ? (
 				<>
 					{button(mode === "chat" ? "▤ Articles" : "Return to AI chat", () => {

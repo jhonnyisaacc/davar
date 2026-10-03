@@ -1,7 +1,14 @@
-import { useCallback, useEffect, useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { AppState, Linking, Pressable, Text, View } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useFocusEffect } from "expo-router";
 import { Calendar, ChevronRight, MapPin } from "lucide-react-native";
 import type { CalendarResponse } from "@davar/shared/productContracts";
+import {
+	calendarIsOutdated,
+	calendarRefreshDelay,
+	calendarTime,
+} from "@davar/shared/calendarRefresh";
 import { productApi, useSession } from "../account/session";
 import {
 	Action,
@@ -19,10 +26,11 @@ type City = {
 };
 export default function CalendarScreen() {
 	const profile = useSession((s) => s.account?.profile);
-	const { colors } = useProductStyle();
+	const { colors, language } = useProductStyle();
 	const [detail, setDetail] = useState(false);
 	const [city, setCity] = useState<City | null>(
-		profile?.latitude && profile.longitude
+		typeof profile?.latitude === "number" &&
+			typeof profile.longitude === "number"
 			? {
 					city: profile.city || "",
 					country: "",
@@ -40,8 +48,49 @@ export default function CalendarScreen() {
 	const [error, setError] = useState("");
 	const [busy, setBusy] = useState(false);
 	const [location, setLocation] = useState(false);
+	const [observationsOpen, setObservationsOpen] = useState(false);
+	const [focused, setFocused] = useState(false);
+	const [attempt, setAttempt] = useState(0);
+	const [restored, setRestored] = useState(false);
+	const requestId = useRef(0);
+	useEffect(() => {
+		let mounted = true;
+		void AsyncStorage.getItem("davar-calendar-location")
+			.then((value) => {
+				if (!value || !mounted) return;
+				const saved = JSON.parse(value);
+				if (
+					typeof saved.city?.city === "string" &&
+					typeof saved.city?.country === "string" &&
+					typeof saved.city?.latitude === "number" &&
+					Math.abs(saved.city.latitude) <= 90 &&
+					typeof saved.city?.longitude === "number" &&
+					Math.abs(saved.city.longitude) <= 180 &&
+					typeof saved.timezone === "string"
+				) {
+					new Intl.DateTimeFormat("en", { timeZone: saved.timezone });
+					setCity(saved.city);
+					setTimezone(saved.timezone);
+				}
+			})
+			.catch(() => {})
+			.finally(() => {
+				if (mounted) setRestored(true);
+			});
+		return () => {
+			mounted = false;
+		};
+	}, []);
+	useEffect(() => {
+		if (restored && city)
+			void AsyncStorage.setItem(
+				"davar-calendar-location",
+				JSON.stringify({ city, timezone }),
+			).catch(() => {});
+	}, [city, timezone, restored]);
 	const load = useCallback(
 		async (chosen: City) => {
+			const id = ++requestId.current;
 			setBusy(true);
 			setError("");
 			try {
@@ -52,27 +101,50 @@ export default function CalendarScreen() {
 					instant: new Date().toISOString(),
 					days: "14",
 				});
-				setCalendar(
-					await productApi.request<CalendarResponse>(
-						`/calendar/upcoming?${params}`,
-						{
-							public: true,
-							cache: true,
-							cacheKey: `calendar/${chosen.latitude}/${chosen.longitude}/${timezone}`,
-						},
-					),
+				const result = await productApi.request<CalendarResponse>(
+					`/calendar/upcoming?${params}`,
+					{
+						public: true,
+						cache: true,
+						cacheKey: `calendar/${chosen.latitude}/${chosen.longitude}/${timezone}`,
+					},
 				);
+				if (id === requestId.current) setCalendar(result);
 			} catch (e) {
-				setError(e instanceof Error ? e.message : "Calendar unavailable");
+				if (id === requestId.current)
+					setError(e instanceof Error ? e.message : "Calendar unavailable");
 			} finally {
-				setBusy(false);
+				if (id === requestId.current) {
+					setBusy(false);
+					setAttempt((value) => value + 1);
+				}
 			}
 		},
 		[timezone],
 	);
+	useFocusEffect(
+		useCallback(() => {
+			setFocused(true);
+			setCalendar(null);
+			if (city && restored) void load(city);
+			const subscription = AppState.addEventListener("change", (state) => {
+				if (state === "active" && city && restored) void load(city);
+			});
+			return () => {
+				setFocused(false);
+				requestId.current++;
+				subscription.remove();
+			};
+		}, [city, load, restored]),
+	);
 	useEffect(() => {
-		if (city) void load(city);
-	}, [city, load]);
+		if (!focused || !city || !restored) return;
+		const timer = setTimeout(
+			() => void load(city),
+			calendarRefreshDelay(calendar),
+		);
+		return () => clearTimeout(timer);
+	}, [focused, city, restored, calendar, attempt, load]);
 	async function search() {
 		setBusy(true);
 		setError("");
@@ -92,6 +164,7 @@ export default function CalendarScreen() {
 		}
 	}
 	const today = calendar?.days[0];
+	const sunset = calendarTime(calendar?.next_sunset_at, timezone, language);
 	return (
 		<Page title={detail ? "Biblical Calendar" : "Widgets"}>
 			{error ? <Copy>{error}</Copy> : null}
@@ -170,8 +243,7 @@ export default function CalendarScreen() {
 					{location || !city ? (
 						<>
 							<Copy>
-								Your city is used for local sunset. It is not saved to your
-								account.
+								Your city is remembered on this device for local sunset.
 							</Copy>
 							<Field label="Search city" value={query} onChange={setQuery} />
 							<Action
@@ -213,6 +285,11 @@ export default function CalendarScreen() {
 								{today.civil_date} ·{" "}
 								{today.biblical.month_id || "Month identity unresolved"}
 							</Copy>
+							{sunset ? (
+								<Copy>
+									Next sunset: {sunset} · {timezone}
+								</Copy>
+							) : null}
 							<Copy>
 								Rabbinic: {today.rabbinic.day} {today.rabbinic.month_id}{" "}
 								{today.rabbinic.year}
@@ -221,6 +298,75 @@ export default function CalendarScreen() {
 					) : null}
 					{calendar ? (
 						<>
+							{calendarIsOutdated(calendar) ? (
+								<Copy>
+									Showing a cached calendar. Reconnect to update the day.
+								</Copy>
+							) : null}
+							{calendar.source?.development_fixture ? (
+								<Copy>Development scenario — synthetic observations.</Copy>
+							) : null}
+							{calendar.source?.stale ? (
+								<Copy>
+									{calendar.source.last_synced_at
+										? "Observation updates are unavailable. Showing the last imported evidence."
+										: "Awaiting the first observation update."}
+								</Copy>
+							) : null}
+							{calendar.source && calendar.source.review_count > 0 ? (
+								<Copy>
+									Some historical reports need review. Only confirmed evidence
+									is used.
+								</Copy>
+							) : null}
+							{calendar.source?.last_synced_at ? (
+								<Copy>
+									Observations checked:{" "}
+									{new Date(calendar.source.last_synced_at).toLocaleString(
+										language,
+									)}
+								</Copy>
+							) : null}
+							<Action
+								label={
+									observationsOpen
+										? "Hide observation details"
+										: "Observation details"
+								}
+								onPress={() => setObservationsOpen(!observationsOpen)}
+							/>
+							{observationsOpen ? (
+								<Card>
+									{today?.observation ? (
+										<>
+											<Copy>
+												Observed on {today.observation.observed_on} · Unaided
+												sighting in Israel
+											</Copy>
+											<Copy>{today.observation.observers.join(", ")}</Copy>
+											<Copy>{today.observation.locations.join(", ")}</Copy>
+											{!today.observation.development_fixture ? (
+												<Action
+													label="Read observation report"
+													onPress={() =>
+														void Linking.openURL(today.observation!.source_url)
+													}
+												/>
+											) : null}
+										</>
+									) : (
+										<Copy>No confirmed observation for this day.</Copy>
+									)}
+									{calendar.source?.url ? (
+										<Action
+											label="Israeli New Moon Society"
+											onPress={() =>
+												void Linking.openURL(calendar.source!.url!)
+											}
+										/>
+									) : null}
+								</Card>
+							) : null}
 							<Copy>Observation and year start</Copy>
 							<Copy>
 								Aviv determination: {calendar.year_start_status}. Appointed
