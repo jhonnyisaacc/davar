@@ -2,7 +2,7 @@ import { afterEach, expect, spyOn, test } from "bun:test";
 import { Window } from "happy-dom";
 import { CommentaryScreen } from "./CommentaryScreen";
 import { productApi } from "../../services/productApi";
-import type { Account } from "@davar/shared/productContracts";
+import type { Account, Citation } from "@davar/shared/productContracts";
 const dom = new Window({ url: "http://localhost:5300/commentary" });
 for (const key of [
 	"window",
@@ -61,9 +61,11 @@ test("account changes clear private conversations while retaining citation links
 						{
 							source_id: "shaul:section",
 							source_url: "https://example.test/section",
-							source_title: "Reviewed source",
-							section: "Meaning",
-						},
+							title: "Reviewed source",
+							section_labels: ["Meaning"],
+							revision: "fixture-v1",
+							attribution: "Davar test fixture",
+						} satisfies Citation,
 					],
 				},
 			],
@@ -79,6 +81,7 @@ test("account changes clear private conversations while retaining citation links
 	expect(ui.getByRole("link").getAttribute("href")).toBe(
 		"https://example.test/section",
 	);
+	expect(ui.getByRole("link").textContent).toBe("Reviewed source — Meaning");
 	ui.rerender(<CommentaryScreen {...props} account={null} />);
 	expect(ui.queryByText("Private answer")).toBeNull();
 	expect(ui.queryByRole("button", { name: "Saved consultation" })).toBeNull();
