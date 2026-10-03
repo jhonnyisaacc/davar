@@ -7,7 +7,6 @@
     "icon": "./assets/images/icon.png",
     "scheme": "davar",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "bible.davar",
@@ -22,7 +21,6 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
       "permissions": [
         "INTERNET",
@@ -37,6 +35,14 @@
     },
     "plugins": [
       "expo-router",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "enableSceneSupport": true
+          }
+        }
+      ],
       [
         "expo-splash-screen",
         {
@@ -58,9 +64,11 @@
       "expo-mail-composer",
       "expo-sqlite",
       "expo-web-browser",
-      "expo-secure-store"
+      "expo-secure-store",
+      "expo-image",
+      "expo-status-bar"
     ],
-    "runtimeVersion": "1.0.2",
+    "runtimeVersion": "1.0.3",
     "updates": {
       "url": "https://u.expo.dev/232e7627-d0c9-4b88-976e-b4855beb322e",
       "enabled": true,

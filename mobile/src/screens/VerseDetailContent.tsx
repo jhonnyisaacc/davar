@@ -39,9 +39,9 @@ import {
 } from "react-native-safe-area-context";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import type { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
-import { BottomTabBarHeightContext } from "@react-navigation/bottom-tabs";
-import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import type { ParamListBase } from "@react-navigation/native";
+import { BottomTabBarHeightContext } from "expo-router/js-tabs";
+import type { BottomTabNavigationProp } from "expo-router/js-tabs";
+import type { ParamListBase } from "expo-router/react-navigation";
 import { VerseCard } from "@/src/components/VerseCard";
 import { VerseCardSkeleton } from "@/src/components/VerseCardSkeleton";
 import { WordAnalysisBottomSheet } from "@/src/components/WordAnalysisBottomSheet";

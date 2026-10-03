@@ -1016,9 +1016,7 @@ const WordAnalysisBottomSheetComponent = (
     activeTab,
     isBesorah,
     lexiconEntry?.hebrew,
-    word?.dssWord,
-    word?.text,
-    word?.source_language,
+    word,
     showNikud,
     showCantillation,
   ]);
@@ -1038,7 +1036,7 @@ const WordAnalysisBottomSheetComponent = (
       displayBase = removeSofPasukForDisplay(displayBase);
     }
     return getPrefixSegments(displayBase, word.prefixes);
-  }, [isBesorah, showNikud, word?.text, word?.prefixes]);
+  }, [isBesorah, showNikud, word]);
 
   useEffect(() => {
     let cancelled = false;

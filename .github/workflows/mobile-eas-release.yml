@@ -159,7 +159,7 @@ jobs:
           cd mobile
 
           if [ "${{ inputs.release_kind }}" = "update" ]; then
-            eas update --channel "${{ inputs.profile }}" --auto --non-interactive
+            eas update --channel "${{ inputs.profile }}" --environment "${{ inputs.profile }}" --auto --non-interactive
           elif [ "${{ inputs.release_kind }}" = "build" ]; then
             eas build --platform "${{ inputs.platform }}" --profile "${{ inputs.profile }}" --non-interactive --wait
           else

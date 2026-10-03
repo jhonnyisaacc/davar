@@ -260,6 +260,7 @@ const NavigationSheetComponent = (
   const [step, setStep] = useState<Step>("book");
   const directionRef = useRef<"forward" | "back">("forward");
   const [selectedBookId, setSelectedBookId] = useState(currentBookId);
+  const [selectedChapter, setSelectedChapter] = useState(currentChapter);
 
   useImperativeHandle(
     ref,
@@ -293,7 +294,6 @@ const NavigationSheetComponent = (
   const snapPoints = useMemo(() => ["60%", "80%"], []);
   const { t } = useTranslation();
 
-  const [selectedChapter, setSelectedChapter] = useState(currentChapter);
   const [searchQuery, setSearchQuery] = useState("");
   const [booksMeta, setBooksMeta] = useState<BookMeta[]>([]);
   const [loadError, setLoadError] = useState<string | null>(null);

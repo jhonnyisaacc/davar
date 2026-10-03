@@ -1,6 +1,6 @@
 import * as Haptics from "expo-haptics";
 import { Pressable } from "react-native";
-import type { BottomTabBarButtonProps } from "@react-navigation/bottom-tabs";
+import type { BottomTabBarButtonProps } from "expo-router/js-tabs";
 
 type HapticTabProps = BottomTabBarButtonProps;
 

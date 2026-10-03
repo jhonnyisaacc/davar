@@ -43,7 +43,7 @@ const createStyles = (colors: ReturnType<typeof getColors>, tablet: boolean) =>
       justifyContent: "center",
     },
     highlight: {
-      ...StyleSheet.absoluteFillObject,
+      ...StyleSheet.absoluteFill,
       ...getNeumorphHighlightStyle(colors),
     },
     bookLabel: {

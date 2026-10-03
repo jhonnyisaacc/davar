@@ -55,6 +55,32 @@ Join our community of developers creating universal apps.
 - If you ever need to force Bun explicitly: `bun expo start --bun`
 - Bun is usually 4–25× faster than npm for installs, so you'll notice the difference right away.
 
+## iOS development with Xcode 27
+
+The mobile app uses Expo SDK 57 and React Native 0.86. The
+`expo-build-properties` plugin enables `ios.enableSceneSupport` so builds using
+Xcode 27 can launch on iOS 27. Expo CLI supports Device Hub.
+The generated iOS project targets iOS 16.4 or later.
+
+After upgrading dependencies, regenerate the ignored iOS project. Run these
+commands from `mobile/`:
+
+```bash
+bun install --frozen-lockfile
+bun x expo prebuild --clean --platform ios --no-install
+bun run ios --device "iPhone 18 Pro" --port 8082
+```
+
+The first build installs CocoaPods dependencies and compiles a new development
+client. Subsequent launches use `bun run ios --port 8082`. The OTA runtime version
+is `1.0.3`; this SDK upgrade requires a new native build before publishing updates
+to that runtime. EAS Update commands explicitly select their EAS environment.
+
+SDK 57 also adds React Compiler lint diagnostics. Existing native animation,
+layout, and state synchronization patterns remain warnings in the affected
+files; standard hook correctness rules remain errors. React Compiler skips
+unsupported components until those patterns are migrated.
+
 ## Formatting
 
 - This repository uses Biome as the formatter/linter source of truth for JS/TS files.
@@ -133,4 +159,3 @@ Checklist:
 5. Verify your local static server is running and bound to a non-loopback interface.
 
 The app now prints a dev diagnostic line with resolved static URLs and Metro host, and network errors include actionable hints for Android physical-device setup.
-
