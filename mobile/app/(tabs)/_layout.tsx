@@ -26,6 +26,10 @@ import {
   Users,
 } from "lucide-react-native";
 import { useAppStore } from "@/src/store/useAppStore";
+import {
+  NAVIGATION_DOCK_HEIGHT,
+  getNavigationDockBottomInset,
+} from "@/src/constants/navigationDock";
 
 const destinations = [
   { id: "assemblies", label: "Assemblies", icon: Users },
@@ -84,9 +88,9 @@ function NavigationDock({ state, navigation }: BottomTabBarProps) {
         position: "absolute",
         left: "50%",
         transform: [{ translateX: -dockWidth / 2 }],
-        bottom: Math.max(insets.bottom, 8),
+        bottom: getNavigationDockBottomInset(insets.bottom),
         width: dockWidth,
-        height: 72,
+        height: NAVIGATION_DOCK_HEIGHT,
         borderRadius: 32,
         shadowColor: "#000000",
         shadowOffset: { width: 0, height: 10 },

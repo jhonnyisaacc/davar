@@ -9,7 +9,11 @@ import {
 	TextInput,
 	View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import {
+	SafeAreaView,
+	useSafeAreaInsets,
+} from "react-native-safe-area-context";
+import { getNavigationDockContentPadding } from "@/src/constants/navigationDock";
 import {
 	ArrowLeft,
 	ArrowRight,
@@ -43,6 +47,7 @@ export default function CommentaryScreen() {
 	const accountId = account?.id;
 	const context = useCommentaryContext((s) => s.context);
 	const { colors, rtl } = useProductStyle();
+	const insets = useSafeAreaInsets();
 	const dark = colors.background === "#3C3836";
 	const surface = dark ? "#44403E" : "#F4EEE7";
 	const accent = dark ? "#BCD8FF" : "#4C72A8";
@@ -170,18 +175,24 @@ export default function CommentaryScreen() {
 	return (
 		<SafeAreaView
 			edges={["top"]}
-			style={{ flex: 1, backgroundColor: colors.background }}
+			style={{
+				flex: 1,
+				backgroundColor: colors.background,
+				// KeyboardAvoidingView controls its own bottom padding on iOS.
+				paddingBottom: getNavigationDockContentPadding(insets.bottom),
+			}}
 		>
 			<KeyboardAvoidingView
 				behavior={Platform.OS === "ios" ? "padding" : undefined}
-				style={{ flex: 1, paddingBottom: 100 }}
+				style={{ flex: 1 }}
 			>
 				<View
 					style={{
 						paddingHorizontal: 16,
 						flexDirection: rtl ? "row-reverse" : "row",
 						alignItems: "center",
-						justifyContent: "space-between",
+						justifyContent:
+							conversation || mode === "articles" ? "space-between" : "flex-end",
 					}}
 				>
 					{conversation || mode === "articles" ? (
@@ -190,17 +201,7 @@ export default function CommentaryScreen() {
 							setMode("chat");
 							setArticle(null);
 						})
-					) : (
-						<Text
-							style={{
-								fontFamily: "Inter_600SemiBold",
-								fontSize: 13,
-								color: colors.textSecondary,
-							}}
-						>
-							Davar · Chat
-						</Text>
-					)}
+					) : null}
 					<View style={{ flexDirection: "row", gap: 4 }}>
 						{icon("Articles", BookOpen, () => {
 							setMode("articles");
@@ -638,7 +639,7 @@ export default function CommentaryScreen() {
 						</Pressable>
 					</View>
 				) : (
-					<View style={{ position: "absolute", right: 20, bottom: 110 }}>
+					<View style={{ position: "absolute", right: 20, bottom: 12 }}>
 						{icon("Return to AI chat", ArrowLeft, () => setMode("chat"))}
 					</View>
 				)}
