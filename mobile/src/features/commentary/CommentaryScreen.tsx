@@ -25,13 +25,17 @@ import {
 	Plus,
 	ScrollText,
 	Sparkles,
-	Users,
+	User,
 } from "lucide-react-native";
 import type {
 	Article,
 	Conversation,
 	ProviderConnection,
 } from "@davar/shared/productContracts";
+import {
+	commentaryAccessLabel,
+	type CommentaryRuntime,
+} from "@davar/shared/commentaryPresentation";
 import { productApi, useSession } from "../account/session";
 import { SignIn } from "../account/SignIn";
 import { useCommentaryContext } from "./context";
@@ -39,7 +43,7 @@ import { Action, Card, Copy, Field, useProductStyle } from "../product/ui";
 const starters = [
 	{ label: "What is the Son of Man?", icon: ScrollText },
 	{ label: "What is the Son of God?", icon: Crown },
-	{ label: "What is the Father?", icon: Users },
+	{ label: "What is the Father?", icon: User },
 	{ label: "What is the meaning of faith?", icon: Sparkles },
 ];
 export default function CommentaryScreen() {
@@ -61,12 +65,26 @@ export default function CommentaryScreen() {
 	const [error, setError] = useState("");
 	const [busy, setBusy] = useState(false);
 	const [connections, setConnections] = useState<ProviderConnection[]>([]);
+	const [developmentProvider, setDevelopmentProvider] =
+		useState<CommentaryRuntime["commentary_provider"]>(null);
 	const [provider, setProvider] = useState("chatgpt");
 	const [credential, setCredential] = useState("");
 	const [model, setModel] = useState("");
 	const [connect, setConnect] = useState(false);
 	const sending = useRef(false);
 	const scroll = useRef<ScrollView>(null);
+	useEffect(() => {
+		let active = true;
+		productApi
+			.request<CommentaryRuntime>("/auth/providers", { public: true })
+			.then((runtime) => {
+				if (active) setDevelopmentProvider(runtime.commentary_provider ?? null);
+			})
+			.catch(() => {});
+		return () => {
+			active = false;
+		};
+	}, []);
 	useEffect(() => {
 		setConversation(null);
 		setPrompt("");
@@ -154,7 +172,10 @@ export default function CommentaryScreen() {
 		sending.current = false;
 	}
 	const needsConnection =
-		!!account && account.consultations_remaining === 0 && !connections.length;
+		!!account &&
+		account.consultations_remaining === 0 &&
+		!connections.length &&
+		!developmentProvider;
 	function icon(label: string, Icon: typeof BookOpen, action: () => void) {
 		return (
 			<Pressable
@@ -192,16 +213,18 @@ export default function CommentaryScreen() {
 						flexDirection: rtl ? "row-reverse" : "row",
 						alignItems: "center",
 						justifyContent:
-							conversation || mode === "articles" ? "space-between" : "flex-end",
+							conversation || mode === "articles"
+								? "space-between"
+								: "flex-end",
 					}}
 				>
-					{conversation || mode === "articles" ? (
-						icon("Back to chat", ArrowLeft, () => {
-							setConversation(null);
-							setMode("chat");
-							setArticle(null);
-						})
-					) : null}
+					{conversation || mode === "articles"
+						? icon("Back to chat", ArrowLeft, () => {
+								setConversation(null);
+								setMode("chat");
+								setArticle(null);
+							})
+						: null}
 					<View style={{ flexDirection: "row", gap: 4 }}>
 						{icon("Articles", BookOpen, () => {
 							setMode("articles");
@@ -395,9 +418,10 @@ export default function CommentaryScreen() {
 												color: accent,
 											}}
 										>
-											{connections.length
-												? "Your connected AI"
-												: "1 free consult · no login needed"}
+											{commentaryAccessLabel(
+												connections[0]?.provider,
+												developmentProvider,
+											)}
 										</Text>
 									</View>
 									{starters.map(({ label, icon: Icon }) => (
@@ -594,9 +618,9 @@ export default function CommentaryScreen() {
 						}}
 					>
 						<TextInput
-							accessibilityLabel="Ask about Shaul"
+							accessibilityLabel="Ask Davar"
 							placeholder={
-								needsConnection ? "Connect to keep asking…" : "Ask about Shaul…"
+								needsConnection ? "Connect to keep asking…" : "Ask Davar…"
 							}
 							placeholderTextColor={colors.textSecondary}
 							value={prompt}

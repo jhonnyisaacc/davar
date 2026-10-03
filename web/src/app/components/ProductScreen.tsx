@@ -1,6 +1,11 @@
 import { AssembliesWorkspace } from "./AssembliesWorkspace";
 import { CalendarPanel } from "./CalendarPanel";
 import { useCallback, useEffect, useState } from "react";
+import { User, type LucideIcon } from "lucide-react";
+import {
+	commentaryAccessLabel,
+	type CommentaryRuntime,
+} from "@davar/shared/commentaryPresentation";
 import type {
 	Account,
 	CommentaryContext,
@@ -34,6 +39,8 @@ export function ProductScreen({
 	const [prompt, setPrompt] = useState("");
 	const [history, setHistory] = useState<{ id: string; title: string }[]>([]);
 	const [connections, setConnections] = useState<ProviderConnection[]>([]);
+	const [developmentProvider, setDevelopmentProvider] =
+		useState<CommentaryRuntime["commentary_provider"]>(null);
 	const [conversation, setConversation] = useState<Conversation | null>(null);
 	const [provider, setProvider] = useState("chatgpt");
 	const [credential, setCredential] = useState("");
@@ -76,6 +83,36 @@ export function ProductScreen({
 				),
 			);
 	}, [mode, run]);
+	useEffect(() => {
+		if (screen !== "commentary") return;
+		let active = true;
+		productApi
+			.request<CommentaryRuntime>("/auth/providers", { public: true })
+			.then((runtime) => {
+				if (active) setDevelopmentProvider(runtime.commentary_provider ?? null);
+			})
+			.catch(() => {});
+		return () => {
+			active = false;
+		};
+	}, [screen]);
+	const accountId = account?.id;
+	useEffect(() => {
+		setConnections([]);
+		if (!accountId || screen !== "commentary") return;
+		let active = true;
+		productApi
+			.request<{ connections: ProviderConnection[] }>("/provider_connections")
+			.then((result) => {
+				if (active) setConnections(result.connections);
+			})
+			.catch((e) => {
+				if (active) setError(e.message);
+			});
+		return () => {
+			active = false;
+		};
+	}, [accountId, screen]);
 	const field = (
 		label: string,
 		value: string,
@@ -86,6 +123,7 @@ export function ProductScreen({
 			{label}
 			<input
 				aria-label={label}
+				placeholder={label === "Ask Davar" ? "Ask Davar…" : undefined}
 				type={secret ? "password" : "text"}
 				value={value}
 				onChange={(e) => set(e.target.value)}
@@ -93,13 +131,14 @@ export function ProductScreen({
 			/>
 		</label>
 	);
-	const button = (label: string, action: () => void) => (
+	const button = (label: string, action: () => void, Icon?: LucideIcon) => (
 		<button
 			type="button"
 			disabled={busy}
 			onClick={action}
-			className="rounded-full px-5 py-3 border border-[var(--primary)] bg-[var(--neomorph-bg)] disabled:opacity-50"
+			className="inline-flex items-center gap-2 rounded-full px-5 py-3 border border-[var(--primary)] bg-[var(--neomorph-bg)] disabled:opacity-50"
 		>
+			{Icon ? <Icon size={18} aria-hidden="true" /> : null}
 			{label}
 		</button>
 	);
@@ -223,7 +262,7 @@ export function ProductScreen({
 								What do you want to understand today?
 							</h2>
 							<p className="text-xs text-[var(--accent-deep)]">
-								1 free consult · no login needed
+								{commentaryAccessLabel(undefined, developmentProvider)}
 							</p>
 							{[
 								"What is the Son of Man?",
@@ -231,9 +270,15 @@ export function ProductScreen({
 								"What is the Father?",
 								"What is the meaning of faith?",
 							].map((label) => (
-								<div key={label}>{button(label, () => setPrompt(label))}</div>
+								<div key={label}>
+									{button(
+										label,
+										() => setPrompt(label),
+										label === "What is the Father?" ? User : undefined,
+									)}
+								</div>
 							))}
-							{field("Ask about Shaul", prompt, setPrompt)}
+							{field("Ask Davar", prompt, setPrompt)}
 							{button(
 								"Start free consultation",
 								() =>
@@ -249,7 +294,12 @@ export function ProductScreen({
 						</>
 					) : (
 						<>
-							<p>One free consultation, then connect your provider.</p>
+							<p className="text-xs text-[var(--accent-deep)]">
+								{commentaryAccessLabel(
+									connections[0]?.provider,
+									developmentProvider,
+								)}
+							</p>
 							{button(
 								"History",
 								() =>
@@ -308,7 +358,7 @@ export function ProductScreen({
 									))}
 								</NeumorphCard>
 							))}
-							{field("Ask about Scripture", prompt, setPrompt)}
+							{field("Ask Davar", prompt, setPrompt)}
 							{button(
 								"Send",
 								() =>
@@ -414,6 +464,13 @@ export function ProductScreen({
 												body: { provider, credential, model },
 											});
 											setCredential("");
+											setConnections(
+												(
+													await productApi.request<{
+														connections: ProviderConnection[];
+													}>("/provider_connections")
+												).connections,
+											);
 										}),
 								)}
 							</NeumorphCard>

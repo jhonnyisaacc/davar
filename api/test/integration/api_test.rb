@@ -4,6 +4,23 @@ class ApiTest < ActionDispatch::IntegrationTest
     _, token = Session.issue!(user)
     {"Authorization"=>"Bearer #{token}"}
   end
+  test "public provider metadata identifies the development commentary override" do
+    original = CommentaryProvider.method(:development_openrouter?)
+    [false, true].each do |enabled|
+      CommentaryProvider.define_singleton_method(:development_openrouter?) { enabled }
+      get "/api/v1/auth/providers"
+      assert_response :success
+      if enabled
+        assert_equal "openrouter", response.parsed_body["commentary_provider"]
+      else
+        assert_nil response.parsed_body["commentary_provider"]
+      end
+      assert response.parsed_body["providers"].all? { |provider| provider.keys.sort == %w[available id] }
+      assert_equal %w[commentary_provider providers], response.parsed_body.keys.sort
+    end
+  ensure
+    CommentaryProvider.define_singleton_method(:development_openrouter?, original)
+  end
   test "public calendar and articles work without an account" do
     get "/api/v1/articles"
     assert_response :success

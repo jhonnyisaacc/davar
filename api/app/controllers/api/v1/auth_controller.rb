@@ -9,7 +9,10 @@ module Api
         render json: {token: token}, status: :created
       end
       def providers
-        render json: {providers: %w[google apple facebook telegram x email].map { |id| {id: id, available: id == "email" || OauthProviders.available?(id)} }}
+        render json: {
+          providers: %w[google apple facebook telegram x email].map { |id| {id: id, available: id == "email" || OauthProviders.available?(id)} },
+          commentary_provider: CommentaryProvider.development_openrouter? ? "openrouter" : nil
+        }
       end
       def start
         throttle!("auth/#{request.remote_ip}", limit: 10)
