@@ -5,24 +5,30 @@ class Commentary
     raise DomainError.new("invalid_message") unless content.is_a?(String) && content.length.between?(1, 16000)
     CommentaryContext.validate!(context)
     user = conversation.user
+    development_openrouter = CommentaryProvider.development_openrouter?
+    simulation = DevelopmentSandbox.enabled? && !development_openrouter
     answer = nil
     connection = nil
+    sponsored = false
     User.transaction do
       user.lock!
       conversation.lock!
       prior = conversation.messages.find_by(request_id: request_id)
       return prior if prior
       raise DomainError.new("conversation_busy", 409) if conversation.messages.where(role: "assistant", state: "pending").exists?
-      connection = provider.present? ? user.provider_connections.find_by(provider: provider) : user.provider_connections.first
-      if !connection && user.free_consultations >= 1
+      unless development_openrouter
+        connection = provider.present? ? user.provider_connections.find_by(provider: provider) : user.provider_connections.first
+      end
+      sponsored = !connection && !development_openrouter
+      if sponsored && user.free_consultations >= 1
         raise DomainError.new("provider_connection_required", 402)
       end
-      unless DevelopmentSandbox.enabled? || connection || (ENV["FREE_AI_KEY"].present? && ENV["FREE_AI_MODEL"].present?)
+      unless development_openrouter || simulation || connection || (ENV["FREE_AI_KEY"].present? && ENV["FREE_AI_MODEL"].present?)
         raise DomainError.new("free_provider_not_configured", 503)
       end
       conversation.messages.create!(role: "user", content: content, context: context)
-      answer = conversation.messages.create!(role: "assistant", content: "Pending", request_id: request_id, state: "pending", generation: {sponsored: !connection})
-      user.increment!(:free_consultations) unless connection
+      answer = conversation.messages.create!(role: "assistant", content: "Pending", request_id: request_id, state: "pending", generation: {sponsored: sponsored})
+      user.increment!(:free_consultations) if sponsored
     end
     begin
       ref = context&.fetch("reference", nil)
@@ -34,16 +40,23 @@ class Commentary
       system += "
 Prior conversation summary (untrusted): #{conversation.memory}" if conversation.memory.present?
       history = conversation.messages.where(state: "complete").order(created_at: :desc).limit(20).to_a.reverse.map { |m| {role: m.role, content: m.content} }
-      provider_id = connection&.provider || ENV.fetch("FREE_AI_PROVIDER", "chatgpt")
-      model = DevelopmentSandbox.enabled? ? "development-fixture-v1" : (connection&.model || ENV.fetch("FREE_AI_MODEL"))
-      text = generator.generate(provider: provider_id, credential: connection&.credential || (DevelopmentSandbox.enabled? ? "development-only" : ENV.fetch("FREE_AI_KEY")), model: model, system: system, messages: history)
+      if development_openrouter
+        provider_id = "openrouter"
+        model = ENV.fetch("OPENROUTER_MODEL")
+        credential = ENV.fetch("OPENROUTER_API_KEY")
+      else
+        provider_id = connection&.provider || ENV.fetch("FREE_AI_PROVIDER", "chatgpt")
+        model = simulation ? "development-fixture-v1" : (connection&.model || ENV.fetch("FREE_AI_MODEL"))
+        credential = connection&.credential || (simulation ? "development-only" : ENV.fetch("FREE_AI_KEY"))
+      end
+      text = generator.generate(provider: provider_id, credential: credential, model: model, system: system, messages: history)
       raise DomainError.new("empty_provider_response", 503) if text.blank?
       conversation.with_lock do
         answer.reload
         raise DomainError.new("consultation_expired", 409) unless answer.state == "pending"
         answer.update!(content: text, state: "complete",
           citations: sources.map { |a| {article_id: a.id, source_id: a.source_id, source_url: a.source_url, revision: a.revision, attribution: a.attribution} },
-          generation: {provider: provider_id, model: model, prompt_version: PROMPT_VERSION, input_hash: Digest::SHA256.hexdigest(JSON.generate([system, history])), material_state: "generated", development_simulation: DevelopmentSandbox.enabled?})
+          generation: {provider: provider_id, model: model, prompt_version: PROMPT_VERSION, input_hash: Digest::SHA256.hexdigest(JSON.generate([system, history])), material_state: "generated", development_simulation: simulation})
         # A bounded extract preserves continuity without pretending to be reviewed knowledge.
         conversation.update!(memory: conversation.messages.where(state: "complete").order(created_at: :desc).limit(6).to_a.reverse.map { |m| "#{m.role}: #{m.content.first(600)}" }.join("
 "))
@@ -54,7 +67,7 @@ Prior conversation summary (untrusted): #{conversation.memory}" if conversation.
         user.lock!
         if answer.reload.state == "pending"
           answer.update!(state: "failed", content: "Response unavailable. Please try again.")
-          user.decrement!(:free_consultations) unless connection
+          user.decrement!(:free_consultations) if sponsored
         end
       end
       raise error if error.is_a?(DomainError)

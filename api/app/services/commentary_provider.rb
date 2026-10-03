@@ -2,9 +2,12 @@ class CommentaryProvider
   def self.supported?(provider)
     %w[claude grok chatgpt gemini].include?(provider)
   end
+  def self.development_openrouter?
+    Rails.env.development? && ENV["OPENROUTER_API_KEY"].present? && ENV["OPENROUTER_MODEL"].present?
+  end
   def self.generate(provider:, credential:, model:, system:, messages:)
-    raise DomainError.new("provider_not_supported", 503) unless supported?(provider)
-    return DevelopmentSandbox.generate(messages: messages) if DevelopmentSandbox.enabled?
+    raise DomainError.new("provider_not_supported", 503) unless supported?(provider) || (provider == "openrouter" && Rails.env.development?)
+    return DevelopmentSandbox.generate(messages: messages) if DevelopmentSandbox.enabled? && provider != "openrouter"
     case provider
     when "claude"
       result = ProviderHttp.json("https://api.anthropic.com/v1/messages", method: :post,
@@ -20,7 +23,7 @@ class CommentaryProvider
       result.fetch("candidates").first.fetch("content").fetch("parts").map { |p| p["text"] }.join("
 ")
     else
-      base = provider == "grok" ? "https://api.x.ai/v1" : "https://api.openai.com/v1"
+      base = {"grok" => "https://api.x.ai/v1", "chatgpt" => "https://api.openai.com/v1", "openrouter" => "https://openrouter.ai/api/v1"}.fetch(provider)
       result = ProviderHttp.json("#{base}/chat/completions", method: :post,
         headers: {"Authorization" => "Bearer #{credential}"},
         body: {model: model, messages: [{role: "system", content: system}] + messages})

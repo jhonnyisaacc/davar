@@ -1,8 +1,33 @@
 require "test_helper"
 require "open3"
 require "rbconfig"
+require "tmpdir"
 
 class EnvironmentConfigTest < ActiveSupport::TestCase
+  test "development loads dotenv settings and preserves exported overrides" do
+    Dir.mktmpdir do |directory|
+      file = File.join(directory, ".env.development")
+      File.write(file, "OPENROUTER_API_KEY=development-file-key\nOPENROUTER_MODEL=fixture/file-model\n")
+      code = <<~RUBY
+        require #{Rails.root.join("config/boot").to_s.inspect}
+        require "rails"
+        Bundler.require(*Rails.groups)
+        Dotenv::Rails.files = [#{file.inspect}]
+        require #{Rails.root.join("config/environment").to_s.inspect}
+        puts JSON.generate(openrouter: CommentaryProvider.development_openrouter?, model: ENV.fetch("OPENROUTER_MODEL"), key_loaded: ENV["OPENROUTER_API_KEY"] == "development-file-key")
+      RUBY
+      [nil, "fixture/exported-model"].each do |override|
+        env = {"RAILS_ENV" => "development", "DAVAR_DEV_SANDBOX" => nil, "OPENROUTER_API_KEY" => nil, "OPENROUTER_MODEL" => override}
+        output, error, status = Open3.capture3(env, RbConfig.ruby, "-e", code)
+        assert status.success?, error
+        result = JSON.parse(output.lines.last)
+        assert_equal true, result["openrouter"]
+        assert_equal true, result["key_loaded"]
+        assert_equal override || "fixture/file-model", result["model"]
+      end
+    end
+  end
+
   def hosted_environment(name)
     {
       "RAILS_ENV" => name,
@@ -23,9 +48,10 @@ class EnvironmentConfigTest < ActiveSupport::TestCase
       code = <<~RUBY
         config = Rails.application.config
         database = ActiveRecord::Base.configurations.configs_for(env_name: Rails.env).first.configuration_hash[:database]
-        puts JSON.generate(environment: Rails.env.to_s, database: database, ssl: config.force_ssl, reload: config.enable_reloading, eager: config.eager_load, local_errors: config.consider_all_requests_local)
+        puts JSON.generate(environment: Rails.env.to_s, database: database, ssl: config.force_ssl, reload: config.enable_reloading, eager: config.eager_load, local_errors: config.consider_all_requests_local, openrouter: CommentaryProvider.development_openrouter?, dotenv_loaded: defined?(Dotenv::Rails).present?)
       RUBY
-      output, error, status = Open3.capture3(hosted_environment(name), RbConfig.ruby, Rails.root.join("bin/rails").to_s, "runner", code)
+      env = hosted_environment(name).merge("OPENROUTER_API_KEY" => "unused-test-key", "OPENROUTER_MODEL" => "fixture/model")
+      output, error, status = Open3.capture3(env, RbConfig.ruby, Rails.root.join("bin/rails").to_s, "runner", code)
       assert status.success?, error
       result = JSON.parse(output.lines.last)
       assert_equal name, result["environment"]
@@ -34,6 +60,8 @@ class EnvironmentConfigTest < ActiveSupport::TestCase
       assert_equal true, result["eager"]
       assert_equal false, result["reload"]
       assert_equal false, result["local_errors"]
+      assert_equal false, result["openrouter"]
+      assert_equal false, result["dotenv_loaded"]
     end
   end
 

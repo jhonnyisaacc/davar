@@ -79,6 +79,14 @@ reset, sign out/stale-session recovery and sign in again.
 
 ## Simulated integrations
 
+For live commentary, copy `api/.env.development.example` to
+`api/.env.development`, set `OPENROUTER_API_KEY` and a full `OPENROUTER_MODEL` ID,
+then restart Rails. In development these settings override simulated AI and
+personal provider connections, without consuming the free consultation quota.
+The banner reports **live AI via OpenRouter**; other sandbox integrations remain
+active. Clear either value and restart to exercise the simulation and quota cases
+below. The API key stays on the Rails server and the local env file is Git-ignored.
+
 - City search: Buenos Aires, Jerusalem, Madrid and São Paulo, approximate centers.
   City selections still use signed tokens and normal profile updates.
 - Commentary: one free successful consultation, then a provider connection is

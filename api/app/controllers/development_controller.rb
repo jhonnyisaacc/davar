@@ -4,7 +4,10 @@ class DevelopmentController < ActionController::API
     response.set_header("Cache-Control", "no-store")
   end
   def status
-    render json: {sandbox: true, simulations: %w[ai cities articles calendar-fixtures], mailbox_url: "#{request.base_url}/development/mailbox"}
+    openrouter = CommentaryProvider.development_openrouter?
+    simulations = %w[cities articles calendar-fixtures]
+    simulations.unshift("ai") unless openrouter
+    render json: {sandbox: true, simulations: simulations, commentary_provider: openrouter ? "openrouter" : "simulation", mailbox_url: "#{request.base_url}/development/mailbox"}
   end
   def mailbox
     directory = Rails.root.join("tmp/sandbox-mail")

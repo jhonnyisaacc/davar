@@ -9,6 +9,7 @@ lib/bore/UPSTREAM.md. No client calculates Biblical dates.
 
 From api/:
 - `bundle install`
+- `cp .env.development.example .env.development` and fill in local settings.
 - `python3 -m pip install -r requirements.txt`
 - Start PostgreSQL directly or `docker compose up -d`.
 - `bundle exec rails db:prepare`
@@ -37,8 +38,12 @@ pages are hidden, and logs go to stdout. Only configuration and data differ.
 | Staging | davar_v2_staging via its own DATABASE_URL | .env.staging.example |
 | Production | davar_v2_production via its own DATABASE_URL | .env.production.example |
 
-Examples contain no credentials and are not automatically loaded by Rails. Inject
-them through your local environment manager or host secret manager. From api/,
+Examples contain no credentials. In development, `dotenv-rails` automatically
+loads local `.env` files from `api/`; use `.env.development` for local settings.
+Existing shell variables take precedence, followed by `.env.development.local`,
+`.env.local`, `.env.development`, and `.env`. Real `.env` files are Git-ignored.
+The gem loads only in development, so automated tests and hosted environments do
+not read these files. Staging and production use their host secret managers. From api/,
 start with `RAILS_ENV=development bundle exec rails server`,
 `RAILS_ENV=staging bundle exec rails server`, or
 `RAILS_ENV=production bundle exec rails server` after configuring the environment.
@@ -55,6 +60,33 @@ require its own scheme/provider app configuration before live callback validatio
 
 This PR configures and tests these environments; hosted resources have not been
 provisioned or deployed.
+
+## OpenRouter commentary in development
+
+Rails does not load `.env` files by itself; `dotenv-rails` supplies that behavior
+for local development. Use `api/.env.development` (rather than `.development.env`)
+and set both variables:
+
+```dotenv
+OPENROUTER_API_KEY=your-development-api-key
+OPENROUTER_MODEL=provider/model-id
+```
+
+Choose the full model ID from the [OpenRouter models catalog](https://openrouter.ai/models).
+Restart Rails after changing the file. When both values are present and Rails is
+in development, every commentary request uses the server's OpenRouter configuration
+instead of personal provider connections or simulated AI. This also works with
+`api/bin/dev-sandbox start`; its other simulated integrations remain active and
+the development banner identifies live AI. No provider connection is required,
+and these development requests do not consume the sponsored consultation quota.
+The usual request throttling, authorized grounding, conversation ownership,
+history, failure handling, and retry deduplication still apply.
+
+With either value absent, the existing provider/sandbox behavior applies.
+OpenRouter is rejected outside development even if its environment variables are
+set. Staging and production continue to use personal connections and `FREE_AI_*`.
+The key stays in Rails; never put it in `PUBLIC_*` or `EXPO_PUBLIC_*` variables.
+Only empty placeholders are committed in the example files.
 
 ## Authentication
 
@@ -219,5 +251,7 @@ From the repository root, `api/bin/dev-sandbox setup` prepares an isolated Postg
 cluster and synthetic fixtures; `api/bin/dev-sandbox start` runs Rails, web and Expo.
 The launcher sets `DAVAR_DEV_SANDBOX=1` only in development. Staging and production
 reject the flag. The local inbox/status routes exist only in sandbox development
-and require loopback requests. No external AI, geocoder, email or Telegram calls
-are made by the simulated integrations. OAuth adapters remain unchanged.
+and require loopback requests. By default no external AI, geocoder, email or
+Telegram calls are made by the simulated integrations. Configuring both
+`OPENROUTER_API_KEY` and `OPENROUTER_MODEL` opts commentary into live AI as described
+above. OAuth adapters remain unchanged.
