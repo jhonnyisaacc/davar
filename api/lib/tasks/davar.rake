@@ -37,7 +37,7 @@ namespace :davar do
   end
   desc "Issue an operator-managed invitation code"
   task issue_invitation: :environment do
-    code = SecureRandom.hex(12)
+    code = SecureRandom.alphanumeric(7).upcase
     AccessCode.create!(code_digest: AccessCode.digest(code), expires_at: 30.days.from_now, max_uses: 100)
     puts code
   end

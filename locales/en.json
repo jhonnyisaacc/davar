@@ -8,6 +8,16 @@
     "getOnGooglePlay": "Get it on Google Play",
     "serverWaking": "Waking server, first request may take a moment."
   },
+  "assemblies": {
+    "splashLabel": "ASSEMBLIES",
+    "welcome": "Welcome",
+    "invitationCopy": "Enter the code from your congregation leader.",
+    "accessCode": "Access code",
+    "continue": "Continue",
+    "back": "Back",
+    "invalidCode": "This code could not be verified. Confirm it with your leader and try again.",
+    "accessUnavailable": "Access is unavailable right now. Please try again."
+  },
   "navigation": {
     "goHome": "Go to home",
     "selectBook": "Book",

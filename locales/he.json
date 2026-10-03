@@ -8,6 +8,16 @@
     "getOnGooglePlay": "זמין ב-Google Play",
     "serverWaking": "מאתחל שרת, הבקשה הראשונה עשויה להימשך רגע."
   },
+  "assemblies": {
+    "splashLabel": "קהילות",
+    "welcome": "ברוכים הבאים",
+    "invitationCopy": "הזינו את הקוד שקיבלתם ממנהיג הקהילה.",
+    "accessCode": "קוד גישה",
+    "continue": "המשך",
+    "back": "חזרה",
+    "invalidCode": "לא ניתן לאמת את הקוד. בדקו אותו עם מנהיג הקהילה ונסו שוב.",
+    "accessUnavailable": "הגישה אינה זמינה כרגע. נסו שוב."
+  },
   "navigation": {
     "goHome": "לדף הבית",
     "selectBook": "ספר",

@@ -17,7 +17,17 @@ import {
 	useProductStyle,
 } from "../product/ui";
 import { Onboarding } from "./Onboarding";
+import { AssembliesEntry } from "./AssembliesEntry";
+
 export default function AssembliesScreen() {
+	return (
+		<AssembliesEntry>
+			<AssembliesContent />
+		</AssembliesEntry>
+	);
+}
+
+function AssembliesContent() {
 	const { colors } = useProductStyle();
 	const [changeCity, setChangeCity] = useState(false);
 	const account = useSession((s) => s.account);

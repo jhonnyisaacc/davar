@@ -1,6 +1,6 @@
 class DevelopmentFixtures
   EMAILS = %w[fresh starting reader applicant leader-one leader-two].map { |name| "#{name}@example.test" }.freeze
-  INVITATION = "DAVAR-LOCAL"
+  INVITATION = "DAVAR01"
   def self.reset!
     DevelopmentSandbox.require_enabled!
     User.transaction do

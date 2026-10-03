@@ -8,6 +8,16 @@
     "getOnGooglePlay": "Disponible en Google Play",
     "serverWaking": "Iniciando servidor, la primera solicitud puede tardar un momento."
   },
+  "assemblies": {
+    "splashLabel": "ASAMBLEAS",
+    "welcome": "Bienvenido",
+    "invitationCopy": "Introduce el código de tu líder de congregación.",
+    "accessCode": "Código de acceso",
+    "continue": "Continuar",
+    "back": "Volver",
+    "invalidCode": "No se pudo verificar este código. Confírmalo con tu líder e inténtalo de nuevo.",
+    "accessUnavailable": "El acceso no está disponible ahora. Inténtalo de nuevo."
+  },
   "navigation": {
     "goHome": "Ir al inicio",
     "selectBook": "Libro",
