@@ -282,17 +282,19 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 			<div className="flex min-h-[65vh] flex-col justify-center gap-8">
 				{city ? header(t("calendar.nav")) : null}
 				<div className="space-y-3.5">
-					<MapPin
-						size={28}
-						className="text-[var(--accent-deep)]"
-						aria-hidden="true"
-					/>
-					<h1
-						className="whitespace-pre-line text-[38px] leading-[1.12]"
-						style={{ fontFamily: "Manrope, sans-serif" }}
-					>
-						{t("calendar.chooseCity")}
-					</h1>
+					<div className="flex items-center gap-3">
+						<MapPin
+							size={28}
+							className="shrink-0 text-[var(--accent-deep)]"
+							aria-hidden="true"
+						/>
+						<h1
+							className="min-w-0 flex-1 text-[38px] leading-[1.12]"
+							style={{ fontFamily: "Manrope, sans-serif" }}
+						>
+							{t("calendar.chooseCity").replaceAll("\n", " ")}
+						</h1>
+					</div>
 					<p className="text-[15px] leading-relaxed text-[var(--text-secondary)]">
 						{t("calendar.cityExplanation")}
 					</p>

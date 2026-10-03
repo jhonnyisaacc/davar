@@ -362,20 +362,30 @@ export default function CalendarScreen() {
           <View
             style={{ gap: 14, alignItems: rtl ? "flex-end" : "flex-start" }}
           >
-            <MapPin size={28} color={colors.primary} />
-            <Text
-              accessibilityRole="header"
+            <View
               style={{
-                fontFamily: "Manrope_400Regular",
-                fontSize: 38,
-                lineHeight: 43,
-                color: colors.textPrimary,
-                textAlign: rtl ? "right" : "left",
-                writingDirection: rtl ? "rtl" : "ltr",
+                width: "100%",
+                flexDirection: rtl ? "row-reverse" : "row",
+                alignItems: "center",
+                gap: 12,
               }}
             >
-              {t("calendar.chooseCity")}
-            </Text>
+              <MapPin size={28} color={colors.primary} />
+              <Text
+                accessibilityRole="header"
+                style={{
+                  flex: 1,
+                  fontFamily: "Manrope_400Regular",
+                  fontSize: 38,
+                  lineHeight: 43,
+                  color: colors.textPrimary,
+                  textAlign: rtl ? "right" : "left",
+                  writingDirection: rtl ? "rtl" : "ltr",
+                }}
+              >
+                {t("calendar.chooseCity").replaceAll("\n", " ")}
+              </Text>
+            </View>
             <Text
               style={{
                 fontFamily: "Inter_400Regular",
