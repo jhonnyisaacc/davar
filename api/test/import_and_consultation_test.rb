@@ -40,11 +40,12 @@ class ImportAndConsultationTest < ActiveSupport::TestCase
     user = User.create!(display_name: "Fixture")
     conversation = user.conversations.create!(title: "Fixture")
     broken = Class.new { def self.generate(**); raise IOError, "private upstream body"; end }
+    commentary_article
     error = assert_raises(DomainError) { Commentary.ask!(conversation: conversation, content: "Study", context: nil, request_id: "failure_001", generator: broken) }
     assert_equal "provider_response_unavailable", error.message
     assert_equal 0, user.reload.free_consultations
     assert_equal "failed", conversation.messages.find_by!(request_id: "failure_001").state
-    success = Class.new { def self.generate(**); "No evidence supplied."; end }
+    success = Class.new { def self.generate(**); '{"answer":"Study this passage cautiously.","source_ids":["fixture:commentary"]}'; end }
     Commentary.ask!(conversation: conversation, content: "Study", context: nil, request_id: "success_001", generator: success)
     assert_equal 1, user.reload.free_consultations
     assert_raises(DomainError) { Commentary.ask!(conversation: conversation, content: "Again", context: nil, request_id: "success_002", generator: success) }

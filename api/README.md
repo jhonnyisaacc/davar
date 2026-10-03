@@ -126,6 +126,63 @@ Expo SecureStore changes runtimeVersion to 1.0.2. A future release requires
 eas build then eas submit, not an OTA update against the previous runtime.
 Do not run publication commands for this PR.
 
+## Shaul-backed Commentary
+
+The local corpus copies public Shaul notes and knowledge verbatim from revision
+`8c94b0fe9eca817e22340430309801d0ef76125b`. Ingestion does not call an LLM or
+change source files, editorial claims, knowledge schemas or Scripture datasets.
+The original repository license and note credits remain in the artifact.
+Private directories, drafts, templates, private-path disclosures and authoring
+guidance are excluded with reasons in the coverage report.
+
+From the repository root, prepare a separate checkout and generate the corpus:
+
+```sh
+git clone --no-checkout https://github.com/jhonnyisaacc/shaul.git /private/tmp/davar-shaul
+git -C /private/tmp/davar-shaul checkout --detach 8c94b0fe9eca817e22340430309801d0ef76125b
+python3 -m scripts.commentary.build --shaul-root /private/tmp/davar-shaul
+```
+
+PyYAML is required. Outputs are ignored in `data/commentary/generated/`:
+`corpus.json` contains exact UTF-8 text, hashes, byte/line locations and search
+indexes; `report.json` accounts for every discovered record and lists unresolved
+references, broken links and existing traceability findings. Unverified reference
+numbering stays in Shaul's native labels; selected Davar verses match only verified
+mappings. Native reference searches such as `Juan 1:51` do not assert a numbering
+conversion.
+
+Rails defaults to `../data/commentary/generated/corpus.json`. Set
+`COMMENTARY_CORPUS_PATH` to use another artifact and `COMMENTARY_EVIDENCE_BYTES`
+to adjust the default 32768-byte evidence budget (1024–131072). Tests use synthetic
+sources unless a corpus path is explicitly configured. Refreshes are explicit:
+build into a new empty directory with `--output`, review its report, then switch
+the path. Startup/search verifies artifact, source and section hashes and caches
+the result in memory. No database import or external search service is needed.
+
+Search prefers original aliases, concept links and references, then keywords.
+Evidence includes at most three sources and six complete sections, including each
+note's scope, cautions and credits. Sources whose necessary sections cannot fit
+are omitted. A normal matched question uses one generation call. Short follow-ups
+reuse source IDs revalidated against the current corpus; explicit new topics take
+precedence. Responses must contain answer text and known cited source IDs; invalid
+responses fail and refund sponsored consultations. Local OpenRouter requests use
+JSON mode, with the response schema and allowed source IDs in the prompt.
+Live checks with the configured development model failed with nested `json_schema` requests.
+Rails checks the returned structure and citations. Answers use short, plain
+"What it is / What it is not" blocks, with a brief specific caution when needed.
+The provider returns separate labels and lists with at most two points each;
+Rails validates and formats them as ordinary answer text for both clients.
+The existing string answer format remains accepted for provider compatibility.
+Missing coverage produces a clear response without an LLM call or quota charge. Existing permitted articles
+remain supported. Citations show source titles and section labels and open the
+original file at the pinned revision.
+
+Validation from the repository root:
+`python3 -m pytest -q tests/test_commentary_corpus.py tests/test_knowledge_*.py`.
+From `api/`: `PYTHON_BIN=/path/to/python mise exec -- bundle exec rails test`.
+From `mobile/`: `bun test`, `bun run typecheck`, and `bun run lint`.
+From `web/`: `bun test`, `bun run typecheck`, and `bun run lint`.
+
 ## Domain APIs
 
 All routes are under /api/v1. Private responses use no-store.

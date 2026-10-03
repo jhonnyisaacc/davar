@@ -17,6 +17,7 @@
 		"serve": "bun --env-file=.env ./server.ts",
 		"serve:mobile": "BUN_IDLE_TIMEOUT=0 bun --env-file=.env ./server.ts",
 		"test": "bun test",
+		"typecheck": "tsc --noEmit",
 		"test:static-data": "bun test src/app/services/staticData.test.js",
 		"lint": "bunx --bun @biomejs/biome lint build.ts server.ts src scripts shared functions package.json tsconfig.json biome.json",
 		"format": "bunx --bun @biomejs/biome format --write build.ts server.ts src scripts shared functions package.json tsconfig.json biome.json",

@@ -82,7 +82,9 @@ export type Article = {
 	permissions?: { public_display?: boolean; ai_grounding?: boolean };
 };
 export type Citation = {
-	article_id: string;
+	article_id?: string;
+	title?: string;
+	section_labels?: string[];
 	source_id: string;
 	source_url: string;
 	revision: string;

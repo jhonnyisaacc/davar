@@ -2,6 +2,7 @@ import {
 	type CommentaryRuntime,
 	commentaryAccessLabel,
 } from "@davar/shared/commentaryPresentation";
+import { commentaryCitationLabel } from "@davar/shared/commentaryCitations";
 import type {
 	Account,
 	Article,
@@ -355,13 +356,14 @@ export function ProductScreen({
 									<p>{message.role}</p>
 									<p className="whitespace-pre-wrap">{message.content}</p>
 									{message.citations?.map((c) => (
-										<a
-											key={c.source_id}
-											href={c.source_url}
+									<a
+										key={c.source_id}
+										className="block text-sm leading-relaxed text-[var(--accent-deep)] underline underline-offset-2"
+										href={c.source_url}
 											target="_blank"
 											rel="noreferrer"
 										>
-											{c.attribution}
+											{commentaryCitationLabel(c)}
 										</a>
 									))}
 								</NeumorphCard>

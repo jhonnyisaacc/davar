@@ -114,8 +114,9 @@ class DomainTest < ActiveSupport::TestCase
     user = reader
     ProviderConnection.create!(user: user, provider: "chatgpt", credential: "mock-key", model: "pinned-model")
     conversation = user.conversations.create!(title: "Study")
-    generator = Class.new { def self.generate(**); "No supplied evidence supports an answer."; end }
-    answer = Commentary.ask!(conversation: conversation, content: "Explain", context: nil, request_id: "request_001", generator: generator)
+    commentary_article
+    generator = Class.new { def self.generate(**); '{"answer":"Supplied evidence needs verification.","source_ids":["fixture:commentary"]}'; end }
+    answer = Commentary.ask!(conversation: conversation, content: "Explain", context: commentary_context, request_id: "request_001", generator: generator)
     assert_equal "generated", answer.generation["material_state"]
     assert_equal "complete", answer.state
     assert conversation.reload.memory.present?

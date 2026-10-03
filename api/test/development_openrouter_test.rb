@@ -8,6 +8,7 @@ class DevelopmentOpenrouterTest < ActiveSupport::TestCase
     ENV_KEYS.each { |key| ENV.delete(key) }
     ENV["OPENROUTER_API_KEY"] = "development-test-key"
     ENV["OPENROUTER_MODEL"] = "fixture/model"
+    commentary_article
   end
 
   teardown do
@@ -22,7 +23,7 @@ class DevelopmentOpenrouterTest < ActiveSupport::TestCase
     Rails.define_singleton_method(:env, original)
   end
 
-  def with_http_response(response = {"choices" => [{"message" => {"content" => "No authorized evidence was supplied."}}]})
+  def with_http_response(response = {"choices" => [{"message" => {"content" => '{"answer":"Supplied evidence needs verification.","source_ids":["fixture:commentary"]}'}}]})
     original = ProviderHttp.method(:json)
     requests = []
     ProviderHttp.define_singleton_method(:json) do |url, **options|
@@ -36,7 +37,7 @@ class DevelopmentOpenrouterTest < ActiveSupport::TestCase
   end
 
   def ask(conversation, request_id: "request_001", **options)
-    Commentary.ask!(conversation: conversation, content: "Explain this passage", context: nil, request_id: request_id, **options)
+    Commentary.ask!(conversation: conversation, content: "Explain this passage", context: commentary_context, request_id: request_id, **options)
   end
 
   test "OpenRouter requires development and both nonblank settings" do
@@ -62,7 +63,7 @@ class DevelopmentOpenrouterTest < ActiveSupport::TestCase
       with_http_response do |requests|
         text = CommentaryProvider.generate(provider: "openrouter", credential: ENV.fetch("OPENROUTER_API_KEY"),
           model: ENV.fetch("OPENROUTER_MODEL"), system: "Authorized evidence only", messages: [{role: "user", content: "Explain"}])
-        assert_equal "No authorized evidence was supplied.", text
+        assert_equal '{"answer":"Supplied evidence needs verification.","source_ids":["fixture:commentary"]}', text
         assert_equal [{url: "https://openrouter.ai/api/v1/chat/completions", method: :post,
           headers: {"Authorization" => "Bearer development-test-key"},
           body: {model: "fixture/model", messages: [{role: "system", content: "Authorized evidence only"}, {role: "user", content: "Explain"}]}}], requests
@@ -94,6 +95,12 @@ class DevelopmentOpenrouterTest < ActiveSupport::TestCase
         assert_equal "openrouter", answer.generation["provider"]
         assert_equal "fixture/model", answer.generation["model"]
         assert_equal false, answer.generation["development_simulation"]
+        assert_equal({type: "json_object"}, requests.first[:body][:response_format])
+        schema = JSON.parse(requests.first[:body][:messages].first[:content].split("Required JSON response schema (format rules, not source evidence): ").last)
+        assert_equal ["answer", "source_ids"], schema["required"]
+        assert_includes schema["properties"]["source_ids"]["items"]["enum"], "fixture:commentary"
+        assert_equal 2, schema["properties"]["answer"]["properties"]["positive"]["maxItems"]
+        assert_equal 2, schema["properties"]["answer"]["properties"]["negative"]["maxItems"]
         assert_not_includes JSON.generate(answer.as_json), "development-test-key"
         assert_equal answer.id, ask(conversation).id
         assert_equal 1, requests.length

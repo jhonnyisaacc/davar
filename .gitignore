@@ -162,3 +162,6 @@ plans/*
 venv/
 __pycache__/
 *.pyc
+
+# Generated, source-preserving Shaul Commentary corpus (rebuilt explicitly).
+data/commentary/generated/

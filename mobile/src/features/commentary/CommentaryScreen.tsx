@@ -36,6 +36,7 @@ import {
 	commentaryAccessLabel,
 	type CommentaryRuntime,
 } from "@davar/shared/commentaryPresentation";
+import { commentaryCitationLabel } from "@davar/shared/commentaryCitations";
 import { productApi, useSession } from "../account/session";
 import { SignIn } from "../account/SignIn";
 import { useCommentaryContext } from "./context";
@@ -380,7 +381,7 @@ export default function CommentaryScreen() {
 											onPress={() => void Linking.openURL(source.source_url)}
 										>
 											<Text style={{ fontSize: 11, color: accent }}>
-												{source.attribution} · Source
+												{commentaryCitationLabel(source)}
 											</Text>
 										</Pressable>
 									))}
