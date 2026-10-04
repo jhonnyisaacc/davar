@@ -32,11 +32,21 @@ import {
 } from "../product/ui";
 import { Onboarding } from "./Onboarding";
 import { AssembliesEntry } from "./AssembliesEntry";
+import { useProductCapabilities } from "../product/useProductCapabilities";
+import { useTranslation } from "@/src/i18n/useTranslation";
 
 const assembliesApi = createAssembliesClient(productApi);
 
 export default function AssembliesScreen() {
 	const accountId = useSession((s) => s.account?.id);
+	const { capabilities } = useProductCapabilities();
+	const { t } = useTranslation();
+	if (!capabilities.flags.assemblies)
+		return (
+			<Page title={t("tabs.assemblies")}>
+				<Copy>{t("featureAvailability.assembliesUnavailable")}</Copy>
+			</Page>
+		);
 	return (
 		<AssembliesEntry>
 			<AssembliesContent key={accountId || "guest"} />

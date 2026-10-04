@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import Markdown from "react-native-markdown-display";
 import {
 	KeyboardAvoidingView,
 	Linking,
@@ -33,14 +34,15 @@ import type {
 	ProviderConnection,
 } from "@davar/shared/productContracts";
 import {
-	commentaryAccessLabel,
-	type CommentaryRuntime,
-} from "@davar/shared/commentaryPresentation";
+	useProductCapabilities,
+	capabilitiesStore,
+} from "../product/useProductCapabilities";
+import { useTranslation } from "@/src/i18n/useTranslation";
+import { ProviderConnections } from "./ProviderConnections";
 import { commentaryCitationLabel } from "@davar/shared/commentaryCitations";
 import { productApi, useSession } from "../account/session";
-import { SignIn } from "../account/SignIn";
 import { useCommentaryContext } from "./context";
-import { Action, Card, Copy, Field, useProductStyle } from "../product/ui";
+import { Action, Card, Copy, useProductStyle } from "../product/ui";
 const starters = [
 	{ label: "What is the Son of Man?", icon: ScrollText },
 	{ label: "What is the Son of God?", icon: Crown },
@@ -48,6 +50,11 @@ const starters = [
 	{ label: "What is the meaning of faith?", icon: Sparkles },
 ];
 export default function CommentaryScreen() {
+	const { capabilities, ready } = useProductCapabilities();
+	const { t } = useTranslation();
+	const canConnect =
+		capabilities.flags.ai_provider_connections &&
+		capabilities.ai.providers.length > 0;
 	const account = useSession((s) => s.account);
 	const accountId = account?.id;
 	const context = useCommentaryContext((s) => s.context);
@@ -56,8 +63,11 @@ export default function CommentaryScreen() {
 	const dark = colors.background === "#3C3836";
 	const surface = dark ? "#44403E" : "#F4EEE7";
 	const accent = dark ? "#BCD8FF" : "#4C72A8";
-	const [mode, setMode] = useState<"chat" | "articles">("chat");
+	const [selectedMode, setMode] = useState<"chat" | "articles">("chat");
+	const mode = capabilities.ai.available ? selectedMode : "articles";
 	const [articles, setArticles] = useState<Article[]>([]);
+	const [articlesLoading, setArticlesLoading] = useState(true);
+	const [nextOffset, setNextOffset] = useState<number | null>(null);
 	const [article, setArticle] = useState<Article | null>(null);
 	const [conversation, setConversation] = useState<Conversation | null>(null);
 	const [history, setHistory] = useState<{ id: string; title: string }[]>([]);
@@ -66,54 +76,65 @@ export default function CommentaryScreen() {
 	const [error, setError] = useState("");
 	const [busy, setBusy] = useState(false);
 	const [connections, setConnections] = useState<ProviderConnection[]>([]);
-	const [developmentProvider, setDevelopmentProvider] =
-		useState<CommentaryRuntime["commentary_provider"]>(null);
-	const [provider, setProvider] = useState("chatgpt");
-	const [credential, setCredential] = useState("");
-	const [model, setModel] = useState("");
 	const [connect, setConnect] = useState(false);
+	const connectedProvider = connections.find((c) =>
+		capabilities.ai.providers.includes(c.provider),
+	);
 	const sending = useRef(false);
 	const scroll = useRef<ScrollView>(null);
 	useEffect(() => {
-		let active = true;
-		productApi
-			.request<CommentaryRuntime>("/auth/providers", { public: true })
-			.then((runtime) => {
-				if (active) setDevelopmentProvider(runtime.commentary_provider ?? null);
-			})
-			.catch(() => {});
-		return () => {
-			active = false;
-		};
-	}, []);
+		if (article) scroll.current?.scrollTo({ y: 0, animated: false });
+	}, [article]);
 	useEffect(() => {
 		setConversation(null);
 		setPrompt("");
-		setCredential("");
 		setHistory([]);
 		setConnections([]);
 		if (!accountId) return;
+		let active = true;
 		productApi
 			.request<{ conversations: typeof history }>("/conversations", {
 				cache: true,
 			})
-			.then((r) => setHistory(r.conversations))
+			.then((r) => {
+				if (active) setHistory(r.conversations);
+			})
 			.catch((e) => setError(e.message));
-		productApi
-			.request<{ connections: ProviderConnection[] }>("/provider_connections")
-			.then((r) => setConnections(r.connections))
-			.catch((e) => setError(e.message));
-	}, [accountId]);
-	useEffect(() => {
-		if (mode === "articles")
+		if (canConnect)
 			productApi
-				.request<{ articles: Article[] }>("/articles", {
-					public: true,
-					cache: true,
+				.request<{ connections: ProviderConnection[] }>("/provider_connections")
+				.then((r) => {
+					if (active) setConnections(r.connections);
 				})
-				.then((r) => setArticles(r.articles))
 				.catch((e) => setError(e.message));
-	}, [mode]);
+		return () => {
+			active = false;
+		};
+	}, [accountId, canConnect]);
+	const loadArticles = useCallback(async (offset = 0) => {
+		setArticlesLoading(true);
+		try {
+			const result = await productApi.request<{
+				articles: Article[];
+				next_offset?: number | null;
+			}>(`/articles${offset ? `?offset=${offset}` : ""}`, {
+				public: true,
+				cache: true,
+			});
+			setArticles((previous) =>
+				offset ? [...previous, ...result.articles] : result.articles,
+			);
+			setNextOffset(result.next_offset ?? null);
+		} finally {
+			setArticlesLoading(false);
+		}
+	}, []);
+	useEffect(() => {
+		if (ready && mode === "articles")
+			void Promise.resolve()
+				.then(() => loadArticles())
+				.catch((e) => setError(e.message));
+	}, [mode, ready, loadArticles]);
 	async function run(action: () => Promise<void>) {
 		setBusy(true);
 		setError("");
@@ -138,23 +159,23 @@ export default function CommentaryScreen() {
 		sending.current = true;
 		const content = prompt;
 		await run(async () => {
-			if (!useSession.getState().account) {
-				const result = await productApi.request<{ token: string }>(
-					"/auth/guest",
-					{ method: "POST", public: true },
-				);
-				await useSession.getState().accept(result.token);
-			}
-			const id =
-				conversation?.id ||
-				(
-					await productApi.request<{ id: string }>("/conversations", {
-						method: "POST",
-						body: { title: content.slice(0, 80) },
-					})
-				).id;
-			setConversation({ id, title: content.slice(0, 80), messages: [] });
 			try {
+				if (!useSession.getState().account) {
+					const result = await productApi.request<{ token: string }>(
+						"/auth/guest",
+						{ method: "POST", public: true },
+					);
+					await useSession.getState().accept(result.token);
+				}
+				const id =
+					conversation?.id ||
+					(
+						await productApi.request<{ id: string }>("/conversations", {
+							method: "POST",
+							body: { title: content.slice(0, 80) },
+						})
+					).id;
+				setConversation({ id, title: content.slice(0, 80), messages: [] });
 				await productApi.request(`/conversations/${id}/messages`, {
 					method: "POST",
 					body: {
@@ -165,18 +186,18 @@ export default function CommentaryScreen() {
 				});
 				setPrompt("");
 				useCommentaryContext.getState().setContext(null);
-			} finally {
 				await open(id);
 				await useSession.getState().refresh();
+			} catch {
+				setMode("articles");
+				setError(t("featureAvailability.aiUnavailable"));
+				void capabilitiesStore.refresh();
 			}
 		});
 		sending.current = false;
 	}
-	const needsConnection =
-		!!account &&
-		account.consultations_remaining === 0 &&
-		!connections.length &&
-		!developmentProvider;
+	const needsConnection = !capabilities.ai.available;
+
 	function icon(label: string, Icon: typeof BookOpen, action: () => void) {
 		return (
 			<Pressable
@@ -219,7 +240,7 @@ export default function CommentaryScreen() {
 								: "flex-end",
 					}}
 				>
-					{conversation || mode === "articles"
+					{capabilities.ai.available && (conversation || mode === "articles")
 						? icon("Back to chat", ArrowLeft, () => {
 								setConversation(null);
 								setMode("chat");
@@ -231,10 +252,11 @@ export default function CommentaryScreen() {
 							setMode("articles");
 							setArticle(null);
 						})}
-						{icon("Conversation history", History, () =>
-							setShowHistory(!showHistory),
-						)}
-						{account
+						{capabilities.ai.available &&
+							icon("Conversation history", History, () =>
+								setShowHistory(!showHistory),
+							)}
+						{account && capabilities.ai.available
 							? icon("New conversation", Plus, () => {
 									setConversation(null);
 									setConnect(false);
@@ -261,7 +283,7 @@ export default function CommentaryScreen() {
 							{error}
 						</Text>
 					) : null}
-					{showHistory ? (
+					{capabilities.ai.available && showHistory ? (
 						<>
 							{history.length ? (
 								history.map((item) => (
@@ -285,15 +307,51 @@ export default function CommentaryScreen() {
 									color: colors.textPrimary,
 								}}
 							>
-								Articles
+								{t("featureAvailability.articles")}
 							</Text>
+							{!capabilities.ai.available && (
+								<Copy>{t("featureAvailability.articleIntro")}</Copy>
+							)}
 							{article ? (
 								<>
 									<Copy>{article.title}</Copy>
-									<Copy>{article.body}</Copy>
+									<Markdown
+										onLinkPress={(url) => /^https?:\/\//i.test(url)}
+										style={{
+											body: {
+												color: colors.textPrimary,
+												fontFamily: "Inter_400Regular",
+												fontSize: 14,
+												lineHeight: 22,
+												writingDirection:
+													article.locale === "he" ? "rtl" : "ltr",
+												textAlign: article.locale === "he" ? "right" : "left",
+											},
+											link: { color: accent },
+											code_inline: {
+												color: colors.textPrimary,
+												backgroundColor: surface,
+											},
+											fence: {
+												color: colors.textPrimary,
+												backgroundColor: surface,
+											},
+											blockquote: {
+												color: colors.textPrimary,
+												backgroundColor: surface,
+											},
+											table: { borderColor: colors.border },
+										}}
+									>
+										{article.body || ""}
+									</Markdown>
 									<Copy>{article.attribution}</Copy>
 									<Action
-										label="Read source"
+										label={t("featureAvailability.back")}
+										onPress={() => setArticle(null)}
+									/>
+									<Action
+										label={t("featureAvailability.readSource")}
 										onPress={() => void Linking.openURL(article.source_url)}
 									/>
 								</>
@@ -324,8 +382,18 @@ export default function CommentaryScreen() {
 									</Pressable>
 								))
 							)}
-							{!articles.length && !article ? (
-								<Copy>No published articles available yet.</Copy>
+							{!article && nextOffset !== null && (
+								<Action
+									label={t("featureAvailability.moreArticles")}
+									disabled={busy}
+									onPress={() => void run(() => loadArticles(nextOffset))}
+								/>
+							)}
+							{articlesLoading && !articles.length && (
+								<Copy>{t("common.loading")}</Copy>
+							)}
+							{!articlesLoading && !articles.length && !article ? (
+								<Copy>{t("featureAvailability.noArticles")}</Copy>
 							) : null}
 						</>
 					) : (
@@ -419,10 +487,11 @@ export default function CommentaryScreen() {
 												color: accent,
 											}}
 										>
-											{commentaryAccessLabel(
-												connections[0]?.provider,
-												developmentProvider,
-											)}
+											{connectedProvider
+												? t("featureAvailability.providerAi", {
+														provider: connectedProvider.provider,
+													})
+												: t("featureAvailability.sharedAi")}
 										</Text>
 									</View>
 									{starters.map(({ label, icon: Icon }) => (
@@ -458,95 +527,6 @@ export default function CommentaryScreen() {
 									))}
 								</>
 							) : null}
-							{needsConnection || connect ? (
-								<>
-									<View
-										style={{ alignItems: "center", gap: 12, paddingTop: 20 }}
-									>
-										<View
-											style={{
-												width: 56,
-												height: 56,
-												borderRadius: 28,
-												backgroundColor: dark ? "#92B5E81A" : "#7AA0D61F",
-												alignItems: "center",
-												justifyContent: "center",
-											}}
-										>
-											<Lock size={24} color={accent} />
-										</View>
-										<Text
-											style={{
-												fontFamily: "Manrope_600SemiBold",
-												fontSize: 22,
-												color: colors.textPrimary,
-												textAlign: "center",
-											}}
-										>
-											To continue, connect your AI
-										</Text>
-										<Copy>
-											Your connected AI powers the response. Only authorized
-											sources are used for grounding.
-										</Copy>
-									</View>
-									{!account?.providers.length ? (
-										<SignIn link={!!account} />
-									) : (
-										<>
-											{[
-												["claude", "Claude"],
-												["chatgpt", "ChatGPT"],
-												["grok", "Grok"],
-												["gemini", "Gemini"],
-											].map(([id, label]) => (
-												<Action
-													key={id}
-													label={(provider === id ? "✓ " : "") + label}
-													onPress={() => setProvider(id)}
-												/>
-											))}
-											<Copy>
-												Muse is unavailable until its supported integration is
-												established. These connections use provider API keys;
-												consumer subscriptions may not include API access.
-											</Copy>
-											<Field
-												label="API key"
-												value={credential}
-												onChange={setCredential}
-												secret
-											/>
-											<Field
-												label="Model ID"
-												value={model}
-												onChange={setModel}
-											/>
-											<Action
-												label="Connect"
-												disabled={busy || !credential || !model}
-												onPress={() =>
-													void run(async () => {
-														await productApi.request("/provider_connections", {
-															method: "POST",
-															body: { provider, credential, model },
-														});
-														setCredential("");
-														setConnect(false);
-														setConnections(
-															(
-																await productApi.request<{
-																	connections: ProviderConnection[];
-																}>("/provider_connections")
-															).connections,
-														);
-													})
-												}
-											/>
-										</>
-									)}
-								</>
-							) : null}
 							{conversation ? (
 								<View style={{ gap: 8 }}>
 									<Action
@@ -577,34 +557,27 @@ export default function CommentaryScreen() {
 									/>
 								</View>
 							) : null}
-							{account?.providers.length && !needsConnection ? (
+							{canConnect && account?.providers.length ? (
 								<Action
-									label="Manage AI connection"
+									label={t("featureAvailability.manageProviders")}
 									onPress={() => setConnect(!connect)}
 								/>
 							) : null}
-							{connect
-								? connections.map((connection) => (
-										<Action
-											key={connection.id}
-											label={"Disconnect " + connection.provider}
-											onPress={() =>
-												void run(async () => {
-													await productApi.request(
-														`/provider_connections/${connection.id}`,
-														{ method: "DELETE" },
-													);
-													setConnections(
-														connections.filter(
-															(item) => item.id !== connection.id,
-														),
-													);
-												})
-											}
-										/>
-									))
-								: null}
 						</>
+					)}
+					{canConnect && mode === "articles" && (
+						<Action
+							label={t("featureAvailability.connectProvider")}
+							onPress={() => setConnect(!connect)}
+						/>
+					)}
+					{canConnect && connect && (
+						<ProviderConnections
+							key={accountId || "guest"}
+							providers={capabilities.ai.providers}
+							connections={connections}
+							onConnections={setConnections}
+						/>
 					)}
 				</ScrollView>
 				{mode === "chat" ? (
@@ -663,11 +636,13 @@ export default function CommentaryScreen() {
 							)}
 						</Pressable>
 					</View>
-				) : (
+				) : capabilities.ai.available ? (
 					<View style={{ position: "absolute", right: 20, bottom: 12 }}>
-						{icon("Return to AI chat", ArrowLeft, () => setMode("chat"))}
+						{icon(t("featureAvailability.returnAi"), ArrowLeft, () =>
+							setMode("chat"),
+						)}
 					</View>
-				)}
+				) : null}
 			</KeyboardAvoidingView>
 		</SafeAreaView>
 	);

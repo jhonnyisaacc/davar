@@ -474,5 +474,26 @@
     "openSource": "פתיחת המקור",
     "empty": "טרם פורסמו מקורות פרשנות.",
     "unavailable": "קטלוג המאמרים אינו זמין. ניתן לבקר במקור שלמעלה."
+  },
+  "featureAvailability": {
+    "moreArticles": "מאמרים נוספים",
+    "assembliesUnavailable": "הקהילות יהיו זמינות בקרוב.",
+    "articles": "מאמרי שאול",
+    "articleIntro": "עיינו במאמרי שאול ולמדו את מקורותיהם.",
+    "aiUnavailable": "הבינה המלאכותית אינה זמינה כרגע. אפשר להמשיך לקרוא את מאמרי שאול.",
+    "sharedAi": "בינה מלאכותית בחינם דרך OpenRouter",
+    "providerAi": "באמצעות חיבור ה־API שלכם ל־{provider}",
+    "returnAi": "חזרה לשיחת הבינה המלאכותית",
+    "readSource": "קריאת המקור",
+    "read": "קריאה",
+    "back": "חזרה",
+    "noArticles": "עדיין אין מאמרים שפורסמו.",
+    "manageProviders": "ניהול חיבורי בינה מלאכותית",
+    "connectProvider": "חיבור ספק בינה מלאכותית",
+    "disconnect": "ניתוק",
+    "providerApiNotice": "התחברו עם מפתח API של הספק. מנוי צרכני עשוי שלא לכלול גישה ל־API.",
+    "apiKey": "מפתח API",
+    "modelId": "מזהה המודל",
+    "aiProvider": "ספק בינה מלאכותית"
   }
 }

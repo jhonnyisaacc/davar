@@ -474,5 +474,26 @@
     "openSource": "Open source",
     "empty": "No commentary sources have been published yet.",
     "unavailable": "The article catalog is unavailable. You can still visit the source above."
+  },
+  "featureAvailability": {
+    "moreArticles": "More articles",
+    "assembliesUnavailable": "Assemblies will be available soon.",
+    "articles": "Shaul’s articles",
+    "articleIntro": "Explore Shaul’s articles and study their sources.",
+    "aiUnavailable": "AI is unavailable right now. You can keep reading Shaul’s articles.",
+    "sharedAi": "Free AI through OpenRouter",
+    "providerAi": "Powered by your {provider} API connection",
+    "returnAi": "Return to AI chat",
+    "readSource": "Read source",
+    "read": "Read",
+    "back": "Back",
+    "noArticles": "No published articles available yet.",
+    "manageProviders": "Manage AI connections",
+    "connectProvider": "Connect an AI provider",
+    "disconnect": "Disconnect",
+    "providerApiNotice": "Connect with a provider API key. A consumer subscription may not include API access.",
+    "apiKey": "API key",
+    "modelId": "Model ID",
+    "aiProvider": "AI provider"
   }
 }

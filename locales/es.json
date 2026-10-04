@@ -474,5 +474,26 @@
     "openSource": "Abrir fuente",
     "empty": "Todavía no se han publicado fuentes de comentarios.",
     "unavailable": "El catálogo de artículos no está disponible. Puedes visitar la fuente de arriba."
+  },
+  "featureAvailability": {
+    "moreArticles": "Más artículos",
+    "assembliesUnavailable": "Las asambleas estarán disponibles pronto.",
+    "articles": "Artículos de Shaul",
+    "articleIntro": "Explora los artículos de Shaul y estudia sus fuentes.",
+    "aiUnavailable": "La IA no está disponible ahora. Puedes seguir leyendo los artículos de Shaul.",
+    "sharedAi": "IA gratuita mediante OpenRouter",
+    "providerAi": "Con tu conexión API de {provider}",
+    "returnAi": "Volver al chat de IA",
+    "readSource": "Leer la fuente",
+    "read": "Leer",
+    "back": "Volver",
+    "noArticles": "Todavía no hay artículos publicados.",
+    "manageProviders": "Administrar conexiones de IA",
+    "connectProvider": "Conectar un proveedor de IA",
+    "disconnect": "Desconectar",
+    "providerApiNotice": "Conecta con una clave API del proveedor. Una suscripción de consumo puede no incluir acceso a la API.",
+    "apiKey": "Clave API",
+    "modelId": "ID del modelo",
+    "aiProvider": "Proveedor de IA"
   }
 }

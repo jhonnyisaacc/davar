@@ -7,6 +7,8 @@ import { CommentaryScreen } from "../features/commentary/CommentaryScreen";
 import { productControls } from "../features/product/controls";
 import { AssembliesEntry } from "./AssembliesEntry";
 import { AssembliesWorkspace } from "./AssembliesWorkspace";
+import { useProductCapabilities } from "../hooks/useProductCapabilities";
+import { useTranslation } from "../hooks/useTranslation";
 export function ProductScreen({
 	screen,
 	language,
@@ -16,6 +18,8 @@ export function ProductScreen({
 	screen: "commentary" | "assemblies";
 	language: "en" | "es" | "he";
 }) {
+	const { capabilities } = useProductCapabilities();
+	const { t } = useTranslation(language);
 	const { account, ready: sessionReady, error: sessionError } = useWebSession();
 	const setAccount = webSession.setAccount;
 	const [error, setError] = useState("");
@@ -41,6 +45,17 @@ export function ProductScreen({
 			onStatus={setError}
 		/>
 	);
+	if (screen === "assemblies" && !capabilities.flags.assemblies) {
+		return (
+			<main
+				dir={language === "he" ? "rtl" : "ltr"}
+				className="max-w-4xl mx-auto px-6 py-12 text-[var(--text-primary)]"
+			>
+				<h1 className="text-3xl font-semibold">{t("tabs.assemblies")}</h1>
+				<p className="mt-4">{t("featureAvailability.assembliesUnavailable")}</p>
+			</main>
+		);
+	}
 	const content = (
 		<main
 			dir={language === "he" ? "rtl" : "ltr"}
@@ -61,6 +76,7 @@ export function ProductScreen({
 			) : null}
 			{screen === "commentary" ? (
 				<CommentaryScreen
+					language={language}
 					account={account}
 					context={context}
 					busy={busy}

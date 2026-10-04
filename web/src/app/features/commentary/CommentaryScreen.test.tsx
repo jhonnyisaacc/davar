@@ -1,6 +1,8 @@
 import { afterEach, expect, spyOn, test } from "bun:test";
 import { Window } from "happy-dom";
 import { CommentaryScreen } from "./CommentaryScreen";
+import { capabilitiesStore } from "../../hooks/useProductCapabilities";
+import { CLOSED_CAPABILITIES } from "@davar/shared/productCapabilities";
 import { productApi } from "../../services/productApi";
 import type { Account, Citation } from "@davar/shared/productContracts";
 const dom = new Window({ url: "http://localhost:5300/commentary" });
@@ -30,7 +32,15 @@ afterEach(() => {
 	cleanup();
 	request.mockRestore();
 });
-const account = { id: "reader" } as Account;
+const enabled = {
+	flags: {
+		ai_provider_connections: false,
+		ai_shared_openrouter: true,
+		assemblies: false,
+	},
+	ai: { available: true, shared_openrouter: true, providers: [] },
+};
+const account = { id: "reader", providers: ["email"] } as Account;
 const props = {
 	account,
 	busy: false,
@@ -44,7 +54,7 @@ const props = {
 
 test("account changes clear private conversations while retaining citation links on the active account", async () => {
 	request = spyOn(productApi, "request").mockImplementation(async (path) => {
-		if (path === "/auth/providers") return {} as never;
+		if (path === "/capabilities") return enabled as never;
 		if (path === "/provider_connections") return { connections: [] } as never;
 		if (path === "/conversations")
 			return {
@@ -71,6 +81,7 @@ test("account changes clear private conversations while retaining citation links
 			],
 		} as never;
 	});
+	await capabilitiesStore.refresh();
 	const ui = render(<CommentaryScreen {...props} />);
 	fireEvent.click(ui.getByRole("button", { name: "History" }));
 	await waitFor(() =>
@@ -92,7 +103,7 @@ test("account changes clear private conversations while retaining citation links
 
 test("logout retains public article navigation without fetching the library or runtime again", async () => {
 	request = spyOn(productApi, "request").mockImplementation(async (path) => {
-		if (path === "/auth/providers") return {} as never;
+		if (path === "/capabilities") return enabled as never;
 		if (path === "/provider_connections") return { connections: [] } as never;
 		return {
 			articles: [
@@ -104,8 +115,9 @@ test("logout retains public article navigation without fetching the library or r
 			],
 		} as never;
 	});
+	await capabilitiesStore.refresh();
 	const ui = render(<CommentaryScreen {...props} />);
-	fireEvent.click(ui.getByRole("button", { name: "▤ Articles" }));
+	fireEvent.click(ui.getByRole("button", { name: "Shaul’s articles" }));
 	await waitFor(() => expect(ui.getByText("Public article")).toBeTruthy());
 	ui.rerender(<CommentaryScreen {...props} account={null} />);
 	expect(ui.getByText("Public article")).toBeTruthy();
@@ -115,6 +127,124 @@ test("logout retains public article navigation without fetching the library or r
 		request.mock.calls.filter(([path]) => path === "/articles"),
 	).toHaveLength(1);
 	expect(
-		request.mock.calls.filter(([path]) => path === "/auth/providers"),
-	).toHaveLength(1);
+		request.mock.calls.filter(([path]) => path === "/capabilities"),
+	).toHaveLength(2);
+});
+
+test("closed flags show attributed articles and no AI or provider controls", async () => {
+	request = spyOn(productApi, "request").mockImplementation(async (path) => {
+		if (path === "/capabilities") return CLOSED_CAPABILITIES as never;
+		if (path === "/articles")
+			return {
+				articles: [
+					{
+						id: "public",
+						title: "Public study",
+						attribution: "Required credit",
+					},
+				],
+			} as never;
+		throw new Error(`Unexpected request ${path}`);
+	});
+	await capabilitiesStore.refresh();
+	const ui = render(<CommentaryScreen {...props} />);
+	await waitFor(() => expect(ui.getByText("Public study")).toBeTruthy());
+	expect(ui.getByText("Required credit")).toBeTruthy();
+	expect(ui.queryByRole("button", { name: "Send" })).toBeNull();
+	expect(ui.queryByRole("button", { name: "Return to AI chat" })).toBeNull();
+	expect(ui.queryByLabelText("API key")).toBeNull();
+	expect(
+		request.mock.calls.some(([path]) => path === "/provider_connections"),
+	).toBe(false);
+});
+
+test("AI errors switch to public articles with useful feedback", async () => {
+	request = spyOn(productApi, "request").mockImplementation(async (path) => {
+		if (path === "/capabilities") return enabled as never;
+		if (path === "/articles")
+			return {
+				articles: [
+					{
+						id: "public",
+						title: "Public study",
+						attribution: "Required credit",
+					},
+				],
+			} as never;
+		throw new Error("unavailable");
+	});
+	await capabilitiesStore.refresh();
+	const ui = render(<CommentaryScreen {...props} prompt="Study" />);
+	fireEvent.click(ui.getByRole("button", { name: "Send" }));
+	await waitFor(() => expect(ui.getByText("Public study")).toBeTruthy());
+	expect(ui.getByRole("status").textContent).toContain("AI is unavailable");
+	expect(ui.queryByLabelText("Ask Davar")).toBeNull();
+});
+
+test("approved API connections remain reachable when shared AI is disabled", async () => {
+	const available = {
+		flags: {
+			ai_provider_connections: true,
+			ai_shared_openrouter: false,
+			assemblies: false,
+		},
+		ai: { available: false, shared_openrouter: false, providers: ["claude"] },
+	};
+	request = spyOn(productApi, "request").mockImplementation(async (path) => {
+		if (path === "/capabilities") return available as never;
+		if (path === "/articles") return { articles: [] } as never;
+		if (path === "/provider_connections") return { connections: [] } as never;
+		throw new Error(`Unexpected request ${path}`);
+	});
+	await capabilitiesStore.refresh();
+	const ui = render(<CommentaryScreen {...props} />);
+	await waitFor(() => expect(ui.getByLabelText("AI provider")).toBeTruthy());
+	expect(ui.getAllByRole("option").map((option) => option.textContent)).toEqual(
+		["claude"],
+	);
+	expect(
+		ui.getByRole("button", { name: "Connect an AI provider" }),
+	).toBeTruthy();
+	expect(ui.queryByRole("button", { name: "Send" })).toBeNull();
+});
+
+test("AI-off articles render Markdown with tables, credits, RTL and safe links", async () => {
+	const article = {
+		id: "markdown",
+		title: "Public study",
+		locale: "he",
+		attribution: "Original credit",
+		source_url: "https://example.test/original",
+		body: "# Study heading\n\n**Important**\n\n- First point\n\n| Word | Meaning |\n| --- | --- |\n| One | First |\n\n[Study link](https://example.test/source)\n\n<script>alert('unsafe')</script>\n\n[Unsafe](javascript:alert(1))",
+	};
+	request = spyOn(productApi, "request").mockImplementation(async (path) => {
+		if (path === "/capabilities") return CLOSED_CAPABILITIES as never;
+		if (path === "/articles") return { articles: [article] } as never;
+		if (path === "/articles/markdown") return article as never;
+		throw new Error(`Unexpected request ${path}`);
+	});
+	await capabilitiesStore.refresh();
+	const ui = render(<CommentaryScreen {...props} />);
+	await waitFor(() => expect(ui.getByText("Public study")).toBeTruthy());
+	fireEvent.click(ui.getByRole("button", { name: "Read" }));
+	await waitFor(() =>
+		expect(ui.getByRole("heading", { name: "Study heading" })).toBeTruthy(),
+	);
+	expect(ui.container.querySelector("strong")?.textContent).toBe("Important");
+	expect(ui.getByRole("listitem").textContent).toBe("First point");
+	expect(ui.getByRole("table")).toBeTruthy();
+	expect(ui.getByText("Original credit")).toBeTruthy();
+	expect(
+		ui
+			.getByRole("heading", { name: "Study heading" })
+			.parentElement?.getAttribute("dir"),
+	).toBe("rtl");
+	const link = ui.getByRole("link", { name: "Study link" });
+	expect(link.getAttribute("href")).toBe("https://example.test/source");
+	expect(link.getAttribute("rel")).toBe("noreferrer");
+	expect(ui.container.querySelector("script")).toBeNull();
+	expect(ui.getByText("Unsafe").getAttribute("href")).not.toContain(
+		"javascript:",
+	);
+	expect(ui.queryByRole("button", { name: "Send" })).toBeNull();
 });

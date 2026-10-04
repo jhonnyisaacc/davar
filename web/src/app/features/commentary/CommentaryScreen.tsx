@@ -1,9 +1,13 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { User } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import {
-	commentaryAccessLabel,
-	type CommentaryRuntime,
-} from "@davar/shared/commentaryPresentation";
+	useProductCapabilities,
+	capabilitiesStore,
+} from "../../hooks/useProductCapabilities";
+import { useTranslation } from "../../hooks/useTranslation";
+import type { ProductCapabilities } from "@davar/shared/productCapabilities";
 import { commentaryCitationLabel } from "@davar/shared/commentaryCitations";
 import type {
 	Account,
@@ -20,6 +24,7 @@ import {
 import { NeumorphCard } from "../../components/NeumorphCard";
 import { productControls } from "../product/controls";
 type CommentaryProps = {
+	language?: "en" | "es" | "he";
 	account: Account | null;
 	context?: CommentaryContext | null;
 	busy: boolean;
@@ -29,43 +34,60 @@ type CommentaryProps = {
 	setPrompt: (prompt: string) => void;
 };
 
-function useCommentaryLibrary(run: CommentaryProps["run"]) {
+function useCommentaryLibrary(
+	run: CommentaryProps["run"],
+	aiAvailable: boolean,
+	ready: boolean,
+) {
 	const [articles, setArticles] = useState<Article[]>([]);
+	const [articlesLoading, setArticlesLoading] = useState(true);
+	const [nextOffset, setNextOffset] = useState<number | null>(null);
 	const [article, setArticle] = useState<Article | null>(null);
-	const [mode, setMode] = useState<"chat" | "articles">("chat");
-	const [developmentProvider, setDevelopmentProvider] =
-		useState<CommentaryRuntime["commentary_provider"]>(null);
 	useEffect(() => {
-		if (mode === "articles")
-			void run(async () =>
-				setArticles(
-					(
-						await productApi.request<{ articles: Article[] }>("/articles", {
-							public: true,
-							cache: true,
-						})
-					).articles,
-				),
+		if (article) window.scrollTo({ top: 0 });
+	}, [article]);
+	const [selectedMode, setMode] = useState<"chat" | "articles">("chat");
+	const mode = aiAvailable ? selectedMode : "articles";
+	const loadArticles = useCallback(async (offset = 0) => {
+		setArticlesLoading(true);
+		try {
+			const result = await productApi.request<{
+				articles: Article[];
+				next_offset?: number | null;
+			}>(`/articles${offset ? `?offset=${offset}` : ""}`, {
+				public: true,
+				cache: true,
+			});
+			setArticles((previous) =>
+				offset ? [...previous, ...result.articles] : result.articles,
 			);
-	}, [mode, run]);
-	useEffect(() => {
-		let active = true;
-		productApi
-			.request<CommentaryRuntime>("/auth/providers", { public: true })
-			.then((runtime) => {
-				if (active) setDevelopmentProvider(runtime.commentary_provider ?? null);
-			})
-			.catch(() => {});
-		return () => {
-			active = false;
-		};
+			setNextOffset(result.next_offset ?? null);
+		} finally {
+			setArticlesLoading(false);
+		}
 	}, []);
-
-	return { articles, article, setArticle, mode, setMode, developmentProvider };
+	useEffect(() => {
+		if (ready && mode === "articles") void run(() => loadArticles());
+	}, [mode, ready, run, loadArticles]);
+	return {
+		articles,
+		article,
+		setArticle,
+		mode,
+		setMode,
+		nextOffset,
+		loadArticles,
+		articlesLoading,
+	};
 }
 
 export function CommentaryScreen(props: CommentaryProps) {
-	const library = useCommentaryLibrary(props.run);
+	const { capabilities, ready } = useProductCapabilities();
+	const library = useCommentaryLibrary(
+		props.run,
+		capabilities.ai.available,
+		ready,
+	);
 	useEffect(() => {
 		if (!props.account) library.setArticle(null);
 	}, [props.account, library.setArticle]);
@@ -73,6 +95,7 @@ export function CommentaryScreen(props: CommentaryProps) {
 		<CommentaryWorkspace
 			key={props.account?.id || "guest"}
 			{...props}
+			capabilities={capabilities}
 			library={library}
 		/>
 	);
@@ -87,14 +110,40 @@ function CommentaryWorkspace({
 	prompt,
 	setPrompt,
 	library,
-}: CommentaryProps & { library: ReturnType<typeof useCommentaryLibrary> }) {
-	const { articles, article, setArticle, mode, setMode, developmentProvider } =
-		library;
+	capabilities,
+	language = "en",
+}: CommentaryProps & {
+	library: ReturnType<typeof useCommentaryLibrary>;
+	capabilities: ProductCapabilities;
+}) {
+	const {
+		articles,
+		article,
+		setArticle,
+		mode,
+		setMode,
+		nextOffset,
+		loadArticles,
+		articlesLoading,
+	} = library;
+	const { t } = useTranslation(language);
+	const canConnect =
+		capabilities.flags.ai_provider_connections &&
+		capabilities.ai.providers.length > 0;
+	const registered = !!account?.providers?.length;
 	const setAccount = webSession.setAccount;
 	const [error, setError] = useState("");
 	const { field, button } = productControls(busy);
 	const [history, setHistory] = useState<{ id: string; title: string }[]>([]);
 	const [connections, setConnections] = useState<ProviderConnection[]>([]);
+	const connectedProvider = connections.find((c) =>
+		capabilities.ai.providers.includes(c.provider),
+	);
+	const accessLabel = connectedProvider
+		? t("featureAvailability.providerAi", {
+				provider: connectedProvider.provider,
+			})
+		: t("featureAvailability.sharedAi");
 	const [conversation, setConversation] = useState<Conversation | null>(null);
 	const [provider, setProvider] = useState("chatgpt");
 	const [credential, setCredential] = useState("");
@@ -102,7 +151,7 @@ function CommentaryWorkspace({
 	const accountId = account?.id;
 	useEffect(() => {
 		setConnections([]);
-		if (!accountId) return;
+		if (!accountId || !canConnect) return;
 		let active = true;
 		productApi
 			.request<{ connections: ProviderConnection[] }>("/provider_connections")
@@ -115,27 +164,134 @@ function CommentaryWorkspace({
 		return () => {
 			active = false;
 		};
-	}, [accountId]);
+	}, [accountId, canConnect]);
+	useEffect(() => {
+		if (!capabilities.ai.providers.includes(provider))
+			setProvider(capabilities.ai.providers[0] || "");
+	}, [capabilities.ai.providers, provider]);
 
+	const providerPanel =
+		registered && canConnect ? (
+			<NeumorphCard className="p-6 space-y-3">
+				{button(
+					t("featureAvailability.manageProviders"),
+					() =>
+						void run(async () =>
+							setConnections(
+								(
+									await productApi.request<{
+										connections: ProviderConnection[];
+									}>("/provider_connections")
+								).connections,
+							),
+						),
+				)}
+				{connections.map((connection) => (
+					<div key={connection.id}>
+						<p>
+							{connection.provider} · {connection.model}
+						</p>
+						{button(
+							t("featureAvailability.disconnect"),
+							() =>
+								void run(async () => {
+									await productApi.request(
+										`/provider_connections/${connection.id}`,
+										{ method: "DELETE" },
+									);
+									setConnections(
+										connections.filter((c) => c.id !== connection.id),
+									);
+									void capabilitiesStore.refresh();
+								}),
+						)}
+					</div>
+				))}
+				<p>{t("featureAvailability.providerApiNotice")}</p>
+				<select
+					aria-label={t("featureAvailability.aiProvider")}
+					value={provider}
+					onChange={(e) => setProvider(e.target.value)}
+				>
+					{capabilities.ai.providers.map((p) => (
+						<option key={p}>{p}</option>
+					))}
+				</select>
+				{field(
+					t("featureAvailability.apiKey"),
+					credential,
+					setCredential,
+					true,
+				)}
+				{field(t("featureAvailability.modelId"), model, setModel)}
+				{button(
+					t("featureAvailability.connectProvider"),
+					() =>
+						void run(async () => {
+							await productApi.request("/provider_connections", {
+								method: "POST",
+								body: { provider, credential, model },
+							});
+							setCredential("");
+							void capabilitiesStore.refresh();
+							setConnections(
+								(
+									await productApi.request<{
+										connections: ProviderConnection[];
+									}>("/provider_connections")
+								).connections,
+							);
+						}),
+				)}
+			</NeumorphCard>
+		) : null;
 	return (
 		<>
 			{error ? <p role="status">{error}</p> : null}
 
-			{button(mode === "chat" ? "▤ Articles" : "Return to AI chat", () => {
-				setMode(mode === "chat" ? "articles" : "chat");
-				setArticle(null);
-			})}
+			{capabilities.ai.available &&
+				button(
+					mode === "chat"
+						? t("featureAvailability.articles")
+						: t("featureAvailability.returnAi"),
+					() => {
+						setMode(mode === "chat" ? "articles" : "chat");
+						setArticle(null);
+					},
+				)}
 			{mode === "articles" ? (
 				<>
+					{!capabilities.ai.available && (
+						<p className="text-sm text-[var(--text-secondary)]">
+							{t("featureAvailability.articleIntro")}
+						</p>
+					)}
 					{article ? (
 						<NeumorphCard className="p-6 space-y-4">
 							<h2>{article.title}</h2>
-							<p className="whitespace-pre-wrap">{article.body}</p>
+							<div
+								dir={article.locale === "he" ? "rtl" : "ltr"}
+								lang={article.locale}
+								className="space-y-3 overflow-x-auto text-sm leading-relaxed [&_h1]:text-xl [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:mt-6 [&_ul]:list-disc [&_ul]:ps-5 [&_ol]:list-decimal [&_ol]:ps-5 [&_table]:border-collapse [&_td]:border [&_td]:p-2 [&_th]:border [&_th]:p-2 [&_a]:underline"
+							>
+								<ReactMarkdown
+									remarkPlugins={[remarkGfm]}
+									components={{
+										a: ({ children, href }) => (
+											<a href={href} target="_blank" rel="noreferrer">
+												{children}
+											</a>
+										),
+									}}
+								>
+									{article.body || ""}
+								</ReactMarkdown>
+							</div>
 							<p>{article.attribution}</p>
 							<a href={article.source_url} target="_blank" rel="noreferrer">
-								Read source
+								{t("featureAvailability.readSource")}
 							</a>
-							{button("Back", () => setArticle(null))}
+							{button(t("featureAvailability.back"), () => setArticle(null))}
 						</NeumorphCard>
 					) : (
 						articles.map((item) => (
@@ -143,7 +299,7 @@ function CommentaryWorkspace({
 								<h2>{item.title}</h2>
 								<p>{item.attribution}</p>
 								{button(
-									"Read",
+									t("featureAvailability.read"),
 									() =>
 										void run(async () =>
 											setArticle(
@@ -157,21 +313,25 @@ function CommentaryWorkspace({
 							</NeumorphCard>
 						))
 					)}
-					{!articles.length ? (
-						<p>No published articles available yet.</p>
+					{!article &&
+						nextOffset !== null &&
+						button(
+							t("featureAvailability.moreArticles"),
+							() => void run(() => loadArticles(nextOffset)),
+						)}
+					{articlesLoading && !articles.length && (
+						<p role="status">{t("common.loading")}</p>
+					)}
+					{!articlesLoading && !article && !articles.length ? (
+						<p>{t("featureAvailability.noArticles")}</p>
 					) : null}
-					<div className="fixed bottom-6 right-6">
-						{button("↩ AI chat", () => setMode("chat"))}
-					</div>
 				</>
 			) : !account ? (
 				<>
 					<h2 className="text-[28px] font-semibold">
 						What do you want to understand today?
 					</h2>
-					<p className="text-xs text-[var(--accent-deep)]">
-						{commentaryAccessLabel(undefined, developmentProvider)}
-					</p>
+					<p className="text-xs text-[var(--accent-deep)]">{accessLabel}</p>
 					{[
 						"What is the Son of Man?",
 						"What is the Son of God?",
@@ -202,12 +362,7 @@ function CommentaryWorkspace({
 				</>
 			) : (
 				<>
-					<p className="text-xs text-[var(--accent-deep)]">
-						{commentaryAccessLabel(
-							connections[0]?.provider,
-							developmentProvider,
-						)}
-					</p>
+					<p className="text-xs text-[var(--accent-deep)]">{accessLabel}</p>
 					{button(
 						"History",
 						() =>
@@ -272,28 +427,37 @@ function CommentaryWorkspace({
 						"Send",
 						() =>
 							void run(async () => {
-								const id =
-									conversation?.id ||
-									(
-										await productApi.request<{ id: string }>("/conversations", {
-											method: "POST",
-											body: { title: prompt.slice(0, 80) },
-										})
-									).id;
-								await productApi.request(`/conversations/${id}/messages`, {
-									method: "POST",
-									body: {
-										content: prompt,
-										context,
-										request_id: crypto.randomUUID(),
-									},
-								});
-								setConversation(
-									await productApi.request<Conversation>(
-										`/conversations/${id}`,
-									),
-								);
-								setPrompt("");
+								try {
+									const id =
+										conversation?.id ||
+										(
+											await productApi.request<{ id: string }>(
+												"/conversations",
+												{
+													method: "POST",
+													body: { title: prompt.slice(0, 80) },
+												},
+											)
+										).id;
+									await productApi.request(`/conversations/${id}/messages`, {
+										method: "POST",
+										body: {
+											content: prompt,
+											context,
+											request_id: crypto.randomUUID(),
+										},
+									});
+									setConversation(
+										await productApi.request<Conversation>(
+											`/conversations/${id}`,
+										),
+									);
+									setPrompt("");
+								} catch {
+									setMode("articles");
+									setError(t("featureAvailability.aiUnavailable"));
+									void capabilitiesStore.refresh();
+								}
 							}),
 					)}
 					{conversation
@@ -306,82 +470,14 @@ function CommentaryWorkspace({
 											{ method: "DELETE" },
 										);
 										setConversation(null);
-										setCredential("");
 										setPrompt("");
 									}),
 							)
 						: null}
-					<NeumorphCard className="p-6 space-y-3">
-						{button(
-							"Manage provider connections",
-							() =>
-								void run(async () =>
-									setConnections(
-										(
-											await productApi.request<{
-												connections: ProviderConnection[];
-											}>("/provider_connections")
-										).connections,
-									),
-								),
-						)}
-						{connections.map((connection) => (
-							<div key={connection.id}>
-								<p>
-									{connection.provider} · {connection.model}
-								</p>
-								{button(
-									"Disconnect",
-									() =>
-										void run(async () => {
-											await productApi.request(
-												`/provider_connections/${connection.id}`,
-												{ method: "DELETE" },
-											);
-											setConnections(
-												connections.filter((c) => c.id !== connection.id),
-											);
-										}),
-								)}
-							</div>
-						))}
-						<p> Muse awaits a supported provider API contract.</p>
-						<p>
-							Connect a provider using API credentials. Consumer subscriptions
-							may not include API access.
-						</p>
-						<select
-							aria-label="AI provider"
-							value={provider}
-							onChange={(e) => setProvider(e.target.value)}
-						>
-							{["claude", "chatgpt", "grok", "gemini"].map((p) => (
-								<option key={p}>{p}</option>
-							))}
-						</select>
-						{field("API key", credential, setCredential, true)}
-						{field("Model ID", model, setModel)}
-						{button(
-							"Connect",
-							() =>
-								void run(async () => {
-									await productApi.request("/provider_connections", {
-										method: "POST",
-										body: { provider, credential, model },
-									});
-									setCredential("");
-									setConnections(
-										(
-											await productApi.request<{
-												connections: ProviderConnection[];
-											}>("/provider_connections")
-										).connections,
-									);
-								}),
-						)}
-					</NeumorphCard>
 				</>
 			)}
+			{providerPanel}
+			{mode === "articles" && canConnect && !registered ? signIn : null}
 		</>
 	);
 }

@@ -21,6 +21,7 @@ import { CalendarCityNotice } from "./CalendarCityNotice";
 import { SettingsResources } from "./SettingsResources";
 import { productApi } from "../services/productApi";
 import type { RouteScreen } from "../utils/routeState";
+import { useProductCapabilities } from "../hooks/useProductCapabilities";
 
 interface NavigationBarProps {
 	activeDestination: RouteScreen;
@@ -117,6 +118,7 @@ export function NavigationBar({
 	translationOnly,
 	onTranslationOnlyChange,
 }: NavigationBarProps) {
+	const { capabilities } = useProductCapabilities();
 	const [selectionMenu, setSelectionMenu] = useState<
 		"book" | "chapter" | "verse" | null
 	>(null);
@@ -365,14 +367,9 @@ export function NavigationBar({
 				return (
 					<div>
 						<div className={settingsRowClass}>
-							<div className="flex-1 space-y-1">
-								<span className="text-[15px]">
-									{t("settings.calendarDayPill.title")}
-								</span>
-								<p className="text-xs text-[var(--text-secondary)]">
-									{t("settings.calendarDayPill.subtitle")}
-								</p>
-							</div>
+							<span className="flex-1 text-[15px]">
+								{t("settings.calendarDayPill.title")}
+							</span>
 							<PillToggle
 								label={t("settings.calendarDayPill.title")}
 								value={showCalendarDayPill}
@@ -460,53 +457,57 @@ export function NavigationBar({
 								"widgets",
 								"settings",
 							] as const
-						).map((id) => (
-							<button
-								key={id}
-								type="button"
-								onClick={() => {
-									if (id === "settings") {
-										setOpenMenu(openMenu === "settings" ? null : "settings");
-									} else {
-										setOpenMenu(null);
-										if (id === "verse") {
-											setScriptureNavigationCollapsed((collapsed) =>
-												isScripture ? !collapsed : false,
-											);
+						)
+							.filter(
+								(id) => id !== "assemblies" || capabilities.flags.assemblies,
+							)
+							.map((id) => (
+								<button
+									key={id}
+									type="button"
+									onClick={() => {
+										if (id === "settings") {
+											setOpenMenu(openMenu === "settings" ? null : "settings");
+										} else {
+											setOpenMenu(null);
+											if (id === "verse") {
+												setScriptureNavigationCollapsed((collapsed) =>
+													isScripture ? !collapsed : false,
+												);
+											}
+											onDestinationClick(id);
 										}
-										onDestinationClick(id);
+									}}
+									aria-current={
+										id !== "settings" && activeDestination === id
+											? "page"
+											: undefined
 									}
-								}}
-								aria-current={
-									id !== "settings" && activeDestination === id
-										? "page"
-										: undefined
-								}
-								aria-expanded={
-									id === "settings"
-										? settingsOpen
-										: id === "verse"
-											? scriptureNavigationOpen
-											: undefined
-								}
-								aria-controls={
-									id === "settings"
-										? "navigation-settings"
-										: id === "verse"
-											? "scripture-navigation"
-											: undefined
-								}
-								className={`flex-1 px-1 py-2 rounded-full text-[10px] sm:flex-none sm:px-[14px] sm:text-[13px] text-[var(--text-primary)] ${(id === "settings" ? settingsOpen : activeDestination === id) ? "bg-[var(--accent-glow)]" : ""}`}
-							>
-								{id === "verse"
-									? "Scripture"
-									: id === "widgets"
-										? t("calendar.nav")
-										: id === "settings"
-											? t("settings.title")
-											: id[0].toUpperCase() + id.slice(1)}
-							</button>
-						))}
+									aria-expanded={
+										id === "settings"
+											? settingsOpen
+											: id === "verse"
+												? scriptureNavigationOpen
+												: undefined
+									}
+									aria-controls={
+										id === "settings"
+											? "navigation-settings"
+											: id === "verse"
+												? "scripture-navigation"
+												: undefined
+									}
+									className={`flex-1 px-1 py-2 rounded-full text-[10px] sm:flex-none sm:px-[14px] sm:text-[13px] text-[var(--text-primary)] ${(id === "settings" ? settingsOpen : activeDestination === id) ? "bg-[var(--accent-glow)]" : ""}`}
+								>
+									{id === "verse"
+										? "Scripture"
+										: id === "widgets"
+											? t("calendar.nav")
+											: id === "settings"
+												? t("settings.title")
+												: id[0].toUpperCase() + id.slice(1)}
+								</button>
+							))}
 					</div>
 				</nav>
 			</div>
