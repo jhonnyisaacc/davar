@@ -1,7 +1,7 @@
-import { useEffect, useState, useSyncExternalStore } from "react";
-import { createCalendarWorkspace } from "@davar/shared/calendarWorkspace";
 import type { CalendarCity } from "@davar/shared/calendarClient";
+import { createCalendarWorkspace } from "@davar/shared/calendarWorkspace";
 import type { CalendarResponse } from "@davar/shared/productContracts";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { calendarClient } from "./useCalendar";
 
 export function useCalendarWorkspace({
@@ -36,10 +36,10 @@ export function useCalendarWorkspace({
 		() => workspace.loadDay(offset, !!city),
 		[workspace, city, offset, calendar],
 	);
-	// biome-ignore lint/correctness/useExhaustiveDependencies: An explicit retry must repeat the annual lookup.
+	// biome-ignore lint/correctness/useExhaustiveDependencies: Refresh annual dates when the calendar updates or a failed request retries.
 	useEffect(
 		() => workspace.loadYear(year, !!city && view === "moadim"),
-		[workspace, city, view, year, annualAttempt],
+		[workspace, city, view, year, annualAttempt, calendar],
 	);
 	return state;
 }

@@ -26,16 +26,27 @@ export function normalizeMoed(event: string): MoedId | null {
 }
 
 export function confirmedMoadim(day: CalendarDay | undefined): MoedId[] {
-	if (
-		!day ||
-		day.biblical.day === null ||
-		day.month_status !== "confirmed" ||
-		day.year_start_status !== "confirmed"
-	)
-		return [];
+	if (!day) return [];
+	const observedMonth =
+		day.biblical.day !== null &&
+		day.month_status === "confirmed" &&
+		(day.year_start_status === "confirmed" ||
+			day.month_identity?.status === "manual");
+	const counted = new Set(
+		(day.counted_events ?? [])
+			.filter((event) => event.status === "calculated")
+			.map((event) => event.event_id),
+	);
 	return [
 		...new Set(
-			day.events.map(normalizeMoed).filter((id): id is MoedId => id !== null),
+			day.events
+				.map(normalizeMoed)
+				.filter(
+					(id): id is MoedId =>
+						id !== null &&
+						(observedMonth ||
+							((id === "bikurim" || id === "shavuot") && counted.has(id))),
+				),
 		),
 	];
 }
@@ -92,14 +103,14 @@ export function readingCalendarPill(
 }
 
 export function annualMoadim(calendar: CalendarResponse | null, year: number) {
+	if (!calendar) return [];
 	return MOADIM.map((moed) => ({
 		...moed,
-		days:
-			calendar?.days.filter(
-				(day) =>
-					day.civil_date.startsWith(`${year}-`) &&
-					confirmedMoadim(day).includes(moed.id),
-			) ?? [],
+		days: calendar.days.filter(
+			(day) =>
+				day.civil_date.startsWith(`${year}-`) &&
+				confirmedMoadim(day).includes(moed.id),
+		),
 	}));
 }
 
@@ -132,7 +143,9 @@ export function calendarSources(
 	const site = calendarUrl(calendar?.source?.url);
 	if (site && !calendar?.source?.development_fixture)
 		sources.push({ id: "provider", name: calendar!.source!.name, url: site });
-	const report = calendarUrl(day?.observation?.source_url);
+	const report = calendarUrl(
+		day?.observation?.source_url ?? day?.counted_events?.[0]?.source_url,
+	);
 	if (
 		report &&
 		!day?.observation?.development_fixture &&

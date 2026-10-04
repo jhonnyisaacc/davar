@@ -375,6 +375,9 @@ at local sunset the preceding evening. Counted events retain their confirmed Avi
 evidence and counting rule in `counted_events`. Missing later month sightings do
 not invalidate the count or fabricate a Biblical month/day. Annual lists show the
 civil date when that month's Biblical date remains unknown.
+Clients display the Biblical day/month and events as primary, with the separate
+rabbinic date in smaller text. The manual refresh CTA is removed; sunset, periodic
+and resume refreshes remain automatic.
 
 Schedule `bundle exec rails davar:deliver_notifications` for the durable outbox.
 Delivery is at least once: a crash after Telegram accepts a message but before

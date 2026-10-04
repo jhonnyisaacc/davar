@@ -242,20 +242,9 @@ export default function SettingsScreen() {
         return (
           <View>
             <View style={styles.row}>
-              <View style={{ flex: 1, gap: 4 }}>
-                <Text style={styles.label}>
-                  {t("settings.calendarDayPill.title")}
-                </Text>
-                <Text
-                  style={{
-                    color: colors.textSecondary,
-                    fontSize: 12,
-                    textAlign: isRTL ? "right" : "left",
-                  }}
-                >
-                  {t("settings.calendarDayPill.subtitle")}
-                </Text>
-              </View>
+              <Text style={styles.label}>
+                {t("settings.calendarDayPill.title")}
+              </Text>
               <PillToggle
                 label={t("settings.calendarDayPill.title")}
                 value={state.showCalendarDayPill}
@@ -267,23 +256,9 @@ export default function SettingsScreen() {
                 accessibilityRole="alert"
                 accessibilityLiveRegion="polite"
                 style={{
-                  backgroundColor: colors.primary + "1F",
-                  borderRadius: 12,
-                  paddingHorizontal: 12,
-                  paddingTop: 10,
                   marginBottom: 8,
                 }}
               >
-                <Text
-                  style={{
-                    color: colors.textPrimary,
-                    fontSize: 12,
-                    textAlign: isRTL ? "right" : "left",
-                    writingDirection: isRTL ? "rtl" : "ltr",
-                  }}
-                >
-                  {t("settings.calendarDayPill.cityRequired")}
-                </Text>
                 <Pressable
                   accessibilityRole="button"
                   onPress={() => router.navigate("/(tabs)/widgets")}
@@ -294,8 +269,16 @@ export default function SettingsScreen() {
                     opacity: pressed ? 0.65 : 1,
                   })}
                 >
-                  <Text style={styles.accountActionText}>
-                    {t("calendar.chooseCityPill")}
+                  <Text
+                    style={{
+                      color: colors.textSecondary,
+                      fontFamily: typography.families.latinUI,
+                      fontSize: 12,
+                      textAlign: isRTL ? "right" : "left",
+                      writingDirection: isRTL ? "rtl" : "ltr",
+                    }}
+                  >
+                    {t("settings.calendarDayPill.cityRequired")}
                   </Text>
                 </Pressable>
               </View>

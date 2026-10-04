@@ -148,14 +148,9 @@ export function SettingsScreen(
 				return (
 					<div>
 						<div className={rowClass}>
-							<div className="flex-1 space-y-1">
-								<span className="text-[15px]">
-									{t("settings.calendarDayPill.title")}
-								</span>
-								<p className="text-xs text-[var(--text-secondary)]">
-									{t("settings.calendarDayPill.subtitle")}
-								</p>
-							</div>
+							<span className="flex-1 text-[15px]">
+								{t("settings.calendarDayPill.title")}
+							</span>
 							<PillToggle
 								label={t("settings.calendarDayPill.title")}
 								value={props.showCalendarDayPill ?? false}

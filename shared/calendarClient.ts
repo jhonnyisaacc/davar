@@ -42,7 +42,53 @@ export function parseCalendarLocation(
 		)
 			return null;
 		new Intl.DateTimeFormat("en", { timeZone: saved.timezone });
-		return saved;
+		return { city, timezone: saved.timezone };
+	} catch {
+		return null;
+	}
+}
+
+function parseSavedCalendar(
+	value: string | null,
+	timezone: string,
+	now = Date.now(),
+): CalendarResponse | null {
+	try {
+		const calendar = JSON.parse(value || "null")?.calendar;
+		const generated = Date.parse(calendar?.generated_at || "");
+		const sunset = Date.parse(calendar?.next_sunset_at || "");
+		if (
+			calendar?.schema_version !== 1 ||
+			!Number.isFinite(generated) ||
+			generated > now ||
+			now - generated > 24 * 60 * 60 * 1000 ||
+			!Number.isFinite(sunset) ||
+			sunset <= now ||
+			(calendar.timezone !== undefined && calendar.timezone !== timezone) ||
+			typeof calendar.year_start_status !== "string" ||
+			!Array.isArray(calendar.days) ||
+			!calendar.days.length ||
+			!calendar.days.every(
+				(day: CalendarResponse["days"][number]) =>
+					day &&
+					typeof day.civil_date === "string" &&
+					day.biblical &&
+					(day.biblical.day === null ||
+						(Number.isInteger(day.biblical.day) &&
+							day.biblical.day >= 1 &&
+							day.biblical.day <= 30)) &&
+					day.rabbinic &&
+					Number.isInteger(day.rabbinic.day) &&
+					typeof day.rabbinic.month_id === "string" &&
+					Number.isInteger(day.rabbinic.year) &&
+					typeof day.month_status === "string" &&
+					typeof day.year_start_status === "string" &&
+					Array.isArray(day.events) &&
+					day.events.every((event) => typeof event === "string"),
+			)
+		)
+			return null;
+		return calendar;
 	} catch {
 		return null;
 	}
@@ -65,6 +111,18 @@ export function createCalendarClient(
 	let requestId = 0;
 	let active = 0;
 	let timer: ReturnType<typeof setTimeout> | undefined;
+	let writes: Promise<unknown> = Promise.resolve();
+	const persist = () => {
+		// Store the public calendar with its location, and keep city changes in order.
+		const saved = JSON.stringify({
+			city: state.city,
+			timezone: state.timezone,
+			calendar: state.calendar,
+		});
+		writes = writes
+			.then(() => storage.setItem(CALENDAR_LOCATION_KEY, saved))
+			.catch(() => {});
+	};
 	const update = (patch: Partial<CalendarState>) => {
 		state = { ...state, ...patch };
 		for (const listener of listeners) listener();
@@ -104,7 +162,10 @@ export function createCalendarClient(
 		update({ busy: true, error: null });
 		try {
 			const calendar = await lookup(city, timezone, new Date(), 14, "today");
-			if (id === requestId) update({ calendar });
+			if (id === requestId) {
+				update({ calendar });
+				persist();
+			}
 		} catch (error) {
 			if (id === requestId)
 				update({
@@ -120,11 +181,15 @@ export function createCalendarClient(
 	};
 	const hydrate = () =>
 		(restore ??= (async () => {
+			const id = requestId;
 			try {
-				const saved = parseCalendarLocation(
-					await storage.getItem(CALENDAR_LOCATION_KEY),
-				);
-				if (saved) update(saved);
+				const value = await storage.getItem(CALENDAR_LOCATION_KEY);
+				const saved = parseCalendarLocation(value);
+				if (saved && id === requestId)
+					update({
+						...saved,
+						calendar: parseSavedCalendar(value, saved.timezone),
+					});
 			} catch {
 				/* Calendar selection still works when storage is unavailable. */
 			} finally {
@@ -151,12 +216,7 @@ export function createCalendarClient(
 		selectCity: (city: CalendarCity) => {
 			requestId++;
 			update({ city, calendar: null, busy: false, error: null });
-			void storage
-				.setItem(
-					CALENDAR_LOCATION_KEY,
-					JSON.stringify({ city, timezone: state.timezone }),
-				)
-				.catch(() => {});
+			persist();
 			void refresh();
 		},
 		searchCities: async (query: string) =>

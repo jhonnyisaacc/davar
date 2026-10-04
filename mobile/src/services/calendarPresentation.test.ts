@@ -57,6 +57,46 @@ const calendarState = (
 });
 
 describe("calendar presentation", () => {
+  test("annual moadim distinguish an unloaded response from a loaded year with unresolved dates", () => {
+    expect(annualMoadim(null, 2026)).toEqual([]);
+    const rows = annualMoadim({ ...calendar(), days: [] }, 2026);
+    expect(rows).toHaveLength(8);
+    expect(rows.every((row) => row.days.length === 0)).toBe(true);
+  });
+  test("annual Shavuot is dated from the confirmed fifty-day count even without a May month sighting", () => {
+    const shavuot = day({
+      civil_date: "2026-05-24",
+      biblical: { day: null, month_id: null, month_ordinal: null },
+      month_status: "pending",
+      year_start_status: "unresolved",
+      events: ["shavuot"],
+      counted_events: [
+        {
+          event_id: "shavuot",
+          status: "calculated",
+          rule: "weekly_shabbat_during_hag_hamatzot",
+          day_of_count: 50,
+          wave_sheaf_civil_date: "2026-04-05",
+          aviv_starts_on_evening: "2026-03-20",
+          confirmation_id: "aviv",
+          source_url: "https://example.test/aviv",
+        },
+      ],
+    });
+    expect(confirmedMoadim(shavuot)).toEqual(["shavuot"]);
+    expect(
+      annualMoadim(calendar(shavuot), 2026).find((row) => row.id === "shavuot")
+        ?.days[0].civil_date,
+    ).toBe("2026-05-24");
+    expect(confirmedMoadim({ ...shavuot, counted_events: [] })).toEqual([]);
+    expect(calendarSources(calendar(shavuot))).toEqual([
+      {
+        id: "observation",
+        name: "observation",
+        url: "https://example.test/aviv",
+      },
+    ]);
+  });
   test("always-on reading pill asks for a city after location restoration", () => {
     const state = calendarState({ city: null, calendar: null });
     expect(readingCalendarPill(state, true)).toEqual({
@@ -161,11 +201,34 @@ describe("calendar presentation", () => {
       ),
     ).toBeNull();
   });
-  test("withholds festival identity until the Biblical year is confirmed", () => {
+  test("withholds festival identity without a confirmed year or explicit month anchor", () => {
     expect(confirmedMoadim(day({ year_start_status: "pending" }))).toEqual([]);
     expect(
       confirmedMoadim(day({ events: ["hag_hamatzot", "hag_hamatzot_last"] })),
     ).toEqual(["hag_hamatzot"]);
+  });
+  test("shows Shemini Atzeret from the explicit seventh-month anchor without substituting the rabbinic date", () => {
+    const anchoredDay = day({
+      biblical: { day: 22, month_id: "etanim", month_ordinal: 7 },
+      rabbinic: { day: 23, month_id: "tishrei", year: 5787 },
+      events: ["shemini_atzeret"],
+      year_start_status: "unresolved",
+      month_identity: {
+        status: "manual",
+        starts_on_evening: "2026-09-12",
+        month_ordinal: 7,
+        source_url: "https://example.test/seventh-month",
+        note: "Synthetic explicit month anchor",
+      },
+    });
+    expect(confirmedMoadim(anchoredDay)).toEqual(["shemini_atzeret"]);
+    expect(readingCalendarDay(calendar(anchoredDay), false)).toBe(anchoredDay);
+    expect(
+      confirmedMoadim({ ...anchoredDay, month_status: "pending" }),
+    ).toEqual([]);
+    expect(confirmedMoadim({ ...anchoredDay, month_identity: null })).toEqual(
+      [],
+    );
   });
   test("groups only confirmed current-year dates and leaves unresolved moadim pending", () => {
     const result = annualMoadim(

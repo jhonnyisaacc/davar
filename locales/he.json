@@ -144,9 +144,8 @@
     "mobileDesignGuideTitle": "מדריך עיצוב לנייד",
     "mobileDesignGuideDescription": "צפה ברכיבי עיצוב לנייד",
     "calendarDayPill": {
-      "title": "הצגת היום בכל יום",
-      "subtitle": "כבוי: הצגה רק במועדים.",
-      "cityRequired": "בחרו את העיר שלכם בלוח השנה כדי להציג את היום. נשתמש בה לשעת השקיעה המקומית."
+      "title": "לוח שנה בפסוק",
+      "cityRequired": "יש לבחור עיר כדי להציג אותו"
     },
     "links": {
       "title": "אודות דבר",
@@ -398,27 +397,22 @@
     "source": "מקור",
     "sourceSubtitle": "תצפיות ומקורות",
     "sources": "מקורות",
-    "sourcesIntroduction": "התצפיות שעליהן מבוסס לוח השנה.",
     "sourceDescription": "תצפיות בירח החדש בישראל.",
     "observationReport": "דוח תצפית",
-    "defaultBrowser": "הקישורים נפתחים בדפדפן ברירת המחדל.",
     "noSources": "המקורות יופיעו בעדכון התצפיות הבא.",
     "appointedTimes": "מועדים",
     "moadim": "מועדים",
-    "currentYear": "השנה הנוכחית",
     "sunsetBoundary": "כל תאריך מתחיל בשקיעה המקומית.",
     "awaitingYear": "ממתינים לאישור השנה.",
     "awaitingDates": "ממתינים לתאריכים",
     "awaitingConfirmation": "ממתינים לאישור",
     "noAppointment": "אין מועד היום.",
     "unavailable": "לוח השנה אינו זמין. נסו שוב.",
-    "refresh": "רענון לוח השנה",
     "loading": "טוען…",
     "cached": "מוצג לוח שנה שמור. התחברו לעדכון היום.",
     "stale": "עדכוני התצפיות אינם זמינים. מוצגות התצפיות האחרונות.",
-    "firstUpdate": "ממתינים לעדכון התצפיות הראשון.",
     "fixture": "תרחיש פיתוח — תצפיות לדוגמה.",
-    "checked": "התצפיות נבדקו: {date}",
+    "checked": "בדיקת התצפיות האחרונה: {date}",
     "review": "חלק מהדוחות ההיסטוריים ממתינים לבדיקה. משתמשים רק בתצפיות מאושרות.",
     "observed": "נצפה בתאריך {date}",
     "day": "יום {day}",
@@ -428,7 +422,7 @@
     "events": {
       "pesach": "פסח",
       "hag_hamatzot": "חג המצות",
-      "bikurim": "ביכורים",
+      "bikurim": "יום הביכורים",
       "shavuot": "שבועות",
       "yom_teruah": "יום תרועה",
       "yom_hakipurim": "יום הכיפורים",
@@ -437,8 +431,36 @@
     },
     "months": {
       "aviv": "אביב",
-      "etanim": "איתנים"
-    }
+      "ziv": "זיו",
+      "third_month": "החודש השלישי",
+      "fourth_month": "החודש הרביעי",
+      "fifth_month": "החודש החמישי",
+      "sixth_month": "החודש השישי",
+      "etanim": "אתנים",
+      "bul": "בול",
+      "ninth_month": "החודש התשיעי",
+      "tenth_month": "החודש העשירי",
+      "eleventh_month": "החודש האחד עשר",
+      "twelfth_month": "החודש השנים עשר",
+      "thirteenth_month": "החודש השלושה עשר"
+    },
+    "rabbinicDate": "רבני: {day} {month} {year}",
+    "rabbinicMonths": {
+      "nisan": "ניסן",
+      "iyar": "אייר",
+      "sivan": "סיוון",
+      "tammuz": "תמוז",
+      "av": "אב",
+      "elul": "אלול",
+      "tishrei": "תשרי",
+      "cheshvan": "חשוון",
+      "kislev": "כסלו",
+      "tevet": "טבת",
+      "shevat": "שבט",
+      "adar": "אדר",
+      "adar_ii": "אדר ב׳"
+    },
+    "moadimYear": "תאריכי המועדים של השנה"
   },
   "support": {
     "description": "צריכים עזרה או רוצים לשתף משוב? צרו קשר.",

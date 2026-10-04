@@ -14,20 +14,18 @@ export function CalendarCityNotice({
 	const { t } = useTranslation(language);
 	if (!enabled || !restored || city) return null;
 	return (
-		<div
-			role="alert"
-			className="mb-2 rounded-xl bg-[var(--accent-glow)] px-3 py-2 text-xs text-[var(--text-primary)]"
-		>
-			<p>{t("settings.calendarDayPill.cityRequired")}</p>
+		<div role="alert" className="mb-2 text-xs text-[var(--text-secondary)]">
 			{onChooseCity ? (
 				<button
 					type="button"
 					onClick={onChooseCity}
-					className="min-h-11 font-medium text-[var(--accent-deep)]"
+					className="min-h-11 text-start"
 				>
-					{t("calendar.chooseCityPill")}
+					{t("settings.calendarDayPill.cityRequired")}
 				</button>
-			) : null}
+			) : (
+				<p>{t("settings.calendarDayPill.cityRequired")}</p>
+			)}
 		</div>
 	);
 }

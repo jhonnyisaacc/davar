@@ -1,5 +1,12 @@
-import { useCalendarWorkspace } from "../hooks/useCalendarWorkspace";
-import { useState, type ReactNode } from "react";
+import {
+	annualMoadim,
+	type CalendarIcon,
+	calendarSources,
+	calendarYear,
+	confirmedMoadim,
+} from "@davar/shared/calendarPresentation";
+import { calendarIsOutdated } from "@davar/shared/calendarRefresh";
+import type { CalendarDay } from "@davar/shared/productContracts";
 import {
 	ArrowLeft,
 	ArrowRight,
@@ -11,6 +18,7 @@ import {
 	ExternalLink,
 	Flame,
 	Heart,
+	type LucideIcon,
 	MapPin,
 	Megaphone,
 	Moon,
@@ -20,19 +28,11 @@ import {
 	Tent,
 	Users,
 	Wheat,
-	type LucideIcon,
 } from "lucide-react";
-import type { CalendarDay } from "@davar/shared/productContracts";
-import {
-	annualMoadim,
-	calendarSources,
-	calendarYear,
-	confirmedMoadim,
-	type CalendarIcon,
-} from "@davar/shared/calendarPresentation";
-import { calendarIsOutdated } from "@davar/shared/calendarRefresh";
+import { type ReactNode, useState } from "react";
 import { calendarClient, useCalendar } from "../hooks/useCalendar";
-import { useTranslation, type AppLanguage } from "../hooks/useTranslation";
+import { useCalendarWorkspace } from "../hooks/useCalendarWorkspace";
+import { type AppLanguage, useTranslation } from "../hooks/useTranslation";
 
 const icons: Record<CalendarIcon, LucideIcon> = {
 	flame: Flame,
@@ -154,12 +154,18 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 		return value.startsWith("calendar.") ? id.replaceAll("_", " ") : value;
 	};
 	const dayLabel = (value: CalendarDay) =>
-		value.biblical.month_id
-			? t("calendar.dayWithMonth", {
-					month: monthLabel(value.biblical.month_id),
-					day: value.biblical.day!,
-				})
-			: t("calendar.day", { day: value.biblical.day! });
+		value.biblical.day === null
+			? new Intl.DateTimeFormat(language, {
+					day: "numeric",
+					month: "long",
+					timeZone: "UTC",
+				}).format(new Date(`${value.civil_date}T12:00:00Z`))
+			: value.biblical.month_id
+				? t("calendar.dayWithMonth", {
+						month: monthLabel(value.biblical.month_id),
+						day: value.biblical.day!,
+					})
+				: t("calendar.day", { day: value.biblical.day! });
 	const back = () => setScreen("calendar");
 	const header = (title: string, canGoBack = true) => (
 		<header className="flex items-center gap-3">
@@ -276,9 +282,6 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 		content = (
 			<>
 				{header(t("calendar.sources"))}
-				<p className="text-[15px] text-[var(--text-secondary)]">
-					{t("calendar.sourcesIntroduction")}
-				</p>
 				{calendarSources(current, day).map((source) => (
 					<section
 						key={source.id}
@@ -317,18 +320,21 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 				{!calendarSources(current, day).length ? (
 					<Caption>{t("calendar.noSources")}</Caption>
 				) : null}
-				<Caption>{t("calendar.defaultBrowser")}</Caption>
-				{calendar?.source?.last_synced_at ? (
+				{calendar?.source?.last_synced_at || calendar?.source?.review_count ? (
 					<Caption>
-						{t("calendar.checked", {
-							date: new Date(calendar.source.last_synced_at).toLocaleString(
-								language,
-							),
-						})}
+						{[
+							calendar.source.review_count ? t("calendar.review") : null,
+							calendar.source.last_synced_at
+								? t("calendar.checked", {
+										date: new Date(
+											calendar.source.last_synced_at,
+										).toLocaleString(language),
+									})
+								: null,
+						]
+							.filter(Boolean)
+							.join(" ")}
 					</Caption>
-				) : null}
-				{calendar?.source?.review_count ? (
-					<Caption>{t("calendar.review")}</Caption>
 				) : null}
 			</>
 		);
@@ -336,12 +342,10 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 		content = (
 			<>
 				{header(t("calendar.moadim"))}
-				<div className="flex justify-between">
-					<Caption>{t("calendar.currentYear")}</Caption>
-					<Caption>{year}</Caption>
-				</div>
 				<Caption>{t("calendar.sunsetBoundary")}</Caption>
-				{annualBusy ? <p role="status">{t("calendar.loading")}</p> : null}
+				{annualBusy || (!annual && !annualError) ? (
+					<p role="status">{t("calendar.loading")}</p>
+				) : null}
 				{annualError ? (
 					<div role="status">
 						<Caption>{t("calendar.yearUnavailable")}</Caption>
@@ -350,15 +354,17 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 							onClick={() => setAnnualAttempt((value) => value + 1)}
 							className="min-h-11 text-sm text-[var(--accent-deep)]"
 						>
-							{t("calendar.refresh")}
+							{t("common.retry")}
 						</button>
 					</div>
 				) : null}
 				<div>{rows.filter((row) => row.days.length).map(moedRow)}</div>
-				<div className="space-y-1.5">
-					<Caption>{t("calendar.awaitingDates")}</Caption>
-					{rows.filter((row) => !row.days.length).map(moedRow)}
-				</div>
+				{rows.some((row) => !row.days.length) ? (
+					<div className="space-y-1.5">
+						<Caption>{t("calendar.awaitingDates")}</Caption>
+						{rows.filter((row) => !row.days.length).map(moedRow)}
+					</div>
+				) : null}
 			</>
 		);
 	else {
@@ -403,11 +409,22 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 					>
 						{day?.biblical.day ?? "—"}
 					</p>
-					<Caption>
+					<p className="text-xl text-[var(--text-primary)]">
 						{day?.biblical.day == null
 							? t("calendar.awaitingMoon")
-							: t("calendar.dayOfMonth")}
-					</Caption>
+							: day.biblical.month_id
+								? monthLabel(day.biblical.month_id)
+								: t("calendar.dayOfMonth")}
+					</p>
+					{day ? (
+						<Caption>
+							{t("calendar.rabbinicDate", {
+								day: day.rabbinic.day,
+								month: t(`calendar.rabbinicMonths.${day.rabbinic.month_id}`),
+								year: day.rabbinic.year,
+							})}
+						</Caption>
+					) : null}
 					{moadim.map((id) => (
 						<button
 							key={id}
@@ -443,13 +460,7 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 					<Row
 						icon={CalendarDays}
 						title={t("calendar.appointedTimes")}
-						subtitle={
-							moadim.length
-								? moadim.map((id) => t(`calendar.events.${id}`)).join(" · ")
-								: current?.year_start_status === "confirmed"
-									? t("calendar.noAppointment")
-									: t("calendar.awaitingYear")
-						}
+						subtitle={t("calendar.moadimYear")}
 						onClick={() => setScreen("moadim")}
 					/>
 					<Row
@@ -469,23 +480,9 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 				{calendar?.source?.development_fixture ? (
 					<Caption>{t("calendar.fixture")}</Caption>
 				) : null}
-				{calendar?.source?.stale ? (
-					<Caption>
-						{t(
-							calendar.source.last_synced_at
-								? "calendar.stale"
-								: "calendar.firstUpdate",
-						)}
-					</Caption>
+				{calendar?.source?.stale && calendar.source.last_synced_at ? (
+					<Caption>{t("calendar.stale")}</Caption>
 				) : null}
-				<button
-					type="button"
-					disabled={busy}
-					onClick={() => void calendarClient.refresh()}
-					className="min-h-11 self-center text-xs text-[var(--accent-deep)] disabled:opacity-50"
-				>
-					{t("calendar.refresh")}
-				</button>
 			</>
 		);
 	}

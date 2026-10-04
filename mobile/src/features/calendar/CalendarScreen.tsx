@@ -242,32 +242,26 @@ export default function CalendarScreen() {
     const value = t(`calendar.months.${id}`);
     return value.startsWith("calendar.") ? id.replaceAll("_", " ") : value;
   };
+  const rabbinicMonth = (id: string) => t(`calendar.rabbinicMonths.${id}`);
   const dayLabel = (value: CalendarDay) =>
-    value.biblical.month_id
-      ? t("calendar.dayWithMonth", {
-          month: displayMonth(value.biblical.month_id),
-          day: value.biblical.day!,
-        })
-      : t("calendar.day", { day: value.biblical.day! });
+    value.biblical.day === null
+      ? new Intl.DateTimeFormat(language, {
+          day: "numeric",
+          month: "long",
+          timeZone: "UTC",
+        }).format(new Date(`${value.civil_date}T12:00:00Z`))
+      : value.biblical.month_id
+        ? t("calendar.dayWithMonth", {
+            month: displayMonth(value.biblical.month_id),
+            day: value.biblical.day!,
+          })
+        : t("calendar.day", { day: value.biblical.day! });
   const yearRows = annualMoadim(annual, year);
 
   const back = () => {
     setScreen("calendar");
     setLinkError(false);
   };
-  const refresh = (
-    <Pressable
-      accessibilityRole="button"
-      accessibilityLabel={t("calendar.refresh")}
-      disabled={busy}
-      onPress={() => void calendarClient.refresh()}
-      style={{ alignSelf: "center", minHeight: 44, justifyContent: "center" }}
-    >
-      <Caption accent>
-        {busy ? t("calendar.loading") : t("calendar.refresh")}
-      </Caption>
-    </Pressable>
-  );
   if (!restored)
     return (
       <Page title="">
@@ -397,17 +391,6 @@ export default function CalendarScreen() {
     return (
       <Page title="">
         <Header title={t("calendar.sources")} back={back} />
-        <Text
-          style={{
-            color: colors.textSecondary,
-            fontFamily: "Inter_400Regular",
-            fontSize: 15,
-            marginVertical: 10,
-            textAlign: rtl ? "right" : "left",
-          }}
-        >
-          {t("calendar.sourcesIntroduction")}
-        </Text>
         {calendarSources(selected, day).map((source) => (
           <View
             key={source.id}
@@ -470,19 +453,22 @@ export default function CalendarScreen() {
         {!calendarSources(selected, day).length ? (
           <Caption>{t("calendar.noSources")}</Caption>
         ) : null}
-        <Caption>{t("calendar.defaultBrowser")}</Caption>
         {linkError ? <Caption>{t("calendar.unavailable")}</Caption> : null}
-        {calendar?.source?.last_synced_at ? (
+        {calendar?.source?.last_synced_at || calendar?.source?.review_count ? (
           <Caption>
-            {t("calendar.checked", {
-              date: new Date(calendar.source.last_synced_at).toLocaleString(
-                language,
-              ),
-            })}
+            {[
+              calendar.source.review_count ? t("calendar.review") : null,
+              calendar.source.last_synced_at
+                ? t("calendar.checked", {
+                    date: new Date(
+                      calendar.source.last_synced_at,
+                    ).toLocaleString(language),
+                  })
+                : null,
+            ]
+              .filter(Boolean)
+              .join(" ")}
           </Caption>
-        ) : null}
-        {calendar?.source?.review_count ? (
-          <Caption>{t("calendar.review")}</Caption>
         ) : null}
       </Page>
     );
@@ -491,17 +477,8 @@ export default function CalendarScreen() {
     return (
       <Page title="">
         <Header title={t("calendar.moadim")} back={back} />
-        <View
-          style={{
-            flexDirection: rtl ? "row-reverse" : "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <Caption>{t("calendar.currentYear")}</Caption>
-          <Caption>{year}</Caption>
-        </View>
         <Caption>{t("calendar.sunsetBoundary")}</Caption>
-        {annualBusy ? (
+        {annualBusy || (!annual && !annualError) ? (
           <ActivityIndicator
             color={colors.primary}
             accessibilityLabel={t("calendar.loading")}
@@ -515,7 +492,7 @@ export default function CalendarScreen() {
               onPress={() => setAnnualAttempt((value) => value + 1)}
               style={{ minHeight: 44, justifyContent: "center" }}
             >
-              <Caption accent>{t("calendar.refresh")}</Caption>
+              <Caption accent>{t("common.retry")}</Caption>
             </Pressable>
           </>
         ) : null}
@@ -539,19 +516,21 @@ export default function CalendarScreen() {
               />
             ))}
         </View>
-        <View style={{ gap: 6 }}>
-          <Caption>{t("calendar.awaitingDates")}</Caption>
-          {yearRows
-            .filter((row) => !row.days.length)
-            .map((row) => (
-              <Row
-                key={row.id}
-                icon={moedIcons[row.icon]}
-                title={t(`calendar.events.${row.id}`)}
-                subtitle={t("calendar.awaitingConfirmation")}
-              />
-            ))}
-        </View>
+        {yearRows.some((row) => !row.days.length) ? (
+          <View style={{ gap: 6 }}>
+            <Caption>{t("calendar.awaitingDates")}</Caption>
+            {yearRows
+              .filter((row) => !row.days.length)
+              .map((row) => (
+                <Row
+                  key={row.id}
+                  icon={moedIcons[row.icon]}
+                  title={t(`calendar.events.${row.id}`)}
+                  subtitle={t("calendar.awaitingConfirmation")}
+                />
+              ))}
+          </View>
+        ) : null}
       </Page>
     );
 
@@ -629,11 +608,30 @@ export default function CalendarScreen() {
           >
             {day?.biblical.day ?? "—"}
           </Text>
-          <Caption>
+          <Text
+            style={{
+              fontFamily: "Manrope_400Regular",
+              fontSize: 22,
+              color: colors.textPrimary,
+              textAlign: "center",
+              writingDirection: rtl ? "rtl" : "ltr",
+            }}
+          >
             {day?.biblical.day == null
               ? t("calendar.awaitingMoon")
-              : t("calendar.dayOfMonth")}
-          </Caption>
+              : day.biblical.month_id
+                ? displayMonth(day.biblical.month_id)
+                : t("calendar.dayOfMonth")}
+          </Text>
+          {day ? (
+            <Caption>
+              {t("calendar.rabbinicDate", {
+                day: day.rabbinic.day,
+                month: rabbinicMonth(day.rabbinic.month_id),
+                year: day.rabbinic.year,
+              })}
+            </Caption>
+          ) : null}
           {moadim.map((id) => (
             <Pressable
               key={id}
@@ -681,13 +679,7 @@ export default function CalendarScreen() {
           <Row
             icon={CalendarDays}
             title={t("calendar.appointedTimes")}
-            subtitle={
-              moadim.length
-                ? moadim.map((id) => t(`calendar.events.${id}`)).join(" · ")
-                : selected?.year_start_status === "confirmed"
-                  ? t("calendar.noAppointment")
-                  : t("calendar.awaitingYear")
-            }
+            subtitle={t("calendar.moadimYear")}
             onPress={() => setScreen("moadim")}
           />
           <Row
@@ -712,16 +704,9 @@ export default function CalendarScreen() {
         {calendar?.source?.development_fixture ? (
           <Caption>{t("calendar.fixture")}</Caption>
         ) : null}
-        {calendar?.source?.stale ? (
-          <Caption>
-            {t(
-              calendar.source.last_synced_at
-                ? "calendar.stale"
-                : "calendar.firstUpdate",
-            )}
-          </Caption>
+        {calendar?.source?.stale && calendar.source.last_synced_at ? (
+          <Caption>{t("calendar.stale")}</Caption>
         ) : null}
-        {refresh}
       </View>
     </Page>
   );

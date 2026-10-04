@@ -37,7 +37,7 @@ export function useCalendarWorkspace({
   );
   useEffect(
     () => workspace.loadYear(year, !!city && view === "moadim"),
-    [workspace, city, view, year, annualAttempt],
+    [workspace, city, view, year, annualAttempt, calendar],
   );
   return state;
 }
