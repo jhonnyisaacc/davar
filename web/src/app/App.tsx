@@ -699,7 +699,6 @@ export default function App() {
 		[books, currentBook],
 	);
 	const isBesorah = currentBookMeta?.section === "besorah";
-	const besorahDisclaimerText = t("verse.besorahDisclaimer.short");
 
 	const handleBesorahTextVersionChange = useCallback(
 		(version: "delitzsch" | "hutter") => {
@@ -1664,19 +1663,6 @@ export default function App() {
 					/>
 				</div>
 			</div>
-
-			{currentScreen === "verse" && isBesorah && !translationOnly && (
-				<div
-					className="fixed left-6 top-6 z-50 pointer-events-none max-w-[280px] rounded-md px-3 py-1.5 text-xs leading-snug"
-					style={{
-						backgroundColor: "var(--surface)",
-						color: "var(--text-secondary)",
-						border: "1px solid var(--border-color)",
-					}}
-				>
-					{besorahDisclaimerText}
-				</div>
-			)}
 
 			<div className="px-6 pb-10 md:pb-32 pt-6">
 				<div className="max-w-7xl mx-auto">

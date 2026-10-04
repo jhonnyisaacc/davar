@@ -31,6 +31,11 @@ export function SourcesScreen({
 							{t(`home.sources.${key}Value`)}
 							{key === "dictionary" ? t("home.sources.dictionaryNote") : null}
 						</p>
+						{key === "besorah" && (
+							<p className="text-sm leading-6 text-[var(--text-secondary)]">
+								{t("verse.besorahDisclaimer.short")}
+							</p>
+						)}
 					</NeumorphCard>
 				))}
 			</div>

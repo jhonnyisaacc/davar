@@ -64,9 +64,7 @@ import {
 import { useAppStore, type AppState } from "@/src/store/useAppStore";
 import { useTranslation } from "@/src/i18n/useTranslation";
 import {
-  loadBesorahDisclaimerCount,
   loadSwipeUpHintCount,
-  saveBesorahDisclaimerCount,
   saveSwipeUpHintCount,
 } from "@/src/services/storage";
 import { formatBookDisplayName } from "../utils/bookNameFormatter";
@@ -823,7 +821,6 @@ export const VerseDetailContent = () => {
     [bookId, booksMeta, verse?.bookId],
   );
   const isBesorah = bookMeta?.section === "besorah";
-  const previousBookSectionRef = useRef<string | null>(null);
 
   const bookVerses = useMemo(() => chapterVerses, [chapterVerses]);
   const orderedVerses = useMemo(
@@ -969,37 +966,6 @@ export const VerseDetailContent = () => {
       isMounted = false;
     };
   }, []);
-
-  useEffect(() => {
-    const currentSection = bookMeta?.section ?? null;
-    const previousSection = previousBookSectionRef.current;
-    const enteredBesorahFromTanaj =
-      Boolean(previousSection) &&
-      previousSection !== "besorah" &&
-      currentSection === "besorah";
-
-    if (enteredBesorahFromTanaj) {
-      void (async () => {
-        const shownCount = await loadBesorahDisclaimerCount();
-        if (shownCount >= 3) {
-          return;
-        }
-
-        Alert.alert(
-          t("verse.besorahDisclaimer.modalTitle"),
-          t("verse.besorahDisclaimer.modalMessage"),
-          [{ text: t("verse.besorahDisclaimer.modalConfirm") }],
-          { cancelable: true },
-        );
-
-        await saveBesorahDisclaimerCount(shownCount + 1);
-      })();
-    }
-
-    if (currentSection) {
-      previousBookSectionRef.current = currentSection;
-    }
-  }, [bookMeta?.section, t]);
 
   const handleNavigationSelect = useCallback(
     (nextBookId: string, nextChapter: number, verseNum: number) => {

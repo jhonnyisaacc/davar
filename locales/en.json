@@ -89,13 +89,13 @@
       "title": "Language"
     },
     "besorahLanguage": {
-      "title": "Besorah language",
+      "title": "Gospel language",
       "hebrew": "Hebrew",
       "greek": "Greek",
       "new": "New"
     },
     "besorahTextVersion": {
-      "title": "Besorah text",
+      "title": "Gospel text",
       "delitzsch": "Delitzsch",
       "hutter": "Hutter",
       "new": "New"

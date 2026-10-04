@@ -18,7 +18,6 @@ const STORAGE_KEYS = {
   translationOnly: "davar.translationOnly",
   wordHintCount: "davar.wordHintCount",
   swipeUpHintCount: "davar.swipeUpHintCount",
-  besorahDisclaimerCount: "davar.besorahDisclaimerCount",
   currentVerseId: "davar.currentVerseId",
   codepushCount: "davar.codepushCount",
   lastSeenUpdateId: "davar.lastSeenUpdateId",
@@ -195,19 +194,6 @@ export const loadSwipeUpHintCount = async () => {
 
 export const saveSwipeUpHintCount = async (count: number) => {
   await AsyncStorage.setItem(STORAGE_KEYS.swipeUpHintCount, String(count));
-};
-
-export const loadBesorahDisclaimerCount = async () => {
-  const value = await AsyncStorage.getItem(STORAGE_KEYS.besorahDisclaimerCount);
-  const parsed = Number(value);
-  return Number.isFinite(parsed) && parsed >= 0 ? parsed : 0;
-};
-
-export const saveBesorahDisclaimerCount = async (count: number) => {
-  await AsyncStorage.setItem(
-    STORAGE_KEYS.besorahDisclaimerCount,
-    String(count),
-  );
 };
 
 export const loadCurrentVerseId = async (): Promise<string | null> => {

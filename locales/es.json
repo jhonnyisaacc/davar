@@ -89,13 +89,13 @@
       "title": "Idioma"
     },
     "besorahLanguage": {
-      "title": "Idioma de la Besorah",
+      "title": "Idioma del Evangelio",
       "hebrew": "Hebreo",
       "greek": "Griego",
       "new": "Nuevo"
     },
     "besorahTextVersion": {
-      "title": "Texto de la Besorah",
+      "title": "Texto del Evangelio",
       "delitzsch": "Delitzsch",
       "hutter": "Hutter",
       "new": "Nuevo"

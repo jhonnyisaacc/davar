@@ -38,6 +38,13 @@ const createStyles = (colors: ReturnType<typeof getColors>) =>
       color: colors.textPrimary,
       lineHeight: 24,
     },
+    sourceNote: {
+      fontFamily: "Arimo_400Regular",
+      fontSize: typography.sizes.caption,
+      color: colors.textSecondary,
+      lineHeight: 20,
+      marginTop: spacing[2],
+    },
   });
 
 export function SourcesScreen() {
@@ -46,7 +53,10 @@ export function SourcesScreen() {
   const styles = useMemo(() => createStyles(colors), [colors]);
   const { t, isRTL } = useTranslation();
 
-  const sources = [
+  const sources: {
+    title: string;
+    items: { label?: string; value: string; note?: string }[];
+  }[] = [
     {
       title: "Tanaj",
       items: [
@@ -62,6 +72,7 @@ export function SourcesScreen() {
         {
           label: t("home.sources.besorahLabel"),
           value: t("home.sources.besorahValue"),
+          note: t("verse.besorahDisclaimer.short"),
         },
         {
           label: t("home.sources.greekTextLabel"),
@@ -141,6 +152,19 @@ export function SourcesScreen() {
               >
                 {item.value}
               </Text>
+              {item.note && (
+                <Text
+                  style={[
+                    styles.sourceNote,
+                    {
+                      textAlign: isRTL ? "right" : "left",
+                      writingDirection: isRTL ? "rtl" : "ltr",
+                    },
+                  ]}
+                >
+                  {item.note}
+                </Text>
+              )}
             </View>
           ))}
         </View>
