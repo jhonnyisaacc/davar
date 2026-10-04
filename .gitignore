@@ -70,6 +70,7 @@ yarn-error.log*
 .yarn-integrity
 
 # React Native
+.expo/
 ios/build/
 android/app/build/
 android/build/
