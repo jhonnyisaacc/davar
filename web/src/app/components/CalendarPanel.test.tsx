@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, expect, spyOn, test } from "bun:test";
-import { calendarYear } from "@davar/shared/calendarPresentation";
 import type { CalendarState } from "@davar/shared/calendarClient";
+import { calendarYear } from "@davar/shared/calendarPresentation";
 import type { CalendarResponse } from "@davar/shared/productContracts";
 import { Window } from "happy-dom";
 import { calendarClient } from "../hooks/useCalendar";
@@ -83,7 +83,64 @@ function openMoadim(language: AppLanguage = "en") {
 	return ui;
 }
 
+test("cached city results appear immediately without loading or a new request", async () => {
+	snapshot.mockReturnValue({ ...state, city: null, calendar: null });
+	const cached = spyOn(calendarClient, "cachedCities").mockReturnValue(
+		state.city ? [state.city] : [],
+	);
+	const search = spyOn(calendarClient, "searchCities").mockRejectedValue(
+		new Error("cached searches must not call the API"),
+	);
+	try {
+		const ui = render(<CalendarPanel language="en" />);
+		await act(async () => {
+			fireEvent.change(
+				ui.getByRole("textbox", {
+					name: translate("en", "calendar.searchCity"),
+				}),
+				{ target: { value: "Buenos" } },
+			);
+		});
+		expect(ui.getByText("Buenos Aires")).toBeTruthy();
+		expect(ui.queryByRole("status")).toBeNull();
+		expect(cached).toHaveBeenCalledWith("Buenos");
+		expect(search).not.toHaveBeenCalled();
+	} finally {
+		cached.mockRestore();
+		search.mockRestore();
+	}
+});
+
 for (const language of ["en", "es", "he"] as const) {
+	test(`cached Moadim dates open without loading or another year request (${language})`, () => {
+		const cached = spyOn(calendarClient, "cachedYear").mockReturnValue(annual);
+		try {
+			let ui = openMoadim(language);
+			const expectDates = () => {
+				expect(ui.queryByRole("status")).toBeNull();
+				expect(
+					ui.getByText(translate(language, "calendar.events.pesach")),
+				).toBeTruthy();
+				expect(yearRequest).not.toHaveBeenCalled();
+			};
+			expectDates();
+			fireEvent.click(
+				ui.getByRole("button", { name: translate(language, "calendar.back") }),
+			);
+			fireEvent.click(
+				ui.getByRole("button", {
+					name: `${translate(language, "calendar.appointedTimes")} ${translate(language, "calendar.moadimYear")}`,
+				}),
+			);
+			expectDates();
+			ui.unmount();
+			ui = openMoadim(language);
+			expectDates();
+		} finally {
+			cached.mockRestore();
+		}
+	});
+
 	test(`Moadim show loading until annual dates arrive (${language})`, async () => {
 		let resolve!: (value: CalendarResponse) => void;
 		yearRequest.mockImplementation(

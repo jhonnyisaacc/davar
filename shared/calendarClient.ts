@@ -3,6 +3,11 @@ import type { ProductClient } from "./productClient";
 import type { CalendarResponse } from "./productContracts";
 
 export const CALENDAR_LOCATION_KEY = "davar-calendar-location";
+const CITY_SEARCH_CACHE_TTL = 24 * 60 * 60 * 1000;
+const CITY_SEARCH_CACHE_LIMIT = 100;
+const ANNUAL_CACHE_TTL = 15 * 60 * 1000;
+const normalizeCityQuery = (query: string) =>
+	query.trim().replace(/\s+/g, " ").normalize("NFC").toLowerCase();
 export type CalendarCity = {
 	city: string;
 	country: string;
@@ -112,6 +117,71 @@ export function createCalendarClient(
 	let active = 0;
 	let timer: ReturnType<typeof setTimeout> | undefined;
 	let writes: Promise<unknown> = Promise.resolve();
+	let annualGeneration = 0;
+	let annualCache: {
+		key: string;
+		calendar: CalendarResponse;
+		savedAt: number;
+	} | null = null;
+	const pendingYears = new Map<string, Promise<CalendarResponse>>();
+	const yearKey = (year: number) =>
+		`${state.city?.latitude}/${state.city?.longitude}/${state.timezone}/${year}`;
+	const cachedYear = (year: number) => {
+		if (
+			!state.city ||
+			annualCache?.key !== yearKey(year) ||
+			Date.now() - annualCache.savedAt >= ANNUAL_CACHE_TTL
+		)
+			return undefined;
+		return annualCache.calendar;
+	};
+	const invalidateYears = () => {
+		annualGeneration++;
+		annualCache = null;
+		pendingYears.clear();
+	};
+	// Public search results survive picker remounts; signed account selections are separate.
+	const citySearches = new Map<
+		string,
+		{ cities: CalendarCity[]; savedAt: number }
+	>();
+	const pendingCitySearches = new Map<string, Promise<CalendarCity[]>>();
+	const cachedCities = (query: string) => {
+		const key = normalizeCityQuery(query);
+		const cached = citySearches.get(key);
+		if (!cached) return undefined;
+		if (Date.now() - cached.savedAt >= CITY_SEARCH_CACHE_TTL) {
+			citySearches.delete(key);
+			return undefined;
+		}
+		citySearches.delete(key);
+		citySearches.set(key, cached);
+		return cached.cities;
+	};
+	const searchCities = (query: string): Promise<CalendarCity[]> => {
+		const key = normalizeCityQuery(query);
+		const cached = cachedCities(key);
+		if (cached) return Promise.resolve(cached);
+		const pending = pendingCitySearches.get(key);
+		if (pending) return pending;
+		const search = api
+			.request<{ cities: CalendarCity[] }>(
+				`/calendar/locations?q=${encodeURIComponent(key)}`,
+				{ public: true },
+			)
+			.then(({ cities }) => {
+				citySearches.delete(key);
+				citySearches.set(key, { cities, savedAt: Date.now() });
+				if (citySearches.size > CITY_SEARCH_CACHE_LIMIT) {
+					const oldestKey = citySearches.keys().next().value;
+					if (oldestKey !== undefined) citySearches.delete(oldestKey);
+				}
+				return cities;
+			})
+			.finally(() => pendingCitySearches.delete(key));
+		pendingCitySearches.set(key, search);
+		return search;
+	};
 	const persist = () => {
 		// Store the public calendar with its location, and keep city changes in order.
 		const saved = JSON.stringify({
@@ -163,6 +233,7 @@ export function createCalendarClient(
 		try {
 			const calendar = await lookup(city, timezone, new Date(), 14, "today");
 			if (id === requestId) {
+				invalidateYears();
 				update({ calendar });
 				persist();
 			}
@@ -215,17 +286,13 @@ export function createCalendarClient(
 		},
 		selectCity: (city: CalendarCity) => {
 			requestId++;
+			invalidateYears();
 			update({ city, calendar: null, busy: false, error: null });
 			persist();
 			void refresh();
 		},
-		searchCities: async (query: string) =>
-			(
-				await api.request<{ cities: CalendarCity[] }>(
-					`/calendar/locations?q=${encodeURIComponent(query.trim())}`,
-					{ public: true },
-				)
-			).cities,
+		cachedCities,
+		searchCities,
 		day: (offset: number) => {
 			if (!state.city) return Promise.reject(new Error("Choose a city first"));
 			const instant = new Date();
@@ -238,17 +305,24 @@ export function createCalendarClient(
 				`day/${offset}/${instant.toISOString().slice(0, 10)}`,
 			);
 		},
-		year: async (year: number) => {
-			if (!state.city) throw new Error("Choose a city first");
+		cachedYear,
+		year: (year: number): Promise<CalendarResponse> => {
+			if (!state.city) return Promise.reject(new Error("Choose a city first"));
+			const cached = cachedYear(year);
+			if (cached) return Promise.resolve(cached);
+			const key = yearKey(year);
+			const pending = pendingYears.get(key);
+			if (pending) return pending;
+			const generation = annualGeneration;
 			const { city, timezone } = state;
 			const count = Math.round(
 				(Date.UTC(year + 1, 0, 1) - Date.UTC(year, 0, 1)) / 86400000,
 			);
-			const parts: CalendarResponse[] = [];
-			// Keep each lookup within the existing API's 60-day range.
+			const lookups: Promise<CalendarResponse>[] = [];
+			// Fetch independent chunks together within the existing API's 60-day range.
 			for (let start = -1; start < count; start += 60)
-				parts.push(
-					await lookup(
+				lookups.push(
+					lookup(
 						city,
 						timezone,
 						new Date(Date.UTC(year, 0, start + 1, 12)),
@@ -256,17 +330,28 @@ export function createCalendarClient(
 						`year/${year}/${start}`,
 					),
 				);
-			return {
-				...parts[0],
-				days: [
-					...new Map(
-						parts
-							.flatMap((part) => part.days)
-							.filter((day) => day.civil_date.startsWith(`${year}-`))
-							.map((day) => [day.civil_date, day]),
-					).values(),
-				].sort((a, b) => a.civil_date.localeCompare(b.civil_date)),
-			};
+			const request = Promise.all(lookups)
+				.then((parts) => {
+					const calendar = {
+						...parts[0],
+						days: [
+							...new Map(
+								parts
+									.flatMap((part) => part.days)
+									.filter((day) => day.civil_date.startsWith(`${year}-`))
+									.map((day) => [day.civil_date, day]),
+							).values(),
+						].sort((a, b) => a.civil_date.localeCompare(b.civil_date)),
+					};
+					if (generation === annualGeneration)
+						annualCache = { key, calendar, savedAt: Date.now() };
+					return calendar;
+				})
+				.finally(() => {
+					if (pendingYears.get(key) === request) pendingYears.delete(key);
+				});
+			pendingYears.set(key, request);
+			return request;
 		},
 	};
 }

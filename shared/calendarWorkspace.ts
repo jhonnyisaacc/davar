@@ -13,8 +13,10 @@ type Workspace = {
 	annual: Resource<CalendarResponse | null>;
 };
 type CalendarLookup = {
+	cachedCities?(query: string): CalendarCity[] | undefined;
 	searchCities(query: string): Promise<CalendarCity[]>;
 	day(offset: number): Promise<CalendarResponse>;
+	cachedYear?(year: number): CalendarResponse | undefined;
 	year(year: number): Promise<CalendarResponse>;
 };
 const empty = <T>(data: T): Resource<T> => ({
@@ -98,7 +100,17 @@ export function createCalendarWorkspace(
 				update("cities", empty([]));
 				return undefined;
 			}
-			return request("cities", [], () => client.searchCities(query), 600);
+			const cached = client.cachedCities?.(query);
+			if (cached) {
+				update("cities", {
+					data: cached,
+					busy: false,
+					error: false,
+					searched: true,
+				});
+				return undefined;
+			}
+			return request("cities", [], () => client.searchCities(query), 250);
 		},
 		loadDay: (offset: number, enabled: boolean) => {
 			if (!enabled || offset === 0) {
@@ -107,7 +119,19 @@ export function createCalendarWorkspace(
 			}
 			return request("day", null, () => client.day(offset));
 		},
-		loadYear: (year: number, enabled: boolean) =>
-			enabled ? request("annual", null, () => client.year(year)) : undefined,
+		loadYear: (year: number, enabled: boolean) => {
+			if (!enabled) return undefined;
+			const cached = client.cachedYear?.(year);
+			if (cached) {
+				update("annual", {
+					data: cached,
+					busy: false,
+					error: false,
+					searched: true,
+				});
+				return undefined;
+			}
+			return request("annual", null, () => client.year(year));
+		},
 	};
 }

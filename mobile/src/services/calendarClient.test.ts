@@ -1,6 +1,6 @@
 // Bun provides this module at runtime; Expo does not index it.
 // eslint-disable-next-line import/no-unresolved
-import { describe, expect, test } from "bun:test";
+import { describe, expect, spyOn, test } from "bun:test";
 import {
   CALENDAR_LOCATION_KEY,
   createCalendarClient,
@@ -46,10 +46,12 @@ const storage = (initial = location) => {
 };
 function deferred<T>() {
   let resolve!: (value: T) => void;
-  const promise = new Promise<T>((done) => {
+  let reject!: (error: Error) => void;
+  const promise = new Promise<T>((done, fail) => {
     resolve = done;
+    reject = fail;
   });
-  return { promise, resolve };
+  return { promise, resolve, reject };
 }
 const tick = () => new Promise((resolve) => setTimeout(resolve, 0));
 
@@ -288,6 +290,280 @@ describe("calendar restart", () => {
         busy: false,
         error: null,
       });
+    } finally {
+      stop();
+    }
+  });
+});
+
+describe("city search cache", () => {
+  test("reuses normalized searches while preserving accents and Hebrew names", async () => {
+    const requests: string[] = [];
+    const client = createCalendarClient(
+      {
+        request: async <T>(path: string, options?: { public?: boolean }) => {
+          expect(options?.public).toBe(true);
+          requests.push(path);
+          return { cities: [city] } as T;
+        },
+      },
+      storage(),
+    );
+    for (const [query, repeat] of [
+      [" Buenos   Aires ", "BUENOS AIRES"],
+      ["SA\u0303O PAULO", "são paulo"],
+      ["MÁLAGA", "málaga"],
+      [" ירושלים ", "ירושלים"],
+    ]) {
+      expect(client.cachedCities(query)).toBeUndefined();
+      await client.searchCities(query);
+      expect(client.cachedCities(repeat)).toEqual([city]);
+      await client.searchCities(repeat);
+    }
+    expect(
+      requests.map((path) => new URLSearchParams(path.split("?")[1]).get("q")),
+    ).toEqual(["buenos aires", "são paulo", "málaga", "ירושלים"]);
+    // Accented and unaccented searches may return different matches.
+    expect(client.cachedCities("malaga")).toBeUndefined();
+  });
+
+  test("shares an in-flight search and retries a failure instead of caching it", async () => {
+    const pending = deferred<{ cities: (typeof city)[] }>();
+    let calls = 0;
+    const client = createCalendarClient(
+      {
+        request: async <T>() => {
+          calls++;
+          return (
+            calls === 1 ? await pending.promise : { cities: [city] }
+          ) as T;
+        },
+      },
+      storage(),
+    );
+    const first = client.searchCities("Buenos");
+    const repeated = client.searchCities(" BUENOS ");
+    expect(repeated).toBe(first);
+    expect(calls).toBe(1);
+    pending.reject(new Error("unavailable"));
+    await expect(first).rejects.toThrow("unavailable");
+    expect(client.cachedCities("Buenos")).toBeUndefined();
+    expect(await client.searchCities("Buenos")).toEqual([city]);
+    expect(calls).toBe(2);
+  });
+
+  test("empty results are cached and expire after a day even when reused", async () => {
+    let time = 1000;
+    let calls = 0;
+    const clock = spyOn(Date, "now").mockImplementation(() => time);
+    try {
+      const client = createCalendarClient(
+        {
+          request: async <T>() => {
+            calls++;
+            return { cities: [] } as T;
+          },
+        },
+        storage(),
+      );
+      await client.searchCities("Nowhere");
+      time += 24 * 60 * 60 * 1000 - 1;
+      expect(client.cachedCities("nowhere")).toEqual([]);
+      await client.searchCities("nowhere");
+      expect(calls).toBe(1);
+      time++;
+      expect(client.cachedCities("nowhere")).toBeUndefined();
+      await client.searchCities("nowhere");
+      expect(calls).toBe(2);
+    } finally {
+      clock.mockRestore();
+    }
+  });
+
+  test("bounds the cache to 100 searches and keeps recently used results", async () => {
+    let calls = 0;
+    const client = createCalendarClient(
+      {
+        request: async <T>() => {
+          calls++;
+          return { cities: [city] } as T;
+        },
+      },
+      storage(),
+    );
+    for (let index = 0; index < 100; index++)
+      await client.searchCities(`City ${index}`);
+    await client.searchCities("city 0");
+    await client.searchCities("city 100");
+    expect(calls).toBe(101);
+    expect(client.cachedCities("city 0")).toEqual([city]);
+    expect(client.cachedCities("city 1")).toBeUndefined();
+    await client.searchCities("city 1");
+    expect(calls).toBe(102);
+  });
+});
+
+describe("annual calendar loading", () => {
+  function chunk(query: URLSearchParams): CalendarResponse {
+    const first = Date.parse(query.get("instant")!);
+    return {
+      ...calendar(),
+      days: Array.from({ length: Number(query.get("days")) }, (_, index) => ({
+        ...calendar().days[0],
+        civil_date: new Date(first + index * 86400000)
+          .toISOString()
+          .slice(0, 10),
+      })),
+    };
+  }
+
+  test("starts every chunk together, shares in-flight requests, and reuses the completed year", async () => {
+    const chunks: {
+      query: URLSearchParams;
+      pending: ReturnType<typeof deferred<CalendarResponse>>;
+    }[] = [];
+    const client = createCalendarClient(
+      {
+        request: async <T>(path: string) => {
+          const query = new URLSearchParams(path.split("?")[1]);
+          if (query.get("days") === "14") return calendar() as T;
+          const pending = deferred<CalendarResponse>();
+          chunks.push({ query, pending });
+          return (await pending.promise) as T;
+        },
+      },
+      storage(),
+    );
+    const stop = client.start();
+    try {
+      await tick();
+      const first = client.year(2024);
+      expect(client.year(2024)).toBe(first);
+      // Every request must start before any response arrives.
+      expect(chunks).toHaveLength(7);
+      expect(chunks.every(({ query }) => Number(query.get("days")) <= 60)).toBe(
+        true,
+      );
+      expect(client.cachedYear(2024)).toBeUndefined();
+      for (const { query, pending } of [...chunks].reverse())
+        pending.resolve(chunk(query));
+      const result = await first;
+      expect(result.days).toHaveLength(366);
+      expect(result.days[0].civil_date).toBe("2024-01-01");
+      expect(result.days.at(-1)?.civil_date).toBe("2024-12-31");
+      expect(client.cachedYear(2024)).toBe(result);
+      expect(client.cachedYear(2025)).toBeUndefined();
+      expect(await client.year(2024)).toBe(result);
+      expect(chunks).toHaveLength(7);
+    } finally {
+      stop();
+    }
+  });
+
+  test("expires a cached year after fifteen minutes without extending it on reuse", async () => {
+    let now = Date.now();
+    const clock = spyOn(Date, "now").mockImplementation(() => now);
+    let requests = 0;
+    const client = createCalendarClient(
+      {
+        request: async <T>(path: string) => {
+          const query = new URLSearchParams(path.split("?")[1]);
+          if (query.get("days") === "14") return calendar() as T;
+          requests++;
+          return chunk(query) as T;
+        },
+      },
+      storage(),
+    );
+    const stop = client.start();
+    try {
+      await tick();
+      const first = await client.year(2026);
+      expect(first.days).toHaveLength(365);
+      now += 15 * 60 * 1000 - 1;
+      expect(await client.year(2026)).toBe(first);
+      expect(requests).toBe(7);
+      now++;
+      expect(client.cachedYear(2026)).toBeUndefined();
+      expect(await client.year(2026)).not.toBe(first);
+      expect(requests).toBe(14);
+    } finally {
+      stop();
+      clock.mockRestore();
+    }
+  });
+
+  for (const change of ["city", "refresh"] as const) {
+    test(`${change} invalidates annual requests and prevents old responses from repopulating the cache`, async () => {
+      const chunks: ReturnType<typeof deferred<CalendarResponse>>[] = [];
+      const client = createCalendarClient(
+        {
+          request: async <T>(path: string) => {
+            const query = new URLSearchParams(path.split("?")[1]);
+            if (query.get("days") === "14") return calendar() as T;
+            const pending = deferred<CalendarResponse>();
+            chunks.push(pending);
+            return (await pending.promise) as T;
+          },
+        },
+        storage(),
+      );
+      const stop = client.start();
+      const changeCalendar = async () => {
+        if (change === "city") {
+          client.selectCity({
+            ...city,
+            city: "Jerusalem",
+            latitude: 31.8,
+            longitude: 35.2,
+          });
+          await tick();
+        } else await client.refresh();
+      };
+      try {
+        await tick();
+        const old = client.year(2026);
+        await changeCalendar();
+        const fresh = client.year(2026);
+        expect(fresh).not.toBe(old);
+        expect(chunks).toHaveLength(14);
+        for (const pending of chunks.slice(0, 7)) pending.resolve(calendar());
+        await old;
+        expect(client.cachedYear(2026)).toBeUndefined();
+        expect(client.year(2026)).toBe(fresh);
+        for (const pending of chunks.slice(7)) pending.resolve(calendar());
+        expect(client.cachedYear(2026)).toBeUndefined();
+        const result = await fresh;
+        expect(client.cachedYear(2026)).toBe(result);
+        await changeCalendar();
+        expect(client.cachedYear(2026)).toBeUndefined();
+      } finally {
+        stop();
+      }
+    });
+  }
+
+  test("failed chunks never cache an incomplete year and a subsequent lookup retries", async () => {
+    let requests = 0;
+    const client = createCalendarClient(
+      {
+        request: async <T>(path: string) => {
+          const query = new URLSearchParams(path.split("?")[1]);
+          if (query.get("days") === "14") return calendar() as T;
+          if (++requests === 4) throw new Error("offline");
+          return chunk(query) as T;
+        },
+      },
+      storage(),
+    );
+    const stop = client.start();
+    try {
+      await tick();
+      await expect(client.year(2026)).rejects.toThrow("offline");
+      expect(requests).toBe(7);
+      expect(client.cachedYear(2026)).toBeUndefined();
+      expect((await client.year(2026)).days).toHaveLength(365);
+      expect(requests).toBe(14);
     } finally {
       stop();
     }
