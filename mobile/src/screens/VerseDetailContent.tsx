@@ -14,11 +14,8 @@ import {
   Animated,
   FlatList,
   Modal,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
   Pressable,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
   ToastAndroid,
@@ -29,6 +26,7 @@ import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Reanimated, {
   cancelAnimation,
   runOnJS,
+  useAnimatedScrollHandler,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
@@ -44,6 +42,11 @@ import type { BottomTabNavigationProp } from "expo-router/js-tabs";
 import type { ParamListBase } from "expo-router/react-navigation";
 import { VerseCard } from "@/src/components/VerseCard";
 import { VerseCardSkeleton } from "@/src/components/VerseCardSkeleton";
+import { getNavigationDockContentPadding } from "@/src/constants/navigationDock";
+import {
+  getVerseSwipeDirection,
+  VERSE_SCROLL_EDGE_EPSILON as EDGE_EPSILON,
+} from "@/src/services/versePaging";
 import { WordAnalysisBottomSheet } from "@/src/components/WordAnalysisBottomSheet";
 import {
   NavigationSheet,
@@ -377,6 +380,7 @@ type VersePageProps = {
   pillVisible: boolean;
   pageHeight: number;
   topPadding: number;
+  bottomPadding: number;
   showWordHint: boolean;
   isActive: boolean;
   isSelectedVerse: boolean;
@@ -403,9 +407,6 @@ type VersePageProps = {
   onScrollBegin?: () => void;
 };
 
-const EDGE_EPSILON = 2;
-const SWIPE_VELOCITY_THRESHOLD = 0.55;
-const PAN_SWIPE_VELOCITY_THRESHOLD = 600;
 const HEBREW_PRESS_SUPPRESSION_MS = 250;
 
 const VersePageComponent = ({
@@ -415,6 +416,7 @@ const VersePageComponent = ({
   pillVisible,
   pageHeight,
   topPadding,
+  bottomPadding,
   showWordHint,
   isActive,
   isSelectedVerse,
@@ -434,10 +436,32 @@ const VersePageComponent = ({
   const { width, height } = useWindowDimensions();
   const layout = getResponsiveLayout(width, height);
   const horizontalPadding = layout.isTablet ? layout.horizontalPadding : spacing[4];
-  const bottomPadding = spacing[8];
   const canScroll = contentHeight > viewportHeight + EDGE_EPSILON;
   const effectiveTopPadding = canScroll ? topPadding : spacing[6];
   const lastHebrewPressInRef = useRef(0);
+  // A swipe ending over a word must not also open its analysis sheet.
+  const isSwipingRef = useRef(false);
+
+  const handleTouchStart = useCallback(() => {
+    isSwipingRef.current = false;
+  }, []);
+
+  const handleSwipeStart = useCallback(() => {
+    if (isSwipingRef.current) return;
+    isSwipingRef.current = true;
+    onScrollBegin?.();
+  }, [onScrollBegin]);
+
+  const handleVersePress = useCallback(() => {
+    if (!isSwipingRef.current) onVersePress();
+  }, [onVersePress]);
+
+  const handleWordPress = useCallback(
+    (word: DisplayVerse["words"][number]) => {
+      if (!isSwipingRef.current) onWordPress(word, item.id);
+    },
+    [item.id, onWordPress],
+  );
 
   const markHebrewPressIn = useCallback(() => {
     lastHebrewPressInRef.current = Date.now();
@@ -445,7 +469,10 @@ const VersePageComponent = ({
 
   const handleNonHebrewAreaPress = useCallback(() => {
     // Ignore bubbling taps immediately following Hebrew word/verse interactions.
-    if (Date.now() - lastHebrewPressInRef.current < HEBREW_PRESS_SUPPRESSION_MS) {
+    if (
+      isSwipingRef.current ||
+      Date.now() - lastHebrewPressInRef.current < HEBREW_PRESS_SUPPRESSION_MS
+    ) {
       return;
     }
     onNonHebrewPress();
@@ -460,58 +487,24 @@ const VersePageComponent = ({
     });
   }, [canScroll, contentHeight, item.id, onMetricsChange, viewportHeight]);
 
-  const handleScroll = useCallback(
-    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+  const scrollOffsetY = useSharedValue(0);
+  const swipeStartOffsetY = useSharedValue(0);
+  const nativeScrollGesture = useMemo(() => Gesture.Native(), []);
+  const handleScroll = useAnimatedScrollHandler(
+    (event) => {
+      scrollOffsetY.value = event.contentOffset.y;
       if (!isActive) {
         return;
       }
 
-      onMetricsChange(item.id, {
+      runOnJS(onMetricsChange)(item.id, {
         canScroll,
-        offsetY: event.nativeEvent.contentOffset.y,
-        contentHeight: event.nativeEvent.contentSize.height,
-        viewportHeight: event.nativeEvent.layoutMeasurement.height,
+        offsetY: event.contentOffset.y,
+        contentHeight: event.contentSize.height,
+        viewportHeight: event.layoutMeasurement.height,
       });
     },
     [canScroll, isActive, item.id, onMetricsChange],
-  );
-
-  const handleScrollEndDrag = useCallback(
-    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-      if (!isActive) {
-        return;
-      }
-
-      const velocityY = event.nativeEvent.velocity?.y ?? 0;
-      if (Math.abs(velocityY) < SWIPE_VELOCITY_THRESHOLD) {
-        return;
-      }
-
-      const nextCanScroll =
-        event.nativeEvent.contentSize.height >
-        event.nativeEvent.layoutMeasurement.height + EDGE_EPSILON;
-      const maxOffset = Math.max(
-        0,
-        event.nativeEvent.contentSize.height -
-          event.nativeEvent.layoutMeasurement.height,
-      );
-      const offsetY = event.nativeEvent.contentOffset.y;
-      const atTop = offsetY <= EDGE_EPSILON;
-      const atBottom = offsetY >= maxOffset - EDGE_EPSILON;
-
-      if (velocityY > SWIPE_VELOCITY_THRESHOLD && (!nextCanScroll || atBottom)) {
-        onEdgeSwipe(item.id, "next");
-        return;
-      }
-
-      if (
-        velocityY < -SWIPE_VELOCITY_THRESHOLD &&
-        (!nextCanScroll || atTop)
-      ) {
-        onEdgeSwipe(item.id, "previous");
-      }
-    },
-    [isActive, item.id, onEdgeSwipe],
   );
 
   const swipeTranslateY = useSharedValue(0);
@@ -527,37 +520,42 @@ const VersePageComponent = ({
   const panGesture = useMemo(
     () =>
       Gesture.Pan()
-        .enabled(!canScroll && isActive)
+        .enabled(isActive)
+        .simultaneousWithExternalGesture(nativeScrollGesture)
         .onBegin(() => {
+          runOnJS(handleTouchStart)();
+          swipeStartOffsetY.value = scrollOffsetY.value;
           cancelAnimation(swipeTranslateY);
           swipeTranslateY.value = 0;
-          if (onScrollBegin) runOnJS(onScrollBegin)();
+        })
+        .onStart(() => {
+          runOnJS(handleSwipeStart)();
         })
         .onUpdate((event) => {
-          swipeTranslateY.value = event.translationY * 0.2;
+          if (!canScroll) {
+            swipeTranslateY.value = event.translationY * 0.2;
+          }
         })
         .onEnd((event) => {
-          if (event.velocityY < -PAN_SWIPE_VELOCITY_THRESHOLD) {
-            if (!canSwipeNext) {
+          const direction = getVerseSwipeDirection({
+            startOffsetY: swipeStartOffsetY.value,
+            offsetY: scrollOffsetY.value,
+            maxOffsetY: Math.max(0, contentHeight - viewportHeight),
+            velocityY: event.velocityY,
+          });
+
+          if (direction) {
+            if (
+              (direction === "next" && !canSwipeNext) ||
+              (direction === "previous" && !canSwipePrevious)
+            ) {
               swipeTranslateY.value = withSpring(0, {
                 damping: 20,
                 stiffness: 300,
               });
-              runOnJS(onEdgeSwipe)(item.id, "next");
-              return;
             }
-            runOnJS(onEdgeSwipe)(item.id, "next");
-          } else if (event.velocityY > PAN_SWIPE_VELOCITY_THRESHOLD) {
-            if (!canSwipePrevious) {
-              swipeTranslateY.value = withSpring(0, {
-                damping: 20,
-                stiffness: 300,
-              });
-              runOnJS(onEdgeSwipe)(item.id, "previous");
-              return;
-            }
-            runOnJS(onEdgeSwipe)(item.id, "previous");
-          } else {
+            runOnJS(onEdgeSwipe)(item.id, direction);
+          } else if (!canScroll) {
             swipeTranslateY.value = withSpring(0, {
               damping: 20,
               stiffness: 300,
@@ -568,11 +566,17 @@ const VersePageComponent = ({
       canScroll,
       canSwipeNext,
       canSwipePrevious,
+      contentHeight,
+      handleSwipeStart,
+      handleTouchStart,
       isActive,
       item.id,
+      nativeScrollGesture,
       onEdgeSwipe,
-      onScrollBegin,
+      scrollOffsetY,
+      swipeStartOffsetY,
       swipeTranslateY,
+      viewportHeight,
     ],
   );
 
@@ -599,7 +603,7 @@ const VersePageComponent = ({
         <BookChapterPill
           bookLabel={bookLabel}
           chapter={item.chapter}
-          onPress={onVersePress}
+          onPress={handleVersePress}
         />
       </Animated.View>
       <VerseCard
@@ -608,8 +612,8 @@ const VersePageComponent = ({
         showWordHint={showWordHint && isSelectedVerse}
         selectedWord={isSelectedVerse ? selectedWord : null}
         isBesorah={isBesorah}
-        onVersePress={onVersePress}
-        onWordPress={(word) => onWordPress(word, item.id)}
+        onVersePress={handleVersePress}
+        onWordPress={handleWordPress}
         onHebrewPressIn={markHebrewPressIn}
       />
     </View>
@@ -627,29 +631,30 @@ const VersePageComponent = ({
           canScroll ? undefined : animatedSwipeStyle,
         ]}
       >
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          bounces={false}
-          alwaysBounceVertical={false}
-          overScrollMode="never"
-          nestedScrollEnabled={canScroll}
-          scrollEnabled={canScroll}
-          scrollEventThrottle={16}
-          onLayout={(event) => {
-            setViewportHeight(event.nativeEvent.layout.height);
-          }}
-          onContentSizeChange={(_, height) => {
-            setContentHeight(height);
-          }}
-          onScrollBeginDrag={onScrollBegin}
-          onScroll={handleScroll}
-          onScrollEndDrag={handleScrollEndDrag}
-          contentContainerStyle={{
-            minHeight: pageHeight,
-          }}
-        >
-          {verseContent}
-        </ScrollView>
+        <GestureDetector gesture={nativeScrollGesture}>
+          <Reanimated.ScrollView
+            showsVerticalScrollIndicator={false}
+            bounces={false}
+            alwaysBounceVertical={false}
+            overScrollMode="never"
+            nestedScrollEnabled={canScroll}
+            scrollEnabled={canScroll}
+            scrollEventThrottle={16}
+            onLayout={(event) => {
+              setViewportHeight(event.nativeEvent.layout.height);
+            }}
+            onContentSizeChange={(_, height) => {
+              setContentHeight(height);
+            }}
+            onScrollBeginDrag={handleSwipeStart}
+            onScroll={handleScroll}
+            contentContainerStyle={{
+              minHeight: pageHeight,
+            }}
+          >
+            {verseContent}
+          </Reanimated.ScrollView>
+        </GestureDetector>
       </Reanimated.View>
     </GestureDetector>
   );
@@ -663,6 +668,8 @@ const VersePage = memo(
     prevProps.pillVisibility === nextProps.pillVisibility &&
     prevProps.pillVisible === nextProps.pillVisible &&
     prevProps.pageHeight === nextProps.pageHeight &&
+    prevProps.topPadding === nextProps.topPadding &&
+    prevProps.bottomPadding === nextProps.bottomPadding &&
     prevProps.showWordHint === nextProps.showWordHint &&
     prevProps.isActive === nextProps.isActive &&
     prevProps.isSelectedVerse === nextProps.isSelectedVerse &&
@@ -742,6 +749,10 @@ export const VerseDetailContent = () => {
 
   const paramId = Array.isArray(params.id) ? params.id[0] : params.id;
   const isStandaloneVerseDetailRoute = Boolean(paramId);
+  const bottomContentInset = isStandaloneVerseDetailRoute
+    ? insets.bottom
+    : getNavigationDockContentPadding(insets.bottom);
+  const verseBottomPadding = bottomContentInset + spacing[8];
 
   // Standalone screens use local state so they never touch the global store
   const [localVerseId, setLocalVerseId] = useState(
@@ -757,8 +768,6 @@ export const VerseDetailContent = () => {
   // Keep refs current for the onViewableItemsChanged closure
   const effectiveVerseIdRef = useRef(effectiveVerseId);
   const setEffectiveVerseIdRef = useRef(setEffectiveVerseId);
-  // Pending verse number to scroll to after cross-book/chapter data loads
-  const pendingScrollVerseRef = useRef<number | null>(null);
   useEffect(() => {
     effectiveVerseIdRef.current = effectiveVerseId;
     setEffectiveVerseIdRef.current = setEffectiveVerseId;
@@ -834,6 +843,11 @@ export const VerseDetailContent = () => {
     () => (verse ? orderedVerses.findIndex((item) => item.id === verse.id) : 0),
     [orderedVerses, verse],
   );
+  // Initial positioning must use loaded data and measured geometry.
+  const isVersePagerReady =
+    !isLoading &&
+    measuredHeight > 0 &&
+    orderedVerses[0]?.id.startsWith(`${bookId}-${chapter}-`);
   const isChapterFlowMode =
     showFullChapter && seferMode && (translationOnly || hebrewOnly);
 
@@ -853,8 +867,6 @@ export const VerseDetailContent = () => {
   );
 
   const [showWordHint] = useState(false);
-  const pageHeightRef = useRef(pageHeight);
-  pageHeightRef.current = pageHeight;
   const swipeSyncTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const listRef = useRef<FlatList<(typeof orderedVerses)[number]>>(null);
   const verseScrollMetricsRef = useRef<
@@ -875,9 +887,13 @@ export const VerseDetailContent = () => {
     }: {
       viewableItems: { item: (typeof orderedVerses)[number] }[];
     }) => {
-      // Skip updates while waiting for cross-book/chapter data to load
-      if (pendingScrollVerseRef.current !== null) return;
       const next = viewableItems[0]?.item;
+      // Ignore callbacks from a chapter that is being replaced.
+      const activeChapter = effectiveVerseIdRef.current
+        .split("-")
+        .slice(0, 2)
+        .join("-");
+      if (!next?.id.startsWith(`${activeChapter}-`)) return;
       if (next && next.id !== effectiveVerseIdRef.current) {
         setEffectiveVerseIdRef.current(next.id);
       }
@@ -982,9 +998,6 @@ export const VerseDetailContent = () => {
             animated: true,
           });
         }
-      } else {
-        // Different book/chapter: defer scroll until new data loads
-        pendingScrollVerseRef.current = verseNum;
       }
     },
     [orderedVerses, setEffectiveVerseId, bookId, chapter, pageHeight],
@@ -1189,6 +1202,7 @@ export const VerseDetailContent = () => {
         pillVisible={pillVisible}
         pageHeight={pageHeight}
         topPadding={contentTopPadding}
+        bottomPadding={verseBottomPadding}
         showWordHint={showWordHint}
         isActive={item.id === verse?.id}
         isSelectedVerse={item.id === verse?.id}
@@ -1210,6 +1224,7 @@ export const VerseDetailContent = () => {
       pillVisible,
       pageHeight,
       contentTopPadding,
+      verseBottomPadding,
       showWordHint,
       verse?.id,
       orderedVerses.length,
@@ -1349,26 +1364,6 @@ export const VerseDetailContent = () => {
           });
           if (!isMounted || !isCurrentLoad()) return;
           setChapterVerses(enriched);
-        }
-        // Scroll to the pending target verse after cross-book/chapter navigation
-        if (pendingScrollVerseRef.current !== null) {
-          const targetVerse = pendingScrollVerseRef.current;
-          pendingScrollVerseRef.current = null;
-          const sorted = [...verses].sort(
-            (a, b) => a.chapter - b.chapter || a.verse - b.verse,
-          );
-          const targetIndex = sorted.findIndex(
-            (item) => item.verse === targetVerse,
-          );
-          if (targetIndex >= 0) {
-            // Use requestAnimationFrame to ensure FlatList has updated with new data
-            requestAnimationFrame(() => {
-              listRef.current?.scrollToOffset({
-                offset: targetIndex * pageHeightRef.current,
-                animated: false,
-              });
-            });
-          }
         }
       } catch {
         if (!isMounted) return;
@@ -1529,37 +1524,41 @@ export const VerseDetailContent = () => {
             />
             )
           ) : (
-            <FlatList
-              ref={listRef}
-              data={orderedVerses}
-              keyExtractor={keyExtractor}
-              renderItem={renderVersePage}
-              directionalLockEnabled
-              scrollEnabled={false}
-              showsVerticalScrollIndicator={false}
-              decelerationRate="fast"
-              snapToInterval={pageHeight}
-              snapToAlignment="start"
-              windowSize={5}
-              initialNumToRender={3}
-              maxToRenderPerBatch={4}
-              updateCellsBatchingPeriod={50}
-              initialScrollIndex={Math.max(currentIndex, 0)}
-              getItemLayout={(_, index) => ({
-                length: pageHeight,
-                offset: pageHeight * index,
-                index,
-              })}
-              viewabilityConfig={viewabilityConfigRef.current}
-              onViewableItemsChanged={onViewableItemsChanged.current}
-            />
+            isVersePagerReady && (
+              <FlatList
+                // A new chapter or height needs a fresh initialScrollIndex.
+                key={`${bookId}-${chapter}:${pageHeight}`}
+                ref={listRef}
+                data={orderedVerses}
+                keyExtractor={keyExtractor}
+                renderItem={renderVersePage}
+                directionalLockEnabled
+                scrollEnabled={false}
+                showsVerticalScrollIndicator={false}
+                decelerationRate="fast"
+                snapToInterval={pageHeight}
+                snapToAlignment="start"
+                windowSize={5}
+                initialNumToRender={3}
+                maxToRenderPerBatch={4}
+                updateCellsBatchingPeriod={50}
+                initialScrollIndex={Math.max(currentIndex, 0)}
+                getItemLayout={(_, index) => ({
+                  length: pageHeight,
+                  offset: pageHeight * index,
+                  index,
+                })}
+                viewabilityConfig={viewabilityConfigRef.current}
+                onViewableItemsChanged={onViewableItemsChanged.current}
+              />
+            )
           )}
           {shouldShowSwipeHint && !showFullChapter ? (
             <View
               pointerEvents="none"
               style={[
                 styles.swipeHintRow,
-                { bottom: spacing[1] },
+                { bottom: bottomContentInset + spacing[1] },
               ]}
             >
               <Text style={styles.swipeHintText}>
@@ -1575,6 +1574,7 @@ export const VerseDetailContent = () => {
         currentVerseId={selectedWordVerseId ?? effectiveVerseId}
         isBesorah={isBesorah}
         onClosed={handleSheetClosed}
+        hasNavigationDock={!isStandaloneVerseDetailRoute}
       />
       <NavigationSheet
         ref={navigationSheetRef}
