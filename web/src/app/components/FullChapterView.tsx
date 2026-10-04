@@ -1,7 +1,6 @@
 import { useTranslation } from "../hooks/useTranslation";
 import type { VerseResponse, WordResponse } from "../services/verseService";
 import {
-	getPrefixSegments,
 	removeMaqafForDisplay,
 	removeSofPasukForDisplay,
 	stripCantillation,
@@ -210,11 +209,6 @@ export function FullChapterView({
 					: Boolean(normalizedSelected) &&
 						normalizedSelected === normalizedWord);
 
-			const prefixSegments =
-				!variantEntry && word.prefixes?.length
-					? getPrefixSegments(displayText, word.prefixes)
-					: null;
-
 			return (
 				<span key={`${verse.chapter}-${verse.verse}-${word.position}`}>
 					<button
@@ -235,24 +229,7 @@ export function FullChapterView({
 								: undefined
 						}
 					>
-						{prefixSegments?.prefixes?.length ? (
-							<>
-								<span
-									style={{ color: "var(--text-secondary)" }}
-									className="cursor-pointer hover:opacity-80"
-									title={t("verse.prefixLabel", {
-										prefix: word.prefixes?.join(", ") ?? "",
-									})}
-								>
-									{prefixSegments.prefixes.join("")}
-								</span>
-								<span style={{ color: "var(--text-hebrew)" }}>
-									{prefixSegments.root}
-								</span>
-							</>
-						) : (
-							displayText
-						)}
+						{displayText}
 					</button>
 					{wordIdx < verse.words.length - 1 && " "}
 				</span>

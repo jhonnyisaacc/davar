@@ -22,7 +22,6 @@ import { useAppStore, type AppState } from "@/src/store/useAppStore";
 import type { DisplayVerse } from "@/src/services/scripture";
 import type { TranslationFootnote } from "@/src/types/api";
 import {
-  getPrefixSegments,
   stripCantillation,
   stripNikud,
   stripMeteg,
@@ -328,10 +327,6 @@ const createStyles = (
     firstWordRowGreek: {
       flexDirection: "row",
     },
-    hebrewPrefixRow: {
-      flexDirection: "row-reverse",
-      alignItems: "center",
-    },
     verseNumberPressable: {
       paddingHorizontal: spacing[1],
       paddingVertical: 0,
@@ -615,11 +610,6 @@ export const VerseCard = ({
               displayText = removeSofPasukForDisplay(displayText);
             }
 
-            const prefixSegments =
-              hasVisibleQumranVariant || !word.prefixes?.length
-                ? null
-                : getPrefixSegments(displayText, word.prefixes);
-
             const wordStyles: StyleProp<ViewStyle>[] = [
               styles.hebrewWordPressable,
             ];
@@ -630,30 +620,6 @@ export const VerseCard = ({
             }
 
             const renderWordContent = () => {
-              if (prefixSegments?.prefixes?.length) {
-                return (
-                  <View style={styles.hebrewPrefixRow}>
-                    <Text
-                      style={[
-                        styles.hebrewWord,
-                        sourceWordStyle,
-                        { color: colors.textSecondary },
-                      ]}
-                    >
-                      {prefixSegments.prefixes.join("")}
-                    </Text>
-                    <Text
-                      style={[
-                        styles.hebrewWord,
-                        sourceWordStyle,
-                        { color: colors.textPrimary },
-                      ]}
-                    >
-                      {prefixSegments.root}
-                    </Text>
-                  </View>
-                );
-              }
               return (
                 <Text
                   style={

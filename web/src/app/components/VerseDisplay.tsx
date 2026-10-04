@@ -8,7 +8,6 @@ import type {
 	WordResponse,
 } from "../services/verseService";
 import {
-	getPrefixSegments,
 	removeMaqafForDisplay,
 	removeSofPasukForDisplay,
 	stripCantillation,
@@ -247,12 +246,6 @@ export function VerseDisplay({
 					: Boolean(normalizedSelected) &&
 						normalizedSelected === normalizedWord;
 
-			// Prefix segmentation is only valid for original Masoretic words.
-			const prefixSegments =
-				!variantEntry && word.prefixes?.length
-					? getPrefixSegments(displayText, word.prefixes)
-					: null;
-
 			const shouldShowHintButton =
 				showOnboardingHint &&
 				!variantEntry &&
@@ -302,24 +295,7 @@ export function VerseDisplay({
 								: undefined
 						}
 					>
-						{prefixSegments?.prefixes?.length ? (
-							<>
-								<span
-									style={{ color: "var(--text-secondary)" }}
-									className="cursor-pointer hover:opacity-80"
-									title={t("verse.prefixLabel", {
-										prefix: word.prefixes?.join(", ") ?? "",
-									})}
-								>
-									{prefixSegments.prefixes.join("")}
-								</span>
-								<span style={{ color: "var(--text-hebrew)" }}>
-									{prefixSegments.root}
-								</span>
-							</>
-						) : (
-							displayText
-						)}
+						{displayText}
 					</button>
 					{index < sourceWords.length - 1 && " "}
 				</span>
