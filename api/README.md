@@ -285,14 +285,43 @@ bundle exec rails davar:sync_calendar
 ```
 
 The initial sync imports the latest 50 reports (currently several years of history).
-Run the same command every 15 minutes through the host scheduler with that
-environment's database and `PYTHON_BIN`. Alternatively, supervise this process:
+Valid live calendar requests can bootstrap missing observations and recover a
+due sync during the new-month observation window. Concurrent calendar requests
+reuse the sync that completes under the database lock. Failed attempts retain
+the last good observations and wait 30 minutes before retrying. Explicit sandbox
+scenarios do not fetch the live feed.
+This lets an ordinary Rails server populate the calendar without a separate
+watcher; the first request may take longer while it fetches and imports the feed.
+
+Solid Queue persists `SyncCalendarObservationsJob` in the same PostgreSQL database
+and schedules it every 30 minutes in development, staging and production through
+`config/recurring.yml`. Puma starts its worker and scheduler automatically, including
+normal `bundle exec rails server` startup and the development sandbox. During
+macOS development, the worker and scheduler use threads inside Puma to avoid
+Objective-C runtime crashes after `fork`. Other platforms and hosted environments
+use the default fork mode. Restart `bin/dev` after changing the Puma configuration.
+
+The job fetches reports only from 30 minutes before Jerusalem sunset on the earliest
+possible last day of the observed lunar month (29 days after its starting evening).
+It continues polling every 30 minutes until the next sighting is imported, including
+delayed reports. A calendar with no sightings bootstraps immediately. Once a new
+month is confirmed, polling waits for its next month boundary. This uses the lunar
+month end rather than a Gregorian month end.
+
+For a dedicated worker, set `SOLID_QUEUE_IN_PUMA=0` on the web process and supervise
+`bundle exec ruby bin/jobs` with the same environment, database and `PYTHON_BIN`.
+The migration adds queue tables to the application's existing database. The
+`calendar` queue is the only worker queue configured here. Completed jobs are
+cleaned up hourly. Explicit `davar:sync_calendar` forces an operator-requested
+sync; scheduled jobs and request recovery share the 30-minute database guard.
+
+The older supervised watcher remains an alternative to Solid Queue:
 
 ```sh
 bundle exec rails davar:watch_calendar
 ```
 
-The development sandbox runs this watcher alongside the API. `setup` imports real
+Use one scheduling approach per deployment. Sandbox `setup` imports real
 reports; `api/bin/dev-sandbox calendar live` restores live mode after explicit
 `confirmed` or `pending` test scenarios. Real observations survive scenario changes
 and sandbox resets. Synthetic witnesses never enter the live calendar.
@@ -306,6 +335,15 @@ unavailable sources and uncertain tables retain the last valid evidence. Uncerta
 reports are stored in `calendar_source_entries` with their source, raw report, hash
 and review reason. Only an unambiguous changed report replaces its prior witnesses.
 
+Historical 2026 evidence also comes from INMS's linked public sightings spreadsheet.
+`config/calendar_observation_backfill.json` supplies the two March 20 unaided Israel
+witnesses that are absent from the forecast-only blog post. The normal sync imports
+this reviewed supplement when that post appears in the feed. Hash-bound date reviews
+in `config/calendar_report_reviews.yml` recover the February 18 and June 16 witness
+tables, whose dates are corroborated by the spreadsheet. Their original report hashes
+and review provenance are retained; a changed report revision requires a new review.
+May has no confirmed Israel sightings in either source and remains unresolved.
+
 The API adds `generated_at`, `next_sunset_at`, `timezone`, source freshness and
 per-day observation provenance. Clients refresh at the supplied sunset boundary,
 every 15 minutes and on resume. A cached response retains its original timestamp
@@ -313,10 +351,30 @@ and day; the UI identifies an outdated response instead of calculating a new dat
 The selected city/timezone stay on the device. No account is required.
 
 Check `CalendarFeedState.current` for the last attempt/success and review count.
-Source freshness becomes stale after two hours without a successful sync or after
-a failed fetch. Historical reports awaiting review do not suppress confirmed dates.
-Aviv, Biblical month identity and dependent festivals remain unresolved under the
-pinned policy; neither INMS month titles nor forecast text supply an Aviv anchor.
+Source freshness becomes stale after two hours without a successful sync during an
+open observation window, or after a failed fetch. A successful source remains current
+between month-end windows. Historical reports awaiting review do not suppress dates.
+Aviv remains unresolved under the pinned policy; neither INMS month titles nor
+forecast text supply an Aviv anchor. Explicit maintainer month identities live in
+`config/calendar_month_anchors.yml`. The September 12, 2026 unaided sighting is the
+seventh-month anchor, so its month is Etanim and day 22 is Shemini Atzeret. The
+Davar bridge applies that identity and Bore's festival rules, with
+`month_identity.status=manual` and the anchor's provenance in the response.
+This does not mark annual Aviv determination as confirmed. Adjacent confirmed
+29/30-day month starts can inherit an ordinal; a missing report breaks that chain,
+and an unconfirmed or retracted anchor supplies no month or festival identity.
+The reviewed January and March month identities identify historical months as well;
+the March observations provide Aviv dates for Pesach and Jag HaMatzot.
+
+Davar explicitly selects the weekly Shabbat during Aviv 15–21 for the wave-sheaf
+rule (Leviticus 23:11, 15–16). Yom HaBikurim is the following Sunday, counted as
+day 1; Shavuot is day 50, exactly 49 elapsed days later. `counted_moadim.py` adds
+these events at the Rails boundary while preserving Bore's pinned domain rules.
+For the March 20, 2026 sighting, the daytime dates are April 5 and May 24, beginning
+at local sunset the preceding evening. Counted events retain their confirmed Aviv
+evidence and counting rule in `counted_events`. Missing later month sightings do
+not invalidate the count or fabricate a Biblical month/day. Annual lists show the
+civil date when that month's Biblical date remains unknown.
 
 Schedule `bundle exec rails davar:deliver_notifications` for the durable outbox.
 Delivery is at least once: a crash after Telegram accepts a message but before

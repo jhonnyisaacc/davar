@@ -17,7 +17,7 @@ class ObservationImport
       incoming.each do |row|
         observation = NewMoonObservation.find_or_initialize_by(source_id: row.fetch("id"))
         attributes = row.slice("source", "source_url", "observed_on", "country", "visibility_method", "verified")
-        provenance = observation.provenance.merge(row.slice("source_entry_id", "observer", "location", "observed_at", "fetched_at", "source_revision"))
+        provenance = observation.provenance.merge(row.slice("source_entry_id", "observer", "location", "observed_at", "fetched_at", "source_revision", "date_review"))
         provenance.delete("retracted_at")
         observation.update!(attributes.merge(input_hash: row.fetch("raw_source_hash"), provenance: provenance))
         report[:observations] += 1

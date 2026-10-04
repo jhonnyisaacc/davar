@@ -78,7 +78,7 @@ when "start"
     end
   end
   entries = []
-  commands = [ ["api",API_ROOT,[RbConfig.ruby,File.join(API_ROOT,"bin/rails"),"server","-b","127.0.0.1","-p","3000"]], ["calendar",API_ROOT,[RbConfig.ruby,File.join(API_ROOT,"bin/rails"),"davar:watch_calendar"]], ["web",File.join(ROOT,"web"),[BUN,"run","dev"]], ["mobile",File.join(ROOT,"mobile"),[BUN,"run","start","--dev-client","--port","8081"]] ]
+  commands = [ ["api",API_ROOT,[RbConfig.ruby,File.join(API_ROOT,"bin/rails"),"server","-b","127.0.0.1","-p","3000"]], ["web",File.join(ROOT,"web"),[BUN,"run","dev"]], ["mobile",File.join(ROOT,"mobile"),[BUN,"run","start","--dev-client","--port","8081"]] ]
   commands.each do |name,directory,command|
     log = File.open(File.join(STATE,"#{name}.log"),"a")
     pid = Process.spawn(ENVIRONMENT.merge("CI"=>"1"),*command,chdir: directory,pgroup: true,out: log,err: log)

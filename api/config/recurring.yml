@@ -1,0 +1,17 @@
+default: &default
+  sync_calendar_observations:
+    class: SyncCalendarObservationsJob
+    queue: calendar
+    schedule: every 30 minutes
+  clear_finished_calendar_jobs:
+    command: "SolidQueue::Job.clear_finished_in_batches(sleep_between_batches: 0.3)"
+    queue: calendar
+    schedule: every hour at minute 12
+
+development:
+  <<: *default
+staging:
+  <<: *default
+production:
+  <<: *default
+test: {}

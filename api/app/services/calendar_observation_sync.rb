@@ -4,20 +4,26 @@ require "open3"
 class CalendarObservationSync
   FEED_URL = "https://moonsocil.blogspot.com/feeds/posts/default?alt=rss&max-results=50"
   MAX_FEED_BYTES = 8 * 1024 * 1024
+  REFRESH_INTERVAL = 30.minutes
 
-  def self.call(rss_xml: nil, now: Time.current, fetcher: method(:fetch_feed))
+  def self.call(rss_xml: nil, now: Time.current, fetcher: method(:fetch_feed), if_due: false)
     state = CalendarFeedState.current
+    return if if_due && !due?(state, now)
     report = nil
     state.with_lock do
+      # Recheck after locking: another API request or watcher may have synced.
+      return if if_due && !due?(state, now)
       begin
         xml = rss_xml || fetcher.call
         raise DomainError.new("calendar_feed_too_large", 503) if xml.bytesize > MAX_FEED_BYTES
-        known = CalendarSourceEntry.where(source: CalendarFeedState::SOURCE).pluck(:source_entry_id, :content_hash).to_h
+        # Reparse held reports so a newly reviewed date can rebuild history.
+        known = CalendarSourceEntry.where(source: CalendarFeedState::SOURCE).where.not(parse_status: "requires_review").pluck(:source_entry_id, :content_hash).to_h
         entries = parse_feed(xml, known, now)
         changed = entries.reject { |entry| entry["unchanged"] }
         accepted = changed.select { |entry| entry["parse_status"] == "ok" }
+        backfill = CalendarObservationBackfill.for_entries(entries)
         report = ObservationImport.call({"schema_version" => 1,
-          "observations" => accepted.flat_map { |entry| entry.fetch("observations") },
+          "observations" => accepted.flat_map { |entry| entry.fetch("observations") } + backfill,
           "replace_entry_ids" => accepted.map { |entry| entry.fetch("source_entry_id") }}, dry_run: false)
         entries.each do |entry|
           record = CalendarSourceEntry.find_or_initialize_by(source: CalendarFeedState::SOURCE, source_entry_id: entry.fetch("source_entry_id"))
@@ -39,9 +45,13 @@ class CalendarObservationSync
     report.merge(status: state.status)
   end
 
+  def self.due?(state, now)
+    (state.last_attempt_at.nil? || state.last_attempt_at <= now - REFRESH_INTERVAL) && CalendarObservationWindow.open?(now: now)
+  end
+
   def self.parse_feed(xml, known, now)
     output, _, status = Open3.capture3(ENV.fetch("PYTHON_BIN", "python3"), Rails.root.join("lib/bore/feed_bridge.py").to_s,
-      stdin_data: JSON.generate(rss_xml: xml, fetched_at: now.iso8601, known_hashes: known))
+      stdin_data: JSON.generate(rss_xml: xml, fetched_at: now.iso8601, known_hashes: known, report_reviews: CalendarReportReviews.all))
     raise DomainError.new("calendar_feed_malformed", 503) unless status.success?
     JSON.parse(output).fetch("entries")
   rescue Errno::ENOENT

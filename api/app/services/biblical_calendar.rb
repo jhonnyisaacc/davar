@@ -1,6 +1,6 @@
 require "open3"
 class BiblicalCalendar
-  def self.call(instant:, latitude:, longitude:, timezone:, count: 1)
+  def self.call(instant:, latitude:, longitude:, timezone:, count: 1, refresh_source: false)
     lat, lon = Float(latitude), Float(longitude)
     count = Integer(count)
     raise DomainError.new("invalid_calendar_location") unless lat.between?(-90, 90) && lon.between?(-180, 180)
@@ -11,6 +11,10 @@ class BiblicalCalendar
     raise DomainError.new("instant_timezone_required") unless instant.match?(/(?:Z|[+-]\d{2}:\d{2})\z/)
     state = CalendarFeedState.current
     scenario = DevelopmentSandbox.enabled? ? state.development_scenario : "live"
+    if refresh_source && scenario == "live"
+      CalendarObservationSync.call(if_due: true)
+      state.reload
+    end
     confirmations = if scenario == "confirmed"
       NewMoonObservation.where("provenance ->> 'development_fixture' = 'true'").map do |observation|
         MonthConfirmation.new(id: observation.id, new_moon_observation: observation, starts_on_evening: observation.observed_on)
@@ -21,6 +25,8 @@ class BiblicalCalendar
       MonthConfirmation.includes(:new_moon_observation).order(:starts_on_evening).reject { |c| c.new_moon_observation.provenance["development_fixture"] == true }
     end
     payload = {instant: time.iso8601, latitude: lat, longitude: lon, timezone: timezone, count: count,
+      month_anchors: scenario == "live" ? CalendarMonthAnchors.all : [],
+      counting_rule: scenario == "live" ? "weekly_shabbat_during_hag_hamatzot" : nil,
       confirmations: confirmations.map { |c|
         o = c.new_moon_observation
         {id: c.id, status: "confirmed", observed_on: o.observed_on.iso8601, starts_on_evening: c.starts_on_evening.iso8601,

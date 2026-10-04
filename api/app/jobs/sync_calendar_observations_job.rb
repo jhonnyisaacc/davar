@@ -1,5 +1,7 @@
 class SyncCalendarObservationsJob < ApplicationJob
-  def perform
-    CalendarObservationSync.call
+  queue_as :calendar
+
+  def perform(force = false)
+    CalendarObservationSync.call(if_due: !force)
   end
 end

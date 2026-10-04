@@ -17,7 +17,7 @@ module Api
       private
       def result(count)
         throttle!("calendar/#{request.remote_ip}", limit: 30)
-        BiblicalCalendar.call(instant: params.fetch(:instant, Time.current.iso8601), latitude: params[:latitude], longitude: params[:longitude], timezone: params[:timezone], count: count)
+        BiblicalCalendar.call(instant: params.fetch(:instant, Time.current.iso8601), latitude: params[:latitude], longitude: params[:longitude], timezone: params[:timezone], count: count, refresh_source: true)
       end
     end
   end

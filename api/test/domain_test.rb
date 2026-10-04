@@ -97,7 +97,7 @@ class DomainTest < ActiveSupport::TestCase
     assert MonthConfirmation.create!(new_moon_observation: observation, starts_on_evening: observation.observed_on)
     result = BiblicalCalendar.call(instant: "2026-09-13T09:00:00Z", latitude: 31.78, longitude: 35.23, timezone: "Asia/Jerusalem")
     assert_equal 1, result["days"][0]["biblical"]["day"]
-    assert_nil result["days"][0]["biblical"]["month_id"]
+    assert_equal "etanim", result["days"][0]["biblical"]["month_id"]
     assert_equal "unresolved", result["year_start_status"]
   end
   test "calendar sunset advances the lookup and missing evidence remains pending" do

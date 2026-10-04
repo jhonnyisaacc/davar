@@ -13,7 +13,8 @@ class CalendarFeedState < ApplicationRecord
   def consumer_status(now: Time.current)
     {name: SOURCE, url: URL, status: status, last_checked_at: last_attempt_at&.iso8601,
       last_synced_at: last_success_at&.iso8601,
-      stale: last_success_at.nil? || last_success_at < now - 2.hours || status == "source_unavailable",
+      stale: last_success_at.nil? || status == "source_unavailable" ||
+        (last_success_at < now - 2.hours && CalendarObservationWindow.open?(now: now)),
       review_count: details.fetch("review_count", 0), development_fixture: false}
   end
 end

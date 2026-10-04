@@ -37,7 +37,8 @@ class CalendarObservationSyncTest < ActiveSupport::TestCase
     assert_equal 1, result["days"][0]["biblical"]["day"]
     assert_equal ["Witness A", "Witness B"], result["days"][0]["observation"][:observers].sort
     assert_equal "unresolved", result["year_start_status"]
-    assert_nil result["days"][0]["biblical"]["month_id"]
+    assert_equal "etanim", result["days"][0]["biblical"]["month_id"]
+    assert_equal "manual", result["days"][0]["month_identity"]["status"]
     assert_equal "ok", result["source"][:status]
     assert Time.iso8601(result["next_sunset_at"]) > Time.iso8601("2026-09-13T12:00:00Z")
   end
@@ -101,6 +102,29 @@ class CalendarObservationSyncTest < ActiveSupport::TestCase
     DevelopmentSandbox.define_singleton_method(:enabled?, original) if original
   end
 
+  test "guarded sync skips recent attempts but explicit sync still applies corrections" do
+    now = Time.iso8601("2026-10-11T16:00:00Z")
+    sync(table(row("Witness A")), now: now)
+    assert_nil sync(table(row("Witness B")), now: now + 1.minute, if_due: true)
+    assert_equal ["Witness A"], calendar["days"][0]["observation"][:observers]
+    sync(table(row("Witness B")), now: now + 2.minutes)
+    assert_equal ["Witness B"], calendar["days"][0]["observation"][:observers]
+    assert_nil sync(table(row("Witness C")), now: now + 17.minutes, if_due: true)
+    sync(table(row("Witness C")), now: now + 32.minutes, if_due: true)
+    assert_equal ["Witness C"], calendar["days"][0]["observation"][:observers]
+  end
+
+  test "automatic polling waits for Israel sunset near the lunar month end" do
+    assert CalendarObservationWindow.open?(now: Time.iso8601("2026-09-13T12:00:00Z"))
+    sync(table(row("Witness A")), now: Time.iso8601("2026-09-13T12:00:00Z"))
+    assert_nil sync(table(row("Midmonth")), now: Time.iso8601("2026-10-03T22:00:00Z"), if_due: true)
+    assert_not CalendarObservationWindow.open?(now: Time.iso8601("2026-10-11T14:20:00Z"))
+    assert CalendarObservationWindow.open?(now: Time.iso8601("2026-10-11T16:00:00Z"))
+    assert CalendarObservationWindow.open?(now: Time.iso8601("2026-10-14T12:00:00Z"))
+    sync(table(row("Next month"), day: "12/10/2026"), now: Time.iso8601("2026-10-13T12:00:00Z"))
+    assert_not CalendarObservationWindow.open?(now: Time.iso8601("2026-10-14T12:00:00Z"))
+  end
+
   test "uncertain changed tables retain valid evidence for review" do
     sync(table(row("Witness A")))
     sync(table(row("Witness B"), day: "Unknown observation date"))
@@ -109,6 +133,46 @@ class CalendarObservationSyncTest < ActiveSupport::TestCase
     assert_equal "requires_review", CalendarFeedState.current.status
     assert_equal 1, CalendarFeedState.current.details["review_count"]
     assert_equal "parser_uncertain", CalendarSourceEntry.first.reason
+  end
+
+  test "source stays current between observation windows and becomes stale if boundary updates stop" do
+    sync(table(row("Witness A")), now: Time.iso8601("2026-09-13T12:00:00Z"))
+    state = CalendarFeedState.current
+    assert_not state.consumer_status(now: Time.iso8601("2026-10-03T22:00:00Z"))[:stale]
+    assert state.consumer_status(now: Time.iso8601("2026-10-11T16:00:00Z"))[:stale]
+    state.update!(status: "source_unavailable")
+    assert state.consumer_status(now: Time.iso8601("2026-10-03T22:00:00Z"))[:stale]
+  end
+
+  test "historical witness backfill reconstructs Aviv festivals without treating forecasts as sightings" do
+    url = "https://moonsocil.blogspot.com/2026/03/new-moon-nissan-5786.html"
+    rss = feed("<p>Forecast only.</p>").sub("https://moonsocil.blogspot.com/report-one", url)
+    CalendarObservationSync.call(rss_xml: rss)
+    assert_equal [Date.new(2026, 3, 20)], MonthConfirmation.pluck(:starts_on_evening)
+    result = BiblicalCalendar.call(instant: "2026-04-03T12:00:00Z", latitude: 31.78, longitude: 35.23, timezone: "Asia/Jerusalem")
+    assert_equal "aviv", result["days"][0]["biblical"]["month_id"]
+    assert_equal 14, result["days"][0]["biblical"]["day"]
+    assert_includes result["days"][0]["events"], "pesach"
+    assert result["days"][0]["observation"][:source_url].start_with?("https://docs.google.com/spreadsheets/")
+    bikurim = BiblicalCalendar.call(instant: "2026-04-05T12:00:00Z", latitude: 31.78, longitude: 35.23, timezone: "Asia/Jerusalem")["days"][0]
+    assert_includes bikurim["events"], "bikurim"
+    assert_equal 16, bikurim["biblical"]["day"]
+    shavuot = BiblicalCalendar.call(instant: "2026-05-24T12:00:00Z", latitude: 31.78, longitude: 35.23, timezone: "Asia/Jerusalem")["days"][0]
+    assert_nil shavuot["biblical"]["day"]
+    assert_equal "pending", shavuot["month_status"]
+    assert_includes shavuot["events"], "shavuot"
+    assert_equal 50, shavuot["counted_events"].sole["day_of_count"]
+    assert_equal "2026-04-05", shavuot["counted_events"].sole["wave_sheaf_civil_date"]
+    sunset_params = {latitude: -34.6, longitude: -58.4, timezone: "America/Argentina/Buenos_Aires"}
+    before = BiblicalCalendar.call(**sunset_params, instant: "2026-05-23T19:00:00Z")["days"][0]
+    after = BiblicalCalendar.call(**sunset_params, instant: "2026-05-23T22:00:00Z")["days"][0]
+    assert_not_includes before["events"], "shavuot"
+    assert_includes after["events"], "shavuot"
+    id = MonthConfirmation.sole.id
+    assert_no_difference ["NewMoonObservation.count", "MonthConfirmation.count"] do
+      CalendarObservationSync.call(rss_xml: rss)
+    end
+    assert_equal id, MonthConfirmation.sole.id
   end
 
   test "unavailable malformed and empty feeds retain the last good observations" do

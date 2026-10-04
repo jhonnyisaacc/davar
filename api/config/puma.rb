@@ -34,6 +34,14 @@ port ENV.fetch("PORT", 3000)
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
 
+# Start the persistent calendar worker and scheduler alongside the API.
+# Set SOLID_QUEUE_IN_PUMA=0 when a dedicated bin/jobs process runs them.
+unless ENV["SOLID_QUEUE_IN_PUMA"] == "0" || Rails.env.test?
+  plugin :solid_queue
+  # macOS cannot safely initialize Objective-C classes after Puma forks.
+  solid_queue_mode :async if Rails.env.development? && RUBY_PLATFORM.include?("darwin")
+end
+
 # Specify the PID file. Defaults to tmp/pids/server.pid in development.
 # In other environments, only set the PID file if requested.
 pidfile ENV["PIDFILE"] if ENV["PIDFILE"]

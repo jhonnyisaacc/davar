@@ -131,6 +131,16 @@ export type Conversation = {
 	messages: ChatMessage[];
 };
 export type CalendarDay = {
+	counted_events?: {
+		event_id: "bikurim" | "shavuot";
+		status: "calculated";
+		rule: "weekly_shabbat_during_hag_hamatzot";
+		day_of_count: 1 | 50;
+		wave_sheaf_civil_date: string;
+		aviv_starts_on_evening: string;
+		confirmation_id: string;
+		source_url: string;
+	}[];
 	civil_date: string;
 	biblical: {
 		day: number | null;
@@ -138,6 +148,13 @@ export type CalendarDay = {
 		month_ordinal: number | null;
 	};
 	rabbinic: { day: number; month_id: string; year: number };
+	month_identity?: {
+		status: "manual";
+		starts_on_evening: string;
+		month_ordinal: number;
+		source_url: string;
+		note: string;
+	} | null;
 	events: string[];
 	month_status: string;
 	year_start_status: string;
