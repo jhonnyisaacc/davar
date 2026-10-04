@@ -1,27 +1,33 @@
-import { BookOpen, ChevronLeft, ChevronRight, Paintbrush } from "lucide-react";
+import type { BesorahLanguage } from "@davar/shared/greekBesorah";
+import {
+	canUseSeferStyle,
+	isSeferStyleVisible,
+	SHARED_SETTINGS_ORDER,
+	type SharedSettingId,
+} from "@davar/shared/settingsOrder";
+import {
+	BookOpen,
+	ChevronLeft,
+	ChevronRight,
+	Paintbrush,
+	Search,
+} from "lucide-react";
 import {
 	Fragment,
+	type ReactNode,
 	useCallback,
 	useEffect,
 	useRef,
 	useState,
-	type ReactNode,
 } from "react";
-import {
-	SHARED_SETTINGS_ORDER,
-	canUseSeferStyle,
-	isSeferStyleVisible,
-	type SharedSettingId,
-} from "@davar/shared/settingsOrder";
-import { useTranslation } from "../hooks/useTranslation";
-import type { BesorahLanguage } from "@davar/shared/greekBesorah";
-import { formatBookDisplayName } from "../utils/bookNameFormatter";
-import { PillToggle } from "./PillToggle";
-import { CalendarCityNotice } from "./CalendarCityNotice";
-import { SettingsResources } from "./SettingsResources";
-import { productApi } from "../services/productApi";
-import type { RouteScreen } from "../utils/routeState";
 import { useProductCapabilities } from "../hooks/useProductCapabilities";
+import { useTranslation } from "../hooks/useTranslation";
+import { productApi } from "../services/productApi";
+import { formatBookDisplayName } from "../utils/bookNameFormatter";
+import type { RouteScreen } from "../utils/routeState";
+import { CalendarCityNotice } from "./CalendarCityNotice";
+import { PillToggle } from "./PillToggle";
+import { SettingsResources } from "./SettingsResources";
 
 interface NavigationBarProps {
 	activeDestination: RouteScreen;
@@ -434,6 +440,73 @@ export function NavigationBar({
 		}
 	};
 
+	const renderNumberSelector = (kind: "chapter" | "verse") => {
+		const isChapter = kind === "chapter";
+		const items = isChapter ? filteredChapters : filteredVerses;
+		const current = isChapter ? chapter : verse;
+		const search = isChapter ? chapterSearch : verseSearch;
+		const setSearch = isChapter ? setChapterSearch : setVerseSearch;
+		const onSelect = isChapter ? onChapterChange : onVerseChange;
+		const titleId = `navigation-${kind}-title`;
+
+		return (
+			<section
+				id={`navigation-${kind}-selector`}
+				aria-labelledby={titleId}
+				className={`navigation-surface absolute left-1/2 top-full z-30 mt-3 flex aspect-square max-w-[calc(100vw-32px)] -translate-x-1/2 flex-col gap-2 border border-[var(--neomorph-border)] p-3 sm:left-auto sm:end-0 sm:translate-x-0 ${isChapter ? "w-[280px]" : "w-[232px]"}`}
+				onWheelCapture={(event) => event.stopPropagation()}
+				onTouchMoveCapture={(event) => event.stopPropagation()}
+			>
+				<div className="flex h-7 shrink-0 items-center justify-between gap-2">
+					<span
+						id={titleId}
+						className="text-xs font-medium text-[var(--text-primary)]"
+					>
+						{t(
+							isChapter ? "navigation.selectChapter" : "navigation.selectVerse",
+						)}
+					</span>
+					<div className="flex h-7 w-[86px] items-center gap-1.5 rounded-full bg-[var(--navigation-bg)] px-[9px] text-[var(--text-secondary)] focus-within:ring-1 focus-within:ring-[var(--accent)]">
+						<Search size={12} className="shrink-0" aria-hidden="true" />
+						<input
+							ref={isChapter ? chapterSearchRef : verseSearchRef}
+							value={search}
+							onChange={(event) =>
+								setSearch(event.target.value.replace(/[^0-9]/g, ""))
+							}
+							aria-label={t(
+								isChapter ? "navigation.findChapter" : "navigation.findVerse",
+							)}
+							placeholder={t("navigation.find")}
+							inputMode="numeric"
+							className="min-w-0 w-full border-0 bg-transparent p-0 text-base text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)] sm:text-[11px]"
+						/>
+					</div>
+				</div>
+				<div className="min-h-0 flex-1 rounded-xl bg-[var(--navigation-bg)] p-1">
+					<div
+						className={`grid h-full content-start gap-x-0.5 overflow-y-auto overscroll-contain ${isChapter ? "grid-cols-8 gap-y-0.5" : "grid-cols-6 gap-y-1"}`}
+					>
+						{items.map((item) => (
+							<button
+								type="button"
+								key={item}
+								aria-pressed={item === current}
+								onClick={() => {
+									onSelect(item);
+									setOpenMenu(null);
+								}}
+								className={`min-w-0 rounded-full text-[11px] text-[var(--text-primary)] focus-visible:outline-1 focus-visible:outline-[var(--accent)] focus-visible:-outline-offset-1 ${isChapter ? "h-7" : "h-6"} ${item === current ? "bg-[var(--accent-glow)] font-semibold" : "hover:bg-[var(--background)]"}`}
+							>
+								{item}
+							</button>
+						))}
+					</div>
+				</div>
+			</section>
+		);
+	};
+
 	return (
 		<div
 			className="app-navigation relative w-full max-w-[620px]"
@@ -511,84 +584,97 @@ export function NavigationBar({
 					</div>
 				</nav>
 			</div>
-			<div
-				id="scripture-navigation"
-				className="scripture-navigation navigation-surface"
-				data-open={scriptureNavigationOpen}
-				aria-hidden={!scriptureNavigationOpen}
-				inert={!scriptureNavigationOpen}
-			>
-				<div className="min-h-0 overflow-hidden">
-					<nav
-						aria-label={`${t("navigation.selectBook")}, ${t("navigation.selectChapter")}, ${t("navigation.selectVerse")}`}
-						className="scripture-navigation-content w-fit max-w-full rounded-b-2xl border border-t-0 border-[var(--neomorph-border)] px-2 py-1.5 sm:px-3"
-					>
-						<div className="flex min-w-0 items-center gap-0.5 rounded-full bg-[var(--navigation-bg)] p-0.5 sm:gap-1">
-							<button
-								type="button"
-								onClick={() => setOpenMenu(openMenu === "book" ? null : "book")}
-								className={`flex min-w-0 items-center gap-1 rounded-full px-2 py-1.5 text-[10px] text-[var(--text-primary)] sm:gap-2 sm:px-3 sm:text-[11px] ${openMenu === "book" ? "bg-[var(--accent-glow)]" : ""}`}
-								aria-label={t("navigation.selectBook")}
-								aria-expanded={openMenu === "book"}
-							>
-								<BookOpen className="hidden md:block w-3 h-3 text-[var(--text-primary)]" />
-								<span className="min-w-0 truncate">
-									<span className="md:hidden">{bookDisplayName}</span>
-									<span className="hidden md:inline">{bookDisplayName} | </span>
-									<span
-										className="hidden md:inline"
-										style={{
-											fontFamily:
-												besorahLanguage === "greek" &&
-												books.find((item) => item.name === book)?.greek
-													? "'Cardo', serif"
-													: "'Suez One', serif",
-										}}
-									>
-										{bookHebrew}
+			<div className="relative mx-auto w-fit max-w-full">
+				<div
+					id="scripture-navigation"
+					className="scripture-navigation navigation-surface"
+					data-open={scriptureNavigationOpen}
+					aria-hidden={!scriptureNavigationOpen}
+					inert={!scriptureNavigationOpen}
+				>
+					<div className="min-h-0 overflow-hidden">
+						<nav
+							aria-label={`${t("navigation.selectBook")}, ${t("navigation.selectChapter")}, ${t("navigation.selectVerse")}`}
+							className="scripture-navigation-content w-fit max-w-full rounded-b-2xl border border-t-0 border-[var(--neomorph-border)] px-2 py-1.5 sm:px-3"
+						>
+							<div className="flex min-w-0 items-center gap-0.5 rounded-full bg-[var(--navigation-bg)] p-0.5 sm:gap-1">
+								<button
+									type="button"
+									onClick={() =>
+										setOpenMenu(openMenu === "book" ? null : "book")
+									}
+									className={`flex min-w-0 items-center gap-1 rounded-full px-2 py-1.5 text-[10px] text-[var(--text-primary)] sm:gap-2 sm:px-3 sm:text-[11px] ${openMenu === "book" ? "bg-[var(--accent-glow)]" : ""}`}
+									aria-label={t("navigation.selectBook")}
+									aria-expanded={openMenu === "book"}
+								>
+									<BookOpen className="hidden md:block w-3 h-3 text-[var(--text-primary)]" />
+									<span className="min-w-0 truncate">
+										<span className="md:hidden">{bookDisplayName}</span>
+										<span className="hidden md:inline">
+											{bookDisplayName} |{" "}
+										</span>
+										<span
+											className="hidden md:inline"
+											style={{
+												fontFamily:
+													besorahLanguage === "greek" &&
+													books.find((item) => item.name === book)?.greek
+														? "'Cardo', serif"
+														: "'Suez One', serif",
+											}}
+										>
+											{bookHebrew}
+										</span>
 									</span>
+								</button>
+
+								<span
+									aria-hidden="true"
+									className="text-[var(--text-secondary)]"
+								>
+									|
 								</span>
-							</button>
+								<button
+									type="button"
+									onClick={() =>
+										setOpenMenu(openMenu === "chapter" ? null : "chapter")
+									}
+									className={`shrink-0 rounded-full px-2 py-1.5 text-[10px] text-[var(--text-primary)] sm:px-3 sm:text-[11px] ${openMenu === "chapter" ? "bg-[var(--accent-glow)]" : ""}`}
+									aria-label={t("navigation.selectChapter")}
+									aria-expanded={openMenu === "chapter"}
+									aria-controls="navigation-chapter-selector"
+								>
+									<span>{chapter}</span>
+								</button>
 
-							<span aria-hidden="true" className="text-[var(--text-secondary)]">
-								|
-							</span>
-							<button
-								type="button"
-								onClick={() =>
-									setOpenMenu(openMenu === "chapter" ? null : "chapter")
-								}
-								className={`shrink-0 rounded-full px-2 py-1.5 text-[10px] text-[var(--text-primary)] sm:px-3 sm:text-[11px] ${openMenu === "chapter" ? "bg-[var(--accent-glow)]" : ""}`}
-								aria-label={t("navigation.selectChapter")}
-								aria-expanded={openMenu === "chapter"}
-							>
-								<span>{chapter}</span>
-							</button>
-
-							{!seferMode && (
-								<>
-									<span
-										aria-hidden="true"
-										className="text-[var(--text-secondary)]"
-									>
-										|
-									</span>
-									<button
-										type="button"
-										onClick={() =>
-											setOpenMenu(openMenu === "verse" ? null : "verse")
-										}
-										className={`shrink-0 rounded-full px-2 py-1.5 text-[10px] text-[var(--text-primary)] sm:px-3 sm:text-[11px] ${openMenu === "verse" ? "bg-[var(--accent-glow)]" : ""}`}
-										aria-label={t("navigation.selectVerse")}
-										aria-expanded={openMenu === "verse"}
-									>
-										<span>{verse}</span>
-									</button>
-								</>
-							)}
-						</div>
-					</nav>
+								{!seferMode && (
+									<>
+										<span
+											aria-hidden="true"
+											className="text-[var(--text-secondary)]"
+										>
+											|
+										</span>
+										<button
+											type="button"
+											onClick={() =>
+												setOpenMenu(openMenu === "verse" ? null : "verse")
+											}
+											className={`shrink-0 rounded-full px-2 py-1.5 text-[10px] text-[var(--text-primary)] sm:px-3 sm:text-[11px] ${openMenu === "verse" ? "bg-[var(--accent-glow)]" : ""}`}
+											aria-label={t("navigation.selectVerse")}
+											aria-expanded={openMenu === "verse"}
+											aria-controls="navigation-verse-selector"
+										>
+											<span>{verse}</span>
+										</button>
+									</>
+								)}
+							</div>
+						</nav>
+					</div>
 				</div>
+				{(openMenu === "chapter" || openMenu === "verse") &&
+					renderNumberSelector(openMenu)}
 			</div>
 
 			{openMenu === "settings" && (
@@ -742,110 +828,6 @@ export function NavigationBar({
 										? item.greek
 										: item.hebrew}
 								</span>
-							</button>
-						))}
-					</div>
-				</div>
-			)}
-
-			{openMenu === "chapter" && (
-				<div
-					className={`absolute ${isRTL ? "right-0" : "left-0"} mt-4 w-[280px] rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] backdrop-blur-[16px] shadow-[0_8px_32px_0_var(--glass-shadow)] p-4 z-30`}
-					onWheelCapture={(event) => {
-						event.stopPropagation();
-					}}
-					onTouchMoveCapture={(event) => {
-						event.stopPropagation();
-					}}
-				>
-					<div className="mb-3">
-						<input
-							ref={chapterSearchRef}
-							value={chapterSearch}
-							onChange={(event) =>
-								setChapterSearch(event.target.value.replace(/[^0-9]/g, ""))
-							}
-							placeholder={t("navigation.chapterShort")}
-							inputMode="numeric"
-							className="w-full rounded-full px-4 py-2 text-base md:text-xs text-[var(--text-primary)]"
-							style={{
-								fontFamily: "'Inter', sans-serif",
-								backgroundColor: "var(--neomorph-bg)",
-								border: "1px solid var(--neomorph-border)",
-								boxShadow:
-									"inset 3px 3px 6px var(--neomorph-inset-shadow-dark), inset -3px -3px 6px var(--neomorph-inset-shadow-light)",
-							}}
-						/>
-					</div>
-					<div className="grid grid-cols-5 gap-2 max-h-[320px] overflow-y-auto overscroll-contain">
-						{filteredChapters.map((item) => (
-							<button
-								type="button"
-								key={item}
-								onClick={() => {
-									onChapterChange(item);
-									setOpenMenu(null);
-								}}
-								className={`rounded-xl px-2 py-2 text-xs transition-all ${
-									item === chapter
-										? "bg-[var(--accent-strong)] text-white"
-										: "bg-[var(--muted)] text-[var(--text-primary)]"
-								}`}
-								style={{ fontFamily: "'Inter', sans-serif" }}
-							>
-								{item}
-							</button>
-						))}
-					</div>
-				</div>
-			)}
-
-			{openMenu === "verse" && (
-				<div
-					className={`absolute ${isRTL ? "right-0" : "left-0"} mt-4 w-[280px] rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] backdrop-blur-[16px] shadow-[0_8px_32px_0_var(--glass-shadow)] p-4 z-30`}
-					onWheelCapture={(event) => {
-						event.stopPropagation();
-					}}
-					onTouchMoveCapture={(event) => {
-						event.stopPropagation();
-					}}
-				>
-					<div className="mb-3">
-						<input
-							ref={verseSearchRef}
-							value={verseSearch}
-							onChange={(event) =>
-								setVerseSearch(event.target.value.replace(/[^0-9]/g, ""))
-							}
-							placeholder={t("navigation.verseShort")}
-							inputMode="numeric"
-							className="w-full rounded-full px-4 py-2 text-base md:text-xs text-[var(--text-primary)]"
-							style={{
-								fontFamily: "'Inter', sans-serif",
-								backgroundColor: "var(--neomorph-bg)",
-								border: "1px solid var(--neomorph-border)",
-								boxShadow:
-									"inset 3px 3px 6px var(--neomorph-inset-shadow-dark), inset -3px -3px 6px var(--neomorph-inset-shadow-light)",
-							}}
-						/>
-					</div>
-					<div className="grid grid-cols-5 gap-2 max-h-[320px] overflow-y-auto overscroll-contain">
-						{filteredVerses.map((item) => (
-							<button
-								type="button"
-								key={item}
-								onClick={() => {
-									onVerseChange(item);
-									setOpenMenu(null);
-								}}
-								className={`rounded-xl px-2 py-2 text-xs transition-all ${
-									item === verse
-										? "bg-[var(--accent-strong)] text-white"
-										: "bg-[var(--muted)] text-[var(--text-primary)]"
-								}`}
-								style={{ fontFamily: "'Inter', sans-serif" }}
-							>
-								{item}
 							</button>
 						))}
 					</div>
