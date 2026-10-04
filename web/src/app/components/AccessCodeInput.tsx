@@ -26,6 +26,10 @@ export function AccessCodeInput({
 	const [activeIndex, setActiveIndex] = useState(0);
 	const selection = useRef<{ start: number; end: number } | null>(null);
 	const displayValue = normalizeAccessCode(value).slice(0, ACCESS_CODE_LENGTH);
+	const selectFirstSlot = () => {
+		input.current?.setSelectionRange(0, Math.min(1, displayValue.length));
+		setActiveIndex(0);
+	};
 
 	useLayoutEffect(() => {
 		if (!selection.current) return;
@@ -70,7 +74,11 @@ export function AccessCodeInput({
 				onSelect={(event) =>
 					setActiveIndex(event.currentTarget.selectionStart ?? 0)
 				}
-				onFocus={() => setFocused(true)}
+				onFocus={() => {
+					setFocused(true);
+					selectFirstSlot();
+				}}
+				onClick={selectFirstSlot}
 				onBlur={() => setFocused(false)}
 				autoCapitalize="characters"
 				autoComplete="off"
@@ -83,28 +91,15 @@ export function AccessCodeInput({
 			/>
 			<div className="assemblies-code-row" dir="ltr" aria-hidden="true">
 				{CODE_SLOTS.map((index) => (
-					<button
+					<div
 						key={index}
-						type="button"
-						tabIndex={-1}
-						disabled={disabled}
 						className="assemblies-code-slot"
 						data-active={
 							focused && index === Math.min(activeIndex, ACCESS_CODE_LENGTH - 1)
 						}
-						onMouseDown={(event) => event.preventDefault()}
-						onClick={() => {
-							const start = Math.min(index, displayValue.length);
-							input.current?.focus();
-							input.current?.setSelectionRange(
-								start,
-								Math.min(start + 1, displayValue.length),
-							);
-							setActiveIndex(start);
-						}}
 					>
 						{displayValue[index] || ""}
-					</button>
+					</div>
 				))}
 			</div>
 		</div>

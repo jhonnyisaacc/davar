@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { useState } from "react";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 import { useProductStyle } from "../product/ui";
 import { ACCESS_CODE_LENGTH, normalizeAccessCode } from "./accessCode";
 
@@ -19,13 +19,16 @@ export function AccessCodeInput({
   onSubmit: () => void;
 }) {
   const { colors } = useProductStyle();
-  const input = useRef<TextInput>(null);
   const [focused, setFocused] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [selection, setSelection] = useState<{ start: number; end: number }>();
   // The slot row displays digits; the full-size input stays available to assistive technology.
   const displayValue = normalizeAccessCode(value).slice(0, ACCESS_CODE_LENGTH);
   const characters = Array.from(displayValue);
+  const selectFirstSlot = () => {
+    setSelection({ start: 0, end: Math.min(1, characters.length) });
+    setActiveIndex(0);
+  };
 
   return (
     <View
@@ -41,7 +44,6 @@ export function AccessCodeInput({
     >
       {/* One native input preserves paste, backspace, and screen reader editing. */}
       <TextInput
-        ref={input}
         accessibilityLabel={label}
         value={displayValue}
         onChangeText={(text) => {
@@ -51,42 +53,39 @@ export function AccessCodeInput({
         selection={selection}
         onSelectionChange={({ nativeEvent }) => {
           setActiveIndex(nativeEvent.selection.start);
-          setSelection(undefined);
         }}
-        onFocus={() => setFocused(true)}
+        onFocus={() => {
+          setFocused(true);
+          selectFirstSlot();
+        }}
+        onPress={selectFirstSlot}
         onBlur={() => setFocused(false)}
         autoCapitalize="characters"
         autoCorrect={false}
         spellCheck={false}
         caretHidden
+        selectionColor="transparent"
         keyboardType="number-pad"
         inputMode="numeric"
+        showSoftInputOnFocus
         editable={editable}
         returnKeyType="go"
         onSubmitEditing={onSubmit}
         style={styles.input}
       />
-      <View style={styles.row}>
+      <View
+        style={styles.row}
+        pointerEvents="none"
+        accessibilityElementsHidden
+        importantForAccessibility="no-hide-descendants"
+      >
         {Array.from({ length: ACCESS_CODE_LENGTH }, (_, index) => {
           const active =
             focused && index === Math.min(activeIndex, ACCESS_CODE_LENGTH - 1);
           return (
-            <Pressable
+            <View
               key={index}
               accessible={false}
-              focusable={false}
-              accessibilityElementsHidden
-              importantForAccessibility="no-hide-descendants"
-              disabled={!editable}
-              onPress={() => {
-                const start = Math.min(index, characters.length);
-                setSelection({
-                  start,
-                  end: Math.min(start + 1, characters.length),
-                });
-                setActiveIndex(start);
-                input.current?.focus();
-              }}
               style={[
                 styles.slot,
                 {
@@ -101,7 +100,7 @@ export function AccessCodeInput({
               <Text style={[styles.character, { color: colors.textPrimary }]}>
                 {characters[index] || ""}
               </Text>
-            </Pressable>
+            </View>
           );
         })}
       </View>
@@ -121,6 +120,7 @@ const styles = StyleSheet.create({
   },
   input: {
     position: "absolute",
+    zIndex: 1,
     top: 0,
     left: 0,
     width: "100%",
