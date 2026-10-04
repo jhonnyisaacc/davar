@@ -31,6 +31,11 @@ From mobile/: `EXPO_PUBLIC_API_URL=http://YOUR_LAN_HOST:3000 bun run start`.
 From web/: `PUBLIC_API_URL=http://localhost:3000 bun run dev`.
 JavaScript commands run with Bun in the relevant surface directory.
 
+Development CORS also allows Bun's HTML server on port 5174 and the default
+web/Expo ports on localhost, 127.0.0.1, and 0.0.0.0, even with an existing
+WEB_ORIGINS setting. Add custom ports or LAN browser origins to WEB_ORIGINS.
+Staging and production allow only their configured origins.
+
 The project uses Rails on 3000, web/static data on 5173, Expo/Metro on 8081,
 and PostgreSQL on 5432. Keep Rails running alongside Expo: Commentary questions
 first create or restore an API session, then submit messages to Rails. Starting
