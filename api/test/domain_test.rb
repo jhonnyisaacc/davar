@@ -1,5 +1,6 @@
 require "test_helper"
 class DomainTest < ActiveSupport::TestCase
+  include EnabledProductFeatures
   def reader(**attributes)
     User.create!({display_name: "Reader", admitted_at: Time.current, profile: {experience: "experienced", city: "Buenos Aires", gender: "male", visibility_reviewed: true, answers: (1..7).to_h { |n| [n.to_s, true] }}}.merge(attributes))
   end

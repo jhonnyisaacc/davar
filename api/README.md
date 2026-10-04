@@ -85,11 +85,11 @@ and set both variables:
 
 ```dotenv
 OPENROUTER_API_KEY=your-development-api-key
-OPENROUTER_MODEL=provider/model-id
+OPENROUTER_MODEL=provider/model-id:free
 ```
 
-Choose the full model ID from the [OpenRouter models catalog](https://openrouter.ai/models).
-Restart Rails after changing the file. When both values are present and Rails is
+Choose a free model ID from the [OpenRouter models catalog](https://openrouter.ai/models).
+Restart Rails after changing the file. When the key and a free model are present and Rails is
 in development, every commentary request uses the server's OpenRouter configuration
 instead of personal provider connections or simulated AI. This also works with
 `api/bin/dev-sandbox start`; its other simulated integrations remain active and
@@ -98,11 +98,51 @@ and these development requests do not consume the sponsored consultation quota.
 The usual request throttling, authorized grounding, conversation ownership,
 history, failure handling, and retry deduplication still apply.
 
-With either value absent, the existing provider/sandbox behavior applies.
-OpenRouter is rejected outside development even if its environment variables are
-set. Staging and production continue to use personal connections and `FREE_AI_*`.
+The development override also requires `ai_shared_openrouter`. With the key absent
+or the development model unset or paid, the enabled personal connection, shared
+free model, or sandbox path applies. Staging and production ignore `OPENROUTER_MODEL`; shared AI uses
+`SHARED_OPENROUTER_MODEL` and only accepts `openrouter/free` or a `:free` model.
 The key stays in Rails; never put it in `PUBLIC_*` or `EXPO_PUBLIC_*` variables.
 Only empty placeholders are committed in the example files.
+
+## Feature flags and release controls
+
+Rails evaluates three flags in the Davar PostHog project (644359) using the US
+endpoint `https://us.i.posthog.com/flags?v=2`. Put `POSTHOG_PROJECT_TOKEN` and
+`POSTHOG_HOST` in the server environment; local credentials belong in the ignored
+`api/.env.development.local`. No PostHog personal API key or browser SDK is required.
+
+- `ai_provider_connections`: enables personal API key connections. The server's
+  comma-separated `AI_CONNECTION_PROVIDERS` allowlist also controls each provider;
+  it starts empty. Supported IDs are `claude`, `grok`, `chatgpt`, and `gemini`.
+  Muse is unavailable until an actual integration exists. API key connections
+  are distinct from account sign-in; approved provider OAuth can be added later.
+- `ai_shared_openrouter`: enables shared AI with `OPENROUTER_API_KEY` on the server.
+  Hosted environments use `SHARED_OPENROUTER_MODEL=openrouter/free` by default.
+  Requests enforce zero prompt/completion pricing and no paid fallback. Limits
+  are 3 requests per minute per account, 20 per minute globally, and
+  `SHARED_AI_DAILY_LIMIT=50` globally per UTC day. This shared free quota is finite;
+  provider availability and upstream limits may be lower. Personal connections
+  take precedence in hosted environments and do not consume the shared quota.
+- `assemblies`: hides Assemblies navigation and protects its API and admission
+  endpoints. Existing registration, admission, and membership rules still apply.
+
+All three start disabled. Both apps read `/api/v1/capabilities` and show Shaul's
+public articles whenever AI is disabled, unconfigured, or unavailable. The article
+API includes the existing validated public Shaul corpus, preserving the exact
+source text and attribution, alongside explicitly published imported articles.
+It serves 50 articles per page with a `next_offset`; private, draft, or unpermitted
+material remains excluded. YAML metadata is omitted from the reading view; prose
+and source credits are preserved. Provider keys remain encrypted in Rails and never appear in responses. Failed evaluation
+or missing flags disable the feature. Evaluations are cached for 30 seconds per
+account and environment; apps refresh on focus/resume and every minute, without
+persisting enabled capabilities offline. No prompts, emails, or credentials are
+sent to PostHog, only a pseudonymous account ID and the Rails environment.
+
+After changing server environment settings, restart Rails. For hosted rollout,
+configure its environment and deploy the API and app changes before enabling the
+flags in [Davar PostHog](https://us.posthog.com/project/644359/feature_flags).
+Shared OpenRouter's live model availability must be checked in that environment.
 
 ## Authentication
 

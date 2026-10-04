@@ -79,6 +79,28 @@ describe("product account cache", () => {
 		await expect(pending).rejects.toBeInstanceOf(ProductApiError);
 		expect(cache.map.size).toBe(0);
 	});
+	test("restoring or clearing a session preserves an in-flight public calendar request", async () => {
+		let finish!: (value: Response) => void;
+		let headers: HeadersInit | undefined;
+		const cache = storage();
+		const api = new ProductClient("https://api.example", cache, (_url, init) => {
+			headers = init?.headers;
+			return new Promise<Response>((resolve) => {
+				finish = resolve;
+			});
+		});
+		await api.setSession("first-token", "first");
+		const pending = api.request("/calendar/upcoming", {
+			public: true,
+			cache: true,
+		});
+		await api.setSession("restored-token", "second");
+		await api.setSession(null, null);
+		finish(new Response(JSON.stringify({ days: [] })));
+		await expect(pending).resolves.toEqual({ days: [] });
+		expect(new Headers(headers).has("Authorization")).toBe(false);
+		expect(cache.map.has("davar-v2-cache/public//calendar/upcoming")).toBe(true);
+	});
 	test("successful mutations invalidate stale reads", async () => {
 		const cache = storage();
 		const api = new ProductClient(

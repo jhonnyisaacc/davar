@@ -5,6 +5,7 @@ module Api
         render json: {conversations: current_user.conversations.order(updated_at: :desc).limit(100).as_json(only: %i[id title updated_at])}
       end
       def create
+        raise DomainError.new("ai_unavailable", 503) unless ProductCapabilities.call(current_user)[:ai][:available]
         conversation = current_user.conversations.create!(title: params[:title].to_s.first(120))
         render json: {id: conversation.id}, status: :created
       end

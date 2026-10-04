@@ -1,5 +1,6 @@
 require "test_helper"
 class ApiTest < ActionDispatch::IntegrationTest
+  include EnabledProductFeatures
   def login(user)
     _, token = Session.issue!(user)
     {"Authorization"=>"Bearer #{token}"}

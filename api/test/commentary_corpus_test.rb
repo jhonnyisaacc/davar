@@ -2,6 +2,7 @@ require "test_helper"
 require "tmpdir"
 
 class CommentaryCorpusTest < ActiveSupport::TestCase
+  include EnabledProductFeatures
   def note(id, title, alias_name, text = nil)
     text ||= "# Tesis\nOriginal contextual interpretation.\n## Detail\n#{title}: original passage.\n## Pendiente de verificar\nNeeds verification; not a fixed lexical definition.\n## Créditos\nOriginal author.\n"
     boundaries = text.to_enum(:scan, /^#+ (.+)$/).map { Regexp.last_match.begin(0) }
@@ -98,9 +99,9 @@ class CommentaryCorpusTest < ActiveSupport::TestCase
     assert_raises(DomainError) { Commentary.parse_answer!(JSON.generate(payload), [{source_id: "shaul:man"}]) }
   end
 
-  test "missing coverage skips generation refunds quota and deduplicates retries" do
-    old = ENV.to_h.slice("FREE_AI_KEY", "FREE_AI_MODEL")
-    ENV["FREE_AI_KEY"], ENV["FREE_AI_MODEL"] = "fixture", "fixture"
+  test "missing coverage skips shared generation and quota and deduplicates retries" do
+    old = ENV.to_h.slice("OPENROUTER_API_KEY", "SHARED_OPENROUTER_MODEL")
+    ENV["OPENROUTER_API_KEY"], ENV["SHARED_OPENROUTER_MODEL"] = "fixture", "openrouter/free"
     user = User.create!
     conversation = user.conversations.create!(title: "Coverage")
     generator = Class.new { def self.generate(**); raise "Must not call provider"; end }
@@ -110,7 +111,7 @@ class CommentaryCorpusTest < ActiveSupport::TestCase
     assert_equal 0, user.reload.free_consultations
     assert_equal answer.id, Commentary.ask!(conversation: conversation, content: "quuxflarb", context: nil, request_id: "coverage_001", generator: generator).id
   ensure
-    %w[FREE_AI_KEY FREE_AI_MODEL].each { |key| old[key] ? ENV[key] = old[key] : ENV.delete(key) }
+    %w[OPENROUTER_API_KEY SHARED_OPENROUTER_MODEL].each { |key| old[key] ? ENV[key] = old[key] : ENV.delete(key) }
   end
 
   test "unpublished or unpermitted articles are not grounding evidence" do
@@ -121,9 +122,9 @@ class CommentaryCorpusTest < ActiveSupport::TestCase
     assert_empty CommentarySearch.call(question: "Study", context: commentary_context, corpus: CommentaryCorpus.new(nil))
   end
 
-  test "invalid citations fail the consultation and refund its reservation" do
-    old = ENV.to_h.slice("FREE_AI_KEY", "FREE_AI_MODEL")
-    ENV["FREE_AI_KEY"], ENV["FREE_AI_MODEL"] = "fixture", "fixture"
+  test "invalid citations fail the shared consultation without consuming the legacy quota" do
+    old = ENV.to_h.slice("OPENROUTER_API_KEY", "SHARED_OPENROUTER_MODEL")
+    ENV["OPENROUTER_API_KEY"], ENV["SHARED_OPENROUTER_MODEL"] = "fixture", "openrouter/free"
     commentary_article
     user = User.create!
     conversation = user.conversations.create!(title: "Invalid citation")
@@ -133,6 +134,6 @@ class CommentaryCorpusTest < ActiveSupport::TestCase
     assert_equal "failed", conversation.messages.find_by!(request_id: "invalid_001").state
     assert_equal 0, user.reload.free_consultations
   ensure
-    %w[FREE_AI_KEY FREE_AI_MODEL].each { |key| old[key] ? ENV[key] = old[key] : ENV.delete(key) }
+    %w[OPENROUTER_API_KEY SHARED_OPENROUTER_MODEL].each { |key| old[key] ? ENV[key] = old[key] : ENV.delete(key) }
   end
 end

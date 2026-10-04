@@ -7,23 +7,26 @@ class EnvironmentConfigTest < ActiveSupport::TestCase
   test "development loads dotenv settings and preserves exported overrides" do
     Dir.mktmpdir do |directory|
       file = File.join(directory, ".env.development")
-      File.write(file, "OPENROUTER_API_KEY=development-file-key\nOPENROUTER_MODEL=fixture/file-model\n")
+      File.write(file, "OPENROUTER_API_KEY=development-file-key\nOPENROUTER_MODEL=fixture/file-model:free\n")
       code = <<~RUBY
         require #{Rails.root.join("config/boot").to_s.inspect}
         require "rails"
+        require "active_model/railtie"
+        require "active_job/railtie"
+        require "active_record/railtie"
         Bundler.require(*Rails.groups)
         Dotenv::Rails.files = [#{file.inspect}]
         require #{Rails.root.join("config/environment").to_s.inspect}
         puts JSON.generate(openrouter: CommentaryProvider.development_openrouter?, model: ENV.fetch("OPENROUTER_MODEL"), key_loaded: ENV["OPENROUTER_API_KEY"] == "development-file-key")
       RUBY
-      [nil, "fixture/exported-model"].each do |override|
+      [nil, "fixture/exported-model:free"].each do |override|
         env = {"RAILS_ENV" => "development", "DAVAR_DEV_SANDBOX" => nil, "OPENROUTER_API_KEY" => nil, "OPENROUTER_MODEL" => override}
         output, error, status = Open3.capture3(env, RbConfig.ruby, "-e", code)
         assert status.success?, error
         result = JSON.parse(output.lines.last)
         assert_equal true, result["openrouter"]
         assert_equal true, result["key_loaded"]
-        assert_equal override || "fixture/file-model", result["model"]
+        assert_equal override || "fixture/file-model:free", result["model"]
       end
     end
   end

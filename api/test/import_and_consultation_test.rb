@@ -1,5 +1,6 @@
 require "test_helper"
 class ImportAndConsultationTest < ActiveSupport::TestCase
+  include EnabledProductFeatures
   test "reviewed Qahal export rolls back dry run and replays idempotently" do
     payload = {"schema_version"=>1, "source_revision"=>"fixture-revision", "decrypted"=>true,
       "users"=>[{"telegram_id"=>12345, "display_name"=>"Fixture", "profile"=>{"city"=>"City"}}],
@@ -33,10 +34,10 @@ class ImportAndConsultationTest < ActiveSupport::TestCase
     assert_equal "failed", message.reload.state
     assert_equal 0, user.reload.free_consultations
   end
-  test "consultation quota is consumed once and unexpected provider failure refunds" do
-    old = ENV.to_h.slice("FREE_AI_KEY", "FREE_AI_MODEL")
-    ENV["FREE_AI_KEY"] = "test-only-key"
-    ENV["FREE_AI_MODEL"] = "fixture-model"
+  test "shared AI handles failures and followups without consuming the legacy sponsored quota" do
+    old = ENV.to_h.slice("OPENROUTER_API_KEY", "SHARED_OPENROUTER_MODEL")
+    ENV["OPENROUTER_API_KEY"] = "test-only-key"
+    ENV["SHARED_OPENROUTER_MODEL"] = "openrouter/free"
     user = User.create!(display_name: "Fixture")
     conversation = user.conversations.create!(title: "Fixture")
     broken = Class.new { def self.generate(**); raise IOError, "private upstream body"; end }
@@ -47,9 +48,9 @@ class ImportAndConsultationTest < ActiveSupport::TestCase
     assert_equal "failed", conversation.messages.find_by!(request_id: "failure_001").state
     success = Class.new { def self.generate(**); '{"answer":"Study this passage cautiously.","source_ids":["fixture:commentary"]}'; end }
     Commentary.ask!(conversation: conversation, content: "Study", context: nil, request_id: "success_001", generator: success)
-    assert_equal 1, user.reload.free_consultations
-    assert_raises(DomainError) { Commentary.ask!(conversation: conversation, content: "Again", context: nil, request_id: "success_002", generator: success) }
+    assert_equal 0, user.reload.free_consultations
+    assert_equal "complete", Commentary.ask!(conversation: conversation, content: "Again", context: nil, request_id: "success_002", generator: success).state
   ensure
-    %w[FREE_AI_KEY FREE_AI_MODEL].each { |key| old[key] ? ENV[key] = old[key] : ENV.delete(key) }
+    %w[OPENROUTER_API_KEY SHARED_OPENROUTER_MODEL].each { |key| old[key] ? ENV[key] = old[key] : ENV.delete(key) }
   end
 end

@@ -92,7 +92,7 @@ export class ProductClient {
 					signal: controller.signal,
 				},
 			);
-			if (generation !== this.generation)
+			if (!options.public && generation !== this.generation)
 				throw new ProductApiError("session_changed", 409);
 			if (!response.ok) {
 				const payload = await response.json().catch(() => null);
@@ -116,7 +116,7 @@ export class ProductClient {
 			// Authorization and validation failures never fall back to cached private data.
 			if (
 				options.cache &&
-				generation === this.generation &&
+				(options.public || generation === this.generation) &&
 				!(error instanceof ProductApiError)
 			) {
 				const stored = await this.storage.get(key);

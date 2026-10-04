@@ -2,6 +2,26 @@ ENV["RAILS_ENV"] ||= "test"
 require_relative "../config/environment"
 require "rails/test_help"
 
+# Existing domain tests exercise released features explicitly, without network calls.
+# Availability and disabled gates have their own tests with closed defaults.
+module EnabledProductFeatures
+  extend ActiveSupport::Concern
+  included do
+    setup do
+      @product_flags = FeatureFlags::KEYS.to_h { |key| [key, true] }
+      flags = @product_flags
+      @original_flag_evaluation = FeatureFlags.method(:evaluate)
+      @original_available_providers = CommentaryProvider.method(:available_providers)
+      FeatureFlags.define_singleton_method(:evaluate) { |_user = nil| flags.dup }
+      CommentaryProvider.define_singleton_method(:available_providers) { %w[claude grok chatgpt gemini] }
+    end
+    teardown do
+      FeatureFlags.define_singleton_method(:evaluate, @original_flag_evaluation)
+      CommentaryProvider.define_singleton_method(:available_providers, @original_available_providers)
+    end
+  end
+end
+
 module ActiveSupport
   class TestCase
     # Run tests in parallel with specified workers

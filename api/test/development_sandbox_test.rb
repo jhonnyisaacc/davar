@@ -2,6 +2,7 @@ require "test_helper"
 require "tmpdir"
 require "mail"
 class DevelopmentSandboxTest < ActiveSupport::TestCase
+  include EnabledProductFeatures
   def with_method(target, name, value)
     original = target.method(name)
     target.define_singleton_method(name) { value }

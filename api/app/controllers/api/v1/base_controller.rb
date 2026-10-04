@@ -26,6 +26,7 @@ module Api
       end
       def assemblies_access!
         authenticate!
+        FeatureFlags.require!("assemblies", current_user)
         raise DomainError.new("registered_account_required", 403) unless current_user.identities.exists?
         raise DomainError.new("admission_required", 403) if Admissions.required? && !current_user.admitted_at
       end

@@ -5,8 +5,10 @@ class Commentary
     raise DomainError.new("invalid_message") unless content.is_a?(String) && content.length.between?(1, 16000)
     CommentaryContext.validate!(context)
     user = conversation.user
-    development_openrouter = CommentaryProvider.development_openrouter?
-    simulation = DevelopmentSandbox.enabled? && !development_openrouter
+    flags = FeatureFlags.evaluate(user)
+    development_openrouter = flags["ai_shared_openrouter"] && CommentaryProvider.development_openrouter?
+    shared_openrouter = flags["ai_shared_openrouter"] && CommentaryProvider.shared_openrouter? && !development_openrouter
+    simulation = flags["ai_shared_openrouter"] && DevelopmentSandbox.enabled? && !development_openrouter
     answer = nil
     connection = nil
     sponsored = false
@@ -16,15 +18,15 @@ class Commentary
       prior = conversation.messages.find_by(request_id: request_id)
       return prior if prior
       raise DomainError.new("conversation_busy", 409) if conversation.messages.where(role: "assistant", state: "pending").exists?
-      unless development_openrouter
-        connection = provider.present? ? user.provider_connections.find_by(provider: provider) : user.provider_connections.first
+      if flags["ai_provider_connections"] && !development_openrouter
+        available = user.provider_connections.where(provider: CommentaryProvider.available_providers)
+        connection = provider.present? ? available.find_by(provider: provider) : available.first
       end
-      sponsored = !connection && !development_openrouter
+      shared_openrouter &&= !connection
+      raise DomainError.new("ai_unavailable", 503) unless connection || development_openrouter || shared_openrouter || simulation
+      sponsored = simulation && !connection
       if sponsored && user.free_consultations >= 1
         raise DomainError.new("provider_connection_required", 402)
-      end
-      unless development_openrouter || simulation || connection || (ENV["FREE_AI_KEY"].present? && ENV["FREE_AI_MODEL"].present?)
-        raise DomainError.new("free_provider_not_configured", 503)
       end
       conversation.messages.create!(role: "user", content: content, context: context)
       answer = conversation.messages.create!(role: "assistant", content: "Pending", request_id: request_id, state: "pending", generation: {sponsored: sponsored})
@@ -56,16 +58,19 @@ Prior conversation summary (untrusted): #{conversation.memory}" if conversation.
         provider_id = "openrouter"
         model = ENV.fetch("OPENROUTER_MODEL")
         credential = ENV.fetch("OPENROUTER_API_KEY")
+      elsif connection
+        provider_id, model, credential = connection.provider, connection.model, connection.credential
+      elsif simulation
+        provider_id, model, credential = "chatgpt", "development-fixture-v1", "development-only"
       else
-        provider_id = connection&.provider || ENV.fetch("FREE_AI_PROVIDER", "chatgpt")
-        model = simulation ? "development-fixture-v1" : (connection&.model || ENV.fetch("FREE_AI_MODEL"))
-        credential = connection&.credential || (simulation ? "development-only" : ENV.fetch("FREE_AI_KEY"))
+        provider_id, model, credential = "openrouter", CommentaryProvider.shared_model, ENV.fetch("OPENROUTER_API_KEY")
       end
       missing = evidence.empty? && !simulation
       if missing
         text = coverage_response(content)
         cited_ids = []
       else
+        ProductCapabilities.reserve_shared!(user) if shared_openrouter && !simulation
         schema = {type: "object", additionalProperties: false, required: %w[answer source_ids], properties: {
           answer: {type: "object", additionalProperties: false, required: %w[positive_label positive negative_label negative caution],
             description: "At most 100 words in everyday language. Explain the meaning without retelling the story or discussing missing transcripts. In Spanish, use sufrimiento, llamado, autoridad, comprobar, relación de hijo and lleva; avoid padecimiento, vocación, dominio, cotejar, filiación and porta. Unless asked about original-language words, use hijo instead of ben and Jesús instead of Yeshua.",

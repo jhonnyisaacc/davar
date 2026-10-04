@@ -15,6 +15,7 @@ module Api
         show
       end
       def redeem
+        FeatureFlags.require!("assemblies", current_user)
         throttle!("admission/#{current_user.id}", limit: 10)
         Admissions.redeem!(current_user, params[:code])
         show

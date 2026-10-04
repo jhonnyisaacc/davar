@@ -2,11 +2,23 @@ class CommentaryProvider
   def self.supported?(provider)
     %w[claude grok chatgpt gemini].include?(provider)
   end
+  def self.available_providers
+    ENV.fetch("AI_CONNECTION_PROVIDERS", "").split(",").map(&:strip).uniq.select { |provider| supported?(provider) }
+  end
+  def self.shared_model
+    ENV.fetch("SHARED_OPENROUTER_MODEL", "openrouter/free")
+  end
+  def self.shared_openrouter?
+    ENV["OPENROUTER_API_KEY"].present? && free_model?(shared_model)
+  end
+  def self.free_model?(model)
+    model == "openrouter/free" || model.to_s.match?(/\A[a-zA-Z0-9._\/-]+:free\z/)
+  end
   def self.development_openrouter?
-    Rails.env.development? && ENV["OPENROUTER_API_KEY"].present? && ENV["OPENROUTER_MODEL"].present?
+    Rails.env.development? && ENV["OPENROUTER_API_KEY"].present? && free_model?(ENV["OPENROUTER_MODEL"])
   end
   def self.generate(provider:, credential:, model:, system:, messages:, response_schema: nil)
-    raise DomainError.new("provider_not_supported", 503) unless supported?(provider) || (provider == "openrouter" && Rails.env.development?)
+    raise DomainError.new("provider_not_supported", 503) unless supported?(provider) || (provider == "openrouter" && free_model?(model))
     return DevelopmentSandbox.generate(messages: messages) if DevelopmentSandbox.enabled? && provider != "openrouter"
     case provider
     when "claude"
@@ -25,8 +37,12 @@ class CommentaryProvider
     else
       base = {"grok" => "https://api.x.ai/v1", "chatgpt" => "https://api.openai.com/v1", "openrouter" => "https://openrouter.ai/api/v1"}.fetch(provider)
       body = {model: model, messages: [{role: "system", content: system}] + messages}
+      if provider == "openrouter" && free_model?(model)
+        body[:max_tokens] = 2000
+        body[:provider] = {max_price: {prompt: 0, completion: 0}}
+      end
       if provider == "openrouter" && response_schema
-        # JSON mode works with the configured development model; Rails validates blocks and citations.
+        # Rails validates the JSON answer blocks and citations before returning them.
         body[:response_format] = {type: "json_object"}
       end
       result = ProviderHttp.json("#{base}/chat/completions", method: :post,

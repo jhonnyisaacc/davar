@@ -1,13 +1,14 @@
 require "test_helper"
 
 class DevelopmentOpenrouterTest < ActiveSupport::TestCase
-  ENV_KEYS = %w[OPENROUTER_API_KEY OPENROUTER_MODEL FREE_AI_PROVIDER FREE_AI_KEY FREE_AI_MODEL DAVAR_DEV_SANDBOX].freeze
+  include EnabledProductFeatures
+  ENV_KEYS = %w[OPENROUTER_API_KEY OPENROUTER_MODEL SHARED_OPENROUTER_MODEL SHARED_AI_DAILY_LIMIT DAVAR_DEV_SANDBOX].freeze
 
   setup do
     @previous_env = ENV.to_h.slice(*ENV_KEYS)
     ENV_KEYS.each { |key| ENV.delete(key) }
     ENV["OPENROUTER_API_KEY"] = "development-test-key"
-    ENV["OPENROUTER_MODEL"] = "fixture/model"
+    ENV["OPENROUTER_MODEL"] = "fixture/model:free"
     commentary_article
   end
 
@@ -66,17 +67,17 @@ class DevelopmentOpenrouterTest < ActiveSupport::TestCase
         assert_equal '{"answer":"Supplied evidence needs verification.","source_ids":["fixture:commentary"]}', text
         assert_equal [{url: "https://openrouter.ai/api/v1/chat/completions", method: :post,
           headers: {"Authorization" => "Bearer development-test-key"},
-          body: {model: "fixture/model", messages: [{role: "system", content: "Authorized evidence only"}, {role: "user", content: "Explain"}]}}], requests
+          body: {model: "fixture/model:free", max_tokens: 2000, provider: {max_price: {prompt: 0, completion: 0}}, messages: [{role: "system", content: "Authorized evidence only"}, {role: "user", content: "Explain"}]}}], requests
       end
     end
   end
 
-  test "OpenRouter is rejected before HTTP outside development" do
+  test "paid OpenRouter models are rejected before HTTP in all environments" do
     with_http_response do |requests|
-      %w[test staging production].each do |name|
+      %w[development test staging production].each do |name|
         in_environment(name) do
           error = assert_raises(DomainError) do
-            CommentaryProvider.generate(provider: "openrouter", credential: "development-test-key", model: "fixture/model", system: "Evidence", messages: [])
+            CommentaryProvider.generate(provider: "openrouter", credential: "development-test-key", model: "fixture/paid-model", system: "Evidence", messages: [])
           end
           assert_equal "provider_not_supported", error.message
         end
@@ -93,7 +94,7 @@ class DevelopmentOpenrouterTest < ActiveSupport::TestCase
         answer = ask(conversation)
         assert_equal "complete", answer.state
         assert_equal "openrouter", answer.generation["provider"]
-        assert_equal "fixture/model", answer.generation["model"]
+        assert_equal "fixture/model:free", answer.generation["model"]
         assert_equal false, answer.generation["development_simulation"]
         assert_equal({type: "json_object"}, requests.first[:body][:response_format])
         schema = JSON.parse(requests.first[:body][:messages].first[:content].split("Required JSON response schema (format rules, not source evidence): ").last)
@@ -149,23 +150,21 @@ class DevelopmentOpenrouterTest < ActiveSupport::TestCase
     end
   end
 
-  test "hosted and test commentary ignore OpenRouter settings and preserve sponsored quota" do
-    ENV["FREE_AI_PROVIDER"] = "chatgpt"
-    ENV["FREE_AI_KEY"] = "sponsored-test-key"
-    ENV["FREE_AI_MODEL"] = "sponsored-model"
+  test "hosted commentary uses only the shared free model and supports followups" do
     %w[test staging production].each do |name|
       user = User.create!
-      conversation = user.conversations.create!(title: "Sponsored study")
+      conversation = user.conversations.create!(title: "Shared free study")
       in_environment(name) do
         with_http_response do |requests|
           answer = ask(conversation)
-          assert_equal "chatgpt", answer.generation["provider"]
-          assert_equal "sponsored-model", answer.generation["model"]
-          assert_equal "https://api.openai.com/v1/chat/completions", requests.first[:url]
-          assert_equal "Bearer sponsored-test-key", requests.first[:headers]["Authorization"]
-          assert_equal 1, user.reload.free_consultations
-          assert_raises(DomainError) { ask(conversation, request_id: "request_002") }
-          assert_equal 1, requests.length
+          assert_equal "openrouter", answer.generation["provider"]
+          assert_equal "openrouter/free", answer.generation["model"]
+          assert_equal "https://openrouter.ai/api/v1/chat/completions", requests.first[:url]
+          assert_equal "Bearer development-test-key", requests.first[:headers]["Authorization"]
+          assert_equal({max_price: {prompt: 0, completion: 0}}, requests.first[:body][:provider])
+          assert_equal 0, user.reload.free_consultations
+          assert_equal "complete", ask(conversation, request_id: "request_002").state
+          assert_equal 2, requests.length
         end
       end
     end

@@ -1,6 +1,7 @@
 require "test_helper"
 
 class AssembliesTest < ActionDispatch::IntegrationTest
+  include EnabledProductFeatures
   setup do
     @sandbox_enabled = DevelopmentSandbox.method(:enabled?)
     DevelopmentSandbox.define_singleton_method(:enabled?) { true }
