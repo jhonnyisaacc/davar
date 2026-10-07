@@ -1,0 +1,60 @@
+name: Davar Server
+on:
+  pull_request:
+    branches: [main, feat/davar-v2]
+    paths: ["server/**", ".github/workflows/server-ci.yml"]
+  push:
+    branches: [main, feat/davar-v2]
+    paths: ["server/**", ".github/workflows/server-ci.yml"]
+permissions:
+  contents: read
+jobs:
+  server:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: davar_server_test
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready --health-interval 10s
+          --health-timeout 5s --health-retries 5
+    defaults:
+      run:
+        working-directory: server
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/davar_server_test
+      TEST_DATABASE_URL: postgresql://postgres:postgres@127.0.0.1:5432/davar_server_test
+      PGHOST: 127.0.0.1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "1.3.14"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: bun install --frozen-lockfile
+      - run: bun run typecheck
+      - run: bun run db:migrate
+      - run: bun test
+  bore-parity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Vendored Bore rules match api/lib/bore
+        run: |
+          if ! git ls-remote --exit-code origin feat/davar-v2 >/dev/null 2>&1; then
+            echo "feat/davar-v2 is gone; skipping bore parity check"
+            exit 0
+          fi
+          git fetch origin feat/davar-v2 --depth 1
+          rm -rf /tmp/rails-bore && mkdir -p /tmp/rails-bore
+          git archive FETCH_HEAD api/lib/bore | tar -x -C /tmp/rails-bore
+          diff -r --exclude=__pycache__ --exclude=README.davar.md \
+            /tmp/rails-bore/api/lib/bore server/lib/bore
