@@ -8,6 +8,7 @@ import { existsSync } from "fs";
 import { mkdir, readdir, readFile, rm, writeFile } from "fs/promises";
 import { extname, join } from "path";
 import { buildLexiconAssets } from "../../shared/lexiconAssets";
+import { TS2009_BOOK_FILE_MAP } from "../../shared/ts2009BookFileMap";
 import {
   canonicalBookIdFromTranslitStem,
   splitDssBook,
@@ -51,75 +52,6 @@ type Ts2009ExportStats = {
   chapters: number;
   verses: number;
   skippedBooks: string[];
-};
-
-const TS2009_BOOK_FILE_MAP: Record<string, string> = {
-  genesis: "bereshit",
-  exodus: "shemoth",
-  leviticus: "wayyiqra",
-  numbers: "bemidbar",
-  deuteronomy: "debarim",
-  joshua: "yehoshua",
-  judges: "shophetim",
-  samuel1: "samuel_1",
-  samuel2: "samuel_2",
-  kings1: "kings_1",
-  kings2: "kings_2",
-  chronicles1: "chronicles_1",
-  chronicles2: "chronicles_2",
-  nehemiah: "nehemyah",
-  esther: "ester",
-  job: "iyob",
-  psalms: "tehillim",
-  ecclesiastes: "qoheleth",
-  songofsolomon: "shir_hashirim",
-  isaiah: "yeshayahu",
-  jeremiah: "yirmeyahu",
-  lamentations: "ekah",
-  ezekiel: "yehezqel",
-  obadiah: "obadyah",
-  jonah: "yonah",
-  ruth: "ruth",
-  ezra: "ezra",
-  proverbs: "mishlei",
-  daniel: "daniel",
-  hosea: "hosea",
-  joel: "yoel",
-  amos: "amos",
-  micah: "micah",
-  nahum: "nahum",
-  habakkuk: "habakkuk",
-  zephaniah: "zephaniah",
-  haggai: "haggai",
-  zechariah: "zechariah",
-  malachi: "malachi",
-  matthew: "mattithyahu",
-  mark: "marqos",
-  luke: "lugqas",
-  john: "yohanan",
-  acts: "maasei",
-  romans: "romiyim",
-  corinthians1: "corinthians_1",
-  corinthians2: "corinthians_2",
-  galatians: "galatiyim",
-  ephesians: "ephsiyim",
-  philippians: "pilipiyim",
-  colossians: "qolasim",
-  thessalonians1: "thessalonians_1",
-  thessalonians2: "thessalonians_2",
-  timothy1: "timothy_1",
-  timothy2: "timothy_2",
-  titus: "titos",
-  philemon: "pileymon",
-  hebrews: "ibrim",
-  james: "yaaqob",
-  peter1: "peter_1",
-  peter2: "peter_2",
-  john1: "john_1",
-  john2: "john_2",
-  john3: "john_3",
-  jude: "yehudah",
-  revelation: "hazon",
 };
 
 const TS2009_LEGACY_BOOK_FILE_MAP: Record<string, string> = {
