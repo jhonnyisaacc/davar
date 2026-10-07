@@ -1,7 +1,7 @@
 import { Hono } from "hono";
-import { desc, eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 import { z } from "zod";
-import { identities, notifications, users } from "../../db/schema.js";
+import { identities, memberships, notifications, users } from "../../db/schema.js";
 import { DomainError } from "../../lib/errors.js";
 import { dec, decJson, enc, encJson } from "../../services/fields.js";
 import {
@@ -59,7 +59,13 @@ export async function accountShape(
 		.from(identities)
 		.where(eq(identities.userId, userId));
 	const profile = await decJson<Profile>(row.profile, config.encryptionPrimaryKey, {});
+	const active = await db
+		.select({ assemblyId: memberships.assemblyId })
+		.from(memberships)
+		.where(and(eq(memberships.userId, userId), eq(memberships.state, "member")))
+		.limit(1);
 	return {
+		active_assembly_id: active[0]?.assemblyId ?? null,
 		id: row.id,
 		display_name: await dec(row.displayName, config.encryptionPrimaryKey),
 		profile,

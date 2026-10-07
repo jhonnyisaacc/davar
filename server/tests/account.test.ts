@@ -44,6 +44,7 @@ describe("account", () => {
 		const body = (await res.json()) as Record<string, unknown>;
 		expect(Object.keys(body).sort()).toEqual(
 			[
+				"active_assembly_id",
 				"admitted",
 				"consultations_remaining",
 				"contact_visible",

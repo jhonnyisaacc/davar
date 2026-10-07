@@ -80,6 +80,107 @@ describe("assemblies access", () => {
 	});
 });
 
+describe("assembly discovery parity", () => {
+	test("online index returns id order", async () => {
+		const { app } = makeTestContext();
+		const first = await leader();
+		const second = await leader();
+		for (const lead of [first, second]) {
+			const created = await app.request("/api/v1/assemblies", {
+				method: "POST",
+				headers: lead.headers,
+				body: JSON.stringify({ name: `Online ${lead.id}`, kind: "online" }),
+			});
+			expect(created.status).toBe(201);
+		}
+		const { headers } = await reader();
+		const response = await app.request("/api/v1/assemblies?kind=online", { headers });
+		const body = (await response.json()) as { assemblies: Array<{ id: string }> };
+		const ids = body.assemblies.map((item) => item.id);
+		expect(ids).toEqual([...ids].sort());
+	});
+
+	test("people fallback requires identities and admission", async () => {
+		const { app } = makeTestContext();
+		const { headers } = await reader();
+		const nearOrigin = { ...READER_PROFILE, latitude: 0.05, longitude: 0.05 };
+		const noIdentity = await createUser({ profile: nearOrigin, discoverable: true });
+		const unadmitted = await createUser({
+			profile: nearOrigin,
+			discoverable: true,
+			admittedAt: null,
+		});
+		await identify(unadmitted, `unadmitted-${unadmitted}`);
+		const admitted = await createUser({ profile: nearOrigin, discoverable: true });
+		await identify(admitted, `admitted-${admitted}`);
+
+		const response = await app.request(
+			"/api/v1/assemblies?kind=in_person&latitude=0&longitude=0&radius_km=10",
+			{ headers },
+		);
+		expect(response.status).toBe(200);
+		const body = (await response.json()) as { people: Array<{ id: string }> };
+		const ids = body.people.map((item) => item.id);
+		expect(ids).not.toContain(noIdentity);
+		expect(ids).not.toContain(unadmitted);
+		expect(ids).toContain(admitted);
+	});
+
+	test("account carries the active assembly id", async () => {
+		const { app } = makeTestContext();
+		const lead = await leader();
+		const created = await app.request("/api/v1/assemblies", {
+			method: "POST",
+			headers: lead.headers,
+			body: JSON.stringify({ name: "Qahal", kind: "online" }),
+		});
+		const assembly = (await created.json()) as { id: string };
+		const mine = (await (
+			await app.request("/api/v1/account", { headers: lead.headers })
+		).json()) as { active_assembly_id: string | null };
+		expect(mine.active_assembly_id).toBe(assembly.id);
+
+		const { headers } = await reader();
+		const other = (await (
+			await app.request("/api/v1/account", { headers })
+		).json()) as { active_assembly_id: unknown };
+		expect(other.active_assembly_id).toBe(null);
+	});
+
+	test("assembly update validates meeting_url like Rails", async () => {
+		const { app } = makeTestContext();
+		const lead = await leader();
+		const created = await app.request("/api/v1/assemblies", {
+			method: "POST",
+			headers: lead.headers,
+			body: JSON.stringify({ name: "Qahal", kind: "online" }),
+		});
+		const assembly = (await created.json()) as { id: string };
+
+		for (const meeting_url of ["not-a-url", "https://"]) {
+			const bad = await app.request(`/api/v1/assemblies/${assembly.id}`, {
+				method: "PATCH",
+				headers: lead.headers,
+				body: JSON.stringify({ meeting_url }),
+			});
+			expect(bad.status).toBe(422);
+			expect(await bad.json()).toEqual({
+				error: { code: "validation_failed", details: expect.anything() },
+			});
+		}
+
+		const good = await app.request(`/api/v1/assemblies/${assembly.id}`, {
+			method: "PATCH",
+			headers: lead.headers,
+			body: JSON.stringify({ meeting_url: "https://example.test/room" }),
+		});
+		expect(good.status).toBe(200);
+		expect(((await good.json()) as { meeting_url: unknown }).meeting_url).toBe(
+			"https://example.test/room",
+		);
+	});
+});
+
 describe("assembly lifecycle", () => {
 	test("creation is policy-gated and reuses the leader location", async () => {
 		const { app } = makeTestContext();
@@ -153,7 +254,37 @@ describe("assembly lifecycle", () => {
 		const list = ((await members.json()) as { memberships: Array<{ id: string; state: string; user: { gender: string; age: unknown; contact_url: unknown } }> }).memberships;
 		const requested = list.find((item) => item.state === "requested");
 		expect(requested?.user.gender).toBe("male");
-		expect(requested?.user.contact_url).toBe(null);
+		// Contact links stay private unless the member opted into visibility,
+		// even when they own a Telegram identity.
+		const { resolveAccount } = await import("../src/services/accounts.js");
+		const { testDb } = await import("./helper.js");
+		await resolveAccount(testDb().db, {
+			provider: "telegram",
+			subject: "telegram-contact-1",
+			linkingUserId: other.id,
+			primaryKey: "test-primary-key-for-davar-server-only-0001",
+			deterministicKey: "test-deterministic-key-davar-only-0001",
+		});
+		const hidden = (await (
+			await app.request(`/api/v1/assemblies/${assembly.id}/members`, {
+				headers: lead.headers,
+			})
+		).json()) as { memberships: Array<{ state: string; user: { contact_url: unknown } }> };
+		expect(hidden.memberships.find((item) => item.state === "requested")?.user.contact_url).toBe(
+			null,
+		);
+		const { db } = makeTestContext().deps;
+		const { users } = await import("../src/db/schema.js");
+		const { eq } = await import("drizzle-orm");
+		await db.update(users).set({ contactVisible: true }).where(eq(users.id, other.id));
+		const visible = (await (
+			await app.request(`/api/v1/assemblies/${assembly.id}/members`, {
+				headers: lead.headers,
+			})
+		).json()) as { memberships: Array<{ state: string; user: { contact_url: unknown } }> };
+		expect(
+			visible.memberships.find((item) => item.state === "requested")?.user.contact_url,
+		).toBe("tg://user?id=telegram-contact-1");
 
 		const stranger = await reader();
 		const forbidden = await app.request(`/api/v1/assemblies/${assembly.id}/members`, {

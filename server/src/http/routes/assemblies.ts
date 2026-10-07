@@ -13,7 +13,7 @@ import {
 import { canCreateAssembly } from "../../services/policy.js";
 import { decideMembership, requestMembership } from "../../services/memberships.js";
 import { checkRateLimit } from "../../services/rateLimit.js";
-import { requireAssemblyAccess } from "../auth.js";
+import { inviteGateEnabled, requireAssemblyAccess } from "../auth.js";
 import { parseBody, ValidationError } from "../validation.js";
 import type { AppVariables } from "../deps.js";
 import type { DatabaseOrTx } from "../../db/client.js";
@@ -39,6 +39,25 @@ const decideSchema = z.object({
 
 function roundCoordinate(value: number): number {
 	return Math.round(value * 20) / 20;
+}
+
+// Mirrors Assembly#valid_meeting_url: blank is allowed, otherwise the value
+// must be a complete HTTPS URL no longer than 2048 characters.
+function assertMeetingUrl(value: unknown): void {
+	const invalid = { meeting_url: ["must be a complete HTTPS URL"] };
+	if (value === undefined || value === null || value === "") return;
+	if (typeof value !== "string" || value.length > 2048) {
+		throw new ValidationError(invalid);
+	}
+	let parsed: URL | null = null;
+	try {
+		parsed = new URL(value);
+	} catch {
+		parsed = null;
+	}
+	if (!parsed || parsed.protocol !== "https:" || !parsed.host) {
+		throw new ValidationError(invalid);
+	}
 }
 
 function distanceKm(lat: number, lon: number, otherLat: number, otherLon: number): number {
@@ -155,7 +174,12 @@ assemblyRoutes.get("/assemblies", async (c) => {
 	const kind = params.kind ?? "in_person";
 	if (kind !== "in_person" && kind !== "online") throw new DomainError("invalid_kind");
 	if (kind === "online") {
-		const rows = await db.select().from(assemblies).where(eq(assemblies.kind, "online")).limit(100);
+		const rows = await db
+			.select()
+			.from(assemblies)
+			.where(eq(assemblies.kind, "online"))
+			.orderBy(assemblies.id)
+			.limit(100);
 		return c.json({
 			assemblies: await Promise.all(
 				rows.map((assembly) => assemblyShape(db, config, assembly, user.id, null)),
@@ -198,9 +222,27 @@ assemblyRoutes.get("/assemblies", async (c) => {
 			.from(users)
 			.where(and(eq(users.discoverable, true), ne(users.id, user.id)))
 			.limit(500);
+		// Rails requires fallback people to own an identity and, when the
+		// invite gate is on, to be admitted.
+		const gateOn = inviteGateEnabled(c.get("deps").env);
+		const identityRows =
+			candidates.length === 0
+				? []
+				: await db
+						.select({ userId: identities.userId })
+						.from(identities)
+						.where(
+							inArray(
+								identities.userId,
+								candidates.map((candidate) => candidate.id),
+							),
+						);
+		const withIdentity = new Set(identityRows.map((row) => row.userId));
 		for (const candidate of candidates) {
 			const profile = await decJson<Profile>(candidate.profile, config.encryptionPrimaryKey, {});
 			if (
+				!withIdentity.has(candidate.id) ||
+				(gateOn && !candidate.admittedAt) ||
 				!completedOnboarding(profile) ||
 				!doctrinalAgreement(profile) ||
 				typeof profile.latitude !== "number" ||
@@ -237,11 +279,7 @@ assemblyRoutes.post("/assemblies", async (c) => {
 	if (!canCreateAssembly({ leaderVerified: user.leaderVerified, profile: user.profile })) {
 		throw new DomainError("leader_verification_required", 403);
 	}
-	if (body.meeting_url !== undefined && body.meeting_url !== null && body.meeting_url !== "") {
-		if (!body.meeting_url.startsWith("https://")) {
-			throw new ValidationError({ meeting_url: ["is invalid"] });
-		}
-	}
+	assertMeetingUrl(body.meeting_url);
 	const attributes: {
 		name: string;
 		kind: string;
@@ -319,9 +357,7 @@ assemblyRoutes.patch("/assemblies/:id", async (c) => {
 	const update: { name?: string; meetingUrl?: string | null } = {};
 	if (body.name !== undefined) update.name = body.name;
 	if (body.meeting_url !== undefined) {
-		if (body.meeting_url && !body.meeting_url.startsWith("https://")) {
-			throw new ValidationError({ meeting_url: ["is invalid"] });
-		}
+		assertMeetingUrl(body.meeting_url);
 		update.meetingUrl = body.meeting_url
 			? await enc(body.meeting_url, config.encryptionPrimaryKey)
 			: null;
@@ -414,7 +450,7 @@ assemblyRoutes.get("/assemblies/:id/members", async (c) => {
 				name: await dec(member.displayName, config.encryptionPrimaryKey),
 				gender: membership.state === "requested" ? (profile.gender ?? null) : null,
 				age: ageOf(profile),
-				contact_url: await telegramContact(db, config, member.id),
+				contact_url: member.contactVisible ? await telegramContact(db, config, member.id) : null,
 			},
 		});
 	}

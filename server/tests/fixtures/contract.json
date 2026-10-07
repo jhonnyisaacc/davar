@@ -1,5 +1,6 @@
 {
 	"account_keys": [
+		"active_assembly_id",
 		"admitted",
 		"consultations_remaining",
 		"contact_visible",
