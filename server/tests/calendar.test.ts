@@ -109,7 +109,7 @@ describe("articles", () => {
 		const { app, deps } = makeTestContext();
 		const empty = await app.request("/api/v1/articles");
 		expect(empty.status).toBe(200);
-		expect(await empty.json()).toEqual({ articles: [] });
+		expect(await empty.json()).toEqual({ articles: [], next_offset: null });
 
 		const key = deps.config.encryptionPrimaryKey;
 		const published = await testDb()
@@ -154,6 +154,12 @@ describe("articles", () => {
 
 		const filtered = await app.request("/api/v1/articles?locale=he");
 		expect(((await filtered.json()) as { articles: unknown[] }).articles).toEqual([]);
+
+		const paged = (await (
+			await app.request("/api/v1/articles?locale=en&page=2")
+		).json()) as { articles: unknown[]; next_offset: number | null };
+		expect(paged.articles).toEqual([]);
+		expect(paged.next_offset).toBe(null);
 
 		const id = published[0]?.id ?? "";
 		const show = await app.request(`/api/v1/articles/${id}`);
