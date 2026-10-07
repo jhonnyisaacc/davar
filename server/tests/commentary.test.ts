@@ -31,10 +31,50 @@ function generatorFor(text: string) {
 		env: {
 			...process.env,
 			NODE_ENV: "test",
-			FREE_AI_KEY: "test-only-key",
-			FREE_AI_MODEL: "fixture-model",
+			OPENROUTER_API_KEY: "test-server-key",
+			SHARED_OPENROUTER_MODEL: "openrouter/free",
+			AI_CONNECTION_PROVIDERS: "claude,grok,chatgpt,gemini",
 		} as NodeJS.ProcessEnv,
 	};
+}
+
+async function commentaryArticle(sourceId = "fixture:commentary"): Promise<void> {
+	const { articles } = await import("../src/db/schema.js");
+	const { enc } = await import("../src/services/fields.js");
+	const key = "test-primary-key-for-davar-server-only-0001";
+	await testDb()
+		.db.insert(articles)
+		.values({
+			sourceId,
+			title: "Study this passage",
+			locale: "en",
+			body: await enc(
+				"This passage is supplied evidence for a study. Its interpretation needs verification.",
+				key,
+			),
+			sourceUrl: "https://shaul.vercel.app/fixture",
+			attribution: "Synthetic test note",
+			revision: "fixture",
+			inputHash: "fixture",
+			publicationState: "published",
+			permissions: { public_display: true, ai_grounding: true },
+			references: [
+				{ system_id: "davar-v1", kind: "verse", book_id: "john", chapter: 1, verse: 51 },
+			],
+		});
+}
+
+function groundedJson(sourceId = "fixture:commentary"): string {
+	return JSON.stringify({
+		answer: {
+			positive_label: "Qué es",
+			positive: ["Study this passage cautiously"],
+			negative_label: "Qué no es",
+			negative: ["A settled definition"],
+			caution: null,
+		},
+		source_ids: [sourceId],
+	});
 }
 
 describe("conversations", () => {
@@ -102,10 +142,9 @@ describe("conversations", () => {
 		expect(await badContext.json()).toEqual({ error: { code: "invalid_reference" } });
 	});
 
-	test("one sponsored consultation, then a connection is required", async () => {
-		const { app } = makeTestContext(
-			generatorFor("No supplied evidence supports an answer."),
-		);
+	test("shared AI answers from evidence without consuming quota", async () => {
+		await commentaryArticle();
+		const { app } = makeTestContext(generatorFor(groundedJson()));
 		const { headers } = await identified();
 		const created = (await (
 			await app.request("/api/v1/conversations", {
@@ -118,51 +157,96 @@ describe("conversations", () => {
 		const first = await app.request(`/api/v1/conversations/${created.id}/messages`, {
 			method: "POST",
 			headers,
-			body: JSON.stringify({ content: "Explain", request_id: "request_001" }),
+			body: JSON.stringify({ content: "Study this passage", request_id: "request_001" }),
 		});
 		expect(first.status).toBe(200);
 		const answer = (await first.json()) as {
 			id: string;
 			state: string;
+			content: string;
+			citations: Array<{ source_id: string }>;
 			generation: Record<string, unknown>;
 		};
 		expect(answer.state).toBe("complete");
 		expect(answer.generation.material_state).toBe("generated");
+		expect(answer.generation.provider).toBe("openrouter");
+		expect(answer.generation.evidence_status).toBe("supplied");
+		expect(answer.citations.map((item) => item.source_id)).toEqual(["fixture:commentary"]);
+		expect(answer.content).toContain("Study this passage cautiously");
 
 		const retry = await app.request(`/api/v1/conversations/${created.id}/messages`, {
 			method: "POST",
 			headers,
-			body: JSON.stringify({ content: "Explain", request_id: "request_001" }),
+			body: JSON.stringify({ content: "Study this passage", request_id: "request_001" }),
 		});
 		expect(((await retry.json()) as { id: string }).id).toBe(answer.id);
 
-		const second = await app.request(`/api/v1/conversations/${created.id}/messages`, {
-			method: "POST",
-			headers,
-			body: JSON.stringify({ content: "Again", request_id: "request_002" }),
-		});
-		expect(second.status).toBe(402);
-		expect(await second.json()).toEqual({ error: { code: "provider_connection_required" } });
-
 		const me = await app.request("/api/v1/account", { headers });
-		expect(((await me.json()) as { consultations_remaining: number }).consultations_remaining).toBe(0);
+		expect(((await me.json()) as { consultations_remaining: number }).consultations_remaining).toBe(1);
 	});
 
-	test("unexpected provider failure refunds and marks the message", async () => {
+	test("missing evidence answers from coverage without calling or consuming", async () => {
 		let calls = 0;
-		const { app, deps } = makeTestContext({
+		const base = generatorFor(groundedJson());
+		const { app } = makeTestContext({
+			...base,
+			generator: async () => {
+				calls += 1;
+				return groundedJson();
+			},
+		});
+		const { headers } = await identified();
+		const created = (await (
+			await app.request("/api/v1/conversations", {
+				method: "POST",
+				headers,
+				body: JSON.stringify({ title: "Missing" }),
+			})
+		).json()) as { id: string };
+		const res = await app.request(`/api/v1/conversations/${created.id}/messages`, {
+			method: "POST",
+			headers,
+			body: JSON.stringify({ content: "Xyzzyplugh quantum", request_id: "missing_001" }),
+		});
+		expect(res.status).toBe(200);
+		const answer = (await res.json()) as {
+			content: string;
+			citations: unknown[];
+			generation: Record<string, unknown>;
+		};
+		expect(answer.content).toContain("couldn't find matching public passages");
+		expect(answer.citations).toEqual([]);
+		expect(answer.generation.provider).toBe(null);
+		expect(answer.generation.evidence_status).toBe("missing");
+		expect(calls).toBe(0);
+	});
+
+	test("closed flags make AI unavailable without spending", async () => {
+		const { app } = makeTestContext({
+			...generatorFor(groundedJson()),
+			flags: { ai_provider_connections: false, ai_shared_openrouter: false, assemblies: true },
+		});
+		const { headers } = await identified();
+		const denied = await app.request("/api/v1/conversations", {
+			method: "POST",
+			headers,
+			body: JSON.stringify({ title: "Forbidden" }),
+		});
+		expect(denied.status).toBe(503);
+		expect(await denied.json()).toEqual({ error: { code: "ai_unavailable" } });
+	});
+
+	test("unexpected provider failure is marked without consuming quota", async () => {
+		await commentaryArticle();
+		let calls = 0;
+		const base = generatorFor(groundedJson());
+		const { app } = makeTestContext({
+			...base,
 			generator: async () => {
 				calls += 1;
 				throw new Error("private upstream body");
 			},
-			env: {
-				...process.env,
-				NODE_ENV: "test",
-				FREE_AI_KEY: "test-only-key",
-				FREE_AI_MODEL: "fixture-model",
-			} as NodeJS.ProcessEnv,
 		});
-		void deps;
 		const { headers } = await identified();
 		const created = (await (
 			await app.request("/api/v1/conversations", {
@@ -174,7 +258,7 @@ describe("conversations", () => {
 		const failed = await app.request(`/api/v1/conversations/${created.id}/messages`, {
 			method: "POST",
 			headers,
-			body: JSON.stringify({ content: "Study", request_id: "failure_001" }),
+			body: JSON.stringify({ content: "Study this passage", request_id: "failure_001" }),
 		});
 		expect(failed.status).toBe(503);
 		expect(await failed.json()).toEqual({ error: { code: "provider_response_unavailable" } });
@@ -187,8 +271,9 @@ describe("conversations", () => {
 		expect(((await me.json()) as { consultations_remaining: number }).consultations_remaining).toBe(1);
 	});
 
-	test("connected consultations do not consume quota", async () => {
-		const { app } = makeTestContext(generatorFor("Connected answer."));
+	test("approved personal connections take precedence over shared AI", async () => {
+		await commentaryArticle();
+		const { app } = makeTestContext(generatorFor(groundedJson()));
 		const { id, headers } = await identified();
 		const linked = await app.request("/api/v1/provider_connections", {
 			method: "POST",
@@ -207,7 +292,7 @@ describe("conversations", () => {
 			method: "POST",
 			headers,
 			body: JSON.stringify({
-				content: "Connected",
+				content: "Study this passage",
 				request_id: "connected_001",
 				provider: "chatgpt",
 			}),
@@ -221,6 +306,11 @@ describe("conversations", () => {
 			.from(providerConnections)
 			.where(eq(providerConnections.userId, id));
 		expect(JSON.stringify(stored)).not.toContain("sandbox-key-value");
+		const { sql } = await import("drizzle-orm");
+		const buckets = await testDb().db.execute(
+			sql`SELECT count(*)::int AS count FROM rate_limits WHERE bucket LIKE 'shared-ai/%'`,
+		);
+		expect((buckets[0] as { count: number }).count).toBe(0);
 	});
 
 	test("memory resets and busy conversations cannot be deleted", async () => {
@@ -246,7 +336,7 @@ describe("conversations", () => {
 	});
 
 	test("provider connections validate credentials and stay private", async () => {
-		const { app } = makeTestContext();
+		const { app } = makeTestContext(generatorFor(groundedJson()));
 		const guest = await createUser({ profile: READER_PROFILE, admittedAt: null });
 		const forbidden = await app.request("/api/v1/provider_connections", {
 			method: "POST",
@@ -269,6 +359,34 @@ describe("conversations", () => {
 			body: JSON.stringify({ provider: "muse", credential: "secret-key-value", model: "m" }),
 		});
 		expect(unsupported.status).toBe(503);
+		expect(await unsupported.json()).toEqual({ error: { code: "provider_not_supported" } });
+
+		const { app: gated } = makeTestContext({
+			...generatorFor(groundedJson()),
+			env: {
+				...generatorFor(groundedJson()).env,
+				AI_CONNECTION_PROVIDERS: "chatgpt",
+			} as NodeJS.ProcessEnv,
+		});
+		const unapproved = await gated.request("/api/v1/provider_connections", {
+			method: "POST",
+			headers,
+			body: JSON.stringify({ provider: "claude", credential: "secret-key-value", model: "m" }),
+		});
+		expect(unapproved.status).toBe(503);
+		expect(await unapproved.json()).toEqual({ error: { code: "provider_not_supported" } });
+
+		const { app: closed } = makeTestContext({
+			...generatorFor(groundedJson()),
+			flags: { ai_provider_connections: false, ai_shared_openrouter: false, assemblies: true },
+		});
+		const disabled = await closed.request("/api/v1/provider_connections", {
+			method: "POST",
+			headers,
+			body: JSON.stringify({ provider: "chatgpt", credential: "secret-key-value", model: "m" }),
+		});
+		expect(disabled.status).toBe(503);
+		expect(await disabled.json()).toEqual({ error: { code: "feature_unavailable" } });
 
 		const badModel = await app.request("/api/v1/provider_connections", {
 			method: "POST",

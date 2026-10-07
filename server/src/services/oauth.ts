@@ -118,6 +118,8 @@ export interface ProviderHttp {
 			body?: unknown;
 			headers?: Record<string, string>;
 			basic?: [string, string];
+			openTimeoutMs?: number;
+			readTimeoutMs?: number;
 		},
 	): Promise<unknown>;
 }
@@ -139,7 +141,8 @@ export const fetchHttp: ProviderHttp = {
 			headers.Authorization = `Basic ${btoa(`${user}:${pass}`)}`;
 		}
 		const controller = new AbortController();
-		const timeout = setTimeout(() => controller.abort(), 30000);
+		const timeoutMs = Math.max(options.openTimeoutMs ?? 5000, options.readTimeoutMs ?? 30000);
+		const timeout = setTimeout(() => controller.abort(), timeoutMs);
 		try {
 			const response = await fetch(url, {
 				method: options.method === "post" ? "POST" : "GET",

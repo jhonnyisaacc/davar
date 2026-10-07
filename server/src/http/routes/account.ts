@@ -15,6 +15,7 @@ import { resolveCitySelection, searchCities } from "../../services/cities.js";
 import { checkRateLimit } from "../../services/rateLimit.js";
 import { sandboxEnabled } from "../../services/sandbox.js";
 import { clientIp, inviteGateEnabled, requireAssemblyAccess, requireUser } from "../auth.js";
+import { requireFlag } from "../../services/flags.js";
 import { parseBody } from "../validation.js";
 import type { AppVariables } from "../deps.js";
 import type { DatabaseOrTx } from "../../db/client.js";
@@ -141,8 +142,9 @@ accountRoutes.patch("/account/settings", async (c) => {
 });
 
 accountRoutes.post("/account/admission", async (c) => {
-	const { db, config, env } = c.get("deps");
+	const { db, config, env, flags, http } = c.get("deps");
 	const user = await requireUser(db, config, c);
+	await requireFlag("assemblies", user.id, { env, http, flags });
 	await checkRateLimit(db, `admission/${user.id}`, 10);
 	const body = parseBody(admissionSchema, await c.req.json().catch(() => ({})));
 	await redeemAdmission(db, user.id, body.code, inviteGateEnabled(env));
@@ -198,7 +200,7 @@ accountRoutes.get("/account/notifications", async (c) => {
 
 accountRoutes.get("/cities", async (c) => {
 	const { db, config, env } = c.get("deps");
-	const user = await requireAssemblyAccess(db, config, c, env);
+	const user = await requireAssemblyAccess(db, config, c, env, c.get("deps").flags);
 	await checkRateLimit(db, `city/${user.id}`, 10);
 	const query = c.req.query();
 	if (typeof query.q !== "string") throw new DomainError("invalid_city_query");
@@ -212,7 +214,7 @@ accountRoutes.get("/cities", async (c) => {
 
 accountRoutes.patch("/account/city", async (c) => {
 	const { db, config, env } = c.get("deps");
-	const user = await requireAssemblyAccess(db, config, c, env);
+	const user = await requireAssemblyAccess(db, config, c, env, c.get("deps").flags);
 	const body = parseBody(selectionSchema, await c.req.json().catch(() => ({})));
 	const city = await resolveCitySelection(body.selection, config.encryptionDeterministicKey);
 	const profile = {

@@ -80,6 +80,12 @@ export interface TestContext {
 	app: ReturnType<typeof createApp>;
 }
 
+export const OPEN_FLAGS = {
+	ai_provider_connections: true,
+	ai_shared_openrouter: true,
+	assemblies: true,
+};
+
 export function makeTestContext(overrides: Partial<AppDeps> = {}): TestContext {
 	const outbox: SentMail[] = [];
 	const deps: AppDeps = {
@@ -88,6 +94,8 @@ export function makeTestContext(overrides: Partial<AppDeps> = {}): TestContext {
 		env: testEnv(),
 		outbox,
 		rootDir: process.cwd(),
+		// Product fully rolled out unless a test says otherwise.
+		flags: { ...OPEN_FLAGS },
 		...overrides,
 	};
 	return { deps, outbox, app: createApp(deps) };

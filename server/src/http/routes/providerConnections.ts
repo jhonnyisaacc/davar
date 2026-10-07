@@ -4,7 +4,9 @@ import { z } from "zod";
 import { providerConnections } from "../../db/schema.js";
 import { DomainError } from "../../lib/errors.js";
 import { enc } from "../../services/fields.js";
-import { providerSupported } from "../../services/provider.js";
+import { productCapabilities } from "../../services/capabilities.js";
+import { requireFlag } from "../../services/flags.js";
+import { availableProviders } from "../../services/provider.js";
 import { requireUser } from "../auth.js";
 import { parseBody } from "../validation.js";
 import type { AppVariables } from "../deps.js";
@@ -20,8 +22,15 @@ const MODEL_PATTERN = /^[A-Za-z0-9._-]{1,120}$/;
 export const providerConnectionRoutes = new Hono<{ Variables: AppVariables }>();
 
 providerConnectionRoutes.get("/provider_connections", async (c) => {
-	const { db, config } = c.get("deps");
+	const { db, config, env, flags, http } = c.get("deps");
 	const user = await requireUser(db, config, c);
+	const capabilities = await productCapabilities(db, {
+		userId: user.id,
+		env,
+		nodeEnv: env.NODE_ENV ?? "development",
+		flags,
+		http,
+	});
 	const rows = await db
 		.select({
 			id: providerConnections.id,
@@ -32,19 +41,20 @@ providerConnectionRoutes.get("/provider_connections", async (c) => {
 		.where(eq(providerConnections.userId, user.id));
 	return c.json({
 		connections: rows,
-		supported: ["claude", "grok", "chatgpt", "gemini"],
+		supported: capabilities.ai.providers,
 		unavailable: ["muse"],
 	});
 });
 
 providerConnectionRoutes.post("/provider_connections", async (c) => {
-	const { db, config } = c.get("deps");
+	const { db, config, env, flags, http } = c.get("deps");
 	const user = await requireUser(db, config, c);
+	await requireFlag("ai_provider_connections", user.id, { env, http, flags });
 	if (user.providers.length === 0) {
 		throw new DomainError("registered_account_required", 403);
 	}
 	const body = parseBody(createSchema, await c.req.json().catch(() => ({})));
-	if (typeof body.provider !== "string" || !providerSupported(body.provider)) {
+	if (typeof body.provider !== "string" || !availableProviders(env).includes(body.provider)) {
 		throw new DomainError("provider_not_supported", 503);
 	}
 	if (typeof body.model !== "string" || !MODEL_PATTERN.test(body.model)) {

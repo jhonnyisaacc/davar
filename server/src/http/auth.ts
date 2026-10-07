@@ -7,6 +7,7 @@ import { DomainError } from "../lib/errors.js";
 import { dec, decJson } from "../services/fields.js";
 import { authenticateSession } from "../services/sessions.js";
 import { checkRateLimit } from "../services/rateLimit.js";
+import { evaluateFlags, type FlagSet } from "../services/flags.js";
 import type { Profile } from "../services/profiles.js";
 import { parseProfile } from "../services/profiles.js";
 
@@ -86,8 +87,13 @@ export async function requireAssemblyAccess(
 	config: ServerConfig,
 	c: Context,
 	env: NodeJS.ProcessEnv = process.env,
+	flags?: FlagSet | null,
 ): Promise<CurrentUser> {
 	const user = await requireUser(db, config, c);
+	const resolved = flags ?? (await evaluateFlags(user.id, { env }));
+	if (!resolved.assemblies) {
+		throw new DomainError("feature_unavailable", 503);
+	}
 	if (user.providers.length === 0) {
 		throw new DomainError("registered_account_required", 403);
 	}

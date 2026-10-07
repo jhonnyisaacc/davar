@@ -8,17 +8,57 @@ export function providerSupported(provider: string): boolean {
 	return SUPPORTED.has(provider);
 }
 
+export function availableProviders(env: NodeJS.ProcessEnv = process.env): string[] {
+	const raw = env.AI_CONNECTION_PROVIDERS ?? "";
+	const seen = new Set<string>();
+	for (const part of raw.split(",")) {
+		const provider = part.trim();
+		if (provider && providerSupported(provider) && !seen.has(provider)) {
+			seen.add(provider);
+		}
+	}
+	return [...seen];
+}
+
+export function sharedModel(env: NodeJS.ProcessEnv = process.env): string {
+	return env.SHARED_OPENROUTER_MODEL ?? "openrouter/free";
+}
+
+export function freeModel(model: string): boolean {
+	return model === "openrouter/free" || /^[A-Za-z0-9._/-]+:free$/.test(model);
+}
+
+export function sharedOpenrouter(
+	env: NodeJS.ProcessEnv = process.env,
+): boolean {
+	return Boolean(env.OPENROUTER_API_KEY) && freeModel(sharedModel(env));
+}
+
+export function developmentOpenrouter(
+	env: NodeJS.ProcessEnv = process.env,
+	nodeEnv: string = env.NODE_ENV ?? "development",
+): boolean {
+	return (
+		nodeEnv === "development" &&
+		Boolean(env.OPENROUTER_API_KEY) &&
+		freeModel(env.OPENROUTER_MODEL ?? "")
+	);
+}
+
 export interface GenerateInput {
 	provider: string;
 	credential: string;
 	model: string;
 	system: string;
 	messages: Array<{ role: string; content: string }>;
+	responseSchema?: Record<string, unknown>;
 	http?: ProviderHttp;
 }
 
 export async function generateCompletion(input: GenerateInput): Promise<string> {
-	if (!providerSupported(input.provider)) {
+	const openrouterFree =
+		input.provider === "openrouter" && freeModel(input.model);
+	if (!providerSupported(input.provider) && !openrouterFree) {
 		throw new DomainError("provider_not_supported", 503);
 	}
 	const http = input.http ?? fetchHttp;
@@ -62,14 +102,26 @@ export async function generateCompletion(input: GenerateInput): Promise<string> 
 			return candidate.content.parts.map((part) => part.text).join("\n");
 		}
 		const base =
-			input.provider === "grok" ? "https://api.x.ai/v1" : "https://api.openai.com/v1";
+			input.provider === "grok"
+				? "https://api.x.ai/v1"
+				: input.provider === "openrouter"
+					? "https://openrouter.ai/api/v1"
+					: "https://api.openai.com/v1";
+		const body: Record<string, unknown> = {
+			model: input.model,
+			messages: [{ role: "system", content: input.system }, ...input.messages],
+		};
+		if (input.provider === "openrouter" && freeModel(input.model)) {
+			body.max_tokens = 2000;
+			body.provider = { max_price: { prompt: 0, completion: 0 } };
+		}
+		if (input.provider === "openrouter" && input.responseSchema) {
+			body.response_format = { type: "json_object" };
+		}
 		const result = (await http.json(`${base}/chat/completions`, {
 			method: "post",
 			headers: { Authorization: `Bearer ${input.credential}` },
-			body: {
-				model: input.model,
-				messages: [{ role: "system", content: input.system }, ...input.messages],
-			},
+			body,
 		})) as { choices: Array<{ message: { content: string } }> };
 		const choice = result.choices[0];
 		if (!choice) throw new DomainError("invalid_provider_response", 503);

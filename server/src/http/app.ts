@@ -7,6 +7,7 @@ import { articleRoutes } from "./routes/articles.js";
 import { assemblyRoutes } from "./routes/assemblies.js";
 import { authRoutes } from "./routes/auth.js";
 import { calendarRoutes } from "./routes/calendar.js";
+import { capabilitiesRoutes } from "./routes/capabilities.js";
 import { conversationRoutes } from "./routes/conversations.js";
 import { developmentRoutes } from "./routes/development.js";
 import { endorsementRoutes } from "./routes/endorsements.js";
@@ -30,6 +31,7 @@ export function createApp(deps: AppDeps): Hono<{ Variables: AppVariables }> {
 		c.header("Cache-Control", "no-store");
 	});
 	v1.route("/auth", authRoutes);
+	v1.route("/", capabilitiesRoutes);
 	v1.route("/", accountRoutes);
 	v1.route("/", assemblyRoutes);
 	v1.route("/", endorsementRoutes);

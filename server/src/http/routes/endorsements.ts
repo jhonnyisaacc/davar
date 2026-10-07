@@ -21,7 +21,7 @@ export const endorsementRoutes = new Hono<{ Variables: AppVariables }>();
 
 endorsementRoutes.get("/endorsements", async (c) => {
 	const { db, config } = c.get("deps");
-	const user = await requireAssemblyAccess(db, config, c);
+	const user = await requireAssemblyAccess(db, config, c, c.get("deps").env, c.get("deps").flags);
 	const rows = await db.execute(sql`
 		SELECT e.id, e.state, e.applicant_id AS "applicantId", e.leader_id AS "leaderId"
 		FROM endorsements e WHERE e.applicant_id = ${user.id} OR e.leader_id = ${user.id}
@@ -45,7 +45,7 @@ endorsementRoutes.get("/endorsements", async (c) => {
 
 endorsementRoutes.post("/endorsements", async (c) => {
 	const { db, config } = c.get("deps");
-	const user = await requireAssemblyAccess(db, config, c);
+	const user = await requireAssemblyAccess(db, config, c, c.get("deps").env, c.get("deps").flags);
 	if (
 		!completedOnboarding(user.profile) ||
 		user.profile.experience !== "leader" ||
@@ -95,7 +95,13 @@ endorsementRoutes.post("/endorsements", async (c) => {
 
 endorsementRoutes.patch("/endorsements/:id", async (c) => {
 	const { db } = c.get("deps");
-	const user = await requireAssemblyAccess(db, c.get("deps").config, c);
+	const user = await requireAssemblyAccess(
+		db,
+		c.get("deps").config,
+		c,
+		c.get("deps").env,
+		c.get("deps").flags,
+	);
 	const body = parseBody(updateSchema, await c.req.json().catch(() => ({})));
 	if (body.state !== "accepted" && body.state !== "declined") {
 		throw new DomainError("invalid_decision");

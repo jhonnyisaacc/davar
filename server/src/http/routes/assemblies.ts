@@ -127,7 +127,7 @@ export const assemblyRoutes = new Hono<{ Variables: AppVariables }>();
 
 assemblyRoutes.get("/assemblies/leaders", async (c) => {
 	const { db, config } = c.get("deps");
-	const user = await requireAssemblyAccess(db, config, c);
+	const user = await requireAssemblyAccess(db, config, c, c.get("deps").env, c.get("deps").flags);
 	const query = (c.req.query().q ?? "").toLowerCase();
 	if (query.length > 100) throw new DomainError("invalid_leader_query");
 	const rows = await db
@@ -147,7 +147,7 @@ assemblyRoutes.get("/assemblies/leaders", async (c) => {
 
 assemblyRoutes.get("/assemblies", async (c) => {
 	const { db, config } = c.get("deps");
-	const user = await requireAssemblyAccess(db, config, c);
+	const user = await requireAssemblyAccess(db, config, c, c.get("deps").env, c.get("deps").flags);
 	if (!completedOnboarding(user.profile)) {
 		throw new DomainError("onboarding_required", 403);
 	}
@@ -229,7 +229,7 @@ assemblyRoutes.get("/assemblies", async (c) => {
 
 assemblyRoutes.post("/assemblies", async (c) => {
 	const { db, config } = c.get("deps");
-	const user = await requireAssemblyAccess(db, config, c);
+	const user = await requireAssemblyAccess(db, config, c, c.get("deps").env, c.get("deps").flags);
 	if (!completedOnboarding(user.profile)) {
 		throw new DomainError("onboarding_required", 403);
 	}
@@ -294,7 +294,7 @@ assemblyRoutes.post("/assemblies", async (c) => {
 
 assemblyRoutes.get("/assemblies/:id", async (c) => {
 	const { db, config } = c.get("deps");
-	const user = await requireAssemblyAccess(db, config, c);
+	const user = await requireAssemblyAccess(db, config, c, c.get("deps").env, c.get("deps").flags);
 	if (!completedOnboarding(user.profile)) {
 		throw new DomainError("onboarding_required", 403);
 	}
@@ -310,7 +310,7 @@ assemblyRoutes.get("/assemblies/:id", async (c) => {
 
 assemblyRoutes.patch("/assemblies/:id", async (c) => {
 	const { db, config } = c.get("deps");
-	const user = await requireAssemblyAccess(db, config, c);
+	const user = await requireAssemblyAccess(db, config, c, c.get("deps").env, c.get("deps").flags);
 	if (!completedOnboarding(user.profile)) {
 		throw new DomainError("onboarding_required", 403);
 	}
@@ -337,7 +337,7 @@ assemblyRoutes.patch("/assemblies/:id", async (c) => {
 
 assemblyRoutes.post("/assemblies/:id/join", async (c) => {
 	const { db, config } = c.get("deps");
-	const user = await requireAssemblyAccess(db, config, c);
+	const user = await requireAssemblyAccess(db, config, c, c.get("deps").env, c.get("deps").flags);
 	if (!completedOnboarding(user.profile)) {
 		throw new DomainError("onboarding_required", 403);
 	}
@@ -359,7 +359,7 @@ assemblyRoutes.post("/assemblies/:id/join", async (c) => {
 
 assemblyRoutes.delete("/assemblies/:id/leave", async (c) => {
 	const { db, config } = c.get("deps");
-	const user = await requireAssemblyAccess(db, config, c);
+	const user = await requireAssemblyAccess(db, config, c, c.get("deps").env, c.get("deps").flags);
 	if (!completedOnboarding(user.profile)) {
 		throw new DomainError("onboarding_required", 403);
 	}
@@ -386,7 +386,7 @@ assemblyRoutes.delete("/assemblies/:id/leave", async (c) => {
 
 assemblyRoutes.get("/assemblies/:id/members", async (c) => {
 	const { db, config } = c.get("deps");
-	const user = await requireAssemblyAccess(db, config, c);
+	const user = await requireAssemblyAccess(db, config, c, c.get("deps").env, c.get("deps").flags);
 	if (!completedOnboarding(user.profile)) {
 		throw new DomainError("onboarding_required", 403);
 	}
@@ -423,7 +423,7 @@ assemblyRoutes.get("/assemblies/:id/members", async (c) => {
 
 assemblyRoutes.post("/assemblies/:id/memberships/:membership_id/decision", async (c) => {
 	const { db, config } = c.get("deps");
-	const user = await requireAssemblyAccess(db, config, c);
+	const user = await requireAssemblyAccess(db, config, c, c.get("deps").env, c.get("deps").flags);
 	if (!completedOnboarding(user.profile)) {
 		throw new DomainError("onboarding_required", 403);
 	}

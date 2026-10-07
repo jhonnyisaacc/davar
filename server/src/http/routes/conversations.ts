@@ -6,6 +6,7 @@ import { DomainError } from "../../lib/errors.js";
 import { dec, decJson, enc } from "../../services/fields.js";
 import { askCommentary, type AnswerShape } from "../../services/commentary.js";
 import { checkRateLimit } from "../../services/rateLimit.js";
+import { productCapabilities } from "../../services/capabilities.js";
 import { requireUser } from "../auth.js";
 import { parseBody } from "../validation.js";
 import type { AppVariables } from "../deps.js";
@@ -56,8 +57,16 @@ conversationRoutes.get("/conversations", async (c) => {
 });
 
 conversationRoutes.post("/conversations", async (c) => {
-	const { db, config } = c.get("deps");
+	const { db, config, env, flags, http } = c.get("deps");
 	const user = await requireUser(db, config, c);
+	const capabilities = await productCapabilities(db, {
+		userId: user.id,
+		env,
+		nodeEnv: env.NODE_ENV ?? "development",
+		flags,
+		http,
+	});
+	if (!capabilities.ai.available) throw new DomainError("ai_unavailable", 503);
 	const body = parseBody(createSchema, await c.req.json().catch(() => ({})));
 	const title = (body.title ?? "").toString().slice(0, 120);
 	const created = await db
@@ -134,7 +143,7 @@ conversationRoutes.post("/conversations/:id/messages", async (c) => {
 			provider: body.provider,
 			primaryKey: config.encryptionPrimaryKey,
 		},
-		{ env, generator },
+		{ env, generator, flags: c.get("deps").flags, http: c.get("deps").http },
 	);
 	return c.json(messageShape(answer));
 });

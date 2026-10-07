@@ -14,16 +14,49 @@ beforeEach(truncateAll);
 
 describe("client contract", () => {
 	test("account, assembly, commentary and calendar shapes hold", async () => {
-		const generator = async () => "No evidence supplied.";
+		const generator = async () =>
+			JSON.stringify({
+				answer: {
+					positive_label: "Qué es",
+					positive: ["Study this passage cautiously"],
+					negative_label: "Qué no es",
+					negative: ["A settled definition"],
+					caution: null,
+				},
+				source_ids: ["fixture:commentary"],
+			});
 		const { app } = makeTestContext({
 			generator,
 			env: {
 				...process.env,
 				NODE_ENV: "test",
-				FREE_AI_KEY: "test-only-key",
-				FREE_AI_MODEL: "fixture-model",
+				OPENROUTER_API_KEY: "test-server-key",
+				SHARED_OPENROUTER_MODEL: "openrouter/free",
+				AI_CONNECTION_PROVIDERS: "claude,grok,chatgpt,gemini",
 			} as NodeJS.ProcessEnv,
 		});
+		const { articles } = await import("../src/db/schema.js");
+		const { enc } = await import("../src/services/fields.js");
+		await testDb()
+			.db.insert(articles)
+			.values({
+				sourceId: "fixture:commentary",
+				title: "Study this passage",
+				locale: "en",
+				body: await enc(
+					"This passage is supplied evidence for a study. Its interpretation needs verification.",
+					"test-primary-key-for-davar-server-only-0001",
+				),
+				sourceUrl: "https://shaul.vercel.app/fixture",
+				attribution: "Synthetic test note",
+				revision: "fixture",
+				inputHash: "fixture",
+				publicationState: "published",
+				permissions: { public_display: true, ai_grounding: true },
+				references: [
+					{ system_id: "davar-v1", kind: "verse", book_id: "john", chapter: 1, verse: 51 },
+				],
+			});
 		const userId = await createUser();
 		await resolveAccount(testDb().db, {
 			provider: "google",
@@ -75,7 +108,7 @@ describe("client contract", () => {
 			await app.request(`/api/v1/conversations/${conversation.id}/messages`, {
 				method: "POST",
 				headers,
-				body: JSON.stringify({ content: "Explain", request_id: "contract_001" }),
+				body: JSON.stringify({ content: "Study this passage", request_id: "contract_001" }),
 			})
 		).json()) as Record<string, unknown>;
 		expect(Object.keys(answer).sort()).toEqual(contract.message_keys);

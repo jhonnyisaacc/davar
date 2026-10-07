@@ -10,6 +10,7 @@ import {
 import { enc } from "../../services/fields.js";
 import { authenticateSession, issueSession } from "../../services/sessions.js";
 import { providerAvailable } from "../../services/oauth.js";
+import { developmentOpenrouter } from "../../services/provider.js";
 import { sendSignInMail } from "../../services/mailer.js";
 import { sandboxEnabled } from "../../services/sandbox.js";
 import { checkRateLimit } from "../../services/rateLimit.js";
@@ -53,6 +54,9 @@ authRoutes.get("/providers", async (c) => {
 			id,
 			available: id === "email" || providerAvailable(id, env),
 		})),
+		commentary_provider: developmentOpenrouter(env, env.NODE_ENV ?? "development")
+			? "openrouter"
+			: null,
 	});
 });
 
