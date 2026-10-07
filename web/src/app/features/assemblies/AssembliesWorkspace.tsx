@@ -1,6 +1,6 @@
-import { DiscoveryResults } from "../features/assemblies/DiscoveryResults";
-import { AssemblyManagement } from "../features/assemblies/AssemblyManagement";
-import { AssemblyOnboarding } from "../features/assemblies/Onboarding";
+import { DiscoveryResults } from "./DiscoveryResults";
+import { AssemblyManagement } from "./AssemblyManagement";
+import { AssemblyOnboarding } from "./Onboarding";
 import { createAssembliesClient } from "@davar/shared/assembliesClient";
 import type {
 	Account,
@@ -24,8 +24,8 @@ import {
 	useRef,
 	useState,
 } from "react";
-import { productApi } from "../services/productApi";
-import { CityChooser } from "./CityChooser";
+import { productApi } from "../../services/productApi";
+import { CityChooser } from "../../components/CityChooser";
 
 const assembliesApi = createAssembliesClient(productApi);
 
