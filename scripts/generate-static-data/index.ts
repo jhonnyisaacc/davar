@@ -8,6 +8,7 @@ import { existsSync } from "fs";
 import { mkdir, readdir, readFile, rm, writeFile } from "fs/promises";
 import { extname, join } from "path";
 import { buildLexiconAssets } from "../../shared/lexiconAssets";
+import { ts2009BookLookupPaths } from "../../shared/scripturePaths";
 import { TS2009_BOOK_FILE_MAP } from "../../shared/ts2009BookFileMap";
 import {
   canonicalBookIdFromTranslitStem,
@@ -641,23 +642,6 @@ const extractTs2009Chapters = (chaptersRaw: unknown): Record<number, Ts2009BookV
   return chapters;
 };
 
-const getTs2009BookFileCandidates = (bookId: string): string[] => {
-  const mapped = TS2009_BOOK_FILE_MAP[bookId];
-  const legacyMapped = TS2009_LEGACY_BOOK_FILE_MAP[bookId];
-  const underscoreVariant = bookId.replace(/(\D)(\d+)$/, "$1_$2");
-  const stems = [mapped, legacyMapped, bookId, underscoreVariant].filter(
-    (value): value is string => Boolean(value),
-  );
-
-  const candidates: string[] = [];
-  for (const stem of stems) {
-    candidates.push(`${stem}.json`);
-    candidates.push(`ts2009/${stem}.json`);
-  }
-
-  return [...new Set(candidates)];
-};
-
 const downloadTs2009BookPayload = async (
   supabaseUrl: string,
   serviceRoleKey: string,
@@ -794,7 +778,10 @@ const generateTs2009Chapters = async (): Promise<{
 
   for (const canonicalBook of CANONICAL_BOOK_ORDER) {
     const bookId = canonicalBook.toLowerCase();
-    const candidates = getTs2009BookFileCandidates(bookId);
+    const candidates = ts2009BookLookupPaths(
+      bookId,
+      TS2009_LEGACY_BOOK_FILE_MAP[bookId],
+    );
     let payload: Ts2009BookPayload | null = null;
 
     for (const candidate of candidates) {

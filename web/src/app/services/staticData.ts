@@ -18,7 +18,16 @@ import {
 	translitChapterAssetPath,
 	ts2009ChapterAssetPath,
 } from "../../../../shared/staticDataPaths";
-import { TS2009_BOOK_FILE_MAP } from "../../../../shared/ts2009BookFileMap";
+import {
+	besBookAssetPath,
+	besorahChapterAssetPath,
+	hutterChapterAssetPath,
+	oeChapterAssetPath,
+	ts2009ApiBookPath,
+	ts2009BookAssetPath,
+	ts2009BookFileStems,
+	tthBookAssetPath,
+} from "../../../../shared/scripturePaths";
 import {
 	GREEK_RECORDED_REVISION,
 	canActivateGreekRelease,
@@ -291,17 +300,6 @@ const extractTs2009ChapterVersesFromBook = (
 	return Array.isArray(chapterEntry?.verses) ? chapterEntry.verses : null;
 };
 
-const getTs2009BookFileCandidates = (bookId: string): string[] => {
-	const normalized = bookId.toLowerCase();
-	const mapped = TS2009_BOOK_FILE_MAP[normalized];
-	const underscoreVariant = normalized.replace(/(\D)(\d+)$/, "$1_$2");
-	const stems = [mapped, normalized, underscoreVariant].filter(
-		(stem): stem is string => Boolean(stem),
-	);
-
-	return [...new Set(stems)];
-};
-
 const normalizePsalmsTs2009VerseMap = (
 	chapter: number,
 	verseMap: Record<string, string>,
@@ -356,8 +354,8 @@ const loadTs2009BookFile = (
 	if (!bookPromise) {
 		bookPromise = (async () => {
 			const candidatePaths = [
-				`/api/ts2009/${fileStem}.json`,
-				`/data/ts2009/${fileStem}.json`,
+				`/${ts2009ApiBookPath(fileStem)}`,
+				`/data/${ts2009BookAssetPath(fileStem)}`,
 			];
 
 			for (const candidatePath of candidatePaths) {
@@ -411,7 +409,7 @@ const loadTs2009ChapterFromBookFile = async (
 		}
 	}
 
-	for (const fileStem of getTs2009BookFileCandidates(bookId)) {
+	for (const fileStem of ts2009BookFileStems(bookId)) {
 		const staticBook = await loadTs2009BookFile(fileStem);
 		if (!staticBook) {
 			continue;
@@ -937,10 +935,13 @@ const loadCoreChapter = async (
 	chapter: number,
 	besorahTextVersion: BesorahTextVersion = "delitzsch",
 ): Promise<RawVerse[]> => {
-	const chapterPath =
+	const chapterPath = `/data/${
 		book.section === "besorah"
-			? `/data/${besorahTextVersion === "hutter" ? "hutter" : "besorah"}/${book.id}/${chapter}.json`
-			: `/data/oe/${book.id}/${chapter}.json`;
+			? besorahTextVersion === "hutter"
+				? hutterChapterAssetPath(book.id, chapter)
+				: besorahChapterAssetPath(book.id, chapter)
+			: oeChapterAssetPath(book.id, chapter)
+	}`;
 
 	try {
 		return await fetchJson<RawVerse[]>(chapterPath);
@@ -983,7 +984,7 @@ const loadTranslationChapter = async (
 	if (tthBookId) {
 		try {
 			const translationBook = await fetchJson<RawTranslationBook>(
-				`/data/tth/${tthBookId}.json`,
+				`/data/${tthBookAssetPath(tthBookId)}`,
 			);
 
 			for (const translationChapter of requiredChapters) {
@@ -1036,7 +1037,7 @@ const loadTranslationChapter = async (
 	// Fill genuinely missing TTH verses from BES.
 	try {
 		const translationBook = await fetchJson<RawTranslationBook>(
-			`/data/bes/${bookId}.json`,
+			`/data/${besBookAssetPath(bookId)}`,
 		);
 
 		for (const translationChapter of requiredChapters) {
@@ -1352,7 +1353,7 @@ export const getBooks = async (): Promise<BookResponse[]> => {
 				books.map(async (book) => {
 					try {
 						const translationBook = await fetchJson<RawTranslationBook>(
-							`/data/bes/${book.id}.json`,
+							`/data/${besBookAssetPath(book.id)}`,
 						);
 						const bookInfo = translationBook.book_info;
 
@@ -1493,7 +1494,9 @@ export const getChapterVerses = async (
 	if (needsSpanishTranslation) {
 		const tthBookId = resolveTthBookId(bookEntry.id);
 		if (tthBookId) {
-			void fetchJson(`/data/tth/${tthBookId}.json`).catch(() => undefined);
+			void fetchJson(`/data/${tthBookAssetPath(tthBookId)}`).catch(
+				() => undefined,
+			);
 		}
 	}
 
