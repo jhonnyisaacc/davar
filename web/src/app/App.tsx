@@ -7,7 +7,7 @@ import { NeumorphCard } from "./components/NeumorphCard";
 import { SandboxBanner } from "./components/SandboxBanner";
 import { Skeleton } from "./components/ui/skeleton";
 import { VerseDisplay } from "./components/VerseDisplay";
-import { WordCard } from "./components/WordCard";
+import { WordCard } from "./features/reader/WordCard";
 import { useReaderChrome } from "./features/reader/useReaderChrome";
 import { useReaderPreferences } from "./features/reader/useReaderPreferences";
 import { useReaderRoute } from "./features/reader/useReaderRoute";

@@ -1,7 +1,7 @@
 import { formatVerseRef } from "@davar/shared/formatVerseRef";
 import { X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { useTranslation } from "../hooks/useTranslation";
+import { useTranslation } from "../../hooks/useTranslation";
 import {
 	getPrefixSegments,
 	normalizeHebrew,
@@ -12,7 +12,7 @@ import {
 	stripNikud,
 	stripCantillation,
 	stripMeteg,
-} from "../utils/hebrew";
+} from "../../utils/hebrew";
 
 interface WordInstance {
 	verse: string;
