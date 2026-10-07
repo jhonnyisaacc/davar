@@ -98,6 +98,27 @@ export async function startAuthentication(
 export interface FinishDeps {
 	http?: ProviderHttp;
 	env?: NodeJS.ProcessEnv;
+	jwksCooldownMs?: number;
+}
+
+interface AttemptRow {
+	id: string;
+	provider: string;
+	nonce: string | null;
+	verifier: string | null;
+	return_uri: string;
+	user_id: string | null;
+	expires_at: Date;
+	consumed_at: Date | null;
+	email: string | null;
+	notification_consent_requested: boolean;
+}
+
+function expiredOrUsed(attempt: AttemptRow): boolean {
+	return (
+		attempt.consumed_at !== null ||
+		asDateRequired(attempt.expires_at).getTime() <= Date.now()
+	);
 }
 
 export async function finishAuthentication(
@@ -115,40 +136,42 @@ export async function finishAuthentication(
 	if (!input.state) throw new DomainError("invalid_state", 401);
 	const digest = await sha256Hex(input.state);
 	const keys = decryptionRing(input.primaryKey, input.previousKeys);
-	return db.transaction(async (tx) => {
-		const rows = await tx.execute(
-			sql`SELECT * FROM auth_attempts WHERE state_digest = ${digest} AND provider = ${input.provider} FOR UPDATE`,
+	// Resolve the subject before opening the transaction: the provider token
+	// exchange and identity lookup are external I/O and must never run while
+	// holding the attempt row lock (or a pool connection). The consume step
+	// below re-checks expiry under the lock, so this preview grants nothing.
+	const preview = (await db.execute(
+		sql`SELECT id, provider, nonce, verifier, return_uri AS "return_uri", user_id AS "user_id", expires_at AS "expires_at", consumed_at AS "consumed_at", email, notification_consent_requested AS "notification_consent_requested" FROM auth_attempts WHERE state_digest = ${digest} AND provider = ${input.provider}`,
+	)) as unknown as AttemptRow[];
+	const draft = preview[0];
+	if (!draft) throw new DomainError("not_found", 404);
+	if (expiredOrUsed(draft)) throw new DomainError("expired_or_used_link", 401);
+	let subject: string;
+	if (input.provider === "email") {
+		const email = await dec(draft.email, keys);
+		if (!email) throw new DomainError("expired_or_used_link", 401);
+		subject = email;
+	} else {
+		const verifier = await dec(draft.verifier, keys);
+		subject = await providerSubject(
+			{ provider: input.provider, nonce: draft.nonce, verifier },
+			input.code,
+			{
+				env: deps.env,
+				http: deps.http,
+				apiPublicUrl: input.apiPublicUrl,
+				jwksCooldownMs: deps.jwksCooldownMs,
+			},
 		);
-		const attempt = rows[0] as
-			| {
-					id: string;
-					provider: string;
-					nonce: string | null;
-					verifier: string | null;
-					return_uri: string;
-					user_id: string | null;
-					expires_at: Date;
-					consumed_at: Date | null;
-					email: string | null;
-					notification_consent_requested: boolean;
-			  }
-			| undefined;
+	}
+	return db.transaction(async (tx) => {
+		const rows = (await tx.execute(
+			sql`SELECT id, provider, nonce, verifier, return_uri AS "return_uri", user_id AS "user_id", expires_at AS "expires_at", consumed_at AS "consumed_at", email, notification_consent_requested AS "notification_consent_requested" FROM auth_attempts WHERE state_digest = ${digest} AND provider = ${input.provider} FOR UPDATE`,
+		)) as unknown as AttemptRow[];
+		const attempt = rows[0];
 		if (!attempt) throw new DomainError("not_found", 404);
-		if (attempt.consumed_at || asDateRequired(attempt.expires_at).getTime() <= Date.now()) {
+		if (expiredOrUsed(attempt)) {
 			throw new DomainError("expired_or_used_link", 401);
-		}
-		let subject: string;
-		if (input.provider === "email") {
-			const email = await dec(attempt.email, keys);
-			if (!email) throw new DomainError("expired_or_used_link", 401);
-			subject = email;
-		} else {
-			const verifier = await dec(attempt.verifier, keys);
-			subject = await providerSubject(
-				{ provider: input.provider, nonce: attempt.nonce, verifier },
-				input.code,
-				{ env: deps.env, http: deps.http, apiPublicUrl: input.apiPublicUrl },
-			);
 		}
 		const user = await resolveAccount(tx, {
 			provider: input.provider,

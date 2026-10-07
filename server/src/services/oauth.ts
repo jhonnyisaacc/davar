@@ -1,4 +1,4 @@
-import { createLocalJWKSet, jwtVerify } from "jose";
+import { createRemoteJWKSet, customFetch, jwtVerify, type RemoteJWKSet } from "jose";
 import { DomainError } from "../lib/errors.js";
 import { pkceChallenge } from "../lib/crypto.js";
 
@@ -161,10 +161,40 @@ export const fetchHttp: ProviderHttp = {
 	},
 };
 
-const jwksCache = new Map<string, { expires: number; value: unknown }>();
+// One remote set per provider. Unlike the previous one-hour snapshot cache
+// (and unlike Rails' hourly fetch), an unknown kid triggers a refetch after
+// the cooldown, so Google/Apple rotations recover within seconds.
+const jwksSets = new Map<
+	string,
+	{ http: ProviderHttp; cooldownMs: number; set: RemoteJWKSet }
+>();
 
 export function clearJwksCache(): void {
-	jwksCache.clear();
+	jwksSets.clear();
+}
+
+function remoteJwks(
+	provider: string,
+	url: string,
+	http: ProviderHttp,
+	cooldownMs: number,
+): RemoteJWKSet {
+	const cached = jwksSets.get(provider);
+	if (cached && cached.http === http && cached.cooldownMs === cooldownMs) {
+		return cached.set;
+	}
+	const set = createRemoteJWKSet(new URL(url), {
+		cooldownDuration: cooldownMs,
+		[customFetch]: async (fetchUrl) => {
+			const data = await http.json(fetchUrl.toString());
+			return new Response(JSON.stringify(data), {
+				status: 200,
+				headers: { "Content-Type": "application/json" },
+			});
+		},
+	});
+	jwksSets.set(provider, { http, cooldownMs, set });
+	return set;
 }
 
 export async function providerSubject(
@@ -174,6 +204,7 @@ export async function providerSubject(
 		env?: NodeJS.ProcessEnv;
 		http?: ProviderHttp;
 		apiPublicUrl?: string;
+		jwksCooldownMs?: number;
 	} = {},
 ): Promise<string> {
 	const env = input.env ?? process.env;
@@ -205,17 +236,11 @@ export async function providerSubject(
 	}
 	try {
 		if (config.jwks) {
-			const cached = jwksCache.get(provider);
-			let keys: unknown = cached && cached.expires > Date.now() ? cached.value : null;
-			if (!keys) {
-				keys = await http.json(config.jwks);
-				jwksCache.set(provider, { expires: Date.now() + 60 * 60 * 1000, value: keys });
-			}
 			if (!token.id_token) throw new DomainError("invalid_provider_identity", 401);
-			const set = createLocalJWKSet(
-				keys as unknown as import("jose").JSONWebKeySet,
-			);
+			const set = remoteJwks(provider, config.jwks, http, input.jwksCooldownMs ?? 30000);
 			const { payload } = await jwtVerify(token.id_token, set, {
+				// Rails pins JWT.decode(..., algorithms: ["RS256"]).
+				algorithms: ["RS256"],
 				issuer: config.issuer ?? undefined,
 				audience: clientId,
 				requiredClaims: ["sub", "iss", "aud", "exp", "iat"],

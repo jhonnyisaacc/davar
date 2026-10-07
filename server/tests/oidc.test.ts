@@ -114,6 +114,147 @@ describe("oidc", () => {
 		expect(proof).toBe(createHmac("sha256", secret).update(access).digest("hex"));
 	});
 
+	test("google pins RS256 and refetches JWKS on unknown kids", async () => {
+		clearJwksCache();
+		const { importJWK } = await import("jose");
+		const secret = new TextEncoder().encode("fixture-hs256-secret-00000001");
+		const oct = { kty: "oct", k: Buffer.from(secret).toString("base64url"), kid: "hs-kid" };
+		const { publicKey, privateKey } = await generateKeyPair("RS256");
+		const rsa = { ...(await exportJWK(publicKey)), kid: "rsa-kid" };
+		let jwks = { keys: [{ ...rsa }] };
+		const fetches: string[] = [];
+		const http = {
+			json: async (url: string) => {
+				fetches.push(url);
+				if (url.includes("certs")) return jwks;
+				return { id_token: token };
+			},
+		};
+		const env = {
+			GOOGLE_CLIENT_ID: "fixture-client",
+			GOOGLE_CLIENT_SECRET: "fixture-secret",
+		} as NodeJS.ProcessEnv;
+		const attempt = { provider: "google", nonce: "fixture-nonce", verifier: "v" };
+		const claims = {
+			sub: "google-subject",
+			iss: "https://accounts.google.com",
+			aud: "fixture-client",
+			exp: Math.floor(Date.now() / 1000) + 300,
+			iat: Math.floor(Date.now() / 1000),
+			nonce: "fixture-nonce",
+		};
+		let token = "";
+		// HS256 with a matching kid must be rejected: only RS256 is allowed.
+		jwks = { keys: [{ ...oct }] };
+		token = await new SignJWT(claims)
+			.setProtectedHeader({ alg: "HS256", kid: "hs-kid" })
+			.sign(await importJWK(oct, "HS256"));
+		await expect(
+			providerSubject(attempt, "code", { env, http, jwksCooldownMs: 0 }),
+		).rejects.toMatchObject({ code: "invalid_provider_identity" });
+
+		// Key rotation: a token signed by an unknown kid refetches the JWKS.
+		clearJwksCache();
+		fetches.length = 0;
+		jwks = { keys: [{ ...rsa }] };
+		token = await new SignJWT(claims)
+			.setProtectedHeader({ alg: "RS256", kid: "rsa-kid" })
+			.sign(privateKey);
+		await expect(
+			providerSubject(attempt, "code", { env, http, jwksCooldownMs: 0 }),
+		).resolves.toBe("google-subject");
+		const rotatedPair = await generateKeyPair("RS256");
+		const rotated = rotatedPair.privateKey;
+		const rotatedJwk = { ...(await exportJWK(rotatedPair.publicKey)), kid: "rsa-kid-2" };
+		jwks = { keys: [rotatedJwk] };
+		token = await new SignJWT(claims)
+			.setProtectedHeader({ alg: "RS256", kid: "rsa-kid-2" })
+			.sign(rotated);
+		await expect(
+			providerSubject(attempt, "code", { env, http, jwksCooldownMs: 0 }),
+		).resolves.toBe("google-subject");
+		expect(fetches.filter((url) => url.includes("certs"))).toHaveLength(2);
+	});
+
+	test("slow providers never hold the attempt row lock", async () => {
+		clearJwksCache();
+		const { startAuthentication, finishAuthentication } = await import(
+			"../src/services/authentication.js"
+		);
+		const { sha256Hex } = await import("../src/lib/crypto.js");
+		const { authAttempts } = await import("../src/db/schema.js");
+		const { eq } = await import("drizzle-orm");
+		const { testConfig, testDb } = await import("./helper.js");
+		const config = testConfig();
+
+		const { publicKey, privateKey } = await generateKeyPair("RS256");
+		const kid = "slow-kid";
+		const jwks = { keys: [{ ...(await exportJWK(publicKey)), kid }] };
+		let tokenCalls = 0;
+		const http = {
+			json: async (url: string) => {
+				if (url.includes("certs")) return jwks;
+				tokenCalls++;
+				await new Promise((resolve) => setTimeout(resolve, 400));
+				return { id_token: token };
+			},
+		};
+		const env = {
+			GOOGLE_CLIENT_ID: "fixture-client",
+			GOOGLE_CLIENT_SECRET: "fixture-secret",
+		} as NodeJS.ProcessEnv;
+		const started = await startAuthentication(testDb().db, {
+			provider: "google",
+			returnUri: "davar://auth/callback",
+			allowedReturnUris: ["davar://auth/callback"],
+			apiPublicUrl: "http://localhost:3000",
+			primaryKey: config.encryptionPrimaryKey,
+			deterministicKey: config.encryptionDeterministicKey,
+			env,
+			sendMail: async () => {},
+		});
+		if (!("authorization_url" in started)) throw new Error("OAuth start failed");
+		const captured = new URL(started.authorization_url).searchParams.get("state") ?? "";
+		const digest = await sha256Hex(captured);
+		const attempts = await testDb()
+			.db.select({ nonce: authAttempts.nonce })
+			.from(authAttempts)
+			.where(eq(authAttempts.stateDigest, digest))
+			.limit(1);
+		const nonce = attempts[0]?.nonce ?? "";
+		let token = await new SignJWT({
+			sub: "slow-subject",
+			iss: "https://accounts.google.com",
+			aud: "fixture-client",
+			exp: Math.floor(Date.now() / 1000) + 300,
+			iat: Math.floor(Date.now() / 1000),
+			nonce,
+		})
+			.setProtectedHeader({ alg: "RS256", kid })
+			.sign(privateKey);
+		const pending = finishAuthentication(
+			testDb().db,
+			{
+				provider: "google",
+				state: captured,
+				code: "slow-code",
+				apiPublicUrl: "http://localhost:3000",
+				primaryKey: config.encryptionPrimaryKey,
+				deterministicKey: config.encryptionDeterministicKey,
+			},
+			{ env, http, jwksCooldownMs: 0 },
+		);
+		while (tokenCalls === 0) {
+			await new Promise((resolve) => setTimeout(resolve, 10));
+		}
+		// Provider I/O is in flight: the attempt row must be lock-free.
+		const probe = await testDb().sql`
+			SELECT id FROM auth_attempts WHERE state_digest = ${digest} FOR UPDATE NOWAIT
+		`;
+		expect(probe.length).toBe(1);
+		await expect(pending).resolves.toMatch(/^davar:\/\/auth\/callback\?code=/);
+	});
+
 	test("apple uses form_post without PKCE, google keeps S256", async () => {
 		const base = {
 			nonce: "nonce",
