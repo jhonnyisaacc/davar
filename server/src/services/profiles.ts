@@ -9,7 +9,7 @@ export type Profile = Record<string, unknown> & {
 	gender?: "male" | "female";
 	answers?: Record<string, boolean>;
 	visibility_reviewed?: boolean;
-	birth_date?: string;
+	birth_date?: string | null;
 };
 
 export function parseProfile(raw: string | null, secret: string): Promise<Profile>;
@@ -124,5 +124,24 @@ export function assertValidProfileUpdate(
 	) {
 		throw new DomainError("invalid_experience");
 	}
+	if (update.birth_date !== undefined) {
+		next.birth_date = enforceBirthdate(update.birth_date);
+	}
 	return next;
+}
+
+function enforceBirthdate(value: unknown): string | null {
+	if (typeof value !== "string" || value.length > 10) return null;
+	if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
+	const date = new Date(`${value}T00:00:00Z`);
+	if (Number.isNaN(date.getTime())) return null;
+	const [year, month, day] = value.split("-").map(Number);
+	if (
+		date.getUTCFullYear() !== year ||
+		date.getUTCMonth() + 1 !== month ||
+		date.getUTCDate() !== day
+	) {
+		return null;
+	}
+	return value;
 }

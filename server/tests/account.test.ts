@@ -104,6 +104,30 @@ describe("account", () => {
 		}
 	});
 
+	test("birth dates are validated like Rails AccountProfile", async () => {
+		const { app } = makeTestContext();
+		const userId = await identifiedUser();
+		const headers = await authHeaders(userId);
+		const invalid = await app.request("/api/v1/account", {
+			method: "PATCH",
+			headers,
+			body: JSON.stringify({ profile: { birth_date: "not-a-date" } }),
+		});
+		expect(invalid.status).toBe(200);
+		expect(
+			((await invalid.json()) as { profile: Record<string, unknown> }).profile.birth_date,
+		).toBe(null);
+
+		const valid = await app.request("/api/v1/account", {
+			method: "PATCH",
+			headers,
+			body: JSON.stringify({ profile: { birth_date: "1990-05-20" } }),
+		});
+		expect(
+			((await valid.json()) as { profile: Record<string, unknown> }).profile.birth_date,
+		).toBe("1990-05-20");
+	});
+
 	test("settings keep versions and text-mode dependencies", async () => {
 		const { app } = makeTestContext();
 		const userId = await identifiedUser();
