@@ -94,6 +94,7 @@ DAVAR_DEV_SANDBOX=1 NODE_ENV=development bun run dev
 - `GET /api/v1/development/status` — sandbox capabilities.
 - `bun run sandbox:seed` / `bun run sandbox:reset` — synthetic accounts,
   invitation `DAVAR-LOCAL`, sandbox assemblies and article.
+- `bun run sandbox:calendar [live|pending|confirmed]` — sets the calendar scenario. The default is `live`, which then runs the calendar sync.
 - `SCENARIO=confirmed bun run sandbox:reset` — synthetic INMS observation.
 - Sandbox mail is written under `tmp/sandbox-mail/` and only accepts
   `@example.test` recipients.

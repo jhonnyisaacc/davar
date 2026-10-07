@@ -15,7 +15,7 @@
 		"import:observations": "bun ./src/jobs/import-observations.ts",
 		"sandbox:seed": "bun ./src/jobs/sandbox-seed.ts",
 		"sandbox:reset": "bun ./src/jobs/sandbox-reset.ts",
-		"sandbox:calendar": "SCENARIO=pending bun ./src/jobs/sandbox-reset.ts",
+		"sandbox:calendar": "bun ./src/jobs/sandbox-calendar.ts",
 		"typecheck": "tsc --noEmit",
 		"test": "bun test"
 	},

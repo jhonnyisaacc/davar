@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, test } from "bun:test";
-import { mkdtemp, readFile, readdir, rm } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { sql } from "drizzle-orm";
@@ -13,9 +13,13 @@ import {
 } from "./helper.js";
 import { resolveAccount, subjectDigest } from "../src/services/accounts.js";
 import { FIXTURE_EMAILS, fixtureCalendar, resetFixtures, seedFixtures } from "../src/services/fixtures.js";
-import { accessCodes, identities, users } from "../src/db/schema.js";
+import { accessCodes, authAttempts, calendarFeedStates, identities, users } from "../src/db/schema.js";
 import { and, eq } from "drizzle-orm";
 import { dec, decJson, enc } from "../src/services/fields.js";
+import {
+	calendarScenarioFromArgs,
+	runSandboxCalendar,
+} from "../src/jobs/sandbox-calendar.js";
 import { accessCodeDigest } from "../src/services/admissions.js";
 import { completedOnboarding, type Profile } from "../src/services/profiles.js";
 
@@ -93,8 +97,11 @@ describe("development sandbox", () => {
 	test("sandbox captures synthetic mail and serves the inbox", async () => {
 		const root = await mkdtemp(join(tmpdir(), "davar-sandbox-"));
 		try {
+			const env = sandboxEnv();
+			delete env.OPENROUTER_API_KEY;
+			delete env.OPENROUTER_MODEL;
 			const { app, outbox } = makeTestContext({
-				env: sandboxEnv(),
+				env,
 				outbox: undefined,
 				rootDir: root,
 			});
@@ -114,9 +121,16 @@ describe("development sandbox", () => {
 
 			const status = await app.request("/api/v1/development/status");
 			expect(status.status).toBe(200);
-			const payload = (await status.json()) as { sandbox: boolean; mailbox_url: string };
+			const payload = (await status.json()) as {
+				sandbox: boolean;
+				mailbox_url: string;
+				simulations: string[];
+				commentary_provider: string;
+			};
 			expect(payload.sandbox).toBe(true);
 			expect(payload.mailbox_url).toContain("/development/mailbox");
+			expect(payload.simulations).toEqual(["ai", "cities", "articles", "calendar-fixtures"]);
+			expect(payload.commentary_provider).toBe("simulation");
 
 			const mailbox = await app.request("/development/mailbox");
 			expect(mailbox.status).toBe(200);
@@ -174,6 +188,65 @@ describe("development sandbox", () => {
 				sql`SELECT count(*)::int AS count FROM assemblies WHERE source_id LIKE 'sandbox:%'`,
 			);
 			expect((sandboxAssemblies[0] as { count: number }).count).toBe(2);
+			const fresh = await fixturePersona(db, "fresh@example.test");
+			expect(fresh.admittedAt).toBeNull();
+		} finally {
+			await rm(keys.rootDir, { recursive: true, force: true });
+		}
+	});
+
+	test("reset keeps unrelated auth attempts and restores the live calendar", async () => {
+		const db = testDb().db;
+		const keys = {
+			primaryKey: PRIMARY,
+			deterministicKey: DETERMINISTIC,
+			env: sandboxEnv(),
+			nodeEnv: "development",
+			rootDir: await mkdtemp(join(tmpdir(), "davar-reset-")),
+		};
+		try {
+			await seedFixtures(db, keys);
+			await fixtureCalendar(db, keys, "confirmed");
+			const mailDir = join(keys.rootDir, "tmp", "sandbox-mail");
+			await mkdir(mailDir, { recursive: true });
+			await writeFile(join(mailDir, "message.json"), "{\"to\":[\"fresh@example.test\"]}");
+			const expiresAt = new Date(Date.now() + 60_000);
+			await db.insert(authAttempts).values({
+				provider: "email",
+				stateDigest: "keeper-email-attempt",
+				returnUri: "davar://auth/callback",
+				expiresAt,
+				email: await enc("keeper@example.org", PRIMARY),
+			});
+			await db.insert(authAttempts).values({
+				provider: "email",
+				stateDigest: "fixture-email-attempt",
+				returnUri: "davar://auth/callback",
+				expiresAt,
+				email: await enc("fresh@example.test", PRIMARY),
+			});
+			const unrelated = await createUser({ profile: READER_PROFILE });
+			await db.insert(authAttempts).values({
+				provider: "google",
+				stateDigest: "keeper-google-attempt",
+				returnUri: "davar://auth/callback",
+				expiresAt,
+				userId: unrelated,
+			});
+			await resetFixtures(db, keys);
+			const kept = await db
+				.select({ digest: authAttempts.stateDigest })
+				.from(authAttempts)
+				.orderBy(authAttempts.stateDigest);
+			expect(kept.map((row) => row.digest)).toEqual([
+				"keeper-email-attempt",
+				"keeper-google-attempt",
+			]);
+			const scenario = await db
+				.select({ scenario: calendarFeedStates.developmentScenario })
+				.from(calendarFeedStates);
+			expect(scenario.map((row) => row.scenario)).toEqual(["live"]);
+			await expect(readdir(mailDir)).rejects.toThrow();
 			const fresh = await fixturePersona(db, "fresh@example.test");
 			expect(fresh.admittedAt).toBeNull();
 		} finally {
@@ -399,6 +472,75 @@ describe("development sandbox", () => {
 		);
 		expect((remaining[0] as { count: number }).count).toBe(0);
 		await expect(fixtureCalendar(db, keys, "bogus")).rejects.toThrow();
+	});
+
+	test("calendar command accepts live pending and confirmed", async () => {
+		const db = testDb().db;
+		const keys = {
+			primaryKey: PRIMARY,
+			deterministicKey: DETERMINISTIC,
+			env: sandboxEnv(),
+			nodeEnv: "development",
+		};
+		const env = sandboxEnv();
+		delete env.IMPORT_FILE;
+		const pkg = (await Bun.file(join(import.meta.dir, "../package.json")).json()) as {
+			scripts: Record<string, string>;
+		};
+		expect(pkg.scripts["sandbox:calendar"]).toBe("bun ./src/jobs/sandbox-calendar.ts");
+		expect(calendarScenarioFromArgs([])).toBe("live");
+		const live = await runSandboxCalendar(db, keys, calendarScenarioFromArgs([]), env);
+		expect(live.calendar).toMatchObject({ scenario: "live", synthetic: false, aviv: "unresolved" });
+		expect(live.sync).toMatchObject({
+			job: "sync_calendar_observations",
+			status: "skipped",
+			reason: "IMPORT_FILE is required",
+		});
+		const pending = await runSandboxCalendar(db, keys, calendarScenarioFromArgs(["pending"]), env);
+		expect(pending.calendar).toMatchObject({ scenario: "pending", synthetic: true, aviv: "unresolved" });
+		expect(pending.sync).toBeUndefined();
+		const confirmed = await runSandboxCalendar(db, keys, calendarScenarioFromArgs(["confirmed"]), env);
+		expect(confirmed.calendar).toMatchObject({ scenario: "confirmed", synthetic: true, aviv: "unresolved" });
+		expect(confirmed.sync).toBeUndefined();
+		const observations = await db.execute(
+			sql`SELECT count(*)::int AS count FROM new_moon_observations WHERE source_id LIKE 'sandbox:%'`,
+		);
+		expect((observations[0] as { count: number }).count).toBe(1);
+		await expect(
+			runSandboxCalendar(db, keys, calendarScenarioFromArgs(["bogus"]), env),
+		).rejects.toThrow("Choose live, pending or confirmed");
+	});
+
+	test("development status drops ai when OpenRouter is on", async () => {
+		const off = sandboxEnv();
+		delete off.OPENROUTER_API_KEY;
+		delete off.OPENROUTER_MODEL;
+		const closed = await makeTestContext({ env: off }).app.request("/api/v1/development/status");
+		expect(closed.status).toBe(200);
+		expect(await closed.json()).toMatchObject({
+			sandbox: true,
+			simulations: ["ai", "cities", "articles", "calendar-fixtures"],
+			commentary_provider: "simulation",
+		});
+		const paid = sandboxEnv({
+			OPENROUTER_API_KEY: "development-file-key",
+			OPENROUTER_MODEL: "fixture/paid-model",
+		});
+		const paidStatus = await makeTestContext({ env: paid }).app.request("/api/v1/development/status");
+		expect(await paidStatus.json()).toMatchObject({
+			simulations: ["ai", "cities", "articles", "calendar-fixtures"],
+			commentary_provider: "simulation",
+		});
+		const open = sandboxEnv({
+			OPENROUTER_API_KEY: "development-file-key",
+			OPENROUTER_MODEL: "openrouter/free",
+		});
+		const openStatus = await makeTestContext({ env: open }).app.request("/api/v1/development/status");
+		expect(await openStatus.json()).toMatchObject({
+			sandbox: true,
+			simulations: ["cities", "articles", "calendar-fixtures"],
+			commentary_provider: "openrouter",
+		});
 	});
 
 	test("simulated commentary refunds failures and stays bounded", async () => {

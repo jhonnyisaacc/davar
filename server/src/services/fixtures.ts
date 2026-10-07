@@ -16,7 +16,7 @@ import { sha256Hex } from "../lib/crypto.js";
 import { requireSandbox } from "./sandbox.js";
 import { resolveAccount, subjectDigest } from "./accounts.js";
 import { accessCodeDigest } from "./admissions.js";
-import { enc, encJson } from "./fields.js";
+import { dec, enc, encJson } from "./fields.js";
 import type { Profile } from "./profiles.js";
 
 export const FIXTURE_SCENARIOS = {
@@ -355,6 +355,25 @@ export async function seedFixtures(
 	};
 }
 
+async function writeDevelopmentScenario(db: DatabaseOrTx, scenario: string): Promise<void> {
+	const existing = await db
+		.select({ id: calendarFeedStates.id })
+		.from(calendarFeedStates)
+		.where(eq(calendarFeedStates.source, FEED_SOURCE))
+		.limit(1);
+	if (existing[0]) {
+		await db
+			.update(calendarFeedStates)
+			.set({ developmentScenario: scenario, updatedAt: new Date() })
+			.where(eq(calendarFeedStates.id, existing[0].id));
+	} else {
+		await db.insert(calendarFeedStates).values({
+			source: FEED_SOURCE,
+			developmentScenario: scenario,
+		});
+	}
+}
+
 export async function resetFixtures(
 	db: DatabaseOrTx,
 	keys: FixtureKeys,
@@ -371,16 +390,27 @@ export async function resetFixtures(
 			.limit(1);
 		for (const row of rows) {
 			await db.execute(sql`DELETE FROM assemblies WHERE leader_id = ${row.userId} OR source_id IN ('sandbox:local', 'sandbox:online')`);
-			await db.execute(sql`DELETE FROM auth_attempts WHERE user_id = ${row.userId} OR email IN (${sql.join(FIXTURE_EMAILS.map((email) => sql`${email}`), sql`, `)})`);
+			await db.execute(sql`DELETE FROM auth_attempts WHERE user_id = ${row.userId}`);
 			await db.execute(
 				sql`DELETE FROM endorsements WHERE applicant_id = ${row.userId} OR leader_id = ${row.userId}`,
 			);
 			await db.execute(sql`DELETE FROM users WHERE id = ${row.userId}`);
 		}
 	}
-	await db.execute(sql`DELETE FROM auth_attempts WHERE provider = 'email'`);
+	const fixtureEmails = new Set(FIXTURE_EMAILS);
+	const emailAttempts = await db.execute(
+		sql`SELECT id, email FROM auth_attempts WHERE provider = 'email'`,
+	);
+	for (const attempt of emailAttempts) {
+		const row = attempt as { id: string; email: string | null };
+		const plain = await dec(row.email, keys.primaryKey);
+		if (plain && fixtureEmails.has(plain)) {
+			await db.execute(sql`DELETE FROM auth_attempts WHERE id = ${row.id}`);
+		}
+	}
 	await db.execute(sql`DELETE FROM articles WHERE source_id LIKE 'sandbox:%'`);
 	await db.execute(sql`DELETE FROM new_moon_observations WHERE source_id LIKE 'sandbox:%'`);
+	await writeDevelopmentScenario(db, "live");
 	const fixtureCodes = [FIXTURE_INVITATION, FIXTURE_VALID_CODE, ...Object.keys(FIXTURE_INVALID_INVITATIONS)];
 	const codeDigests = await Promise.all(fixtureCodes.map((code) => accessCodeDigest(code)));
 	await db.execute(
@@ -409,19 +439,7 @@ export async function fixtureCalendar(
 	if (scenario !== "live" && scenario !== "pending" && scenario !== "confirmed") {
 		throw new Error("Choose live, pending or confirmed");
 	}
-	const existing = await db
-		.select({ id: calendarFeedStates.id })
-		.from(calendarFeedStates)
-		.where(eq(calendarFeedStates.source, FEED_SOURCE))
-		.limit(1);
-	if (existing[0]) {
-		await db
-			.update(calendarFeedStates)
-			.set({ developmentScenario: scenario, updatedAt: new Date() })
-			.where(eq(calendarFeedStates.id, existing[0].id));
-	} else {
-		await db.insert(calendarFeedStates).values({ source: FEED_SOURCE, developmentScenario: scenario });
-	}
+	await writeDevelopmentScenario(db, scenario);
 	await db.execute(sql`DELETE FROM new_moon_observations WHERE source_id LIKE 'sandbox:%'`);
 	if (scenario === "confirmed") {
 		const day = new Date(Date.now() - 4 * 24 * 60 * 60 * 1000);
