@@ -242,8 +242,8 @@ export async function providerSubject(
 			})) as { data: { id: string } };
 			return me.data.id;
 		}
-		const { hmacHex } = await import("../lib/codec.js");
-		const proof = await hmacHex(access, clientSecret ?? "");
+		const { hmacSha256Hex } = await import("../lib/codec.js");
+		const proof = await hmacSha256Hex(clientSecret ?? "", access);
 		const me = (await http.json(
 			`https://graph.facebook.com/v24.0/me?fields=id&appsecret_proof=${proof}`,
 			{ headers: { Authorization: `Bearer ${access}` } },

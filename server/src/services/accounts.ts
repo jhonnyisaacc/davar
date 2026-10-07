@@ -1,7 +1,7 @@
 import { and, eq } from "drizzle-orm";
 import type { DatabaseOrTx } from "../db/client.js";
 import { identities, users } from "../db/schema.js";
-import { hmacHex } from "../lib/codec.js";
+import { derivedHmacHex } from "../lib/codec.js";
 import { DomainError } from "../lib/errors.js";
 import { enc } from "./fields.js";
 
@@ -16,7 +16,7 @@ export async function subjectDigest(
 	subject: string,
 	deterministicKey: string,
 ): Promise<string> {
-	return hmacHex(`identity-subject:${subject}`, deterministicKey);
+	return derivedHmacHex(`identity-subject:${subject}`, deterministicKey);
 }
 
 const PROVIDERS = ["google", "apple", "facebook", "telegram", "x", "email"] as const;

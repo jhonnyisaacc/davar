@@ -159,8 +159,8 @@ async function telegramUserId(
 	subject: string,
 	deterministicKey: string,
 ): Promise<string> {
-	const { hmacHex } = await import("../lib/codec.js");
-	const digest = await hmacHex(`identity-subject:${subject}`, deterministicKey);
+	const { derivedHmacHex } = await import("../lib/codec.js");
+	const digest = await derivedHmacHex(`identity-subject:${subject}`, deterministicKey);
 	const rows = await db
 		.select({ userId: identities.userId })
 		.from(identities)

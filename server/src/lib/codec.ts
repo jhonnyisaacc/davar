@@ -48,7 +48,9 @@ export async function decryptField(
 	return new TextDecoder().decode(plain);
 }
 
-export async function hmacHex(
+// Internal digests and signatures only: the key is derived with SHA-256
+// first, so this must never stand in for an external HMAC contract.
+export async function derivedHmacHex(
 	message: string,
 	secret: string,
 ): Promise<string> {
@@ -58,7 +60,30 @@ export async function hmacHex(
 		key,
 		new TextEncoder().encode(message),
 	);
-	return [...new Uint8Array(signature)]
+	return hexBytes(signature);
+}
+
+// External HMAC contracts (for example Facebook's appsecret_proof, which
+// Rails computes with OpenSSL::HMAC and the raw secret): the key is used
+// exactly as given.
+export async function hmacSha256Hex(key: string, message: string): Promise<string> {
+	const imported = await crypto.subtle.importKey(
+		"raw",
+		new TextEncoder().encode(key),
+		{ name: "HMAC", hash: "SHA-256" },
+		false,
+		["sign"],
+	);
+	const signature = await crypto.subtle.sign(
+		"HMAC",
+		imported,
+		new TextEncoder().encode(message),
+	);
+	return hexBytes(signature);
+}
+
+function hexBytes(buffer: ArrayBuffer): string {
+	return [...new Uint8Array(buffer)]
 		.map((byte) => byte.toString(16).padStart(2, "0"))
 		.join("");
 }
@@ -73,7 +98,7 @@ export async function signSelection(
 		exp: Math.floor(Date.now() / 1000) + ttlSeconds,
 	};
 	const encoded = base64UrlEncode(new TextEncoder().encode(JSON.stringify(body)));
-	const signature = await hmacHex(`city-selection:${encoded}`, secret);
+	const signature = await derivedHmacHex(`city-selection:${encoded}`, secret);
 	return `${encoded}.${signature}`;
 }
 
@@ -83,7 +108,7 @@ export async function verifySelection<T>(
 ): Promise<T> {
 	const [encoded, signature] = token.split(".");
 	if (!encoded || !signature) throw new Error("Invalid selection");
-	const expected = await hmacHex(`city-selection:${encoded}`, secret);
+	const expected = await derivedHmacHex(`city-selection:${encoded}`, secret);
 	if (expected.length !== signature.length) throw new Error("Invalid selection");
 	let diff = 0;
 	for (let i = 0; i < expected.length; i++) {

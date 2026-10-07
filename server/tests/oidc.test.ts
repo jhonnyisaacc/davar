@@ -91,6 +91,29 @@ describe("oidc", () => {
 		expect(new URL(consented).searchParams.get("scope")).toContain("telegram:bot_access");
 	});
 
+	test("facebook signs appsecret_proof with the raw client secret", async () => {
+		const { createHmac } = await import("node:crypto");
+		const secret = "fixture-facebook-secret";
+		const access = "fixture-access-token";
+		const urls: string[] = [];
+		const http = {
+			json: async (url: string) => {
+				urls.push(url);
+				if (url.includes("/me?")) return { id: "fb-123" };
+				return { access_token: access };
+			},
+		};
+		const env = {
+			FACEBOOK_CLIENT_ID: "fixture-client",
+			FACEBOOK_CLIENT_SECRET: secret,
+		} as NodeJS.ProcessEnv;
+		const attempt = { provider: "facebook", nonce: "n", verifier: "v" };
+		await expect(providerSubject(attempt, "code", { env, http })).resolves.toBe("fb-123");
+		const graph = urls.find((url) => url.includes("/me?"));
+		const proof = graph ? new URL(graph).searchParams.get("appsecret_proof") : null;
+		expect(proof).toBe(createHmac("sha256", secret).update(access).digest("hex"));
+	});
+
 	test("apple uses form_post without PKCE, google keeps S256", async () => {
 		const base = {
 			nonce: "nonce",
