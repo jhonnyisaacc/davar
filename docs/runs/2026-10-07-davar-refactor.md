@@ -84,3 +84,33 @@ Local checks on this branch, after `cd web && bun run generate-data:ensure`:
 | `cd web && bun test` | 146 pass |
 
 No ratchet baseline, ignore count, or public route changed.
+
+## Split the web reader screen state
+
+Draft PR [#274](https://github.com/jhonnyisaacc/davar/pull/274) (`refactor/split-app` into `refactor/split-static-data`, stacked on #272). Screen state. Not merged.
+
+Reader hooks under `web/src/app/features/reader/` own settings, reading position, the book list and chapter load, the address bar, the word panel state, and scroll chrome. `App.tsx` composes them. `WordCard.tsx`, `CalendarPanel.tsx`, and `AssembliesWorkspace.tsx` stay put. Reading position storage stays `davar.readingState`. `shared/` and `mobile/` are unchanged. Pin assertions are unchanged. `biome-ignore` stays at 6. Decision: `docs/decisions/0005-split-app.md`.
+
+Local checks on this branch, after `cd web && bun run generate-data:ensure`:
+
+| Check | Result |
+| --- | --- |
+| `cd web && bun x tsc --noEmit` | pass |
+| `cd web && bun test` | 146 pass |
+
+No ratchet baseline, ignore count, or public route changed.
+
+## Split the web reader screen state
+
+Draft PR [#274](https://github.com/jhonnyisaacc/davar/pull/274) (`refactor/split-app` into `refactor/split-static-data`, stacked on #272). Screen state. Not merged.
+
+Reader hooks under `web/src/app/features/reader/` own settings, reading position, the book list and chapter load, the address bar, the word panel state, and scroll chrome. `App.tsx` composes them. `WordCard.tsx`, `CalendarPanel.tsx`, and `AssembliesWorkspace.tsx` stay put. Reading position storage stays `davar.readingState`. `shared/` and `mobile/` are unchanged. Pin assertions are unchanged. `biome-ignore` stays at 6. Decision: `docs/decisions/0005-split-app.md`.
+
+Local checks on this branch, after `cd web && bun run generate-data:ensure`:
+
+| Check | Result |
+| --- | --- |
+| `cd web && bun x tsc --noEmit` | pass |
+| `cd web && bun test` | 146 pass |
+
+No ratchet baseline, ignore count, or public route changed.
