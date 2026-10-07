@@ -1,23 +1,36 @@
 import { sql } from "drizzle-orm";
+import { join } from "node:path";
 import type { DatabaseOrTx } from "../db/client.js";
 import { DomainError } from "../lib/errors.js";
+import { runBridge } from "./bridge.js";
+import { monthAnchors } from "./calendarConfig.js";
 import { repoRoot } from "./context.js";
-import { join } from "node:path";
+import { consumerStatus, feedState, FEED_SOURCE } from "./feedState.js";
+import { sandboxEnabled } from "./sandbox.js";
+import { observationWindowOpen } from "./window.js";
+import { syncObservations } from "./sync.js";
 
 export interface CalendarDay {
 	civil_date: string;
 	biblical: { day: number | null; month_id: string | null; month_ordinal: number | null };
+	month_identity: unknown;
 	rabbinic: { day: number; month_id: string; year: number };
 	events: string[];
+	counted_events: unknown[];
 	month_status: string;
 	year_start_status: string;
 	confirmation_id: string | null;
+	observation?: unknown;
 }
 
 export interface CalendarResult {
 	schema_version: 1;
 	days: CalendarDay[];
 	year_start_status: string;
+	next_sunset_at?: string;
+	timezone?: string;
+	generated_at?: string;
+	source?: unknown;
 	[key: string]: unknown;
 }
 
@@ -25,6 +38,8 @@ export function bridgePath(env: NodeJS.ProcessEnv = process.env): string {
 	if (env.BORE_BRIDGE_PATH) return env.BORE_BRIDGE_PATH;
 	return join(repoRoot(), "server", "lib", "bore", "bridge.py");
 }
+
+export const COUNTING_RULE = "weekly_shabbat_during_hag_hamatzot";
 
 function supportedTimeZones(): Set<string> {
 	try {
@@ -47,6 +62,39 @@ export function parseInstant(raw: unknown): Date {
 	return date;
 }
 
+interface ConfirmationRow {
+	id: string;
+	startsOnEvening: string | Date;
+	observationId: string;
+	observedOn: string | Date;
+	source: string;
+	sourceId: string;
+	sourceUrl: string;
+	provenance: Record<string, unknown>;
+	createdAt: string | Date;
+}
+
+function confirmationPayload(row: ConfirmationRow) {
+	const observedOn = new Date(row.observedOn);
+	const startsOn = new Date(row.startsOnEvening);
+	return {
+		id: row.id,
+		status: "confirmed",
+		observed_on: observedOn.toISOString().slice(0, 10),
+		starts_on_evening: startsOn.toISOString().slice(0, 10),
+		source: row.source,
+		source_entry_id: row.sourceId,
+		source_url: row.sourceUrl,
+		observation_ids: [row.observationId],
+		observers: row.provenance?.observer ? [row.provenance.observer] : [],
+		locations: row.provenance?.location ? [row.provenance.location] : [],
+		unaided: true,
+		ingested_at: new Date(row.createdAt).toISOString(),
+		reason: "Verified INMS unaided Israel observation",
+		fixture: row.provenance?.development_fixture === true,
+	};
+}
+
 export async function biblicalCalendar(
 	db: DatabaseOrTx,
 	input: {
@@ -55,10 +103,12 @@ export async function biblicalCalendar(
 		longitude: unknown;
 		timezone: unknown;
 		count?: unknown;
+		refreshSource?: boolean;
 	},
-	deps: { env?: NodeJS.ProcessEnv; pythonBin?: string; bridge?: string } = {},
+	deps: { env?: NodeJS.ProcessEnv; pythonBin?: string; bridge?: string; nodeEnv?: string } = {},
 ): Promise<CalendarResult> {
 	const env = deps.env ?? process.env;
+	const nodeEnv = deps.nodeEnv ?? env.NODE_ENV ?? "development";
 	const lat = Number(input.latitude);
 	const lon = Number(input.longitude);
 	const count = input.count === undefined ? 1 : Number(input.count);
@@ -75,84 +125,120 @@ export async function biblicalCalendar(
 		throw new DomainError("invalid_timezone");
 	}
 	const time = parseInstant(input.instant);
-	const rows = await db.execute(sql`
-		SELECT mc.id, mc.starts_on_evening AS "startsOnEvening",
-			o.id AS "observationId", o.observed_on AS "observedOn",
-			o.source, o.source_id AS "sourceId", o.source_url AS "sourceUrl",
-			o.provenance, o.created_at AS "createdAt"
-		FROM month_confirmations mc
-		JOIN new_moon_observations o ON o.id = mc.new_moon_observation_id
-		ORDER BY mc.starts_on_evening
-	`);
-	const confirmations = (rows as unknown as Array<{
-		id: string;
-		startsOnEvening: string | Date;
-		observationId: string;
-		observedOn: string | Date;
-		source: string;
-		sourceId: string;
-		sourceUrl: string;
-		provenance: Record<string, unknown>;
-		createdAt: string | Date;
-	}>).map((row) => {
-		const observedOn = new Date(row.observedOn);
-		const startsOn = new Date(row.startsOnEvening);
-		return {
-			id: row.id,
-			status: "confirmed",
-			observed_on: observedOn.toISOString().slice(0, 10),
-			starts_on_evening: startsOn.toISOString().slice(0, 10),
-			source: row.source,
-			source_entry_id: row.sourceId,
-			source_url: row.sourceUrl,
-			observation_ids: [row.observationId],
-			observers: row.provenance?.observer ? [row.provenance.observer] : [],
-			locations: row.provenance?.location ? [row.provenance.location] : [],
-			unaided: true,
-			ingested_at: new Date(row.createdAt).toISOString(),
-			reason: "Verified INMS unaided Israel observation",
-		};
-	});
+	let state = await feedState(db);
+	const scenario = sandboxEnabled(env, nodeEnv) ? state.developmentScenario : "live";
+	if (input.refreshSource && scenario === "live") {
+		await syncObservations(db, { ifDue: true, env });
+		state = await feedState(db);
+	}
+	let confirmations: Array<ReturnType<typeof confirmationPayload>>;
+	if (scenario === "confirmed") {
+		const rows = (await db.execute(sql`
+			SELECT mc.id, mc.starts_on_evening AS "startsOnEvening",
+				o.id AS "observationId", o.observed_on AS "observedOn",
+				o.source, o.source_id AS "sourceId", o.source_url AS "sourceUrl",
+				o.provenance, o.created_at AS "createdAt"
+			FROM month_confirmations mc
+			JOIN new_moon_observations o ON o.id = mc.new_moon_observation_id
+			WHERE o.provenance ->> 'development_fixture' = 'true'
+			ORDER BY mc.starts_on_evening
+		`)) as unknown as ConfirmationRow[];
+		// Fixture confirmations start on the observed evening itself.
+		confirmations = rows.map((row) => {
+			const payload = confirmationPayload(row);
+			return { ...payload, starts_on_evening: payload.observed_on };
+		});
+	} else if (scenario === "pending") {
+		confirmations = [];
+	} else {
+		const rows = (await db.execute(sql`
+			SELECT mc.id, mc.starts_on_evening AS "startsOnEvening",
+				o.id AS "observationId", o.observed_on AS "observedOn",
+				o.source, o.source_id AS "sourceId", o.source_url AS "sourceUrl",
+				o.provenance, o.created_at AS "createdAt"
+			FROM month_confirmations mc
+			JOIN new_moon_observations o ON o.id = mc.new_moon_observation_id
+			WHERE COALESCE(o.provenance ->> 'development_fixture', 'false') != 'true'
+			ORDER BY mc.starts_on_evening
+		`)) as unknown as ConfirmationRow[];
+		confirmations = rows.map(confirmationPayload);
+	}
 	const payload = {
 		instant: time.toISOString(),
 		latitude: lat,
 		longitude: lon,
 		timezone: input.timezone,
 		count,
+		month_anchors: scenario === "live" ? monthAnchors() : [],
+		counting_rule: scenario === "live" ? COUNTING_RULE : null,
 		confirmations,
 	};
-	const bridge = deps.bridge ?? bridgePath(env);
-	const python = deps.pythonBin ?? env.PYTHON_BIN ?? "python3";
-	let proc: ReturnType<typeof Bun.spawn>;
-	try {
-		proc = Bun.spawn([python, bridge], {
-			stdin: "pipe",
-			stdout: "pipe",
-			stderr: "pipe",
+	const result = await runBridge<CalendarResult>(
+		deps.bridge ?? bridgePath(env),
+		payload,
+		{ pythonBin: deps.pythonBin ?? env.PYTHON_BIN ?? "python3" },
+	);
+	const witnesses =
+		confirmations.length === 0
+			? []
+			: ((await db.execute(sql`
+		SELECT observed_on AS "observedOn", source_url AS "sourceUrl",
+			provenance ->> 'observer' AS "observer", provenance ->> 'location' AS "location",
+			COALESCE(provenance ->> 'development_fixture', 'false') = 'true' AS "fixture"
+		FROM new_moon_observations
+		WHERE source = ${FEED_SOURCE} AND country = 'IL'
+			AND visibility_method = 'unaided' AND verified = true
+			AND observed_on IN (${sql.join(confirmations.map((c) => sql`${c.starts_on_evening}::date`), sql`, `)})
+		ORDER BY source_id
+	`)) as unknown as Array<{
+				observedOn: string | Date;
+				sourceUrl: string;
+				observer: string | null;
+				location: string | null;
+				fixture: boolean;
+			}>);
+	const evidence: Record<string, unknown> = {};
+	for (const confirmation of confirmations) {
+		const match = witnesses.filter((witness) => {
+			const day =
+				witness.observedOn instanceof Date
+					? witness.observedOn.toISOString().slice(0, 10)
+					: String(witness.observedOn).slice(0, 10);
+			return day === confirmation.starts_on_evening;
 		});
-	} catch {
-		throw new DomainError("calendar_domain_unavailable", 503);
+		const synthetic = confirmation.fixture;
+		const group = match.filter((witness) => witness.fixture === synthetic);
+		evidence[confirmation.id] = {
+			observed_on: confirmation.observed_on,
+			source_url: confirmation.source_url,
+			observers: [...new Set(group.map((witness) => witness.observer).filter(Boolean))],
+			locations: [...new Set(group.map((witness) => witness.location).filter(Boolean))],
+			unaided: true,
+			development_fixture: synthetic,
+		};
 	}
-	try {
-		const stdin = proc.stdin;
-		const stdout = proc.stdout;
-		if (typeof stdin === "number" || !stdin || typeof stdout === "number" || !stdout) {
-			throw new DomainError("calendar_domain_unavailable", 503);
-		}
-		stdin.write(JSON.stringify(payload));
-		stdin.end();
-		const [output, exitCode] = await Promise.all([
-			new Response(stdout).text(),
-			proc.exited,
-		]);
-		if (exitCode !== 0) throw new DomainError("calendar_domain_unavailable", 503);
-		try {
-			return JSON.parse(output) as CalendarResult;
-		} catch {
-			throw new DomainError("calendar_domain_unavailable", 503);
-		}
-	} catch (error) {
-		if (error instanceof DomainError) throw error;
-		throw new DomainError("calendar_domain_unavailable", 503);
+	for (const day of result.days) {
+		day.observation = (evidence[day.confirmation_id ?? ""] ?? null) as unknown;
 	}
+	result.generated_at = new Date().toISOString();
+	if (scenario === "live") {
+		result.source = await consumerStatus(
+			db,
+			new Date(),
+			await observationWindowOpen(db, new Date(), { env }),
+		);
+	} else {
+		result.source = {
+			name: "development_fixture",
+			url: null,
+			status: `synthetic_${scenario}`,
+			stale: false,
+			review_count: 0,
+			last_checked_at: null,
+			last_synced_at: null,
+			development_fixture: true,
+		};
+	}
+	void state;
+	return result;
 }

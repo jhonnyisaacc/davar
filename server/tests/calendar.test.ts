@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, test } from "bun:test";
 import { testDb } from "./helper.js";
-import { makeTestContext, truncateAll } from "./helper.js";
+import { makeTestContext, seedFeedState, truncateAll } from "./helper.js";
 import { articles } from "../src/db/schema.js";
 import { enc } from "../src/services/fields.js";
 import { eq } from "drizzle-orm";
@@ -20,6 +20,7 @@ function query(params: Record<string, string>): string {
 
 describe("calendar", () => {
 	test("today is public and matches the pinned Bore shape", async () => {
+		await seedFeedState();
 		const { app } = makeTestContext();
 		const res = await app.request(query(TODAY));
 		expect(res.status).toBe(200);
@@ -46,6 +47,7 @@ describe("calendar", () => {
 	});
 
 	test("sunset advances the civil lookup", async () => {
+		await seedFeedState();
 		const { app } = makeTestContext();
 		const evening = await app.request(
 			query({ ...TODAY, instant: "2026-09-30T22:00:00Z" }),
@@ -56,6 +58,7 @@ describe("calendar", () => {
 	});
 
 	test("upcoming honors the day count", async () => {
+		await seedFeedState();
 		const { app } = makeTestContext();
 		const res = await app.request(
 			`/api/v1/calendar/upcoming?${new URLSearchParams({ ...TODAY, days: "3" }).toString()}`,

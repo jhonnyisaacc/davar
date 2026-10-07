@@ -28,10 +28,16 @@
 		"biblical",
 		"civil_date",
 		"confirmation_id",
+		"counted_events",
 		"events",
+		"month_identity",
 		"month_status",
+		"observation",
 		"rabbinic",
 		"year_start_status"
 	],
+	"capabilities_keys": ["ai", "flags"],
+	"capabilities_ai_keys": ["available", "providers", "shared_openrouter"],
+	"capabilities_flags_keys": ["ai_provider_connections", "ai_shared_openrouter", "assemblies"],
 	"providers": ["google", "apple", "facebook", "telegram", "x", "email"]
 }

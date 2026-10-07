@@ -5,6 +5,7 @@ import {
 	createUser,
 	makeTestContext,
 	READER_PROFILE,
+	seedFeedState,
 	truncateAll,
 } from "./helper.js";
 import { resolveAccount } from "../src/services/accounts.js";
@@ -14,6 +15,7 @@ beforeEach(truncateAll);
 
 describe("client contract", () => {
 	test("account, assembly, commentary and calendar shapes hold", async () => {
+		await seedFeedState();
 		const generator = async () =>
 			JSON.stringify({
 				answer: {
@@ -124,5 +126,20 @@ describe("client contract", () => {
 			)
 		).json()) as { days: Array<Record<string, unknown>> };
 		expect(Object.keys(calendar.days[0] ?? {}).sort()).toEqual(contract.calendar_day_keys);
+
+		const capabilities = (await (
+			await app.request("/api/v1/capabilities", { headers })
+		).json()) as {
+			flags: Record<string, unknown>;
+			ai: Record<string, unknown>;
+		};
+		const contractShape = contract as unknown as {
+			capabilities_keys: string[];
+			capabilities_ai_keys: string[];
+			capabilities_flags_keys: string[];
+		};
+		expect(Object.keys(capabilities).sort()).toEqual(contractShape.capabilities_keys);
+		expect(Object.keys(capabilities.ai).sort()).toEqual(contractShape.capabilities_ai_keys);
+		expect(Object.keys(capabilities.flags).sort()).toEqual(contractShape.capabilities_flags_keys);
 	});
 });

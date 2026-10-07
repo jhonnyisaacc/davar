@@ -4,11 +4,13 @@ import {
 	accessCodes,
 	articles,
 	assemblies,
+	calendarFeedStates,
 	identities,
 	memberships,
 	newMoonObservations,
 	users,
 } from "../db/schema.js";
+import { FEED_SOURCE } from "./feedState.js";
 import { sha256Hex } from "../lib/crypto.js";
 import { requireSandbox } from "./sandbox.js";
 import { resolveAccount, subjectDigest } from "./accounts.js";
@@ -248,8 +250,21 @@ export async function fixtureCalendar(
 	scenario: string,
 ): Promise<{ scenario: string; synthetic: boolean; aviv: string }> {
 	requireSandbox(keys.env, keys.nodeEnv);
-	if (scenario !== "pending" && scenario !== "confirmed") {
-		throw new Error("Choose pending or confirmed");
+	if (scenario !== "live" && scenario !== "pending" && scenario !== "confirmed") {
+		throw new Error("Choose live, pending or confirmed");
+	}
+	const existing = await db
+		.select({ id: calendarFeedStates.id })
+		.from(calendarFeedStates)
+		.where(eq(calendarFeedStates.source, FEED_SOURCE))
+		.limit(1);
+	if (existing[0]) {
+		await db
+			.update(calendarFeedStates)
+			.set({ developmentScenario: scenario, updatedAt: new Date() })
+			.where(eq(calendarFeedStates.id, existing[0].id));
+	} else {
+		await db.insert(calendarFeedStates).values({ source: FEED_SOURCE, developmentScenario: scenario });
 	}
 	await db.execute(sql`DELETE FROM new_moon_observations WHERE source_id LIKE 'sandbox:%'`);
 	if (scenario === "confirmed") {
@@ -281,5 +296,5 @@ export async function fixtureCalendar(
 			});
 		}
 	}
-	return { scenario, synthetic: true, aviv: "unresolved" };
+	return { scenario, synthetic: scenario !== "live", aviv: "unresolved" };
 }

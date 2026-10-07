@@ -5,7 +5,6 @@ import {
 	assemblies,
 	identities,
 	memberships,
-	monthConfirmations,
 	newMoonObservations,
 	users,
 } from "../db/schema.js";
@@ -244,7 +243,7 @@ export async function articleImport(
 	return report;
 }
 
-interface ObservationRow {
+export interface ObservationRow {
 	id: string;
 	source: string;
 	source_url: string;
@@ -259,37 +258,117 @@ interface ObservationRow {
 	observed_at?: string;
 	fetched_at?: string;
 	source_revision?: string;
+	date_review?: unknown;
 }
 
-function automaticallyConfirmable(row: {
-	source: string;
-	country: string;
-	visibilityMethod: string;
-	verified: boolean;
-}): boolean {
-	return (
-		row.source === "israeli_new_moon_society" &&
-		row.country === "IL" &&
-		row.visibilityMethod === "unaided" &&
-		row.verified
-	);
+export const FEED_OBSERVATION_SOURCE = "israeli_new_moon_society";
+
+export async function rebuildConfirmations(db: DatabaseOrTx): Promise<number> {
+	const rows = (await db.execute(sql`
+		SELECT id, source_id AS "sourceId", observed_on AS "observedOn",
+			provenance ->> 'source_entry_id' AS "entryId"
+		FROM new_moon_observations
+		WHERE source = ${FEED_OBSERVATION_SOURCE} AND country = 'IL'
+			AND visibility_method = 'unaided' AND verified = true
+			AND COALESCE(provenance ->> 'development_fixture', 'false') != 'true'
+		ORDER BY observed_on, source_id
+	`)) as unknown as Array<{ id: string; sourceId: string; observedOn: string | Date; entryId: string | null }>;
+	const byEntry = new Map<string, (typeof rows)[number]>();
+	for (const row of rows) {
+		const key = row.entryId || row.sourceId;
+		if (!byEntry.has(key)) byEntry.set(key, row);
+	}
+	const representatives = new Map<string, (typeof rows)[number]>();
+	for (const row of byEntry.values()) {
+		const day =
+			row.observedOn instanceof Date
+				? row.observedOn.toISOString().slice(0, 10)
+				: String(row.observedOn).slice(0, 10);
+		if (!representatives.has(day)) representatives.set(day, row);
+	}
+	const days = [...representatives.keys()];
+	if (days.length > 0) {
+		await db.execute(sql`
+			DELETE FROM month_confirmations WHERE starts_on_evening NOT IN (${sql.join(days.map((day) => sql`${day}::date`), sql`, `)})
+		`);
+	} else {
+		await db.execute(sql`DELETE FROM month_confirmations`);
+	}
+	for (const [day, observation] of representatives) {
+		const found = await db.execute(sql`
+			SELECT id, new_moon_observation_id AS "observationId" FROM month_confirmations WHERE starts_on_evening = ${day}::date LIMIT 1
+		`);
+		const current = found[0] as { id: string; observationId: string } | undefined;
+		if (current) {
+			if (current.observationId !== observation.id) {
+				await db.execute(sql`
+					UPDATE month_confirmations SET new_moon_observation_id = ${observation.id} WHERE id = ${current.id}
+				`);
+			}
+		} else {
+			await db.execute(sql`
+				INSERT INTO month_confirmations (new_moon_observation_id, starts_on_evening) VALUES (${observation.id}, ${day}::date)
+			`);
+		}
+	}
+	return representatives.size;
 }
 
 export async function observationImport(
 	db: DatabaseOrTx,
-	payload: { schema_version: number; observations: ObservationRow[] },
+	payload: {
+		schema_version: number;
+		observations: ObservationRow[];
+		replace_entry_ids?: string[];
+	},
 	dryRun = true,
 ): Promise<{ observations: number; confirmations: number; dry_run: boolean }> {
 	if (payload.schema_version !== 1) throw new DomainError("unsupported_import");
 	const report = { observations: 0, confirmations: 0, dry_run: dryRun };
 	try {
 		await db.transaction(async (tx) => {
-			for (const row of payload.observations) {
+			// Serialize feed/manual imports; confirmations rebuild below.
+			await tx.execute(sql`SELECT pg_advisory_xact_lock(1146503506)`);
+			const incoming = payload.observations;
+			for (const entryId of payload.replace_entry_ids ?? []) {
+				const retained = incoming
+					.filter((row) => row.source_entry_id === entryId)
+					.map((row) => row.id);
+				const stale = (await tx.execute(sql`
+					SELECT id, source_id AS "sourceId", provenance FROM new_moon_observations
+					WHERE source = ${FEED_OBSERVATION_SOURCE}
+					AND provenance ->> 'source_entry_id' = ${entryId}
+				`)) as unknown as Array<{ id: string; sourceId: string; provenance: Record<string, unknown> }>;
+				for (const row of stale) {
+					if (retained.includes(row.sourceId)) continue;
+					await tx.execute(sql`
+						UPDATE new_moon_observations SET verified = false,
+							provenance = provenance || ${JSON.stringify({ retracted_at: new Date().toISOString() })}::jsonb
+						WHERE id = ${row.id}
+					`);
+				}
+			}
+			for (const row of incoming) {
 				const found = await tx
 					.select()
 					.from(newMoonObservations)
 					.where(eq(newMoonObservations.sourceId, row.id))
 					.limit(1);
+				const current = found[0];
+				const merged: Record<string, unknown> = {
+					...(current ? (current.provenance as Record<string, unknown>) : {}),
+					source_entry_id: row.source_entry_id,
+					observer: row.observer,
+					location: row.location,
+					observed_at: row.observed_at,
+					fetched_at: row.fetched_at,
+					source_revision: row.source_revision,
+					date_review: row.date_review,
+				};
+				for (const key of Object.keys(merged)) {
+					if (merged[key] === undefined) delete merged[key];
+				}
+				delete merged.retracted_at;
 				const values = {
 					source: row.source,
 					sourceUrl: row.source_url,
@@ -298,63 +377,20 @@ export async function observationImport(
 					visibilityMethod: row.visibility_method,
 					verified: row.verified,
 					inputHash: row.raw_source_hash,
-					provenance: {
-						source_entry_id: row.source_entry_id,
-						observer: row.observer,
-						location: row.location,
-						observed_at: row.observed_at,
-						fetched_at: row.fetched_at,
-						source_revision: row.source_revision,
-					},
+					provenance: merged,
 					updatedAt: new Date(),
 				};
-				let observationId: string;
-				if (found[0]) {
+				if (current) {
 					await tx
 						.update(newMoonObservations)
 						.set(values)
-						.where(eq(newMoonObservations.id, found[0].id));
-					observationId = found[0].id;
+						.where(eq(newMoonObservations.id, current.id));
 				} else {
-					const created = await tx
-						.insert(newMoonObservations)
-						.values({ sourceId: row.id, ...values })
-						.returning({ id: newMoonObservations.id });
-					const createdRow = created[0];
-					if (!createdRow) throw new Error("Observation insert failed");
-					observationId = createdRow.id;
-				}
-				const confirmable = automaticallyConfirmable({
-					source: values.source,
-					country: values.country,
-					visibilityMethod: values.visibilityMethod,
-					verified: values.verified,
-				});
-				const existingConfirmation = await tx
-					.select({ id: monthConfirmations.id })
-					.from(monthConfirmations)
-					.where(eq(monthConfirmations.newMoonObservationId, observationId))
-					.limit(1);
-				if (confirmable) {
-					if (existingConfirmation[0]) {
-						await tx
-							.update(monthConfirmations)
-							.set({ startsOnEvening: values.observedOn })
-							.where(eq(monthConfirmations.id, existingConfirmation[0].id));
-					} else {
-						await tx.insert(monthConfirmations).values({
-							newMoonObservationId: observationId,
-							startsOnEvening: values.observedOn,
-						});
-					}
-					report.confirmations += 1;
-				} else if (existingConfirmation[0]) {
-					await tx
-						.delete(monthConfirmations)
-						.where(eq(monthConfirmations.id, existingConfirmation[0].id));
+					await tx.insert(newMoonObservations).values({ sourceId: row.id, ...values });
 				}
 				report.observations += 1;
 			}
+			report.confirmations = await rebuildConfirmations(tx);
 			if (dryRun) throw new Rollback();
 		});
 	} catch (error) {

@@ -280,6 +280,41 @@ export const monthConfirmations = pgTable("month_confirmations", {
 	updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
+export const calendarFeedStates = pgTable("calendar_feed_states", {
+	id: uuid("id").primaryKey().defaultRandom(),
+	source: text("source").notNull().unique(),
+	status: text("status").notNull().default("pending"),
+	developmentScenario: text("development_scenario").notNull().default("pending"),
+	lastAttemptAt: timestamp("last_attempt_at", { withTimezone: true }),
+	lastSuccessAt: timestamp("last_success_at", { withTimezone: true }),
+	syncAttempts: integer("sync_attempts").notNull().default(0),
+	details: jsonb("details").$type<Record<string, unknown>>().notNull().default({}),
+	createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+	updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const calendarSourceEntries = pgTable(
+	"calendar_source_entries",
+	{
+		id: uuid("id").primaryKey().defaultRandom(),
+		source: text("source").notNull(),
+		sourceEntryId: text("source_entry_id").notNull(),
+		sourceUrl: text("source_url").notNull(),
+		title: text("title"),
+		contentHash: text("content_hash").notNull(),
+		rawContent: text("raw_content"),
+		parseStatus: text("parse_status").notNull().default("pending"),
+		reason: text("reason"),
+		lastSeenAt: timestamp("last_seen_at", { withTimezone: true }),
+		lastParsedAt: timestamp("last_parsed_at", { withTimezone: true }),
+		createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+		updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+	},
+	(table) => [
+		uniqueIndex("calendar_source_entries_source_entry_idx").on(table.source, table.sourceEntryId),
+	],
+);
+
 export const rateLimits = pgTable(
 	"rate_limits",
 	{

@@ -9,7 +9,7 @@ import {
 } from "../src/services/imports.js";
 import { recoverConsultations } from "../src/services/recover.js";
 import { deliverTelegramNotifications } from "../src/services/notify.js";
-import { syncCalendarObservations } from "../src/services/calendarSync.js";
+import { syncObservations } from "../src/services/sync.js";
 import { resolveAccount, subjectDigest } from "../src/services/accounts.js";
 import { conversations, identities, messages, newMoonObservations, notifications, users } from "../src/db/schema.js";
 import { enc } from "../src/services/fields.js";
@@ -221,12 +221,12 @@ describe("jobs", () => {
 		expect(rows[0]?.deliveredAt).not.toBe(null);
 	});
 
-	test("calendar sync never invents provenance", async () => {
-		const idle = await syncCalendarObservations(testDb().db, {});
-		expect(idle).toEqual({ synced: 0, confirmations: 0, status: "not_configured" });
-		const dry = await syncCalendarObservations(testDb().db, {
-			payload: { schema_version: 1, observations: [] },
-		});
-		expect(dry.status).toBe("dry_run");
+	test("observation sync reports malformed feeds without importing", async () => {
+		const report = await syncObservations(testDb().db, { rssXml: "<rss></rss>" });
+		expect(report).toMatchObject({ status: "source_unavailable", error: "calendar_feed_malformed" });
+		const count = await testDb().db.execute(
+			sql`SELECT count(*)::int AS count FROM new_moon_observations`,
+		);
+		expect((count[0] as { count: number }).count).toBe(0);
 	});
 });

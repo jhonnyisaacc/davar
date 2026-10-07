@@ -42,6 +42,8 @@ const TABLES = [
 	"articles",
 	"month_confirmations",
 	"new_moon_observations",
+	"calendar_source_entries",
+	"calendar_feed_states",
 	"access_codes",
 	"users",
 ];
@@ -162,4 +164,32 @@ export async function json<T>(response: Response): Promise<{ status: number; bod
 
 export function cacheControl(response: Response): string | null {
 	return response.headers.get("Cache-Control");
+}
+
+export async function seedFeedState(
+	status: string = "ok",
+	lastSuccessAt: Date | null = new Date(),
+): Promise<void> {
+	const { calendarFeedStates } = await import("../src/db/schema.js");
+	const { FEED_SOURCE } = await import("../src/services/feedState.js");
+	const db = testDb().db;
+	const { eq } = await import("drizzle-orm");
+	const existing = await db
+		.select({ id: calendarFeedStates.id })
+		.from(calendarFeedStates)
+		.where(eq(calendarFeedStates.source, FEED_SOURCE))
+		.limit(1);
+	if (existing[0]) {
+		await db
+			.update(calendarFeedStates)
+			.set({ status, lastAttemptAt: new Date(), lastSuccessAt, updatedAt: new Date() })
+			.where(eq(calendarFeedStates.id, existing[0].id));
+	} else {
+		await db.insert(calendarFeedStates).values({
+			source: FEED_SOURCE,
+			status,
+			lastAttemptAt: new Date(),
+			lastSuccessAt,
+		});
+	}
 }
