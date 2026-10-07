@@ -26,3 +26,13 @@ No gate, test, or baseline was loosened. The earlier boundary failure (run 37611
 Accept a readonly book list on the navigation bar instead of dropping `as const` on the test fixture. Dropping `as const` would widen the other literal props (`activeDestination`, `theme`, `language`) and fail the same typecheck for a different reason.
 
 No pin files, ratchet baselines, CI workflows, or public API routes changed.
+
+## 4d. Fold mobile components
+
+Draft PR [#257](https://github.com/jhonnyisaacc/davar/pull/257) (`cursor/fold-mobile-components-3cf2` into `cursor/fix-web-typecheck-86fd`, stacked on #255). Not merged. Does not target `main`.
+
+`mobile/components/**` now lives in `mobile/src/components/` (`themed-view`, `themed-text`, `parallax-scroll-view`, `external-link`, `haptic-tab`, `ui/`). `mobile/app/(tabs)/explore.tsx` imports those paths. The explore route stays. Screen copy is unchanged.
+
+Verify: `cd mobile && bun run typecheck && bun test`. Typecheck passed. 82 tests passed, 0 failed.
+
+Tier B: keep the kebab-case filenames and the `ui/` layout. Callers use `@/src/components/...`. `HapticTab` has no callers; it moves with the tree and is not deleted. No new behavior, dependencies, comments, or pin edits.
