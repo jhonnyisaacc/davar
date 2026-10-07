@@ -35,10 +35,15 @@ const UUID_PATTERN =
 	/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
 // Rails casts malformed ids to nil and raises RecordNotFound, so every uuid
-// route param that fails validation answers 404 instead of leaking a
-// database syntax error as a 500.
-export function uuidParam(c: Context, key: string): string {
-	const value = c.req.param()[key] ?? "";
-	if (!UUID_PATTERN.test(value)) throw new DomainError("not_found", 404);
+// that fails validation answers 404 instead of leaking a database syntax
+// error as a 500 — route params and body ids alike.
+export function uuidValue(value: unknown): string {
+	if (typeof value !== "string" || !UUID_PATTERN.test(value)) {
+		throw new DomainError("not_found", 404);
+	}
 	return value;
+}
+
+export function uuidParam(c: Context, key: string): string {
+	return uuidValue(c.req.param()[key] ?? "");
 }

@@ -7,7 +7,7 @@ import { decryptionKeys } from "../../lib/config.js";
 import { dec, decJson } from "../../services/fields.js";
 import { completedOnboarding } from "../../services/profiles.js";
 import { requireAssemblyAccess } from "../auth.js";
-import { parseBody, uuidParam } from "../validation.js";
+import { parseBody, uuidParam, uuidValue } from "../validation.js";
 import type { AppVariables } from "../deps.js";
 
 const createSchema = z.object({
@@ -55,7 +55,11 @@ endorsementRoutes.post("/endorsements", async (c) => {
 		throw new DomainError("onboarding_required", 403);
 	}
 	const body = parseBody(createSchema, await c.req.json().catch(() => ({})));
-	const leader = await db.select().from(users).where(eq(users.id, body.leader_id)).limit(1);
+	const leader = await db
+		.select()
+		.from(users)
+		.where(eq(users.id, uuidValue(body.leader_id)))
+		.limit(1);
 	const endorser = leader[0];
 	if (!endorser) throw new DomainError("not_found", 404);
 	if (!endorser.leaderVerified || endorser.id === user.id) {

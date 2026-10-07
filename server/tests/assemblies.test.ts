@@ -428,6 +428,22 @@ describe("assembly lifecycle", () => {
 });
 
 describe("endorsements", () => {
+	test("malformed endorser ids answer 404 like route params", async () => {
+		const { app } = makeTestContext();
+		const applicant = await createUser({
+			profile: { ...READER_PROFILE, experience: "leader" },
+		});
+		await identify(applicant, `endorser-abc-${applicant}`);
+		const headers = await authHeaders(applicant);
+		const res = await app.request("/api/v1/endorsements", {
+			method: "POST",
+			headers,
+			body: JSON.stringify({ leader_id: "abc" }),
+		});
+		expect(res.status).toBe(404);
+		expect(await res.json()).toEqual({ error: { code: "not_found" } });
+	});
+
 	test("two acceptances verify the applicant and declines need support", async () => {
 		const { app } = makeTestContext();
 		const applicant = await createUser({
