@@ -6,7 +6,7 @@ import { DomainError } from "../../lib/errors.js";
 import { dec, decJson } from "../../services/fields.js";
 import { completedOnboarding } from "../../services/profiles.js";
 import { requireAssemblyAccess } from "../auth.js";
-import { parseBody } from "../validation.js";
+import { parseBody, uuidParam } from "../validation.js";
 import type { AppVariables } from "../deps.js";
 
 const createSchema = z.object({
@@ -102,6 +102,7 @@ endorsementRoutes.patch("/endorsements/:id", async (c) => {
 		c.get("deps").env,
 		c.get("deps").flags,
 	);
+	const id = uuidParam(c, "id");
 	const body = parseBody(updateSchema, await c.req.json().catch(() => ({})));
 	if (body.state !== "accepted" && body.state !== "declined") {
 		throw new DomainError("invalid_decision");
@@ -110,7 +111,7 @@ endorsementRoutes.patch("/endorsements/:id", async (c) => {
 		const found = await tx
 			.select()
 			.from(endorsements)
-			.where(and(eq(endorsements.id, c.req.param("id")), eq(endorsements.leaderId, user.id)))
+			.where(and(eq(endorsements.id, id), eq(endorsements.leaderId, user.id)))
 			.limit(1);
 		const endorsement = found[0];
 		if (!endorsement) throw new DomainError("not_found", 404);

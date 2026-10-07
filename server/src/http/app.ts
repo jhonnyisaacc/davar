@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { DomainError, errorBody } from "../lib/errors.js";
-import { isUniqueViolation } from "../lib/pgErrors.js";
+import { isUniqueViolation, pgErrorCode } from "../lib/pgErrors.js";
 import { ValidationError } from "./validation.js";
 import type { AppDeps, AppVariables } from "./deps.js";
 import { accountRoutes } from "./routes/account.js";
@@ -72,7 +72,17 @@ export function createApp(deps: AppDeps): Hono<{ Variables: AppVariables }> {
 		if (isUniqueViolation(error)) {
 			return c.json({ error: { code: "conflict" } }, 409);
 		}
-		console.error(`Unhandled request error: ${(error as Error).message}`);
+		// Never log error messages or params: drizzle failures embed bound
+		// values (tokens, emails, ciphertext) in both.
+		console.error(
+			JSON.stringify({
+				event: "request_error",
+				name: (error as Error)?.name ?? "Error",
+				pg_code: pgErrorCode(error),
+				method: c.req.method,
+				route: c.req.routePath,
+			}),
+		);
 		return c.json({ error: { code: "internal_error" } }, 500);
 	});
 

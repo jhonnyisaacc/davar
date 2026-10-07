@@ -1,3 +1,4 @@
+import type { Context } from "hono";
 import { z } from "zod";
 import { DomainError } from "../lib/errors.js";
 
@@ -29,3 +30,15 @@ export const optionalJson = (value: unknown): Record<string, unknown> =>
 	typeof value === "object" && value !== null
 		? (value as Record<string, unknown>)
 		: {};
+
+const UUID_PATTERN =
+	/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+// Rails casts malformed ids to nil and raises RecordNotFound, so every uuid
+// route param that fails validation answers 404 instead of leaking a
+// database syntax error as a 500.
+export function uuidParam(c: Context, key: string): string {
+	const value = c.req.param()[key] ?? "";
+	if (!UUID_PATTERN.test(value)) throw new DomainError("not_found", 404);
+	return value;
+}

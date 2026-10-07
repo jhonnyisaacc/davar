@@ -8,7 +8,7 @@ import { productCapabilities } from "../../services/capabilities.js";
 import { requireFlag } from "../../services/flags.js";
 import { availableProviders } from "../../services/provider.js";
 import { requireUser } from "../auth.js";
-import { parseBody } from "../validation.js";
+import { parseBody, uuidParam } from "../validation.js";
 import type { AppVariables } from "../deps.js";
 
 const createSchema = z.object({
@@ -117,7 +117,7 @@ providerConnectionRoutes.delete("/provider_connections/:id", async (c) => {
 		.from(providerConnections)
 		.where(
 			and(
-				eq(providerConnections.id, c.req.param("id")),
+				eq(providerConnections.id, uuidParam(c, "id")),
 				eq(providerConnections.userId, user.id),
 			),
 		)

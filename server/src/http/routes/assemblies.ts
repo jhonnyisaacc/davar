@@ -14,7 +14,7 @@ import { canCreateAssembly } from "../../services/policy.js";
 import { decideMembership, requestMembership } from "../../services/memberships.js";
 import { checkRateLimit } from "../../services/rateLimit.js";
 import { inviteGateEnabled, requireAssemblyAccess } from "../auth.js";
-import { parseBody, ValidationError } from "../validation.js";
+import { parseBody, uuidParam, ValidationError } from "../validation.js";
 import type { AppVariables } from "../deps.js";
 import type { DatabaseOrTx } from "../../db/client.js";
 import type { ServerConfig } from "../../lib/config.js";
@@ -339,7 +339,7 @@ assemblyRoutes.get("/assemblies/:id", async (c) => {
 	const rows = await db
 		.select()
 		.from(assemblies)
-		.where(eq(assemblies.id, c.req.param("id")))
+		.where(eq(assemblies.id, uuidParam(c, "id")))
 		.limit(1);
 	const assembly = rows[0];
 	if (!assembly) throw new DomainError("not_found", 404);
@@ -352,7 +352,7 @@ assemblyRoutes.patch("/assemblies/:id", async (c) => {
 	if (!completedOnboarding(user.profile)) {
 		throw new DomainError("onboarding_required", 403);
 	}
-	const assembly = await managedAssembly(db, c.req.param("id"), user.id);
+	const assembly = await managedAssembly(db, uuidParam(c, "id"), user.id);
 	const body = parseBody(updateSchema, await c.req.json().catch(() => ({})));
 	const update: { name?: string; meetingUrl?: string | null } = {};
 	if (body.name !== undefined) update.name = body.name;
@@ -381,7 +381,7 @@ assemblyRoutes.post("/assemblies/:id/join", async (c) => {
 	const target = await db
 		.select({ id: assemblies.id })
 		.from(assemblies)
-		.where(eq(assemblies.id, c.req.param("id")))
+		.where(eq(assemblies.id, uuidParam(c, "id")))
 		.limit(1);
 	if (!target[0]) throw new DomainError("not_found", 404);
 	return c.json(
@@ -402,7 +402,7 @@ assemblyRoutes.delete("/assemblies/:id/leave", async (c) => {
 	const rows = await db
 		.select()
 		.from(assemblies)
-		.where(eq(assemblies.id, c.req.param("id")))
+		.where(eq(assemblies.id, uuidParam(c, "id")))
 		.limit(1);
 	const assembly = rows[0];
 	if (!assembly) throw new DomainError("not_found", 404);
@@ -426,7 +426,7 @@ assemblyRoutes.get("/assemblies/:id/members", async (c) => {
 	if (!completedOnboarding(user.profile)) {
 		throw new DomainError("onboarding_required", 403);
 	}
-	const assembly = await managedAssembly(db, c.req.param("id"), user.id);
+	const assembly = await managedAssembly(db, uuidParam(c, "id"), user.id);
 	const rows = await db
 		.select()
 		.from(memberships)
@@ -463,13 +463,13 @@ assemblyRoutes.post("/assemblies/:id/memberships/:membership_id/decision", async
 	if (!completedOnboarding(user.profile)) {
 		throw new DomainError("onboarding_required", 403);
 	}
-	const assembly = await managedAssembly(db, c.req.param("id"), user.id);
+	const assembly = await managedAssembly(db, uuidParam(c, "id"), user.id);
 	const found = await db
 		.select({ id: memberships.id })
 		.from(memberships)
 		.where(
 			and(
-				eq(memberships.id, c.req.param("membership_id")),
+				eq(memberships.id, uuidParam(c, "membership_id")),
 				eq(memberships.assemblyId, assembly.id),
 			),
 		)

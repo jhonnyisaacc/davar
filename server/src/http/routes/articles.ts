@@ -3,6 +3,7 @@ import { and, eq, sql } from "drizzle-orm";
 import { articles } from "../../db/schema.js";
 import { DomainError } from "../../lib/errors.js";
 import { dec } from "../../services/fields.js";
+import { uuidParam } from "../validation.js";
 import type { DatabaseOrTx } from "../../db/client.js";
 import type { AppVariables } from "../deps.js";
 
@@ -109,12 +110,13 @@ articleRoutes.get("/articles", async (c) => {
 
 articleRoutes.get("/articles/:id", async (c) => {
 	const { db, config } = c.get("deps");
-	const id = c.req.param("id");
-	if (id.startsWith("source_")) {
+	const raw = c.req.param("id");
+	if (raw.startsWith("source_")) {
 		// Corpus-backed synthetic records are unavailable without the
 		// private commentary data; unknown corpus ids are not found.
 		throw new DomainError("not_found", 404);
 	}
+	const id = uuidParam(c, "id");
 	const rows = await db
 		.select()
 		.from(articles)

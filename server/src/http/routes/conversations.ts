@@ -8,7 +8,7 @@ import { askCommentary, type AnswerShape } from "../../services/commentary.js";
 import { checkRateLimit } from "../../services/rateLimit.js";
 import { productCapabilities } from "../../services/capabilities.js";
 import { requireUser } from "../auth.js";
-import { parseBody } from "../validation.js";
+import { parseBody, uuidParam } from "../validation.js";
 import type { AppVariables } from "../deps.js";
 import type { DatabaseOrTx } from "../../db/client.js";
 
@@ -99,7 +99,7 @@ async function ownedConversation(
 conversationRoutes.get("/conversations/:id", async (c) => {
 	const { db, config } = c.get("deps");
 	const user = await requireUser(db, config, c);
-	const conversation = await ownedConversation(db, c.req.param("id"), user.id);
+	const conversation = await ownedConversation(db, uuidParam(c, "id"), user.id);
 	const rows = await db
 		.select()
 		.from(messages)
@@ -130,7 +130,7 @@ conversationRoutes.post("/conversations/:id/messages", async (c) => {
 	const { db, config, env, generator } = c.get("deps");
 	const user = await requireUser(db, config, c);
 	await checkRateLimit(db, `chat/${user.id}`, 10);
-	const conversation = await ownedConversation(db, c.req.param("id"), user.id);
+	const conversation = await ownedConversation(db, uuidParam(c, "id"), user.id);
 	const body = parseBody(messageSchema, await c.req.json().catch(() => ({})));
 	const answer = await askCommentary(
 		db,
@@ -151,7 +151,7 @@ conversationRoutes.post("/conversations/:id/messages", async (c) => {
 conversationRoutes.delete("/conversations/:id/memory", async (c) => {
 	const { db, config } = c.get("deps");
 	const user = await requireUser(db, config, c);
-	const conversation = await ownedConversation(db, c.req.param("id"), user.id);
+	const conversation = await ownedConversation(db, uuidParam(c, "id"), user.id);
 	await db
 		.update(conversations)
 		.set({ memory: null, updatedAt: new Date() })
@@ -162,7 +162,7 @@ conversationRoutes.delete("/conversations/:id/memory", async (c) => {
 conversationRoutes.delete("/conversations/:id", async (c) => {
 	const { db, config } = c.get("deps");
 	const user = await requireUser(db, config, c);
-	const conversation = await ownedConversation(db, c.req.param("id"), user.id);
+	const conversation = await ownedConversation(db, uuidParam(c, "id"), user.id);
 	await db.transaction(async (tx) => {
 		await tx.execute(sql`SELECT id FROM conversations WHERE id = ${conversation.id} FOR UPDATE`);
 		const busy = await tx
