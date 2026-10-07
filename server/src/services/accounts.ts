@@ -1,16 +1,10 @@
-import { and, eq } from "drizzle-orm";
-import type { DatabaseOrTx } from "../db/client.js";
+import { and, eq, sql } from "drizzle-orm";
+import { withSavepoint, type DatabaseOrTx } from "../db/client.js";
 import { identities, users } from "../db/schema.js";
 import { derivedHmacHex } from "../lib/codec.js";
 import { DomainError } from "../lib/errors.js";
+import { isUniqueViolation } from "../lib/pgErrors.js";
 import { enc } from "./fields.js";
-
-export function isUniqueViolation(error: unknown): boolean {
-	const code = (error as { code?: unknown }).code;
-	if (code === "23505") return true;
-	const message = (error as { message?: unknown }).message;
-	return typeof message === "string" && message.includes("duplicate key value");
-}
 
 export async function subjectDigest(
 	subject: string,
@@ -36,6 +30,15 @@ export async function resolveAccount(
 	}
 	if (!input.subject) throw new DomainError("invalid_subject");
 	const digest = await subjectDigest(input.subject, input.deterministicKey);
+	if (input.linkingUserId) {
+		// Mirrors Rails' linking_user&.lock!: serialize linkers on the user.
+		const locked = await db.execute(
+			sql`SELECT id FROM users WHERE id = ${input.linkingUserId} FOR UPDATE`,
+		);
+		if (!locked[0]) throw new DomainError("not_found", 404);
+	}
+	// Rails retries a lost insert-or-find race indefinitely; three bounded
+	// attempts are enough in practice and cannot spin forever.
 	for (let attempt = 0; attempt < 3; attempt++) {
 		const found = await db
 			.select()
@@ -50,23 +53,25 @@ export async function resolveAccount(
 			return { id: identity.userId };
 		}
 		try {
-			let userId = input.linkingUserId ?? null;
-			if (!userId) {
-				const created = await db
-					.insert(users)
-					.values({ displayName: await enc("Reader", input.primaryKey) })
-					.returning({ id: users.id });
-				const row = created[0];
-				if (!row) throw new Error("User insert failed");
-				userId = row.id;
-			}
-			await db.insert(identities).values({
-				userId,
-				provider: input.provider,
-				subject: await enc(input.subject, input.primaryKey),
-				subjectDigest: digest,
+			return await withSavepoint(db, async (sp) => {
+				let userId = input.linkingUserId ?? null;
+				if (!userId) {
+					const created = await sp
+						.insert(users)
+						.values({ displayName: await enc("Reader", input.primaryKey) })
+						.returning({ id: users.id });
+					const row = created[0];
+					if (!row) throw new Error("User insert failed");
+					userId = row.id;
+				}
+				await sp.insert(identities).values({
+					userId,
+					provider: input.provider,
+					subject: await enc(input.subject, input.primaryKey),
+					subjectDigest: digest,
+				});
+				return { id: userId };
 			});
-			return { id: userId };
 		} catch (error) {
 			if (!isUniqueViolation(error)) throw error;
 			if (input.linkingUserId) throw new DomainError("identity_already_linked", 409);

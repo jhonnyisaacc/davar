@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 import type { DatabaseOrTx } from "../db/client.js";
 import { calendarFeedStates } from "../db/schema.js";
-import { isUniqueViolation } from "./accounts.js";
+import { isUniqueViolation } from "../lib/pgErrors.js";
 
 export const FEED_SOURCE = "israeli_new_moon_society";
 export const FEED_URL = "https://moonsocil.blogspot.com/";

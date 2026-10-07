@@ -321,7 +321,7 @@ assemblyRoutes.post("/assemblies", async (c) => {
 		try {
 			await tx.insert(memberships).values({ userId: user.id, assemblyId: assembly.id, state: "member" });
 		} catch (error) {
-			const { isUniqueViolation } = await import("../../services/accounts.js");
+			const { isUniqueViolation } = await import("../../lib/pgErrors.js");
 			if (isUniqueViolation(error)) throw new DomainError("already_member_elsewhere", 409);
 			throw error;
 		}

@@ -153,6 +153,45 @@ describe("email magic link state machine", () => {
 		);
 	});
 
+	test("parallel first sign-ins for one email resolve to one user", async () => {
+		const { app, outbox } = makeTestContext();
+		const { testDb } = await import("./helper.js");
+		const { handoffs, sessions, users } = await import("../src/db/schema.js");
+		const before = await testDb().db.select({ id: users.id }).from(users);
+		const states: string[] = [];
+		for (let i = 0; i < 4; i++) {
+			const start = await app.request("/api/v1/auth/email/start", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ return_uri: "davar://auth/callback", email: "race@example.test" }),
+			});
+			expect(start.status).toBe(200);
+			const url =
+				outbox[i]?.body.split(/\s/).find((word) => word.startsWith("http")) ?? "";
+			states.push(new URL(url).searchParams.get("state") ?? "");
+		}
+		const callbacks = await Promise.all(
+			states.map((state) =>
+				app.request(`/api/v1/auth/email/callback?state=${encodeURIComponent(state)}`, {
+					redirect: "manual",
+				}),
+			),
+		);
+		for (const callback of callbacks) {
+			expect(callback.status).toBe(302);
+		}
+		const after = await testDb().db.select({ id: users.id }).from(users);
+		expect(after.length - before.length).toBe(1);
+		const locations = callbacks.map((callback) => callback.headers.get("Location") ?? "");
+		const codes = locations.map(
+			(location) =>
+				new URL(location.replace("davar://", "http://x/")).searchParams.get("code") ?? "",
+		);
+		expect(new Set(codes).size).toBe(4);
+		expect(await testDb().db.select({ id: handoffs.id }).from(handoffs)).toHaveLength(4);
+		expect(await testDb().db.select({ id: sessions.id }).from(sessions)).toHaveLength(4);
+	});
+
 	test("blank handoff and denied providers fail closed", async () => {
 		const { app } = makeTestContext();
 		const blank = await app.request("/api/v1/auth/exchange", {

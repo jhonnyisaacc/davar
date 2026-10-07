@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { DomainError, errorBody } from "../lib/errors.js";
+import { isUniqueViolation } from "../lib/pgErrors.js";
 import { ValidationError } from "./validation.js";
 import type { AppDeps, AppVariables } from "./deps.js";
 import { accountRoutes } from "./routes/account.js";
@@ -66,6 +67,10 @@ export function createApp(deps: AppDeps): Hono<{ Variables: AppVariables }> {
 		}
 		if (error instanceof DomainError) {
 			return c.json(errorBody(error), error.status as 400 | 401 | 402 | 403 | 404 | 409 | 422 | 429 | 500 | 503);
+		}
+		// Rails maps any ActiveRecord::RecordNotUnique to 409 conflict.
+		if (isUniqueViolation(error)) {
+			return c.json({ error: { code: "conflict" } }, 409);
 		}
 		console.error(`Unhandled request error: ${(error as Error).message}`);
 		return c.json({ error: { code: "internal_error" } }, 500);
