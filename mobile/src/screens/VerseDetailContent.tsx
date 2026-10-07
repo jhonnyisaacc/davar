@@ -47,7 +47,7 @@ import {
   getVerseSwipeDirection,
   VERSE_SCROLL_EDGE_EPSILON as EDGE_EPSILON,
 } from "@/src/services/versePaging";
-import { WordAnalysisBottomSheet } from "@/src/components/WordAnalysisBottomSheet";
+import { WordAnalysisBottomSheet } from "@/src/features/reader/WordAnalysisBottomSheet";
 import {
   NavigationSheet,
   type NavigationSheetMethods,
