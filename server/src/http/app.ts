@@ -1,0 +1,60 @@
+import { Hono } from "hono";
+import { DomainError, errorBody } from "../lib/errors.js";
+import { ValidationError } from "./validation.js";
+import type { AppDeps, AppVariables } from "./deps.js";
+import { accountRoutes } from "./routes/account.js";
+import { articleRoutes } from "./routes/articles.js";
+import { assemblyRoutes } from "./routes/assemblies.js";
+import { authRoutes } from "./routes/auth.js";
+import { calendarRoutes } from "./routes/calendar.js";
+import { conversationRoutes } from "./routes/conversations.js";
+import { developmentRoutes } from "./routes/development.js";
+import { endorsementRoutes } from "./routes/endorsements.js";
+import { providerConnectionRoutes } from "./routes/providerConnections.js";
+
+export function createApp(deps: AppDeps): Hono<{ Variables: AppVariables }> {
+	const app = new Hono<{ Variables: AppVariables }>();
+
+	app.use(async (c, next) => {
+		c.set("deps", deps);
+		await next();
+	});
+
+	app.get("/up", (c) => c.json({ status: "ok" }));
+
+	app.route("/", developmentRoutes);
+
+	const v1 = new Hono<{ Variables: AppVariables }>();
+	v1.use(async (c, next) => {
+		await next();
+		c.header("Cache-Control", "no-store");
+	});
+	v1.route("/auth", authRoutes);
+	v1.route("/", accountRoutes);
+	v1.route("/", assemblyRoutes);
+	v1.route("/", endorsementRoutes);
+	v1.route("/", articleRoutes);
+	v1.route("/", conversationRoutes);
+	v1.route("/", providerConnectionRoutes);
+	v1.route("/", calendarRoutes);
+
+	app.route("/api/v1", v1);
+
+	app.notFound((c) => c.json({ error: { code: "not_found" } }, 404));
+
+	app.onError((error, c) => {
+		if (error instanceof ValidationError) {
+			return c.json(
+				{ error: { code: error.code, details: error.details } },
+				error.status as 422,
+			);
+		}
+		if (error instanceof DomainError) {
+			return c.json(errorBody(error), error.status as 400 | 401 | 402 | 403 | 404 | 409 | 422 | 429 | 500 | 503);
+		}
+		console.error(`Unhandled request error: ${(error as Error).message}`);
+		return c.json({ error: { code: "internal_error" } }, 500);
+	});
+
+	return app;
+}

@@ -59,6 +59,21 @@ Run the Python suite from the repository root:
 PYTHONPATH=. python -m pytest -q tests tools/bani/tests
 ```
 
+### 4) API server (Bun + Hono)
+
+Byte-compatible port of the Davar v2 product API (`server/`). Clients keep
+calling the same `/api/v1` paths on `http://127.0.0.1:3000`:
+
+```bash
+cd server
+bun install
+bun run db:migrate
+bun run dev
+```
+
+See `server/README.md` for env vars, the dev sandbox, jobs, and how it maps
+to the Rails app in PR #250.
+
 Web checks from `.github/workflows/web-ci.yml`:
 
 ```bash

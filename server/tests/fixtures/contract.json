@@ -1,0 +1,37 @@
+{
+	"account_keys": [
+		"admitted",
+		"consultations_remaining",
+		"contact_visible",
+		"discoverable",
+		"display_name",
+		"id",
+		"leader_verified",
+		"onboarding_complete",
+		"profile",
+		"providers",
+		"settings",
+		"settings_version"
+	],
+	"assembly_keys": [
+		"can_manage",
+		"city",
+		"distance_km",
+		"id",
+		"kind",
+		"meeting_url",
+		"member_state",
+		"name"
+	],
+	"message_keys": ["citations", "content", "generation", "id", "role", "state"],
+	"calendar_day_keys": [
+		"biblical",
+		"civil_date",
+		"confirmation_id",
+		"events",
+		"month_status",
+		"rabbinic",
+		"year_start_status"
+	],
+	"providers": ["google", "apple", "facebook", "telegram", "x", "email"]
+}

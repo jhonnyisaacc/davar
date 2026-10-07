@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"lib": ["ESNext"],
+		"types": ["bun"],
+		"strict": true,
+		"skipLibCheck": true,
+		"noEmit": true,
+		"noUncheckedIndexedAccess": true,
+		"exactOptionalPropertyTypes": false,
+		"outDir": "dist",
+		"rootDir": "."
+	},
+	"include": ["src/**/*", "tests/**/*"]
+}
