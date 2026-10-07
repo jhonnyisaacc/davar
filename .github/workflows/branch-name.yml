@@ -1,0 +1,33 @@
+name: Branch name
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  branch-name:
+    name: branch-name
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check head branch
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          if [ -z "${HEAD_REF}" ]; then
+            echo "Head branch is empty." >&2
+            exit 1
+          fi
+          # Remove this exemption after cursor/davar-repo-review-e47f and cursor/fix-web-typecheck-86fd merge.
+          case "${HEAD_REF}" in
+            cursor/davar-repo-review-e47f|cursor/fix-web-typecheck-86fd)
+              exit 0
+              ;;
+          esac
+          pattern='^(feat|fix|hotfix|chore|docs|refactor|test|release)/[a-z0-9][a-z0-9-]*$'
+          if printf '%s\n' "${HEAD_REF}" | grep -Eq "${pattern}"; then
+            exit 0
+          fi
+          echo "Head branch '${HEAD_REF}' does not match ${pattern}." >&2
+          exit 1
