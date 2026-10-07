@@ -1,13 +1,28 @@
-import { Fragment, useCallback, useMemo, type ReactNode } from "react";
-import { Alert, ScrollView, StyleSheet, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Fragment, useMemo, type ReactNode } from "react";
+import { router } from "expo-router";
+import { useShallow } from "zustand/react/shallow";
+import { ChevronLeft, ChevronRight } from "lucide-react-native";
+import {
+  Alert,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import {
+  SafeAreaView,
+  useSafeAreaInsets,
+} from "react-native-safe-area-context";
 
-import { AppIcon } from "@/src/components/ui/AppIcon";
+import { SettingsResources } from "@/src/components/SettingsResources";
 import { PillToggle } from "@/src/components/ui/PillToggle";
-import { OnOffButton } from "@/src/components/ui/OnOffButton";
 import { SettingsDropdown } from "@/src/components/ui/SettingsDropdown";
-import { getColors, radii, spacing, typography } from "@/src/theme";
-import { useAppStore, type AppState } from "@/src/store/useAppStore";
+import { getNavigationDockContentPadding } from "@/src/constants/navigationDock";
+import { useSession } from "@/src/features/account/session";
+import { useCalendar } from "@/src/features/calendar/useCalendar";
+import { getColors, spacing, typography } from "@/src/theme";
+import { useAppStore } from "@/src/store/useAppStore";
 import { clearStorage } from "@/src/services/storage";
 import { useTranslation } from "@/src/i18n/useTranslation";
 import { isGreekBesorahEnabled } from "@davar/shared/greekBesorah";
@@ -18,173 +33,114 @@ import {
   type SharedSettingId,
 } from "@davar/shared/settingsOrder";
 
-const createStyles = (colors: ReturnType<typeof getColors>, isRTL: boolean) =>
+const createStyles = (
+  colors: ReturnType<typeof getColors>,
+  isRTL: boolean,
+  dark: boolean,
+) =>
   StyleSheet.create({
     safeArea: {
       flex: 1,
       backgroundColor: colors.background,
     },
     container: {
-      paddingHorizontal: spacing[6],
-      paddingTop: spacing[4],
-      paddingBottom: spacing[8],
-    },
-    header: {
-      alignItems: "center",
-      marginBottom: spacing[5],
+      paddingHorizontal: spacing[5],
+      paddingTop: spacing[5],
+      gap: spacing[1],
     },
     title: {
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.h2,
-      fontWeight: typography.weights.semibold,
+      fontFamily: "Manrope_400Regular",
+      fontSize: 32,
       color: colors.textPrimary,
       textAlign: isRTL ? "right" : "left",
       writingDirection: isRTL ? "rtl" : "ltr",
-    },
-    sectionTitle: {
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.bodySmall,
-      color: colors.textSecondary,
-      textTransform: "uppercase",
-      letterSpacing: 1.5,
-      marginBottom: spacing[3],
-      textAlign: isRTL ? "right" : "left",
-      writingDirection: isRTL ? "rtl" : "ltr",
-    },
-    divider: {
-      height: StyleSheet.hairlineWidth,
-      backgroundColor: colors.border,
-      marginVertical: spacing[3],
     },
     row: {
-      flexDirection: "row",
+      flexDirection: isRTL ? "row-reverse" : "row",
       alignItems: "center",
       justifyContent: "space-between",
-      paddingVertical: spacing[2],
-    },
-    rowContent: {
-      flexDirection: "row",
-      alignItems: "center",
-      flex: 1,
-    },
-    iconContainer: {
-      width: 36,
-      height: 36,
-      borderRadius: radii.md,
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: colors.surface,
-      borderWidth: 1,
-      borderColor: colors.border,
-      marginRight: spacing[3],
-    },
-    textContainer: {
-      flex: 1,
+      minHeight: 50,
+      paddingVertical: 10,
+      gap: spacing[3],
     },
     label: {
+      flex: 1,
       fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.body,
-      fontWeight: typography.weights.medium,
+      fontSize: 15,
       color: colors.textPrimary,
       textAlign: isRTL ? "right" : "left",
       writingDirection: isRTL ? "rtl" : "ltr",
     },
-    labelRow: {
-      flexDirection: "row",
+    accountAction: {
+      flexDirection: isRTL ? "row-reverse" : "row",
       alignItems: "center",
-      gap: spacing[2],
+      gap: spacing[1],
+      maxWidth: "60%",
     },
-    newBadge: {
-      borderRadius: 999,
-      backgroundColor: colors.accentCopper,
-      paddingHorizontal: spacing[2],
-      paddingVertical: 2,
-    },
-    newBadgeText: {
-      fontFamily: typography.families.latinUI,
-      fontSize: 10,
-      lineHeight: 12,
-      fontWeight: typography.weights.semibold,
-      color: "#FFFFFF",
-      textTransform: "uppercase",
-    },
-    subtitle: {
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.bodySmall,
-      color: colors.textSecondary,
-      marginTop: 1,
+    accountActionText: {
+      flexShrink: 1,
+      fontFamily: typography.families.latinUIMedium,
+      fontSize: 13,
+      color: dark ? colors.primaryLight : colors.primaryDeep,
       textAlign: isRTL ? "right" : "left",
       writingDirection: isRTL ? "rtl" : "ltr",
+    },
+    destructive: {
+      color: dark ? "#FF8DA2" : "#D4183D",
     },
   });
 
 export default function SettingsScreen() {
-  const themeMode = useAppStore((state: AppState) => state.themeMode);
-  const toggleThemeMode = useAppStore(
-    (state: AppState) => state.toggleThemeMode,
+  const state = useAppStore(
+    useShallow((store) => ({
+      themeMode: store.themeMode,
+      toggleThemeMode: store.toggleThemeMode,
+      language: store.language,
+      setLanguage: store.setLanguage,
+      besorahLanguage: store.besorahLanguage,
+      setBesorahLanguage: store.setBesorahLanguage,
+      besorahTextVersion: store.besorahTextVersion,
+      setBesorahTextVersion: store.setBesorahTextVersion,
+      showFullChapter: store.showFullChapter,
+      setShowFullChapter: store.setShowFullChapter,
+      showCalendarDayPill: store.showCalendarDayPill,
+      setShowCalendarDayPill: store.setShowCalendarDayPill,
+      seferMode: store.seferMode,
+      setSeferMode: store.setSeferMode,
+      hebrewOnly: store.hebrewOnly,
+      setHebrewOnly: store.setHebrewOnly,
+      showQumran: store.showQumran,
+      setShowQumran: store.setShowQumran,
+      translationOnly: store.translationOnly,
+      setTranslationOnly: store.setTranslationOnly,
+      showNikud: store.showNikud,
+      setShowNikud: store.setShowNikud,
+      showCantillation: store.showCantillation,
+      setShowCantillation: store.setShowCantillation,
+    })),
   );
-  const language = useAppStore((state: AppState) => state.language);
-  const setLanguage = useAppStore((state: AppState) => state.setLanguage);
-  const besorahTextVersion = useAppStore(
-    (state: AppState) => state.besorahTextVersion,
-  );
-  const besorahLanguage = useAppStore(
-    (state: AppState) => state.besorahLanguage,
-  );
-  const setBesorahLanguage = useAppStore(
-    (state: AppState) => state.setBesorahLanguage,
+  const account = useSession((session) => session.account);
+  const { city: calendarCity, restored: calendarRestored } = useCalendar();
+  const hasLinkedAccount = !!account?.providers.length;
+  const insets = useSafeAreaInsets();
+  const colors = getColors(state.themeMode);
+  const { t, isRTL } = useTranslation();
+  const styles = useMemo(
+    () => createStyles(colors, isRTL, state.themeMode === "dark"),
+    [colors, isRTL, state.themeMode],
   );
   const greekAvailable = isGreekBesorahEnabled({
     EXPO_PUBLIC_GREEK_PREVIEW_ENABLED:
       process.env.EXPO_PUBLIC_GREEK_PREVIEW_ENABLED,
   });
-  const setBesorahTextVersion = useAppStore(
-    (state: AppState) => state.setBesorahTextVersion,
-  );
-  const showQumran = useAppStore((state: AppState) => state.showQumran);
-  const setShowQumran = useAppStore((state: AppState) => state.setShowQumran);
-  const showFullChapter = useAppStore(
-    (state: AppState) => state.showFullChapter,
-  );
-  const setShowFullChapter = useAppStore(
-    (state: AppState) => state.setShowFullChapter,
-  );
-  const seferMode = useAppStore((state: AppState) => state.seferMode);
-  const setSeferMode = useAppStore((state: AppState) => state.setSeferMode);
-  const hebrewOnly = useAppStore((state: AppState) => state.hebrewOnly);
-  const setHebrewOnly = useAppStore((state: AppState) => state.setHebrewOnly);
-  const translationOnly = useAppStore(
-    (state: AppState) => state.translationOnly,
-  );
-  const setTranslationOnly = useAppStore(
-    (state: AppState) => state.setTranslationOnly,
-  );
-  const showCantillation = useAppStore(
-    (state: AppState) => state.showCantillation,
-  );
-  const setShowCantillation = useAppStore(
-    (state: AppState) => state.setShowCantillation,
-  );
-  const showNikud = useAppStore((state: AppState) => state.showNikud);
-  const setShowNikud = useAppStore((state: AppState) => state.setShowNikud);
-  const colors = getColors(themeMode);
-  const { t, isRTL } = useTranslation();
-  const styles = useMemo(() => createStyles(colors, isRTL), [colors, isRTL]);
-  const translationOnlyDisablesHebrewOptions = translationOnly;
-  const seferEnabled = canUseSeferStyle({
-    showFullChapter,
-    hebrewOnly,
-    translationOnly,
-  });
-  const handleBesorahTextVersionChange = useCallback(
-    (version: AppState["besorahTextVersion"]) => {
-      setBesorahTextVersion(version);
-    },
-    [setBesorahTextVersion],
-  );
+  const seferEnabled = canUseSeferStyle(state);
+  const Chevron = isRTL ? ChevronLeft : ChevronRight;
 
   const handleDisabledHebrewOptionPress = () => {
-    Alert.alert(t("settings.translationOnly.title"), t("settings.translationOnly.disablesHebrewFeatures"));
+    Alert.alert(
+      t("settings.translationOnly.title"),
+      t("settings.translationOnly.disablesHebrewFeatures"),
+    );
   };
 
   const handleDisabledSeferPress = () => {
@@ -194,39 +150,41 @@ export default function SettingsScreen() {
     );
   };
 
+  const toggleRow = (
+    label: string,
+    value: boolean,
+    onChange: (value: boolean) => void,
+    disabled = false,
+    onDisabledPress?: () => void,
+  ) => (
+    <View style={styles.row}>
+      <Text style={[styles.label, disabled && { opacity: 0.55 }]}>{label}</Text>
+      <PillToggle
+        label={label}
+        value={value}
+        onChange={onChange}
+        disabled={disabled}
+        onDisabledPress={onDisabledPress}
+      />
+    </View>
+  );
+
   const renderSharedSetting = (id: SharedSettingId): ReactNode => {
     switch (id) {
       case "theme":
-        return (
-          <View style={styles.row}>
-            <View style={styles.rowContent}>
-              <View style={styles.iconContainer}>
-                <AppIcon name="idea" size={18} color={colors.textSecondary} />
-              </View>
-              <View style={styles.textContainer}>
-                <Text style={styles.label}>{t("settings.theme.title")}</Text>
-                <Text style={styles.subtitle}>
-                  {t("settings.theme.subtitle")}
-                </Text>
-              </View>
-            </View>
-            <PillToggle value={themeMode === "dark"} onChange={toggleThemeMode} />
-          </View>
+        return toggleRow(
+          t("settings.theme.title"),
+          state.themeMode === "dark",
+          state.toggleThemeMode,
         );
       case "language":
         return (
           <View style={styles.row}>
-            <View style={styles.rowContent}>
-              <View style={styles.iconContainer}>
-                <AppIcon name="language" size={18} color={colors.textSecondary} />
-              </View>
-              <View style={styles.textContainer}>
-                <Text style={styles.label}>{t("settings.language.title")}</Text>
-              </View>
-            </View>
+            <Text style={styles.label}>{t("settings.language.title")}</Text>
             <SettingsDropdown
-              value={language}
-              onChange={setLanguage}
+              label={t("settings.language.title")}
+              value={state.language}
+              onChange={state.setLanguage}
               options={[
                 { label: t("languages.en"), value: "en" },
                 { label: t("languages.es"), value: "es" },
@@ -239,58 +197,34 @@ export default function SettingsScreen() {
         if (!greekAvailable) return null;
         return (
           <View style={styles.row}>
-            <View style={styles.rowContent}>
-              <View style={styles.iconContainer}>
-                <AppIcon name="scroll" size={18} color={colors.textSecondary} />
-              </View>
-              <View style={styles.textContainer}>
-                <View style={styles.labelRow}>
-                  <Text style={styles.label}>
-                    {t("settings.besorahLanguage.title")}
-                  </Text>
-                  <View style={styles.newBadge}>
-                    <Text style={styles.newBadgeText}>
-                      {t("settings.besorahLanguage.new")}
-                    </Text>
-                  </View>
-                </View>
-              </View>
-            </View>
+            <Text style={styles.label}>
+              {t("settings.besorahLanguage.title")}
+            </Text>
             <SettingsDropdown
-              value={besorahLanguage}
-              onChange={(value) =>
-                setBesorahLanguage(value as AppState["besorahLanguage"])
-              }
+              label={t("settings.besorahLanguage.title")}
+              value={state.besorahLanguage}
+              onChange={state.setBesorahLanguage}
               options={[
                 {
                   label: t("settings.besorahLanguage.hebrew"),
                   value: "hebrew",
                 },
-                {
-                  label: t("settings.besorahLanguage.greek"),
-                  value: "greek",
-                },
+                { label: t("settings.besorahLanguage.greek"), value: "greek" },
               ]}
             />
           </View>
         );
       case "besorahTextVersion":
-        if (besorahLanguage === "greek") return null;
+        if (state.besorahLanguage === "greek") return null;
         return (
           <View style={styles.row}>
-            <View style={styles.rowContent}>
-              <View style={styles.iconContainer}>
-                <AppIcon name="scroll" size={18} color={colors.textSecondary} />
-              </View>
-              <View style={styles.textContainer}>
-                <Text style={styles.label}>
-                  {t("settings.besorahTextVersion.title")}
-                </Text>
-              </View>
-            </View>
+            <Text style={styles.label}>
+              {t("settings.besorahTextVersion.title")}
+            </Text>
             <SettingsDropdown
-              value={besorahTextVersion}
-              onChange={handleBesorahTextVersionChange}
+              label={t("settings.besorahTextVersion.title")}
+              value={state.besorahTextVersion}
+              onChange={state.setBesorahTextVersion}
               options={[
                 {
                   label: t("settings.besorahTextVersion.delitzsch"),
@@ -304,253 +238,192 @@ export default function SettingsScreen() {
             />
           </View>
         );
+      case "calendarDayPill":
+        return (
+          <View>
+            <View style={styles.row}>
+              <Text style={styles.label}>
+                {t("settings.calendarDayPill.title")}
+              </Text>
+              <PillToggle
+                label={t("settings.calendarDayPill.title")}
+                value={state.showCalendarDayPill}
+                onChange={state.setShowCalendarDayPill}
+              />
+            </View>
+            {state.showCalendarDayPill && calendarRestored && !calendarCity ? (
+              <View
+                accessibilityRole="alert"
+                accessibilityLiveRegion="polite"
+                style={{
+                  marginBottom: 8,
+                }}
+              >
+                <Pressable
+                  accessibilityRole="button"
+                  onPress={() => router.navigate("/(tabs)/widgets")}
+                  style={({ pressed }) => ({
+                    minHeight: 44,
+                    justifyContent: "center",
+                    alignSelf: isRTL ? "flex-end" : "flex-start",
+                    opacity: pressed ? 0.65 : 1,
+                  })}
+                >
+                  <Text
+                    style={{
+                      color: colors.textSecondary,
+                      fontFamily: typography.families.latinUI,
+                      fontSize: 12,
+                      textAlign: isRTL ? "right" : "left",
+                      writingDirection: isRTL ? "rtl" : "ltr",
+                    }}
+                  >
+                    {t("settings.calendarDayPill.cityRequired")}
+                  </Text>
+                </Pressable>
+              </View>
+            ) : null}
+          </View>
+        );
       case "fullChapter":
         return (
-          <View style={styles.row}>
-            <View style={styles.rowContent}>
-              <View style={styles.iconContainer}>
-                <AppIcon name="book" size={18} color={colors.textSecondary} />
-              </View>
-              <View style={styles.textContainer}>
-                <Text style={styles.label}>{t("settings.fullChapter.title")}</Text>
-                <Text style={styles.subtitle}>
-                  {t("settings.fullChapter.subtitle")}
-                </Text>
-              </View>
-            </View>
-            <OnOffButton value={showFullChapter} onChange={setShowFullChapter} />
-          </View>
+          <>
+            {toggleRow(
+              t("settings.fullChapter.title"),
+              state.showFullChapter,
+              state.setShowFullChapter,
+            )}
+            {toggleRow(
+              t("settings.translationOnly.title"),
+              state.translationOnly,
+              state.setTranslationOnly,
+            )}
+          </>
         );
       case "seferStyle":
-        if (!isSeferStyleVisible(showFullChapter)) return null;
-        return (
-          <View style={styles.row}>
-            <View style={styles.rowContent}>
-              <View style={styles.iconContainer}>
-                <AppIcon name="book" size={18} color={colors.textSecondary} />
-              </View>
-              <View style={styles.textContainer}>
-                <Text style={styles.label}>{t("settings.seferStyle.title")}</Text>
-                <Text style={styles.subtitle}>
-                  {t("settings.seferStyle.subtitle")}
-                </Text>
-              </View>
-            </View>
-            <OnOffButton
-              value={seferMode}
-              onChange={setSeferMode}
-              disabled={!seferEnabled}
-              onDisabledPress={handleDisabledSeferPress}
-            />
-          </View>
+        if (!isSeferStyleVisible(state.showFullChapter)) return null;
+        return toggleRow(
+          t("settings.seferStyle.title"),
+          state.seferMode,
+          state.setSeferMode,
+          !seferEnabled,
+          handleDisabledSeferPress,
         );
       case "hebrewOnly":
-        return (
-          <View
-            style={[
-              styles.row,
-              translationOnlyDisablesHebrewOptions ? { opacity: 0.55 } : null,
-            ]}
-          >
-            <View style={styles.rowContent}>
-              <View style={styles.iconContainer}>
-                <AppIcon name="hebrew" size={18} color={colors.textSecondary} />
-              </View>
-              <View style={styles.textContainer}>
-                <Text style={styles.label}>{t("settings.hebrewOnly.title")}</Text>
-                <Text style={styles.subtitle}>
-                  {t("settings.hebrewOnly.subtitle")}
-                </Text>
-              </View>
-            </View>
-            <OnOffButton
-              value={hebrewOnly}
-              onChange={setHebrewOnly}
-              disabled={translationOnlyDisablesHebrewOptions}
-              onDisabledPress={handleDisabledHebrewOptionPress}
-            />
-          </View>
+        return toggleRow(
+          t("settings.hebrewOnly.title"),
+          state.hebrewOnly,
+          state.setHebrewOnly,
+          state.translationOnly,
+          handleDisabledHebrewOptionPress,
         );
       case "qumran":
-        return (
-          <View
-            style={[
-              styles.row,
-              translationOnlyDisablesHebrewOptions ? { opacity: 0.55 } : null,
-            ]}
-          >
-            <View style={styles.rowContent}>
-              <View style={styles.iconContainer}>
-                <AppIcon name="scroll" size={18} color={colors.textSecondary} />
-              </View>
-              <View style={styles.textContainer}>
-                <Text style={styles.label}>{t("settings.qumran.title")}</Text>
-                <Text style={styles.subtitle}>
-                  {t("settings.qumran.subtitle")}
-                </Text>
-              </View>
-            </View>
-            <OnOffButton
-              value={showQumran}
-              onChange={setShowQumran}
-              disabled={translationOnlyDisablesHebrewOptions}
-              onDisabledPress={handleDisabledHebrewOptionPress}
-            />
-          </View>
+        return toggleRow(
+          t("settings.qumran.title"),
+          state.showQumran,
+          state.setShowQumran,
+          state.translationOnly,
+          handleDisabledHebrewOptionPress,
         );
       default: {
-        const _exhaustive: never = id;
-        return _exhaustive;
+        const exhaustive: never = id;
+        return exhaustive;
       }
     }
   };
 
+  const handleClearStorage = () => {
+    Alert.alert(
+      t("settings.clearStorage.alertTitle"),
+      t("settings.clearStorage.alertMessage"),
+      [
+        { text: t("settings.clearStorage.cancel"), style: "cancel" },
+        {
+          text: t("settings.clearStorage.confirm"),
+          style: "destructive",
+          onPress: async () => {
+            await clearStorage();
+            const current = useAppStore.getState();
+            current.setHebrewFontScale(1);
+            current.setShowQumran(false);
+            current.setShowFullChapter(false);
+            current.setSeferMode(false);
+            current.setShowCalendarDayPill(false);
+            current.setHebrewOnly(false);
+            current.setTranslationOnly(false);
+            current.setLanguage("en");
+            if (current.themeMode === "dark") current.toggleThemeMode();
+          },
+        },
+      ],
+    );
+  };
 
   return (
     <SafeAreaView style={styles.safeArea} edges={["top"]}>
-      <ScrollView contentContainerStyle={styles.container}>
-        {/* Header */}
-        <View style={styles.header}>
-          <Text style={styles.title}>{t("settings.title")}</Text>
-        </View>
-
-        {/* General Section */}
-        <Text style={styles.sectionTitle}>
-          {t("settings.sections.general")}
+      <ScrollView
+        contentContainerStyle={[
+          styles.container,
+          { paddingBottom: getNavigationDockContentPadding(insets.bottom) },
+        ]}
+        scrollIndicatorInsets={{
+          bottom: getNavigationDockContentPadding(insets.bottom),
+        }}
+      >
+        <Text accessibilityRole="header" style={styles.title}>
+          {t("settings.title")}
         </Text>
-
-        {SHARED_SETTINGS_ORDER.map((id) => {
-          const row = renderSharedSetting(id);
-          if (!row) return null;
-          return (
-            <Fragment key={id}>
-              {row}
-              <View style={styles.divider} />
-            </Fragment>
-          );
-        })}
-
-        {/* Translation Only */}
-        <View style={styles.row}>
-          <View style={styles.rowContent}>
-            <View style={styles.iconContainer}>
-              <AppIcon name="language" size={18} color={colors.textSecondary} />
-            </View>
-            <View style={styles.textContainer}>
-              <Text style={styles.label}>{t("settings.translationOnly.title")}</Text>
-              <Text style={styles.subtitle}>
-                {t("settings.translationOnly.subtitle")}
-              </Text>
-            </View>
-          </View>
-          <OnOffButton value={translationOnly} onChange={setTranslationOnly} />
-        </View>
-
-        <View style={styles.divider} />
-
-        {/* Cantillation */}
-        <View
-          style={[
-            styles.row,
-            translationOnlyDisablesHebrewOptions ? { opacity: 0.55 } : null,
-          ]}
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={`${t("settings.account.title")}, ${hasLinkedAccount ? t("settings.account.manage") : t("settings.account.signIn")}`}
+          onPress={() => router.push("/account")}
+          style={({ pressed }) => [styles.row, pressed && { opacity: 0.65 }]}
         >
-          <View style={styles.rowContent}>
-            <View style={styles.iconContainer}>
-              <AppIcon name="hebrew" size={18} color={colors.textSecondary} />
-            </View>
-            <View style={styles.textContainer}>
-              <Text style={styles.label}>
-                {t("settings.cantillation.title")}
-              </Text>
-              <Text style={styles.subtitle}>
-                {t("settings.cantillation.subtitle")}
-              </Text>
-            </View>
+          <Text style={styles.label}>{t("settings.account.title")}</Text>
+          <View style={styles.accountAction}>
+            <Text numberOfLines={1} style={styles.accountActionText}>
+              {hasLinkedAccount
+                ? account.display_name || t("settings.account.manage")
+                : t("settings.account.signIn")}
+            </Text>
+            <Chevron
+              size={16}
+              color={
+                state.themeMode === "dark"
+                  ? colors.primaryLight
+                  : colors.primaryDeep
+              }
+            />
           </View>
-          <OnOffButton
-            value={showCantillation}
-            onChange={setShowCantillation}
-            disabled={translationOnlyDisablesHebrewOptions}
-            onDisabledPress={handleDisabledHebrewOptionPress}
-          />
-        </View>
-
-        <View style={styles.divider} />
-
-        {/* Nikud */}
-        <View
-          style={[
-            styles.row,
-            translationOnlyDisablesHebrewOptions ? { opacity: 0.55 } : null,
-          ]}
+        </Pressable>
+        {SHARED_SETTINGS_ORDER.map((id) => (
+          <Fragment key={id}>{renderSharedSetting(id)}</Fragment>
+        ))}
+        {toggleRow(
+          t("settings.nikud.title"),
+          state.showNikud,
+          state.setShowNikud,
+          state.translationOnly,
+          handleDisabledHebrewOptionPress,
+        )}
+        {toggleRow(
+          t("settings.cantillation.title"),
+          state.showCantillation,
+          state.setShowCantillation,
+          state.translationOnly,
+          handleDisabledHebrewOptionPress,
+        )}
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={t("settings.clearStorage.title")}
+          onPress={handleClearStorage}
+          style={({ pressed }) => [styles.row, pressed && { opacity: 0.65 }]}
         >
-          <View style={styles.rowContent}>
-            <View style={styles.iconContainer}>
-              <AppIcon name="hebrew" size={18} color={colors.textSecondary} />
-            </View>
-            <View style={styles.textContainer}>
-              <Text style={styles.label}>{t("settings.nikud.title")}</Text>
-              <Text style={styles.subtitle}>
-                {t("settings.nikud.subtitle")}
-              </Text>
-            </View>
-          </View>
-          <OnOffButton
-            value={showNikud}
-            onChange={setShowNikud}
-            disabled={translationOnlyDisablesHebrewOptions}
-            onDisabledPress={handleDisabledHebrewOptionPress}
-          />
-        </View>
-
-        <View style={styles.divider} />
-
-        {/* Clear Storage */}
-        <View style={styles.row}>
-          <View style={styles.rowContent}>
-            <View style={styles.iconContainer}>
-              <AppIcon name="download" size={18} color={colors.textSecondary} />
-            </View>
-            <View style={styles.textContainer}>
-              <Text style={styles.label}>
-                {t("settings.clearStorage.title")}
-              </Text>
-              <Text style={styles.subtitle}>
-                {t("settings.clearStorage.subtitle")}
-              </Text>
-            </View>
-          </View>
-          <OnOffButton
-            value={false}
-            onChange={() => {
-              Alert.alert(
-                t("settings.clearStorage.alertTitle"),
-                t("settings.clearStorage.alertMessage"),
-                [
-                  { text: t("settings.clearStorage.cancel"), style: "cancel" },
-                  {
-                    text: t("settings.clearStorage.confirm"),
-                    style: "destructive",
-                    onPress: async () => {
-                      await clearStorage();
-                      useAppStore.getState().setHebrewFontScale(1);
-                      useAppStore.getState().setShowQumran(false);
-                      useAppStore.getState().setShowFullChapter(false);
-                      useAppStore.getState().setSeferMode(false);
-                      useAppStore.getState().setHebrewOnly(false);
-                      useAppStore.getState().setTranslationOnly(false);
-                      useAppStore.getState().setLanguage("en");
-                      if (themeMode === "dark") {
-                        toggleThemeMode();
-                      }
-                    },
-                  },
-                ],
-              );
-            }}
-          />
-        </View>
+          <Text style={[styles.label, styles.destructive]}>
+            {t("settings.clearStorage.title")}
+          </Text>
+        </Pressable>
+        <SettingsResources />
       </ScrollView>
     </SafeAreaView>
   );

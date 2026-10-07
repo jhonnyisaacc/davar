@@ -70,6 +70,7 @@ yarn-error.log*
 .yarn-integrity
 
 # React Native
+.expo/
 ios/build/
 android/app/build/
 android/build/
@@ -162,3 +163,6 @@ plans/*
 venv/
 __pycache__/
 *.pyc
+
+# Generated, source-preserving Shaul Commentary corpus (rebuilt explicitly).
+data/commentary/generated/

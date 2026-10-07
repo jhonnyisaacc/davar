@@ -1,3 +1,7 @@
+import { router } from "expo-router";
+import { Alert } from "react-native";
+import { scriptureContext } from "@davar/shared/productContracts";
+import { useCommentaryContext } from "@/src/features/commentary/context";
 import { type ReactNode, useMemo, useState } from "react";
 import {
   useWindowDimensions,
@@ -18,7 +22,6 @@ import { useAppStore, type AppState } from "@/src/store/useAppStore";
 import type { DisplayVerse } from "@/src/services/scripture";
 import type { TranslationFootnote } from "@/src/types/api";
 import {
-  getPrefixSegments,
   stripCantillation,
   stripNikud,
   stripMeteg,
@@ -324,10 +327,6 @@ const createStyles = (
     firstWordRowGreek: {
       flexDirection: "row",
     },
-    hebrewPrefixRow: {
-      flexDirection: "row-reverse",
-      alignItems: "center",
-    },
     verseNumberPressable: {
       paddingHorizontal: spacing[1],
       paddingVertical: 0,
@@ -460,6 +459,20 @@ export const VerseCard = ({
   variant = "card",
   isBesorah = false,
 }: VerseCardProps) => {
+  const besorahTextVersion = useAppStore(s => s.besorahTextVersion);
+  const askCommentary = (word?: DisplayVerse["words"][number]) => {
+    Alert.alert("Commentary", "Ask about this " + (word ? "word" : "verse") + "?", [
+      {text: "Cancel", style: "cancel"},
+      {text: "Ask in Commentary", onPress: () => {
+        useCommentaryContext.getState().setContext(scriptureContext({
+          bookId: verse.bookId, chapter: verse.sourceChapter, verse: verse.sourceVerse,
+          edition: verse.edition || (isBesorah ? besorahTextVersion : "oe"),
+          ...(word ? {word: {index: verse.words.indexOf(word), text: word.text}} : {}),
+        }));
+        router.push("/commentary" as never);
+      }},
+    ]);
+  };
   const themeMode = useAppStore((state: AppState) => state.themeMode);
   const hebrewFontScale = useAppStore(
     (state: AppState) => state.hebrewFontScale,
@@ -597,11 +610,6 @@ export const VerseCard = ({
               displayText = removeSofPasukForDisplay(displayText);
             }
 
-            const prefixSegments =
-              hasVisibleQumranVariant || !word.prefixes?.length
-                ? null
-                : getPrefixSegments(displayText, word.prefixes);
-
             const wordStyles: StyleProp<ViewStyle>[] = [
               styles.hebrewWordPressable,
             ];
@@ -612,30 +620,6 @@ export const VerseCard = ({
             }
 
             const renderWordContent = () => {
-              if (prefixSegments?.prefixes?.length) {
-                return (
-                  <View style={styles.hebrewPrefixRow}>
-                    <Text
-                      style={[
-                        styles.hebrewWord,
-                        sourceWordStyle,
-                        { color: colors.textSecondary },
-                      ]}
-                    >
-                      {prefixSegments.prefixes.join("")}
-                    </Text>
-                    <Text
-                      style={[
-                        styles.hebrewWord,
-                        sourceWordStyle,
-                        { color: colors.textPrimary },
-                      ]}
-                    >
-                      {prefixSegments.root}
-                    </Text>
-                  </View>
-                );
-              }
               return (
                 <Text
                   style={
@@ -665,6 +649,7 @@ export const VerseCard = ({
                   <Pressable
                     onPressIn={onHebrewPressIn}
                     onPress={onVersePress}
+                    onLongPress={() => askCommentary()}
                     style={styles.verseNumberPressable}
                   >
                     <Text style={styles.verseNumber}>[{verse.verse}]</Text>
@@ -672,6 +657,7 @@ export const VerseCard = ({
                   <Pressable
                     onPressIn={onHebrewPressIn}
                     onPress={() => onWordPress?.(word)}
+                    onLongPress={() => askCommentary(word)}
                     hitSlop={8}
                     style={({ pressed }) => [
                       ...wordStyles,
@@ -692,6 +678,7 @@ export const VerseCard = ({
                 key={wordKey}
                 onPressIn={onHebrewPressIn}
                 onPress={() => onWordPress?.(word)}
+                    onLongPress={() => askCommentary(word)}
                 hitSlop={8}
                 style={({ pressed }) => [
                   ...wordStyles,

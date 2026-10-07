@@ -1,25 +1,39 @@
-import { BookOpen, Home, Paintbrush, ScrollText, Settings } from "lucide-react";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import type { BesorahLanguage } from "@davar/shared/greekBesorah";
 import {
-	SHARED_SETTINGS_ORDER,
 	canUseSeferStyle,
 	isSeferStyleVisible,
+	SHARED_SETTINGS_ORDER,
 	type SharedSettingId,
 } from "@davar/shared/settingsOrder";
-import { FaThList } from "react-icons/fa";
-import { LuLightbulb } from "react-icons/lu";
-import { TbAlphabetHebrew, TbLanguageHiragana } from "react-icons/tb";
-import { destinationById } from "@davar/shared/destinations";
+import {
+	BookOpen,
+	ChevronLeft,
+	ChevronRight,
+	Paintbrush,
+	Search,
+} from "lucide-react";
+import {
+	Fragment,
+	type ReactNode,
+	useCallback,
+	useEffect,
+	useRef,
+	useState,
+} from "react";
+import { useProductCapabilities } from "../hooks/useProductCapabilities";
 import { useTranslation } from "../hooks/useTranslation";
-import type { BesorahLanguage } from "@davar/shared/greekBesorah";
+import { productApi } from "../services/productApi";
 import { formatBookDisplayName } from "../utils/bookNameFormatter";
-import { NeumorphCard } from "./NeumorphCard";
-import { NeumorphicToggle } from "./NeumorphicToggle";
-
-const homeDestination = destinationById("home");
-const settingsDestination = destinationById("settings");
+import type { RouteScreen } from "../utils/routeState";
+import { CalendarCityNotice } from "./CalendarCityNotice";
+import { PillToggle } from "./PillToggle";
+import { SettingsResources } from "./SettingsResources";
 
 interface NavigationBarProps {
+	activeDestination: RouteScreen;
+	onDestinationClick: (screen: RouteScreen) => void;
+	settingsOpen: boolean;
+	onSettingsOpenChange: (open: boolean) => void;
 	book: string;
 	bookDisplayName: string;
 	bookHebrew: string;
@@ -37,8 +51,8 @@ interface NavigationBarProps {
 	onBookChange: (book: string) => void;
 	onChapterChange: (chapter: number) => void;
 	onVerseChange: (verse: number) => void;
-	onHomeClick: (screen: typeof homeDestination.id) => void;
 	onDesignSystemClick?: () => void;
+	onMobileDesignGuideClick?: () => void;
 	theme: "light" | "dark";
 	onThemeChange: (theme: "light" | "dark") => void;
 	language: "en" | "es" | "he";
@@ -52,6 +66,8 @@ interface NavigationBarProps {
 	onQumranChange: (show: boolean) => void;
 	showFullChapter: boolean;
 	onFullChapterChange: (show: boolean) => void;
+	showCalendarDayPill?: boolean;
+	onCalendarDayPillChange?: (show: boolean) => void;
 	seferMode: boolean;
 	onSeferModeChange: (show: boolean) => void;
 	hebrewOnly: boolean;
@@ -65,6 +81,10 @@ interface NavigationBarProps {
 }
 
 export function NavigationBar({
+	activeDestination,
+	onDestinationClick,
+	settingsOpen,
+	onSettingsOpenChange,
 	book,
 	bookDisplayName,
 	bookHebrew,
@@ -76,8 +96,8 @@ export function NavigationBar({
 	onBookChange,
 	onChapterChange,
 	onVerseChange,
-	onHomeClick,
 	onDesignSystemClick,
+	onMobileDesignGuideClick,
 	theme,
 	onThemeChange,
 	language,
@@ -91,6 +111,8 @@ export function NavigationBar({
 	onQumranChange,
 	showFullChapter,
 	onFullChapterChange,
+	showCalendarDayPill = false,
+	onCalendarDayPillChange,
 	seferMode,
 	onSeferModeChange,
 	hebrewOnly,
@@ -102,9 +124,20 @@ export function NavigationBar({
 	translationOnly,
 	onTranslationOnlyChange,
 }: NavigationBarProps) {
-	const [openMenu, setOpenMenu] = useState<
-		typeof settingsDestination.id | "book" | "chapter" | "verse" | null
+	const { capabilities } = useProductCapabilities();
+	const [selectionMenu, setSelectionMenu] = useState<
+		"book" | "chapter" | "verse" | null
 	>(null);
+	const [scriptureNavigationCollapsed, setScriptureNavigationCollapsed] =
+		useState(false);
+	const openMenu = settingsOpen ? "settings" : selectionMenu;
+	const setOpenMenu = useCallback(
+		(menu: typeof openMenu) => {
+			setSelectionMenu(menu === "settings" ? null : menu);
+			onSettingsOpenChange(menu === "settings");
+		},
+		[onSettingsOpenChange],
+	);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	const bookListRef = useRef<HTMLDivElement>(null);
 	const bookSearchRef = useRef<HTMLInputElement>(null);
@@ -115,6 +148,9 @@ export function NavigationBar({
 	const [verseSearch, setVerseSearch] = useState("");
 	const { t } = useTranslation(language);
 	const isRTL = language === "he";
+	const isScripture = activeDestination === "verse";
+	const scriptureNavigationOpen = isScripture && !scriptureNavigationCollapsed;
+	const Chevron = isRTL ? ChevronLeft : ChevronRight;
 	const env =
 		(
 			import.meta as ImportMeta & {
@@ -139,12 +175,17 @@ export function NavigationBar({
 			return () =>
 				document.removeEventListener("pointerdown", handleClickOutside);
 		}
-	}, [openMenu]);
+	}, [openMenu, setOpenMenu]);
 
 	useEffect(() => {
-		const isSelectionMenuOpen =
-			openMenu === "book" || openMenu === "chapter" || openMenu === "verse";
-		if (!isSelectionMenuOpen) return;
+		if (!isScripture) {
+			setSelectionMenu(null);
+			setScriptureNavigationCollapsed(false);
+		}
+	}, [isScripture]);
+
+	useEffect(() => {
+		if (!openMenu) return;
 
 		const previousOverflow = document.body.style.overflow;
 		const previousOverscrollBehavior = document.body.style.overscrollBehavior;
@@ -169,7 +210,7 @@ export function NavigationBar({
 
 		document.addEventListener("keydown", handleEscape);
 		return () => document.removeEventListener("keydown", handleEscape);
-	}, [openMenu]);
+	}, [openMenu, setOpenMenu]);
 
 	useEffect(() => {
 		if (!openMenu) return;
@@ -186,16 +227,6 @@ export function NavigationBar({
 			window.setTimeout(() => verseSearchRef.current?.focus(), 0);
 		}
 	}, [openMenu]);
-
-	const languages = [
-		{ code: "en", label: t("languages.en") },
-		{ code: "es", label: t("languages.es") },
-		{ code: "he", label: t("languages.he") },
-	];
-	const besorahTextVersions = [
-		{ code: "delitzsch", label: t("settings.besorahTextVersion.delitzsch") },
-		{ code: "hutter", label: t("settings.besorahTextVersion.hutter") },
-	] as const;
 
 	const chapters = Array.from({ length: chapterCount }, (_, i) => i + 1);
 	const verses = Array.from({ length: verseCount }, (_, i) => i + 1);
@@ -239,474 +270,498 @@ export function NavigationBar({
 	const filteredVerses = normalizedVerseSearch
 		? verses.filter((item) => String(item).startsWith(normalizedVerseSearch))
 		: verses;
-	const translationOnlyDisablesHebrewOptions = translationOnly;
 	const seferEnabled = canUseSeferStyle({
 		showFullChapter,
 		hebrewOnly,
 		translationOnly,
 	});
-	const seferDisabled = !seferEnabled;
 
 	useEffect(() => {
 		if (seferMode && openMenu === "verse") {
 			setOpenMenu(null);
 		}
-	}, [seferMode, openMenu]);
+	}, [seferMode, openMenu, setOpenMenu]);
 
+	const settingsRowClass =
+		"flex min-h-[50px] items-center justify-between gap-3 py-2.5";
+	const toggleRow = (
+		label: string,
+		value: boolean,
+		onChange: (value: boolean) => void,
+		disabled = false,
+		disabledReason?: string,
+	) => (
+		<div className={settingsRowClass}>
+			<span className={`flex-1 text-[15px] ${disabled ? "opacity-55" : ""}`}>
+				{label}
+			</span>
+			<PillToggle
+				label={label}
+				value={value}
+				onChange={onChange}
+				disabled={disabled}
+				disabledReason={disabledReason}
+			/>
+		</div>
+	);
+	const selectRow = <T extends string>(
+		label: string,
+		value: T,
+		onChange: (value: T) => void,
+		options: { value: T; label: string }[],
+	) => (
+		<div className={settingsRowClass}>
+			<span className="flex-1 text-[15px]">{label}</span>
+			<select
+				aria-label={label}
+				value={value}
+				onChange={(event) => onChange(event.target.value as T)}
+				className="min-h-[30px] max-w-[50%] cursor-pointer border-0 bg-transparent text-[13px] text-[var(--text-secondary)] focus-visible:outline-[var(--primary)]"
+			>
+				{options.map((option) => (
+					<option key={option.value} value={option.value}>
+						{option.label}
+					</option>
+				))}
+			</select>
+		</div>
+	);
 
 	const renderSharedSetting = (id: SharedSettingId): ReactNode => {
 		switch (id) {
 			case "theme":
-				return (
-					<div className="flex items-center justify-between">
-						<div className="flex items-center gap-3">
-							<LuLightbulb className="w-4 h-4 text-[var(--text-secondary)]" />
-							<span
-								className="text-sm text-[var(--text-primary)]"
-								style={{ fontFamily: "'Inter', sans-serif" }}
-							>
-								{t("settings.theme.title")}
-							</span>
-						</div>
-						<NeumorphicToggle
-							enabled={theme === "dark"}
-							onToggle={() =>
-								onThemeChange(theme === "light" ? "dark" : "light")
-							}
-							ariaLabel={t("navigation.toggleDarkTheme")}
-						/>
-					</div>
+				return toggleRow(t("settings.theme.title"), theme === "dark", (dark) =>
+					onThemeChange(dark ? "dark" : "light"),
 				);
 			case "language":
-				return (
-					<div className="flex items-center justify-between">
-						<div className="flex items-center gap-3">
-							<TbLanguageHiragana className="w-4 h-4 text-[var(--text-secondary)]" />
-							<span
-								className="text-sm text-[var(--text-primary)]"
-								style={{ fontFamily: "'Inter', sans-serif" }}
-							>
-								{t("settings.language.title")}
-							</span>
-						</div>
-						<select
-							value={language}
-							onChange={(event) =>
-								onLanguageChange(event.target.value as "en" | "es" | "he")
-							}
-							className="rounded-full px-3 py-2 text-base md:text-xs text-[var(--text-primary)]"
-							style={{
-								fontFamily: "'Inter', sans-serif",
-								backgroundColor: "var(--neomorph-bg)",
-								border: "1px solid var(--neomorph-border)",
-								boxShadow:
-									"inset 3px 3px 6px var(--neomorph-inset-shadow-dark), inset -3px -3px 6px var(--neomorph-inset-shadow-light)",
-							}}
-						>
-							{languages.map((lang) => (
-								<option key={lang.code} value={lang.code}>
-									{lang.label}
-								</option>
-							))}
-						</select>
-					</div>
+				return selectRow(
+					t("settings.language.title"),
+					language,
+					onLanguageChange,
+					[
+						{ value: "en", label: t("languages.en") },
+						{ value: "es", label: t("languages.es") },
+						{ value: "he", label: t("languages.he") },
+					],
 				);
 			case "besorahLanguage":
 				if (!greekAvailable) return null;
-				return (
-					<div className="flex items-center justify-between gap-4">
-						<div className="flex items-center gap-3">
-							<ScrollText className="w-4 h-4 text-[var(--text-secondary)]" />
-							<span
-								className="flex items-center gap-2 text-sm text-[var(--text-primary)]"
-								style={{ fontFamily: "'Inter', sans-serif" }}
-							>
-								{t("settings.besorahLanguage.title")}
-								<span className="rounded-full bg-[var(--copper-base)] px-1.5 py-0.5 text-[9px] font-semibold uppercase leading-3 text-white">
-									{t("settings.besorahLanguage.new")}
-								</span>
-							</span>
-						</div>
-						<select
-							value={besorahLanguage}
-							onChange={(event) =>
-								onBesorahLanguageChange(
-									event.target.value as BesorahLanguage,
-								)
-							}
-							className="rounded-full px-3 py-2 text-base md:text-xs text-[var(--text-primary)]"
-							style={{
-								fontFamily: "'Inter', sans-serif",
-								backgroundColor: "var(--neomorph-bg)",
-								border: "1px solid var(--neomorph-border)",
-								boxShadow:
-									"inset 3px 3px 6px var(--neomorph-inset-shadow-dark), inset -3px -3px 6px var(--neomorph-inset-shadow-light)",
-							}}
-						>
-							<option value="hebrew">
-								{t("settings.besorahLanguage.hebrew")}
-							</option>
-							<option value="greek">
-								{t("settings.besorahLanguage.greek")}
-							</option>
-						</select>
-					</div>
+				return selectRow(
+					t("settings.besorahLanguage.title"),
+					besorahLanguage,
+					onBesorahLanguageChange,
+					[
+						{ value: "hebrew", label: t("settings.besorahLanguage.hebrew") },
+						{ value: "greek", label: t("settings.besorahLanguage.greek") },
+					],
 				);
 			case "besorahTextVersion":
 				if (besorahLanguage === "greek") return null;
+				return selectRow(
+					t("settings.besorahTextVersion.title"),
+					besorahTextVersion,
+					onBesorahTextVersionChange,
+					[
+						{
+							value: "delitzsch",
+							label: t("settings.besorahTextVersion.delitzsch"),
+						},
+						{ value: "hutter", label: t("settings.besorahTextVersion.hutter") },
+					],
+				);
+			case "calendarDayPill":
 				return (
-					<div className="flex items-center justify-between gap-4">
-						<div className="flex items-center gap-3">
-							<ScrollText className="w-4 h-4 text-[var(--text-secondary)]" />
-							<div>
-								<div
-									className="text-sm text-[var(--text-primary)]"
-									style={{ fontFamily: "'Inter', sans-serif" }}
-								>
-									{t("settings.besorahTextVersion.title")}
-								</div>
-							</div>
+					<div>
+						<div className={settingsRowClass}>
+							<span className="flex-1 text-[15px]">
+								{t("settings.calendarDayPill.title")}
+							</span>
+							<PillToggle
+								label={t("settings.calendarDayPill.title")}
+								value={showCalendarDayPill}
+								onChange={(value) => onCalendarDayPillChange?.(value)}
+								disabled={!onCalendarDayPillChange}
+							/>
 						</div>
-						<select
-							value={besorahTextVersion}
-							onChange={(event) =>
-								onBesorahTextVersionChange(
-									event.target.value as "delitzsch" | "hutter",
-								)
-							}
-							className="rounded-full px-3 py-2 text-base md:text-xs text-[var(--text-primary)]"
-							style={{
-								fontFamily: "'Inter', sans-serif",
-								backgroundColor: "var(--neomorph-bg)",
-								border: "1px solid var(--neomorph-border)",
-								boxShadow:
-									"inset 3px 3px 6px var(--neomorph-inset-shadow-dark), inset -3px -3px 6px var(--neomorph-inset-shadow-light)",
+						<CalendarCityNotice
+							enabled={showCalendarDayPill}
+							language={language}
+							onChooseCity={() => {
+								setOpenMenu(null);
+								onDestinationClick("widgets");
 							}}
-						>
-							{besorahTextVersions.map((version) => (
-								<option key={version.code} value={version.code}>
-									{version.label}
-								</option>
-							))}
-						</select>
+						/>
 					</div>
 				);
 			case "fullChapter":
 				return (
-					<div className="flex items-center justify-between">
-						<div className="flex items-center gap-3">
-							<FaThList className="w-4 h-4 text-[var(--text-secondary)]" />
-							<span
-								className="text-sm text-[var(--text-primary)]"
-								style={{ fontFamily: "'Inter', sans-serif" }}
-							>
-								{t("settings.fullChapter.title")}
-							</span>
-						</div>
-						<NeumorphicToggle
-							enabled={showFullChapter}
-							onToggle={() => onFullChapterChange(!showFullChapter)}
-							ariaLabel={t("navigation.toggleFullChapter")}
-						/>
-					</div>
+					<>
+						{toggleRow(
+							t("settings.fullChapter.title"),
+							showFullChapter,
+							onFullChapterChange,
+						)}
+						{toggleRow(
+							t("settings.translationOnly.title"),
+							translationOnly,
+							onTranslationOnlyChange,
+						)}
+					</>
 				);
 			case "seferStyle":
 				if (!isSeferStyleVisible(showFullChapter)) return null;
-				return (
-					<div className="flex items-center justify-between">
-						<div className="flex items-center gap-3">
-							<BookOpen className="w-4 h-4 text-[var(--text-secondary)]" />
-							<span
-								className="text-sm text-[var(--text-primary)]"
-								style={{ fontFamily: "'Inter', sans-serif" }}
-							>
-								{t("settings.seferStyle.title")}
-							</span>
-						</div>
-						<NeumorphicToggle
-							enabled={seferMode}
-							onToggle={() => onSeferModeChange(!seferMode)}
-							ariaLabel={t("navigation.toggleSeferStyle")}
-							disabled={seferDisabled}
-							disabledReason={t("settings.seferStyle.warningMessage")}
-						/>
-					</div>
+				return toggleRow(
+					t("settings.seferStyle.title"),
+					seferMode,
+					onSeferModeChange,
+					!seferEnabled,
+					t("settings.seferStyle.warningMessage"),
 				);
 			case "hebrewOnly":
-				return (
-					<div
-						className={`flex items-center justify-between ${translationOnlyDisablesHebrewOptions ? "opacity-60" : ""}`}
-					>
-						<div className="flex items-center gap-3">
-							<TbAlphabetHebrew className="w-4 h-4 text-[var(--text-secondary)]" />
-							<span
-								className="text-sm text-[var(--text-primary)]"
-								style={{ fontFamily: "'Inter', sans-serif" }}
-							>
-								{t("settings.hebrewOnly.title")}
-							</span>
-						</div>
-						<NeumorphicToggle
-							enabled={hebrewOnly}
-							onToggle={() => onHebrewOnlyChange(!hebrewOnly)}
-							ariaLabel={t("navigation.toggleHebrewOnly")}
-							disabled={translationOnlyDisablesHebrewOptions}
-							disabledReason={t(
-								"settings.translationOnly.disablesHebrewFeatures",
-							)}
-						/>
-					</div>
+				return toggleRow(
+					t("settings.hebrewOnly.title"),
+					hebrewOnly,
+					onHebrewOnlyChange,
+					translationOnly,
+					t("settings.translationOnly.disablesHebrewFeatures"),
 				);
 			case "qumran":
-				return (
-					<div
-						className={`flex items-center justify-between ${translationOnlyDisablesHebrewOptions ? "opacity-60" : ""}`}
-					>
-						<div className="flex items-center gap-3">
-							<ScrollText className="w-4 h-4 text-[var(--text-secondary)]" />
-							<span
-								className="text-sm text-[var(--text-primary)]"
-								style={{ fontFamily: "'Inter', sans-serif" }}
-							>
-								{t("settings.qumran.title")}
-							</span>
-						</div>
-						<NeumorphicToggle
-							enabled={showQumran}
-							onToggle={() => onQumranChange(!showQumran)}
-							ariaLabel={t("navigation.toggleQumran")}
-							disabled={translationOnlyDisablesHebrewOptions}
-							disabledReason={t(
-								"settings.translationOnly.disablesHebrewFeatures",
-							)}
-						/>
-					</div>
+				return toggleRow(
+					t("settings.qumran.title"),
+					showQumran,
+					onQumranChange,
+					translationOnly,
+					t("settings.translationOnly.disablesHebrewFeatures"),
 				);
 			default: {
-				const _exhaustive: never = id;
-				return _exhaustive;
+				const exhaustive: never = id;
+				return exhaustive;
 			}
 		}
 	};
 
-	return (
-		<div className="relative" ref={dropdownRef}>
-			<NeumorphCard className="w-full md:w-auto px-2 py-2 md:px-3">
-				<div className="flex w-full items-center gap-1 md:gap-2">
-					<div className="flex min-w-0 flex-1 items-center gap-1 md:gap-2">
-						<button
-							type="button"
-							onClick={() => onHomeClick(homeDestination.id)}
-							className="shrink-0 rounded-full p-2 transition-all md:hover:scale-[1.02] md:active:scale-[0.98]"
-							style={{
-								fontFamily: "'Inter', sans-serif",
-								backgroundColor: "var(--neomorph-bg)",
-								border: "1px solid var(--neomorph-border)",
-								boxShadow:
-									"6px 6px 12px var(--neomorph-shadow-dark), -6px -6px 12px var(--neomorph-shadow-light)",
-							}}
-							aria-label={t("navigation.goHome")}
-						>
-							<Home className="w-3 h-3 text-[var(--text-primary)]" />
-						</button>
+	const renderNumberSelector = (kind: "chapter" | "verse") => {
+		const isChapter = kind === "chapter";
+		const items = isChapter ? filteredChapters : filteredVerses;
+		const current = isChapter ? chapter : verse;
+		const search = isChapter ? chapterSearch : verseSearch;
+		const setSearch = isChapter ? setChapterSearch : setVerseSearch;
+		const onSelect = isChapter ? onChapterChange : onVerseChange;
+		const titleId = `navigation-${kind}-title`;
 
+		return (
+			<section
+				id={`navigation-${kind}-selector`}
+				aria-labelledby={titleId}
+				className={`navigation-surface absolute left-1/2 top-full z-30 mt-3 flex aspect-square max-w-[calc(100vw-32px)] -translate-x-1/2 flex-col gap-2 border border-[var(--neomorph-border)] p-3 sm:left-auto sm:end-0 sm:translate-x-0 ${isChapter ? "w-[280px]" : "w-[232px]"}`}
+				onWheelCapture={(event) => event.stopPropagation()}
+				onTouchMoveCapture={(event) => event.stopPropagation()}
+			>
+				<div className="flex h-7 shrink-0 items-center justify-between gap-2">
+					<span
+						id={titleId}
+						className="text-xs font-medium text-[var(--text-primary)]"
+					>
+						{t(
+							isChapter ? "navigation.selectChapter" : "navigation.selectVerse",
+						)}
+					</span>
+					<div className="flex h-7 w-[86px] items-center gap-1.5 rounded-full bg-[var(--navigation-bg)] px-[9px] text-[var(--text-secondary)] focus-within:ring-1 focus-within:ring-[var(--accent)]">
+						<Search size={12} className="shrink-0" aria-hidden="true" />
+						<input
+							ref={isChapter ? chapterSearchRef : verseSearchRef}
+							value={search}
+							onChange={(event) =>
+								setSearch(event.target.value.replace(/[^0-9]/g, ""))
+							}
+							aria-label={t(
+								isChapter ? "navigation.findChapter" : "navigation.findVerse",
+							)}
+							placeholder={t("navigation.find")}
+							inputMode="numeric"
+							className="min-w-0 w-full border-0 bg-transparent p-0 text-base text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)] sm:text-[11px]"
+						/>
+					</div>
+				</div>
+				<div className="min-h-0 flex-1 rounded-xl bg-[var(--navigation-bg)] p-1">
+					<div
+						className={`grid h-full content-start gap-x-0.5 overflow-y-auto overscroll-contain ${isChapter ? "grid-cols-8 gap-y-0.5" : "grid-cols-6 gap-y-1"}`}
+					>
+						{items.map((item) => (
+							<button
+								type="button"
+								key={item}
+								aria-pressed={item === current}
+								onClick={() => {
+									onSelect(item);
+									setOpenMenu(null);
+								}}
+								className={`min-w-0 rounded-full text-[11px] text-[var(--text-primary)] focus-visible:outline-1 focus-visible:outline-[var(--accent)] focus-visible:-outline-offset-1 ${isChapter ? "h-7" : "h-6"} ${item === current ? "bg-[var(--accent-glow)] font-semibold" : "hover:bg-[var(--background)]"}`}
+							>
+								{item}
+							</button>
+						))}
+					</div>
+				</div>
+			</section>
+		);
+	};
+
+	return (
+		<div
+			className="app-navigation relative w-full max-w-[620px]"
+			ref={dropdownRef}
+			dir={isRTL ? "rtl" : "ltr"}
+		>
+			<div className="main-navigation navigation-surface relative z-10 border border-[var(--neomorph-border)]">
+				<nav
+					aria-label="Davar"
+					className="flex justify-center flex-wrap items-center gap-2 px-2 py-2 sm:gap-4 sm:px-[14px]"
+				>
+					<span className="text-xl" style={{ fontFamily: "Suez One" }}>
+						דבר
+					</span>
+					<div className="flex w-full justify-center gap-0.5 p-1 rounded-full bg-[var(--navigation-bg)] sm:w-auto sm:gap-1">
+						{(
+							[
+								"assemblies",
+								"commentary",
+								"verse",
+								"widgets",
+								"settings",
+							] as const
+						)
+							.filter(
+								(id) => id !== "assemblies" || capabilities.flags.assemblies,
+							)
+							.map((id) => (
+								<button
+									key={id}
+									type="button"
+									onClick={() => {
+										if (id === "settings") {
+											setOpenMenu(openMenu === "settings" ? null : "settings");
+										} else {
+											setOpenMenu(null);
+											if (id === "verse") {
+												setScriptureNavigationCollapsed((collapsed) =>
+													isScripture ? !collapsed : false,
+												);
+											}
+											onDestinationClick(id);
+										}
+									}}
+									aria-current={
+										id !== "settings" && activeDestination === id
+											? "page"
+											: undefined
+									}
+									aria-expanded={
+										id === "settings"
+											? settingsOpen
+											: id === "verse"
+												? scriptureNavigationOpen
+												: undefined
+									}
+									aria-controls={
+										id === "settings"
+											? "navigation-settings"
+											: id === "verse"
+												? "scripture-navigation"
+												: undefined
+									}
+									className={`flex-1 px-1 py-2 rounded-full text-[10px] sm:flex-none sm:px-[14px] sm:text-[13px] text-[var(--text-primary)] ${(id === "settings" ? settingsOpen : activeDestination === id) ? "bg-[var(--accent-glow)]" : ""}`}
+								>
+									{id === "verse"
+										? "Scripture"
+										: id === "widgets"
+											? t("calendar.nav")
+											: id === "settings"
+												? t("settings.title")
+												: id[0].toUpperCase() + id.slice(1)}
+								</button>
+							))}
+					</div>
+				</nav>
+			</div>
+			<div className="relative mx-auto w-fit max-w-full">
+				<div
+					id="scripture-navigation"
+					className="scripture-navigation navigation-surface"
+					data-open={scriptureNavigationOpen}
+					aria-hidden={!scriptureNavigationOpen}
+					inert={!scriptureNavigationOpen}
+				>
+					<div className="min-h-0 overflow-hidden">
+						<nav
+							aria-label={`${t("navigation.selectBook")}, ${t("navigation.selectChapter")}, ${t("navigation.selectVerse")}`}
+							className="scripture-navigation-content w-fit max-w-full rounded-b-2xl border border-t-0 border-[var(--neomorph-border)] px-2 py-1.5 sm:px-3"
+						>
+							<div className="flex min-w-0 items-center gap-0.5 rounded-full bg-[var(--navigation-bg)] p-0.5 sm:gap-1">
+								<button
+									type="button"
+									onClick={() =>
+										setOpenMenu(openMenu === "book" ? null : "book")
+									}
+									className={`flex min-w-0 items-center gap-1 rounded-full px-2 py-1.5 text-[10px] text-[var(--text-primary)] sm:gap-2 sm:px-3 sm:text-[11px] ${openMenu === "book" ? "bg-[var(--accent-glow)]" : ""}`}
+									aria-label={t("navigation.selectBook")}
+									aria-expanded={openMenu === "book"}
+								>
+									<BookOpen className="hidden md:block w-3 h-3 text-[var(--text-primary)]" />
+									<span className="min-w-0 truncate">
+										<span className="md:hidden">{bookDisplayName}</span>
+										<span className="hidden md:inline">
+											{bookDisplayName} |{" "}
+										</span>
+										<span
+											className="hidden md:inline"
+											style={{
+												fontFamily:
+													besorahLanguage === "greek" &&
+													books.find((item) => item.name === book)?.greek
+														? "'Cardo', serif"
+														: "'Suez One', serif",
+											}}
+										>
+											{bookHebrew}
+										</span>
+									</span>
+								</button>
+
+								<span
+									aria-hidden="true"
+									className="text-[var(--text-secondary)]"
+								>
+									|
+								</span>
+								<button
+									type="button"
+									onClick={() =>
+										setOpenMenu(openMenu === "chapter" ? null : "chapter")
+									}
+									className={`shrink-0 rounded-full px-2 py-1.5 text-[10px] text-[var(--text-primary)] sm:px-3 sm:text-[11px] ${openMenu === "chapter" ? "bg-[var(--accent-glow)]" : ""}`}
+									aria-label={t("navigation.selectChapter")}
+									aria-expanded={openMenu === "chapter"}
+									aria-controls="navigation-chapter-selector"
+								>
+									<span>{chapter}</span>
+								</button>
+
+								{!seferMode && (
+									<>
+										<span
+											aria-hidden="true"
+											className="text-[var(--text-secondary)]"
+										>
+											|
+										</span>
+										<button
+											type="button"
+											onClick={() =>
+												setOpenMenu(openMenu === "verse" ? null : "verse")
+											}
+											className={`shrink-0 rounded-full px-2 py-1.5 text-[10px] text-[var(--text-primary)] sm:px-3 sm:text-[11px] ${openMenu === "verse" ? "bg-[var(--accent-glow)]" : ""}`}
+											aria-label={t("navigation.selectVerse")}
+											aria-expanded={openMenu === "verse"}
+											aria-controls="navigation-verse-selector"
+										>
+											<span>{verse}</span>
+										</button>
+									</>
+								)}
+							</div>
+						</nav>
+					</div>
+				</div>
+				{(openMenu === "chapter" || openMenu === "verse") &&
+					renderNumberSelector(openMenu)}
+			</div>
+
+			{openMenu === "settings" && (
+				<section
+					id="navigation-settings"
+					aria-label={t("settings.title")}
+					className="absolute end-0 top-full mt-3 w-[360px] max-w-[calc(100vw-32px)] max-h-[calc(100dvh-180px)] overflow-y-auto overscroll-contain rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] backdrop-blur-[16px] shadow-[0_8px_32px_0_var(--glass-shadow)] p-5 z-30"
+					onWheelCapture={(event) => {
+						event.stopPropagation();
+					}}
+					onTouchMoveCapture={(event) => {
+						event.stopPropagation();
+					}}
+				>
+					<div
+						className="space-y-1 text-[var(--text-primary)]"
+						style={{ fontFamily: "Inter, sans-serif" }}
+					>
 						<button
 							type="button"
-							onClick={() => setOpenMenu(openMenu === "book" ? null : "book")}
-							className="flex min-w-0 flex-1 items-center gap-1 rounded-full px-2 py-1.5 md:gap-2 md:px-3 transition-all md:hover:scale-[1.02] md:active:scale-[0.98]"
-							style={{
-								fontFamily: "'Inter', sans-serif",
-								boxShadow:
-									"inset 3px 3px 6px var(--neomorph-inset-shadow-dark), inset -3px -3px 6px var(--neomorph-inset-shadow-light)",
-								backgroundColor: "var(--neomorph-bg)",
+							className={`${settingsRowClass} w-full text-start text-[15px]`}
+							onClick={() => {
+								setOpenMenu(null);
+								onDestinationClick("account");
 							}}
-							aria-label={t("navigation.selectBook")}
 						>
-							<BookOpen className="hidden md:block w-3 h-3 text-[var(--text-primary)]" />
-							<span className="min-w-0 truncate text-[10px] md:text-[11px] text-[var(--text-primary)]">
-								<span className="md:hidden">{bookDisplayName}</span>
-								<span className="hidden md:inline">{bookDisplayName} | </span>
-								<span
-									className="hidden md:inline"
-									style={{
-										fontFamily:
-											besorahLanguage === "greek" &&
-											books.find((item) => item.name === book)?.greek
-												? "'Cardo', serif"
-												: "'Suez One', serif",
+							<span className="flex items-center gap-3">
+								{t("settings.account.title")}
+							</span>
+							<span className="flex items-center gap-1 text-[13px] text-[var(--accent-deep)]">
+								{t(
+									productApi.authenticated()
+										? "settings.account.manage"
+										: "settings.account.signIn",
+								)}
+								<Chevron size={16} />
+							</span>
+						</button>
+						{SHARED_SETTINGS_ORDER.map((id) => (
+							<Fragment key={id}>{renderSharedSetting(id)}</Fragment>
+						))}
+						{toggleRow(
+							t("settings.nikud.title"),
+							showNikud,
+							onNikudChange,
+							translationOnly,
+							t("settings.translationOnly.disablesHebrewFeatures"),
+						)}
+						{toggleRow(
+							t("settings.cantillation.title"),
+							showCantillation,
+							onCantillationChange,
+							translationOnly,
+							t("settings.translationOnly.disablesHebrewFeatures"),
+						)}
+					</div>
+					{isDev &&
+						[
+							["settings.designSystemTitle", onDesignSystemClick],
+							["settings.mobileDesignGuideTitle", onMobileDesignGuideClick],
+						].map(([label, action]) =>
+							typeof action === "function" ? (
+								<button
+									key={String(label)}
+									type="button"
+									className="mt-5 flex w-full items-center justify-between text-sm text-[var(--text-primary)]"
+									onClick={() => {
+										setOpenMenu(null);
+										action();
 									}}
 								>
-									{bookHebrew}
-								</span>
-							</span>
-						</button>
-
-						<button
-							type="button"
-							onClick={() =>
-								setOpenMenu(openMenu === "chapter" ? null : "chapter")
-							}
-							className="flex shrink-0 items-center gap-1 rounded-full px-2 py-1.5 md:gap-2 md:px-3 transition-all md:hover:scale-[1.02] md:active:scale-[0.98]"
-							style={{
-								fontFamily: "'Inter', sans-serif",
-								boxShadow:
-									"inset 3px 3px 6px var(--neomorph-inset-shadow-dark), inset -3px -3px 6px var(--neomorph-inset-shadow-light)",
-								backgroundColor: "var(--neomorph-bg)",
-							}}
-							aria-label={t("navigation.selectChapter")}
-						>
-							<span className="text-[9px] md:text-[10px] tracking-[0.15em] md:tracking-[0.2em] uppercase text-[var(--text-primary)]">
-								{t("navigation.chapterShort")}
-							</span>
-							<span className="text-[10px] md:text-[11px] text-[var(--text-primary)]">
-								{chapter}
-							</span>
-						</button>
-
-						{!seferMode && (
-							<button
-								type="button"
-								onClick={() =>
-									setOpenMenu(openMenu === "verse" ? null : "verse")
-								}
-								className="flex shrink-0 items-center gap-1 rounded-full px-2 py-1.5 md:gap-2 md:px-3 transition-all md:hover:scale-[1.02] md:active:scale-[0.98]"
-								style={{
-									fontFamily: "'Inter', sans-serif",
-									boxShadow:
-										"inset 3px 3px 6px var(--neomorph-inset-shadow-dark), inset -3px -3px 6px var(--neomorph-inset-shadow-light)",
-									backgroundColor: "var(--neomorph-bg)",
-								}}
-								aria-label={t("navigation.selectVerse")}
-							>
-								<span className="text-[9px] md:text-[10px] tracking-[0.15em] md:tracking-[0.2em] uppercase text-[var(--text-primary)]">
-									{t("navigation.verseShort")}
-								</span>
-								<span className="text-[10px] md:text-[11px] text-[var(--text-primary)]">
-									{verse}
-								</span>
-							</button>
+									<span className="flex items-center gap-3">
+										<Paintbrush className="size-4 text-[var(--text-secondary)]" />
+										{t(String(label))}
+									</span>
+									<Chevron size={16} />
+								</button>
+							) : null,
 						)}
-					</div>
-
-					<div className="flex shrink-0 items-center gap-1 md:gap-2">
-						{isDev && onDesignSystemClick && (
-							<button
-								type="button"
-								onClick={onDesignSystemClick}
-								className="shrink-0 rounded-full p-2 transition-all md:hover:scale-[1.05] md:active:scale-[0.98]"
-								style={{
-									backgroundColor: "var(--neomorph-bg)",
-									boxShadow:
-										"6px 6px 12px var(--neomorph-shadow-dark), -6px -6px 12px var(--neomorph-shadow-light)",
-									border: "1px solid var(--neomorph-border)",
-								}}
-								aria-label="Design System"
-							>
-								<Paintbrush className="w-3 h-3 text-[var(--text-primary)]" />
-							</button>
-						)}
-
-						<button
-							type="button"
-							onClick={() =>
-								setOpenMenu(
-									openMenu === settingsDestination.id
-										? null
-										: settingsDestination.id,
-								)
-							}
-							className="relative shrink-0 rounded-full p-2 transition-all md:hover:scale-[1.05] md:active:scale-[0.98]"
-							style={{
-								backgroundColor: "var(--neomorph-bg)",
-								boxShadow:
-									"6px 6px 12px var(--neomorph-shadow-dark), -6px -6px 12px var(--neomorph-shadow-light)",
-								border: "1px solid var(--neomorph-border)",
-							}}
-							aria-label={t("navigation.openSettings")}
-						>
-							<Settings className="w-3 h-3 text-[var(--text-primary)]" />
-							<span
-								aria-hidden="true"
-								className="absolute right-0.5 top-0.5 h-2 w-2 rounded-full border border-[var(--neomorph-bg)] bg-[var(--primary)]"
-							/>
-						</button>
-					</div>
-				</div>
-			</NeumorphCard>
-
-			{openMenu === settingsDestination.id && (
-				<div className="absolute right-0 mt-4 w-[320px] rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] backdrop-blur-[16px] shadow-[0_8px_32px_0_var(--glass-shadow)] p-5 z-30">
-					<div className="space-y-5">
-						{SHARED_SETTINGS_ORDER.map((id) => {
-							const row = renderSharedSetting(id);
-							if (!row) return null;
-							return <div key={id}>{row}</div>;
-						})}
-
-						<div
-							className={`flex items-center justify-between ${translationOnlyDisablesHebrewOptions ? "opacity-60" : ""}`}
-						>
-							<div className="flex items-center gap-3">
-								<TbAlphabetHebrew className="w-4 h-4 text-[var(--text-secondary)]" />
-								<span
-									className="text-sm text-[var(--text-primary)]"
-									style={{ fontFamily: "'Inter', sans-serif" }}
-								>
-									{t("settings.nikud.title")}
-								</span>
-							</div>
-							<NeumorphicToggle
-								enabled={showNikud}
-								onToggle={() => onNikudChange(!showNikud)}
-								ariaLabel={t("navigation.toggleNikud")}
-								disabled={translationOnlyDisablesHebrewOptions}
-								disabledReason={t(
-									"settings.translationOnly.disablesHebrewFeatures",
-								)}
-							/>
-						</div>
-
-						<div
-							className={`flex items-center justify-between ${translationOnlyDisablesHebrewOptions ? "opacity-60" : ""}`}
-						>
-							<div className="flex items-center gap-3">
-								<TbAlphabetHebrew className="w-4 h-4 text-[var(--text-secondary)]" />
-								<span
-									className="text-sm text-[var(--text-primary)]"
-									style={{ fontFamily: "'Inter', sans-serif" }}
-								>
-									{t("settings.cantillation.title")}
-								</span>
-							</div>
-							<NeumorphicToggle
-								enabled={showCantillation}
-								onToggle={() => onCantillationChange(!showCantillation)}
-								ariaLabel={t("navigation.toggleCantillation")}
-								disabled={translationOnlyDisablesHebrewOptions}
-								disabledReason={t(
-									"settings.translationOnly.disablesHebrewFeatures",
-								)}
-							/>
-						</div>
-
-						<div className="flex items-center justify-between">
-							<div className="flex items-center gap-3">
-								<TbLanguageHiragana className="w-4 h-4 text-[var(--text-secondary)]" />
-								<span
-									className="text-sm text-[var(--text-primary)]"
-									style={{ fontFamily: "'Inter', sans-serif" }}
-								>
-									{t("settings.translationOnly.title")}
-								</span>
-							</div>
-							<NeumorphicToggle
-								enabled={translationOnly}
-								onToggle={() => onTranslationOnlyChange(!translationOnly)}
-								ariaLabel={t("navigation.toggleTranslationOnly")}
-							/>
-						</div>
-					</div>
-				</div>
+					<SettingsResources
+						language={language}
+						onOpenScreen={(screen) => {
+							setOpenMenu(null);
+							onDestinationClick(screen);
+						}}
+					/>
+				</section>
 			)}
 
 			{openMenu === "book" && (
@@ -773,110 +828,6 @@ export function NavigationBar({
 										? item.greek
 										: item.hebrew}
 								</span>
-							</button>
-						))}
-					</div>
-				</div>
-			)}
-
-			{openMenu === "chapter" && (
-				<div
-					className={`absolute ${isRTL ? "right-0" : "left-0"} mt-4 w-[280px] rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] backdrop-blur-[16px] shadow-[0_8px_32px_0_var(--glass-shadow)] p-4 z-30`}
-					onWheelCapture={(event) => {
-						event.stopPropagation();
-					}}
-					onTouchMoveCapture={(event) => {
-						event.stopPropagation();
-					}}
-				>
-					<div className="mb-3">
-						<input
-							ref={chapterSearchRef}
-							value={chapterSearch}
-							onChange={(event) =>
-								setChapterSearch(event.target.value.replace(/[^0-9]/g, ""))
-							}
-							placeholder={t("navigation.chapterShort")}
-							inputMode="numeric"
-							className="w-full rounded-full px-4 py-2 text-base md:text-xs text-[var(--text-primary)]"
-							style={{
-								fontFamily: "'Inter', sans-serif",
-								backgroundColor: "var(--neomorph-bg)",
-								border: "1px solid var(--neomorph-border)",
-								boxShadow:
-									"inset 3px 3px 6px var(--neomorph-inset-shadow-dark), inset -3px -3px 6px var(--neomorph-inset-shadow-light)",
-							}}
-						/>
-					</div>
-					<div className="grid grid-cols-5 gap-2 max-h-[320px] overflow-y-auto overscroll-contain">
-						{filteredChapters.map((item) => (
-							<button
-								type="button"
-								key={item}
-								onClick={() => {
-									onChapterChange(item);
-									setOpenMenu(null);
-								}}
-								className={`rounded-xl px-2 py-2 text-xs transition-all ${
-									item === chapter
-										? "bg-[var(--accent-strong)] text-white"
-										: "bg-[var(--muted)] text-[var(--text-primary)]"
-								}`}
-								style={{ fontFamily: "'Inter', sans-serif" }}
-							>
-								{item}
-							</button>
-						))}
-					</div>
-				</div>
-			)}
-
-			{openMenu === "verse" && (
-				<div
-					className={`absolute ${isRTL ? "right-0" : "left-0"} mt-4 w-[280px] rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] backdrop-blur-[16px] shadow-[0_8px_32px_0_var(--glass-shadow)] p-4 z-30`}
-					onWheelCapture={(event) => {
-						event.stopPropagation();
-					}}
-					onTouchMoveCapture={(event) => {
-						event.stopPropagation();
-					}}
-				>
-					<div className="mb-3">
-						<input
-							ref={verseSearchRef}
-							value={verseSearch}
-							onChange={(event) =>
-								setVerseSearch(event.target.value.replace(/[^0-9]/g, ""))
-							}
-							placeholder={t("navigation.verseShort")}
-							inputMode="numeric"
-							className="w-full rounded-full px-4 py-2 text-base md:text-xs text-[var(--text-primary)]"
-							style={{
-								fontFamily: "'Inter', sans-serif",
-								backgroundColor: "var(--neomorph-bg)",
-								border: "1px solid var(--neomorph-border)",
-								boxShadow:
-									"inset 3px 3px 6px var(--neomorph-inset-shadow-dark), inset -3px -3px 6px var(--neomorph-inset-shadow-light)",
-							}}
-						/>
-					</div>
-					<div className="grid grid-cols-5 gap-2 max-h-[320px] overflow-y-auto overscroll-contain">
-						{filteredVerses.map((item) => (
-							<button
-								type="button"
-								key={item}
-								onClick={() => {
-									onVerseChange(item);
-									setOpenMenu(null);
-								}}
-								className={`rounded-xl px-2 py-2 text-xs transition-all ${
-									item === verse
-										? "bg-[var(--accent-strong)] text-white"
-										: "bg-[var(--muted)] text-[var(--text-primary)]"
-								}`}
-								style={{ fontFamily: "'Inter', sans-serif" }}
-							>
-								{item}
 							</button>
 						))}
 					</div>

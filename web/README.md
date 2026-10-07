@@ -16,8 +16,9 @@ full required dashboard settings and the exact troubleshooting for
 "Could not resolve: react-dom/client" build failures.
 
 Run `bun run dev` for Bun HTML hot-reload mode without running `build.ts`.
-It keeps the app on `http://localhost:3002`, checks static data, runs Bun HTML mode on an internal port, and serves `/data/*.json` through a local gateway.
-The gateway listens on `0.0.0.0` by default so mobile devices on the same LAN can use `http://<your-machine-ip>:3002`.
+It keeps the app on `http://localhost:5173`, checks static data, runs Bun HTML mode on an internal port, and serves `/data/*.json` through a local gateway.
+The hot-reload upstream at `http://localhost:5174` also serves `/data/*` and `/api/ts2009/*`, so verse links opened directly on either port work.
+The gateway listens on `0.0.0.0` by default so mobile devices on the same LAN can use `http://<your-machine-ip>:5173`.
 
 Run `bun run dev:static` for production-parity local serving (builds `dist/` once, then serves it).
 
@@ -62,7 +63,8 @@ At runtime:
 For local Bun development:
 
 - `bun run dev` and `bun run serve` expose the same `/api/ts2009/*` path.
-- Those local routes read directly from `data/ts2009/` on disk — **not** from the Cloudflare R2 bucket.
+- Those local routes prefer `data/ts2009/` on disk. When a book file is missing, they proxy the existing `https://davar.bible/api/ts2009/*` endpoint, so English reading and Sefer work without a local licensed dataset.
+- Set `TS2009_API_ORIGIN` in `web/.env` to use another deployed preview, or set it to `off` for local files only. The fallback needs an internet connection; it forwards no browser credentials and saves no licensed files.
 - Setting `PUBLIC_STATIC_URL` to a deployed URL does not proxy TS2009: `/api/*` requests always stay same-origin.
 
 ### Testing dev with production TS2009 (R2) data
@@ -106,7 +108,7 @@ bunx wrangler pages dev dist --r2=TS2009_BUCKET=ts2009
 
 #### Option 2: Hot reload with a local copy of R2 data
 
-`bun run dev` and `bun run serve` only read `data/ts2009/`. Sync production objects into that folder, then run dev as usual:
+For offline development, sync production objects into `data/ts2009/`, then run dev as usual:
 
 ```bash
 cd web
@@ -131,7 +133,7 @@ Open your live or preview Pages URL (with `TS2009_BUCKET` configured). That is t
 | Goal | Approach |
 |------|----------|
 | Real R2 + same `/api/ts2009` as prod | Option 1 (`wrangler pages dev` + `remote = true`) |
-| `bun run dev` hot reload with prod text | Option 2 (sync R2 → `data/ts2009/`) |
+| `bun run dev` hot reload with prod text | Automatic deployed API fallback; Option 2 for offline copies |
 | Verify deploy and R2 bindings | Option 3 (deployed URL) |
 
 ## Formatting

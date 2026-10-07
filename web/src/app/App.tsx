@@ -1,3 +1,7 @@
+import { useReadingModes } from "./features/reader/useReadingModes";
+import { useScreenNavigation } from "./features/reader/useScreenNavigation";
+import { useCalendarLifecycle } from "./hooks/useCalendar";
+import { SandboxBanner } from "./components/SandboxBanner";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { BottomSheet } from "./components/BottomSheet";
 import { DesignSystemExport } from "./components/DesignSystemExport";
@@ -53,11 +57,8 @@ import {
 	buildRoutePath,
 	findCanonicalBook,
 	parseRoutePath,
-	type RouteScreen,
 	type RouteState,
 } from "./utils/routeState";
-
-type Screen = RouteScreen;
 
 type WordSelectionContext = {
 	chapter: number;
@@ -135,14 +136,18 @@ const BOOK_ABBREVIATIONS: Record<string, string> = {
 };
 
 export default function App() {
+	useCalendarLifecycle();
 	// Initialize persisted state from localStorage or defaults
 	const initialState = getStoredReadingState() ?? createDefaultReadingState();
 
 	// Use persisted state hooks for all settings
-	const [currentScreen, setCurrentScreen] = useState<Screen>(() => {
-		if (typeof window === "undefined") return "verse";
-		return parseRoutePath(window.location.pathname)?.screen ?? "notFound";
-	});
+	const {
+		currentScreen,
+		setCurrentScreen,
+		settingsOpen,
+		setSettingsOpen,
+		handleOpenScreen,
+	} = useScreenNavigation();
 	const currentScreenRef = useRef(currentScreen);
 	const [theme, setTheme] = usePersistedState("theme", initialState.theme);
 	const [language, setLanguage] = usePersistedState(
@@ -170,6 +175,10 @@ export default function App() {
 	const [showFullChapter, setShowFullChapter] = usePersistedState(
 		"showFullChapter",
 		initialState.showFullChapter,
+	);
+	const [showCalendarDayPill, setShowCalendarDayPill] = usePersistedState(
+		"showCalendarDayPill",
+		initialState.showCalendarDayPill ?? false,
 	);
 	const [seferMode, setSeferMode] = usePersistedState(
 		"seferMode",
@@ -303,111 +312,30 @@ export default function App() {
 		return trimmed;
 	}, []);
 
-	useEffect(() => {
-		if (!showFullChapter && seferMode) {
-			setSeferMode(false);
-		}
-	}, [showFullChapter, seferMode, setSeferMode]);
-
-	useEffect(() => {
-		if (!translationOnly) return;
-
-		if (hebrewOnly) {
-			setHebrewOnly(false);
-		}
-		if (showQumran) {
-			setShowQumran(false);
-		}
-		if (showNikud) {
-			setShowNikud(false);
-		}
-		if (showCantillation) {
-			setShowCantillation(false);
-		}
-	}, [
+	const {
+		handleSeferModeChange,
+		handleHebrewOnlyChange,
+		handleTranslationOnlyChange,
+	} = useReadingModes({
+		showFullChapter,
+		seferMode,
 		translationOnly,
 		hebrewOnly,
 		showQumran,
 		showNikud,
 		showCantillation,
+		setShowFullChapter,
+		setSeferMode,
+		setTranslationOnly,
 		setHebrewOnly,
 		setShowQumran,
 		setShowNikud,
 		setShowCantillation,
-	]);
-
-	const handleSeferModeChange = useCallback(
-		(nextSeferMode: boolean) => {
-			if (nextSeferMode) {
-				if (!showFullChapter) {
-					setShowFullChapter(true);
-				}
-				if (!hebrewOnly && !translationOnly) {
-					setTranslationOnly(true);
-				}
-			}
-
-			setSeferMode(nextSeferMode);
-		},
-		[
-			showFullChapter,
-			hebrewOnly,
-			translationOnly,
-			setShowFullChapter,
-			setTranslationOnly,
-			setSeferMode,
-		],
-	);
-
-	const handleHebrewOnlyChange = useCallback(
-		(nextHebrewOnly: boolean) => {
-			setHebrewOnly(nextHebrewOnly);
-			if (!nextHebrewOnly && !translationOnly && seferMode) {
-				setSeferMode(false);
-			}
-		},
-		[seferMode, setHebrewOnly, setSeferMode, translationOnly],
-	);
-
-	const handleTranslationOnlyChange = useCallback(
-		(nextTranslationOnly: boolean) => {
-			setTranslationOnly(nextTranslationOnly);
-			const activeVerse =
-				chapterVerses.find((item) => item.verse === currentVerse) ??
-				chapterVerses[0];
-
-			if (!nextTranslationOnly && activeVerse) {
-				setCurrentChapter(activeVerse.sourceChapter);
-				setCurrentVerse(activeVerse.sourceVerse);
-			}
-
-			if (nextTranslationOnly) {
-				if (!showFullChapter) {
-					setShowFullChapter(true);
-				}
-				if (!seferMode) {
-					setSeferMode(true);
-				}
-				return;
-			}
-
-			setShowNikud(true);
-			setShowQumran(true);
-			setShowFullChapter(false);
-			setSeferMode(false);
-		},
-		[
-			chapterVerses,
-			currentVerse,
-			showFullChapter,
-			seferMode,
-			setTranslationOnly,
-			setShowNikud,
-			setShowQumran,
-			setShowFullChapter,
-			setSeferMode,
-		],
-	);
+		chapterVerses,
+		currentVerse,
+		setCurrentChapter,
+		setCurrentVerse,
+	});
 
 	useEffect(() => {
 		booksRef.current = books;
@@ -771,7 +699,6 @@ export default function App() {
 		[books, currentBook],
 	);
 	const isBesorah = currentBookMeta?.section === "besorah";
-	const besorahDisclaimerText = t("verse.besorahDisclaimer.short");
 
 	const handleBesorahTextVersionChange = useCallback(
 		(version: "delitzsch" | "hutter") => {
@@ -810,7 +737,7 @@ export default function App() {
 		return () => {
 			isMounted = false;
 		};
-	}, [currentBook, language]);
+	}, [currentBook, language, setCurrentScreen]);
 
 	useEffect(() => {
 		const pending = pendingRouteRef.current;
@@ -822,7 +749,7 @@ export default function App() {
 		}
 
 		if (pending.screen !== "verse") {
-			setCurrentScreen(pending.screen);
+			handleOpenScreen(pending.screen);
 			pendingRouteRef.current = undefined;
 			return;
 		}
@@ -855,7 +782,7 @@ export default function App() {
 
 		setCurrentScreen("verse");
 		pendingRouteRef.current = undefined;
-	}, [books]);
+	}, [books, handleOpenScreen, setCurrentScreen]);
 
 	useEffect(() => {
 		let isMounted = true;
@@ -893,21 +820,21 @@ export default function App() {
 			try {
 				const [chapterCountValue, verseCountValue, loadedVerses] =
 					await Promise.all([
-					getChapterCount(currentBook.toLowerCase()),
-					getVerseCount(currentBook.toLowerCase(), currentChapter),
-					useGreekSource
-						? getGreekChapterVerses(
-								currentBook.toLowerCase(),
-								currentChapter,
-								{
-									language: greekOverlayLanguage,
-								},
-							)
-						: getChapterVerses(currentBook.toLowerCase(), currentChapter, {
-								...chapterOptions,
-								showDss: false,
-							}),
-				]);
+						getChapterCount(currentBook.toLowerCase()),
+						getVerseCount(currentBook.toLowerCase(), currentChapter),
+						useGreekSource
+							? getGreekChapterVerses(
+									currentBook.toLowerCase(),
+									currentChapter,
+									{
+										language: greekOverlayLanguage,
+									},
+								)
+							: getChapterVerses(currentBook.toLowerCase(), currentChapter, {
+									...chapterOptions,
+									showDss: false,
+								}),
+					]);
 				const verses = useGreekSource
 					? Array.from({ length: verseCountValue }, (_, index) => {
 							const verseNumber = index + 1;
@@ -966,8 +893,7 @@ export default function App() {
 				}
 
 				const scheduleIdle =
-					typeof window !== "undefined" &&
-					"requestIdleCallback" in window
+					typeof window !== "undefined" && "requestIdleCallback" in window
 						? window.requestIdleCallback.bind(window)
 						: (callback: () => void) => window.setTimeout(callback, 200);
 				scheduleIdle(() => {
@@ -1013,6 +939,7 @@ export default function App() {
 		translationOnly,
 		isBesorah,
 		greekAvailable,
+		setCurrentScreen,
 	]);
 
 	useEffect(() => {
@@ -1020,6 +947,7 @@ export default function App() {
 		const handlePopState = () => {
 			isHandlingPopStateRef.current = true;
 			const route = parseRoutePath(window.location.pathname);
+			setSettingsOpen(route?.screen === "settings");
 
 			// Handle invalid routes (null)
 			if (!route) {
@@ -1031,7 +959,7 @@ export default function App() {
 			}
 
 			if (route.screen !== "verse") {
-				setCurrentScreen(route.screen);
+				handleOpenScreen(route.screen);
 			} else {
 				// If we're coming back from terms/privacy/feedback, go to home instead of verse
 				if (
@@ -1068,7 +996,7 @@ export default function App() {
 
 		window.addEventListener("popstate", handlePopState);
 		return () => window.removeEventListener("popstate", handlePopState);
-	}, []);
+	}, [handleOpenScreen, setCurrentScreen, setSettingsOpen]);
 
 	useEffect(() => {
 		if (typeof window === "undefined") return;
@@ -1091,12 +1019,7 @@ export default function App() {
 		if (lastUrlRef.current === path) return;
 		window.history.pushState(null, "", path);
 		lastUrlRef.current = path;
-	}, [
-		currentBook,
-		currentChapter,
-		currentScreen,
-		currentVerse,
-	]);
+	}, [currentBook, currentChapter, currentScreen, currentVerse]);
 
 	useEffect(() => {
 		let isMounted = true;
@@ -1168,8 +1091,7 @@ export default function App() {
 							: await loadLexiconInstances(analysis.strong_number);
 					if (!isCurrentRequest() || !instances) return;
 					setSelectedWordAnalysis((current) =>
-						current &&
-						isCurrentLexiconResult(strongPart, current.strong_number)
+						current && isCurrentLexiconResult(strongPart, current.strong_number)
 							? { ...current, ...instances }
 							: current,
 					);
@@ -1433,7 +1355,7 @@ export default function App() {
 			window.removeEventListener("online", handleOnline);
 			window.removeEventListener("offline", handleOffline);
 		};
-	}, [currentScreen]);
+	}, [currentScreen, setCurrentScreen]);
 
 	useEffect(() => {
 		if (!isMobile) {
@@ -1649,7 +1571,7 @@ export default function App() {
 	useVerseScrollNavigation({
 		containerRef: versePanelRef,
 		isEnabled: isScrollNavigationActive,
-		isBlocked: isWordPanelHovered,
+		isBlocked: isWordPanelHovered || settingsOpen,
 		threshold: 36,
 		cooldownMs: 500,
 		onNavigateNext: handleNextVerse,
@@ -1674,8 +1596,13 @@ export default function App() {
 						: "translate-y-0 opacity-100"
 				}`}
 			>
+				<SandboxBanner />
 				<div className="mx-auto flex justify-center">
 					<NavigationBar
+						activeDestination={currentScreen}
+						onDestinationClick={handleOpenScreen}
+						settingsOpen={settingsOpen}
+						onSettingsOpenChange={setSettingsOpen}
 						book={currentBook}
 						bookDisplayName={getDisplayBookName(currentBook)}
 						bookHebrew={getHebrewBookName(currentBook)}
@@ -1706,8 +1633,8 @@ export default function App() {
 							setCurrentVerse(1);
 						}}
 						onVerseChange={(verse) => setCurrentVerse(verse)}
-						onHomeClick={(screen) => setCurrentScreen(screen)}
 						onDesignSystemClick={() => setShowDesignSystem(true)}
+						onMobileDesignGuideClick={() => setShowMobileDesignGuide(true)}
 						theme={theme}
 						onThemeChange={setTheme}
 						language={language}
@@ -1721,6 +1648,8 @@ export default function App() {
 						onQumranChange={setShowQumran}
 						showFullChapter={showFullChapter}
 						onFullChapterChange={setShowFullChapter}
+						showCalendarDayPill={showCalendarDayPill}
+						onCalendarDayPillChange={setShowCalendarDayPill}
 						seferMode={seferMode}
 						onSeferModeChange={handleSeferModeChange}
 						hebrewOnly={hebrewOnly}
@@ -1734,19 +1663,6 @@ export default function App() {
 					/>
 				</div>
 			</div>
-
-			{currentScreen === "verse" && isBesorah && !translationOnly && (
-				<div
-					className="fixed left-6 top-6 z-50 pointer-events-none max-w-[280px] rounded-md px-3 py-1.5 text-xs leading-snug"
-					style={{
-						backgroundColor: "var(--surface)",
-						color: "var(--text-secondary)",
-						border: "1px solid var(--border-color)",
-					}}
-				>
-					{besorahDisclaimerText}
-				</div>
-			)}
 
 			<div className="px-6 pb-10 md:pb-32 pt-6">
 				<div className="max-w-7xl mx-auto">
@@ -1766,11 +1682,15 @@ export default function App() {
 							onQumranChange: setShowQumran,
 							showFullChapter,
 							onFullChapterChange: setShowFullChapter,
+							showCalendarDayPill,
+							onCalendarDayPillChange: setShowCalendarDayPill,
 							seferMode,
 							onSeferModeChange: handleSeferModeChange,
 							hebrewOnly,
 							onHebrewOnlyChange: handleHebrewOnlyChange,
-							onOpenScreen: setCurrentScreen,
+							translationOnly,
+							onTranslationOnlyChange: handleTranslationOnlyChange,
+							onOpenScreen: handleOpenScreen,
 							onOpenDesignSystem: () => setShowDesignSystem(true),
 							onOpenMobileDesignGuide: () => setShowMobileDesignGuide(true),
 						})}
@@ -1830,6 +1750,8 @@ export default function App() {
 												currentVerseData.source_language !== "greek"
 											}
 											showFullChapter={showFullChapter}
+											showCalendarDayPill={showCalendarDayPill}
+											onOpenCalendar={() => setCurrentScreen("widgets")}
 											seferMode={seferMode}
 											hebrewOnly={hebrewOnly}
 											showNikud={showNikud}

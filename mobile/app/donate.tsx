@@ -1,3 +1,4 @@
+import { ResourceHeader } from "@/src/components/ResourcePage";
 import { useMemo } from "react";
 import {
   Linking,
@@ -105,7 +106,8 @@ export default function DonateScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea} edges={["top"]}>
+    <SafeAreaView style={styles.safeArea} edges={["bottom"]}>
+      <ResourceHeader title={t("settings.links.donate")} />
       <View style={styles.container}>
         <ScrollView contentContainerStyle={styles.content}>
           <View style={styles.centeredContent}>

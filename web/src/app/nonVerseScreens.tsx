@@ -1,7 +1,14 @@
+import { AccountScreen } from "./components/AccountScreen";
+import { SourcesScreen } from "./components/SourcesScreen";
+import { CommentarySourcesScreen } from "./components/CommentarySourcesScreen";
+import { SupportScreen } from "./components/SupportScreen";
+import { DonationPage } from "./components/DonationPage";
+import type { CommentaryContext } from "@davar/shared/productContracts";
+import { CalendarPanel } from "./components/CalendarPanel";
+import { ProductScreen } from "./components/ProductScreen";
 import type { ReactNode } from "react";
 import type { BesorahLanguage } from "@davar/shared/greekBesorah";
 import { ConnectionErrorPage } from "./components/ConnectionErrorPage";
-import { DonateScreen } from "./components/DonateScreen";
 import { FeaturesScreen } from "./components/FeaturesScreen";
 import { FeedbackScreen } from "./components/FeedbackScreen";
 import { HomeScreen } from "./components/HomeScreen";
@@ -13,6 +20,7 @@ import type { RouteScreen } from "./utils/routeState";
 type NonVerseScreen = Exclude<RouteScreen, "verse">;
 
 export type NonVerseScreenProps = {
+	commentaryContext?: CommentaryContext | null;
 	screen: NonVerseScreen;
 	language: "en" | "es" | "he";
 	theme: "light" | "dark";
@@ -27,16 +35,21 @@ export type NonVerseScreenProps = {
 	onQumranChange: (show: boolean) => void;
 	showFullChapter: boolean;
 	onFullChapterChange: (show: boolean) => void;
+	showCalendarDayPill?: boolean;
+	onCalendarDayPillChange?: (show: boolean) => void;
 	seferMode: boolean;
 	onSeferModeChange: (show: boolean) => void;
 	hebrewOnly: boolean;
 	onHebrewOnlyChange: (show: boolean) => void;
+	translationOnly: boolean;
+	onTranslationOnlyChange: (show: boolean) => void;
 	onOpenScreen: (screen: RouteScreen) => void;
 	onOpenDesignSystem: () => void;
 	onOpenMobileDesignGuide: () => void;
 };
 
 export function renderNonVerseScreen({
+	commentaryContext,
 	screen,
 	language,
 	theme,
@@ -51,15 +64,53 @@ export function renderNonVerseScreen({
 	onQumranChange,
 	showFullChapter,
 	onFullChapterChange,
+	showCalendarDayPill = false,
+	onCalendarDayPillChange,
 	seferMode,
 	onSeferModeChange,
 	hebrewOnly,
 	onHebrewOnlyChange,
+	translationOnly,
+	onTranslationOnlyChange,
 	onOpenScreen,
 	onOpenDesignSystem,
 	onOpenMobileDesignGuide,
 }: NonVerseScreenProps): ReactNode {
+	const settingsProps = {
+		theme,
+		onThemeChange,
+		language,
+		onLanguageChange,
+		besorahLanguage,
+		onBesorahLanguageChange,
+		greekAvailable,
+		besorahTextVersion,
+		onBesorahTextVersionChange,
+		showQumran,
+		onQumranChange,
+		showFullChapter,
+		onFullChapterChange,
+		showCalendarDayPill,
+		onCalendarDayPillChange,
+		seferMode,
+		onSeferModeChange,
+		hebrewOnly,
+		onHebrewOnlyChange,
+		translationOnly,
+		onTranslationOnlyChange,
+	};
 	switch (screen) {
+		case "widgets":
+			return <CalendarPanel language={language} />;
+		case "assemblies":
+		case "commentary":
+			return (
+				<ProductScreen
+					screen={screen}
+					language={language}
+					context={commentaryContext}
+				/>
+			);
 		case "home":
 			return (
 				<HomeScreen
@@ -73,7 +124,7 @@ export function renderNonVerseScreen({
 				<LegalScreen
 					kind="terms"
 					language={language}
-					onBack={() => onOpenScreen("home")}
+					onBack={() => onOpenScreen("settings")}
 				/>
 			);
 		case "privacy":
@@ -81,7 +132,7 @@ export function renderNonVerseScreen({
 				<LegalScreen
 					kind="privacy"
 					language={language}
-					onBack={() => onOpenScreen("home")}
+					onBack={() => onOpenScreen("settings")}
 				/>
 			);
 		case "feedback":
@@ -92,29 +143,48 @@ export function renderNonVerseScreen({
 				/>
 			);
 		case "donate":
-			return <DonateScreen language={language} />;
+			return (
+				<DonationPage
+					language={language}
+					onBack={() => onOpenScreen("settings")}
+				/>
+			);
 		case "features":
 			return <FeaturesScreen language={language} />;
+		case "sources":
+			return (
+				<SourcesScreen
+					language={language}
+					onBack={() => onOpenScreen("settings")}
+				/>
+			);
+		case "commentarySources":
+			return (
+				<CommentarySourcesScreen
+					language={language}
+					onBack={() => onOpenScreen("settings")}
+				/>
+			);
+		case "support":
+			return (
+				<SupportScreen
+					language={language}
+					onBack={() => onOpenScreen("settings")}
+				/>
+			);
+		case "account":
+			return (
+				<AccountScreen
+					{...settingsProps}
+					onBack={() => onOpenScreen("settings")}
+				/>
+			);
 		case "settings":
 			return (
 				<SettingsScreen
-					theme={theme}
-					onThemeChange={onThemeChange}
-					language={language}
-					onLanguageChange={onLanguageChange}
-					besorahLanguage={besorahLanguage}
-					onBesorahLanguageChange={onBesorahLanguageChange}
-					greekAvailable={greekAvailable}
-					besorahTextVersion={besorahTextVersion}
-					onBesorahTextVersionChange={onBesorahTextVersionChange}
-					showQumran={showQumran}
-					onQumranChange={onQumranChange}
-					showFullChapter={showFullChapter}
-					onFullChapterChange={onFullChapterChange}
-					seferMode={seferMode}
-					onSeferModeChange={onSeferModeChange}
-					hebrewOnly={hebrewOnly}
-					onHebrewOnlyChange={onHebrewOnlyChange}
+					{...settingsProps}
+					onAccountClick={() => onOpenScreen("account")}
+					onOpenScreen={onOpenScreen}
 					onDesignSystemClick={onOpenDesignSystem}
 					onMobileDesignGuideClick={onOpenMobileDesignGuide}
 				/>
@@ -127,8 +197,6 @@ export function renderNonVerseScreen({
 				/>
 			);
 		case "connectionError":
-			return (
-				<ConnectionErrorPage onRetry={() => window.location.reload()} />
-			);
+			return <ConnectionErrorPage onRetry={() => window.location.reload()} />;
 	}
 }

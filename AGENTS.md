@@ -15,6 +15,7 @@ JavaScript installs, scripts, and tests use Bun from the surface directory (`web
 ## Product rules
 
 - Write code, comments, and documentation in English.
+- Apply UI wording changes to English, Spanish, and Hebrew together, unless the user explicitly limits the change to specific languages.
 - Hebrew UI is RTL. Keep the neumorphic, contemplative layout.
 - Do not modify licensed content, remove required attributions, or commit secrets, tokens, or private datasets.
 - Public code may ship with mock data. Licensed texts stay off the public branch.

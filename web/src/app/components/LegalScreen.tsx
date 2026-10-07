@@ -22,7 +22,7 @@ export function LegalScreen({ kind, language, onBack }: LegalScreenProps) {
 			<div className="legal-hero">
 				<div className="legal-hero-inner">
 					<button className="legal-back" onClick={onBack} type="button">
-						{t("navigation.backToApp")}
+						{t("settings.title")}
 					</button>
 					<h1 className="legal-title">{doc.title}</h1>
 					{doc.lastUpdated && (

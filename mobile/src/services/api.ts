@@ -5,9 +5,9 @@ import {
   shouldVersionStaticPath,
 } from "@davar/shared/staticDataPaths";
 
-const DEV_STATIC_DATA_BASE_URL = "http://127.0.0.1:3002/data";
+const DEV_STATIC_DATA_BASE_URL = "http://127.0.0.1:5173/data";
 const PROD_STATIC_DATA_BASE_URL = "https://davar.bible/data";
-const DEV_TS2009_BASE_URL = "http://127.0.0.1:3002/api/ts2009";
+const DEV_TS2009_BASE_URL = "http://127.0.0.1:5173/api/ts2009";
 const PROD_TS2009_BASE_URL = "https://davar.bible/api/ts2009";
 
 const staticDataCache = new Map<string, unknown>();
@@ -200,7 +200,7 @@ const buildNetworkHint = (requestUrl: string): string => {
     const host = parsed.hostname;
 
     if (Platform.OS === "android" && (host === "10.0.2.2" || LOOPBACK_HOSTS.has(host))) {
-      return " In Android dev builds on a physical device, set EXPO_PUBLIC_STATIC_DATA_BASE_URL and EXPO_PUBLIC_STATIC_BUNDLES_BASE_URL to your machine LAN IP (example: http://192.168.1.50:3002/data).";
+      return " In Android dev builds on a physical device, set EXPO_PUBLIC_STATIC_DATA_BASE_URL and EXPO_PUBLIC_STATIC_BUNDLES_BASE_URL to your machine LAN IP (example: http://192.168.1.50:5173/data).";
     }
   } catch {
     return "";

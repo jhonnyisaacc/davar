@@ -35,6 +35,7 @@ import type { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/typ
 import { router } from "expo-router";
 
 import { getColors, radii, spacing, typography } from "@/src/theme";
+import { getNavigationDockContentPadding } from "@/src/constants/navigationDock";
 import { useAppStore, type AppState } from "@/src/store/useAppStore";
 import { formatVerseRef } from "@davar/shared/formatVerseRef";
 import type { DisplayWord } from "@/src/services/scripture";
@@ -78,6 +79,7 @@ type PrefixResponse = {
 type WordAnalysisBottomSheetProps = {
   currentVerseId?: string;
   isBesorah?: boolean;
+  hasNavigationDock?: boolean;
   word?:
     | (DisplayWord & {
         meanings?: string[];
@@ -872,6 +874,7 @@ const WordAnalysisBottomSheetComponent = (
     word,
     currentVerseId,
     isBesorah = false,
+    hasNavigationDock = true,
     onClosed,
   }: WordAnalysisBottomSheetProps,
   ref: React.ForwardedRef<BottomSheetMethods>,
@@ -892,6 +895,11 @@ const WordAnalysisBottomSheetComponent = (
   );
   const themeMode = useAppStore((state: AppState) => state.themeMode);
   const insets = useSafeAreaInsets();
+  const bottomPadding =
+    spacing[8] +
+    (hasNavigationDock
+      ? getNavigationDockContentPadding(insets.bottom)
+      : insets.bottom);
   const { height: screenHeight } = useWindowDimensions();
   const hebrewFontScale = useAppStore(
     (state: AppState) => state.hebrewFontScale,
@@ -1016,9 +1024,7 @@ const WordAnalysisBottomSheetComponent = (
     activeTab,
     isBesorah,
     lexiconEntry?.hebrew,
-    word?.dssWord,
-    word?.text,
-    word?.source_language,
+    word,
     showNikud,
     showCantillation,
   ]);
@@ -1038,7 +1044,7 @@ const WordAnalysisBottomSheetComponent = (
       displayBase = removeSofPasukForDisplay(displayBase);
     }
     return getPrefixSegments(displayBase, word.prefixes);
-  }, [isBesorah, showNikud, word?.text, word?.prefixes]);
+  }, [isBesorah, showNikud, word]);
 
   useEffect(() => {
     let cancelled = false;
@@ -1413,7 +1419,7 @@ const WordAnalysisBottomSheetComponent = (
     >
       <BottomSheetScrollView
         style={styles.content}
-        contentContainerStyle={{ paddingBottom: spacing[8] + insets.bottom }}
+        contentContainerStyle={{ paddingBottom: bottomPadding }}
       >
         {/* Show empty state when no word is selected */}
         {!word ? (

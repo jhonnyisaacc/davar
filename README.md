@@ -24,12 +24,15 @@ A minimalist Bible study app focused on Hebrew Scriptures.
 ### Requirements
 
 - Bun installed
+- Mise installed and activated in your shell (Ruby and Python are declared in `mise.toml`)
 
 ### 1) Clone and install
 
 ```bash
 git clone https://github.com/jhonnyisaacc/davar.git
 cd davar
+mise trust
+mise install
 ```
 
 ### 2) Web app
@@ -37,19 +40,33 @@ cd davar
 ```bash
 cd web
 bun install
-bun dev
+bun run dev
 ```
 
 Local web URL:
-- http://localhost:3002
+- http://localhost:5173
 
 ### 3) Mobile app (Expo)
 
 ```bash
 cd mobile
 bun install
-bun expo start
+bun run start
 ```
+
+Keep the Rails API running for Commentary, accounts, assemblies, and the calendar.
+Follow [api/README.md](api/README.md) for its dependencies and development configuration,
+then run `bundle exec rails server` from `api/`.
+
+| Service | Local URL |
+| --- | --- |
+| Rails API | http://localhost:3000 |
+| Web and static data | http://localhost:5173 |
+| Expo / Metro | http://localhost:8081 |
+| PostgreSQL | localhost:5432 |
+
+Expo uses its default Metro port. Web uses 5173 so it can run alongside Rails on
+3000. Start web as well when testing mobile with local Scripture data.
 
 ### Test baseline
 
