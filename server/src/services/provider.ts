@@ -38,9 +38,10 @@ export function developmentOpenrouter(
 	env: NodeJS.ProcessEnv = process.env,
 	nodeEnv: string = env.NODE_ENV ?? "development",
 ): boolean {
+	const key = env.OPENROUTER_API_KEY ?? "";
 	return (
 		nodeEnv === "development" &&
-		Boolean(env.OPENROUTER_API_KEY) &&
+		key.trim().length > 0 &&
 		freeModel(env.OPENROUTER_MODEL ?? "")
 	);
 }
