@@ -1,146 +1,34 @@
-import { useReadingModes } from "./features/reader/useReadingModes";
-import { useScreenNavigation } from "./features/reader/useScreenNavigation";
-import { useCalendarLifecycle } from "./hooks/useCalendar";
-import { SandboxBanner } from "./components/SandboxBanner";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { parseSourceStrong } from "@davar/shared/greekBesorah";
 import { BottomSheet } from "./components/BottomSheet";
 import { DesignSystemExport } from "./components/DesignSystemExport";
 import { MobileDesignSystemGuide } from "./components/MobileDesignSystemGuide";
 import { NavigationBar } from "./components/NavigationBar";
 import { NeumorphCard } from "./components/NeumorphCard";
+import { SandboxBanner } from "./components/SandboxBanner";
 import { Skeleton } from "./components/ui/skeleton";
 import { VerseDisplay } from "./components/VerseDisplay";
 import { WordCard } from "./components/WordCard";
+import { useReaderChrome } from "./features/reader/useReaderChrome";
+import { useReaderPreferences } from "./features/reader/useReaderPreferences";
+import { useReaderRoute } from "./features/reader/useReaderRoute";
+import { useReadingModes } from "./features/reader/useReadingModes";
+import { useReadingPosition } from "./features/reader/useReadingPosition";
+import { useScreenNavigation } from "./features/reader/useScreenNavigation";
+import { useVerseLibrary } from "./features/reader/useVerseLibrary";
+import { useWordSelection } from "./features/reader/useWordSelection";
+import { useCalendarLifecycle } from "./hooks/useCalendar";
 import { renderNonVerseScreen } from "./nonVerseScreens";
-import { useDocumentTitle } from "./hooks/useDocumentTitle";
-import { usePersistedState } from "./hooks/usePersistedState";
-import { translate, useTranslation } from "./hooks/useTranslation";
-import {
-	type BookResponse,
-	getBooks,
-	getChapterCount,
-	getChapterVerses,
-	getGreekChapterVerses,
-	getVerseCount,
-	isGreekPreviewEnabled,
-	loadGreekLexiconEntry,
-	loadGreekLexiconInstances,
-	loadLexiconEntry,
-	loadLexiconInstances,
-	lookupBook,
-	prefetchChapterResources,
-	prefetchLexiconEntry,
-	type VerseResponse,
-	type WordAnalysis,
-	type WordResponse,
-} from "./services/staticData";
-import {
-	GREEK_BESORAH_BOOK_NAMES,
-	parseSourceStrong,
-} from "@davar/shared/greekBesorah";
-import { isCurrentLexiconResult } from "@davar/shared/lexiconAssets";
-import { formatBookDisplayName } from "./utils/bookNameFormatter";
-import { stripCantillation, stripMeteg } from "./utils/hebrew";
+import { prefetchLexiconEntry } from "./services/staticData";
 import {
 	createDefaultReadingState,
 	getLastPositionForBook,
 	getStoredReadingState,
-	saveReadingState,
-	updateLastPositionForBook,
 } from "./utils/storageHelpers";
-import {
-	getDssCommentaryForLanguage,
-	resolveGreekOverlayLanguage,
-} from "./utils/translationConfig";
-import { useVerseScrollNavigation } from "./utils/useVerseScrollNavigation";
-import {
-	buildRoutePath,
-	findCanonicalBook,
-	parseRoutePath,
-	type RouteState,
-} from "./utils/routeState";
-
-type WordSelectionContext = {
-	chapter: number;
-	verse: number;
-};
-
-const BOOK_ABBREVIATIONS: Record<string, string> = {
-	gen: "Genesis",
-	exod: "Exodus",
-	ex: "Exodus",
-	lev: "Leviticus",
-	num: "Numbers",
-	deut: "Deuteronomy",
-	josh: "Joshua",
-	judg: "Judges",
-	ruth: "Ruth",
-	"1sam": "Samuel1",
-	"2sam": "Samuel2",
-	"1kgs": "Kings1",
-	"2kgs": "Kings2",
-	"1chr": "Chronicles1",
-	"2chr": "Chronicles2",
-	ezra: "Ezra",
-	neh: "Nehemiah",
-	esth: "Esther",
-	job: "Job",
-	ps: "Psalms",
-	prov: "Proverbs",
-	eccl: "Ecclesiastes",
-	song: "SongOfSolomon",
-	isa: "Isaiah",
-	jer: "Jeremiah",
-	ezek: "Ezekiel",
-	dan: "Daniel",
-	hos: "Hosea",
-	joel: "Joel",
-	amos: "Amos",
-	obad: "Obadiah",
-	jonah: "Jonah",
-	mic: "Micah",
-	nah: "Nahum",
-	hab: "Habakkuk",
-	zeph: "Zephaniah",
-	hag: "Haggai",
-	zech: "Zechariah",
-	mal: "Malachi",
-	matt: "Matthew",
-	mark: "Mark",
-	luke: "Luke",
-	john: "John",
-	acts: "Acts",
-	rom: "Romans",
-	"1cor": "Corinthians1",
-	"2cor": "Corinthians2",
-	gal: "Galatians",
-	eph: "Ephesians",
-	phil: "Philippians",
-	col: "Colossians",
-	"1thess": "Thessalonians1",
-	"2thess": "Thessalonians2",
-	"1tim": "Timothy1",
-	"2tim": "Timothy2",
-	tit: "Titus",
-	phlm: "Philemon",
-	phlm2: "Philemon",
-	heb: "Hebrews",
-	jas: "James",
-	"1pet": "Peter1",
-	"2pet": "Peter2",
-	"1john": "John1",
-	"2john": "John2",
-	"3john": "John3",
-	jude: "Jude",
-	rev: "Revelation",
-};
+import { getDssCommentaryForLanguage } from "./utils/translationConfig";
 
 export default function App() {
 	useCalendarLifecycle();
-	// Initialize persisted state from localStorage or defaults
 	const initialState = getStoredReadingState() ?? createDefaultReadingState();
-
-	// Use persisted state hooks for all settings
 	const {
 		currentScreen,
 		setCurrentScreen,
@@ -148,170 +36,77 @@ export default function App() {
 		setSettingsOpen,
 		handleOpenScreen,
 	} = useScreenNavigation();
-	const currentScreenRef = useRef(currentScreen);
-	const [theme, setTheme] = usePersistedState("theme", initialState.theme);
-	const [language, setLanguage] = usePersistedState(
-		"language",
-		initialState.language,
-	);
-	const [besorahTextVersion, setBesorahTextVersion] = usePersistedState(
-		"besorahTextVersion",
-		initialState.besorahTextVersion,
-	);
-	const [besorahLanguage, setBesorahLanguage] = usePersistedState(
-		"besorahLanguage",
-		initialState.besorahLanguage,
-	);
-	const greekAvailable = isGreekPreviewEnabled();
-	const { t, isRTL } = useTranslation(language);
-
-	useEffect(() => {
-		currentScreenRef.current = currentScreen;
-	}, [currentScreen]);
-	const [showQumran, setShowQumran] = usePersistedState(
-		"showQumran",
-		initialState.showQumran,
-	);
-	const [showFullChapter, setShowFullChapter] = usePersistedState(
-		"showFullChapter",
-		initialState.showFullChapter,
-	);
-	const [showCalendarDayPill, setShowCalendarDayPill] = usePersistedState(
-		"showCalendarDayPill",
-		initialState.showCalendarDayPill ?? false,
-	);
-	const [seferMode, setSeferMode] = usePersistedState(
-		"seferMode",
-		initialState.seferMode ?? false,
-	);
-	const [hebrewOnly, setHebrewOnly] = usePersistedState(
-		"hebrewOnly",
-		initialState.hebrewOnly,
-	);
-	const [translationOnly, setTranslationOnly] = usePersistedState(
-		"translationOnly",
-		initialState.translationOnly,
-	);
-	const [showNikud, setShowNikud] = usePersistedState(
-		"showNikud",
-		initialState.showNikud,
-	);
-	const [showCantillation, setShowCantillation] = usePersistedState(
-		"showCantillation",
-		initialState.showCantillation,
-	);
-	const [scrollHintCount, setScrollHintCount] = usePersistedState(
-		"scrollNavHintCount",
-		initialState.scrollNavHintCount,
-	);
-	const [desktopScrollHintCount, setDesktopScrollHintCount] = usePersistedState(
-		"desktopScrollHintCount",
-		initialState.desktopScrollHintCount,
-	);
-
-	// Navigation state - also persisted but with special logic for per-book tracking
-	const [currentBook, setCurrentBook] = useState(initialState.book);
-	const [currentChapter, setCurrentChapter] = useState(initialState.chapter);
-	const [currentVerse, setCurrentVerse] = useState(initialState.verse);
-	const prevBookRef = useRef(currentBook);
-
-	// Non-persisted UI state
-	const [scrollJumpActive, setScrollJumpActive] = useState(false);
-	const [isWordPanelHovered, setIsWordPanelHovered] = useState(false);
-	const versePanelRef = useRef<HTMLDivElement | null>(null);
-
-	const [selectedWord, setSelectedWord] = useState<WordResponse | null>(null);
-	const [selectedWordContext, setSelectedWordContext] =
-		useState<WordSelectionContext | null>(null);
-	const [isWordSheetOpen, setIsWordSheetOpen] = useState(false);
-	const wordSheetClosingRef = useRef(false);
-	const [isWordPanelDismissed, setIsWordPanelDismissed] = useState(true);
-	const [showWordHint, _setShowWordHint] = useState(true);
-	const [isNavigatingWordPanel, setIsNavigatingWordPanel] = useState(false);
-	const [showWordSkeleton, setShowWordSkeleton] = useState(false);
-	const navigationKeyRef = useRef<string | null>(null);
-	const wordSkeletonTimerRef = useRef<number | null>(null);
-	const wordPanelDismissedRef = useRef(true);
-	const [lastSelectedWord, setLastSelectedWord] = useState<WordResponse | null>(
-		null,
-	);
-	const [lastSelectedWordContext, setLastSelectedWordContext] =
-		useState<WordSelectionContext | null>(null);
-	const [lastSelectedWordAnalysis, setLastSelectedWordAnalysis] =
-		useState<WordAnalysis | null>(null);
-	const [showMobileDesignGuide, setShowMobileDesignGuide] = useState(false);
-	const [showDesignSystem, setShowDesignSystem] = useState(false);
-	const [isMobile, setIsMobile] = useState(false);
-
-	const [books, setBooks] = useState<BookResponse[]>([]);
-	const booksRef = useRef<BookResponse[]>([]);
-	const [chapterVerses, setChapterVerses] = useState<VerseResponse[]>([]);
-	const [chapterCount, setChapterCount] = useState(1);
-	const [verseCount, setVerseCount] = useState(1);
-	const [isLoading, setIsLoading] = useState(false);
-	const [_errorMessage, setErrorMessage] = useState<string | null>(null);
-	const [selectedWordAnalysis, setSelectedWordAnalysis] =
-		useState<WordAnalysis | null>(null);
-	const [isWordAnalysisLoading, setIsWordAnalysisLoading] = useState(false);
-	const wordAnalysisRequestRef = useRef(0);
-	const dssAnalysisRequestRef = useRef(0);
-	const chapterLoadRequestRef = useRef(0);
-	const [selectedDssAnalysis, setSelectedDssAnalysis] =
-		useState<WordAnalysis | null>(null);
-	const [lastSelectedDssAnalysis, setLastSelectedDssAnalysis] =
-		useState<WordAnalysis | null>(null);
-	const [isDssAnalysisLoading, setIsDssAnalysisLoading] = useState(false);
-	const lastUrlRef = useRef<string | null>(null);
-	const pendingRouteRef = useRef<RouteState | null | undefined>(undefined);
-	const isHandlingPopStateRef = useRef(false);
-	const preserveWordRef = useRef(false);
-	const pendingWordTextRef = useRef<string | null>(null);
-	const pendingWordStrongRef = useRef<string | null>(null);
-	const pendingWordRef = useRef<WordResponse | null>(null);
-	const [wordCardTabKey, setWordCardTabKey] = useState(0);
-	const [hideNavOnScroll, setHideNavOnScroll] = useState(false);
-	const lastScrollYRef = useRef(0);
-
-	const getTransliterationForLanguage = useCallback(
-		(word?: WordResponse | null) => {
-			if (!word) return undefined;
-			if (language === "en") return word.translit_en;
-			if (language === "es") return word.translit_es;
-			return word.translit_he;
-		},
-		[language],
-	);
-
-	const getAnalysisTransliterationForLanguage = useCallback(
-		(analysis?: WordAnalysis | null) => {
-			if (!analysis) return undefined;
-			if (language === "en") return analysis.translit_en;
-			if (language === "es") return analysis.translit_es;
-			return analysis.translit_he;
-		},
-		[language],
-	);
-
-	const resolveRenderableDssWord = useCallback((value?: string) => {
-		if (!value) return undefined;
-		const trimmed = value.trim();
-		if (!trimmed || trimmed.toLowerCase() === "note") {
-			return undefined;
-		}
-
-		// Multi-word DSS variants are renderable now that replacement is
-		// span-aware in VerseDisplay (#103).
-		const tokenCount = trimmed
-			.replace(/[/:]/g, " ")
-			.split(/\s+/)
-			.filter(Boolean).length;
-		if (tokenCount < 1) {
-			return undefined;
-		}
-
-		return trimmed;
-	}, []);
-
+	const {
+		theme,
+		setTheme,
+		language,
+		setLanguage,
+		besorahTextVersion,
+		besorahLanguage,
+		setBesorahLanguage,
+		greekAvailable,
+		t,
+		showQumran,
+		setShowQumran,
+		showFullChapter,
+		setShowFullChapter,
+		showCalendarDayPill,
+		setShowCalendarDayPill,
+		seferMode,
+		setSeferMode,
+		hebrewOnly,
+		setHebrewOnly,
+		translationOnly,
+		setTranslationOnly,
+		showNikud,
+		setShowNikud,
+		showCantillation,
+		setShowCantillation,
+		desktopScrollHintCount,
+		handleBesorahTextVersionChange,
+		scrollJumpActive,
+		triggerScrollJump,
+	} = useReaderPreferences(initialState);
+	const {
+		currentBook,
+		setCurrentBook,
+		currentChapter,
+		setCurrentChapter,
+		currentVerse,
+		setCurrentVerse,
+	} = useReadingPosition(initialState);
+	const {
+		books,
+		chapterVerses,
+		setChapterVerses,
+		chapterCount,
+		verseCount,
+		isLoading,
+		currentVerseData,
+		currentVerseIndex,
+		bookOptions,
+		isBesorah,
+		getHebrewBookName,
+		getDisplayBookName,
+		handlePreviousVerse,
+		handleNextVerse,
+	} = useVerseLibrary({
+		currentBook,
+		currentChapter,
+		currentVerse,
+		currentScreen,
+		setCurrentBook,
+		setCurrentChapter,
+		setCurrentVerse,
+		setCurrentScreen,
+		language,
+		besorahLanguage,
+		besorahTextVersion,
+		showQumran,
+		translationOnly,
+		greekAvailable,
+		t,
+	});
 	const {
 		handleSeferModeChange,
 		handleHebrewOnlyChange,
@@ -336,1247 +131,90 @@ export default function App() {
 		setCurrentChapter,
 		setCurrentVerse,
 	});
-
-	useEffect(() => {
-		booksRef.current = books;
-	}, [books]);
-
-	const getHebrewBookName = useCallback(
-		(book: string): string => {
-			const found = books.find(
-				(item) => item.name.toLowerCase() === book.toLowerCase(),
-			);
-			if (
-				besorahLanguage === "greek" &&
-				found?.section === "besorah" &&
-				GREEK_BESORAH_BOOK_NAMES[found.id]
-			) {
-				return GREEK_BESORAH_BOOK_NAMES[found.id];
-			}
-			return found?.hebrew_name ?? book;
-		},
-		[besorahLanguage, books],
-	);
-
-	const getDisplayBookName = useCallback(
-		(book: string): string => {
-			const found = books.find(
-				(item) => item.name.toLowerCase() === book.toLowerCase(),
-			);
-			if (language === "es") {
-				return formatBookDisplayName(found?.spanish_name || book);
-			}
-			return formatBookDisplayName(book);
-		},
-		[books, language],
-	);
-
-	const tabTitle = useMemo(() => {
-		if (currentScreen === "terms") {
-			return `${t("home.aboutItems.terms")} | ${t("common.appName")}`;
-		}
-
-		if (currentScreen === "privacy") {
-			return `${t("home.aboutItems.privacy")} | ${t("common.appName")}`;
-		}
-
-		if (currentScreen !== "verse" || !currentBook || !currentChapter) {
-			return t("common.appName");
-		}
-
-		const hebrewBookName = getHebrewBookName(currentBook);
-		const chapterVerse = `${currentChapter}:${currentVerse}`;
-
-		if (language === "he") {
-			return `${hebrewBookName} ${chapterVerse} ${hebrewBookName}`;
-		}
-
-		const displayBookName = getDisplayBookName(currentBook);
-
-		return `${displayBookName} ${chapterVerse} ${hebrewBookName}`;
-	}, [
+	useReaderRoute({
+		books,
 		currentBook,
 		currentChapter,
 		currentVerse,
 		currentScreen,
-		language,
-		t,
-		getHebrewBookName,
-		getDisplayBookName,
-	]);
-
-	useDocumentTitle(tabTitle);
-
-	useEffect(() => {
-		if (theme === "dark") {
-			document.documentElement.classList.add("dark");
-		} else {
-			document.documentElement.classList.remove("dark");
-		}
-	}, [theme]);
-
-	useEffect(() => {
-		if (typeof window === "undefined") return;
-		const pathname = window.location.pathname;
-		pendingRouteRef.current = parseRoutePath(pathname);
-		// Keep an incoming deep link from being replaced by persisted state
-		// before the book list is available to apply the pending route.
-		lastUrlRef.current = pathname;
-	}, []);
-
-	useEffect(() => {
-		document.documentElement.dir = isRTL ? "rtl" : "ltr";
-		document.documentElement.lang = language;
-	}, [isRTL, language]);
-
-	useEffect(() => {
-		if (typeof window === "undefined") return;
-		// Save navigation state and per-book position to localStorage
-		const stored = getStoredReadingState();
-		if (stored) {
-			let updated = {
-				...stored,
-				book: currentBook,
-				chapter: currentChapter,
-				verse: currentVerse,
-			};
-			updated = updateLastPositionForBook(
-				updated,
-				currentBook,
-				currentChapter,
-				currentVerse,
-			);
-			saveReadingState(updated);
-		}
-	}, [currentBook, currentChapter, currentVerse]);
-
-	// Clear selected word and chapter verses when book changes to prevent showing stale data
-	useEffect(() => {
-		if (prevBookRef.current !== currentBook) {
-			setSelectedWord(null);
-			setSelectedWordContext(null);
-			setSelectedWordAnalysis(null);
-			setChapterVerses([]); // Clear old verses so currentVerseData becomes null
-			prevBookRef.current = currentBook;
-		}
-	}, [currentBook]);
-
-	useEffect(() => {
-		if (currentScreen === "verse") return;
-
-		wordSheetClosingRef.current = false;
-		setIsWordSheetOpen(false);
-		setIsWordPanelHovered(false);
-		setIsNavigatingWordPanel(false);
-		setShowWordSkeleton(false);
-		setSelectedWord(null);
-		setSelectedWordContext(null);
-	}, [currentScreen]);
-
-	const closeWordSheet = useCallback(() => {
-		wordSheetClosingRef.current = true;
-		setIsWordSheetOpen(false);
-	}, []);
-
-	const logWordDebug = useCallback((...args: unknown[]) => {
-		if ((import.meta as ImportMeta & { env?: { DEV?: boolean } }).env?.DEV) {
-			console.debug("[word-debug]", ...args);
-		}
-	}, []);
-
-	const handleWordSheetAfterClose = useCallback(() => {
-		if (isWordSheetOpen) return;
-		wordSheetClosingRef.current = false;
-		setSelectedWord(null);
-		setSelectedWordContext(null);
-	}, [isWordSheetOpen]);
-
-	const handleWordClick = useCallback(
-		(word: WordResponse, context?: WordSelectionContext) => {
-			if (besorahTextVersion === "hutter" && !word.strong) {
-				return;
-			}
-			const resolvedContext = context ?? {
-				chapter: currentChapter,
-				verse: currentVerse,
-			};
-			logWordDebug("click", {
-				text: word.text,
-				strong: word.strong ?? null,
-				position: word.position,
-				context: resolvedContext,
-				selected: selectedWord
-					? {
-							text: selectedWord.text,
-							strong: selectedWord.strong ?? null,
-							position: selectedWord.position,
-							context: selectedWordContext,
-						}
-					: null,
-			});
-
-			// If same word is clicked again, close the word card
-			if (
-				selectedWord?.text === word.text &&
-				selectedWord?.strong === word.strong &&
-				selectedWord?.position === word.position &&
-				selectedWordContext?.chapter === resolvedContext.chapter &&
-				selectedWordContext?.verse === resolvedContext.verse
-			) {
-				logWordDebug("click-same-word-close", {
-					text: word.text,
-					strong: word.strong ?? null,
-					position: word.position,
-					context: resolvedContext,
-				});
-				if (isMobile) {
-					closeWordSheet();
-				} else {
-					setIsWordPanelDismissed(true);
-					setSelectedWord(null);
-					setSelectedWordContext(null);
-					setLastSelectedWordAnalysis(null);
-					setLastSelectedDssAnalysis(null);
-				}
-				return;
-			}
-			setIsWordPanelDismissed(false);
-			setSelectedWord(word);
-			setSelectedWordContext(resolvedContext);
-			setSelectedWordAnalysis(null);
-			setSelectedDssAnalysis(null);
-			setIsWordAnalysisLoading(Boolean(parseSourceStrong(word.strong)));
-			setIsDssAnalysisLoading(false);
-			logWordDebug("click-select-word", {
-				text: word.text,
-				strong: word.strong ?? null,
-				position: word.position,
-				context: resolvedContext,
-				isMobile,
-			});
-			if (isMobile) {
-				wordSheetClosingRef.current = false;
-				setIsWordSheetOpen(true);
-			}
-		},
-		[
-			besorahTextVersion,
-			closeWordSheet,
-			currentChapter,
-			currentVerse,
-			isMobile,
-			logWordDebug,
-			selectedWord,
-			selectedWordContext,
-		],
-	);
-
-	const handleNavigateToVerse = async (verseRef: string) => {
-		const wordToPreserve = selectedWord ?? lastSelectedWord;
-		if (wordToPreserve) {
-			preserveWordRef.current = true;
-			pendingWordTextRef.current = wordToPreserve.text;
-			pendingWordStrongRef.current = wordToPreserve.strong ?? null;
-			pendingWordRef.current = wordToPreserve;
-			setIsWordPanelDismissed(false);
-			setWordCardTabKey((previous) => previous + 1);
-		}
-		const cleanedRef = verseRef.replace(/\s+/g, " ").trim();
-		const lastSpaceIndex = cleanedRef.lastIndexOf(" ");
-		if (lastSpaceIndex <= 0) return;
-
-		const bookLabel = cleanedRef.slice(0, lastSpaceIndex).trim();
-		const chapterVerse = cleanedRef.slice(lastSpaceIndex + 1).trim();
-		const match = chapterVerse.match(/^(\d+):(\d+)$/);
-		if (!match) return;
-
-		const chapter = Number.parseInt(match[1], 10);
-		const verse = Number.parseInt(match[2], 10);
-		if (Number.isNaN(chapter) || Number.isNaN(verse)) return;
-
-		const normalizedBookLabel = bookLabel.toLowerCase().replace(/\./g, "");
-		const abbreviationMatch = BOOK_ABBREVIATIONS[normalizedBookLabel];
-
-		const matchedBook = books.find((item) => {
-			const label = normalizedBookLabel;
-			return (
-				item.name.toLowerCase() === label ||
-				item.hebrew_name?.toLowerCase() === label ||
-				item.spanish_name?.toLowerCase() === label
-			);
-		});
-
-		let resolvedBookName = matchedBook?.name ?? abbreviationMatch ?? bookLabel;
-		if (!matchedBook && !abbreviationMatch) {
-			try {
-				const resolved = await lookupBook(bookLabel);
-				resolvedBookName = resolved.name;
-			} catch (error) {
-				console.error("Failed to normalize book label:", error);
-			}
-		}
-
-		setCurrentBook(resolvedBookName);
-		setCurrentChapter(chapter);
-		setCurrentVerse(verse);
-		if (isMobile) {
-			closeWordSheet();
-		} else {
-			setIsWordPanelDismissed(false);
-		}
-	};
-
-	const currentVerseData = useMemo(
-		() => chapterVerses.find((item) => item.verse === currentVerse) ?? null,
-		[chapterVerses, currentVerse],
-	);
-
-	const currentVerseIndex = useMemo(
-		() => chapterVerses.findIndex((item) => item.verse === currentVerse),
-		[chapterVerses, currentVerse],
-	);
-
-	const selectedWordVerseData = useMemo(() => {
-		const context = selectedWordContext ?? lastSelectedWordContext;
-		if (!context) return currentVerseData;
-
-		return (
-			chapterVerses.find(
-				(item) =>
-					item.chapter === context.chapter && item.verse === context.verse,
-			) ?? currentVerseData
-		);
-	}, [
-		chapterVerses,
-		currentVerseData,
-		lastSelectedWordContext,
-		selectedWordContext,
-	]);
-
-	const highlightedWord = useMemo(
-		() => selectedWord ?? lastSelectedWord,
-		[selectedWord, lastSelectedWord],
-	);
-
-	const highlightedWordContext = useMemo(() => {
-		if (selectedWord && selectedWordContext) {
-			return selectedWordContext;
-		}
-
-		if (!selectedWord && lastSelectedWordContext) {
-			return lastSelectedWordContext;
-		}
-
-		return null;
-	}, [selectedWord, selectedWordContext, lastSelectedWordContext]);
-
-	const selectedDssVariant = useMemo(
-		() =>
-			selectedWordVerseData?.dss?.find(
-				(variant) => variant.position === selectedWord?.position,
-			) ?? null,
-		[selectedWord, selectedWordVerseData],
-	);
-
-	const bookOptions = useMemo(
-		() =>
-			[...books]
-				.sort((a, b) => a.order - b.order)
-				.map((book) => ({
-					name: book.name,
-					hebrew: book.hebrew_name,
-					spanish: book.spanish_name,
-					greek: GREEK_BESORAH_BOOK_NAMES[book.id],
-					section: book.section,
-				})),
-		[books],
-	);
-	const currentBookMeta = useMemo(
-		() =>
-			books.find(
-				(item) => item.name.toLowerCase() === currentBook.toLowerCase(),
-			) ?? null,
-		[books, currentBook],
-	);
-	const isBesorah = currentBookMeta?.section === "besorah";
-
-	const handleBesorahTextVersionChange = useCallback(
-		(version: "delitzsch" | "hutter") => {
-			setBesorahTextVersion(version);
-		},
-		[setBesorahTextVersion],
-	);
-
-	useEffect(() => {
-		let isMounted = true;
-		const loadBooks = async () => {
-			try {
-				const response = await getBooks();
-				if (!isMounted) return;
-				setBooks(response);
-				if (response.length > 0) {
-					const hasCurrent = response.some(
-						(item) => item.name.toLowerCase() === currentBook.toLowerCase(),
-					);
-					if (!hasCurrent) {
-						setCurrentBook(response[0].name);
-						setCurrentChapter(1);
-						setCurrentVerse(1);
-					}
-				}
-			} catch (error) {
-				if (!isMounted) return;
-				if (error instanceof Error && error.name === "NetworkError") {
-					setCurrentScreen("connectionError");
-				} else {
-					setErrorMessage(translate(language, "errors.loadBooks"));
-				}
-			}
-		};
-		loadBooks();
-		return () => {
-			isMounted = false;
-		};
-	}, [currentBook, language, setCurrentScreen]);
-
-	useEffect(() => {
-		const pending = pendingRouteRef.current;
-		if (pending === undefined) return;
-		if (pending === null) {
-			setCurrentScreen("notFound");
-			pendingRouteRef.current = undefined;
-			return;
-		}
-
-		if (pending.screen !== "verse") {
-			handleOpenScreen(pending.screen);
-			pendingRouteRef.current = undefined;
-			return;
-		}
-
-		// Wait for books to load before processing verse routes with a book
-		// This prevents showing 404 when the page reloads before books are fetched
-		if (pending.book && books.length === 0) {
-			return;
-		}
-
-		if (pending.book) {
-			const matchedBook = findCanonicalBook(books, pending.book);
-			if (matchedBook) {
-				setCurrentBook(matchedBook.name);
-			} else {
-				// Book not found - show 404 page
-				setCurrentScreen("notFound");
-				pendingRouteRef.current = undefined;
-				return;
-			}
-		}
-
-		if (pending.chapter) {
-			setCurrentChapter(pending.chapter);
-		}
-
-		if (pending.verse) {
-			setCurrentVerse(pending.verse);
-		}
-
-		setCurrentScreen("verse");
-		pendingRouteRef.current = undefined;
-	}, [books, handleOpenScreen, setCurrentScreen]);
-
-	useEffect(() => {
-		let isMounted = true;
-		const loadRequestId = ++chapterLoadRequestRef.current;
-		const isCurrentLoad = () =>
-			isMounted && loadRequestId === chapterLoadRequestRef.current;
-		const loadChapterData = async () => {
-			setIsLoading(true);
-			setErrorMessage(null);
-			const useGreekSource =
-				greekAvailable &&
-				isBesorah &&
-				besorahLanguage === "greek" &&
-				!translationOnly;
-			const greekOverlayLanguage = useGreekSource
-				? resolveGreekOverlayLanguage(language, translationOnly)
-				: undefined;
-			const hebrewTranslationLanguage: "en" | "es" | undefined = translationOnly
-				? language === "es"
-					? "es"
-					: "en"
-				: language === "he"
-					? undefined
-					: language === "es"
-						? "es"
-						: "en";
-			const chapterOptions = {
-				language: hebrewTranslationLanguage,
-				hebrewOnly: false,
-				referenceMode: translationOnly
-					? ("translation" as const)
-					: ("source" as const),
-				besorahTextVersion,
-			};
-			try {
-				const [chapterCountValue, verseCountValue, loadedVerses] =
-					await Promise.all([
-						getChapterCount(currentBook.toLowerCase()),
-						getVerseCount(currentBook.toLowerCase(), currentChapter),
-						useGreekSource
-							? getGreekChapterVerses(
-									currentBook.toLowerCase(),
-									currentChapter,
-									{
-										language: greekOverlayLanguage,
-									},
-								)
-							: getChapterVerses(currentBook.toLowerCase(), currentChapter, {
-									...chapterOptions,
-									showDss: false,
-								}),
-					]);
-				const verses = useGreekSource
-					? Array.from({ length: verseCountValue }, (_, index) => {
-							const verseNumber = index + 1;
-							return (
-								loadedVerses.find((verse) => verse.verse === verseNumber) ?? {
-									available: false,
-									chapter: currentChapter,
-									edition: "sblgnt",
-									hebrew: "",
-									revision: undefined,
-									sourceChapter: currentChapter,
-									sourceVerse: verseNumber,
-									source_language: "greek" as const,
-									text: "",
-									verse: verseNumber,
-									words: [],
-								}
-							);
-						})
-					: loadedVerses;
-				const displayedVerseCount = translationOnly
-					? verses.length
-					: verseCountValue;
-				if (!isCurrentLoad()) return;
-				setChapterCount(chapterCountValue);
-				setVerseCount(displayedVerseCount);
-				setChapterVerses(verses);
-				if (verses.length > 0) {
-					const availableVerseNumbers = verses
-						.map((verse) => verse.verse)
-						.filter(
-							(verseNumber) => Number.isFinite(verseNumber) && verseNumber > 0,
-						);
-
-					if (availableVerseNumbers.length > 0) {
-						const availableVerseSet = new Set(availableVerseNumbers);
-						const fallbackVerse = availableVerseNumbers[0];
-						setCurrentVerse((prevVerse) =>
-							availableVerseSet.has(prevVerse) ? prevVerse : fallbackVerse,
-						);
-					}
-				}
-				if (isCurrentLoad()) setIsLoading(false);
-
-				if (!useGreekSource && showQumran) {
-					const enrichedVerses = await getChapterVerses(
-						currentBook.toLowerCase(),
-						currentChapter,
-						{
-							...chapterOptions,
-							showDss: true,
-						},
-					);
-					if (!isCurrentLoad()) return;
-					setChapterVerses(enrichedVerses);
-				}
-
-				const scheduleIdle =
-					typeof window !== "undefined" && "requestIdleCallback" in window
-						? window.requestIdleCallback.bind(window)
-						: (callback: () => void) => window.setTimeout(callback, 200);
-				scheduleIdle(() => {
-					if (!isCurrentLoad()) return;
-					prefetchChapterResources(
-						currentBook.toLowerCase(),
-						currentChapter + 1,
-						chapterOptions,
-					);
-					if (currentChapter > 1) {
-						prefetchChapterResources(
-							currentBook.toLowerCase(),
-							currentChapter - 1,
-							chapterOptions,
-						);
-					}
-				});
-			} catch (error) {
-				if (!isCurrentLoad()) return;
-				console.error("Failed to load chapter data", error);
-				if (error instanceof Error && error.name === "NetworkError") {
-					setCurrentScreen("connectionError");
-				} else {
-					setErrorMessage(translate(language, "errors.loadVerses"));
-				}
-			} finally {
-				if (isCurrentLoad()) setIsLoading(false);
-			}
-		};
-		if (currentBook) {
-			loadChapterData();
-		}
-		return () => {
-			isMounted = false;
-		};
-	}, [
-		besorahLanguage,
-		besorahTextVersion,
-		currentBook,
-		currentChapter,
-		language,
-		showQumran,
-		translationOnly,
-		isBesorah,
-		greekAvailable,
+		setCurrentBook,
+		setCurrentChapter,
+		setCurrentVerse,
 		setCurrentScreen,
-	]);
-
-	useEffect(() => {
-		if (typeof window === "undefined") return;
-		const handlePopState = () => {
-			isHandlingPopStateRef.current = true;
-			const route = parseRoutePath(window.location.pathname);
-			setSettingsOpen(route?.screen === "settings");
-
-			// Handle invalid routes (null)
-			if (!route) {
-				setCurrentScreen("notFound");
-				window.setTimeout(() => {
-					isHandlingPopStateRef.current = false;
-				}, 0);
-				return;
-			}
-
-			if (route.screen !== "verse") {
-				handleOpenScreen(route.screen);
-			} else {
-				// If we're coming back from terms/privacy/feedback, go to home instead of verse
-				if (
-					["terms", "privacy", "feedback"].includes(currentScreenRef.current)
-				) {
-					setCurrentScreen("home");
-				} else {
-					if (route.book) {
-						const matchedBook = findCanonicalBook(booksRef.current, route.book);
-						if (matchedBook) {
-							setCurrentBook(matchedBook.name);
-						} else {
-							// Book not found - show 404 page
-							setCurrentScreen("notFound");
-							window.setTimeout(() => {
-								isHandlingPopStateRef.current = false;
-							}, 0);
-							return;
-						}
-					}
-					if (route.chapter) {
-						setCurrentChapter(route.chapter);
-					}
-					if (route.verse) {
-						setCurrentVerse(route.verse);
-					}
-					setCurrentScreen("verse");
-				}
-			}
-			window.setTimeout(() => {
-				isHandlingPopStateRef.current = false;
-			}, 0);
-		};
-
-		window.addEventListener("popstate", handlePopState);
-		return () => window.removeEventListener("popstate", handlePopState);
-	}, [handleOpenScreen, setCurrentScreen, setSettingsOpen]);
-
-	useEffect(() => {
-		if (typeof window === "undefined") return;
-		if (isHandlingPopStateRef.current) return;
-
-		const path = buildRoutePath({
-			screen: currentScreen,
-			book: currentBook,
-			chapter: currentChapter,
-			verse: currentVerse,
-		});
-
-		if (
-			currentScreen === "notFound" &&
-			parseRoutePath(window.location.pathname) === null
-		) {
-			return;
-		}
-
-		if (lastUrlRef.current === path) return;
-		window.history.pushState(null, "", path);
-		lastUrlRef.current = path;
-	}, [currentBook, currentChapter, currentScreen, currentVerse]);
-
-	useEffect(() => {
-		let isMounted = true;
-		const requestId = ++wordAnalysisRequestRef.current;
-		const isCurrentRequest = () =>
-			isMounted && requestId === wordAnalysisRequestRef.current;
-		const loadWordAnalysis = async () => {
-			if (!selectedWord?.strong) {
-				logWordDebug("analysis-skip-no-strong", {
-					text: selectedWord?.text ?? null,
-					strong: selectedWord?.strong ?? null,
-					position: selectedWord?.position ?? null,
-				});
-				setSelectedWordAnalysis(null);
-				setLastSelectedWordAnalysis(null);
-				setIsWordAnalysisLoading(false);
-				return;
-			}
-
-			const strongPart = parseSourceStrong(selectedWord.strong);
-
-			if (!strongPart) {
-				logWordDebug("analysis-skip-invalid-strong", {
-					strong: selectedWord.strong,
-				});
-				setSelectedWordAnalysis(null);
-				setLastSelectedWordAnalysis(null);
-				setIsWordAnalysisLoading(false);
-				return;
-			}
-
-			setSelectedWordAnalysis(null);
-			setIsWordAnalysisLoading(true);
-			logWordDebug("analysis-load-start", {
-				strong: strongPart,
-				language,
-			});
-			try {
-				const analysis =
-					selectedWord.source_language === "greek"
-						? await loadGreekLexiconEntry(strongPart, language)
-						: await loadLexiconEntry(
-								strongPart,
-								language === "he" ? "en" : language,
-							);
-				if (!isCurrentRequest()) {
-					return;
-				}
-				if (
-					analysis &&
-					!isCurrentLexiconResult(strongPart, analysis.strong_number)
-				) {
-					setIsWordAnalysisLoading(false);
-					return;
-				}
-				setSelectedWordAnalysis(analysis);
-				setIsWordAnalysisLoading(false);
-				logWordDebug("analysis-load-success", {
-					strong: strongPart,
-					hasDefinitions: Boolean(analysis?.definitions?.length),
-				});
-				if (analysis?.has_instances_asset) {
-					const instances =
-						analysis.source_language === "greek"
-							? await loadGreekLexiconInstances(
-									analysis.strong_number,
-									analysis.revision,
-								)
-							: await loadLexiconInstances(analysis.strong_number);
-					if (!isCurrentRequest() || !instances) return;
-					setSelectedWordAnalysis((current) =>
-						current && isCurrentLexiconResult(strongPart, current.strong_number)
-							? { ...current, ...instances }
-							: current,
-					);
-				}
-			} catch (error) {
-				if (isCurrentRequest()) {
-					logWordDebug("analysis-load-error", {
-						strong: strongPart,
-						error,
-					});
-					console.error("Failed to load word analysis", error);
-					setSelectedWordAnalysis(null);
-					setLastSelectedWordAnalysis(null);
-					setIsWordAnalysisLoading(false);
-				}
-			}
-		};
-		loadWordAnalysis();
-		return () => {
-			isMounted = false;
-		};
-	}, [selectedWord, language, logWordDebug]);
-
-	useEffect(() => {
-		let isMounted = true;
-		const requestId = ++dssAnalysisRequestRef.current;
-		const isCurrentRequest = () =>
-			isMounted && requestId === dssAnalysisRequestRef.current;
-		const loadDssAnalysis = async () => {
-			const dssStrong = selectedDssVariant?.dss_strong ?? null;
-			if (!dssStrong) {
-				setSelectedDssAnalysis(null);
-				setLastSelectedDssAnalysis(null);
-				setIsDssAnalysisLoading(false);
-				return;
-			}
-
-			const strongPart = dssStrong
-				.split("/")
-				.map((part) => part.trim())
-				.find((part) => /^[HGD]\d+$/.test(part));
-
-			if (!strongPart) {
-				setSelectedDssAnalysis(null);
-				setLastSelectedDssAnalysis(null);
-				setIsDssAnalysisLoading(false);
-				return;
-			}
-
-			setSelectedDssAnalysis(null);
-			setIsDssAnalysisLoading(true);
-			try {
-				const analysis = await loadLexiconEntry(
-					strongPart,
-					language === "he" ? "en" : language,
-				);
-				if (!isCurrentRequest()) {
-					return;
-				}
-				if (
-					analysis &&
-					!isCurrentLexiconResult(strongPart, analysis.strong_number)
-				) {
-					setIsDssAnalysisLoading(false);
-					return;
-				}
-				setSelectedDssAnalysis(analysis);
-				setIsDssAnalysisLoading(false);
-			} catch (error) {
-				if (isCurrentRequest()) {
-					console.error("Failed to load DSS analysis", error);
-					setSelectedDssAnalysis(null);
-					setLastSelectedDssAnalysis(null);
-					setIsDssAnalysisLoading(false);
-				}
-			}
-		};
-		loadDssAnalysis();
-		return () => {
-			isMounted = false;
-		};
-	}, [selectedDssVariant, language]);
-
-	useEffect(() => {
-		if (selectedWord) {
-			setLastSelectedWord(selectedWord);
-		}
-	}, [selectedWord]);
-
-	useEffect(() => {
-		if (selectedWordContext) {
-			setLastSelectedWordContext(selectedWordContext);
-		}
-	}, [selectedWordContext]);
-
-	useEffect(() => {
-		if (selectedWordAnalysis) {
-			setLastSelectedWordAnalysis(selectedWordAnalysis);
-		}
-	}, [selectedWordAnalysis]);
-
-	useEffect(() => {
-		if (selectedDssAnalysis) {
-			setLastSelectedDssAnalysis(selectedDssAnalysis);
-		}
-	}, [selectedDssAnalysis]);
-
-	const isSplitView = Boolean(
-		!isMobile && (selectedWord || isNavigatingWordPanel),
-	);
-	const [isWordPanelVisible, setIsWordPanelVisible] = useState(false);
-	const isWordPanelActive =
-		!isMobile &&
-		!isWordPanelDismissed &&
-		(selectedWord || isNavigatingWordPanel);
-	const shouldShowWordSkeleton =
-		isWordPanelActive &&
-		isNavigatingWordPanel &&
-		showWordSkeleton &&
-		!selectedWord;
-
-	useEffect(() => {
-		if (isWordPanelActive) {
-			setIsWordPanelVisible(true);
-			return undefined;
-		}
-
-		if (isWordPanelVisible) {
-			const timeout = window.setTimeout(
-				() => setIsWordPanelVisible(false),
-				300,
-			);
-			return () => window.clearTimeout(timeout);
-		}
-
-		return undefined;
-	}, [isWordPanelActive, isWordPanelVisible]);
-
-	useEffect(() => {
-		wordPanelDismissedRef.current = isWordPanelDismissed;
-	}, [isWordPanelDismissed]);
-
-	useEffect(() => {
-		if (wordSkeletonTimerRef.current) {
-			window.clearTimeout(wordSkeletonTimerRef.current);
-			wordSkeletonTimerRef.current = null;
-		}
-		setShowWordSkeleton(false);
-
-		if (isMobile) {
-			setIsNavigatingWordPanel(false);
-			return;
-		}
-
-		const navigationKey = `${currentBook}-${currentChapter}-${currentVerse}`;
-		if (navigationKeyRef.current === navigationKey) return;
-		navigationKeyRef.current = navigationKey;
-
-		if (preserveWordRef.current) {
-			setIsNavigatingWordPanel(false);
-			setIsWordPanelDismissed(false);
-			return;
-		}
-
-		setIsNavigatingWordPanel(false);
-		setIsWordPanelDismissed(true);
-		setSelectedWord(null);
-		setSelectedWordContext(null);
-	}, [currentBook, currentChapter, currentVerse, isMobile]);
-
-	useEffect(() => {
-		if (!currentVerseData || !preserveWordRef.current) return;
-
-		const targetText = pendingWordTextRef.current;
-		const targetStrong = pendingWordStrongRef.current;
-		const fallbackWord = pendingWordRef.current;
-
-		const normalize = (text: string) =>
-			stripMeteg(stripCantillation(text)).replace(/\//g, "");
-
-		let matchedWord: WordResponse | undefined;
-
-		if (targetStrong) {
-			matchedWord = currentVerseData.words?.find(
-				(word) => word.strong === targetStrong,
-			);
-		}
-
-		if (!matchedWord && targetText) {
-			const normalizedTarget = normalize(targetText);
-			matchedWord = currentVerseData.words?.find(
-				(word) => normalize(word.text) === normalizedTarget,
-			);
-		}
-
-		if (matchedWord) {
-			setSelectedWord(matchedWord);
-			setSelectedWordContext({
-				chapter: currentVerseData.chapter,
-				verse: currentVerseData.verse,
-			});
-			setIsWordPanelDismissed(false);
-		} else if (fallbackWord) {
-			setSelectedWord(fallbackWord);
-			setSelectedWordContext({
-				chapter: currentVerseData.chapter,
-				verse: currentVerseData.verse,
-			});
-			setIsWordPanelDismissed(false);
-		}
-
-		preserveWordRef.current = false;
-		pendingWordTextRef.current = null;
-		pendingWordStrongRef.current = null;
-		pendingWordRef.current = null;
-	}, [currentVerseData]);
-
-	useEffect(() => {
-		if (!selectedWord) return;
-		setIsNavigatingWordPanel(false);
-		setShowWordSkeleton(false);
-		if (wordSkeletonTimerRef.current) {
-			window.clearTimeout(wordSkeletonTimerRef.current);
-			wordSkeletonTimerRef.current = null;
-		}
-	}, [selectedWord]);
-
-	useEffect(() => {
-		return () => {
-			if (wordSkeletonTimerRef.current) {
-				window.clearTimeout(wordSkeletonTimerRef.current);
-				wordSkeletonTimerRef.current = null;
-			}
-		};
-	}, []);
-
-	useEffect(() => {
-		const media = window.matchMedia("(max-width: 767px)");
-		const update = () => setIsMobile(media.matches);
-		update();
-		media.addEventListener("change", update);
-		return () => media.removeEventListener("change", update);
-	}, []);
-
-	// Online/offline event listeners
-	useEffect(() => {
-		const handleOnline = () => {
-			if (currentScreen === "connectionError") {
-				window.location.reload();
-			}
-		};
-
-		const handleOffline = () => {
-			setCurrentScreen("connectionError");
-		};
-
-		window.addEventListener("online", handleOnline);
-		window.addEventListener("offline", handleOffline);
-
-		return () => {
-			window.removeEventListener("online", handleOnline);
-			window.removeEventListener("offline", handleOffline);
-		};
-	}, [currentScreen, setCurrentScreen]);
-
-	useEffect(() => {
-		if (!isMobile) {
-			wordSheetClosingRef.current = false;
-			setIsWordSheetOpen(false);
-			return;
-		}
-
-		if (!selectedWord) {
-			setIsWordSheetOpen(false);
-			return;
-		}
-
-		if (!wordSheetClosingRef.current) {
-			setIsWordSheetOpen(true);
-		}
-	}, [isMobile, selectedWord]);
-
-	useEffect(() => {
-		if (!selectedWord || isMobile) {
-			setIsWordPanelHovered(false);
-		}
-	}, [isMobile, selectedWord]);
-
-	useEffect(() => {
-		if (!scrollJumpActive) return undefined;
-		const timeout = window.setTimeout(() => setScrollJumpActive(false), 240);
-		return () => window.clearTimeout(timeout);
-	}, [scrollJumpActive]);
-
-	const triggerScrollJump = useCallback(() => {
-		if (scrollHintCount < 5) {
-			setScrollJumpActive(true);
-			setScrollHintCount(scrollHintCount + 1);
-		}
-
-		if (desktopScrollHintCount < 5) {
-			setDesktopScrollHintCount(desktopScrollHintCount + 1);
-		}
-	}, [
-		desktopScrollHintCount,
-		scrollHintCount,
-		setDesktopScrollHintCount,
-		setScrollHintCount,
-	]);
-
-	const handlePreviousVerse = useCallback(async () => {
-		if (translationOnly) {
-			if (currentVerseIndex > 0) {
-				setCurrentVerse(chapterVerses[currentVerseIndex - 1].verse);
-				return true;
-			}
-
-			if (currentChapter > 1) {
-				try {
-					const previousChapter = currentChapter - 1;
-					const translationLanguage = language === "es" ? "es" : "en";
-					const previousChapterVerses = await getChapterVerses(
-						currentBook.toLowerCase(),
-						previousChapter,
-						{
-							language: translationLanguage,
-							showDss: showQumran,
-							hebrewOnly: false,
-							referenceMode: "translation",
-						},
-					);
-					const lastVerse = previousChapterVerses.at(-1)?.verse ?? 1;
-					setCurrentChapter(previousChapter);
-					setCurrentVerse(lastVerse);
-					return true;
-				} catch {
-					return false;
-				}
-			}
-
-			return false;
-		}
-
-		if (currentVerse > 1) {
-			setCurrentVerse(currentVerse - 1);
-			return true;
-		}
-
-		if (currentChapter > 1) {
-			try {
-				const previousChapter = currentChapter - 1;
-				const previousVerseCount = await getVerseCount(
-					currentBook.toLowerCase(),
-					previousChapter,
-				);
-				setCurrentChapter(previousChapter);
-				setCurrentVerse(previousVerseCount);
-				return true;
-			} catch {
-				return false;
-			}
-		}
-		return false;
-	}, [
-		chapterVerses,
+		setSettingsOpen,
+		handleOpenScreen,
+	});
+	const {
+		isMobile,
+		selectedWord,
+		setSelectedWord,
+		selectedWordContext,
+		setSelectedWordContext,
+		isWordSheetOpen,
+		setIsWordPanelDismissed,
+		showWordHint,
+		isNavigatingWordPanel,
+		setIsNavigatingWordPanel,
+		showWordSkeleton,
+		setShowWordSkeleton,
+		wordSkeletonTimerRef,
+		lastSelectedWord,
+		lastSelectedWordContext,
+		lastSelectedWordAnalysis,
+		selectedWordAnalysis,
+		isWordAnalysisLoading,
+		selectedDssAnalysis,
+		lastSelectedDssAnalysis,
+		isDssAnalysisLoading,
+		wordCardTabKey,
+		isWordPanelHovered,
+		setIsWordPanelHovered,
+		closeWordSheet,
+		handleWordSheetAfterClose,
+		handleWordClick,
+		handleNavigateToVerse,
+		getTransliterationForLanguage,
+		getAnalysisTransliterationForLanguage,
+		resolveRenderableDssWord,
+		highlightedWord,
+		highlightedWordContext,
+		isSplitView,
+		isWordPanelActive,
+		isWordPanelVisible,
+		shouldShowWordSkeleton,
+	} = useWordSelection({
+		books,
 		currentBook,
 		currentChapter,
 		currentVerse,
-		currentVerseIndex,
-		language,
-		showQumran,
-		translationOnly,
-	]);
-
-	const handleNextVerse = useCallback(async () => {
-		if (translationOnly) {
-			if (
-				currentVerseIndex >= 0 &&
-				currentVerseIndex < chapterVerses.length - 1
-			) {
-				setCurrentVerse(chapterVerses[currentVerseIndex + 1].verse);
-				return true;
-			}
-
-			if (currentChapter < chapterCount) {
-				try {
-					const nextChapter = currentChapter + 1;
-					const translationLanguage = language === "es" ? "es" : "en";
-					const nextChapterVerses = await getChapterVerses(
-						currentBook.toLowerCase(),
-						nextChapter,
-						{
-							language: translationLanguage,
-							showDss: showQumran,
-							hebrewOnly: false,
-							referenceMode: "translation",
-						},
-					);
-					const firstVerse = nextChapterVerses[0]?.verse ?? 1;
-					setCurrentChapter(nextChapter);
-					setCurrentVerse(firstVerse);
-					return true;
-				} catch {
-					return false;
-				}
-			}
-
-			return false;
-		}
-
-		if (currentVerse < verseCount) {
-			setCurrentVerse(currentVerse + 1);
-			return true;
-		}
-
-		if (currentChapter < chapterCount) {
-			setCurrentChapter(currentChapter + 1);
-			setCurrentVerse(1);
-			return true;
-		}
-		return false;
-	}, [
-		chapterCount,
+		currentScreen,
+		currentVerseData,
 		chapterVerses,
-		currentBook,
-		currentChapter,
-		currentVerse,
-		currentVerseIndex,
+		setChapterVerses,
 		language,
-		showQumran,
-		translationOnly,
-		verseCount,
-	]);
-
-	const isScrollNavigationActive =
-		currentScreen === "verse" && !showFullChapter && !isMobile;
-
-	useEffect(() => {
-		if (isMobile) {
-			const threshold = 24;
-			lastScrollYRef.current = window.scrollY;
-
-			const handleMobileScroll = () => {
-				const currentY = window.scrollY;
-				const delta = currentY - lastScrollYRef.current;
-
-				if (currentY <= threshold) {
-					setHideNavOnScroll(false);
-				} else if (delta > 4) {
-					setHideNavOnScroll(true);
-				} else if (delta < -4) {
-					setHideNavOnScroll(false);
-				}
-
-				lastScrollYRef.current = currentY;
-			};
-
-			handleMobileScroll();
-			window.addEventListener("scroll", handleMobileScroll, { passive: true });
-			return () => window.removeEventListener("scroll", handleMobileScroll);
-		}
-
-		if (!(currentScreen === "verse" && showFullChapter && seferMode)) {
-			setHideNavOnScroll(false);
-			return;
-		}
-
-		const handleScroll = () => {
-			setHideNavOnScroll(window.scrollY > 40);
-		};
-
-		handleScroll();
-		window.addEventListener("scroll", handleScroll, { passive: true });
-		return () => window.removeEventListener("scroll", handleScroll);
-	}, [currentScreen, isMobile, showFullChapter, seferMode]);
-
-	useVerseScrollNavigation({
-		containerRef: versePanelRef,
-		isEnabled: isScrollNavigationActive,
-		isBlocked: isWordPanelHovered || settingsOpen,
-		threshold: 36,
-		cooldownMs: 500,
-		onNavigateNext: handleNextVerse,
-		onNavigatePrevious: handlePreviousVerse,
-		onNavigateFeedback: triggerScrollJump,
+		besorahTextVersion,
+		setCurrentBook,
+		setCurrentChapter,
+		setCurrentVerse,
+	});
+	const {
+		hideNavOnScroll,
+		versePanelRef,
+		isScrollNavigationActive,
+		showDesignSystem,
+		setShowDesignSystem,
+		showMobileDesignGuide,
+		setShowMobileDesignGuide,
+	} = useReaderChrome({
+		isMobile,
+		currentScreen,
+		showFullChapter,
+		seferMode,
+		settingsOpen,
+		isWordPanelHovered,
+		handleNextVerse,
+		handlePreviousVerse,
+		triggerScrollJump,
 	});
 
 	return (
@@ -1613,7 +251,6 @@ export default function App() {
 						verseCount={verseCount}
 						onBookChange={(selectedBook) => {
 							if (selectedBook === currentBook) {
-								// Same book - retrieve last position for this book
 								const stored = getStoredReadingState();
 								if (stored) {
 									const position = getLastPositionForBook(stored, selectedBook);
@@ -1621,7 +258,6 @@ export default function App() {
 									setCurrentVerse(position.verse);
 								}
 							} else {
-								// Different book - reset to 1:1
 								setCurrentBook(selectedBook);
 								setCurrentChapter(1);
 								setCurrentVerse(1);
@@ -1811,7 +447,6 @@ export default function App() {
 								</div>
 							</div>
 
-							{/* Word panel - in full chapter mode, only render when active to avoid blocking clicks */}
 							{(!showFullChapter || isWordPanelActive) && (
 								<div
 									className={`hidden md:block ${showFullChapter ? "word-panel-fixed-wrapper" : ""}`}
