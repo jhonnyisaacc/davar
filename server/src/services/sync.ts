@@ -113,6 +113,63 @@ export interface SyncReport {
 	error?: string;
 }
 
+interface LockedFeedState {
+	status: string;
+	last_attempt_at: Date | string | null;
+	details: Record<string, unknown>;
+}
+
+async function lockFeedState(
+	tx: DatabaseOrTx,
+	id: string,
+): Promise<LockedFeedState | undefined> {
+	const locked = await tx.execute(
+		sql`SELECT status, last_attempt_at AS "last_attempt_at", details FROM calendar_feed_states WHERE id = ${id} FOR UPDATE`,
+	);
+	return locked[0] as LockedFeedState | undefined;
+}
+
+async function knownHashes(db: DatabaseOrTx): Promise<Record<string, string>> {
+	const knownRows = await db
+		.select({
+			sourceEntryId: calendarSourceEntries.sourceEntryId,
+			contentHash: calendarSourceEntries.contentHash,
+		})
+		.from(calendarSourceEntries)
+		.where(
+			and(
+				eq(calendarSourceEntries.source, FEED_SOURCE),
+				sql`parse_status != 'requires_review'`,
+			),
+		);
+	const known: Record<string, string> = {};
+	for (const row of knownRows) known[row.sourceEntryId] = row.contentHash;
+	return known;
+}
+
+async function markUnavailable(
+	db: DatabaseOrTx,
+	stateId: string,
+	details: Record<string, unknown>,
+	code: string,
+	now: Date,
+): Promise<SyncReport> {
+	await db.transaction(async (tx) => {
+		const current = await lockFeedState(tx, stateId);
+		if (!current) throw new DomainError("not_found", 404);
+		await tx
+			.update(calendarFeedStates)
+			.set({
+				status: "source_unavailable",
+				lastAttemptAt: now,
+				details: { ...details, error: code },
+				updatedAt: new Date(),
+			})
+			.where(eq(calendarFeedStates.id, stateId));
+	});
+	return { status: "source_unavailable", error: code };
+}
+
 export async function syncObservations(
 	db: DatabaseOrTx,
 	input: {
@@ -126,47 +183,40 @@ export async function syncObservations(
 	const env = input.env ?? process.env;
 	const now = input.now ?? new Date();
 	const state = await feedState(db);
-	if (input.ifDue && !(await syncDue(db, state, now, env))) {
+	const windowOpen = await observationWindowOpen(db, now, { env });
+	if (input.ifDue && !dueAt(state.lastAttemptAt, now, windowOpen)) {
 		return { status: state.status };
 	}
+	// Every external I/O (feed fetch, feed bridge) runs before the
+	// transaction, so a slow source never holds the state row lock or a
+	// pool connection. The claim below re-checks under lock.
+	let entries: FeedEntry[];
+	try {
+		const xml = input.rssXml ?? (await (input.fetcher ?? (() => fetchFeed(env)))());
+		entries = await parseFeed(xml, await knownHashes(db), now, env);
+	} catch (error) {
+		const code = error instanceof DomainError ? error.code : "source_unavailable";
+		return markUnavailable(db, state.id, (state.details ?? {}) as Record<string, unknown>, code, now);
+	}
+	const changed = entries.filter((entry) => !entry.unchanged);
+	const accepted = changed.filter((entry) => entry.parse_status === "ok");
+	const backfill = backfillForEntries(entries);
 	return db.transaction(async (tx) => {
-		const locked = await tx.execute(
-			sql`SELECT * FROM calendar_feed_states WHERE id = ${state.id} FOR UPDATE`,
-		);
-		const current = locked[0] as
-			| { status: string; last_attempt_at: Date | string | null; details: Record<string, unknown> }
-			| undefined;
+		const current = await lockFeedState(tx, state.id);
 		if (!current) throw new DomainError("not_found", 404);
-		if (
-			input.ifDue &&
-			!dueAt(
-				current.last_attempt_at ? new Date(current.last_attempt_at) : null,
-				now,
-				await observationWindowOpen(tx, now, { env }),
-			)
-		) {
-			return { status: current.status };
+		if (input.ifDue) {
+			// Another sync committed while our fetch/parse ran: skip instead
+			// of importing twice. (Rails re-evaluates the full due check
+			// here, window bridge included; the timestamp comparison covers
+			// the race without I/O under the lock.)
+			const before = state.lastAttemptAt?.getTime() ?? null;
+			const after = current.last_attempt_at ? new Date(current.last_attempt_at).getTime() : null;
+			if (before !== after) return { status: current.status };
+			if (!dueAt(after ? new Date(after) : null, now, windowOpen)) {
+				return { status: current.status };
+			}
 		}
 		try {
-			const xml = input.rssXml ?? (await (input.fetcher ?? (() => fetchFeed(env)))());
-			const knownRows = await tx
-				.select({
-					sourceEntryId: calendarSourceEntries.sourceEntryId,
-					contentHash: calendarSourceEntries.contentHash,
-				})
-				.from(calendarSourceEntries)
-				.where(
-					and(
-						eq(calendarSourceEntries.source, FEED_SOURCE),
-						sql`parse_status != 'requires_review'`,
-					),
-				);
-			const known: Record<string, string> = {};
-			for (const row of knownRows) known[row.sourceEntryId] = row.contentHash;
-			const entries = await parseFeed(xml, known, now, env);
-			const changed = entries.filter((entry) => !entry.unchanged);
-			const accepted = changed.filter((entry) => entry.parse_status === "ok");
-			const backfill = backfillForEntries(entries);
 			const report = await observationImport(
 				tx,
 				{
@@ -260,15 +310,6 @@ export async function syncObservations(
 			return { status: "source_unavailable", error: code };
 		}
 	});
-}
-
-async function syncDue(
-	db: DatabaseOrTx,
-	state: { lastAttemptAt: Date | null },
-	now: Date,
-	env: NodeJS.ProcessEnv,
-): Promise<boolean> {
-	return dueAt(state.lastAttemptAt, now, await observationWindowOpen(db, now, { env }));
 }
 
 function dueAt(lastAttempt: Date | null, now: Date, windowOpen: boolean): boolean {

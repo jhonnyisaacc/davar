@@ -80,6 +80,37 @@ describe("calendar feed", () => {
 		expect((same[0] as { count: number }).count).toBe(1);
 	});
 
+	test("feed fetching never holds the state row lock", async () => {
+		const db = testDb().db;
+		const feed = rss(
+			rssItem(
+				"lock-post",
+				"https://example.test/lock-post",
+				"Lock post",
+				observationTable("12/09/2026", "Lock Observer", "Jerusalem", "18:14"),
+			),
+		);
+		let fetchStarted = false;
+		const pending = syncObservations(db, {
+			fetcher: async () => {
+				fetchStarted = true;
+				await new Promise((resolve) => setTimeout(resolve, 400));
+				return feed;
+			},
+		});
+		while (!fetchStarted) {
+			await new Promise((resolve) => setTimeout(resolve, 10));
+		}
+		// The fetch is in flight: the state row must be lock-free.
+		const state = await feedState(db);
+		const probe = await testDb().sql`
+			SELECT id FROM calendar_feed_states WHERE id = ${state.id} FOR UPDATE NOWAIT
+		`;
+		expect(probe.length).toBe(1);
+		const report = await pending;
+		expect(report.status).toBe("ok");
+	});
+
 	test("sync marks the feed unavailable when fetching fails", async () => {
 		const db = testDb().db;
 		const { DomainError } = await import("../src/lib/errors.js");
