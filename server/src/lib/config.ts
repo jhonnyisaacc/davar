@@ -50,11 +50,31 @@ export function loadConfig(source: NodeJS.ProcessEnv = process.env): ServerConfi
 			throw new Error(`API_PUBLIC_URL must use HTTPS in ${env}`);
 		}
 	}
+	const dbHost = (() => {
+		try {
+			return new URL(source.DATABASE_URL ?? "").hostname.toLowerCase();
+		} catch {
+			return "";
+		}
+	})();
+	// Fail closed: default local keys must never protect a remote database.
+	// Staging/production already require real keys above.
+	if (
+		!["", "localhost", "127.0.0.1", "::1"].includes(dbHost) &&
+		(!source.DAVAR_ENCRYPTION_PRIMARY_KEY || !source.DAVAR_ENCRYPTION_DETERMINISTIC_KEY)
+	) {
+		throw new Error(
+			"Refuses default encryption keys with a non-local DATABASE_URL: set DAVAR_ENCRYPTION_PRIMARY_KEY and DAVAR_ENCRYPTION_DETERMINISTIC_KEY.",
+		);
+	}
 	return {
 		env,
 		databaseUrl: source.DATABASE_URL,
 		apiPublicUrl: source.API_PUBLIC_URL ?? "http://localhost:3000",
-		authReturnUris: (source.AUTH_RETURN_URIS ?? "davar://auth/callback").split(","),
+		authReturnUris: (source.AUTH_RETURN_URIS ?? "davar://auth/callback")
+			.split(",")
+			.map((part) => part.trim())
+			.filter((part) => part.length > 0),
 		webOrigins: allowedOrigins({
 			configured: source.WEB_ORIGINS,
 			development: env === "development",

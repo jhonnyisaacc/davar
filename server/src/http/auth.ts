@@ -6,7 +6,6 @@ import { decryptionKeys, type ServerConfig } from "../lib/config.js";
 import { DomainError } from "../lib/errors.js";
 import { dec, decJson } from "../services/fields.js";
 import { authenticateSession } from "../services/sessions.js";
-import { checkRateLimit } from "../services/rateLimit.js";
 import { resolveClientIp, socketAddress } from "../services/remoteIp.js";
 import { evaluateFlags, type FlagSet } from "../services/flags.js";
 import type { Profile } from "../services/profiles.js";
@@ -106,15 +105,6 @@ export async function requireAssemblyAccess(
 		throw new DomainError("admission_required", 403);
 	}
 	return user;
-}
-
-export async function throttle(
-	db: DatabaseOrTx,
-	c: Context,
-	bucket: string,
-	limit = 20,
-): Promise<void> {
-	await checkRateLimit(db, bucket, limit);
 }
 
 export { parseProfile };

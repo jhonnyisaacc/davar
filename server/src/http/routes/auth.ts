@@ -24,8 +24,10 @@ const PROVIDER_ORDER = ["google", "apple", "facebook", "telegram", "x", "email"]
 const startSchema = z.object({
 	return_uri: z.string().optional(),
 	email: z.string().optional().nullable(),
-	link: z.boolean().optional(),
-	notification_consent: z.boolean().optional(),
+	// Rails compares params[:link] / params[:notification_consent] with ==
+	// true, so strings are accepted and ignored; only a real boolean opts in.
+	link: z.union([z.boolean(), z.string()]).optional(),
+	notification_consent: z.union([z.boolean(), z.string()]).optional(),
 });
 
 const exchangeSchema = z.object({
@@ -100,7 +102,6 @@ authRoutes.post("/:provider/start", async (c) => {
 		z.object({
 			return_uri: z.string().optional(),
 			email: z.string().optional().nullable(),
-			notification_consent: z.string().optional(),
 		}),
 		c.req.query(),
 	);
@@ -110,8 +111,7 @@ authRoutes.post("/:provider/start", async (c) => {
 		returnUri: body.return_uri ?? query.return_uri ?? "",
 		email: body.email ?? query.email,
 		linkingUserId,
-		notificationConsent:
-			body.notification_consent ?? query.notification_consent === "true",
+		notificationConsent: body.notification_consent === true,
 		allowedReturnUris: config.authReturnUris,
 		apiPublicUrl: config.apiPublicUrl,
 		primaryKey: config.encryptionPrimaryKey,

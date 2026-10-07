@@ -192,6 +192,28 @@ describe("email magic link state machine", () => {
 		expect(await testDb().db.select({ id: sessions.id }).from(sessions)).toHaveLength(4);
 	});
 
+	test("string flags follow Rails == true semantics", async () => {
+		const { app } = makeTestContext();
+		const start = (body: Record<string, unknown>) =>
+			app.request("/api/v1/auth/email/start", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ return_uri: "davar://auth/callback", ...body }),
+			});
+		// Strings are accepted, never link, and never enable consent.
+		const stringLink = await start({ email: "a@example.test", link: "true" });
+		expect(stringLink.status).toBe(200);
+		const stringConsent = await start({
+			email: "b@example.test",
+			notification_consent: "true",
+		});
+		expect(stringConsent.status).toBe(200);
+		// Only a real boolean links (and then needs a session).
+		const boolLink = await start({ email: "c@example.test", link: true });
+		expect(boolLink.status).toBe(401);
+		expect(await boolLink.json()).toEqual({ error: { code: "authentication_required" } });
+	});
+
 	test("blank handoff and denied providers fail closed", async () => {
 		const { app } = makeTestContext();
 		const blank = await app.request("/api/v1/auth/exchange", {

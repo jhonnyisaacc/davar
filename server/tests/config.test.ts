@@ -17,6 +17,30 @@ describe("environment configuration", () => {
 		expect(config.port).toBe(3000);
 	});
 
+	test("return URIs trim entries and drop empties", async () => {
+		const config = loadConfig(
+			base({ AUTH_RETURN_URIS: " davar://auth/callback ,, https://app.example.test " }),
+		);
+		expect(config.authReturnUris).toEqual([
+			"davar://auth/callback",
+			"https://app.example.test",
+		]);
+	});
+
+	test("non-local databases fail closed without real keys", async () => {
+		const remote = {
+			DATABASE_URL: "postgresql://db.example.org/davar",
+			API_PUBLIC_URL: "http://localhost:3000",
+		};
+		expect(() => loadConfig(base(remote))).toThrow(
+			"Refuses default encryption keys with a non-local DATABASE_URL",
+		);
+		const local = loadConfig(
+			base({ DATABASE_URL: "postgresql://127.0.0.1:5432/davar" }),
+		);
+		expect(local.env).toBe("test");
+	});
+
 	test("staging and production require keys, database and https", async () => {
 		for (const env of ["staging", "production"] as const) {
 			const good = {
