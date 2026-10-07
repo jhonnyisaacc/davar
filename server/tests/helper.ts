@@ -59,6 +59,7 @@ export function testConfig(): ServerConfig {
 		databaseUrl: TEST_DATABASE_URL,
 		apiPublicUrl: "http://localhost:3000",
 		authReturnUris: ["davar://auth/callback"],
+		webOrigins: [],
 		sandbox: false,
 		encryptionPrimaryKey: "test-primary-key-for-davar-server-only-0001",
 		encryptionDeterministicKey: "test-deterministic-key-davar-only-0001",

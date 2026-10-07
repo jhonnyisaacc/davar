@@ -1,4 +1,5 @@
 import { Hono } from "hono";
+import { cors } from "hono/cors";
 import { DomainError, errorBody } from "../lib/errors.js";
 import { ValidationError } from "./validation.js";
 import type { AppDeps, AppVariables } from "./deps.js";
@@ -20,6 +21,18 @@ export function createApp(deps: AppDeps): Hono<{ Variables: AppVariables }> {
 		c.set("deps", deps);
 		await next();
 	});
+
+	// Mirrors api/config/initializers/cors.rb: only /api/* is reachable from
+	// browsers, with the Authorization/Content-Type headers Rails allows.
+	app.use(
+		"/api/*",
+		cors({
+			origin: (origin) => (deps.config.webOrigins.includes(origin) ? origin : null),
+			allowHeaders: ["Authorization", "Content-Type"],
+			allowMethods: ["GET", "POST", "PATCH", "DELETE", "OPTIONS"],
+			maxAge: 7200,
+		}),
+	);
 
 	app.get("/up", (c) => c.json({ status: "ok" }));
 

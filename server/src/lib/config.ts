@@ -1,3 +1,5 @@
+import { allowedOrigins } from "../services/webOrigins.js";
+
 export type AppEnv = "development" | "test" | "staging" | "production";
 
 export interface ServerConfig {
@@ -5,6 +7,7 @@ export interface ServerConfig {
 	databaseUrl: string | undefined;
 	apiPublicUrl: string;
 	authReturnUris: string[];
+	webOrigins: string[];
 	sandbox: boolean;
 	encryptionPrimaryKey: string;
 	encryptionDeterministicKey: string;
@@ -40,6 +43,10 @@ export function loadConfig(source: NodeJS.ProcessEnv = process.env): ServerConfi
 		databaseUrl: source.DATABASE_URL,
 		apiPublicUrl: source.API_PUBLIC_URL ?? "http://localhost:3000",
 		authReturnUris: (source.AUTH_RETURN_URIS ?? "davar://auth/callback").split(","),
+		webOrigins: allowedOrigins({
+			configured: source.WEB_ORIGINS,
+			development: env === "development",
+		}),
 		sandbox,
 		encryptionPrimaryKey:
 			source.DAVAR_ENCRYPTION_PRIMARY_KEY ??
