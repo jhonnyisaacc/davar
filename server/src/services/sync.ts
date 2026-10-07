@@ -113,6 +113,14 @@ export interface SyncReport {
 	error?: string;
 }
 
+// The calendar job never fetches the live feed on its own: without an
+// explicit IMPORT_FILE payload it is a no-op (see README "Jobs").
+export function calendarPayload(env: NodeJS.ProcessEnv): { kind: "skip"; reason: string } | { kind: "file"; path: string } {
+	const path = env.IMPORT_FILE;
+	if (!path) return { kind: "skip", reason: "IMPORT_FILE is required" };
+	return { kind: "file", path };
+}
+
 interface LockedFeedState {
 	status: string;
 	last_attempt_at: Date | string | null;

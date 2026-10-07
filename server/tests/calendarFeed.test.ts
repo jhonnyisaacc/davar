@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, test } from "bun:test";
 import { sql } from "drizzle-orm";
+import { join } from "node:path";
 import { testDb } from "./helper.js";
 import { makeTestContext, seedFeedState, truncateAll } from "./helper.js";
 import { backfillForEntries, monthAnchors, reportReviews } from "../src/services/calendarConfig.js";
@@ -109,6 +110,35 @@ describe("calendar feed", () => {
 		expect(probe.length).toBe(1);
 		const report = await pending;
 		expect(report.status).toBe("ok");
+	});
+
+	test("calendar payload requires an explicit file", async () => {
+		const { calendarPayload } = await import("../src/services/sync.js");
+		expect(calendarPayload({})).toEqual({ kind: "skip", reason: "IMPORT_FILE is required" });
+		expect(calendarPayload({ IMPORT_FILE: "feed.xml" })).toEqual({
+			kind: "file",
+			path: "feed.xml",
+		});
+	});
+
+	test("jobs:calendar is a no-op without IMPORT_FILE", async () => {
+		const env = { ...process.env };
+		delete env.IMPORT_FILE;
+		const proc = Bun.spawn([process.execPath, "src/jobs/calendar.ts"], {
+			cwd: join(import.meta.dir, ".."),
+			env,
+			stdout: "pipe",
+			stderr: "pipe",
+		});
+		const [out, code] = await Promise.all([
+			new Response(proc.stdout).text(),
+			proc.exited,
+		]);
+		expect(code).toBe(0);
+		expect(JSON.parse(out)).toMatchObject({
+			job: "sync_calendar_observations",
+			status: "skipped",
+		});
 	});
 
 	test("sync marks the feed unavailable when fetching fails", async () => {
