@@ -207,7 +207,8 @@ describe("development sandbox", () => {
 		};
 		try {
 			const seeded = await seedFixtures(db, keys);
-			expect(seeded.assemblies_scenarios).toEqual(scenarios);
+			const labels: Record<string, string> = { ...seeded.assemblies_scenarios };
+			expect(labels).toEqual(scenarios);
 			expect(seeded.accounts).toEqual(Object.keys(scenarios).map((name) => `${name}@example.test`));
 			expect(seeded.accounts).toHaveLength(25);
 			expect(seeded.invitation).toBe("DAVAR-LOCAL");
@@ -250,7 +251,12 @@ describe("development sandbox", () => {
 					JOIN assemblies a ON a.id = m.assembly_id
 					WHERE m.user_id = ${(loaded[name] as FixturePersona).id}
 				`);
-				expect(rows).toEqual([{ state, sourceId }]);
+				expect(
+					rows.map((row) => ({
+						state: (row as { state: string }).state,
+						sourceId: (row as { sourceId: string }).sourceId,
+					})),
+				).toEqual([{ state, sourceId }]);
 			}
 
 			for (const [name, states] of [
