@@ -6,6 +6,7 @@
 	"scripts": {
 		"dev": "bun --env-file=.env ./src/index.ts",
 		"start": "bun --env-file=.env ./src/index.ts",
+		"setup": "bun ./src/setup.ts",
 		"db:migrate": "bun ./src/db/migrate.ts",
 		"jobs:recover": "bun ./src/jobs/recover.ts",
 		"jobs:calendar": "bun ./src/jobs/calendar.ts",
