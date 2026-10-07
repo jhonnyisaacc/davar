@@ -26,3 +26,15 @@ No gate, test, or baseline was loosened. The earlier boundary failure (run 37611
 Accept a readonly book list on the navigation bar instead of dropping `as const` on the test fixture. Dropping `as const` would widen the other literal props (`activeDestination`, `theme`, `language`) and fail the same typecheck for a different reason.
 
 No pin files, ratchet baselines, CI workflows, or public API routes changed.
+
+## Scripture pins
+
+Draft PR [#260](https://github.com/jhonnyisaacc/davar/pull/260) (`refactor/scripture-pins` into `cursor/fix-web-typecheck-86fd`, stacked on #255). Pins only. The book map is not deduped. Not merged.
+
+Locked `shared/staticDataPaths.ts` path strings, the Bani golden `מִקְוֶה` / H4723 (`miqveh`, guide `MIQveh`, stress syllable 1), web `getVerse("psalms", 117, 1)`, and mobile `fetchChapterVerses("psalms", 117)`. Today's bugs stay: web positions start at 0, mobile positions start at 1, H3068 has no transliteration, and the mobile chapter includes `translation: ""`. Decision: `docs/decisions/0001-scripture-loader-pins.md`.
+
+```
+PYTHONPATH=. python -m pytest -q tests/pins
+cd web && bun test src/app/services/staticDataPaths.pin.test.ts src/app/services/verseLoad.pin.test.ts
+cd mobile && bun test src/services/chapterLoad.pin.test.ts
+```
