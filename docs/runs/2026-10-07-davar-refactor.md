@@ -26,3 +26,11 @@ No gate, test, or baseline was loosened. The earlier boundary failure (run 37611
 Accept a readonly book list on the navigation bar instead of dropping `as const` on the test fixture. Dropping `as const` would widen the other literal props (`activeDestination`, `theme`, `language`) and fail the same typecheck for a different reason.
 
 No pin files, ratchet baselines, CI workflows, or public API routes changed.
+
+## Knowledge import cycle
+
+Draft PR [#261](https://github.com/jhonnyisaacc/davar/pull/261) (`refactor/knowledge-import-cycle` into `cursor/fix-web-typecheck-86fd`). `pinned_inputs` takes the `Validator` the caller already builds. `scripts/knowledge/core.py` no longer imports `scripts/knowledge/validate.py`.
+
+`PYTHONPATH=. python -m pytest -q tests/test_knowledge_workflow_boundary.py tests/test_knowledge_publication_boundary.py tests/test_knowledge_v2_publication_contract.py` — 13 passed in 1.19s.
+
+Pin assertions in `tests/test_knowledge_*.py` are unchanged. No ratchet, CI, or baseline change.
