@@ -5,6 +5,7 @@ import {
 	articles,
 	assemblies,
 	calendarFeedStates,
+	endorsements,
 	identities,
 	memberships,
 	newMoonObservations,
@@ -16,15 +17,37 @@ import { requireSandbox } from "./sandbox.js";
 import { resolveAccount, subjectDigest } from "./accounts.js";
 import { accessCodeDigest } from "./admissions.js";
 import { enc, encJson } from "./fields.js";
+import type { Profile } from "./profiles.js";
 
-export const FIXTURE_EMAILS = [
-	"fresh@example.test",
-	"starting@example.test",
-	"reader@example.test",
-	"applicant@example.test",
-	"leader-one@example.test",
-	"leader-two@example.test",
-];
+export const FIXTURE_SCENARIOS = {
+	fresh: "Invitation required; no onboarding",
+	"onboarding-path": "Admitted; choose a path",
+	"onboarding-questions": "Experienced path; resume after question 2",
+	"onboarding-name": "Answers complete; name and gender required",
+	"onboarding-city": "Name and gender complete; city required",
+	"onboarding-visibility": "City selected; visibility review required",
+	starting: "Starting path; may browse but cannot join",
+	reader: "Join request pending in local assembly",
+	"female-reader": "Experienced female reader; eligible to join",
+	disagreed: "One negative answer; excluded from people discovery",
+	member: "Local member; meeting access; cannot join elsewhere",
+	declined: "Declined local request; may request again",
+	left: "Left local assembly; may request again",
+	"pending-online": "Online request pending",
+	"legacy-city": "City label without coordinates; must select a city",
+	applicant: "Unverified leader; request two endorsements",
+	"applicant-pending": "Two pending endorsements",
+	"applicant-one": "One accepted and one pending endorsement",
+	"applicant-declined": "Declined endorsement; support required",
+	"leader-one": "Verified local leader with members and requests",
+	"leader-two": "Verified online leader with requests",
+	"leader-create": "Verified leader without an assembly; can create",
+	"nearby-hidden": "Jerusalem; hidden from people discovery",
+	"nearby-visible": "Jerusalem; discoverable name and city only",
+	"nearby-contact": "Jerusalem; discoverable with synthetic Telegram contact",
+} as const;
+
+export const FIXTURE_EMAILS = Object.keys(FIXTURE_SCENARIOS).map((name) => `${name}@example.test`);
 
 export const FIXTURE_INVITATION = "DAVAR-LOCAL";
 
@@ -36,16 +59,82 @@ export interface FixtureKeys {
 	rootDir?: string;
 }
 
-function pathFor(name: string): string {
+function pathFor(name: string): "starting" | "experienced" | "leader" {
 	if (name === "starting") return "starting";
-	if (name.startsWith("leader") || name === "applicant") return "leader";
+	if (name.startsWith("leader") || name.startsWith("applicant")) return "leader";
 	return "experienced";
+}
+
+function trueAnswers(numbers: number[]): Record<string, boolean> {
+	return Object.fromEntries(numbers.map((number) => [String(number), true]));
+}
+
+function fixtureProfile(name: string): Profile {
+	const path = pathFor(name);
+	let profile: Profile =
+		name === "fresh"
+			? {}
+			: {
+					experience: path,
+					city: "Buenos Aires",
+					latitude: -34.6,
+					longitude: -58.4,
+					gender: "male",
+					visibility_reviewed: true,
+					answers: trueAnswers(path === "starting" ? [1, 3] : [1, 2, 3, 4, 5, 6, 7]),
+				};
+	if (name === "onboarding-path") profile = {};
+	else if (name === "onboarding-questions") {
+		profile = { experience: path, answers: { "1": true, "2": false } };
+	} else if (name === "onboarding-name") {
+		profile = { experience: path, answers: trueAnswers([1, 2, 3, 4, 5, 6, 7]) };
+	} else if (name === "onboarding-city") {
+		delete profile.city;
+		delete profile.latitude;
+		delete profile.longitude;
+		delete profile.visibility_reviewed;
+	} else if (name === "onboarding-visibility") {
+		delete profile.visibility_reviewed;
+	} else if (name === "female-reader") {
+		profile = { ...profile, gender: "female" };
+	} else if (name === "disagreed") {
+		profile = { ...profile, answers: { ...profile.answers, "2": false } };
+	} else if (name === "legacy-city") {
+		delete profile.latitude;
+		delete profile.longitude;
+	}
+	if (name.startsWith("nearby-")) {
+		profile = { ...profile, city: "Jerusalem", latitude: 31.8, longitude: 35.25 };
+	}
+	if (name === "reader") profile = { ...profile, birth_date: "1990-01-01" };
+	return profile;
+}
+
+async function fixtureUserId(
+	db: DatabaseOrTx,
+	email: string,
+	deterministicKey: string,
+): Promise<string> {
+	const rows = await db
+		.select({ userId: identities.userId })
+		.from(identities)
+		.where(eq(identities.subjectDigest, await subjectDigest(email, deterministicKey)))
+		.limit(1);
+	const userId = rows[0]?.userId;
+	if (!userId) throw new Error(`Missing sandbox account ${email}`);
+	return userId;
 }
 
 export async function seedFixtures(
 	db: DatabaseOrTx,
 	keys: FixtureKeys,
-): Promise<{ accounts: string[]; invitation: string; provider_key: string; provider_model: string }> {
+): Promise<{
+	accounts: string[];
+	assemblies_scenarios: typeof FIXTURE_SCENARIOS;
+	invitation: string;
+	provider_key: string;
+	provider_model: string;
+}> {
 	requireSandbox(keys.env, keys.nodeEnv);
 	for (const email of FIXTURE_EMAILS) {
 		const existing = await db
@@ -61,21 +150,7 @@ export async function seedFixtures(
 			primaryKey: keys.primaryKey,
 			deterministicKey: keys.deterministicKey,
 		});
-		const path = pathFor(name);
-		const profile =
-			name === "fresh"
-				? {}
-				: {
-						experience: path,
-						city: "Buenos Aires",
-						latitude: -34.6,
-						longitude: -58.4,
-						gender: "male",
-						visibility_reviewed: true,
-						answers: Object.fromEntries(
-							(path === "starting" ? [1, 3] : [1, 2, 3, 4, 5, 6, 7]).map((n) => [String(n), true]),
-						),
-					};
+		const profile = fixtureProfile(name);
 		await db
 			.update(users)
 			.set({
@@ -83,10 +158,20 @@ export async function seedFixtures(
 				profile: await encJson(profile, keys.primaryKey),
 				admittedAt: name === "fresh" ? null : new Date(),
 				leaderVerified: name.startsWith("leader"),
-				discoverable: false,
+				discoverable: name === "nearby-visible" || name === "nearby-contact",
+				contactVisible: name === "nearby-contact",
 				updatedAt: new Date(),
 			})
 			.where(eq(users.id, user.id));
+		if (name === "nearby-contact") {
+			await resolveAccount(db, {
+				provider: "telegram",
+				subject: "990000000001",
+				linkingUserId: user.id,
+				primaryKey: keys.primaryKey,
+				deterministicKey: keys.deterministicKey,
+			});
+		}
 	}
 	const codeDigest = await accessCodeDigest(FIXTURE_INVITATION);
 	const existingCode = await db
@@ -118,11 +203,6 @@ export async function seedFixtures(
 		.from(identities)
 		.where(eq(identities.subjectDigest, await subjectDigest("leader-two@example.test", keys.deterministicKey)))
 		.limit(1);
-	const reader = await db
-		.select({ userId: identities.userId })
-		.from(identities)
-		.where(eq(identities.subjectDigest, await subjectDigest("reader@example.test", keys.deterministicKey)))
-		.limit(1);
 	const defs = [
 		{ sourceId: "sandbox:local", name: "Sandbox Buenos Aires", kind: "in_person", leader: leaderOne[0]?.userId },
 		{ sourceId: "sandbox:online", name: "Sandbox Online", kind: "online", leader: leaderTwo[0]?.userId },
@@ -153,22 +233,53 @@ export async function seedFixtures(
 			await db.insert(memberships).values({ userId: def.leader, assemblyId: assembly.id, state: "member" });
 		}
 	}
-	if (reader[0]) {
-		const local = await db
-			.select({ id: assemblies.id })
-			.from(assemblies)
-			.where(eq(assemblies.sourceId, "sandbox:local"))
-			.limit(1);
-		if (local[0]) {
-			const mine = await db.execute(sql`
-				SELECT id FROM memberships WHERE user_id = ${reader[0].userId} AND assembly_id = ${local[0].id} LIMIT 1
+	const local = await db
+		.select({ id: assemblies.id })
+		.from(assemblies)
+		.where(eq(assemblies.sourceId, "sandbox:local"))
+		.limit(1);
+	const online = await db
+		.select({ id: assemblies.id })
+		.from(assemblies)
+		.where(eq(assemblies.sourceId, "sandbox:online"))
+		.limit(1);
+	if (!local[0] || !online[0]) throw new Error("Missing sandbox assemblies");
+	const membershipPlan = [
+		["reader@example.test", local[0].id, "requested"],
+		["member@example.test", local[0].id, "member"],
+		["declined@example.test", local[0].id, "declined"],
+		["left@example.test", local[0].id, "left"],
+		["pending-online@example.test", online[0].id, "requested"],
+	] as const;
+	for (const [email, assemblyId, state] of membershipPlan) {
+		const userId = await fixtureUserId(db, email, keys.deterministicKey);
+		const mine = await db.execute(sql`
+			SELECT id FROM memberships WHERE user_id = ${userId} AND assembly_id = ${assemblyId} LIMIT 1
+		`);
+		if (!mine[0]) {
+			await db.insert(memberships).values({ userId, assemblyId, state });
+		}
+	}
+	const leaderOneId = leaderOne[0]?.userId;
+	const leaderTwoId = leaderTwo[0]?.userId;
+	if (!leaderOneId || !leaderTwoId) throw new Error("Missing sandbox leaders");
+	const endorsementPlan = [
+		["applicant-pending@example.test", "requested", "requested"],
+		["applicant-one@example.test", "accepted", "requested"],
+		["applicant-declined@example.test", "declined", "requested"],
+	] as const;
+	for (const [email, first, second] of endorsementPlan) {
+		const applicantId = await fixtureUserId(db, email, keys.deterministicKey);
+		const pairs = [
+			[leaderOneId, first],
+			[leaderTwoId, second],
+		] as const;
+		for (const [leaderId, state] of pairs) {
+			const existing = await db.execute(sql`
+				SELECT id FROM endorsements WHERE applicant_id = ${applicantId} AND leader_id = ${leaderId} LIMIT 1
 			`);
-			if (!mine[0]) {
-				await db.insert(memberships).values({
-					userId: reader[0].userId as string,
-					assemblyId: local[0].id,
-					state: "requested",
-				});
+			if (!existing[0]) {
+				await db.insert(endorsements).values({ applicantId, leaderId, state });
 			}
 		}
 	}
@@ -197,6 +308,7 @@ export async function seedFixtures(
 	}
 	return {
 		accounts: FIXTURE_EMAILS,
+		assemblies_scenarios: FIXTURE_SCENARIOS,
 		invitation: FIXTURE_INVITATION,
 		provider_key: "sandbox-key",
 		provider_model: "development-fixture-v1",

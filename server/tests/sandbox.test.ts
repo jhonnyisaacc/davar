@@ -12,9 +12,11 @@ import {
 	truncateAll,
 } from "./helper.js";
 import { resolveAccount, subjectDigest } from "../src/services/accounts.js";
-import { fixtureCalendar, resetFixtures, seedFixtures } from "../src/services/fixtures.js";
-import { identities } from "../src/db/schema.js";
-import { eq } from "drizzle-orm";
+import { FIXTURE_EMAILS, fixtureCalendar, resetFixtures, seedFixtures } from "../src/services/fixtures.js";
+import { identities, users } from "../src/db/schema.js";
+import { and, eq } from "drizzle-orm";
+import { dec, decJson, enc } from "../src/services/fields.js";
+import { completedOnboarding, type Profile } from "../src/services/profiles.js";
 
 const PRIMARY = "test-primary-key-for-davar-server-only-0001";
 const DETERMINISTIC = "test-deterministic-key-davar-only-0001";
@@ -28,6 +30,42 @@ const sandboxEnv = (extra: Record<string, string> = {}) =>
 		AUTH_RETURN_URIS: "davar://auth/callback",
 		...extra,
 	}) as NodeJS.ProcessEnv;
+
+type FixturePersona = {
+	id: string;
+	admittedAt: Date | null;
+	leaderVerified: boolean;
+	discoverable: boolean;
+	contactVisible: boolean;
+	displayName: string | null;
+	profile: Profile;
+};
+
+async function fixturePersona(
+	db: ReturnType<typeof testDb>["db"],
+	email: string,
+): Promise<FixturePersona> {
+	const digest = await subjectDigest(email, DETERMINISTIC);
+	const identity = await db
+		.select({ userId: identities.userId })
+		.from(identities)
+		.where(eq(identities.subjectDigest, digest))
+		.limit(1);
+	const userId = identity[0]?.userId;
+	if (!userId) throw new Error(`Missing ${email}`);
+	const row = await db.select().from(users).where(eq(users.id, userId)).limit(1);
+	const user = row[0];
+	if (!user) throw new Error(`Missing ${email}`);
+	return {
+		id: user.id,
+		admittedAt: user.admittedAt,
+		leaderVerified: user.leaderVerified,
+		discoverable: user.discoverable,
+		contactVisible: user.contactVisible,
+		displayName: user.displayName,
+		profile: await decJson<Profile>(user.profile, PRIMARY, {}),
+	};
+}
 
 beforeEach(truncateAll);
 
@@ -95,16 +133,7 @@ describe("development sandbox", () => {
 		try {
 			await seedFixtures(db, keys);
 			const digest = async (email: string) => subjectDigest(email, DETERMINISTIC);
-			const digests = await Promise.all(
-				[
-					"fresh@example.test",
-					"starting@example.test",
-					"reader@example.test",
-					"applicant@example.test",
-					"leader-one@example.test",
-					"leader-two@example.test",
-				].map(digest),
-			);
+			const digests = await Promise.all(FIXTURE_EMAILS.map(digest));
 			const owned = await db.execute(
 				sql`SELECT user_id AS "userId" FROM identities WHERE subject_digest IN (${sql.join(digests.map((d) => sql`${d}`), sql`, `)}) ORDER BY user_id`,
 			);
@@ -133,6 +162,147 @@ describe("development sandbox", () => {
 				sql`SELECT count(*)::int AS count FROM assemblies WHERE source_id LIKE 'sandbox:%'`,
 			);
 			expect((sandboxAssemblies[0] as { count: number }).count).toBe(2);
+			const fresh = await fixturePersona(db, "fresh@example.test");
+			expect(fresh.admittedAt).toBeNull();
+		} finally {
+			await rm(keys.rootDir, { recursive: true, force: true });
+		}
+	});
+
+	test("personas cover onboarding membership leadership privacy and scenario labels", async () => {
+		const db = testDb().db;
+		const keys = {
+			primaryKey: PRIMARY,
+			deterministicKey: DETERMINISTIC,
+			env: sandboxEnv(),
+			nodeEnv: "development",
+			rootDir: await mkdtemp(join(tmpdir(), "davar-personas-")),
+		};
+		const scenarios = {
+			fresh: "Invitation required; no onboarding",
+			"onboarding-path": "Admitted; choose a path",
+			"onboarding-questions": "Experienced path; resume after question 2",
+			"onboarding-name": "Answers complete; name and gender required",
+			"onboarding-city": "Name and gender complete; city required",
+			"onboarding-visibility": "City selected; visibility review required",
+			starting: "Starting path; may browse but cannot join",
+			reader: "Join request pending in local assembly",
+			"female-reader": "Experienced female reader; eligible to join",
+			disagreed: "One negative answer; excluded from people discovery",
+			member: "Local member; meeting access; cannot join elsewhere",
+			declined: "Declined local request; may request again",
+			left: "Left local assembly; may request again",
+			"pending-online": "Online request pending",
+			"legacy-city": "City label without coordinates; must select a city",
+			applicant: "Unverified leader; request two endorsements",
+			"applicant-pending": "Two pending endorsements",
+			"applicant-one": "One accepted and one pending endorsement",
+			"applicant-declined": "Declined endorsement; support required",
+			"leader-one": "Verified local leader with members and requests",
+			"leader-two": "Verified online leader with requests",
+			"leader-create": "Verified leader without an assembly; can create",
+			"nearby-hidden": "Jerusalem; hidden from people discovery",
+			"nearby-visible": "Jerusalem; discoverable name and city only",
+			"nearby-contact": "Jerusalem; discoverable with synthetic Telegram contact",
+		};
+		try {
+			const seeded = await seedFixtures(db, keys);
+			expect(seeded.assemblies_scenarios).toEqual(scenarios);
+			expect(seeded.accounts).toEqual(Object.keys(scenarios).map((name) => `${name}@example.test`));
+			expect(seeded.accounts).toHaveLength(25);
+			expect(seeded.invitation).toBe("DAVAR-LOCAL");
+
+			const loaded = Object.fromEntries(
+				await Promise.all(
+					seeded.accounts.map(async (email) => {
+						const name = email.split("@")[0] as string;
+						return [name, await fixturePersona(db, email)] as const;
+					}),
+				),
+			);
+			expect(Object.keys(loaded)).toHaveLength(25);
+			for (const name of [
+				"onboarding-path",
+				"onboarding-questions",
+				"onboarding-name",
+				"onboarding-city",
+				"onboarding-visibility",
+			]) {
+				const user = loaded[name] as FixturePersona;
+				expect(user.admittedAt).toBeTruthy();
+				expect(completedOnboarding(user.profile)).toBe(false);
+			}
+			expect(loaded["onboarding-questions"]?.profile.answers?.["2"]).toBe(false);
+			expect(loaded["female-reader"]?.profile.gender).toBe("female");
+			expect(completedOnboarding(loaded["legacy-city"]?.profile as Profile)).toBe(true);
+			expect(loaded["legacy-city"]?.profile.latitude).toBeUndefined();
+
+			for (const [name, state, sourceId] of [
+				["reader", "requested", "sandbox:local"],
+				["member", "member", "sandbox:local"],
+				["declined", "declined", "sandbox:local"],
+				["left", "left", "sandbox:local"],
+				["pending-online", "requested", "sandbox:online"],
+			] as const) {
+				const rows = await db.execute(sql`
+					SELECT m.state, a.source_id AS "sourceId"
+					FROM memberships m
+					JOIN assemblies a ON a.id = m.assembly_id
+					WHERE m.user_id = ${(loaded[name] as FixturePersona).id}
+				`);
+				expect(rows).toEqual([{ state, sourceId }]);
+			}
+
+			for (const [name, states] of [
+				["applicant-pending", ["requested", "requested"]],
+				["applicant-one", ["accepted", "requested"]],
+				["applicant-declined", ["declined", "requested"]],
+			] as const) {
+				const rows = await db.execute(sql`
+					SELECT state FROM endorsements
+					WHERE applicant_id = ${(loaded[name] as FixturePersona).id}
+					ORDER BY state
+				`);
+				expect(rows.map((row) => (row as { state: string }).state).sort()).toEqual([...states].sort());
+			}
+
+			const leaderCreate = loaded["leader-create"] as FixturePersona;
+			expect(leaderCreate.leaderVerified).toBe(true);
+			const leaderMemberships = await db.execute(sql`
+				SELECT id FROM memberships WHERE user_id = ${leaderCreate.id}
+			`);
+			expect(leaderMemberships).toHaveLength(0);
+			expect(loaded["nearby-hidden"]?.discoverable).toBe(false);
+			expect(loaded["nearby-visible"]?.discoverable).toBe(true);
+			expect(loaded["nearby-visible"]?.contactVisible).toBe(false);
+			expect(loaded["nearby-contact"]?.contactVisible).toBe(true);
+			const telegram = await db
+				.select({ subject: identities.subject })
+				.from(identities)
+				.where(
+					and(
+						eq(identities.userId, (loaded["nearby-contact"] as FixturePersona).id),
+						eq(identities.provider, "telegram"),
+					),
+				);
+			expect(telegram).toHaveLength(1);
+			expect(await dec(telegram[0]?.subject, PRIMARY)).toBe("990000000001");
+
+			const membershipsBefore = await db.execute(sql`SELECT count(*)::int AS count FROM memberships`);
+			const endorsementsBefore = await db.execute(sql`SELECT count(*)::int AS count FROM endorsements`);
+			await db
+				.update(users)
+				.set({
+					displayName: await enc("Changed during QA", PRIMARY),
+					discoverable: true,
+				})
+				.where(eq(users.id, (loaded["female-reader"] as FixturePersona).id));
+			await seedFixtures(db, keys);
+			const female = await fixturePersona(db, "female-reader@example.test");
+			expect(await dec(female.displayName, PRIMARY)).toBe("Changed during QA");
+			expect(female.discoverable).toBe(true);
+			expect(await db.execute(sql`SELECT count(*)::int AS count FROM memberships`)).toEqual(membershipsBefore);
+			expect(await db.execute(sql`SELECT count(*)::int AS count FROM endorsements`)).toEqual(endorsementsBefore);
 		} finally {
 			await rm(keys.rootDir, { recursive: true, force: true });
 		}
