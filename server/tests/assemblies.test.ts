@@ -100,6 +100,37 @@ describe("assembly discovery parity", () => {
 		expect(ids).toEqual([...ids].sort());
 	});
 
+	test("in-person discovery maps leader and meeting fields", async () => {
+		const { app } = makeTestContext();
+		const lead = await leader();
+		const created = await app.request("/api/v1/assemblies", {
+			method: "POST",
+			headers: lead.headers,
+			body: JSON.stringify({
+				name: "Local Qahal",
+				kind: "in_person",
+				meeting_url: "https://example.test/room",
+			}),
+		});
+		expect(created.status).toBe(201);
+		const res = await app.request(
+			"/api/v1/assemblies?kind=in_person&latitude=-34.6&longitude=-58.4&radius_km=10",
+			{ headers: lead.headers },
+		);
+		expect(res.status).toBe(200);
+		const body = (await res.json()) as {
+			assemblies: Array<{
+				member_state: string;
+				can_manage: boolean;
+				meeting_url: string | null;
+			}>;
+		};
+		expect(body.assemblies).toHaveLength(1);
+		expect(body.assemblies[0]?.member_state).toBe("member");
+		expect(body.assemblies[0]?.can_manage).toBe(true);
+		expect(body.assemblies[0]?.meeting_url).toBe("https://example.test/room");
+	});
+
 	test("people fallback requires identities and admission", async () => {
 		const { app } = makeTestContext();
 		const { headers } = await reader();

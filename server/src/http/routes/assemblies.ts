@@ -201,12 +201,21 @@ assemblyRoutes.get("/assemblies", async (c) => {
 	) {
 		throw new DomainError("invalid_area");
 	}
-	const rows = await db.execute(sql`
-		SELECT * FROM assemblies WHERE kind = 'in_person'
-		AND latitude BETWEEN ${lat - radius / 111.0} AND ${lat + radius / 111.0}
-		LIMIT 1000
-	`);
-	const nearby = (rows as unknown as AssemblyRow[])
+	// Drizzle maps columns to camelCase (leaderId, meetingUrl); raw
+	// SELECT * would hand assemblyShape snake_case rows instead.
+	const rows = await db
+		.select()
+		.from(assemblies)
+		.where(
+			and(
+				eq(assemblies.kind, "in_person"),
+				// Numeric columns compare through SQL so Postgres keeps the
+				// number coercion the raw query relied on.
+				sql`${assemblies.latitude} BETWEEN ${lat - radius / 111.0} AND ${lat + radius / 111.0}`,
+			),
+		)
+		.limit(1000);
+	const nearby = rows
 		.filter((assembly) => assembly.latitude !== null && assembly.longitude !== null)
 		.map((assembly) => ({
 			assembly,
