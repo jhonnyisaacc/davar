@@ -8,9 +8,16 @@ import { enc, encJson } from "../src/services/fields.js";
 import { issueSession } from "../src/services/sessions.js";
 import type { SentMail } from "../src/services/mailer.js";
 
-export const TEST_DATABASE_URL =
-	process.env.TEST_DATABASE_URL ??
-	"postgresql://jhonny@127.0.0.1:5433/davar_server_test";
+export const TEST_DATABASE_URL = (() => {
+	const url = process.env.TEST_DATABASE_URL;
+	if (!url) {
+		throw new Error(
+			"TEST_DATABASE_URL is required (e.g. postgresql://<user>:<pass>@127.0.0.1:5432/davar_server_test). " +
+				"Create the database, run `bun run db:migrate` with DATABASE_URL set, then re-run the tests.",
+		);
+	}
+	return url;
+})();
 
 let handle: DbHandle | null = null;
 
