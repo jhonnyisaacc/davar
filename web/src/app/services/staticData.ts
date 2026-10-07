@@ -1,34 +1,5 @@
 import { selectDssTransliteration } from "../../../../shared/dssTransliteration";
 import {
-	mapLexiconDefinitions,
-	type LexiconEntryAsset,
-	type LexiconEntryShard,
-	type LexiconInstancesAsset,
-} from "../../../../shared/lexiconAssets";
-import {
-	appendStaticDataVersion,
-	dssBookAssetPath,
-	dssChapterAssetPath,
-	dssTranslitBookAssetPath,
-	dssTranslitChapterAssetPath,
-	lexiconEntryAssetPath,
-	lexiconInstancesAssetPath,
-	shouldVersionStaticPath,
-	translitBookAssetPath,
-	translitChapterAssetPath,
-	ts2009ChapterAssetPath,
-} from "../../../../shared/staticDataPaths";
-import {
-	besBookAssetPath,
-	besorahChapterAssetPath,
-	hutterChapterAssetPath,
-	oeChapterAssetPath,
-	ts2009ApiBookPath,
-	ts2009BookAssetPath,
-	ts2009BookFileStems,
-	tthBookAssetPath,
-} from "../../../../shared/scripturePaths";
-import {
 	GREEK_RECORDED_REVISION,
 	canActivateGreekRelease,
 	greekChapterPath,
@@ -45,6 +16,22 @@ import {
 } from "../../../../shared/greekText";
 import { joinHebrewPrefixSlashes } from "../../../../shared/hebrewText";
 import { instanceSurface } from "../../../../shared/instanceSurface";
+import { mapLexiconDefinitions } from "../../../../shared/lexiconAssets";
+import {
+	besBookAssetPath,
+	besorahChapterAssetPath,
+	hutterChapterAssetPath,
+	oeChapterAssetPath,
+	tthBookAssetPath,
+} from "../../../../shared/scripturePaths";
+import {
+	dssBookAssetPath,
+	dssChapterAssetPath,
+	dssTranslitBookAssetPath,
+	dssTranslitChapterAssetPath,
+	translitBookAssetPath,
+	translitChapterAssetPath,
+} from "../../../../shared/staticDataPaths";
 import {
 	type BesorahTextVersion,
 	getMissingSpanishTranslationNotice,
@@ -55,7 +42,27 @@ import {
 	TTH_BOOK_MAPPING,
 } from "../../../../shared/translationConfig";
 import { getSourceChaptersForTranslationChapter } from "../../../../shared/versification";
-import { VERSIFICATION_DATA } from "../../../../shared/versificationData";
+import { fetchJson, resetStaticDataFetchCaches } from "./staticDataFetch";
+import {
+	loadLexiconEntryAsset,
+	resetLexiconCaches,
+	type DefinitionItem,
+	type WordAnalysis,
+} from "./staticDataLexicon";
+import {
+	fetchCachedTs2009Translation,
+	resetTs2009Caches,
+} from "./staticDataTs2009";
+
+export type { DefinitionItem, WordAnalysis };
+
+export {
+	getPolicyInstances,
+	loadLexiconEntry,
+	loadLexiconInstances,
+	prefetchLexiconEntry,
+	searchLexicon,
+} from "./staticDataLexicon";
 
 export interface WordResponse {
 	position: number;
@@ -180,8 +187,8 @@ type LoadedTranslationChapter = {
 };
 
 type RawDssDifference = {
-  dss_translit_en?: string;
-  dss_translit_es?: string;
+	dss_translit_en?: string;
+	dss_translit_es?: string;
 	position?: number;
 	dss_word?: string;
 	translit_en?: string;
@@ -235,459 +242,8 @@ type RawDssTranslitBook = {
 	variants?: RawDssTranslitVariant[];
 };
 
-const MAX_CACHE_SIZE = 400;
-const jsonCache = new Map<string, Promise<unknown>>();
-let staticDataVersionPromise: Promise<string | null> | null = null;
-
-// In-memory cache for TS2009 translations to avoid repeated private API reads.
-// Keys: `${bookId}:${chapter}:${verse}`, Values: string | null
-const ts2009Cache = new Map<string, string | null>();
-const ts2009ChapterCache = new Map<
-	string,
-	Promise<Map<number, string> | null>
->();
-const ts2009BookFileCache = new Map<
-	string,
-	Promise<RawTs2009BookPayload | null>
->();
-
-type RawTs2009BookVerse = {
-	number?: number;
-	verse?: number;
-	translation?: unknown;
-	text?: unknown;
-};
-
-type RawTs2009BookChapter = {
-	number?: number;
-	chapter?: number;
-	verses?: RawTs2009BookVerse[];
-};
-
-type RawTs2009BookPayload = {
-	chapters?:
-		| RawTs2009BookChapter[]
-		| Record<string, RawTs2009BookChapter | RawTs2009BookVerse[]>;
-};
-
-const parseTs2009BookVerseText = (verse: RawTs2009BookVerse): string | null => {
-	if (typeof verse.translation === "string") return verse.translation;
-	if (typeof verse.text === "string") return verse.text;
-	return null;
-};
-
-const extractTs2009ChapterVersesFromBook = (
-	payload: RawTs2009BookPayload,
-	chapter: number,
-): RawTs2009BookVerse[] | null => {
-	const chapters = payload.chapters;
-	if (!chapters) return null;
-
-	if (Array.isArray(chapters)) {
-		const chapterMatch = chapters.find((entry) => {
-			const chapterNumber = Number(entry.number ?? entry.chapter ?? Number.NaN);
-			return Number.isFinite(chapterNumber) && chapterNumber === chapter;
-		});
-
-		return Array.isArray(chapterMatch?.verses) ? chapterMatch.verses : null;
-	}
-
-	const chapterEntry = chapters[String(chapter)];
-	if (Array.isArray(chapterEntry)) {
-		return chapterEntry;
-	}
-
-	return Array.isArray(chapterEntry?.verses) ? chapterEntry.verses : null;
-};
-
-const normalizePsalmsTs2009VerseMap = (
-	chapter: number,
-	verseMap: Record<string, string>,
-): Record<string, string> => {
-	const psaMap = VERSIFICATION_DATA.PSA?.simple_map;
-	if (!psaMap) return verseMap;
-
-	const chapterMap = (psaMap as Record<string, Record<string, string>>)[
-		String(chapter)
-	];
-	if (!chapterMap) return verseMap;
-
-	const targetForEnglishVerse1 = chapterMap["1"];
-	if (!targetForEnglishVerse1) return verseMap;
-
-	const [, targetVerseToken] = targetForEnglishVerse1.split(":");
-	const firstRealHebrewVerse = Number(targetVerseToken);
-	if (!Number.isFinite(firstRealHebrewVerse) || firstRealHebrewVerse <= 1) {
-		return verseMap;
-	}
-
-	const superscriptionCount = firstRealHebrewVerse - 1;
-	const englishVerseCount = Object.keys(chapterMap).filter(
-		(verseKey) => Number(verseKey) > 0,
-	).length;
-	const existingKeys = Object.keys(verseMap)
-		.map(Number)
-		.filter((value) => Number.isFinite(value))
-		.sort((a, b) => a - b);
-
-	if (existingKeys.length !== englishVerseCount + superscriptionCount) {
-		return verseMap;
-	}
-
-	const normalized: Record<string, string> = {};
-	const realVerseKeys = existingKeys.slice(superscriptionCount);
-	for (const [index, hebrewKey] of realVerseKeys.entries()) {
-		const englishVerse = index + 1;
-		const text = verseMap[String(hebrewKey)];
-		if (text !== undefined) {
-			normalized[String(englishVerse)] = text;
-		}
-	}
-
-	return normalized;
-};
-
-const loadTs2009BookFile = (
-	fileStem: string,
-): Promise<RawTs2009BookPayload | null> => {
-	let bookPromise = ts2009BookFileCache.get(fileStem);
-	if (!bookPromise) {
-		bookPromise = (async () => {
-			const candidatePaths = [
-				`/${ts2009ApiBookPath(fileStem)}`,
-				`/data/${ts2009BookAssetPath(fileStem)}`,
-			];
-
-			for (const candidatePath of candidatePaths) {
-				try {
-					return await fetchJson<RawTs2009BookPayload>(candidatePath);
-				} catch {
-					// Try the next published location.
-				}
-			}
-
-			return null;
-		})();
-		ts2009BookFileCache.set(fileStem, bookPromise);
-	}
-
-	return bookPromise;
-};
-
-const loadTs2009ChapterFromChapterFile = async (
-	bookId: string,
-	chapter: number,
-): Promise<Map<number, string> | null> => {
-	try {
-		const staticChapter = await fetchJson<{
-			verses?: Record<string, string>;
-		}>(`/data/${ts2009ChapterAssetPath(bookId, chapter)}`);
-		const verses = staticChapter.verses ?? {};
-		const verseMap = new Map<number, string>();
-		for (const [verseKey, translation] of Object.entries(verses)) {
-			const verseNumber = Number(verseKey);
-			if (Number.isFinite(verseNumber) && typeof translation === "string") {
-				verseMap.set(verseNumber, translation);
-			}
-		}
-		return verseMap.size > 0 ? verseMap : null;
-	} catch {
-		// Chapter files are unpublished. Later chapters go straight to the book file.
-		ts2009ChapterFilesUnavailable = true;
-		return null;
-	}
-};
-
-const loadTs2009ChapterFromBookFile = async (
-	bookId: string,
-	chapter: number,
-): Promise<Map<number, string> | null> => {
-	if (!ts2009ChapterFilesUnavailable) {
-		const chapterFile = await loadTs2009ChapterFromChapterFile(bookId, chapter);
-		if (chapterFile) {
-			return chapterFile;
-		}
-	}
-
-	for (const fileStem of ts2009BookFileStems(bookId)) {
-		const staticBook = await loadTs2009BookFile(fileStem);
-		if (!staticBook) {
-			continue;
-		}
-
-		const chapterVerses = extractTs2009ChapterVersesFromBook(
-			staticBook,
-			chapter,
-		);
-		if (!chapterVerses || chapterVerses.length === 0) {
-			continue;
-		}
-
-		const rawVerseMap: Record<string, string> = {};
-		for (const [index, verse] of chapterVerses.entries()) {
-			const verseNumber = Number(verse.number ?? verse.verse ?? index + 1);
-			const verseText = parseTs2009BookVerseText(verse);
-			if (!Number.isFinite(verseNumber) || !verseText) {
-				continue;
-			}
-
-			rawVerseMap[String(verseNumber)] = verseText;
-		}
-
-		const normalizedVerseMap =
-			bookId.toLowerCase() === "psalms"
-				? normalizePsalmsTs2009VerseMap(chapter, rawVerseMap)
-				: rawVerseMap;
-
-		const verseMap = new Map<number, string>();
-		for (const [verseKey, verseText] of Object.entries(normalizedVerseMap)) {
-			const verseNumber = Number(verseKey);
-			if (!Number.isFinite(verseNumber)) {
-				continue;
-			}
-
-			verseMap.set(verseNumber, verseText);
-		}
-
-		if (verseMap.size > 0) {
-			return verseMap;
-		}
-	}
-
-	return null;
-};
-
-type StaticBase = "" | "/public" | "/web" | "/web/public";
-
-const staticUrlPrefix = (
-	(
-		import.meta as ImportMeta & {
-			env?: Record<string, string | undefined>;
-		}
-	).env?.PUBLIC_STATIC_URL ?? ""
-).replace(/\/+$/, "");
-
-let preferredStaticBase: StaticBase = "";
-let staticBaseResolved = false;
-let ts2009ChapterFilesUnavailable = false;
-const STATIC_BASE_CANDIDATES: StaticBase[] = [
-	"",
-	"/public",
-	"/web",
-	"/web/public",
-];
-
-const normalizeStaticPath = (path: string): string =>
-	path.startsWith("/") ? path : `/${path}`;
-
-const buildCandidatePaths = (path: string): string[] => {
-	const normalizedPath = normalizeStaticPath(path);
-	if (normalizedPath.startsWith("/api/")) {
-		return [normalizedPath];
-	}
-
-	const orderedBases = staticBaseResolved
-		? [preferredStaticBase]
-		: [
-				preferredStaticBase,
-				...STATIC_BASE_CANDIDATES.filter(
-					(base) => base !== preferredStaticBase,
-				),
-			];
-	const localPaths = orderedBases.map((base) => `${base}${normalizedPath}`);
-
-	if (!staticUrlPrefix) {
-		return localPaths;
-	}
-
-	const prefixedPaths = localPaths.map(
-		(candidatePath) => `${staticUrlPrefix}${candidatePath}`,
-	);
-
-	return [...new Set([...prefixedPaths, ...localPaths])];
-};
-
-const inferStaticBaseFromResolvedPath = (
-	resolvedPath: string,
-	originalPath: string,
-): StaticBase => {
-	const normalizedPath = normalizeStaticPath(originalPath);
-
-	if (!resolvedPath.endsWith(normalizedPath)) {
-		return "";
-	}
-
-	const base = resolvedPath.slice(
-		0,
-		resolvedPath.length - normalizedPath.length,
-	);
-	if (
-		base === "" ||
-		base === "/public" ||
-		base === "/web" ||
-		base === "/web/public"
-	) {
-		return base;
-	}
-
-	return "";
-};
-
-const parseStaticJson = async <T>(
-	response: Response,
-	resolvedPath: string,
-): Promise<T> => {
-	if (!response.ok) {
-		throw new Error(
-			`Failed to load static data: ${resolvedPath} (status ${response.status})`,
-		);
-	}
-
-	const contentType = response.headers.get("content-type") || "";
-	const payload = await response.text();
-	const normalizedPayload = payload.trimStart().toLowerCase();
-	const looksLikeHtml =
-		normalizedPayload.startsWith("<!doctype") ||
-		normalizedPayload.startsWith("<html");
-
-	if (looksLikeHtml) {
-		throw new Error(
-			`Static data endpoint returned HTML instead of JSON: ${resolvedPath}`,
-		);
-	}
-
-	try {
-		return JSON.parse(payload) as T;
-	} catch {
-		const contentTypeLabel = contentType || "unknown";
-		throw new Error(
-			`Invalid JSON for static data: ${resolvedPath} (content-type: ${contentTypeLabel})`,
-		);
-	}
-};
-
-const loadStaticDataVersion = async (): Promise<string | null> => {
-	if (!staticDataVersionPromise) {
-		staticDataVersionPromise = (async () => {
-			try {
-				const payload = await fetchJson<{
-					version?: string;
-					data_version?: string;
-				}>("/data/version.json", { versioned: false, cache: "no-cache" });
-				return payload.version ?? payload.data_version ?? null;
-			} catch {
-				return null;
-			}
-		})();
-	}
-
-	return staticDataVersionPromise;
-};
-
-const fetchJson = async <T>(
-	path: string,
-	options?: { versioned?: boolean; cache?: RequestCache },
-): Promise<T> => {
-	// If already cached, move to end (mark as recently used)
-	if (jsonCache.has(path)) {
-		// biome-ignore lint/style/noNonNullAssertion: safe — guarded by .has() check above
-		const promise = jsonCache.get(path)!;
-		jsonCache.delete(path);
-		jsonCache.set(path, promise);
-		return promise as Promise<T>;
-	}
-
-	const promise = (async () => {
-		const errors: string[] = [];
-		const isApi = normalizeStaticPath(path).startsWith("/api/");
-		const troubleshootingHint = isApi
-			? "Verify the local Bun server or deployed Pages Function serves this API route."
-			: "Verify the web app is launched from the web/ directory (bun run dev) or served from a build that includes copied public data.";
-		const shouldVersion =
-			options?.versioned ??
-			(!isApi && shouldVersionStaticPath(normalizeStaticPath(path).slice(1)));
-		// Revalidate metadata and manifests because their URLs have no data version.
-		// This also replaces stale HTML cached before a local data route was fixed.
-		const cacheMode =
-			options?.cache ?? (isApi || !shouldVersion ? "no-cache" : "force-cache");
-		const version = shouldVersion ? await loadStaticDataVersion() : null;
-
-		for (const resolvedPath of buildCandidatePaths(path)) {
-			try {
-				const requestPath = appendStaticDataVersion(resolvedPath, version);
-				const response = await fetch(requestPath, { cache: cacheMode });
-				const parsed = await parseStaticJson<T>(response, resolvedPath);
-				preferredStaticBase = inferStaticBaseFromResolvedPath(
-					resolvedPath,
-					path,
-				);
-				staticBaseResolved = true;
-				return parsed;
-			} catch (error) {
-				const message = error instanceof Error ? error.message : String(error);
-				errors.push(message);
-			}
-		}
-
-		throw new Error(
-			`Failed to load static data from all candidates for ${normalizeStaticPath(path)}: ${errors.join(" | ")}. ${troubleshootingHint}`,
-		);
-	})().catch((error) => {
-		jsonCache.delete(path); // Remove failed entry to allow retry
-		throw error;
-	});
-
-	// Evict oldest if at capacity
-	if (jsonCache.size >= MAX_CACHE_SIZE) {
-		const firstKey = jsonCache.keys().next().value;
-		if (firstKey !== undefined) {
-			jsonCache.delete(firstKey);
-		}
-	}
-
-	jsonCache.set(path, promise);
-	return promise as Promise<T>;
-};
-
 let metadataPromise: Promise<MetadataPayload> | null = null;
 let booksPromise: Promise<BookResponse[]> | null = null;
-
-/**
- * Fetches TS2009 translation with client-side caching to avoid repeated API requests.
- * Uses in-memory cache with keys formatted as `${bookId}:${chapter}:${verse}`.
- */
-const fetchCachedTs2009Translation = async (
-	bookId: string,
-	chapter: number,
-	verse: number,
-): Promise<string | null> => {
-	const cacheKey = `${bookId}:${chapter}:${verse}`;
-
-	// Return cached value if available
-	if (ts2009Cache.has(cacheKey)) {
-		// biome-ignore lint/style/noNonNullAssertion: safe — guarded by .has() check above
-		return ts2009Cache.get(cacheKey)!;
-	}
-
-	const chapterKey = `${bookId}:${chapter}`;
-
-	let chapterPromise = ts2009ChapterCache.get(chapterKey);
-	if (!chapterPromise) {
-		chapterPromise = loadTs2009ChapterFromBookFile(bookId, chapter);
-
-		ts2009ChapterCache.set(chapterKey, chapterPromise);
-	}
-
-	const staticChapterTranslations = await chapterPromise;
-	const staticTranslation = staticChapterTranslations?.get(verse) ?? null;
-	if (staticTranslation) {
-		ts2009Cache.set(cacheKey, staticTranslation);
-		return staticTranslation;
-	}
-
-	ts2009Cache.set(cacheKey, null);
-	return null;
-};
 
 export const loadMetadata = async (): Promise<MetadataPayload> => {
 	if (!metadataPromise) {
@@ -1018,9 +574,7 @@ const loadTranslationChapter = async (
 					translationBook.chapters?.some(
 						(item) =>
 							item.chapter === translationChapter &&
-							(item.verses ?? []).some((verse) =>
-								hasTranslationText(verse),
-							),
+							(item.verses ?? []).some((verse) => hasTranslationText(verse)),
 					),
 			);
 			if (requiredChapters.length > 0 && tthCoversRequiredChapters) {
@@ -1160,7 +714,11 @@ const indexDssTranslitVariants = (
 
 		const verse = Number(variant.verse);
 		const position = Number(variant.position);
-		if (!Number.isFinite(verse) || !Number.isFinite(position) || position <= 0) {
+		if (
+			!Number.isFinite(verse) ||
+			!Number.isFinite(position) ||
+			position <= 0
+		) {
 			continue;
 		}
 
@@ -1257,10 +815,14 @@ const mapVerse = (
 		const dssVariant = dssVariantMap.get(index);
 		const dssTranslit = dssTranslitByPosition?.[index];
 		const prefersDssTranslit = Boolean(options?.showDss && dssVariant);
-		const dssTranslitEn =
-			selectDssTransliteration(dssVariant?.dss_translit_en, dssTranslit?.translit_en);
-		const dssTranslitEs =
-			selectDssTransliteration(dssVariant?.dss_translit_es, dssTranslit?.translit_es);
+		const dssTranslitEn = selectDssTransliteration(
+			dssVariant?.dss_translit_en,
+			dssTranslit?.translit_en,
+		);
+		const dssTranslitEs = selectDssTransliteration(
+			dssVariant?.dss_translit_es,
+			dssTranslit?.translit_es,
+		);
 		const translitWord = canMapTranslitByPosition
 			? translitWords?.[index]
 			: translitWords
@@ -1275,10 +837,10 @@ const mapVerse = (
 			prefixes: word.prefixes ?? [],
 			has_dss_variant: dssVariantMap.has(index),
 			translit_en: prefersDssTranslit
-				? (dssTranslitEn)
+				? dssTranslitEn
 				: (word.translit_en ?? translitWord?.translit_en),
 			translit_es: prefersDssTranslit
-				? (dssTranslitEs)
+				? dssTranslitEs
 				: (word.translit_es ?? translitWord?.translit_es),
 			dss_translit_en: dssTranslitEn,
 			dss_translit_es: dssTranslitEs,
@@ -1341,8 +903,7 @@ export const getBooks = async (): Promise<BookResponse[]> => {
 
 			const hasPlaceholderLabels = books.some(
 				(book) =>
-					book.hebrew_name === book.name &&
-					book.spanish_name === book.name,
+					book.hebrew_name === book.name && book.spanish_name === book.name,
 			);
 
 			if (!hasPlaceholderLabels) {
@@ -1444,7 +1005,10 @@ export const getChapterVerses = async (
 		!options?.hebrewOnly && options?.language === "en";
 	const needsSpanishTranslation =
 		!options?.hebrewOnly && options?.language === "es";
-	const emptyTranslations: LoadedTranslationChapter = { verses: {}, titles: {} };
+	const emptyTranslations: LoadedTranslationChapter = {
+		verses: {},
+		titles: {},
+	};
 
 	const corePromise = Promise.all(
 		sourceChapters.map((sourceChapter) =>
@@ -1470,10 +1034,10 @@ export const getChapterVerses = async (
 				),
 			).then(
 				(records) =>
-					Object.assign(
-						{},
-						...records,
-					) as Record<string, Record<number, RawDssTranslitVariant>>,
+					Object.assign({}, ...records) as Record<
+						string,
+						Record<number, RawDssTranslitVariant>
+					>,
 			)
 		: Promise.resolve<Record<string, Record<number, RawDssTranslitVariant>>>(
 				{},
@@ -1483,11 +1047,9 @@ export const getChapterVerses = async (
 		const guessedChapters =
 			referenceMode === "translation" ? [chapter] : sourceChapters;
 		for (const guessedChapter of guessedChapters) {
-			void fetchCachedTs2009Translation(
-				bookEntry.id,
-				guessedChapter,
-				1,
-			).catch(() => null);
+			void fetchCachedTs2009Translation(bookEntry.id, guessedChapter, 1).catch(
+				() => null,
+			);
 		}
 	}
 
@@ -1702,10 +1264,7 @@ type GreekLexiconEntry = {
 	}>;
 };
 
-const greekManifestPromises = new Map<
-	string,
-	Promise<GreekReleaseManifest>
->();
+const greekManifestPromises = new Map<string, Promise<GreekReleaseManifest>>();
 const greekLexiconPromises = new Map<
 	string,
 	Promise<Record<string, GreekLexiconEntry>>
@@ -1724,8 +1283,8 @@ type GreekOccurrenceBucket = {
 export const isGreekPreviewEnabled = (): boolean => {
 	try {
 		return isGreekBesorahEnabled({
-			PUBLIC_GREEK_PREVIEW_ENABLED:
-				import.meta.env.PUBLIC_GREEK_PREVIEW_ENABLED,
+			PUBLIC_GREEK_PREVIEW_ENABLED: import.meta.env
+				.PUBLIC_GREEK_PREVIEW_ENABLED,
 			PUBLIC_GREEK_PUBLIC_ENABLED: import.meta.env.PUBLIC_GREEK_PUBLIC_ENABLED,
 		});
 	} catch {
@@ -1807,31 +1366,31 @@ export const getGreekChapterVerses = async (
 		...new Set([...sourceByVerse.keys(), ...translationByVerse.keys()]),
 	].sort((left, right) => left - right);
 	return verseNumbers.map((verseNumber) => {
-			const verse = sourceByVerse.get(verseNumber);
-			const translated = translationByVerse.get(verseNumber);
-			return {
-				available: Boolean(verse),
-				chapter,
-				edition: payload.edition,
-				hebrew: "",
-				revision,
-				sourceChapter: chapter,
-				sourceVerse: verseNumber,
+		const verse = sourceByVerse.get(verseNumber);
+		const translated = translationByVerse.get(verseNumber);
+		return {
+			available: Boolean(verse),
+			chapter,
+			edition: payload.edition,
+			hebrew: "",
+			revision,
+			sourceChapter: chapter,
+			sourceVerse: verseNumber,
+			source_language: "greek",
+			text: cleanGreekSurfaceText(verse?.text ?? ""),
+			translation: translated?.translation,
+			translation_footnotes: translated?.translation_footnotes,
+			translation_language: translated?.translation_language,
+			verse: verseNumber,
+			words: (verse?.words ?? []).map((word) => ({
+				...word,
+				has_dss_variant: false,
+				prefixes: [],
 				source_language: "greek",
-				text: cleanGreekSurfaceText(verse?.text ?? ""),
-				translation: translated?.translation,
-				translation_footnotes: translated?.translation_footnotes,
-				translation_language: translated?.translation_language,
-				verse: verseNumber,
-				words: (verse?.words ?? []).map((word) => ({
-					...word,
-					has_dss_variant: false,
-					prefixes: [],
-					source_language: "greek",
-					text: cleanGreekSurfaceText(word.text),
-				})),
-			};
-		});
+				text: cleanGreekSurfaceText(word.text),
+			})),
+		};
+	});
 };
 
 export const getGreekVerse = async (
@@ -1879,7 +1438,8 @@ export const loadGreekLexiconEntry = async (
 	const [lexicon, customAsset] = await Promise.all([
 		promise,
 		loadLexiconEntryAsset(family).then(
-			(asset) => asset ?? (family === strong ? null : loadLexiconEntryAsset(strong)),
+			(asset) =>
+				asset ?? (family === strong ? null : loadLexiconEntryAsset(strong)),
 		),
 	]);
 	const entry =
@@ -1989,410 +1549,6 @@ const loadGreekOccurrenceBucket = async (
 	return (await promise)[strong];
 };
 
-// ── Lexicon Service ───────────────────────────────────────────────────────
-
-export interface DefinitionItem {
-	text: string;
-	source: "custom" | "strong" | "bdb" | string;
-	language: "en" | "es" | "he" | string;
-	review_status?: "approved" | "imported" | "draft";
-	license?: string;
-}
-
-export interface WordAnalysis {
-	strong_number: string;
-	hebrew?: string;
-	greek?: string;
-	source_language?: ScriptureSourceLanguage;
-	edition?: string;
-	revision?: string;
-	lemma?: string;
-	translit_en?: string;
-	translit_es?: string;
-	translit_he?: string;
-	lemma_translit_en?: string;
-	lemma_translit_es?: string;
-	lemma_translit_he?: string;
-	short_meaning?: string;
-	full_definition?: string;
-	definitions: DefinitionItem[];
-	root?: string;
-	root_strong?: string;
-	root_definitions?: DefinitionItem[];
-	root_translit_en?: string;
-	root_translit_es?: string;
-	occurrences_count: number;
-	instances?: Array<string | { verse: string; text: string }>;
-	instance_policy_version?: string;
-	instance_total?: number;
-	instance_surface_count?: number;
-	instance_tier?: "low" | "medium" | "high";
-	instance_omitted_count?: number;
-	has_instances_asset?: boolean;
-}
-
-type RawDefinition = {
-	text?: string;
-	text_en?: string;
-	text_es?: string;
-	text_he?: string;
-	source?: string;
-	review_status?: "approved" | "imported" | "draft";
-	license?: string;
-	term_language?: "greek" | "hebrew" | "unknown";
-	source_file?: string;
-	source_row?: string;
-	source_url?: string;
-	context?: string;
-};
-
-type RawOccurrence = {
-	total?: number;
-	references?: string[];
-	surface_references?: string[];
-};
-
-type RawWordEntry = {
-	strong_number?: string;
-	lemma?: string;
-	hebrew?: string;
-	translit_en?: string;
-	translit_es?: string;
-	transliteration_en?: string;
-	transliteration_es?: string;
-	definitions?: RawDefinition[];
-	occurrences?: RawOccurrence;
-	root_ref?: string;
-	root_strong?: string;
-};
-
-type RawCustomInstance = {
-	book: string;
-	chapter: number;
-	verse: number;
-	word_positions?: number[] | number;
-	stable_id?: string;
-	confidence?: number;
-	[key: string]: unknown;
-};
-
-type RawCustomEntry = {
-	strong_number?: string;
-	compound_key?: string;
-	hebrew?: string;
-	transliteration_en?: string;
-	transliteration_es?: string;
-	term_language?: "greek" | "hebrew" | "unknown";
-	canonical_strong?: string | null;
-	imported_by?: string;
-	definitions?: RawDefinition[];
-	root?: string;
-	root_strong?: string;
-	manual_instances?: string[];
-	oe_instances?: RawCustomInstance[];
-	nt_instances?: RawCustomInstance[];
-	instances?: RawCustomInstance[];
-	surface_instances?: RawCustomInstance[];
-	instance_policy_version?: string;
-	instance_total?: number;
-	instance_surface_count?: number;
-	instance_tier?: "low" | "medium" | "high";
-	instance_omitted_count?: number;
-};
-
-let wordsPromise: Promise<Record<string, RawWordEntry>> | null = null;
-let rootsPromise: Promise<Record<string, RawWordEntry>> | null = null;
-let customPromise: Promise<Record<string, RawCustomEntry>> | null = null;
-
-const loadWords = async (): Promise<Record<string, RawWordEntry>> => {
-	if (!wordsPromise) {
-		wordsPromise = fetchJson<Record<string, RawWordEntry>>(
-			"/data/dict/words.json",
-		);
-	}
-	return wordsPromise;
-};
-
-const loadRoots = async (): Promise<Record<string, RawWordEntry>> => {
-	if (!rootsPromise) {
-		rootsPromise = fetchJson<Record<string, RawWordEntry>>(
-			"/data/dict/roots.json",
-		);
-	}
-	return rootsPromise;
-};
-
-const loadCustomDefinitions = async (): Promise<
-	Record<string, RawCustomEntry>
-> => {
-	if (!customPromise) {
-		customPromise = fetchJson<Record<string, RawCustomEntry>>(
-			"/data/dict/custom_definitions.json",
-		);
-	}
-	return customPromise;
-};
-
-const normalizeStrong = (strong?: string): string | null => {
-	if (!strong) return null;
-	const cleaned = strong.trim().toUpperCase();
-	if (/^[HGD]\d+$/.test(cleaned)) return cleaned;
-	return null;
-};
-
-export const getPolicyInstances = (entry: RawCustomEntry): RawCustomInstance[] =>
-	entry.surface_instances ??
-	entry.instances ?? [
-		...(entry.oe_instances ?? []),
-		...(entry.nt_instances ?? []),
-	];
-
-const mapDefinitions = (
-	definitions: RawDefinition[] | undefined,
-	language: "en" | "es" | "he",
-): DefinitionItem[] => {
-	if (!definitions?.length) return [];
-
-	const mapped: Array<DefinitionItem | null> = definitions.map((definition) => {
-		const text =
-			language === "es"
-				? definition.text_es
-				: language === "he"
-					? definition.text_he
-					: definition.text_en;
-
-		if (!text) return null;
-
-		return {
-			text,
-			source: definition.source ?? "strong",
-			language,
-			review_status: definition.review_status,
-			license: definition.license,
-		};
-	});
-
-	return mapped.filter((item): item is DefinitionItem => Boolean(item));
-};
-
-const mergeUniqueDefinitions = (
-	...groups: DefinitionItem[][]
-): DefinitionItem[] => {
-	const seen = new Set<string>();
-	const merged: DefinitionItem[] = [];
-
-	for (const group of groups) {
-		for (const definition of group) {
-			const key = `${definition.source}:${definition.text.toLowerCase()}`;
-			if (seen.has(key)) continue;
-			seen.add(key);
-			merged.push(definition);
-		}
-	}
-
-	return merged;
-};
-
-const getRootEntry = (
-	rootStrong: string | undefined,
-	words: Record<string, RawWordEntry>,
-	roots: Record<string, RawWordEntry>,
-	custom: Record<string, RawCustomEntry>,
-): RawWordEntry | RawCustomEntry | null => {
-	const normalizedRoot = normalizeStrong(rootStrong);
-	if (!normalizedRoot) return null;
-
-	return (
-		roots[normalizedRoot] ??
-		words[normalizedRoot] ??
-		custom[normalizedRoot] ??
-		null
-	);
-};
-
-const isRawWordEntry = (
-	value: RawWordEntry | RawCustomEntry | null,
-): value is RawWordEntry =>
-	Boolean(value && ("lemma" in value || "root_ref" in value));
-
-const isRawCustomEntry = (
-	value: RawWordEntry | RawCustomEntry | null,
-): value is RawCustomEntry =>
-	Boolean(value && ("root" in value || "compound_key" in value));
-
-const toWordAnalysis = (
-	strong: string,
-	language: "en" | "es",
-	words: Record<string, RawWordEntry>,
-	roots: Record<string, RawWordEntry>,
-	custom: Record<string, RawCustomEntry>,
-): WordAnalysis | null => {
-	const wordEntry = words[strong];
-	const rootsEntry = roots[strong];
-	const customEntry = custom[strong];
-	const dictionaryEntry = wordEntry ?? rootsEntry;
-
-	if (!dictionaryEntry && !customEntry) {
-		return null;
-	}
-
-	const strongNumber =
-		customEntry?.strong_number ?? dictionaryEntry?.strong_number ?? strong;
-	const hebrew =
-		customEntry?.hebrew ?? dictionaryEntry?.lemma ?? dictionaryEntry?.hebrew;
-	const translit_en =
-		customEntry?.transliteration_en ??
-		dictionaryEntry?.translit_en ??
-		dictionaryEntry?.transliteration_en;
-	const translit_es =
-		customEntry?.transliteration_es ??
-		dictionaryEntry?.translit_es ??
-		dictionaryEntry?.transliteration_es;
-
-	const definitions = mergeUniqueDefinitions(
-		mapDefinitions(customEntry?.definitions, language),
-		mapDefinitions(dictionaryEntry?.definitions, language),
-	);
-
-	const rootStrong =
-		customEntry?.root_strong ??
-		dictionaryEntry?.root_ref ??
-		dictionaryEntry?.root_strong ??
-		(dictionaryEntry ? strongNumber : undefined);
-	const rootEntry = getRootEntry(rootStrong, words, roots, custom);
-
-	const rootDefinitions = mergeUniqueDefinitions(
-		mapDefinitions(rootEntry?.definitions, language),
-	);
-
-	const surface = instanceSurface(customEntry, dictionaryEntry?.occurrences);
-	const instances = surface.instances;
-	const occurrencesCount = surface.total;
-
-	return {
-		strong_number: strongNumber,
-		hebrew,
-		translit_en,
-		translit_es,
-		definitions,
-		root:
-			customEntry?.root ??
-			(isRawWordEntry(rootEntry) ? rootEntry.lemma : undefined) ??
-			(isRawCustomEntry(rootEntry) ? rootEntry.hebrew : undefined),
-		root_strong: rootStrong,
-		root_definitions: rootDefinitions.length > 0 ? rootDefinitions : undefined,
-		root_translit_en: isRawWordEntry(rootEntry)
-			? rootEntry.translit_en
-			: rootEntry?.transliteration_en,
-		root_translit_es: isRawWordEntry(rootEntry)
-			? rootEntry.translit_es
-			: rootEntry?.transliteration_es,
-		occurrences_count: occurrencesCount,
-		instances: instances.length > 0 ? instances : undefined,
-		instance_policy_version: customEntry?.instance_policy_version,
-		instance_total: customEntry?.instance_total,
-		instance_surface_count: customEntry?.instance_surface_count,
-		instance_tier: customEntry?.instance_tier,
-		instance_omitted_count: customEntry?.instance_omitted_count,
-	};
-};
-
-const toWordAnalysisFromAsset = (
-	entry: LexiconEntryAsset,
-	language: "en" | "es",
-): WordAnalysis => ({
-	strong_number: entry.strong_number,
-	hebrew: entry.hebrew,
-	translit_en: entry.translit_en,
-	translit_es: entry.translit_es,
-	definitions: mapLexiconDefinitions(entry.definitions, language),
-	root: entry.root,
-	root_strong: entry.root_strong,
-	root_definitions: entry.root_definitions
-		? mapLexiconDefinitions(entry.root_definitions, language)
-		: undefined,
-	root_translit_en: entry.root_translit_en,
-	root_translit_es: entry.root_translit_es,
-	occurrences_count: entry.occurrences_count,
-	instances: entry.instances,
-	has_instances_asset: entry.has_instances_asset,
-	instance_policy_version: entry.instance_policy_version,
-	instance_total: entry.instance_total,
-	instance_surface_count: entry.instance_surface_count,
-	instance_tier: entry.instance_tier,
-	instance_omitted_count: entry.instance_omitted_count,
-});
-
-const loadLexiconEntryAsset = async (
-	strong: string,
-): Promise<LexiconEntryAsset | null> => {
-	try {
-		const shard = await fetchJson<LexiconEntryShard>(
-			`/data/${lexiconEntryAssetPath(strong)}`,
-		);
-		return shard[strong] ?? null;
-	} catch {
-		return null;
-	}
-};
-
-export const loadLexiconInstances = async (
-	strong?: string,
-): Promise<Partial<WordAnalysis> | null> => {
-	const normalizedStrong = normalizeStrong(strong);
-	if (!normalizedStrong) return null;
-
-	try {
-		const payload = await fetchJson<LexiconInstancesAsset>(
-			`/data/${lexiconInstancesAssetPath(normalizedStrong)}`,
-		);
-		return {
-			instances: payload.instances,
-			occurrences_count: payload.occurrences_count,
-			instance_policy_version: payload.instance_policy_version,
-			instance_total: payload.instance_total,
-			instance_surface_count: payload.instance_surface_count,
-			instance_tier: payload.instance_tier,
-			instance_omitted_count: payload.instance_omitted_count,
-			has_instances_asset: false,
-		};
-	} catch {
-		return null;
-	}
-};
-
-export const loadLexiconEntry = async (
-	strong?: string,
-	language?: "en" | "es",
-): Promise<WordAnalysis | null> => {
-	const normalizedStrong = normalizeStrong(strong);
-	if (!normalizedStrong) return null;
-
-	const selectedLanguage = language ?? "en";
-	const asset = await loadLexiconEntryAsset(normalizedStrong);
-	if (asset) {
-		return toWordAnalysisFromAsset(asset, selectedLanguage);
-	}
-
-	try {
-		const [words, roots, custom] = await Promise.all([
-			loadWords(),
-			loadRoots(),
-			loadCustomDefinitions(),
-		]);
-
-		return toWordAnalysis(
-			normalizedStrong,
-			selectedLanguage,
-			words,
-			roots,
-			custom,
-		);
-	} catch {
-		return null;
-	}
-};
-
 export const prefetchChapterResources = (
 	book: string,
 	chapter: number,
@@ -2403,71 +1559,6 @@ export const prefetchChapterResources = (
 		...options,
 		showDss: false,
 	}).catch(() => undefined);
-};
-
-export const prefetchLexiconEntry = (strong?: string): void => {
-	const normalizedStrong = normalizeStrong(strong);
-	if (!normalizedStrong) return;
-	void loadLexiconEntryAsset(normalizedStrong);
-};
-
-export const searchLexicon = async (
-	query: string,
-	options?: { limit?: number; offset?: number },
-): Promise<WordAnalysis[]> => {
-	const needle = query.trim().toLowerCase();
-	if (!needle) return [];
-
-	const [words, roots, custom] = await Promise.all([
-		loadWords(),
-		loadRoots(),
-		loadCustomDefinitions(),
-	]);
-
-	const strongKeys = new Set<string>([
-		...Object.keys(words),
-		...Object.keys(custom),
-	]);
-
-	const matches: WordAnalysis[] = [];
-
-	for (const strong of strongKeys) {
-		const word = words[strong];
-		const customEntry = custom[strong];
-
-		const haystack = [
-			strong,
-			word?.lemma,
-			word?.translit_en,
-			word?.translit_es,
-			customEntry?.hebrew,
-			customEntry?.transliteration_en,
-			customEntry?.transliteration_es,
-			...(word?.definitions?.flatMap((definition) => [
-				definition.text_en,
-				definition.text_es,
-			]) ?? []),
-			...(customEntry?.definitions?.flatMap((definition) => [
-				definition.text_en,
-				definition.text_es,
-				definition.text,
-			]) ?? []),
-		]
-			.filter(Boolean)
-			.join(" ")
-			.toLowerCase();
-
-		if (!haystack.includes(needle)) continue;
-
-		const analysis = toWordAnalysis(strong, "en", words, roots, custom);
-		if (analysis) {
-			matches.push(analysis);
-		}
-	}
-
-	const offset = options?.offset ?? 0;
-	const limit = options?.limit ?? 20;
-	return matches.slice(offset, offset + limit);
 };
 
 // ── Prefix Service ───────────────────────────────────────────────────────
@@ -2487,21 +1578,13 @@ export const loadPrefix = async (prefixId: string): Promise<unknown> => {
 };
 
 export const resetStaticDataCachesForTests = (): void => {
-	jsonCache.clear();
-	staticDataVersionPromise = null;
-	preferredStaticBase = "";
-	staticBaseResolved = false;
-	ts2009ChapterFilesUnavailable = false;
+	resetStaticDataFetchCaches();
+	resetTs2009Caches();
 	metadataPromise = null;
 	booksPromise = null;
-	wordsPromise = null;
-	rootsPromise = null;
-	customPromise = null;
+	resetLexiconCaches();
 	prefixesPromise = null;
 	greekManifestPromises.clear();
 	greekLexiconPromises.clear();
 	greekOccurrenceShardPromises.clear();
-	ts2009Cache.clear();
-	ts2009ChapterCache.clear();
-	ts2009BookFileCache.clear();
 };
