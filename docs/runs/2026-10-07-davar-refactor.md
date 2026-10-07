@@ -2,7 +2,7 @@
 
 ## Outcome
 
-Draft PR on `cursor/fix-web-typecheck-86fd` into `feat/davar-v2`. It fixes the red Web CI typecheck. The knowledge boundary check was already green on `feat/davar-v2` and still passes. Not merged.
+Draft PR [#255](https://github.com/jhonnyisaacc/davar/pull/255) (`cursor/fix-web-typecheck-86fd` into `feat/davar-v2`). It fixes the red Web CI typecheck. The knowledge boundary check was already green on `feat/davar-v2` and still passes. Not merged.
 
 ## What changed
 
