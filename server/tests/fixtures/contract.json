@@ -40,5 +40,6 @@
 	"capabilities_keys": ["ai", "flags"],
 	"capabilities_ai_keys": ["available", "providers", "shared_openrouter"],
 	"capabilities_flags_keys": ["ai_provider_connections", "ai_shared_openrouter", "assemblies"],
-	"providers": ["google", "apple", "facebook", "telegram", "x", "email"]
+	"providers": ["google", "apple", "facebook", "telegram", "x", "email"],
+	"providers_keys": ["commentary_provider", "providers"]
 }

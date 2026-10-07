@@ -96,8 +96,15 @@ describe("client contract", () => {
 
 		const providers = (await (
 			await app.request("/api/v1/auth/providers")
-		).json()) as { providers: Array<{ id: string }> };
+		).json()) as {
+			providers: Array<{ id: string; available: boolean }>;
+			commentary_provider: string | null;
+		};
 		expect(providers.providers.map((item) => item.id)).toEqual(contract.providers);
+		expect(Object.keys(providers).sort()).toEqual(contract.providers_keys);
+		expect(
+			providers.commentary_provider === null || providers.commentary_provider === "openrouter",
+		).toBe(true);
 
 		const conversation = (await (
 			await app.request("/api/v1/conversations", {

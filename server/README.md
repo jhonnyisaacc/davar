@@ -44,6 +44,8 @@ Health: `GET /up`.
 | `FREE_AI_KEY/FREE_AI_MODEL[/FREE_AI_PROVIDER]` | no | Single sponsored consultation when the user has no provider connection |
 | `TELEGRAM_BOT_TOKEN` | no | Enables the Telegram notification worker |
 | `PYTHON_BIN` | no (`python3`) | Interpreter for the pinned Bore bridge |
+| `WEB_ORIGINS` | no (Rails defaults) | Comma-separated browser origins allowed on `/api/*` |
+| `TRUSTED_PROXIES` | no (loopback + private ranges) | Comma-separated IPs/IPv4 CIDRs whose `X-Forwarded-For` is honored |
 | `BORE_BRIDGE_PATH` | no (`server/lib/bore/bridge.py`) | Override for the calendar bridge |
 | `IMPORT_FILE` / `APPLY` | import commands | Reviewed-payload file; dry run unless `APPLY=1` |
 | `SCENARIO` | sandbox calendar | `pending` or `confirmed` |
@@ -123,13 +125,13 @@ calls. Mobile/web tests are untouched; fields they assume are preserved.
 
 ## Routes (all preserved exactly)
 
-Health `GET /up`; dev-only mailbox/status; auth guest/providers/exchange/
-session/destroy/start/callback (email, google, apple, telegram, facebook,
-x); account show/update/settings/admission/notification preferences/
-notifications; cities search/update; assemblies index/leaders/show/create/
-update/join/leave/members/decide; endorsements; articles; conversations +
-messages + memory reset; provider connections; calendar locations/today/
-upcoming.
+Health `GET /up`; public `GET /api/v1/capabilities`; dev-only
+mailbox/status; auth guest/providers/exchange/session/destroy/start/
+callback (email, google, apple, telegram, facebook, x); account
+show/update/settings/admission/notification preferences/notifications;
+cities search/update; assemblies index/leaders/show/create/update/join/
+leave/members/decide; endorsements; articles; conversations + messages +
+memory reset; provider connections; calendar locations/today/upcoming.
 
 Error codes and status mapping come from Rails `DomainError`, including
 `invalid_return_uri`, `provider_not_configured` (503), `invalid_email`,
@@ -139,15 +141,34 @@ are `not_found` (404). Only digests (SHA-256 hex) are stored for state,
 handoff codes and session token lookups; raw tokens, codes and verifiers are
 never logged.
 
-## Intentional gaps (no Rails source to preserve)
+## Intentional gaps (verified against the tip of `feat/davar-v2`)
 
-- `GET /api/v1/capabilities` is not in the Rails routes and no client calls
-  it, so it stays absent (404) rather than invented.
-- `20261003000000_add_calendar_feed_tracking.rb` / Solid Queue migrations do
-  not exist in the Rails tree; the schema covers the five domain migrations.
-- `assembly_discovery`, `calendar_observation_*`, `published_articles` and
-  `sync_calendar_observations` services do not exist as such in Rails; the
-  equivalent behavior ships as the assemblies people-fallback, the
-  observation import + disabled-by-default sync job, and the published scope.
+- `20261003000001_add_solid_queue.rb` is not ported: there is no ActiveJob
+  backend here. Jobs ship as idempotent `bun run jobs:*` commands
+  (recover, calendar sync, Telegram delivery); nothing enqueues at runtime.
+  `20261003000000_add_calendar_feed_tracking.rb` **is** ported
+  (`drizzle/0002_calendar_feed.sql`).
+- Stored ciphertext is not compatible with ActiveRecord Encryption (see
+  "Encryption (greenfield decision)" above): byte-compat covers the HTTP
+  API only.
+- JWKS rotation recovers faster than Rails: an unknown `kid` refetches
+  after a 30s cooldown instead of waiting out Rails' hourly cache. The
+  `algorithms: ["RS256"]` pin matches Rails exactly.
+- `resolveAccount` retries a lost insert-or-find race at most 3 times;
+  Rails retries indefinitely. The retry runs behind a savepoint either way.
+- `AUTH_RETURN_URIS` entries are trimmed and empties dropped; Rails
+  compares untrimmed (a sloppy env value works here that Rails rejects).
+- Query-string `notification_consent=true` no longer opts in (Rails'
+  `== true` ignores it); only a JSON boolean does.
+- `server/lib/bore/` is a byte-identical consumer copy of `api/lib/bore`
+  (plus this repo's `README.davar.md`); `api/` is canonical. CI's
+  `bore-parity` job diffs the two trees.
 - Live OAuth/SMTP/AI providers are configuration, not code; the
   fixture/disabled paths from Rails are preserved instead.
+
+Rules the code follows (all learned from bugs above): no external I/O
+inside DB transactions (provider lookup runs before the callback
+transaction; statement retries go through `withSavepoint`); never log
+error messages or query params (logs carry name, pg code, method, route);
+client IPs come from the socket with a trusted-proxy XFF walk, never from
+blindly trusted headers.
