@@ -10,7 +10,7 @@ import {
 import { sha256Hex } from "../lib/crypto.js";
 import { DomainError } from "../lib/errors.js";
 import { validateCommentaryContext, type CommentaryContextInput } from "./context.js";
-import { dec, decJson, enc, encJson } from "./fields.js";
+import { dec, decJson, decryptionRing, enc, encJson, type PreviousKeys } from "./fields.js";
 import { evaluateFlags, type FlagSet } from "./flags.js";
 import { generateCompletion } from "./provider.js";
 import {
@@ -69,13 +69,13 @@ async function toAnswer(row: {
 	state: string;
 	generation: Record<string, unknown>;
 	createdAt: Date;
-}, primaryKey: string): Promise<AnswerShape> {
+}, keys: readonly string[]): Promise<AnswerShape> {
 	return {
 		id: row.id,
 		role: row.role,
-		content: (await dec(row.content, primaryKey)) ?? "",
-		context: await decJson<CommentaryContextInput | null>(row.context, primaryKey, null),
-		citations: await decJson<unknown[] | null>(row.citations, primaryKey, null),
+		content: (await dec(row.content, keys)) ?? "",
+		context: await decJson<CommentaryContextInput | null>(row.context, keys, null),
+		citations: await decJson<unknown[] | null>(row.citations, keys, null),
 		state: row.state,
 		generation: row.generation ?? {},
 		createdAt: row.createdAt,
@@ -100,8 +100,9 @@ function referenceEqual(a: unknown, b: unknown): boolean {
 
 export async function searchArticles(
 	db: DatabaseOrTx,
-	input: { question: string; reference: unknown; primaryKey: string },
+	input: { question: string; reference: unknown; primaryKey: string } & PreviousKeys,
 ): Promise<EvidenceItem[]> {
+	const keys = decryptionRing(input.primaryKey, input.previousKeys);
 	const keywords = searchTerms(input.question);
 	const rows = await db
 		.select()
@@ -111,7 +112,7 @@ export async function searchArticles(
 		);
 	const scored: Array<{ score: number; item: EvidenceItem }> = [];
 	for (const article of rows) {
-		const body = (await dec(article.body, input.primaryKey)) ?? "";
+		const body = (await dec(article.body, keys)) ?? "";
 		const exact =
 			!!input.reference &&
 			(Array.isArray(article.references) ? article.references : []).some((ref) =>
@@ -168,10 +169,11 @@ export async function askCommentary(
 		requestId: unknown;
 		provider?: string | null;
 		primaryKey: string;
-	},
+	} & PreviousKeys,
 	deps: AskDeps = {},
 ): Promise<AnswerShape> {
 	const env = deps.env ?? process.env;
+	const keys = decryptionRing(input.primaryKey, input.previousKeys);
 	const nodeEnv = deps.nodeEnv ?? env.NODE_ENV ?? "development";
 	if (typeof input.requestId !== "string" || !REQUEST_ID_PATTERN.test(input.requestId)) {
 		throw new DomainError("request_id_required");
@@ -242,7 +244,7 @@ export async function askCommentary(
 		state.connection = match
 			? {
 					provider: match.provider,
-					credential: await dec(match.credential, input.primaryKey),
+					credential: await dec(match.credential, keys),
 					model: match.model,
 				}
 			: null;
@@ -304,7 +306,7 @@ export async function askCommentary(
 			.limit(1);
 		const row = existing[0];
 		if (row && row.state !== "pending") {
-			return toAnswer(row, input.primaryKey);
+			return toAnswer(row, keys);
 		}
 	}
 
@@ -314,6 +316,7 @@ export async function askCommentary(
 			question: input.content as string,
 			reference: ref,
 			primaryKey: input.primaryKey,
+			previousKeys: input.previousKeys,
 		});
 		let system =
 			`${COMMENTARY_SYSTEM_PROMPT}\n\nAuthorized evidence:\n` +
@@ -333,7 +336,7 @@ export async function askCommentary(
 			.from(conversations)
 			.where(eq(conversations.id, input.conversationId))
 			.limit(1);
-		const memory = await dec(convoRow[0]?.memory, input.primaryKey);
+		const memory = await dec(convoRow[0]?.memory, keys);
 		if (memory) system += `\nPrior conversation summary (untrusted): ${memory}`;
 		const historyRows = await db
 			.select()
@@ -344,7 +347,7 @@ export async function askCommentary(
 		const history = await Promise.all(
 			historyRows.reverse().map(async (message) => ({
 				role: message.role,
-				content: (await dec(message.content, input.primaryKey)) ?? "",
+				content: (await dec(message.content, keys)) ?? "",
 			})),
 		);
 		let providerId: string;
@@ -442,7 +445,7 @@ export async function askCommentary(
 			const summary = (
 				await Promise.all(
 					recent.reverse().map(async (message) => {
-						const content = (await dec(message.content, input.primaryKey)) ?? "";
+						const content = (await dec(message.content, keys)) ?? "";
 						return `${message.role}: ${content.slice(0, 600)}`;
 					}),
 				)
@@ -460,7 +463,7 @@ export async function askCommentary(
 			return rows[0];
 		});
 		if (!updated) throw new Error("Answer update failed");
-		return toAnswer(updated, input.primaryKey);
+		return toAnswer(updated, keys);
 	} catch (error) {
 		await db.transaction(async (tx) => {
 			await tx.execute(sql`SELECT id FROM users WHERE id = ${input.userId} FOR UPDATE`);

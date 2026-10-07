@@ -12,8 +12,18 @@ export interface ServerConfig {
 	trustedProxies: string[];
 	sandbox: boolean;
 	encryptionPrimaryKey: string;
+	encryptionPreviousKeys: string[];
 	encryptionDeterministicKey: string;
 	port: number;
+}
+
+// Ordered decryption ring: the current primary first, then previous keys
+// kept only to open rows written before a rotation.
+export function decryptionKeys(input: {
+	encryptionPrimaryKey: string;
+	encryptionPreviousKeys: string[];
+}): string[] {
+	return [input.encryptionPrimaryKey, ...input.encryptionPreviousKeys];
 }
 
 export function loadConfig(source: NodeJS.ProcessEnv = process.env): ServerConfig {
@@ -59,6 +69,10 @@ export function loadConfig(source: NodeJS.ProcessEnv = process.env): ServerConfi
 		encryptionPrimaryKey:
 			source.DAVAR_ENCRYPTION_PRIMARY_KEY ??
 			"davar-local-only-primary-key-0001",
+		encryptionPreviousKeys: (source.DAVAR_ENCRYPTION_PREVIOUS_KEYS ?? "")
+			.split(",")
+			.map((part) => part.trim())
+			.filter((part) => part.length > 0),
 		encryptionDeterministicKey:
 			source.DAVAR_ENCRYPTION_DETERMINISTIC_KEY ??
 			"davar-local-only-deterministic01",

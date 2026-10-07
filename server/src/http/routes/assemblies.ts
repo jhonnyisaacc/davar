@@ -17,7 +17,7 @@ import { inviteGateEnabled, requireAssemblyAccess } from "../auth.js";
 import { parseBody, uuidParam, ValidationError } from "../validation.js";
 import type { AppVariables } from "../deps.js";
 import type { DatabaseOrTx } from "../../db/client.js";
-import type { ServerConfig } from "../../lib/config.js";
+import { decryptionKeys, type ServerConfig } from "../../lib/config.js";
 
 const createSchema = z.object({
 	name: z.string().min(1).max(120),
@@ -108,7 +108,7 @@ export async function assemblyShape(
 		distance_km: distance === null ? null : Math.round(distance * 10) / 10,
 		meeting_url:
 			managed || membership?.state === "member"
-				? await dec(assembly.meetingUrl, config.encryptionPrimaryKey)
+				? await dec(assembly.meetingUrl, decryptionKeys(config))
 				: null,
 	};
 }
@@ -138,7 +138,7 @@ async function telegramContact(
 		.from(identities)
 		.where(and(eq(identities.userId, userId), eq(identities.provider, "telegram")))
 		.limit(1);
-	const subject = rows[0] ? await dec(rows[0].subject, config.encryptionPrimaryKey) : null;
+	const subject = rows[0] ? await dec(rows[0].subject, decryptionKeys(config)) : null;
 	return subject ? `tg://user?id=${subject}` : null;
 }
 
@@ -156,9 +156,9 @@ assemblyRoutes.get("/assemblies/leaders", async (c) => {
 		.limit(100);
 	const leaders: Array<{ id: string; name: string | null; city: unknown }> = [];
 	for (const row of rows) {
-		const name = await dec(row.displayName, config.encryptionPrimaryKey);
+		const name = await dec(row.displayName, decryptionKeys(config));
 		if (query && !(name ?? "").toLowerCase().includes(query)) continue;
-		const profile = await decJson<Profile>(row.profile, config.encryptionPrimaryKey, {});
+		const profile = await decJson<Profile>(row.profile, decryptionKeys(config), {});
 		leaders.push({ id: row.id, name, city: profile.city ?? null });
 	}
 	return c.json({ leaders });
@@ -239,7 +239,7 @@ assemblyRoutes.get("/assemblies", async (c) => {
 						);
 		const withIdentity = new Set(identityRows.map((row) => row.userId));
 		for (const candidate of candidates) {
-			const profile = await decJson<Profile>(candidate.profile, config.encryptionPrimaryKey, {});
+			const profile = await decJson<Profile>(candidate.profile, decryptionKeys(config), {});
 			if (
 				!withIdentity.has(candidate.id) ||
 				(gateOn && !candidate.admittedAt) ||
@@ -253,7 +253,7 @@ assemblyRoutes.get("/assemblies", async (c) => {
 			if (distanceKm(lat, lon, profile.latitude, profile.longitude) > radius) continue;
 			people.push({
 				id: candidate.id,
-				name: await dec(candidate.displayName, config.encryptionPrimaryKey),
+				name: await dec(candidate.displayName, decryptionKeys(config)),
 				area: profile.city ?? null,
 				contact_url: candidate.contactVisible
 					? await telegramContact(db, config, candidate.id)
@@ -441,13 +441,13 @@ assemblyRoutes.get("/assemblies/:id/members", async (c) => {
 		const owner = await db.select().from(users).where(eq(users.id, membership.userId)).limit(1);
 		const member = owner[0];
 		if (!member) continue;
-		const profile = await decJson<Profile>(member.profile, config.encryptionPrimaryKey, {});
+		const profile = await decJson<Profile>(member.profile, decryptionKeys(config), {});
 		result.push({
 			id: membership.id,
 			state: membership.state,
 			user: {
 				id: member.id,
-				name: await dec(member.displayName, config.encryptionPrimaryKey),
+				name: await dec(member.displayName, decryptionKeys(config)),
 				gender: membership.state === "requested" ? (profile.gender ?? null) : null,
 				age: ageOf(profile),
 				contact_url: member.contactVisible ? await telegramContact(db, config, member.id) : null,

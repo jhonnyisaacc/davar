@@ -8,6 +8,7 @@ try {
 	const result = await deliverTelegramNotifications(db, {
 		env: process.env,
 		primaryKey: config.encryptionPrimaryKey,
+		previousKeys: config.encryptionPreviousKeys,
 	});
 	console.log(JSON.stringify({ job: "telegram_notifications", ...result }));
 } finally {

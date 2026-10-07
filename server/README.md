@@ -36,6 +36,7 @@ Health: `GET /up`.
 | `INVITE_GATE_ENABLED` | no (`true`) | Admission gate for assembly domains |
 | `DAVAR_DEV_SANDBOX` | no | `1` enables the dev sandbox mailbox, fixture cities/AI and seed commands (development only) |
 | `DAVAR_ENCRYPTION_PRIMARY_KEY` | staging/production | At-rest encryption for PII/token envelopes |
+| `DAVAR_ENCRYPTION_PREVIOUS_KEYS` | no | Comma-separated older primaries, kept only to decrypt rows written before a rotation |
 | `DAVAR_ENCRYPTION_DETERMINISTIC_KEY` | staging/production | HMAC key for deterministic identity-subject digests |
 | `{GOOGLE,APPLE,TELEGRAM,FACEBOOK,X}_CLIENT_ID` + `_CLIENT_SECRET` | per provider | Env-gated OAuth availability; unconfigured providers return 503 `provider_not_configured` (email always works) |
 | `MAIL_FROM` | no | Magic-link sender |
@@ -49,6 +50,25 @@ Health: `GET /up`.
 
 Staging/production boot requires the encryption keys, `DATABASE_URL` and an
 HTTPS `API_PUBLIC_URL`, and rejects `DAVAR_DEV_SANDBOX=1` — same as Rails.
+
+## Encryption (greenfield decision)
+
+"Byte-compatible" covers the HTTP API only: stored ciphertext is **not**
+compatible with Rails ActiveRecord Encryption. This server seals PII/token
+columns in a custom `v1.` AES-GCM envelope keyed by
+`SHA-256(DAVAR_ENCRYPTION_PRIMARY_KEY)`, and looks identities up by an
+HMAC digest (`subject_digest`) instead of Rails' deterministic encryption.
+The `ACTIVE_RECORD_ENCRYPTION_*` vars were intentionally not carried over,
+and `KEY_DERIVATION_SALT` has no equivalent here. Every deployment is
+greenfield (fresh database per server), so no Rails-written rows exist to
+read — confirmed with the maintainer before keeping this scheme.
+
+Key rotation: new writes always use the primary key; reads try
+`[DAVAR_ENCRYPTION_PRIMARY_KEY, ...DAVAR_ENCRYPTION_PREVIOUS_KEYS]` in
+order (`decryptionKeys`). To rotate, generate a new primary, move the old
+one into `DAVAR_ENCRYPTION_PREVIOUS_KEYS`, and drop it once rows have been
+rewritten. Rotating `DAVAR_ENCRYPTION_DETERMINISTIC_KEY` changes identity
+digests and is not seamless (lookups would miss).
 
 ## Database
 

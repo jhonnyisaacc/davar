@@ -2,6 +2,7 @@ import { Hono } from "hono";
 import { and, eq, sql } from "drizzle-orm";
 import { articles } from "../../db/schema.js";
 import { DomainError } from "../../lib/errors.js";
+import { decryptionKeys } from "../../lib/config.js";
 import { dec } from "../../services/fields.js";
 import { uuidParam } from "../validation.js";
 import type { DatabaseOrTx } from "../../db/client.js";
@@ -138,7 +139,7 @@ articleRoutes.get("/articles/:id", async (c) => {
 				revision: article.revision,
 				permissions: article.permissions,
 			},
-			await dec(article.body, config.encryptionPrimaryKey),
+			await dec(article.body, decryptionKeys(config)),
 		),
 	);
 });

@@ -2,7 +2,7 @@ import type { Context } from "hono";
 import { eq } from "drizzle-orm";
 import type { DatabaseOrTx } from "../db/client.js";
 import { identities, users } from "../db/schema.js";
-import type { ServerConfig } from "../lib/config.js";
+import { decryptionKeys, type ServerConfig } from "../lib/config.js";
 import { DomainError } from "../lib/errors.js";
 import { dec, decJson } from "../services/fields.js";
 import { authenticateSession } from "../services/sessions.js";
@@ -60,8 +60,8 @@ export async function currentUser(
 		.where(eq(identities.userId, row.id));
 	return {
 		id: row.id,
-		displayName: await dec(row.displayName, config.encryptionPrimaryKey),
-		profile: await decJson<Profile>(row.profile, config.encryptionPrimaryKey, {}),
+		displayName: await dec(row.displayName, decryptionKeys(config)),
+		profile: await decJson<Profile>(row.profile, decryptionKeys(config), {}),
 		settings: (row.settings ?? {}) as Record<string, unknown>,
 		settingsVersion: row.settingsVersion,
 		discoverable: row.discoverable,

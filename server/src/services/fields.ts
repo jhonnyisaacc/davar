@@ -1,5 +1,9 @@
 import { decryptField, encryptField } from "../lib/codec.js";
 
+export interface PreviousKeys {
+	previousKeys?: readonly string[];
+}
+
 export function enc(value: string, secret: string): Promise<string>;
 export function enc(value: null | undefined, secret: string): Promise<null>;
 export async function enc(
@@ -10,12 +14,32 @@ export async function enc(
 	return encryptField(value, secret);
 }
 
+// Ordered decryption ring: the current primary first, then previous keys
+// kept only to open rows written before a rotation.
+export function decryptionRing(
+	primary: string,
+	previous?: readonly string[],
+): readonly string[] {
+	return previous && previous.length > 0 ? [primary, ...previous] : [primary];
+}
+
+// Decryption accepts an ordered key ring (current primary first, previous
+// keys after) so a rotated primary keeps opening older rows. Returns null
+// when no key opens the envelope instead of throwing.
 export async function dec(
 	envelope: string | null | undefined,
-	secret: string,
+	secrets: string | readonly string[],
 ): Promise<string | null> {
 	if (envelope === null || envelope === undefined) return null;
-	return decryptField(envelope, secret);
+	const ring = Array.isArray(secrets) ? secrets : [secrets];
+	for (const secret of ring) {
+		try {
+			return await decryptField(envelope, secret);
+		} catch {
+			// Try the next key in the ring.
+		}
+	}
+	return null;
 }
 
 export async function encJson(
@@ -38,12 +62,14 @@ export function asDateRequired(value: Date | string | null | undefined): Date {
 
 export async function decJson<T>(
 	envelope: string | null | undefined,
-	secret: string,
+	secrets: string | readonly string[],
 	fallback: T,
 ): Promise<T> {
 	if (envelope === null || envelope === undefined) return fallback;
 	try {
-		return JSON.parse(await decryptField(envelope, secret)) as T;
+		const plain = await dec(envelope, secrets);
+		if (plain === null) return fallback;
+		return JSON.parse(plain) as T;
 	} catch {
 		return fallback;
 	}

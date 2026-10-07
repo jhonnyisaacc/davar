@@ -62,6 +62,7 @@ export function testConfig(): ServerConfig {
 		authReturnUris: ["davar://auth/callback"],
 		webOrigins: [],
 		trustedProxies: [...DEFAULT_TRUSTED_PROXIES],
+		encryptionPreviousKeys: [],
 		sandbox: false,
 		encryptionPrimaryKey: "test-primary-key-for-davar-server-only-0001",
 		encryptionDeterministicKey: "test-deterministic-key-davar-only-0001",

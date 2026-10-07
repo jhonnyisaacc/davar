@@ -4,7 +4,7 @@ import { authAttempts, handoffs, users } from "../db/schema.js";
 import { randomToken, sha256Hex } from "../lib/crypto.js";
 import { DomainError } from "../lib/errors.js";
 import { resolveAccount } from "./accounts.js";
-import { asDateRequired, dec, enc } from "./fields.js";
+import { asDateRequired, dec, decryptionRing, enc, type PreviousKeys } from "./fields.js";
 import { issueSession } from "./sessions.js";
 import {
 	authorizationUrl,
@@ -109,11 +109,12 @@ export async function finishAuthentication(
 		apiPublicUrl: string;
 		primaryKey: string;
 		deterministicKey: string;
-	},
+	} & PreviousKeys,
 	deps: FinishDeps = {},
 ): Promise<string> {
 	if (!input.state) throw new DomainError("invalid_state", 401);
 	const digest = await sha256Hex(input.state);
+	const keys = decryptionRing(input.primaryKey, input.previousKeys);
 	return db.transaction(async (tx) => {
 		const rows = await tx.execute(
 			sql`SELECT * FROM auth_attempts WHERE state_digest = ${digest} AND provider = ${input.provider} FOR UPDATE`,
@@ -138,11 +139,11 @@ export async function finishAuthentication(
 		}
 		let subject: string;
 		if (input.provider === "email") {
-			const email = await dec(attempt.email, input.primaryKey);
+			const email = await dec(attempt.email, keys);
 			if (!email) throw new DomainError("expired_or_used_link", 401);
 			subject = email;
 		} else {
-			const verifier = await dec(attempt.verifier, input.primaryKey);
+			const verifier = await dec(attempt.verifier, keys);
 			subject = await providerSubject(
 				{ provider: input.provider, nonce: attempt.nonce, verifier },
 				input.code,
@@ -190,7 +191,7 @@ export async function finishAuthentication(
 
 export async function exchangeHandoff(
 	db: DatabaseOrTx,
-	input: { code: string | null | undefined; primaryKey: string },
+	input: { code: string | null | undefined; primaryKey: string } & PreviousKeys,
 ): Promise<string> {
 	if (!input.code) throw new DomainError("invalid_handoff", 401);
 	const digest = await sha256Hex(input.code);
@@ -205,7 +206,9 @@ export async function exchangeHandoff(
 		if (asDateRequired(handoff.expiresAt).getTime() <= Date.now() || handoff.revokedAt) {
 			throw new DomainError("expired_handoff", 401);
 		}
-		const token = (await dec(handoff.token, input.primaryKey)) ?? handoff.token;
+		const token =
+			(await dec(handoff.token, decryptionRing(input.primaryKey, input.previousKeys))) ??
+			handoff.token;
 		await tx.delete(handoffs).where(eq(handoffs.id, handoff.id));
 		return token;
 	});

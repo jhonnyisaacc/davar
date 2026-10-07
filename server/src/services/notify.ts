@@ -3,7 +3,7 @@ import type { DatabaseOrTx } from "../db/client.js";
 import { identities, notifications, users } from "../db/schema.js";
 import { DomainError } from "../lib/errors.js";
 import { sandboxEnabled } from "./sandbox.js";
-import { dec } from "./fields.js";
+import { dec, decryptionRing, type PreviousKeys } from "./fields.js";
 import type { ProviderHttp } from "./oauth.js";
 import { fetchHttp } from "./oauth.js";
 
@@ -20,7 +20,7 @@ export async function deliverTelegramNotifications(
 		http?: ProviderHttp;
 		limit?: number;
 		primaryKey?: string;
-	} = {},
+	} & PreviousKeys = {},
 ): Promise<NotifyResult> {
 	const env = input.env ?? process.env;
 	if (sandboxEnabled(env, env.NODE_ENV ?? "development")) {
@@ -60,9 +60,10 @@ export async function deliverTelegramNotifications(
 			const settings = (owner[0]?.settings ?? {}) as Record<string, unknown>;
 			// Without the encryption key there is no chat to deliver to; the
 			// notification stays queued for a configured run.
-			if (!input.primaryKey) return;
+			const primaryKey = input.primaryKey;
+			if (!primaryKey) return;
 			const chatId = telegram[0]
-				? await dec(telegram[0].subject, input.primaryKey)
+				? await dec(telegram[0].subject, decryptionRing(primaryKey, input.previousKeys))
 				: null;
 			if (!chatId || settings.telegram_notifications !== true) return;
 			await tx

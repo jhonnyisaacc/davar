@@ -67,6 +67,7 @@ authRoutes.post("/exchange", async (c) => {
 	const token = await exchangeHandoff(db, {
 		code: body.code,
 		primaryKey: config.encryptionPrimaryKey,
+		previousKeys: config.encryptionPreviousKeys,
 	});
 	return c.json({ token });
 });
@@ -160,6 +161,7 @@ async function callbackHandler(c: {
 			code: params.code,
 			apiPublicUrl: config.apiPublicUrl,
 			primaryKey: config.encryptionPrimaryKey,
+			previousKeys: config.encryptionPreviousKeys,
 			deterministicKey: config.encryptionDeterministicKey,
 		},
 		{ env, http },

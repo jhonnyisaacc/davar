@@ -3,6 +3,7 @@ import { and, eq, sql } from "drizzle-orm";
 import { z } from "zod";
 import { endorsements, notifications, users } from "../../db/schema.js";
 import { DomainError } from "../../lib/errors.js";
+import { decryptionKeys } from "../../lib/config.js";
 import { dec, decJson } from "../../services/fields.js";
 import { completedOnboarding } from "../../services/profiles.js";
 import { requireAssemblyAccess } from "../auth.js";
@@ -35,8 +36,8 @@ endorsementRoutes.get("/endorsements", async (c) => {
 		result.push({
 			id: item.id,
 			state: item.state,
-			applicant_name: await dec(applicant[0].displayName, config.encryptionPrimaryKey),
-			leader_name: await dec(leader[0].displayName, config.encryptionPrimaryKey),
+			applicant_name: await dec(applicant[0].displayName, decryptionKeys(config)),
+			leader_name: await dec(leader[0].displayName, decryptionKeys(config)),
 			can_decide: item.leaderId === user.id && item.state === "requested",
 		});
 	}

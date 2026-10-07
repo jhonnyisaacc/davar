@@ -3,6 +3,7 @@ import { and, desc, eq, sql } from "drizzle-orm";
 import { z } from "zod";
 import { conversations, messages } from "../../db/schema.js";
 import { DomainError } from "../../lib/errors.js";
+import { decryptionKeys } from "../../lib/config.js";
 import { dec, decJson, enc } from "../../services/fields.js";
 import { askCommentary, type AnswerShape } from "../../services/commentary.js";
 import { checkRateLimit } from "../../services/rateLimit.js";
@@ -49,7 +50,7 @@ conversationRoutes.get("/conversations", async (c) => {
 	for (const row of rows) {
 		result.push({
 			id: row.id,
-			title: await dec(row.title, config.encryptionPrimaryKey),
+			title: await dec(row.title, decryptionKeys(config)),
 			updated_at: row.updatedAt.toISOString(),
 		});
 	}
@@ -111,9 +112,9 @@ conversationRoutes.get("/conversations/:id", async (c) => {
 		result.push({
 			id: message.id,
 			role: message.role,
-			content: await dec(message.content, config.encryptionPrimaryKey),
-			context: await decJson(message.context, config.encryptionPrimaryKey, null),
-			citations: await decJson(message.citations, config.encryptionPrimaryKey, null),
+			content: await dec(message.content, decryptionKeys(config)),
+			context: await decJson(message.context, decryptionKeys(config), null),
+			citations: await decJson(message.citations, decryptionKeys(config), null),
 			generation: message.generation ?? {},
 			state: message.state,
 			created_at: message.createdAt.toISOString(),
@@ -121,7 +122,7 @@ conversationRoutes.get("/conversations/:id", async (c) => {
 	}
 	return c.json({
 		id: conversation.id,
-		title: await dec(conversation.title, config.encryptionPrimaryKey),
+		title: await dec(conversation.title, decryptionKeys(config)),
 		messages: result,
 	});
 });
@@ -142,6 +143,7 @@ conversationRoutes.post("/conversations/:id/messages", async (c) => {
 			requestId: body.request_id,
 			provider: body.provider,
 			primaryKey: config.encryptionPrimaryKey,
+			previousKeys: config.encryptionPreviousKeys,
 		},
 		{ env, generator, flags: c.get("deps").flags, http: c.get("deps").http },
 	);

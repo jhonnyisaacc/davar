@@ -19,7 +19,7 @@ import { requireFlag } from "../../services/flags.js";
 import { parseBody } from "../validation.js";
 import type { AppVariables } from "../deps.js";
 import type { DatabaseOrTx } from "../../db/client.js";
-import type { ServerConfig } from "../../lib/config.js";
+import { decryptionKeys, type ServerConfig } from "../../lib/config.js";
 
 const updateSchema = z.object({
 	display_name: z.string().max(100).optional().nullable(),
@@ -58,7 +58,7 @@ export async function accountShape(
 		.select({ provider: identities.provider })
 		.from(identities)
 		.where(eq(identities.userId, userId));
-	const profile = await decJson<Profile>(row.profile, config.encryptionPrimaryKey, {});
+	const profile = await decJson<Profile>(row.profile, decryptionKeys(config), {});
 	const active = await db
 		.select({ assemblyId: memberships.assemblyId })
 		.from(memberships)
@@ -67,7 +67,7 @@ export async function accountShape(
 	return {
 		active_assembly_id: active[0]?.assemblyId ?? null,
 		id: row.id,
-		display_name: await dec(row.displayName, config.encryptionPrimaryKey),
+		display_name: await dec(row.displayName, decryptionKeys(config)),
 		profile,
 		settings: (row.settings ?? {}) as Record<string, unknown>,
 		settings_version: row.settingsVersion,
