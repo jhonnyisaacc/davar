@@ -106,8 +106,12 @@ Desktop.ini
 .idea/
 *.sublime-project
 *.sublime-workspace
-.cursor/
+.cursor/*
+!.cursor/skills/
+!.cursor/skills/**
 .cursorrules
+
+artifacts/verify/
 
 # Build Outputs
 dist/
