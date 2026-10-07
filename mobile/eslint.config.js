@@ -38,6 +38,12 @@ export default defineConfig([
     },
   },
   {
+    files: ["src/services/chapterLoad.pin.test.ts"],
+    settings: {
+      "import/core-modules": ["bun:test"],
+    },
+  },
+  {
     ignores: ["dist/*"],
   },
 ]);
