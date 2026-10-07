@@ -38,3 +38,19 @@ PYTHONPATH=. python -m pytest -q tests/pins
 cd web && bun test src/app/services/staticDataPaths.pin.test.ts src/app/services/verseLoad.pin.test.ts
 cd mobile && bun test src/services/chapterLoad.pin.test.ts
 ```
+
+## TS2009 book-file map
+
+Draft PR [#265](https://github.com/jhonnyisaacc/davar/pull/265) (`refactor/book-file-map` into `refactor/scripture-pins`, stacked on #260). One shared map. Not merged.
+
+`shared/ts2009BookFileMap.ts` exports the 66-entry `TS2009_BOOK_FILE_MAP`. The copies in the web loader, the mobile loader, and the static-data generator now import it. Values are the same. The generator-only legacy map stays in `scripts/generate-static-data/index.ts`. `staticData.ts` is not split. Pin assertions are unchanged. Decision: `docs/decisions/0002-ts2009-book-file-map.md`.
+
+Local checks on this branch:
+
+| Check | Result |
+| --- | --- |
+| `PYTHONPATH=. python -m pytest -q tests/pins` | 1 passed |
+| `cd web && bun test src/app/services/staticDataPaths.pin.test.ts src/app/services/verseLoad.pin.test.ts src/app/services/staticData.loading.test.ts` | 16 pass |
+| `cd mobile && bun test src/services/*.test.ts` | 71 pass |
+
+No ratchet baseline, ignore count, or public route changed.
