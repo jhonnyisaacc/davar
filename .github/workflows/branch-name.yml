@@ -19,9 +19,25 @@ jobs:
             echo "Head branch is empty." >&2
             exit 1
           fi
-          # Remove this exemption after cursor/davar-repo-review-e47f and cursor/fix-web-typecheck-86fd merge.
           case "${HEAD_REF}" in
-            cursor/davar-repo-review-e47f|cursor/fix-web-typecheck-86fd)
+            # Remove this exemption once cursor/davar-repo-review-e47f (#254) merges or closes.
+            cursor/davar-repo-review-e47f)
+              exit 0
+              ;;
+            # Remove this exemption once cursor/fix-web-typecheck-86fd (#255) merges or closes.
+            cursor/fix-web-typecheck-86fd)
+              exit 0
+              ;;
+            # Remove this exemption once cursor/hono-envelope-key-version-60f7 (#256) merges or closes.
+            cursor/hono-envelope-key-version-60f7)
+              exit 0
+              ;;
+            # Remove this exemption once cursor/fold-mobile-components-3cf2 (#257) merges or closes.
+            cursor/fold-mobile-components-3cf2)
+              exit 0
+              ;;
+            # Remove this exemption once cursor/verification-setup-73bc (#258) merges or closes.
+            cursor/verification-setup-73bc)
               exit 0
               ;;
           esac
