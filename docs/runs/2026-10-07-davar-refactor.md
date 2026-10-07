@@ -114,3 +114,18 @@ Local checks on this branch, after `cd web && bun run generate-data:ensure`:
 | `cd web && bun test` | 146 pass |
 
 No ratchet baseline, ignore count, or public route changed.
+
+## Move the web word card into the reader feature
+
+Draft PR [#275](https://github.com/jhonnyisaacc/davar/pull/275) (`refactor/split-word-card` into `refactor/split-app`, stacked on #274). File move. Not merged.
+
+`WordCard.tsx` now lives under `web/src/app/features/reader/`. `App.tsx` imports it from there. The card contents stay the same. `CalendarPanel.tsx` and `AssembliesWorkspace.tsx` stay in `web/src/app/components/`. `shared/` and `mobile/` are unchanged. Pin assertions are unchanged. `biome-ignore` stays at 6. Decision: `docs/decisions/0006-split-word-card.md`.
+
+Local checks on this branch, after `cd web && bun run generate-data:ensure`:
+
+| Check | Result |
+| --- | --- |
+| `cd web && bun x tsc --noEmit` | pass |
+| `cd web && bun test` | 146 pass, 0 fail |
+
+No ratchet baseline, ignore count, or public route changed.
