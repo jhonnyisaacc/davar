@@ -507,6 +507,82 @@ export function NavigationBar({
 		);
 	};
 
+	const renderBookSelector = () => {
+		const titleId = "navigation-book-title";
+
+		return (
+			<section
+				id="navigation-book-selector"
+				aria-labelledby={titleId}
+				className="navigation-surface absolute left-1/2 top-full z-30 mt-3 flex max-h-[min(440px,calc(100dvh-220px))] w-[300px] max-w-[calc(100vw-32px)] -translate-x-1/2 flex-col gap-2 border border-[var(--neomorph-border)] p-3 sm:left-auto sm:end-0 sm:translate-x-0"
+				onWheelCapture={(event) => event.stopPropagation()}
+				onTouchMoveCapture={(event) => event.stopPropagation()}
+			>
+				<div className="flex h-7 shrink-0 items-center justify-between gap-2">
+					<span
+						id={titleId}
+						className="text-xs font-medium text-[var(--text-primary)]"
+					>
+						{t("navigation.selectBook")}
+					</span>
+					<div className="flex h-7 w-[86px] items-center gap-1.5 rounded-full bg-[var(--navigation-bg)] px-[9px] text-[var(--text-secondary)] focus-within:ring-1 focus-within:ring-[var(--accent)]">
+						<Search size={12} className="shrink-0" aria-hidden="true" />
+						<input
+							ref={bookSearchRef}
+							value={bookSearch}
+							onChange={(event) => setBookSearch(event.target.value)}
+							aria-label={t("navigation.findBook")}
+							placeholder={t("navigation.find")}
+							className="min-w-0 w-full border-0 bg-transparent p-0 text-base text-[var(--text-primary)] outline-none placeholder:text-[var(--text-secondary)] sm:text-[11px]"
+						/>
+					</div>
+				</div>
+				<div
+					ref={bookListRef}
+					className="min-h-0 flex-1 overflow-y-auto overscroll-contain rounded-xl bg-[var(--navigation-bg)] p-1"
+				>
+					<div className="flex flex-col gap-0.5">
+						{filteredBooks.map((item) => {
+							const isCurrentBook = item.name === book;
+							return (
+								<button
+									type="button"
+									key={item.name}
+									data-current-book={isCurrentBook ? "true" : undefined}
+									aria-current={isCurrentBook ? true : undefined}
+									onClick={() => {
+										onBookChange(item.name);
+										setOpenMenu(null);
+									}}
+									className={`flex w-full min-w-0 items-center justify-between gap-2 rounded-full px-3 py-1.5 text-[var(--text-primary)] focus-visible:outline-1 focus-visible:outline-[var(--accent)] focus-visible:-outline-offset-1 ${isCurrentBook ? "bg-[var(--accent-glow)] font-semibold" : "hover:bg-[var(--background)]"}`}
+								>
+									<span className="min-w-0 truncate text-[11px]">
+										{language === "es"
+											? formatBookDisplayName(item.spanish)
+											: formatBookDisplayName(item.name)}
+									</span>
+									<span
+										className="shrink-0 text-[11px]"
+										style={{
+											fontFamily:
+												besorahLanguage === "greek" && item.greek
+													? "'Cardo', serif"
+													: "'Suez One', serif",
+										}}
+									>
+										{besorahLanguage === "greek" && item.greek
+											? item.greek
+											: item.hebrew}
+									</span>
+								</button>
+							);
+						})}
+					</div>
+				</div>
+			</section>
+		);
+	};
+
 	return (
 		<div
 			className="app-navigation relative w-full max-w-[620px]"
@@ -606,6 +682,7 @@ export function NavigationBar({
 									className={`flex min-w-0 items-center gap-1 rounded-full px-2 py-1.5 text-[10px] text-[var(--text-primary)] sm:gap-2 sm:px-3 sm:text-[11px] ${openMenu === "book" ? "bg-[var(--accent-glow)]" : ""}`}
 									aria-label={t("navigation.selectBook")}
 									aria-expanded={openMenu === "book"}
+									aria-controls="navigation-book-selector"
 								>
 									<BookOpen className="hidden md:block w-3 h-3 text-[var(--text-primary)]" />
 									<span className="min-w-0 truncate">
@@ -675,6 +752,7 @@ export function NavigationBar({
 				</div>
 				{(openMenu === "chapter" || openMenu === "verse") &&
 					renderNumberSelector(openMenu)}
+				{openMenu === "book" && renderBookSelector()}
 			</div>
 
 			{openMenu === "settings" && (
@@ -764,75 +842,6 @@ export function NavigationBar({
 				</section>
 			)}
 
-			{openMenu === "book" && (
-				<div
-					className={`absolute ${isRTL ? "right-0" : "left-0"} mt-4 w-[280px] rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-surface)] backdrop-blur-[16px] shadow-[0_8px_32px_0_var(--glass-shadow)] p-4 z-30`}
-					onWheelCapture={(event) => {
-						event.stopPropagation();
-					}}
-					onTouchMoveCapture={(event) => {
-						event.stopPropagation();
-					}}
-				>
-					<div className="mb-3">
-						<input
-							ref={bookSearchRef}
-							value={bookSearch}
-							onChange={(event) => setBookSearch(event.target.value)}
-							placeholder="Search book"
-							className="w-full rounded-full px-4 py-2 text-base md:text-xs text-[var(--text-primary)]"
-							style={{
-								fontFamily: "'Inter', sans-serif",
-								backgroundColor: "var(--neomorph-bg)",
-								border: "1px solid var(--neomorph-border)",
-								boxShadow:
-									"inset 3px 3px 6px var(--neomorph-inset-shadow-dark), inset -3px -3px 6px var(--neomorph-inset-shadow-light)",
-							}}
-						/>
-					</div>
-					<div
-						ref={bookListRef}
-						className="max-h-[320px] overflow-y-auto overscroll-contain space-y-2"
-					>
-						{filteredBooks.map((item) => (
-							<button
-								type="button"
-								key={item.name}
-								data-current-book={item.name === book ? "true" : undefined}
-								onClick={() => {
-									onBookChange(item.name);
-									setOpenMenu(null);
-								}}
-								className={`w-full flex items-center justify-between rounded-xl px-4 py-3 transition-all ${
-									item.name === book
-										? "bg-[var(--accent-strong)] text-white"
-										: "bg-[var(--muted)] text-[var(--text-primary)]"
-								}`}
-								style={{ fontFamily: "'Inter', sans-serif" }}
-							>
-								<span className="text-xs tracking-[0.2em] uppercase">
-									{language === "es"
-										? formatBookDisplayName(item.spanish)
-										: formatBookDisplayName(item.name)}
-								</span>
-								<span
-									className="text-sm"
-									style={{
-										fontFamily:
-											besorahLanguage === "greek" && item.greek
-												? "'Cardo', serif"
-												: "'Suez One', serif",
-									}}
-								>
-									{besorahLanguage === "greek" && item.greek
-										? item.greek
-										: item.hebrew}
-								</span>
-							</button>
-						))}
-					</div>
-				</div>
-			)}
 		</div>
 	);
 }
