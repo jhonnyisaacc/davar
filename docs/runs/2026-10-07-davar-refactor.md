@@ -70,3 +70,17 @@ Local checks on this branch:
 | `cd mobile && bun test src/services/*.test.ts` | 71 pass |
 
 No ratchet baseline, ignore count, or public route changed.
+
+## Split the web static data loader
+
+Draft PR [#272](https://github.com/jhonnyisaacc/davar/pull/272) (`refactor/split-static-data` into `refactor/shared-scripture-helpers`, stacked on #268). Fetch, lexicon, and TS2009 loading. Not merged.
+
+`staticDataFetch.ts`, `staticDataTs2009.ts`, and `staticDataLexicon.ts` hold those loaders. `staticData.ts` re-exports the same functions. Callers stay. Verse assembly, Greek chapter loading, metadata, and prefixes stay in `staticData.ts`. `shared/` and `mobile/` are unchanged. Pin assertions are unchanged. `biome-ignore` stays at 6. Decision: `docs/decisions/0004-split-static-data.md`.
+
+Local checks on this branch, after `cd web && bun run generate-data:ensure`:
+
+| Check | Result |
+| --- | --- |
+| `cd web && bun test` | 146 pass |
+
+No ratchet baseline, ignore count, or public route changed.
