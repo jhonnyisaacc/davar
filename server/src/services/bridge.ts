@@ -6,6 +6,16 @@ export interface BridgeOptions {
 	failureCode?: string;
 }
 
+// Stderr is observability, never trusted input: single-line it and strip
+// control characters before logging.
+export function sanitizeBridgeOutput(text: string): string {
+	return text
+		.replace(/\x1B\[[0-9;]*[A-Za-z]/g, "")
+		.replace(/[\x00-\x1F\x7F]+/g, " ")
+		.trim()
+		.slice(0, 500);
+}
+
 export async function runBridge<T>(
 	script: string,
 	payload: unknown,
@@ -34,13 +44,22 @@ export async function runBridge<T>(
 		stdin.write(JSON.stringify(payload));
 		stdin.end();
 		let timedOut = false;
+		let killTimer: ReturnType<typeof setTimeout> | undefined;
 		const timer = setTimeout(() => {
 			timedOut = true;
 			try {
-				proc.kill();
+				proc.kill("SIGTERM");
 			} catch {
 				// The child may have exited between the timeout and the kill.
 			}
+			// A child that ignores SIGTERM must not hang the request: escalate.
+			killTimer = setTimeout(() => {
+				try {
+					proc.kill("SIGKILL");
+				} catch {
+					// Exited between the two signals.
+				}
+			}, 1000);
 		}, timeoutMs);
 		try {
 			const stderrDrain = (async () => {
@@ -59,12 +78,14 @@ export async function runBridge<T>(
 			} catch {
 				throw failure;
 			} finally {
-				if (stderrText.trim()) {
-					console.warn(`Bridge ${script} stderr: ${stderrText.trim().slice(0, 500)}`);
+				const sanitized = sanitizeBridgeOutput(stderrText);
+				if (sanitized) {
+					console.warn(`Bridge ${script} stderr: ${sanitized}`);
 				}
 			}
 		} finally {
 			clearTimeout(timer);
+			if (killTimer) clearTimeout(killTimer);
 		}
 	} catch (error) {
 		if (error instanceof DomainError) throw error;
