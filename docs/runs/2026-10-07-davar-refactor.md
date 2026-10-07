@@ -129,3 +129,33 @@ Local checks on this branch, after `cd web && bun run generate-data:ensure`:
 | `cd web && bun test` | 146 pass, 0 fail |
 
 No ratchet baseline, ignore count, or public route changed.
+
+## Move web calendar and assemblies into feature folders
+
+Draft PR [#277](https://github.com/jhonnyisaacc/davar/pull/277) (`refactor/move-calendar-assemblies` into `refactor/split-word-card`, stacked on #275). File move. Not merged.
+
+`CalendarPanel.tsx` now lives under `web/src/app/features/calendar/`. `AssembliesWorkspace.tsx` now lives under `web/src/app/features/assemblies/`. Callers and the existing tests import them from those folders. Screen output stays the same. `WordCard.tsx` stays under `web/src/app/features/reader/`. `shared/` and `mobile/` are unchanged. Pin assertions are unchanged. `biome-ignore` stays at 6. Decision: `docs/decisions/0007-move-calendar-assemblies.md`.
+
+Local checks on this branch, after `cd web && bun run generate-data:ensure`:
+
+| Check | Result |
+| --- | --- |
+| `cd web && bun x tsc --noEmit` | pass |
+| `cd web && bun test` | 146 pass, 0 fail |
+
+No ratchet baseline, ignore count, or public route changed.
+
+## Move web calendar and assemblies into feature folders
+
+Draft PR [#277](https://github.com/jhonnyisaacc/davar/pull/277) (`refactor/move-calendar-assemblies` into `refactor/split-word-card`, stacked on #275). File move. Not merged.
+
+`CalendarPanel.tsx` now lives under `web/src/app/features/calendar/`. `AssembliesWorkspace.tsx` now lives under `web/src/app/features/assemblies/`. Callers and the existing tests import them from those folders. Screen output stays the same. `WordCard.tsx` stays under `web/src/app/features/reader/`. `shared/` and `mobile/` are unchanged. Pin assertions are unchanged. `biome-ignore` stays at 6. Decision: `docs/decisions/0007-move-calendar-assemblies.md`.
+
+Local checks on this branch, after `cd web && bun run generate-data:ensure`:
+
+| Check | Result |
+| --- | --- |
+| `cd web && bun x tsc --noEmit` | pass |
+| `cd web && bun test` | 146 pass, 0 fail |
+
+No ratchet baseline, ignore count, or public route changed.
