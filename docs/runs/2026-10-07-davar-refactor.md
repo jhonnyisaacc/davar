@@ -26,3 +26,7 @@ No gate, test, or baseline was loosened. The earlier boundary failure (run 37611
 Accept a readonly book list on the navigation bar instead of dropping `as const` on the test fixture. Dropping `as const` would widen the other literal props (`activeDestination`, `theme`, `language`) and fail the same typecheck for a different reason.
 
 No pin files, ratchet baselines, CI workflows, or public API routes changed.
+
+## Decisions
+
+Jhonny, rules v2.7, 2026-10-07. Every branch is named `refactor/<name>`, short kebab-case for what the PR does, for example `refactor/fix-web-typecheck`. Never `cursor/` or any other tool prefix. The brief names the exact branch. Create it off `feat/davar-v2`, or off the stacked base, before the first commit. Already-open branches are not renamed: #254, #255 `cursor/fix-web-typecheck-86fd`, #256 `cursor/hono-envelope-key-version-60f7`, #257 `cursor/fold-mobile-components-3cf2`, #258 `cursor/verification-setup-73bc`. When AGENTS.md is rewritten, its git section gets this rule. This PR does not edit AGENTS.md.
