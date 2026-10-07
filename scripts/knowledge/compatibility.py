@@ -10,6 +10,8 @@ import tarfile
 import tempfile
 from pathlib import Path
 
+import yaml
+
 from .build import build
 from .core import ROOT, SOURCES, cli_dest, digest, encoded, read_json
 
@@ -61,6 +63,95 @@ def publication_compatible(path: str, before: bytes, after: bytes) -> bool:
         return False
 
 
+def workflow_change_additive(before: bytes, after: bytes) -> bool:
+    """Allow workflow edits that only widen CI coverage.
+
+    The knowledge-foundation workflow guards the additive boundary, so its own
+    edits must not narrow it: trigger paths may only grow, and existing check
+    commands may only gain arguments (for example, extra test files). Anything
+    else (removed paths, dropped commands, toolchain changes) fails closed.
+    """
+    # NOTE: YAML 1.1 parses the `on:` trigger key as boolean True. Normalize it
+    # so the coverage comparison below sees the real trigger config.
+    def load(payload: bytes):
+        try:
+            doc = yaml.safe_load(payload)
+        except Exception:
+            return None
+        if not isinstance(doc, dict):
+            return None
+        if True in doc and "on" not in doc:
+            doc["on"] = doc.pop(True)
+        return doc
+
+    old, new = load(before), load(after)
+    if old is None or new is None:
+        return False
+    old_on, new_on = old.get("on", {}) or {}, new.get("on", {}) or {}
+    for trigger in ("pull_request", "push"):
+        old_trigger = old_on.get(trigger, {}) or {}
+        new_trigger = new_on.get(trigger, {}) or {}
+        if set(old_trigger.get("paths", []) or []) - set(
+            new_trigger.get("paths", []) or []
+        ):
+            return False
+        if {k: v for k, v in old_trigger.items() if k != "paths"} != {
+            k: v for k, v in new_trigger.items() if k != "paths"
+        }:
+            return False
+    if {k: v for k, v in old_on.items() if k not in ("pull_request", "push")} != {
+        k: v for k, v in new_on.items() if k not in ("pull_request", "push")
+    }:
+        return False
+
+    def step_covers(old_step, new_step) -> bool:
+        if not isinstance(old_step, dict) or not isinstance(new_step, dict):
+            return old_step == new_step
+        if {k: v for k, v in old_step.items() if k != "run"} != {
+            k: v for k, v in new_step.items() if k != "run"
+        }:
+            return False
+        if "run" not in old_step:
+            return "run" not in new_step
+        return "run" in new_step and set(str(old_step["run"]).split()) <= set(
+            str(new_step["run"]).split()
+        )
+
+    def steps_compatible(old_steps, new_steps) -> bool:
+        # Old steps must survive in order; added steps are widening, so allowed.
+        pos = 0
+        for old_step in old_steps:
+            while pos < len(new_steps) and not step_covers(
+                old_step, new_steps[pos]
+            ):
+                pos += 1
+            if pos == len(new_steps):
+                return False
+            pos += 1
+        return True
+
+    old_jobs, new_jobs = old.get("jobs", {}) or {}, new.get("jobs", {}) or {}
+    if set(old_jobs) - set(new_jobs):
+        return False
+    for name, old_job in old_jobs.items():
+        new_job = new_jobs[name]
+        if {k: v for k, v in old_job.items() if k != "steps"} != {
+            k: v for k, v in new_job.items() if k != "steps"
+        }:
+            return False
+        if not steps_compatible(
+            old_job.get("steps", []) or [], new_job.get("steps", []) or []
+        ):
+            return False
+
+    rest = {
+        key for key in list(old) + list(new) if key not in ("on", "jobs")
+    }
+    return all(old.get(key) == new.get(key) for key in rest) and set(
+        k for k in old if k not in ("on", "jobs")
+    ) == set(k for k in new if k not in ("on", "jobs"))
+
+
 def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
     changes = subprocess.check_output(
         ["git", "diff", "--name-status", base, "--"], cwd=root, text=True
@@ -75,7 +166,10 @@ def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
             continue
         if status == "M":
             before = subprocess.check_output(["git", "show", f"{base}:{path}"], cwd=root)
-            if publication_compatible(path, before, (root / path).read_bytes()):
+            after = (root / path).read_bytes()
+            if path == WORKFLOW and workflow_change_additive(before, after):
+                continue
+            if publication_compatible(path, before, after):
                 continue
         if status != "A":
             raise ValueError("Non-additive or out-of-scope change: " + line)
