@@ -54,3 +54,19 @@ Local checks on this branch:
 | `cd mobile && bun test src/services/*.test.ts` | 71 pass |
 
 No ratchet baseline, ignore count, or public route changed.
+
+## Shared scripture path helpers
+
+Draft PR [#268](https://github.com/jhonnyisaacc/davar/pull/268) (`refactor/shared-scripture-helpers` into `refactor/book-file-map`, stacked on #265). Pure path and book-file resolution. Not merged.
+
+`shared/scripturePaths.ts` builds TS2009 book-file stems and the scripture asset paths. The web loader, the mobile loader, and the static-data generator call it. The 66-entry map stays in `shared/ts2009BookFileMap.ts`. Web still fetches static JSON in `staticData.ts`. Mobile still reads SQLite in `database.ts` and `scripture.ts`. The generator-only legacy map stays in `scripts/generate-static-data/index.ts`. `staticData.ts` is not split. Pin assertions are unchanged. Decision: `docs/decisions/0003-shared-scripture-paths.md`.
+
+Local checks on this branch:
+
+| Check | Result |
+| --- | --- |
+| `PYTHONPATH=. python -m pytest -q tests/pins` | 1 passed |
+| `cd web && bun test src/app/services/staticDataPaths.pin.test.ts src/app/services/verseLoad.pin.test.ts src/app/services/staticData.loading.test.ts` | 16 pass |
+| `cd mobile && bun test src/services/*.test.ts` | 71 pass |
+
+No ratchet baseline, ignore count, or public route changed.
