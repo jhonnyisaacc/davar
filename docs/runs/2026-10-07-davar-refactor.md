@@ -36,3 +36,13 @@ Draft PR [#257](https://github.com/jhonnyisaacc/davar/pull/257) (`cursor/fold-mo
 Verify: `cd mobile && bun run typecheck && bun test`. Typecheck passed. 82 tests passed, 0 failed.
 
 Tier B: keep the kebab-case filenames and the `ui/` layout. Callers use `@/src/components/...`. `HapticTab` has no callers; it moves with the tree and is not deleted. No new behavior, dependencies, comments, or pin edits.
+
+## 4h. Word analysis sheet
+
+Draft PR [#263](https://github.com/jhonnyisaacc/davar/pull/263) (`refactor/split-word-sheet` into `cursor/fold-mobile-components-3cf2`, stacked on #257). Not merged. Does not target `main`. Does not rename #257 or #255.
+
+`WordAnalysisBottomSheet.tsx` moves from `mobile/src/components/` to `mobile/src/features/reader/`. `VerseDetailContent` still renders it and now imports that path. The sheet's props, tabs, and close behavior stay the same. `VerseDetailContent` is not split.
+
+Tier B: the reader feature folder, because mobile has no word-card feature folder and the sheet opens from the verse reader. The other option was `mobile/src/features/word-card/`. No re-export at the old path. No tests render the sheet, so none were added and none assert hook calls.
+
+Verify: `cd mobile && bun run typecheck && bun test`. Typecheck passed. 82 tests passed, 0 failed.
