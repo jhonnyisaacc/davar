@@ -46,3 +46,13 @@ Draft PR [#263](https://github.com/jhonnyisaacc/davar/pull/263) (`refactor/split
 Tier B: the reader feature folder, because mobile has no word-card feature folder and the sheet opens from the verse reader. The other option was `mobile/src/features/word-card/`. No re-export at the old path. No tests render the sheet, so none were added and none assert hook calls.
 
 Verify: `cd mobile && bun run typecheck && bun test`. Typecheck passed. 82 tests passed, 0 failed.
+
+## 4j. Verse detail screen
+
+Draft PR [#269](https://github.com/jhonnyisaacc/davar/pull/269) (`refactor/split-verse-detail` into `refactor/split-word-sheet`, stacked on #263). Not merged. Does not target `main`.
+
+`VerseDetailContent` stays the screen. It still mounts `WordAnalysisBottomSheet` with the same props. The sheet file stays in `mobile/src/features/reader/`. The verse page, chapter flow, translation-flow rendering, and screen styles move into that reader folder.
+
+Tier B: extract those pieces and leave the screen as the opener. The other option was moving the whole screen into the reader folder and re-exporting it. No screen test covers the word-sheet open, so none were added. The pin is the word-card feature-map check. The React compiler warning list follows `VersePage` and the sheet's current path. The rules stay warnings. No new suppression.
+
+Verify: `cd mobile && bun test && bun run typecheck`. Typecheck passed. 82 tests passed, 0 failed.
