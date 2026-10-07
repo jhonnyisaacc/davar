@@ -50,6 +50,12 @@ export const FIXTURE_SCENARIOS = {
 export const FIXTURE_EMAILS = Object.keys(FIXTURE_SCENARIOS).map((name) => `${name}@example.test`);
 
 export const FIXTURE_INVITATION = "DAVAR-LOCAL";
+export const FIXTURE_VALID_CODE = "1234567";
+export const FIXTURE_INVALID_INVITATIONS = {
+	"7654321": "expired",
+	"7654322": "revoked",
+	"7654323": "exhausted",
+} as const;
 
 export interface FixtureKeys {
 	primaryKey: string;
@@ -125,6 +131,51 @@ async function fixtureUserId(
 	return userId;
 }
 
+const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
+
+async function ensureOpenCode(db: DatabaseOrTx, code: string): Promise<void> {
+	const codeDigest = await accessCodeDigest(code);
+	const existingCode = await db
+		.select()
+		.from(accessCodes)
+		.where(eq(accessCodes.codeDigest, codeDigest))
+		.limit(1);
+	const row = existingCode[0];
+	if (!row || (row.expiresAt?.getTime() ?? 0) <= Date.now()) {
+		const expiresAt = new Date(Date.now() + THIRTY_DAYS_MS);
+		if (!row) {
+			await db.insert(accessCodes).values({ codeDigest, expiresAt, maxUses: 100 });
+		} else {
+			await db
+				.update(accessCodes)
+				.set({ expiresAt, updatedAt: new Date() })
+				.where(eq(accessCodes.id, row.id));
+		}
+	}
+}
+
+async function ensureInvalidCode(
+	db: DatabaseOrTx,
+	code: string,
+	state: (typeof FIXTURE_INVALID_INVITATIONS)[keyof typeof FIXTURE_INVALID_INVITATIONS],
+): Promise<void> {
+	const codeDigest = await accessCodeDigest(code);
+	const existing = await db
+		.select({ id: accessCodes.id })
+		.from(accessCodes)
+		.where(eq(accessCodes.codeDigest, codeDigest))
+		.limit(1);
+	if (existing[0]) return;
+	const day = 24 * 60 * 60 * 1000;
+	await db.insert(accessCodes).values({
+		codeDigest,
+		expiresAt: state === "expired" ? new Date(Date.now() - day) : new Date(Date.now() + THIRTY_DAYS_MS),
+		revokedAt: state === "revoked" ? new Date() : null,
+		maxUses: 1,
+		uses: state === "exhausted" ? 1 : 0,
+	});
+}
+
 export async function seedFixtures(
 	db: DatabaseOrTx,
 	keys: FixtureKeys,
@@ -132,6 +183,8 @@ export async function seedFixtures(
 	accounts: string[];
 	assemblies_scenarios: typeof FIXTURE_SCENARIOS;
 	invitation: string;
+	valid_code: string;
+	invalid_invitations: typeof FIXTURE_INVALID_INVITATIONS;
 	provider_key: string;
 	provider_model: string;
 }> {
@@ -173,26 +226,11 @@ export async function seedFixtures(
 			});
 		}
 	}
-	const codeDigest = await accessCodeDigest(FIXTURE_INVITATION);
-	const existingCode = await db
-		.select()
-		.from(accessCodes)
-		.where(eq(accessCodes.codeDigest, codeDigest))
-		.limit(1);
-	if (!existingCode[0] || (existingCode[0].expiresAt?.getTime() ?? 0) <= Date.now()) {
-		if (!existingCode[0]) {
-			await db.insert(accessCodes).values({
-				codeDigest,
-				expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-				maxUses: 100,
-			});
-		} else {
-			await db
-				.update(accessCodes)
-				.set({ expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), updatedAt: new Date() })
-				.where(eq(accessCodes.id, existingCode[0].id));
-		}
-	}
+	await ensureOpenCode(db, FIXTURE_INVITATION);
+	await ensureOpenCode(db, FIXTURE_VALID_CODE);
+	await ensureInvalidCode(db, "7654321", "expired");
+	await ensureInvalidCode(db, "7654322", "revoked");
+	await ensureInvalidCode(db, "7654323", "exhausted");
 	const leaderOne = await db
 		.select({ userId: identities.userId })
 		.from(identities)
@@ -310,6 +348,8 @@ export async function seedFixtures(
 		accounts: FIXTURE_EMAILS,
 		assemblies_scenarios: FIXTURE_SCENARIOS,
 		invitation: FIXTURE_INVITATION,
+		valid_code: FIXTURE_VALID_CODE,
+		invalid_invitations: FIXTURE_INVALID_INVITATIONS,
 		provider_key: "sandbox-key",
 		provider_model: "development-fixture-v1",
 	};
@@ -341,7 +381,11 @@ export async function resetFixtures(
 	await db.execute(sql`DELETE FROM auth_attempts WHERE provider = 'email'`);
 	await db.execute(sql`DELETE FROM articles WHERE source_id LIKE 'sandbox:%'`);
 	await db.execute(sql`DELETE FROM new_moon_observations WHERE source_id LIKE 'sandbox:%'`);
-	await db.execute(sql`DELETE FROM access_codes WHERE code_digest = ${await accessCodeDigest(FIXTURE_INVITATION)}`);
+	const fixtureCodes = [FIXTURE_INVITATION, FIXTURE_VALID_CODE, ...Object.keys(FIXTURE_INVALID_INVITATIONS)];
+	const codeDigests = await Promise.all(fixtureCodes.map((code) => accessCodeDigest(code)));
+	await db.execute(
+		sql`DELETE FROM access_codes WHERE code_digest IN (${sql.join(codeDigests.map((digest) => sql`${digest}`), sql`, `)})`,
+	);
 	const { rm } = await import("node:fs/promises");
 	const { join } = await import("node:path");
 	try {

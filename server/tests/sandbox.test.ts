@@ -13,9 +13,10 @@ import {
 } from "./helper.js";
 import { resolveAccount, subjectDigest } from "../src/services/accounts.js";
 import { FIXTURE_EMAILS, fixtureCalendar, resetFixtures, seedFixtures } from "../src/services/fixtures.js";
-import { identities, users } from "../src/db/schema.js";
+import { accessCodes, identities, users } from "../src/db/schema.js";
 import { and, eq } from "drizzle-orm";
 import { dec, decJson, enc } from "../src/services/fields.js";
+import { accessCodeDigest } from "../src/services/admissions.js";
 import { completedOnboarding, type Profile } from "../src/services/profiles.js";
 
 const PRIMARY = "test-primary-key-for-davar-server-only-0001";
@@ -65,6 +66,17 @@ async function fixturePersona(
 		displayName: user.displayName,
 		profile: await decJson<Profile>(user.profile, PRIMARY, {}),
 	};
+}
+
+async function fixtureAccessCode(db: ReturnType<typeof testDb>["db"], code: string) {
+	const rows = await db
+		.select()
+		.from(accessCodes)
+		.where(eq(accessCodes.codeDigest, await accessCodeDigest(code)))
+		.limit(1);
+	const row = rows[0];
+	if (!row) throw new Error(`Missing access code ${code}`);
+	return row;
 }
 
 beforeEach(truncateAll);
@@ -212,6 +224,42 @@ describe("development sandbox", () => {
 			expect(seeded.accounts).toEqual(Object.keys(scenarios).map((name) => `${name}@example.test`));
 			expect(seeded.accounts).toHaveLength(25);
 			expect(seeded.invitation).toBe("DAVAR-LOCAL");
+			expect(seeded.valid_code).toBe("1234567");
+			expect(seeded.invalid_invitations).toEqual({
+				"7654321": "expired",
+				"7654322": "revoked",
+				"7654323": "exhausted",
+			});
+
+			const localCode = await fixtureAccessCode(db, "DAVAR-LOCAL");
+			expect(localCode.revokedAt).toBeNull();
+			expect(localCode.expiresAt.getTime()).toBeGreaterThan(Date.now());
+			expect(localCode.maxUses).toBe(100);
+			expect(localCode.uses).toBe(0);
+
+			const validCode = await fixtureAccessCode(db, "1234567");
+			expect(validCode.revokedAt).toBeNull();
+			expect(validCode.expiresAt.getTime()).toBeGreaterThan(Date.now());
+			expect(validCode.maxUses).toBe(100);
+			expect(validCode.uses).toBe(0);
+
+			const expiredCode = await fixtureAccessCode(db, "7654321");
+			expect(expiredCode.expiresAt.getTime()).toBeLessThan(Date.now());
+			expect(expiredCode.revokedAt).toBeNull();
+			expect(expiredCode.maxUses).toBe(1);
+			expect(expiredCode.uses).toBe(0);
+
+			const revokedCode = await fixtureAccessCode(db, "7654322");
+			expect(revokedCode.revokedAt).not.toBeNull();
+			expect(revokedCode.expiresAt.getTime()).toBeGreaterThan(Date.now());
+			expect(revokedCode.maxUses).toBe(1);
+			expect(revokedCode.uses).toBe(0);
+
+			const exhaustedCode = await fixtureAccessCode(db, "7654323");
+			expect(exhaustedCode.revokedAt).toBeNull();
+			expect(exhaustedCode.expiresAt.getTime()).toBeGreaterThan(Date.now());
+			expect(exhaustedCode.maxUses).toBe(1);
+			expect(exhaustedCode.uses).toBe(1);
 
 			const loaded = Object.fromEntries(
 				await Promise.all(
@@ -309,6 +357,13 @@ describe("development sandbox", () => {
 			expect(female.discoverable).toBe(true);
 			expect(await db.execute(sql`SELECT count(*)::int AS count FROM memberships`)).toEqual(membershipsBefore);
 			expect(await db.execute(sql`SELECT count(*)::int AS count FROM endorsements`)).toEqual(endorsementsBefore);
+			const expiredAgain = await fixtureAccessCode(db, "7654321");
+			expect(expiredAgain.expiresAt.getTime()).toBe(expiredCode.expiresAt.getTime());
+			expect(expiredAgain.uses).toBe(0);
+			expect((await fixtureAccessCode(db, "7654322")).revokedAt?.getTime()).toBe(revokedCode.revokedAt?.getTime());
+			expect((await fixtureAccessCode(db, "7654323")).uses).toBe(1);
+			expect((await fixtureAccessCode(db, "DAVAR-LOCAL")).maxUses).toBe(100);
+			expect((await fixtureAccessCode(db, "1234567")).uses).toBe(0);
 		} finally {
 			await rm(keys.rootDir, { recursive: true, force: true });
 		}
