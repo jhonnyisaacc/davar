@@ -16,6 +16,8 @@
 		"sandbox:seed": "bun ./src/jobs/sandbox-seed.ts",
 		"sandbox:reset": "bun ./src/jobs/sandbox-reset.ts",
 		"sandbox:calendar": "bun ./src/jobs/sandbox-calendar.ts",
+		"operator:issue-invitation": "bun ./src/jobs/issue-invitation.ts",
+		"operator:verify-leader": "bun ./src/jobs/verify-leader.ts",
 		"typecheck": "tsc --noEmit",
 		"test": "bun test"
 	},

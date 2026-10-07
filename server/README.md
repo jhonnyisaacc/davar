@@ -106,6 +106,8 @@ bun run jobs:recover    # release interrupted sponsored consultations
 bun run jobs:calendar   # observation sync; no-op without an explicit payload
 bun run jobs:notify     # Telegram outbox delivery
 bun run import:qahal / import:articles / import:observations  # IMPORT_FILE=... [APPLY=1]
+bun run operator:issue-invitation   # print a 7-digit code, 30 days, 100 uses
+bun run operator:verify-leader      # USER_ID=... sets leader_verified for an eligible leader
 ```
 
 ## Tests
