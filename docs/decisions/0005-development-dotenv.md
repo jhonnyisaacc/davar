@@ -24,7 +24,7 @@ Leave `start` on `--env-file=.env` and tell operators to delete the file. Rails 
 
 ## How to undo
 
-Restore `dev` and `start` in `server/package.json` to `bun --env-file=.env ./src/index.ts`, and remove this record and `server/tests/dotenv.test.ts`.
+Restore `dev` and `start` in `server/package.json` to `bun --env-file=.env ./src/index.ts`. Restore the `server/.env.example` header, the environment paragraph in `server/README.md`, and the `.env.development.local` gitignore line. Remove this record and `server/tests/dotenv.test.ts`.
 
 ## Status
 
