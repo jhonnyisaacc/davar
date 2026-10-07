@@ -40,7 +40,7 @@ Health: `GET /up`.
 | `DAVAR_ENCRYPTION_DETERMINISTIC_KEY` | staging/production | HMAC key for deterministic identity-subject digests |
 | `{GOOGLE,APPLE,TELEGRAM,FACEBOOK,X}_CLIENT_ID` + `_CLIENT_SECRET` | per provider | Env-gated OAuth availability; unconfigured providers return 503 `provider_not_configured` (email always works) |
 | `MAIL_FROM` | no | Magic-link sender |
-| `SMTP_HOST/PORT/USER/PASS/SECURE` | no | Real delivery; without sandbox mail is captured, not sent |
+| `SMTP_HOST/PORT/USER/PASSWORD/PASS/SECURE` | no | Real delivery; without sandbox mail is captured, not sent. A non-empty `SMTP_PASSWORD` wins over `SMTP_PASS` |
 | `FREE_AI_KEY/FREE_AI_MODEL[/FREE_AI_PROVIDER]` | no | Single sponsored consultation when the user has no provider connection |
 | `TELEGRAM_BOT_TOKEN` | no | Enables the Telegram notification worker |
 | `PYTHON_BIN` | no (`python3`) | Interpreter for the pinned Bore bridge |

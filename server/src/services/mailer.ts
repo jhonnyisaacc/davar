@@ -70,14 +70,13 @@ export async function sendSignInMail(input: {
 		return;
 	}
 	const env = input.env ?? process.env;
+	const password = env.SMTP_PASSWORD || env.SMTP_PASS;
 	const transport = nodemailer.createTransport({
 		host: env.SMTP_HOST ?? "localhost",
 		port: Number(env.SMTP_PORT ?? 25),
 		secure: env.SMTP_SECURE === "1",
 		auth:
-			env.SMTP_USER && env.SMTP_PASS
-				? { user: env.SMTP_USER, pass: env.SMTP_PASS }
-				: undefined,
+			env.SMTP_USER && password ? { user: env.SMTP_USER, pass: password } : undefined,
 	});
 	await transport.sendMail({ from: input.mailFrom, to: input.to, subject, text: body });
 }
