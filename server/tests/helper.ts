@@ -4,6 +4,7 @@ import type { AppDeps } from "../src/http/deps.js";
 import { createDb, type DbHandle } from "../src/db/client.js";
 import { users } from "../src/db/schema.js";
 import type { ServerConfig } from "../src/lib/config.js";
+import { DEFAULT_TRUSTED_PROXIES } from "../src/services/remoteIp.js";
 import { enc, encJson } from "../src/services/fields.js";
 import { issueSession } from "../src/services/sessions.js";
 import type { SentMail } from "../src/services/mailer.js";
@@ -60,6 +61,7 @@ export function testConfig(): ServerConfig {
 		apiPublicUrl: "http://localhost:3000",
 		authReturnUris: ["davar://auth/callback"],
 		webOrigins: [],
+		trustedProxies: [...DEFAULT_TRUSTED_PROXIES],
 		sandbox: false,
 		encryptionPrimaryKey: "test-primary-key-for-davar-server-only-0001",
 		encryptionDeterministicKey: "test-deterministic-key-davar-only-0001",

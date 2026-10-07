@@ -1,4 +1,5 @@
 import { allowedOrigins } from "../services/webOrigins.js";
+import { DEFAULT_TRUSTED_PROXIES } from "../services/remoteIp.js";
 
 export type AppEnv = "development" | "test" | "staging" | "production";
 
@@ -8,6 +9,7 @@ export interface ServerConfig {
 	apiPublicUrl: string;
 	authReturnUris: string[];
 	webOrigins: string[];
+	trustedProxies: string[];
 	sandbox: boolean;
 	encryptionPrimaryKey: string;
 	encryptionDeterministicKey: string;
@@ -47,6 +49,12 @@ export function loadConfig(source: NodeJS.ProcessEnv = process.env): ServerConfi
 			configured: source.WEB_ORIGINS,
 			development: env === "development",
 		}),
+		trustedProxies:
+			source.TRUSTED_PROXIES === undefined
+				? [...DEFAULT_TRUSTED_PROXIES]
+				: source.TRUSTED_PROXIES.split(",")
+						.map((part) => part.trim())
+						.filter((part) => part.length > 0),
 		sandbox,
 		encryptionPrimaryKey:
 			source.DAVAR_ENCRYPTION_PRIMARY_KEY ??

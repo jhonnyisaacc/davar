@@ -7,9 +7,11 @@ import { DomainError } from "../lib/errors.js";
 import { dec, decJson } from "../services/fields.js";
 import { authenticateSession } from "../services/sessions.js";
 import { checkRateLimit } from "../services/rateLimit.js";
+import { resolveClientIp, socketAddress } from "../services/remoteIp.js";
 import { evaluateFlags, type FlagSet } from "../services/flags.js";
 import type { Profile } from "../services/profiles.js";
 import { parseProfile } from "../services/profiles.js";
+import type { AppDeps } from "./deps.js";
 
 export interface CurrentUser {
 	id: string;
@@ -34,9 +36,12 @@ export function bearerToken(c: Context): string | null {
 }
 
 export function clientIp(c: Context): string {
-	const forwarded = c.req.header("x-forwarded-for");
-	if (forwarded) return forwarded.split(",")[0]?.trim() ?? "unknown";
-	return "local";
+	const deps = c.get("deps") as AppDeps | undefined;
+	return resolveClientIp({
+		remoteAddr: deps?.remoteAddr ?? socketAddress(c),
+		forwardedFor: c.req.header("x-forwarded-for") ?? null,
+		trusted: deps?.config.trustedProxies ?? [],
+	});
 }
 
 export async function currentUser(

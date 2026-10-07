@@ -17,7 +17,9 @@ const app = createApp(deps);
 
 export default {
 	port: config.port,
-	fetch: app.fetch,
+	// Bun passes the server as the second fetch argument, which Hono exposes
+	// as c.env — clientIp uses it for the real socket address (remote_ip).
+	fetch: (req: Request, server: unknown) => app.fetch(req, server as never),
 };
 
 console.log(`Davar API (Bun + Hono) listening on port ${config.port}`);
