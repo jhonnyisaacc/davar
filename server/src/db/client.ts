@@ -1,6 +1,7 @@
 import { drizzle, type PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import { loadConfig, type ServerConfig } from "../lib/config.js";
+import { formatQueryLog } from "../lib/queryLog.js";
 import * as schema from "./schema.js";
 
 export type Database = PostgresJsDatabase<typeof schema>;
@@ -27,16 +28,38 @@ export async function withSavepoint<T>(
 	return db.transaction(async (tx) => fn(tx as DatabaseOrTx));
 }
 
-export function createDb(databaseUrl: string | undefined): DbHandle {
+export function createDb(
+	databaseUrl: string | undefined,
+	options?: { verboseQueryLogs?: boolean },
+): DbHandle {
 	if (!databaseUrl) {
 		throw new Error("DATABASE_URL is required");
 	}
-	const sql = postgres(databaseUrl, { max: 10 });
+	const verbose =
+		options?.verboseQueryLogs ??
+		(process.env.NODE_ENV ?? "development") === "development";
+	const sql = postgres(databaseUrl, {
+		max: 10,
+		...(verbose
+			? {
+					debug: (
+						_connection: number,
+						query: string,
+						_parameters: unknown[],
+						_paramTypes: unknown[],
+					) => {
+						console.log(formatQueryLog(query));
+					},
+				}
+			: {}),
+	});
 	return { sql, db: drizzle(sql, { schema }) };
 }
 
-export function dbFromEnv(): DbHandle {
-	return createDb(loadConfig().databaseUrl);
+export function dbFromEnv(config: ServerConfig = loadConfig()): DbHandle {
+	return createDb(config.databaseUrl, {
+		verboseQueryLogs: config.env === "development",
+	});
 }
 
 export interface Ctx {

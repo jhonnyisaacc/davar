@@ -24,6 +24,7 @@ export interface AppDeps {
 	flags?: FlagSet | null;
 	/** Test seam for the remote address (see clientIp). */
 	remoteAddr?: string;
+	pendingMigrations?: () => Promise<readonly string[]>;
 }
 
 export type AppVariables = {

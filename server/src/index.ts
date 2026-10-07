@@ -1,16 +1,21 @@
 import { loadConfig } from "./lib/config.js";
 import { dbFromEnv } from "./db/client.js";
+import { assertMigrationsApplied, pendingMigrationNames } from "./db/pending.js";
 import { createApp } from "./http/app.js";
 import type { AppDeps } from "./http/deps.js";
 
 const config = loadConfig();
-const { db } = dbFromEnv();
+const { db, sql } = dbFromEnv(config);
+await assertMigrationsApplied(config.env, sql);
 
 const deps: AppDeps = {
 	db,
 	config,
 	env: process.env,
 	rootDir: process.cwd(),
+	...(config.env === "development"
+		? { pendingMigrations: () => pendingMigrationNames(sql) }
+		: {}),
 };
 
 const app = createApp(deps);
