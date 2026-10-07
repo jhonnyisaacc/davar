@@ -29,3 +29,7 @@ Mobile publication uses Expo commands and the repository secret `EXPO_TOKEN`. Ne
 
 - Summarize the change and name the files. Show a diff only when asked.
 - When a JavaScript command is required, give the exact Bun command and the directory it runs in.
+
+## Git
+
+Commits are signed with the agents' SSH signing key and must show Verified.
