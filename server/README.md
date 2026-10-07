@@ -53,6 +53,11 @@ Health: `GET /up`.
 Staging/production boot requires the encryption keys, `DATABASE_URL` and an
 HTTPS `API_PUBLIC_URL`, and rejects `DAVAR_DEV_SANDBOX=1` — same as Rails.
 
+`bun run dev` loads the development dotenv files in Rails order. An exported
+variable wins, then `.env.development.local`, `.env.local`, `.env.development`,
+and `.env`. Missing files are skipped. `bun run start` does not read dotenv
+files. Staging and production take variables from the process environment.
+
 ## Encryption (greenfield decision)
 
 "Byte-compatible" covers the HTTP API only: stored ciphertext is **not**

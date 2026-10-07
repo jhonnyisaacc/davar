@@ -4,8 +4,8 @@
 	"version": "0.1.0",
 	"type": "module",
 	"scripts": {
-		"dev": "bun --env-file=.env ./src/index.ts",
-		"start": "bun --env-file=.env ./src/index.ts",
+		"dev": "bun --no-env-file --env-file=.env --env-file=.env.development --env-file=.env.local --env-file=.env.development.local ./src/index.ts",
+		"start": "bun --no-env-file ./src/index.ts",
 		"db:migrate": "bun ./src/db/migrate.ts",
 		"jobs:recover": "bun ./src/jobs/recover.ts",
 		"jobs:calendar": "bun ./src/jobs/calendar.ts",
