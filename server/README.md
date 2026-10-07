@@ -107,6 +107,12 @@ DAVAR_DEV_SANDBOX=1 NODE_ENV=development bun run dev
 - `SCENARIO=confirmed bun run sandbox:reset` — synthetic INMS observation.
 - Sandbox mail is written under `tmp/sandbox-mail/` and only accepts
   `@example.test` recipients.
+- `bin/dev-sandbox setup` installs web and mobile dependencies, creates
+  `tmp/sandbox/venv`, prepares `davar_v2_sandbox` with `bin/setup --skip-server`,
+  seeds fixtures, runs `bun run jobs:calendar`, and builds web with `bun ./build.ts`.
+- `bin/dev-sandbox start` checks PostgreSQL and ports 3000, 5173, 5174, and 8081,
+  then starts the API, web, and mobile. `bin/dev-sandbox stop` stops that process
+  group and leaves PostgreSQL running. `--dry-run` prints the checks and commands.
 
 ## Jobs (idempotent, no production run in this PR)
 
