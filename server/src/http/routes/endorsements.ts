@@ -1,4 +1,4 @@
-import { Hono } from "hono";
+import { Hono, type Context } from "hono";
 import { and, eq, sql } from "drizzle-orm";
 import { z } from "zod";
 import { endorsements, notifications, users } from "../../db/schema.js";
@@ -98,7 +98,7 @@ endorsementRoutes.post("/endorsements", async (c) => {
 	return c.json({ id: created.id, state: created.state }, 201);
 });
 
-endorsementRoutes.patch("/endorsements/:id", async (c) => {
+const updateEndorsement = async (c: Context<{ Variables: AppVariables }>) => {
 	const { db } = c.get("deps");
 	const user = await requireAssemblyAccess(
 		db,
@@ -169,4 +169,7 @@ endorsementRoutes.patch("/endorsements/:id", async (c) => {
 		return { id: endorsement.id, state: body.state };
 	});
 	return c.json(updated);
-});
+};
+
+endorsementRoutes.patch("/endorsements/:id", updateEndorsement);
+endorsementRoutes.put("/endorsements/:id", updateEndorsement);
