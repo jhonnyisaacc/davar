@@ -67,6 +67,22 @@ Staging/production boot validates the environment with one Zod schema and
 exits non-zero on failure. It requires the encryption keys, `DATABASE_URL`,
 `API_HOSTS`, and an HTTPS `API_PUBLIC_URL`, and rejects `DAVAR_DEV_SANDBOX=1`.
 
+## HTTPS
+
+`httpsSecurity` uses Hono `secureHeaders` with HSTS on
+(`Strict-Transport-Security: max-age=15552000; includeSubDomains`).
+A proxy that sends `X-Forwarded-Proto: http` gets a `301` to the same
+host, path, and query on HTTPS. Direct local requests omit that header,
+so `bun run dev` on port 3000 stays HTTP.
+
+Cloudflare **Always Use HTTPS** covers the edge: the zone redirects
+visitors to HTTPS before a request reaches this server. The origin
+redirect is the backstop when a proxy still forwards HTTP.
+
+`Cross-Origin-Resource-Policy` is `cross-origin`. Hono's default
+`same-origin` would block the browser clients that already call `/api/*`
+from another origin.
+
 `bun run dev` and `bun run start` let Bun load `.env`. An exported variable
 wins. The server does not pass a dotenv file list.
 
