@@ -208,3 +208,11 @@ No ratchet baseline, ignore count, or public route changed.
 ## Decisions
 
 Jhonny, rules v2.9, 2026-10-07. This agent-friendly refactor run uses `refactor/<short-kebab-name>` for every branch, including fixes, test pins, docs, and tooling. The branch-name check PR is `refactor/branch-name-check`. The eight-prefix table is for all other work in the repo, with one spelling each: `feat/` (new behavior), `fix/` (bug fix), `hotfix/` (urgent production patch), `chore/` (deps, config, tooling), `docs/` (docs only), `refactor/` (structure change, same behavior), `test/` (tests only), `release/` (release cut). Never `cursor/` or any other tool prefix. The brief names the exact branch. Create it off `feat/davar-v2`, or off the stacked base when the PR depends on an earlier PR, before the first commit. The CI check still allows all eight prefixes. AGENTS.md states both the eight-prefix table and that agent-friendly refactor runs use `refactor/` for everything. This PR does not edit AGENTS.md or any workflow. Do not rename #255.
+
+## Knowledge import cycle
+
+Draft PR [#261](https://github.com/jhonnyisaacc/davar/pull/261) (`refactor/knowledge-import-cycle` into `cursor/fix-web-typecheck-86fd`). `pinned_inputs` takes the `Validator` the caller already builds. `scripts/knowledge/core.py` no longer imports `scripts/knowledge/validate.py`.
+
+`PYTHONPATH=. python -m pytest -q tests/test_knowledge_workflow_boundary.py tests/test_knowledge_publication_boundary.py tests/test_knowledge_v2_publication_contract.py` — 13 passed in 1.19s.
+
+Pin assertions in `tests/test_knowledge_*.py` are unchanged. No ratchet, CI, or baseline change.
