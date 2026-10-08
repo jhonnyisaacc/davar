@@ -1,4 +1,5 @@
 import { eq, sql } from "drizzle-orm";
+import { z } from "zod";
 import type { DatabaseOrTx } from "../db/client.js";
 import {
 	articles,
@@ -255,13 +256,39 @@ export interface ObservationRow {
 	source_entry_id?: string;
 	observer?: string;
 	location?: string;
-	observed_at?: string;
+	observed_at?: string | null;
 	fetched_at?: string;
 	source_revision?: string;
 	date_review?: unknown;
 }
 
 export const FEED_OBSERVATION_SOURCE = "israeli_new_moon_society";
+
+const VISIBILITY_METHODS = ["unaided", "aided", "unknown"] as const;
+
+const inmsObservationSchema = z.object({
+	id: z.string().min(1),
+	source: z.literal(FEED_OBSERVATION_SOURCE),
+	source_entry_id: z.string().min(1),
+	source_url: z.string().min(1),
+	observed_on: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+	observed_at: z.string().min(1).nullable(),
+	observer: z.string(),
+	location: z.string(),
+	country: z.string().min(1),
+	visibility_method: z.enum(VISIBILITY_METHODS),
+	verified: z.boolean(),
+	raw_source_hash: z.string().min(1),
+	fetched_at: z.string().min(1),
+	source_revision: z.string().optional(),
+	date_review: z.unknown().optional(),
+});
+
+export function parseInmsObservations(rows: unknown[]): ObservationRow[] {
+	const parsed = z.array(inmsObservationSchema).safeParse(rows);
+	if (!parsed.success) throw new DomainError("calendar_feed_malformed", 503);
+	return parsed.data;
+}
 
 export async function rebuildConfirmations(db: DatabaseOrTx): Promise<number> {
 	const rows = (await db.execute(sql`
