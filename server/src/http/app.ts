@@ -68,7 +68,6 @@ export function createApp(deps: AppDeps): Hono<{ Variables: AppVariables }> {
 		if (error instanceof DomainError) {
 			return c.json(errorBody(error), error.status as 400 | 401 | 402 | 403 | 404 | 409 | 422 | 429 | 500 | 503);
 		}
-		// Rails maps any ActiveRecord::RecordNotUnique to 409 conflict.
 		if (isUniqueViolation(error)) {
 			return c.json({ error: { code: "conflict" } }, 409);
 		}
