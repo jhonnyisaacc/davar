@@ -1,6 +1,6 @@
 ---
 name: verify-davar
-description: "Drive Davar's React web reader over Chrome DevTools, the Hono API over HTTP, and the Python knowledge worker in a terminal session. Use when proving a Davar change, checking that an instance is worth driving, or capturing verification evidence. Mobile drive is unimplemented."
+description: "Drive Davar's React web reader over Chrome DevTools, the Hono API over HTTP, the Python knowledge worker in a terminal session, and the dict and Delitzsch pipeline CLIs. Use when proving a Davar change, checking that an instance is worth driving, or capturing verification evidence. Mobile drive is unimplemented."
 ---
 
 # Verify Davar
@@ -36,6 +36,14 @@ bun scripts/control/worker.ts start
 
 Ready when `status ok` names the tmux session `davar-verify-worker` (override with `DAVAR_WORKER_SESSION`). Requires `python3` with `jsonschema` and `referencing` importable.
 
+Python pipelines (no long-running process; start records the interpreter):
+
+```bash
+bun scripts/control/python.ts start
+```
+
+Ready when `status ok` names `python python3` (override the binary with `DAVAR_PYTHON`).
+
 Expo packager, only when `mobile/node_modules/expo` is already installed:
 
 ```bash
@@ -53,9 +61,10 @@ bun scripts/control/web.ts doctor
 bun scripts/control/server.ts doctor
 bun scripts/control/worker.ts doctor
 bun scripts/control/mobile.ts doctor
+bun scripts/control/python.ts doctor
 ```
 
-Web doctor requires the dev server pid and the Chrome pid from this run, the listen ports owned by those processes, and Chrome's `/json/version` answering. Server doctor requires the same for port 3000 and `GET /up` body `{"status":"ok"}`. Worker doctor requires tmux, `python3`, the schema imports, and the session. Mobile doctor reads `mobile/app.json` and always reports `drive unimplemented` and `reason maestro`.
+Web doctor requires the dev server pid and the Chrome pid from this run, the listen ports owned by those processes, and Chrome's `/json/version` answering. Server doctor requires the same for port 3000 and `GET /up` body `{"status":"ok"}`. Worker doctor requires tmux, `python3`, the schema imports, and the session. Mobile doctor reads `mobile/app.json` and always reports `drive unimplemented` and `reason maestro`. Python doctor prints the running interpreter against the `mise.toml` pin (`python`, `pin`, `gap`) and whether `pytest` and `jsonschema` import. It does not install Python. A version gap is `gap yes` and is still `status ok` when those imports succeed.
 
 `reason not-running` means there is nothing to drive yet. `reason port-not-ours` or `port-busy` means another process already has the port: do not take it over.
 
@@ -97,6 +106,13 @@ bun scripts/control/mobile.ts drive
 
 That exits `status fail` and `reason maestro-unimplemented`.
 
+Python pipeline drive runs one existing module command. `help` prints dict help. `fixture` runs the pinned Delitzsch dry run and does not write product data.
+
+```bash
+bun scripts/control/python.ts drive help
+bun scripts/control/python.ts drive fixture
+```
+
 Read the feature map before choosing a path. A proof that uses one entry point does not cover the others listed for that feature.
 
 ## Evidence
@@ -110,7 +126,11 @@ bun scripts/control/server.ts state
 bun scripts/control/server.ts evidence
 bun scripts/control/worker.ts state
 bun scripts/control/worker.ts evidence
+bun scripts/control/python.ts state
+bun scripts/control/python.ts evidence
 ```
+
+Python pipeline evidence is the module stdout and exit code.
 
 Mobile has `state` (version, bundle id, Metro up or down). `evidence` fails with `maestro-unimplemented` because there is no UI capture without Maestro.
 
@@ -126,6 +146,7 @@ bun scripts/control/web.ts reset
 bun scripts/control/server.ts reset
 bun scripts/control/worker.ts reset
 bun scripts/control/mobile.ts reset
+bun scripts/control/python.ts reset
 ```
 
 After reset, the evidence directory from the last `evidence` command must still be on disk.
@@ -137,6 +158,7 @@ Control CLIs, from the repository root:
 - `bun scripts/control/web.ts` — React web, Chrome DevTools
 - `bun scripts/control/server.ts` — Hono API, HTTP
 - `bun scripts/control/worker.ts` — `python -m scripts.knowledge` in tmux
+- `bun scripts/control/python.ts` — `python -m scripts.dict` and `python -m scripts.delitzsch`
 - `bun scripts/control/mobile.ts` — Expo doctor, state, and reset; drive unimplemented
 
 Each accepts only `doctor`, `start`, `stop`, `drive`, `state`, `evidence`, and `reset`.

@@ -7,6 +7,7 @@ Read [feature-map.md](../feature-map.md) for the check command of each feature, 
 - Web runs at `http://127.0.0.1:5173` with Chrome DevTools on port 9222, both started by `bun scripts/control/web.ts start`.
 - The Hono API runs at `http://127.0.0.1:3000` only after `DATABASE_URL` is set and `bun scripts/control/server.ts start` prints `status ok`.
 - The knowledge worker is the tmux session `davar-verify-worker` in this checkout.
+- Python pipelines use `bun scripts/control/python.ts`. `drive help` and `drive fixture` do not write product data.
 - Run `doctor` for that app and require the printed URL or session. Never drive a port this run does not own.
 - One instance per app. A second web instance needs a different `DAVAR_VERIFY_ROOT`, `DAVAR_WEB_PORT`, and `DAVAR_WEB_CDP_PORT`.
 
