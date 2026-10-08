@@ -1,5 +1,7 @@
 import { base64UrlDecode, base64UrlEncode } from "./crypto.js";
 
+const KEY_ID_BYTES = 4;
+
 async function importKey(
 	secret: string,
 	usage: "encrypt" | "hmac",
@@ -15,11 +17,40 @@ async function importKey(
 	);
 }
 
+export async function encryptionKeyId(secret: string): Promise<string> {
+	const digest = new Uint8Array(
+		await crypto.subtle.digest("SHA-256", new TextEncoder().encode(secret)),
+	);
+	let id = "";
+	for (let index = 0; index < KEY_ID_BYTES; index++) {
+		const byte = digest[index];
+		if (byte === undefined) throw new Error("Unknown encryption key");
+		id += byte.toString(16).padStart(2, "0");
+	}
+	return id;
+}
+
+function isKeyId(value: string): boolean {
+	return value.length === KEY_ID_BYTES * 2 && /^[0-9a-f]+$/.test(value);
+}
+
+async function openPayload(payload: string, key: CryptoKey): Promise<string> {
+	const combined = base64UrlDecode(payload);
+	if (combined.byteLength < 28) throw new Error("Unknown ciphertext version");
+	const plain = await crypto.subtle.decrypt(
+		{ name: "AES-GCM", iv: combined.slice(0, 12) as unknown as ArrayBuffer },
+		key,
+		combined.slice(12) as unknown as ArrayBuffer,
+	);
+	return new TextDecoder().decode(plain);
+}
+
 export async function encryptField(
 	plaintext: string,
 	secret: string,
 ): Promise<string> {
 	const key = await importKey(secret, "encrypt");
+	const keyId = await encryptionKeyId(secret);
 	const iv = crypto.getRandomValues(new Uint8Array(12));
 	const cipher = await crypto.subtle.encrypt(
 		{ name: "AES-GCM", iv: iv as unknown as ArrayBuffer },
@@ -29,23 +60,31 @@ export async function encryptField(
 	const combined = new Uint8Array(12 + cipher.byteLength);
 	combined.set(iv, 0);
 	combined.set(new Uint8Array(cipher), 12);
-	return `v1.${base64UrlEncode(combined)}`;
+	return `v1.${keyId}.${base64UrlEncode(combined)}`;
 }
 
 export async function decryptField(
 	envelope: string,
 	secret: string,
 ): Promise<string> {
-	const [version, payload] = envelope.split(".");
-	if (version !== "v1" || !payload) throw new Error("Unknown ciphertext version");
+	const parts = envelope.split(".");
+	if (parts[0] !== "v1" || parts.some((part) => part.length === 0)) {
+		throw new Error("Unknown ciphertext version");
+	}
 	const key = await importKey(secret, "encrypt");
-	const combined = base64UrlDecode(payload);
-	const plain = await crypto.subtle.decrypt(
-		{ name: "AES-GCM", iv: combined.slice(0, 12) as unknown as ArrayBuffer },
-		key,
-		combined.slice(12) as unknown as ArrayBuffer,
-	);
-	return new TextDecoder().decode(plain);
+	if (parts.length === 2) {
+		const payload = parts[1];
+		if (!payload) throw new Error("Unknown ciphertext version");
+		return openPayload(payload, key);
+	}
+	if (parts.length !== 3) throw new Error("Unknown ciphertext version");
+	const keyId = parts[1];
+	const payload = parts[2];
+	if (!keyId || !payload || !isKeyId(keyId)) {
+		throw new Error("Unknown ciphertext version");
+	}
+	if (keyId !== (await encryptionKeyId(secret))) throw new Error("Unknown encryption key");
+	return openPayload(payload, key);
 }
 
 // Internal digests and signatures only: the key is derived with SHA-256
