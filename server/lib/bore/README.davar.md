@@ -4,7 +4,7 @@ This directory is a byte-identical copy of `api/lib/bore/` from PR #250
 (`feat/davar-v2`). The Bun server only *consumes* these rules through
 `bridge.py` (stdin/stdout JSON) — see `src/services/calendar.ts`. It is not
 a new calendar engine: Aviv policy and observation provenance stay explicit
-prerequisites, same as Rails.
+prerequisites.
 
 - Upstream provenance: see `UPSTREAM.md`.
 - License: see `LICENSE` (MIT, Jhonny). The attribution is preserved here.

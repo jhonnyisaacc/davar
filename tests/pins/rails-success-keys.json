@@ -1,0 +1,91 @@
+{
+	"copied_from": [
+		"api/test/integration/api_test.rb",
+		"api/test/integration/assemblies_test.rb",
+		"api/test/integration/feature_availability_test.rb",
+		"server/tests/fixtures/contract.json"
+	],
+	"exact": {
+		"account": [
+			"active_assembly_id",
+			"admitted",
+			"consultations_remaining",
+			"contact_visible",
+			"discoverable",
+			"display_name",
+			"id",
+			"leader_verified",
+			"onboarding_complete",
+			"profile",
+			"providers",
+			"settings",
+			"settings_version"
+		],
+		"assembly": [
+			"can_manage",
+			"city",
+			"distance_km",
+			"id",
+			"kind",
+			"meeting_url",
+			"member_state",
+			"name"
+		],
+		"message": ["citations", "content", "generation", "id", "role", "state"],
+		"calendar_day": [
+			"biblical",
+			"civil_date",
+			"confirmation_id",
+			"counted_events",
+			"events",
+			"month_identity",
+			"month_status",
+			"observation",
+			"rabbinic",
+			"year_start_status"
+		],
+		"capabilities": ["ai", "flags"],
+		"capabilities_ai": ["available", "providers", "shared_openrouter"],
+		"capabilities_flags": ["ai_provider_connections", "ai_shared_openrouter", "assemblies"],
+		"providers": ["commentary_provider", "providers"],
+		"provider": ["available", "id"]
+	},
+	"present": {
+		"account": [
+			"active_assembly_id",
+			"admitted",
+			"leader_verified",
+			"onboarding_complete",
+			"profile"
+		],
+		"profile": ["answers", "city", "latitude"],
+		"assembly": [
+			"can_manage",
+			"city",
+			"distance_km",
+			"id",
+			"kind",
+			"meeting_url",
+			"member_state"
+		],
+		"assemblies_index": ["assemblies", "people"],
+		"people": ["contact_url", "name"],
+		"join": ["state"],
+		"members": ["memberships"],
+		"membership": ["state", "user"],
+		"membership_user": ["contact_url", "id"],
+		"notifications": ["notifications"],
+		"notification": ["kind"],
+		"article": ["attribution"],
+		"capabilities_ai": ["available", "providers"],
+		"calendar": ["days", "source"],
+		"calendar_source": ["stale", "status"],
+		"calendar_day": ["events", "year_start_status"],
+		"calendar_biblical": ["day", "month_id"],
+		"calendar_month_identity": ["starts_on_evening", "status"],
+		"calendar_rabbinic": ["day", "month_id", "year"]
+	},
+	"absent": {
+		"people": ["birth_date", "gender", "identities", "latitude", "longitude"]
+	}
+}

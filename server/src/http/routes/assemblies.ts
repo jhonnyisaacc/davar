@@ -1,4 +1,4 @@
-import { Hono } from "hono";
+import { Hono, type Context } from "hono";
 import { and, eq, inArray, ne, sql } from "drizzle-orm";
 import { z } from "zod";
 import { assemblies, identities, memberships, users } from "../../db/schema.js";
@@ -355,7 +355,7 @@ assemblyRoutes.get("/assemblies/:id", async (c) => {
 	return c.json(await assemblyShape(db, config, assembly, user.id, null));
 });
 
-assemblyRoutes.patch("/assemblies/:id", async (c) => {
+const updateAssembly = async (c: Context<{ Variables: AppVariables }>) => {
 	const { db, config } = c.get("deps");
 	const user = await requireAssemblyAccess(db, config, c, c.get("deps").env, c.get("deps").flags);
 	if (!completedOnboarding(user.profile)) {
@@ -378,7 +378,10 @@ assemblyRoutes.patch("/assemblies/:id", async (c) => {
 	const fresh = rows[0];
 	if (!fresh) throw new DomainError("not_found", 404);
 	return c.json(await assemblyShape(db, config, fresh, user.id, null));
-});
+};
+
+assemblyRoutes.patch("/assemblies/:id", updateAssembly);
+assemblyRoutes.put("/assemblies/:id", updateAssembly);
 
 assemblyRoutes.post("/assemblies/:id/join", async (c) => {
 	const { db, config } = c.get("deps");
