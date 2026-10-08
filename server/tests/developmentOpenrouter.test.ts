@@ -33,8 +33,11 @@ describe("development OpenRouter", () => {
 				DAVAR_ENCRYPTION_PRIMARY_KEY: "a".repeat(32),
 				DAVAR_ENCRYPTION_DETERMINISTIC_KEY: "b".repeat(32),
 				API_PUBLIC_URL: `https://api.${name}.example.org`,
+				API_HOSTS: `api.${name}.example.org`,
 			};
-			expect(loadConfig(hosted).env).toBe(name);
+			const config = loadConfig(hosted);
+			expect(config.env).toBe(name);
+			expect(config.allowedHosts).toEqual([`api.${name}.example.org`]);
 			expect(developmentOpenrouter(hosted)).toBe(false);
 			expect(developmentOpenrouter({ ...hosted, OPENROUTER_MODEL: "fixture/model" })).toBe(false);
 		}

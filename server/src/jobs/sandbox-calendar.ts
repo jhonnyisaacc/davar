@@ -35,7 +35,7 @@ export async function runSandboxCalendar(
 
 if (import.meta.main) {
 	const config = loadConfig();
-	const { sql, db } = createDb(config.databaseUrl);
+	const { sql, db } = createDb(config.databaseUrl, config.poolSize);
 	try {
 		const scenario = calendarScenarioFromArgs(process.argv.slice(2));
 		const outcome = await runSandboxCalendar(

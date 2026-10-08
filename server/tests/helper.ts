@@ -66,6 +66,8 @@ export function testConfig(): ServerConfig {
 		sandbox: false,
 		encryptionPrimaryKey: "test-primary-key-for-davar-server-only-0001",
 		encryptionDeterministicKey: "test-deterministic-key-davar-only-0001",
+		allowedHosts: [],
+		poolSize: 10,
 		port: 3000,
 	};
 }

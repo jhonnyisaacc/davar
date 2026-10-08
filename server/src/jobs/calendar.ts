@@ -3,7 +3,7 @@ import { createDb } from "../db/client.js";
 import { calendarPayload, syncObservations } from "../services/sync.js";
 
 const config = loadConfig();
-const { sql, db } = createDb(config.databaseUrl);
+const { sql, db } = createDb(config.databaseUrl, config.poolSize);
 try {
 	const payload = calendarPayload(process.env);
 	if (payload.kind === "skip") {
