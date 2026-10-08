@@ -87,6 +87,7 @@ logs/
 *.swo
 *~
 web/tmp/
+server/tmp/
 
 # macOS
 .DS_Store

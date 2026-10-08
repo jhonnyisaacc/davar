@@ -22,6 +22,14 @@ bun run db:migrate   # needs DATABASE_URL
 bun run dev          # PORT=3000 by default
 ```
 
+`bun run setup` installs dependencies, prepares the local
+database, clears `log/*.log`, and starts the server. `--skip-server` stops
+before the server. `--reset` drops and recreates that database after prepare.
+`--dry-run` prints the steps and does not connect. `compose.yml` is Postgres
+17 on 127.0.0.1:5432 for `davar_v2_development`. Setup does not start it.
+An unset `DATABASE_URL` uses that local database. A host other than
+`localhost`, `127.0.0.1`, or `::1` is refused.
+
 Health: `GET /up`.
 
 ## Environment
@@ -29,6 +37,7 @@ Health: `GET /up`.
 | Variable | Required | Purpose |
 | --- | --- | --- |
 | `DATABASE_URL` | yes (except local dev default) | PostgreSQL connection string |
+| `DATABASE_POOL_SIZE` | no (5) | postgres.js connection pool max |
 | `TEST_DATABASE_URL` | tests/CI | Separate database for `bun test` |
 | `PORT` | no (`3000`) | HTTP listen port |
 | `API_PUBLIC_URL` | no (`http://localhost:3000`) | OAuth callback base |
@@ -109,6 +118,8 @@ bun run jobs:recover    # release interrupted sponsored consultations
 bun run jobs:calendar   # observation sync; no-op without an explicit payload
 bun run jobs:notify     # Telegram outbox delivery
 bun run import:qahal / import:articles / import:observations  # IMPORT_FILE=... [APPLY=1]
+bun run operator:issue-invitation   # print a 7-digit code, 30 days, 100 uses
+bun run operator:verify-leader      # USER_ID=... sets leader_verified for an eligible leader
 ```
 
 ## Tests
