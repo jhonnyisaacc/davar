@@ -386,6 +386,7 @@ export function VerseDisplay({
 				<SwipeIndicator>
 					<div
 						className="text-center leading-relaxed px-4 transition-all duration-500 text-[var(--text-primary)]"
+						data-translation-settled={translationPending ? undefined : ""}
 						style={{
 							fontFamily: isHebrewOverlay
 								? "'Cardo', serif"
