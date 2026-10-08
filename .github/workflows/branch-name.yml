@@ -1,0 +1,49 @@
+name: Branch name
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  branch-name:
+    name: branch-name
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check head branch
+        env:
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          if [ -z "${HEAD_REF}" ]; then
+            echo "Head branch is empty." >&2
+            exit 1
+          fi
+          case "${HEAD_REF}" in
+            # Remove this exemption once cursor/davar-repo-review-e47f (#254) merges or closes.
+            cursor/davar-repo-review-e47f)
+              exit 0
+              ;;
+            # Remove this exemption once cursor/fix-web-typecheck-86fd (#255) merges or closes.
+            cursor/fix-web-typecheck-86fd)
+              exit 0
+              ;;
+            # Remove this exemption once cursor/hono-envelope-key-version-60f7 (#256) merges or closes.
+            cursor/hono-envelope-key-version-60f7)
+              exit 0
+              ;;
+            # Remove this exemption once cursor/fold-mobile-components-3cf2 (#257) merges or closes.
+            cursor/fold-mobile-components-3cf2)
+              exit 0
+              ;;
+            # Remove this exemption once cursor/verification-setup-73bc (#258) merges or closes.
+            cursor/verification-setup-73bc)
+              exit 0
+              ;;
+          esac
+          pattern='^(feat|fix|hotfix|chore|docs|refactor|test|release)/[a-z0-9][a-z0-9-]*$'
+          if printf '%s\n' "${HEAD_REF}" | grep -Eq "${pattern}"; then
+            exit 0
+          fi
+          echo "Head branch '${HEAD_REF}' does not match ${pattern}." >&2
+          exit 1

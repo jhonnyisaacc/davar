@@ -29,3 +29,22 @@ Mobile publication uses Expo commands and the repository secret `EXPO_TOKEN`. Ne
 
 - Summarize the change and name the files. Show a diff only when asked.
 - When a JavaScript command is required, give the exact Bun command and the directory it runs in.
+
+## Git
+
+Other repo work uses a branch named `<prefix>/<short-kebab-name>` with one of these prefixes:
+
+| Prefix | Use |
+| --- | --- |
+| `feat/` | New behavior |
+| `fix/` | Bug fix |
+| `hotfix/` | Urgent production patch |
+| `chore/` | Dependencies, config, and tooling |
+| `docs/` | Docs only |
+| `refactor/` | Structure change, same behavior |
+| `test/` | Tests only |
+| `release/` | Release cut |
+
+This agent-friendly refactor run uses `refactor/<short-kebab-name>` for every branch.
+
+Commits are signed with the agents' SSH signing key and must show Verified.
