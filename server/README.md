@@ -136,16 +136,23 @@ DAVAR_DEV_SANDBOX=1 NODE_ENV=development bun run dev
 - Sandbox mail is written under `tmp/sandbox-mail/` and only accepts
   `@example.test` recipients.
 
-## Jobs (idempotent, no production run in this PR)
+## Jobs (idempotent)
+
+`bun run dev` and `bun run start` arm one in-process scheduler unless `NODE_ENV=test`. It is not a Cloudflare Cron Trigger: this process is Bun, and `web/wrangler.jsonc` is the Pages frontend. The timer ticks once a minute and calls the job functions that are due: calendar sync every 30 minutes (live feed, skipped when not due), consultation recovery every minute, and Telegram delivery every minute. See `docs/decisions/0014-in-process-job-scheduler.md`.
 
 ```sh
 bun run jobs:recover    # release interrupted sponsored consultations
-bun run jobs:calendar   # observation sync; no-op without an explicit payload
+bun run jobs:calendar   # reviewed-file sync; no-op without an explicit payload
 bun run jobs:notify     # Telegram outbox delivery
 bun run import:qahal / import:articles / import:observations  # IMPORT_FILE=... [APPLY=1]
 bun run operator:issue-invitation   # print a 7-digit code, 30 days, 100 uses
 bun run operator:verify-leader      # USER_ID=... sets leader_verified for an eligible leader
-# From the repo root. Fetches the public INMS feed, or replays a recorded RSS fixture:
+# From the repo root. The job commands call the same functions as the scheduler.
+bun scripts/control/index.ts job sync_calendar_observations
+bun scripts/control/index.ts job recover_consultations
+bun scripts/control/index.ts job telegram_notifications
+bun scripts/control/index.ts job tick
+# Fetches the public INMS feed, or replays a recorded RSS fixture:
 bun scripts/control/index.ts import inms
 bun scripts/control/index.ts import inms --fixture path/to/feed.xml
 ```
@@ -186,9 +193,9 @@ never logged.
 
 ## Intentional gaps (verified against the tip of `feat/davar-v2`)
 
-- `20261003000001_add_solid_queue.rb` is not ported: there is no ActiveJob
-  backend here. Jobs ship as idempotent `bun run jobs:*` commands
-  (recover, calendar sync, Telegram delivery); nothing enqueues at runtime.
+- `20261003000001_add_solid_queue.rb` is not ported: there is no queue
+  table and no hourly finished-job purge. The in-process scheduler calls
+  the job functions directly (`docs/decisions/0014-in-process-job-scheduler.md`).
   `20261003000000_add_calendar_feed_tracking.rb` **is** ported
   (`drizzle/0002_calendar_feed.sql`).
 - Stored ciphertext uses this server's envelope (see
