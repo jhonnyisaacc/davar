@@ -7,7 +7,7 @@ import { runBridge } from "./bridge.js";
 import { backfillForEntries, reportReviews } from "./calendarConfig.js";
 import { repoRoot } from "./context.js";
 import { FEED_SOURCE, feedState } from "./feedState.js";
-import { observationImport, type ObservationRow } from "./imports.js";
+import { observationImport, parseInmsObservations } from "./imports.js";
 import { observationWindowOpen } from "./window.js";
 
 export const FEED_URL =
@@ -229,10 +229,10 @@ export async function syncObservations(
 				tx,
 				{
 					schema_version: 1,
-					observations: [
+					observations: parseInmsObservations([
 						...accepted.flatMap((entry) => entry.observations),
 						...backfill,
-					] as unknown as ObservationRow[],
+					]),
 					replace_entry_ids: accepted.map((entry) => entry.source_entry_id),
 				},
 				false,

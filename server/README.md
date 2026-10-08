@@ -143,6 +143,9 @@ bun run jobs:notify     # Telegram outbox delivery
 bun run import:qahal / import:articles / import:observations  # IMPORT_FILE=... [APPLY=1]
 bun run operator:issue-invitation   # print a 7-digit code, 30 days, 100 uses
 bun run operator:verify-leader      # USER_ID=... sets leader_verified for an eligible leader
+# From the repo root. Fetches the public INMS feed, or replays a recorded RSS fixture:
+bun scripts/control/index.ts import inms
+bun scripts/control/index.ts import inms --fixture path/to/feed.xml
 ```
 
 ## Tests
