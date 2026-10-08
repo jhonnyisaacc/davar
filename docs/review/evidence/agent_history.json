@@ -1,0 +1,956 @@
+{
+  "authors": [
+    {
+      "commits": 908,
+      "author": "Jhonny"
+    },
+    {
+      "commits": 52,
+      "author": "Cursor Agent"
+    },
+    {
+      "commits": 47,
+      "author": "jony"
+    },
+    {
+      "commits": 43,
+      "author": "copilot-swe-agent[bot]"
+    },
+    {
+      "commits": 32,
+      "author": "Jhonny (david)"
+    },
+    {
+      "commits": 2,
+      "author": "cursor[bot]"
+    }
+  ],
+  "revert_subjects": [
+    {
+      "sha": "e7787a989",
+      "date": "2026-04-02",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "revert: remove CI/deployment changes to separate into dedicated PR"
+    }
+  ],
+  "cursor_agent_subjects": [
+    {
+      "sha": "c78e5a744",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Ignore clock fields in legacy version.json comparisons."
+    },
+    {
+      "sha": "570a33de6",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Ignore out-of-scope paths in the knowledge boundary guard."
+    },
+    {
+      "sha": "bea7a2728",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Merge remote-tracking branch 'origin/cursor/ci-workflow-cleanup-2974' into cursor/land-remaining-0a02"
+    },
+    {
+      "sha": "fdfceb642",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Merge remote-tracking branch 'origin/cursor/agents-md-10d4' into cursor/land-remaining-0a02"
+    },
+    {
+      "sha": "df0e27314",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Merge remote-tracking branch 'origin/cursor/shared-destinations-0a02' into cursor/land-remaining-0a02"
+    },
+    {
+      "sha": "ea2c5a853",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Merge remote-tracking branch 'origin/cursor/web-shared-split-e5cf' into cursor/land-remaining-0a02"
+    },
+    {
+      "sha": "abb23029a",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Merge remote-tracking branch 'origin/cursor/web-destination-table-c404' into cursor/land-remaining-0a02"
+    },
+    {
+      "sha": "67317ce44",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Merge remote-tracking branch 'origin/cursor/web-dead-code-33c0' into cursor/land-remaining-0a02"
+    },
+    {
+      "sha": "9e608b2a0",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Merge remote-tracking branch 'origin/cursor/bani-single-engine-085b' into cursor/land-remaining-0a02"
+    },
+    {
+      "sha": "ad6a6a1eb",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Merge remote-tracking branch 'origin/cursor/knowledge-source-table-6f05' into cursor/land-remaining-0a02"
+    },
+    {
+      "sha": "95b7c57f2",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Merge remote-tracking branch 'origin/cursor/remove-repo-dead-weight-60a9' into cursor/land-remaining-0a02"
+    },
+    {
+      "sha": "4ba93904a",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Merge remote-tracking branch 'origin/cursor/subtract-strongs-matcher-0a02' into cursor/land-remaining-0a02"
+    },
+    {
+      "sha": "41a83ac9f",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "fix: keep mammoth pinned after dropping unused requirements"
+    },
+    {
+      "sha": "c8643c54c",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Merge remote-tracking branch 'origin/cursor/subtract-unreferenced-0a02' into cursor/land-remaining-0a02"
+    },
+    {
+      "sha": "32b948cc7",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Merge remote-tracking branch 'origin/cursor/book-name-registry-0a02' into cursor/land-remaining-0a02"
+    },
+    {
+      "sha": "b392d666e",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Merge remote-tracking branch 'origin/cursor/tth-books-json-0a02' into cursor/land-remaining-0a02"
+    },
+    {
+      "sha": "25fbe05fd",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Merge remote-tracking branch 'origin/cursor/repo-relative-paths-42ab' into cursor/land-remaining-0a02"
+    },
+    {
+      "sha": "1d9b3a8c2",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Merge remote-tracking branch 'origin/cursor/single-word-dirs-64de' into cursor/land-remaining-0a02"
+    },
+    {
+      "sha": "cfe9fbbe2",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Merge remote-tracking branch 'origin/cursor/remove-tth-v1-75ee' into cursor/land-remaining-0a02"
+    },
+    {
+      "sha": "220ca3fb5",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Merge remote-tracking branch 'origin/cursor/pin-tth-extraction-baseline-83c7' into cursor/land-remaining-0a02"
+    },
+    {
+      "sha": "c45452996",
+      "date": "2026-09-23",
+      "author": "Cursor Agent",
+      "subject": "Merge remote-tracking branch 'origin/cursor/eas-main-workflow-10d4' into cursor/mobile-landing-0a02"
+    },
+    {
+      "sha": "f94d2843f",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "refactor(mobile): drive navigation from the shared destination table"
+    },
+    {
+      "sha": "39d59ca04",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "refactor(web): share the destination table"
+    },
+    {
+      "sha": "3505b908c",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "Remove the unreferenced Strong's v2 matcher pipeline."
+    },
+    {
+      "sha": "f41bae5e8",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "Document the Strong's v2 matcher instead of the removed v1 CLI."
+    },
+    {
+      "sha": "c29e83011",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "Load book names and codes from the registry"
+    },
+    {
+      "sha": "3cfcffed8",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "Remove unreferenced Strong's v1 scripts and unused requirements."
+    },
+    {
+      "sha": "bd4e9d18f",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "refactor(tth): load book metadata from books.json"
+    },
+    {
+      "sha": "836a2fd4f",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "fix: run Python scripts from the checkout instead of ~/davar"
+    },
+    {
+      "sha": "17e19ba28",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "docs: point the web README at the Cloudflare guide"
+    },
+    {
+      "sha": "d18dd261d",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "fix: refresh knowledge pilot digests after the path rename"
+    },
+    {
+      "sha": "509674766",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "refactor: rename to single-word directories"
+    },
+    {
+      "sha": "bfca56824",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "refactor(web): share Hebrew helpers and split non-verse screens"
+    },
+    {
+      "sha": "e1461694d",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "fix(knowledge): judge script edits by Shaul output"
+    },
+    {
+      "sha": "d287cb343",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "refactor: call Bani only through apply.py"
+    },
+    {
+      "sha": "77c76a7a3",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "ci: retire stale workflow triggers"
+    },
+    {
+      "sha": "09f4b698b",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "refactor(mobile): fold AppNavigator into the tab layout"
+    },
+    {
+      "sha": "a950d0e49",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "docs: keep AGENTS.md to current project rules"
+    },
+    {
+      "sha": "2dbadbd6d",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "ci: publish mobile EAS only for the matching change"
+    },
+    {
+      "sha": "e308b22ad",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "docs: replace agent prompts with AGENTS.md"
+    },
+    {
+      "sha": "4098bbd1f",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "fix(web): keep unknown paths on the not-found screen"
+    },
+    {
+      "sha": "15ed5afee",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "refactor(knowledge): route owners through a source table"
+    },
+    {
+      "sha": "2729a4ed9",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "refactor(web): drive navigation from a destination table"
+    },
+    {
+      "sha": "971833831",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "test(web): pin the current route paths"
+    },
+    {
+      "sha": "d8a57e7e3",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "refactor(web): remove unused components"
+    },
+    {
+      "sha": "c49e4681e",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "refactor(repo): drop the archived backend and duplicate dumps"
+    },
+    {
+      "sha": "752b34918",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "refactor(strongs): read the canonical Hebrew dictionary"
+    },
+    {
+      "sha": "24c3aeaec",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "refactor(mobile): remove unused Expo template leftovers"
+    },
+    {
+      "sha": "9da2ac280",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "refactor(tth): remove the superseded v1 pipeline"
+    },
+    {
+      "sha": "06b1ed600",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "test(tth): name the Amos verses that diverge"
+    },
+    {
+      "sha": "c77184c58",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "test(tth): import converters as a package"
+    },
+    {
+      "sha": "625ac1439",
+      "date": "2026-09-22",
+      "author": "Cursor Agent",
+      "subject": "test(tth): pin DOCX and Markdown conversion"
+    }
+  ],
+  "copilot_subjects": [
+    {
+      "sha": "5f49f0d0f",
+      "date": "2026-05-26",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "chore: remove stale supabase connectivity checks from web tests"
+    },
+    {
+      "sha": "1a64d5720",
+      "date": "2026-05-25",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "chore: remove generated TS2009 upload state artifact"
+    },
+    {
+      "sha": "c8f664513",
+      "date": "2026-05-12",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "fix: restore missing spaces in verse texts after punctuation (tehilim, jabakuk)"
+    },
+    {
+      "sha": "2e25f771d",
+      "date": "2026-05-10",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "refactor: extract marker-matching helpers into shared footnoteUtils"
+    },
+    {
+      "sha": "7ca27b4e3",
+      "date": "2026-05-03",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "fix: code review corrections in versification, store, formatter, and postprocess"
+    },
+    {
+      "sha": "9cd20b895",
+      "date": "2026-05-03",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "fix: correct missing Spanish diacritical marks in notice strings"
+    },
+    {
+      "sha": "901046a9c",
+      "date": "2026-05-03",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    },
+    {
+      "sha": "fa7e4ec5b",
+      "date": "2026-04-23",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "refactor: extract DEFAULT_FOOTNOTE_MARKER_COLOR constant to footnoteUtils"
+    },
+    {
+      "sha": "f923cd092",
+      "date": "2026-04-23",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "refactor(mobile): extract footnote utilities to shared module and fix hardcoded color"
+    },
+    {
+      "sha": "189e7b0b3",
+      "date": "2026-04-21",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "fix(web): align og/twitter static descriptions, add Play Store downloadUrl, drop legacy userLanguage"
+    },
+    {
+      "sha": "2be0be3d8",
+      "date": "2026-04-12",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "fix: remove dead elif besorah branch and fix docstring in book_splitter"
+    },
+    {
+      "sha": "6154620f2",
+      "date": "2026-04-05",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "fix(i18n): localize \"Last Updated\" label in mobile and web LegalScreen"
+    },
+    {
+      "sha": "4c70ddfe5",
+      "date": "2026-04-02",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    },
+    {
+      "sha": "e7787a989",
+      "date": "2026-04-02",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "revert: remove CI/deployment changes to separate into dedicated PR"
+    },
+    {
+      "sha": "2db6fa319",
+      "date": "2026-04-02",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    },
+    {
+      "sha": "92c21df4a",
+      "date": "2026-04-01",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    },
+    {
+      "sha": "1d2f53d02",
+      "date": "2026-03-29",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    },
+    {
+      "sha": "087bb1622",
+      "date": "2026-03-29",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    },
+    {
+      "sha": "c93c3df2f",
+      "date": "2026-03-27",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    },
+    {
+      "sha": "471f155f7",
+      "date": "2026-03-27",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "refactor: remove duplicate lexicon implementation from lexiconService.ts"
+    },
+    {
+      "sha": "4d40f2043",
+      "date": "2026-03-24",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    },
+    {
+      "sha": "75ec9e352",
+      "date": "2026-03-23",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    },
+    {
+      "sha": "e1c2492ae",
+      "date": "2026-03-22",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    },
+    {
+      "sha": "fed715935",
+      "date": "2026-03-22",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    },
+    {
+      "sha": "2292a96f0",
+      "date": "2026-03-17",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "fix: remove duplicate _build_verse_counts, add i18n for serverWaking, add EOF newlines"
+    },
+    {
+      "sha": "473a54323",
+      "date": "2026-03-17",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    },
+    {
+      "sha": "c3c6715e8",
+      "date": "2026-03-15",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "fix: normalize 304 response pattern in get_verse to match get_verses"
+    },
+    {
+      "sha": "bbe2d0ed7",
+      "date": "2026-03-15",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    },
+    {
+      "sha": "924fa3e32",
+      "date": "2026-03-15",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "fix: use i18n translations for mobile web verse navigation buttons"
+    },
+    {
+      "sha": "6dff1a4c5",
+      "date": "2026-03-15",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    },
+    {
+      "sha": "bfbff6424",
+      "date": "2026-03-10",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    },
+    {
+      "sha": "b7b3ef273",
+      "date": "2026-03-09",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "fix: add production warning for missing PUBLIC_API_KEY"
+    },
+    {
+      "sha": "d15c8b16e",
+      "date": "2026-03-09",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "security: remove hardcoded API key fallback from apiClient.ts"
+    },
+    {
+      "sha": "23bb17ffa",
+      "date": "2026-03-09",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    },
+    {
+      "sha": "3c05e4761",
+      "date": "2026-03-08",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    },
+    {
+      "sha": "7233b35c7",
+      "date": "2026-03-08",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "fix: deduplicate supabase dep, align settings field name, use settings in sync script"
+    },
+    {
+      "sha": "166e046ca",
+      "date": "2026-03-08",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    },
+    {
+      "sha": "79153b0ab",
+      "date": "2026-03-08",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "fix: use i18n translation for Ko-fi button text in donate screen"
+    },
+    {
+      "sha": "f59c9ba82",
+      "date": "2026-03-08",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    },
+    {
+      "sha": "2ee050967",
+      "date": "2026-03-08",
+      "author": "copilot-swe-agent[bot]",
+      "subject": "Initial plan"
+    }
+  ],
+  "pr_250": {
+    "author": {
+      "id": "MDQ6VXNlcjYwNDg1NTk1",
+      "is_bot": false,
+      "login": "jhonnyisaacc",
+      "name": "Jhonny"
+    },
+    "baseRefName": "main",
+    "comments": [
+      {
+        "id": "IC_kwDOQXDFNs8AAAABYMTs-Q",
+        "author": {
+          "login": "cloudflare-workers-and-pages"
+        },
+        "authorAssociation": "NONE",
+        "body": "## Deploying davar with &nbsp;<a href=\"https://pages.dev\"><img alt=\"Cloudflare Pages\" src=\"https://user-images.githubusercontent.com/23264/106598434-9e719e00-654f-11eb-9e59-6167043cfa01.png\" width=\"16\"></a> &nbsp;Cloudflare Pages\n\n<table><tr><td><strong>Latest commit:</strong> </td><td>\n<code>9c8866d</code>\n</td></tr>\n<tr><td><strong>Status:</strong></td><td>&nbsp;\u2705&nbsp; Deploy successful!</td></tr>\n<tr><td><strong>Preview URL:</strong></td><td>\n<a href='https://ce658702.davar.pages.dev'>https://ce658702.davar.pages.dev</a>\n</td></tr>\n<tr><td><strong>Branch Preview URL:</strong></td><td>\n<a href='https://feat-v2-refactor.davar.pages.dev'>https://feat-v2-refactor.davar.pages.dev</a>\n</td></tr>\n</table>\n\n[View logs](https://dash.cloudflare.com/?to=/ee926269d38fbdfc2103d2075f3546b0/pages/view/davar/ce658702-dce9-426e-9709-8496c24330e9)\n",
+        "createdAt": "2026-09-30T19:48:22Z",
+        "includesCreatedEdit": true,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/jhonnyisaacc/davar/pull/250#issuecomment-5918485753",
+        "viewerDidAuthor": false
+      }
+    ],
+    "headRefName": "feat/davar-v2",
+    "isDraft": true,
+    "number": 250,
+    "reviewDecision": "",
+    "reviews": [],
+    "state": "OPEN",
+    "title": "feat: unify Davar v2 domains and Pen-based product flows",
+    "url": "https://github.com/jhonnyisaacc/davar/pull/250"
+  },
+  "review_comments": {
+    "count": 141,
+    "authors": {
+      "cursor[bot]": 15,
+      "Copilot": 121,
+      "jhonnyisaacc": 5
+    },
+    "keyword_samples": [
+      {
+        "id": 2725430977,
+        "user": "cursor[bot]",
+        "path": "backend/app/config.py",
+        "pull": "11",
+        "created": "2026-01-25T11:51:47Z",
+        "body": "### Hardcoded local machine path in configuration  **High Severity**  <!-- DESCRIPTION START --> The `env_file` setting contains an absolute path `/Users/jhonny/davar/backend/.env` which is specific to a developer's local machine. This path won't exist on other developers' machin"
+      },
+      {
+        "id": 2725430979,
+        "user": "cursor[bot]",
+        "path": "backend/.env.example",
+        "pull": "11",
+        "created": "2026-01-25T11:51:47Z",
+        "body": "### CORS origins format incompatible with validator  **Medium Severity**  <!-- DESCRIPTION START --> The `.env.example` uses JSON array syntax `[\"http://localhost:3002\",\"http://localhost:3003\"]` for `DAVAR_ALLOWED_ORIGINS`, but the `parse_allowed_origins` validator splits by comm"
+      },
+      {
+        "id": 2725430980,
+        "user": "cursor[bot]",
+        "path": "backend/app/api/routes/verses.py",
+        "pull": "11",
+        "created": "2026-01-25T11:51:47Z",
+        "body": "### Streaming mode returns 200 for non-existent resources  **Medium Severity**  <!-- DESCRIPTION START --> When `stream=True`, the verses endpoint returns an empty array `[]` with HTTP 200 for non-existent books or chapters. The non-streaming path correctly returns HTTP 404 for t"
+      },
+      {
+        "id": 2725433326,
+        "user": "Copilot",
+        "path": "backend/app/config.py",
+        "pull": "11",
+        "created": "2026-01-25T11:55:26Z",
+        "body": "The env_file path is hardcoded to an absolute path specific to a local machine (\"/Users/jhonny/davar/backend/.env\"). This will break for other developers and deployment environments. The env_file should be relative or use a path that works across different environments. ```sugges"
+      },
+      {
+        "id": 2725433329,
+        "user": "Copilot",
+        "path": "backend/app/schemas/verse.py",
+        "pull": "11",
+        "created": "2026-01-25T11:55:26Z",
+        "body": "The removed 'text_no_nikud' field from WordResponse is a breaking change for any existing API clients. This should be documented in the PR description or handled with API versioning to ensure backward compatibility. ```suggestion     text: str     # Backward compatibility: retain"
+      },
+      {
+        "id": 2725433347,
+        "user": "Copilot",
+        "path": "web/src/app/services/apiClient.ts",
+        "pull": "11",
+        "created": "2026-01-25T11:55:26Z",
+        "body": "The API key validation logic allows empty strings after trimming, which bypasses the security check. An empty or whitespace-only API key should be treated the same as a missing key."
+      },
+      {
+        "id": 2725433408,
+        "user": "Copilot",
+        "path": "backend/BACKEND_PLAN.md",
+        "pull": "11",
+        "created": "2026-01-25T11:55:30Z",
+        "body": "The environment layout here treats `DAVAR_API_KEY` as a secure backend secret while also defining `VITE_API_KEY` and `EXPO_PUBLIC_API_KEY` for the same API key in the frontends, which means the key cannot actually function as a trusted authenticator. Once the key is embedded in b"
+      },
+      {
+        "id": 2725452152,
+        "user": "cursor[bot]",
+        "path": "backend/app/config.py",
+        "pull": "11",
+        "created": "2026-01-25T12:17:21Z",
+        "body": "### Empty API key default breaks all authenticated endpoints  **Medium Severity**  <!-- DESCRIPTION START --> The `api_key` setting changed from required to optional with an empty string default. If `DAVAR_API_KEY` is not set in the environment, `settings.api_key` becomes `\"\"`. I"
+      },
+      {
+        "id": 2725452153,
+        "user": "cursor[bot]",
+        "path": "backend/app/data_loaders/dictionary.py",
+        "pull": "11",
+        "created": "2026-01-25T12:17:21Z",
+        "body": "### Search endpoint returns empty results due to missing strong number  **High Severity**  <!-- DESCRIPTION START --> The `search_lexicon` method in `DictionaryLoader` iterates over `custom_defs.items()` but only appends the entry value to results, discarding the `strong_num` key"
+      },
+      {
+        "id": 2725572690,
+        "user": "cursor[bot]",
+        "path": "backend/app/config.py",
+        "pull": "12",
+        "created": "2026-01-25T14:24:17Z",
+        "body": "### Hardcoded local machine path in config  **High Severity**  <!-- DESCRIPTION START --> The `env_file` setting is hardcoded to `/Users/jhonny/davar/backend/.env`, which is a developer's local machine path. This absolute path won't exist on other developers' machines, CI/CD envi"
+      },
+      {
+        "id": 2725572691,
+        "user": "cursor[bot]",
+        "path": "backend/app/config.py",
+        "pull": "12",
+        "created": "2026-01-25T14:24:17Z",
+        "body": "### CORS origins parser incompatible with example format  **High Severity**  <!-- DESCRIPTION START --> The `parse_allowed_origins` validator splits strings by comma, but `.env.example` was changed to use JSON array format `[\"http://localhost:3002\",\"http://localhost:3003\"]`. When"
+      },
+      {
+        "id": 2725572692,
+        "user": "cursor[bot]",
+        "path": "backend/app/api/routes/verses.py",
+        "pull": "12",
+        "created": "2026-01-25T14:24:17Z",
+        "body": "### Streaming endpoint returns 200 for missing resources  **Medium Severity**  <!-- DESCRIPTION START --> When `stream=True`, the verses endpoint returns HTTP 200 with an empty array `[]` for non-existent books or chapters. The non-streaming path correctly returns HTTP 404. The s"
+      },
+      {
+        "id": 2725574724,
+        "user": "cursor[bot]",
+        "path": "web/src/app/components/NavigationBar.tsx",
+        "pull": "13",
+        "created": "2026-01-25T14:26:16Z",
+        "body": "### Duplicate Hebrew Only toggle in navigation bar settings  **Medium Severity**  <!-- DESCRIPTION START --> The Hebrew Only toggle appears twice in the settings menu - once before the sefer style toggle and again after it. The duplicate toggle after the sefer style section shoul"
+      },
+      {
+        "id": 2725801902,
+        "user": "cursor[bot]",
+        "path": "backend/app/services/verses.py",
+        "pull": "13",
+        "created": "2026-01-25T18:24:13Z",
+        "body": "### Unsafe dictionary access may raise KeyError  **Medium Severity**  <!-- DESCRIPTION START --> The code accesses `verse_data[\"chapter\"]` and `verse_data[\"verse\"]` directly without safety checks, which could raise a KeyError if these fields are missing. This is inconsistent with"
+      },
+      {
+        "id": 2725810108,
+        "user": "cursor[bot]",
+        "path": "backend/app/services/verses.py",
+        "pull": "13",
+        "created": "2026-01-25T18:35:25Z",
+        "body": "### Transliteration words matched by index without validation  **Medium Severity**  <!-- DESCRIPTION START --> Transliteration words are matched to verse words by list index, assuming the transliteration list order and length match the verse words. If the transliteration data is "
+      },
+      {
+        "id": 2778593034,
+        "user": "Copilot",
+        "path": "mobile/src/components/NavigationSheet.tsx",
+        "pull": "27",
+        "created": "2026-02-08T05:21:07Z",
+        "body": "Same ref-forwarding issue here: `useImperativeHandle(ref, () => sheetRef.current)` can leave the parent `ref.current` as `null` until this component re-renders, because the BottomSheet ref assignment doesn\u2019t trigger a render. That can cause `navigationSheetRef.current?.snapToInde"
+      },
+      {
+        "id": 2778593041,
+        "user": "Copilot",
+        "path": "mobile/src/screens/VerseDetailContent.tsx",
+        "pull": "27",
+        "created": "2026-02-08T05:21:07Z",
+        "body": "`handleWordPress` calls `sheetRef.current?.snapToIndex(0)` immediately after `setSelectedWord(word)`. With the current `WordAnalysisBottomSheet` ref wiring (imperative handle returning the child\u2019s `sheetRef.current`), `sheetRef.current` can still be `null` on the first interactio"
+      },
+      {
+        "id": 2779614085,
+        "user": "Copilot",
+        "path": "backend/app/data_loaders/translations.py",
+        "pull": "29",
+        "created": "2026-02-08T18:10:26Z",
+        "body": "On case-sensitive filesystems, this will fail for the current BES filenames shown in this PR (e.g., `data/bes/json/lamentations.json`, `.../jude.json`, etc.). `bes_book_name` is derived from `BES_BOOK_MAPPING`, which currently uses TitleCase values (e.g., `Lamentations`, `Jude`) "
+      },
+      {
+        "id": 2779614116,
+        "user": "Copilot",
+        "path": "data/bes/json/lamentations.json",
+        "pull": "29",
+        "created": "2026-02-08T18:10:27Z",
+        "body": "There appears to be a missing space in \\\"espadahas\\\" (likely \\\"espada has\\\" or a similar intended separation). This will display as a merged word in the exported/consumer UIs; fix the spacing in the source text. ```suggestion           \"bes\": \"Los j\u00f3venes y los ancianos est\u00e1n ten"
+      },
+      {
+        "id": 2779841537,
+        "user": "Copilot",
+        "path": "scripts/tth_2/book_splitter.py",
+        "pull": "30",
+        "created": "2026-02-08T20:59:46Z",
+        "body": "`find_book_boundaries()` now treats the first line that matches `/^\\*\\*.*?\\*\\*/` as the start of *any* requested book. This will incorrectly start extraction at the first bold chapter marker like `**1**` (or any other bold line) rather than the actual book header, especially for "
+      },
+      {
+        "id": 2779841560,
+        "user": "Copilot",
+        "path": "scripts/tth_2/README.md",
+        "pull": "30",
+        "created": "2026-02-08T20:59:47Z",
+        "body": "The \u201cBesorah\u201d count in this section is inconsistent with the list shown: it says \u201cBesorah (8)\u201d but only lists 6 items (and the removed books suggest it should be reduced). Please update the count (and potentially the total book count) so the README matches the actual supported bo"
+      },
+      {
+        "id": 2779885663,
+        "user": "Copilot",
+        "path": "scripts/tth_2/book_splitter.py",
+        "pull": "30",
+        "created": "2026-02-08T21:23:20Z",
+        "body": "This error message is misleading: the book exists in `BOOKS_INFO`, but its `patterns` list is empty. Consider changing the message to indicate the real problem (e.g., no patterns configured for this book key) to make debugging config issues easier. ```suggestion                 f"
+      },
+      {
+        "id": 2779885695,
+        "user": "Copilot",
+        "path": "web/src/app/components/FullChapterView.tsx",
+        "pull": "30",
+        "created": "2026-02-08T21:23:21Z",
+        "body": "Same issue as the single-verse view: `hideSuperscripts` is turned on when `verse.translation_footnotes` exist, but `FullChapterView` does not render those footnotes. This removes footnote markers without providing the footnote content to the user. ```suggestion                   "
+      },
+      {
+        "id": 2784760185,
+        "user": "Copilot",
+        "path": "mobile/app/(tabs)/home.tsx",
+        "pull": "31",
+        "created": "2026-02-09T22:07:49Z",
+        "body": "The translation keys used for the support email (`support.emailSubject` / `support.emailBody`) don't exist in the current locale JSON files, so the composed email will likely show raw keys as subject/body. Add these keys to `locales/en.json`, `locales/es.json`, and `locales/he.js"
+      },
+      {
+        "id": 2784760230,
+        "user": "Copilot",
+        "path": "mobile/app/(tabs)/home.tsx",
+        "pull": "31",
+        "created": "2026-02-09T22:07:50Z",
+        "body": "`Linking.openURL(...)` returns a Promise; currently it's not awaited/handled. For consistency with other screens (and to avoid unhandled rejections), prefix with `void` and/or handle failures (e.g., via `canOpenURL` + error UI)."
+      },
+      {
+        "id": 2785293331,
+        "user": "Copilot",
+        "path": "mobile/src/services/offlineSync.ts",
+        "pull": "32",
+        "created": "2026-02-10T01:10:43Z",
+        "body": "`extractTthVerses` is already building an object that matches `TranslationRow`, so the `as TranslationRow` cast is likely unnecessary and hides type mismatches that could be caught earlier. If TypeScript is complaining here, it\u2019s better to fix the underlying type (e.g., `footnote"
+      },
+      {
+        "id": 2790954916,
+        "user": "Copilot",
+        "path": "data/bes/json/psalms.json",
+        "pull": "35",
+        "created": "2026-02-11T00:38:58Z",
+        "body": "Missing space after period in the title text. Should be \"distante. Mictam\" instead of \"distante.Mictam\". This appears to be a data formatting issue from the source USFX parsing. ```suggestion       \"title\": \"Para el principal creador de m\u00fasica; sobre la paloma silenciosa en paraj"
+      },
+      {
+        "id": 2790954926,
+        "user": "Copilot",
+        "path": "data/bes/json/lamentations.json",
+        "pull": "35",
+        "created": "2026-02-11T00:38:58Z",
+        "body": "The verse text has a leading period and space (\". Ha levantado...\") which appears to be unintentional. The period should either be removed or this may be a data parsing error from the source USFX file. ```suggestion           \"bes\": \"Ha levantado un muro de piedras cortadas sobre"
+      },
+      {
+        "id": 2796254621,
+        "user": "Copilot",
+        "path": "mobile/src/components/WordAnalysisBottomSheet.tsx",
+        "pull": "36",
+        "created": "2026-02-12T00:53:59Z",
+        "body": "fetchPrefixEntry() returns the stored \"data\" payload from SQLite, but PrefixResponse requires an \"id\" field. Casting the offline payload to PrefixResponse can lead to missing required fields (e.g., entry.id being undefined) and runtime errors in consumers. Consider normalizing th"
+      },
+      {
+        "id": 2809783145,
+        "user": "Copilot",
+        "path": "mobile/app/splash.tsx",
+        "pull": "38",
+        "created": "2026-02-15T18:16:35Z",
+        "body": "The `scale` and `logoOpacity` shared values should not be in the dependency array of useEffect. React Reanimated shared values are stable references and don't trigger re-renders when changed. Including them in the dependency array is unnecessary and can be confusing. Only include"
+      },
+      {
+        "id": 2809783156,
+        "user": "Copilot",
+        "path": "mobile/scripts/generate-noise.py",
+        "pull": "38",
+        "created": "2026-02-15T18:16:35Z",
+        "body": "The hardcoded output path 'assets/images/noise-texture.png' uses a relative path that assumes the script is run from the mobile directory. However, the PR description mentions this file was added but I don't see it being used anywhere in the codebase. Additionally, the script des"
+      },
+      {
+        "id": 2809783158,
+        "user": "Copilot",
+        "path": "mobile/SPLASH_EXPLANATION.md",
+        "pull": "38",
+        "created": "2026-02-15T18:16:35Z",
+        "body": "The documentation uses `bunx` commands for expo prebuild, which is correct according to the project's Bun-only policy. However, the commands shown use both `bunx expo prebuild` format. For consistency with the package.json scripts which use direct expo commands (like `expo start`"
+      },
+      {
+        "id": 2809783159,
+        "user": "Copilot",
+        "path": "mobile/app/splash.tsx",
+        "pull": "38",
+        "created": "2026-02-15T18:16:35Z",
+        "body": "The Stack navigator's `initialRouteName` has been changed from \"splash\" to \"(tabs)\", but the splash.tsx file still exists in the app directory. This creates a dead code situation where:  1. The splash.tsx component will never be rendered by the router 2. The file adds unnecessary"
+      },
+      {
+        "id": 2809783164,
+        "user": "Copilot",
+        "path": "mobile/app/splash.tsx",
+        "pull": "38",
+        "created": "2026-02-15T18:16:36Z",
+        "body": "The splash screen route has been removed from the Stack navigator (changed from `initialRouteName=\"splash\"` to `initialRouteName=\"(tabs)\"`), but the splash.tsx file still exists and the navigation at line 66 tries to route to \"/verse\". This creates confusion:  1. The splash.tsx c"
+      },
+      {
+        "id": 2810296337,
+        "user": "Copilot",
+        "path": "mobile/app/donate.tsx",
+        "pull": "39",
+        "created": "2026-02-16T01:15:16Z",
+        "body": "The inline style object for marginTop should be extracted to the styles object for better performance. Creating inline styles on every render can cause unnecessary re-renders and memory allocations."
+      },
+      {
+        "id": 2810296339,
+        "user": "Copilot",
+        "path": "mobile/app/donate.tsx",
+        "pull": "39",
+        "created": "2026-02-16T01:15:17Z",
+        "body": "The Pressable components lack accessibilityRole and accessibilityLabel props. These should be added to improve screen reader support. For example, the GitHub Sponsor button should have accessibilityRole=\"link\" and an appropriate accessibilityLabel that describes the action."
+      },
+      {
+        "id": 2810296375,
+        "user": "Copilot",
+        "path": "mobile/src/components/NavigationSheet.tsx",
+        "pull": "39",
+        "created": "2026-02-16T01:15:18Z",
+        "body": "Moving the state declarations (step and selectedBookId) above useImperativeHandle is good for organization. However, these state variables should be included in the useImperativeHandle dependency array since openAtChapter modifies the step state. Currently, the empty dependency a"
+      },
+      {
+        "id": 2810296384,
+        "user": "Copilot",
+        "path": "mobile/src/components/NavigationSheet.tsx",
+        "pull": "39",
+        "created": "2026-02-16T01:15:18Z",
+        "body": "The ref parameter type should be NavigationSheetMethods instead of BottomSheetMethods, since this component exports and returns NavigationSheetMethods. This creates a type mismatch where consumers expect NavigationSheetMethods but the ref is typed as the base BottomSheetMethods."
+      },
+      {
+        "id": 4205738459,
+        "user": "cursor[bot]",
+        "path": "server/src/http/routes/assemblies.ts",
+        "pull": "253",
+        "created": "2026-10-07T10:21:52Z",
+        "body": "### In-person search maps snake_case rows  **High Severity**  <!-- DESCRIPTION START --> The nearby `in_person` assembly query uses raw `SELECT *`, so Postgres returns `leader_id` and `meeting_url`. `assemblyShape` reads `leaderId` and `meetingUrl`, so `can_manage` stays false fo"
+      },
+      {
+        "id": 4205738472,
+        "user": "cursor[bot]",
+        "path": "server/src/services/sync.ts",
+        "pull": "253",
+        "created": "2026-10-07T10:21:52Z",
+        "body": "### Feed sync holds lock during I/O  **High Severity**  <!-- DESCRIPTION START --> `syncObservations` takes `FOR UPDATE` on `calendar_feed_states` and then fetches the RSS feed, runs the Python feed bridge, and may run `observationWindowOpen` (another Python process) before commi"
+      }
+    ]
+  }
+}

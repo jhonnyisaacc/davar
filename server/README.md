@@ -1,15 +1,18 @@
 # Davar API — Bun + Hono port (`server/`)
 
-Byte-compatible port of the Rails 8.1 / PostgreSQL API introduced in
-PR #250 (`feat/davar-v2`) to Bun + Hono. The existing Expo (`mobile/`) and
-React (`web/`) clients keep calling the same `/api/v1` paths with no product
-rewrites. Scripture reading, static assets and the SQLite/static-data path
-are untouched — this server only owns the authenticated product domains.
+Port of the Rails 8.1 / PostgreSQL API introduced in PR #250
+(`feat/davar-v2`) to Bun + Hono. The existing Expo (`mobile/`) and React
+(`web/`) clients keep calling the same `/api/v1` paths with no product
+rewrites. Byte-compatible means that HTTP API only, not stored ciphertext;
+see Encryption below. Scripture reading, static assets and the
+SQLite/static-data path are untouched — this server only owns the
+authenticated product domains.
 
 Source of truth for behavior is the Rails tree in `api/` on `feat/davar-v2`
 (routes, controllers, services, policies, serializers, jobs, mailer,
 migrations and tests). Where this README and that tree disagree, the Rails
-behavior wins.
+behavior wins. Stored encryption is the exception: it stays the Hono scheme
+in Encryption below.
 
 ## Run
 
@@ -53,24 +56,44 @@ Health: `GET /up`.
 Staging/production boot requires the encryption keys, `DATABASE_URL` and an
 HTTPS `API_PUBLIC_URL`, and rejects `DAVAR_DEV_SANDBOX=1` — same as Rails.
 
-## Encryption (greenfield decision)
+## Encryption
 
-"Byte-compatible" covers the HTTP API only: stored ciphertext is **not**
-compatible with Rails ActiveRecord Encryption. This server seals PII/token
-columns in a custom `v1.` AES-GCM envelope keyed by
-`SHA-256(DAVAR_ENCRYPTION_PRIMARY_KEY)`, and looks identities up by an
-HMAC digest (`subject_digest`) instead of Rails' deterministic encryption.
-The `ACTIVE_RECORD_ENCRYPTION_*` vars were intentionally not carried over,
-and `KEY_DERIVATION_SALT` has no equivalent here. Every deployment is
-greenfield (fresh database per server), so no Rails-written rows exist to
-read — confirmed with the maintainer before keeping this scheme.
+Byte-compatible means the HTTP API only: the same `/api/v1` methods, paths,
+and JSON shapes. It does not mean stored bytes. Ciphertext is not
+compatible with Rails ActiveRecord Encryption, and this server does not
+try to make it so. No Rails-written data needs to be preserved (Jhonny,
+2026-10-07; `docs/decisions/0001-keep-hono-encryption-key-version.md`).
+Local databases can be reset. `ACTIVE_RECORD_ENCRYPTION_*` is not read,
+and there is no key-derivation salt.
 
-Key rotation: new writes always use the primary key; reads try
-`[DAVAR_ENCRYPTION_PRIMARY_KEY, ...DAVAR_ENCRYPTION_PREVIOUS_KEYS]` in
-order (`decryptionKeys`). To rotate, generate a new primary, move the old
-one into `DAVAR_ENCRYPTION_PREVIOUS_KEYS`, and drop it once rows have been
-rewritten. Rotating `DAVAR_ENCRYPTION_DETERMINISTIC_KEY` changes identity
-digests and is not seamless (lookups would miss).
+The scheme is AES-256-GCM. The AES key is `SHA-256(secret)`. Identities
+are looked up by an HMAC digest (`subject_digest`), not by deterministic
+ciphertext.
+
+New writes use a versioned envelope:
+
+```
+v1.<keyId>.<payload>
+```
+
+- `v1` names this Hono scheme.
+- `keyId` is the first 8 hex characters (4 bytes) of `SHA-256(secret)`,
+  lowercase. New rows stamp the current `DAVAR_ENCRYPTION_PRIMARY_KEY`.
+- `payload` is base64url (no padding) of a random 12-byte IV followed by
+  the AES-GCM ciphertext and tag.
+
+Reads try `[DAVAR_ENCRYPTION_PRIMARY_KEY, ...DAVAR_ENCRYPTION_PREVIOUS_KEYS]`
+in that order (`decryptionKeys`). A versioned envelope opens only with the
+secret whose key id matches, so a later primary can be introduced and an
+older envelope still opens while its secret stays on the previous-key list.
+Envelopes written before key ids (`v1.<payload>`, no key id) still decrypt
+with the current primary key. After that primary is moved onto the
+previous-key list, those same envelopes open from that list.
+
+To rotate, generate a new primary, move the old one into
+`DAVAR_ENCRYPTION_PREVIOUS_KEYS`, and drop it once rows have been rewritten
+under the new key. Rotating `DAVAR_ENCRYPTION_DETERMINISTIC_KEY` changes
+identity digests and is not seamless (lookups would miss).
 
 ## Database
 
@@ -149,8 +172,8 @@ never logged.
   `20261003000000_add_calendar_feed_tracking.rb` **is** ported
   (`drizzle/0002_calendar_feed.sql`).
 - Stored ciphertext is not compatible with ActiveRecord Encryption (see
-  "Encryption (greenfield decision)" above): byte-compat covers the HTTP
-  API only.
+  Encryption above). Byte-compatible means the HTTP API only, not stored
+  bytes.
 - JWKS rotation recovers faster than Rails: an unknown `kid` refetches
   after a 30s cooldown instead of waiting out Rails' hourly cache. The
   `algorithms: ["RS256"]` pin matches Rails exactly.
