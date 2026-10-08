@@ -2,7 +2,8 @@ import { readdir } from "node:fs/promises";
 import { join } from "node:path";
 import postgres from "postgres";
 import { loadConfig } from "../lib/config.js";
-import { MIGRATIONS_DIR } from "./pending.js";
+
+const MIGRATIONS_DIR = new URL("../../drizzle/", import.meta.url).pathname;
 
 async function main(): Promise<void> {
 	const config = loadConfig();

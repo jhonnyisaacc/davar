@@ -1,6 +1,5 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import { PendingMigrationError } from "../db/pending.js";
 import { DomainError, errorBody } from "../lib/errors.js";
 import { isUniqueViolation, pgErrorCode } from "../lib/pgErrors.js";
 import { ValidationError } from "./validation.js";
@@ -23,14 +22,6 @@ export function createApp(deps: AppDeps): Hono<{ Variables: AppVariables }> {
 		c.set("deps", deps);
 		await next();
 	});
-
-	if (deps.config.env === "development" && deps.pendingMigrations) {
-		app.use(async (_c, next) => {
-			const pending = await deps.pendingMigrations?.();
-			if (pending && pending.length > 0) throw new PendingMigrationError(pending);
-			await next();
-		});
-	}
 
 	// Mirrors api/config/initializers/cors.rb: only /api/* is reachable from
 	// browsers, with the Authorization/Content-Type headers Rails allows.
@@ -81,9 +72,6 @@ export function createApp(deps: AppDeps): Hono<{ Variables: AppVariables }> {
 		if (isUniqueViolation(error)) {
 			return c.json({ error: { code: "conflict" } }, 409);
 		}
-		if (error instanceof PendingMigrationError && deps.config.env === "development") {
-			return c.json({ error: { code: error.code, message: error.message } }, 500);
-		}
 		// Never log error messages or params: drizzle failures embed bound
 		// values (tokens, emails, ciphertext) in both.
 		console.error(
@@ -95,20 +83,6 @@ export function createApp(deps: AppDeps): Hono<{ Variables: AppVariables }> {
 				route: c.req.routePath,
 			}),
 		);
-		if (deps.config.env === "development") {
-			const err = error instanceof Error ? error : new Error(String(error));
-			return c.json(
-				{
-					error: {
-						code: "internal_error",
-						name: err.name,
-						message: err.message,
-						stack: err.stack ?? "",
-					},
-				},
-				500,
-			);
-		}
 		return c.json({ error: { code: "internal_error" } }, 500);
 	});
 
