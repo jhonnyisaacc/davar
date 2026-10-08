@@ -22,7 +22,7 @@ const verseCardSrc = readFileSync(
 	"utf8",
 );
 const scriptureSrc = readFileSync(
-	join(ROOT, "mobile/src/services/scripture.ts"),
+	join(ROOT, "mobile/src/services/scriptureDisplay.ts"),
 	"utf8",
 );
 
@@ -186,7 +186,7 @@ describe("DSS span-aware replacement (#103)", () => {
 			["VerseDisplay.tsx", verseDisplaySrc],
 			["FullChapterView.tsx", fullChapterViewSrc],
 			["VerseCard.tsx", verseCardSrc],
-			["scripture.ts", scriptureSrc],
+			["scriptureDisplay.ts", scriptureSrc],
 		] as const) {
 			expect(src.includes("tokenCount === 1"), name).toBe(false);
 			expect(src.includes("countDssWordTokens(trimmed) === 1"), name).toBe(
