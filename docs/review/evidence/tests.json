@@ -1,0 +1,251 @@
+{
+  "test_files": {
+    "api": {
+      "count": 23,
+      "files": [
+        "api/test/bore/test_calendar_domain.py",
+        "api/test/bore/test_counted_moadim.py",
+        "api/test/bore/test_feed_bridge.py",
+        "api/test/bore/test_month_identity.py",
+        "api/test/bore/test_observation_window.py",
+        "api/test/bore/test_sunset.py",
+        "api/test/calendar_observation_sync_test.rb",
+        "api/test/calendar_schedule_test.rb",
+        "api/test/commentary_corpus_test.rb",
+        "api/test/development_openrouter_test.rb",
+        "api/test/development_sandbox_test.rb",
+        "api/test/domain_test.rb",
+        "api/test/environment_config_test.rb",
+        "api/test/feature_flags_test.rb",
+        "api/test/import_and_consultation_test.rb",
+        "api/test/integration/api_test.rb",
+        "api/test/integration/assemblies_test.rb",
+        "api/test/integration/feature_availability_test.rb",
+        "api/test/membership_race_test.rb",
+        "api/test/oidc_test.rb",
+        "api/test/published_articles_test.rb",
+        "api/test/shared_ai_test.rb",
+        "api/test/web_origins_test.rb"
+      ]
+    },
+    "mobile": {
+      "count": 18,
+      "files": [
+        "mobile/src/features/account/authReturnUri.test.ts",
+        "mobile/src/features/assemblies/assembliesPresentation.test.ts",
+        "mobile/src/features/commentary/citations.test.ts",
+        "mobile/src/services/calendarClient.test.ts",
+        "mobile/src/services/calendarPresentation.test.ts",
+        "mobile/src/services/calendarRefresh.test.ts",
+        "mobile/src/services/calendarWorkspace.test.ts",
+        "mobile/src/services/chapterPositioning.test.ts",
+        "mobile/src/services/dictionaryBundle.test.ts",
+        "mobile/src/services/lexicon.test.ts",
+        "mobile/src/services/navigationPositioning.test.ts",
+        "mobile/src/services/navigationSelection.test.ts",
+        "mobile/src/services/offlinePlan.test.ts",
+        "mobile/src/services/productClient.test.ts",
+        "mobile/src/services/responsiveLayout.test.ts",
+        "mobile/src/services/verseIdentity.test.ts",
+        "mobile/src/services/versePaging.test.ts",
+        "mobile/src/store/useAppStore.test.ts"
+      ]
+    },
+    "scripts": {
+      "count": 6,
+      "files": [
+        "scripts/delitzsch/test_basic.py",
+        "scripts/dict/test_import_tcysite.py",
+        "scripts/dss/test_filter.py",
+        "scripts/dss/test_parser_2samuel.py",
+        "scripts/generate-static-data/book-registry.test.ts",
+        "scripts/generate-static-data/lexicon-entries.test.ts"
+      ]
+    },
+    "server": {
+      "count": 18,
+      "files": [
+        "server/tests/account.test.ts",
+        "server/tests/assemblies.test.ts",
+        "server/tests/auth.test.ts",
+        "server/tests/bridge.test.ts",
+        "server/tests/calendar.test.ts",
+        "server/tests/calendarFeed.test.ts",
+        "server/tests/clientIp.test.ts",
+        "server/tests/commentary.test.ts",
+        "server/tests/config.test.ts",
+        "server/tests/contract.test.ts",
+        "server/tests/cors.test.ts",
+        "server/tests/encryption.test.ts",
+        "server/tests/imports.test.ts",
+        "server/tests/oidc.test.ts",
+        "server/tests/pgErrors.test.ts",
+        "server/tests/routes.test.ts",
+        "server/tests/sandbox.test.ts",
+        "server/tests/uuidParams.test.ts"
+      ]
+    },
+    "tests": {
+      "count": 37,
+      "files": [
+        "tests/fixtures/knowledge/legacy-mapping.test.ts",
+        "tests/test_adjudicate_roots.py",
+        "tests/test_apply_morphology_api_proposals.py",
+        "tests/test_besorah_remediation.py",
+        "tests/test_book_registry.py",
+        "tests/test_build_lexicon_bdb.py",
+        "tests/test_commentary_corpus.py",
+        "tests/test_delitzsch_holem_normalization.py",
+        "tests/test_delitzsch_review.py",
+        "tests/test_dss_transformation.py",
+        "tests/test_greek_definitions.py",
+        "tests/test_greek_fetch.py",
+        "tests/test_greek_importer.py",
+        "tests/test_greek_release.py",
+        "tests/test_greek_script_gloss.py",
+        "tests/test_greek_tagnt_edition.py",
+        "tests/test_greek_translate.py",
+        "tests/test_greek_transliteration.py",
+        "tests/test_hutter_attested_morphology.py",
+        "tests/test_hutter_map_strongs.py",
+        "tests/test_hutter_morphology.py",
+        "tests/test_hutter_morphology_api.py",
+        "tests/test_hutter_transcription.py",
+        "tests/test_hutter_verse_images.py",
+        "tests/test_instance_policy.py",
+        "tests/test_knowledge_boundary.py",
+        "tests/test_knowledge_compatibility.py",
+        "tests/test_knowledge_foundation.py",
+        "tests/test_knowledge_modeling.py",
+        "tests/test_knowledge_profiles.py",
+        "tests/test_knowledge_publication_boundary.py",
+        "tests/test_knowledge_v2_publication_contract.py",
+        "tests/test_knowledge_workflow_boundary.py",
+        "tests/test_merge_strongs.py",
+        "tests/test_translate.py",
+        "tests/test_translit_benchmark.py",
+        "tests/test_tth_pipeline.py"
+      ]
+    },
+    "tools": {
+      "count": 1,
+      "files": [
+        "tools/bani/tests/test_syllable_shortening.py"
+      ]
+    },
+    "web": {
+      "count": 21,
+      "files": [
+        "web/shared/localTs2009.test.ts",
+        "web/shared/socialPreview.test.ts",
+        "web/src/app/components/Assemblies.test.tsx",
+        "web/src/app/components/CalendarPanel.test.tsx",
+        "web/src/app/components/FullChapterView.test.tsx",
+        "web/src/app/components/NavigationBar.test.tsx",
+        "web/src/app/features/commentary/CommentaryScreen.test.tsx",
+        "web/src/app/features/reader/readingModes.test.tsx",
+        "web/src/app/services/accountSession.test.ts",
+        "web/src/app/services/besorahPolicy.test.ts",
+        "web/src/app/services/commentaryCitations.test.ts",
+        "web/src/app/services/dssSpan.test.ts",
+        "web/src/app/services/dssTransformation.test.ts",
+        "web/src/app/services/instanceSurface.test.ts",
+        "web/src/app/services/productCapabilities.test.ts",
+        "web/src/app/services/settingsOrder.test.ts",
+        "web/src/app/services/staticData.loading.test.ts",
+        "web/src/app/services/staticData.test.js",
+        "web/src/app/services/transliterationPolicy.test.ts",
+        "web/src/app/utils/hebrew.test.ts",
+        "web/src/app/utils/routeState.test.ts"
+      ]
+    }
+  },
+  "package_scripts": {
+    "package.json": {},
+    "web/package.json": {
+      "test": "bun test",
+      "typecheck": "tsc --noEmit",
+      "lint": "bunx --bun @biomejs/biome lint build.ts server.ts src scripts shared functions package.json tsconfig.json biome.json",
+      "test:static-data": "bun test src/app/services/staticData.test.js"
+    },
+    "server/package.json": {
+      "test": "bun test",
+      "typecheck": "tsc --noEmit"
+    },
+    "mobile/package.json": {
+      "test": "bun test",
+      "typecheck": "tsc --noEmit",
+      "lint": "expo lint",
+      "preflight": "bun run typecheck && bun run lint && bun run test"
+    }
+  },
+  "workflow_commands": {
+    ".github/workflows/bani-ci.yml": [
+      "- run: pip install pytest",
+      "- run: python -m pytest -q tools/bani/tests"
+    ],
+    ".github/workflows/besorah-quality.yml": [
+      "- run: pip install pytest python-dotenv",
+      "- run: python -m pytest -q tests/test_besorah_remediation.py tests/test_merge_strongs.py tests/test_delitzsch_review.py"
+    ],
+    ".github/workflows/davar-api-ci.yml": [
+      "- run: bundle exec rails zeitwerk:check",
+      "- run: bundle exec rails test",
+      "- run: PYTHONPATH=lib/bore python -m pytest test/bore -q"
+    ],
+    ".github/workflows/greek-source-quality.yml": [
+      "- run: pip install pytest",
+      "- run: python -m pytest -q tests/test_greek_*.py"
+    ],
+    ".github/workflows/hutter-transcription-ci.yml": [
+      "- run: pip install pytest",
+      "- run: python -m pytest -q tests/test_hutter_transcription.py"
+    ],
+    ".github/workflows/knowledge-foundation.yml": [
+      "- run: pip install jsonschema==4.26.0 PyYAML==6.0.3 pytest==9.0.2",
+      "- run: python -m pytest -q tests/test_knowledge_*.py tests/test_commentary_corpus.py",
+      "- run: pip install jsonschema==4.26.0 PyYAML==6.0.3 pytest==9.0.2 python-dotenv",
+      "- run: bun test tests/fixtures/knowledge/legacy-mapping.test.ts",
+      "- run: python -m pytest -q tests/test_greek_importer.py tests/test_greek_release.py tests/test_merge_strongs.py tests/test_delitzsch_review.py",
+      "- run: bun test scripts/knowledge.test.ts"
+    ],
+    ".github/workflows/mobile-ci.yml": [
+      "- name: Run lint",
+      "bun run lint",
+      "bun run test",
+      "bun run typecheck"
+    ],
+    ".github/workflows/python-ci.yml": [
+      "pytest:",
+      "- name: Install pytest",
+      "run: pip install pytest",
+      "run: python -m pytest tests/test_hutter_morphology.py tests/test_hutter_attested_morphology.py -q"
+    ],
+    ".github/workflows/server-ci.yml": [
+      "- run: bun run typecheck",
+      "- run: bun test"
+    ],
+    ".github/workflows/translit-quality.yml": [
+      "- run: pip install pytest python-dotenv",
+      "- run: python -m pytest -q tests/test_translit_benchmark.py tests/test_dss_transformation.py"
+    ],
+    ".github/workflows/web-ci.yml": [
+      "- name: Run lint",
+      "bun run lint",
+      "bun x tsc --noEmit",
+      "bun test src/app/services/staticData.loading.test.ts ../scripts/generate-static-data/lexicon-entries.test.ts",
+      "bun test"
+    ]
+  },
+  "pytest_timing": {
+    "ran": true,
+    "exit_code": 0,
+    "seconds": 42.438,
+    "tail": "........................................................................ [ 19%]\n........................................................................ [ 38%]\n........................................................................ [ 57%]\n........................................................................ [ 77%]\n........................................................................ [ 96%]\n.............                                                            [100%]\n373 passed in 42.09s"
+  },
+  "js_runners": {
+    "bun": null,
+    "ruby": null,
+    "bundle": null
+  }
+}
