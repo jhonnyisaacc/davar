@@ -2,10 +2,20 @@ name: Davar Server
 on:
   pull_request:
     branches: [main, feat/davar-v2]
-    paths: ["server/**", ".github/workflows/server-ci.yml"]
+    paths:
+      - "server/**"
+      - ".github/workflows/server-ci.yml"
+      - "shared/product*.ts"
+      - "contracts/biblical-knowledge/**"
+      - "data/knowledge/registries/**"
   push:
     branches: [main, feat/davar-v2]
-    paths: ["server/**", ".github/workflows/server-ci.yml"]
+    paths:
+      - "server/**"
+      - ".github/workflows/server-ci.yml"
+      - "shared/product*.ts"
+      - "contracts/biblical-knowledge/**"
+      - "data/knowledge/registries/**"
 permissions:
   contents: read
 jobs:
