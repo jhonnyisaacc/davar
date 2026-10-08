@@ -25,6 +25,14 @@ bun run db:migrate   # needs DATABASE_URL
 bun run dev          # PORT=3000 by default
 ```
 
+`bun run setup` installs dependencies, prepares the local
+database, clears `log/*.log`, and starts the server. `--skip-server` stops
+before the server. `--reset` drops and recreates that database after prepare.
+`--dry-run` prints the steps and does not connect. `compose.yml` is Postgres
+17 on 127.0.0.1:5432 for `davar_v2_development`. Setup does not start it.
+An unset `DATABASE_URL` uses that local database. A host other than
+`localhost`, `127.0.0.1`, or `::1` is refused.
+
 Health: `GET /up`.
 
 ## Environment
@@ -32,6 +40,7 @@ Health: `GET /up`.
 | Variable | Required | Purpose |
 | --- | --- | --- |
 | `DATABASE_URL` | yes (except local dev default) | PostgreSQL connection string |
+| `DATABASE_POOL_SIZE` | no (5) | postgres.js connection pool max |
 | `TEST_DATABASE_URL` | tests/CI | Separate database for `bun test` |
 | `PORT` | no (`3000`) | HTTP listen port |
 | `API_PUBLIC_URL` | no (`http://localhost:3000`) | OAuth callback base |
@@ -54,13 +63,16 @@ Health: `GET /up`.
 | `SCENARIO` | sandbox calendar | `pending` or `confirmed` |
 
 Staging/production boot requires the encryption keys, `DATABASE_URL` and an
-HTTPS `API_PUBLIC_URL`, and rejects `DAVAR_DEV_SANDBOX=1` — same as Rails.
+HTTPS `API_PUBLIC_URL`, and rejects `DAVAR_DEV_SANDBOX=1`.
+
+`bun run dev` and `bun run start` let Bun load `.env`. An exported variable
+wins. The server does not pass a dotenv file list.
 
 ## Encryption
 
 Byte-compatible means the HTTP API only: the same `/api/v1` methods, paths,
 and JSON shapes. It does not mean stored bytes. Ciphertext is not
-compatible with Rails ActiveRecord Encryption, and this server does not
+compatible with the older encryption, and this server does not
 try to make it so. No Rails-written data needs to be preserved (Jhonny,
 2026-10-07; `docs/decisions/0001-keep-hono-encryption-key-version.md`).
 Local databases can be reset. `ACTIVE_RECORD_ENCRYPTION_*` is not read,
@@ -117,6 +129,7 @@ DAVAR_DEV_SANDBOX=1 NODE_ENV=development bun run dev
 - `GET /api/v1/development/status` — sandbox capabilities.
 - `bun run sandbox:seed` / `bun run sandbox:reset` — synthetic accounts,
   invitation `DAVAR-LOCAL`, sandbox assemblies and article.
+- `bun run sandbox:calendar [live|pending|confirmed]` — sets the calendar scenario. The default is `live`, which then runs the calendar sync.
 - `SCENARIO=confirmed bun run sandbox:reset` — synthetic INMS observation.
 - Sandbox mail is written under `tmp/sandbox-mail/` and only accepts
   `@example.test` recipients.
@@ -128,6 +141,8 @@ bun run jobs:recover    # release interrupted sponsored consultations
 bun run jobs:calendar   # observation sync; no-op without an explicit payload
 bun run jobs:notify     # Telegram outbox delivery
 bun run import:qahal / import:articles / import:observations  # IMPORT_FILE=... [APPLY=1]
+bun run operator:issue-invitation   # print a 7-digit code, 30 days, 100 uses
+bun run operator:verify-leader      # USER_ID=... sets leader_verified for an eligible leader
 ```
 
 ## Tests
@@ -171,7 +186,7 @@ never logged.
   (recover, calendar sync, Telegram delivery); nothing enqueues at runtime.
   `20261003000000_add_calendar_feed_tracking.rb` **is** ported
   (`drizzle/0002_calendar_feed.sql`).
-- Stored ciphertext is not compatible with ActiveRecord Encryption (see
+- Stored ciphertext uses this server's envelope (see
   Encryption above). Byte-compatible means the HTTP API only, not stored
   bytes.
 - JWKS rotation recovers faster than Rails: an unknown `kid` refetches

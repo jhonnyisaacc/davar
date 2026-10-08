@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+set -euo pipefail
+root="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$root"
+
+py="python"
+if ! command -v python >/dev/null 2>&1; then
+	py="python3"
+fi
+
+echo "check web"
+(
+	cd web
+	bun install
+	bun run lint
+	bun x tsc --noEmit
+	bun test src/app/services/staticData.loading.test.ts ../scripts/generate-static-data/lexicon-entries.test.ts
+	bun run build
+	bun test
+)
+
+echo "check mobile"
+(
+	cd mobile
+	bun install --frozen-lockfile
+	bun run lint
+	bun run test
+	bun run typecheck
+)
+
+echo "check server"
+(
+	cd server
+	export DATABASE_URL="${DATABASE_URL:-postgresql://postgres:postgres@127.0.0.1:5432/davar_server_test}"
+	export TEST_DATABASE_URL="${TEST_DATABASE_URL:-$DATABASE_URL}"
+	export PGHOST="${PGHOST:-127.0.0.1}"
+	bun install --frozen-lockfile
+	bun run typecheck
+	bun run db:migrate
+	bun test
+)
+
+echo "check python"
+"$py" -m pip install pytest
+PYTHONPATH=. "$py" -m pytest tests/test_hutter_morphology.py tests/test_hutter_attested_morphology.py -q
+
+echo "check ok"

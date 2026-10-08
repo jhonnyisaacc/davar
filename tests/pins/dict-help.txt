@@ -1,0 +1,37 @@
+usage: python -m scripts.dict [-h] [--verbose] [--dry-run] COMMAND ...
+
+Hebrew Scripture Processing Toolkit
+
+positional arguments:
+  COMMAND        Available commands
+    lexicon      Lexicon building and management operations
+    verses       Verse processing operations
+    validate     Validate lexicon and verse data quality
+    translate    Translation operations using xAI Grok API
+    sync         Synchronization operations
+
+options:
+  -h, --help     show this help message and exit
+  --verbose, -v  Enable verbose output
+  --dry-run      Preview changes without saving files
+
+Examples:
+  # Build lexicon
+  python -m scripts.dict lexicon build lexicon_100_percent_list.json
+  python -m scripts.dict lexicon build H7965 --update
+
+  # Build verses
+  python -m scripts.dict verses build --book genesis
+
+  # Validate data
+  python -m scripts.dict validate --quick
+
+  # Translate definitions
+  python -m scripts.dict translate run --language es --batch-size 500
+
+  # Consolidate lexicon files
+  python -m scripts.dict lexicon consolidate --preserve-translations
+
+  # Export translation backup
+  python -m scripts.dict sync export-translations
+        

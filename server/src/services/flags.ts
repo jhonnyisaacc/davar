@@ -68,7 +68,7 @@ export async function evaluateFlags(
 			errorsWhileComputingFlags?: unknown;
 			quotaLimited?: unknown;
 		};
-		if (typeof payload !== "object" || payload === null) {
+		if (typeof payload !== "object" || payload === null || Array.isArray(payload)) {
 			throw new DomainError("flags_unavailable", 503);
 		}
 		if (

@@ -3,6 +3,7 @@ import { readFile, readdir } from "node:fs/promises";
 import { join } from "node:path";
 import { DomainError } from "../../lib/errors.js";
 import { mailboxDir } from "../../services/mailer.js";
+import { developmentOpenrouter } from "../../services/provider.js";
 import { sandboxEnabled } from "../../services/sandbox.js";
 import type { AppVariables } from "../deps.js";
 
@@ -36,9 +37,14 @@ developmentRoutes.use("/development/*", gateDevelopment);
 
 developmentRoutes.get("/api/v1/development/status", async (c) => {
 	const base = new URL(c.req.url);
+	const { env } = c.get("deps");
+	const openrouter = developmentOpenrouter(env, env.NODE_ENV ?? "development");
+	const simulations = ["cities", "articles", "calendar-fixtures"];
+	if (!openrouter) simulations.unshift("ai");
 	return c.json({
 		sandbox: true,
-		simulations: ["ai", "cities", "articles", "calendar-fixtures"],
+		simulations,
+		commentary_provider: openrouter ? "openrouter" : "simulation",
 		mailbox_url: `${base.origin}/development/mailbox`,
 	});
 });
