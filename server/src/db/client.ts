@@ -45,7 +45,7 @@ export function createDb(
 		throw new Error("DATABASE_URL is required");
 	}
 	const sql = postgres(databaseUrl, {
-		max: databasePoolMax(env.RAILS_MAX_THREADS),
+		max: databasePoolMax(env.DATABASE_POOL_SIZE),
 	});
 	return { sql, db: drizzle(sql, { schema }) };
 }

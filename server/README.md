@@ -29,6 +29,7 @@ Health: `GET /up`.
 | Variable | Required | Purpose |
 | --- | --- | --- |
 | `DATABASE_URL` | yes (except local dev default) | PostgreSQL connection string |
+| `DATABASE_POOL_SIZE` | no (5) | postgres.js connection pool max |
 | `TEST_DATABASE_URL` | tests/CI | Separate database for `bun test` |
 | `PORT` | no (`3000`) | HTTP listen port |
 | `API_PUBLIC_URL` | no (`http://localhost:3000`) | OAuth callback base |
