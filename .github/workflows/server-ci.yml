@@ -2,10 +2,20 @@ name: Davar Server
 on:
   pull_request:
     branches: [main, feat/davar-v2]
-    paths: ["server/**", ".github/workflows/server-ci.yml"]
+    paths:
+      - "server/**"
+      - ".github/workflows/server-ci.yml"
+      - "shared/product*.ts"
+      - "contracts/biblical-knowledge/**"
+      - "data/knowledge/registries/**"
   push:
     branches: [main, feat/davar-v2]
-    paths: ["server/**", ".github/workflows/server-ci.yml"]
+    paths:
+      - "server/**"
+      - ".github/workflows/server-ci.yml"
+      - "shared/product*.ts"
+      - "contracts/biblical-knowledge/**"
+      - "data/knowledge/registries/**"
 permissions:
   contents: read
 jobs:
@@ -45,16 +55,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          fetch-depth: 0
-      - name: Vendored Bore rules match api/lib/bore
+          python-version: "3.13"
+      - name: Bore calendar tests
+        working-directory: server
         run: |
-          if ! git ls-remote --exit-code origin feat/davar-v2 >/dev/null 2>&1; then
-            echo "feat/davar-v2 is gone; skipping bore parity check"
-            exit 0
-          fi
-          git fetch origin feat/davar-v2 --depth 1
-          rm -rf /tmp/rails-bore && mkdir -p /tmp/rails-bore
-          git archive FETCH_HEAD api/lib/bore | tar -x -C /tmp/rails-bore
-          diff -r --exclude=__pycache__ --exclude=README.davar.md \
-            /tmp/rails-bore/api/lib/bore server/lib/bore
+          python -m pip install 'pytest>=8,<10'
+          PYTHONPATH=lib/bore python -m pytest tests/bore -q

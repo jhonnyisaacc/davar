@@ -33,8 +33,7 @@ export function createApp(deps: AppDeps): Hono<{ Variables: AppVariables }> {
 		await next();
 	});
 
-	// Mirrors api/config/initializers/cors.rb: only /api/* is reachable from
-	// browsers, with the Authorization/Content-Type headers Rails allows.
+	// Only /api/* is reachable from browsers, with Authorization and Content-Type.
 	app.use(
 		"/api/*",
 		cors({

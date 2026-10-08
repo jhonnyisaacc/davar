@@ -1,8 +1,5 @@
 {
 	"copied_from": [
-		"api/test/integration/api_test.rb",
-		"api/test/integration/assemblies_test.rb",
-		"api/test/integration/feature_availability_test.rb",
 		"server/tests/fixtures/contract.json"
 	],
 	"exact": {

@@ -1,18 +1,10 @@
-# Davar API — Bun + Hono port (`server/`)
+# Davar API — Bun + Hono (`server/`)
 
-Port of the Rails 8.1 / PostgreSQL API introduced in PR #250
-(`feat/davar-v2`) to Bun + Hono. The existing Expo (`mobile/`) and React
-(`web/`) clients keep calling the same `/api/v1` paths with no product
-rewrites. Byte-compatible means that HTTP API only, not stored ciphertext;
-see Encryption below. Scripture reading, static assets and the
-SQLite/static-data path are untouched — this server only owns the
-authenticated product domains.
-
-Source of truth for behavior is the Rails tree in `api/` on `feat/davar-v2`
-(routes, controllers, services, policies, serializers, jobs, mailer,
-migrations and tests). Where this README and that tree disagree, the Rails
-behavior wins. Stored encryption is the exception: it stays the Hono scheme
-in Encryption below.
+Product API for the Expo (`mobile/`) and React (`web/`) clients. They keep
+calling the same `/api/v1` paths. Byte-compatible means that HTTP API only,
+not stored ciphertext; see Encryption below. Scripture reading, static
+assets and the SQLite/static-data path are untouched — this server only
+owns the authenticated product domains.
 
 ## Run
 
@@ -57,7 +49,7 @@ Health: `GET /up`.
 | `FREE_AI_KEY/FREE_AI_MODEL[/FREE_AI_PROVIDER]` | no | Single sponsored consultation when the user has no provider connection |
 | `TELEGRAM_BOT_TOKEN` | no | Enables the Telegram notification worker |
 | `PYTHON_BIN` | no (`python3`) | Interpreter for the pinned Bore bridge |
-| `WEB_ORIGINS` | no (Rails defaults) | Comma-separated browser origins allowed on `/api/*` |
+| `WEB_ORIGINS` | no (local defaults) | Comma-separated browser origins allowed on `/api/*` |
 | `TRUSTED_PROXIES` | no (loopback + private ranges) | Comma-separated IPs/IPv4 CIDRs whose `X-Forwarded-For` is honored |
 | `BORE_BRIDGE_PATH` | no (`server/lib/bore/bridge.py`) | Override for the calendar bridge |
 | `IMPORT_FILE` / `APPLY` | import commands | Reviewed-payload file; dry run unless `APPLY=1` |
@@ -128,9 +120,8 @@ identity digests and is not seamless (lookups would miss).
 
 ## Database
 
-`drizzle/0001_davar_domain.sql` mirrors the Rails domain migrations
-(`20260930000001`–`20260930000005`, including notification delivery,
-observation provenance and consent columns). Solid Queue is not ported.
+`drizzle/0001_davar_domain.sql` is the domain schema (notification delivery,
+observation provenance, and consent columns). There is no queue table.
 Drizzle ORM + `postgres` (postgres.js) is the data layer; `src/db/schema.ts`
 is the typed counterpart of the SQL migration.
 
@@ -183,7 +174,7 @@ bun run typecheck
 bun test
 ```
 
-`tests/` ports the Rails request/service assertions: authz on every route,
+`tests/` covers the product request and service assertions: authz on every route,
 the handoff/PKCE/magic-link state machine, assembly decision permissions,
 the single sponsored-consultation rule, calendar responses against the pinned
 Bore bridge, and `tests/fixtures/contract.json`, which snapshots the JSON
@@ -200,7 +191,7 @@ cities search/update; assemblies index/leaders/show/create/update/join/
 leave/members/decide; endorsements; articles; conversations + messages +
 memory reset; provider connections; calendar locations/today/upcoming.
 
-Error codes and status mapping come from Rails `DomainError`, including
+Error codes and status mapping include
 `invalid_return_uri`, `provider_not_configured` (503), `invalid_email`,
 `invalid_state`/`expired_or_used_link`/`invalid_handoff`/`expired_handoff`
 (401). Validation failures are `validation_failed` (422); missing records
@@ -208,30 +199,25 @@ are `not_found` (404). Only digests (SHA-256 hex) are stored for state,
 handoff codes and session token lookups; raw tokens, codes and verifiers are
 never logged.
 
-## Intentional gaps (verified against the tip of `feat/davar-v2`)
+## Behavior notes
 
-- `20261003000001_add_solid_queue.rb` is not ported: there is no queue
-  table and no hourly finished-job purge. The in-process scheduler calls
-  the job functions directly (`docs/decisions/0014-in-process-job-scheduler.md`).
-  `20261003000000_add_calendar_feed_tracking.rb` **is** ported
-  (`drizzle/0002_calendar_feed.sql`).
-- Stored ciphertext uses this server's envelope (see
-  Encryption above). Byte-compatible means the HTTP API only, not stored
-  bytes.
-- JWKS rotation recovers faster than Rails: an unknown `kid` refetches
-  after a 30s cooldown instead of waiting out Rails' hourly cache. The
-  `algorithms: ["RS256"]` pin matches Rails exactly.
-- `resolveAccount` retries a lost insert-or-find race at most 3 times;
-  Rails retries indefinitely. The retry runs behind a savepoint either way.
-- `AUTH_RETURN_URIS` entries are trimmed and empties dropped; Rails
-  compares untrimmed (a sloppy env value works here that Rails rejects).
-- Query-string `notification_consent=true` no longer opts in (Rails'
-  `== true` ignores it); only a JSON boolean does.
-- `server/lib/bore/` is a byte-identical consumer copy of `api/lib/bore`
-  (plus this repo's `README.davar.md`); `api/` is canonical. CI's
-  `bore-parity` job diffs the two trees.
-- Live OAuth/SMTP/AI providers are configuration, not code; the
-  fixture/disabled paths from Rails are preserved instead.
+- There is no queue table and no hourly finished-job purge. The in-process
+  scheduler calls the job functions directly
+  (`docs/decisions/0014-in-process-job-scheduler.md`). Calendar feed tracking
+  is `drizzle/0002_calendar_feed.sql`.
+- Stored ciphertext uses this server's envelope (see Encryption above).
+  Byte-compatible means the HTTP API only, not stored bytes.
+- An unknown JWKS `kid` refetches after a 30s cooldown. Signing algorithms
+  stay `["RS256"]`.
+- `resolveAccount` retries a lost insert-or-find race at most 3 times,
+  behind a savepoint.
+- `AUTH_RETURN_URIS` entries are trimmed and empties dropped.
+- Query-string `notification_consent=true` does not opt in; only a JSON
+  boolean does.
+- `server/lib/bore/` is the calendar engine. CI runs its pytest suite with
+  `PYTHONPATH=lib/bore`.
+- Live OAuth, SMTP, and AI providers are configuration. Unconfigured
+  providers stay unavailable; the sandbox keeps the fixture paths.
 
 Rules the code follows (all learned from bugs above): no external I/O
 inside DB transactions (provider lookup runs before the callback
