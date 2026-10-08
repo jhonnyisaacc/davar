@@ -65,7 +65,7 @@ async function withSilentConsole(run: () => Promise<void>): Promise<string> {
 }
 
 describe("hosted SMTP password", () => {
-	test("SMTP_PASSWORD authenticates hosted mail", async () => {
+	test("SMTP_PASS authenticates hosted mail", async () => {
 		resetTransport();
 		await sendSignInMail({
 			...message,
@@ -73,57 +73,19 @@ describe("hosted SMTP password", () => {
 				SMTP_HOST: "smtp.example.test",
 				SMTP_PORT: "587",
 				SMTP_USER: "mailer",
-				SMTP_PASSWORD: "password-from-rails",
+				SMTP_PASS: "password-from-hono",
 			},
 		});
 		expect(transports).toHaveLength(1);
 		expect(transports[0]?.host).toBe("smtp.example.test");
 		expect(transports[0]?.port).toBe(587);
-		expect(transports[0]?.auth).toEqual({ user: "mailer", pass: "password-from-rails" });
-	});
-
-	test("SMTP_PASS still authenticates when SMTP_PASSWORD is unset", async () => {
-		resetTransport();
-		await sendSignInMail({
-			...message,
-			env: {
-				SMTP_USER: "mailer",
-				SMTP_PASS: "password-from-hono",
-			},
-		});
 		expect(transports[0]?.auth).toEqual({ user: "mailer", pass: "password-from-hono" });
-	});
-
-	test("SMTP_PASSWORD wins when both passwords are set", async () => {
-		resetTransport();
-		await sendSignInMail({
-			...message,
-			env: {
-				SMTP_USER: "mailer",
-				SMTP_PASSWORD: "password-from-rails",
-				SMTP_PASS: "password-from-hono",
-			},
-		});
-		expect(transports[0]?.auth?.pass).toBe("password-from-rails");
-	});
-
-	test("an empty SMTP_PASSWORD falls back to SMTP_PASS", async () => {
-		resetTransport();
-		await sendSignInMail({
-			...message,
-			env: {
-				SMTP_USER: "mailer",
-				SMTP_PASSWORD: "",
-				SMTP_PASS: "password-from-hono",
-			},
-		});
-		expect(transports[0]?.auth?.pass).toBe("password-from-hono");
 	});
 
 	test("a delivery failure raises and the password is not printed", async () => {
 		resetTransport();
 		deliveryError = new Error("smtp delivery failed");
-		const secret = "password-from-rails";
+		const secret = "password-from-hono";
 		let thrown: unknown;
 		const printed = await withSilentConsole(async () => {
 			try {
@@ -131,7 +93,7 @@ describe("hosted SMTP password", () => {
 					...message,
 					env: {
 						SMTP_USER: "mailer",
-						SMTP_PASSWORD: secret,
+						SMTP_PASS: secret,
 					},
 				});
 			} catch (error) {
@@ -156,7 +118,6 @@ describe("hosted SMTP password", () => {
 				rootDir: root,
 				env: {
 					SMTP_USER: "mailer",
-					SMTP_PASSWORD: "password-from-rails",
 					SMTP_PASS: "password-from-hono",
 				},
 			});
