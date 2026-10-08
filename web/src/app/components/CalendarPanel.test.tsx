@@ -5,7 +5,7 @@ import type { CalendarResponse } from "@davar/shared/productContracts";
 import { Window } from "happy-dom";
 import { calendarClient } from "../hooks/useCalendar";
 import { type AppLanguage, translate } from "../hooks/useTranslation";
-import { CalendarPanel } from "./CalendarPanel";
+import { CalendarPanel } from "../features/calendar/CalendarPanel";
 
 const dom = new Window({ url: "http://localhost:5300/calendar" });
 for (const key of [

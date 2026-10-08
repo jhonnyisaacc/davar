@@ -30,9 +30,9 @@ import {
 	Wheat,
 } from "lucide-react";
 import { type ReactNode, useState } from "react";
-import { calendarClient, useCalendar } from "../hooks/useCalendar";
-import { useCalendarWorkspace } from "../hooks/useCalendarWorkspace";
-import { type AppLanguage, useTranslation } from "../hooks/useTranslation";
+import { calendarClient, useCalendar } from "../../hooks/useCalendar";
+import { useCalendarWorkspace } from "../../hooks/useCalendarWorkspace";
+import { type AppLanguage, useTranslation } from "../../hooks/useTranslation";
 
 const icons: Record<CalendarIcon, LucideIcon> = {
 	flame: Flame,

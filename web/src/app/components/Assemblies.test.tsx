@@ -27,7 +27,9 @@ Object.defineProperty(globalThis, "IS_REACT_ACT_ENVIRONMENT", {
 const { act, render, cleanup, fireEvent, waitFor } = await import(
 	"@testing-library/react"
 );
-const { AssembliesWorkspace } = await import("./AssembliesWorkspace");
+const { AssembliesWorkspace } = await import(
+	"../features/assemblies/AssembliesWorkspace"
+);
 const { AssembliesEntry } = await import("./AssembliesEntry");
 const { productApi } = await import("../services/productApi");
 const { ProductApiError } = await import("@davar/shared/productClient");

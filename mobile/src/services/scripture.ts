@@ -15,7 +15,18 @@ import {
   dssTranslitChapterAssetPath,
   translitBookAssetPath,
   translitChapterAssetPath,
+  ts2009ChapterAssetPath,
 } from "@davar/shared/staticDataPaths";
+import {
+  besBookAssetPath,
+  besorahChapterAssetPath,
+  hutterChapterAssetPath,
+  oeChapterAssetPath,
+  ts2009BookAssetPath,
+  ts2009BookFileName,
+  ts2009BookFileStems,
+  tthBookAssetPath,
+} from "@davar/shared/scripturePaths";
 import type { TranslationFootnote, WordResponse } from "@/src/types/api";
 import {
   fetchHebrewVerses,
@@ -43,75 +54,6 @@ import { toDisplayVerseId } from "@/src/services/verseIdentity";
 // Chapter-level cache for TS2009 static JSON (matches web approach)
 const ts2009ChapterCache = new Map<string, Promise<Map<number, string> | null>>();
 let ts2009ChapterFilesUnavailable = false;
-
-const TS2009_BOOK_FILE_MAP: Record<string, string> = {
-  genesis: "bereshit",
-  exodus: "shemoth",
-  leviticus: "wayyiqra",
-  numbers: "bemidbar",
-  deuteronomy: "debarim",
-  joshua: "yehoshua",
-  judges: "shophetim",
-  samuel1: "samuel_1",
-  samuel2: "samuel_2",
-  kings1: "kings_1",
-  kings2: "kings_2",
-  chronicles1: "chronicles_1",
-  chronicles2: "chronicles_2",
-  nehemiah: "nehemyah",
-  esther: "ester",
-  job: "iyob",
-  psalms: "tehillim",
-  ecclesiastes: "qoheleth",
-  songofsolomon: "shir_hashirim",
-  isaiah: "yeshayahu",
-  jeremiah: "yirmeyahu",
-  lamentations: "ekah",
-  ezekiel: "yehezqel",
-  obadiah: "obadyah",
-  jonah: "yonah",
-  ruth: "ruth",
-  ezra: "ezra",
-  proverbs: "mishlei",
-  daniel: "daniel",
-  hosea: "hosea",
-  joel: "yoel",
-  amos: "amos",
-  micah: "micah",
-  nahum: "nahum",
-  habakkuk: "habakkuk",
-  zephaniah: "zephaniah",
-  haggai: "haggai",
-  zechariah: "zechariah",
-  malachi: "malachi",
-  matthew: "mattithyahu",
-  mark: "marqos",
-  luke: "lugqas",
-  john: "yohanan",
-  acts: "maasei",
-  romans: "romiyim",
-  corinthians1: "corinthians_1",
-  corinthians2: "corinthians_2",
-  galatians: "galatiyim",
-  ephesians: "ephsiyim",
-  philippians: "pilipiyim",
-  colossians: "qolasim",
-  thessalonians1: "thessalonians_1",
-  thessalonians2: "thessalonians_2",
-  timothy1: "timothy_1",
-  timothy2: "timothy_2",
-  titus: "titos",
-  philemon: "pileymon",
-  hebrews: "ibrim",
-  james: "yaaqob",
-  peter1: "peter_1",
-  peter2: "peter_2",
-  john1: "john_1",
-  john2: "john_2",
-  john3: "john_3",
-  jude: "yehudah",
-  revelation: "hazon",
-};
 
 type Ts2009BookVerse = {
   number?: number;
@@ -160,31 +102,20 @@ const extractTs2009ChapterFromBook = (
   return Array.isArray(chapterEntry?.verses) ? chapterEntry.verses : null;
 };
 
-const getTs2009BookFileCandidates = (bookId: string): string[] => {
-  const normalized = bookId.toLowerCase();
-  const mapped = TS2009_BOOK_FILE_MAP[normalized];
-  const underscoreVariant = normalized.replace(/(\D)(\d+)$/, "$1_$2");
-  const stems = [mapped, normalized, underscoreVariant].filter(
-    (stem): stem is string => Boolean(stem),
-  );
-
-  return [...new Set(stems)];
-};
-
 const fetchTs2009ChapterFromBookFile = async (
   bookId: string,
   chapter: number,
 ): Promise<Map<number, string> | null> => {
-  for (const fileStem of getTs2009BookFileCandidates(bookId)) {
+  for (const fileStem of ts2009BookFileStems(bookId)) {
     try {
       let staticBook: Ts2009BookPayload;
       try {
         staticBook = await ts2009Request<Ts2009BookPayload>(
-          `${fileStem}.json`,
+          ts2009BookFileName(fileStem),
         );
       } catch {
         staticBook = await staticDataRequest<Ts2009BookPayload>(
-          `ts2009/${fileStem}.json`,
+          ts2009BookAssetPath(fileStem),
         );
       }
 
@@ -232,7 +163,7 @@ const fetchTs2009ChapterStatic = (
       try {
         const staticChapter = await staticDataRequest<{
           verses?: Record<string, string>;
-        }>(`ts2009/${bookId}/${chapter}.json`);
+        }>(ts2009ChapterAssetPath(bookId, chapter));
 
         const verses = staticChapter.verses ?? {};
         const verseMap = new Map<number, string>();
@@ -680,7 +611,7 @@ const loadStaticTranslationsForChapter = async (
     if (tthBookId) {
       try {
         const translationBook = await staticDataRequest<StaticTranslationBook>(
-          `tth/${tthBookId}.json`,
+          tthBookAssetPath(tthBookId),
         );
 
         for (const translationChapter of requiredTranslationChapters) {
@@ -727,7 +658,7 @@ const loadStaticTranslationsForChapter = async (
     // Fill genuinely missing TTH verses from BES.
     try {
       const translationBook = await staticDataRequest<StaticTranslationBook>(
-        `bes/${bookId}.json`,
+        besBookAssetPath(bookId),
       );
 
       for (const translationChapter of requiredTranslationChapters) {
@@ -1109,11 +1040,11 @@ const loadStaticSourceChapterVerses = async (
   chapter: number,
   besorahTextVersion: BesorahTextVersion = "delitzsch",
 ): Promise<StaticChapterVerse[]> => {
-  const besorahSource =
-    besorahTextVersion === "hutter" ? "hutter" : "besorah";
   const chapterSources = [
-    `oe/${bookId}/${chapter}.json`,
-    `${besorahSource}/${bookId}/${chapter}.json`,
+    oeChapterAssetPath(bookId, chapter),
+    besorahTextVersion === "hutter"
+      ? hutterChapterAssetPath(bookId, chapter)
+      : besorahChapterAssetPath(bookId, chapter),
   ];
   const sourceErrors: string[] = [];
 
@@ -1188,7 +1119,7 @@ const fetchChapterVersesStatic = async (
   if (!options?.hebrewOnly && options?.language === "es") {
     const tthBookId = resolveTthBookId(bookId);
     if (tthBookId) {
-      void staticDataRequest(`tth/${tthBookId}.json`).catch(() => undefined);
+      void staticDataRequest(tthBookAssetPath(tthBookId)).catch(() => undefined);
     }
   }
 
