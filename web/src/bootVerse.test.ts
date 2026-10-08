@@ -67,3 +67,40 @@ test("translation-only reading and other screens stay quiet", () => {
 	expect(readEarlyVerseTarget("/", { translationOnly: true })).toBeNull();
 	expect(readEarlyVerseTarget("/commentary", null)).toBeNull();
 });
+
+const earlyApi = globalThis as typeof globalThis & {
+	__davarEarlyDisplayWord: (
+		text: string,
+		stored: { showCantillation?: boolean; showNikud?: boolean } | null,
+	) => string;
+	__davarEarlyTranslationLines: (
+		wordCount: number,
+		columnWidth: number,
+	) => number[];
+};
+
+test("early words sit in a block so the spaces between them remain", () => {
+	const rule = html.match(/\.early-verse\s*\{[^}]*\}/)?.[0] ?? "";
+	expect(rule).toContain("display: block");
+	expect(rule).toContain("word-spacing: 0.24em");
+});
+
+test("early words match the settled verse, without cantillation or slash marks", () => {
+	expect(
+		earlyApi.__davarEarlyDisplayWord("בְּ/רֵאשִׁ֖ית", {
+			showCantillation: false,
+		}),
+	).toBe("בְּרֵאשִׁית");
+});
+
+test("the translation skeleton is one bar per line", () => {
+	const wide = earlyApi.__davarEarlyTranslationLines(7, 864);
+	expect(wide).toHaveLength(1);
+	expect(wide[0]).toBeGreaterThan(200);
+	expect(wide[0]).toBeLessThan(864);
+	const narrow = earlyApi.__davarEarlyTranslationLines(7, 310);
+	expect(narrow.length).toBeGreaterThan(1);
+	expect(narrow[0]).toBe(310);
+	expect(narrow[narrow.length - 1]).toBeGreaterThan(0);
+	expect(narrow[narrow.length - 1]).toBeLessThan(310);
+});
