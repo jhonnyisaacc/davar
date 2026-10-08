@@ -55,7 +55,7 @@ def test_only_legacy_manifest_clock_values_are_ignored(tmp_path):
 
 def test_optional_shaul_root_is_pinned_and_read_only(tmp_path):
     shaul = tmp_path / "shaul"
-    manifest, _ = pinned_inputs(ROOT)
+    manifest, _ = pinned_inputs(ROOT, validator=Validator(ROOT))
     for item in manifest["inputs"]:
         if item["owner"] != "shaul":
             continue

@@ -1,7 +1,5 @@
 import { FullChapterView } from "@/src/components/FullChapterView";
 import {
-  memo,
-  type ReactNode,
   useCallback,
   useContext,
   useEffect,
@@ -16,21 +14,11 @@ import {
   Modal,
   Pressable,
   Platform,
-  StyleSheet,
   Text,
   ToastAndroid,
   View,
   useWindowDimensions,
 } from "react-native";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import Reanimated, {
-  cancelAnimation,
-  runOnJS,
-  useAnimatedScrollHandler,
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-} from "react-native-reanimated";
 import {
   SafeAreaView,
   useSafeAreaInsets,
@@ -43,11 +31,11 @@ import type { ParamListBase } from "expo-router/react-navigation";
 import { VerseCard } from "@/src/components/VerseCard";
 import { VerseCardSkeleton } from "@/src/components/VerseCardSkeleton";
 import { getNavigationDockContentPadding } from "@/src/constants/navigationDock";
-import {
-  getVerseSwipeDirection,
-  VERSE_SCROLL_EDGE_EPSILON as EDGE_EPSILON,
-} from "@/src/services/versePaging";
-import { WordAnalysisBottomSheet } from "@/src/components/WordAnalysisBottomSheet";
+import { VERSE_SCROLL_EDGE_EPSILON as EDGE_EPSILON } from "@/src/services/versePaging";
+import { ChapterFlow } from "@/src/features/reader/ChapterFlow";
+import { VersePage } from "@/src/features/reader/VersePage";
+import { WordAnalysisBottomSheet } from "@/src/features/reader/WordAnalysisBottomSheet";
+import { createStyles } from "@/src/features/reader/verseDetailStyles";
 import {
   NavigationSheet,
   type NavigationSheetMethods,
@@ -56,7 +44,7 @@ import { CalendarDayPill } from "@/src/features/calendar/CalendarDayPill";
 import { useCalendar } from "@/src/features/calendar/useCalendar";
 import { readingCalendarPill } from "@davar/shared/calendarPresentation";
 import { BookChapterPill } from "@/src/components/ui/BookChapterPill";
-import { getColors, getResponsiveLayout, spacing, typography } from "@/src/theme";
+import { getColors, getResponsiveLayout, spacing } from "@/src/theme";
 import { fetchMetadata } from "@/src/services/metadata";
 import type { BookResponse, TranslationFootnote } from "@/src/types/api";
 import {
@@ -71,620 +59,14 @@ import {
   saveSwipeUpHintCount,
 } from "@/src/services/storage";
 import { formatBookDisplayName } from "../utils/bookNameFormatter";
-import {
-  sanitizeEmTags,
-  buildMarkerRegex,
-  createFootnoteLookup,
-  DEFAULT_FOOTNOTE_MARKER_COLOR,
-  collectMarkerMatches,
-  resolveFootnoteForMarker,
-  formatMarkerForDisplay,
-} from "@/src/utils/footnoteUtils";
-import { stripCantillation, stripMeteg, stripNikud } from "@/src/utils/hebrew";
+import { stripNikud } from "@/src/utils/hebrew";
 import { resolveGreekOverlayLanguage } from "@/src/utils/translationConfig";
 
 const SWIPE_HINT_MAX_SHOWS = 5;
 
-const renderTranslationSegment = (
-  text: string,
-  keyPrefix: string,
-  markerRegex: RegExp | null,
-  footnoteLookup: Map<string, TranslationFootnote>,
-  onFootnotePress?: (footnote: TranslationFootnote) => void,
-  isItalic = false,
-  markerColor = DEFAULT_FOOTNOTE_MARKER_COLOR,
-  renderUnmappedSuperscripts = false,
-): ReactNode[] => {
-  const sanitized = sanitizeEmTags(text);
-  if (!sanitized) {
-    return [];
-  }
-
-  const markerMatches = collectMarkerMatches(
-    sanitized,
-    markerRegex,
-    renderUnmappedSuperscripts,
-  );
-
-  if (markerMatches.length === 0) {
-    return isItalic
-      ? [
-          <Text key={`${keyPrefix}-italic`} style={{ fontStyle: "italic" }}>
-            {sanitized}
-          </Text>,
-        ]
-      : [sanitized];
-  }
-  const nodes: ReactNode[] = [];
-
-  let lastIndex = 0;
-
-  for (let i = 0; i < markerMatches.length; i += 1) {
-    const markerMatch = markerMatches[i];
-    const plainText = sanitized.slice(lastIndex, markerMatch.start);
-    if (plainText) {
-      if (isItalic) {
-        nodes.push(
-          <Text key={`${keyPrefix}-text-${i}`} style={{ fontStyle: "italic" }}>
-            {plainText}
-          </Text>,
-        );
-      } else {
-        nodes.push(plainText);
-      }
-    }
-
-    const marker = markerMatch.content;
-    const footnote = resolveFootnoteForMarker(footnoteLookup, marker);
-    const markerText = formatMarkerForDisplay(marker);
-
-    nodes.push(
-      <Text
-        key={`${keyPrefix}-marker-${i}`}
-        onPress={
-          footnote && onFootnotePress
-            ? () => onFootnotePress(footnote)
-            : undefined
-        }
-        style={{
-          color: markerColor,
-          fontSize: typography.sizes.caption,
-          lineHeight: typography.sizes.caption + 2,
-          includeFontPadding: false,
-          transform: [{ translateY: -5 }],
-        }}
-      >
-        {markerText}
-      </Text>,
-    );
-
-    lastIndex = markerMatch.end;
-  }
-
-  const trailingText = sanitized.slice(lastIndex);
-  if (trailingText) {
-    if (isItalic) {
-      nodes.push(
-        <Text key={`${keyPrefix}-text-tail`} style={{ fontStyle: "italic" }}>
-          {trailingText}
-        </Text>,
-      );
-    } else {
-      nodes.push(trailingText);
-    }
-  }
-
-  return nodes;
-};
-
-const renderTranslationFlowText = (
-  translation: string,
-  footnotes?: TranslationFootnote[],
-  onFootnotePress?: (footnote: TranslationFootnote) => void,
-  markerColor = DEFAULT_FOOTNOTE_MARKER_COLOR,
-  renderUnmappedSuperscripts = false,
-): ReactNode[] => {
-  const footnoteLookup = createFootnoteLookup(footnotes);
-  const markerRegex = buildMarkerRegex(footnoteLookup);
-
-  const segments: ReactNode[] = [];
-  const emPattern = /<em>(.*?)<\/em>/gi;
-  let lastIndex = 0;
-  let match: RegExpExecArray | null;
-  let index = 0;
-
-  while ((match = emPattern.exec(translation)) !== null) {
-    const start = match.index;
-    const end = start + match[0].length;
-
-    const plainText = translation.slice(lastIndex, start);
-    if (plainText) {
-      segments.push(
-        ...renderTranslationSegment(
-          plainText,
-          `plain-${index}`,
-          markerRegex,
-          footnoteLookup,
-          onFootnotePress,
-          false,
-          markerColor,
-          renderUnmappedSuperscripts,
-        ),
-      );
-    }
-
-    segments.push(
-      ...renderTranslationSegment(
-        match[1],
-        `em-${index}`,
-        markerRegex,
-        footnoteLookup,
-        onFootnotePress,
-        true,
-        markerColor,
-        renderUnmappedSuperscripts,
-      ),
-    );
-
-    lastIndex = end;
-    index += 1;
-  }
-
-  const trailingText = translation.slice(lastIndex);
-  if (trailingText) {
-    segments.push(
-      ...renderTranslationSegment(
-        trailingText,
-        "trailing",
-        markerRegex,
-        footnoteLookup,
-        onFootnotePress,
-        false,
-        markerColor,
-        renderUnmappedSuperscripts,
-      ),
-    );
-  }
-
-  return segments;
-};
-
 type TabPressEvent = {
   preventDefault: () => void;
 };
-
-const createStyles = (colors: ReturnType<typeof getColors>, layout: ReturnType<typeof getResponsiveLayout>) =>
-  StyleSheet.create({
-    safeArea: {
-      flex: 1,
-      backgroundColor: colors.background,
-    },
-    container: {
-      flex: 1,
-    },
-    navigationRow: {
-      position: "absolute",
-      top: spacing[16],
-      left: 0,
-      right: 0,
-      alignItems: "center",
-      zIndex: 10,
-      elevation: 10,
-    },
-    swipeHintRow: {
-      position: "absolute",
-      left: spacing[4],
-      right: spacing[4],
-      alignItems: "center",
-      zIndex: 12,
-      elevation: 12,
-    },
-    swipeHintText: {
-      fontFamily: typography.families.latinUI,
-      fontSize: 10,
-      color: colors.textSecondary,
-      textAlign: "center",
-    },
-    chapterTranslationScroll: {
-      flex: 1,
-      paddingHorizontal: layout.horizontalPadding,
-      paddingBottom: spacing[8],
-    },
-    chapterTranslationContent: {
-      width: "100%",
-      maxWidth: layout.contentMaxWidth,
-      alignSelf: "center",
-      paddingTop: spacing[16],
-      paddingBottom: spacing[16],
-    },
-    chapterVerseList: {
-      rowGap: layout.chapterGap,
-    },
-    chapterTranslationFlowText: {
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.body + 1,
-      lineHeight: (typography.sizes.body + 1) * typography.lineHeights.body,
-      color: colors.textPrimary,
-      opacity: 0.84,
-    },
-    chapterTranslationVerseNumber: {
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.caption + 1,
-      color: colors.textPrimary,
-      opacity: 0.68,
-      letterSpacing: 0.8,
-      marginRight: spacing[1],
-    },
-    chapterHebrewFlowText: {
-      fontFamily: typography.families.hebrewScripture,
-      fontSize: typography.sizes.hebrewVerseMedium * 1.06,
-      lineHeight:
-        typography.sizes.hebrewVerseMedium * typography.lineHeights.hebrewScripture,
-      color: colors.textPrimary,
-      textAlign: "right",
-      writingDirection: "rtl",
-      letterSpacing: 0.3,
-    },
-    chapterHebrewVerseNumber: {
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.caption + 1,
-      color: colors.textPrimary,
-      opacity: 0.68,
-      letterSpacing: 0.8,
-    },
-    chapterFootnoteOverlay: {
-      flex: 1,
-      backgroundColor: "rgba(0, 0, 0, 0.35)",
-      justifyContent: "center",
-      alignItems: "center",
-      paddingHorizontal: spacing[6],
-    },
-    chapterFootnoteCard: {
-      width: "100%",
-      // Percentage width prevents phone-sized dialogs on iPad and split view.
-      maxWidth: layout.modalWidth,
-      borderRadius: 14,
-      paddingHorizontal: spacing[5],
-      paddingVertical: spacing[4],
-      backgroundColor: colors.neomorphBg,
-      borderWidth: 1,
-      borderColor: colors.neomorphBorder,
-    },
-    chapterFootnoteHeading: {
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.caption,
-      color: colors.textSecondary,
-      marginBottom: spacing[2],
-      textTransform: "uppercase",
-      letterSpacing: 0.8,
-    },
-    chapterFootnoteWord: {
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.body,
-      color: colors.textPrimary,
-      fontWeight: "600",
-      marginBottom: spacing[2],
-    },
-    chapterFootnoteText: {
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.body,
-      lineHeight: typography.sizes.body * typography.lineHeights.body,
-      color: colors.textPrimary,
-    },
-  });
-
-type VersePageProps = {
-  item: DisplayVerse;
-  bookLabel: string;
-  pillVisibility: Animated.Value;
-  pillVisible: boolean;
-  pageHeight: number;
-  topPadding: number;
-  bottomPadding: number;
-  showWordHint: boolean;
-  isActive: boolean;
-  isSelectedVerse: boolean;
-  canSwipePrevious: boolean;
-  canSwipeNext: boolean;
-  isBesorah: boolean;
-  onVersePress: () => void;
-  selectedWord: DisplayVerse["words"][number] | null;
-  onWordPress: (
-    word: DisplayVerse["words"][number] | null,
-    verseId: string,
-  ) => void;
-  onNonHebrewPress: () => void;
-  onMetricsChange: (
-    verseId: string,
-    metrics: {
-      canScroll: boolean;
-      offsetY: number;
-      contentHeight: number;
-      viewportHeight: number;
-    },
-  ) => void;
-  onEdgeSwipe: (verseId: string, direction: "previous" | "next") => void;
-  onScrollBegin?: () => void;
-};
-
-const HEBREW_PRESS_SUPPRESSION_MS = 250;
-
-const VersePageComponent = ({
-  item,
-  bookLabel,
-  pillVisibility,
-  pillVisible,
-  pageHeight,
-  topPadding,
-  bottomPadding,
-  showWordHint,
-  isActive,
-  isSelectedVerse,
-  canSwipePrevious,
-  canSwipeNext,
-  isBesorah,
-  onVersePress,
-  selectedWord,
-  onWordPress,
-  onNonHebrewPress,
-  onMetricsChange,
-  onEdgeSwipe,
-  onScrollBegin,
-}: VersePageProps) => {
-  const [contentHeight, setContentHeight] = useState(0);
-  const [viewportHeight, setViewportHeight] = useState(0);
-  const { width, height } = useWindowDimensions();
-  const layout = getResponsiveLayout(width, height);
-  const horizontalPadding = layout.isTablet ? layout.horizontalPadding : spacing[4];
-  const canScroll = contentHeight > viewportHeight + EDGE_EPSILON;
-  const effectiveTopPadding = canScroll ? topPadding : spacing[6];
-  const lastHebrewPressInRef = useRef(0);
-  // A swipe ending over a word must not also open its analysis sheet.
-  const isSwipingRef = useRef(false);
-
-  const handleTouchStart = useCallback(() => {
-    isSwipingRef.current = false;
-  }, []);
-
-  const handleSwipeStart = useCallback(() => {
-    if (isSwipingRef.current) return;
-    isSwipingRef.current = true;
-    onScrollBegin?.();
-  }, [onScrollBegin]);
-
-  const handleVersePress = useCallback(() => {
-    if (!isSwipingRef.current) onVersePress();
-  }, [onVersePress]);
-
-  const handleWordPress = useCallback(
-    (word: DisplayVerse["words"][number]) => {
-      if (!isSwipingRef.current) onWordPress(word, item.id);
-    },
-    [item.id, onWordPress],
-  );
-
-  const markHebrewPressIn = useCallback(() => {
-    lastHebrewPressInRef.current = Date.now();
-  }, []);
-
-  const handleNonHebrewAreaPress = useCallback(() => {
-    // Ignore bubbling taps immediately following Hebrew word/verse interactions.
-    if (
-      isSwipingRef.current ||
-      Date.now() - lastHebrewPressInRef.current < HEBREW_PRESS_SUPPRESSION_MS
-    ) {
-      return;
-    }
-    onNonHebrewPress();
-  }, [onNonHebrewPress]);
-
-  useEffect(() => {
-    onMetricsChange(item.id, {
-      canScroll,
-      offsetY: 0,
-      contentHeight,
-      viewportHeight,
-    });
-  }, [canScroll, contentHeight, item.id, onMetricsChange, viewportHeight]);
-
-  const scrollOffsetY = useSharedValue(0);
-  const swipeStartOffsetY = useSharedValue(0);
-  const nativeScrollGesture = useMemo(() => Gesture.Native(), []);
-  const handleScroll = useAnimatedScrollHandler(
-    (event) => {
-      scrollOffsetY.value = event.contentOffset.y;
-      if (!isActive) {
-        return;
-      }
-
-      runOnJS(onMetricsChange)(item.id, {
-        canScroll,
-        offsetY: event.contentOffset.y,
-        contentHeight: event.contentSize.height,
-        viewportHeight: event.layoutMeasurement.height,
-      });
-    },
-    [canScroll, isActive, item.id, onMetricsChange],
-  );
-
-  const swipeTranslateY = useSharedValue(0);
-
-  useEffect(() => {
-    swipeTranslateY.value = 0;
-  }, [item.id, isActive, swipeTranslateY]);
-
-  const animatedSwipeStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: swipeTranslateY.value }],
-  }));
-
-  const panGesture = useMemo(
-    () =>
-      Gesture.Pan()
-        .enabled(isActive)
-        .simultaneousWithExternalGesture(nativeScrollGesture)
-        .onBegin(() => {
-          runOnJS(handleTouchStart)();
-          swipeStartOffsetY.value = scrollOffsetY.value;
-          cancelAnimation(swipeTranslateY);
-          swipeTranslateY.value = 0;
-        })
-        .onStart(() => {
-          runOnJS(handleSwipeStart)();
-        })
-        .onUpdate((event) => {
-          if (!canScroll) {
-            swipeTranslateY.value = event.translationY * 0.2;
-          }
-        })
-        .onEnd((event) => {
-          const direction = getVerseSwipeDirection({
-            startOffsetY: swipeStartOffsetY.value,
-            offsetY: scrollOffsetY.value,
-            maxOffsetY: Math.max(0, contentHeight - viewportHeight),
-            velocityY: event.velocityY,
-          });
-
-          if (direction) {
-            if (
-              (direction === "next" && !canSwipeNext) ||
-              (direction === "previous" && !canSwipePrevious)
-            ) {
-              swipeTranslateY.value = withSpring(0, {
-                damping: 20,
-                stiffness: 300,
-              });
-            }
-            runOnJS(onEdgeSwipe)(item.id, direction);
-          } else if (!canScroll) {
-            swipeTranslateY.value = withSpring(0, {
-              damping: 20,
-              stiffness: 300,
-            });
-          }
-        }),
-    [
-      canScroll,
-      canSwipeNext,
-      canSwipePrevious,
-      contentHeight,
-      handleSwipeStart,
-      handleTouchStart,
-      isActive,
-      item.id,
-      nativeScrollGesture,
-      onEdgeSwipe,
-      scrollOffsetY,
-      swipeStartOffsetY,
-      swipeTranslateY,
-      viewportHeight,
-    ],
-  );
-
-  const verseContent = (
-    <View
-      style={{
-        minHeight: pageHeight,
-        width: "100%",
-        maxWidth: layout.contentMaxWidth,
-        alignSelf: "center",
-        justifyContent: canScroll ? "flex-start" : "center",
-        paddingHorizontal: horizontalPadding,
-        paddingTop: effectiveTopPadding,
-        paddingBottom: bottomPadding,
-        gap: spacing[5],
-      }}
-      onTouchEnd={handleNonHebrewAreaPress}
-    >
-      <Animated.View
-        pointerEvents={pillVisible ? "auto" : "none"}
-        style={{ opacity: pillVisibility }}
-      >
-        <CalendarDayPill />
-        <BookChapterPill
-          bookLabel={bookLabel}
-          chapter={item.chapter}
-          onPress={handleVersePress}
-        />
-      </Animated.View>
-      <VerseCard
-        verse={item}
-        variant="detail"
-        showWordHint={showWordHint && isSelectedVerse}
-        selectedWord={isSelectedVerse ? selectedWord : null}
-        isBesorah={isBesorah}
-        onVersePress={handleVersePress}
-        onWordPress={handleWordPress}
-        onHebrewPressIn={markHebrewPressIn}
-      />
-    </View>
-  );
-
-  return (
-    <GestureDetector gesture={panGesture}>
-      <Reanimated.View
-        pointerEvents={isActive ? "auto" : "none"}
-        style={[
-          {
-            height: pageHeight,
-            width: "100%",
-          },
-          canScroll ? undefined : animatedSwipeStyle,
-        ]}
-      >
-        <GestureDetector gesture={nativeScrollGesture}>
-          <Reanimated.ScrollView
-            showsVerticalScrollIndicator={false}
-            bounces={false}
-            alwaysBounceVertical={false}
-            overScrollMode="never"
-            nestedScrollEnabled={canScroll}
-            scrollEnabled={canScroll}
-            scrollEventThrottle={16}
-            onLayout={(event) => {
-              setViewportHeight(event.nativeEvent.layout.height);
-            }}
-            onContentSizeChange={(_, height) => {
-              setContentHeight(height);
-            }}
-            onScrollBeginDrag={handleSwipeStart}
-            onScroll={handleScroll}
-            contentContainerStyle={{
-              minHeight: pageHeight,
-            }}
-          >
-            {verseContent}
-          </Reanimated.ScrollView>
-        </GestureDetector>
-      </Reanimated.View>
-    </GestureDetector>
-  );
-};
-
-const VersePage = memo(
-  VersePageComponent,
-  (prevProps, nextProps) =>
-    prevProps.item.id === nextProps.item.id &&
-    prevProps.bookLabel === nextProps.bookLabel &&
-    prevProps.pillVisibility === nextProps.pillVisibility &&
-    prevProps.pillVisible === nextProps.pillVisible &&
-    prevProps.pageHeight === nextProps.pageHeight &&
-    prevProps.topPadding === nextProps.topPadding &&
-    prevProps.bottomPadding === nextProps.bottomPadding &&
-    prevProps.showWordHint === nextProps.showWordHint &&
-    prevProps.isActive === nextProps.isActive &&
-    prevProps.isSelectedVerse === nextProps.isSelectedVerse &&
-    prevProps.canSwipePrevious === nextProps.canSwipePrevious &&
-    prevProps.canSwipeNext === nextProps.canSwipeNext &&
-    prevProps.isBesorah === nextProps.isBesorah &&
-    (prevProps.isSelectedVerse ? prevProps.selectedWord : null) ===
-      (nextProps.isSelectedVerse ? nextProps.selectedWord : null) &&
-    prevProps.onVersePress === nextProps.onVersePress &&
-    prevProps.onWordPress === nextProps.onWordPress &&
-    prevProps.onNonHebrewPress === nextProps.onNonHebrewPress &&
-    prevProps.onMetricsChange === nextProps.onMetricsChange &&
-    prevProps.onEdgeSwipe === nextProps.onEdgeSwipe &&
-    prevProps.onScrollBegin === nextProps.onScrollBegin,
-);
 
 export const VerseDetailContent = () => {
   const themeMode = useAppStore((state: AppState) => state.themeMode);
@@ -850,21 +232,6 @@ export const VerseDetailContent = () => {
     orderedVerses[0]?.id.startsWith(`${bookId}-${chapter}-`);
   const isChapterFlowMode =
     showFullChapter && seferMode && (translationOnly || hebrewOnly);
-
-  const normalizeFlowHebrew = useCallback(
-    (text: string) => {
-      let normalized = text;
-      if (!showNikud) {
-        normalized = stripNikud(normalized);
-      }
-      if (!showCantillation) {
-        normalized = stripCantillation(normalized);
-      }
-      normalized = stripMeteg(normalized);
-      return normalized.replace(/\//g, "");
-    },
-    [showCantillation, showNikud],
-  );
 
   const [showWordHint] = useState(false);
   const swipeSyncTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -1463,63 +830,24 @@ export const VerseDetailContent = () => {
                   onWordPress={word => handleWordPress(word, item.id)} />
               )}
               renderFlow={isChapterFlowMode ? (flowItems) => (
-                <Pressable onPress={handleTogglePills}>
-                  {translationOnly ? (
-                    <Text style={styles.chapterTranslationFlowText}>
-                      {flowItems.map((item, index) => (
-                        <Text key={item.id}>
-                          <Text style={styles.chapterTranslationVerseNumber}>
-                            [{item.verse}]
-                          </Text>{" "}
-                          {renderTranslationFlowText(
-                            language === "es" && !(item.translation ?? "").trim()
-                              ? t("verse.missingSpanishTranslation")
-                              : (item.translation ?? ""),
-                            language === "es" ? item.translation_footnotes : undefined,
-                            language === "es" ? setActiveFlowFootnote : undefined,
-                            colors.accentCopper,
-                            language === "es",
-                          )}
-                          {index < flowItems.length - 1 ? "\u200E " : ""}
-                        </Text>
-                      ))}
-                    </Text>
-                  ) : (
-                    <Text
-                      style={[
-                        styles.chapterHebrewFlowText,
-                        {
-                          fontSize: typography.sizes.hebrewVerseMedium * hebrewFontScale * 1.06 * layout.textScale,
-                          lineHeight:
-                            typography.sizes.hebrewVerseMedium *
-                            hebrewFontScale * layout.textScale *
-                            typography.lineHeights.hebrewScripture,
-                        },
-                        besorahLanguage === "greek"
-                          ? {
-                              textAlign: "left",
-                              writingDirection: "ltr",
-                            }
-                          : undefined,
-                      ]}
-                    >
-                      {flowItems.flatMap(item => item.available === false
-                        ? <Text key={item.id}>{t("verse.greekUnavailable")} </Text>
-                        : item.words.length
-                        ? item.words.map((word, wordIndex) => (
-                          <Text key={`${item.id}-${word.position}-${wordIndex}`}
-                            testID={`sefer-${item.id}-${word.position}`}
-                            accessibilityRole="button"
-                            accessibilityLabel={normalizeFlowHebrew(word.text)}
-                            onPress={() => handleWordPress(word, item.id)}
-                            style={selectedWordVerseId === item.id && selectedWord?.position === word.position
-                              ? { backgroundColor: colors.primaryLight } : undefined}
-                          >{normalizeFlowHebrew(word.text)} </Text>
-                        ))
-                        : <Text key={item.id}>{normalizeFlowHebrew(item.hebrew)} </Text>)}
-                    </Text>
-                  )}
-                </Pressable>
+                <ChapterFlow
+                  flowItems={flowItems}
+                  translationOnly={translationOnly}
+                  language={language}
+                  styles={styles}
+                  colors={colors}
+                  hebrewFontScale={hebrewFontScale}
+                  textScale={layout.textScale}
+                  besorahLanguage={besorahLanguage}
+                  showNikud={showNikud}
+                  showCantillation={showCantillation}
+                  selectedWordVerseId={selectedWordVerseId}
+                  selectedWord={selectedWord}
+                  onTogglePills={handleTogglePills}
+                  onWordPress={handleWordPress}
+                  onFootnotePress={setActiveFlowFootnote}
+                  t={t}
+                />
               ) : undefined}
             />
             )

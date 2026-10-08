@@ -4,7 +4,7 @@ import { CommentarySourcesScreen } from "./components/CommentarySourcesScreen";
 import { SupportScreen } from "./components/SupportScreen";
 import { DonationPage } from "./components/DonationPage";
 import type { CommentaryContext } from "@davar/shared/productContracts";
-import { CalendarPanel } from "./components/CalendarPanel";
+import { CalendarPanel } from "./features/calendar/CalendarPanel";
 import { ProductScreen } from "./components/ProductScreen";
 import type { ReactNode } from "react";
 import type { BesorahLanguage } from "@davar/shared/greekBesorah";

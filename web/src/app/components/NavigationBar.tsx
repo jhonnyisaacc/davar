@@ -39,7 +39,7 @@ interface NavigationBarProps {
 	bookHebrew: string;
 	chapter: number;
 	verse: number;
-	books: {
+	books: readonly {
 		name: string;
 		hebrew: string;
 		spanish: string;

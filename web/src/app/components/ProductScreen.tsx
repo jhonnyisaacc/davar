@@ -6,7 +6,7 @@ import { ProductSignIn } from "../features/account/ProductSignIn";
 import { CommentaryScreen } from "../features/commentary/CommentaryScreen";
 import { productControls } from "../features/product/controls";
 import { AssembliesEntry } from "./AssembliesEntry";
-import { AssembliesWorkspace } from "./AssembliesWorkspace";
+import { AssembliesWorkspace } from "../features/assemblies/AssembliesWorkspace";
 import { useProductCapabilities } from "../hooks/useProductCapabilities";
 import { useTranslation } from "../hooks/useTranslation";
 export function ProductScreen({
