@@ -52,6 +52,30 @@ describe("https security", () => {
 		expect(withPort.headers.get("Location")).toBe("https://api.example.test:8443/up");
 	});
 
+	test("keeps non-GET methods on a 308 redirect", async () => {
+		const app = appFor();
+		for (const method of ["POST", "PATCH", "DELETE"] as const) {
+			const res = await app.request("http://127.0.0.1:3000/api/v1/account", {
+				method,
+				headers: {
+					host: "api.example.test",
+					"content-type": "application/json",
+					"x-forwarded-proto": "http",
+				},
+				body: JSON.stringify({ display_name: "Reader" }),
+			});
+			expect(res.status).toBe(308);
+			expect(res.headers.get("Location")).toBe("https://api.example.test/api/v1/account");
+		}
+
+		const head = await app.request("http://127.0.0.1:3000/up", {
+			method: "HEAD",
+			headers: { host: "api.example.test", "x-forwarded-proto": "http" },
+		});
+		expect(head.status).toBe(301);
+		expect(head.headers.get("Location")).toBe("https://api.example.test/up");
+	});
+
 	test("uses the first forwarded protocol", async () => {
 		const app = appFor();
 		const httpFirst = await app.request("http://127.0.0.1:3000/up", {

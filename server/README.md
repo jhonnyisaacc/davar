@@ -71,9 +71,10 @@ exits non-zero on failure. It requires the encryption keys, `DATABASE_URL`,
 
 `httpsSecurity` uses Hono `secureHeaders` with HSTS on
 (`Strict-Transport-Security: max-age=15552000; includeSubDomains`).
-A proxy that sends `X-Forwarded-Proto: http` gets a `301` to the same
-host, path, and query on HTTPS. Direct local requests omit that header,
-so `bun run dev` on port 3000 stays HTTP.
+A proxy that sends `X-Forwarded-Proto: http` is redirected to the same
+host, path, and query on HTTPS. GET and HEAD use `301`. Other methods
+use `308` so the method and body survive. Direct local requests omit
+that header, so `bun run dev` on port 3000 stays HTTP.
 
 Cloudflare **Always Use HTTPS** covers the edge: the zone redirects
 visitors to HTTPS before a request reaches this server. The origin

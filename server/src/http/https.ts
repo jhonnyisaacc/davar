@@ -17,10 +17,18 @@ const securityHeaders = secureHeaders({
 export function httpsSecurity(): MiddlewareHandler {
 	return async (c, next) => {
 		if (forwardedProto(c.req.header("x-forwarded-proto")) === "http") {
-			return c.redirect(httpsLocation(c.req.url, c.req.header("host")), 301);
+			// 301 lets clients replay POST, PATCH, and DELETE as GET and drop the body.
+			// 308 keeps the method and body. GET and HEAD stay 301.
+			return c.redirect(httpsLocation(c.req.url, c.req.header("host")), redirectStatus(c.req.method));
 		}
 		return securityHeaders(c, next);
 	};
+}
+
+function redirectStatus(method: string): 301 | 308 {
+	const normalized = method.toUpperCase();
+	if (normalized === "GET" || normalized === "HEAD") return 301;
+	return 308;
 }
 
 function forwardedProto(header: string | undefined): string | undefined {
