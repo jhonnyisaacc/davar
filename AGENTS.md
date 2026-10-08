@@ -32,7 +32,7 @@ Mobile publication uses Expo commands and the repository secret `EXPO_TOKEN`. Ne
 
 ## Git
 
-Other repo work uses a branch named `<prefix>/<short-kebab-name>` with one of these prefixes:
+Name the branch `<prefix>/<short-kebab-name>`. Pick the prefix from this table for the change itself:
 
 | Prefix | Use |
 | --- | --- |
@@ -45,6 +45,8 @@ Other repo work uses a branch named `<prefix>/<short-kebab-name>` with one of th
 | `test/` | Tests only |
 | `release/` | Release cut |
 
-This agent-friendly refactor run uses `refactor/<short-kebab-name>` for every branch.
+`refactor/` is a structure change that keeps behavior the same. It is not the default for agent work. A change the reader can see, including a faster first paint, uses `feat/`. The branch-name check accepts only these spellings.
+
+Create every pull request as a draft with `gh pr create --draft`. Mark it ready with `gh pr ready` only when it is ready for manual testing, which means opening the Cloudflare preview. Leaving draft sends `ready_for_review` and starts Web Preview. A draft does not deploy a preview.
 
 Commits are signed with the agents' SSH signing key and must show Verified.
