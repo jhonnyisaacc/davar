@@ -157,8 +157,8 @@ describe("local setup", () => {
 		expect(compose).not.toContain("supabase");
 		expect(compose).not.toContain("neon.tech");
 		const pkg = await Bun.file(join(SERVER_ROOT, "package.json")).json();
-		expect(pkg.scripts.dev).toBe("bun --env-file=.env ./src/index.ts");
-		expect(pkg.scripts.start).toBe("bun --env-file=.env ./src/index.ts");
+		expect(pkg.scripts.dev).toBe("bun --watch ./src/index.ts");
+		expect(pkg.scripts.start).toBe("bun ./src/index.ts");
 		expect(pkg.scripts.setup).toBe("bun ./src/setup.ts");
 	});
 });
