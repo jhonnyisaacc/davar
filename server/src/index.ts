@@ -1,10 +1,19 @@
-import { loadConfig } from "./lib/config.js";
-import { dbFromEnv } from "./db/client.js";
+import { loadConfig, type ServerConfig } from "./lib/config.js";
+import { createDb } from "./db/client.js";
 import { createApp } from "./http/app.js";
 import type { AppDeps } from "./http/deps.js";
 
-const config = loadConfig();
-const { db } = dbFromEnv();
+function bootConfig(): ServerConfig {
+	try {
+		return loadConfig();
+	} catch (error) {
+		console.error(error instanceof Error ? error.message : "Invalid server environment");
+		process.exit(1);
+	}
+}
+
+const config = bootConfig();
+const { db } = createDb(config.databaseUrl, config.poolSize);
 
 const deps: AppDeps = {
 	db,

@@ -44,6 +44,7 @@ Health: `GET /up`.
 | `TEST_DATABASE_URL` | tests/CI | Separate database for `bun test` |
 | `PORT` | no (`3000`) | HTTP listen port |
 | `API_PUBLIC_URL` | no (`http://localhost:3000`) | OAuth callback base |
+| `API_HOSTS` | staging/production | Comma-separated `Host` allowlist enforced on every request |
 | `AUTH_RETURN_URIS` | no (`davar://auth/callback`) | Comma-separated allowlist for sign-in return URIs |
 | `INVITE_GATE_ENABLED` | no (`true`) | Admission gate for assembly domains |
 | `DAVAR_DEV_SANDBOX` | no | `1` enables the dev sandbox mailbox, fixture cities/AI and seed commands (development only) |
@@ -62,8 +63,9 @@ Health: `GET /up`.
 | `IMPORT_FILE` / `APPLY` | import commands | Reviewed-payload file; dry run unless `APPLY=1` |
 | `SCENARIO` | sandbox calendar | `pending` or `confirmed` |
 
-Staging/production boot requires the encryption keys, `DATABASE_URL` and an
-HTTPS `API_PUBLIC_URL`, and rejects `DAVAR_DEV_SANDBOX=1`.
+Staging/production boot validates the environment with one Zod schema and
+exits non-zero on failure. It requires the encryption keys, `DATABASE_URL`,
+`API_HOSTS`, and an HTTPS `API_PUBLIC_URL`, and rejects `DAVAR_DEV_SANDBOX=1`.
 
 `bun run dev` and `bun run start` let Bun load `.env`. An exported variable
 wins. The server does not pass a dotenv file list.

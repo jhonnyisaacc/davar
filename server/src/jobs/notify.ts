@@ -3,7 +3,7 @@ import { createDb } from "../db/client.js";
 import { deliverTelegramNotifications } from "../services/notify.js";
 
 const config = loadConfig();
-const { sql, db } = createDb(config.databaseUrl);
+const { sql, db } = createDb(config.databaseUrl, config.poolSize);
 try {
 	const result = await deliverTelegramNotifications(db, {
 		env: process.env,

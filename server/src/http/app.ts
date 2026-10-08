@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
+import { hostAllowlist } from "./hostAllowlist.js";
 import { DomainError, errorBody } from "../lib/errors.js";
 import { isUniqueViolation, pgErrorCode } from "../lib/pgErrors.js";
 import { ValidationError } from "./validation.js";
@@ -17,6 +18,13 @@ import { providerConnectionRoutes } from "./routes/providerConnections.js";
 
 export function createApp(deps: AppDeps): Hono<{ Variables: AppVariables }> {
 	const app = new Hono<{ Variables: AppVariables }>();
+
+	app.use(
+		hostAllowlist({
+			env: deps.config.env,
+			allowedHosts: deps.config.allowedHosts,
+		}),
+	);
 
 	app.use(async (c, next) => {
 		c.set("deps", deps);

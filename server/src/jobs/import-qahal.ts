@@ -3,7 +3,7 @@ import { createDb } from "../db/client.js";
 import { qahalImport } from "../services/imports.js";
 
 const config = loadConfig();
-const { sql, db } = createDb(config.databaseUrl);
+const { sql, db } = createDb(config.databaseUrl, config.poolSize);
 try {
 	const file = Bun.env.IMPORT_FILE ?? process.env.IMPORT_FILE;
 	if (!file) throw new Error("IMPORT_FILE is required");

@@ -27,31 +27,17 @@ export async function withSavepoint<T>(
 	return db.transaction(async (tx) => fn(tx as DatabaseOrTx));
 }
 
-const DEFAULT_POOL = 5;
-
-export function databasePoolMax(raw: string | undefined): number {
-	const trimmed = raw?.trim() ?? "";
-	if (!/^[0-9]+$/.test(trimmed)) return DEFAULT_POOL;
-	const value = Number(trimmed);
-	if (!Number.isSafeInteger(value) || value < 1) return DEFAULT_POOL;
-	return value;
-}
-
-export function createDb(
-	databaseUrl: string | undefined,
-	env: NodeJS.ProcessEnv = process.env,
-): DbHandle {
+export function createDb(databaseUrl: string | undefined, poolSize = 5): DbHandle {
 	if (!databaseUrl) {
 		throw new Error("DATABASE_URL is required");
 	}
-	const sql = postgres(databaseUrl, {
-		max: databasePoolMax(env.DATABASE_POOL_SIZE),
-	});
+	const sql = postgres(databaseUrl, { max: poolSize });
 	return { sql, db: drizzle(sql, { schema }) };
 }
 
 export function dbFromEnv(): DbHandle {
-	return createDb(loadConfig().databaseUrl);
+	const config = loadConfig();
+	return createDb(config.databaseUrl, config.poolSize);
 }
 
 export interface Ctx {

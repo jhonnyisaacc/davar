@@ -3,7 +3,7 @@ import { createDb } from "../db/client.js";
 import { articleImport } from "../services/imports.js";
 
 const config = loadConfig();
-const { sql, db } = createDb(config.databaseUrl);
+const { sql, db } = createDb(config.databaseUrl, config.poolSize);
 try {
 	const file = process.env.IMPORT_FILE;
 	if (!file) throw new Error("IMPORT_FILE is required");

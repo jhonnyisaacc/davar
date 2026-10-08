@@ -3,7 +3,7 @@ import { createDb } from "../db/client.js";
 import { fixtureCalendar, resetFixtures } from "../services/fixtures.js";
 
 const config = loadConfig();
-const { sql, db } = createDb(config.databaseUrl);
+const { sql, db } = createDb(config.databaseUrl, config.poolSize);
 try {
 	const keys = {
 		primaryKey: config.encryptionPrimaryKey,
