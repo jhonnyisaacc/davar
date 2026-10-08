@@ -1,6 +1,11 @@
 # Davar v2 local manual testing
 
-This is a development-only sandbox for PR #250. UI continues to use `davar.pen`.
+The Rails sandbox launcher has been removed. Start the API from `server/`
+([server/README.md](../../server/README.md)). iOS sandbox launch stays
+deferred. The persona table below described that launcher's fixtures; the
+running seed is the accounts in the server README.
+
+This is a development-only sandbox. UI continues to use `davar.pen`.
 Fixtures are synthetic: they are not Scripture evidence, Shaul imports, real
 observations, real locations of members, or AI interpretation. The development
 banner and status endpoint identify simulations. No hosted deployment or EAS
@@ -10,43 +15,32 @@ without that flag the normal authentication and integration behavior remains.
 ## Setup and launch
 
 Use the checkout you are currently developing in.
-Prerequisites: Bun, Ruby 3.4+, PostgreSQL 17, Python 3.13+, Xcode with iPhone 17
-simulator, and CocoaPods for native builds. Start PostgreSQL on port 5432 before
-running setup. The launcher locates installed mise Ruby/Python runtimes; `RUBY_BIN`, `PYTHON_BIN`
-and `BUN_BIN` can select alternatives. JavaScript commands use Bun.
+Prerequisites: Bun, PostgreSQL 17, and Python 3.13+. Start PostgreSQL on port
+5432 before the API. JavaScript commands use Bun. iOS sandbox launch stays
+deferred.
 
-From the repository root:
-
-```sh
-api/bin/dev-sandbox setup
-api/bin/dev-sandbox start
-```
-
-Keep `start` running in its terminal. It refuses occupied ports rather than
-stopping other checkouts. In a second terminal, from the same root:
+From `server/`:
 
 ```sh
-api/bin/dev-sandbox ios
+bun install
+bun run db:migrate
+DAVAR_DEV_SANDBOX=1 NODE_ENV=development bun run dev
 ```
 
-This builds/installs locally and opens the development client on iPhone 17. The
-simulator build is already installed on this machine. No EAS commands are used.
-If the installed client opens an old server, open the following URL in simulator
-Safari: `exp+davar://expo-development-client/?url=http%3A%2F%2Flocalhost%3A8081`.
-Metro runs in CI mode under the launcher; restart services after changing mobile
-source rather than expecting hot reload.
+In other terminals, start web from `web/` with `bun run dev` and mobile from
+`mobile/` with `bun run start`. There is no iOS sandbox command.
 
 | Surface | URL / port |
 | --- | --- |
 | Browser app | http://127.0.0.1:5173/assemblies |
-| Rails inbox (also simulator Safari) | http://127.0.0.1:3000/development/mailbox |
+| Development inbox | http://127.0.0.1:3000/development/mailbox |
 | Development diagnostics | http://127.0.0.1:3000/api/v1/development/status |
 | Expo / optional Expo web | http://127.0.0.1:8081 |
-| PostgreSQL | 127.0.0.1:5432, separate database `davar_v2_sandbox` |
+| PostgreSQL | 127.0.0.1:5432, database `davar_v2_development` |
 
 The browser callback returns to its current Commentary/Assemblies route. Native
 returns to `davar://auth/callback`; Expo web returns to its browser origin plus
-`/auth/callback`. These exact local URLs are allowlisted by the launcher. Physical
+`/auth/callback`. These local URLs are the development defaults. Physical
 iPhones require a LAN address and corresponding allowlists; loopback setup here
 is specifically for the simulator.
 
@@ -101,13 +95,13 @@ reset, sign out/stale-session recovery and sign in again.
 
 ## Simulated integrations
 
-For live commentary, copy `api/.env.development.example` to
-`api/.env.development`, set `OPENROUTER_API_KEY` and a full `OPENROUTER_MODEL` ID,
-then restart Rails. In development these settings override simulated AI and
-personal provider connections, without consuming the free consultation quota.
-The banner reports **live AI via OpenRouter**; other sandbox integrations remain
-active. Clear either value and restart to exercise the simulation and quota cases
-below. The API key stays on the Rails server and the local env file is Git-ignored.
+For live commentary, set `OPENROUTER_API_KEY` and a full `OPENROUTER_MODEL` ID
+in the server environment, then restart `bun run dev`. In development these
+settings override simulated AI and personal provider connections, without
+consuming the free consultation quota. The banner reports **live AI via
+OpenRouter**; other sandbox integrations remain active. Clear either value
+and restart to exercise the simulation and quota cases below. The API key
+stays on the server and the local env file is Git-ignored.
 
 - City search: Buenos Aires, Jerusalem, Madrid and São Paulo, approximate centers.
   City selections still use signed tokens and normal profile updates.
@@ -124,17 +118,17 @@ below. The API key stays on the Rails server and the local env file is Git-ignor
 - Notifications: internal notifications remain testable; no Telegram delivery or
   other external notifications occur. Synthetic meeting/source URLs under
   `example.test` intentionally do not lead to real content.
-- Calendar: Rails invokes pinned Bore logic; clients calculate no calendar rules.
-  Real public INMS reports are imported by default and refreshed every 15 minutes.
+- Calendar: the API invokes Bore logic; clients calculate no calendar rules.
+  Real public INMS reports are imported by default and refreshed every 30 minutes.
   Explicit synthetic scenarios remain labeled by provenance and the sandbox
   banner; unresolved Aviv remains explicit in all modes.
 
-From repository root, select a scenario and refresh the calendar consumer:
+From `server/`, select a scenario:
 
 ```sh
-api/bin/dev-sandbox calendar confirmed
-api/bin/dev-sandbox calendar pending
-api/bin/dev-sandbox calendar live
+bun run sandbox:calendar confirmed
+bun run sandbox:calendar pending
+bun run sandbox:calendar live
 ```
 
 `confirmed` creates synthetic qualifying evidence four days before today;
@@ -145,22 +139,16 @@ reload/reopen the calendar to verify the selected city stays on the device.
 
 ## Reset and stop
 
-From repository root:
+From `server/`:
 
 ```sh
-api/bin/dev-sandbox reset
-api/bin/dev-sandbox stop
+bun run sandbox:reset
 ```
 
-Reset recreates the 25 accounts, their sessions/conversations/settings,
-fixture-owned assemblies (including ones created by those accounts), memberships,
-endorsements, invitation, article and inbox. It removes sandbox observations;
-select a calendar scenario again. Other accounts and imports remain intact.
-Seeding is idempotent and preserves testing progress; use reset for a clean run.
-Rate limits still apply; wait for their window if repeated sign-in attempts are
-throttled. Stop targets only processes recorded by this launcher (with matching
-start signatures) and its own PostgreSQL cluster. Ctrl+C stops app services;
-`stop` leaves the shared PostgreSQL service running. Runtime state/logs/mail are ignored under `api/tmp/`.
+Stop the API with Ctrl+C. That leaves PostgreSQL running. Reset clears the
+sandbox rows the seed owns and writes them again. Select a calendar scenario
+again after reset. Rate limits still apply; wait for their window if repeated
+sign-in attempts are throttled. Sandbox mail is under `server/tmp/sandbox-mail/`.
 Do not share runtime logs or inbox links. No private corpus is required.
 
 ## Broader product acceptance checklist

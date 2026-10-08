@@ -1,4 +1,4 @@
-// Mirrors api/config/web_origins.rb: the browser origins allowed to call /api/*.
+// Browser origins allowed to call /api/*.
 export const DEFAULT_WEB_ORIGINS: string[] = [
 	"http://localhost:5173",
 	"http://127.0.0.1:5173",

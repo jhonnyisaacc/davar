@@ -24,7 +24,7 @@ A minimalist Bible study app focused on Hebrew Scriptures.
 ### Requirements
 
 - Bun installed
-- Mise installed and activated in your shell (Ruby and Python are declared in `mise.toml`)
+- Mise installed and activated in your shell (Python is declared in `mise.toml`)
 
 ### 1) Clone and install
 
@@ -54,18 +54,18 @@ bun install
 bun run start
 ```
 
-Keep the Rails API running for Commentary, accounts, assemblies, and the calendar.
-Follow [api/README.md](api/README.md) for its dependencies and development configuration,
-then run `bundle exec rails server` from `api/`.
+Keep the API running for Commentary, accounts, assemblies, and the calendar.
+Follow [server/README.md](server/README.md), then from `server/` run
+`bun run dev` (port 3000).
 
 | Service | Local URL |
 | --- | --- |
-| Rails API | http://localhost:3000 |
+| API | http://localhost:3000 |
 | Web and static data | http://localhost:5173 |
 | Expo / Metro | http://localhost:8081 |
 | PostgreSQL | localhost:5432 |
 
-Expo uses its default Metro port. Web uses 5173 so it can run alongside Rails on
+Expo uses its default Metro port. Web uses 5173 so it can run alongside the API on
 3000. Start web as well when testing mobile with local Scripture data.
 
 ### Test baseline
@@ -88,8 +88,7 @@ bun run db:migrate
 bun run dev
 ```
 
-See `server/README.md` for env vars, the dev sandbox, jobs, and how it maps
-to the Rails app in PR #250.
+See `server/README.md` for env vars, the dev sandbox, and jobs.
 
 Web checks from `.github/workflows/web-ci.yml`:
 
