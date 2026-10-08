@@ -1,6 +1,7 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { hostAllowlist } from "./hostAllowlist.js";
+import { httpsSecurity } from "./https.js";
 import { DomainError, errorBody } from "../lib/errors.js";
 import { isUniqueViolation, pgErrorCode } from "../lib/pgErrors.js";
 import { ValidationError } from "./validation.js";
@@ -25,6 +26,7 @@ export function createApp(deps: AppDeps): Hono<{ Variables: AppVariables }> {
 			allowedHosts: deps.config.allowedHosts,
 		}),
 	);
+	app.use(httpsSecurity());
 
 	app.use(async (c, next) => {
 		c.set("deps", deps);
