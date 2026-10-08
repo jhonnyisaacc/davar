@@ -26,3 +26,33 @@ No gate, test, or baseline was loosened. The earlier boundary failure (run 37611
 Accept a readonly book list on the navigation bar instead of dropping `as const` on the test fixture. Dropping `as const` would widen the other literal props (`activeDestination`, `theme`, `language`) and fail the same typecheck for a different reason.
 
 No pin files, ratchet baselines, CI workflows, or public API routes changed.
+
+## 4d. Fold mobile components
+
+Draft PR [#257](https://github.com/jhonnyisaacc/davar/pull/257) (`cursor/fold-mobile-components-3cf2` into `cursor/fix-web-typecheck-86fd`, stacked on #255). Not merged. Does not target `main`.
+
+`mobile/components/**` now lives in `mobile/src/components/` (`themed-view`, `themed-text`, `parallax-scroll-view`, `external-link`, `haptic-tab`, `ui/`). `mobile/app/(tabs)/explore.tsx` imports those paths. The explore route stays. Screen copy is unchanged.
+
+Verify: `cd mobile && bun run typecheck && bun test`. Typecheck passed. 82 tests passed, 0 failed.
+
+Tier B: keep the kebab-case filenames and the `ui/` layout. Callers use `@/src/components/...`. `HapticTab` has no callers; it moves with the tree and is not deleted. No new behavior, dependencies, comments, or pin edits.
+
+## 4h. Word analysis sheet
+
+Draft PR [#263](https://github.com/jhonnyisaacc/davar/pull/263) (`refactor/split-word-sheet` into `cursor/fold-mobile-components-3cf2`, stacked on #257). Not merged. Does not target `main`. Does not rename #257 or #255.
+
+`WordAnalysisBottomSheet.tsx` moves from `mobile/src/components/` to `mobile/src/features/reader/`. `VerseDetailContent` still renders it and now imports that path. The sheet's props, tabs, and close behavior stay the same. `VerseDetailContent` is not split.
+
+Tier B: the reader feature folder, because mobile has no word-card feature folder and the sheet opens from the verse reader. The other option was `mobile/src/features/word-card/`. No re-export at the old path. No tests render the sheet, so none were added and none assert hook calls.
+
+Verify: `cd mobile && bun run typecheck && bun test`. Typecheck passed. 82 tests passed, 0 failed.
+
+## 4j. Verse detail screen
+
+Draft PR [#269](https://github.com/jhonnyisaacc/davar/pull/269) (`refactor/split-verse-detail` into `refactor/split-word-sheet`, stacked on #263). Not merged. Does not target `main`.
+
+`VerseDetailContent` stays the screen. It still mounts `WordAnalysisBottomSheet` with the same props. The sheet file stays in `mobile/src/features/reader/`. The verse page, chapter flow, translation-flow rendering, and screen styles move into that reader folder.
+
+Tier B: extract those pieces and leave the screen as the opener. The other option was moving the whole screen into the reader folder and re-exporting it. No screen test covers the word-sheet open, so none were added. The pin is the word-card feature-map check. The React compiler warning list follows `VersePage` and the sheet's current path. The rules stay warnings. No new suppression.
+
+Verify: `cd mobile && bun test && bun run typecheck`. Typecheck passed. 82 tests passed, 0 failed.
