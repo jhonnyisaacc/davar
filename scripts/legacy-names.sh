@@ -16,7 +16,7 @@ patterns = (
     "ActiveRecord",
     "Rails.",
 )
-skip_dirs = {"node_modules", ".git"}
+skip_dirs = {"node_modules", ".git", "__pycache__"}
 pinned_root = Path("server/lib/bore")
 api_bore = Path("api/lib/bore")
 matches = []
