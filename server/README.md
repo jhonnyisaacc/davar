@@ -51,18 +51,18 @@ Health: `GET /up`.
 | `SCENARIO` | sandbox calendar | `pending` or `confirmed` |
 
 Staging/production boot requires the encryption keys, `DATABASE_URL` and an
-HTTPS `API_PUBLIC_URL`, and rejects `DAVAR_DEV_SANDBOX=1` — same as Rails.
+HTTPS `API_PUBLIC_URL`, and rejects `DAVAR_DEV_SANDBOX=1`.
 
 `bun run dev` and `bun run start` let Bun load `.env`. An exported variable
 wins. The server does not pass a dotenv file list.
 
 ## Encryption (greenfield decision)
 
-"Byte-compatible" covers the HTTP API only: stored ciphertext is **not**
-compatible with Rails ActiveRecord Encryption. This server seals PII/token
+"Byte-compatible" covers the HTTP API only: stored ciphertext uses this
+server's envelope. This server seals PII/token
 columns in a custom `v1.` AES-GCM envelope keyed by
 `SHA-256(DAVAR_ENCRYPTION_PRIMARY_KEY)`, and looks identities up by an
-HMAC digest (`subject_digest`) instead of Rails' deterministic encryption.
+HMAC digest (`subject_digest`) instead of deterministic encryption.
 The `ACTIVE_RECORD_ENCRYPTION_*` vars were intentionally not carried over,
 and `KEY_DERIVATION_SALT` has no equivalent here. Every deployment is
 greenfield (fresh database per server), so no Rails-written rows exist to
@@ -152,7 +152,7 @@ never logged.
   (recover, calendar sync, Telegram delivery); nothing enqueues at runtime.
   `20261003000000_add_calendar_feed_tracking.rb` **is** ported
   (`drizzle/0002_calendar_feed.sql`).
-- Stored ciphertext is not compatible with ActiveRecord Encryption (see
+- Stored ciphertext uses this server's envelope (see
   "Encryption (greenfield decision)" above): byte-compat covers the HTTP
   API only.
 - JWKS rotation recovers faster than Rails: an unknown `kid` refetches
