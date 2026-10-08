@@ -4,6 +4,7 @@ import {
 	authHeaders,
 	createUser,
 	makeTestContext,
+	OPEN_FLAGS,
 	READER_PROFILE,
 	truncateAll,
 } from "./helper.js";
@@ -224,7 +225,7 @@ describe("conversations", () => {
 	test("closed flags make AI unavailable without spending", async () => {
 		const { app } = makeTestContext({
 			...generatorFor(groundedJson()),
-			flags: { ai_provider_connections: false, ai_shared_openrouter: false, assemblies: true },
+			flags: { ...OPEN_FLAGS, ai_provider_connections: false, ai_shared_openrouter: false },
 		});
 		const { headers } = await identified();
 		const denied = await app.request("/api/v1/conversations", {
@@ -378,7 +379,7 @@ describe("conversations", () => {
 
 		const { app: closed } = makeTestContext({
 			...generatorFor(groundedJson()),
-			flags: { ai_provider_connections: false, ai_shared_openrouter: false, assemblies: true },
+			flags: { ...OPEN_FLAGS, ai_provider_connections: false, ai_shared_openrouter: false },
 		});
 		const disabled = await closed.request("/api/v1/provider_connections", {
 			method: "POST",

@@ -13,8 +13,9 @@ import { providerAvailable } from "../../services/oauth.js";
 import { developmentOpenrouter } from "../../services/provider.js";
 import { sendSignInMail } from "../../services/mailer.js";
 import { sandboxEnabled } from "../../services/sandbox.js";
+import { requireFlag } from "../../services/flags.js";
 import { checkRateLimit } from "../../services/rateLimit.js";
-import { bearerToken, clientIp, requireUser } from "../auth.js";
+import { bearerToken, clientIp, currentUser, requireUser } from "../auth.js";
 import { parseBody, parseQuery } from "../validation.js";
 import type { AppVariables } from "../deps.js";
 import { z } from "zod";
@@ -89,7 +90,9 @@ authRoutes.delete("/session", async (c) => {
 });
 
 authRoutes.post("/:provider/start", async (c) => {
-	const { db, config, env, outbox, rootDir } = c.get("deps");
+	const { db, config, env, outbox, rootDir, flags, http } = c.get("deps");
+	const sessionUser = await currentUser(db, config, c);
+	await requireFlag("account_sign_in", sessionUser?.id ?? null, { env, http, flags });
 	const provider = c.req.param("provider");
 	await checkRateLimit(db, `auth/${clientIp(c)}`, 10);
 	const body = parseBody(startSchema, await c.req.json().catch(() => ({})));

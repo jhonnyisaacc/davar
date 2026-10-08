@@ -6,6 +6,7 @@ import { users } from "../src/db/schema.js";
 import type { ServerConfig } from "../src/lib/config.js";
 import { DEFAULT_TRUSTED_PROXIES } from "../src/services/remoteIp.js";
 import { enc, encJson } from "../src/services/fields.js";
+import { FLAG_KEYS, type FlagSet } from "../src/services/flags.js";
 import { issueSession } from "../src/services/sessions.js";
 import type { SentMail } from "../src/services/mailer.js";
 
@@ -88,11 +89,9 @@ export interface TestContext {
 	app: ReturnType<typeof createApp>;
 }
 
-export const OPEN_FLAGS = {
-	ai_provider_connections: true,
-	ai_shared_openrouter: true,
-	assemblies: true,
-};
+export const OPEN_FLAGS: FlagSet = Object.fromEntries(
+	FLAG_KEYS.map((key) => [key, true]),
+) as FlagSet;
 
 export function makeTestContext(overrides: Partial<AppDeps> = {}): TestContext {
 	const outbox: SentMail[] = [];

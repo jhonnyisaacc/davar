@@ -9,11 +9,9 @@ import {
 } from "../src/services/flags.js";
 import type { ProviderHttp } from "../src/services/oauth.js";
 
-const OPEN_FLAGS: FlagSet = {
-	ai_provider_connections: true,
-	ai_shared_openrouter: true,
-	assemblies: true,
-};
+const OPEN_FLAGS: FlagSet = Object.fromEntries(
+	FLAG_KEYS.map((key) => [key, true]),
+) as FlagSet;
 
 const PRIVATE_NAME = "Private name";
 
@@ -164,5 +162,36 @@ describe("PostHog feature flags", () => {
 		env.POSTHOG_HOST = "https://eu.i.posthog.com";
 		expect(await evaluateFlags("eu-user", { env, http })).toEqual(OPEN_FLAGS);
 		expect(requests.at(-1)?.url).toBe("https://eu.i.posthog.com/flags?v=2");
+	});
+
+	test("commentary off forces both AI flags off", async () => {
+		const stub = await evaluateFlags("reader", {
+			flags: { ...OPEN_FLAGS, commentary: false },
+		});
+		expect(stub.commentary).toBe(false);
+		expect(stub.ai_provider_connections).toBe(false);
+		expect(stub.ai_shared_openrouter).toBe(false);
+		expect(stub.assemblies).toBe(true);
+		expect(stub.account_sign_in).toBe(true);
+
+		const http: ProviderHttp = {
+			async json() {
+				return {
+					flags: {
+						ai_provider_connections: { enabled: true },
+						ai_shared_openrouter: { enabled: true },
+						assemblies: { enabled: true },
+						commentary: { enabled: false },
+						account_sign_in: { enabled: true },
+					},
+				};
+			},
+		};
+		const evaluated = await evaluateFlags(null, { env: posthogEnv(), http });
+		expect(evaluated.commentary).toBe(false);
+		expect(evaluated.ai_provider_connections).toBe(false);
+		expect(evaluated.ai_shared_openrouter).toBe(false);
+		expect(evaluated.assemblies).toBe(true);
+		expect(evaluated.account_sign_in).toBe(true);
 	});
 });
