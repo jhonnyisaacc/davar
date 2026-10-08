@@ -5,7 +5,7 @@ description: "Drive Davar's React web reader over Chrome DevTools, the Hono API 
 
 # Verify Davar
 
-Primary surface is the React web app (scripture reader). The Hono API, the Python knowledge worker, and the Expo app are separate control CLIs. Drive only an instance this skill started. One instance per app lives under `/tmp/davar-verify` unless `DAVAR_VERIFY_ROOT` points somewhere else. A second web instance also needs its own `DAVAR_WEB_PORT` and `DAVAR_WEB_CDP_PORT`.
+Primary surface is the React web app (scripture reader). The Hono API, the Python knowledge worker, and the Expo app are separate control CLIs. Drive only an instance this skill started. One instance per app lives under `/tmp/davar-verify` unless `DAVAR_VERIFY_ROOT` points somewhere else. A second web instance also needs its own `DAVAR_WEB_PORT` and `DAVAR_WEB_CDP_PORT`. The hot HTML server listens on the next port after `DAVAR_WEB_PORT`.
 
 Run every command from the repository root. The control CLIs print `status ok` or `status fail` and short `key value` lines.
 

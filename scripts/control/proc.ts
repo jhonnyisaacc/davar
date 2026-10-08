@@ -56,14 +56,44 @@ export function alive(pid: number | null): boolean {
 	}
 }
 
+export function descendantIds(table: string, root: number): number[] {
+	const children = new Map<number, number[]>();
+	for (const line of table.split("\n")) {
+		const parts = line.trim().split(/\s+/);
+		if (parts.length < 2) continue;
+		const pid = Number(parts[0]);
+		const ppid = Number(parts[1]);
+		if (!Number.isInteger(pid) || pid <= 0 || !Number.isInteger(ppid)) continue;
+		const list = children.get(ppid);
+		if (list) list.push(pid);
+		else children.set(ppid, [pid]);
+	}
+	const seen = new Set<number>();
+	const walk = (pid: number): number[] => {
+		if (seen.has(pid)) return [];
+		seen.add(pid);
+		const kids = children.get(pid) ?? [];
+		return [pid, ...kids.flatMap((child) => walk(child))];
+	};
+	return walk(root);
+}
+
 export function descendants(pid: number): number[] {
-	const result = Bun.spawnSync(["ps", "-o", "pid=", "--ppid", String(pid)]);
-	const children = result.stdout
-		.toString()
-		.split("\n")
-		.map((line) => Number(line.trim()))
-		.filter((value) => value > 0);
-	return [pid, ...children.flatMap((child) => descendants(child))];
+	const result = Bun.spawnSync(["ps", "-ax", "-o", "pid=,ppid="]);
+	if (result.exitCode !== 0) return [pid];
+	return descendantIds(result.stdout.toString(), pid);
+}
+
+export function urlHasPath(href: string, path: string): boolean {
+	let pathname: string;
+	try {
+		pathname = new URL(href).pathname;
+	} catch {
+		return false;
+	}
+	const trim = (value: string) =>
+		value.length > 1 && value.endsWith("/") ? value.slice(0, -1) : value;
+	return trim(pathname) === trim(path);
 }
 
 export function listeners(port: number): number[] {

@@ -12,6 +12,7 @@ import {
 	lastAction,
 	listeners,
 	ownsPort,
+	urlHasPath,
 	readJson,
 	readPid,
 	rememberAction,
@@ -102,7 +103,11 @@ async function start(): Promise<never> {
 		finish(false, { app, command: "start", reason: "chrome-missing" });
 	}
 	const port = Number(process.env.DAVAR_WEB_PORT ?? 5173);
+	const htmlPort = port + 1;
 	const cdp = Number(process.env.DAVAR_WEB_CDP_PORT ?? 9222);
+	if (!Number.isInteger(port) || port < 1 || htmlPort > 65535) {
+		finish(false, { app, command: "start", reason: "port-invalid", port });
+	}
 	if (alive(readPid(app, "server")) || alive(readPid(app, "chrome"))) {
 		finish(false, { app, command: "start", reason: "already-running" });
 	}
@@ -111,6 +116,9 @@ async function start(): Promise<never> {
 	}
 	if (listeners(cdp).length > 0) {
 		finish(false, { app, command: "start", reason: "cdp-busy", cdp });
+	}
+	if (listeners(htmlPort).length > 0) {
+		finish(false, { app, command: "start", reason: "html-port-busy", port: htmlPort });
 	}
 	const dir = ensureRunDir(app);
 	const envPath = join(repoRoot, "web", ".env");
@@ -130,6 +138,7 @@ async function start(): Promise<never> {
 		join(repoRoot, "web"),
 		envStrings({
 			PORT: String(port),
+			HOT_HTML_PORT: String(htmlPort),
 			HOST: "127.0.0.1",
 			PUBLIC_NODE_ENV: "development",
 		}),
@@ -235,7 +244,7 @@ async function drive(args: string[]): Promise<never> {
 			try {
 				const state = await pageState(cdp);
 				seen = state.url;
-				return state.url.includes(path) && state.text.length > 0;
+				return urlHasPath(state.url, path) && state.text.length > 0;
 			} catch {
 				return false;
 			}
