@@ -2,6 +2,7 @@ import { loadConfig, type ServerConfig } from "./lib/config.js";
 import { createDb } from "./db/client.js";
 import { createApp } from "./http/app.js";
 import type { AppDeps } from "./http/deps.js";
+import { schedulerEnabled, startScheduler } from "./scheduler.js";
 
 function bootConfig(): ServerConfig {
 	try {
@@ -23,6 +24,15 @@ const deps: AppDeps = {
 };
 
 const app = createApp(deps);
+
+if (schedulerEnabled(config.env)) {
+	startScheduler({
+		db,
+		env: process.env,
+		primaryKey: config.encryptionPrimaryKey,
+		previousKeys: config.encryptionPreviousKeys,
+	});
+}
 
 export default {
 	port: config.port,
