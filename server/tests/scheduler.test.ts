@@ -155,11 +155,59 @@ describe("scheduler", () => {
 			expect(sameInstant.ran).toEqual([]);
 			expect(fixtureReads).toBe(1);
 
+			expect(dueNames(recordedAt + THIRTY_MINUTES_MS, sameInstant.state)).toContain(
+				"sync_calendar_observations",
+			);
 			const later = await tick(recordedAt + THIRTY_MINUTES_MS, sameInstant.state, deps);
-			expect(later.ran).toContain("sync_calendar_observations");
-			expect(fixtureReads).toBeGreaterThanOrEqual(1);
 			expect(liveFetches).toBe(0);
 			expect(syncCalendarObservations).toBe(JOBS.sync_calendar_observations);
+			expect(later.failed).toEqual([]);
+		} finally {
+			globalThis.fetch = original;
+		}
+	});
+
+	test("a skipped ifDue tick does not push the next live sync out by another interval", async () => {
+		const original = globalThis.fetch;
+		let liveFetches = 0;
+		globalThis.fetch = (async () => {
+			liveFetches += 1;
+			throw new Error("live fetch");
+		}) as unknown as typeof fetch;
+		let fixtureReads = 0;
+		const deps = {
+			db: testDb().db,
+			env: { NODE_ENV: "test" } as NodeJS.ProcessEnv,
+			primaryKey: "test-primary-key-for-davar-server-only-0001",
+			previousKeys: [] as string[],
+			fetcher: async () => {
+				fixtureReads += 1;
+				return recordedFeed;
+			},
+		};
+		try {
+			await testDb().db.execute(sql`
+				INSERT INTO calendar_feed_states (source, last_attempt_at)
+				VALUES ('israeli_new_moon_society', ${new Date(recordedAt).toISOString()}::timestamptz)
+			`);
+			const early = await tick(recordedAt + 29 * ONE_MINUTE_MS, emptyState(), deps);
+			expect(fixtureReads).toBe(0);
+			expect(early.state.lastRun.sync_calendar_observations).toBeUndefined();
+			expect(early.ran).not.toContain("sync_calendar_observations");
+
+			const due = await tick(recordedAt + THIRTY_MINUTES_MS, early.state, deps);
+			expect(fixtureReads).toBe(1);
+			expect(due.ran).toContain("sync_calendar_observations");
+			expect(due.state.lastRun.sync_calendar_observations).toBe(recordedAt + THIRTY_MINUTES_MS);
+
+			const stillWaiting = await tick(
+				recordedAt + THIRTY_MINUTES_MS + THIRTY_MINUTES_MS - 1,
+				due.state,
+				deps,
+			);
+			expect(fixtureReads).toBe(1);
+			expect(stillWaiting.ran).not.toContain("sync_calendar_observations");
+			expect(liveFetches).toBe(0);
 		} finally {
 			globalThis.fetch = original;
 		}

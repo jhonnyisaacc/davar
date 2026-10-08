@@ -69,7 +69,8 @@ export async function tick(
 		const last = state.lastRun[job.name];
 		if (last !== undefined && nowMs - last < job.everyMs) continue;
 		try {
-			await job.run(jobDeps);
+			const outcome = await job.run(jobDeps);
+			if (!recordsAttempt(outcome)) continue;
 			next.lastRun[job.name] = nowMs;
 			ran.push(job.name);
 		} catch {
@@ -77,6 +78,13 @@ export async function tick(
 		}
 	}
 	return { ran, failed, state: next };
+}
+
+// Jobs that do not say otherwise count as an attempt. The calendar sync sets
+// attempted only after the feed fetch starts, so an ifDue skip leaves the clock.
+export function recordsAttempt(outcome: unknown): boolean {
+	if (!outcome || typeof outcome !== "object" || !("attempted" in outcome)) return true;
+	return (outcome as { attempted: unknown }).attempted === true;
 }
 
 export function schedulerEnabled(env: string | undefined): boolean {

@@ -12,13 +12,20 @@ export interface JobDeps {
 	fetcher?: () => Promise<string>;
 }
 
-export async function syncCalendarObservations(deps: JobDeps): Promise<SyncReport> {
-	return syncObservations(deps.db, {
+export async function syncCalendarObservations(
+	deps: JobDeps,
+): Promise<SyncReport & { attempted: boolean }> {
+	let attempted = false;
+	const report = await syncObservations(deps.db, {
 		env: deps.env,
 		now: deps.now,
 		ifDue: true,
-		fetcher: deps.fetcher ?? (() => fetchFeed(deps.env)),
+		fetcher: async () => {
+			attempted = true;
+			return deps.fetcher ? deps.fetcher() : fetchFeed(deps.env);
+		},
 	});
+	return { ...report, attempted };
 }
 
 export async function recoverConsultationsJob(deps: JobDeps): Promise<{ recovered: number }> {

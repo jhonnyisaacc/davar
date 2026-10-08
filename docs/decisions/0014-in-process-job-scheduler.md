@@ -12,6 +12,8 @@ Use one in-process Bun scheduler. Do not add Cloudflare Cron Triggers.
 
 `server/src/scheduler.ts` keeps the last run of each job in memory and ticks once a minute. A tick calls only the jobs that are due. The scheduled functions are `syncCalendarObservations` (every 30 minutes, live feed, skipped when the feed is not due), `recoverConsultationsJob` (every minute), and `deliverNotifications` (every minute). `NODE_ENV=test` does not start the timer.
 
+A calendar tick that returns before the feed fetch starts does not move that job's clock. The clock moves when the fetch starts. A restart during the 30-minute guard retries on the next minute instead of waiting out another full interval.
+
 The control CLI runs those same functions: `bun scripts/control/index.ts job <name>` and `bun scripts/control/index.ts job tick`. `job tick` is one tick, not a loop. `bun run jobs:calendar` stays the reviewed-file import and still skips without `IMPORT_FILE`.
 
 There is no queue table, so the hourly finished-job purge has nothing to delete. It is not ported.
