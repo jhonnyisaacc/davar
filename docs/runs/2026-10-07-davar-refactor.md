@@ -189,3 +189,18 @@ Local checks on this branch, after `cd web && bun run generate-data:ensure`:
 | `cd web && bun test` | 146 pass, 0 fail |
 
 No ratchet baseline, ignore count, or public route changed.
+
+## Mobile scripture service split
+
+Draft PR [#271](https://github.com/jhonnyisaacc/davar/pull/271) (`refactor/split-scripture-service` into `refactor/shared-scripture-helpers`, stacked on #268). The mobile scripture loader is split behind the same exports. Not merged.
+
+`mobile/src/services/scripture.ts` re-exports `fetchChapterVerses`, the Greek fetchers, and `DisplayWord` / `DisplayVerse`. Static JSON, the TS2009 cache, the SQLite chapter loader, and the Greek fetchers each live in a sibling module. SQLite queries stay in `database.ts`. Callers keep `@/src/services/scripture`. `web/` and `shared/` are untouched. `VerseDetailContent` and component files are untouched. Pin assertions are unchanged. Decision: `docs/decisions/0008-split-mobile-scripture-service.md`.
+
+Local checks on this branch:
+
+| Check | Result |
+| --- | --- |
+| `cd mobile && bun test src/services/*.test.ts` | 71 pass, 0 fail |
+| `cd mobile && bun run typecheck` | pass |
+
+No ratchet baseline, ignore count, or public route changed.
