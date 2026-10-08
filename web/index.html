@@ -3,6 +3,65 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      try {
+        var earlyTheme = JSON.parse(
+          localStorage.getItem("davar.readingState") || "null",
+        );
+        if (earlyTheme && earlyTheme.theme === "dark") {
+          document.documentElement.classList.add("dark");
+        }
+      } catch (error) {}
+    </script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #faf6f0;
+      }
+      html.dark,
+      html.dark body {
+        background: #3c3836;
+      }
+      #davar-early {
+        position: fixed;
+        inset: 0;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        padding: 2rem;
+        pointer-events: none;
+        background: #faf6f0;
+        color: #000;
+        direction: rtl;
+        text-align: center;
+        font-family: Cardo, "Times New Roman", serif;
+        font-size: 48px;
+        line-height: 1.85;
+        word-spacing: 0.24em;
+      }
+      html.dark #davar-early {
+        background: #3c3836;
+        color: #d5c4a1;
+      }
+      #davar-early[hidden] {
+        display: none;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cardo:ital,wght@0,400;0,700;1,400&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jost:wght@400;500;600;700&family=Manrope:wght@400&family=Suez+One&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cardo:ital,wght@0,400;0,700;1,400&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Jost:wght@400;500;600;700&family=Manrope:wght@400&family=Suez+One&display=swap"
+      />
+    </noscript>
     <title>Davar | Hebrew Scriptures</title>
     <link
       rel="icon"
@@ -171,7 +230,131 @@
   </head>
 
   <body>
+    <div id="davar-early" hidden></div>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script id="davar-early-boot">
+      function readEarlyVerseTarget(pathname, stored) {
+        if (stored && stored.translationOnly) return null;
+        var path = String(pathname || "/").replace(/\/+$/, "") || "/";
+        var parts = path.split("/").filter(Boolean);
+        var book;
+        var chapter;
+        var verse;
+        if (parts[0] === "verse" && parts[1]) {
+          book = decodeURIComponent(parts[1]);
+          chapter = Number(parts[2] || 1);
+          verse = Number(parts[3] || 1);
+        } else if (parts.length === 0) {
+          book = (stored && stored.book) || "Genesis";
+          chapter = Number((stored && stored.chapter) || 1);
+          verse = Number((stored && stored.verse) || 1);
+        } else {
+          return null;
+        }
+        if (!book || !(chapter > 0) || !(verse > 0)) return null;
+        var id = String(book).toLowerCase();
+        var besorah =
+          " matthew mark luke john acts romans corinthians1 corinthians2 galatians ephesians philippians colossians thessalonians1 thessalonians2 timothy1 timothy2 titus philemon hebrews james peter1 peter2 john1 john2 john3 jude revelation ";
+        var folder = "oe";
+        if (besorah.indexOf(" " + id + " ") !== -1) {
+          folder =
+            stored && stored.besorahTextVersion === "hutter"
+              ? "hutter"
+              : "besorah";
+        }
+        return {
+          path: "/data/" + folder + "/" + id + "/" + chapter + ".json",
+          verse: verse,
+        };
+      }
+      globalThis.__davarReadEarlyVerseTarget = readEarlyVerseTarget;
+
+      (function () {
+        if (typeof document === "undefined") return;
+        var early = document.querySelector("#davar-early");
+        var root = document.querySelector("#root");
+        if (!early || !root || !globalThis.__davarReadEarlyVerseTarget) return;
+        var stored = null;
+        try {
+          stored = JSON.parse(localStorage.getItem("davar.readingState") || "null");
+        } catch (error) {
+          stored = null;
+        }
+        var target = globalThis.__davarReadEarlyVerseTarget(
+          location.pathname,
+          stored,
+        );
+        if (!target) return;
+
+        var slot = {
+          path: target.path,
+          promise: fetch(target.path, { priority: "high" }).then(function (
+            response,
+          ) {
+            if (!response.ok) throw new Error("early chapter failed");
+            return response.text();
+          }).then(function (body) {
+            var first = body.trimStart().charAt(0);
+            if (first !== "[" && first !== "{") {
+              throw new Error("early chapter was not json");
+            }
+            return body;
+          }),
+        };
+        globalThis.__DAVAR_EARLY_CHAPTER__ = slot;
+
+        slot.promise
+          .then(function (body) {
+            var verses = JSON.parse(body);
+            if (!Array.isArray(verses) || verses.length === 0) return;
+            var row = verses[0];
+            for (var index = 0; index < verses.length; index += 1) {
+              if (Number(verses[index] && verses[index].verse) === target.verse) {
+                row = verses[index];
+                break;
+              }
+            }
+            var words = [];
+            var rawWords = row && row.words;
+            if (Array.isArray(rawWords)) {
+              for (var wordIndex = 0; wordIndex < rawWords.length; wordIndex += 1) {
+                var text = rawWords[wordIndex] && rawWords[wordIndex].text;
+                if (text) words.push(String(text).split("/").join(""));
+              }
+            }
+            if (!words.length && row && row.hebrew) {
+              words = String(row.hebrew).split(/\s+/).filter(Boolean).map(function (word) {
+                return word.split("/").join("");
+              });
+            }
+            if (!words.length) return;
+            var mark = document.createElement("span");
+            mark.textContent = "[" + target.verse + "]";
+            mark.style.fontFamily = "Inter, sans-serif";
+            mark.style.fontSize = "14px";
+            mark.style.opacity = "0.5";
+            mark.style.marginLeft = "0.35em";
+            early.replaceChildren(mark);
+            for (var paintIndex = 0; paintIndex < words.length; paintIndex += 1) {
+              early.append(document.createTextNode(" "));
+              var span = document.createElement("span");
+              span.textContent = words[paintIndex];
+              early.append(span);
+            }
+            early.hidden = false;
+            performance.mark("davar-early-verse");
+          })
+          .catch(function () {});
+
+        var observer = new MutationObserver(function () {
+          if (!root.querySelector(".word-interactive")) return;
+          early.hidden = true;
+          early.replaceChildren();
+          observer.disconnect();
+        });
+        observer.observe(root, { childList: true, subtree: true });
+      })();
+    </script>
+    <script type="module" src="/src/main.tsx" fetchpriority="low"></script>
   </body>
 </html>

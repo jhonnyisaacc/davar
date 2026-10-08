@@ -1,10 +1,4 @@
-/* Import Google Fonts for Davar app */
-@import url("https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Suez+One&display=swap");
+/* Google fonts load from index.html without blocking the first paint. */
 
 /* Custom font for Qumran/Dead Sea Scrolls style (fallback to Cardo for simulation) */
 @font-face {

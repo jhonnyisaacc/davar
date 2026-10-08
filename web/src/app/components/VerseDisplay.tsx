@@ -1,4 +1,3 @@
-import { CalendarDayPill } from "./CalendarDayPill";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { useTranslation } from "../hooks/useTranslation";
 import type {
@@ -20,6 +19,7 @@ import {
 	shouldHideTranslationText,
 } from "../utils/translationConfig";
 import { renderTranslation } from "../utils/translationFormatter";
+import { CalendarDayPill } from "./CalendarDayPill";
 import { FullChapterView } from "./FullChapterView";
 import { OnboardingWordHint } from "./OnboardingWordHint";
 import { SwipeIndicator } from "./SwipeIndicator";
@@ -29,6 +29,7 @@ interface VerseDisplayProps {
 	sourceLanguage?: "hebrew" | "greek";
 	sourceAvailable?: boolean;
 	translation: string;
+	translationPending?: boolean;
 	verseRef: string;
 	verseNumber: number;
 	bookName: string;
@@ -71,6 +72,7 @@ export function VerseDisplay({
 	sourceLanguage = "hebrew",
 	sourceAvailable = true,
 	translation,
+	translationPending = false,
 	verseNumber,
 	bookName,
 	bookNameHebrew,
@@ -413,9 +415,11 @@ export function VerseDisplay({
 							</div>
 						)}
 						{!translation.trim()
-							? language === "es"
-								? spanishMissingTranslation
-								: t("verse.translationUnavailable")
+							? translationPending
+								? null
+								: language === "es"
+									? spanishMissingTranslation
+									: t("verse.translationUnavailable")
 							: renderTranslation(translation, translationRenderOptions)}
 					</div>
 				</SwipeIndicator>

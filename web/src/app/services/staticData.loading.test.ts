@@ -198,6 +198,53 @@ describe("chapter and lexicon loaders", () => {
 		);
 	});
 
+	test("hebrew-only chapter load does not wait on a translation file", async () => {
+		await getChapterVerses("genesis", 1, { hebrewOnly: true, language: "en" });
+		expect(requestedPaths().some((path) => path.includes("ts2009"))).toBe(
+			false,
+		);
+	});
+
+	test("reuses the chapter body the early boot already fetched", async () => {
+		const host = globalThis as typeof globalThis & {
+			__DAVAR_EARLY_CHAPTER__?: { path: string; promise: Promise<string> };
+		};
+		host.__DAVAR_EARLY_CHAPTER__ = {
+			path: "/data/oe/genesis/1.json",
+			promise: Promise.resolve(
+				JSON.stringify([
+					{
+						chapter: 1,
+						verse: 1,
+						hebrew: "בְּרֵאשִׁית",
+						words: [
+							{
+								text: "בְּרֵאשִׁית",
+								strong: "H7225",
+								prefixes: [],
+								translit_en: "bereshit",
+							},
+						],
+					},
+				]),
+			),
+		};
+
+		try {
+			const verses = await getChapterVerses("genesis", 1, {
+				hebrewOnly: true,
+			});
+			expect(verses[0]?.words[0]?.text).toBe("בְּרֵאשִׁית");
+			expect(
+				requestedPaths().some((path) =>
+					path.includes("/data/oe/genesis/1.json"),
+				),
+			).toBe(false);
+		} finally {
+			delete host.__DAVAR_EARLY_CHAPTER__;
+		}
+	});
+
 	test("single-word lookup fetches the Strong shard instead of full dictionaries", async () => {
 		const entry = await loadLexiconEntry("H430", "en");
 		expect(entry).toMatchObject({
