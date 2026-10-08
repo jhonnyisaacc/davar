@@ -112,6 +112,13 @@ export const serverEnvSchema: z.ZodType<ServerConfig, z.ZodTypeDef, RawEnv> = ra
 				issue(ctx, `Missing ${name} configuration: ${missing.join(", ")}`, missing[0] ?? "NODE_ENV");
 				return;
 			}
+			// A non-blank API_HOSTS can still parse to nothing (",", whitespace).
+			// That must fail startup the same way a missing value does, or the
+			// process would boot and reject every request.
+			if (parseHostList(env.API_HOSTS).length === 0) {
+				issue(ctx, `Missing ${name} configuration: API_HOSTS`, "API_HOSTS");
+				return;
+			}
 			try {
 				const url = new URL(env.API_PUBLIC_URL as string);
 				if (url.protocol !== "https:" || !url.host) {

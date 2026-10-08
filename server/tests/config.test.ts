@@ -59,6 +59,11 @@ describe("environment configuration", () => {
 		expect(() => loadConfig(base({ ...hosted, API_HOSTS: "" }))).toThrow(
 			"Missing production configuration: API_HOSTS",
 		);
+		for (const blank of [",", " , , "]) {
+			expect(() => loadConfig(base({ ...hosted, API_HOSTS: blank }))).toThrow(
+				"Missing production configuration: API_HOSTS",
+			);
+		}
 	});
 
 	test("return URIs trim entries and drop empties", async () => {
