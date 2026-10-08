@@ -1,14 +1,15 @@
-import { useCallback, useState } from "react";
+import { destinationOpen } from "@davar/shared/destinations";
 import type { CommentaryContext } from "@davar/shared/productContracts";
-import { webSession } from "../services/productApi";
-import { useWebSession } from "../features/account/useWebSession";
+import { useCallback, useState } from "react";
 import { ProductSignIn } from "../features/account/ProductSignIn";
+import { useWebSession } from "../features/account/useWebSession";
+import { AssembliesWorkspace } from "../features/assemblies/AssembliesWorkspace";
 import { CommentaryScreen } from "../features/commentary/CommentaryScreen";
 import { productControls } from "../features/product/controls";
-import { AssembliesEntry } from "./AssembliesEntry";
-import { AssembliesWorkspace } from "../features/assemblies/AssembliesWorkspace";
 import { useProductCapabilities } from "../hooks/useProductCapabilities";
 import { useTranslation } from "../hooks/useTranslation";
+import { webSession } from "../services/productApi";
+import { AssembliesEntry } from "./AssembliesEntry";
 export function ProductScreen({
 	screen,
 	language,
@@ -39,20 +40,29 @@ export function ProductScreen({
 	}, []);
 	const signIn = (
 		<ProductSignIn
+			language={language}
 			account={account}
 			busy={busy}
 			run={run}
 			onStatus={setError}
 		/>
 	);
-	if (screen === "assemblies" && !capabilities.flags.assemblies) {
+	if (!destinationOpen(capabilities, screen)) {
 		return (
 			<main
 				dir={language === "he" ? "rtl" : "ltr"}
 				className="max-w-4xl mx-auto px-6 py-12 text-[var(--text-primary)]"
 			>
-				<h1 className="text-3xl font-semibold">{t("tabs.assemblies")}</h1>
-				<p className="mt-4">{t("featureAvailability.assembliesUnavailable")}</p>
+				<h1 className="text-3xl font-semibold">
+					{t(screen === "commentary" ? "tabs.commentary" : "tabs.assemblies")}
+				</h1>
+				<p className="mt-4">
+					{t(
+						screen === "commentary"
+							? "featureAvailability.commentaryUnavailable"
+							: "featureAvailability.assembliesUnavailable",
+					)}
+				</p>
 			</main>
 		);
 	}

@@ -40,16 +40,30 @@ import {
 import { useTranslation } from "@/src/i18n/useTranslation";
 import { ProviderConnections } from "./ProviderConnections";
 import { commentaryCitationLabel } from "@davar/shared/commentaryCitations";
+import { destinationOpen } from "@davar/shared/destinations";
 import { productApi, useSession } from "../account/session";
 import { useCommentaryContext } from "./context";
-import { Action, Card, Copy, useProductStyle } from "../product/ui";
+import { Action, Card, Copy, Page, useProductStyle } from "../product/ui";
 const starters = [
 	{ label: "What is the Son of Man?", icon: ScrollText },
 	{ label: "What is the Son of God?", icon: Crown },
 	{ label: "What is the Father?", icon: User },
 	{ label: "What is the meaning of faith?", icon: Sparkles },
 ];
-export default function CommentaryScreen() {
+export default function CommentaryRoute() {
+	const { capabilities } = useProductCapabilities();
+	const { t } = useTranslation();
+	if (!destinationOpen(capabilities, "commentary")) {
+		return (
+			<Page title={t("tabs.commentary")}>
+				<Copy>{t("featureAvailability.commentaryUnavailable")}</Copy>
+			</Page>
+		);
+	}
+	return <CommentaryScreen />;
+}
+
+function CommentaryScreen() {
 	const { capabilities, ready } = useProductCapabilities();
 	const { t } = useTranslation();
 	const canConnect =

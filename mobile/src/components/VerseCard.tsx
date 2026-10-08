@@ -1,6 +1,8 @@
 import { router } from "expo-router";
 import { Alert } from "react-native";
+import { destinationOpen } from "@davar/shared/destinations";
 import { scriptureContext } from "@davar/shared/productContracts";
+import { useProductCapabilities } from "@/src/features/product/useProductCapabilities";
 import { useCommentaryContext } from "@/src/features/commentary/context";
 import { type ReactNode, useMemo, useState } from "react";
 import {
@@ -488,6 +490,8 @@ export const VerseCard = ({
   );
   const showNikud = useAppStore((state: AppState) => state.showNikud);
   const { t } = useTranslation();
+  const { capabilities } = useProductCapabilities();
+  const commentaryOpen = destinationOpen(capabilities, "commentary");
   const [activeFootnote, setActiveFootnote] = useState<TranslationFootnote | null>(
     null,
   );
@@ -649,7 +653,7 @@ export const VerseCard = ({
                   <Pressable
                     onPressIn={onHebrewPressIn}
                     onPress={onVersePress}
-                    onLongPress={() => askCommentary()}
+                    onLongPress={commentaryOpen ? () => askCommentary() : undefined}
                     style={styles.verseNumberPressable}
                   >
                     <Text style={styles.verseNumber}>[{verse.verse}]</Text>
@@ -657,7 +661,9 @@ export const VerseCard = ({
                   <Pressable
                     onPressIn={onHebrewPressIn}
                     onPress={() => onWordPress?.(word)}
-                    onLongPress={() => askCommentary(word)}
+                    onLongPress={
+                      commentaryOpen ? () => askCommentary(word) : undefined
+                    }
                     hitSlop={8}
                     style={({ pressed }) => [
                       ...wordStyles,
@@ -678,7 +684,9 @@ export const VerseCard = ({
                 key={wordKey}
                 onPressIn={onHebrewPressIn}
                 onPress={() => onWordPress?.(word)}
-                    onLongPress={() => askCommentary(word)}
+                onLongPress={
+                  commentaryOpen ? () => askCommentary(word) : undefined
+                }
                 hitSlop={8}
                 style={({ pressed }) => [
                   ...wordStyles,
