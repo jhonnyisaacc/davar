@@ -6,7 +6,7 @@ Rails `api/bin/setup` installs gems, runs `db:prepare`, runs `db:reset` when `--
 
 ## Decision
 
-`server/bin/setup` and `bun run setup` install server dependencies with `bun install --frozen-lockfile`, prepare the local database, optionally drop and recreate it, truncate `log/*.log`, and start `bun run dev` unless `--skip-server`. `--help` and `--dry-run` do not install, connect, or start the server. An unknown flag fails.
+Dropped the `server/bin/setup` wrapper. The setup outcome stays a Bun script: `bun run setup` (`server/src/setup.ts`). It installs server dependencies with `bun install --frozen-lockfile`, prepares the local database, optionally drops and recreates it, truncates `log/*.log`, and starts `bun run dev` unless `--skip-server`. `--help` and `--dry-run` do not install, connect, or start the server. An unknown flag fails. There is no `bin/setup` file.
 
 The database URL is `DATABASE_URL` when that variable is set. When it is unset or blank, the URL is the compose database `postgresql://davar:local-development-only@127.0.0.1:5432/davar_v2_development`. The host must be `localhost`, `127.0.0.1`, or `::1`. Any other host is refused before a connection. The database name must be a simple identifier, and the maintenance database `postgres` is refused. Staging and production are refused before a connection on a real run.
 
@@ -34,8 +34,8 @@ Accept any `DATABASE_URL`, including a hosted host. Setup could then drop a remo
 
 ## How to undo
 
-Delete `server/bin/setup`, `server/src/setup.ts`, `server/compose.yml`, `server/tests/setup.test.ts`, and this file. Remove the `setup` script from `server/package.json`. Restore the `DATABASE_URL` line in `server/.env.example` and the run section in `server/README.md`.
+Delete `server/src/setup.ts`, `server/compose.yml`, `server/tests/setup.test.ts`, and this file. Remove the `setup` script from `server/package.json`. Restore the `DATABASE_URL` line in `server/.env.example` and the run section in `server/README.md`.
 
 ## Status
 
-Accepted for checklist rows 22 and 23.
+Accepted for checklist rows 22 and 23. The `bin/setup` wrapper is dropped on this branch.

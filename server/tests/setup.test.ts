@@ -81,8 +81,8 @@ describe("local setup", () => {
 		expect(result.stdout.toString()).not.toContain("Installing dependencies");
 	});
 
-	test("the shell command prints help", () => {
-		const result = Bun.spawnSync(["bash", "./bin/setup", "--help"], {
+	test("bun run setup prints help", () => {
+		const result = Bun.spawnSync(["bun", "run", "setup", "--help"], {
 			cwd: SERVER_ROOT,
 			env: { ...process.env, DATABASE_URL: "", NODE_ENV: "development" },
 			stdout: "pipe",

@@ -48,7 +48,7 @@ export function parseSetupArgs(argv: string[]): SetupOptions {
 
 export function helpText(): string {
 	return [
-		"Usage: bin/setup [--reset] [--skip-server] [--dry-run] [--help]",
+		"Usage: bun run setup [--reset] [--skip-server] [--dry-run] [--help]",
 		"",
 		"Install server dependencies, prepare the local development database,",
 		"clear logs, and start the server.",

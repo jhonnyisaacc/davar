@@ -22,7 +22,7 @@ bun run db:migrate   # needs DATABASE_URL
 bun run dev          # PORT=3000 by default
 ```
 
-`bin/setup` (or `bun run setup`) installs dependencies, prepares the local
+`bun run setup` installs dependencies, prepares the local
 database, clears `log/*.log`, and starts the server. `--skip-server` stops
 before the server. `--reset` drops and recreates that database after prepare.
 `--dry-run` prints the steps and does not connect. `compose.yml` is Postgres
