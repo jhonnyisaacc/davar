@@ -91,7 +91,7 @@ export function readingCalendarPill(
 		return { kind: "status", messageKey: "calendar.loading" };
 	if (!state.city)
 		return { kind: "status", messageKey: "calendar.chooseCityPill" };
-	if (state.busy)
+	if (state.busy && !state.calendar)
 		return { kind: "status", messageKey: "calendar.loading" };
 	if (
 		state.error ||

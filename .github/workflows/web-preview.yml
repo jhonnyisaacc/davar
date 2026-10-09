@@ -38,7 +38,13 @@ jobs:
 
       - name: Build web
         working-directory: web
+        env:
+          PUBLIC_API_URL: ${{ secrets.PUBLIC_API_URL }}
         run: |
+          if [ -z "${PUBLIC_API_URL:-}" ]; then
+            echo "Missing GitHub secret PUBLIC_API_URL"
+            exit 1
+          fi
           touch .env
           bun run build
 

@@ -13,6 +13,9 @@ export const DEVELOPMENT_WEB_ORIGINS: readonly string[] = DEVELOPMENT_HOSTS.flat
 	DEVELOPMENT_PORTS.map((port) => `http://${host}:${port}`),
 );
 
+const PRODUCT_BROWSER_ORIGIN = "https://davar.bible";
+const PAGES_PREVIEW_HOST = "davar.pages.dev";
+
 export function allowedOrigins(input: {
 	configured: string | undefined;
 	development: boolean;
@@ -26,4 +29,19 @@ export function allowedOrigins(input: {
 					.filter((part) => part.length > 0);
 	if (!input.development) return origins;
 	return [...new Set([...origins, ...DEVELOPMENT_WEB_ORIGINS])];
+}
+
+export function originAllowed(origin: string, configured: readonly string[]): boolean {
+	if (configured.includes(origin)) return true;
+	if (origin === PRODUCT_BROWSER_ORIGIN) return true;
+	let url: URL;
+	try {
+		url = new URL(origin);
+	} catch {
+		return false;
+	}
+	if (url.protocol !== "https:") return false;
+	if (url.username || url.password || url.pathname !== "/" || url.search || url.hash) return false;
+	const host = url.hostname.toLowerCase();
+	return host === PAGES_PREVIEW_HOST || host.endsWith(`.${PAGES_PREVIEW_HOST}`);
 }

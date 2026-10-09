@@ -68,6 +68,16 @@ describe("calendar", () => {
 		expect(body.days).toHaveLength(3);
 	});
 
+	test("accepts a legacy timezone link the browser still sends", async () => {
+		await seedFeedState();
+		const { app } = makeTestContext();
+		const res = await app.request(query({ ...TODAY, timezone: "America/Buenos_Aires" }));
+		expect(res.status).toBe(200);
+		const body = (await res.json()) as { days: Array<{ civil_date: string }> };
+		expect(body.days).toHaveLength(1);
+		expect(body.days[0]?.civil_date).toBe("2026-09-30");
+	});
+
 	test("rejects unbounded years, bad zones and bad ranges", async () => {
 		const { app } = makeTestContext();
 		const ancient = await app.request(query({ ...TODAY, instant: "0001-01-01T12:00:00Z" }));
