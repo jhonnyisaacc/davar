@@ -127,18 +127,43 @@ function hexBytes(buffer: ArrayBuffer): string {
 		.join("");
 }
 
+async function selectionToken(
+	data: Record<string, unknown>,
+	key: CryptoKey,
+	exp: number,
+): Promise<string> {
+	const encoded = base64UrlEncode(
+		new TextEncoder().encode(JSON.stringify({ data, exp })),
+	);
+	const signature = await crypto.subtle.sign(
+		"HMAC",
+		key,
+		new TextEncoder().encode(`city-selection:${encoded}`),
+	);
+	return `${encoded}.${hexBytes(signature)}`;
+}
+
 export async function signSelection(
 	data: Record<string, unknown>,
 	secret: string,
 	ttlSeconds = 86400,
 ): Promise<string> {
-	const body = {
+	const key = await importKey(secret, "hmac");
+	return selectionToken(
 		data,
-		exp: Math.floor(Date.now() / 1000) + ttlSeconds,
-	};
-	const encoded = base64UrlEncode(new TextEncoder().encode(JSON.stringify(body)));
-	const signature = await derivedHmacHex(`city-selection:${encoded}`, secret);
-	return `${encoded}.${signature}`;
+		key,
+		Math.floor(Date.now() / 1000) + ttlSeconds,
+	);
+}
+
+export async function signSelections(
+	rows: Record<string, unknown>[],
+	secret: string,
+	ttlSeconds = 86400,
+): Promise<string[]> {
+	const key = await importKey(secret, "hmac");
+	const exp = Math.floor(Date.now() / 1000) + ttlSeconds;
+	return Promise.all(rows.map((data) => selectionToken(data, key, exp)));
 }
 
 export async function verifySelection<T>(
