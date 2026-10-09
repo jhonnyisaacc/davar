@@ -210,7 +210,6 @@ export default function App() {
 		isMobile,
 		currentScreen,
 		showFullChapter,
-		seferMode,
 		settingsOpen,
 		isWordPanelHovered,
 		handleNextVerse,
@@ -226,78 +225,86 @@ export default function App() {
 				minHeight: isMobile ? "100dvh" : undefined,
 				height: isScrollNavigationActive ? "100vh" : undefined,
 				overflow: isScrollNavigationActive ? "hidden" : undefined,
+				overflowAnchor: "none",
 			}}
 		>
 			<div
-				className={`sticky top-0 z-40 px-2 pt-4 pb-4 sm:px-4 sm:pt-5 sm:pb-5 md:px-6 md:pt-6 md:pb-6 transition-transform duration-300 ${
-					hideNavOnScroll
-						? "-translate-y-full opacity-0 pointer-events-none"
-						: "translate-y-0 opacity-100"
-				}`}
+				className={`sticky top-0 z-40 ${hideNavOnScroll ? "h-0 pointer-events-none" : ""}`}
 			>
-				<SandboxBanner />
-				<div className="mx-auto flex justify-center">
-					<NavigationBar
-						activeDestination={currentScreen}
-						onDestinationClick={handleOpenScreen}
-						settingsOpen={settingsOpen}
-						onSettingsOpenChange={setSettingsOpen}
-						book={currentBook}
-						bookDisplayName={getDisplayBookName(currentBook)}
-						bookHebrew={getHebrewBookName(currentBook)}
-						chapter={currentChapter}
-						verse={currentVerse}
-						books={bookOptions}
-						chapterCount={chapterCount}
-						verseCount={verseCount}
-						onBookChange={(selectedBook) => {
-							if (selectedBook === currentBook) {
-								const stored = getStoredReadingState();
-								if (stored) {
-									const position = getLastPositionForBook(stored, selectedBook);
-									setCurrentChapter(position.chapter);
-									setCurrentVerse(position.verse);
+				<div
+					className={`px-2 pt-4 pb-4 sm:px-4 sm:pt-5 sm:pb-5 md:px-6 md:pt-6 md:pb-6 transition-transform duration-300 ${
+						hideNavOnScroll
+							? "-translate-y-full opacity-0"
+							: "translate-y-0 opacity-100"
+					}`}
+				>
+					<SandboxBanner />
+					<div className="mx-auto flex justify-center">
+						<NavigationBar
+							activeDestination={currentScreen}
+							onDestinationClick={handleOpenScreen}
+							settingsOpen={settingsOpen}
+							onSettingsOpenChange={setSettingsOpen}
+							book={currentBook}
+							bookDisplayName={getDisplayBookName(currentBook)}
+							bookHebrew={getHebrewBookName(currentBook)}
+							chapter={currentChapter}
+							verse={currentVerse}
+							books={bookOptions}
+							chapterCount={chapterCount}
+							verseCount={verseCount}
+							onBookChange={(selectedBook) => {
+								if (selectedBook === currentBook) {
+									const stored = getStoredReadingState();
+									if (stored) {
+										const position = getLastPositionForBook(
+											stored,
+											selectedBook,
+										);
+										setCurrentChapter(position.chapter);
+										setCurrentVerse(position.verse);
+									}
+								} else {
+									setCurrentBook(selectedBook);
+									setCurrentChapter(1);
+									setCurrentVerse(1);
 								}
-							} else {
-								setCurrentBook(selectedBook);
-								setCurrentChapter(1);
+								setCurrentScreen("verse");
+							}}
+							onChapterChange={(chapter) => {
+								setCurrentChapter(chapter);
 								setCurrentVerse(1);
-							}
-							setCurrentScreen("verse");
-						}}
-						onChapterChange={(chapter) => {
-							setCurrentChapter(chapter);
-							setCurrentVerse(1);
-						}}
-						onVerseChange={(verse) => setCurrentVerse(verse)}
-						onDesignSystemClick={() => setShowDesignSystem(true)}
-						onMobileDesignGuideClick={() => setShowMobileDesignGuide(true)}
-						theme={theme}
-						onThemeChange={setTheme}
-						language={language}
-						onLanguageChange={setLanguage}
-						besorahLanguage={besorahLanguage}
-						onBesorahLanguageChange={setBesorahLanguage}
-						greekAvailable={greekAvailable}
-						besorahTextVersion={besorahTextVersion}
-						onBesorahTextVersionChange={handleBesorahTextVersionChange}
-						showQumran={showQumran}
-						onQumranChange={setShowQumran}
-						showFullChapter={showFullChapter}
-						onFullChapterChange={setShowFullChapter}
-						showCalendarDayPill={showCalendarDayPill}
-						onCalendarDayPillChange={setShowCalendarDayPill}
-						seferMode={seferMode}
-						onSeferModeChange={handleSeferModeChange}
-						hebrewOnly={hebrewOnly}
-						onHebrewOnlyChange={handleHebrewOnlyChange}
-						showNikud={showNikud}
-						onNikudChange={setShowNikud}
-						showCantillation={showCantillation}
-						onCantillationChange={setShowCantillation}
-						translationOnly={translationOnly}
-						onTranslationOnlyChange={handleTranslationOnlyChange}
-					/>
+							}}
+							onVerseChange={(verse) => setCurrentVerse(verse)}
+							onDesignSystemClick={() => setShowDesignSystem(true)}
+							onMobileDesignGuideClick={() => setShowMobileDesignGuide(true)}
+							theme={theme}
+							onThemeChange={setTheme}
+							language={language}
+							onLanguageChange={setLanguage}
+							besorahLanguage={besorahLanguage}
+							onBesorahLanguageChange={setBesorahLanguage}
+							greekAvailable={greekAvailable}
+							besorahTextVersion={besorahTextVersion}
+							onBesorahTextVersionChange={handleBesorahTextVersionChange}
+							showQumran={showQumran}
+							onQumranChange={setShowQumran}
+							showFullChapter={showFullChapter}
+							onFullChapterChange={setShowFullChapter}
+							showCalendarDayPill={showCalendarDayPill}
+							onCalendarDayPillChange={setShowCalendarDayPill}
+							seferMode={seferMode}
+							onSeferModeChange={handleSeferModeChange}
+							hebrewOnly={hebrewOnly}
+							onHebrewOnlyChange={handleHebrewOnlyChange}
+							showNikud={showNikud}
+							onNikudChange={setShowNikud}
+							showCantillation={showCantillation}
+							onCantillationChange={setShowCantillation}
+							translationOnly={translationOnly}
+							onTranslationOnlyChange={handleTranslationOnlyChange}
+						/>
+					</div>
 				</div>
 			</div>
 
