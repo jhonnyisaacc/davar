@@ -23,6 +23,8 @@ import { CalendarDayPill } from "./CalendarDayPill";
 import { FullChapterView } from "./FullChapterView";
 import { OnboardingWordHint } from "./OnboardingWordHint";
 import { SwipeIndicator } from "./SwipeIndicator";
+import { TranslationLineHold } from "./TranslationLineHold";
+import { translationWordCount } from "./translationLines";
 
 interface VerseDisplayProps {
 	hebrewText: string;
@@ -337,6 +339,7 @@ export function VerseDisplay({
 					showNikud={showNikud}
 					showCantillation={showCantillation}
 					isBesorah={isBesorah}
+					translationPending={translationPending}
 				/>
 			</div>
 		);
@@ -415,13 +418,19 @@ export function VerseDisplay({
 								[{verseNumber}]
 							</div>
 						)}
-						{!translation.trim()
-							? translationPending
-								? null
-								: language === "es"
-									? spanishMissingTranslation
-									: t("verse.translationUnavailable")
-							: renderTranslation(translation, translationRenderOptions)}
+						{!translation.trim() ? (
+							translationPending ? (
+								<TranslationLineHold
+									wordCount={translationWordCount(words, hebrewText)}
+								/>
+							) : language === "es" ? (
+								spanishMissingTranslation
+							) : (
+								t("verse.translationUnavailable")
+							)
+						) : (
+							renderTranslation(translation, translationRenderOptions)
+						)}
 					</div>
 				</SwipeIndicator>
 			)}

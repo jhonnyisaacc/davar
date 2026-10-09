@@ -1,0 +1,14 @@
+feature: verse-load-placeholder
+sub-feature: next-verse-after-chapter-settles
+entry: Next verse after Exodus 20:1
+url: /verse/Exodus/20/2
+book: Exodus
+chapter: 20
+verse: 2
+viewport: 390x844
+
+- button "Verse" visible text 2
+- button "Previous verse"
+- button "Next verse"
+- translation is settled
+- verse panel has no .animate-pulse and no .translation-line

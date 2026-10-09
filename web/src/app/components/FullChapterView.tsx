@@ -13,6 +13,8 @@ import {
 	shouldHideTranslationText,
 } from "../utils/translationConfig";
 import { renderTranslation } from "../utils/translationFormatter";
+import { TranslationLineHold } from "./TranslationLineHold";
+import { translationWordCount } from "./translationLines";
 
 interface FullChapterViewProps {
 	verses: VerseResponse[];
@@ -34,6 +36,7 @@ interface FullChapterViewProps {
 	showNikud?: boolean;
 	showCantillation?: boolean;
 	isBesorah?: boolean;
+	translationPending?: boolean;
 }
 
 export function FullChapterView({
@@ -50,6 +53,7 @@ export function FullChapterView({
 	showNikud = true,
 	showCantillation = true,
 	isBesorah = false,
+	translationPending = false,
 }: FullChapterViewProps) {
 	const { t } = useTranslation(language);
 	const isGreekSource = verses.some(
@@ -104,6 +108,18 @@ export function FullChapterView({
 
 	const renderVerseTranslation = (verse: VerseResponse) => {
 		if (!verse.translation?.trim()) {
+			if (translationPending) {
+				return (
+					<TranslationLineHold
+						wordCount={translationWordCount(
+							verse.words,
+							verse.source_language === "greek"
+								? (verse.text ?? "")
+								: verse.hebrew,
+						)}
+					/>
+				);
+			}
 			return language === "es"
 				? spanishMissingTranslation
 				: t("verse.translationUnavailable");

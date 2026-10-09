@@ -11,12 +11,22 @@ import {
 	getChapterVerses,
 	getGreekChapterVerses,
 	getVerseCount,
+	peekChapterVerses,
+	peekGreekChapterVerses,
 	prefetchChapterResources,
+	prefetchGreekChapter,
+	readyHebrewChapter,
 	type VerseResponse,
 } from "../../services/staticData";
 import { formatBookDisplayName } from "../../utils/bookNameFormatter";
 import type { RouteScreen } from "../../utils/routeState";
 import { resolveGreekOverlayLanguage } from "../../utils/translationConfig";
+import {
+	hebrewReadingLanguage,
+	readerChapterIdentity,
+	readerSourceMode,
+	visibleChapter,
+} from "./visibleChapter";
 
 export function useVerseLibrary({
 	currentBook,
@@ -53,22 +63,15 @@ export function useVerseLibrary({
 }) {
 	const [books, setBooks] = useState<BookResponse[]>([]);
 	const [chapterVerses, setChapterVerses] = useState<VerseResponse[]>([]);
+	const [publishedIdentity, setPublishedIdentity] = useState<string | null>(
+		null,
+	);
 	const [chapterCount, setChapterCount] = useState(1);
 	const [verseCount, setVerseCount] = useState(1);
 	const [isLoading, setIsLoading] = useState(false);
 	const [translationPending, setTranslationPending] = useState(false);
 	const [_errorMessage, setErrorMessage] = useState<string | null>(null);
 	const chapterLoadRequestRef = useRef(0);
-
-	const currentVerseData = useMemo(
-		() => chapterVerses.find((item) => item.verse === currentVerse) ?? null,
-		[chapterVerses, currentVerse],
-	);
-
-	const currentVerseIndex = useMemo(
-		() => chapterVerses.findIndex((item) => item.verse === currentVerse),
-		[chapterVerses, currentVerse],
-	);
 
 	const bookOptions = useMemo(
 		() =>
@@ -91,6 +94,62 @@ export function useVerseLibrary({
 		[books, currentBook],
 	);
 	const isBesorah = currentBookMeta?.section === "besorah";
+	const useGreekSource =
+		greekAvailable &&
+		isBesorah &&
+		besorahLanguage === "greek" &&
+		!translationOnly;
+	const chapterIdentity = readerChapterIdentity(
+		currentBook,
+		currentChapter,
+		readerSourceMode({
+			useGreekSource,
+			translationOnly,
+			besorahTextVersion,
+		}),
+	);
+	const hebrewTranslationLanguage = hebrewReadingLanguage(
+		language,
+		translationOnly,
+	);
+	const paintSourceFirst = !useGreekSource && !translationOnly;
+	const referenceMode = translationOnly ? "translation" : "source";
+	const chapterPreview = useGreekSource
+		? {
+				full: peekGreekChapterVerses(currentBook, currentChapter, {
+					language: resolveGreekOverlayLanguage(language, translationOnly),
+				}),
+				source: null,
+			}
+		: readyHebrewChapter(currentBook, currentChapter, {
+				language: hebrewTranslationLanguage,
+				showDss: showQumran,
+				referenceMode,
+				besorahTextVersion,
+				sourceFirst: paintSourceFirst,
+			});
+	const readerChapter = visibleChapter({
+		publishedIdentity,
+		chapterIdentity,
+		publishedVerses: chapterVerses,
+		publishedTranslationPending: translationPending,
+		publishedLoading: isLoading,
+		peekedFull: chapterPreview.full,
+		peekedSource: chapterPreview.source,
+		translationExpected: paintSourceFirst && Boolean(hebrewTranslationLanguage),
+		hasBook: Boolean(currentBook),
+	});
+	const readerVerses = readerChapter.verses;
+	const readerLoading = readerChapter.loading;
+	const readerTranslationPending = readerChapter.translationPending;
+	const currentVerseData = useMemo(
+		() => readerVerses.find((item) => item.verse === currentVerse) ?? null,
+		[readerVerses, currentVerse],
+	);
+	const currentVerseIndex = useMemo(
+		() => readerVerses.findIndex((item) => item.verse === currentVerse),
+		[readerVerses, currentVerse],
+	);
 
 	const getHebrewBookName = useCallback(
 		(book: string): string => {
@@ -203,29 +262,19 @@ export function useVerseLibrary({
 		const isCurrentLoad = () =>
 			isMounted && loadRequestId === chapterLoadRequestRef.current;
 		const loadChapterData = async () => {
-			setIsLoading(true);
-			setTranslationPending(false);
 			setErrorMessage(null);
-			const useGreekSource =
+			const loadingGreekSource =
 				greekAvailable &&
 				isBesorah &&
 				besorahLanguage === "greek" &&
 				!translationOnly;
-			const greekOverlayLanguage = useGreekSource
+			const greekOverlayLanguage = loadingGreekSource
 				? resolveGreekOverlayLanguage(language, translationOnly)
 				: undefined;
-			const hebrewTranslationLanguage: "en" | "es" | undefined = translationOnly
-				? language === "es"
-					? "es"
-					: "en"
-				: language === "he"
-					? undefined
-					: language === "es"
-						? "es"
-						: "en";
+			const readingLanguage = hebrewReadingLanguage(language, translationOnly);
 			const chapterOptions = {
-				language: hebrewTranslationLanguage,
-				hebrewOnly: false,
+				language: readingLanguage,
+				hebrewOnly: false as const,
 				referenceMode: translationOnly
 					? ("translation" as const)
 					: ("source" as const),
@@ -233,37 +282,65 @@ export function useVerseLibrary({
 			};
 			// Hebrew (or Greek) is enough to put the verse on screen. The translation
 			// file is the whole book, so it must not hold the words back.
-			const paintSourceFirst = !useGreekSource && !translationOnly;
+			const sourceFirst = !loadingGreekSource && !translationOnly;
+			const identity = readerChapterIdentity(
+				currentBook,
+				currentChapter,
+				readerSourceMode({
+					useGreekSource: loadingGreekSource,
+					translationOnly,
+					besorahTextVersion,
+				}),
+			);
+			const preview = loadingGreekSource
+				? {
+						full: peekGreekChapterVerses(currentBook, currentChapter, {
+							language: greekOverlayLanguage,
+						}),
+						source: null,
+					}
+				: readyHebrewChapter(currentBook, currentChapter, {
+						language: readingLanguage,
+						showDss: showQumran,
+						referenceMode: chapterOptions.referenceMode,
+						besorahTextVersion,
+						sourceFirst,
+					});
+			if (!preview.full && !preview.source) {
+				setIsLoading(true);
+			}
 			try {
 				const [chapterCountValue, verseCountValue, loadedVerses] =
 					await Promise.all([
 						getChapterCount(currentBook.toLowerCase()),
 						getVerseCount(currentBook.toLowerCase(), currentChapter),
-						useGreekSource
-							? getGreekChapterVerses(
-									currentBook.toLowerCase(),
-									currentChapter,
-									{
-										language: greekOverlayLanguage,
-									},
-								)
-							: getChapterVerses(
-									currentBook.toLowerCase(),
-									currentChapter,
-									paintSourceFirst
-										? {
-												...chapterOptions,
-												hebrewOnly: true,
-												language: undefined,
-												showDss: false,
-											}
-										: {
-												...chapterOptions,
-												showDss: false,
-											},
-								),
+						preview.full
+							? Promise.resolve(preview.full)
+							: loadingGreekSource
+								? getGreekChapterVerses(
+										currentBook.toLowerCase(),
+										currentChapter,
+										{
+											language: greekOverlayLanguage,
+										},
+									)
+								: getChapterVerses(
+										currentBook.toLowerCase(),
+										currentChapter,
+										sourceFirst
+											? {
+													...chapterOptions,
+													hebrewOnly: true,
+													language: undefined,
+													showDss: false,
+												}
+											: {
+													...chapterOptions,
+													showDss: false,
+												},
+									),
 					]);
-				const verses = useGreekSource
+				const verses = loadingGreekSource
 					? Array.from({ length: verseCountValue }, (_, index) => {
 							const verseNumber = index + 1;
 							return (
@@ -290,6 +367,10 @@ export function useVerseLibrary({
 				setChapterCount(chapterCountValue);
 				setVerseCount(displayedVerseCount);
 				setChapterVerses(verses);
+				setPublishedIdentity(identity);
+				setTranslationPending(
+					preview.full || !sourceFirst ? false : Boolean(readingLanguage),
+				);
 				if (verses.length > 0) {
 					const availableVerseNumbers = verses
 						.map((verse) => verse.verse)
@@ -307,11 +388,16 @@ export function useVerseLibrary({
 				}
 				if (isCurrentLoad()) setIsLoading(false);
 
-				const enrichWithTranslation =
-					paintSourceFirst && Boolean(hebrewTranslationLanguage);
-				const enrichWithQumran = !useGreekSource && showQumran;
-				if (enrichWithTranslation || enrichWithQumran) {
-					if (enrichWithTranslation) {
+				const enrichWithTranslation = sourceFirst && Boolean(readingLanguage);
+				const enrichWithQumran = !loadingGreekSource && showQumran;
+				const enrichReady = Boolean(
+					peekChapterVerses(currentBook, currentChapter, {
+						...chapterOptions,
+						showDss: showQumran,
+					}),
+				);
+				if ((enrichWithTranslation || enrichWithQumran) && !enrichReady) {
+					if (enrichWithTranslation && !preview.full) {
 						setTranslationPending(true);
 					}
 					try {
@@ -325,6 +411,7 @@ export function useVerseLibrary({
 						);
 						if (!isCurrentLoad()) return;
 						setChapterVerses(enrichedVerses);
+						setPublishedIdentity(identity);
 					} catch (error) {
 						console.error("Failed to load chapter translation", error);
 					} finally {
@@ -338,6 +425,22 @@ export function useVerseLibrary({
 						: (callback: () => void) => window.setTimeout(callback, 200);
 				scheduleIdle(() => {
 					if (!isCurrentLoad()) return;
+					if (loadingGreekSource) {
+						const greekOptions = { language: greekOverlayLanguage };
+						prefetchGreekChapter(
+							currentBook.toLowerCase(),
+							currentChapter + 1,
+							greekOptions,
+						);
+						if (currentChapter > 1) {
+							prefetchGreekChapter(
+								currentBook.toLowerCase(),
+								currentChapter - 1,
+								greekOptions,
+							);
+						}
+						return;
+					}
 					prefetchChapterResources(
 						currentBook.toLowerCase(),
 						currentChapter + 1,
@@ -353,6 +456,11 @@ export function useVerseLibrary({
 				});
 			} catch (error) {
 				if (!isCurrentLoad()) return;
+				if (!preview.full && !preview.source) {
+					setPublishedIdentity(identity);
+					setChapterVerses([]);
+					setTranslationPending(false);
+				}
 				console.error("Failed to load chapter data", error);
 				if (error instanceof Error && error.name === "NetworkError") {
 					setCurrentScreen("connectionError");
@@ -386,7 +494,7 @@ export function useVerseLibrary({
 	const handlePreviousVerse = useCallback(async () => {
 		if (translationOnly) {
 			if (currentVerseIndex > 0) {
-				setCurrentVerse(chapterVerses[currentVerseIndex - 1].verse);
+				setCurrentVerse(readerVerses[currentVerseIndex - 1].verse);
 				return true;
 			}
 
@@ -437,7 +545,7 @@ export function useVerseLibrary({
 		}
 		return false;
 	}, [
-		chapterVerses,
+		readerVerses,
 		currentBook,
 		currentChapter,
 		currentVerse,
@@ -453,9 +561,9 @@ export function useVerseLibrary({
 		if (translationOnly) {
 			if (
 				currentVerseIndex >= 0 &&
-				currentVerseIndex < chapterVerses.length - 1
+				currentVerseIndex < readerVerses.length - 1
 			) {
-				setCurrentVerse(chapterVerses[currentVerseIndex + 1].verse);
+				setCurrentVerse(readerVerses[currentVerseIndex + 1].verse);
 				return true;
 			}
 
@@ -498,7 +606,7 @@ export function useVerseLibrary({
 		return false;
 	}, [
 		chapterCount,
-		chapterVerses,
+		readerVerses,
 		currentBook,
 		currentChapter,
 		currentVerse,
@@ -513,12 +621,11 @@ export function useVerseLibrary({
 
 	return {
 		books,
-		chapterVerses,
-		setChapterVerses,
+		chapterVerses: readerVerses,
 		chapterCount,
 		verseCount,
-		isLoading,
-		translationPending,
+		isLoading: readerLoading,
+		translationPending: readerTranslationPending,
 		currentVerseData,
 		currentVerseIndex,
 		bookOptions,

@@ -8,6 +8,7 @@ import {
 	getChapterVerses,
 	loadGreekLexiconEntry,
 	loadLexiconEntry,
+	peekChapterVerses,
 	resetStaticDataCachesForTests,
 } from "./staticData";
 
@@ -203,6 +204,15 @@ describe("chapter and lexicon loaders", () => {
 		expect(requestedPaths().some((path) => path.includes("ts2009"))).toBe(
 			false,
 		);
+	});
+
+	test("a loaded chapter can be painted again without waiting", async () => {
+		expect(peekChapterVerses("genesis", 1, { hebrewOnly: true })).toBeNull();
+		const verses = await getChapterVerses("genesis", 1, { hebrewOnly: true });
+		expect(peekChapterVerses("Genesis", 1, { hebrewOnly: true })).toEqual(
+			verses,
+		);
+		expect(peekChapterVerses("genesis", 2, { hebrewOnly: true })).toBeNull();
 	});
 
 	test("reuses the chapter body the early boot already fetched", async () => {
