@@ -482,6 +482,8 @@
   "featureAvailability": {
     "moreArticles": "Más artículos",
     "assembliesUnavailable": "Las asambleas estarán disponibles pronto.",
+    "commentaryUnavailable": "El comentario estará disponible pronto.",
+    "signInUnavailable": "El inicio de sesión estará disponible pronto.",
     "articles": "Artículos de Shaul",
     "articleIntro": "Explora los artículos de Shaul y estudia sus fuentes.",
     "aiUnavailable": "La IA no está disponible ahora. Puedes seguir leyendo los artículos de Shaul.",

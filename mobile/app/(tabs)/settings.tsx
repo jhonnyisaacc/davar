@@ -19,7 +19,9 @@ import { SettingsResources } from "@/src/components/SettingsResources";
 import { PillToggle } from "@/src/components/ui/PillToggle";
 import { SettingsDropdown } from "@/src/components/ui/SettingsDropdown";
 import { getNavigationDockContentPadding } from "@/src/constants/navigationDock";
-import { useSession } from "@/src/features/account/session";
+import { productApi, useSession } from "@/src/features/account/session";
+import { useProductCapabilities } from "@/src/features/product/useProductCapabilities";
+import { accountEntryOpen } from "@davar/shared/productCapabilities";
 import { useCalendar } from "@/src/features/calendar/useCalendar";
 import { getColors, spacing, typography } from "@/src/theme";
 import { useAppStore } from "@/src/store/useAppStore";
@@ -120,6 +122,7 @@ export default function SettingsScreen() {
     })),
   );
   const account = useSession((session) => session.account);
+  const { capabilities } = useProductCapabilities();
   const { city: calendarCity, restored: calendarRestored } = useCalendar();
   const hasLinkedAccount = !!account?.providers.length;
   const insets = useSafeAreaInsets();
@@ -373,29 +376,34 @@ export default function SettingsScreen() {
         <Text accessibilityRole="header" style={styles.title}>
           {t("settings.title")}
         </Text>
-        <Pressable
-          accessibilityRole="button"
-          accessibilityLabel={`${t("settings.account.title")}, ${hasLinkedAccount ? t("settings.account.manage") : t("settings.account.signIn")}`}
-          onPress={() => router.push("/account")}
-          style={({ pressed }) => [styles.row, pressed && { opacity: 0.65 }]}
-        >
-          <Text style={styles.label}>{t("settings.account.title")}</Text>
-          <View style={styles.accountAction}>
-            <Text numberOfLines={1} style={styles.accountActionText}>
-              {hasLinkedAccount
-                ? account.display_name || t("settings.account.manage")
-                : t("settings.account.signIn")}
-            </Text>
-            <Chevron
-              size={16}
-              color={
-                state.themeMode === "dark"
-                  ? colors.primaryLight
-                  : colors.primaryDeep
-              }
-            />
-          </View>
-        </Pressable>
+        {accountEntryOpen(
+          capabilities,
+          productApi.authenticated() || account !== null,
+        ) ? (
+          <Pressable
+            accessibilityRole="button"
+            accessibilityLabel={`${t("settings.account.title")}, ${hasLinkedAccount ? t("settings.account.manage") : t("settings.account.signIn")}`}
+            onPress={() => router.push("/account")}
+            style={({ pressed }) => [styles.row, pressed && { opacity: 0.65 }]}
+          >
+            <Text style={styles.label}>{t("settings.account.title")}</Text>
+            <View style={styles.accountAction}>
+              <Text numberOfLines={1} style={styles.accountActionText}>
+                {hasLinkedAccount
+                  ? account.display_name || t("settings.account.manage")
+                  : t("settings.account.signIn")}
+              </Text>
+              <Chevron
+                size={16}
+                color={
+                  state.themeMode === "dark"
+                    ? colors.primaryLight
+                    : colors.primaryDeep
+                }
+              />
+            </View>
+          </Pressable>
+        ) : null}
         {SHARED_SETTINGS_ORDER.map((id) => (
           <Fragment key={id}>{renderSharedSetting(id)}</Fragment>
         ))}

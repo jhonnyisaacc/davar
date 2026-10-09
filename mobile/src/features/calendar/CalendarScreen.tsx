@@ -689,7 +689,7 @@ export default function CalendarScreen() {
             onPress={() => setScreen("sources")}
           />
         </View>
-        {busy || dayBusy ? (
+        {!day && (busy || dayBusy) ? (
           <ActivityIndicator
             color={colors.primary}
             accessibilityLabel={t("calendar.loading")}

@@ -7,6 +7,8 @@ import {
 	type SignInProvider,
 } from "@davar/shared/productContracts";
 import { productApi, completeSignIn } from "./session";
+import { useTranslation } from "@/src/i18n/useTranslation";
+import { useProductCapabilities } from "../product/useProductCapabilities";
 import { Action, Card, Copy, Field } from "../product/ui";
 export function SignIn({
 	link = false,
@@ -18,6 +20,15 @@ export function SignIn({
 	const [email, setEmail] = useState("");
 	const [status, setStatus] = useState("");
 	const [busy, setBusy] = useState(false);
+	const { capabilities } = useProductCapabilities();
+	const { t } = useTranslation();
+	if (!capabilities.flags.account_sign_in) {
+		return (
+			<Card>
+				<Copy>{t("featureAvailability.signInUnavailable")}</Copy>
+			</Card>
+		);
+	}
 	async function start(provider: SignInProvider) {
 		setBusy(true);
 		setStatus("");

@@ -1,10 +1,11 @@
 import { afterEach, expect, spyOn, test } from "bun:test";
-import { Window } from "happy-dom";
-import { CommentaryScreen } from "./CommentaryScreen";
-import { capabilitiesStore } from "../../hooks/useProductCapabilities";
 import { CLOSED_CAPABILITIES } from "@davar/shared/productCapabilities";
-import { productApi } from "../../services/productApi";
 import type { Account, Citation } from "@davar/shared/productContracts";
+import { Window } from "happy-dom";
+import { capabilitiesStore } from "../../hooks/useProductCapabilities";
+import { productApi } from "../../services/productApi";
+import { CommentaryScreen } from "./CommentaryScreen";
+
 const dom = new Window({ url: "http://localhost:5300/commentary" });
 for (const key of [
 	"window",
@@ -37,6 +38,8 @@ const enabled = {
 		ai_provider_connections: false,
 		ai_shared_openrouter: true,
 		assemblies: false,
+		commentary: true,
+		account_sign_in: true,
 	},
 	ai: { available: true, shared_openrouter: true, providers: [] },
 };
@@ -187,6 +190,8 @@ test("approved API connections remain reachable when shared AI is disabled", asy
 			ai_provider_connections: true,
 			ai_shared_openrouter: false,
 			assemblies: false,
+			commentary: true,
+			account_sign_in: true,
 		},
 		ai: { available: false, shared_openrouter: false, providers: ["claude"] },
 	};

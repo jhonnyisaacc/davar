@@ -94,7 +94,7 @@ export async function requireAssemblyAccess(
 	flags?: FlagSet | null,
 ): Promise<CurrentUser> {
 	const user = await requireUser(db, config, c);
-	const resolved = flags ?? (await evaluateFlags(user.id, { env }));
+	const resolved = await evaluateFlags(user.id, { env, flags });
 	if (!resolved.assemblies) {
 		throw new DomainError("feature_unavailable", 503);
 	}

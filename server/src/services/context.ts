@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { DomainError } from "../lib/errors.js";
 
@@ -17,6 +17,14 @@ export function repoRoot(): string {
 		}
 	}
 	return process.cwd();
+}
+
+export function serverPackageRoot(env: NodeJS.ProcessEnv = process.env): string {
+	const override = env.DAVAR_SERVER_ROOT?.trim();
+	if (override) return override;
+	const cwd = process.cwd();
+	if (existsSync(join(cwd, "lib", "bore", "bridge.py"))) return cwd;
+	return join(repoRoot(), "server");
 }
 
 export function loadBookIds(root?: string): Set<string> {

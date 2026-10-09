@@ -482,6 +482,8 @@
   "featureAvailability": {
     "moreArticles": "More articles",
     "assembliesUnavailable": "Assemblies will be available soon.",
+    "commentaryUnavailable": "Commentary will be available soon.",
+    "signInUnavailable": "Sign-in will be available soon.",
     "articles": "Shaul’s articles",
     "articleIntro": "Explore Shaul’s articles and study their sources.",
     "aiUnavailable": "AI is unavailable right now. You can keep reading Shaul’s articles.",

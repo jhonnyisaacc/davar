@@ -3,11 +3,11 @@ import { join } from "node:path";
 import type { DatabaseOrTx } from "../db/client.js";
 import { DomainError } from "../lib/errors.js";
 import { runBridge } from "./bridge.js";
-import { repoRoot } from "./context.js";
+import { serverPackageRoot } from "./context.js";
 
 export function windowBridgePath(env: NodeJS.ProcessEnv = process.env): string {
 	if (env.BORE_WINDOW_PATH) return env.BORE_WINDOW_PATH;
-	return join(repoRoot(), "server", "lib", "bore", "observation_window.py");
+	return join(serverPackageRoot(env), "lib", "bore", "observation_window.py");
 }
 
 export async function windowOpensAt(

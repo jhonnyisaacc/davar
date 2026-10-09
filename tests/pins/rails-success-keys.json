@@ -43,7 +43,7 @@
 		],
 		"capabilities": ["ai", "flags"],
 		"capabilities_ai": ["available", "providers", "shared_openrouter"],
-		"capabilities_flags": ["ai_provider_connections", "ai_shared_openrouter", "assemblies"],
+		"capabilities_flags": ["account_sign_in", "ai_provider_connections", "ai_shared_openrouter", "assemblies", "commentary"],
 		"providers": ["commentary_provider", "providers"],
 		"provider": ["available", "id"]
 	},

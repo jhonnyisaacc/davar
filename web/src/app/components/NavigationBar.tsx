@@ -1,4 +1,6 @@
+import { destinationOpen } from "@davar/shared/destinations";
 import type { BesorahLanguage } from "@davar/shared/greekBesorah";
+import { accountEntryOpen } from "@davar/shared/productCapabilities";
 import {
 	canUseSeferStyle,
 	isSeferStyleVisible,
@@ -607,9 +609,7 @@ export function NavigationBar({
 								"settings",
 							] as const
 						)
-							.filter(
-								(id) => id !== "assemblies" || capabilities.flags.assemblies,
-							)
+							.filter((id) => destinationOpen(capabilities, id))
 							.map((id) => (
 								<button
 									key={id}
@@ -771,26 +771,28 @@ export function NavigationBar({
 						className="space-y-1 text-[var(--text-primary)]"
 						style={{ fontFamily: "Inter, sans-serif" }}
 					>
-						<button
-							type="button"
-							className={`${settingsRowClass} w-full text-start text-[15px]`}
-							onClick={() => {
-								setOpenMenu(null);
-								onDestinationClick("account");
-							}}
-						>
-							<span className="flex items-center gap-3">
-								{t("settings.account.title")}
-							</span>
-							<span className="flex items-center gap-1 text-[13px] text-[var(--accent-deep)]">
-								{t(
-									productApi.authenticated()
-										? "settings.account.manage"
-										: "settings.account.signIn",
-								)}
-								<Chevron size={16} />
-							</span>
-						</button>
+						{accountEntryOpen(capabilities, productApi.authenticated()) ? (
+							<button
+								type="button"
+								className={`${settingsRowClass} w-full text-start text-[15px]`}
+								onClick={() => {
+									setOpenMenu(null);
+									onDestinationClick("account");
+								}}
+							>
+								<span className="flex items-center gap-3">
+									{t("settings.account.title")}
+								</span>
+								<span className="flex items-center gap-1 text-[13px] text-[var(--accent-deep)]">
+									{t(
+										productApi.authenticated()
+											? "settings.account.manage"
+											: "settings.account.signIn",
+									)}
+									<Chevron size={16} />
+								</span>
+							</button>
+						) : null}
 						{SHARED_SETTINGS_ORDER.map((id) => (
 							<Fragment key={id}>{renderSharedSetting(id)}</Fragment>
 						))}
@@ -841,7 +843,6 @@ export function NavigationBar({
 					/>
 				</section>
 			)}
-
 		</div>
 	);
 }
