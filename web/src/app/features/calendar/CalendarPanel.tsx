@@ -470,7 +470,9 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 						onClick={() => setScreen("sources")}
 					/>
 				</div>
-				{busy || dayBusy ? <p role="status">{t("calendar.loading")}</p> : null}
+				{!day && (busy || dayBusy) ? (
+					<p role="status">{t("calendar.loading")}</p>
+				) : null}
 				{error || dayError ? (
 					<p role="status">{t("calendar.unavailable")}</p>
 				) : null}

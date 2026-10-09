@@ -73,6 +73,13 @@ afterEach(() => {
 	yearRequest.mockRestore();
 });
 
+test("a shown day does not return to loading while a refresh is in flight", () => {
+	snapshot.mockReturnValue({ ...state, busy: true });
+	const ui = render(<CalendarPanel language="en" />);
+	expect(ui.queryByText(translate("en", "calendar.loading"))).toBeNull();
+	expect(ui.getByText("14")).toBeTruthy();
+});
+
 function openMoadim(language: AppLanguage = "en") {
 	const ui = render(<CalendarPanel language={language} />);
 	fireEvent.click(
