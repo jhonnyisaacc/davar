@@ -18,6 +18,33 @@ export default defineConfig([
     },
   },
   {
+    // SDK 57 adds compiler diagnostics for existing native animation, layout,
+    // and state synchronization code. Keep them visible while preserving the
+    // current reader behavior; React Compiler skips unsupported components.
+    files: [
+      "hooks/use-color-scheme.web.ts",
+      "src/components/NavigationSheet.tsx",
+      "src/features/reader/VersePage.tsx",
+      "src/features/reader/WordAnalysisBottomSheet.tsx",
+      "src/components/ui/NeumorphButton.tsx",
+      "src/features/assemblies/AssembliesScreen.tsx",
+      "src/features/calendar/CalendarScreen.tsx",
+      "src/features/commentary/CommentaryScreen.tsx",
+      "src/screens/VerseDetailContent.tsx",
+    ],
+    rules: {
+      "react-hooks/immutability": "warn",
+      "react-hooks/refs": "warn",
+      "react-hooks/set-state-in-effect": "warn",
+    },
+  },
+  {
+    files: ["src/services/chapterLoad.pin.test.ts"],
+    settings: {
+      "import/core-modules": ["bun:test"],
+    },
+  },
+  {
     ignores: ["dist/*"],
   },
 ]);

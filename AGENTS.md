@@ -15,6 +15,7 @@ JavaScript installs, scripts, and tests use Bun from the surface directory (`web
 ## Product rules
 
 - Write code, comments, and documentation in English.
+- Apply UI wording changes to English, Spanish, and Hebrew together, unless the user explicitly limits the change to specific languages.
 - Hebrew UI is RTL. Keep the neumorphic, contemplative layout.
 - Do not modify licensed content, remove required attributions, or commit secrets, tokens, or private datasets.
 - Public code may ship with mock data. Licensed texts stay off the public branch.
@@ -28,3 +29,24 @@ Mobile publication uses Expo commands and the repository secret `EXPO_TOKEN`. Ne
 
 - Summarize the change and name the files. Show a diff only when asked.
 - When a JavaScript command is required, give the exact Bun command and the directory it runs in.
+
+## Git
+
+Name the branch `<prefix>/<short-kebab-name>`. Pick the prefix from this table for the change itself:
+
+| Prefix | Use |
+| --- | --- |
+| `feat/` | New behavior |
+| `fix/` | Bug fix |
+| `hotfix/` | Urgent production patch |
+| `chore/` | Dependencies, config, and tooling |
+| `docs/` | Docs only |
+| `refactor/` | Structure change, same behavior |
+| `test/` | Tests only |
+| `release/` | Release cut |
+
+`refactor/` is a structure change that keeps behavior the same. It is not the default for agent work. A change the reader can see, including a faster first paint, uses `feat/`. The branch-name check accepts only these spellings.
+
+Create every pull request as a draft with `gh pr create --draft`. Mark it ready with `gh pr ready` only when it is ready for manual testing, which means opening the Cloudflare preview. Leaving draft sends `ready_for_review` and starts Web Preview. A draft does not deploy a preview.
+
+Commits are signed with the agents' SSH signing key and must show Verified.

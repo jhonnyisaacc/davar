@@ -7,7 +7,6 @@ import type {
 	WordResponse,
 } from "../services/verseService";
 import {
-	getPrefixSegments,
 	removeMaqafForDisplay,
 	removeSofPasukForDisplay,
 	stripCantillation,
@@ -20,6 +19,7 @@ import {
 	shouldHideTranslationText,
 } from "../utils/translationConfig";
 import { renderTranslation } from "../utils/translationFormatter";
+import { CalendarDayPill } from "./CalendarDayPill";
 import { FullChapterView } from "./FullChapterView";
 import { OnboardingWordHint } from "./OnboardingWordHint";
 import { SwipeIndicator } from "./SwipeIndicator";
@@ -29,6 +29,7 @@ interface VerseDisplayProps {
 	sourceLanguage?: "hebrew" | "greek";
 	sourceAvailable?: boolean;
 	translation: string;
+	translationPending?: boolean;
 	verseRef: string;
 	verseNumber: number;
 	bookName: string;
@@ -46,6 +47,8 @@ interface VerseDisplayProps {
 	showOnboardingHint?: boolean;
 	showQumran?: boolean;
 	showFullChapter?: boolean;
+	showCalendarDayPill?: boolean;
+	onOpenCalendar?: () => void;
 	seferMode?: boolean;
 	hebrewOnly?: boolean;
 	translationOnly?: boolean;
@@ -69,6 +72,7 @@ export function VerseDisplay({
 	sourceLanguage = "hebrew",
 	sourceAvailable = true,
 	translation,
+	translationPending = false,
 	verseNumber,
 	bookName,
 	bookNameHebrew,
@@ -79,6 +83,8 @@ export function VerseDisplay({
 	showOnboardingHint = false,
 	showQumran = false,
 	showFullChapter = false,
+	showCalendarDayPill = false,
+	onOpenCalendar,
 	seferMode = false,
 	hebrewOnly = false,
 	translationOnly = false,
@@ -98,11 +104,14 @@ export function VerseDisplay({
 }: VerseDisplayProps) {
 	const { t } = useTranslation(language);
 	const spanishMissingTranslation = t("verse.missingSpanishTranslation");
-	const hideSuperscripts = shouldHideSuperscripts(getTranslationKey(language));
+	const hideSuperscripts = shouldHideSuperscripts(
+		getTranslationKey(translationOnly && language === "he" ? "en" : language),
+	);
 	const hideTranslationText =
 		shouldHideTranslationText(language, hebrewOnly, sourceLanguage) &&
 		!translationOnly;
-	const isHebrewOverlay = language === "he" && sourceLanguage === "greek";
+	const isHebrewOverlay =
+		!translationOnly && language === "he" && sourceLanguage === "greek";
 	const translationRenderOptions = {
 		hideSuperscripts,
 		footnotes: translation_footnotes ?? [],
@@ -239,12 +248,6 @@ export function VerseDisplay({
 					: Boolean(normalizedSelected) &&
 						normalizedSelected === normalizedWord;
 
-			// Prefix segmentation is only valid for original Masoretic words.
-			const prefixSegments =
-				!variantEntry && word.prefixes?.length
-					? getPrefixSegments(displayText, word.prefixes)
-					: null;
-
 			const shouldShowHintButton =
 				showOnboardingHint &&
 				!variantEntry &&
@@ -294,24 +297,7 @@ export function VerseDisplay({
 								: undefined
 						}
 					>
-						{prefixSegments?.prefixes?.length ? (
-							<>
-								<span
-									style={{ color: "var(--text-secondary)" }}
-									className="cursor-pointer hover:opacity-80"
-									title={t("verse.prefixLabel", {
-										prefix: word.prefixes?.join(", ") ?? "",
-									})}
-								>
-									{prefixSegments.prefixes.join("")}
-								</span>
-								<span style={{ color: "var(--text-hebrew)" }}>
-									{prefixSegments.root}
-								</span>
-							</>
-						) : (
-							displayText
-						)}
+						{displayText}
 					</button>
 					{index < sourceWords.length - 1 && " "}
 				</span>
@@ -319,10 +305,21 @@ export function VerseDisplay({
 		});
 	};
 
+	const calendarDayPill = onOpenCalendar ? (
+		<div className="pb-5 text-center empty:hidden">
+			<CalendarDayPill
+				language={language}
+				showEveryDay={showCalendarDayPill}
+				onOpenCalendar={onOpenCalendar}
+			/>
+		</div>
+	) : null;
+
 	// If full chapter mode is enabled and we have verses, show the full chapter view
 	if (showFullChapter && chapterVerses && chapterVerses.length > 0) {
 		return (
 			<div className="transition-opacity duration-500">
+				{calendarDayPill}
 				<FullChapterView
 					verses={chapterVerses}
 					bookName={bookName}
@@ -348,6 +345,7 @@ export function VerseDisplay({
 	// Otherwise show the single verse view
 	return (
 		<div className="space-y-10 relative pt-12 sm:pt-14">
+			{calendarDayPill}
 			{/* Hebrew Text with Verse Number and Onboarding Hint - Large and Centered */}
 			{showSourceText && (
 				<div
@@ -388,6 +386,7 @@ export function VerseDisplay({
 				<SwipeIndicator>
 					<div
 						className="text-center leading-relaxed px-4 transition-all duration-500 text-[var(--text-primary)]"
+						data-translation-settled={translationPending ? undefined : ""}
 						style={{
 							fontFamily: isHebrewOverlay
 								? "'Cardo', serif"
@@ -416,9 +415,13 @@ export function VerseDisplay({
 								[{verseNumber}]
 							</div>
 						)}
-						{language === "es" && !translation.trim()
-							? spanishMissingTranslation
-							: renderTranslation(translation || "", translationRenderOptions)}
+						{!translation.trim()
+							? translationPending
+								? null
+								: language === "es"
+									? spanishMissingTranslation
+									: t("verse.translationUnavailable")
+							: renderTranslation(translation, translationRenderOptions)}
 					</div>
 				</SwipeIndicator>
 			)}

@@ -80,13 +80,11 @@ def contained(root: Path, relative: str) -> Path:
     return path
 
 
-def pinned_inputs(root: Path, manifest_path=None, **source_roots):
+def pinned_inputs(root: Path, manifest_path=None, *, validator, **source_roots):
     manifest = read_json(
         contained(root, manifest_path or "data/knowledge/pilot-inputs.json")
     )
-    from .validate import Validator
-
-    Validator(root).schema("input-manifest", manifest)
+    validator.schema("input-manifest", manifest)
     roots = resolve_roots(source_roots)
     blobs = {}
     for item in manifest["inputs"]:

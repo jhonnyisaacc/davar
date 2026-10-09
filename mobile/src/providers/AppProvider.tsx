@@ -1,3 +1,4 @@
+import { useCalendarLifecycle } from "@/src/features/calendar/useCalendar";
 import React, { createContext, useEffect, useMemo, useRef } from "react";
 
 import { getColors } from "@/src/theme";
@@ -12,6 +13,7 @@ import {
   loadHebrewOnly,
   loadLanguage,
   loadSeferMode,
+  loadShowCalendarDayPill,
   loadShowFullChapter,
   loadShowQumran,
   loadTranslationOnly,
@@ -24,6 +26,7 @@ import {
   saveHebrewOnly,
   saveLanguage,
   saveSeferMode,
+  saveShowCalendarDayPill,
   saveShowFullChapter,
   saveShowQumran,
   saveTranslationOnly,
@@ -47,6 +50,7 @@ export const AppThemeContext = createContext<AppTheme>({
 });
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
+  useCalendarLifecycle();
   const hasHydratedSettingsRef = useRef(false);
   const shouldPersistSettings = () => hasHydratedSettingsRef.current;
 
@@ -83,6 +87,10 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const setShowFullChapter = useAppStore(
     (state: AppState) => state.setShowFullChapter,
   );
+  const showCalendarDayPill = useAppStore((state) => state.showCalendarDayPill);
+  const setShowCalendarDayPill = useAppStore(
+    (state) => state.setShowCalendarDayPill,
+  );
   const seferMode = useAppStore((state: AppState) => state.seferMode);
   const setSeferMode = useAppStore((state: AppState) => state.setSeferMode);
   const hebrewOnly = useAppStore((state: AppState) => state.hebrewOnly);
@@ -95,9 +103,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   );
   const bookmarks = useAppStore((state: AppState) => state.bookmarks);
   const setBookmarks = useAppStore((state: AppState) => state.setBookmarks);
-  const currentVerseId = useAppStore(
-    (state: AppState) => state.currentVerseId,
-  );
+  const currentVerseId = useAppStore((state: AppState) => state.currentVerseId);
   const setCurrentVerseId = useAppStore(
     (state: AppState) => state.setCurrentVerseId,
   );
@@ -136,6 +142,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
           savedShowQumran,
           savedShowFullChapter,
           savedSeferMode,
+          savedCalendarDayPill,
           savedHebrewOnly,
           savedTranslationOnly,
           savedVerseId,
@@ -149,6 +156,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
           loadShowQumran(),
           loadShowFullChapter(),
           loadSeferMode(),
+          loadShowCalendarDayPill(),
           loadHebrewOnly(),
           loadTranslationOnly(),
           loadCurrentVerseId(),
@@ -166,6 +174,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         setHebrewOnly(savedHebrewOnly);
         setShowFullChapter(savedShowFullChapter);
         setSeferMode(savedSeferMode);
+        setShowCalendarDayPill(savedCalendarDayPill);
         if (savedVerseId) {
           setCurrentVerseId(savedVerseId);
         }
@@ -185,10 +194,16 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     setShowQumran,
     setShowFullChapter,
     setSeferMode,
+    setShowCalendarDayPill,
     setHebrewOnly,
     setTranslationOnly,
     setCurrentVerseId,
   ]);
+
+  useEffect(() => {
+    if (shouldPersistSettings())
+      void saveShowCalendarDayPill(showCalendarDayPill);
+  }, [showCalendarDayPill]);
 
   // Load offline bundle versions from SQLite and check for updates
   useEffect(() => {
@@ -320,6 +335,8 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   }, [currentVerseId]);
 
   return (
-    <AppThemeContext.Provider value={value}>{children}</AppThemeContext.Provider>
+    <AppThemeContext.Provider value={value}>
+      {children}
+    </AppThemeContext.Provider>
   );
 };

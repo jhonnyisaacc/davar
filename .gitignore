@@ -35,6 +35,7 @@ debug/
 # Environment Variables
 .env
 .env.local
+.env.development.local
 .env.production
 .env.development
 
@@ -70,6 +71,7 @@ yarn-error.log*
 .yarn-integrity
 
 # React Native
+.expo/
 ios/build/
 android/app/build/
 android/build/
@@ -85,6 +87,7 @@ logs/
 *.swo
 *~
 web/tmp/
+server/tmp/
 
 # macOS
 .DS_Store
@@ -105,8 +108,14 @@ Desktop.ini
 .idea/
 *.sublime-project
 *.sublime-workspace
-.cursor/
+.cursor/*
+!.cursor/skills/
+!.cursor/skills/**
+!.cursor/environment.json
+!.cursor/setup-ssh-signing.sh
 .cursorrules
+
+artifacts/verify/
 
 # Build Outputs
 dist/
@@ -162,3 +171,6 @@ plans/*
 venv/
 __pycache__/
 *.pyc
+
+# Generated, source-preserving Shaul Commentary corpus (rebuilt explicitly).
+data/commentary/generated/

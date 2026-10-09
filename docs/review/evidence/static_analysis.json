@@ -1,0 +1,326 @@
+{
+  "tsconfig": {
+    "tsconfig.json": {
+      "strict": null,
+      "noUncheckedIndexedAccess": null,
+      "exactOptionalPropertyTypes": null,
+      "noImplicitAny": null,
+      "extends": "expo/tsconfig.base",
+      "paths": []
+    },
+    "web/tsconfig.json": {
+      "strict": true,
+      "noUncheckedIndexedAccess": null,
+      "exactOptionalPropertyTypes": null,
+      "noImplicitAny": null,
+      "extends": null,
+      "paths": [
+        "@/*",
+        "@davar/shared/*"
+      ]
+    },
+    "scripts/tsconfig.json": {
+      "strict": true,
+      "noUncheckedIndexedAccess": null,
+      "exactOptionalPropertyTypes": null,
+      "noImplicitAny": null,
+      "extends": null,
+      "paths": []
+    },
+    "server/tsconfig.json": {
+      "strict": true,
+      "noUncheckedIndexedAccess": true,
+      "exactOptionalPropertyTypes": false,
+      "noImplicitAny": null,
+      "extends": null,
+      "paths": []
+    },
+    "mobile/tsconfig.json": {
+      "strict": true,
+      "noUncheckedIndexedAccess": null,
+      "exactOptionalPropertyTypes": null,
+      "noImplicitAny": null,
+      "extends": "expo/tsconfig.base",
+      "paths": [
+        "@/*",
+        "@davar/shared/*"
+      ]
+    }
+  },
+  "package_scripts": {
+    "package.json": {
+      "lint": null,
+      "typecheck": null,
+      "test": null,
+      "format": null,
+      "preflight": null
+    },
+    "web/package.json": {
+      "lint": "bunx --bun @biomejs/biome lint build.ts server.ts src scripts shared functions package.json tsconfig.json biome.json",
+      "typecheck": "tsc --noEmit",
+      "test": "bun test",
+      "format": "bunx --bun @biomejs/biome format --write build.ts server.ts src scripts shared functions package.json tsconfig.json biome.json",
+      "preflight": null
+    },
+    "server/package.json": {
+      "lint": null,
+      "typecheck": "tsc --noEmit",
+      "test": "bun test",
+      "format": null,
+      "preflight": null
+    },
+    "mobile/package.json": {
+      "lint": "expo lint",
+      "typecheck": "tsc --noEmit",
+      "test": "bun test",
+      "format": "biome format --write",
+      "preflight": "bun run typecheck && bun run lint && bun run test"
+    }
+  },
+  "suppression_counts": {
+    "tests": {
+      "word_any": 18,
+      "noqa": 2
+    },
+    "(other)": {
+      "word_any": 15
+    },
+    "web": {
+      "word_any": 18,
+      "biome_ignore": 6
+    },
+    "tools": {
+      "word_any": 18,
+      "noqa": 1,
+      "colon_any": 2
+    },
+    "api": {
+      "word_any": 26,
+      "type_ignore": 1
+    },
+    "scripts": {
+      "word_any": 96,
+      "noqa": 6,
+      "type_ignore": 1,
+      "colon_any": 1
+    },
+    "server": {
+      "word_any": 8,
+      "type_ignore": 1
+    },
+    "shared": {
+      "word_any": 1
+    },
+    "mobile": {
+      "word_any": 7,
+      "eslint_disable": 18
+    }
+  },
+  "suppression_files": {
+    "tests": {
+      "word_any": [
+        "tests/test_greek_importer.py",
+        "tests/test_greek_translate.py",
+        "tests/test_knowledge_foundation.py",
+        "tests/test_instance_policy.py",
+        "tests/test_hutter_verse_images.py",
+        "tests/test_knowledge_profiles.py",
+        "tests/test_hutter_morphology.py"
+      ],
+      "noqa": [
+        "tests/test_instance_policy.py"
+      ]
+    },
+    "(other)": {
+      "word_any": [
+        "locales/legalContent.ts"
+      ]
+    },
+    "web": {
+      "word_any": [
+        "web/src/app/legal/legalContent.ts",
+        "web/src/app/components/AppUXFlows.tsx"
+      ],
+      "biome_ignore": [
+        "web/src/app/components/NeumorphCard.tsx",
+        "web/src/app/components/KoFiWidget.tsx",
+        "web/src/app/hooks/useCalendarWorkspace.ts",
+        "web/src/app/services/staticData.ts"
+      ]
+    },
+    "tools": {
+      "word_any": [
+        "tools/bani/generate.py",
+        "tools/bani/validate.py",
+        "tools/bani/apply.py",
+        "tools/bani/scripts/es.py",
+        "tools/bani/scripts/en.py"
+      ],
+      "noqa": [
+        "tools/bani/audit_phonology.py"
+      ],
+      "colon_any": [
+        "tools/bani/scripts/es.py",
+        "tools/bani/scripts/en.py"
+      ]
+    },
+    "api": {
+      "word_any": [
+        "api/app/services/assembly_discovery.rb",
+        "api/app/services/commentary.rb",
+        "api/app/services/calendar_observation_window.rb",
+        "api/app/services/development_fixtures.rb",
+        "api/app/services/commentary_search.rb",
+        "api/app/services/calendar_observation_backfill.rb",
+        "api/config/application.rb",
+        "api/config/initializers/hosted_environment.rb",
+        "api/config/environments/development.rb",
+        "api/config/environments/production.rb",
+        "api/lib/bore/calendar/rules/forbidden_names.py",
+        "api/lib/bore/calendar/sources/html_tables.py",
+        "api/lib/bore/calendar/sources/israeli_new_moon_society.py",
+        "api/db/seeds.rb"
+      ],
+      "type_ignore": [
+        "api/lib/bore/calendar/localization/i18n.py"
+      ]
+    },
+    "scripts": {
+      "word_any": [
+        "scripts/paths.py",
+        "scripts/hutter/verse_images.py",
+        "scripts/hutter/process_verses_api.py",
+        "scripts/hutter/evaluate_attested_morphology.py",
+        "scripts/hutter/review_api_results.py",
+        "scripts/hutter/evaluate_morphology.py",
+        "scripts/hutter/render_fix_queue_pages.py",
+        "scripts/hutter/attested_morphology.py",
+        "scripts/hutter/audit_transcription.py",
+        "scripts/dss/notes_parser.py",
+        "scripts/translit/local_translit.py",
+        "scripts/commentary/build.py",
+        "scripts/dict/adjudicate_roots.py",
+        "scripts/dict/audit_missing_senses.py",
+        "scripts/dict/strong_processor.py",
+        "scripts/dict/integrate_custom_dict.py",
+        "scripts/dict/build_lexicon.py",
+        "scripts/dict/instance_policy.py",
+        "scripts/dict/test_import_tcysite.py",
+        "scripts/dict/validator.py",
+        "scripts/dict/import_tcysite.py",
+        "scripts/dict/update_transliterations.py",
+        "scripts/dict/translation/main.py",
+        "scripts/dict/translation/config.py",
+        "scripts/dict/translation/translator.py",
+        "scripts/generate-static-data/dss-transformation.ts",
+        "scripts/generate-static-data/index.ts",
+        "scripts/delitzsch/prefix_detector.py",
+        "scripts/delitzsch/audit_delitzsch_parsing.py",
+        "scripts/delitzsch/result_formatter.py",
+        "scripts/delitzsch/review/remediate.py",
+        "scripts/delitzsch/review/workflow.py",
+        "scripts/delitzsch/strongs/v2/merge_strongs.py",
+        "scripts/greek/parse_tagnt.py",
+        "scripts/greek/transliteration.py",
+        "scripts/greek/release_gate.py",
+        "scripts/greek/publish.py",
+        "scripts/knowledge/build.py",
+        "scripts/knowledge/validate.py",
+        "scripts/knowledge/compatibility.py",
+        "scripts/translate/client.py",
+        "scripts/prefixes/validate.py",
+        "scripts/tth/book_splitter.py",
+        "scripts/tth/text_cleaner.py",
+        "scripts/tth/docx_to_md.py",
+        "scripts/tth/json_postprocess.py",
+        "scripts/tth/md_to_json.py",
+        "scripts/tth/section_headers.py"
+      ],
+      "noqa": [
+        "scripts/dict/benchmark_instance_policy.py",
+        "scripts/greek/translate.py",
+        "scripts/strong/book_processor.py",
+        "scripts/strong/config.py",
+        "scripts/strong/__init__.py",
+        "scripts/translate/engine.py"
+      ],
+      "type_ignore": [
+        "scripts/translate/__main__.py"
+      ],
+      "colon_any": [
+        "scripts/tth/text_cleaner.py"
+      ]
+    },
+    "server": {
+      "word_any": [
+        "server/tests/assemblies.test.ts",
+        "server/tests/fixtures/bridge_sleep.py",
+        "server/src/http/app.ts",
+        "server/src/db/client.ts",
+        "server/src/services/window.ts",
+        "server/lib/bore/calendar/rules/forbidden_names.py",
+        "server/lib/bore/calendar/sources/html_tables.py",
+        "server/lib/bore/calendar/sources/israeli_new_moon_society.py"
+      ],
+      "type_ignore": [
+        "server/lib/bore/calendar/localization/i18n.py"
+      ]
+    },
+    "shared": {
+      "word_any": [
+        "shared/hebrew.ts"
+      ]
+    },
+    "mobile": {
+      "word_any": [
+        "mobile/src/providers/AppProvider.tsx",
+        "mobile/src/utils/hebrew.ts",
+        "mobile/src/components/WordAnalysisBottomSheet.tsx",
+        "mobile/src/services/calendarClient.test.ts",
+        "mobile/src/services/database.ts",
+        "mobile/app/(tabs)/home.tsx"
+      ],
+      "eslint_disable": [
+        "mobile/src/features/account/authReturnUri.test.ts",
+        "mobile/src/features/commentary/citations.test.ts",
+        "mobile/src/features/assemblies/assembliesPresentation.test.ts",
+        "mobile/src/store/useAppStore.test.ts",
+        "mobile/src/services/chapterPositioning.test.ts",
+        "mobile/src/services/calendarWorkspace.test.ts",
+        "mobile/src/services/calendarPresentation.test.ts",
+        "mobile/src/services/calendarRefresh.test.ts",
+        "mobile/src/services/navigationSelection.test.ts",
+        "mobile/src/services/verseIdentity.test.ts",
+        "mobile/src/services/productClient.test.ts",
+        "mobile/src/services/offlinePlan.test.ts",
+        "mobile/src/services/responsiveLayout.test.ts",
+        "mobile/src/services/calendarClient.test.ts",
+        "mobile/src/services/lexicon.test.ts",
+        "mobile/src/services/versePaging.test.ts",
+        "mobile/src/services/navigationPositioning.test.ts",
+        "mobile/src/services/dictionaryBundle.test.ts"
+      ]
+    }
+  },
+  "config_files": [
+    "mobile/biome.json",
+    "mobile/eslint.config.js",
+    "mobile/package.json",
+    "mobile/tsconfig.json",
+    "package.json",
+    "scripts/tsconfig.json",
+    "server/package.json",
+    "server/tsconfig.json",
+    "tsconfig.json",
+    "web/biome.json",
+    "web/package.json",
+    "web/tsconfig.json"
+  ],
+  "absent_python_and_ruby_linters": [
+    "pyproject.toml",
+    "ruff.toml",
+    "mypy.ini",
+    "basedpyrightconfig.json",
+    ".rubocop.yml"
+  ]
+}

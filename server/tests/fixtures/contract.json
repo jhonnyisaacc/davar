@@ -1,0 +1,45 @@
+{
+	"account_keys": [
+		"active_assembly_id",
+		"admitted",
+		"consultations_remaining",
+		"contact_visible",
+		"discoverable",
+		"display_name",
+		"id",
+		"leader_verified",
+		"onboarding_complete",
+		"profile",
+		"providers",
+		"settings",
+		"settings_version"
+	],
+	"assembly_keys": [
+		"can_manage",
+		"city",
+		"distance_km",
+		"id",
+		"kind",
+		"meeting_url",
+		"member_state",
+		"name"
+	],
+	"message_keys": ["citations", "content", "generation", "id", "role", "state"],
+	"calendar_day_keys": [
+		"biblical",
+		"civil_date",
+		"confirmation_id",
+		"counted_events",
+		"events",
+		"month_identity",
+		"month_status",
+		"observation",
+		"rabbinic",
+		"year_start_status"
+	],
+	"capabilities_keys": ["ai", "flags"],
+	"capabilities_ai_keys": ["available", "providers", "shared_openrouter"],
+	"capabilities_flags_keys": ["account_sign_in", "ai_provider_connections", "ai_shared_openrouter", "assemblies", "commentary"],
+	"providers": ["google", "apple", "facebook", "telegram", "x", "email"],
+	"providers_keys": ["commentary_provider", "providers"]
+}

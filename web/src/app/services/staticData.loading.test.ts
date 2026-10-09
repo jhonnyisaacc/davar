@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, test } from "bun:test";
+import { afterEach, beforeEach, describe, expect, spyOn, test } from "bun:test";
 import {
 	GREEK_RECORDED_REVISION,
 	greekLexiconPath,
@@ -19,6 +19,13 @@ const requestedPaths = (): string[] =>
 
 let recordedRequests: string[] = [];
 let originalFetch: typeof fetch;
+function setTestFetch(
+	handler: (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>,
+) {
+	globalThis.fetch = Object.assign(handler, {
+		preconnect: originalFetch.preconnect,
+	});
+}
 
 const jsonResponse = (body: unknown, status = 200): Response =>
 	new Response(JSON.stringify(body), {
@@ -30,7 +37,7 @@ beforeEach(() => {
 	recordedRequests = [];
 	resetStaticDataCachesForTests();
 	originalFetch = globalThis.fetch;
-	globalThis.fetch = async (input) => {
+	setTestFetch(async (input) => {
 		const url = String(input);
 		recordedRequests.push(url);
 		const path = new URL(url, "https://davar.test").pathname;
@@ -78,7 +85,9 @@ beforeEach(() => {
 					{
 						chapter: 1,
 						verse: 1,
-						words: [{ text: "בְּרֵאשִׁית", strong: "H7225", translit_en: "bereshit" }],
+						words: [
+							{ text: "בְּרֵאשִׁית", strong: "H7225", translit_en: "bereshit" },
+						],
 					},
 				],
 			});
@@ -146,7 +155,7 @@ beforeEach(() => {
 		}
 
 		return jsonResponse({ error: path }, 404);
-	};
+	});
 });
 
 afterEach(() => {
@@ -155,6 +164,23 @@ afterEach(() => {
 });
 
 describe("chapter and lexicon loaders", () => {
+	test("revalidates unversioned metadata while caching versioned chapter data", async () => {
+		const fetchSpy = spyOn(globalThis, "fetch");
+		try {
+			await getChapterVerses("genesis", 1, { hebrewOnly: true });
+			const metadataRequest = fetchSpy.mock.calls.find(
+				([input]) => String(input) === "/data/metadata.json",
+			);
+			const chapterRequest = fetchSpy.mock.calls.find(([input]) =>
+				String(input).startsWith("/data/oe/genesis/1.json?v="),
+			);
+			expect(metadataRequest?.[1]?.cache).toBe("no-cache");
+			expect(chapterRequest?.[1]?.cache).toBe("force-cache");
+		} finally {
+			fetchSpy.mockRestore();
+		}
+	});
+
 	test("uses chapter-scoped transliteration instead of the full book file", async () => {
 		const verses = await getChapterVerses("genesis", 1, { hebrewOnly: true });
 		expect(verses).toHaveLength(1);
@@ -172,6 +198,53 @@ describe("chapter and lexicon loaders", () => {
 		);
 	});
 
+	test("hebrew-only chapter load does not wait on a translation file", async () => {
+		await getChapterVerses("genesis", 1, { hebrewOnly: true, language: "en" });
+		expect(requestedPaths().some((path) => path.includes("ts2009"))).toBe(
+			false,
+		);
+	});
+
+	test("reuses the chapter body the early boot already fetched", async () => {
+		const host = globalThis as typeof globalThis & {
+			__DAVAR_EARLY_CHAPTER__?: { path: string; promise: Promise<string> };
+		};
+		host.__DAVAR_EARLY_CHAPTER__ = {
+			path: "/data/oe/genesis/1.json",
+			promise: Promise.resolve(
+				JSON.stringify([
+					{
+						chapter: 1,
+						verse: 1,
+						hebrew: "בְּרֵאשִׁית",
+						words: [
+							{
+								text: "בְּרֵאשִׁית",
+								strong: "H7225",
+								prefixes: [],
+								translit_en: "bereshit",
+							},
+						],
+					},
+				]),
+			),
+		};
+
+		try {
+			const verses = await getChapterVerses("genesis", 1, {
+				hebrewOnly: true,
+			});
+			expect(verses[0]?.words[0]?.text).toBe("בְּרֵאשִׁית");
+			expect(
+				requestedPaths().some((path) =>
+					path.includes("/data/oe/genesis/1.json"),
+				),
+			).toBe(false);
+		} finally {
+			delete host.__DAVAR_EARLY_CHAPTER__;
+		}
+	});
+
 	test("single-word lookup fetches the Strong shard instead of full dictionaries", async () => {
 		const entry = await loadLexiconEntry("H430", "en");
 		expect(entry).toMatchObject({
@@ -183,9 +256,11 @@ describe("chapter and lexicon loaders", () => {
 		expect(requestedPaths()).toContain("/data/dict/entries/H04.json");
 		expect(
 			requestedPaths().some((path) =>
-				["/data/dict/words.json", "/data/dict/roots.json", "/data/dict/custom_definitions.json"].includes(
-					path,
-				),
+				[
+					"/data/dict/words.json",
+					"/data/dict/roots.json",
+					"/data/dict/custom_definitions.json",
+				].includes(path),
 			),
 		).toBe(false);
 	});
@@ -212,7 +287,7 @@ describe("chapter and lexicon loaders", () => {
 	test("failed requests can retry", async () => {
 		let attempts = 0;
 		let shouldFail = true;
-		globalThis.fetch = async (input) => {
+		setTestFetch(async (input) => {
 			const url = String(input);
 			recordedRequests.push(url);
 			const path = new URL(url, "https://davar.test").pathname;
@@ -233,7 +308,7 @@ describe("chapter and lexicon loaders", () => {
 				});
 			}
 			return jsonResponse({}, 404);
-		};
+		});
 
 		expect(await loadLexiconEntry("H430", "en")).toBeNull();
 		shouldFail = false;
@@ -250,7 +325,7 @@ describe("chapter and lexicon loaders", () => {
 	});
 
 	test("returns a Greek gloss without the custom dictionary or occurrence shard", async () => {
-		globalThis.fetch = async (input) => {
+		setTestFetch(async (input) => {
 			const url = String(input);
 			recordedRequests.push(url);
 			const path = new URL(url, "https://davar.test").pathname;
@@ -284,7 +359,7 @@ describe("chapter and lexicon loaders", () => {
 			}
 
 			return jsonResponse({ error: path }, 404);
-		};
+		});
 
 		const entry = await loadGreekLexiconEntry("G2424G", "en");
 		expect(entry?.strong_number).toBe("G2424");
@@ -295,9 +370,9 @@ describe("chapter and lexicon loaders", () => {
 		expect(
 			requestedPaths().some((path) => path.includes("custom_definitions")),
 		).toBe(false);
-		expect(requestedPaths().some((path) => path.includes("/occurrences/"))).toBe(
-			false,
-		);
+		expect(
+			requestedPaths().some((path) => path.includes("/occurrences/")),
+		).toBe(false);
 	});
 
 	test("prefers chapter-scoped TS2009 files over the full book file", async () => {
@@ -327,7 +402,7 @@ describe("chapter and lexicon loaders", () => {
 	});
 
 	test("falls back to the TS2009 book once and remembers that chapter files are missing", async () => {
-		globalThis.fetch = async (input) => {
+		setTestFetch(async (input) => {
 			const url = String(input);
 			recordedRequests.push(url);
 			const path = new URL(url, "https://davar.test").pathname;
@@ -380,7 +455,7 @@ describe("chapter and lexicon loaders", () => {
 			}
 
 			return jsonResponse({ error: path }, 404);
-		};
+		});
 
 		const verses = await getChapterVerses("genesis", 1, { language: "en" });
 		expect(verses[0]?.translation).toBe("In the beginning Elohim");
@@ -407,15 +482,17 @@ describe("chapter and lexicon loaders", () => {
 	test("does not hydrate every BES book when metadata already has labels", async () => {
 		const { getBooks } = await import("./staticData");
 		await getBooks();
-		expect(
-			requestedPaths().some((path) => path.startsWith("/data/bes/")),
-		).toBe(false);
+		expect(requestedPaths().some((path) => path.startsWith("/data/bes/"))).toBe(
+			false,
+		);
 	});
 
 	test("appends a data version to immutable static URLs", async () => {
 		await loadLexiconEntry("H430", "en");
 		expect(
-			recordedRequests.some((url) => url.includes("/data/dict/entries/H04.json?v=test-1")),
+			recordedRequests.some((url) =>
+				url.includes("/data/dict/entries/H04.json?v=test-1"),
+			),
 		).toBe(true);
 	});
 });

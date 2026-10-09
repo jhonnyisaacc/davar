@@ -1,0 +1,16 @@
+feature: read-verse
+sub-feature: read-verse-next
+entry: Next verse button after http://127.0.0.1:5193/verse/Genesis/1/1
+url: /verse/Genesis/1/2
+book: Genesis
+verse: 2
+viewport: 390x844
+
+- navigation "Davar": Commentary, Scripture (current), Calendar, Settings
+- navigation "Book, Chapter, Verse"
+- button "Book" visible text Genesis
+- button "Chapter" visible text 1
+- button "Verse" visible text 2
+- button "Previous verse"
+- button "Next verse"
+- button "Select word" plus the Hebrew word buttons of Genesis 1:2

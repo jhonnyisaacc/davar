@@ -1,0 +1,404 @@
+{
+  "sha": "95eec881a0b399892c95e23ea4515844fab323ed",
+  "branch": "feat/davar-v2",
+  "areas": {
+    "api": {
+      "files": {
+        ".rb": 118,
+        ".py": 44,
+        ".rake": 1
+      },
+      "lines": {
+        ".rb": 5254,
+        ".py": 2490,
+        ".rake": 63
+      },
+      "source_files": 163,
+      "source_lines": 7807
+    },
+    "locales": {
+      "files": {
+        ".ts": 1
+      },
+      "lines": {
+        ".ts": 730
+      },
+      "source_files": 1,
+      "source_lines": 730
+    },
+    "mobile": {
+      "files": {
+        ".js": 2,
+        ".ts": 58,
+        ".tsx": 76
+      },
+      "lines": {
+        ".js": 61,
+        ".ts": 8453,
+        ".tsx": 14701
+      },
+      "source_files": 136,
+      "source_lines": 23215
+    },
+    "scripts": {
+      "files": {
+        ".py": 185,
+        ".ts": 9
+      },
+      "lines": {
+        ".py": 40654,
+        ".ts": 1891
+      },
+      "source_files": 194,
+      "source_lines": 42545
+    },
+    "server": {
+      "files": {
+        ".ts": 82,
+        ".py": 41
+      },
+      "lines": {
+        ".ts": 10976,
+        ".py": 2182
+      },
+      "source_files": 123,
+      "source_lines": 13158
+    },
+    "shared": {
+      "files": {
+        ".ts": 31
+      },
+      "lines": {
+        ".ts": 5653
+      },
+      "source_files": 31,
+      "source_lines": 5653
+    },
+    "tests": {
+      "files": {
+        ".py": 36,
+        ".ts": 1
+      },
+      "lines": {
+        ".py": 6545,
+        ".ts": 13
+      },
+      "source_files": 37,
+      "source_lines": 6558
+    },
+    "tools": {
+      "files": {
+        ".py": 9
+      },
+      "lines": {
+        ".py": 4416
+      },
+      "source_files": 9,
+      "source_lines": 4416
+    },
+    "web": {
+      "files": {
+        ".ts": 50,
+        ".tsx": 58,
+        ".js": 1
+      },
+      "lines": {
+        ".ts": 7603,
+        ".tsx": 13528,
+        ".js": 371
+      },
+      "source_files": 109,
+      "source_lines": 21502
+    }
+  },
+  "largest_source_files": [
+    {
+      "path": "web/src/app/services/staticData.ts",
+      "lines": 2572
+    },
+    {
+      "path": "shared/versificationData.ts",
+      "lines": 2410
+    },
+    {
+      "path": "web/src/app/App.tsx",
+      "lines": 2173
+    },
+    {
+      "path": "mobile/src/components/WordAnalysisBottomSheet.tsx",
+      "lines": 1836
+    },
+    {
+      "path": "mobile/src/services/scripture.ts",
+      "lines": 1665
+    },
+    {
+      "path": "mobile/src/screens/VerseDetailContent.tsx",
+      "lines": 1616
+    },
+    {
+      "path": "tools/bani/scripts/en.py",
+      "lines": 1601
+    },
+    {
+      "path": "tools/bani/scripts/es.py",
+      "lines": 1523
+    },
+    {
+      "path": "scripts/hutter/map_strongs.py",
+      "lines": 1516
+    },
+    {
+      "path": "scripts/generate-static-data/index.ts",
+      "lines": 1332
+    },
+    {
+      "path": "scripts/dict/build_lexicon.py",
+      "lines": 1313
+    },
+    {
+      "path": "scripts/hutter/verse_images.py",
+      "lines": 1285
+    },
+    {
+      "path": "scripts/tth/md_to_json.py",
+      "lines": 1078
+    },
+    {
+      "path": "web/src/app/components/WordCard.tsx",
+      "lines": 1067
+    },
+    {
+      "path": "scripts/tth/json_postprocess.py",
+      "lines": 1062
+    },
+    {
+      "path": "mobile/src/services/database.ts",
+      "lines": 980
+    },
+    {
+      "path": "scripts/delitzsch/review/workflow.py",
+      "lines": 961
+    },
+    {
+      "path": "web/src/app/components/MobileDesignSystemGuide.tsx",
+      "lines": 923
+    },
+    {
+      "path": "scripts/tth/main.py",
+      "lines": 920
+    },
+    {
+      "path": "web/src/app/components/DesignSystemExport.tsx",
+      "lines": 868
+    },
+    {
+      "path": "scripts/greek/translate.py",
+      "lines": 853
+    },
+    {
+      "path": "web/src/app/components/NavigationBar.tsx",
+      "lines": 847
+    },
+    {
+      "path": "mobile/src/components/VerseCard.tsx",
+      "lines": 757
+    },
+    {
+      "path": "scripts/dict/validator.py",
+      "lines": 753
+    },
+    {
+      "path": "web/src/app/legal/legalContent.ts",
+      "lines": 732
+    },
+    {
+      "path": "locales/legalContent.ts",
+      "lines": 730
+    },
+    {
+      "path": "mobile/src/features/calendar/CalendarScreen.tsx",
+      "lines": 713
+    },
+    {
+      "path": "scripts/dict/integrate_custom_dict.py",
+      "lines": 664
+    },
+    {
+      "path": "mobile/src/features/commentary/CommentaryScreen.tsx",
+      "lines": 649
+    },
+    {
+      "path": "tests/test_hutter_map_strongs.py",
+      "lines": 643
+    },
+    {
+      "path": "mobile/src/features/assemblies/AssembliesScreen.tsx",
+      "lines": 634
+    },
+    {
+      "path": "scripts/dict/utils.py",
+      "lines": 627
+    },
+    {
+      "path": "mobile/app/(tabs)/home.tsx",
+      "lines": 624
+    },
+    {
+      "path": "mobile/src/services/offlineSync.ts",
+      "lines": 608
+    },
+    {
+      "path": "scripts/dict/cli.py",
+      "lines": 603
+    },
+    {
+      "path": "scripts/greek/publish.py",
+      "lines": 582
+    },
+    {
+      "path": "scripts/hutter/review_morphology_api.py",
+      "lines": 579
+    },
+    {
+      "path": "mobile/src/services/calendarClient.test.ts",
+      "lines": 571
+    },
+    {
+      "path": "scripts/dict/import_tcysite.py",
+      "lines": 544
+    },
+    {
+      "path": "web/shared/socialPreview.ts",
+      "lines": 542
+    }
+  ],
+  "files_at_least_1000_lines": [
+    {
+      "path": "web/src/app/services/staticData.ts",
+      "lines": 2572
+    },
+    {
+      "path": "shared/versificationData.ts",
+      "lines": 2410
+    },
+    {
+      "path": "web/src/app/App.tsx",
+      "lines": 2173
+    },
+    {
+      "path": "mobile/src/components/WordAnalysisBottomSheet.tsx",
+      "lines": 1836
+    },
+    {
+      "path": "mobile/src/services/scripture.ts",
+      "lines": 1665
+    },
+    {
+      "path": "mobile/src/screens/VerseDetailContent.tsx",
+      "lines": 1616
+    },
+    {
+      "path": "tools/bani/scripts/en.py",
+      "lines": 1601
+    },
+    {
+      "path": "tools/bani/scripts/es.py",
+      "lines": 1523
+    },
+    {
+      "path": "scripts/hutter/map_strongs.py",
+      "lines": 1516
+    },
+    {
+      "path": "scripts/generate-static-data/index.ts",
+      "lines": 1332
+    },
+    {
+      "path": "scripts/dict/build_lexicon.py",
+      "lines": 1313
+    },
+    {
+      "path": "scripts/hutter/verse_images.py",
+      "lines": 1285
+    },
+    {
+      "path": "scripts/tth/md_to_json.py",
+      "lines": 1078
+    },
+    {
+      "path": "web/src/app/components/WordCard.tsx",
+      "lines": 1067
+    },
+    {
+      "path": "scripts/tth/json_postprocess.py",
+      "lines": 1062
+    }
+  ],
+  "entrypoints": [
+    "api/Gemfile",
+    "api/Rakefile",
+    "api/bin/ci",
+    "api/bin/dev",
+    "api/bin/dev-sandbox",
+    "api/bin/jobs",
+    "api/bin/rails",
+    "api/bin/rake",
+    "api/bin/setup",
+    "api/config.ru",
+    "data/hutter/staging/scripts/images/__main__.py",
+    "data/hutter/staging/scripts/images/cli.py",
+    "data/hutter/staging/scripts/pdf/__main__.py",
+    "data/hutter/staging/scripts/pdf/cli.py",
+    "data/hutter/staging/scripts/review/__main__.py",
+    "data/hutter/staging/scripts/text/__main__.py",
+    "data/hutter/staging/scripts/text/cli.py",
+    "scripts/delitzsch/__main__.py",
+    "scripts/delitzsch/cli.py",
+    "scripts/dict/__main__.py",
+    "scripts/dict/cli.py",
+    "scripts/generate-static-data/index.ts",
+    "scripts/greek/__main__.py",
+    "scripts/knowledge/__main__.py",
+    "scripts/translate/__main__.py",
+    "scripts/ts2009/cli.py",
+    "server/src/index.ts",
+    "tools/bani/research/hebrew-transliteration/src/index.ts",
+    "tools/bani/research/hebrew-transliteration/src/schemas/index.ts",
+    "web/server.ts",
+    "web/src/main.tsx"
+  ],
+  "manifests": [
+    "api/Gemfile",
+    "api/compose.yml",
+    "api/requirements.txt",
+    "mise.toml",
+    "mobile/app.json",
+    "mobile/eas.json",
+    "mobile/package.json",
+    "package.json",
+    "requirements.txt",
+    "server/package.json",
+    "web/package.json",
+    "web/wrangler.jsonc"
+  ],
+  "data": {
+    "files": 39306,
+    "bytes": 773776310
+  },
+  "top_level": [
+    "api",
+    "contracts",
+    "data",
+    "design",
+    "docs",
+    "locales",
+    "mobile",
+    "scripts",
+    "server",
+    "shared",
+    "tests",
+    "tools",
+    "web"
+  ]
+}

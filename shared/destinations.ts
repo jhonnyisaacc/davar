@@ -1,7 +1,16 @@
+import type { ProductCapabilities } from "./productCapabilities";
+
 export const DESTINATIONS = [
   { id: "home", path: "/home" },
+  { id: "assemblies", path: "/assemblies", flag: "assemblies" },
+  { id: "commentary", path: "/commentary", flag: "commentary" },
+  { id: "widgets", path: "/widgets" },
   { id: "verse", path: "/verse", primary: true },
   { id: "settings", path: "/settings" },
+  { id: "account", path: "/account" },
+  { id: "sources", path: "/sources" },
+  { id: "commentarySources", path: "/commentary-sources" },
+  { id: "support", path: "/support" },
   { id: "donate", path: "/donate" },
   { id: "features", path: "/features" },
   { id: "terms", path: "/terms" },
@@ -25,3 +34,9 @@ export const destinationById = (id: DestinationId): Destination => {
   }
   return destination;
 };
+
+export function destinationOpen(capabilities: ProductCapabilities, id: DestinationId): boolean {
+  const destination = destinationById(id);
+  if (!("flag" in destination)) return true;
+  return capabilities.flags[destination.flag] === true;
+}

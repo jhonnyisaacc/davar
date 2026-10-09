@@ -3,6 +3,58 @@
 @import "./theme.css";
 
 /* Additional global styles for Davar app */
+.app-navigation {
+	--navigation-bg: #e7e7e7;
+}
+
+.dark .app-navigation {
+	--navigation-bg: #454545;
+}
+
+.navigation-surface {
+	background-color: var(--background);
+	border-radius: 1rem;
+	box-shadow:
+		6px 6px 12px var(--neomorph-shadow-dark),
+		-6px -6px 12px var(--neomorph-shadow-light);
+}
+
+.scripture-navigation {
+	display: grid;
+	width: fit-content;
+	max-width: 100%;
+	margin: -1px auto 0;
+	border-radius: 0 0 1rem 1rem;
+	grid-template-rows: 0fr;
+	opacity: 0;
+	transition:
+		grid-template-rows 280ms cubic-bezier(0.22, 1, 0.36, 1),
+		opacity 220ms ease,
+		background-color 420ms ease,
+		box-shadow 420ms ease;
+}
+
+.scripture-navigation[data-open="true"] {
+	grid-template-rows: 1fr;
+	opacity: 1;
+}
+
+.scripture-navigation-content {
+	transform: translateY(-10px);
+	transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scripture-navigation[data-open="true"] .scripture-navigation-content {
+	transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.scripture-navigation,
+	.scripture-navigation-content {
+		transition: none;
+	}
+}
+
 body {
 	font-family: "Inter", sans-serif;
 	-webkit-font-smoothing: antialiased;

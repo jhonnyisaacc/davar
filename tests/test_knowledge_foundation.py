@@ -271,7 +271,7 @@ def test_existing_compound_occurrence():
 
 
 def test_build_determinism_source_immutability_and_output_isolation(tmp_path):
-    manifest, _ = pinned_inputs(ROOT)
+    manifest, _ = pinned_inputs(ROOT, validator=Validator(ROOT))
     tracked = [ROOT / i.get("fixture_path", i["path"]) for i in manifest["inputs"]]
     legacy = ROOT / "web/public/data"
     tracked += [p for p in legacy.rglob("*") if p.is_file()]
@@ -309,7 +309,7 @@ def test_portable_checkout_and_pinned_drift(tmp_path, output):
     clone = tmp_path / "checkout"
     shutil.copytree(ROOT / "contracts", clone / "contracts")
     shutil.copytree(ROOT / "data/knowledge", clone / "data/knowledge")
-    manifest, _ = pinned_inputs(ROOT)
+    manifest, _ = pinned_inputs(ROOT, validator=Validator(ROOT))
     for item in manifest["inputs"]:
         rel = item.get("fixture_path", item["path"])
         target = clone / rel

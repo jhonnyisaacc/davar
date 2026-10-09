@@ -24,7 +24,7 @@ const createStyles = (colors: ReturnType<typeof getColors>, padding: number) =>
       borderWidth: 0,
     },
     highlight: {
-      ...StyleSheet.absoluteFillObject,
+      ...StyleSheet.absoluteFill,
       ...Platform.select({
         ios: getNeumorphHighlightStyle(colors),
         android: {},
