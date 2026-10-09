@@ -4,6 +4,7 @@ import {
 	calendarSources,
 	calendarYear,
 	confirmedMoadim,
+	localSunsetClock,
 } from "@davar/shared/calendarPresentation";
 import { calendarIsOutdated } from "@davar/shared/calendarRefresh";
 import type { CalendarDay } from "@davar/shared/productContracts";
@@ -441,7 +442,17 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 					<Row
 						icon={Sunset}
 						title={t("calendar.localSunset")}
-						subtitle={[city!.city, city!.country].filter(Boolean).join(", ")}
+						subtitle={[
+							localSunsetClock(
+								day?.sunset_at,
+								current?.timezone ?? timezone,
+								language,
+							),
+							city?.city,
+							city?.country,
+						]
+							.filter(Boolean)
+							.join(", ")}
 						onClick={() => {
 							setQuery("");
 							setScreen("city");

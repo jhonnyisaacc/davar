@@ -159,6 +159,7 @@ export type CalendarDay = {
 	month_status: string;
 	year_start_status: string;
 	confirmation_id: string | null;
+	sunset_at?: string;
 	observation?: {
 		observed_on: string;
 		source_url: string;
