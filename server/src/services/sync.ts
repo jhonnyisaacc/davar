@@ -5,7 +5,7 @@ import { calendarFeedStates, calendarSourceEntries } from "../db/schema.js";
 import { DomainError } from "../lib/errors.js";
 import { runBridge } from "./bridge.js";
 import { backfillForEntries, reportReviews } from "./calendarConfig.js";
-import { repoRoot } from "./context.js";
+import { serverPackageRoot } from "./context.js";
 import { FEED_SOURCE, feedState } from "./feedState.js";
 import { observationImport, parseInmsObservations } from "./imports.js";
 import { observationWindowOpen } from "./window.js";
@@ -17,7 +17,7 @@ export const REFRESH_INTERVAL_MS = 30 * 60 * 1000;
 
 export function feedBridgePath(env: NodeJS.ProcessEnv = process.env): string {
 	if (env.BORE_FEED_PATH) return env.BORE_FEED_PATH;
-	return join(repoRoot(), "server", "lib", "bore", "feed_bridge.py");
+	return join(serverPackageRoot(env), "lib", "bore", "feed_bridge.py");
 }
 
 export interface FeedEntry {
