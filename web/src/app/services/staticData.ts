@@ -1,13 +1,13 @@
 import { selectDssTransliteration } from "../../../../shared/dssTransliteration";
 import {
-	GREEK_RECORDED_REVISION,
 	canActivateGreekRelease,
+	GREEK_RECORDED_REVISION,
+	type GreekReleaseManifest,
 	greekChapterPath,
 	greekLexiconPath,
 	greekOccurrencesShardPath,
 	greekStrongFamily,
 	isGreekBesorahEnabled,
-	type GreekReleaseManifest,
 	type ScriptureSourceLanguage,
 } from "../../../../shared/greekBesorah";
 import {
@@ -44,17 +44,15 @@ import {
 import { getSourceChaptersForTranslationChapter } from "../../../../shared/versification";
 import { fetchJson, resetStaticDataFetchCaches } from "./staticDataFetch";
 import {
+	type DefinitionItem,
 	loadLexiconEntryAsset,
 	resetLexiconCaches,
-	type DefinitionItem,
 	type WordAnalysis,
 } from "./staticDataLexicon";
 import {
 	fetchCachedTs2009Translation,
 	resetTs2009Caches,
 } from "./staticDataTs2009";
-
-export type { DefinitionItem, WordAnalysis };
 
 export {
 	getPolicyInstances,
@@ -63,6 +61,7 @@ export {
 	prefetchLexiconEntry,
 	searchLexicon,
 } from "./staticDataLexicon";
+export type { DefinitionItem, WordAnalysis };
 
 export interface WordResponse {
 	position: number;
@@ -978,16 +977,143 @@ export const getVerseCount = async (
 	return chapterVerses.length;
 };
 
-export const getChapterVerses = async (
+type ChapterVerseOptions = {
+	language?: "es" | "en";
+	showDss?: boolean;
+	hebrewOnly?: boolean;
+	referenceMode?: ReferenceMode;
+	besorahTextVersion?: BesorahTextVersion;
+};
+
+const chapterVerseResults = new Map<string, VerseResponse[]>();
+const greekChapterResults = new Map<string, VerseResponse[]>();
+
+export function chapterVerseCacheKey(
+	book: string,
+	chapter: number,
+	options?: ChapterVerseOptions,
+): string {
+	return [
+		book.trim().toLowerCase(),
+		String(chapter),
+		options?.language ?? "",
+		options?.hebrewOnly ? "h" : "",
+		options?.showDss ? "d" : "",
+		options?.referenceMode ?? "source",
+		options?.besorahTextVersion ?? "delitzsch",
+	].join("|");
+}
+
+function rememberChapterVerses(
+	book: string,
+	bookEntry: { id: string; name: string },
+	chapter: number,
+	options: ChapterVerseOptions | undefined,
+	verses: VerseResponse[],
+): void {
+	if (verses.length === 0) return;
+	const aliases = new Set(
+		[book, bookEntry.id, bookEntry.name].map((alias) =>
+			alias.trim().toLowerCase(),
+		),
+	);
+	for (const alias of aliases) {
+		chapterVerseResults.set(
+			chapterVerseCacheKey(alias, chapter, options),
+			verses,
+		);
+	}
+}
+
+export function peekChapterVerses(
+	book: string,
+	chapter: number,
+	options?: ChapterVerseOptions,
+): VerseResponse[] | null {
+	return (
+		chapterVerseResults.get(chapterVerseCacheKey(book, chapter, options)) ??
+		null
+	);
+}
+
+export function readyHebrewChapter(
+	book: string,
+	chapter: number,
+	options: {
+		language?: "es" | "en";
+		showDss?: boolean;
+		referenceMode?: ReferenceMode;
+		besorahTextVersion?: BesorahTextVersion;
+		sourceFirst: boolean;
+	},
+): { full: VerseResponse[] | null; source: VerseResponse[] | null } {
+	const shared = {
+		language: options.language,
+		referenceMode: options.referenceMode,
+		besorahTextVersion: options.besorahTextVersion,
+	};
+	const withDss = peekChapterVerses(book, chapter, {
+		...shared,
+		hebrewOnly: false,
+		showDss: options.showDss,
+	});
+	const withoutDss = options.showDss
+		? peekChapterVerses(book, chapter, {
+				...shared,
+				hebrewOnly: false,
+				showDss: false,
+			})
+		: null;
+	const full = withDss ?? withoutDss;
+	const source =
+		options.sourceFirst && !full
+			? peekChapterVerses(book, chapter, {
+					...shared,
+					language: undefined,
+					hebrewOnly: true,
+					showDss: false,
+				})
+			: null;
+	return { full, source };
+}
+
+function greekChapterCacheKey(
 	book: string,
 	chapter: number,
 	options?: {
-		language?: "es" | "en";
-		showDss?: boolean;
-		hebrewOnly?: boolean;
-		referenceMode?: ReferenceMode;
-		besorahTextVersion?: BesorahTextVersion;
+		language?: "en" | "es" | "he";
+		includeTranslation?: boolean;
+		revision?: string;
 	},
+): string {
+	return [
+		book.trim().toLowerCase(),
+		String(chapter),
+		options?.language ?? "",
+		options?.includeTranslation === false ? "source" : "translated",
+		options?.revision ?? GREEK_RECORDED_REVISION,
+	].join("|");
+}
+
+export function peekGreekChapterVerses(
+	book: string,
+	chapter: number,
+	options?: {
+		language?: "en" | "es" | "he";
+		includeTranslation?: boolean;
+		revision?: string;
+	},
+): VerseResponse[] | null {
+	return (
+		greekChapterResults.get(greekChapterCacheKey(book, chapter, options)) ??
+		null
+	);
+}
+
+export const getChapterVerses = async (
+	book: string,
+	chapter: number,
+	options?: ChapterVerseOptions,
 ): Promise<VerseResponse[]> => {
 	const metadata = await loadMetadata();
 	const bookEntry = findBook(metadata.books, book);
@@ -1190,21 +1316,22 @@ export const getChapterVerses = async (
 		);
 	});
 
-	if (referenceMode === "translation" && options?.language) {
-		return mappedVerses
-			.filter((verse) => verse.chapter === chapter)
-			.sort(
-				(a, b) =>
-					a.verse - b.verse ||
-					a.sourceChapter - b.sourceChapter ||
-					a.sourceVerse - b.sourceVerse,
-			);
-	}
-
-	return mappedVerses.sort(
-		(a, b) =>
-			a.sourceChapter - b.sourceChapter || a.sourceVerse - b.sourceVerse,
-	);
+	const ordered =
+		referenceMode === "translation" && options?.language
+			? mappedVerses
+					.filter((verse) => verse.chapter === chapter)
+					.sort(
+						(a, b) =>
+							a.verse - b.verse ||
+							a.sourceChapter - b.sourceChapter ||
+							a.sourceVerse - b.sourceVerse,
+					)
+			: mappedVerses.sort(
+					(a, b) =>
+						a.sourceChapter - b.sourceChapter || a.sourceVerse - b.sourceVerse,
+				);
+	rememberChapterVerses(book, bookEntry, chapter, options, ordered);
+	return ordered;
 };
 
 export const getVerse = async (
@@ -1365,7 +1492,7 @@ export const getGreekChapterVerses = async (
 	const verseNumbers = [
 		...new Set([...sourceByVerse.keys(), ...translationByVerse.keys()]),
 	].sort((left, right) => left - right);
-	return verseNumbers.map((verseNumber) => {
+	const greekVerses = verseNumbers.map((verseNumber) => {
 		const verse = sourceByVerse.get(verseNumber);
 		const translated = translationByVerse.get(verseNumber);
 		return {
@@ -1376,7 +1503,7 @@ export const getGreekChapterVerses = async (
 			revision,
 			sourceChapter: chapter,
 			sourceVerse: verseNumber,
-			source_language: "greek",
+			source_language: "greek" as const,
 			text: cleanGreekSurfaceText(verse?.text ?? ""),
 			translation: translated?.translation,
 			translation_footnotes: translated?.translation_footnotes,
@@ -1386,11 +1513,18 @@ export const getGreekChapterVerses = async (
 				...word,
 				has_dss_variant: false,
 				prefixes: [],
-				source_language: "greek",
+				source_language: "greek" as const,
 				text: cleanGreekSurfaceText(word.text),
 			})),
 		};
 	});
+	if (greekVerses.length > 0) {
+		greekChapterResults.set(
+			greekChapterCacheKey(book, chapter, options),
+			greekVerses,
+		);
+	}
+	return greekVerses;
 };
 
 export const getGreekVerse = async (
@@ -1561,6 +1695,15 @@ export const prefetchChapterResources = (
 	}).catch(() => undefined);
 };
 
+export const prefetchGreekChapter = (
+	book: string,
+	chapter: number,
+	options?: Parameters<typeof getGreekChapterVerses>[2],
+): void => {
+	if (!Number.isFinite(chapter) || chapter <= 0) return;
+	void getGreekChapterVerses(book, chapter, options).catch(() => undefined);
+};
+
 // ── Prefix Service ───────────────────────────────────────────────────────
 
 let prefixesPromise: Promise<Record<string, unknown>> | null = null;
@@ -1587,4 +1730,6 @@ export const resetStaticDataCachesForTests = (): void => {
 	greekManifestPromises.clear();
 	greekLexiconPromises.clear();
 	greekOccurrenceShardPromises.clear();
+	chapterVerseResults.clear();
+	greekChapterResults.clear();
 };

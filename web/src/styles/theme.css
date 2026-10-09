@@ -562,6 +562,22 @@ html:has(.full-chapter-scroll) {
   transition: transform 220ms ease;
 }
 
+.translation-line-hold {
+  display: block;
+}
+
+.translation-line {
+  display: block;
+  height: 27.625px;
+  max-width: 100%;
+  margin: 0 auto;
+  background: linear-gradient(var(--skeleton-bg), var(--skeleton-bg));
+  background-size: 100% 7px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 999px;
+}
+
 .scroll-nav-hint {
   position: fixed;
   left: 50%;
