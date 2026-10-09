@@ -4,7 +4,7 @@ import type { DatabaseOrTx } from "../db/client.js";
 import { DomainError } from "../lib/errors.js";
 import { runBridge } from "./bridge.js";
 import { monthAnchors } from "./calendarConfig.js";
-import { repoRoot } from "./context.js";
+import { serverPackageRoot } from "./context.js";
 import { consumerStatus, feedState, FEED_SOURCE } from "./feedState.js";
 import { sandboxEnabled } from "./sandbox.js";
 import { observationWindowOpen } from "./window.js";
@@ -36,16 +36,18 @@ export interface CalendarResult {
 
 export function bridgePath(env: NodeJS.ProcessEnv = process.env): string {
 	if (env.BORE_BRIDGE_PATH) return env.BORE_BRIDGE_PATH;
-	return join(repoRoot(), "server", "lib", "bore", "bridge.py");
+	return join(serverPackageRoot(env), "lib", "bore", "bridge.py");
 }
 
 export const COUNTING_RULE = "weekly_shabbat_during_hag_hamatzot";
 
-function supportedTimeZones(): Set<string> {
+function canonicalTimeZone(value: unknown): string | null {
+	if (typeof value !== "string" || value.trim() === "") return null;
 	try {
-		return new Set((Intl as unknown as { supportedValuesOf(key: string): string[] }).supportedValuesOf("timeZone"));
+		const resolved = new Intl.DateTimeFormat("en", { timeZone: value }).resolvedOptions().timeZone;
+		return resolved ? resolved : null;
 	} catch {
-		return new Set(["UTC", "Asia/Jerusalem", "America/Argentina/Buenos_Aires"]);
+		return null;
 	}
 }
 
@@ -121,9 +123,8 @@ export async function biblicalCalendar(
 	if (!Number.isInteger(count) || count < 1 || count > 60) {
 		throw new DomainError("invalid_calendar_range");
 	}
-	if (typeof input.timezone !== "string" || !supportedTimeZones().has(input.timezone)) {
-		throw new DomainError("invalid_timezone");
-	}
+	const timezone = canonicalTimeZone(input.timezone);
+	if (!timezone) throw new DomainError("invalid_timezone");
 	const time = parseInstant(input.instant);
 	let state = await feedState(db);
 	const scenario = sandboxEnabled(env, nodeEnv) ? state.developmentScenario : "live";
@@ -167,7 +168,7 @@ export async function biblicalCalendar(
 		instant: time.toISOString(),
 		latitude: lat,
 		longitude: lon,
-		timezone: input.timezone,
+		timezone,
 		count,
 		month_anchors: scenario === "live" ? monthAnchors() : [],
 		counting_rule: scenario === "live" ? COUNTING_RULE : null,

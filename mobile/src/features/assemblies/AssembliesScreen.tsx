@@ -1,4 +1,5 @@
 import { createAssembliesClient } from "@davar/shared/assembliesClient";
+import { destinationOpen } from "@davar/shared/destinations";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Linking, Pressable, Switch, Text, View } from "react-native";
 import { DiscoveryResults } from "./DiscoveryResults";
@@ -41,7 +42,7 @@ export default function AssembliesScreen() {
 	const accountId = useSession((s) => s.account?.id);
 	const { capabilities } = useProductCapabilities();
 	const { t } = useTranslation();
-	if (!capabilities.flags.assemblies)
+	if (!destinationOpen(capabilities, "assemblies"))
 		return (
 			<Page title={t("tabs.assemblies")}>
 				<Copy>{t("featureAvailability.assembliesUnavailable")}</Copy>

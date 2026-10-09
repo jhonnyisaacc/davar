@@ -195,7 +195,13 @@ console.log("[davar-web] phase=assets done");
 const distIndexPath = join(distDir, "index.html");
 if (existsSync(distIndexPath)) {
 	const html = readFileSync(distIndexPath, "utf-8");
-	const normalizedHtml = html.replace(/(href|src)="\.\/([^"]+)"/g, '$1="/$2"');
+	let normalizedHtml = html.replace(/(href|src)="\.\/([^"]+)"/g, '$1="/$2"');
+	if (!normalizedHtml.includes('fetchpriority="low"')) {
+		normalizedHtml = normalizedHtml.replace(
+			'<script type="module"',
+			'<script type="module" fetchpriority="low"',
+		);
+	}
 
 	if (normalizedHtml !== html) {
 		writeFileSync(distIndexPath, normalizedHtml, "utf-8");

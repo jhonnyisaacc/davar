@@ -56,6 +56,7 @@ export function useVerseLibrary({
 	const [chapterCount, setChapterCount] = useState(1);
 	const [verseCount, setVerseCount] = useState(1);
 	const [isLoading, setIsLoading] = useState(false);
+	const [translationPending, setTranslationPending] = useState(false);
 	const [_errorMessage, setErrorMessage] = useState<string | null>(null);
 	const chapterLoadRequestRef = useRef(0);
 
@@ -203,6 +204,7 @@ export function useVerseLibrary({
 			isMounted && loadRequestId === chapterLoadRequestRef.current;
 		const loadChapterData = async () => {
 			setIsLoading(true);
+			setTranslationPending(false);
 			setErrorMessage(null);
 			const useGreekSource =
 				greekAvailable &&
@@ -229,6 +231,9 @@ export function useVerseLibrary({
 					: ("source" as const),
 				besorahTextVersion,
 			};
+			// Hebrew (or Greek) is enough to put the verse on screen. The translation
+			// file is the whole book, so it must not hold the words back.
+			const paintSourceFirst = !useGreekSource && !translationOnly;
 			try {
 				const [chapterCountValue, verseCountValue, loadedVerses] =
 					await Promise.all([
@@ -242,10 +247,21 @@ export function useVerseLibrary({
 										language: greekOverlayLanguage,
 									},
 								)
-							: getChapterVerses(currentBook.toLowerCase(), currentChapter, {
-									...chapterOptions,
-									showDss: false,
-								}),
+							: getChapterVerses(
+									currentBook.toLowerCase(),
+									currentChapter,
+									paintSourceFirst
+										? {
+												...chapterOptions,
+												hebrewOnly: true,
+												language: undefined,
+												showDss: false,
+											}
+										: {
+												...chapterOptions,
+												showDss: false,
+											},
+								),
 					]);
 				const verses = useGreekSource
 					? Array.from({ length: verseCountValue }, (_, index) => {
@@ -291,17 +307,29 @@ export function useVerseLibrary({
 				}
 				if (isCurrentLoad()) setIsLoading(false);
 
-				if (!useGreekSource && showQumran) {
-					const enrichedVerses = await getChapterVerses(
-						currentBook.toLowerCase(),
-						currentChapter,
-						{
-							...chapterOptions,
-							showDss: true,
-						},
-					);
-					if (!isCurrentLoad()) return;
-					setChapterVerses(enrichedVerses);
+				const enrichWithTranslation =
+					paintSourceFirst && Boolean(hebrewTranslationLanguage);
+				const enrichWithQumran = !useGreekSource && showQumran;
+				if (enrichWithTranslation || enrichWithQumran) {
+					if (enrichWithTranslation) {
+						setTranslationPending(true);
+					}
+					try {
+						const enrichedVerses = await getChapterVerses(
+							currentBook.toLowerCase(),
+							currentChapter,
+							{
+								...chapterOptions,
+								showDss: showQumran,
+							},
+						);
+						if (!isCurrentLoad()) return;
+						setChapterVerses(enrichedVerses);
+					} catch (error) {
+						console.error("Failed to load chapter translation", error);
+					} finally {
+						if (isCurrentLoad()) setTranslationPending(false);
+					}
 				}
 
 				const scheduleIdle =
@@ -490,6 +518,7 @@ export function useVerseLibrary({
 		chapterCount,
 		verseCount,
 		isLoading,
+		translationPending,
 		currentVerseData,
 		currentVerseIndex,
 		bookOptions,

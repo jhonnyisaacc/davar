@@ -7,7 +7,6 @@ import { NeumorphCard } from "./components/NeumorphCard";
 import { SandboxBanner } from "./components/SandboxBanner";
 import { Skeleton } from "./components/ui/skeleton";
 import { VerseDisplay } from "./components/VerseDisplay";
-import { WordCard } from "./features/reader/WordCard";
 import { useReaderChrome } from "./features/reader/useReaderChrome";
 import { useReaderPreferences } from "./features/reader/useReaderPreferences";
 import { useReaderRoute } from "./features/reader/useReaderRoute";
@@ -16,6 +15,7 @@ import { useReadingPosition } from "./features/reader/useReadingPosition";
 import { useScreenNavigation } from "./features/reader/useScreenNavigation";
 import { useVerseLibrary } from "./features/reader/useVerseLibrary";
 import { useWordSelection } from "./features/reader/useWordSelection";
+import { WordCard } from "./features/reader/WordCard";
 import { useCalendarLifecycle } from "./hooks/useCalendar";
 import { renderNonVerseScreen } from "./nonVerseScreens";
 import { prefetchLexiconEntry } from "./services/staticData";
@@ -82,6 +82,7 @@ export default function App() {
 		chapterCount,
 		verseCount,
 		isLoading,
+		translationPending,
 		currentVerseData,
 		currentVerseIndex,
 		bookOptions,
@@ -369,6 +370,7 @@ export default function App() {
 											}
 											sourceAvailable={currentVerseData.available !== false}
 											translation={currentVerseData.translation ?? ""}
+											translationPending={translationPending}
 											verseRef={`${currentBook} ${currentChapter}:${currentVerse}`}
 											verseNumber={currentVerseData.verse}
 											bookName={getDisplayBookName(currentBook)}

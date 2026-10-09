@@ -47,8 +47,11 @@ export async function productCapabilities(
 	},
 ): Promise<Capabilities> {
 	const env = input.env ?? process.env;
-	const flags =
-		input.flags ?? (await evaluateFlags(input.userId ?? null, { env, http: input.http }));
+	const flags = await evaluateFlags(input.userId ?? null, {
+		env,
+		http: input.http,
+		flags: input.flags,
+	});
 	const providers = flags.ai_provider_connections ? availableProviders(env) : [];
 	const shared =
 		flags.ai_shared_openrouter && sharedOpenrouter(env) && (await sharedAvailable(db, env));

@@ -4,6 +4,7 @@ import {
 	allowedOrigins,
 	DEFAULT_WEB_ORIGINS,
 	DEVELOPMENT_WEB_ORIGINS,
+	originAllowed,
 } from "../src/services/webOrigins.js";
 
 describe("web origins", () => {
@@ -28,6 +29,21 @@ describe("web origins", () => {
 		expect(
 			allowedOrigins({ configured: " https://a.test,,https://b.test ", development: false }),
 		).toEqual(["https://a.test", "https://b.test"]);
+	});
+
+	test("hosted product and pages preview origins are allowed", () => {
+		const configured = ["https://app.example.test"];
+		expect(originAllowed("https://app.example.test", configured)).toBe(true);
+		expect(originAllowed("https://davar.bible", configured)).toBe(true);
+		expect(originAllowed("https://feat-commentary-sign-in-flag.davar.pages.dev", configured)).toBe(
+			true,
+		);
+		expect(originAllowed("https://8511c1b8.davar.pages.dev", configured)).toBe(true);
+		expect(originAllowed("https://davar.pages.dev", configured)).toBe(true);
+		expect(originAllowed("http://8511c1b8.davar.pages.dev", configured)).toBe(false);
+		expect(originAllowed("https://evil.example.test", configured)).toBe(false);
+		expect(originAllowed("https://davar.pages.dev.evil.com", configured)).toBe(false);
+		expect(originAllowed("https://notdavar.pages.dev", configured)).toBe(false);
 	});
 });
 

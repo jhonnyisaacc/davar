@@ -29,6 +29,37 @@ const STATIC_BASE_CANDIDATES: StaticBase[] = [
 const normalizeStaticPath = (path: string): string =>
 	path.startsWith("/") ? path : `/${path}`;
 
+type EarlyChapterSlot = {
+	path: string;
+	promise: Promise<string>;
+};
+
+const earlyChapterSlot = (): EarlyChapterSlot | null => {
+	const host = globalThis as typeof globalThis & {
+		__DAVAR_EARLY_CHAPTER__?: EarlyChapterSlot;
+	};
+	const slot = host.__DAVAR_EARLY_CHAPTER__;
+	if (!slot || typeof slot.path !== "string" || !slot.promise) return null;
+	return slot;
+};
+
+const readMatchingEarlyChapter = async (
+	path: string,
+): Promise<string | null> => {
+	const slot = earlyChapterSlot();
+	if (!slot) return null;
+
+	const requested = normalizeStaticPath(path).split("?")[0];
+	const earlyPath = slot.path.split("?")[0];
+	if (requested !== earlyPath && !requested.endsWith(earlyPath)) return null;
+
+	try {
+		return await slot.promise;
+	} catch {
+		return null;
+	}
+};
+
 const buildCandidatePaths = (path: string): string[] => {
 	const normalizedPath = normalizeStaticPath(path);
 	if (normalizedPath.startsWith("/api/")) {
@@ -147,6 +178,11 @@ export const fetchJson = async <T>(
 	}
 
 	const promise = (async () => {
+		const earlyBody = await readMatchingEarlyChapter(path);
+		if (earlyBody !== null) {
+			return JSON.parse(earlyBody) as T;
+		}
+
 		const errors: string[] = [];
 		const isApi = normalizeStaticPath(path).startsWith("/api/");
 		const troubleshootingHint = isApi

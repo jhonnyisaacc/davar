@@ -27,6 +27,7 @@ import {
   Users,
 } from "lucide-react-native";
 import { useAppStore } from "@/src/store/useAppStore";
+import { destinationOpen, type DestinationId } from "@davar/shared/destinations";
 import { useProductCapabilities } from "@/src/features/product/useProductCapabilities";
 import {
   NAVIGATION_DOCK_HEIGHT,
@@ -44,8 +45,8 @@ const hidden = ["home", "index", "search", "bookmarks", "explore"];
 
 function NavigationDock({ state, navigation }: BottomTabBarProps) {
   const { capabilities } = useProductCapabilities();
-  const visibleDestinations = destinations.filter(
-    ({ id }) => id !== "assemblies" || capabilities.flags.assemblies,
+  const visibleDestinations = destinations.filter(({ id }) =>
+    destinationOpen(capabilities, id as DestinationId),
   );
   const { t } = useTranslation();
   const dark = useAppStore((s) => s.themeMode === "dark");
@@ -56,10 +57,9 @@ function NavigationDock({ state, navigation }: BottomTabBarProps) {
     Partial<Record<string, LayoutRectangle>>
   >({});
   const selectedId = state.routes[state.index].name;
-  const selectedLayout =
-    selectedId === "assemblies" && !capabilities.flags.assemblies
-      ? undefined
-      : itemLayouts[selectedId];
+  const selectedLayout = visibleDestinations.some(({ id }) => id === selectedId)
+    ? itemLayouts[selectedId]
+    : undefined;
   const indicatorPositioned = useRef(false);
   const indicatorX = useSharedValue(0);
   const indicatorWidth = useSharedValue(0);

@@ -1,5 +1,6 @@
 import { useEffect, useSyncExternalStore } from "react";
 import { createCalendarClient } from "@davar/shared/calendarClient";
+import { calendarIsOutdated } from "@davar/shared/calendarRefresh";
 import { productApi } from "../services/productApi";
 
 export const calendarClient = createCalendarClient(productApi, {
@@ -17,7 +18,10 @@ export function useCalendarLifecycle() {
 	useEffect(() => {
 		const stop = calendarClient.start();
 		const resume = () => {
-			if (!document.hidden) void calendarClient.refresh();
+			if (document.hidden) return;
+			const { calendar } = calendarClient.getSnapshot();
+			if (calendar && !calendarIsOutdated(calendar)) return;
+			void calendarClient.refresh();
 		};
 		window.addEventListener("focus", resume);
 		window.addEventListener("online", resume);

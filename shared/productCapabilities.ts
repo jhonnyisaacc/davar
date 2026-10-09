@@ -1,24 +1,38 @@
 import type { ProductClient } from "./productClient";
 
+export const CAPABILITY_FLAG_KEYS = [
+	"ai_provider_connections",
+	"ai_shared_openrouter",
+	"assemblies",
+	"commentary",
+	"account_sign_in",
+] as const;
+
+export type CapabilityFlagKey = (typeof CAPABILITY_FLAG_KEYS)[number];
+
 export type ProductCapabilities = {
-	flags: {
-		ai_provider_connections: boolean;
-		ai_shared_openrouter: boolean;
-		assemblies: boolean;
-	};
+	flags: Record<CapabilityFlagKey, boolean>;
 	ai: { available: boolean; shared_openrouter: boolean; providers: string[] };
 };
+
+function capabilityFlags(read: (key: CapabilityFlagKey) => boolean): Record<CapabilityFlagKey, boolean> {
+	const flags = {} as Record<CapabilityFlagKey, boolean>;
+	for (const key of CAPABILITY_FLAG_KEYS) flags[key] = read(key) === true;
+	return flags;
+}
+
 export const CLOSED_CAPABILITIES: ProductCapabilities = {
-	flags: { ai_provider_connections: false, ai_shared_openrouter: false, assemblies: false },
+	flags: capabilityFlags(() => false),
 	ai: { available: false, shared_openrouter: false, providers: [] },
 };
+
+export function accountEntryOpen(capabilities: ProductCapabilities, authenticated: boolean): boolean {
+	return authenticated || capabilities.flags.account_sign_in === true;
+}
+
 export function normalizeCapabilities(value: unknown): ProductCapabilities {
 	const input = value as Partial<ProductCapabilities> | null;
-	const flags = {
-		ai_provider_connections: input?.flags?.ai_provider_connections === true,
-		ai_shared_openrouter: input?.flags?.ai_shared_openrouter === true,
-		assemblies: input?.flags?.assemblies === true,
-	};
+	const flags = capabilityFlags((key) => input?.flags?.[key] === true);
 	return {
 		flags,
 		ai: {

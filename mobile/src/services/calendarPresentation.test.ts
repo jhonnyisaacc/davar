@@ -166,6 +166,12 @@ describe("calendar presentation", () => {
       messageKey: "calendar.awaitingConfirmation",
     });
     expect(readingCalendarPill(state, false)).toBeNull();
+    expect(
+      readingCalendarPill({ ...state, busy: true }, true),
+    ).toEqual({
+      kind: "status",
+      messageKey: "calendar.awaitingConfirmation",
+    });
   });
   test("reading pill preserves the default moadim-only behavior", () => {
     expect(readingCalendarPill(calendarState(), false)?.kind).toBe("day");

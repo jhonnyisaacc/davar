@@ -1,4 +1,4 @@
-import { Hono } from "hono";
+import { Hono, type MiddlewareHandler } from "hono";
 import { and, desc, eq, sql } from "drizzle-orm";
 import { z } from "zod";
 import { conversations, messages } from "../../db/schema.js";
@@ -8,6 +8,7 @@ import { dec, decJson, enc } from "../../services/fields.js";
 import { askCommentary, type AnswerShape } from "../../services/commentary.js";
 import { checkRateLimit } from "../../services/rateLimit.js";
 import { productCapabilities } from "../../services/capabilities.js";
+import { requireFlag } from "../../services/flags.js";
 import { requireUser } from "../auth.js";
 import { parseBody, uuidParam } from "../validation.js";
 import type { AppVariables } from "../deps.js";
@@ -36,6 +37,18 @@ function messageShape(answer: AnswerShape) {
 }
 
 export const conversationRoutes = new Hono<{ Variables: AppVariables }>();
+
+const requireCommentary: MiddlewareHandler<{ Variables: AppVariables }> = async (c, next) => {
+	const { db, config, env, http, flags } = c.get("deps");
+	const user = await requireUser(db, config, c);
+	await requireFlag("commentary", user.id, { env, http, flags });
+	await next();
+};
+
+// A pathless use() on this router would run for every later route, because the
+// router is mounted at "/".
+conversationRoutes.use("/conversations", requireCommentary);
+conversationRoutes.use("/conversations/*", requireCommentary);
 
 conversationRoutes.get("/conversations", async (c) => {
 	const { db, config } = c.get("deps");

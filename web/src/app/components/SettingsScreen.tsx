@@ -1,18 +1,20 @@
-import { Fragment, type ReactNode } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import type { BesorahLanguage } from "@davar/shared/greekBesorah";
+import { accountEntryOpen } from "@davar/shared/productCapabilities";
 import {
-	SHARED_SETTINGS_ORDER,
 	canUseSeferStyle,
 	isSeferStyleVisible,
+	SHARED_SETTINGS_ORDER,
 	type SharedSettingId,
 } from "@davar/shared/settingsOrder";
-import type { BesorahLanguage } from "@davar/shared/greekBesorah";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Fragment, type ReactNode } from "react";
+import { useProductCapabilities } from "../hooks/useProductCapabilities";
 import { useTranslation } from "../hooks/useTranslation";
 import { productApi } from "../services/productApi";
-import { SettingsResources } from "./SettingsResources";
+import type { RouteScreen } from "../utils/routeState";
 import { CalendarCityNotice } from "./CalendarCityNotice";
 import { PillToggle } from "./PillToggle";
-import type { RouteScreen } from "../utils/routeState";
+import { SettingsResources } from "./SettingsResources";
 
 export interface SettingsScreenProps {
 	theme: "light" | "dark";
@@ -45,6 +47,7 @@ export function SettingsScreen(
 	props: SettingsScreenProps & { onOpenScreen?: (screen: RouteScreen) => void },
 ) {
 	const { t } = useTranslation(props.language);
+	const { capabilities } = useProductCapabilities();
 	const rtl = props.language === "he";
 	const Chevron = rtl ? ChevronLeft : ChevronRight;
 	const translationOnly = props.translationOnly ?? false;
@@ -228,21 +231,23 @@ export function SettingsScreen(
 			>
 				{t("settings.title")}
 			</h1>
-			<button
-				type="button"
-				className={`${rowClass} w-full text-start`}
-				onClick={props.onAccountClick}
-			>
-				<span className="text-[15px]">{t("settings.account.title")}</span>
-				<span className="inline-flex items-center gap-1 text-[13px] text-[var(--accent-deep)]">
-					{t(
-						productApi.authenticated()
-							? "settings.account.manage"
-							: "settings.account.signIn",
-					)}
-					<Chevron size={16} />
-				</span>
-			</button>
+			{accountEntryOpen(capabilities, productApi.authenticated()) ? (
+				<button
+					type="button"
+					className={`${rowClass} w-full text-start`}
+					onClick={props.onAccountClick}
+				>
+					<span className="text-[15px]">{t("settings.account.title")}</span>
+					<span className="inline-flex items-center gap-1 text-[13px] text-[var(--accent-deep)]">
+						{t(
+							productApi.authenticated()
+								? "settings.account.manage"
+								: "settings.account.signIn",
+						)}
+						<Chevron size={16} />
+					</span>
+				</button>
+			) : null}
 			{SHARED_SETTINGS_ORDER.map((id) => (
 				<Fragment key={id}>{renderSetting(id)}</Fragment>
 			))}

@@ -3,17 +3,34 @@ import { DomainError } from "../lib/errors.js";
 import type { ProviderHttp } from "./oauth.js";
 import { fetchHttp } from "./oauth.js";
 
-export const FLAG_KEYS = ["ai_provider_connections", "ai_shared_openrouter", "assemblies"] as const;
+export const FLAG_KEYS = [
+	"ai_provider_connections",
+	"ai_shared_openrouter",
+	"assemblies",
+	"commentary",
+	"account_sign_in",
+] as const;
 
 export type FlagKey = (typeof FLAG_KEYS)[number];
 
 export type FlagSet = Record<FlagKey, boolean>;
 
-export const CLOSED_FLAGS: FlagSet = {
-	ai_provider_connections: false,
-	ai_shared_openrouter: false,
-	assemblies: false,
+const FLAG_REQUIRES: Partial<Record<FlagKey, FlagKey>> = {
+	ai_provider_connections: "commentary",
+	ai_shared_openrouter: "commentary",
 };
+
+function flagSet(read: (key: FlagKey) => boolean): FlagSet {
+	const flags = {} as FlagSet;
+	for (const key of FLAG_KEYS) flags[key] = read(key) === true;
+	for (const key of FLAG_KEYS) {
+		const parent = FLAG_REQUIRES[key];
+		if (parent !== undefined && flags[parent] !== true) flags[key] = false;
+	}
+	return flags;
+}
+
+export const CLOSED_FLAGS: FlagSet = flagSet(() => false);
 
 const ALLOWED_HOSTS = new Set(["https://us.i.posthog.com", "https://eu.i.posthog.com"]);
 
@@ -39,7 +56,8 @@ export async function evaluateFlags(
 	userId: string | null,
 	deps: FlagsDeps = {},
 ): Promise<FlagSet> {
-	if (deps.flags) return { ...deps.flags };
+	const stub = deps.flags;
+	if (stub) return flagSet((key) => stub[key] === true);
 	const env = deps.env ?? process.env;
 	const token = (env.POSTHOG_PROJECT_TOKEN ?? "").trim();
 	if (!token) return { ...CLOSED_FLAGS };
@@ -77,12 +95,8 @@ export async function evaluateFlags(
 		) {
 			throw new DomainError("flags_unavailable", 503);
 		}
-		const flags = payload.flags;
-		const result: FlagSet = {
-			ai_provider_connections: flags?.ai_provider_connections?.enabled === true,
-			ai_shared_openrouter: flags?.ai_shared_openrouter?.enabled === true,
-			assemblies: flags?.assemblies?.enabled === true,
-		};
+		const reported = payload.flags;
+		const result = flagSet((key) => reported?.[key]?.enabled === true);
 		flagCache.set(cacheKey, { expires: Date.now() + 30 * 1000, value: result });
 		return { ...result };
 	} catch {

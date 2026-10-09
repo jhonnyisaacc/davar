@@ -188,7 +188,11 @@ export async function askCommentary(
 	const context = validateCommentaryContext(
 		input.context as Record<string, unknown> | null,
 	);
-	const flags = deps.flags ?? (await evaluateFlags(input.userId, { env, http: deps.http }));
+	const flags = await evaluateFlags(input.userId, {
+		env,
+		http: deps.http,
+		flags: deps.flags,
+	});
 	const sandbox = sandboxEnabled(env, nodeEnv);
 	const development = flags.ai_shared_openrouter && developmentOpenrouter(env, nodeEnv);
 	const sharedAvailable = flags.ai_shared_openrouter && sharedOpenrouter(env) && !development;
