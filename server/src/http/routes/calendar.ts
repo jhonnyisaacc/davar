@@ -1,7 +1,7 @@
 import { Hono, type Context } from "hono";
 import { biblicalCalendar } from "../../services/calendar.js";
 import { checkRateLimit } from "../../services/rateLimit.js";
-import { searchCities } from "../../services/cities.js";
+import { cachedCitySearch, searchCities } from "../../services/cities.js";
 import { sandboxEnabled } from "../../services/sandbox.js";
 import { DomainError } from "../../lib/errors.js";
 import { clientIp } from "../auth.js";
@@ -13,16 +13,23 @@ export const calendarRoutes = new Hono<{ Variables: AppVariables }>();
 
 calendarRoutes.get("/calendar/locations", async (c) => {
 	const { db, config, env } = c.get("deps");
-	await checkRateLimit(db, `calendar_city/${clientIp(c)}`, 10);
 	const query = c.req.query().q;
+	if (cachedCitySearch(query) === null) {
+		await checkRateLimit(db, `calendar_city/${clientIp(c)}`, 10);
+	}
 	if (typeof query !== "string") throw new DomainError("invalid_city_query");
 	const cities = await searchCities(query, {
 		secret: config.encryptionDeterministicKey,
 		sandbox: sandboxEnabled(env, env.NODE_ENV ?? "development"),
 		env,
+		sign: false,
 	});
 	return c.json({
-		cities: cities.map(({ selection: _selection, ...rest }) => rest),
+		cities: cities.map((city) => {
+			if (!("selection" in city)) return city;
+			const { selection: _selection, ...rest } = city;
+			return rest;
+		}),
 	});
 });
 
