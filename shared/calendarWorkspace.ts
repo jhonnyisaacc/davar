@@ -15,6 +15,7 @@ type Workspace = {
 type CalendarLookup = {
 	cachedCities?(query: string): CalendarCity[] | undefined;
 	searchCities(query: string): Promise<CalendarCity[]>;
+	cachedDay?(offset: number): CalendarResponse | undefined;
 	day(offset: number): Promise<CalendarResponse>;
 	cachedYear?(year: number): CalendarResponse | undefined;
 	year(year: number): Promise<CalendarResponse>;
@@ -117,7 +118,17 @@ export function createCalendarWorkspace(
 				update("day", empty(null));
 				return undefined;
 			}
-			return request("day", null, () => client.day(offset));
+			const cached = client.cachedDay?.(offset);
+			if (cached) {
+				update("day", {
+					data: cached,
+					busy: false,
+					error: false,
+					searched: true,
+				});
+				return undefined;
+			}
+			return request("day", state.day.data, () => client.day(offset));
 		},
 		loadYear: (year: number, enabled: boolean) => {
 			if (!enabled) return undefined;

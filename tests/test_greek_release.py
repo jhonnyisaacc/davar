@@ -128,6 +128,9 @@ def test_complete_release_is_published_and_revalidated(tmp_path: Path):
     assert not (release_dir / "occurrences.json").exists()
     shard = read_json(release_dir / "occurrences" / "G30.json")
     assert shard["G3056"]["count"] == 27
+    lexicon_shard = read_json(release_dir / "lexicon" / "G30.json")
+    assert lexicon_shard["G3056"] == lexicon["G3056"]
+    assert manifest["lexicon_shards"]["G30"]["path"] == "lexicon/G30.json"
     assert len(shard["G3056"]["references"]) == 27
     chapter_path = release_dir / "books" / manifest["books"][0] / "1.json"
     chapter_text = chapter_path.read_text(encoding="utf-8")

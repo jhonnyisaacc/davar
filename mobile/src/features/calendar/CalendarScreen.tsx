@@ -37,6 +37,7 @@ import {
   calendarSources,
   calendarYear,
   confirmedMoadim,
+  localSunsetClock,
   type CalendarIcon,
 } from "@davar/shared/calendarPresentation";
 import { calendarIsOutdated } from "@davar/shared/calendarRefresh";
@@ -235,7 +236,7 @@ export default function CalendarScreen() {
     busy: annualBusy,
     error: annualError,
   } = requests.annual;
-  const selected = offset === 0 ? calendar : selectedCalendar;
+  const selected = offset === 0 ? calendar : (selectedCalendar ?? calendar);
   const day = selected?.days[0];
   const moadim = confirmedMoadim(day);
   const displayMonth = (id: string) => {
@@ -552,7 +553,6 @@ export default function CalendarScreen() {
           <Pressable
             accessibilityRole="button"
             accessibilityLabel={t("calendar.previousDay")}
-            disabled={dayBusy}
             onPress={() => setOffset((value) => value - 1)}
             style={{
               minWidth: 44,
@@ -581,7 +581,6 @@ export default function CalendarScreen() {
           <Pressable
             accessibilityRole="button"
             accessibilityLabel={t("calendar.nextDay")}
-            disabled={dayBusy}
             onPress={() => setOffset((value) => value + 1)}
             style={{
               minWidth: 44,
@@ -656,7 +655,17 @@ export default function CalendarScreen() {
           <Row
             icon={Sunset}
             title={t("calendar.localSunset")}
-            subtitle={[city?.city, city?.country].filter(Boolean).join(" · ")}
+            subtitle={[
+              localSunsetClock(
+                day?.sunset_at,
+                selected?.timezone ?? timezone,
+                language,
+              ),
+              city?.city,
+              city?.country,
+            ]
+              .filter(Boolean)
+              .join(" · ")}
             onPress={() => {
               setQuery("");
               setScreen("city");

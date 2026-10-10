@@ -4,7 +4,7 @@ import {
 	GREEK_RECORDED_REVISION,
 	type GreekReleaseManifest,
 	greekChapterPath,
-	greekLexiconPath,
+	greekLexiconShardPath,
 	greekOccurrencesShardPath,
 	greekStrongFamily,
 	isGreekBesorahEnabled,
@@ -1561,14 +1561,13 @@ export const loadGreekLexiconEntry = async (
 ): Promise<WordAnalysis | null> => {
 	if (!isGreekPreviewEnabled() || !strong?.startsWith("G")) return null;
 	await loadGreekReleaseManifest(revision);
-	let promise = greekLexiconPromises.get(revision);
-	if (!promise) {
-		promise = fetchJson<Record<string, GreekLexiconEntry>>(
-			`/data/${greekLexiconPath(revision)}`,
-		);
-		greekLexiconPromises.set(revision, promise);
-	}
 	const family = greekStrongFamily(strong);
+	const path = greekLexiconShardPath(family, revision);
+	let promise = greekLexiconPromises.get(path);
+	if (!promise) {
+		promise = fetchJson<Record<string, GreekLexiconEntry>>(`/data/${path}`);
+		greekLexiconPromises.set(path, promise);
+	}
 	const [lexicon, customAsset] = await Promise.all([
 		promise,
 		loadLexiconEntryAsset(family).then(
@@ -1576,12 +1575,7 @@ export const loadGreekLexiconEntry = async (
 				asset ?? (family === strong ? null : loadLexiconEntryAsset(strong)),
 		),
 	]);
-	const entry =
-		lexicon[strong] ??
-		lexicon[family] ??
-		Object.values(lexicon).find(
-			(item) => greekStrongFamily(item.strong) === family,
-		);
+	const entry = lexicon[strong] ?? lexicon[family];
 	if (!entry) return null;
 	const localized = entry.definitions?.[language];
 	const english = entry.definitions?.en;
