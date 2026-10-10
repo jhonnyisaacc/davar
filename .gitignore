@@ -162,3 +162,6 @@ plans/*
 venv/
 __pycache__/
 *.pyc
+
+# Claude Code personal instructions
+CLAUDE.local.md
