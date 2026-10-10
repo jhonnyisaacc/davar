@@ -37,6 +37,7 @@ export type GreekReleaseManifest = {
   publicEnabled: boolean;
   books: string[];
   occurrence_shards?: Record<string, GreekOccurrenceShard>;
+  lexicon_shards?: Record<string, GreekOccurrenceShard>;
   previousRevision?: string;
 };
 
@@ -78,6 +79,12 @@ export const greekOccurrenceShardKey = (strong: string): string => {
   const digits = (strong.match(/\d+/)?.[0] ?? "0").padStart(4, "0");
   return `G${digits.slice(0, 2)}`;
 };
+
+export const greekLexiconShardPath = (
+  strong: string,
+  revision = GREEK_RECORDED_REVISION,
+): string =>
+  `${greekReleaseBasePath(revision)}/lexicon/${greekOccurrenceShardKey(strong)}.json`;
 
 export const greekOccurrencesShardPath = (
   strong: string,

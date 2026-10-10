@@ -1,7 +1,7 @@
 import { instanceSurface } from "@davar/shared/instanceSurface";
 import {
   GREEK_RECORDED_REVISION,
-  greekLexiconPath,
+  greekLexiconShardPath,
   greekOccurrencesShardPath,
   greekSourceIdentity,
   greekStrongFamily,
@@ -334,9 +334,10 @@ const loadGreekLexiconEntry = async (
 ): Promise<LexiconResponse | null> => {
   const revision = GREEK_RECORDED_REVISION;
   try {
+    const family = greekStrongFamily(strong);
     const [lexicon, customShard] = await Promise.all([
       staticDataRequest<Record<string, GreekLexiconEntry>>(
-        greekLexiconPath(revision),
+        greekLexiconShardPath(family, revision),
       ),
       staticDataRequest<
         Record<string, { definitions?: StaticDictionaryDefinition[] }>
@@ -348,14 +349,7 @@ const loadGreekLexiconEntry = async (
           >,
       ),
     ]);
-    const family = greekStrongFamily(strong);
-    const entry =
-      lexicon[strong] ??
-      lexicon[family] ??
-      Object.values(lexicon).find(
-        (item) =>
-          item.strong != null && greekStrongFamily(item.strong) === family,
-      );
+    const entry = lexicon[strong] ?? lexicon[family];
     if (!entry) return null;
     return toGreekLexiconResponse(
       entry,
