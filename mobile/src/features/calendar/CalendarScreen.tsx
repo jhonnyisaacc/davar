@@ -236,7 +236,7 @@ export default function CalendarScreen() {
     busy: annualBusy,
     error: annualError,
   } = requests.annual;
-  const selected = offset === 0 ? calendar : selectedCalendar;
+  const selected = offset === 0 ? calendar : (selectedCalendar ?? calendar);
   const day = selected?.days[0];
   const moadim = confirmedMoadim(day);
   const displayMonth = (id: string) => {
@@ -553,7 +553,6 @@ export default function CalendarScreen() {
           <Pressable
             accessibilityRole="button"
             accessibilityLabel={t("calendar.previousDay")}
-            disabled={dayBusy}
             onPress={() => setOffset((value) => value - 1)}
             style={{
               minWidth: 44,
@@ -582,7 +581,6 @@ export default function CalendarScreen() {
           <Pressable
             accessibilityRole="button"
             accessibilityLabel={t("calendar.nextDay")}
-            disabled={dayBusy}
             onPress={() => setOffset((value) => value + 1)}
             style={{
               minWidth: 44,

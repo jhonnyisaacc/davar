@@ -147,6 +147,44 @@ test("a late day lookup cannot replace a newer selection or today's calendar", a
   expect(workspace.getSnapshot().day.busy).toBe(false);
 });
 
+test("a cached day appears immediately and the previous day stays while the next loads", async () => {
+  const cached = {
+    ...response,
+    days: [{ civil_date: "2026-06-02" }],
+  } as CalendarResponse;
+  const next = {
+    ...response,
+    days: [{ civil_date: "2026-06-03" }],
+  } as CalendarResponse;
+  const pending = deferred<CalendarResponse>();
+  let calls = 0;
+  const workspace = createCalendarWorkspace({
+    searchCities: async () => [],
+    cachedDay: (offset) => (offset === 1 ? cached : undefined),
+    day: () => {
+      calls++;
+      return pending.promise;
+    },
+    year: async () => response,
+  });
+  workspace.loadDay(1, true);
+  expect(calls).toBe(0);
+  expect(workspace.getSnapshot().day).toEqual({
+    data: cached,
+    busy: false,
+    error: false,
+    searched: true,
+  });
+  workspace.loadDay(2, true);
+  expect(calls).toBe(1);
+  expect(workspace.getSnapshot().day.data).toBe(cached);
+  expect(workspace.getSnapshot().day.busy).toBe(true);
+  pending.resolve(next);
+  await tick();
+  expect(workspace.getSnapshot().day.data).toBe(next);
+  expect(workspace.getSnapshot().day.busy).toBe(false);
+});
+
 test("annual failures can retry and abandoned requests do not update subscribers", async () => {
   const pending = deferred<CalendarResponse>();
   let attempt = 0;
