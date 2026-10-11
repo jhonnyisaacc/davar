@@ -42,7 +42,9 @@ describe("field encryption", () => {
 
 	test("tampered envelopes do not decrypt", async () => {
 		const sealed = (await enc("Shalom", KEY_A)) ?? "";
-		const tampered = `${sealed.slice(0, -2)}AA`;
+		const [version, keyId, payload = ""] = sealed.split(".");
+		const flipped = payload.startsWith("A") ? "B" : "A";
+		const tampered = `${version}.${keyId}.${flipped}${payload.slice(1)}`;
 		expect(await dec(tampered, [KEY_A])).toBe(null);
 		expect(await dec("v2.533aaaa4.payload", KEY_A)).toBe(null);
 		expect(await dec("v1.NOTHEXID.payload", KEY_A)).toBe(null);
