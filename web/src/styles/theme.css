@@ -578,11 +578,12 @@ html:has(.full-chapter-scroll) {
   border-radius: 999px;
 }
 
+/* In flow at the foot of the full-height reader column, so the verse panel ends above it. */
 .scroll-nav-hint {
-  position: fixed;
-  left: 50%;
-  bottom: 20px;
-  transform: translateX(-50%);
+  position: relative;
+  flex: none;
+  align-self: center;
+  margin-bottom: 20px;
   pointer-events: none;
   border-radius: 12px;
   padding: 8px 12px;

@@ -221,7 +221,7 @@ export default function App() {
 
 	return (
 		<div
-			className="min-h-screen"
+			className={`min-h-screen ${isScrollNavigationActive ? "flex flex-col" : ""}`}
 			style={{
 				backgroundColor: "var(--background)",
 				minHeight: isMobile ? "100dvh" : undefined,
@@ -312,8 +312,15 @@ export default function App() {
 				</div>
 			</div>
 
-			<div className="px-6 pb-10 md:pb-32 pt-6">
-				<div className="max-w-7xl mx-auto">
+			<div
+				className={`px-6 pt-6 ${isScrollNavigationActive ? "flex-1 min-h-0 pb-4" : "pb-10 md:pb-32"}`}
+			>
+				<div
+					className={`max-w-7xl mx-auto ${isScrollNavigationActive ? "h-full" : ""}`}
+					style={
+						isScrollNavigationActive ? { containerType: "size" } : undefined
+					}
+				>
 					{currentScreen !== "verse" &&
 						renderNonVerseScreen({
 							screen: currentScreen,
@@ -347,14 +354,14 @@ export default function App() {
 						<div className="grid gap-6 items-start md:grid-cols-[7fr_3fr]">
 							<div
 								ref={versePanelRef}
-								className={`min-h-[70vh] ${
+								className={`${isScrollNavigationActive ? "" : "min-h-[70vh]"} ${
 									showFullChapter
 										? isMobile
 											? "pt-8"
 											: ""
 										: isMobile
 											? "flex items-start pt-8"
-											: "flex items-center justify-center"
+											: "flex items-center-safe justify-center overflow-y-auto"
 								} w-full max-w-3xl md:max-w-4xl justify-self-center verse-panel-shell ${
 									isSplitView
 										? "verse-panel-split md:col-span-1"
@@ -365,7 +372,7 @@ export default function App() {
 										? undefined
 										: isMobile
 											? undefined
-											: { height: "70vh" }
+											: { height: "70vh", maxHeight: "100cqh" }
 								}
 							>
 								<div className="verse-panel-inner relative">
