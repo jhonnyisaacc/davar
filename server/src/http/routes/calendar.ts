@@ -46,7 +46,7 @@ async function calendarResult(c: AppContext, count: number) {
 				longitude: params.longitude,
 				timezone: params.timezone,
 				count,
-				refreshSource: true,
+				refreshSource: params.refresh !== "0",
 			},
 			{ env, nodeEnv: env.NODE_ENV ?? "development" },
 		),
