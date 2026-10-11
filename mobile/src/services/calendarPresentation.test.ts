@@ -4,6 +4,7 @@ import {
   annualMoadim,
   calendarSources,
   confirmedMoadim,
+  localSunsetClock,
   readingCalendarDay,
   readingCalendarPill,
 } from "@davar/shared/calendarPresentation";
@@ -283,6 +284,16 @@ describe("calendar presentation", () => {
         ),
       ),
     ).toEqual([]);
+  });
+  test("formats the civil day's sunset in the saved city timezone", () => {
+    const sunsetAt = "2026-06-21T16:47:00.000Z";
+    expect(localSunsetClock(sunsetAt, "Asia/Jerusalem", "en")).toBe("7:47 PM");
+    expect(localSunsetClock(sunsetAt, "Asia/Jerusalem", "es")).toBe("19:47");
+    expect(localSunsetClock(sunsetAt, "Asia/Jerusalem", "he")).toBe("19:47");
+    expect(localSunsetClock(null, "Asia/Jerusalem", "en")).toBeNull();
+    expect(localSunsetClock(sunsetAt, null, "en")).toBeNull();
+    expect(localSunsetClock("not-a-time", "Asia/Jerusalem", "en")).toBeNull();
+    expect(localSunsetClock(sunsetAt, "Not/AZone", "en")).toBeNull();
   });
 });
 
