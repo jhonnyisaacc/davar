@@ -1,13 +1,14 @@
 import { afterEach, beforeEach, describe, expect, spyOn, test } from "bun:test";
 import {
 	GREEK_RECORDED_REVISION,
-	greekLexiconPath,
+	greekLexiconShardPath,
 } from "../../../../shared/greekBesorah";
 import { isCurrentLexiconResult } from "../../../../shared/lexiconAssets";
 import {
 	getChapterVerses,
 	loadGreekLexiconEntry,
 	loadLexiconEntry,
+	peekChapterVerses,
 	resetStaticDataCachesForTests,
 } from "./staticData";
 
@@ -205,6 +206,15 @@ describe("chapter and lexicon loaders", () => {
 		);
 	});
 
+	test("a loaded chapter can be painted again without waiting", async () => {
+		expect(peekChapterVerses("genesis", 1, { hebrewOnly: true })).toBeNull();
+		const verses = await getChapterVerses("genesis", 1, { hebrewOnly: true });
+		expect(peekChapterVerses("Genesis", 1, { hebrewOnly: true })).toEqual(
+			verses,
+		);
+		expect(peekChapterVerses("genesis", 2, { hebrewOnly: true })).toBeNull();
+	});
+
 	test("reuses the chapter body the early boot already fetched", async () => {
 		const host = globalThis as typeof globalThis & {
 			__DAVAR_EARLY_CHAPTER__?: { path: string; promise: Promise<string> };
@@ -346,7 +356,7 @@ describe("chapter and lexicon loaders", () => {
 					books: Array.from({ length: 27 }, (_, index) => `book${index}`),
 				});
 			}
-			if (path.endsWith(`/data/${greekLexiconPath()}`)) {
+			if (path.endsWith(`/data/${greekLexiconShardPath("G2424")}`)) {
 				return jsonResponse({
 					G2424: {
 						strong: "G2424",
@@ -354,6 +364,12 @@ describe("chapter and lexicon loaders", () => {
 						translit_en: "Iēsous",
 						definitions: { en: { short: "Jesus" } },
 						occurrences_count: 917,
+					},
+					G2401: {
+						strong: "G2401",
+						lemma: "Ἰδουμαία",
+						translit_en: "Idoumaia",
+						definitions: { en: { short: "Idumea" } },
 					},
 				});
 			}
@@ -373,6 +389,16 @@ describe("chapter and lexicon loaders", () => {
 		expect(
 			requestedPaths().some((path) => path.includes("/occurrences/")),
 		).toBe(false);
+		const shardPath = `/data/${greekLexiconShardPath("G2424")}`;
+		expect(requestedPaths()).toContain(shardPath);
+		expect(
+			requestedPaths().some((path) => path.endsWith("/lexicon.json")),
+		).toBe(false);
+		const sameShard = await loadGreekLexiconEntry("G2401", "en");
+		expect(sameShard?.strong_number).toBe("G2401");
+		expect(requestedPaths().filter((path) => path === shardPath)).toHaveLength(
+			1,
+		);
 	});
 
 	test("prefers chapter-scoped TS2009 files over the full book file", async () => {

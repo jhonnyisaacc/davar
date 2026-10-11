@@ -78,7 +78,6 @@ export default function App() {
 	const {
 		books,
 		chapterVerses,
-		setChapterVerses,
 		chapterCount,
 		verseCount,
 		isLoading,
@@ -191,7 +190,6 @@ export default function App() {
 		currentScreen,
 		currentVerseData,
 		chapterVerses,
-		setChapterVerses,
 		language,
 		besorahTextVersion,
 		setCurrentBook,
@@ -437,20 +435,11 @@ export default function App() {
 												currentChapter < chapterCount
 											}
 										/>
-									) : (
+									) : isLoading ? null : (
 										<NeumorphCard>
-											{isLoading ? (
-												<div className="mx-auto w-fit space-y-3">
-													<Skeleton className="h-3 w-56" />
-													<Skeleton className="h-3 w-56" />
-													<Skeleton className="h-3 w-56" />
-													<Skeleton className="h-3 w-56" />
-												</div>
-											) : (
-												<p className="text-sm text-gray-500">
-													{t("verse.selectBookPrompt")}
-												</p>
-											)}
+											<p className="text-sm text-gray-500">
+												{t("verse.selectBookPrompt")}
+											</p>
 										</NeumorphCard>
 									)}
 								</div>

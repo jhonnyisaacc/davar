@@ -11,7 +11,11 @@ import {
 } from "../../services/profiles.js";
 import { applySettings, SETTING_KEYS } from "../../services/settings.js";
 import { redeemAdmission } from "../../services/admissions.js";
-import { resolveCitySelection, searchCities } from "../../services/cities.js";
+import {
+	cachedCitySearch,
+	resolveCitySelection,
+	searchCities,
+} from "../../services/cities.js";
 import { checkRateLimit } from "../../services/rateLimit.js";
 import { sandboxEnabled } from "../../services/sandbox.js";
 import { clientIp, inviteGateEnabled, requireAssemblyAccess, requireUser } from "../auth.js";
@@ -207,13 +211,16 @@ accountRoutes.get("/account/notifications", async (c) => {
 accountRoutes.get("/cities", async (c) => {
 	const { db, config, env } = c.get("deps");
 	const user = await requireAssemblyAccess(db, config, c, env, c.get("deps").flags);
-	await checkRateLimit(db, `city/${user.id}`, 10);
 	const query = c.req.query();
+	if (cachedCitySearch(query.q) === null) {
+		await checkRateLimit(db, `city/${user.id}`, 10);
+	}
 	if (typeof query.q !== "string") throw new DomainError("invalid_city_query");
 	const cities = await searchCities(query.q, {
 		secret: config.encryptionDeterministicKey,
 		sandbox: sandboxEnabled(env, env.NODE_ENV ?? "development"),
 		env,
+		sign: true,
 	});
 	return c.json({ cities });
 });

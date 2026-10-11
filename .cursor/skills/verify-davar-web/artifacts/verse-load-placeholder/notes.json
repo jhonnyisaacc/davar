@@ -1,0 +1,53 @@
+{
+  "feature": "verse-load-placeholder",
+  "entry": "http://127.0.0.1:5193/verse/Genesis/1/1",
+  "driver": "Helium headless Chrome DevTools. Cursor browser tools were not available.",
+  "viewport": "390x844",
+  "finalUrl": "/verse/Exodus/20/2",
+  "languageControl": "Settings",
+  "ok": true,
+  "pulseInVersePanel": false,
+  "steps": [
+    {
+      "label": "cold-load",
+      "pulseInVersePanel": false,
+      "sawLineHoldWithWords": false,
+      "sawEarlyLines": true,
+      "settledWithWords": true,
+      "url": "/verse/Genesis/1/1",
+      "bookLabel": "GenesisGenesis | בראשית",
+      "verseLabel": "1"
+    },
+    {
+      "label": "exodus",
+      "pulseInVersePanel": false,
+      "sawLineHoldWithWords": true,
+      "sawEarlyLines": false,
+      "settledWithWords": false,
+      "url": "/verse/Exodus/1/1",
+      "bookLabel": "ExodusExodus | שמות",
+      "verseLabel": "1"
+    },
+    {
+      "label": "exodus-chapter-20",
+      "pulseInVersePanel": false,
+      "sawLineHoldWithWords": true,
+      "sawEarlyLines": false,
+      "settledWithWords": true,
+      "url": "/verse/Exodus/20/1",
+      "bookLabel": "ExodusExodus | שמות",
+      "verseLabel": "1"
+    },
+    {
+      "label": "next-verse-cached",
+      "pulseInVersePanel": false,
+      "sawLineHoldWithWords": false,
+      "sawEarlyLines": false,
+      "settledWithWords": true,
+      "url": "/verse/Exodus/20/2",
+      "bookLabel": "ExodusExodus | שמות",
+      "verseLabel": "2"
+    }
+  ],
+  "error": null
+}

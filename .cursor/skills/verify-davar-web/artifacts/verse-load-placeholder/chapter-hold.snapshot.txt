@@ -1,0 +1,18 @@
+feature: verse-load-placeholder
+sub-feature: chapter-change-while-translation-loads
+entry: Book Exodus, then Chapter 20, from http://127.0.0.1:5193/verse/Genesis/1/1
+url: /verse/Exodus/20/1
+book: Exodus
+chapter: 20
+verse: 1
+viewport: 390x844
+driver: Helium headless. Cursor browser tools were not available.
+
+- navigation "Davar": Scripture (current), Calendar, Settings
+- navigation "Book, Chapter, Verse"
+- button "Book" visible text Exodus
+- button "Chapter" visible text 20
+- button "Verse" visible text 1
+- verse panel has Hebrew word buttons and .translation-line holds
+- verse panel has no .animate-pulse
+- #davar-early is hidden
