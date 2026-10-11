@@ -37,6 +37,7 @@ interface NavigationBarProps {
 	onDestinationClick: (screen: RouteScreen) => void;
 	settingsOpen: boolean;
 	onSettingsOpenChange: (open: boolean) => void;
+	onSelectionMenuOpenChange: (open: boolean) => void;
 	book: string;
 	bookDisplayName: string;
 	bookHebrew: string;
@@ -88,6 +89,7 @@ export function NavigationBar({
 	onDestinationClick,
 	settingsOpen,
 	onSettingsOpenChange,
+	onSelectionMenuOpenChange,
 	book,
 	bookDisplayName,
 	bookHebrew,
@@ -141,6 +143,9 @@ export function NavigationBar({
 		},
 		[onSettingsOpenChange],
 	);
+	useEffect(() => {
+		onSelectionMenuOpenChange(selectionMenu !== null);
+	}, [selectionMenu, onSelectionMenuOpenChange]);
 	const dropdownRef = useRef<HTMLDivElement>(null);
 	const bookListRef = useRef<HTMLDivElement>(null);
 	const bookSearchRef = useRef<HTMLInputElement>(null);

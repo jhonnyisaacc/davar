@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { type FocusEvent, useEffect, useRef, useState } from "react";
 import type { RouteScreen } from "../../utils/routeState";
 import { useVerseScrollNavigation } from "../../utils/useVerseScrollNavigation";
 
@@ -28,11 +28,41 @@ export function readerNavTracksScroll({
 	return isMobile || (currentScreen === "verse" && showFullChapter);
 }
 
+export type ReaderNavPresence = "shown" | "hiddenByScroll" | "awaitingHover";
+
+export function readerNavPresence({
+	isMobile,
+	currentScreen,
+	showFullChapter,
+	canHover,
+	pointerOver,
+	focusWithin,
+	menuOpen,
+	scrollHidden,
+}: {
+	isMobile: boolean;
+	currentScreen: RouteScreen;
+	showFullChapter: boolean;
+	canHover: boolean;
+	pointerOver: boolean;
+	focusWithin: boolean;
+	menuOpen: boolean;
+	scrollHidden: boolean;
+}): ReaderNavPresence {
+	const revealsOnHover =
+		canHover && isMobile && currentScreen === "verse" && !showFullChapter;
+	if (!revealsOnHover) return scrollHidden ? "hiddenByScroll" : "shown";
+	return pointerOver || focusWithin || menuOpen ? "shown" : "awaitingHover";
+}
+
+const HOVER_POINTER_QUERY = "(hover: hover) and (pointer: fine)";
+
 export function useReaderChrome({
 	isMobile,
 	currentScreen,
 	showFullChapter,
 	settingsOpen,
+	selectionMenuOpen,
 	isWordPanelHovered,
 	handleNextVerse,
 	handlePreviousVerse,
@@ -42,6 +72,7 @@ export function useReaderChrome({
 	currentScreen: RouteScreen;
 	showFullChapter: boolean;
 	settingsOpen: boolean;
+	selectionMenuOpen: boolean;
 	isWordPanelHovered: boolean;
 	handleNextVerse: () => boolean | Promise<boolean>;
 	handlePreviousVerse: () => boolean | Promise<boolean>;
@@ -49,6 +80,9 @@ export function useReaderChrome({
 }) {
 	const [hideNavOnScroll, setHideNavOnScroll] = useState(false);
 	const lastScrollYRef = useRef(0);
+	const [canHover, setCanHover] = useState(false);
+	const [pointerOverNav, setPointerOverNav] = useState(false);
+	const [keyboardFocusInNav, setKeyboardFocusInNav] = useState(false);
 	const [showMobileDesignGuide, setShowMobileDesignGuide] = useState(false);
 	const [showDesignSystem, setShowDesignSystem] = useState(false);
 	const versePanelRef = useRef<HTMLDivElement | null>(null);
@@ -81,6 +115,69 @@ export function useReaderChrome({
 		return () => window.removeEventListener("scroll", handleScroll);
 	}, [tracksScroll]);
 
+	useEffect(() => {
+		const media = window.matchMedia(HOVER_POINTER_QUERY);
+		const update = () => setCanHover(media.matches);
+		update();
+		media.addEventListener("change", update);
+		return () => media.removeEventListener("change", update);
+	}, []);
+
+	const navRef = useRef<HTMLDivElement | null>(null);
+	const menuOpen = settingsOpen || selectionMenuOpen;
+	// The nav's own pointerleave is skipped when an open menu under the pointer unmounts.
+	useEffect(() => {
+		const handlePointerOver = (event: PointerEvent) =>
+			setPointerOverNav(
+				Boolean(navRef.current?.contains(event.target as Node | null)),
+			);
+		const handlePointerOut = (event: PointerEvent) => {
+			if (!event.relatedTarget) setPointerOverNav(false);
+		};
+		document.addEventListener("pointerover", handlePointerOver);
+		document.addEventListener("pointerout", handlePointerOut);
+		return () => {
+			document.removeEventListener("pointerover", handlePointerOver);
+			document.removeEventListener("pointerout", handlePointerOut);
+		};
+	}, []);
+
+	const navPresence = readerNavPresence({
+		isMobile,
+		currentScreen,
+		showFullChapter,
+		canHover,
+		pointerOver: pointerOverNav,
+		focusWithin: keyboardFocusInNav,
+		menuOpen,
+		scrollHidden: hideNavOnScroll,
+	});
+
+	// A focused menu input is removed without a blur event when its menu closes.
+	useEffect(() => {
+		if (menuOpen) return;
+		const active = document.activeElement;
+		setKeyboardFocusInNav(
+			Boolean(
+				active &&
+					navRef.current?.contains(active) &&
+					active.matches(":focus-visible"),
+			),
+		);
+	}, [menuOpen]);
+
+	const navHoverHandlers = {
+		ref: navRef,
+		// Mouse clicks leave focus on nav buttons; only keyboard focus should hold the bar open.
+		onFocus: (event: FocusEvent<HTMLElement>) =>
+			setKeyboardFocusInNav(event.target.matches(":focus-visible")),
+		onBlur: (event: FocusEvent<HTMLElement>) => {
+			if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+				setKeyboardFocusInNav(false);
+			}
+		},
+	};
+
 	useVerseScrollNavigation({
 		containerRef: versePanelRef,
 		isEnabled: isScrollNavigationActive,
@@ -93,7 +190,8 @@ export function useReaderChrome({
 	});
 
 	return {
-		hideNavOnScroll,
+		navPresence,
+		navHoverHandlers,
 		versePanelRef,
 		isScrollNavigationActive,
 		showDesignSystem,

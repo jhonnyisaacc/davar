@@ -7,6 +7,7 @@ const props = {
 	onDestinationClick: () => {},
 	settingsOpen: false,
 	onSettingsOpenChange: () => {},
+	onSelectionMenuOpenChange: () => {},
 	book: "Genesis",
 	bookDisplayName: "Genesis",
 	bookHebrew: "בראשית",

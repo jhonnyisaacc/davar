@@ -1,4 +1,5 @@
 import { parseSourceStrong } from "@davar/shared/greekBesorah";
+import { useState } from "react";
 import { BottomSheet } from "./components/BottomSheet";
 import { DesignSystemExport } from "./components/DesignSystemExport";
 import { MobileDesignSystemGuide } from "./components/MobileDesignSystemGuide";
@@ -196,8 +197,10 @@ export default function App() {
 		setCurrentChapter,
 		setCurrentVerse,
 	});
+	const [selectionMenuOpen, setSelectionMenuOpen] = useState(false);
 	const {
-		hideNavOnScroll,
+		navPresence,
+		navHoverHandlers,
 		versePanelRef,
 		isScrollNavigationActive,
 		showDesignSystem,
@@ -209,6 +212,7 @@ export default function App() {
 		currentScreen,
 		showFullChapter,
 		settingsOpen,
+		selectionMenuOpen,
 		isWordPanelHovered,
 		handleNextVerse,
 		handlePreviousVerse,
@@ -227,13 +231,14 @@ export default function App() {
 			}}
 		>
 			<div
-				className={`sticky top-0 z-40 ${hideNavOnScroll ? "pointer-events-none" : ""}`}
+				className={`sticky top-0 z-40 ${navPresence === "hiddenByScroll" ? "pointer-events-none" : ""}`}
+				{...navHoverHandlers}
 			>
 				<div
 					className={`px-2 pt-4 pb-4 sm:px-4 sm:pt-5 sm:pb-5 md:px-6 md:pt-6 md:pb-6 transition-transform duration-300 ${
-						hideNavOnScroll
-							? "-translate-y-full opacity-0"
-							: "translate-y-0 opacity-100"
+						navPresence === "shown"
+							? "translate-y-0 opacity-100"
+							: "-translate-y-full opacity-0"
 					}`}
 				>
 					<SandboxBanner />
@@ -243,6 +248,7 @@ export default function App() {
 							onDestinationClick={handleOpenScreen}
 							settingsOpen={settingsOpen}
 							onSettingsOpenChange={setSettingsOpen}
+							onSelectionMenuOpenChange={setSelectionMenuOpen}
 							book={currentBook}
 							bookDisplayName={getDisplayBookName(currentBook)}
 							bookHebrew={getHebrewBookName(currentBook)}
