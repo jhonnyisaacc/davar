@@ -32,9 +32,20 @@ export function useVerseScrollNavigation({
 			if (!isEnabled || isBlocked) return;
 			if (event.deltaY === 0) return;
 
+			const now = Date.now();
+			const page = document.scrollingElement ?? document.documentElement;
+			const canScrollPage =
+				event.deltaY > 0
+					? page.scrollTop + page.clientHeight < page.scrollHeight - 1
+					: page.scrollTop > 0;
+			if (canScrollPage) {
+				// Momentum that carries the page to its edge must not also change the verse.
+				lastTriggerRef.current = now;
+				return;
+			}
+
 			event.preventDefault();
 
-			const now = Date.now();
 			if (now - lastTriggerRef.current < cooldownMs) return;
 
 			if (Math.abs(event.deltaY) < threshold) return;
@@ -45,6 +56,7 @@ export function useVerseScrollNavigation({
 				event.deltaY > 0 ? await onNavigateNext() : await onNavigatePrevious();
 
 			if (didNavigate) {
+				window.scrollTo({ top: 0, behavior: "instant" });
 				onNavigateFeedback?.();
 			}
 		};

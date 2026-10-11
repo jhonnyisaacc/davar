@@ -225,8 +225,6 @@ export default function App() {
 			style={{
 				backgroundColor: "var(--background)",
 				minHeight: isMobile ? "100dvh" : undefined,
-				height: isScrollNavigationActive ? "100vh" : undefined,
-				overflow: isScrollNavigationActive ? "hidden" : undefined,
 				overflowAnchor: "none",
 			}}
 		>
@@ -313,13 +311,10 @@ export default function App() {
 			</div>
 
 			<div
-				className={`px-6 pt-6 ${isScrollNavigationActive ? "flex-1 min-h-0 pb-4" : "pb-10 md:pb-32"}`}
+				className={`px-6 pt-6 ${isScrollNavigationActive ? "flex-1 flex flex-col pb-4" : "pb-10 md:pb-32"}`}
 			>
 				<div
-					className={`max-w-7xl mx-auto ${isScrollNavigationActive ? "h-full" : ""}`}
-					style={
-						isScrollNavigationActive ? { containerType: "size" } : undefined
-					}
+					className={`max-w-7xl mx-auto ${isScrollNavigationActive ? "w-full flex-1 flex flex-col" : ""}`}
 				>
 					{currentScreen !== "verse" &&
 						renderNonVerseScreen({
@@ -351,29 +346,24 @@ export default function App() {
 						})}
 
 					{currentScreen === "verse" && (
-						<div className="grid gap-6 items-start md:grid-cols-[7fr_3fr]">
+						<div
+							className={`grid gap-6 items-start md:grid-cols-[7fr_3fr] ${isScrollNavigationActive ? "flex-1" : ""}`}
+						>
 							<div
 								ref={versePanelRef}
-								className={`${isScrollNavigationActive ? "" : "min-h-[70vh]"} ${
+								className={`${isScrollNavigationActive ? "self-stretch" : "min-h-[70vh]"} ${
 									showFullChapter
 										? isMobile
 											? "pt-8"
 											: ""
 										: isMobile
 											? "flex items-start pt-8"
-											: "flex items-center-safe justify-center overflow-y-auto"
+											: "flex items-center-safe justify-center"
 								} w-full max-w-3xl md:max-w-4xl justify-self-center verse-panel-shell ${
 									isSplitView
 										? "verse-panel-split md:col-span-1"
 										: "verse-panel-centered md:col-span-2"
 								} ${scrollJumpActive ? "verse-panel-jump" : ""}`}
-								style={
-									showFullChapter
-										? undefined
-										: isMobile
-											? undefined
-											: { height: "70vh", maxHeight: "100cqh" }
-								}
 							>
 								<div className="verse-panel-inner relative">
 									{currentVerseData ? (
@@ -460,7 +450,7 @@ export default function App() {
 
 							{(!showFullChapter || isWordPanelActive) && (
 								<div
-									className={`hidden md:block ${showFullChapter ? "word-panel-fixed-wrapper" : ""}`}
+									className={`hidden ${isScrollNavigationActive && !isSplitView ? "" : "md:block"} ${showFullChapter ? "word-panel-fixed-wrapper" : ""}`}
 									style={showFullChapter ? undefined : { height: "70vh" }}
 								>
 									{(() => {
