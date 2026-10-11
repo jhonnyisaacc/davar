@@ -27,6 +27,7 @@ import { useTranslation } from "../hooks/useTranslation";
 import { productApi } from "../services/productApi";
 import { formatBookDisplayName } from "../utils/bookNameFormatter";
 import type { RouteScreen } from "../utils/routeState";
+import { centeredListScrollTop } from "./bookListScroll";
 import { CalendarCityNotice } from "./CalendarCityNotice";
 import { PillToggle } from "./PillToggle";
 import { SettingsResources } from "./SettingsResources";
@@ -189,15 +190,26 @@ export function NavigationBar({
 	useEffect(() => {
 		if (!openMenu) return;
 
+		const scrollY = window.scrollY;
 		const previousOverflow = document.body.style.overflow;
 		const previousOverscrollBehavior = document.body.style.overscrollBehavior;
+		const previousScrollBehavior =
+			document.documentElement.style.scrollBehavior;
+
+		const keepPageScroll = () => {
+			document.documentElement.style.scrollBehavior = "auto";
+			window.scrollTo(0, scrollY);
+			document.documentElement.style.scrollBehavior = previousScrollBehavior;
+		};
 
 		document.body.style.overflow = "hidden";
 		document.body.style.overscrollBehavior = "none";
+		keepPageScroll();
 
 		return () => {
 			document.body.style.overflow = previousOverflow;
 			document.body.style.overscrollBehavior = previousOverscrollBehavior;
+			keepPageScroll();
 		};
 	}, [openMenu]);
 
@@ -218,15 +230,24 @@ export function NavigationBar({
 		if (!openMenu) return;
 		if (openMenu === "book") {
 			setBookSearch("");
-			window.setTimeout(() => bookSearchRef.current?.focus(), 0);
+			window.setTimeout(
+				() => bookSearchRef.current?.focus({ preventScroll: true }),
+				0,
+			);
 		}
 		if (openMenu === "chapter") {
 			setChapterSearch("");
-			window.setTimeout(() => chapterSearchRef.current?.focus(), 0);
+			window.setTimeout(
+				() => chapterSearchRef.current?.focus({ preventScroll: true }),
+				0,
+			);
 		}
 		if (openMenu === "verse") {
 			setVerseSearch("");
-			window.setTimeout(() => verseSearchRef.current?.focus(), 0);
+			window.setTimeout(
+				() => verseSearchRef.current?.focus({ preventScroll: true }),
+				0,
+			);
 		}
 	}, [openMenu]);
 
@@ -248,13 +269,17 @@ export function NavigationBar({
 		if (openMenu !== "book") return;
 
 		const rafId = window.requestAnimationFrame(() => {
-			const selectedBookButton =
-				bookListRef.current?.querySelector<HTMLButtonElement>(
-					'[data-current-book="true"]',
-				);
-			selectedBookButton?.scrollIntoView({
-				block: "center",
-				inline: "nearest",
+			const list = bookListRef.current;
+			const selectedBookButton = list?.querySelector<HTMLButtonElement>(
+				'[data-current-book="true"]',
+			);
+			if (!list || !selectedBookButton) return;
+			list.scrollTop = centeredListScrollTop({
+				listTop: list.getBoundingClientRect().top,
+				listHeight: list.clientHeight,
+				buttonTop: selectedBookButton.getBoundingClientRect().top,
+				buttonHeight: selectedBookButton.offsetHeight,
+				scrollTop: list.scrollTop,
 			});
 		});
 

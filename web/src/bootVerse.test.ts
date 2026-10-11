@@ -1,6 +1,10 @@
 import { expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import {
+	translationColumnWidth,
+	translationLineWidths,
+} from "./app/components/translationLines";
 
 const html = readFileSync(join(import.meta.dir, "..", "index.html"), "utf8");
 const source = html.match(
@@ -103,4 +107,19 @@ test("the translation skeleton is one bar per line", () => {
 	expect(narrow[0]).toBe(310);
 	expect(narrow[narrow.length - 1]).toBeGreaterThan(0);
 	expect(narrow[narrow.length - 1]).toBeLessThan(310);
+});
+
+test("react translation bars use the early line rule", () => {
+	expect(translationColumnWidth(390)).toBe(310);
+	expect(translationColumnWidth(1280)).toBe(864);
+	for (const [wordCount, columnWidth] of [
+		[7, 864],
+		[7, 310],
+		[400, 320],
+		[0, 864],
+	] as const) {
+		expect(translationLineWidths(wordCount, columnWidth)).toEqual(
+			earlyApi.__davarEarlyTranslationLines(wordCount, columnWidth),
+		);
+	}
 });
