@@ -227,7 +227,7 @@ export default function App() {
 			}}
 		>
 			<div
-				className={`sticky top-0 z-40 ${hideNavOnScroll ? "h-0 pointer-events-none" : ""}`}
+				className={`sticky top-0 z-40 ${hideNavOnScroll ? "pointer-events-none" : ""}`}
 			>
 				<div
 					className={`px-2 pt-4 pb-4 sm:px-4 sm:pt-5 sm:pb-5 md:px-6 md:pt-6 md:pb-6 transition-transform duration-300 ${

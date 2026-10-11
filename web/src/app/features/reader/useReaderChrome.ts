@@ -4,7 +4,6 @@ import { useVerseScrollNavigation } from "../../utils/useVerseScrollNavigation";
 
 const NAV_SCROLL_TOP = 24;
 const NAV_SCROLL_DELTA = 4;
-const NAV_LAYOUT_LOCK_MS = 350;
 
 export function nextNavHidden(
 	currentY: number,
@@ -68,23 +67,13 @@ export function useReaderChrome({
 		}
 
 		lastScrollYRef.current = window.scrollY;
-		let lockUntil = 0;
 
 		const handleScroll = () => {
 			const currentY = window.scrollY;
-			if (performance.now() < lockUntil) {
-				lastScrollYRef.current = currentY;
-				return;
-			}
-
 			const next = nextNavHidden(currentY, lastScrollYRef.current);
 			lastScrollYRef.current = currentY;
 			if (next === null) return;
-			setHideNavOnScroll((previous) => {
-				if (previous === next) return previous;
-				lockUntil = performance.now() + NAV_LAYOUT_LOCK_MS;
-				return next;
-			});
+			setHideNavOnScroll(next);
 		};
 
 		handleScroll();
