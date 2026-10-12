@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import subprocess
 import tarfile
 import tempfile
@@ -247,6 +248,15 @@ def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
         print("Additive file boundary and legacy import isolation: OK")
 
 
+_GREEK_SHARD = re.compile(r"^greek/.+/lexicon/G\d+\.json$")
+
+
+def _greek_manifest(name: str) -> bool:
+    return name == "greek/manifest.json" or (
+        name.startswith("greek/") and name.endswith("/manifest.json")
+    )
+
+
 def tree(path: Path, *, legacy_clock=False):
     result = {}
     for file in sorted(path.rglob("*")):
@@ -254,14 +264,34 @@ def tree(path: Path, *, legacy_clock=False):
             continue
         name = file.relative_to(path).as_posix()
         data = file.read_bytes()
-        if legacy_clock and name in ("manifest.json", "version.json"):
+        if legacy_clock and (
+            name in ("manifest.json", "version.json") or _greek_manifest(name)
+        ):
             payload = read_json(file)
-            # Exactly the two pre-existing clock-derived values are excluded.
-            for key in ("version", "generated_at"):
-                payload.pop(key)
+            prepare_legacy_digest(name, payload)
             data = encoded(payload)
         result[name] = digest(data)
     return result
+
+
+def prepare_legacy_digest(name: str, payload: dict) -> None:
+    if name in ("manifest.json", "version.json"):
+        # Exactly the two pre-existing clock-derived values are excluded.
+        for key in ("version", "generated_at"):
+            payload.pop(key, None)
+    if _greek_manifest(name):
+        payload.pop("lexicon_shards", None)
+
+
+def legacy_generation_differences(expected: dict, actual: dict) -> list[str]:
+    differences = []
+    for name in sorted(expected.keys() | actual.keys()):
+        if expected.get(name) == actual.get(name):
+            continue
+        if name not in expected and _GREEK_SHARD.fullmatch(name):
+            continue
+        differences.append(name)
+    return differences
 
 
 def archive(root: Path, revision: str, destination: Path):
@@ -331,12 +361,8 @@ def legacy(base: str, root=ROOT):
                         baseline_outputs[export] = actual
                         continue
                     expected = baseline_outputs[export]
-                    if expected != actual:
-                        differences = sorted(
-                            k
-                            for k in expected.keys() | actual.keys()
-                            if expected.get(k) != actual.get(k)
-                        )
+                    differences = legacy_generation_differences(expected, actual)
+                    if differences:
                         raise ValueError(
                             "Legacy generation changed: " + repr(differences[:20])
                         )
