@@ -47,14 +47,16 @@ normalize() {
 	printf '%s\n' "$url"
 }
 
+# Same path set as .github/workflows/api-ci.yml (and Railway focused watchPatterns).
 touches_api=0
-if git diff --name-only "$base"..."$head_sha" | grep -qE '^api/'; then
+if git diff --name-only "$base"..."$head_sha" | grep -qE \
+	'^api/|^shared/product[^/]*\.ts$|^contracts/biblical-knowledge/|^data/knowledge/registries/'; then
 	touches_api=1
 fi
 
 if [[ "$touches_api" -eq 1 ]]; then
 	if [[ -z "$pr" ]]; then
-		echo "PR number required when the diff touches api/" >&2
+		echo "PR number required when the diff touches the API path set" >&2
 		exit 1
 	fi
 	if [[ -z "${GITHUB_REPOSITORY:-}" || -z "${GH_TOKEN:-}${GITHUB_TOKEN:-}" ]]; then
