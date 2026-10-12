@@ -48,7 +48,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd web
-          bun install
+          bun install --frozen-lockfile
 
       - name: Run lint
         run: |
@@ -68,7 +68,7 @@ jobs:
       - name: Run build
         run: |
           cd web
-          bun run build
+          bun --env-file=.env ./build.ts
 
       - name: Run UI and service regression tests
         run: |
