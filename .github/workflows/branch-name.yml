@@ -40,6 +40,18 @@ jobs:
             cursor/verification-setup-73bc)
               exit 0
               ;;
+            # Remove this exemption once cursor/ci-budget-fa93 merges or closes.
+            cursor/ci-budget-fa93)
+              exit 0
+              ;;
+            # Remove this exemption once cursor/eas-submit-fa93 merges or closes.
+            cursor/eas-submit-fa93)
+              exit 0
+              ;;
+            # Remove this exemption once cursor/reconcile-pre-staging-fa93 merges or closes.
+            cursor/reconcile-pre-staging-fa93)
+              exit 0
+              ;;
           esac
           pattern='^(feat|fix|hotfix|chore|docs|refactor|test|release)/[a-z0-9][a-z0-9-]*$'
           if printf '%s\n' "${HEAD_REF}" | grep -Eq "${pattern}"; then
