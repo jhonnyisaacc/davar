@@ -20,6 +20,10 @@ jobs:
             exit 1
           fi
           case "${HEAD_REF}" in
+            # Integration branch. A promotion into main uses this head.
+            staging)
+              exit 0
+              ;;
             # Remove this exemption once cursor/davar-repo-review-e47f (#254) merges or closes.
             cursor/davar-repo-review-e47f)
               exit 0
