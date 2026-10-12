@@ -639,17 +639,7 @@ export function NavigationBar({
 						דבר
 					</span>
 					<div className="flex w-full justify-center gap-0.5 p-1 rounded-full bg-[var(--navigation-bg)] sm:w-auto sm:gap-1">
-						{centeredNavDestinations.map((destination, index) => {
-							if (destination == null) {
-								return (
-									<span
-										key={`pad-${index}`}
-										className="flex-1 sm:flex-none"
-										aria-hidden="true"
-									/>
-								);
-							}
-							return (
+						{centeredNavDestinations.map((destination) => (
 								<button
 									key={destination.id}
 									type="button"
@@ -699,8 +689,7 @@ export function NavigationBar({
 												: destination.id[0].toUpperCase() +
 													destination.id.slice(1)}
 								</button>
-							);
-						})}
+						))}
 					</div>
 				</nav>
 			</div>

@@ -49,14 +49,20 @@ function destinationIsPrimary(id: string): boolean {
 export function centerPrimaryDestination<T extends { id: string }>(
   items: readonly T[],
   isPrimary: (item: T) => boolean = (item) => destinationIsPrimary(item.id),
-): Array<T | null> {
+): T[] {
   const index = items.findIndex((item) => isPrimary(item));
   if (index < 0) return [...items];
-  const before = index;
-  const after = items.length - index - 1;
-  return [
-    ...Array.from({ length: Math.max(0, after - before) }, () => null),
-    ...items,
-    ...Array.from({ length: Math.max(0, before - after) }, () => null),
-  ];
+  const primary = items[index];
+  if (!primary) return [...items];
+  const left = items.slice(0, index);
+  const right = items.slice(index + 1);
+  while (right.length - left.length > 1) {
+    const moved = right.shift();
+    if (moved) left.push(moved);
+  }
+  while (left.length - right.length > 1) {
+    const moved = left.pop();
+    if (moved) right.unshift(moved);
+  }
+  return [...left, primary, ...right];
 }

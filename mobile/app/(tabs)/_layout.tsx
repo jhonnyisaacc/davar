@@ -156,12 +156,7 @@ function NavigationDock({ state, navigation }: BottomTabBarProps) {
               indicatorStyle,
             ]}
           />
-          {centeredDestinations.map((destination, index) => {
-            if (!destination) {
-              return (
-                <View key={`pad-${index}`} style={{ flex: 1, height: 56 }} />
-              );
-            }
+          {centeredDestinations.map((destination) => {
             const { id, labelKey, icon: Icon } = destination;
             const label = t(labelKey);
             const route = state.routes.find((route) => route.name === id)!;
