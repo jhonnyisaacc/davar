@@ -1,7 +1,7 @@
 name: Davar API
 on:
   pull_request:
-    branches: [main, feat/davar-v2]
+    branches: [main, feat/davar-v2, feat/preview-api-railway]
     paths:
       - "api/**"
       - ".github/workflows/api-ci.yml"
@@ -21,6 +21,7 @@ permissions:
 jobs:
   api:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     services:
       postgres:
         image: postgres:17
@@ -44,15 +45,13 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: "1.3.14"
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.13"
       - run: bun install --frozen-lockfile
       - run: bun run typecheck
       - run: bun run db:migrate
       - run: bun test
   bore-parity:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
