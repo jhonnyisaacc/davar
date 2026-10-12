@@ -451,7 +451,7 @@ const createStyles = (
     hebrew: {
       fontFamily: typography.families.hebrewScripture,
       fontSize: baseHebrewSize,
-      color: colors.textPrimary,
+      color: colors.textHebrew,
       textAlign: "center",
       writingDirection: "rtl",
       lineHeight: baseHebrewLineHeight,
@@ -460,11 +460,11 @@ const createStyles = (
       fontFamily: typography.families.hebrewQumran,
       fontSize: qumranSize,
       lineHeight: qumranLineHeight,
-      color: colors.textPrimary,
+      color: colors.qumranText,
       textDecorationLine: "underline",
     },
     qumranText: {
-      color: colors.textPrimary,
+      color: colors.qumranText,
       textDecorationLine: "underline",
     },
     transliteration: {

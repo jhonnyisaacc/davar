@@ -68,7 +68,7 @@ export const createStyles = (colors: ReturnType<typeof getColors>, layout: Retur
       fontSize: typography.sizes.hebrewVerseMedium * 1.06,
       lineHeight:
         typography.sizes.hebrewVerseMedium * typography.lineHeights.hebrewScripture,
-      color: colors.textPrimary,
+      color: colors.textHebrew,
       textAlign: "right",
       writingDirection: "rtl",
       letterSpacing: 0.3,
