@@ -4,6 +4,7 @@ import { Tabs } from "expo-router";
 import type { BottomTabBarProps } from "expo-router/js-tabs";
 import { useEffect, useRef, useState } from "react";
 import {
+  Platform,
   Pressable,
   StyleSheet,
   Text,
@@ -136,7 +137,11 @@ function NavigationDock({ state, navigation }: BottomTabBarProps) {
             alignItems: "center",
             padding: 6,
             gap: 2,
-            backgroundColor: dark ? "#3C3836B3" : "#FDF8F2B3",
+            // Elevation leaves a translucent fill unpainted on the label line.
+            backgroundColor: Platform.select({
+              android: dark ? "#3C3836" : "#FDF8F2",
+              default: dark ? "#3C3836B3" : "#FDF8F2B3",
+            }),
           }}
         >
           <Animated.View
