@@ -930,7 +930,7 @@ jobs:
             check_play_json mobile/secrets/google-play-service-account.json
           }
           # PLAYCHECK_END
-          if needs_android_play_json "build-and-submit" "all"; then
+          if needs_android_play_json "build-and-submit" "android"; then
             write_play_json
           fi
 
@@ -961,10 +961,9 @@ jobs:
         if: steps.classify.outputs.mode == 'build'
         working-directory: mobile
         run: |
-          echo "Native config, native dependency, runtimeVersion, app version, or eas.json diff. Running eas build and eas submit. Skipping eas update."
-          echo "iOS submit uses the App Store Connect API key on EAS project 232e7627-d0c9-4b88-976e-b4855beb322e. A missing key fails eas submit for iOS."
-          eas build --platform all --profile production --non-interactive --wait
-          eas submit --platform all --profile production --latest --non-interactive
+          echo "Native config, native dependency, runtimeVersion, app version, or eas.json diff. Running eas build and eas submit for Android. Skipping iOS and eas update."
+          eas build --platform android --profile production --non-interactive --wait
+          eas submit --platform android --profile production --latest --non-interactive
 
       - name: Skip both Expo commands
         if: steps.classify.outputs.mode == 'skip'
