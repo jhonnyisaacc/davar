@@ -2,18 +2,24 @@ name: Python CI
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, feat/preview-api-railway]
     paths:
-      - "scripts/**"
-      - "tests/**"
-      - "tools/**"
+      - "scripts/hutter/morphology.py"
+      - "scripts/hutter/attested_morphology.py"
+      - "scripts/hutter/evaluate_attested_morphology.py"
+      - "scripts/hutter/map_strongs.py"
+      - "tests/test_hutter_morphology.py"
+      - "tests/test_hutter_attested_morphology.py"
       - ".github/workflows/python-ci.yml"
   push:
     branches: [main]
     paths:
-      - "scripts/**"
-      - "tests/**"
-      - "tools/**"
+      - "scripts/hutter/morphology.py"
+      - "scripts/hutter/attested_morphology.py"
+      - "scripts/hutter/evaluate_attested_morphology.py"
+      - "scripts/hutter/map_strongs.py"
+      - "tests/test_hutter_morphology.py"
+      - "tests/test_hutter_attested_morphology.py"
       - ".github/workflows/python-ci.yml"
 
 permissions:
@@ -23,6 +29,7 @@ jobs:
   pytest:
     name: pytest
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 

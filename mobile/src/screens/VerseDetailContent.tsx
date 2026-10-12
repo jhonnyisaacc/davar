@@ -1,7 +1,5 @@
 import { FullChapterView } from "@/src/components/FullChapterView";
 import {
-  memo,
-  type ReactNode,
   useCallback,
   useContext,
   useEffect,
@@ -14,43 +12,39 @@ import {
   Animated,
   FlatList,
   Modal,
-  NativeScrollEvent,
-  NativeSyntheticEvent,
   Pressable,
   Platform,
-  ScrollView,
-  StyleSheet,
   Text,
   ToastAndroid,
   View,
   useWindowDimensions,
 } from "react-native";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import Reanimated, {
-  cancelAnimation,
-  runOnJS,
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-} from "react-native-reanimated";
 import {
   SafeAreaView,
   useSafeAreaInsets,
 } from "react-native-safe-area-context";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import type { BottomSheetMethods } from "@gorhom/bottom-sheet/lib/typescript/types";
-import { BottomTabBarHeightContext } from "@react-navigation/bottom-tabs";
-import type { BottomTabNavigationProp } from "@react-navigation/bottom-tabs";
-import type { ParamListBase } from "@react-navigation/native";
+import { BottomTabBarHeightContext } from "expo-router/js-tabs";
+import type { BottomTabNavigationProp } from "expo-router/js-tabs";
+import type { ParamListBase } from "expo-router/react-navigation";
 import { VerseCard } from "@/src/components/VerseCard";
 import { VerseCardSkeleton } from "@/src/components/VerseCardSkeleton";
-import { WordAnalysisBottomSheet } from "@/src/components/WordAnalysisBottomSheet";
+import { getNavigationDockContentPadding } from "@/src/constants/navigationDock";
+import { VERSE_SCROLL_EDGE_EPSILON as EDGE_EPSILON } from "@/src/services/versePaging";
+import { ChapterFlow } from "@/src/features/reader/ChapterFlow";
+import { VersePage } from "@/src/features/reader/VersePage";
+import { WordAnalysisBottomSheet } from "@/src/features/reader/WordAnalysisBottomSheet";
+import { createStyles } from "@/src/features/reader/verseDetailStyles";
 import {
   NavigationSheet,
   type NavigationSheetMethods,
 } from "@/src/components/NavigationSheet";
+import { CalendarDayPill } from "@/src/features/calendar/CalendarDayPill";
+import { useCalendar } from "@/src/features/calendar/useCalendar";
+import { readingCalendarPill } from "@davar/shared/calendarPresentation";
 import { BookChapterPill } from "@/src/components/ui/BookChapterPill";
-import { getColors, getResponsiveLayout, spacing, typography } from "@/src/theme";
+import { getColors, getResponsiveLayout, spacing } from "@/src/theme";
 import { fetchMetadata } from "@/src/services/metadata";
 import type { BookResponse, TranslationFootnote } from "@/src/types/api";
 import {
@@ -61,602 +55,18 @@ import {
 import { useAppStore, type AppState } from "@/src/store/useAppStore";
 import { useTranslation } from "@/src/i18n/useTranslation";
 import {
-  loadBesorahDisclaimerCount,
   loadSwipeUpHintCount,
-  saveBesorahDisclaimerCount,
   saveSwipeUpHintCount,
 } from "@/src/services/storage";
 import { formatBookDisplayName } from "../utils/bookNameFormatter";
-import {
-  sanitizeEmTags,
-  buildMarkerRegex,
-  createFootnoteLookup,
-  DEFAULT_FOOTNOTE_MARKER_COLOR,
-  collectMarkerMatches,
-  resolveFootnoteForMarker,
-  formatMarkerForDisplay,
-} from "@/src/utils/footnoteUtils";
-import { GREEK_BESORAH_BOOK_NAMES } from "@davar/shared/greekBesorah";
-import { stripCantillation, stripMeteg, stripNikud } from "@/src/utils/hebrew";
+import { stripNikud } from "@/src/utils/hebrew";
 import { resolveGreekOverlayLanguage } from "@/src/utils/translationConfig";
 
 const SWIPE_HINT_MAX_SHOWS = 5;
 
-const renderTranslationSegment = (
-  text: string,
-  keyPrefix: string,
-  markerRegex: RegExp | null,
-  footnoteLookup: Map<string, TranslationFootnote>,
-  onFootnotePress?: (footnote: TranslationFootnote) => void,
-  isItalic = false,
-  markerColor = DEFAULT_FOOTNOTE_MARKER_COLOR,
-  renderUnmappedSuperscripts = false,
-): ReactNode[] => {
-  const sanitized = sanitizeEmTags(text);
-  if (!sanitized) {
-    return [];
-  }
-
-  const markerMatches = collectMarkerMatches(
-    sanitized,
-    markerRegex,
-    renderUnmappedSuperscripts,
-  );
-
-  if (markerMatches.length === 0) {
-    return isItalic
-      ? [
-          <Text key={`${keyPrefix}-italic`} style={{ fontStyle: "italic" }}>
-            {sanitized}
-          </Text>,
-        ]
-      : [sanitized];
-  }
-  const nodes: ReactNode[] = [];
-
-  let lastIndex = 0;
-
-  for (let i = 0; i < markerMatches.length; i += 1) {
-    const markerMatch = markerMatches[i];
-    const plainText = sanitized.slice(lastIndex, markerMatch.start);
-    if (plainText) {
-      if (isItalic) {
-        nodes.push(
-          <Text key={`${keyPrefix}-text-${i}`} style={{ fontStyle: "italic" }}>
-            {plainText}
-          </Text>,
-        );
-      } else {
-        nodes.push(plainText);
-      }
-    }
-
-    const marker = markerMatch.content;
-    const footnote = resolveFootnoteForMarker(footnoteLookup, marker);
-    const markerText = formatMarkerForDisplay(marker);
-
-    nodes.push(
-      <Text
-        key={`${keyPrefix}-marker-${i}`}
-        onPress={
-          footnote && onFootnotePress
-            ? () => onFootnotePress(footnote)
-            : undefined
-        }
-        style={{
-          color: markerColor,
-          fontSize: typography.sizes.caption,
-          lineHeight: typography.sizes.caption + 2,
-          includeFontPadding: false,
-          transform: [{ translateY: -5 }],
-        }}
-      >
-        {markerText}
-      </Text>,
-    );
-
-    lastIndex = markerMatch.end;
-  }
-
-  const trailingText = sanitized.slice(lastIndex);
-  if (trailingText) {
-    if (isItalic) {
-      nodes.push(
-        <Text key={`${keyPrefix}-text-tail`} style={{ fontStyle: "italic" }}>
-          {trailingText}
-        </Text>,
-      );
-    } else {
-      nodes.push(trailingText);
-    }
-  }
-
-  return nodes;
-};
-
-const renderTranslationFlowText = (
-  translation: string,
-  footnotes?: TranslationFootnote[],
-  onFootnotePress?: (footnote: TranslationFootnote) => void,
-  markerColor = DEFAULT_FOOTNOTE_MARKER_COLOR,
-  renderUnmappedSuperscripts = false,
-): ReactNode[] => {
-  const footnoteLookup = createFootnoteLookup(footnotes);
-  const markerRegex = buildMarkerRegex(footnoteLookup);
-
-  const segments: ReactNode[] = [];
-  const emPattern = /<em>(.*?)<\/em>/gi;
-  let lastIndex = 0;
-  let match: RegExpExecArray | null;
-  let index = 0;
-
-  while ((match = emPattern.exec(translation)) !== null) {
-    const start = match.index;
-    const end = start + match[0].length;
-
-    const plainText = translation.slice(lastIndex, start);
-    if (plainText) {
-      segments.push(
-        ...renderTranslationSegment(
-          plainText,
-          `plain-${index}`,
-          markerRegex,
-          footnoteLookup,
-          onFootnotePress,
-          false,
-          markerColor,
-          renderUnmappedSuperscripts,
-        ),
-      );
-    }
-
-    segments.push(
-      ...renderTranslationSegment(
-        match[1],
-        `em-${index}`,
-        markerRegex,
-        footnoteLookup,
-        onFootnotePress,
-        true,
-        markerColor,
-        renderUnmappedSuperscripts,
-      ),
-    );
-
-    lastIndex = end;
-    index += 1;
-  }
-
-  const trailingText = translation.slice(lastIndex);
-  if (trailingText) {
-    segments.push(
-      ...renderTranslationSegment(
-        trailingText,
-        "trailing",
-        markerRegex,
-        footnoteLookup,
-        onFootnotePress,
-        false,
-        markerColor,
-        renderUnmappedSuperscripts,
-      ),
-    );
-  }
-
-  return segments;
-};
-
 type TabPressEvent = {
   preventDefault: () => void;
 };
-
-const createStyles = (colors: ReturnType<typeof getColors>, layout: ReturnType<typeof getResponsiveLayout>) =>
-  StyleSheet.create({
-    safeArea: {
-      flex: 1,
-      backgroundColor: colors.background,
-    },
-    container: {
-      flex: 1,
-    },
-    navigationRow: {
-      position: "absolute",
-      top: spacing[16],
-      left: 0,
-      right: 0,
-      alignItems: "center",
-      zIndex: 10,
-      elevation: 10,
-    },
-    swipeHintRow: {
-      position: "absolute",
-      left: spacing[4],
-      right: spacing[4],
-      alignItems: "center",
-      zIndex: 12,
-      elevation: 12,
-    },
-    swipeHintText: {
-      fontFamily: typography.families.latinUI,
-      fontSize: 10,
-      color: colors.textSecondary,
-      textAlign: "center",
-    },
-    chapterTranslationScroll: {
-      flex: 1,
-      paddingHorizontal: layout.horizontalPadding,
-      paddingBottom: spacing[8],
-    },
-    chapterTranslationContent: {
-      width: "100%",
-      maxWidth: layout.contentMaxWidth,
-      alignSelf: "center",
-      paddingTop: spacing[16],
-      paddingBottom: spacing[16],
-    },
-    chapterVerseList: {
-      rowGap: layout.chapterGap,
-    },
-    chapterTranslationFlowText: {
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.body + 1,
-      lineHeight: (typography.sizes.body + 1) * typography.lineHeights.body,
-      color: colors.textPrimary,
-      opacity: 0.84,
-    },
-    chapterTranslationVerseNumber: {
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.caption + 1,
-      color: colors.textPrimary,
-      opacity: 0.68,
-      letterSpacing: 0.8,
-      marginRight: spacing[1],
-    },
-    chapterHebrewFlowText: {
-      fontFamily: typography.families.hebrewScripture,
-      fontSize: typography.sizes.hebrewVerseMedium * 1.06,
-      lineHeight:
-        typography.sizes.hebrewVerseMedium * typography.lineHeights.hebrewScripture,
-      color: colors.textPrimary,
-      textAlign: "right",
-      writingDirection: "rtl",
-      letterSpacing: 0.3,
-    },
-    chapterHebrewVerseNumber: {
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.caption + 1,
-      color: colors.textPrimary,
-      opacity: 0.68,
-      letterSpacing: 0.8,
-    },
-    chapterFootnoteOverlay: {
-      flex: 1,
-      backgroundColor: "rgba(0, 0, 0, 0.35)",
-      justifyContent: "center",
-      alignItems: "center",
-      paddingHorizontal: spacing[6],
-    },
-    chapterFootnoteCard: {
-      width: "100%",
-      // Percentage width prevents phone-sized dialogs on iPad and split view.
-      maxWidth: layout.modalWidth,
-      borderRadius: 14,
-      paddingHorizontal: spacing[5],
-      paddingVertical: spacing[4],
-      backgroundColor: colors.neomorphBg,
-      borderWidth: 1,
-      borderColor: colors.neomorphBorder,
-    },
-    chapterFootnoteHeading: {
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.caption,
-      color: colors.textSecondary,
-      marginBottom: spacing[2],
-      textTransform: "uppercase",
-      letterSpacing: 0.8,
-    },
-    chapterFootnoteWord: {
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.body,
-      color: colors.textPrimary,
-      fontWeight: "600",
-      marginBottom: spacing[2],
-    },
-    chapterFootnoteText: {
-      fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.body,
-      lineHeight: typography.sizes.body * typography.lineHeights.body,
-      color: colors.textPrimary,
-    },
-  });
-
-type VersePageProps = {
-  item: DisplayVerse;
-  pageHeight: number;
-  topPadding: number;
-  showWordHint: boolean;
-  isActive: boolean;
-  isSelectedVerse: boolean;
-  canSwipePrevious: boolean;
-  canSwipeNext: boolean;
-  isBesorah: boolean;
-  onVersePress: () => void;
-  selectedWord: DisplayVerse["words"][number] | null;
-  onWordPress: (
-    word: DisplayVerse["words"][number] | null,
-    verseId: string,
-  ) => void;
-  onNonHebrewPress: () => void;
-  onMetricsChange: (
-    verseId: string,
-    metrics: {
-      canScroll: boolean;
-      offsetY: number;
-      contentHeight: number;
-      viewportHeight: number;
-    },
-  ) => void;
-  onEdgeSwipe: (verseId: string, direction: "previous" | "next") => void;
-  onScrollBegin?: () => void;
-};
-
-const EDGE_EPSILON = 2;
-const SWIPE_VELOCITY_THRESHOLD = 0.55;
-const PAN_SWIPE_VELOCITY_THRESHOLD = 600;
-const HEBREW_PRESS_SUPPRESSION_MS = 250;
-
-const VersePageComponent = ({
-  item,
-  pageHeight,
-  topPadding,
-  showWordHint,
-  isActive,
-  isSelectedVerse,
-  canSwipePrevious,
-  canSwipeNext,
-  isBesorah,
-  onVersePress,
-  selectedWord,
-  onWordPress,
-  onNonHebrewPress,
-  onMetricsChange,
-  onEdgeSwipe,
-  onScrollBegin,
-}: VersePageProps) => {
-  const [contentHeight, setContentHeight] = useState(0);
-  const [viewportHeight, setViewportHeight] = useState(0);
-  const { width, height } = useWindowDimensions();
-  const layout = getResponsiveLayout(width, height);
-  const horizontalPadding = layout.isTablet ? layout.horizontalPadding : spacing[4];
-  const bottomPadding = spacing[8];
-  const canScroll = contentHeight > viewportHeight + EDGE_EPSILON;
-  const effectiveTopPadding = canScroll ? topPadding : spacing[6];
-  const lastHebrewPressInRef = useRef(0);
-
-  const markHebrewPressIn = useCallback(() => {
-    lastHebrewPressInRef.current = Date.now();
-  }, []);
-
-  const handleNonHebrewAreaPress = useCallback(() => {
-    // Ignore bubbling taps immediately following Hebrew word/verse interactions.
-    if (Date.now() - lastHebrewPressInRef.current < HEBREW_PRESS_SUPPRESSION_MS) {
-      return;
-    }
-    onNonHebrewPress();
-  }, [onNonHebrewPress]);
-
-  useEffect(() => {
-    onMetricsChange(item.id, {
-      canScroll,
-      offsetY: 0,
-      contentHeight,
-      viewportHeight,
-    });
-  }, [canScroll, contentHeight, item.id, onMetricsChange, viewportHeight]);
-
-  const handleScroll = useCallback(
-    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-      if (!isActive) {
-        return;
-      }
-
-      onMetricsChange(item.id, {
-        canScroll,
-        offsetY: event.nativeEvent.contentOffset.y,
-        contentHeight: event.nativeEvent.contentSize.height,
-        viewportHeight: event.nativeEvent.layoutMeasurement.height,
-      });
-    },
-    [canScroll, isActive, item.id, onMetricsChange],
-  );
-
-  const handleScrollEndDrag = useCallback(
-    (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-      if (!isActive) {
-        return;
-      }
-
-      const velocityY = event.nativeEvent.velocity?.y ?? 0;
-      if (Math.abs(velocityY) < SWIPE_VELOCITY_THRESHOLD) {
-        return;
-      }
-
-      const nextCanScroll =
-        event.nativeEvent.contentSize.height >
-        event.nativeEvent.layoutMeasurement.height + EDGE_EPSILON;
-      const maxOffset = Math.max(
-        0,
-        event.nativeEvent.contentSize.height -
-          event.nativeEvent.layoutMeasurement.height,
-      );
-      const offsetY = event.nativeEvent.contentOffset.y;
-      const atTop = offsetY <= EDGE_EPSILON;
-      const atBottom = offsetY >= maxOffset - EDGE_EPSILON;
-
-      if (velocityY > SWIPE_VELOCITY_THRESHOLD && (!nextCanScroll || atBottom)) {
-        onEdgeSwipe(item.id, "next");
-        return;
-      }
-
-      if (
-        velocityY < -SWIPE_VELOCITY_THRESHOLD &&
-        (!nextCanScroll || atTop)
-      ) {
-        onEdgeSwipe(item.id, "previous");
-      }
-    },
-    [isActive, item.id, onEdgeSwipe],
-  );
-
-  const swipeTranslateY = useSharedValue(0);
-
-  useEffect(() => {
-    swipeTranslateY.value = 0;
-  }, [item.id, isActive, swipeTranslateY]);
-
-  const animatedSwipeStyle = useAnimatedStyle(() => ({
-    transform: [{ translateY: swipeTranslateY.value }],
-  }));
-
-  const panGesture = useMemo(
-    () =>
-      Gesture.Pan()
-        .enabled(!canScroll && isActive)
-        .onBegin(() => {
-          cancelAnimation(swipeTranslateY);
-          swipeTranslateY.value = 0;
-          if (onScrollBegin) runOnJS(onScrollBegin)();
-        })
-        .onUpdate((event) => {
-          swipeTranslateY.value = event.translationY * 0.2;
-        })
-        .onEnd((event) => {
-          if (event.velocityY < -PAN_SWIPE_VELOCITY_THRESHOLD) {
-            if (!canSwipeNext) {
-              swipeTranslateY.value = withSpring(0, {
-                damping: 20,
-                stiffness: 300,
-              });
-              runOnJS(onEdgeSwipe)(item.id, "next");
-              return;
-            }
-            runOnJS(onEdgeSwipe)(item.id, "next");
-          } else if (event.velocityY > PAN_SWIPE_VELOCITY_THRESHOLD) {
-            if (!canSwipePrevious) {
-              swipeTranslateY.value = withSpring(0, {
-                damping: 20,
-                stiffness: 300,
-              });
-              runOnJS(onEdgeSwipe)(item.id, "previous");
-              return;
-            }
-            runOnJS(onEdgeSwipe)(item.id, "previous");
-          } else {
-            swipeTranslateY.value = withSpring(0, {
-              damping: 20,
-              stiffness: 300,
-            });
-          }
-        }),
-    [
-      canScroll,
-      canSwipeNext,
-      canSwipePrevious,
-      isActive,
-      item.id,
-      onEdgeSwipe,
-      onScrollBegin,
-      swipeTranslateY,
-    ],
-  );
-
-  const verseContent = (
-    <View
-      style={{
-        minHeight: pageHeight,
-        width: "100%",
-        maxWidth: layout.contentMaxWidth,
-        alignSelf: "center",
-        justifyContent: canScroll ? "flex-start" : "center",
-        paddingHorizontal: horizontalPadding,
-        paddingTop: effectiveTopPadding,
-        paddingBottom: bottomPadding,
-      }}
-      onTouchEnd={handleNonHebrewAreaPress}
-    >
-      <VerseCard
-        verse={item}
-        variant="detail"
-        showWordHint={showWordHint && isSelectedVerse}
-        selectedWord={isSelectedVerse ? selectedWord : null}
-        isBesorah={isBesorah}
-        onVersePress={onVersePress}
-        onWordPress={(word) => onWordPress(word, item.id)}
-        onHebrewPressIn={markHebrewPressIn}
-      />
-    </View>
-  );
-
-  return (
-    <GestureDetector gesture={panGesture}>
-      <Reanimated.View
-        pointerEvents={isActive ? "auto" : "none"}
-        style={[
-          {
-            height: pageHeight,
-            width: "100%",
-          },
-          canScroll ? undefined : animatedSwipeStyle,
-        ]}
-      >
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          bounces={false}
-          alwaysBounceVertical={false}
-          overScrollMode="never"
-          nestedScrollEnabled={canScroll}
-          scrollEnabled={canScroll}
-          scrollEventThrottle={16}
-          onLayout={(event) => {
-            setViewportHeight(event.nativeEvent.layout.height);
-          }}
-          onContentSizeChange={(_, height) => {
-            setContentHeight(height);
-          }}
-          onScrollBeginDrag={onScrollBegin}
-          onScroll={handleScroll}
-          onScrollEndDrag={handleScrollEndDrag}
-          contentContainerStyle={{
-            minHeight: pageHeight,
-          }}
-        >
-          {verseContent}
-        </ScrollView>
-      </Reanimated.View>
-    </GestureDetector>
-  );
-};
-
-const VersePage = memo(
-  VersePageComponent,
-  (prevProps, nextProps) =>
-    prevProps.item.id === nextProps.item.id &&
-    prevProps.pageHeight === nextProps.pageHeight &&
-    prevProps.showWordHint === nextProps.showWordHint &&
-    prevProps.isActive === nextProps.isActive &&
-    prevProps.isSelectedVerse === nextProps.isSelectedVerse &&
-    prevProps.canSwipePrevious === nextProps.canSwipePrevious &&
-    prevProps.canSwipeNext === nextProps.canSwipeNext &&
-    prevProps.isBesorah === nextProps.isBesorah &&
-    (prevProps.isSelectedVerse ? prevProps.selectedWord : null) ===
-      (nextProps.isSelectedVerse ? nextProps.selectedWord : null) &&
-    prevProps.onVersePress === nextProps.onVersePress &&
-    prevProps.onWordPress === nextProps.onWordPress &&
-    prevProps.onNonHebrewPress === nextProps.onNonHebrewPress &&
-    prevProps.onMetricsChange === nextProps.onMetricsChange &&
-    prevProps.onEdgeSwipe === nextProps.onEdgeSwipe &&
-    prevProps.onScrollBegin === nextProps.onScrollBegin,
-);
 
 export const VerseDetailContent = () => {
   const themeMode = useAppStore((state: AppState) => state.themeMode);
@@ -721,6 +131,10 @@ export const VerseDetailContent = () => {
 
   const paramId = Array.isArray(params.id) ? params.id[0] : params.id;
   const isStandaloneVerseDetailRoute = Boolean(paramId);
+  const bottomContentInset = isStandaloneVerseDetailRoute
+    ? insets.bottom
+    : getNavigationDockContentPadding(insets.bottom);
+  const verseBottomPadding = bottomContentInset + spacing[8];
 
   // Standalone screens use local state so they never touch the global store
   const [localVerseId, setLocalVerseId] = useState(
@@ -736,18 +150,23 @@ export const VerseDetailContent = () => {
   // Keep refs current for the onViewableItemsChanged closure
   const effectiveVerseIdRef = useRef(effectiveVerseId);
   const setEffectiveVerseIdRef = useRef(setEffectiveVerseId);
-  // Pending verse number to scroll to after cross-book/chapter data loads
-  const pendingScrollVerseRef = useRef<number | null>(null);
   useEffect(() => {
     effectiveVerseIdRef.current = effectiveVerseId;
     setEffectiveVerseIdRef.current = setEffectiveVerseId;
   });
 
   const verseId = effectiveVerseId;
+  const readingCalendarState = useCalendar();
+  const showCalendarDayPill = useAppStore((state) => state.showCalendarDayPill);
+  const hasCalendarDayPill = !!readingCalendarPill(
+    readingCalendarState,
+    showCalendarDayPill,
+  );
   const navigationRowTop = isStandaloneVerseDetailRoute
     ? spacing[1]
     : spacing[16];
-  const contentTopPadding = navigationRowTop + layout.controlHeight + spacing[6];
+  const contentTopPadding =
+    navigationRowTop + layout.controlHeight + spacing[6] + (hasCalendarDayPill ? 40 : 0);
 
   const chapterScrollOffsets = useRef(new Map<string, number>());
   const chapterMeasurements = useRef(new Map<string, Map<number, number>>());
@@ -793,7 +212,6 @@ export const VerseDetailContent = () => {
     [bookId, booksMeta, verse?.bookId],
   );
   const isBesorah = bookMeta?.section === "besorah";
-  const previousBookSectionRef = useRef<string | null>(null);
 
   const bookVerses = useMemo(() => chapterVerses, [chapterVerses]);
   const orderedVerses = useMemo(
@@ -807,27 +225,15 @@ export const VerseDetailContent = () => {
     () => (verse ? orderedVerses.findIndex((item) => item.id === verse.id) : 0),
     [orderedVerses, verse],
   );
+  // Initial positioning must use loaded data and measured geometry.
+  const isVersePagerReady =
+    !isLoading &&
+    measuredHeight > 0 &&
+    orderedVerses[0]?.id.startsWith(`${bookId}-${chapter}-`);
   const isChapterFlowMode =
     showFullChapter && seferMode && (translationOnly || hebrewOnly);
 
-  const normalizeFlowHebrew = useCallback(
-    (text: string) => {
-      let normalized = text;
-      if (!showNikud) {
-        normalized = stripNikud(normalized);
-      }
-      if (!showCantillation) {
-        normalized = stripCantillation(normalized);
-      }
-      normalized = stripMeteg(normalized);
-      return normalized.replace(/\//g, "");
-    },
-    [showCantillation, showNikud],
-  );
-
   const [showWordHint] = useState(false);
-  const pageHeightRef = useRef(pageHeight);
-  pageHeightRef.current = pageHeight;
   const swipeSyncTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const listRef = useRef<FlatList<(typeof orderedVerses)[number]>>(null);
   const verseScrollMetricsRef = useRef<
@@ -848,9 +254,13 @@ export const VerseDetailContent = () => {
     }: {
       viewableItems: { item: (typeof orderedVerses)[number] }[];
     }) => {
-      // Skip updates while waiting for cross-book/chapter data to load
-      if (pendingScrollVerseRef.current !== null) return;
       const next = viewableItems[0]?.item;
+      // Ignore callbacks from a chapter that is being replaced.
+      const activeChapter = effectiveVerseIdRef.current
+        .split("-")
+        .slice(0, 2)
+        .join("-");
+      if (!next?.id.startsWith(`${activeChapter}-`)) return;
       if (next && next.id !== effectiveVerseIdRef.current) {
         setEffectiveVerseIdRef.current(next.id);
       }
@@ -908,11 +318,17 @@ export const VerseDetailContent = () => {
           e.preventDefault();
           // Close word analysis sheet if it's open
           sheetRef.current?.close();
-          navigationSheetRef.current?.snapToIndex(0);
+          navigationSheetRef.current?.open();
         }
       },
     );
     return unsubscribe;
+  }, [navigation]);
+
+  useEffect(() => {
+    return navigation.addListener("blur", () =>
+      navigationSheetRef.current?.close(),
+    );
   }, [navigation]);
 
   useEffect(() => {
@@ -934,37 +350,6 @@ export const VerseDetailContent = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const currentSection = bookMeta?.section ?? null;
-    const previousSection = previousBookSectionRef.current;
-    const enteredBesorahFromTanaj =
-      Boolean(previousSection) &&
-      previousSection !== "besorah" &&
-      currentSection === "besorah";
-
-    if (enteredBesorahFromTanaj) {
-      void (async () => {
-        const shownCount = await loadBesorahDisclaimerCount();
-        if (shownCount >= 3) {
-          return;
-        }
-
-        Alert.alert(
-          t("verse.besorahDisclaimer.modalTitle"),
-          t("verse.besorahDisclaimer.modalMessage"),
-          [{ text: t("verse.besorahDisclaimer.modalConfirm") }],
-          { cancelable: true },
-        );
-
-        await saveBesorahDisclaimerCount(shownCount + 1);
-      })();
-    }
-
-    if (currentSection) {
-      previousBookSectionRef.current = currentSection;
-    }
-  }, [bookMeta?.section, t]);
-
   const handleNavigationSelect = useCallback(
     (nextBookId: string, nextChapter: number, verseNum: number) => {
       const targetId = `${nextBookId}-${nextChapter}-${verseNum}`;
@@ -980,9 +365,6 @@ export const VerseDetailContent = () => {
             animated: true,
           });
         }
-      } else {
-        // Different book/chapter: defer scroll until new data loads
-        pendingScrollVerseRef.current = verseNum;
       }
     },
     [orderedVerses, setEffectiveVerseId, bookId, chapter, pageHeight],
@@ -1066,7 +448,8 @@ export const VerseDetailContent = () => {
   }, []);
 
   const handleOpenNavigationSheet = useCallback(() => {
-    navigationSheetRef.current?.snapToIndex(0);
+    sheetRef.current?.close();
+    navigationSheetRef.current?.open();
   }, []);
 
   const showBoundaryToast = useCallback(
@@ -1162,6 +545,14 @@ export const VerseDetailContent = () => {
     [],
   );
   const shouldShowSwipeHint = swipeHintCount < SWIPE_HINT_MAX_SHOWS;
+  const locationBookLabel =
+    language === "he"
+      ? stripNikud(bookMeta?.hebrew_name ?? t("common.loading"))
+      : formatBookDisplayName(
+          language === "es"
+            ? (bookMeta?.spanish_name ?? t("common.loading"))
+            : (bookMeta?.name ?? t("common.loading")),
+        );
 
   const renderVersePage = useCallback(
     ({
@@ -1173,8 +564,12 @@ export const VerseDetailContent = () => {
     }) => (
       <VersePage
         item={item}
+        bookLabel={locationBookLabel}
+        pillVisibility={pillVisibility}
+        pillVisible={pillVisible}
         pageHeight={pageHeight}
         topPadding={contentTopPadding}
+        bottomPadding={verseBottomPadding}
         showWordHint={showWordHint}
         isActive={item.id === verse?.id}
         isSelectedVerse={item.id === verse?.id}
@@ -1191,8 +586,12 @@ export const VerseDetailContent = () => {
       />
     ),
     [
+      locationBookLabel,
+      pillVisibility,
+      pillVisible,
       pageHeight,
       contentTopPadding,
+      verseBottomPadding,
       showWordHint,
       verse?.id,
       orderedVerses.length,
@@ -1333,26 +732,6 @@ export const VerseDetailContent = () => {
           if (!isMounted || !isCurrentLoad()) return;
           setChapterVerses(enriched);
         }
-        // Scroll to the pending target verse after cross-book/chapter navigation
-        if (pendingScrollVerseRef.current !== null) {
-          const targetVerse = pendingScrollVerseRef.current;
-          pendingScrollVerseRef.current = null;
-          const sorted = [...verses].sort(
-            (a, b) => a.chapter - b.chapter || a.verse - b.verse,
-          );
-          const targetIndex = sorted.findIndex(
-            (item) => item.verse === targetVerse,
-          );
-          if (targetIndex >= 0) {
-            // Use requestAnimationFrame to ensure FlatList has updated with new data
-            requestAnimationFrame(() => {
-              listRef.current?.scrollToOffset({
-                offset: targetIndex * pageHeightRef.current,
-                animated: false,
-              });
-            });
-          }
-        }
       } catch {
         if (!isMounted) return;
         setErrorMessage(t("errors.loadVerses"));
@@ -1392,52 +771,34 @@ export const VerseDetailContent = () => {
             );
           }}
         >
-          <View
-            style={[styles.navigationRow, { top: navigationRowTop }]}
-            pointerEvents="box-none"
-          >
-            <Animated.View
-              pointerEvents={pillVisible ? "auto" : "none"}
-              style={{
-                opacity: pillVisibility,
-                transform: [
-                  {
-                    translateY: pillVisibility.interpolate({
-                      inputRange: [0, 1],
-                      outputRange: [-12, 0],
-                    }),
-                  },
-                ],
-              }}
+          {showFullChapter && (
+            <View
+              style={[styles.navigationRow, { top: navigationRowTop }]}
+              pointerEvents="box-none"
             >
-              <BookChapterPill
-                bookLabel={formatBookDisplayName(
-                  language === "es"
-                    ? (bookMeta?.spanish_name ?? t("common.loading"))
-                    : (bookMeta?.name ?? t("common.loading")),
-                )}
-                hebrewLabel={
-                  besorahLanguage === "greek" && bookMeta?.id
-                    ? (GREEK_BESORAH_BOOK_NAMES[bookMeta.id] ??
-                      bookMeta.hebrew_name ??
-                      "")
-                    : (bookMeta?.hebrew_name ?? "")
-                }
-                nativeLabelScript={
-                  besorahLanguage === "greek" &&
-                  bookMeta?.id &&
-                  GREEK_BESORAH_BOOK_NAMES[bookMeta.id]
-                    ? "greek"
-                    : "hebrew"
-                }
-                chapter={verse?.chapter ?? chapter}
-                onBookPress={() => navigationSheetRef.current?.snapToIndex(0)}
-                onChapterPress={() =>
-                  navigationSheetRef.current?.openAtChapter()
-                }
-              />
-            </Animated.View>
-          </View>
+              <Animated.View
+                pointerEvents={pillVisible ? "auto" : "none"}
+                style={{
+                  opacity: pillVisibility,
+                  transform: [
+                    {
+                      translateY: pillVisibility.interpolate({
+                        inputRange: [0, 1],
+                        outputRange: [-12, 0],
+                      }),
+                    },
+                  ],
+                }}
+              >
+                <CalendarDayPill />
+                <BookChapterPill
+                  bookLabel={locationBookLabel}
+                  chapter={verse?.chapter ?? chapter}
+                  onPress={handleOpenNavigationSheet}
+                />
+              </Animated.View>
+            </View>
+          )}
           {isLoading ? <VerseCardSkeleton pageHeight={pageHeight} /> : null}
           {errorMessage ? (
             <View
@@ -1469,98 +830,63 @@ export const VerseDetailContent = () => {
                   onWordPress={word => handleWordPress(word, item.id)} />
               )}
               renderFlow={isChapterFlowMode ? (flowItems) => (
-                <Pressable onPress={handleTogglePills}>
-                  {translationOnly ? (
-                    <Text style={styles.chapterTranslationFlowText}>
-                      {flowItems.map((item, index) => (
-                        <Text key={item.id}>
-                          <Text style={styles.chapterTranslationVerseNumber}>
-                            [{item.verse}]
-                          </Text>{" "}
-                          {renderTranslationFlowText(
-                            language === "es" && !(item.translation ?? "").trim()
-                              ? t("verse.missingSpanishTranslation")
-                              : (item.translation ?? ""),
-                            language === "es" ? item.translation_footnotes : undefined,
-                            language === "es" ? setActiveFlowFootnote : undefined,
-                            colors.accentCopper,
-                            language === "es",
-                          )}
-                          {index < flowItems.length - 1 ? "\u200E " : ""}
-                        </Text>
-                      ))}
-                    </Text>
-                  ) : (
-                    <Text
-                      style={[
-                        styles.chapterHebrewFlowText,
-                        {
-                          fontSize: typography.sizes.hebrewVerseMedium * hebrewFontScale * 1.06 * layout.textScale,
-                          lineHeight:
-                            typography.sizes.hebrewVerseMedium *
-                            hebrewFontScale * layout.textScale *
-                            typography.lineHeights.hebrewScripture,
-                        },
-                        besorahLanguage === "greek"
-                          ? {
-                              textAlign: "left",
-                              writingDirection: "ltr",
-                            }
-                          : undefined,
-                      ]}
-                    >
-                      {flowItems.flatMap(item => item.available === false
-                        ? <Text key={item.id}>{t("verse.greekUnavailable")} </Text>
-                        : item.words.length
-                        ? item.words.map((word, wordIndex) => (
-                          <Text key={`${item.id}-${word.position}-${wordIndex}`}
-                            testID={`sefer-${item.id}-${word.position}`}
-                            accessibilityRole="button"
-                            accessibilityLabel={normalizeFlowHebrew(word.text)}
-                            onPress={() => handleWordPress(word, item.id)}
-                            style={selectedWordVerseId === item.id && selectedWord?.position === word.position
-                              ? { backgroundColor: colors.primaryLight } : undefined}
-                          >{normalizeFlowHebrew(word.text)} </Text>
-                        ))
-                        : <Text key={item.id}>{normalizeFlowHebrew(item.hebrew)} </Text>)}
-                    </Text>
-                  )}
-                </Pressable>
+                <ChapterFlow
+                  flowItems={flowItems}
+                  translationOnly={translationOnly}
+                  language={language}
+                  styles={styles}
+                  colors={colors}
+                  hebrewFontScale={hebrewFontScale}
+                  textScale={layout.textScale}
+                  besorahLanguage={besorahLanguage}
+                  showNikud={showNikud}
+                  showCantillation={showCantillation}
+                  selectedWordVerseId={selectedWordVerseId}
+                  selectedWord={selectedWord}
+                  onTogglePills={handleTogglePills}
+                  onWordPress={handleWordPress}
+                  onFootnotePress={setActiveFlowFootnote}
+                  t={t}
+                />
               ) : undefined}
             />
             )
           ) : (
-            <FlatList
-              ref={listRef}
-              data={orderedVerses}
-              keyExtractor={keyExtractor}
-              renderItem={renderVersePage}
-              directionalLockEnabled
-              scrollEnabled={false}
-              showsVerticalScrollIndicator={false}
-              decelerationRate="fast"
-              snapToInterval={pageHeight}
-              snapToAlignment="start"
-              windowSize={5}
-              initialNumToRender={3}
-              maxToRenderPerBatch={4}
-              updateCellsBatchingPeriod={50}
-              initialScrollIndex={Math.max(currentIndex, 0)}
-              getItemLayout={(_, index) => ({
-                length: pageHeight,
-                offset: pageHeight * index,
-                index,
-              })}
-              viewabilityConfig={viewabilityConfigRef.current}
-              onViewableItemsChanged={onViewableItemsChanged.current}
-            />
+            isVersePagerReady && (
+              <FlatList
+                // A new chapter or height needs a fresh initialScrollIndex.
+                key={`${bookId}-${chapter}:${pageHeight}`}
+                ref={listRef}
+                data={orderedVerses}
+                keyExtractor={keyExtractor}
+                renderItem={renderVersePage}
+                directionalLockEnabled
+                scrollEnabled={false}
+                showsVerticalScrollIndicator={false}
+                decelerationRate="fast"
+                snapToInterval={pageHeight}
+                snapToAlignment="start"
+                windowSize={5}
+                initialNumToRender={3}
+                maxToRenderPerBatch={4}
+                updateCellsBatchingPeriod={50}
+                initialScrollIndex={Math.max(currentIndex, 0)}
+                getItemLayout={(_, index) => ({
+                  length: pageHeight,
+                  offset: pageHeight * index,
+                  index,
+                })}
+                viewabilityConfig={viewabilityConfigRef.current}
+                onViewableItemsChanged={onViewableItemsChanged.current}
+              />
+            )
           )}
           {shouldShowSwipeHint && !showFullChapter ? (
             <View
               pointerEvents="none"
               style={[
                 styles.swipeHintRow,
-                { bottom: spacing[1] },
+                { bottom: bottomContentInset + spacing[1] },
               ]}
             >
               <Text style={styles.swipeHintText}>
@@ -1576,6 +902,7 @@ export const VerseDetailContent = () => {
         currentVerseId={selectedWordVerseId ?? effectiveVerseId}
         isBesorah={isBesorah}
         onClosed={handleSheetClosed}
+        hasNavigationDock={!isStandaloneVerseDetailRoute}
       />
       <NavigationSheet
         ref={navigationSheetRef}
@@ -1584,6 +911,7 @@ export const VerseDetailContent = () => {
         currentVerse={verse?.verse ?? verseNumber}
         translationOnly={translationOnly}
         currentChapterVerseNumbers={orderedVerses.map((item) => item.verse)}
+        hasNavigationDock={!isStandaloneVerseDetailRoute}
         onSelectVerse={handleNavigationSelect}
       />
       <Modal

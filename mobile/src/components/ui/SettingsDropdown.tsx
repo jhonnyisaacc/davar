@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
 import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 
 import { getColors, radii, spacing, typography } from "@/src/theme";
 import { useAppStore, type AppState } from "@/src/store/useAppStore";
+import { useTranslation } from "@/src/i18n/useTranslation";
 
 type SettingsDropdownOption<T extends string> = {
   label: string;
@@ -20,21 +20,14 @@ type SettingsDropdownProps<T extends string> = {
 const createStyles = (colors: ReturnType<typeof getColors>) =>
   StyleSheet.create({
     trigger: {
-      borderWidth: 1,
-      borderColor: colors.border,
-      borderRadius: radii.full,
-      backgroundColor: colors.surface,
-      paddingHorizontal: spacing[4],
-      paddingVertical: spacing[3],
-      flexDirection: "row",
-      alignItems: "center",
-      gap: spacing[2],
-      minWidth: 120,
+      minHeight: 30,
+      justifyContent: "center",
+      flexShrink: 1,
     },
     triggerLabel: {
       fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.body,
-      color: colors.textPrimary,
+      fontSize: 13,
+      color: colors.textSecondary,
     },
     modalOverlay: {
       flex: 1,
@@ -78,6 +71,7 @@ const createStyles = (colors: ReturnType<typeof getColors>) =>
   });
 
 export const SettingsDropdown = <T extends string>({
+  label,
   value,
   options,
   onChange,
@@ -86,13 +80,26 @@ export const SettingsDropdown = <T extends string>({
   const colors = getColors(themeMode);
   const styles = useMemo(() => createStyles(colors), [colors]);
   const [open, setOpen] = useState(false);
+  const { isRTL } = useTranslation();
   const selected = options.find((option) => option.value === value);
 
   return (
     <>
-      <Pressable style={styles.trigger} onPress={() => setOpen(true)}>
-        <Text style={styles.triggerLabel}>{selected?.label ?? ""}</Text>
-        <Ionicons name="chevron-down" size={16} color={colors.textSecondary} />
+      <Pressable
+        hitSlop={7}
+        accessibilityRole="button"
+        accessibilityLabel={
+          label ? `${label}, ${selected?.label ?? ""}` : selected?.label
+        }
+        aria-expanded={open}
+        style={styles.trigger}
+        onPress={() => setOpen(true)}
+      >
+        <Text
+          style={[styles.triggerLabel, { textAlign: isRTL ? "left" : "right" }]}
+        >
+          {selected?.label ?? ""}
+        </Text>
       </Pressable>
       <Modal
         visible={open}
@@ -106,6 +113,8 @@ export const SettingsDropdown = <T extends string>({
               const isActive = option.value === value;
               return (
                 <Pressable
+                  accessibilityRole="button"
+                  aria-selected={isActive}
                   key={option.value}
                   onPress={() => {
                     onChange(option.value);

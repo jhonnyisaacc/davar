@@ -1,0 +1,88 @@
+{
+  "nodes_scanned": 803,
+  "nodes_with_internal_edges": 471,
+  "internal_edges": 1506,
+  "unresolved_relative_or_alias": [],
+  "unresolved_count": 0,
+  "cross_area_edges_outside_allowlist": [
+    {
+      "from": "tests/fixtures/knowledge/legacy-mapping.test.ts",
+      "to": "shared/translationConfig.ts",
+      "areas": [
+        "tests",
+        "shared"
+      ]
+    },
+    {
+      "from": "web/src/app/services/transliterationPolicy.test.ts",
+      "to": "scripts/generate-static-data/transliteration-policy.ts",
+      "areas": [
+        "web",
+        "scripts"
+      ]
+    },
+    {
+      "from": "web/src/app/services/besorahPolicy.test.ts",
+      "to": "scripts/generate-static-data/besorah-policy.ts",
+      "areas": [
+        "web",
+        "scripts"
+      ]
+    },
+    {
+      "from": "web/src/app/services/dssTransformation.test.ts",
+      "to": "scripts/generate-static-data/dss-transformation.ts",
+      "areas": [
+        "web",
+        "scripts"
+      ]
+    },
+    {
+      "from": "tools/bani/tests/test_syllable_shortening.py",
+      "to": "scripts/dict/update_transliterations.py",
+      "areas": [
+        "tools",
+        "scripts"
+      ]
+    },
+    {
+      "from": "mobile/src/screens/LegalScreen.tsx",
+      "to": "locales/legalContent.ts",
+      "areas": [
+        "mobile",
+        "locales"
+      ]
+    }
+  ],
+  "cross_area_count": 6,
+  "allowlist": [
+    "api->api",
+    "contracts->contracts",
+    "mobile->mobile",
+    "mobile->shared",
+    "scripts->scripts",
+    "scripts->shared",
+    "scripts->tools",
+    "server->server",
+    "server->shared",
+    "shared->shared",
+    "tests->scripts",
+    "tests->tests",
+    "tests->tools",
+    "tools->tools",
+    "web->shared",
+    "web->web"
+  ],
+  "cycle_sample_limit": 40,
+  "cycles_found_up_to_limit": 1,
+  "cycle_length_counts_in_sample": {
+    "2": 1
+  },
+  "cycles": [
+    [
+      "scripts/knowledge/core.py",
+      "scripts/knowledge/validate.py",
+      "scripts/knowledge/core.py"
+    ]
+  ]
+}

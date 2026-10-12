@@ -146,6 +146,24 @@
       "size": 24,
       "color": "black",
       "description": "Data sources / attribution / references"
+    },
+    "users": {
+      "family": "Feather",
+      "name": "users",
+      "size": 24,
+      "color": "#7AA0D6"
+    },
+    "message-circle": {
+      "family": "Feather",
+      "name": "message-circle",
+      "size": 24,
+      "color": "#7AA0D6"
+    },
+    "calendar": {
+      "family": "Feather",
+      "name": "calendar",
+      "size": 24,
+      "color": "#7AA0D6"
     }
   },
   "meta": {

@@ -37,7 +37,7 @@ const createStyles = (colors: ReturnType<typeof getColors>, active: boolean) =>
       borderWidth: 0,
     },
     highlight: {
-      ...StyleSheet.absoluteFillObject,
+      ...StyleSheet.absoluteFill,
       borderRadius: radii.full,
       ...getNeumorphHighlightStyle(colors),
     },

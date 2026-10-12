@@ -6,13 +6,32 @@
     "appName": "Davar",
     "downloadOnAppStore": "Download on the App Store",
     "getOnGooglePlay": "Get it on Google Play",
-    "serverWaking": "Waking server, first request may take a moment."
+    "serverWaking": "Waking server, first request may take a moment.",
+    "retry": "Retry"
+  },
+  "assemblies": {
+    "splashLabel": "ASSEMBLIES",
+    "welcome": "Welcome",
+    "invitationCopy": "This section is in Beta. Enter a code to access.",
+    "accessCode": "Access code",
+    "continue": "Continue",
+    "paste": "Paste",
+    "back": "Back",
+    "invalidCode": "This code could not be verified. Confirm it with your leader and try again.",
+    "accessUnavailable": "Access is unavailable right now. Please try again.",
+    "clipboardUnavailable": "Could not read your clipboard. Enter the code manually or try again."
   },
   "navigation": {
     "goHome": "Go to home",
     "selectBook": "Book",
     "selectChapter": "Chapter",
     "selectVerse": "Verse",
+    "find": "Find",
+    "findChapter": "Find chapter",
+    "findVerse": "Find verse",
+    "findBook": "Find book",
+    "selectLocation": "Book · chapter · verse",
+    "closePicker": "Close scripture picker",
     "previousVerse": "Previous verse",
     "nextVerse": "Next verse",
     "openFeatures": "Open features",
@@ -50,45 +69,61 @@
       "general": "General",
       "offline": "Offline"
     },
+    "account": {
+      "title": "Account",
+      "signIn": "Sign In",
+      "manage": "Manage account",
+      "description": "Scripture is always available without an account.",
+      "linkDescription": "Link a verified identity to this account.",
+      "emailLabel": "Email",
+      "emailAction": "Send sign-in link",
+      "emailSent": "Check your email for a sign-in link.",
+      "unavailable": "Unable to sign in. Please try again.",
+      "signOut": "Sign out",
+      "save": "Save reading settings",
+      "load": "Load account settings",
+      "saved": "Reading settings saved.",
+      "loaded": "Account settings loaded."
+    },
     "theme": {
-      "title": "Theme",
+      "title": "Dark theme",
       "subtitle": "Dark Mode"
     },
     "language": {
       "title": "Language"
     },
     "besorahLanguage": {
-      "title": "Besorah source",
+      "title": "Gospel language",
       "hebrew": "Hebrew",
       "greek": "Greek",
       "new": "New"
     },
     "besorahTextVersion": {
-      "title": "Gospel translation",
+      "title": "Gospel text",
       "delitzsch": "Delitzsch",
       "hutter": "Hutter",
       "new": "New"
     },
     "qumran": {
-      "title": "Qumran Variants",
+      "title": "Qumran",
       "subtitle": "Show Dead Sea Scrolls text"
     },
     "fullChapter": {
-      "title": "Full Chapter",
+      "title": "Full chapter",
       "subtitle": "Show full chapter text"
     },
     "seferStyle": {
-      "title": "Book Style",
+      "title": "Sefer style",
       "subtitle": "Continuous Hebrew scroll layout",
       "warningTitle": "Book requires Hebrew Only",
       "warningMessage": "Enable Hebrew Only or Translation Only to use Book style."
     },
     "hebrewOnly": {
-      "title": "Hebrew Only",
+      "title": "Hebrew only",
       "subtitle": "Show text in Hebrew only"
     },
     "translationOnly": {
-      "title": "Translation Only",
+      "title": "Translation only",
       "subtitle": "Show translation without Hebrew",
       "disablesHebrewFeatures": "Disable Translation Only to use Hebrew display options."
     },
@@ -101,7 +136,7 @@
       "subtitle": "Show vowel pointing"
     },
     "clearStorage": {
-      "title": "Clear Storage",
+      "title": "Clear storage",
       "subtitle": "Reset all settings and data",
       "alertTitle": "Clear Storage",
       "alertMessage": "This will reset all settings and data. The app will reload.",
@@ -111,7 +146,21 @@
     "designSystemTitle": "Design System",
     "designSystemDescription": "View design components",
     "mobileDesignGuideTitle": "Mobile Design Guide",
-    "mobileDesignGuideDescription": "View mobile design components"
+    "mobileDesignGuideDescription": "View mobile design components",
+    "calendarDayPill": {
+      "title": "Calendar on verse",
+      "cityRequired": "You have to choose a city to display it"
+    },
+    "links": {
+      "title": "About Davar",
+      "textSources": "Text Sources",
+      "commentarySources": "Commentary Sources",
+      "donate": "Donate",
+      "terms": "Terms",
+      "privacy": "Privacy",
+      "support": "Support",
+      "github": "GitHub"
+    }
   },
   "home": {
     "todayIs": "Today is",
@@ -257,6 +306,7 @@
     "selectBookPrompt": "Select a book to begin.",
     "loading": "Loading verses...",
     "prefixLabel": "Prefix: {prefix}",
+    "translationUnavailable": "Translation is unavailable right now. Please try again later.",
     "missingSpanishTranslation": "We don't have a Spanish translation for this text yet, we're working on it...",
     "greekUnavailable": "Not present in the SBLGNT 2011 displayed text.",
     "besorahDisclaimer": {
@@ -321,6 +371,135 @@
   "tabs": {
     "home": "Home",
     "verse": "Verse",
+    "scripture": "Scripture",
+    "assemblies": "Assemblies",
+    "commentary": "Commentary",
     "settings": "Settings"
+  },
+  "calendar": {
+    "title": "Biblical Calendar",
+    "nav": "Calendar",
+    "chooseCity": "Choose your\ncity",
+    "chooseCityPill": "Choose city",
+    "dayUnavailable": "Calendar unavailable",
+    "cityExplanation": "We’ll use it for your local sunset.",
+    "searchCity": "Search city",
+    "cityHint": "You can change your city anytime by tapping its name in the calendar.",
+    "noCities": "No cities found. Try another name.",
+    "searchUnavailable": "City search is unavailable. Try again.",
+    "back": "Back to calendar",
+    "today": "Today",
+    "previousDay": "Previous day",
+    "nextDay": "Next day",
+    "dayOfMonth": "Day of the current month",
+    "awaitingMoon": "Awaiting the new moon",
+    "localSunset": "Local sunset",
+    "moonConfirmed": "New moon confirmed",
+    "sightedIsrael": "Sighted in Israel",
+    "moonPending": "Awaiting confirmation",
+    "waitingIsrael": "Waiting for a sighting in Israel.",
+    "source": "Source",
+    "sourceSubtitle": "Observations and references",
+    "sources": "Sources",
+    "sourceDescription": "New moon observations in Israel.",
+    "observationReport": "Observation report",
+    "noSources": "Sources will appear with the next observation update.",
+    "appointedTimes": "Appointed times",
+    "moadim": "Moadim",
+    "sunsetBoundary": "Each date begins at local sunset.",
+    "awaitingYear": "Awaiting year confirmation.",
+    "awaitingDates": "Awaiting dates",
+    "awaitingConfirmation": "Awaiting confirmation",
+    "noAppointment": "No appointed time today.",
+    "unavailable": "Calendar is unavailable. Try again.",
+    "loading": "Loading…",
+    "cached": "Showing a cached calendar. Reconnect to update the day.",
+    "stale": "Observation updates are unavailable. Showing the last imported evidence.",
+    "fixture": "Development scenario — synthetic observations.",
+    "checked": "Last observation review: {date}",
+    "review": "Some historical reports need review. Only confirmed evidence is used.",
+    "observed": "Sighted on {date}",
+    "day": "Day {day}",
+    "dayWithMonth": "{month} {day}",
+    "yearUnavailable": "The yearly list is unavailable. Try again.",
+    "monthRange": "{month} {first}–{last}",
+    "events": {
+      "pesach": "Pesach",
+      "hag_hamatzot": "Jag HaMatzot",
+      "bikurim": "Yom HaBikurim",
+      "shavuot": "Shavuot",
+      "yom_teruah": "Yom T'ruah",
+      "yom_hakipurim": "Yom HaKippurim",
+      "sukkot": "Sukkot",
+      "shemini_atzeret": "Shemini Atzeret"
+    },
+    "months": {
+      "aviv": "Aviv",
+      "ziv": "Ziv",
+      "third_month": "Third month",
+      "fourth_month": "Fourth month",
+      "fifth_month": "Fifth month",
+      "sixth_month": "Sixth month",
+      "etanim": "Etanim",
+      "bul": "Bul",
+      "ninth_month": "Ninth month",
+      "tenth_month": "Tenth month",
+      "eleventh_month": "Eleventh month",
+      "twelfth_month": "Twelfth month",
+      "thirteenth_month": "Thirteenth month"
+    },
+    "rabbinicDate": "Rabbinic: {day} {month} {year}",
+    "rabbinicMonths": {
+      "nisan": "Nisan",
+      "iyar": "Iyar",
+      "sivan": "Sivan",
+      "tammuz": "Tammuz",
+      "av": "Av",
+      "elul": "Elul",
+      "tishrei": "Tishrei",
+      "cheshvan": "Cheshvan",
+      "kislev": "Kislev",
+      "tevet": "Tevet",
+      "shevat": "Shevat",
+      "adar": "Adar",
+      "adar_ii": "Adar II"
+    },
+    "moadimYear": "Dates of this year's moadim"
+  },
+  "support": {
+    "description": "Need help or want to share feedback? Get in touch.",
+    "emailLabel": "Email",
+    "emailAction": "Email support",
+    "creator": "Contact the creator",
+    "telegramAction": "Open Telegram"
+  },
+  "commentarySources": {
+    "description": "Published commentary and original source links.",
+    "openSource": "Open source",
+    "empty": "No commentary sources have been published yet.",
+    "unavailable": "The article catalog is unavailable. You can still visit the source above."
+  },
+  "featureAvailability": {
+    "moreArticles": "More articles",
+    "assembliesUnavailable": "Assemblies will be available soon.",
+    "commentaryUnavailable": "Commentary will be available soon.",
+    "signInUnavailable": "Sign-in will be available soon.",
+    "articles": "Shaul’s articles",
+    "articleIntro": "Explore Shaul’s articles and study their sources.",
+    "aiUnavailable": "AI is unavailable right now. You can keep reading Shaul’s articles.",
+    "sharedAi": "Free AI through OpenRouter",
+    "providerAi": "Powered by your {provider} API connection",
+    "returnAi": "Return to AI chat",
+    "readSource": "Read source",
+    "read": "Read",
+    "back": "Back",
+    "noArticles": "No published articles available yet.",
+    "manageProviders": "Manage AI connections",
+    "connectProvider": "Connect an AI provider",
+    "disconnect": "Disconnect",
+    "providerApiNotice": "Connect with a provider API key. A consumer subscription may not include API access.",
+    "apiKey": "API key",
+    "modelId": "Model ID",
+    "aiProvider": "AI provider"
   }
 }

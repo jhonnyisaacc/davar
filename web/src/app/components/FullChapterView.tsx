@@ -1,7 +1,6 @@
 import { useTranslation } from "../hooks/useTranslation";
 import type { VerseResponse, WordResponse } from "../services/verseService";
 import {
-	getPrefixSegments,
 	removeMaqafForDisplay,
 	removeSofPasukForDisplay,
 	stripCantillation,
@@ -14,6 +13,8 @@ import {
 	shouldHideTranslationText,
 } from "../utils/translationConfig";
 import { renderTranslation } from "../utils/translationFormatter";
+import { TranslationLineHold } from "./TranslationLineHold";
+import { translationWordCount } from "./translationLines";
 
 interface FullChapterViewProps {
 	verses: VerseResponse[];
@@ -35,6 +36,7 @@ interface FullChapterViewProps {
 	showNikud?: boolean;
 	showCantillation?: boolean;
 	isBesorah?: boolean;
+	translationPending?: boolean;
 }
 
 export function FullChapterView({
@@ -51,6 +53,7 @@ export function FullChapterView({
 	showNikud = true,
 	showCantillation = true,
 	isBesorah = false,
+	translationPending = false,
 }: FullChapterViewProps) {
 	const { t } = useTranslation(language);
 	const isGreekSource = verses.some(
@@ -58,14 +61,14 @@ export function FullChapterView({
 	);
 	const shouldShowSefer = seferMode && (hebrewOnly || translationOnly);
 	const spanishMissingTranslation = t("verse.missingSpanishTranslation");
-	const hideSuperscripts = shouldHideSuperscripts(getTranslationKey(language));
 	const hideTranslationText =
 		shouldHideTranslationText(
 			language,
 			hebrewOnly,
 			isGreekSource ? "greek" : "hebrew",
 		) && !translationOnly;
-	const isHebrewOverlay = language === "he" && isGreekSource;
+	const isHebrewOverlay =
+		!translationOnly && language === "he" && isGreekSource;
 	const isRenderableDssWord = (value?: string): value is string => {
 		if (!value) return false;
 		const normalized = value.trim();
@@ -103,11 +106,39 @@ export function FullChapterView({
 		? normalizeForMatch(selectedWord.text)
 		: null;
 
-	const renderVerseTranslation = (verse: VerseResponse) =>
-		renderTranslation(verse.translation ?? "", {
-			hideSuperscripts,
+	const renderVerseTranslation = (verse: VerseResponse) => {
+		if (!verse.translation?.trim()) {
+			if (translationPending) {
+				return (
+					<TranslationLineHold
+						wordCount={translationWordCount(
+							verse.words,
+							verse.source_language === "greek"
+								? (verse.text ?? "")
+								: verse.hebrew,
+						)}
+					/>
+				);
+			}
+			return language === "es"
+				? spanishMissingTranslation
+				: t("verse.translationUnavailable");
+		}
+		const translationLanguage =
+			verse.translation_language === "en" ||
+			verse.translation_language === "es" ||
+			verse.translation_language === "he"
+				? verse.translation_language
+				: translationOnly && language === "he"
+					? "en"
+					: language;
+		return renderTranslation(verse.translation, {
+			hideSuperscripts: shouldHideSuperscripts(
+				getTranslationKey(translationLanguage),
+			),
 			footnotes: verse.translation_footnotes ?? [],
 		});
+	};
 
 	const renderVerseWords = (verse: VerseResponse) => {
 		if (verse.available === false) {
@@ -194,11 +225,6 @@ export function FullChapterView({
 					: Boolean(normalizedSelected) &&
 						normalizedSelected === normalizedWord);
 
-			const prefixSegments =
-				!variantEntry && word.prefixes?.length
-					? getPrefixSegments(displayText, word.prefixes)
-					: null;
-
 			return (
 				<span key={`${verse.chapter}-${verse.verse}-${word.position}`}>
 					<button
@@ -219,24 +245,7 @@ export function FullChapterView({
 								: undefined
 						}
 					>
-						{prefixSegments?.prefixes?.length ? (
-							<>
-								<span
-									style={{ color: "var(--text-secondary)" }}
-									className="cursor-pointer hover:opacity-80"
-									title={t("verse.prefixLabel", {
-										prefix: word.prefixes?.join(", ") ?? "",
-									})}
-								>
-									{prefixSegments.prefixes.join("")}
-								</span>
-								<span style={{ color: "var(--text-hebrew)" }}>
-									{prefixSegments.root}
-								</span>
-							</>
-						) : (
-							displayText
-						)}
+						{displayText}
 					</button>
 					{wordIdx < verse.words.length - 1 && " "}
 				</span>
@@ -276,9 +285,7 @@ export function FullChapterView({
 											direction: "ltr",
 										}}
 									>
-										{language === "es" && !(verse.translation ?? "").trim()
-											? spanishMissingTranslation
-											: renderVerseTranslation(verse)}
+										{renderVerseTranslation(verse)}
 									</span>
 									{idx < verses.length - 1 && "\u200E "}
 								</span>
@@ -305,7 +312,7 @@ export function FullChapterView({
 											fontSize: "14px",
 										}}
 									>
-										[{idx + 1}]
+										[{verse.verse}]
 									</span>
 									{renderVerseWords(verse)}
 									{idx < verses.length - 1 && " "}
@@ -316,7 +323,7 @@ export function FullChapterView({
 				</div>
 			) : (
 				<div className="space-y-8 px-2">
-					{verses.map((verse, idx) => (
+					{verses.map((verse) => (
 						<div
 							key={verse.verse}
 							className="space-y-3 transition-all duration-300 verse-block"
@@ -341,7 +348,7 @@ export function FullChapterView({
 											fontSize: "14px",
 										}}
 									>
-										[{idx + 1}]
+										[{verse.verse}]
 									</span>
 									{renderVerseWords(verse)}
 								</div>
@@ -377,12 +384,8 @@ export function FullChapterView({
 											>
 												[{verse.verse}]
 											</span>
-											{language === "es" && !(verse.translation ?? "").trim()
-												? spanishMissingTranslation
-												: renderVerseTranslation(verse)}
+											{renderVerseTranslation(verse)}
 										</>
-									) : language === "es" && !(verse.translation ?? "").trim() ? (
-										spanishMissingTranslation
 									) : (
 										renderVerseTranslation(verse)
 									)}

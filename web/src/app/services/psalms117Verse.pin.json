@@ -1,0 +1,107 @@
+{
+	"chapter": 117,
+	"verse": 1,
+	"sourceChapter": 117,
+	"sourceVerse": 1,
+	"hebrew": "הַֽלְל֣וּ אֶת יְ֭הוָה כָּל גּוֹיִ֑ם שַׁ֝בְּח֗וּ/הוּ כָּל הָ/אֻמִּֽים",
+	"words": [
+		{
+			"position": 0,
+			"text": "הַֽלְל֣וּ",
+			"strong": "H1984",
+			"morph": "HVpv2mp",
+			"prefixes": [],
+			"has_dss_variant": false,
+			"translit_en": "hallu",
+			"translit_es": "hallu",
+			"dss_translit_en": "__UNDEFINED__",
+			"dss_translit_es": "__UNDEFINED__"
+		},
+		{
+			"position": 1,
+			"text": "אֶת",
+			"strong": "H853",
+			"morph": "HTo",
+			"prefixes": [],
+			"has_dss_variant": false,
+			"translit_en": "et",
+			"translit_es": "et",
+			"dss_translit_en": "__UNDEFINED__",
+			"dss_translit_es": "__UNDEFINED__"
+		},
+		{
+			"position": 2,
+			"text": "יְ֭הוָה",
+			"strong": "H3068",
+			"morph": "HNp",
+			"prefixes": [],
+			"has_dss_variant": false,
+			"translit_en": "__UNDEFINED__",
+			"translit_es": "__UNDEFINED__",
+			"dss_translit_en": "__UNDEFINED__",
+			"dss_translit_es": "__UNDEFINED__"
+		},
+		{
+			"position": 3,
+			"text": "כָּל",
+			"strong": "H3605",
+			"morph": "HNcmsc",
+			"prefixes": [],
+			"has_dss_variant": false,
+			"translit_en": "kal",
+			"translit_es": "kal",
+			"dss_translit_en": "__UNDEFINED__",
+			"dss_translit_es": "__UNDEFINED__"
+		},
+		{
+			"position": 4,
+			"text": "גּוֹיִ֑ם",
+			"strong": "H1471",
+			"morph": "HNcmpa",
+			"prefixes": [],
+			"has_dss_variant": false,
+			"translit_en": "goyim",
+			"translit_es": "goyim",
+			"dss_translit_en": "__UNDEFINED__",
+			"dss_translit_es": "__UNDEFINED__"
+		},
+		{
+			"position": 5,
+			"text": "שַׁ֝בְּח֗וּ/הוּ",
+			"strong": "H7623",
+			"morph": "HVpv2mp/Sp3ms",
+			"prefixes": [],
+			"has_dss_variant": false,
+			"translit_en": "shabechuhu",
+			"translit_es": "shabejuhu",
+			"dss_translit_en": "__UNDEFINED__",
+			"dss_translit_es": "__UNDEFINED__"
+		},
+		{
+			"position": 6,
+			"text": "כָּל",
+			"strong": "H3605",
+			"morph": "HNcmsc",
+			"prefixes": [],
+			"has_dss_variant": false,
+			"translit_en": "kal",
+			"translit_es": "kal",
+			"dss_translit_en": "__UNDEFINED__",
+			"dss_translit_es": "__UNDEFINED__"
+		},
+		{
+			"position": 7,
+			"text": "הָ/אֻמִּֽים",
+			"strong": "Hd/H523",
+			"morph": "HTd/Ncfpa",
+			"prefixes": [
+				"Hd"
+			],
+			"has_dss_variant": false,
+			"translit_en": "haumim",
+			"translit_es": "haumim",
+			"dss_translit_en": "__UNDEFINED__",
+			"dss_translit_es": "__UNDEFINED__"
+		}
+	]
+}

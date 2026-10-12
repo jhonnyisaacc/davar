@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "report_url": "https://moonsocil.blogspot.com/2026/03/new-moon-nissan-5786.html",
+  "observations": [
+    {
+      "id": "56095ff2e10a5900cc23f0f30aa90dcd",
+      "source": "israeli_new_moon_society",
+      "source_entry_id": "inms-history:2026-03-20",
+      "source_url": "https://docs.google.com/spreadsheets/d/1Wsz56ytFTLETlYuVxKnK_GhEQ1ise_lUXDgYILw56e8/edit",
+      "observed_on": "2026-03-20",
+      "observed_at": "18:14:00",
+      "observer": "Ephraim Amnon",
+      "location": "Kfar Chasidim",
+      "country": "IL",
+      "visibility_method": "unaided",
+      "verified": true,
+      "raw_source_hash": "802d3ae5cf80a09d7ef829952f112848e6a5d5d7428cefed04ba4311a3338c98",
+      "fetched_at": "2026-10-03T23:00:00Z",
+      "source_revision": "Public historical sheet reviewed 2026-10-03; Form N, First Y, Seen Y."
+    },
+    {
+      "id": "4e324ae05554b50b0f3521d6c8e36884",
+      "source": "israeli_new_moon_society",
+      "source_entry_id": "inms-history:2026-03-20",
+      "source_url": "https://docs.google.com/spreadsheets/d/1Wsz56ytFTLETlYuVxKnK_GhEQ1ise_lUXDgYILw56e8/edit",
+      "observed_on": "2026-03-20",
+      "observed_at": "18:03:00",
+      "observer": "Yoel HaLevy",
+      "location": "Kiryat Ata",
+      "country": "IL",
+      "visibility_method": "unaided",
+      "verified": true,
+      "raw_source_hash": "802d3ae5cf80a09d7ef829952f112848e6a5d5d7428cefed04ba4311a3338c98",
+      "fetched_at": "2026-10-03T23:00:00Z",
+      "source_revision": "Public historical sheet reviewed 2026-10-03; Form N, First Y, Seen Y."
+    }
+  ]
+}

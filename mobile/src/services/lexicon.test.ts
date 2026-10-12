@@ -1,11 +1,10 @@
 // Bun provides this test module at runtime; Expo's resolver does not index it.
-// eslint-disable-next-line import/no-unresolved
 import { afterEach, beforeEach, describe, expect, mock, test } from "bun:test";
 
 (globalThis as { __DEV__?: boolean }).__DEV__ = true;
 
 mock.module("react-native", () => ({
-	NativeModules: { SourceCode: { scriptURL: "http://localhost:8082/index.bundle" } },
+	NativeModules: { SourceCode: { scriptURL: "http://localhost:8081/index.bundle" } },
 	Platform: { OS: "ios" },
 }));
 

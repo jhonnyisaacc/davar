@@ -20,6 +20,7 @@ export interface ReadingStateV2 {
 	showNikud: boolean;
 	showCantillation: boolean;
 	showFullChapter: boolean;
+	showCalendarDayPill: boolean;
 	seferMode: boolean;
 	scrollNavHintCount: number;
 	desktopScrollHintCount: number;
@@ -77,6 +78,7 @@ function migrateV1toV2(v1Data: ReadingStateV1): ReadingStateV2 {
 		showNikud: true,
 		showCantillation: false,
 		showFullChapter: false,
+		showCalendarDayPill: false,
 		seferMode: false,
 		scrollNavHintCount: v1Data.scrollNavHintCount ?? 0,
 		desktopScrollHintCount: v1Data.desktopScrollHintCount ?? 0,
@@ -183,6 +185,7 @@ export function createDefaultReadingState(): ReadingStateV2 {
 		showNikud: true,
 		showCantillation: false,
 		showFullChapter: false,
+		showCalendarDayPill: false,
 		seferMode: false,
 		scrollNavHintCount: 0,
 		desktopScrollHintCount: 0,

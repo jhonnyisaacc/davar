@@ -47,7 +47,7 @@ const createStyles = (
       borderRadius: radii.xl,
     },
     lightShadowLayer: {
-      ...StyleSheet.absoluteFillObject,
+      ...StyleSheet.absoluteFill,
       borderRadius: radii.xl,
       backgroundColor: "transparent",
       ...getNeumorphHighlightStyle(colors),
@@ -61,10 +61,10 @@ const createStyles = (
       overflow: "hidden",
     },
     raisedGlow: {
-      ...StyleSheet.absoluteFillObject,
+      ...StyleSheet.absoluteFill,
     },
     insetShadow: {
-      ...StyleSheet.absoluteFillObject,
+      ...StyleSheet.absoluteFill,
     },
     label: {
       fontFamily: typography.families.latinUI,

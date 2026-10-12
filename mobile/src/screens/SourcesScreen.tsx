@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet, Text, View } from "react-native";
+import { ResourcePage } from "@/src/components/ResourcePage";
 
 import { getColors, radii, spacing, typography } from "@/src/theme";
 import { useAppStore, type AppState } from "@/src/store/useAppStore";
@@ -9,29 +9,6 @@ import { GreekAttribution } from "@/src/components/GreekAttribution";
 
 const createStyles = (colors: ReturnType<typeof getColors>) =>
   StyleSheet.create({
-    safeArea: {
-      flex: 1,
-      backgroundColor: colors.background,
-    },
-    container: {
-      flex: 1,
-    },
-    header: {
-      paddingHorizontal: spacing[6],
-      paddingTop: spacing[6],
-      paddingBottom: spacing[5],
-      marginBottom: spacing[5],
-    },
-    title: {
-      fontFamily: "Jost_400Regular",
-      fontSize: 30,
-      color: colors.textPrimary,
-      marginBottom: spacing[2],
-    },
-    content: {
-      paddingHorizontal: spacing[6],
-      paddingBottom: spacing[12],
-    },
     categoryCard: {
       borderRadius: radii.lg,
       backgroundColor: colors.surface,
@@ -61,15 +38,25 @@ const createStyles = (colors: ReturnType<typeof getColors>) =>
       color: colors.textPrimary,
       lineHeight: 24,
     },
+    sourceNote: {
+      fontFamily: "Arimo_400Regular",
+      fontSize: typography.sizes.caption,
+      color: colors.textSecondary,
+      lineHeight: 20,
+      marginTop: spacing[2],
+    },
   });
 
 export function SourcesScreen() {
   const themeMode = useAppStore((state: AppState) => state.themeMode);
   const colors = getColors(themeMode);
   const styles = useMemo(() => createStyles(colors), [colors]);
-  const { t } = useTranslation();
+  const { t, isRTL } = useTranslation();
 
-  const sources = [
+  const sources: {
+    title: string;
+    items: { label?: string; value: string; note?: string }[];
+  }[] = [
     {
       title: "Tanaj",
       items: [
@@ -85,6 +72,7 @@ export function SourcesScreen() {
         {
           label: t("home.sources.besorahLabel"),
           value: t("home.sources.besorahValue"),
+          note: t("verse.besorahDisclaimer.short"),
         },
         {
           label: t("home.sources.greekTextLabel"),
@@ -130,36 +118,63 @@ export function SourcesScreen() {
   ];
 
   return (
-    <SafeAreaView style={styles.safeArea} edges={["top"]}>
-      <View style={styles.container}>
-        <ScrollView>
-          <View style={styles.header}>
-            <Text style={styles.title}>{t("home.about.items.sources")}</Text>
-          </View>
-
-          <View style={styles.content}>
-            {sources.map((category, idx) => (
-              <View key={idx} style={styles.categoryCard}>
-                <Text style={styles.categoryTitle}>{category.title}</Text>
-                {category.items.map((item, itemIdx) => (
-                  <View key={itemIdx} style={styles.sourceItem}>
-                    {item.label && (
-                      <Text style={styles.sourceLabel}>{item.label}</Text>
-                    )}
-                    <Text style={styles.sourceValue}>{item.value}</Text>
-                  </View>
-                ))}
-              </View>
-            ))}
-            <View style={styles.categoryCard}>
-              <GreekAttribution
-                titleColor={colors.textPrimary}
-                mutedColor={colors.textSecondary}
-              />
+    <ResourcePage title={t("settings.links.textSources")}>
+      {sources.map((category, idx) => (
+        <View key={idx} style={styles.categoryCard}>
+          <Text
+            style={[
+              styles.categoryTitle,
+              { textAlign: isRTL ? "right" : "left" },
+            ]}
+          >
+            {category.title}
+          </Text>
+          {category.items.map((item, itemIdx) => (
+            <View key={itemIdx} style={styles.sourceItem}>
+              {item.label && (
+                <Text
+                  style={[
+                    styles.sourceLabel,
+                    { textAlign: isRTL ? "right" : "left" },
+                  ]}
+                >
+                  {item.label}
+                </Text>
+              )}
+              <Text
+                style={[
+                  styles.sourceValue,
+                  {
+                    textAlign: isRTL ? "right" : "left",
+                    writingDirection: isRTL ? "rtl" : "ltr",
+                  },
+                ]}
+              >
+                {item.value}
+              </Text>
+              {item.note && (
+                <Text
+                  style={[
+                    styles.sourceNote,
+                    {
+                      textAlign: isRTL ? "right" : "left",
+                      writingDirection: isRTL ? "rtl" : "ltr",
+                    },
+                  ]}
+                >
+                  {item.note}
+                </Text>
+              )}
             </View>
-          </View>
-        </ScrollView>
+          ))}
+        </View>
+      ))}
+      <View style={styles.categoryCard}>
+        <GreekAttribution
+          titleColor={colors.textPrimary}
+          mutedColor={colors.textSecondary}
+        />
       </View>
-    </SafeAreaView>
+    </ResourcePage>
   );
 }

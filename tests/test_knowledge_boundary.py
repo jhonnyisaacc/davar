@@ -116,3 +116,21 @@ def test_knowledge_script_edits_still_require_the_pinned_shaul_revision(tmp_path
     added.write_text("x = 1\n")
     git(repo, "add", "scripts/knowledge/new_module.py")
     boundary(base, repo, shaul_root=unpinned_shaul(tmp_path / "shaul-add"))
+
+
+def test_knowledge_test_edits_require_the_pinned_shaul_revision(tmp_path):
+    """Companion tests may change with knowledge code, but still need the Shaul pin."""
+    repo, base = knowledge_repo(tmp_path)
+    added = repo / "tests/test_knowledge_added.py"
+    added.parent.mkdir()
+    added.write_text("def test_added():\n    pass\n")
+    git(repo, "add", "tests/test_knowledge_added.py")
+    git(repo, "commit", "-q", "-m", "add knowledge test")
+    base = subprocess.check_output(
+        ["git", "-C", str(repo), "rev-parse", "HEAD"], text=True
+    ).strip()
+    added.write_text("def test_added():\n    assert True\n")
+    with pytest.raises(
+        ValueError, match="Shaul regression checkout must be at the pinned revision"
+    ):
+        boundary(base, repo, shaul_root=unpinned_shaul(tmp_path / "shaul"))

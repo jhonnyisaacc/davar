@@ -13,16 +13,14 @@ const runtimeExit = (code: number): never => {
 };
 
 const webRoot = fileURLToPath(new URL("../", import.meta.url));
-const appPort = Number(runtimeEnv.PORT ?? 3002);
+const appPort = Number(runtimeEnv.PORT ?? 5173);
 const appHost = runtimeEnv.HOST ?? "0.0.0.0";
-const htmlPort = Number(runtimeEnv.HOT_HTML_PORT ?? 3003);
+const htmlPort = Number(runtimeEnv.HOT_HTML_PORT ?? 5174);
 // Keep the gateway enabled by default so /data JSON is always served in hot mode.
 const useGateway = runtimeEnv.HOT_USE_GATEWAY !== "0";
-// In gateway mode, prefer same-origin data fetches so LAN/mobile clients do not
+// Prefer same-origin data fetches so LAN/mobile clients do not
 // get pinned to localhost. HOT_STATIC_URL can still force an absolute base.
-const staticUrl =
-	runtimeEnv.HOT_STATIC_URL ??
-	(useGateway ? "" : `http://localhost:${appPort}`);
+const staticUrl = runtimeEnv.HOT_STATIC_URL ?? "";
 
 console.log(
 	`[davar-web] dev:hot app-host=${appHost} app-port=${appPort} html-port=${htmlPort} static-base=${staticUrl || "(same-origin)"} gateway=${useGateway ? "on" : "off"}`,
@@ -30,7 +28,7 @@ console.log(
 
 if (useGateway) {
 	console.log(
-		`[davar-web] browse http://localhost:${appPort} (port ${htmlPort} is HTML upstream only and does not serve /data/*)`,
+		`[davar-web] browse http://localhost:${appPort} (hot-reload upstream http://localhost:${htmlPort} also serves /data/* and /api/ts2009/*)`,
 	);
 }
 
@@ -44,17 +42,20 @@ if (ensure.exitCode !== 0) {
 	runtimeExit(ensure.exitCode ?? 1);
 }
 
-const htmlServer = Bun.spawn(["bun", "--env-file=.env", "./index.html"], {
-	cwd: webRoot,
-	env: {
-		...runtimeEnv,
-		PORT: String(useGateway ? htmlPort : appPort),
-		HOST: appHost,
-		PUBLIC_STATIC_URL: staticUrl,
+const htmlServer = Bun.spawn(
+	["bun", "--env-file=.env", "./scripts/dev-hot-html.ts"],
+	{
+		cwd: webRoot,
+		env: {
+			...runtimeEnv,
+			PORT: String(useGateway ? htmlPort : appPort),
+			HOST: appHost,
+			PUBLIC_STATIC_URL: staticUrl,
+		},
+		stdout: "inherit",
+		stderr: "inherit",
 	},
-	stdout: "inherit",
-	stderr: "inherit",
-});
+);
 
 const gatewayServer = useGateway
 	? Bun.spawn(["bun", "./scripts/dev-hot-gateway.ts"], {
@@ -90,6 +91,9 @@ runtimeProcess.on("SIGTERM", () => {
 	runtimeExit(0);
 });
 
-const htmlExitCode = await htmlServer.exited;
+const serverExitCode = await Promise.race([
+	htmlServer.exited,
+	...(gatewayServer ? [gatewayServer.exited] : []),
+]);
 shutdown();
-runtimeExit(htmlExitCode);
+runtimeExit(serverExitCode);

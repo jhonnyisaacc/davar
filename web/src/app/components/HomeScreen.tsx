@@ -22,7 +22,7 @@ function attributionHref(part: string) {
 	return trimmed.startsWith("http") ? trimmed : `https://${trimmed}`;
 }
 
-function linkifyAttribution(text: string) {
+export function linkifyAttribution(text: string) {
 	return text.split(ATTRIBUTION_URL).map((part) => {
 		const isUrl = part.startsWith("http") || part.startsWith("www.");
 		if (!isUrl) {

@@ -64,7 +64,7 @@ python -m scripts.delitzsch.cli run --verbose
 Direct script entrypoints are available in this folder:
 
 ```bash
-python -m scripts.delitzsch.run_matcher --help
+python -m scripts.delitzsch run --help
 python scripts/delitzsch/audit_delitzsch_parsing.py --help
 python scripts/delitzsch/normalize_delitzsch_prefixes.py --help
 ```

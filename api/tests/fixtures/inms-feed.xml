@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+<channel>
+<title>INMS</title>
+<item>
+<guid>test-entry-1</guid>
+<link>https://moonsocil.blogspot.com/2026/09/test.html</link>
+<title>Test report</title>
+<description><![CDATA[<table><tr><td>Observer</td><td>Location</td><td>Unaided</td></tr><tr><td colspan='3'>12/09/2026</td></tr><tr><td>Test Observer</td><td>Jerusalem</td><td>18:14</td></tr></table>]]></description>
+<pubDate>Sat, 12 Sep 2026 18:00:00 +0300</pubDate>
+</item>
+</channel>
+</rss>

@@ -129,7 +129,7 @@ Static data is automatically served from `/data/` paths on your domain. No addit
 Example:
 
 ```bash
-DAVAR_ALLOWED_ORIGINS=["http://localhost:3002","http://localhost:3003","http://localhost:8082","https://app.yourdomain.com"]
+DAVAR_ALLOWED_ORIGINS=["http://localhost:5173","http://localhost:5174","http://localhost:8081","https://app.yourdomain.com"]
 ```
 
 Then redeploy backend.
@@ -294,5 +294,7 @@ Important interpretation:
 Canonical ownership for this repository:
 
 1. Cloudflare Pages is the only frontend deployment owner.
-2. Render is the backend deployment owner.
+2. Railway hosts the product API (`api/`). PR and staging API wiring for
+   Cloudflare previews is documented in [railway-preview.md](./railway-preview.md).
 3. Vercel deployment integration should remain disabled to avoid duplicate preview and production statuses.
+

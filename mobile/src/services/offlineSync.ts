@@ -3,6 +3,7 @@ import {
   GREEK_RECORDED_REVISION,
   greekBundleKey,
   greekLexiconPath,
+  greekOccurrenceShardKey,
   greekReleaseBasePath,
   greekSourceIdentity,
   type BesorahLanguage,
@@ -419,6 +420,7 @@ export const downloadGreekBundle = async (
 
   await beginSourceRelease(identity);
   try {
+    const lexiconShardsNeeded = new Set<string>();
     for (const bookId of index.books) {
       const part = index.parts[bookId];
       if (!part?.path) throw new Error(`Missing Greek bundle part: ${bookId}`);
@@ -440,6 +442,9 @@ export const downloadGreekBundle = async (
               `Greek verse ${bookId} ${verse.chapter}:${verse.verse} contains ${word.strong}`,
             );
           }
+          if (word.strong?.startsWith("G")) {
+            lexiconShardsNeeded.add(greekOccurrenceShardKey(word.strong));
+          }
         }
       }
       await insertSourceVerses(
@@ -454,12 +459,32 @@ export const downloadGreekBundle = async (
         })),
       );
     }
-    const lexicon = await staticDataRequest<Record<string, Record<string, unknown>>>(
-      greekLexiconPath(revision),
-    );
     const releaseManifest = await staticDataRequest<GreekReleaseManifest>(
       `${greekReleaseBasePath(revision)}/manifest.json`,
     );
+    const lexicon: Record<string, Record<string, unknown>> = {};
+    const publishedShards = releaseManifest.lexicon_shards ?? {};
+    if (Object.keys(publishedShards).length === 0) {
+      Object.assign(
+        lexicon,
+        await staticDataRequest<Record<string, Record<string, unknown>>>(
+          greekLexiconPath(revision),
+        ),
+      );
+    } else {
+      for (const key of lexiconShardsNeeded) {
+        const meta = publishedShards[key];
+        if (!meta?.path) {
+          throw new Error(`Missing Greek lexicon shard: ${key}`);
+        }
+        Object.assign(
+          lexicon,
+          await staticDataRequest<Record<string, Record<string, unknown>>>(
+            `${greekReleaseBasePath(revision)}/${meta.path}`,
+          ),
+        );
+      }
+    }
     for (const meta of Object.values(releaseManifest.occurrence_shards ?? {})) {
       const payload = await staticDataRequest<
         Record<string, { count?: number; references?: unknown[] }>

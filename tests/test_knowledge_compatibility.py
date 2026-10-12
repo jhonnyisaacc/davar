@@ -7,7 +7,7 @@ import shutil
 import pytest
 
 from scripts.knowledge.build import artifacts, build, output_guard
-from scripts.knowledge.compatibility import tree
+from scripts.knowledge.compatibility import legacy_generation_differences, tree
 from scripts.knowledge.core import (
     KNOWLEDGE,
     ROOT,
@@ -53,9 +53,51 @@ def test_only_legacy_manifest_clock_values_are_ignored(tmp_path):
     assert initial != tree(tmp_path, legacy_clock=True)
 
 
+def test_added_greek_lexicon_shards_keep_legacy_parity(tmp_path):
+    base = tmp_path / "base"
+    head = tmp_path / "head"
+    release = "greek/releases/sblgnt/abc"
+    for root in (base, head):
+        (root / release).mkdir(parents=True)
+        (root / "books").mkdir()
+        (root / "greek/manifest.json").write_bytes(
+            encoded({"complete": True, "revision": "abc"})
+        )
+        (root / f"{release}/manifest.json").write_bytes(encoded({"revision": "abc"}))
+        (root / "books/genesis.json").write_bytes(encoded({"verses": 1}))
+    shards = {"G00": {"checksum": "aa", "path": "lexicon/G00.json"}}
+    (head / "greek/manifest.json").write_bytes(
+        encoded({"complete": True, "lexicon_shards": shards, "revision": "abc"})
+    )
+    (head / f"{release}/manifest.json").write_bytes(
+        encoded({"lexicon_shards": shards, "revision": "abc"})
+    )
+    (head / f"{release}/lexicon").mkdir()
+    (head / f"{release}/lexicon/G00.json").write_bytes(encoded({"G1": {"gloss": "word"}}))
+    assert (
+        legacy_generation_differences(
+            tree(base, legacy_clock=True),
+            tree(head, legacy_clock=True),
+        )
+        == []
+    )
+    (base / f"{release}/lexicon").mkdir()
+    (base / f"{release}/lexicon/G00.json").write_bytes(encoded({"G1": {"gloss": "old"}}))
+    (head / f"{release}/lexicon/G00.json").write_bytes(encoded({"G1": {"gloss": "new"}}))
+    assert legacy_generation_differences(
+        tree(base, legacy_clock=True),
+        tree(head, legacy_clock=True),
+    ) == [f"{release}/lexicon/G00.json"]
+    (head / "books/genesis.json").write_bytes(encoded({"verses": 2}))
+    assert "books/genesis.json" in legacy_generation_differences(
+        tree(base, legacy_clock=True),
+        tree(head, legacy_clock=True),
+    )
+
+
 def test_optional_shaul_root_is_pinned_and_read_only(tmp_path):
     shaul = tmp_path / "shaul"
-    manifest, _ = pinned_inputs(ROOT)
+    manifest, _ = pinned_inputs(ROOT, validator=Validator(ROOT))
     for item in manifest["inputs"]:
         if item["owner"] != "shaul":
             continue

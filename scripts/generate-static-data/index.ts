@@ -8,6 +8,8 @@ import { existsSync } from "fs";
 import { mkdir, readdir, readFile, rm, writeFile } from "fs/promises";
 import { extname, join } from "path";
 import { buildLexiconAssets } from "../../shared/lexiconAssets";
+import { ts2009BookLookupPaths } from "../../shared/scripturePaths";
+import { TS2009_BOOK_FILE_MAP } from "../../shared/ts2009BookFileMap";
 import {
   canonicalBookIdFromTranslitStem,
   splitDssBook,
@@ -51,75 +53,6 @@ type Ts2009ExportStats = {
   chapters: number;
   verses: number;
   skippedBooks: string[];
-};
-
-const TS2009_BOOK_FILE_MAP: Record<string, string> = {
-  genesis: "bereshit",
-  exodus: "shemoth",
-  leviticus: "wayyiqra",
-  numbers: "bemidbar",
-  deuteronomy: "debarim",
-  joshua: "yehoshua",
-  judges: "shophetim",
-  samuel1: "samuel_1",
-  samuel2: "samuel_2",
-  kings1: "kings_1",
-  kings2: "kings_2",
-  chronicles1: "chronicles_1",
-  chronicles2: "chronicles_2",
-  nehemiah: "nehemyah",
-  esther: "ester",
-  job: "iyob",
-  psalms: "tehillim",
-  ecclesiastes: "qoheleth",
-  songofsolomon: "shir_hashirim",
-  isaiah: "yeshayahu",
-  jeremiah: "yirmeyahu",
-  lamentations: "ekah",
-  ezekiel: "yehezqel",
-  obadiah: "obadyah",
-  jonah: "yonah",
-  ruth: "ruth",
-  ezra: "ezra",
-  proverbs: "mishlei",
-  daniel: "daniel",
-  hosea: "hosea",
-  joel: "yoel",
-  amos: "amos",
-  micah: "micah",
-  nahum: "nahum",
-  habakkuk: "habakkuk",
-  zephaniah: "zephaniah",
-  haggai: "haggai",
-  zechariah: "zechariah",
-  malachi: "malachi",
-  matthew: "mattithyahu",
-  mark: "marqos",
-  luke: "lugqas",
-  john: "yohanan",
-  acts: "maasei",
-  romans: "romiyim",
-  corinthians1: "corinthians_1",
-  corinthians2: "corinthians_2",
-  galatians: "galatiyim",
-  ephesians: "ephsiyim",
-  philippians: "pilipiyim",
-  colossians: "qolasim",
-  thessalonians1: "thessalonians_1",
-  thessalonians2: "thessalonians_2",
-  timothy1: "timothy_1",
-  timothy2: "timothy_2",
-  titus: "titos",
-  philemon: "pileymon",
-  hebrews: "ibrim",
-  james: "yaaqob",
-  peter1: "peter_1",
-  peter2: "peter_2",
-  john1: "john_1",
-  john2: "john_2",
-  john3: "john_3",
-  jude: "yehudah",
-  revelation: "hazon",
 };
 
 const TS2009_LEGACY_BOOK_FILE_MAP: Record<string, string> = {
@@ -709,23 +642,6 @@ const extractTs2009Chapters = (chaptersRaw: unknown): Record<number, Ts2009BookV
   return chapters;
 };
 
-const getTs2009BookFileCandidates = (bookId: string): string[] => {
-  const mapped = TS2009_BOOK_FILE_MAP[bookId];
-  const legacyMapped = TS2009_LEGACY_BOOK_FILE_MAP[bookId];
-  const underscoreVariant = bookId.replace(/(\D)(\d+)$/, "$1_$2");
-  const stems = [mapped, legacyMapped, bookId, underscoreVariant].filter(
-    (value): value is string => Boolean(value),
-  );
-
-  const candidates: string[] = [];
-  for (const stem of stems) {
-    candidates.push(`${stem}.json`);
-    candidates.push(`ts2009/${stem}.json`);
-  }
-
-  return [...new Set(candidates)];
-};
-
 const downloadTs2009BookPayload = async (
   supabaseUrl: string,
   serviceRoleKey: string,
@@ -862,7 +778,10 @@ const generateTs2009Chapters = async (): Promise<{
 
   for (const canonicalBook of CANONICAL_BOOK_ORDER) {
     const bookId = canonicalBook.toLowerCase();
-    const candidates = getTs2009BookFileCandidates(bookId);
+    const candidates = ts2009BookLookupPaths(
+      bookId,
+      TS2009_LEGACY_BOOK_FILE_MAP[bookId],
+    );
     let payload: Ts2009BookPayload | null = null;
 
     for (const candidate of candidates) {

@@ -1,0 +1,1777 @@
+{
+  "failure_count": 79,
+  "oldest": "2026-03-08T17:52:23Z",
+  "newest": "2026-10-07T11:24:30Z",
+  "by_workflow": {
+    "Web CI": 26,
+    "Knowledge foundation": 15,
+    "Davar API": 1,
+    "Mobile CI": 10,
+    "Greek source quality": 1,
+    "Besorah quality": 2,
+    "Policy Gate": 19,
+    "Mobile EAS Release": 2,
+    "Backend CI": 3
+  },
+  "by_branch": {
+    "fix/issue-20-remove-yhvh-translit-data-level": 22,
+    "feat/davar-v2": 14,
+    "static": 11,
+    "feat/greek_besorah": 7,
+    "feat/issue-107-settings-order": 6,
+    "main": 3,
+    "cursor/knowledge-source-table-6f05": 2,
+    "fix/issue-43-merge-strongs-prefix-composition": 2,
+    "feat/tth_updating_tehilim_and_mishlei": 2,
+    "web_fixes": 2,
+    "cursor/fix-compatibility-scope-0a02": 1,
+    "cursor/land-remaining-0a02": 1,
+    "feat/load-info-faster": 1,
+    "fix/greek_improvements": 1,
+    "feat/issue-94-clean": 1,
+    "feat/misc_3": 1,
+    "feat/android_4": 1,
+    "supabase": 1
+  },
+  "groups": [
+    {
+      "workflow": "Policy Gate",
+      "failed": [
+        {
+          "conclusion": "failure",
+          "job": "policy-gate",
+          "steps": [
+            "Secret scan"
+          ]
+        }
+      ],
+      "count": 15
+    },
+    {
+      "workflow": "Knowledge foundation",
+      "failed": [
+        {
+          "conclusion": "failure",
+          "job": "davar-compatibility",
+          "steps": [
+            "Run python -m scripts.knowledge.compatibility boundary --base \"$BASE_SHA\""
+          ]
+        }
+      ],
+      "count": 13
+    },
+    {
+      "workflow": "Web CI",
+      "failed": [
+        {
+          "conclusion": "failure",
+          "job": "web-ci",
+          "steps": [
+            "Run build"
+          ]
+        }
+      ],
+      "count": 12
+    },
+    {
+      "workflow": "Web CI",
+      "failed": [
+        {
+          "conclusion": "failure",
+          "job": "web-ci",
+          "steps": [
+            "Run lint"
+          ]
+        }
+      ],
+      "count": 7
+    },
+    {
+      "workflow": "Web CI",
+      "failed": [
+        {
+          "conclusion": "failure",
+          "job": "web-ci",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ],
+      "count": 4
+    },
+    {
+      "workflow": "Mobile CI",
+      "failed": [
+        {
+          "conclusion": "failure",
+          "job": "mobile-ci",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ],
+      "count": 4
+    },
+    {
+      "workflow": "Policy Gate",
+      "failed": [
+        {
+          "conclusion": "failure",
+          "job": "policy-gate",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ],
+      "count": 4
+    },
+    {
+      "workflow": "Mobile CI",
+      "failed": [
+        {
+          "conclusion": "failure",
+          "job": "mobile-ci",
+          "steps": [
+            "Check TypeScript"
+          ]
+        }
+      ],
+      "count": 3
+    },
+    {
+      "workflow": "Knowledge foundation",
+      "failed": [
+        {
+          "conclusion": "failure",
+          "job": "davar-compatibility",
+          "steps": [
+            "Run python -m scripts.knowledge.compatibility legacy --base \"$BASE_SHA\""
+          ]
+        }
+      ],
+      "count": 2
+    },
+    {
+      "workflow": "Web CI",
+      "failed": [
+        {
+          "conclusion": "failure",
+          "job": "web-ci",
+          "steps": [
+            "Create development deployment"
+          ]
+        }
+      ],
+      "count": 2
+    },
+    {
+      "workflow": "Besorah quality",
+      "failed": [
+        {
+          "conclusion": "failure",
+          "job": "besorah",
+          "steps": [
+            "Run python -m pytest -q tests/test_besorah_remediation.py tests/test_merge_strongs.py tests/test_delitzsch_review.py"
+          ]
+        }
+      ],
+      "count": 2
+    },
+    {
+      "workflow": "Mobile EAS Release",
+      "failed": [
+        {
+          "conclusion": "failure",
+          "job": "mobile-eas-release",
+          "steps": [
+            "Preflight config and environment checks"
+          ]
+        }
+      ],
+      "count": 2
+    },
+    {
+      "workflow": "Backend CI",
+      "failed": [
+        {
+          "conclusion": "failure",
+          "job": "backend-ci",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ],
+      "count": 2
+    },
+    {
+      "workflow": "Mobile CI",
+      "failed": [
+        {
+          "conclusion": "failure",
+          "job": "test",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ],
+      "count": 2
+    },
+    {
+      "workflow": "Web CI",
+      "failed": [
+        {
+          "conclusion": "failure",
+          "job": "web-ci",
+          "steps": [
+            "Check TypeScript"
+          ]
+        }
+      ],
+      "count": 1
+    },
+    {
+      "workflow": "Davar API",
+      "failed": [
+        {
+          "conclusion": "failure",
+          "job": "api",
+          "steps": [
+            "Run ruby/setup-ruby@v1"
+          ]
+        }
+      ],
+      "count": 1
+    },
+    {
+      "workflow": "Mobile CI",
+      "failed": [
+        {
+          "conclusion": "failure",
+          "job": "mobile-ci",
+          "steps": [
+            "Create development deployment"
+          ]
+        }
+      ],
+      "count": 1
+    },
+    {
+      "workflow": "Greek source quality",
+      "failed": [
+        {
+          "conclusion": "failure",
+          "job": "greek-source",
+          "steps": [
+            "Run python -m pytest -q tests/test_greek_tagnt_edition.py"
+          ]
+        }
+      ],
+      "count": 1
+    },
+    {
+      "workflow": "Backend CI",
+      "failed": [
+        {
+          "conclusion": "failure",
+          "job": "test",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ],
+      "count": 1
+    }
+  ],
+  "sample_logs": {
+    "Web CI|Check TypeScript": {
+      "run_id": 37613868519,
+      "ok": true,
+      "lines": [
+        "src/app/components/CalendarPanel.tsx:166:12 lint/style/noNonNullAssertion \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501",
+        "src/app/components/CalendarPanel.tsx:168:32 lint/style/noNonNullAssertion \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501",
+        "src/app/components/CalendarPanel.tsx:202:27 lint/style/noNonNullAssertion \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501",
+        "src/app/components/CalendarPanel.tsx:203:16 lint/style/noNonNullAssertion \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501",
+        "src/app/components/CalendarPanel.tsx:204:15 lint/style/noNonNullAssertion \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501",
+        "src/app/components/CalendarPanel.tsx:444:18 lint/style/noNonNullAssertion  FIXABLE  \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501",
+        "src/app/components/CalendarPanel.tsx:444:30 lint/style/noNonNullAssertion  FIXABLE  \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501",
+        "src/app/components/NavigationBar.test.tsx(47,37): error TS2322: Type '{ activeDestination: \"verse\"; onDestinationClick: () => void; settingsOpen: false; onSettingsOpenChange: () => void; book: \"Genesis\"; bookDisplayName: \"Genesis\"; bookHebr",
+        "##[error]Process completed with exit code 2."
+      ]
+    },
+    "Knowledge foundation|Run python -m scripts.knowledge.compatibility boundary --base \"$BASE_SHA\"": {
+      "run_id": 37611663475,
+      "ok": true,
+      "lines": [
+        "raise ValueError(\"Non-additive or out-of-scope change: \" + line)",
+        "ValueError: Non-additive or out-of-scope change: M\t.github/workflows/knowledge-foundation.yml",
+        "##[error]Process completed with exit code 1."
+      ]
+    },
+    "Web CI|Run lint": {
+      "run_id": 37137651718,
+      "ok": true,
+      "lines": [
+        "src/app/components/CalendarPanel.tsx:112:2 lint/correctness/useExhaustiveDependencies  FIXABLE  \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501",
+        "Found 1 error.",
+        "##[error]Process completed with exit code 1."
+      ]
+    },
+    "Davar API|Run ruby/setup-ruby@v1": {
+      "run_id": 36768129729,
+      "ok": true,
+      "lines": [
+        "Your bundle only supports platforms [\"aarch64-linux\", \"arm64-darwin\"] but your",
+        "##[error]The process '/opt/hostedtoolcache/Ruby/3.4.9/x64/bin/bundle' failed with exit code 16"
+      ]
+    },
+    "Knowledge foundation|Run python -m scripts.knowledge.compatibility legacy --base \"$BASE_SHA\"": {
+      "run_id": 35822521382,
+      "ok": true,
+      "lines": [
+        "raise ValueError(",
+        "ValueError: Legacy generation changed: ['version.json']",
+        "##[error]Process completed with exit code 1."
+      ]
+    },
+    "Mobile CI|Check TypeScript": {
+      "run_id": 35758673844,
+      "ok": true,
+      "lines": [
+        "241:15  warning  Array type using 'Array<T>' is forbidden. Use 'T[]' instead  @typescript-eslint/array-type",
+        "162:5   warning  Array type using 'Array<T>' is forbidden. Use 'T[]' instead  @typescript-eslint/array-type",
+        "167:14  warning  Array type using 'Array<T>' is forbidden. Use 'T[]' instead  @typescript-eslint/array-type",
+        "1509:11  warning  Array type using 'Array<T>' is forbidden. Use 'T[]' instead  @typescript-eslint/array-type",
+        "1536:21  warning  Array type using 'Array<T>' is forbidden. Use 'T[]' instead  @typescript-eslint/array-type",
+        "src/components/WordAnalysisBottomSheet.tsx(317,5): error TS2322: Type '{ book: string; chapter: number; verse?: number | null | undefined; verse_id?: string | undefined; index: number; }[] | undefined' is not assignable to type 'Instance[] ",
+        "##[error]Process completed with exit code 2."
+      ]
+    },
+    "Mobile CI|Create development deployment": {
+      "run_id": 34749279756,
+      "ok": true,
+      "lines": [
+        "##[error]Unhandled error: HttpError: Server Error"
+      ]
+    },
+    "Web CI|Create development deployment": {
+      "run_id": 34749279788,
+      "ok": true,
+      "lines": [
+        "##[error]Unhandled error: HttpError: Server Error"
+      ]
+    },
+    "Greek source quality|Run python -m pytest -q tests/test_greek_tagnt_edition.py": {
+      "run_id": 34748347078,
+      "ok": true,
+      "lines": [
+        "E       FileNotFoundError: [Errno 2] No such file or directory: '/home/runner/work/davar/davar/web/data/metadata.json'",
+        "/opt/hostedtoolcache/Python/3.12.14/x64/lib/python3.12/pathlib.py:1013: FileNotFoundError",
+        "FAILED tests/test_greek_tagnt_edition.py::test_tagnt_map_matches_web_and_mobile_besorah_ids - FileNotFoundError: [Errno 2] No such file or directory: '/home/runner/work/davar/davar/web/data/metadata.json'",
+        "##[error]Process completed with exit code 1."
+      ]
+    },
+    "Besorah quality|Run python -m pytest -q tests/test_besorah_remediation.py tests/test_merge_strongs.py tests/test_delitzsch_review.py": {
+      "run_id": 34069901956,
+      "ok": true,
+      "lines": [
+        "ImportError while importing test module '/home/runner/work/davar/davar/tests/test_merge_strongs.py'.",
+        "E   ModuleNotFoundError: No module named 'httpx'",
+        "raise ImportError(",
+        "E   ImportError: Grok assigner requires 'openai' package. Install with: pip install openai",
+        "##[error]Process completed with exit code 2."
+      ]
+    },
+    "Policy Gate|Secret scan": {
+      "run_id": 34063514760,
+      "ok": true,
+      "lines": [
+        "^[[90m10:16PM^[[0m ^[[31mERR^[[0m ^[[1m[git] fatal: Invalid revision range 35e40e2228cbb6d97a03eb3a4cc1c81f2cb4535b^..b02144d48775473f889b9d56f26a85784af3cf7a^[[0m",
+        "##[error]ERROR: Unexpected exit code [1]"
+      ]
+    },
+    "Mobile EAS Release|Preflight config and environment checks": {
+      "run_id": 33091332648,
+      "ok": true,
+      "lines": [
+        "Error: env:list command failed.",
+        "##[error]Process completed with exit code 1."
+      ]
+    },
+    "Web CI|Run build": {
+      "run_id": 33089139993,
+      "ok": true,
+      "lines": [
+        "src/app/components/SettingsScreen.tsx:732:5 lint/complexity/noUselessFragments  FIXABLE  \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501",
+        "src/app/services/staticData.ts:384:6 lint/complexity/noUselessContinue  FIXABLE  \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501",
+        "ENOENT: no such file or directory, open '/home/runner/work/davar/davar/scripts/generate-static-data/index.part05.txt'",
+        "code: \"ENOENT\"",
+        "##[error]Process completed with exit code 1."
+      ]
+    },
+    "Web CI|(no step)": {
+      "run_id": 24294912584,
+      "ok": false,
+      "error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/jhonnyisaacc/davar/actions/runs/24294912584/logs)"
+    },
+    "Mobile CI|(no step)": {
+      "run_id": 23926012476,
+      "ok": false,
+      "error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/jhonnyisaacc/davar/actions/runs/23926012476/logs)"
+    },
+    "Policy Gate|(no step)": {
+      "run_id": 23654539744,
+      "ok": false,
+      "error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/jhonnyisaacc/davar/actions/runs/23654539744/logs)"
+    },
+    "Backend CI|(no step)": {
+      "run_id": 23653083927,
+      "ok": false,
+      "error": "failed to get run log: HTTP 410: Server Error (https://api.github.com/repos/jhonnyisaacc/davar/actions/runs/23653083927/logs)"
+    }
+  },
+  "runs": [
+    {
+      "databaseId": 37613868519,
+      "createdAt": "2026-10-07T11:24:30Z",
+      "workflowName": "Web CI",
+      "headBranch": "feat/davar-v2",
+      "displayTitle": "feat: unify Davar v2 domains and Pen-based product flows",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/37613868519",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Check TypeScript"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 37611663475,
+      "createdAt": "2026-10-07T11:04:54Z",
+      "workflowName": "Knowledge foundation",
+      "headBranch": "feat/davar-v2",
+      "displayTitle": "feat: unify Davar v2 domains and Pen-based product flows",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/37611663475",
+      "failed": [
+        {
+          "job": "davar-compatibility",
+          "conclusion": "failure",
+          "steps": [
+            "Run python -m scripts.knowledge.compatibility boundary --base \"$BASE_SHA\""
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 37236010021,
+      "createdAt": "2026-10-04T21:25:10Z",
+      "workflowName": "Knowledge foundation",
+      "headBranch": "feat/davar-v2",
+      "displayTitle": "feat: unify Davar v2 domains and Pen-based product flows",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/37236010021",
+      "failed": [
+        {
+          "job": "davar-compatibility",
+          "conclusion": "failure",
+          "steps": [
+            "Run python -m scripts.knowledge.compatibility boundary --base \"$BASE_SHA\""
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 37235988112,
+      "createdAt": "2026-10-04T21:24:49Z",
+      "workflowName": "Knowledge foundation",
+      "headBranch": "feat/davar-v2",
+      "displayTitle": "feat: unify Davar v2 domains and Pen-based product flows",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/37235988112",
+      "failed": [
+        {
+          "job": "davar-compatibility",
+          "conclusion": "failure",
+          "steps": [
+            "Run python -m scripts.knowledge.compatibility boundary --base \"$BASE_SHA\""
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 37232832161,
+      "createdAt": "2026-10-04T20:37:49Z",
+      "workflowName": "Knowledge foundation",
+      "headBranch": "feat/davar-v2",
+      "displayTitle": "feat: unify Davar v2 domains and Pen-based product flows",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/37232832161",
+      "failed": [
+        {
+          "job": "davar-compatibility",
+          "conclusion": "failure",
+          "steps": [
+            "Run python -m scripts.knowledge.compatibility boundary --base \"$BASE_SHA\""
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 37164221785,
+      "createdAt": "2026-10-04T00:12:20Z",
+      "workflowName": "Knowledge foundation",
+      "headBranch": "feat/davar-v2",
+      "displayTitle": "feat: unify Davar v2 domains and Pen-based product flows",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/37164221785",
+      "failed": [
+        {
+          "job": "davar-compatibility",
+          "conclusion": "failure",
+          "steps": [
+            "Run python -m scripts.knowledge.compatibility boundary --base \"$BASE_SHA\""
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 37156695344,
+      "createdAt": "2026-10-03T21:55:38Z",
+      "workflowName": "Knowledge foundation",
+      "headBranch": "feat/davar-v2",
+      "displayTitle": "feat: unify Davar v2 domains and Pen-based product flows",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/37156695344",
+      "failed": [
+        {
+          "job": "davar-compatibility",
+          "conclusion": "failure",
+          "steps": [
+            "Run python -m scripts.knowledge.compatibility boundary --base \"$BASE_SHA\""
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 37156128395,
+      "createdAt": "2026-10-03T21:43:52Z",
+      "workflowName": "Knowledge foundation",
+      "headBranch": "feat/davar-v2",
+      "displayTitle": "feat: unify Davar v2 domains and Pen-based product flows",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/37156128395",
+      "failed": [
+        {
+          "job": "davar-compatibility",
+          "conclusion": "failure",
+          "steps": [
+            "Run python -m scripts.knowledge.compatibility boundary --base \"$BASE_SHA\""
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 37156010203,
+      "createdAt": "2026-10-03T21:41:50Z",
+      "workflowName": "Knowledge foundation",
+      "headBranch": "feat/davar-v2",
+      "displayTitle": "feat: unify Davar v2 domains and Pen-based product flows",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/37156010203",
+      "failed": [
+        {
+          "job": "davar-compatibility",
+          "conclusion": "failure",
+          "steps": [
+            "Run python -m scripts.knowledge.compatibility boundary --base \"$BASE_SHA\""
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 37152271337,
+      "createdAt": "2026-10-03T20:38:36Z",
+      "workflowName": "Knowledge foundation",
+      "headBranch": "feat/davar-v2",
+      "displayTitle": "feat: unify Davar v2 domains and Pen-based product flows",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/37152271337",
+      "failed": [
+        {
+          "job": "davar-compatibility",
+          "conclusion": "failure",
+          "steps": [
+            "Run python -m scripts.knowledge.compatibility boundary --base \"$BASE_SHA\""
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 37137651718,
+      "createdAt": "2026-10-03T16:39:26Z",
+      "workflowName": "Web CI",
+      "headBranch": "feat/davar-v2",
+      "displayTitle": "feat: unify Davar v2 domains and Pen-based product flows",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/37137651718",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Run lint"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 37135162087,
+      "createdAt": "2026-10-03T15:58:54Z",
+      "workflowName": "Web CI",
+      "headBranch": "feat/davar-v2",
+      "displayTitle": "feat: unify Davar v2 domains and Pen-based product flows",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/37135162087",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Run lint"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 36768129729,
+      "createdAt": "2026-09-30T19:47:39Z",
+      "workflowName": "Davar API",
+      "headBranch": "feat/davar-v2",
+      "displayTitle": "feat: unify Davar v2 domains and Pen-based product flows",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/36768129729",
+      "failed": [
+        {
+          "job": "api",
+          "conclusion": "failure",
+          "steps": [
+            "Run ruby/setup-ruby@v1"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 36768129561,
+      "createdAt": "2026-09-30T19:47:39Z",
+      "workflowName": "Knowledge foundation",
+      "headBranch": "feat/davar-v2",
+      "displayTitle": "feat: unify Davar v2 domains and Pen-based product flows",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/36768129561",
+      "failed": [
+        {
+          "job": "davar-compatibility",
+          "conclusion": "failure",
+          "steps": [
+            "Run python -m scripts.knowledge.compatibility boundary --base \"$BASE_SHA\""
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 35822521382,
+      "createdAt": "2026-09-23T05:28:04Z",
+      "workflowName": "Knowledge foundation",
+      "headBranch": "cursor/fix-compatibility-scope-0a02",
+      "displayTitle": "Fix knowledge boundary scope and legacy version clock",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/35822521382",
+      "failed": [
+        {
+          "job": "davar-compatibility",
+          "conclusion": "failure",
+          "steps": [
+            "Run python -m scripts.knowledge.compatibility legacy --base \"$BASE_SHA\""
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 35820822307,
+      "createdAt": "2026-09-23T05:03:17Z",
+      "workflowName": "Knowledge foundation",
+      "headBranch": "main",
+      "displayTitle": "Land remaining open draft refactors",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/35820822307",
+      "failed": [
+        {
+          "job": "davar-compatibility",
+          "conclusion": "failure",
+          "steps": [
+            "Run python -m scripts.knowledge.compatibility boundary --base \"$BASE_SHA\""
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 35820547784,
+      "createdAt": "2026-09-23T04:59:18Z",
+      "workflowName": "Knowledge foundation",
+      "headBranch": "cursor/land-remaining-0a02",
+      "displayTitle": "Land remaining open draft refactors",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/35820547784",
+      "failed": [
+        {
+          "job": "davar-compatibility",
+          "conclusion": "failure",
+          "steps": [
+            "Run python -m scripts.knowledge.compatibility boundary --base \"$BASE_SHA\""
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 35778249915,
+      "createdAt": "2026-09-22T20:07:49Z",
+      "workflowName": "Knowledge foundation",
+      "headBranch": "cursor/knowledge-source-table-6f05",
+      "displayTitle": "refactor(knowledge): route owners through a source table",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/35778249915",
+      "failed": [
+        {
+          "job": "davar-compatibility",
+          "conclusion": "failure",
+          "steps": [
+            "Run python -m scripts.knowledge.compatibility legacy --base \"$BASE_SHA\""
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 35769830065,
+      "createdAt": "2026-09-22T18:50:18Z",
+      "workflowName": "Knowledge foundation",
+      "headBranch": "cursor/knowledge-source-table-6f05",
+      "displayTitle": "refactor(knowledge): route owners through a source table",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/35769830065",
+      "failed": [
+        {
+          "job": "davar-compatibility",
+          "conclusion": "failure",
+          "steps": [
+            "Run python -m scripts.knowledge.compatibility boundary --base \"$BASE_SHA\""
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 35758673844,
+      "createdAt": "2026-09-22T17:07:55Z",
+      "workflowName": "Mobile CI",
+      "headBranch": "feat/load-info-faster",
+      "displayTitle": "feat: load verse and word-card content near-instantly",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/35758673844",
+      "failed": [
+        {
+          "job": "mobile-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Check TypeScript"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 34860655801,
+      "createdAt": "2026-09-14T15:12:39Z",
+      "workflowName": "Web CI",
+      "headBranch": "fix/greek_improvements",
+      "displayTitle": "fix/greek_improvements",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/34860655801",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Run lint"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 34851992464,
+      "createdAt": "2026-09-14T13:52:48Z",
+      "workflowName": "Mobile CI",
+      "headBranch": "feat/greek_besorah",
+      "displayTitle": "feat/greek_besorah",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/34851992464",
+      "failed": [
+        {
+          "job": "mobile-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Check TypeScript"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 34851992498,
+      "createdAt": "2026-09-14T13:52:48Z",
+      "workflowName": "Web CI",
+      "headBranch": "feat/greek_besorah",
+      "displayTitle": "feat/greek_besorah",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/34851992498",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Run lint"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 34749762890,
+      "createdAt": "2026-09-13T09:34:50Z",
+      "workflowName": "Web CI",
+      "headBranch": "feat/greek_besorah",
+      "displayTitle": "feat/greek_besorah",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/34749762890",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Run lint"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 34749582471,
+      "createdAt": "2026-09-13T09:29:15Z",
+      "workflowName": "Web CI",
+      "headBranch": "feat/greek_besorah",
+      "displayTitle": "feat/greek_besorah",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/34749582471",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Run lint"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 34749279756,
+      "createdAt": "2026-09-13T09:18:00Z",
+      "workflowName": "Mobile CI",
+      "headBranch": "feat/greek_besorah",
+      "displayTitle": "feat/greek_besorah",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/34749279756",
+      "failed": [
+        {
+          "job": "mobile-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Create development deployment"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 34749279788,
+      "createdAt": "2026-09-13T09:18:00Z",
+      "workflowName": "Web CI",
+      "headBranch": "feat/greek_besorah",
+      "displayTitle": "feat/greek_besorah",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/34749279788",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Create development deployment"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 34748347078,
+      "createdAt": "2026-09-13T08:42:10Z",
+      "workflowName": "Greek source quality",
+      "headBranch": "feat/greek_besorah",
+      "displayTitle": "feat/greek_besorah",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/34748347078",
+      "failed": [
+        {
+          "job": "greek-source",
+          "conclusion": "failure",
+          "steps": [
+            "Run python -m pytest -q tests/test_greek_tagnt_edition.py"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 34069901956,
+      "createdAt": "2026-09-07T00:27:57Z",
+      "workflowName": "Besorah quality",
+      "headBranch": "fix/issue-43-merge-strongs-prefix-composition",
+      "displayTitle": "fix: complete Besorah remediation and enforce publication quality gates",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/34069901956",
+      "failed": [
+        {
+          "job": "besorah",
+          "conclusion": "failure",
+          "steps": [
+            "Run python -m pytest -q tests/test_besorah_remediation.py tests/test_merge_strongs.py tests/test_delitzsch_review.py"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 34069766058,
+      "createdAt": "2026-09-07T00:25:24Z",
+      "workflowName": "Besorah quality",
+      "headBranch": "fix/issue-43-merge-strongs-prefix-composition",
+      "displayTitle": "fix: complete Besorah remediation and enforce publication quality gates",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/34069766058",
+      "failed": [
+        {
+          "job": "besorah",
+          "conclusion": "failure",
+          "steps": [
+            "Run python -m pytest -q tests/test_besorah_remediation.py tests/test_merge_strongs.py tests/test_delitzsch_review.py"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 34063514760,
+      "createdAt": "2026-09-06T22:16:04Z",
+      "workflowName": "Policy Gate",
+      "headBranch": "feat/issue-94-clean",
+      "displayTitle": "feat(dict): integrate versioned instance policy and bounded client surfaces",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/34063514760",
+      "failed": [
+        {
+          "job": "policy-gate",
+          "conclusion": "failure",
+          "steps": [
+            "Secret scan"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33091332648,
+      "createdAt": "2026-08-27T16:04:43Z",
+      "workflowName": "Mobile EAS Release",
+      "headBranch": "main",
+      "displayTitle": "Mobile EAS Release",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33091332648",
+      "failed": [
+        {
+          "job": "mobile-eas-release",
+          "conclusion": "failure",
+          "steps": [
+            "Preflight config and environment checks"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33090354777,
+      "createdAt": "2026-08-27T15:54:04Z",
+      "workflowName": "Mobile EAS Release",
+      "headBranch": "main",
+      "displayTitle": "Mobile EAS Release",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33090354777",
+      "failed": [
+        {
+          "job": "mobile-eas-release",
+          "conclusion": "failure",
+          "steps": [
+            "Preflight config and environment checks"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33089139988,
+      "createdAt": "2026-08-27T15:40:56Z",
+      "workflowName": "Policy Gate",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33089139988",
+      "failed": [
+        {
+          "job": "policy-gate",
+          "conclusion": "failure",
+          "steps": [
+            "Secret scan"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33089139993,
+      "createdAt": "2026-08-27T15:40:56Z",
+      "workflowName": "Web CI",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33089139993",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Run build"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33089073388,
+      "createdAt": "2026-08-27T15:40:14Z",
+      "workflowName": "Web CI",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33089073388",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Run build"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33089073396,
+      "createdAt": "2026-08-27T15:40:14Z",
+      "workflowName": "Policy Gate",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33089073396",
+      "failed": [
+        {
+          "job": "policy-gate",
+          "conclusion": "failure",
+          "steps": [
+            "Secret scan"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33089030689,
+      "createdAt": "2026-08-27T15:39:44Z",
+      "workflowName": "Policy Gate",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33089030689",
+      "failed": [
+        {
+          "job": "policy-gate",
+          "conclusion": "failure",
+          "steps": [
+            "Secret scan"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33089030239,
+      "createdAt": "2026-08-27T15:39:44Z",
+      "workflowName": "Web CI",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33089030239",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Run build"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33088984651,
+      "createdAt": "2026-08-27T15:39:13Z",
+      "workflowName": "Policy Gate",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33088984651",
+      "failed": [
+        {
+          "job": "policy-gate",
+          "conclusion": "failure",
+          "steps": [
+            "Secret scan"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33088984626,
+      "createdAt": "2026-08-27T15:39:13Z",
+      "workflowName": "Web CI",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33088984626",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Run build"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33088937922,
+      "createdAt": "2026-08-27T15:38:44Z",
+      "workflowName": "Policy Gate",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33088937922",
+      "failed": [
+        {
+          "job": "policy-gate",
+          "conclusion": "failure",
+          "steps": [
+            "Secret scan"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33088937928,
+      "createdAt": "2026-08-27T15:38:44Z",
+      "workflowName": "Web CI",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33088937928",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Run build"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33088856772,
+      "createdAt": "2026-08-27T15:37:52Z",
+      "workflowName": "Web CI",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33088856772",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Run build"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33088849154,
+      "createdAt": "2026-08-27T15:37:47Z",
+      "workflowName": "Web CI",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33088849154",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Run build"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33088511524,
+      "createdAt": "2026-08-27T15:33:58Z",
+      "workflowName": "Web CI",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33088511524",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Run build"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33088492779,
+      "createdAt": "2026-08-27T15:33:46Z",
+      "workflowName": "Web CI",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33088492779",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Run build"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33088449575,
+      "createdAt": "2026-08-27T15:33:18Z",
+      "workflowName": "Policy Gate",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33088449575",
+      "failed": [
+        {
+          "job": "policy-gate",
+          "conclusion": "failure",
+          "steps": [
+            "Secret scan"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33088392008,
+      "createdAt": "2026-08-27T15:32:41Z",
+      "workflowName": "Web CI",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33088392008",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Create development deployment"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33088392073,
+      "createdAt": "2026-08-27T15:32:41Z",
+      "workflowName": "Policy Gate",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33088392073",
+      "failed": [
+        {
+          "job": "policy-gate",
+          "conclusion": "failure",
+          "steps": [
+            "Secret scan"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33087814984,
+      "createdAt": "2026-08-27T15:26:27Z",
+      "workflowName": "Policy Gate",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33087814984",
+      "failed": [
+        {
+          "job": "policy-gate",
+          "conclusion": "failure",
+          "steps": [
+            "Secret scan"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33087787544,
+      "createdAt": "2026-08-27T15:26:08Z",
+      "workflowName": "Policy Gate",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33087787544",
+      "failed": [
+        {
+          "job": "policy-gate",
+          "conclusion": "failure",
+          "steps": [
+            "Secret scan"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33087551793,
+      "createdAt": "2026-08-27T15:23:32Z",
+      "workflowName": "Policy Gate",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33087551793",
+      "failed": [
+        {
+          "job": "policy-gate",
+          "conclusion": "failure",
+          "steps": [
+            "Secret scan"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33087401541,
+      "createdAt": "2026-08-27T15:21:58Z",
+      "workflowName": "Policy Gate",
+      "headBranch": "feat/issue-107-settings-order",
+      "displayTitle": "feat: unify shared settings order across mobile and web (#107)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33087401541",
+      "failed": [
+        {
+          "job": "policy-gate",
+          "conclusion": "failure",
+          "steps": [
+            "Secret scan"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33086790197,
+      "createdAt": "2026-08-27T15:15:11Z",
+      "workflowName": "Policy Gate",
+      "headBranch": "feat/issue-107-settings-order",
+      "displayTitle": "feat: unify shared settings order across mobile and web (#107)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33086790197",
+      "failed": [
+        {
+          "job": "policy-gate",
+          "conclusion": "failure",
+          "steps": [
+            "Secret scan"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33086685243,
+      "createdAt": "2026-08-27T15:14:04Z",
+      "workflowName": "Web CI",
+      "headBranch": "feat/issue-107-settings-order",
+      "displayTitle": "feat: unify shared settings order across mobile and web (#107)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33086685243",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Run build"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33086568538,
+      "createdAt": "2026-08-27T15:12:48Z",
+      "workflowName": "Web CI",
+      "headBranch": "feat/issue-107-settings-order",
+      "displayTitle": "feat: unify shared settings order across mobile and web (#107)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33086568538",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Run build"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33086453795,
+      "createdAt": "2026-08-27T15:11:33Z",
+      "workflowName": "Policy Gate",
+      "headBranch": "feat/issue-107-settings-order",
+      "displayTitle": "feat: unify shared settings order across mobile and web (#107)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33086453795",
+      "failed": [
+        {
+          "job": "policy-gate",
+          "conclusion": "failure",
+          "steps": [
+            "Secret scan"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33086270578,
+      "createdAt": "2026-08-27T15:09:34Z",
+      "workflowName": "Web CI",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33086270578",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Run build"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33086270623,
+      "createdAt": "2026-08-27T15:09:34Z",
+      "workflowName": "Policy Gate",
+      "headBranch": "fix/issue-20-remove-yhvh-translit-data-level",
+      "displayTitle": "fix: remove YHVH (H3068) transliteration at the data source (#20)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33086270623",
+      "failed": [
+        {
+          "job": "policy-gate",
+          "conclusion": "failure",
+          "steps": [
+            "Secret scan"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 33086112479,
+      "createdAt": "2026-08-27T15:07:49Z",
+      "workflowName": "Mobile CI",
+      "headBranch": "feat/issue-107-settings-order",
+      "displayTitle": "feat: unify shared settings order across mobile and web (#107)",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/33086112479",
+      "failed": [
+        {
+          "job": "mobile-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Check TypeScript"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 25292663046,
+      "createdAt": "2026-05-03T22:29:43Z",
+      "workflowName": "Web CI",
+      "headBranch": "feat/misc_3",
+      "displayTitle": "feat: add versification and full chapter improvements across mobile/web",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/25292663046",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "Run lint"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 24294912584,
+      "createdAt": "2026-04-12T00:26:53Z",
+      "workflowName": "Web CI",
+      "headBranch": "feat/tth_updating_tehilim_and_mishlei",
+      "displayTitle": "fix: harden tth_2 extraction and parsing pipeline",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/24294912584",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 24294657695,
+      "createdAt": "2026-04-12T00:10:37Z",
+      "workflowName": "Web CI",
+      "headBranch": "feat/tth_updating_tehilim_and_mishlei",
+      "displayTitle": "fix: harden tth_2 extraction and parsing pipeline",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/24294657695",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 23926012476,
+      "createdAt": "2026-04-02T23:03:24Z",
+      "workflowName": "Mobile CI",
+      "headBranch": "feat/android_4",
+      "displayTitle": "fix: harden Android release preflight and mobile Supabase config",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/23926012476",
+      "failed": [
+        {
+          "job": "mobile-ci",
+          "conclusion": "failure",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 23654910903,
+      "createdAt": "2026-03-27T15:49:26Z",
+      "workflowName": "Web CI",
+      "headBranch": "static",
+      "displayTitle": "feat: migrate to static services with Supabase-backed data access",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/23654910903",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 23654539744,
+      "createdAt": "2026-03-27T15:41:03Z",
+      "workflowName": "Policy Gate",
+      "headBranch": "static",
+      "displayTitle": "feat: migrate to static services with Supabase-backed data access",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/23654539744",
+      "failed": [
+        {
+          "job": "policy-gate",
+          "conclusion": "failure",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 23654539726,
+      "createdAt": "2026-03-27T15:41:03Z",
+      "workflowName": "Web CI",
+      "headBranch": "static",
+      "displayTitle": "feat: migrate to static services with Supabase-backed data access",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/23654539726",
+      "failed": [
+        {
+          "job": "web-ci",
+          "conclusion": "failure",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 23654539690,
+      "createdAt": "2026-03-27T15:41:03Z",
+      "workflowName": "Mobile CI",
+      "headBranch": "static",
+      "displayTitle": "feat: migrate to static services with Supabase-backed data access",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/23654539690",
+      "failed": [
+        {
+          "job": "mobile-ci",
+          "conclusion": "failure",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 23654067714,
+      "createdAt": "2026-03-27T15:30:17Z",
+      "workflowName": "Mobile CI",
+      "headBranch": "static",
+      "displayTitle": "feat: migrate to static services with Supabase-backed data access",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/23654067714",
+      "failed": [
+        {
+          "job": "mobile-ci",
+          "conclusion": "failure",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 23654067767,
+      "createdAt": "2026-03-27T15:30:17Z",
+      "workflowName": "Policy Gate",
+      "headBranch": "static",
+      "displayTitle": "feat: migrate to static services with Supabase-backed data access",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/23654067767",
+      "failed": [
+        {
+          "job": "policy-gate",
+          "conclusion": "failure",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 23653831359,
+      "createdAt": "2026-03-27T15:25:08Z",
+      "workflowName": "Policy Gate",
+      "headBranch": "static",
+      "displayTitle": "feat: migrate to static services with Supabase-backed data access",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/23653831359",
+      "failed": [
+        {
+          "job": "policy-gate",
+          "conclusion": "failure",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 23653387408,
+      "createdAt": "2026-03-27T15:15:31Z",
+      "workflowName": "Policy Gate",
+      "headBranch": "static",
+      "displayTitle": "feat: migrate to static services with Supabase-backed data access",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/23653387408",
+      "failed": [
+        {
+          "job": "policy-gate",
+          "conclusion": "failure",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 23653083927,
+      "createdAt": "2026-03-27T15:08:53Z",
+      "workflowName": "Backend CI",
+      "headBranch": "static",
+      "displayTitle": "feat: migrate to static services with Supabase-backed data access",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/23653083927",
+      "failed": [
+        {
+          "job": "backend-ci",
+          "conclusion": "failure",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 23652344907,
+      "createdAt": "2026-03-27T14:53:01Z",
+      "workflowName": "Backend CI",
+      "headBranch": "static",
+      "displayTitle": "feat: migrate to static services with Supabase-backed data access",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/23652344907",
+      "failed": [
+        {
+          "job": "backend-ci",
+          "conclusion": "failure",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 23652344893,
+      "createdAt": "2026-03-27T14:53:01Z",
+      "workflowName": "Mobile CI",
+      "headBranch": "static",
+      "displayTitle": "feat: migrate to static services with Supabase-backed data access",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/23652344893",
+      "failed": [
+        {
+          "job": "mobile-ci",
+          "conclusion": "failure",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 23102189853,
+      "createdAt": "2026-03-15T03:09:08Z",
+      "workflowName": "Mobile CI",
+      "headBranch": "web_fixes",
+      "displayTitle": "feat: enhance web and mobile user experience",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/23102189853",
+      "failed": [
+        {
+          "job": "test",
+          "conclusion": "failure",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 23102009357,
+      "createdAt": "2026-03-15T02:57:14Z",
+      "workflowName": "Mobile CI",
+      "headBranch": "web_fixes",
+      "displayTitle": "feat: enhance web and mobile user experience",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/23102009357",
+      "failed": [
+        {
+          "job": "test",
+          "conclusion": "failure",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ]
+    },
+    {
+      "databaseId": 22826519716,
+      "createdAt": "2026-03-08T17:52:23Z",
+      "workflowName": "Backend CI",
+      "headBranch": "supabase",
+      "displayTitle": "feat: implement backend deployment infrastructure with TS2009 Supabase integration",
+      "url": "https://github.com/jhonnyisaacc/davar/actions/runs/22826519716",
+      "failed": [
+        {
+          "job": "test",
+          "conclusion": "failure",
+          "steps": [
+            "(no step)"
+          ]
+        }
+      ]
+    }
+  ]
+}

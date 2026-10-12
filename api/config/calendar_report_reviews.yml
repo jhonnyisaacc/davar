@@ -1,0 +1,12 @@
+# Reviewed dates for witness tables whose report omits an in-table date.
+# A content hash binds the review to this exact report revision.
+- source_url: "https://moonsocil.blogspot.com/2026/02/new-moon-adar-5786.html"
+  content_hash: "ef81f1a4b3f8b253a1c95be6e8a9fa2b7ded569fae2a6d8b930d37871149ea8c"
+  observed_on: "2026-02-18"
+  note: "The witness date is corroborated by the INMS historical spreadsheet; the blog table omits the date."
+  corroborating_url: "https://docs.google.com/spreadsheets/d/1Wsz56ytFTLETlYuVxKnK_GhEQ1ise_lUXDgYILw56e8/edit"
+- source_url: "https://moonsocil.blogspot.com/2026/06/tamuz-5786.html"
+  content_hash: "1342bedd04c1f38206f530e5e32431e762671dc44b536d968ec7b82d75562f18"
+  observed_on: "2026-06-16"
+  note: "The INMS historical spreadsheet dates the Israel witnesses June 16; June 15 in the blog prose refers to US sightings."
+  corroborating_url: "https://docs.google.com/spreadsheets/d/1Wsz56ytFTLETlYuVxKnK_GhEQ1ise_lUXDgYILw56e8/edit"

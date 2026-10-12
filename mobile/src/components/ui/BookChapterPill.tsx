@@ -1,141 +1,73 @@
-import { useMemo } from "react";
-import { Pressable, StyleSheet, Text, View, useWindowDimensions } from "react-native";
+import { Pressable, StyleSheet, Text } from "react-native";
 
-import {
-  getColors,
-  getResponsiveLayout,
-  getNeumorphHighlightStyle,
-  getNeumorphShadowStyle,
-  radii,
-  spacing,
-  typography,
-} from "@/src/theme";
-import { useAppStore, type AppState } from "@/src/store/useAppStore";
+import { getColors, radii, spacing, typography } from "@/src/theme";
+import { useAppStore } from "@/src/store/useAppStore";
+import { useTranslation } from "@/src/i18n/useTranslation";
 
 type BookChapterPillProps = {
   bookLabel: string;
-  hebrewLabel: string;
-  nativeLabelScript?: "hebrew" | "greek";
   chapter: number;
-  onBookPress?: () => void;
-  onChapterPress?: () => void;
+  onPress: () => void;
 };
 
-const stripNikud = (value: string) =>
-  value.normalize("NFD").replace(/[\u0591-\u05C7]/g, "");
-
-const createStyles = (colors: ReturnType<typeof getColors>, tablet: boolean) =>
-  StyleSheet.create({
-    container: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: spacing[3],
-    },
-    pill: {
-      borderRadius: radii.xl,
-      paddingVertical: spacing[2],
-      paddingHorizontal: spacing[4],
-      borderWidth: 0,
-      backgroundColor: colors.surface,
-      minHeight: tablet ? 48 : 36,
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    highlight: {
-      ...StyleSheet.absoluteFillObject,
-      ...getNeumorphHighlightStyle(colors),
-    },
-    bookLabel: {
-      fontFamily: typography.families.latinUI,
-      fontSize: tablet ? typography.sizes.bodySmall : typography.sizes.caption,
-      letterSpacing: 0.8,
-      textTransform: "uppercase",
-      color: colors.textSecondary,
-    },
-    bookRow: {
-      flexDirection: "row",
-      alignItems: "center",
-    },
-    hebrewLabel: {
-      fontFamily: typography.families.hebrewUI,
-      fontSize: tablet ? typography.sizes.bodySmall : typography.sizes.caption,
-      color: colors.textSecondary,
-      marginLeft: spacing[2],
-    },
-    separator: {
-      fontFamily: typography.families.latinUI,
-      fontSize: tablet ? typography.sizes.bodySmall : typography.sizes.caption,
-      color: colors.textSecondary,
-      marginLeft: spacing[2],
-      fontWeight: "200",
-    },
-    chapterLabel: {
-      fontFamily: typography.families.latinUI,
-      fontSize: tablet ? typography.sizes.bodySmall : typography.sizes.caption,
-      letterSpacing: 0.6,
-      color: colors.textSecondary,
-    },
-  });
+const styles = StyleSheet.create({
+  pill: {
+    alignSelf: "center",
+    maxWidth: "100%",
+    borderRadius: radii.full,
+    paddingVertical: 6,
+    paddingHorizontal: spacing[3],
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  label: {
+    fontSize: typography.sizes.caption,
+    textAlign: "center",
+  },
+});
 
 export const BookChapterPill = ({
   bookLabel,
-  hebrewLabel,
-  nativeLabelScript = "hebrew",
   chapter,
-  onBookPress,
-  onChapterPress,
+  onPress,
 }: BookChapterPillProps) => {
-  const themeMode = useAppStore((state: AppState) => state.themeMode);
+  const themeMode = useAppStore((state) => state.themeMode);
   const colors = getColors(themeMode);
-  const { width, height } = useWindowDimensions();
-  const { isTablet } = getResponsiveLayout(width, height);
-  const styles = useMemo(() => createStyles(colors, isTablet), [colors, isTablet]);
-  const hebrewLabelPlain = useMemo(
-    () =>
-      nativeLabelScript === "greek" ? hebrewLabel : stripNikud(hebrewLabel),
-    [hebrewLabel, nativeLabelScript],
-  );
+  const { t, isRTL } = useTranslation();
+  const label = `${bookLabel} · ${chapter}`;
 
   return (
-    <View style={styles.container}>
-      <Pressable
-        onPress={onBookPress}
-        style={({ pressed }) => [
-          styles.pill,
-          pressed
-            ? getNeumorphShadowStyle("pressed", colors)
-            : getNeumorphShadowStyle("raised", colors),
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={label}
+      accessibilityHint={t("navigation.selectLocation")}
+      testID="reading-location-chip"
+      hitSlop={spacing[2]}
+      onPress={(event) => {
+        event.stopPropagation();
+        onPress();
+      }}
+      style={({ pressed }) => [
+        styles.pill,
+        { backgroundColor: colors.surfaceElevated, opacity: pressed ? 0.7 : 1 },
+      ]}
+    >
+      <Text
+        style={[
+          styles.label,
+          {
+            color: colors.textPrimary,
+            fontFamily: isRTL
+              ? "Arimo_400Regular"
+              : typography.families.latinUI,
+            writingDirection: isRTL ? "rtl" : "ltr",
+          },
         ]}
       >
-        <View pointerEvents="none" style={styles.highlight} />
-        <View pointerEvents="none" style={styles.bookRow}>
-          <Text style={styles.bookLabel}>{bookLabel}</Text>
-          <Text style={styles.separator}>|</Text>
-          <Text
-            style={[
-              styles.hebrewLabel,
-              nativeLabelScript === "greek"
-                ? { fontFamily: typography.families.hebrewScripture }
-                : null,
-            ]}
-          >
-            {hebrewLabelPlain}
-          </Text>
-        </View>
-      </Pressable>
-      <Pressable
-        onPress={onChapterPress}
-        style={({ pressed }) => [
-          styles.pill,
-          pressed
-            ? getNeumorphShadowStyle("pressed", colors)
-            : getNeumorphShadowStyle("raised", colors),
-        ]}
-      >
-        <View pointerEvents="none" style={styles.highlight} />
-        <Text style={styles.chapterLabel}>{chapter}</Text>
-      </Pressable>
-    </View>
+        {bookLabel} · {"\u2066"}
+        {chapter}
+        {"\u2069"}
+      </Text>
+    </Pressable>
   );
 };

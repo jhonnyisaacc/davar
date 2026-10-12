@@ -1,0 +1,742 @@
+{
+  "sha": "95eec881a0b399892c95e23ea4515844fab323ed",
+  "merge_base_with_main": "c10a71a7480a069dad65ea7bbaae8180e2b32b58",
+  "since_180_days": "2026-04-10",
+  "windows": {
+    "all_history": {
+      "files": 1371,
+      "top_30": [
+        {
+          "path": "web/src/app/App.tsx",
+          "commits": 81,
+          "added": 5511,
+          "deleted": 3703,
+          "lines": 2173,
+          "churn_x_size": 176013
+        },
+        {
+          "path": "mobile/src/components/WordAnalysisBottomSheet.tsx",
+          "commits": 70,
+          "added": 3213,
+          "deleted": 1316,
+          "lines": 1836,
+          "churn_x_size": 128520
+        },
+        {
+          "path": "mobile/src/screens/VerseDetailContent.tsx",
+          "commits": 64,
+          "added": 2906,
+          "deleted": 1279,
+          "lines": 1616,
+          "churn_x_size": 103424
+        },
+        {
+          "path": "web/src/app/services/staticData.ts",
+          "commits": 32,
+          "added": 3953,
+          "deleted": 1381,
+          "lines": 2572,
+          "churn_x_size": 82304
+        },
+        {
+          "path": "mobile/src/services/scripture.ts",
+          "commits": 34,
+          "added": 2288,
+          "deleted": 463,
+          "lines": 1665,
+          "churn_x_size": 56610
+        },
+        {
+          "path": "web/src/app/components/NavigationBar.tsx",
+          "commits": 46,
+          "added": 3110,
+          "deleted": 2337,
+          "lines": 847,
+          "churn_x_size": 38962
+        },
+        {
+          "path": "web/src/app/components/WordCard.tsx",
+          "commits": 34,
+          "added": 2467,
+          "deleted": 1737,
+          "lines": 1067,
+          "churn_x_size": 36278
+        },
+        {
+          "path": "mobile/src/components/VerseCard.tsx",
+          "commits": 43,
+          "added": 1307,
+          "deleted": 550,
+          "lines": 757,
+          "churn_x_size": 32551
+        },
+        {
+          "path": "scripts/generate-static-data/index.ts",
+          "commits": 17,
+          "added": 1374,
+          "deleted": 42,
+          "lines": 1332,
+          "churn_x_size": 22644
+        },
+        {
+          "path": "web/src/app/components/VerseDisplay.tsx",
+          "commits": 47,
+          "added": 914,
+          "deleted": 750,
+          "lines": 471,
+          "churn_x_size": 22137
+        },
+        {
+          "path": "scripts/dict/build_lexicon.py",
+          "commits": 14,
+          "added": 1511,
+          "deleted": 198,
+          "lines": 1313,
+          "churn_x_size": 18382
+        },
+        {
+          "path": "scripts/hutter/map_strongs.py",
+          "commits": 12,
+          "added": 1580,
+          "deleted": 64,
+          "lines": 1516,
+          "churn_x_size": 18192
+        },
+        {
+          "path": "mobile/app/(tabs)/home.tsx",
+          "commits": 26,
+          "added": 1128,
+          "deleted": 428,
+          "lines": 624,
+          "churn_x_size": 16224
+        },
+        {
+          "path": "mobile/src/components/NavigationSheet.tsx",
+          "commits": 30,
+          "added": 1507,
+          "deleted": 974,
+          "lines": 533,
+          "churn_x_size": 15990
+        },
+        {
+          "path": "web/src/app/components/FullChapterView.tsx",
+          "commits": 40,
+          "added": 899,
+          "deleted": 646,
+          "lines": 384,
+          "churn_x_size": 15360
+        },
+        {
+          "path": "mobile/src/services/database.ts",
+          "commits": 14,
+          "added": 1565,
+          "deleted": 249,
+          "lines": 980,
+          "churn_x_size": 13720
+        },
+        {
+          "path": "mobile/src/services/offlineSync.ts",
+          "commits": 19,
+          "added": 1269,
+          "deleted": 370,
+          "lines": 608,
+          "churn_x_size": 11552
+        },
+        {
+          "path": "mobile/app/(tabs)/settings.tsx",
+          "commits": 25,
+          "added": 1709,
+          "deleted": 1279,
+          "lines": 430,
+          "churn_x_size": 10750
+        },
+        {
+          "path": "mobile/src/services/api.ts",
+          "commits": 15,
+          "added": 656,
+          "deleted": 156,
+          "lines": 494,
+          "churn_x_size": 7410
+        },
+        {
+          "path": "web/src/app/legal/legalContent.ts",
+          "commits": 10,
+          "added": 833,
+          "deleted": 101,
+          "lines": 732,
+          "churn_x_size": 7320
+        },
+        {
+          "path": "locales/legalContent.ts",
+          "commits": 10,
+          "added": 769,
+          "deleted": 39,
+          "lines": 730,
+          "churn_x_size": 7300
+        },
+        {
+          "path": "tests/test_hutter_map_strongs.py",
+          "commits": 10,
+          "added": 645,
+          "deleted": 2,
+          "lines": 643,
+          "churn_x_size": 6430
+        },
+        {
+          "path": "web/src/app/services/staticData.test.js",
+          "commits": 17,
+          "added": 542,
+          "deleted": 171,
+          "lines": 371,
+          "churn_x_size": 6307
+        },
+        {
+          "path": "web/src/app/components/SettingsScreen.tsx",
+          "commits": 22,
+          "added": 2238,
+          "deleted": 2424,
+          "lines": 273,
+          "churn_x_size": 6006
+        },
+        {
+          "path": "web/src/app/components/HomeScreen.tsx",
+          "commits": 22,
+          "added": 680,
+          "deleted": 797,
+          "lines": 255,
+          "churn_x_size": 5610
+        },
+        {
+          "path": "scripts/tth/main.py",
+          "commits": 6,
+          "added": 421,
+          "deleted": 420,
+          "lines": 920,
+          "churn_x_size": 5520
+        },
+        {
+          "path": "shared/versificationData.ts",
+          "commits": 2,
+          "added": 2411,
+          "deleted": 1,
+          "lines": 2410,
+          "churn_x_size": 4820
+        },
+        {
+          "path": "mobile/src/providers/AppProvider.tsx",
+          "commits": 13,
+          "added": 478,
+          "deleted": 69,
+          "lines": 342,
+          "churn_x_size": 4446
+        },
+        {
+          "path": "tests/test_delitzsch_review.py",
+          "commits": 8,
+          "added": 566,
+          "deleted": 28,
+          "lines": 538,
+          "churn_x_size": 4304
+        },
+        {
+          "path": "mobile/src/features/calendar/CalendarScreen.tsx",
+          "commits": 6,
+          "added": 1332,
+          "deleted": 619,
+          "lines": 713,
+          "churn_x_size": 4278
+        }
+      ]
+    },
+    "last_180_days": {
+      "files": 882,
+      "top_30": [
+        {
+          "path": "web/src/app/services/staticData.ts",
+          "commits": 30,
+          "added": 2830,
+          "deleted": 1374,
+          "lines": 2572,
+          "churn_x_size": 77160
+        },
+        {
+          "path": "web/src/app/App.tsx",
+          "commits": 33,
+          "added": 3019,
+          "deleted": 2563,
+          "lines": 2173,
+          "churn_x_size": 71709
+        },
+        {
+          "path": "mobile/src/screens/VerseDetailContent.tsx",
+          "commits": 25,
+          "added": 1324,
+          "deleted": 767,
+          "lines": 1616,
+          "churn_x_size": 40400
+        },
+        {
+          "path": "mobile/src/services/scripture.ts",
+          "commits": 19,
+          "added": 1225,
+          "deleted": 286,
+          "lines": 1665,
+          "churn_x_size": 31635
+        },
+        {
+          "path": "mobile/src/components/WordAnalysisBottomSheet.tsx",
+          "commits": 14,
+          "added": 473,
+          "deleted": 339,
+          "lines": 1836,
+          "churn_x_size": 25704
+        },
+        {
+          "path": "web/src/app/components/NavigationBar.tsx",
+          "commits": 27,
+          "added": 2086,
+          "deleted": 1898,
+          "lines": 847,
+          "churn_x_size": 22869
+        },
+        {
+          "path": "scripts/generate-static-data/index.ts",
+          "commits": 15,
+          "added": 523,
+          "deleted": 39,
+          "lines": 1332,
+          "churn_x_size": 19980
+        },
+        {
+          "path": "scripts/hutter/map_strongs.py",
+          "commits": 12,
+          "added": 1580,
+          "deleted": 64,
+          "lines": 1516,
+          "churn_x_size": 18192
+        },
+        {
+          "path": "web/src/app/components/WordCard.tsx",
+          "commits": 11,
+          "added": 1173,
+          "deleted": 1112,
+          "lines": 1067,
+          "churn_x_size": 11737
+        },
+        {
+          "path": "mobile/src/components/VerseCard.tsx",
+          "commits": 13,
+          "added": 713,
+          "deleted": 384,
+          "lines": 757,
+          "churn_x_size": 9841
+        },
+        {
+          "path": "web/src/app/components/VerseDisplay.tsx",
+          "commits": 19,
+          "added": 593,
+          "deleted": 462,
+          "lines": 471,
+          "churn_x_size": 8949
+        },
+        {
+          "path": "mobile/app/(tabs)/settings.tsx",
+          "commits": 18,
+          "added": 1219,
+          "deleted": 1088,
+          "lines": 430,
+          "churn_x_size": 7740
+        },
+        {
+          "path": "web/src/app/components/FullChapterView.tsx",
+          "commits": 20,
+          "added": 553,
+          "deleted": 403,
+          "lines": 384,
+          "churn_x_size": 7680
+        },
+        {
+          "path": "scripts/dict/build_lexicon.py",
+          "commits": 5,
+          "added": 245,
+          "deleted": 63,
+          "lines": 1313,
+          "churn_x_size": 6565
+        },
+        {
+          "path": "tests/test_hutter_map_strongs.py",
+          "commits": 10,
+          "added": 645,
+          "deleted": 2,
+          "lines": 643,
+          "churn_x_size": 6430
+        },
+        {
+          "path": "web/src/app/services/staticData.test.js",
+          "commits": 16,
+          "added": 434,
+          "deleted": 171,
+          "lines": 371,
+          "churn_x_size": 5936
+        },
+        {
+          "path": "web/src/app/components/SettingsScreen.tsx",
+          "commits": 19,
+          "added": 2130,
+          "deleted": 2347,
+          "lines": 273,
+          "churn_x_size": 5187
+        },
+        {
+          "path": "shared/versificationData.ts",
+          "commits": 2,
+          "added": 2411,
+          "deleted": 1,
+          "lines": 2410,
+          "churn_x_size": 4820
+        },
+        {
+          "path": "tests/test_delitzsch_review.py",
+          "commits": 8,
+          "added": 566,
+          "deleted": 28,
+          "lines": 538,
+          "churn_x_size": 4304
+        },
+        {
+          "path": "mobile/src/features/calendar/CalendarScreen.tsx",
+          "commits": 6,
+          "added": 1332,
+          "deleted": 619,
+          "lines": 713,
+          "churn_x_size": 4278
+        },
+        {
+          "path": "mobile/src/components/NavigationSheet.tsx",
+          "commits": 8,
+          "added": 554,
+          "deleted": 732,
+          "lines": 533,
+          "churn_x_size": 4264
+        },
+        {
+          "path": "mobile/src/services/offlineSync.ts",
+          "commits": 7,
+          "added": 209,
+          "deleted": 170,
+          "lines": 608,
+          "churn_x_size": 4256
+        },
+        {
+          "path": "scripts/greek/publish.py",
+          "commits": 7,
+          "added": 642,
+          "deleted": 60,
+          "lines": 582,
+          "churn_x_size": 4074
+        },
+        {
+          "path": "mobile/src/services/database.ts",
+          "commits": 4,
+          "added": 355,
+          "deleted": 5,
+          "lines": 980,
+          "churn_x_size": 3920
+        },
+        {
+          "path": "scripts/delitzsch/review/workflow.py",
+          "commits": 4,
+          "added": 968,
+          "deleted": 7,
+          "lines": 961,
+          "churn_x_size": 3844
+        },
+        {
+          "path": "mobile/app/(tabs)/home.tsx",
+          "commits": 6,
+          "added": 119,
+          "deleted": 10,
+          "lines": 624,
+          "churn_x_size": 3744
+        },
+        {
+          "path": "scripts/hutter/review_morphology_api.py",
+          "commits": 6,
+          "added": 605,
+          "deleted": 26,
+          "lines": 579,
+          "churn_x_size": 3474
+        },
+        {
+          "path": "server/src/http/routes/assemblies.ts",
+          "commits": 7,
+          "added": 540,
+          "deleted": 44,
+          "lines": 496,
+          "churn_x_size": 3472
+        },
+        {
+          "path": "shared/translationConfig.ts",
+          "commits": 15,
+          "added": 187,
+          "deleted": 74,
+          "lines": 219,
+          "churn_x_size": 3285
+        },
+        {
+          "path": "mobile/src/features/commentary/CommentaryScreen.tsx",
+          "commits": 5,
+          "added": 871,
+          "deleted": 222,
+          "lines": 649,
+          "churn_x_size": 3245
+        }
+      ]
+    },
+    "since_main_merge_base": {
+      "files": 450,
+      "top_30": [
+        {
+          "path": "web/src/app/App.tsx",
+          "commits": 7,
+          "added": 134,
+          "deleted": 212,
+          "lines": 2173,
+          "churn_x_size": 15211
+        },
+        {
+          "path": "mobile/src/screens/VerseDetailContent.tsx",
+          "commits": 6,
+          "added": 242,
+          "deleted": 242,
+          "lines": 1616,
+          "churn_x_size": 9696
+        },
+        {
+          "path": "web/src/app/components/NavigationBar.tsx",
+          "commits": 8,
+          "added": 838,
+          "deleted": 878,
+          "lines": 847,
+          "churn_x_size": 6776
+        },
+        {
+          "path": "web/src/app/services/staticData.ts",
+          "commits": 2,
+          "added": 12,
+          "deleted": 4,
+          "lines": 2572,
+          "churn_x_size": 5144
+        },
+        {
+          "path": "mobile/src/features/calendar/CalendarScreen.tsx",
+          "commits": 6,
+          "added": 1332,
+          "deleted": 619,
+          "lines": 713,
+          "churn_x_size": 4278
+        },
+        {
+          "path": "mobile/src/components/WordAnalysisBottomSheet.tsx",
+          "commits": 2,
+          "added": 11,
+          "deleted": 5,
+          "lines": 1836,
+          "churn_x_size": 3672
+        },
+        {
+          "path": "server/src/http/routes/assemblies.ts",
+          "commits": 7,
+          "added": 540,
+          "deleted": 44,
+          "lines": 496,
+          "churn_x_size": 3472
+        },
+        {
+          "path": "mobile/src/features/commentary/CommentaryScreen.tsx",
+          "commits": 5,
+          "added": 871,
+          "deleted": 222,
+          "lines": 649,
+          "churn_x_size": 3245
+        },
+        {
+          "path": "mobile/src/features/assemblies/AssembliesScreen.tsx",
+          "commits": 5,
+          "added": 904,
+          "deleted": 270,
+          "lines": 634,
+          "churn_x_size": 3170
+        },
+        {
+          "path": "mobile/app/(tabs)/settings.tsx",
+          "commits": 7,
+          "added": 362,
+          "deleted": 489,
+          "lines": 430,
+          "churn_x_size": 3010
+        },
+        {
+          "path": "web/src/app/components/CalendarPanel.tsx",
+          "commits": 5,
+          "added": 906,
+          "deleted": 408,
+          "lines": 498,
+          "churn_x_size": 2490
+        },
+        {
+          "path": "web/src/app/components/AssembliesWorkspace.tsx",
+          "commits": 5,
+          "added": 787,
+          "deleted": 355,
+          "lines": 432,
+          "churn_x_size": 2160
+        },
+        {
+          "path": "server/tests/assemblies.test.ts",
+          "commits": 4,
+          "added": 513,
+          "deleted": 1,
+          "lines": 512,
+          "churn_x_size": 2048
+        },
+        {
+          "path": "mobile/app/(tabs)/_layout.tsx",
+          "commits": 7,
+          "added": 396,
+          "deleted": 304,
+          "lines": 248,
+          "churn_x_size": 1736
+        },
+        {
+          "path": "web/src/app/components/SettingsScreen.tsx",
+          "commits": 6,
+          "added": 288,
+          "deleted": 865,
+          "lines": 273,
+          "churn_x_size": 1638
+        },
+        {
+          "path": "mobile/src/components/NavigationSheet.tsx",
+          "commits": 3,
+          "added": 404,
+          "deleted": 711,
+          "lines": 533,
+          "churn_x_size": 1599
+        },
+        {
+          "path": "mobile/src/components/VerseCard.tsx",
+          "commits": 2,
+          "added": 21,
+          "deleted": 34,
+          "lines": 757,
+          "churn_x_size": 1514
+        },
+        {
+          "path": "server/src/services/commentary.ts",
+          "commits": 3,
+          "added": 607,
+          "deleted": 113,
+          "lines": 494,
+          "churn_x_size": 1482
+        },
+        {
+          "path": "api/test/integration/assemblies_test.rb",
+          "commits": 4,
+          "added": 364,
+          "deleted": 1,
+          "lines": 363,
+          "churn_x_size": 1452
+        },
+        {
+          "path": "web/src/app/components/VerseDisplay.tsx",
+          "commits": 3,
+          "added": 46,
+          "deleted": 48,
+          "lines": 471,
+          "churn_x_size": 1413
+        },
+        {
+          "path": "shared/productContracts.ts",
+          "commits": 6,
+          "added": 235,
+          "deleted": 1,
+          "lines": 234,
+          "churn_x_size": 1404
+        },
+        {
+          "path": "server/tests/helper.ts",
+          "commits": 7,
+          "added": 202,
+          "deleted": 3,
+          "lines": 199,
+          "churn_x_size": 1393
+        },
+        {
+          "path": "api/db/schema.rb",
+          "commits": 3,
+          "added": 434,
+          "deleted": 4,
+          "lines": 430,
+          "churn_x_size": 1290
+        },
+        {
+          "path": "mobile/src/features/assemblies/AssembliesEntry.tsx",
+          "commits": 3,
+          "added": 452,
+          "deleted": 42,
+          "lines": 410,
+          "churn_x_size": 1230
+        },
+        {
+          "path": "server/src/services/imports.ts",
+          "commits": 3,
+          "added": 466,
+          "deleted": 66,
+          "lines": 400,
+          "churn_x_size": 1200
+        },
+        {
+          "path": "mobile/src/services/calendarClient.test.ts",
+          "commits": 2,
+          "added": 574,
+          "deleted": 3,
+          "lines": 571,
+          "churn_x_size": 1142
+        },
+        {
+          "path": "server/src/services/oauth.ts",
+          "commits": 4,
+          "added": 296,
+          "deleted": 15,
+          "lines": 281,
+          "churn_x_size": 1124
+        },
+        {
+          "path": "web/src/app/components/ProductScreen.tsx",
+          "commits": 8,
+          "added": 691,
+          "deleted": 554,
+          "lines": 137,
+          "churn_x_size": 1096
+        },
+        {
+          "path": "mobile/src/services/calendarPresentation.test.ts",
+          "commits": 3,
+          "added": 366,
+          "deleted": 1,
+          "lines": 365,
+          "churn_x_size": 1095
+        },
+        {
+          "path": "web/src/app/components/Assemblies.test.tsx",
+          "commits": 2,
+          "added": 539,
+          "deleted": 1,
+          "lines": 538,
+          "churn_x_size": 1076
+        }
+      ]
+    }
+  }
+}

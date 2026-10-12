@@ -6,7 +6,7 @@
 	"scripts": {
 		"generate-data": "bun ../scripts/generate-static-data/index.ts",
 		"generate-data:ensure": "bun ./scripts/ensure-static-data.ts",
-		"build": "bun install --frozen-lockfile && bun --env-file=.env ./build.ts",
+		"build": "bun --env-file=.env ./build.ts",
 		"build:dev": "EXPORT_TS2009_STATIC=1 bun --env-file=.env ./build.ts",
 		"build:prod": "bun install --frozen-lockfile && bun --env-file=.env.production ./build.ts",
 		"build:cf": "bun run build:prod",
@@ -17,6 +17,7 @@
 		"serve": "bun --env-file=.env ./server.ts",
 		"serve:mobile": "BUN_IDLE_TIMEOUT=0 bun --env-file=.env ./server.ts",
 		"test": "bun test",
+		"typecheck": "tsc --noEmit",
 		"test:static-data": "bun test src/app/services/staticData.test.js",
 		"lint": "bunx --bun @biomejs/biome lint build.ts server.ts src scripts shared functions package.json tsconfig.json biome.json",
 		"format": "bunx --bun @biomejs/biome format --write build.ts server.ts src scripts shared functions package.json tsconfig.json biome.json",
@@ -38,9 +39,11 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.4.11",
+		"@testing-library/react": "^16.3.3",
 		"@types/bun": "^1.3.14",
 		"@types/react": "19.2.14",
 		"@types/react-dom": "19.2.3",
+		"happy-dom": "^20.14.5",
 		"typescript": "6.0.2"
 	}
 }

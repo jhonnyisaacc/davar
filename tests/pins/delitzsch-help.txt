@@ -1,0 +1,18 @@
+usage: delitzsch [-h] {run,audit,normalize-holem,normalize,review} ...
+
+Delitzsch parsing and maintenance CLI
+
+positional arguments:
+  {run,audit,normalize-holem,normalize,review}
+    run                 Process Delitzsch books from SQLite into parsed JSON
+                        output
+    audit               Audit parsed Delitzsch output for prefix/strong
+                        anomalies
+    normalize-holem     Normalize corrupted sin dots in Delitzsch source text
+    normalize           Normalize duplicate prefixes in parsed Delitzsch
+                        output
+    review              Scan, batch, apply, and report Delitzsch Strong's
+                        review work
+
+options:
+  -h, --help            show this help message and exit

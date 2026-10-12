@@ -171,7 +171,10 @@ def project(records: dict, query: dict, inputs_digest: str, coverage=None):
 
 def artifacts(root: Path = ROOT, profile=None, **source_roots):
     profile = load_profile(root, profile)
-    manifest, blobs = pinned_inputs(root, profile["input_manifest"], **source_roots)
+    validator = Validator(root)
+    manifest, blobs = pinned_inputs(
+        root, profile["input_manifest"], validator=validator, **source_roots
+    )
     registries = {
         p.stem: read_json(p)
         for p in sorted((root / KNOWLEDGE / "registries").glob("*.json"))
@@ -187,7 +190,6 @@ def artifacts(root: Path = ROOT, profile=None, **source_roots):
         p.name: digest(p.read_bytes())
         for p in sorted((root / "contracts/biblical-knowledge/v1").glob("*.json"))
     }
-    validator = Validator(root)
     validator.registries(registries)
     validator.schema("input-manifest", manifest)
     validate_selections(profile, manifest, registries)

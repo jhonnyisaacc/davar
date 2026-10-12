@@ -1,0 +1,227 @@
+{
+  "markers": {
+    "TS2009_BOOK_FILE_MAP": [
+      {
+        "path": "mobile/src/services/scripture.ts",
+        "count": 2
+      },
+      {
+        "path": "scripts/generate-static-data/index.ts",
+        "count": 3
+      },
+      {
+        "path": "web/src/app/services/staticData.ts",
+        "count": 2
+      }
+    ],
+    "RAILS_ROUTES": [
+      {
+        "path": "server/tests/routes.test.ts",
+        "count": 2
+      }
+    ],
+    "useTranslation_definitions": [
+      {
+        "path": "mobile/src/i18n/useTranslation.ts",
+        "count": 1
+      },
+      {
+        "path": "web/src/app/hooks/useTranslation.ts",
+        "count": 1
+      }
+    ],
+    "zod_imports": [
+      {
+        "path": "server/src/http/routes/account.ts",
+        "count": 1
+      },
+      {
+        "path": "server/src/http/routes/assemblies.ts",
+        "count": 1
+      },
+      {
+        "path": "server/src/http/routes/auth.ts",
+        "count": 1
+      },
+      {
+        "path": "server/src/http/routes/conversations.ts",
+        "count": 1
+      },
+      {
+        "path": "server/src/http/routes/endorsements.ts",
+        "count": 1
+      },
+      {
+        "path": "server/src/http/routes/providerConnections.ts",
+        "count": 1
+      },
+      {
+        "path": "server/src/http/validation.ts",
+        "count": 1
+      }
+    ],
+    "zustand": [
+      {
+        "path": "mobile/src/features/account/session.ts",
+        "count": 1
+      },
+      {
+        "path": "mobile/src/features/commentary/context.ts",
+        "count": 1
+      },
+      {
+        "path": "mobile/src/store/useAppStore.ts",
+        "count": 1
+      }
+    ],
+    "ProductClient": [
+      {
+        "path": "mobile/src/features/account/session.ts",
+        "count": 1
+      },
+      {
+        "path": "mobile/src/services/productClient.test.ts",
+        "count": 5
+      },
+      {
+        "path": "shared/productClient.ts",
+        "count": 1
+      },
+      {
+        "path": "web/src/app/services/accountSession.test.ts",
+        "count": 5
+      },
+      {
+        "path": "web/src/app/services/productApi.ts",
+        "count": 1
+      }
+    ],
+    "biome_ignore": [
+      {
+        "path": "web/src/app/components/KoFiWidget.tsx",
+        "count": 1
+      },
+      {
+        "path": "web/src/app/components/NeumorphCard.tsx",
+        "count": 1
+      },
+      {
+        "path": "web/src/app/hooks/useCalendarWorkspace.ts",
+        "count": 2
+      },
+      {
+        "path": "web/src/app/services/staticData.ts",
+        "count": 2
+      }
+    ],
+    "workaround_comments": [
+      {
+        "path": "server/tests/routes.test.ts",
+        "count": 1
+      }
+    ]
+  },
+  "bore_directories": [
+    "api/lib/bore",
+    "api/test/bore",
+    "server/lib/bore"
+  ],
+  "feature_and_component_dirs": {
+    "web/src/app/features": [
+      "account",
+      "assemblies",
+      "commentary",
+      "product",
+      "reader"
+    ],
+    "mobile/src/features": [
+      "account",
+      "assemblies",
+      "calendar",
+      "commentary",
+      "product"
+    ],
+    "web/src/app/components": [
+      "AccessCodeInput.tsx",
+      "AccountScreen.tsx",
+      "AccountSettings.tsx",
+      "AppUXFlows.tsx",
+      "Assemblies.test.tsx",
+      "AssembliesEntry.tsx",
+      "AssembliesWorkspace.tsx",
+      "BottomSheet.tsx",
+      "CalendarCityNotice.tsx",
+      "CalendarDayPill.tsx",
+      "CalendarPanel.test.tsx",
+      "CalendarPanel.tsx",
+      "CityChooser.tsx",
+      "CommentarySourcesScreen.tsx",
+      "ConnectionErrorPage.tsx",
+      "DavarLogo.tsx",
+      "DesignSystemExport.tsx",
+      "DonateScreen.tsx",
+      "DonationPage.tsx",
+      "ErrorBoundary.tsx",
+      "FeaturesScreen.tsx",
+      "FeedbackScreen.tsx",
+      "FullChapterView.test.tsx",
+      "FullChapterView.tsx",
+      "HomeScreen.tsx",
+      "KoFiWidget.tsx",
+      "LegalScreen.tsx",
+      "MobileDesignSystemGuide.tsx",
+      "NavigationBar.test.tsx",
+      "NavigationBar.tsx",
+      "NeumorphButton.tsx",
+      "NeumorphCard.tsx",
+      "NotFoundPage.tsx",
+      "OnboardingWordHint.tsx",
+      "PillToggle.tsx",
+      "ProductScreen.tsx",
+      "ResourcePage.tsx",
+      "SandboxBanner.tsx",
+      "SettingsResources.tsx",
+      "SettingsScreen.tsx",
+      "SourcesScreen.tsx",
+      "SupportScreen.tsx",
+      "SwipeIndicator.tsx",
+      "VerseDisplay.tsx",
+      "WordCard.tsx",
+      "ui"
+    ],
+    "mobile/src/components": [
+      "BookSelectorSheet.tsx",
+      "ErrorBoundary.tsx",
+      "FullChapterView.tsx",
+      "GreekAttribution.tsx",
+      "NavigationSheet.tsx",
+      "NumberGridBottomSheet.tsx",
+      "ResourcePage.tsx",
+      "SearchResultCard.tsx",
+      "SettingsResources.tsx",
+      "VerseCard.tsx",
+      "VerseCardSkeleton.tsx",
+      "VerseSelectorSheet.tsx",
+      "WordAnalysisBottomSheet.tsx",
+      "ui"
+    ],
+    "mobile/components": [
+      "external-link.tsx",
+      "haptic-tab.tsx",
+      "parallax-scroll-view.tsx",
+      "themed-text.tsx",
+      "themed-view.tsx",
+      "ui"
+    ]
+  },
+  "http_stacks": {
+    "rails_routes": true,
+    "hono_app": true,
+    "rails_gemfile": true,
+    "server_package": true
+  },
+  "validation": {
+    "server_validation_ts": true,
+    "shared_has_zod": false
+  }
+}

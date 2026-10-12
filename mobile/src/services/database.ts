@@ -9,7 +9,10 @@ export type TranslationRow = {
   footnotes?: unknown[];
 };
 
-const db = SQLite.openDatabaseSync("davar.db");
+// Initialize lazily and asynchronously so a browser worker failure cannot crash
+// every route while modules load. Native reading uses the same SQLite file.
+let database: Promise<SQLite.SQLiteDatabase> | null = null;
+const getDatabase = () => database ??= SQLite.openDatabaseAsync("davar.db");
 
 const CURRENT_SCHEMA_VERSION = 4;
 
@@ -52,7 +55,7 @@ const executeRead = async (
 ): Promise<unknown[]> => {
   try {
     const rows = await (
-      db as unknown as {
+      (await getDatabase()) as unknown as {
         getAllAsync: (sql: string, params?: unknown[]) => Promise<unknown[]>;
       }
     ).getAllAsync(query, params);
@@ -107,7 +110,7 @@ const executeWrite = async (
   const safeParams = params.map(sanitizeParam);
   try {
     await (
-      db as unknown as {
+      (await getDatabase()) as unknown as {
         runAsync: (sql: string, params?: unknown[]) => Promise<unknown>;
       }
     ).runAsync(query, safeParams);

@@ -1,6 +1,6 @@
 import { join } from "node:path";
 
-const port = Number(process.env.HOT_DATA_PORT ?? 3004);
+const port = Number(process.env.HOT_DATA_PORT ?? 5175);
 const hostname = process.env.HOT_DATA_HOST ?? "localhost";
 const webRoot = join(import.meta.dir, "..");
 const dataRoot = join(webRoot, "public", "data");

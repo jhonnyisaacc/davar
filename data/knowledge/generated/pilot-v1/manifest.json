@@ -3,15 +3,15 @@
   "files": [
     {
       "path": "bundles/daniel/7/13.json",
-      "sha256": "4ce7284fa2743c754e65ec73573ebf3bcc38ada2133d4e503b919d80d8067b87"
+      "sha256": "901cf7d69e1f031e2d015772edc8dcde45a93ea32654326210bcc911ee417060"
     },
     {
       "path": "bundles/john/1/1.json",
-      "sha256": "a9792dcffbf7ad2d56d354abcb6ea92c4687f628e28e89d925e22ba5d102d41f"
+      "sha256": "63b9c1573d0a95d663c85610940ff1e5aac82edd0f3be7af87e881c2437a97eb"
     },
     {
       "path": "bundles/john/1/51.json",
-      "sha256": "aedea9480e6fd314e9dfae9416eb92efcc1405bbae9d5b154432e109a2660299"
+      "sha256": "1d86efe19fa48789e4d946615328ae513c4b5a5f90314b27f1fb67f824fca0bb"
     },
     {
       "path": "records/records.json",
@@ -19,7 +19,7 @@
     }
   ],
   "generator_version": "1.0.0",
-  "input_manifest_digest": "63103bfa37038b3d44da20a722d9cfc3e06340dda37ea1c4df48c0bb6a4f128e",
+  "input_manifest_digest": "c76ee34825d2db69c93aa847b0e08ed8b10459222e91608a225088c927f97981",
   "inputs": [
     {
       "id": "greek-lexicon",

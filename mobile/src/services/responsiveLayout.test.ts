@@ -1,5 +1,4 @@
 // Bun supplies this runtime module; Expo lint does not resolve it.
-// eslint-disable-next-line import/no-unresolved
 import { expect, test } from "bun:test";
 import { getResponsiveLayout } from "./responsiveLayout";
 

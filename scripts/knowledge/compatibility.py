@@ -3,11 +3,15 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
+import re
 import subprocess
 import tarfile
 import tempfile
 from pathlib import Path
+
+import yaml
 
 from .build import build
 from .core import ROOT, SOURCES, cli_dest, digest, encoded, read_json
@@ -23,6 +27,15 @@ WORKFLOW = ".github/workflows/knowledge-foundation.yml"
 SHAUL_REVISION = "8c94b0fe9eca817e22340430309801d0ef76125b"
 SHAUL_ORIGIN = "https://github.com/jhonnyisaacc/shaul.git"
 KNOWLEDGE_CODE = "scripts/knowledge/"
+KNOWLEDGE_TESTS = "tests/test_knowledge_"
+MOVED_PYTEST = frozenset(
+    {
+        "tests/test_delitzsch_review.py",
+        "tests/test_greek_importer.py",
+        "tests/test_greek_release.py",
+        "tests/test_merge_strongs.py",
+    }
+)
 
 
 def run(args, cwd=ROOT, env=None):
@@ -34,6 +47,145 @@ def fetch_shaul(destination: Path):
     run(["git", "remote", "add", "origin", SHAUL_ORIGIN], cwd=destination)
     run(["git", "fetch", "--depth", "1", "origin", SHAUL_REVISION], cwd=destination)
     run(["git", "checkout", "--quiet", "FETCH_HEAD"], cwd=destination)
+
+
+def publication_compatible(path: str, before: bytes, after: bytes) -> bool:
+    """Permit only the optional publication extension and metadata-only rehashes."""
+    if path == "contracts/biblical-knowledge/v1/README.md":
+        return after.startswith(before)
+    schema = "contracts/biblical-knowledge/v1/manifest.schema.json"
+    pilot = "data/knowledge/generated/pilot-v1/"
+    if path != schema and not (path.startswith(pilot + "bundles/") or path == pilot + "manifest.json"):
+        return False
+    try:
+        old, new = json.loads(before), json.loads(after)
+        if path == schema:
+            extension = new.get("properties", {}).pop("artifacts", None)
+            expected = {"type": "array", "items": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/artifact.schema.json"}}
+            return extension == expected and new == old
+        for payload in (old, new):
+            payload.pop("input_manifest_digest", None)
+            if path == pilot + "manifest.json":
+                for entry in payload.get("files", []):
+                    entry.pop("sha256", None)
+        return old == new
+    except (ValueError, TypeError, AttributeError):
+        return False
+
+
+def moved_pytest_step(step) -> bool:
+    """True when the step only runs pytest files owned by another workflow."""
+    if not isinstance(step, dict) or set(step) != {"run"}:
+        return False
+    parts = str(step.get("run", "")).split()
+    if parts[:3] != ["python", "-m", "pytest"]:
+        return False
+    files = [part for part in parts[3:] if part != "-q"]
+    return bool(files) and set(files) <= MOVED_PYTEST
+
+
+def timeout_compatible(old_job: dict, new_job: dict) -> bool:
+    """A missing timeout may be added. An existing timeout may not shrink."""
+    old_timeout = old_job.get("timeout-minutes")
+    new_timeout = new_job.get("timeout-minutes")
+    if old_timeout is None:
+        return True
+    if not isinstance(old_timeout, int) or not isinstance(new_timeout, int):
+        return False
+    return new_timeout >= old_timeout
+
+
+def workflow_change_additive(before: bytes, after: bytes) -> bool:
+    """Allow workflow edits that keep or widen CI coverage.
+
+    Trigger paths may only grow. A job may gain timeout-minutes, and an
+    existing timeout may not shrink. Pytest files owned by Besorah quality or
+    Greek source quality may leave this workflow. Any other removed path,
+    dropped command, or toolchain change fails closed.
+    """
+    # NOTE: YAML 1.1 parses the `on:` trigger key as boolean True. Normalize it
+    # so the coverage comparison below sees the real trigger config.
+    def load(payload: bytes):
+        try:
+            doc = yaml.safe_load(payload)
+        except Exception:
+            return None
+        if not isinstance(doc, dict):
+            return None
+        if True in doc and "on" not in doc:
+            doc["on"] = doc.pop(True)
+        return doc
+
+    old, new = load(before), load(after)
+    if old is None or new is None:
+        return False
+    old_on, new_on = old.get("on", {}) or {}, new.get("on", {}) or {}
+    for trigger in ("pull_request", "push"):
+        old_trigger = old_on.get(trigger, {}) or {}
+        new_trigger = new_on.get(trigger, {}) or {}
+        if set(old_trigger.get("paths", []) or []) - set(
+            new_trigger.get("paths", []) or []
+        ):
+            return False
+        if {k: v for k, v in old_trigger.items() if k != "paths"} != {
+            k: v for k, v in new_trigger.items() if k != "paths"
+        }:
+            return False
+    if {k: v for k, v in old_on.items() if k not in ("pull_request", "push")} != {
+        k: v for k, v in new_on.items() if k not in ("pull_request", "push")
+    }:
+        return False
+
+    def step_covers(old_step, new_step) -> bool:
+        if not isinstance(old_step, dict) or not isinstance(new_step, dict):
+            return old_step == new_step
+        if {k: v for k, v in old_step.items() if k != "run"} != {
+            k: v for k, v in new_step.items() if k != "run"
+        }:
+            return False
+        if "run" not in old_step:
+            return "run" not in new_step
+        return "run" in new_step and set(str(old_step["run"]).split()) <= set(
+            str(new_step["run"]).split()
+        )
+
+    def steps_compatible(old_steps, new_steps) -> bool:
+        # Old steps must survive in order; added steps are widening, so allowed.
+        pos = 0
+        for old_step in old_steps:
+            if moved_pytest_step(old_step):
+                continue
+            while pos < len(new_steps) and not step_covers(
+                old_step, new_steps[pos]
+            ):
+                pos += 1
+            if pos == len(new_steps):
+                return False
+            pos += 1
+        return True
+
+    old_jobs, new_jobs = old.get("jobs", {}) or {}, new.get("jobs", {}) or {}
+    if set(old_jobs) - set(new_jobs):
+        return False
+    for name, old_job in old_jobs.items():
+        new_job = new_jobs[name]
+        if {k: v for k, v in old_job.items() if k not in ("steps", "timeout-minutes")} != {
+            k: v for k, v in new_job.items() if k not in ("steps", "timeout-minutes")
+        }:
+            return False
+        if not timeout_compatible(old_job, new_job):
+            return False
+        if not steps_compatible(
+            old_job.get("steps", []) or [], new_job.get("steps", []) or []
+        ):
+            return False
+
+    rest = {
+        key for key in list(old) + list(new) if key not in ("on", "jobs")
+    }
+    return all(old.get(key) == new.get(key) for key in rest) and set(
+        k for k in old if k not in ("on", "jobs")
+    ) == set(k for k in new if k not in ("on", "jobs"))
 
 
 def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
@@ -48,6 +200,18 @@ def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
         if path.startswith(KNOWLEDGE_CODE) and status != "A":
             knowledge_edits = True
             continue
+        # Companion tests track scripts/knowledge/. Edits stay gated by the
+        # pinned Shaul checkout below, same as knowledge script edits.
+        if path.startswith(KNOWLEDGE_TESTS) and status == "M":
+            knowledge_edits = True
+            continue
+        if status == "M":
+            before = subprocess.check_output(["git", "show", f"{base}:{path}"], cwd=root)
+            after = (root / path).read_bytes()
+            if path == WORKFLOW and workflow_change_additive(before, after):
+                continue
+            if publication_compatible(path, before, after):
+                continue
         if status != "A":
             raise ValueError("Non-additive or out-of-scope change: " + line)
     untracked = subprocess.check_output(
@@ -84,6 +248,15 @@ def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
         print("Additive file boundary and legacy import isolation: OK")
 
 
+_GREEK_SHARD = re.compile(r"^greek/.+/lexicon/G\d+\.json$")
+
+
+def _greek_manifest(name: str) -> bool:
+    return name == "greek/manifest.json" or (
+        name.startswith("greek/") and name.endswith("/manifest.json")
+    )
+
+
 def tree(path: Path, *, legacy_clock=False):
     result = {}
     for file in sorted(path.rglob("*")):
@@ -91,14 +264,34 @@ def tree(path: Path, *, legacy_clock=False):
             continue
         name = file.relative_to(path).as_posix()
         data = file.read_bytes()
-        if legacy_clock and name in ("manifest.json", "version.json"):
+        if legacy_clock and (
+            name in ("manifest.json", "version.json") or _greek_manifest(name)
+        ):
             payload = read_json(file)
-            # Exactly the two pre-existing clock-derived values are excluded.
-            for key in ("version", "generated_at"):
-                payload.pop(key)
+            prepare_legacy_digest(name, payload)
             data = encoded(payload)
         result[name] = digest(data)
     return result
+
+
+def prepare_legacy_digest(name: str, payload: dict) -> None:
+    if name in ("manifest.json", "version.json"):
+        # Exactly the two pre-existing clock-derived values are excluded.
+        for key in ("version", "generated_at"):
+            payload.pop(key, None)
+    if _greek_manifest(name):
+        payload.pop("lexicon_shards", None)
+
+
+def legacy_generation_differences(expected: dict, actual: dict) -> list[str]:
+    differences = []
+    for name in sorted(expected.keys() | actual.keys()):
+        if expected.get(name) == actual.get(name):
+            continue
+        if name not in expected and _GREEK_SHARD.fullmatch(name):
+            continue
+        differences.append(name)
+    return differences
 
 
 def archive(root: Path, revision: str, destination: Path):
@@ -168,12 +361,8 @@ def legacy(base: str, root=ROOT):
                         baseline_outputs[export] = actual
                         continue
                     expected = baseline_outputs[export]
-                    if expected != actual:
-                        differences = sorted(
-                            k
-                            for k in expected.keys() | actual.keys()
-                            if expected.get(k) != actual.get(k)
-                        )
+                    differences = legacy_generation_differences(expected, actual)
+                    if differences:
                         raise ValueError(
                             "Legacy generation changed: " + repr(differences[:20])
                         )

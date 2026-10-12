@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths: ["web/**", "shared/**", "scripts/generate-static-data/**", ".github/workflows/web-ci.yml"]
   pull_request:
-    branches: [main]
+    branches: [main, feat/davar-v2, feat/preview-api-railway]
     paths: ["web/**", "shared/**", "scripts/generate-static-data/**", ".github/workflows/web-ci.yml"]
 
 permissions:
@@ -16,6 +16,7 @@ jobs:
   web_ci:
     name: web-ci
     runs-on: ubuntu-latest
+    timeout-minutes: 20
 
     steps:
       - uses: actions/checkout@v4
@@ -48,12 +49,22 @@ jobs:
       - name: Install dependencies
         run: |
           cd web
-          bun install
+          bun install --frozen-lockfile
+
+      - name: Audit web dependencies
+        run: |
+          cd web
+          bun audit || echo "::warning::Web dependency audit found vulnerabilities"
 
       - name: Run lint
         run: |
           cd web
           bun run lint
+
+      - name: Check TypeScript
+        run: |
+          cd web
+          bun x tsc --noEmit
 
       - name: Run static-data loader tests
         run: |
@@ -64,6 +75,11 @@ jobs:
         run: |
           cd web
           bun run build
+
+      - name: Run UI and service regression tests
+        run: |
+          cd web
+          bun test
 
       - name: Finalize development deployment
         if: always() && github.event_name == 'pull_request' && steps.create_deployment.outputs.deployment_id != ''

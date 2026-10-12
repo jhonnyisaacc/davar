@@ -16,7 +16,7 @@ const createStyles = (colors: ReturnType<typeof getColors>, fontSize: number) =>
       fontFamily: typography.families.hebrewScripture,
       fontSize,
       lineHeight: fontSize * typography.lineHeights.hebrewScripture,
-      color: colors.textPrimary,
+      color: colors.textHebrew,
       textAlign: "right",
       writingDirection: "rtl",
     },
