@@ -13,6 +13,7 @@ jobs:
   policy_gate:
     name: policy-gate
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Checkout code

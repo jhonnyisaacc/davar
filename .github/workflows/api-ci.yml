@@ -21,6 +21,7 @@ permissions:
 jobs:
   api:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     services:
       postgres:
         image: postgres:17
@@ -53,6 +54,7 @@ jobs:
       - run: bun test
   bore-parity:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

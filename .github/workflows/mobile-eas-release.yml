@@ -44,6 +44,7 @@ jobs:
   mobile_release:
     name: mobile-eas-release
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     environment: ${{ inputs.profile == 'production' && 'mobile-production' || 'mobile-preview' }}
 
     steps:

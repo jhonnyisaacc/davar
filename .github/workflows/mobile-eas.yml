@@ -25,6 +25,7 @@ jobs:
   publish:
     name: mobile-eas
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     env:
       EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
       BEFORE_SHA: ${{ github.event.before }}

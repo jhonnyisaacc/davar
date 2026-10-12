@@ -16,6 +16,7 @@ jobs:
   web_ci:
     name: web-ci
     runs-on: ubuntu-latest
+    timeout-minutes: 25
 
     steps:
       - uses: actions/checkout@v4
