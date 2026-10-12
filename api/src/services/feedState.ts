@@ -13,7 +13,6 @@ export interface FeedState {
 	developmentScenario: string;
 	lastAttemptAt: Date | null;
 	lastSuccessAt: Date | null;
-	syncAttempts: number;
 	details: Record<string, unknown>;
 }
 
@@ -52,7 +51,6 @@ function rowOf(row: {
 	developmentScenario: string;
 	lastAttemptAt: Date | null;
 	lastSuccessAt: Date | null;
-	syncAttempts: number;
 	details: Record<string, unknown>;
 }): FeedState {
 	return {
@@ -62,7 +60,6 @@ function rowOf(row: {
 		developmentScenario: row.developmentScenario,
 		lastAttemptAt: row.lastAttemptAt,
 		lastSuccessAt: row.lastSuccessAt,
-		syncAttempts: row.syncAttempts,
 		details: row.details ?? {},
 	};
 }
