@@ -72,6 +72,11 @@ jobs:
             sleep 3
           done
 
+      - name: Audit dependencies
+        run: |
+          cd mobile
+          bun audit || echo "::warning::Mobile dependency audit found vulnerabilities"
+
       - name: Run lint
         run: |
           cd mobile

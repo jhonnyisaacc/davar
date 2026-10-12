@@ -20,39 +20,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Detect changed paths
-        id: changes
-        uses: dorny/paths-filter@v3
-        with:
-          filters: |
-            mobile:
-              - 'mobile/**'
-            web:
-              - 'web/**'
-            shared:
-              - 'shared/**'
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
-
       - name: Secret scan
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Audit web dependencies
-        if: steps.changes.outputs.web == 'true' || steps.changes.outputs.shared == 'true'
-        run: |
-          cd web
-          bun install --frozen-lockfile
-          bun audit || echo "::warning::Web dependency audit found vulnerabilities"
-
-      - name: Audit mobile dependencies
-        if: steps.changes.outputs.mobile == 'true' || steps.changes.outputs.shared == 'true'
-        run: |
-          cd mobile
-          bun install --frozen-lockfile
-          bun audit || echo "::warning::Mobile dependency audit found vulnerabilities"
 
       - name: Report gate status
         run: |

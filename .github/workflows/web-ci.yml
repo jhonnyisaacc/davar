@@ -50,6 +50,11 @@ jobs:
           cd web
           bun install --frozen-lockfile
 
+      - name: Audit dependencies
+        run: |
+          cd web
+          bun audit || echo "::warning::Web dependency audit found vulnerabilities"
+
       - name: Run lint
         run: |
           cd web
