@@ -19,7 +19,12 @@ patterns = (
 skip_dirs = {"node_modules", ".git", "__pycache__"}
 matches = []
 
-for path in sorted(Path("api").rglob("*")):
+api_root = Path("api")
+if not api_root.is_dir():
+    print("legacy-names: api/ missing", file=sys.stderr)
+    sys.exit(1)
+
+for path in sorted(api_root.rglob("*")):
     if not path.is_file():
         continue
     if any(part in skip_dirs for part in path.parts):

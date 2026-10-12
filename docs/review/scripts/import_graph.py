@@ -174,7 +174,7 @@ def main():
     cross = []
     nodes = set()
     allowed = {
-        ("web", "shared"), ("mobile", "shared"),
+        ("web", "shared"), ("mobile", "shared"), ("api", "shared"),
         ("scripts", "shared"), ("scripts", "tools"), ("tests", "scripts"),
         ("tests", "tools"), ("web", "web"), ("mobile", "mobile"),
         ("shared", "shared"), ("scripts", "scripts"),
