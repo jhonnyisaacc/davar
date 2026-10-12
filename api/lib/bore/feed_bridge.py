@@ -1,4 +1,4 @@
-"""Adapt INMS reports to Rails persistence without changing pinned Bore rules."""
+"""Adapt INMS reports for Davar persistence without changing pinned Bore rules."""
 import json
 import sys
 from datetime import date, datetime
