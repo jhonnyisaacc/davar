@@ -209,22 +209,24 @@ export async function syncObservations(
 	const changed = entries.filter((entry) => !entry.unchanged);
 	const accepted = changed.filter((entry) => entry.parse_status === "ok");
 	const backfill = backfillForEntries(entries);
-	return db.transaction(async (tx) => {
-		const current = await lockFeedState(tx, state.id);
-		if (!current) throw new DomainError("not_found", 404);
-		if (input.ifDue) {
-			// Another sync committed while our fetch/parse ran: skip instead
-			// of importing twice. (Rails re-evaluates the full due check
-			// here, window bridge included; the timestamp comparison covers
-			// the race without I/O under the lock.)
-			const before = state.lastAttemptAt?.getTime() ?? null;
-			const after = current.last_attempt_at ? new Date(current.last_attempt_at).getTime() : null;
-			if (before !== after) return { status: current.status };
-			if (!dueAt(after ? new Date(after) : null, now, windowOpen)) {
-				return { status: current.status };
+	try {
+		return await db.transaction(async (tx) => {
+			const current = await lockFeedState(tx, state.id);
+			if (!current) throw new DomainError("not_found", 404);
+			if (input.ifDue) {
+				// Another sync committed while our fetch/parse ran: skip instead
+				// of importing twice. (Rails re-evaluates the full due check
+				// here, window bridge included; the timestamp comparison covers
+				// the race without I/O under the lock.)
+				const before = state.lastAttemptAt?.getTime() ?? null;
+				const after = current.last_attempt_at
+					? new Date(current.last_attempt_at).getTime()
+					: null;
+				if (before !== after) return { status: current.status };
+				if (!dueAt(after ? new Date(after) : null, now, windowOpen)) {
+					return { status: current.status };
+				}
 			}
-		}
-		try {
 			const report = await observationImport(
 				tx,
 				{
@@ -257,11 +259,13 @@ export async function syncObservations(
 					}
 					continue;
 				}
+				// Rails-era rows require title/raw_content/created_at NOT NULL with
+				// no DB defaults, so coalesce empties and set created_at explicitly.
 				const values = {
 					sourceUrl: entry.source_url,
-					title: entry.title ?? null,
+					title: entry.title ?? "",
 					contentHash: entry.content_hash,
-					rawContent: entry.raw_content ?? null,
+					rawContent: entry.raw_content ?? "",
 					parseStatus: entry.parse_status,
 					reason: entry.reason ?? null,
 					lastSeenAt: now,
@@ -277,6 +281,7 @@ export async function syncObservations(
 					await tx.insert(calendarSourceEntries).values({
 						source: FEED_SOURCE,
 						sourceEntryId: entry.source_entry_id,
+						createdAt: now,
 						...values,
 					});
 				}
@@ -304,20 +309,18 @@ export async function syncObservations(
 				})
 				.where(eq(calendarFeedStates.id, state.id));
 			return { status, ...details };
-		} catch (error) {
-			const code = error instanceof DomainError ? error.code : "source_unavailable";
-			await tx
-				.update(calendarFeedStates)
-				.set({
-					status: "source_unavailable",
-					lastAttemptAt: now,
-					details: { ...(current.details ?? {}), error: code },
-					updatedAt: new Date(),
-				})
-				.where(eq(calendarFeedStates.id, state.id));
-			return { status: "source_unavailable", error: code };
-		}
-	});
+		});
+	} catch (error) {
+		if (error instanceof DomainError && error.code === "not_found") throw error;
+		const code = error instanceof DomainError ? error.code : "source_unavailable";
+		return markUnavailable(
+			db,
+			state.id,
+			(state.details ?? {}) as Record<string, unknown>,
+			code,
+			now,
+		);
+	}
 }
 
 function dueAt(lastAttempt: Date | null, now: Date, windowOpen: boolean): boolean {

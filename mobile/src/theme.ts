@@ -2,6 +2,10 @@ import { I18nManager, Platform, type ViewStyle } from "react-native";
 
 export type ThemeMode = "light" | "dark";
 
+export function themeModeFromToggle(dark: boolean): ThemeMode {
+  return dark ? "dark" : "light";
+}
+
 export const getColors = (mode: ThemeMode) => {
   if (mode === "dark") {
     return {
@@ -18,6 +22,7 @@ export const getColors = (mode: ThemeMode) => {
       surfaceElevated: "#44403E",
       surfaceLightest: "#2A292E",
       textPrimary: "#FAF4E6",
+      textHebrew: "#d5c4a1",
       textSecondary: "#A89A7F",
       textTertiary: "#d5d5d5",
       border: "rgba(255,255,255,0.1)",
@@ -46,6 +51,7 @@ export const getColors = (mode: ThemeMode) => {
     surfaceElevated: "#F4EEE7",
     surfaceLightest: "#F5F5F5",
     textPrimary: "#000000",
+    textHebrew: "#000000",
     textSecondary: "#707070",
     textTertiary: "#9a9a9a",
     border: "rgba(0,0,0,0.08)",
