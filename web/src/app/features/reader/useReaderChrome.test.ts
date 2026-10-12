@@ -59,6 +59,7 @@ const narrowSingleVerse = {
 	focusWithin: false,
 	menuOpen: false,
 	scrollHidden: false,
+	scrolledDown: false,
 };
 
 test("narrow single verse with a mouse shows the bar only while the pointer, keyboard focus, or a menu holds it", () => {
@@ -96,4 +97,16 @@ test("touch devices, wide windows, and full chapter keep the scroll-driven bar",
 	expect(
 		readerNavPresence({ ...narrowSingleVerse, currentScreen: "widgets" }),
 	).toBe("shown");
+});
+
+test("wide single verse hides the bar once a long verse scrolls under it", () => {
+	const wideSingleVerse = { ...narrowSingleVerse, isMobile: false };
+	expect(readerNavPresence(wideSingleVerse)).toBe("shown");
+	const scrolled = { ...wideSingleVerse, scrolledDown: true };
+	expect(readerNavPresence(scrolled)).toBe("awaitingHover");
+	expect(readerNavPresence({ ...scrolled, pointerOver: true })).toBe("shown");
+	expect(readerNavPresence({ ...scrolled, canHover: false })).toBe("shown");
+	expect(readerNavPresence({ ...scrolled, showFullChapter: true })).toBe(
+		"shown",
+	);
 });

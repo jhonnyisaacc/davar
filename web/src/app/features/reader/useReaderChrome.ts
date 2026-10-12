@@ -39,6 +39,7 @@ export function readerNavPresence({
 	focusWithin,
 	menuOpen,
 	scrollHidden,
+	scrolledDown,
 }: {
 	isMobile: boolean;
 	currentScreen: RouteScreen;
@@ -48,9 +49,13 @@ export function readerNavPresence({
 	focusWithin: boolean;
 	menuOpen: boolean;
 	scrollHidden: boolean;
+	scrolledDown: boolean;
 }): ReaderNavPresence {
 	const revealsOnHover =
-		canHover && isMobile && currentScreen === "verse" && !showFullChapter;
+		canHover &&
+		(isMobile || scrolledDown) &&
+		currentScreen === "verse" &&
+		!showFullChapter;
 	if (!revealsOnHover) return scrollHidden ? "hiddenByScroll" : "shown";
 	return pointerOver || focusWithin || menuOpen ? "shown" : "awaitingHover";
 }
@@ -79,6 +84,7 @@ export function useReaderChrome({
 	triggerScrollJump: () => void;
 }) {
 	const [hideNavOnScroll, setHideNavOnScroll] = useState(false);
+	const [scrolledDown, setScrolledDown] = useState(false);
 	const lastScrollYRef = useRef(0);
 	const [canHover, setCanHover] = useState(false);
 	const [pointerOverNav, setPointerOverNav] = useState(false);
@@ -116,6 +122,17 @@ export function useReaderChrome({
 	}, [tracksScroll]);
 
 	useEffect(() => {
+		if (!isScrollNavigationActive) {
+			setScrolledDown(false);
+			return;
+		}
+		const handleScroll = () => setScrolledDown(window.scrollY > NAV_SCROLL_TOP);
+		handleScroll();
+		window.addEventListener("scroll", handleScroll, { passive: true });
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, [isScrollNavigationActive]);
+
+	useEffect(() => {
 		const media = window.matchMedia(HOVER_POINTER_QUERY);
 		const update = () => setCanHover(media.matches);
 		update();
@@ -151,6 +168,7 @@ export function useReaderChrome({
 		focusWithin: keyboardFocusInNav,
 		menuOpen,
 		scrollHidden: hideNavOnScroll,
+		scrolledDown,
 	});
 
 	// A focused menu input is removed without a blur event when its menu closes.
