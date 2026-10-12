@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved -- Bun test runner built-in
 import { expect, test } from "bun:test";
 import { authReturnUri } from "@davar/shared/authReturnUri";
 test("native and Expo web select their own callback", () => {

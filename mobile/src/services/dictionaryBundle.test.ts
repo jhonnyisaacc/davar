@@ -1,5 +1,4 @@
 // Bun provides this test module at runtime; Expo's resolver does not index it.
-// eslint-disable-next-line import/no-unresolved
 import { describe, expect, test } from "bun:test";
 import {
   buildLexiconEntries,

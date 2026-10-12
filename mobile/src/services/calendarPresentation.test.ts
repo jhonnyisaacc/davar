@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved
 import { describe, expect, test } from "bun:test";
 import {
   annualMoadim,

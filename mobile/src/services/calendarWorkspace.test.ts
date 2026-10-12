@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved -- Bun provides its built-in test module.
 import { expect, test } from "bun:test";
 import { createCalendarWorkspace } from "@davar/shared/calendarWorkspace";
 import type { CalendarCity } from "@davar/shared/calendarClient";

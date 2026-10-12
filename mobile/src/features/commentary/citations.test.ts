@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved -- Bun test runner built-in
 import { expect, test } from "bun:test";
 import { commentaryCitationLabel } from "@davar/shared/commentaryCitations";
 

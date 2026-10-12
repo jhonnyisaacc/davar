@@ -1,5 +1,4 @@
 // Bun provides this test module at runtime; Expo's resolver does not index it.
-// eslint-disable-next-line import/no-unresolved
 import { afterEach, describe, expect, mock, test } from "bun:test";
 
 mock.module("@react-native-async-storage/async-storage", () => ({
