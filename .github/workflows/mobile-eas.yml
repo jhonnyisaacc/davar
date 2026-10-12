@@ -1,17 +1,9 @@
-# Publish mobile to EAS from main only.
-# The workflow runs on a push to main that changes mobile/** or shared/**, and on workflow_dispatch.
-# It does not run on pull_request.
-# A JS-only diff, including shared/**, runs `eas update` and skips build and submit.
-# A native diff runs `eas build`, then `eas submit`, and skips the OTA update.
-# Native means eas.json, the app version, runtimeVersion, app.json plugins,
-# permissions, icons, the iOS bundle identifier, the Android package name,
-# or a direct native dependency in package.json.
-# mobile/ios and mobile/android are gitignored, so a normal diff does not include them.
-# Android submit checks GOOGLE_PLAY_SERVICE_ACCOUNT_JSON before eas build.
-# After the build, it writes that JSON to
-# mobile/secrets/google-play-service-account.json with mode 600, then deletes it.
-# Repository secret EXPO_TOKEN is required. Android submit also requires
-# GOOGLE_PLAY_SERVICE_ACCOUNT_JSON. This file does not store either secret.
+# Publish mobile from main only.
+# Push to main under mobile/** or shared/**, and workflow_dispatch.
+# The publish job does not run on pull_request.
+# A pull_request job self-checks the classifier and the Play JSON gate.
+# JS-only diffs run eas update. Native config runs eas build and eas submit.
+# Repository secrets: EXPO_TOKEN, and GOOGLE_PLAY_SERVICE_ACCOUNT_JSON for Android submit.
 
 name: Mobile EAS
 
@@ -22,19 +14,219 @@ on:
       - "mobile/**"
       - "shared/**"
   workflow_dispatch:
-
-concurrency:
-  group: mobile-eas-main
-  cancel-in-progress: false
+  pull_request:
+    paths:
+      - ".github/workflows/mobile-eas.yml"
+      - ".github/workflows/mobile-eas-release.yml"
 
 permissions:
   contents: read
 
 jobs:
+  play-json-self-check:
+    name: play-json-self-check
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Classifier and Play JSON self-check
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          python3 - << 'PY'
+          import os
+          import pathlib
+          import re
+          import subprocess
+          import sys
+          import textwrap
+
+          auto = pathlib.Path(".github/workflows/mobile-eas.yml").read_text()
+          rel = pathlib.Path(".github/workflows/mobile-eas-release.yml").read_text()
+
+          def extract(text, start, end):
+              blocks = []
+              buf = None
+              for line in text.splitlines(keepends=True):
+                  stripped = line.lstrip(" \t").strip()
+                  if stripped == start:
+                      if buf is not None:
+                          sys.exit("nested %s" % start)
+                      buf = []
+                      continue
+                  if stripped == end:
+                      if buf is None:
+                          sys.exit("end without start %s" % end)
+                      blocks.append("".join(buf))
+                      buf = None
+                      continue
+                  if buf is not None:
+                      buf.append(line)
+              if buf is not None:
+                  sys.exit("unclosed %s" % start)
+              if len(blocks) != 1:
+                  sys.exit("%s count %s" % (start, len(blocks)))
+              return textwrap.dedent(blocks[0])
+
+          classify = extract(auto, "# CLASSIFY_START", "# CLASSIFY_END")
+          play_auto = extract(auto, "# PLAYCHECK_START", "# PLAYCHECK_END")
+          play_rel = extract(rel, "# PLAYCHECK_START", "# PLAYCHECK_END")
+          guard = extract(auto, "# MAINGUARD_START", "# MAINGUARD_END")
+          if play_auto != play_rel:
+              sys.exit("Play JSON helpers differ between Mobile EAS workflows")
+          pathlib.Path("/tmp/classify-mobile-eas.py").write_text(classify)
+          pathlib.Path("/tmp/playcheck.sh").write_text(play_auto)
+          pathlib.Path("/tmp/mainguard.sh").write_text(guard)
+          env = os.environ.copy()
+          env["SELF_TEST"] = "1"
+          subprocess.check_call([sys.executable, "/tmp/classify-mobile-eas.py"], env=env)
+          print("extracted-classifier-ok")
+          PY
+
+          grep -F 'GOOGLE_PLAY_SERVICE_ACCOUNT_JSON' docs/github-environments-setup.md >/dev/null
+          grep -F 'mobile/secrets/google-play-service-account.json' docs/github-environments-setup.md >/dev/null
+          grep -F '232e7627-d0c9-4b88-976e-b4855beb322e' docs/github-environments-setup.md >/dev/null
+          grep -F 'releaseStatus' docs/github-environments-setup.md >/dev/null
+          grep -F 'shared/**' .github/workflows/mobile-eas.yml >/dev/null
+          grep -F 'Remove Play service account' .github/workflows/mobile-eas.yml >/dev/null
+          grep -F 'Remove Play service account' .github/workflows/mobile-eas-release.yml >/dev/null
+
+          python3 - << 'PY'
+          import json
+          data = json.load(open("mobile/eas.json", encoding="utf-8"))
+          android = data["submit"]["production"]["android"]
+          if android["track"] != "production":
+              raise SystemExit("track drifted")
+          if android["releaseStatus"] != "completed":
+              raise SystemExit("releaseStatus drifted")
+          if android["serviceAccountKeyPath"] != "./secrets/google-play-service-account.json":
+              raise SystemExit("service account path drifted")
+          print("eas-json-production-track-ok")
+          PY
+
+          guard_out=$(mktemp)
+          set +e
+          GITHUB_REF=refs/heads/chore/eas-submit bash /tmp/mainguard.sh > "$guard_out"
+          guard_status=$?
+          set -e
+          if [ "$guard_status" -eq 0 ]; then
+            echo "main guard allowed a non-main ref"
+            exit 1
+          fi
+          grep -F 'No Expo command was called.' "$guard_out" >/dev/null
+          if grep -F 'eas ' "$guard_out" >/dev/null; then
+            echo "main guard invoked eas"
+            exit 1
+          fi
+          GITHUB_REF=refs/heads/main bash /tmp/mainguard.sh
+
+          work=$(mktemp -d)
+          (
+            cd "$work"
+            # shellcheck disable=SC1091
+            source /tmp/playcheck.sh
+            fixture='{"type":"service_account","client_email":"fixture@example.com","private_key":"fixture"}'
+
+            if needs_android_play_json "build" "android"; then
+              echo "build without submit required Play JSON"
+              exit 1
+            fi
+            if needs_android_play_json "update" "all"; then
+              echo "update required Play JSON"
+              exit 1
+            fi
+            if needs_android_play_json "build-and-submit" "ios"; then
+              echo "ios submit required Play JSON"
+              exit 1
+            fi
+            needs_android_play_json "build-and-submit" "android"
+            needs_android_play_json "build-and-submit" "all"
+
+            export GOOGLE_PLAY_SERVICE_ACCOUNT_JSON="$fixture"
+            if needs_android_play_json "build-and-submit" "ios"; then
+              write_play_json
+            fi
+            if [ -e mobile/secrets/google-play-service-account.json ]; then
+              echo "iOS-only submit wrote the Play JSON"
+              exit 1
+            fi
+
+            unset GOOGLE_PLAY_SERVICE_ACCOUNT_JSON
+            eas() { echo eas-called > eas.flag; }
+            if needs_android_play_json "build-and-submit" "android"; then
+              if write_play_json; then
+                eas submit --platform android
+              fi
+            fi
+            if [ -e eas.flag ]; then
+              echo "eas submit ran without the Play secret"
+              exit 1
+            fi
+            if [ -e mobile/secrets/google-play-service-account.json ]; then
+              echo "missing secret still wrote a Play JSON file"
+              exit 1
+            fi
+
+            export GOOGLE_PLAY_SERVICE_ACCOUNT_JSON="$fixture"$'\n'
+            umask 022
+            start=$(date +%s%3N)
+            write_play_json
+            end=$(date +%s%3N)
+            elapsed=$((end - start))
+            echo "play-json-write-ms=${elapsed}"
+            if [ "$elapsed" -ge 5000 ]; then
+              echo "Play JSON write took ${elapsed}ms"
+              exit 1
+            fi
+            mode=$(stat -c '%a' mobile/secrets/google-play-service-account.json)
+            if [ "$mode" != "600" ]; then
+              echo "mode ${mode}"
+              exit 1
+            fi
+            chmod 644 mobile/secrets/google-play-service-account.json
+            if check_play_json mobile/secrets/google-play-service-account.json; then
+              echo "mode 644 passed"
+              exit 1
+            fi
+            chmod 640 mobile/secrets/google-play-service-account.json
+            if check_play_json mobile/secrets/google-play-service-account.json; then
+              echo "mode 640 passed"
+              exit 1
+            fi
+            printf '%s' 'not-json' > mobile/secrets/google-play-service-account.json
+            chmod 600 mobile/secrets/google-play-service-account.json
+            if check_play_json mobile/secrets/google-play-service-account.json; then
+              echo "invalid json passed"
+              exit 1
+            fi
+            printf '%s' '{}' > mobile/secrets/google-play-service-account.json
+            chmod 600 mobile/secrets/google-play-service-account.json
+            if check_play_json mobile/secrets/google-play-service-account.json; then
+              echo "empty object passed"
+              exit 1
+            fi
+            rm -f mobile/secrets/google-play-service-account.json
+            if check_play_json mobile/secrets/google-play-service-account.json; then
+              echo "missing file passed"
+              exit 1
+            fi
+            rm -rf mobile eas.flag
+          )
+          rm -rf "$work" /tmp/playcheck.sh /tmp/mainguard.sh /tmp/classify-mobile-eas.py "$guard_out"
+          echo "play-json-self-check-ok"
+
   publish:
     name: mobile-eas
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 120
+    concurrency:
+      group: mobile-eas-main
+      cancel-in-progress: false
     env:
       EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
       BEFORE_SHA: ${{ github.event.before }}
@@ -51,11 +243,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-
+          # MAINGUARD_START
           if [ "${GITHUB_REF}" != "refs/heads/main" ]; then
             echo "::error::EAS commands run only on refs/heads/main (current: ${GITHUB_REF}). No Expo command was called."
             exit 1
           fi
+          # MAINGUARD_END
 
           if [ -z "${EXPO_TOKEN:-}" ]; then
             echo "::error::Repository secret EXPO_TOKEN is missing. Create an Expo access token and save it as the GitHub repository secret EXPO_TOKEN. Do not commit the token."
@@ -73,206 +266,658 @@ jobs:
             after="$(git rev-parse HEAD)"
           fi
 
-          echo "Classifying ${before}..${after}"
-          files=()
-          while IFS= read -r line; do
-            if [ -n "${line}" ]; then
-              files+=("${line}")
-            fi
-          done < <(git diff --name-only "${before}" "${after}" -- mobile shared)
-
-          native=0
-          js=0
-          for file in "${files[@]+"${files[@]}"}"; do
-            case "${file}" in
-              # These directories are gitignored. The globs match only a force-added tree.
-              mobile/ios/*|mobile/android/*|mobile/eas.json)
-                native=1
-                ;;
-              mobile/app.json|mobile/package.json|mobile/app.config.js|mobile/app.config.ts)
-                js=1
-                ;;
-              *.m|*.mm|*.swift|*.kt|*.kts|*.java|*.gradle|*.pbxproj)
-                native=1
-                ;;
-              *.md)
-                ;;
-              mobile/*|shared/*)
-                js=1
-                ;;
-            esac
-            base="$(basename "${file}")"
-            case "${base}" in
-              Podfile|Podfile.lock|AndroidManifest.xml|Info.plist|Expo.plist)
-                native=1
-                ;;
-            esac
-          done
-
-          config_class="$(python3 - "${before}" "${after}" <<'PY'
+          export BEFORE="${before}"
+          export AFTER="${after}"
+          echo "Classifying ${BEFORE}..${AFTER}"
+          mode="$(python3 - << 'PY'
+          # CLASSIFY_START
           import json
+          import os
+          import re
+          import shutil
           import subprocess
           import sys
+          import tempfile
+          import time
 
-          before_rev = sys.argv[1]
-          after_rev = sys.argv[2]
+          CONFIG_FILES = {"mobile/app.config.js", "mobile/app.config.ts"}
+          NATIVE_SEGMENTS = {
+              "plugins",
+              "permissions",
+              "blockedPermissions",
+              "icon",
+              "adaptiveIcon",
+              "favicon",
+              "splash",
+              "infoPlist",
+              "entitlements",
+              "googleServicesFile",
+              "bundleIdentifier",
+          }
+          ASSET_KEYS = {
+              "icon",
+              "favicon",
+              "foregroundImage",
+              "monochromeImage",
+              "backgroundImage",
+              "image",
+          }
+          JS_ONLY_DEPS = {
+              "react-native-web",
+              "react-native-markdown-display",
+              "react-native-circular-progress",
+          }
+          NATIVE_BASENAMES = {
+              "Podfile",
+              "Podfile.lock",
+              "AndroidManifest.xml",
+              "Info.plist",
+              "Expo.plist",
+          }
+          CONFIG_NATIVE_RE = re.compile(
+              r"""(?m)^[+-](?![+-]).*(?:plugins|permissions|blockedPermissions|adaptiveIcon|favicon|infoPlist|entitlements|googleServicesFile|bundleIdentifier|"icon"|"splash")"""
+          )
+          CONFIG_VERSION_RE = re.compile(
+              r"""(?m)^[+-](?![+-]).*"(?:version|runtimeVersion)"\s*:"""
+          )
 
-          def load(rev, path):
+
+          def flatten(obj, prefix=()):
+              if isinstance(obj, dict):
+                  if not obj:
+                      yield prefix, "dict:"
+                      return
+                  for key in sorted(obj):
+                      yield from flatten(obj[key], prefix + (key,))
+              elif isinstance(obj, list):
+                  yield prefix, "list:" + json.dumps(obj, sort_keys=True, separators=(",", ":"))
+              else:
+                  yield prefix, "val:" + json.dumps(obj)
+
+
+          def changed_paths(before, after):
+              before_map = dict(flatten(before or {}))
+              after_map = dict(flatten(after or {}))
+              for path in set(before_map) | set(after_map):
+                  if before_map.get(path) != after_map.get(path):
+                      yield path
+
+
+          def json_is_native(before, after):
+              for path in changed_paths(before, after):
+                  segments = set(path)
+                  if segments & NATIVE_SEGMENTS:
+                      return True
+                  if "version" in segments or "runtimeVersion" in segments:
+                      return True
+                  if "package" in segments and "android" in segments:
+                      return True
+              return False
+
+
+          def is_native_dep(name):
+              if name in JS_ONLY_DEPS:
+                  return False
+              if name in {"expo", "react-native"}:
+                  return True
+              return name.startswith(
+                  (
+                      "expo-",
+                      "@expo/",
+                      "react-native-",
+                      "@react-native/",
+                      "@react-native-",
+                  )
+              )
+
+
+          def dep_map(pkg):
+              if not isinstance(pkg, dict):
+                  return {}
+              deps = pkg.get("dependencies") or {}
+              if not isinstance(deps, dict):
+                  return {}
+              return deps
+
+
+          def native_dep_changed(before, after):
+              before_deps = dep_map(before)
+              after_deps = dep_map(after)
+              for name in set(before_deps) | set(after_deps):
+                  if is_native_dep(name) and before_deps.get(name) != after_deps.get(name):
+                      return True
+              return False
+
+
+          def normalize_asset(value):
+              if not isinstance(value, str):
+                  return None
+              if value.startswith(("http://", "https://", "data:")):
+                  return None
+              if value.startswith("./"):
+                  value = value[2:]
+              if not value or value.startswith("/"):
+                  return None
+              if "/" not in value and not value.endswith(
+                  (".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg")
+              ):
+                  return None
+              if not value.startswith("mobile/"):
+                  value = "mobile/" + value
+              return value
+
+
+          def collect_assets(obj, found):
+              if isinstance(obj, dict):
+                  for key, value in obj.items():
+                      if key in ASSET_KEYS:
+                          normalized = normalize_asset(value)
+                          if normalized:
+                              found.add(normalized)
+                      collect_assets(value, found)
+              elif isinstance(obj, list):
+                  for item in obj:
+                      collect_assets(item, found)
+
+
+          def config_is_native(diff):
+              if not diff:
+                  return False
+              if CONFIG_VERSION_RE.search(diff):
+                  return True
+              return CONFIG_NATIVE_RE.search(diff) is not None
+
+
+          def classify(files, before_app, after_app, before_pkg, after_pkg, config_diff):
+              native = False
+              js = False
+              for file in files:
+                  if file.startswith("shared/"):
+                      if not file.endswith(".md"):
+                          js = True
+                      continue
+                  if not file.startswith("mobile/"):
+                      continue
+                  base = os.path.basename(file)
+                  if (
+                      file.startswith("mobile/ios/")
+                      or file.startswith("mobile/android/")
+                      or file == "mobile/eas.json"
+                  ):
+                      native = True
+                      continue
+                  if file.endswith(
+                      (".m", ".mm", ".swift", ".kt", ".kts", ".java", ".gradle", ".pbxproj")
+                  ):
+                      native = True
+                  if base in NATIVE_BASENAMES:
+                      native = True
+                  if file.endswith(".md"):
+                      continue
+                  if file == "mobile/app.json":
+                      if json_is_native(before_app, after_app):
+                          native = True
+                      else:
+                          js = True
+                      continue
+                  if file in CONFIG_FILES:
+                      js = True
+                      if config_is_native(config_diff):
+                          native = True
+                      continue
+                  if file == "mobile/package.json":
+                      js = True
+                      if native_dep_changed(before_pkg, after_pkg):
+                          native = True
+                      before_version = (before_pkg or {}).get("version")
+                      after_version = (after_pkg or {}).get("version")
+                      if before_version != after_version:
+                          native = True
+                      continue
+                  js = True
+
+              assets = set()
+              collect_assets(before_app, assets)
+              collect_assets(after_app, assets)
+              if assets.intersection(files):
+                  native = True
+
+              if native:
+                  return "build"
+              if js:
+                  return "update"
+              return "skip"
+
+
+          def read_git_file(rev, path, cwd):
               proc = subprocess.run(
-                  ["git", "show", f"{rev}:{path}"],
+                  ["git", "show", "%s:%s" % (rev, path)],
+                  cwd=cwd,
                   capture_output=True,
               )
               if proc.returncode != 0:
                   return None
-              try:
-                  return json.loads(proc.stdout)
-              except json.JSONDecodeError:
-                  return "broken"
+              return proc.stdout.decode()
 
-          def slot(doc, *keys):
-              if not isinstance(doc, dict):
+
+          def parse_json(text, label, changed):
+              if text is None:
                   return None
-              cur = doc
-              for key in keys:
-                  if not isinstance(cur, dict) or key not in cur:
-                      return None
-                  cur = cur[key]
-              return cur
+              try:
+                  return json.loads(text)
+              except json.JSONDecodeError:
+                  if changed:
+                      raise SystemExit("%s is not valid JSON. No Expo command was called." % label)
+                  sys.stderr.write("%s is not valid JSON. Skipping native JSON signals.\n" % label)
+                  return None
 
-          def same(left, right):
-              return json.dumps(left, sort_keys=True) == json.dumps(right, sort_keys=True)
 
-          def native_dep(name):
-              if name == "react-native" or name.startswith("react-native-"):
-                  return True
-              if name.startswith("@react-native/") or name.startswith("@react-native-"):
-                  return True
-              if name == "expo" or name.startswith("expo-"):
-                  return True
-              if name.startswith("@expo/"):
-                  return True
-              return False
+          def decide(before, after, cwd):
+              listed = subprocess.check_output(
+                  ["git", "diff", "--name-only", before, after, "--", "mobile", "shared"],
+                  cwd=cwd,
+                  text=True,
+              )
+              files = [line for line in listed.splitlines() if line]
+              if os.environ.get("SELF_TEST") != "1":
+                  sys.stderr.write(
+                      "Changed files: %s\n" % (" ".join(files) if files else "none")
+                  )
+              app_changed = "mobile/app.json" in files
+              pkg_changed = "mobile/package.json" in files
+              before_app = parse_json(
+                  read_git_file(before, "mobile/app.json", cwd), "mobile/app.json", app_changed
+              )
+              after_app = parse_json(
+                  read_git_file(after, "mobile/app.json", cwd), "mobile/app.json", app_changed
+              )
+              before_pkg = parse_json(
+                  read_git_file(before, "mobile/package.json", cwd),
+                  "mobile/package.json",
+                  pkg_changed,
+              )
+              after_pkg = parse_json(
+                  read_git_file(after, "mobile/package.json", cwd),
+                  "mobile/package.json",
+                  pkg_changed,
+              )
+              config_paths = [path for path in files if path in CONFIG_FILES]
+              config_diff = ""
+              if config_paths:
+                  config_diff = subprocess.check_output(
+                      ["git", "diff", "-U0", before, after, "--", *config_paths],
+                      cwd=cwd,
+                      text=True,
+                  )
+              return classify(
+                  files, before_app, after_app, before_pkg, after_pkg, config_diff
+              )
 
-          def native_deps(doc):
-              deps = slot(doc, "dependencies")
-              if not isinstance(deps, dict):
-                  return {}
-              return {key: value for key, value in deps.items() if native_dep(key)}
 
-          app_slots = (
-              ("expo", "version"),
-              ("expo", "runtimeVersion"),
-              ("expo", "plugins"),
-              ("expo", "icon"),
-              ("expo", "android", "icon"),
-              ("expo", "android", "adaptiveIcon"),
-              ("expo", "android", "permissions"),
-              ("expo", "android", "package"),
-              ("expo", "ios", "icon"),
-              ("expo", "ios", "infoPlist"),
-              ("expo", "ios", "bundleIdentifier"),
-          )
+          def expect(actual, wanted, label):
+              if actual != wanted:
+                  raise SystemExit("%s: got %s, want %s" % (label, actual, wanted))
 
-          native = False
-          before_app = load(before_rev, "mobile/app.json")
-          after_app = load(after_rev, "mobile/app.json")
-          if before_app == "broken" or after_app == "broken":
-              native = True
+
+          def copy_json(value):
+              return json.loads(json.dumps(value))
+
+
+          def test_memory():
+              expect(classify(["mobile/README.md"], None, None, None, None, ""), "skip", "mobile md")
+              expect(classify(["shared/README.md"], None, None, None, None, ""), "skip", "shared md")
+              expect(classify(["shared/books.ts"], None, None, None, None, ""), "update", "shared ts")
+              expect(classify(["mobile/App.tsx"], None, None, None, None, ""), "update", "app tsx")
+              expect(classify(["mobile/eas.json"], None, None, None, None, ""), "build", "eas.json")
+              expect(
+                  classify(["mobile/ios/Podfile"], None, None, None, None, ""),
+                  "build",
+                  "ios podfile",
+              )
+              expect(
+                  classify(["mobile/android/app/build.gradle"], None, None, None, None, ""),
+                  "build",
+                  "android gradle",
+              )
+              expect(
+                  classify(["shared/books.ts", "mobile/eas.json"], None, None, None, None, ""),
+                  "build",
+                  "shared plus eas",
+              )
+              expect(
+                  classify(
+                      ["mobile/app.config.js"],
+                      None,
+                      None,
+                      None,
+                      None,
+                      "+    plugins: ['expo-camera'],\n",
+                  ),
+                  "build",
+                  "config plugins",
+              )
+              expect(
+                  classify(
+                      ["mobile/app.config.js"],
+                      None,
+                      None,
+                      None,
+                      None,
+                      "+    extra: { x: 1 },\n",
+                  ),
+                  "update",
+                  "config extra",
+              )
+              before_pkg = {"version": "1.0.0", "dependencies": {"zustand": "1"}, "scripts": {"a": "b"}}
+              after_pkg = {"version": "1.0.0", "dependencies": {"zustand": "1"}, "scripts": {"a": "c"}}
+              expect(
+                  classify(["mobile/package.json"], None, None, before_pkg, after_pkg, ""),
+                  "update",
+                  "scripts only",
+              )
+              after_pkg = {
+                  "version": "1.0.0",
+                  "dependencies": {"expo": "2", "zustand": "1"},
+                  "scripts": {"a": "b"},
+              }
+              before_pkg = {"version": "1.0.0", "dependencies": {"expo": "1", "zustand": "1"}}
+              expect(
+                  classify(["mobile/package.json"], None, None, before_pkg, after_pkg, ""),
+                  "build",
+                  "expo dep",
+              )
+              before_pkg = {"version": "1", "dependencies": {"react-native-web": "1"}}
+              after_pkg = {"version": "1", "dependencies": {"react-native-web": "2"}}
+              expect(
+                  classify(["mobile/package.json"], None, None, before_pkg, after_pkg, ""),
+                  "update",
+                  "react-native-web",
+              )
+              before_pkg = {
+                  "version": "1",
+                  "dependencies": {"@react-native-async-storage/async-storage": "1"},
+              }
+              after_pkg = {
+                  "version": "1",
+                  "dependencies": {"@react-native-async-storage/async-storage": "2"},
+              }
+              expect(
+                  classify(["mobile/package.json"], None, None, before_pkg, after_pkg, ""),
+                  "build",
+                  "async storage",
+              )
+              before_pkg = {"version": "1.0.0", "dependencies": {}}
+              after_pkg = {"version": "1.0.1", "dependencies": {}}
+              expect(
+                  classify(["mobile/package.json"], None, None, before_pkg, after_pkg, ""),
+                  "build",
+                  "app version",
+              )
+              before_pkg = {
+                  "version": "1",
+                  "dependencies": {"zustand": "1"},
+                  "devDependencies": {"eslint-config-expo": "1"},
+              }
+              after_pkg = {
+                  "version": "1",
+                  "dependencies": {"zustand": "1"},
+                  "devDependencies": {"eslint-config-expo": "2"},
+              }
+              expect(
+                  classify(["mobile/package.json"], None, None, before_pkg, after_pkg, ""),
+                  "update",
+                  "dev dependency",
+              )
+              before_app = {"expo": {"android": {"package": "bible.davar"}}}
+              after_app = {"expo": {"android": {"package": "bible.other"}}}
+              expect(
+                  classify(["mobile/app.json"], before_app, after_app, None, None, ""),
+                  "build",
+                  "android package",
+              )
+              before_app = {"expo": {"ios": {"bundleIdentifier": "bible.davar"}}}
+              after_app = {"expo": {"ios": {"bundleIdentifier": "bible.other"}}}
+              expect(
+                  classify(["mobile/app.json"], before_app, after_app, None, None, ""),
+                  "build",
+                  "bundle id",
+              )
+              before_app = {"expo": {"ios": {"infoPlist": {"ITSAppUsesNonExemptEncryption": False}}}}
+              after_app = {"expo": {"ios": {"infoPlist": {"NSCameraUsageDescription": "Camera"}}}}
+              expect(
+                  classify(["mobile/app.json"], before_app, after_app, None, None, ""),
+                  "build",
+                  "infoPlist",
+              )
+              before_app = {"expo": {"userInterfaceStyle": "automatic", "extra": {"x": 1}}}
+              after_app = {"expo": {"userInterfaceStyle": "dark", "extra": {"x": 1}}}
+              expect(
+                  classify(["mobile/app.json"], before_app, after_app, None, None, ""),
+                  "update",
+                  "userInterfaceStyle",
+              )
+              icon_app = {"expo": {"icon": "./assets/images/icon.png", "extra": {"x": 1}}}
+              expect(
+                  classify(
+                      ["mobile/assets/images/icon.png"],
+                      icon_app,
+                      icon_app,
+                      None,
+                      None,
+                      "",
+                  ),
+                  "build",
+                  "icon file",
+              )
+
+
+          def test_real_repo():
+              app_path = "mobile/app.json"
+              pkg_path = "mobile/package.json"
+              if os.path.exists(app_path):
+                  app = json.loads(open(app_path, encoding="utf-8").read())
+                  icon = copy_json(app)
+                  icon["expo"]["icon"] = "./assets/images/other-icon.png"
+                  expect(classify(["mobile/app.json"], app, icon, None, None, ""), "build", "real icon")
+                  extra = copy_json(app)
+                  extra["expo"]["extra"]["router"] = {"changed": True}
+                  expect(
+                      classify(["mobile/app.json"], app, extra, None, None, ""),
+                      "update",
+                      "real extra",
+                  )
+                  permissions = copy_json(app)
+                  permissions["expo"]["android"]["permissions"] = list(
+                      permissions["expo"]["android"]["permissions"]
+                  ) + ["CAMERA"]
+                  expect(
+                      classify(["mobile/app.json"], app, permissions, None, None, ""),
+                      "build",
+                      "real permissions",
+                  )
+                  plugins = copy_json(app)
+                  plugins["expo"]["plugins"] = list(plugins["expo"]["plugins"]) + ["expo-camera"]
+                  expect(
+                      classify(["mobile/app.json"], app, plugins, None, None, ""),
+                      "build",
+                      "real plugins",
+                  )
+                  runtime = copy_json(app)
+                  runtime["expo"]["runtimeVersion"] = "9.9.9"
+                  expect(
+                      classify(["mobile/app.json"], app, runtime, None, None, ""),
+                      "build",
+                      "real runtimeVersion",
+                  )
+              if os.path.exists(pkg_path):
+                  pkg = json.loads(open(pkg_path, encoding="utf-8").read())
+                  js_dep = copy_json(pkg)
+                  js_dep["dependencies"]["zustand"] = "^9.9.9"
+                  expect(
+                      classify(["mobile/package.json"], None, None, pkg, js_dep, ""),
+                      "update",
+                      "real zustand",
+                  )
+                  native_dep = copy_json(pkg)
+                  native_dep["dependencies"]["expo"] = "^99.0.0"
+                  expect(
+                      classify(["mobile/package.json"], None, None, pkg, native_dep, ""),
+                      "build",
+                      "real expo",
+                  )
+
+
+          def git_commit(cwd, message):
+              subprocess.check_call(["git", "add", "."], cwd=cwd)
+              subprocess.check_call(["git", "commit", "-qm", message], cwd=cwd)
+              return subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=cwd, text=True).strip()
+
+
+          def test_git():
+              td = tempfile.mkdtemp(prefix="eas-classify-")
+              try:
+                  subprocess.check_call(["git", "init", "-q", "-b", "main"], cwd=td)
+                  subprocess.check_call(["git", "config", "user.email", "classify@example.com"], cwd=td)
+                  subprocess.check_call(["git", "config", "user.name", "classify"], cwd=td)
+                  subprocess.check_call(["git", "config", "commit.gpgsign", "false"], cwd=td)
+                  mobile = os.path.join(td, "mobile")
+                  shared = os.path.join(td, "shared")
+                  os.makedirs(mobile)
+                  os.makedirs(shared)
+                  app = {"expo": {"version": "1.0.0", "icon": "./assets/images/icon.png", "extra": {"x": 1}}}
+                  with open(os.path.join(mobile, "app.json"), "w", encoding="utf-8") as handle:
+                      json.dump(app, handle)
+                  with open(os.path.join(mobile, "App.tsx"), "w", encoding="utf-8") as handle:
+                      handle.write("export {}\n")
+                  with open(os.path.join(shared, "books.ts"), "w", encoding="utf-8") as handle:
+                      handle.write("export {}\n")
+                  base = git_commit(td, "base")
+                  with open(os.path.join(shared, "books.ts"), "w", encoding="utf-8") as handle:
+                      handle.write("export const n = 1\n")
+                  shared_head = git_commit(td, "shared")
+                  expect(decide(base, shared_head, td), "update", "git shared")
+                  with open(os.path.join(mobile, "App.tsx"), "w", encoding="utf-8") as handle:
+                      handle.write("export const a = 1\n")
+                  js_head = git_commit(td, "js")
+                  expect(decide(shared_head, js_head, td), "update", "git js")
+                  icon_dir = os.path.join(mobile, "assets", "images")
+                  os.makedirs(icon_dir)
+                  with open(os.path.join(icon_dir, "icon.png"), "wb") as handle:
+                      handle.write(b"png")
+                  icon_head = git_commit(td, "icon")
+                  expect(decide(js_head, icon_head, td), "build", "git icon asset")
+                  app["expo"]["extra"]["x"] = 2
+                  with open(os.path.join(mobile, "app.json"), "w", encoding="utf-8") as handle:
+                      json.dump(app, handle)
+                  extra_head = git_commit(td, "extra")
+                  expect(decide(icon_head, extra_head, td), "update", "git extra")
+                  with open(os.path.join(mobile, "eas.json"), "w", encoding="utf-8") as handle:
+                      handle.write("{}\n")
+                  eas_head = git_commit(td, "eas")
+                  expect(decide(extra_head, eas_head, td), "build", "git eas")
+              finally:
+                  shutil.rmtree(td)
+
+
+          def run_self_test():
+              test_memory()
+              test_real_repo()
+              test_git()
+
+
+          if os.environ.get("SELF_TEST") == "1":
+              started = time.perf_counter()
+              run_self_test()
+              elapsed_ms = (time.perf_counter() - started) * 1000
+              sys.stderr.write("classifier-self-test-ms=%.1f\n" % elapsed_ms)
+              if elapsed_ms >= 5000:
+                  raise SystemExit("classifier self-test exceeded 5000ms")
           else:
-              for keys in app_slots:
-                  if not same(slot(before_app, *keys), slot(after_app, *keys)):
-                      native = True
-                      break
-
-          before_pkg = load(before_rev, "mobile/package.json")
-          after_pkg = load(after_rev, "mobile/package.json")
-          if before_pkg == "broken" or after_pkg == "broken":
-              native = True
-          elif not same(slot(before_pkg, "version"), slot(after_pkg, "version")):
-              native = True
-          elif not same(native_deps(before_pkg), native_deps(after_pkg)):
-              native = True
-
-          print("native" if native else "ok")
+              mode = decide(os.environ["BEFORE"], os.environ["AFTER"], os.getcwd())
+              if mode not in {"build", "update", "skip"}:
+                  raise SystemExit("Classifier returned %s." % mode)
+              sys.stdout.write(mode + "\n")
+          # CLASSIFY_END
           PY
           )"
-          if [ "${config_class}" = "native" ]; then
-            native=1
-          fi
-
-          if git diff -U0 "${before}" "${after}" -- mobile/app.config.js mobile/app.config.ts | grep -Eq '^[+-].*(plugins|permissions|adaptiveIcon|runtimeVersion|"icon"|icon:)'; then
-            native=1
-          fi
-
-          if [ "${native}" -eq 1 ]; then
-            mode="build"
-          elif [ "${js}" -eq 1 ]; then
-            mode="update"
-          else
-            mode="skip"
-          fi
-
-          echo "Changed files: ${files[*]:-none}"
+          case "${mode}" in
+            build|update|skip) ;;
+            *)
+              echo "::error::Classifier returned '${mode}'."
+              exit 1
+              ;;
+          esac
           echo "Selected mode: ${mode}"
           echo "mode=${mode}" >> "${GITHUB_OUTPUT}"
 
-      - name: Require the Play service account before Android submit
+      - name: Write Play service account for Android submit
         if: steps.classify.outputs.mode == 'build'
+        shell: bash
         env:
           GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
-          PLAY_JSON_ACTION: check
         run: |
           set -euo pipefail
-          cat > "${RUNNER_TEMP}/play_account.py" << 'PY'
-          import json
-          import os
-          import sys
+          # PLAYCHECK_START
+          needs_android_play_json() {
+            kind="$1"
+            platform="$2"
+            [ "${kind}" = "build-and-submit" ] || return 1
+            [ "${platform}" != "ios" ]
+          }
 
-          raw = os.environ.get("GOOGLE_PLAY_SERVICE_ACCOUNT_JSON", "")
-          action = os.environ.get("PLAY_JSON_ACTION", "check")
-          if action == "check":
-              refused = "eas build and eas submit were not called."
-          else:
-              refused = "eas submit was not called."
-
-          def fail(message):
-              sys.stderr.write(f"::error::{message} {refused}\n")
+          check_play_json() {
+            file="$1"
+            if [ ! -f "${file}" ]; then
+              echo "::error::Missing ${file}. Android submit needs the Play service account JSON. eas submit was not called."
+              return 1
+            fi
+            if ! python3 -c '
+          import json, sys
+          path = sys.argv[1]
+          try:
+              with open(path, encoding="utf-8") as handle:
+                  data = json.load(handle)
+          except Exception:
+              sys.stderr.write("Play service account file is not valid JSON. eas submit was not called.\n")
               sys.exit(1)
+          if not isinstance(data, dict):
+              sys.stderr.write("Play service account JSON must be an object. eas submit was not called.\n")
+              sys.exit(1)
+          if data.get("type") != "service_account":
+              sys.stderr.write("Play service account JSON must have type service_account. eas submit was not called.\n")
+              sys.exit(1)
+          for key in ("client_email", "private_key"):
+              value = data.get(key)
+              if not isinstance(value, str) or not value.strip():
+                  sys.stderr.write("Play service account JSON is missing %s. eas submit was not called.\n" % key)
+                  sys.exit(1)
+          ' "${file}"
+            then
+              echo "::error::Play service account JSON failed validation. eas submit was not called."
+              return 1
+            fi
+            mode="$(stat -c '%a' "${file}")"
+            if [ "${mode}" != "600" ]; then
+              echo "::error::${file} mode is ${mode}, expected 600. eas submit was not called."
+              return 1
+            fi
+          }
 
-          if raw.strip() == "":
-              fail(
-                  "Repository secret GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is missing. "
-                  "Android Play submit needs the Play Console service account JSON in that repository secret. "
-                  "iOS-only submit does not need it. Update and build do not need it."
-              )
-          try:
-              parsed = json.loads(raw)
-          except json.JSONDecodeError:
-              fail(
-                  "GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is not valid JSON. "
-                  "Save the Play Console service account file contents as that repository secret."
-              )
-          email = parsed.get("client_email") if isinstance(parsed, dict) else None
-          key = parsed.get("private_key") if isinstance(parsed, dict) else None
-          if not isinstance(email, str) or email == "" or not isinstance(key, str) or key == "":
-              fail(
-                  "GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is not a Google service account key. "
-                  "The JSON needs client_email and private_key."
-              )
-          if action != "write":
-              sys.exit(0)
-
-          os.makedirs("secrets", exist_ok=True)
-          os.chmod("secrets", 0o700)
-          path = "secrets/google-play-service-account.json"
-          fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
-          try:
-              os.write(fd, raw.encode("utf-8"))
-          finally:
-              os.close(fd)
-          os.chmod(path, 0o600)
-          PY
-          python3 "${RUNNER_TEMP}/play_account.py"
+          write_play_json() {
+            if [ -z "${GOOGLE_PLAY_SERVICE_ACCOUNT_JSON:-}" ]; then
+              echo "::error::Repository secret GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is missing. Android submit needs it. eas build and eas submit were not called."
+              return 1
+            fi
+            mkdir -p mobile/secrets
+            umask 077
+            printf '%s' "${GOOGLE_PLAY_SERVICE_ACCOUNT_JSON}" > mobile/secrets/google-play-service-account.json
+            chmod 600 mobile/secrets/google-play-service-account.json
+            check_play_json mobile/secrets/google-play-service-account.json
+          }
+          # PLAYCHECK_END
+          if needs_android_play_json "build-and-submit" "all"; then
+            write_play_json
+          fi
 
       - name: Setup Bun
         if: steps.classify.outputs.mode != 'skip'
@@ -294,35 +939,22 @@ jobs:
         if: steps.classify.outputs.mode == 'update'
         working-directory: mobile
         run: |
-          echo "JS-only diff. Running eas update. Skipping eas build and eas submit."
+          echo "JS-only mobile diff. Running eas update. Skipping eas build and eas submit."
           eas update --channel production --environment production --auto --non-interactive
 
-      - name: Build a native binary
+      - name: Build and submit a native binary
         if: steps.classify.outputs.mode == 'build'
         working-directory: mobile
         run: |
-          echo "Native config changed. Running eas build. Skipping eas update."
+          echo "Native config, native dependency, runtimeVersion, app version, or eas.json diff. Running eas build and eas submit. Skipping eas update."
+          echo "iOS submit uses the App Store Connect API key on EAS project 232e7627-d0c9-4b88-976e-b4855beb322e. A missing key fails eas submit for iOS."
           eas build --platform all --profile production --non-interactive --wait
-
-      - name: Write the Play service account
-        if: steps.classify.outputs.mode == 'build'
-        working-directory: mobile
-        env:
-          GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
-          PLAY_JSON_ACTION: write
-        run: python3 "${RUNNER_TEMP}/play_account.py"
-
-      - name: Submit the native binary
-        if: steps.classify.outputs.mode == 'build'
-        working-directory: mobile
-        run: |
-          echo "Running eas submit for production."
           eas submit --platform all --profile production --latest --non-interactive
-
-      - name: Delete the Play service account
-        if: always()
-        run: rm -f mobile/secrets/google-play-service-account.json
 
       - name: Skip both Expo commands
         if: steps.classify.outputs.mode == 'skip'
         run: echo "No JS or native mobile change in this diff. Skipping eas update, eas build, and eas submit."
+
+      - name: Remove Play service account
+        if: always()
+        run: rm -f mobile/secrets/google-play-service-account.json

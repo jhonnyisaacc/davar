@@ -66,63 +66,83 @@ jobs:
             exit 1
           fi
 
-      - name: Require the Play service account before Android submit
+      - name: Write Play service account for Android submit
         if: inputs.release_kind == 'build-and-submit' && inputs.platform != 'ios'
+        shell: bash
         env:
           GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
-          PLAY_JSON_ACTION: check
+          RELEASE_KIND: ${{ inputs.release_kind }}
+          RELEASE_PLATFORM: ${{ inputs.platform }}
         run: |
           set -euo pipefail
-          cat > "${RUNNER_TEMP}/play_account.py" << 'PY'
-          import json
-          import os
-          import sys
+          # PLAYCHECK_START
+          needs_android_play_json() {
+            kind="$1"
+            platform="$2"
+            [ "${kind}" = "build-and-submit" ] || return 1
+            [ "${platform}" != "ios" ]
+          }
 
-          raw = os.environ.get("GOOGLE_PLAY_SERVICE_ACCOUNT_JSON", "")
-          action = os.environ.get("PLAY_JSON_ACTION", "check")
-          if action == "check":
-              refused = "eas build and eas submit were not called."
-          else:
-              refused = "eas submit was not called."
-
-          def fail(message):
-              sys.stderr.write(f"::error::{message} {refused}\n")
+          check_play_json() {
+            file="$1"
+            if [ ! -f "${file}" ]; then
+              echo "::error::Missing ${file}. Android submit needs the Play service account JSON. eas submit was not called."
+              return 1
+            fi
+            if ! python3 -c '
+          import json, sys
+          path = sys.argv[1]
+          try:
+              with open(path, encoding="utf-8") as handle:
+                  data = json.load(handle)
+          except Exception:
+              sys.stderr.write("Play service account file is not valid JSON. eas submit was not called.\n")
               sys.exit(1)
+          if not isinstance(data, dict):
+              sys.stderr.write("Play service account JSON must be an object. eas submit was not called.\n")
+              sys.exit(1)
+          if data.get("type") != "service_account":
+              sys.stderr.write("Play service account JSON must have type service_account. eas submit was not called.\n")
+              sys.exit(1)
+          for key in ("client_email", "private_key"):
+              value = data.get(key)
+              if not isinstance(value, str) or not value.strip():
+                  sys.stderr.write("Play service account JSON is missing %s. eas submit was not called.\n" % key)
+                  sys.exit(1)
+          ' "${file}"
+            then
+              echo "::error::Play service account JSON failed validation. eas submit was not called."
+              return 1
+            fi
+            mode="$(stat -c '%a' "${file}")"
+            if [ "${mode}" != "600" ]; then
+              echo "::error::${file} mode is ${mode}, expected 600. eas submit was not called."
+              return 1
+            fi
+          }
 
-          if raw.strip() == "":
-              fail(
-                  "Repository secret GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is missing. "
-                  "Android Play submit needs the Play Console service account JSON in that repository secret. "
-                  "iOS-only submit does not need it. Update and build do not need it."
-              )
-          try:
-              parsed = json.loads(raw)
-          except json.JSONDecodeError:
-              fail(
-                  "GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is not valid JSON. "
-                  "Save the Play Console service account file contents as that repository secret."
-              )
-          email = parsed.get("client_email") if isinstance(parsed, dict) else None
-          key = parsed.get("private_key") if isinstance(parsed, dict) else None
-          if not isinstance(email, str) or email == "" or not isinstance(key, str) or key == "":
-              fail(
-                  "GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is not a Google service account key. "
-                  "The JSON needs client_email and private_key."
-              )
-          if action != "write":
-              sys.exit(0)
+          write_play_json() {
+            if [ -z "${GOOGLE_PLAY_SERVICE_ACCOUNT_JSON:-}" ]; then
+              echo "::error::Repository secret GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is missing. Android submit needs it. eas build and eas submit were not called."
+              return 1
+            fi
+            mkdir -p mobile/secrets
+            umask 077
+            printf '%s' "${GOOGLE_PLAY_SERVICE_ACCOUNT_JSON}" > mobile/secrets/google-play-service-account.json
+            chmod 600 mobile/secrets/google-play-service-account.json
+            check_play_json mobile/secrets/google-play-service-account.json
+          }
+          # PLAYCHECK_END
+          if needs_android_play_json "${RELEASE_KIND}" "${RELEASE_PLATFORM}"; then
+            write_play_json
+          fi
 
-          os.makedirs("secrets", exist_ok=True)
-          os.chmod("secrets", 0o700)
-          path = "secrets/google-play-service-account.json"
-          fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
-          try:
-              os.write(fd, raw.encode("utf-8"))
-          finally:
-              os.close(fd)
-          os.chmod(path, 0o600)
-          PY
-          python3 "${RUNNER_TEMP}/play_account.py"
+      - name: Record the App Store Connect gap
+        if: inputs.release_kind == 'build-and-submit' && (inputs.platform == 'ios' || inputs.platform == 'all')
+        run: |
+          echo "iOS submit uses the App Store Connect API key stored on EAS project 232e7627-d0c9-4b88-976e-b4855beb322e."
+          echo "An iOS-only submit runs without the Play service account JSON."
+          echo "A missing App Store Connect API key on that EAS project fails eas submit for iOS."
 
       - name: Install mobile dependencies
         run: |
@@ -204,39 +224,31 @@ jobs:
             echo "$env_validation_errors"
           fi
 
+          if [ "${{ inputs.release_kind }}" = "build-and-submit" ] && [ "${{ inputs.platform }}" != "ios" ]; then
+            if [ ! -f "./secrets/google-play-service-account.json" ]; then
+              echo "::error::Missing mobile/secrets/google-play-service-account.json. Android submit needs it. eas submit was not called."
+              exit 1
+            fi
+          fi
+
           echo "RELEASE_CHANNEL=${{ inputs.profile }}" >> "$GITHUB_ENV"
           echo "RUNTIME_PREFLIGHT=passed" >> "$GITHUB_ENV"
           echo "ENV_PREFLIGHT=passed" >> "$GITHUB_ENV"
 
-      - name: Publish an OTA update
-        if: inputs.release_kind == 'update'
-        working-directory: mobile
-        run: eas update --channel "${{ inputs.profile }}" --environment "${{ inputs.profile }}" --auto --non-interactive
-
-      - name: Build a binary
-        if: inputs.release_kind == 'build' || inputs.release_kind == 'build-and-submit'
-        working-directory: mobile
+      - name: Execute EAS release action
         run: |
-          if [ "${{ inputs.release_kind }}" = "build" ]; then
+          cd mobile
+
+          if [ "${{ inputs.release_kind }}" = "update" ]; then
+            eas update --channel "${{ inputs.profile }}" --environment "${{ inputs.profile }}" --auto --non-interactive
+          elif [ "${{ inputs.release_kind }}" = "build" ]; then
             eas build --platform "${{ inputs.platform }}" --profile "${{ inputs.profile }}" --non-interactive --wait
           else
             eas build --platform "${{ inputs.platform }}" --profile production --non-interactive --wait
+            eas submit --platform "${{ inputs.platform }}" --profile production --latest --non-interactive
           fi
 
-      - name: Write the Play service account
-        if: inputs.release_kind == 'build-and-submit' && inputs.platform != 'ios'
-        working-directory: mobile
-        env:
-          GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
-          PLAY_JSON_ACTION: write
-        run: python3 "${RUNNER_TEMP}/play_account.py"
-
-      - name: Submit the binary
-        if: inputs.release_kind == 'build-and-submit'
-        working-directory: mobile
-        run: eas submit --platform "${{ inputs.platform }}" --profile production --latest --non-interactive
-
-      - name: Delete the Play service account
+      - name: Remove Play service account
         if: always()
         run: rm -f mobile/secrets/google-play-service-account.json
 
