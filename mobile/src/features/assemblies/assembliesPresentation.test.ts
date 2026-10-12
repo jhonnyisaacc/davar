@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-unresolved -- Bun test runner built-in
 import {describe, expect, test} from "bun:test";
 import {assemblyMembershipLabel, assembliesErrorMessage, canCreateAssembly, canRequestAssembly, hasAssemblyLocation} from "@davar/shared/assembliesPresentation";
 import {isCompleteAccessCode, normalizeAccessCode} from "@davar/shared/assemblyAccessCode";

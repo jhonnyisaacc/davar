@@ -39,7 +39,7 @@ export default defineConfig([
     },
   },
   {
-    files: ["src/services/chapterLoad.pin.test.ts"],
+    files: ["**/*.test.ts"],
     settings: {
       "import/core-modules": ["bun:test"],
     },

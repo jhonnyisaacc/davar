@@ -1,5 +1,4 @@
 // Bun supplies this runtime module; Expo lint does not resolve it.
-// eslint-disable-next-line import/no-unresolved
 import { expect, test } from "bun:test";
 import { selectedBookScroll, centeredBookOffset, type PositioningState } from "./navigationPositioning";
 test("book positioning waits for both readiness signals and an open sheet", () => {

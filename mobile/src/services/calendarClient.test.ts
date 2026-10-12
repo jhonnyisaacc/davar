@@ -1,5 +1,4 @@
 // Bun provides this module at runtime; Expo does not index it.
-// eslint-disable-next-line import/no-unresolved
 import { describe, expect, spyOn, test } from "bun:test";
 import {
   CALENDAR_LOCATION_KEY,
