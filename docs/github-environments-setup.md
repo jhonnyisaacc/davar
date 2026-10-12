@@ -51,3 +51,14 @@ gh api repos/jhonnyisaacc/davar/environments/mobile-production
 gh secret set EXPO_TOKEN --repo jhonnyisaacc/davar --env mobile-preview
 gh secret set EXPO_TOKEN --repo jhonnyisaacc/davar --env mobile-production
 ```
+
+## Web preview API secrets (repo-level)
+
+`web-preview` resolves `PUBLIC_API_URL` at build time (see
+[railway-preview.md](./railway-preview.md)). Prefer staging:
+
+```bash
+gh secret set STAGING_API_URL --repo jhonnyisaacc/davar --body 'https://<staging>.up.railway.app'
+```
+
+Keep `PUBLIC_API_URL` only as a fallback until staging exists.
