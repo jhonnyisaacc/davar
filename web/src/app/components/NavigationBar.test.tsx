@@ -49,3 +49,12 @@ test("book trigger is wired to the book selector panel", () => {
 	expect(html).toContain('aria-controls="navigation-book-selector"');
 	expect(html).not.toContain("Search book");
 });
+
+test("scripture tab uses the translated label", () => {
+	const english = renderToStaticMarkup(<NavigationBar {...props} />);
+	const spanish = renderToStaticMarkup(
+		<NavigationBar {...props} language="es" />,
+	);
+	expect(english).toContain("Scripture");
+	expect(spanish).toContain("Escrituras");
+});

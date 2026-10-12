@@ -40,3 +40,23 @@ export function destinationOpen(capabilities: ProductCapabilities, id: Destinati
   if (!("flag" in destination)) return true;
   return capabilities.flags[destination.flag] === true;
 }
+
+function destinationIsPrimary(id: string): boolean {
+  const destination = destinationsById.get(id as DestinationId);
+  return destination != null && "primary" in destination && destination.primary === true;
+}
+
+export function centerPrimaryDestination<T extends { id: string }>(
+  items: readonly T[],
+  isPrimary: (item: T) => boolean = (item) => destinationIsPrimary(item.id),
+): Array<T | null> {
+  const index = items.findIndex((item) => isPrimary(item));
+  if (index < 0) return [...items];
+  const before = index;
+  const after = items.length - index - 1;
+  return [
+    ...Array.from({ length: Math.max(0, after - before) }, () => null),
+    ...items,
+    ...Array.from({ length: Math.max(0, before - after) }, () => null),
+  ];
+}

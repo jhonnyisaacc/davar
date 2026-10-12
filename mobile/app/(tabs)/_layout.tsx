@@ -27,7 +27,11 @@ import {
   Users,
 } from "lucide-react-native";
 import { useAppStore } from "@/src/store/useAppStore";
-import { destinationOpen, type DestinationId } from "@davar/shared/destinations";
+import {
+  centerPrimaryDestination,
+  destinationOpen,
+  type DestinationId,
+} from "@davar/shared/destinations";
 import { useProductCapabilities } from "@/src/features/product/useProductCapabilities";
 import {
   NAVIGATION_DOCK_HEIGHT,
@@ -48,6 +52,7 @@ function NavigationDock({ state, navigation }: BottomTabBarProps) {
   const visibleDestinations = destinations.filter(({ id }) =>
     destinationOpen(capabilities, id as DestinationId),
   );
+  const centeredDestinations = centerPrimaryDestination(visibleDestinations);
   const { t } = useTranslation();
   const dark = useAppStore((s) => s.themeMode === "dark");
   const insets = useSafeAreaInsets();
@@ -151,7 +156,13 @@ function NavigationDock({ state, navigation }: BottomTabBarProps) {
               indicatorStyle,
             ]}
           />
-          {visibleDestinations.map(({ id, labelKey, icon: Icon }) => {
+          {centeredDestinations.map((destination, index) => {
+            if (!destination) {
+              return (
+                <View key={`pad-${index}`} style={{ flex: 1, height: 56 }} />
+              );
+            }
+            const { id, labelKey, icon: Icon } = destination;
             const label = t(labelKey);
             const route = state.routes.find((route) => route.name === id)!;
             const selected = state.routes[state.index].key === route.key;
