@@ -1,13 +1,73 @@
-import { useEffect, useRef, useState } from "react";
+import { type FocusEvent, useEffect, useRef, useState } from "react";
 import type { RouteScreen } from "../../utils/routeState";
 import { useVerseScrollNavigation } from "../../utils/useVerseScrollNavigation";
+
+const NAV_SCROLL_TOP = 24;
+const NAV_SCROLL_DELTA = 4;
+
+export function nextNavHidden(
+	currentY: number,
+	previousY: number,
+): boolean | null {
+	const delta = currentY - previousY;
+	if (currentY <= NAV_SCROLL_TOP) return false;
+	if (delta > NAV_SCROLL_DELTA) return true;
+	if (delta < -NAV_SCROLL_DELTA) return false;
+	return null;
+}
+
+export function readerNavTracksScroll({
+	isMobile,
+	currentScreen,
+	showFullChapter,
+}: {
+	isMobile: boolean;
+	currentScreen: RouteScreen;
+	showFullChapter: boolean;
+}): boolean {
+	return isMobile || (currentScreen === "verse" && showFullChapter);
+}
+
+export type ReaderNavPresence = "shown" | "hiddenByScroll" | "awaitingHover";
+
+export function readerNavPresence({
+	isMobile,
+	currentScreen,
+	showFullChapter,
+	canHover,
+	pointerOver,
+	focusWithin,
+	menuOpen,
+	scrollHidden,
+	scrolledDown,
+}: {
+	isMobile: boolean;
+	currentScreen: RouteScreen;
+	showFullChapter: boolean;
+	canHover: boolean;
+	pointerOver: boolean;
+	focusWithin: boolean;
+	menuOpen: boolean;
+	scrollHidden: boolean;
+	scrolledDown: boolean;
+}): ReaderNavPresence {
+	const revealsOnHover =
+		canHover &&
+		(isMobile || scrolledDown) &&
+		currentScreen === "verse" &&
+		!showFullChapter;
+	if (!revealsOnHover) return scrollHidden ? "hiddenByScroll" : "shown";
+	return pointerOver || focusWithin || menuOpen ? "shown" : "awaitingHover";
+}
+
+const HOVER_POINTER_QUERY = "(hover: hover) and (pointer: fine)";
 
 export function useReaderChrome({
 	isMobile,
 	currentScreen,
 	showFullChapter,
-	seferMode,
 	settingsOpen,
+	selectionMenuOpen,
 	isWordPanelHovered,
 	handleNextVerse,
 	handlePreviousVerse,
@@ -16,59 +76,125 @@ export function useReaderChrome({
 	isMobile: boolean;
 	currentScreen: RouteScreen;
 	showFullChapter: boolean;
-	seferMode: boolean;
 	settingsOpen: boolean;
+	selectionMenuOpen: boolean;
 	isWordPanelHovered: boolean;
 	handleNextVerse: () => boolean | Promise<boolean>;
 	handlePreviousVerse: () => boolean | Promise<boolean>;
 	triggerScrollJump: () => void;
 }) {
 	const [hideNavOnScroll, setHideNavOnScroll] = useState(false);
+	const [scrolledDown, setScrolledDown] = useState(false);
 	const lastScrollYRef = useRef(0);
+	const [canHover, setCanHover] = useState(false);
+	const [pointerOverNav, setPointerOverNav] = useState(false);
+	const [keyboardFocusInNav, setKeyboardFocusInNav] = useState(false);
 	const [showMobileDesignGuide, setShowMobileDesignGuide] = useState(false);
 	const [showDesignSystem, setShowDesignSystem] = useState(false);
 	const versePanelRef = useRef<HTMLDivElement | null>(null);
 	const isScrollNavigationActive =
 		currentScreen === "verse" && !showFullChapter && !isMobile;
+	const tracksScroll = readerNavTracksScroll({
+		isMobile,
+		currentScreen,
+		showFullChapter,
+	});
 
 	useEffect(() => {
-		if (isMobile) {
-			const threshold = 24;
-			lastScrollYRef.current = window.scrollY;
-
-			const handleMobileScroll = () => {
-				const currentY = window.scrollY;
-				const delta = currentY - lastScrollYRef.current;
-
-				if (currentY <= threshold) {
-					setHideNavOnScroll(false);
-				} else if (delta > 4) {
-					setHideNavOnScroll(true);
-				} else if (delta < -4) {
-					setHideNavOnScroll(false);
-				}
-
-				lastScrollYRef.current = currentY;
-			};
-
-			handleMobileScroll();
-			window.addEventListener("scroll", handleMobileScroll, { passive: true });
-			return () => window.removeEventListener("scroll", handleMobileScroll);
-		}
-
-		if (!(currentScreen === "verse" && showFullChapter && seferMode)) {
+		if (!tracksScroll) {
 			setHideNavOnScroll(false);
 			return;
 		}
 
+		lastScrollYRef.current = window.scrollY;
+
 		const handleScroll = () => {
-			setHideNavOnScroll(window.scrollY > 40);
+			const currentY = window.scrollY;
+			const next = nextNavHidden(currentY, lastScrollYRef.current);
+			lastScrollYRef.current = currentY;
+			if (next === null) return;
+			setHideNavOnScroll(next);
 		};
 
 		handleScroll();
 		window.addEventListener("scroll", handleScroll, { passive: true });
 		return () => window.removeEventListener("scroll", handleScroll);
-	}, [currentScreen, isMobile, showFullChapter, seferMode]);
+	}, [tracksScroll]);
+
+	useEffect(() => {
+		if (!isScrollNavigationActive) {
+			setScrolledDown(false);
+			return;
+		}
+		const handleScroll = () => setScrolledDown(window.scrollY > NAV_SCROLL_TOP);
+		handleScroll();
+		window.addEventListener("scroll", handleScroll, { passive: true });
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, [isScrollNavigationActive]);
+
+	useEffect(() => {
+		const media = window.matchMedia(HOVER_POINTER_QUERY);
+		const update = () => setCanHover(media.matches);
+		update();
+		media.addEventListener("change", update);
+		return () => media.removeEventListener("change", update);
+	}, []);
+
+	const navRef = useRef<HTMLDivElement | null>(null);
+	const menuOpen = settingsOpen || selectionMenuOpen;
+	// The nav's own pointerleave is skipped when an open menu under the pointer unmounts.
+	useEffect(() => {
+		const handlePointerOver = (event: PointerEvent) =>
+			setPointerOverNav(
+				Boolean(navRef.current?.contains(event.target as Node | null)),
+			);
+		const handlePointerOut = (event: PointerEvent) => {
+			if (!event.relatedTarget) setPointerOverNav(false);
+		};
+		document.addEventListener("pointerover", handlePointerOver);
+		document.addEventListener("pointerout", handlePointerOut);
+		return () => {
+			document.removeEventListener("pointerover", handlePointerOver);
+			document.removeEventListener("pointerout", handlePointerOut);
+		};
+	}, []);
+
+	const navPresence = readerNavPresence({
+		isMobile,
+		currentScreen,
+		showFullChapter,
+		canHover,
+		pointerOver: pointerOverNav,
+		focusWithin: keyboardFocusInNav,
+		menuOpen,
+		scrollHidden: hideNavOnScroll,
+		scrolledDown,
+	});
+
+	// A focused menu input is removed without a blur event when its menu closes.
+	useEffect(() => {
+		if (menuOpen) return;
+		const active = document.activeElement;
+		setKeyboardFocusInNav(
+			Boolean(
+				active &&
+					navRef.current?.contains(active) &&
+					active.matches(":focus-visible"),
+			),
+		);
+	}, [menuOpen]);
+
+	const navHoverHandlers = {
+		ref: navRef,
+		// Mouse clicks leave focus on nav buttons; only keyboard focus should hold the bar open.
+		onFocus: (event: FocusEvent<HTMLElement>) =>
+			setKeyboardFocusInNav(event.target.matches(":focus-visible")),
+		onBlur: (event: FocusEvent<HTMLElement>) => {
+			if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+				setKeyboardFocusInNav(false);
+			}
+		},
+	};
 
 	useVerseScrollNavigation({
 		containerRef: versePanelRef,
@@ -82,7 +208,8 @@ export function useReaderChrome({
 	});
 
 	return {
-		hideNavOnScroll,
+		navPresence,
+		navHoverHandlers,
 		versePanelRef,
 		isScrollNavigationActive,
 		showDesignSystem,

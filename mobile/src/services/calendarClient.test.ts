@@ -569,3 +569,118 @@ describe("annual calendar loading", () => {
     }
   });
 });
+
+function addCivilDays(civilDate: string, days: number): string {
+  const [year, month, day] = civilDate.split("-").map(Number);
+  return new Date(Date.UTC(year, month - 1, day + days))
+    .toISOString()
+    .slice(0, 10);
+}
+
+function zonedParts(iso: string, timeZone: string) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    hourCycle: "h23",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+  }).formatToParts(new Date(iso));
+  const value = (type: Intl.DateTimeFormatPartTypes) =>
+    parts.find((part) => part.type === type)?.value;
+  return {
+    civil: `${value("year")}-${value("month")}-${value("day")}`,
+    hour: value("hour"),
+  };
+}
+
+describe("calendar day paging", () => {
+  function daysFrom(anchor: string, count: number): CalendarResponse {
+    return {
+      ...calendar(),
+      days: Array.from({ length: count }, (_, index) => {
+        const civil = addCivilDays(anchor, index);
+        return {
+          ...calendar().days[0],
+          civil_date: civil,
+          biblical: {
+            day: Number(civil.slice(8)),
+            month_id: "aviv",
+            month_ordinal: 1,
+          },
+        };
+      }),
+    };
+  }
+
+  test("reuses the loaded days and fetches one unsynced window for the days beyond them", async () => {
+    const requests: URLSearchParams[] = [];
+    const paging: {
+      query: URLSearchParams;
+      pending: ReturnType<typeof deferred<CalendarResponse>>;
+    }[] = [];
+    const client = createCalendarClient(
+      {
+        request: async <T>(path: string) => {
+          const query = new URLSearchParams(path.split("?")[1]);
+          requests.push(query);
+          if (query.get("refresh") !== "0") {
+            const anchor =
+              Number(query.get("latitude")) > 0 ? "2026-07-01" : "2026-06-01";
+            return daysFrom(anchor, 14) as T;
+          }
+          const pending = deferred<CalendarResponse>();
+          paging.push({ query, pending });
+          return (await pending.promise) as T;
+        },
+      },
+      storage(),
+    );
+    const stop = client.start();
+    try {
+      await tick();
+      expect(requests).toHaveLength(1);
+      expect(requests[0].get("refresh")).toBeNull();
+      expect(requests[0].get("days")).toBe("14");
+      for (let offset = 1; offset <= 13; offset++) {
+        const day = await client.day(offset);
+        expect(day.days).toHaveLength(1);
+        expect(day.days[0].civil_date).toBe(addCivilDays("2026-06-01", offset));
+      }
+      expect(paging).toHaveLength(0);
+
+      const fourteenth = client.day(14);
+      const sixteenth = client.day(16);
+      expect(paging).toHaveLength(1);
+      const forward = zonedParts(paging[0].query.get("instant")!, timezone);
+      expect(paging[0].query.get("refresh")).toBe("0");
+      expect(paging[0].query.get("days")).toBe("14");
+      expect(forward).toEqual({ civil: "2026-06-09", hour: "12" });
+      paging[0].pending.resolve(daysFrom("2026-06-09", 14));
+      expect((await fourteenth).days[0].biblical.day).toBe(15);
+      expect((await sixteenth).days[0].civil_date).toBe("2026-06-17");
+      expect(await client.day(21)).toMatchObject({
+        days: [{ civil_date: "2026-06-22" }],
+      });
+      expect(paging).toHaveLength(1);
+
+      const yesterday = client.day(-1);
+      const earlier = client.day(-3);
+      expect(paging).toHaveLength(2);
+      expect(zonedParts(paging[1].query.get("instant")!, timezone).civil).toBe(
+        "2026-05-25",
+      );
+      paging[1].pending.resolve(daysFrom("2026-05-25", 14));
+      expect((await yesterday).days[0].civil_date).toBe("2026-05-31");
+      expect((await earlier).days[0].civil_date).toBe("2026-05-29");
+
+      client.selectCity({ ...city, latitude: 31.7, longitude: 35.2 });
+      await tick();
+      expect((await client.day(1)).days[0].civil_date).toBe("2026-07-02");
+      expect(paging).toHaveLength(2);
+      expect(requests).toHaveLength(4);
+    } finally {
+      stop();
+    }
+  });
+});

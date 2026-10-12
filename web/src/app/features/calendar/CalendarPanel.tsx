@@ -4,6 +4,7 @@ import {
 	calendarSources,
 	calendarYear,
 	confirmedMoadim,
+	localSunsetClock,
 } from "@davar/shared/calendarPresentation";
 import { calendarIsOutdated } from "@davar/shared/calendarRefresh";
 import type { CalendarDay } from "@davar/shared/productContracts";
@@ -144,7 +145,7 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 		busy: annualBusy,
 		error: annualError,
 	} = requests.annual;
-	const current = offset === 0 ? calendar : selected;
+	const current = offset === 0 ? calendar : (selected ?? calendar);
 	const day = current?.days[0];
 	const moadim = confirmedMoadim(day);
 
@@ -377,7 +378,6 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 					<button
 						type="button"
 						aria-label={t("calendar.previousDay")}
-						disabled={dayBusy}
 						onClick={() => setOffset((value) => value - 1)}
 						className="flex size-11 items-center justify-center text-[var(--text-secondary)]"
 					>
@@ -395,7 +395,6 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 					<button
 						type="button"
 						aria-label={t("calendar.nextDay")}
-						disabled={dayBusy}
 						onClick={() => setOffset((value) => value + 1)}
 						className="flex size-11 items-center justify-center text-[var(--text-secondary)]"
 					>
@@ -441,7 +440,17 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 					<Row
 						icon={Sunset}
 						title={t("calendar.localSunset")}
-						subtitle={[city!.city, city!.country].filter(Boolean).join(", ")}
+						subtitle={[
+							localSunsetClock(
+								day?.sunset_at,
+								current?.timezone ?? timezone,
+								language,
+							),
+							city?.city,
+							city?.country,
+						]
+							.filter(Boolean)
+							.join(", ")}
 						onClick={() => {
 							setQuery("");
 							setScreen("city");

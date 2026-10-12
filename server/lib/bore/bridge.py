@@ -6,7 +6,7 @@ from calendar.models.month_confirmation import MonthConfirmation
 from calendar.services.calendar_builder import CalendarBuilder
 from calendar.services.biblical_clock import biblical_lookup_date
 from calendar.services.rabbinic_calendar import gregorian_to_rabbinic
-from calendar.services.sunset import next_sunset_after
+from calendar.services.sunset import next_sunset_after, sunset_on
 from calendar.rules.biblical_months import month_id_for_ordinal
 from calendar.services.moadim_calculator import MoadimCalculator
 from month_identity import anchored_month_identities
@@ -47,6 +47,7 @@ for offset in range(payload["count"]):
         "month_status": day.month_status.value if day else "pending",
         "year_start_status": decision.status.value,
         "confirmation_id": day.confirmation_id if day else None,
+        "sunset_at": sunset_on(civil, payload["latitude"], payload["longitude"], payload["timezone"]).isoformat(),
     })
 json.dump({"schema_version": 1, "days": result, "year_start_status": decision.status.value,
            "next_sunset_at": next_sunset_after(instant, payload["latitude"], payload["longitude"], payload["timezone"]).isoformat(),

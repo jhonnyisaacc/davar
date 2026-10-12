@@ -1,4 +1,5 @@
 import { parseSourceStrong } from "@davar/shared/greekBesorah";
+import { useState } from "react";
 import { BottomSheet } from "./components/BottomSheet";
 import { DesignSystemExport } from "./components/DesignSystemExport";
 import { MobileDesignSystemGuide } from "./components/MobileDesignSystemGuide";
@@ -78,7 +79,6 @@ export default function App() {
 	const {
 		books,
 		chapterVerses,
-		setChapterVerses,
 		chapterCount,
 		verseCount,
 		isLoading,
@@ -191,15 +191,16 @@ export default function App() {
 		currentScreen,
 		currentVerseData,
 		chapterVerses,
-		setChapterVerses,
 		language,
 		besorahTextVersion,
 		setCurrentBook,
 		setCurrentChapter,
 		setCurrentVerse,
 	});
+	const [selectionMenuOpen, setSelectionMenuOpen] = useState(false);
 	const {
-		hideNavOnScroll,
+		navPresence,
+		navHoverHandlers,
 		versePanelRef,
 		isScrollNavigationActive,
 		showDesignSystem,
@@ -210,8 +211,8 @@ export default function App() {
 		isMobile,
 		currentScreen,
 		showFullChapter,
-		seferMode,
 		settingsOpen,
+		selectionMenuOpen,
 		isWordPanelHovered,
 		handleNextVerse,
 		handlePreviousVerse,
@@ -220,89 +221,101 @@ export default function App() {
 
 	return (
 		<div
-			className="min-h-screen"
+			className={`min-h-screen ${isScrollNavigationActive ? "flex flex-col" : ""}`}
 			style={{
 				backgroundColor: "var(--background)",
 				minHeight: isMobile ? "100dvh" : undefined,
-				height: isScrollNavigationActive ? "100vh" : undefined,
-				overflow: isScrollNavigationActive ? "hidden" : undefined,
+				overflowAnchor: "none",
 			}}
 		>
 			<div
-				className={`sticky top-0 z-40 px-2 pt-4 pb-4 sm:px-4 sm:pt-5 sm:pb-5 md:px-6 md:pt-6 md:pb-6 transition-transform duration-300 ${
-					hideNavOnScroll
-						? "-translate-y-full opacity-0 pointer-events-none"
-						: "translate-y-0 opacity-100"
-				}`}
+				className={`sticky top-0 z-40 ${navPresence === "hiddenByScroll" ? "pointer-events-none" : ""}`}
+				{...navHoverHandlers}
 			>
-				<SandboxBanner />
-				<div className="mx-auto flex justify-center">
-					<NavigationBar
-						activeDestination={currentScreen}
-						onDestinationClick={handleOpenScreen}
-						settingsOpen={settingsOpen}
-						onSettingsOpenChange={setSettingsOpen}
-						book={currentBook}
-						bookDisplayName={getDisplayBookName(currentBook)}
-						bookHebrew={getHebrewBookName(currentBook)}
-						chapter={currentChapter}
-						verse={currentVerse}
-						books={bookOptions}
-						chapterCount={chapterCount}
-						verseCount={verseCount}
-						onBookChange={(selectedBook) => {
-							if (selectedBook === currentBook) {
-								const stored = getStoredReadingState();
-								if (stored) {
-									const position = getLastPositionForBook(stored, selectedBook);
-									setCurrentChapter(position.chapter);
-									setCurrentVerse(position.verse);
+				<div
+					className={`px-2 pt-4 pb-4 sm:px-4 sm:pt-5 sm:pb-5 md:px-6 md:pt-6 md:pb-6 transition-transform duration-300 ${
+						navPresence === "shown"
+							? "translate-y-0 opacity-100"
+							: "-translate-y-full opacity-0"
+					}`}
+				>
+					<SandboxBanner />
+					<div className="mx-auto flex justify-center">
+						<NavigationBar
+							activeDestination={currentScreen}
+							onDestinationClick={handleOpenScreen}
+							settingsOpen={settingsOpen}
+							onSettingsOpenChange={setSettingsOpen}
+							onSelectionMenuOpenChange={setSelectionMenuOpen}
+							book={currentBook}
+							bookDisplayName={getDisplayBookName(currentBook)}
+							bookHebrew={getHebrewBookName(currentBook)}
+							chapter={currentChapter}
+							verse={currentVerse}
+							books={bookOptions}
+							chapterCount={chapterCount}
+							verseCount={verseCount}
+							onBookChange={(selectedBook) => {
+								if (selectedBook === currentBook) {
+									const stored = getStoredReadingState();
+									if (stored) {
+										const position = getLastPositionForBook(
+											stored,
+											selectedBook,
+										);
+										setCurrentChapter(position.chapter);
+										setCurrentVerse(position.verse);
+									}
+								} else {
+									setCurrentBook(selectedBook);
+									setCurrentChapter(1);
+									setCurrentVerse(1);
 								}
-							} else {
-								setCurrentBook(selectedBook);
-								setCurrentChapter(1);
+								setCurrentScreen("verse");
+							}}
+							onChapterChange={(chapter) => {
+								setCurrentChapter(chapter);
 								setCurrentVerse(1);
-							}
-							setCurrentScreen("verse");
-						}}
-						onChapterChange={(chapter) => {
-							setCurrentChapter(chapter);
-							setCurrentVerse(1);
-						}}
-						onVerseChange={(verse) => setCurrentVerse(verse)}
-						onDesignSystemClick={() => setShowDesignSystem(true)}
-						onMobileDesignGuideClick={() => setShowMobileDesignGuide(true)}
-						theme={theme}
-						onThemeChange={setTheme}
-						language={language}
-						onLanguageChange={setLanguage}
-						besorahLanguage={besorahLanguage}
-						onBesorahLanguageChange={setBesorahLanguage}
-						greekAvailable={greekAvailable}
-						besorahTextVersion={besorahTextVersion}
-						onBesorahTextVersionChange={handleBesorahTextVersionChange}
-						showQumran={showQumran}
-						onQumranChange={setShowQumran}
-						showFullChapter={showFullChapter}
-						onFullChapterChange={setShowFullChapter}
-						showCalendarDayPill={showCalendarDayPill}
-						onCalendarDayPillChange={setShowCalendarDayPill}
-						seferMode={seferMode}
-						onSeferModeChange={handleSeferModeChange}
-						hebrewOnly={hebrewOnly}
-						onHebrewOnlyChange={handleHebrewOnlyChange}
-						showNikud={showNikud}
-						onNikudChange={setShowNikud}
-						showCantillation={showCantillation}
-						onCantillationChange={setShowCantillation}
-						translationOnly={translationOnly}
-						onTranslationOnlyChange={handleTranslationOnlyChange}
-					/>
+							}}
+							onVerseChange={(verse) => setCurrentVerse(verse)}
+							onDesignSystemClick={() => setShowDesignSystem(true)}
+							onMobileDesignGuideClick={() => setShowMobileDesignGuide(true)}
+							theme={theme}
+							onThemeChange={setTheme}
+							language={language}
+							onLanguageChange={setLanguage}
+							besorahLanguage={besorahLanguage}
+							onBesorahLanguageChange={setBesorahLanguage}
+							greekAvailable={greekAvailable}
+							besorahTextVersion={besorahTextVersion}
+							onBesorahTextVersionChange={handleBesorahTextVersionChange}
+							showQumran={showQumran}
+							onQumranChange={setShowQumran}
+							showFullChapter={showFullChapter}
+							onFullChapterChange={setShowFullChapter}
+							showCalendarDayPill={showCalendarDayPill}
+							onCalendarDayPillChange={setShowCalendarDayPill}
+							seferMode={seferMode}
+							onSeferModeChange={handleSeferModeChange}
+							hebrewOnly={hebrewOnly}
+							onHebrewOnlyChange={handleHebrewOnlyChange}
+							showNikud={showNikud}
+							onNikudChange={setShowNikud}
+							showCantillation={showCantillation}
+							onCantillationChange={setShowCantillation}
+							translationOnly={translationOnly}
+							onTranslationOnlyChange={handleTranslationOnlyChange}
+						/>
+					</div>
 				</div>
 			</div>
 
-			<div className="px-6 pb-10 md:pb-32 pt-6">
-				<div className="max-w-7xl mx-auto">
+			<div
+				className={`px-6 pt-6 ${isScrollNavigationActive ? "flex-1 flex flex-col pb-4" : "pb-10 md:pb-32"}`}
+			>
+				<div
+					className={`max-w-7xl mx-auto ${isScrollNavigationActive ? "w-full flex-1 flex flex-col" : ""}`}
+				>
 					{currentScreen !== "verse" &&
 						renderNonVerseScreen({
 							screen: currentScreen,
@@ -333,29 +346,24 @@ export default function App() {
 						})}
 
 					{currentScreen === "verse" && (
-						<div className="grid gap-6 items-start md:grid-cols-[7fr_3fr]">
+						<div
+							className={`grid gap-6 items-start md:grid-cols-[7fr_3fr] ${isScrollNavigationActive ? "flex-1" : ""}`}
+						>
 							<div
 								ref={versePanelRef}
-								className={`min-h-[70vh] ${
+								className={`${isScrollNavigationActive ? "self-stretch" : "min-h-[70vh]"} ${
 									showFullChapter
 										? isMobile
 											? "pt-8"
 											: ""
 										: isMobile
 											? "flex items-start pt-8"
-											: "flex items-center justify-center"
+											: "flex items-center-safe justify-center"
 								} w-full max-w-3xl md:max-w-4xl justify-self-center verse-panel-shell ${
 									isSplitView
 										? "verse-panel-split md:col-span-1"
 										: "verse-panel-centered md:col-span-2"
 								} ${scrollJumpActive ? "verse-panel-jump" : ""}`}
-								style={
-									showFullChapter
-										? undefined
-										: isMobile
-											? undefined
-											: { height: "70vh" }
-								}
 							>
 								<div className="verse-panel-inner relative">
 									{currentVerseData ? (
@@ -430,20 +438,11 @@ export default function App() {
 												currentChapter < chapterCount
 											}
 										/>
-									) : (
+									) : isLoading ? null : (
 										<NeumorphCard>
-											{isLoading ? (
-												<div className="mx-auto w-fit space-y-3">
-													<Skeleton className="h-3 w-56" />
-													<Skeleton className="h-3 w-56" />
-													<Skeleton className="h-3 w-56" />
-													<Skeleton className="h-3 w-56" />
-												</div>
-											) : (
-												<p className="text-sm text-gray-500">
-													{t("verse.selectBookPrompt")}
-												</p>
-											)}
+											<p className="text-sm text-gray-500">
+												{t("verse.selectBookPrompt")}
+											</p>
 										</NeumorphCard>
 									)}
 								</div>
@@ -451,7 +450,7 @@ export default function App() {
 
 							{(!showFullChapter || isWordPanelActive) && (
 								<div
-									className={`hidden md:block ${showFullChapter ? "word-panel-fixed-wrapper" : ""}`}
+									className={`hidden ${isScrollNavigationActive && !isSplitView ? "" : "md:block"} ${showFullChapter ? "word-panel-fixed-wrapper" : ""}`}
 									style={showFullChapter ? undefined : { height: "70vh" }}
 								>
 									{(() => {

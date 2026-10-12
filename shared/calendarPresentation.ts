@@ -1,6 +1,7 @@
 import type { CalendarState } from "./calendarClient";
 import { calendarIsOutdated } from "./calendarRefresh";
 import type { CalendarDay, CalendarResponse } from "./productContracts";
+import type { AppLanguage } from "./translationConfig";
 
 export const MOADIM = [
 	{ id: "pesach", icon: "flame" },
@@ -23,6 +24,25 @@ export function normalizeMoed(event: string): MoedId | null {
 				? "sukkot"
 				: event;
 	return MOADIM.find((moed) => moed.id === id)?.id ?? null;
+}
+
+export function localSunsetClock(
+	sunsetAt: string | null | undefined,
+	timeZone: string | null | undefined,
+	language: AppLanguage,
+): string | null {
+	if (!sunsetAt || !timeZone) return null;
+	const instant = new Date(sunsetAt);
+	if (Number.isNaN(instant.getTime())) return null;
+	try {
+		return new Intl.DateTimeFormat(language, {
+			hour: "numeric",
+			minute: "2-digit",
+			timeZone,
+		}).format(instant);
+	} catch {
+		return null;
+	}
 }
 
 export function confirmedMoadim(day: CalendarDay | undefined): MoedId[] {

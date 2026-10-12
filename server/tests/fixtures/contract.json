@@ -35,6 +35,7 @@
 		"month_status",
 		"observation",
 		"rabbinic",
+		"sunset_at",
 		"year_start_status"
 	],
 	"capabilities_keys": ["ai", "flags"],

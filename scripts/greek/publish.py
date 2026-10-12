@@ -99,6 +99,13 @@ def assert_public_file_size(path: Path) -> None:
         )
 
 
+def lexicon_shard_payloads(lexicon: dict[str, dict]) -> dict[str, dict[str, dict]]:
+    shards: dict[str, dict[str, dict]] = {}
+    for strong, entry in lexicon.items():
+        shards.setdefault(occurrence_shard_key(strong), {})[strong] = entry
+    return dict(sorted(shards.items()))
+
+
 def occurrence_shards(occurrences: dict[str, dict]) -> dict[str, dict[str, dict]]:
     shards: dict[str, dict[str, dict]] = {}
     for strong, bucket in occurrences.items():
@@ -272,6 +279,26 @@ def validate_release_tree(release_dir: Path, manifest: dict | None = None) -> di
     if any(entry.get("instances") for entry in lexicon.values()):
         raise ValueError("Published Greek lexicon must not embed occurrence instances")
     assert_public_file_size(lexicon_path)
+    lexicon_shard_index = release_manifest.get("lexicon_shards") or {}
+    if not lexicon_shard_index:
+        raise ValueError("Greek release is missing lexicon shards")
+    covered: set[str] = set()
+    for key, meta in lexicon_shard_index.items():
+        shard_path = release_dir / meta["path"]
+        if not shard_path.is_file():
+            raise ValueError(f"Missing lexicon shard: {key}")
+        payload = read_json(shard_path)
+        if checksum(payload) != meta.get("checksum"):
+            raise ValueError(f"Lexicon shard checksum mismatch: {key}")
+        assert_public_file_size(shard_path)
+        for strong, entry in payload.items():
+            if occurrence_shard_key(strong) != key or entry.get("strong") != strong:
+                raise ValueError(f"Strong {strong} is in the wrong lexicon shard {key}")
+            if entry != lexicon.get(strong):
+                raise ValueError(f"Lexicon shard drifted from lexicon.json: {strong}")
+            covered.add(strong)
+    if covered != set(lexicon):
+        raise ValueError("Greek lexicon shards do not match lexicon.json")
     shards = release_manifest.get("occurrence_shards") or {}
     if not shards:
         raise ValueError("Greek release is missing occurrence shards")
@@ -349,6 +376,13 @@ def publish_preview(
     )
     write_published_json(staging_dir / "lexicon.json", lexicon)
     assert_public_file_size(staging_dir / "lexicon.json")
+    lexicon_index: dict[str, dict[str, str]] = {}
+    for key, payload in lexicon_shard_payloads(lexicon).items():
+        relative = f"lexicon/{key}.json"
+        shard_path = staging_dir / relative
+        write_published_json(shard_path, payload)
+        assert_public_file_size(shard_path)
+        lexicon_index[key] = {"checksum": checksum(payload), "path": relative}
     shard_index: dict[str, dict[str, str]] = {}
     for key, payload in occurrence_shards(bundle["occurrences"]).items():
         shard_path = staging_dir / "occurrences" / f"{key}.json"
@@ -375,6 +409,7 @@ def publish_preview(
         "complete": True,
         "edition": "sblgnt",
         "lexicon_checksum": checksum(lexicon),
+        "lexicon_shards": lexicon_index,
         "occurrence_shards": shard_index,
         "publicEnabled": False,
         "revision": STEPBIBLE_COMMIT,

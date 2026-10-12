@@ -1,6 +1,5 @@
 import { parseSourceStrong } from "@davar/shared/greekBesorah";
 import { isCurrentLexiconResult } from "@davar/shared/lexiconAssets";
-import type { Dispatch, SetStateAction } from "react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
 	type BookResponse,
@@ -98,7 +97,6 @@ export function useWordSelection({
 	currentScreen,
 	currentVerseData,
 	chapterVerses,
-	setChapterVerses,
 	language,
 	besorahTextVersion,
 	setCurrentBook,
@@ -112,7 +110,6 @@ export function useWordSelection({
 	currentScreen: string;
 	currentVerseData: VerseResponse | null;
 	chapterVerses: VerseResponse[];
-	setChapterVerses: Dispatch<SetStateAction<VerseResponse[]>>;
 	language: "en" | "es" | "he";
 	besorahTextVersion: "delitzsch" | "hutter";
 	setCurrentBook: (book: string) => void;
@@ -408,10 +405,9 @@ export function useWordSelection({
 			setSelectedWord(null);
 			setSelectedWordContext(null);
 			setSelectedWordAnalysis(null);
-			setChapterVerses([]);
 			prevBookRef.current = currentBook;
 		}
-	}, [currentBook, setChapterVerses]);
+	}, [currentBook]);
 
 	useEffect(() => {
 		if (currentScreen === "verse") return;
