@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths: ["web/**", "shared/**", "scripts/generate-static-data/**", ".github/workflows/web-ci.yml"]
   pull_request:
-    branches: [main, feat/davar-v2]
+    branches: [main, feat/davar-v2, feat/preview-api-railway]
     paths: ["web/**", "shared/**", "scripts/generate-static-data/**", ".github/workflows/web-ci.yml"]
 
 permissions:
@@ -16,7 +16,7 @@ jobs:
   web_ci:
     name: web-ci
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 20
 
     steps:
       - uses: actions/checkout@v4
@@ -51,7 +51,7 @@ jobs:
           cd web
           bun install --frozen-lockfile
 
-      - name: Audit dependencies
+      - name: Audit web dependencies
         run: |
           cd web
           bun audit || echo "::warning::Web dependency audit found vulnerabilities"
@@ -74,7 +74,7 @@ jobs:
       - name: Run build
         run: |
           cd web
-          bun --env-file=.env ./build.ts
+          bun run build
 
       - name: Run UI and service regression tests
         run: |

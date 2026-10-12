@@ -75,14 +75,14 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: '1.3.14'
-      - run: pip install jsonschema==4.26.0 PyYAML==6.0.3
+      - run: pip install jsonschema==4.26.0 PyYAML==6.0.3 pytest==9.0.2 python-dotenv
       - run: python -m scripts.knowledge.compatibility boundary --base "$BASE_SHA"
       - run: bun test tests/fixtures/knowledge/legacy-mapping.test.ts
       - run: python -m scripts.knowledge.compatibility legacy --base "$BASE_SHA"
 
   shaul-compatibility:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:

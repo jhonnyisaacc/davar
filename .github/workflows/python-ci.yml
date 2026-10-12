@@ -2,7 +2,7 @@ name: Python CI
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, feat/preview-api-railway]
     paths:
       - "scripts/hutter/morphology.py"
       - "scripts/hutter/attested_morphology.py"

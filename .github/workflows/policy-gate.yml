@@ -2,7 +2,7 @@ name: Policy Gate
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, feat/preview-api-railway]
   push:
     branches: [main]
 
@@ -13,7 +13,6 @@ jobs:
   policy_gate:
     name: policy-gate
     runs-on: ubuntu-latest
-    timeout-minutes: 15
 
     steps:
       - name: Checkout code
@@ -29,4 +28,4 @@ jobs:
       - name: Report gate status
         run: |
           echo "Policy gate check passed."
-          echo "This required check now enforces lightweight security controls."
+          echo "gitleaks scanned the checkout."

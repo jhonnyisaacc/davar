@@ -2,11 +2,13 @@ name: Web Preview
 
 on:
   pull_request:
-    types: [ready_for_review, synchronize]
-    paths-ignore:
-      - "mobile/**"
-      - "docs/**"
-      - "*.md"
+    types: [opened, ready_for_review, synchronize, reopened]
+    paths:
+      - "web/**"
+      - "shared/**"
+      - "scripts/generate-static-data/**"
+      - "scripts/preview-api-url.sh"
+      - ".github/workflows/web-preview.yml"
   workflow_dispatch:
 
 permissions:
@@ -50,6 +52,10 @@ jobs:
           URL="$(bash scripts/preview-api-url.sh)"
           echo "url=$URL" >> "$GITHUB_OUTPUT"
           echo "Resolved PUBLIC_API_URL=$URL"
+
+      - name: Install dependencies
+        working-directory: web
+        run: bun install --frozen-lockfile
 
       - name: Build web
         working-directory: web
