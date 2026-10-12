@@ -17,7 +17,7 @@ The commentary screen answers a question about a verse reference using the comme
 Preconditions:
 
 - The baseline instance is healthy.
-- The API is running: `bun scripts/control/server.ts start`, then `bun scripts/control/server.ts doctor` prints `status ok`.
+- The API is running: `bun scripts/control/api.ts start`, then `bun scripts/control/api.ts doctor` prints `status ok`.
 
 - **Open Commentary.** Run `bun scripts/control/web.ts drive open /commentary`. The text shows the commentary screen, not the not-found screen.
 - **Proof.** Run `bun scripts/control/web.ts evidence`.

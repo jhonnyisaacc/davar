@@ -28,9 +28,9 @@ echo "check mobile"
 	bun run typecheck
 )
 
-echo "check server"
+echo "check api"
 (
-	cd server
+	cd api
 	export DATABASE_URL="${DATABASE_URL:-postgresql://postgres:postgres@127.0.0.1:5432/davar_server_test}"
 	export TEST_DATABASE_URL="${TEST_DATABASE_URL:-$DATABASE_URL}"
 	export PGHOST="${PGHOST:-127.0.0.1}"

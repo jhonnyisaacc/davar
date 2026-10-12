@@ -7,7 +7,7 @@ This directory holds the recipes for verifying what a reader sees in the Davar w
 - Start the app with `bun scripts/control/web.ts start` from the repository root, with `CHROME_PATH` pointing at a Chromium build (on this Mac, Brave).
 - `bun scripts/control/web.ts doctor` prints `status ok` with `url http://127.0.0.1:5173`.
 - The browser profile is new each start, so there is no saved city, language, or theme.
-- Features marked as needing the API also need `bun scripts/control/server.ts start` (port 3000).
+- Features marked as needing the API also need `bun scripts/control/api.ts start` (port 3000).
 - Never drive an instance that this run didn't start.
 
 ## Driving conventions

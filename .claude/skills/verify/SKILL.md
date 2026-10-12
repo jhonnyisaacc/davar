@@ -65,7 +65,7 @@ Proof standards:
 - Exercise the real reader path through routes and visible controls. Don't call internal setters, and don't seed `localStorage` by hand.
 - Capture before and after: one `evidence` before the action and one after, so the change of state is visible.
 - Read the screenshot, not just the text. Hebrew niqqud, RTL direction, and layout regressions only show in the image.
-- Commentary, accounts, assemblies, and the calendar API need `server/` running on port 3000 (`bun scripts/control/server.ts`). Without it those screens show their offline or error state. Say which state you proved.
+- Commentary, accounts, assemblies, and the calendar API need `api/` running on port 3000 (`bun scripts/control/api.ts`). Without it those screens show their offline or error state. Say which state you proved.
 
 ## Cleanup
 

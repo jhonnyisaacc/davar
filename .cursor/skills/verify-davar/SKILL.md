@@ -19,11 +19,11 @@ bun scripts/control/web.ts start
 
 Ready when the command prints `status ok` with `url http://127.0.0.1:5173` and a `cdp` port (9222 unless `DAVAR_WEB_CDP_PORT` is set). Chrome opens at 390 by 844 so the narrow-layout verse buttons are on screen. The dev server log is `/tmp/davar-verify/web/server.log`. If `web/.env` is missing, start copies `web/.env.example` and reset deletes that copy.
 
-Hono API (documented `bun --env-file=.env ./src/index.ts` in `server/`):
+Hono API (documented `bun --env-file=.env ./src/index.ts` in `api/`):
 
 ```bash
 export DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:5432/davar_server_test
-bun scripts/control/server.ts start
+bun scripts/control/api.ts start
 ```
 
 Ready when `status ok` and `GET /up` would return `{"status":"ok"}`. Start fails with `database-url-missing` when `DATABASE_URL` is unset. Port 3000 unless `DAVAR_SERVER_PORT` is set.
@@ -58,7 +58,7 @@ Run doctor before driving. It is read-only.
 
 ```bash
 bun scripts/control/web.ts doctor
-bun scripts/control/server.ts doctor
+bun scripts/control/api.ts doctor
 bun scripts/control/worker.ts doctor
 bun scripts/control/mobile.ts doctor
 bun scripts/control/python.ts doctor
@@ -86,7 +86,7 @@ A cold load of `/settings` can be replaced by the saved verse route. Open the re
 Hono drive is HTTP GET only:
 
 ```bash
-bun scripts/control/server.ts drive get /up
+bun scripts/control/api.ts drive get /up
 ```
 
 The knowledge worker drive types one of two commands into the tmux session: `python3 -m scripts.knowledge validate` or `check`, with `PYTHONPATH=.` from the repo root.
@@ -122,8 +122,8 @@ Capture the action and the resulting state. Web evidence is a PNG screenshot plu
 ```bash
 bun scripts/control/web.ts state
 bun scripts/control/web.ts evidence
-bun scripts/control/server.ts state
-bun scripts/control/server.ts evidence
+bun scripts/control/api.ts state
+bun scripts/control/api.ts evidence
 bun scripts/control/worker.ts state
 bun scripts/control/worker.ts evidence
 bun scripts/control/python.ts state
@@ -143,7 +143,7 @@ Stop kills only the pids or the tmux session this run recorded. Reset does that 
 ```bash
 bun scripts/control/web.ts stop
 bun scripts/control/web.ts reset
-bun scripts/control/server.ts reset
+bun scripts/control/api.ts reset
 bun scripts/control/worker.ts reset
 bun scripts/control/mobile.ts reset
 bun scripts/control/python.ts reset
@@ -156,7 +156,7 @@ After reset, the evidence directory from the last `evidence` command must still 
 Control CLIs, from the repository root:
 
 - `bun scripts/control/web.ts` — React web, Chrome DevTools
-- `bun scripts/control/server.ts` — Hono API, HTTP
+- `bun scripts/control/api.ts` — Hono API, HTTP
 - `bun scripts/control/worker.ts` — `python -m scripts.knowledge` in tmux
 - `bun scripts/control/python.ts` — `python -m scripts.dict` and `python -m scripts.delitzsch`
 - `bun scripts/control/mobile.ts` — Expo doctor, state, and reset; drive unimplemented

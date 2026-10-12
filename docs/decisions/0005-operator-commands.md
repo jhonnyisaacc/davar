@@ -20,11 +20,11 @@ Print a fixed invitation code. The rake task draws a new code on each run.
 
 ## Evidence
 
-`cd server && bun test tests/operators.test.ts` covers the padded code, the 30-day expiry, 100 uses, the printed command, the eligible male leader, a reader, a female leader, incomplete onboarding, a missing user, a missing `USER_ID`, and that no endorsement row is written.
+`cd api && bun test tests/operators.test.ts` covers the padded code, the 30-day expiry, 100 uses, the printed command, the eligible male leader, a reader, a female leader, incomplete onboarding, a missing user, a missing `USER_ID`, and that no endorsement row is written.
 
 ## How to undo
 
-Remove `operator:issue-invitation` and `operator:verify-leader` from `server/package.json`, and delete `server/src/services/operators.ts`, `server/src/jobs/issue-invitation.ts`, `server/src/jobs/verify-leader.ts`, and `server/tests/operators.test.ts`.
+Remove `operator:issue-invitation` and `operator:verify-leader` from `api/package.json`, and delete `api/src/services/operators.ts`, `api/src/jobs/issue-invitation.ts`, `api/src/jobs/verify-leader.ts`, and `api/tests/operators.test.ts`.
 
 ## Status
 

@@ -49,11 +49,11 @@ Pass: the URL contains `/sources` and the visible text contains `Text Sources`.
 Ask the Hono server for its health document.
 
 ```bash
-bun scripts/control/server.ts drive get /up
-bun scripts/control/server.ts evidence
+bun scripts/control/api.ts drive get /up
+bun scripts/control/api.ts evidence
 ```
 
-Pass: `http 200` and body `{"status":"ok"}`. The response file remains under `artifacts/verify/server/` after reset.
+Pass: `http 200` and body `{"status":"ok"}`. The response file remains under `artifacts/verify/api/` after reset.
 
 ## Knowledge worker
 

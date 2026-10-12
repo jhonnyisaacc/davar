@@ -14,10 +14,10 @@ The Hono server reports whether the API process is up. Clients keep calling `/ap
 
 Preconditions:
 
-- `DATABASE_URL` is set and `bun scripts/control/server.ts doctor` prints `status ok` with body `{"status":"ok"}`.
+- `DATABASE_URL` is set and `bun scripts/control/api.ts doctor` prints `status ok` with body `{"status":"ok"}`.
 
-- **Health.** Request the health route. Run `bun scripts/control/server.ts drive get /up`. The command prints `http 200` and `body {"status":"ok"}`.
-- **Proof.** Run `bun scripts/control/server.ts evidence`. `artifacts/verify/server/` contains `response.txt` and `http.txt`.
+- **Health.** Request the health route. Run `bun scripts/control/api.ts drive get /up`. The command prints `http 200` and `body {"status":"ok"}`.
+- **Proof.** Run `bun scripts/control/api.ts evidence`. `artifacts/verify/api/` contains `response.txt` and `http.txt`.
 
 ## Gotchas
 

@@ -124,8 +124,8 @@ unsupported components until those patterns are migrated.
 ## Static Data Environment Setup
 
 Local services use the API on `3000`, web/static data on `5173`, and Expo/Metro
-on its default port `8081`. Commentary requires the API; start it from `server/`
-with `bun run dev` after following [the API setup](../server/README.md).
+on its default port `8081`. Commentary requires the API; start it from `api/`
+with `bun run dev` after following [the API setup](../api/README.md).
 Start the static data server from `web/` with `bun run dev`.
 
 Mobile static data endpoints are controlled by Expo public env vars:

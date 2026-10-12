@@ -55,7 +55,7 @@ bun run start
 ```
 
 Keep the API running for Commentary, accounts, assemblies, and the calendar.
-Follow [server/README.md](server/README.md), then from `server/` run
+Follow [api/README.md](api/README.md), then from `api/` run
 `bun run dev` (port 3000).
 
 | Service | Local URL |
@@ -78,17 +78,17 @@ PYTHONPATH=. python -m pytest -q tests tools/bani/tests
 
 ### 4) API server (Bun + Hono)
 
-Byte-compatible port of the Davar v2 product API (`server/`). Clients keep
+Byte-compatible port of the Davar v2 product API (`api/`). Clients keep
 calling the same `/api/v1` paths on `http://127.0.0.1:3000`:
 
 ```bash
-cd server
+cd api
 bun install
 bun run db:migrate
 bun run dev
 ```
 
-See `server/README.md` for env vars, the dev sandbox, and jobs.
+See `api/README.md` for env vars, the dev sandbox, and jobs.
 
 Web checks from `.github/workflows/web-ci.yml`:
 

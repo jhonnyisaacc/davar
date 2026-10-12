@@ -1,6 +1,6 @@
 # Feature map
 
-Five features and the command that checks each one. Every command already exists on this branch. Control commands are `scripts/control/web.ts`, `scripts/control/server.ts`, `scripts/control/worker.ts`, and `scripts/control/mobile.ts`.
+Five features and the command that checks each one. Every command already exists on this branch. Control commands are `scripts/control/web.ts`, `scripts/control/api.ts`, `scripts/control/worker.ts`, and `scripts/control/mobile.ts`.
 
 Run a `scripts/control` command from the repository root. For the verse route, run `bun scripts/control/web.ts start` first. Run each `bun test` from the directory in that row.
 
@@ -8,8 +8,8 @@ Run a `scripts/control` command from the repository root. For the verse route, r
 | --- | --- | --- |
 | Read a verse | The web route renders Hebrew from static JSON. | `bun scripts/control/web.ts drive open /verse/Genesis/1/1` |
 | Word card | Selecting a token opens the lexicon card. | `cd web && bun test src/app/services/staticData.loading.test.ts` |
-| Calendar | `GET /api/v1/calendar/upcoming` returns the documented keys. | `cd server && bun test tests/calendar.test.ts` |
-| Assemblies | A signed-in client can list assemblies. | `cd server && bun test tests/assemblies.test.ts` |
+| Calendar | `GET /api/v1/calendar/upcoming` returns the documented keys. | `cd api && bun test tests/calendar.test.ts` |
+| Assemblies | A signed-in client can list assemblies. | `cd api && bun test tests/assemblies.test.ts` |
 | Commentary | The commentary screen loads for a verse reference. | `cd web && bun test src/app/features/commentary/CommentaryScreen.test.tsx` |
 
 ## What passing looks like

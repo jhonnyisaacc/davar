@@ -1,4 +1,4 @@
-# Davar API — Bun + Hono (`server/`)
+# Davar API — Bun + Hono (`api/`)
 
 Product API for the Expo (`mobile/`) and React (`web/`) clients. They keep
 calling the same `/api/v1` paths. Byte-compatible means that HTTP API only,
@@ -11,7 +11,7 @@ owns the authenticated product domains.
 Clients already default to `http://127.0.0.1:3000`, and so does this server:
 
 ```sh
-cd server
+cd api
 bun install
 bun run db:migrate   # needs DATABASE_URL
 bun run dev          # PORT=3000 by default
@@ -51,7 +51,7 @@ Health: `GET /up`.
 | `PYTHON_BIN` | no (`python3`) | Interpreter for the pinned Bore bridge |
 | `WEB_ORIGINS` | no (local defaults) | Comma-separated browser origins allowed on `/api/*` |
 | `TRUSTED_PROXIES` | no (loopback + private ranges) | Comma-separated IPs/IPv4 CIDRs whose `X-Forwarded-For` is honored |
-| `BORE_BRIDGE_PATH` | no (`server/lib/bore/bridge.py`) | Override for the calendar bridge |
+| `BORE_BRIDGE_PATH` | no (`api/lib/bore/bridge.py`) | Override for the calendar bridge |
 | `IMPORT_FILE` / `APPLY` | import commands | Reviewed-payload file; dry run unless `APPLY=1` |
 | `SCENARIO` | sandbox calendar | `pending` or `confirmed` |
 
@@ -214,7 +214,7 @@ never logged.
 - `AUTH_RETURN_URIS` entries are trimmed and empties dropped.
 - Query-string `notification_consent=true` does not opt in; only a JSON
   boolean does.
-- `server/lib/bore/` is the calendar engine. CI runs its pytest suite with
+- `api/lib/bore/` is the calendar engine. CI runs its pytest suite with
   `PYTHONPATH=lib/bore`.
 - Live OAuth, SMTP, and AI providers are configuration. Unconfigured
   providers stay unavailable; the sandbox keeps the fixture paths.

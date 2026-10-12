@@ -18,11 +18,11 @@ Add a reload package. Bun's `--watch` already reloads.
 
 ## Evidence
 
-`cd server && bun test tests/developmentRuntime.test.ts` checks that `dev` uses `--watch` and `start` does not.
+`cd api && bun test tests/developmentRuntime.test.ts` checks that `dev` uses `--watch` and `start` does not.
 
 ## How to undo
 
-Remove `--watch` from `server/package.json` `dev`. Delete `server/tests/developmentRuntime.test.ts` and this file.
+Remove `--watch` from `api/package.json` `dev`. Delete `api/tests/developmentRuntime.test.ts` and this file.
 
 ## Status
 

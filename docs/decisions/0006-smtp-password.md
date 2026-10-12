@@ -16,11 +16,11 @@ Add a one-file shim with a removal issue. The stack-migration exception is for a
 
 ## Evidence
 
-`cd server && bun test tests/mailer.test.ts` covers `SMTP_PASS` authentication, a raised delivery error that does not print the password, and sandbox delivery that does not open an SMTP transport.
+`cd api && bun test tests/mailer.test.ts` covers `SMTP_PASS` authentication, a raised delivery error that does not print the password, and sandbox delivery that does not open an SMTP transport.
 
 ## How to undo
 
-Revert `server/src/services/mailer.ts`, `server/tests/mailer.test.ts`, the SMTP lines in `server/.env.example` and `server/README.md`, and delete this file.
+Revert `api/src/services/mailer.ts`, `api/tests/mailer.test.ts`, the SMTP lines in `api/.env.example` and `api/README.md`, and delete this file.
 
 ## Status
 

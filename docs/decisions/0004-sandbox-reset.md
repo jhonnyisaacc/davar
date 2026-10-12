@@ -22,11 +22,11 @@ Keep deleting every `provider = email` attempt. Rails keeps attempts that are no
 
 ## Evidence
 
-`cd server && bun test tests/sandbox.test.ts` covers reset (kept auth attempt, deleted fixture attempt, scenario `live`, mailbox cleared), the three calendar scenarios plus the `live` sync skip, and the status payload with and without development OpenRouter.
+`cd api && bun test tests/sandbox.test.ts` covers reset (kept auth attempt, deleted fixture attempt, scenario `live`, mailbox cleared), the three calendar scenarios plus the `live` sync skip, and the status payload with and without development OpenRouter.
 
 ## How to undo
 
-Revert `server/src/services/fixtures.ts`, `server/src/jobs/sandbox-calendar.ts`, `server/src/http/routes/development.ts`, `server/package.json`, `server/README.md`, and `server/tests/sandbox.test.ts`.
+Revert `api/src/services/fixtures.ts`, `api/src/jobs/sandbox-calendar.ts`, `api/src/http/routes/development.ts`, `api/package.json`, `api/README.md`, and `api/tests/sandbox.test.ts`.
 
 ## Status
 

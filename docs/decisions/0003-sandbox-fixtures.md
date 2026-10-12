@@ -14,11 +14,11 @@ Replace `DAVAR-LOCAL` with `1234567`. Hono keeps the local code and gains the Ra
 
 ## Evidence
 
-`cd server && bun test tests/sandbox.test.ts` asserts the 25 accounts, a repeat seed that keeps the same users and does not rewrite a changed display name, the membership states, the endorsement states, the scenario labels, and the stored state of `DAVAR-LOCAL`, `1234567`, `7654321`, `7654322`, and `7654323`.
+`cd api && bun test tests/sandbox.test.ts` asserts the 25 accounts, a repeat seed that keeps the same users and does not rewrite a changed display name, the membership states, the endorsement states, the scenario labels, and the stored state of `DAVAR-LOCAL`, `1234567`, `7654321`, `7654322`, and `7654323`.
 
 ## How to undo
 
-Revert the persona, membership, endorsement, label, and invitation changes in `server/src/services/fixtures.ts` and `server/tests/sandbox.test.ts`.
+Revert the persona, membership, endorsement, label, and invitation changes in `api/src/services/fixtures.ts` and `api/tests/sandbox.test.ts`.
 
 ## Status
 

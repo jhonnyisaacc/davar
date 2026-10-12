@@ -30,10 +30,10 @@ Rails deletion is not this change.
 
 ## Evidence
 
-- `server/src/lib/codec.ts` writes `v1.<keyId>.<payload>` and still opens `v1.<payload>`.
-- `server/tests/encryption.pin.test.ts` decrypts a fixed legacy `v1.` envelope with the primary key that sealed it, and with that key on the previous-key list.
-- `server/tests/encryption.test.ts` opens an envelope sealed under an older secret after a later primary is placed first in the ring.
-- `server/README.md` states that byte-compatible means the HTTP API only.
+- `api/src/lib/codec.ts` writes `v1.<keyId>.<payload>` and still opens `v1.<payload>`.
+- `api/tests/encryption.pin.test.ts` decrypts a fixed legacy `v1.` envelope with the primary key that sealed it, and with that key on the previous-key list.
+- `api/tests/encryption.test.ts` opens an envelope sealed under an older secret after a later primary is placed first in the ring.
+- `api/README.md` states that byte-compatible means the HTTP API only.
 
 ## How to undo
 

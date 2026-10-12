@@ -2,13 +2,13 @@
 
 ## Context
 
-Rails `api/bin/dev-sandbox` installs gems, prepares a sandbox database, seeds fixtures, starts the API, web, and mobile, and stops that process group. Hono already resets the sandbox with `bun run sandbox:seed` and `bun run sandbox:reset`. A first port added `server/bin/dev-sandbox` as a process manager for setup, start, and stop. Checklist rows 32, 33, and 36. Row 34 (`ios`) is a separate command and is not added here.
+Rails `api/bin/dev-sandbox` installs gems, prepares a sandbox database, seeds fixtures, starts the API, web, and mobile, and stops that process group. Hono already resets the sandbox with `bun run sandbox:seed` and `bun run sandbox:reset`. A first port added `api/bin/dev-sandbox` as a process manager for setup, start, and stop. Checklist rows 32, 33, and 36. Row 34 (`ios`) is a separate command and is not added here.
 
 ## Decision
 
-Dropped the process manager: `server/bin/dev-sandbox` and `server/src/dev-sandbox.ts` are gone. The resettable sandbox outcome stays the Bun scripts `bun run sandbox:seed` and `bun run sandbox:reset`. There is no iOS command. `jobs:calendar` remains a no-op without `IMPORT_FILE`. Forcing an INMS fetch is checklist row 46. `server/tmp/` stays ignored so the local mailbox is not committed.
+Dropped the process manager: `api/bin/dev-sandbox` and `api/src/dev-sandbox.ts` are gone. The resettable sandbox outcome stays the Bun scripts `bun run sandbox:seed` and `bun run sandbox:reset`. There is no iOS command. `jobs:calendar` remains a no-op without `IMPORT_FILE`. Forcing an INMS fetch is checklist row 46. `api/tmp/` stays ignored so the local mailbox is not committed.
 
-Old-stack names found in `server/` on this branch, outside that launcher, are dropped from this server's own files: the unique-violation comment, the encryption paragraphs that named the previous encryption library, and the Bore copy note that ended on the old stack. `server/lib/bore` files that are still byte-identical to `api/lib/bore` stay unchanged. The `legacy-names` check scans `server/` and does not count those pinned copies.
+Old-stack names found in `api/` on this branch, outside that launcher, are dropped from this package's own files: the unique-violation comment, the encryption paragraphs that named the previous encryption library, and the Bore copy note that ended on the old stack. Bore stays at `api/lib/bore`. The `legacy-names` check scans `api/`.
 
 ## Alternatives
 
@@ -22,11 +22,11 @@ Make `jobs:calendar` fetch the public INMS feed. That force import is checklist 
 
 ## Evidence
 
-`cd server && bun test tests/dev-sandbox.test.ts` checks that seed and reset are Bun scripts and that the launcher file is gone. It does not boot PostgreSQL, web, or mobile. `bash scripts/legacy-names.sh` prints `legacy-names: 0`.
+`cd api && bun test tests/dev-sandbox.test.ts` checks that seed and reset are Bun scripts and that the launcher file is gone. It does not boot PostgreSQL, web, or mobile. `bash scripts/legacy-names.sh` prints `legacy-names: 0`.
 
 ## How to undo
 
-Restore `server/bin/dev-sandbox`, `server/src/dev-sandbox.ts`, and the previous `server/tests/dev-sandbox.test.ts`. Restore the launcher bullets in `server/README.md`.
+Restore `api/bin/dev-sandbox`, `api/src/dev-sandbox.ts`, and the previous `api/tests/dev-sandbox.test.ts`. Restore the launcher bullets in `api/README.md`.
 
 ## Status
 

@@ -20,11 +20,11 @@ Default to 3 when the variable is unset. That matches Puma's thread default, not
 
 ## Evidence
 
-`cd server && bun test tests/dbPool.test.ts` covers an unset variable, a positive integer, a trimmed integer, and invalid or non-positive values, and checks that `createDb` passes that size as `max`.
+`cd api && bun test tests/dbPool.test.ts` covers an unset variable, a positive integer, a trimmed integer, and invalid or non-positive values, and checks that `createDb` passes that size as `max`.
 
 ## How to undo
 
-Revert `server/src/db/client.ts`, delete `server/tests/dbPool.test.ts`, and delete this file. Remove the `DATABASE_POOL_SIZE` lines from `server/README.md` and `server/.env.example`.
+Revert `api/src/db/client.ts`, delete `api/tests/dbPool.test.ts`, and delete this file. Remove the `DATABASE_POOL_SIZE` lines from `api/README.md` and `api/.env.example`.
 
 ## Status
 

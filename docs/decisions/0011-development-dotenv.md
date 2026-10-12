@@ -18,11 +18,11 @@ Add a dotenv dependency. Bun already loads `.env`.
 
 ## Evidence
 
-`cd server && bun test tests/dotenv.test.ts` checks that `dev` and `start` omit the file flags, that both load `.env`, and that an export wins.
+`cd api && bun test tests/dotenv.test.ts` checks that `dev` and `start` omit the file flags, that both load `.env`, and that an export wins.
 
 ## How to undo
 
-Restore `dev` and `start` in `server/package.json` to `bun --env-file=.env ./src/index.ts`. Restore the `server/.env.example` header and the environment paragraph in `server/README.md`. Remove this record and `server/tests/dotenv.test.ts`. The `.env.development.local` gitignore line can stay; it only keeps a local file uncommitted.
+Restore `dev` and `start` in `api/package.json` to `bun --env-file=.env ./src/index.ts`. Restore the `api/.env.example` header and the environment paragraph in `api/README.md`. Remove this record and `api/tests/dotenv.test.ts`. The `.env.development.local` gitignore line can stay; it only keeps a local file uncommitted.
 
 ## Status
 

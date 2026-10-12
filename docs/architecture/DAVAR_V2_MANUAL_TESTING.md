@@ -1,9 +1,9 @@
 # Davar v2 local manual testing
 
-The Rails sandbox launcher has been removed. Start the API from `server/`
-([server/README.md](../../server/README.md)). iOS sandbox launch stays
+The Rails sandbox launcher has been removed. Start the API from `api/`
+([api/README.md](../../api/README.md)). iOS sandbox launch stays
 deferred. The persona table below described that launcher's fixtures; the
-running seed is the accounts in the server README.
+running seed is the accounts in the API README.
 
 This is a development-only sandbox. UI continues to use `davar.pen`.
 Fixtures are synthetic: they are not Scripture evidence, Shaul imports, real
@@ -19,7 +19,7 @@ Prerequisites: Bun, PostgreSQL 17, and Python 3.13+. Start PostgreSQL on port
 5432 before the API. JavaScript commands use Bun. iOS sandbox launch stays
 deferred.
 
-From `server/`:
+From `api/`:
 
 ```sh
 bun install
@@ -123,7 +123,7 @@ stays on the server and the local env file is Git-ignored.
   Explicit synthetic scenarios remain labeled by provenance and the sandbox
   banner; unresolved Aviv remains explicit in all modes.
 
-From `server/`, select a scenario:
+From `api/`, select a scenario:
 
 ```sh
 bun run sandbox:calendar confirmed
@@ -139,7 +139,7 @@ reload/reopen the calendar to verify the selected city stays on the device.
 
 ## Reset and stop
 
-From `server/`:
+From `api/`:
 
 ```sh
 bun run sandbox:reset
@@ -148,7 +148,7 @@ bun run sandbox:reset
 Stop the API with Ctrl+C. That leaves PostgreSQL running. Reset clears the
 sandbox rows the seed owns and writes them again. Select a calendar scenario
 again after reset. Rate limits still apply; wait for their window if repeated
-sign-in attempts are throttled. Sandbox mail is under `server/tmp/sandbox-mail/`.
+sign-in attempts are throttled. Sandbox mail is under `api/tmp/sandbox-mail/`.
 Do not share runtime logs or inbox links. No private corpus is required.
 
 ## Broader product acceptance checklist

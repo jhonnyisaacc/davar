@@ -18,7 +18,7 @@ The Calendar tab shows the biblical calendar based on local sunset. The first ti
 Preconditions:
 
 - The baseline instance is healthy. The browser profile is new, so no city is saved.
-- For `calendar-days`, also start the API with `bun scripts/control/server.ts start`.
+- For `calendar-days`, also start the API with `bun scripts/control/api.ts start`.
 
 - **Open Calendar.** Run `bun scripts/control/web.ts drive click Calendar`. The URL ends in `/widgets`, and the text contains `Choose your city` and `We’ll use it for your local sunset.`
 - **Proof.** Run `bun scripts/control/web.ts evidence`.

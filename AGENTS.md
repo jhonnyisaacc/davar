@@ -6,11 +6,12 @@ Davar (דבר, "word") is a minimalist Bible study app for Hebrew Scriptures (Ta
 
 - `web/`: Bun and React. Static JSON on Cloudflare Pages. TS2009 from Supabase Storage.
 - `mobile/`: React Native and Expo, with SQLite for offline reading.
+- `api/`: Bun and Hono product API. Python Bore lives at `api/lib/bore`.
 - `shared/`: pure helpers imported by web and mobile.
 - `data/` and `scripts/`: source datasets and the Python pipelines that build them.
 - `tools/bani/`: Hebrew transliteration engine. `scripts/translit/` is the batch pipeline that calls it.
 
-JavaScript installs, scripts, and tests use Bun from the surface directory (`web/` or `mobile/`). Do not suggest npm, yarn, pnpm, or deno.
+JavaScript installs, scripts, and tests use Bun from the surface directory (`web/`, `mobile/`, or `api/`). Do not suggest npm, yarn, pnpm, or deno.
 
 ## Product rules
 
