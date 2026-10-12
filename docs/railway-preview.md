@@ -56,9 +56,10 @@ Root directory `/api`. Watch patterns match `api-ci.yml`:
 - `data/knowledge/registries/**`
 
 Hosted boot needs HTTPS `API_PUBLIC_URL` and exact-match `API_HOSTS`
-(`api/src/lib/config.ts`). Staging should use
-`API_PUBLIC_URL=https://davar-staging.up.railway.app` and
-`API_HOSTS=davar-staging.up.railway.app`, with `NODE_ENV=staging`.
+(`api/src/lib/config.ts`). Staging is set to
+`API_PUBLIC_URL=https://davar-staging.up.railway.app`,
+`API_HOSTS=davar-staging.up.railway.app`, and `NODE_ENV=staging`.
+`GET /up` on that domain returns `{"status":"ok"}` after restart.
 
 CORS already allows `https://davar.bible` and `https://*.davar.pages.dev`
 (`api/src/services/webOrigins.ts`).

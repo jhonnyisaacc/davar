@@ -58,7 +58,16 @@ gh secret set EXPO_TOKEN --repo jhonnyisaacc/davar --env mobile-production
 [railway-preview.md](./railway-preview.md)). Prefer staging:
 
 ```bash
-gh secret set STAGING_API_URL --repo jhonnyisaacc/davar --body 'https://<staging>.up.railway.app'
+gh secret set STAGING_API_URL --repo jhonnyisaacc/davar --body 'https://davar-staging.up.railway.app'
 ```
 
 Keep `PUBLIC_API_URL` only as a fallback until staging exists.
+
+## Staging branch ruleset
+
+Definition: `.github/rulesets/staging.json` (PR required, no force-push,
+no deletion). Apply with admin `gh` (cloud agent tokens get 403):
+
+```bash
+gh api --method POST repos/jhonnyisaacc/davar/rulesets --input .github/rulesets/staging.json
+```
