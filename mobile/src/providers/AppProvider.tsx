@@ -131,6 +131,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     const hydrate = async () => {
+      const themeAtStart = useAppStore.getState().themeMode;
       try {
         const [
           savedTheme,
@@ -161,7 +162,10 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
           loadTranslationOnly(),
           loadCurrentVerseId(),
         ]);
-        setThemeMode(savedTheme);
+        // Keep a theme change made while storage was loading.
+        if (useAppStore.getState().themeMode === themeAtStart) {
+          setThemeMode(savedTheme);
+        }
         setHebrewFontScale(savedScale);
         setBookmarks(savedBookmarks);
         setLanguage(savedLanguage as AppLanguage);

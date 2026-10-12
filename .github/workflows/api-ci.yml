@@ -1,7 +1,7 @@
 name: Davar API
 on:
   pull_request:
-    branches: [main, feat/davar-v2]
+    branches: [main, feat/davar-v2, feat/preview-api-railway]
     paths:
       - "api/**"
       - ".github/workflows/api-ci.yml"
@@ -9,7 +9,7 @@ on:
       - "contracts/biblical-knowledge/**"
       - "data/knowledge/registries/**"
   push:
-    branches: [main, feat/davar-v2]
+    branches: [main, feat/davar-v2, feat/preview-api-railway]
     paths:
       - "api/**"
       - ".github/workflows/api-ci.yml"
@@ -21,6 +21,7 @@ permissions:
 jobs:
   api:
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     services:
       postgres:
         image: postgres:17
@@ -53,6 +54,7 @@ jobs:
       - run: bun test
   bore-parity:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

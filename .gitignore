@@ -89,6 +89,10 @@ logs/
 web/tmp/
 api/tmp/
 
+# Bundler / Rails leftovers (API is Bun/Hono)
+.bundle/
+**/vendor/bundle/
+
 # macOS
 .DS_Store
 .DS_Store?

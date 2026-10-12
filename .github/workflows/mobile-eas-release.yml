@@ -44,6 +44,7 @@ jobs:
   mobile_release:
     name: mobile-eas-release
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     environment: ${{ inputs.profile == 'production' && 'mobile-production' || 'mobile-preview' }}
 
     steps:
@@ -64,6 +65,84 @@ jobs:
             echo "build-and-submit is only allowed with production profile"
             exit 1
           fi
+
+      - name: Write Play service account for Android submit
+        if: inputs.release_kind == 'build-and-submit' && inputs.platform != 'ios'
+        shell: bash
+        env:
+          GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+          RELEASE_KIND: ${{ inputs.release_kind }}
+          RELEASE_PLATFORM: ${{ inputs.platform }}
+        run: |
+          set -euo pipefail
+          # PLAYCHECK_START
+          needs_android_play_json() {
+            kind="$1"
+            platform="$2"
+            [ "${kind}" = "build-and-submit" ] || return 1
+            [ "${platform}" != "ios" ]
+          }
+
+          check_play_json() {
+            file="$1"
+            if [ ! -f "${file}" ]; then
+              echo "::error::Missing ${file}. Android submit needs the Play service account JSON. eas submit was not called."
+              return 1
+            fi
+            if ! python3 -c '
+          import json, sys
+          path = sys.argv[1]
+          try:
+              with open(path, encoding="utf-8") as handle:
+                  data = json.load(handle)
+          except Exception:
+              sys.stderr.write("Play service account file is not valid JSON. eas submit was not called.\n")
+              sys.exit(1)
+          if not isinstance(data, dict):
+              sys.stderr.write("Play service account JSON must be an object. eas submit was not called.\n")
+              sys.exit(1)
+          if data.get("type") != "service_account":
+              sys.stderr.write("Play service account JSON must have type service_account. eas submit was not called.\n")
+              sys.exit(1)
+          for key in ("client_email", "private_key"):
+              value = data.get(key)
+              if not isinstance(value, str) or not value.strip():
+                  sys.stderr.write("Play service account JSON is missing %s. eas submit was not called.\n" % key)
+                  sys.exit(1)
+          ' "${file}"
+            then
+              echo "::error::Play service account JSON failed validation. eas submit was not called."
+              return 1
+            fi
+            mode="$(stat -c '%a' "${file}")"
+            if [ "${mode}" != "600" ]; then
+              echo "::error::${file} mode is ${mode}, expected 600. eas submit was not called."
+              return 1
+            fi
+          }
+
+          write_play_json() {
+            if [ -z "${GOOGLE_PLAY_SERVICE_ACCOUNT_JSON:-}" ]; then
+              echo "::error::Repository secret GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is missing. Android submit needs it. eas build and eas submit were not called."
+              return 1
+            fi
+            mkdir -p mobile/secrets
+            umask 077
+            printf '%s' "${GOOGLE_PLAY_SERVICE_ACCOUNT_JSON}" > mobile/secrets/google-play-service-account.json
+            chmod 600 mobile/secrets/google-play-service-account.json
+            check_play_json mobile/secrets/google-play-service-account.json
+          }
+          # PLAYCHECK_END
+          if needs_android_play_json "${RELEASE_KIND}" "${RELEASE_PLATFORM}"; then
+            write_play_json
+          fi
+
+      - name: Record the App Store Connect gap
+        if: inputs.release_kind == 'build-and-submit' && (inputs.platform == 'ios' || inputs.platform == 'all')
+        run: |
+          echo "iOS submit uses the App Store Connect API key stored on EAS project 232e7627-d0c9-4b88-976e-b4855beb322e."
+          echo "An iOS-only submit runs without the Play service account JSON."
+          echo "A missing App Store Connect API key on that EAS project fails eas submit for iOS."
 
       - name: Install mobile dependencies
         run: |
@@ -145,9 +224,11 @@ jobs:
             echo "$env_validation_errors"
           fi
 
-          if [ "${{ inputs.release_kind }}" = "build-and-submit" ] && [ ! -f "./secrets/google-play-service-account.json" ]; then
-            echo "Missing mobile/secrets/google-play-service-account.json required by eas submit profile"
-            exit 1
+          if [ "${{ inputs.release_kind }}" = "build-and-submit" ] && [ "${{ inputs.platform }}" != "ios" ]; then
+            if [ ! -f "./secrets/google-play-service-account.json" ]; then
+              echo "::error::Missing mobile/secrets/google-play-service-account.json. Android submit needs it. eas submit was not called."
+              exit 1
+            fi
           fi
 
           echo "RELEASE_CHANNEL=${{ inputs.profile }}" >> "$GITHUB_ENV"
@@ -166,6 +247,10 @@ jobs:
             eas build --platform "${{ inputs.platform }}" --profile production --non-interactive --wait
             eas submit --platform "${{ inputs.platform }}" --profile production --latest --non-interactive
           fi
+
+      - name: Remove Play service account
+        if: always()
+        run: rm -f mobile/secrets/google-play-service-account.json
 
       - name: Create mobile deployment
         id: create_deployment

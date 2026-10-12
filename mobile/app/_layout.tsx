@@ -25,6 +25,7 @@ import { destinationById } from "@davar/shared/destinations";
 import { AppProvider } from "@/src/providers/AppProvider";
 import { ErrorBoundary } from "@/src/components/ErrorBoundary";
 import { useTranslation } from "@/src/i18n/useTranslation";
+import { useAppStore } from "@/src/store/useAppStore";
 
 const homeDestination = destinationById("home");
 const verseDestination = destinationById("verse");
@@ -69,6 +70,7 @@ export default function RootLayout() {
   });
 
   const { t } = useTranslation();
+  const themeMode = useAppStore((state) => state.themeMode);
   const appReady = fontsLoaded || !!fontError;
 
   // Hide the native splash screen
@@ -130,7 +132,7 @@ export default function RootLayout() {
                   }}
                 />
               </Stack>
-              <StatusBar style="auto" />
+              <StatusBar style={themeMode === "dark" ? "light" : "dark"} />
             </AppProvider>
           </ErrorBoundary>
         </BottomSheetModalProvider>

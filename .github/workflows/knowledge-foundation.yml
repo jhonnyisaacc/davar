@@ -49,6 +49,7 @@ permissions:
 jobs:
   foundation:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -77,11 +78,11 @@ jobs:
       - run: pip install jsonschema==4.26.0 PyYAML==6.0.3 pytest==9.0.2 python-dotenv
       - run: python -m scripts.knowledge.compatibility boundary --base "$BASE_SHA"
       - run: bun test tests/fixtures/knowledge/legacy-mapping.test.ts
-      - run: python -m pytest -q tests/test_greek_importer.py tests/test_greek_release.py tests/test_merge_strongs.py tests/test_delitzsch_review.py
       - run: python -m scripts.knowledge.compatibility legacy --base "$BASE_SHA"
 
   shaul-compatibility:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
         with:

@@ -8,6 +8,7 @@ on:
       - 'data/delitzsch/review/**'
       - 'tests/test_besorah_remediation.py'
       - 'tests/test_merge_strongs.py'
+      - 'tests/test_delitzsch_review.py'
       - '.github/workflows/besorah-quality.yml'
   push:
     branches: [main]
@@ -17,11 +18,13 @@ on:
       - 'data/delitzsch/review/**'
       - 'tests/test_besorah_remediation.py'
       - 'tests/test_merge_strongs.py'
+      - 'tests/test_delitzsch_review.py'
 permissions:
   contents: read
 jobs:
   besorah:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

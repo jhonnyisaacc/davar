@@ -352,7 +352,7 @@ const createStyles = (
         hebrewScale *
         HEBREW_SCRIPTURE_LINE_HEIGHT_MULTIPLIER *
         (isDetailVariant ? DETAIL_VARIANT_FONT_SCALE : 1),
-      color: colors.textPrimary,
+      color: colors.textHebrew,
       textAlign: "right",
       writingDirection: "rtl",
       includeFontPadding: false,
@@ -369,7 +369,7 @@ const createStyles = (
         hebrewScale *
         HEBREW_QUMRAN_LINE_HEIGHT_MULTIPLIER *
         (isDetailVariant ? DETAIL_VARIANT_FONT_SCALE : 1),
-      color: colors.textPrimary,
+      color: colors.qumranText,
     },
     hebrewWordPressable: {
       paddingHorizontal: spacing[2],

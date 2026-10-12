@@ -4,6 +4,7 @@ import { Tabs } from "expo-router";
 import type { BottomTabBarProps } from "expo-router/js-tabs";
 import { useEffect, useRef, useState } from "react";
 import {
+  Platform,
   Pressable,
   StyleSheet,
   Text,
@@ -27,7 +28,11 @@ import {
   Users,
 } from "lucide-react-native";
 import { useAppStore } from "@/src/store/useAppStore";
-import { destinationOpen, type DestinationId } from "@davar/shared/destinations";
+import {
+  centerPrimaryDestination,
+  destinationOpen,
+  type DestinationId,
+} from "@davar/shared/destinations";
 import { useProductCapabilities } from "@/src/features/product/useProductCapabilities";
 import {
   NAVIGATION_DOCK_HEIGHT,
@@ -48,6 +53,7 @@ function NavigationDock({ state, navigation }: BottomTabBarProps) {
   const visibleDestinations = destinations.filter(({ id }) =>
     destinationOpen(capabilities, id as DestinationId),
   );
+  const centeredDestinations = centerPrimaryDestination(visibleDestinations);
   const { t } = useTranslation();
   const dark = useAppStore((s) => s.themeMode === "dark");
   const insets = useSafeAreaInsets();
@@ -131,7 +137,11 @@ function NavigationDock({ state, navigation }: BottomTabBarProps) {
             alignItems: "center",
             padding: 6,
             gap: 2,
-            backgroundColor: dark ? "#3C3836B3" : "#FDF8F2B3",
+            // Elevation leaves a translucent fill unpainted on the label line.
+            backgroundColor: Platform.select({
+              android: dark ? "#3C3836" : "#FDF8F2",
+              default: dark ? "#3C3836B3" : "#FDF8F2B3",
+            }),
           }}
         >
           <Animated.View
@@ -151,7 +161,8 @@ function NavigationDock({ state, navigation }: BottomTabBarProps) {
               indicatorStyle,
             ]}
           />
-          {visibleDestinations.map(({ id, labelKey, icon: Icon }) => {
+          {centeredDestinations.map((destination) => {
+            const { id, labelKey, icon: Icon } = destination;
             const label = t(labelKey);
             const route = state.routes.find((route) => route.name === id)!;
             const selected = state.routes[state.index].key === route.key;

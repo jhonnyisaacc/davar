@@ -287,7 +287,6 @@ export const calendarFeedStates = pgTable("calendar_feed_states", {
 	developmentScenario: text("development_scenario").notNull().default("pending"),
 	lastAttemptAt: timestamp("last_attempt_at", { withTimezone: true }),
 	lastSuccessAt: timestamp("last_success_at", { withTimezone: true }),
-	syncAttempts: integer("sync_attempts").notNull().default(0),
 	details: jsonb("details").$type<Record<string, unknown>>().notNull().default({}),
 	createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 	updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),

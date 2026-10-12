@@ -1,4 +1,7 @@
-import { destinationOpen } from "@davar/shared/destinations";
+import {
+	centerPrimaryDestination,
+	destinationOpen,
+} from "@davar/shared/destinations";
 import type { BesorahLanguage } from "@davar/shared/greekBesorah";
 import { accountEntryOpen } from "@davar/shared/productCapabilities";
 import {
@@ -615,6 +618,12 @@ export function NavigationBar({
 		);
 	};
 
+	const centeredNavDestinations = centerPrimaryDestination(
+		(["assemblies", "commentary", "verse", "widgets", "settings"] as const)
+			.filter((id) => destinationOpen(capabilities, id))
+			.map((id) => ({ id })),
+	);
+
 	return (
 		<div
 			className="app-navigation relative w-full max-w-[620px]"
@@ -630,63 +639,57 @@ export function NavigationBar({
 						דבר
 					</span>
 					<div className="flex w-full justify-center gap-0.5 p-1 rounded-full bg-[var(--navigation-bg)] sm:w-auto sm:gap-1">
-						{(
-							[
-								"assemblies",
-								"commentary",
-								"verse",
-								"widgets",
-								"settings",
-							] as const
-						)
-							.filter((id) => destinationOpen(capabilities, id))
-							.map((id) => (
+						{centeredNavDestinations.map((destination) => (
 								<button
-									key={id}
+									key={destination.id}
 									type="button"
 									onClick={() => {
-										if (id === "settings") {
-											setOpenMenu(openMenu === "settings" ? null : "settings");
+										if (destination.id === "settings") {
+											setOpenMenu(
+												openMenu === "settings" ? null : "settings",
+											);
 										} else {
 											setOpenMenu(null);
-											if (id === "verse") {
+											if (destination.id === "verse") {
 												setScriptureNavigationCollapsed((collapsed) =>
 													isScripture ? !collapsed : false,
 												);
 											}
-											onDestinationClick(id);
+											onDestinationClick(destination.id);
 										}
 									}}
 									aria-current={
-										id !== "settings" && activeDestination === id
+										destination.id !== "settings" &&
+										activeDestination === destination.id
 											? "page"
 											: undefined
 									}
 									aria-expanded={
-										id === "settings"
+										destination.id === "settings"
 											? settingsOpen
-											: id === "verse"
+											: destination.id === "verse"
 												? scriptureNavigationOpen
 												: undefined
 									}
 									aria-controls={
-										id === "settings"
+										destination.id === "settings"
 											? "navigation-settings"
-											: id === "verse"
+											: destination.id === "verse"
 												? "scripture-navigation"
 												: undefined
 									}
-									className={`flex-1 px-1 py-2 rounded-full text-[10px] sm:flex-none sm:px-[14px] sm:text-[13px] text-[var(--text-primary)] ${(id === "settings" ? settingsOpen : activeDestination === id) ? "bg-[var(--accent-glow)]" : ""}`}
+									className={`flex-1 px-1 py-2 rounded-full text-[10px] sm:flex-none sm:px-[14px] sm:text-[13px] text-[var(--text-primary)] ${(destination.id === "settings" ? settingsOpen : activeDestination === destination.id) ? "bg-[var(--accent-glow)]" : ""}`}
 								>
-									{id === "verse"
-										? "Scripture"
-										: id === "widgets"
+									{destination.id === "verse"
+										? t("tabs.scripture")
+										: destination.id === "widgets"
 											? t("calendar.nav")
-											: id === "settings"
+											: destination.id === "settings"
 												? t("settings.title")
-												: id[0].toUpperCase() + id.slice(1)}
+												: destination.id[0].toUpperCase() +
+													destination.id.slice(1)}
 								</button>
-							))}
+						))}
 					</div>
 				</nav>
 			</div>
