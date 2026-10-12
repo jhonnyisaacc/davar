@@ -1,4 +1,3 @@
-"""Adapt INMS reports for Davar persistence without changing pinned Bore rules."""
 import json
 import sys
 from datetime import date, datetime

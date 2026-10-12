@@ -1,4 +1,3 @@
-"""Davar boundary over the pinned Bore domain; stdin/stdout JSON only."""
 import json
 import sys
 from datetime import date, datetime, timedelta
