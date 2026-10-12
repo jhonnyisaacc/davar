@@ -6,7 +6,7 @@
 	"scripts": {
 		"generate-data": "bun ../scripts/generate-static-data/index.ts",
 		"generate-data:ensure": "bun ./scripts/ensure-static-data.ts",
-		"build": "bun install --frozen-lockfile && bun --env-file=.env ./build.ts",
+		"build": "bun --env-file=.env ./build.ts",
 		"build:dev": "EXPORT_TS2009_STATIC=1 bun --env-file=.env ./build.ts",
 		"build:prod": "bun install --frozen-lockfile && bun --env-file=.env.production ./build.ts",
 		"build:cf": "bun run build:prod",
