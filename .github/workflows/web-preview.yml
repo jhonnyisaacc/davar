@@ -3,6 +3,10 @@ name: Web Preview
 on:
   pull_request:
     types: [ready_for_review, synchronize]
+    paths-ignore:
+      - "mobile/**"
+      - "docs/**"
+      - "*.md"
   workflow_dispatch:
 
 permissions:
