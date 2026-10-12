@@ -16,7 +16,7 @@
     "web": "bun run start --web",
     "typecheck": "tsc --noEmit",
     "lint": "expo lint",
-    "test": "bun test",
+    "test": "bun test --isolate",
     "format": "biome format --write",
     "format:check": "biome format",
     "preflight": "bun run typecheck && bun run lint && bun run test",
