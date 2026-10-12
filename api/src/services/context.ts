@@ -19,12 +19,12 @@ export function repoRoot(): string {
 	return process.cwd();
 }
 
-export function serverPackageRoot(env: NodeJS.ProcessEnv = process.env): string {
-	const override = env.DAVAR_SERVER_ROOT?.trim();
+export function apiPackageRoot(env: NodeJS.ProcessEnv = process.env): string {
+	const override = env.DAVAR_API_ROOT?.trim();
 	if (override) return override;
 	const cwd = process.cwd();
 	if (existsSync(join(cwd, "lib", "bore", "bridge.py"))) return cwd;
-	return join(repoRoot(), "server");
+	return join(repoRoot(), "api");
 }
 
 export function loadBookIds(root?: string): Set<string> {

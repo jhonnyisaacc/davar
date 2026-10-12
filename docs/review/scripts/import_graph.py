@@ -99,7 +99,7 @@ def resolve_py(source, dots, module):
         return resolve_file(base, PY_EXT)
     if not module:
         return None
-    if module.split(".")[0] not in {"scripts", "tools", "tests", "api", "server"}:
+    if module.split(".")[0] not in {"scripts", "tools", "tests", "api"}:
         return None
     return resolve_file(ROOT.joinpath(*module.split(".")), PY_EXT)
 
@@ -128,7 +128,7 @@ def edges_for(path):
             else:
                 dots = match.group(3) or ""
                 module = match.group(4) or ""
-            if not dots and module.split(".")[0] not in {"scripts", "tools", "tests", "api", "server"}:
+            if not dots and module.split(".")[0] not in {"scripts", "tools", "tests", "api"}:
                 continue
             target = resolve_py(path, dots, module)
             found.append((dots + module, target))
@@ -174,10 +174,10 @@ def main():
     cross = []
     nodes = set()
     allowed = {
-        ("web", "shared"), ("mobile", "shared"), ("server", "shared"),
+        ("web", "shared"), ("mobile", "shared"),
         ("scripts", "shared"), ("scripts", "tools"), ("tests", "scripts"),
         ("tests", "tools"), ("web", "web"), ("mobile", "mobile"),
-        ("server", "server"), ("shared", "shared"), ("scripts", "scripts"),
+        ("shared", "shared"), ("scripts", "scripts"),
         ("tools", "tools"), ("tests", "tests"), ("api", "api"),
         ("contracts", "contracts"),
     }

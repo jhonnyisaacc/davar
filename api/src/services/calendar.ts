@@ -4,7 +4,7 @@ import type { DatabaseOrTx } from "../db/client.js";
 import { DomainError } from "../lib/errors.js";
 import { runBridge } from "./bridge.js";
 import { monthAnchors } from "./calendarConfig.js";
-import { serverPackageRoot } from "./context.js";
+import { apiPackageRoot } from "./context.js";
 import { consumerStatus, feedState, FEED_SOURCE } from "./feedState.js";
 import { sandboxEnabled } from "./sandbox.js";
 import { observationWindowOpen } from "./window.js";
@@ -37,7 +37,7 @@ export interface CalendarResult {
 
 export function bridgePath(env: NodeJS.ProcessEnv = process.env): string {
 	if (env.BORE_BRIDGE_PATH) return env.BORE_BRIDGE_PATH;
-	return join(serverPackageRoot(env), "lib", "bore", "bridge.py");
+	return join(apiPackageRoot(env), "lib", "bore", "bridge.py");
 }
 
 export const COUNTING_RULE = "weekly_shabbat_during_hag_hamatzot";

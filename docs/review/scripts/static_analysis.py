@@ -26,7 +26,7 @@ PATTERNS = {
     "colon_any": re.compile(r":\s*any\b"),
     "any_array": re.compile(r"\bany\[\]"),
 }
-AREAS = ["web", "mobile", "server", "shared", "scripts", "api", "tools", "tests"]
+AREAS = ["web", "mobile", "shared", "scripts", "api", "tools", "tests"]
 
 
 def rel(path):

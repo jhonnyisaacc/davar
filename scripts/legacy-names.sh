@@ -17,24 +17,12 @@ patterns = (
     "Rails.",
 )
 skip_dirs = {"node_modules", ".git", "__pycache__"}
-pinned_root = Path("server/lib/bore")
-api_bore = Path("api/lib/bore")
 matches = []
 
-def pinned_copy(path: Path) -> bool:
-    try:
-        rel = path.relative_to(pinned_root)
-    except ValueError:
-        return False
-    other = api_bore / rel
-    return other.is_file() and other.read_bytes() == path.read_bytes()
-
-for path in sorted(Path("server").rglob("*")):
+for path in sorted(Path("api").rglob("*")):
     if not path.is_file():
         continue
     if any(part in skip_dirs for part in path.parts):
-        continue
-    if pinned_copy(path):
         continue
     rel = path.as_posix()
     for pattern in patterns:
@@ -49,7 +37,7 @@ for path in sorted(Path("server").rglob("*")):
                 break
 
 if matches:
-    print(f"legacy-names: {len(matches)} match(es) in server/ (baseline 0)", file=sys.stderr)
+    print(f"legacy-names: {len(matches)} match(es) in api/ (baseline 0)", file=sys.stderr)
     for item in matches:
         print(item, file=sys.stderr)
     sys.exit(1)

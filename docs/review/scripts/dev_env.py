@@ -60,16 +60,16 @@ def main():
         "files": {
             relative: exists(relative)
             for relative in [
-                "mise.toml", ".env.example", "api/.env.example", "server/.env.example",
+                "mise.toml", ".env.example", "api/.env.example",
                 "web/.env.example", "mobile/.env.example", "api/bin/dev-sandbox",
                 "api/compose.yml", "web/wrangler.jsonc", "web/public/data", "web/data",
-                "api/README.md", "server/README.md", "AGENTS.md", ".cursor",
+                "api/README.md", "AGENTS.md", ".cursor",
                 "BUGBOT.md", "environment.json", "hooks.json",
             ]
         },
         "env_example_keys": {
             relative: env_keys(relative)
-            for relative in [".env.example", "api/.env.example", "server/.env.example", "web/.env.example", "mobile/.env.example"]
+            for relative in [".env.example", "api/.env.example", "web/.env.example", "mobile/.env.example"]
         },
         "sandbox": sandbox(),
     }

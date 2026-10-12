@@ -63,12 +63,12 @@ def main():
         "feature_and_component_dirs": feature_dirs(),
         "http_stacks": {
             "rails_routes": (ROOT / "api/config/routes.rb").is_file(),
-            "hono_app": (ROOT / "server/src/http/app.ts").is_file(),
+            "hono_app": (ROOT / "api/src/http/app.ts").is_file(),
             "rails_gemfile": (ROOT / "api/Gemfile").is_file(),
-            "server_package": (ROOT / "server/package.json").is_file(),
+            "api_package": (ROOT / "api/package.json").is_file(),
         },
         "validation": {
-            "server_validation_ts": (ROOT / "server/src/http/validation.ts").is_file(),
+            "api_validation_ts": (ROOT / "api/src/http/validation.ts").is_file(),
             "shared_has_zod": any("zod" in (ROOT / "shared" / name).read_text(errors="replace") for name in os.listdir(ROOT / "shared") if name.endswith(".ts")) if (ROOT / "shared").exists() else False,
         },
     }

@@ -1,9 +1,9 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { serverPackageRoot } from "./context.js";
+import { apiPackageRoot } from "./context.js";
 
 function configDir(): string {
-	return process.env.DAVAR_CONFIG_DIR ?? join(serverPackageRoot(), "config");
+	return process.env.DAVAR_CONFIG_DIR ?? join(apiPackageRoot(), "config");
 }
 
 // Minimal reader for the two shapes used by the pinned calendar configs:

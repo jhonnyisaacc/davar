@@ -1,6 +1,6 @@
 {
 	"copied_from": [
-		"server/tests/fixtures/contract.json"
+		"api/tests/fixtures/contract.json"
 	],
 	"exact": {
 		"account": [

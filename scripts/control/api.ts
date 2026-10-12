@@ -23,7 +23,7 @@ import {
 } from "./proc.ts";
 import { finish } from "./report.ts";
 
-const app = "server";
+const app = "api";
 
 function port(): number {
 	return readJson<{ port: number }>(app, "ports.json")?.port ?? Number(process.env.DAVAR_SERVER_PORT ?? 3000);
@@ -81,19 +81,19 @@ async function start(): Promise<never> {
 		finish(false, { app, command: "start", reason: "port-busy", port: listen });
 	}
 	const dir = ensureRunDir(app);
-	const envPath = join(repoRoot, "server", ".env");
+	const envPath = join(repoRoot, "api", ".env");
 	if (!existsSync(envPath)) {
-		const example = join(repoRoot, "server", ".env.example");
+		const example = join(repoRoot, "api", ".env.example");
 		if (!existsSync(example)) finish(false, { app, command: "start", reason: "env-missing" });
 		writeFileSync(envPath, readFileSync(example));
-		writeFileSync(join(dir, "created-env"), "server/.env\n");
+		writeFileSync(join(dir, "created-env"), "api/.env\n");
 	}
 	writeJson(app, "ports.json", { port: listen });
 	const log = join(dir, "server.log");
 	writeFileSync(log, "");
 	const pid = spawnLogged(
 		["bun", "--env-file=.env", "./src/index.ts"],
-		join(repoRoot, "server"),
+		join(repoRoot, "api"),
 		envStrings({
 			PORT: String(listen),
 			HOST: "127.0.0.1",
@@ -201,7 +201,7 @@ async function reset(): Promise<never> {
 	const created = existsSync(marker) ? readFileSync(marker, "utf8").trim() : "";
 	await killRecorded(app, ["server"]);
 	removeTree(runDir(app));
-	if (created === "server/.env") removeTree(join(repoRoot, "server", ".env"));
+	if (created === "api/.env") removeTree(join(repoRoot, "api", ".env"));
 	finish(true, { app, command: "reset" });
 }
 

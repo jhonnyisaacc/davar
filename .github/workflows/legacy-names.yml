@@ -9,5 +9,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Old-stack names in server
+      - name: Old-stack names in api
         run: bash scripts/legacy-names.sh
