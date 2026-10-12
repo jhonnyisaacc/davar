@@ -27,6 +27,14 @@ SHAUL_REVISION = "8c94b0fe9eca817e22340430309801d0ef76125b"
 SHAUL_ORIGIN = "https://github.com/jhonnyisaacc/shaul.git"
 KNOWLEDGE_CODE = "scripts/knowledge/"
 KNOWLEDGE_TESTS = "tests/test_knowledge_"
+MOVED_PYTEST = frozenset(
+    {
+        "tests/test_delitzsch_review.py",
+        "tests/test_greek_importer.py",
+        "tests/test_greek_release.py",
+        "tests/test_merge_strongs.py",
+    }
+)
 
 
 def run(args, cwd=ROOT, env=None):
@@ -64,13 +72,35 @@ def publication_compatible(path: str, before: bytes, after: bytes) -> bool:
         return False
 
 
-def workflow_change_additive(before: bytes, after: bytes) -> bool:
-    """Allow workflow edits that only widen CI coverage.
+def moved_pytest_step(step) -> bool:
+    """True when the step only runs pytest files owned by another workflow."""
+    if not isinstance(step, dict) or set(step) != {"run"}:
+        return False
+    parts = str(step.get("run", "")).split()
+    if parts[:3] != ["python", "-m", "pytest"]:
+        return False
+    files = [part for part in parts[3:] if part != "-q"]
+    return bool(files) and set(files) <= MOVED_PYTEST
 
-    The knowledge-foundation workflow guards the additive boundary, so its own
-    edits must not narrow it: trigger paths may only grow, and existing check
-    commands may only gain arguments (for example, extra test files). Anything
-    else (removed paths, dropped commands, toolchain changes) fails closed.
+
+def timeout_compatible(old_job: dict, new_job: dict) -> bool:
+    """A missing timeout may be added. An existing timeout may not shrink."""
+    old_timeout = old_job.get("timeout-minutes")
+    new_timeout = new_job.get("timeout-minutes")
+    if old_timeout is None:
+        return True
+    if not isinstance(old_timeout, int) or not isinstance(new_timeout, int):
+        return False
+    return new_timeout >= old_timeout
+
+
+def workflow_change_additive(before: bytes, after: bytes) -> bool:
+    """Allow workflow edits that keep or widen CI coverage.
+
+    Trigger paths may only grow. A job may gain timeout-minutes, and an
+    existing timeout may not shrink. Pytest files owned by Besorah quality or
+    Greek source quality may leave this workflow. Any other removed path,
+    dropped command, or toolchain change fails closed.
     """
     # NOTE: YAML 1.1 parses the `on:` trigger key as boolean True. Normalize it
     # so the coverage comparison below sees the real trigger config.
@@ -122,6 +152,8 @@ def workflow_change_additive(before: bytes, after: bytes) -> bool:
         # Old steps must survive in order; added steps are widening, so allowed.
         pos = 0
         for old_step in old_steps:
+            if moved_pytest_step(old_step):
+                continue
             while pos < len(new_steps) and not step_covers(
                 old_step, new_steps[pos]
             ):
@@ -136,9 +168,11 @@ def workflow_change_additive(before: bytes, after: bytes) -> bool:
         return False
     for name, old_job in old_jobs.items():
         new_job = new_jobs[name]
-        if {k: v for k, v in old_job.items() if k != "steps"} != {
-            k: v for k, v in new_job.items() if k != "steps"
+        if {k: v for k, v in old_job.items() if k not in ("steps", "timeout-minutes")} != {
+            k: v for k, v in new_job.items() if k not in ("steps", "timeout-minutes")
         }:
+            return False
+        if not timeout_compatible(old_job, new_job):
             return False
         if not steps_compatible(
             old_job.get("steps", []) or [], new_job.get("steps", []) or []
