@@ -23,7 +23,12 @@ import { productApi, useSession } from "@/src/features/account/session";
 import { useProductCapabilities } from "@/src/features/product/useProductCapabilities";
 import { accountEntryOpen } from "@davar/shared/productCapabilities";
 import { useCalendar } from "@/src/features/calendar/useCalendar";
-import { getColors, spacing, typography } from "@/src/theme";
+import {
+  getColors,
+  spacing,
+  themeModeFromToggle,
+  typography,
+} from "@/src/theme";
 import { useAppStore } from "@/src/store/useAppStore";
 import { clearStorage } from "@/src/services/storage";
 import { useTranslation } from "@/src/i18n/useTranslation";
@@ -96,7 +101,7 @@ export default function SettingsScreen() {
   const state = useAppStore(
     useShallow((store) => ({
       themeMode: store.themeMode,
-      toggleThemeMode: store.toggleThemeMode,
+      setThemeMode: store.setThemeMode,
       language: store.language,
       setLanguage: store.setLanguage,
       besorahLanguage: store.besorahLanguage,
@@ -178,7 +183,7 @@ export default function SettingsScreen() {
         return toggleRow(
           t("settings.theme.title"),
           state.themeMode === "dark",
-          state.toggleThemeMode,
+          (dark) => state.setThemeMode(themeModeFromToggle(dark)),
         );
       case "language":
         return (
