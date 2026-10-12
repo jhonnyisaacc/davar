@@ -1,9 +1,17 @@
 # Publish mobile to EAS from main only.
-# Push to main (mobile/**) and workflow_dispatch. Never pull_request.
-# JS-only diffs run `eas update` and skip build/submit.
-# Native paths, runtimeVersion, app version, ios/, android/, or eas.json
-# run `eas build` then `eas submit` and skip the OTA update.
-# Requires the repository secret EXPO_TOKEN. No token is stored in this file.
+# The workflow runs on a push to main that changes mobile/** or shared/**, and on workflow_dispatch.
+# It does not run on pull_request.
+# A JS-only diff, including shared/**, runs `eas update` and skips build and submit.
+# A native diff runs `eas build`, then `eas submit`, and skips the OTA update.
+# Native means eas.json, the app version, runtimeVersion, app.json plugins,
+# permissions, icons, the iOS bundle identifier, the Android package name,
+# or a direct native dependency in package.json.
+# mobile/ios and mobile/android are gitignored, so a normal diff does not include them.
+# Android submit checks GOOGLE_PLAY_SERVICE_ACCOUNT_JSON before eas build.
+# After the build, it writes that JSON to
+# mobile/secrets/google-play-service-account.json with mode 600, then deletes it.
+# Repository secret EXPO_TOKEN is required. Android submit also requires
+# GOOGLE_PLAY_SERVICE_ACCOUNT_JSON. This file does not store either secret.
 
 name: Mobile EAS
 
@@ -12,6 +20,7 @@ on:
     branches: [main]
     paths:
       - "mobile/**"
+      - "shared/**"
   workflow_dispatch:
 
 concurrency:
@@ -69,12 +78,13 @@ jobs:
             if [ -n "${line}" ]; then
               files+=("${line}")
             fi
-          done < <(git diff --name-only "${before}" "${after}" -- mobile)
+          done < <(git diff --name-only "${before}" "${after}" -- mobile shared)
 
           native=0
           js=0
           for file in "${files[@]+"${files[@]}"}"; do
             case "${file}" in
+              # These directories are gitignored. The globs match only a force-added tree.
               mobile/ios/*|mobile/android/*|mobile/eas.json)
                 native=1
                 ;;
@@ -86,7 +96,7 @@ jobs:
                 ;;
               *.md)
                 ;;
-              mobile/*)
+              mobile/*|shared/*)
                 js=1
                 ;;
             esac
@@ -98,10 +108,98 @@ jobs:
             esac
           done
 
-          if git diff -U0 "${before}" "${after}" -- mobile/app.json mobile/app.config.js mobile/app.config.ts | grep -Eq '^[+-][[:space:]]*"(version|runtimeVersion)"[[:space:]]*:'; then
+          config_class="$(python3 - "${before}" "${after}" <<'PY'
+          import json
+          import subprocess
+          import sys
+
+          before_rev = sys.argv[1]
+          after_rev = sys.argv[2]
+
+          def load(rev, path):
+              proc = subprocess.run(
+                  ["git", "show", f"{rev}:{path}"],
+                  capture_output=True,
+              )
+              if proc.returncode != 0:
+                  return None
+              try:
+                  return json.loads(proc.stdout)
+              except json.JSONDecodeError:
+                  return "broken"
+
+          def slot(doc, *keys):
+              if not isinstance(doc, dict):
+                  return None
+              cur = doc
+              for key in keys:
+                  if not isinstance(cur, dict) or key not in cur:
+                      return None
+                  cur = cur[key]
+              return cur
+
+          def same(left, right):
+              return json.dumps(left, sort_keys=True) == json.dumps(right, sort_keys=True)
+
+          def native_dep(name):
+              if name == "react-native" or name.startswith("react-native-"):
+                  return True
+              if name.startswith("@react-native/") or name.startswith("@react-native-"):
+                  return True
+              if name == "expo" or name.startswith("expo-"):
+                  return True
+              if name.startswith("@expo/"):
+                  return True
+              return False
+
+          def native_deps(doc):
+              deps = slot(doc, "dependencies")
+              if not isinstance(deps, dict):
+                  return {}
+              return {key: value for key, value in deps.items() if native_dep(key)}
+
+          app_slots = (
+              ("expo", "version"),
+              ("expo", "runtimeVersion"),
+              ("expo", "plugins"),
+              ("expo", "icon"),
+              ("expo", "android", "icon"),
+              ("expo", "android", "adaptiveIcon"),
+              ("expo", "android", "permissions"),
+              ("expo", "android", "package"),
+              ("expo", "ios", "icon"),
+              ("expo", "ios", "infoPlist"),
+              ("expo", "ios", "bundleIdentifier"),
+          )
+
+          native = False
+          before_app = load(before_rev, "mobile/app.json")
+          after_app = load(after_rev, "mobile/app.json")
+          if before_app == "broken" or after_app == "broken":
+              native = True
+          else:
+              for keys in app_slots:
+                  if not same(slot(before_app, *keys), slot(after_app, *keys)):
+                      native = True
+                      break
+
+          before_pkg = load(before_rev, "mobile/package.json")
+          after_pkg = load(after_rev, "mobile/package.json")
+          if before_pkg == "broken" or after_pkg == "broken":
+              native = True
+          elif not same(slot(before_pkg, "version"), slot(after_pkg, "version")):
+              native = True
+          elif not same(native_deps(before_pkg), native_deps(after_pkg)):
+              native = True
+
+          print("native" if native else "ok")
+          PY
+          )"
+          if [ "${config_class}" = "native" ]; then
             native=1
           fi
-          if git diff -U0 "${before}" "${after}" -- mobile/package.json | grep -Eq '^[+-][[:space:]]*"version"[[:space:]]*:'; then
+
+          if git diff -U0 "${before}" "${after}" -- mobile/app.config.js mobile/app.config.ts | grep -Eq '^[+-].*(plugins|permissions|adaptiveIcon|runtimeVersion|"icon"|icon:)'; then
             native=1
           fi
 
@@ -113,9 +211,67 @@ jobs:
             mode="skip"
           fi
 
-          echo "Changed mobile files: ${files[*]:-none}"
+          echo "Changed files: ${files[*]:-none}"
           echo "Selected mode: ${mode}"
           echo "mode=${mode}" >> "${GITHUB_OUTPUT}"
+
+      - name: Require the Play service account before Android submit
+        if: steps.classify.outputs.mode == 'build'
+        env:
+          GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+          PLAY_JSON_ACTION: check
+        run: |
+          set -euo pipefail
+          cat > "${RUNNER_TEMP}/play_account.py" << 'PY'
+          import json
+          import os
+          import sys
+
+          raw = os.environ.get("GOOGLE_PLAY_SERVICE_ACCOUNT_JSON", "")
+          action = os.environ.get("PLAY_JSON_ACTION", "check")
+          if action == "check":
+              refused = "eas build and eas submit were not called."
+          else:
+              refused = "eas submit was not called."
+
+          def fail(message):
+              sys.stderr.write(f"::error::{message} {refused}\n")
+              sys.exit(1)
+
+          if raw.strip() == "":
+              fail(
+                  "Repository secret GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is missing. "
+                  "Android Play submit needs the Play Console service account JSON in that repository secret. "
+                  "iOS-only submit does not need it. Update and build do not need it."
+              )
+          try:
+              parsed = json.loads(raw)
+          except json.JSONDecodeError:
+              fail(
+                  "GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is not valid JSON. "
+                  "Save the Play Console service account file contents as that repository secret."
+              )
+          email = parsed.get("client_email") if isinstance(parsed, dict) else None
+          key = parsed.get("private_key") if isinstance(parsed, dict) else None
+          if not isinstance(email, str) or email == "" or not isinstance(key, str) or key == "":
+              fail(
+                  "GOOGLE_PLAY_SERVICE_ACCOUNT_JSON is not a Google service account key. "
+                  "The JSON needs client_email and private_key."
+              )
+          if action != "write":
+              sys.exit(0)
+
+          os.makedirs("secrets", exist_ok=True)
+          os.chmod("secrets", 0o700)
+          path = "secrets/google-play-service-account.json"
+          fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+          try:
+              os.write(fd, raw.encode("utf-8"))
+          finally:
+              os.close(fd)
+          os.chmod(path, 0o600)
+          PY
+          python3 "${RUNNER_TEMP}/play_account.py"
 
       - name: Setup Bun
         if: steps.classify.outputs.mode != 'skip'
@@ -137,16 +293,34 @@ jobs:
         if: steps.classify.outputs.mode == 'update'
         working-directory: mobile
         run: |
-          echo "JS-only mobile diff. Running eas update. Skipping eas build and eas submit."
+          echo "JS-only diff. Running eas update. Skipping eas build and eas submit."
           eas update --channel production --environment production --auto --non-interactive
 
-      - name: Build and submit a native binary
+      - name: Build a native binary
         if: steps.classify.outputs.mode == 'build'
         working-directory: mobile
         run: |
-          echo "Native, runtimeVersion, app version, ios/, android/, or eas.json diff. Running eas build and eas submit. Skipping eas update."
+          echo "Native config changed. Running eas build. Skipping eas update."
           eas build --platform all --profile production --non-interactive --wait
+
+      - name: Write the Play service account
+        if: steps.classify.outputs.mode == 'build'
+        working-directory: mobile
+        env:
+          GOOGLE_PLAY_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_JSON }}
+          PLAY_JSON_ACTION: write
+        run: python3 "${RUNNER_TEMP}/play_account.py"
+
+      - name: Submit the native binary
+        if: steps.classify.outputs.mode == 'build'
+        working-directory: mobile
+        run: |
+          echo "Running eas submit for production."
           eas submit --platform all --profile production --latest --non-interactive
+
+      - name: Delete the Play service account
+        if: always()
+        run: rm -f mobile/secrets/google-play-service-account.json
 
       - name: Skip both Expo commands
         if: steps.classify.outputs.mode == 'skip'
