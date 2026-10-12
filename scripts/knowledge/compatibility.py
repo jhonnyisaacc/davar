@@ -26,6 +26,7 @@ WORKFLOW = ".github/workflows/knowledge-foundation.yml"
 SHAUL_REVISION = "8c94b0fe9eca817e22340430309801d0ef76125b"
 SHAUL_ORIGIN = "https://github.com/jhonnyisaacc/shaul.git"
 KNOWLEDGE_CODE = "scripts/knowledge/"
+KNOWLEDGE_TESTS = "tests/test_knowledge_"
 
 
 def run(args, cwd=ROOT, env=None):
@@ -162,6 +163,11 @@ def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
         if not (path.startswith(ALLOWED) or path == WORKFLOW):
             continue
         if path.startswith(KNOWLEDGE_CODE) and status != "A":
+            knowledge_edits = True
+            continue
+        # Companion tests track scripts/knowledge/. Edits stay gated by the
+        # pinned Shaul checkout below, same as knowledge script edits.
+        if path.startswith(KNOWLEDGE_TESTS) and status == "M":
             knowledge_edits = True
             continue
         if status == "M":
