@@ -64,14 +64,14 @@ Hosted boot needs HTTPS `API_PUBLIC_URL` and exact-match `API_HOSTS`
 CORS already allows `https://davar.bible` and `https://*.davar.pages.dev`
 (`api/src/services/webOrigins.ts`).
 
-## Live leftovers to clear
+## Live source
 
-Production and staging **live** config may still show the old GitHub slug
-`edyhvh/davar` and root `/server` until you accept the staged patch that
-moves them to `jhonnyisaacc/davar` and `/api`. Those are Hono-era path
-names from the Rails→Hono move, not Ruby variables. Accept **staging**
-once `staging` has `api/`. Accept **production** only after `api/` is on
-`main`.
+Production and staging both deploy GitHub repo `jhonnyisaacc/davar` with
+root directory `/api`.
+
+Cloudflare previews call `https://davar-staging.up.railway.app`. That
+origin is the `STAGING_API_URL` secret. A preview does not create a
+Railway environment.
 
 ## Known hosted gaps
 
