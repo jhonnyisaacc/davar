@@ -2,23 +2,46 @@ name: Web Deploy Production
 
 on:
   workflow_run:
-    workflows: ["Web CI"]
+    workflows: ["CI"]
     types: [completed]
     branches: [main]
 
 permissions:
   contents: read
+  actions: read
   deployments: write
+
+concurrency:
+  group: web-deploy-production-${{ github.event.workflow_run.head_sha }}
+  cancel-in-progress: true
 
 jobs:
   deploy_status:
     name: web-deploy-production
-    if: github.event.workflow_run.conclusion == 'success'
+    if: github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'failure'
     runs-on: ubuntu-latest
 
     steps:
+      - name: Require a successful web job
+        id: web
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const jobs = await github.paginate(
+              github.rest.actions.listJobsForWorkflowRun,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                run_id: context.payload.workflow_run.id,
+                per_page: 100,
+              },
+            );
+            const web = jobs.find((job) => job.name === "web");
+            core.setOutput("ok", web && web.conclusion === "success" ? "true" : "false");
+
       - name: Create production deployment
         id: create_deployment
+        if: steps.web.outputs.ok == 'true'
         uses: actions/github-script@v7
         with:
           script: |
@@ -33,11 +56,12 @@ jobs:
               auto_merge: false,
               transient_environment: false,
               production_environment: true,
-              payload: JSON.stringify({ app: 'web', sourceWorkflow: 'Web CI' }),
+              payload: JSON.stringify({ app: 'web', sourceWorkflow: 'CI' }),
             });
             core.setOutput('deployment_id', String(data.id));
 
       - name: Finalize production deployment
+        if: steps.web.outputs.ok == 'true'
         uses: actions/github-script@v7
         with:
           script: |

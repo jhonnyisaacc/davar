@@ -1,0 +1,99 @@
+name: Railway staging
+
+on:
+  pull_request:
+    types: [ready_for_review, synchronize]
+    paths:
+      - api/**
+      - shared/product*.ts
+      - contracts/biblical-knowledge/**
+      - data/knowledge/registries/**
+      - .github/workflows/railway-staging.yml
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: railway-staging
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: railway-staging
+    if: github.event.pull_request.draft == false && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+      - name: Require Railway token
+        id: token
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          if [ -z "${RAILWAY_TOKEN:-}" ]; then
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::RAILWAY_TOKEN is absent; skipping Railway staging deploy"
+          else
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Install Railway CLI
+        if: steps.token.outputs.present == 'true'
+        run: npm install --global @railway/cli@5.66.0
+      - name: Deploy staging
+        if: steps.token.outputs.present == 'true'
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: railway up "${GITHUB_WORKSPACE}/api" --service davar --environment staging --ci -y
+      - name: Wait for GET /up
+        if: steps.token.outputs.present == 'true'
+        env:
+          STAGING_API_URL: ${{ secrets.STAGING_API_URL }}
+        run: |
+          base="${STAGING_API_URL:-https://davar-staging.up.railway.app}"
+          base="${base%/}"
+          url="${base}/up"
+          for _ in $(seq 1 60); do
+            if curl -fsS "$url" | grep -q '"status":"ok"'; then
+              echo "healthy: $url"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "Timed out waiting for $url" >&2
+          exit 1
+      - name: Comment which pull request staging runs
+        if: steps.token.outputs.present == 'true'
+        uses: actions/github-script@v7
+        env:
+          PREVIEW_SHA: ${{ github.event.pull_request.head.sha }}
+        with:
+          script: |
+            const marker = "<!-- davar-railway-staging -->";
+            const sha = process.env.PREVIEW_SHA;
+            const number = context.payload.pull_request.number;
+            const body = `${marker}\nRailway staging is running pull request #${number} at \`${sha}\`.`;
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: number,
+              per_page: 100,
+            });
+            const existing = comments.find((comment) => comment.body?.includes(marker));
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+              return;
+            }
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: number,
+              body,
+            });

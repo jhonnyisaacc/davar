@@ -2,7 +2,7 @@ name: Web Preview
 
 on:
   pull_request:
-    types: [opened, ready_for_review, synchronize, reopened]
+    types: [ready_for_review, synchronize]
     paths:
       - "web/**"
       - "shared/**"
@@ -30,7 +30,15 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Setup Bun
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v2
+
+      - name: Cache Bun
+        uses: actions/cache@v4
+        with:
+          path: ~/.bun/install/cache
+          key: bun-web-preview-${{ runner.os }}-${{ hashFiles('web/bun.lock') }}
+          restore-keys: |
+            bun-web-preview-${{ runner.os }}-
 
       - name: Require preview secrets
         env:

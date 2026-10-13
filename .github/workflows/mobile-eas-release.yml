@@ -189,9 +189,11 @@ jobs:
             fi
 
             echo "Warning: $env_list_error"
-            echo "ENV_PREFLIGHT=warning" >> "$GITHUB_ENV"
-            echo "RELEASE_CHANNEL=${{ inputs.profile }}" >> "$GITHUB_ENV"
-            echo "RUNTIME_PREFLIGHT=passed" >> "$GITHUB_ENV"
+            {
+              echo "ENV_PREFLIGHT=warning"
+              echo "RELEASE_CHANNEL=${{ inputs.profile }}"
+              echo "RUNTIME_PREFLIGHT=passed"
+            } >> "$GITHUB_ENV"
             exit 0
           fi
 
@@ -231,9 +233,11 @@ jobs:
             fi
           fi
 
-          echo "RELEASE_CHANNEL=${{ inputs.profile }}" >> "$GITHUB_ENV"
-          echo "RUNTIME_PREFLIGHT=passed" >> "$GITHUB_ENV"
-          echo "ENV_PREFLIGHT=passed" >> "$GITHUB_ENV"
+          {
+            echo "RELEASE_CHANNEL=${{ inputs.profile }}"
+            echo "RUNTIME_PREFLIGHT=passed"
+            echo "ENV_PREFLIGHT=passed"
+          } >> "$GITHUB_ENV"
 
       - name: Execute EAS release action
         run: |
@@ -300,11 +304,13 @@ jobs:
       - name: Summarize release
         if: always()
         run: |
-          echo "## Mobile release summary" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Profile: ${{ inputs.profile }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Platform: ${{ inputs.platform }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Channel: ${RELEASE_CHANNEL:-${{ inputs.profile }}}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Action: ${{ inputs.release_kind }}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Runtime preflight: ${RUNTIME_PREFLIGHT:-failed}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Environment preflight: ${ENV_PREFLIGHT:-failed}" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> "$GITHUB_STEP_SUMMARY"
+          {
+            echo "## Mobile release summary"
+            echo "- Profile: ${{ inputs.profile }}"
+            echo "- Platform: ${{ inputs.platform }}"
+            echo "- Channel: ${RELEASE_CHANNEL:-${{ inputs.profile }}}"
+            echo "- Action: ${{ inputs.release_kind }}"
+            echo "- Runtime preflight: ${RUNTIME_PREFLIGHT:-failed}"
+            echo "- Environment preflight: ${ENV_PREFLIGHT:-failed}"
+            echo "- Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          } >> "$GITHUB_STEP_SUMMARY"

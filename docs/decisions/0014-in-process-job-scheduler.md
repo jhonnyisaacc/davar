@@ -4,7 +4,7 @@
 
 The Hono API needs a schedule for the calendar sync, consultation recovery, and Telegram outbox. Rails runs the calendar sync every 30 minutes inside Puma and tells operators to run consultation recovery and notification delivery every minute from outside the process. The hourly purge only deletes finished Solid Queue rows. Hono already had the three job bodies behind `bun run jobs:*`. Nothing was calling them on a timer.
 
-The Hono server does not deploy on Cloudflare Workers. `api/src/index.ts` is a Bun process (`port` and `fetch`). `web/wrangler.jsonc` is a Pages project for the frontend (`pages_build_output_dir`, the TS2009 R2 binding). There is no Wrangler config under `api/`. `.github/workflows/backend-deploy.yml` is a manual no-op. Older notes that mention Render describe a previous backend, not this process.
+The Hono server does not deploy on Cloudflare Workers. `api/src/index.ts` is a Bun process (`port` and `fetch`). `web/wrangler.jsonc` is a Pages project for the frontend (`pages_build_output_dir`, the TS2009 R2 binding). There is no Wrangler config under `api/`. `.github/workflows/backend-deploy.yml` was a manual no-op and the CI baseline deleted it. Older notes that mention Render describe a previous backend, not this process.
 
 ## Decision
 
