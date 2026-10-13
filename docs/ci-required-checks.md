@@ -1,12 +1,12 @@
 # See which CI checks a pull request runs
 
-`.github/workflows/ci.yml` runs on every pull request, with no base-branch filter, and on a push to `main`. A push to `staging` does not start it.
+`.github/workflows/ci.yml` runs on every pull request, with no base-branch filter, and on a push to `main`. Pull requests target `main`.
 
-The job `gate` is the check to require on `main`. It fails when any needed job failed or was cancelled. A job that the path filter skipped does not fail `gate`. `.github/rulesets/main.json` still names `policy-gate`. Change the GitHub ruleset to require `gate` and signed commits. Do not add a ruleset on `staging`.
+The job `gate` is the check to require on `main`. It fails when any needed job failed or was cancelled. A job that the path filter skipped does not fail `gate`. `.github/rulesets/main.json` still names `policy-gate`. Change the GitHub ruleset to require `gate` and signed commits.
 
 Web production status is recorded when the `web` job succeeded. Another job failing does not block that record. A skipped `web` job does not create it.
 
-`hygiene` runs on every pull request. It checks the branch name, that each commit is Verified and authored by `jhonnyisaacc`, that no commit message has an AI co-author trailer, gitleaks, and actionlint.
+`hygiene` runs on every pull request. It checks the branch name, that each commit is Verified and authored with the owner email, that no commit message has an AI co-author trailer, gitleaks, and actionlint. The author name is `jhonnyisaacc`, or `Jhonny` when GitHub squash-merge records the account display name.
 
 `api`, `web`, `mobile`, `python`, and `knowledge` run only when `.github/ci/path-filters.yml` matches a changed path. `dup-code` runs on every pull request. The duplicate count is `.github/ci/dup-baseline.json`. A higher count fails the job. Lower the file in the same pull request after extracting the shared code.
 

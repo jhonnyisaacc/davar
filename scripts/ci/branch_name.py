@@ -6,11 +6,10 @@ import re
 import sys
 
 PATTERN = re.compile(r"^(feat|fix|hotfix|chore|docs|refactor|test|release)/[a-z0-9][a-z0-9-]*$")
-EXACT = frozenset({"staging"})
 
 
 def allowed(name: str) -> bool:
-    return name in EXACT or PATTERN.fullmatch(name) is not None
+    return PATTERN.fullmatch(name) is not None
 
 
 def main(argv: list[str]) -> int:
@@ -23,7 +22,7 @@ def main(argv: list[str]) -> int:
         return 1
     if allowed(name):
         return 0
-    print(f"Head branch '{name}' does not match {PATTERN.pattern} or {sorted(EXACT)}.", file=sys.stderr)
+    print(f"Head branch '{name}' does not match {PATTERN.pattern}.", file=sys.stderr)
     return 1
 
 
