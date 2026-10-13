@@ -42,14 +42,11 @@ jobs:
       - name: Install Railway CLI
         if: steps.token.outputs.present == 'true'
         run: npm install --global @railway/cli@5.66.0
-      - name: Drop the dangling static-data symlink
-        if: steps.token.outputs.present == 'true'
-        run: rm -f web/data
       - name: Deploy staging
         if: steps.token.outputs.present == 'true'
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: railway up --service davar --environment staging --ci -y
+        run: railway up api --service davar --environment staging --ci -y
       - name: Wait for GET /up
         if: steps.token.outputs.present == 'true'
         env:
