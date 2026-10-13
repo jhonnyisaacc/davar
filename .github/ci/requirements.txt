@@ -1,0 +1,4 @@
+pytest==9.0.2
+python-dotenv
+jsonschema==4.26.0
+PyYAML==6.0.3
