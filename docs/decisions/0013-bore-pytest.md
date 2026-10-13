@@ -2,7 +2,7 @@
 
 ## Context
 
-Bore and its tests live in one tree. The library is `api/lib/bore`. The tests are `api/tests/bore`. API CI runs them from `api/` with `PYTHONPATH=lib/bore` and `python -m pytest tests/bore -q` (`.github/workflows/api-ci.yml`).
+Bore and its tests live in one tree. The library is `api/lib/bore`. The tests are `api/tests/bore`. API CI runs them from `api/` with `PYTHONPATH=lib/bore` and `python -m pytest tests/bore -q` (the `api` job in `.github/workflows/ci.yml`).
 
 ## Decision
 

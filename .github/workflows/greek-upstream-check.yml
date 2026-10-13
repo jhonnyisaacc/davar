@@ -9,6 +9,10 @@ permissions:
   contents: read
   issues: write
 
+concurrency:
+  group: greek-upstream-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   upstream:
     runs-on: ubuntu-latest
