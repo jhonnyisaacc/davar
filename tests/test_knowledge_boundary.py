@@ -118,6 +118,64 @@ def test_knowledge_script_edits_still_require_the_pinned_shaul_revision(tmp_path
     boundary(base, repo, shaul_root=unpinned_shaul(tmp_path / "shaul-add"))
 
 
+FOLDED = """\
+name: CI
+jobs:
+  knowledge:
+    steps:
+      - run: python -m pytest -q tests/test_knowledge_*.py tests/test_commentary_corpus.py
+      - run: python -m scripts.knowledge check
+      - run: python -m scripts.knowledge.compatibility boundary --base "$BASE_SHA"
+      - run: bun test tests/fixtures/knowledge/legacy-mapping.test.ts
+      - run: python -m scripts.knowledge.compatibility legacy --base "$BASE_SHA"
+      - run: python scripts/test_build_verse_index.py
+      - run: bun test scripts/knowledge.test.ts
+      - run: python -m scripts.knowledge.compatibility shaul --shaul-root ../shaul
+"""
+
+
+def test_deleting_the_knowledge_workflow_requires_the_commands_in_ci(tmp_path, capsys):
+    repo, base = knowledge_repo(tmp_path)
+    (repo / ".github/workflows/knowledge-foundation.yml").unlink()
+    with pytest.raises(ValueError, match="Knowledge checks left .github/workflows/ci.yml"):
+        boundary(base, repo)
+    (repo / ".github/workflows/ci.yml").write_text(FOLDED)
+    boundary(base, repo)
+    assert (
+        capsys.readouterr().out
+        == "Additive file boundary and legacy import isolation: OK\n"
+    )
+
+
+def test_a_later_ci_edit_cannot_drop_a_folded_knowledge_command(tmp_path, capsys):
+    repo, base = knowledge_repo(tmp_path)
+    (repo / ".github/workflows/knowledge-foundation.yml").unlink()
+    ci = repo / ".github/workflows/ci.yml"
+    ci.write_text(FOLDED)
+    git(repo, "add", "-A")
+    git(repo, "commit", "-q", "-m", "fold knowledge checks")
+    base = subprocess.check_output(
+        ["git", "-C", str(repo), "rev-parse", "HEAD"], text=True
+    ).strip()
+    ci.write_text(FOLDED.replace("      - run: python -m scripts.knowledge check\n", ""))
+    with pytest.raises(ValueError, match="Knowledge checks left .github/workflows/ci.yml"):
+        boundary(base, repo)
+    ci.write_text(FOLDED + "\n")
+    boundary(base, repo)
+    assert (
+        capsys.readouterr().out
+        == "Additive file boundary and legacy import isolation: OK\n"
+    )
+
+
+def test_editing_the_old_workflow_still_fails_when_ci_has_the_commands(tmp_path):
+    repo, base = knowledge_repo(tmp_path)
+    (repo / ".github/workflows/ci.yml").write_text(FOLDED)
+    (repo / ".github/workflows/knowledge-foundation.yml").write_text("name: changed\n")
+    with pytest.raises(ValueError, match="Non-additive or out-of-scope change"):
+        boundary(base, repo)
+
+
 def test_knowledge_test_edits_require_the_pinned_shaul_revision(tmp_path):
     """Companion tests may change with knowledge code, but still need the Shaul pin."""
     repo, base = knowledge_repo(tmp_path)
