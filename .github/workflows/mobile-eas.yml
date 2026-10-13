@@ -96,6 +96,21 @@ jobs:
           grep -F 'Remove Play service account' .github/workflows/mobile-eas-release.yml >/dev/null
 
           python3 - << 'PY'
+          from pathlib import Path
+          text = Path(".github/workflows/mobile-eas.yml").read_text()
+          start = text.rindex("      - name: Build and submit a native binary")
+          end = text.rindex("      - name: Skip both Expo commands")
+          step = text[start:end]
+          if "--platform all" in step:
+              raise SystemExit("automatic publish still targets every platform")
+          if "eas build --platform android --profile production" not in step:
+              raise SystemExit("automatic publish missing android build")
+          if "eas submit --platform android --profile production" not in step:
+              raise SystemExit("automatic publish missing android submit")
+          print("android-only-publish-ok")
+          PY
+
+          python3 - << 'PY'
           import json
           data = json.load(open("mobile/eas.json", encoding="utf-8"))
           android = data["submit"]["production"]["android"]
@@ -915,7 +930,7 @@ jobs:
             check_play_json mobile/secrets/google-play-service-account.json
           }
           # PLAYCHECK_END
-          if needs_android_play_json "build-and-submit" "all"; then
+          if needs_android_play_json "build-and-submit" "android"; then
             write_play_json
           fi
 
@@ -946,10 +961,9 @@ jobs:
         if: steps.classify.outputs.mode == 'build'
         working-directory: mobile
         run: |
-          echo "Native config, native dependency, runtimeVersion, app version, or eas.json diff. Running eas build and eas submit. Skipping eas update."
-          echo "iOS submit uses the App Store Connect API key on EAS project 232e7627-d0c9-4b88-976e-b4855beb322e. A missing key fails eas submit for iOS."
-          eas build --platform all --profile production --non-interactive --wait
-          eas submit --platform all --profile production --latest --non-interactive
+          echo "Native config, native dependency, runtimeVersion, app version, or eas.json diff. Running eas build and eas submit for Android. Skipping iOS and eas update."
+          eas build --platform android --profile production --non-interactive --wait
+          eas submit --platform android --profile production --latest --non-interactive
 
       - name: Skip both Expo commands
         if: steps.classify.outputs.mode == 'skip'
