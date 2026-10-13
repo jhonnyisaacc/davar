@@ -58,9 +58,10 @@ Root directory `/api`. Watch patterns match the `api` filter in
 - `data/knowledge/registries/**`
 
 `railway-staging.yml` deploys a non-draft pull request that touches those
-paths. It runs `railway up api --service davar --environment staging` and
-waits for `GET /up`. The path limit keeps the indexer off `web/data`. The
-archive still has the `api/` prefix because the service root is `/api`.
+paths. It runs `railway up` on the absolute `api` directory and waits for
+`GET /up`. A relative path fails archive prefixing. `--path-as-root` would
+drop the `api/` prefix, and the service root is `/api`. The indexer never
+sees `web/data`.
 One deploy runs at a time, and a second deploy waits for it. Turn Railway's automatic pull
 request environments off. The workflow skips with a notice when
 `RAILWAY_TOKEN` is absent.

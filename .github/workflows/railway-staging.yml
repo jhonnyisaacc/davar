@@ -46,7 +46,7 @@ jobs:
         if: steps.token.outputs.present == 'true'
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
-        run: railway up api --service davar --environment staging --ci -y
+        run: railway up "${GITHUB_WORKSPACE}/api" --service davar --environment staging --ci -y
       - name: Wait for GET /up
         if: steps.token.outputs.present == 'true'
         env:
