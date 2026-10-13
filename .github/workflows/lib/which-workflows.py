@@ -11,10 +11,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 WORKFLOWS = ROOT / ".github" / "workflows"
 MOVED_PYTEST = {
-    "tests/test_delitzsch_review.py": "Besorah quality",
-    "tests/test_greek_importer.py": "Greek source quality",
-    "tests/test_greek_release.py": "Greek source quality",
-    "tests/test_merge_strongs.py": "Besorah quality",
+    "tests/test_delitzsch_review.py": "CI",
+    "tests/test_greek_importer.py": "CI",
+    "tests/test_greek_release.py": "CI",
+    "tests/test_merge_strongs.py": "CI",
 }
 
 
@@ -120,11 +120,8 @@ def parse_workflow(path: Path) -> dict:
             break
     pytest_tokens: list[str] = []
     for line in lines:
-        stripped = line.strip()
-        if stripped.startswith("- run:") or stripped.startswith("run:"):
-            command = stripped.split(":", 1)[1].strip()
-            if "pytest" in command:
-                pytest_tokens.extend(command.split())
+        if "pytest" in line:
+            pytest_tokens.extend(line.split())
     record = {
         "file": path.name,
         "name": name,
@@ -192,16 +189,16 @@ def expect(actual: list[str], expected: set[str], label: str, failures: list[str
 
 def self_check() -> int:
     failures: list[str] = []
-    always = {"Branch name", "legacy-names", "Policy Gate"}
+    always = {"CI"}
     expect(
         firing(["mobile/App.tsx"], "main"),
-        always | {"Mobile CI"},
+        always,
         "mobile/App.tsx on main",
         failures,
     )
     expect(
         firing(["web/src/main.tsx"], "main"),
-        always | {"Web CI", "Web Preview"},
+        always | {"Web Preview"},
         "web/src/main.tsx on main",
         failures,
     )
@@ -212,32 +209,44 @@ def self_check() -> int:
         failures,
     )
     expect(
+        firing(["api/src/index.ts"], "main"),
+        always | {"Railway staging"},
+        "api/src/index.ts on main",
+        failures,
+    )
+    expect(
         firing(["data/delitzsch/parsed/john/1.json"], "main"),
-        always | {"Besorah quality", "Knowledge foundation"},
+        always,
         "data/delitzsch/parsed/john/1.json on main",
         failures,
     )
     expect(
         firing(["scripts/hutter/morphology.py"], "main"),
-        always | {"Python CI", "Hutter transcription QA"},
+        always,
         "scripts/hutter/morphology.py on main",
         failures,
     )
     expect(
         firing(["scripts/translit/local_translit.py"], "main"),
-        always | {"Transliteration quality"},
+        always,
         "scripts/translit/local_translit.py on main",
         failures,
     )
     expect(
+        firing([".github/workflows/mobile-eas.yml"], "main"),
+        always | {"Mobile EAS"},
+        "mobile-eas.yml on main",
+        failures,
+    )
+    expect(
         firing(["mobile/App.tsx"], "feat/preview-api-railway"),
-        {"Branch name", "legacy-names", "Policy Gate", "Mobile CI"},
+        always,
         "mobile/App.tsx on the preview stack base",
         failures,
     )
     expect(
         firing(["docs/README.md"], "feat/unrelated"),
-        {"Branch name", "legacy-names"},
+        always,
         "docs/README.md on an unlisted base",
         failures,
     )

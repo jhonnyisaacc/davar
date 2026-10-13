@@ -1,0 +1,101 @@
+api:
+  - api/**
+  - shared/product*.ts
+  - contracts/biblical-knowledge/**
+  - data/knowledge/registries/**
+  - scripts/legacy-names.sh
+  - scripts/ci/**
+  - .github/workflows/ci.yml
+  - .github/ci/**
+
+web:
+  - web/**
+  - shared/**
+  - scripts/generate-static-data/**
+  - scripts/ci/**
+  - .github/workflows/ci.yml
+  - .github/ci/**
+
+mobile:
+  - mobile/**
+  - shared/**
+  - scripts/ci/**
+  - .github/workflows/ci.yml
+  - .github/ci/**
+
+knowledge:
+  - contracts/biblical-knowledge/**
+  - data/knowledge/**
+  - scripts/knowledge/**
+  - scripts/commentary/**
+  - tests/test_commentary_corpus.py
+  - tests/test_knowledge_*
+  - tests/fixtures/knowledge/**
+  - data/oe/daniel/7.json
+  - data/oe/daniel/2.json
+  - data/oe/genesis/1.json
+  - data/oe/genesis/2.json
+  - data/delitzsch/parsed/john/1.json
+  - data/greek/preview/**
+  - data/tth/json/iojanan.json
+  - data/dict/lexicon/words.json
+  - data/dict/lexicon/custom_definitions.json
+  - scripts/ci/**
+  - .github/workflows/ci.yml
+  - .github/ci/**
+
+morphology:
+  - scripts/hutter/morphology.py
+  - scripts/hutter/attested_morphology.py
+  - scripts/hutter/evaluate_attested_morphology.py
+  - scripts/hutter/map_strongs.py
+  - tests/test_hutter_morphology.py
+  - tests/test_hutter_attested_morphology.py
+  - scripts/ci/**
+  - .github/workflows/ci.yml
+  - .github/ci/**
+
+bani:
+  - tools/bani/**
+  - scripts/dict/update_transliterations.py
+  - scripts/ci/**
+  - .github/workflows/ci.yml
+  - .github/ci/**
+
+translit:
+  - scripts/translit/**
+  - data/translit/**
+  - tools/bani/**
+  - tests/test_translit_benchmark.py
+  - tests/test_dss_transformation.py
+  - scripts/ci/**
+  - .github/workflows/ci.yml
+  - .github/ci/**
+
+besorah:
+  - scripts/delitzsch/**
+  - data/delitzsch/parsed/**
+  - data/delitzsch/review/**
+  - tests/test_besorah_remediation.py
+  - tests/test_merge_strongs.py
+  - tests/test_delitzsch_review.py
+  - scripts/ci/**
+  - .github/workflows/ci.yml
+  - .github/ci/**
+
+greek-source:
+  - scripts/greek/**
+  - tests/test_greek_*.py
+  - tests/fixtures/greek/**
+  - docs/greek-besorah-source-licenses.md
+  - scripts/ci/**
+  - .github/workflows/ci.yml
+  - .github/ci/**
+
+hutter:
+  - scripts/hutter/**
+  - tests/test_hutter_transcription.py
+  - data/hutter/**
+  - scripts/ci/**
+  - .github/workflows/ci.yml
+  - .github/ci/**

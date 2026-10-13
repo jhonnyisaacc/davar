@@ -36,6 +36,7 @@ fixed per preview deploy.
 | `PUBLIC_API_URL` | fallback | Shared API origin if staging is unset |
 | `CLOUDFLARE_API_TOKEN` | yes | Pages deploy |
 | `CLOUDFLARE_ACCOUNT_ID` | yes | Pages deploy |
+| `RAILWAY_TOKEN` | yes for API staging deploys | Project token scoped to the staging environment |
 
 ```bash
 gh secret set STAGING_API_URL --repo jhonnyisaacc/davar --body 'https://davar-staging.up.railway.app'
@@ -48,12 +49,22 @@ Pages **production** environment, or the client falls back to
 
 ## Railway settings (per environment)
 
-Root directory `/api`. Watch patterns match `api-ci.yml`:
+Root directory `/api`. Watch patterns match the `api` filter in
+`.github/ci/path-filters.yml` and `.github/workflows/railway-staging.yml`:
 
 - `api/**`
 - `shared/product*.ts`
 - `contracts/biblical-knowledge/**`
 - `data/knowledge/registries/**`
+
+`railway-staging.yml` deploys a non-draft pull request that touches those
+paths. It runs `railway up` on the absolute `api` directory and waits for
+`GET /up`. A relative path fails archive prefixing. `--path-as-root` would
+drop the `api/` prefix, and the service root is `/api`. The indexer never
+sees `web/data`.
+One deploy runs at a time, and a second deploy waits for it. Turn Railway's automatic pull
+request environments off. The workflow skips with a notice when
+`RAILWAY_TOKEN` is absent.
 
 Hosted boot needs HTTPS `API_PUBLIC_URL` and exact-match `API_HOSTS`
 (`api/src/lib/config.ts`). Staging is set to

@@ -1,0 +1,23 @@
+{
+  "minLines": 5,
+  "minTokens": 50,
+  "mode": "mild",
+  "threshold": 100,
+  "absolute": true,
+  "gitignore": true,
+  "reporters": ["json"],
+  "ignore": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/.git/**",
+    "**/coverage/**",
+    "data/**",
+    "web/data/**",
+    "**/*.json",
+    "**/*.lock",
+    "**/*.lockb",
+    "mobile/ios/**",
+    "mobile/android/**"
+  ],
+  "format": ["typescript", "javascript", "tsx", "jsx", "python"]
+}
