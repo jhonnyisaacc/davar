@@ -24,6 +24,17 @@ ALLOWED = (
     "tests/test_knowledge_",
 )
 WORKFLOW = ".github/workflows/knowledge-foundation.yml"
+CI_WORKFLOW = ".github/workflows/ci.yml"
+KNOWLEDGE_COMMANDS = (
+    "python -m pytest -q tests/test_knowledge_*.py tests/test_commentary_corpus.py",
+    "python -m scripts.knowledge check",
+    "scripts.knowledge.compatibility boundary",
+    "bun test tests/fixtures/knowledge/legacy-mapping.test.ts",
+    "scripts.knowledge.compatibility legacy",
+    "scripts/test_build_verse_index.py",
+    "bun test scripts/knowledge.test.ts",
+    "scripts.knowledge.compatibility shaul",
+)
 SHAUL_REVISION = "8c94b0fe9eca817e22340430309801d0ef76125b"
 SHAUL_ORIGIN = "https://github.com/jhonnyisaacc/shaul.git"
 KNOWLEDGE_CODE = "scripts/knowledge/"
@@ -188,6 +199,14 @@ def workflow_change_additive(before: bytes, after: bytes) -> bool:
     ) == set(k for k in new if k not in ("on", "jobs"))
 
 
+def folded_knowledge_commands(root: Path) -> bool:
+    path = root / CI_WORKFLOW
+    if not path.is_file():
+        return False
+    text = path.read_text(encoding="utf-8")
+    return all(command in text for command in KNOWLEDGE_COMMANDS)
+
+
 def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
     changes = subprocess.check_output(
         ["git", "diff", "--name-status", base, "--"], cwd=root, text=True
@@ -195,7 +214,7 @@ def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
     knowledge_edits = False
     for line in changes.splitlines():
         status, path = line.split("\t", 1)
-        if not (path.startswith(ALLOWED) or path == WORKFLOW):
+        if not (path.startswith(ALLOWED) or path in (WORKFLOW, CI_WORKFLOW)):
             continue
         if path.startswith(KNOWLEDGE_CODE) and status != "A":
             knowledge_edits = True
@@ -205,6 +224,10 @@ def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
         if path.startswith(KNOWLEDGE_TESTS) and status == "M":
             knowledge_edits = True
             continue
+        if path == CI_WORKFLOW or (path == WORKFLOW and status == "D"):
+            if (root / WORKFLOW).is_file() or folded_knowledge_commands(root):
+                continue
+            raise ValueError("Knowledge checks left .github/workflows/ci.yml: " + line)
         if status == "M":
             before = subprocess.check_output(["git", "show", f"{base}:{path}"], cwd=root)
             after = (root / path).read_bytes()

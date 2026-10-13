@@ -163,7 +163,7 @@ Control CLIs, from the repository root:
 
 Each accepts only `doctor`, `start`, `stop`, `drive`, `state`, `evidence`, and `reset`.
 
-Local check, same commands as Web CI, Mobile CI, Server CI, and Python CI:
+Local check, same commands as the web, mobile, api, and python jobs in `.github/workflows/ci.yml`:
 
 ```bash
 ./scripts/check

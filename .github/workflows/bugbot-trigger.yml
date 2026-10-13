@@ -1,0 +1,48 @@
+name: Bugbot trigger
+
+on:
+  pull_request_target:
+    types: [ready_for_review]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: bugbot-trigger-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  trigger:
+    name: bugbot-trigger
+    if: github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment bugbot run
+        env:
+          GH_TOKEN: ${{ secrets.BUGBOT_TRIGGER_PAT }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -eu
+          if [ -z "${GH_TOKEN:-}" ]; then
+            echo "::notice::BUGBOT_TRIGGER_PAT is absent; skipping bugbot trigger"
+            exit 0
+          fi
+          files=$(gh api --paginate "repos/${{ github.repository }}/pulls/${PR_NUMBER}/files" --jq '.[].filename')
+          docs_only=true
+          if [ -z "$files" ]; then
+            docs_only=false
+          else
+            while IFS= read -r file; do
+              [ -z "$file" ] && continue
+              case "$file" in
+                docs/*|*.md|*.mdx) ;;
+                *) docs_only=false ;;
+              esac
+            done <<< "$files"
+          fi
+          if [ "$docs_only" = true ]; then
+            echo "::notice::Docs-only pull request; skipping bugbot trigger"
+            exit 0
+          fi
+          gh pr comment "$PR_NUMBER" --repo "${{ github.repository }}" --body "bugbot run"
