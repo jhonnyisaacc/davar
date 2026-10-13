@@ -13,7 +13,9 @@
 # shared/books.ts imports the book registry, so that one file has to stay.
 archive/
 data/**
+!data/knowledge
 !data/knowledge/
+!data/knowledge/registries
 !data/knowledge/registries/
 !data/knowledge/registries/books.json
 debug/
