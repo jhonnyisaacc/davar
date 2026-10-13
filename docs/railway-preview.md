@@ -59,7 +59,7 @@ Root directory `/api`. Watch patterns match the `api` filter in
 
 `railway-staging.yml` deploys a non-draft pull request that touches those
 paths. It runs `railway up --service davar --environment staging` and waits
-for `GET /up`. One deploy runs at a time. Turn Railway's automatic pull
+for `GET /up`. One deploy runs at a time, and a second deploy waits for it. Turn Railway's automatic pull
 request environments off. The workflow skips with a notice when
 `RAILWAY_TOKEN` is absent.
 

@@ -45,4 +45,4 @@ jobs:
             echo "::notice::Docs-only pull request; skipping bugbot trigger"
             exit 0
           fi
-          gh pr comment "$PR_NUMBER" --body "bugbot run"
+          gh pr comment "$PR_NUMBER" --repo "${{ github.repository }}" --body "bugbot run"

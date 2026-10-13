@@ -62,7 +62,9 @@ jobs:
           python3 .github/workflows/lib/which-workflows.py --check
       - name: actionlint
         run: |
-          bash -c 'curl -sL https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash | bash -s -- 1.7.7'
+          curl -sL -o actionlint.tar.gz https://github.com/rhysd/actionlint/releases/download/v1.7.7/actionlint_1.7.7_linux_amd64.tar.gz
+          echo "023070a287cd8cccd71515fedc843f1985bf96c436b7effaecce67290e7e0757  actionlint.tar.gz" | sha256sum -c
+          tar -xzf actionlint.tar.gz actionlint
           ./actionlint -color
       - name: Secret scan
         uses: gitleaks/gitleaks-action@v2
