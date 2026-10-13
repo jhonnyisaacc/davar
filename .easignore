@@ -9,9 +9,13 @@
 .pytest_cache/
 .DS_Store
 
-# Repository areas not required for Expo mobile cloud builds
+# Repository areas not required for Expo mobile cloud builds.
+# shared/books.ts imports the book registry, so that one file has to stay.
 archive/
-data/
+data/**
+!data/knowledge/
+!data/knowledge/registries/
+!data/knowledge/registries/books.json
 debug/
 design/
 docs/
