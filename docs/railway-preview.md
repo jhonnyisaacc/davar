@@ -36,6 +36,7 @@ fixed per preview deploy.
 | `PUBLIC_API_URL` | fallback | Shared API origin if staging is unset |
 | `CLOUDFLARE_API_TOKEN` | yes | Pages deploy |
 | `CLOUDFLARE_ACCOUNT_ID` | yes | Pages deploy |
+| `RAILWAY_TOKEN` | yes for API staging deploys | Project token scoped to the staging environment |
 
 ```bash
 gh secret set STAGING_API_URL --repo jhonnyisaacc/davar --body 'https://davar-staging.up.railway.app'
@@ -48,12 +49,19 @@ Pages **production** environment, or the client falls back to
 
 ## Railway settings (per environment)
 
-Root directory `/api`. Watch patterns match `api-ci.yml`:
+Root directory `/api`. Watch patterns match the `api` filter in
+`.github/ci/path-filters.yml` and `.github/workflows/railway-staging.yml`:
 
 - `api/**`
 - `shared/product*.ts`
 - `contracts/biblical-knowledge/**`
 - `data/knowledge/registries/**`
+
+`railway-staging.yml` deploys a non-draft pull request that touches those
+paths. It runs `railway up --service davar --environment staging` and waits
+for `GET /up`. One deploy runs at a time. Turn Railway's automatic pull
+request environments off. The workflow skips with a notice when
+`RAILWAY_TOKEN` is absent.
 
 Hosted boot needs HTTPS `API_PUBLIC_URL` and exact-match `API_HOSTS`
 (`api/src/lib/config.ts`). Staging is set to
@@ -64,14 +72,14 @@ Hosted boot needs HTTPS `API_PUBLIC_URL` and exact-match `API_HOSTS`
 CORS already allows `https://davar.bible` and `https://*.davar.pages.dev`
 (`api/src/services/webOrigins.ts`).
 
-## Live leftovers to clear
+## Live source
 
-Production and staging **live** config may still show the old GitHub slug
-`edyhvh/davar` and root `/server` until you accept the staged patch that
-moves them to `jhonnyisaacc/davar` and `/api`. Those are Hono-era path
-names from the Rails→Hono move, not Ruby variables. Accept **staging**
-once `staging` has `api/`. Accept **production** only after `api/` is on
-`main`.
+Production and staging both deploy GitHub repo `jhonnyisaacc/davar` with
+root directory `/api`.
+
+Cloudflare previews call `https://davar-staging.up.railway.app`. That
+origin is the `STAGING_API_URL` secret. A preview does not create a
+Railway environment.
 
 ## Known hosted gaps
 
