@@ -84,13 +84,11 @@ gh secret set GOOGLE_PLAY_SERVICE_ACCOUNT_JSON --repo jhonnyisaacc/davar < play-
 gh secret set STAGING_API_URL --repo jhonnyisaacc/davar --body 'https://davar-staging.up.railway.app'
 ```
 
-Keep `PUBLIC_API_URL` only as a fallback until staging exists.
+Keep `PUBLIC_API_URL` only as a fallback when `STAGING_API_URL` is unset.
 
-## Staging branch ruleset
+## Pull requests
 
-Definition: `.github/rulesets/staging.json` (PR required, no force-push,
-no deletion). Apply with admin `gh` (cloud agent tokens get 403):
-
-```bash
-gh api --method POST repos/jhonnyisaacc/davar/rulesets --input .github/rulesets/staging.json
-```
+Open pull requests against `main`. Staging is the Railway environment at
+`https://davar-staging.up.railway.app`, not a git branch these docs ask
+you to target. `.github/rulesets/staging.json` is left in the repo and is
+not applied from this guide.

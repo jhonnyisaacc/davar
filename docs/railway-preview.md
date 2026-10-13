@@ -7,16 +7,16 @@ previews for non-draft PRs bake in `PUBLIC_API_URL` at build time via
 There is no `railway.toml` in the repo. Service config lives in the Railway
 dashboard (project `davar`, service `davar`).
 
-## Branch model
+## Environments
 
-| Railway environment | Git branch | Domain |
-| --- | --- | --- |
-| production | `main` | `https://davar-production-ecd0.up.railway.app` |
-| staging | `staging` | `https://davar-staging.up.railway.app` |
+| Railway environment | Domain |
+| --- | --- |
+| production | `https://davar-production-ecd0.up.railway.app` |
+| staging | `https://davar-staging.up.railway.app` |
 
-`staging` is the integration branch. Feature PRs merge there before
-promotion to `main`. Cloudflare previews always use the staging API
-(`STAGING_API_URL`). They do not wait on Railway PR environments.
+Pull requests target `main`. Staging is a Railway environment. Cloudflare
+previews always use the staging API (`STAGING_API_URL`). They do not wait
+on Railway PR environments. Production Pages builds from `main`.
 
 ## PreviewApiTarget
 

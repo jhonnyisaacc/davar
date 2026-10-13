@@ -136,9 +136,8 @@ class CommitAuditTest(unittest.TestCase):
 
 
 class BranchNameTest(unittest.TestCase):
-    def test_prefixes_and_staging(self) -> None:
+    def test_prefixes(self) -> None:
         for name in (
-            "staging",
             "feat/preview",
             "fix/nav-bar",
             "hotfix/outage",
@@ -152,6 +151,8 @@ class BranchNameTest(unittest.TestCase):
             self.assertEqual(result.returncode, 0, name + result.stderr)
 
     def test_cursor_prefix_and_empty_fail(self) -> None:
+        staging = run_py("branch_name.py", ["staging"])
+        self.assertEqual(staging.returncode, 1)
         cursor = run_py("branch_name.py", ["cursor/ci-baseline-722a"])
         self.assertEqual(cursor.returncode, 1)
         empty = run_py("branch_name.py", [""])

@@ -48,6 +48,6 @@ Name the branch `<prefix>/<short-kebab-name>`. Pick the prefix from this table f
 
 `refactor/` is a structure change that keeps behavior the same. It is not the default for agent work. A change the reader can see, including a faster first paint, uses `feat/`. The branch-name check accepts only these spellings.
 
-Create every pull request as a draft with `gh pr create --draft`. Mark it ready with `gh pr ready` only when it is ready for manual testing, which means opening the Cloudflare preview. Leaving draft sends `ready_for_review` and starts Web Preview. A draft does not deploy a preview.
+Open every pull request against `main`. The flow is draft, then ready for review, then `main`. Create every pull request as a draft with `gh pr create --draft`. Mark it ready with `gh pr ready` only when it is ready for manual testing, which means opening the Cloudflare preview. Leaving draft sends `ready_for_review` and starts Web Preview. A draft does not deploy a preview. Staging is a Railway environment, not a git branch pull requests target.
 
 Commits are signed with the agents' SSH signing key and must show Verified.
