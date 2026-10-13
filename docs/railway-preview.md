@@ -58,7 +58,9 @@ Root directory `/api`. Watch patterns match the `api` filter in
 - `data/knowledge/registries/**`
 
 `railway-staging.yml` deploys a non-draft pull request that touches those
-paths. It runs `railway up --service davar --environment staging` and waits
+paths. It removes the `web/data` symlink before upload. That link points at
+gitignored `web/public/data`, and `railway up` follows links during indexing.
+It runs `railway up --service davar --environment staging` and waits
 for `GET /up`. One deploy runs at a time, and a second deploy waits for it. Turn Railway's automatic pull
 request environments off. The workflow skips with a notice when
 `RAILWAY_TOKEN` is absent.
