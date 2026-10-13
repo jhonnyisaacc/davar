@@ -12,6 +12,8 @@ from commit_message import trailer_lines
 
 OWNER_NAME = "jhonnyisaacc"
 OWNER_EMAIL = "60485595+jhonnyisaacc@users.noreply.github.com"
+# GitHub squash-merge records the account display name, not user.name.
+OWNER_NAMES = frozenset({OWNER_NAME, "Jhonny"})
 
 
 def flatten_commits(payload: object) -> list[dict]:
@@ -40,7 +42,7 @@ def problems(commits: list[dict]) -> list[str]:
         message = body.get("message") if isinstance(body.get("message"), str) else ""
         if verification.get("verified") is not True:
             found.append(f"{sha}: not Verified")
-        if author.get("name") != OWNER_NAME or author.get("email") != OWNER_EMAIL:
+        if author.get("name") not in OWNER_NAMES or author.get("email") != OWNER_EMAIL:
             found.append(f"{sha}: author is not {OWNER_NAME} <{OWNER_EMAIL}>")
         if trailer_lines(message):
             found.append(f"{sha}: AI co-author trailer")

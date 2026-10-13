@@ -109,6 +109,14 @@ class CommitAuditTest(unittest.TestCase):
     def test_verified_owner_commit_passes(self) -> None:
         result = self.audit([self.commit()])
         self.assertEqual(result.returncode, 0, result.stderr)
+        named = self.commit()
+        named["sha"] = "squash"
+        named["commit"]["author"] = {
+            "name": "Jhonny",
+            "email": "60485595+jhonnyisaacc@users.noreply.github.com",
+        }
+        squash = self.audit([named])
+        self.assertEqual(squash.returncode, 0, squash.stderr)
 
     def test_unverified_wrong_author_and_trailer_fail(self) -> None:
         unsigned = self.commit()
