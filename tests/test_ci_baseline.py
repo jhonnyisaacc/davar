@@ -212,11 +212,11 @@ class CommitAuditGitTest(ScratchRepoTest):
         self.assertEqual(result.returncode, 1)
         self.assertEqual(result.stderr, f"{sha}: AI co-author trailer\n")
 
-    def test_only_a_merge_may_read_e(self) -> None:
-        self.assertTrue(locally_verified("E", 2))
-        self.assertFalse(locally_verified("E", 1))
-        self.assertTrue(locally_verified("U", 1))
-        self.assertFalse(locally_verified("N", 1))
+    def test_unchecked_signature_is_not_verified(self) -> None:
+        self.assertTrue(locally_verified("G"))
+        self.assertTrue(locally_verified("U"))
+        self.assertFalse(locally_verified("E"))
+        self.assertFalse(locally_verified("N"))
 
 
 class PrePushTest(ScratchRepoTest):
