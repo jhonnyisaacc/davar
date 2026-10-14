@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, expect, mock, test } from "bun:test";
+import { repoDataResponse } from "@davar/shared/repoDataResponse";
 
 (globalThis as { __DEV__?: boolean }).__DEV__ = true;
 
@@ -73,6 +74,39 @@ const waitForSource = async (
   }
 };
 
+const readPsalms3 = () =>
+  readChapterSourceFirst("psalms", 3, {
+    language: "en",
+    isConnected: true,
+    referenceMode: "source",
+  });
+
+const paintWhileTranslationHolds = async () => {
+  const read = readPsalms3();
+  try {
+    return { read, painted: await waitForSource(read.source) };
+  } finally {
+    releaseTranslation();
+  }
+};
+
+const expectShiftedTranslation = (
+  verses: { verse: number; translation: string }[],
+) => {
+  expect(verses.find((verse) => verse.verse === 2)?.translation).toBe(
+    firstLine,
+  );
+  expect(verses.find((verse) => verse.verse === 3)?.translation).toBe(
+    secondLine,
+  );
+  expect(verses.find((verse) => verse.verse === 1)?.translation).not.toBe(
+    firstLine,
+  );
+  expect(verses.find((verse) => verse.verse === 1)?.translation).not.toBe(
+    secondLine,
+  );
+};
+
 beforeEach(() => {
   offline.hebrew = [];
   offline.translation = [];
@@ -102,19 +136,10 @@ beforeEach(() => {
       }
       return new Response("missing", { status: 404 });
     }
-    const marker = "/data/";
-    const index = pathname.lastIndexOf(marker);
-    if (index === -1) {
-      return new Response("missing", { status: 404 });
-    }
-    const relative = pathname.slice(index + marker.length);
-    const file = Bun.file(new URL(relative, dataRoot));
-    if (!(await file.exists())) {
-      return new Response("missing", { status: 404 });
-    }
-    return new Response(await file.text(), {
-      headers: { "content-type": "application/json" },
-    });
+    return (
+      (await repoDataResponse(pathname, dataRoot)) ??
+      new Response("missing", { status: 404 })
+    );
   }) as typeof fetch;
 });
 
@@ -129,18 +154,7 @@ test("psalms 3 paints the Hebrew file before the translation file returns", asyn
   const sourceFile = (await Bun.file(
     new URL("oe/psalms/3.json", dataRoot),
   ).json()) as { verse: number; hebrew: string }[];
-  const read = readChapterSourceFirst("psalms", 3, {
-    language: "en",
-    isConnected: true,
-    referenceMode: "source",
-  });
-
-  let painted: Awaited<ReturnType<typeof waitForSource>>;
-  try {
-    painted = await waitForSource(read.source);
-  } finally {
-    releaseTranslation();
-  }
+  const { read, painted } = await paintWhileTranslationHolds();
 
   expect(painted.translationPending).toBe(true);
   expect(painted.verses.map((verse) => verse.verse)).toEqual(
@@ -164,18 +178,7 @@ test("psalms 3 paints the Hebrew file before the translation file returns", asyn
   expect(settled.map((verse) => verse.verse)).toEqual(
     painted.verses.map((verse) => verse.verse),
   );
-  expect(settled.find((verse) => verse.verse === 2)?.translation).toBe(
-    firstLine,
-  );
-  expect(settled.find((verse) => verse.verse === 3)?.translation).toBe(
-    secondLine,
-  );
-  expect(settled.find((verse) => verse.verse === 1)?.translation).not.toBe(
-    firstLine,
-  );
-  expect(settled.find((verse) => verse.verse === 1)?.translation).not.toBe(
-    secondLine,
-  );
+  expectShiftedTranslation(settled);
 });
 
 test("a stored chapter paints Hebrew without requesting the Hebrew file", async () => {
@@ -184,18 +187,7 @@ test("a stored chapter paints Hebrew without requesting the Hebrew file", async 
     hebrewRow(2, "STORED-BET"),
     hebrewRow(3, "STORED-GIMEL"),
   ];
-  const read = readChapterSourceFirst("psalms", 3, {
-    language: "en",
-    isConnected: true,
-    referenceMode: "source",
-  });
-
-  let painted: Awaited<ReturnType<typeof waitForSource>>;
-  try {
-    painted = await waitForSource(read.source);
-  } finally {
-    releaseTranslation();
-  }
+  const { read, painted } = await paintWhileTranslationHolds();
 
   expect(painted.translationPending).toBe(true);
   expect(painted.verses.find((verse) => verse.verse === 1)?.hebrew).toBe(
@@ -213,15 +205,7 @@ test("a stored chapter paints Hebrew without requesting the Hebrew file", async 
   expect(settled.find((verse) => verse.verse === 1)?.hebrew).toBe(
     "STORED-ALEPH",
   );
-  expect(settled.find((verse) => verse.verse === 2)?.translation).toBe(
-    firstLine,
-  );
-  expect(settled.find((verse) => verse.verse === 3)?.translation).toBe(
-    secondLine,
-  );
-  expect(settled.find((verse) => verse.verse === 1)?.translation).not.toBe(
-    firstLine,
-  );
+  expectShiftedTranslation(settled);
   expect(requestedPaths.some((path) => path.includes("/oe/"))).toBe(false);
   expect(
     requestedPaths.some((path) => path.includes("/ts2009/psalms/3.json")),
@@ -238,23 +222,11 @@ test("a stored translation paints on the shifted verse without a network read", 
     { chapter: 3, verse: 1, text: firstLine },
     { chapter: 3, verse: 2, text: secondLine },
   ];
-  const read = readChapterSourceFirst("psalms", 3, {
-    language: "en",
-    isConnected: true,
-    referenceMode: "source",
-  });
+  const read = readPsalms3();
   const painted = await waitForSource(read.source);
 
   expect(painted.translationPending).toBe(false);
-  expect(painted.verses.find((verse) => verse.verse === 2)?.translation).toBe(
-    firstLine,
-  );
-  expect(painted.verses.find((verse) => verse.verse === 3)?.translation).toBe(
-    secondLine,
-  );
-  expect(
-    painted.verses.find((verse) => verse.verse === 1)?.translation,
-  ).not.toBe(firstLine);
+  expectShiftedTranslation(painted.verses);
   expect(requestedPaths).toEqual([]);
   expect(
     (await read.settled).find((verse) => verse.verse === 2)?.translation,

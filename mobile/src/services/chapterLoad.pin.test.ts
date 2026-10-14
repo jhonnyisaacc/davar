@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, expect, mock, test } from "bun:test";
+import { repoDataResponse } from "@davar/shared/repoDataResponse";
 
 (globalThis as { __DEV__?: boolean }).__DEV__ = true;
 
@@ -46,19 +47,10 @@ beforeEach(() => {
 		if (pathname.endsWith("/version.json")) {
 			return new Response("missing", { status: 404 });
 		}
-		const marker = "/data/";
-		const index = pathname.lastIndexOf(marker);
-		if (index === -1) {
-			return new Response("missing", { status: 404 });
-		}
-		const relative = pathname.slice(index + marker.length);
-		const file = Bun.file(new URL(relative, dataRoot));
-		if (!(await file.exists())) {
-			return new Response("missing", { status: 404 });
-		}
-		return new Response(await file.text(), {
-			headers: { "content-type": "application/json" },
-		});
+		return (
+			(await repoDataResponse(pathname, dataRoot)) ??
+			new Response("missing", { status: 404 })
+		);
 	}) as typeof fetch;
 });
 
