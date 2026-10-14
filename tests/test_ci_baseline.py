@@ -12,6 +12,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CI = ROOT / "scripts" / "ci"
+sys.path.insert(0, str(CI))
+
+from commit_audit import OWNER_EMAIL, OWNER_NAME, locally_verified
 
 
 def run_py(script: str, args: list[str], env: dict | None = None, cwd: Path | None = None) -> subprocess.CompletedProcess[str]:
@@ -27,6 +30,52 @@ def run_py(script: str, args: list[str], env: dict | None = None, cwd: Path | No
         capture_output=True,
         check=False,
     )
+
+
+class ScratchRepo:
+    def __init__(self, root: Path) -> None:
+        self.path = root / "repo"
+        self.env = {
+            key: value
+            for key, value in os.environ.items()
+            if not key.startswith("GIT_") and key not in ("NEEDS", "SSH_AUTH_SOCK")
+        }
+        self.env["GIT_CONFIG_GLOBAL"] = str(root / "gitconfig")
+        self.env["GIT_CONFIG_NOSYSTEM"] = "1"
+        (root / "gitconfig").write_text("")
+        key = root / "signing"
+        subprocess.run(["ssh-keygen", "-q", "-t", "ed25519", "-N", "", "-f", str(key)], check=True)
+        public = " ".join((root / "signing.pub").read_text().split()[:2])
+        (root / "allowed_signers").write_text(f"{OWNER_EMAIL} {public}\n")
+        self.path.mkdir()
+        self.git("init", "-q", "-b", "main")
+        for name, value in (
+            ("user.name", OWNER_NAME),
+            ("user.email", OWNER_EMAIL),
+            ("gpg.format", "ssh"),
+            ("user.signingkey", str(key)),
+            ("gpg.ssh.allowedSignersFile", str(root / "allowed_signers")),
+            ("commit.gpgsign", "true"),
+        ):
+            self.git("config", name, value)
+        self.commit("chore: base\n")
+        self.git("update-ref", "refs/remotes/origin/main", "HEAD")
+
+    def git(self, *args: str) -> str:
+        return subprocess.run(
+            ["git", *args], cwd=self.path, env=self.env, text=True, capture_output=True, check=True
+        ).stdout
+
+    def commit(self, message: str, signed: bool = True) -> str:
+        self.git("-c", f"commit.gpgsign={str(signed).lower()}", "commit", "-q", "--allow-empty", "-m", message)
+        return self.git("rev-parse", "HEAD").strip()
+
+
+class ScratchRepoTest(unittest.TestCase):
+    def setUp(self) -> None:
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.repo = ScratchRepo(Path(tmp.name).resolve())
 
 
 class GateStatusTest(unittest.TestCase):
@@ -133,6 +182,36 @@ class CommitAuditTest(unittest.TestCase):
         self.assertIn("unsigned: not Verified", result.stderr)
         self.assertIn("stranger: author is not", result.stderr)
         self.assertIn("trailed: AI co-author trailer", result.stderr)
+
+
+class CommitAuditGitTest(ScratchRepoTest):
+    def audit(self) -> subprocess.CompletedProcess[str]:
+        return run_py("commit_audit.py", ["--git", "origin/main..HEAD"], env=self.repo.env, cwd=self.repo.path)
+
+    def test_signed_owner_commit_passes(self) -> None:
+        self.repo.commit("feat: x\n")
+        self.assertIn(self.repo.git("log", "-1", "--format=%G?"), ("G\n", "U\n"))
+        result = self.audit()
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(result.stdout, "commits: 1 verified\n")
+
+    def test_unsigned_commit_fails(self) -> None:
+        sha = self.repo.commit("feat: x\n", signed=False)
+        result = self.audit()
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(result.stderr, f"{sha}: not Verified\n")
+
+    def test_ai_trailer_fails(self) -> None:
+        sha = self.repo.commit("fix: x\n\nCo-authored-by: Cursor <cursoragent@cursor.com>\n")
+        result = self.audit()
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(result.stderr, f"{sha}: AI co-author trailer\n")
+
+    def test_only_a_merge_may_read_e(self) -> None:
+        self.assertTrue(locally_verified("E", 2))
+        self.assertFalse(locally_verified("E", 1))
+        self.assertTrue(locally_verified("U", 1))
+        self.assertFalse(locally_verified("N", 1))
 
 
 class BranchNameTest(unittest.TestCase):
