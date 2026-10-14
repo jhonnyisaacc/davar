@@ -107,6 +107,11 @@ const fetchTs2009ChapterFromBookFile = async (
   return null;
 };
 
+export const resetTs2009ChapterCacheForTests = (): void => {
+  ts2009ChapterCache.clear();
+  ts2009ChapterFilesUnavailable = false;
+};
+
 export const fetchTs2009ChapterStatic = (
   bookId: string,
   chapter: number,

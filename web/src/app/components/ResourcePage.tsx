@@ -7,11 +7,13 @@ export function ResourcePage({
 	language,
 	onBack,
 	children,
+	hideTitle = false,
 }: {
 	title: string;
 	language: AppLanguage;
 	onBack: () => void;
 	children: ReactNode;
+	hideTitle?: boolean;
 }) {
 	const { t } = useTranslation(language);
 	useEffect(() => {
@@ -31,12 +33,14 @@ export function ResourcePage({
 				<Back size={16} />
 				{t("settings.title")}
 			</button>
-			<h1
-				className="text-[32px] font-normal"
-				style={{ fontFamily: "Manrope, sans-serif" }}
-			>
-				{title}
-			</h1>
+			{hideTitle ? null : (
+				<h1
+					className="text-[32px] font-normal"
+					style={{ fontFamily: "Manrope, sans-serif" }}
+				>
+					{title}
+				</h1>
+			)}
 			{children}
 		</main>
 	);

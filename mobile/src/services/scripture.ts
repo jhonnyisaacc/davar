@@ -1,5 +1,9 @@
 export type { DisplayVerse, DisplayWord } from "./scriptureDisplay";
-export { fetchChapterVerses } from "./scriptureChapter";
+export {
+  fetchChapterVerses,
+  readChapterSourceFirst,
+} from "./scriptureChapter";
+export type { ChapterSourcePaint } from "./scriptureChapter";
 export {
   fetchGreekChapterVerses,
   fetchGreekVerse,

@@ -19,6 +19,7 @@ import {
 } from "react-native";
 
 import { NeumorphCard } from "@/src/components/ui/NeumorphCard";
+import { Skeleton } from "@/src/components/ui/Skeleton";
 import { getColors, getResponsiveLayout, spacing, typography } from "@/src/theme";
 import { useAppStore, type AppState } from "@/src/store/useAppStore";
 import type { DisplayVerse } from "@/src/services/scripture";
@@ -229,6 +230,7 @@ type VerseCardProps = {
   selectedWord?: DisplayVerse["words"][number] | null;
   variant?: "card" | "detail";
   isBesorah?: boolean;
+  translationPending?: boolean;
 };
 
 // Font-specific calibration keeps Cardo and DSS glyph metrics visually aligned
@@ -265,6 +267,12 @@ const createStyles = (
       color: colors.textPrimary,
       marginTop: spacing[6],
       textAlign: "center",
+    },
+    translationHold: {
+      marginTop: spacing[6],
+      gap: spacing[2],
+      width: "100%",
+      alignItems: "center",
     },
     translationItalic: {
       fontStyle: "italic",
@@ -460,6 +468,7 @@ export const VerseCard = ({
   selectedWord = null,
   variant = "card",
   isBesorah = false,
+  translationPending = false,
 }: VerseCardProps) => {
   const besorahTextVersion = useAppStore(s => s.besorahTextVersion);
   const askCommentary = (word?: DisplayVerse["words"][number]) => {
@@ -702,7 +711,13 @@ export const VerseCard = ({
         </View>
       ) : null}
 
-      {hideTranslationText ? null : (
+      {hideTranslationText ? null : translationPending &&
+        !verse.translation.trim() ? (
+        <View style={styles.translationHold}>
+          <Skeleton width="72%" height={14} />
+          <Skeleton width="48%" height={14} delay={80} />
+        </View>
+      ) : (
         <Text
           style={[
             styles.translation,

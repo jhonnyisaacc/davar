@@ -1,9 +1,16 @@
+import {
+	CREATOR_TELEGRAM_HANDLE,
+	CREATOR_TELEGRAM_URL,
+	PLAY_STORE_URL,
+} from "@davar/shared/settingsResources";
 import { type AppLanguage, useTranslation } from "../hooks/useTranslation";
 import { KoFiWidget } from "./KoFiWidget";
+import { NeumorphCard } from "./NeumorphCard";
 
-const DONATION_CONFIG = {
-	githubSponsor: "https://github.com/sponsors/jhonnyisaacc",
-} as const;
+const GITHUB_SPONSORS_URL = "https://github.com/sponsors/jhonnyisaacc";
+
+const action =
+	"inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[var(--accent-deep)] px-5 py-3 text-white";
 
 const GithubSponsorsIcon = ({ className }: { className?: string }) => (
 	<svg
@@ -39,70 +46,52 @@ interface DonateScreenProps {
 export function DonateScreen({ language }: DonateScreenProps) {
 	const { t } = useTranslation(language);
 	return (
-		<div className="min-h-[60vh] flex items-center justify-center">
-			<div className="text-center">
-				<div
-					className="space-y-6 text-[var(--text-secondary)]"
-					style={{ fontFamily: "'Inter', sans-serif" }}
+		<div className="space-y-6">
+			<NeumorphCard className="p-5 space-y-4">
+				<KoFiWidget />
+				<a
+					href={GITHUB_SPONSORS_URL}
+					target="_blank"
+					rel="noopener noreferrer"
+					className={action}
 				>
-					<KoFiWidget />
+					<GithubSponsorsIcon className="h-5 w-5" />
+					<span>{t("donate.githubSponsor")}</span>
+				</a>
+			</NeumorphCard>
 
-					<a
-						href={DONATION_CONFIG.githubSponsor}
-						target="_blank"
-						rel="noopener noreferrer"
-						className="inline-flex items-center gap-2 rounded-md border border-zinc-900 bg-zinc-900 px-4 py-2 text-lg font-medium text-white hover:bg-zinc-800 hover:border-zinc-800 transition-colors"
-					>
-						<GithubSponsorsIcon className="w-5 h-5 text-pink-400" />
-						<span>{t("donate.githubSponsor")}</span>
-					</a>
-
-					<p className="text-sm text-[var(--text-secondary)]">
-						{t("donate.contactPrefix")}{" "}
-						<span className="inline-flex items-baseline gap-2">
-							<span className="inline-flex items-baseline gap-1 font-medium text-[var(--text-primary)]">
-								<TelegramIcon className="w-4 h-4 align-middle" />
-								{t("donate.telegramLabel")}
-							</span>
-							<a
-								href="https://t.me/jhonnyisaacc"
-								target="_blank"
-								rel="noopener noreferrer"
-								className="inline-flex items-baseline underline underline-offset-2 hover:text-[var(--text-primary)] transition-colors"
-							>
-								@jhonnyisaacc
-							</a>
+			<NeumorphCard className="p-5 space-y-4">
+				<p className="text-[var(--text-secondary)]">
+					{t("donate.contactPrefix")}{" "}
+					<span className="inline-flex items-baseline gap-2">
+						<span className="inline-flex items-baseline gap-1">
+							<TelegramIcon className="h-4 w-4" />
+							{t("donate.telegramLabel")}
 						</span>
-					</p>
+						<a
+							href={CREATOR_TELEGRAM_URL}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="underline underline-offset-2"
+						>
+							{CREATOR_TELEGRAM_HANDLE}
+						</a>
+					</span>
+				</p>
+			</NeumorphCard>
 
-					<div className="flex flex-wrap items-center justify-center gap-6 pt-6">
-						<a
-							href="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label={t("common.downloadOnAppStore")}
-						>
-							<img
-								src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-								alt={t("common.downloadOnAppStore")}
-								className="h-12"
-							/>
-						</a>
-						<a
-							href="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label={t("common.getOnGooglePlay")}
-						>
-							<img
-								src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
-								alt={t("common.getOnGooglePlay")}
-								className="h-14"
-							/>
-						</a>
-					</div>
-				</div>
-			</div>
+			<a
+				href={PLAY_STORE_URL}
+				target="_blank"
+				rel="noopener noreferrer"
+				aria-label={t("common.getOnGooglePlay")}
+			>
+				<img
+					src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
+					alt={t("common.getOnGooglePlay")}
+					className="h-14"
+				/>
+			</a>
 		</div>
 	);
 }

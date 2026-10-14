@@ -8,7 +8,6 @@ import {
 	normalizeHebrewDisplay,
 	removeMaqafForDisplay,
 	removeSofPasukForDisplay,
-	splitLeadingHebrewCluster,
 	stripNikud,
 	stripCantillation,
 	stripMeteg,
@@ -454,14 +453,11 @@ export function WordCard({
 					}}
 				>
 					{prefixSegments.prefixes.length > 0 && !isQumranTab ? (
-						<>
-							<span style={{ color: "var(--text-secondary)" }}>
-								{normalizeHebrewDisplay(prefixSegments.prefixes.join(""))}
-							</span>
-							<span style={{ color: "var(--text-hebrew)" }}>
-								{normalizeHebrewDisplay(prefixSegments.root)}
-							</span>
-						</>
+						<span style={{ color: "var(--text-hebrew)" }}>
+							{normalizeHebrewDisplay(
+								`${prefixSegments.prefixes.join("")}${prefixSegments.root}`,
+							)}
+						</span>
 					) : (
 						<span
 							style={{
@@ -651,8 +647,6 @@ export function WordCard({
 										entry?.main_form ??
 										"",
 								);
-								const { head: prefixHead, tail: prefixTail } =
-									splitLeadingHebrewCluster(prefixText);
 
 								return (
 									<div key={prefixItem.key} className="space-y-2">
@@ -663,20 +657,10 @@ export function WordCard({
 												direction: "rtl",
 												lineHeight: 1,
 												fontWeight: 600,
+												color: "var(--text-hebrew)",
 											}}
 										>
-											{prefixHead && (
-												<>
-													<span style={{ color: "var(--text-secondary)" }}>
-														{normalizeHebrewDisplay(prefixHead)}
-													</span>
-													{prefixTail.length > 0 && (
-														<span style={{ color: "var(--text-hebrew)" }}>
-															{normalizeHebrewDisplay(prefixTail)}
-														</span>
-													)}
-												</>
-											)}
+											{prefixText ? normalizeHebrewDisplay(prefixText) : null}
 										</div>
 										{translit ? (
 											<div

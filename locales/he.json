@@ -470,7 +470,7 @@
     "description": "צריכים עזרה או רוצים לשתף משוב? צרו קשר.",
     "emailLabel": "דואר אלקטרוני",
     "emailAction": "פנייה לתמיכה במייל",
-    "creator": "יצירת קשר עם היוצר",
+    "creator": "יצירת קשר עם המפתח",
     "telegramAction": "פתיחת Telegram"
   },
   "commentarySources": {

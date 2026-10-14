@@ -1,3 +1,4 @@
+import { PLAY_STORE_URL } from "@davar/shared/settingsResources";
 import {
 	Bug,
 	FileText,
@@ -226,19 +227,7 @@ export function HomeScreen({
 
 			<div className="flex flex-wrap items-center justify-center gap-6 pt-2">
 				<a
-					href="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-					target="_blank"
-					rel="noopener noreferrer"
-					aria-label={t("common.downloadOnAppStore")}
-				>
-					<img
-						src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
-						alt={t("common.downloadOnAppStore")}
-						className="h-12"
-					/>
-				</a>
-				<a
-					href="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
+					href={PLAY_STORE_URL}
 					target="_blank"
 					rel="noopener noreferrer"
 					aria-label={t("common.getOnGooglePlay")}

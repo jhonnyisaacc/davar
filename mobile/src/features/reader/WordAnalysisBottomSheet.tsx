@@ -47,7 +47,6 @@ import {
   normalizeHebrewDisplay,
   removeMaqafForDisplay,
   removeSofPasukForDisplay,
-  splitLeadingHebrewCluster,
 } from "@/src/utils/hebrew";
 import { staticDataRequest } from "@/src/services/api";
 import {
@@ -673,7 +672,7 @@ const createStyles = (
     prefixHebrew: {
       fontFamily: typography.families.hebrewScripture,
       fontSize: 40 * hebrewScale,
-      color: colors.textSecondary,
+      color: colors.textHebrew,
       textAlign: "center",
       writingDirection: "rtl",
       lineHeight: 56 * hebrewScale,
@@ -1432,14 +1431,9 @@ const WordAnalysisBottomSheetComponent = (
               >
                 <Text style={[styles.hebrew, isQumranTab && styles.hebrewQumran]}>
                   {prefixSegments.prefixes.length > 0 && !isQumranTab ? (
-                    <>
-                      <Text style={{ color: colors.textSecondary }}>
-                        {prefixSegments.prefixes.join("")}
-                      </Text>
-                      <Text style={{ color: colors.textPrimary }}>
-                        {prefixSegments.root}
-                      </Text>
-                    </>
+                    <Text style={{ color: colors.textHebrew }}>
+                      {`${prefixSegments.prefixes.join("")}${prefixSegments.root}`}
+                    </Text>
                   ) : (
                     displayHebrew
                   )}
@@ -1588,8 +1582,6 @@ const WordAnalysisBottomSheetComponent = (
                           prefixSegments.prefixes[index]?.replace(/\//g, "") ??
                           entry?.main_form ??
                           "";
-                        const { head: prefixHead, tail: prefixTail } =
-                          splitLeadingHebrewCluster(prefixText);
 
                         return (
                           <View
@@ -1597,18 +1589,7 @@ const WordAnalysisBottomSheetComponent = (
                             style={styles.prefixItem}
                           >
                             <Text style={styles.prefixHebrew}>
-                              {prefixHead && (
-                                <>
-                                  <Text style={{ color: colors.textSecondary }}>
-                                    {prefixHead}
-                                  </Text>
-                                  {prefixTail.length > 0 && (
-                                    <Text style={{ color: colors.textPrimary }}>
-                                      {prefixTail}
-                                    </Text>
-                                  )}
-                                </>
-                              )}
+                              {prefixText}
                             </Text>
                             {transliteration ? (
                               <Text style={styles.prefixTransliteration}>

@@ -20,6 +20,7 @@
   /* Light theme foundations – warm manuscript cream */
   --background: #faf6f0; /* Shafan-inspired warm parchment */
   --foreground: #000000;
+  --text-primary: #000000;
   --text-secondary: #707070;
   --text-hebrew: #000000;
   --qumran-text: #c68f55;

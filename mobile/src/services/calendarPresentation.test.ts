@@ -4,6 +4,7 @@ import {
   calendarSources,
   confirmedMoadim,
   localSunsetClock,
+  moedRowSubtitle,
   readingCalendarDay,
   readingCalendarPill,
 } from "@davar/shared/calendarPresentation";
@@ -62,6 +63,63 @@ describe("calendar presentation", () => {
     const rows = annualMoadim({ ...calendar(), days: [] }, 2026);
     expect(rows).toHaveLength(8);
     expect(rows.every((row) => row.days.length === 0)).toBe(true);
+  });
+  test("a confirmed moed subtitle leads with the civil date and keeps the biblical label", () => {
+    const copy = (
+      key: string,
+      params?: Record<string, string | number>,
+    ): string => {
+      if (key === "calendar.months.aviv") return "Aviv";
+      if (key === "calendar.dayWithMonth")
+        return `${params?.month} ${params?.day}`;
+      if (key === "calendar.day") return `Day ${params?.day}`;
+      if (key === "calendar.monthRange")
+        return `${params?.month} ${params?.first}\u2013${params?.last}`;
+      return key;
+    };
+    const pesach = day();
+    expect(moedRowSubtitle([pesach], "en", copy)).toBe("April 2 · Aviv 14");
+    expect(moedRowSubtitle([pesach], "es", copy)).toBe("2 de abril · Aviv 14");
+    expect(moedRowSubtitle([pesach], "he", copy)).toBe("2 באפריל · Aviv 14");
+    expect(moedRowSubtitle([], "en", copy)).toBeNull();
+    expect(
+      moedRowSubtitle(
+        [
+          day({
+            biblical: { day: null, month_id: null, month_ordinal: null },
+          }),
+        ],
+        "en",
+        copy,
+      ),
+    ).toBe("April 2");
+    expect(
+      moedRowSubtitle(
+        [
+          day({
+            civil_date: "2026-04-03",
+            biblical: { day: 15, month_id: "aviv", month_ordinal: 1 },
+          }),
+          day({
+            civil_date: "2026-04-09",
+            biblical: { day: 21, month_id: "aviv", month_ordinal: 1 },
+          }),
+        ],
+        "en",
+        copy,
+      ),
+    ).toBe("April 3 \u2013 April 9 · Aviv 15\u201321");
+    expect(
+      moedRowSubtitle(
+        [
+          day({
+            biblical: { day: 14, month_id: null, month_ordinal: null },
+          }),
+        ],
+        "en",
+        copy,
+      ),
+    ).toBe("April 2 · Day 14");
   });
   test("annual Shavuot is dated from the confirmed fifty-day count even without a May month sighting", () => {
     const shavuot = day({

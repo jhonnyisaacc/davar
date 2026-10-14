@@ -15,6 +15,7 @@ export function DonationPage({
 			title={t("settings.links.donate")}
 			language={language}
 			onBack={onBack}
+			hideTitle
 		>
 			<DonateScreen language={language} />
 		</ResourcePage>

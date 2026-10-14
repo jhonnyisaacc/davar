@@ -470,7 +470,7 @@
     "description": "¿Necesitas ayuda o quieres compartir comentarios? Contáctanos.",
     "emailLabel": "Correo electrónico",
     "emailAction": "Escribir a soporte",
-    "creator": "Contactar al creador",
+    "creator": "Contactar al desarrollador",
     "telegramAction": "Abrir Telegram"
   },
   "commentarySources": {
