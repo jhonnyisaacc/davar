@@ -138,7 +138,6 @@ export const readChapterSourceFirst = (
     rejectSettled = reject;
   });
 
-  // Hebrew is enough to paint. The translation file must not hold the verse back.
   const source = (async (): Promise<ChapterSourcePaint> => {
     let settledHooked = false;
     try {

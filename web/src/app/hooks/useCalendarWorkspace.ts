@@ -36,7 +36,7 @@ export function useCalendarWorkspace({
 		() => workspace.loadDay(offset, !!city),
 		[workspace, city, offset, calendar],
 	);
-	// biome-ignore lint/correctness/useExhaustiveDependencies: Prefetch the year once a city is known, and again when today refreshes or a failed request retries.
+	// biome-ignore lint/correctness/useExhaustiveDependencies: loadYear deps intentionally omit workspace internals
 	useEffect(
 		() => workspace.loadYear(year, !!city),
 		[workspace, city, year, annualAttempt, calendar],

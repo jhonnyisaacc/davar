@@ -183,7 +183,6 @@ function biblicalMoedLabel(
 	});
 }
 
-// Days come from annualMoadim, which already drops unconfirmed moadim.
 export function moedRowSubtitle(
 	days: readonly CalendarDay[],
 	language: AppLanguage,

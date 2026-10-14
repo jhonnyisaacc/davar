@@ -1,5 +1,3 @@
-# Records a GitHub production deployment status when CI's web job succeeds.
-# It does not upload or publish Cloudflare Pages. Production hosting is outside this workflow.
 name: Web Production Status
 
 on:

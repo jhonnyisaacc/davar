@@ -14,7 +14,6 @@ A minimalist Bible study app focused on Hebrew Scriptures.
   <a href="https://play.google.com/store/apps/details?id=bible.davar">
     <img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="Get it on Google Play" height="64" />
   </a>
-  <!-- App Store badge stays hidden until a real listing URL exists. -->
 </p>
 
 ## Run Locally

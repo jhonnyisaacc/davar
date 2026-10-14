@@ -3,7 +3,6 @@ export const CREATOR_TELEGRAM_HANDLE = "@jhonnyisaacc";
 export const CREATOR_TELEGRAM_URL = "https://t.me/jhonnyisaacc";
 export const GITHUB_URL = "https://github.com/jhonnyisaacc/davar";
 export const COMMENTARY_SOURCE_URL = "https://shaul.vercel.app/";
-// No App Store constant until a real listing URL exists.
 export const PLAY_STORE_URL =
   "https://play.google.com/store/apps/details?id=bible.davar";
 

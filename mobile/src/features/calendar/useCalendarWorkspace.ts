@@ -35,7 +35,6 @@ export function useCalendarWorkspace({
     () => workspace.loadDay(offset, !!city),
     [workspace, city, offset, calendar],
   );
-  // Prefetch the year once a city is known so Moadim can open from the in-memory cache.
   useEffect(
     () => workspace.loadYear(year, !!city),
     [workspace, city, year, annualAttempt, calendar],
