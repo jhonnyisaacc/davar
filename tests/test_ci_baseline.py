@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -12,6 +13,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CI = ROOT / "scripts" / "ci"
+HOOK = ROOT / ".githooks" / "pre-push"
+INSTALLER = ROOT / "scripts" / "install-git-hooks.sh"
+MARKER = "# installed by scripts/install-git-hooks.sh"
+ZERO = "0" * 40
 sys.path.insert(0, str(CI))
 
 from commit_audit import OWNER_EMAIL, OWNER_NAME, locally_verified
@@ -212,6 +217,144 @@ class CommitAuditGitTest(ScratchRepoTest):
         self.assertFalse(locally_verified("E", 1))
         self.assertTrue(locally_verified("U", 1))
         self.assertFalse(locally_verified("N", 1))
+
+
+class PrePushTest(ScratchRepoTest):
+    def push(self, *lines: str) -> subprocess.CompletedProcess[str]:
+        return subprocess.run(
+            [str(HOOK), "origin", "https://github.com/jhonnyisaacc/davar"],
+            input="".join(f"{line}\n" for line in lines),
+            cwd=self.repo.path,
+            env=self.repo.env,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+
+    def test_branch_outside_the_table_blocks_before_dup_code(self) -> None:
+        tip = self.repo.commit("feat: x\n")
+        for local_ref, branch in (("refs/heads/cursor/x-1", "cursor/x-1"), ("HEAD", "cursor/from-head")):
+            with self.subTest(local_ref=local_ref):
+                result = self.push(f"{local_ref} {tip} refs/heads/{branch} {ZERO}")
+                self.assertEqual(result.returncode, 1, result.stderr)
+                self.assertIn(
+                    f"pre-push blocked {branch}:\n"
+                    f"$ python3 {CI / 'branch_name.py'} {branch}\n"
+                    f"Head branch '{branch}' does not match",
+                    result.stderr,
+                )
+                self.assertNotIn("dup-code", result.stderr)
+
+    def test_ai_trailer_blocks_a_good_branch(self) -> None:
+        tip = self.repo.commit("feat: ok\n\nCo-authored-by: Cursor <cursoragent@cursor.com>\n")
+        result = self.push(f"refs/heads/feat/ok {tip} refs/heads/feat/ok {ZERO}")
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(
+            result.stderr,
+            f"pre-push blocked feat/ok:\n"
+            f"$ python3 {CI / 'commit_audit.py'} --git origin/main..{tip}\n"
+            f"{tip}: AI co-author trailer\n",
+        )
+
+    def test_a_deleted_branch_is_not_checked(self) -> None:
+        tip = self.repo.commit("feat: x\n")
+        result = self.push(
+            f"(delete) {ZERO} refs/heads/cursor/deleted-1 {tip}",
+            f"refs/heads/cursor/x-1 {tip} refs/heads/cursor/x-1 {ZERO}",
+        )
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("Head branch 'cursor/x-1' does not match", result.stderr)
+        self.assertNotIn("deleted-1", result.stderr)
+
+    @unittest.skipUnless(shutil.which("bunx"), "dup-code.sh needs Bun")
+    def test_main_runs_only_dup_code(self) -> None:
+        for scanned in ("api", "web/src", "mobile", "shared", "scripts/ci", "tools/bani", ".github/ci"):
+            (self.repo.path / scanned).mkdir(parents=True)
+        shutil.copy(ROOT / ".github" / "ci" / "jscpd.json", self.repo.path / ".github" / "ci")
+        shutil.copy(CI / "dup_count.py", self.repo.path / "scripts" / "ci")
+        (self.repo.path / ".github" / "ci" / "dup-baseline.json").write_text('{"clones": 0, "duplicatedLines": 0}\n')
+        tip = self.repo.git("rev-parse", "origin/main").strip()
+        result = self.push(f"refs/heads/main {tip} refs/heads/main {ZERO}")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertNotIn("does not match", result.stderr)
+        self.assertEqual(
+            result.stdout, "pre-push ok: duplicates: clones=0 baseline=0, duplicatedLines=0 baseline=0\n"
+        )
+
+
+class InstallGitHooksTest(ScratchRepoTest):
+    def setUp(self) -> None:
+        super().setUp()
+        shutil.copytree(ROOT / ".githooks", self.repo.path / ".githooks")
+        self.hooks = self.repo.path / ".git" / "hooks"
+
+    def install(self) -> subprocess.CompletedProcess[str]:
+        return subprocess.run(
+            ["sh", str(INSTALLER)], cwd=self.repo.path, env=self.repo.env, text=True, capture_output=True, check=False
+        )
+
+    def run_hook(self, name: str, stdin: str = "") -> subprocess.CompletedProcess[str]:
+        return subprocess.run(
+            [str(self.hooks / name), "origin", "https://github.com/jhonnyisaacc/davar"],
+            input=stdin,
+            cwd=self.repo.path,
+            env=self.repo.env,
+            text=True,
+            capture_output=True,
+            check=False,
+        )
+
+    def test_second_run_rewrites_the_same_shims(self) -> None:
+        first = self.install()
+        self.assertEqual(first.returncode, 0, first.stderr)
+        self.assertEqual(first.stdout, f"installed {self.hooks}/commit-msg\ninstalled {self.hooks}/pre-push\n")
+        shims = {name: (self.hooks / name).read_bytes() for name in ("commit-msg", "pre-push")}
+        second = self.install()
+        self.assertEqual(second.returncode, 0, second.stderr)
+        self.assertEqual({name: (self.hooks / name).read_bytes() for name in shims}, shims)
+        ran = self.run_hook("pre-push", "refs/heads/feat/ok 123\n")
+        self.assertEqual(ran.returncode, 1)
+        self.assertEqual(ran.stderr, "pre-push: expected four fields, got 'refs/heads/feat/ok 123'\n")
+
+    def test_shim_skips_a_missing_hook_and_the_installer_removes_it(self) -> None:
+        self.install()
+        versioned = self.repo.path / ".githooks" / "pre-push"
+        versioned.chmod(0o644)
+        skipped = self.run_hook("pre-push")
+        self.assertEqual(skipped.returncode, 0)
+        self.assertEqual(skipped.stderr, f"pre-push: {versioned} is not in this checkout. Skipped.\n")
+        again = self.install()
+        self.assertEqual(again.returncode, 0, again.stderr)
+        self.assertFalse((self.hooks / "pre-push").exists())
+        self.assertIn(MARKER, (self.hooks / "commit-msg").read_text())
+
+    def test_foreign_pre_push_is_left_alone(self) -> None:
+        self.hooks.mkdir(exist_ok=True)
+        foreign = self.hooks / "pre-push"
+        foreign.write_text("#!/bin/sh\nexit 0\n")
+        result = self.install()
+        self.assertEqual(result.returncode, 1)
+        self.assertEqual(result.stderr, f"{foreign} is not ours. Left unchanged.\n")
+        self.assertEqual(foreign.read_text(), "#!/bin/sh\nexit 0\n")
+        self.assertIn(MARKER, (self.hooks / "commit-msg").read_text())
+
+    def test_cursor_dispatcher_gains_a_link_once(self) -> None:
+        dispatch = self.repo.path.parent / "agent-hooks"
+        dispatch.mkdir()
+        (dispatch / ".dispatcher").write_text("#!/bin/sh\n")
+        (dispatch / ".dispatcher").chmod(0o755)
+        (dispatch / ".cursor-original-hooks-path").write_text(str(self.hooks))
+        self.repo.git("config", "core.hooksPath", str(dispatch))
+        first = self.install()
+        self.assertEqual(first.returncode, 0, first.stderr)
+        self.assertEqual(os.readlink(dispatch / "pre-push"), ".dispatcher")
+        dispatch.chmod(0o555)
+        self.addCleanup(dispatch.chmod, 0o755)
+        second = self.install()
+        self.assertEqual(second.returncode, 0, second.stderr)
+        self.assertEqual(second.stderr, "")
+        self.assertEqual(os.readlink(dispatch / "pre-push"), ".dispatcher")
+        self.assertEqual(self.repo.git("config", "core.hooksPath"), f"{dispatch}\n")
 
 
 class BranchNameTest(unittest.TestCase):

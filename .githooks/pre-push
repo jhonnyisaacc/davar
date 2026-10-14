@@ -1,0 +1,84 @@
+#!/usr/bin/env python3
+
+from __future__ import annotations
+
+import shlex
+import subprocess
+import sys
+from dataclasses import dataclass
+from pathlib import Path
+
+CI = Path(__file__).resolve().parents[1] / "scripts" / "ci"
+HEADS = "refs/heads/"
+
+
+@dataclass(frozen=True)
+class Push:
+    branch: str
+    tip: str
+
+    @property
+    def opens_pull_request(self) -> bool:
+        return self.branch != "main"
+
+
+def parse_pushes(text: str) -> list[Push]:
+    pushes: list[Push] = []
+    for line in text.splitlines():
+        if not line.strip():
+            continue
+        fields = line.split()
+        if len(fields) != 4:
+            raise ValueError(line)
+        _, tip, remote_ref, _ = fields
+        if set(tip) == {"0"} or not remote_ref.startswith(HEADS):
+            continue
+        pushes.append(Push(remote_ref[len(HEADS):], tip))
+    return pushes
+
+
+def run(argv: list[str]) -> subprocess.CompletedProcess[str]:
+    return subprocess.run(argv, capture_output=True, text=True, check=False)
+
+
+def report(label: str, failures: list[subprocess.CompletedProcess[str]]) -> None:
+    print(f"pre-push blocked {label}:", file=sys.stderr)
+    for failure in failures:
+        print(f"$ {shlex.join(failure.args)}", file=sys.stderr)
+        sys.stderr.write(failure.stderr)
+
+
+def main() -> int:
+    try:
+        pushes = parse_pushes(sys.stdin.read())
+    except ValueError as error:
+        print(f"pre-push: expected four fields, got {error.args[0]!r}", file=sys.stderr)
+        return 1
+    if not pushes:
+        return 0
+    summary: list[str] = []
+    blocked = False
+    for push in pushes:
+        if not push.opens_pull_request:
+            continue
+        name = run(["python3", str(CI / "branch_name.py"), push.branch])
+        audit = run(["python3", str(CI / "commit_audit.py"), "--git", f"origin/main..{push.tip}"])
+        failures = [check for check in (name, audit) if check.returncode != 0]
+        if failures:
+            blocked = True
+            report(push.branch, failures)
+        else:
+            summary.append(f"{push.branch} {audit.stdout.strip()}")
+    if blocked:
+        return 1
+    dup = run(["bash", str(CI / "dup-code.sh")])
+    if dup.returncode != 0:
+        report(", ".join(push.branch for push in pushes), [dup])
+        return 1
+    summary.extend(line for line in dup.stdout.splitlines() if line.startswith("duplicates:"))
+    print("pre-push ok: " + "; ".join(summary))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
