@@ -252,7 +252,16 @@
     }
   },
   "donate": {
+    "intro": "דבר זמין לקריאה בחינם, בלי פרסומות. אם הוא משרת את הלימוד שלך, אפשר לעזור לו להמשיך.",
     "kofi": "תמוך בי ב-Ko-fi",
+    "kofiName": "Ko-fi",
+    "kofiDetail": "חד-פעמי או חודשי",
+    "give": "תרומה",
+    "monthly": "חודשי",
+    "sponsor": "חסות",
+    "otherWays": "דרכי תרומה נוספות",
+    "ask": "שאלה",
+    "alsoOnAndroid": "גם באנדרואיד",
     "githubSponsor": "GitHub Sponsors",
     "contactPrefix": "אם תרצה לדעת על דרכי תרומה נוספות, אפשר ליצור איתי קשר ב",
     "telegramLabel": "טלגרם"
@@ -471,10 +480,17 @@
     "emailLabel": "דואר אלקטרוני",
     "emailAction": "פנייה לתמיכה במייל",
     "creator": "יצירת קשר עם המפתח",
-    "telegramAction": "פתיחת Telegram"
+    "telegramAction": "פתיחת Telegram",
+    "copyAddress": "העתקת הכתובת",
+    "copied": "הועתק",
+    "telegramLead": "מעדיפים צ'אט? כתבו למפתח בטלגרם"
   },
   "commentarySources": {
     "description": "פרשנות שפורסמה וקישורים למקורות המקוריים.",
+    "sourceLabel": "מקור",
+    "publishedLabel": "מאמרים שפורסמו",
+    "open": "פתיחה",
+    "read": "קריאה",
     "openSource": "פתיחת המקור",
     "empty": "טרם פורסמו מקורות פרשנות.",
     "unavailable": "קטלוג המאמרים אינו זמין. ניתן לבקר במקור שלמעלה."

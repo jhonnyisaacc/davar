@@ -1,10 +1,15 @@
-import { useEffect, useState } from "react";
 import type { Article } from "@davar/shared/productContracts";
 import { COMMENTARY_SOURCE_URL } from "@davar/shared/settingsResources";
+import { FileText, Globe } from "lucide-react";
+import { useEffect, useState } from "react";
+import { type AppLanguage, useTranslation } from "../hooks/useTranslation";
 import { productApi } from "../services/productApi";
-import { useTranslation, type AppLanguage } from "../hooks/useTranslation";
-import { ResourcePage } from "./ResourcePage";
-import { NeumorphCard } from "./NeumorphCard";
+import { ResourceLinkRow, ResourcePage } from "./ResourcePage";
+
+const sourceHost = COMMENTARY_SOURCE_URL.replace(/^https?:\/\//, "").replace(
+	/\/$/,
+	"",
+);
 
 export function CommentarySourcesScreen({
 	language,
@@ -38,62 +43,76 @@ export function CommentarySourcesScreen({
 			active = false;
 		};
 	}, [attempt]);
-	const sourceLink = (url: string) => (
-		<a
-			href={url}
-			target="_blank"
-			rel="noopener noreferrer"
-			className="inline-flex min-h-11 items-center text-sm text-[var(--accent-deep)] underline underline-offset-4"
-		>
-			{t("commentarySources.openSource")}
-		</a>
-	);
 	return (
 		<ResourcePage
+			flat
 			title={t("settings.links.commentarySources")}
+			lede={t("commentarySources.description")}
 			language={language}
 			onBack={onBack}
 		>
-			<p className="text-[var(--text-secondary)]">
-				{t("commentarySources.description")}
-			</p>
-			<NeumorphCard className="p-5 space-y-3">
-				<h2 className="text-xl">Shaul</h2>
-				<p dir="ltr" className="text-sm text-[var(--text-secondary)]">
-					{COMMENTARY_SOURCE_URL}
+			<section>
+				<p className="pb-2.5 text-[11px] font-semibold tracking-wide text-[var(--text-secondary)] uppercase">
+					{t("commentarySources.sourceLabel")}
 				</p>
-				{sourceLink(COMMENTARY_SOURCE_URL)}
-			</NeumorphCard>
-			{loading ? (
-				<p role="status">{t("common.loading")}</p>
-			) : failed ? (
-				<div role="status">
-					<p>{t("commentarySources.unavailable")}</p>
-					<button
-						type="button"
-						className="min-h-11 underline"
-						onClick={() => {
-							setLoading(true);
-							setFailed(false);
-							setAttempt((value) => value + 1);
-						}}
-					>
-						{t("common.retry")}
-					</button>
+				<div className="border-t border-[var(--border)]">
+					<ResourceLinkRow
+						href={COMMENTARY_SOURCE_URL}
+						icon={Globe}
+						label={sourceHost}
+						value="Shaul"
+						action={t("commentarySources.open")}
+					/>
 				</div>
-			) : articles.length ? (
-				articles.map((article) => (
-					<NeumorphCard key={article.id} className="p-5 space-y-3">
-						<h2>{article.title}</h2>
-						<p className="text-sm text-[var(--text-secondary)]">
-							{article.attribution}
+			</section>
+			<section className="pt-10">
+				<p className="pb-2.5 text-[11px] font-semibold tracking-wide text-[var(--text-secondary)] uppercase">
+					{t("commentarySources.publishedLabel")}
+				</p>
+				<div className="border-t border-[var(--border)]">
+					{loading ? (
+						<p
+							role="status"
+							className="py-[18px] text-sm text-[var(--text-secondary)]"
+						>
+							{t("common.loading")}
 						</p>
-						{sourceLink(article.source_url)}
-					</NeumorphCard>
-				))
-			) : (
-				<p>{t("commentarySources.empty")}</p>
-			)}
+					) : failed ? (
+						<div
+							role="status"
+							className="flex flex-col items-start gap-2 py-[18px]"
+						>
+							<p>{t("commentarySources.unavailable")}</p>
+							<button
+								type="button"
+								className="inline-flex min-h-11 items-center text-sm font-medium text-[var(--accent-deep)]"
+								onClick={() => {
+									setLoading(true);
+									setFailed(false);
+									setAttempt((value) => value + 1);
+								}}
+							>
+								{t("common.retry")}
+							</button>
+						</div>
+					) : articles.length ? (
+						articles.map((article) => (
+							<ResourceLinkRow
+								key={article.id}
+								href={article.source_url}
+								icon={FileText}
+								label={article.attribution}
+								value={article.title}
+								action={t("commentarySources.read")}
+							/>
+						))
+					) : (
+						<p className="py-[18px] text-sm text-[var(--text-secondary)]">
+							{t("commentarySources.empty")}
+						</p>
+					)}
+				</div>
+			</section>
 		</ResourcePage>
 	);
 }

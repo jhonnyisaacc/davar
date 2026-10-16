@@ -252,7 +252,16 @@
     }
   },
   "donate": {
+    "intro": "Davar is free to read, without ads. If it serves your study, you can help keep it going.",
     "kofi": "Support me on Ko-fi",
+    "kofiName": "Ko-fi",
+    "kofiDetail": "One-time or monthly",
+    "give": "Give",
+    "monthly": "Monthly",
+    "sponsor": "Sponsor",
+    "otherWays": "Other ways to give",
+    "ask": "Ask",
+    "alsoOnAndroid": "Also on Android",
     "githubSponsor": "Github Sponsors",
     "contactPrefix": "if you wanna know other methods to donate please contact me on",
     "telegramLabel": "telegram"
@@ -471,10 +480,17 @@
     "emailLabel": "Email",
     "emailAction": "Email support",
     "creator": "Contact the developer",
-    "telegramAction": "Open Telegram"
+    "telegramAction": "Open Telegram",
+    "copyAddress": "Copy address",
+    "copied": "Copied",
+    "telegramLead": "Prefer chat? Message the developer on Telegram"
   },
   "commentarySources": {
     "description": "Published commentary and original source links.",
+    "sourceLabel": "Source",
+    "publishedLabel": "Published articles",
+    "open": "Open",
+    "read": "Read",
     "openSource": "Open source",
     "empty": "No commentary sources have been published yet.",
     "unavailable": "The article catalog is unavailable. You can still visit the source above."
