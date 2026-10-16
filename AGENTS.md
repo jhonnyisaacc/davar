@@ -51,3 +51,5 @@ Name the branch `<prefix>/<short-kebab-name>`. Pick the prefix from this table f
 Open every pull request against `main`. The flow is draft, then ready for review, then `main`. Create every pull request as a draft with `gh pr create --draft`. Mark it ready with `gh pr ready` only when it is ready for manual testing, which means opening the Cloudflare preview. Leaving draft sends `ready_for_review` and starts Web Preview. A draft does not deploy a preview. Staging is a Railway environment, not a git branch pull requests target.
 
 Commits are signed with the agents' SSH signing key and must show Verified.
+
+Run `sh scripts/install-git-hooks.sh` once in each clone. Cloud agents run it from `.cursor/environment.json` before the SSH signing setup. It installs `.githooks/pre-push`, which runs `branch_name.py`, `commit_audit.py`, and `dup-code.sh` from `scripts/ci/` and blocks the push when one fails. `dup-code.sh` needs Bun. It also installs `.githooks/commit-msg`, which strips an AI `Co-authored-by` trailer.

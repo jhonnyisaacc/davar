@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import subprocess
 import sys
 from pathlib import Path
 
@@ -14,6 +15,8 @@ OWNER_NAME = "jhonnyisaacc"
 OWNER_EMAIL = "60485595+jhonnyisaacc@users.noreply.github.com"
 # GitHub squash-merge records the account display name, not user.name.
 OWNER_NAMES = frozenset({OWNER_NAME, "Jhonny"})
+LOG_FORMAT = "%H%x1f%G?%x1f%an%x1f%ae%x1f%B"
+USAGE = "usage: commit_audit.py COMMITS.json\n       commit_audit.py --git REV [REV...]"
 
 
 def flatten_commits(payload: object) -> list[dict]:
@@ -25,6 +28,29 @@ def flatten_commits(payload: object) -> list[dict]:
             commits.extend(flatten_commits(item))
         return commits
     raise TypeError("commit payload must be a list of GitHub commit objects")
+
+
+def locally_verified(signature: str) -> bool:
+    return signature in ("G", "U")
+
+
+def log_commits(output: str) -> list[dict]:
+    commits: list[dict] = []
+    for record in output.split("\0"):
+        if not record:
+            continue
+        sha, signature, name, email, message = record.split("\x1f", 4)
+        commits.append(
+            {
+                "sha": sha,
+                "commit": {
+                    "author": {"name": name, "email": email},
+                    "message": message,
+                    "verification": {"verified": locally_verified(signature)},
+                },
+            }
+        )
+    return commits
 
 
 def problems(commits: list[dict]) -> list[str]:
@@ -50,16 +76,30 @@ def problems(commits: list[dict]) -> list[str]:
 
 
 def main(argv: list[str]) -> int:
-    if len(argv) != 2:
-        print("usage: commit_audit.py COMMITS.json", file=sys.stderr)
+    args = argv[1:]
+    if len(args) >= 2 and args[0] == "--git":
+        log = subprocess.run(
+            ["git", "log", "-z", f"--format={LOG_FORMAT}", *args[1:], "--"],
+            capture_output=True,
+            encoding="utf-8",
+            errors="replace",
+            check=False,
+        )
+        if log.returncode != 0:
+            sys.stderr.write(log.stderr)
+            return 2
+        commits = log_commits(log.stdout)
+    elif len(args) == 1 and args[0] != "--git":
+        commits = flatten_commits(json.loads(Path(args[0]).read_text()))
+    else:
+        print(USAGE, file=sys.stderr)
         return 2
-    payload = json.loads(Path(argv[1]).read_text())
-    found = problems(flatten_commits(payload))
+    found = problems(commits)
     if found:
         for line in found:
             print(line, file=sys.stderr)
         return 1
-    print(f"commits: {len(flatten_commits(payload))} verified")
+    print(f"commits: {len(commits)} verified")
     return 0
 
 
