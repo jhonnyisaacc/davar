@@ -252,7 +252,16 @@
     }
   },
   "donate": {
+    "intro": "Davar es gratis para leer, sin anuncios. Si te ayuda a estudiar, puedes ayudar a que siga.",
     "kofi": "Apóyame en Ko-fi",
+    "kofiName": "Ko-fi",
+    "kofiDetail": "Única o mensual",
+    "give": "Dar",
+    "monthly": "Mensual",
+    "sponsor": "Patrocinar",
+    "otherWays": "Otras formas de donar",
+    "ask": "Preguntar",
+    "alsoOnAndroid": "También en Android",
     "githubSponsor": "GitHub Sponsors",
     "contactPrefix": "si quieres conocer otros métodos para donar por favor contáctame en",
     "telegramLabel": "telegram"
@@ -471,10 +480,17 @@
     "emailLabel": "Correo electrónico",
     "emailAction": "Escribir a soporte",
     "creator": "Contactar al desarrollador",
-    "telegramAction": "Abrir Telegram"
+    "telegramAction": "Abrir Telegram",
+    "copyAddress": "Copiar dirección",
+    "copied": "Copiada",
+    "telegramLead": "¿Prefieres el chat? Escribe al desarrollador en Telegram"
   },
   "commentarySources": {
     "description": "Comentarios publicados y enlaces a las fuentes originales.",
+    "sourceLabel": "Fuente",
+    "publishedLabel": "Artículos publicados",
+    "open": "Abrir",
+    "read": "Leer",
     "openSource": "Abrir fuente",
     "empty": "Todavía no se han publicado fuentes de comentarios.",
     "unavailable": "El catálogo de artículos no está disponible. Puedes visitar la fuente de arriba."

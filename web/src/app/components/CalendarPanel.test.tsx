@@ -2,30 +2,12 @@ import { afterEach, beforeEach, expect, spyOn, test } from "bun:test";
 import type { CalendarState } from "@davar/shared/calendarClient";
 import { calendarYear } from "@davar/shared/calendarPresentation";
 import type { CalendarResponse } from "@davar/shared/productContracts";
-import { Window } from "happy-dom";
+import { CalendarPanel } from "../features/calendar/CalendarPanel";
 import { calendarClient } from "../hooks/useCalendar";
 import { type AppLanguage, translate } from "../hooks/useTranslation";
-import { CalendarPanel } from "../features/calendar/CalendarPanel";
+import { installTestDom } from "../testDom";
 
-const dom = new Window({ url: "http://localhost:5300/calendar" });
-for (const key of [
-	"window",
-	"document",
-	"navigator",
-	"HTMLElement",
-	"MutationObserver",
-]) {
-	Object.defineProperty(globalThis, key, {
-		configurable: true,
-		writable: true,
-		value: key === "window" ? dom : Reflect.get(dom, key),
-	});
-}
-Object.defineProperty(globalThis, "IS_REACT_ACT_ENVIRONMENT", {
-	configurable: true,
-	writable: true,
-	value: true,
-});
+installTestDom("http://localhost:5300/calendar");
 const { act, cleanup, fireEvent, render } = await import(
 	"@testing-library/react"
 );

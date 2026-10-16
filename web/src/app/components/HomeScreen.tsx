@@ -1,4 +1,3 @@
-import { PLAY_STORE_URL } from "@davar/shared/settingsResources";
 import {
 	Bug,
 	FileText,
@@ -9,6 +8,7 @@ import {
 } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 import { getSupportTelegramUrl, useTranslation } from "../hooks/useTranslation";
+import { PlayStoreBadge } from "./PlayStoreBadge";
 
 interface HomeScreenProps {
 	language: "en" | "es" | "he";
@@ -226,18 +226,7 @@ export function HomeScreen({
 			</div>
 
 			<div className="flex flex-wrap items-center justify-center gap-6 pt-2">
-				<a
-					href={PLAY_STORE_URL}
-					target="_blank"
-					rel="noopener noreferrer"
-					aria-label={t("common.getOnGooglePlay")}
-				>
-					<img
-						src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
-						alt={t("common.getOnGooglePlay")}
-						className="h-14"
-					/>
-				</a>
+				<PlayStoreBadge language={language} />
 			</div>
 		</div>
 	);
