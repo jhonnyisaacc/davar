@@ -6,9 +6,10 @@ import {
 	ProductClient,
 } from "@davar/shared/productClient";
 import type { Account } from "@davar/shared/productContracts";
+import { resolveProductApiUrl } from "./productApiUrl";
 // Private cache is in memory. It survives brief network loss, never device logout.
 export const productApi = new ProductClient(
-	process.env.EXPO_PUBLIC_API_URL || "http://127.0.0.1:3000",
+	resolveProductApiUrl(process.env.EXPO_PUBLIC_API_URL, __DEV__),
 	createMemoryCacheStorage(),
 );
 const SESSION_KEY = "davar_v2_session";
