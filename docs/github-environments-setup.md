@@ -66,9 +66,9 @@ The Play secret is required when Android submit runs: an automatic native build,
 
 `mobile/eas.json` submits Android on the Play track `production` with `releaseStatus` `completed`.
 
-iOS submit uses the App Store Connect API key stored on EAS project `232e7627-d0c9-4b88-976e-b4855beb322e`. The key stays on that EAS project. A missing key fails `eas submit` for iOS.
+Automatic native publish runs `eas build` and `eas submit` with `--platform android`. The manual Mobile EAS Release workflow can still target iOS. That iOS submit uses the App Store Connect API key stored on EAS project `232e7627-d0c9-4b88-976e-b4855beb322e`. The key stays on that EAS project. A missing key fails `eas submit` for iOS.
 
-A JavaScript-only diff, including files under `shared/**`, runs `eas update`. Plugin, permission, icon, native-dependency, `runtimeVersion`, app version, and `eas.json` diffs run `eas build` and `eas submit`. Generated `mobile/ios` and `mobile/android` trees are gitignored, so the classifier reads `mobile/app.json` and `mobile/package.json` for those native signals. Pull requests that change either workflow run a fixture check with a fake Play JSON and do not call Expo.
+A JavaScript-only diff, including files under `shared/**`, runs `eas update`. Plugin, permission, icon, native-dependency, `runtimeVersion`, app version, and `eas.json` diffs run `eas build` and `eas submit` for Android. Generated `mobile/ios` and `mobile/android` trees are gitignored, so the classifier reads `mobile/app.json` and `mobile/package.json` for those native signals. Pull requests that change either workflow run a fixture check with a fake Play JSON and do not call Expo.
 
 ```bash
 gh secret set EXPO_TOKEN --repo jhonnyisaacc/davar

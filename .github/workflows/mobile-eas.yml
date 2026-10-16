@@ -2,7 +2,7 @@
 # Push to main under mobile/** or shared/**, and workflow_dispatch.
 # The publish job does not run on pull_request.
 # A pull_request job self-checks the classifier and the Play JSON gate.
-# JS-only diffs run eas update. Native config runs eas build and eas submit.
+# JS-only diffs run eas update. Native config runs eas build and eas submit for Android.
 # Repository secrets: EXPO_TOKEN, and GOOGLE_PLAY_SERVICE_ACCOUNT_JSON for Android submit.
 
 name: Mobile EAS
@@ -946,10 +946,9 @@ jobs:
         if: steps.classify.outputs.mode == 'build'
         working-directory: mobile
         run: |
-          echo "Native config, native dependency, runtimeVersion, app version, or eas.json diff. Running eas build and eas submit. Skipping eas update."
-          echo "iOS submit uses the App Store Connect API key on EAS project 232e7627-d0c9-4b88-976e-b4855beb322e. A missing key fails eas submit for iOS."
-          eas build --platform all --profile production --non-interactive --wait
-          eas submit --platform all --profile production --latest --non-interactive
+          echo "Native config, native dependency, runtimeVersion, app version, or eas.json diff. Running eas build and eas submit for Android. Skipping eas update."
+          eas build --platform android --profile production --non-interactive --wait
+          eas submit --platform android --profile production --latest --non-interactive
 
       - name: Skip both Expo commands
         if: steps.classify.outputs.mode == 'skip'
