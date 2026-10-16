@@ -1,28 +1,10 @@
 import { afterEach, expect, test } from "bun:test";
-import { Window } from "happy-dom";
 import { useState } from "react";
+import { installTestDom } from "../../testDom";
 import { useReadingModes } from "./useReadingModes";
 import { useScreenNavigation } from "./useScreenNavigation";
 
-const dom = new Window({ url: "http://localhost:5300/genesis/1/6" });
-for (const key of [
-	"window",
-	"document",
-	"navigator",
-	"HTMLElement",
-	"MutationObserver",
-]) {
-	Object.defineProperty(globalThis, key, {
-		configurable: true,
-		writable: true,
-		value: key === "window" ? dom : Reflect.get(dom, key),
-	});
-}
-Object.defineProperty(globalThis, "IS_REACT_ACT_ENVIRONMENT", {
-	configurable: true,
-	writable: true,
-	value: true,
-});
+const dom = installTestDom("http://localhost:5300/genesis/1/6");
 const { act, cleanup, renderHook } = await import("@testing-library/react");
 afterEach(cleanup);
 

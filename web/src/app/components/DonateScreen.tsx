@@ -1,10 +1,10 @@
 import {
 	CREATOR_TELEGRAM_HANDLE,
 	CREATOR_TELEGRAM_URL,
-	PLAY_STORE_URL,
 } from "@davar/shared/settingsResources";
 import { Coffee, Heart, Send } from "lucide-react";
 import { type AppLanguage, useTranslation } from "../hooks/useTranslation";
+import { PlayStoreBadge } from "./PlayStoreBadge";
 import { ResourceLinkRow } from "./ResourcePage";
 
 const KOFI_URL = "https://ko-fi.com/jhonnyisaacc";
@@ -45,18 +45,7 @@ export function DonateScreen({ language }: DonateScreenProps) {
 				<p className="text-[13px] text-[var(--text-secondary)]">
 					{t("donate.alsoOnAndroid")}
 				</p>
-				<a
-					href={PLAY_STORE_URL}
-					target="_blank"
-					rel="noopener noreferrer"
-					aria-label={t("common.getOnGooglePlay")}
-				>
-					<img
-						src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png"
-						alt={t("common.getOnGooglePlay")}
-						className="h-14"
-					/>
-				</a>
+				<PlayStoreBadge language={language} />
 			</div>
 		</div>
 	);

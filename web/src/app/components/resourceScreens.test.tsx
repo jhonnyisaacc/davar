@@ -1,31 +1,13 @@
 import { afterEach, expect, type Mock, spyOn, test } from "bun:test";
 import type { Article } from "@davar/shared/productContracts";
-import { Window } from "happy-dom";
 import { translate } from "../hooks/useTranslation";
 import { productApi } from "../services/productApi";
+import { installTestDom } from "../testDom";
 import { CommentarySourcesScreen } from "./CommentarySourcesScreen";
 import { DonationPage } from "./DonationPage";
 import { SupportScreen } from "./SupportScreen";
 
-const dom = new Window({ url: "http://localhost:5300/donate" });
-for (const key of [
-	"window",
-	"document",
-	"navigator",
-	"HTMLElement",
-	"MutationObserver",
-]) {
-	Object.defineProperty(globalThis, key, {
-		configurable: true,
-		writable: true,
-		value: key === "window" ? dom : Reflect.get(dom, key),
-	});
-}
-Object.defineProperty(globalThis, "IS_REACT_ACT_ENVIRONMENT", {
-	configurable: true,
-	writable: true,
-	value: true,
-});
+installTestDom("http://localhost:5300/donate");
 const { cleanup, render } = await import("@testing-library/react");
 
 let request: Mock<typeof productApi.request> | null = null;
