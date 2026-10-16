@@ -158,6 +158,13 @@ Notes:
 - TS2009 is intentionally excluded from the mobile offline bundle download and version-update path; the offline download covers Hebrew text, Spanish TTH, dictionary, and DSS data.
 - Supabase is not required by the mobile runtime. The static data URLs above are the source of truth for mobile content.
 
+## Store version vs OTA
+
+- Play Console and App Store show `expo.version` from [app.json](app.json) as the marketing version (`versionName` / CFBundleShortVersionString).
+- EAS production `autoIncrement` with `appVersionSource: "remote"` advances Android `versionCode` and iOS build number. It does not bump `expo.version`.
+- An `eas update` ships JavaScript under the same native marketing version. Bump `expo.version` when cutting a store release, then run a new EAS production build and submit.
+- Release Android builds enable R8 minify and resource shrink through `expo-build-properties`. That also needs a new native build, not OTA alone.
+
 ## OTA Runtime Version Policy
 
 - `expo.runtimeVersion` in [app.json](app.json) is intentionally a plain string for Expo bare workflow compatibility.

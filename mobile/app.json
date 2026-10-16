@@ -2,7 +2,7 @@
   "expo": {
     "name": "Davar",
     "slug": "Davar",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "davar",
@@ -40,6 +40,10 @@
         {
           "ios": {
             "enableSceneSupport": true
+          },
+          "android": {
+            "enableMinifyInReleaseBuilds": true,
+            "enableShrinkResourcesInReleaseBuilds": true
           }
         }
       ],
@@ -68,7 +72,7 @@
       "expo-image",
       "expo-status-bar"
     ],
-    "runtimeVersion": "1.0.3",
+    "runtimeVersion": "1.0.4",
     "updates": {
       "url": "https://u.expo.dev/232e7627-d0c9-4b88-976e-b4855beb322e",
       "enabled": true,
