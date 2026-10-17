@@ -401,6 +401,35 @@ describe("chapter and lexicon loaders", () => {
 		);
 	});
 
+	test("reuses the translation body the early boot already fetched", async () => {
+		const host = globalThis as typeof globalThis & {
+			__DAVAR_EARLY_TRANSLATION__?: { path: string; promise: Promise<string> };
+		};
+		host.__DAVAR_EARLY_TRANSLATION__ = {
+			path: "/api/ts2009/bereshit.json",
+			promise: Promise.resolve(
+				JSON.stringify({
+					chapters: [
+						{
+							number: 1,
+							verses: [{ number: 1, text: "In the beginning Elohim" }],
+						},
+					],
+				}),
+			),
+		};
+
+		try {
+			const verses = await getChapterVerses("genesis", 1, { language: "en" });
+			expect(verses[0]?.translation).toBe("In the beginning Elohim");
+			expect(requestedPaths().some((path) => path.includes("ts2009"))).toBe(
+				false,
+			);
+		} finally {
+			delete host.__DAVAR_EARLY_TRANSLATION__;
+		}
+	});
+
 	test("prefers chapter-scoped TS2009 files over the full book file", async () => {
 		const verses = await getChapterVerses("genesis", 1, { language: "en" });
 		expect(verses[0]?.translation).toBe("In the beginning");
