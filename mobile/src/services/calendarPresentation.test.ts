@@ -65,21 +65,19 @@ describe("calendar presentation", () => {
     expect(rows).toHaveLength(8);
     expect(rows.every((row) => row.days.length === 0)).toBe(true);
   });
-  test("the Gregorian caption uses the civil date, with the year, in each language", () => {
+  test("the civil date caption is the date alone, with the year, in each language", () => {
     const copy = (key: string, params?: Record<string, string | number>) =>
-      key === "calendar.gregorianDate" ? `Gregorian: ${params?.date}` : key;
+      key === "calendar.gregorianDate" ? String(params?.date) : key;
     expect(gregorianDateCaption("2026-04-02", "en", copy)).toBe(
-      "Gregorian: April 2, 2026",
+      "April 2, 2026",
     );
     expect(gregorianDateCaption("2026-04-02", "es", copy)).toBe(
-      "Gregorian: 2 de abril de 2026",
+      "2 de abril de 2026",
     );
     expect(gregorianDateCaption("2026-04-02", "he", copy)).toBe(
-      "Gregorian: 2 באפריל 2026",
+      "2 באפריל 2026",
     );
-    expect(gregorianDateCaption("not-a-date", "en", copy)).toBe(
-      "Gregorian: not-a-date",
-    );
+    expect(gregorianDateCaption("not-a-date", "en", copy)).toBe("not-a-date");
   });
   test("a confirmed moed subtitle leads with the civil date and keeps the biblical label", () => {
     const copy = (

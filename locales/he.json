@@ -457,8 +457,8 @@
       "twelfth_month": "החודש השנים עשר",
       "thirteenth_month": "החודש השלושה עשר"
     },
-    "rabbinicDate": "רבני: {day} {month} {year}",
-    "gregorianDate": "גרגוריאני: {date}",
+    "rabbinicDate": "{day} {month} {year}",
+    "gregorianDate": "{date}",
     "rabbinicMonths": {
       "nisan": "ניסן",
       "iyar": "אייר",
