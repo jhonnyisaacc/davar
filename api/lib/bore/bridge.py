@@ -11,6 +11,22 @@ from calendar.services.moadim_calculator import MoadimCalculator
 from month_identity import anchored_month_identities
 from counted_moadim import counted_moadim_dates
 
+def open_tail_ordinal(days, identities, confirmation_starts, civil, day_number):
+    if not isinstance(day_number, int) or day_number < 1:
+        return None
+    origin = days.get(civil - timedelta(days=day_number))
+    if origin is None or origin.biblical.day != 30 or not origin.confirmation_id:
+        return None
+    start = confirmation_starts.get(origin.confirmation_id)
+    identity = identities.get(start) if start else None
+    if not identity:
+        return None
+    ordinal = int(identity["month_ordinal"]) + 1
+    if not 1 <= ordinal <= 13:
+        return None
+    return ordinal
+
+
 payload = json.load(sys.stdin)
 instant = datetime.fromisoformat(payload["instant"].replace("Z", "+00:00"))
 if instant.tzinfo is None:
@@ -34,6 +50,17 @@ for offset in range(payload["count"]):
         biblical["month_ordinal"] = identity["month_ordinal"]
         biblical["month_id"] = month_id_for_ordinal(identity["month_ordinal"])
         events = [event.event_id for event in MoadimCalculator().events_for(biblical["month_id"], biblical["day"], civil)]
+    elif (
+        day
+        and day.confirmation_id is None
+        and biblical["day"] is not None
+        and biblical["month_id"] is None
+    ):
+        ordinal = open_tail_ordinal(days, identities, confirmation_starts, civil, biblical["day"])
+        if ordinal is not None:
+            biblical["month_ordinal"] = ordinal
+            biblical["month_id"] = month_id_for_ordinal(ordinal)
+            events = [event.event_id for event in MoadimCalculator().events_for(biblical["month_id"], biblical["day"], civil)]
     counted_events = counted_dates.get(civil, [])
     events = list(dict.fromkeys(events + [event["event_id"] for event in counted_events]))
     result.append({

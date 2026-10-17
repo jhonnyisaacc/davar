@@ -117,20 +117,29 @@ class CalendarBuilder:
     ) -> None:
         if not through or not months:
             return
+        last = months[-1]
+        tail_start = None
+        tail_end = None
+        if last.day_count == MAX_MONTH_LENGTH and last.last_daytime is not None:
+            tail_start = last.last_daytime + timedelta(days=1)
+            tail_end = last.last_daytime + timedelta(days=MAX_MONTH_LENGTH)
         current = months[0].first_daytime
         while current <= through:
             if current not in days:
+                day_number = None
+                if tail_start is not None and tail_start <= current <= tail_end:
+                    day_number = (current - tail_start).days + 1
                 hyear, hmonth, hday = gregorian_to_rabbinic(current)
                 days[current] = CalendarDay(
                     civil_date=current,
                     biblical=BiblicalDate(
-                        day=None,
+                        day=day_number,
                         month_id=None,
                         month_ordinal=None,
                         year_start_status=decision.status,
                     ),
                     rabbinic=RabbinicDate(day=hday, month_id=hmonth, year=hyear),
-                    events=self.moadim.events_for(None, None, current),
+                    events=self.moadim.events_for(None, day_number, current),
                     month_status=MonthStatus.PENDING,
                     year_start_status=decision.status,
                     confirmation_id=None,
