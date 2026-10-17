@@ -31,13 +31,13 @@ import {
   Wheat,
   type LucideIcon,
 } from "lucide-react-native";
-import type { CalendarDay } from "@davar/shared/productContracts";
 import {
   annualMoadim,
   calendarSources,
   calendarYear,
   confirmedMoadim,
   localSunsetClock,
+  moedRowSubtitle,
   type CalendarIcon,
 } from "@davar/shared/calendarPresentation";
 import { calendarIsOutdated } from "@davar/shared/calendarRefresh";
@@ -244,19 +244,6 @@ export default function CalendarScreen() {
     return value.startsWith("calendar.") ? id.replaceAll("_", " ") : value;
   };
   const rabbinicMonth = (id: string) => t(`calendar.rabbinicMonths.${id}`);
-  const dayLabel = (value: CalendarDay) =>
-    value.biblical.day === null
-      ? new Intl.DateTimeFormat(language, {
-          day: "numeric",
-          month: "long",
-          timeZone: "UTC",
-        }).format(new Date(`${value.civil_date}T12:00:00Z`))
-      : value.biblical.month_id
-        ? t("calendar.dayWithMonth", {
-            month: displayMonth(value.biblical.month_id),
-            day: value.biblical.day!,
-          })
-        : t("calendar.day", { day: value.biblical.day! });
   const yearRows = annualMoadim(annual, year);
 
   const back = () => {
@@ -506,13 +493,8 @@ export default function CalendarScreen() {
                 icon={moedIcons[row.icon]}
                 title={t(`calendar.events.${row.id}`)}
                 subtitle={
-                  row.days.length === 1
-                    ? dayLabel(row.days[0])
-                    : t("calendar.monthRange", {
-                        month: displayMonth(row.days[0].biblical.month_id!),
-                        first: row.days[0].biblical.day!,
-                        last: row.days[row.days.length - 1].biblical.day!,
-                      })
+                  moedRowSubtitle(row.days, language, t) ??
+                  t("calendar.awaitingConfirmation")
                 }
               />
             ))}

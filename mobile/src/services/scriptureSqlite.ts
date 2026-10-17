@@ -194,20 +194,28 @@ const mapOfflineDataToDisplay = (
 
 // ── Offline fetch from SQLite ──────────────────────────────────────────────
 
-export const fetchChapterVersesOffline = async (
+export type OfflineChapter = {
+  verses: DisplayVerse[];
+  translationStored: boolean;
+  dssReady: boolean;
+};
+
+export const readOfflineChapter = async (
   bookId: string,
   chapter: number,
   options?: {
     language?: "en" | "es";
     showDss?: boolean;
+    hebrewOnly?: boolean;
     referenceMode?: ReferenceMode;
   },
-): Promise<DisplayVerse[]> => {
+): Promise<OfflineChapter | null> => {
   const referenceMode = options?.referenceMode ?? "source";
+  const language = options?.hebrewOnly ? undefined : options?.language;
   const sourceChapters = getSourceChaptersForRequest(
     bookId,
     chapter,
-    options?.language,
+    language,
     referenceMode,
   );
 
@@ -219,32 +227,33 @@ export const fetchChapterVersesOffline = async (
     )
   ).flat();
   if (hebrewRows.length === 0) {
-    throw new Error(`No offline Hebrew data for ${bookId} chapter ${chapter}`);
+    return null;
   }
 
-  const translationLanguage = options?.language;
-  const translationRows = translationLanguage
-    ? (
-        await Promise.all(
-          getRequiredTranslationChapters(
-            bookId,
-            hebrewRows.map((row) => ({
-              chapter: row.chapter,
-              verse: row.verse,
-            })),
-            translationLanguage,
-          ).map((translationChapter) =>
-            fetchTranslationVerses(
-              bookId,
-              translationChapter,
-              translationLanguage,
-            ),
-          ),
-        )
-      ).flat()
-    : [];
+  let translationRows: TranslationRow[] = [];
+  let translationStored = !language;
+  if (language) {
+    translationRows = (
+      await Promise.all(
+        getRequiredTranslationChapters(
+          bookId,
+          hebrewRows.map((row) => ({
+            chapter: row.chapter,
+            verse: row.verse,
+          })),
+          language,
+        ).map((translationChapter) =>
+          fetchTranslationVerses(bookId, translationChapter, language),
+        ),
+      )
+    ).flat();
+    translationStored = translationRows.some(
+      (row) => row.text.trim().length > 0,
+    );
+  }
 
-  const dssRows = options?.showDss
+  const showDss = Boolean(options?.showDss);
+  const dssRows = showDss
     ? (
         await Promise.all(
           sourceChapters.map((sourceChapter) =>
@@ -254,13 +263,17 @@ export const fetchChapterVersesOffline = async (
       ).flat()
     : [];
 
-  return mapOfflineDataToDisplay(
-    bookId,
-    hebrewRows,
-    translationRows,
-    dssRows,
-    translationLanguage,
-    referenceMode,
-    chapter,
-  );
+  return {
+    verses: mapOfflineDataToDisplay(
+      bookId,
+      hebrewRows,
+      translationStored ? translationRows : [],
+      dssRows,
+      translationStored ? language : undefined,
+      referenceMode,
+      chapter,
+    ),
+    translationStored,
+    dssReady: !showDss || dssRows.length > 0,
+  };
 };

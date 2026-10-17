@@ -134,6 +134,68 @@ export function annualMoadim(calendar: CalendarResponse | null, year: number) {
 	}));
 }
 
+function formatCivilDate(civilDate: string, language: AppLanguage): string {
+	const instant = new Date(`${civilDate}T12:00:00Z`);
+	if (Number.isNaN(instant.getTime())) return civilDate;
+	try {
+		return new Intl.DateTimeFormat(language, {
+			day: "numeric",
+			month: "long",
+			timeZone: "UTC",
+		}).format(instant);
+	} catch {
+		return civilDate;
+	}
+}
+
+function monthName(
+	id: string,
+	t: (key: string, params?: Record<string, string | number>) => string,
+): string {
+	const value = t(`calendar.months.${id}`);
+	return value.startsWith("calendar.") ? id.replaceAll("_", " ") : value;
+}
+
+function biblicalMoedLabel(
+	days: readonly CalendarDay[],
+	t: (key: string, params?: Record<string, string | number>) => string,
+): string | null {
+	if (days.length === 1) {
+		const day = days[0].biblical.day;
+		if (day === null) return null;
+		const month = days[0].biblical.month_id;
+		return month
+			? t("calendar.dayWithMonth", { month: monthName(month, t), day })
+			: t("calendar.day", { day });
+	}
+	const first = days[0];
+	const last = days[days.length - 1];
+	if (
+		first.biblical.day === null ||
+		last.biblical.day === null ||
+		!first.biblical.month_id
+	)
+		return null;
+	return t("calendar.monthRange", {
+		month: monthName(first.biblical.month_id, t),
+		first: first.biblical.day,
+		last: last.biblical.day,
+	});
+}
+
+export function moedRowSubtitle(
+	days: readonly CalendarDay[],
+	language: AppLanguage,
+	t: (key: string, params?: Record<string, string | number>) => string,
+): string | null {
+	if (!days.length) return null;
+	const first = formatCivilDate(days[0].civil_date, language);
+	const last = formatCivilDate(days[days.length - 1].civil_date, language);
+	const civil = first === last ? first : `${first} \u2013 ${last}`;
+	const biblical = biblicalMoedLabel(days, t);
+	return biblical ? `${civil} \u00b7 ${biblical}` : civil;
+}
+
 export function calendarYear(timezone: string, now = new Date()): number {
 	return Number(
 		new Intl.DateTimeFormat("en", {

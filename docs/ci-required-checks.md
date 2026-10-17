@@ -4,7 +4,7 @@
 
 The job `gate` is the check to require on `main`. It fails when any needed job failed or was cancelled. A job that the path filter skipped does not fail `gate`. `.github/rulesets/main.json` still names `policy-gate`. Change the GitHub ruleset to require `gate` and signed commits.
 
-Web production status is recorded when the `web` job succeeded. Another job failing does not block that record. A skipped `web` job does not create it.
+Web production status is recorded when the `web` job succeeded. The `Web Production Status` workflow only writes a GitHub deployment record for `https://davar.bible`. It does not publish Cloudflare Pages. Another job failing does not block that record. A skipped `web` job does not create it.
 
 `hygiene` runs on every pull request. It checks the branch name, that each commit is Verified and authored with the owner email, that no commit message has an AI co-author trailer, gitleaks, and actionlint. The author name is `jhonnyisaacc`, or `Jhonny` when GitHub squash-merge records the account display name.
 

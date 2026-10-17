@@ -1,6 +1,6 @@
-import { useTranslation, type AppLanguage } from "../hooks/useTranslation";
-import { ResourcePage } from "./ResourcePage";
+import { type AppLanguage, useTranslation } from "../hooks/useTranslation";
 import { DonateScreen } from "./DonateScreen";
+import { ResourcePage } from "./ResourcePage";
 
 export function DonationPage({
 	language,
@@ -12,7 +12,9 @@ export function DonationPage({
 	const { t } = useTranslation(language);
 	return (
 		<ResourcePage
+			flat
 			title={t("settings.links.donate")}
+			lede={t("donate.intro")}
 			language={language}
 			onBack={onBack}
 		>

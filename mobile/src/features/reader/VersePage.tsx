@@ -51,6 +51,7 @@ type VersePageProps = {
   ) => void;
   onEdgeSwipe: (verseId: string, direction: "previous" | "next") => void;
   onScrollBegin?: () => void;
+  translationPending?: boolean;
 };
 
 const HEBREW_PRESS_SUPPRESSION_MS = 250;
@@ -76,6 +77,7 @@ const VersePageComponent = ({
   onMetricsChange,
   onEdgeSwipe,
   onScrollBegin,
+  translationPending = false,
 }: VersePageProps) => {
   const [contentHeight, setContentHeight] = useState(0);
   const [viewportHeight, setViewportHeight] = useState(0);
@@ -255,6 +257,7 @@ const VersePageComponent = ({
       <VerseCard
         verse={item}
         variant="detail"
+        translationPending={translationPending}
         showWordHint={showWordHint && isSelectedVerse}
         selectedWord={isSelectedVerse ? selectedWord : null}
         isBesorah={isBesorah}
@@ -310,6 +313,9 @@ export const VersePage = memo(
   VersePageComponent,
   (prevProps, nextProps) =>
     prevProps.item.id === nextProps.item.id &&
+    prevProps.item.translation === nextProps.item.translation &&
+    prevProps.item.words === nextProps.item.words &&
+    prevProps.translationPending === nextProps.translationPending &&
     prevProps.bookLabel === nextProps.bookLabel &&
     prevProps.pillVisibility === nextProps.pillVisibility &&
     prevProps.pillVisible === nextProps.pillVisible &&

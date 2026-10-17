@@ -1,30 +1,12 @@
 import { afterEach, expect, spyOn, test } from "bun:test";
 import { CLOSED_CAPABILITIES } from "@davar/shared/productCapabilities";
 import type { Account, Citation } from "@davar/shared/productContracts";
-import { Window } from "happy-dom";
 import { capabilitiesStore } from "../../hooks/useProductCapabilities";
 import { productApi } from "../../services/productApi";
+import { installTestDom } from "../../testDom";
 import { CommentaryScreen } from "./CommentaryScreen";
 
-const dom = new Window({ url: "http://localhost:5300/commentary" });
-for (const key of [
-	"window",
-	"document",
-	"navigator",
-	"HTMLElement",
-	"MutationObserver",
-]) {
-	Object.defineProperty(globalThis, key, {
-		configurable: true,
-		writable: true,
-		value: key === "window" ? dom : Reflect.get(dom, key),
-	});
-}
-Object.defineProperty(globalThis, "IS_REACT_ACT_ENVIRONMENT", {
-	configurable: true,
-	writable: true,
-	value: true,
-});
+installTestDom("http://localhost:5300/commentary");
 const { cleanup, fireEvent, render, waitFor } = await import(
 	"@testing-library/react"
 );

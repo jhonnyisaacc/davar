@@ -5,9 +5,9 @@ import {
 	calendarYear,
 	confirmedMoadim,
 	localSunsetClock,
+	moedRowSubtitle,
 } from "@davar/shared/calendarPresentation";
 import { calendarIsOutdated } from "@davar/shared/calendarRefresh";
-import type { CalendarDay } from "@davar/shared/productContracts";
 import {
 	ArrowLeft,
 	ArrowRight,
@@ -154,19 +154,6 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 		const value = t(`calendar.months.${id}`);
 		return value.startsWith("calendar.") ? id.replaceAll("_", " ") : value;
 	};
-	const dayLabel = (value: CalendarDay) =>
-		value.biblical.day === null
-			? new Intl.DateTimeFormat(language, {
-					day: "numeric",
-					month: "long",
-					timeZone: "UTC",
-				}).format(new Date(`${value.civil_date}T12:00:00Z`))
-			: value.biblical.month_id
-				? t("calendar.dayWithMonth", {
-						month: monthLabel(value.biblical.month_id),
-						day: value.biblical.day!,
-					})
-				: t("calendar.day", { day: value.biblical.day! });
 	const back = () => setScreen("calendar");
 	const header = (title: string, canGoBack = true) => (
 		<header className="flex items-center gap-3">
@@ -195,15 +182,8 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 			icon={icons[row.icon]}
 			title={t(`calendar.events.${row.id}`)}
 			subtitle={
-				!row.days.length
-					? t("calendar.awaitingConfirmation")
-					: row.days.length === 1
-						? dayLabel(row.days[0])
-						: t("calendar.monthRange", {
-								month: monthLabel(row.days[0].biblical.month_id!),
-								first: row.days[0].biblical.day!,
-								last: row.days[row.days.length - 1].biblical.day!,
-							})
+				moedRowSubtitle(row.days, language, t) ??
+				t("calendar.awaitingConfirmation")
 			}
 		/>
 	);

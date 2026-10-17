@@ -48,8 +48,8 @@ import { getColors, getResponsiveLayout, spacing } from "@/src/theme";
 import { fetchMetadata } from "@/src/services/metadata";
 import type { BookResponse, TranslationFootnote } from "@/src/types/api";
 import {
-  fetchChapterVerses,
   fetchGreekChapterVerses,
+  readChapterSourceFirst,
   type DisplayVerse,
 } from "@/src/services/scripture";
 import { useAppStore, type AppState } from "@/src/store/useAppStore";
@@ -172,6 +172,7 @@ export const VerseDetailContent = () => {
   const chapterMeasurements = useRef(new Map<string, Map<number, number>>());
   const [chapterVerses, setChapterVerses] = useState<DisplayVerse[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [translationPending, setTranslationPending] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [booksMeta, setBooksMeta] = useState<BookResponse[]>([]);
   const [activeFlowFootnote, setActiveFlowFootnote] =
@@ -583,10 +584,12 @@ export const VerseDetailContent = () => {
         onMetricsChange={handleVerseMetricsChange}
         onEdgeSwipe={handleEdgeSwipe}
         onScrollBegin={handleScrollBegin}
+        translationPending={translationPending}
       />
     ),
     [
       locationBookLabel,
+      translationPending,
       pillVisibility,
       pillVisible,
       pageHeight,
@@ -668,8 +671,20 @@ export const VerseDetailContent = () => {
       setSelectedWord(null);
       setSelectedWordVerseId(null);
       setIsLoading(true);
+      setTranslationPending(false);
       setErrorMessage(null);
       sheetRef.current?.close();
+      const isCurrentLoad = () =>
+        isMounted &&
+        currentLoadRef.current.bookId === bookId &&
+        currentLoadRef.current.chapter === chapter &&
+        currentLoadRef.current.language === language &&
+        currentLoadRef.current.showQumran === showQumran &&
+        currentLoadRef.current.translationOnly === translationOnly &&
+        currentLoadRef.current.besorahTextVersion === besorahTextVersion &&
+        currentLoadRef.current.besorahLanguage === besorahLanguage &&
+        currentLoadRef.current.isBesorah === isBesorah &&
+        currentLoadRef.current.isConnected === isConnected;
 
       try {
         const useGreekSource =
@@ -699,41 +714,81 @@ export const VerseDetailContent = () => {
             : ("source" as const),
           besorahTextVersion,
         };
-        const verses = useGreekSource
-          ? await fetchGreekChapterVerses(bookId, chapter, {
-              language: greekOverlayLanguage,
-              isConnected,
-            })
-          : await fetchChapterVerses(bookId, chapter, {
-              ...chapterOptions,
-              showDss: false,
-            });
-        if (!isMounted) return;
-        const isCurrentLoad = () =>
-          currentLoadRef.current.bookId === bookId &&
-          currentLoadRef.current.chapter === chapter &&
-          currentLoadRef.current.language === language &&
-          currentLoadRef.current.showQumran === showQumran &&
-          currentLoadRef.current.translationOnly === translationOnly &&
-          currentLoadRef.current.besorahTextVersion === besorahTextVersion &&
-          currentLoadRef.current.besorahLanguage === besorahLanguage &&
-          currentLoadRef.current.isBesorah === isBesorah &&
-          currentLoadRef.current.isConnected === isConnected;
-        if (!isCurrentLoad()) {
+        const sourceFirst =
+          !useGreekSource &&
+          !translationOnly &&
+          !hideTranslations &&
+          isConnected !== false;
+        if (useGreekSource) {
+          const verses = await fetchGreekChapterVerses(bookId, chapter, {
+            language: greekOverlayLanguage,
+            isConnected,
+          });
+          if (!isCurrentLoad()) return;
+          setChapterVerses(verses);
           return;
         }
-        setChapterVerses(verses);
-        if (isMounted) setIsLoading(false);
-        if (!useGreekSource && showQumran) {
-          const enriched = await fetchChapterVerses(bookId, chapter, {
+        if (!sourceFirst) {
+          const verses = await readChapterSourceFirst(bookId, chapter, {
             ...chapterOptions,
-            showDss: true,
-          });
-          if (!isMounted || !isCurrentLoad()) return;
-          setChapterVerses(enriched);
+            showDss: false,
+          }).settled;
+          if (!isCurrentLoad()) return;
+          setChapterVerses(verses);
+          setIsLoading(false);
+          if (showQumran) {
+            const enriched = await readChapterSourceFirst(bookId, chapter, {
+              ...chapterOptions,
+              showDss: true,
+            }).settled;
+            if (!isCurrentLoad()) return;
+            setChapterVerses(enriched);
+          }
+          return;
+        }
+        const read = readChapterSourceFirst(bookId, chapter, {
+          ...chapterOptions,
+          showDss: showQumran,
+        });
+        const leaveSettled = () => {
+          void read.settled.catch(() => undefined);
+        };
+        let paintedSource = false;
+        try {
+          const painted = await read.source;
+          if (!isCurrentLoad()) {
+            leaveSettled();
+            return;
+          }
+          setChapterVerses(painted.verses);
+          setTranslationPending(painted.translationPending);
+          setIsLoading(false);
+          paintedSource = true;
+        } catch (sourceError) {
+          console.debug(
+            `Source chapter ${bookId}/${chapter} waited for the full read:`,
+            sourceError,
+          );
+        }
+        try {
+          const settled = await read.settled;
+          if (!isCurrentLoad()) return;
+          setChapterVerses(settled);
+          setTranslationPending(false);
+        } catch (settleError) {
+          if (!isCurrentLoad()) return;
+          setTranslationPending(false);
+          if (!paintedSource) {
+            console.debug(
+              `Chapter ${bookId}/${chapter} failed before any verses painted:`,
+              settleError,
+            );
+            setErrorMessage(t("errors.loadVerses"));
+          }
         }
       } catch {
-        if (!isMounted) return;
+        if (!isCurrentLoad()) return;
+        setTranslationPending(false);
         setErrorMessage(t("errors.loadVerses"));
       } finally {
         if (isMounted) setIsLoading(false);
@@ -825,6 +880,7 @@ export const VerseDetailContent = () => {
               gap={layout.chapterGap}
               renderVerse={item => (
                 <VerseCard verse={item} variant="detail" showWordHint={false}
+                  translationPending={translationPending}
                   selectedWord={item.id === selectedWordVerseId ? selectedWord : null}
                   isBesorah={isBesorah} onVersePress={handleOpenNavigationSheet}
                   onWordPress={word => handleWordPress(word, item.id)} />

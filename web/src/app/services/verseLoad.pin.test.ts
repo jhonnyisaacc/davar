@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, expect, test } from "bun:test";
+import { repoDataResponse } from "@davar/shared/repoDataResponse";
 import { getVerse, resetStaticDataCachesForTests } from "./staticData";
 
 const dataRoot = new URL("../../../../data/", import.meta.url);
@@ -53,19 +54,10 @@ beforeEach(() => {
 				],
 			});
 		}
-		const marker = "/data/";
-		const index = pathname.lastIndexOf(marker);
-		if (index === -1) {
-			return new Response("missing", { status: 404 });
-		}
-		const relative = pathname.slice(index + marker.length);
-		const file = Bun.file(new URL(relative, dataRoot));
-		if (!(await file.exists())) {
-			return new Response("missing", { status: 404 });
-		}
-		return new Response(await file.text(), {
-			headers: { "content-type": "application/json" },
-		});
+		return (
+			(await repoDataResponse(pathname, dataRoot)) ??
+			new Response("missing", { status: 404 })
+		);
 	});
 });
 

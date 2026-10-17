@@ -2,30 +2,12 @@ import { afterEach, beforeEach, expect, spyOn, test } from "bun:test";
 import type { CalendarState } from "@davar/shared/calendarClient";
 import { calendarYear } from "@davar/shared/calendarPresentation";
 import type { CalendarResponse } from "@davar/shared/productContracts";
-import { Window } from "happy-dom";
+import { CalendarPanel } from "../features/calendar/CalendarPanel";
 import { calendarClient } from "../hooks/useCalendar";
 import { type AppLanguage, translate } from "../hooks/useTranslation";
-import { CalendarPanel } from "../features/calendar/CalendarPanel";
+import { installTestDom } from "../testDom";
 
-const dom = new Window({ url: "http://localhost:5300/calendar" });
-for (const key of [
-	"window",
-	"document",
-	"navigator",
-	"HTMLElement",
-	"MutationObserver",
-]) {
-	Object.defineProperty(globalThis, key, {
-		configurable: true,
-		writable: true,
-		value: key === "window" ? dom : Reflect.get(dom, key),
-	});
-}
-Object.defineProperty(globalThis, "IS_REACT_ACT_ENVIRONMENT", {
-	configurable: true,
-	writable: true,
-	value: true,
-});
+installTestDom("http://localhost:5300/calendar");
 const { act, cleanup, fireEvent, render } = await import(
 	"@testing-library/react"
 );
@@ -65,7 +47,9 @@ let snapshot = spyOn(calendarClient, "getSnapshot");
 let yearRequest = spyOn(calendarClient, "year");
 beforeEach(() => {
 	snapshot = spyOn(calendarClient, "getSnapshot").mockReturnValue(state);
-	yearRequest = spyOn(calendarClient, "year");
+	yearRequest = spyOn(calendarClient, "year").mockImplementation(
+		() => new Promise(() => {}),
+	);
 });
 afterEach(() => {
 	cleanup();
@@ -178,10 +162,11 @@ for (const language of ["en", "es", "he"] as const) {
 		).toBeTruthy();
 		expect(
 			ui.getByText(
-				translate(language, "calendar.dayWithMonth", {
-					month: translate(language, "calendar.months.aviv"),
-					day: 14,
-				}),
+				{
+					en: "April 2 · Aviv 14",
+					es: "2 de abril · Aviv 14",
+					he: "2 באפריל · 14 אביב",
+				}[language],
 			),
 		).toBeTruthy();
 		expect(
@@ -192,6 +177,27 @@ for (const language of ["en", "es", "he"] as const) {
 		).toHaveLength(7);
 	});
 }
+
+test("opening the calendar prefetches the year so Moadim shows the civil date", async () => {
+	let resolve!: (value: CalendarResponse) => void;
+	yearRequest.mockImplementation(
+		() =>
+			new Promise((yes) => {
+				resolve = yes;
+			}),
+	);
+	const ui = render(<CalendarPanel language="en" />);
+	expect(yearRequest).toHaveBeenCalledWith(year);
+	await act(async () => resolve(annual));
+	fireEvent.click(
+		ui.getByRole("button", {
+			name: `${translate("en", "calendar.appointedTimes")} ${translate("en", "calendar.moadimYear")}`,
+		}),
+	);
+	expect(ui.queryByRole("status")).toBeNull();
+	expect(ui.getByText(translate("en", "calendar.events.pesach"))).toBeTruthy();
+	expect(ui.getByText("April 2 · Aviv 14")).toBeTruthy();
+});
 
 test("an annual lookup failure shows retry without claiming dates await confirmation", async () => {
 	yearRequest.mockRejectedValueOnce(new Error("offline"));

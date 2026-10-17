@@ -3,6 +3,7 @@ import {
   getPsalmsSuperscriptionNotice,
   resolveTranslationLookupKey,
   resolveTranslationSource,
+  resolveTranslationTarget,
   TTH_BOOK_MAPPING,
 } from "@davar/shared/translationConfig";
 import { getSourceChaptersForTranslationChapter } from "@davar/shared/versification";
@@ -130,6 +131,43 @@ export const resolveTranslationText = (params: {
     getMissingSpanishTranslationNotice(language),
   );
 };
+
+export const applyChapterTranslations = (
+  bookId: string,
+  verses: DisplayVerse[],
+  language: "en" | "es",
+  translations: {
+    verses: Map<string, { text: string; footnotes?: TranslationFootnote[] }>;
+    titles: Map<number, string>;
+  },
+): DisplayVerse[] =>
+  verses.map((verse) => {
+    const translationTarget = resolveTranslationTarget(
+      bookId,
+      verse.sourceChapter,
+      verse.sourceVerse,
+      { language },
+    );
+    const translationKey = translationTarget.reference
+      ? `${translationTarget.reference.chapter}-${translationTarget.reference.verse}`
+      : null;
+    const translationEntry = translationKey
+      ? translations.verses.get(translationKey)
+      : undefined;
+    return {
+      ...verse,
+      translation: resolveTranslationText({
+        bookId,
+        language,
+        mappedTranslationKey: translationKey,
+        translationTitle: translationTarget.usesPsalmTitle
+          ? translations.titles.get(verse.sourceChapter)
+          : undefined,
+        translationText: translationEntry?.text,
+      }),
+      translation_footnotes: translationEntry?.footnotes,
+    };
+  });
 
 const countDssWordTokens = (value?: string): number => {
   if (!value) return 0;
