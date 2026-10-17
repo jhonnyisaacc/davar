@@ -4,6 +4,7 @@ import {
 	calendarSources,
 	calendarYear,
 	confirmedMoadim,
+	dayNavLabel,
 	localSunsetClock,
 	moedRowSubtitle,
 } from "@davar/shared/calendarPresentation";
@@ -368,9 +369,15 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 						onClick={() => setOffset(0)}
 						className="min-h-11 text-sm text-[var(--accent-deep)]"
 					>
-						{offset === 0
-							? t("calendar.today")
-							: day?.civil_date || t("calendar.loading")}
+						{dayNavLabel(
+							offset === 0,
+							selected?.days[0]?.civil_date,
+							language,
+							{
+								today: t("calendar.today"),
+								pending: t("calendar.loading"),
+							},
+						)}
 					</button>
 					<button
 						type="button"

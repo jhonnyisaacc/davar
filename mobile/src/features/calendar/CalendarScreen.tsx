@@ -36,6 +36,7 @@ import {
   calendarSources,
   calendarYear,
   confirmedMoadim,
+  dayNavLabel,
   localSunsetClock,
   moedRowSubtitle,
   type CalendarIcon,
@@ -555,9 +556,15 @@ export default function CalendarScreen() {
             style={{ minHeight: 44, justifyContent: "center" }}
           >
             <Caption accent>
-              {offset === 0
-                ? t("calendar.today")
-                : day?.civil_date || t("calendar.loading")}
+              {dayNavLabel(
+                offset === 0,
+                selectedCalendar?.days[0]?.civil_date,
+                language,
+                {
+                  today: t("calendar.today"),
+                  pending: t("calendar.loading"),
+                },
+              )}
             </Caption>
           </Pressable>
           <Pressable
