@@ -58,6 +58,16 @@
         margin-top: 2.5rem;
         text-align: center;
       }
+      #davar-early .early-translation-text {
+        display: block;
+        margin: 0 auto;
+        max-width: 40rem;
+        font-family: Inter, sans-serif;
+        font-size: 17px;
+        line-height: 1.65;
+        letter-spacing: 0;
+        word-spacing: normal;
+      }
       #davar-early .early-line {
         display: block;
         height: 27.625px;
@@ -355,6 +365,134 @@
       }
       globalThis.__davarEarlyTranslationLines = earlyTranslationLines;
 
+      var EARLY_TS2009_STEMS = {
+        genesis: "bereshit",
+        exodus: "shemoth",
+        leviticus: "wayyiqra",
+        numbers: "bemidbar",
+        deuteronomy: "debarim",
+        joshua: "yehoshua",
+        judges: "shophetim",
+        samuel1: "samuel_1",
+        samuel2: "samuel_2",
+        kings1: "kings_1",
+        kings2: "kings_2",
+        chronicles1: "chronicles_1",
+        chronicles2: "chronicles_2",
+        nehemiah: "nehemyah",
+        esther: "ester",
+        job: "iyob",
+        psalms: "tehillim",
+        ecclesiastes: "qoheleth",
+        songofsolomon: "shir_hashirim",
+        isaiah: "yeshayahu",
+        jeremiah: "yirmeyahu",
+        lamentations: "ekah",
+        ezekiel: "yehezqel",
+        obadiah: "obadyah",
+        jonah: "yonah",
+        ruth: "ruth",
+        ezra: "ezra",
+        proverbs: "mishlei",
+        daniel: "daniel",
+        hosea: "hosea",
+        joel: "yoel",
+        amos: "amos",
+        micah: "micah",
+        nahum: "nahum",
+        habakkuk: "habakkuk",
+        zephaniah: "zephaniah",
+        haggai: "haggai",
+        zechariah: "zechariah",
+        malachi: "malachi",
+        matthew: "mattithyahu",
+        mark: "marqos",
+        luke: "lugqas",
+        john: "yohanan",
+        acts: "maasei",
+        romans: "romiyim",
+        corinthians1: "corinthians_1",
+        corinthians2: "corinthians_2",
+        galatians: "galatiyim",
+        ephesians: "ephsiyim",
+        philippians: "pilipiyim",
+        colossians: "qolasim",
+        thessalonians1: "thessalonians_1",
+        thessalonians2: "thessalonians_2",
+        timothy1: "timothy_1",
+        timothy2: "timothy_2",
+        titus: "titos",
+        philemon: "pileymon",
+        hebrews: "ibrim",
+        james: "yaaqob",
+        peter1: "peter_1",
+        peter2: "peter_2",
+        john1: "john_1",
+        john2: "john_2",
+        john3: "john_3",
+        jude: "yehudah",
+        revelation: "hazon",
+      };
+      function earlyTranslationStem(bookId) {
+        return EARLY_TS2009_STEMS[bookId] || bookId;
+      }
+      globalThis.__davarEarlyTranslationStem = earlyTranslationStem;
+
+      function earlyTranslationText(payload, chapter, verse) {
+        var chapters = payload && payload.chapters;
+        if (!chapters) return "";
+        var chapterEntry = null;
+        if (Array.isArray(chapters)) {
+          for (var index = 0; index < chapters.length; index += 1) {
+            var entry = chapters[index];
+            var number = Number(entry && (entry.number != null ? entry.number : entry.chapter));
+            if (number === chapter) {
+              chapterEntry = entry;
+              break;
+            }
+          }
+        } else {
+          chapterEntry = chapters[String(chapter)];
+        }
+        var verses = Array.isArray(chapterEntry)
+          ? chapterEntry
+          : chapterEntry && chapterEntry.verses;
+        if (!Array.isArray(verses)) return "";
+        for (var verseIndex = 0; verseIndex < verses.length; verseIndex += 1) {
+          var row = verses[verseIndex];
+          var verseNumber = Number(
+            row && (row.number != null ? row.number : row.verse != null ? row.verse : verseIndex + 1),
+          );
+          if (verseNumber !== verse) continue;
+          var text = row && (row.translation || row.text || "");
+          return typeof text === "string" ? text : "";
+        }
+        return "";
+      }
+      globalThis.__davarEarlyTranslationText = earlyTranslationText;
+
+      function paintEarlyTranslation(text) {
+        var apply = function () {
+          var host = document.querySelector("#davar-early .early-translation");
+          if (!host || !text) return false;
+          var node = document.createElement("span");
+          node.className = "early-translation-text";
+          node.textContent = text;
+          host.replaceChildren(node);
+          if (!performance.getEntriesByName("davar-early-translation").length) {
+            performance.mark("davar-early-translation");
+          }
+          return true;
+        };
+        if (apply()) return;
+        var early = document.querySelector("#davar-early");
+        if (!early) return;
+        var paintObserver = new MutationObserver(function () {
+          if (apply()) paintObserver.disconnect();
+        });
+        paintObserver.observe(early, { childList: true, subtree: true });
+      }
+
       (function () {
         if (typeof document === "undefined") return;
         var early = document.querySelector("#davar-early");
@@ -388,6 +526,42 @@
           }),
         };
         globalThis.__DAVAR_EARLY_CHAPTER__ = slot;
+
+        var storedLanguage = stored && stored.language;
+        if (!earlyHidesTranslation(stored) && storedLanguage !== "es") {
+          var segments = String(target.path).split("/");
+          var bookId = segments[3];
+          var chapter = Number(String(segments[4] || "").replace(".json", ""));
+          var stem = bookId ? earlyTranslationStem(bookId) : "";
+          if (bookId && chapter > 0 && stem) {
+            var translationPath = "/api/ts2009/" + stem + ".json";
+            var translationSlot = {
+              path: translationPath,
+              promise: fetch(translationPath, { priority: "high" }).then(function (
+                response,
+              ) {
+                if (!response.ok) throw new Error("early translation failed");
+                return response.text();
+              }).then(function (body) {
+                var first = body.trimStart().charAt(0);
+                if (first !== "{" && first !== "[") {
+                  throw new Error("early translation was not json");
+                }
+                return body;
+              }),
+            };
+            globalThis.__DAVAR_EARLY_TRANSLATION__ = translationSlot;
+            // Psalm files count a superscription as a verse, so this line would not match the reader.
+            if (bookId !== "psalms") {
+              translationSlot.promise
+                .then(function (body) {
+                  var text = earlyTranslationText(JSON.parse(body), chapter, target.verse);
+                  if (text) paintEarlyTranslation(text);
+                })
+                .catch(function () {});
+            }
+          }
+        }
 
         slot.promise
           .then(function (body) {

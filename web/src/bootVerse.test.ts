@@ -1,6 +1,7 @@
 import { expect, test } from "bun:test";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import { TS2009_BOOK_FILE_MAP } from "../../shared/ts2009BookFileMap";
 import {
 	translationColumnWidth,
 	translationLineWidths,
@@ -81,6 +82,12 @@ const earlyApi = globalThis as typeof globalThis & {
 		wordCount: number,
 		columnWidth: number,
 	) => number[];
+	__davarEarlyTranslationStem: (bookId: string) => string;
+	__davarEarlyTranslationText: (
+		payload: unknown,
+		chapter: number,
+		verse: number,
+	) => string;
 };
 
 test("early words sit in a block so the spaces between them remain", () => {
@@ -95,6 +102,31 @@ test("early words match the settled verse, without cantillation or slash marks",
 			showCantillation: false,
 		}),
 	).toBe("בְּרֵאשִׁית");
+});
+
+test("the early translation stem matches the published book file", () => {
+	for (const [bookId, stem] of Object.entries(TS2009_BOOK_FILE_MAP)) {
+		expect(earlyApi.__davarEarlyTranslationStem(bookId)).toBe(stem);
+	}
+	expect(earlyApi.__davarEarlyTranslationStem("not-a-book")).toBe("not-a-book");
+});
+
+test("the early translation line reads the requested verse", () => {
+	expect(
+		earlyApi.__davarEarlyTranslationText(
+			{
+				chapters: [
+					{
+						number: 1,
+						verses: [{ number: 1, text: "In the beginning" }],
+					},
+				],
+			},
+			1,
+			1,
+		),
+	).toBe("In the beginning");
+	expect(earlyApi.__davarEarlyTranslationText({ chapters: [] }, 1, 1)).toBe("");
 });
 
 test("the translation skeleton is one bar per line", () => {
