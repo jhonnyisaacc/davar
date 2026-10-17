@@ -1,4 +1,9 @@
+import json
+import os
+import subprocess
+import sys
 from datetime import date, datetime, timezone
+from pathlib import Path
 
 from calendar.models.enums import MonthStatus, NewMoonSource, YearStartStatus
 from calendar.models.month_confirmation import MonthConfirmation
@@ -69,6 +74,22 @@ def test_biblical_month_names_are_scripture_only():
         assert not contains_babylonian_month_name(month_id_for_ordinal(ordinal))
 
 
+def test_full_month_opens_one_pending_month():
+    confirmation = _confirmation(date(2026, 9, 12), "etanim")
+    _, days, _ = CalendarBuilder().build((confirmation,), through=date(2026, 11, 12))
+    assert days[date(2026, 10, 12)].biblical.day == 30
+    assert days[date(2026, 10, 12)].month_status == MonthStatus.CONFIRMED
+    opened = days[date(2026, 10, 13)]
+    assert opened.biblical.day == 1
+    assert opened.biblical.month_id is None
+    assert opened.month_status == MonthStatus.PENDING
+    assert opened.confirmation_id is None
+    assert days[date(2026, 10, 18)].biblical.day == 6
+    assert days[date(2026, 10, 18)].month_status == MonthStatus.PENDING
+    assert days[date(2026, 11, 11)].biblical.day == 30
+    assert days[date(2026, 11, 12)].biblical.day is None
+
+
 def test_month_does_not_span_a_missing_report():
     confirmations = (
         _confirmation(date(2026, 1, 20), "winter"),
@@ -125,6 +146,55 @@ def test_event_ids_are_locale_independent():
     assert [event.event_id for event in events] == ["pesach"]
     assert "Pesaj" not in str(events)
     assert UNRESOLVED_COUNTING_EVENTS == frozenset({"bikurim", "omer", "shavuot"})
+
+
+def test_bridge_names_the_open_tail_from_the_previous_anchor():
+    confirmation = _confirmation(date(2026, 9, 12), "etanim")
+    payload = {
+        "instant": "2026-10-12T06:00:00+00:00",
+        "latitude": 31.7683,
+        "longitude": 35.2137,
+        "timezone": "Asia/Jerusalem",
+        "count": 10,
+        "month_anchors": [
+            {
+                "starts_on_evening": "2026-09-12",
+                "month_ordinal": 7,
+                "source_url": "https://example.test/etanim",
+                "note": "seventh month",
+            }
+        ],
+        "confirmations": [confirmation.to_dict()],
+    }
+    bore = Path(__file__).resolve().parents[2] / "lib" / "bore"
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(bore)
+    proc = subprocess.run(
+        [sys.executable, str(bore / "bridge.py")],
+        input=json.dumps(payload),
+        text=True,
+        capture_output=True,
+        cwd=bore,
+        env=env,
+        check=False,
+    )
+    assert proc.returncode == 0, proc.stderr
+    by_date = {day["civil_date"]: day for day in json.loads(proc.stdout)["days"]}
+    etanim = by_date["2026-10-12"]
+    assert etanim["biblical"]["day"] == 30
+    assert etanim["biblical"]["month_id"] == "etanim"
+    assert etanim["biblical"]["month_ordinal"] == 7
+    assert etanim["month_status"] == "confirmed"
+    bul = by_date["2026-10-18"]
+    assert bul["biblical"]["day"] == 6
+    assert bul["biblical"]["month_id"] == "bul"
+    assert bul["biblical"]["month_ordinal"] == 8
+    assert bul["month_status"] == "pending"
+    assert bul["confirmation_id"] is None
+    assert bul["month_identity"] is None
+    assert bul["rabbinic"]["month_id"] == "cheshvan"
+    assert bul["events"] == []
+    assert by_date["2026-10-13"]["events"] == ["rosh_hodesh"]
 
 
 def test_omer_family_is_not_silently_scheduled():
