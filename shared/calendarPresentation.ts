@@ -134,6 +134,26 @@ export function annualMoadim(calendar: CalendarResponse | null, year: number) {
 	}));
 }
 
+export function dayNavLabel(
+	viewingToday: boolean,
+	civilDate: string | null | undefined,
+	language: AppLanguage,
+	copy: { readonly today: string; readonly pending: string },
+): string {
+	if (viewingToday) return copy.today;
+	if (!civilDate) return copy.pending;
+	const instant = new Date(`${civilDate}T12:00:00Z`);
+	if (Number.isNaN(instant.getTime())) return copy.pending;
+	try {
+		return new Intl.DateTimeFormat(language, {
+			weekday: "long",
+			timeZone: "UTC",
+		}).format(instant);
+	} catch {
+		return copy.pending;
+	}
+}
+
 function formatCivilDate(civilDate: string, language: AppLanguage): string {
 	const instant = new Date(`${civilDate}T12:00:00Z`);
 	if (Number.isNaN(instant.getTime())) return civilDate;
