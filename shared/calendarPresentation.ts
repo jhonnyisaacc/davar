@@ -134,18 +134,54 @@ export function annualMoadim(calendar: CalendarResponse | null, year: number) {
 	}));
 }
 
-function formatCivilDate(civilDate: string, language: AppLanguage): string {
+export function dayNavLabel(
+	viewingToday: boolean,
+	civilDate: string | null | undefined,
+	language: AppLanguage,
+	copy: { readonly today: string; readonly pending: string },
+): string {
+	if (viewingToday) return copy.today;
+	if (!civilDate) return copy.pending;
 	const instant = new Date(`${civilDate}T12:00:00Z`);
-	if (Number.isNaN(instant.getTime())) return civilDate;
+	if (Number.isNaN(instant.getTime())) return copy.pending;
 	try {
 		return new Intl.DateTimeFormat(language, {
-			day: "numeric",
-			month: "long",
+			weekday: "long",
 			timeZone: "UTC",
 		}).format(instant);
 	} catch {
+		return copy.pending;
+	}
+}
+
+function formatCivilDate(
+	civilDate: string,
+	language: AppLanguage,
+	year = false,
+): string {
+	const instant = new Date(`${civilDate}T12:00:00Z`);
+	if (Number.isNaN(instant.getTime())) return civilDate;
+	const options: Intl.DateTimeFormatOptions = {
+		day: "numeric",
+		month: "long",
+		timeZone: "UTC",
+	};
+	if (year) options.year = "numeric";
+	try {
+		return new Intl.DateTimeFormat(language, options).format(instant);
+	} catch {
 		return civilDate;
 	}
+}
+
+export function gregorianDateCaption(
+	civilDate: string,
+	language: AppLanguage,
+	t: (key: string, params?: Record<string, string | number>) => string,
+): string {
+	return t("calendar.gregorianDate", {
+		date: formatCivilDate(civilDate, language, true),
+	});
 }
 
 function monthName(

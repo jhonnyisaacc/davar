@@ -3,6 +3,8 @@ import {
   annualMoadim,
   calendarSources,
   confirmedMoadim,
+  dayNavLabel,
+  gregorianDateCaption,
   localSunsetClock,
   moedRowSubtitle,
   readingCalendarDay,
@@ -58,11 +60,47 @@ const calendarState = (
 });
 
 describe("calendar presentation", () => {
+  test("the day nav says today on the current day and the weekday on any other day", () => {
+    const copy = { today: "Today", pending: "Loading" };
+    expect(dayNavLabel(true, "2026-10-19", "en", copy)).toBe("Today");
+    expect(
+      dayNavLabel(true, undefined, "he", { today: "היום", pending: "…" }),
+    ).toBe("היום");
+    expect(dayNavLabel(false, "2026-10-19", "en", copy)).toBe("Monday");
+    expect(dayNavLabel(false, "2026-10-20", "es", copy)).toBe("martes");
+    expect(dayNavLabel(false, "2026-10-19", "he", copy)).toBe("יום שני");
+    expect(dayNavLabel(false, "2026-10-18", "es", copy)).toBe("domingo");
+    expect(dayNavLabel(false, "2026-10-18", "he", copy)).toBe("יום ראשון");
+    expect(dayNavLabel(false, undefined, "en", copy)).toBe("Loading");
+    expect(dayNavLabel(false, "not-a-date", "en", copy)).toBe("Loading");
+    for (const label of [
+      dayNavLabel(false, "2026-10-19", "en", copy),
+      dayNavLabel(false, "2026-10-20", "es", copy),
+      dayNavLabel(false, "2026-10-19", "he", copy),
+    ]) {
+      expect(label).not.toMatch(/\d/);
+      expect(label).not.toMatch(/october|octubre|אוקטובר|2026/i);
+    }
+  });
   test("annual moadim distinguish an unloaded response from a loaded year with unresolved dates", () => {
     expect(annualMoadim(null, 2026)).toEqual([]);
     const rows = annualMoadim({ ...calendar(), days: [] }, 2026);
     expect(rows).toHaveLength(8);
     expect(rows.every((row) => row.days.length === 0)).toBe(true);
+  });
+  test("the civil date caption is the date alone, with the year, in each language", () => {
+    const copy = (key: string, params?: Record<string, string | number>) =>
+      key === "calendar.gregorianDate" ? String(params?.date) : key;
+    expect(gregorianDateCaption("2026-04-02", "en", copy)).toBe(
+      "April 2, 2026",
+    );
+    expect(gregorianDateCaption("2026-04-02", "es", copy)).toBe(
+      "2 de abril de 2026",
+    );
+    expect(gregorianDateCaption("2026-04-02", "he", copy)).toBe(
+      "2 באפריל 2026",
+    );
+    expect(gregorianDateCaption("not-a-date", "en", copy)).toBe("not-a-date");
   });
   test("a confirmed moed subtitle leads with the civil date and keeps the biblical label", () => {
     const copy = (
