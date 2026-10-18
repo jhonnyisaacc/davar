@@ -4,6 +4,8 @@ import {
 	calendarSources,
 	calendarYear,
 	confirmedMoadim,
+	dayNavLabel,
+	gregorianDateCaption,
 	localSunsetClock,
 	moedRowSubtitle,
 } from "@davar/shared/calendarPresentation";
@@ -368,9 +370,15 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 						onClick={() => setOffset(0)}
 						className="min-h-11 text-sm text-[var(--accent-deep)]"
 					>
-						{offset === 0
-							? t("calendar.today")
-							: day?.civil_date || t("calendar.loading")}
+						{dayNavLabel(
+							offset === 0,
+							selected?.days[0]?.civil_date,
+							language,
+							{
+								today: t("calendar.today"),
+								pending: t("calendar.loading"),
+							},
+						)}
 					</button>
 					<button
 						type="button"
@@ -396,13 +404,18 @@ export function CalendarPanel({ language }: { language: AppLanguage }) {
 								: t("calendar.dayOfMonth")}
 					</p>
 					{day ? (
-						<Caption>
-							{t("calendar.rabbinicDate", {
-								day: day.rabbinic.day,
-								month: t(`calendar.rabbinicMonths.${day.rabbinic.month_id}`),
-								year: day.rabbinic.year,
-							})}
-						</Caption>
+						<>
+							<Caption>
+								{t("calendar.rabbinicDate", {
+									day: day.rabbinic.day,
+									month: t(`calendar.rabbinicMonths.${day.rabbinic.month_id}`),
+									year: day.rabbinic.year,
+								})}
+							</Caption>
+							<Caption>
+								{gregorianDateCaption(day.civil_date, language, t)}
+							</Caption>
+						</>
 					) : null}
 					{moadim.map((id) => (
 						<button

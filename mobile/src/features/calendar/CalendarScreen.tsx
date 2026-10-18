@@ -36,6 +36,8 @@ import {
   calendarSources,
   calendarYear,
   confirmedMoadim,
+  dayNavLabel,
+  gregorianDateCaption,
   localSunsetClock,
   moedRowSubtitle,
   type CalendarIcon,
@@ -555,9 +557,15 @@ export default function CalendarScreen() {
             style={{ minHeight: 44, justifyContent: "center" }}
           >
             <Caption accent>
-              {offset === 0
-                ? t("calendar.today")
-                : day?.civil_date || t("calendar.loading")}
+              {dayNavLabel(
+                offset === 0,
+                selectedCalendar?.days[0]?.civil_date,
+                language,
+                {
+                  today: t("calendar.today"),
+                  pending: t("calendar.loading"),
+                },
+              )}
             </Caption>
           </Pressable>
           <Pressable
@@ -605,13 +613,18 @@ export default function CalendarScreen() {
                 : t("calendar.dayOfMonth")}
           </Text>
           {day ? (
-            <Caption>
-              {t("calendar.rabbinicDate", {
-                day: day.rabbinic.day,
-                month: rabbinicMonth(day.rabbinic.month_id),
-                year: day.rabbinic.year,
-              })}
-            </Caption>
+            <>
+              <Caption>
+                {t("calendar.rabbinicDate", {
+                  day: day.rabbinic.day,
+                  month: rabbinicMonth(day.rabbinic.month_id),
+                  year: day.rabbinic.year,
+                })}
+              </Caption>
+              <Caption>
+                {gregorianDateCaption(day.civil_date, language, t)}
+              </Caption>
+            </>
           ) : null}
           {moadim.map((id) => (
             <Pressable

@@ -116,12 +116,44 @@ const normalizePsalmsTs2009VerseMap = (
 	return normalized;
 };
 
+type EarlyTranslationSlot = {
+	path: string;
+	promise: Promise<string>;
+};
+
+const earlyTranslationSlot = (): EarlyTranslationSlot | null => {
+	const host = globalThis as typeof globalThis & {
+		__DAVAR_EARLY_TRANSLATION__?: EarlyTranslationSlot;
+	};
+	const slot = host.__DAVAR_EARLY_TRANSLATION__;
+	if (!slot || typeof slot.path !== "string" || !slot.promise) return null;
+	return slot;
+};
+
+const readEarlyTs2009Book = async (
+	fileStem: string,
+): Promise<RawTs2009BookPayload | null> => {
+	const slot = earlyTranslationSlot();
+	if (!slot || slot.path !== `/${ts2009ApiBookPath(fileStem)}`) return null;
+	try {
+		const body = await slot.promise;
+		const first = body.trimStart().charAt(0);
+		if (first !== "{" && first !== "[") return null;
+		return JSON.parse(body) as RawTs2009BookPayload;
+	} catch {
+		return null;
+	}
+};
+
 const loadTs2009BookFile = (
 	fileStem: string,
 ): Promise<RawTs2009BookPayload | null> => {
 	let bookPromise = ts2009BookFileCache.get(fileStem);
 	if (!bookPromise) {
 		bookPromise = (async () => {
+			const earlyBook = await readEarlyTs2009Book(fileStem);
+			if (earlyBook) return earlyBook;
+
 			const candidatePaths = [
 				`/${ts2009ApiBookPath(fileStem)}`,
 				`/data/${ts2009BookAssetPath(fileStem)}`,
@@ -167,17 +199,10 @@ const loadTs2009ChapterFromChapterFile = async (
 	}
 };
 
-const loadTs2009ChapterFromBookFile = async (
+const verseMapFromBookFile = async (
 	bookId: string,
 	chapter: number,
 ): Promise<Map<number, string> | null> => {
-	if (!ts2009ChapterFilesUnavailable) {
-		const chapterFile = await loadTs2009ChapterFromChapterFile(bookId, chapter);
-		if (chapterFile) {
-			return chapterFile;
-		}
-	}
-
 	for (const fileStem of ts2009BookFileStems(bookId)) {
 		const staticBook = await loadTs2009BookFile(fileStem);
 		if (!staticBook) {
@@ -226,6 +251,33 @@ const loadTs2009ChapterFromBookFile = async (
 	return null;
 };
 
+const earlySlotMatchesBook = (bookId: string): boolean => {
+	const slot = earlyTranslationSlot();
+	if (!slot) return false;
+	return ts2009BookFileStems(bookId).some(
+		(fileStem) => slot.path === `/${ts2009ApiBookPath(fileStem)}`,
+	);
+};
+
+const loadTs2009ChapterFromBookFile = async (
+	bookId: string,
+	chapter: number,
+): Promise<Map<number, string> | null> => {
+	if (earlySlotMatchesBook(bookId)) {
+		const earlyChapter = await verseMapFromBookFile(bookId, chapter);
+		if (earlyChapter) return earlyChapter;
+	}
+
+	if (!ts2009ChapterFilesUnavailable) {
+		const chapterFile = await loadTs2009ChapterFromChapterFile(bookId, chapter);
+		if (chapterFile) {
+			return chapterFile;
+		}
+	}
+
+	return verseMapFromBookFile(bookId, chapter);
+};
+
 /**
  * Fetches TS2009 translation with client-side caching to avoid repeated API requests.
  * Uses in-memory cache with keys formatted as `${bookId}:${chapter}:${verse}`.
@@ -268,4 +320,9 @@ export const resetTs2009Caches = (): void => {
 	ts2009Cache.clear();
 	ts2009ChapterCache.clear();
 	ts2009BookFileCache.clear();
+	delete (
+		globalThis as typeof globalThis & {
+			__DAVAR_EARLY_TRANSLATION__?: EarlyTranslationSlot;
+		}
+	).__DAVAR_EARLY_TRANSLATION__;
 };

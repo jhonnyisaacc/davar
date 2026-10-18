@@ -64,6 +64,40 @@ test("a shown day does not return to loading while a refresh is in flight", () =
 	expect(ui.getByText("14")).toBeTruthy();
 });
 
+const rabbinicDate = {
+	en: "14 Nisan 5786",
+	es: "14 Nisán 5786",
+	he: "14 ניסן 5786",
+} as const;
+const gregorianDate = {
+	en: `April 2, ${year}`,
+	es: `2 de abril de ${year}`,
+	he: `2 באפריל ${year}`,
+} as const;
+
+for (const language of ["en", "es", "he"] as const) {
+	test(`the day view shows the civil date under the rabbinic date (${language})`, () => {
+		const ui = render(<CalendarPanel language={language} />);
+		const rabbinic = ui.getByText(rabbinicDate[language]);
+		const gregorian = ui.getByText(gregorianDate[language]);
+		expect(gregorian.className).toBe(rabbinic.className);
+		expect(rabbinic.nextElementSibling).toBe(gregorian);
+		expect(ui.container.textContent).not.toMatch(
+			/Rabbinic:|Gregorian:|Rabínico:|Gregoriano:|גרגוריאני:|רבני:/,
+		);
+	});
+}
+
+test("an empty month leaves both date lines off", () => {
+	snapshot.mockReturnValue({
+		...state,
+		calendar: { ...annual, days: [] },
+	});
+	const ui = render(<CalendarPanel language="en" />);
+	expect(ui.queryByText(rabbinicDate.en)).toBeNull();
+	expect(ui.queryByText(gregorianDate.en)).toBeNull();
+});
+
 function openMoadim(language: AppLanguage = "en") {
 	const ui = render(<CalendarPanel language={language} />);
 	fireEvent.click(
@@ -197,6 +231,61 @@ test("opening the calendar prefetches the year so Moadim shows the civil date", 
 	expect(ui.queryByRole("status")).toBeNull();
 	expect(ui.getByText(translate("en", "calendar.events.pesach"))).toBeTruthy();
 	expect(ui.getByText("April 2 · Aviv 14")).toBeTruthy();
+});
+
+test("day navigation keeps today on the current day and names the weekday beside it", async () => {
+	const nextDay: CalendarResponse = {
+		...annual,
+		days: [{ ...annual.days[0], civil_date: "2026-10-19" }],
+	};
+	const previousDay: CalendarResponse = {
+		...annual,
+		days: [{ ...annual.days[0], civil_date: "2026-10-18" }],
+	};
+	const lookup = spyOn(calendarClient, "day").mockImplementation((offset) =>
+		Promise.resolve(offset > 0 ? nextDay : previousDay),
+	);
+	try {
+		for (const language of ["en", "es", "he"] as const) {
+			const today = translate(language, "calendar.today");
+			const weekday = { en: "Monday", es: "lunes", he: "יום שני" }[language];
+			const earlier = { en: "Sunday", es: "domingo", he: "יום ראשון" }[
+				language
+			];
+			const ui = render(<CalendarPanel language={language} />);
+			expect(ui.getByRole("button", { name: today })).toBeTruthy();
+			expect(ui.queryByText(`${year}-04-02`)).toBeNull();
+			await act(async () => {
+				fireEvent.click(
+					ui.getByRole("button", {
+						name: translate(language, "calendar.nextDay"),
+					}),
+				);
+			});
+			const next = ui.getByRole("button", { name: weekday });
+			expect(next.textContent).toBe(weekday);
+			expect(next.textContent ?? "").not.toMatch(/\d/);
+			expect(ui.queryByText("2026-10-19")).toBeNull();
+			await act(async () => {
+				fireEvent.click(next);
+			});
+			expect(ui.getByRole("button", { name: today })).toBeTruthy();
+			await act(async () => {
+				fireEvent.click(
+					ui.getByRole("button", {
+						name: translate(language, "calendar.previousDay"),
+					}),
+				);
+			});
+			expect(ui.getByRole("button", { name: earlier }).textContent).toBe(
+				earlier,
+			);
+			expect(ui.queryByText("2026-10-18")).toBeNull();
+			ui.unmount();
+		}
+	} finally {
+		lookup.mockRestore();
+	}
 });
 
 test("an annual lookup failure shows retry without claiming dates await confirmation", async () => {
