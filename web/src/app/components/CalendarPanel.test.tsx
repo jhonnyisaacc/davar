@@ -233,6 +233,61 @@ test("opening the calendar prefetches the year so Moadim shows the civil date", 
 	expect(ui.getByText("April 2 · Aviv 14")).toBeTruthy();
 });
 
+test("day navigation keeps today on the current day and names the weekday beside it", async () => {
+	const nextDay: CalendarResponse = {
+		...annual,
+		days: [{ ...annual.days[0], civil_date: "2026-10-19" }],
+	};
+	const previousDay: CalendarResponse = {
+		...annual,
+		days: [{ ...annual.days[0], civil_date: "2026-10-18" }],
+	};
+	const lookup = spyOn(calendarClient, "day").mockImplementation((offset) =>
+		Promise.resolve(offset > 0 ? nextDay : previousDay),
+	);
+	try {
+		for (const language of ["en", "es", "he"] as const) {
+			const today = translate(language, "calendar.today");
+			const weekday = { en: "Monday", es: "lunes", he: "יום שני" }[language];
+			const earlier = { en: "Sunday", es: "domingo", he: "יום ראשון" }[
+				language
+			];
+			const ui = render(<CalendarPanel language={language} />);
+			expect(ui.getByRole("button", { name: today })).toBeTruthy();
+			expect(ui.queryByText(`${year}-04-02`)).toBeNull();
+			await act(async () => {
+				fireEvent.click(
+					ui.getByRole("button", {
+						name: translate(language, "calendar.nextDay"),
+					}),
+				);
+			});
+			const next = ui.getByRole("button", { name: weekday });
+			expect(next.textContent).toBe(weekday);
+			expect(next.textContent ?? "").not.toMatch(/\d/);
+			expect(ui.queryByText("2026-10-19")).toBeNull();
+			await act(async () => {
+				fireEvent.click(next);
+			});
+			expect(ui.getByRole("button", { name: today })).toBeTruthy();
+			await act(async () => {
+				fireEvent.click(
+					ui.getByRole("button", {
+						name: translate(language, "calendar.previousDay"),
+					}),
+				);
+			});
+			expect(ui.getByRole("button", { name: earlier }).textContent).toBe(
+				earlier,
+			);
+			expect(ui.queryByText("2026-10-18")).toBeNull();
+			ui.unmount();
+		}
+	} finally {
+		lookup.mockRestore();
+	}
+});
+
 test("an annual lookup failure shows retry without claiming dates await confirmation", async () => {
 	yearRequest.mockRejectedValueOnce(new Error("offline"));
 	const ui = openMoadim();

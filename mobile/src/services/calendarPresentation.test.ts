@@ -3,6 +3,7 @@ import {
   annualMoadim,
   calendarSources,
   confirmedMoadim,
+  dayNavLabel,
   gregorianDateCaption,
   localSunsetClock,
   moedRowSubtitle,
@@ -59,6 +60,28 @@ const calendarState = (
 });
 
 describe("calendar presentation", () => {
+  test("the day nav says today on the current day and the weekday on any other day", () => {
+    const copy = { today: "Today", pending: "Loading" };
+    expect(dayNavLabel(true, "2026-10-19", "en", copy)).toBe("Today");
+    expect(
+      dayNavLabel(true, undefined, "he", { today: "היום", pending: "…" }),
+    ).toBe("היום");
+    expect(dayNavLabel(false, "2026-10-19", "en", copy)).toBe("Monday");
+    expect(dayNavLabel(false, "2026-10-20", "es", copy)).toBe("martes");
+    expect(dayNavLabel(false, "2026-10-19", "he", copy)).toBe("יום שני");
+    expect(dayNavLabel(false, "2026-10-18", "es", copy)).toBe("domingo");
+    expect(dayNavLabel(false, "2026-10-18", "he", copy)).toBe("יום ראשון");
+    expect(dayNavLabel(false, undefined, "en", copy)).toBe("Loading");
+    expect(dayNavLabel(false, "not-a-date", "en", copy)).toBe("Loading");
+    for (const label of [
+      dayNavLabel(false, "2026-10-19", "en", copy),
+      dayNavLabel(false, "2026-10-20", "es", copy),
+      dayNavLabel(false, "2026-10-19", "he", copy),
+    ]) {
+      expect(label).not.toMatch(/\d/);
+      expect(label).not.toMatch(/october|octubre|אוקטובר|2026/i);
+    }
+  });
   test("annual moadim distinguish an unloaded response from a loaded year with unresolved dates", () => {
     expect(annualMoadim(null, 2026)).toEqual([]);
     const rows = annualMoadim({ ...calendar(), days: [] }, 2026);
