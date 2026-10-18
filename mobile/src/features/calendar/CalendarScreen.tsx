@@ -36,6 +36,7 @@ import {
   calendarSources,
   calendarYear,
   confirmedMoadim,
+  gregorianDateCaption,
   localSunsetClock,
   moedRowSubtitle,
   type CalendarIcon,
@@ -605,13 +606,18 @@ export default function CalendarScreen() {
                 : t("calendar.dayOfMonth")}
           </Text>
           {day ? (
-            <Caption>
-              {t("calendar.rabbinicDate", {
-                day: day.rabbinic.day,
-                month: rabbinicMonth(day.rabbinic.month_id),
-                year: day.rabbinic.year,
-              })}
-            </Caption>
+            <>
+              <Caption>
+                {t("calendar.rabbinicDate", {
+                  day: day.rabbinic.day,
+                  month: rabbinicMonth(day.rabbinic.month_id),
+                  year: day.rabbinic.year,
+                })}
+              </Caption>
+              <Caption>
+                {gregorianDateCaption(day.civil_date, language, t)}
+              </Caption>
+            </>
           ) : null}
           {moadim.map((id) => (
             <Pressable

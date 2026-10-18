@@ -457,7 +457,8 @@
       "twelfth_month": "Duodécimo mes",
       "thirteenth_month": "Decimotercer mes"
     },
-    "rabbinicDate": "Rabínico: {day} {month} {year}",
+    "rabbinicDate": "{day} {month} {year}",
+    "gregorianDate": "{date}",
     "rabbinicMonths": {
       "nisan": "Nisán",
       "iyar": "Iyar",

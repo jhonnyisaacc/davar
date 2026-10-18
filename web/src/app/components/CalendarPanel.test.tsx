@@ -64,6 +64,40 @@ test("a shown day does not return to loading while a refresh is in flight", () =
 	expect(ui.getByText("14")).toBeTruthy();
 });
 
+const rabbinicDate = {
+	en: "14 Nisan 5786",
+	es: "14 Nisán 5786",
+	he: "14 ניסן 5786",
+} as const;
+const gregorianDate = {
+	en: `April 2, ${year}`,
+	es: `2 de abril de ${year}`,
+	he: `2 באפריל ${year}`,
+} as const;
+
+for (const language of ["en", "es", "he"] as const) {
+	test(`the day view shows the civil date under the rabbinic date (${language})`, () => {
+		const ui = render(<CalendarPanel language={language} />);
+		const rabbinic = ui.getByText(rabbinicDate[language]);
+		const gregorian = ui.getByText(gregorianDate[language]);
+		expect(gregorian.className).toBe(rabbinic.className);
+		expect(rabbinic.nextElementSibling).toBe(gregorian);
+		expect(ui.container.textContent).not.toMatch(
+			/Rabbinic:|Gregorian:|Rabínico:|Gregoriano:|גרגוריאני:|רבני:/,
+		);
+	});
+}
+
+test("an empty month leaves both date lines off", () => {
+	snapshot.mockReturnValue({
+		...state,
+		calendar: { ...annual, days: [] },
+	});
+	const ui = render(<CalendarPanel language="en" />);
+	expect(ui.queryByText(rabbinicDate.en)).toBeNull();
+	expect(ui.queryByText(gregorianDate.en)).toBeNull();
+});
+
 function openMoadim(language: AppLanguage = "en") {
 	const ui = render(<CalendarPanel language={language} />);
 	fireEvent.click(
