@@ -154,18 +154,34 @@ export function dayNavLabel(
 	}
 }
 
-function formatCivilDate(civilDate: string, language: AppLanguage): string {
+function formatCivilDate(
+	civilDate: string,
+	language: AppLanguage,
+	year = false,
+): string {
 	const instant = new Date(`${civilDate}T12:00:00Z`);
 	if (Number.isNaN(instant.getTime())) return civilDate;
+	const options: Intl.DateTimeFormatOptions = {
+		day: "numeric",
+		month: "long",
+		timeZone: "UTC",
+	};
+	if (year) options.year = "numeric";
 	try {
-		return new Intl.DateTimeFormat(language, {
-			day: "numeric",
-			month: "long",
-			timeZone: "UTC",
-		}).format(instant);
+		return new Intl.DateTimeFormat(language, options).format(instant);
 	} catch {
 		return civilDate;
 	}
+}
+
+export function gregorianDateCaption(
+	civilDate: string,
+	language: AppLanguage,
+	t: (key: string, params?: Record<string, string | number>) => string,
+): string {
+	return t("calendar.gregorianDate", {
+		date: formatCivilDate(civilDate, language, true),
+	});
 }
 
 function monthName(
