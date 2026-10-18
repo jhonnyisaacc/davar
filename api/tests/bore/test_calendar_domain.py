@@ -148,7 +148,24 @@ def test_event_ids_are_locale_independent():
     assert UNRESOLVED_COUNTING_EVENTS == frozenset({"bikurim", "omer", "shavuot"})
 
 
-def test_bridge_names_the_open_tail_from_the_previous_anchor():
+def _bridge_days(payload):
+    bore = Path(__file__).resolve().parents[2] / "lib" / "bore"
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(bore)
+    proc = subprocess.run(
+        [sys.executable, str(bore / "bridge.py")],
+        input=json.dumps(payload),
+        text=True,
+        capture_output=True,
+        cwd=bore,
+        env=env,
+        check=False,
+    )
+    assert proc.returncode == 0, proc.stderr
+    return {day["civil_date"]: day for day in json.loads(proc.stdout)["days"]}
+
+
+def _etanim_tail_payload(**extra):
     confirmation = _confirmation(date(2026, 9, 12), "etanim")
     payload = {
         "instant": "2026-10-12T06:00:00+00:00",
@@ -165,21 +182,14 @@ def test_bridge_names_the_open_tail_from_the_previous_anchor():
             }
         ],
         "confirmations": [confirmation.to_dict()],
+        "advisory_observed_on": None,
     }
-    bore = Path(__file__).resolve().parents[2] / "lib" / "bore"
-    env = os.environ.copy()
-    env["PYTHONPATH"] = str(bore)
-    proc = subprocess.run(
-        [sys.executable, str(bore / "bridge.py")],
-        input=json.dumps(payload),
-        text=True,
-        capture_output=True,
-        cwd=bore,
-        env=env,
-        check=False,
-    )
-    assert proc.returncode == 0, proc.stderr
-    by_date = {day["civil_date"]: day for day in json.loads(proc.stdout)["days"]}
+    payload.update(extra)
+    return payload
+
+
+def test_bridge_names_the_open_tail_from_the_previous_anchor():
+    by_date = _bridge_days(_etanim_tail_payload())
     etanim = by_date["2026-10-12"]
     assert etanim["biblical"]["day"] == 30
     assert etanim["biblical"]["month_id"] == "etanim"
@@ -195,6 +205,28 @@ def test_bridge_names_the_open_tail_from_the_previous_anchor():
     assert bul["rabbinic"]["month_id"] == "cheshvan"
     assert bul["events"] == []
     assert by_date["2026-10-13"]["events"] == ["rosh_hodesh"]
+
+
+def test_secondary_report_date_names_pending_days_without_a_confirmation():
+    for observed_on in ("2026-10-12", "2026-10-13"):
+        by_date = _bridge_days(_etanim_tail_payload(advisory_observed_on=observed_on))
+        assert by_date["2026-10-12"]["biblical"]["day"] == 30
+        assert by_date["2026-10-12"]["biblical"]["month_id"] == "etanim"
+        assert by_date["2026-10-12"]["month_status"] == "confirmed"
+        bul = by_date["2026-10-18"]
+        assert bul["biblical"]["day"] == 6
+        assert bul["biblical"]["month_id"] == "bul"
+        assert bul["biblical"]["month_ordinal"] == 8
+        assert bul["month_status"] == "pending"
+        assert bul["confirmation_id"] is None
+        pending = [
+            day
+            for day in by_date.values()
+            if day["biblical"]["day"] is not None and day["month_status"] == "pending"
+        ]
+        assert pending
+        assert all(day["biblical"]["month_id"] == "bul" for day in pending)
+        assert all(day["confirmation_id"] is None for day in pending)
 
 
 def test_omer_family_is_not_silently_scheduled():

@@ -8,23 +8,56 @@ from calendar.services.rabbinic_calendar import gregorian_to_rabbinic
 from calendar.services.sunset import next_sunset_after, sunset_on
 from calendar.rules.biblical_months import month_id_for_ordinal
 from calendar.services.moadim_calculator import MoadimCalculator
+from calendar.sources.advisory_month_date import advisory_observed_on
 from month_identity import anchored_month_identities
 from counted_moadim import counted_moadim_dates
 
-def open_tail_ordinal(days, identities, confirmation_starts, civil, day_number):
+def tail_identity(days, identities, confirmation_starts, civil, day_number):
     if not isinstance(day_number, int) or day_number < 1:
-        return None
+        return None, None
     origin = days.get(civil - timedelta(days=day_number))
     if origin is None or origin.biblical.day != 30 or not origin.confirmation_id:
-        return None
+        return None, None
     start = confirmation_starts.get(origin.confirmation_id)
     identity = identities.get(start) if start else None
+    return origin, identity
+
+
+def next_ordinal(identity):
     if not identity:
         return None
     ordinal = int(identity["month_ordinal"]) + 1
     if not 1 <= ordinal <= 13:
         return None
     return ordinal
+
+
+def open_tail_ordinal(days, identities, confirmation_starts, civil, day_number):
+    _, identity = tail_identity(days, identities, confirmation_starts, civil, day_number)
+    return next_ordinal(identity)
+
+
+def advisory_tail_ordinal(days, identities, confirmation_starts, civil, day_number, observed_on):
+    if observed_on is None:
+        return None
+    origin, identity = tail_identity(days, identities, confirmation_starts, civil, day_number)
+    if origin is None:
+        return None
+    if observed_on not in (origin.civil_date, origin.civil_date + timedelta(days=1)):
+        return None
+    return next_ordinal(identity)
+
+
+def supplied_advisory(payload):
+    if "advisory_observed_on" in payload:
+        raw = payload.get("advisory_observed_on")
+        if not isinstance(raw, str) or not raw:
+            return None
+        try:
+            return date.fromisoformat(raw)
+        except ValueError:
+            return None
+    return advisory_observed_on()
 
 
 payload = json.load(sys.stdin)
@@ -38,6 +71,7 @@ _, days, decision = CalendarBuilder().build(confirmations, through=through)
 identities = anchored_month_identities(confirmations, payload.get("month_anchors", []))
 counted_dates = counted_moadim_dates(confirmations, identities, payload.get("counting_rule"))
 confirmation_starts = {item.id: item.starts_on_evening for item in confirmations}
+advisory = supplied_advisory(payload)
 result = []
 for offset in range(payload["count"]):
     civil = lookup + timedelta(days=offset)
@@ -56,7 +90,11 @@ for offset in range(payload["count"]):
         and biblical["day"] is not None
         and biblical["month_id"] is None
     ):
-        ordinal = open_tail_ordinal(days, identities, confirmation_starts, civil, biblical["day"])
+        ordinal = advisory_tail_ordinal(
+            days, identities, confirmation_starts, civil, biblical["day"], advisory
+        )
+        if ordinal is None:
+            ordinal = open_tail_ordinal(days, identities, confirmation_starts, civil, biblical["day"])
         if ordinal is not None:
             biblical["month_ordinal"] = ordinal
             biblical["month_id"] = month_id_for_ordinal(ordinal)
