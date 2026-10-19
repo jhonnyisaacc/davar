@@ -61,6 +61,9 @@ export type DefinitionItem = {
   language: string;
   review_status?: "approved" | "imported" | "draft";
   license?: string;
+  sense?: string;
+  definition_kind?: string;
+  role?: "short" | "fuller" | "gloss";
 };
 
 export type LexiconResponse = {
@@ -80,6 +83,7 @@ export type LexiconResponse = {
   short_meaning?: string;
   full_definition?: string;
   definitions: DefinitionItem[];
+  study_definitions?: DefinitionItem[];
   root?: string;
   root_strong?: string;
   root_translit_en?: string;

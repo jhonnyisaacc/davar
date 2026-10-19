@@ -16,7 +16,10 @@ import {
 } from "../../../../shared/greekText";
 import { joinHebrewPrefixSlashes } from "../../../../shared/hebrewText";
 import { instanceSurface } from "../../../../shared/instanceSurface";
-import { mapLexiconDefinitions } from "../../../../shared/lexiconAssets";
+import {
+	mapLexiconDefinitions,
+	partitionMappedDefinitions,
+} from "../../../../shared/lexiconAssets";
 import {
 	besBookAssetPath,
 	besorahChapterAssetPath,
@@ -1582,28 +1585,32 @@ export const loadGreekLexiconEntry = async (
 	const usable = (definition?: GreekDefinition) =>
 		Boolean(definition?.short || definition?.fuller);
 	const selected = localized && usable(localized) ? localized : english;
-	const definitions: DefinitionItem[] = mapLexiconDefinitions(
+	const merged: DefinitionItem[] = mapLexiconDefinitions(
 		customAsset?.definitions,
 		language,
 	);
 	if (selected?.short) {
-		definitions.push({
+		merged.push({
 			language: selected === localized ? language : "en",
 			license: selected.license,
 			review_status: selected.review_status,
+			role: "short",
 			source: selected.source ?? "stepbible-tbesg",
 			text: cleanLexicalText(selected.short),
 		});
 	}
 	if (selected?.fuller && selected.fuller !== selected.short) {
-		definitions.push({
+		merged.push({
 			language: selected === localized ? language : "en",
 			license: selected.license,
 			review_status: selected.review_status,
+			role: "fuller",
 			source: selected.source ?? "stepbible-tbesg",
 			text: cleanLexicalText(selected.fuller),
 		});
 	}
+	const { primary: definitions, secondary: studyDefinitions } =
+		partitionMappedDefinitions(merged);
 	const inlineInstances = entry.instances ?? [];
 	const surface = instanceSurface({
 		instance_total: entry.occurrences_count,
@@ -1632,6 +1639,8 @@ export const loadGreekLexiconEntry = async (
 			: undefined,
 		source_language: "greek",
 		strong_number: entry.strong,
+		study_definitions:
+			studyDefinitions.length > 0 ? studyDefinitions : undefined,
 		translit_en: entry.translit_en,
 		translit_es: entry.translit_es,
 		translit_he: entry.translit_he,
