@@ -1,6 +1,8 @@
 import { instanceSurface } from "@davar/shared/instanceSurface";
 import {
   mapLexiconDefinitions,
+  mapPartitionedLexiconDefinitions,
+  partitionMappedDefinitions,
   type LexiconEntryAsset,
   type LexiconEntryShard,
   type LexiconInstancesAsset,
@@ -21,6 +23,9 @@ type StaticDictionaryDefinition = {
   source?: string;
   review_status?: "approved" | "imported" | "draft";
   license?: string;
+  sense?: string;
+  definition_kind?: string;
+  order?: number;
 };
 
 type StaticDictionaryEntry = {
@@ -101,22 +106,33 @@ const mapStaticDefinitions = (
 const toResponseFromAsset = (
   entry: LexiconEntryAsset,
   language: "en" | "es" | "he",
-): LexiconResponse => ({
-  strong_number: entry.strong_number,
-  hebrew: entry.hebrew,
-  translit_en: entry.translit_en,
-  translit_es: entry.translit_es,
-  definitions: mapLexiconDefinitions(entry.definitions, language),
-  root: entry.root,
-  root_strong: entry.root_strong,
-  root_translit_en: entry.root_translit_en,
-  root_translit_es: entry.root_translit_es,
-  root_definitions: mapLexiconDefinitions(entry.root_definitions, language),
-  occurrences_count: entry.occurrences_count,
-  instances: (entry.instances ?? []).map((instance) =>
-    typeof instance === "string" ? instance : instance.verse,
-  ),
-});
+): LexiconResponse => {
+  const { primary, secondary } = mapPartitionedLexiconDefinitions(
+    entry.definitions,
+    language,
+  );
+  const rootPartitioned = mapPartitionedLexiconDefinitions(
+    entry.root_definitions,
+    language,
+  );
+  return {
+    strong_number: entry.strong_number,
+    hebrew: entry.hebrew,
+    translit_en: entry.translit_en,
+    translit_es: entry.translit_es,
+    definitions: primary,
+    study_definitions: secondary.length > 0 ? secondary : undefined,
+    root: entry.root,
+    root_strong: entry.root_strong,
+    root_translit_en: entry.root_translit_en,
+    root_translit_es: entry.root_translit_es,
+    root_definitions: rootPartitioned.primary,
+    occurrences_count: entry.occurrences_count,
+    instances: (entry.instances ?? []).map((instance) =>
+      typeof instance === "string" ? instance : instance.verse,
+    ),
+  };
+};
 
 export const loadLexiconEntryAsset = async (
   strong: string,
@@ -196,6 +212,13 @@ const loadLexiconEntryFromFullDictionaries = async (
     : undefined;
 
   const surface = instanceSurface(customEntry, dictionaryEntry?.occurrences);
+  const { primary, secondary } = partitionMappedDefinitions([
+    ...mapStaticDefinitions(customEntry?.definitions, language),
+    ...mapStaticDefinitions(dictionaryEntry?.definitions, language),
+  ]);
+  const { primary: rootDefinitions } = partitionMappedDefinitions(
+    mapStaticDefinitions(rootEntry?.definitions, language),
+  );
 
   return {
     strong_number:
@@ -209,10 +232,8 @@ const loadLexiconEntryFromFullDictionaries = async (
       customEntry?.transliteration_es ??
       dictionaryEntry?.translit_es ??
       dictionaryEntry?.transliteration_es,
-    definitions: [
-      ...mapStaticDefinitions(customEntry?.definitions, language),
-      ...mapStaticDefinitions(dictionaryEntry?.definitions, language),
-    ],
+    definitions: primary,
+    study_definitions: secondary.length > 0 ? secondary : undefined,
     root: customEntry?.root ?? getRootLemma(rootEntry),
     root_strong: rootStrong,
     root_translit_en:
@@ -223,7 +244,7 @@ const loadLexiconEntryFromFullDictionaries = async (
       rootEntry && "translit_es" in rootEntry
         ? rootEntry.translit_es
         : rootEntry?.transliteration_es,
-    root_definitions: mapStaticDefinitions(rootEntry?.definitions, language),
+    root_definitions: rootDefinitions,
     occurrences_count: surface.total,
     instances: surface.instances,
   };

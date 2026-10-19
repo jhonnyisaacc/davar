@@ -347,6 +347,8 @@
     "appearsCount": "Aparece {count} veces",
     "appearsIn": "Aparece en",
     "showMore": "Mostrar {count} más",
+    "moreStudy": "Más",
+    "hideStudy": "Ocultar más",
     "properName": "Nombre propio",
     "definitionNotAvailable": "Definición no disponible",
     "copiedToClipboard": "Copiado al portapapeles"

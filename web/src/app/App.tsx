@@ -489,6 +489,10 @@ export default function App() {
 											wordAnalysisForCard?.definitions?.map(
 												(item) => item.text,
 											) ?? [];
+										const wordSecondaryMeanings =
+											wordAnalysisForCard?.study_definitions?.map(
+												(item) => item.text,
+											) ?? [];
 										const wordTransliteration =
 											getTransliterationForLanguage(wordForCard) ??
 											getAnalysisTransliterationForLanguage(
@@ -579,6 +583,7 @@ export default function App() {
 														showQumran={showQumran}
 														transliteration={wordTransliteration}
 														meanings={wordMeanings}
+														secondaryMeanings={wordSecondaryMeanings}
 														root={wordAnalysisForCard?.root}
 														rootTransliteration={
 															language === "en"
@@ -707,6 +712,10 @@ export default function App() {
 
 						const selectedWordMeanings =
 							selectedWordAnalysis?.definitions?.map((item) => item.text) ?? [];
+						const selectedWordSecondaryMeanings =
+							selectedWordAnalysis?.study_definitions?.map(
+								(item) => item.text,
+							) ?? [];
 						const selectedWordTransliteration =
 							getTransliterationForLanguage(selectedWord) ??
 							getAnalysisTransliterationForLanguage(selectedWordAnalysis);
@@ -743,6 +752,7 @@ export default function App() {
 								showQumran={showQumran}
 								transliteration={selectedWordTransliteration}
 								meanings={selectedWordMeanings}
+								secondaryMeanings={selectedWordSecondaryMeanings}
 								root={selectedWordAnalysis?.root}
 								rootTransliteration={
 									language === "en"

@@ -36,6 +36,8 @@ interface WordCardProps {
 	showQumran?: boolean;
 	transliteration?: string;
 	meanings: string[];
+	/** Secondary / study meanings (expandable). */
+	secondaryMeanings?: string[];
 	root?: string;
 	rootTransliteration?: string;
 	rootMeaning?: string;
@@ -98,6 +100,7 @@ export function WordCard({
 	showQumran = false,
 	transliteration,
 	meanings,
+	secondaryMeanings = [],
 	root,
 	rootTransliteration,
 	rootMeaning,
@@ -117,12 +120,14 @@ export function WordCard({
 	const [activeTab, setActiveTab] = useState<
 		"masoretic" | "qumran" | "instances"
 	>("masoretic");
+	const [showSecondaryMeanings, setShowSecondaryMeanings] = useState(false);
 	const isTransitioning = false;
 	const [displayedData, setDisplayedData] = useState({
 		word,
 		wordFromVerse,
 		transliteration,
 		meanings,
+		secondaryMeanings,
 		root,
 		rootTransliteration,
 		rootMeaning,
@@ -176,6 +181,17 @@ export function WordCard({
 				return { key: `meaning-${value}-${occurrence}`, value };
 			});
 	}, [displayedData.meanings]);
+
+	const secondaryMeaningItems = useMemo(() => {
+		const counts = new Map<string, number>();
+		return (displayedData.secondaryMeanings ?? [])
+			.filter((m) => m?.trim())
+			.map((value) => {
+				const occurrence = (counts.get(value) ?? 0) + 1;
+				counts.set(value, occurrence);
+				return { key: `secondary-meaning-${value}-${occurrence}`, value };
+			});
+	}, [displayedData.secondaryMeanings]);
 
 	const qumranMeaningItems = useMemo(() => {
 		const counts = new Map<string, number>();
@@ -302,6 +318,8 @@ export function WordCard({
 			displayedData.rootMeaning !== rootMeaning ||
 			displayedData.rootTransliteration !== rootTransliteration ||
 			displayedData.meanings.join("|") !== meanings.join("|") ||
+			(displayedData.secondaryMeanings ?? []).join("|") !==
+				(secondaryMeanings ?? []).join("|") ||
 			(displayedData.qumranMeanings ?? []).join("|") !==
 				(qumranMeanings ?? []).join("|") ||
 			displayedData.qumranWord !== qumranWord ||
@@ -319,11 +337,13 @@ export function WordCard({
 		if (!identityChanged && !enrichmentChanged) return undefined;
 
 		if (identityChanged) {
+			setShowSecondaryMeanings(false);
 			setDisplayedData({
 				word,
 				wordFromVerse,
 				transliteration,
 				meanings: isLoading ? [] : meanings,
+				secondaryMeanings: isLoading ? [] : secondaryMeanings,
 				root: isLoading ? undefined : root,
 				rootTransliteration: isLoading ? undefined : rootTransliteration,
 				rootMeaning: isLoading ? undefined : rootMeaning,
@@ -352,6 +372,7 @@ export function WordCard({
 			wordFromVerse,
 			transliteration,
 			meanings,
+			secondaryMeanings,
 			root,
 			rootTransliteration,
 			rootMeaning,
@@ -372,6 +393,7 @@ export function WordCard({
 		isLoading,
 		isQumranLoading,
 		meanings,
+		secondaryMeanings,
 		qumranMeanings,
 		prefixes,
 		root,
@@ -608,6 +630,40 @@ export function WordCard({
 											{formatMeaning(item.value).replace(/\//g, "")}
 										</div>
 									))}
+									{secondaryMeaningItems.length > 0 ? (
+										<div className="pt-2 space-y-2">
+											<button
+												type="button"
+												className="text-[11px] uppercase tracking-[0.15em] font-semibold"
+												style={{
+													fontFamily: "'Inter', sans-serif",
+													color: "var(--text-secondary)",
+												}}
+												aria-expanded={showSecondaryMeanings}
+												onClick={() =>
+													setShowSecondaryMeanings((open) => !open)
+												}
+											>
+												{showSecondaryMeanings
+													? t("wordCard.hideStudy")
+													: t("wordCard.moreStudy")}
+											</button>
+											{showSecondaryMeanings
+												? secondaryMeaningItems.map((item) => (
+														<div
+															key={item.key}
+															style={{
+																whiteSpace: "normal",
+																fontSize: "15px",
+																opacity: 0.85,
+															}}
+														>
+															{formatMeaning(item.value).replace(/\//g, "")}
+														</div>
+													))
+												: null}
+										</div>
+									) : null}
 								</div>
 							) : (
 								t("wordCard.noMeanings")
