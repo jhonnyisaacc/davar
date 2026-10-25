@@ -1,8 +1,8 @@
 import { instanceSurface } from "@davar/shared/instanceSurface";
 import {
   mapLexiconDefinitions,
-  mapPartitionedLexiconDefinitions,
-  partitionMappedDefinitions,
+  mapStructuredLexiconDefinitions,
+  structureMappedDefinitions,
   type LexiconEntryAsset,
   type LexiconEntryShard,
   type LexiconInstancesAsset,
@@ -107,11 +107,11 @@ const toResponseFromAsset = (
   entry: LexiconEntryAsset,
   language: "en" | "es" | "he",
 ): LexiconResponse => {
-  const { primary, secondary } = mapPartitionedLexiconDefinitions(
+  const structured = mapStructuredLexiconDefinitions(
     entry.definitions,
     language,
   );
-  const rootPartitioned = mapPartitionedLexiconDefinitions(
+  const rootStructured = mapStructuredLexiconDefinitions(
     entry.root_definitions,
     language,
   );
@@ -120,13 +120,18 @@ const toResponseFromAsset = (
     hebrew: entry.hebrew,
     translit_en: entry.translit_en,
     translit_es: entry.translit_es,
-    definitions: primary,
-    study_definitions: secondary.length > 0 ? secondary : undefined,
+    definitions: structured.gloss,
+    gloss: structured.gloss,
+    senses: structured.senses.length > 0 ? structured.senses : undefined,
+    fuller_definitions:
+      structured.fuller.length > 0 ? structured.fuller : undefined,
+    study_definitions:
+      structured.study.length > 0 ? structured.study : undefined,
     root: entry.root,
     root_strong: entry.root_strong,
     root_translit_en: entry.root_translit_en,
     root_translit_es: entry.root_translit_es,
-    root_definitions: rootPartitioned.primary,
+    root_definitions: rootStructured.gloss,
     occurrences_count: entry.occurrences_count,
     instances: (entry.instances ?? []).map((instance) =>
       typeof instance === "string" ? instance : instance.verse,
@@ -212,11 +217,11 @@ const loadLexiconEntryFromFullDictionaries = async (
     : undefined;
 
   const surface = instanceSurface(customEntry, dictionaryEntry?.occurrences);
-  const { primary, secondary } = partitionMappedDefinitions([
+  const structured = structureMappedDefinitions([
     ...mapStaticDefinitions(customEntry?.definitions, language),
     ...mapStaticDefinitions(dictionaryEntry?.definitions, language),
   ]);
-  const { primary: rootDefinitions } = partitionMappedDefinitions(
+  const rootStructured = structureMappedDefinitions(
     mapStaticDefinitions(rootEntry?.definitions, language),
   );
 
@@ -232,8 +237,13 @@ const loadLexiconEntryFromFullDictionaries = async (
       customEntry?.transliteration_es ??
       dictionaryEntry?.translit_es ??
       dictionaryEntry?.transliteration_es,
-    definitions: primary,
-    study_definitions: secondary.length > 0 ? secondary : undefined,
+    definitions: structured.gloss,
+    gloss: structured.gloss,
+    senses: structured.senses.length > 0 ? structured.senses : undefined,
+    fuller_definitions:
+      structured.fuller.length > 0 ? structured.fuller : undefined,
+    study_definitions:
+      structured.study.length > 0 ? structured.study : undefined,
     root: customEntry?.root ?? getRootLemma(rootEntry),
     root_strong: rootStrong,
     root_translit_en:
@@ -244,7 +254,7 @@ const loadLexiconEntryFromFullDictionaries = async (
       rootEntry && "translit_es" in rootEntry
         ? rootEntry.translit_es
         : rootEntry?.transliteration_es,
-    root_definitions: rootDefinitions,
+    root_definitions: rootStructured.gloss,
     occurrences_count: surface.total,
     instances: surface.instances,
   };

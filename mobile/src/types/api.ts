@@ -83,6 +83,9 @@ export type LexiconResponse = {
   short_meaning?: string;
   full_definition?: string;
   definitions: DefinitionItem[];
+  gloss?: DefinitionItem[];
+  senses?: DefinitionItem[];
+  fuller_definitions?: DefinitionItem[];
   study_definitions?: DefinitionItem[];
   root?: string;
   root_strong?: string;

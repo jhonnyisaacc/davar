@@ -1,7 +1,12 @@
 import {
+	LEXICON_MEANINGS_SCHEMA,
 	partitionDefinitionMeanings,
+	structureDefinitionMeanings,
 	stripDefinitionControls,
+	type StructuredDefinitionMeanings,
 } from "./definitionMeanings";
+
+export { LEXICON_MEANINGS_SCHEMA };
 import { greekStrongFamily } from "./greekBesorah";
 import { instanceSurface } from "./instanceSurface";
 import {
@@ -29,7 +34,10 @@ export type LexiconEntryAsset = {
 	hebrew?: string;
 	translit_en?: string;
 	translit_es?: string;
+	/** Clients structure these multilingual rows into gloss/senses/fuller/study. */
 	definitions: LexiconDefinitionAsset[];
+	/** Schema version for structured meaning consumers (gloss/senses/fuller/study). */
+	meanings_schema?: typeof LEXICON_MEANINGS_SCHEMA;
 	root?: string;
 	root_strong?: string;
 	root_definitions?: LexiconDefinitionAsset[];
@@ -214,6 +222,13 @@ export const mapPartitionedLexiconDefinitions = (
 	};
 };
 
+/** Map lexicon assets into gloss / senses / fuller / study. */
+export const mapStructuredLexiconDefinitions = (
+	definitions: RawDefinition[] | undefined,
+	language: "en" | "es" | "he",
+): StructuredDefinitionMeanings<DefinitionItem> =>
+	structureDefinitionMeanings(mapLexiconDefinitions(definitions, language));
+
 /** Partition already-mapped definition items (e.g. after appending Greek short/fuller). */
 export const partitionMappedDefinitions = (
 	definitions: DefinitionItem[],
@@ -224,6 +239,12 @@ export const partitionMappedDefinitions = (
 		secondary: partitioned.secondary,
 	};
 };
+
+/** Structure already-mapped definition items into gloss / senses / fuller / study. */
+export const structureMappedDefinitions = (
+	definitions: DefinitionItem[],
+): StructuredDefinitionMeanings<DefinitionItem> =>
+	structureDefinitionMeanings(definitions);
 
 export const buildLexiconEntryAsset = (
 	strong: string,
@@ -290,6 +311,7 @@ export const buildLexiconEntryAsset = (
 		translit_en,
 		translit_es,
 		definitions,
+		meanings_schema: LEXICON_MEANINGS_SCHEMA,
 		root:
 			customEntry?.root ??
 			(isRawWordEntry(rootEntry) ? rootEntry.lemma : undefined) ??

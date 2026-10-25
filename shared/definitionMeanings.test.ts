@@ -2,6 +2,7 @@ import { describe, expect, test } from "bun:test";
 import {
 	isDetailDefinition,
 	partitionDefinitionMeanings,
+	structureDefinitionMeanings,
 	stripDefinitionControls,
 } from "./definitionMeanings";
 
@@ -32,7 +33,11 @@ describe("isDetailDefinition", () => {
 			}),
 		).toBe(true);
 		expect(
-			isDetailDefinition({ text: "word", source: "stepbible-tbesg", role: "fuller" }),
+			isDetailDefinition({
+				text: "word",
+				source: "stepbible-tbesg",
+				role: "fuller",
+			}),
 		).toBe(true);
 		expect(
 			isDetailDefinition({
@@ -44,9 +49,9 @@ describe("isDetailDefinition", () => {
 	});
 });
 
-describe("partitionDefinitionMeanings", () => {
-	test("H430: custom wins; BDB fragments move to secondary", () => {
-		const { primary, secondary } = partitionDefinitionMeanings([
+describe("structureDefinitionMeanings", () => {
+	test("H430: custom gloss; BDB as senses; Eric as study", () => {
+		const structured = structureDefinitionMeanings([
 			{
 				text: "MIGHTY ONE (majestic plural)",
 				source: "custom",
@@ -62,28 +67,38 @@ describe("partitionDefinitionMeanings", () => {
 			},
 		]);
 
-		expect(primary.map((item) => item.text)).toEqual([
+		expect(structured.gloss.map((item) => item.text)).toEqual([
 			"MIGHTY ONE (majestic plural)",
 			"Creator of the world",
 		]);
-		expect(secondary.map((item) => item.text)).toContain("rulers");
-		expect(secondary.map((item) => item.text)).toContain("judges");
-		expect(secondary.map((item) => item.text)).toContain("Dios");
+		expect(structured.senses.map((item) => item.text)).toEqual([
+			"rulers",
+			"judges",
+			"God",
+		]);
+		expect(structured.study.map((item) => item.source)).toContain(
+			"tcysite-eric",
+		);
+		expect(structured.fuller).toEqual([]);
+		expect(structured.primary).toEqual(structured.gloss);
 	});
 
-	test("Hebrew without custom keeps only the first BDB fragment primary", () => {
-		const { primary, secondary } = partitionDefinitionMeanings([
+	test("Hebrew without custom: first BDB is gloss; rest are senses", () => {
+		const structured = structureDefinitionMeanings([
 			{ text: "rulers", source: "bdb", sense: "1a" },
 			{ text: "judges", source: "bdb", sense: "1a" },
 			{ text: "gods", source: "bdb", sense: "1d" },
 		]);
 
-		expect(primary.map((item) => item.text)).toEqual(["rulers"]);
-		expect(secondary.map((item) => item.text)).toEqual(["judges", "gods"]);
+		expect(structured.gloss.map((item) => item.text)).toEqual(["rulers"]);
+		expect(structured.senses.map((item) => item.text)).toEqual([
+			"judges",
+			"gods",
+		]);
 	});
 
-	test("G3056 Spanish: demotes detail and fuller; prefers Eric then strong then TBESG short", () => {
-		const { primary, secondary } = partitionDefinitionMeanings([
+	test("G3056 Spanish: gloss order; detail in study; fuller separate", () => {
+		const structured = structureDefinitionMeanings([
 			{
 				text: "λüγος dump…",
 				source: "tcysite-greek-detail",
@@ -113,22 +128,24 @@ describe("partitionDefinitionMeanings", () => {
 			},
 		]);
 
-		expect(primary.map((item) => item.source)).toEqual([
+		expect(structured.gloss.map((item) => item.source)).toEqual([
 			"tcysite-eric",
 			"tcysite-greek-strong",
 			"tcysite-greek-master",
 			"stepbible-tbesg",
 		]);
-		expect(primary[0]?.text).toBe("palabra, corporeidad de Dios");
-		expect(secondary.map((item) => item.role)).toContain("fuller");
+		expect(structured.fuller).toHaveLength(1);
+		expect(structured.fuller[0]?.role).toBe("fuller");
 		expect(
-			secondary.some((item) => item.source === "tcysite-greek-detail"),
+			structured.study.some((item) => item.source === "tcysite-greek-detail"),
 		).toBe(true);
-		expect(primary.some((item) => item.role === "fuller")).toBe(false);
+		expect(structured.gloss.some((item) => item.role === "fuller")).toBe(
+			false,
+		);
 	});
 
-	test("G2424G: short stays primary when fuller is present", () => {
-		const { primary, secondary } = partitionDefinitionMeanings([
+	test("G2424G: short gloss; fuller bucket", () => {
+		const structured = structureDefinitionMeanings([
 			{ text: "Jesus", source: "stepbible-tbesg", role: "short" },
 			{
 				text: "Ἰησοῦς … long essay",
@@ -137,13 +154,13 @@ describe("partitionDefinitionMeanings", () => {
 			},
 		]);
 
-		expect(primary.map((item) => item.text)).toEqual(["Jesus"]);
-		expect(secondary).toHaveLength(1);
-		expect(secondary[0]?.role).toBe("fuller");
+		expect(structured.gloss.map((item) => item.text)).toEqual(["Jesus"]);
+		expect(structured.fuller).toHaveLength(1);
+		expect(structured.secondary).toHaveLength(1);
 	});
 
-	test("fallback promotes least-bad secondary when primary would be empty", () => {
-		const { primary, secondary } = partitionDefinitionMeanings([
+	test("fallback promotes least-bad when gloss would be empty", () => {
+		const structured = structureDefinitionMeanings([
 			{
 				text: "only detail left",
 				source: "tcysite-greek-detail",
@@ -151,8 +168,27 @@ describe("partitionDefinitionMeanings", () => {
 			},
 		]);
 
-		expect(primary.map((item) => item.text)).toEqual(["only detail left"]);
-		expect(secondary).toEqual([]);
+		expect(structured.gloss.map((item) => item.text)).toEqual([
+			"only detail left",
+		]);
+		expect(structured.study).toEqual([]);
+	});
+});
+
+describe("partitionDefinitionMeanings", () => {
+	test("primary/secondary mirror structured gloss/secondary", () => {
+		const input = [
+			{ text: "Jesus", source: "stepbible-tbesg", role: "short" as const },
+			{
+				text: "long",
+				source: "stepbible-tbesg",
+				role: "fuller" as const,
+			},
+		];
+		const partitioned = partitionDefinitionMeanings(input);
+		const structured = structureDefinitionMeanings(input);
+		expect(partitioned.primary).toEqual(structured.primary);
+		expect(partitioned.secondary).toEqual(structured.secondary);
 	});
 
 	test("strips BiDi before partitioning", () => {

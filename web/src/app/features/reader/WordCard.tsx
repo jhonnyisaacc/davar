@@ -36,7 +36,13 @@ interface WordCardProps {
 	showQumran?: boolean;
 	transliteration?: string;
 	meanings: string[];
-	/** Secondary / study meanings (expandable). */
+	/** BDB sense fragments (chips). */
+	senseMeanings?: string[];
+	/** Fuller lexicon essays (under More). */
+	fullerMeanings?: string[];
+	/** Study / detail commentary (under More). */
+	studyMeanings?: string[];
+	/** @deprecated Prefer sense/fuller/study; kept for older callers. */
 	secondaryMeanings?: string[];
 	root?: string;
 	rootTransliteration?: string;
@@ -100,6 +106,9 @@ export function WordCard({
 	showQumran = false,
 	transliteration,
 	meanings,
+	senseMeanings = [],
+	fullerMeanings = [],
+	studyMeanings = [],
 	secondaryMeanings = [],
 	root,
 	rootTransliteration,
@@ -122,12 +131,31 @@ export function WordCard({
 	>("masoretic");
 	const [showSecondaryMeanings, setShowSecondaryMeanings] = useState(false);
 	const isTransitioning = false;
+	const resolvedSenseMeanings =
+		senseMeanings.length > 0 ? senseMeanings : [];
+	const resolvedFullerMeanings =
+		fullerMeanings.length > 0 ? fullerMeanings : [];
+	const resolvedStudyMeanings =
+		studyMeanings.length > 0
+			? studyMeanings
+			: secondaryMeanings.length > 0 &&
+					senseMeanings.length === 0 &&
+					fullerMeanings.length === 0
+				? secondaryMeanings
+				: [];
+	const hasExpandableMeanings =
+		resolvedSenseMeanings.length > 0 ||
+		resolvedFullerMeanings.length > 0 ||
+		resolvedStudyMeanings.length > 0;
+
 	const [displayedData, setDisplayedData] = useState({
 		word,
 		wordFromVerse,
 		transliteration,
 		meanings,
-		secondaryMeanings,
+		senseMeanings: resolvedSenseMeanings,
+		fullerMeanings: resolvedFullerMeanings,
+		studyMeanings: resolvedStudyMeanings,
 		root,
 		rootTransliteration,
 		rootMeaning,
@@ -182,16 +210,29 @@ export function WordCard({
 			});
 	}, [displayedData.meanings]);
 
-	const secondaryMeaningItems = useMemo(() => {
+	const toMeaningItems = (values: string[] | undefined, prefix: string) => {
 		const counts = new Map<string, number>();
-		return (displayedData.secondaryMeanings ?? [])
+		return (values ?? [])
 			.filter((m) => m?.trim())
 			.map((value) => {
 				const occurrence = (counts.get(value) ?? 0) + 1;
 				counts.set(value, occurrence);
-				return { key: `secondary-meaning-${value}-${occurrence}`, value };
+				return { key: `${prefix}-${value}-${occurrence}`, value };
 			});
-	}, [displayedData.secondaryMeanings]);
+	};
+
+	const senseMeaningItems = useMemo(
+		() => toMeaningItems(displayedData.senseMeanings, "sense"),
+		[displayedData.senseMeanings],
+	);
+	const fullerMeaningItems = useMemo(
+		() => toMeaningItems(displayedData.fullerMeanings, "fuller"),
+		[displayedData.fullerMeanings],
+	);
+	const studyMeaningItems = useMemo(
+		() => toMeaningItems(displayedData.studyMeanings, "study"),
+		[displayedData.studyMeanings],
+	);
 
 	const qumranMeaningItems = useMemo(() => {
 		const counts = new Map<string, number>();
@@ -318,8 +359,12 @@ export function WordCard({
 			displayedData.rootMeaning !== rootMeaning ||
 			displayedData.rootTransliteration !== rootTransliteration ||
 			displayedData.meanings.join("|") !== meanings.join("|") ||
-			(displayedData.secondaryMeanings ?? []).join("|") !==
-				(secondaryMeanings ?? []).join("|") ||
+			(displayedData.senseMeanings ?? []).join("|") !==
+				resolvedSenseMeanings.join("|") ||
+			(displayedData.fullerMeanings ?? []).join("|") !==
+				resolvedFullerMeanings.join("|") ||
+			(displayedData.studyMeanings ?? []).join("|") !==
+				resolvedStudyMeanings.join("|") ||
 			(displayedData.qumranMeanings ?? []).join("|") !==
 				(qumranMeanings ?? []).join("|") ||
 			displayedData.qumranWord !== qumranWord ||
@@ -343,7 +388,9 @@ export function WordCard({
 				wordFromVerse,
 				transliteration,
 				meanings: isLoading ? [] : meanings,
-				secondaryMeanings: isLoading ? [] : secondaryMeanings,
+				senseMeanings: isLoading ? [] : resolvedSenseMeanings,
+				fullerMeanings: isLoading ? [] : resolvedFullerMeanings,
+				studyMeanings: isLoading ? [] : resolvedStudyMeanings,
 				root: isLoading ? undefined : root,
 				rootTransliteration: isLoading ? undefined : rootTransliteration,
 				rootMeaning: isLoading ? undefined : rootMeaning,
@@ -372,7 +419,9 @@ export function WordCard({
 			wordFromVerse,
 			transliteration,
 			meanings,
-			secondaryMeanings,
+			senseMeanings: resolvedSenseMeanings,
+			fullerMeanings: resolvedFullerMeanings,
+			studyMeanings: resolvedStudyMeanings,
 			root,
 			rootTransliteration,
 			rootMeaning,
@@ -393,7 +442,9 @@ export function WordCard({
 		isLoading,
 		isQumranLoading,
 		meanings,
-		secondaryMeanings,
+		resolvedSenseMeanings,
+		resolvedFullerMeanings,
+		resolvedStudyMeanings,
 		qumranMeanings,
 		prefixes,
 		root,
@@ -630,7 +681,40 @@ export function WordCard({
 											{formatMeaning(item.value).replace(/\//g, "")}
 										</div>
 									))}
-									{secondaryMeaningItems.length > 0 ? (
+									{senseMeaningItems.length > 0 ? (
+										<div className="pt-3 space-y-2">
+											<div
+												className="text-[11px] uppercase tracking-[0.15em] font-semibold"
+												style={{
+													fontFamily: "'Inter', sans-serif",
+													color: "var(--text-secondary)",
+												}}
+											>
+												{t("wordCard.senses")}
+											</div>
+											<div className="flex flex-wrap justify-center gap-2">
+												{senseMeaningItems.map((item) => (
+													<span
+														key={item.key}
+														style={{
+															fontFamily: "'Jost', sans-serif",
+															fontSize: "14px",
+															lineHeight: 1.4,
+															padding: "4px 10px",
+															borderRadius: "999px",
+															background: "var(--surface-muted, rgba(0,0,0,0.04))",
+															color: "var(--text-secondary)",
+														}}
+													>
+														{formatMeaning(item.value).replace(/\//g, "")}
+													</span>
+												))}
+											</div>
+										</div>
+									) : null}
+									{hasExpandableMeanings &&
+									(fullerMeaningItems.length > 0 ||
+										studyMeaningItems.length > 0) ? (
 										<div className="pt-2 space-y-2">
 											<button
 												type="button"
@@ -648,20 +732,68 @@ export function WordCard({
 													? t("wordCard.hideStudy")
 													: t("wordCard.moreStudy")}
 											</button>
-											{showSecondaryMeanings
-												? secondaryMeaningItems.map((item) => (
-														<div
-															key={item.key}
-															style={{
-																whiteSpace: "normal",
-																fontSize: "15px",
-																opacity: 0.85,
-															}}
-														>
-															{formatMeaning(item.value).replace(/\//g, "")}
+											{showSecondaryMeanings ? (
+												<>
+													{fullerMeaningItems.length > 0 ? (
+														<div className="space-y-2 pt-1">
+															<div
+																className="text-[11px] uppercase tracking-[0.15em] font-semibold"
+																style={{
+																	fontFamily: "'Inter', sans-serif",
+																	color: "var(--text-secondary)",
+																}}
+															>
+																{t("wordCard.fullerMeaning")}
+															</div>
+															{fullerMeaningItems.map((item) => (
+																<div
+																	key={item.key}
+																	style={{
+																		whiteSpace: "pre-wrap",
+																		fontSize: "15px",
+																		opacity: 0.85,
+																		textAlign: "start",
+																	}}
+																>
+																	{formatMeaning(item.value).replace(
+																		/\//g,
+																		"",
+																	)}
+																</div>
+															))}
 														</div>
-													))
-												: null}
+													) : null}
+													{studyMeaningItems.length > 0 ? (
+														<div className="space-y-2 pt-1">
+															<div
+																className="text-[11px] uppercase tracking-[0.15em] font-semibold"
+																style={{
+																	fontFamily: "'Inter', sans-serif",
+																	color: "var(--text-secondary)",
+																}}
+															>
+																{t("wordCard.studyNotes")}
+															</div>
+															{studyMeaningItems.map((item) => (
+																<div
+																	key={item.key}
+																	style={{
+																		whiteSpace: "pre-wrap",
+																		fontSize: "15px",
+																		opacity: 0.85,
+																		textAlign: "start",
+																	}}
+																>
+																	{formatMeaning(item.value).replace(
+																		/\//g,
+																		"",
+																	)}
+																</div>
+															))}
+														</div>
+													) : null}
+												</>
+											) : null}
 										</div>
 									) : null}
 								</div>
