@@ -85,7 +85,11 @@ besorah:
 
 greek-source:
   - scripts/greek/**
+  - scripts/dict/definition_hygiene.py
+  - scripts/dict/import_tcysite.py
+  - scripts/dict/validator.py
   - tests/test_greek_*.py
+  - tests/test_definition_hygiene.py
   - tests/fixtures/greek/**
   - docs/greek-besorah-source-licenses.md
   - scripts/ci/**
