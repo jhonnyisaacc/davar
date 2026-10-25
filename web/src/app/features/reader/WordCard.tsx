@@ -88,6 +88,22 @@ const loadPrefixesData = async (): Promise<Record<string, PrefixEntry>> => {
 	return prefixesPromise;
 };
 
+const EMPTY_MEANINGS: string[] = [];
+
+const toMeaningItems = (
+	values: string[] | undefined,
+	prefix: string,
+): Array<{ key: string; value: string }> => {
+	const counts = new Map<string, number>();
+	return (values ?? [])
+		.filter((m) => m?.trim())
+		.map((value) => {
+			const occurrence = (counts.get(value) ?? 0) + 1;
+			counts.set(value, occurrence);
+			return { key: `${prefix}-${value}-${occurrence}`, value };
+		});
+};
+
 export function WordCard({
 	word,
 	sourceLanguage = "hebrew",
@@ -132,9 +148,9 @@ export function WordCard({
 	const [showSecondaryMeanings, setShowSecondaryMeanings] = useState(false);
 	const isTransitioning = false;
 	const resolvedSenseMeanings =
-		senseMeanings.length > 0 ? senseMeanings : [];
+		senseMeanings.length > 0 ? senseMeanings : EMPTY_MEANINGS;
 	const resolvedFullerMeanings =
-		fullerMeanings.length > 0 ? fullerMeanings : [];
+		fullerMeanings.length > 0 ? fullerMeanings : EMPTY_MEANINGS;
 	const resolvedStudyMeanings =
 		studyMeanings.length > 0
 			? studyMeanings
@@ -142,7 +158,7 @@ export function WordCard({
 					senseMeanings.length === 0 &&
 					fullerMeanings.length === 0
 				? secondaryMeanings
-				: [];
+				: EMPTY_MEANINGS;
 	const hasExpandableMeanings =
 		resolvedSenseMeanings.length > 0 ||
 		resolvedFullerMeanings.length > 0 ||
@@ -209,17 +225,6 @@ export function WordCard({
 				return { key: `meaning-${value}-${occurrence}`, value };
 			});
 	}, [displayedData.meanings]);
-
-	const toMeaningItems = (values: string[] | undefined, prefix: string) => {
-		const counts = new Map<string, number>();
-		return (values ?? [])
-			.filter((m) => m?.trim())
-			.map((value) => {
-				const occurrence = (counts.get(value) ?? 0) + 1;
-				counts.set(value, occurrence);
-				return { key: `${prefix}-${value}-${occurrence}`, value };
-			});
-	};
 
 	const senseMeaningItems = useMemo(
 		() => toMeaningItems(displayedData.senseMeanings, "sense"),
