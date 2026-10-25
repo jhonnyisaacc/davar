@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import re
 
+from scripts.dict.definition_hygiene import strip_definition_controls
+
 _SURFACE_MARKS = re.compile(r"[¶§]")
 _L_REF = re.compile(r"\{L:([^<{]+)(?:<[^>]*>)?\}(?:\[[a-z]\])?", re.I)
 _BRACE_REF = re.compile(r"\{[DNS]:[^}]+\}")
@@ -20,11 +22,11 @@ def clean_greek_surface_text(value: str) -> str:
 
 
 def clean_lexical_text(value: str) -> str:
-    """Remove Louw-Nida/SDBG refs and Abbott-Smith section underscores."""
+    """Remove Louw-Nida/SDBG refs, Abbott-Smith underscores, and BiDi controls."""
     text = _L_REF.sub(r"\1", value)
     text = _BRACE_REF.sub("", text)
     text = _SDBG.sub("", text)
     text = _UNDERSCORE_HEADING.sub("", text)
     text = _BARE_UNDERSCORES.sub("", text)
     lines = [_SPACE.sub(" ", line).strip() for line in text.splitlines()]
-    return "\n".join(line for line in lines if line)
+    return strip_definition_controls("\n".join(line for line in lines if line))

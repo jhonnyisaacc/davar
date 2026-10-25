@@ -173,13 +173,16 @@ def classify_term(value: Any) -> str:
 
 
 def clean_html(value: Any) -> str:
+    from .definition_hygiene import strip_definition_controls
+
     text = str(value or "")
     text = re.sub(r"<p\s*/?>", "\n\n", text, flags=re.IGNORECASE)
     text = re.sub(r"<br\s*/?>", "\n", text, flags=re.IGNORECASE)
     text = re.sub(r"<a\b[^>]*>(.*?)</a>", r"\1", text, flags=re.IGNORECASE | re.DOTALL)
     text = re.sub(r"<[^>]+>", "", text)
     text = html.unescape(text).replace("\xa0", " ")
-    return re.sub(r"[ \t]+", " ", text).strip()
+    text = re.sub(r"[ \t]+", " ", text).strip()
+    return strip_definition_controls(text)
 
 
 def strong_core(value: str) -> tuple[int, str] | None:

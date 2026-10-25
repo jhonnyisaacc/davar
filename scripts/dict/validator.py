@@ -613,6 +613,35 @@ def main():
     print(f"   Files missing occurrences: {missing_fields['missing_occurrences']}")
     print(f"   Files missing sources: {missing_fields['missing_sources']}")
     print(f"   Files without definitions: {missing_defs['total']}")
+
+    print("\n🧹 Definition hygiene (custom_definitions)...")
+    from .definition_hygiene import audit_custom_definitions
+
+    custom_path = config.DATA_DIR / "dict" / "lexicon" / "custom_definitions.json"
+    hygiene = {
+        "entries_checked": 0,
+        "control_char_hits": 0,
+        "long_primary_hits": 0,
+        "detail_as_short_hits": 0,
+        "sample_issues": [],
+    }
+    if custom_path.exists():
+        try:
+            custom_data = load_json(custom_path)
+            hygiene = audit_custom_definitions(
+                custom_data if isinstance(custom_data, dict) else {},
+                sample_limit=20,
+            )
+        except Exception as exc:  # pragma: no cover - defensive report path
+            print(f"   ⚠️  Could not audit custom definitions: {exc}")
+    print(f"   Entries checked: {hygiene['entries_checked']}")
+    print(f"   Control/BiDi hits: {hygiene['control_char_hits']}")
+    print(f"   Long primary gloss hits: {hygiene['long_primary_hits']}")
+    print(f"   Detail-as-short hits: {hygiene['detail_as_short_hits']}")
+    if hygiene["sample_issues"]:
+        print("   Sample issues:")
+        for issue in hygiene["sample_issues"][:8]:
+            print(f"      - {issue}")
     
     # Show samples of issues
     if incomplete_senses['count'] > 0:
