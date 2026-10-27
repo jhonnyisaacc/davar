@@ -1,8 +1,8 @@
 import type { ScriptureSourceLanguage } from "../../../../shared/greekBesorah";
 import { instanceSurface } from "../../../../shared/instanceSurface";
 import {
-	mapPartitionedLexiconDefinitions,
-	partitionMappedDefinitions,
+	mapStructuredLexiconDefinitions,
+	structureMappedDefinitions,
 	type LexiconEntryAsset,
 	type LexiconEntryShard,
 	type LexiconInstancesAsset,
@@ -41,8 +41,14 @@ export interface WordAnalysis {
 	lemma_translit_he?: string;
 	short_meaning?: string;
 	full_definition?: string;
+	/** Primary short glosses (structured schema v2). */
 	definitions: DefinitionItem[];
-	/** Secondary / study meanings (detail, fuller, extra BDB senses). */
+	gloss?: DefinitionItem[];
+	/** BDB sense fragments (chips / expandable). */
+	senses?: DefinitionItem[];
+	/** TBESG/UBS fuller essays. */
+	fuller_definitions?: DefinitionItem[];
+	/** Study / detail commentary (TCY detail, Eric notes, etc.). */
 	study_definitions?: DefinitionItem[];
 	root?: string;
 	root_strong?: string;
@@ -290,8 +296,7 @@ const toWordAnalysis = (
 		mapDefinitions(customEntry?.definitions, language),
 		mapDefinitions(dictionaryEntry?.definitions, language),
 	);
-	const { primary: definitions, secondary: studyDefinitions } =
-		partitionMappedDefinitions(merged);
+	const structured = structureMappedDefinitions(merged);
 
 	const rootStrong =
 		customEntry?.root_strong ??
@@ -303,7 +308,7 @@ const toWordAnalysis = (
 	const rootMerged = mergeUniqueDefinitions(
 		mapDefinitions(rootEntry?.definitions, language),
 	);
-	const { primary: rootDefinitions } = partitionMappedDefinitions(rootMerged);
+	const rootStructured = structureMappedDefinitions(rootMerged);
 
 	const surface = instanceSurface(customEntry, dictionaryEntry?.occurrences);
 	const instances = surface.instances;
@@ -314,15 +319,20 @@ const toWordAnalysis = (
 		hebrew,
 		translit_en,
 		translit_es,
-		definitions,
+		definitions: structured.gloss,
+		gloss: structured.gloss,
+		senses: structured.senses.length > 0 ? structured.senses : undefined,
+		fuller_definitions:
+			structured.fuller.length > 0 ? structured.fuller : undefined,
 		study_definitions:
-			studyDefinitions.length > 0 ? studyDefinitions : undefined,
+			structured.study.length > 0 ? structured.study : undefined,
 		root:
 			customEntry?.root ??
 			(isRawWordEntry(rootEntry) ? rootEntry.lemma : undefined) ??
 			(isRawCustomEntry(rootEntry) ? rootEntry.hebrew : undefined),
 		root_strong: rootStrong,
-		root_definitions: rootDefinitions.length > 0 ? rootDefinitions : undefined,
+		root_definitions:
+			rootStructured.gloss.length > 0 ? rootStructured.gloss : undefined,
 		root_translit_en: isRawWordEntry(rootEntry)
 			? rootEntry.translit_en
 			: rootEntry?.transliteration_en,
@@ -343,12 +353,12 @@ const toWordAnalysisFromAsset = (
 	entry: LexiconEntryAsset,
 	language: "en" | "es",
 ): WordAnalysis => {
-	const { primary, secondary } = mapPartitionedLexiconDefinitions(
+	const structured = mapStructuredLexiconDefinitions(
 		entry.definitions,
 		language,
 	);
-	const rootPartitioned = entry.root_definitions
-		? mapPartitionedLexiconDefinitions(entry.root_definitions, language)
+	const rootStructured = entry.root_definitions
+		? mapStructuredLexiconDefinitions(entry.root_definitions, language)
 		: null;
 
 	return {
@@ -356,12 +366,17 @@ const toWordAnalysisFromAsset = (
 		hebrew: entry.hebrew,
 		translit_en: entry.translit_en,
 		translit_es: entry.translit_es,
-		definitions: primary,
-		study_definitions: secondary.length > 0 ? secondary : undefined,
+		definitions: structured.gloss,
+		gloss: structured.gloss,
+		senses: structured.senses.length > 0 ? structured.senses : undefined,
+		fuller_definitions:
+			structured.fuller.length > 0 ? structured.fuller : undefined,
+		study_definitions:
+			structured.study.length > 0 ? structured.study : undefined,
 		root: entry.root,
 		root_strong: entry.root_strong,
-		root_definitions: rootPartitioned?.primary.length
-			? rootPartitioned.primary
+		root_definitions: rootStructured?.gloss.length
+			? rootStructured.gloss
 			: undefined,
 		root_translit_en: entry.root_translit_en,
 		root_translit_es: entry.root_translit_es,

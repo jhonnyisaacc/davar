@@ -489,7 +489,15 @@ export default function App() {
 											wordAnalysisForCard?.definitions?.map(
 												(item) => item.text,
 											) ?? [];
-										const wordSecondaryMeanings =
+										const wordSenseMeanings =
+											wordAnalysisForCard?.senses?.map(
+												(item) => item.text,
+											) ?? [];
+										const wordFullerMeanings =
+											wordAnalysisForCard?.fuller_definitions?.map(
+												(item) => item.text,
+											) ?? [];
+										const wordStudyMeanings =
 											wordAnalysisForCard?.study_definitions?.map(
 												(item) => item.text,
 											) ?? [];
@@ -583,7 +591,9 @@ export default function App() {
 														showQumran={showQumran}
 														transliteration={wordTransliteration}
 														meanings={wordMeanings}
-														secondaryMeanings={wordSecondaryMeanings}
+														senseMeanings={wordSenseMeanings}
+														fullerMeanings={wordFullerMeanings}
+														studyMeanings={wordStudyMeanings}
 														root={wordAnalysisForCard?.root}
 														rootTransliteration={
 															language === "en"
@@ -712,7 +722,13 @@ export default function App() {
 
 						const selectedWordMeanings =
 							selectedWordAnalysis?.definitions?.map((item) => item.text) ?? [];
-						const selectedWordSecondaryMeanings =
+						const selectedWordSenseMeanings =
+							selectedWordAnalysis?.senses?.map((item) => item.text) ?? [];
+						const selectedWordFullerMeanings =
+							selectedWordAnalysis?.fuller_definitions?.map(
+								(item) => item.text,
+							) ?? [];
+						const selectedWordStudyMeanings =
 							selectedWordAnalysis?.study_definitions?.map(
 								(item) => item.text,
 							) ?? [];
@@ -752,7 +768,9 @@ export default function App() {
 								showQumran={showQumran}
 								transliteration={selectedWordTransliteration}
 								meanings={selectedWordMeanings}
-								secondaryMeanings={selectedWordSecondaryMeanings}
+								senseMeanings={selectedWordSenseMeanings}
+								fullerMeanings={selectedWordFullerMeanings}
+								studyMeanings={selectedWordStudyMeanings}
 								root={selectedWordAnalysis?.root}
 								rootTransliteration={
 									language === "en"

@@ -7,7 +7,7 @@ import {
   greekStrongFamily,
 } from "@davar/shared/greekBesorah";
 import { cleanLexicalText } from "@davar/shared/greekText";
-import { partitionMappedDefinitions } from "@davar/shared/lexiconAssets";
+import { structureMappedDefinitions } from "@davar/shared/lexiconAssets";
 import React, {
   useCallback,
   useEffect,
@@ -290,8 +290,7 @@ const toGreekLexiconResponse = (
       text: cleanLexicalText(selected.fuller),
     });
   }
-  const { primary: definitions, secondary: studyDefinitions } =
-    partitionMappedDefinitions(merged);
+  const structured = structureMappedDefinitions(merged);
   const surface = instanceSurface({
     instance_total: entry.occurrences_count,
     instances: entry.instances?.map((row) => ({
@@ -301,10 +300,13 @@ const toGreekLexiconResponse = (
     })),
   });
   return {
-    definitions,
+    definitions: structured.gloss,
     full_definition: selected?.fuller
       ? cleanLexicalText(selected.fuller)
       : undefined,
+    fuller_definitions:
+      structured.fuller.length > 0 ? structured.fuller : undefined,
+    gloss: structured.gloss,
     greek: entry.lemma,
     instances: surface.instances,
     lemma: entry.lemma,
@@ -312,13 +314,14 @@ const toGreekLexiconResponse = (
     lemma_translit_es: entry.translit_es,
     lemma_translit_he: entry.translit_he,
     occurrences_count: surface.total,
+    senses: structured.senses.length > 0 ? structured.senses : undefined,
     short_meaning: selected?.short
       ? cleanLexicalText(selected.short)
       : undefined,
     source_language: "greek",
     strong_number: entry.strong ?? strong,
     study_definitions:
-      studyDefinitions.length > 0 ? studyDefinitions : undefined,
+      structured.study.length > 0 ? structured.study : undefined,
     translit_en: entry.translit_en,
     translit_es: entry.translit_es,
     translit_he: entry.translit_he,
@@ -1091,16 +1094,20 @@ const WordAnalysisBottomSheetComponent = (
                     (definition) => definition.language === language,
                   )
                 : [];
-              const { primary, secondary } =
-                partitionMappedDefinitions(offlineDefs);
+              const structured = structureMappedDefinitions(offlineDefs);
               entry = {
                 strong_number: String(offlineEntry.strong ?? requestedStrong),
                 hebrew: offlineEntry.hebrew
                   ? String(offlineEntry.hebrew)
                   : undefined,
-                definitions: primary,
+                definitions: structured.gloss,
+                gloss: structured.gloss,
+                senses:
+                  structured.senses.length > 0 ? structured.senses : undefined,
+                fuller_definitions:
+                  structured.fuller.length > 0 ? structured.fuller : undefined,
                 study_definitions:
-                  secondary.length > 0 ? secondary : undefined,
+                  structured.study.length > 0 ? structured.study : undefined,
                 root: offlineEntry.root ? String(offlineEntry.root) : undefined,
                 root_strong: offlineEntry.root_strong
                   ? String(offlineEntry.root_strong)
@@ -1182,16 +1189,20 @@ const WordAnalysisBottomSheetComponent = (
               const offlineDefs = Array.isArray(offlineEntry.definitions)
                 ? (offlineEntry.definitions as LexiconResponse["definitions"])
                 : [];
-              const { primary, secondary } =
-                partitionMappedDefinitions(offlineDefs);
+              const structured = structureMappedDefinitions(offlineDefs);
               entry = {
                 strong_number: String(offlineEntry.strong ?? dssStrongNumber),
                 hebrew: offlineEntry.hebrew
                   ? String(offlineEntry.hebrew)
                   : undefined,
-                definitions: primary,
+                definitions: structured.gloss,
+                gloss: structured.gloss,
+                senses:
+                  structured.senses.length > 0 ? structured.senses : undefined,
+                fuller_definitions:
+                  structured.fuller.length > 0 ? structured.fuller : undefined,
                 study_definitions:
-                  secondary.length > 0 ? secondary : undefined,
+                  structured.study.length > 0 ? structured.study : undefined,
                 root: offlineEntry.root ? String(offlineEntry.root) : undefined,
                 root_strong: offlineEntry.root_strong
                   ? String(offlineEntry.root_strong)
@@ -1364,6 +1375,32 @@ const WordAnalysisBottomSheetComponent = (
     formatMeaningText,
     normalizeMeaningDisplay,
   ]);
+
+  const senseMeaningsList = useMemo(() => {
+    if (!lexiconEntry?.senses?.length) {
+      return [];
+    }
+    return lexiconEntry.senses
+      .map((item) =>
+        item.text
+          ? formatMeaningText(normalizeMeaningDisplay(item.text))
+          : "",
+      )
+      .filter(Boolean);
+  }, [lexiconEntry, formatMeaningText, normalizeMeaningDisplay]);
+
+  const fullerMeaningsList = useMemo(() => {
+    if (!lexiconEntry?.fuller_definitions?.length) {
+      return [];
+    }
+    return lexiconEntry.fuller_definitions
+      .map((item) =>
+        item.text
+          ? formatMeaningText(normalizeMeaningDisplay(item.text))
+          : "",
+      )
+      .filter(Boolean);
+  }, [lexiconEntry, formatMeaningText, normalizeMeaningDisplay]);
 
   const studyMeaningsList = useMemo(() => {
     if (!lexiconEntry?.study_definitions?.length) {
@@ -1613,7 +1650,23 @@ const WordAnalysisBottomSheetComponent = (
                       {meaning}
                     </Text>
                   ))}
-                  {studyMeaningsList.length > 0 ? (
+                  {senseMeaningsList.length > 0 ? (
+                    <>
+                      <Text style={styles.sectionLabel}>
+                        {t("wordCard.senses")}
+                      </Text>
+                      {senseMeaningsList.map((meaning, index) => (
+                        <Text
+                          key={`sense-${meaning}-${index}`}
+                          style={styles.meaningsBullet}
+                        >
+                          {meaning}
+                        </Text>
+                      ))}
+                    </>
+                  ) : null}
+                  {fullerMeaningsList.length > 0 ||
+                  studyMeaningsList.length > 0 ? (
                     <>
                       <Pressable
                         style={styles.showMoreButton}
@@ -1627,16 +1680,40 @@ const WordAnalysisBottomSheetComponent = (
                             : t("wordCard.moreStudy")}
                         </Text>
                       </Pressable>
-                      {showStudyMeanings
-                        ? studyMeaningsList.map((meaning, index) => (
-                            <Text
-                              key={`study-${meaning}-${index}`}
-                              style={styles.meaningsBullet}
-                            >
-                              {meaning}
-                            </Text>
-                          ))
-                        : null}
+                      {showStudyMeanings ? (
+                        <>
+                          {fullerMeaningsList.length > 0 ? (
+                            <>
+                              <Text style={styles.sectionLabel}>
+                                {t("wordCard.fullerMeaning")}
+                              </Text>
+                              {fullerMeaningsList.map((meaning, index) => (
+                                <Text
+                                  key={`fuller-${meaning}-${index}`}
+                                  style={styles.meaningsBullet}
+                                >
+                                  {meaning}
+                                </Text>
+                              ))}
+                            </>
+                          ) : null}
+                          {studyMeaningsList.length > 0 ? (
+                            <>
+                              <Text style={styles.sectionLabel}>
+                                {t("wordCard.studyNotes")}
+                              </Text>
+                              {studyMeaningsList.map((meaning, index) => (
+                                <Text
+                                  key={`study-${meaning}-${index}`}
+                                  style={styles.meaningsBullet}
+                                >
+                                  {meaning}
+                                </Text>
+                              ))}
+                            </>
+                          ) : null}
+                        </>
+                      ) : null}
                     </>
                   ) : null}
                 </View>

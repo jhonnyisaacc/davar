@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { LEXICON_MEANINGS_SCHEMA } from "../../shared/definitionMeanings";
 import {
 	LEXICON_INSTANCE_SPLIT_THRESHOLD_BYTES,
 	buildLexiconAssets,
@@ -60,6 +61,7 @@ describe("lexicon entry generation", () => {
 			"strong",
 		]);
 		expect(built?.entry.definitions[0]?.review_status).toBe("approved");
+		expect(built?.entry.meanings_schema).toBe(LEXICON_MEANINGS_SCHEMA);
 		expect(built?.instances).toBeNull();
 	});
 

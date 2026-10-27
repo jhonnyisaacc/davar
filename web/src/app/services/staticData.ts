@@ -18,7 +18,7 @@ import { joinHebrewPrefixSlashes } from "../../../../shared/hebrewText";
 import { instanceSurface } from "../../../../shared/instanceSurface";
 import {
 	mapLexiconDefinitions,
-	partitionMappedDefinitions,
+	structureMappedDefinitions,
 } from "../../../../shared/lexiconAssets";
 import {
 	besBookAssetPath,
@@ -1609,8 +1609,7 @@ export const loadGreekLexiconEntry = async (
 			text: cleanLexicalText(selected.fuller),
 		});
 	}
-	const { primary: definitions, secondary: studyDefinitions } =
-		partitionMappedDefinitions(merged);
+	const structured = structureMappedDefinitions(merged);
 	const inlineInstances = entry.instances ?? [];
 	const surface = instanceSurface({
 		instance_total: entry.occurrences_count,
@@ -1620,11 +1619,14 @@ export const loadGreekLexiconEntry = async (
 		})),
 	});
 	return {
-		definitions,
+		definitions: structured.gloss,
 		edition: "sblgnt",
 		full_definition: selected?.fuller
 			? cleanLexicalText(selected.fuller)
 			: undefined,
+		fuller_definitions:
+			structured.fuller.length > 0 ? structured.fuller : undefined,
+		gloss: structured.gloss,
 		greek: entry.lemma,
 		has_instances_asset: inlineInstances.length === 0,
 		instances: surface.instances,
@@ -1634,13 +1636,14 @@ export const loadGreekLexiconEntry = async (
 		lemma_translit_he: entry.translit_he,
 		occurrences_count: surface.total,
 		revision,
+		senses: structured.senses.length > 0 ? structured.senses : undefined,
 		short_meaning: selected?.short
 			? cleanLexicalText(selected.short)
 			: undefined,
 		source_language: "greek",
 		strong_number: entry.strong,
 		study_definitions:
-			studyDefinitions.length > 0 ? studyDefinitions : undefined,
+			structured.study.length > 0 ? structured.study : undefined,
 		translit_en: entry.translit_en,
 		translit_es: entry.translit_es,
 		translit_he: entry.translit_he,

@@ -1,6 +1,6 @@
 /**
- * Phase 1 definition display helpers: strip Unicode BiDi/controls and select
- * a concise primary gloss list while keeping study/detail text as secondary.
+ * Definition display helpers: strip Unicode BiDi/controls and structure
+ * meanings into gloss / senses / fuller / study for web and mobile.
  */
 
 const UNICODE_CONTROLS =
@@ -10,10 +10,7 @@ const DETAIL_SOURCES = new Set(["tcysite-greek-detail"]);
 
 const CUSTOM_SOURCES = new Set(["custom"]);
 
-const TCY_SHORT_SOURCES = new Set([
-	"tcysite-greek-strong",
-	"tcysite-eric",
-]);
+const TCY_SHORT_SOURCES = new Set(["tcysite-greek-strong", "tcysite-eric"]);
 
 const ACADEMIC_SHORT_SOURCES = new Set([
 	"stepbible-tbesg",
@@ -24,6 +21,9 @@ const ACADEMIC_SHORT_SOURCES = new Set([
 	"strong",
 	"bdb",
 ]);
+
+/** Schema id for structured lexicon meanings consumed by clients. */
+export const LEXICON_MEANINGS_SCHEMA = 2 as const;
 
 export type DefinitionMeaningRole = "short" | "fuller" | "gloss";
 
@@ -37,6 +37,21 @@ export type DefinitionMeaningInput = {
 
 export type PartitionedDefinitionMeanings<T extends DefinitionMeaningInput> = {
 	primary: T[];
+	secondary: T[];
+};
+
+export type StructuredDefinitionMeanings<T extends DefinitionMeaningInput> = {
+	/** Short reading glosses (custom / preferred short). */
+	gloss: T[];
+	/** BDB (and similar) sense fragments kept out of the primary gloss. */
+	senses: T[];
+	/** TBESG/UBS fuller lexicon essays. */
+	fuller: T[];
+	/** Study / detail commentary (TCY detail, extra study rows). */
+	study: T[];
+	/** Backward-compatible primary = gloss. */
+	primary: T[];
+	/** Backward-compatible secondary = senses + fuller + study. */
 	secondary: T[];
 };
 
@@ -60,6 +75,10 @@ export const isDetailDefinition = (
 	}
 	return false;
 };
+
+export const isFullerDefinition = (
+	definition: DefinitionMeaningInput,
+): boolean => definition.role === "fuller";
 
 const sourceRank = (source?: string): number => {
 	const normalized = normalizeSource(source);
@@ -98,15 +117,20 @@ const isCustom = (definition: DefinitionMeaningInput): boolean =>
 const isBdb = (definition: DefinitionMeaningInput): boolean =>
 	normalizeSource(definition.source) === "bdb";
 
+const sameText = (left: DefinitionMeaningInput, right: DefinitionMeaningInput) =>
+	left.text.trim().toLowerCase() === right.text.trim().toLowerCase();
+
+const notIn = <T extends DefinitionMeaningInput>(haystack: T[], item: T) =>
+	!haystack.some((entry) => sameText(entry, item));
+
 /**
- * Prefer a short primary gloss list. Detail dumps, lexical_detail rows, and
- * fuller lexicon essays move to secondary. Custom wins; Hebrew falls back to
- * the first BDB sense fragment; Greek prefers TCY short then TBESG/UBS short.
- * Never leave primary empty when any usable text remains.
+ * Structure definitions into gloss / senses / fuller / study.
+ * Custom wins for gloss; otherwise first BDB fragment; Greek prefers TCY then
+ * TBESG/UBS short. Never leave gloss empty when any usable text remains.
  */
-export const partitionDefinitionMeanings = <T extends DefinitionMeaningInput>(
+export const structureDefinitionMeanings = <T extends DefinitionMeaningInput>(
 	definitions: T[],
-): PartitionedDefinitionMeanings<T> => {
+): StructuredDefinitionMeanings<T> => {
 	const cleaned = definitions
 		.map((definition) => ({
 			...definition,
@@ -114,22 +138,34 @@ export const partitionDefinitionMeanings = <T extends DefinitionMeaningInput>(
 		}))
 		.filter((definition) => Boolean(definition.text.trim())) as T[];
 
+	const empty: StructuredDefinitionMeanings<T> = {
+		gloss: [],
+		senses: [],
+		fuller: [],
+		study: [],
+		primary: [],
+		secondary: [],
+	};
+
 	if (cleaned.length === 0) {
-		return { primary: [], secondary: [] };
+		return empty;
 	}
 
-	const detail: T[] = [];
+	const fuller: T[] = [];
+	const study: T[] = [];
 	const rest: T[] = [];
 	for (const definition of cleaned) {
-		if (isDetailDefinition(definition)) {
-			detail.push(definition);
+		if (isFullerDefinition(definition)) {
+			fuller.push(definition);
+		} else if (isDetailDefinition(definition)) {
+			study.push(definition);
 		} else {
 			rest.push(definition);
 		}
 	}
 
-	let primary: T[] = [];
-	let secondary: T[] = [...detail];
+	let gloss: T[] = [];
+	let senses: T[] = [];
 
 	const customs = rest.filter(isCustom);
 	const bdb = rest.filter(isBdb);
@@ -138,34 +174,77 @@ export const partitionDefinitionMeanings = <T extends DefinitionMeaningInput>(
 	);
 
 	if (customs.length > 0) {
-		primary = sortPrimary(customs);
-		secondary = [...secondary, ...bdb, ...others];
+		gloss = sortPrimary(customs);
+		senses = bdb;
+		study.push(...others);
 	} else if (bdb.length > 0) {
-		primary = [bdb[0]];
-		secondary = [...secondary, ...bdb.slice(1), ...others];
+		gloss = [bdb[0]];
+		senses = bdb.slice(1);
+		study.push(...others);
 	} else {
-		primary = sortPrimary(others);
+		gloss = sortPrimary(others);
 	}
 
-	primary = dedupeByText(primary);
-	secondary = dedupeByText(secondary).filter(
+	gloss = dedupeByText(gloss);
+	senses = dedupeByText(senses).filter((item) => notIn(gloss, item));
+	const fullerDeduped = dedupeByText(fuller).filter(
+		(item) => notIn(gloss, item) && notIn(senses, item),
+	);
+	const studyDeduped = dedupeByText(study).filter(
 		(item) =>
-			!primary.some(
-				(primaryItem) =>
-					primaryItem.text.trim().toLowerCase() ===
-					item.text.trim().toLowerCase(),
-			),
+			notIn(gloss, item) &&
+			notIn(senses, item) &&
+			notIn(fullerDeduped, item),
 	);
 
-	if (primary.length === 0 && secondary.length > 0) {
-		const fallback = [...secondary].sort(
+	if (
+		gloss.length === 0 &&
+		(senses.length > 0 ||
+			fullerDeduped.length > 0 ||
+			studyDeduped.length > 0)
+	) {
+		const pool = [...senses, ...fullerDeduped, ...studyDeduped];
+		const fallback = [...pool].sort(
 			(left, right) => left.text.length - right.text.length,
 		)[0];
-		primary = [fallback];
-		secondary = secondary.filter((item) => item !== fallback);
+		gloss = [fallback];
+		senses = senses.filter((item) => !sameText(item, fallback));
+		const fullerOut = fullerDeduped.filter((item) => !sameText(item, fallback));
+		const studyOut = studyDeduped.filter((item) => !sameText(item, fallback));
+		const secondary = [...senses, ...fullerOut, ...studyOut];
+		return {
+			gloss,
+			senses,
+			fuller: fullerOut,
+			study: studyOut,
+			primary: gloss,
+			secondary,
+		};
 	}
 
-	return { primary, secondary };
+	const secondary = [...senses, ...fullerDeduped, ...studyDeduped];
+	return {
+		gloss,
+		senses,
+		fuller: fullerDeduped,
+		study: studyDeduped,
+		primary: gloss,
+		secondary,
+	};
+};
+
+/**
+ * Prefer a short primary gloss list. Detail dumps, lexical_detail rows, and
+ * fuller lexicon essays move to secondary.
+ */
+export const partitionDefinitionMeanings = <T extends DefinitionMeaningInput>(
+	definitions: T[],
+): PartitionedDefinitionMeanings<T> => {
+	const structured = structureDefinitionMeanings(definitions);
+	return {
+		primary: structured.primary,
+		secondary: structured.secondary,
+	};
 };
 
 export const meaningTexts = (
