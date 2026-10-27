@@ -233,7 +233,7 @@ jobs:
               python -m scripts.delitzsch.review.remediate check
               ;;
             greek-source)
-              PYTHONPATH=. python -m pytest -q tests/test_greek_*.py
+              PYTHONPATH=. python -m pytest -q tests/test_greek_*.py tests/test_definition_hygiene.py
               ;;
             hutter)
               python -m pytest -q tests/test_hutter_transcription.py

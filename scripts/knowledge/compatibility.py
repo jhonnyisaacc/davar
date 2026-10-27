@@ -412,7 +412,12 @@ def legacy(base: str, root=ROOT):
                                 str(p.relative_to(checkout / app))
                                 for p in sorted((checkout / app).glob(pattern))
                             ]
-                            run(["bun", "test", *tests], checkout / app, env)
+                            # Mobile package.json uses --isolate; without it, parallel
+                            # service tests can race on shared chapter fixtures.
+                            cmd = ["bun", "test"]
+                            if app == "mobile":
+                                cmd.append("--isolate")
+                            run([*cmd, *tests], checkout / app, env)
 
 
 def shaul(root: Path, davar=ROOT):
