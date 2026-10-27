@@ -7,6 +7,7 @@ import {
   greekStrongFamily,
 } from "@davar/shared/greekBesorah";
 import { cleanLexicalText } from "@davar/shared/greekText";
+import { partitionMappedDefinitions } from "@davar/shared/lexiconAssets";
 import React, {
   useCallback,
   useEffect,
@@ -118,6 +119,9 @@ type StaticDictionaryDefinition = {
   source_row?: string;
   source_url?: string;
   context?: string;
+  sense?: string;
+  definition_kind?: string;
+  order?: number;
 };
 
 type StaticCustomDefinition = {
@@ -191,6 +195,9 @@ type MappedDefinition = {
   language: "en" | "es" | "he";
   review_status?: "approved" | "imported" | "draft";
   license?: string;
+  sense?: string;
+  definition_kind?: string;
+  role?: "short" | "fuller" | "gloss";
 };
 
 const mapStaticDefinitions = (
@@ -215,6 +222,8 @@ const mapStaticDefinitions = (
         language: definitionLanguage,
         review_status: definition.review_status,
         license: definition.license,
+        sense: definition.sense,
+        definition_kind: definition.definition_kind,
       };
     })
     .filter((value): value is MappedDefinition => value !== null);
@@ -258,27 +267,31 @@ const toGreekLexiconResponse = (
   const english = entry.definitions?.en;
   const selected =
     localized && (localized.short || localized.fuller) ? localized : english;
-  const definitions: LexiconResponse["definitions"] = [
+  const merged: LexiconResponse["definitions"] = [
     ...mapStaticDefinitions(customEntry?.definitions, language),
   ];
   if (selected?.short) {
-    definitions.push({
+    merged.push({
       language: selected === localized ? language : "en",
       license: selected.license,
       review_status: selected.review_status,
+      role: "short",
       source: selected.source ?? "stepbible-tbesg",
       text: cleanLexicalText(selected.short),
     });
   }
   if (selected?.fuller && selected.fuller !== selected.short) {
-    definitions.push({
+    merged.push({
       language: selected === localized ? language : "en",
       license: selected.license,
       review_status: selected.review_status,
+      role: "fuller",
       source: selected.source ?? "stepbible-tbesg",
       text: cleanLexicalText(selected.fuller),
     });
   }
+  const { primary: definitions, secondary: studyDefinitions } =
+    partitionMappedDefinitions(merged);
   const surface = instanceSurface({
     instance_total: entry.occurrences_count,
     instances: entry.instances?.map((row) => ({
@@ -289,6 +302,9 @@ const toGreekLexiconResponse = (
   });
   return {
     definitions,
+    full_definition: selected?.fuller
+      ? cleanLexicalText(selected.fuller)
+      : undefined,
     greek: entry.lemma,
     instances: surface.instances,
     lemma: entry.lemma,
@@ -296,8 +312,13 @@ const toGreekLexiconResponse = (
     lemma_translit_es: entry.translit_es,
     lemma_translit_he: entry.translit_he,
     occurrences_count: surface.total,
+    short_meaning: selected?.short
+      ? cleanLexicalText(selected.short)
+      : undefined,
     source_language: "greek",
     strong_number: entry.strong ?? strong,
+    study_definitions:
+      studyDefinitions.length > 0 ? studyDefinitions : undefined,
     translit_en: entry.translit_en,
     translit_es: entry.translit_es,
     translit_he: entry.translit_he,
@@ -921,6 +942,7 @@ const WordAnalysisBottomSheetComponent = (
     useState<LexiconResponse | null>(null);
   const [isDssLoading, setIsDssLoading] = useState(false);
   const [showAllInstances, setShowAllInstances] = useState(false);
+  const [showStudyMeanings, setShowStudyMeanings] = useState(false);
   const [prefixEntries, setPrefixEntries] = useState<
     Record<string, PrefixResponse | null>
   >({});
@@ -1064,16 +1086,21 @@ const WordAnalysisBottomSheetComponent = (
             const offlineEntry = await fetchLexiconEntry(requestedStrong);
             if (offlineEntry) {
               const instances = normalizeOfflineInstances(offlineEntry.occurrences);
+              const offlineDefs = Array.isArray(offlineEntry.definitions)
+                ? (offlineEntry.definitions as LexiconResponse["definitions"]).filter(
+                    (definition) => definition.language === language,
+                  )
+                : [];
+              const { primary, secondary } =
+                partitionMappedDefinitions(offlineDefs);
               entry = {
                 strong_number: String(offlineEntry.strong ?? requestedStrong),
                 hebrew: offlineEntry.hebrew
                   ? String(offlineEntry.hebrew)
                   : undefined,
-                definitions: Array.isArray(offlineEntry.definitions)
-                  ? (offlineEntry.definitions as LexiconResponse["definitions"]).filter(
-                      (definition) => definition.language === language,
-                    )
-                  : [],
+                definitions: primary,
+                study_definitions:
+                  secondary.length > 0 ? secondary : undefined,
                 root: offlineEntry.root ? String(offlineEntry.root) : undefined,
                 root_strong: offlineEntry.root_strong
                   ? String(offlineEntry.root_strong)
@@ -1152,14 +1179,19 @@ const WordAnalysisBottomSheetComponent = (
             const offlineEntry = await fetchLexiconEntry(dssStrongNumber);
             if (offlineEntry) {
               const instances = normalizeOfflineInstances(offlineEntry.occurrences);
+              const offlineDefs = Array.isArray(offlineEntry.definitions)
+                ? (offlineEntry.definitions as LexiconResponse["definitions"])
+                : [];
+              const { primary, secondary } =
+                partitionMappedDefinitions(offlineDefs);
               entry = {
                 strong_number: String(offlineEntry.strong ?? dssStrongNumber),
                 hebrew: offlineEntry.hebrew
                   ? String(offlineEntry.hebrew)
                   : undefined,
-                definitions: Array.isArray(offlineEntry.definitions)
-                  ? (offlineEntry.definitions as LexiconResponse["definitions"])
-                  : [],
+                definitions: primary,
+                study_definitions:
+                  secondary.length > 0 ? secondary : undefined,
                 root: offlineEntry.root ? String(offlineEntry.root) : undefined,
                 root_strong: offlineEntry.root_strong
                   ? String(offlineEntry.root_strong)
@@ -1195,6 +1227,7 @@ const WordAnalysisBottomSheetComponent = (
     // Reset to default tab when a new word is selected
     setActiveTab(hasDssVariant ? "qumran" : "masoretic");
     setShowAllInstances(false);
+    setShowStudyMeanings(false);
   }, [word?.strong, word?.dssStrong, hasDssVariant]);
 
   useEffect(() => {
@@ -1279,20 +1312,23 @@ const WordAnalysisBottomSheetComponent = (
     }
   }, [displayHebrew, t]);
 
+  const formatMeaningText = useCallback((text: string) => {
+    const cleaned = text.replace(/^[-–—]\s*/, "").trim();
+    if (!cleaned) return cleaned;
+    return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
+  }, []);
+
+  const normalizeMeaningDisplay = useCallback(
+    (value: string) =>
+      stripCantillation(stripNikud(value)).replace(/\//g, "").trim(),
+    [],
+  );
+
   const meaningsList = useMemo(() => {
-    const normalizeForDisplay = (t: string) =>
-      stripCantillation(stripNikud(t)).replace(/\//g, "").trim();
-
-    const formatMeaning = (text: string) => {
-      const cleaned = text.replace(/^[-–—]\s*/, "").trim();
-      if (!cleaned) return cleaned;
-      return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
-    };
-
     let rawMeanings: string[] = [];
     if (lexiconEntry?.definitions?.length) {
       rawMeanings = lexiconEntry.definitions
-        .map((item) => (item.text ? normalizeForDisplay(item.text) : ""))
+        .map((item) => (item.text ? normalizeMeaningDisplay(item.text) : ""))
         .filter(Boolean);
     } else if (!word) {
       return ["—"];
@@ -1306,21 +1342,41 @@ const WordAnalysisBottomSheetComponent = (
       const preferLatin = language !== "he";
       const isLatin = (s: string) => /[A-Za-zÀ-ž0-9]/.test(s);
       rawMeanings = meanings
-        .map((m) => (m ? normalizeForDisplay(m) : ""))
+        .map((m) => (m ? normalizeMeaningDisplay(m) : ""))
         .filter(Boolean)
         .filter((m) => (preferLatin ? isLatin(m) : true));
 
       // If filtering removed all items and we have raw ones, fall back to unfiltered normalized list
       if (!rawMeanings.length && meanings) {
         rawMeanings = meanings
-          .map((m) => (m ? normalizeForDisplay(m) : ""))
+          .map((m) => (m ? normalizeMeaningDisplay(m) : ""))
           .filter(Boolean);
       }
     }
 
-    const formatted = rawMeanings.map((item) => formatMeaning(item));
+    const formatted = rawMeanings.map((item) => formatMeaningText(item));
     return formatted.length ? formatted : ["—"];
-  }, [lexiconEntry, word, language, t]);
+  }, [
+    lexiconEntry,
+    word,
+    language,
+    t,
+    formatMeaningText,
+    normalizeMeaningDisplay,
+  ]);
+
+  const studyMeaningsList = useMemo(() => {
+    if (!lexiconEntry?.study_definitions?.length) {
+      return [];
+    }
+    return lexiconEntry.study_definitions
+      .map((item) =>
+        item.text
+          ? formatMeaningText(normalizeMeaningDisplay(item.text))
+          : "",
+      )
+      .filter(Boolean);
+  }, [lexiconEntry, formatMeaningText, normalizeMeaningDisplay]);
 
   const dssMeaningsList = useMemo(() => {
     const normalizeForDisplay = (t: string) =>
@@ -1557,6 +1613,32 @@ const WordAnalysisBottomSheetComponent = (
                       {meaning}
                     </Text>
                   ))}
+                  {studyMeaningsList.length > 0 ? (
+                    <>
+                      <Pressable
+                        style={styles.showMoreButton}
+                        onPress={() =>
+                          setShowStudyMeanings((open) => !open)
+                        }
+                      >
+                        <Text style={styles.showMoreText}>
+                          {showStudyMeanings
+                            ? t("wordCard.hideStudy")
+                            : t("wordCard.moreStudy")}
+                        </Text>
+                      </Pressable>
+                      {showStudyMeanings
+                        ? studyMeaningsList.map((meaning, index) => (
+                            <Text
+                              key={`study-${meaning}-${index}`}
+                              style={styles.meaningsBullet}
+                            >
+                              {meaning}
+                            </Text>
+                          ))
+                        : null}
+                    </>
+                  ) : null}
                 </View>
 
                 {word?.prefixes?.length ? (

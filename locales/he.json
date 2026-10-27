@@ -347,6 +347,8 @@
     "appearsCount": "מופיע {count} פעמים",
     "appearsIn": "מופיע ב",
     "showMore": "הצג עוד {count}",
+    "moreStudy": "עוד",
+    "hideStudy": "הסתר עוד",
     "properName": "שם פרטי",
     "definitionNotAvailable": "הגדרה לא זמינה",
     "copiedToClipboard": "הועתק ללוח"

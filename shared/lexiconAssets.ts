@@ -1,3 +1,7 @@
+import {
+	partitionDefinitionMeanings,
+	stripDefinitionControls,
+} from "./definitionMeanings";
 import { greekStrongFamily } from "./greekBesorah";
 import { instanceSurface } from "./instanceSurface";
 import {
@@ -15,6 +19,9 @@ export type LexiconDefinitionAsset = {
 	source?: string;
 	review_status?: "approved" | "imported" | "draft";
 	license?: string;
+	sense?: string;
+	definition_kind?: string;
+	order?: number;
 };
 
 export type LexiconEntryAsset = {
@@ -106,6 +113,9 @@ type DefinitionItem = {
 	language: string;
 	review_status?: "approved" | "imported" | "draft";
 	license?: string;
+	sense?: string;
+	definition_kind?: string;
+	role?: "short" | "fuller" | "gloss";
 };
 
 const mergeUniqueDefinitions = (
@@ -179,14 +189,40 @@ export const mapLexiconDefinitions = (
 		if (!text) continue;
 
 		mapped.push({
-			text,
+			text: stripDefinitionControls(text),
 			source: definition.source ?? "strong",
 			language,
 			review_status: definition.review_status,
 			license: definition.license,
+			sense: definition.sense,
+			definition_kind: definition.definition_kind,
 		});
 	}
-	return mapped;
+	return mapped.filter((item) => Boolean(item.text.trim()));
+};
+
+/** Map lexicon assets then split into primary glosses vs secondary/study. */
+export const mapPartitionedLexiconDefinitions = (
+	definitions: RawDefinition[] | undefined,
+	language: "en" | "es" | "he",
+): { primary: DefinitionItem[]; secondary: DefinitionItem[] } => {
+	const mapped = mapLexiconDefinitions(definitions, language);
+	const partitioned = partitionDefinitionMeanings(mapped);
+	return {
+		primary: partitioned.primary,
+		secondary: partitioned.secondary,
+	};
+};
+
+/** Partition already-mapped definition items (e.g. after appending Greek short/fuller). */
+export const partitionMappedDefinitions = (
+	definitions: DefinitionItem[],
+): { primary: DefinitionItem[]; secondary: DefinitionItem[] } => {
+	const partitioned = partitionDefinitionMeanings(definitions);
+	return {
+		primary: partitioned.primary,
+		secondary: partitioned.secondary,
+	};
 };
 
 export const buildLexiconEntryAsset = (

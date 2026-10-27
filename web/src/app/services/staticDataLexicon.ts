@@ -1,11 +1,13 @@
 import type { ScriptureSourceLanguage } from "../../../../shared/greekBesorah";
 import { instanceSurface } from "../../../../shared/instanceSurface";
 import {
-	mapLexiconDefinitions,
+	mapPartitionedLexiconDefinitions,
+	partitionMappedDefinitions,
 	type LexiconEntryAsset,
 	type LexiconEntryShard,
 	type LexiconInstancesAsset,
 } from "../../../../shared/lexiconAssets";
+import { stripDefinitionControls } from "../../../../shared/definitionMeanings";
 import {
 	lexiconEntryAssetPath,
 	lexiconInstancesAssetPath,
@@ -18,6 +20,9 @@ export interface DefinitionItem {
 	language: "en" | "es" | "he" | string;
 	review_status?: "approved" | "imported" | "draft";
 	license?: string;
+	sense?: string;
+	definition_kind?: string;
+	role?: "short" | "fuller" | "gloss";
 }
 
 export interface WordAnalysis {
@@ -37,6 +42,8 @@ export interface WordAnalysis {
 	short_meaning?: string;
 	full_definition?: string;
 	definitions: DefinitionItem[];
+	/** Secondary / study meanings (detail, fuller, extra BDB senses). */
+	study_definitions?: DefinitionItem[];
 	root?: string;
 	root_strong?: string;
 	root_definitions?: DefinitionItem[];
@@ -65,6 +72,9 @@ type RawDefinition = {
 	source_row?: string;
 	source_url?: string;
 	context?: string;
+	sense?: string;
+	definition_kind?: string;
+	order?: number;
 };
 
 type RawOccurrence = {
@@ -187,15 +197,19 @@ const mapDefinitions = (
 		if (!text) return null;
 
 		return {
-			text,
+			text: stripDefinitionControls(text),
 			source: definition.source ?? "strong",
 			language,
 			review_status: definition.review_status,
 			license: definition.license,
+			sense: definition.sense,
+			definition_kind: definition.definition_kind,
 		};
 	});
 
-	return mapped.filter((item): item is DefinitionItem => Boolean(item));
+	return mapped.filter(
+		(item): item is DefinitionItem => Boolean(item?.text.trim()),
+	);
 };
 
 const mergeUniqueDefinitions = (
@@ -272,10 +286,12 @@ const toWordAnalysis = (
 		dictionaryEntry?.translit_es ??
 		dictionaryEntry?.transliteration_es;
 
-	const definitions = mergeUniqueDefinitions(
+	const merged = mergeUniqueDefinitions(
 		mapDefinitions(customEntry?.definitions, language),
 		mapDefinitions(dictionaryEntry?.definitions, language),
 	);
+	const { primary: definitions, secondary: studyDefinitions } =
+		partitionMappedDefinitions(merged);
 
 	const rootStrong =
 		customEntry?.root_strong ??
@@ -284,9 +300,10 @@ const toWordAnalysis = (
 		(dictionaryEntry ? strongNumber : undefined);
 	const rootEntry = getRootEntry(rootStrong, words, roots, custom);
 
-	const rootDefinitions = mergeUniqueDefinitions(
+	const rootMerged = mergeUniqueDefinitions(
 		mapDefinitions(rootEntry?.definitions, language),
 	);
+	const { primary: rootDefinitions } = partitionMappedDefinitions(rootMerged);
 
 	const surface = instanceSurface(customEntry, dictionaryEntry?.occurrences);
 	const instances = surface.instances;
@@ -298,6 +315,8 @@ const toWordAnalysis = (
 		translit_en,
 		translit_es,
 		definitions,
+		study_definitions:
+			studyDefinitions.length > 0 ? studyDefinitions : undefined,
 		root:
 			customEntry?.root ??
 			(isRawWordEntry(rootEntry) ? rootEntry.lemma : undefined) ??
@@ -323,28 +342,39 @@ const toWordAnalysis = (
 const toWordAnalysisFromAsset = (
 	entry: LexiconEntryAsset,
 	language: "en" | "es",
-): WordAnalysis => ({
-	strong_number: entry.strong_number,
-	hebrew: entry.hebrew,
-	translit_en: entry.translit_en,
-	translit_es: entry.translit_es,
-	definitions: mapLexiconDefinitions(entry.definitions, language),
-	root: entry.root,
-	root_strong: entry.root_strong,
-	root_definitions: entry.root_definitions
-		? mapLexiconDefinitions(entry.root_definitions, language)
-		: undefined,
-	root_translit_en: entry.root_translit_en,
-	root_translit_es: entry.root_translit_es,
-	occurrences_count: entry.occurrences_count,
-	instances: entry.instances,
-	has_instances_asset: entry.has_instances_asset,
-	instance_policy_version: entry.instance_policy_version,
-	instance_total: entry.instance_total,
-	instance_surface_count: entry.instance_surface_count,
-	instance_tier: entry.instance_tier,
-	instance_omitted_count: entry.instance_omitted_count,
-});
+): WordAnalysis => {
+	const { primary, secondary } = mapPartitionedLexiconDefinitions(
+		entry.definitions,
+		language,
+	);
+	const rootPartitioned = entry.root_definitions
+		? mapPartitionedLexiconDefinitions(entry.root_definitions, language)
+		: null;
+
+	return {
+		strong_number: entry.strong_number,
+		hebrew: entry.hebrew,
+		translit_en: entry.translit_en,
+		translit_es: entry.translit_es,
+		definitions: primary,
+		study_definitions: secondary.length > 0 ? secondary : undefined,
+		root: entry.root,
+		root_strong: entry.root_strong,
+		root_definitions: rootPartitioned?.primary.length
+			? rootPartitioned.primary
+			: undefined,
+		root_translit_en: entry.root_translit_en,
+		root_translit_es: entry.root_translit_es,
+		occurrences_count: entry.occurrences_count,
+		instances: entry.instances,
+		has_instances_asset: entry.has_instances_asset,
+		instance_policy_version: entry.instance_policy_version,
+		instance_total: entry.instance_total,
+		instance_surface_count: entry.instance_surface_count,
+		instance_tier: entry.instance_tier,
+		instance_omitted_count: entry.instance_omitted_count,
+	};
+};
 
 export const loadLexiconEntryAsset = async (
 	strong: string,
