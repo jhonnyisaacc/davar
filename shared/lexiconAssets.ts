@@ -3,6 +3,7 @@ import {
 	partitionDefinitionMeanings,
 	structureDefinitionMeanings,
 	stripDefinitionControls,
+	studyDefinitionsForLanguage,
 	type StructuredDefinitionMeanings,
 } from "./definitionMeanings";
 
@@ -226,8 +227,17 @@ export const mapPartitionedLexiconDefinitions = (
 export const mapStructuredLexiconDefinitions = (
 	definitions: RawDefinition[] | undefined,
 	language: "en" | "es" | "he",
-): StructuredDefinitionMeanings<DefinitionItem> =>
-	structureDefinitionMeanings(mapLexiconDefinitions(definitions, language));
+): StructuredDefinitionMeanings<DefinitionItem> => {
+	const structured = structureDefinitionMeanings(
+		mapLexiconDefinitions(definitions, language),
+	);
+	const study = studyDefinitionsForLanguage(structured.study, language);
+	return {
+		...structured,
+		study,
+		secondary: [...structured.senses, ...structured.fuller, ...study],
+	};
+};
 
 /** Partition already-mapped definition items (e.g. after appending Greek short/fuller). */
 export const partitionMappedDefinitions = (
