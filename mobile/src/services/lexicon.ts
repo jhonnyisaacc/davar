@@ -1,4 +1,3 @@
-import { optionalStudyDefinitions } from "@davar/shared/definitionMeanings";
 import { instanceSurface } from "@davar/shared/instanceSurface";
 import {
   mapLexiconDefinitions,
@@ -126,7 +125,8 @@ const toResponseFromAsset = (
     senses: structured.senses.length > 0 ? structured.senses : undefined,
     fuller_definitions:
       structured.fuller.length > 0 ? structured.fuller : undefined,
-    study_definitions: optionalStudyDefinitions(structured.study, language),
+    study_definitions:
+      structured.study.length > 0 ? structured.study : undefined,
     root: entry.root,
     root_strong: entry.root_strong,
     root_translit_en: entry.root_translit_en,
@@ -242,7 +242,8 @@ const loadLexiconEntryFromFullDictionaries = async (
     senses: structured.senses.length > 0 ? structured.senses : undefined,
     fuller_definitions:
       structured.fuller.length > 0 ? structured.fuller : undefined,
-    study_definitions: optionalStudyDefinitions(structured.study, language),
+    study_definitions:
+      structured.study.length > 0 ? structured.study : undefined,
     root: customEntry?.root ?? getRootLemma(rootEntry),
     root_strong: rootStrong,
     root_translit_en:

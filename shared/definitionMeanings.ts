@@ -139,24 +139,6 @@ export const isBdbTechnicalScrap = (text: string): boolean => {
 	return false;
 };
 
-/**
- * Study notes stay hidden in English until curated `text_en` study content
- * lands (see issue #183). ES/HE keep study rows.
- */
-export const studyDefinitionsForLanguage = <T>(
-	study: readonly T[],
-	language: "en" | "es" | "he",
-): T[] => (language === "en" ? [] : [...study]);
-
-/** Study list for analysis payloads — `undefined` when empty or English UI. */
-export const optionalStudyDefinitions = <T>(
-	study: readonly T[],
-	language: "en" | "es" | "he",
-): T[] | undefined => {
-	const filtered = studyDefinitionsForLanguage(study, language);
-	return filtered.length > 0 ? filtered : undefined;
-};
-
 const normalizeSource = (source?: string): string =>
 	(source ?? "").trim().toLowerCase();
 
