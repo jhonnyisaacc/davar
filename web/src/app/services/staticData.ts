@@ -16,7 +16,6 @@ import {
 } from "../../../../shared/greekText";
 import { joinHebrewPrefixSlashes } from "../../../../shared/hebrewText";
 import { instanceSurface } from "../../../../shared/instanceSurface";
-import { optionalStudyDefinitions } from "../../../../shared/definitionMeanings";
 import {
 	mapLexiconDefinitions,
 	structureMappedDefinitions,
@@ -1643,7 +1642,8 @@ export const loadGreekLexiconEntry = async (
 			: undefined,
 		source_language: "greek",
 		strong_number: entry.strong,
-		study_definitions: optionalStudyDefinitions(structured.study, language),
+		study_definitions:
+			structured.study.length > 0 ? structured.study : undefined,
 		translit_en: entry.translit_en,
 		translit_es: entry.translit_es,
 		translit_he: entry.translit_he,

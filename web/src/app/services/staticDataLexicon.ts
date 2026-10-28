@@ -7,10 +7,7 @@ import {
 	type LexiconEntryShard,
 	type LexiconInstancesAsset,
 } from "../../../../shared/lexiconAssets";
-import {
-	optionalStudyDefinitions,
-	stripDefinitionControls,
-} from "../../../../shared/definitionMeanings";
+import { stripDefinitionControls } from "../../../../shared/definitionMeanings";
 import {
 	lexiconEntryAssetPath,
 	lexiconInstancesAssetPath,
@@ -327,7 +324,8 @@ const toWordAnalysis = (
 		senses: structured.senses.length > 0 ? structured.senses : undefined,
 		fuller_definitions:
 			structured.fuller.length > 0 ? structured.fuller : undefined,
-		study_definitions: optionalStudyDefinitions(structured.study, language),
+		study_definitions:
+			structured.study.length > 0 ? structured.study : undefined,
 		root:
 			customEntry?.root ??
 			(isRawWordEntry(rootEntry) ? rootEntry.lemma : undefined) ??
@@ -373,7 +371,8 @@ const toWordAnalysisFromAsset = (
 		senses: structured.senses.length > 0 ? structured.senses : undefined,
 		fuller_definitions:
 			structured.fuller.length > 0 ? structured.fuller : undefined,
-		study_definitions: optionalStudyDefinitions(structured.study, language),
+		study_definitions:
+			structured.study.length > 0 ? structured.study : undefined,
 		root: entry.root,
 		root_strong: entry.root_strong,
 		root_definitions: rootStructured?.gloss.length

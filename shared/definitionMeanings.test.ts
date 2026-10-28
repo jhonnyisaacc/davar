@@ -3,12 +3,10 @@ import {
 	formatDefinitionMeaningForDisplay,
 	isBdbTechnicalScrap,
 	isDetailDefinition,
-	optionalStudyDefinitions,
 	partitionDefinitionMeanings,
 	sanitizePaganDeityCapitalization,
 	structureDefinitionMeanings,
 	stripDefinitionControls,
-	studyDefinitionsForLanguage,
 } from "./definitionMeanings";
 
 describe("stripDefinitionControls", () => {
@@ -108,17 +106,6 @@ describe("isBdbTechnicalScrap", () => {
 		for (const text of glosses) {
 			expect(isBdbTechnicalScrap(text)).toBe(false);
 		}
-	});
-});
-
-describe("studyDefinitionsForLanguage", () => {
-	test("hides study for English; keeps ES/HE", () => {
-		const study = [{ text: "nota de estudio", source: "tcysite-eric" }];
-		expect(studyDefinitionsForLanguage(study, "en")).toEqual([]);
-		expect(studyDefinitionsForLanguage(study, "es")).toEqual(study);
-		expect(studyDefinitionsForLanguage(study, "he")).toEqual(study);
-		expect(optionalStudyDefinitions(study, "en")).toBeUndefined();
-		expect(optionalStudyDefinitions(study, "es")).toEqual(study);
 	});
 });
 
