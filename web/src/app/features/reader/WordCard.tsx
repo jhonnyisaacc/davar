@@ -1,3 +1,4 @@
+import { formatDefinitionMeaningForDisplay } from "@davar/shared/definitionMeanings";
 import { formatVerseRef } from "@davar/shared/formatVerseRef";
 import { X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
@@ -272,13 +273,10 @@ export function WordCard({
 		});
 	}, [displayedData.instances]);
 
-	const formatMeaning = (text: string) => {
-		const cleaned = stripMeteg(stripCantillation(text))
-			.replace(/^[-–—]\s*/, "")
-			.trim();
-		if (!cleaned) return cleaned;
-		return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
-	};
+	const formatMeaning = (text: string) =>
+		formatDefinitionMeaningForDisplay(
+			stripMeteg(stripCantillation(text)),
+		);
 
 	const prefixSegments = useMemo(() => {
 		if (!displayedData.wordFromVerse || !displayedData.prefixes?.length) {
@@ -653,7 +651,7 @@ export function WordCard({
 			{/* Tab Content */}
 			{activeTab === "masoretic" ? (
 				<div className="space-y-6 text-center">
-					{/* Meanings Section */}
+					{/* Senses Section — gloss + BDB chips under one title */}
 					<div className="pb-6">
 						<h3
 							className="mb-4"
@@ -666,7 +664,7 @@ export function WordCard({
 								textTransform: "uppercase",
 							}}
 						>
-							{t("wordCard.meanings")}
+							{t("wordCard.senses")}
 						</h3>
 						<div
 							style={{
@@ -679,42 +677,50 @@ export function WordCard({
 						>
 							{isLoading && displayedData.meanings.length === 0 ? (
 								t("wordCard.loadingDefinitions")
-							) : displayedData.meanings.length > 0 ? (
-								<div className="space-y-2 text-center">
-									{meaningItems.map((item) => (
-										<div key={item.key} style={{ whiteSpace: "normal" }}>
-											{formatMeaning(item.value).replace(/\//g, "")}
+							) : displayedData.meanings.length > 0 ||
+								senseMeaningItems.length > 0 ? (
+								<div className="space-y-3 text-center">
+									{meaningItems.length > 0 ? (
+										<div className="flex flex-wrap justify-center gap-2">
+											{meaningItems.map((item) => (
+												<span
+													key={item.key}
+													style={{
+														fontFamily: "'Jost', sans-serif",
+														fontSize: "15px",
+														lineHeight: 1.4,
+														fontWeight: 500,
+														padding: "5px 12px",
+														borderRadius: "4px",
+														background: "var(--accent-light)",
+														color: "var(--accent-deep)",
+														whiteSpace: "normal",
+													}}
+												>
+													{formatMeaning(item.value).replace(/\//g, "")}
+												</span>
+											))}
 										</div>
-									))}
+									) : null}
 									{senseMeaningItems.length > 0 ? (
-										<div className="pt-3 space-y-2">
-											<div
-												className="text-[11px] uppercase tracking-[0.15em] font-semibold"
-												style={{
-													fontFamily: "'Inter', sans-serif",
-													color: "var(--text-secondary)",
-												}}
-											>
-												{t("wordCard.senses")}
-											</div>
-											<div className="flex flex-wrap justify-center gap-2">
-												{senseMeaningItems.map((item) => (
-													<span
-														key={item.key}
-														style={{
-															fontFamily: "'Jost', sans-serif",
-															fontSize: "14px",
-															lineHeight: 1.4,
-															padding: "4px 10px",
-															borderRadius: "999px",
-															background: "var(--surface-muted, rgba(0,0,0,0.04))",
-															color: "var(--text-secondary)",
-														}}
-													>
-														{formatMeaning(item.value).replace(/\//g, "")}
-													</span>
-												))}
-											</div>
+										<div className="flex flex-wrap justify-center gap-2">
+											{senseMeaningItems.map((item) => (
+												<span
+													key={item.key}
+													style={{
+														fontFamily: "'Jost', sans-serif",
+														fontSize: "14px",
+														lineHeight: 1.4,
+														padding: "4px 10px",
+														borderRadius: "999px",
+														background:
+															"var(--surface-muted, rgba(0,0,0,0.04))",
+														color: "var(--text-secondary)",
+													}}
+												>
+													{formatMeaning(item.value).replace(/\//g, "")}
+												</span>
+											))}
 										</div>
 									) : null}
 									{hasExpandableMeanings &&
@@ -1046,7 +1052,7 @@ export function WordCard({
 								textTransform: "uppercase",
 							}}
 						>
-							{t("wordCard.meanings")}
+							{t("wordCard.senses")}
 						</h3>
 						<div
 							style={{
@@ -1061,11 +1067,24 @@ export function WordCard({
 							{isQumranLoading ? (
 								t("wordCard.loadingDefinitions")
 							) : displayedData.qumranMeanings?.length ? (
-								<div className="space-y-2 text-center">
+								<div className="flex flex-wrap justify-center gap-2">
 									{qumranMeaningItems.map((item) => (
-										<div key={item.key} style={{ whiteSpace: "normal" }}>
+										<span
+											key={item.key}
+											style={{
+												fontFamily: "'Jost', sans-serif",
+												fontSize: "15px",
+												lineHeight: 1.4,
+												fontWeight: 500,
+												padding: "5px 12px",
+												borderRadius: "4px",
+												background: "var(--accent-light)",
+												color: "var(--accent-deep)",
+												whiteSpace: "normal",
+											}}
+										>
 											{formatMeaning(item.value).replace(/\//g, "")}
-										</div>
+										</span>
 									))}
 								</div>
 							) : (

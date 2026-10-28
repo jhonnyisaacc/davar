@@ -59,6 +59,48 @@ export type StructuredDefinitionMeanings<T extends DefinitionMeaningInput> = {
 export const stripDefinitionControls = (text: string): string =>
 	text.replace(UNICODE_CONTROLS, "").replace(/[ \t]+\n/g, "\n").trim();
 
+/**
+ * Demote capitalized pagan-deity labels that confuse readers next to theological
+ * "Dios" / "God". Display-boundary only — does not rewrite lexicon JSON.
+ *
+ * Spanish: Dioses, Diosas, Diosa, "Dios pagano/a".
+ * English (parallel, careful): Gods, Goddess(es), "pagan God".
+ * Leaves standalone Dios / God untouched.
+ */
+export const sanitizePaganDeityCapitalization = (text: string): string => {
+	if (!text) return text;
+	return (
+		text
+			// Spanish plurals / goddess forms
+			.replace(/\bDioses\b/g, "dioses")
+			.replace(/\bDiosas\b/g, "diosas")
+			.replace(/\bDiosa\b/g, "diosa")
+			// "Dios pagano" / "Dios pagana" (keep "Dios" alone)
+			.replace(/\bDios(\s+)([Pp]agan[oa]s?)\b/g, (_m, space, pagan) => {
+				const lower = String(pagan).toLowerCase();
+				return `dios${space}${lower}`;
+			})
+			// English parallel — plurals / goddess, not singular God
+			.replace(/\bGods\b/g, "gods")
+			.replace(/\bGoddesses\b/g, "goddesses")
+			.replace(/\bGoddess\b/g, "goddess")
+			.replace(/\b[Pp]agan(\s+)God\b/g, (_m, space) => `pagan${space}god`)
+	);
+};
+
+/**
+ * Reader-facing meaning line: strip leading dashes, sentence-case first letter,
+ * then demote pagan deity capitalizations.
+ */
+export const formatDefinitionMeaningForDisplay = (text: string): string => {
+	const cleaned = stripDefinitionControls(text)
+		.replace(/^[-–—]\s*/, "")
+		.trim();
+	if (!cleaned) return cleaned;
+	const capitalized = cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
+	return sanitizePaganDeityCapitalization(capitalized);
+};
+
 const normalizeSource = (source?: string): string =>
 	(source ?? "").trim().toLowerCase();
 
