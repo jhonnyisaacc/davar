@@ -101,6 +101,62 @@ export const formatDefinitionMeaningForDisplay = (text: string): string => {
 	return sanitizePaganDeityCapitalization(capitalized);
 };
 
+/**
+ * BDB morph/syntax abbreviation stems (matched as `stem.`). Trailing `\b` after
+ * the dot is avoided — `.` + space is not a word boundary.
+ */
+const BDB_DOT_ABBREV =
+	/\b(?:sq|oft|pf|impf|inf(?:abs|cstr)?|ptcp?|part|conj|pred|prep|pers|subj|obj|accus|gen|dat|cstr|abs|vb|adj|adv|cf|etc|conjug)\./gi;
+
+const BDB_TECH_WORDS =
+	/\b(?:copula|periphrastic|implicit\s+accus(?:ative)?)\b/i;
+
+/**
+ * True when the text is a BDB grammar/syntax scrap rather than a lexical gloss
+ * (e.g. "sq. pred. adj.", "oft. c. לְ pred. לְ pers.", "with עַל and לְ").
+ * Display filter only — does not rewrite lexicon JSON.
+ */
+export const isBdbTechnicalScrap = (text: string): boolean => {
+	const t = stripDefinitionControls(text).trim();
+	if (!t) return false;
+
+	const abbrevs = t.match(BDB_DOT_ABBREV) ?? [];
+	const hasTechWord = BDB_TECH_WORDS.test(t);
+	const hebrewCount = (t.match(/[\u0590-\u05FF]/g) ?? []).length;
+	const latinLetters = (t.match(/[A-Za-z]/g) ?? []).length;
+
+	if (abbrevs.length >= 2) return true;
+	if (abbrevs.length >= 1 && (hasTechWord || hebrewCount > 0 || latinLetters <= 24)) {
+		return true;
+	}
+	if (hasTechWord) return true;
+
+	// Short English frame around Hebrew particles ("with עַל and לְ").
+	if (hebrewCount >= 2 && latinLetters > 0 && latinLetters <= 12) {
+		return true;
+	}
+
+	return false;
+};
+
+/**
+ * Study notes stay hidden in English until curated `text_en` study content
+ * lands (see issue #183). ES/HE keep study rows.
+ */
+export const studyDefinitionsForLanguage = <T>(
+	study: readonly T[],
+	language: "en" | "es" | "he",
+): T[] => (language === "en" ? [] : [...study]);
+
+/** Study list for analysis payloads — `undefined` when empty or English UI. */
+export const optionalStudyDefinitions = <T>(
+	study: readonly T[],
+	language: "en" | "es" | "he",
+): T[] | undefined => {
+	const filtered = studyDefinitionsForLanguage(study, language);
+	return filtered.length > 0 ? filtered : undefined;
+};
+
 const normalizeSource = (source?: string): string =>
 	(source ?? "").trim().toLowerCase();
 
@@ -178,7 +234,8 @@ export const structureDefinitionMeanings = <T extends DefinitionMeaningInput>(
 			...definition,
 			text: stripDefinitionControls(definition.text ?? ""),
 		}))
-		.filter((definition) => Boolean(definition.text.trim())) as T[];
+		.filter((definition) => Boolean(definition.text.trim()))
+		.filter((definition) => !isBdbTechnicalScrap(definition.text)) as T[];
 
 	const empty: StructuredDefinitionMeanings<T> = {
 		gloss: [],

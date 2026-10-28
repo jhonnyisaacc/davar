@@ -1,4 +1,7 @@
-import { formatDefinitionMeaningForDisplay } from "@davar/shared/definitionMeanings";
+import {
+  formatDefinitionMeaningForDisplay,
+  optionalStudyDefinitions,
+} from "@davar/shared/definitionMeanings";
 import { instanceSurface } from "@davar/shared/instanceSurface";
 import {
   GREEK_RECORDED_REVISION,
@@ -321,8 +324,7 @@ const toGreekLexiconResponse = (
       : undefined,
     source_language: "greek",
     strong_number: entry.strong ?? strong,
-    study_definitions:
-      structured.study.length > 0 ? structured.study : undefined,
+    study_definitions: optionalStudyDefinitions(structured.study, language),
     translit_en: entry.translit_en,
     translit_es: entry.translit_es,
     translit_he: entry.translit_he,
@@ -1142,8 +1144,10 @@ const WordAnalysisBottomSheetComponent = (
                   structured.senses.length > 0 ? structured.senses : undefined,
                 fuller_definitions:
                   structured.fuller.length > 0 ? structured.fuller : undefined,
-                study_definitions:
-                  structured.study.length > 0 ? structured.study : undefined,
+                study_definitions: optionalStudyDefinitions(
+                  structured.study,
+                  language,
+                ),
                 root: offlineEntry.root ? String(offlineEntry.root) : undefined,
                 root_strong: offlineEntry.root_strong
                   ? String(offlineEntry.root_strong)
@@ -1237,8 +1241,10 @@ const WordAnalysisBottomSheetComponent = (
                   structured.senses.length > 0 ? structured.senses : undefined,
                 fuller_definitions:
                   structured.fuller.length > 0 ? structured.fuller : undefined,
-                study_definitions:
-                  structured.study.length > 0 ? structured.study : undefined,
+                study_definitions: optionalStudyDefinitions(
+                  structured.study,
+                  language,
+                ),
                 root: offlineEntry.root ? String(offlineEntry.root) : undefined,
                 root_strong: offlineEntry.root_strong
                   ? String(offlineEntry.root_strong)
@@ -1438,7 +1444,7 @@ const WordAnalysisBottomSheetComponent = (
   }, [lexiconEntry, formatMeaningText, normalizeMeaningDisplay]);
 
   const studyMeaningsList = useMemo(() => {
-    if (!lexiconEntry?.study_definitions?.length) {
+    if (language === "en" || !lexiconEntry?.study_definitions?.length) {
       return [];
     }
     return lexiconEntry.study_definitions
@@ -1448,7 +1454,7 @@ const WordAnalysisBottomSheetComponent = (
           : "",
       )
       .filter(Boolean);
-  }, [lexiconEntry, formatMeaningText, normalizeMeaningDisplay]);
+  }, [lexiconEntry, language, formatMeaningText, normalizeMeaningDisplay]);
 
   const dssMeaningsList = useMemo(() => {
     const normalizeForDisplay = (value: string) =>

@@ -153,17 +153,17 @@ export function WordCard({
 	const resolvedFullerMeanings =
 		fullerMeanings.length > 0 ? fullerMeanings : EMPTY_MEANINGS;
 	const resolvedStudyMeanings =
-		studyMeanings.length > 0
-			? studyMeanings
-			: secondaryMeanings.length > 0 &&
-					senseMeanings.length === 0 &&
-					fullerMeanings.length === 0
-				? secondaryMeanings
-				: EMPTY_MEANINGS;
+		language === "en"
+			? EMPTY_MEANINGS
+			: studyMeanings.length > 0
+				? studyMeanings
+				: secondaryMeanings.length > 0 &&
+						senseMeanings.length === 0 &&
+						fullerMeanings.length === 0
+					? secondaryMeanings
+					: EMPTY_MEANINGS;
 	const hasExpandableMeanings =
-		resolvedSenseMeanings.length > 0 ||
-		resolvedFullerMeanings.length > 0 ||
-		resolvedStudyMeanings.length > 0;
+		resolvedFullerMeanings.length > 0 || resolvedStudyMeanings.length > 0;
 
 	const [displayedData, setDisplayedData] = useState({
 		word,

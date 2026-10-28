@@ -1,11 +1,14 @@
 import { describe, expect, test } from "bun:test";
 import {
 	formatDefinitionMeaningForDisplay,
+	isBdbTechnicalScrap,
 	isDetailDefinition,
+	optionalStudyDefinitions,
 	partitionDefinitionMeanings,
 	sanitizePaganDeityCapitalization,
 	structureDefinitionMeanings,
 	stripDefinitionControls,
+	studyDefinitionsForLanguage,
 } from "./definitionMeanings";
 
 describe("stripDefinitionControls", () => {
@@ -69,6 +72,53 @@ describe("formatDefinitionMeaningForDisplay", () => {
 		expect(formatDefinitionMeaningForDisplay("Dios")).toBe("Dios");
 		expect(formatDefinitionMeaningForDisplay("God")).toBe("God");
 		expect(formatDefinitionMeaningForDisplay("rulers")).toBe("Rulers");
+	});
+});
+
+describe("isBdbTechnicalScrap", () => {
+	test("flags H1961-style morph/syntax scraps", () => {
+		const scraps = [
+			"rarely also Pf. c. וְ conj. וְהָיָה",
+			"sq. prep.",
+			"sq. pred. noun (to be viewed as implicit accus.)",
+			"sq. pred. adj.",
+			"sq. pred. לְ pers.",
+			"sq. לְ pred.",
+			"oft. c. לְ pred. לְ pers.",
+			"with עַל and לְ",
+			"as copula, joining subj. & pred.",
+			"periphrastic conjug.",
+		];
+		for (const text of scraps) {
+			expect(isBdbTechnicalScrap(text)).toBe(true);
+		}
+	});
+
+	test("keeps real lexical glosses", () => {
+		const glosses = [
+			"rulers",
+			"judges",
+			"gods",
+			"become",
+			"fall out",
+			"and it came to pass",
+			"become like",
+			"became the property of",
+		];
+		for (const text of glosses) {
+			expect(isBdbTechnicalScrap(text)).toBe(false);
+		}
+	});
+});
+
+describe("studyDefinitionsForLanguage", () => {
+	test("hides study for English; keeps ES/HE", () => {
+		const study = [{ text: "nota de estudio", source: "tcysite-eric" }];
+		expect(studyDefinitionsForLanguage(study, "en")).toEqual([]);
+		expect(studyDefinitionsForLanguage(study, "es")).toEqual(study);
+		expect(studyDefinitionsForLanguage(study, "he")).toEqual(study);
+		expect(optionalStudyDefinitions(study, "en")).toBeUndefined();
+		expect(optionalStudyDefinitions(study, "es")).toEqual(study);
 	});
 });
 
@@ -150,6 +200,28 @@ describe("structureDefinitionMeanings", () => {
 			"judges",
 			"gods",
 		]);
+	});
+
+	test("H1961: drops BDB syntax scraps from gloss and senses", () => {
+		const structured = structureDefinitionMeanings([
+			{ text: "become", source: "bdb", sense: "0" },
+			{ text: "rarely also Pf. c. וְ conj. וְהָיָה", source: "bdb" },
+			{ text: "sq. pred. adj.", source: "bdb" },
+			{ text: "oft. c. לְ pred. לְ pers.", source: "bdb" },
+			{ text: "with עַל and לְ", source: "bdb" },
+			{ text: "become like", source: "bdb" },
+			{ text: "as copula, joining subj. & pred.", source: "bdb" },
+		]);
+
+		expect(structured.gloss.map((item) => item.text)).toEqual(["become"]);
+		expect(structured.senses.map((item) => item.text)).toEqual([
+			"become like",
+		]);
+		expect(
+			[...structured.gloss, ...structured.senses, ...structured.study].some(
+				(item) => isBdbTechnicalScrap(item.text),
+			),
+		).toBe(false);
 	});
 
 	test("G3056 Spanish: gloss order; detail in study; fuller separate", () => {
