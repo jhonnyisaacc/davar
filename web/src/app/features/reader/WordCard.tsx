@@ -1,3 +1,4 @@
+import { formatDefinitionMeaningForDisplay } from "@davar/shared/definitionMeanings";
 import { formatVerseRef } from "@davar/shared/formatVerseRef";
 import { X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
@@ -272,13 +273,10 @@ export function WordCard({
 		});
 	}, [displayedData.instances]);
 
-	const formatMeaning = (text: string) => {
-		const cleaned = stripMeteg(stripCantillation(text))
-			.replace(/^[-–—]\s*/, "")
-			.trim();
-		if (!cleaned) return cleaned;
-		return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
-	};
+	const formatMeaning = (text: string) =>
+		formatDefinitionMeaningForDisplay(
+			stripMeteg(stripCantillation(text)),
+		);
 
 	const prefixSegments = useMemo(() => {
 		if (!displayedData.wordFromVerse || !displayedData.prefixes?.length) {
@@ -583,26 +581,28 @@ export function WordCard({
 				)}
 			</div>
 
-			{/* Segmented Control - Pill style with border */}
+			{/* Segmented control — rectangular segments (match gloss chip radius) */}
 			<div
-				className={`grid ${showQumranTab ? "grid-cols-3" : "grid-cols-2"} gap-2 border-2 border-[var(--primary)] rounded-full p-1`}
+				className={`grid ${showQumranTab ? "grid-cols-3" : "grid-cols-2"} gap-1 border border-[var(--accent)] rounded-[4px] p-0.5`}
 				style={{ overflow: "hidden" }}
 			>
 				{showQumranTab && (
 					<button
 						type="button"
 						onClick={() => setActiveTab("qumran")}
-						className="py-3 transition-all rounded-full"
+						className="py-1.5 px-2 transition-all rounded-[4px]"
 						style={{
 							fontFamily: "'Inter', sans-serif",
 							fontWeight: 700,
-							fontSize: "11px",
-							letterSpacing: "0.12em",
+							fontSize: "10px",
+							letterSpacing: "0.1em",
 							textTransform: "uppercase",
 							backgroundColor:
-								activeTab === "qumran" ? "var(--accent-strong)" : "transparent",
+								activeTab === "qumran" ? "var(--accent)" : "transparent",
 							color:
-								activeTab === "qumran" ? "#ffffff" : "var(--text-secondary)",
+								activeTab === "qumran"
+									? "var(--accent-foreground)"
+									: "var(--text-secondary)",
 						}}
 					>
 						{t("wordCard.qumran")}
@@ -611,19 +611,19 @@ export function WordCard({
 				<button
 					type="button"
 					onClick={() => setActiveTab("masoretic")}
-					className="py-3 transition-all rounded-full"
+					className="py-1.5 px-2 transition-all rounded-[4px]"
 					style={{
 						fontFamily: "'Inter', sans-serif",
 						fontWeight: 700,
-						fontSize: "11px",
-						letterSpacing: "0.12em",
+						fontSize: "10px",
+						letterSpacing: "0.1em",
 						textTransform: "uppercase",
 						backgroundColor:
-							activeTab === "masoretic"
-								? "var(--accent-strong)"
-								: "transparent",
+							activeTab === "masoretic" ? "var(--accent)" : "transparent",
 						color:
-							activeTab === "masoretic" ? "#ffffff" : "var(--text-secondary)",
+							activeTab === "masoretic"
+								? "var(--accent-foreground)"
+								: "var(--text-secondary)",
 					}}
 				>
 					{showQumranTab ? t("wordCard.masoretic") : t("wordCard.meanings")}
@@ -631,19 +631,19 @@ export function WordCard({
 				<button
 					type="button"
 					onClick={() => setActiveTab("instances")}
-					className="py-3 transition-all rounded-full"
+					className="py-1.5 px-2 transition-all rounded-[4px]"
 					style={{
 						fontFamily: "'Inter', sans-serif",
 						fontWeight: 700,
-						fontSize: "11px",
-						letterSpacing: "0.12em",
+						fontSize: "10px",
+						letterSpacing: "0.1em",
 						textTransform: "uppercase",
 						backgroundColor:
-							activeTab === "instances"
-								? "var(--accent-strong)"
-								: "transparent",
+							activeTab === "instances" ? "var(--accent)" : "transparent",
 						color:
-							activeTab === "instances" ? "#ffffff" : "var(--text-secondary)",
+							activeTab === "instances"
+								? "var(--accent-foreground)"
+								: "var(--text-secondary)",
 					}}
 				>
 					{t("wordCard.instances")}
@@ -653,7 +653,7 @@ export function WordCard({
 			{/* Tab Content */}
 			{activeTab === "masoretic" ? (
 				<div className="space-y-6 text-center">
-					{/* Meanings Section */}
+					{/* Senses Section — gloss + BDB chips under one title */}
 					<div className="pb-6">
 						<h3
 							className="mb-4"
@@ -666,7 +666,7 @@ export function WordCard({
 								textTransform: "uppercase",
 							}}
 						>
-							{t("wordCard.meanings")}
+							{t("wordCard.senses")}
 						</h3>
 						<div
 							style={{
@@ -679,42 +679,49 @@ export function WordCard({
 						>
 							{isLoading && displayedData.meanings.length === 0 ? (
 								t("wordCard.loadingDefinitions")
-							) : displayedData.meanings.length > 0 ? (
-								<div className="space-y-2 text-center">
-									{meaningItems.map((item) => (
-										<div key={item.key} style={{ whiteSpace: "normal" }}>
-											{formatMeaning(item.value).replace(/\//g, "")}
+							) : displayedData.meanings.length > 0 ||
+								senseMeaningItems.length > 0 ? (
+								<div className="space-y-3 text-center">
+									{meaningItems.length > 0 ? (
+										<div className="flex flex-wrap justify-center gap-2">
+											{meaningItems.map((item) => (
+												<span
+													key={item.key}
+													style={{
+														fontFamily: "'Jost', sans-serif",
+														fontSize: "15px",
+														lineHeight: 1.4,
+														fontWeight: 500,
+														padding: "5px 12px",
+														borderRadius: "4px",
+														background: "var(--accent-light)",
+														color: "var(--accent-darker)",
+														whiteSpace: "normal",
+													}}
+												>
+													{formatMeaning(item.value).replace(/\//g, "")}
+												</span>
+											))}
 										</div>
-									))}
+									) : null}
 									{senseMeaningItems.length > 0 ? (
-										<div className="pt-3 space-y-2">
-											<div
-												className="text-[11px] uppercase tracking-[0.15em] font-semibold"
-												style={{
-													fontFamily: "'Inter', sans-serif",
-													color: "var(--text-secondary)",
-												}}
-											>
-												{t("wordCard.senses")}
-											</div>
-											<div className="flex flex-wrap justify-center gap-2">
-												{senseMeaningItems.map((item) => (
-													<span
-														key={item.key}
-														style={{
-															fontFamily: "'Jost', sans-serif",
-															fontSize: "14px",
-															lineHeight: 1.4,
-															padding: "4px 10px",
-															borderRadius: "999px",
-															background: "var(--surface-muted, rgba(0,0,0,0.04))",
-															color: "var(--text-secondary)",
-														}}
-													>
-														{formatMeaning(item.value).replace(/\//g, "")}
-													</span>
-												))}
-											</div>
+										<div className="flex flex-wrap justify-center gap-2">
+											{senseMeaningItems.map((item) => (
+												<span
+													key={item.key}
+													style={{
+														fontFamily: "'Jost', sans-serif",
+														fontSize: "14px",
+														lineHeight: 1.4,
+														padding: "4px 10px",
+														borderRadius: "999px",
+														background: "var(--surface-elevated)",
+														color: "var(--text-primary)",
+													}}
+												>
+													{formatMeaning(item.value).replace(/\//g, "")}
+												</span>
+											))}
 										</div>
 									) : null}
 									{hasExpandableMeanings &&
@@ -870,15 +877,26 @@ export function WordCard({
 											</div>
 										) : null}
 										{meanings.length ? (
-											<div
-												style={{
-													fontFamily: "'Jost', sans-serif",
-													fontSize: "15px",
-													lineHeight: 1.5,
-												}}
-												className="dark:text-[var(--text-secondary)]"
-											>
-												{meanings.join(", ")}
+											<div className="flex flex-wrap justify-center gap-2">
+												{toMeaningItems(
+													meanings,
+													`${prefixItem.key}-meaning`,
+												).map((item) => (
+													<span
+														key={item.key}
+														style={{
+															fontFamily: "'Jost', sans-serif",
+															fontSize: "14px",
+															lineHeight: 1.4,
+															padding: "4px 10px",
+															borderRadius: "999px",
+															background: "var(--surface-elevated)",
+															color: "var(--text-primary)",
+														}}
+													>
+														{formatMeaning(item.value).replace(/\//g, "")}
+													</span>
+												))}
 											</div>
 										) : null}
 									</div>
@@ -913,7 +931,7 @@ export function WordCard({
 												fontFamily: "'Cardo', serif",
 												fontSize: "48px",
 												direction: "rtl",
-												color: "var(--primary)",
+												color: "var(--accent)",
 												fontWeight: 600,
 												lineHeight: 1.4,
 											}}
@@ -1046,7 +1064,7 @@ export function WordCard({
 								textTransform: "uppercase",
 							}}
 						>
-							{t("wordCard.meanings")}
+							{t("wordCard.senses")}
 						</h3>
 						<div
 							style={{
@@ -1061,11 +1079,24 @@ export function WordCard({
 							{isQumranLoading ? (
 								t("wordCard.loadingDefinitions")
 							) : displayedData.qumranMeanings?.length ? (
-								<div className="space-y-2 text-center">
+								<div className="flex flex-wrap justify-center gap-2">
 									{qumranMeaningItems.map((item) => (
-										<div key={item.key} style={{ whiteSpace: "normal" }}>
+										<span
+											key={item.key}
+											style={{
+												fontFamily: "'Jost', sans-serif",
+												fontSize: "15px",
+												lineHeight: 1.4,
+												fontWeight: 500,
+												padding: "5px 12px",
+												borderRadius: "4px",
+												background: "var(--accent-light)",
+												color: "var(--accent-darker)",
+												whiteSpace: "normal",
+											}}
+										>
 											{formatMeaning(item.value).replace(/\//g, "")}
-										</div>
+										</span>
 									))}
 								</div>
 							) : (
@@ -1215,7 +1246,7 @@ export function WordCard({
 										type="button"
 										key={item.key}
 										onClick={() => onInstanceClick(item.value.verse)}
-										className="py-4 transition-all hover:bg-[var(--primary)] hover:text-white rounded-[20px]"
+										className="py-4 transition-all hover:bg-[var(--accent)] hover:text-[var(--accent-foreground)] rounded-[20px]"
 										style={{
 											backgroundColor: "var(--muted)",
 											fontFamily: "'Inter', sans-serif",

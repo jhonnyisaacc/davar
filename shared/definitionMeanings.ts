@@ -59,6 +59,86 @@ export type StructuredDefinitionMeanings<T extends DefinitionMeaningInput> = {
 export const stripDefinitionControls = (text: string): string =>
 	text.replace(UNICODE_CONTROLS, "").replace(/[ \t]+\n/g, "\n").trim();
 
+/**
+ * Demote capitalized pagan-deity labels that confuse readers next to theological
+ * "Dios" / "God". Display-boundary only — does not rewrite lexicon JSON.
+ *
+ * Spanish: Dioses, Diosas, Diosa, "Dios pagano/a".
+ * English (parallel, careful): Gods, Goddess(es), "pagan God".
+ * Leaves standalone Dios / God untouched.
+ */
+export const sanitizePaganDeityCapitalization = (text: string): string => {
+	if (!text) return text;
+	return (
+		text
+			// Spanish plurals / goddess forms
+			.replace(/\bDioses\b/g, "dioses")
+			.replace(/\bDiosas\b/g, "diosas")
+			.replace(/\bDiosa\b/g, "diosa")
+			// "Dios pagano" / "Dios pagana" (keep "Dios" alone)
+			.replace(/\bDios(\s+)([Pp]agan[oa]s?)\b/g, (_m, space, pagan) => {
+				const lower = String(pagan).toLowerCase();
+				return `dios${space}${lower}`;
+			})
+			// English parallel — plurals / goddess, not singular God
+			.replace(/\bGods\b/g, "gods")
+			.replace(/\bGoddesses\b/g, "goddesses")
+			.replace(/\bGoddess\b/g, "goddess")
+			.replace(/\b[Pp]agan(\s+)God\b/g, (_m, space) => `pagan${space}god`)
+	);
+};
+
+/**
+ * Reader-facing meaning line: strip leading dashes, sentence-case first letter,
+ * then demote pagan deity capitalizations.
+ */
+export const formatDefinitionMeaningForDisplay = (text: string): string => {
+	const cleaned = stripDefinitionControls(text)
+		.replace(/^[-–—]\s*/, "")
+		.trim();
+	if (!cleaned) return cleaned;
+	const capitalized = cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
+	return sanitizePaganDeityCapitalization(capitalized);
+};
+
+/**
+ * BDB morph/syntax abbreviation stems (matched as `stem.`). Trailing `\b` after
+ * the dot is avoided — `.` + space is not a word boundary.
+ */
+const BDB_DOT_ABBREV =
+	/\b(?:sq|oft|pf|impf|inf(?:abs|cstr)?|ptcp?|part|conj|pred|prep|pers|subj|obj|accus|gen|dat|cstr|abs|vb|adj|adv|cf|etc|conjug)\./gi;
+
+const BDB_TECH_WORDS =
+	/\b(?:copula|periphrastic|implicit\s+accus(?:ative)?)\b/i;
+
+/**
+ * True when the text is a BDB grammar/syntax scrap rather than a lexical gloss
+ * (e.g. "sq. pred. adj.", "oft. c. לְ pred. לְ pers.", "with עַל and לְ").
+ * Display filter only — does not rewrite lexicon JSON.
+ */
+export const isBdbTechnicalScrap = (text: string): boolean => {
+	const t = stripDefinitionControls(text).trim();
+	if (!t) return false;
+
+	const abbrevs = t.match(BDB_DOT_ABBREV) ?? [];
+	const hasTechWord = BDB_TECH_WORDS.test(t);
+	const hebrewCount = (t.match(/[\u0590-\u05FF]/g) ?? []).length;
+	const latinLetters = (t.match(/[A-Za-z]/g) ?? []).length;
+
+	if (abbrevs.length >= 2) return true;
+	if (abbrevs.length >= 1 && (hasTechWord || hebrewCount > 0 || latinLetters <= 24)) {
+		return true;
+	}
+	if (hasTechWord) return true;
+
+	// Short English frame around Hebrew particles ("with עַל and לְ").
+	if (hebrewCount >= 2 && latinLetters > 0 && latinLetters <= 12) {
+		return true;
+	}
+
+	return false;
+};
+
 const normalizeSource = (source?: string): string =>
 	(source ?? "").trim().toLowerCase();
 
@@ -136,7 +216,8 @@ export const structureDefinitionMeanings = <T extends DefinitionMeaningInput>(
 			...definition,
 			text: stripDefinitionControls(definition.text ?? ""),
 		}))
-		.filter((definition) => Boolean(definition.text.trim())) as T[];
+		.filter((definition) => Boolean(definition.text.trim()))
+		.filter((definition) => !isBdbTechnicalScrap(definition.text)) as T[];
 
 	const empty: StructuredDefinitionMeanings<T> = {
 		gloss: [],
