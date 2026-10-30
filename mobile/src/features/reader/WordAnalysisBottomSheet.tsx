@@ -607,7 +607,7 @@ const createStyles = (
     glossChipText: {
       fontFamily: typography.families.latinUIMedium,
       fontSize: typography.sizes.bodySmall,
-      color: colors.primaryDeep,
+      color: colors.primary,
       textAlign: "center",
       lineHeight: 20,
     },

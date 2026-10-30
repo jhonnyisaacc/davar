@@ -583,7 +583,7 @@ export function WordCard({
 
 			{/* Segmented control — rectangular segments (match gloss chip radius) */}
 			<div
-				className={`grid ${showQumranTab ? "grid-cols-3" : "grid-cols-2"} gap-1 border border-[var(--primary)] rounded-[4px] p-0.5`}
+				className={`grid ${showQumranTab ? "grid-cols-3" : "grid-cols-2"} gap-1 border border-[var(--accent)] rounded-[4px] p-0.5`}
 				style={{ overflow: "hidden" }}
 			>
 				{showQumranTab && (
@@ -598,9 +598,11 @@ export function WordCard({
 							letterSpacing: "0.1em",
 							textTransform: "uppercase",
 							backgroundColor:
-								activeTab === "qumran" ? "var(--accent-strong)" : "transparent",
+								activeTab === "qumran" ? "var(--accent)" : "transparent",
 							color:
-								activeTab === "qumran" ? "#ffffff" : "var(--text-secondary)",
+								activeTab === "qumran"
+									? "var(--accent-foreground)"
+									: "var(--text-secondary)",
 						}}
 					>
 						{t("wordCard.qumran")}
@@ -617,11 +619,11 @@ export function WordCard({
 						letterSpacing: "0.1em",
 						textTransform: "uppercase",
 						backgroundColor:
-							activeTab === "masoretic"
-								? "var(--accent-strong)"
-								: "transparent",
+							activeTab === "masoretic" ? "var(--accent)" : "transparent",
 						color:
-							activeTab === "masoretic" ? "#ffffff" : "var(--text-secondary)",
+							activeTab === "masoretic"
+								? "var(--accent-foreground)"
+								: "var(--text-secondary)",
 					}}
 				>
 					{showQumranTab ? t("wordCard.masoretic") : t("wordCard.meanings")}
@@ -637,11 +639,11 @@ export function WordCard({
 						letterSpacing: "0.1em",
 						textTransform: "uppercase",
 						backgroundColor:
-							activeTab === "instances"
-								? "var(--accent-strong)"
-								: "transparent",
+							activeTab === "instances" ? "var(--accent)" : "transparent",
 						color:
-							activeTab === "instances" ? "#ffffff" : "var(--text-secondary)",
+							activeTab === "instances"
+								? "var(--accent-foreground)"
+								: "var(--text-secondary)",
 					}}
 				>
 					{t("wordCard.instances")}
@@ -693,7 +695,7 @@ export function WordCard({
 														padding: "5px 12px",
 														borderRadius: "4px",
 														background: "var(--accent-light)",
-														color: "var(--accent-deep)",
+														color: "var(--accent)",
 														whiteSpace: "normal",
 													}}
 												>
@@ -928,7 +930,7 @@ export function WordCard({
 												fontFamily: "'Cardo', serif",
 												fontSize: "48px",
 												direction: "rtl",
-												color: "var(--primary)",
+												color: "var(--accent)",
 												fontWeight: 600,
 												lineHeight: 1.4,
 											}}
@@ -1088,7 +1090,7 @@ export function WordCard({
 												padding: "5px 12px",
 												borderRadius: "4px",
 												background: "var(--accent-light)",
-												color: "var(--accent-deep)",
+												color: "var(--accent)",
 												whiteSpace: "normal",
 											}}
 										>
@@ -1243,7 +1245,7 @@ export function WordCard({
 										type="button"
 										key={item.key}
 										onClick={() => onInstanceClick(item.value.verse)}
-										className="py-4 transition-all hover:bg-[var(--primary)] hover:text-white rounded-[20px]"
+										className="py-4 transition-all hover:bg-[var(--accent)] hover:text-[var(--accent-foreground)] rounded-[20px]"
 										style={{
 											backgroundColor: "var(--muted)",
 											fontFamily: "'Inter', sans-serif",
