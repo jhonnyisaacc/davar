@@ -581,21 +581,21 @@ export function WordCard({
 				)}
 			</div>
 
-			{/* Segmented Control - Pill style with border */}
+			{/* Segmented control — rectangular segments (match gloss chip radius) */}
 			<div
-				className={`grid ${showQumranTab ? "grid-cols-3" : "grid-cols-2"} gap-2 border-2 border-[var(--primary)] rounded-full p-1`}
+				className={`grid ${showQumranTab ? "grid-cols-3" : "grid-cols-2"} gap-1 border border-[var(--primary)] rounded-[4px] p-0.5`}
 				style={{ overflow: "hidden" }}
 			>
 				{showQumranTab && (
 					<button
 						type="button"
 						onClick={() => setActiveTab("qumran")}
-						className="py-3 transition-all rounded-full"
+						className="py-1.5 px-2 transition-all rounded-[4px]"
 						style={{
 							fontFamily: "'Inter', sans-serif",
 							fontWeight: 700,
-							fontSize: "11px",
-							letterSpacing: "0.12em",
+							fontSize: "10px",
+							letterSpacing: "0.1em",
 							textTransform: "uppercase",
 							backgroundColor:
 								activeTab === "qumran" ? "var(--accent-strong)" : "transparent",
@@ -609,12 +609,12 @@ export function WordCard({
 				<button
 					type="button"
 					onClick={() => setActiveTab("masoretic")}
-					className="py-3 transition-all rounded-full"
+					className="py-1.5 px-2 transition-all rounded-[4px]"
 					style={{
 						fontFamily: "'Inter', sans-serif",
 						fontWeight: 700,
-						fontSize: "11px",
-						letterSpacing: "0.12em",
+						fontSize: "10px",
+						letterSpacing: "0.1em",
 						textTransform: "uppercase",
 						backgroundColor:
 							activeTab === "masoretic"
@@ -629,12 +629,12 @@ export function WordCard({
 				<button
 					type="button"
 					onClick={() => setActiveTab("instances")}
-					className="py-3 transition-all rounded-full"
+					className="py-1.5 px-2 transition-all rounded-[4px]"
 					style={{
 						fontFamily: "'Inter', sans-serif",
 						fontWeight: 700,
-						fontSize: "11px",
-						letterSpacing: "0.12em",
+						fontSize: "10px",
+						letterSpacing: "0.1em",
 						textTransform: "uppercase",
 						backgroundColor:
 							activeTab === "instances"
