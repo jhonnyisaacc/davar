@@ -695,7 +695,7 @@ export function WordCard({
 														padding: "5px 12px",
 														borderRadius: "4px",
 														background: "var(--accent-light)",
-														color: "var(--accent)",
+														color: "var(--text-primary)",
 														whiteSpace: "normal",
 													}}
 												>
@@ -715,9 +715,8 @@ export function WordCard({
 														lineHeight: 1.4,
 														padding: "4px 10px",
 														borderRadius: "999px",
-														background:
-															"var(--surface-muted, rgba(0,0,0,0.04))",
-														color: "var(--text-secondary)",
+														background: "var(--surface-elevated)",
+														color: "var(--text-primary)",
 													}}
 												>
 													{formatMeaning(item.value).replace(/\//g, "")}
@@ -888,9 +887,8 @@ export function WordCard({
 															lineHeight: 1.4,
 															padding: "4px 10px",
 															borderRadius: "999px",
-															background:
-																"var(--surface-muted, rgba(0,0,0,0.04))",
-															color: "var(--text-secondary)",
+															background: "var(--surface-elevated)",
+															color: "var(--text-primary)",
 														}}
 													>
 														{formatMeaning(meaning).replace(/\//g, "")}
@@ -1090,7 +1088,7 @@ export function WordCard({
 												padding: "5px 12px",
 												borderRadius: "4px",
 												background: "var(--accent-light)",
-												color: "var(--accent)",
+												color: "var(--text-primary)",
 												whiteSpace: "normal",
 											}}
 										>

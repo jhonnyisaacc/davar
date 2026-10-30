@@ -607,7 +607,7 @@ const createStyles = (
     glossChipText: {
       fontFamily: typography.families.latinUIMedium,
       fontSize: typography.sizes.bodySmall,
-      color: colors.primary,
+      color: colors.textPrimary,
       textAlign: "center",
       lineHeight: 20,
     },
@@ -621,7 +621,7 @@ const createStyles = (
     senseChipText: {
       fontFamily: typography.families.latinMeaning,
       fontSize: typography.sizes.bodySmall,
-      color: colors.textSecondary,
+      color: colors.textPrimary,
       textAlign: "center",
       lineHeight: 20,
     },
