@@ -607,7 +607,8 @@ const createStyles = (
     glossChipText: {
       fontFamily: typography.families.latinUIMedium,
       fontSize: typography.sizes.bodySmall,
-      color: colors.textPrimary,
+      // primaryDarker on primaryLight stays readable in light and dark
+      color: colors.primaryDarker,
       textAlign: "center",
       lineHeight: 20,
     },

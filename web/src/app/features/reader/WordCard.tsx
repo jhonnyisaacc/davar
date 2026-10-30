@@ -695,7 +695,7 @@ export function WordCard({
 														padding: "5px 12px",
 														borderRadius: "4px",
 														background: "var(--accent-light)",
-														color: "var(--text-primary)",
+														color: "var(--accent-darker)",
 														whiteSpace: "normal",
 													}}
 												>
@@ -1088,7 +1088,7 @@ export function WordCard({
 												padding: "5px 12px",
 												borderRadius: "4px",
 												background: "var(--accent-light)",
-												color: "var(--text-primary)",
+												color: "var(--accent-darker)",
 												whiteSpace: "normal",
 											}}
 										>
