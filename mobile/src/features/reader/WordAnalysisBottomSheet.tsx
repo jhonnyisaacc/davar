@@ -1788,9 +1788,20 @@ const WordAnalysisBottomSheetComponent = (
                               </Text>
                             ) : null}
                             {meanings.length ? (
-                              <Text style={styles.prefixMeaning}>
-                                {meanings.join(", ")}
-                              </Text>
+                              <View style={styles.meaningsChipRow}>
+                                {meanings.map((meaning, meaningIndex) => (
+                                  <View
+                                    key={`${prefix}-meaning-${meaningIndex}`}
+                                    style={styles.senseChip}
+                                  >
+                                    <Text style={styles.senseChipText}>
+                                      {formatMeaningText(
+                                        normalizeMeaningDisplay(meaning),
+                                      )}
+                                    </Text>
+                                  </View>
+                                ))}
+                              </View>
                             ) : null}
                           </View>
                         );

@@ -876,15 +876,24 @@ export function WordCard({
 											</div>
 										) : null}
 										{meanings.length ? (
-											<div
-												style={{
-													fontFamily: "'Jost', sans-serif",
-													fontSize: "15px",
-													lineHeight: 1.5,
-												}}
-												className="dark:text-[var(--text-secondary)]"
-											>
-												{meanings.join(", ")}
+											<div className="flex flex-wrap justify-center gap-2">
+												{meanings.map((meaning, meaningIndex) => (
+													<span
+														key={`${prefixItem.key}-meaning-${meaningIndex}`}
+														style={{
+															fontFamily: "'Jost', sans-serif",
+															fontSize: "14px",
+															lineHeight: 1.4,
+															padding: "4px 10px",
+															borderRadius: "999px",
+															background:
+																"var(--surface-muted, rgba(0,0,0,0.04))",
+															color: "var(--text-secondary)",
+														}}
+													>
+														{formatMeaning(meaning).replace(/\//g, "")}
+													</span>
+												))}
 											</div>
 										) : null}
 									</div>
