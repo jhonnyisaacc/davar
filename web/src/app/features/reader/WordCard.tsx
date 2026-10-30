@@ -878,9 +878,12 @@ export function WordCard({
 										) : null}
 										{meanings.length ? (
 											<div className="flex flex-wrap justify-center gap-2">
-												{meanings.map((meaning, meaningIndex) => (
+												{toMeaningItems(
+													meanings,
+													`${prefixItem.key}-meaning`,
+												).map((item) => (
 													<span
-														key={`${prefixItem.key}-meaning-${meaningIndex}`}
+														key={item.key}
 														style={{
 															fontFamily: "'Jost', sans-serif",
 															fontSize: "14px",
@@ -891,7 +894,7 @@ export function WordCard({
 															color: "var(--text-primary)",
 														}}
 													>
-														{formatMeaning(meaning).replace(/\//g, "")}
+														{formatMeaning(item.value).replace(/\//g, "")}
 													</span>
 												))}
 											</div>
