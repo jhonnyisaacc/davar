@@ -362,22 +362,18 @@ export function useWordSelection({
 		selectedWordContext,
 	]);
 
-	const highlightedWord = useMemo(
-		() => selectedWord ?? lastSelectedWord,
-		[selectedWord, lastSelectedWord],
-	);
+	// Permanent verse highlight only while the word card/sheet is open.
+	// lastSelectedWord stays for panel close animation / instance navigation,
+	// but must not keep the copper selection after dismiss. Hover uses CSS.
+	const highlightedWord = useMemo(() => selectedWord, [selectedWord]);
 
 	const highlightedWordContext = useMemo(() => {
 		if (selectedWord && selectedWordContext) {
 			return selectedWordContext;
 		}
 
-		if (!selectedWord && lastSelectedWordContext) {
-			return lastSelectedWordContext;
-		}
-
 		return null;
-	}, [selectedWord, selectedWordContext, lastSelectedWordContext]);
+	}, [selectedWord, selectedWordContext]);
 
 	const selectedDssVariant = useMemo(
 		() =>
