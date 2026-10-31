@@ -1,3 +1,4 @@
+import { formatDefinitionMeaningForDisplay } from "@davar/shared/definitionMeanings";
 import { instanceSurface } from "@davar/shared/instanceSurface";
 import {
   GREEK_RECORDED_REVISION,
@@ -508,17 +509,18 @@ const createStyles = (
     toggleContainer: {
       flexDirection: "row",
       backgroundColor: colors.background,
-      borderRadius: radii.full,
-      padding: 4,
+      borderRadius: 4,
+      padding: 2,
       marginBottom: spacing[6],
       borderWidth: 1,
       borderColor: colors.border,
+      gap: 2,
     },
     toggleButton: {
       flex: 1,
-      paddingVertical: spacing[3],
-      paddingHorizontal: spacing[4],
-      borderRadius: radii.full,
+      paddingVertical: spacing[1] + 2,
+      paddingHorizontal: spacing[2],
+      borderRadius: 4,
       alignItems: "center",
     },
     toggleButtonActive: {
@@ -526,11 +528,11 @@ const createStyles = (
     },
     toggleText: {
       fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.bodySmall,
+      fontSize: typography.sizes.caption,
       color: colors.textSecondary,
       fontWeight: "600",
       textTransform: "uppercase",
-      letterSpacing: 1,
+      letterSpacing: 0.8,
     },
     toggleTextActive: {
       color: colors.surface,
@@ -541,9 +543,9 @@ const createStyles = (
       marginBottom: spacing[6],
     },
     secondaryToggleButton: {
-      paddingVertical: spacing[2],
-      paddingHorizontal: spacing[4],
-      borderRadius: radii.full,
+      paddingVertical: spacing[1] + 2,
+      paddingHorizontal: spacing[3],
+      borderRadius: 4,
       borderWidth: 1,
       borderColor: colors.border,
       backgroundColor: colors.background,
@@ -554,11 +556,11 @@ const createStyles = (
     },
     secondaryToggleText: {
       fontFamily: typography.families.latinUI,
-      fontSize: typography.sizes.bodySmall,
+      fontSize: typography.sizes.caption,
       color: colors.textSecondary,
       fontWeight: "600",
       textTransform: "uppercase",
-      letterSpacing: 1,
+      letterSpacing: 0.8,
     },
     secondaryToggleTextActive: {
       color: colors.surface,
@@ -587,6 +589,42 @@ const createStyles = (
     meaningsList: {
       alignItems: "center",
       marginBottom: spacing[4],
+    },
+    meaningsChipRow: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      justifyContent: "center",
+      gap: spacing[2],
+      marginBottom: spacing[3],
+    },
+    glossChip: {
+      backgroundColor: colors.primaryLight,
+      borderRadius: 4,
+      paddingHorizontal: 12,
+      paddingVertical: 5,
+      maxWidth: "100%",
+    },
+    glossChipText: {
+      fontFamily: typography.families.latinUIMedium,
+      fontSize: typography.sizes.bodySmall,
+      // primaryDarker on primaryLight stays readable in light and dark
+      color: colors.primaryDarker,
+      textAlign: "center",
+      lineHeight: 20,
+    },
+    senseChip: {
+      backgroundColor: colors.surfaceElevated,
+      borderRadius: radii.full,
+      paddingHorizontal: 10,
+      paddingVertical: 4,
+      maxWidth: "100%",
+    },
+    senseChipText: {
+      fontFamily: typography.families.latinMeaning,
+      fontSize: typography.sizes.bodySmall,
+      color: colors.textPrimary,
+      textAlign: "center",
+      lineHeight: 20,
     },
     meaningsBullet: {
       fontFamily: typography.families.latinMeaning,
@@ -1323,11 +1361,10 @@ const WordAnalysisBottomSheetComponent = (
     }
   }, [displayHebrew, t]);
 
-  const formatMeaningText = useCallback((text: string) => {
-    const cleaned = text.replace(/^[-–—]\s*/, "").trim();
-    if (!cleaned) return cleaned;
-    return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
-  }, []);
+  const formatMeaningText = useCallback(
+    (text: string) => formatDefinitionMeaningForDisplay(text),
+    [],
+  );
 
   const normalizeMeaningDisplay = useCallback(
     (value: string) =>
@@ -1416,14 +1453,8 @@ const WordAnalysisBottomSheetComponent = (
   }, [lexiconEntry, formatMeaningText, normalizeMeaningDisplay]);
 
   const dssMeaningsList = useMemo(() => {
-    const normalizeForDisplay = (t: string) =>
-      stripCantillation(stripNikud(t)).replace(/\//g, "").trim();
-
-    const formatMeaning = (text: string) => {
-      const cleaned = text.replace(/^[-–—]\s*/, "").trim();
-      if (!cleaned) return cleaned;
-      return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
-    };
+    const normalizeForDisplay = (value: string) =>
+      stripCantillation(stripNikud(value)).replace(/\//g, "").trim();
 
     if (!dssLexiconEntry?.definitions?.length) {
       return ["—"];
@@ -1433,7 +1464,9 @@ const WordAnalysisBottomSheetComponent = (
       .map((item) => (item.text ? normalizeForDisplay(item.text) : ""))
       .filter(Boolean);
 
-    const formatted = rawMeanings.map((item) => formatMeaning(item));
+    const formatted = rawMeanings.map((item) =>
+      formatDefinitionMeaningForDisplay(item),
+    );
     return formatted.length ? formatted : ["—"];
   }, [dssLexiconEntry]);
 
@@ -1444,9 +1477,7 @@ const WordAnalysisBottomSheetComponent = (
     if (text === "—") {
       return text;
     }
-    const cleaned = text.replace(/^[-–—]\s*/, "").trim();
-    if (!cleaned) return cleaned;
-    return cleaned.charAt(0).toUpperCase() + cleaned.slice(1);
+    return formatDefinitionMeaningForDisplay(text);
   };
 
   const isDerivedRoot = Boolean(lexiconEntry?.root_strong || word?.root);
@@ -1632,9 +1663,9 @@ const WordAnalysisBottomSheetComponent = (
             {/* Tab Content */}
             {activeTab === "masoretic" ? (
               <>
-                {/* Meanings section */}
+                {/* Senses section — gloss + BDB chips under one title */}
                 <Text style={styles.sectionLabel}>
-                  {t("wordCard.meanings")}
+                  {t("wordCard.senses")}
                 </Text>
                 {isLoading ? (
                   <Text style={styles.emptyText}>
@@ -1642,28 +1673,31 @@ const WordAnalysisBottomSheetComponent = (
                   </Text>
                 ) : null}
                 <View style={styles.meaningsList}>
-                  {meaningsList.map((meaning, index) => (
-                    <Text
-                      key={`${meaning}-${index}`}
-                      style={styles.meaningsBullet}
-                    >
-                      {meaning}
-                    </Text>
-                  ))}
-                  {senseMeaningsList.length > 0 ? (
-                    <>
-                      <Text style={styles.sectionLabel}>
-                        {t("wordCard.senses")}
-                      </Text>
-                      {senseMeaningsList.map((meaning, index) => (
-                        <Text
-                          key={`sense-${meaning}-${index}`}
-                          style={styles.meaningsBullet}
+                  {meaningsList.length > 0 && meaningsList[0] !== "—" ? (
+                    <View style={styles.meaningsChipRow}>
+                      {meaningsList.map((meaning, index) => (
+                        <View
+                          key={`gloss-${meaning}-${index}`}
+                          style={styles.glossChip}
                         >
-                          {meaning}
-                        </Text>
+                          <Text style={styles.glossChipText}>{meaning}</Text>
+                        </View>
                       ))}
-                    </>
+                    </View>
+                  ) : meaningsList[0] === "—" ? (
+                    <Text style={styles.meaningsBullet}>—</Text>
+                  ) : null}
+                  {senseMeaningsList.length > 0 ? (
+                    <View style={styles.meaningsChipRow}>
+                      {senseMeaningsList.map((meaning, index) => (
+                        <View
+                          key={`sense-${meaning}-${index}`}
+                          style={styles.senseChip}
+                        >
+                          <Text style={styles.senseChipText}>{meaning}</Text>
+                        </View>
+                      ))}
+                    </View>
                   ) : null}
                   {fullerMeaningsList.length > 0 ||
                   studyMeaningsList.length > 0 ? (
@@ -1756,9 +1790,20 @@ const WordAnalysisBottomSheetComponent = (
                               </Text>
                             ) : null}
                             {meanings.length ? (
-                              <Text style={styles.prefixMeaning}>
-                                {meanings.join(", ")}
-                              </Text>
+                              <View style={styles.meaningsChipRow}>
+                                {meanings.map((meaning, meaningIndex) => (
+                                  <View
+                                    key={`${prefix}-meaning-${meaningIndex}`}
+                                    style={styles.senseChip}
+                                  >
+                                    <Text style={styles.senseChipText}>
+                                      {formatMeaningText(
+                                        normalizeMeaningDisplay(meaning),
+                                      )}
+                                    </Text>
+                                  </View>
+                                ))}
+                              </View>
                             ) : null}
                           </View>
                         );
@@ -1828,7 +1873,7 @@ const WordAnalysisBottomSheetComponent = (
 
                 <View style={styles.sectionDivider} />
                 <Text style={styles.sectionLabel}>
-                  {t("wordCard.meanings")}
+                  {t("wordCard.senses")}
                 </Text>
                 {isDssLoading ? (
                   <Text style={styles.emptyText}>
@@ -1836,14 +1881,22 @@ const WordAnalysisBottomSheetComponent = (
                   </Text>
                 ) : null}
                 <View style={styles.meaningsList}>
-                  {dssMeaningsList.map((meaning, index) => (
-                    <Text
-                      key={`${meaning}-${index}`}
-                      style={styles.meaningsBullet}
-                    >
-                      {meaning}
+                  {dssMeaningsList.length > 0 && dssMeaningsList[0] !== "—" ? (
+                    <View style={styles.meaningsChipRow}>
+                      {dssMeaningsList.map((meaning, index) => (
+                        <View
+                          key={`dss-gloss-${meaning}-${index}`}
+                          style={styles.glossChip}
+                        >
+                          <Text style={styles.glossChipText}>{meaning}</Text>
+                        </View>
+                      ))}
+                    </View>
+                  ) : (
+                    <Text style={styles.meaningsBullet}>
+                      {dssMeaningsList[0] ?? "—"}
                     </Text>
-                  ))}
+                  )}
                 </View>
 
                 <View style={styles.sectionDivider} />
