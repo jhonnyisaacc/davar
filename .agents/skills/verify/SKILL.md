@@ -1,9 +1,9 @@
 ---
 name: verify
-description: Drive the real Davar web app (Bun dev server + headless Chromium over CDP) to prove a change works the way a reader sees it. Use after any change under web/ or shared/ that a user can see, for bug reproduction on the web surface, and whenever a playbook asks for the driver skill. Mobile, server, and worker have sibling harnesses in scripts/control/.
+description: Drive the real Davar app to prove a change works the way a reader sees it. The web reader runs on a Bun dev server plus headless Chromium over CDP; the Hono API, the Python knowledge worker, the Python pipelines, and the Expo packager have sibling control CLIs in scripts/control/. Use after any user-visible change under web/ or shared/, after changes to api/, scripts/knowledge, or the dict and Delitzsch pipelines, for bug reproduction, and whenever a playbook asks for the driver skill.
 ---
 
-# Verify Davar web
+# Verify Davar
 
 The primary surface is the web reader in `web/`. Drive it with the repo's own harness, `scripts/control/web.ts`. It starts the dev server and a headless Chromium on a debug port, then opens routes, clicks controls, and captures evidence. Every command prints `key value` lines and starts with `status ok` or `status fail` plus a `reason`, so act on the `reason` instead of guessing.
 
@@ -12,10 +12,10 @@ Run every command from the repository root.
 ## Launch
 
 ```bash
-CHROME_PATH="/Applications/Brave Browser.app/Contents/MacOS/Brave Browser" bun scripts/control/web.ts start
+bun scripts/control/web.ts start
 ```
 
-- The harness defaults to `google-chrome`, which this Mac does not have. Any Chromium build works through `CHROME_PATH`.
+- The harness runs `google-chrome`. When that is not on `PATH`, set `CHROME_PATH` to the executable of any Chromium build (Chrome, Chromium, Brave, Edge) for every command.
 - `start` runs `bun run dev` in `web/` (gateway on `5173`, hot HTML on `5174`) and then the browser with CDP on `9222`. The browser opens at a phone-sized 390x844 window.
 - It is ready when it prints `status ok` with `url http://127.0.0.1:5173`. It waits on its own; don't poll. The first run can take minutes while `ensure-static-data` builds `/data`. Give the command a 10-minute timeout.
 - If `web/.env` is missing, `start` copies `web/.env.example` and records that, so `reset` can remove it later.
@@ -48,7 +48,7 @@ bun scripts/control/web.ts state
 - `drive open <path>` navigates to a same-origin path and waits up to 45 s for the URL to match and the body to have text. It prints the URL and the first 500 characters of page text.
 - `drive click <name>` clicks the first `button`, `a`, or `[role=button]` whose `aria-label`, or else whitespace-collapsed text, equals `<name>` exactly. Then it waits 800 ms and prints the URL and text. The name is case-sensitive and must match the whole label.
 - `state` prints the current URL, title, and text without acting.
-- The harness has no typing, scrolling, or key-press actions. A feature that needs them, such as city search, is out of reach until someone adds the action to `scripts/control/web.ts`. Report that instead of claiming the feature passed.
+- The harness has no typing, scrolling, key-press, `<select>`, or viewport actions. A feature that needs them, such as city search or the Language dropdown, is out of reach until someone adds the action to `scripts/control/web.ts`. Report that instead of claiming the feature passed.
 
 Routes come from `shared/destinations.ts`: `/verse/<Book>/<chapter>/<verse>`, `/home`, `/widgets` (calendar), `/assemblies`, `/commentary`, `/settings`, `/account`, `/sources`, `/commentary-sources`, `/support`, `/donate`, `/features`, `/terms`, `/privacy`, `/feedback`. Feature recipes are in [features/](features/README.md).
 
@@ -75,3 +75,20 @@ bun scripts/control/web.ts reset   # stop, delete the run dir, delete web/.env o
 ```
 
 Both commands kill by recorded PID, never by process name. Neither one touches `artifacts/verify/`, so evidence survives cleanup. Run `stop` after every failed attempt too, so a broken run doesn't leave ports held.
+
+## Other surfaces
+
+Each sibling CLI accepts the same subcommands as `web.ts` (`doctor`, `start`, `stop`, `drive`, `state`, `evidence`, `reset`), prints the same `status` and `reason` lines, and keeps run state under `$DAVAR_VERIFY_ROOT/<app>`. Evidence goes to `artifacts/verify/<app>/`.
+
+- **Hono API.** `DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:5432/davar_server_test bun scripts/control/api.ts start` serves port 3000 (`DAVAR_SERVER_PORT` overrides it) and fails with `database-url-missing` without the variable. `doctor` requires `GET /up` to return `{"status":"ok"}`. `drive get <path>` is the only action, HTTP GET. `evidence` saves the status and body.
+- **Knowledge worker.** `bun scripts/control/worker.ts start` opens the tmux session `davar-verify-worker` and needs `python3` with `jsonschema` and `referencing`. `drive validate` checks the committed pilot and `drive check` rebuilds it in a temp directory and compares. Neither writes product data. `evidence` saves the output and exit code.
+- **Python pipelines.** `bun scripts/control/python.ts start` records the interpreter (`DAVAR_PYTHON` overrides it). `doctor` compares it with the `mise.toml` pin and reports `gap yes` without failing. `drive help` prints the dict CLI help and `drive fixture` runs the pinned Delitzsch dry run.
+- **Expo packager.** `bun scripts/control/mobile.ts start` starts Metro on 8081 when `mobile/node_modules/expo` is installed. `state` reports the version and bundle id. `drive` and `evidence` exit `maestro-unimplemented`, so say the mobile UI was not driven instead of substituting the web reader.
+
+`reset` on any of them stops only the recorded process or session and keeps `artifacts/verify/`.
+
+## Local check
+
+`./scripts/check` runs the same web, mobile, api, and python commands as `.github/workflows/ci.yml`. The api section needs a local Postgres at `DATABASE_URL`.
+
+Keep the recipes honest with `/maintain-verification-skill` as features change.
