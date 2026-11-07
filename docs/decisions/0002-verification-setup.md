@@ -6,7 +6,7 @@ Davar needs one way for an agent to launch, drive, and prove the web reader, the
 
 ## Decision
 
-Ship `.cursor/skills/verify-davar/` plus four control CLIs under `scripts/control/`. Web uses Chrome DevTools. The API uses HTTP. The knowledge worker uses a tmux session around `python3 -m scripts.knowledge`. Mobile `drive` and `evidence` exit `maestro-unimplemented`. `./scripts/check` runs the existing Web, Mobile, Server, and Python CI commands without dropping a step.
+Ship `.agents/skills/verify/` plus four control CLIs under `scripts/control/`. Web uses Chrome DevTools. The API uses HTTP. The knowledge worker uses a tmux session around `python3 -m scripts.knowledge`. Mobile `drive` and `evidence` exit `maestro-unimplemented`. `./scripts/check` runs the existing Web, Mobile, Server, and Python CI commands without dropping a step.
 
 ## Alternatives
 
@@ -18,7 +18,7 @@ The skill's Launch, Doctor, Drive, Evidence, and Cleanup sections name the comma
 
 ## How to undo
 
-Delete `.cursor/skills/verify-davar/`, `scripts/control/`, `scripts/check`, and this record. Restore the `.cursor/` gitignore line.
+Delete `.agents/skills/verify/`, `scripts/control/`, `scripts/check`, and this record. Restore the `.cursor/` gitignore line.
 
 ## Status
 
