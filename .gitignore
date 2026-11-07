@@ -118,6 +118,7 @@ Desktop.ini
 .cursorrules
 
 artifacts/verify/
+.claude/worktrees/
 
 # Build Outputs
 dist/

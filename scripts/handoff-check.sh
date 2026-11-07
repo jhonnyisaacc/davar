@@ -25,9 +25,17 @@ if ! gh auth status >/dev/null 2>&1; then
 	exit 0
 fi
 
-if url=$(gh pr view "$branch" --json url --jq .url 2>/dev/null); then
-	echo "handoff-check ok: $url"
-	exit 0
+pr=$(gh pr view "$branch" --json state,url,headRefOid --jq '[.state, .url, .headRefOid] | @tsv' 2>/dev/null || true)
+state=$(printf '%s' "$pr" | cut -f1)
+url=$(printf '%s' "$pr" | cut -f2)
+remote_head=$(printf '%s' "$pr" | cut -f3)
+if [ "$state" != OPEN ]; then
+	echo "handoff-check: $branch has no open pull request${url:+ ($url is $state)}. Push it and open one with gh pr create --draft, then rerun." >&2
+	exit 1
 fi
-echo "handoff-check: $branch has no pull request. Push it and open one with gh pr create --draft, then rerun." >&2
-exit 1
+local_head=$(git rev-parse HEAD)
+if [ "$local_head" != "$remote_head" ]; then
+	echo "handoff-check: $url is at ${remote_head}, but $branch is at ${local_head}. Push your commits, then rerun." >&2
+	exit 1
+fi
+echo "handoff-check ok: $url"
