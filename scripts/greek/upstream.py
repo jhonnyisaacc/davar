@@ -12,6 +12,7 @@ from scripts.greek.sources import (
     ALL_SOURCES,
     STEPBIBLE_COMMIT,
     UBS_COMMIT,
+    UBS_ES_BLOB_SHA,
     UBS_ES_PATH,
 )
 from scripts.greek.stable_json import write_json
@@ -75,9 +76,9 @@ def check_upstream() -> dict:
             "relative_path": UBS_ES_PATH,
             "recorded_commit": UBS_COMMIT,
             "latest_commit": ubs_head,
-            "recorded_blob_sha": None,
+            "recorded_blob_sha": UBS_ES_BLOB_SHA,
             "latest_blob_sha": ubs_blob,
-            "changed": ubs_head != UBS_COMMIT,
+            "changed": ubs_blob != UBS_ES_BLOB_SHA,
         }
     )
     changed = [source["key"] for source in sources if source["changed"]]
