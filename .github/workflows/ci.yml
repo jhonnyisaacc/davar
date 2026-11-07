@@ -59,6 +59,7 @@ jobs:
       - name: Gate and routing tests
         run: |
           python3 tests/test_ci_baseline.py
+          python3 tests/test_runtime_version.py
           python3 .github/workflows/lib/which-workflows.py --check
       - name: actionlint
         run: |
@@ -155,6 +156,11 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check runtimeVersion bump for native changes
+        if: github.event_name == 'pull_request'
+        run: python3 scripts/ci/runtime_version.py --base "origin/${{ github.base_ref }}"
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
