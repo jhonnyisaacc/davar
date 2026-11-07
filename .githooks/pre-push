@@ -71,10 +71,13 @@ def main() -> int:
             summary.append(f"{push.branch} {audit.stdout.strip()}")
     if blocked:
         return 1
+    layout = run(["python3", str(CI / "agent_layout.py")])
     dup = run(["bash", str(CI / "dup-code.sh")])
-    if dup.returncode != 0:
-        report(", ".join(push.branch for push in pushes), [dup])
+    failures = [check for check in (layout, dup) if check.returncode != 0]
+    if failures:
+        report(", ".join(push.branch for push in pushes), failures)
         return 1
+    summary.append(layout.stdout.strip())
     summary.extend(line for line in dup.stdout.splitlines() if line.startswith("duplicates:"))
     print("pre-push ok: " + "; ".join(summary))
     return 0
