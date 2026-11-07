@@ -126,7 +126,7 @@ Data in this project comes from public-domain, permissive, and licensed sources.
 - Qumran differences/data reference: https://codeberg.org/dandeto/deadseainsights
 - SBL Hebrew font source: https://www.sbl-site.org/educational/BiblicalFonts_SBLHebrew.aspx
 - Google Fonts: https://fonts.google.com
-- STEP Bible TAGNT and TBESG (Tyndale House, Cambridge): https://www.STEPBible.org / https://github.com/STEPBible/STEPBible-Data
+- STEPBible TAGNT and TBESG (Tyndale House, Cambridge, and STEPBible.org): https://STEPBible.github.io/STEPBible-Data
 - SBL Greek New Testament (Holmes 2010): https://sblgnt.com/license/
 - UBS Dictionary of the Greek New Testament (Spanish): https://github.com/ubsicap/ubs-open-license
 
@@ -140,7 +140,7 @@ Licensed translation credits used by permission:
 Greek Besorah sources (CC BY / CC BY-SA; required notices):
 
 - STEPBible TAGNT and TBESG (CC BY 4.0):
-  "Greek word tags and English lexical data are from STEP Bible (www.STEPBible.org), based on work at Tyndale House, Cambridge, licensed under CC BY 4.0. Source: https://github.com/STEPBible/STEPBible-Data. Modifications, if any, are recorded with the data revision."
+  "Greek word tags and English lexical data are from Tyndale House, Cambridge, and STEPBible.org, licensed under CC BY 4.0. Source: https://STEPBible.github.io/STEPBible-Data. Modifications, if any, are recorded with the data revision."
 - SBLGNT (CC BY 4.0):
   "The displayed Greek reading is the SBL Greek New Testament, edited by Michael W. Holmes. Copyright © 2010 Society of Biblical Literature and Logos Bible Software. Licensed under CC BY 4.0. https://sblgnt.com/license/"
 - UBS Dictionary of the Greek New Testament (CC BY-SA 4.0):

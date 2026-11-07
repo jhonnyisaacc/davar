@@ -23,7 +23,7 @@ Later screens and data bundles must retain at least this wording, plus a link to
 
 **STEPBible TAGNT and TBESG (CC BY 4.0)**
 
-> Greek word tags and English lexical data are from STEP Bible (www.STEPBible.org), based on work at Tyndale House, Cambridge, licensed under CC BY 4.0. Source: https://github.com/STEPBible/STEPBible-Data. Modifications, if any, are recorded with the data revision.
+> Greek word tags and English lexical data are from Tyndale House, Cambridge, and STEPBible.org, licensed under CC BY 4.0. Source: https://STEPBible.github.io/STEPBible-Data. Modifications, if any, are recorded with the data revision.
 
 **SBLGNT (CC BY 4.0)**
 
@@ -41,12 +41,14 @@ Offline copies of TAGNT, TBESG, and SBLGNT are permitted under CC BY 4.0 if attr
 
 Official repository: [STEPBible/STEPBible-Data](https://github.com/STEPBible/STEPBible-Data). Repository and file headers state **CC BY 4.0**, created for [STEPBible.org](https://www.stepbible.org/) from work at Tyndale House, Cambridge.
 
-Required practices from the official README and file headers:
+Required practices from the file headers (licence summary revised in STEPBible-Data `5de0a47f3`, 2026-11-02):
 
-- Credit “STEP Bible” with a link to `https://www.STEPBible.org`.
+- Attribute the data to Tyndale House and STEPBible.org, with a link to `https://STEPBible.github.io/STEPBible-Data` as the source.
 - Record modifications and keep that record available to later users.
-- Prefer referring others to the official GitHub repository rather than becoming a second untracked distribution point.
-- Send proposed corrections to STEPBible for verification.
+- Do not post copies of the data files elsewhere, so STEPBible stays the single up-to-date source.
+- Send proposed corrections to STEPBible@Gmail.com for verification.
+
+The revised summary also allows sending the data to AI servers without requesting permission.
 
 Offline distribution of reformatted TAGNT/TBESG artifacts is allowed under CC BY 4.0 if attribution and modification records travel with the data.
 
