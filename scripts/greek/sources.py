@@ -59,6 +59,7 @@ ALL_SOURCES = (*TAGNT_SOURCES, TBESG)
 UBS_REPO = "https://github.com/ubsicap/ubs-open-license"
 UBS_COMMIT = "3a6edd8212df2e1189037ad39687726990c80d56"
 UBS_ES_PATH = "dictionaries/greek/JSON/UBSGreekNTDic-v1.0-es.JSON"
+UBS_ES_BLOB_SHA = "285c436f3fff645d23d8edff64d21564612a19b1"
 UBS_ES_URL = (
     f"https://raw.githubusercontent.com/ubsicap/ubs-open-license/{UBS_COMMIT}/"
     f"{UBS_ES_PATH}"
