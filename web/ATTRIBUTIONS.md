@@ -8,7 +8,7 @@ This Figma Make file includes photos from [Unsplash](https://unsplash.com) used 
 
 ## Greek Besorah
 
-Greek word tags and English lexical data are from STEP Bible (www.STEPBible.org), based on work at Tyndale House, Cambridge, licensed under CC BY 4.0. Source: https://github.com/STEPBible/STEPBible-Data. Modifications, if any, are recorded with the data revision.
+Greek word tags and English lexical data are from Tyndale House, Cambridge, and STEPBible.org, licensed under CC BY 4.0. Source: https://STEPBible.github.io/STEPBible-Data. Modifications, if any, are recorded with the data revision.
 
 The displayed Greek reading is the SBL Greek New Testament, edited by Michael W. Holmes. Copyright © 2010 Society of Biblical Literature and Logos Bible Software. Licensed under CC BY 4.0. https://sblgnt.com/license/
 
