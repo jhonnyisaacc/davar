@@ -20,12 +20,12 @@ jobs:
     steps:
       - name: Comment bugbot run
         env:
-          GH_TOKEN: ${{ secrets.BUGBOT_TRIGGER_PAT }}
+          GH_TOKEN: ${{ secrets.BUGBOT_TRIGGER_PATH }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           set -eu
           if [ -z "${GH_TOKEN:-}" ]; then
-            echo "::notice::BUGBOT_TRIGGER_PAT is absent; skipping bugbot trigger"
+            echo "::notice::BUGBOT_TRIGGER_PATH is absent; skipping bugbot trigger"
             exit 0
           fi
           files=$(gh api --paginate "repos/${{ github.repository }}/pulls/${PR_NUMBER}/files" --jq '.[].filename')
