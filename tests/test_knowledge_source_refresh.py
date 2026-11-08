@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from scripts.knowledge.compatibility import boundary
+from scripts.knowledge.compatibility import boundary, legacy_generation_differences, refreshed_outputs
 
 INPUTS = {
     "contract_version": "1.0.0",
@@ -83,3 +83,18 @@ def test_a_repin_cannot_change_edition_fields_other_than_source_revision(tmp_pat
     write(repo, "data/knowledge/registries/editions.json", [{**EDITIONS[0], "name": "Other"}])
     with pytest.raises(ValueError, match="Non-additive or out-of-scope change"):
         boundary(base, repo)
+
+
+def test_a_greek_repin_exempts_only_greek_outputs_from_legacy_parity():
+    refreshed = refreshed_outputs(("data/greek/preview/greek/releases/sblgnt/new/lexicon.json",))
+    expected = {"greek/manifest.json": "old", "bundles/greek-sblgnt.json": "old", "bundles/tanaj.json": "old"}
+    actual = {"greek/manifest.json": "new", "bundles/greek-sblgnt.json": "new", "bundles/tanaj.json": "new"}
+    assert legacy_generation_differences(expected, actual, refreshed) == ["bundles/tanaj.json"]
+
+
+def test_a_repin_outside_the_refresh_table_keeps_legacy_parity_strict():
+    refreshed = refreshed_outputs(("data/oe/daniel/7.json",))
+    assert refreshed == ()
+    assert legacy_generation_differences({"greek/manifest.json": "old"}, {"greek/manifest.json": "new"}, refreshed) == [
+        "greek/manifest.json"
+    ]

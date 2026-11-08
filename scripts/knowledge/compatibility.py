@@ -40,6 +40,7 @@ SHAUL_ORIGIN = "https://github.com/jhonnyisaacc/shaul.git"
 PILOT_INPUTS = "data/knowledge/pilot-inputs.json"
 EDITIONS = "data/knowledge/registries/editions.json"
 PILOT_OUTPUT = "data/knowledge/generated/pilot-v1/"
+REFRESH_OUTPUTS = {"data/greek/preview/": ("greek/", "bundles/greek-sblgnt")}
 KNOWLEDGE_CODE = "scripts/knowledge/"
 KNOWLEDGE_TESTS = "tests/test_knowledge_"
 MOVED_PYTEST = frozenset(
@@ -91,15 +92,17 @@ def _without(rows, keys):
     return [{k: v for k, v in row.items() if k not in keys} for row in rows]
 
 
-def repinned_inputs(before: bytes, after: bytes) -> bool:
+def repinned_inputs(before: bytes, after: bytes) -> tuple[str, ...]:
     try:
         old, new = json.loads(before), json.loads(after)
         old_inputs, new_inputs = old.pop("inputs"), new.pop("inputs")
-        return old == new and _without(old_inputs, {"path", "sha256"}) == _without(
+        if old != new or _without(old_inputs, {"path", "sha256"}) != _without(
             new_inputs, {"path", "sha256"}
-        )
+        ):
+            return ()
+        return tuple(b["path"] for a, b in zip(old_inputs, new_inputs) if a != b)
     except (ValueError, TypeError, AttributeError, KeyError):
-        return False
+        return ()
 
 
 def repinned_editions(before: bytes, after: bytes) -> bool:
@@ -110,11 +113,23 @@ def repinned_editions(before: bytes, after: bytes) -> bool:
         return False
 
 
-def source_refresh(base: str, root: Path, changes: str) -> bool:
-    if f"M\t{PILOT_INPUTS}" not in changes.splitlines():
-        return False
+def source_refresh(base: str, root: Path) -> tuple[str, ...]:
+    changes = subprocess.check_output(
+        ["git", "diff", "--name-status", base, "--", PILOT_INPUTS], cwd=root, text=True
+    )
+    if changes.split("\t", 1)[0] != "M":
+        return ()
     before = subprocess.check_output(["git", "show", f"{base}:{PILOT_INPUTS}"], cwd=root)
     return repinned_inputs(before, (root / PILOT_INPUTS).read_bytes())
+
+
+def refreshed_outputs(repinned: tuple[str, ...]) -> tuple[str, ...]:
+    return tuple(
+        output
+        for prefix, outputs in REFRESH_OUTPUTS.items()
+        if any(path.startswith(prefix) for path in repinned)
+        for output in outputs
+    )
 
 
 def moved_pytest_step(step) -> bool:
@@ -245,7 +260,7 @@ def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
         ["git", "diff", "--name-status", base, "--"], cwd=root, text=True
     )
     knowledge_edits = False
-    refresh = source_refresh(base, root, changes)
+    refresh = bool(source_refresh(base, root))
     for line in changes.splitlines():
         status, path = line.split("\t", 1)
         if not (path.startswith(ALLOWED) or path in (WORKFLOW, CI_WORKFLOW)):
@@ -346,12 +361,16 @@ def prepare_legacy_digest(name: str, payload: dict) -> None:
         payload.pop("lexicon_shards", None)
 
 
-def legacy_generation_differences(expected: dict, actual: dict) -> list[str]:
+def legacy_generation_differences(
+    expected: dict, actual: dict, refreshed: tuple[str, ...] = ()
+) -> list[str]:
     differences = []
     for name in sorted(expected.keys() | actual.keys()):
         if expected.get(name) == actual.get(name):
             continue
         if name not in expected and _GREEK_SHARD.fullmatch(name):
+            continue
+        if refreshed and name.startswith(refreshed):
             continue
         differences.append(name)
     return differences
@@ -373,6 +392,7 @@ def archive(root: Path, revision: str, destination: Path):
 
 def legacy(base: str, root=ROOT):
     boundary(base, root)
+    refreshed = refreshed_outputs(source_refresh(base, root))
     env = {
         k: v
         for k, v in os.environ.items()
@@ -424,7 +444,7 @@ def legacy(base: str, root=ROOT):
                         baseline_outputs[export] = actual
                         continue
                     expected = baseline_outputs[export]
-                    differences = legacy_generation_differences(expected, actual)
+                    differences = legacy_generation_differences(expected, actual, refreshed)
                     if differences:
                         raise ValueError(
                             "Legacy generation changed: " + repr(differences[:20])
