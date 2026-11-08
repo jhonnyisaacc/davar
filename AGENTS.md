@@ -24,7 +24,7 @@ JavaScript installs, scripts, and tests use Bun from the surface directory (`web
 
 ## Releases
 
-Mobile publication uses Expo commands and the repository secret `EXPO_TOKEN`. Never commit that token. JavaScript-only `mobile/` changes on `main` use `eas update`. Changes to native projects, `runtimeVersion`, the app version, `ios/`, `android/`, or `eas.json` use `eas build` and then `eas submit`. Do not run those commands for a pull request.
+Mobile publication uses Expo commands and the repository secret `EXPO_TOKEN`. Never commit that token. JavaScript-only `mobile/` changes on `main` use `eas update`. Changes to native projects, `runtimeVersion`, the app version, `ios/`, `android/`, or `eas.json` use `eas build` and then `eas submit`. Do not run those commands for a pull request. Every pull request that the mobile-eas classifier calls native must bump `expo.runtimeVersion` in `mobile/app.json`, and `scripts/ci/runtime_version.py` enforces it.
 
 ## Assistant habits
 
