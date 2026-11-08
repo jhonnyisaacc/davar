@@ -20,6 +20,7 @@ mobile:
   - mobile/**
   - shared/**
   - scripts/ci/**
+  - .github/workflows/mobile-eas.yml
   - .github/workflows/ci.yml
   - .github/ci/**
 
