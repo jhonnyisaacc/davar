@@ -266,8 +266,26 @@ class PrePushTest(ScratchRepoTest):
         self.assertIn("Head branch 'cursor/x-1' does not match", result.stderr)
         self.assertNotIn("deleted-1", result.stderr)
 
+    def add_agent_layout(self) -> None:
+        skill = self.repo.path / ".agents" / "skills" / "verify" / "SKILL.md"
+        skill.parent.mkdir(parents=True)
+        skill.write_text("---\nname: verify\n---\n")
+        (self.repo.path / ".claude").mkdir()
+        (self.repo.path / ".claude" / "skills").symlink_to("../.agents/skills")
+        self.repo.git("add", ".agents", ".claude/skills")
+
+    def test_agent_layout_failure_blocks_the_push(self) -> None:
+        tip = self.repo.git("rev-parse", "origin/main").strip()
+        result = self.push(f"refs/heads/main {tip} refs/heads/main {ZERO}")
+        self.assertEqual(result.returncode, 1)
+        self.assertIn(
+            f"$ python3 {CI / 'agent_layout.py'}\nagent-layout: .claude/skills is not tracked",
+            result.stderr,
+        )
+
     @unittest.skipUnless(shutil.which("bunx"), "dup-code.sh needs Bun")
-    def test_main_runs_only_dup_code(self) -> None:
+    def test_main_runs_agent_layout_and_dup_code(self) -> None:
+        self.add_agent_layout()
         for scanned in ("api", "web/src", "mobile", "shared", "scripts/ci", "tools/bani", ".github/ci"):
             (self.repo.path / scanned).mkdir(parents=True)
         shutil.copy(ROOT / ".github" / "ci" / "jscpd.json", self.repo.path / ".github" / "ci")
@@ -278,7 +296,8 @@ class PrePushTest(ScratchRepoTest):
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertNotIn("does not match", result.stderr)
         self.assertEqual(
-            result.stdout, "pre-push ok: duplicates: clones=0 baseline=0, duplicatedLines=0 baseline=0\n"
+            result.stdout,
+            "pre-push ok: agent-layout ok; duplicates: clones=0 baseline=0, duplicatedLines=0 baseline=0\n",
         )
 
 

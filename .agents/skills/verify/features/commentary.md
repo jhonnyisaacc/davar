@@ -12,7 +12,7 @@ The commentary screen answers a question about a verse reference using the comme
 - Open `/commentary` directly.
 - Use the commentary entry point on a verse when the flag is enabled.
 
-## Driving it with control/web.ts
+## Driving it with scripts/control
 
 Preconditions:
 

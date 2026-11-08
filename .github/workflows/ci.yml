@@ -59,6 +59,8 @@ jobs:
       - name: Gate and routing tests
         run: |
           python3 tests/test_ci_baseline.py
+          python3 tests/test_agent_layout.py
+          python3 scripts/ci/agent_layout.py
           python3 tests/test_runtime_version.py
           python3 .github/workflows/lib/which-workflows.py --check
       - name: actionlint

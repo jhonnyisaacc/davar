@@ -113,13 +113,12 @@ Desktop.ini
 *.sublime-project
 *.sublime-workspace
 .cursor/*
-!.cursor/skills/
-!.cursor/skills/**
 !.cursor/environment.json
 !.cursor/setup-ssh-signing.sh
 .cursorrules
 
 artifacts/verify/
+.claude/worktrees/
 
 # Build Outputs
 dist/

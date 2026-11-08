@@ -1,6 +1,6 @@
 # Davar
 
-Davar (דבר, "word") is a minimalist Bible study app for Hebrew Scriptures (Tanakh and Besorah), including Qumran variants and a custom dictionary. Cursor and Codex both read this file. Do not add a second instruction tree under `.github/prompts/` or `.github/instructions/`. Tool-specific skills are extra; they must not restate this file.
+Davar (דבר, "word") is a minimalist Bible study app for Hebrew Scriptures (Tanakh and Besorah), including Qumran variants and a custom dictionary. Every coding agent reads this file. Do not add a second instruction tree under `.github/prompts/` or `.github/instructions/`, and skills must not restate this file.
 
 ## Surfaces
 
@@ -30,6 +30,12 @@ Mobile publication uses Expo commands and the repository secret `EXPO_TOKEN`. Ne
 
 - Summarize the change and name the files. Show a diff only when asked.
 - When a JavaScript command is required, give the exact Bun command and the directory it runs in.
+- Never edit an installed plugin or its cache (for example under `~/.cursor/plugins/cache/` or `~/.claude/plugins/cache/`). Change the plugin's source or this repo instead.
+- Before reporting work done, run `sh scripts/handoff-check.sh` and fix what it reports.
+
+## Skills
+
+Skills live in `.agents/skills/`. `.claude/skills` is a symlink to it, and `scripts/ci/agent_layout.py` enforces that layout.
 
 ## Git
 
