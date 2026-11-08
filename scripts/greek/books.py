@@ -33,7 +33,7 @@ def davar_besorah_ids_from_metadata() -> list[str]:
 
 
 # TAGNT verse identities with rows but no SBL edition token at
-# STEPBible-Data ae39711d7843b2902d54993e432de9c12d6a4b9a. Do not fill these
+# STEPBible-Data 5de0a47f35f0fc13dfe1430d104e5db8a4285f9c. Do not fill these
 # from Hebrew Besorah or from NA28.
 TAGNT_SBL_ABSENT_VERSES: tuple[str, ...] = (
     "Mat.17.21",

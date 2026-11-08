@@ -6,7 +6,7 @@ export type StrongNamespace = "G" | "H" | "D";
 export const GREEK_EDITION: GreekEdition = "sblgnt";
 export const GREEK_TAGGING_SOURCE = "stepbible-tagnt";
 export const GREEK_RECORDED_REVISION =
-  "ae39711d7843b2902d54993e432de9c12d6a4b9a";
+  "5de0a47f35f0fc13dfe1430d104e5db8a4285f9c";
 export const GREEK_TRANSLITERATION_VERSION = "greek-transliteration-v1";
 
 export type SourceIdentity = {

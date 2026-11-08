@@ -201,7 +201,7 @@ def test_identity_policy_and_nonnumeric_label():
 def test_real_greek_nonnumeric_source_record():
     path = (
         ROOT
-        / "data/greek/preview/greek/releases/sblgnt/ae39711d7843b2902d54993e432de9c12d6a4b9a/books/luke/1.json"
+        / "data/greek/preview/greek/releases/sblgnt/5de0a47f35f0fc13dfe1430d104e5db8a4285f9c/books/luke/1.json"
     )
     verse = next(v for v in read_json(path)["verses"] if v["verse_id"] == "73[1.74]")
     passage, tokens = greek_passage(verse, "luke", "/verses/0", {"passages": []})

@@ -6,8 +6,8 @@
   "owner": "davar",
   "repository": "https://github.com/jhonnyisaacc/davar",
   "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-  "path": "data/greek/preview/greek/releases/sblgnt/ae39711d7843b2902d54993e432de9c12d6a4b9a/lexicon.json",
-  "sha256": "54fa36644dc9f58b51e66d313a9292ea593c897ba3f77a71ca1d49f29a34699c"
+  "path": "data/greek/preview/greek/releases/sblgnt/5de0a47f35f0fc13dfe1430d104e5db8a4285f9c/lexicon.json",
+  "sha256": "05f541841c245761e8f8c45f9598675bef745b5d5574b02404e300486e2293ef"
 },
     {
       "id": "oe",
@@ -30,8 +30,8 @@
       "owner": "davar",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-      "path": "data/greek/preview/greek/releases/sblgnt/ae39711d7843b2902d54993e432de9c12d6a4b9a/books/john/1.json",
-      "sha256": "263c2adfacffef25bbd80e7f6268c9cdf5986c1fc90d4220ecde02f2d6df16b2"
+      "path": "data/greek/preview/greek/releases/sblgnt/5de0a47f35f0fc13dfe1430d104e5db8a4285f9c/books/john/1.json",
+      "sha256": "4bd52de4568830211e937c8ba334a296fce3f71d06d7cfb98192359d2c90a279"
     },
     {
       "id": "tth",
