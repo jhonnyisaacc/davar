@@ -92,7 +92,7 @@ def _without(rows, keys):
     return [{k: v for k, v in row.items() if k not in keys} for row in rows]
 
 
-def repinned_inputs(before: bytes, after: bytes) -> tuple[str, ...]:
+def repinned_inputs(before: bytes, after: bytes) -> tuple[tuple[str, str], ...]:
     try:
         old, new = json.loads(before), json.loads(after)
         old_inputs, new_inputs = old.pop("inputs"), new.pop("inputs")
@@ -100,34 +100,51 @@ def repinned_inputs(before: bytes, after: bytes) -> tuple[str, ...]:
             new_inputs, {"path", "sha256"}
         ):
             return ()
-        return tuple(b["path"] for a, b in zip(old_inputs, new_inputs) if a != b)
+        return tuple(
+            (a["path"], b["path"]) for a, b in zip(old_inputs, new_inputs) if a != b
+        )
     except (ValueError, TypeError, AttributeError, KeyError):
         return ()
 
 
-def repinned_editions(before: bytes, after: bytes) -> bool:
+def repinned_editions(
+    before: bytes, after: bytes, repinned: tuple[tuple[str, str], ...]
+) -> bool:
     try:
         old, new = json.loads(before), json.loads(after)
-        return _without(old, {"source_revision"}) == _without(new, {"source_revision"})
-    except (ValueError, TypeError, AttributeError):
+        if _without(old, {"source_revision"}) != _without(new, {"source_revision"}):
+            return False
+        return all(
+            a["source_revision"] == b["source_revision"]
+            or any(
+                a["source_revision"] in old_path and b["source_revision"] in new_path
+                for old_path, new_path in repinned
+            )
+            for a, b in zip(old, new)
+        )
+    except (ValueError, TypeError, AttributeError, KeyError):
         return False
 
 
-def source_refresh(base: str, root: Path) -> tuple[str, ...]:
-    changes = subprocess.check_output(
-        ["git", "diff", "--name-status", base, "--", PILOT_INPUTS], cwd=root, text=True
+def source_refresh(base: str, root: Path) -> tuple[tuple[str, str], ...]:
+    changed = subprocess.check_output(
+        ["git", "diff", "--name-status", base, "--"], cwd=root, text=True
+    ).splitlines()
+    builder_edits = any(
+        path.startswith(KNOWLEDGE_CODE) and path != KNOWLEDGE_CODE + "compatibility.py"
+        for path in (line.split("\t")[-1] for line in changed)
     )
-    if changes.split("\t", 1)[0] != "M":
+    if builder_edits or f"M\t{PILOT_INPUTS}" not in changed:
         return ()
     before = subprocess.check_output(["git", "show", f"{base}:{PILOT_INPUTS}"], cwd=root)
     return repinned_inputs(before, (root / PILOT_INPUTS).read_bytes())
 
 
-def refreshed_outputs(repinned: tuple[str, ...]) -> tuple[str, ...]:
+def refreshed_outputs(repinned: tuple[tuple[str, str], ...]) -> tuple[str, ...]:
     return tuple(
         output
         for prefix, outputs in REFRESH_OUTPUTS.items()
-        if any(path.startswith(prefix) for path in repinned)
+        if any(new_path.startswith(prefix) for _, new_path in repinned)
         for output in outputs
     )
 
@@ -260,7 +277,7 @@ def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
         ["git", "diff", "--name-status", base, "--"], cwd=root, text=True
     )
     knowledge_edits = False
-    refresh = bool(source_refresh(base, root))
+    repinned = source_refresh(base, root)
     for line in changes.splitlines():
         status, path = line.split("\t", 1)
         if not (path.startswith(ALLOWED) or path in (WORKFLOW, CI_WORKFLOW)):
@@ -284,10 +301,10 @@ def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
                 continue
             if publication_compatible(path, before, after):
                 continue
-            if refresh and (
+            if repinned and (
                 path == PILOT_INPUTS
                 or path.startswith(PILOT_OUTPUT)
-                or (path == EDITIONS and repinned_editions(before, after))
+                or (path == EDITIONS and repinned_editions(before, after, repinned))
             ):
                 continue
         if status != "A":
@@ -335,7 +352,7 @@ def _greek_manifest(name: str) -> bool:
     )
 
 
-def tree(path: Path, *, legacy_clock=False):
+def tree(path: Path, *, legacy_clock=False, refreshed: tuple[str, ...] = ()):
     result = {}
     for file in sorted(path.rglob("*")):
         if not file.is_file():
@@ -343,22 +360,29 @@ def tree(path: Path, *, legacy_clock=False):
         name = file.relative_to(path).as_posix()
         data = file.read_bytes()
         if legacy_clock and (
-            name in ("manifest.json", "version.json") or _greek_manifest(name)
+            name in ("manifest.json", "version.json", "bundles/versions.json")
+            or _greek_manifest(name)
         ):
             payload = read_json(file)
-            prepare_legacy_digest(name, payload)
+            prepare_legacy_digest(name, payload, refreshed)
             data = encoded(payload)
         result[name] = digest(data)
     return result
 
 
-def prepare_legacy_digest(name: str, payload: dict) -> None:
+def prepare_legacy_digest(name: str, payload: dict, refreshed: tuple[str, ...] = ()) -> None:
     if name in ("manifest.json", "version.json"):
         # Exactly the two pre-existing clock-derived values are excluded.
         for key in ("version", "generated_at"):
             payload.pop(key, None)
     if _greek_manifest(name):
         payload.pop("lexicon_shards", None)
+    if "greek/" in refreshed:
+        if name == "bundles/versions.json":
+            for key in [key for key in payload if key.startswith("greek:")]:
+                payload.pop(key)
+        if name == "manifest.json":
+            payload.get("bundles", {}).get("versions", {}).pop("checksum", None)
 
 
 def legacy_generation_differences(
@@ -439,7 +463,9 @@ def legacy(base: str, root=ROOT):
                         checkout,
                         {**env, "EXPORT_TS2009_STATIC": export},
                     )
-                    actual = tree(checkout / "web/public/data", legacy_clock=True)
+                    actual = tree(
+                        checkout / "web/public/data", legacy_clock=True, refreshed=refreshed
+                    )
                     if label == "base":
                         baseline_outputs[export] = actual
                         continue
