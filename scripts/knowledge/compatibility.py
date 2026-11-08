@@ -37,6 +37,9 @@ KNOWLEDGE_COMMANDS = (
 )
 SHAUL_REVISION = "8c94b0fe9eca817e22340430309801d0ef76125b"
 SHAUL_ORIGIN = "https://github.com/jhonnyisaacc/shaul.git"
+PILOT_INPUTS = "data/knowledge/pilot-inputs.json"
+EDITIONS = "data/knowledge/registries/editions.json"
+PILOT_OUTPUT = "data/knowledge/generated/pilot-v1/"
 KNOWLEDGE_CODE = "scripts/knowledge/"
 KNOWLEDGE_TESTS = "tests/test_knowledge_"
 MOVED_PYTEST = frozenset(
@@ -82,6 +85,36 @@ def publication_compatible(path: str, before: bytes, after: bytes) -> bool:
         return old == new
     except (ValueError, TypeError, AttributeError):
         return False
+
+
+def _without(rows, keys):
+    return [{k: v for k, v in row.items() if k not in keys} for row in rows]
+
+
+def repinned_inputs(before: bytes, after: bytes) -> bool:
+    try:
+        old, new = json.loads(before), json.loads(after)
+        old_inputs, new_inputs = old.pop("inputs"), new.pop("inputs")
+        return old == new and _without(old_inputs, {"path", "sha256"}) == _without(
+            new_inputs, {"path", "sha256"}
+        )
+    except (ValueError, TypeError, AttributeError, KeyError):
+        return False
+
+
+def repinned_editions(before: bytes, after: bytes) -> bool:
+    try:
+        old, new = json.loads(before), json.loads(after)
+        return _without(old, {"source_revision"}) == _without(new, {"source_revision"})
+    except (ValueError, TypeError, AttributeError):
+        return False
+
+
+def source_refresh(base: str, root: Path, changes: str) -> bool:
+    if f"M\t{PILOT_INPUTS}" not in changes.splitlines():
+        return False
+    before = subprocess.check_output(["git", "show", f"{base}:{PILOT_INPUTS}"], cwd=root)
+    return repinned_inputs(before, (root / PILOT_INPUTS).read_bytes())
 
 
 def moved_pytest_step(step) -> bool:
@@ -212,6 +245,7 @@ def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
         ["git", "diff", "--name-status", base, "--"], cwd=root, text=True
     )
     knowledge_edits = False
+    refresh = source_refresh(base, root, changes)
     for line in changes.splitlines():
         status, path = line.split("\t", 1)
         if not (path.startswith(ALLOWED) or path in (WORKFLOW, CI_WORKFLOW)):
@@ -234,6 +268,12 @@ def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
             if path == WORKFLOW and workflow_change_additive(before, after):
                 continue
             if publication_compatible(path, before, after):
+                continue
+            if refresh and (
+                path == PILOT_INPUTS
+                or path.startswith(PILOT_OUTPUT)
+                or (path == EDITIONS and repinned_editions(before, after))
+            ):
                 continue
         if status != "A":
             raise ValueError("Non-additive or out-of-scope change: " + line)
