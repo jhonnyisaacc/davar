@@ -163,7 +163,7 @@
       "owner": "davar",
       "reference_system_id": "tagnt-native",
       "source_kind": "biblical_text",
-      "source_revision": "ae39711d7843b2902d54993e432de9c12d6a4b9a"
+      "source_revision": "5de0a47f35f0fc13dfe1430d104e5db8a4285f9c"
     },
     {
       "attribution": "Original TTH text and footnotes from data/tth/json; existing attribution and permissions apply.",
@@ -1096,20 +1096,20 @@
       "id": "source:greek",
       "kind": "dataset",
       "owner": "davar",
-      "path": "data/greek/preview/greek/releases/sblgnt/ae39711d7843b2902d54993e432de9c12d6a4b9a/books/john/1.json",
+      "path": "data/greek/preview/greek/releases/sblgnt/5de0a47f35f0fc13dfe1430d104e5db8a4285f9c/books/john/1.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-      "sha256": "263c2adfacffef25bbd80e7f6268c9cdf5986c1fc90d4220ecde02f2d6df16b2",
+      "sha256": "4bd52de4568830211e937c8ba334a296fce3f71d06d7cfb98192359d2c90a279",
       "visibility": "public"
     },
     {
       "id": "source:greek-lexicon",
       "kind": "lexicon",
       "owner": "davar",
-      "path": "data/greek/preview/greek/releases/sblgnt/ae39711d7843b2902d54993e432de9c12d6a4b9a/lexicon.json",
+      "path": "data/greek/preview/greek/releases/sblgnt/5de0a47f35f0fc13dfe1430d104e5db8a4285f9c/lexicon.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-      "sha256": "54fa36644dc9f58b51e66d313a9292ea593c897ba3f77a71ca1d49f29a34699c",
+      "sha256": "05f541841c245761e8f8c45f9598675bef745b5d5574b02404e300486e2293ef",
       "visibility": "public"
     },
     {
@@ -3877,7 +3877,7 @@
         "lemma_translit_es": "arje",
         "lemma_translit_he": "ארכי",
         "morph": "N-DSF",
-        "translit_en": "archēa",
+        "translit_en": "archē",
         "translit_es": "arjei",
         "translit_he": "ארכיי",
         "word_type": "NKO"

@@ -3,31 +3,31 @@
   "files": [
     {
       "path": "bundles/daniel/7/13.json",
-      "sha256": "901cf7d69e1f031e2d015772edc8dcde45a93ea32654326210bcc911ee417060"
+      "sha256": "f701b240badb0be8c2a67d4f72b874830085176b2dd275006e7ee582af4613c0"
     },
     {
       "path": "bundles/john/1/1.json",
-      "sha256": "63b9c1573d0a95d663c85610940ff1e5aac82edd0f3be7af87e881c2437a97eb"
+      "sha256": "a164e74579bce17130e0612a3a50236af93e593e897973f0ac1b02b46c84f98a"
     },
     {
       "path": "bundles/john/1/51.json",
-      "sha256": "1d86efe19fa48789e4d946615328ae513c4b5a5f90314b27f1fb67f824fca0bb"
+      "sha256": "de600ead41782f514909d0071075805f6c3102c5193d72cb128d3e7628d81b93"
     },
     {
       "path": "records/records.json",
-      "sha256": "dd8654a7fd7b3e5cd45e7a7176b9b6b76c757b82e25366314e6fbb9226f3443f"
+      "sha256": "c3b01d85241be4a32432585a349b0a5eac3e1076fa299cba1c7bbe22175e8a13"
     }
   ],
   "generator_version": "1.0.0",
-  "input_manifest_digest": "c76ee34825d2db69c93aa847b0e08ed8b10459222e91608a225088c927f97981",
+  "input_manifest_digest": "2b5c0ea5b2729314cfcba9cab2802ba8831a1595f6a652bd3f42931bb06484b0",
   "inputs": [
     {
       "id": "greek-lexicon",
       "owner": "davar",
-      "path": "data/greek/preview/greek/releases/sblgnt/ae39711d7843b2902d54993e432de9c12d6a4b9a/lexicon.json",
+      "path": "data/greek/preview/greek/releases/sblgnt/5de0a47f35f0fc13dfe1430d104e5db8a4285f9c/lexicon.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-      "sha256": "54fa36644dc9f58b51e66d313a9292ea593c897ba3f77a71ca1d49f29a34699c"
+      "sha256": "05f541841c245761e8f8c45f9598675bef745b5d5574b02404e300486e2293ef"
     },
     {
       "id": "oe",
@@ -48,10 +48,10 @@
     {
       "id": "greek",
       "owner": "davar",
-      "path": "data/greek/preview/greek/releases/sblgnt/ae39711d7843b2902d54993e432de9c12d6a4b9a/books/john/1.json",
+      "path": "data/greek/preview/greek/releases/sblgnt/5de0a47f35f0fc13dfe1430d104e5db8a4285f9c/books/john/1.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-      "sha256": "263c2adfacffef25bbd80e7f6268c9cdf5986c1fc90d4220ecde02f2d6df16b2"
+      "sha256": "4bd52de4568830211e937c8ba334a296fce3f71d06d7cfb98192359d2c90a279"
     },
     {
       "id": "tth",

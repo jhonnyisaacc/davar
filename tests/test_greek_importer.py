@@ -78,7 +78,7 @@ def test_preserves_accents_final_sigma_and_disambiguated_strongs(tmp_path):
     write_bundle(bundle, tmp_path)
     source = (tmp_path / "MODIFICATIONS.md").read_text(encoding="utf-8")
     assert "STEP Bible" in source
-    assert "ae39711d7843b2902d54993e432de9c12d6a4b9a" in source
+    assert "5de0a47f35f0fc13dfe1430d104e5db8a4285f9c" in source
 
 
 def test_lexicon_aliases_displayed_tagnt_stems():

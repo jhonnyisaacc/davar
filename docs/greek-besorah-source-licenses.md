@@ -56,10 +56,10 @@ Recorded official revision at verification time:
 
 | Artifact | Location | Revision |
 | --- | --- | --- |
-| Repository HEAD | `STEPBible/STEPBible-Data` `master` | `ae39711d7843b2902d54993e432de9c12d6a4b9a` (2026-09-08) |
-| TAGNT Matthew–John | `Translators Amalgamated OT+NT/TAGNT Mat-Jhn - Translators Amalgamated Greek NT - STEPBible.org CC-BY.txt` | blob `705c1bc1cf752e013efcef99b8d9a3b7853bf843` |
-| TAGNT Acts–Revelation | `Translators Amalgamated OT+NT/TAGNT Act-Rev - Translators Amalgamated Greek NT - STEPBible.org CC-BY.txt` | blob `4bbea2c14681b01eb889d5a2d1dc0856858a32de` |
-| TBESG | `Lexicons/TBESG - Translators Brief lexicon of Extended Strongs for Greek - STEPBible.org CC BY.txt` | blob `efe271a1dbb73fa01f8fa6e0f164c6687757a9ae` |
+| Repository HEAD | `STEPBible/STEPBible-Data` `master` | `5de0a47f35f0fc13dfe1430d104e5db8a4285f9c` (2026-11-02) |
+| TAGNT Matthew–John | `Translators Amalgamated OT+NT/TAGNT Mat-Jhn - Translators Amalgamated Greek NT - STEPBible.org CC-BY.txt` | blob `3348f4ce1d1ca03405e2c3a5fd6a3cf1817fb9d6` |
+| TAGNT Acts–Revelation | `Translators Amalgamated OT+NT/TAGNT Act-Rev - Translators Amalgamated Greek NT - STEPBible.org CC-BY.txt` | blob `08efc474124d3b243b73c1a681a244290d0ae05c` |
+| TBESG | `Lexicons/TBESG - Translators Brief lexicon of Extended Strongs for Greek - STEPBible.org CC BY.txt` | blob `d61029c1f7aaaa629d272aa4bc2ba14678ede0de` |
 
 Introduction cited by the files: `TinyURL.com/TAGNT-Intro`. Spreadsheet: [TAGNT sheet](https://docs.google.com/spreadsheets/d/1Uri4ehqXnzUa97uvH-1-C022708HhLQ1a541Hsnlt70/edit).
 

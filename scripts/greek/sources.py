@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 STEPBIBLE_REPO = "https://github.com/STEPBible/STEPBible-Data"
-STEPBIBLE_COMMIT = "ae39711d7843b2902d54993e432de9c12d6a4b9a"
+STEPBIBLE_COMMIT = "5de0a47f35f0fc13dfe1430d104e5db8a4285f9c"
 RAW_BASE = (
     "https://raw.githubusercontent.com/STEPBible/STEPBible-Data/"
     f"{STEPBIBLE_COMMIT}/"
@@ -30,7 +30,7 @@ TAGNT_MAT_JHN = OfficialSource(
         "Translators Amalgamated OT+NT/"
         "TAGNT Mat-Jhn - Translators Amalgamated Greek NT - STEPBible.org CC-BY.txt"
     ),
-    blob_sha="705c1bc1cf752e013efcef99b8d9a3b7853bf843",
+    blob_sha="3348f4ce1d1ca03405e2c3a5fd6a3cf1817fb9d6",
     filename="TAGNT-Mat-Jhn.txt",
 )
 TAGNT_ACT_REV = OfficialSource(
@@ -39,7 +39,7 @@ TAGNT_ACT_REV = OfficialSource(
         "Translators Amalgamated OT+NT/"
         "TAGNT Act-Rev - Translators Amalgamated Greek NT - STEPBible.org CC-BY.txt"
     ),
-    blob_sha="4bbea2c14681b01eb889d5a2d1dc0856858a32de",
+    blob_sha="08efc474124d3b243b73c1a681a244290d0ae05c",
     filename="TAGNT-Act-Rev.txt",
 )
 TBESG = OfficialSource(
@@ -49,7 +49,7 @@ TBESG = OfficialSource(
         "TBESG - Translators Brief lexicon of Extended Strongs for Greek - "
         "STEPBible.org CC BY.txt"
     ),
-    blob_sha="efe271a1dbb73fa01f8fa6e0f164c6687757a9ae",
+    blob_sha="d61029c1f7aaaa629d272aa4bc2ba14678ede0de",
     filename="TBESG.txt",
 )
 

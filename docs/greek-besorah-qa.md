@@ -1,7 +1,7 @@
 # Greek Besorah launch QA
 
 Release: SBLGNT 2011 + STEPBible TAGNT/TBESG revision
-`ae39711d7843b2902d54993e432de9c12d6a4b9a`.
+`5de0a47f35f0fc13dfe1430d104e5db8a4285f9c`.
 
 The feature is available on preview builds only. Production enablement fails
 closed until all checks below are represented by a passing machine-readable QA

@@ -37,6 +37,10 @@ KNOWLEDGE_COMMANDS = (
 )
 SHAUL_REVISION = "8c94b0fe9eca817e22340430309801d0ef76125b"
 SHAUL_ORIGIN = "https://github.com/jhonnyisaacc/shaul.git"
+PILOT_INPUTS = "data/knowledge/pilot-inputs.json"
+EDITIONS = "data/knowledge/registries/editions.json"
+PILOT_OUTPUT = "data/knowledge/generated/pilot-v1/"
+REFRESH_OUTPUTS = {"data/greek/preview/": ("greek/", "bundles/greek-sblgnt")}
 KNOWLEDGE_CODE = "scripts/knowledge/"
 KNOWLEDGE_TESTS = "tests/test_knowledge_"
 MOVED_PYTEST = frozenset(
@@ -82,6 +86,67 @@ def publication_compatible(path: str, before: bytes, after: bytes) -> bool:
         return old == new
     except (ValueError, TypeError, AttributeError):
         return False
+
+
+def _without(rows, keys):
+    return [{k: v for k, v in row.items() if k not in keys} for row in rows]
+
+
+def repinned_inputs(before: bytes, after: bytes) -> tuple[tuple[str, str], ...]:
+    try:
+        old, new = json.loads(before), json.loads(after)
+        old_inputs, new_inputs = old.pop("inputs"), new.pop("inputs")
+        if old != new or _without(old_inputs, {"path", "sha256"}) != _without(
+            new_inputs, {"path", "sha256"}
+        ):
+            return ()
+        return tuple(
+            (a["path"], b["path"]) for a, b in zip(old_inputs, new_inputs) if a != b
+        )
+    except (ValueError, TypeError, AttributeError, KeyError):
+        return ()
+
+
+def repinned_editions(
+    before: bytes, after: bytes, repinned: tuple[tuple[str, str], ...]
+) -> bool:
+    try:
+        old, new = json.loads(before), json.loads(after)
+        if _without(old, {"source_revision"}) != _without(new, {"source_revision"}):
+            return False
+        return all(
+            a["source_revision"] == b["source_revision"]
+            or any(
+                a["source_revision"] in old_path and b["source_revision"] in new_path
+                for old_path, new_path in repinned
+            )
+            for a, b in zip(old, new)
+        )
+    except (ValueError, TypeError, AttributeError, KeyError):
+        return False
+
+
+def source_refresh(base: str, root: Path) -> tuple[tuple[str, str], ...]:
+    changed = subprocess.check_output(
+        ["git", "diff", "--name-status", base, "--"], cwd=root, text=True
+    ).splitlines()
+    builder_edits = any(
+        path.startswith(KNOWLEDGE_CODE) and path != KNOWLEDGE_CODE + "compatibility.py"
+        for path in (line.split("\t")[-1] for line in changed)
+    )
+    if builder_edits or f"M\t{PILOT_INPUTS}" not in changed:
+        return ()
+    before = subprocess.check_output(["git", "show", f"{base}:{PILOT_INPUTS}"], cwd=root)
+    return repinned_inputs(before, (root / PILOT_INPUTS).read_bytes())
+
+
+def refreshed_outputs(repinned: tuple[tuple[str, str], ...]) -> tuple[str, ...]:
+    return tuple(
+        output
+        for prefix, outputs in REFRESH_OUTPUTS.items()
+        if any(new_path.startswith(prefix) for _, new_path in repinned)
+        for output in outputs
+    )
 
 
 def moved_pytest_step(step) -> bool:
@@ -212,6 +277,7 @@ def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
         ["git", "diff", "--name-status", base, "--"], cwd=root, text=True
     )
     knowledge_edits = False
+    repinned = source_refresh(base, root)
     for line in changes.splitlines():
         status, path = line.split("\t", 1)
         if not (path.startswith(ALLOWED) or path in (WORKFLOW, CI_WORKFLOW)):
@@ -234,6 +300,12 @@ def boundary(base: str, root=ROOT, shaul_root: Path | None = None):
             if path == WORKFLOW and workflow_change_additive(before, after):
                 continue
             if publication_compatible(path, before, after):
+                continue
+            if repinned and (
+                path == PILOT_INPUTS
+                or path.startswith(PILOT_OUTPUT)
+                or (path == EDITIONS and repinned_editions(before, after, repinned))
+            ):
                 continue
         if status != "A":
             raise ValueError("Non-additive or out-of-scope change: " + line)
@@ -280,7 +352,7 @@ def _greek_manifest(name: str) -> bool:
     )
 
 
-def tree(path: Path, *, legacy_clock=False):
+def tree(path: Path, *, legacy_clock=False, refreshed: tuple[str, ...] = ()):
     result = {}
     for file in sorted(path.rglob("*")):
         if not file.is_file():
@@ -288,30 +360,41 @@ def tree(path: Path, *, legacy_clock=False):
         name = file.relative_to(path).as_posix()
         data = file.read_bytes()
         if legacy_clock and (
-            name in ("manifest.json", "version.json") or _greek_manifest(name)
+            name in ("manifest.json", "version.json", "bundles/versions.json")
+            or _greek_manifest(name)
         ):
             payload = read_json(file)
-            prepare_legacy_digest(name, payload)
+            prepare_legacy_digest(name, payload, refreshed)
             data = encoded(payload)
         result[name] = digest(data)
     return result
 
 
-def prepare_legacy_digest(name: str, payload: dict) -> None:
+def prepare_legacy_digest(name: str, payload: dict, refreshed: tuple[str, ...] = ()) -> None:
     if name in ("manifest.json", "version.json"):
         # Exactly the two pre-existing clock-derived values are excluded.
         for key in ("version", "generated_at"):
             payload.pop(key, None)
     if _greek_manifest(name):
         payload.pop("lexicon_shards", None)
+    if "greek/" in refreshed:
+        if name == "bundles/versions.json":
+            for key in [key for key in payload if key.startswith("greek:")]:
+                payload.pop(key)
+        if name == "manifest.json":
+            payload.get("bundles", {}).get("versions", {}).pop("checksum", None)
 
 
-def legacy_generation_differences(expected: dict, actual: dict) -> list[str]:
+def legacy_generation_differences(
+    expected: dict, actual: dict, refreshed: tuple[str, ...] = ()
+) -> list[str]:
     differences = []
     for name in sorted(expected.keys() | actual.keys()):
         if expected.get(name) == actual.get(name):
             continue
         if name not in expected and _GREEK_SHARD.fullmatch(name):
+            continue
+        if refreshed and name.startswith(refreshed):
             continue
         differences.append(name)
     return differences
@@ -333,6 +416,7 @@ def archive(root: Path, revision: str, destination: Path):
 
 def legacy(base: str, root=ROOT):
     boundary(base, root)
+    refreshed = refreshed_outputs(source_refresh(base, root))
     env = {
         k: v
         for k, v in os.environ.items()
@@ -379,12 +463,14 @@ def legacy(base: str, root=ROOT):
                         checkout,
                         {**env, "EXPORT_TS2009_STATIC": export},
                     )
-                    actual = tree(checkout / "web/public/data", legacy_clock=True)
+                    actual = tree(
+                        checkout / "web/public/data", legacy_clock=True, refreshed=refreshed
+                    )
                     if label == "base":
                         baseline_outputs[export] = actual
                         continue
                     expected = baseline_outputs[export]
-                    differences = legacy_generation_differences(expected, actual)
+                    differences = legacy_generation_differences(expected, actual, refreshed)
                     if differences:
                         raise ValueError(
                             "Legacy generation changed: " + repr(differences[:20])
