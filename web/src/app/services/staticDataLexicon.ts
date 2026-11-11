@@ -1,3 +1,4 @@
+import type { RelatedGlossSource } from "../../../../shared/contextualRelationships";
 import type { ScriptureSourceLanguage } from "../../../../shared/greekBesorah";
 import { instanceSurface } from "../../../../shared/instanceSurface";
 import {
@@ -402,6 +403,15 @@ export const loadLexiconEntryAsset = async (
 	} catch {
 		return null;
 	}
+};
+
+export const loadRelatedGloss: RelatedGlossSource = async (strong, language) => {
+	const asset = await loadLexiconEntryAsset(strong);
+	if (!asset) return null;
+	return (
+		mapStructuredLexiconDefinitions(asset.definitions, language).gloss[0]
+			?.text ?? null
+	);
 };
 
 export const loadLexiconInstances = async (
