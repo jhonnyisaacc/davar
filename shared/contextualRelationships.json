@@ -1,0 +1,25 @@
+{
+	"schema": "davar-contextual-relationships-v1",
+	"relationships": [
+		{
+			"id": "g3056-h1697-john-1-1",
+			"predicate": "contextually_related_to",
+			"source": { "language": "greek", "strong": "G3056", "lemma": "λόγος", "transliteration": "logos" },
+			"target": { "language": "hebrew", "strong": "H1697", "lemma": "דָּבָר", "transliteration": "davar" },
+			"scope": [{ "system_id": "davar-v1", "kind": "verse", "book_id": "john", "chapter": 1, "verse": 1 }],
+			"rationale": { "es": "Heb.: Davar. Aram.: Meymrá. Gr.: Logos. Término que expresa la corporeidad de Elohim. Así también en vers. 2." },
+			"attribution": {
+				"credit": "Texto tomado de la Traducción Textual del Hebreo, Copyright por Natanael Doldan. Usado con permiso.",
+				"locator": "Iojanán 1:1, nota 2"
+			},
+			"provenance": {
+				"source_id": "tth",
+				"path": "data/tth/json/iojanan.json",
+				"json_pointer": "/chapters/0/verses/0/footnotes/1",
+				"origin": "source",
+				"transformation": "extracted"
+			},
+			"review": { "status": "unreviewed" }
+		}
+	]
+}
