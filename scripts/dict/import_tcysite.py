@@ -17,6 +17,7 @@ import re
 import unicodedata
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
+from functools import partial
 from pathlib import Path
 from typing import Any
 from urllib.request import Request, urlopen
@@ -336,6 +337,67 @@ def reset_imported(output: dict[str, Any]) -> None:
         del output[key]
 
 
+def resolve_greek(
+    term: str,
+    transliteration: str,
+    greek_lookup: dict[str, set[str]],
+    greek_key_index: dict[tuple[int, str], set[str]],
+) -> tuple[str | None, bool]:
+    candidates: set[str] = set()
+    for value in (term, transliteration):
+        candidates.update(greek_lookup.get(normalize_term(value), set()))
+    canonical = {
+        canonical_greek_key(site_id, greek_key_index) for site_id in candidates
+    }
+    canonical.discard(None)
+    return (
+        (next(iter(canonical)), False)
+        if len(canonical) == 1
+        else (None, len(canonical) > 1)
+    )
+
+
+def resolve_hebrew(
+    term: str, hebrew_index: dict[str, set[str]]
+) -> tuple[str | None, bool]:
+    candidates = hebrew_index.get(normalize_term(term), set())
+    return (
+        (next(iter(candidates)), False)
+        if len(candidates) == 1
+        else (None, len(candidates) > 1)
+    )
+
+
+def target_for(
+    identity: str,
+    language: str,
+    term: str,
+    transliteration: str,
+    *,
+    greek_lookup: dict[str, set[str]],
+    greek_key_index: dict[tuple[int, str], set[str]],
+    hebrew_index: dict[str, set[str]],
+    used_ids: set[str],
+    stats: Counter[str],
+    fallback_rows: list[dict[str, Any]],
+) -> str:
+    target, ambiguous = (
+        resolve_greek(term, transliteration, greek_lookup, greek_key_index)
+        if language == "greek"
+        else resolve_hebrew(term, hebrew_index)
+    )
+    if target:
+        stats["matched_canonical"] += 1
+        return target
+    if ambiguous:
+        stats["ambiguous"] += 1
+    stats["unmatched"] += 1
+    fallback = fallback_id(identity, used_ids)
+    stats["fallback"] += 1
+    fallback_rows.append({"identity": identity, "language": language, "term": term, "id": fallback})
+    return fallback
+
+
 def import_data(source_root: Path) -> dict[str, Any]:
     output = read_json(CUSTOM_PATH)
     reset_imported(output)
@@ -366,44 +428,15 @@ def import_data(source_root: Path) -> dict[str, Any]:
     duplicate_terms: Counter[str] = Counter()
     fallback_rows: list[dict[str, Any]] = []
 
-    def resolve_greek(term: str, transliteration: str) -> tuple[str | None, bool]:
-        candidates: set[str] = set()
-        for value in (term, transliteration):
-            candidates.update(greek_lookup.get(normalize_term(value), set()))
-        canonical = {
-            canonical_greek_key(site_id, greek_key_index) for site_id in candidates
-        }
-        canonical.discard(None)
-        return (
-            (next(iter(canonical)), False)
-            if len(canonical) == 1
-            else (None, len(canonical) > 1)
-        )
-
-    def resolve_hebrew(term: str) -> tuple[str | None, bool]:
-        candidates = hebrew_index.get(normalize_term(term), set())
-        return (
-            (next(iter(candidates)), False)
-            if len(candidates) == 1
-            else (None, len(candidates) > 1)
-        )
-
-    def target_for(identity: str, language: str, term: str, transliteration: str) -> str:
-        target, ambiguous = (
-            resolve_greek(term, transliteration)
-            if language == "greek"
-            else resolve_hebrew(term)
-        )
-        if target:
-            stats["matched_canonical"] += 1
-            return target
-        if ambiguous:
-            stats["ambiguous"] += 1
-        stats["unmatched"] += 1
-        fallback = fallback_id(identity, used_ids)
-        stats["fallback"] += 1
-        fallback_rows.append({"identity": identity, "language": language, "term": term, "id": fallback})
-        return fallback
+    resolve_target = partial(
+        target_for,
+        greek_lookup=greek_lookup,
+        greek_key_index=greek_key_index,
+        hebrew_index=hebrew_index,
+        used_ids=used_ids,
+        stats=stats,
+        fallback_rows=fallback_rows,
+    )
 
     for slug, url in ERIC_URLS.items():
         rows = read_json(source_root / "eric" / f"{slug}.json")
@@ -422,7 +455,7 @@ def import_data(source_root: Path) -> dict[str, Any]:
             context = str(row.get("observacion") or "").strip()
             if not meaning:
                 stats["missing_spanish"] += 1
-            key = target_for(f"eric:{slug}:{index}", language, term, transliteration)
+            key = resolve_target(f"eric:{slug}:{index}", language, term, transliteration)
             source = "tcysite-eric"
             if add_definition(
                 output,
@@ -447,7 +480,7 @@ def import_data(source_root: Path) -> dict[str, Any]:
         transliteration = str(row[1] or "")
         short_definition = str(row[3] or "")
         stats["greek_index_rows"] += 1
-        target = target_for(f"greek-index:{site_id}", "greek", lemma, transliteration)
+        target = resolve_target(f"greek-index:{site_id}", "greek", lemma, transliteration)
         if add_definition(
             output,
             target,
@@ -493,7 +526,7 @@ def import_data(source_root: Path) -> dict[str, Any]:
         lemma = str(row.get("lemma") or "").strip()
         transliteration = str(row.get("Forma lexica") or "").strip()
         stats["greek_master_rows"] += 1
-        target = target_for(f"greek-master:{index}", "greek", lemma, transliteration)
+        target = resolve_target(f"greek-master:{index}", "greek", lemma, transliteration)
         if add_definition(
             output,
             target,
