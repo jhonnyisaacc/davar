@@ -485,6 +485,7 @@ const generateDictionary = async (): Promise<{
     dictionaryBundle: {
       custom_definitions: customDefinitions,
       roots,
+      words,
       prefixes,
     },
     prefixesById,
