@@ -19,8 +19,6 @@ type WordSelectionContext = {
 	verse: number;
 };
 
-type SelectedWordContext = WordSelectionContext & { book: string };
-
 const BOOK_ABBREVIATIONS: Record<string, string> = {
 	gen: "Genesis",
 	exod: "Exodus",
@@ -122,7 +120,7 @@ export function useWordSelection({
 	const [isWordPanelHovered, setIsWordPanelHovered] = useState(false);
 	const [selectedWord, setSelectedWord] = useState<WordResponse | null>(null);
 	const [selectedWordContext, setSelectedWordContext] =
-		useState<SelectedWordContext | null>(null);
+		useState<WordSelectionContext | null>(null);
 	const [isWordSheetOpen, setIsWordSheetOpen] = useState(false);
 	const wordSheetClosingRef = useRef(false);
 	const [isWordPanelDismissed, setIsWordPanelDismissed] = useState(true);
@@ -136,7 +134,7 @@ export function useWordSelection({
 		null,
 	);
 	const [lastSelectedWordContext, setLastSelectedWordContext] =
-		useState<SelectedWordContext | null>(null);
+		useState<WordSelectionContext | null>(null);
 	const [lastSelectedWordAnalysis, setLastSelectedWordAnalysis] =
 		useState<WordAnalysis | null>(null);
 	const [isMobile, setIsMobile] = useState(false);
@@ -263,7 +261,7 @@ export function useWordSelection({
 			}
 			setIsWordPanelDismissed(false);
 			setSelectedWord(word);
-			setSelectedWordContext({ ...resolvedContext, book: currentBook });
+			setSelectedWordContext(resolvedContext);
 			setSelectedWordAnalysis(null);
 			setSelectedDssAnalysis(null);
 			setIsWordAnalysisLoading(Boolean(parseSourceStrong(word.strong)));
@@ -283,7 +281,6 @@ export function useWordSelection({
 		[
 			besorahTextVersion,
 			closeWordSheet,
-			currentBook,
 			currentChapter,
 			currentVerse,
 			isMobile,
@@ -675,7 +672,6 @@ export function useWordSelection({
 		if (matchedWord) {
 			setSelectedWord(matchedWord);
 			setSelectedWordContext({
-				book: prevBookRef.current,
 				chapter: currentVerseData.chapter,
 				verse: currentVerseData.verse,
 			});
@@ -683,7 +679,6 @@ export function useWordSelection({
 		} else if (fallbackWord) {
 			setSelectedWord(fallbackWord);
 			setSelectedWordContext({
-				book: prevBookRef.current,
 				chapter: currentVerseData.chapter,
 				verse: currentVerseData.verse,
 			});

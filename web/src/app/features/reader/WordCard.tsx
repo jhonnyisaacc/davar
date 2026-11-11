@@ -1,10 +1,8 @@
 import { formatDefinitionMeaningForDisplay } from "@davar/shared/definitionMeanings";
-import type { VerseRef } from "@davar/shared/contextualRelationships";
 import { formatVerseRef } from "@davar/shared/formatVerseRef";
 import { X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "../../hooks/useTranslation";
-import { ContextualRelatedSection } from "./ContextualRelatedSection";
 import {
 	getPrefixSegments,
 	normalizeHebrew,
@@ -61,8 +59,6 @@ interface WordCardProps {
 	onClose?: () => void;
 	tabResetKey?: number;
 	isBesorah?: boolean;
-	verse?: VerseRef | null;
-	rawStrong?: string | null;
 }
 
 interface PrefixEntry {
@@ -145,8 +141,6 @@ export function WordCard({
 	onClose,
 	tabResetKey,
 	isBesorah = false,
-	verse = null,
-	rawStrong,
 }: WordCardProps) {
 	const { t } = useTranslation(language);
 	const [activeTab, setActiveTab] = useState<
@@ -820,12 +814,6 @@ export function WordCard({
 							)}
 						</div>
 					</div>
-
-					<ContextualRelatedSection
-						strong={rawStrong}
-						verse={verse}
-						language={language}
-					/>
 
 					{displayedData.prefixes?.length ? (
 						<div className="text-center space-y-4 pb-6">
