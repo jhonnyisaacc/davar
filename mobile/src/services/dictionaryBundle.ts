@@ -30,7 +30,7 @@ const toOfflineEntry = (entry: LexiconEntryAsset): LexiconResponse => ({
   definitions: allLanguages(entry.definitions),
   root: entry.root,
   root_strong: entry.root_strong,
-  root_definitions: allLanguages(entry.root_definitions),
+  root_definitions: [],
   occurrences_count: entry.occurrences_count,
   instances: [],
 });
