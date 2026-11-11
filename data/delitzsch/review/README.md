@@ -38,3 +38,13 @@ letter previously misclassified as a prefix is actually part of the lexeme.
 the non-actionable counts, and `scan_flags` reports the raw heuristic total.
 Batch generation excludes reviewed flags so completed work is not reviewed
 again.
+
+## Definition coverage
+
+`python -m scripts.delitzsch.definition_coverage write` regenerates
+`reports/definition_coverage.json`, which reports definition coverage per
+identifier separately from mapping coverage. `check` fails when that report is
+stale, an identifier has no lexicon entry, or a missing English or Spanish
+definition is not listed in `definition_gaps_baseline.json`. The baseline only
+shrinks. Remove an identifier from it when its definition lands, and route a
+gap caused by a wrong identity to #159.
