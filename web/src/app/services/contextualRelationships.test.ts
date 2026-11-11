@@ -527,3 +527,29 @@ describe("fixture relationships", () => {
 		expect(JSON.stringify(related)).not.toContain("Fixture definition");
 	});
 });
+
+describe("locale labels", () => {
+	const KEYS = [
+		"contextualRelation",
+		"contextualRelationScope",
+		"contextualRelationNote",
+		"contextualRelationGreek",
+		"contextualRelationHebrew",
+		"contextualRelationWhy",
+		"contextualRelationReviewedBy",
+	];
+	const PLACEHOLDERS: Record<string, string> = {
+		contextualRelationScope: "{reference}",
+		contextualRelationReviewedBy: "{reviewer}",
+	};
+
+	test.each(LANGUAGES)("%s defines every relationship label", (language) => {
+		const { wordCard } = readJson<{ wordCard: Record<string, string> }>(
+			`locales/${language}.json`,
+		);
+		for (const key of KEYS) {
+			expect(wordCard[key]?.trim()).toBeTruthy();
+			if (PLACEHOLDERS[key]) expect(wordCard[key]).toContain(PLACEHOLDERS[key]);
+		}
+	});
+});

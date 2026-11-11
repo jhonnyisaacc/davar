@@ -1,3 +1,4 @@
+import { verseRef } from "@davar/shared/contextualRelationships";
 import { parseSourceStrong } from "@davar/shared/greekBesorah";
 import { useState } from "react";
 import { BottomSheet } from "./components/BottomSheet";
@@ -563,6 +564,16 @@ export default function App() {
 															wordForCard.source_language ?? "hebrew"
 														}
 														wordFromVerse={wordForCard.text}
+														rawStrong={wordForCard.strong}
+														verse={
+															wordContextForCard
+																? verseRef(
+																		wordContextForCard.book,
+																		wordContextForCard.chapter,
+																		wordContextForCard.verse,
+																	)
+																: null
+														}
 														strongNumber={
 															parseSourceStrong(wordForCard.strong) ??
 															wordAnalysisForCard?.strong_number
@@ -742,6 +753,16 @@ export default function App() {
 								word={selectedWord.text}
 								sourceLanguage={selectedWord.source_language ?? "hebrew"}
 								wordFromVerse={selectedWord.text}
+								rawStrong={selectedWord.strong}
+								verse={
+									selectedWordContext
+										? verseRef(
+												selectedWordContext.book,
+												selectedWordContext.chapter,
+												selectedWordContext.verse,
+											)
+										: null
+								}
 								strongNumber={
 									parseSourceStrong(selectedWord.strong) ??
 									selectedWordAnalysis?.strong_number
