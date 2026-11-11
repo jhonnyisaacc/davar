@@ -1,3 +1,4 @@
+import type { RelatedGlossSource } from "@davar/shared/contextualRelationships";
 import { instanceSurface } from "@davar/shared/instanceSurface";
 import {
   mapLexiconDefinitions,
@@ -13,6 +14,7 @@ import {
   normalizeStrongNumber,
 } from "@davar/shared/staticDataPaths";
 import { staticDataRequest } from "@/src/services/api";
+import { fetchLexiconEntry } from "@/src/services/database";
 import type { LexiconResponse } from "@/src/types/api";
 
 type StaticDictionaryDefinition = {
@@ -270,6 +272,20 @@ export const loadLexiconEntryFromStatic = async (
   }
 
   return loadLexiconEntryFromFullDictionaries(strong, language);
+};
+
+export const loadRelatedGloss: RelatedGlossSource = async (strong, language) => {
+  const online = await loadLexiconEntryFromStatic(strong, language).catch(
+    () => null,
+  );
+  if (online) return online.gloss?.[0]?.text ?? null;
+
+  const offline = await fetchLexiconEntry(strong);
+  if (!offline) return null;
+  const rows = (offline.definitions as LexiconResponse["definitions"]).filter(
+    (definition) => definition.language === language,
+  );
+  return structureMappedDefinitions(rows).gloss[0]?.text ?? null;
 };
 
 export const prefetchLexiconEntry = (strong?: string): void => {
