@@ -191545,7 +191545,15 @@
     "transliteration": "Yôwchânân",
     "translit_en": "yochanan",
     "translit_es": "yojanan",
-    "definitions": [],
+    "definitions": [
+      {
+        "text_en": "Johanan; the Hebrew name represented as John in the New Testament.",
+        "text_es": "Johanán; nombre hebreo representado como Juan en el Nuevo Testamento.",
+        "source": "delitzsch_review_issue_119",
+        "sense": "0",
+        "order": 1
+      }
+    ],
     "sources": {
       "strongs": false,
       "bdb": false
@@ -196877,7 +196885,15 @@
     "transliteration": "Yôwrâm",
     "translit_en": "yoram",
     "translit_es": "yoram",
-    "definitions": [],
+    "definitions": [
+      {
+        "text_en": "Joram; son of Jehoshaphat and an ancestor in the royal genealogy.",
+        "text_es": "Joram; hijo de Josafat y antepasado en la genealogía real.",
+        "source": "delitzsch_review_issue_119",
+        "sense": "0",
+        "order": 1
+      }
+    ],
     "sources": {
       "strongs": false,
       "bdb": false
@@ -233556,7 +233572,15 @@
     "transliteration": "Kûwsh",
     "translit_en": "kvsh",
     "translit_es": "kvsh",
-    "definitions": [],
+    "definitions": [
+      {
+        "text_en": "Cush; the region south of Egypt associated with Nubia or Ethiopia.",
+        "text_es": "Cus; región al sur de Egipto asociada con Nubia o Etiopía.",
+        "source": "delitzsch_review_issue_119",
+        "sense": "0",
+        "order": 1
+      }
+    ],
     "sources": {
       "strongs": false,
       "bdb": false
@@ -288516,7 +288540,15 @@
     "transliteration": "Mᵉgiddôwn",
     "translit_en": "megidon",
     "translit_es": "megidon",
-    "definitions": [],
+    "definitions": [
+      {
+        "text_en": "Megiddon; Megiddo, used in the expression Har Megiddon (Armageddon).",
+        "text_es": "Meguido; usado en la expresión Har Meguido (Armagedón).",
+        "source": "delitzsch_review_issue_119",
+        "sense": "0",
+        "order": 1
+      }
+    ],
     "sources": {
       "strongs": false,
       "bdb": false
@@ -318736,7 +318768,15 @@
     "transliteration": "Machath",
     "translit_en": "machat",
     "translit_es": "majat",
-    "definitions": [],
+    "definitions": [
+      {
+        "text_en": "Mahath; a personal name in the genealogy rendered by Delitzsch.",
+        "text_es": "Mahat; nombre personal en la genealogía traducida por Delitzsch.",
+        "source": "delitzsch_review_issue_119",
+        "sense": "0",
+        "order": 1
+      }
+    ],
     "sources": {
       "strongs": false,
       "bdb": false
@@ -584165,7 +584205,15 @@
     "transliteration": "Râm",
     "translit_en": "ram",
     "translit_es": "ram",
-    "definitions": [],
+    "definitions": [
+      {
+        "text_en": "Ram; an ancestor in the genealogy of Jesus.",
+        "text_es": "Ram; antepasado en la genealogía de Jesús.",
+        "source": "delitzsch_review_issue_119",
+        "sense": "0",
+        "order": 1
+      }
+    ],
     "sources": {
       "strongs": false,
       "bdb": false
@@ -629358,7 +629406,15 @@
     "transliteration": "Salmôwn",
     "translit_en": "salemon",
     "translit_es": "salemon",
-    "definitions": [],
+    "definitions": [
+      {
+        "text_en": "Salmon; an ancestor in the genealogy of Jesus.",
+        "text_es": "Salmón; antepasado en la genealogía de Jesús.",
+        "source": "delitzsch_review_issue_119",
+        "sense": "0",
+        "order": 1
+      }
+    ],
     "sources": {
       "strongs": false,
       "bdb": false
