@@ -406,39 +406,49 @@ describe("fixture relationships", () => {
 			glossOf("Fixture gloss"),
 		);
 		return {
-			hits: hits.map((entry) => [entry.id, entry.locator]),
-			issues: related.issues.map((issue) => issue.id),
+			hits: hits.map((entry) => entry.id),
+			issues: related.issues
+				.map((issue) => `${issue.id}: ${issue.reason}`)
+				.sort(),
 		};
 	};
 
-	test("a repeated id keeps the same record regardless of input order", async () => {
-		const first = fixture({
-			attribution: { credit: "Fixture credit", locator: "Fixture locator A" },
-		});
-		const second = fixture({
-			attribution: { credit: "Fixture credit", locator: "Fixture locator B" },
-		});
-		const expected = {
-			hits: [["fixture-g3056-h1697-john-1-1", "Fixture locator A"]],
-			issues: ["fixture-g3056-h1697-john-1-1"],
-		};
-		expect(await resolveIds([first, second])).toEqual(expected);
-		expect(await resolveIds([second, first])).toEqual(expected);
+	const unrelated = fixture({
+		id: "fixture-unrelated",
+		target: side("hebrew", "H1254"),
 	});
 
-	test("an overlapping reversed pair keeps the first by id regardless of input order", async () => {
-		const first = fixture({ id: "fixture-a" });
-		const reversed = fixture({
+	test("a repeated id renders neither copy in either input order", async () => {
+		const pending = fixture({ review: { status: "unreviewed" } });
+		const signed = fixture();
+		const expected = {
+			hits: ["fixture-unrelated"],
+			issues: [
+				"fixture-g3056-h1697-john-1-1: repeated id",
+				"fixture-g3056-h1697-john-1-1: repeated id",
+			],
+		};
+		expect(await resolveIds([pending, signed, unrelated])).toEqual(expected);
+		expect(await resolveIds([unrelated, signed, pending])).toEqual(expected);
+	});
+
+	test("an approved and a rejected record on the same pair and verse render nothing in either input order", async () => {
+		const signed = fixture({ id: "fixture-a" });
+		const rejected = fixture({
 			id: "fixture-b",
 			source: side("hebrew", "H1697"),
 			target: side("greek", "G3056"),
+			review: { ...approved, status: "rejected" },
 		});
 		const expected = {
-			hits: [["fixture-a", "Fixture locator"]],
-			issues: ["fixture-b"],
+			hits: ["fixture-unrelated"],
+			issues: [
+				"fixture-a: overlaps fixture-b on the same Strong pair and verse",
+				"fixture-b: overlaps fixture-a on the same Strong pair and verse",
+			],
 		};
-		expect(await resolveIds([first, reversed])).toEqual(expected);
-		expect(await resolveIds([reversed, first])).toEqual(expected);
+		expect(await resolveIds([signed, rejected, unrelated])).toEqual(expected);
+		expect(await resolveIds([unrelated, rejected, signed])).toEqual(expected);
 	});
 
 	test("verse references agree and reject malformed input", () => {

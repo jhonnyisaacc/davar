@@ -266,13 +266,8 @@ const rawId = (value: unknown): string | null => {
 	return typeof id === "string" && id.trim() ? id : null;
 };
 
-const compareRecords = (left: Relationship, right: Relationship): number => {
-	if (left.id !== right.id) return left.id < right.id ? -1 : 1;
-	const leftBody = JSON.stringify(left);
-	const rightBody = JSON.stringify(right);
-	if (leftBody === rightBody) return 0;
-	return leftBody < rightBody ? -1 : 1;
-};
+const compareRecords = (left: Relationship, right: Relationship): number =>
+	left.id === right.id ? 0 : left.id < right.id ? -1 : 1;
 
 const parseCatalog = (
 	input: unknown,
@@ -314,28 +309,37 @@ const buildIndex = (
 	issues: CatalogIssue[],
 ): Map<string, ApprovedRelationship[]> => {
 	const index = new Map<string, ApprovedRelationship[]>();
-	const seenIds = new Set<string>();
-	const seenPairs = new Map<string, string>();
+	const idCounts = new Map<string, number>();
+	const pairIds = new Map<string, string[]>();
 	const add = (key: string, record: ApprovedRelationship) => {
 		index.set(key, [...(index.get(key) ?? []), record]);
 	};
 	for (const record of records) {
-		if (seenIds.has(record.id)) {
-			issues.push({ id: record.id, reason: "repeated id" });
-			continue;
+		idCounts.set(record.id, (idCounts.get(record.id) ?? 0) + 1);
+		for (const verse of record.scope) {
+			const pair = pairKey(record, verse);
+			pairIds.set(pair, [...(pairIds.get(pair) ?? []), record.id]);
 		}
-		seenIds.add(record.id);
-		const pairs = record.scope.map((verse) => pairKey(record, verse));
-		const overlap = pairs.find((pair) => seenPairs.has(pair));
-		if (overlap) {
+	}
+	for (const record of records) {
+		const repeated = idCounts.get(record.id) !== 1;
+		if (repeated) issues.push({ id: record.id, reason: "repeated id" });
+		const overlaps = [
+			...new Set(
+				record.scope.flatMap((verse) =>
+					(pairIds.get(pairKey(record, verse)) ?? []).filter(
+						(id) => id !== record.id,
+					),
+				),
+			),
+		].sort();
+		if (overlaps.length > 0) {
 			issues.push({
 				id: record.id,
-				reason: `overlaps ${seenPairs.get(overlap)} on the same Strong pair and verse`,
+				reason: `overlaps ${overlaps.join(", ")} on the same Strong pair and verse`,
 			});
-			continue;
 		}
-		for (const pair of pairs) seenPairs.set(pair, record.id);
-		if (!isApproved(record)) continue;
+		if (repeated || overlaps.length > 0 || !isApproved(record)) continue;
 		for (const verse of record.scope) {
 			add(indexKey(record.source.strong, verse), record);
 			add(indexKey(record.target.strong, verse), record);
