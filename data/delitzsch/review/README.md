@@ -38,3 +38,27 @@ letter previously misclassified as a prefix is actually part of the lexeme.
 the non-actionable counts, and `scan_flags` reports the raw heuristic total.
 Batch generation excludes reviewed flags so completed work is not reviewed
 again.
+
+## Disposition ledger (issue #159)
+
+`reports/besorah_dispositions_v1.json.gz` gives each occurrence in the
+`review_queue` of `reports/besorah_remediation_v1.json.gz` a family and a
+disposition. Regenerate it with `python -m scripts.delitzsch review
+dispositions`, and check that the committed copy is current with `--check`.
+Reruns write identical bytes.
+
+- Families come from the queue reasons: `prefix_metadata`,
+  `lexical_plausibility`, and `prefix_metadata_and_lexical`.
+- Dispositions are `benign`, `corrected`, `already_reviewed`, `unresolved`,
+  `blocked`, and `superseded`. `superseded` is for the identity-less
+  `legacy_assignment_review` rows.
+- Each record names its `rule`, `rule_version`, and `reviewer`, keeps the
+  queued `before` state, and carries its `evidence`. An `already_reviewed`
+  record copies the prior decision's status, action, Strong values, reason,
+  and timestamp.
+
+The rules in `scripts/delitzsch/review/dispositions.py` run in order, and the
+first match decides. A queued occurrence with a prior review status is
+`already_reviewed`. Everything else stays `unresolved` until a later rule
+settles it. A new rule goes before `unadjudicated`. A changed rule bumps its
+version.
