@@ -1,6 +1,5 @@
 import { BOOKS } from "./books";
 import raw from "./contextualRelationships.json";
-import { formatVerseRef } from "./formatVerseRef";
 import { parseSourceStrong } from "./greekBesorah";
 
 export type Language = "en" | "es" | "he";
@@ -437,7 +436,17 @@ export const verseRef = (
 export const formatRelatedReference = (
 	reference: VerseRef,
 	language: Language,
-): string => formatVerseRef(verseKey(reference), language);
+): string => {
+	const book = BOOKS.find(({ id }) => id === reference.book_id);
+	const name =
+		language === "he"
+			? book?.hebrew_name
+			: (language === "es" ? book?.spanish_name : book?.name)?.replace(
+					/^(.*?)\s*(\d+)$/,
+					"$2 $1",
+				);
+	return `${name} ${reference.chapter}:${reference.verse}`;
+};
 
 export const verseRefFromDisplayId = (
 	id: string | null | undefined,

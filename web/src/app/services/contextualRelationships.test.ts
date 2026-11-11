@@ -459,11 +459,30 @@ describe("fixture relationships", () => {
 			chapter: 1,
 			verse: 10,
 		});
-		expect(formatRelatedReference(JOHN_1_1, "es")).toBe("Jn 1:1");
 		expect(verseRef("Fixture", 1, 1)).toBeNull();
 		expect(verseRef("John", 0, 1)).toBeNull();
 		for (const id of ["1", "fixture-1-1", "john-1", "John-1-1", "", null]) {
 			expect(verseRefFromDisplayId(id)).toBeNull();
+		}
+	});
+
+	test("formats related references from the book registry names", () => {
+		const cases: [string, Record<"en" | "es" | "he", string>][] = [
+			["john", { en: "John 1:1", es: "Juan 1:1", he: "יוחנן 1:1" }],
+			["john1", { en: "1 John 1:1", es: "1 Juan 1:1", he: "יוחנן א 1:1" }],
+			[
+				"samuel1",
+				{ en: "1 Samuel 1:1", es: "1 Samuel 1:1", he: "שמואל א 1:1" },
+			],
+			["kings2", { en: "2 Kings 1:1", es: "2 Reyes 1:1", he: "מלכים ב 1:1" }],
+			["genesis", { en: "Genesis 1:1", es: "Génesis 1:1", he: "בראשית 1:1" }],
+		];
+		for (const [book_id, labels] of cases) {
+			for (const language of ["en", "es", "he"] as const) {
+				expect(
+					formatRelatedReference({ book_id, chapter: 1, verse: 1 }, language),
+				).toBe(labels[language]);
+			}
 		}
 	});
 
