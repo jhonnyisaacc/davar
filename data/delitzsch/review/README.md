@@ -60,5 +60,7 @@ Reruns write identical bytes.
 The rules in `scripts/delitzsch/review/dispositions.py` run in order, and the
 first match decides. A queued occurrence with a prior review status is
 `already_reviewed`. Everything else stays `unresolved` until a later rule
-settles it. A new rule goes before `unadjudicated`. A changed rule bumps its
-version.
+settles it. A prior review decided the Strong number, not the prefix metadata,
+so a rule that settles prefixes (#364, #366) goes before
+`prior_review_decision`. Other new rules go before `unadjudicated`. A changed
+rule bumps its version.
