@@ -1,7 +1,10 @@
 import json
 from pathlib import Path
 
+import pytest
 
+
+from scripts.delitzsch.review import dispositions
 from scripts.delitzsch.review.workflow import (
     LexiconIndex,
     apply_decisions,
@@ -536,3 +539,46 @@ def test_targeted_proper_names_use_custom_definitions():
     assert custom["D0057"]["definitions"][0]["text_es"]
     assert custom["D0024"]["definitions"][0]["text_en"]
     assert custom["D0024"]["definitions"][0]["text_es"]
+
+
+def queue_entry(location, reasons, prior=None):
+    return {"location": location, "text": "בָּחַר", "strong": "H977", "reasons": reasons,
+            "prior_review_status": prior, "evidence": "heuristic only"}
+
+
+def test_disposition_ledger_records_prior_reviews_and_leaves_the_rest_unresolved():
+    queue = [
+        queue_entry("acts.1.2.12", ["prefix_metadata_disagreement"], prior="applied"),
+        queue_entry("acts.1.2.13", ["lexical_plausibility"]),
+        queue_entry("acts.1.2.14", ["prefix_metadata_disagreement", "lexical_plausibility"]),
+    ]
+    decision = {"status": "applied", "action": "set_strong", "reviewer": "codex-desktop", "new_strong": "H977"}
+    first = dispositions.build_ledger(queue, {"acts.1.2.12": decision, "acts.9.9.9": decision})
+
+    assert first["schema_version"] == dispositions.SCHEMA_VERSION
+    assert [(r["family"], r["disposition"], r["rule"], r["reviewer"]) for r in first["records"]] == [
+        ("prefix_metadata", "already_reviewed", "prior_review_decision", "codex-desktop"),
+        ("lexical_plausibility", "unresolved", "unadjudicated", None),
+        ("prefix_metadata_and_lexical", "unresolved", "unadjudicated", None),
+    ]
+    assert all(r["disposition"] in first["dispositions"] and r["rule_version"] == 1 for r in first["records"])
+    assert first["records"][0]["evidence"]["prior_decision"]["new_strong"] == "H977"
+    assert first["records"][0]["before"] == {"text": "בָּחַר", "strong": "H977"}
+    assert first["summary"]["by_disposition"]["unresolved"] == 2
+    assert first["summary"]["by_family"]["prefix_metadata"]["already_reviewed"] == 1
+    assert dispositions.serialize(first) == dispositions.serialize(dispositions.build_ledger(queue, {"acts.1.2.12": decision}))
+
+
+def test_disposition_ledger_rejects_a_prior_review_without_its_decision():
+    with pytest.raises(ValueError, match="no decision log entry"):
+        dispositions.build_ledger([queue_entry("acts.1.2.12", ["lexical_plausibility"], prior="skipped")], {})
+
+
+def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
+    rebuilt = dispositions.build_from_disk()
+    assert dispositions.serialize(rebuilt) == dispositions.serialize(dispositions.build_from_disk())
+    committed = dispositions.read_ledger()
+    assert committed == rebuilt
+    summary = committed["summary"]
+    assert summary["total"] == 11528
+    assert summary["by_disposition"]["already_reviewed"] == 718
