@@ -7,7 +7,11 @@ import { createHash } from "crypto";
 import { existsSync } from "fs";
 import { mkdir, readdir, readFile, rm, writeFile } from "fs/promises";
 import { extname, join } from "path";
-import { buildLexiconAssets } from "../../shared/lexiconAssets";
+import {
+  buildLexiconAssets,
+  offlineLexiconSources,
+  type OfflineLexiconSources,
+} from "../../shared/lexiconAssets";
 import { ts2009BookLookupPaths } from "../../shared/scripturePaths";
 import { TS2009_BOOK_FILE_MAP } from "../../shared/ts2009BookFileMap";
 import {
@@ -483,11 +487,13 @@ const generateDictionary = async (): Promise<{
 
   return {
     dictionaryBundle: {
-      custom_definitions: customDefinitions,
-      roots,
-      words,
+      ...offlineLexiconSources({
+        words,
+        roots,
+        custom_definitions: customDefinitions,
+      } as unknown as OfflineLexiconSources),
       prefixes,
-    },
+    } as unknown as JsonValue,
     prefixesById,
     lexiconShards: Object.keys(lexiconAssets.shards).length,
     lexiconInstances: Object.keys(lexiconAssets.instances).length,
@@ -1109,39 +1115,23 @@ const main = async (): Promise<void> => {
     parts: tanajParts,
     total_size: tanajTotalSize,
   };
-  assertBundleFileSize("data/bundles/tanaj.json", getJsonSize(tanajIndex as unknown as JsonValue));
-  await writeFile(
-    join(bundlesDir, "tanaj.json"),
-    JSON.stringify(tanajIndex),
-    "utf-8",
-  );
-  await writeFile(
-    join(bundlesDir, "besorah.json"),
-    JSON.stringify(besorah.bundle),
-    "utf-8",
-  );
-  await writeFile(
-    join(bundlesDir, "hutter.json"),
-    JSON.stringify({ books: hutter.books }),
-    "utf-8",
-  );
-  await writeFile(join(bundlesDir, "tth.json"), JSON.stringify(tthBundle), "utf-8");
+  const writeBundle = async (name: string, value: unknown): Promise<void> => {
+    const body = JSON.stringify(value);
+    assertBundleFileSize(`data/bundles/${name}`, Buffer.byteLength(body, "utf-8"));
+    await writeFile(join(bundlesDir, name), body, "utf-8");
+  };
+  await writeBundle("tanaj.json", tanajIndex);
+  await writeBundle("besorah.json", besorah.bundle);
+  await writeBundle("hutter.json", { books: hutter.books });
+  await writeBundle("tth.json", tthBundle);
   const ts2009Bundle = shouldExportTs2009Static
     ? await generateTs2009Chapters()
     : null;
   if (ts2009Bundle) {
-    await writeFile(
-      join(bundlesDir, "ts2009.json"),
-      JSON.stringify(ts2009Bundle.bundle),
-      "utf-8",
-    );
+    await writeBundle("ts2009.json", ts2009Bundle.bundle);
   }
-  await writeFile(
-    join(bundlesDir, "dictionary.json"),
-    JSON.stringify(dictionaryBundle),
-    "utf-8",
-  );
-  await writeFile(join(bundlesDir, "dss.json"), JSON.stringify(dssBundle), "utf-8");
+  await writeBundle("dictionary.json", dictionaryBundle);
+  await writeBundle("dss.json", dssBundle);
   const bundleVersions = mergeGreekBundleVersion(BUNDLE_VERSIONS, greekStash);
   await writeFile(
     join(bundlesDir, "versions.json"),

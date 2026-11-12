@@ -1,6 +1,10 @@
 // Bun provides this test module at runtime; Expo's resolver does not index it.
 import { describe, expect, test } from "bun:test";
-import { buildLexiconAssets } from "@davar/shared/lexiconAssets";
+import {
+  buildLexiconAssets,
+  offlineLexiconSources,
+  type OfflineLexiconSources,
+} from "@davar/shared/lexiconAssets";
 import {
   buildLexiconEntries,
   type DictionaryBundle,
@@ -106,5 +110,23 @@ describe("dictionary bundle normalization", () => {
     expect(servant?.definitions.some((item) => item.language === "es" && item.text === "siervo")).toBe(true);
     expect(offline.get("H935")?.definitions.length).toBeGreaterThan(0);
     expect(offline.get("D0271")?.definitions.map((item) => item.language).sort()).toEqual(["en", "es"]);
+  });
+
+  test("builds the same offline entries from the trimmed bundle as from the full lexicon", async () => {
+    const full: OfflineLexiconSources = {
+      words: await fileJson("data/dict/lexicon/words.json"),
+      roots: await fileJson("data/dict/lexicon/roots.json"),
+      custom_definitions: await fileJson("data/dict/lexicon/custom_definitions.json"),
+    };
+    const downloaded = JSON.parse(
+      JSON.stringify(offlineLexiconSources(full)),
+    ) as OfflineLexiconSources;
+
+    expect(buildLexiconEntries({ ...downloaded, prefixes: {} })).toEqual(
+      buildLexiconEntries({ ...full, prefixes: {} }),
+    );
+    expect(Buffer.byteLength(JSON.stringify(downloaded))).toBeLessThan(
+      25 * 1024 * 1024,
+    );
   });
 });
