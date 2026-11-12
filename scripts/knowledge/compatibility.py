@@ -40,7 +40,10 @@ SHAUL_ORIGIN = "https://github.com/jhonnyisaacc/shaul.git"
 PILOT_INPUTS = "data/knowledge/pilot-inputs.json"
 EDITIONS = "data/knowledge/registries/editions.json"
 PILOT_OUTPUT = "data/knowledge/generated/pilot-v1/"
-REFRESH_OUTPUTS = {"data/greek/preview/": ("greek/", "bundles/greek-sblgnt")}
+REFRESH_OUTPUTS = {
+    "data/greek/preview/": ("greek/", "bundles/greek-sblgnt"),
+    "data/dict/lexicon/": ("dict/", "bundles/dictionary"),
+}
 KNOWLEDGE_CODE = "scripts/knowledge/"
 KNOWLEDGE_TESTS = "tests/test_knowledge_"
 MOVED_PYTEST = frozenset(
@@ -383,6 +386,8 @@ def prepare_legacy_digest(name: str, payload: dict, refreshed: tuple[str, ...] =
                 payload.pop(key)
         if name == "manifest.json":
             payload.get("bundles", {}).get("versions", {}).pop("checksum", None)
+    if "bundles/dictionary" in refreshed and name == "manifest.json":
+        payload.get("bundles", {}).pop("dictionary", None)
 
 
 def legacy_generation_differences(

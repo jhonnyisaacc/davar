@@ -92,6 +92,13 @@ def test_a_greek_repin_exempts_only_greek_outputs_from_legacy_parity():
     assert legacy_generation_differences(expected, actual, refreshed) == ["bundles/tanaj.json"]
 
 
+def test_a_lexicon_repin_exempts_only_dictionary_outputs_from_legacy_parity():
+    refreshed = refreshed_outputs((("data/dict/lexicon/words.json", "data/dict/lexicon/words.json"),))
+    expected = {"dict/entries/H31.json": "old", "dict/words.json": "old", "bundles/dictionary.json": "old", "bundles/tanaj.json": "old"}
+    actual = {"dict/entries/H31.json": "new", "dict/words.json": "new", "bundles/dictionary.json": "new", "bundles/tanaj.json": "new"}
+    assert legacy_generation_differences(expected, actual, refreshed) == ["bundles/tanaj.json"]
+
+
 def test_a_repin_outside_the_refresh_table_keeps_legacy_parity_strict():
     refreshed = refreshed_outputs((("data/oe/old.json", "data/oe/daniel/7.json"),))
     assert refreshed == ()
@@ -112,6 +119,26 @@ def test_a_greek_refresh_ignores_only_the_greek_version_key(tmp_path):
     versions.write_bytes(encoded({"tanaj": 3, "greek:sblgnt:new": 1}))
     assert tree(tmp_path, legacy_clock=True, refreshed=refreshed) == before
     versions.write_bytes(encoded({"tanaj": 4, "greek:sblgnt:new": 1}))
+    assert tree(tmp_path, legacy_clock=True, refreshed=refreshed) != before
+
+
+def test_a_lexicon_refresh_ignores_only_the_dictionary_manifest_entry(tmp_path):
+    from scripts.knowledge.core import encoded
+    from scripts.knowledge.compatibility import tree
+
+    refreshed = refreshed_outputs((("data/dict/lexicon/words.json", "data/dict/lexicon/words.json"),))
+    manifest = tmp_path / "manifest.json"
+
+    def bundles(dictionary, tanaj):
+        return {"bundles": {"dictionary": {"checksum": dictionary}, "tanaj": {"checksum": tanaj}}}
+
+    manifest.write_bytes(encoded(bundles("old", "same")))
+    before = tree(tmp_path, legacy_clock=True, refreshed=refreshed)
+    strict = tree(tmp_path, legacy_clock=True)
+    manifest.write_bytes(encoded(bundles("new", "same")))
+    assert tree(tmp_path, legacy_clock=True, refreshed=refreshed) == before
+    assert tree(tmp_path, legacy_clock=True) != strict
+    manifest.write_bytes(encoded(bundles("new", "changed")))
     assert tree(tmp_path, legacy_clock=True, refreshed=refreshed) != before
 
 
