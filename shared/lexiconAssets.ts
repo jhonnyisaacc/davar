@@ -466,3 +466,83 @@ export const isCurrentLexiconResult = (
 
 	return false;
 };
+
+type OfflineWordEntry = RawWordEntry & { transliteration?: string };
+
+export type OfflineLexiconSources = {
+	words: Record<string, OfflineWordEntry>;
+	roots: Record<string, OfflineWordEntry>;
+	custom_definitions: Record<string, RawCustomEntry>;
+};
+
+const withoutUndefined = <T extends object>(value: T): T =>
+	Object.fromEntries(
+		Object.entries(value).filter(([, field]) => field !== undefined),
+	) as T;
+
+const offlineDefinition = (definition: RawDefinition): RawDefinition =>
+	withoutUndefined({
+		text: definition.text,
+		text_en: definition.text_en,
+		text_es: definition.text_es,
+		text_he: definition.text_he,
+		source: definition.source,
+		review_status: definition.review_status,
+		license: definition.license,
+		sense: definition.sense,
+		definition_kind: definition.definition_kind,
+		order: definition.order,
+	});
+
+const offlineWord = (entry: OfflineWordEntry): OfflineWordEntry =>
+	withoutUndefined({
+		strong_number: entry.strong_number,
+		lemma: entry.lemma,
+		hebrew: entry.hebrew,
+		transliteration: entry.transliteration,
+		translit_en: entry.translit_en,
+		translit_es: entry.translit_es,
+		transliteration_en: entry.transliteration_en,
+		transliteration_es: entry.transliteration_es,
+		definitions: entry.definitions?.map(offlineDefinition),
+		occurrences: entry.occurrences && {
+			total: entry.occurrences.references?.length ?? entry.occurrences.total,
+		},
+		root_ref: entry.root_ref,
+		root_strong: entry.root_strong,
+	});
+
+const offlineCustom = (entry: RawCustomEntry): RawCustomEntry => {
+	const instances =
+		entry.instances ?? [
+			...(entry.oe_instances ?? []),
+			...(entry.nt_instances ?? []),
+		];
+	return withoutUndefined({
+		strong_number: entry.strong_number,
+		hebrew: entry.hebrew,
+		transliteration_en: entry.transliteration_en,
+		transliteration_es: entry.transliteration_es,
+		definitions: entry.definitions?.map(offlineDefinition),
+		root: entry.root,
+		root_strong: entry.root_strong,
+		manual_instances: entry.manual_instances,
+		instance_total: entry.instance_total ?? (instances.length || undefined),
+	});
+};
+
+const mapValues = <T>(
+	record: Record<string, T>,
+	map: (value: T) => T,
+): Record<string, T> =>
+	Object.fromEntries(
+		Object.entries(record).map(([key, value]) => [key, map(value)]),
+	);
+
+export const offlineLexiconSources = (
+	sources: OfflineLexiconSources,
+): OfflineLexiconSources => ({
+	words: mapValues(sources.words, offlineWord),
+	roots: mapValues(sources.roots, offlineWord),
+	custom_definitions: mapValues(sources.custom_definitions, offlineCustom),
+});
