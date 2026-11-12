@@ -80,6 +80,7 @@ besorah:
   - tests/test_besorah_remediation.py
   - tests/test_merge_strongs.py
   - tests/test_delitzsch_review.py
+  - data/dict/lexicon/**
   - scripts/ci/**
   - .github/workflows/ci.yml
   - .github/ci/**
@@ -91,6 +92,7 @@ greek-source:
   - scripts/dict/validator.py
   - tests/test_greek_*.py
   - tests/test_definition_hygiene.py
+  - data/dict/lexicon/**
   - tests/fixtures/greek/**
   - docs/greek-besorah-source-licenses.md
   - scripts/ci/**
