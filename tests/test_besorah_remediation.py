@@ -88,3 +88,25 @@ def test_checked_in_repairs_match_narrow_rules_and_preserve_scripture():
             assert GRAMMAR[pointed(change['before']['text'])]==change['after']['strong']
         assert change['before']['text']==change['after']['text']
     assert plan['baseline']['hebrew_character_sha256']==plan['final']['hebrew_character_sha256']
+
+def test_definition_coverage_separates_sources_languages_and_missing_entries(tmp_path):
+    from scripts.delitzsch.definition_coverage import build_report, check_errors, encoded, occurrence_counts
+    chapter=tmp_path/"jude"/"1.json"; chapter.parent.mkdir(parents=True)
+    words=[{"text":"א","strong":s} for s in ["Hc/Hd/H1","H1","D2","H3","H4"]]
+    chapter.write_text(json.dumps([{"chapter":1,"verses":[{"verse":1,"words":words}]}]))
+    sources={"words":{"H1":{"definitions":[{"text_en":"father"}]}},"roots":{"H4":{"definitions":[{"text_en":" ","text_es":"raíz"}]}},
+        "custom_definitions":{"D2":{"definitions":[{"text_en":"in her","text_es":"en ella"}]},"H1":{"definitions":[{"text_es":"padre"}]}}}
+    report=build_report(occurrence_counts(tmp_path),sources)
+    assert report["identifiers"]=={"H1":{"source":"canonical_and_custom","languages":["en","es"],"occurrences":2},
+        "D2":{"source":"custom","languages":["en","es"],"occurrences":1},"H4":{"source":"canonical","languages":["es"],"occurrences":1}}
+    assert report["missing_entries"]==[{"strong":"H3","occurrences":1}]
+    assert report["missing_definitions"]=={"en":[{"strong":"H4","source":"canonical","occurrences":1}],"es":[]}
+    errors=check_errors(report,encoded(report),{"en":["H4","H9"],"es":[]})
+    assert errors==["H3 has no lexicon entry (1 occurrences)",
+        "H9 now has a en definition; remove it from data/delitzsch/review/definition_gaps_baseline.json"]
+    assert check_errors(report,encoded(report),{"en":[],"es":[]})[-1].startswith("H4 has no en definition")
+
+def test_committed_definition_coverage_is_current_and_gaps_only_shrink():
+    from scripts.delitzsch.definition_coverage import BASELINE, REPORT, build_report, check_errors, load_lexicon, occurrence_counts
+    report=build_report(occurrence_counts(),load_lexicon())
+    assert check_errors(report,REPORT.read_text(encoding="utf-8"),json.loads(BASELINE.read_text(encoding="utf-8")))==[]
