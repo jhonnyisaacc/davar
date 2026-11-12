@@ -152,3 +152,18 @@ def test_acceptance_samples_h430_g3056_g2424g_shapes():
         ],
     )
     assert g2424 == []
+
+
+def test_published_lexicon_definitions_match_their_entry_shards():
+    import json
+    from pathlib import Path
+
+    lexicon = Path(__file__).resolve().parents[1] / "data/dict/lexicon"
+    drift = []
+    for name in ("words", "roots"):
+        published = json.loads((lexicon / f"{name}.json").read_text(encoding="utf-8"))
+        for shard in sorted((lexicon / name).glob("*.json")):
+            entry = json.loads(shard.read_text(encoding="utf-8"))
+            if entry.get("definitions") != published.get(shard.stem, {}).get("definitions"):
+                drift.append(f"{name}/{shard.stem}")
+    assert drift == [], f"shard definitions differ from the published lexicon: {drift}"

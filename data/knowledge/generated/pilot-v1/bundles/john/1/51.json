@@ -34,7 +34,7 @@
     "#malaji_4_5: reference_system_not_verified",
     "#yeshayahu_40_3: reference_system_not_verified"
   ],
-  "input_manifest_digest": "2b5c0ea5b2729314cfcba9cab2802ba8831a1595f6a652bd3f42931bb06484b0",
+  "input_manifest_digest": "b4678b0a81c48750f7a4539c94e97bd69bc1cd24d975c340c2a7ea05ac4fe212",
   "records": {
     "concepts": [
       {
@@ -604,7 +604,7 @@
         "path": "data/dict/lexicon/words.json",
         "repository": "https://github.com/jhonnyisaacc/davar",
         "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-        "sha256": "f940146b0f4cd917286da893fa5b7b783c8dd110dd386d29e1b8d3bc07550034",
+        "sha256": "ff7823061b3567180096bc84f078bc90975eb44e3bd479e4772f7b8a086c70fa",
         "visibility": "public"
       },
       {

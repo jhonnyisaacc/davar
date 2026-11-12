@@ -92,6 +92,13 @@ def test_a_greek_repin_exempts_only_greek_outputs_from_legacy_parity():
     assert legacy_generation_differences(expected, actual, refreshed) == ["bundles/tanaj.json"]
 
 
+def test_a_lexicon_repin_exempts_only_dictionary_outputs_from_legacy_parity():
+    refreshed = refreshed_outputs((("data/dict/lexicon/words.json", "data/dict/lexicon/words.json"),))
+    expected = {"dict/entries/H31.json": "old", "dict/words.json": "old", "bundles/dictionary.json": "old", "bundles/tanaj.json": "old"}
+    actual = {"dict/entries/H31.json": "new", "dict/words.json": "new", "bundles/dictionary.json": "new", "bundles/tanaj.json": "new"}
+    assert legacy_generation_differences(expected, actual, refreshed) == ["bundles/tanaj.json"]
+
+
 def test_a_repin_outside_the_refresh_table_keeps_legacy_parity_strict():
     refreshed = refreshed_outputs((("data/oe/old.json", "data/oe/daniel/7.json"),))
     assert refreshed == ()

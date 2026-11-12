@@ -3,23 +3,23 @@
   "files": [
     {
       "path": "bundles/daniel/7/13.json",
-      "sha256": "f701b240badb0be8c2a67d4f72b874830085176b2dd275006e7ee582af4613c0"
+      "sha256": "0b3fae92f0b606b856f1e5dc4877b3b16d1fddf026aaf56784107a3d8c03d6ac"
     },
     {
       "path": "bundles/john/1/1.json",
-      "sha256": "a164e74579bce17130e0612a3a50236af93e593e897973f0ac1b02b46c84f98a"
+      "sha256": "fa0d9733ead4154f7c2f59d78e24be77104fb25a44308a333bcdb63d885c654c"
     },
     {
       "path": "bundles/john/1/51.json",
-      "sha256": "de600ead41782f514909d0071075805f6c3102c5193d72cb128d3e7628d81b93"
+      "sha256": "5c277cc733100ecd1e38a9a8c6894478e7ace1e24922b97558679344cd43dcda"
     },
     {
       "path": "records/records.json",
-      "sha256": "c3b01d85241be4a32432585a349b0a5eac3e1076fa299cba1c7bbe22175e8a13"
+      "sha256": "105f5ed8bda8a3ce40bc062d3d024b1f7e25967b28b5c4fa2c5758a314486ade"
     }
   ],
   "generator_version": "1.0.0",
-  "input_manifest_digest": "2b5c0ea5b2729314cfcba9cab2802ba8831a1595f6a652bd3f42931bb06484b0",
+  "input_manifest_digest": "b4678b0a81c48750f7a4539c94e97bd69bc1cd24d975c340c2a7ea05ac4fe212",
   "inputs": [
     {
       "id": "greek-lexicon",
@@ -67,7 +67,7 @@
       "path": "data/dict/lexicon/words.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-      "sha256": "f940146b0f4cd917286da893fa5b7b783c8dd110dd386d29e1b8d3bc07550034"
+      "sha256": "ff7823061b3567180096bc84f078bc90975eb44e3bd479e4772f7b8a086c70fa"
     },
     {
       "id": "custom",
