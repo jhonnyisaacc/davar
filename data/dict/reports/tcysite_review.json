@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "decisions": "data/dict/review/tcysite_eric.jsonl",
+  "reasons": {
+    "third_party_lexicon": "Spanish edition of a third-party lexicon (Strong/Chávez, Tuggy, Vine, Swanson), not the permitted Eric dictionary; for most of these entries the canonical Greek lexicon carries English and Hebrew definitions",
+    "source_defect": "The Spanish source row has no translatable meaning",
+    "entry_unresolved": "The row is attached to the wrong entry and no single Strong number fits it"
+  },
+  "counts": {
+    "tcysite-eric:approved": 3898,
+    "tcysite-eric:blocked": 4,
+    "tcysite-eric:corrected": 17,
+    "tcysite-greek-detail:blocked": 5524,
+    "tcysite-greek-master:blocked": 3617,
+    "tcysite-greek-strong:blocked": 5524
+  },
+  "reviewers": {
+    "claude-tcy-review": 3919
+  },
+  "unreviewed": [],
+  "orphan_decisions": []
+}
