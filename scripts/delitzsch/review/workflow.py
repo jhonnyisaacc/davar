@@ -539,7 +539,7 @@ def generate_batch(
         "instructions": (
             "Edit decisions in this file, then run review apply. Supported actions: "
             "set_strong, add_definition, upsert_custom_definition, "
-            "create_custom_entry, needs_manual_review, skip."
+            "remove_custom_definition, create_custom_entry, needs_manual_review, skip."
         ),
         "decisions": [issue_to_decision_stub(issue) for issue in selected],
     }
@@ -789,6 +789,24 @@ def _upsert_custom_definition(
     return key
 
 
+def _remove_custom_definition(lexicon: LexiconIndex, decision: dict[str, Any]) -> int:
+    key = lexicon.normalize_strong(decision.get("custom_key") or decision.get("strong"))
+    entry = lexicon.load_custom_entries().get(key)
+    if not entry:
+        raise FileNotFoundError(f"Custom entry not found for {key}")
+    target = decision.get("definition") or {}
+    if "order" not in target or not (target.get("text_en") or target.get("text_es")):
+        raise ValueError("remove_custom_definition requires definition.order and its text")
+    before = entry.get("definitions") or []
+    entry["definitions"] = [
+        item
+        for item in before
+        if (item.get("order"), item.get("text_en"), item.get("text_es"))
+        != (target["order"], target.get("text_en"), target.get("text_es"))
+    ]
+    return len(before) - len(entry["definitions"])
+
+
 def apply_decisions(
     decisions_file: Path,
     base_dir: Path,
@@ -937,6 +955,17 @@ def apply_decisions(
                 changed_lexicon[lexicon.custom_definitions_path] = lexicon.load_custom_entries()
                 stats.definition_updates += 1
                 append_decision_log(log_dir, {**decision, "strong": key}, "applied", dry_run)
+                stats.log_entries += 0 if dry_run else 1
+                continue
+
+            if action == "remove_custom_definition":
+                removed = _remove_custom_definition(lexicon, decision)
+                if removed:
+                    changed_lexicon[lexicon.custom_definitions_path] = lexicon.load_custom_entries()
+                    stats.definition_updates += removed
+                else:
+                    stats.skipped += 1
+                append_decision_log(log_dir, decision, "applied" if removed else "already_applied", dry_run)
                 stats.log_entries += 0 if dry_run else 1
                 continue
 
