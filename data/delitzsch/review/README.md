@@ -96,6 +96,31 @@ prefix reading can be real when the Strong number was never reviewed (for
 example `לָכֶם` mapped to H3922). `remediate check` reverts the `corrected`
 records before it compares the corpus with the validated plan.
 
+### Reviewed Strong corrections (#379)
+
+A reviewer can correct a wrong Strong number with a `set_strong` decision
+whose `issue_type` is `strong_correction`. The decision keeps the prefixes,
+and its `evidence` gives the `lexicon`, `grammar`, and `context` reasons.
+`batches/strong_corrections_379.json` corrects Mark 13:19 `הַבְּרִיאָה` from
+H1277 to H1278 and Revelation 21:2 `כַכַּלָּה` from H5369 to H3618. Apply it
+with `review apply`, then run `review dispositions`.
+
+The `reviewed_strong_correction` rule records such a decision as `corrected`,
+with the before and after Strong numbers. The ledger raises an error when the
+decision is not an `applied` or `already_applied` `set_strong` by a person or
+agent reviewer, when its previous Strong number differs from the queued one,
+when the new Strong number repeats the old one or tags other prefixes, or when
+an evidence field is missing.
+
+A `strong_correction` decision for an occurrence outside the review queue gets
+a record with `source` set to `decision_log` and the `outside_queue` family.
+Mark 13:19 is such an occurrence. The queue flags only a missing Strong
+number, a Strong string whose prefixes differ from the prefix metadata, or a
+word that shares at most one letter with its lemma. `Hd/H1277` agrees with
+`Hd` and shares four letters with `בריא`, so no queue rule saw it.
+`remediate check` reverts the Strong number and the prefixes of each
+`corrected` record, so any other edit to the corpus still fails the check.
+
 ### Style-only prefixes (#364)
 
 Most prefix-only flags are style differences. The word's prefixes are real, and
