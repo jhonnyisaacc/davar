@@ -80,8 +80,8 @@ describe("dictionary bundle normalization", () => {
     expect(new Set(entries.map((entry) => entry.strong_number)).size).toBe(
       entries.length,
     );
-    expect(importedOverlaps).toHaveLength(49);
-    expect(importedDefinitionCount).toBe(84);
+    expect(importedOverlaps).toHaveLength(59);
+    expect(importedDefinitionCount).toBe(92);
     expect(importedOverlaps.every((strong) => byStrong.has(strong))).toBe(true);
   });
 
