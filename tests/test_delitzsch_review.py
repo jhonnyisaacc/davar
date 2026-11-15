@@ -934,7 +934,7 @@ def test_false_prefixes_outside_the_queue_leave_the_prefixes_and_the_strong_stri
         "decision_log", "outside_queue", "corrected", "root_letter_prefix_outside_queue")
     assert chose["before"] == {"text": "בָּחַרְתָּ", "strong": "Hb/H977", "prefixes": ["Hb"]}
     assert chose["after"] == {"text": "בָּחַרְתָּ", "strong": "H977", "prefixes": []}
-    assert (chose["evidence"]["basis"], chose["evidence"]["strong_review"]["status"]) == ("reviewed_strong", "skipped")
+    assert (chose["evidence"]["basis"], chose["evidence"]["lemma"], chose["evidence"]["strong_review"]["status"]) == ("reviewed_strong", "בחר", "skipped")
     assert "אֲשֶׁר־בָּחַרְתָּ" in parsed_verse("acts", 1, 24)["hebrew"]
 
     night = ledger_record("acts.12.6.1")

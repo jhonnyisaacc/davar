@@ -482,17 +482,17 @@ def root_letter_batch_from_disk() -> dict[str, Any]:
     return root_letter_batch(queue, load_corpus(), load_latest_decisions(REPORTS.parent / "decisions"), lexicon)
 
 
-def outside_root_letter_decision(location: str, word: Record, found: RootLetter, review: dict[str, Any] | None) -> Record:
+def outside_root_letter_decision(location: str, word: Record, reading: Reading, review: dict[str, Any] | None) -> Record:
     book, chapter_number, verse, index = location.split(".")
-    strong = word["strong"]
+    strong, found = word["strong"], reading.root_letter
     base = strong.split("/")[-1]
     return dict(
         action="set_strong", issue_type=ROOT_LETTER_ISSUE, reviewer=OUTSIDE_ROOT_LETTER_REVIEWER, confidence=0.95,
         occurrence=dict(book=book, chapter=int(chapter_number), verse=int(verse), word_index=int(index),
                         text=word["text"], strong=strong, prefixes=word["prefixes"]),
         previous_strong=strong, new_strong="/".join([*found.new_prefixes, base]), new_prefixes=found.new_prefixes,
-        reason=f"The tagged prefix letters {prefix_letters(word['prefixes'][len(found.new_prefixes):])} begin the lemma of {base}, so they are root letters, not prefixes.",
-        evidence=dict(basis=found.basis, consonants=normalize_hebrew(word["text"]), prefix_letters=prefix_letters(word["prefixes"]),
+        reason=f"The tagged prefix letters {prefix_letters(word['prefixes'][len(found.new_prefixes):])} begin the lemma {reading.lemma} of {base}, so they are root letters, not prefixes.",
+        evidence=dict(basis=found.basis, consonants=normalize_hebrew(word["text"]), prefix_letters=prefix_letters(word["prefixes"]), lemma=reading.lemma,
                       strong_review=review and {key: review.get(key) for key in ("reviewer", "status", "new_strong", "reason", "logged_at")}),
     )
 
@@ -511,7 +511,7 @@ def outside_root_letter_batch(queue: list[Record], corpus: dict[str, Any], decis
         if reading.root_letter is None:
             continue
         if reading.root_letter.certain:
-            proposals.append(outside_root_letter_decision(location, word, reading.root_letter, reviews.get(location)))
+            proposals.append(outside_root_letter_decision(location, word, reading, reviews.get(location)))
         else:
             unresolved.append(dict(location=location, text=word["text"], strong=strong, prefixes=word["prefixes"],
                                    lemma=reading.lemma, reason=reading.root_letter.basis))
