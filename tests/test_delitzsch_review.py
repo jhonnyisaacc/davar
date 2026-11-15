@@ -580,16 +580,69 @@ def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
     committed = dispositions.read_ledger()
     assert committed == rebuilt
     summary = committed["summary"]
-    assert summary["total"] == 11528
+    assert summary["total"] == 11528 + 16084
     assert summary["by_family"]["prefix_metadata"] == {
         "benign": 1480, "corrected": 70, "already_reviewed": 374, "unresolved": 3570, "blocked": 0, "superseded": 0,
     }
     assert summary["benign_lexical_review"] == {"pending": 1230, "reviewed": 250}
+    assert summary["by_family"]["legacy_assignment"] == {
+        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 7249, "superseded": 8835,
+    }
+    assert {rule: summary["by_rule"][rule] for rule in ("legacy_without_candidate", "legacy_current_value", "legacy_blocked")} == {
+        "legacy_without_candidate": 4360, "legacy_current_value": 4475, "legacy_blocked": 7249,
+    }
+
+
+def legacy_record(row):
+    record = next(r for r in dispositions.read_ledger()["records"] if r.get("row") == row)
+    assert (record["source"], record["location"]) == ("legacy_assignment_review", None)
+    return record
+
+
+def test_legacy_rows_without_a_candidate_are_superseded():
+    theophilus = legacy_record(0)
+    assert (theophilus["disposition"], theophilus["rule"], theophilus["after"]) == ("superseded", "legacy_without_candidate", None)
+    assert theophilus["before"] == {"book": "acts", "chapter": 1, "word_index": 3, "text": "תְּאוֹפִילוֹס", "candidate": None, "outcome": "failed"}
+    placeholder = legacy_record(7324)
+    assert (placeholder["before"]["text"], placeholder["disposition"]) == ("WO", "superseded")
+
+
+def test_legacy_row_matching_the_current_value_at_its_one_location_is_superseded_by_it():
+    baptized = legacy_record(5)
+    assert (baptized["disposition"], baptized["rule"], baptized["reviewer"]) == ("superseded", "legacy_current_value", "rule:legacy_current_value_v1")
+    assert baptized["after"] == {"location": "acts.1.5.5", "strong": "H2881"}
+    assert baptized["evidence"]["current"] == [{"location": "acts.1.5.5", "text": "תִּטָּבְלוּ", "strong": "H2881", "review_status": "applied"}]
+    assert parsed_verse("acts", 1, 5)["words"][5]["strong"] == "H2881"
+
+
+def test_other_legacy_rows_are_blocked_with_their_matching_locations_and_nothing_is_reapplied():
+    command = legacy_record(2)
+    assert (command["disposition"], command["rule"], command["after"]) == ("blocked", "legacy_blocked", None)
+    assert command["before"]["candidate"] == "H6702"
+    assert command["evidence"]["current"] == [{"location": "acts.1.2.6", "text": "צַוֹּתוֹ", "strong": "H6680", "review_status": "applied"}]
+    assert parsed_verse("acts", 1, 2)["words"][6]["strong"] == "H6680"
+    need = legacy_record(27)
+    assert (need["disposition"], need["evidence"]["matching_locations"]) == ("blocked", ["acts.1.16.3", "acts.1.21.3"])
+    assert [m["strong"] for m in need["evidence"]["current"]] == ["H8293", "H8293"]
+
+
+def test_legacy_row_is_blocked_when_its_location_has_another_word_or_several_matches():
+    row = dict(book="acts", chapter=1, word_index=5, text="תִּטָּבְלוּ", candidate="H2881", outcome="strong",
+               matching_locations=["acts.1.5.5"], reason="lost identity")
+    same = dispositions.Match("acts.1.5.5", {"text": "תִּטָּבְלוּ", "strong": "H2881"}, None)
+    other = dispositions.Match("acts.1.5.5", {"text": "וַתִּטָּבְלוּ", "strong": "H2881"}, None)
+
+    def rule(matches):
+        return dispositions.build_ledger([], {}, {}, [row], [matches])["records"][0]["rule"]
+
+    assert rule([same]) == "legacy_current_value"
+    assert rule([other]) == rule([same, same]) == rule([]) == "legacy_blocked"
+    assert dispositions.build_ledger([], {}, {}, [dict(row, candidate=None)], [[]])["records"][0]["rule"] == "legacy_without_candidate"
 
 
 def test_style_only_prefixes_are_benign_with_lemma_evidence():
     samaria = ledger_record("acts.1.8.12")
-    assert (samaria["disposition"], samaria["rule"], samaria["rule_version"]) == ("benign", "style_only_prefix", 4)
+    assert (samaria["disposition"], samaria["rule"], samaria["rule_version"]) == ("benign", "style_only_prefix", 5)
     assert samaria["before"] == {"text": "וּבְשֹׁמְרוֹן", "strong": "H8111"}
     assert samaria["after"] is None
     evidence = samaria["evidence"]
@@ -620,6 +673,13 @@ def test_style_only_rule_leaves_unsettled_prefix_flags_alone():
     readings = {"acts.1.2.12": dispositions.Reading([], "בחר")}
     [record] = dispositions.build_ledger([dict(entry, text="בְּבָחַר")], {}, readings)["records"]
     assert record["disposition"] == "unresolved"
+
+
+def test_style_only_rule_does_not_settle_a_prefix_flag_with_no_prefixes():
+    entry = queue_entry("acts.1.2.12", ["prefix_metadata_disagreement"])
+    readings = {"acts.1.2.12": dispositions.Reading([], "בחר")}
+    [record] = dispositions.build_ledger([entry], {}, readings)["records"]
+    assert (record["disposition"], record["rule"]) == ("unresolved", "unadjudicated")
 
 
 def test_style_only_rule_does_not_settle_a_prefix_letter_another_lemma_reads_as_root():
