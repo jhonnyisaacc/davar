@@ -166,7 +166,7 @@ def build_plan(corpus, lexicon, decisions, include_legacy=False):
         corpus_after_sha256=digest(after),quality_gate=dict(passed=not errors,errors=errors),review_queue=queue)
 
 
-def apply_plan(plan, base=PARSED):
+def apply_plan(plan, base=PARSED, revert=lambda path, payload: payload):
     if not plan["quality_gate"]["passed"]: raise ValueError("Publication gate failed")
     staged = []
     for path, item in plan["files"].items():
@@ -174,9 +174,8 @@ def apply_plan(plan, base=PARSED):
         if not target.resolve().is_relative_to(base.resolve()): raise ValueError("Invalid plan path")
         current = json.loads(target.read_text())
         if digest(item["after"]) != item["after_sha256"]: raise ValueError("Corrupt planned payload")
-        if digest(current) == item["after_sha256"]: continue
-        if digest(current) != item["before_sha256"]: raise ValueError(f"Stale source: {path}")
-        staged.append((target,item["after"]))
+        if digest(current) == item["before_sha256"]: staged.append((target,item["after"])); continue
+        if digest(revert(path, current)) != item["after_sha256"]: raise ValueError(f"Stale source: {path}")
     for path,payload in staged: path.write_bytes(encoded(payload))
     return len(staged)
 
@@ -220,10 +219,12 @@ def main():
         if not plan['quality_gate']['passed']: raise SystemExit(2)
     else:
         plan=json.loads(gzip.decompress(args.plan.read_bytes()))
-        if args.command=="apply": print('files_changed',apply_plan(plan))
+        from scripts.delitzsch.review.dispositions import read_ledger, revert_corrections, revert_file
+        records=read_ledger()["records"]
+        if args.command=="apply": print('files_changed',apply_plan(plan,revert=lambda path,payload: revert_file(path,payload,records)))
         corpus=load_corpus()
         errors=publication_errors(corpus,lexicon)
-        if errors or digest(corpus)!=plan['corpus_after_sha256']: raise SystemExit('Corpus does not match validated plan')
+        if errors or digest(revert_corrections(corpus,records))!=plan['corpus_after_sha256']: raise SystemExit('Corpus does not match validated plan and the disposition ledger corrections')
         if args.command=="apply": print('custom_instances_added',sync_custom_instances(plan))
         print(json.dumps(metrics(corpus),indent=2))
 

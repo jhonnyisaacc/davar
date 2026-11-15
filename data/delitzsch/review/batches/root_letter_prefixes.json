@@ -1,0 +1,2400 @@
+{
+  "issue": 366,
+  "rule": "root_letter_prefix",
+  "rule_version": 1,
+  "decisions": [
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בחר",
+        "lemma": "בחר",
+        "prefix_letters": "ב",
+        "strong_review": {
+          "logged_at": "2026-05-29T17:01:20.246310+00:00",
+          "new_strong": "H977",
+          "reason": "בָּחַר is the verb בחר, “choose”; H970 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H977",
+      "occurrence": {
+        "book": "acts",
+        "chapter": 1,
+        "prefixes": [
+          "Hb"
+        ],
+        "strong": "H977",
+        "text": "בָּחַר",
+        "verse": 2,
+        "word_index": 12
+      },
+      "previous_strong": "H977",
+      "reason": "The tagged prefix letters ב begin the lemma בחר of the reviewed Strong H977, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בדימ",
+        "lemma": "בד",
+        "prefix_letters": "ב",
+        "strong_review": {
+          "logged_at": "2026-05-29T17:03:24.072694+00:00",
+          "new_strong": "H906",
+          "reason": "בַדִּים here means linen garments; H905 “alone/part” is not the clothing sense.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H906",
+      "occurrence": {
+        "book": "acts",
+        "chapter": 1,
+        "prefixes": [
+          "Hb"
+        ],
+        "strong": "H906",
+        "text": "בַדִּים",
+        "verse": 10,
+        "word_index": 8
+      },
+      "previous_strong": "H906",
+      "reason": "The tagged prefix letters ב begin the lemma בד of the reviewed Strong H906, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לחמ",
+        "lemma": "לחם",
+        "prefix_letters": "ל",
+        "strong_review": {
+          "logged_at": "2026-05-29T17:38:27.092947+00:00",
+          "new_strong": "H3899",
+          "reason": "לָחֶם means bread/food; H1035 Bethlehem is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3899",
+      "occurrence": {
+        "book": "acts",
+        "chapter": 11,
+        "prefixes": [
+          "Hl"
+        ],
+        "strong": "H3899",
+        "text": "לָחֶם׃",
+        "verse": 3,
+        "word_index": 8
+      },
+      "previous_strong": "H3899",
+      "reason": "The tagged prefix letters ל begin the lemma לחם of the reviewed Strong H3899, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בעל",
+        "lemma": "בעל",
+        "prefix_letters": "ב",
+        "strong_review": {
+          "logged_at": "2026-05-29T17:57:42.248210+00:00",
+          "new_strong": "H1167",
+          "reason": "בַּעַל means possessor/one having; H1167 בַּעַל fits, H4807 is an unrelated proper name.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H1167",
+      "occurrence": {
+        "book": "acts",
+        "chapter": 19,
+        "prefixes": [
+          "Hb"
+        ],
+        "strong": "H1167",
+        "text": "בַּעַל",
+        "verse": 16,
+        "word_index": 2
+      },
+      "previous_strong": "H1167",
+      "reason": "The tagged prefix letters ב begin the lemma בעל of the reviewed Strong H1167, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לשנות",
+        "lemma": "לשון",
+        "prefix_letters": "ל",
+        "strong_review": {
+          "logged_at": "2026-05-29T17:07:11.950144+00:00",
+          "new_strong": "H3956",
+          "reason": "לְשֹׁנוֹת means tongues/languages; H1525 means rejoicing and is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3956",
+      "occurrence": {
+        "book": "acts",
+        "chapter": 2,
+        "prefixes": [
+          "Hl"
+        ],
+        "strong": "H3956",
+        "text": "לְשֹׁנוֹת",
+        "verse": 3,
+        "word_index": 2
+      },
+      "previous_strong": "H3956",
+      "reason": "The tagged prefix letters ל begin the lemma לשון of the reviewed Strong H3956, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "ובחוריכמ",
+        "lemma": "בחור",
+        "prefix_letters": "וב",
+        "strong_review": {
+          "logged_at": "2026-05-29T17:09:00.210626+00:00",
+          "new_strong": "H970",
+          "reason": "וּבַחוּרֵיכֶם means “your young men”; H2360 is a proper-name entry and is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hc"
+      ],
+      "new_strong": "H970",
+      "occurrence": {
+        "book": "acts",
+        "chapter": 2,
+        "prefixes": [
+          "Hc",
+          "Hb"
+        ],
+        "strong": "H970",
+        "text": "וּבַחוּרֵיכֶם",
+        "verse": 17,
+        "word_index": 14
+      },
+      "previous_strong": "H970",
+      "reason": "The tagged prefix letters ב begin the lemma בחור of the reviewed Strong H970, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בציעת",
+        "lemma": "בצע",
+        "prefix_letters": "ב",
+        "strong_review": {
+          "logged_at": "2026-05-29T14:37:44.353785+00:00",
+          "new_strong": "H1214",
+          "reason": "בציעת הלחם means breaking of bread; root בצע corresponds to H1214 cut/break off.",
+          "reviewer": "codex-delitzsch-review",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H1214",
+      "occurrence": {
+        "book": "acts",
+        "chapter": 2,
+        "prefixes": [
+          "Hb"
+        ],
+        "strong": "H1214",
+        "text": "בְּצִיעַת",
+        "verse": 42,
+        "word_index": 8
+      },
+      "previous_strong": "H1214",
+      "reason": "The tagged prefix letters ב begin the lemma בצע of the reviewed Strong H1214, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לכלא",
+        "lemma": "כלא",
+        "prefix_letters": "לכ",
+        "strong_review": {
+          "logged_at": "2026-05-29T18:01:43.386656+00:00",
+          "new_strong": "H3608",
+          "reason": "לַכֶּלֶא means to prison/confinement; H3608 כֶּלֶא fits, H249 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hl"
+      ],
+      "new_strong": "H3608",
+      "occurrence": {
+        "book": "acts",
+        "chapter": 22,
+        "prefixes": [
+          "Hl",
+          "Hk"
+        ],
+        "strong": "H3608",
+        "text": "לַכֶּלֶא",
+        "verse": 4,
+        "word_index": 9
+      },
+      "previous_strong": "H3608",
+      "reason": "The tagged prefix letters כ begin the lemma כלא of the reviewed Strong H3608, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בכחנו",
+        "lemma": "כח",
+        "prefix_letters": "בכ",
+        "strong_review": {
+          "logged_at": "2026-05-29T17:13:04.572750+00:00",
+          "new_strong": "H3581",
+          "reason": "H3581 is the corrected כח entry for power/strength, and the local definition is currently wrong/narrow.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hb"
+      ],
+      "new_strong": "H3581",
+      "occurrence": {
+        "book": "acts",
+        "chapter": 3,
+        "prefixes": [
+          "Hb",
+          "Hk"
+        ],
+        "strong": "H3581",
+        "text": "בְּכֹחֵנוּ",
+        "verse": 12,
+        "word_index": 18
+      },
+      "previous_strong": "H3581",
+      "reason": "The tagged prefix letters כ begin the lemma כח of the reviewed Strong H3581, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "וכחשתמ",
+        "lemma": "כחש",
+        "prefix_letters": "וכ",
+        "strong_review": {
+          "logged_at": "2026-05-29T17:13:04.570104+00:00",
+          "new_strong": "H3584",
+          "reason": "וְכִחַשְׁתֶּם means “you denied/disowned”; H3585 is the noun falsehood/leanness.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hc"
+      ],
+      "new_strong": "H3584",
+      "occurrence": {
+        "book": "acts",
+        "chapter": 3,
+        "prefixes": [
+          "Hc",
+          "Hk"
+        ],
+        "strong": "H3584",
+        "text": "וְכִחַשְׁתֶּם",
+        "verse": 13,
+        "word_index": 17
+      },
+      "previous_strong": "H3584",
+      "reason": "The tagged prefix letters כ begin the lemma כחש of the reviewed Strong H3584, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בכספו",
+        "lemma": "כסף",
+        "prefix_letters": "בכ",
+        "strong_review": {
+          "logged_at": "2026-05-29T17:29:58.191678+00:00",
+          "new_strong": "H3701",
+          "reason": "בְּכַסְפּוֹ means “with his money/silver”; H7326 be poor is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hb"
+      ],
+      "new_strong": "H3701",
+      "occurrence": {
+        "book": "acts",
+        "chapter": 7,
+        "prefixes": [
+          "Hb",
+          "Hk"
+        ],
+        "strong": "H3701",
+        "text": "בְּכַסְפּוֹ",
+        "verse": 16,
+        "word_index": 7
+      },
+      "previous_strong": "H3701",
+      "reason": "The tagged prefix letters כ begin the lemma כסף of the reviewed Strong H3701, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "ולבבמ",
+        "lemma": "לבב",
+        "prefix_letters": "ול",
+        "strong_review": {
+          "logged_at": "2026-05-29T17:31:23.510050+00:00",
+          "new_strong": "H3824",
+          "reason": "וּלְבָבָם means “and their heart”; H2969 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hc"
+      ],
+      "new_strong": "H3824",
+      "occurrence": {
+        "book": "acts",
+        "chapter": 7,
+        "prefixes": [
+          "Hc",
+          "Hl"
+        ],
+        "strong": "H3824",
+        "text": "וּלְבָבָם",
+        "verse": 39,
+        "word_index": 11
+      },
+      "previous_strong": "H3824",
+      "reason": "The tagged prefix letters ל begin the lemma לבב of the reviewed Strong H3824, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בהרגתו",
+        "lemma": "הרג",
+        "prefix_letters": "בה",
+        "strong_review": {
+          "logged_at": "2026-05-29T17:33:04.467159+00:00",
+          "new_strong": "H2027",
+          "reason": "בַהֲרֵגָתוֹ refers to Stephen’s killing/slaughter; H3867 join is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hb"
+      ],
+      "new_strong": "H2027",
+      "occurrence": {
+        "book": "acts",
+        "chapter": 8,
+        "prefixes": [
+          "Hb",
+          "Hd"
+        ],
+        "strong": "H2027",
+        "text": "בַהֲרֵגָתוֹ",
+        "verse": 1,
+        "word_index": 5
+      },
+      "previous_strong": "H2027",
+      "reason": "The tagged prefix letters ה begin the lemma הרג of the reviewed Strong H2027, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בכפרימ",
+        "lemma": "כפר",
+        "prefix_letters": "בכ",
+        "strong_review": {
+          "logged_at": "2026-05-29T17:33:04.471661+00:00",
+          "new_strong": "H3723",
+          "reason": "בִּכְפָרִים means in villages; H3722 cover/atone is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hb"
+      ],
+      "new_strong": "H3723",
+      "occurrence": {
+        "book": "acts",
+        "chapter": 8,
+        "prefixes": [
+          "Hb",
+          "Hk"
+        ],
+        "strong": "H3723",
+        "text": "בִּכְפָרִים",
+        "verse": 25,
+        "word_index": 13
+      },
+      "previous_strong": "H3723",
+      "reason": "The tagged prefix letters כ begin the lemma כפר of the reviewed Strong H3723, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "למדתמ",
+        "lemma": "למד",
+        "prefix_letters": "ל",
+        "strong_review": {
+          "logged_at": "2026-05-29T18:12:40.717255+00:00",
+          "new_strong": "H3925",
+          "reason": "לְמַדְתֶּם means you learned; H3925 לָמַד fits, H5475 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3925",
+      "occurrence": {
+        "book": "colossians",
+        "chapter": 1,
+        "prefixes": [
+          "Hl"
+        ],
+        "strong": "H3925",
+        "text": "לְמַדְתֶּם",
+        "verse": 7,
+        "word_index": 1
+      },
+      "previous_strong": "H3925",
+      "reason": "The tagged prefix letters ל begin the lemma למד of the reviewed Strong H3925, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "ולבשתמ",
+        "lemma": "לבש",
+        "prefix_letters": "ול",
+        "strong_review": {
+          "logged_at": "2026-05-29T18:29:36.899838+00:00",
+          "new_strong": "H3847",
+          "reason": "וּלְבַשְׁתֶּם means you put on/clothed yourselves; H3847 לָבַשׁ fits, H386 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hc"
+      ],
+      "new_strong": "H3847",
+      "occurrence": {
+        "book": "colossians",
+        "chapter": 3,
+        "prefixes": [
+          "Hc",
+          "Hl"
+        ],
+        "strong": "H3847",
+        "text": "וּלְבַשְׁתֶּם",
+        "verse": 10,
+        "word_index": 0
+      },
+      "previous_strong": "H3847",
+      "reason": "The tagged prefix letters ל begin the lemma לבש of the reviewed Strong H3847, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לשנות",
+        "lemma": "לשון",
+        "prefix_letters": "ל",
+        "strong_review": {
+          "logged_at": "2026-05-29T18:37:02.895201+00:00",
+          "new_strong": "H3956",
+          "reason": "לְשֹׁנוֹת means tongues/languages; H3956 לָשׁוֹן fits, H7500 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3956",
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 12,
+        "prefixes": [
+          "Hl"
+        ],
+        "strong": "H3956",
+        "text": "לְשֹׁנוֹת׃",
+        "verse": 10,
+        "word_index": 14
+      },
+      "previous_strong": "H3956",
+      "reason": "The tagged prefix letters ל begin the lemma לשון of the reviewed Strong H3956, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לבנותמ",
+        "lemma": "בנה",
+        "prefix_letters": "לב",
+        "strong_review": {
+          "logged_at": "2026-05-29T18:39:10.182898+00:00",
+          "new_strong": "H1129",
+          "reason": "לִבְנוֹתָם means to build them up/edify them; H1129 בָּנָה fits, H3607 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hl"
+      ],
+      "new_strong": "H1129",
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 14,
+        "prefixes": [
+          "Hl",
+          "Hb"
+        ],
+        "strong": "H1129",
+        "text": "לִבְנוֹתָם",
+        "verse": 3,
+        "word_index": 5
+      },
+      "previous_strong": "H1129",
+      "reason": "The tagged prefix letters ב begin the lemma בנה of the reviewed Strong H1129, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "היתכמ",
+        "lemma": "היה",
+        "prefix_letters": "ה",
+        "strong_review": {
+          "logged_at": "2026-05-29T18:33:10.785229+00:00",
+          "new_strong": "H1961",
+          "reason": "הֱיֹתְכֶם is an infinitive/being form from הָיָה; H3487 יַת is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H1961",
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 3,
+        "prefixes": [
+          "Hd"
+        ],
+        "strong": "H1961",
+        "text": "הֱיֹתְכֶם",
+        "verse": 2,
+        "word_index": 14
+      },
+      "previous_strong": "H1961",
+      "reason": "The tagged prefix letters ה begin the lemma היה of the reviewed Strong H1961, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לקחימ",
+        "lemma": "לקח",
+        "prefix_letters": "ל",
+        "strong_review": {
+          "logged_at": "2026-05-29T18:35:12.275016+00:00",
+          "new_strong": "H3947",
+          "reason": "לֹקְחִים means taking/receiving; H3947 לָקַח fits, H444 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3947",
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 9,
+        "prefixes": [
+          "Hl"
+        ],
+        "strong": "H3947",
+        "text": "לֹקְחִים",
+        "verse": 13,
+        "word_index": 11
+      },
+      "previous_strong": "H3947",
+      "reason": "The tagged prefix letters ל begin the lemma לקח of the reviewed Strong H3947, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לוחות",
+        "lemma": "לוח",
+        "prefix_letters": "ל",
+        "strong_review": {
+          "logged_at": "2026-05-29T14:47:24.954659+00:00",
+          "new_strong": "H3871",
+          "reason": "לוחות means tablets, from לוח.",
+          "reviewer": "codex-delitzsch-review",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3871",
+      "occurrence": {
+        "book": "corinthians2",
+        "chapter": 3,
+        "prefixes": [
+          "Hl"
+        ],
+        "strong": "H3871",
+        "text": "לוּחוֹת",
+        "verse": 3,
+        "word_index": 19
+      },
+      "previous_strong": "H3871",
+      "reason": "The tagged prefix letters ל begin the lemma לוח of the reviewed Strong H3871, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לוחות",
+        "lemma": "לוח",
+        "prefix_letters": "ל",
+        "strong_review": {
+          "logged_at": "2026-05-29T14:47:24.954826+00:00",
+          "new_strong": "H3871",
+          "reason": "לוחות means tablets, from לוח.",
+          "reviewer": "codex-delitzsch-review",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3871",
+      "occurrence": {
+        "book": "corinthians2",
+        "chapter": 3,
+        "prefixes": [
+          "Hl"
+        ],
+        "strong": "H3871",
+        "text": "לוּחוֹת",
+        "verse": 3,
+        "word_index": 24
+      },
+      "previous_strong": "H3871",
+      "reason": "The tagged prefix letters ל begin the lemma לוח of the reviewed Strong H3871, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בטוחימ",
+        "lemma": "בטח",
+        "prefix_letters": "ב",
+        "strong_review": {
+          "logged_at": "2026-05-29T18:43:59.618475+00:00",
+          "new_strong": "H982",
+          "reason": "בְּטוּחִים means confident/trusting; H982 בָּטַח fits, H4452 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H982",
+      "occurrence": {
+        "book": "corinthians2",
+        "chapter": 5,
+        "prefixes": [
+          "Hb"
+        ],
+        "strong": "H982",
+        "text": "בְּטוּחִים",
+        "verse": 6,
+        "word_index": 1
+      },
+      "previous_strong": "H982",
+      "reason": "The tagged prefix letters ב begin the lemma בטח of the reviewed Strong H982, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "ברכה",
+        "lemma": "ברכה",
+        "prefix_letters": "ב",
+        "strong_review": {
+          "logged_at": "2026-05-29T18:45:45.990145+00:00",
+          "new_strong": "H1293",
+          "reason": "בְּרָכָה means blessing/gift; H1293 בְּרָכָה fits, H1294 is a proper-place/person entry.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H1293",
+      "occurrence": {
+        "book": "corinthians2",
+        "chapter": 9,
+        "prefixes": [
+          "Hb"
+        ],
+        "strong": "H1293",
+        "text": "בְּרָכָה",
+        "verse": 5,
+        "word_index": 21
+      },
+      "previous_strong": "H1293",
+      "reason": "The tagged prefix letters ב begin the lemma ברכה of the reviewed Strong H1293, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "ברכנו",
+        "lemma": "ברך",
+        "prefix_letters": "ב",
+        "strong_review": {
+          "logged_at": "2026-05-29T18:47:34.286767+00:00",
+          "new_strong": "H1288",
+          "reason": "בֵּרְכָנוּ means blessed us; H1288 בָּרַךְ fits, H7390 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H1288",
+      "occurrence": {
+        "book": "ephesians",
+        "chapter": 1,
+        "prefixes": [
+          "Hb"
+        ],
+        "strong": "H1288",
+        "text": "בֵּרְכָנוּ",
+        "verse": 3,
+        "word_index": 8
+      },
+      "previous_strong": "H1288",
+      "reason": "The tagged prefix letters ב begin the lemma ברך of the reviewed Strong H1288, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בינתי",
+        "lemma": "בינה",
+        "prefix_letters": "ב",
+        "strong_review": {
+          "logged_at": "2026-05-29T18:47:34.291659+00:00",
+          "new_strong": "H998",
+          "reason": "בִּינָתִי means my understanding; H998 בִּינָה fits, H7327 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H998",
+      "occurrence": {
+        "book": "ephesians",
+        "chapter": 3,
+        "prefixes": [
+          "Hb"
+        ],
+        "strong": "H998",
+        "text": "בִּינָתִי",
+        "verse": 4,
+        "word_index": 5
+      },
+      "previous_strong": "H998",
+      "reason": "The tagged prefix letters ב begin the lemma בינה of the reviewed Strong H998, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "ובחנו",
+        "lemma": "בחן",
+        "prefix_letters": "וב",
+        "strong_review": {
+          "logged_at": "2026-05-29T18:47:34.293872+00:00",
+          "new_strong": "H974",
+          "reason": "וּבַחֲנוּ means and test/examine; H974 בָּחַן fits, H7012 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hc"
+      ],
+      "new_strong": "H974",
+      "occurrence": {
+        "book": "ephesians",
+        "chapter": 5,
+        "prefixes": [
+          "Hc",
+          "Hb"
+        ],
+        "strong": "H974",
+        "text": "וּבַחֲנוּ",
+        "verse": 10,
+        "word_index": 0
+      },
+      "previous_strong": "H974",
+      "reason": "The tagged prefix letters ב begin the lemma בחן of the reviewed Strong H974, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "כתמ",
+        "lemma": "כתם",
+        "prefix_letters": "כ",
+        "strong_review": {
+          "logged_at": "2026-05-29T18:54:12.185136+00:00",
+          "new_strong": "H3799",
+          "reason": "כֶּתֶם in Ephesians 5:27 means stain/spot; H3799 כָּתַם fits the stain sense, while H3800 means gold.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3799",
+      "occurrence": {
+        "book": "ephesians",
+        "chapter": 5,
+        "prefixes": [
+          "Hk"
+        ],
+        "strong": "H3799",
+        "text": "כֶּתֶם",
+        "verse": 27,
+        "word_index": 7
+      },
+      "previous_strong": "H3799",
+      "reason": "The tagged prefix letters כ begin the lemma כתם of the reviewed Strong H3799, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בוש",
+        "lemma": "בוש",
+        "prefix_letters": "ב",
+        "strong_review": {
+          "logged_at": "2026-05-29T19:21:02.400313+00:00",
+          "new_strong": "H954",
+          "reason": "בוֹשׁ means is ashamed; H954 בּוּשׁ fits, H5848 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H954",
+      "occurrence": {
+        "book": "hebrews",
+        "chapter": 11,
+        "prefixes": [
+          "Hb"
+        ],
+        "strong": "H954",
+        "text": "בוֹשׁ",
+        "verse": 16,
+        "word_index": 10
+      },
+      "previous_strong": "H954",
+      "reason": "The tagged prefix letters ב begin the lemma בוש of the reviewed Strong H954, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "וברק",
+        "lemma": "ברק",
+        "prefix_letters": "וב",
+        "strong_review": {
+          "logged_at": "2026-05-29T19:21:02.401046+00:00",
+          "new_strong": "H1301",
+          "reason": "וּבָרָק is Barak the judge; H1301 proper-name entry fits better than H1300 lightning.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hc"
+      ],
+      "new_strong": "H1301",
+      "occurrence": {
+        "book": "hebrews",
+        "chapter": 11,
+        "prefixes": [
+          "Hc",
+          "Hb"
+        ],
+        "strong": "H1301",
+        "text": "וּבָרָק",
+        "verse": 32,
+        "word_index": 11
+      },
+      "previous_strong": "H1301",
+      "reason": "The tagged prefix letters ב begin the lemma ברק of the reviewed Strong H1301, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בעל",
+        "lemma": "בעל",
+        "prefix_letters": "ב",
+        "strong_review": {
+          "logged_at": "2026-05-29T18:55:44.075939+00:00",
+          "new_strong": "H1167",
+          "reason": "בַעַל in context marks the one to whom account is due/owner; H1167 בַּעַל fits, H4810 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H1167",
+      "occurrence": {
+        "book": "hebrews",
+        "chapter": 4,
+        "prefixes": [
+          "Hb"
+        ],
+        "strong": "H1167",
+        "text": "בַעַל",
+        "verse": 13,
+        "word_index": 10
+      },
+      "previous_strong": "H1167",
+      "reason": "The tagged prefix letters ב begin the lemma בעל of the reviewed Strong H1167, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "כמונו",
+        "lemma": "כמו",
+        "prefix_letters": "כ",
+        "strong_review": {
+          "logged_at": "2026-05-29T14:49:52.286614+00:00",
+          "new_strong": "H3644",
+          "reason": "כמונו means “like us,” from כמו.",
+          "reviewer": "codex-delitzsch-review",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3644",
+      "occurrence": {
+        "book": "hebrews",
+        "chapter": 4,
+        "prefixes": [
+          "Hk"
+        ],
+        "strong": "H3644",
+        "text": "כָּמוֹנוּ",
+        "verse": 15,
+        "word_index": 15
+      },
+      "previous_strong": "H3644",
+      "reason": "The tagged prefix letters כ begin the lemma כמו of the reviewed Strong H3644, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בכהנתו",
+        "lemma": "כהן",
+        "prefix_letters": "בכ",
+        "strong_review": {
+          "logged_at": "2026-05-29T14:49:52.287289+00:00",
+          "new_strong": "H3548",
+          "reason": "בכהנתו means “in his priesthood,” from כהן.",
+          "reviewer": "codex-delitzsch-review",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hb"
+      ],
+      "new_strong": "H3548",
+      "occurrence": {
+        "book": "hebrews",
+        "chapter": 7,
+        "prefixes": [
+          "Hb",
+          "Hk"
+        ],
+        "strong": "H3548",
+        "text": "בִּכְהֻנָּתוֹ",
+        "verse": 3,
+        "word_index": 19
+      },
+      "previous_strong": "H3548",
+      "reason": "The tagged prefix letters כ begin the lemma כהן of the reviewed Strong H3548, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לקחימ",
+        "lemma": "לקח",
+        "prefix_letters": "ל",
+        "strong_review": {
+          "logged_at": "2026-05-29T18:57:16.486576+00:00",
+          "new_strong": "H3947",
+          "reason": "לֹקְחִים means taking/receiving; H3947 לָקַח fits, H5626 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3947",
+      "occurrence": {
+        "book": "hebrews",
+        "chapter": 7,
+        "prefixes": [
+          "Hl"
+        ],
+        "strong": "H3947",
+        "text": "לֹקְחִים",
+        "verse": 8,
+        "word_index": 4
+      },
+      "previous_strong": "H3947",
+      "reason": "The tagged prefix letters ל begin the lemma לקח of the reviewed Strong H3947, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בחלתי",
+        "lemma": "בחל",
+        "prefix_letters": "ב",
+        "strong_review": {
+          "logged_at": "2026-05-29T14:49:52.287706+00:00",
+          "new_strong": "H973",
+          "reason": "בחלתי means “I rejected/loathed,” from בחל.",
+          "reviewer": "codex-delitzsch-review",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H973",
+      "occurrence": {
+        "book": "hebrews",
+        "chapter": 8,
+        "prefixes": [
+          "Hb"
+        ],
+        "strong": "H973",
+        "text": "בָּחַלְתִּי",
+        "verse": 9,
+        "word_index": 18
+      },
+      "previous_strong": "H973",
+      "reason": "The tagged prefix letters ב begin the lemma בחל of the reviewed Strong H973, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "ובגדו",
+        "lemma": "בגד",
+        "prefix_letters": "וב",
+        "strong_review": {
+          "logged_at": "2026-05-29T19:22:41.661565+00:00",
+          "new_strong": "H899",
+          "reason": "וּבִגְדוֹ means and his garment; H899 בֶּגֶד fits, H1408 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hc"
+      ],
+      "new_strong": "H899",
+      "occurrence": {
+        "book": "james",
+        "chapter": 2,
+        "prefixes": [
+          "Hc",
+          "Hb"
+        ],
+        "strong": "H899",
+        "text": "וּבִגְדוֹ",
+        "verse": 2,
+        "word_index": 19
+      },
+      "previous_strong": "H899",
+      "reason": "The tagged prefix letters ב begin the lemma בגד of the reviewed Strong H899, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "באש",
+        "lemma": "באש",
+        "prefix_letters": "ב",
+        "strong_review": {
+          "logged_at": "2026-05-29T19:54:20.101171+00:00",
+          "new_strong": "H887",
+          "reason": "H887 is the correct local Strong but lacks a generated lexicon word file or usable bilingual definition.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H887",
+      "occurrence": {
+        "book": "john",
+        "chapter": 11,
+        "prefixes": [
+          "Hb"
+        ],
+        "strong": "H887",
+        "text": "בָּאָשׁ",
+        "verse": 39,
+        "word_index": 14
+      },
+      "previous_strong": "H887",
+      "reason": "The tagged prefix letters ב begin the lemma באש of the reviewed Strong H887, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לוטימ",
+        "lemma": "לוט",
+        "prefix_letters": "ל",
+        "strong_review": {
+          "logged_at": "2026-05-29T15:28:45.326379+00:00",
+          "new_strong": "H3874",
+          "reason": "לוטים means “wrapped/enveloped,” from לוט.",
+          "reviewer": "codex-delitzsch-review",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3874",
+      "occurrence": {
+        "book": "john",
+        "chapter": 11,
+        "prefixes": [
+          "Hl"
+        ],
+        "strong": "H3874",
+        "text": "לוּטִים",
+        "verse": 44,
+        "word_index": 7
+      },
+      "previous_strong": "H3874",
+      "reason": "The tagged prefix letters ל begin the lemma לוט of the reviewed Strong H3874, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לחמי",
+        "lemma": "לחם",
+        "prefix_letters": "ל",
+        "strong_review": {
+          "logged_at": "2026-05-29T19:54:20.091269+00:00",
+          "new_strong": "H3899",
+          "reason": "לַחְמִי means my bread; H3899 לֶחֶם fits, while H3902 is the proper name Lahmi.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3899",
+      "occurrence": {
+        "book": "john",
+        "chapter": 13,
+        "prefixes": [
+          "Hl"
+        ],
+        "strong": "H3899",
+        "text": "לַחְמִי",
+        "verse": 18,
+        "word_index": 15
+      },
+      "previous_strong": "H3899",
+      "reason": "The tagged prefix letters ל begin the lemma לחם of the reviewed Strong H3899, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בכבוד",
+        "lemma": "כבוד",
+        "prefix_letters": "בכ",
+        "strong_review": {
+          "logged_at": "2026-05-29T19:54:20.097592+00:00",
+          "new_strong": "H3519",
+          "reason": "בַּכָּבוֹד means in/with the glory; H3519 כָּבוֹד fits, while H1846 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hb"
+      ],
+      "new_strong": "H3519",
+      "occurrence": {
+        "book": "john",
+        "chapter": 17,
+        "prefixes": [
+          "Hb",
+          "Hk"
+        ],
+        "strong": "H3519",
+        "text": "בַּכָּבוֹד",
+        "verse": 5,
+        "word_index": 5
+      },
+      "previous_strong": "H3519",
+      "reason": "The tagged prefix letters כ begin the lemma כבוד of the reviewed Strong H3519, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "ולקחתיו",
+        "lemma": "לקח",
+        "prefix_letters": "ול",
+        "strong_review": {
+          "logged_at": "2026-05-29T19:56:29.853112+00:00",
+          "new_strong": "H3947",
+          "reason": "H3947 is the correct Strong for this form but lacks a generated lexicon word file or usable bilingual definition.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hc"
+      ],
+      "new_strong": "H3947",
+      "occurrence": {
+        "book": "john",
+        "chapter": 20,
+        "prefixes": [
+          "Hc",
+          "Hl"
+        ],
+        "strong": "H3947",
+        "text": "וּלְקַחְתִּיו",
+        "verse": 15,
+        "word_index": 28
+      },
+      "previous_strong": "H3947",
+      "reason": "The tagged prefix letters ל begin the lemma לקח of the reviewed Strong H3947, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "למדני",
+        "lemma": "למד",
+        "prefix_letters": "ל",
+        "strong_review": {
+          "logged_at": "2026-05-29T19:52:14.760826+00:00",
+          "new_strong": "H3925",
+          "reason": "לִמְּדַנִי means taught me; H3925 לָמַד fits, while H4092 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3925",
+      "occurrence": {
+        "book": "john",
+        "chapter": 8,
+        "prefixes": [
+          "Hl"
+        ],
+        "strong": "H3925",
+        "text": "לִמְּדַנִי",
+        "verse": 28,
+        "word_index": 21
+      },
+      "previous_strong": "H3925",
+      "reason": "The tagged prefix letters ל begin the lemma למד of the reviewed Strong H3925, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "כנפיה",
+        "lemma": "כנף",
+        "prefix_letters": "כ",
+        "strong_review": {
+          "logged_at": "2026-05-29T15:31:27.617215+00:00",
+          "new_strong": "H3671",
+          "reason": "כנפיה means “her wings,” from כנף.",
+          "reviewer": "codex-delitzsch-review",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3671",
+      "occurrence": {
+        "book": "luke",
+        "chapter": 13,
+        "prefixes": [
+          "Hk"
+        ],
+        "strong": "H3671",
+        "text": "כְּנָפֶיהָ",
+        "verse": 34,
+        "word_index": 21
+      },
+      "previous_strong": "H3671",
+      "reason": "The tagged prefix letters כ begin the lemma כנף of the reviewed Strong H3671, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בוש",
+        "lemma": "בוש",
+        "prefix_letters": "ב",
+        "strong_review": {
+          "logged_at": "2026-05-29T16:46:41.990467+00:00",
+          "new_strong": "H954",
+          "reason": "בוש means “I am ashamed,” from בוש.",
+          "reviewer": "codex-delitzsch-review",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H954",
+      "occurrence": {
+        "book": "luke",
+        "chapter": 16,
+        "prefixes": [
+          "Hb"
+        ],
+        "strong": "H954",
+        "text": "בוֹשׁ׃",
+        "verse": 3,
+        "word_index": 18
+      },
+      "previous_strong": "H954",
+      "reason": "The tagged prefix letters ב begin the lemma בוש of the reviewed Strong H954, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בתי",
+        "lemma": "בת",
+        "prefix_letters": "ב",
+        "strong_review": {
+          "logged_at": "2026-05-29T16:46:41.990544+00:00",
+          "new_strong": "H1324",
+          "reason": "בתי means “baths,” a liquid measure, from בת.",
+          "reviewer": "codex-delitzsch-review",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H1324",
+      "occurrence": {
+        "book": "luke",
+        "chapter": 16,
+        "prefixes": [
+          "Hb"
+        ],
+        "strong": "H1324",
+        "text": "בַּתֵּי",
+        "verse": 6,
+        "word_index": 2
+      },
+      "previous_strong": "H1324",
+      "reason": "The tagged prefix letters ב begin the lemma בת of the reviewed Strong H1324, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "כליתי",
+        "lemma": "כלה",
+        "prefix_letters": "כל",
+        "strong_review": {
+          "logged_at": "2026-05-29T20:17:35.620931+00:00",
+          "new_strong": "H3615",
+          "reason": "H3615 is the correct Strong for this form but lacks a generated lexicon word file or usable bilingual definition.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3615",
+      "occurrence": {
+        "book": "luke",
+        "chapter": 17,
+        "prefixes": [
+          "Hk",
+          "Hl"
+        ],
+        "strong": "H3615",
+        "text": "כִּלִּיתִי",
+        "verse": 8,
+        "word_index": 12
+      },
+      "previous_strong": "H3615",
+      "reason": "The tagged prefix letters כל begin the lemma כלה of the reviewed Strong H3615, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "כתנות",
+        "lemma": "כתנת",
+        "prefix_letters": "כ",
+        "strong_review": {
+          "logged_at": "2026-05-29T20:15:55.051622+00:00",
+          "new_strong": "H3801",
+          "reason": "כֻתֳּנוֹת means tunics; H3801 כְּתֹנֶת fits, while H453 is Elijah.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3801",
+      "occurrence": {
+        "book": "luke",
+        "chapter": 9,
+        "prefixes": [
+          "Hk"
+        ],
+        "strong": "H3801",
+        "text": "כֻתֳּנוֹת׃",
+        "verse": 3,
+        "word_index": 19
+      },
+      "previous_strong": "H3801",
+      "reason": "The tagged prefix letters כ begin the lemma כתנת of the reviewed Strong H3801, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לבטחימ",
+        "lemma": "בטח",
+        "prefix_letters": "לב",
+        "strong_review": {
+          "logged_at": "2026-05-29T20:25:52.802475+00:00",
+          "new_strong": "H982",
+          "reason": "H982 is the correct Strong for this form but lacks a generated lexicon word file or usable bilingual definition.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hl"
+      ],
+      "new_strong": "H982",
+      "occurrence": {
+        "book": "mark",
+        "chapter": 10,
+        "prefixes": [
+          "Hl",
+          "Hb"
+        ],
+        "strong": "H982",
+        "text": "לַבֹּטְחִים",
+        "verse": 24,
+        "word_index": 12
+      },
+      "previous_strong": "H982",
+      "reason": "The tagged prefix letters ב begin the lemma בטח of the reviewed Strong H982, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "ברא",
+        "lemma": "ברא",
+        "prefix_letters": "ב",
+        "strong_review": {
+          "logged_at": "2026-05-29T20:57:01.992293+00:00",
+          "new_strong": "H1254",
+          "reason": "H1254 is the correct Strong for this form but lacks a generated lexicon word file or usable bilingual definition.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H1254",
+      "occurrence": {
+        "book": "mark",
+        "chapter": 13,
+        "prefixes": [
+          "Hb"
+        ],
+        "strong": "H1254",
+        "text": "בָּרָא",
+        "verse": 19,
+        "word_index": 13
+      },
+      "previous_strong": "H1254",
+      "reason": "The tagged prefix letters ב begin the lemma ברא of the reviewed Strong H1254, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "כלשונמ",
+        "lemma": "לשון",
+        "prefix_letters": "כל",
+        "strong_review": {
+          "logged_at": "2026-05-29T20:57:01.980551+00:00",
+          "new_strong": "H3956",
+          "reason": "כִּלְשׁוֹנָם means according to their language/tongue; H3956 לָשׁוֹן fits, while H7766 is Shunem.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hk"
+      ],
+      "new_strong": "H3956",
+      "occurrence": {
+        "book": "mark",
+        "chapter": 14,
+        "prefixes": [
+          "Hk",
+          "Hl"
+        ],
+        "strong": "H3956",
+        "text": "כִּלְשׁוֹנָם׃",
+        "verse": 70,
+        "word_index": 18
+      },
+      "previous_strong": "H3956",
+      "reason": "The tagged prefix letters ל begin the lemma לשון of the reviewed Strong H3956, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לבנה",
+        "lemma": "לבן",
+        "prefix_letters": "לב",
+        "strong_review": {
+          "logged_at": "2026-05-29T20:57:01.981235+00:00",
+          "new_strong": "H3836",
+          "reason": "לְבָנָה means white; H3836 לָבָן fits, while H3838 is an Aramaic proper entry.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3836",
+      "occurrence": {
+        "book": "mark",
+        "chapter": 16,
+        "prefixes": [
+          "Hl",
+          "Hb"
+        ],
+        "strong": "H3836",
+        "text": "לְבָנָה",
+        "verse": 5,
+        "word_index": 12
+      },
+      "previous_strong": "H3836",
+      "reason": "The tagged prefix letters לב begin the lemma לבן of the reviewed Strong H3836, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לכבשו",
+        "lemma": "כבש",
+        "prefix_letters": "לכ",
+        "strong_review": {
+          "logged_at": "2026-05-29T20:25:52.800735+00:00",
+          "new_strong": "H3533",
+          "reason": "H3533 is the correct Strong for this form but lacks a generated lexicon word file or usable bilingual definition.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hl"
+      ],
+      "new_strong": "H3533",
+      "occurrence": {
+        "book": "mark",
+        "chapter": 5,
+        "prefixes": [
+          "Hl",
+          "Hk"
+        ],
+        "strong": "H3533",
+        "text": "לְכָבְשׁוֹ׃",
+        "verse": 4,
+        "word_index": 15
+      },
+      "previous_strong": "H3533",
+      "reason": "The tagged prefix letters כ begin the lemma כבש of the reviewed Strong H3533, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "כדימ",
+        "lemma": "כד",
+        "prefix_letters": "כ",
+        "strong_review": {
+          "logged_at": "2026-05-29T20:25:52.795482+00:00",
+          "new_strong": "H3537",
+          "reason": "כַּדִּים means jars/pots; H3537 כַּד fits, while H3745 is proclaim.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3537",
+      "occurrence": {
+        "book": "mark",
+        "chapter": 7,
+        "prefixes": [
+          "Hk"
+        ],
+        "strong": "H3537",
+        "text": "כַּדִּים",
+        "verse": 8,
+        "word_index": 10
+      },
+      "previous_strong": "H3537",
+      "reason": "The tagged prefix letters כ begin the lemma כד of the reviewed Strong H3537, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "כרמי",
+        "lemma": "כרם",
+        "prefix_letters": "כ",
+        "strong_review": {
+          "logged_at": "2026-05-30T13:41:23.013283+00:00",
+          "new_strong": "H3754",
+          "reason": "כַּרְמִי means my vineyard; H3754 כֶּרֶם fits, while H3756 is the proper name Carmi.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3754",
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 20,
+        "prefixes": [
+          "Hk"
+        ],
+        "strong": "H3754",
+        "text": "כַּרְמִי",
+        "verse": 4,
+        "word_index": 6
+      },
+      "previous_strong": "H3754",
+      "reason": "The tagged prefix letters כ begin the lemma כרם of the reviewed Strong H3754, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "כנפיה",
+        "lemma": "כנף",
+        "prefix_letters": "כ",
+        "strong_review": {
+          "logged_at": "2026-05-29T16:51:27.045291+00:00",
+          "new_strong": "H3671",
+          "reason": "כנפיה means “her wings,” from כנף.",
+          "reviewer": "codex-delitzsch-review",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3671",
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 23,
+        "prefixes": [
+          "Hk"
+        ],
+        "strong": "H3671",
+        "text": "כְּנָפֶיהָ",
+        "verse": 37,
+        "word_index": 20
+      },
+      "previous_strong": "H3671",
+      "reason": "The tagged prefix letters כ begin the lemma כנף of the reviewed Strong H3671, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בארות",
+        "lemma": "באר",
+        "prefix_letters": "ב",
+        "strong_review": {
+          "logged_at": "2026-05-30T13:48:06.921247+00:00",
+          "new_strong": "H875",
+          "reason": "בְּאֵרוֹת here means wells/springs without water; H875 באר is correct, while H881 is the proper place-name Beeroth.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H875",
+      "occurrence": {
+        "book": "peter2",
+        "chapter": 2,
+        "prefixes": [
+          "Hb"
+        ],
+        "strong": "H875",
+        "text": "בְּאֵרוֹת",
+        "verse": 17,
+        "word_index": 0
+      },
+      "previous_strong": "H875",
+      "reason": "The tagged prefix letters ב begin the lemma באר of the reviewed Strong H875, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לבטח",
+        "lemma": "בטח",
+        "prefix_letters": "לב",
+        "strong_review": {
+          "logged_at": "2026-05-30T13:48:06.927012+00:00",
+          "new_strong": "H982",
+          "reason": "לִבְטֹחַ means to trust; H982 בטח fits, while H8102 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hl"
+      ],
+      "new_strong": "H982",
+      "occurrence": {
+        "book": "philippians",
+        "chapter": 3,
+        "prefixes": [
+          "Hl",
+          "Hb"
+        ],
+        "strong": "H982",
+        "text": "לִבְטֹחַ",
+        "verse": 4,
+        "word_index": 11
+      },
+      "previous_strong": "H982",
+      "reason": "The tagged prefix letters ב begin the lemma בטח of the reviewed Strong H982, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לבטנכ",
+        "lemma": "בטן",
+        "prefix_letters": "לב",
+        "strong_review": {
+          "logged_at": "2026-05-30T13:50:22.680816+00:00",
+          "new_strong": "H990",
+          "reason": "לְבִטְנְךָ means to your belly; H990 בטן fits, while H7325 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hl"
+      ],
+      "new_strong": "H990",
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 10,
+        "prefixes": [
+          "Hl",
+          "Hb"
+        ],
+        "strong": "H990",
+        "text": "לְבִטְנְךָ",
+        "verse": 9,
+        "word_index": 15
+      },
+      "previous_strong": "H990",
+      "reason": "The tagged prefix letters ב begin the lemma בטן of the reviewed Strong H990, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "כחו",
+        "lemma": "כח",
+        "prefix_letters": "כ",
+        "strong_review": {
+          "logged_at": "2026-05-30T14:03:44.003206+00:00",
+          "new_strong": "H3581",
+          "reason": "כֹּחוֹ means his power/strength; H3581 כח fits, while H2053 is hook/pin.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3581",
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 13,
+        "prefixes": [
+          "Hk"
+        ],
+        "strong": "H3581",
+        "text": "כֹּחוֹ",
+        "verse": 2,
+        "word_index": 15
+      },
+      "previous_strong": "H3581",
+      "reason": "The tagged prefix letters כ begin the lemma כח of the reviewed Strong H3581, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בכנורותיהמ",
+        "lemma": "כנור",
+        "prefix_letters": "בכ",
+        "strong_review": {
+          "logged_at": "2026-05-30T14:03:44.003902+00:00",
+          "new_strong": "H3658",
+          "reason": "בְּכִנּוֹרוֹתֵיהֶם means with their lyres/harps; H3658 כנור fits, while H3913 sharpen is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hb"
+      ],
+      "new_strong": "H3658",
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 14,
+        "prefixes": [
+          "Hb",
+          "Hk"
+        ],
+        "strong": "H3658",
+        "text": "בְּכִנּוֹרוֹתֵיהֶם׃",
+        "verse": 2,
+        "word_index": 15
+      },
+      "previous_strong": "H3658",
+      "reason": "The tagged prefix letters כ begin the lemma כנור of the reviewed Strong H3658, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לבעלה",
+        "lemma": "בעל",
+        "prefix_letters": "לב",
+        "strong_review": {
+          "logged_at": "2026-05-30T14:06:14.235380+00:00",
+          "new_strong": "H1167",
+          "reason": "לְבַעְלָהּ means for her husband; H1167 בעל fits, while H8054 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hl"
+      ],
+      "new_strong": "H1167",
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 21,
+        "prefixes": [
+          "Hl",
+          "Hb"
+        ],
+        "strong": "H1167",
+        "text": "לְבַעְלָהּ׃",
+        "verse": 2,
+        "word_index": 14
+      },
+      "previous_strong": "H1167",
+      "reason": "The tagged prefix letters ב begin the lemma בעל of the reviewed Strong H1167, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "ברקת",
+        "lemma": "ברקת",
+        "prefix_letters": "ב",
+        "strong_review": {
+          "logged_at": "2026-05-30T14:06:14.236166+00:00",
+          "new_strong": "H1304",
+          "reason": "בָּרָקֶת means emerald; H1304 ברקת fits, while H7557 is unrelated/place-like.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H1304",
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 21,
+        "prefixes": [
+          "Hb"
+        ],
+        "strong": "H1304",
+        "text": "בָּרָקֶת׃",
+        "verse": 19,
+        "word_index": 15
+      },
+      "previous_strong": "H1304",
+      "reason": "The tagged prefix letters ב begin the lemma ברקת of the reviewed Strong H1304, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לשמ",
+        "lemma": "לשם",
+        "prefix_letters": "ל",
+        "strong_review": {
+          "logged_at": "2026-05-30T14:06:14.236451+00:00",
+          "new_strong": "H3958",
+          "reason": "לֶשֶׁם here is the gemstone leshem/jacinth, not the place-name; H3958 is the non-proper entry, while H3959 is place-related.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3958",
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 21,
+        "prefixes": [
+          "Hl"
+        ],
+        "strong": "H3958",
+        "text": "לֶשֶׁם",
+        "verse": 20,
+        "word_index": 14
+      },
+      "previous_strong": "H3958",
+      "reason": "The tagged prefix letters ל begin the lemma לשם of the reviewed Strong H3958, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לפידי",
+        "lemma": "לפיד",
+        "prefix_letters": "ל",
+        "strong_review": {
+          "logged_at": "2026-05-30T13:48:06.931122+00:00",
+          "new_strong": "H3940",
+          "reason": "לַפִּידֵי means torches/flames; H3940 לפיד is correct, while H6365 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H3940",
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 4,
+        "prefixes": [
+          "Hl"
+        ],
+        "strong": "H3940",
+        "text": "לַפִּידֵי",
+        "verse": 5,
+        "word_index": 7
+      },
+      "previous_strong": "H3940",
+      "reason": "The tagged prefix letters ל begin the lemma לפיד of the reviewed Strong H3940, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בריה",
+        "lemma": "בריאה",
+        "prefix_letters": "ב",
+        "strong_review": {
+          "logged_at": "2026-05-30T13:50:22.676116+00:00",
+          "new_strong": "H1278",
+          "reason": "בְּרִיָּה means creature/created thing; H1278 בריאה is correct, while H7377 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H1278",
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 5,
+        "prefixes": [
+          "Hb"
+        ],
+        "strong": "H1278",
+        "text": "בְּרִיָּה",
+        "verse": 13,
+        "word_index": 1
+      },
+      "previous_strong": "H1278",
+      "reason": "The tagged prefix letters ב begin the lemma בריאה of the reviewed Strong H1278, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "וכאבמ",
+        "lemma": "כאב",
+        "prefix_letters": "וכ",
+        "strong_review": {
+          "logged_at": "2026-05-30T13:50:22.680049+00:00",
+          "new_strong": "H3511",
+          "reason": "וּכְאֵבָם means and their pain; H3511 כאב fits, while H5172 is serpent/divination.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hc"
+      ],
+      "new_strong": "H3511",
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 9,
+        "prefixes": [
+          "Hc",
+          "Hk"
+        ],
+        "strong": "H3511",
+        "text": "וּכְאֵבָם",
+        "verse": 5,
+        "word_index": 8
+      },
+      "previous_strong": "H3511",
+      "reason": "The tagged prefix letters כ begin the lemma כאב of the reviewed Strong H3511, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בחירתו",
+        "lemma": "בחר",
+        "prefix_letters": "ב",
+        "strong_review": {
+          "logged_at": "2026-05-30T14:08:21.757412+00:00",
+          "new_strong": "H977",
+          "reason": "בְחִירָתוֹ means his choice/election; H977 בחר fits, while H2194 indignation is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [],
+      "new_strong": "H977",
+      "occurrence": {
+        "book": "romans",
+        "chapter": 9,
+        "prefixes": [
+          "Hb"
+        ],
+        "strong": "H977",
+        "text": "בְחִירָתוֹ",
+        "verse": 11,
+        "word_index": 15
+      },
+      "previous_strong": "H977",
+      "reason": "The tagged prefix letters ב begin the lemma בחר of the reviewed Strong H977, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "לכרוז",
+        "lemma": "כרוז",
+        "prefix_letters": "לכ",
+        "strong_review": {
+          "logged_at": "2026-05-30T14:11:52.965433+00:00",
+          "new_strong": "H3744",
+          "reason": "לְכָרוֹז means as/for a herald; H3744 כרוז fits, while H3666 is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hl"
+      ],
+      "new_strong": "H3744",
+      "occurrence": {
+        "book": "timothy1",
+        "chapter": 2,
+        "prefixes": [
+          "Hl",
+          "Hk"
+        ],
+        "strong": "H3744",
+        "text": "לְכָרוֹז",
+        "verse": 7,
+        "word_index": 4
+      },
+      "previous_strong": "H3744",
+      "reason": "The tagged prefix letters כ begin the lemma כרוז of the reviewed Strong H3744, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "וכבש",
+        "lemma": "כבש",
+        "prefix_letters": "וכ",
+        "strong_review": {
+          "logged_at": "2026-05-30T14:11:52.968793+00:00",
+          "new_strong": "H3533",
+          "reason": "וְכֹבֵשׁ means self-controlled/subduing; H3533 כבש fits better than H8581 abomination.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hc"
+      ],
+      "new_strong": "H3533",
+      "occurrence": {
+        "book": "titus",
+        "chapter": 1,
+        "prefixes": [
+          "Hc",
+          "Hk"
+        ],
+        "strong": "H3533",
+        "text": "וְכֹבֵשׁ",
+        "verse": 8,
+        "word_index": 10
+      },
+      "previous_strong": "H3533",
+      "reason": "The tagged prefix letters כ begin the lemma כבש of the reviewed Strong H3533, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    },
+    {
+      "action": "set_strong",
+      "confidence": 0.95,
+      "evidence": {
+        "consonants": "בלקח",
+        "lemma": "לקח",
+        "prefix_letters": "בל",
+        "strong_review": {
+          "logged_at": "2026-05-30T14:11:52.969138+00:00",
+          "new_strong": "H3948",
+          "reason": "בַּלֶּקַח means in the teaching/instruction; H3948 לקח fits, while H5620 turn aside is unrelated.",
+          "reviewer": "codex-desktop",
+          "status": "applied"
+        }
+      },
+      "issue_type": "root_letter_prefix",
+      "new_prefixes": [
+        "Hb"
+      ],
+      "new_strong": "H3948",
+      "occurrence": {
+        "book": "titus",
+        "chapter": 1,
+        "prefixes": [
+          "Hb",
+          "Hl"
+        ],
+        "strong": "H3948",
+        "text": "בַּלֶּקַח",
+        "verse": 9,
+        "word_index": 9
+      },
+      "previous_strong": "H3948",
+      "reason": "The tagged prefix letters ל begin the lemma לקח of the reviewed Strong H3948, so they are root letters, not prefixes.",
+      "reviewer": "rule:root_letter_prefix_v1"
+    }
+  ]
+}

@@ -66,6 +66,12 @@ def register_subcommand(subparsers: argparse._SubParsersAction) -> argparse.Argu
     ledger.add_argument("--check", action="store_true", help="Fail when the committed ledger is stale")
     ledger.set_defaults(handler=handle_dispositions)
 
+    root_letters = review_subparsers.add_parser(
+        "root-letter-prefixes",
+        help="Write the batch that removes tagged prefixes that are the lemma's first letters",
+    )
+    root_letters.set_defaults(handler=handle_root_letter_prefixes)
+
     return parser
 
 
@@ -254,4 +260,12 @@ def handle_dispositions(args: argparse.Namespace) -> int:
     else:
         path.write_bytes(dispositions.serialize(ledger))
     print(json.dumps(ledger["summary"], ensure_ascii=False, indent=2))
+    return 0
+
+
+def handle_root_letter_prefixes(args: argparse.Namespace) -> int:
+    batch = dispositions.root_letter_batch_from_disk()
+    dispositions.ROOT_LETTER_BATCH.write_text(json.dumps(batch, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"Batch decisions: {len(batch['decisions'])}")
+    print(f"Batch written to {dispositions.ROOT_LETTER_BATCH}")
     return 0
