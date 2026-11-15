@@ -64406,7 +64406,17 @@
       }
     ],
     "term_language": "hebrew",
-    "imported_by": "tcysite"
+    "imported_by": "tcysite",
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:52 codex-delitzsch-review",
+        "acts.jsonl:560 codex-desktop",
+        "john.jsonl:226 codex-desktop"
+      ]
+    }
   },
   "D0002": {
     "strong_number": "D0002",
@@ -64914,7 +64924,17 @@
         },
         "source_key": "[\"\",null,\"acts\",1,13,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:53 codex-delitzsch-review",
+        "john.jsonl:227 codex-desktop",
+        "john.jsonl:47 codex-delitzsch-review"
+      ]
+    }
   },
   "D0003": {
     "strong_number": "D0003",
@@ -65056,7 +65076,15 @@
         },
         "source_key": "[\"\",null,\"colossians\",4,11,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:55 codex-delitzsch-review"
+      ]
+    }
   },
   "D0004": {
     "strong_number": "D0004",
@@ -65161,7 +65189,15 @@
         },
         "source_key": "[\"\",null,\"peter1\",1,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:57 codex-delitzsch-review"
+      ]
+    }
   },
   "D0005": {
     "strong_number": "D0005",
@@ -65414,7 +65450,15 @@
         },
         "source_key": "[\"\",null,\"acts\",13,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:58 codex-delitzsch-review"
+      ]
+    }
   },
   "D0006": {
     "strong_number": "D0006",
@@ -65636,7 +65680,16 @@
         },
         "source_key": "[\"\",null,\"galatians\",6,14,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:60 codex-delitzsch-review",
+        "mark.jsonl:25 codex-delitzsch-review"
+      ]
+    }
   },
   "D0021": {
     "strong_number": "D0021",
@@ -67654,7 +67707,17 @@
         },
         "source_key": "[\"\",null,\"timothy1\",6,13,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:66 codex-delitzsch-review",
+        "john.jsonl:207 codex-desktop",
+        "john.jsonl:41 codex-delitzsch-review"
+      ]
+    }
   },
   "D0007": {
     "strong_number": "D0007",
@@ -67765,7 +67828,16 @@
         },
         "source_key": "[\"\",null,\"romans\",12,13,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:71 codex-delitzsch-review",
+        "romans.jsonl:18 codex-delitzsch-review"
+      ]
+    }
   },
   "D0008": {
     "strong_number": "D0008",
@@ -68548,7 +68620,17 @@
         },
         "source_key": "[\"\",null,\"acts\",24,20,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1324 codex-desktop",
+        "acts.jsonl:72 codex-delitzsch-review",
+        "matthew.jsonl:21 codex-delitzsch-review"
+      ]
+    }
   },
   "D0009": {
     "strong_number": "D0009",
@@ -68616,7 +68698,15 @@
         },
         "source_key": "[\"\",null,\"acts\",6,5,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:73 codex-delitzsch-review"
+      ]
+    }
   },
   "D0010": {
     "strong_number": "D0010",
@@ -68684,7 +68774,15 @@
         },
         "source_key": "[\"\",null,\"acts\",6,5,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:74 codex-delitzsch-review"
+      ]
+    }
   },
   "D0011": {
     "strong_number": "D0011",
@@ -68752,7 +68850,15 @@
         },
         "source_key": "[\"\",null,\"acts\",6,5,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:75 codex-delitzsch-review"
+      ]
+    }
   },
   "D0012": {
     "strong_number": "D0012",
@@ -68820,7 +68926,15 @@
         },
         "source_key": "[\"\",null,\"acts\",6,5,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:76 codex-delitzsch-review"
+      ]
+    }
   },
   "D0013": {
     "strong_number": "D0013",
@@ -68888,7 +69002,15 @@
         },
         "source_key": "[\"\",null,\"acts\",6,5,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:77 codex-delitzsch-review"
+      ]
+    }
   },
   "D0014": {
     "strong_number": "D0014",
@@ -69585,7 +69707,15 @@
         },
         "source_key": "[\"\",null,\"timothy2\",3,11,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:78 codex-delitzsch-review"
+      ]
+    }
   },
   "D0015": {
     "strong_number": "D0015",
@@ -69986,7 +70116,15 @@
         },
         "source_key": "[\"\",null,\"corinthians1\",16,17,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:79 codex-delitzsch-review"
+      ]
+    }
   },
   "D0016": {
     "strong_number": "D0016",
@@ -70054,7 +70192,15 @@
         },
         "source_key": "[\"\",null,\"acts\",6,9,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:80 codex-delitzsch-review"
+      ]
+    }
   },
   "D0017": {
     "strong_number": "D0017",
@@ -70350,7 +70496,16 @@
         },
         "source_key": "[\"\",null,\"galatians\",1,21,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1408 codex-desktop",
+        "acts.jsonl:81 codex-delitzsch-review"
+      ]
+    }
   },
   "D0018": {
     "strong_number": "D0018",
@@ -70418,7 +70573,15 @@
         },
         "source_key": "[\"\",null,\"acts\",6,15,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:85 codex-delitzsch-review"
+      ]
+    }
   },
   "D0019": {
     "strong_number": "D0019",
@@ -71010,7 +71173,15 @@
         },
         "source_key": "[\"\",null,\"acts\",25,13,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:97 codex-delitzsch-review"
+      ]
+    }
   },
   "D0020": {
     "strong_number": "D0020",
@@ -71158,7 +71329,16 @@
         },
         "source_key": "[\"\",null,\"acts\",21,2,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1125 codex-desktop",
+        "acts.jsonl:99 codex-delitzsch-review"
+      ]
+    }
   },
   "D0022": {
     "strong_number": "D0022",
@@ -71300,7 +71480,15 @@
         },
         "source_key": "[\"\",null,\"acts\",22,3,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:151 codex-delitzsch-review"
+      ]
+    }
   },
   "D0023": {
     "strong_number": "D0023",
@@ -71627,7 +71815,15 @@
         },
         "source_key": "[\"\",null,\"timothy2\",4,11,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:158 codex-delitzsch-review"
+      ]
+    }
   },
   "D0028": {
     "strong_number": "D0028",
@@ -71738,7 +71934,16 @@
         },
         "source_key": "[\"\",null,\"acts\",12,17,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:159 codex-delitzsch-review",
+        "john.jsonl:21 codex-delitzsch-review"
+      ]
+    }
   },
   "D0029": {
     "strong_number": "D0029",
@@ -71806,7 +72011,15 @@
         },
         "source_key": "[\"\",null,\"acts\",12,21,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:162 codex-delitzsch-review"
+      ]
+    }
   },
   "D0025": {
     "strong_number": "D0025",
@@ -73337,7 +73550,16 @@
         },
         "source_key": "[\"\",null,\"acts\",23,35,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1013 codex-desktop",
+        "acts.jsonl:163 codex-delitzsch-review"
+      ]
+    }
   },
   "D0026": {
     "strong_number": "D0026",
@@ -73405,7 +73627,15 @@
         },
         "source_key": "[\"\",null,\"acts\",14,6,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:166 codex-delitzsch-review"
+      ]
+    }
   },
   "D0027": {
     "strong_number": "D0027",
@@ -73553,7 +73783,16 @@
         },
         "source_key": "[\"\",null,\"timothy2\",3,11,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1144 codex-desktop",
+        "acts.jsonl:167 codex-delitzsch-review"
+      ]
+    }
   },
   "D0024": {
     "strong_number": "D0024",
@@ -79470,7 +79709,16 @@
         },
         "source_key": "[\"\",null,\"timothy2\",1,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1121 codex-desktop",
+        "acts.jsonl:168 codex-delitzsch-review"
+      ]
+    }
   },
   "D0030": {
     "strong_number": "D0030",
@@ -79686,7 +79934,15 @@
         },
         "source_key": "[\"\",null,\"acts\",27,5,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:176 codex-delitzsch-review"
+      ]
+    }
   },
   "D0031": {
     "strong_number": "D0031",
@@ -79791,7 +80047,15 @@
         },
         "source_key": "[\"\",null,\"acts\",14,25,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:177 codex-delitzsch-review"
+      ]
+    }
   },
   "D0032": {
     "strong_number": "D0032",
@@ -80309,7 +80573,16 @@
         },
         "source_key": "[\"\",null,\"acts\",18,5,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1180 codex-desktop",
+        "acts.jsonl:179 codex-delitzsch-review"
+      ]
+    }
   },
   "D0033": {
     "strong_number": "D0033",
@@ -80377,7 +80650,15 @@
         },
         "source_key": "[\"\",null,\"acts\",16,11,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:182 codex-delitzsch-review"
+      ]
+    }
   },
   "D0034": {
     "strong_number": "D0034",
@@ -80445,7 +80726,15 @@
         },
         "source_key": "[\"\",null,\"acts\",16,13,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:183 codex-delitzsch-review"
+      ]
+    }
   },
   "D0035": {
     "strong_number": "D0035",
@@ -80704,7 +80993,15 @@
         },
         "source_key": "[\"\",null,\"acts\",28,17,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 2 has no reviewed decision"
+      ]
+    }
   },
   "D0036": {
     "strong_number": "D0036",
@@ -80920,7 +81217,15 @@
         },
         "source_key": "[\"\",null,\"romans\",16,21,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:188 codex-delitzsch-review"
+      ]
+    }
   },
   "D0037": {
     "strong_number": "D0037",
@@ -81136,7 +81441,15 @@
         },
         "source_key": "[\"\",null,\"corinthians1\",16,19,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:191 codex-delitzsch-review"
+      ]
+    }
   },
   "D0038": {
     "strong_number": "D0038",
@@ -81278,7 +81591,15 @@
         },
         "source_key": "[\"\",null,\"acts\",23,26,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:192 codex-delitzsch-review"
+      ]
+    }
   },
   "D0039": {
     "strong_number": "D0039",
@@ -81346,7 +81667,15 @@
         },
         "source_key": "[\"\",null,\"acts\",18,8,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:195 codex-delitzsch-review"
+      ]
+    }
   },
   "D0040": {
     "strong_number": "D0040",
@@ -81599,7 +81928,15 @@
         },
         "source_key": "[\"\",null,\"timothy2\",4,19,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:198 codex-delitzsch-review"
+      ]
+    }
   },
   "D0041": {
     "strong_number": "D0041",
@@ -82272,7 +82609,16 @@
         },
         "source_key": "[\"\",null,\"timothy2\",4,12,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:199 codex-delitzsch-review",
+        "revelation.jsonl:1 codex-delitzsch-review"
+      ]
+    }
   },
   "D0042": {
     "strong_number": "D0042",
@@ -82340,7 +82686,15 @@
         },
         "source_key": "[\"\",null,\"acts\",19,9,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0043": {
     "strong_number": "D0043",
@@ -82519,7 +82873,15 @@
         },
         "source_key": "[\"\",null,\"acts\",20,4,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0044": {
     "strong_number": "D0044",
@@ -82587,7 +82949,15 @@
         },
         "source_key": "[\"\",null,\"acts\",20,15,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0045": {
     "strong_number": "D0045",
@@ -82655,7 +83025,15 @@
         },
         "source_key": "[\"\",null,\"acts\",21,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0046": {
     "strong_number": "D0046",
@@ -82723,7 +83101,15 @@
         },
         "source_key": "[\"\",null,\"acts\",21,5,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0047": {
     "strong_number": "D0047",
@@ -82791,7 +83177,15 @@
         },
         "source_key": "[\"\",null,\"acts\",22,3,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0048": {
     "strong_number": "D0048",
@@ -83125,7 +83519,15 @@
         },
         "source_key": "[\"\",null,\"acts\",25,14,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0049": {
     "strong_number": "D0049",
@@ -83267,7 +83669,15 @@
         },
         "source_key": "[\"\",null,\"acts\",24,22,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0050": {
     "strong_number": "D0050",
@@ -83779,7 +84189,15 @@
         },
         "source_key": "[\"\",null,\"acts\",26,32,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0051": {
     "strong_number": "D0051",
@@ -83847,7 +84265,15 @@
         },
         "source_key": "[\"\",null,\"acts\",25,13,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0052": {
     "strong_number": "D0052",
@@ -84322,7 +84748,15 @@
         },
         "source_key": "[\"\",null,\"acts\",26,32,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0053": {
     "strong_number": "D0053",
@@ -84390,7 +84824,15 @@
         },
         "source_key": "[\"\",null,\"acts\",26,10,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0054": {
     "strong_number": "D0054",
@@ -84458,7 +84900,15 @@
         },
         "source_key": "[\"\",null,\"colossians\",1,16,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0055": {
     "strong_number": "D0055",
@@ -84865,7 +85315,15 @@
         },
         "source_key": "[\"\",null,\"corinthians1\",16,12,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0056": {
     "strong_number": "D0056",
@@ -84983,7 +85441,15 @@
       }
     ],
     "term_language": "hebrew",
-    "imported_by": "tcysite"
+    "imported_by": "tcysite",
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0057": {
     "strong_number": "D0057",
@@ -85205,7 +85671,15 @@
         },
         "source_key": "[\"\",null,\"john3\",1,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 2 has no reviewed decision"
+      ]
+    }
   },
   "D0058": {
     "strong_number": "D0058",
@@ -85427,7 +85901,16 @@
         },
         "source_key": "[\"\",null,\"corinthians1\",1,17,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "mark.jsonl:8 codex-delitzsch-review",
+        "matthew.jsonl:217 codex-desktop"
+      ]
+    }
   },
   "D0059": {
     "strong_number": "D0059",
@@ -85495,7 +85978,15 @@
         },
         "source_key": "[\"\",null,\"corinthians1\",9,18,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0060": {
     "strong_number": "D0060",
@@ -85563,7 +86054,15 @@
         },
         "source_key": "[\"\",null,\"corinthians1\",15,56,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0061": {
     "strong_number": "D0061",
@@ -86008,7 +86507,15 @@
         },
         "source_key": "[\"\",null,\"timothy2\",4,10,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0062": {
     "strong_number": "D0062",
@@ -86718,7 +87225,15 @@
         },
         "source_key": "[\"\",null,\"timothy1\",1,3,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0063": {
     "strong_number": "D0063",
@@ -86823,7 +87338,15 @@
         },
         "source_key": "[\"\",null,\"corinthians2\",3,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "luke.jsonl:33 codex-delitzsch-review"
+      ]
+    }
   },
   "D0064": {
     "strong_number": "D0064",
@@ -86891,7 +87414,15 @@
         },
         "source_key": "[\"\",null,\"corinthians2\",9,5,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0065": {
     "strong_number": "D0065",
@@ -87261,7 +87792,15 @@
         },
         "source_key": "[\"\",null,\"galatians\",1,21,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0066": {
     "strong_number": "D0066",
@@ -87329,7 +87868,15 @@
         },
         "source_key": "[\"\",null,\"galatians\",2,14,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0067": {
     "strong_number": "D0067",
@@ -87397,7 +87944,15 @@
         },
         "source_key": "[\"\",null,\"hebrews\",1,3,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0068": {
     "strong_number": "D0068",
@@ -87465,7 +88020,15 @@
         },
         "source_key": "[\"\",null,\"hebrews\",7,16,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0069": {
     "strong_number": "D0069",
@@ -88902,7 +89465,15 @@
       }
     ],
     "term_language": "hebrew",
-    "imported_by": "tcysite"
+    "imported_by": "tcysite",
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0070": {
     "strong_number": "D0070",
@@ -88970,7 +89541,15 @@
         },
         "source_key": "[\"\",null,\"john\",10,10,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "john.jsonl:12 codex-delitzsch-review"
+      ]
+    }
   },
   "D0071": {
     "strong_number": "D0071",
@@ -89038,7 +89617,15 @@
         },
         "source_key": "[\"\",null,\"john\",13,38,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "john.jsonl:22 codex-delitzsch-review"
+      ]
+    }
   },
   "D0072": {
     "strong_number": "D0072",
@@ -89180,7 +89767,15 @@
         },
         "source_key": "[\"\",null,\"john\",15,26,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "john.jsonl:24 codex-delitzsch-review"
+      ]
+    }
   },
   "D0073": {
     "strong_number": "D0073",
@@ -89248,7 +89843,15 @@
         },
         "source_key": "[\"\",null,\"john\",18,10,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "john.jsonl:36 codex-delitzsch-review"
+      ]
+    }
   },
   "D0074": {
     "strong_number": "D0074",
@@ -89316,7 +89919,15 @@
         },
         "source_key": "[\"\",null,\"john\",20,6,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "john.jsonl:42 codex-delitzsch-review"
+      ]
+    }
   },
   "D0083": {
     "strong_number": "D0083",
@@ -89421,7 +90032,15 @@
         },
         "source_key": "[\"\",null,\"john\",21,20,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "john.jsonl:53 codex-delitzsch-review"
+      ]
+    }
   },
   "D0075": {
     "strong_number": "D0075",
@@ -89489,7 +90108,15 @@
         },
         "source_key": "[\"\",null,\"john3\",1,9,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "john3.jsonl:3 codex-delitzsch-review"
+      ]
+    }
   },
   "D0076": {
     "strong_number": "D0076",
@@ -89557,7 +90184,15 @@
         },
         "source_key": "[\"\",null,\"john3\",1,12,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "john3.jsonl:4 codex-delitzsch-review"
+      ]
+    }
   },
   "D0077": {
     "strong_number": "D0077",
@@ -89662,7 +90297,15 @@
         },
         "source_key": "[\"\",null,\"acts\",1,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:252 codex-desktop"
+      ]
+    }
   },
   "D0078": {
     "strong_number": "D0078",
@@ -89730,7 +90373,15 @@
         },
         "source_key": "[\"\",null,\"luke\",3,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "luke.jsonl:6 codex-delitzsch-review"
+      ]
+    }
   },
   "D0079": {
     "strong_number": "D0079",
@@ -89798,7 +90449,15 @@
         },
         "source_key": "[\"\",null,\"luke\",3,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "luke.jsonl:7 codex-delitzsch-review"
+      ]
+    }
   },
   "D0080": {
     "strong_number": "D0080",
@@ -89866,7 +90525,15 @@
         },
         "source_key": "[\"\",null,\"luke\",3,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "luke.jsonl:8 codex-delitzsch-review"
+      ]
+    }
   },
   "D0081": {
     "strong_number": "D0081",
@@ -90082,7 +90749,15 @@
         },
         "source_key": "[\"\",null,\"luke\",3,19,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "luke.jsonl:10 codex-delitzsch-review"
+      ]
+    }
   },
   "D0082": {
     "strong_number": "D0082",
@@ -90187,7 +90862,15 @@
         },
         "source_key": "[\"\",null,\"luke\",6,42,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "luke.jsonl:15 codex-delitzsch-review"
+      ]
+    }
   },
   "D0084": {
     "strong_number": "D0084",
@@ -90255,7 +90938,15 @@
         },
         "source_key": "[\"\",null,\"luke\",16,11,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "luke.jsonl:43 codex-delitzsch-review"
+      ]
+    }
   },
   "D0085": {
     "strong_number": "D0085",
@@ -90323,7 +91014,15 @@
         },
         "source_key": "[\"\",null,\"luke\",23,14,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "luke.jsonl:53 codex-delitzsch-review"
+      ]
+    }
   },
   "D0086": {
     "strong_number": "D0086",
@@ -90428,7 +91127,15 @@
         },
         "source_key": "[\"\",null,\"acts\",1,13,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:367 codex-desktop"
+      ]
+    }
   },
   "D0087": {
     "strong_number": "D0087",
@@ -90496,7 +91203,15 @@
         },
         "source_key": "[\"\",null,\"mark\",8,17,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "mark.jsonl:7 codex-delitzsch-review"
+      ]
+    }
   },
   "D0088": {
     "strong_number": "D0088",
@@ -90749,7 +91464,15 @@
         },
         "source_key": "[\"\",null,\"luke\",3,29,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "mark.jsonl:27 codex-delitzsch-review"
+      ]
+    }
   },
   "D0089": {
     "strong_number": "D0089",
@@ -90835,7 +91558,15 @@
       }
     ],
     "term_language": "hebrew",
-    "imported_by": "tcysite"
+    "imported_by": "tcysite",
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "matthew.jsonl:20 codex-delitzsch-review"
+      ]
+    }
   },
   "D0090": {
     "strong_number": "D0090",
@@ -91344,7 +92075,15 @@
       }
     ],
     "term_language": "hebrew",
-    "imported_by": "tcysite"
+    "imported_by": "tcysite",
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "matthew.jsonl:22 codex-delitzsch-review"
+      ]
+    }
   },
   "D0091": {
     "strong_number": "D0091",
@@ -91412,7 +92151,15 @@
         },
         "source_key": "[\"\",null,\"matthew\",18,8,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "matthew.jsonl:46 codex-delitzsch-review"
+      ]
+    }
   },
   "D0092": {
     "strong_number": "D0092",
@@ -91480,7 +92227,15 @@
         },
         "source_key": "[\"\",null,\"peter1\",5,3,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "peter1.jsonl:7 codex-delitzsch-review"
+      ]
+    }
   },
   "D0093": {
     "strong_number": "D0093",
@@ -92399,7 +93154,15 @@
         },
         "source_key": "[\"\",null,\"timothy2\",1,2,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "philemon.jsonl:1 codex-delitzsch-review"
+      ]
+    }
   },
   "D0094": {
     "strong_number": "D0094",
@@ -92467,7 +93230,15 @@
         },
         "source_key": "[\"\",null,\"philemon\",1,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "philemon.jsonl:2 codex-delitzsch-review"
+      ]
+    }
   },
   "D0095": {
     "strong_number": "D0095",
@@ -92572,7 +93343,15 @@
         },
         "source_key": "[\"\",null,\"philemon\",1,2,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "philemon.jsonl:3 codex-delitzsch-review"
+      ]
+    }
   },
   "D0096": {
     "strong_number": "D0096",
@@ -92640,7 +93419,15 @@
         },
         "source_key": "[\"\",null,\"philippians\",4,3,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "philippians.jsonl:5 codex-delitzsch-review"
+      ]
+    }
   },
   "D0097": {
     "strong_number": "D0097",
@@ -92745,7 +93532,15 @@
         },
         "source_key": "[\"\",null,\"revelation\",2,12,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "revelation.jsonl:2 codex-delitzsch-review"
+      ]
+    }
   },
   "D0098": {
     "strong_number": "D0098",
@@ -92924,7 +93719,15 @@
         },
         "source_key": "[\"\",null,\"revelation\",2,24,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "revelation.jsonl:3 codex-delitzsch-review"
+      ]
+    }
   },
   "D0099": {
     "strong_number": "D0099",
@@ -93066,7 +93869,15 @@
         },
         "source_key": "[\"\",null,\"revelation\",3,4,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "revelation.jsonl:4 codex-delitzsch-review"
+      ]
+    }
   },
   "D0100": {
     "strong_number": "D0100",
@@ -93171,7 +93982,15 @@
         },
         "source_key": "[\"\",null,\"revelation\",3,7,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "revelation.jsonl:5 codex-delitzsch-review"
+      ]
+    }
   },
   "D0101": {
     "strong_number": "D0101",
@@ -93424,7 +94243,15 @@
         },
         "source_key": "[\"\",null,\"revelation\",3,14,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "revelation.jsonl:6 codex-delitzsch-review"
+      ]
+    }
   },
   "D0102": {
     "strong_number": "D0102",
@@ -93492,7 +94319,15 @@
         },
         "source_key": "[\"\",null,\"revelation\",2,13,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "revelation.jsonl:10 codex-delitzsch-review"
+      ]
+    }
   },
   "D0103": {
     "strong_number": "D0103",
@@ -93597,7 +94432,15 @@
         },
         "source_key": "[\"\",null,\"timothy1\",6,2,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "thessalonians1.jsonl:6 codex-delitzsch-review"
+      ]
+    }
   },
   "D0104": {
     "strong_number": "D0104",
@@ -93665,7 +94508,15 @@
         },
         "source_key": "[\"\",null,\"thessalonians2\",1,4,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "thessalonians2.jsonl:1 codex-delitzsch-review"
+      ]
+    }
   },
   "D0105": {
     "strong_number": "D0105",
@@ -93844,7 +94695,15 @@
         },
         "source_key": "[\"\",null,\"timothy1\",6,13,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "luke.jsonl:96 codex-desktop"
+      ]
+    }
   },
   "D0106": {
     "strong_number": "D0106",
@@ -93912,7 +94771,15 @@
         },
         "source_key": "[\"\",null,\"timothy2\",4,8,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "timothy2.jsonl:1 codex-delitzsch-review"
+      ]
+    }
   },
   "D0107": {
     "strong_number": "D0107",
@@ -94054,7 +94921,15 @@
         },
         "source_key": "[\"\",null,\"timothy2\",4,10,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "timothy2.jsonl:2 codex-delitzsch-review"
+      ]
+    }
   },
   "D0108": {
     "strong_number": "D0108",
@@ -94270,7 +95145,15 @@
         },
         "source_key": "[\"\",null,\"timothy2\",4,12,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "timothy2.jsonl:3 codex-delitzsch-review"
+      ]
+    }
   },
   "D0109": {
     "strong_number": "D0109",
@@ -94492,7 +95375,16 @@
         },
         "source_key": "[\"\",null,\"titus\",1,12,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1418 codex-desktop",
+        "titus.jsonl:2 codex-delitzsch-review"
+      ]
+    }
   },
   "D0110": {
     "strong_number": "D0110",
@@ -94560,7 +95452,15 @@
         },
         "source_key": "[\"\",null,\"acts\",1,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:250 codex-desktop"
+      ]
+    }
   },
   "D0111": {
     "strong_number": "D0111",
@@ -94694,7 +95594,15 @@
       }
     ],
     "term_language": "hebrew",
-    "imported_by": "tcysite"
+    "imported_by": "tcysite",
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:270 codex-desktop"
+      ]
+    }
   },
   "D0112": {
     "strong_number": "D0112",
@@ -94762,7 +95670,15 @@
         },
         "source_key": "[\"\",null,\"acts\",1,4,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:296 codex-desktop"
+      ]
+    }
   },
   "D0113": {
     "strong_number": "D0113",
@@ -94830,7 +95746,15 @@
         },
         "source_key": "[\"\",null,\"acts\",1,13,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:365 codex-desktop"
+      ]
+    }
   },
   "D0114": {
     "strong_number": "D0114",
@@ -95540,7 +96464,16 @@
         },
         "source_key": "[\"\",null,\"timothy2\",1,15,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1147 codex-desktop",
+        "acts.jsonl:445 codex-desktop"
+      ]
+    }
   },
   "D0115": {
     "strong_number": "D0115",
@@ -95608,7 +96541,15 @@
         },
         "source_key": "[\"\",null,\"acts\",2,22,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:486 codex-desktop"
+      ]
+    }
   },
   "D0116": {
     "strong_number": "D0116",
@@ -95719,7 +96660,16 @@
         },
         "source_key": "[\"\",null,\"acts\",15,28,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1140 codex-desktop",
+        "acts.jsonl:599 codex-desktop"
+      ]
+    }
   },
   "D0117": {
     "strong_number": "D0117",
@@ -96249,7 +97199,15 @@
       }
     ],
     "term_language": "hebrew",
-    "imported_by": "tcysite"
+    "imported_by": "tcysite",
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:617 codex-desktop"
+      ]
+    }
   },
   "D0118": {
     "strong_number": "D0118",
@@ -96317,7 +97275,15 @@
         },
         "source_key": "[\"\",null,\"acts\",4,6,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:628 codex-desktop"
+      ]
+    }
   },
   "D0119": {
     "strong_number": "D0119",
@@ -96385,7 +97351,15 @@
         },
         "source_key": "[\"\",null,\"acts\",4,6,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:629 codex-desktop"
+      ]
+    }
   },
   "D0120": {
     "strong_number": "D0120",
@@ -96453,7 +97427,15 @@
         },
         "source_key": "[\"\",null,\"acts\",4,16,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:646 codex-desktop"
+      ]
+    }
   },
   "D0121": {
     "strong_number": "D0121",
@@ -96521,7 +97503,15 @@
         },
         "source_key": "[\"\",null,\"acts\",4,36,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:674 codex-desktop"
+      ]
+    }
   },
   "D0122": {
     "strong_number": "D0122",
@@ -96589,7 +97579,15 @@
         },
         "source_key": "[\"\",null,\"acts\",6,4,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:750 codex-desktop"
+      ]
+    }
   },
   "D0123": {
     "strong_number": "D0123",
@@ -96657,7 +97655,15 @@
         },
         "source_key": "[\"\",null,\"acts\",9,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:917 codex-desktop"
+      ]
+    }
   },
   "D0124": {
     "strong_number": "D0124",
@@ -96725,7 +97731,15 @@
         },
         "source_key": "[\"\",null,\"acts\",9,16,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:934 codex-desktop"
+      ]
+    }
   },
   "D0125": {
     "strong_number": "D0125",
@@ -97126,7 +98140,15 @@
         },
         "source_key": "[\"\",null,\"acts\",10,31,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:955 codex-desktop"
+      ]
+    }
   },
   "D0126": {
     "strong_number": "D0126",
@@ -97194,7 +98216,15 @@
         },
         "source_key": "[\"\",null,\"acts\",10,6,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:961 codex-desktop"
+      ]
+    }
   },
   "D0127": {
     "strong_number": "D0127",
@@ -97262,7 +98292,15 @@
         },
         "source_key": "[\"\",null,\"acts\",10,6,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:962 codex-desktop"
+      ]
+    }
   },
   "D0128": {
     "strong_number": "D0128",
@@ -97330,7 +98368,15 @@
         },
         "source_key": "[\"\",null,\"acts\",10,38,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:992 codex-desktop"
+      ]
+    }
   },
   "D0129": {
     "strong_number": "D0129",
@@ -97398,7 +98444,15 @@
         },
         "source_key": "[\"\",null,\"acts\",13,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1049 codex-desktop"
+      ]
+    }
   },
   "D0130": {
     "strong_number": "D0130",
@@ -97503,7 +98557,15 @@
         },
         "source_key": "[\"\",null,\"romans\",16,21,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1050 codex-desktop"
+      ]
+    }
   },
   "D0131": {
     "strong_number": "D0131",
@@ -97571,7 +98633,15 @@
         },
         "source_key": "[\"\",null,\"acts\",13,5,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1056 codex-desktop"
+      ]
+    }
   },
   "D0134": {
     "strong_number": "D0134",
@@ -97705,7 +98775,15 @@
       }
     ],
     "term_language": "hebrew",
-    "imported_by": "tcysite"
+    "imported_by": "tcysite",
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1060 codex-desktop"
+      ]
+    }
   },
   "D0133": {
     "strong_number": "D0133",
@@ -97817,7 +98895,15 @@
         },
         "source_key": "[\"\",null,\"acts\",15,2,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1087 codex-desktop"
+      ]
+    }
   },
   "D0132": {
     "strong_number": "D0132",
@@ -98033,7 +99119,15 @@
         },
         "source_key": "[\"\",null,\"acts\",16,2,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1094 codex-desktop"
+      ]
+    }
   },
   "D0137": {
     "strong_number": "D0137",
@@ -98108,7 +99202,15 @@
         },
         "source_key": "[\"\",null,\"acts\",15,22,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1138 codex-desktop"
+      ]
+    }
   },
   "D0135": {
     "strong_number": "D0135",
@@ -98213,7 +99315,15 @@
         },
         "source_key": "[\"\",null,\"peter1\",1,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1148 codex-desktop"
+      ]
+    }
   },
   "D0136": {
     "strong_number": "D0136",
@@ -98281,7 +99391,15 @@
         },
         "source_key": "[\"\",null,\"acts\",16,12,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1151 codex-desktop"
+      ]
+    }
   },
   "D0138": {
     "strong_number": "D0138",
@@ -98423,7 +99541,15 @@
         },
         "source_key": "[\"\",null,\"acts\",20,4,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1187 codex-desktop"
+      ]
+    }
   },
   "D0139": {
     "strong_number": "D0139",
@@ -98713,7 +99839,15 @@
         },
         "source_key": "[\"\",null,\"timothy2\",4,20,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1205 codex-desktop"
+      ]
+    }
   },
   "D0140": {
     "strong_number": "D0140",
@@ -98892,7 +100026,15 @@
         },
         "source_key": "[\"\",null,\"hebrews\",13,24,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1206 codex-desktop"
+      ]
+    }
   },
   "D0141": {
     "strong_number": "D0141",
@@ -99034,7 +100176,15 @@
         },
         "source_key": "[\"\",null,\"acts\",23,11,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1207 codex-desktop"
+      ]
+    }
   },
   "D0142": {
     "strong_number": "D0142",
@@ -99102,7 +100252,15 @@
         },
         "source_key": "[\"\",null,\"acts\",18,24,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1225 codex-desktop"
+      ]
+    }
   },
   "D0143": {
     "strong_number": "D0143",
@@ -99170,7 +100328,15 @@
         },
         "source_key": "[\"\",null,\"acts\",20,4,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1264 codex-desktop"
+      ]
+    }
   },
   "D0144": {
     "strong_number": "D0144",
@@ -99238,7 +100404,15 @@
         },
         "source_key": "[\"\",null,\"acts\",20,4,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1265 codex-desktop"
+      ]
+    }
   },
   "D0145": {
     "strong_number": "D0145",
@@ -99380,7 +100554,15 @@
         },
         "source_key": "[\"\",null,\"thessalonians2\",1,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1267 codex-desktop"
+      ]
+    }
   },
   "D0146": {
     "strong_number": "D0146",
@@ -99596,7 +100778,15 @@
         },
         "source_key": "[\"\",null,\"philemon\",1,24,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1268 codex-desktop"
+      ]
+    }
   },
   "D0147": {
     "strong_number": "D0147",
@@ -99664,7 +100854,15 @@
         },
         "source_key": "[\"\",null,\"acts\",21,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1289 codex-desktop"
+      ]
+    }
   },
   "D0148": {
     "strong_number": "D0148",
@@ -99732,7 +100930,15 @@
         },
         "source_key": "[\"\",null,\"acts\",22,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1310 codex-desktop"
+      ]
+    }
   },
   "D0149": {
     "strong_number": "D0149",
@@ -99837,7 +101043,15 @@
         },
         "source_key": "[\"\",null,\"acts\",24,2,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1351 codex-desktop"
+      ]
+    }
   },
   "D0150": {
     "strong_number": "D0150",
@@ -99905,7 +101119,15 @@
         },
         "source_key": "[\"\",null,\"acts\",24,5,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1360 codex-desktop"
+      ]
+    }
   },
   "D0151": {
     "strong_number": "D0151",
@@ -99973,7 +101195,15 @@
         },
         "source_key": "[\"\",null,\"acts\",24,10,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1362 codex-desktop"
+      ]
+    }
   },
   "D0152": {
     "strong_number": "D0152",
@@ -100041,7 +101271,15 @@
         },
         "source_key": "[\"\",null,\"acts\",25,11,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1375 codex-desktop"
+      ]
+    }
   },
   "D0153": {
     "strong_number": "D0153",
@@ -100109,7 +101347,15 @@
         },
         "source_key": "[\"\",null,\"acts\",26,5,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1389 codex-desktop"
+      ]
+    }
   },
   "D0154": {
     "strong_number": "D0154",
@@ -100251,7 +101497,15 @@
         },
         "source_key": "[\"\",null,\"acts\",27,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1403 codex-desktop"
+      ]
+    }
   },
   "D0155": {
     "strong_number": "D0155",
@@ -100356,7 +101610,15 @@
         },
         "source_key": "[\"\",null,\"acts\",27,3,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1404 codex-desktop"
+      ]
+    }
   },
   "D0156": {
     "strong_number": "D0156",
@@ -100424,7 +101686,15 @@
         },
         "source_key": "[\"\",null,\"acts\",27,7,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1413 codex-desktop"
+      ]
+    }
   },
   "D0157": {
     "strong_number": "D0157",
@@ -100492,7 +101762,15 @@
         },
         "source_key": "[\"\",null,\"acts\",27,12,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1417 codex-desktop"
+      ]
+    }
   },
   "D0158": {
     "strong_number": "D0158",
@@ -100560,7 +101838,15 @@
         },
         "source_key": "[\"\",null,\"acts\",27,16,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1427 codex-desktop"
+      ]
+    }
   },
   "D0160": {
     "strong_number": "D0160",
@@ -100628,7 +101914,15 @@
         },
         "source_key": "[\"\",null,\"colossians\",1,2,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "colossians.jsonl:5 codex-desktop"
+      ]
+    }
   },
   "D0161": {
     "strong_number": "D0161",
@@ -100696,7 +101990,15 @@
         },
         "source_key": "[\"\",null,\"colossians\",4,9,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "colossians.jsonl:70 codex-desktop"
+      ]
+    }
   },
   "D0162": {
     "strong_number": "D0162",
@@ -100764,7 +102066,15 @@
         },
         "source_key": "[\"\",null,\"corinthians1\",2,9,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "corinthians1.jsonl:47 codex-desktop"
+      ]
+    }
   },
   "D0163": {
     "strong_number": "D0163",
@@ -100832,7 +102142,15 @@
         },
         "source_key": "[\"\",null,\"corinthians1\",3,3,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "corinthians1.jsonl:56 codex-desktop"
+      ]
+    }
   },
   "D0164": {
     "strong_number": "D0164",
@@ -100900,7 +102218,15 @@
         },
         "source_key": "[\"\",null,\"corinthians1\",7,5,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "corinthians1.jsonl:113 codex-desktop"
+      ]
+    }
   },
   "D0165": {
     "strong_number": "D0165",
@@ -100968,7 +102294,15 @@
         },
         "source_key": "[\"\",null,\"corinthians1\",7,5,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "corinthians1.jsonl:117 codex-desktop"
+      ]
+    }
   },
   "D0166": {
     "strong_number": "D0166",
@@ -101036,7 +102370,15 @@
         },
         "source_key": "[\"\",null,\"corinthians1\",7,9,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "corinthians1.jsonl:120 codex-desktop"
+      ]
+    }
   },
   "D0167": {
     "strong_number": "D0167",
@@ -101104,7 +102446,15 @@
         },
         "source_key": "[\"\",null,\"corinthians1\",12,18,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "corinthians1.jsonl:193 codex-desktop"
+      ]
+    }
   },
   "D0168": {
     "strong_number": "D0168",
@@ -101172,7 +102522,15 @@
         },
         "source_key": "[\"\",null,\"corinthians1\",15,21,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "corinthians1.jsonl:226 codex-desktop"
+      ]
+    }
   },
   "D0169": {
     "strong_number": "D0169",
@@ -101240,7 +102598,15 @@
         },
         "source_key": "[\"\",null,\"corinthians2\",5,10,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "corinthians2.jsonl:59 codex-desktop"
+      ]
+    }
   },
   "D0170": {
     "strong_number": "D0170",
@@ -101308,7 +102674,15 @@
         },
         "source_key": "[\"\",null,\"corinthians2\",9,6,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "corinthians2.jsonl:96 codex-desktop"
+      ]
+    }
   },
   "D0171": {
     "strong_number": "D0171",
@@ -101376,7 +102750,15 @@
         },
         "source_key": "[\"\",null,\"corinthians2\",11,5,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "corinthians2.jsonl:120 codex-desktop"
+      ]
+    }
   },
   "D0172": {
     "strong_number": "D0172",
@@ -101444,7 +102826,15 @@
         },
         "source_key": "[\"\",null,\"ephesians\",2,2,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "ephesians.jsonl:11 codex-desktop"
+      ]
+    }
   },
   "D0173": {
     "strong_number": "D0173",
@@ -101512,7 +102902,15 @@
         },
         "source_key": "[\"\",null,\"ephesians\",4,13,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "ephesians.jsonl:25 codex-desktop"
+      ]
+    }
   },
   "D0174": {
     "strong_number": "D0174",
@@ -101580,7 +102978,15 @@
         },
         "source_key": "[\"\",null,\"ephesians\",4,13,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "ephesians.jsonl:26 codex-desktop"
+      ]
+    }
   },
   "D0175": {
     "strong_number": "D0175",
@@ -101648,7 +103054,15 @@
         },
         "source_key": "[\"\",null,\"ephesians\",5,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "ephesians.jsonl:32 codex-desktop"
+      ]
+    }
   },
   "D0176": {
     "strong_number": "D0176",
@@ -101753,7 +103167,15 @@
         },
         "source_key": "[\"\",null,\"ephesians\",5,6,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "ephesians.jsonl:33 codex-desktop"
+      ]
+    }
   },
   "D0177": {
     "strong_number": "D0177",
@@ -102006,7 +103428,15 @@
         },
         "source_key": "[\"\",null,\"timothy2\",4,10,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "galatians.jsonl:12 codex-desktop"
+      ]
+    }
   },
   "D0178": {
     "strong_number": "D0178",
@@ -102074,7 +103504,15 @@
         },
         "source_key": "[\"\",null,\"galatians\",3,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "galatians.jsonl:26 codex-desktop"
+      ]
+    }
   },
   "D0179": {
     "strong_number": "D0179",
@@ -102142,7 +103580,15 @@
         },
         "source_key": "[\"\",null,\"hebrews\",5,14,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "hebrews.jsonl:65 codex-desktop"
+      ]
+    }
   },
   "D0180": {
     "strong_number": "D0180",
@@ -102210,7 +103656,15 @@
         },
         "source_key": "[\"\",null,\"hebrews\",7,9,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "hebrews.jsonl:84 codex-desktop"
+      ]
+    }
   },
   "D0181": {
     "strong_number": "D0181",
@@ -102278,7 +103732,15 @@
         },
         "source_key": "[\"\",null,\"hebrews\",9,11,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "hebrews.jsonl:104 codex-desktop"
+      ]
+    }
   },
   "D0182": {
     "strong_number": "D0182",
@@ -102346,7 +103808,15 @@
         },
         "source_key": "[\"\",null,\"hebrews\",10,25,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "hebrews.jsonl:115 codex-desktop"
+      ]
+    }
   },
   "D0183": {
     "strong_number": "D0183",
@@ -102414,7 +103884,15 @@
         },
         "source_key": "[\"\",null,\"james\",1,23,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "james.jsonl:15 codex-desktop"
+      ]
+    }
   },
   "D0184": {
     "strong_number": "D0184",
@@ -102532,7 +104010,15 @@
       }
     ],
     "term_language": "hebrew",
-    "imported_by": "tcysite"
+    "imported_by": "tcysite",
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "john.jsonl:66 codex-desktop"
+      ]
+    }
   },
   "D0185": {
     "strong_number": "D0185",
@@ -102600,7 +104086,15 @@
         },
         "source_key": "[\"\",null,\"john\",2,9,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "john.jsonl:79 codex-desktop"
+      ]
+    }
   },
   "D0186": {
     "strong_number": "D0186",
@@ -103260,7 +104754,15 @@
         },
         "source_key": "[\"\",null,\"john\",6,59,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "john.jsonl:82 codex-desktop"
+      ]
+    }
   },
   "D0187": {
     "strong_number": "D0187",
@@ -103328,7 +104830,15 @@
         },
         "source_key": "[\"\",null,\"john\",6,7,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "john.jsonl:99 codex-desktop"
+      ]
+    }
   },
   "H5749": {
     "strong_number": "H5749",
@@ -103477,7 +104987,15 @@
         },
         "source_key": "[\"\",null,\"john\",16,7,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "john.jsonl:179 codex-desktop"
+      ]
+    }
   },
   "D0189": {
     "strong_number": "D0189",
@@ -103545,7 +105063,15 @@
         },
         "source_key": "[\"\",null,\"john\",18,13,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "john.jsonl:189 codex-desktop"
+      ]
+    }
   },
   "H3782": {
     "strong_number": "H3782",
@@ -104254,7 +105780,15 @@
         },
         "source_key": "[\"\",null,\"john\",20,18,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "john.jsonl:217 codex-desktop"
+      ]
+    }
   },
   "D0191": {
     "strong_number": "D0191",
@@ -104359,7 +105893,15 @@
         },
         "source_key": "[\"\",null,\"john\",19,38,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "john.jsonl:221 codex-desktop"
+      ]
+    }
   },
   "D0192": {
     "strong_number": "D0192",
@@ -104464,7 +106006,15 @@
         },
         "source_key": "[\"\",null,\"revelation\",18,13,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "john.jsonl:228 codex-desktop"
+      ]
+    }
   },
   "D0193": {
     "strong_number": "D0193",
@@ -104909,7 +106459,15 @@
         },
         "source_key": "[\"\",null,\"john\",21,2,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "john.jsonl:229 codex-desktop"
+      ]
+    }
   },
   "H8609": {
     "strong_number": "H8609",
@@ -105307,7 +106865,15 @@
         },
         "source_key": "[\"\",null,\"luke\",3,27,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "luke.jsonl:116 codex-desktop"
+      ]
+    }
   },
   "D0195": {
     "strong_number": "D0195",
@@ -105375,7 +106941,15 @@
         },
         "source_key": "[\"\",null,\"luke\",6,2,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "luke.jsonl:164 codex-desktop"
+      ]
+    }
   },
   "D0196": {
     "strong_number": "D0196",
@@ -105857,7 +107431,15 @@
         },
         "source_key": "[\"\",null,\"acts\",1,13,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "luke.jsonl:168 codex-desktop"
+      ]
+    }
   },
   "D0197": {
     "strong_number": "D0197",
@@ -105925,7 +107507,15 @@
         },
         "source_key": "[\"\",null,\"luke\",7,6,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "luke.jsonl:183 codex-desktop"
+      ]
+    }
   },
   "D0198": {
     "strong_number": "D0198",
@@ -106030,7 +107620,15 @@
         },
         "source_key": "[\"\",null,\"luke\",24,10,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "luke.jsonl:199 codex-desktop"
+      ]
+    }
   },
   "H2891": {
     "strong_number": "H2891",
@@ -106287,7 +107885,15 @@
         },
         "source_key": "[\"\",null,\"luke\",9,3,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "luke.jsonl:219 codex-desktop"
+      ]
+    }
   },
   "D0200": {
     "strong_number": "D0200",
@@ -106355,7 +107961,15 @@
         },
         "source_key": "[\"\",null,\"luke\",13,15,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "luke.jsonl:253 codex-desktop"
+      ]
+    }
   },
   "H2470": {
     "strong_number": "H2470",
@@ -107281,7 +108895,15 @@
         },
         "source_key": "[\"\",null,\"mark\",14,32,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "mark.jsonl:123 codex-desktop"
+      ]
+    }
   },
   "H3001": {
     "strong_number": "H3001",
@@ -108101,7 +109723,15 @@
         },
         "source_key": "[\"\",null,\"matthew\",22,4,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "matthew.jsonl:180 codex-desktop"
+      ]
+    }
   },
   "H5090": {
     "strong_number": "H5090",
@@ -108257,7 +109887,15 @@
         },
         "source_key": "[\"\",null,\"peter2\",2,3,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "peter2.jsonl:10 codex-desktop"
+      ]
+    }
   },
   "H6340": {
     "strong_number": "H6340",
@@ -108730,7 +110368,15 @@
         },
         "source_key": "[\"\",null,\"philemon\",1,2,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "philemon.jsonl:7 codex-desktop"
+      ]
+    }
   },
   "H1160": {
     "strong_number": "H1160",
@@ -110818,7 +112464,15 @@
         },
         "source_key": "[\"\",null,\"revelation\",22,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "revelation.jsonl:266 codex-desktop"
+      ]
+    }
   },
   "D0205": {
     "strong_number": "D0205",
@@ -110886,7 +112540,15 @@
         },
         "source_key": "[\"\",null,\"romans\",1,20,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "romans.jsonl:28 codex-desktop"
+      ]
+    }
   },
   "D0206": {
     "strong_number": "D0206",
@@ -110954,7 +112616,15 @@
         },
         "source_key": "[\"\",null,\"romans\",2,1,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "romans.jsonl:35 codex-desktop"
+      ]
+    }
   },
   "H4735": {
     "strong_number": "H4735",
@@ -123512,7 +125182,15 @@
         },
         "source_key": "[\"\",null,\"timothy1\",6,21,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1822 codex-delitzsch-review"
+      ]
+    }
   },
   "D0209": {
     "strong_number": "D0209",
@@ -123588,7 +125266,15 @@
         },
         "source_key": "[\"\",null,\"john1\",1,8,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0210": {
     "strong_number": "D0210",
@@ -132584,7 +134270,15 @@
       }
     ],
     "term_language": "hebrew",
-    "imported_by": "tcysite"
+    "imported_by": "tcysite",
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1826 codex-delitzsch-review"
+      ]
+    }
   },
   "D0267": {
     "strong_number": "D0267",
@@ -132690,7 +134384,15 @@
         },
         "source_key": "[\"\",null,\"corinthians2\",12,6,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "corinthians2.jsonl:165 codex-delitzsch-review"
+      ]
+    }
   },
   "D0266": {
     "strong_number": "D0266",
@@ -150925,7 +152627,15 @@
       }
     ],
     "term_language": "hebrew",
-    "imported_by": "tcysite"
+    "imported_by": "tcysite",
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "hebrews.jsonl:176 codex-delitzsch-review"
+      ]
+    }
   },
   "D0268": {
     "strong_number": "D0268",
@@ -150994,7 +152704,15 @@
         },
         "source_key": "[\"\",null,\"john\",17,5,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "john.jsonl:328 codex-delitzsch-review"
+      ]
+    }
   },
   "D0269": {
     "strong_number": "D0269",
@@ -151063,7 +152781,15 @@
         },
         "source_key": "[\"\",null,\"matthew\",5,19,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "matthew.jsonl:303 codex-delitzsch-review"
+      ]
+    }
   },
   "D0270": {
     "strong_number": "D0270",
@@ -151132,7 +152858,15 @@
         },
         "source_key": "[\"\",null,\"matthew\",17,27,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "matthew.jsonl:305 codex-delitzsch-review"
+      ]
+    }
   },
   "D0271": {
     "strong_number": "D0271",
@@ -154131,7 +155865,15 @@
         },
         "source_key": "[\"\",null,\"timothy1\",1,19,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "acts.jsonl:1828 codex-delitzsch-review"
+      ]
+    }
   },
   "D0272": {
     "strong_number": "D0272",
@@ -156102,7 +157844,15 @@
         },
         "source_key": "[\"\",null,\"timothy2\",3,6,null]"
       }
-    ]
+    ],
+    "publication": {
+      "status": "draft",
+      "rule": "unreviewed_definition",
+      "rule_version": 1,
+      "evidence": [
+        "definition order 1 has no reviewed decision"
+      ]
+    }
   },
   "D0278": {
     "strong_number": "D0278",

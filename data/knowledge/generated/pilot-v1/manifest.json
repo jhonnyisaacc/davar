@@ -3,23 +3,23 @@
   "files": [
     {
       "path": "bundles/daniel/7/13.json",
-      "sha256": "0b3fae92f0b606b856f1e5dc4877b3b16d1fddf026aaf56784107a3d8c03d6ac"
+      "sha256": "f684120c3bd6e03ef83ac265f2db4c74abcbbbf839fd441866616f8977052034"
     },
     {
       "path": "bundles/john/1/1.json",
-      "sha256": "fa0d9733ead4154f7c2f59d78e24be77104fb25a44308a333bcdb63d885c654c"
+      "sha256": "462a87795803b51b43de0c9b436165769a1c58a3adb06ec94c02633804fdddfb"
     },
     {
       "path": "bundles/john/1/51.json",
-      "sha256": "5c277cc733100ecd1e38a9a8c6894478e7ace1e24922b97558679344cd43dcda"
+      "sha256": "4c9012a16bbce57cf7d2db6a247644a64c9e1a82372d81a5661e1776f10c7a79"
     },
     {
       "path": "records/records.json",
-      "sha256": "105f5ed8bda8a3ce40bc062d3d024b1f7e25967b28b5c4fa2c5758a314486ade"
+      "sha256": "7475653f5107acf31fd7fb7aacf5a8d7ba18802059d9e7ca3a54b5c9616df24a"
     }
   ],
   "generator_version": "1.0.0",
-  "input_manifest_digest": "b4678b0a81c48750f7a4539c94e97bd69bc1cd24d975c340c2a7ea05ac4fe212",
+  "input_manifest_digest": "b1d76f2c1310d36f63fb9cbc53330215c20489e7d1a40cea455106834a660ab4",
   "inputs": [
     {
       "id": "greek-lexicon",
@@ -76,7 +76,7 @@
       "path": "data/dict/lexicon/custom_definitions.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-      "sha256": "856e063a90c18b529a75e39e2a6d53693eaed6afec8027e57b5f842abe6aa992"
+      "sha256": "874688ce2c1fabe4370b022cbcb0529ebf6587363834e01716db48cb1cfaf8db"
     },
     {
       "fixture_path": "tests/fixtures/knowledge/shaul/knowledge/concepts/son-of-man.yml",
