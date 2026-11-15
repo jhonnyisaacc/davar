@@ -35,11 +35,15 @@ LEGACY_FAMILY = "legacy_assignment"
 DECISION_FIELDS = ("status", "action", "issue_type", "previous_strong", "new_strong", "confidence", "reason", "logged_at")
 PREFIX_LETTERS = {"Hb": "ב", "Hl": "ל", "Hk": "כ", "Hc": "ו", "Hd": "ה", "Hm": "מ"}
 ROOT_LETTER_ISSUE = "root_letter_prefix"
+WITHDRAWN_ROOT_LETTER_ISSUE = "root_letter_prefix_withdrawn"
 STRONG_ISSUE = "strong_correction"
-OUTSIDE_QUEUE_ISSUES = {STRONG_ISSUE}
+OUTSIDE_QUEUE_ISSUES = {STRONG_ISSUE, ROOT_LETTER_ISSUE}
 EVIDENCE_KEYS = ("lexicon", "grammar", "context")
 ROOT_LETTER_BATCH = REPORTS.parent / "batches" / "root_letter_prefixes.json"
+OUTSIDE_ROOT_LETTER_BATCH = REPORTS.parent / "batches" / "root_letter_prefixes_outside_queue.json"
+OUTSIDE_ROOT_LETTER_REVIEWER = "rule:root_letter_prefix_outside_queue_v1"
 STRONG_CONFIRMED = {"applied", "already_applied"}
+STRONG_REVIEWED = {*STRONG_CONFIRMED, "skipped"}
 PREFIX_ONLY = ["prefix_metadata_disagreement"]
 PREPOSITIONS = {"Hb", "Hl", "Hk"}
 REDUCED_VOWELS = set("\u05b0\u05b1\u05b2\u05b3")
@@ -57,11 +61,18 @@ class Verdict(NamedTuple):
     lexical_review: str | None = None
 
 
+class RootLetter(NamedTuple):
+    new_prefixes: list[str]
+    basis: str
+    certain: bool
+
+
 class Reading(NamedTuple):
     prefixes: list[str]
     lemma: str | None
     lemma_is_root: bool = False
     prefix_as_root: bool = False
+    root_letter: RootLetter | None = None
 
 
 class Match(NamedTuple):
@@ -74,9 +85,13 @@ Rule = tuple[str, int, Callable[[Record, dict[str, Any] | None, Reading | None],
 LegacyRule = tuple[str, int, Callable[[Record, list[Match]], Verdict | None]]
 
 
+def prefix_letters(prefixes: list[str]) -> str:
+    return "".join(PREFIX_LETTERS[prefix] for prefix in prefixes)
+
+
 def real_prefix_count(consonants: str, prefixes: list[str], lemma: str) -> int | None:
     for count in range(len(prefixes), -1, -1):
-        letters = "".join(PREFIX_LETTERS[prefix] for prefix in prefixes[:count])
+        letters = prefix_letters(prefixes[:count])
         if consonants.startswith(letters) and consonants[len(letters):].startswith(lemma[:2]):
             return count
     return None
@@ -125,8 +140,35 @@ def root_letter_prefixes(text: str, prefixes: list[str], lemma: str | None) -> l
     return None if count is None or count == len(prefixes) else prefixes[:count]
 
 
+def outside_root_letter(text: str, prefixes: list[str], strong: str, lemma: str | None, is_root: bool,
+                        lemmas: frozenset[str], review: dict[str, Any] | None) -> RootLetter | None:
+    new_prefixes = root_letter_prefixes(text, prefixes, lemma)
+    if new_prefixes is None:
+        return None
+    if review is not None and review["status"] in STRONG_REVIEWED and (review.get("new_strong") or "").split("/")[-1] == strong.split("/")[-1]:
+        return RootLetter(new_prefixes, "reviewed_strong", True)
+    consonants = normalize_hebrew(text)
+    kept = consonants[len(prefix_letters(new_prefixes)):]
+    stems = [consonants[len(prefix_letters(prefixes[:count])):] for count in range(len(new_prefixes) + 1, len(prefixes) + 1)]
+    if review is not None and review["status"] == "needs_manual_review":
+        reason = "manual_review"
+    elif len(lemma) < 3:
+        reason = "short_lemma"
+    elif not kept.startswith(lemma):
+        reason = "lemma_not_in_word"
+    elif any(stem in lemmas or any(stem[:length] in lemmas for length in range(3, len(stem))) for stem in stems):
+        reason = "prefix_reading"
+    elif "Hd" in prefixes[len(new_prefixes):] and article_shaped(text, prefixes, is_root):
+        reason = "article_shape"
+    else:
+        return RootLetter(new_prefixes, "lemma_check", True)
+    return RootLetter(new_prefixes, reason, False)
+
+
 def root_letter_correction(entry: Record, decision: dict[str, Any] | None, reading: Reading | None) -> Verdict | None:
     if decision is None or decision.get("issue_type") != ROOT_LETTER_ISSUE or decision["status"] not in STRONG_CONFIRMED:
+        return None
+    if entry.get("source") == DECISION_SOURCE:
         return None
     occurrence = decision["occurrence"]
     strong_review = decision.get("evidence", {}).get("strong_review") or {}
@@ -137,6 +179,27 @@ def root_letter_correction(entry: Record, decision: dict[str, Any] | None, readi
         or root_letter_prefixes(occurrence["text"], occurrence["prefixes"], reading and reading.lemma) != decision["new_prefixes"]
     ):
         raise ValueError(f"{entry['location']}: root-letter decision does not satisfy the root-letter rule")
+    return Verdict(
+        "corrected", decision["reviewer"], dict(decision["evidence"], status=decision["status"], logged_at=decision["logged_at"]),
+        before=dict(prefixes=occurrence["prefixes"]),
+        after=dict(text=occurrence["text"], strong=decision["new_strong"], prefixes=decision["new_prefixes"]),
+    )
+
+
+def outside_root_letter_correction(entry: Record, decision: dict[str, Any] | None, reading: Reading | None) -> Verdict | None:
+    if entry.get("source") != DECISION_SOURCE or decision is None or decision.get("issue_type") != ROOT_LETTER_ISSUE:
+        return None
+    occurrence, found = decision["occurrence"], reading and reading.root_letter
+    if (
+        decision["status"] not in STRONG_CONFIRMED
+        or not found
+        or not found.certain
+        or not decision["previous_strong"] == occurrence["strong"] == entry["strong"]
+        or decision["new_prefixes"] != found.new_prefixes
+        or decision["evidence"]["basis"] != found.basis
+        or decision["new_strong"] != "/".join([*found.new_prefixes, entry["strong"].split("/")[-1]])
+    ):
+        raise ValueError(f"{entry['location']}: root-letter decision does not satisfy the outside-queue root-letter rule")
     return Verdict(
         "corrected", decision["reviewer"], dict(decision["evidence"], status=decision["status"], logged_at=decision["logged_at"]),
         before=dict(prefixes=occurrence["prefixes"]),
@@ -182,7 +245,7 @@ def style_only_prefix(entry: Record, decision: dict[str, Any] | None, reading: R
         return None
     return Verdict("benign", "rule:style_only_prefix_v5", dict(
         consonants=consonants, prefixes=reading.prefixes,
-        prefix_letters="".join(PREFIX_LETTERS[p] for p in reading.prefixes), lemma=reading.lemma,
+        prefix_letters=prefix_letters(reading.prefixes), lemma=reading.lemma,
         prior_decision=decision and {key: decision.get(key) for key in DECISION_FIELDS},
     ), lexical_review="reviewed" if strong_reviewed else "pending")
 
@@ -201,6 +264,7 @@ def unadjudicated(entry: Record, decision: dict[str, Any] | None, reading: Readi
 
 RULES: tuple[Rule, ...] = (
     ("root_letter_prefix", 1, root_letter_correction),
+    ("root_letter_prefix_outside_queue", 1, outside_root_letter_correction),
     ("reviewed_strong_correction", 1, reviewed_strong_correction),
     ("style_only_prefix", 5, style_only_prefix),
     ("prior_review_decision", 1, prior_review),
@@ -327,14 +391,37 @@ def build_from_disk(report: Path = REPORT, decisions_dir: Path = REPORTS.parent 
     plan = json.loads(gzip.decompress(report.read_bytes()))
     queue, legacy = plan["review_queue"], plan[LEGACY_SOURCE]
     corpus, decisions = load_corpus(), load_latest_decisions(decisions_dir)
-    readings = prefix_readings(queue, corpus, LexiconIndex(ROOT / "data/dict/lexicon/words"))
+    lexicon = LexiconIndex(ROOT / "data/dict/lexicon/words")
+    readings = prefix_readings(queue, corpus, lexicon)
+    readings |= outside_readings(outside_queue_entries(queue, decisions), decisions, strong_reviews(decisions_dir), lexicon)
     return build_ledger(queue, decisions, readings, legacy, legacy_matches(legacy, corpus, decisions))
+
+
+def strong_reviews(decisions_dir: Path = REPORTS.parent / "decisions") -> dict[str, dict[str, Any]]:
+    return load_latest_decisions(decisions_dir, keep=lambda entry: entry.get("issue_type") not in {ROOT_LETTER_ISSUE, WITHDRAWN_ROOT_LETTER_ISSUE})
+
+
+def outside_reading(word: Record, review: dict[str, Any] | None, lexicon: LexiconIndex, lemmas: frozenset[str]) -> Reading:
+    prefixes, lemma = word.get("prefixes") or [], lexicon.normalized_lemma(word["strong"])
+    is_root = bool((lexicon.get(word["strong"]) or {}).get("is_root"))
+    found = outside_root_letter(word["text"], prefixes, word["strong"], lemma and normalize_hebrew(lemma), is_root, lemmas, review)
+    return Reading(prefixes, lemma, is_root, root_letter=found)
+
+
+def outside_readings(entries: list[Record], decisions: dict[str, dict[str, Any]], reviews: dict[str, dict[str, Any]],
+                     lexicon: LexiconIndex) -> dict[str, Reading]:
+    lemmas = lexicon_lemmas(lexicon)
+    return {
+        entry["location"]: outside_reading(decisions[entry["location"]]["occurrence"], reviews.get(entry["location"]), lexicon, lemmas)
+        for entry in entries
+        if decisions[entry["location"]].get("issue_type") == ROOT_LETTER_ISSUE
+    }
 
 
 def lexicon_lemmas(lexicon: LexiconIndex) -> frozenset[str]:
     paths = (*lexicon.lexicon_words_dir.glob("H*.json"), *lexicon.lexicon_roots_dir.glob("H*.json"))
     lemmas = (lexicon.normalized_lemma(path.stem) for path in paths)
-    return frozenset(normalize_hebrew(lemma) for lemma in lemmas if lemma and len(lemma) >= 3)
+    return frozenset(normalize_hebrew(lemma) for lemma in lemmas if lemma and len(lemma) >= 2)
 
 
 def prefix_readings(queue: list[Record], corpus: dict[str, Any], lexicon: LexiconIndex) -> dict[str, Reading]:
@@ -373,8 +460,8 @@ def root_letter_decision(entry: Record, word: Record, decision: dict[str, Any] |
         occurrence=dict(book=book, chapter=int(chapter_number), verse=int(verse), word_index=int(index),
                         text=word["text"], strong=entry["strong"], prefixes=prefixes),
         previous_strong=entry["strong"], new_strong=entry["strong"], new_prefixes=new_prefixes,
-        reason=f"The tagged prefix letters {''.join(PREFIX_LETTERS[p] for p in prefixes[len(new_prefixes):])} begin the lemma {lemma} of the reviewed Strong {entry['strong']}, so they are root letters, not prefixes.",
-        evidence=dict(consonants=consonants, prefix_letters="".join(PREFIX_LETTERS[p] for p in prefixes), lemma=lemma,
+        reason=f"The tagged prefix letters {prefix_letters(prefixes[len(new_prefixes):])} begin the lemma {lemma} of the reviewed Strong {entry['strong']}, so they are root letters, not prefixes.",
+        evidence=dict(consonants=consonants, prefix_letters=prefix_letters(prefixes), lemma=lemma,
                       strong_review={key: decision.get(key) for key in ("reviewer", "status", "new_strong", "reason", "logged_at")}),
     )
 
@@ -395,6 +482,64 @@ def root_letter_batch_from_disk() -> dict[str, Any]:
     queue = json.loads(gzip.decompress(REPORT.read_bytes()))["review_queue"]
     lexicon = LexiconIndex(ROOT / "data/dict/lexicon/words")
     return root_letter_batch(queue, load_corpus(), load_latest_decisions(REPORTS.parent / "decisions"), lexicon)
+
+
+def outside_root_letter_decision(location: str, word: Record, reading: Reading, review: dict[str, Any] | None) -> Record:
+    book, chapter_number, verse, index = location.split(".")
+    strong, found = word["strong"], reading.root_letter
+    base = strong.split("/")[-1]
+    return dict(
+        action="set_strong", issue_type=ROOT_LETTER_ISSUE, reviewer=OUTSIDE_ROOT_LETTER_REVIEWER, confidence=0.95,
+        occurrence=dict(book=book, chapter=int(chapter_number), verse=int(verse), word_index=int(index),
+                        text=word["text"], strong=strong, prefixes=word["prefixes"]),
+        previous_strong=strong, new_strong="/".join([*found.new_prefixes, base]), new_prefixes=found.new_prefixes,
+        reason=f"The tagged prefix letters {prefix_letters(word['prefixes'][len(found.new_prefixes):])} begin the lemma {reading.lemma} of {base}, so they are root letters, not prefixes.",
+        evidence=dict(basis=found.basis, consonants=normalize_hebrew(word["text"]), prefix_letters=prefix_letters(word["prefixes"]), lemma=reading.lemma,
+                      strong_review=review and {key: review.get(key) for key in ("reviewer", "status", "new_strong", "reason", "logged_at")}),
+    )
+
+
+def withdrawn_root_letter_decision(location: str, word: Record, decision: dict[str, Any], reading: Reading) -> Record:
+    book, chapter_number, verse, index = location.split(".")
+    return dict(
+        action="set_strong", issue_type=WITHDRAWN_ROOT_LETTER_ISSUE, reviewer=OUTSIDE_ROOT_LETTER_REVIEWER, confidence=0.95,
+        occurrence=dict(book=book, chapter=int(chapter_number), verse=int(verse), word_index=int(index),
+                        text=word["text"], strong=word["strong"], prefixes=word.get("prefixes") or []),
+        previous_strong=word["strong"], new_strong=decision["previous_strong"], new_prefixes=decision["occurrence"]["prefixes"],
+        reason=f"The root-letter rule no longer finds the match certain ({reading.root_letter.basis}), so the correction logged at {decision['logged_at']} is withdrawn.",
+        evidence=dict(basis=reading.root_letter.basis, withdrawn={key: decision.get(key) for key in ("status", "previous_strong", "new_strong", "new_prefixes", "logged_at")}),
+    )
+
+
+def outside_root_letter_batch(queue: list[Record], corpus: dict[str, Any], decisions: dict[str, dict[str, Any]],
+                              reviews: dict[str, dict[str, Any]], lexicon: LexiconIndex) -> dict[str, Any]:
+    queued, lemmas = {entry["location"] for entry in queue}, lexicon_lemmas(lexicon)
+    proposals, unresolved = [], []
+    for _, _, _, current, location in words(corpus):
+        decision = decisions.get(location)
+        corrected = decision is not None and decision.get("issue_type") == ROOT_LETTER_ISSUE
+        word = decision["occurrence"] if corrected else current
+        strong = word.get("strong")
+        if location in queued or not word.get("prefixes") or not strong or strong.startswith("D"):
+            continue
+        reading = outside_reading(word, reviews.get(location), lexicon, lemmas)
+        if reading.root_letter is None:
+            continue
+        if reading.root_letter.certain:
+            proposals.append(outside_root_letter_decision(location, word, reading, reviews.get(location)))
+        else:
+            unresolved.append(dict(location=location, text=word["text"], strong=strong, prefixes=word["prefixes"],
+                                   lemma=reading.lemma, reason=reading.root_letter.basis))
+            if corrected:
+                proposals.append(withdrawn_root_letter_decision(location, current, decision, reading))
+    return dict(issue=380, rule="root_letter_prefix_outside_queue", rule_version=1, decisions=proposals, unresolved=unresolved)
+
+
+def outside_root_letter_batch_from_disk() -> dict[str, Any]:
+    queue = json.loads(gzip.decompress(REPORT.read_bytes()))["review_queue"]
+    decisions_dir = REPORTS.parent / "decisions"
+    lexicon = LexiconIndex(ROOT / "data/dict/lexicon/words")
+    return outside_root_letter_batch(queue, load_corpus(), load_latest_decisions(decisions_dir), strong_reviews(decisions_dir), lexicon)
 
 
 def revert_corrections(corpus: dict[str, Any], records: list[Record]) -> dict[str, Any]:
