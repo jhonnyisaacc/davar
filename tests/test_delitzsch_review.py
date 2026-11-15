@@ -581,20 +581,20 @@ def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
     committed = dispositions.read_ledger()
     assert committed == rebuilt
     summary = committed["summary"]
-    assert summary["total"] == 11528 + 16084 + 4019
+    assert summary["total"] == 11528 + 16084 + 4965
     assert summary["by_disposition"]["unresolved"] == 0
     assert summary["by_family"]["prefix_metadata"] == {
-        "benign": 1390, "corrected": 3478, "already_reviewed": 374, "unresolved": 0, "blocked": 252, "superseded": 0,
+        "benign": 1386, "corrected": 3509, "already_reviewed": 348, "unresolved": 0, "blocked": 251, "superseded": 0,
     }
     assert summary["by_family"]["outside_queue"] == {
-        "benign": 0, "corrected": 4012, "already_reviewed": 0, "unresolved": 0, "blocked": 7, "superseded": 0,
+        "benign": 0, "corrected": 4954, "already_reviewed": 0, "unresolved": 0, "blocked": 11, "superseded": 0,
     }
-    assert summary["benign_lexical_review"] == {"pending": 0, "reviewed": 1753}
+    assert summary["benign_lexical_review"] == {"pending": 0, "reviewed": 1749}
     assert summary["by_family"]["legacy_assignment"] == {
-        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 7820, "superseded": 8264,
+        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 7879, "superseded": 8205,
     }
     assert {rule: summary["by_rule"][rule] for rule in ("legacy_without_candidate", "legacy_current_value", "legacy_blocked", "lexical_review")} == {
-        "legacy_without_candidate": 4360, "legacy_current_value": 3904, "legacy_blocked": 7820, "lexical_review": 2301,
+        "legacy_without_candidate": 4360, "legacy_current_value": 3845, "legacy_blocked": 7879, "lexical_review": 2300,
     }
 
 
@@ -673,7 +673,8 @@ def test_style_only_rule_leaves_unsettled_prefix_flags_alone():
     assert ledger_record("acts.13.15.14")["after"]["strong"] == "Hl/H859"
     assert ledger_record("acts.7.58.6")["after"]["strong"] == "Hc/Hd/H5707"
     assert {ledger_record(location)["rule"] for location in ("acts.13.15.14", "acts.7.58.6")} == {"reviewed_strong_correction"}
-    assert ledger_record("corinthians1.1.4.9")["disposition"] == "already_reviewed"
+    assert ledger_record("acts.10.11.14")["disposition"] == "already_reviewed"
+    assert (ledger_record("corinthians1.1.4.9")["disposition"], ledger_record("corinthians1.1.4.9")["after"]["strong"]) == ("corrected", "Hl/H859")
     entry = queue_entry("acts.1.2.12", ["prefix_metadata_disagreement"])
     readings = {"acts.1.2.12": dispositions.Reading(["Hb"], "בחר")}
     [record] = dispositions.build_ledger([entry], {}, readings)["records"]
@@ -758,6 +759,20 @@ def test_root_letter_prefixes_are_corrected_in_the_ledger_and_the_verse():
     young_men = ledger_record("acts.2.17.14")
     assert (young_men["before"]["prefixes"], young_men["after"]["prefixes"]) == (["Hc", "Hb"], ["Hc"])
     assert "וּ/בַחוּרֵיכֶם" in parsed_verse("acts", 2, 17)["hebrew"]
+
+
+def test_follow_up_lexical_review_maps_hebrew_letters_and_suffixed_prepositions_to_their_entries():
+    letters = ledger_record("corinthians2.10.10.2")
+    assert (letters["disposition"], letters["before"]["strong"], letters["after"]["strong"]) == ("corrected", "H1431", "Hd/H107")
+    assert ledger_record("thessalonians2.3.17.8")["after"] == {"text": "הָאִגְּרוֹת", "strong": "Hd/H107", "prefixes": ["Hd"]}
+    to_me = ledger_record("corinthians1.5.12.2")
+    assert (to_me["source"], to_me["before"]["strong"], to_me["after"]["strong"]) == ("decision_log", "H107", "D0265")
+    assert ledger_record("acts.10.5.2")["after"]["strong"] == "D0274"
+    assert ledger_record("romans.14.6.19")["after"]["strong"] == "H3034"
+    temptation = ledger_record("matthew.6.13.3")
+    assert (temptation["disposition"], temptation["rule"], temptation["reviewer"]) == ("blocked", "lexical_review", "claude-delitzsch-review")
+    assert parsed_verse("luke", 7, 6)["words"][17]["strong"] == "H994"
+    assert [w["strong"] for w in parsed_verse("thessalonians2", 3, 17)["words"] if w["strong"].endswith(("H104", "H107"))] == ["Hd/H107"]
 
 
 def test_plausible_prefix_readings_are_settled_by_lexical_review_not_by_the_root_letter_rule():

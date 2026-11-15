@@ -50624,11 +50624,18 @@
     "translit_es": "tv",
     "definitions": [
       {
-        "text_en": "and I will sweep it with the besom of destruction",
+        "text_en": "sweep",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "y la barreré con la escoba de la destrucción"
+        "text_es": "barrer"
+      },
+      {
+        "text_en": "sweep away",
+        "source": "bdb",
+        "order": 2,
+        "sense": "0",
+        "text_es": "barrer por completo"
       }
     ],
     "sources": {
@@ -144009,116 +144016,39 @@
     "translit_es": "anah",
     "definitions": [
       {
-        "text_en": "dwell",
+        "text_en": "answer",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "habitar"
+        "text_es": "responder"
       },
       {
-        "text_en": "sing",
+        "text_en": "respond",
         "source": "bdb",
         "order": 2,
         "sense": "0",
-        "text_es": "cantar"
-      },
-      {
-        "text_en": "utter tunefully",
-        "source": "bdb",
-        "order": 3,
-        "sense": "0"
-      },
-      {
-        "text_en": "sing sweetly of it",
-        "source": "bdb",
-        "order": 4,
-        "sense": "0"
-      },
-      {
-        "text_en": "answer",
-        "source": "bdb",
-        "order": 5,
-        "sense": "0",
-        "text_es": "responder"
-      },
-      {
-        "text_en": "respond",
-        "source": "bdb",
-        "order": 6,
-        "sense": "0",
-        "text_es": "responder"
-      },
-      {
-        "text_en": "answer",
-        "source": "bdb",
-        "order": 7,
-        "sense": "1",
-        "text_es": "responder"
-      },
-      {
-        "text_en": "respond to",
-        "source": "bdb",
-        "order": 8,
-        "sense": "1"
-      },
-      {
-        "text_en": "respond",
-        "source": "bdb",
-        "order": 9,
-        "sense": "2a",
-        "text_es": "responder"
-      },
-      {
-        "text_en": "meets all demands",
-        "source": "bdb",
-        "order": 10,
-        "sense": "2b"
-      },
-      {
-        "text_en": "respond",
-        "source": "bdb",
-        "order": 11,
-        "sense": "3a",
         "text_es": "responder"
       },
       {
         "text_en": "testify",
         "source": "bdb",
-        "order": 12,
+        "order": 3,
         "sense": "3a",
         "text_es": "testificar"
       },
       {
-        "text_en": "make response",
-        "source": "bdb",
-        "order": 13,
-        "sense": "3b"
-      },
-      {
-        "text_en": "make answer",
-        "source": "bdb",
-        "order": 14,
-        "sense": "1"
-      },
-      {
         "text_en": "be answered",
         "source": "bdb",
-        "order": 15,
+        "order": 4,
         "sense": "2",
         "text_es": "ser respondido"
       },
       {
-        "text_en": "causes",
+        "text_en": "sing",
         "source": "bdb",
-        "order": 16,
+        "order": 5,
         "sense": "0",
-        "text_es": "causa"
-      },
-      {
-        "text_en": "to respond in the joy of his heart",
-        "source": "bdb",
-        "order": 17,
-        "sense": "0"
+        "text_es": "cantar"
       }
     ],
     "sources": {
