@@ -4,7 +4,7 @@ import json
 import pytest
 
 from scripts.dict import tcysite_review
-from scripts.dict.tcysite_review import apply_reviews, build, load_decisions
+from scripts.dict.tcysite_review import EntryProfile, apply_reviews, build, load_decisions, stems
 
 
 def eric_row(row="0", text_es="paz"):
@@ -123,6 +123,7 @@ def test_apply_is_idempotent():
         ({"verdict": "blocked", "reason": "source_defect"}, "blocked decision carries a translation"),
         ({"verdict": "corrected"}, "corrected decision without before"),
         ({"reviewer": ""}, "missing reviewer"),
+        ({"entry_checked": "Hashem"}, "invalid entry_checked"),
     ],
 )
 def test_invalid_decisions_are_rejected(tmp_path, fields, error):
@@ -136,5 +137,42 @@ def test_committed_data_reviews_every_tcy_row():
     text, report = build()
     assert report["unreviewed"] == []
     assert report["orphan_decisions"] == []
+    assert report["entry_flags"] == []
     assert tcysite_review.CUSTOM_PATH.read_text(encoding="utf-8") == text
     assert json.loads(tcysite_review.REPORT_PATH.read_text(encoding="utf-8")) == report
+
+
+PROFILES = {
+    "H7965": EntryProfile(proper=False, stems=stems("completeness, peace, welfare")),
+    "H8007": EntryProfile(proper=True, stems=stems("Salma, an Israelite")),
+    "H4695": EntryProfile(proper=False, stems=stems("a quarrel")),
+}
+
+
+def test_row_on_a_proper_name_entry_is_flagged_until_moved_or_checked():
+    data = {"H8007": {"definitions": [eric_row()]}}
+    report = apply_reviews(copy.deepcopy(data), keyed(decision()), PROFILES)
+    assert report["entry_flags"] == ["H8007 eric/parashot.json#0 proper_name"]
+    assert apply_reviews(copy.deepcopy(data), keyed(decision(entry="H7965")), PROFILES)["entry_flags"] == []
+    assert apply_reviews(copy.deepcopy(data), keyed(decision(entry_checked="H8007")), PROFILES)["entry_flags"] == []
+
+
+def test_row_sharing_no_sense_with_its_entry_is_flagged():
+    data = {"H4695": {"definitions": [eric_row(text_es="panes sin levadura")]}}
+    unleavened = decision(text_es="panes sin levadura", text_en="unleavened breads", text_he="מצות")
+    report = apply_reviews(data, keyed(unleavened), PROFILES)
+    assert report["entry_flags"] == ["H4695 eric/parashot.json#0 no_shared_sense"]
+
+
+def test_row_sharing_a_sense_or_blocked_is_not_flagged():
+    blocked = decision(verdict="blocked", reason="entry_unresolved")
+    del blocked["text_en"], blocked["text_he"]
+    assert apply_reviews(custom(eric_row()), keyed(decision()), PROFILES)["entry_flags"] == []
+    data = {"H8007": {"definitions": [eric_row()]}}
+    assert apply_reviews(data, keyed(blocked), PROFILES)["entry_flags"] == []
+
+
+def test_an_entry_check_for_another_entry_does_not_cover_this_one():
+    data = {"H8007": {"definitions": [eric_row()]}}
+    report = apply_reviews(data, keyed(decision(entry_checked="H7965")), PROFILES)
+    assert report["entry_flags"] == ["H8007 eric/parashot.json#0 proper_name"]

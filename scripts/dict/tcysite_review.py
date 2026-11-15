@@ -11,12 +11,14 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import unicodedata
 from collections import Counter
+from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Iterator
 
 from .definition_hygiene import has_forbidden_controls
-from .import_tcysite import read_json, write_json
+from .import_tcysite import GREEK_RELEASE_ROOT, ROOTS_PATH, WORDS_PATH, read_json, write_json
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -39,6 +41,58 @@ REASONS = {
 HEBREW_LETTER = re.compile(r"[א-ת]")
 ENTRY_KEY = re.compile(r"[HGD]\d+[A-Za-z]?")
 RowKey = tuple[str, str]
+HEBREW_STRONG_PATH = ROOT / "data/dict/raw/HebrewStrong.xml"
+STRONG_ENTRY = re.compile(r'<entry id="(H\d+[a-z]?)">(.*?)</entry>', re.S)
+STOPWORDS = frozenset(
+    "the and for with one who that which from his her its their this was are "
+    "los las del por con para que una uno sus como".split()
+)
+
+
+@dataclass(frozen=True)
+class EntryProfile:
+    proper: bool
+    stems: frozenset[str]
+
+
+def stems(text: str) -> frozenset[str]:
+    plain = "".join(ch for ch in unicodedata.normalize("NFKD", text.lower()) if not unicodedata.combining(ch))
+    return frozenset(word[:5] for word in re.findall(r"[a-z]{3,}", plain) if word not in STOPWORDS)
+
+
+def entry_profiles() -> dict[str, EntryProfile]:
+    glosses: dict[str, list[str]] = {}
+    proper: dict[str, bool] = {}
+    for match in STRONG_ENTRY.finditer(HEBREW_STRONG_PATH.read_text(encoding="utf-8")):
+        strong, body = match.groups()
+        pos = re.search(r'<w pos="([^"]+)"', body)
+        proper[strong] = bool(pos) and all(tag.startswith("n-pr") for tag in pos.group(1).split())
+        glosses[strong] = re.findall(r"<(?:meaning|usage)>(.*?)</(?:meaning|usage)>", body, re.S)
+    for path in (WORDS_PATH, ROOTS_PATH):
+        for strong, entry in read_json(path).items():
+            for item in entry.get("definitions", []):
+                glosses.setdefault(strong, []).extend((item.get("text_en", ""), item.get("text_es", "")))
+    greek = read_json(sorted(GREEK_RELEASE_ROOT.glob("*/lexicon.json"))[-1])
+    for key, entry in greek.items():
+        strong = key.rstrip("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+        proper[strong] = proper.get(strong, True) and entry["lemma"][:1].isupper()
+        for language in ("en", "es"):
+            text = entry["definitions"].get(language) or {}
+            glosses.setdefault(strong, []).extend((text.get("short", ""), text.get("fuller", "")))
+    return {
+        strong: EntryProfile(proper.get(strong, False), stems(re.sub(r"<[^>]+>", " ", " ".join(texts))))
+        for strong, texts in glosses.items()
+    }
+
+
+def entry_flag(definition: dict[str, Any], profile: EntryProfile | None) -> str | None:
+    if profile is None:
+        return None
+    if profile.proper:
+        return "proper_name"
+    if not stems(f"{definition['text_en']} {definition['text_es']}") & profile.stems:
+        return "no_shared_sense"
+    return None
 
 
 def tcy_rows(custom: dict[str, Any]) -> Iterator[tuple[str, dict[str, Any]]]:
@@ -58,8 +112,9 @@ def decision_errors(decision: dict[str, Any]) -> list[str]:
     for field in ("source_file", "source_row", "text_es", "reviewer", "evidence"):
         if not str(decision.get(field) or "").strip():
             errors.append(f"missing {field}")
-    if "entry" in decision and not ENTRY_KEY.fullmatch(str(decision["entry"])):
-        errors.append(f"invalid entry {decision['entry']!r}")
+    for field in ("entry", "entry_checked"):
+        if field in decision and not ENTRY_KEY.fullmatch(str(decision[field])):
+            errors.append(f"invalid {field} {decision[field]!r}")
     if verdict == "blocked":
         if decision.get("reason") not in REASONS:
             errors.append(f"unknown reason {decision.get('reason')!r}")
@@ -145,10 +200,13 @@ def place(custom: dict[str, Any], strong: str, definition: dict[str, Any], targe
 
 
 def apply_reviews(
-    custom: dict[str, Any], decisions: dict[RowKey, dict[str, Any]]
+    custom: dict[str, Any],
+    decisions: dict[RowKey, dict[str, Any]],
+    profiles: dict[str, EntryProfile] | None = None,
 ) -> dict[str, Any]:
     counts: Counter[str] = Counter()
     unreviewed: list[str] = []
+    entry_flags: list[str] = []
     seen: set[RowKey] = set()
     for strong, definition in list(tcy_rows(custom)):
         decision = decisions.get(row_key(definition)) if definition["source"] == ERIC_SOURCE else None
@@ -164,8 +222,13 @@ def apply_reviews(
         fields = reviewed_fields(definition, decision)
         definition.update(fields)
         counts[f"{definition['source']}:{decision['verdict'] if decision else fields['review_status']}"] += 1
+        label = f"{strong} {definition['source_file']}#{definition['source_row']}"
         if fields["review_status"] == "imported":
-            unreviewed.append(f"{strong} {definition['source_file']}#{definition['source_row']}")
+            unreviewed.append(label)
+        if fields["review_status"] == "approved" and decision.get("entry_checked") != strong:
+            flag = entry_flag(definition, (profiles or {}).get(strong))
+            if flag:
+                entry_flags.append(f"{label} {flag}")
     orphans = sorted(f"{file}#{row}" for file, row in set(decisions) - seen)
     return {
         "schema_version": 1,
@@ -175,6 +238,8 @@ def apply_reviews(
         "reviewers": dict(sorted(Counter(item["reviewer"] for item in decisions.values()).items())),
         "unreviewed": unreviewed,
         "orphan_decisions": orphans,
+        "entry_checked": sum(1 for item in decisions.values() if item.get("entry_checked")),
+        "entry_flags": entry_flags,
     }
 
 
@@ -219,7 +284,7 @@ def merge(paths: list[Path]) -> None:
 
 def build() -> tuple[str, dict[str, Any]]:
     custom = read_json(CUSTOM_PATH)
-    report = apply_reviews(custom, load_decisions())
+    report = apply_reviews(custom, load_decisions(), entry_profiles())
     return json.dumps(custom, ensure_ascii=False, indent=2) + "\n", report
 
 
@@ -252,6 +317,8 @@ def main() -> None:
         problems.append(f"{len(report['unreviewed'])} TCY rows have no current decision, first: {report['unreviewed'][0]}")
     if report["orphan_decisions"]:
         problems.append(f"{len(report['orphan_decisions'])} decisions match no row, first: {report['orphan_decisions'][0]}")
+    if report["entry_flags"]:
+        problems.append(f"{len(report['entry_flags'])} approved rows sit on an entry that does not fit them, first: {report['entry_flags'][0]}")
     if CUSTOM_PATH.read_text(encoding="utf-8") != text:
         problems.append("custom_definitions.json is stale; run apply")
     if not REPORT_PATH.exists() or read_json(REPORT_PATH) != report:

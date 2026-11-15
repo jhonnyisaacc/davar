@@ -103,6 +103,11 @@ manifest metadata are unchanged, so repeated fetches remain deterministic.
   canonical Greek lexicon already has English and Hebrew definitions.
 - A decision can name `entry` to move a row the importer attached to the wrong
   Strong number. `entry_before` records where it was.
+- An approved row is flagged when its entry is a proper name (`n-pr` in
+  `HebrewStrong.xml`, or a capitalized Greek lemma), or when its meaning shares
+  no word stem with the entry's Strong, BDB or Greek lexicon glosses. A
+  reviewer clears a flag by moving the row, blocking it as `entry_unresolved`,
+  or setting `entry_checked` to the entry the row was confirmed against.
 - Each reviewed row records `review_status` (`approved` or `blocked`),
   `reviewed_by`, and, when blocked, `review_reason`. A row whose Spanish text
   no longer matches its decision returns to `imported`.
@@ -115,7 +120,7 @@ python -m scripts.dict.tcysite_review check
 ```
 
 `check` fails when a TCY row has no current decision, a decision matches no
-row, or the committed data or `data/dict/reports/tcysite_review.json` is stale.
+row, an approved row has an entry flag, or the committed data or `data/dict/reports/tcysite_review.json` is stale.
 The importer applies the decisions too, so a reimport keeps the review.
 
 #### Attribution for imported custom definitions
