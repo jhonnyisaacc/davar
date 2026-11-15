@@ -145,3 +145,12 @@ def test_committed_publication_status_is_current():
     from scripts.delitzsch.entry_publication import CUSTOM, apply, load_ledger, referenced_custom_keys
     custom=json.loads(CUSTOM.read_text(encoding="utf-8"))
     assert apply(custom,referenced_custom_keys(custom,occurrence_counts()),load_ledger())==[]
+
+def test_duplicate_definition_orders_fail_the_publication_check():
+    from scripts.delitzsch.entry_publication import duplicate_orders
+    custom={"D1":{"definitions":[{"order":1},{"order":2},{"order":2}]},"D2":{"definitions":[{"order":1},{"order":2}]}}
+    assert duplicate_orders(custom)==["D1 repeats definition orders [2]; renumber it with a renumber_custom_definitions decision"]
+
+def test_committed_custom_entries_have_unique_definition_orders():
+    from scripts.delitzsch.entry_publication import CUSTOM, duplicate_orders
+    assert duplicate_orders(json.loads(CUSTOM.read_text(encoding="utf-8")))==[]
