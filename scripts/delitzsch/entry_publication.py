@@ -1,7 +1,8 @@
 """Publication status for the custom D entries that the Delitzsch text references.
 
 write: set each entry's `publication` from the review decision log.
-check: fail when a committed `publication` differs from what write would set.
+check: fail when a committed `publication` differs from what write would set, or
+when a custom entry repeats a definition order.
 
 Rules, first match wins:
 - blocked (pending_manual_review): a needs_manual_review decision names the entry.
@@ -85,6 +86,16 @@ def apply(custom: dict, keys: list[str], ledger: Ledger) -> list[str]:
     return changed
 
 
+def duplicate_orders(custom: dict) -> list[str]:
+    errors = []
+    for key, entry in sorted(custom.items()):
+        orders = [definition.get("order") for definition in entry.get("definitions") or []]
+        repeated = sorted({order for order in orders if orders.count(order) > 1}, key=str)
+        if repeated:
+            errors.append(f"{key} repeats definition orders {repeated}; renumber it with a renumber_custom_definitions decision")
+    return errors
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("command", choices=["write", "check"])
@@ -93,9 +104,11 @@ def main(argv: list[str] | None = None) -> int:
     keys = referenced_custom_keys(custom, occurrence_counts())
     changed = apply(custom, keys, load_ledger())
     if args.command == "check":
-        for key in changed:
-            print(f"{key} publication is stale; run python -m scripts.delitzsch.entry_publication write")
-        return 1 if changed else 0
+        errors = [f"{key} publication is stale; run python -m scripts.delitzsch.entry_publication write" for key in changed]
+        errors += duplicate_orders(custom)
+        for error in errors:
+            print(error)
+        return 1 if errors else 0
     if changed:
         CUSTOM.write_text(json.dumps(custom, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     by_status: dict[str, list[str]] = defaultdict(list)
