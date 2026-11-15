@@ -3186,35 +3186,6 @@
       "occurrence": {
         "book": "acts",
         "chapter": 20,
-        "verse": 33,
-        "word_index": 7,
-        "text": "לְבוּשׁוֹ׃",
-        "strong": "Hl/Hb/H3830",
-        "prefixes": [
-          "Hl",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hl/Hb/H3830",
-      "new_strong": "H3830",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters לב begin the lemma לבוש of H3830, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "לבושו",
-        "prefix_letters": "לב",
-        "lemma": "לבוש",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "acts",
-        "chapter": 20,
         "verse": 36,
         "word_index": 7,
         "text": "בִּרְכָּיו",
@@ -12597,35 +12568,6 @@
       "occurrence": {
         "book": "ephesians",
         "chapter": 1,
-        "verse": 5,
-        "word_index": 2,
-        "text": "לְבָנִים",
-        "strong": "Hl/Hb/H3836",
-        "prefixes": [
-          "Hl",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hl/Hb/H3836",
-      "new_strong": "H3836",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters לב begin the lemma לבן of H3836, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "לבנימ",
-        "prefix_letters": "לב",
-        "lemma": "לבן",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "ephesians",
-        "chapter": 1,
         "verse": 6,
         "word_index": 1,
         "text": "כְּבוֹד",
@@ -18771,35 +18713,6 @@
       "occurrence": {
         "book": "john",
         "chapter": 19,
-        "verse": 24,
-        "word_index": 21,
-        "text": "לְבוּשִׁי",
-        "strong": "Hl/Hb/H3830",
-        "prefixes": [
-          "Hl",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hl/Hb/H3830",
-      "new_strong": "H3830",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters לב begin the lemma לבוש of H3830, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "לבושי",
-        "prefix_letters": "לב",
-        "lemma": "לבוש",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "john",
-        "chapter": 19,
         "verse": 27,
         "word_index": 14,
         "text": "בֵּיתוֹ׃",
@@ -19029,35 +18942,6 @@
         "consonants": "ביתמ",
         "prefix_letters": "ב",
         "lemma": "בית",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "john",
-        "chapter": 20,
-        "verse": 12,
-        "word_index": 4,
-        "text": "לְבָנִים",
-        "strong": "Hl/Hb/H3836",
-        "prefixes": [
-          "Hl",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hl/Hb/H3836",
-      "new_strong": "H3836",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters לב begin the lemma לבן of H3836, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "לבנימ",
-        "prefix_letters": "לב",
-        "lemma": "לבן",
         "strong_review": null
       }
     },
@@ -31737,35 +31621,6 @@
         "book": "mark",
         "chapter": 9,
         "verse": 3,
-        "word_index": 3,
-        "text": "לְבָנִים",
-        "strong": "Hl/Hb/H3836",
-        "prefixes": [
-          "Hl",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hl/Hb/H3836",
-      "new_strong": "H3836",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters לב begin the lemma לבן of H3836, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "לבנימ",
-        "prefix_letters": "לב",
-        "lemma": "לבן",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "mark",
-        "chapter": 9,
-        "verse": 3,
         "word_index": 12,
         "text": "כְּמוֹהֶם׃",
         "strong": "Hk/H3644",
@@ -36961,35 +36816,6 @@
       "occurrence": {
         "book": "matthew",
         "chapter": 27,
-        "verse": 35,
-        "word_index": 20,
-        "text": "לְבוּשִׁי",
-        "strong": "Hl/Hb/H3830",
-        "prefixes": [
-          "Hl",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hl/Hb/H3830",
-      "new_strong": "H3830",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters לב begin the lemma לבוש of H3830, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "לבושי",
-        "prefix_letters": "לב",
-        "lemma": "לבוש",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "matthew",
-        "chapter": 27,
         "verse": 43,
         "word_index": 0,
         "text": "בָּטַח",
@@ -37265,35 +37091,6 @@
         "consonants": "ולמדתמ",
         "prefix_letters": "ול",
         "lemma": "למד",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "matthew",
-        "chapter": 3,
-        "verse": 4,
-        "word_index": 2,
-        "text": "לְבוּשׁוֹ",
-        "strong": "Hl/Hb/H3830",
-        "prefixes": [
-          "Hl",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hl/Hb/H3830",
-      "new_strong": "H3830",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters לב begin the lemma לבוש of H3830, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "לבושו",
-        "prefix_letters": "לב",
-        "lemma": "לבוש",
         "strong_review": null
       }
     },
@@ -40181,35 +39978,6 @@
       "occurrence": {
         "book": "revelation",
         "chapter": 1,
-        "verse": 14,
-        "word_index": 2,
-        "text": "לְבָנִים",
-        "strong": "Hl/Hb/H3836",
-        "prefixes": [
-          "Hl",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hl/Hb/H3836",
-      "new_strong": "H3836",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters לב begin the lemma לבן of H3836, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "לבנימ",
-        "prefix_letters": "לב",
-        "lemma": "לבן",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "revelation",
-        "chapter": 1,
         "verse": 16,
         "word_index": 5,
         "text": "כּוֹכָבִים",
@@ -40501,35 +40269,6 @@
         "book": "revelation",
         "chapter": 12,
         "verse": 1,
-        "word_index": 7,
-        "text": "לְבוּשָׁהּ",
-        "strong": "Hl/Hb/H3830",
-        "prefixes": [
-          "Hl",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hl/Hb/H3830",
-      "new_strong": "H3830",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters לב begin the lemma לבוש of H3830, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "לבושה",
-        "prefix_letters": "לב",
-        "lemma": "לבוש",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "revelation",
-        "chapter": 12,
-        "verse": 1,
         "word_index": 16,
         "text": "כּוֹכָבִים׃",
         "strong": "Hk/H3556",
@@ -40720,35 +40459,6 @@
         "consonants": "ולשונ",
         "prefix_letters": "ול",
         "lemma": "לשון",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "revelation",
-        "chapter": 14,
-        "verse": 4,
-        "word_index": 24,
-        "text": "בִּכּוּרִים",
-        "strong": "Hb/Hk/H1061",
-        "prefixes": [
-          "Hb",
-          "Hk"
-        ]
-      },
-      "previous_strong": "Hb/Hk/H1061",
-      "new_strong": "H1061",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters בכ begin the lemma בכור of H1061, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "בכורימ",
-        "prefix_letters": "בכ",
-        "lemma": "בכור",
         "strong_review": null
       }
     },
@@ -41231,35 +40941,6 @@
         "consonants": "כבדה",
         "prefix_letters": "כב",
         "lemma": "כבד",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "revelation",
-        "chapter": 17,
-        "verse": 4,
-        "word_index": 1,
-        "text": "לְבוּשָׁהּ",
-        "strong": "Hl/Hb/H3830",
-        "prefixes": [
-          "Hl",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hl/Hb/H3830",
-      "new_strong": "H3830",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters לב begin the lemma לבוש of H3830, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "לבושה",
-        "prefix_letters": "לב",
-        "lemma": "לבוש",
         "strong_review": null
       }
     },
@@ -41850,35 +41531,6 @@
         "consonants": "כתב",
         "prefix_letters": "כ",
         "lemma": "כתב",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "revelation",
-        "chapter": 19,
-        "verse": 14,
-        "word_index": 6,
-        "text": "לְבָנִים",
-        "strong": "Hl/Hb/H3836",
-        "prefixes": [
-          "Hl",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hl/Hb/H3836",
-      "new_strong": "H3836",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters לב begin the lemma לבן of H3836, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "לבנימ",
-        "prefix_letters": "לב",
-        "lemma": "לבן",
         "strong_review": null
       }
     },
@@ -42701,64 +42353,6 @@
       "occurrence": {
         "book": "revelation",
         "chapter": 3,
-        "verse": 4,
-        "word_index": 14,
-        "text": "לְבָנִים",
-        "strong": "Hl/Hb/H3836",
-        "prefixes": [
-          "Hl",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hl/Hb/H3836",
-      "new_strong": "H3836",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters לב begin the lemma לבן of H3836, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "לבנימ",
-        "prefix_letters": "לב",
-        "lemma": "לבן",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "revelation",
-        "chapter": 3,
-        "verse": 5,
-        "word_index": 3,
-        "text": "לְבָנִים",
-        "strong": "Hl/Hb/H3836",
-        "prefixes": [
-          "Hl",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hl/Hb/H3836",
-      "new_strong": "H3836",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters לב begin the lemma לבן of H3836, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "לבנימ",
-        "prefix_letters": "לב",
-        "lemma": "לבן",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "revelation",
-        "chapter": 3,
         "verse": 7,
         "word_index": 4,
         "text": "כְּתֹב",
@@ -42894,35 +42488,6 @@
         "consonants": "כתב",
         "prefix_letters": "כ",
         "lemma": "כתב",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "revelation",
-        "chapter": 3,
-        "verse": 18,
-        "word_index": 10,
-        "text": "לְבָנִים",
-        "strong": "Hl/Hb/H3836",
-        "prefixes": [
-          "Hl",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hl/Hb/H3836",
-      "new_strong": "H3836",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters לב begin the lemma לבן of H3836, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "לבנימ",
-        "prefix_letters": "לב",
-        "lemma": "לבן",
         "strong_review": null
       }
     },
@@ -43097,35 +42662,6 @@
         "consonants": "כסאות",
         "prefix_letters": "כ",
         "lemma": "כסא",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "revelation",
-        "chapter": 4,
-        "verse": 4,
-        "word_index": 16,
-        "text": "לְבָנִים",
-        "strong": "Hl/Hb/H3836",
-        "prefixes": [
-          "Hl",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hl/Hb/H3836",
-      "new_strong": "H3836",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters לב begin the lemma לבן of H3836, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "לבנימ",
-        "prefix_letters": "לב",
-        "lemma": "לבן",
         "strong_review": null
       }
     },
@@ -46055,35 +45591,6 @@
         "consonants": "כבוד",
         "prefix_letters": "כב",
         "lemma": "כבוד",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "romans",
-        "chapter": 8,
-        "verse": 23,
-        "word_index": 10,
-        "text": "בִּכּוּרֵי",
-        "strong": "Hb/Hk/H1061",
-        "prefixes": [
-          "Hb",
-          "Hk"
-        ]
-      },
-      "previous_strong": "Hb/Hk/H1061",
-      "new_strong": "H1061",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters בכ begin the lemma בכור of H1061, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "בכורי",
-        "prefix_letters": "בכ",
-        "lemma": "בכור",
         "strong_review": null
       }
     },
@@ -50579,6 +50086,17 @@
       "reason": "prefix_reading"
     },
     {
+      "location": "acts.20.33.7",
+      "text": "לְבוּשׁוֹ׃",
+      "strong": "Hl/Hb/H3830",
+      "prefixes": [
+        "Hl",
+        "Hb"
+      ],
+      "lemma": "לבוש",
+      "reason": "prefix_reading"
+    },
+    {
       "location": "acts.20.34.6",
       "text": "בְּעַד",
       "strong": "Hb/H1157",
@@ -54467,6 +53985,17 @@
       "reason": "lemma_not_in_word"
     },
     {
+      "location": "ephesians.1.5.2",
+      "text": "לְבָנִים",
+      "strong": "Hl/Hb/H3836",
+      "prefixes": [
+        "Hl",
+        "Hb"
+      ],
+      "lemma": "לבן",
+      "reason": "prefix_reading"
+    },
+    {
       "location": "ephesians.1.13.10",
       "text": "בְּשׂוֹרַת",
       "strong": "Hb/H1309",
@@ -58196,6 +57725,17 @@
       "reason": "prefix_reading"
     },
     {
+      "location": "john.19.24.21",
+      "text": "לְבוּשִׁי",
+      "strong": "Hl/Hb/H3830",
+      "prefixes": [
+        "Hl",
+        "Hb"
+      ],
+      "lemma": "לבוש",
+      "reason": "prefix_reading"
+    },
+    {
       "location": "john.19.26.16",
       "text": "בְּנֵךְ׃",
       "strong": "Hb/H1121",
@@ -58378,6 +57918,17 @@
       ],
       "lemma": "בד",
       "reason": "short_lemma"
+    },
+    {
+      "location": "john.20.12.4",
+      "text": "לְבָנִים",
+      "strong": "Hl/Hb/H3836",
+      "prefixes": [
+        "Hl",
+        "Hb"
+      ],
+      "lemma": "לבן",
+      "reason": "prefix_reading"
     },
     {
       "location": "john.21.2.10",
@@ -64875,6 +64426,17 @@
       "reason": "prefix_reading"
     },
     {
+      "location": "mark.9.3.3",
+      "text": "לְבָנִים",
+      "strong": "Hl/Hb/H3836",
+      "prefixes": [
+        "Hl",
+        "Hb"
+      ],
+      "lemma": "לבן",
+      "reason": "prefix_reading"
+    },
+    {
       "location": "mark.9.5.7",
       "text": "הֱיוֹתֵנוּ",
       "strong": "Hd/H1961",
@@ -67378,6 +66940,17 @@
       "reason": "prefix_reading"
     },
     {
+      "location": "matthew.27.35.20",
+      "text": "לְבוּשִׁי",
+      "strong": "Hl/Hb/H3830",
+      "prefixes": [
+        "Hl",
+        "Hb"
+      ],
+      "lemma": "לבוש",
+      "reason": "prefix_reading"
+    },
+    {
       "location": "matthew.27.37.4",
       "text": "כָּתוּב",
       "strong": "Hk/H3789",
@@ -67460,6 +67033,17 @@
       ],
       "lemma": "לב",
       "reason": "short_lemma"
+    },
+    {
+      "location": "matthew.3.4.2",
+      "text": "לְבוּשׁוֹ",
+      "strong": "Hl/Hb/H3830",
+      "prefixes": [
+        "Hl",
+        "Hb"
+      ],
+      "lemma": "לבוש",
+      "reason": "prefix_reading"
     },
     {
       "location": "matthew.3.5.7",
@@ -68937,6 +68521,17 @@
       "reason": "short_lemma"
     },
     {
+      "location": "revelation.1.14.2",
+      "text": "לְבָנִים",
+      "strong": "Hl/Hb/H3836",
+      "prefixes": [
+        "Hl",
+        "Hb"
+      ],
+      "lemma": "לבן",
+      "reason": "prefix_reading"
+    },
+    {
       "location": "revelation.1.19.10",
       "text": "לִהְיוֹת",
       "strong": "Hl/Hd/H1961",
@@ -69027,6 +68622,17 @@
         "Hk"
       ],
       "lemma": "כבד",
+      "reason": "prefix_reading"
+    },
+    {
+      "location": "revelation.12.1.7",
+      "text": "לְבוּשָׁהּ",
+      "strong": "Hl/Hb/H3830",
+      "prefixes": [
+        "Hl",
+        "Hb"
+      ],
+      "lemma": "לבוש",
       "reason": "prefix_reading"
     },
     {
@@ -69139,6 +68745,17 @@
       ],
       "lemma": "בן",
       "reason": "short_lemma"
+    },
+    {
+      "location": "revelation.14.4.24",
+      "text": "בִּכּוּרִים",
+      "strong": "Hb/Hk/H1061",
+      "prefixes": [
+        "Hb",
+        "Hk"
+      ],
+      "lemma": "בכור",
+      "reason": "prefix_reading"
     },
     {
       "location": "revelation.14.6.9",
@@ -69321,6 +68938,17 @@
       ],
       "lemma": "בן",
       "reason": "short_lemma"
+    },
+    {
+      "location": "revelation.17.4.1",
+      "text": "לְבוּשָׁהּ",
+      "strong": "Hl/Hb/H3830",
+      "prefixes": [
+        "Hl",
+        "Hb"
+      ],
+      "lemma": "לבוש",
+      "reason": "prefix_reading"
     },
     {
       "location": "revelation.17.5.2",
@@ -69558,6 +69186,17 @@
         "Hl"
       ],
       "lemma": "לבוש",
+      "reason": "prefix_reading"
+    },
+    {
+      "location": "revelation.19.14.6",
+      "text": "לְבָנִים",
+      "strong": "Hl/Hb/H3836",
+      "prefixes": [
+        "Hl",
+        "Hb"
+      ],
+      "lemma": "לבן",
       "reason": "prefix_reading"
     },
     {
@@ -69875,6 +69514,17 @@
       "reason": "prefix_reading"
     },
     {
+      "location": "revelation.3.4.14",
+      "text": "לְבָנִים",
+      "strong": "Hl/Hb/H3836",
+      "prefixes": [
+        "Hl",
+        "Hb"
+      ],
+      "lemma": "לבן",
+      "reason": "prefix_reading"
+    },
+    {
       "location": "revelation.3.5.2",
       "text": "בְּגָדִים",
       "strong": "Hb/H899",
@@ -69882,6 +69532,17 @@
         "Hb"
       ],
       "lemma": "בגד",
+      "reason": "prefix_reading"
+    },
+    {
+      "location": "revelation.3.5.3",
+      "text": "לְבָנִים",
+      "strong": "Hl/Hb/H3836",
+      "prefixes": [
+        "Hl",
+        "Hb"
+      ],
+      "lemma": "לבן",
       "reason": "prefix_reading"
     },
     {
@@ -69928,6 +69589,17 @@
       "reason": "prefix_reading"
     },
     {
+      "location": "revelation.3.18.10",
+      "text": "לְבָנִים",
+      "strong": "Hl/Hb/H3836",
+      "prefixes": [
+        "Hl",
+        "Hb"
+      ],
+      "lemma": "לבן",
+      "reason": "prefix_reading"
+    },
+    {
       "location": "revelation.4.2.1",
       "text": "הָיִיתִי",
       "strong": "Hd/H1961",
@@ -69956,6 +69628,17 @@
         "Hb"
       ],
       "lemma": "בגד",
+      "reason": "prefix_reading"
+    },
+    {
+      "location": "revelation.4.4.16",
+      "text": "לְבָנִים",
+      "strong": "Hl/Hb/H3836",
+      "prefixes": [
+        "Hl",
+        "Hb"
+      ],
+      "lemma": "לבן",
       "reason": "prefix_reading"
     },
     {
@@ -71675,6 +71358,17 @@
       ],
       "lemma": "כל",
       "reason": "short_lemma"
+    },
+    {
+      "location": "romans.8.23.10",
+      "text": "בִּכּוּרֵי",
+      "strong": "Hb/Hk/H1061",
+      "prefixes": [
+        "Hb",
+        "Hk"
+      ],
+      "lemma": "בכור",
+      "reason": "prefix_reading"
     },
     {
       "location": "romans.8.27.1",

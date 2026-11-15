@@ -581,12 +581,12 @@ def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
     committed = dispositions.read_ledger()
     assert committed == rebuilt
     summary = committed["summary"]
-    assert summary["total"] == 11528 + 16084 + 1 + 1674
+    assert summary["total"] == 11528 + 16084 + 1 + 1657
     assert summary["by_family"]["prefix_metadata"] == {
         "benign": 1480, "corrected": 71, "already_reviewed": 374, "unresolved": 3569, "blocked": 0, "superseded": 0,
     }
     assert summary["by_family"]["outside_queue"] == {
-        "benign": 0, "corrected": 1675, "already_reviewed": 0, "unresolved": 0, "blocked": 0, "superseded": 0,
+        "benign": 0, "corrected": 1658, "already_reviewed": 0, "unresolved": 0, "blocked": 0, "superseded": 0,
     }
     assert summary["benign_lexical_review"] == {"pending": 1230, "reviewed": 250}
     assert summary["by_family"]["legacy_assignment"] == {
@@ -922,9 +922,9 @@ def test_reverting_restores_corrected_strongs_and_any_other_strong_edit_still_fa
 def test_committed_outside_queue_root_letter_batch_matches_its_generator():
     committed = json.loads(dispositions.OUTSIDE_ROOT_LETTER_BATCH.read_text(encoding="utf-8"))
     assert committed == dispositions.outside_root_letter_batch_from_disk()
-    assert len(committed["decisions"]) == 1674
+    assert len(committed["decisions"]) == 1657
     assert Counter(item["reason"] for item in committed["unresolved"]) == {
-        "prefix_reading": 852, "short_lemma": 838, "lemma_not_in_word": 644, "article_shape": 7, "manual_review": 3,
+        "prefix_reading": 869, "short_lemma": 838, "lemma_not_in_word": 644, "article_shape": 7, "manual_review": 3,
     }
 
 
@@ -950,6 +950,7 @@ def test_plausible_prefixes_outside_the_queue_stay_as_tagged():
         ("corinthians1.7.31.0", "article_shape", "corinthians1", 7, 31, 0, "Hc/Hd/H2008"),
         ("acts.6.1.18", "manual_review", "acts", 6, 1, 18, "Hl/H3861"),
         ("acts.10.2.6", "short_lemma", "acts", 10, 2, 6, "Hb/H1121"),
+        ("ephesians.1.5.2", "prefix_reading", "ephesians", 1, 5, 2, "Hl/Hb/H3836"),
     ):
         assert unresolved[location] == reason
         assert parsed_verse(book, chapter, verse)["words"][index]["strong"] == strong
@@ -966,9 +967,11 @@ def test_plausible_prefixes_outside_the_queue_stay_as_tagged():
     ("וְהַנֶּהֱנִים", ["Hc", "Hd"], "Hc/Hd/H2008", "הנה", None, (["Hc"], "article_shape", False)),
     ("לָבוֹא", ["Hl", "Hb"], "Hl/Hb/H935", "בוא", {"status": "needs_manual_review", "new_strong": "Hl/Hb/H935"}, (["Hl"], "manual_review", False)),
     ("לְבֵית", ["Hl"], "Hl/H1004", "בית", None, None),
+    ("לְבָנִים", ["Hl", "Hb"], "Hl/Hb/H3836", "לבנ", None, ([], "prefix_reading", False)),
+    ("לְבוּשׁוֹ", ["Hl", "Hb"], "Hl/Hb/H3830", "לבוש", None, ([], "lemma_check", True)),
 ])
 def test_outside_root_letter_is_certain_only_for_a_reviewed_strong_or_an_unambiguous_lemma(text, prefixes, strong, lemma, review, expected):
-    lemmas = frozenset({"בחר", "חרת", "המונ", "אש", "הנ", "בוא", "בית"})
+    lemmas = frozenset({"בחר", "חרת", "המונ", "אש", "הנ", "בוא", "בית", "בני"})
     found = dispositions.outside_root_letter(text, prefixes, strong, lemma, False, lemmas, review)
     assert (found and tuple(found)) == expected
 
@@ -992,3 +995,15 @@ def test_ledger_rejects_an_outside_queue_root_letter_decision_the_rule_does_not_
     ):
         with pytest.raises(ValueError, match="does not satisfy the outside-queue root-letter rule"):
             dispositions.build_ledger([], {"acts.13.45.4": decision}, readings)
+
+
+def test_a_correction_the_rule_no_longer_supports_is_withdrawn_through_the_decision_log():
+    sons = next(
+        json.loads(line) for line in reversed((dispositions.REPORTS.parent / "decisions/ephesians.jsonl").read_text(encoding="utf-8").splitlines())
+        if '"word_index": 2' in line and '"verse": 5' in line and '"chapter": 1' in line
+    )
+    assert (sons["issue_type"], sons["status"], sons["previous_strong"], sons["new_strong"], sons["new_prefixes"]) == (
+        dispositions.WITHDRAWN_ROOT_LETTER_ISSUE, "applied", "H3836", "Hl/Hb/H3836", ["Hl", "Hb"])
+    assert all(record["location"] != "ephesians.1.5.2" for record in dispositions.read_ledger()["records"])
+    assert "ephesians.1.5.2" not in dispositions.strong_reviews()
+    assert "לְ/בָ/נִים" in parsed_verse("ephesians", 1, 5)["hebrew"]

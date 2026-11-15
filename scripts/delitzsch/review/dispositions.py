@@ -35,6 +35,7 @@ LEGACY_FAMILY = "legacy_assignment"
 DECISION_FIELDS = ("status", "action", "issue_type", "previous_strong", "new_strong", "confidence", "reason", "logged_at")
 PREFIX_LETTERS = {"Hb": "ב", "Hl": "ל", "Hk": "כ", "Hc": "ו", "Hd": "ה", "Hm": "מ"}
 ROOT_LETTER_ISSUE = "root_letter_prefix"
+WITHDRAWN_ROOT_LETTER_ISSUE = "root_letter_prefix_withdrawn"
 STRONG_ISSUE = "strong_correction"
 OUTSIDE_QUEUE_ISSUES = {STRONG_ISSUE, ROOT_LETTER_ISSUE}
 EVIDENCE_KEYS = ("lexicon", "grammar", "context")
@@ -147,14 +148,15 @@ def outside_root_letter(text: str, prefixes: list[str], strong: str, lemma: str 
     if review is not None and review["status"] in STRONG_REVIEWED and (review.get("new_strong") or "").split("/")[-1] == strong.split("/")[-1]:
         return RootLetter(new_prefixes, "reviewed_strong", True)
     consonants = normalize_hebrew(text)
-    stem, kept = consonants[len(prefix_letters(prefixes)):], consonants[len(prefix_letters(new_prefixes)):]
+    kept = consonants[len(prefix_letters(new_prefixes)):]
+    stems = [consonants[len(prefix_letters(prefixes[:count])):] for count in range(len(new_prefixes) + 1, len(prefixes) + 1)]
     if review is not None and review["status"] == "needs_manual_review":
         reason = "manual_review"
     elif len(lemma) < 3:
         reason = "short_lemma"
     elif not kept.startswith(lemma):
         reason = "lemma_not_in_word"
-    elif stem in lemmas or any(stem[:length] in lemmas for length in range(3, len(stem))):
+    elif any(stem in lemmas or any(stem[:length] in lemmas for length in range(3, len(stem))) for stem in stems):
         reason = "prefix_reading"
     elif "Hd" in prefixes[len(new_prefixes):] and article_shaped(text, prefixes, is_root):
         reason = "article_shape"
@@ -396,7 +398,7 @@ def build_from_disk(report: Path = REPORT, decisions_dir: Path = REPORTS.parent 
 
 
 def strong_reviews(decisions_dir: Path = REPORTS.parent / "decisions") -> dict[str, dict[str, Any]]:
-    return load_latest_decisions(decisions_dir, keep=lambda entry: entry.get("issue_type") != ROOT_LETTER_ISSUE)
+    return load_latest_decisions(decisions_dir, keep=lambda entry: entry.get("issue_type") not in {ROOT_LETTER_ISSUE, WITHDRAWN_ROOT_LETTER_ISSUE})
 
 
 def outside_reading(word: Record, review: dict[str, Any] | None, lexicon: LexiconIndex, lemmas: frozenset[str]) -> Reading:
@@ -497,13 +499,26 @@ def outside_root_letter_decision(location: str, word: Record, reading: Reading, 
     )
 
 
+def withdrawn_root_letter_decision(location: str, word: Record, decision: dict[str, Any], reading: Reading) -> Record:
+    book, chapter_number, verse, index = location.split(".")
+    return dict(
+        action="set_strong", issue_type=WITHDRAWN_ROOT_LETTER_ISSUE, reviewer=OUTSIDE_ROOT_LETTER_REVIEWER, confidence=0.95,
+        occurrence=dict(book=book, chapter=int(chapter_number), verse=int(verse), word_index=int(index),
+                        text=word["text"], strong=word["strong"], prefixes=word.get("prefixes") or []),
+        previous_strong=word["strong"], new_strong=decision["previous_strong"], new_prefixes=decision["occurrence"]["prefixes"],
+        reason=f"The root-letter rule no longer finds the match certain ({reading.root_letter.basis}), so the correction logged at {decision['logged_at']} is withdrawn.",
+        evidence=dict(basis=reading.root_letter.basis, withdrawn={key: decision.get(key) for key in ("status", "previous_strong", "new_strong", "new_prefixes", "logged_at")}),
+    )
+
+
 def outside_root_letter_batch(queue: list[Record], corpus: dict[str, Any], decisions: dict[str, dict[str, Any]],
                               reviews: dict[str, dict[str, Any]], lexicon: LexiconIndex) -> dict[str, Any]:
     queued, lemmas = {entry["location"] for entry in queue}, lexicon_lemmas(lexicon)
     proposals, unresolved = [], []
     for _, _, _, current, location in words(corpus):
         decision = decisions.get(location)
-        word = decision["occurrence"] if decision is not None and decision.get("issue_type") == ROOT_LETTER_ISSUE else current
+        corrected = decision is not None and decision.get("issue_type") == ROOT_LETTER_ISSUE
+        word = decision["occurrence"] if corrected else current
         strong = word.get("strong")
         if location in queued or not word.get("prefixes") or not strong or strong.startswith("D"):
             continue
@@ -515,6 +530,8 @@ def outside_root_letter_batch(queue: list[Record], corpus: dict[str, Any], decis
         else:
             unresolved.append(dict(location=location, text=word["text"], strong=strong, prefixes=word["prefixes"],
                                    lemma=reading.lemma, reason=reading.root_letter.basis))
+            if corrected:
+                proposals.append(withdrawn_root_letter_decision(location, current, decision, reading))
     return dict(issue=380, rule="root_letter_prefix_outside_queue", rule_version=1, decisions=proposals, unresolved=unresolved)
 
 
