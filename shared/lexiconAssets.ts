@@ -23,6 +23,8 @@ export type LexiconDefinitionAsset = {
 	text_he?: string;
 	source?: string;
 	review_status?: "approved" | "imported" | "draft" | "blocked";
+	reviewed_by?: string;
+	review_reason?: string;
 	license?: string;
 	sense?: string;
 	definition_kind?: string;
@@ -488,6 +490,8 @@ const offlineDefinition = (definition: RawDefinition): RawDefinition =>
 		text_he: definition.text_he,
 		source: definition.source,
 		review_status: definition.review_status,
+		reviewed_by: definition.reviewed_by,
+		review_reason: definition.review_reason,
 		license: definition.license,
 		sense: definition.sense,
 		definition_kind: definition.definition_kind,

@@ -80,8 +80,8 @@ describe("dictionary bundle normalization", () => {
     expect(new Set(entries.map((entry) => entry.strong_number)).size).toBe(
       entries.length,
     );
-    expect(importedOverlaps).toHaveLength(59);
-    expect(importedDefinitionCount).toBe(92);
+    expect(importedOverlaps).toHaveLength(64);
+    expect(importedDefinitionCount).toBe(104);
     expect(importedOverlaps.every((strong) => byStrong.has(strong))).toBe(true);
   });
 
@@ -110,6 +110,32 @@ describe("dictionary bundle normalization", () => {
     expect(servant?.definitions.some((item) => item.language === "es" && item.text === "siervo")).toBe(true);
     expect(offline.get("H935")?.definitions.length).toBeGreaterThan(0);
     expect(offline.get("D0271")?.definitions.map((item) => item.language).sort()).toEqual(["en", "es"]);
+  });
+
+  test("keeps each TCY review outcome and reviewer in the offline bundle", async () => {
+    const custom = await fileJson<OfflineLexiconSources["custom_definitions"]>(
+      "data/dict/lexicon/custom_definitions.json",
+    );
+    const offline = offlineLexiconSources({ words: {}, roots: {}, custom_definitions: custom });
+    const review = (strong: string) =>
+      offline.custom_definitions[strong].definitions
+        ?.filter((item) => item.source === "tcysite-eric")
+        .map(({ review_status, reviewed_by, review_reason }) => ({
+          review_status,
+          reviewed_by,
+          review_reason,
+        }));
+
+    expect(review("H6948")).toContainEqual({
+      review_status: "blocked",
+      reviewed_by: "claude-tcy-review",
+      review_reason: "entry_unresolved",
+    });
+    expect(review("H8034")).toContainEqual({
+      review_status: "approved",
+      reviewed_by: "claude-tcy-review",
+      review_reason: undefined,
+    });
   });
 
   test("builds the same offline entries from the trimmed bundle as from the full lexicon", async () => {
