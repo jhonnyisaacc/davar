@@ -131,7 +131,7 @@ def root_letter_correction(entry: Record, decision: dict[str, Any] | None, readi
 
 
 def style_only_prefix(entry: Record, decision: dict[str, Any] | None, reading: Reading | None) -> Verdict | None:
-    if reading is None or len(reading.lemma or "") < 3 or entry["prior_review_status"] not in (None, *STRONG_CONFIRMED):
+    if reading is None or not reading.prefixes or len(reading.lemma or "") < 3 or entry["prior_review_status"] not in (None, *STRONG_CONFIRMED):
         return None
     consonants = normalize_hebrew(entry["text"])
     stem_length = len(consonants) - len(reading.prefixes)
@@ -142,7 +142,7 @@ def style_only_prefix(entry: Record, decision: dict[str, Any] | None, reading: R
         return None
     if not strong_reviewed and (reading.prefix_as_root or not consonants[len(reading.prefixes):].startswith(normalize_hebrew(reading.lemma)[:3])):
         return None
-    return Verdict("benign", "rule:style_only_prefix_v4", dict(
+    return Verdict("benign", "rule:style_only_prefix_v5", dict(
         consonants=consonants, prefixes=reading.prefixes,
         prefix_letters="".join(PREFIX_LETTERS[p] for p in reading.prefixes), lemma=reading.lemma,
         prior_decision=decision and {key: decision.get(key) for key in DECISION_FIELDS},
@@ -163,7 +163,7 @@ def unadjudicated(entry: Record, decision: dict[str, Any] | None, reading: Readi
 
 RULES: tuple[Rule, ...] = (
     ("root_letter_prefix", 1, root_letter_correction),
-    ("style_only_prefix", 4, style_only_prefix),
+    ("style_only_prefix", 5, style_only_prefix),
     ("prior_review_decision", 1, prior_review),
     ("unadjudicated", 1, unadjudicated),
 )

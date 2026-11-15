@@ -105,6 +105,8 @@ prior decision as evidence. It does not change a Strong number.
 
 A flag is `benign` only when all of these are true:
 
+- The word has at least one tagged prefix. A flag with no prefixes stays
+  `unresolved`.
 - The tagged prefix letters start the word, and the lemma's first two letters
   follow them.
 - The lemma has at least three letters, and the rest of the word is at least
