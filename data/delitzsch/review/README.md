@@ -49,6 +49,25 @@ definition is not listed in `definition_gaps_baseline.json`. The baseline only
 shrinks. Remove an identifier from it when its definition lands, and route a
 gap caused by a wrong identity to #159.
 
+## Publication status (issue #369)
+
+Each custom `D` entry that the Delitzsch text references carries a
+`publication` object: a `status` from `shared/customEntryPublication.json`
+(`approved`, `draft`, or `blocked`), the `rule` and `rule_version` that set it,
+and the decision-log lines that prove it. `python -m
+scripts.delitzsch.entry_publication write` sets it, and `check` fails when it
+is stale. Reruns write identical bytes.
+
+- `blocked`: a `needs_manual_review` decision names the entry.
+- `approved`: every definition that is not an import matches, in English and
+  Spanish, an applied `create_custom_entry` or `upsert_custom_definition`
+  decision for the entry that names its reviewer.
+- `draft`: anything else.
+
+The static-data build publishes only approved custom entries, so web, mobile
+online, and mobile offline read the same set. To publish a draft entry, log a
+reviewed decision for its definitions and rerun `write`.
+
 ## Disposition ledger (issue #159)
 
 `reports/besorah_dispositions_v1.json.gz` gives each occurrence in the

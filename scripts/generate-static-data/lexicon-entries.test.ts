@@ -1,4 +1,5 @@
 import { describe, expect, test } from "bun:test";
+import { publishedCustomEntries } from "../../shared/customEntryPublication";
 import { LEXICON_MEANINGS_SCHEMA } from "../../shared/definitionMeanings";
 import {
 	LEXICON_INSTANCE_SPLIT_THRESHOLD_BYTES,
@@ -202,5 +203,31 @@ describe("chapter asset splitting", () => {
 		});
 		expect(translit["1"].variants).toHaveLength(1);
 		expect(translit["2"].variants).toHaveLength(1);
+	});
+});
+
+describe("custom entry publication", () => {
+	const entry = (status?: string) => ({
+		definitions: [{ text_en: "in them", text_es: "en ellos" }],
+		...(status ? { publication: { status } } : {}),
+	});
+
+	test("publishes approved and unstatused entries and withholds the rest", () => {
+		const published = publishedCustomEntries({
+			D1: entry("approved"),
+			D2: entry("draft"),
+			D3: entry("blocked"),
+			H1: entry(),
+		});
+		expect(Object.keys(published)).toEqual(["D1", "H1"]);
+		const { shards } = buildLexiconAssets({}, {}, published);
+		const keys = Object.values(shards).flatMap((shard) => Object.keys(shard));
+		expect(keys.sort()).toEqual(["D1", "H1"]);
+	});
+
+	test("rejects a status outside the shared set", () => {
+		expect(() => publishedCustomEntries({ D1: entry("reviewed") })).toThrow(
+			"D1 has an invalid publication status",
+		);
 	});
 });

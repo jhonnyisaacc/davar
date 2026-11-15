@@ -324,11 +324,14 @@ export const initializeDatabase = async () => {
 
 const BATCH_SIZE = 500;
 
-export const insertLexiconEntries = async (entries: LexiconResponse[]) => {
-  for (let i = 0; i < entries.length; i += BATCH_SIZE) {
+export const replaceLexiconEntries = async (entries: LexiconResponse[]) => {
+  for (let i = 0; i < Math.max(entries.length, 1); i += BATCH_SIZE) {
     const batch = entries.slice(i, i + BATCH_SIZE);
     await executeWrite("BEGIN TRANSACTION;");
     try {
+      if (i === 0) {
+        await executeWrite("DELETE FROM lexicon;");
+      }
       for (const entry of batch) {
         const strong = String(entry.strong_number ?? "").trim();
         if (strong === "") {
