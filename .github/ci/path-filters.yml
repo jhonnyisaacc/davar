@@ -81,6 +81,7 @@ besorah:
   - tests/test_merge_strongs.py
   - tests/test_delitzsch_review.py
   - data/dict/lexicon/**
+  - shared/customEntryPublication.json
   - scripts/ci/**
   - .github/workflows/ci.yml
   - .github/ci/**
