@@ -43,6 +43,7 @@ PILOT_OUTPUT = "data/knowledge/generated/pilot-v1/"
 REFRESH_OUTPUTS = {
     "data/greek/preview/": ("greek/", "bundles/greek-sblgnt"),
     "data/dict/lexicon/": ("dict/", "bundles/dictionary"),
+    "data/delitzsch/parsed/": ("besorah/", "bundles/besorah"),
 }
 KNOWLEDGE_CODE = "scripts/knowledge/"
 KNOWLEDGE_TESTS = "tests/test_knowledge_"
