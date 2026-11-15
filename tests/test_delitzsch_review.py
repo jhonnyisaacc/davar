@@ -546,10 +546,6 @@ def queue_entry(location, reasons, prior=None):
             "prior_review_status": prior, "evidence": "heuristic only"}
 
 
-def no_lemma(strong):
-    return None
-
-
 def test_disposition_ledger_records_prior_reviews_and_leaves_the_rest_unresolved():
     queue = [
         queue_entry("acts.1.2.12", ["prefix_metadata_disagreement"], prior="applied"),
@@ -557,7 +553,7 @@ def test_disposition_ledger_records_prior_reviews_and_leaves_the_rest_unresolved
         queue_entry("acts.1.2.14", ["prefix_metadata_disagreement", "lexical_plausibility"]),
     ]
     decision = {"status": "applied", "action": "set_strong", "reviewer": "codex-desktop", "new_strong": "H977"}
-    first = dispositions.build_ledger(queue, {"acts.1.2.12": decision, "acts.9.9.9": decision}, no_lemma)
+    first = dispositions.build_ledger(queue, {"acts.1.2.12": decision, "acts.9.9.9": decision})
 
     assert first["schema_version"] == dispositions.SCHEMA_VERSION
     assert [(r["family"], r["disposition"], r["rule"], r["reviewer"]) for r in first["records"]] == [
@@ -570,12 +566,12 @@ def test_disposition_ledger_records_prior_reviews_and_leaves_the_rest_unresolved
     assert first["records"][0]["before"] == {"text": "בָּחַר", "strong": "H977"}
     assert first["summary"]["by_disposition"]["unresolved"] == 2
     assert first["summary"]["by_family"]["prefix_metadata"]["already_reviewed"] == 1
-    assert dispositions.serialize(first) == dispositions.serialize(dispositions.build_ledger(queue, {"acts.1.2.12": decision}, no_lemma))
+    assert dispositions.serialize(first) == dispositions.serialize(dispositions.build_ledger(queue, {"acts.1.2.12": decision}))
 
 
 def test_disposition_ledger_rejects_a_prior_review_without_its_decision():
     with pytest.raises(ValueError, match="no decision log entry"):
-        dispositions.build_ledger([queue_entry("acts.1.2.12", ["lexical_plausibility"], prior="skipped")], {}, no_lemma)
+        dispositions.build_ledger([queue_entry("acts.1.2.12", ["lexical_plausibility"], prior="skipped")], {})
 
 
 def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
@@ -585,8 +581,86 @@ def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
     assert committed == rebuilt
     summary = committed["summary"]
     assert summary["total"] == 11528
-    assert summary["by_disposition"]["corrected"] == 70
-    assert summary["by_disposition"]["already_reviewed"] == 718 - 70
+    assert summary["by_family"]["prefix_metadata"] == {
+        "benign": 1480, "corrected": 70, "already_reviewed": 374, "unresolved": 3570, "blocked": 0, "superseded": 0,
+    }
+    assert summary["benign_lexical_review"] == {"pending": 1230, "reviewed": 250}
+
+
+def test_style_only_prefixes_are_benign_with_lemma_evidence():
+    samaria = ledger_record("acts.1.8.12")
+    assert (samaria["disposition"], samaria["rule"], samaria["rule_version"]) == ("benign", "style_only_prefix", 4)
+    assert samaria["before"] == {"text": "וּבְשֹׁמְרוֹן", "strong": "H8111"}
+    assert samaria["after"] is None
+    evidence = samaria["evidence"]
+    assert (evidence["consonants"], evidence["prefix_letters"], evidence["lemma"]) == ("ובשמרונ", "וב", "שמרון")
+    assert evidence["prefixes"] == ["Hc", "Hb"]
+    assert evidence["prior_decision"]["new_strong"] == "H8111"
+    assert samaria["lexical_review"] == "reviewed"
+    assert ledger_record("luke.6.21.6")["disposition"] == "benign"
+    assert ledger_record("acts.1.2.12")["disposition"] == "corrected"
+
+
+def test_benign_prefix_without_a_reviewed_strong_stays_pending_lexical_review():
+    matthew = ledger_record("acts.1.13.17")
+    assert (matthew["disposition"], matthew["before"]) == ("benign", {"text": "וּמַתַּי", "strong": "H4970"})
+    assert matthew["evidence"]["prior_decision"] is None
+    assert matthew["lexical_review"] == "pending"
+    assert "lexical_review" not in ledger_record("acts.1.2.12")
+
+
+def test_style_only_rule_leaves_unsettled_prefix_flags_alone():
+    assert ledger_record("acts.13.15.14")["disposition"] == "unresolved"
+    assert ledger_record("acts.7.58.6")["disposition"] == "unresolved"
+    assert ledger_record("corinthians1.1.4.9")["disposition"] == "already_reviewed"
+    entry = queue_entry("acts.1.2.12", ["prefix_metadata_disagreement"])
+    readings = {"acts.1.2.12": dispositions.Reading(["Hb"], "בחר")}
+    [record] = dispositions.build_ledger([entry], {}, readings)["records"]
+    assert (record["disposition"], record["rule"]) == ("unresolved", "unadjudicated")
+    readings = {"acts.1.2.12": dispositions.Reading([], "בחר")}
+    [record] = dispositions.build_ledger([dict(entry, text="בְּבָחַר")], {}, readings)["records"]
+    assert record["disposition"] == "unresolved"
+
+
+def test_style_only_rule_does_not_settle_a_prefix_letter_another_lemma_reads_as_root():
+    confidence = ledger_record("acts.28.31.11")
+    assert (confidence["disposition"], confidence["before"]) == ("unresolved", {"text": "בִּטְחוֹן", "strong": "H2911"})
+    assert ledger_record("corinthians2.10.8.12")["disposition"] == "unresolved"
+    assert ledger_record("luke.8.30.7")["disposition"] == "unresolved"
+    entry = dict(queue_entry("acts.28.31.11", ["prefix_metadata_disagreement"]), text="בִּטְחוֹן", strong="H2911")
+    reviewed = {"status": "applied", "new_strong": "H2911", "reviewer": "r", "reason": "x", "logged_at": "t"}
+    readings = {"acts.28.31.11": dispositions.Reading(["Hb"], "טחון", False, True)}
+    [pending] = dispositions.build_ledger([entry], {}, readings)["records"]
+    [confirmed] = dispositions.build_ledger([dict(entry, prior_review_status="applied")], {"acts.28.31.11": reviewed}, readings)["records"]
+    assert (pending["disposition"], confirmed["disposition"], confirmed["lexical_review"]) == ("unresolved", "benign", "reviewed")
+
+
+def test_style_only_rule_does_not_settle_a_prefix_an_equal_length_lemma_reads_as_root():
+    without = ledger_record("hebrews.11.40.4")
+    assert (without["disposition"], without["before"]) == ("unresolved", {"text": "בִּלְעָדֵינוּ", "strong": "H5722"})
+    assert dispositions.reads_prefix_as_root("בלעדינו", 2, "עדינו", frozenset({"בלעדי"}))
+    assert not dispositions.reads_prefix_as_root("כדברו", 1, "דבר", frozenset({"כדב"}))
+    assert ledger_record("acts.1.13.17")["disposition"] == ledger_record("acts.1.8.12")["disposition"] == "benign"
+
+
+def test_style_only_rule_does_not_read_a_verb_stem_he_as_the_article():
+    assert ledger_record("acts.6.6.2")["before"]["text"] == "הֶעֱמִידוּ"
+    assert ledger_record("acts.6.6.2")["disposition"] == "unresolved"
+    assert ledger_record("romans.15.30.11")["disposition"] == "unresolved"
+    raise_up = ledger_record("acts.12.4.14")
+    assert (raise_up["before"]["text"], raise_up["disposition"], raise_up["rule"]) == ("לְהַעֲלוֹתוֹ", "already_reviewed", "prior_review_decision")
+    assert ledger_record("luke.6.21.6")["before"]["text"] == "הַבֹּכִים"
+
+    def disposition(text, prefixes, lemma, is_root=False):
+        entry = dict(queue_entry("acts.1.1.1", ["prefix_metadata_disagreement"]), text=text)
+        readings = {"acts.1.1.1": dispositions.Reading(prefixes, lemma, is_root)}
+        return dispositions.build_ledger([entry], {}, readings)["records"][0]["disposition"]
+
+    assert disposition("הַתַּלְמִידִים", ["Hd"], "תלמיד") == "benign"
+    assert disposition("הָעִבְרִיִּים", ["Hd"], "עברי") == "benign"
+    assert disposition("לְהַתַּלְמִידִים", ["Hl", "Hd"], "תלמיד") == "unresolved"
+    assert disposition("הַעֲמִיד", ["Hd"], "עמד", is_root=True) == "unresolved"
+    assert disposition("הִשְׁלִיכוּ", ["Hd"], "שלך", is_root=True) == "unresolved"
 
 
 def ledger_record(location):
@@ -697,10 +771,10 @@ def root_letter_tagged(location, text, strong, prefixes, new_prefixes, prior_str
 
 
 def test_ledger_rejects_a_root_letter_decision_the_rule_does_not_support():
-    lemmas = {"H977": "בחר", "H3922": "לכה"}.get
+    readings = {"acts.1.2.12": dispositions.Reading([], "בחר"), "luke.18.29.5": dispositions.Reading(["Hl"], "לכה")}
     chose = dict(queue_entry("acts.1.2.12", ["prefix_metadata_disagreement"], prior="applied"))
     valid = root_letter_tagged("acts.1.2.12", "בָּחַר", "H977", ["Hb"], [], "H977")
-    assert dispositions.build_ledger([chose], {"acts.1.2.12": valid}, lemmas)["records"][0]["disposition"] == "corrected"
+    assert dispositions.build_ledger([chose], {"acts.1.2.12": valid}, readings)["records"][0]["disposition"] == "corrected"
     you = dict(queue_entry("luke.18.29.5", ["prefix_metadata_disagreement"]), text="לָכֶם", strong="H3922")
     mistagged = root_letter_tagged("luke.18.29.5", "לָכֶם", "H3922", ["Hl"], [], None)
     for entry, decision in (
@@ -710,4 +784,4 @@ def test_ledger_rejects_a_root_letter_decision_the_rule_does_not_support():
         (dict(chose, prior_review_status=None), valid),
     ):
         with pytest.raises(ValueError, match="does not satisfy the root-letter rule"):
-            dispositions.build_ledger([entry], {entry["location"]: decision}, lemmas)
+            dispositions.build_ledger([entry], {entry["location"]: decision}, readings)
