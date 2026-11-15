@@ -581,4 +581,67 @@ def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
     assert committed == rebuilt
     summary = committed["summary"]
     assert summary["total"] == 11528
-    assert summary["by_disposition"]["already_reviewed"] == 718
+    assert summary["by_disposition"]["corrected"] == 70
+    assert summary["by_disposition"]["already_reviewed"] == 718 - 70
+
+
+def ledger_record(location):
+    return next(r for r in dispositions.read_ledger()["records"] if r["location"] == location)
+
+
+def parsed_verse(book, chapter, verse):
+    payload = json.loads((dispositions.ROOT / "data/delitzsch/parsed" / book / f"{chapter}.json").read_text(encoding="utf-8"))
+    return next(v for v in (payload[0] if isinstance(payload, list) else payload)["verses"] if v["verse"] == verse)
+
+
+def test_root_letter_prefixes_are_corrected_in_the_ledger_and_the_verse():
+    chose = ledger_record("acts.1.2.12")
+    assert (chose["disposition"], chose["rule"], chose["reviewer"]) == ("corrected", "root_letter_prefix", "rule:root_letter_prefix_v1")
+    assert chose["before"] == {"text": "בָּחַר", "strong": "H977", "prefixes": ["Hb"]}
+    assert chose["after"] == {"text": "בָּחַר", "strong": "H977", "prefixes": []}
+    assert (chose["evidence"]["consonants"], chose["evidence"]["lemma"]) == ("בחר", "בחר")
+    assert chose["evidence"]["strong_review"]["new_strong"] == "H977"
+    verse = parsed_verse("acts", 1, 2)
+    assert verse["words"][12]["prefixes"] == []
+    assert "אֲשֶׁר־בָּחַר בָּ/הֶם" in verse["hebrew"]
+
+    bread = ledger_record("acts.11.3.8")
+    assert (bread["disposition"], bread["before"]["prefixes"], bread["after"]["prefixes"]) == ("corrected", ["Hl"], [])
+    young_men = ledger_record("acts.2.17.14")
+    assert (young_men["before"]["prefixes"], young_men["after"]["prefixes"]) == (["Hc", "Hb"], ["Hc"])
+    assert "וּ/בַחוּרֵיכֶם" in parsed_verse("acts", 2, 17)["hebrew"]
+
+
+def test_plausible_prefix_readings_stay_unresolved():
+    for location in ("luke.18.29.5", "matthew.6.24.26", "matthew.2.2.7"):
+        assert ledger_record(location)["disposition"] == "unresolved"
+
+
+def test_root_letter_rule_needs_a_reviewed_strong_and_a_false_prefix():
+    entry = {"location": "acts.1.2.12", "strong": "H977", "reasons": ["prefix_metadata_disagreement"]}
+    reviewed = {"status": "applied", "new_strong": "H977", "reviewer": "codex-desktop", "reason": "choose", "logged_at": "t"}
+    word = {"text": "בָּחַר", "prefixes": ["Hb"]}
+    proposal = dispositions.root_letter_decision(entry, word, reviewed, "בחר")
+    assert (proposal["new_strong"], proposal["new_prefixes"], proposal["occurrence"]["prefixes"]) == ("H977", [], ["Hb"])
+    assert dispositions.root_letter_decision(entry, word, None, "בחר") is None
+    assert dispositions.root_letter_decision(entry, word, dict(reviewed, status="needs_manual_review"), "בחר") is None
+    confidence = {"text": "בְּבִטְחוֹן", "prefixes": ["Hb"]}
+    assert dispositions.root_letter_decision(dict(entry, strong="H986"), confidence, dict(reviewed, new_strong="H986"), "בטחונ") is None
+
+
+def test_committed_root_letter_batch_matches_its_generator():
+    committed = json.loads(dispositions.ROOT_LETTER_BATCH.read_text(encoding="utf-8"))
+    assert committed == dispositions.root_letter_batch_from_disk()
+    assert len(committed["decisions"]) == 70
+
+
+def test_reverting_ledger_corrections_restores_the_validated_remediation_corpus():
+    import gzip
+    from scripts.delitzsch.review.remediate import digest, load_corpus
+    plan = json.loads(gzip.decompress(dispositions.REPORT.read_bytes()))
+    records = dispositions.read_ledger()["records"]
+    corpus = load_corpus()
+    assert digest(dispositions.revert_corrections(corpus, records)) == plan["corpus_after_sha256"]
+    stale = [dict(r, after=dict(r["after"], prefixes=["Hb"])) for r in records if r["location"] == "acts.1.10.8"]
+    with pytest.raises(ValueError, match="corpus prefixes differ"):
+        dispositions.revert_corrections(corpus, stale)

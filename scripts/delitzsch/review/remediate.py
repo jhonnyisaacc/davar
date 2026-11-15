@@ -221,9 +221,10 @@ def main():
     else:
         plan=json.loads(gzip.decompress(args.plan.read_bytes()))
         if args.command=="apply": print('files_changed',apply_plan(plan))
+        from scripts.delitzsch.review.dispositions import read_ledger, revert_corrections
         corpus=load_corpus()
         errors=publication_errors(corpus,lexicon)
-        if errors or digest(corpus)!=plan['corpus_after_sha256']: raise SystemExit('Corpus does not match validated plan')
+        if errors or digest(revert_corrections(corpus,read_ledger()["records"]))!=plan['corpus_after_sha256']: raise SystemExit('Corpus does not match validated plan and the disposition ledger corrections')
         if args.command=="apply": print('custom_instances_added',sync_custom_instances(plan))
         print(json.dumps(metrics(corpus),indent=2))
 

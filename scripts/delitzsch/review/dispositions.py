@@ -1,14 +1,20 @@
 """Versioned disposition ledger for the Besorah remediation review queue (issue #159)."""
 from __future__ import annotations
 
+import copy
 import gzip
 import json
 from collections import Counter
 from pathlib import Path
-from typing import Any, Callable
+from typing import Any, Callable, NamedTuple
 
-from scripts.delitzsch.review.remediate import REPORTS, ROOT, digest, encoded
-from scripts.delitzsch.review.workflow import load_latest_decisions
+from scripts.delitzsch.review.remediate import REPORTS, ROOT, chapter, digest, encoded, load_corpus, words
+from scripts.delitzsch.review.workflow import (
+    LexiconIndex,
+    _refresh_verse_prefix_separators,
+    load_latest_decisions,
+    normalize_hebrew,
+)
 
 SCHEMA_VERSION = 1
 METHOD = "besorah_dispositions_v1"
@@ -21,10 +27,42 @@ FAMILIES = {
     ("prefix_metadata_disagreement", "lexical_plausibility"): "prefix_metadata_and_lexical",
 }
 DECISION_FIELDS = ("status", "action", "issue_type", "previous_strong", "new_strong", "confidence", "reason", "logged_at")
+PREFIX_LETTERS = {"Hb": "ב", "Hl": "ל", "Hk": "כ", "Hc": "ו", "Hd": "ה", "Hm": "מ"}
+ROOT_LETTER_ISSUE = "root_letter_prefix"
+ROOT_LETTER_BATCH = REPORTS.parent / "batches" / "root_letter_prefixes.json"
+STRONG_CONFIRMED = {"applied", "already_applied"}
 
 Record = dict[str, Any]
-Verdict = tuple[str, str | None, dict[str, Any]]
+
+
+class Verdict(NamedTuple):
+    disposition: str
+    reviewer: str | None
+    evidence: dict[str, Any]
+    before: dict[str, Any] = {}
+    after: dict[str, Any] | None = None
+
+
 Rule = tuple[str, int, Callable[[Record, dict[str, Any] | None], Verdict | None]]
+
+
+def real_prefix_count(consonants: str, prefixes: list[str], lemma: str) -> int | None:
+    for count in range(len(prefixes), -1, -1):
+        letters = "".join(PREFIX_LETTERS[prefix] for prefix in prefixes[:count])
+        if consonants.startswith(letters) and consonants[len(letters):].startswith(lemma[:2]):
+            return count
+    return None
+
+
+def root_letter_correction(entry: Record, decision: dict[str, Any] | None) -> Verdict | None:
+    if decision is None or decision.get("issue_type") != ROOT_LETTER_ISSUE or decision["status"] not in STRONG_CONFIRMED:
+        return None
+    occurrence = decision["occurrence"]
+    return Verdict(
+        "corrected", decision["reviewer"], dict(decision["evidence"], status=decision["status"], logged_at=decision["logged_at"]),
+        before=dict(prefixes=occurrence["prefixes"]),
+        after=dict(text=occurrence["text"], strong=decision["new_strong"], prefixes=decision["new_prefixes"]),
+    )
 
 
 def prior_review(entry: Record, decision: dict[str, Any] | None) -> Verdict | None:
@@ -32,14 +70,15 @@ def prior_review(entry: Record, decision: dict[str, Any] | None) -> Verdict | No
         return None
     if decision is None:
         raise ValueError(f"{entry['location']}: queue records a prior review but no decision log entry exists")
-    return "already_reviewed", decision["reviewer"], {"prior_decision": {key: decision.get(key) for key in DECISION_FIELDS}}
+    return Verdict("already_reviewed", decision["reviewer"], {"prior_decision": {key: decision.get(key) for key in DECISION_FIELDS}})
 
 
 def unadjudicated(entry: Record, decision: dict[str, Any] | None) -> Verdict:
-    return "unresolved", None, {}
+    return Verdict("unresolved", None, {})
 
 
 RULES: tuple[Rule, ...] = (
+    ("root_letter_prefix", 1, root_letter_correction),
     ("prior_review_decision", 1, prior_review),
     ("unadjudicated", 1, unadjudicated),
 )
@@ -50,12 +89,11 @@ def dispose(entry: Record, decision: dict[str, Any] | None) -> Record:
     for name, version, rule in RULES:
         if (verdict := rule(entry, decision)) is not None:
             break
-    disposition, reviewer, evidence = verdict
     return dict(
         location=entry["location"], source="review_queue", family=family, reasons=entry["reasons"],
-        disposition=disposition, rule=name, rule_version=version, reviewer=reviewer,
-        before=dict(text=entry["text"], strong=entry["strong"]), after=None,
-        evidence=dict(queue=entry["evidence"], **evidence),
+        disposition=verdict.disposition, rule=name, rule_version=version, reviewer=verdict.reviewer,
+        before=dict(text=entry["text"], strong=entry["strong"], **verdict.before), after=verdict.after,
+        evidence=dict(queue=entry["evidence"], **verdict.evidence),
     )
 
 
@@ -93,3 +131,57 @@ def build_from_disk(report: Path = REPORT, decisions_dir: Path = REPORTS.parent 
 
 def read_ledger(path: Path = LEDGER) -> dict[str, Any]:
     return json.loads(gzip.decompress(path.read_bytes()))
+
+
+def root_letter_decision(entry: Record, word: Record, decision: dict[str, Any] | None, lemma: str | None) -> Record | None:
+    if decision is not None and decision.get("issue_type") == ROOT_LETTER_ISSUE:
+        return {key: value for key, value in decision.items() if key not in ("status", "logged_at")}
+    prefixes = word.get("prefixes") or []
+    consonants = normalize_hebrew(word["text"])
+    count = real_prefix_count(consonants, prefixes, lemma) if lemma and len(lemma) >= 2 else None
+    if count is None or count == len(prefixes):
+        return None
+    if decision is None or decision["status"] not in STRONG_CONFIRMED or decision.get("new_strong") != entry["strong"]:
+        return None
+    book, chapter_number, verse, index = entry["location"].split(".")
+    return dict(
+        action="set_strong", issue_type=ROOT_LETTER_ISSUE, reviewer="rule:root_letter_prefix_v1", confidence=0.95,
+        occurrence=dict(book=book, chapter=int(chapter_number), verse=int(verse), word_index=int(index),
+                        text=word["text"], strong=entry["strong"], prefixes=prefixes),
+        previous_strong=entry["strong"], new_strong=entry["strong"], new_prefixes=prefixes[:count],
+        reason=f"The tagged prefix letters {''.join(PREFIX_LETTERS[p] for p in prefixes[count:])} begin the lemma {lemma} of the reviewed Strong {entry['strong']}, so they are root letters, not prefixes.",
+        evidence=dict(consonants=consonants, prefix_letters="".join(PREFIX_LETTERS[p] for p in prefixes), lemma=lemma,
+                      strong_review={key: decision.get(key) for key in ("reviewer", "status", "new_strong", "reason", "logged_at")}),
+    )
+
+
+def root_letter_batch(queue: list[Record], corpus: dict[str, Any], decisions: dict[str, dict[str, Any]], lexicon: LexiconIndex) -> dict[str, Any]:
+    by_location = {key: word for _, _, _, word, key in words(corpus)}
+    proposals = []
+    for entry in queue:
+        if entry["reasons"] != ["prefix_metadata_disagreement"]:
+            continue
+        proposal = root_letter_decision(entry, by_location[entry["location"]], decisions.get(entry["location"]), lexicon.normalized_lemma(entry["strong"]))
+        if proposal is not None:
+            proposals.append(proposal)
+    return dict(issue=366, rule="root_letter_prefix", rule_version=1, decisions=proposals)
+
+
+def root_letter_batch_from_disk() -> dict[str, Any]:
+    queue = json.loads(gzip.decompress(REPORT.read_bytes()))["review_queue"]
+    lexicon = LexiconIndex(ROOT / "data/dict/lexicon/words")
+    return root_letter_batch(queue, load_corpus(), load_latest_decisions(REPORTS.parent / "decisions"), lexicon)
+
+
+def revert_corrections(corpus: dict[str, Any], records: list[Record]) -> dict[str, Any]:
+    reverted = copy.deepcopy(corpus)
+    index = {key: (path, verse, word) for path, verse, _, word, key in words(reverted)}
+    for record in records:
+        if record["disposition"] != "corrected":
+            continue
+        path, verse, word = index[record["location"]]
+        if word.get("prefixes", []) != record["after"]["prefixes"]:
+            raise ValueError(f"{record['location']}: corpus prefixes differ from the corrected ledger value")
+        word["prefixes"] = record["before"]["prefixes"]
+        _refresh_verse_prefix_separators(chapter(reverted[path])["verses"], {"verse": verse["verse"]})
+    return reverted
