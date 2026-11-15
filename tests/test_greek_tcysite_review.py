@@ -92,6 +92,21 @@ def test_blocked_and_corrected_decisions():
     assert report["counts"] == {"tcysite-eric:blocked": 1, "tcysite-eric:corrected": 1}
 
 
+def test_decision_entry_moves_the_row_and_drops_an_emptied_import():
+    data = {
+        "H8007": {"imported_by": "tcysite", "definitions": [{**eric_row(), "term_language": "hebrew", "order": 1}]},
+        "H8001": {"definitions": [{"source": "custom", "text_es": "paz", "order": 4}]},
+    }
+    decisions = keyed(decision(entry="H8001"))
+    apply_reviews(data, decisions)
+    once = copy.deepcopy(data)
+    apply_reviews(data, decisions)
+    assert data == once
+    assert "H8007" not in data
+    moved = data["H8001"]["definitions"][1]
+    assert (moved["source"], moved["order"], moved["text_he"]) == ("tcysite-eric", 5, "שלום")
+
+
 def test_apply_is_idempotent():
     data = custom(eric_row(), {"source": "tcysite-greek-master", "text_es": "x", "review_status": "imported", "source_file": "greek/m.json", "source_row": "1"})
     decisions = keyed(decision())

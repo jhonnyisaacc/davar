@@ -31,10 +31,12 @@ GREEK_REVIEWER = "claude-tcy-review"
 REVIEW_FIELDS = ("text_en", "text_he", "reviewed_by", "review_reason")
 VERDICTS = frozenset({"approved", "corrected", "blocked"})
 REASONS = {
-    "third_party_lexicon": "Spanish edition of a third-party lexicon (Strong/Chávez, Tuggy, Vine, Swanson); the canonical Greek lexicon carries the English and Hebrew definitions",
+    "third_party_lexicon": "Spanish edition of a third-party lexicon (Strong/Chávez, Tuggy, Vine, Swanson), not the permitted Eric dictionary; for most of these entries the canonical Greek lexicon carries English and Hebrew definitions",
     "source_defect": "The Spanish source row has no translatable meaning",
+    "entry_unresolved": "The row is attached to the wrong entry and no single Strong number fits it",
 }
 HEBREW_LETTER = re.compile(r"[א-ת]")
+ENTRY_KEY = re.compile(r"[HGD]\d+[A-Za-z]?")
 RowKey = tuple[str, str]
 
 
@@ -64,6 +66,8 @@ def decision_errors(decision: dict[str, Any]) -> list[str]:
     for field in ("source_file", "source_row", "text_es", "reviewer", "evidence"):
         if not str(decision.get(field) or "").strip():
             errors.append(f"missing {field}")
+    if "entry" in decision and not ENTRY_KEY.fullmatch(str(decision["entry"])):
+        errors.append(f"invalid entry {decision['entry']!r}")
     if verdict == "blocked":
         if decision.get("reason") not in REASONS:
             errors.append(f"unknown reason {decision.get('reason')!r}")
@@ -114,7 +118,7 @@ def write_decisions(decisions: dict[RowKey, dict[str, Any]], path: Path = DECISI
 def reviewed_fields(definition: dict[str, Any], decision: dict[str, Any] | None) -> dict[str, Any]:
     if definition["source"] in GREEK_SOURCES:
         return {"review_status": "blocked", "reviewed_by": GREEK_REVIEWER, "review_reason": "third_party_lexicon"}
-    if decision is None or decision["text_es"] != definition["text_es"]:
+    if decision is None:
         return {"review_status": "imported"}
     if decision["verdict"] == "blocked":
         return {"review_status": "blocked", "reviewed_by": decision["reviewer"], "review_reason": decision["reason"]}
@@ -126,22 +130,48 @@ def reviewed_fields(definition: dict[str, Any], decision: dict[str, Any] | None)
     }
 
 
+def place(custom: dict[str, Any], strong: str, definition: dict[str, Any], target: str) -> None:
+    if target == strong:
+        return
+    source = custom[strong]
+    source["definitions"] = [item for item in source["definitions"] if item is not definition]
+    if not source["definitions"] and source.get("imported_by") == "tcysite":
+        del custom[strong]
+    entry = custom.setdefault(
+        target,
+        {
+            "strong_number": target,
+            "is_custom": True,
+            "term_language": definition.get("term_language"),
+            "canonical_strong": target if target[:1] in {"G", "H"} else None,
+            "imported_by": "tcysite",
+            "definitions": [],
+        },
+    )
+    definition["order"] = max((int(item.get("order", 0)) for item in entry["definitions"]), default=0) + 1
+    entry["definitions"].append(definition)
+
+
 def apply_reviews(
     custom: dict[str, Any], decisions: dict[RowKey, dict[str, Any]]
 ) -> dict[str, Any]:
     counts: Counter[str] = Counter()
     unreviewed: list[str] = []
     seen: set[RowKey] = set()
-    for strong, definition in tcy_rows(custom):
+    for strong, definition in list(tcy_rows(custom)):
         decision = decisions.get(row_key(definition)) if definition["source"] == ERIC_SOURCE else None
         if decision is not None:
             seen.add(row_key(definition))
+            if decision["text_es"] != definition["text_es"]:
+                decision = None
+        if decision is not None and decision.get("entry"):
+            place(custom, strong, definition, decision["entry"])
+            strong = decision["entry"]
         for field in REVIEW_FIELDS:
             definition.pop(field, None)
         fields = reviewed_fields(definition, decision)
         definition.update(fields)
-        verdict = decision["verdict"] if decision and fields["review_status"] != "imported" else fields["review_status"]
-        counts[f"{definition['source']}:{verdict}"] += 1
+        counts[f"{definition['source']}:{decision['verdict'] if decision else fields['review_status']}"] += 1
         if fields["review_status"] == "imported":
             unreviewed.append(f"{strong} {definition['source_file']}#{definition['source_row']}")
     orphans = sorted(f"{file}#{row}" for file, row in set(decisions) - seen)

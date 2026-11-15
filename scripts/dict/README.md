@@ -98,9 +98,11 @@ manifest metadata are unchanged, so repeated fetches remain deterministic.
   and `text_he`. A `corrected` decision keeps the earlier translation in
   `before`. A `blocked` decision names a reason and adds no text.
 - Greek rows are Spanish editions of third-party lexicons (Strong/Chávez,
-  Tuggy, Vine, Swanson). They are blocked with reason `third_party_lexicon`,
-  because the canonical Greek lexicon carries the English and Hebrew
-  definitions.
+  Tuggy, Vine, Swanson), not the Eric dictionary. They are blocked with
+  reason `third_party_lexicon`. For 13,367 of the 14,665 Greek rows, the
+  canonical Greek lexicon already has English and Hebrew definitions.
+- A decision can name `entry` to move a row the importer attached to the wrong
+  Strong number. `entry_before` records where it was.
 - Each reviewed row records `review_status` (`approved` or `blocked`),
   `reviewed_by`, and, when blocked, `review_reason`. A row whose Spanish text
   no longer matches its decision returns to `imported`.
