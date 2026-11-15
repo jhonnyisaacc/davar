@@ -26,21 +26,21 @@
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "medida"
+      "text_es": "codo"
     },
     {
       "text_en": "cubit",
       "source": "bdb",
       "order": 4,
       "sense": "1",
-      "text_es": "medida"
+      "text_es": "codo"
     },
     {
       "text_en": "measure",
       "source": "bdb",
       "order": 5,
       "sense": "2",
-      "text_es": "el netofatita"
+      "text_es": "medida"
     }
   ],
   "sources": {

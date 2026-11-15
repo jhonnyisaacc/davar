@@ -12,28 +12,28 @@
       "source": "bdb",
       "order": 1,
       "sense": "1",
-      "text_es": "mango"
+      "text_es": "empuñadura"
     },
     {
       "text_en": "hilt",
       "source": "bdb",
       "order": 2,
       "sense": "1",
-      "text_es": "prefecto"
+      "text_es": "mango"
     },
     {
       "text_en": "prefect",
       "source": "bdb",
       "order": 3,
       "sense": "2",
-      "text_es": "diputado"
+      "text_es": "prefecto"
     },
     {
       "text_en": "deputy",
       "source": "bdb",
       "order": 4,
       "sense": "2",
-      "text_es": "firmeza"
+      "text_es": "diputado"
     },
     {
       "text_en": "fixed",

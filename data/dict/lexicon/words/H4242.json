@@ -12,35 +12,35 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "alquiler"
+      "text_es": "precio"
     },
     {
       "text_en": "hire",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "colocado al frente"
+      "text_es": "alquiler"
     },
     {
       "text_en": "placed in front",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "presentado"
+      "text_es": "colocado al frente"
     },
     {
       "text_en": "presented",
       "source": "bdb",
       "order": 4,
       "sense": "0",
-      "text_es": "ofrecido"
+      "text_es": "presentado"
     },
     {
       "text_en": "offered",
       "source": "bdb",
       "order": 5,
       "sense": "0",
-      "text_es": "una hija de Zelofehad"
+      "text_es": "ofrecido"
     }
   ],
   "sources": {

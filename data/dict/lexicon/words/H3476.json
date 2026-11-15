@@ -19,7 +19,7 @@
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "lo que se debe"
+      "text_es": "rectitud"
     },
     {
       "text_en": "straightness",
@@ -47,21 +47,21 @@
       "source": "bdb",
       "order": 6,
       "sense": "2",
-      "text_es": "lo que se debe"
+      "text_es": "rectitud"
     },
     {
       "text_en": "what is due",
       "source": "bdb",
       "order": 7,
       "sense": "3",
-      "text_es": "derecho"
+      "text_es": "lo que se debe"
     },
     {
       "text_en": "right",
       "source": "bdb",
       "order": 8,
       "sense": "3",
-      "text_es": "recto"
+      "text_es": "derecho"
     }
   ],
   "sources": {

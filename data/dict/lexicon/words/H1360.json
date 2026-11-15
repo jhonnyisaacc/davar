@@ -12,35 +12,35 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "estanque"
+      "text_es": "cisterna"
     },
     {
       "text_en": "pool",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "cisterna"
+      "text_es": "estanque"
     },
     {
       "text_en": "cistern",
       "source": "bdb",
       "order": 3,
       "sense": "1",
-      "text_es": "estanque"
+      "text_es": "cisterna"
     },
     {
       "text_en": "pool",
       "source": "bdb",
       "order": 4,
       "sense": "2",
-      "text_es": "cisterna"
+      "text_es": "estanque"
     },
     {
       "text_en": "marsh",
       "source": "bdb",
       "order": 5,
       "sense": "2",
-      "text_es": "estanque"
+      "text_es": "pantano"
     }
   ],
   "sources": {

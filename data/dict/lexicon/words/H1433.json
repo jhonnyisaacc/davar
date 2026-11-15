@@ -26,28 +26,28 @@
       "source": "bdb",
       "order": 3,
       "sense": "1",
-      "text_es": "grandeza"
+      "text_es": "magnitud"
     },
     {
       "text_en": "magnificence",
       "source": "bdb",
       "order": 4,
       "sense": "2",
-      "text_es": "magnitud"
+      "text_es": "magnificencia"
     },
     {
       "text_en": "pride",
       "source": "bdb",
       "order": 5,
       "sense": "3",
-      "text_es": "magnificencia"
+      "text_es": "orgullo"
     },
     {
       "text_en": "insolence of heart",
       "source": "bdb",
       "order": 6,
       "sense": "3",
-      "text_es": "orgullo"
+      "text_es": "insolencia de corazón"
     }
   ],
   "sources": {

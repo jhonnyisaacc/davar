@@ -12,28 +12,28 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "cadáver"
+      "text_es": "cachorro"
     },
     {
       "text_en": "young",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "cachorro"
+      "text_es": "joven"
     },
     {
       "text_en": "whelps",
       "source": "bdb",
       "order": 3,
       "sense": "1",
-      "text_es": "joven"
+      "text_es": "cachorros"
     },
     {
       "text_en": "young of jackals",
       "source": "bdb",
       "order": 4,
       "sense": "2",
-      "text_es": "cachorros"
+      "text_es": "crías de chacales"
     }
   ],
   "sources": {

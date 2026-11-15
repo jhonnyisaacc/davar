@@ -12,56 +12,56 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "olla de fuego"
+      "text_es": "olla"
     },
     {
       "text_en": "basin",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "lavabo"
+      "text_es": "cuenca"
     },
     {
       "text_en": "pot",
       "source": "bdb",
       "order": 3,
       "sense": "1",
-      "text_es": "olla de fuego"
+      "text_es": "olla"
     },
     {
       "text_en": "fire-pot",
       "source": "bdb",
       "order": 4,
       "sense": "2",
-      "text_es": "cuenca"
+      "text_es": "olla de fuego"
     },
     {
       "text_en": "basin",
       "source": "bdb",
       "order": 5,
       "sense": "3",
-      "text_es": "lavabo"
+      "text_es": "cuenca"
     },
     {
       "text_en": "laver",
       "source": "bdb",
       "order": 6,
       "sense": "3",
-      "text_es": "plataforma"
+      "text_es": "lavabo"
     },
     {
       "text_en": "platform",
       "source": "bdb",
       "order": 7,
       "sense": "4",
-      "text_es": "escenario"
+      "text_es": "plataforma"
     },
     {
       "text_en": "stage",
       "source": "bdb",
       "order": 8,
       "sense": "4",
-      "text_es": "bribón"
+      "text_es": "escenario"
     }
   ],
   "sources": {
