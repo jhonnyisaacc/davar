@@ -297,6 +297,37 @@ async function drive(args: string[]): Promise<never> {
 				text: state.text,
 			});
 		}
+		if (action === "select") {
+			const name = (args[1] ?? "").trim();
+			const option = args.slice(2).join(" ").trim();
+			if (!name || !option) finish(false, { app, command: "drive", reason: "name-and-option-required" });
+			const selected = await evaluate<{ ok: boolean; reason?: string }>(
+				page,
+				`(() => {
+					const wanted = ${JSON.stringify(name)};
+					const optionLabel = ${JSON.stringify(option)};
+					const select = Array.from(document.querySelectorAll("select")).find(
+						(node) => (node.getAttribute("aria-label") || "").replace(/\\s+/g, " ").trim() === wanted,
+					);
+					if (!(select instanceof HTMLSelectElement)) return { ok: false, reason: "control-not-found" };
+					const match = Array.from(select.options).find(
+						(node) => node.textContent.replace(/\\s+/g, " ").trim() === optionLabel,
+					);
+					if (!match) return { ok: false, reason: "option-not-found" };
+					const setValue = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, "value").set;
+					setValue.call(select, match.value);
+					select.dispatchEvent(new Event("change", { bubbles: true }));
+					return { ok: true };
+				})()`,
+			);
+			if (!selected.ok) {
+				finish(false, { app, command: "drive", reason: selected.reason ?? "control-not-found", name, option });
+			}
+			await Bun.sleep(800);
+			rememberAction(app, `select ${name} ${option}`);
+			const state = await pageState(cdp);
+			finish(true, { app, command: "drive", action: "select", name, option, url: state.url, text: state.text });
+		}
 		finish(false, { app, command: "drive", reason: "unknown-action" });
 	} finally {
 		page.close();
