@@ -895,6 +895,55 @@ def test_ledger_records_a_reviewed_strong_correction_outside_the_queue_and_rejec
             dispositions.build_ledger([], {"mark.13.19.11": decision})
 
 
+def lexical_reviewed(action, status, new_strong, **extra):
+    occurrence = dict(book="corinthians1", chapter=11, verse=22, word_index=1, text="לָכֶם", strong="H5083", prefixes=["Hl"])
+    return {
+        **dict(
+            status=status, action=action, issue_type=dispositions.LEXICAL_ISSUE, reviewer="claude-delitzsch-review",
+            occurrence=occurrence, previous_strong="H5083", new_strong=new_strong, reason="H5083 gift is unrelated", logged_at="t",
+            evidence=dict(lexicon="H859 you", grammar="preposition with 2mp suffix", context="have you no houses"),
+        ),
+        **extra,
+    }
+
+
+def lexical_ledger(decision):
+    entry = dict(queue_entry("corinthians1.11.22.1", ["prefix_metadata_disagreement"]), text="לָכֶם", strong="H5083")
+    [record] = dispositions.build_ledger([entry], {entry["location"]: decision})["records"]
+    return record
+
+
+def test_lexical_reviews_keep_correct_or_block_a_queued_occurrence():
+    kept = lexical_ledger(lexical_reviewed("skip", "skipped", "H5083"))
+    assert (kept["disposition"], kept["rule"], kept["reviewer"], kept["lexical_review"]) == ("benign", "lexical_review", "claude-delitzsch-review", "reviewed")
+    blocked = lexical_ledger(lexical_reviewed("needs_manual_review", "needs_manual_review", "H5083"))
+    assert (blocked["disposition"], blocked["evidence"]["reason"]) == ("blocked", "H5083 gift is unrelated")
+    corrected = lexical_ledger(lexical_reviewed("set_strong", "applied", "Hl/H859"))
+    assert (corrected["disposition"], corrected["rule"], corrected["rule_version"]) == ("corrected", "reviewed_strong_correction", 2)
+    assert (corrected["before"], corrected["after"]) == (
+        {"text": "לָכֶם", "strong": "H5083", "prefixes": ["Hl"]}, {"text": "לָכֶם", "strong": "Hl/H859", "prefixes": ["Hl"]})
+    dropped = lexical_ledger(lexical_reviewed("set_strong", "applied", "H3922", new_prefixes=[]))
+    assert dropped["after"] == {"text": "לָכֶם", "strong": "H3922", "prefixes": []}
+
+
+@pytest.mark.parametrize("decision, rule", [
+    (lexical_reviewed("skip", "skipped", "H859"), "lexical review rule"),
+    (lexical_reviewed("skip", "skipped", "H5083", new_prefixes=[]), "lexical review rule"),
+    (lexical_reviewed("skip", "skipped", "H5083", reviewer="rule:anything_v1"), "lexical review rule"),
+    (lexical_reviewed("needs_manual_review", "needs_manual_review", "H5083", reason=""), "lexical review rule"),
+    (lexical_reviewed("set_strong", "applied", "H859"), "reviewed Strong correction rule"),
+    (lexical_reviewed("set_strong", "applied", "Hl/H5083"), "reviewed Strong correction rule"),
+    (lexical_reviewed("set_strong", "applied", "Hb/H859", new_prefixes=["Hb"]), "reviewed Strong correction rule"),
+    (lexical_reviewed("set_strong", "error", "Hl/H859"), "reviewed Strong correction rule"),
+    (lexical_reviewed("set_strong", "applied", "Hl/H859", previous_strong="H3922"), "reviewed Strong correction rule"),
+    (lexical_reviewed("set_strong", "applied", "Hl/H859", reviewer="rule:anything_v1"), "reviewed Strong correction rule"),
+    (lexical_reviewed("set_strong", "applied", "Hl/H859", evidence=dict(lexicon="H859", grammar="suffix")), "reviewed Strong correction rule"),
+])
+def test_ledger_rejects_a_lexical_review_the_rules_do_not_support(decision, rule):
+    with pytest.raises(ValueError, match=f"does not satisfy the {rule}"):
+        lexical_ledger(decision)
+
+
 def mark_13_19_words(corpus):
     payload = corpus["mark/13.json"]
     return next(v for v in (payload[0] if isinstance(payload, list) else payload)["verses"] if v["verse"] == 19)["words"]

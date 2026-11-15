@@ -226,7 +226,7 @@ def reviewed_strong_correction(entry: Record, decision: dict[str, Any] | None, r
         or (decision["issue_type"] == STRONG_ISSUE and "new_prefixes" in decision)
         or occurrence["text"] != entry["text"]
         or not decision["previous_strong"] == occurrence["strong"] == entry["strong"]
-        or (new_strong, new_prefixes) == (entry["strong"], prefixes)
+        or (new_strong.split("/")[-1], new_prefixes) == (entry["strong"].split("/")[-1], prefixes)
         or new_strong.split("/")[:-1] != new_prefixes
         or not normalize_hebrew(entry["text"]).startswith(prefix_letters(new_prefixes))
         or not reviewed_evidence(decision)
