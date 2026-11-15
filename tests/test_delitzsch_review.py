@@ -580,9 +580,12 @@ def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
     committed = dispositions.read_ledger()
     assert committed == rebuilt
     summary = committed["summary"]
-    assert summary["total"] == 11528 + 16084
+    assert summary["total"] == 11528 + 16084 + 1
     assert summary["by_family"]["prefix_metadata"] == {
-        "benign": 1480, "corrected": 70, "already_reviewed": 374, "unresolved": 3570, "blocked": 0, "superseded": 0,
+        "benign": 1480, "corrected": 71, "already_reviewed": 374, "unresolved": 3569, "blocked": 0, "superseded": 0,
+    }
+    assert summary["by_family"]["outside_queue"] == {
+        "benign": 0, "corrected": 1, "already_reviewed": 0, "unresolved": 0, "blocked": 0, "superseded": 0,
     }
     assert summary["benign_lexical_review"] == {"pending": 1230, "reviewed": 250}
     assert summary["by_family"]["legacy_assignment"] == {
@@ -845,3 +848,71 @@ def test_ledger_rejects_a_root_letter_decision_the_rule_does_not_support():
     ):
         with pytest.raises(ValueError, match="does not satisfy the root-letter rule"):
             dispositions.build_ledger([entry], {entry["location"]: decision}, readings)
+
+
+def test_issue_379_strong_corrections_are_recorded_with_before_and_after_evidence():
+    creation = ledger_record("mark.13.19.11")
+    assert (creation["source"], creation["family"], creation["disposition"], creation["rule"]) == (
+        "decision_log", "outside_queue", "corrected", "reviewed_strong_correction")
+    assert creation["before"] == {"text": "הַבְּרִיאָה", "strong": "Hd/H1277", "prefixes": ["Hd"]}
+    assert creation["after"] == {"text": "הַבְּרִיאָה", "strong": "Hd/H1278", "prefixes": ["Hd"]}
+    assert all(creation["evidence"][key] for key in ("lexicon", "grammar", "context", "reason"))
+    bride = ledger_record("revelation.21.2.12")
+    assert (bride["source"], bride["family"], bride["disposition"]) == ("review_queue", "prefix_metadata", "corrected")
+    assert (bride["before"]["strong"], bride["after"]["strong"]) == ("H5369", "Hk/H3618")
+    assert parsed_verse("mark", 13, 19)["words"][11]["strong"] == "Hd/H1278"
+    assert parsed_verse("revelation", 21, 2)["words"][12]["strong"] == "Hk/H3618"
+
+
+def strong_corrected(location, text, strong, prefixes, new_strong):
+    book, chapter, verse, index = location.split(".")
+    return dict(
+        status="applied", action="set_strong", issue_type=dispositions.STRONG_ISSUE, reviewer="claude-delitzsch-review",
+        occurrence=dict(book=book, chapter=int(chapter), verse=int(verse), word_index=int(index), text=text, strong=strong, prefixes=prefixes),
+        previous_strong=strong, new_strong=new_strong, reason="creation", logged_at="t",
+        evidence=dict(lexicon="H1278", grammar="article", context="creation"),
+    )
+
+
+def test_ledger_records_a_reviewed_strong_correction_outside_the_queue_and_rejects_unsupported_ones():
+    valid = strong_corrected("mark.13.19.11", "הַבְּרִיאָה", "Hd/H1277", ["Hd"], "Hd/H1278")
+    [record] = dispositions.build_ledger([], {"mark.13.19.11": valid})["records"]
+    assert (record["source"], record["family"], record["disposition"], record["after"]["strong"]) == (
+        "decision_log", "outside_queue", "corrected", "Hd/H1278")
+    assert dispositions.build_ledger([], {"mark.13.19.11": dict(valid, issue_type="definition_review")})["records"] == []
+    evidence = valid["evidence"]
+    for decision in (
+        dict(valid, status="needs_manual_review"),
+        dict(valid, reviewer="rule:anything_v1"),
+        dict(valid, new_strong="H1278"),
+        dict(valid, new_strong="Hd/H1277"),
+        dict(valid, previous_strong="Hd/H1279"),
+        dict(valid, new_prefixes=[]),
+        dict(valid, evidence={key: value for key, value in evidence.items() if key != "context"}),
+    ):
+        with pytest.raises(ValueError, match="does not satisfy the reviewed Strong correction rule"):
+            dispositions.build_ledger([], {"mark.13.19.11": decision})
+
+
+def mark_13_19_words(corpus):
+    payload = corpus["mark/13.json"]
+    return next(v for v in (payload[0] if isinstance(payload, list) else payload)["verses"] if v["verse"] == 19)["words"]
+
+
+def test_reverting_restores_corrected_strongs_and_any_other_strong_edit_still_fails():
+    import gzip
+    from scripts.delitzsch.review.remediate import digest, load_corpus
+    plan = json.loads(gzip.decompress(dispositions.REPORT.read_bytes()))
+    records = dispositions.read_ledger()["records"]
+    reverted = dispositions.revert_corrections(load_corpus(), records)
+    assert digest(reverted) == plan["corpus_after_sha256"]
+    assert mark_13_19_words(reverted)[11]["strong"] == "Hd/H1277"
+
+    def edited(index, strong):
+        corpus = load_corpus()
+        mark_13_19_words(corpus)[index]["strong"] = strong
+        return corpus
+
+    with pytest.raises(ValueError, match="corpus Strong differs"):
+        dispositions.revert_corrections(edited(11, "Hd/H1279"), records)
+    assert digest(dispositions.revert_corrections(edited(12, "H1"), records)) != plan["corpus_after_sha256"]

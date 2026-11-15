@@ -1,0 +1,53 @@
+{
+  "issue": 379,
+  "decisions": [
+    {
+      "action": "set_strong",
+      "issue_type": "strong_correction",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.98,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 13,
+        "verse": 19,
+        "word_index": 11,
+        "text": "הַבְּרִיאָה",
+        "strong": "Hd/H1277",
+        "prefixes": ["Hd"]
+      },
+      "previous_strong": "Hd/H1277",
+      "new_strong": "Hd/H1278",
+      "reason": "הַבְּרִיאָה is the article with בְּרִיאָה, creation (H1278). H1277 בָּרִיא means fat or healthy and does not fit the verse.",
+      "evidence": {
+        "lexicon": "H1278 בְּרִיאָה: a creation, thing created. H1277 בָּרִיא: fat; healthy, sound.",
+        "grammar": "Patah under ה with dagesh in the following בּ is the article. The rest of the word, בְּרִיאָה, has the consonants and vowels of the H1278 lemma, including the final ה.",
+        "context": "מֵרֵאשִׁית הַבְּרִיאָה אֲשֶׁר בָּרָא אֱלֹהִים, from the beginning of the creation which God created. The relative clause uses the verb בָּרָא from the same root.",
+        "issue": "https://github.com/jhonnyisaacc/davar/issues/379"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "strong_correction",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.98,
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 21,
+        "verse": 2,
+        "word_index": 12,
+        "text": "כַכַּלָּה",
+        "strong": "H5369",
+        "prefixes": ["Hk"]
+      },
+      "previous_strong": "H5369",
+      "new_strong": "Hk/H3618",
+      "reason": "כַכַּלָּה is the preposition כְּ with the article before כַּלָּה, bride (H3618). H5369 נֵר (lamp, Nêr) shares no letters with the stem.",
+      "evidence": {
+        "lexicon": "H3618 כַּלָּה: daughter-in-law, bride. H5369 נֵר (Nêr): lamp.",
+        "grammar": "Patah under the first כ with dagesh in the second כּ is כְּ with the article absorbed. The stem כַּלָּה is the H3618 lemma, and the tagged Hk prefix stays.",
+        "context": "נְכוֹנָה כַכַּלָּה הַמְקֻשֶּׁטֶת לְבַעְלָהּ, prepared as the bride adorned for her husband.",
+        "issue": "https://github.com/jhonnyisaacc/davar/issues/379"
+      }
+    }
+  ]
+}

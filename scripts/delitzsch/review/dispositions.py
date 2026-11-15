@@ -27,12 +27,17 @@ FAMILIES = {
     ("prefix_metadata_disagreement",): "prefix_metadata",
     ("lexical_plausibility",): "lexical_plausibility",
     ("prefix_metadata_disagreement", "lexical_plausibility"): "prefix_metadata_and_lexical",
+    (): "outside_queue",
 }
 LEGACY_SOURCE = "legacy_assignment_review"
+DECISION_SOURCE = "decision_log"
 LEGACY_FAMILY = "legacy_assignment"
 DECISION_FIELDS = ("status", "action", "issue_type", "previous_strong", "new_strong", "confidence", "reason", "logged_at")
 PREFIX_LETTERS = {"Hb": "ב", "Hl": "ל", "Hk": "כ", "Hc": "ו", "Hd": "ה", "Hm": "מ"}
 ROOT_LETTER_ISSUE = "root_letter_prefix"
+STRONG_ISSUE = "strong_correction"
+OUTSIDE_QUEUE_ISSUES = {STRONG_ISSUE}
+EVIDENCE_KEYS = ("lexicon", "grammar", "context")
 ROOT_LETTER_BATCH = REPORTS.parent / "batches" / "root_letter_prefixes.json"
 STRONG_CONFIRMED = {"applied", "already_applied"}
 PREFIX_ONLY = ["prefix_metadata_disagreement"]
@@ -139,6 +144,30 @@ def root_letter_correction(entry: Record, decision: dict[str, Any] | None, readi
     )
 
 
+def reviewed_strong_correction(entry: Record, decision: dict[str, Any] | None, reading: Reading | None) -> Verdict | None:
+    if decision is None or decision.get("issue_type") != STRONG_ISSUE:
+        return None
+    occurrence, new_strong = decision["occurrence"], decision["new_strong"]
+    prefixes = occurrence["prefixes"]
+    if (
+        decision["status"] not in STRONG_CONFIRMED
+        or decision["action"] != "set_strong"
+        or decision["reviewer"].startswith("rule:")
+        or "new_prefixes" in decision
+        or occurrence["text"] != entry["text"]
+        or not decision["previous_strong"] == occurrence["strong"] == entry["strong"] != new_strong
+        or new_strong.split("/")[:-1] != prefixes
+        or not all(decision.get("evidence", {}).get(key) for key in EVIDENCE_KEYS)
+    ):
+        raise ValueError(f"{entry['location']}: Strong correction does not satisfy the reviewed Strong correction rule")
+    return Verdict(
+        "corrected", decision["reviewer"],
+        dict(decision["evidence"], reason=decision["reason"], status=decision["status"], logged_at=decision["logged_at"]),
+        before=dict(prefixes=prefixes),
+        after=dict(text=occurrence["text"], strong=new_strong, prefixes=prefixes),
+    )
+
+
 def style_only_prefix(entry: Record, decision: dict[str, Any] | None, reading: Reading | None) -> Verdict | None:
     if reading is None or not reading.prefixes or len(reading.lemma or "") < 3 or entry["prior_review_status"] not in (None, *STRONG_CONFIRMED):
         return None
@@ -172,6 +201,7 @@ def unadjudicated(entry: Record, decision: dict[str, Any] | None, reading: Readi
 
 RULES: tuple[Rule, ...] = (
     ("root_letter_prefix", 1, root_letter_correction),
+    ("reviewed_strong_correction", 1, reviewed_strong_correction),
     ("style_only_prefix", 5, style_only_prefix),
     ("prior_review_decision", 1, prior_review),
     ("unadjudicated", 1, unadjudicated),
@@ -229,13 +259,23 @@ def legacy_matches(rows: list[Record], corpus: dict[str, Any], decisions: dict[s
     return [[Match(loc, by_location.get(loc), decisions.get(loc)) for loc in row["matching_locations"]] for row in rows]
 
 
+def outside_queue_entries(queue: list[Record], decisions: dict[str, dict[str, Any]]) -> list[Record]:
+    queued = {entry["location"] for entry in queue}
+    return [
+        dict(location=location, source=DECISION_SOURCE, text=decision["occurrence"]["text"], strong=decision["occurrence"]["strong"],
+             reasons=[], prior_review_status=None, evidence="not in review_queue")
+        for location, decision in sorted(decisions.items())
+        if location not in queued and decision.get("issue_type") in OUTSIDE_QUEUE_ISSUES
+    ]
+
+
 def dispose(entry: Record, decision: dict[str, Any] | None, reading: Reading | None) -> Record:
     family = FAMILIES[tuple(entry["reasons"])]
     for name, version, rule in RULES:
         if (verdict := rule(entry, decision, reading)) is not None:
             break
     record = dict(
-        location=entry["location"], source="review_queue", family=family, reasons=entry["reasons"],
+        location=entry["location"], source=entry.get("source", "review_queue"), family=family, reasons=entry["reasons"],
         disposition=verdict.disposition, rule=name, rule_version=version, reviewer=verdict.reviewer,
         before=dict(text=entry["text"], strong=entry["strong"], **verdict.before), after=verdict.after,
         evidence=dict(queue=entry["evidence"], **verdict.evidence),
@@ -250,9 +290,10 @@ def build_ledger(
     legacy: list[Record] = (), matches: list[list[Match]] = (),
 ) -> dict[str, Any]:
     readings = readings or {}
-    records = [dispose(entry, decisions.get(entry["location"]), readings.get(entry["location"])) for entry in queue]
+    outside = outside_queue_entries(queue, decisions)
+    records = [dispose(entry, decisions.get(entry["location"]), readings.get(entry["location"])) for entry in (*queue, *outside)]
     records += [dispose_legacy(index, row, row_matches) for index, (row, row_matches) in enumerate(zip(legacy, matches, strict=True))]
-    locations = {r["location"] for r in queue} | {m.location for row_matches in matches for m in row_matches}
+    locations = {r["location"] for r in (*queue, *outside)} | {m.location for row_matches in matches for m in row_matches}
     used = {location: decisions[location] for location in locations if location in decisions}
     by_family: dict[str, Counter] = {family: Counter() for family in (*FAMILIES.values(), LEGACY_FAMILY)}
     for record in records:
@@ -365,11 +406,13 @@ def revert_corrections(corpus: dict[str, Any], records: list[Record]) -> dict[st
         path, verse, word = index[record["location"]]
         if word.get("prefixes", []) != record["after"]["prefixes"]:
             raise ValueError(f"{record['location']}: corpus prefixes differ from the corrected ledger value")
+        if word.get("strong") != record["after"]["strong"]:
+            raise ValueError(f"{record['location']}: corpus Strong differs from the corrected ledger value")
         rebuilt = copy.deepcopy(verse)
         _refresh_verse_prefix_separators([rebuilt], {"verse": verse["verse"]})
         if rebuilt["hebrew"] != verse["hebrew"]:
             raise ValueError(f"{record['location']}: verse separators differ from the ones its words produce")
-        word["prefixes"] = record["before"]["prefixes"]
+        word["prefixes"], word["strong"] = record["before"]["prefixes"], record["before"]["strong"]
         _refresh_verse_prefix_separators(chapter(reverted[path])["verses"], {"verse": verse["verse"]})
     return reverted
 
