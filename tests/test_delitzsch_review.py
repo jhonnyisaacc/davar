@@ -546,6 +546,10 @@ def queue_entry(location, reasons, prior=None):
             "prior_review_status": prior, "evidence": "heuristic only"}
 
 
+def no_lemma(strong):
+    return None
+
+
 def test_disposition_ledger_records_prior_reviews_and_leaves_the_rest_unresolved():
     queue = [
         queue_entry("acts.1.2.12", ["prefix_metadata_disagreement"], prior="applied"),
@@ -553,7 +557,7 @@ def test_disposition_ledger_records_prior_reviews_and_leaves_the_rest_unresolved
         queue_entry("acts.1.2.14", ["prefix_metadata_disagreement", "lexical_plausibility"]),
     ]
     decision = {"status": "applied", "action": "set_strong", "reviewer": "codex-desktop", "new_strong": "H977"}
-    first = dispositions.build_ledger(queue, {"acts.1.2.12": decision, "acts.9.9.9": decision})
+    first = dispositions.build_ledger(queue, {"acts.1.2.12": decision, "acts.9.9.9": decision}, no_lemma)
 
     assert first["schema_version"] == dispositions.SCHEMA_VERSION
     assert [(r["family"], r["disposition"], r["rule"], r["reviewer"]) for r in first["records"]] == [
@@ -566,12 +570,12 @@ def test_disposition_ledger_records_prior_reviews_and_leaves_the_rest_unresolved
     assert first["records"][0]["before"] == {"text": "בָּחַר", "strong": "H977"}
     assert first["summary"]["by_disposition"]["unresolved"] == 2
     assert first["summary"]["by_family"]["prefix_metadata"]["already_reviewed"] == 1
-    assert dispositions.serialize(first) == dispositions.serialize(dispositions.build_ledger(queue, {"acts.1.2.12": decision}))
+    assert dispositions.serialize(first) == dispositions.serialize(dispositions.build_ledger(queue, {"acts.1.2.12": decision}, no_lemma))
 
 
 def test_disposition_ledger_rejects_a_prior_review_without_its_decision():
     with pytest.raises(ValueError, match="no decision log entry"):
-        dispositions.build_ledger([queue_entry("acts.1.2.12", ["lexical_plausibility"], prior="skipped")], {})
+        dispositions.build_ledger([queue_entry("acts.1.2.12", ["lexical_plausibility"], prior="skipped")], {}, no_lemma)
 
 
 def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
@@ -645,3 +649,65 @@ def test_reverting_ledger_corrections_restores_the_validated_remediation_corpus(
     stale = [dict(r, after=dict(r["after"], prefixes=["Hb"])) for r in records if r["location"] == "acts.1.10.8"]
     with pytest.raises(ValueError, match="corpus prefixes differ"):
         dispositions.revert_corrections(corpus, stale)
+
+
+def corpus_with_acts_1_2(hebrew):
+    from scripts.delitzsch.review.remediate import load_corpus
+    corpus = load_corpus()
+    payload = corpus["acts/1.json"]
+    verse = next(v for v in (payload[0] if isinstance(payload, list) else payload)["verses"] if v["verse"] == 2)
+    assert verse["hebrew"] != hebrew(verse["hebrew"])
+    verse["hebrew"] = hebrew(verse["hebrew"])
+    return corpus
+
+
+@pytest.mark.parametrize("hebrew", [
+    lambda text: text.replace("בָּ/הֶם", "בָּהֶם"),
+    lambda text: text.replace("עַד", "ע/ַד", 1),
+])
+def test_reverting_rejects_a_separator_change_on_another_word_of_a_corrected_verse(hebrew):
+    records = dispositions.read_ledger()["records"]
+    with pytest.raises(ValueError, match="separators differ"):
+        dispositions.revert_corrections(corpus_with_acts_1_2(hebrew), records)
+
+
+def test_rerunning_the_remediation_apply_after_ledger_corrections_changes_nothing(tmp_path):
+    import gzip
+    import shutil
+    from scripts.delitzsch.review.remediate import PARSED, apply_plan
+    plan = json.loads(gzip.decompress(dispositions.REPORT.read_bytes()))
+    records = dispositions.read_ledger()["records"]
+    shutil.copytree(PARSED, tmp_path, dirs_exist_ok=True)
+    before = {path: (tmp_path / path).read_bytes() for path in plan["files"]}
+    assert apply_plan(plan, tmp_path, revert=lambda path, payload: dispositions.revert_file(path, payload, records)) == 0
+    assert {path: (tmp_path / path).read_bytes() for path in plan["files"]} == before
+    (tmp_path / "acts/1.json").write_text((tmp_path / "acts/1.json").read_text(encoding="utf-8").replace("בָּ/הֶם", "בָּהֶם"), encoding="utf-8")
+    with pytest.raises(ValueError, match="separators differ"):
+        apply_plan(plan, tmp_path, revert=lambda path, payload: dispositions.revert_file(path, payload, records))
+
+
+def root_letter_tagged(location, text, strong, prefixes, new_prefixes, prior_strong):
+    book, chapter, verse, index = location.split(".")
+    return dict(
+        status="applied", action="set_strong", issue_type=dispositions.ROOT_LETTER_ISSUE, reviewer="rule:root_letter_prefix_v1",
+        occurrence=dict(book=book, chapter=int(chapter), verse=int(verse), word_index=int(index), text=text, strong=strong, prefixes=prefixes),
+        previous_strong=strong, new_strong=strong, new_prefixes=new_prefixes, logged_at="t",
+        evidence=dict(strong_review=dict(status="applied", new_strong=prior_strong)),
+    )
+
+
+def test_ledger_rejects_a_root_letter_decision_the_rule_does_not_support():
+    lemmas = {"H977": "בחר", "H3922": "לכה"}.get
+    chose = dict(queue_entry("acts.1.2.12", ["prefix_metadata_disagreement"], prior="applied"))
+    valid = root_letter_tagged("acts.1.2.12", "בָּחַר", "H977", ["Hb"], [], "H977")
+    assert dispositions.build_ledger([chose], {"acts.1.2.12": valid}, lemmas)["records"][0]["disposition"] == "corrected"
+    you = dict(queue_entry("luke.18.29.5", ["prefix_metadata_disagreement"]), text="לָכֶם", strong="H3922")
+    mistagged = root_letter_tagged("luke.18.29.5", "לָכֶם", "H3922", ["Hl"], [], None)
+    for entry, decision in (
+        (you, mistagged),
+        (chose, dict(valid, new_prefixes=["Hb"])),
+        (chose, dict(valid, evidence=dict(strong_review=dict(status="applied", new_strong="H970")))),
+        (dict(chose, prior_review_status=None), valid),
+    ):
+        with pytest.raises(ValueError, match="does not satisfy the root-letter rule"):
+            dispositions.build_ledger([entry], {entry["location"]: decision}, lemmas)
