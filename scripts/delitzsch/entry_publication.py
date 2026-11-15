@@ -101,7 +101,7 @@ def main(argv: list[str] | None = None) -> int:
     by_status: dict[str, list[str]] = defaultdict(list)
     for key in keys:
         by_status[custom[key]["publication"]["status"]].append(key)
-    print(json.dumps({"changed": len(changed), **{name: len(rows) for name, rows in sorted(by_status.items())}, "not_approved": sorted(k for s, rows in by_status.items() if s != "approved" for k in rows)}, indent=2))
+    print(json.dumps({"changed": len(changed), "by_status": dict(sorted(by_status.items()))}, indent=2))
     return 0
 
 

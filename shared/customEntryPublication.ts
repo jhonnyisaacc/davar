@@ -2,13 +2,6 @@ import spec from "./customEntryPublication.json";
 
 const STATUSES: readonly string[] = spec.statuses;
 
-export type CustomEntryPublication = {
-	status: string;
-	rule: string;
-	rule_version: number;
-	evidence: string[];
-};
-
 const publicationStatus = (key: string, publication: unknown): string => {
 	const status = (publication as { status?: unknown } | null)?.status;
 	if (typeof status !== "string" || !STATUSES.includes(status)) {
