@@ -39,6 +39,24 @@ the non-actionable counts, and `scan_flags` reports the raw heuristic total.
 Batch generation excludes reviewed flags so completed work is not reviewed
 again.
 
+## Reviewers and approval (issue #386)
+
+A review decision counts as an approval when its `reviewer` names a person or
+an agent. Jhonny decided this in #386: an agent review is an approval, provided
+the decision records which agent reviewed it, so a later human pass can find
+every agent decision by its `reviewer` value.
+
+- A person reviewer is a GitHub login, such as `jhonnyisaacc`.
+- An agent reviewer names the agent, such as `codex-desktop`,
+  `codex-delitzsch-review`, or `claude-delitzsch-review`.
+- A `rule:` reviewer, such as `rule:style_only_prefix_v5`, is a deterministic
+  rule, not a review. It never confirms a Strong number or approves an entry on
+  its own.
+
+The same rule applies to custom entry publication (#369): an applied decision
+that names an agent reviewer approves the definitions it covers. A decision
+with no reviewer approves nothing.
+
 ## Definition coverage
 
 `python -m scripts.delitzsch.definition_coverage write` regenerates
@@ -163,6 +181,40 @@ restores the original Strong string and prefixes. Apply it with
 `review apply`. A withdrawn correction gets no ledger record, because the
 word again matches the validated plan, and the scan lists the word as
 unresolved. A withdrawal never counts as a review of the Strong number.
+
+### Lexical review (#368, #367)
+
+`batches/lexical_review_368.json` gives every occurrence that no earlier rule
+settled a reviewed decision with `issue_type` set to `lexical_review`. The
+batch covers the `unresolved` queue records, the `benign` records whose
+`lexical_review` is `pending`, and the `unresolved` list of
+`batches/root_letter_prefixes_outside_queue.json`. Each decision names its
+reviewer and gives `lexicon`, `grammar`, and `context` evidence and a
+`reason`. Its action is one of these:
+
+- `skip` keeps the current Strong number. The record is `benign`, with
+  `lexical_review` set to `reviewed`.
+- `set_strong` corrects the Strong number, and `new_prefixes` corrects the
+  prefixes when they are wrong. The Strong string carries the prefixes, so
+  `לָכֶם` mapped to H5083 becomes `Hl/H859`. The record is `corrected`.
+- `needs_manual_review` blocks the occurrence, for example a post-biblical
+  word with no lexicon entry. The record is `blocked`, and `evidence.reason`
+  says why.
+
+Apply the batch with `review apply lexical_review_368.json`. Then run
+`review root-letter-prefixes`, apply its outside-queue batch, and run
+`review dispositions`. A kept Strong number counts as a review, so the rerun
+scan removes a false root-letter prefix, such as the `Hb` of `בֵּית` mapped to
+H1004, and the ledger records it as `corrected` by the
+`root_letter_prefix_outside_queue` rule.
+
+The `reviewed_strong_correction` rule (version 2) records a `set_strong`
+lexical review. It raises an error when the decision has no person or agent
+reviewer, when an evidence field is missing, when the previous Strong number
+differs from the queued one, when nothing changes, or when the Strong string
+does not carry the new prefixes. The `lexical_review` rule raises the same
+error for a `skip` that changes the Strong number. A lexical review outside
+the queue gets a record with `source` set to `decision_log`.
 
 ### Style-only prefixes (#364)
 
