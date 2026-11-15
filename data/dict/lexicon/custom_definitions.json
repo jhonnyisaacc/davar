@@ -80748,12 +80748,6 @@
         "text_es": "Romanos",
         "source": "custom",
         "order": 1
-      },
-      {
-        "text_en": "Romans",
-        "source": "custom",
-        "order": 2,
-        "text_es": "romanos"
       }
     ],
     "root": "",
@@ -80995,11 +80989,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 2 has no reviewed decision"
+        "acts.jsonl:185 codex-delitzsch-review"
       ]
     }
   },
@@ -82688,11 +82682,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "acts.jsonl:1844 jhonnyisaacc"
       ]
     }
   },
@@ -82875,11 +82869,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "acts.jsonl:1845 jhonnyisaacc"
       ]
     }
   },
@@ -82951,11 +82945,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "acts.jsonl:1846 jhonnyisaacc"
       ]
     }
   },
@@ -83027,11 +83021,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "acts.jsonl:1847 jhonnyisaacc"
       ]
     }
   },
@@ -83103,11 +83097,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "acts.jsonl:1848 jhonnyisaacc"
       ]
     }
   },
@@ -83179,11 +83173,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "acts.jsonl:1849 jhonnyisaacc"
       ]
     }
   },
@@ -83521,11 +83515,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "acts.jsonl:1850 jhonnyisaacc"
       ]
     }
   },
@@ -83671,11 +83665,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "acts.jsonl:1851 jhonnyisaacc"
       ]
     }
   },
@@ -84191,11 +84185,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "acts.jsonl:1852 jhonnyisaacc"
       ]
     }
   },
@@ -84267,11 +84261,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "acts.jsonl:1853 jhonnyisaacc"
       ]
     }
   },
@@ -84750,11 +84744,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "acts.jsonl:1854 jhonnyisaacc"
       ]
     }
   },
@@ -84826,11 +84820,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "acts.jsonl:1855 jhonnyisaacc"
       ]
     }
   },
@@ -84902,11 +84896,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "colossians.jsonl:86 jhonnyisaacc"
       ]
     }
   },
@@ -85317,11 +85311,12 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "acts.jsonl:1229 codex-desktop",
+        "corinthians1.jsonl:281 jhonnyisaacc"
       ]
     }
   },
@@ -85443,11 +85438,11 @@
     "term_language": "hebrew",
     "imported_by": "tcysite",
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "corinthians1.jsonl:282 jhonnyisaacc"
       ]
     }
   },
@@ -85465,10 +85460,10 @@
         "text_es": "Gayo; creyente asociado con Pablo."
       },
       {
-        "text_en": "Gaius; a believer associated with Paul and John.",
-        "text_es": "Gayo; creyente asociado con Pablo y Juan.",
+        "order": 2,
         "source": "custom",
-        "order": 2
+        "text_en": "Gaius; the believer to whom John's third letter is addressed.",
+        "text_es": "Gayo; el creyente a quien está dirigida la tercera carta de Juan."
       }
     ],
     "root": "",
@@ -85673,11 +85668,12 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 2 has no reviewed decision"
+        "john3.jsonl:6 jhonnyisaacc",
+        "romans.jsonl:24 codex-delitzsch-review"
       ]
     }
   },
@@ -85980,11 +85976,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "corinthians1.jsonl:283 jhonnyisaacc"
       ]
     }
   },
@@ -86056,11 +86052,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "corinthians1.jsonl:284 jhonnyisaacc"
       ]
     }
   },
@@ -86509,11 +86505,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "corinthians2.jsonl:167 jhonnyisaacc"
       ]
     }
   },
@@ -87227,11 +87223,12 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "acts.jsonl:1406 codex-desktop",
+        "corinthians2.jsonl:168 jhonnyisaacc"
       ]
     }
   },
@@ -87416,11 +87413,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "corinthians2.jsonl:169 jhonnyisaacc"
       ]
     }
   },
@@ -87794,11 +87791,12 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "acts.jsonl:1262 codex-desktop",
+        "galatians.jsonl:64 jhonnyisaacc"
       ]
     }
   },
@@ -87870,11 +87868,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "galatians.jsonl:65 jhonnyisaacc"
       ]
     }
   },
@@ -87946,11 +87944,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "hebrews.jsonl:180 jhonnyisaacc"
       ]
     }
   },
@@ -88022,11 +88020,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "hebrews.jsonl:181 jhonnyisaacc"
       ]
     }
   },
@@ -88070,6 +88068,12 @@
         "transliteration": "Filipos",
         "context": "Discípulo originario de Betsaida que reconoció en Yehoshua' a aquel de quien escribieron Moisés y los profetas.",
         "original_id": 204
+      },
+      {
+        "order": 3,
+        "source": "custom",
+        "text_en": "Philip; son of Herod the Great, named in Luke 3:1, 3:19, Mark 6:17, and Matthew 14:3; also in the place name Caesarea Philippi.",
+        "text_es": "Felipe; hijo de Herodes el Grande, mencionado en Lucas 3:1, 3:19, Marcos 6:17 y Mateo 14:3; también en el nombre del lugar Cesarea de Filipo."
       }
     ],
     "root": "",
@@ -89467,11 +89471,14 @@
     "term_language": "hebrew",
     "imported_by": "tcysite",
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "acts.jsonl:1296 codex-desktop",
+        "acts.jsonl:752 codex-desktop",
+        "john.jsonl:337 jhonnyisaacc",
+        "luke.jsonl:445 jhonnyisaacc"
       ]
     }
   },
@@ -125268,11 +125275,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "john1.jsonl:30 jhonnyisaacc"
       ]
     }
   },
@@ -157846,11 +157853,11 @@
       }
     ],
     "publication": {
-      "status": "draft",
-      "rule": "unreviewed_definition",
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "definition order 1 has no reviewed decision"
+        "acts.jsonl:1856 jhonnyisaacc"
       ]
     }
   },
