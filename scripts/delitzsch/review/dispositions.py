@@ -8,7 +8,7 @@ from collections import Counter
 from pathlib import Path
 from typing import Any, Callable, NamedTuple
 
-from scripts.delitzsch.review.remediate import REPORTS, ROOT, chapter, digest, encoded, load_corpus, words
+from scripts.delitzsch.review.remediate import REPORTS, ROOT, chapter, digest, encoded, load_corpus, pointed, words
 from scripts.delitzsch.review.workflow import (
     FINAL_TO_REGULAR,
     HEBREW_LETTERS,
@@ -28,6 +28,8 @@ FAMILIES = {
     ("lexical_plausibility",): "lexical_plausibility",
     ("prefix_metadata_disagreement", "lexical_plausibility"): "prefix_metadata_and_lexical",
 }
+LEGACY_SOURCE = "legacy_assignment_review"
+LEGACY_FAMILY = "legacy_assignment"
 DECISION_FIELDS = ("status", "action", "issue_type", "previous_strong", "new_strong", "confidence", "reason", "logged_at")
 PREFIX_LETTERS = {"Hb": "ב", "Hl": "ל", "Hk": "כ", "Hc": "ו", "Hd": "ה", "Hm": "מ"}
 ROOT_LETTER_ISSUE = "root_letter_prefix"
@@ -57,7 +59,14 @@ class Reading(NamedTuple):
     prefix_as_root: bool = False
 
 
+class Match(NamedTuple):
+    location: str
+    word: Record | None
+    decision: dict[str, Any] | None
+
+
 Rule = tuple[str, int, Callable[[Record, dict[str, Any] | None, Reading | None], Verdict | None]]
+LegacyRule = tuple[str, int, Callable[[Record, list[Match]], Verdict | None]]
 
 
 def real_prefix_count(consonants: str, prefixes: list[str], lemma: str) -> int | None:
@@ -169,6 +178,57 @@ RULES: tuple[Rule, ...] = (
 )
 
 
+def current_state(match: Match) -> dict[str, Any]:
+    word = match.word or {}
+    return dict(location=match.location, text=word.get("text"), strong=word.get("strong"),
+                review_status=match.decision and match.decision["status"])
+
+
+def legacy_without_candidate(row: Record, matches: list[Match]) -> Verdict | None:
+    if row["candidate"] is not None:
+        return None
+    return Verdict("superseded", "rule:legacy_without_candidate_v1", dict(matching_locations=row["matching_locations"]))
+
+
+def legacy_current_value(row: Record, matches: list[Match]) -> Verdict | None:
+    if len(matches) != 1 or matches[0].word is None:
+        return None
+    [match] = matches
+    if pointed(match.word["text"]) != pointed(row["text"]) or match.word.get("strong") != row["candidate"]:
+        return None
+    return Verdict("superseded", "rule:legacy_current_value_v1",
+                   dict(matching_locations=row["matching_locations"], current=[current_state(match)]),
+                   after=dict(location=match.location, strong=match.word["strong"]))
+
+
+def legacy_blocked(row: Record, matches: list[Match]) -> Verdict:
+    return Verdict("blocked", None, dict(matching_locations=row["matching_locations"], current=[current_state(m) for m in matches]))
+
+
+LEGACY_RULES: tuple[LegacyRule, ...] = (
+    ("legacy_without_candidate", 1, legacy_without_candidate),
+    ("legacy_current_value", 1, legacy_current_value),
+    ("legacy_blocked", 1, legacy_blocked),
+)
+
+
+def dispose_legacy(index: int, row: Record, matches: list[Match]) -> Record:
+    for name, version, rule in LEGACY_RULES:
+        if (verdict := rule(row, matches)) is not None:
+            break
+    return dict(
+        location=None, source=LEGACY_SOURCE, row=index, family=LEGACY_FAMILY,
+        disposition=verdict.disposition, rule=name, rule_version=version, reviewer=verdict.reviewer,
+        before={key: row[key] for key in ("book", "chapter", "word_index", "text", "candidate", "outcome")}, after=verdict.after,
+        evidence=dict(queue=row["reason"], **verdict.evidence),
+    )
+
+
+def legacy_matches(rows: list[Record], corpus: dict[str, Any], decisions: dict[str, dict[str, Any]]) -> list[list[Match]]:
+    by_location = {key: word for _, _, _, word, key in words(corpus)}
+    return [[Match(loc, by_location.get(loc), decisions.get(loc)) for loc in row["matching_locations"]] for row in rows]
+
+
 def dispose(entry: Record, decision: dict[str, Any] | None, reading: Reading | None) -> Record:
     family = FAMILIES[tuple(entry["reasons"])]
     for name, version, rule in RULES:
@@ -185,11 +245,16 @@ def dispose(entry: Record, decision: dict[str, Any] | None, reading: Reading | N
     return record
 
 
-def build_ledger(queue: list[Record], decisions: dict[str, dict[str, Any]], readings: dict[str, Reading] | None = None) -> dict[str, Any]:
+def build_ledger(
+    queue: list[Record], decisions: dict[str, dict[str, Any]], readings: dict[str, Reading] | None = None,
+    legacy: list[Record] = (), matches: list[list[Match]] = (),
+) -> dict[str, Any]:
     readings = readings or {}
     records = [dispose(entry, decisions.get(entry["location"]), readings.get(entry["location"])) for entry in queue]
-    used = {r["location"]: decisions[r["location"]] for r in records if r["location"] in decisions}
-    by_family: dict[str, Counter] = {family: Counter() for family in FAMILIES.values()}
+    records += [dispose_legacy(index, row, row_matches) for index, (row, row_matches) in enumerate(zip(legacy, matches, strict=True))]
+    locations = {r["location"] for r in queue} | {m.location for row_matches in matches for m in row_matches}
+    used = {location: decisions[location] for location in locations if location in decisions}
+    by_family: dict[str, Counter] = {family: Counter() for family in (*FAMILIES.values(), LEGACY_FAMILY)}
     for record in records:
         by_family[record["family"]][record["disposition"]] += 1
     return dict(
@@ -200,11 +265,13 @@ def build_ledger(queue: list[Record], decisions: dict[str, dict[str, Any]], read
             review_queue=dict(path=str(REPORT.relative_to(ROOT)), key="review_queue", sha256=digest(queue)),
             decisions=dict(path="data/delitzsch/review/decisions", sha256=digest(dict(sorted(used.items())))),
             prefix_readings=dict(paths=["data/delitzsch/parsed", "data/dict/lexicon"], sha256=digest(dict(sorted(readings.items())))),
+            legacy_assignment_review=dict(path=str(REPORT.relative_to(ROOT)), key=LEGACY_SOURCE, sha256=digest(list(legacy))),
         ),
         summary=dict(
             total=len(records),
             by_disposition={d: sum(c[d] for c in by_family.values()) for d in DISPOSITIONS},
             by_family={family: {d: counts[d] for d in DISPOSITIONS} for family, counts in by_family.items()},
+            by_rule=dict(sorted(Counter(r["rule"] for r in records).items())),
             benign_lexical_review={status: sum(r.get("lexical_review") == status for r in records) for status in ("pending", "reviewed")},
         ),
         records=records,
@@ -216,8 +283,11 @@ def serialize(ledger: dict[str, Any]) -> bytes:
 
 
 def build_from_disk(report: Path = REPORT, decisions_dir: Path = REPORTS.parent / "decisions") -> dict[str, Any]:
-    queue = json.loads(gzip.decompress(report.read_bytes()))["review_queue"]
-    return build_ledger(queue, load_latest_decisions(decisions_dir), prefix_readings(queue, load_corpus(), LexiconIndex(ROOT / "data/dict/lexicon/words")))
+    plan = json.loads(gzip.decompress(report.read_bytes()))
+    queue, legacy = plan["review_queue"], plan[LEGACY_SOURCE]
+    corpus, decisions = load_corpus(), load_latest_decisions(decisions_dir)
+    readings = prefix_readings(queue, corpus, LexiconIndex(ROOT / "data/dict/lexicon/words"))
+    return build_ledger(queue, decisions, readings, legacy, legacy_matches(legacy, corpus, decisions))
 
 
 def lexicon_lemmas(lexicon: LexiconIndex) -> frozenset[str]:
