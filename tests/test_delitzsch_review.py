@@ -581,19 +581,20 @@ def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
     committed = dispositions.read_ledger()
     assert committed == rebuilt
     summary = committed["summary"]
-    assert summary["total"] == 11528 + 16084 + 1 + 1657
+    assert summary["total"] == 11528 + 16084 + 4019
+    assert summary["by_disposition"]["unresolved"] == 0
     assert summary["by_family"]["prefix_metadata"] == {
-        "benign": 1480, "corrected": 71, "already_reviewed": 374, "unresolved": 3569, "blocked": 0, "superseded": 0,
+        "benign": 1390, "corrected": 3478, "already_reviewed": 374, "unresolved": 0, "blocked": 252, "superseded": 0,
     }
     assert summary["by_family"]["outside_queue"] == {
-        "benign": 0, "corrected": 1658, "already_reviewed": 0, "unresolved": 0, "blocked": 0, "superseded": 0,
+        "benign": 0, "corrected": 4012, "already_reviewed": 0, "unresolved": 0, "blocked": 7, "superseded": 0,
     }
-    assert summary["benign_lexical_review"] == {"pending": 1230, "reviewed": 250}
+    assert summary["benign_lexical_review"] == {"pending": 0, "reviewed": 1753}
     assert summary["by_family"]["legacy_assignment"] == {
-        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 7249, "superseded": 8835,
+        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 7820, "superseded": 8264,
     }
-    assert {rule: summary["by_rule"][rule] for rule in ("legacy_without_candidate", "legacy_current_value", "legacy_blocked")} == {
-        "legacy_without_candidate": 4360, "legacy_current_value": 4475, "legacy_blocked": 7249,
+    assert {rule: summary["by_rule"][rule] for rule in ("legacy_without_candidate", "legacy_current_value", "legacy_blocked", "lexical_review")} == {
+        "legacy_without_candidate": 4360, "legacy_current_value": 3904, "legacy_blocked": 7820, "lexical_review": 2301,
     }
 
 
@@ -627,7 +628,7 @@ def test_other_legacy_rows_are_blocked_with_their_matching_locations_and_nothing
     assert parsed_verse("acts", 1, 2)["words"][6]["strong"] == "H6680"
     need = legacy_record(27)
     assert (need["disposition"], need["evidence"]["matching_locations"]) == ("blocked", ["acts.1.16.3", "acts.1.21.3"])
-    assert [m["strong"] for m in need["evidence"]["current"]] == ["H8293", "H8293"]
+    assert [m["strong"] for m in need["evidence"]["current"]] == ["Hd/H6878", "Hd/H6878"]
 
 
 def test_legacy_row_is_blocked_when_its_location_has_another_word_or_several_matches():
@@ -659,16 +660,19 @@ def test_style_only_prefixes_are_benign_with_lemma_evidence():
 
 
 def test_benign_prefix_without_a_reviewed_strong_stays_pending_lexical_review():
+    entry = dict(queue_entry("acts.1.13.17", ["prefix_metadata_disagreement"]), text="וּמַתַּי", strong="H4970")
+    readings = {"acts.1.13.17": dispositions.Reading(["Hc"], "מתי")}
+    [record] = dispositions.build_ledger([entry], {}, readings)["records"]
+    assert (record["disposition"], record["evidence"]["prior_decision"], record["lexical_review"]) == ("benign", None, "pending")
     matthew = ledger_record("acts.1.13.17")
-    assert (matthew["disposition"], matthew["before"]) == ("benign", {"text": "וּמַתַּי", "strong": "H4970"})
-    assert matthew["evidence"]["prior_decision"] is None
-    assert matthew["lexical_review"] == "pending"
+    assert (matthew["disposition"], matthew["rule"], matthew["reviewer"]) == ("blocked", "lexical_review", "claude-delitzsch-review")
     assert "lexical_review" not in ledger_record("acts.1.2.12")
 
 
 def test_style_only_rule_leaves_unsettled_prefix_flags_alone():
-    assert ledger_record("acts.13.15.14")["disposition"] == "unresolved"
-    assert ledger_record("acts.7.58.6")["disposition"] == "unresolved"
+    assert ledger_record("acts.13.15.14")["after"]["strong"] == "Hl/H859"
+    assert ledger_record("acts.7.58.6")["after"]["strong"] == "Hc/Hd/H5707"
+    assert {ledger_record(location)["rule"] for location in ("acts.13.15.14", "acts.7.58.6")} == {"reviewed_strong_correction"}
     assert ledger_record("corinthians1.1.4.9")["disposition"] == "already_reviewed"
     entry = queue_entry("acts.1.2.12", ["prefix_metadata_disagreement"])
     readings = {"acts.1.2.12": dispositions.Reading(["Hb"], "בחר")}
@@ -688,9 +692,10 @@ def test_style_only_rule_does_not_settle_a_prefix_flag_with_no_prefixes():
 
 def test_style_only_rule_does_not_settle_a_prefix_letter_another_lemma_reads_as_root():
     confidence = ledger_record("acts.28.31.11")
-    assert (confidence["disposition"], confidence["before"]) == ("unresolved", {"text": "בִּטְחוֹן", "strong": "H2911"})
-    assert ledger_record("corinthians2.10.8.12")["disposition"] == "unresolved"
-    assert ledger_record("luke.8.30.7")["disposition"] == "unresolved"
+    assert (confidence["disposition"], confidence["rule"]) == ("corrected", "reviewed_strong_correction")
+    assert (confidence["before"]["strong"], confidence["after"]["strong"], confidence["after"]["prefixes"]) == ("H2911", "H986", [])
+    assert ledger_record("corinthians2.10.8.12")["after"]["strong"] == "Hl/H1129"
+    assert (ledger_record("luke.8.30.7")["disposition"], ledger_record("luke.8.30.7")["rule"]) == ("blocked", "lexical_review")
     entry = dict(queue_entry("acts.28.31.11", ["prefix_metadata_disagreement"]), text="בִּטְחוֹן", strong="H2911")
     reviewed = {"status": "applied", "new_strong": "H2911", "reviewer": "r", "reason": "x", "logged_at": "t"}
     readings = {"acts.28.31.11": dispositions.Reading(["Hb"], "טחון", False, True)}
@@ -701,16 +706,17 @@ def test_style_only_rule_does_not_settle_a_prefix_letter_another_lemma_reads_as_
 
 def test_style_only_rule_does_not_settle_a_prefix_an_equal_length_lemma_reads_as_root():
     without = ledger_record("hebrews.11.40.4")
-    assert (without["disposition"], without["before"]) == ("unresolved", {"text": "בִּלְעָדֵינוּ", "strong": "H5722"})
+    assert (without["disposition"], without["before"]["strong"], without["before"]["prefixes"]) == ("corrected", "H5722", ["Hb", "Hl"])
+    assert (without["after"]["strong"], without["after"]["prefixes"]) == ("H1107", [])
     assert dispositions.reads_prefix_as_root("בלעדינו", 2, "עדינו", frozenset({"בלעדי"}))
     assert not dispositions.reads_prefix_as_root("כדברו", 1, "דבר", frozenset({"כדב"}))
-    assert ledger_record("acts.1.13.17")["disposition"] == ledger_record("acts.1.8.12")["disposition"] == "benign"
+    assert ledger_record("acts.1.8.12")["disposition"] == "benign"
 
 
 def test_style_only_rule_does_not_read_a_verb_stem_he_as_the_article():
-    assert ledger_record("acts.6.6.2")["before"]["text"] == "הֶעֱמִידוּ"
-    assert ledger_record("acts.6.6.2")["disposition"] == "unresolved"
-    assert ledger_record("romans.15.30.11")["disposition"] == "unresolved"
+    stood = ledger_record("acts.6.6.2")
+    assert (stood["before"]["text"], stood["before"]["prefixes"], stood["after"]["strong"], stood["after"]["prefixes"]) == ("הֶעֱמִידוּ", ["Hd"], "H5975", [])
+    assert ledger_record("romans.15.30.11")["after"]["strong"] == "Hb/H6279"
     raise_up = ledger_record("acts.12.4.14")
     assert (raise_up["before"]["text"], raise_up["disposition"], raise_up["rule"]) == ("לְהַעֲלוֹתוֹ", "already_reviewed", "prior_review_decision")
     assert ledger_record("luke.6.21.6")["before"]["text"] == "הַבֹּכִים"
@@ -754,9 +760,15 @@ def test_root_letter_prefixes_are_corrected_in_the_ledger_and_the_verse():
     assert "וּ/בַחוּרֵיכֶם" in parsed_verse("acts", 2, 17)["hebrew"]
 
 
-def test_plausible_prefix_readings_stay_unresolved():
-    for location in ("luke.18.29.5", "matthew.6.24.26", "matthew.2.2.7"):
-        assert ledger_record(location)["disposition"] == "unresolved"
+def test_plausible_prefix_readings_are_settled_by_lexical_review_not_by_the_root_letter_rule():
+    for location, strong, prefixes in (
+        ("luke.18.29.5", "Hl/H859", ["Hl"]),
+        ("matthew.6.24.26", "Hd/D0084", ["Hd"]),
+        ("matthew.2.2.7", "H3556", []),
+    ):
+        record = ledger_record(location)
+        assert (record["rule"], record["reviewer"], record["after"]["strong"], record["after"]["prefixes"]) == (
+            "reviewed_strong_correction", "claude-delitzsch-review", strong, prefixes)
 
 
 def test_root_letter_rule_needs_a_reviewed_strong_and_a_false_prefix():
@@ -968,13 +980,36 @@ def test_reverting_restores_corrected_strongs_and_any_other_strong_edit_still_fa
     assert digest(dispositions.revert_corrections(edited(12, "H1"), records)) != plan["corpus_after_sha256"]
 
 
+def test_reverting_restores_lexical_review_corrections_and_an_unrecorded_edit_still_fails():
+    import gzip
+    from scripts.delitzsch.review.remediate import digest, load_corpus
+    plan = json.loads(gzip.decompress(dispositions.REPORT.read_bytes()))
+    records = dispositions.read_ledger()["records"]
+
+    def words(corpus, chapter_file, verse):
+        payload = corpus[chapter_file]
+        return next(v for v in (payload[0] if isinstance(payload, list) else payload)["verses"] if v["verse"] == verse)["words"]
+
+    reverted = dispositions.revert_corrections(load_corpus(), records)
+    assert (words(reverted, "ephesians/1.json", 5)[2]["strong"], words(reverted, "ephesians/1.json", 5)[2]["prefixes"]) == ("Hl/Hb/H3836", ["Hl", "Hb"])
+    assert words(load_corpus(), "ephesians/1.json", 5)[2]["strong"] == "Hl/H1121"
+
+    def edited(chapter_file, verse, index, strong):
+        corpus = load_corpus()
+        words(corpus, chapter_file, verse)[index]["strong"] = strong
+        return corpus
+
+    with pytest.raises(ValueError, match="corpus Strong differs"):
+        dispositions.revert_corrections(edited("ephesians/1.json", 5, 2, "Hl/H1129"), records)
+    assert ledger_record("acts.1.8.12")["disposition"] == "benign"
+    assert digest(dispositions.revert_corrections(edited("acts/1.json", 8, 12, "Hc/Hb/H8112"), records)) != plan["corpus_after_sha256"]
+
+
 def test_committed_outside_queue_root_letter_batch_matches_its_generator():
     committed = json.loads(dispositions.OUTSIDE_ROOT_LETTER_BATCH.read_text(encoding="utf-8"))
     assert committed == dispositions.outside_root_letter_batch_from_disk()
-    assert len(committed["decisions"]) == 1657
-    assert Counter(item["reason"] for item in committed["unresolved"]) == {
-        "prefix_reading": 869, "short_lemma": 838, "lemma_not_in_word": 644, "article_shape": 7, "manual_review": 3,
-    }
+    assert Counter(item["evidence"]["basis"] for item in committed["decisions"]) == {"reviewed_strong": 2377, "lemma_check": 1530}
+    assert Counter(item["reason"] for item in committed["unresolved"]) == {"manual_review": 7}
 
 
 def test_false_prefixes_outside_the_queue_leave_the_prefixes_and_the_strong_string():
@@ -992,17 +1027,22 @@ def test_false_prefixes_outside_the_queue_leave_the_prefixes_and_the_strong_stri
     assert "בַּ/לַּיְלָה" in parsed_verse("acts", 12, 6)["hebrew"]
 
 
-def test_plausible_prefixes_outside_the_queue_stay_as_tagged():
+def test_outside_queue_root_letter_matches_end_with_a_lexical_review():
     unresolved = {item["location"]: item["reason"] for item in json.loads(dispositions.OUTSIDE_ROOT_LETTER_BATCH.read_text(encoding="utf-8"))["unresolved"]}
-    for location, reason, book, chapter, verse, index, strong in (
-        ("revelation.14.10.14", "prefix_reading", "revelation", 14, 10, 14, "Hb/H888"),
-        ("corinthians1.7.31.0", "article_shape", "corinthians1", 7, 31, 0, "Hc/Hd/H2008"),
-        ("acts.6.1.18", "manual_review", "acts", 6, 1, 18, "Hl/H3861"),
-        ("acts.10.2.6", "short_lemma", "acts", 10, 2, 6, "Hb/H1121"),
-        ("ephesians.1.5.2", "prefix_reading", "ephesians", 1, 5, 2, "Hl/Hb/H3836"),
+    for location, book, chapter, verse, index, strong, rule in (
+        ("revelation.14.10.14", "revelation", 14, 10, 14, "Hb/H784", "reviewed_strong_correction"),
+        ("acts.6.1.18", "acts", 6, 1, 18, "Hl/H2007", "reviewed_strong_correction"),
+        ("acts.10.2.6", "acts", 10, 2, 6, "H1121", "root_letter_prefix_outside_queue"),
+        ("ephesians.1.5.2", "ephesians", 1, 5, 2, "Hl/H1121", "reviewed_strong_correction"),
+        ("revelation.3.4.14", "revelation", 3, 4, 14, "H3836", "root_letter_prefix_outside_queue"),
     ):
-        assert unresolved[location] == reason
+        assert location not in unresolved
+        assert ledger_record(location)["rule"] == rule
         assert parsed_verse(book, chapter, verse)["words"][index]["strong"] == strong
+    assert unresolved["corinthians1.7.31.0"] == "manual_review"
+    blocked = ledger_record("corinthians1.7.31.0")
+    assert (blocked["disposition"], blocked["rule"], blocked["before"]["strong"]) == ("blocked", "lexical_review", "Hc/Hd/H2008")
+    assert parsed_verse("corinthians1", 7, 31)["words"][0]["strong"] == "Hc/Hd/H2008"
 
 
 @pytest.mark.parametrize("text, prefixes, strong, lemma, review, expected", [
@@ -1046,13 +1086,16 @@ def test_ledger_rejects_an_outside_queue_root_letter_decision_the_rule_does_not_
             dispositions.build_ledger([], {"acts.13.45.4": decision}, readings)
 
 
-def test_a_correction_the_rule_no_longer_supports_is_withdrawn_through_the_decision_log():
-    sons = next(
-        json.loads(line) for line in reversed((dispositions.REPORTS.parent / "decisions/ephesians.jsonl").read_text(encoding="utf-8").splitlines())
-        if '"word_index": 2' in line and '"verse": 5' in line and '"chapter": 1' in line
-    )
-    assert (sons["issue_type"], sons["status"], sons["previous_strong"], sons["new_strong"], sons["new_prefixes"]) == (
+def test_a_correction_the_rule_no_longer_supports_is_withdrawn_and_then_settled_by_lexical_review():
+    history = [
+        json.loads(line) for line in (dispositions.REPORTS.parent / "decisions/ephesians.jsonl").read_text(encoding="utf-8").splitlines()
+        if '"word_index": 2' in line and '"verse": 5' in line and '"chapter": 1,' in line
+    ]
+    withdrawn, sons = history[-2:]
+    assert (withdrawn["issue_type"], withdrawn["status"], withdrawn["previous_strong"], withdrawn["new_strong"], withdrawn["new_prefixes"]) == (
         dispositions.WITHDRAWN_ROOT_LETTER_ISSUE, "applied", "H3836", "Hl/Hb/H3836", ["Hl", "Hb"])
-    assert all(record["location"] != "ephesians.1.5.2" for record in dispositions.read_ledger()["records"])
-    assert "ephesians.1.5.2" not in dispositions.strong_reviews()
-    assert "לְ/בָ/נִים" in parsed_verse("ephesians", 1, 5)["hebrew"]
+    assert (sons["issue_type"], sons["reviewer"], sons["previous_strong"], sons["new_strong"], sons["new_prefixes"]) == (
+        dispositions.LEXICAL_ISSUE, "claude-delitzsch-review", "Hl/Hb/H3836", "Hl/H1121", ["Hl"])
+    record = ledger_record("ephesians.1.5.2")
+    assert (record["disposition"], record["after"]) == ("corrected", {"text": "לְבָנִים", "strong": "Hl/H1121", "prefixes": ["Hl"]})
+    assert "לְ/בָנִים" in parsed_verse("ephesians", 1, 5)["hebrew"]
