@@ -7,7 +7,7 @@ import json
 from dataclasses import asdict
 from pathlib import Path
 
-from ..review import workflow
+from ..review import dispositions, workflow
 
 
 def register_subcommand(subparsers: argparse._SubParsersAction) -> argparse.ArgumentParser:
@@ -58,6 +58,13 @@ def register_subcommand(subparsers: argparse._SubParsersAction) -> argparse.Argu
     report = review_subparsers.add_parser("report", help="Print review summary")
     add_common_scan_args(report)
     report.set_defaults(handler=handle_report)
+
+    ledger = review_subparsers.add_parser(
+        "dispositions",
+        help="Write the versioned disposition ledger for the Besorah remediation review queue",
+    )
+    ledger.add_argument("--check", action="store_true", help="Fail when the committed ledger is stale")
+    ledger.set_defaults(handler=handle_dispositions)
 
     return parser
 
@@ -234,4 +241,17 @@ def handle_report(args: argparse.Namespace) -> int:
         "decision_logs": workflow.summarize_decision_logs(review / "decisions"),
     }
     print(json.dumps(payload, ensure_ascii=False, indent=2))
+    return 0
+
+
+def handle_dispositions(args: argparse.Namespace) -> int:
+    ledger = dispositions.build_from_disk()
+    path = dispositions.LEDGER
+    if args.check:
+        if not path.exists() or dispositions.read_ledger(path) != ledger:
+            print(f"{path} is stale. Run python -m scripts.delitzsch review dispositions")
+            return 1
+    else:
+        path.write_bytes(dispositions.serialize(ledger))
+    print(json.dumps(ledger["summary"], ensure_ascii=False, indent=2))
     return 0

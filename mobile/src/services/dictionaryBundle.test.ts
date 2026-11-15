@@ -1,6 +1,11 @@
 // Bun provides this test module at runtime; Expo's resolver does not index it.
 import { describe, expect, test } from "bun:test";
 import {
+  buildLexiconAssets,
+  offlineLexiconSources,
+  type OfflineLexiconSources,
+} from "@davar/shared/lexiconAssets";
+import {
   buildLexiconEntries,
   type DictionaryBundle,
 } from "./dictionaryBundle";
@@ -26,10 +31,7 @@ describe("dictionary bundle normalization", () => {
         H3372: {
           strong_number: "H3372",
           lemma: "יָרֵא",
-          transliteration: "yare",
           definitions: [{ text_es: "canonical", source: "bdb" }],
-          root: "canonical root",
-          occurrences_count: 12,
         },
       },
       prefixes: {},
@@ -42,7 +44,6 @@ describe("dictionary bundle normalization", () => {
       strong_number: "H3372",
       hebrew: "יָרֵא",
       root: "custom root",
-      occurrences_count: 12,
     });
     expect(entries[0].definitions.map((item) => item.text)).toEqual([
       "authored",
@@ -63,14 +64,14 @@ describe("dictionary bundle normalization", () => {
     const byStrong = new Map(entries.map((entry) => [entry.strong_number, entry]));
     const overlapping = Object.keys(custom).filter((strong) => strong in roots);
     const importedOverlaps = overlapping.filter((strong) =>
-      custom[strong].definitions.some((item) =>
+      (custom[strong].definitions ?? []).some((item) =>
         item.source?.startsWith("tcysite-"),
       ),
     );
     const importedDefinitionCount = importedOverlaps.reduce(
       (total, strong) =>
         total +
-        custom[strong].definitions.filter((item) =>
+        (custom[strong].definitions ?? []).filter((item) =>
           item.source?.startsWith("tcysite-"),
         ).length,
       0,
@@ -82,5 +83,50 @@ describe("dictionary bundle normalization", () => {
     expect(importedOverlaps).toHaveLength(49);
     expect(importedDefinitionCount).toBe(84);
     expect(importedOverlaps.every((strong) => byStrong.has(strong))).toBe(true);
+  });
+
+  test("resolves the same entries and definitions offline as the online lexicon assets", async () => {
+    const [words, roots, custom] = await Promise.all([
+      fileJson<NonNullable<DictionaryBundle["words"]>>("data/dict/lexicon/words.json"),
+      fileJson<DictionaryBundle["roots"]>("data/dict/lexicon/roots.json"),
+      fileJson<DictionaryBundle["custom_definitions"]>(
+        "data/dict/lexicon/custom_definitions.json",
+      ),
+    ]);
+    const offline = new Map(
+      buildLexiconEntries({ words, roots, custom_definitions: custom, prefixes: {} }).map(
+        (entry) => [entry.strong_number, entry],
+      ),
+    );
+    const online = Object.assign(
+      {},
+      ...Object.values(buildLexiconAssets(words, roots, custom).shards),
+    );
+
+    expect([...offline.keys()].sort()).toEqual(Object.keys(online).sort());
+
+    const servant = offline.get("H5650");
+    expect(servant?.definitions.some((item) => item.language === "en" && item.text === "servant")).toBe(true);
+    expect(servant?.definitions.some((item) => item.language === "es" && item.text === "siervo")).toBe(true);
+    expect(offline.get("H935")?.definitions.length).toBeGreaterThan(0);
+    expect(offline.get("D0271")?.definitions.map((item) => item.language).sort()).toEqual(["en", "es"]);
+  });
+
+  test("builds the same offline entries from the trimmed bundle as from the full lexicon", async () => {
+    const full: OfflineLexiconSources = {
+      words: await fileJson("data/dict/lexicon/words.json"),
+      roots: await fileJson("data/dict/lexicon/roots.json"),
+      custom_definitions: await fileJson("data/dict/lexicon/custom_definitions.json"),
+    };
+    const downloaded = JSON.parse(
+      JSON.stringify(offlineLexiconSources(full)),
+    ) as OfflineLexiconSources;
+
+    expect(buildLexiconEntries({ ...downloaded, prefixes: {} })).toEqual(
+      buildLexiconEntries({ ...full, prefixes: {} }),
+    );
+    expect(Buffer.byteLength(JSON.stringify(downloaded))).toBeLessThan(
+      25 * 1024 * 1024,
+    );
   });
 });
