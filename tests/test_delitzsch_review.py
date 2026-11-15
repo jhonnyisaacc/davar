@@ -589,7 +589,7 @@ def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
 
 def test_style_only_prefixes_are_benign_with_lemma_evidence():
     samaria = ledger_record("acts.1.8.12")
-    assert (samaria["disposition"], samaria["rule"], samaria["rule_version"]) == ("benign", "style_only_prefix", 4)
+    assert (samaria["disposition"], samaria["rule"], samaria["rule_version"]) == ("benign", "style_only_prefix", 5)
     assert samaria["before"] == {"text": "וּבְשֹׁמְרוֹן", "strong": "H8111"}
     assert samaria["after"] is None
     evidence = samaria["evidence"]
@@ -620,6 +620,13 @@ def test_style_only_rule_leaves_unsettled_prefix_flags_alone():
     readings = {"acts.1.2.12": dispositions.Reading([], "בחר")}
     [record] = dispositions.build_ledger([dict(entry, text="בְּבָחַר")], {}, readings)["records"]
     assert record["disposition"] == "unresolved"
+
+
+def test_style_only_rule_does_not_settle_a_prefix_flag_with_no_prefixes():
+    entry = queue_entry("acts.1.2.12", ["prefix_metadata_disagreement"])
+    readings = {"acts.1.2.12": dispositions.Reading([], "בחר")}
+    [record] = dispositions.build_ledger([entry], {}, readings)["records"]
+    assert (record["disposition"], record["rule"]) == ("unresolved", "unadjudicated")
 
 
 def test_style_only_rule_does_not_settle_a_prefix_letter_another_lemma_reads_as_root():
