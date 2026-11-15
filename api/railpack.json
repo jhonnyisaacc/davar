@@ -1,0 +1,15 @@
+{
+  "$schema": "https://schema.railpack.com",
+  "buildAptPackages": ["...", "python3-pip"],
+  "steps": {
+    "build": {
+      "commands": ["...", "python3 -m pip install --no-cache-dir --target /app/.python tzdata==2026.6"]
+    }
+  },
+  "deploy": {
+    "aptPackages": ["python3", "tzdata", "tzdata-legacy"],
+    "variables": {
+      "PYTHONPATH": "/app/.python"
+    }
+  }
+}
