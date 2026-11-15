@@ -51,17 +51,21 @@ function commandExists(name: string): boolean {
 	return existsSync(join(process.env.HOME ?? "", ".bun", "bin", name));
 }
 
+function readState(page: Awaited<ReturnType<typeof connectPage>>): Promise<PageState> {
+	return evaluate<PageState>(
+		page,
+		`(() => ({
+			url: location.href,
+			title: document.title,
+			text: (document.body?.innerText ?? "").replace(/\\s+/g, " ").trim().slice(0, 500)
+		}))()`,
+	);
+}
+
 async function pageState(cdp: number): Promise<PageState> {
 	const page = await connectPage(cdp);
 	try {
-		return await evaluate<PageState>(
-			page,
-			`(() => ({
-				url: location.href,
-				title: document.title,
-				text: (document.body?.innerText ?? "").replace(/\\s+/g, " ").trim().slice(0, 500)
-			}))()`,
-		);
+		return await readState(page);
 	} finally {
 		page.close();
 	}
@@ -280,14 +284,7 @@ async function drive(args: string[]): Promise<never> {
 			}
 			await Bun.sleep(800);
 			rememberAction(app, `click ${name}`);
-			const state = await evaluate<PageState>(
-				page,
-				`(() => ({
-					url: location.href,
-					title: document.title,
-					text: (document.body?.innerText ?? "").replace(/\\s+/g, " ").trim().slice(0, 300)
-				}))()`,
-			);
+			const state = await readState(page);
 			finish(true, {
 				app,
 				command: "drive",
@@ -325,7 +322,7 @@ async function drive(args: string[]): Promise<never> {
 			}
 			await Bun.sleep(800);
 			rememberAction(app, `select ${name} ${option}`);
-			const state = await pageState(cdp);
+			const state = await readState(page);
 			finish(true, { app, command: "drive", action: "select", name, option, url: state.url, text: state.text });
 		}
 		finish(false, { app, command: "drive", reason: "unknown-action" });
