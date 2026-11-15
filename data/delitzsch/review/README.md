@@ -94,3 +94,66 @@ correction keeps the Strong number. Other flags stay `unresolved`, because the
 prefix reading can be real when the Strong number was never reviewed (for
 example `לָכֶם` mapped to H3922). `remediate check` reverts the `corrected`
 records before it compares the corpus with the validated plan.
+
+### Style-only prefixes (#364)
+
+Most prefix-only flags are style differences. The word's prefixes are real, and
+the `strong` string leaves out the prefix segment, as in `וּבְשֹׁמְרוֹן` (H8111)
+with `Hc` and `Hb`. The `style_only_prefix` rule records such a flag as
+`benign`, with the token consonants, the prefix letters, the lemma, and any
+prior decision as evidence. It does not change a Strong number.
+
+A flag is `benign` only when all of these are true:
+
+- The tagged prefix letters start the word, and the lemma's first two letters
+  follow them.
+- The lemma has at least three letters, and the rest of the word is at least
+  as long as the lemma.
+- No prior review marked the occurrence `skipped` or `needs_manual_review`.
+- A tagged `Hd` has the shape of the article, by the rules below.
+- When no prior review set the Strong number, the first three letters of the
+  lemma follow the prefixes, and no longer lexicon lemma starts at a tagged
+  prefix letter. For example, `בִּטְחוֹן` mapped to H2911 (`טחון`) stays
+  `unresolved`, because `בטחון` (H986) reads the `ב` as a root letter.
+  A lexicon lemma of the same length also counts when the assigned lemma has
+  at least four letters, so `בִּלְעָדֵינוּ` mapped to H5722 (`עדינו`) stays
+  `unresolved`, because `בלעדי` (H1107) reads the `ב` and `ל` as root letters.
+  Three-letter overlaps across the prefix match by accident too often.
+
+An unreviewed Strong number came from the same matcher that tagged the
+prefixes, so it is weak evidence for them. A prior review of the Strong number
+did not review the prefixes, so the `Hd` rules apply to every flag.
+
+The data has no verb stem or morphology, so the `Hd` rules use the pointing.
+A tagged `Hd` is the article only when all of these are true:
+
+- No `Hb`, `Hl`, or `Hk` comes before it. The article's `ה` drops after those
+  prepositions, so a written `ה` there belongs to the stem, as in `לְהַעֲלוֹתוֹ`.
+- Its vowel and the next letter fit the article: patah with a dagesh in the
+  next letter, patah before `ח` or `ה`, patah before `י` or `מ` with a sheva,
+  qamets before `א`, `ע`, or `ר`, or segol before `ח`, `ע`, or `ה` with a
+  qamets. Other shapes, such as `הֶעֱמִידוּ`, the hireq of `הִשְׁלִיכוּ`, or
+  the tsere of `הֵבִינוּ`, are verb patterns.
+- If the next letter has a sheva or hateph and no dagesh, the Strong number is
+  not a root entry in the lexicon. This keeps hiphil forms such as
+  `וְהַחֲזִיקוּ` (H2388) out.
+
+These rules keep some real articles out of `benign`, such as `הָאֲבֵלִים`
+(H56). A flag that a rule cannot settle stays `unresolved`.
+
+Two-letter lemmas and short forms such as `לָכֶם` mapped to H3642 match by
+accident too often, so they stay `unresolved`. The rule checks the prefix
+against the assigned lemma. It does not prove that the Strong number is right,
+because the original matcher chose that number after it removed the same
+prefix letters.
+
+Each `benign` record therefore has a `lexical_review` field:
+
+- `reviewed`: a prior `applied` or `already_applied` decision set the current
+  Strong number. That decision is in `evidence.prior_decision`.
+- `pending`: no prior review decision set the Strong number. An example is
+  `וּמַתַּי` (Acts 1:13) mapped to H4970.
+
+`summary.benign_lexical_review` gives the counts, and the `dispositions`
+command prints them. The lexical review for #368 covers every `unresolved`
+record and every `benign` record whose `lexical_review` is `pending`.
