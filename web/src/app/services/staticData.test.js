@@ -252,7 +252,7 @@ describe("static data integrity", () => {
 			expect(spanish?.definitions[0]).toMatchObject({
 				source: "tcysite-greek-strong",
 				language: "es",
-				review_status: "imported",
+				review_status: "blocked",
 			});
 			const english = await loadGreekLexiconEntry("G0976", "en");
 			expect(english?.definitions.every((definition) => definition.language === "en")).toBe(true);
