@@ -22,8 +22,6 @@ from pathlib import Path
 from typing import Any
 from urllib.request import Request, urlopen
 
-from .tcysite_review import REPORT_PATH as REVIEW_REPORT_PATH, apply_reviews, load_decisions
-
 
 ROOT = Path(__file__).resolve().parents[2]
 RAW_ROOT = ROOT / "data/dict/raw/tcysite"
@@ -549,6 +547,8 @@ def import_data(source_root: Path) -> dict[str, Any]:
     stats["duplicate_term_rows"] = sum(count - 1 for count in duplicate_terms.values() if count > 1)
     stats["output_entries"] = len(output)
     stats["fallback_rows_reported"] = len(fallback_rows)
+
+    from .tcysite_review import REPORT_PATH as REVIEW_REPORT_PATH, apply_reviews, load_decisions
 
     review_report = apply_reviews(output, load_decisions())
     write_json(CUSTOM_PATH, output)

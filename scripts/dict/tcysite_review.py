@@ -16,6 +16,7 @@ from pathlib import Path
 from typing import Any, Iterator
 
 from .definition_hygiene import has_forbidden_controls
+from .import_tcysite import read_json, write_json
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -38,15 +39,6 @@ REASONS = {
 HEBREW_LETTER = re.compile(r"[א-ת]")
 ENTRY_KEY = re.compile(r"[HGD]\d+[A-Za-z]?")
 RowKey = tuple[str, str]
-
-
-def read_json(path: Path) -> Any:
-    return json.loads(path.read_text(encoding="utf-8"))
-
-
-def write_json(path: Path, value: Any) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def tcy_rows(custom: dict[str, Any]) -> Iterator[tuple[str, dict[str, Any]]]:
