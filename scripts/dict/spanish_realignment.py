@@ -1,14 +1,5 @@
 """Undo the Spanish gloss shift that the 2026-02-04 Grok run wrote into words.json.
 
-That run sent 500 definitions per request and zipped the returned list back onto
-the batch. When Grok returned 499 or 498 items the tail was padded, and when it
-returned 501 the last item was cut, so every gloss after the fault landed on a
-neighbouring definition. FAULTS lists each fault as reviewed against the run
-snapshot with --explain: from `start` on, the gloss at position i is the run's
-translation of position i + offset. The padded tail was translated again later,
-so it keeps its gloss. A gloss the run lost falls back to the previous run's
-gloss for the same Strong number and English text.
-
     python -m scripts.dict.spanish_realignment --check
     python -m scripts.dict.spanish_realignment --write
     python -m scripts.dict.spanish_realignment --explain 9
@@ -186,7 +177,9 @@ def batch_corrections(
             corrected, source = realigned[position], "realigned"
         else:
             candidates = reference.get((gloss.strong, fold(gloss.text_en)), set())
-            corrected, source = (next(iter(candidates)), "reference") if len(candidates) == 1 else ("", "unresolved")
+            if len(candidates) != 1:
+                continue
+            corrected, source = next(iter(candidates)), "reference"
         if corrected != gloss.text_es:
             corrections.append(
                 Correction(gloss.strong, gloss.index, gloss.order, gloss.text_en, gloss.text_es, corrected, source)
