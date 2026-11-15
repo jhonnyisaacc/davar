@@ -138,7 +138,7 @@ def root_letter_decision(entry: Record, word: Record, decision: dict[str, Any] |
         return {key: value for key, value in decision.items() if key not in ("status", "logged_at")}
     prefixes = word.get("prefixes") or []
     consonants = normalize_hebrew(word["text"])
-    count = real_prefix_count(consonants, prefixes, lemma) if lemma and len(lemma) >= 2 else None
+    count = real_prefix_count(consonants, prefixes, lemma) if lemma else None
     if count is None or count == len(prefixes):
         return None
     if decision is None or decision["status"] not in STRONG_CONFIRMED or decision.get("new_strong") != entry["strong"]:
