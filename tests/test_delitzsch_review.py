@@ -1,4 +1,5 @@
 import json
+from collections import Counter
 from pathlib import Path
 
 import pytest
@@ -580,12 +581,12 @@ def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
     committed = dispositions.read_ledger()
     assert committed == rebuilt
     summary = committed["summary"]
-    assert summary["total"] == 11528 + 16084 + 1
+    assert summary["total"] == 11528 + 16084 + 1 + 1674
     assert summary["by_family"]["prefix_metadata"] == {
         "benign": 1480, "corrected": 71, "already_reviewed": 374, "unresolved": 3569, "blocked": 0, "superseded": 0,
     }
     assert summary["by_family"]["outside_queue"] == {
-        "benign": 0, "corrected": 1, "already_reviewed": 0, "unresolved": 0, "blocked": 0, "superseded": 0,
+        "benign": 0, "corrected": 1675, "already_reviewed": 0, "unresolved": 0, "blocked": 0, "superseded": 0,
     }
     assert summary["benign_lexical_review"] == {"pending": 1230, "reviewed": 250}
     assert summary["by_family"]["legacy_assignment"] == {
@@ -916,3 +917,78 @@ def test_reverting_restores_corrected_strongs_and_any_other_strong_edit_still_fa
     with pytest.raises(ValueError, match="corpus Strong differs"):
         dispositions.revert_corrections(edited(11, "Hd/H1279"), records)
     assert digest(dispositions.revert_corrections(edited(12, "H1"), records)) != plan["corpus_after_sha256"]
+
+
+def test_committed_outside_queue_root_letter_batch_matches_its_generator():
+    committed = json.loads(dispositions.OUTSIDE_ROOT_LETTER_BATCH.read_text(encoding="utf-8"))
+    assert committed == dispositions.outside_root_letter_batch_from_disk()
+    assert len(committed["decisions"]) == 1674
+    assert Counter(item["reason"] for item in committed["unresolved"]) == {
+        "prefix_reading": 852, "short_lemma": 838, "lemma_not_in_word": 644, "article_shape": 7, "manual_review": 3,
+    }
+
+
+def test_false_prefixes_outside_the_queue_leave_the_prefixes_and_the_strong_string():
+    chose = ledger_record("acts.1.24.15")
+    assert (chose["source"], chose["family"], chose["disposition"], chose["rule"]) == (
+        "decision_log", "outside_queue", "corrected", "root_letter_prefix_outside_queue")
+    assert chose["before"] == {"text": "בָּחַרְתָּ", "strong": "Hb/H977", "prefixes": ["Hb"]}
+    assert chose["after"] == {"text": "בָּחַרְתָּ", "strong": "H977", "prefixes": []}
+    assert (chose["evidence"]["basis"], chose["evidence"]["strong_review"]["status"]) == ("reviewed_strong", "skipped")
+    assert "אֲשֶׁר־בָּחַרְתָּ" in parsed_verse("acts", 1, 24)["hebrew"]
+
+    night = ledger_record("acts.12.6.1")
+    assert (night["before"]["strong"], night["after"]["strong"], night["after"]["prefixes"]) == ("Hb/Hl/H3915", "Hb/H3915", ["Hb"])
+    assert night["evidence"]["basis"] == "lemma_check"
+    assert "בַּ/לַּיְלָה" in parsed_verse("acts", 12, 6)["hebrew"]
+
+
+def test_plausible_prefixes_outside_the_queue_stay_as_tagged():
+    unresolved = {item["location"]: item["reason"] for item in json.loads(dispositions.OUTSIDE_ROOT_LETTER_BATCH.read_text(encoding="utf-8"))["unresolved"]}
+    for location, reason, book, chapter, verse, index, strong in (
+        ("revelation.14.10.14", "prefix_reading", "revelation", 14, 10, 14, "Hb/H888"),
+        ("corinthians1.7.31.0", "article_shape", "corinthians1", 7, 31, 0, "Hc/Hd/H2008"),
+        ("acts.6.1.18", "manual_review", "acts", 6, 1, 18, "Hl/H3861"),
+        ("acts.10.2.6", "short_lemma", "acts", 10, 2, 6, "Hb/H1121"),
+    ):
+        assert unresolved[location] == reason
+        assert parsed_verse(book, chapter, verse)["words"][index]["strong"] == strong
+
+
+@pytest.mark.parametrize("text, prefixes, strong, lemma, review, expected", [
+    ("בָּחַרְתָּ", ["Hb"], "Hb/H977", "בחר", {"status": "skipped", "new_strong": "Hb/H977"}, ([], "reviewed_strong", True)),
+    ("בָּחַרְתָּ", ["Hb"], "Hb/H977", "בחר", None, ([], "prefix_reading", False)),
+    ("הֲמוֹן", ["Hd"], "Hd/H1995", "המונ", None, ([], "lemma_check", True)),
+    ("בְּאֵשׁ", ["Hb"], "Hb/H888", "באש", None, ([], "prefix_reading", False)),
+    ("לָהֶן", ["Hl"], "Hl/H3861", "להנ", None, ([], "prefix_reading", False)),
+    ("בְּנֵי", ["Hb"], "Hb/H1121", "בנ", None, ([], "short_lemma", False)),
+    ("בְּשׂוֹרַת", ["Hb"], "Hb/H1309", "בשורה", None, ([], "lemma_not_in_word", False)),
+    ("וְהַנֶּהֱנִים", ["Hc", "Hd"], "Hc/Hd/H2008", "הנה", None, (["Hc"], "article_shape", False)),
+    ("לָבוֹא", ["Hl", "Hb"], "Hl/Hb/H935", "בוא", {"status": "needs_manual_review", "new_strong": "Hl/Hb/H935"}, (["Hl"], "manual_review", False)),
+    ("לְבֵית", ["Hl"], "Hl/H1004", "בית", None, None),
+])
+def test_outside_root_letter_is_certain_only_for_a_reviewed_strong_or_an_unambiguous_lemma(text, prefixes, strong, lemma, review, expected):
+    lemmas = frozenset({"בחר", "חרת", "המונ", "אש", "הנ", "בוא", "בית"})
+    found = dispositions.outside_root_letter(text, prefixes, strong, lemma, False, lemmas, review)
+    assert (found and tuple(found)) == expected
+
+
+def test_ledger_rejects_an_outside_queue_root_letter_decision_the_rule_does_not_support():
+    occurrence = dict(book="acts", chapter=13, verse=45, word_index=4, text="הֲמוֹן", strong="Hd/H1995", prefixes=["Hd"])
+    valid = dict(status="applied", action="set_strong", issue_type=dispositions.ROOT_LETTER_ISSUE,
+                 reviewer=dispositions.OUTSIDE_ROOT_LETTER_REVIEWER, occurrence=occurrence, previous_strong="Hd/H1995",
+                 new_strong="H1995", new_prefixes=[], logged_at="t", evidence=dict(basis="lemma_check"))
+    certain = {"acts.13.45.4": dispositions.Reading(["Hd"], "המון", root_letter=dispositions.RootLetter([], "lemma_check", True))}
+    [record] = dispositions.build_ledger([], {"acts.13.45.4": valid}, certain)["records"]
+    assert (record["disposition"], record["after"]) == ("corrected", {"text": "הֲמוֹן", "strong": "H1995", "prefixes": []})
+    uncertain = {"acts.13.45.4": dispositions.Reading(["Hd"], "המון", root_letter=dispositions.RootLetter([], "prefix_reading", False))}
+    for decision, readings in (
+        (valid, uncertain),
+        (valid, {}),
+        (dict(valid, new_strong="Hd/H1995"), certain),
+        (dict(valid, new_prefixes=["Hd"]), certain),
+        (dict(valid, evidence=dict(basis="reviewed_strong")), certain),
+        (dict(valid, previous_strong="H1995"), certain),
+    ):
+        with pytest.raises(ValueError, match="does not satisfy the outside-queue root-letter rule"):
+            dispositions.build_ledger([], {"acts.13.45.4": decision}, readings)
