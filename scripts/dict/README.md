@@ -78,16 +78,43 @@ resolves exact Greek/Hebrew matches to canonical Strong IDs, and assigns
 unmatched rows stable `D1000000+` fallback IDs.
 
 ```bash
-python scripts/dict/import_tcysite.py --fetch
+python -m scripts.dict.import_tcysite --fetch
 python -m scripts.dict.test_import_tcysite
 ```
 
 Source snapshots, checksums, attribution, and permission notes are stored in
-`data/dict/raw/tcysite/`. Imported definitions are Spanish-only until their
-English and Hebrew translations receive a separate human review. Each manifest
+`data/dict/raw/tcysite/`. Each manifest
 file entry includes its SHA-256 checksum, byte size, and record count. Running
 `--fetch` preserves the prior retrieval timestamp when all source content and
 manifest metadata are unchanged, so repeated fetches remain deterministic.
+
+#### English and Hebrew review
+
+`tcysite_review.py` gives every imported TCY row a review outcome. The Spanish
+`text_es` never changes.
+
+- Eric rows take their verdict from `data/dict/review/tcysite_eric.jsonl`, one
+  decision per source row. An `approved` or `corrected` decision adds `text_en`
+  and `text_he`. A `corrected` decision keeps the earlier translation in
+  `before`. A `blocked` decision names a reason and adds no text.
+- Greek rows are Spanish editions of third-party lexicons (Strong/Chávez,
+  Tuggy, Vine, Swanson). They are blocked with reason `third_party_lexicon`,
+  because the canonical Greek lexicon carries the English and Hebrew
+  definitions.
+- Each reviewed row records `review_status` (`approved` or `blocked`),
+  `reviewed_by`, and, when blocked, `review_reason`. A row whose Spanish text
+  no longer matches its decision returns to `imported`.
+
+```bash
+python -m scripts.dict.tcysite_review export --out /tmp/tcy-shards
+python -m scripts.dict.tcysite_review merge /tmp/tcy-out/*.jsonl
+python -m scripts.dict.tcysite_review apply
+python -m scripts.dict.tcysite_review check
+```
+
+`check` fails when a TCY row has no current decision, a decision matches no
+row, or the committed data or `data/dict/reports/tcysite_review.json` is stale.
+The importer applies the decisions too, so a reimport keeps the review.
 
 #### Attribution for imported custom definitions
 

@@ -1372,7 +1372,7 @@ type GreekDefinition = {
 	short?: string | null;
 	fuller?: string | null;
 	source?: string;
-	review_status?: "approved" | "imported" | "draft";
+	review_status?: "approved" | "imported" | "draft" | "blocked";
 	license?: string;
 };
 

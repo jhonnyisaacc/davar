@@ -113,7 +113,7 @@ type StaticDictionaryDefinition = {
   text_es?: string;
   text_he?: string;
   source?: string;
-  review_status?: "approved" | "imported" | "draft";
+  review_status?: "approved" | "imported" | "draft" | "blocked";
   license?: string;
   term_language?: "greek" | "hebrew" | "unknown";
   source_file?: string;
@@ -194,7 +194,7 @@ type MappedDefinition = {
   text: string;
   source: string;
   language: "en" | "es" | "he";
-  review_status?: "approved" | "imported" | "draft";
+  review_status?: "approved" | "imported" | "draft" | "blocked";
   license?: string;
   sense?: string;
   definition_kind?: string;
@@ -243,7 +243,7 @@ type GreekLexiconEntry = {
         short?: string | null;
         fuller?: string | null;
         source?: string;
-        review_status?: "approved" | "imported" | "draft";
+        review_status?: "approved" | "imported" | "draft" | "blocked";
         license?: string;
       }
     >
@@ -403,7 +403,8 @@ const loadGreekLexiconEntry = async (
               review_status:
                 definition.review_status === "approved" ||
                 definition.review_status === "imported" ||
-                definition.review_status === "draft"
+                definition.review_status === "draft" ||
+                definition.review_status === "blocked"
                   ? definition.review_status
                   : undefined,
               license: typeof definition.license === "string" ? definition.license : undefined,

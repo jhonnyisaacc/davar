@@ -23,7 +23,7 @@ type StaticDictionaryDefinition = {
   text_es?: string;
   text_he?: string;
   source?: string;
-  review_status?: "approved" | "imported" | "draft";
+  review_status?: "approved" | "imported" | "draft" | "blocked";
   license?: string;
   sense?: string;
   definition_kind?: string;

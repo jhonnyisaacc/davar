@@ -19,7 +19,7 @@ export interface DefinitionItem {
 	text: string;
 	source: "custom" | "strong" | "bdb" | string;
 	language: "en" | "es" | "he" | string;
-	review_status?: "approved" | "imported" | "draft";
+	review_status?: "approved" | "imported" | "draft" | "blocked";
 	license?: string;
 	sense?: string;
 	definition_kind?: string;
@@ -72,7 +72,7 @@ type RawDefinition = {
 	text_es?: string;
 	text_he?: string;
 	source?: string;
-	review_status?: "approved" | "imported" | "draft";
+	review_status?: "approved" | "imported" | "draft" | "blocked";
 	license?: string;
 	term_language?: "greek" | "hebrew" | "unknown";
 	source_file?: string;
