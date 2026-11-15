@@ -389,6 +389,8 @@ def prepare_legacy_digest(name: str, payload: dict, refreshed: tuple[str, ...] =
             payload.get("bundles", {}).get("versions", {}).pop("checksum", None)
     if "bundles/dictionary" in refreshed and name == "manifest.json":
         payload.get("bundles", {}).pop("dictionary", None)
+    if "bundles/besorah" in refreshed and name == "manifest.json":
+        payload.get("bundles", {}).pop("besorah", None)
 
 
 def legacy_generation_differences(
