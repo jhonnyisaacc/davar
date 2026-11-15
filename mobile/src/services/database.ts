@@ -325,41 +325,32 @@ export const initializeDatabase = async () => {
 const BATCH_SIZE = 500;
 
 export const replaceLexiconEntries = async (entries: LexiconResponse[]) => {
-  for (let i = 0; i < Math.max(entries.length, 1); i += BATCH_SIZE) {
-    const batch = entries.slice(i, i + BATCH_SIZE);
-    await executeWrite("BEGIN TRANSACTION;");
-    try {
-      if (i === 0) {
-        await executeWrite("DELETE FROM lexicon;");
+  await executeWrite("BEGIN TRANSACTION;");
+  try {
+    await executeWrite("DELETE FROM lexicon;");
+    for (const entry of entries) {
+      const strong = String(entry.strong_number ?? "").trim();
+      if (strong === "") {
+        continue;
       }
-      for (const entry of batch) {
-        const strong = String(entry.strong_number ?? "").trim();
-        if (strong === "") {
-          continue;
-        }
-        await executeWrite(
-          `INSERT OR REPLACE INTO lexicon (
-            strong, hebrew, definitions, root, root_strong, occurrences
-          ) VALUES (?, ?, ?, ?, ?, ?);`,
-          [
-            strong,
-            entry.hebrew ?? "",
-            JSON.stringify(entry.definitions ?? []),
-            entry.root ?? "",
-            entry.root_strong ?? "",
-            JSON.stringify(entry.root_definitions ?? []),
-          ],
-        );
-      }
-      await executeWrite("COMMIT;");
-    } catch (error) {
-      try {
-        await executeWrite("ROLLBACK;");
-      } catch {
-        // Best-effort rollback
-      }
-      throw error;
+      await executeWrite(
+        `INSERT OR REPLACE INTO lexicon (
+          strong, hebrew, definitions, root, root_strong, occurrences
+        ) VALUES (?, ?, ?, ?, ?, ?);`,
+        [
+          strong,
+          entry.hebrew ?? "",
+          JSON.stringify(entry.definitions ?? []),
+          entry.root ?? "",
+          entry.root_strong ?? "",
+          JSON.stringify(entry.root_definitions ?? []),
+        ],
+      );
     }
+    await executeWrite("COMMIT;");
+  } catch (error) {
+    await executeWrite("ROLLBACK;").catch(() => {});
+    throw error;
   }
 };
 
