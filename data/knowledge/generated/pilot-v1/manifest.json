@@ -3,23 +3,23 @@
   "files": [
     {
       "path": "bundles/daniel/7/13.json",
-      "sha256": "b643feec284f11b6685ac4a2e1461c3dfa46dfa24e042b37126e8e4a31e8eeb3"
+      "sha256": "26a4cd6677b262b8008fece0d7be9a97c8e8331e1ee55876b14a6f75e95d20ef"
     },
     {
       "path": "bundles/john/1/1.json",
-      "sha256": "923f60831fdae8fc35fd59e81b71b9b36db61f0601de09ad4b18735790f07f65"
+      "sha256": "1440b6f38a0dd14e7f67d9d3674c7b8be8d1fb4d00dedd8bc9dd8e226d85b281"
     },
     {
       "path": "bundles/john/1/51.json",
-      "sha256": "132c9bc4b9e7470ce8fe60bec0b0304b5b2bd201b70ae6f76e890a26516cc394"
+      "sha256": "d65c2b453404f3ef358f1405fcccfd897a69411205c7db1e794cbd5cb6fcde7f"
     },
     {
       "path": "records/records.json",
-      "sha256": "7de1977835138acd23d851b27bc7823c9a4d82a52963b5bc3a857570a78e6544"
+      "sha256": "73766725334f4db2e69c3259ab0f640bf345eafe94b00c9a6c84760883212947"
     }
   ],
   "generator_version": "1.0.0",
-  "input_manifest_digest": "98e380b8956e704b2d604a93ff74557dda14a0120353d9b8e24a115daa095d52",
+  "input_manifest_digest": "1b96ef5c6b49439505485d03b2cbf4a9be46f45594bbc2fd0f07b7048e689db0",
   "inputs": [
     {
       "id": "greek-lexicon",
@@ -43,7 +43,7 @@
       "path": "data/delitzsch/parsed/john/1.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-      "sha256": "af360e54d2eb3874b3319fd330ea5a5b30a706fd4f3351d8198f77b72abfdf5f"
+      "sha256": "9a3b45a89580117ab68b147ec7ebd59be17862c8951728c71b36b06f92363046"
     },
     {
       "id": "greek",

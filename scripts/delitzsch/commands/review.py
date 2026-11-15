@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+from collections import Counter
 from dataclasses import asdict
 from pathlib import Path
 
@@ -68,7 +69,7 @@ def register_subcommand(subparsers: argparse._SubParsersAction) -> argparse.Argu
 
     root_letters = review_subparsers.add_parser(
         "root-letter-prefixes",
-        help="Write the batch that removes tagged prefixes that are the lemma's first letters",
+        help="Write the batches that remove tagged prefixes that are the lemma's first letters, in and outside the review queue",
     )
     root_letters.set_defaults(handler=handle_root_letter_prefixes)
 
@@ -264,8 +265,13 @@ def handle_dispositions(args: argparse.Namespace) -> int:
 
 
 def handle_root_letter_prefixes(args: argparse.Namespace) -> int:
-    batch = dispositions.root_letter_batch_from_disk()
-    dispositions.ROOT_LETTER_BATCH.write_text(json.dumps(batch, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    print(f"Batch decisions: {len(batch['decisions'])}")
-    print(f"Batch written to {dispositions.ROOT_LETTER_BATCH}")
+    for path, batch in (
+        (dispositions.ROOT_LETTER_BATCH, dispositions.root_letter_batch_from_disk()),
+        (dispositions.OUTSIDE_ROOT_LETTER_BATCH, dispositions.outside_root_letter_batch_from_disk()),
+    ):
+        path.write_text(json.dumps(batch, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        print(f"Batch decisions: {len(batch['decisions'])}")
+        if "unresolved" in batch:
+            print(f"Unresolved: {json.dumps(Counter(item['reason'] for item in batch['unresolved']), sort_keys=True)}")
+        print(f"Batch written to {path}")
     return 0
