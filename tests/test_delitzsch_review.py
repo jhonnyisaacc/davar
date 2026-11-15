@@ -339,6 +339,48 @@ def test_apply_remove_custom_definition_drops_only_the_named_sense(tmp_path):
         assert json.loads((log_dir / "acts.jsonl").read_text().splitlines()[-1])["status"] == status
 
 
+def test_apply_remove_custom_definition_fails_when_no_sense_matches(tmp_path):
+    lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
+    custom_path = lexicon_dir.parent / "custom_definitions.json"
+    log_dir = tmp_path / "data" / "delitzsch" / "review" / "decisions"
+    senses = [{"text_en": "Romans", "text_es": "Romanos", "order": 1}, {"text_en": "Romans", "text_es": "romanos", "order": 2}]
+    write_json(custom_path, {"D0035": {"strong_number": "D0035", "definitions": senses}})
+    decisions_path = tmp_path / "remove.json"
+    mistyped = {"text_en": "Romans", "text_es": "Romanos", "order": 2}
+    write_json(
+        decisions_path,
+        {"decisions": [{"action": "remove_custom_definition", "custom_key": "D0035", "book": "acts", "definition": mistyped}]},
+    )
+
+    stats = apply_decisions(decisions_path, tmp_path, LexiconIndex(lexicon_dir), log_dir, dry_run=False)
+
+    assert stats.errors == 1
+    assert json.loads(custom_path.read_text(encoding="utf-8"))["D0035"]["definitions"] == senses
+    logged = json.loads((log_dir / "acts.jsonl").read_text().splitlines()[-1])
+    assert logged["status"] == "error"
+    assert "matched no D0035 definition with order 2" in logged["error"]
+
+
+def test_apply_renumber_custom_definitions_makes_orders_unique_in_reading_order(tmp_path):
+    lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
+    custom_path = lexicon_dir.parent / "custom_definitions.json"
+    log_dir = tmp_path / "data" / "delitzsch" / "review" / "decisions"
+    texts = ["disciple", "personal name", "evangelist", "imported", "son of Herod"]
+    write_json(
+        custom_path,
+        {"D0069": {"strong_number": "D0069", "definitions": [{"text_en": t, "order": o} for t, o in zip(texts, [1, 2, 2, 3, 3])]}},
+    )
+    decisions_path = tmp_path / "renumber.json"
+    write_json(decisions_path, {"decisions": [{"action": "renumber_custom_definitions", "custom_key": "D0069", "book": "john"}]})
+
+    for status in ("applied", "already_applied"):
+        stats = apply_decisions(decisions_path, tmp_path, LexiconIndex(lexicon_dir), log_dir, dry_run=False)
+        definitions = json.loads(custom_path.read_text(encoding="utf-8"))["D0069"]["definitions"]
+        assert stats.errors == 0
+        assert [(d["text_en"], d["order"]) for d in definitions] == list(zip(texts, [1, 2, 3, 4, 5]))
+        assert json.loads((log_dir / "john.jsonl").read_text().splitlines()[-1])["status"] == status
+
+
 def test_custom_entry_hebrew_is_available_as_normalized_lemma(tmp_path):
     lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
     write_json(
