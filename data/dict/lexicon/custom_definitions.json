@@ -723,25 +723,6 @@
         "text_es": "Lugar de la habitación de Elohim",
         "text_en": "Place of Elohim's dwelling",
         "order": 6
-      },
-      {
-        "source": "tcysite-eric",
-        "text_es": "santificación",
-        "order": 7,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/salmos.json",
-        "source_row": "1140",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
-        "definition_kind": "definition",
-        "term": "קְדֻשָּׁה",
-        "transliteration": "Qedusháh",
-        "context": "Fruto de haber sido libertado de la esclavitud del pecado, indispensable para el que ha sido llamado.",
-        "original_id": 1141,
-        "text_en": "sanctification",
-        "text_he": "קדושה",
-        "reviewed_by": "claude-tcy-review"
       }
     ],
     "root": "קדש",
@@ -106849,6 +106830,25 @@
         "text_en": "have mercy on me, give me grace",
         "text_he": "רחם עליי, תן לי חן",
         "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "dame gracia, ten piedad de mí",
+        "order": 3,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/salmos.json",
+        "source_row": "111",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
+        "definition_kind": "definition",
+        "term": "חָנֵּנִי",
+        "transliteration": "Joneni",
+        "context": "Petición basada en la raíz de Jen, el autor enfatiza que los traductores han intentado difuminar este concepto en la Torah. Súplica que apela a la gracia de Dios cuando el individuo carece totalmente de méritos propios.",
+        "original_id": 112,
+        "text_en": "give me grace, have mercy on me",
+        "text_he": "תן לי חן, רחם עליי",
+        "reviewed_by": "claude-tcy-review"
       }
     ],
     "root": "",
@@ -108132,25 +108132,6 @@
         "original_id": 87,
         "text_en": "Created",
         "text_he": "ברא",
-        "reviewed_by": "claude-tcy-review"
-      },
-      {
-        "source": "tcysite-eric",
-        "text_es": "hijo, portador, depositario",
-        "order": 8,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/1tesalonicenses.json",
-        "source_row": "7",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_1tesalonicenses.json",
-        "definition_kind": "definition",
-        "term": "בְּרָא",
-        "transliteration": "Brá’ (arameo)",
-        "context": "Se enfatiza la idea de portar/traer/depositar, no solo parentesco biológico.",
-        "original_id": 8,
-        "text_en": "son, bearer, depositary",
-        "text_he": "בן, נושא, מחזיק הפיקדון",
         "reviewed_by": "claude-tcy-review"
       },
       {
@@ -109704,6 +109685,44 @@
         "text_es": "pie; pies.",
         "source": "delitzsch_review",
         "order": 1
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "pies",
+        "order": 2,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/shir_hashirim.json",
+        "source_row": "227",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_shir_hashirim.json",
+        "definition_kind": "definition",
+        "term": "רַגְלַיִם",
+        "transliteration": "Raglayim",
+        "context": "Su lavado simboliza dejar a un lado la voluntad propia y los anhelos para cumplir el propósito divino.",
+        "original_id": 228,
+        "text_en": "feet",
+        "text_he": "רגליים",
+        "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "pies, veces",
+        "order": 3,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/juan.json",
+        "source_row": "266",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
+        "definition_kind": "definition",
+        "term": "רְגָלִים",
+        "transliteration": "Regalim",
+        "context": "Plural de pie, se utiliza en la expresión 'Shlosh Regalim' para referirse a las tres citas específicas: Pésaj, Shavu'ot y Sukot.",
+        "original_id": 267,
+        "text_en": "feet, times",
+        "text_he": "רגליים, פעמים",
+        "reviewed_by": "claude-tcy-review"
       }
     ],
     "root": "",
@@ -110339,6 +110358,25 @@
         "text_es": "fuerza; poder; vigor.",
         "source": "delitzsch_review",
         "order": 1
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "poder, esencia",
+        "order": 2,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/salmos.json",
+        "source_row": "873",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
+        "definition_kind": "definition",
+        "term": "עוֹז",
+        "transliteration": "Oz",
+        "context": "Capacidad única y natural de Dios para intervenir y determinar cualquier situación.",
+        "original_id": 874,
+        "text_en": "power, essence",
+        "text_he": "עוז, מהות",
+        "reviewed_by": "claude-tcy-review"
       }
     ],
     "root": "",
@@ -112123,6 +112161,25 @@
         "text_es": "dividir; compartir; repartir.",
         "source": "delitzsch_review",
         "order": 1
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "dar, repartir, distribuir",
+        "order": 2,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/efesios.json",
+        "source_row": "183",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_efesios.json",
+        "definition_kind": "definition",
+        "term": "חִלַּקְתָּ",
+        "transliteration": "Jalaqta",
+        "context": "Acción de otorgar dones a los hombres como fruto de la obra de redención y la victoria sobre la cautividad.",
+        "original_id": 184,
+        "text_en": "to give, to share out, to distribute",
+        "text_he": "לתת, לחלק, להקצות",
+        "reviewed_by": "claude-tcy-review"
       }
     ],
     "root": "",
@@ -113431,6 +113488,25 @@
         "text_es": "llamar; proclamar; leer.",
         "source": "delitzsch_review",
         "order": 1
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "leer, llamar, ocurrir, poner",
+        "order": 2,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/1tesalonicenses.json",
+        "source_row": "63",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_1tesalonicenses.json",
+        "definition_kind": "definition",
+        "term": "קוֹרֵא",
+        "transliteration": "qore’",
+        "context": "Se expone como verbo con varios valores útiles en la pedagogía del texto.",
+        "original_id": 64,
+        "text_en": "to read, to call, to happen, to put",
+        "text_he": "לקרוא, לקרוא אל, לקרות, לשים",
+        "reviewed_by": "claude-tcy-review"
       }
     ],
     "root": "",
@@ -158579,6 +158655,24 @@
         "text_en": "cultic prostitute, dedicated one",
         "text_he": "זונה פולחנית, מוקדשת",
         "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "santificación",
+        "order": 2,
+        "review_status": "blocked",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/salmos.json",
+        "source_row": "1140",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
+        "definition_kind": "definition",
+        "term": "קְדֻשָּׁה",
+        "transliteration": "Qedusháh",
+        "context": "Fruto de haber sido libertado de la esclavitud del pecado, indispensable para el que ha sido llamado.",
+        "original_id": 1141,
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       }
     ]
   },
@@ -159388,7 +159482,7 @@
         "source": "tcysite-eric",
         "text_es": "leyenda, relato, parte teológica",
         "order": 2,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/salmos.json",
@@ -159399,9 +159493,8 @@
         "transliteration": "'Agadah",
         "context": "Parte del Midrásh que se enfoca en la teología y explicaciones que van más allá de la literalidad.",
         "original_id": 719,
-        "text_en": "legend, narrative, theological part",
-        "text_he": "אגדה, סיפור, החלק התאולוגי",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       }
     ]
   },
@@ -160801,7 +160894,7 @@
         "source": "tcysite-eric",
         "text_es": "condenar, emitir sentencia",
         "order": 4,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/juan.json",
@@ -160812,9 +160905,8 @@
         "transliteration": "Dam",
         "context": "Palabra empleada por el autor para precisar la acción de dictar decretos condenatorios, marcando un claro contraste con el sentido de amparo de Shafat.",
         "original_id": 743,
-        "text_en": "to condemn, to pass sentence",
-        "text_he": "להרשיע, לגזור דין",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       },
       {
         "source": "tcysite-eric",
@@ -161761,34 +161853,6 @@
         "original_id": 141,
         "text_en": "cursed",
         "text_he": "ארור",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
-  "H3036": {
-    "strong_number": "H3036",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H3036",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "juzgará, contendrá (según lectura)",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/parashot.json",
-        "source_row": "141",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_parashot.json",
-        "definition_kind": "definition",
-        "term": "יָדוֹן",
-        "transliteration": "Yadón",
-        "context": "Se vincula con la raíz דין.",
-        "original_id": 142,
-        "text_en": "he will judge, he will contend (according to reading)",
-        "text_he": "ישפוט, יריב (לפי קריאה)",
         "reviewed_by": "claude-tcy-review"
       }
     ]
@@ -163852,34 +163916,6 @@
       }
     ]
   },
-  "H8013": {
-    "strong_number": "H8013",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H8013",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "perfectas, completas",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/parashot.json",
-        "source_row": "209",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_parashot.json",
-        "definition_kind": "definition",
-        "term": "שְׁלֵמוֹת",
-        "transliteration": "Shelemot",
-        "context": "Forma femenina plural explicada en el bloque de ‘piedras perfectas’.",
-        "original_id": 210,
-        "text_en": "perfect, complete",
-        "text_he": "מושלמות, שלמות",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
   "H8251": {
     "strong_number": "H8251",
     "is_custom": true,
@@ -165655,72 +165691,6 @@
       }
     ]
   },
-  "H4695": {
-    "strong_number": "H4695",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H4695",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "panes sin leudar, oxidar",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/parashot.json",
-        "source_row": "252",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_parashot.json",
-        "definition_kind": "definition",
-        "term": "מַצּוֹת",
-        "transliteration": "Matzot",
-        "context": "Pan preparado con premura que simboliza la urgencia del juicio y la pureza.",
-        "original_id": 253,
-        "text_en": "unleavened bread, to oxidize",
-        "text_he": "לחמים ללא חמץ, להתחמצן",
-        "reviewed_by": "claude-tcy-review"
-      },
-      {
-        "source": "tcysite-eric",
-        "text_es": "panes sin levadura",
-        "order": 4,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/juan.json",
-        "source_row": "271",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
-        "definition_kind": "definition",
-        "term": "מַצּוֹת",
-        "transliteration": "Matzot",
-        "context": "Festividad íntimamente ligada al sacrificio de Pésaj y a las celebraciones en el Templo.",
-        "original_id": 272,
-        "text_en": "unleavened breads",
-        "text_he": "לחמים ללא שאור",
-        "reviewed_by": "claude-tcy-review"
-      },
-      {
-        "source": "tcysite-eric",
-        "text_es": "panes sin levadura",
-        "order": 5,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/juan.json",
-        "source_row": "344",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
-        "definition_kind": "definition",
-        "term": "מַצּוֹת",
-        "transliteration": "Matzot",
-        "context": "Memorial festivo que corre en paralelo y estrecha dependencia con los ritos y sacrificios pascualos.",
-        "original_id": 345,
-        "text_en": "unleavened breads",
-        "text_he": "לחמים ללא שאור",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
   "H3208": {
     "strong_number": "H3208",
     "is_custom": true,
@@ -166870,62 +166840,6 @@
         "original_id": 863,
         "text_en": "vine, vineyard",
         "text_he": "גפן, כרם",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
-  "H8322": {
-    "strong_number": "H8322",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H8322",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "vid escogida, el remanente",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/parashot.json",
-        "source_row": "286",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_parashot.json",
-        "definition_kind": "definition",
-        "term": "שֹׂרֵקָה",
-        "transliteration": "Sorekáh",
-        "context": "Se refiere al grupo de escogidos dentro de la vid general, con quienes Mashiaj trabaja íntimamente.",
-        "original_id": 287,
-        "text_en": "choice vine, the remnant",
-        "text_he": "גפן נבחרת, השארית",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
-  "H843": {
-    "strong_number": "H843",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H843",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "felicidades de",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/salmos.json",
-        "source_row": "0",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
-        "definition_kind": "definition",
-        "term": "אֲשֶׁרֵי",
-        "transliteration": "Ashrey",
-        "context": "Constructo plural de la palabra Eshr. Se traduce comúnmente como bienaventurado o feliz, pero estructuralmente indica una pluralidad de felicidades a causa de algo.",
-        "original_id": 1,
-        "text_en": "happinesses of",
-        "text_he": "אושרי",
         "reviewed_by": "claude-tcy-review"
       }
     ]
@@ -168331,6 +168245,25 @@
         "text_en": "nation, city-state",
         "text_he": "לאום, מדינת עיר",
         "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "grandes imperios, naciones poderosas, naciones reinantes, naciones, pueblos, imperios poderosos",
+        "order": 2,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/salmos.json",
+        "source_row": "186",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
+        "definition_kind": "definition",
+        "term": "לְאֻמִּים",
+        "transliteration": "Leumim, Le'umin",
+        "context": "Plural de Leom, refiere a las potencias mundiales que serán procesadas con rectitud. Término para pueblos que han adquirido autoridad y poder de gobierno. Fuente 461, 462. Término utilizado específicamente para referirse a las 70 naciones del mundo descendientes de Noé. Se refiere a las potencias que surgieron a partir de las interacciones entre diversas naciones.",
+        "original_id": 187,
+        "text_en": "great empires, mighty nations, reigning nations, nations, peoples, mighty empires",
+        "text_he": "אימפריות גדולות, אומות חזקות, אומות שולטות, אומות, עמים, אימפריות אדירות",
+        "reviewed_by": "claude-tcy-review"
       }
     ]
   },
@@ -169598,34 +169531,6 @@
       }
     ]
   },
-  "H2044": {
-    "strong_number": "H2044",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H2044",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "el Nombre",
-        "order": 5,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/1tesalonicenses.json",
-        "source_row": "66",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_1tesalonicenses.json",
-        "definition_kind": "definition",
-        "term": "הַשֵּׁם",
-        "transliteration": "Hashem",
-        "context": "Se usa reverencialmente en fórmulas de oración, juicio y exhortación práctica.",
-        "original_id": 67,
-        "text_en": "the Name",
-        "text_he": "השם",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
   "D5112211": {
     "strong_number": "D5112211",
     "is_custom": true,
@@ -170299,34 +170204,6 @@
       }
     ]
   },
-  "H2607": {
-    "strong_number": "H2607",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H2607",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "dame gracia, ten piedad de mí",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/salmos.json",
-        "source_row": "111",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
-        "definition_kind": "definition",
-        "term": "חָנֵּנִי",
-        "transliteration": "Joneni",
-        "context": "Petición basada en la raíz de Jen, el autor enfatiza que los traductores han intentado difuminar este concepto en la Torah. Súplica que apela a la gracia de Dios cuando el individuo carece totalmente de méritos propios.",
-        "original_id": 112,
-        "text_en": "give me grace, have mercy on me",
-        "text_he": "תן לי חן, רחם עליי",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
   "H3423": {
     "strong_number": "H3423",
     "is_custom": true,
@@ -170352,20 +170229,11 @@
         "text_en": "to inherit, to conquer",
         "text_he": "לרשת, לכבוש",
         "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
-  "H2758": {
-    "strong_number": "H2758",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H2758",
-    "imported_by": "tcysite",
-    "definitions": [
+      },
       {
         "source": "tcysite-eric",
         "text_es": "conquistar, tomar",
-        "order": 1,
+        "order": 2,
         "review_status": "approved",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
@@ -172196,7 +172064,7 @@
         "source": "tcysite-eric",
         "text_es": "lectura",
         "order": 1,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/salmos.json",
@@ -172207,15 +172075,14 @@
         "transliteration": "Qeri",
         "context": "Capacidad de maniobrar con la lectura de las consonantes o vocales para hallar el sentido profético.",
         "original_id": 180,
-        "text_en": "reading",
-        "text_he": "קריאה",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       },
       {
         "source": "tcysite-eric",
         "text_es": "lo que se lee",
         "order": 2,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/juan.json",
@@ -172226,15 +172093,14 @@
         "transliteration": "Qeri",
         "context": "Fórmula de interpretación que indica: 'No leas así, sino de esta otra forma para que entiendas'.",
         "original_id": 212,
-        "text_en": "what is read",
-        "text_he": "מה שנקרא",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       },
       {
         "source": "tcysite-eric",
         "text_es": "lo que se lee",
         "order": 3,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/juan.json",
@@ -172245,15 +172111,14 @@
         "transliteration": "Qeri",
         "context": "Instrucción de lectura tradicional de la exégesis hebrea que propone alternar o enfocar la pronunciación de un término para capturar su sentido teológico.",
         "original_id": 327,
-        "text_en": "what is read",
-        "text_he": "מה שנקרא",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       },
       {
         "source": "tcysite-eric",
         "text_es": "lo que se lee, lectura alternativa",
         "order": 4,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/juan.json",
@@ -172264,9 +172129,8 @@
         "transliteration": "Qeri",
         "context": "Técnica hermenéutica de los sabios antiguos orientada a proponer lecturas vocálicas o de entonación alternativas sobre el texto consonántico, enriqueciendo el sentido sin alterar la ortografía sagrada.",
         "original_id": 787,
-        "text_en": "what is read, alternative reading",
-        "text_he": "מה שנקרא, קריאה חלופית",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       }
     ]
   },
@@ -172453,34 +172317,6 @@
         "original_id": 186,
         "text_en": "Armilus",
         "text_he": "ארמילוס",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
-  "H3817": {
-    "strong_number": "H3817",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H3817",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "grandes imperios, naciones poderosas, naciones reinantes, naciones, pueblos, imperios poderosos",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/salmos.json",
-        "source_row": "186",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
-        "definition_kind": "definition",
-        "term": "לְאֻמִּים",
-        "transliteration": "Leumim, Le'umin",
-        "context": "Plural de Leom, refiere a las potencias mundiales que serán procesadas con rectitud. Término para pueblos que han adquirido autoridad y poder de gobierno. Fuente 461, 462. Término utilizado específicamente para referirse a las 70 naciones del mundo descendientes de Noé. Se refiere a las potencias que surgieron a partir de las interacciones entre diversas naciones.",
-        "original_id": 187,
-        "text_en": "great empires, mighty nations, reigning nations, nations, peoples, mighty empires",
-        "text_he": "אימפריות גדולות, אומות חזקות, אומות שולטות, אומות, עמים, אימפריות אדירות",
         "reviewed_by": "claude-tcy-review"
       }
     ]
@@ -172677,53 +172513,6 @@
         "original_id": 195,
         "text_en": "offering, fragrant aroma, Dedicated offering, gift, personalized offering, special gift, evening offering",
         "text_he": "מנחה, ריח ניחוח, מנחה מוקדשת, מתנה, מנחה אישית, שי מיוחד, מנחת הערב",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
-  "H6981": {
-    "strong_number": "H6981",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H6981",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "perdiz, el que hace bulla, el que llama, el que pone nombre",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/salmos.json",
-        "source_row": "195",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
-        "definition_kind": "definition",
-        "term": "קוֹרֵא",
-        "transliteration": "Core, Qore'",
-        "context": "Ave que corre a esconderse en las montañas, metáfora del perseguido. Acción de Dios al establecer un testimonio y una identidad (fama) en cada uno de sus hijos.",
-        "original_id": 196,
-        "text_en": "partridge, the one who makes noise, the one who calls, the one who gives a name",
-        "text_he": "קורא, המרעיש, הקורא, הנותן שם",
-        "reviewed_by": "claude-tcy-review"
-      },
-      {
-        "source": "tcysite-eric",
-        "text_es": "leer, llamar, ocurrir, poner",
-        "order": 2,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/1tesalonicenses.json",
-        "source_row": "63",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_1tesalonicenses.json",
-        "definition_kind": "definition",
-        "term": "קוֹרֵא",
-        "transliteration": "qore’",
-        "context": "Se expone como verbo con varios valores útiles en la pedagogía del texto.",
-        "original_id": 64,
-        "text_en": "to read, to call, to happen, to put",
-        "text_he": "לקרוא, לקרוא אל, לקרות, לשים",
         "reviewed_by": "claude-tcy-review"
       }
     ]
@@ -174478,129 +174267,6 @@
       }
     ]
   },
-  "H1263": {
-    "strong_number": "H1263",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H1263",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "bendito, lleno de amparo",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/salmos.json",
-        "source_row": "251",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
-        "definition_kind": "definition",
-        "term": "בָּרוּךְ",
-        "transliteration": "Baruj",
-        "context": "Expresión de alabanza y reconocimiento a la soberanía de YHWH. Estado de plenitud divina que incluye a los adoptados bajo la protección del Creador. Atributo referido a la potestad absoluta de Dios para adoptar hijos y unirlos a Su cuerpo.",
-        "original_id": 252,
-        "text_en": "blessed, full of shelter",
-        "text_he": "ברוך, מלא מחסה",
-        "reviewed_by": "claude-tcy-review"
-      },
-      {
-        "source": "tcysite-eric",
-        "text_es": "bendito, lleno de adopciones",
-        "order": 2,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/qohelet.json",
-        "source_row": "93",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_qohelet.json",
-        "definition_kind": "definition",
-        "term": "בָּרוּךְ",
-        "transliteration": "Baruj",
-        "context": "Calificativo de Hashem que destaca su victoria sobre la muerte y su capacidad de adoptar a los que le proclaman.",
-        "original_id": 94,
-        "text_en": "blessed, full of adoptions",
-        "text_he": "ברוך, מלא אימוצים",
-        "reviewed_by": "claude-tcy-review"
-      },
-      {
-        "source": "tcysite-eric",
-        "text_es": "bendito",
-        "order": 3,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/juan.json",
-        "source_row": "682",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
-        "definition_kind": "definition",
-        "term": "בָּרוּךְ",
-        "transliteration": "Baruj",
-        "context": "Calificativo que expresa la exaltación y el reconocimiento de la fuente de donde emana toda provisión y misericordia.",
-        "original_id": 683,
-        "text_en": "blessed",
-        "text_he": "ברוך",
-        "reviewed_by": "claude-tcy-review"
-      },
-      {
-        "source": "tcysite-eric",
-        "text_es": "bendito",
-        "order": 4,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/1tesalonicenses.json",
-        "source_row": "55",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_1tesalonicenses.json",
-        "definition_kind": "definition",
-        "term": "בָּרוּךְ",
-        "transliteration": "Baruj",
-        "context": "En 1Ts 5:18 se usa como proclamación ('proclamen que es Baruj').",
-        "original_id": 56,
-        "text_en": "blessed",
-        "text_he": "ברוך",
-        "reviewed_by": "claude-tcy-review"
-      },
-      {
-        "source": "tcysite-eric",
-        "text_es": "bendito, lleno de injertos",
-        "order": 5,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/efesios.json",
-        "source_row": "36",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_efesios.json",
-        "definition_kind": "definition",
-        "term": "בָּרוּךְ",
-        "transliteration": "Baruj",
-        "context": "Describe a Dios como aquel que está lleno de personas que han venido a buscar amparo y que han sido adoptadas.",
-        "original_id": 37,
-        "text_en": "blessed, full of grafts",
-        "text_he": "ברוך, מלא הרכבות",
-        "reviewed_by": "claude-tcy-review"
-      },
-      {
-        "source": "tcysite-eric",
-        "text_es": "bendito, lleno de amparos",
-        "order": 6,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/efesios.json",
-        "source_row": "268",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_efesios.json",
-        "definition_kind": "definition",
-        "term": "בָּרוּךְ",
-        "transliteration": "Baruj",
-        "context": "Atributo de Hashem que se reconoce tanto en la alegría como en la tristeza.",
-        "original_id": 269,
-        "text_en": "blessed, full of protections",
-        "text_he": "ברוך, מלא מחסות",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
   "D7792524": {
     "strong_number": "D7792524",
     "is_custom": true,
@@ -175421,7 +175087,7 @@
         "source": "tcysite-eric",
         "text_es": "Mandato",
         "order": 1,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/salmos.json",
@@ -175432,9 +175098,8 @@
         "transliteration": "Paritz",
         "context": "Deriva del acadio 'partzu', se refiere a la instrucción o decreto divino.",
         "original_id": 283,
-        "text_en": "Command",
-        "text_he": "ציווי",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       }
     ]
   },
@@ -177894,34 +177559,6 @@
         "original_id": 370,
         "text_en": "deep love, mercies, Mercy, unconditional love, inexhaustible love, deep unconditional love, maternal",
         "text_he": "אהבה עמוקה, רחמים, רחמנות, אהבה ללא תנאי, אהבה בלתי נדלית, אהבה עמוקה ללא תנאי, אימהית",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
-  "H351": {
-    "strong_number": "H351",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H351",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "¡Cómo!",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/salmos.json",
-        "source_row": "370",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
-        "definition_kind": "definition",
-        "term": "אֵיכָה",
-        "transliteration": "Eija",
-        "context": "Título hebreo del libro de Lamentaciones que expresa el asombro ante la desolación.",
-        "original_id": 371,
-        "text_en": "How!",
-        "text_he": "איכה!",
         "reviewed_by": "claude-tcy-review"
       }
     ]
@@ -185444,34 +185081,6 @@
       }
     ]
   },
-  "H987": {
-    "strong_number": "H987",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H987",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "lo secreto, lo íntimo",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/salmos.json",
-        "source_row": "622",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
-        "definition_kind": "definition",
-        "term": "בַּטֻּחוֹת",
-        "transliteration": "Batujot",
-        "context": "Referencia a lo más profundo del ser donde Dios deposita y demanda la verdad.",
-        "original_id": 623,
-        "text_en": "the secret, the intimate",
-        "text_he": "הנסתר, האינטימי",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
   "D7134083": {
     "strong_number": "D7134083",
     "is_custom": true,
@@ -185623,7 +185232,7 @@
         "source": "tcysite-eric",
         "text_es": "lo que no es recto, anomia",
         "order": 1,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/salmos.json",
@@ -185634,9 +185243,8 @@
         "transliteration": "’Avel",
         "context": "Aquello que se desvía de la norma bíblica, acciones que carecen de la rectitud de la Torah.",
         "original_id": 630,
-        "text_en": "what is not upright, lawlessness",
-        "text_he": "מה שאינו ישר, אי-חוקיות",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       }
     ]
   },
@@ -186252,34 +185860,6 @@
         "original_id": 655,
         "text_en": "the one who absorbs, the one who sucks in",
         "text_he": "הבולע, השואף",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
-  "H7410": {
-    "strong_number": "H7410",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H7410",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "flotar, elevado, Alto, despegado",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/salmos.json",
-        "source_row": "655",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
-        "definition_kind": "definition",
-        "term": "רָם",
-        "transliteration": "Ram",
-        "context": "Raíz que describe lo que está por encima de lo terrenal, sin contacto con el suelo, como el arca sobre las aguas. Atributo del trono de Hashem que no tiene contacto directo con la superficie de la tierra.",
-        "original_id": 656,
-        "text_en": "to float, elevated, high, detached",
-        "text_he": "לרחף, מרומם, גבוה, מנותק",
         "reviewed_by": "claude-tcy-review"
       }
     ]
@@ -187064,53 +186644,6 @@
         "original_id": 686,
         "text_en": "service, worship",
         "text_he": "עבודה, פולחן",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
-  "H2219": {
-    "strong_number": "H2219",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H2219",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "extraña, ajena",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/salmos.json",
-        "source_row": "686",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
-        "definition_kind": "definition",
-        "term": "זָרָה",
-        "transliteration": "Zara",
-        "context": "Cualidad de un culto o servicio que no es compatible con el Creador.",
-        "original_id": 687,
-        "text_en": "strange, foreign",
-        "text_he": "זרה, נוכרית",
-        "reviewed_by": "claude-tcy-review"
-      },
-      {
-        "source": "tcysite-eric",
-        "text_es": "extraño, ajeno",
-        "order": 2,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/efesios.json",
-        "source_row": "243",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_efesios.json",
-        "definition_kind": "definition",
-        "term": "זָרָה",
-        "transliteration": "Zará",
-        "context": "Califica aquello que es incompatible con la santidad de Dios y que ocupa Su lugar en los pensamientos y actividades.",
-        "original_id": 244,
-        "text_en": "strange, foreign",
-        "text_he": "זר, נכרי",
         "reviewed_by": "claude-tcy-review"
       }
     ]
@@ -188972,34 +188505,6 @@
         "original_id": 752,
         "text_en": "Salmon, Tzalmon, shadow with death",
         "text_he": "צלמון, צלמון, צל עם מוות",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
-  "H3351": {
-    "strong_number": "H3351",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H3351",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "levántese, surja",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/salmos.json",
-        "source_row": "752",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
-        "definition_kind": "definition",
-        "term": "יָקוּם",
-        "transliteration": "Yakum",
-        "context": "Grito de guerra espiritual que suplica la intervención activa de Dios para que el mal no se normalice.",
-        "original_id": 753,
-        "text_en": "let him rise, let him arise",
-        "text_he": "יקום, יעלה",
         "reviewed_by": "claude-tcy-review"
       }
     ]
@@ -191237,34 +190742,6 @@
       }
     ]
   },
-  "H2176": {
-    "strong_number": "H2176",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H2176",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "tributo, lo mejor",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/salmos.json",
-        "source_row": "833",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
-        "definition_kind": "definition",
-        "term": "זִמְרָת",
-        "transliteration": "Zimrat",
-        "context": "Ofrenda de lo más selecto de un lugar, relacionada con la raíz de 'Mitzmor'.",
-        "original_id": 834,
-        "text_en": "tribute, the best",
-        "text_he": "מנחה, המיטב",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
   "D6913397": {
     "strong_number": "D6913397",
     "is_custom": true,
@@ -192208,34 +191685,6 @@
       }
     ]
   },
-  "H5756": {
-    "strong_number": "H5756",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H5756",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "poder, esencia",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/salmos.json",
-        "source_row": "873",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
-        "definition_kind": "definition",
-        "term": "עוֹז",
-        "transliteration": "Oz",
-        "context": "Capacidad única y natural de Dios para intervenir y determinar cualquier situación.",
-        "original_id": 874,
-        "text_en": "power, essence",
-        "text_he": "עוז, מהות",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
   "D8331309": {
     "strong_number": "D8331309",
     "is_custom": true,
@@ -192624,34 +192073,6 @@
         "original_id": 888,
         "text_en": "raised, standing firm",
         "text_he": "מוצב, עומד איתן",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
-  "H2213": {
-    "strong_number": "H2213",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H2213",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "extraño, desconocido",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/salmos.json",
-        "source_row": "888",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
-        "definition_kind": "definition",
-        "term": "זָר",
-        "transliteration": "Zar",
-        "context": "Potestad de otra índole ajena a Yisra'el, todo lo que está fuera de Hashem.",
-        "original_id": 889,
-        "text_en": "strange, unknown",
-        "text_he": "זר, לא מוכר",
         "reviewed_by": "claude-tcy-review"
       }
     ]
@@ -194927,34 +194348,6 @@
         "original_id": 969,
         "text_en": "Torrent, flow, strength",
         "text_he": "נחל שוטף, זרם, עוצמה",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
-  "H250": {
-    "strong_number": "H250",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H250",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "Nativo, del lugar",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/salmos.json",
-        "source_row": "969",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
-        "definition_kind": "definition",
-        "term": "אֶזְרָחִי",
-        "transliteration": "Esraji",
-        "context": "Término que designa el origen o la naturaleza del autor Eitan en relación a la luz.",
-        "original_id": 970,
-        "text_en": "Native, of the place",
-        "text_he": "יליד, בן המקום",
         "reviewed_by": "claude-tcy-review"
       }
     ]
@@ -204743,34 +204136,6 @@
         "original_id": 110,
         "text_en": "thread, cord",
         "text_he": "חוט, פתיל",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
-  "H5369": {
-    "strong_number": "H5369",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H5369",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "lámpara",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/qohelet.json",
-        "source_row": "110",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_qohelet.json",
-        "definition_kind": "definition",
-        "term": "נֵר",
-        "transliteration": "Ner",
-        "context": "Metáfora de la Torah que guía los pasos del creyente, iluminando su sendero para evitar los tropiezos en la oscuridad.",
-        "original_id": 111,
-        "text_en": "lamp",
-        "text_he": "נר",
         "reviewed_by": "claude-tcy-review"
       }
     ]
@@ -214720,53 +214085,6 @@
       }
     ]
   },
-  "H7274": {
-    "strong_number": "H7274",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H7274",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "pies",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/shir_hashirim.json",
-        "source_row": "227",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_shir_hashirim.json",
-        "definition_kind": "definition",
-        "term": "רַגְלַיִם",
-        "transliteration": "Raglayim",
-        "context": "Su lavado simboliza dejar a un lado la voluntad propia y los anhelos para cumplir el propósito divino.",
-        "original_id": 228,
-        "text_en": "feet",
-        "text_he": "רגליים",
-        "reviewed_by": "claude-tcy-review"
-      },
-      {
-        "source": "tcysite-eric",
-        "text_es": "pies, veces",
-        "order": 2,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/juan.json",
-        "source_row": "266",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
-        "definition_kind": "definition",
-        "term": "רְגָלִים",
-        "transliteration": "Regalim",
-        "context": "Plural de pie, se utiliza en la expresión 'Shlosh Regalim' para referirse a las tres citas específicas: Pésaj, Shavu'ot y Sukot.",
-        "original_id": 267,
-        "text_en": "feet, times",
-        "text_he": "רגליים, פעמים",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
   "D3642020": {
     "strong_number": "D3642020",
     "is_custom": true,
@@ -220571,7 +219889,7 @@
         "source": "tcysite-eric",
         "text_es": "Estudio de lo correcto",
         "order": 1,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "greek",
         "source_file": "eric/juan.json",
@@ -220582,9 +219900,8 @@
         "transliteration": "Logía",
         "context": "Sufijo que deriva del concepto de Logos, referido al estudio del orden natural del universo que se manda y ordena a sí mismo.",
         "original_id": 71,
-        "text_en": "Study of what is right",
-        "text_he": "חקר הנכון",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       },
       {
         "source": "tcysite-greek-strong",
@@ -221033,53 +220350,6 @@
         "original_id": 78,
         "text_en": "Was, Was, Possessed, To be, To be, To exist, Was, existed",
         "text_he": "היה, נמצא, החזיק, להיות, להימצא, להתקיים, היה, התקיים",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
-  "H1957": {
-    "strong_number": "H1957",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H1957",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "Este",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/juan.json",
-        "source_row": "80",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
-        "definition_kind": "definition",
-        "term": "הַזֶּה",
-        "transliteration": "Hazéh",
-        "context": "Componente del concepto que designa al mundo presente (Olam Hazéh) en contraste con el mundo venidero.",
-        "original_id": 81,
-        "text_en": "This",
-        "text_he": "הזה",
-        "reviewed_by": "claude-tcy-review"
-      },
-      {
-        "source": "tcysite-eric",
-        "text_es": "este",
-        "order": 2,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/juan.json",
-        "source_row": "503",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
-        "definition_kind": "definition",
-        "term": "הַזֶּה",
-        "transliteration": "Hazé'",
-        "context": "Usado en la construcción 'Olam Hazé' para identificar este mundo o escondidero actual en contraste con la eternidad.",
-        "original_id": 504,
-        "text_en": "this",
-        "text_he": "הזה",
         "reviewed_by": "claude-tcy-review"
       }
     ]
@@ -224735,7 +224005,7 @@
         "source": "tcysite-eric",
         "text_es": "Nazarena",
         "order": 1,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/juan.json",
@@ -224746,9 +224016,8 @@
         "transliteration": "Natzra",
         "context": "Término arameo que sirve como base para la adaptación helénica 'Nazoreos', vinculada por paronomasia con el concepto de Netzer.",
         "original_id": 208,
-        "text_en": "Nazarene",
-        "text_he": "נצרתית",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       }
     ]
   },
@@ -229989,72 +229258,6 @@
       }
     ]
   },
-  "H1894": {
-    "strong_number": "H1894",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H1894",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "el hijo, el portador",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/juan.json",
-        "source_row": "437",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
-        "definition_kind": "definition",
-        "term": "הַבֵּן",
-        "transliteration": "Haben",
-        "context": "Término hebreo equivalente al vocablo arameo Brá', que designa a Mashiaj en su rol de portador de los atributos divinos en la tierra.",
-        "original_id": 438,
-        "text_en": "the son, the bearer",
-        "text_he": "הבן, הנושא",
-        "reviewed_by": "claude-tcy-review"
-      },
-      {
-        "source": "tcysite-eric",
-        "text_es": "el hijo",
-        "order": 2,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/efesios.json",
-        "source_row": "166",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_efesios.json",
-        "definition_kind": "definition",
-        "term": "הַבֵּן",
-        "transliteration": "Ha'ben",
-        "context": "Referencia al cuerpo disminuido de la deidad que habitó entre nosotros.",
-        "original_id": 167,
-        "text_en": "the son",
-        "text_he": "הבן",
-        "reviewed_by": "claude-tcy-review"
-      },
-      {
-        "source": "tcysite-eric",
-        "text_es": "heredero, portador",
-        "order": 3,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/efesios.json",
-        "source_row": "184",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_efesios.json",
-        "definition_kind": "definition",
-        "term": "הַבֵּן",
-        "transliteration": "Ha'ben",
-        "context": "Referente al hijo como aquel que porta la redención y es el medio para el reconocimiento de la gloria de 'Abà.",
-        "original_id": 185,
-        "text_en": "heir, bearer",
-        "text_he": "יורש, נושא",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
   "D3017591": {
     "strong_number": "D3017591",
     "is_custom": true,
@@ -230464,7 +229667,7 @@
         "source": "tcysite-eric",
         "text_es": "monedas, plural de Zuz",
         "order": 1,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/juan.json",
@@ -230475,9 +229678,8 @@
         "transliteration": "Zuzim",
         "context": "Forma plural utilizada para cuantificar las sumas recaudadas o requeridas para el aprovisionamiento colectivo de pan.",
         "original_id": 458,
-        "text_en": "coins, plural of Zuz",
-        "text_he": "מטבעות, ריבוי של זוז",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       }
     ]
   },
@@ -231991,7 +231193,7 @@
         "source": "tcysite-eric",
         "text_es": "verdadero",
         "order": 1,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/juan.json",
@@ -232002,15 +231204,14 @@
         "transliteration": "Amity",
         "context": "Adjetivo para referirse a lo verdadero en hebreo moderno, diferenciado del concepto bíblico donde la palabra 'Emet abarcaba este sentido plenamente.",
         "original_id": 513,
-        "text_en": "true",
-        "text_he": "אמיתי",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       },
       {
         "source": "tcysite-eric",
         "text_es": "verdadero",
         "order": 2,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/juan.json",
@@ -232021,9 +231222,8 @@
         "transliteration": "Amiti",
         "context": "Vocablo del hebreo moderno empleado para calificar lo verdadero. El escrito destaca que no aparece originalmente en el texto de la Toráh, donde se prefiere el término Emet.",
         "original_id": 820,
-        "text_en": "true",
-        "text_he": "אמיתי",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       }
     ]
   },
@@ -233263,34 +232463,6 @@
         "original_id": 563,
         "text_en": "work of kneading",
         "text_he": "מלאכת הלש",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
-  "H948": {
-    "strong_number": "H948",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H948",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "lodo, barro",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/juan.json",
-        "source_row": "563",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
-        "definition_kind": "definition",
-        "term": "בּוֹץ",
-        "transliteration": "Botz",
-        "context": "Término hebreo específico para denominar el lodo o mezcla homogénea que el portador elaboró mezclando saliva y polvo en el día de Shabat.",
-        "original_id": 564,
-        "text_en": "mud, clay",
-        "text_he": "בוץ, טיט",
         "reviewed_by": "claude-tcy-review"
       }
     ]
@@ -235357,7 +234529,7 @@
         "source": "tcysite-eric",
         "text_es": "colocación, fundación",
         "order": 1,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/juan.json",
@@ -235368,9 +234540,8 @@
         "transliteration": "Jashtiyah",
         "context": "Utilizado para designar la roca de fundación ubicada en el lugar santísimo, sitio donde reposaba originalmente el arca del pacto.",
         "original_id": 643,
-        "text_en": "placement, foundation",
-        "text_he": "הנחה, יסוד",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       }
     ]
   },
@@ -236962,34 +236133,6 @@
       }
     ]
   },
-  "H5682": {
-    "strong_number": "H5682",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H5682",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "hebreos",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/juan.json",
-        "source_row": "698",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
-        "definition_kind": "definition",
-        "term": "עִבְרִים",
-        "transliteration": "Ivrim",
-        "context": "Designación para los descendientes de la familia de Ever. Históricamente englobaba a múltiples grupos emparentados antes de que muchos de ellos se asimilaran o gentilizaran.",
-        "original_id": 699,
-        "text_en": "Hebrews",
-        "text_he": "עברים",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
   "H3458": {
     "strong_number": "H3458",
     "is_custom": true,
@@ -237665,7 +236808,7 @@
         "source": "tcysite-eric",
         "text_es": "quedar atónito, estático",
         "order": 1,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/juan.json",
@@ -237676,9 +236819,8 @@
         "transliteration": "Bajal",
         "context": "Raíz verbal hebrea vinculada a la parálisis de la actividad biológica, denotando la condición de un ser frío o sin capacidad de acción inmediata ante el debido proceso.",
         "original_id": 728,
-        "text_en": "to be stunned, static",
-        "text_he": "להיות המום, קפוא",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       }
     ]
   },
@@ -239565,34 +238707,6 @@
         "original_id": 792,
         "text_en": "is, is present",
         "text_he": "ישנו, נמצא",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
-  "H4497": {
-    "strong_number": "H4497",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H4497",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "permanecer, residir, quedarse",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/juan.json",
-        "source_row": "792",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
-        "definition_kind": "definition",
-        "term": "מֵנוֹן",
-        "transliteration": "Menon",
-        "context": "Hebraísmo adaptado del griego μένων. Describe la acción estable y continua de habitar o persistir de manera inmutable dentro de un marco.",
-        "original_id": 793,
-        "text_en": "to remain, to reside, to stay",
-        "text_he": "להישאר, לשכון, לשהות",
         "reviewed_by": "claude-tcy-review"
       }
     ]
@@ -243268,6 +242382,25 @@
         "original_id": "G3306",
         "reviewed_by": "claude-tcy-review",
         "review_reason": "third_party_lexicon"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "permanecer, residir, quedarse",
+        "order": 4,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/juan.json",
+        "source_row": "792",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
+        "definition_kind": "definition",
+        "term": "מֵנוֹן",
+        "transliteration": "Menon",
+        "context": "Hebraísmo adaptado del griego μένων. Describe la acción estable y continua de habitar o persistir de manera inmutable dentro de un marco.",
+        "original_id": 793,
+        "text_en": "to remain, to reside, to stay",
+        "text_he": "להישאר, לשכון, לשהות",
+        "reviewed_by": "claude-tcy-review"
       }
     ]
   },
@@ -254452,34 +253585,6 @@
       }
     ]
   },
-  "H2520": {
-    "strong_number": "H2520",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H2520",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "dar, repartir, distribuir",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/efesios.json",
-        "source_row": "183",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_efesios.json",
-        "definition_kind": "definition",
-        "term": "חִלַּקְתָּ",
-        "transliteration": "Jalaqta",
-        "context": "Acción de otorgar dones a los hombres como fruto de la obra de redención y la victoria sobre la cautividad.",
-        "original_id": 184,
-        "text_en": "to give, to share out, to distribute",
-        "text_he": "לתת, לחלק, להקצות",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
   "D4065087": {
     "strong_number": "D4065087",
     "is_custom": true,
@@ -260797,7 +259902,7 @@
         "source": "tcysite-eric",
         "text_es": "destruir",
         "order": 1,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/apocalipsis.json",
@@ -260808,9 +259913,8 @@
         "transliteration": "Shel",
         "context": "Raíz hebrea que da origen al término para demonio.",
         "original_id": 101,
-        "text_en": "destroy",
-        "text_he": "להשמיד",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       }
     ]
   },
@@ -261090,34 +260194,6 @@
         "original_id": 114,
         "text_en": "throne",
         "text_he": "כס",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
-  "H4433": {
-    "strong_number": "H4433",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H4433",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "majestad; rey",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/apocalipsis.json",
-        "source_row": "114",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_apocalipsis.json",
-        "definition_kind": "definition",
-        "term": "מַלְכָּא",
-        "transliteration": "Malká",
-        "context": "Término arameo que forma parte de la expresión del trono de la majestad en el sistema de justificación.",
-        "original_id": 115,
-        "text_en": "majesty; king",
-        "text_he": "הוד מלכות; מלך",
         "reviewed_by": "claude-tcy-review"
       }
     ]
@@ -560298,6 +559374,25 @@
         "text_en": "bearer, the one who reveals",
         "text_he": "נושא, המגלה",
         "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "hijo, portador, depositario",
+        "order": 8,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/1tesalonicenses.json",
+        "source_row": "7",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_1tesalonicenses.json",
+        "definition_kind": "definition",
+        "term": "בְּרָא",
+        "transliteration": "Brá’ (arameo)",
+        "context": "Se enfatiza la idea de portar/traer/depositar, no solo parentesco biológico.",
+        "original_id": 8,
+        "text_en": "son, bearer, depositary",
+        "text_he": "בן, נושא, מחזיק הפיקדון",
+        "reviewed_by": "claude-tcy-review"
       }
     ]
   },
@@ -560325,6 +559420,25 @@
         "original_id": 435,
         "text_en": "happinesses for, happinesses of, happinesses, beatitudes, happiness",
         "text_he": "אושר על, אושרי, אושרים, אשרי, אושר",
+        "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "felicidades de",
+        "order": 2,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/salmos.json",
+        "source_row": "0",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
+        "definition_kind": "definition",
+        "term": "אֲשֶׁרֵי",
+        "transliteration": "Ashrey",
+        "context": "Constructo plural de la palabra Eshr. Se traduce comúnmente como bienaventurado o feliz, pero estructuralmente indica una pluralidad de felicidades a causa de algo.",
+        "original_id": 1,
+        "text_en": "happinesses of",
+        "text_he": "אושרי",
         "reviewed_by": "claude-tcy-review"
       }
     ]
@@ -560494,6 +559608,25 @@
         "context": "Identifica a la deidad en su amor incondicional, siendo el mayor de todos los atributos que caracterizan al Creador.",
         "original_id": 179,
         "text_en": "The Name",
+        "text_he": "השם",
+        "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "el Nombre",
+        "order": 8,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/1tesalonicenses.json",
+        "source_row": "66",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_1tesalonicenses.json",
+        "definition_kind": "definition",
+        "term": "הַשֵּׁם",
+        "transliteration": "Hashem",
+        "context": "Se usa reverencialmente en fórmulas de oración, juicio y exhortación práctica.",
+        "original_id": 67,
+        "text_en": "the Name",
         "text_he": "השם",
         "reviewed_by": "claude-tcy-review"
       }
@@ -560954,6 +560087,766 @@
         "original_id": 270,
         "text_en": "peace",
         "text_he": "שלום",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H1777": {
+    "strong_number": "H1777",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H1777",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "juzgará, contendrá (según lectura)",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/parashot.json",
+        "source_row": "141",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_parashot.json",
+        "definition_kind": "definition",
+        "term": "יָדוֹן",
+        "transliteration": "Yadón",
+        "context": "Se vincula con la raíz דין.",
+        "original_id": 142,
+        "text_en": "he will judge, he will contend (according to reading)",
+        "text_he": "ישפוט, יריב (לפי קריאה)",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H8003": {
+    "strong_number": "H8003",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H8003",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "perfectas, completas",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/parashot.json",
+        "source_row": "209",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_parashot.json",
+        "definition_kind": "definition",
+        "term": "שְׁלֵמוֹת",
+        "transliteration": "Shelemot",
+        "context": "Forma femenina plural explicada en el bloque de ‘piedras perfectas’.",
+        "original_id": 210,
+        "text_en": "perfect, complete",
+        "text_he": "מושלמות, שלמות",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H4682": {
+    "strong_number": "H4682",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H4682",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "panes sin leudar, oxidar",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/parashot.json",
+        "source_row": "252",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_parashot.json",
+        "definition_kind": "definition",
+        "term": "מַצּוֹת",
+        "transliteration": "Matzot",
+        "context": "Pan preparado con premura que simboliza la urgencia del juicio y la pureza.",
+        "original_id": 253,
+        "text_en": "unleavened bread, to oxidize",
+        "text_he": "לחמים ללא חמץ, להתחמצן",
+        "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "panes sin levadura",
+        "order": 2,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/juan.json",
+        "source_row": "271",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
+        "definition_kind": "definition",
+        "term": "מַצּוֹת",
+        "transliteration": "Matzot",
+        "context": "Festividad íntimamente ligada al sacrificio de Pésaj y a las celebraciones en el Templo.",
+        "original_id": 272,
+        "text_en": "unleavened breads",
+        "text_he": "לחמים ללא שאור",
+        "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "panes sin levadura",
+        "order": 3,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/juan.json",
+        "source_row": "344",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
+        "definition_kind": "definition",
+        "term": "מַצּוֹת",
+        "transliteration": "Matzot",
+        "context": "Memorial festivo que corre en paralelo y estrecha dependencia con los ritos y sacrificios pascualos.",
+        "original_id": 345,
+        "text_en": "unleavened breads",
+        "text_he": "לחמים ללא שאור",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H8321": {
+    "strong_number": "H8321",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H8321",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "vid escogida, el remanente",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/parashot.json",
+        "source_row": "286",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_parashot.json",
+        "definition_kind": "definition",
+        "term": "שֹׂרֵקָה",
+        "transliteration": "Sorekáh",
+        "context": "Se refiere al grupo de escogidos dentro de la vid general, con quienes Mashiaj trabaja íntimamente.",
+        "original_id": 287,
+        "text_en": "choice vine, the remnant",
+        "text_he": "גפן נבחרת, השארית",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H7124": {
+    "strong_number": "H7124",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H7124",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "perdiz, el que hace bulla, el que llama, el que pone nombre",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/salmos.json",
+        "source_row": "195",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
+        "definition_kind": "definition",
+        "term": "קוֹרֵא",
+        "transliteration": "Core, Qore'",
+        "context": "Ave que corre a esconderse en las montañas, metáfora del perseguido. Acción de Dios al establecer un testimonio y una identidad (fama) en cada uno de sus hijos.",
+        "original_id": 196,
+        "text_en": "partridge, the one who makes noise, the one who calls, the one who gives a name",
+        "text_he": "קורא, המרעיש, הקורא, הנותן שם",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H1288": {
+    "strong_number": "H1288",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H1288",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "bendito, lleno de amparo",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/salmos.json",
+        "source_row": "251",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
+        "definition_kind": "definition",
+        "term": "בָּרוּךְ",
+        "transliteration": "Baruj",
+        "context": "Expresión de alabanza y reconocimiento a la soberanía de YHWH. Estado de plenitud divina que incluye a los adoptados bajo la protección del Creador. Atributo referido a la potestad absoluta de Dios para adoptar hijos y unirlos a Su cuerpo.",
+        "original_id": 252,
+        "text_en": "blessed, full of shelter",
+        "text_he": "ברוך, מלא מחסה",
+        "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "bendito, lleno de adopciones",
+        "order": 2,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/qohelet.json",
+        "source_row": "93",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_qohelet.json",
+        "definition_kind": "definition",
+        "term": "בָּרוּךְ",
+        "transliteration": "Baruj",
+        "context": "Calificativo de Hashem que destaca su victoria sobre la muerte y su capacidad de adoptar a los que le proclaman.",
+        "original_id": 94,
+        "text_en": "blessed, full of adoptions",
+        "text_he": "ברוך, מלא אימוצים",
+        "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "bendito",
+        "order": 3,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/juan.json",
+        "source_row": "682",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
+        "definition_kind": "definition",
+        "term": "בָּרוּךְ",
+        "transliteration": "Baruj",
+        "context": "Calificativo que expresa la exaltación y el reconocimiento de la fuente de donde emana toda provisión y misericordia.",
+        "original_id": 683,
+        "text_en": "blessed",
+        "text_he": "ברוך",
+        "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "bendito",
+        "order": 4,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/1tesalonicenses.json",
+        "source_row": "55",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_1tesalonicenses.json",
+        "definition_kind": "definition",
+        "term": "בָּרוּךְ",
+        "transliteration": "Baruj",
+        "context": "En 1Ts 5:18 se usa como proclamación ('proclamen que es Baruj').",
+        "original_id": 56,
+        "text_en": "blessed",
+        "text_he": "ברוך",
+        "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "bendito, lleno de injertos",
+        "order": 5,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/efesios.json",
+        "source_row": "36",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_efesios.json",
+        "definition_kind": "definition",
+        "term": "בָּרוּךְ",
+        "transliteration": "Baruj",
+        "context": "Describe a Dios como aquel que está lleno de personas que han venido a buscar amparo y que han sido adoptadas.",
+        "original_id": 37,
+        "text_en": "blessed, full of grafts",
+        "text_he": "ברוך, מלא הרכבות",
+        "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "bendito, lleno de amparos",
+        "order": 6,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/efesios.json",
+        "source_row": "268",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_efesios.json",
+        "definition_kind": "definition",
+        "term": "בָּרוּךְ",
+        "transliteration": "Baruj",
+        "context": "Atributo de Hashem que se reconoce tanto en la alegría como en la tristeza.",
+        "original_id": 269,
+        "text_en": "blessed, full of protections",
+        "text_he": "ברוך, מלא מחסות",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H349": {
+    "strong_number": "H349",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H349",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "¡Cómo!",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/salmos.json",
+        "source_row": "370",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
+        "definition_kind": "definition",
+        "term": "אֵיכָה",
+        "transliteration": "Eija",
+        "context": "Título hebreo del libro de Lamentaciones que expresa el asombro ante la desolación.",
+        "original_id": 371,
+        "text_en": "How!",
+        "text_he": "איכה!",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H2910": {
+    "strong_number": "H2910",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H2910",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "lo secreto, lo íntimo",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/salmos.json",
+        "source_row": "622",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
+        "definition_kind": "definition",
+        "term": "בַּטֻּחוֹת",
+        "transliteration": "Batujot",
+        "context": "Referencia a lo más profundo del ser donde Dios deposita y demanda la verdad.",
+        "original_id": 623,
+        "text_en": "the secret, the intimate",
+        "text_he": "הנסתר, האינטימי",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H7311": {
+    "strong_number": "H7311",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H7311",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "flotar, elevado, Alto, despegado",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/salmos.json",
+        "source_row": "655",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
+        "definition_kind": "definition",
+        "term": "רָם",
+        "transliteration": "Ram",
+        "context": "Raíz que describe lo que está por encima de lo terrenal, sin contacto con el suelo, como el arca sobre las aguas. Atributo del trono de Hashem que no tiene contacto directo con la superficie de la tierra.",
+        "original_id": 656,
+        "text_en": "to float, elevated, high, detached",
+        "text_he": "לרחף, מרומם, גבוה, מנותק",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H2114": {
+    "strong_number": "H2114",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H2114",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "extraña, ajena",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/salmos.json",
+        "source_row": "686",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
+        "definition_kind": "definition",
+        "term": "זָרָה",
+        "transliteration": "Zara",
+        "context": "Cualidad de un culto o servicio que no es compatible con el Creador.",
+        "original_id": 687,
+        "text_en": "strange, foreign",
+        "text_he": "זרה, נוכרית",
+        "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "extraño, ajeno",
+        "order": 2,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/efesios.json",
+        "source_row": "243",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_efesios.json",
+        "definition_kind": "definition",
+        "term": "זָרָה",
+        "transliteration": "Zará",
+        "context": "Califica aquello que es incompatible con la santidad de Dios y que ocupa Su lugar en los pensamientos y actividades.",
+        "original_id": 244,
+        "text_en": "strange, foreign",
+        "text_he": "זר, נכרי",
+        "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "extraño, desconocido",
+        "order": 3,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/salmos.json",
+        "source_row": "888",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
+        "definition_kind": "definition",
+        "term": "זָר",
+        "transliteration": "Zar",
+        "context": "Potestad de otra índole ajena a Yisra'el, todo lo que está fuera de Hashem.",
+        "original_id": 889,
+        "text_en": "strange, unknown",
+        "text_he": "זר, לא מוכר",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H6965": {
+    "strong_number": "H6965",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H6965",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "levántese, surja",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/salmos.json",
+        "source_row": "752",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
+        "definition_kind": "definition",
+        "term": "יָקוּם",
+        "transliteration": "Yakum",
+        "context": "Grito de guerra espiritual que suplica la intervención activa de Dios para que el mal no se normalice.",
+        "original_id": 753,
+        "text_en": "let him rise, let him arise",
+        "text_he": "יקום, יעלה",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H2173": {
+    "strong_number": "H2173",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H2173",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "tributo, lo mejor",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/salmos.json",
+        "source_row": "833",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
+        "definition_kind": "definition",
+        "term": "זִמְרָת",
+        "transliteration": "Zimrat",
+        "context": "Ofrenda de lo más selecto de un lugar, relacionada con la raíz de 'Mitzmor'.",
+        "original_id": 834,
+        "text_en": "tribute, the best",
+        "text_he": "מנחה, המיטב",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H249": {
+    "strong_number": "H249",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H249",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "Nativo, del lugar",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/salmos.json",
+        "source_row": "969",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
+        "definition_kind": "definition",
+        "term": "אֶזְרָחִי",
+        "transliteration": "Esraji",
+        "context": "Término que designa el origen o la naturaleza del autor Eitan en relación a la luz.",
+        "original_id": 970,
+        "text_en": "Native, of the place",
+        "text_he": "יליד, בן המקום",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H5216": {
+    "strong_number": "H5216",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H5216",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "lámpara",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/qohelet.json",
+        "source_row": "110",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_qohelet.json",
+        "definition_kind": "definition",
+        "term": "נֵר",
+        "transliteration": "Ner",
+        "context": "Metáfora de la Torah que guía los pasos del creyente, iluminando su sendero para evitar los tropiezos en la oscuridad.",
+        "original_id": 111,
+        "text_en": "lamp",
+        "text_he": "נר",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H2088": {
+    "strong_number": "H2088",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H2088",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "Este",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/juan.json",
+        "source_row": "80",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
+        "definition_kind": "definition",
+        "term": "הַזֶּה",
+        "transliteration": "Hazéh",
+        "context": "Componente del concepto que designa al mundo presente (Olam Hazéh) en contraste con el mundo venidero.",
+        "original_id": 81,
+        "text_en": "This",
+        "text_he": "הזה",
+        "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "este",
+        "order": 2,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/juan.json",
+        "source_row": "503",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
+        "definition_kind": "definition",
+        "term": "הַזֶּה",
+        "transliteration": "Hazé'",
+        "context": "Usado en la construcción 'Olam Hazé' para identificar este mundo o escondidero actual en contraste con la eternidad.",
+        "original_id": 504,
+        "text_en": "this",
+        "text_he": "הזה",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H1121": {
+    "strong_number": "H1121",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H1121",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "el hijo, el portador",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/juan.json",
+        "source_row": "437",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
+        "definition_kind": "definition",
+        "term": "הַבֵּן",
+        "transliteration": "Haben",
+        "context": "Término hebreo equivalente al vocablo arameo Brá', que designa a Mashiaj en su rol de portador de los atributos divinos en la tierra.",
+        "original_id": 438,
+        "text_en": "the son, the bearer",
+        "text_he": "הבן, הנושא",
+        "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "el hijo",
+        "order": 2,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/efesios.json",
+        "source_row": "166",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_efesios.json",
+        "definition_kind": "definition",
+        "term": "הַבֵּן",
+        "transliteration": "Ha'ben",
+        "context": "Referencia al cuerpo disminuido de la deidad que habitó entre nosotros.",
+        "original_id": 167,
+        "text_en": "the son",
+        "text_he": "הבן",
+        "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "heredero, portador",
+        "order": 3,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/efesios.json",
+        "source_row": "184",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_efesios.json",
+        "definition_kind": "definition",
+        "term": "הַבֵּן",
+        "transliteration": "Ha'ben",
+        "context": "Referente al hijo como aquel que porta la redención y es el medio para el reconocimiento de la gloria de 'Abà.",
+        "original_id": 185,
+        "text_en": "heir, bearer",
+        "text_he": "יורש, נושא",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H1206": {
+    "strong_number": "H1206",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H1206",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "lodo, barro",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/juan.json",
+        "source_row": "563",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
+        "definition_kind": "definition",
+        "term": "בּוֹץ",
+        "transliteration": "Botz",
+        "context": "Término hebreo específico para denominar el lodo o mezcla homogénea que el portador elaboró mezclando saliva y polvo en el día de Shabat.",
+        "original_id": 564,
+        "text_en": "mud, clay",
+        "text_he": "בוץ, טיט",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H5680": {
+    "strong_number": "H5680",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H5680",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "hebreos",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/juan.json",
+        "source_row": "698",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
+        "definition_kind": "definition",
+        "term": "עִבְרִים",
+        "transliteration": "Ivrim",
+        "context": "Designación para los descendientes de la familia de Ever. Históricamente englobaba a múltiples grupos emparentados antes de que muchos de ellos se asimilaran o gentilizaran.",
+        "original_id": 699,
+        "text_en": "Hebrews",
+        "text_he": "עברים",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H4430": {
+    "strong_number": "H4430",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H4430",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "majestad; rey",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/apocalipsis.json",
+        "source_row": "114",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_apocalipsis.json",
+        "definition_kind": "definition",
+        "term": "מַלְכָּא",
+        "transliteration": "Malká",
+        "context": "Término arameo que forma parte de la expresión del trono de la majestad en el sistema de justificación.",
+        "original_id": 115,
+        "text_en": "majesty; king",
+        "text_he": "הוד מלכות; מלך",
         "reviewed_by": "claude-tcy-review"
       }
     ]

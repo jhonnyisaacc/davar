@@ -7,8 +7,8 @@
     "entry_unresolved": "The row is attached to the wrong entry and no single Strong number fits it"
   },
   "counts": {
-    "tcysite-eric:approved": 3898,
-    "tcysite-eric:blocked": 4,
+    "tcysite-eric:approved": 3881,
+    "tcysite-eric:blocked": 21,
     "tcysite-eric:corrected": 17,
     "tcysite-greek-detail:blocked": 5524,
     "tcysite-greek-master:blocked": 3617,
@@ -18,5 +18,7 @@
     "claude-tcy-review": 3919
   },
   "unreviewed": [],
-  "orphan_decisions": []
+  "orphan_decisions": [],
+  "entry_checked": 271,
+  "entry_flags": []
 }
