@@ -74,3 +74,23 @@ settles it. A prior review decided the Strong number, not the prefix metadata,
 so a rule that settles prefixes (#364, #366) goes before
 `prior_review_decision`. Other new rules go before `unadjudicated`. A changed
 rule bumps its version.
+
+### Root-letter prefixes (#366)
+
+Some words tag a prefix whose letter is the first letter of the lemma, such as
+`בָּחַר` (H977, `בחר`) tagged `Hb`. To correct them, run these commands in
+order:
+
+1. `python -m scripts.delitzsch review root-letter-prefixes` writes
+   `batches/root_letter_prefixes.json`.
+2. `python -m scripts.delitzsch review apply root_letter_prefixes.json` removes
+   the false prefixes, refreshes the verse separators, and logs each decision.
+3. `python -m scripts.delitzsch review dispositions` records each one as
+   `corrected`, with the before and after prefixes.
+
+A flag is corrected only when a prior review confirmed its Strong number and
+the lemma's first two letters start the word at a tagged prefix letter. The
+correction keeps the Strong number. Other flags stay `unresolved`, because the
+prefix reading can be real when the Strong number was never reviewed (for
+example `לָכֶם` mapped to H3922). `remediate check` reverts the `corrected`
+records before it compares the corpus with the validated plan.
