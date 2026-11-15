@@ -57,11 +57,12 @@ disposition. Regenerate it with `python -m scripts.delitzsch review
 dispositions`, and check that the committed copy is current with `--check`.
 Reruns write identical bytes.
 
-- Families come from the queue reasons: `prefix_metadata`,
-  `lexical_plausibility`, and `prefix_metadata_and_lexical`.
+- Queue families come from the queue reasons: `prefix_metadata`,
+  `lexical_plausibility`, and `prefix_metadata_and_lexical`. Legacy rows are
+  in `legacy_assignment`.
 - Dispositions are `benign`, `corrected`, `already_reviewed`, `unresolved`,
   `blocked`, and `superseded`. `superseded` is for the identity-less
-  `legacy_assignment_review` rows.
+  `legacy_assignment_review` rows (#365, below).
 - Each record names its `rule`, `rule_version`, and `reviewer`, keeps the
   queued `before` state, and carries its `evidence`. An `already_reviewed`
   record copies the prior decision's status, action, Strong values, reason,
@@ -105,6 +106,8 @@ prior decision as evidence. It does not change a Strong number.
 
 A flag is `benign` only when all of these are true:
 
+- The word has at least one tagged prefix. A flag with no prefixes stays
+  `unresolved`.
 - The tagged prefix letters start the word, and the lemma's first two letters
   follow them.
 - The lemma has at least three letters, and the rest of the word is at least
@@ -157,3 +160,30 @@ Each `benign` record therefore has a `lexical_review` field:
 `summary.benign_lexical_review` gives the counts, and the `dispositions`
 command prints them. The lexical review for #368 covers every `unresolved`
 record and every `benign` record whose `lexical_review` is `pending`.
+
+### Identity-less legacy assignments (#365)
+
+The ledger also gives each row of `legacy_assignment_review` in the
+remediation report a record in the `legacy_assignment` family. These rows come
+from `parsed/strongs/v2` and lost their verse number. The remediation plan
+lists the current locations with the same book, chapter, word index, and
+pointed text in `matching_locations`. A legacy record has `source` set to
+`legacy_assignment_review`, its position in that list as `row`, and no
+`location`, because the row has no verse identity. Its `before` keeps the
+row's book, chapter, word index, text, candidate, and outcome.
+
+These rules run in order, and the first match decides:
+
+1. `legacy_without_candidate`: a `failed` or `skipped` row has no candidate,
+   so it is `superseded`.
+2. `legacy_current_value`: the row matches exactly one location, the word
+   there has the same pointed text, and its current Strong number equals the
+   candidate. The row is `superseded` by that value. `after` names the
+   location and the Strong number, and `evidence.current` gives the word and
+   the status of its last review decision.
+3. `legacy_blocked`: every other row is `blocked`. `evidence.current` lists
+   the current word at each matching location.
+
+No rule writes to the corpus, so no legacy candidate is reapplied. A blocked
+row stays blocked. The current value at its location stays in the review
+queue when a heuristic flags it. `summary.by_rule` gives the count per rule.
