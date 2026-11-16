@@ -4294,7 +4294,7 @@
         "source": "tcysite-eric",
         "text_es": "Deuteronomio",
         "order": 4,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/juan.json",
@@ -4305,9 +4305,8 @@
         "transliteration": "Devarim",
         "context": "Texto de la Torah que establece las directrices y procedimientos normativos e institucionales respecto al divorcio.",
         "original_id": 426,
-        "text_en": "Deuteronomy",
-        "text_he": "דברים",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       }
     ],
     "root": "דבר",
@@ -5753,7 +5752,7 @@
         "source": "tcysite-eric",
         "text_es": "arrepentimiento",
         "order": 6,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/2tesalonicenses.json",
@@ -5764,9 +5763,8 @@
         "transliteration": "Tshuváh",
         "context": "El objetivo final de la disciplina comunitaria: lograr que la persona recapacite y retorne al diseño original.",
         "original_id": 105,
-        "text_en": "repentance",
-        "text_he": "תשובה",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       },
       {
         "source": "tcysite-eric",
@@ -170229,25 +170227,6 @@
         "text_en": "to inherit, to conquer",
         "text_he": "לרשת, לכבוש",
         "reviewed_by": "claude-tcy-review"
-      },
-      {
-        "source": "tcysite-eric",
-        "text_es": "conquistar, tomar",
-        "order": 2,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/salmos.json",
-        "source_row": "113",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
-        "definition_kind": "definition",
-        "term": "חָרִישׁ",
-        "transliteration": "Jorish",
-        "context": "Forma de la raíz Yarash en edificio Ifil, implica tomar lo ajeno o conquistar.",
-        "original_id": 114,
-        "text_en": "to conquer, to take",
-        "text_he": "לכבוש, לקחת",
-        "reviewed_by": "claude-tcy-review"
       }
     ]
   },
@@ -172145,7 +172124,7 @@
         "source": "tcysite-eric",
         "text_es": "eternidad",
         "order": 1,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/salmos.json",
@@ -172156,15 +172135,14 @@
         "transliteration": "'Almut",
         "context": "Vocalización que sugiere la victoria sobre la muerte, se asocia con el hijo que ha vencido el juicio.",
         "original_id": 181,
-        "text_en": "eternity",
-        "text_he": "נצח",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       },
       {
         "source": "tcysite-eric",
         "text_es": "eternidad",
         "order": 2,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/salmos.json",
@@ -172175,9 +172153,8 @@
         "transliteration": "Almut",
         "context": "Lectura corregida (en lugar de Alamot) que denota la dimensión eterna de los himnos de Coré.",
         "original_id": 576,
-        "text_en": "eternity",
-        "text_he": "נצח",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       }
     ]
   },
@@ -173659,25 +173636,6 @@
     "definitions": [
       {
         "source": "tcysite-eric",
-        "text_es": "entendido",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/salmos.json",
-        "source_row": "231",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
-        "definition_kind": "definition",
-        "term": "מַשְׂכִּיל",
-        "transliteration": "Masqil",
-        "context": "Aquel que posee discernimiento para buscar a 'Elohim en medio de una generación corrupta.",
-        "original_id": 232,
-        "text_en": "understanding one",
-        "text_he": "משכיל",
-        "reviewed_by": "claude-tcy-review"
-      },
-      {
-        "source": "tcysite-eric",
         "text_es": "Concientizador",
         "order": 2,
         "review_status": "approved",
@@ -174474,7 +174432,7 @@
         "source": "tcysite-eric",
         "text_es": "letra D",
         "order": 1,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/salmos.json",
@@ -174485,9 +174443,8 @@
         "transliteration": "Dalet",
         "context": "Letra identificada en el análisis de las disonancias y variaciones de sonidos en el texto hebreo.",
         "original_id": 261,
-        "text_en": "letter D",
-        "text_he": "האות ד",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       },
       {
         "source": "tcysite-eric",
@@ -177415,7 +177372,7 @@
         "source": "tcysite-eric",
         "text_es": "Lamed (letra)",
         "order": 4,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/juan.json",
@@ -177426,15 +177383,14 @@
         "transliteration": "Lamed",
         "context": "Letra hebrea con un valor numérico de 30, componente central de la palabra Sulam.",
         "original_id": 237,
-        "text_en": "Lamed (letter)",
-        "text_he": "למד (אות)",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       },
       {
         "source": "tcysite-eric",
         "text_es": "Lamed (letra del alfabeto hebreo)",
         "order": 5,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/juan.json",
@@ -177445,9 +177401,8 @@
         "transliteration": "Lamed",
         "context": "Letra cuyo valor numérico equivale a 30, integrada en los cálculos del valor místico de los términos bíblicos.",
         "original_id": 315,
-        "text_en": "Lamed (letter of the Hebrew alphabet)",
-        "text_he": "למד (אות באלפבית העברי)",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       }
     ]
   },
@@ -180394,7 +180349,7 @@
         "source": "tcysite-eric",
         "text_es": "Literal",
         "order": 1,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/salmos.json",
@@ -180405,9 +180360,8 @@
         "transliteration": "Peshat",
         "context": "Nivel de interpretación del texto tal cual como está escrito.",
         "original_id": 455,
-        "text_en": "Literal",
-        "text_he": "מילולי",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       }
     ]
   },
@@ -203869,53 +203823,6 @@
       }
     ]
   },
-  "H4505": {
-    "strong_number": "H4505",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H4505",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "consolador, el que restituye",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/qohelet.json",
-        "source_row": "100",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_qohelet.json",
-        "definition_kind": "definition",
-        "term": "מְנַחֵם",
-        "transliteration": "Menajem",
-        "context": "Uno de los atributos de Mashiaj, aquel que restaura y trae consuelo a los oprimidos por el sistema del mundo.",
-        "original_id": 101,
-        "text_en": "comforter, the one who restores",
-        "text_he": "מנחם, המשיב",
-        "reviewed_by": "claude-tcy-review"
-      },
-      {
-        "source": "tcysite-eric",
-        "text_es": "consolador, restaurador",
-        "order": 2,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/juan.json",
-        "source_row": "809",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
-        "definition_kind": "definition",
-        "term": "מְנַחֵם",
-        "transliteration": "Menajen",
-        "context": "Figura del pensamiento hebreo que describe al agente encargado de traer consolación operativa a Yisra'el, la cual se traduce directamente en restauración y cumplimiento profético.",
-        "original_id": 810,
-        "text_en": "comforter, restorer",
-        "text_he": "מנחם, משקם",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
   "D1384559": {
     "strong_number": "D1384559",
     "is_custom": true,
@@ -206861,6 +206768,25 @@
         "original_id": 229,
         "text_en": "destruction",
         "text_he": "שוד",
+        "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "destruir",
+        "order": 2,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/apocalipsis.json",
+        "source_row": "100",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_apocalipsis.json",
+        "definition_kind": "definition",
+        "term": "לַשֶּׁד",
+        "transliteration": "Shel",
+        "context": "Raíz hebrea que da origen al término para demonio.",
+        "original_id": 101,
+        "text_en": "destroy",
+        "text_he": "להשמיד",
         "reviewed_by": "claude-tcy-review"
       }
     ]
@@ -222419,53 +222345,6 @@
       }
     ]
   },
-  "H453": {
-    "strong_number": "H453",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H453",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "Elías",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/juan.json",
-        "source_row": "157",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
-        "definition_kind": "definition",
-        "term": "אֵלִיָּהוּ",
-        "transliteration": "Eliyahu",
-        "context": "Figura profética cuya venida se esperaba como precursora del día de 'Adonay, mencionada en el contexto de la identidad de Yojanan.",
-        "original_id": 158,
-        "text_en": "Elijah",
-        "text_he": "אליהו",
-        "reviewed_by": "claude-tcy-review"
-      },
-      {
-        "source": "tcysite-eric",
-        "text_es": "Elías",
-        "order": 2,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/juan.json",
-        "source_row": "442",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
-        "definition_kind": "definition",
-        "term": "אֵלִיָּהוּ",
-        "transliteration": "Eliyahu",
-        "context": "Profeta hebreo cuyo espíritu y poder sirvieron de parámetro profético para el alistamiento del pueblo antes de la venida del Señor.",
-        "original_id": 443,
-        "text_en": "Elijah",
-        "text_he": "אליהו",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
   "D1059035": {
     "strong_number": "D1059035",
     "is_custom": true,
@@ -224480,7 +224359,7 @@
         "source": "tcysite-eric",
         "text_es": "antiguo, de antes, primordial",
         "order": 1,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/juan.json",
@@ -224491,15 +224370,14 @@
         "transliteration": "Qadmón",
         "context": "Utilizado en el título 'Adam Qadmón' para referirse al ser que existe antes de todas las cosas.",
         "original_id": 231,
-        "text_en": "ancient, from before, primordial",
-        "text_he": "עתיק, מלפנים, קדמון",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       },
       {
         "source": "tcysite-eric",
         "text_es": "antiguo, de antes de todas las cosas, primigenio",
         "order": 2,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/juan.json",
@@ -224510,15 +224388,14 @@
         "transliteration": "Qadmón",
         "context": "Utilizado como un título de la deidad en la literatura del siglo primero al unirse con 'Adam ('Adam qadmón).",
         "original_id": 307,
-        "text_en": "ancient, from before all things, primeval",
-        "text_he": "עתיק, מלפני כל הדברים, קדמון",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       },
       {
         "source": "tcysite-eric",
         "text_es": "anterior; antes de todas las cosas",
         "order": 3,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/apocalipsis.json",
@@ -224529,9 +224406,8 @@
         "transliteration": "Katmon",
         "context": "Atributo del 'Adam primordial que existe desde antes de la fundación del mundo.",
         "original_id": 120,
-        "text_en": "former; before all things",
-        "text_he": "קדום; לפני הכול",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       }
     ]
   },
@@ -224658,7 +224534,7 @@
         "source": "tcysite-eric",
         "text_es": "Samej (letra)",
         "order": 1,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/juan.json",
@@ -224669,15 +224545,14 @@
         "transliteration": "Samej",
         "context": "Letra hebrea con un valor numérico de 60, componente inicial de la palabra Sulam.",
         "original_id": 236,
-        "text_en": "Samej (letter)",
-        "text_he": "סמך (אות)",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       },
       {
         "source": "tcysite-eric",
         "text_es": "Samej (letra del alfabeto hebreo)",
         "order": 2,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/juan.json",
@@ -224688,9 +224563,8 @@
         "transliteration": "Samej",
         "context": "Letra cuyo valor numérico es igual a 60, analizada bajo el método hermenéutico de la Guimatria para el término Sulam.",
         "original_id": 314,
-        "text_en": "Samej (letter of the Hebrew alphabet)",
-        "text_he": "סמך (אות באלפבית העברי)",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       },
       {
         "source": "tcysite-eric",
@@ -225935,7 +225809,7 @@
         "source": "tcysite-eric",
         "text_es": "tradición codificada",
         "order": 4,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/1tesalonicenses.json",
@@ -225946,9 +225820,8 @@
         "transliteration": "Mishnáh",
         "context": "Se menciona en crítica a la sustitución de la palabra escrita.",
         "original_id": 32,
-        "text_en": "codified tradition",
-        "text_he": "מסורת מקודדת",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       },
       {
         "source": "tcysite-eric",
@@ -238554,7 +238427,7 @@
         "source": "tcysite-eric",
         "text_es": "transmisión, tradición entregada",
         "order": 1,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
         "source_file": "eric/juan.json",
@@ -238565,9 +238438,8 @@
         "transliteration": "Mesoráh",
         "context": "Estructura conceptual referida a la cadena ininterrumpida de transmisión de una autoridad delegada o enseñanza genuina de un emisor a su receptor.",
         "original_id": 785,
-        "text_en": "transmission, handed-down tradition",
-        "text_he": "העברה, מסורת שנמסרה",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       }
     ]
   },
@@ -251801,7 +251673,7 @@
         "source": "tcysite-eric",
         "text_es": "bueno (apariencia), bonito",
         "order": 1,
-        "review_status": "approved",
+        "review_status": "blocked",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "greek",
         "source_file": "eric/efesios.json",
@@ -251812,9 +251684,8 @@
         "transliteration": "Kalós",
         "context": "Se refiere a lo que es estéticamente bueno o se ve bien desde afuera, son las obras que resultan hermosas ante la vista por su justicia.",
         "original_id": 104,
-        "text_en": "good (appearance), pretty",
-        "text_he": "טוב (מראה), יפה",
-        "reviewed_by": "claude-tcy-review"
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
       },
       {
         "source": "tcysite-greek-strong",
@@ -259888,33 +259759,6 @@
         "text_en": "Proper name",
         "text_he": "שם פרטי",
         "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
-  "H3955": {
-    "strong_number": "H3955",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H3955",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "destruir",
-        "order": 1,
-        "review_status": "blocked",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/apocalipsis.json",
-        "source_row": "100",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_apocalipsis.json",
-        "definition_kind": "definition",
-        "term": "לַשֶּׁד",
-        "transliteration": "Shel",
-        "context": "Raíz hebrea que da origen al término para demonio.",
-        "original_id": 101,
-        "reviewed_by": "claude-tcy-review",
-        "review_reason": "entry_unresolved"
       }
     ]
   },
@@ -560598,34 +560442,6 @@
       }
     ]
   },
-  "H249": {
-    "strong_number": "H249",
-    "is_custom": true,
-    "term_language": "hebrew",
-    "canonical_strong": "H249",
-    "imported_by": "tcysite",
-    "definitions": [
-      {
-        "source": "tcysite-eric",
-        "text_es": "Nativo, del lugar",
-        "order": 1,
-        "review_status": "approved",
-        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
-        "term_language": "hebrew",
-        "source_file": "eric/salmos.json",
-        "source_row": "969",
-        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
-        "definition_kind": "definition",
-        "term": "אֶזְרָחִי",
-        "transliteration": "Esraji",
-        "context": "Término que designa el origen o la naturaleza del autor Eitan en relación a la luz.",
-        "original_id": 970,
-        "text_en": "Native, of the place",
-        "text_he": "יליד, בן המקום",
-        "reviewed_by": "claude-tcy-review"
-      }
-    ]
-  },
   "H5216": {
     "strong_number": "H5216",
     "is_custom": true,
@@ -560847,6 +560663,183 @@
         "original_id": 115,
         "text_en": "majesty; king",
         "text_he": "הוד מלכות; מלך",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H2758": {
+    "strong_number": "H2758",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H2758",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "conquistar, tomar",
+        "order": 1,
+        "review_status": "blocked",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/salmos.json",
+        "source_row": "113",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
+        "definition_kind": "definition",
+        "term": "חָרִישׁ",
+        "transliteration": "Jorish",
+        "context": "Forma de la raíz Yarash en edificio Ifil, implica tomar lo ajeno o conquistar.",
+        "original_id": 114,
+        "reviewed_by": "claude-tcy-review",
+        "review_reason": "entry_unresolved"
+      }
+    ]
+  },
+  "H7919": {
+    "strong_number": "H7919",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H7919",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "entendido",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/salmos.json",
+        "source_row": "231",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
+        "definition_kind": "definition",
+        "term": "מַשְׂכִּיל",
+        "transliteration": "Masqil",
+        "context": "Aquel que posee discernimiento para buscar a 'Elohim en medio de una generación corrupta.",
+        "original_id": 232,
+        "text_en": "understanding one",
+        "text_he": "משכיל",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H5162": {
+    "strong_number": "H5162",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H5162",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "consolador, el que restituye",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/qohelet.json",
+        "source_row": "100",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_qohelet.json",
+        "definition_kind": "definition",
+        "term": "מְנַחֵם",
+        "transliteration": "Menajem",
+        "context": "Uno de los atributos de Mashiaj, aquel que restaura y trae consuelo a los oprimidos por el sistema del mundo.",
+        "original_id": 101,
+        "text_en": "comforter, the one who restores",
+        "text_he": "מנחם, המשיב",
+        "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "consolador, restaurador",
+        "order": 2,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/juan.json",
+        "source_row": "809",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
+        "definition_kind": "definition",
+        "term": "מְנַחֵם",
+        "transliteration": "Menajen",
+        "context": "Figura del pensamiento hebreo que describe al agente encargado de traer consolación operativa a Yisra'el, la cual se traduce directamente en restauración y cumplimiento profético.",
+        "original_id": 810,
+        "text_en": "comforter, restorer",
+        "text_he": "מנחם, משקם",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H452": {
+    "strong_number": "H452",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H452",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "Elías",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/juan.json",
+        "source_row": "157",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
+        "definition_kind": "definition",
+        "term": "אֵלִיָּהוּ",
+        "transliteration": "Eliyahu",
+        "context": "Figura profética cuya venida se esperaba como precursora del día de 'Adonay, mencionada en el contexto de la identidad de Yojanan.",
+        "original_id": 158,
+        "text_en": "Elijah",
+        "text_he": "אליהו",
+        "reviewed_by": "claude-tcy-review"
+      },
+      {
+        "source": "tcysite-eric",
+        "text_es": "Elías",
+        "order": 2,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/juan.json",
+        "source_row": "442",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_Juan.json",
+        "definition_kind": "definition",
+        "term": "אֵלִיָּהוּ",
+        "transliteration": "Eliyahu",
+        "context": "Profeta hebreo cuyo espíritu y poder sirvieron de parámetro profético para el alistamiento del pueblo antes de la venida del Señor.",
+        "original_id": 443,
+        "text_en": "Elijah",
+        "text_he": "אליהו",
+        "reviewed_by": "claude-tcy-review"
+      }
+    ]
+  },
+  "H250": {
+    "strong_number": "H250",
+    "is_custom": true,
+    "term_language": "hebrew",
+    "canonical_strong": "H250",
+    "imported_by": "tcysite",
+    "definitions": [
+      {
+        "source": "tcysite-eric",
+        "text_es": "Nativo, del lugar",
+        "order": 1,
+        "review_status": "approved",
+        "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
+        "term_language": "hebrew",
+        "source_file": "eric/salmos.json",
+        "source_row": "969",
+        "source_url": "https://www.torah-con-yehoshua-hamashiaj.com/dic/Diccionarioboton/diccionario_salmos.json",
+        "definition_kind": "definition",
+        "term": "אֶזְרָחִי",
+        "transliteration": "Esraji",
+        "context": "Término que designa el origen o la naturaleza del autor Eitan en relación a la luz.",
+        "original_id": 970,
+        "text_en": "Native, of the place",
+        "text_he": "יליד, בן המקום",
         "reviewed_by": "claude-tcy-review"
       }
     ]
