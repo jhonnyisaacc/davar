@@ -39,32 +39,6 @@
       "reviewer": "claude-delitzsch-review",
       "confidence": 0.9,
       "occurrence": {
-        "book": "acts",
-        "chapter": 28,
-        "verse": 13,
-        "word_index": 7,
-        "text": "דְּרוֹמִית",
-        "strong": "H1784",
-        "prefixes": []
-      },
-      "previous_strong": "H1784",
-      "new_strong": "H1864",
-      "reason": "Hebrew word; H1784 is an Aramaic gentilic of Ezra 4:9, and the lexicon has the Hebrew entry דָּרוֹם, south",
-      "evidence": {
-        "lexicon": "H1864 דָּרוֹם: south",
-        "grammar": "adjective דרומי from דרום, southern (wind)",
-        "context": "Acts 28:13.7: אֶל־ רֶגְיוֹן וּבִנְשֹׁב רוּחַ [דְּרוֹמִית] בְּיוֹם הַמָּחֳרָת בָּאנוּ בַּיּוֹם",
-        "kind": "aramaic_entry",
-        "item": "R2",
-        "shard": "corrections"
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "lexical_review",
-      "reviewer": "claude-delitzsch-review",
-      "confidence": 0.9,
-      "occurrence": {
         "book": "luke",
         "chapter": 23,
         "verse": 25,
@@ -161,6 +135,594 @@
         "kind": "unrelated_entry",
         "item": "R2",
         "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 4,
+        "verse": 10,
+        "word_index": 5,
+        "text": "לָּךְ",
+        "strong": "H3922",
+        "prefixes": []
+      },
+      "previous_strong": "H3922",
+      "new_strong": "D0275",
+      "reason": "the word is the suffixed preposition לָךְ with a conjunctive dagesh, so it uses the exact-form entry D0275; H3922 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0275 לָךְ: to you; for you, preposition ל with second person singular suffix (feminine, or masculine ",
+        "grammar": "ל with second person singular suffix in pause, to you",
+        "context": "Luke 4:10.5: כָתוּב כִּי־ מַלְאָכָיו יְצַוֶּה־ [לָּךְ] לְשָׁמְרֶךָ׃",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 7,
+        "verse": 50,
+        "word_index": 5,
+        "text": "לָּךְ",
+        "strong": "H3922",
+        "prefixes": []
+      },
+      "previous_strong": "H3922",
+      "new_strong": "D0275",
+      "reason": "the word is the suffixed preposition לָךְ with a conjunctive dagesh, so it uses the exact-form entry D0275; H3922 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0275 לָךְ: to you; for you, preposition ל with second person singular suffix (feminine, or masculine ",
+        "grammar": "ל with second person singular suffix in pause, to you",
+        "context": "Luke 7:50.5: אֶל־ הָאִשָּׁה אֱמוּנָתֵךְ הוֹשִׁיעָה [לָּךְ] לְכִי לְשָׁלוֹם׃",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 18,
+        "verse": 41,
+        "word_index": 4,
+        "text": "לָּךְ",
+        "strong": "H3922",
+        "prefixes": []
+      },
+      "previous_strong": "H3922",
+      "new_strong": "D0275",
+      "reason": "the word is the suffixed preposition לָךְ with a conjunctive dagesh, so it uses the exact-form entry D0275; H3922 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0275 לָךְ: to you; for you, preposition ל with second person singular suffix (feminine, or masculine ",
+        "grammar": "ל with second person singular suffix in pause, to you",
+        "context": "Luke 18:41.4: מַה־ חֶפְצְךָ כִּי אֶעֱשֶׂה־ [לָּךְ] וַיֹּאמֶר אֲדֹנִי כִּי אֶרְאֶה׃",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 18,
+        "verse": 42,
+        "word_index": 5,
+        "text": "לָּךְ׃",
+        "strong": "H3922",
+        "prefixes": []
+      },
+      "previous_strong": "H3922",
+      "new_strong": "D0275",
+      "reason": "the word is the suffixed preposition לָךְ with a conjunctive dagesh, so it uses the exact-form entry D0275; H3922 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0275 לָךְ: to you; for you, preposition ל with second person singular suffix (feminine, or masculine ",
+        "grammar": "ל with second person singular suffix in pause, to you",
+        "context": "Luke 18:42.5: אֵלָיו רְאֵה אֱמוּנָתְךָ הוֹשִׁיעָה [לָּךְ׃] ",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 5,
+        "verse": 34,
+        "word_index": 5,
+        "text": "לָּךְ",
+        "strong": "H3922",
+        "prefixes": []
+      },
+      "previous_strong": "H3922",
+      "new_strong": "D0275",
+      "reason": "the word is the suffixed preposition לָךְ with a conjunctive dagesh, so it uses the exact-form entry D0275; H3922 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0275 לָךְ: to you; for you, preposition ל with second person singular suffix (feminine, or masculine ",
+        "grammar": "ל with second person singular suffix in pause, to you",
+        "context": "Mark 5:34.5: אֵלֶיהָ בִּתִּי אֱמוּנָתֵךְ הוֹשִׁיעָה [לָּךְ] לְכִי לְשָׁלוֹם וְחָיִית מִנִּגְעֵךְ׃",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 10,
+        "verse": 51,
+        "word_index": 7,
+        "text": "לָּךְ",
+        "strong": "H3922",
+        "prefixes": []
+      },
+      "previous_strong": "H3922",
+      "new_strong": "D0275",
+      "reason": "the word is the suffixed preposition לָךְ with a conjunctive dagesh, so it uses the exact-form entry D0275; H3922 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0275 לָךְ: to you; for you, preposition ל with second person singular suffix (feminine, or masculine ",
+        "grammar": "ל with second person singular suffix in pause, to you",
+        "context": "Mark 10:51.7: אֵלָיו מֶה־ חָפַצְתָּ וְאֶעֱשֶׂה־ [לָּךְ] וַיֹּאמֶר אֵלָיו הָעִוֵּר רַבִּי",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 10,
+        "verse": 52,
+        "word_index": 7,
+        "text": "לָּךְ",
+        "strong": "H3922",
+        "prefixes": []
+      },
+      "previous_strong": "H3922",
+      "new_strong": "D0275",
+      "reason": "the word is the suffixed preposition לָךְ with a conjunctive dagesh, so it uses the exact-form entry D0275; H3922 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0275 לָךְ: to you; for you, preposition ל with second person singular suffix (feminine, or masculine ",
+        "grammar": "ל with second person singular suffix in pause, to you",
+        "context": "Mark 10:52.7: לֶךְ־ לְךָ אֱמוּנָתְךָ הוֹשִׁיעָה [לָּךְ] וּפִתְאֹם רָאָה וַיֵּלֶךְ אַחֲרֵי",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 18,
+        "verse": 26,
+        "word_index": 12,
+        "text": "לָּךְ׃",
+        "strong": "H3922",
+        "prefixes": []
+      },
+      "previous_strong": "H3922",
+      "new_strong": "D0275",
+      "reason": "the word is the suffixed preposition לָךְ with a conjunctive dagesh, so it uses the exact-form entry D0275; H3922 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0275 לָךְ: to you; for you, preposition ל with second person singular suffix (feminine, or masculine ",
+        "grammar": "ל with second person singular suffix in pause, to you",
+        "context": "Matthew 18:26.12: אַפֶּךָ וְאֶת־ כֹּל אֲשַׁלְּמָה [לָּךְ׃] ",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 21,
+        "verse": 22,
+        "word_index": 10,
+        "text": "לְּךָ",
+        "strong": "H3922",
+        "prefixes": []
+      },
+      "previous_strong": "H3922",
+      "new_strong": "D0274",
+      "reason": "the word is the suffixed preposition לְךָ with a conjunctive dagesh, so it uses the exact-form entry D0274; H3922 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0274 לְךָ: to you; for you, preposition ל with second masculine singular suffix.",
+        "grammar": "ל with second masculine singular suffix, to you",
+        "context": "John 21:22.10: יִשָּׁאֵר עַד־ בֹּאִי מַה־ [לְּךָ] וְלָזֹאת אַתָּה לֵךְ אַחֲרָי׃",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 18,
+        "verse": 15,
+        "word_index": 14,
+        "text": "לְּךָ",
+        "strong": "H3922",
+        "prefixes": []
+      },
+      "previous_strong": "H3922",
+      "new_strong": "D0274",
+      "reason": "the word is the suffixed preposition לְךָ with a conjunctive dagesh, so it uses the exact-form entry D0274; H3922 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0274 לְךָ: to you; for you, preposition ל with second masculine singular suffix.",
+        "grammar": "ל with second masculine singular suffix, to you",
+        "context": "Matthew 18:15.14: וְאִם־ יִשְׁמַע אֵלֶיךָ קָנִיתָ [לְּךָ] אָחִיךָ׃",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 18,
+        "verse": 29,
+        "word_index": 11,
+        "text": "לְּךָ",
+        "strong": "H3922",
+        "prefixes": []
+      },
+      "previous_strong": "H3922",
+      "new_strong": "D0274",
+      "reason": "the word is the suffixed preposition לְךָ with a conjunctive dagesh, so it uses the exact-form entry D0274; H3922 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0274 לְךָ: to you; for you, preposition ל with second masculine singular suffix.",
+        "grammar": "ל with second masculine singular suffix, to you",
+        "context": "Matthew 18:29.11: הַאֲרֶךְ־ לִי אַפֶּךָ וַאֲשַׁלְּמָה [לְּךָ] הַכֹּל׃",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 2,
+        "verse": 25,
+        "word_index": 16,
+        "text": "לְּךָ",
+        "strong": "H3922",
+        "prefixes": []
+      },
+      "previous_strong": "H3922",
+      "new_strong": "D0274",
+      "reason": "the word is the suffixed preposition לְךָ with a conjunctive dagesh, so it uses the exact-form entry D0274; H3922 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0274 לְךָ: to you; for you, preposition ל with second masculine singular suffix.",
+        "grammar": "ל with second masculine singular suffix, to you",
+        "context": "Romans 2:25.16: הַתּוֹרָה אָז מִילָתְךָ הָיְתָה־ [לְּךָ] לְעָרְלָה׃",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 18,
+        "verse": 19,
+        "word_index": 5,
+        "text": "לִּי",
+        "strong": "H3922",
+        "prefixes": []
+      },
+      "previous_strong": "H3922",
+      "new_strong": "D0265",
+      "reason": "the word is the suffixed preposition לִי with a conjunctive dagesh, so it uses the exact-form entry D0265; H3922 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0265 לִי: to me; for me, preposition ל with first common singular suffix.",
+        "grammar": "ל with first common singular suffix, to me",
+        "context": "Luke 18:19.5: אֵלָיו יֵשׁוּעַ מַדּוּעַ קָרָאתָ [לִּי] טוֹב אֵין טוֹב בִּלְתִּי",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 5,
+        "verse": 7,
+        "word_index": 5,
+        "text": "לִּי",
+        "strong": "H3922",
+        "prefixes": []
+      },
+      "previous_strong": "H3922",
+      "new_strong": "D0265",
+      "reason": "the word is the suffixed preposition לִי with a conjunctive dagesh, so it uses the exact-form entry D0265; H3922 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0265 לִי: to me; for me, preposition ל with first common singular suffix.",
+        "grammar": "ל with first common singular suffix, to me",
+        "context": "Mark 5:7.5: בְּקוֹל גָּדוֹל וַיֹּאמֶר מַה־ [לִּי] וָלָךְ יֵשׁוּעַ בֶּן־ אֵל",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 17,
+        "verse": 9,
+        "word_index": 14,
+        "text": "לִּי",
+        "strong": "H1990",
+        "prefixes": []
+      },
+      "previous_strong": "H1990",
+      "new_strong": "D0265",
+      "reason": "the word is the suffixed preposition לִי with a conjunctive dagesh, so it uses the exact-form entry D0265; H1990 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0265 לִי: to me; for me, preposition ל with first common singular suffix.",
+        "grammar": "ל with first common singular suffix, to me",
+        "context": "John 17:9.14: בְּעַד אֵלֶּה אֲשֶׁר נָתַתָּ [לִּי] כִּי־ לְךָ הֵמָּה׃",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 7,
+        "verse": 47,
+        "word_index": 5,
+        "text": "לָהּ",
+        "strong": "H3922",
+        "prefixes": []
+      },
+      "previous_strong": "H3922",
+      "new_strong": "D0276",
+      "reason": "the word is the suffixed preposition לָהּ; H3922 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0276 לָהּ: to her; for her, preposition ל with third feminine singular suffix.",
+        "grammar": "ל with third feminine singular suffix, to her",
+        "context": "Luke 7:47.5: אֲנִי אֹמֵר אֵלֶיךָ נִסְלְחוּ־ [לָהּ] חַטֹּאתֶיהָ הָרַבּוֹת כִּי הַרְבֵּה",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 14,
+        "verse": 7,
+        "word_index": 1,
+        "text": "לָהּ",
+        "strong": "H8119",
+        "prefixes": []
+      },
+      "previous_strong": "H8119",
+      "new_strong": "D0276",
+      "reason": "the word is the suffixed preposition לָהּ; H8119 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0276 לָהּ: to her; for her, preposition ל with third feminine singular suffix.",
+        "grammar": "ל with third feminine singular suffix, to her",
+        "context": "Matthew 14:7.1: וַיִּשָּׁבַע [לָהּ] וַיֹּאמַר מַה־ תִּשְׁאַל נַפְשֵׁךְ",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 13,
+        "verse": 2,
+        "word_index": 18,
+        "text": "לָהּ׃",
+        "strong": "H893",
+        "prefixes": []
+      },
+      "previous_strong": "H893",
+      "new_strong": "D0276",
+      "reason": "the word is the suffixed preposition לָהּ; H893 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0276 לָהּ: to her; for her, preposition ל with third feminine singular suffix.",
+        "grammar": "ל with third feminine singular suffix, to her",
+        "context": "Acts 13:2.18: שָׁאוּל לַמְּלָאכָה אֲשֶׁר קְרָאתִים [לָהּ׃] ",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections",
+        "replaced": {
+          "issue_type": "definition_review",
+          "new": "H893",
+          "previous": "H893",
+          "reviewer": "codex-desktop",
+          "status": "needs_manual_review"
+        }
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 22,
+        "verse": 15,
+        "word_index": 3,
+        "text": "לּוֹ",
+        "strong": "H3575",
+        "prefixes": []
+      },
+      "previous_strong": "H3575",
+      "new_strong": "D0266",
+      "reason": "the word is the suffixed preposition לוֹ with a conjunctive dagesh, so it uses the exact-form entry D0266; H3575 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0266 לוֹ: to him; for him, preposition ל with third masculine singular suffix.",
+        "grammar": "ל with third masculine singular suffix, to him",
+        "context": "Acts 22:15.3: כִּי הָיוֹ תִהְיֶה־ [לּוֹ] לְעֵד אֶל־ כָּל־ בְּנֵי",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 17,
+        "verse": 2,
+        "word_index": 14,
+        "text": "לּוֹ׃",
+        "strong": "H1990",
+        "prefixes": []
+      },
+      "previous_strong": "H1990",
+      "new_strong": "D0266",
+      "reason": "the word is the suffixed preposition לוֹ with a conjunctive dagesh, so it uses the exact-form entry D0266; H1990 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0266 לוֹ: to him; for him, preposition ל with third masculine singular suffix.",
+        "grammar": "ל with third masculine singular suffix, to him",
+        "context": "John 17:2.14: עוֹלָמִים לְכֹל אֲשֶׁר־ נָתַתָּ [לּוֹ׃] ",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 17,
+        "verse": 23,
+        "word_index": 3,
+        "text": "בִי",
+        "strong": "H3487",
+        "prefixes": []
+      },
+      "previous_strong": "H3487",
+      "new_strong": "D0267",
+      "reason": "the word is the suffixed preposition בִּי; H3487 is an unrelated entry",
+      "evidence": {
+        "lexicon": "D0267 בִּי: in me; with me, preposition ב with first common singular suffix.",
+        "grammar": "ב with first common singular suffix, in me",
+        "context": "John 17:23.3: אֲנִי בָהֶם וְאַתָּה [בִי] לְמַעַן יִהְיוּ מֻשְׁלָמִים לְאֶחָד",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 6,
+        "verse": 1,
+        "word_index": 13,
+        "text": "לָכֶם",
+        "strong": "H6889",
+        "prefixes": [
+          "Hl"
+        ]
+      },
+      "previous_strong": "H6889",
+      "new_strong": "Hl/H859",
+      "reason": "the word is the suffixed preposition לָכֶם, which has no custom entry, so it uses Hl + H859; H6889 is an unrelated entry",
+      "evidence": {
+        "lexicon": "H859 אַתָּה: thou; you",
+        "grammar": "ל with second masculine plural suffix, to you",
+        "context": "Matthew 6:1.13: אֶתְכֶם וְאִם־ לֹא אֵין־ [לָכֶם] שָׂכָר מֵאֵת אֲבִיכֶם שֶׁבַּשָּׁמָיִם׃",
+        "kind": "suffixed_preposition",
+        "item": "R3",
+        "shard": "corrections",
+        "replaced": {
+          "issue_type": "definition_review",
+          "new": "H6889",
+          "previous": "H6889",
+          "reviewer": "codex-desktop",
+          "status": "needs_manual_review"
+        }
       }
     }
   ]

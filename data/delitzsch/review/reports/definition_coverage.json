@@ -1885,7 +1885,7 @@
     "en",
     "es"
    ],
-   "occurrences": 158,
+   "occurrences": 152,
    "source": "custom"
   },
   "D0275": {
@@ -1893,7 +1893,7 @@
     "en",
     "es"
    ],
-   "occurrences": 74,
+   "occurrences": 80,
    "source": "custom"
   },
   "D0276": {
@@ -4056,6 +4056,11 @@
    "occurrences": 1,
    "source": "canonical"
   },
+  "H1784": {
+   "languages": [],
+   "occurrences": 1,
+   "source": "canonical"
+  },
   "H1792": {
    "languages": [
     "en",
@@ -4340,7 +4345,7 @@
     "en",
     "es"
    ],
-   "occurrences": 4,
+   "occurrences": 3,
    "source": "canonical"
   },
   "H1865": {
@@ -25884,6 +25889,11 @@
     "strong": "H1704"
    },
    {
+    "occurrences": 1,
+    "source": "canonical",
+    "strong": "H1784"
+   },
+   {
     "occurrences": 3,
     "source": "canonical",
     "strong": "H3194"
@@ -25974,6 +25984,11 @@
     "occurrences": 2,
     "source": "canonical",
     "strong": "H1704"
+   },
+   {
+    "occurrences": 1,
+    "source": "canonical",
+    "strong": "H1784"
    },
    {
     "occurrences": 2,
@@ -26081,19 +26096,19 @@
  "schema_version": 1,
  "totals": {
   "by_source": {
-   "canonical": 2404,
+   "canonical": 2405,
    "canonical_and_custom": 593,
    "custom": 243
   },
-  "identifiers": 3240,
+  "identifiers": 3241,
   "missing_definitions": {
    "en": {
-    "identifiers": 16,
-    "occurrences": 36
+    "identifiers": 17,
+    "occurrences": 37
    },
    "es": {
-    "identifiers": 24,
-    "occurrences": 73
+    "identifiers": 25,
+    "occurrences": 74
    }
   },
   "missing_entries": 0,

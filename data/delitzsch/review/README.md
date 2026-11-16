@@ -222,7 +222,9 @@ whole corpus, after `lexical_review_368.json`:
   exception is `בִּי אֲדֹנִי`, "I pray, my lord", which stays on H994.
   The entry follows the pointed form, not the person addressed. Pausal
   `לָךְ` and `בָּךְ` addressed to a man, as in Luke 4:7 and John 8:48, use
-  D0275 and D0279, and `וָלָךְ` in Mark 1:24 uses `Hc/D0275`.
+  D0275 and D0279, and `וָלָךְ` in Mark 1:24 uses `Hc/D0275`. A conjunctive
+  dagesh does not change the entry, so `לָּךְ`, `לְּךָ`, `לִּי`, and `לּוֹ`
+  use the entry of `לָךְ`, `לְךָ`, `לִי`, and `לוֹ`.
 - A Hebrew word uses the Hebrew entry, not the Aramaic entry of Ezra and
   Daniel, such as `הָאִגְּרוֹת` on H107, not H104. An Aramaic entry stays when
   the lexicon has no Hebrew entry for the word, such as `שָׁלְטָן` (H7985), or
@@ -232,9 +234,11 @@ Apply it with `review apply lexical_review_368_followup.json`, then run
 `review dispositions`.
 
 `batches/lexical_review_368_corrections.json` comes after the follow-up. It
-corrects five words that neither batch reached, such as `מָסַר` in Luke 23:25
-(H994 to H4560) and `דְּרוֹמִית` in Acts 28:13 (Aramaic H1784 to Hebrew
-H1864). It also rewords D0275 and D0279 to "second person singular
+corrects 26 words that neither batch reached. Four are verbs on H994, such
+as `מָסַר` in Luke 23:25 (H994 to H4560). The other 22 are suffixed
+prepositions on unrelated entries, most with a conjunctive dagesh, such as
+`לָּךְ` in Luke 18:41 (H3922 to D0275) and `לּוֹ` in Acts 22:15 (H3575 to
+D0266). It also rewords D0275 and D0279 to "second person singular
 (feminine, or masculine in pause)" with `upsert_custom_definition`. Apply it
 with `review apply lexical_review_368_corrections.json`, then run
 `review dispositions`.
