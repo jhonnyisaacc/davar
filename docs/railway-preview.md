@@ -5,7 +5,14 @@ previews for non-draft PRs bake in `PUBLIC_API_URL` at build time via
 `scripts/preview-api-url.sh` (called from `.github/workflows/web-preview.yml`).
 
 There is no `railway.toml` in the repo. Service config lives in the Railway
-dashboard (project `davar`, service `davar`).
+dashboard (project `davar`, service `davar`), except the Python runtime.
+`api/railpack.json` sets `deploy.aptPackages`, which replaces the
+dashboard `RAILPACK_DEPLOY_APT_PACKAGES` list because Railpack lets the
+file win. That list installs `python3` for the Bore bridge. The build
+step installs the pinned `tzdata` package into `/app/.python`, and
+`PYTHONPATH` points there, so `zoneinfo` resolves legacy names such as
+`America/Buenos_Aires` even when the image's system zone files lack
+them. Keep the `tzdata` pin equal to `.github/ci/requirements.txt`.
 
 ## Environments
 
