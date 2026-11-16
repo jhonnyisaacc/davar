@@ -89503,6 +89503,12 @@
         "text_es": "Demetrio; hombre recomendado en 3 Juan.",
         "source": "custom",
         "order": 1
+      },
+      {
+        "source": "delitzsch_review",
+        "text_en": "Demetrius; the silversmith of Ephesus who made silver shrines of Artemis.",
+        "text_es": "Demetrio; el platero de Éfeso que hacía templecillos de plata de Artemisa.",
+        "order": 2
       }
     ],
     "root": "",
@@ -166863,6 +166869,12 @@
         "transliteration": "Aram",
         "context": "Región geográfica donde se encontraba el reino de Gesur. Región de los dos ríos que David capturó, abarcando territorios desde el centro en Babel hasta el norte asirio.",
         "original_id": 69
+      },
+      {
+        "source": "delitzsch_review",
+        "text_en": "Aram; Syria and Mesopotamia, the land of the Arameans.",
+        "text_es": "Aram; Siria y Mesopotamia, la tierra de los arameos.",
+        "order": 2
       }
     ]
   },
@@ -519874,5 +519886,1976 @@
         "original_id": "otárion"
       }
     ]
+  },
+  "D0285": {
+    "strong_number": "D0285",
+    "hebrew": "לִיבַרְטִינִים",
+    "transliteration_es": "libertos",
+    "transliteration_en": "Libertines",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Libertines; freedmen, the name of a synagogue of Jews in Jerusalem, probably former slaves and their descendants.",
+        "text_es": "libertos; nombre de una sinagoga de judíos en Jerusalén, probablemente antiguos esclavos y sus descendientes."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 6,
+        "verse": 9,
+        "word_index": 7,
+        "text": "הַלִּיבַרְטִינִים"
+      }
+    ]
+  },
+  "D0286": {
+    "strong_number": "D0286",
+    "hebrew": "שׁוֹשַׁנָּה",
+    "transliteration_es": "Susana",
+    "transliteration_en": "Susanna",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Susanna; a woman who supported Jesus' ministry, named in Luke 8:3.",
+        "text_es": "Susana; mujer que sostuvo el ministerio de Jesús, nombrada en Lucas 8:3."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 8,
+        "verse": 3,
+        "word_index": 5,
+        "text": "וְשׁוֹשַׁנָּה"
+      }
+    ]
+  },
+  "D0287": {
+    "strong_number": "D0287",
+    "hebrew": "גַּדְרִיִּים",
+    "transliteration_es": "gadarenos",
+    "transliteration_en": "Gadarenes",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Gadarenes; people of the region of Gadara, east of the Sea of Galilee (Greek manuscripts also read Gerasenes).",
+        "text_es": "gadarenos; habitantes de la región de Gádara, al este del mar de Galilea (los manuscritos griegos también leen gerasenos)."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 8,
+        "verse": 26,
+        "word_index": 4,
+        "text": "הַגַּדְרִיִּים"
+      },
+      {
+        "book": "luke",
+        "chapter": 8,
+        "verse": 37,
+        "word_index": 5,
+        "text": "הַגַּדְרִיִּים"
+      },
+      {
+        "book": "mark",
+        "chapter": 5,
+        "verse": 1,
+        "word_index": 6,
+        "text": "הַגַּדְרִיִּם׃"
+      },
+      {
+        "book": "matthew",
+        "chapter": 8,
+        "verse": 28,
+        "word_index": 7,
+        "text": "הַגַּדְרִיִּם"
+      }
+    ]
+  },
+  "D0288": {
+    "strong_number": "D0288",
+    "hebrew": "הִירַפּוֹלִיס",
+    "transliteration_es": "Hierápolis",
+    "transliteration_en": "Hierapolis",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Hierapolis; a city of Phrygia near Laodicea and Colossae.",
+        "text_es": "Hierápolis; ciudad de Frigia cercana a Laodicea y Colosas."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "colossians",
+        "chapter": 4,
+        "verse": 13,
+        "word_index": 13,
+        "text": "הִירַפּוֹלִיס׃"
+      }
+    ]
+  },
+  "D0289": {
+    "strong_number": "D0289",
+    "hebrew": "תַּסְלוֹנִיקִי",
+    "transliteration_es": "Tesalónica",
+    "transliteration_en": "Thessalonica",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Thessalonica; the chief city of Macedonia, on the Aegean coast.",
+        "text_es": "Tesalónica; la ciudad principal de Macedonia, en la costa del Egeo."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 1,
+        "word_index": 7,
+        "text": "תַּסְלוֹנִיקִי"
+      },
+      {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 11,
+        "word_index": 4,
+        "text": "תַסְלוֹנִיקִי"
+      },
+      {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 13,
+        "word_index": 5,
+        "text": "מִתַּסְלוֹנִיקִי"
+      },
+      {
+        "book": "acts",
+        "chapter": 27,
+        "verse": 2,
+        "word_index": 17,
+        "text": "תַּסְלוֹנִיקִי׃"
+      },
+      {
+        "book": "philippians",
+        "chapter": 4,
+        "verse": 16,
+        "word_index": 2,
+        "text": "בְּתַסְלוֹנִיקִי"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 4,
+        "verse": 10,
+        "word_index": 9,
+        "text": "לְתַסְלוֹנִיקִי"
+      }
+    ]
+  },
+  "D0290": {
+    "strong_number": "D0290",
+    "hebrew": "אִיטַלְקִי",
+    "transliteration_es": "italiano",
+    "transliteration_en": "Italian",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Italian; of Italy, as in the Italian cohort at Caesarea.",
+        "text_es": "italiano; de Italia, como la cohorte italiana de Cesarea."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 10,
+        "verse": 1,
+        "word_index": 10,
+        "text": "הָאִיטַלְקִי׃"
+      }
+    ]
+  },
+  "D0291": {
+    "strong_number": "D0291",
+    "hebrew": "אַפֹּלוֹנְיָא",
+    "transliteration_es": "Apolonia",
+    "transliteration_en": "Apollonia",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Apollonia; a town of Macedonia on the road from Amphipolis to Thessalonica.",
+        "text_es": "Apolonia; ciudad de Macedonia en el camino de Anfípolis a Tesalónica."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 1,
+        "word_index": 4,
+        "text": "וּבְאַפֹּלוֹנְיָא"
+      }
+    ]
+  },
+  "D0292": {
+    "strong_number": "D0292",
+    "hebrew": "אַפִּיקוֹרוֹס",
+    "transliteration_es": "Epicuro",
+    "transliteration_en": "Epicurus",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Epicurus; the Greek philosopher whose followers, the Epicureans, met Paul in Athens.",
+        "text_es": "Epicuro; el filósofo griego cuyos seguidores, los epicúreos, se encontraron con Pablo en Atenas."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 18,
+        "word_index": 4,
+        "text": "אַפִּיקוֹרוֹס"
+      }
+    ]
+  },
+  "D0293": {
+    "strong_number": "D0293",
+    "hebrew": "פוֹבְלִיּוֹס",
+    "transliteration_es": "Publio",
+    "transliteration_en": "Publius",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Publius; the chief man of Malta, who received Paul after the shipwreck.",
+        "text_es": "Publio; el hombre principal de Malta, que recibió a Pablo después del naufragio."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 28,
+        "verse": 7,
+        "word_index": 10,
+        "text": "פוֹבְלִיּוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 28,
+        "verse": 8,
+        "word_index": 1,
+        "text": "פוֹבְלִיּוֹס"
+      }
+    ]
+  },
+  "D0294": {
+    "strong_number": "D0294",
+    "hebrew": "טִימַי",
+    "transliteration_es": "Timeo",
+    "transliteration_en": "Timaeus",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Timaeus; the father of Bartimaeus, the blind man of Jericho.",
+        "text_es": "Timeo; el padre de Bartimeo, el ciego de Jericó."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "mark",
+        "chapter": 10,
+        "verse": 46,
+        "word_index": 13,
+        "text": "טִימַי"
+      }
+    ]
+  },
+  "D0295": {
+    "strong_number": "D0295",
+    "hebrew": "בַּרְטִימַי",
+    "transliteration_es": "Bartimeo",
+    "transliteration_en": "Bartimaeus",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Bartimaeus; the blind beggar of Jericho whom Jesus healed; the name means son of Timaeus.",
+        "text_es": "Bartimeo; el mendigo ciego de Jericó a quien Jesús sanó; el nombre significa hijo de Timeo."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "mark",
+        "chapter": 10,
+        "verse": 46,
+        "word_index": 11,
+        "text": "בַּרְטִימַי"
+      }
+    ]
+  },
+  "D0296": {
+    "strong_number": "D0296",
+    "hebrew": "לוּקָס",
+    "transliteration_es": "Lucas",
+    "transliteration_en": "Luke",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Luke; the physician and co-worker of Paul.",
+        "text_es": "Lucas; el médico y colaborador de Pablo."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "colossians",
+        "chapter": 4,
+        "verse": 14,
+        "word_index": 0,
+        "text": "לוּקַס"
+      },
+      {
+        "book": "philemon",
+        "chapter": 1,
+        "verse": 24,
+        "word_index": 3,
+        "text": "וְלוּקָס"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 4,
+        "verse": 11,
+        "word_index": 0,
+        "text": "וְלוּקָס"
+      }
+    ]
+  },
+  "D0297": {
+    "strong_number": "D0297",
+    "hebrew": "אֲלֶכְּסַנְדֶּר",
+    "transliteration_es": "Alejandro",
+    "transliteration_en": "Alexander",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Alexander; the name of several men in the New Testament: a son of Simon of Cyrene, a member of the high priest's family, a Jew of Ephesus, and an opponent of Paul named with Hymenaeus and as the coppersmith.",
+        "text_es": "Alejandro; nombre de varios hombres del Nuevo Testamento: un hijo de Simón de Cirene, un miembro de la familia del sumo sacerdote, un judío de Éfeso y un opositor de Pablo, nombrado con Himeneo y como el calderero."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 4,
+        "verse": 6,
+        "word_index": 5,
+        "text": "וַאֲלֶכְסַנְדְּרוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 19,
+        "verse": 33,
+        "word_index": 4,
+        "text": "אֲלֶכְּסַנְדֶּר"
+      },
+      {
+        "book": "acts",
+        "chapter": 19,
+        "verse": 33,
+        "word_index": 11,
+        "text": "אֲלֶכְּסַנְדֶּר"
+      },
+      {
+        "book": "mark",
+        "chapter": 15,
+        "verse": 21,
+        "word_index": 11,
+        "text": "אֲלֶכְסַנְדְּרוֹס"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 1,
+        "verse": 20,
+        "word_index": 2,
+        "text": "וַאֲלֶכְּסַנְדֶּר"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 4,
+        "verse": 14,
+        "word_index": 0,
+        "text": "אֲלֶכְּסַנְדֶּר"
+      }
+    ]
+  },
+  "D0298": {
+    "strong_number": "D0298",
+    "hebrew": "אֲלֶכְסַנְדְּרִיָּא",
+    "transliteration_es": "Alejandría",
+    "transliteration_en": "Alexandria",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Alexandria; the great port city of Egypt.",
+        "text_es": "Alejandría; la gran ciudad portuaria de Egipto."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 18,
+        "verse": 24,
+        "word_index": 7,
+        "text": "אֲלֶכְסַנְדְּרִיָּא"
+      }
+    ]
+  },
+  "D0299": {
+    "strong_number": "D0299",
+    "hebrew": "אֲרַסְטוֹס",
+    "transliteration_es": "Erasto",
+    "transliteration_en": "Erastus",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Erastus; a co-worker of Paul, named as treasurer of the city of Corinth.",
+        "text_es": "Erasto; colaborador de Pablo, nombrado como tesorero de la ciudad de Corinto."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 19,
+        "verse": 22,
+        "word_index": 8,
+        "text": "אֲרִסְטוֹס"
+      },
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 23,
+        "word_index": 8,
+        "text": "אֲרַסְטוֹס"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 4,
+        "verse": 20,
+        "word_index": 0,
+        "text": "אֲרַסְטוֹס"
+      }
+    ]
+  },
+  "D0300": {
+    "strong_number": "D0300",
+    "hebrew": "פַּרְתִּיִּים",
+    "transliteration_es": "partos",
+    "transliteration_en": "Parthians",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Parthians; people of Parthia, east of Mesopotamia.",
+        "text_es": "partos; habitantes de Partia, al este de Mesopotamia."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 2,
+        "verse": 9,
+        "word_index": 0,
+        "text": "פַּרְתִּיִּים"
+      }
+    ]
+  },
+  "D0301": {
+    "strong_number": "D0301",
+    "hebrew": "פְּרוּגְיָא",
+    "transliteration_es": "Frigia",
+    "transliteration_en": "Phrygia",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Phrygia; a region of central Asia Minor.",
+        "text_es": "Frigia; región del centro de Asia Menor."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 2,
+        "verse": 10,
+        "word_index": 0,
+        "text": "פְּרוּגְיָא"
+      },
+      {
+        "book": "acts",
+        "chapter": 16,
+        "verse": 6,
+        "word_index": 1,
+        "text": "בִפְרוּגְיָא"
+      },
+      {
+        "book": "acts",
+        "chapter": 18,
+        "verse": 23,
+        "word_index": 9,
+        "text": "וּפְרוּגְיָא"
+      }
+    ]
+  },
+  "D0302": {
+    "strong_number": "D0302",
+    "hebrew": "טִיבַרְיָה",
+    "transliteration_es": "Tiberíades",
+    "transliteration_en": "Tiberias",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Tiberias; a city on the western shore of the Sea of Galilee, which John also calls the Sea of Tiberias.",
+        "text_es": "Tiberíades; ciudad en la orilla occidental del mar de Galilea, que Juan también llama mar de Tiberíades."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "john",
+        "chapter": 6,
+        "verse": 1,
+        "word_index": 10,
+        "text": "לְטִיבַרְיָה׃"
+      },
+      {
+        "book": "john",
+        "chapter": 6,
+        "verse": 23,
+        "word_index": 3,
+        "text": "מִטִּיבַרְיָה"
+      },
+      {
+        "book": "john",
+        "chapter": 21,
+        "verse": 1,
+        "word_index": 10,
+        "text": "טִיבַרְיָה"
+      }
+    ]
+  },
+  "D0303": {
+    "strong_number": "D0303",
+    "hebrew": "טִיבַרְיוֹס",
+    "transliteration_es": "Tiberio",
+    "transliteration_en": "Tiberius",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Tiberius; the Roman emperor in whose fifteenth year John the Baptist began to preach.",
+        "text_es": "Tiberio; el emperador romano en cuyo año decimoquinto Juan el Bautista comenzó a predicar."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 1,
+        "word_index": 5,
+        "text": "טִיבַרְיוֹס"
+      }
+    ]
+  },
+  "D0304": {
+    "strong_number": "D0304",
+    "hebrew": "רָמָתַיִם",
+    "transliteration_es": "Arimatea",
+    "transliteration_en": "Arimathea",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Arimathea (Ramathaim); the Judean town of Joseph, who buried Jesus.",
+        "text_es": "Arimatea (Ramataim); la ciudad de Judea de José, el que sepultó a Jesús."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 23,
+        "verse": 50,
+        "word_index": 11,
+        "text": "הָרָמָתַיִם"
+      },
+      {
+        "book": "matthew",
+        "chapter": 27,
+        "verse": 57,
+        "word_index": 6,
+        "text": "הָרָמָתַיִם"
+      }
+    ]
+  },
+  "D0305": {
+    "strong_number": "D0305",
+    "hebrew": "אַתִּינַס",
+    "transliteration_es": "Atenas",
+    "transliteration_en": "Athens",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Athens; the chief city of Attica, in Greece.",
+        "text_es": "Atenas; la ciudad principal del Ática, en Grecia."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 15,
+        "word_index": 5,
+        "text": "אַתִּינַס"
+      },
+      {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 16,
+        "word_index": 1,
+        "text": "בְּאַתִּינַס"
+      },
+      {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 22,
+        "word_index": 7,
+        "text": "אַתִּינַס"
+      },
+      {
+        "book": "acts",
+        "chapter": 18,
+        "verse": 1,
+        "word_index": 4,
+        "text": "מֵאַתִּינַס"
+      },
+      {
+        "book": "thessalonians1",
+        "chapter": 3,
+        "verse": 1,
+        "word_index": 9,
+        "text": "בְּאַתִּינָס׃"
+      }
+    ]
+  },
+  "D0306": {
+    "strong_number": "D0306",
+    "hebrew": "אַתִּינִיִּים",
+    "transliteration_es": "atenienses",
+    "transliteration_en": "Athenians",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Athenians; people of Athens.",
+        "text_es": "atenienses; habitantes de Atenas."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 21,
+        "word_index": 1,
+        "text": "הָאַתִּינִיִּים"
+      }
+    ]
+  },
+  "D0307": {
+    "strong_number": "D0307",
+    "hebrew": "זִיֵּף",
+    "transliteration_es": "ziyef",
+    "transliteration_en": "ziyef",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "to falsify; to adulterate or forge, a post-biblical Hebrew verb.",
+        "text_es": "falsificar; adulterar o falsear, verbo hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "corinthians2",
+        "chapter": 4,
+        "verse": 2,
+        "word_index": 9,
+        "text": "לְזַיֵּף"
+      }
+    ]
+  },
+  "D0308": {
+    "strong_number": "D0308",
+    "hebrew": "שֵׁרוּת",
+    "transliteration_es": "sherut",
+    "transliteration_en": "sherut",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "service; ministry, a post-biblical Hebrew noun.",
+        "text_es": "servicio; ministerio, sustantivo hebreo posbíblico."
+      }
+    ],
+    "root": "שרת",
+    "root_strong": "H8334",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 1,
+        "verse": 17,
+        "word_index": 6,
+        "text": "הַשֵּׁרוּת"
+      },
+      {
+        "book": "acts",
+        "chapter": 1,
+        "verse": 25,
+        "word_index": 3,
+        "text": "הַשֵּׁרוּת"
+      },
+      {
+        "book": "acts",
+        "chapter": 20,
+        "verse": 24,
+        "word_index": 16,
+        "text": "הַשֵּׁרוּת"
+      },
+      {
+        "book": "acts",
+        "chapter": 21,
+        "verse": 19,
+        "word_index": 10,
+        "text": "בְּשֵׁרוּתוֹ׃"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 16,
+        "verse": 15,
+        "word_index": 14,
+        "text": "לְשֵׁרוּת"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 3,
+        "verse": 3,
+        "word_index": 8,
+        "text": "שֵׁרוּתֵנוּ"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 3,
+        "verse": 7,
+        "word_index": 1,
+        "text": "שֵׁרוּת"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 3,
+        "verse": 8,
+        "word_index": 3,
+        "text": "שֵׁרוּת"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 3,
+        "verse": 9,
+        "word_index": 2,
+        "text": "הַשֵּׁרוּת"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 3,
+        "verse": 9,
+        "word_index": 10,
+        "text": "הַשֵּׁרוּת"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 4,
+        "verse": 1,
+        "word_index": 4,
+        "text": "הַשֵּׁרוּת"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 5,
+        "verse": 18,
+        "word_index": 12,
+        "text": "שֵׁרוּת"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 6,
+        "verse": 3,
+        "word_index": 7,
+        "text": "שֵׁרוּתֵנוּ"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 9,
+        "verse": 1,
+        "word_index": 7,
+        "text": "הַשֵּׁרוּת"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 9,
+        "verse": 12,
+        "word_index": 1,
+        "text": "שֵׁרוּת"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 9,
+        "verse": 12,
+        "word_index": 15,
+        "text": "בְּשֵׁרוּתְכֶם"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 8,
+        "verse": 6,
+        "word_index": 3,
+        "text": "שֵׁרוּת"
+      },
+      {
+        "book": "luke",
+        "chapter": 10,
+        "verse": 40,
+        "word_index": 3,
+        "text": "שֵׁרוּתָהּ"
+      },
+      {
+        "book": "romans",
+        "chapter": 11,
+        "verse": 13,
+        "word_index": 11,
+        "text": "שֵׁרוּתִי"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 1,
+        "verse": 18,
+        "word_index": 10,
+        "text": "שֵׁרוּתוֹ"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 4,
+        "verse": 5,
+        "word_index": 12,
+        "text": "שֵׁרוּתֶךָ׃"
+      }
+    ]
+  },
+  "D0309": {
+    "strong_number": "D0309",
+    "hebrew": "יְכֹלֶת",
+    "transliteration_es": "yejolet",
+    "transliteration_en": "yekholet",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "ability; power, capacity, a post-biblical Hebrew noun.",
+        "text_es": "capacidad; poder, facultad, sustantivo hebreo posbíblico."
+      }
+    ],
+    "root": "יכל",
+    "root_strong": "H3201",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 19,
+        "word_index": 6,
+        "text": "הַיְכֹלֶת"
+      },
+      {
+        "book": "acts",
+        "chapter": 20,
+        "verse": 32,
+        "word_index": 10,
+        "text": "הַיְכֹלֶת"
+      },
+      {
+        "book": "acts",
+        "chapter": 24,
+        "verse": 13,
+        "word_index": 2,
+        "text": "בִּיכָלְתָּם"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 3,
+        "verse": 5,
+        "word_index": 9,
+        "text": "יְכָלְתֵּנוּ"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 8,
+        "verse": 11,
+        "word_index": 13,
+        "text": "יְכָלְתְּכֶם׃"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 10,
+        "verse": 1,
+        "word_index": 12,
+        "text": "בִּיכָלְתָּהּ"
+      },
+      {
+        "book": "james",
+        "chapter": 3,
+        "verse": 2,
+        "word_index": 11,
+        "text": "וּבִיכָלְתּוֹ"
+      },
+      {
+        "book": "luke",
+        "chapter": 12,
+        "verse": 26,
+        "word_index": 5,
+        "text": "בִּיכָלְתְּכֶם"
+      },
+      {
+        "book": "matthew",
+        "chapter": 26,
+        "verse": 40,
+        "word_index": 11,
+        "text": "בִיכָלְתְּכֶם"
+      },
+      {
+        "book": "matthew",
+        "chapter": 26,
+        "verse": 61,
+        "word_index": 4,
+        "text": "בִּיכָלְתִּי"
+      },
+      {
+        "book": "philippians",
+        "chapter": 3,
+        "verse": 21,
+        "word_index": 11,
+        "text": "יְכָלְתּוֹ"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 1,
+        "verse": 12,
+        "word_index": 14,
+        "text": "הַיְכֹלֶת"
+      }
+    ]
+  },
+  "D0310": {
+    "strong_number": "D0310",
+    "hebrew": "עֵסֶק",
+    "transliteration_es": "esek",
+    "transliteration_en": "esek",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "business; affairs, occupation, a post-biblical Hebrew noun.",
+        "text_es": "negocio; asuntos, ocupación, sustantivo hebreo posbíblico."
+      }
+    ],
+    "root": "עסק",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "timothy2",
+        "chapter": 2,
+        "verse": 4,
+        "word_index": 5,
+        "text": "בְּעִסְקֵי"
+      }
+    ]
+  },
+  "D0311": {
+    "strong_number": "D0311",
+    "hebrew": "עָסַק",
+    "transliteration_es": "asak",
+    "transliteration_en": "asak",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "to be occupied with; to engage in or practice, a post-biblical Hebrew verb.",
+        "text_es": "ocuparse de; dedicarse a o practicar, verbo hebreo posbíblico."
+      }
+    ],
+    "root": "עסק",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 19,
+        "verse": 19,
+        "word_index": 2,
+        "text": "עָסְקוּ"
+      },
+      {
+        "book": "acts",
+        "chapter": 19,
+        "verse": 25,
+        "word_index": 4,
+        "text": "הָעֹסְקִים"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 2,
+        "verse": 14,
+        "word_index": 7,
+        "text": "לַעֲסֹק"
+      },
+      {
+        "book": "titus",
+        "chapter": 3,
+        "verse": 8,
+        "word_index": 14,
+        "text": "לַעֲסֹק"
+      },
+      {
+        "book": "titus",
+        "chapter": 3,
+        "verse": 14,
+        "word_index": 4,
+        "text": "לַעֲסֹק"
+      }
+    ]
+  },
+  "D0312": {
+    "strong_number": "D0312",
+    "hebrew": "סוּדָר",
+    "transliteration_es": "sudar",
+    "transliteration_en": "sudar",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "cloth; a handkerchief or face cloth, a post-biblical Hebrew noun from Latin sudarium.",
+        "text_es": "paño; pañuelo o sudario, sustantivo hebreo posbíblico, del latín sudarium."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 19,
+        "verse": 12,
+        "word_index": 4,
+        "text": "סוּדָרִים"
+      }
+    ]
+  },
+  "D0313": {
+    "strong_number": "D0313",
+    "hebrew": "יִסּוּרִים",
+    "transliteration_es": "yisurim",
+    "transliteration_en": "yissurim",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "sufferings; afflictions, chastisements, a post-biblical Hebrew noun.",
+        "text_es": "sufrimientos; aflicciones, castigos, sustantivo hebreo posbíblico."
+      }
+    ],
+    "root": "יסר",
+    "root_strong": "H3256",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "colossians",
+        "chapter": 1,
+        "verse": 24,
+        "word_index": 11,
+        "text": "בְּיִסּוּרֵי"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 11,
+        "verse": 37,
+        "word_index": 5,
+        "text": "בְיִסּוּרִים"
+      }
+    ]
+  },
+  "D0314": {
+    "strong_number": "D0314",
+    "hebrew": "קַלּוּת",
+    "transliteration_es": "kalut",
+    "transliteration_en": "kallut",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "lightness; levity, recklessness, a post-biblical Hebrew noun; קַלּוּת רֹאשׁ is frivolity.",
+        "text_es": "ligereza; frivolidad, temeridad, sustantivo hebreo posbíblico; קַלּוּת רֹאשׁ es frivolidad."
+      }
+    ],
+    "root": "קלל",
+    "root_strong": "H7043",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "jude",
+        "chapter": 1,
+        "verse": 12,
+        "word_index": 7,
+        "text": "וּבְקַלּוּת"
+      }
+    ]
+  },
+  "D0315": {
+    "strong_number": "D0315",
+    "hebrew": "רְדִיפָה",
+    "transliteration_es": "redifá",
+    "transliteration_en": "redifah",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "persecution; pursuit, a post-biblical Hebrew noun.",
+        "text_es": "persecución; acoso, sustantivo hebreo posbíblico."
+      }
+    ],
+    "root": "רדף",
+    "root_strong": "H7291",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 1,
+        "word_index": 9,
+        "text": "רְדִיפָה"
+      },
+      {
+        "book": "acts",
+        "chapter": 13,
+        "verse": 50,
+        "word_index": 11,
+        "text": "רְדִיפָה"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 12,
+        "verse": 10,
+        "word_index": 6,
+        "text": "וּבִרְדִיפוֹת"
+      },
+      {
+        "book": "mark",
+        "chapter": 4,
+        "verse": 17,
+        "word_index": 12,
+        "text": "וּרְדִיפָה"
+      },
+      {
+        "book": "mark",
+        "chapter": 10,
+        "verse": 30,
+        "word_index": 7,
+        "text": "הָרְדִיפוֹת"
+      },
+      {
+        "book": "matthew",
+        "chapter": 13,
+        "verse": 21,
+        "word_index": 10,
+        "text": "וּרְדִיפָה"
+      },
+      {
+        "book": "thessalonians2",
+        "chapter": 1,
+        "verse": 4,
+        "word_index": 13,
+        "text": "הָרְדִיפוֹת"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 3,
+        "verse": 11,
+        "word_index": 0,
+        "text": "וּבָרְדִיפוֹת"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 3,
+        "verse": 11,
+        "word_index": 8,
+        "text": "הָרְדִיפוֹת"
+      }
+    ]
+  },
+  "D0316": {
+    "strong_number": "D0316",
+    "hebrew": "רִבִּית",
+    "transliteration_es": "ribit",
+    "transliteration_en": "ribbit",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "interest; profit on lent money, a post-biblical Hebrew noun.",
+        "text_es": "interés; ganancia sobre dinero prestado, sustantivo hebreo posbíblico."
+      }
+    ],
+    "root": "רבה",
+    "root_strong": "H7235",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 23,
+        "word_index": 11,
+        "text": "בְּרִבִּית׃"
+      },
+      {
+        "book": "matthew",
+        "chapter": 25,
+        "verse": 27,
+        "word_index": 14,
+        "text": "בְּרִבִּית׃"
+      }
+    ]
+  },
+  "D0317": {
+    "strong_number": "D0317",
+    "hebrew": "נְפִילָה",
+    "transliteration_es": "nefilá",
+    "transliteration_en": "nefilah",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "fall; falling, downfall, a post-biblical Hebrew noun.",
+        "text_es": "caída; derrumbe, sustantivo hebreo posbíblico."
+      }
+    ],
+    "root": "נפל",
+    "root_strong": "H5307",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 2,
+        "verse": 34,
+        "word_index": 10,
+        "text": "לִנְפִילָה"
+      }
+    ]
+  },
+  "D0318": {
+    "strong_number": "D0318",
+    "hebrew": "שְׁלֵמוּת",
+    "transliteration_es": "shelemut",
+    "transliteration_en": "shelemut",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "completeness; perfection, full assurance, a post-biblical Hebrew noun.",
+        "text_es": "plenitud; perfección, plena certeza, sustantivo hebreo posbíblico."
+      }
+    ],
+    "root": "שלם",
+    "root_strong": "H7999",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "colossians",
+        "chapter": 3,
+        "verse": 14,
+        "word_index": 7,
+        "text": "הַשְּׁלֵמוּת׃"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 6,
+        "verse": 1,
+        "word_index": 9,
+        "text": "הַשְּׁלֵמוּת"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 6,
+        "verse": 11,
+        "word_index": 9,
+        "text": "בִּשְׁלֵמוּת"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 7,
+        "verse": 11,
+        "word_index": 4,
+        "text": "שְׁלֵמוּת"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 9,
+        "verse": 11,
+        "word_index": 13,
+        "text": "וּשְׁלֵמוּת"
+      },
+      {
+        "book": "luke",
+        "chapter": 1,
+        "verse": 1,
+        "word_index": 9,
+        "text": "בִשְׁלֵמוּת"
+      }
+    ]
+  },
+  "D0319": {
+    "strong_number": "D0319",
+    "hebrew": "נְתִינָה",
+    "transliteration_es": "netiná",
+    "transliteration_en": "netinah",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "giving; putting or applying, as of the blood at the Passover, a post-biblical Hebrew noun.",
+        "text_es": "entrega; acción de poner o aplicar, como la sangre en la Pascua, sustantivo hebreo posbíblico."
+      }
+    ],
+    "root": "נתן",
+    "root_strong": "H5414",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "hebrews",
+        "chapter": 11,
+        "verse": 28,
+        "word_index": 4,
+        "text": "וּנְתִינַת"
+      }
+    ]
+  },
+  "D0320": {
+    "strong_number": "D0320",
+    "hebrew": "כְּדַאי",
+    "transliteration_es": "kedai",
+    "transliteration_en": "kedai",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "worthy; deserving, a post-biblical Hebrew and Aramaic word.",
+        "text_es": "digno; merecedor, palabra hebrea y aramea posbíblica."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "hebrews",
+        "chapter": 11,
+        "verse": 38,
+        "word_index": 4,
+        "text": "כְדַאי"
+      },
+      {
+        "book": "matthew",
+        "chapter": 10,
+        "verse": 37,
+        "word_index": 8,
+        "text": "כְדַאי"
+      },
+      {
+        "book": "matthew",
+        "chapter": 10,
+        "verse": 37,
+        "word_index": 17,
+        "text": "כְדַאי"
+      },
+      {
+        "book": "matthew",
+        "chapter": 10,
+        "verse": 38,
+        "word_index": 8,
+        "text": "כְדַאי"
+      }
+    ]
+  },
+  "D0321": {
+    "strong_number": "D0321",
+    "hebrew": "דִּבּוּר",
+    "transliteration_es": "dibur",
+    "transliteration_en": "dibbur",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "speech; word, utterance, a post-biblical Hebrew noun.",
+        "text_es": "habla; palabra, expresión, sustantivo hebreo posbíblico."
+      }
+    ],
+    "root": "דבר",
+    "root_strong": "H1696",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "colossians",
+        "chapter": 4,
+        "verse": 3,
+        "word_index": 9,
+        "text": "הַדִּבּוּר"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 1,
+        "verse": 5,
+        "word_index": 5,
+        "text": "דִּבּוּר"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 12,
+        "verse": 8,
+        "word_index": 10,
+        "text": "דִּבּוּר"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 14,
+        "verse": 9,
+        "word_index": 7,
+        "text": "דִּבּוּר"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 10,
+        "verse": 11,
+        "word_index": 7,
+        "text": "בְדִבּוּר"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 11,
+        "verse": 6,
+        "word_index": 4,
+        "text": "בַּדִּבּוּר"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 8,
+        "verse": 7,
+        "word_index": 5,
+        "text": "וּבְדִבּוּר"
+      },
+      {
+        "book": "james",
+        "chapter": 3,
+        "verse": 2,
+        "word_index": 7,
+        "text": "בְּדִבּוּר"
+      },
+      {
+        "book": "thessalonians1",
+        "chapter": 1,
+        "verse": 5,
+        "word_index": 5,
+        "text": "בְּדִבּוּר"
+      },
+      {
+        "book": "thessalonians2",
+        "chapter": 2,
+        "verse": 2,
+        "word_index": 11,
+        "text": "בְדִבּוּר"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 4,
+        "verse": 12,
+        "word_index": 9,
+        "text": "בְּדִבּוּר"
+      }
+    ]
+  },
+  "D0322": {
+    "strong_number": "D0322",
+    "hebrew": "תָּבַע",
+    "transliteration_es": "tavá",
+    "transliteration_en": "tava",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "to demand; to claim or collect what is owed, a post-biblical Hebrew verb.",
+        "text_es": "reclamar; exigir o cobrar lo que se debe, verbo hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 23,
+        "word_index": 9,
+        "text": "תוֹבֵעַ"
+      }
+    ]
+  },
+  "D0323": {
+    "strong_number": "D0323",
+    "hebrew": "גָּבָה",
+    "transliteration_es": "gavá",
+    "transliteration_en": "gavah",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "to collect; to gather money or a levy, a post-biblical Hebrew verb.",
+        "text_es": "recaudar; reunir dinero o una contribución, verbo hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "corinthians2",
+        "chapter": 8,
+        "verse": 19,
+        "word_index": 12,
+        "text": "הַגָּבוּי"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 8,
+        "verse": 20,
+        "word_index": 11,
+        "text": "הַגְּבוּיָה"
+      }
+    ]
+  },
+  "D0324": {
+    "strong_number": "D0324",
+    "hebrew": "יָתֵר",
+    "transliteration_es": "yater",
+    "transliteration_en": "yater",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "abundant; extra, greater, more, a post-biblical Hebrew adjective.",
+        "text_es": "abundante; adicional, mayor, más, adjetivo hebreo posbíblico."
+      }
+    ],
+    "root": "יתר",
+    "root_strong": "H3498",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "corinthians2",
+        "chapter": 2,
+        "verse": 4,
+        "word_index": 15,
+        "text": "הַיְתֵרָה"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 4,
+        "verse": 7,
+        "word_index": 11,
+        "text": "הַיְתֵרָה"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 7,
+        "verse": 13,
+        "word_index": 6,
+        "text": "יְתֵרָה"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 8,
+        "verse": 17,
+        "word_index": 4,
+        "text": "הַיְתֵרָה"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 12,
+        "verse": 15,
+        "word_index": 20,
+        "text": "הַיְתֵרָה"
+      },
+      {
+        "book": "john",
+        "chapter": 15,
+        "verse": 13,
+        "word_index": 3,
+        "text": "יְתֵרָה"
+      },
+      {
+        "book": "romans",
+        "chapter": 12,
+        "verse": 10,
+        "word_index": 4,
+        "text": "יְתֵרָה"
+      }
+    ]
+  },
+  "D0325": {
+    "strong_number": "D0325",
+    "hebrew": "דְּרוֹמִי",
+    "transliteration_es": "dromí",
+    "transliteration_en": "dromi",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "southern; of the south, as in a south wind, a post-biblical Hebrew adjective.",
+        "text_es": "meridional; del sur, como un viento del sur, adjetivo hebreo posbíblico."
+      }
+    ],
+    "root": "דרום",
+    "root_strong": "H1864",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 28,
+        "verse": 13,
+        "word_index": 7,
+        "text": "דְּרוֹמִית"
+      }
+    ]
+  },
+  "D0326": {
+    "strong_number": "D0326",
+    "hebrew": "כָּרַךְ",
+    "transliteration_es": "karaj",
+    "transliteration_en": "karakh",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "to wrap; to wind or roll up, as a body in linen, a post-biblical Hebrew verb.",
+        "text_es": "envolver; enrollar, como un cuerpo en lienzos, verbo hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "john",
+        "chapter": 19,
+        "verse": 40,
+        "word_index": 4,
+        "text": "וַיִּכְרְכוּהָ"
+      },
+      {
+        "book": "luke",
+        "chapter": 23,
+        "verse": 53,
+        "word_index": 2,
+        "text": "וַיִּכְרְכֶהָ"
+      },
+      {
+        "book": "mark",
+        "chapter": 15,
+        "verse": 46,
+        "word_index": 5,
+        "text": "וַיִּכְרְכֵהוּ"
+      },
+      {
+        "book": "matthew",
+        "chapter": 27,
+        "verse": 59,
+        "word_index": 4,
+        "text": "וַיִּכְרֹךְ"
+      }
+    ]
+  },
+  "H1421": {
+    "strong_number": "H1421",
+    "hebrew": "גִּדּוּף",
+    "transliteration_es": "giduf",
+    "transliteration_en": "giduf",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "delitzsch_review",
+        "text_en": "reviling; blasphemy, insult.",
+        "text_es": "injuria; blasfemia, insulto.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "H1442",
+    "manual_instances": [],
+    "mapping_scope": "instances_only"
+  },
+  "H1861": {
+    "strong_number": "H1861",
+    "hebrew": "דׇּרְבוֹן",
+    "transliteration_es": "dorevon",
+    "transliteration_en": "dorevon",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "delitzsch_review",
+        "text_en": "goad; a pointed stick for driving oxen.",
+        "text_es": "aguijón; vara puntiaguda para arrear bueyes.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only"
+  },
+  "H4136": {
+    "strong_number": "H4136",
+    "hebrew": "מוּל",
+    "transliteration_es": "mvl",
+    "transliteration_en": "mvl",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "delitzsch_review",
+        "text_en": "front; in front of, opposite; with מִן, from before or across from.",
+        "text_es": "frente; delante de, enfrente de; con מִן, desde enfrente.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "H4135",
+    "manual_instances": [],
+    "mapping_scope": "instances_only"
+  },
+  "H5681": {
+    "strong_number": "H5681",
+    "hebrew": "עִבְרִי",
+    "transliteration_es": "iveriy",
+    "transliteration_en": "iveriy",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "delitzsch_review",
+        "text_en": "Hebrew; a Hebrew, or the Hebrew language.",
+        "text_es": "hebreo; un hebreo, o la lengua hebrea.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "H5674",
+    "manual_instances": [],
+    "mapping_scope": "instances_only"
+  },
+  "H6969": {
+    "strong_number": "H6969",
+    "hebrew": "קוּן",
+    "transliteration_es": "kvn",
+    "transliteration_en": "kvn",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "delitzsch_review",
+        "text_en": "to chant a dirge; to lament, wail.",
+        "text_es": "entonar un lamento; lamentar, plañir.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only"
   }
 }

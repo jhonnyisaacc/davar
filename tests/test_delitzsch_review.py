@@ -583,20 +583,20 @@ def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
     committed = dispositions.read_ledger()
     assert committed == rebuilt
     summary = committed["summary"]
-    assert summary["total"] == 11528 + 16084 + 5173
+    assert summary["total"] == 11528 + 16084 + 5190
     assert summary["by_disposition"]["unresolved"] == 0
     assert summary["by_family"]["prefix_metadata"] == {
-        "benign": 1386, "corrected": 3512, "already_reviewed": 345, "unresolved": 0, "blocked": 251, "superseded": 0,
+        "benign": 1386, "corrected": 3563, "already_reviewed": 345, "unresolved": 0, "blocked": 200, "superseded": 0,
     }
     assert summary["by_family"]["outside_queue"] == {
-        "benign": 10, "corrected": 5142, "already_reviewed": 0, "unresolved": 0, "blocked": 21, "superseded": 0,
+        "benign": 10, "corrected": 5169, "already_reviewed": 0, "unresolved": 0, "blocked": 11, "superseded": 0,
     }
     assert summary["benign_lexical_review"] == {"pending": 0, "reviewed": 1759}
     assert summary["by_family"]["legacy_assignment"] == {
-        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 7904, "superseded": 8180,
+        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 7936, "superseded": 8148,
     }
     assert {rule: summary["by_rule"][rule] for rule in ("legacy_without_candidate", "legacy_current_value", "legacy_blocked", "lexical_review")} == {
-        "legacy_without_candidate": 4360, "legacy_current_value": 3820, "legacy_blocked": 7904, "lexical_review": 2322,
+        "legacy_without_candidate": 4360, "legacy_current_value": 3788, "legacy_blocked": 7936, "lexical_review": 2191,
     }
 
 
@@ -1025,10 +1025,70 @@ def test_identifiers_without_definitions_end_with_a_lexical_review():
     aram = ledger_record("acts.2.9.4")
     assert (aram["family"], aram["disposition"], aram["rule"], aram["lexical_review"]) == ("outside_queue", "benign", "lexical_review", "reviewed")
     ministry = ledger_record("corinthians2.6.3.7")
-    assert (ministry["disposition"], ministry["before"]["strong"]) == ("blocked", "H1122")
-    assert parsed_verse("corinthians2", 6, 3)["words"][7]["strong"] == "H1122"
+    assert (ministry["disposition"], ministry["before"]["strong"], ministry["after"]["strong"]) == ("corrected", "H1122", "D0308")
+    assert parsed_verse("corinthians2", 6, 3)["words"][7]["strong"] == "D0308"
     southern = ledger_record("acts.28.13.7")
-    assert (southern["disposition"], southern["rule"], southern["before"]["strong"]) == ("blocked", "lexical_review", "H1784")
+    assert (southern["disposition"], southern["rule"], southern["before"]["strong"], southern["after"]["strong"]) == (
+        "corrected", "reviewed_strong_correction", "H1784", "D0325")
+
+
+def definition_gaps_batch():
+    path = dispositions.ROOT / "data/delitzsch/review/batches/definition_gaps_42.json"
+    return json.loads(path.read_text(encoding="utf-8"))["decisions"]
+
+
+def test_issue_42_entries_list_exactly_the_occurrences_reviewed_onto_them():
+    custom = json.loads((dispositions.ROOT / "data/dict/lexicon/custom_definitions.json").read_text(encoding="utf-8"))
+    corpus = Counter()
+    for path in sorted((dispositions.ROOT / "data/delitzsch/parsed").glob("*/*.json")):
+        if path.stem.isdigit():
+            for verse in json.loads(path.read_text(encoding="utf-8"))[0]["verses"]:
+                for index, word in enumerate(verse["words"]):
+                    corpus[(word.get("strong") or "").split("/")[-1], f"{path.parent.name}.{path.stem}.{verse['verse']}.{index}"] += 1
+    created = [d for d in definition_gaps_batch() if "nt_instances" in d]
+    assert len(created) == 42
+    for decision in created:
+        entry = custom[decision["strong"]]
+        assert entry["mapping_scope"] == "instances_only"
+        assert all(d["text_en"] and d["text_es"] for d in entry["definitions"])
+        listed = {f"{i['book']}.{i['chapter']}.{i['verse']}.{i['word_index']}" for i in entry["nt_instances"]}
+        assert listed == {location for strong, location in corpus if strong == decision["strong"]}
+        for location in listed:
+            record = ledger_record(location)
+            assert (record["disposition"], record["reviewer"], record["after"]["strong"].split("/")[-1]) == (
+                "corrected", "claude-delitzsch-review", decision["strong"])
+
+
+def test_issue_42_identity_evidence_names_a_greek_word_of_the_verse():
+    greek = dispositions.ROOT / "data/greek/preview/greek/releases/sblgnt/5de0a47f35f0fc13dfe1430d104e5db8a4285f9c/books"
+    moves = [d for d in definition_gaps_batch() if d["action"] == "set_strong"]
+    assert len(moves) == 148
+    for decision in moves:
+        occurrence = decision["occurrence"]
+        verses = json.loads((greek / occurrence["book"] / f"{occurrence['chapter']}.json").read_text(encoding="utf-8"))["verses"]
+        words = {f"{w['strong']} {w['lemma']}" for v in verses if v["verse"] in range(occurrence["verse"] - 1, occurrence["verse"] + 2) for w in v["words"]}
+        assert decision["evidence"]["greek"] in words, occurrence
+
+
+def test_upsert_custom_definition_sets_scope_and_instances_only_when_it_creates_the_entry(tmp_path):
+    lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
+    custom_path = lexicon_dir.parent / "custom_definitions.json"
+    write_json(custom_path, {})
+    instance = {"book": "acts", "chapter": 17, "verse": 1, "word_index": 7, "text": "תַּסְלוֹנִיקִי"}
+
+    def upsert(text_en, scope):
+        path = tmp_path / f"{text_en}.json"
+        write_json(path, {"decisions": [{
+            "action": "upsert_custom_definition", "strong": "D0900", "hebrew": "תַּסְלוֹנִיקִי", "reviewer": "claude-delitzsch-review",
+            "mapping_scope": scope, "nt_instances": [instance], "definition": {"text_en": text_en, "text_es": text_en},
+        }]})
+        apply_decisions(path, tmp_path / "parsed", LexiconIndex(lexicon_dir), tmp_path / "log")
+
+    upsert("Thessalonica", "instances_only")
+    upsert("Thessalonike", "exact")
+    entry = json.loads(custom_path.read_text(encoding="utf-8"))["D0900"]
+    assert (entry["mapping_scope"], entry["nt_instances"]) == ("instances_only", [instance])
+    assert [d["text_en"] for d in entry["definitions"]] == ["Thessalonica", "Thessalonike"]
     you = ledger_record("matthew.6.1.13")
     assert (you["family"], you["rule"], you["before"]["strong"], you["after"]["strong"]) == (
         "prefix_metadata", "reviewed_strong_correction", "H6889", "Hl/H859")

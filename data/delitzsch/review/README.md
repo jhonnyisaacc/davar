@@ -64,8 +64,9 @@ with no reviewer approves nothing.
 identifier separately from mapping coverage. `check` fails when that report is
 stale, an identifier has no lexicon entry, or a missing English or Spanish
 definition is not listed in `definition_gaps_baseline.json`. The baseline only
-shrinks. Remove an identifier from it when its definition lands, and route a
-gap caused by a wrong identity to #159.
+shrinks, and #42 emptied it: every identifier the corpus references has an
+English and a Spanish definition. A new gap fails the check. Add the
+definition, or fix a wrong identity with a lexical review.
 
 ## Disposition ledger (issue #159)
 
@@ -203,7 +204,8 @@ reviewer and gives `lexicon`, `grammar`, and `context` evidence and a
 
 `batches/lexical_review_367.json` reviews the same way every remaining
 occurrence whose identifier has no English or Spanish definition (#367). A
-blocked one keeps its identifier and stays in `definition_gaps_baseline.json`.
+blocked one kept its identifier until `definition_gaps_42.json` gave the word
+an entry of its own.
 
 Apply each batch with `review apply`, for example
 `review apply lexical_review_368.json`. Then run
@@ -241,6 +243,31 @@ prepositions on unrelated entries, most with a conjunctive dagesh, such as
 D0266). It also rewords D0275 and D0279 to "second person singular
 (feminine, or masculine in pause)" with `upsert_custom_definition`. Apply it
 with `review apply lexical_review_368_corrections.json`, then run
+`review dispositions`.
+
+`batches/definition_gaps_42.json` resolves the occurrences that #367 and #368
+blocked on identifiers with no English or Spanish definition (#42). Most were
+names and post-biblical words with no entry of their own. The batch covers
+every occurrence of the same words that was blocked or never reviewed, such as
+Thessalonica on H2803 "think". An occurrence that an earlier review corrected
+keeps that correction. The batch makes these changes:
+
+- 42 `upsert_custom_definition` decisions create custom entries D0285 to
+  D0326. Each entry has an English and a Spanish sense, a transliteration,
+  `mapping_scope` set to `instances_only`, and the `nt_instances` it covers.
+  Names include Thessalonica, Athens, Luke, and Alexander. Post-biblical words
+  include שֵׁרוּת service, יְכֹלֶת ability, רְדִיפָה persecution, and the
+  adjective יָתֵר. A derived word gets its own entry and is not mapped to its
+  root.
+- 7 more decisions add senses. D0076 gets the Ephesian silversmith Demetrius.
+  H1421, H1861, H4136, H5681, H6969, and H758 get the English or Spanish they
+  lacked.
+- 148 `set_strong` lexical reviews move the occurrences to these entries, to
+  D0282 (טַלְיְתָא), D0016 (the Alexandrian ships), and H3201 (Galatians 4:15).
+  They also correct false prefix tags, such as the ל of לוּקָס. Each
+  decision's `evidence.greek` names the SBLGNT word of the verse.
+
+Apply it with `review apply definition_gaps_42.json`, then run
 `review dispositions`.
 
 The `reviewed_strong_correction` rule (version 2) records a `set_strong`
