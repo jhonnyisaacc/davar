@@ -12,70 +12,70 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "nivel"
+      "text_es": "recto"
     },
     {
       "text_en": "right",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "agradable"
+      "text_es": "derecho"
     },
     {
       "text_en": "straight",
       "source": "bdb",
       "order": 3,
       "sense": "1",
-      "text_es": "nivel"
+      "text_es": "recto"
     },
     {
       "text_en": "level",
       "source": "bdb",
       "order": 4,
       "sense": "1",
-      "text_es": "derecho"
+      "text_es": "nivel"
     },
     {
       "text_en": "right",
       "source": "bdb",
       "order": 5,
       "sense": "2",
-      "text_es": "agradable"
+      "text_es": "derecho"
     },
     {
       "text_en": "pleasing",
       "source": "bdb",
       "order": 6,
       "sense": "2",
-      "text_es": "directo"
+      "text_es": "agradable"
     },
     {
       "text_en": "straightforward",
       "source": "bdb",
       "order": 7,
       "sense": "3",
-      "text_es": "justo"
+      "text_es": "directo"
     },
     {
       "text_en": "just",
       "source": "bdb",
       "order": 8,
       "sense": "3",
-      "text_es": "recto"
+      "text_es": "justo"
     },
     {
       "text_en": "upright",
       "source": "bdb",
       "order": 9,
       "sense": "3",
-      "text_es": "rectitud"
+      "text_es": "recto"
     },
     {
       "text_en": "uprightness",
       "source": "bdb",
       "order": 10,
       "sense": "4",
-      "text_es": "Israel"
+      "text_es": "rectitud"
     }
   ],
   "sources": {

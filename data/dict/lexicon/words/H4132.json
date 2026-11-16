@@ -12,56 +12,56 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "poste"
+      "text_es": "sacudida"
     },
     {
       "text_en": "pole",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "barra"
+      "text_es": "poste"
     },
     {
       "text_en": "bar",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "poste"
+      "text_es": "barra"
     },
     {
       "text_en": "a shaking",
       "source": "bdb",
       "order": 4,
       "sense": "1",
-      "text_es": "tambaleo"
+      "text_es": "una sacudida"
     },
     {
       "text_en": "tottering",
       "source": "bdb",
       "order": 5,
       "sense": "1",
-      "text_es": "poste"
+      "text_es": "tambaleo"
     },
     {
       "text_en": "pole",
       "source": "bdb",
       "order": 6,
       "sense": "2",
-      "text_es": "barra"
+      "text_es": "poste"
     },
     {
       "text_en": "bar",
       "source": "bdb",
       "order": 7,
       "sense": "2",
-      "text_es": "poste"
+      "text_es": "barra"
     },
     {
       "text_en": "bar",
       "source": "bdb",
       "order": 8,
       "sense": "3",
-      "text_es": "poste"
+      "text_es": "barra"
     }
   ],
   "sources": {

@@ -12,21 +12,21 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "opaco"
+      "text_es": "tenue"
     },
     {
       "text_en": "dull",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "débil"
+      "text_es": "opaco"
     },
     {
       "text_en": "faint",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "oscurecimiento"
+      "text_es": "débil"
     }
   ],
   "sources": {

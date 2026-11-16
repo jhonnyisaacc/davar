@@ -12,28 +12,28 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "cima"
+      "text_es": "techo"
     },
     {
       "text_en": "top",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "techo"
+      "text_es": "cima"
     },
     {
       "text_en": "roof",
       "source": "bdb",
       "order": 3,
       "sense": "1",
-      "text_es": "cima"
+      "text_es": "techo"
     },
     {
       "text_en": "top of altar of incense, in tabern.",
       "source": "bdb",
       "order": 4,
       "sense": "2",
-      "text_es": "techo"
+      "text_es": "cima del altar de incienso, en el tabernáculo"
     }
   ],
   "sources": {

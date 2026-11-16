@@ -90,6 +90,7 @@ greek-source:
   - scripts/greek/**
   - scripts/dict/definition_hygiene.py
   - scripts/dict/import_tcysite.py
+  - scripts/dict/spanish_realignment.py
   - scripts/dict/validator.py
   - tests/test_greek_*.py
   - tests/test_definition_hygiene.py

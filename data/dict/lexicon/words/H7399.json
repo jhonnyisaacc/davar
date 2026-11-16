@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "bienes"
+      "text_es": "propiedad"
     },
     {
       "text_en": "goods",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "Ariel"
+      "text_es": "bienes"
     }
   ],
   "sources": {

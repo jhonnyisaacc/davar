@@ -12,63 +12,63 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "reunión designada"
+      "text_es": "tiempo designado"
     },
     {
       "text_en": "place",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "reunión"
+      "text_es": "lugar"
     },
     {
       "text_en": "meeting",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "tiempo designado"
+      "text_es": "reunión"
     },
     {
       "text_en": "appointed time",
       "source": "bdb",
       "order": 4,
       "sense": "1",
-      "text_es": "reunión designada"
+      "text_es": "tiempo designado"
     },
     {
       "text_en": "appointed meeting",
       "source": "bdb",
       "order": 5,
       "sense": "2",
-      "text_es": "lugar designado"
+      "text_es": "reunión designada"
     },
     {
       "text_en": "appointed place",
       "source": "bdb",
       "order": 6,
       "sense": "3",
-      "text_es": "señal designada"
+      "text_es": "lugar designado"
     },
     {
       "text_en": "appointed sign",
       "source": "bdb",
       "order": 7,
       "sense": "4",
-      "text_es": "señal"
+      "text_es": "señal designada"
     },
     {
       "text_en": "signal",
       "source": "bdb",
       "order": 8,
       "sense": "4",
-      "text_es": "tienda de reunión"
+      "text_es": "señal"
     },
     {
       "text_en": "tent of meeting",
       "source": "bdb",
       "order": 9,
       "sense": "5",
-      "text_es": "lugar designado"
+      "text_es": "tienda de reunión"
     }
   ],
   "sources": {

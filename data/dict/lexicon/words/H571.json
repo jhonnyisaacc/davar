@@ -12,77 +12,77 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "fidelidad"
+      "text_es": "firmeza"
     },
     {
       "text_en": "faithfulness",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "confiabilidad"
+      "text_es": "fidelidad"
     },
     {
       "text_en": "reliability",
       "source": "bdb",
       "order": 3,
       "sense": "1",
-      "text_es": "seguridad"
+      "text_es": "confiabilidad"
     },
     {
       "text_en": "sureness",
       "source": "bdb",
       "order": 4,
       "sense": "1",
-      "text_es": "estabilidad"
+      "text_es": "seguridad"
     },
     {
       "text_en": "stability",
       "source": "bdb",
       "order": 5,
       "sense": "2",
-      "text_es": "continuidad"
+      "text_es": "estabilidad"
     },
     {
       "text_en": "continuance",
       "source": "bdb",
       "order": 6,
       "sense": "2",
-      "text_es": "fidelidad"
+      "text_es": "continuidad"
     },
     {
       "text_en": "faithfulness",
       "source": "bdb",
       "order": 7,
       "sense": "3",
-      "text_es": "confiabilidad"
+      "text_es": "fidelidad"
     },
     {
       "text_en": "reliableness",
       "source": "bdb",
       "order": 8,
       "sense": "3",
-      "text_es": "verdad"
+      "text_es": "confiabilidad"
     },
     {
       "text_en": "truth",
       "source": "bdb",
       "order": 9,
       "sense": "4",
-      "text_es": "en verdad"
+      "text_es": "verdad"
     },
     {
       "text_en": "in truth",
       "source": "bdb",
       "order": 10,
       "sense": "5",
-      "text_es": "verdaderamente"
+      "text_es": "en verdad"
     },
     {
       "text_en": "truly",
       "source": "bdb",
       "order": 11,
       "sense": "5",
-      "text_es": "de Lamec"
+      "text_es": "verdaderamente"
     }
   ],
   "sources": {

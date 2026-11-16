@@ -33,84 +33,84 @@
       "source": "bdb",
       "order": 4,
       "sense": "0",
-      "text_es": "mientras"
+      "text_es": "hasta"
     },
     {
       "text_en": "while",
       "source": "bdb",
       "order": 5,
       "sense": "0",
-      "text_es": "de espacio"
+      "text_es": "mientras"
     },
     {
       "text_en": "of space",
       "source": "bdb",
       "order": 6,
       "sense": "I1",
-      "text_es": "de tiempo"
+      "text_es": "de espacio"
     },
     {
       "text_en": "Of time",
       "source": "bdb",
       "order": 7,
       "sense": "I2",
-      "text_es": "de grado"
+      "text_es": "de tiempo"
     },
     {
       "text_en": "Of degree",
       "source": "bdb",
       "order": 8,
       "sense": "I3",
-      "text_es": "incluso hasta"
+      "text_es": "de grado"
     },
     {
       "text_en": "until",
       "source": "bdb",
       "order": 9,
       "sense": "II1",
-      "text_es": "mientras"
+      "text_es": "hasta"
     },
     {
       "text_en": "While",
       "source": "bdb",
       "order": 10,
       "sense": "II2",
-      "text_es": "hasta el punto que"
+      "text_es": "mientras"
     },
     {
       "text_en": "to the point that",
       "source": "bdb",
       "order": 11,
       "sense": "II3",
-      "text_es": "de modo que incluso"
+      "text_es": "hasta el punto que"
     },
     {
       "text_en": "so that even",
       "source": "bdb",
       "order": 12,
       "sense": "II3",
-      "text_es": "de espacio"
+      "text_es": "de modo que incluso"
     },
     {
       "text_en": "of space",
       "source": "bdb",
       "order": 13,
       "sense": "III1",
-      "text_es": "de tiempo"
+      "text_es": "de espacio"
     },
     {
       "text_en": "Of time",
       "source": "bdb",
       "order": 14,
       "sense": "III2",
-      "text_es": "de grado"
+      "text_es": "de tiempo"
     },
     {
       "text_en": "Of degree",
       "source": "bdb",
       "order": 15,
       "sense": "III3",
-      "text_es": "incluso hasta"
+      "text_es": "de grado"
     }
   ],
   "sources": {

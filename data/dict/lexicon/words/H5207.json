@@ -12,21 +12,21 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "calmante"
+      "text_es": "un aquietamiento"
     },
     {
       "text_en": "soothing",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "tranquilizador"
+      "text_es": "calmante"
     },
     {
       "text_en": "tranquilizing",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "calmante"
+      "text_es": "tranquilizador"
     }
   ],
   "sources": {

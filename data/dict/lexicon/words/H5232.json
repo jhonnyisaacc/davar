@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "propiedad"
+      "text_es": "riquezas"
     },
     {
       "text_en": "property",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "riquezas"
+      "text_es": "propiedad"
     }
   ],
   "sources": {

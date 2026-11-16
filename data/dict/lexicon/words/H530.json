@@ -12,56 +12,56 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "estabilidad"
+      "text_es": "firmeza"
     },
     {
       "text_en": "steadfastness",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "fidelidad"
+      "text_es": "constancia"
     },
     {
       "text_en": "fidelity",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "firmeza"
+      "text_es": "fidelidad"
     },
     {
       "text_en": "firmness",
       "source": "bdb",
       "order": 4,
       "sense": "1",
-      "text_es": "estabilidad"
+      "text_es": "firmeza"
     },
     {
       "text_en": "steadiness",
       "source": "bdb",
       "order": 5,
       "sense": "1",
-      "text_es": "constancia"
+      "text_es": "estabilidad"
     },
     {
       "text_en": "steadfastness",
       "source": "bdb",
       "order": 6,
       "sense": "2",
-      "text_es": "fidelidad"
+      "text_es": "constancia"
     },
     {
       "text_en": "faithfulness",
       "source": "bdb",
       "order": 7,
       "sense": "3",
-      "text_es": "confianza"
+      "text_es": "fidelidad"
     },
     {
       "text_en": "trust",
       "source": "bdb",
       "order": 8,
       "sense": "3",
-      "text_es": "rubí"
+      "text_es": "confianza"
     },
     {
       "text_en": "faith; trust; faithfulness.",

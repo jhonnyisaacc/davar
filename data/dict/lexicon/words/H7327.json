@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "amistad"
+      "text_es": "Rut"
     },
     {
       "text_en": "friendship",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "secreto"
+      "text_es": "amistad"
     }
   ],
   "sources": {
