@@ -220,6 +220,9 @@ whole corpus, after `lexical_review_368.json`:
   form, such as `לְךָ` on D0274 and `בִּי` on D0267. Without one, it uses the
   prefix and the independent pronoun, such as `בְּךָ` on `Hb/H859`. The
   exception is `בִּי אֲדֹנִי`, "I pray, my lord", which stays on H994.
+  The entry follows the pointed form, not the person addressed. Pausal
+  `לָךְ` and `בָּךְ` addressed to a man, as in Luke 4:7 and John 8:48, use
+  D0275 and D0279, and `וָלָךְ` in Mark 1:24 uses `Hc/D0275`.
 - A Hebrew word uses the Hebrew entry, not the Aramaic entry of Ezra and
   Daniel, such as `הָאִגְּרוֹת` on H107, not H104. An Aramaic entry stays when
   the lexicon has no Hebrew entry for the word, such as `שָׁלְטָן` (H7985), or
@@ -228,9 +231,17 @@ whole corpus, after `lexical_review_368.json`:
 Apply it with `review apply lexical_review_368_followup.json`, then run
 `review dispositions`.
 
+`batches/lexical_review_368_corrections.json` comes after the follow-up. It
+corrects five words that neither batch reached, such as `מָסַר` in Luke 23:25
+(H994 to H4560) and `דְּרוֹמִית` in Acts 28:13 (Aramaic H1784 to Hebrew
+H1864). It also rewords D0275 and D0279 to "second person singular
+(feminine, or masculine in pause)" with `upsert_custom_definition`. Apply it
+with `review apply lexical_review_368_corrections.json`, then run
+`review dispositions`.
+
 The `reviewed_strong_correction` rule (version 2) records a `set_strong`
 lexical review. It raises an error when the decision has no person or agent
-reviewer, when an evidence field is missing, when the previous Strong number
+reviewer, when an evidence field or the reason is missing, when the previous Strong number
 differs from the queued one, when nothing changes, or when the Strong string
 does not carry the new prefixes. The `lexical_review` rule raises the same
 error for a `skip` that changes the Strong number. A lexical review outside

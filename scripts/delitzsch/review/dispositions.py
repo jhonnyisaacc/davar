@@ -229,6 +229,7 @@ def reviewed_strong_correction(entry: Record, decision: dict[str, Any] | None, r
         or (new_strong.split("/")[-1], new_prefixes) == (entry["strong"].split("/")[-1], prefixes)
         or new_strong.split("/")[:-1] != new_prefixes
         or not normalize_hebrew(entry["text"]).startswith(prefix_letters(new_prefixes))
+        or not decision.get("reason")
         or not reviewed_evidence(decision)
     ):
         raise ValueError(f"{entry['location']}: Strong correction does not satisfy the reviewed Strong correction rule")
