@@ -768,6 +768,7 @@ def _upsert_custom_definition(
             "root": decision.get("root", ""),
             "root_strong": existing.get("root_ref") or existing.get("root_strong") or decision.get("root_strong", ""),
             "manual_instances": [],
+            **{field: decision[field] for field in ("mapping_scope", "nt_instances") if field in decision},
         },
     )
     entry.setdefault("strong_number", key)
