@@ -12,77 +12,77 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "cortes"
+      "text_es": "grande"
     },
     {
       "text_en": "in magnitude and extent",
       "source": "bdb",
       "order": 2,
       "sense": "1",
-      "text_es": "grande"
+      "text_es": "en magnitud y extensión"
     },
     {
       "text_en": "in number",
       "source": "bdb",
       "order": 3,
       "sense": "2",
-      "text_es": "en magnitud y extensión"
+      "text_es": "en número"
     },
     {
       "text_en": "in intensity",
       "source": "bdb",
       "order": 4,
       "sense": "3",
-      "text_es": "en número"
+      "text_es": "en intensidad"
     },
     {
       "text_en": "loud",
       "source": "bdb",
       "order": 5,
       "sense": "4",
-      "text_es": "en intensidad"
+      "text_es": "fuerte"
     },
     {
       "text_en": "in age",
       "source": "bdb",
       "order": 6,
       "sense": "5",
-      "text_es": "fuerte"
+      "text_es": "en edad"
     },
     {
       "text_en": "in importance",
       "source": "bdb",
       "order": 7,
       "sense": "6",
-      "text_es": "en edad"
+      "text_es": "en importancia"
     },
     {
       "text_en": "in phrases",
       "source": "bdb",
       "order": 8,
       "sense": "7",
-      "text_es": "en importancia"
+      "text_es": "en frases"
     },
     {
       "text_en": "cstr.",
       "source": "bdb",
       "order": 9,
       "sense": "8",
-      "text_es": "en frases"
+      "text_es": "cstr."
     },
     {
       "text_en": "do great things",
       "source": "bdb",
       "order": 10,
       "sense": "9",
-      "text_es": "cstr."
+      "text_es": "hacer grandes cosas"
     },
     {
       "text_en": "greatness",
       "source": "bdb",
       "order": 11,
       "sense": "10",
-      "text_es": "hacer grandes cosas"
+      "text_es": "grandeza"
     }
   ],
   "sources": {

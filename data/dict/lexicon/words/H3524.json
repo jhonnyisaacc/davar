@@ -12,21 +12,21 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "poderoso"
+      "text_es": "grande"
     },
     {
       "text_en": "mighty",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "mucho"
+      "text_es": "poderoso"
     },
     {
       "text_en": "much",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "grillete"
+      "text_es": "mucho"
     }
   ],
   "sources": {

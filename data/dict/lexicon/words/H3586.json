@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "falso"
+      "text_es": "engañoso"
     },
     {
       "text_en": "false",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "quemadura"
+      "text_es": "falso"
     }
   ],
   "sources": {

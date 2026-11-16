@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "vano"
+      "text_es": "vacío"
     },
     {
       "text_en": "vain",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "vacíamente"
+      "text_es": "vano"
     }
   ],
   "sources": {

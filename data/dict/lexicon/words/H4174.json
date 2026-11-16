@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "pendiente"
+      "text_es": "descenso"
     },
     {
       "text_en": "slope",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "lluvia"
+      "text_es": "pendiente"
     }
   ],
   "sources": {

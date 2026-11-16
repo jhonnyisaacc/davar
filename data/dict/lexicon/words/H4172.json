@@ -12,49 +12,49 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "terror"
+      "text_es": "miedo"
     },
     {
       "text_en": "fear",
       "source": "bdb",
       "order": 2,
       "sense": "1",
-      "text_es": "terror"
+      "text_es": "miedo"
     },
     {
       "text_en": "terror",
       "source": "bdb",
       "order": 3,
       "sense": "1",
-      "text_es": "reverencia"
+      "text_es": "terror"
     },
     {
       "text_en": "reverence",
       "source": "bdb",
       "order": 4,
       "sense": "2",
-      "text_es": "objeto de reverencia"
+      "text_es": "reverencia"
     },
     {
       "text_en": "object of reverence",
       "source": "bdb",
       "order": 5,
       "sense": "3",
-      "text_es": "espectáculo inspirador de awe"
+      "text_es": "objeto de reverencia"
     },
     {
       "text_en": "awe-inspiring spectacle",
       "source": "bdb",
       "order": 6,
       "sense": "4",
-      "text_es": "hecho"
+      "text_es": "espectáculo inspirador de awe"
     },
     {
       "text_en": "deed",
       "source": "bdb",
       "order": 7,
       "sense": "4",
-      "text_es": "trillo"
+      "text_es": "hecho"
     },
     {
       "text_en": "appoint terror",

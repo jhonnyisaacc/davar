@@ -12,21 +12,21 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "superficie"
+      "text_es": "brillante"
     },
     {
       "text_en": "glaring",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "tierra abrasada"
+      "text_es": "deslumbrante"
     },
     {
       "text_en": "surface",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "hedor"
+      "text_es": "superficie"
     }
   ],
   "sources": {

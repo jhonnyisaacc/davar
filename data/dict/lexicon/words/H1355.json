@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "borde"
+      "text_es": "espalda"
     },
     {
       "text_en": "side",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "espalda"
+      "text_es": "lado"
     }
   ],
   "sources": {

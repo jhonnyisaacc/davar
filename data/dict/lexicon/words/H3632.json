@@ -12,21 +12,21 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "completo"
+      "text_es": "entero"
     },
     {
       "text_en": "whole",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "holocausto"
+      "text_es": "completo"
     },
     {
       "text_en": "holocaust",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "completo"
+      "text_es": "holocausto"
     }
   ],
   "sources": {

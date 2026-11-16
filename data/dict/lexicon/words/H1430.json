@@ -18,14 +18,14 @@
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "cabritos"
+      "text_es": "montón"
     },
     {
       "text_en": "stack",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "montón"
+      "text_es": "pila"
     }
   ],
   "sources": {

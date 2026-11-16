@@ -12,35 +12,35 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "ambos"
+      "text_es": "dos clases"
     },
     {
       "text_en": "both",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "dos"
+      "text_es": "ambos"
     },
     {
       "text_en": "two",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "reservorios"
+      "text_es": "dos"
     },
     {
       "text_en": "reservoirs",
       "source": "bdb",
       "order": 4,
       "sense": "0",
-      "text_es": "no hagas que tu ganado se reproduzca"
+      "text_es": "reservorios"
     },
     {
       "text_en": "not cause thy cattle to breed",
       "source": "bdb",
       "order": 5,
       "sense": "0",
-      "text_es": "perro"
+      "text_es": "no hagas que tu ganado se reproduzca"
     }
   ],
   "sources": {

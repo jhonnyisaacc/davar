@@ -18,56 +18,56 @@
       "source": "bdb",
       "order": 2,
       "sense": "1",
-      "text_es": "cuando"
+      "text_es": "eso"
     },
     {
       "text_en": "when",
       "source": "bdb",
       "order": 3,
       "sense": "2a",
-      "text_es": "si"
+      "text_es": "cuando"
     },
     {
       "text_en": "if",
       "source": "bdb",
       "order": 4,
       "sense": "2b",
-      "text_es": "aunque"
+      "text_es": "si"
     },
     {
       "text_en": "when",
       "source": "bdb",
       "order": 5,
       "sense": "2c",
-      "text_es": "si"
+      "text_es": "cuando"
     },
     {
       "text_en": "if",
       "source": "bdb",
       "order": 6,
       "sense": "2c",
-      "text_es": "aunque"
+      "text_es": "si"
     },
     {
       "text_en": "though",
       "source": "bdb",
       "order": 7,
       "sense": "2c",
-      "text_es": "Porque"
+      "text_es": "aunque"
     },
     {
       "text_en": "Because",
       "source": "bdb",
       "order": 8,
       "sense": "3",
-      "text_es": "ya que"
+      "text_es": "Porque"
     },
     {
       "text_en": "since",
       "source": "bdb",
       "order": 9,
       "sense": "3",
-      "text_es": "su desgracia"
+      "text_es": "ya que"
     },
     {
       "text_en": "that if",

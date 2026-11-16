@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "ancho"
+      "text_es": "curación"
     },
     {
       "text_en": "cure",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "curación"
+      "text_es": "cura"
     }
   ],
   "sources": {

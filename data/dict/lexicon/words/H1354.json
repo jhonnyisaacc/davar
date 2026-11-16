@@ -54,14 +54,14 @@
       "source": "bdb",
       "order": 7,
       "sense": "5",
-      "text_es": "murallas"
+      "text_es": "ceja"
     },
     {
       "text_en": "rim",
       "source": "bdb",
       "order": 8,
       "sense": "6",
-      "text_es": "ceja"
+      "text_es": "borde"
     }
   ],
   "sources": {

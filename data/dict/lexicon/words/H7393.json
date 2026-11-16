@@ -12,28 +12,28 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "carro"
+      "text_es": "carruaje"
     },
     {
       "text_en": "chariot",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "piedra de molino"
+      "text_es": "carro"
     },
     {
       "text_en": "mill-stone",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "jinetes"
+      "text_es": "piedra de molino"
     },
     {
       "text_en": "riders",
       "source": "bdb",
       "order": 4,
       "sense": "0",
-      "text_es": "banda de jinetes"
+      "text_es": "jinetes"
     }
   ],
   "sources": {

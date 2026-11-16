@@ -12,21 +12,21 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "falsedad"
+      "text_es": "mentira"
     },
     {
       "text_en": "falsehood",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "cosa engañosa"
+      "text_es": "falsedad"
     },
     {
       "text_en": "deceptive thing",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "camaleón"
+      "text_es": "cosa engañosa"
     }
   ],
   "sources": {
