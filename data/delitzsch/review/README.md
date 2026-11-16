@@ -201,7 +201,12 @@ reviewer and gives `lexicon`, `grammar`, and `context` evidence and a
   word with no lexicon entry. The record is `blocked`, and `evidence.reason`
   says why.
 
-Apply the batch with `review apply lexical_review_368.json`. Then run
+`batches/lexical_review_367.json` reviews the same way every remaining
+occurrence whose identifier has no English or Spanish definition (#367). A
+blocked one keeps its identifier and stays in `definition_gaps_baseline.json`.
+
+Apply each batch with `review apply`, for example
+`review apply lexical_review_368.json`. Then run
 `review root-letter-prefixes`, apply its outside-queue batch, and run
 `review dispositions`. A kept Strong number counts as a review, so the rerun
 scan removes a false root-letter prefix, such as the `Hb` of `בֵּית` mapped to

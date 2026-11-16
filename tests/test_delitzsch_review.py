@@ -583,20 +583,20 @@ def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
     committed = dispositions.read_ledger()
     assert committed == rebuilt
     summary = committed["summary"]
-    assert summary["total"] == 11528 + 16084 + 4990
+    assert summary["total"] == 11528 + 16084 + 5173
     assert summary["by_disposition"]["unresolved"] == 0
     assert summary["by_family"]["prefix_metadata"] == {
-        "benign": 1386, "corrected": 3510, "already_reviewed": 347, "unresolved": 0, "blocked": 251, "superseded": 0,
+        "benign": 1386, "corrected": 3512, "already_reviewed": 345, "unresolved": 0, "blocked": 251, "superseded": 0,
     }
     assert summary["by_family"]["outside_queue"] == {
-        "benign": 0, "corrected": 4979, "already_reviewed": 0, "unresolved": 0, "blocked": 11, "superseded": 0,
+        "benign": 10, "corrected": 5142, "already_reviewed": 0, "unresolved": 0, "blocked": 21, "superseded": 0,
     }
-    assert summary["benign_lexical_review"] == {"pending": 0, "reviewed": 1749}
+    assert summary["benign_lexical_review"] == {"pending": 0, "reviewed": 1759}
     assert summary["by_family"]["legacy_assignment"] == {
-        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 7886, "superseded": 8198,
+        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 7904, "superseded": 8180,
     }
     assert {rule: summary["by_rule"][rule] for rule in ("legacy_without_candidate", "legacy_current_value", "legacy_blocked", "lexical_review")} == {
-        "legacy_without_candidate": 4360, "legacy_current_value": 3838, "legacy_blocked": 7886, "lexical_review": 2300,
+        "legacy_without_candidate": 4360, "legacy_current_value": 3820, "legacy_blocked": 7904, "lexical_review": 2322,
     }
 
 
@@ -1016,6 +1016,22 @@ def test_reverting_restores_corrected_strongs_and_any_other_strong_edit_still_fa
     with pytest.raises(ValueError, match="corpus Strong differs"):
         dispositions.revert_corrections(edited(11, "Hd/H1279"), records)
     assert digest(dispositions.revert_corrections(edited(12, "H1"), records)) != plan["corpus_after_sha256"]
+
+
+def test_identifiers_without_definitions_end_with_a_lexical_review():
+    but = ledger_record("corinthians2.3.6.9")
+    assert (but["family"], but["disposition"], but["reviewer"]) == ("outside_queue", "corrected", "claude-delitzsch-review")
+    assert (but["before"]["strong"], but["after"]["strong"]) == ("H414", "D0162")
+    aram = ledger_record("acts.2.9.4")
+    assert (aram["family"], aram["disposition"], aram["rule"], aram["lexical_review"]) == ("outside_queue", "benign", "lexical_review", "reviewed")
+    ministry = ledger_record("corinthians2.6.3.7")
+    assert (ministry["disposition"], ministry["before"]["strong"]) == ("blocked", "H1122")
+    assert parsed_verse("corinthians2", 6, 3)["words"][7]["strong"] == "H1122"
+    southern = ledger_record("acts.28.13.7")
+    assert (southern["disposition"], southern["rule"], southern["before"]["strong"]) == ("blocked", "lexical_review", "H1784")
+    you = ledger_record("matthew.6.1.13")
+    assert (you["family"], you["rule"], you["before"]["strong"], you["after"]["strong"]) == (
+        "prefix_metadata", "reviewed_strong_correction", "H6889", "Hl/H859")
 
 
 def test_reverting_restores_lexical_review_corrections_and_an_unrecorded_edit_still_fails():
