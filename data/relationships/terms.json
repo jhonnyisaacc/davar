@@ -1,0 +1,31 @@
+{
+	"greek": {
+		"Anomía": "G0458",
+		"Arjé": "G0746",
+		"Diábolos": "G1228",
+		"Járis": "G5485",
+		"Koinós": "G2839",
+		"Logos": "G3056",
+		"Mesites": "G3316",
+		"Oikoumene": "G3625",
+		"Paidagogos": "G3807",
+		"Spanía": "G4681",
+		"Ápsindsos": "G0894"
+	},
+	"hebrew": {
+		"Áven": "H205",
+		"Davar": "H1697",
+		"Jen": "H2580",
+		"Jol": "H2455",
+		"La'anah": "H3939",
+		"Oménet": "H539",
+		"Reshit": "H7225",
+		"Rishón": "H7223",
+		"Satán": "H7854",
+		"Tevel": "H8398"
+	},
+	"no_strong": {
+		"Sarsur": "סַרְסוּר is post-biblical Hebrew and has no Strong number.",
+		"Sh'faniyah": "The place name has no Strong number. Delitzsch writes אִסְפַּמְיָא in Romans 15:24."
+	}
+}

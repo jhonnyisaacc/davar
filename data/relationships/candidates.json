@@ -1,0 +1,751 @@
+{
+	"schema": "davar-contextual-relationship-candidates-v1",
+	"candidates": [
+		{
+			"path": "data/tth/json/galatas.json",
+			"json_pointer": "/chapters/1/verses/1/footnotes/2",
+			"locator": "Gálatas 2:2, nota 21",
+			"explanation": "Lit.: a aquellos que consideran. Gr.: Dokúnton. Aram.: Savora'im. Título dado a los apóstoles. Así también en los versículos 6 y 9.",
+			"greek_terms": [
+				"Dokúnton"
+			],
+			"hebrew_terms": [],
+			"kind": "greek_only",
+			"scope_hint": "Así también en los versículos 6 y 9.",
+			"pairs": []
+		},
+		{
+			"path": "data/tth/json/galatas.json",
+			"json_pointer": "/chapters/2/verses/18/footnotes/0",
+			"locator": "Gálatas 3:19, nota 56",
+			"explanation": "Uno que se encargaba de reconciliar dos partes en pleito. Gr.: Mesites. Heb.: Sarsur.",
+			"greek_terms": [
+				"Mesites"
+			],
+			"hebrew_terms": [
+				"Sarsur"
+			],
+			"kind": "two_language",
+			"scope_hint": null,
+			"pairs": [
+				{
+					"greek": "Mesites",
+					"hebrew": "Sarsur",
+					"record_id": null,
+					"unresolved": [
+						"סַרְסוּר is post-biblical Hebrew and has no Strong number."
+					],
+					"precheck": {
+						"greek": {
+							"strong": "G3316",
+							"lemma": "μεσίτης",
+							"source": "tagnt",
+							"status": "found",
+							"tokens": [
+								"μεσίτου."
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"path": "data/tth/json/galatas.json",
+			"json_pointer": "/chapters/2/verses/23/footnotes/0",
+			"locator": "Gálatas 3:24, nota 60",
+			"explanation": "Gr.: Paidagogos. Tutor encargado de vigilar, disciplinar y acompañar a los niños. Heb.: Oménet.",
+			"greek_terms": [
+				"Paidagogos"
+			],
+			"hebrew_terms": [
+				"Oménet"
+			],
+			"kind": "two_language",
+			"scope_hint": null,
+			"pairs": [
+				{
+					"greek": "Paidagogos",
+					"hebrew": "Oménet",
+					"record_id": null,
+					"unresolved": [
+						"H539 has no single lemma in the repo lexicon."
+					],
+					"precheck": {
+						"greek": {
+							"strong": "G3807",
+							"lemma": "παιδαγωγός",
+							"source": "tagnt",
+							"status": "found",
+							"tokens": [
+								"παιδαγωγὸς"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"path": "data/tth/json/iejezkel.json",
+			"json_pointer": "/chapters/10/verses/1/footnotes/0",
+			"locator": "Iejezkel 11:2, nota 32",
+			"explanation": "O, la ausencia de Torah. Heb.: Áven. Gr.: Anomía.",
+			"greek_terms": [
+				"Anomía"
+			],
+			"hebrew_terms": [
+				"Áven"
+			],
+			"kind": "two_language",
+			"scope_hint": null,
+			"pairs": [
+				{
+					"greek": "Anomía",
+					"hebrew": "Áven",
+					"record_id": "g0458-h205-ezekiel-11-2",
+					"unresolved": [],
+					"precheck": {
+						"greek": {
+							"strong": "G0458",
+							"lemma": "ἀνομία",
+							"source": "none",
+							"status": "unchecked",
+							"reason": "No Greek text of the Tanakh (LXX) is in the repo.",
+							"tokens": []
+						},
+						"hebrew": {
+							"strong": "H205",
+							"lemma": "אָוֶן",
+							"source": "oshb",
+							"status": "found",
+							"tokens": [
+								"אָ֛וֶן"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"path": "data/tth/json/iojanan.json",
+			"json_pointer": "/chapters/0/verses/0/footnotes/1",
+			"locator": "Iojanán 1:1, nota 2",
+			"explanation": "Heb.: Davar. Aram.: Meymrá. Gr.: Logos. Término que expresa la corporeidad de Elohim. Así también en vers. 2.",
+			"greek_terms": [
+				"Logos"
+			],
+			"hebrew_terms": [
+				"Davar"
+			],
+			"kind": "two_language",
+			"scope_hint": "Así también en vers. 2.",
+			"pairs": [
+				{
+					"greek": "Logos",
+					"hebrew": "Davar",
+					"record_id": "g3056-h1697-john-1-1",
+					"unresolved": [],
+					"precheck": {
+						"greek": {
+							"strong": "G3056",
+							"lemma": "λόγος",
+							"source": "tagnt",
+							"status": "found",
+							"tokens": [
+								"λόγος,",
+								"λόγος",
+								"λόγος."
+							]
+						},
+						"hebrew": {
+							"strong": "H1697",
+							"lemma": "דָּבָר",
+							"source": "delitzsch",
+							"status": "found",
+							"tokens": [
+								"הַדָּבָר",
+								"וְהַדָּבָר",
+								"הַדָּבָר׃"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"path": "data/tth/json/iojanan.json",
+			"json_pointer": "/chapters/5/verses/68/footnotes/0",
+			"locator": "Iojanán 6:70, nota 99",
+			"explanation": "Heb.: Satán. Gr.: Diábolos. La Ver. Políglota de Nuremberg dice: es uno que avergüenza; heb.: majlim.",
+			"greek_terms": [
+				"Diábolos"
+			],
+			"hebrew_terms": [
+				"Satán"
+			],
+			"kind": "two_language",
+			"scope_hint": null,
+			"pairs": [
+				{
+					"greek": "Diábolos",
+					"hebrew": "Satán",
+					"record_id": "g1228-h7854-john-6-70",
+					"unresolved": [],
+					"precheck": {
+						"greek": {
+							"strong": "G1228",
+							"lemma": "διάβολος",
+							"source": "tagnt",
+							"status": "found",
+							"tokens": [
+								"διάβολός"
+							]
+						},
+						"hebrew": {
+							"strong": "H7854",
+							"lemma": "שָׂטָן",
+							"source": "delitzsch",
+							"status": "found",
+							"tokens": [
+								"שָׂטָן"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"path": "data/tth/json/iojanan.json",
+			"json_pointer": "/chapters/7/verses/23/footnotes/0",
+			"locator": "Iojanán 8:25, nota 130",
+			"explanation": "Heb.: 1Reshit, 2Rishón. Gr.: Arjé.",
+			"greek_terms": [
+				"Arjé"
+			],
+			"hebrew_terms": [
+				"Reshit",
+				"Rishón"
+			],
+			"kind": "two_language",
+			"scope_hint": null,
+			"pairs": [
+				{
+					"greek": "Arjé",
+					"hebrew": "Reshit",
+					"record_id": "g0746-h7225-john-8-25",
+					"unresolved": [],
+					"precheck": {
+						"greek": {
+							"strong": "G0746",
+							"lemma": "ἀρχή",
+							"source": "tagnt",
+							"status": "found",
+							"tokens": [
+								"ἀρχὴν"
+							]
+						},
+						"hebrew": {
+							"strong": "H7225",
+							"lemma": "רֵאשִׁית",
+							"source": "delitzsch",
+							"status": "absent",
+							"tokens": []
+						}
+					}
+				},
+				{
+					"greek": "Arjé",
+					"hebrew": "Rishón",
+					"record_id": "g0746-h7223-john-8-25",
+					"unresolved": [],
+					"precheck": {
+						"greek": {
+							"strong": "G0746",
+							"lemma": "ἀρχή",
+							"source": "tagnt",
+							"status": "found",
+							"tokens": [
+								"ἀρχὴν"
+							]
+						},
+						"hebrew": {
+							"strong": "H7223",
+							"lemma": "רִאשׁוֹן",
+							"source": "delitzsch",
+							"status": "absent",
+							"tokens": []
+						}
+					}
+				}
+			]
+		},
+		{
+			"path": "data/tth/json/iojanan.json",
+			"json_pointer": "/chapters/10/verses/14/footnotes/0",
+			"locator": "Iojanán 11:16, nota 165",
+			"explanation": "Gemelo. Gr.: Didimos.",
+			"greek_terms": [
+				"Didimos"
+			],
+			"hebrew_terms": [],
+			"kind": "greek_only",
+			"scope_hint": null,
+			"pairs": []
+		},
+		{
+			"path": "data/tth/json/iojanan.json",
+			"json_pointer": "/chapters/13/verses/14/footnotes/0",
+			"locator": "Iojanán 14:16, nota 196",
+			"explanation": "Restaurador, abogado. Gr.: Paracletos.",
+			"greek_terms": [
+				"Paracletos"
+			],
+			"hebrew_terms": [],
+			"kind": "greek_only",
+			"scope_hint": null,
+			"pairs": []
+		},
+		{
+			"path": "data/tth/json/iojanan.json",
+			"json_pointer": "/chapters/13/verses/24/footnotes/0",
+			"locator": "Iojanán 14:26, nota 200",
+			"explanation": "Restaurador, abogado. Gr.: Paracletos.",
+			"greek_terms": [
+				"Paracletos"
+			],
+			"hebrew_terms": [],
+			"kind": "greek_only",
+			"scope_hint": null,
+			"pairs": []
+		},
+		{
+			"path": "data/tth/json/iojanan.json",
+			"json_pointer": "/chapters/14/verses/24/footnotes/0",
+			"locator": "Iojanán 15:26, nota 204",
+			"explanation": "Restaurador, abogado. Gr.: Paracletos.",
+			"greek_terms": [
+				"Paracletos"
+			],
+			"hebrew_terms": [],
+			"kind": "greek_only",
+			"scope_hint": null,
+			"pairs": []
+		},
+		{
+			"path": "data/tth/json/iojanan.json",
+			"json_pointer": "/chapters/15/verses/5/footnotes/0",
+			"locator": "Iojanán 16:7, nota 207",
+			"explanation": "Restaurador, abogado. Gr.: Paracletos.",
+			"greek_terms": [
+				"Paracletos"
+			],
+			"hebrew_terms": [],
+			"kind": "greek_only",
+			"scope_hint": null,
+			"pairs": []
+		},
+		{
+			"path": "data/tth/json/iojanan.json",
+			"json_pointer": "/chapters/19/verses/22/footnotes/0",
+			"locator": "Iojanán 20:24, nota 245",
+			"explanation": "Gemelo. Gr.: Didimos.",
+			"greek_terms": [
+				"Didimos"
+			],
+			"hebrew_terms": [],
+			"kind": "greek_only",
+			"scope_hint": null,
+			"pairs": []
+		},
+		{
+			"path": "data/tth/json/iojanan.json",
+			"json_pointer": "/chapters/20/verses/0/footnotes/0",
+			"locator": "Iojanán 21:2, nota 250",
+			"explanation": "Gemelo. Gr.: Didimos.",
+			"greek_terms": [
+				"Didimos"
+			],
+			"hebrew_terms": [],
+			"kind": "greek_only",
+			"scope_hint": null,
+			"pairs": []
+		},
+		{
+			"path": "data/tth/json/romanos.json",
+			"json_pointer": "/chapters/9/verses/3/footnotes/0",
+			"locator": "Romanos 10:4, nota 105",
+			"explanation": "O, finalidad. Gr.: Telós.",
+			"greek_terms": [
+				"Telós"
+			],
+			"hebrew_terms": [],
+			"kind": "greek_only",
+			"scope_hint": null,
+			"pairs": []
+		},
+		{
+			"path": "data/tth/json/romanos.json",
+			"json_pointer": "/chapters/10/verses/4/footnotes/0",
+			"locator": "Romanos 11:5, nota 131",
+			"explanation": "Heb.: Jen. Gr.: Járis.",
+			"greek_terms": [
+				"Járis"
+			],
+			"hebrew_terms": [
+				"Jen"
+			],
+			"kind": "two_language",
+			"scope_hint": null,
+			"pairs": [
+				{
+					"greek": "Járis",
+					"hebrew": "Jen",
+					"record_id": "g5485-h2580-romans-11-5",
+					"unresolved": [],
+					"precheck": {
+						"greek": {
+							"strong": "G5485",
+							"lemma": "χάρις",
+							"source": "tagnt",
+							"status": "found",
+							"tokens": [
+								"χάριτος"
+							]
+						},
+						"hebrew": {
+							"strong": "H2580",
+							"lemma": "חֵן",
+							"source": "delitzsch",
+							"status": "absent",
+							"tokens": []
+						}
+					}
+				}
+			]
+		},
+		{
+			"path": "data/tth/json/romanos.json",
+			"json_pointer": "/chapters/13/verses/13/footnotes/1",
+			"locator": "Romanos 14:14, nota 168",
+			"explanation": "Heb.: Jol. Gr.: Koinós.",
+			"greek_terms": [
+				"Koinós"
+			],
+			"hebrew_terms": [
+				"Jol"
+			],
+			"kind": "two_language",
+			"scope_hint": null,
+			"pairs": [
+				{
+					"greek": "Koinós",
+					"hebrew": "Jol",
+					"record_id": "g2839-h2455-romans-14-14",
+					"unresolved": [],
+					"precheck": {
+						"greek": {
+							"strong": "G2839",
+							"lemma": "κοινός",
+							"source": "tagnt",
+							"status": "found",
+							"tokens": [
+								"κοινὸν",
+								"κοινὸν",
+								"κοινόν·"
+							]
+						},
+						"hebrew": {
+							"strong": "H2455",
+							"lemma": "חֹל",
+							"source": "delitzsch",
+							"status": "absent",
+							"tokens": []
+						}
+					}
+				}
+			]
+		},
+		{
+			"path": "data/tth/json/romanos.json",
+			"json_pointer": "/chapters/14/verses/23/footnotes/0",
+			"locator": "Romanos 15:24, nota 187",
+			"explanation": "Gr.: Spanía. Heb.: Sh'faniyah. Región de la Península ibérica. No confundir con heb. Sefarad, alusivo a Sparda, que es Sardis.",
+			"greek_terms": [
+				"Spanía"
+			],
+			"hebrew_terms": [
+				"Sh'faniyah"
+			],
+			"kind": "two_language",
+			"scope_hint": null,
+			"pairs": [
+				{
+					"greek": "Spanía",
+					"hebrew": "Sh'faniyah",
+					"record_id": null,
+					"unresolved": [
+						"The place name has no Strong number. Delitzsch writes אִסְפַּמְיָא in Romans 15:24."
+					],
+					"precheck": {
+						"greek": {
+							"strong": "G4681",
+							"lemma": "Σπανία",
+							"source": "tagnt",
+							"status": "found",
+							"tokens": [
+								"Σπανίαν"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"path": "data/tth/json/sodot.json",
+			"json_pointer": "/chapters/2/verses/9/footnotes/1",
+			"locator": "Sodot 3:10, nota 36",
+			"explanation": "Heb.: Tevel. Gr.: Oikoumene. Tierra donde habite el pueblo de Israel.",
+			"greek_terms": [
+				"Oikoumene"
+			],
+			"hebrew_terms": [
+				"Tevel"
+			],
+			"kind": "two_language",
+			"scope_hint": null,
+			"pairs": [
+				{
+					"greek": "Oikoumene",
+					"hebrew": "Tevel",
+					"record_id": "g3625-h8398-revelation-3-10",
+					"unresolved": [],
+					"precheck": {
+						"greek": {
+							"strong": "G3625",
+							"lemma": "οἰκουμένη",
+							"source": "tagnt",
+							"status": "found",
+							"tokens": [
+								"οἰκουμένης"
+							]
+						},
+						"hebrew": {
+							"strong": "H8398",
+							"lemma": "תֵּבֵל",
+							"source": "delitzsch",
+							"status": "found",
+							"tokens": [
+								"תֵּבֵל"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"path": "data/tth/json/sodot.json",
+			"json_pointer": "/chapters/7/verses/10/footnotes/0",
+			"locator": "Sodot 8:11, nota 87",
+			"explanation": "Heb.: La'anah. Gr.: Ápsindsos.",
+			"greek_terms": [
+				"Ápsindsos"
+			],
+			"hebrew_terms": [
+				"La'anah"
+			],
+			"kind": "two_language",
+			"scope_hint": null,
+			"pairs": [
+				{
+					"greek": "Ápsindsos",
+					"hebrew": "La'anah",
+					"record_id": "g0894-h3939-revelation-8-11",
+					"unresolved": [],
+					"precheck": {
+						"greek": {
+							"strong": "G0894",
+							"lemma": "ἄψινθος",
+							"source": "tagnt",
+							"status": "found",
+							"tokens": [
+								"Ἄψινθος·",
+								"ἄψινθον,"
+							]
+						},
+						"hebrew": {
+							"strong": "H3939",
+							"lemma": "לַעֲנָה",
+							"source": "delitzsch",
+							"status": "found",
+							"tokens": [
+								"לַעֲנָה",
+								"לְלַעֲנָה"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"path": "data/tth/json/sodot.json",
+			"json_pointer": "/chapters/11/verses/8/footnotes/2",
+			"locator": "Sodot 12:9, nota 120",
+			"explanation": "Heb.: Tevel. Gr.: Oikoumene. Tierra donde habite el pueblo de Israel.",
+			"greek_terms": [
+				"Oikoumene"
+			],
+			"hebrew_terms": [
+				"Tevel"
+			],
+			"kind": "two_language",
+			"scope_hint": null,
+			"pairs": [
+				{
+					"greek": "Oikoumene",
+					"hebrew": "Tevel",
+					"record_id": "g3625-h8398-revelation-12-9",
+					"unresolved": [],
+					"precheck": {
+						"greek": {
+							"strong": "G3625",
+							"lemma": "οἰκουμένη",
+							"source": "tagnt",
+							"status": "found",
+							"tokens": [
+								"οἰκουμένην"
+							]
+						},
+						"hebrew": {
+							"strong": "H8398",
+							"lemma": "תֵּבֵל",
+							"source": "delitzsch",
+							"status": "found",
+							"tokens": [
+								"תֵּבֵל"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"path": "data/tth/json/sodot.json",
+			"json_pointer": "/chapters/12/verses/15/footnotes/0",
+			"locator": "Sodot 13:16, nota 136",
+			"explanation": "Gr.: Járagma. Marca producida por un daño, ya sea una mordida o un sello. Posiblemente, heb.: Tzarébet.",
+			"greek_terms": [
+				"Járagma"
+			],
+			"hebrew_terms": [],
+			"kind": "greek_only",
+			"scope_hint": null,
+			"pairs": []
+		},
+		{
+			"path": "data/tth/json/sodot.json",
+			"json_pointer": "/chapters/13/verses/8/footnotes/0",
+			"locator": "Sodot 14:9, nota 144",
+			"explanation": "Gr.: Járagma. Marca producida por un daño, ya sea una mordida o un sello. Posiblemente, heb.: Tzarébet.",
+			"greek_terms": [
+				"Járagma"
+			],
+			"hebrew_terms": [],
+			"kind": "greek_only",
+			"scope_hint": null,
+			"pairs": []
+		},
+		{
+			"path": "data/tth/json/sodot.json",
+			"json_pointer": "/chapters/14/verses/1/footnotes/1",
+			"locator": "Sodot 15:2, nota 154",
+			"explanation": "Gr.: Járagma. Marca producida por un daño, ya sea una mordida o un sello. Posiblemente, heb.: Tzarébet. Así también en cap. 16:2.",
+			"greek_terms": [
+				"Járagma"
+			],
+			"hebrew_terms": [],
+			"kind": "greek_only",
+			"scope_hint": "Así también en cap. 16:2.",
+			"pairs": []
+		},
+		{
+			"path": "data/tth/json/sodot.json",
+			"json_pointer": "/chapters/15/verses/13/footnotes/0",
+			"locator": "Sodot 16:14, nota 165",
+			"explanation": "Heb.: Tevel. Gr.: Oikoumene. Tierra donde habite el pueblo de Israel.",
+			"greek_terms": [
+				"Oikoumene"
+			],
+			"hebrew_terms": [
+				"Tevel"
+			],
+			"kind": "two_language",
+			"scope_hint": null,
+			"pairs": [
+				{
+					"greek": "Oikoumene",
+					"hebrew": "Tevel",
+					"record_id": "g3625-h8398-revelation-16-14",
+					"unresolved": [],
+					"precheck": {
+						"greek": {
+							"strong": "G3625",
+							"lemma": "οἰκουμένη",
+							"source": "tagnt",
+							"status": "found",
+							"tokens": [
+								"οἰκουμένης"
+							]
+						},
+						"hebrew": {
+							"strong": "H8398",
+							"lemma": "תֵּבֵל",
+							"source": "delitzsch",
+							"status": "found",
+							"tokens": [
+								"וְתֵבֵל"
+							]
+						}
+					}
+				}
+			]
+		},
+		{
+			"path": "data/tth/json/sodot.json",
+			"json_pointer": "/chapters/19/verses/3/footnotes/1",
+			"locator": "Sodot 20:4, nota 191",
+			"explanation": "Gr.: Járagma. Marca producida por un daño, ya sea una mordida o un sello. Posiblemente, heb.: Tzarébet.",
+			"greek_terms": [
+				"Járagma"
+			],
+			"hebrew_terms": [],
+			"kind": "greek_only",
+			"scope_hint": null,
+			"pairs": []
+		},
+		{
+			"path": "data/tth/json/sodot.json",
+			"json_pointer": "/chapters/20/verses/5/footnotes/0",
+			"locator": "Sodot 21:6, nota 200",
+			"explanation": "Es decir, el Primero y el Último. Gr.: Alfa y Omega.",
+			"greek_terms": [
+				"Alfa y Omega"
+			],
+			"hebrew_terms": [],
+			"kind": "greek_only",
+			"scope_hint": null,
+			"pairs": []
+		},
+		{
+			"path": "data/tth/json/sodot.json",
+			"json_pointer": "/chapters/21/verses/12/footnotes/0",
+			"locator": "Sodot 22:13, nota 217",
+			"explanation": "Es decir, el Primero y el Último. Gr.: Alfa y Omega.",
+			"greek_terms": [
+				"Alfa y Omega"
+			],
+			"hebrew_terms": [],
+			"kind": "greek_only",
+			"scope_hint": null,
+			"pairs": []
+		}
+	]
+}
