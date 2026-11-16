@@ -50,6 +50,9 @@
   "H1058:2": {
     "es": "lamentar"
   },
+  "H1062:1": {
+    "es": "derecho de primogenitura"
+  },
   "H1082:1": {
     "es": "brillar"
   },
@@ -2066,6 +2069,12 @@
   "H2891:2": {
     "es": "puro"
   },
+  "H2894:1": {
+    "es": "barrer"
+  },
+  "H2894:2": {
+    "es": "barrer por completo"
+  },
   "H2895:1": {
     "es": "agradable"
   },
@@ -3316,6 +3325,9 @@
   },
   "H4229:2": {
     "es": "exterminar"
+  },
+  "H4246:1": {
+    "es": "danza"
   },
   "H4272:1": {
     "es": "herir de parte a parte"
@@ -5203,6 +5215,15 @@
   },
   "H6030:2": {
     "es": "responder"
+  },
+  "H6030:3": {
+    "es": "testificar"
+  },
+  "H6030:4": {
+    "es": "ser respondido"
+  },
+  "H6030:5": {
+    "es": "cantar"
   },
   "H6031:1": {
     "es": "estar ocupado"
@@ -18624,10 +18645,22 @@
     "es": "amor"
   },
   "H3034:1": {
-    "es": "lanzar"
+    "es": "dar gracias"
   },
   "H3034:2": {
+    "es": "alabar"
+  },
+  "H3034:3": {
+    "es": "confesar"
+  },
+  "H3034:4": {
+    "es": "lanzar"
+  },
+  "H3034:5": {
     "es": "arrojar"
+  },
+  "H3034:6": {
+    "es": "confesar; dar gracias; reconocer."
   },
   "H3035:1": {
     "es": "un manasita"
@@ -30150,16 +30183,13 @@
     "es": "imagen fundida"
   },
   "H526:1": {
-    "es": "maestro artesano"
+    "es": "Amón; rey de Judá, hijo de Manasés"
   },
   "H526:2": {
-    "es": "rey de Judá"
+    "es": "Amón; gobernador de la ciudad de Samaria bajo Acab"
   },
   "H526:3": {
-    "es": "capitán de una ciudad"
-  },
-  "H526:4": {
-    "es": "uno de la línea de los siervos de Salomón"
+    "es": "Amón; jefe de una familia de los siervos de Salomón"
   },
   "H5260:1": {
     "es": "derramar"
@@ -37248,7 +37278,7 @@
     "es": "cuchillos de pedernal"
   },
   "H6865:1": {
-    "es": "Tiro"
+    "es": "Tiro; ciudad portuaria fenicia en la costa al norte de Israel"
   },
   "H6867:1": {
     "es": "costra"

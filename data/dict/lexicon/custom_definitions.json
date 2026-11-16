@@ -154241,10 +154241,10 @@
     "mapping_scope": "exact",
     "definitions": [
       {
-        "text_en": "to you; for you, preposition ל with second feminine singular suffix.",
-        "text_es": "a ti; para ti, preposición ל con sufijo femenino singular de segunda persona.",
-        "source": "hutter_image_review",
-        "order": 1
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "to you; for you, preposition ל with second person singular suffix (feminine, or masculine in pause).",
+        "text_es": "a ti; para ti, preposición ל con sufijo de segunda persona singular (femenino, o masculino en pausa)."
       }
     ],
     "root": "",
@@ -156144,10 +156144,10 @@
     "mapping_scope": "exact",
     "definitions": [
       {
-        "text_en": "in you; by you, preposition ב with second feminine singular suffix.",
-        "text_es": "en ti; por ti, preposición ב con sufijo femenino singular de segunda persona.",
-        "source": "hutter_image_review",
-        "order": 1
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "in you; by you, preposition ב with second person singular suffix (feminine, or masculine in pause).",
+        "text_es": "en ti; por ti, preposición ב con sufijo de segunda persona singular (femenino, o masculino en pausa)."
       }
     ],
     "root": "",

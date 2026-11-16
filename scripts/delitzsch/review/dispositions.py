@@ -37,7 +37,8 @@ PREFIX_LETTERS = {"Hb": "ב", "Hl": "ל", "Hk": "כ", "Hc": "ו", "Hd": "ה", "H
 ROOT_LETTER_ISSUE = "root_letter_prefix"
 WITHDRAWN_ROOT_LETTER_ISSUE = "root_letter_prefix_withdrawn"
 STRONG_ISSUE = "strong_correction"
-OUTSIDE_QUEUE_ISSUES = {STRONG_ISSUE, ROOT_LETTER_ISSUE}
+LEXICAL_ISSUE = "lexical_review"
+OUTSIDE_QUEUE_ISSUES = {STRONG_ISSUE, ROOT_LETTER_ISSUE, LEXICAL_ISSUE}
 EVIDENCE_KEYS = ("lexicon", "grammar", "context")
 ROOT_LETTER_BATCH = REPORTS.parent / "batches" / "root_letter_prefixes.json"
 OUTSIDE_ROOT_LETTER_BATCH = REPORTS.parent / "batches" / "root_letter_prefixes_outside_queue.json"
@@ -207,28 +208,58 @@ def outside_root_letter_correction(entry: Record, decision: dict[str, Any] | Non
     )
 
 
+def reviewed_evidence(decision: dict[str, Any]) -> bool:
+    return not decision["reviewer"].startswith("rule:") and all(decision.get("evidence", {}).get(key) for key in EVIDENCE_KEYS)
+
+
 def reviewed_strong_correction(entry: Record, decision: dict[str, Any] | None, reading: Reading | None) -> Verdict | None:
-    if decision is None or decision.get("issue_type") != STRONG_ISSUE:
+    if decision is None or decision.get("issue_type") not in (STRONG_ISSUE, LEXICAL_ISSUE):
+        return None
+    if decision["issue_type"] == LEXICAL_ISSUE and decision.get("action") != "set_strong":
         return None
     occurrence, new_strong = decision["occurrence"], decision["new_strong"]
     prefixes = occurrence["prefixes"]
+    new_prefixes = decision.get("new_prefixes", prefixes) if decision["issue_type"] == LEXICAL_ISSUE else prefixes
     if (
         decision["status"] not in STRONG_CONFIRMED
         or decision["action"] != "set_strong"
-        or decision["reviewer"].startswith("rule:")
-        or "new_prefixes" in decision
+        or (decision["issue_type"] == STRONG_ISSUE and "new_prefixes" in decision)
         or occurrence["text"] != entry["text"]
-        or not decision["previous_strong"] == occurrence["strong"] == entry["strong"] != new_strong
-        or new_strong.split("/")[:-1] != prefixes
-        or not all(decision.get("evidence", {}).get(key) for key in EVIDENCE_KEYS)
+        or not decision["previous_strong"] == occurrence["strong"] == entry["strong"]
+        or (new_strong.split("/")[-1], new_prefixes) == (entry["strong"].split("/")[-1], prefixes)
+        or new_strong.split("/")[:-1] != new_prefixes
+        or not normalize_hebrew(entry["text"]).startswith(prefix_letters(new_prefixes))
+        or not decision.get("reason")
+        or not reviewed_evidence(decision)
     ):
         raise ValueError(f"{entry['location']}: Strong correction does not satisfy the reviewed Strong correction rule")
     return Verdict(
         "corrected", decision["reviewer"],
         dict(decision["evidence"], reason=decision["reason"], status=decision["status"], logged_at=decision["logged_at"]),
         before=dict(prefixes=prefixes),
-        after=dict(text=occurrence["text"], strong=new_strong, prefixes=prefixes),
+        after=dict(text=occurrence["text"], strong=new_strong, prefixes=new_prefixes),
     )
+
+
+def lexical_review(entry: Record, decision: dict[str, Any] | None, reading: Reading | None) -> Verdict | None:
+    if decision is None or decision.get("issue_type") != LEXICAL_ISSUE or decision.get("action") == "set_strong":
+        return None
+    occurrence = decision["occurrence"]
+    kept = decision["action"] == "skip" and decision["status"] == "skipped" and decision["new_strong"] == entry["strong"]
+    blocked = decision["action"] == "needs_manual_review" and decision["status"] == "needs_manual_review"
+    if (
+        not (kept or blocked)
+        or "new_prefixes" in decision
+        or occurrence["text"] != entry["text"]
+        or not decision["previous_strong"] == occurrence["strong"] == entry["strong"]
+        or not decision.get("reason")
+        or not reviewed_evidence(decision)
+    ):
+        raise ValueError(f"{entry['location']}: lexical review does not satisfy the lexical review rule")
+    evidence = dict(decision["evidence"], reason=decision["reason"], status=decision["status"], logged_at=decision["logged_at"])
+    if blocked:
+        return Verdict("blocked", decision["reviewer"], evidence)
+    return Verdict("benign", decision["reviewer"], evidence, before=dict(prefixes=occurrence["prefixes"]), lexical_review="reviewed")
 
 
 def style_only_prefix(entry: Record, decision: dict[str, Any] | None, reading: Reading | None) -> Verdict | None:
@@ -265,7 +296,8 @@ def unadjudicated(entry: Record, decision: dict[str, Any] | None, reading: Readi
 RULES: tuple[Rule, ...] = (
     ("root_letter_prefix", 1, root_letter_correction),
     ("root_letter_prefix_outside_queue", 1, outside_root_letter_correction),
-    ("reviewed_strong_correction", 1, reviewed_strong_correction),
+    ("reviewed_strong_correction", 2, reviewed_strong_correction),
+    ("lexical_review", 1, lexical_review),
     ("style_only_prefix", 5, style_only_prefix),
     ("prior_review_decision", 1, prior_review),
     ("unadjudicated", 1, unadjudicated),

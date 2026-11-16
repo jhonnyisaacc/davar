@@ -8,87 +8,46 @@
   "translit_es": "yadah",
   "definitions": [
     {
-      "text_en": "throw",
+      "text_en": "give thanks",
       "source": "bdb",
       "order": 1,
+      "sense": "1",
+      "text_es": "dar gracias"
+    },
+    {
+      "text_en": "praise",
+      "source": "bdb",
+      "order": 2,
+      "sense": "1",
+      "text_es": "alabar"
+    },
+    {
+      "text_en": "confess",
+      "source": "bdb",
+      "order": 3,
+      "sense": "2",
+      "text_es": "confesar"
+    },
+    {
+      "text_en": "throw",
+      "source": "bdb",
+      "order": 4,
       "sense": "0",
       "text_es": "lanzar"
     },
     {
       "text_en": "cast",
       "source": "bdb",
-      "order": 2,
+      "order": 5,
       "sense": "0",
       "text_es": "arrojar"
     },
     {
-      "text_en": "shoot",
-      "source": "bdb",
-      "order": 3,
-      "sense": "0",
-      "text_es": "brote"
-    },
-    {
-      "text_en": "and they cast",
-      "source": "bdb",
-      "order": 4,
-      "sense": "0",
-      "text_es": "y arrojaron"
-    },
-    {
-      "text_en": "on me",
-      "source": "bdb",
-      "order": 5,
-      "sense": "0"
-    },
-    {
-      "text_en": "give thanks",
-      "source": "bdb",
-      "order": 6,
-      "sense": "1",
-      "text_es": "dar gracias"
-    },
-    {
-      "text_en": "laud",
-      "source": "bdb",
-      "order": 7,
-      "sense": "1",
-      "text_es": "alabar"
-    },
-    {
-      "text_en": "praise",
-      "source": "bdb",
-      "order": 8,
-      "sense": "1",
-      "text_es": "alabanza"
-    },
-    {
-      "text_en": "confess",
-      "source": "bdb",
-      "order": 9,
-      "sense": "2",
-      "text_es": "confesar"
-    },
-    {
-      "text_en": "confess",
-      "source": "bdb",
-      "order": 10,
-      "sense": "1",
-      "text_es": "confesar"
-    },
-    {
-      "text_en": "give thanks",
-      "source": "bdb",
-      "order": 11,
-      "sense": "2",
-      "text_es": "dar gracias"
-    },
-    {
       "text_en": "confess; give thanks; acknowledge.",
-      "text_es": "confesar; dar gracias; reconocer.",
       "source": "delitzsch_review",
-      "order": 12,
-      "sense": "0"
+      "order": 6,
+      "sense": "0",
+      "text_es": "confesar; dar gracias; reconocer."
     }
   ],
   "sources": {
