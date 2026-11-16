@@ -108,3 +108,20 @@ hutter:
   - scripts/ci/**
   - .github/workflows/ci.yml
   - .github/ci/**
+
+relationships:
+  - scripts/relationships/**
+  - data/relationships/**
+  - shared/contextualRelationships.json
+  - tests/test_relationship_candidates.py
+  - scripts/books.py
+  - scripts/paths.py
+  - data/knowledge/registries/books.json
+  - data/tth/json/**
+  - data/delitzsch/parsed/**
+  - data/dict/books/**
+  - data/dict/lexicon/words/**
+  - data/greek/preview/greek/**
+  - scripts/ci/**
+  - .github/workflows/ci.yml
+  - .github/ci/**
