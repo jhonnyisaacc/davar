@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 import unicodedata
@@ -283,6 +284,10 @@ def _owned(record: dict) -> bool:
     return provenance.get("source_id") == "tth" and provenance.get("transformation") == "extracted"
 
 
+def _content(record: dict) -> dict:
+    return {key: value for key, value in record.items() if key != "review"}
+
+
 def merge(existing: list[dict], generated: list[dict]) -> list[dict]:
     fresh = {record["id"]: record for record in generated}
     if len(fresh) != len(generated):
@@ -299,6 +304,11 @@ def merge(existing: list[dict], generated: list[dict]) -> list[dict]:
                     f"{record['id']} has a recorded review but no longer matches a footnote"
                 )
             continue
+        if record["review"]["status"] != "unreviewed" and _content(record) != _content(replacement):
+            raise SystemExit(
+                f"{record['id']} has a recorded review but its footnote content changed; "
+                "re-review it and record the decision again"
+            )
         merged.append({**replacement, "review": record["review"]})
     return merged + [fresh[key] for key in sorted(fresh)]
 
@@ -331,10 +341,10 @@ def main(argv: list[str] | None = None) -> int:
     ]
     if args.check:
         for path in stale:
-            print(f"stale: {path.relative_to(ROOT)}", file=sys.stderr)
+            print(f"stale: {os.path.relpath(path, ROOT)}", file=sys.stderr)
         return 1 if stale else 0
     for path in stale:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(outputs[path], encoding="utf-8")
-        print(f"wrote {path.relative_to(ROOT)}")
+        print(f"wrote {os.path.relpath(path, ROOT)}")
     return 0

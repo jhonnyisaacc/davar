@@ -47,4 +47,4 @@ To record the decision, replace the record's `review` in `shared/contextualRelat
 { "status": "approved", "reviewer": { "name": "Jhonny" }, "reviewed_on": "2026-11-16" }
 ```
 
-Use `"rejected"` for a pair that fails a check. Then run `python3 -m scripts.relationships` and commit both files. The script keeps the decision when it runs again. It stops when a reviewed record no longer matches a footnote, so a changed source cannot silently drop a decision.
+Use `"rejected"` for a pair that fails a check. Then run `python3 -m scripts.relationships` and commit both files. The script keeps the decision when it runs again. It stops when a reviewed record no longer matches a footnote, or when its regenerated content differs from the committed record, so a changed source cannot silently drop a decision or carry it over to text the reviewer never saw. To clear the stop, set that record's `review` back to `{ "status": "unreviewed" }`, run the script, and review the record again.

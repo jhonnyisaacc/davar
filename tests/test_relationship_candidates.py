@@ -63,6 +63,26 @@ def test_reviewed_record_without_a_footnote_stops_the_run(tmp_path):
         lever.render(_catalog(tmp_path, [orphan]))
 
 
+def test_reviewed_record_whose_content_changed_stops_the_run(tmp_path):
+    committed = json.loads(lever.CATALOG.read_text(encoding="utf-8"))["relationships"][0]
+    edited = {
+        **committed,
+        "rationale": {"es": "Texto que el revisor nunca vio."},
+        "review": APPROVAL,
+    }
+    with pytest.raises(SystemExit, match=f"{committed['id']}.*re-review"):
+        lever.render(_catalog(tmp_path, [edited]))
+
+
+def test_check_fails_on_stale_output_and_writes_nothing(tmp_path, monkeypatch, capsys):
+    stale = tmp_path / "candidates.json"
+    stale.write_text("{}\n", encoding="utf-8")
+    monkeypatch.setattr(lever, "CANDIDATES", stale)
+    assert lever.main(["--check"]) == 1
+    assert capsys.readouterr().err.strip().endswith(f"{stale.parent.name}/candidates.json")
+    assert stale.read_text(encoding="utf-8") == "{}\n"
+
+
 def test_authored_records_pass_through_untouched(tmp_path):
     committed = json.loads(lever.CATALOG.read_text(encoding="utf-8"))["relationships"][0]
     authored = {

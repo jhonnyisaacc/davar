@@ -116,6 +116,7 @@ relationships:
   - tests/test_relationship_candidates.py
   - scripts/books.py
   - scripts/paths.py
+  - data/knowledge/registries/books.json
   - data/tth/json/**
   - data/delitzsch/parsed/**
   - data/dict/books/**
