@@ -4,10 +4,30 @@
 		{
 			"id": "g3056-h1697-john-1-1",
 			"predicate": "contextually_related_to",
-			"source": { "language": "greek", "strong": "G3056", "lemma": "λόγος", "transliteration": "logos" },
-			"target": { "language": "hebrew", "strong": "H1697", "lemma": "דָּבָר", "transliteration": "davar" },
-			"scope": [{ "system_id": "davar-v1", "kind": "verse", "book_id": "john", "chapter": 1, "verse": 1 }],
-			"rationale": { "es": "Heb.: Davar. Aram.: Meymrá. Gr.: Logos. Término que expresa la corporeidad de Elohim. Así también en vers. 2." },
+			"source": {
+				"language": "greek",
+				"strong": "G3056",
+				"lemma": "λόγος",
+				"transliteration": "logos"
+			},
+			"target": {
+				"language": "hebrew",
+				"strong": "H1697",
+				"lemma": "דָּבָר",
+				"transliteration": "davar"
+			},
+			"scope": [
+				{
+					"system_id": "davar-v1",
+					"kind": "verse",
+					"book_id": "john",
+					"chapter": 1,
+					"verse": 1
+				}
+			],
+			"rationale": {
+				"es": "Heb.: Davar. Aram.: Meymrá. Gr.: Logos. Término que expresa la corporeidad de Elohim. Así también en vers. 2."
+			},
 			"attribution": {
 				"credit": "Texto tomado de la Traducción Textual del Hebreo, Copyright por Natanael Doldan. Usado con permiso.",
 				"locator": "Iojanán 1:1, nota 2"
@@ -19,7 +39,429 @@
 				"origin": "source",
 				"transformation": "extracted"
 			},
-			"review": { "status": "unreviewed" }
+			"review": {
+				"status": "unreviewed"
+			}
+		},
+		{
+			"id": "g0458-h205-ezekiel-11-2",
+			"predicate": "contextually_related_to",
+			"source": {
+				"language": "greek",
+				"strong": "G0458",
+				"lemma": "ἀνομία",
+				"transliteration": "anomia"
+			},
+			"target": {
+				"language": "hebrew",
+				"strong": "H205",
+				"lemma": "אָוֶן",
+				"transliteration": "aven"
+			},
+			"scope": [
+				{
+					"system_id": "davar-v1",
+					"kind": "verse",
+					"book_id": "ezekiel",
+					"chapter": 11,
+					"verse": 2
+				}
+			],
+			"rationale": {
+				"es": "O, la ausencia de Torah. Heb.: Áven. Gr.: Anomía."
+			},
+			"attribution": {
+				"credit": "Texto tomado de la Traducción Textual del Hebreo, Copyright por Natanael Doldan. Usado con permiso.",
+				"locator": "Iejezkel 11:2, nota 32"
+			},
+			"provenance": {
+				"source_id": "tth",
+				"path": "data/tth/json/iejezkel.json",
+				"json_pointer": "/chapters/10/verses/1/footnotes/0",
+				"origin": "source",
+				"transformation": "extracted"
+			},
+			"review": {
+				"status": "unreviewed"
+			}
+		},
+		{
+			"id": "g0746-h7223-john-8-25",
+			"predicate": "contextually_related_to",
+			"source": {
+				"language": "greek",
+				"strong": "G0746",
+				"lemma": "ἀρχή",
+				"transliteration": "arje"
+			},
+			"target": {
+				"language": "hebrew",
+				"strong": "H7223",
+				"lemma": "רִאשׁוֹן",
+				"transliteration": "rishon"
+			},
+			"scope": [
+				{
+					"system_id": "davar-v1",
+					"kind": "verse",
+					"book_id": "john",
+					"chapter": 8,
+					"verse": 25
+				}
+			],
+			"rationale": {
+				"es": "Heb.: 1Reshit, 2Rishón. Gr.: Arjé."
+			},
+			"attribution": {
+				"credit": "Texto tomado de la Traducción Textual del Hebreo, Copyright por Natanael Doldan. Usado con permiso.",
+				"locator": "Iojanán 8:25, nota 130"
+			},
+			"provenance": {
+				"source_id": "tth",
+				"path": "data/tth/json/iojanan.json",
+				"json_pointer": "/chapters/7/verses/23/footnotes/0",
+				"origin": "source",
+				"transformation": "extracted"
+			},
+			"review": {
+				"status": "unreviewed"
+			}
+		},
+		{
+			"id": "g0746-h7225-john-8-25",
+			"predicate": "contextually_related_to",
+			"source": {
+				"language": "greek",
+				"strong": "G0746",
+				"lemma": "ἀρχή",
+				"transliteration": "arje"
+			},
+			"target": {
+				"language": "hebrew",
+				"strong": "H7225",
+				"lemma": "רֵאשִׁית",
+				"transliteration": "reshit"
+			},
+			"scope": [
+				{
+					"system_id": "davar-v1",
+					"kind": "verse",
+					"book_id": "john",
+					"chapter": 8,
+					"verse": 25
+				}
+			],
+			"rationale": {
+				"es": "Heb.: 1Reshit, 2Rishón. Gr.: Arjé."
+			},
+			"attribution": {
+				"credit": "Texto tomado de la Traducción Textual del Hebreo, Copyright por Natanael Doldan. Usado con permiso.",
+				"locator": "Iojanán 8:25, nota 130"
+			},
+			"provenance": {
+				"source_id": "tth",
+				"path": "data/tth/json/iojanan.json",
+				"json_pointer": "/chapters/7/verses/23/footnotes/0",
+				"origin": "source",
+				"transformation": "extracted"
+			},
+			"review": {
+				"status": "unreviewed"
+			}
+		},
+		{
+			"id": "g0894-h3939-revelation-8-11",
+			"predicate": "contextually_related_to",
+			"source": {
+				"language": "greek",
+				"strong": "G0894",
+				"lemma": "ἄψινθος",
+				"transliteration": "apsindsos"
+			},
+			"target": {
+				"language": "hebrew",
+				"strong": "H3939",
+				"lemma": "לַעֲנָה",
+				"transliteration": "la'anah"
+			},
+			"scope": [
+				{
+					"system_id": "davar-v1",
+					"kind": "verse",
+					"book_id": "revelation",
+					"chapter": 8,
+					"verse": 11
+				}
+			],
+			"rationale": {
+				"es": "Heb.: La'anah. Gr.: Ápsindsos."
+			},
+			"attribution": {
+				"credit": "Texto tomado de la Traducción Textual del Hebreo, Copyright por Natanael Doldan. Usado con permiso.",
+				"locator": "Sodot 8:11, nota 87"
+			},
+			"provenance": {
+				"source_id": "tth",
+				"path": "data/tth/json/sodot.json",
+				"json_pointer": "/chapters/7/verses/10/footnotes/0",
+				"origin": "source",
+				"transformation": "extracted"
+			},
+			"review": {
+				"status": "unreviewed"
+			}
+		},
+		{
+			"id": "g1228-h7854-john-6-70",
+			"predicate": "contextually_related_to",
+			"source": {
+				"language": "greek",
+				"strong": "G1228",
+				"lemma": "διάβολος",
+				"transliteration": "diabolos"
+			},
+			"target": {
+				"language": "hebrew",
+				"strong": "H7854",
+				"lemma": "שָׂטָן",
+				"transliteration": "satan"
+			},
+			"scope": [
+				{
+					"system_id": "davar-v1",
+					"kind": "verse",
+					"book_id": "john",
+					"chapter": 6,
+					"verse": 70
+				}
+			],
+			"rationale": {
+				"es": "Heb.: Satán. Gr.: Diábolos. La Ver. Políglota de Nuremberg dice: es uno que avergüenza; heb.: majlim."
+			},
+			"attribution": {
+				"credit": "Texto tomado de la Traducción Textual del Hebreo, Copyright por Natanael Doldan. Usado con permiso.",
+				"locator": "Iojanán 6:70, nota 99"
+			},
+			"provenance": {
+				"source_id": "tth",
+				"path": "data/tth/json/iojanan.json",
+				"json_pointer": "/chapters/5/verses/68/footnotes/0",
+				"origin": "source",
+				"transformation": "extracted"
+			},
+			"review": {
+				"status": "unreviewed"
+			}
+		},
+		{
+			"id": "g2839-h2455-romans-14-14",
+			"predicate": "contextually_related_to",
+			"source": {
+				"language": "greek",
+				"strong": "G2839",
+				"lemma": "κοινός",
+				"transliteration": "koinos"
+			},
+			"target": {
+				"language": "hebrew",
+				"strong": "H2455",
+				"lemma": "חֹל",
+				"transliteration": "jol"
+			},
+			"scope": [
+				{
+					"system_id": "davar-v1",
+					"kind": "verse",
+					"book_id": "romans",
+					"chapter": 14,
+					"verse": 14
+				}
+			],
+			"rationale": {
+				"es": "Heb.: Jol. Gr.: Koinós."
+			},
+			"attribution": {
+				"credit": "Texto tomado de la Traducción Textual del Hebreo, Copyright por Natanael Doldan. Usado con permiso.",
+				"locator": "Romanos 14:14, nota 168"
+			},
+			"provenance": {
+				"source_id": "tth",
+				"path": "data/tth/json/romanos.json",
+				"json_pointer": "/chapters/13/verses/13/footnotes/1",
+				"origin": "source",
+				"transformation": "extracted"
+			},
+			"review": {
+				"status": "unreviewed"
+			}
+		},
+		{
+			"id": "g3625-h8398-revelation-12-9",
+			"predicate": "contextually_related_to",
+			"source": {
+				"language": "greek",
+				"strong": "G3625",
+				"lemma": "οἰκουμένη",
+				"transliteration": "oikoumene"
+			},
+			"target": {
+				"language": "hebrew",
+				"strong": "H8398",
+				"lemma": "תֵּבֵל",
+				"transliteration": "tevel"
+			},
+			"scope": [
+				{
+					"system_id": "davar-v1",
+					"kind": "verse",
+					"book_id": "revelation",
+					"chapter": 12,
+					"verse": 9
+				}
+			],
+			"rationale": {
+				"es": "Heb.: Tevel. Gr.: Oikoumene. Tierra donde habite el pueblo de Israel."
+			},
+			"attribution": {
+				"credit": "Texto tomado de la Traducción Textual del Hebreo, Copyright por Natanael Doldan. Usado con permiso.",
+				"locator": "Sodot 12:9, nota 120"
+			},
+			"provenance": {
+				"source_id": "tth",
+				"path": "data/tth/json/sodot.json",
+				"json_pointer": "/chapters/11/verses/8/footnotes/2",
+				"origin": "source",
+				"transformation": "extracted"
+			},
+			"review": {
+				"status": "unreviewed"
+			}
+		},
+		{
+			"id": "g3625-h8398-revelation-16-14",
+			"predicate": "contextually_related_to",
+			"source": {
+				"language": "greek",
+				"strong": "G3625",
+				"lemma": "οἰκουμένη",
+				"transliteration": "oikoumene"
+			},
+			"target": {
+				"language": "hebrew",
+				"strong": "H8398",
+				"lemma": "תֵּבֵל",
+				"transliteration": "tevel"
+			},
+			"scope": [
+				{
+					"system_id": "davar-v1",
+					"kind": "verse",
+					"book_id": "revelation",
+					"chapter": 16,
+					"verse": 14
+				}
+			],
+			"rationale": {
+				"es": "Heb.: Tevel. Gr.: Oikoumene. Tierra donde habite el pueblo de Israel."
+			},
+			"attribution": {
+				"credit": "Texto tomado de la Traducción Textual del Hebreo, Copyright por Natanael Doldan. Usado con permiso.",
+				"locator": "Sodot 16:14, nota 165"
+			},
+			"provenance": {
+				"source_id": "tth",
+				"path": "data/tth/json/sodot.json",
+				"json_pointer": "/chapters/15/verses/13/footnotes/0",
+				"origin": "source",
+				"transformation": "extracted"
+			},
+			"review": {
+				"status": "unreviewed"
+			}
+		},
+		{
+			"id": "g3625-h8398-revelation-3-10",
+			"predicate": "contextually_related_to",
+			"source": {
+				"language": "greek",
+				"strong": "G3625",
+				"lemma": "οἰκουμένη",
+				"transliteration": "oikoumene"
+			},
+			"target": {
+				"language": "hebrew",
+				"strong": "H8398",
+				"lemma": "תֵּבֵל",
+				"transliteration": "tevel"
+			},
+			"scope": [
+				{
+					"system_id": "davar-v1",
+					"kind": "verse",
+					"book_id": "revelation",
+					"chapter": 3,
+					"verse": 10
+				}
+			],
+			"rationale": {
+				"es": "Heb.: Tevel. Gr.: Oikoumene. Tierra donde habite el pueblo de Israel."
+			},
+			"attribution": {
+				"credit": "Texto tomado de la Traducción Textual del Hebreo, Copyright por Natanael Doldan. Usado con permiso.",
+				"locator": "Sodot 3:10, nota 36"
+			},
+			"provenance": {
+				"source_id": "tth",
+				"path": "data/tth/json/sodot.json",
+				"json_pointer": "/chapters/2/verses/9/footnotes/1",
+				"origin": "source",
+				"transformation": "extracted"
+			},
+			"review": {
+				"status": "unreviewed"
+			}
+		},
+		{
+			"id": "g5485-h2580-romans-11-5",
+			"predicate": "contextually_related_to",
+			"source": {
+				"language": "greek",
+				"strong": "G5485",
+				"lemma": "χάρις",
+				"transliteration": "jaris"
+			},
+			"target": {
+				"language": "hebrew",
+				"strong": "H2580",
+				"lemma": "חֵן",
+				"transliteration": "jen"
+			},
+			"scope": [
+				{
+					"system_id": "davar-v1",
+					"kind": "verse",
+					"book_id": "romans",
+					"chapter": 11,
+					"verse": 5
+				}
+			],
+			"rationale": {
+				"es": "Heb.: Jen. Gr.: Járis."
+			},
+			"attribution": {
+				"credit": "Texto tomado de la Traducción Textual del Hebreo, Copyright por Natanael Doldan. Usado con permiso.",
+				"locator": "Romanos 11:5, nota 131"
+			},
+			"provenance": {
+				"source_id": "tth",
+				"path": "data/tth/json/romanos.json",
+				"json_pointer": "/chapters/10/verses/4/footnotes/0",
+				"origin": "source",
+				"transformation": "extracted"
+			},
+			"review": {
+				"status": "unreviewed"
+			}
 		}
 	]
 }
