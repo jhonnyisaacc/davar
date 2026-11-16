@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "ola"
+      "text_es": "montón"
     },
     {
       "text_en": "wave",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "montón"
+      "text_es": "ola"
     },
     {
       "text_en": "billow",
@@ -33,28 +33,28 @@
       "source": "bdb",
       "order": 4,
       "sense": "1",
-      "text_es": "ola"
+      "text_es": "montón"
     },
     {
       "text_en": "waves",
       "source": "bdb",
       "order": 5,
       "sense": "2",
-      "text_es": "montón"
+      "text_es": "olas"
     },
     {
       "text_en": "rollers",
       "source": "bdb",
       "order": 6,
       "sense": "2",
-      "text_es": "olas"
+      "text_es": "rodillos"
     },
     {
       "text_en": "spring",
       "source": "bdb",
       "order": 7,
       "sense": "3",
-      "text_es": "rodillos"
+      "text_es": "manantial"
     }
   ],
   "sources": {

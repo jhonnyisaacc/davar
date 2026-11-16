@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "todo"
+      "text_es": "el todo"
     },
     {
       "text_en": "all",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "confinamiento"
+      "text_es": "todo"
     }
   ],
   "sources": {

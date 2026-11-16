@@ -8,25 +8,25 @@
   "translit_es": "amon",
   "definitions": [
     {
-      "text_en": "artificer",
-      "source": "bdb",
+      "text_en": "Amon; king of Judah, son of Manasseh",
+      "source": "delitzsch_review",
       "order": 1,
       "sense": "0",
-      "text_es": "artífice"
+      "text_es": "Amón; rey de Judá, hijo de Manasés"
     },
     {
-      "text_en": "architect",
-      "source": "bdb",
+      "text_en": "Amon; governor of the city of Samaria under Ahab",
+      "source": "delitzsch_review",
       "order": 2,
       "sense": "0",
-      "text_es": "arquitecto"
+      "text_es": "Amón; gobernador de la ciudad de Samaria bajo Acab"
     },
     {
-      "text_en": "master-workman",
-      "source": "bdb",
+      "text_en": "Amon; head of a family of Solomon's servants",
+      "source": "delitzsch_review",
       "order": 3,
       "sense": "0",
-      "text_es": "rey de Judá"
+      "text_es": "Amón; jefe de una familia de los siervos de Salomón"
     }
   ],
   "sources": {

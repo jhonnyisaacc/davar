@@ -47,8 +47,9 @@ bun scripts/control/web.ts state
 
 - `drive open <path>` navigates to a same-origin path and waits up to 45 s for the URL to match and the body to have text. It prints the URL and the first 500 characters of page text.
 - `drive click <name>` clicks the first `button`, `a`, or `[role=button]` whose `aria-label`, or else whitespace-collapsed text, equals `<name>` exactly. Then it waits 800 ms and prints the URL and text. The name is case-sensitive and must match the whole label.
+- `drive select <label> <option>` picks the option whose visible text equals `<option>` in the `<select>` whose `aria-label` equals `<label>`. Quote a label with spaces. The label and option follow the UI language, so after a switch to Spanish the language control is `Idioma` and English is `Inglés`.
 - `state` prints the current URL, title, and text without acting.
-- The harness has no typing, scrolling, key-press, `<select>`, or viewport actions. A feature that needs them, such as city search or the Language dropdown, is out of reach until someone adds the action to `scripts/control/web.ts`. Report that instead of claiming the feature passed.
+- The harness has no typing, scrolling, key-press, or viewport actions. A feature that needs them, such as city search, is out of reach until someone adds the action to `scripts/control/web.ts`. Report that instead of claiming the feature passed.
 
 Routes come from `shared/destinations.ts`: `/verse/<Book>/<chapter>/<verse>`, `/home`, `/widgets` (calendar), `/assemblies`, `/commentary`, `/settings`, `/account`, `/sources`, `/commentary-sources`, `/support`, `/donate`, `/features`, `/terms`, `/privacy`, `/feedback`. Feature recipes are in [features/](features/README.md).
 

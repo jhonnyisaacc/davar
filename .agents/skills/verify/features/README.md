@@ -23,7 +23,7 @@ This directory holds the recipes for verifying what a reader sees in Davar. Read
 - Run `evidence` before and after the action under test, and read both screenshots.
 - Web proof is the URL, the visible text, and the screenshot. HTTP proof is the status and body. Worker proof is the exit code and output tail.
 - Record the feature ID and the entry point you used. A proof through one entry point does not cover the others the recipe lists.
-- If a step needs an action the harness lacks (typing, scrolling, keys, `<select>`, viewport), report it as not driven and name the missing action. Don't count a different path as proof.
+- If a step needs an action the harness lacks (typing, scrolling, keys, viewport), report it as not driven and name the missing action. Don't count a different path as proof.
 
 ## Feature entry contract
 

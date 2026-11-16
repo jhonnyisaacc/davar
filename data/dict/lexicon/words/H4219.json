@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "lavabo"
+      "text_es": "cuenco"
     },
     {
       "text_en": "bason",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "lanzamiento"
+      "text_es": "lavabo"
     },
     {
       "text_en": "throwing",
@@ -33,7 +33,7 @@
       "source": "bdb",
       "order": 4,
       "sense": "0",
-      "text_es": "cebado"
+      "text_es": "lanzamiento"
     }
   ],
   "sources": {

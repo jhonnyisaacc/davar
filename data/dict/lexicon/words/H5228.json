@@ -12,21 +12,21 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "derecho"
+      "text_es": "recto"
     },
     {
       "text_en": "right",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "rectitud"
+      "text_es": "derecho"
     },
     {
       "text_en": "straightness",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "tribu"
+      "text_es": "rectitud"
     }
   ],
   "sources": {

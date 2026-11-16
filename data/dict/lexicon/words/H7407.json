@@ -12,42 +12,42 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "banda"
+      "text_es": "lazo"
     },
     {
       "text_en": "band",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "unión"
+      "text_es": "banda"
     },
     {
       "text_en": "banding together",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "liga"
+      "text_es": "unión"
     },
     {
       "text_en": "league",
       "source": "bdb",
       "order": 4,
       "sense": "0",
-      "text_es": "conspiración"
+      "text_es": "liga"
     },
     {
       "text_en": "conspiracy",
       "source": "bdb",
       "order": 5,
       "sense": "0",
-      "text_es": "tramas"
+      "text_es": "conspiración"
     },
     {
       "text_en": "plottings",
       "source": "bdb",
       "order": 6,
       "sense": "0",
-      "text_es": "corceles"
+      "text_es": "tramas"
     }
   ],
   "sources": {

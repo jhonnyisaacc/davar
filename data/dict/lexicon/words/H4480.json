@@ -19,35 +19,35 @@
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "a través"
+      "text_es": "a causa de"
     },
     {
       "text_en": "off",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "al lado de"
+      "text_es": "de"
     },
     {
       "text_en": "on the side of",
       "source": "bdb",
       "order": 4,
       "sense": "0",
-      "text_es": "De"
+      "text_es": "al lado de"
     },
     {
       "text_en": "since",
       "source": "bdb",
       "order": 5,
       "sense": "0",
-      "text_es": "después"
+      "text_es": "desde"
     },
     {
       "text_en": "above",
       "source": "bdb",
       "order": 6,
       "sense": "0",
-      "text_es": "a causa de"
+      "text_es": "arriba"
     },
     {
       "text_en": "than",
@@ -82,126 +82,126 @@
       "source": "bdb",
       "order": 11,
       "sense": "1b",
-      "text_es": "de"
+      "text_es": "lejos de"
     },
     {
       "text_en": "off",
       "source": "bdb",
       "order": 12,
       "sense": "1c",
-      "text_es": "al lado de"
+      "text_es": "de"
     },
     {
       "text_en": "on the side of",
       "source": "bdb",
       "order": 13,
       "sense": "1c",
-      "text_es": "De"
+      "text_es": "al lado de"
     },
     {
       "text_en": "Out of",
       "source": "bdb",
       "order": 14,
       "sense": "2",
-      "text_es": "Parcialmente"
+      "text_es": "De"
     },
     {
       "text_en": "Partitively",
       "source": "bdb",
       "order": 15,
       "sense": "3",
-      "text_es": "desde"
+      "text_es": "Parcialmente"
     },
     {
       "text_en": "since",
       "source": "bdb",
       "order": 16,
       "sense": "4a",
-      "text_es": "después"
+      "text_es": "desde"
     },
     {
       "text_en": "after",
       "source": "bdb",
       "order": 17,
       "sense": "4b",
-      "text_es": "que"
+      "text_es": "después"
     },
     {
       "text_en": "towards",
       "source": "bdb",
       "order": 18,
       "sense": "4c",
-      "text_es": "desde … hasta"
+      "text_es": "hacia"
     },
     {
       "text_en": "from … even to",
       "source": "bdb",
       "order": 19,
       "sense": "5",
-      "text_es": "más allá"
+      "text_es": "desde … hasta"
     },
     {
       "text_en": "beyond",
       "source": "bdb",
       "order": 20,
       "sense": "6",
-      "text_es": "arriba"
+      "text_es": "más allá"
     },
     {
       "text_en": "above",
       "source": "bdb",
       "order": 21,
       "sense": "6",
-      "text_es": "a causa de"
+      "text_es": "arriba"
     },
     {
       "text_en": "on account of",
       "source": "bdb",
       "order": 22,
       "sense": "7a",
-      "text_es": "a través"
+      "text_es": "a causa de"
     },
     {
       "text_en": "through",
       "source": "bdb",
       "order": 23,
       "sense": "7a",
-      "text_es": "después de verbos que implican restricción, prevención, cese, etc."
+      "text_es": "a través"
     },
     {
       "text_en": "after verbs implying restraint, prevention, cessation, etc.",
       "source": "bdb",
       "order": 24,
       "sense": "7b",
-      "text_es": "desde"
+      "text_es": "después de verbos que implican restricción, prevención, cese, etc."
     },
     {
       "text_en": "since",
       "source": "bdb",
       "order": 25,
       "sense": "7c",
-      "text_es": "después"
+      "text_es": "desde"
     },
     {
       "text_en": "after",
       "source": "bdb",
       "order": 26,
       "sense": "7c",
-      "text_es": "que"
+      "text_es": "después"
     },
     {
       "text_en": "that",
       "source": "bdb",
       "order": 27,
       "sense": "8",
-      "text_es": "En compuestos:"
+      "text_es": "que"
     },
     {
       "text_en": "In compounds:",
       "source": "bdb",
       "order": 28,
       "sense": "9",
-      "text_es": "fuera de"
+      "text_es": "En compuestos:"
     },
     {
       "text_en": "portion",

@@ -50,6 +50,9 @@
   "H1058:2": {
     "es": "lamentar"
   },
+  "H1062:1": {
+    "es": "derecho de primogenitura"
+  },
   "H1082:1": {
     "es": "brillar"
   },
@@ -2066,6 +2069,12 @@
   "H2891:2": {
     "es": "puro"
   },
+  "H2894:1": {
+    "es": "barrer"
+  },
+  "H2894:2": {
+    "es": "barrer por completo"
+  },
   "H2895:1": {
     "es": "agradable"
   },
@@ -3316,6 +3325,9 @@
   },
   "H4229:2": {
     "es": "exterminar"
+  },
+  "H4246:1": {
+    "es": "danza"
   },
   "H4272:1": {
     "es": "herir de parte a parte"
@@ -5203,6 +5215,15 @@
   },
   "H6030:2": {
     "es": "responder"
+  },
+  "H6030:3": {
+    "es": "testificar"
+  },
+  "H6030:4": {
+    "es": "ser respondido"
+  },
+  "H6030:5": {
+    "es": "cantar"
   },
   "H6031:1": {
     "es": "estar ocupado"
@@ -10098,526 +10119,526 @@
     "es": "seno"
   },
   "H1354:7": {
-    "es": "murallas"
-  },
-  "H1354:8": {
     "es": "ceja"
   },
-  "H1355:1": {
+  "H1354:8": {
     "es": "borde"
   },
-  "H1355:2": {
+  "H1355:1": {
     "es": "espalda"
   },
-  "H1356:1": {
+  "H1355:2": {
     "es": "lado"
   },
-  "H1356:2": {
+  "H1356:1": {
     "es": "foso"
   },
-  "H1356:3": {
+  "H1356:2": {
     "es": "zanja"
   },
-  "H1357:1": {
+  "H1356:3": {
     "es": "trinchera"
   },
-  "H1357:2": {
+  "H1357:1": {
     "es": "langosta"
   },
-  "H1357:3": {
+  "H1357:2": {
     "es": "enjambre"
   },
-  "H1358:1": {
+  "H1357:3": {
     "es": "colección"
+  },
+  "H1358:1": {
+    "es": "foso"
   },
   "H1358:2": {
     "es": "foso"
   },
   "H1360:1": {
-    "es": "foso"
+    "es": "cisterna"
   },
   "H1360:2": {
-    "es": "cisterna"
+    "es": "estanque"
   },
   "H1360:3": {
-    "es": "estanque"
-  },
-  "H1360:4": {
     "es": "cisterna"
   },
-  "H1360:5": {
+  "H1360:4": {
     "es": "estanque"
   },
-  "H1362:1": {
+  "H1360:5": {
     "es": "pantano"
   },
-  "H1362:2": {
+  "H1362:1": {
     "es": "alto"
   },
-  "H1362:3": {
+  "H1362:2": {
     "es": "exaltado"
   },
-  "H1362:4": {
+  "H1362:3": {
     "es": "alto"
   },
-  "H1362:5": {
+  "H1362:4": {
     "es": "elevado"
   },
-  "H1362:6": {
+  "H1362:5": {
     "es": "alto"
   },
-  "H1362:7": {
+  "H1362:6": {
     "es": "exaltado en posición"
   },
-  "H1362:8": {
+  "H1362:7": {
     "es": "altivo"
   },
-  "H1363:1": {
+  "H1362:8": {
     "es": "elevación"
+  },
+  "H1363:1": {
+    "es": "altura"
   },
   "H1363:2": {
     "es": "altura"
   },
   "H1363:3": {
-    "es": "altura"
-  },
-  "H1363:4": {
     "es": "exaltación"
   },
-  "H1363:5": {
+  "H1363:4": {
     "es": "grandeza"
   },
-  "H1364:1": {
+  "H1363:5": {
     "es": "altanería"
+  },
+  "H1364:1": {
+    "es": "alto"
   },
   "H1364:2": {
-    "es": "alto"
-  },
-  "H1364:3": {
     "es": "exaltado"
   },
-  "H1364:4": {
+  "H1364:3": {
     "es": "alto"
   },
-  "H1364:5": {
+  "H1364:4": {
     "es": "elevado"
   },
-  "H1364:6": {
+  "H1364:5": {
     "es": "alto"
   },
-  "H1364:7": {
+  "H1364:6": {
     "es": "exaltado en posición"
   },
-  "H1364:8": {
+  "H1364:7": {
     "es": "altivo"
   },
-  "H1365:1": {
+  "H1364:8": {
     "es": "elevación"
   },
-  "H1366:1": {
+  "H1365:1": {
     "es": "altanería"
   },
-  "H1366:2": {
+  "H1366:1": {
     "es": "borde"
+  },
+  "H1366:2": {
+    "es": "límite"
   },
   "H1366:3": {
-    "es": "límite"
+    "es": "territorio"
   },
   "H1366:4": {
-    "es": "territorio"
+    "es": "borde"
   },
   "H1366:5": {
-    "es": "borde"
+    "es": "límite"
   },
   "H1366:6": {
-    "es": "límite"
-  },
-  "H1367:1": {
     "es": "territorio"
   },
-  "H1367:2": {
+  "H1367:1": {
     "es": "borde"
   },
-  "H1368:1": {
+  "H1367:2": {
     "es": "límite"
   },
-  "H1368:2": {
+  "H1368:1": {
     "es": "fuerte"
   },
-  "H1369:1": {
+  "H1368:2": {
     "es": "poderoso"
   },
-  "H1369:2": {
+  "H1369:1": {
     "es": "fuerza"
+  },
+  "H1369:2": {
+    "es": "poder"
   },
   "H1369:3": {
-    "es": "poder"
-  },
-  "H1369:4": {
     "es": "fuerza"
   },
-  "H1369:5": {
+  "H1369:4": {
     "es": "poder"
   },
-  "H1369:6": {
+  "H1369:5": {
     "es": "valor"
+  },
+  "H1369:6": {
+    "es": "poder"
   },
   "H1370:1": {
     "es": "poder"
   },
   "H1371:1": {
-    "es": "poder"
-  },
-  "H1372:1": {
     "es": "con frente calva"
   },
-  "H1374:1": {
+  "H1372:1": {
     "es": "frente calva"
   },
-  "H1375:1": {
+  "H1374:1": {
     "es": "trincheras"
   },
-  "H1375:2": {
+  "H1375:1": {
     "es": "taza"
   },
-  "H1376:1": {
+  "H1375:2": {
     "es": "tazón"
   },
-  "H1377:1": {
+  "H1376:1": {
     "es": "señor"
   },
-  "H1377:2": {
+  "H1377:1": {
     "es": "señora"
   },
-  "H1377:3": {
+  "H1377:2": {
     "es": "reina"
   },
-  "H1378:1": {
+  "H1377:3": {
     "es": "reina madre"
   },
-  "H1379:1": {
+  "H1378:1": {
     "es": "cristal"
   },
-  "H1379:2": {
+  "H1379:1": {
     "es": "límite"
   },
-  "H138:1": {
+  "H1379:2": {
     "es": "borde"
   },
-  "H138:2": {
+  "H138:1": {
     "es": "mi Señor es YHVH"
   },
-  "H138:3": {
+  "H138:2": {
     "es": "cuarto hijo de David"
   },
-  "H138:4": {
+  "H138:3": {
     "es": "un levita"
   },
-  "H1383:1": {
+  "H138:4": {
     "es": "un jefe del pueblo"
   },
-  "H1383:2": {
+  "H1383:1": {
     "es": "torsión"
   },
-  "H1384:1": {
+  "H1383:2": {
     "es": "cuerdas de torsión"
+  },
+  "H1384:1": {
+    "es": "jorobado"
   },
   "H1384:2": {
     "es": "jorobado"
   },
   "H1386:1": {
-    "es": "jorobado"
-  },
-  "H1386:2": {
     "es": "pico"
   },
-  "H1389:1": {
+  "H1386:2": {
     "es": "cumbre redondeada"
+  },
+  "H1389:1": {
+    "es": "colina"
   },
   "H1390:1": {
     "es": "colina"
   },
   "H1390:2": {
-    "es": "colina"
-  },
-  "H1390:3": {
     "es": "una ciudad de Judá"
   },
-  "H1390:4": {
+  "H1390:3": {
     "es": "ciudad de Benj."
   },
-  "H1392:1": {
+  "H1390:4": {
     "es": "una ciudad de Efraín"
   },
-  "H1392:2": {
+  "H1392:1": {
     "es": "brote"
   },
-  "H1397:1": {
+  "H1392:2": {
     "es": "el lino estaba en brote"
+  },
+  "H1397:1": {
+    "es": "hombre"
   },
   "H1399:1": {
     "es": "hombre"
   },
   "H140:1": {
-    "es": "hombre"
-  },
-  "H1400:1": {
     "es": "mi señor ha resucitado"
   },
-  "H1401:1": {
+  "H1400:1": {
     "es": "hombre"
   },
-  "H1402:1": {
+  "H1401:1": {
     "es": "poderoso"
   },
-  "H1403:1": {
+  "H1402:1": {
     "es": "héroe"
   },
-  "H1404:1": {
+  "H1403:1": {
     "es": "hombre de Ēl"
   },
-  "H1404:2": {
+  "H1404:1": {
     "es": "señora"
   },
-  "H1404:3": {
+  "H1404:2": {
     "es": "reina"
   },
-  "H1405:1": {
+  "H1404:3": {
     "es": "amante"
   },
-  "H1405:2": {
+  "H1405:1": {
     "es": "montículo"
   },
-  "H1406:1": {
+  "H1405:2": {
     "es": "altura"
   },
-  "H1406:2": {
+  "H1406:1": {
     "es": "techo"
   },
-  "H1406:3": {
+  "H1406:2": {
     "es": "cima"
   },
-  "H1406:4": {
+  "H1406:3": {
     "es": "techo"
   },
-  "H1407:1": {
+  "H1406:4": {
     "es": "cima del altar de incienso, en el tabernáculo"
   },
-  "H1408:1": {
+  "H1407:1": {
     "es": "cilantro"
   },
-  "H1408:2": {
+  "H1408:1": {
     "es": "fortuna"
+  },
+  "H1408:2": {
+    "es": "buena fortuna"
   },
   "H1408:3": {
-    "es": "buena fortuna"
+    "es": "dios de la fortuna"
   },
   "H1409:1": {
-    "es": "dios de la fortuna"
-  },
-  "H1409:2": {
     "es": "fortuna"
   },
-  "H1409:3": {
+  "H1409:2": {
     "es": "buena fortuna"
   },
-  "H141:1": {
+  "H1409:3": {
     "es": "dios de la fortuna"
   },
-  "H1410:1": {
+  "H141:1": {
     "es": "mi Señor está exaltado"
   },
-  "H1410:2": {
+  "H1410:1": {
     "es": "afortunado"
   },
-  "H1410:3": {
+  "H1410:2": {
     "es": "hijo de Jacob y Zilpa"
   },
-  "H1411:1": {
+  "H1410:3": {
     "es": "un profeta en tiempos de David"
   },
-  "H1414:1": {
+  "H1411:1": {
     "es": "tesorero"
   },
-  "H1415:1": {
+  "H1414:1": {
     "es": "talar"
   },
-  "H1416:1": {
+  "H1415:1": {
     "es": "banco"
   },
-  "H1416:2": {
+  "H1416:1": {
     "es": "banda"
   },
-  "H1416:3": {
+  "H1416:2": {
     "es": "tropa"
   },
-  "H1416:4": {
+  "H1416:3": {
     "es": "banda de merodeadores"
   },
-  "H1416:5": {
+  "H1416:4": {
     "es": "tropa"
   },
-  "H1416:6": {
+  "H1416:5": {
     "es": "incursión"
   },
-  "H1417:1": {
+  "H1416:6": {
     "es": "asalto"
   },
-  "H1417:2": {
+  "H1417:1": {
     "es": "surco"
+  },
+  "H1417:2": {
+    "es": "corte"
   },
   "H1417:3": {
-    "es": "corte"
+    "es": "surco"
   },
   "H1417:4": {
-    "es": "surco"
+    "es": "cortes"
   },
   "H1418:1": {
-    "es": "cortes"
+    "es": "surco"
   },
   "H1418:2": {
-    "es": "surco"
-  },
-  "H1418:3": {
     "es": "corte"
   },
-  "H1418:4": {
+  "H1418:3": {
     "es": "surco"
   },
-  "H1419:1": {
+  "H1418:4": {
     "es": "cortes"
   },
-  "H1419:2": {
+  "H1419:1": {
     "es": "grande"
   },
-  "H1419:3": {
+  "H1419:2": {
     "es": "en magnitud y extensión"
   },
-  "H1419:4": {
+  "H1419:3": {
     "es": "en número"
   },
-  "H1419:5": {
+  "H1419:4": {
     "es": "en intensidad"
   },
-  "H1419:6": {
+  "H1419:5": {
     "es": "fuerte"
   },
-  "H1419:7": {
+  "H1419:6": {
     "es": "en edad"
   },
-  "H1419:8": {
+  "H1419:7": {
     "es": "en importancia"
   },
-  "H1419:9": {
+  "H1419:8": {
     "es": "en frases"
   },
-  "H1419:10": {
+  "H1419:9": {
     "es": "cstr."
   },
-  "H1419:11": {
+  "H1419:10": {
     "es": "hacer grandes cosas"
+  },
+  "H1419:11": {
+    "es": "grandeza"
   },
   "H1420:1": {
     "es": "grandeza"
   },
   "H1422:1": {
-    "es": "grandeza"
-  },
-  "H1423:1": {
     "es": "burla"
   },
-  "H1425:1": {
+  "H1423:1": {
     "es": "cabrito"
   },
-  "H1426:1": {
+  "H1425:1": {
     "es": "gadita"
   },
-  "H1427:1": {
+  "H1426:1": {
     "es": "mi fortuna"
   },
-  "H1429:1": {
+  "H1427:1": {
     "es": "Ēl es mi fortuna"
   },
-  "H1430:1": {
+  "H1429:1": {
     "es": "cabritos"
   },
-  "H1430:2": {
+  "H1430:1": {
     "es": "montón"
   },
-  "H1432:1": {
+  "H1430:2": {
     "es": "pila"
   },
-  "H1432:2": {
+  "H1432:1": {
     "es": "haciéndose grande"
   },
-  "H1433:1": {
+  "H1432:2": {
     "es": "creciendo"
+  },
+  "H1433:1": {
+    "es": "grandeza"
   },
   "H1433:2": {
     "es": "grandeza"
   },
   "H1433:3": {
-    "es": "grandeza"
-  },
-  "H1433:4": {
     "es": "magnitud"
   },
-  "H1433:5": {
+  "H1433:4": {
     "es": "magnificencia"
   },
-  "H1433:6": {
+  "H1433:5": {
     "es": "orgullo"
   },
-  "H1434:1": {
+  "H1433:6": {
     "es": "insolencia de corazón"
   },
-  "H1434:2": {
+  "H1434:1": {
     "es": "hilos torcidos"
   },
-  "H1434:3": {
+  "H1434:2": {
     "es": "borlas"
   },
-  "H1435:1": {
+  "H1434:3": {
     "es": "festones"
   },
-  "H1435:2": {
+  "H1435:1": {
     "es": "muy grande"
   },
-  "H1435:3": {
+  "H1435:2": {
     "es": "cabeza de una de las familias de netineos"
   },
-  "H1436:1": {
+  "H1435:3": {
     "es": "cabeza de una de las familias de los siervos de Salomón"
   },
-  "H1436:2": {
+  "H1436:1": {
     "es": "Yah es grande"
   },
-  "H1436:3": {
+  "H1436:2": {
     "es": "gobernador de Judea nombrado por Nabucodonosor"
   },
-  "H1436:4": {
+  "H1436:3": {
     "es": "hijo de Amarías, un hijo de Ezequías"
   },
-  "H1436:5": {
+  "H1436:4": {
     "es": "sacerdote de los hijos de Jesúa"
   },
-  "H1436:6": {
+  "H1436:5": {
     "es": "Yah(u) es grande"
   },
-  "H1436:7": {
+  "H1436:6": {
     "es": "gobernador de Judea"
   },
-  "H1436:8": {
+  "H1436:7": {
     "es": "hijo de Pasur, uno de los jefes de Jerusalén en tiempos de Jeremías"
   },
-  "H1437:1": {
+  "H1436:8": {
     "es": "uno de los hijos de Jedutún, en tiempos de David"
   },
-  "H1437:2": {
+  "H1437:1": {
     "es": "yo magnifico"
   },
-  "H1444:1": {
+  "H1437:2": {
     "es": "Dios"
+  },
+  "H1444:1": {
+    "es": "muro"
   },
   "H1447:1": {
     "es": "muro"
@@ -10626,154 +10647,154 @@
     "es": "muro"
   },
   "H145:1": {
-    "es": "muro"
-  },
-  "H145:2": {
     "es": "gloria"
   },
-  "H145:3": {
+  "H145:2": {
     "es": "magnificencia"
   },
-  "H145:4": {
+  "H145:3": {
     "es": "manto"
   },
-  "H145:5": {
+  "H145:4": {
     "es": "capa"
   },
-  "H1456:1": {
+  "H145:5": {
     "es": "ancho"
   },
-  "H1456:2": {
+  "H1456:1": {
     "es": "curación"
   },
-  "H1458:1": {
+  "H1456:2": {
     "es": "cura"
   },
-  "H1459:1": {
+  "H1458:1": {
     "es": "espalda"
   },
-  "H146:1": {
+  "H1459:1": {
     "es": "medio"
   },
-  "H146:2": {
+  "H146:1": {
     "es": "noble"
   },
-  "H146:3": {
+  "H146:2": {
     "es": "hijo de Bela, nieto de Benjamín"
   },
-  "H1460:1": {
+  "H146:3": {
     "es": "ciudad en Judá"
   },
-  "H1462:1": {
+  "H1460:1": {
     "es": "espalda"
   },
-  "H1463:1": {
+  "H1462:1": {
     "es": "langostas"
   },
-  "H1463:2": {
+  "H1463:1": {
     "es": "un rubenita"
   },
-  "H1465:1": {
+  "H1463:2": {
     "es": "Gog de la tierra de Magog, príncipe de Rosh, Meshek y Tubal"
   },
-  "H1466:1": {
+  "H1465:1": {
     "es": "espalda"
+  },
+  "H1466:1": {
+    "es": "orgullo"
   },
   "H1466:2": {
     "es": "orgullo"
   },
   "H1466:3": {
-    "es": "orgullo"
-  },
-  "H1467:1": {
     "es": "levantamiento"
   },
-  "H1469:1": {
+  "H1467:1": {
     "es": "orgullo"
   },
-  "H147:1": {
+  "H1469:1": {
     "es": "cría de aves"
   },
-  "H1471:1": {
+  "H147:1": {
     "es": "era"
   },
-  "H1471:2": {
+  "H1471:1": {
     "es": "nación"
   },
-  "H1472:1": {
+  "H1471:2": {
     "es": "Tid‛al rey de Goim"
   },
-  "H1472:2": {
+  "H1472:1": {
     "es": "cuerpo"
+  },
+  "H1472:2": {
+    "es": "cadáver"
   },
   "H1472:3": {
-    "es": "cadáver"
+    "es": "cuerpo"
   },
   "H1472:4": {
-    "es": "cuerpo"
-  },
-  "H1472:5": {
     "es": "cuerpo muerto"
   },
-  "H1472:6": {
+  "H1472:5": {
     "es": "cadáver"
   },
-  "H1473:1": {
+  "H1472:6": {
     "es": "carcasa"
   },
-  "H1473:2": {
+  "H1473:1": {
     "es": "exiliados"
   },
-  "H1475:1": {
+  "H1473:2": {
     "es": "exilio"
   },
-  "H1476:1": {
+  "H1475:1": {
     "es": "foso"
   },
-  "H1476:2": {
+  "H1476:1": {
     "es": "un neftalita"
   },
-  "H148:1": {
+  "H1476:2": {
     "es": "un gadita"
   },
-  "H1480:1": {
+  "H148:1": {
     "es": "consejero"
   },
-  "H1480:2": {
+  "H1480:1": {
     "es": "cuerpo"
   },
-  "H1482:1": {
+  "H1480:2": {
     "es": "cadáver"
   },
-  "H1482:2": {
+  "H1482:1": {
     "es": "cachorro"
   },
-  "H1482:3": {
+  "H1482:2": {
     "es": "joven"
   },
-  "H1482:4": {
+  "H1482:3": {
     "es": "cachorros"
   },
-  "H1483:1": {
+  "H1482:4": {
     "es": "crías de chacales"
   },
-  "H1483:2": {
+  "H1483:1": {
     "es": "estadía"
   },
-  "H1484:1": {
+  "H1483:2": {
     "es": "morada"
   },
-  "H1484:2": {
+  "H1484:1": {
     "es": "cachorro"
   },
-  "H1485:1": {
+  "H1484:2": {
     "es": "pendenciero"
   },
-  "H1485:2": {
+  "H1485:1": {
     "es": "morada"
   },
-  "H1486:1": {
+  "H1485:2": {
     "es": "Gûr de Baal"
+  },
+  "H1486:1": {
+    "es": "suerte"
   },
   "H1486:2": {
     "es": "suerte"
@@ -10782,373 +10803,373 @@
     "es": "suerte"
   },
   "H1486:4": {
-    "es": "suerte"
+    "es": "cosa asignada"
   },
   "H1486:5": {
-    "es": "cosa asignada"
+    "es": "asignado"
   },
   "H1486:6": {
     "es": "asignado"
   },
   "H1486:7": {
-    "es": "asignado"
-  },
-  "H1486:8": {
     "es": "porción"
   },
-  "H1486:9": {
+  "H1486:8": {
     "es": "recompensa"
   },
-  "H1487:1": {
+  "H1486:9": {
     "es": "retribución"
   },
-  "H1487:2": {
+  "H1487:1": {
     "es": "terrón"
   },
-  "H1488:1": {
+  "H1487:2": {
     "es": "bulto"
   },
-  "H1488:2": {
+  "H1488:1": {
     "es": "esquila"
   },
-  "H1489:1": {
+  "H1488:2": {
     "es": "siega"
   },
-  "H149:1": {
+  "H1489:1": {
     "es": "tesorero"
   },
-  "H149:2": {
+  "H149:1": {
     "es": "correctamente"
   },
-  "H1490:1": {
+  "H149:2": {
     "es": "exactamente"
   },
-  "H1492:1": {
+  "H1490:1": {
     "es": "tesorero"
   },
-  "H1496:1": {
+  "H1492:1": {
     "es": "vellón"
+  },
+  "H1496:1": {
+    "es": "corte"
   },
   "H1496:2": {
     "es": "corte"
   },
   "H1498:1": {
-    "es": "corte"
+    "es": "robo"
   },
   "H1499:1": {
     "es": "robo"
   },
   "H1500:1": {
-    "es": "robo"
-  },
-  "H1500:2": {
     "es": "saqueo"
   },
-  "H1501:1": {
+  "H1500:2": {
     "es": "botín"
   },
-  "H1503:1": {
+  "H1501:1": {
     "es": "langostas"
+  },
+  "H1503:1": {
+    "es": "tallo"
   },
   "H1503:2": {
     "es": "tallo"
   },
   "H1505:1": {
-    "es": "tallo"
-  },
-  "H1505:2": {
     "es": "cortar"
   },
-  "H1505:3": {
+  "H1505:2": {
     "es": "dividir"
   },
-  "H1506:1": {
+  "H1505:3": {
     "es": "determinar"
   },
-  "H1507:1": {
+  "H1506:1": {
     "es": "parte"
   },
-  "H1508:1": {
+  "H1507:1": {
     "es": "porción"
   },
-  "H1508:2": {
+  "H1508:1": {
     "es": "corte"
+  },
+  "H1508:2": {
+    "es": "separación"
   },
   "H1509:1": {
     "es": "separación"
   },
   "H1510:1": {
-    "es": "separación"
-  },
-  "H1512:1": {
     "es": "decreto"
   },
-  "H1513:1": {
+  "H1512:1": {
     "es": "vientre"
   },
-  "H1514:1": {
+  "H1513:1": {
     "es": "carbón"
   },
-  "H1516:1": {
+  "H1514:1": {
     "es": "llama"
   },
-  "H1517:1": {
+  "H1516:1": {
     "es": "valle"
   },
-  "H1519:1": {
+  "H1517:1": {
     "es": "tendón"
   },
-  "H152:1": {
+  "H1519:1": {
     "es": "estallar"
   },
-  "H152:2": {
+  "H152:1": {
     "es": "Adar es príncipe"
   },
-  "H152:3": {
+  "H152:2": {
     "es": "Adar-malik"
   },
-  "H152:4": {
+  "H152:3": {
     "es": "un dios de Sepharvaim"
   },
-  "H1520:1": {
+  "H152:4": {
     "es": "hijo parricida de Senaquerib"
   },
-  "H1521:1": {
+  "H1520:1": {
     "es": "un manantial"
   },
-  "H1521:2": {
+  "H1521:1": {
     "es": "un estallido"
   },
-  "H1521:3": {
+  "H1521:2": {
     "es": "uno de los ríos del Edén"
   },
-  "H1522:1": {
+  "H1521:3": {
     "es": "manantial de agua cerca de Jerusalén"
   },
-  "H1524:1": {
+  "H1522:1": {
     "es": "valle de visión"
+  },
+  "H1524:1": {
+    "es": "regocijo"
   },
   "H1525:1": {
     "es": "regocijo"
   },
   "H1528:1": {
-    "es": "regocijo"
-  },
-  "H1528:2": {
     "es": "tiza"
   },
-  "H153:1": {
+  "H1528:2": {
     "es": "yeso"
   },
-  "H1530:1": {
+  "H153:1": {
     "es": "fuerza"
   },
-  "H1530:2": {
+  "H1530:1": {
     "es": "montón"
+  },
+  "H1530:2": {
+    "es": "ola"
   },
   "H1530:3": {
     "es": "ola"
   },
   "H1530:4": {
-    "es": "ola"
-  },
-  "H1530:5": {
     "es": "montón"
   },
-  "H1530:6": {
+  "H1530:5": {
     "es": "olas"
   },
-  "H1530:7": {
+  "H1530:6": {
     "es": "rodillos"
   },
-  "H1531:1": {
+  "H1530:7": {
     "es": "manantial"
   },
-  "H1531:2": {
+  "H1531:1": {
     "es": "cuenca"
+  },
+  "H1531:2": {
+    "es": "tazón"
   },
   "H1531:3": {
-    "es": "tazón"
-  },
-  "H1531:4": {
     "es": "cuenca"
   },
-  "H1531:5": {
+  "H1531:4": {
     "es": "estanque"
   },
-  "H1531:6": {
+  "H1531:5": {
     "es": "pozo"
   },
-  "H1532:1": {
+  "H1531:6": {
     "es": "tazón"
   },
-  "H1533:1": {
+  "H1532:1": {
     "es": "barbero"
   },
-  "H1534:1": {
+  "H1533:1": {
     "es": "Gilboa‛"
   },
-  "H1534:2": {
+  "H1534:1": {
     "es": "rueda"
   },
-  "H1534:3": {
+  "H1534:2": {
     "es": "remolino"
   },
-  "H1536:1": {
+  "H1534:3": {
     "es": "torbellino"
   },
-  "H1537:1": {
+  "H1536:1": {
     "es": "rueda"
   },
-  "H1537:2": {
+  "H1537:1": {
     "es": "círculo"
   },
-  "H1537:3": {
+  "H1537:2": {
     "es": "lugar al E. de Jericó, donde Israel acampó"
   },
-  "H1537:4": {
+  "H1537:3": {
     "es": "lugar en la frontera entre Judá y Benjamín"
   },
-  "H1537:5": {
+  "H1537:4": {
     "es": "lugar en el N. de Israel, morada de profetas"
   },
-  "H1537:6": {
+  "H1537:5": {
     "es": "lugar en el N. de Israel cerca del Mt. Gerizim y Mt. Ebal"
   },
-  "H1538:1": {
+  "H1537:6": {
     "es": "en phr."
   },
-  "H1538:2": {
+  "H1538:1": {
     "es": "cráneo"
+  },
+  "H1538:2": {
+    "es": "cabeza"
   },
   "H1538:3": {
     "es": "cabeza"
   },
   "H1538:4": {
-    "es": "cabeza"
+    "es": "cráneo"
   },
   "H1538:5": {
-    "es": "cráneo"
+    "es": "cabeza"
   },
   "H1538:6": {
     "es": "cabeza"
   },
   "H1539:1": {
-    "es": "cabeza"
-  },
-  "H1543:1": {
     "es": "piel"
   },
-  "H1543:2": {
+  "H1543:1": {
     "es": "cuenca"
+  },
+  "H1543:2": {
+    "es": "tazón"
   },
   "H1543:3": {
-    "es": "tazón"
-  },
-  "H1543:4": {
     "es": "cuenca"
   },
-  "H1543:5": {
+  "H1543:4": {
     "es": "estanque"
   },
-  "H1543:6": {
+  "H1543:5": {
     "es": "pozo"
   },
-  "H1544:1": {
+  "H1543:6": {
     "es": "tazón"
   },
-  "H1544:2": {
+  "H1544:1": {
     "es": "ídolos"
   },
-  "H1544:3": {
+  "H1544:2": {
     "es": "troncos"
   },
-  "H1545:1": {
+  "H1544:3": {
     "es": "bloques"
   },
-  "H1545:2": {
+  "H1545:1": {
     "es": "envoltura"
   },
-  "H1546:1": {
+  "H1545:2": {
     "es": "prenda"
   },
-  "H1549:1": {
+  "H1546:1": {
     "es": "exilio"
   },
-  "H1549:2": {
+  "H1549:1": {
     "es": "mesa"
   },
-  "H155:1": {
+  "H1549:2": {
     "es": "tablilla"
   },
-  "H155:2": {
+  "H155:1": {
     "es": "gloria"
+  },
+  "H155:2": {
+    "es": "capa"
   },
   "H155:3": {
-    "es": "capa"
-  },
-  "H155:4": {
     "es": "gloria"
   },
-  "H155:5": {
+  "H155:4": {
     "es": "magnificencia"
   },
-  "H155:6": {
+  "H155:5": {
     "es": "capa"
   },
-  "H1550:1": {
+  "H155:6": {
     "es": "manto"
   },
-  "H1550:2": {
+  "H1550:1": {
     "es": "giro"
   },
-  "H1551:1": {
+  "H1550:2": {
     "es": "pliegue"
   },
-  "H1551:2": {
+  "H1551:1": {
     "es": "cilindro"
+  },
+  "H1551:2": {
+    "es": "varilla"
   },
   "H1551:3": {
-    "es": "varilla"
+    "es": "circuito"
   },
   "H1551:4": {
-    "es": "circuito"
+    "es": "distrito"
   },
   "H1551:5": {
-    "es": "distrito"
-  },
-  "H1551:6": {
     "es": "cilindro"
   },
-  "H1551:7": {
+  "H1551:6": {
     "es": "varilla"
   },
-  "H1551:8": {
+  "H1551:7": {
     "es": "circuito"
   },
-  "H1552:1": {
+  "H1551:8": {
     "es": "distrito"
   },
-  "H1552:2": {
+  "H1552:1": {
     "es": "circuito"
   },
-  "H1552:3": {
+  "H1552:2": {
     "es": "límite"
   },
-  "H1552:4": {
+  "H1552:3": {
     "es": "territorio"
   },
-  "H1553:1": {
+  "H1552:4": {
     "es": "Galilea"
   },
-  "H1553:2": {
+  "H1553:1": {
     "es": "círculos"
   },
-  "H1553:3": {
+  "H1553:2": {
     "es": "lugar en la frontera entre Benj. y Judá"
   },
-  "H1553:4": {
+  "H1553:3": {
     "es": "hacia Geliloth"
+  },
+  "H1553:4": {
+    "es": "los círculos"
   },
   "H1553:5": {
     "es": "del Jordán que está en la tierra de Canaán"
@@ -18624,10 +18645,22 @@
     "es": "amor"
   },
   "H3034:1": {
-    "es": "lanzar"
+    "es": "dar gracias"
   },
   "H3034:2": {
+    "es": "alabar"
+  },
+  "H3034:3": {
+    "es": "confesar"
+  },
+  "H3034:4": {
+    "es": "lanzar"
+  },
+  "H3034:5": {
     "es": "arrojar"
+  },
+  "H3034:6": {
+    "es": "confesar; dar gracias; reconocer."
   },
   "H3035:1": {
     "es": "un manasita"
@@ -20736,916 +20769,916 @@
     "es": "rectitud"
   },
   "H3476:6": {
-    "es": "lo que se debe"
+    "es": "rectitud"
   },
   "H3476:7": {
-    "es": "derecho"
+    "es": "lo que se debe"
   },
   "H3476:8": {
-    "es": "recto"
+    "es": "derecho"
   },
   "H3477:1": {
-    "es": "derecho"
+    "es": "recto"
   },
   "H3477:2": {
-    "es": "recto"
-  },
-  "H3477:3": {
-    "es": "nivel"
-  },
-  "H3477:4": {
     "es": "derecho"
   },
+  "H3477:3": {
+    "es": "recto"
+  },
+  "H3477:4": {
+    "es": "nivel"
+  },
   "H3477:5": {
-    "es": "agradable"
+    "es": "derecho"
   },
   "H3477:6": {
-    "es": "directo"
+    "es": "agradable"
   },
   "H3477:7": {
-    "es": "justo"
+    "es": "directo"
   },
   "H3477:8": {
-    "es": "recto"
+    "es": "justo"
   },
   "H3477:9": {
-    "es": "rectitud"
-  },
-  "H3477:10": {
-    "es": "Israel"
-  },
-  "H3478:1": {
-    "es": "El persiste"
-  },
-  "H3478:2": {
-    "es": "persevera"
-  },
-  "H3478:3": {
-    "es": "n.pr.m. segundo nombre de Jacob"
-  },
-  "H3478:4": {
-    "es": "n.pr.gent. nombre de la nación hebrea"
-  },
-  "H3478:5": {
-    "es": "Israel"
-  },
-  "H3479:1": {
-    "es": "rectitud"
-  },
-  "H3483:1": {
     "es": "recto"
   },
+  "H3477:10": {
+    "es": "rectitud"
+  },
+  "H3478:1": {
+    "es": "Israel"
+  },
+  "H3478:2": {
+    "es": "El persiste"
+  },
+  "H3478:3": {
+    "es": "persevera"
+  },
+  "H3478:4": {
+    "es": "n.pr.m. segundo nombre de Jacob"
+  },
+  "H3478:5": {
+    "es": "n.pr.gent. nombre de la nación hebrea"
+  },
+  "H3479:1": {
+    "es": "Israel"
+  },
+  "H3483:1": {
+    "es": "rectitud"
+  },
   "H3484:1": {
-    "es": "ideal"
+    "es": "recto"
   },
   "H3484:2": {
-    "es": "Isacar"
+    "es": "ideal"
   },
   "H3485:1": {
-    "es": "anciano"
+    "es": "Isacar"
   },
   "H3486:1": {
-    "es": "decadente"
+    "es": "anciano"
   },
   "H3486:2": {
-    "es": "sentar"
+    "es": "decadente"
   },
   "H3488:1": {
-    "es": "habitar"
+    "es": "sentar"
   },
   "H3488:2": {
-    "es": "clavija"
+    "es": "habitar"
   },
   "H3489:1": {
     "es": "clavija"
   },
   "H3489:2": {
-    "es": "¿Cómo?"
+    "es": "clavija"
   },
   "H349:1": {
-    "es": "¡Cómo!"
+    "es": "¿Cómo?"
   },
   "H349:2": {
-    "es": "huérfano"
+    "es": "¡Cómo!"
   },
   "H3490:1": {
-    "es": "búsqueda"
+    "es": "huérfano"
   },
   "H3491:1": {
-    "es": "preeminente"
+    "es": "búsqueda"
   },
   "H3493:1": {
-    "es": "sobresaliente"
+    "es": "preeminente"
   },
   "H3493:2": {
-    "es": "El contrata"
+    "es": "sobresaliente"
   },
   "H3496:1": {
-    "es": "resto"
+    "es": "El contrata"
   },
   "H3499:1": {
-    "es": "excelencia"
+    "es": "resto"
   },
   "H3499:2": {
-    "es": "exceso"
+    "es": "excelencia"
   },
   "H3499:3": {
-    "es": "baya de alcaparra"
+    "es": "exceso"
   },
   "H35:1": {
-    "es": "el alma pobre"
+    "es": "baya de alcaparra"
   },
   "H35:2": {
-    "es": "abundancia"
+    "es": "el alma pobre"
   },
   "H3500:1": {
-    "es": "padre de la esposa de Moisés"
+    "es": "abundancia"
   },
   "H3500:2": {
-    "es": "hijo mayor de Gedeón"
+    "es": "padre de la esposa de Moisés"
   },
   "H3500:3": {
-    "es": "padre de Amasa"
+    "es": "hijo mayor de Gedeón"
   },
   "H3500:4": {
-    "es": "hombres de Judá"
+    "es": "padre de Amasa"
   },
   "H3500:5": {
-    "es": "un hombre de Aser"
+    "es": "hombres de Judá"
   },
   "H3500:6": {
-    "es": "abundancia"
-  },
-  "H3502:1": {
-    "es": "riquezas"
-  },
-  "H3502:2": {
-    "es": "ventaja"
-  },
-  "H3504:1": {
-    "es": "beneficio"
-  },
-  "H3504:2": {
-    "es": "un edomita"
-  },
-  "H3506:1": {
     "es": "un hombre de Aser"
   },
-  "H3506:2": {
-    "es": "apéndice"
-  },
-  "H3508:1": {
-    "es": "dolor"
-  },
-  "H3511:1": {
-    "es": "pesadez"
-  },
-  "H3514:1": {
-    "es": "peso"
-  },
-  "H3514:2": {
-    "es": "masa"
-  },
-  "H3514:3": {
+  "H3502:1": {
     "es": "abundancia"
   },
-  "H3514:4": {
-    "es": "vehemencia"
-  },
-  "H3514:5": {
-    "es": "pesado"
-  },
-  "H3515:1": {
-    "es": "hígado"
-  },
-  "H3516:1": {
-    "es": "pesado"
-  },
-  "H3516:2": {
-    "es": "pesadez"
-  },
-  "H3517:1": {
-    "es": "abundancia"
-  },
-  "H3519:1": {
-    "es": "honor"
-  },
-  "H3519:2": {
-    "es": "gloria"
-  },
-  "H3519:3": {
-    "es": "abundancia"
-  },
-  "H3519:4": {
+  "H3502:2": {
     "es": "riquezas"
   },
-  "H3519:5": {
+  "H3504:1": {
+    "es": "ventaja"
+  },
+  "H3504:2": {
+    "es": "beneficio"
+  },
+  "H3506:1": {
+    "es": "un edomita"
+  },
+  "H3506:2": {
+    "es": "un hombre de Aser"
+  },
+  "H3508:1": {
+    "es": "apéndice"
+  },
+  "H3511:1": {
+    "es": "dolor"
+  },
+  "H3514:1": {
+    "es": "pesadez"
+  },
+  "H3514:2": {
+    "es": "peso"
+  },
+  "H3514:3": {
+    "es": "masa"
+  },
+  "H3514:4": {
+    "es": "abundancia"
+  },
+  "H3514:5": {
+    "es": "vehemencia"
+  },
+  "H3515:1": {
+    "es": "pesado"
+  },
+  "H3516:1": {
+    "es": "hígado"
+  },
+  "H3516:2": {
+    "es": "pesado"
+  },
+  "H3517:1": {
+    "es": "pesadez"
+  },
+  "H3519:1": {
+    "es": "abundancia"
+  },
+  "H3519:2": {
     "es": "honor"
+  },
+  "H3519:3": {
+    "es": "gloria"
+  },
+  "H3519:4": {
+    "es": "abundancia"
+  },
+  "H3519:5": {
+    "es": "riquezas"
   },
   "H3519:6": {
-    "es": "esplendor"
+    "es": "honor"
   },
   "H3519:7": {
-    "es": "gloria"
+    "es": "esplendor"
   },
   "H3519:8": {
-    "es": "honor"
+    "es": "gloria"
   },
   "H3519:9": {
-    "es": "dignidad"
+    "es": "honor"
   },
   "H3519:10": {
-    "es": "honor"
+    "es": "dignidad"
   },
   "H3519:11": {
-    "es": "reputación"
-  },
-  "H3519:12": {
-    "es": "mi honor"
-  },
-  "H3519:13": {
     "es": "honor"
   },
+  "H3519:12": {
+    "es": "reputación"
+  },
+  "H3519:13": {
+    "es": "mi honor"
+  },
   "H3519:14": {
-    "es": "reverencia"
+    "es": "honor"
   },
   "H3519:15": {
-    "es": "gloria"
+    "es": "reverencia"
   },
   "H3519:16": {
     "es": "gloria"
   },
   "H3519:17": {
-    "es": "el objeto"
+    "es": "gloria"
   },
   "H3519:18": {
-    "es": "carnero"
+    "es": "el objeto"
   },
   "H352:1": {
-    "es": "abundancia"
+    "es": "carnero"
   },
   "H3520:1": {
-    "es": "riquezas"
+    "es": "abundancia"
   },
   "H3520:2": {
-    "es": "ciudad en la frontera de Aser"
+    "es": "riquezas"
   },
   "H3521:1": {
-    "es": "distrito en Galilea conteniendo 20 ciudades dadas por Salomón a Hiram"
+    "es": "ciudad en la frontera de Aser"
   },
   "H3521:2": {
-    "es": "enredado"
+    "es": "distrito en Galilea conteniendo 20 ciudades dadas por Salomón a Hiram"
   },
   "H3523:1": {
-    "es": "red para moscas"
+    "es": "enredado"
   },
   "H3523:2": {
-    "es": "grande"
+    "es": "red para moscas"
   },
   "H3524:1": {
-    "es": "poderoso"
+    "es": "grande"
   },
   "H3524:2": {
-    "es": "mucho"
+    "es": "poderoso"
   },
   "H3524:3": {
-    "es": "grillete"
+    "es": "mucho"
   },
   "H3525:1": {
-    "es": "ya"
+    "es": "grillete"
   },
   "H3528:1": {
-    "es": "Quebar"
+    "es": "ya"
   },
   "H3529:1": {
-    "es": "ayuda"
+    "es": "Quebar"
   },
   "H353:1": {
-    "es": "distancia"
+    "es": "ayuda"
   },
   "H3530:1": {
-    "es": "distancia de tierra"
+    "es": "distancia"
   },
   "H3530:2": {
-    "es": "longitud de camino"
+    "es": "distancia de tierra"
   },
   "H3530:3": {
-    "es": "un tamiz"
+    "es": "longitud de camino"
   },
   "H3531:1": {
-    "es": "red"
+    "es": "un tamiz"
   },
   "H3531:2": {
-    "es": "cordero"
+    "es": "red"
   },
   "H3532:1": {
-    "es": "reposapiés"
+    "es": "cordero"
   },
   "H3534:1": {
-    "es": "cordera"
+    "es": "reposapiés"
   },
   "H3535:1": {
-    "es": "horno"
+    "es": "cordera"
   },
   "H3536:1": {
-    "es": "jarra"
+    "es": "horno"
   },
   "H3537:1": {
-    "es": "falso"
+    "es": "jarra"
   },
   "H3538:1": {
-    "es": "rubí"
+    "es": "falso"
   },
   "H3539:1": {
-    "es": "ciervo"
+    "es": "rubí"
   },
   "H354:1": {
     "es": "ciervo"
   },
   "H354:2": {
-    "es": "venado"
+    "es": "ciervo"
   },
   "H354:3": {
-    "es": "así"
+    "es": "venado"
   },
   "H3541:1": {
-    "es": "aquí"
-  },
-  "H3541:2": {
     "es": "así"
   },
-  "H3541:3": {
+  "H3541:2": {
     "es": "aquí"
+  },
+  "H3541:3": {
+    "es": "así"
   },
   "H3541:4": {
-    "es": "hasta ahora"
-  },
-  "H3541:5": {
     "es": "aquí"
   },
+  "H3541:5": {
+    "es": "hasta ahora"
+  },
   "H3542:1": {
-    "es": "tenue"
+    "es": "aquí"
   },
   "H3544:1": {
-    "es": "opaco"
+    "es": "tenue"
   },
   "H3544:2": {
-    "es": "débil"
+    "es": "opaco"
   },
   "H3544:3": {
-    "es": "oscurecimiento"
+    "es": "débil"
   },
   "H3545:1": {
-    "es": "disminución"
+    "es": "oscurecimiento"
   },
   "H3545:2": {
-    "es": "alivio"
+    "es": "disminución"
   },
   "H3545:3": {
-    "es": "ser capaz"
+    "es": "alivio"
   },
   "H3546:1": {
-    "es": "actuar como sacerdote"
+    "es": "ser capaz"
   },
   "H3547:1": {
-    "es": "sacerdote"
+    "es": "actuar como sacerdote"
   },
   "H3548:1": {
     "es": "sacerdote"
   },
   "H3549:1": {
-    "es": "cierva"
+    "es": "sacerdote"
   },
   "H355:1": {
-    "es": "hembra de ciervo"
+    "es": "cierva"
   },
   "H355:2": {
-    "es": "sacerdocio"
+    "es": "hembra de ciervo"
   },
   "H3550:1": {
-    "es": "ventana"
+    "es": "sacerdocio"
   },
   "H3551:1": {
-    "es": "casco"
+    "es": "ventana"
   },
   "H3553:1": {
-    "es": "estrella"
+    "es": "casco"
   },
   "H3556:1": {
-    "es": "pastel"
+    "es": "estrella"
   },
   "H3561:1": {
-    "es": "pastel sacrificial"
+    "es": "pastel"
   },
   "H3561:2": {
-    "es": "taza"
+    "es": "pastel sacrificial"
   },
   "H3563:1": {
-    "es": "crisol"
+    "es": "taza"
   },
   "H3564:1": {
-    "es": "horno"
+    "es": "crisol"
   },
   "H3564:2": {
-    "es": "Ciro"
+    "es": "horno"
   },
   "H3566:1": {
     "es": "Ciro"
   },
   "H3567:1": {
-    "es": "primer 'hijo' de Cam"
+    "es": "Ciro"
   },
   "H3568:1": {
-    "es": "tierra y pueblo del valle sur del Nilo, o Alto Egipto, extendiéndose desde Siene indefinidamente hacia el sur"
+    "es": "primer 'hijo' de Cam"
   },
   "H3568:2": {
-    "es": "כּוּשׁ es error por כַּשׁ = babilonio Kaššu"
+    "es": "tierra y pueblo del valle sur del Nilo, o Alto Egipto, extendiéndose desde Siene indefinidamente hacia el sur"
   },
   "H3568:3": {
-    "es": "sg. concordando con sustantivo"
+    "es": "כּוּשׁ es error por כַּשׁ = babilonio Kaššu"
   },
   "H3569:1": {
-    "es": "un cusita"
+    "es": "sg. concordando con sustantivo"
   },
   "H3569:2": {
-    "es": "el cusita"
+    "es": "un cusita"
   },
   "H3569:3": {
-    "es": "pl. = sust."
+    "es": "el cusita"
   },
   "H3569:4": {
-    "es": "Ciervo"
+    "es": "pl. = sust."
   },
   "H357:1": {
-    "es": "Ajalón"
+    "es": "Ciervo"
   },
   "H357:2": {
-    "es": "ciudad en Dan"
+    "es": "Ajalón"
   },
   "H357:3": {
-    "es": "ciudad en Zabulón"
+    "es": "ciudad en Dan"
   },
   "H357:4": {
-    "es": "bisabuelo de יְהוּדִי"
+    "es": "ciudad en Zabulón"
   },
   "H3570:1": {
-    "es": "padre del profeta Sofonías"
+    "es": "bisabuelo de יְהוּדִי"
   },
   "H3570:2": {
-    "es": "prosperidad"
+    "es": "padre del profeta Sofonías"
   },
   "H3574:1": {
-    "es": "mentira"
+    "es": "prosperidad"
   },
   "H3577:1": {
-    "es": "falsedad"
-  },
-  "H3577:2": {
-    "es": "cosa engañosa"
-  },
-  "H3577:3": {
-    "es": "camaleón"
-  },
-  "H3581:1": {
     "es": "mentira"
   },
+  "H3577:2": {
+    "es": "falsedad"
+  },
+  "H3577:3": {
+    "es": "cosa engañosa"
+  },
+  "H3581:1": {
+    "es": "camaleón"
+  },
   "H3585:1": {
-    "es": "delgadez"
+    "es": "mentira"
   },
   "H3585:2": {
-    "es": "engañoso"
+    "es": "delgadez"
   },
   "H3586:1": {
-    "es": "falso"
+    "es": "engañoso"
   },
   "H3586:2": {
-    "es": "quemadura"
+    "es": "falso"
   },
   "H3587:1": {
-    "es": "marca"
+    "es": "quemadura"
   },
   "H3587:2": {
-    "es": "eso"
+    "es": "marca"
   },
   "H3588:1": {
-    "es": "cuando"
-  },
-  "H3588:2": {
     "es": "eso"
   },
-  "H3588:3": {
+  "H3588:2": {
     "es": "cuando"
+  },
+  "H3588:3": {
+    "es": "eso"
   },
   "H3588:4": {
-    "es": "si"
-  },
-  "H3588:5": {
     "es": "cuando"
   },
-  "H3588:6": {
+  "H3588:5": {
     "es": "si"
   },
+  "H3588:6": {
+    "es": "cuando"
+  },
   "H3588:7": {
-    "es": "aunque"
+    "es": "si"
   },
   "H3588:8": {
-    "es": "Porque"
+    "es": "aunque"
   },
   "H3588:9": {
-    "es": "ya que"
+    "es": "Porque"
   },
   "H3588:10": {
-    "es": "su desgracia"
+    "es": "ya que"
   },
   "H3589:1": {
-    "es": "arboleda de árboles altos"
+    "es": "su desgracia"
   },
   "H359:1": {
-    "es": "chispa"
+    "es": "arboleda de árboles altos"
   },
   "H3590:1": {
-    "es": "dardo"
+    "es": "chispa"
   },
   "H3591:1": {
-    "es": "jabalina"
+    "es": "dardo"
   },
   "H3591:2": {
-    "es": "ataque"
+    "es": "jabalina"
   },
   "H3593:1": {
-    "es": "establecido"
+    "es": "ataque"
   },
   "H3594:1": {
-    "es": "firme"
+    "es": "establecido"
   },
   "H3594:2": {
-    "es": "olla"
+    "es": "firme"
   },
   "H3595:1": {
-    "es": "cuenca"
-  },
-  "H3595:2": {
     "es": "olla"
   },
-  "H3595:3": {
-    "es": "olla de fuego"
-  },
-  "H3595:4": {
+  "H3595:2": {
     "es": "cuenca"
   },
+  "H3595:3": {
+    "es": "olla"
+  },
+  "H3595:4": {
+    "es": "olla de fuego"
+  },
   "H3595:5": {
-    "es": "lavabo"
+    "es": "cuenca"
   },
   "H3595:6": {
-    "es": "plataforma"
+    "es": "lavabo"
   },
   "H3595:7": {
-    "es": "escenario"
+    "es": "plataforma"
   },
   "H3595:8": {
-    "es": "bribón"
+    "es": "escenario"
   },
   "H3596:1": {
-    "es": "Pléyades"
+    "es": "bribón"
   },
   "H3598:1": {
-    "es": "bolsa"
+    "es": "Pléyades"
   },
   "H3599:1": {
     "es": "bolsa"
   },
   "H3599:2": {
-    "es": "de su bolsa"
+    "es": "bolsa"
   },
   "H3599:3": {
-    "es": "pesos (v. אֶבֶן 5) Dt 25:13 Mi 6:11 Pr 16:11;"
+    "es": "de su bolsa"
   },
   "H3599:4": {
-    "es": "una bolsa"
+    "es": "pesos (v. אֶבֶן 5) Dt 25:13 Mi 6:11 Pr 16:11;"
   },
   "H3599:5": {
-    "es": "mi padre es bondad"
+    "es": "una bolsa"
   },
   "H36:1": {
-    "es": "horno de cocina"
+    "es": "mi padre es bondad"
   },
   "H3600:1": {
-    "es": "rueca"
+    "es": "horno de cocina"
   },
   "H3601:1": {
-    "es": "así"
+    "es": "rueca"
   },
   "H3602:1": {
-    "es": "un círculo"
+    "es": "así"
   },
   "H3603:1": {
-    "es": "un distrito redondo"
+    "es": "un círculo"
   },
   "H3603:2": {
-    "es": "un pan redondo"
+    "es": "un distrito redondo"
   },
   "H3603:3": {
-    "es": "un peso redondo"
+    "es": "un pan redondo"
   },
   "H3603:4": {
-    "es": "talento"
+    "es": "un peso redondo"
   },
   "H3603:5": {
     "es": "talento"
   },
   "H3604:1": {
-    "es": "el todo"
+    "es": "talento"
   },
   "H3605:1": {
-    "es": "todo"
-  },
-  "H3605:2": {
-    "es": "el todo de"
-  },
-  "H3605:3": {
-    "es": "cualquiera"
-  },
-  "H3605:4": {
-    "es": "cada"
-  },
-  "H3605:5": {
-    "es": "todas las cosas"
-  },
-  "H3605:6": {
-    "es": "todo"
-  },
-  "H3605:7": {
-    "es": "donde el sentido está limitado por el contexto a cosas (o personas) recién mencionadas"
-  },
-  "H3605:8": {
-    "es": "todo"
-  },
-  "H3605:9": {
     "es": "el todo"
   },
-  "H3606:1": {
+  "H3605:2": {
     "es": "todo"
   },
+  "H3605:3": {
+    "es": "el todo de"
+  },
+  "H3605:4": {
+    "es": "cualquiera"
+  },
+  "H3605:5": {
+    "es": "cada"
+  },
+  "H3605:6": {
+    "es": "todas las cosas"
+  },
+  "H3605:7": {
+    "es": "todo"
+  },
+  "H3605:8": {
+    "es": "donde el sentido está limitado por el contexto a cosas (o personas) recién mencionadas"
+  },
+  "H3605:9": {
+    "es": "todo"
+  },
+  "H3606:1": {
+    "es": "el todo"
+  },
   "H3606:2": {
-    "es": "confinamiento"
+    "es": "todo"
   },
   "H3608:1": {
-    "es": "restricción"
+    "es": "confinamiento"
   },
   "H3608:2": {
-    "es": "encarcelamiento"
+    "es": "restricción"
   },
   "H3608:3": {
-    "es": "prisión"
+    "es": "encarcelamiento"
   },
   "H3608:4": {
-    "es": "vestiduras de imprisonment"
+    "es": "prisión"
   },
   "H3608:5": {
-    "es": "pórtico"
+    "es": "vestiduras de imprisonment"
   },
   "H361:1": {
-    "es": "dos clases"
+    "es": "pórtico"
   },
   "H3610:1": {
-    "es": "ambos"
+    "es": "dos clases"
   },
   "H3610:2": {
-    "es": "dos"
+    "es": "ambos"
   },
   "H3610:3": {
-    "es": "reservorios"
+    "es": "dos"
   },
   "H3610:4": {
-    "es": "no hagas que tu ganado se reproduzca"
+    "es": "reservorios"
   },
   "H3610:5": {
-    "es": "perro"
+    "es": "no hagas que tu ganado se reproduzca"
   },
   "H3611:1": {
-    "es": "mis perros pastores"
+    "es": "perro"
   },
   "H3611:2": {
-    "es": "un perro muerto"
+    "es": "mis perros pastores"
   },
   "H3611:3": {
-    "es": "fallando"
+    "es": "un perro muerto"
   },
   "H3616:1": {
-    "es": "completación"
-  },
-  "H3617:1": {
-    "es": "destrucción completa"
-  },
-  "H3617:2": {
-    "es": "consunción"
-  },
-  "H3617:3": {
-    "es": "aniquilación"
-  },
-  "H3617:4": {
-    "es": "nuera"
-  },
-  "H3618:1": {
-    "es": "novia"
-  },
-  "H3618:2": {
-    "es": "cesta"
-  },
-  "H3619:1": {
-    "es": "jaula"
-  },
-  "H3619:2": {
-    "es": "un nombre en Judá"
-  },
-  "H3620:1": {
-    "es": "padre de uno de los oficiales de David"
-  },
-  "H3620:2": {
-    "es": "desposorio"
-  },
-  "H3623:1": {
-    "es": "firme"
-  },
-  "H3624:1": {
-    "es": "fuerza rugosa"
-  },
-  "H3624:2": {
-    "es": "padre de uno de los constructores, Salún"
-  },
-  "H3626:1": {
-    "es": "un nombre en Judá"
-  },
-  "H3626:2": {
-    "es": "artículo"
-  },
-  "H3627:1": {
-    "es": "utensilio"
-  },
-  "H3627:2": {
-    "es": "vasija"
-  },
-  "H3627:3": {
-    "es": "riñones"
-  },
-  "H3629:1": {
-    "es": "árbol"
-  },
-  "H363:1": {
     "es": "fallando"
   },
-  "H3631:1": {
-    "es": "debilitamiento"
+  "H3617:1": {
+    "es": "completación"
   },
-  "H3631:2": {
+  "H3617:2": {
+    "es": "destrucción completa"
+  },
+  "H3617:3": {
+    "es": "consunción"
+  },
+  "H3617:4": {
     "es": "aniquilación"
   },
+  "H3618:1": {
+    "es": "nuera"
+  },
+  "H3618:2": {
+    "es": "novia"
+  },
+  "H3619:1": {
+    "es": "cesta"
+  },
+  "H3619:2": {
+    "es": "jaula"
+  },
+  "H3620:1": {
+    "es": "un nombre en Judá"
+  },
+  "H3620:2": {
+    "es": "padre de uno de los oficiales de David"
+  },
+  "H3623:1": {
+    "es": "desposorio"
+  },
+  "H3624:1": {
+    "es": "firme"
+  },
+  "H3624:2": {
+    "es": "fuerza rugosa"
+  },
+  "H3626:1": {
+    "es": "padre de uno de los constructores, Salún"
+  },
+  "H3626:2": {
+    "es": "un nombre en Judá"
+  },
+  "H3627:1": {
+    "es": "artículo"
+  },
+  "H3627:2": {
+    "es": "utensilio"
+  },
+  "H3627:3": {
+    "es": "vasija"
+  },
+  "H3629:1": {
+    "es": "riñones"
+  },
+  "H363:1": {
+    "es": "árbol"
+  },
+  "H3631:1": {
+    "es": "fallando"
+  },
+  "H3631:2": {
+    "es": "debilitamiento"
+  },
   "H3631:3": {
-    "es": "entero"
+    "es": "aniquilación"
   },
   "H3632:1": {
-    "es": "completo"
+    "es": "entero"
   },
   "H3632:2": {
-    "es": "holocausto"
-  },
-  "H3632:3": {
     "es": "completo"
   },
+  "H3632:3": {
+    "es": "holocausto"
+  },
   "H3635:1": {
-    "es": "insulto"
+    "es": "completo"
   },
   "H3639:1": {
-    "es": "reproche"
+    "es": "insulto"
   },
   "H3639:2": {
-    "es": "ignominia"
+    "es": "reproche"
   },
   "H3639:3": {
-    "es": "terebinto de Parán"
-  },
-  "H364:1": {
     "es": "ignominia"
   },
+  "H364:1": {
+    "es": "terebinto de Parán"
+  },
   "H3640:1": {
-    "es": "asistente de David"
+    "es": "ignominia"
   },
   "H3643:1": {
-    "es": "en n.loc."
+    "es": "asistente de David"
   },
   "H3643:2": {
-    "es": "como"
+    "es": "en n.loc."
   },
   "H3644:1": {
-    "es": "cuando"
+    "es": "como"
   },
   "H3644:2": {
-    "es": "lo similar a qué"
+    "es": "cuando"
   },
   "H3644:3": {
-    "es": "Quemos"
+    "es": "lo similar a qué"
   },
   "H3645:1": {
-    "es": "comino"
+    "es": "Quemos"
   },
   "H3646:1": {
-    "es": "ídolo-"
+    "es": "comino"
   },
   "H3649:1": {
-    "es": "sacerdote"
+    "es": "ídolo-"
   },
   "H3649:2": {
-    "es": "oscuridad"
+    "es": "sacerdote"
   },
   "H3650:1": {
-    "es": "sombrío"
+    "es": "oscuridad"
   },
   "H3650:2": {
-    "es": "derecho"
+    "es": "sombrío"
   },
   "H3651:1": {
     "es": "derecho"
   },
   "H3651:2": {
-    "es": "verídico"
+    "es": "derecho"
   },
   "H3651:3": {
-    "es": "verdadero"
+    "es": "verídico"
   },
   "H3651:4": {
-    "es": "honesto"
+    "es": "verdadero"
   },
   "H3651:5": {
-    "es": "así"
+    "es": "honesto"
   },
   "H3651:6": {
     "es": "así"
   },
   "H3652:1": {
-    "es": "como sigue"
+    "es": "así"
   },
   "H3652:2": {
-    "es": "base"
-  },
-  "H3653:1": {
-    "es": "pedestal"
-  },
-  "H3653:2": {
-    "es": "oficio"
-  },
-  "H3653:3": {
-    "es": "mosquito"
-  },
-  "H3654:1": {
-    "es": "mosquitos"
-  },
-  "H3654:2": {
-    "es": "enjambre de mosquitos"
-  },
-  "H3654:3": {
-    "es": "piojos"
-  },
-  "H3654:4": {
-    "es": "soporte"
-  },
-  "H3657:1": {
-    "es": "raíz"
-  },
-  "H3657:2": {
-    "es": "tronco"
-  },
-  "H3657:3": {
-    "es": "lira"
-  },
-  "H3658:1": {
-    "es": "terrible"
-  },
-  "H366:1": {
-    "es": "espantoso"
-  },
-  "H366:2": {
-    "es": "por consiguiente"
-  },
-  "H3660:1": {
     "es": "como sigue"
   },
+  "H3653:1": {
+    "es": "base"
+  },
+  "H3653:2": {
+    "es": "pedestal"
+  },
+  "H3653:3": {
+    "es": "oficio"
+  },
+  "H3654:1": {
+    "es": "mosquito"
+  },
+  "H3654:2": {
+    "es": "mosquitos"
+  },
+  "H3654:3": {
+    "es": "enjambre de mosquitos"
+  },
+  "H3654:4": {
+    "es": "piojos"
+  },
+  "H3657:1": {
+    "es": "soporte"
+  },
+  "H3657:2": {
+    "es": "raíz"
+  },
+  "H3657:3": {
+    "es": "tronco"
+  },
+  "H3658:1": {
+    "es": "lira"
+  },
+  "H366:1": {
+    "es": "terrible"
+  },
+  "H366:2": {
+    "es": "espantoso"
+  },
+  "H3660:1": {
+    "es": "por consiguiente"
+  },
   "H3660:2": {
-    "es": "es firme"
+    "es": "como sigue"
   },
   "H3663:1": {
-    "es": "un levita = כְּנַנְיָה"
+    "es": "es firme"
   },
   "H3663:2": {
-    "es": "un izarita"
+    "es": "un levita = כְּנַנְיָה"
   },
   "H3663:3": {
-    "es": "fardo"
+    "es": "un izarita"
   },
   "H3666:1": {
-    "es": "paquete"
+    "es": "fardo"
   },
   "H3666:2": {
-    "es": "Canaán"
+    "es": "paquete"
   },
   "H3667:1": {
     "es": "Canaán"
@@ -23964,379 +23997,379 @@
     "es": "hacia"
   },
   "H413:4": {
-    "es": "hacia"
+    "es": "hacia adentro"
   },
   "H413:5": {
-    "es": "contra"
-  },
-  "H413:6": {
     "es": "hacia"
   },
-  "H413:7": {
-    "es": "además de"
-  },
-  "H413:8": {
-    "es": "con respecto a"
-  },
-  "H413:9": {
-    "es": "concerniente"
-  },
-  "H413:10": {
-    "es": "a causa de"
-  },
-  "H413:11": {
-    "es": "según"
-  },
-  "H413:12": {
+  "H413:6": {
     "es": "contra"
   },
+  "H413:7": {
+    "es": "hacia"
+  },
+  "H413:8": {
+    "es": "además de"
+  },
+  "H413:9": {
+    "es": "con respecto a"
+  },
+  "H413:10": {
+    "es": "concerniente"
+  },
+  "H413:11": {
+    "es": "a causa de"
+  },
+  "H413:12": {
+    "es": "según"
+  },
   "H413:13": {
-    "es": "movimiento"
+    "es": "contra"
   },
   "H413:14": {
-    "es": "dirección hacia"
+    "es": "movimiento"
   },
   "H413:15": {
-    "es": "sacudida"
+    "es": "dirección hacia"
   },
   "H4132:1": {
-    "es": "poste"
+    "es": "sacudida"
   },
   "H4132:2": {
-    "es": "barra"
-  },
-  "H4132:3": {
-    "es": "una sacudida"
-  },
-  "H4132:4": {
-    "es": "tambaleo"
-  },
-  "H4132:5": {
     "es": "poste"
   },
-  "H4132:6": {
+  "H4132:3": {
     "es": "barra"
+  },
+  "H4132:4": {
+    "es": "una sacudida"
+  },
+  "H4132:5": {
+    "es": "tambaleo"
+  },
+  "H4132:6": {
+    "es": "poste"
   },
   "H4132:7": {
     "es": "barra"
   },
   "H4132:8": {
-    "es": "poste"
-  },
-  "H4133:1": {
     "es": "barra"
   },
+  "H4133:1": {
+    "es": "poste"
+  },
   "H4133:2": {
-    "es": "frente"
+    "es": "barra"
   },
   "H4136:1": {
-    "es": "frente a"
+    "es": "frente"
   },
   "H4136:2": {
-    "es": "parentesco"
+    "es": "frente a"
   },
   "H4138:1": {
-    "es": "nacimiento"
+    "es": "parentesco"
   },
   "H4138:2": {
-    "es": "descendencia"
+    "es": "nacimiento"
   },
   "H4138:3": {
-    "es": "circuncisión"
+    "es": "descendencia"
   },
   "H4139:1": {
-    "es": "rodeando"
+    "es": "circuncisión"
   },
   "H4141:1": {
-    "es": "circundante"
+    "es": "rodeando"
   },
   "H4141:2": {
-    "es": "fundamento"
+    "es": "circundante"
   },
   "H4143:1": {
-    "es": "colocación de fundamento"
+    "es": "fundamento"
   },
   "H4143:2": {
-    "es": "fundamento"
+    "es": "colocación de fundamento"
   },
   "H4144:1": {
     "es": "fundamento"
   },
   "H4145:1": {
-    "es": "cita"
+    "es": "fundamento"
   },
   "H4145:2": {
-    "es": "vara de cita"
+    "es": "cita"
   },
   "H4145:3": {
-    "es": "fundamentos"
+    "es": "vara de cita"
   },
   "H4145:4": {
-    "es": "fundado"
+    "es": "fundamentos"
   },
   "H4145:5": {
-    "es": "provisto de fundamentos"
+    "es": "fundado"
   },
   "H4145:6": {
-    "es": "banda"
+    "es": "provisto de fundamentos"
   },
   "H4147:1": {
-    "es": "vínculo"
+    "es": "banda"
   },
   "H4147:2": {
-    "es": "disciplina"
+    "es": "vínculo"
   },
   "H4148:1": {
-    "es": "castigo"
+    "es": "disciplina"
   },
   "H4148:2": {
-    "es": "corrección"
+    "es": "castigo"
   },
   "H4148:3": {
-    "es": "tiempo designado"
+    "es": "corrección"
   },
   "H4150:1": {
-    "es": "lugar"
-  },
-  "H4150:2": {
-    "es": "reunión"
-  },
-  "H4150:3": {
     "es": "tiempo designado"
   },
-  "H4150:4": {
-    "es": "reunión designada"
-  },
-  "H4150:5": {
-    "es": "lugar designado"
-  },
-  "H4150:6": {
-    "es": "señal designada"
-  },
-  "H4150:7": {
-    "es": "señal"
-  },
-  "H4150:8": {
-    "es": "tienda de reunión"
-  },
-  "H4150:9": {
-    "es": "lugar designado"
-  },
-  "H4151:1": {
-    "es": "ciudades designadas"
-  },
-  "H4152:1": {
-    "es": "tinieblas"
-  },
-  "H4155:1": {
-    "es": "consejo"
-  },
-  "H4156:1": {
-    "es": "plan"
-  },
-  "H4156:2": {
-    "es": "principio"
-  },
-  "H4156:3": {
-    "es": "artificio"
-  },
-  "H4156:4": {
-    "es": "compresión"
-  },
-  "H4157:1": {
-    "es": "angustia"
-  },
-  "H4157:2": {
-    "es": "maravilla"
-  },
-  "H4159:1": {
-    "es": "señal"
-  },
-  "H4159:2": {
-    "es": "portento"
-  },
-  "H4159:3": {
-    "es": "maravilla"
-  },
-  "H4159:4": {
-    "es": "señal"
-  },
-  "H4159:5": {
-    "es": "prueba"
-  },
-  "H4159:6": {
+  "H4150:2": {
     "es": "lugar"
   },
-  "H4161:1": {
-    "es": "acto de salir"
+  "H4150:3": {
+    "es": "reunión"
   },
-  "H4161:2": {
-    "es": "emisión"
+  "H4150:4": {
+    "es": "tiempo designado"
   },
-  "H4161:3": {
-    "es": "exportación"
+  "H4150:5": {
+    "es": "reunión designada"
   },
-  "H4161:4": {
-    "es": "fuente"
+  "H4150:6": {
+    "es": "lugar designado"
   },
-  "H4161:5": {
-    "es": "manantial"
+  "H4150:7": {
+    "es": "señal designada"
   },
-  "H4161:6": {
-    "es": "hijo de Caleb por Efa su concubina"
+  "H4150:8": {
+    "es": "señal"
   },
-  "H4162:1": {
-    "es": "un descendiente de Saúl"
+  "H4150:9": {
+    "es": "tienda de reunión"
   },
-  "H4162:2": {
-    "es": "su origen"
+  "H4151:1": {
+    "es": "lugar designado"
   },
-  "H4163:1": {
-    "es": "lugar de salida hacia"
+  "H4152:1": {
+    "es": "ciudades designadas"
   },
-  "H4163:2": {
-    "es": "un retrete"
+  "H4155:1": {
+    "es": "tinieblas"
   },
-  "H4163:3": {
-    "es": "restricción"
+  "H4156:1": {
+    "es": "consejo"
   },
-  "H4164:1": {
+  "H4156:2": {
+    "es": "plan"
+  },
+  "H4156:3": {
+    "es": "principio"
+  },
+  "H4156:4": {
+    "es": "artificio"
+  },
+  "H4157:1": {
+    "es": "compresión"
+  },
+  "H4157:2": {
     "es": "angustia"
   },
+  "H4159:1": {
+    "es": "maravilla"
+  },
+  "H4159:2": {
+    "es": "señal"
+  },
+  "H4159:3": {
+    "es": "portento"
+  },
+  "H4159:4": {
+    "es": "maravilla"
+  },
+  "H4159:5": {
+    "es": "señal"
+  },
+  "H4159:6": {
+    "es": "prueba"
+  },
+  "H4161:1": {
+    "es": "lugar"
+  },
+  "H4161:2": {
+    "es": "acto de salir"
+  },
+  "H4161:3": {
+    "es": "emisión"
+  },
+  "H4161:4": {
+    "es": "exportación"
+  },
+  "H4161:5": {
+    "es": "fuente"
+  },
+  "H4161:6": {
+    "es": "manantial"
+  },
+  "H4162:1": {
+    "es": "hijo de Caleb por Efa su concubina"
+  },
+  "H4162:2": {
+    "es": "un descendiente de Saúl"
+  },
+  "H4163:1": {
+    "es": "su origen"
+  },
+  "H4163:2": {
+    "es": "lugar de salida hacia"
+  },
+  "H4163:3": {
+    "es": "un retrete"
+  },
+  "H4164:1": {
+    "es": "restricción"
+  },
   "H4164:2": {
-    "es": "un lanzamiento"
+    "es": "angustia"
   },
   "H4165:1": {
-    "es": "masa ardiente"
+    "es": "un lanzamiento"
   },
   "H4168:1": {
-    "es": "hogar"
+    "es": "masa ardiente"
   },
   "H4169:1": {
-    "es": "lugar de quema"
+    "es": "hogar"
   },
   "H4169:2": {
-    "es": "hogar del altar"
+    "es": "lugar de quema"
   },
   "H4169:3": {
-    "es": "granizo"
+    "es": "hogar del altar"
   },
   "H417:1": {
-    "es": "un cebo"
+    "es": "granizo"
   },
   "H4170:1": {
-    "es": "señuelo"
+    "es": "un cebo"
   },
   "H4170:2": {
-    "es": "una trampa"
+    "es": "señuelo"
   },
   "H4170:3": {
-    "es": "miedo"
+    "es": "una trampa"
   },
   "H4172:1": {
     "es": "miedo"
   },
   "H4172:2": {
-    "es": "terror"
+    "es": "miedo"
   },
   "H4172:3": {
-    "es": "reverencia"
+    "es": "terror"
   },
   "H4172:4": {
-    "es": "objeto de reverencia"
+    "es": "reverencia"
   },
   "H4172:5": {
-    "es": "espectáculo inspirador de awe"
+    "es": "objeto de reverencia"
   },
   "H4172:6": {
-    "es": "hecho"
+    "es": "espectáculo inspirador de awe"
   },
   "H4172:7": {
-    "es": "trillo"
+    "es": "hecho"
   },
   "H4173:1": {
-    "es": "descenso"
+    "es": "trillo"
   },
   "H4174:1": {
-    "es": "pendiente"
+    "es": "descenso"
   },
   "H4174:2": {
-    "es": "lluvia"
+    "es": "pendiente"
   },
   "H4175:1": {
-    "es": "maestro"
+    "es": "lluvia"
   },
   "H4176:1": {
-    "es": "navaja"
+    "es": "maestro"
   },
   "H4177:1": {
-    "es": "sándalo"
+    "es": "navaja"
   },
   "H418:1": {
-    "es": "una posesión"
+    "es": "sándalo"
   },
   "H4180:1": {
     "es": "una posesión"
   },
   "H4181:1": {
-    "es": "asiento"
+    "es": "una posesión"
   },
   "H4186:1": {
-    "es": "asamblea"
-  },
-  "H4186:2": {
-    "es": "lugar de morada"
-  },
-  "H4186:3": {
-    "es": "morada"
-  },
-  "H4186:4": {
-    "es": "moradores"
-  },
-  "H4186:5": {
     "es": "asiento"
   },
-  "H4186:6": {
-    "es": "sentado"
-  },
-  "H4186:7": {
-    "es": "los sentados"
-  },
-  "H4186:8": {
-    "es": "compañía sentada"
-  },
-  "H4186:9": {
+  "H4186:2": {
     "es": "asamblea"
   },
-  "H4186:10": {
+  "H4186:3": {
     "es": "lugar de morada"
   },
-  "H4186:11": {
+  "H4186:4": {
     "es": "morada"
   },
+  "H4186:5": {
+    "es": "moradores"
+  },
+  "H4186:6": {
+    "es": "asiento"
+  },
+  "H4186:7": {
+    "es": "sentado"
+  },
+  "H4186:8": {
+    "es": "los sentados"
+  },
+  "H4186:9": {
+    "es": "compañía sentada"
+  },
+  "H4186:10": {
+    "es": "asamblea"
+  },
+  "H4186:11": {
+    "es": "lugar de morada"
+  },
   "H4186:12": {
-    "es": "= casa"
+    "es": "morada"
   },
   "H4186:13": {
-    "es": "situación"
+    "es": "= casa"
   },
   "H4186:14": {
-    "es": "ubicación"
+    "es": "situación"
   },
   "H4186:15": {
-    "es": "tiempo de morada"
+    "es": "ubicación"
   },
   "H4186:16": {
-    "es": "los que moran"
+    "es": "tiempo de morada"
   },
   "H4186:17": {
-    "es": "Dios ha amado"
+    "es": "los que moran"
   },
   "H419:1": {
-    "es": "actos salvadores"
+    "es": "Dios ha amado"
   },
   "H4190:1": {
-    "es": "muerte"
+    "es": "actos salvadores"
   },
   "H4193:1": {
     "es": "muerte"
@@ -24345,163 +24378,163 @@
     "es": "muerte"
   },
   "H4194:2": {
-    "es": "muerte por violencia"
+    "es": "muerte"
   },
   "H4194:3": {
-    "es": "estado de muerte"
+    "es": "muerte por violencia"
   },
   "H4194:4": {
-    "es": "lugar de muerte"
+    "es": "estado de muerte"
   },
   "H4194:5": {
-    "es": "abundancia"
+    "es": "lugar de muerte"
   },
   "H4195:1": {
-    "es": "preeminencia"
+    "es": "abundancia"
   },
   "H4195:2": {
-    "es": "altar"
+    "es": "preeminencia"
   },
   "H4196:1": {
-    "es": "mezcla"
+    "es": "altar"
   },
   "H4197:1": {
-    "es": "succionado"
+    "es": "mezcla"
   },
   "H4198:1": {
-    "es": "vacío"
+    "es": "succionado"
   },
   "H4198:2": {
-    "es": "mi padre es deleite"
+    "es": "vacío"
   },
   "H42:1": {
-    "es": "Dios ha llamado"
+    "es": "mi padre es deleite"
   },
   "H420:1": {
-    "es": "granero"
+    "es": "Dios ha llamado"
   },
   "H4200:1": {
-    "es": "poste de puerta"
+    "es": "granero"
   },
   "H4201:1": {
     "es": "poste de puerta"
   },
   "H4201:2": {
-    "es": "alimento"
+    "es": "poste de puerta"
   },
   "H4202:1": {
-    "es": "sustento"
-  },
-  "H4202:2": {
     "es": "alimento"
   },
+  "H4202:2": {
+    "es": "sustento"
+  },
   "H4203:1": {
-    "es": "red"
+    "es": "alimento"
   },
   "H4204:1": {
-    "es": "extendido"
+    "es": "red"
   },
   "H4204:2": {
-    "es": "herida"
+    "es": "extendido"
   },
   "H4205:1": {
-    "es": "exprimido"
+    "es": "herida"
   },
   "H4205:2": {
-    "es": "propósito"
+    "es": "exprimido"
   },
   "H4209:1": {
-    "es": "discreción"
+    "es": "propósito"
   },
   "H4209:2": {
-    "es": "artificio"
+    "es": "discreción"
   },
   "H4209:3": {
-    "es": "melodía"
+    "es": "artificio"
   },
   "H4210:1": {
-    "es": "cuchillo de poda"
+    "es": "melodía"
   },
   "H4211:1": {
-    "es": "un poco"
+    "es": "cuchillo de poda"
   },
   "H4213:1": {
-    "es": "una bagatela"
+    "es": "un poco"
   },
   "H4213:2": {
-    "es": "unos pocos"
+    "es": "una bagatela"
   },
   "H4213:3": {
-    "es": "horquilla para heno"
+    "es": "unos pocos"
   },
   "H4214:1": {
-    "es": "lugar de salida del sol"
+    "es": "horquilla para heno"
   },
   "H4217:1": {
-    "es": "este"
+    "es": "lugar de salida del sol"
   },
   "H4217:2": {
-    "es": "lugar de siembra"
+    "es": "este"
   },
   "H4218:1": {
-    "es": "tierra de semilla"
+    "es": "lugar de siembra"
   },
   "H4218:2": {
-    "es": "cuenco"
+    "es": "tierra de semilla"
   },
   "H4219:1": {
-    "es": "lavabo"
+    "es": "cuenco"
   },
   "H4219:2": {
-    "es": "lanzamiento"
+    "es": "lavabo"
   },
   "H4219:3": {
     "es": "lanzamiento"
   },
   "H4219:4": {
-    "es": "cebado"
+    "es": "lanzamiento"
   },
   "H4220:1": {
-    "es": "médula"
+    "es": "cebado"
   },
   "H4221:1": {
-    "es": "golpear"
+    "es": "médula"
   },
   "H4223:1": {
-    "es": "escondite"
+    "es": "golpear"
   },
   "H4224:1": {
-    "es": "cosa unida"
+    "es": "escondite"
   },
   "H4225:1": {
-    "es": "lugar de unión"
+    "es": "cosa unida"
   },
   "H4225:2": {
-    "es": "atador"
+    "es": "lugar de unión"
   },
   "H4226:1": {
-    "es": "abrazadera"
+    "es": "atador"
   },
   "H4226:2": {
-    "es": "unión"
+    "es": "abrazadera"
   },
   "H4226:3": {
-    "es": "placa plana"
+    "es": "unión"
   },
   "H4227:1": {
-    "es": "sartén"
+    "es": "placa plana"
   },
   "H4227:2": {
-    "es": "plancha"
+    "es": "sartén"
   },
   "H4227:3": {
-    "es": "ceñido"
+    "es": "plancha"
   },
   "H4228:1": {
-    "es": "cinturón"
+    "es": "ceñido"
   },
   "H4228:2": {
-    "es": "juramento"
+    "es": "cinturón"
   },
   "H423:1": {
     "es": "juramento"
@@ -24510,142 +24543,142 @@
     "es": "juramento"
   },
   "H423:3": {
-    "es": "maldición"
+    "es": "juramento"
   },
   "H423:4": {
-    "es": "execración"
+    "es": "maldición"
   },
   "H423:5": {
-    "es": "instrumento circular"
+    "es": "execración"
   },
   "H4230:1": {
-    "es": "compás"
+    "es": "instrumento circular"
   },
   "H4230:2": {
-    "es": "ciudad"
+    "es": "compás"
   },
   "H4231:1": {
-    "es": "danza"
+    "es": "ciudad"
   },
   "H4234:1": {
-    "es": "visión"
+    "es": "danza"
   },
   "H4236:1": {
-    "es": "luz"
+    "es": "visión"
   },
   "H4237:1": {
-    "es": "lugar de ver"
+    "es": "luz"
   },
   "H4237:2": {
-    "es": "ventana"
+    "es": "lugar de ver"
   },
   "H4237:3": {
-    "es": "el golpe de su ariete"
+    "es": "ventana"
   },
   "H4239:1": {
-    "es": "terebinto"
+    "es": "el golpe de su ariete"
   },
   "H424:1": {
-    "es": "preservación de la vida"
-  },
-  "H4241:1": {
-    "es": "sustento"
-  },
-  "H4241:2": {
-    "es": "preservación de la vida"
-  },
-  "H4241:3": {
-    "es": "sustento"
-  },
-  "H4241:4": {
-    "es": "revivificación"
-  },
-  "H4241:5": {
-    "es": "lo vivo"
-  },
-  "H4241:6": {
-    "es": "precio"
-  },
-  "H4242:1": {
-    "es": "alquiler"
-  },
-  "H4242:2": {
-    "es": "colocado al frente"
-  },
-  "H4242:3": {
-    "es": "presentado"
-  },
-  "H4242:4": {
-    "es": "ofrecido"
-  },
-  "H4242:5": {
-    "es": "una hija de Zelofehad"
-  },
-  "H4244:1": {
-    "es": "un nombre gileadita (pos. m.)"
-  },
-  "H4244:2": {
-    "es": "enfermedad"
-  },
-  "H4245:1": {
-    "es": "agujero"
-  },
-  "H4247:1": {
-    "es": "Levita, hijo de Merari"
-  },
-  "H4249:1": {
-    "es": "hijo de Musi, nieto de Merari"
-  },
-  "H4249:2": {
     "es": "terebinto"
   },
+  "H4241:1": {
+    "es": "preservación de la vida"
+  },
+  "H4241:2": {
+    "es": "sustento"
+  },
+  "H4241:3": {
+    "es": "preservación de la vida"
+  },
+  "H4241:4": {
+    "es": "sustento"
+  },
+  "H4241:5": {
+    "es": "revivificación"
+  },
+  "H4241:6": {
+    "es": "lo vivo"
+  },
+  "H4242:1": {
+    "es": "precio"
+  },
+  "H4242:2": {
+    "es": "alquiler"
+  },
+  "H4242:3": {
+    "es": "colocado al frente"
+  },
+  "H4242:4": {
+    "es": "presentado"
+  },
+  "H4242:5": {
+    "es": "ofrecido"
+  },
+  "H4244:1": {
+    "es": "una hija de Zelofehad"
+  },
+  "H4244:2": {
+    "es": "un nombre gileadita (pos. m.)"
+  },
+  "H4245:1": {
+    "es": "enfermedad"
+  },
+  "H4247:1": {
+    "es": "agujero"
+  },
+  "H4249:1": {
+    "es": "Levita, hijo de Merari"
+  },
+  "H4249:2": {
+    "es": "hijo de Musi, nieto de Merari"
+  },
   "H425:1": {
-    "es": "un jefe de Edom"
+    "es": "terebinto"
   },
   "H425:2": {
-    "es": "hijo de Baasa"
+    "es": "un jefe de Edom"
   },
   "H425:3": {
-    "es": "padre de Oseas que fue el último rey de Israel"
+    "es": "hijo de Baasa"
   },
   "H425:4": {
-    "es": "un hijo de Caleb"
+    "es": "padre de Oseas que fue el último rey de Israel"
   },
   "H425:5": {
-    "es": "un hijo de Uzi"
+    "es": "un hijo de Caleb"
   },
   "H425:6": {
-    "es": "cuchillo"
+    "es": "un hijo de Uzi"
   },
   "H4252:1": {
-    "es": "trenza"
+    "es": "cuchillo"
   },
   "H4253:1": {
-    "es": "entrelazado"
+    "es": "trenza"
   },
   "H4253:2": {
-    "es": "pasando a través"
+    "es": "entrelazado"
   },
   "H4253:3": {
-    "es": "túnica de estado"
+    "es": "pasando a través"
   },
   "H4254:1": {
-    "es": "quitado"
+    "es": "túnica de estado"
   },
   "H4254:2": {
-    "es": "clase"
+    "es": "quitado"
   },
   "H4255:1": {
-    "es": "división"
+    "es": "clase"
   },
   "H4255:2": {
     "es": "división"
   },
   "H4256:1": {
-    "es": "curso"
+    "es": "división"
   },
   "H4256:2": {
-    "es": "hija de Ismael"
+    "es": "curso"
   },
   "H4258:1": {
     "es": "hija de Ismael"
@@ -25998,154 +26031,154 @@
     "es": "lejos de"
   },
   "H4480:11": {
-    "es": "de"
+    "es": "lejos de"
   },
   "H4480:12": {
-    "es": "al lado de"
+    "es": "de"
   },
   "H4480:13": {
-    "es": "De"
+    "es": "al lado de"
   },
   "H4480:14": {
-    "es": "Parcialmente"
+    "es": "De"
   },
   "H4480:15": {
-    "es": "desde"
+    "es": "Parcialmente"
   },
   "H4480:16": {
-    "es": "después"
-  },
-  "H4480:17": {
-    "es": "hacia"
-  },
-  "H4480:18": {
-    "es": "desde … hasta"
-  },
-  "H4480:19": {
-    "es": "más allá"
-  },
-  "H4480:20": {
-    "es": "arriba"
-  },
-  "H4480:21": {
-    "es": "a causa de"
-  },
-  "H4480:22": {
-    "es": "a través"
-  },
-  "H4480:23": {
-    "es": "después de verbos que implican restricción, prevención, cese, etc."
-  },
-  "H4480:24": {
     "es": "desde"
   },
-  "H4480:25": {
+  "H4480:17": {
     "es": "después"
   },
+  "H4480:18": {
+    "es": "hacia"
+  },
+  "H4480:19": {
+    "es": "desde … hasta"
+  },
+  "H4480:20": {
+    "es": "más allá"
+  },
+  "H4480:21": {
+    "es": "arriba"
+  },
+  "H4480:22": {
+    "es": "a causa de"
+  },
+  "H4480:23": {
+    "es": "a través"
+  },
+  "H4480:24": {
+    "es": "después de verbos que implican restricción, prevención, cese, etc."
+  },
+  "H4480:25": {
+    "es": "desde"
+  },
   "H4480:26": {
-    "es": "que"
+    "es": "después"
   },
   "H4480:27": {
-    "es": "En compuestos:"
+    "es": "que"
   },
   "H4480:28": {
-    "es": "fuera de"
+    "es": "En compuestos:"
   },
   "H4481:1": {
-    "es": "por razón de"
+    "es": "fuera de"
   },
   "H4481:2": {
-    "es": "más que"
+    "es": "por razón de"
   },
   "H4481:3": {
-    "es": "cuerda"
+    "es": "más que"
   },
   "H4482:1": {
-    "es": "manéh"
+    "es": "cuerda"
   },
   "H4484:1": {
-    "es": "mina"
-  },
-  "H4484:2": {
-    "es": "burla"
-  },
-  "H4485:1": {
-    "es": "burlón"
-  },
-  "H4485:2": {
-    "es": "canción"
-  },
-  "H4485:3": {
-    "es": "conocimiento"
-  },
-  "H4486:1": {
-    "es": "poder de conocer"
-  },
-  "H4486:2": {
     "es": "manéh"
   },
-  "H4488:1": {
+  "H4484:2": {
     "es": "mina"
   },
+  "H4485:1": {
+    "es": "burla"
+  },
+  "H4485:2": {
+    "es": "burlón"
+  },
+  "H4485:3": {
+    "es": "canción"
+  },
+  "H4486:1": {
+    "es": "conocimiento"
+  },
+  "H4486:2": {
+    "es": "poder de conocer"
+  },
+  "H4488:1": {
+    "es": "manéh"
+  },
   "H4488:2": {
-    "es": "parte"
+    "es": "mina"
   },
   "H4488:3": {
-    "es": "número contado"
-  },
-  "H4489:1": {
-    "es": "tiempo"
-  },
-  "H4489:2": {
     "es": "parte"
   },
+  "H4489:1": {
+    "es": "número contado"
+  },
+  "H4489:2": {
+    "es": "tiempo"
+  },
   "H4490:1": {
-    "es": "porción"
+    "es": "parte"
   },
   "H4490:2": {
-    "es": "conducción"
+    "es": "porción"
   },
   "H4491:1": {
-    "es": "conducción de carro"
+    "es": "conducción"
   },
   "H4491:2": {
-    "es": "un sacudimiento"
+    "es": "conducción de carro"
   },
   "H4493:1": {
-    "es": "meneo"
+    "es": "un sacudimiento"
   },
   "H4493:2": {
-    "es": "lugar de descanso"
+    "es": "meneo"
   },
   "H4494:1": {
-    "es": "estado"
-  },
-  "H4494:2": {
-    "es": "condición de descanso"
-  },
-  "H4494:3": {
     "es": "lugar de descanso"
   },
+  "H4494:2": {
+    "es": "estado"
+  },
+  "H4494:3": {
+    "es": "condición de descanso"
+  },
   "H4496:1": {
-    "es": "descanso"
+    "es": "lugar de descanso"
   },
   "H4496:2": {
-    "es": "ingrato"
+    "es": "descanso"
   },
   "H4497:1": {
-    "es": "huida"
+    "es": "ingrato"
   },
   "H4498:1": {
-    "es": "lugar de escape"
-  },
-  "H4498:2": {
-    "es": "refugio"
-  },
-  "H4498:3": {
     "es": "huida"
   },
+  "H4498:2": {
+    "es": "lugar de escape"
+  },
+  "H4498:3": {
+    "es": "refugio"
+  },
   "H4499:1": {
-    "es": "Dios sabe"
+    "es": "huida"
   },
   "H450:1": {
     "es": "Dios sabe"
@@ -29913,256 +29946,253 @@
     "es": "codo"
   },
   "H520:3": {
-    "es": "medida"
+    "es": "codo"
   },
   "H520:4": {
-    "es": "el netofatita"
+    "es": "medida"
   },
   "H5200:1": {
-    "es": "netofatitas"
+    "es": "el netofatita"
   },
   "H5200:2": {
-    "es": "guardar"
+    "es": "netofatitas"
   },
   "H5202:1": {
-    "es": "lamento"
+    "es": "guardar"
   },
   "H5204:1": {
-    "es": "movimiento tembloroso"
+    "es": "lamento"
   },
   "H5205:1": {
-    "es": "un aquietamiento"
+    "es": "movimiento tembloroso"
   },
   "H5207:1": {
-    "es": "calmante"
+    "es": "un aquietamiento"
   },
   "H5207:2": {
-    "es": "tranquilizador"
-  },
-  "H5207:3": {
     "es": "calmante"
   },
-  "H5208:1": {
+  "H5207:3": {
     "es": "tranquilizador"
   },
+  "H5208:1": {
+    "es": "calmante"
+  },
   "H5208:2": {
-    "es": "vástago"
+    "es": "tranquilizador"
   },
   "H5209:1": {
-    "es": "posteridad"
+    "es": "vástago"
   },
   "H5209:2": {
-    "es": "Nínive"
-  },
-  "H5210:1": {
-    "es": "chispa"
-  },
-  "H5213:1": {
-    "es": "romper"
-  },
-  "H5214:1": {
-    "es": "arar fresco"
-  },
-  "H5214:2": {
-    "es": "lo arable"
-  },
-  "H5215:1": {
-    "es": "sin cultivar"
-  },
-  "H5215:2": {
-    "es": "barbecho"
-  },
-  "H5215:3": {
-    "es": "lámpara"
-  },
-  "H5216:1": {
-    "es": "un espíritu abatido"
-  },
-  "H5218:1": {
-    "es": "abatido"
-  },
-  "H5218:2": {
-    "es": "una especia"
-  },
-  "H5219:1": {
-    "es": "progenie"
-  },
-  "H5220:1": {
     "es": "posteridad"
   },
+  "H5210:1": {
+    "es": "Nínive"
+  },
+  "H5213:1": {
+    "es": "chispa"
+  },
+  "H5214:1": {
+    "es": "romper"
+  },
+  "H5214:2": {
+    "es": "arar fresco"
+  },
+  "H5215:1": {
+    "es": "lo arable"
+  },
+  "H5215:2": {
+    "es": "sin cultivar"
+  },
+  "H5215:3": {
+    "es": "barbecho"
+  },
+  "H5216:1": {
+    "es": "lámpara"
+  },
+  "H5218:1": {
+    "es": "un espíritu abatido"
+  },
+  "H5218:2": {
+    "es": "abatido"
+  },
+  "H5219:1": {
+    "es": "una especia"
+  },
+  "H5220:1": {
+    "es": "progenie"
+  },
   "H5220:2": {
-    "es": "abatidos"
+    "es": "posteridad"
   },
   "H5222:1": {
-    "es": "abatido"
+    "es": "abatidos"
   },
   "H5223:1": {
     "es": "abatido"
   },
   "H5223:2": {
-    "es": "Neco"
+    "es": "abatido"
   },
   "H5224:1": {
-    "es": "frente"
+    "es": "Neco"
   },
   "H5226:1": {
-    "es": "frente a"
-  },
-  "H5226:2": {
-    "es": "opuesto a"
-  },
-  "H5226:3": {
-    "es": "combinado con preps."
-  },
-  "H5226:4": {
     "es": "frente"
   },
-  "H5227:1": {
+  "H5226:2": {
     "es": "frente a"
   },
-  "H5227:2": {
+  "H5226:3": {
     "es": "opuesto a"
   },
-  "H5227:3": {
+  "H5226:4": {
     "es": "combinado con preps."
   },
+  "H5227:1": {
+    "es": "frente"
+  },
+  "H5227:2": {
+    "es": "frente a"
+  },
+  "H5227:3": {
+    "es": "opuesto a"
+  },
   "H5227:4": {
-    "es": "recto"
+    "es": "combinado con preps."
   },
   "H5228:1": {
-    "es": "derecho"
+    "es": "recto"
   },
   "H5228:2": {
-    "es": "rectitud"
+    "es": "derecho"
   },
   "H5228:3": {
-    "es": "tribu"
+    "es": "rectitud"
   },
   "H523:1": {
-    "es": "pueblo"
+    "es": "tribu"
   },
   "H523:2": {
-    "es": "astucia"
+    "es": "pueblo"
   },
   "H5231:1": {
-    "es": "maña"
+    "es": "astucia"
   },
   "H5231:2": {
-    "es": "villanía"
+    "es": "maña"
   },
   "H5231:3": {
-    "es": "riquezas"
+    "es": "villanía"
   },
   "H5232:1": {
-    "es": "propiedad"
-  },
-  "H5232:2": {
     "es": "riquezas"
   },
+  "H5232:2": {
+    "es": "propiedad"
+  },
   "H5233:1": {
-    "es": "tesoros"
+    "es": "riquezas"
   },
   "H5233:2": {
-    "es": "desgracia"
+    "es": "tesoros"
   },
   "H5235:1": {
-    "es": "calamidad"
+    "es": "desgracia"
   },
   "H5235:2": {
-    "es": "lo que es extranjero"
+    "es": "calamidad"
   },
   "H5236:1": {
-    "es": "extranjía"
+    "es": "lo que es extranjero"
   },
   "H5236:2": {
-    "es": "extranjero"
+    "es": "extranjía"
   },
   "H5237:1": {
-    "es": "ajeno"
+    "es": "extranjero"
   },
   "H5237:2": {
-    "es": "tesoro"
+    "es": "ajeno"
   },
   "H5238:1": {
-    "es": "nación"
+    "es": "tesoro"
   },
   "H524:1": {
-    "es": "hijo de Simeón"
+    "es": "nación"
   },
   "H5241:1": {
-    "es": "un rubenita (hermano de Datán y Abiram)"
+    "es": "hijo de Simeón"
   },
   "H5241:2": {
-    "es": "hormiga"
+    "es": "un rubenita (hermano de Datán y Abiram)"
   },
   "H5244:1": {
-    "es": "leopardo"
+    "es": "hormiga"
   },
   "H5245:1": {
     "es": "leopardo"
   },
   "H5246:1": {
-    "es": "Nimrod"
+    "es": "leopardo"
   },
   "H5248:1": {
-    "es": "artífice"
+    "es": "Nimrod"
   },
   "H525:1": {
-    "es": "arquitecto"
+    "es": "artífice"
   },
   "H525:2": {
-    "es": "maestro artesano"
+    "es": "arquitecto"
   },
   "H525:3": {
-    "es": "estandarte"
-  },
-  "H5251:1": {
-    "es": "insignia"
-  },
-  "H5251:2": {
-    "es": "señal"
-  },
-  "H5251:3": {
-    "es": "signo"
-  },
-  "H5251:4": {
-    "es": "girar"
-  },
-  "H5252:1": {
-    "es": "arrancar"
-  },
-  "H5256:1": {
-    "es": "ser arrancado"
-  },
-  "H5256:2": {
-    "es": "libación"
-  },
-  "H5257:1": {
-    "es": "imagen fundida"
-  },
-  "H5257:2": {
-    "es": "vino de su libación"
-  },
-  "H5257:3": {
-    "es": "imagen fundida"
-  },
-  "H5257:4": {
     "es": "maestro artesano"
   },
+  "H5251:1": {
+    "es": "estandarte"
+  },
+  "H5251:2": {
+    "es": "insignia"
+  },
+  "H5251:3": {
+    "es": "señal"
+  },
+  "H5251:4": {
+    "es": "signo"
+  },
+  "H5252:1": {
+    "es": "girar"
+  },
+  "H5256:1": {
+    "es": "arrancar"
+  },
+  "H5256:2": {
+    "es": "ser arrancado"
+  },
+  "H5257:1": {
+    "es": "libación"
+  },
+  "H5257:2": {
+    "es": "imagen fundida"
+  },
+  "H5257:3": {
+    "es": "vino de su libación"
+  },
+  "H5257:4": {
+    "es": "imagen fundida"
+  },
   "H526:1": {
-    "es": "rey de Judá"
+    "es": "Amón; rey de Judá, hijo de Manasés"
   },
   "H526:2": {
-    "es": "capitán de una ciudad"
+    "es": "Amón; gobernador de la ciudad de Samaria bajo Acab"
   },
   "H526:3": {
-    "es": "uno de la línea de los siervos de Salomón"
-  },
-  "H526:4": {
-    "es": "derramar"
+    "es": "Amón; jefe de una familia de los siervos de Salomón"
   },
   "H5260:1": {
-    "es": "libación"
+    "es": "derramar"
   },
   "H5261:1": {
     "es": "libación"
@@ -30171,481 +30201,481 @@
     "es": "libación"
   },
   "H5262:2": {
-    "es": "imágenes fundidas"
+    "es": "libación"
   },
   "H5262:3": {
-    "es": "ser alto"
+    "es": "imágenes fundidas"
   },
   "H5264:1": {
-    "es": "conspicuo"
+    "es": "ser alto"
   },
   "H5264:2": {
-    "es": "que pueda ser exhibido"
+    "es": "conspicuo"
   },
   "H5264:3": {
-    "es": "elevado"
+    "es": "que pueda ser exhibido"
   },
   "H5264:4": {
-    "es": "prominente"
+    "es": "elevado"
   },
   "H5264:5": {
-    "es": "artífice"
+    "es": "prominente"
   },
   "H527:1": {
-    "es": "arquitecto"
+    "es": "artífice"
   },
   "H527:2": {
-    "es": "maestro artesano"
+    "es": "arquitecto"
   },
   "H527:3": {
-    "es": "juventud"
+    "es": "maestro artesano"
   },
   "H5271:1": {
-    "es": "vida temprana"
+    "es": "juventud"
   },
   "H5271:2": {
-    "es": "agradable"
+    "es": "vida temprana"
   },
   "H5273:1": {
-    "es": "delicioso"
+    "es": "agradable"
   },
   "H5273:2": {
-    "es": "barra"
+    "es": "delicioso"
   },
   "H5274:1": {
-    "es": "proveer con sandalias"
+    "es": "barra"
   },
   "H5274:2": {
-    "es": "sandalia"
+    "es": "proveer con sandalias"
   },
   "H5275:1": {
-    "es": "zapato"
+    "es": "sandalia"
   },
   "H5275:2": {
-    "es": "deliciosidad"
+    "es": "zapato"
   },
   "H5278:1": {
-    "es": "agrado"
-  },
-  "H5278:2": {
     "es": "deliciosidad"
   },
+  "H5278:2": {
+    "es": "agrado"
+  },
   "H5278:3": {
-    "es": "nombre de uno de dos bastones simbólicos Zac 11:7, 10."
+    "es": "deliciosidad"
   },
   "H5278:4": {
-    "es": "agrado"
+    "es": "nombre de uno de dos bastones simbólicos Zac 11:7, 10."
   },
   "H5278:5": {
-    "es": "hermana de Tubal Caín"
-  },
-  "H5279:1": {
-    "es": "amonita, madre de Roboam"
-  },
-  "H5279:2": {
-    "es": "Amón"
-  },
-  "H528:1": {
     "es": "agrado"
   },
+  "H5279:1": {
+    "es": "hermana de Tubal Caín"
+  },
+  "H5279:2": {
+    "es": "amonita, madre de Roboam"
+  },
+  "H528:1": {
+    "es": "Amón"
+  },
   "H5282:1": {
-    "es": "hijo de Benjamín"
+    "es": "agrado"
   },
   "H5283:1": {
-    "es": "general arameo"
+    "es": "hijo de Benjamín"
   },
   "H5283:2": {
-    "es": "espino"
+    "es": "general arameo"
   },
   "H5285:1": {
-    "es": "niño"
+    "es": "espino"
   },
   "H5288:1": {
-    "es": "muchacho"
-  },
-  "H5288:2": {
-    "es": "juventud"
-  },
-  "H5288:3": {
-    "es": "sirviente"
-  },
-  "H5288:4": {
     "es": "niño"
   },
-  "H5288:5": {
+  "H5288:2": {
     "es": "muchacho"
   },
-  "H5288:6": {
+  "H5288:3": {
     "es": "juventud"
   },
-  "H5288:7": {
+  "H5288:4": {
     "es": "sirviente"
+  },
+  "H5288:5": {
+    "es": "niño"
+  },
+  "H5288:6": {
+    "es": "muchacho"
+  },
+  "H5288:7": {
+    "es": "juventud"
   },
   "H5288:8": {
     "es": "sirviente"
   },
   "H5288:9": {
-    "es": "sacudida"
+    "es": "sirviente"
   },
   "H5289:1": {
-    "es": "dispersión"
+    "es": "sacudida"
   },
   "H5289:2": {
-    "es": "dispersados"
+    "es": "dispersión"
   },
   "H5289:3": {
-    "es": "juventud"
+    "es": "dispersados"
   },
   "H5290:1": {
-    "es": "vida temprana"
+    "es": "juventud"
   },
   "H5290:2": {
-    "es": "niña"
+    "es": "vida temprana"
   },
   "H5291:1": {
-    "es": "doncella"
-  },
-  "H5291:2": {
     "es": "niña"
   },
-  "H5291:3": {
+  "H5291:2": {
     "es": "doncella"
   },
+  "H5291:3": {
+    "es": "niña"
+  },
   "H5291:4": {
-    "es": "doncellas"
+    "es": "doncella"
   },
   "H5291:5": {
-    "es": "un descendiente de David"
+    "es": "doncellas"
   },
   "H5294:1": {
-    "es": "un simeonita"
+    "es": "un descendiente de David"
   },
   "H5294:2": {
-    "es": "estopa"
+    "es": "un simeonita"
   },
   "H5296:1": {
-    "es": "sacudido"
+    "es": "estopa"
   },
   "H5296:2": {
-    "es": "un levita"
+    "es": "sacudido"
   },
   "H5298:1": {
-    "es": "un hijo de David"
+    "es": "un levita"
   },
   "H5298:2": {
-    "es": "cedazo"
+    "es": "un hijo de David"
   },
   "H5299:1": {
-    "es": "mi padre es paz"
+    "es": "cedazo"
   },
   "H53:1": {
-    "es": "suegro de Roboam"
+    "es": "mi padre es paz"
   },
   "H53:2": {
-    "es": "3er hijo de David"
+    "es": "suegro de Roboam"
   },
   "H53:3": {
-    "es": "firmeza"
+    "es": "3er hijo de David"
   },
   "H530:1": {
-    "es": "constancia"
+    "es": "firmeza"
   },
   "H530:2": {
-    "es": "fidelidad"
-  },
-  "H530:3": {
-    "es": "firmeza"
-  },
-  "H530:4": {
-    "es": "estabilidad"
-  },
-  "H530:5": {
     "es": "constancia"
   },
-  "H530:6": {
+  "H530:3": {
     "es": "fidelidad"
   },
-  "H530:7": {
-    "es": "confianza"
-  },
-  "H530:8": {
-    "es": "rubí"
-  },
-  "H5306:1": {
-    "es": "carbunclo"
-  },
-  "H5306:2": {
-    "es": "esmeralda"
-  },
-  "H5306:3": {
-    "es": "caer"
-  },
-  "H5308:1": {
-    "es": "nacimiento prematuro"
-  },
-  "H5309:1": {
-    "es": "aborto"
-  },
-  "H5309:2": {
-    "es": "tormenta impulsora"
-  },
-  "H5311:1": {
-    "es": "estallido"
-  },
-  "H5311:2": {
-    "es": "desembolso"
-  },
-  "H5313:1": {
-    "es": "alma"
-  },
-  "H5315:1": {
-    "es": "ser vivo"
-  },
-  "H5315:2": {
-    "es": "vida"
-  },
-  "H5315:3": {
-    "es": "yo"
-  },
-  "H5315:4": {
-    "es": "persona"
-  },
-  "H5315:5": {
-    "es": "deseo"
-  },
-  "H5315:6": {
-    "es": "apetito"
-  },
-  "H5315:7": {
-    "es": "emoción"
-  },
-  "H5315:8": {
-    "es": "pasión"
-  },
-  "H5315:9": {
-    "es": "lo que respira"
-  },
-  "H5315:10": {
-    "es": "la sustancia o ser que respira"
-  },
-  "H5315:11": {
-    "es": "El נפשׁ se convierte en un ser vivo"
-  },
-  "H5315:12": {
-    "es": "El נפשׁ es especif."
-  },
-  "H5315:13": {
-    "es": "el hombre mismo"
-  },
-  "H5315:14": {
-    "es": "sede de los apetitos"
-  },
-  "H5315:15": {
-    "es": "sede de emociones y pasiones"
-  },
-  "H5315:16": {
-    "es": "נפשׁ se usa ocasionalmente para actos mentales"
-  },
-  "H5315:17": {
-    "es": "נפשׁ para actos de la voluntad es dud."
-  },
-  "H5315:18": {
-    "es": "נפשׁ = carácter es aún más dud."
-  },
-  "H5315:19": {
-    "es": "נ׳ en D"
-  },
-  "H5315:20": {
-    "es": "miel fluida"
-  },
-  "H5317:1": {
-    "es": "miel del panal"
-  },
-  "H5317:2": {
-    "es": "luchas"
-  },
-  "H5319:1": {
-    "es": "la tierra del norte"
-  },
-  "H5320:1": {
-    "es": "Neftalí"
-  },
-  "H5321:1": {
-    "es": "empuñadura"
-  },
-  "H5325:1": {
-    "es": "mango"
-  },
-  "H5325:2": {
-    "es": "prefecto"
-  },
-  "H5325:3": {
-    "es": "diputado"
-  },
-  "H5325:4": {
+  "H530:4": {
     "es": "firmeza"
   },
-  "H5326:1": {
-    "es": "flor"
+  "H530:5": {
+    "es": "estabilidad"
   },
-  "H5328:1": {
-    "es": "brillante"
+  "H530:6": {
+    "es": "constancia"
   },
-  "H5328:2": {
-    "es": "ser preeminente"
+  "H530:7": {
+    "es": "fidelidad"
   },
-  "H5329:1": {
-    "es": "duradero"
+  "H530:8": {
+    "es": "confianza"
   },
-  "H5329:2": {
-    "es": "poderoso"
+  "H5306:1": {
+    "es": "rubí"
   },
-  "H533:1": {
-    "es": "distinguirse"
+  "H5306:2": {
+    "es": "carbunclo"
   },
-  "H5330:1": {
-    "es": "eminencia"
+  "H5306:3": {
+    "es": "esmeralda"
   },
-  "H5331:1": {
-    "es": "duradero"
+  "H5308:1": {
+    "es": "caer"
   },
-  "H5331:2": {
-    "es": "eterno"
+  "H5309:1": {
+    "es": "nacimiento prematuro"
   },
-  "H5331:3": {
-    "es": "perpetuidad"
+  "H5309:2": {
+    "es": "aborto"
   },
-  "H5331:4": {
-    "es": "jugo"
+  "H5311:1": {
+    "es": "tormenta impulsora"
   },
-  "H5332:1": {
-    "es": "sangre"
+  "H5311:2": {
+    "es": "estallido"
   },
-  "H5332:2": {
-    "es": "sangre derramada"
+  "H5313:1": {
+    "es": "desembolso"
   },
-  "H5332:3": {
-    "es": "pilar"
+  "H5315:1": {
+    "es": "alma"
   },
-  "H5333:1": {
+  "H5315:2": {
+    "es": "ser vivo"
+  },
+  "H5315:3": {
+    "es": "vida"
+  },
+  "H5315:4": {
+    "es": "yo"
+  },
+  "H5315:5": {
+    "es": "persona"
+  },
+  "H5315:6": {
+    "es": "deseo"
+  },
+  "H5315:7": {
+    "es": "apetito"
+  },
+  "H5315:8": {
+    "es": "emoción"
+  },
+  "H5315:9": {
+    "es": "pasión"
+  },
+  "H5315:10": {
+    "es": "lo que respira"
+  },
+  "H5315:11": {
+    "es": "la sustancia o ser que respira"
+  },
+  "H5315:12": {
+    "es": "El נפשׁ se convierte en un ser vivo"
+  },
+  "H5315:13": {
+    "es": "El נפשׁ es especif."
+  },
+  "H5315:14": {
+    "es": "el hombre mismo"
+  },
+  "H5315:15": {
+    "es": "sede de los apetitos"
+  },
+  "H5315:16": {
+    "es": "sede de emociones y pasiones"
+  },
+  "H5315:17": {
+    "es": "נפשׁ se usa ocasionalmente para actos mentales"
+  },
+  "H5315:18": {
+    "es": "נפשׁ para actos de la voluntad es dud."
+  },
+  "H5315:19": {
+    "es": "נפשׁ = carácter es aún más dud."
+  },
+  "H5315:20": {
+    "es": "נ׳ en D"
+  },
+  "H5317:1": {
+    "es": "miel fluida"
+  },
+  "H5317:2": {
+    "es": "miel del panal"
+  },
+  "H5319:1": {
+    "es": "luchas"
+  },
+  "H5320:1": {
+    "es": "la tierra del norte"
+  },
+  "H5321:1": {
+    "es": "Neftalí"
+  },
+  "H5325:1": {
+    "es": "empuñadura"
+  },
+  "H5325:2": {
+    "es": "mango"
+  },
+  "H5325:3": {
     "es": "prefecto"
   },
+  "H5325:4": {
+    "es": "diputado"
+  },
+  "H5326:1": {
+    "es": "firmeza"
+  },
+  "H5328:1": {
+    "es": "flor"
+  },
+  "H5328:2": {
+    "es": "brillante"
+  },
+  "H5329:1": {
+    "es": "ser preeminente"
+  },
+  "H5329:2": {
+    "es": "duradero"
+  },
+  "H533:1": {
+    "es": "poderoso"
+  },
+  "H5330:1": {
+    "es": "distinguirse"
+  },
+  "H5331:1": {
+    "es": "eminencia"
+  },
+  "H5331:2": {
+    "es": "duradero"
+  },
+  "H5331:3": {
+    "es": "eterno"
+  },
+  "H5331:4": {
+    "es": "perpetuidad"
+  },
+  "H5332:1": {
+    "es": "jugo"
+  },
+  "H5332:2": {
+    "es": "sangre"
+  },
+  "H5332:3": {
+    "es": "sangre derramada"
+  },
+  "H5333:1": {
+    "es": "pilar"
+  },
   "H5333:2": {
-    "es": "guarnición"
+    "es": "prefecto"
   },
   "H5333:3": {
-    "es": "poste"
+    "es": "guarnición"
   },
   "H5333:4": {
-    "es": "preservado"
+    "es": "poste"
   },
   "H5336:1": {
-    "es": "rescate"
+    "es": "preservado"
   },
   "H5338:1": {
-    "es": "librar"
+    "es": "rescate"
   },
   "H5338:2": {
-    "es": "cima"
+    "es": "librar"
   },
   "H534:1": {
-    "es": "cumbre"
+    "es": "cima"
   },
   "H534:2": {
-    "es": "brote"
+    "es": "cumbre"
   },
   "H5342:1": {
-    "es": "retoño"
+    "es": "brote"
   },
   "H5342:2": {
-    "es": "limpio"
+    "es": "retoño"
   },
   "H5343:1": {
-    "es": "puro"
-  },
-  "H5343:2": {
-    "es": "pasar"
-  },
-  "H5346:1": {
-    "es": "hembra"
-  },
-  "H5347:1": {
-    "es": "moteado"
-  },
-  "H5348:1": {
-    "es": "criador de ovejas"
-  },
-  "H5349:1": {
-    "es": "-comerciante"
-  },
-  "H5349:2": {
-    "es": "-cuidador"
-  },
-  "H5349:3": {
-    "es": "punta"
-  },
-  "H5351:1": {
-    "es": "gota"
-  },
-  "H5351:2": {
     "es": "limpio"
   },
+  "H5343:2": {
+    "es": "puro"
+  },
+  "H5346:1": {
+    "es": "pasar"
+  },
+  "H5347:1": {
+    "es": "hembra"
+  },
+  "H5348:1": {
+    "es": "moteado"
+  },
+  "H5349:1": {
+    "es": "criador de ovejas"
+  },
+  "H5349:2": {
+    "es": "-comerciante"
+  },
+  "H5349:3": {
+    "es": "-cuidador"
+  },
+  "H5351:1": {
+    "es": "punta"
+  },
+  "H5351:2": {
+    "es": "gota"
+  },
   "H5355:1": {
-    "es": "libre de"
+    "es": "limpio"
   },
   "H5355:2": {
-    "es": "exento"
+    "es": "libre de"
   },
   "H5355:3": {
-    "es": "inocente"
+    "es": "exento"
   },
   "H5355:4": {
-    "es": "inocencia"
+    "es": "inocente"
   },
   "H5356:1": {
-    "es": "libertad de culpa"
-  },
-  "H5356:2": {
     "es": "inocencia"
   },
+  "H5356:2": {
+    "es": "libertad de culpa"
+  },
   "H5356:3": {
-    "es": "libertad de castigo"
+    "es": "inocencia"
   },
   "H5356:4": {
-    "es": "limpieza de dientes"
+    "es": "libertad de castigo"
   },
   "H5356:5": {
-    "es": "hendidura"
+    "es": "limpieza de dientes"
   },
   "H5357:1": {
-    "es": "venganza"
+    "es": "hendidura"
   },
   "H5359:1": {
     "es": "venganza"
   },
   "H5360:1": {
-    "es": "golpeo"
+    "es": "venganza"
   },
   "H5363:1": {
-    "es": "cuerda circundante"
+    "es": "golpeo"
   },
   "H5364:1": {
-    "es": "agujero"
+    "es": "cuerda circundante"
   },
   "H5366:1": {
-    "es": "grieta"
+    "es": "agujero"
   },
   "H5366:2": {
-    "es": "golpear"
+    "es": "grieta"
   },
   "H5368:1": {
-    "es": "padre de Abner"
+    "es": "golpear"
   },
   "H5369:1": {
-    "es": "padre de Cis"
+    "es": "padre de Abner"
   },
   "H5369:2": {
-    "es": "débil"
+    "es": "padre de Cis"
   },
   "H537:1": {
     "es": "débil"
@@ -32013,139 +32043,139 @@
     "es": "hasta"
   },
   "H5704:4": {
-    "es": "mientras"
+    "es": "hasta"
   },
   "H5704:5": {
-    "es": "de espacio"
-  },
-  "H5704:6": {
-    "es": "de tiempo"
-  },
-  "H5704:7": {
-    "es": "de grado"
-  },
-  "H5704:8": {
-    "es": "hasta"
-  },
-  "H5704:9": {
     "es": "mientras"
   },
-  "H5704:10": {
-    "es": "hasta el punto que"
-  },
-  "H5704:11": {
-    "es": "de modo que incluso"
-  },
-  "H5704:12": {
+  "H5704:6": {
     "es": "de espacio"
   },
-  "H5704:13": {
+  "H5704:7": {
     "es": "de tiempo"
   },
-  "H5704:14": {
+  "H5704:8": {
     "es": "de grado"
   },
-  "H5704:15": {
-    "es": "incluso hasta"
-  },
-  "H5705:1": {
+  "H5704:9": {
     "es": "hasta"
   },
+  "H5704:10": {
+    "es": "mientras"
+  },
+  "H5704:11": {
+    "es": "hasta el punto que"
+  },
+  "H5704:12": {
+    "es": "de modo que incluso"
+  },
+  "H5704:13": {
+    "es": "de espacio"
+  },
+  "H5704:14": {
+    "es": "de tiempo"
+  },
+  "H5704:15": {
+    "es": "de grado"
+  },
+  "H5705:1": {
+    "es": "incluso hasta"
+  },
   "H5705:2": {
-    "es": "botín"
+    "es": "hasta"
   },
   "H5706:1": {
-    "es": "presa"
+    "es": "botín"
   },
   "H5706:2": {
-    "es": "testigo"
+    "es": "presa"
   },
   "H5707:1": {
-    "es": "reiterando"
+    "es": "testigo"
   },
   "H5707:2": {
-    "es": "afirmando enfáticamente"
+    "es": "reiterando"
   },
   "H5707:3": {
-    "es": "testigo"
+    "es": "afirmando enfáticamente"
   },
   "H5707:4": {
-    "es": "testimonio"
+    "es": "testigo"
   },
   "H5707:5": {
-    "es": "evidencia"
-  },
-  "H5707:6": {
-    "es": "testigo"
-  },
-  "H5707:7": {
-    "es": "menstruación"
-  },
-  "H5708:1": {
-    "es": "tiempo"
-  },
-  "H5708:2": {
-    "es": "período"
-  },
-  "H5708:3": {
-    "es": "firmeza"
-  },
-  "H571:1": {
-    "es": "fidelidad"
-  },
-  "H571:2": {
-    "es": "confiabilidad"
-  },
-  "H571:3": {
-    "es": "seguridad"
-  },
-  "H571:4": {
-    "es": "estabilidad"
-  },
-  "H571:5": {
-    "es": "continuidad"
-  },
-  "H571:6": {
-    "es": "fidelidad"
-  },
-  "H571:7": {
-    "es": "confiabilidad"
-  },
-  "H571:8": {
-    "es": "verdad"
-  },
-  "H571:9": {
-    "es": "en verdad"
-  },
-  "H571:10": {
-    "es": "verdaderamente"
-  },
-  "H571:11": {
-    "es": "de Lamec"
-  },
-  "H5711:1": {
-    "es": "de Esaú"
-  },
-  "H5711:2": {
-    "es": "congregación"
-  },
-  "H5712:1": {
-    "es": "compañía reunida por cita"
-  },
-  "H5712:2": {
-    "es": "actuando concertadamente"
-  },
-  "H5712:3": {
     "es": "testimonio"
   },
-  "H5713:1": {
+  "H5707:6": {
+    "es": "evidencia"
+  },
+  "H5707:7": {
     "es": "testigo"
   },
+  "H5708:1": {
+    "es": "menstruación"
+  },
+  "H5708:2": {
+    "es": "tiempo"
+  },
+  "H5708:3": {
+    "es": "período"
+  },
+  "H571:1": {
+    "es": "firmeza"
+  },
+  "H571:2": {
+    "es": "fidelidad"
+  },
+  "H571:3": {
+    "es": "confiabilidad"
+  },
+  "H571:4": {
+    "es": "seguridad"
+  },
+  "H571:5": {
+    "es": "estabilidad"
+  },
+  "H571:6": {
+    "es": "continuidad"
+  },
+  "H571:7": {
+    "es": "fidelidad"
+  },
+  "H571:8": {
+    "es": "confiabilidad"
+  },
+  "H571:9": {
+    "es": "verdad"
+  },
+  "H571:10": {
+    "es": "en verdad"
+  },
+  "H571:11": {
+    "es": "verdaderamente"
+  },
+  "H5711:1": {
+    "es": "de Lamec"
+  },
+  "H5711:2": {
+    "es": "de Esaú"
+  },
+  "H5712:1": {
+    "es": "congregación"
+  },
+  "H5712:2": {
+    "es": "compañía reunida por cita"
+  },
+  "H5712:3": {
+    "es": "actuando concertadamente"
+  },
+  "H5713:1": {
+    "es": "testimonio"
+  },
   "H5713:2": {
-    "es": "Iddo"
+    "es": "testigo"
   },
   "H5714:1": {
-    "es": "padre de un oficial de Sol."
+    "es": "Iddo"
   },
   "H5714:2": {
     "es": "padre de un oficial de Salomón"
@@ -33573,79 +33603,79 @@
     "es": "paralelo a"
   },
   "H5980:5": {
-    "es": "correspondiente a"
+    "es": "de acuerdo con"
   },
   "H5980:6": {
-    "es": "pilar"
+    "es": "correspondiente a"
   },
   "H5982:1": {
-    "es": "columna"
+    "es": "pilar"
   },
   "H5982:2": {
-    "es": "Amón"
+    "es": "columna"
   },
   "H5983:1": {
-    "es": "amonita"
+    "es": "Amón"
   },
   "H5984:1": {
-    "es": "Amós"
+    "es": "amonita"
   },
   "H5986:1": {
-    "es": "mi pariente es Dios"
+    "es": "Amós"
   },
   "H5988:1": {
-    "es": "nombre este del Jordán"
+    "es": "mi pariente es Dios"
   },
   "H5988:2": {
-    "es": "un danita"
+    "es": "nombre este del Jordán"
   },
   "H5988:3": {
-    "es": "suegro de David"
+    "es": "un danita"
   },
   "H5988:4": {
-    "es": "hijo de Obed Edom"
+    "es": "suegro de David"
   },
   "H5988:5": {
-    "es": "mi pariente es majestad"
+    "es": "hijo de Obed Edom"
   },
   "H5989:1": {
-    "es": "un gesurita"
+    "es": "mi pariente es majestad"
   },
   "H5989:2": {
-    "es": "un efraimita"
+    "es": "un gesurita"
   },
   "H5989:3": {
-    "es": "un simeonita"
+    "es": "un efraimita"
   },
   "H5989:4": {
-    "es": "un neftalita"
+    "es": "un simeonita"
   },
   "H5989:5": {
-    "es": "un judaíta"
+    "es": "un neftalita"
   },
   "H5989:6": {
-    "es": "mi pariente ha otorgado"
+    "es": "un judaíta"
   },
   "H5990:1": {
-    "es": "mi pariente es noble"
+    "es": "mi pariente ha otorgado"
   },
   "H5992:1": {
-    "es": "suegro de Aarón"
+    "es": "mi pariente es noble"
   },
   "H5992:2": {
-    "es": "levitas"
+    "es": "suegro de Aarón"
   },
   "H5992:3": {
-    "es": "profundo"
+    "es": "levitas"
   },
   "H5994:1": {
-    "es": "franja"
+    "es": "profundo"
   },
   "H5995:1": {
-    "es": "fila de grano caído"
+    "es": "franja"
   },
   "H5995:2": {
-    "es": "mi pariente es Shadday"
+    "es": "fila de grano caído"
   },
   "H5996:1": {
     "es": "mi pariente es Shadday"
@@ -36405,244 +36435,244 @@
     "es": "justicia"
   },
   "H6664:11": {
-    "es": "justicia"
+    "es": "rectitud"
   },
   "H6664:12": {
-    "es": "justificación"
+    "es": "justicia"
   },
   "H6664:13": {
-    "es": "liberación"
+    "es": "justicia"
   },
   "H6664:14": {
-    "es": "victoria"
+    "es": "justificación"
   },
   "H6664:15": {
-    "es": "prosperidad"
+    "es": "liberación"
   },
   "H6664:16": {
-    "es": "hacer lo correcto"
+    "es": "victoria"
   },
   "H6664:17": {
-    "es": "justicia"
+    "es": "prosperidad"
   },
   "H6665:1": {
-    "es": "justicia"
+    "es": "hacer lo correcto"
   },
   "H6666:1": {
-    "es": "atributo de Dios como soberano"
+    "es": "justicia"
   },
   "H6666:2": {
     "es": "justicia"
   },
   "H6666:3": {
-    "es": "justicia"
+    "es": "atributo de Dios como soberano"
   },
   "H6666:4": {
-    "es": "veracidad"
+    "es": "justicia"
   },
   "H6666:5": {
     "es": "justicia"
   },
   "H6666:6": {
-    "es": "justicia"
+    "es": "veracidad"
   },
   "H6666:7": {
-    "es": "justificación"
+    "es": "justicia"
   },
   "H6666:8": {
-    "es": "salvación"
+    "es": "justicia"
   },
   "H6666:9": {
-    "es": "actos justos"
+    "es": "justificación"
   },
   "H6666:10": {
-    "es": "es justicia"
+    "es": "salvación"
   },
   "H6666:11": {
-    "es": "último rey de Judá"
+    "es": "actos justos"
   },
   "H6667:1": {
-    "es": "falsos profetas"
+    "es": "es justicia"
   },
   "H6667:2": {
-    "es": "príncipe; tiempo de Jeremías"
+    "es": "último rey de Judá"
   },
   "H6667:3": {
-    "es": "sacerdote, tiempo de Nehemías"
+    "es": "falsos profetas"
   },
   "H6667:4": {
-    "es": "hijo de Joacim"
+    "es": "príncipe; tiempo de Jeremías"
   },
   "H6667:5": {
-    "es": "brillante"
+    "es": "sacerdote, tiempo de Nehemías"
   },
   "H6667:6": {
-    "es": "amarillo"
+    "es": "hijo de Joacim"
   },
   "H6669:1": {
-    "es": "joven"
+    "es": "brillante"
   },
   "H6669:2": {
-    "es": "jóvenes"
+    "es": "amarillo"
   },
   "H667:1": {
     "es": "joven"
   },
   "H667:2": {
-    "es": "exprimir aceite"
+    "es": "jóvenes"
   },
   "H667:3": {
-    "es": "mediodía"
+    "es": "joven"
   },
   "H6671:1": {
-    "es": "mediodía"
+    "es": "exprimir aceite"
   },
   "H6672:1": {
-    "es": "mando"
+    "es": "mediodía"
   },
   "H6672:2": {
-    "es": "ordenanza"
+    "es": "mediodía"
   },
   "H6673:1": {
-    "es": "cuello"
+    "es": "mando"
   },
   "H6673:2": {
-    "es": "cuello"
+    "es": "ordenanza"
   },
   "H6676:1": {
-    "es": "nuca"
+    "es": "cuello"
   },
   "H6677:1": {
-    "es": "cazar"
+    "es": "cuello"
   },
   "H6677:2": {
-    "es": "sedán"
+    "es": "nuca"
   },
   "H6679:1": {
-    "es": "litera"
+    "es": "cazar"
   },
   "H668:1": {
-    "es": "palanquín"
+    "es": "sedán"
   },
   "H668:2": {
-    "es": "clamor"
+    "es": "litera"
   },
   "H668:3": {
-    "es": "profundidad oceánica"
+    "es": "palanquín"
   },
   "H6682:1": {
-    "es": "ayuno"
+    "es": "clamor"
   },
   "H6683:1": {
-    "es": "ayuno"
+    "es": "profundidad oceánica"
   },
   "H6685:1": {
-    "es": "pequeño"
+    "es": "ayuno"
   },
   "H6685:2": {
-    "es": "peine"
+    "es": "ayuno"
   },
   "H6686:1": {
-    "es": "exudando"
+    "es": "pequeño"
   },
   "H6688:1": {
-    "es": "Efraín"
+    "es": "peine"
   },
   "H6688:2": {
-    "es": "restricción"
+    "es": "exudando"
   },
   "H669:1": {
-    "es": "presión"
+    "es": "Efraín"
   },
   "H6695:1": {
-    "es": "roca"
+    "es": "restricción"
   },
   "H6695:2": {
-    "es": "acantilado"
+    "es": "presión"
   },
   "H6697:1": {
-    "es": "Roca"
+    "es": "roca"
   },
   "H6697:2": {
-    "es": "un príncipe de Madián"
+    "es": "acantilado"
   },
   "H6698:1": {
-    "es": "gabaonita"
+    "es": "Roca"
   },
   "H6698:2": {
-    "es": "forma"
+    "es": "un príncipe de Madián"
   },
   "H6698:3": {
-    "es": "moda"
+    "es": "gabaonita"
   },
   "H6699:1": {
-    "es": "persas"
+    "es": "forma"
   },
   "H6699:2": {
-    "es": "mi roca es El"
+    "es": "moda"
   },
   "H670:1": {
-    "es": "mi roca es Sadai"
+    "es": "persas"
   },
   "H6700:1": {
-    "es": "deslumbrante"
+    "es": "mi roca es El"
   },
   "H6701:1": {
-    "es": "brillante"
+    "es": "mi roca es Sadai"
   },
   "H6703:1": {
-    "es": "claro"
-  },
-  "H6703:2": {
-    "es": "abrasado"
-  },
-  "H6703:3": {
-    "es": "brillante"
-  },
-  "H6704:1": {
     "es": "deslumbrante"
   },
+  "H6703:2": {
+    "es": "brillante"
+  },
+  "H6703:3": {
+    "es": "claro"
+  },
+  "H6704:1": {
+    "es": "abrasado"
+  },
   "H6706:1": {
-    "es": "superficie"
+    "es": "brillante"
   },
   "H6706:2": {
-    "es": "tierra abrasada"
+    "es": "deslumbrante"
   },
   "H6706:3": {
-    "es": "hedor"
+    "es": "superficie"
   },
   "H6707:1": {
-    "es": "región abrasada"
+    "es": "tierra abrasada"
   },
   "H6709:1": {
-    "es": "risa"
+    "es": "hedor"
   },
   "H6710:1": {
-    "es": "rojizo-gris"
+    "es": "región abrasada"
   },
   "H6712:1": {
-    "es": "leonado"
+    "es": "risa"
   },
   "H6713:1": {
-    "es": "padre de Efrón el hitita"
+    "es": "rojizo-gris"
   },
   "H6713:2": {
-    "es": "hijo de Simeón"
-  },
-  "H6714:1": {
-    "es": "nombre en Judá"
-  },
-  "H6714:2": {
     "es": "leonado"
   },
+  "H6714:1": {
+    "es": "padre de Efrón el hitita"
+  },
+  "H6714:2": {
+    "es": "hijo de Simeón"
+  },
   "H6714:3": {
-    "es": "barco"
+    "es": "nombre en Judá"
   },
   "H6715:1": {
-    "es": "caza"
+    "es": "leonado"
   },
   "H6716:1": {
-    "es": "caza"
+    "es": "barco"
   },
   "H6718:1": {
     "es": "caza"
@@ -37248,7 +37278,7 @@
     "es": "cuchillos de pedernal"
   },
   "H6865:1": {
-    "es": "Tiro"
+    "es": "Tiro; ciudad portuaria fenicia en la costa al norte de Israel"
   },
   "H6867:1": {
     "es": "costra"
@@ -39072,70 +39102,70 @@
     "es": "tranquilo"
   },
   "H7282:2": {
-    "es": "estar en tumulto"
+    "es": "tranquilo"
   },
   "H7284:1": {
-    "es": "multitud"
+    "es": "estar en tumulto"
   },
   "H7285:1": {
-    "es": "envoltura ancha"
+    "es": "multitud"
   },
   "H7289:1": {
-    "es": "velo grande"
+    "es": "envoltura ancha"
   },
   "H7289:2": {
-    "es": "tormenta"
+    "es": "velo grande"
   },
   "H7293:1": {
-    "es": "arrogancia"
-  },
-  "H7293:2": {
-    "es": "monstruo marino mítico"
-  },
-  "H7293:3": {
-    "es": "nombre emblemático de Egipto"
-  },
-  "H7293:4": {
     "es": "tormenta"
   },
-  "H7294:1": {
+  "H7293:2": {
     "es": "arrogancia"
   },
-  "H7294:2": {
+  "H7293:3": {
     "es": "monstruo marino mítico"
   },
-  "H7294:3": {
+  "H7293:4": {
     "es": "nombre emblemático de Egipto"
   },
+  "H7294:1": {
+    "es": "tormenta"
+  },
+  "H7294:2": {
+    "es": "arrogancia"
+  },
+  "H7294:3": {
+    "es": "monstruo marino mítico"
+  },
   "H7294:4": {
-    "es": "orgulloso"
+    "es": "nombre emblemático de Egipto"
   },
   "H7295:1": {
-    "es": "desafiante"
+    "es": "orgulloso"
   },
   "H7295:2": {
-    "es": "orgullo"
+    "es": "desafiante"
   },
   "H7296:1": {
-    "es": "abrevadero"
+    "es": "orgullo"
   },
   "H7298:1": {
-    "es": "recogido"
+    "es": "abrevadero"
   },
   "H7298:2": {
-    "es": "apariencia"
+    "es": "recogido"
   },
   "H7299:1": {
-    "es": "cinturón"
+    "es": "apariencia"
   },
   "H73:1": {
-    "es": "cedro"
+    "es": "cinturón"
   },
   "H730:1": {
-    "es": "cedro-árbol"
+    "es": "cedro"
   },
   "H730:2": {
-    "es": "madera de cedro"
+    "es": "cedro-árbol"
   },
   "H730:3": {
     "es": "madera de cedro"
@@ -39144,508 +39174,508 @@
     "es": "madera de cedro"
   },
   "H730:5": {
-    "es": "regado"
+    "es": "madera de cedro"
   },
   "H7302:1": {
-    "es": "espacio"
+    "es": "regado"
   },
   "H7305:1": {
-    "es": "intervalo"
+    "es": "espacio"
   },
   "H7305:2": {
-    "es": "respiro"
+    "es": "intervalo"
   },
   "H7305:3": {
-    "es": "alivio"
+    "es": "respiro"
   },
   "H7305:4": {
-    "es": "aliento"
+    "es": "alivio"
   },
   "H7307:1": {
-    "es": "viento"
-  },
-  "H7307:2": {
-    "es": "espíritu"
-  },
-  "H7307:3": {
     "es": "aliento"
   },
-  "H7307:4": {
+  "H7307:2": {
     "es": "viento"
   },
-  "H7307:5": {
+  "H7307:3": {
     "es": "espíritu"
+  },
+  "H7307:4": {
+    "es": "aliento"
+  },
+  "H7307:5": {
+    "es": "viento"
   },
   "H7307:6": {
-    "es": "temperamento"
+    "es": "espíritu"
   },
   "H7307:7": {
-    "es": "disposición"
+    "es": "temperamento"
   },
   "H7307:8": {
-    "es": "espíritu"
+    "es": "disposición"
   },
   "H7307:9": {
     "es": "espíritu"
   },
   "H7307:10": {
-    "es": "ocasionalmente (y tarde) = sede u órgano de actos mentales"
-  },
-  "H7307:11": {
-    "es": "raramente de la voluntad"
-  },
-  "H7307:12": {
-    "es": "רוּחַ esp. de carácter moral"
-  },
-  "H7307:13": {
-    "es": "espíritu de Dios"
-  },
-  "H7307:14": {
-    "es": "viento"
-  },
-  "H7308:1": {
     "es": "espíritu"
   },
+  "H7307:11": {
+    "es": "ocasionalmente (y tarde) = sede u órgano de actos mentales"
+  },
+  "H7307:12": {
+    "es": "raramente de la voluntad"
+  },
+  "H7307:13": {
+    "es": "רוּחַ esp. de carácter moral"
+  },
+  "H7307:14": {
+    "es": "espíritu de Dios"
+  },
+  "H7308:1": {
+    "es": "viento"
+  },
   "H7308:2": {
-    "es": "respiro"
+    "es": "espíritu"
   },
   "H7309:1": {
-    "es": "alivio"
+    "es": "respiro"
   },
   "H7309:2": {
-    "es": "paneles de cedro"
+    "es": "alivio"
   },
   "H731:1": {
-    "es": "trabajo de cedro"
+    "es": "paneles de cedro"
   },
   "H731:2": {
-    "es": "saturación"
+    "es": "trabajo de cedro"
   },
   "H7310:1": {
-    "es": "altura"
+    "es": "saturación"
   },
   "H7312:1": {
-    "es": "altivez"
-  },
-  "H7312:2": {
-    "es": "elevarse"
-  },
-  "H7313:1": {
     "es": "altura"
   },
+  "H7312:2": {
+    "es": "altivez"
+  },
+  "H7313:1": {
+    "es": "elevarse"
+  },
   "H7314:1": {
-    "es": "en alto"
+    "es": "altura"
   },
   "H7315:1": {
-    "es": "altivamente"
+    "es": "en alto"
   },
   "H7317:1": {
-    "es": "exaltación"
+    "es": "altivamente"
   },
   "H7318:1": {
-    "es": "alabanza"
+    "es": "exaltación"
   },
   "H7318:2": {
-    "es": "Rut"
+    "es": "alabanza"
   },
   "H7327:1": {
-    "es": "amistad"
+    "es": "Rut"
   },
   "H7327:2": {
-    "es": "secreto"
+    "es": "amistad"
   },
   "H7328:1": {
-    "es": "viajero"
+    "es": "secreto"
   },
   "H733:1": {
-    "es": "un hombre de Aser"
+    "es": "viajero"
   },
   "H733:2": {
-    "es": "cabeza de familia de exiliados regresados"
+    "es": "un hombre de Aser"
   },
   "H733:3": {
-    "es": "magro"
+    "es": "cabeza de familia de exiliados regresados"
   },
   "H7330:1": {
-    "es": "magra"
+    "es": "magro"
   },
   "H7332:1": {
-    "es": "desgaste"
-  },
-  "H7332:2": {
-    "es": "escasez"
-  },
-  "H7332:3": {
-    "es": "potentado"
-  },
-  "H7333:1": {
     "es": "magra"
   },
-  "H7334:1": {
+  "H7332:2": {
     "es": "desgaste"
   },
+  "H7332:3": {
+    "es": "escasez"
+  },
+  "H7333:1": {
+    "es": "potentado"
+  },
+  "H7334:1": {
+    "es": "magra"
+  },
   "H7334:2": {
-    "es": "anchura"
+    "es": "desgaste"
   },
   "H7338:1": {
-    "es": "extensión amplia"
+    "es": "anchura"
   },
   "H7338:2": {
-    "es": "camino"
+    "es": "extensión amplia"
   },
   "H734:1": {
-    "es": "sendero"
+    "es": "camino"
   },
   "H734:2": {
-    "es": "lit."
-  },
-  "H734:3": {
     "es": "sendero"
   },
+  "H734:3": {
+    "es": "lit."
+  },
   "H734:4": {
-    "es": "camino"
+    "es": "sendero"
   },
   "H734:5": {
     "es": "camino"
   },
   "H734:6": {
-    "es": "viajero"
+    "es": "camino"
   },
   "H734:7": {
     "es": "viajero"
   },
   "H734:8": {
-    "es": "anchura"
+    "es": "viajero"
   },
   "H7341:1": {
-    "es": "ancho"
+    "es": "anchura"
   },
   "H7341:2": {
     "es": "ancho"
   },
   "H7342:1": {
-    "es": "amplio"
+    "es": "ancho"
   },
   "H7342:2": {
-    "es": "cerca de Nínive"
+    "es": "amplio"
   },
   "H7344:1": {
-    "es": "nombre de pozo"
+    "es": "cerca de Nínive"
   },
   "H7344:2": {
-    "es": "hogar de un rey de Edom"
+    "es": "nombre de pozo"
   },
   "H7344:3": {
-    "es": "Roboam"
+    "es": "hogar de un rey de Edom"
   },
   "H7346:1": {
-    "es": "mano-"
+    "es": "Roboam"
   },
   "H7347:1": {
-    "es": "molino"
+    "es": "mano-"
   },
   "H7347:2": {
-    "es": "dos piedras de molino"
+    "es": "molino"
   },
   "H7347:3": {
-    "es": "Rehum"
+    "es": "dos piedras de molino"
   },
   "H7348:1": {
-    "es": "con Zorobabel"
+    "es": "Rehum"
   },
   "H7348:2": {
-    "es": "con Nehemías"
+    "es": "con Zorobabel"
   },
   "H7348:3": {
-    "es": "compasivo"
+    "es": "con Nehemías"
   },
   "H7349:1": {
-    "es": "camino"
+    "es": "compasivo"
   },
   "H735:1": {
-    "es": "distante"
+    "es": "camino"
   },
   "H7350:1": {
-    "es": "lejos"
+    "es": "distante"
   },
   "H7350:2": {
-    "es": "distancia"
-  },
-  "H7350:3": {
     "es": "lejos"
   },
+  "H7350:3": {
+    "es": "distancia"
+  },
   "H7352:1": {
-    "es": "oveja"
+    "es": "lejos"
   },
   "H7353:1": {
-    "es": "Raquel"
+    "es": "oveja"
   },
   "H7354:1": {
-    "es": "seno"
+    "es": "Raquel"
   },
   "H7356:1": {
-    "es": "niña"
-  },
-  "H7357:1": {
     "es": "seno"
   },
+  "H7357:1": {
+    "es": "niña"
+  },
   "H7358:1": {
-    "es": "compañía de viaje"
+    "es": "seno"
   },
   "H736:1": {
-    "es": "caravana"
+    "es": "compañía de viaje"
   },
   "H736:2": {
-    "es": "buitre carroñero"
+    "es": "caravana"
   },
   "H7360:1": {
-    "es": "mujeres compasivas"
+    "es": "buitre carroñero"
   },
   "H7362:1": {
-    "es": "confianza"
+    "es": "mujeres compasivas"
   },
   "H7365:1": {
-    "es": "lavado"
+    "es": "confianza"
   },
   "H7366:1": {
-    "es": "remover"
+    "es": "lavado"
   },
   "H7369:1": {
-    "es": "partir"
+    "es": "remover"
   },
   "H7369:2": {
-    "es": "comida"
+    "es": "partir"
   },
   "H737:1": {
-    "es": "ración"
+    "es": "comida"
   },
   "H737:2": {
-    "es": "pala de aventar"
+    "es": "ración"
   },
   "H7371:1": {
-    "es": "húmedo"
+    "es": "pala de aventar"
   },
   "H7373:1": {
-    "es": "jugoso"
+    "es": "húmedo"
   },
   "H7373:2": {
-    "es": "fresco"
+    "es": "jugoso"
   },
   "H7373:3": {
-    "es": "temblor"
+    "es": "fresco"
   },
   "H7374:1": {
-    "es": "pánico"
+    "es": "temblor"
   },
   "H7374:2": {
-    "es": "volverse fresco"
+    "es": "pánico"
   },
   "H7375:1": {
-    "es": "humedad"
+    "es": "volverse fresco"
   },
   "H7377:1": {
-    "es": "contienda"
+    "es": "humedad"
   },
   "H7379:1": {
-    "es": "disputa"
+    "es": "contienda"
   },
   "H7379:2": {
-    "es": "león"
+    "es": "disputa"
   },
   "H738:1": {
-    "es": "aroma"
+    "es": "león"
   },
   "H7381:1": {
-    "es": "olor"
+    "es": "aroma"
   },
   "H7381:2": {
-    "es": "aliento"
-  },
-  "H7381:3": {
     "es": "olor"
   },
+  "H7381:3": {
+    "es": "aliento"
+  },
   "H7382:1": {
-    "es": "vaciedad"
+    "es": "olor"
   },
   "H7385:1": {
-    "es": "vanidad"
+    "es": "vaciedad"
   },
   "H7385:2": {
-    "es": "vacío"
+    "es": "vanidad"
   },
   "H7386:1": {
-    "es": "vano"
-  },
-  "H7386:2": {
-    "es": "vacíamente"
-  },
-  "H7387:1": {
-    "es": "vanamente"
-  },
-  "H7387:2": {
-    "es": "en condición vacía"
-  },
-  "H7387:3": {
     "es": "vacío"
   },
+  "H7386:2": {
+    "es": "vano"
+  },
+  "H7387:1": {
+    "es": "vacíamente"
+  },
+  "H7387:2": {
+    "es": "vanamente"
+  },
+  "H7387:3": {
+    "es": "en condición vacía"
+  },
   "H7387:4": {
-    "es": "en vano"
+    "es": "vacío"
   },
   "H7387:5": {
-    "es": "sin efecto"
+    "es": "en vano"
   },
   "H7387:6": {
-    "es": "jugo viscoso"
+    "es": "sin efecto"
   },
   "H7388:1": {
-    "es": "saliva"
+    "es": "jugo viscoso"
   },
   "H7388:2": {
-    "es": "pobreza"
+    "es": "saliva"
   },
   "H7389:1": {
-    "es": "Ariel"
+    "es": "pobreza"
   },
   "H739:1": {
-    "es": "leona de El"
-  },
-  "H739:2": {
-    "es": "n. pr. m. un hombre principal entre exiliados regresados"
-  },
-  "H739:3": {
-    "es": "dos hijos de Ariel de Moab"
-  },
-  "H739:4": {
-    "es": "y Qr"
-  },
-  "H739:5": {
-    "es": "tierno"
-  },
-  "H7390:1": {
-    "es": "delicado"
-  },
-  "H7390:2": {
-    "es": "suave"
-  },
-  "H7390:3": {
-    "es": "tierno"
-  },
-  "H7391:1": {
-    "es": "delicado"
-  },
-  "H7391:2": {
-    "es": "suave"
-  },
-  "H7391:3": {
-    "es": "carruaje"
-  },
-  "H7393:1": {
-    "es": "carro"
-  },
-  "H7393:2": {
-    "es": "piedra de molino"
-  },
-  "H7393:3": {
-    "es": "jinetes"
-  },
-  "H7393:4": {
-    "es": "banda de jinetes"
-  },
-  "H7394:1": {
-    "es": "auriga"
-  },
-  "H7395:1": {
-    "es": "jinete"
-  },
-  "H7395:2": {
-    "es": "montar"
-  },
-  "H7396:1": {
-    "es": "carro"
-  },
-  "H7398:1": {
-    "es": "propiedad"
-  },
-  "H7399:1": {
-    "es": "bienes"
-  },
-  "H7399:2": {
     "es": "Ariel"
   },
-  "H740:1": {
+  "H739:2": {
     "es": "leona de El"
   },
-  "H740:2": {
+  "H739:3": {
     "es": "n. pr. m. un hombre principal entre exiliados regresados"
   },
-  "H740:3": {
+  "H739:4": {
     "es": "dos hijos de Ariel de Moab"
   },
-  "H740:4": {
+  "H739:5": {
     "es": "y Qr"
   },
+  "H7390:1": {
+    "es": "tierno"
+  },
+  "H7390:2": {
+    "es": "delicado"
+  },
+  "H7390:3": {
+    "es": "suave"
+  },
+  "H7391:1": {
+    "es": "tierno"
+  },
+  "H7391:2": {
+    "es": "delicado"
+  },
+  "H7391:3": {
+    "es": "suave"
+  },
+  "H7393:1": {
+    "es": "carruaje"
+  },
+  "H7393:2": {
+    "es": "carro"
+  },
+  "H7393:3": {
+    "es": "piedra de molino"
+  },
+  "H7393:4": {
+    "es": "jinetes"
+  },
+  "H7394:1": {
+    "es": "banda de jinetes"
+  },
+  "H7395:1": {
+    "es": "auriga"
+  },
+  "H7395:2": {
+    "es": "jinete"
+  },
+  "H7396:1": {
+    "es": "montar"
+  },
+  "H7398:1": {
+    "es": "carro"
+  },
+  "H7399:1": {
+    "es": "propiedad"
+  },
+  "H7399:2": {
+    "es": "bienes"
+  },
+  "H740:1": {
+    "es": "Ariel"
+  },
+  "H740:2": {
+    "es": "leona de El"
+  },
+  "H740:3": {
+    "es": "n. pr. m. un hombre principal entre exiliados regresados"
+  },
+  "H740:4": {
+    "es": "dos hijos de Ariel de Moab"
+  },
   "H740:5": {
-    "es": "calumnia"
+    "es": "y Qr"
   },
   "H7400:1": {
-    "es": "chismoso"
+    "es": "calumnia"
   },
   "H7400:2": {
-    "es": "informante"
+    "es": "chismoso"
   },
   "H7400:3": {
-    "es": "comerciante"
+    "es": "informante"
   },
   "H7403:1": {
-    "es": "tráfico"
+    "es": "comerciante"
   },
   "H7404:1": {
-    "es": "mercancía"
+    "es": "tráfico"
   },
   "H7404:2": {
-    "es": "rugosidad"
+    "es": "mercancía"
   },
   "H7406:1": {
-    "es": "atadura"
+    "es": "rugosidad"
   },
   "H7406:2": {
-    "es": "saber"
+    "es": "atadura"
   },
   "H7406:3": {
-    "es": "impenetrable"
+    "es": "saber"
   },
   "H7406:4": {
-    "es": "cadena"
+    "es": "impenetrable"
   },
   "H7406:5": {
-    "es": "lazo"
+    "es": "cadena"
   },
   "H7407:1": {
-    "es": "banda"
+    "es": "lazo"
   },
   "H7407:2": {
-    "es": "unión"
+    "es": "banda"
   },
   "H7407:3": {
-    "es": "liga"
+    "es": "unión"
   },
   "H7407:4": {
-    "es": "conspiración"
+    "es": "liga"
   },
   "H7407:5": {
-    "es": "tramas"
+    "es": "conspiración"
   },
   "H7407:6": {
-    "es": "corceles"
+    "es": "tramas"
   },
   "H7409:1": {
-    "es": "hogar"
+    "es": "corceles"
   },
   "H741:1": {
-    "es": "hogar del altar"
+    "es": "hogar"
   },
   "H741:2": {
-    "es": "un antepasado de David, hermano de Jerameel"
+    "es": "hogar del altar"
   },
   "H7410:1": {
     "es": "un ancestro de David, hermano de Jerameel"
@@ -44121,31 +44151,31 @@
     "es": "entero"
   },
   "H8549:6": {
-    "es": "sano"
-  },
-  "H8549:7": {
-    "es": "saludable"
-  },
-  "H8549:8": {
-    "es": "completo"
-  },
-  "H8549:9": {
     "es": "entero"
   },
-  "H8549:10": {
+  "H8549:7": {
     "es": "sano"
   },
-  "H8549:11": {
+  "H8549:8": {
     "es": "saludable"
   },
+  "H8549:9": {
+    "es": "completo"
+  },
+  "H8549:10": {
+    "es": "entero"
+  },
+  "H8549:11": {
+    "es": "sano"
+  },
   "H8549:12": {
-    "es": "intacto"
+    "es": "saludable"
   },
   "H8549:13": {
-    "es": "inocente"
+    "es": "intacto"
   },
   "H8549:14": {
-    "es": "con integridad"
+    "es": "inocente"
   },
   "H8549:15": {
     "es": "teniendo integridad"

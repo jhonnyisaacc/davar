@@ -11,7 +11,7 @@ import re
 from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Callable, Iterable
 
 
 LEXICON_KEY_RE = re.compile(r"([HGD])(\d+)")
@@ -390,7 +390,9 @@ def summarize_issues(issues: list[ReviewIssue]) -> dict[str, Any]:
     }
 
 
-def load_latest_decisions(log_dir: Path) -> dict[str, dict[str, Any]]:
+def load_latest_decisions(
+    log_dir: Path, keep: Callable[[dict[str, Any]], bool] = lambda entry: True
+) -> dict[str, dict[str, Any]]:
     """Load the latest logged review decision for each stable occurrence."""
 
     latest: dict[str, dict[str, Any]] = {}
@@ -402,6 +404,8 @@ def load_latest_decisions(log_dir: Path) -> dict[str, dict[str, Any]]:
                 if not line.strip():
                     continue
                 entry = json.loads(line)
+                if not keep(entry):
+                    continue
                 occurrence = entry.get("occurrence") or {}
                 try:
                     key = (

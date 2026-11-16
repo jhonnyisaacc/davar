@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "estallido"
+      "text_es": "tormenta impulsora"
     },
     {
       "text_en": "bursting",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "desembolso"
+      "text_es": "estallido"
     }
   ],
   "sources": {

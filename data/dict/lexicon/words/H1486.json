@@ -33,14 +33,14 @@
       "source": "bdb",
       "order": 4,
       "sense": "3",
-      "text_es": "suerte"
+      "text_es": "cosa asignada"
     },
     {
       "text_en": "apportioned",
       "source": "bdb",
       "order": 5,
       "sense": "3",
-      "text_es": "cosa asignada"
+      "text_es": "asignado"
     },
     {
       "text_en": "allotted",
@@ -54,21 +54,21 @@
       "source": "bdb",
       "order": 7,
       "sense": "4",
-      "text_es": "asignado"
+      "text_es": "porción"
     },
     {
       "text_en": "recompence",
       "source": "bdb",
       "order": 8,
       "sense": "4",
-      "text_es": "porción"
+      "text_es": "recompensa"
     },
     {
       "text_en": "retribution",
       "source": "bdb",
       "order": 9,
       "sense": "4",
-      "text_es": "recompensa"
+      "text_es": "retribución"
     }
   ],
   "sources": {

@@ -12,28 +12,28 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "corte"
+      "text_es": "surco"
     },
     {
       "text_en": "cutting",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "surco"
+      "text_es": "corte"
     },
     {
       "text_en": "furrow",
       "source": "bdb",
       "order": 3,
       "sense": "1",
-      "text_es": "corte"
+      "text_es": "surco"
     },
     {
       "text_en": "cuttings",
       "source": "bdb",
       "order": 4,
       "sense": "2",
-      "text_es": "surco"
+      "text_es": "cortes"
     }
   ],
   "sources": {
