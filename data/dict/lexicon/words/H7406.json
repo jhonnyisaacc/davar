@@ -12,35 +12,35 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "atadura"
+      "text_es": "rugosidad"
     },
     {
       "text_en": "binding",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "saber"
+      "text_es": "atadura"
     },
     {
       "text_en": "know",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "impenetrable"
+      "text_es": "saber"
     },
     {
       "text_en": "impassable",
       "source": "bdb",
       "order": 4,
       "sense": "0",
-      "text_es": "cadena"
+      "text_es": "impenetrable"
     },
     {
       "text_en": "chain",
       "source": "bdb",
       "order": 5,
       "sense": "0",
-      "text_es": "lazo"
+      "text_es": "cadena"
     }
   ],
   "sources": {

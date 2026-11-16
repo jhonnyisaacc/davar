@@ -12,21 +12,21 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "arquitecto"
+      "text_es": "artífice"
     },
     {
       "text_en": "architect",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "maestro artesano"
+      "text_es": "arquitecto"
     },
     {
       "text_en": "master-workman",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "estandarte"
+      "text_es": "maestro artesano"
     }
   ],
   "sources": {

@@ -12,28 +12,28 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "mosquitos"
+      "text_es": "mosquito"
     },
     {
       "text_en": "gnats",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "enjambre de mosquitos"
+      "text_es": "mosquitos"
     },
     {
       "text_en": "gnat-swarm",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "piojos"
+      "text_es": "enjambre de mosquitos"
     },
     {
       "text_en": "lice",
       "source": "bdb",
       "order": 4,
       "sense": "0",
-      "text_es": "soporte"
+      "text_es": "piojos"
     }
   ],
   "sources": {

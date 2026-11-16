@@ -12,42 +12,42 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "sustento"
+      "text_es": "preservación de la vida"
     },
     {
       "text_en": "sustenance",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "revivificación"
+      "text_es": "sustento"
     },
     {
       "text_en": "preservation of life",
       "source": "bdb",
       "order": 3,
       "sense": "1",
-      "text_es": "sustento"
+      "text_es": "preservación de la vida"
     },
     {
       "text_en": "sustenance",
       "source": "bdb",
       "order": 4,
       "sense": "2",
-      "text_es": "revivificación"
+      "text_es": "sustento"
     },
     {
       "text_en": "reviving",
       "source": "bdb",
       "order": 5,
       "sense": "3",
-      "text_es": "lo vivo"
+      "text_es": "revivificación"
     },
     {
       "text_en": "the quick",
       "source": "bdb",
       "order": 6,
       "sense": "4",
-      "text_es": "precio"
+      "text_es": "lo vivo"
     }
   ],
   "sources": {

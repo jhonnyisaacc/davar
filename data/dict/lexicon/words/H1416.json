@@ -12,42 +12,42 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "banco"
+      "text_es": "banda"
     },
     {
       "text_en": "troop",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "banda de merodeadores"
+      "text_es": "tropa"
     },
     {
       "text_en": "marauding band",
       "source": "bdb",
       "order": 3,
       "sense": "1",
-      "text_es": "tropa"
+      "text_es": "banda de merodeadores"
     },
     {
       "text_en": "troop",
       "source": "bdb",
       "order": 4,
       "sense": "2",
-      "text_es": "banda de merodeadores"
+      "text_es": "tropa"
     },
     {
       "text_en": "foray",
       "source": "bdb",
       "order": 5,
       "sense": "3",
-      "text_es": "tropa"
+      "text_es": "incursión"
     },
     {
       "text_en": "raid",
       "source": "bdb",
       "order": 6,
       "sense": "3",
-      "text_es": "incursión"
+      "text_es": "asalto"
     }
   ],
   "sources": {

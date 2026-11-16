@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "porción"
+      "text_es": "corte"
     },
     {
       "text_en": "separation",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "corte"
+      "text_es": "separación"
     }
   ],
   "sources": {

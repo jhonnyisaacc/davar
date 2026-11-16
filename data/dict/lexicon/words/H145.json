@@ -12,35 +12,35 @@
       "source": "bdb",
       "order": 1,
       "sense": "1",
-      "text_es": "muro"
+      "text_es": "gloria"
     },
     {
       "text_en": "magnificence",
       "source": "bdb",
       "order": 2,
       "sense": "1",
-      "text_es": "gloria"
+      "text_es": "magnificencia"
     },
     {
       "text_en": "mantle",
       "source": "bdb",
       "order": 3,
       "sense": "2",
-      "text_es": "magnificencia"
+      "text_es": "manto"
     },
     {
       "text_en": "cloak",
       "source": "bdb",
       "order": 4,
       "sense": "2",
-      "text_es": "manto"
+      "text_es": "capa"
     },
     {
       "text_en": "wide",
       "source": "bdb",
       "order": 5,
       "sense": "2",
-      "text_es": "capa"
+      "text_es": "ancho"
     },
     {
       "text_en": "amplitude",

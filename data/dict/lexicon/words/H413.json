@@ -33,84 +33,84 @@
       "source": "bdb",
       "order": 4,
       "sense": "2",
-      "text_es": "hacia"
+      "text_es": "hacia adentro"
     },
     {
       "text_en": "towards",
       "source": "bdb",
       "order": 5,
       "sense": "3",
-      "text_es": "contra"
+      "text_es": "hacia"
     },
     {
       "text_en": "against",
       "source": "bdb",
       "order": 6,
       "sense": "4",
-      "text_es": "movimiento"
+      "text_es": "contra"
     },
     {
       "text_en": "Unto",
       "source": "bdb",
       "order": 7,
       "sense": "5",
-      "text_es": "además de"
+      "text_es": "hacia"
     },
     {
       "text_en": "in addition to",
       "source": "bdb",
       "order": 8,
       "sense": "5",
-      "text_es": "con respecto a"
+      "text_es": "además de"
     },
     {
       "text_en": "in regard to",
       "source": "bdb",
       "order": 9,
       "sense": "6",
-      "text_es": "concerniente"
+      "text_es": "con respecto a"
     },
     {
       "text_en": "concerning",
       "source": "bdb",
       "order": 10,
       "sense": "6",
-      "text_es": "a causa de"
+      "text_es": "concerniente"
     },
     {
       "text_en": "on account of",
       "source": "bdb",
       "order": 11,
       "sense": "6",
-      "text_es": "según"
+      "text_es": "a causa de"
     },
     {
       "text_en": "according to",
       "source": "bdb",
       "order": 12,
       "sense": "7",
-      "text_es": "contra"
+      "text_es": "según"
     },
     {
       "text_en": "against",
       "source": "bdb",
       "order": 13,
       "sense": "8",
-      "text_es": "movimiento"
+      "text_es": "contra"
     },
     {
       "text_en": "motion",
       "source": "bdb",
       "order": 14,
       "sense": "9",
-      "text_es": "dirección hacia"
+      "text_es": "movimiento"
     },
     {
       "text_en": "direction to",
       "source": "bdb",
       "order": 15,
       "sense": "9",
-      "text_es": "sacudida"
+      "text_es": "dirección hacia"
     }
   ],
   "sources": {

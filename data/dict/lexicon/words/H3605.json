@@ -12,63 +12,63 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "todo"
+      "text_es": "el todo"
     },
     {
       "text_en": "all",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "el todo"
+      "text_es": "todo"
     },
     {
       "text_en": "the whole of",
       "source": "bdb",
       "order": 3,
       "sense": "1",
-      "text_es": "cualquiera"
+      "text_es": "el todo de"
     },
     {
       "text_en": "any",
       "source": "bdb",
       "order": 4,
       "sense": "1",
-      "text_es": "cada"
+      "text_es": "cualquiera"
     },
     {
       "text_en": "every",
       "source": "bdb",
       "order": 5,
       "sense": "1",
-      "text_es": "todas las cosas"
+      "text_es": "cada"
     },
     {
       "text_en": "all things",
       "source": "bdb",
       "order": 6,
       "sense": "2a",
-      "text_es": "todo"
+      "text_es": "todas las cosas"
     },
     {
       "text_en": "all",
       "source": "bdb",
       "order": 7,
       "sense": "2a",
-      "text_es": "el todo"
+      "text_es": "todo"
     },
     {
       "text_en": "where the sense is limited by the context to things (or persons) just mentioned",
       "source": "bdb",
       "order": 8,
       "sense": "2b(a)",
-      "text_es": "todo"
+      "text_es": "donde el sentido está limitado por el contexto a cosas (o personas) recién mencionadas"
     },
     {
       "text_en": "all",
       "source": "bdb",
       "order": 9,
       "sense": "2b(b)",
-      "text_es": "el todo"
+      "text_es": "todo"
     }
   ],
   "sources": {

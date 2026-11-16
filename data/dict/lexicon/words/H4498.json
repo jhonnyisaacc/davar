@@ -12,21 +12,21 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "lugar de escape"
+      "text_es": "huida"
     },
     {
       "text_en": "place of escape",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "refugio"
+      "text_es": "lugar de escape"
     },
     {
       "text_en": "refuge",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "huida"
+      "text_es": "refugio"
     }
   ],
   "sources": {
