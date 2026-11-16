@@ -23,7 +23,7 @@
     }
   ],
   "diagnostics": [],
-  "input_manifest_digest": "ae8699f6ec16246a3822ebae12614ba70870cefbc79a6647e83764e10de1df8c",
+  "input_manifest_digest": "9d116b0a5249c7c227c78ae3424ee0d511e903014416dcae140057cfb90b2653",
   "records": {
     "concepts": [],
     "editions": [
@@ -326,7 +326,7 @@
         "path": "data/dict/lexicon/words.json",
         "repository": "https://github.com/jhonnyisaacc/davar",
         "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-        "sha256": "ff7823061b3567180096bc84f078bc90975eb44e3bd479e4772f7b8a086c70fa",
+        "sha256": "64e1ca11da891761106251b99a11898029a7390156abb0dd574158aa6dcc42d5",
         "visibility": "public"
       },
       {
@@ -336,7 +336,7 @@
         "path": "data/delitzsch/parsed/john/1.json",
         "repository": "https://github.com/jhonnyisaacc/davar",
         "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-        "sha256": "9a3b45a89580117ab68b147ec7ebd59be17862c8951728c71b36b06f92363046",
+        "sha256": "9472e153046563290651bddd20bbb8341d8c54fedad64587e43907d739a0a948",
         "visibility": "public"
       },
       {

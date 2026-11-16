@@ -62,8 +62,8 @@ class GrokTranslator:
         self._mismatch_stats = {
             'total_batches': 0,
             'mismatched_batches': 0,
-            'total_padding': 0,
-            'total_truncation': 0,
+            'total_missing': 0,
+            'total_extra': 0,
             'mismatch_patterns': {}
         }
     
@@ -251,11 +251,10 @@ Input definitions:
                 actual_count = len(translations)
                 mismatch_diff = actual_count - expected_count
 
-                # Track padding/truncation
                 if mismatch_diff > 0:
-                    self._mismatch_stats['total_truncation'] += mismatch_diff
+                    self._mismatch_stats['total_extra'] += mismatch_diff
                 elif mismatch_diff < 0:
-                    self._mismatch_stats['total_padding'] += abs(mismatch_diff)
+                    self._mismatch_stats['total_missing'] += abs(mismatch_diff)
 
                 # Track mismatch patterns
                 pattern_key = f"{expected_count}->{actual_count}"
@@ -277,20 +276,10 @@ Input definitions:
                         translated = translations[i][:50] + "..." if i < len(translations) and len(translations[i]) > 50 else translations[i] if i < len(translations) else "[MISSING]"
                         log_msg += f"\n  {i+1}. '{original}' -> '{translated}'"
 
-                # Log action taken
-                if mismatch_diff > 0:
-                    log_msg += f"\nAction: Truncated {mismatch_diff} extra translations"
-                elif mismatch_diff < 0:
-                    log_msg += f"\nAction: Padded with {abs(mismatch_diff)} empty strings"
-
                 logger.warning(log_msg)
-            
-            # Ensure we have the same number of translations as inputs
-            # Pad with empty strings if needed
-            while len(translations) < len(texts):
-                translations.append("")
-            
-            return translations[:len(texts)]
+                raise ValueError(log_msg)
+
+            return translations
             
         except json.JSONDecodeError as e:
             logger.error(f"Failed to parse JSON response: {e}")

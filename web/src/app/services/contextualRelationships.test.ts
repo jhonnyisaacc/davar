@@ -24,7 +24,7 @@ type ShippedRecord = {
 	rationale: { es: string };
 	attribution: { credit: string };
 	provenance: { path: string; json_pointer: string };
-	review: { status: string };
+	review: unknown;
 };
 
 const shipped = readJson<{ relationships: ShippedRecord[] }>(
@@ -95,24 +95,38 @@ const glossOf = (gloss: string | null) =>
 	mock<RelatedGlossSource>(async () => gloss);
 
 describe("shipped relationship", () => {
-	test("parses without issues and claims no reviewer", () => {
+	test("parses without issues and names its reviewer", () => {
 		expect(contextualRelationships.issues).toEqual([]);
-		expect(shipped.review).toEqual({ status: "unreviewed" });
+		expect(shipped.review).toEqual({
+			status: "approved",
+			reviewer: { name: "Jhonny" },
+			reviewed_on: "2026-11-16",
+		});
 	});
 
-	test("renders nowhere and never asks for a gloss", async () => {
+	test("renders on both sides at John 1:1 only, in Spanish only", async () => {
 		const gloss = glossOf("Fixture gloss");
+		const sides = [
+			["G3056", "H1697"],
+			["Hd/H1697", "G3056"],
+		];
 		for (const language of LANGUAGES) {
-			for (const strong of ["G3056", "Hd/H1697"]) {
+			for (const [strong, related] of sides) {
+				const rows = await contextualRelationships.loadRelated(
+					{ strong, verse: JOHN_1_1, language },
+					gloss,
+				);
+				expect(
+					rows.map((row) => [row.id, row.related.strong, row.reviewer]),
+				).toEqual(language === "es" ? [[shipped.id, related, "Jhonny"]] : []);
 				expect(
 					await contextualRelationships.loadRelated(
-						{ strong, verse: JOHN_1_1, language },
+						{ strong, verse: { ...JOHN_1_1, verse: 2 }, language },
 						gloss,
 					),
 				).toEqual([]);
 			}
 		}
-		expect(gloss).not.toHaveBeenCalled();
 	});
 
 	test("rationale is the source footnote verbatim", () => {

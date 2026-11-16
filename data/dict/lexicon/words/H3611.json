@@ -12,21 +12,21 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "mis perros pastores"
+      "text_es": "perro"
     },
     {
       "text_en": "my sheep-dogs",
       "source": "bdb",
       "order": 2,
       "sense": "a",
-      "text_es": "un perro muerto"
+      "text_es": "mis perros pastores"
     },
     {
       "text_en": "a dead dog",
       "source": "bdb",
       "order": 3,
       "sense": "b",
-      "text_es": "fallando"
+      "text_es": "un perro muerto"
     }
   ],
   "sources": {

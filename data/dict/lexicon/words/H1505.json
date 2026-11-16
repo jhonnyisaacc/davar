@@ -12,21 +12,21 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "tallo"
+      "text_es": "cortar"
     },
     {
       "text_en": "divide",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "cortar"
+      "text_es": "dividir"
     },
     {
       "text_en": "determine",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "dividir"
+      "text_es": "determinar"
     },
     {
       "text_en": "determiners",

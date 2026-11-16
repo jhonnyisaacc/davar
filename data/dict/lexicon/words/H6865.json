@@ -8,18 +8,11 @@
   "translit_es": "tzor",
   "definitions": [
     {
-      "text_en": "narrow",
-      "source": "bdb",
+      "text_en": "Tyre; Phoenician port city on the coast north of Israel",
+      "source": "delitzsch_review",
       "order": 1,
       "sense": "0",
-      "text_es": "estrecho"
-    },
-    {
-      "text_en": "tight",
-      "source": "bdb",
-      "order": 2,
-      "sense": "0",
-      "text_es": "apretado"
+      "text_es": "Tiro; ciudad portuaria fenicia en la costa al norte de Israel"
     }
   ],
   "sources": {

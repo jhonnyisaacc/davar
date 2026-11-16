@@ -13,6 +13,7 @@ GROUPS = {
         "besorah",
         "greek-source",
         "hutter",
+        "relationships",
     ),
 }
 

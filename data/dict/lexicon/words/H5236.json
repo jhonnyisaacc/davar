@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "extranjía"
+      "text_es": "lo que es extranjero"
     },
     {
       "text_en": "foreignness",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "extranjero"
+      "text_es": "extranjía"
     }
   ],
   "sources": {

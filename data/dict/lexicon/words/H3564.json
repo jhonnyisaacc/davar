@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "horno"
+      "text_es": "crisol"
     },
     {
       "text_en": "furnace",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "Ciro"
+      "text_es": "horno"
     }
   ],
   "sources": {

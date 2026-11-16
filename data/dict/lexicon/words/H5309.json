@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "aborto"
+      "text_es": "nacimiento prematuro"
     },
     {
       "text_en": "abortion",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "tormenta impulsora"
+      "text_es": "aborto"
     }
   ],
   "sources": {

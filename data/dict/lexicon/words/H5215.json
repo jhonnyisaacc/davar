@@ -12,21 +12,21 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "sin cultivar"
+      "text_es": "lo arable"
     },
     {
       "text_en": "untilled",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "barbecho"
+      "text_es": "sin cultivar"
     },
     {
       "text_en": "fallow ground",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "lámpara"
+      "text_es": "barbecho"
     }
   ],
   "sources": {

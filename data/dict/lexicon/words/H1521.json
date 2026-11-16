@@ -12,21 +12,21 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "un manantial"
+      "text_es": "un estallido"
     },
     {
       "text_en": "one of the rivers of Eden",
       "source": "bdb",
       "order": 2,
       "sense": "1",
-      "text_es": "un estallido"
+      "text_es": "uno de los ríos del Edén"
     },
     {
       "text_en": "spring of water near Jerusalem",
       "source": "bdb",
       "order": 3,
       "sense": "2",
-      "text_es": "uno de los ríos del Edén"
+      "text_es": "manantial de agua cerca de Jerusalén"
     }
   ],
   "sources": {

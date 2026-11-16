@@ -12,42 +12,42 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "cadáver"
+      "text_es": "cuerpo"
     },
     {
       "text_en": "corpse",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "cuerpo muerto"
+      "text_es": "cadáver"
     },
     {
       "text_en": "body",
       "source": "bdb",
       "order": 3,
       "sense": "1",
-      "text_es": "cadáver"
+      "text_es": "cuerpo"
     },
     {
       "text_en": "dead body",
       "source": "bdb",
       "order": 4,
       "sense": "2",
-      "text_es": "cuerpo"
+      "text_es": "cuerpo muerto"
     },
     {
       "text_en": "corpse",
       "source": "bdb",
       "order": 5,
       "sense": "2",
-      "text_es": "cuerpo muerto"
+      "text_es": "cadáver"
     },
     {
       "text_en": "carcass",
       "source": "bdb",
       "order": 6,
       "sense": "2",
-      "text_es": "cadáver"
+      "text_es": "carcasa"
     }
   ],
   "sources": {

@@ -12,35 +12,35 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "restricción"
+      "text_es": "confinamiento"
     },
     {
       "text_en": "restraint",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "encarcelamiento"
+      "text_es": "restricción"
     },
     {
       "text_en": "imprisonment",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "prisión"
+      "text_es": "encarcelamiento"
     },
     {
       "text_en": "prison",
       "source": "bdb",
       "order": 4,
       "sense": "0",
-      "text_es": "vestiduras de imprisonment"
+      "text_es": "prisión"
     },
     {
       "text_en": "garments of imprisonment",
       "source": "bdb",
       "order": 5,
       "sense": "0",
-      "text_es": "pórtico"
+      "text_es": "vestiduras de imprisonment"
     }
   ],
   "sources": {

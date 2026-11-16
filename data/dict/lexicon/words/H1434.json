@@ -12,21 +12,21 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "insolencia de corazón"
+      "text_es": "hilos torcidos"
     },
     {
       "text_en": "tassels",
       "source": "bdb",
       "order": 2,
       "sense": "1",
-      "text_es": "hilos torcidos"
+      "text_es": "borlas"
     },
     {
       "text_en": "festoons",
       "source": "bdb",
       "order": 3,
       "sense": "2",
-      "text_es": "borlas"
+      "text_es": "festones"
     }
   ],
   "sources": {

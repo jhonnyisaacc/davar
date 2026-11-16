@@ -25,28 +25,28 @@
       "source": "bdb",
       "order": 3,
       "sense": "1",
-      "text_es": "verídico"
+      "text_es": "derecho"
     },
     {
       "text_en": "veritable",
       "source": "bdb",
       "order": 4,
       "sense": "2",
-      "text_es": "verdadero"
+      "text_es": "verídico"
     },
     {
       "text_en": "true",
       "source": "bdb",
       "order": 5,
       "sense": "2",
-      "text_es": "honesto"
+      "text_es": "verdadero"
     },
     {
       "text_en": "honest",
       "source": "bdb",
       "order": 6,
       "sense": "3",
-      "text_es": "así"
+      "text_es": "honesto"
     },
     {
       "text_en": "so",

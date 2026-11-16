@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "cristal"
+      "text_es": "límite"
     },
     {
       "text_en": "border",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "límite"
+      "text_es": "borde"
     },
     {
       "text_en": "set bounds for",
