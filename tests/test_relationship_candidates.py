@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+from scripts.books import load_books
 from scripts.relationships import candidates as lever
 
 APPROVAL = {"status": "approved", "reviewer": {"name": "Reviewer"}, "reviewed_on": "2026-11-16"}
@@ -111,6 +112,24 @@ def test_tanakh_greek_side_is_unchecked_not_guessed():
     checks = ezekiel["pairs"][0]["precheck"]
     assert checks["greek"]["status"] == "unchecked"
     assert checks["hebrew"]["status"] == "found"
+
+
+@pytest.mark.parametrize("book", load_books(), ids=lambda book: book["id"])
+def test_precheck_reads_every_book_in_each_corpus(book):
+    note = lever.Footnote(
+        path="",
+        json_pointer="",
+        tth_name=book["name"],
+        book_id=book["id"],
+        in_besorah=book["section"] == "besorah",
+        chapter=1,
+        verse=1,
+        number="1",
+        explanation="",
+    )
+    languages = ["greek", "hebrew"] if note.in_besorah else ["hebrew"]
+    for language in languages:
+        assert lever.precheck(note, language, "H0")["status"] == "absent"
 
 
 def test_unknown_term_stops_the_run():

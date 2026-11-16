@@ -12,7 +12,7 @@ from dataclasses import dataclass
 from functools import lru_cache
 from pathlib import Path
 
-from scripts.books import book_by_tth_code
+from scripts.books import book_by_tth_code, load_books
 from scripts.paths import DATA, ROOT
 
 TTH_JSON = DATA / "tth" / "json"
@@ -150,8 +150,13 @@ def _delitzsch_tokens(book_id: str, chapter: int, verse: int) -> list[tuple[str,
     ]
 
 
+def _tanakh_file(book_id: str) -> Path:
+    book = next(book for book in load_books() if book["id"] == book_id)
+    return TANAKH / f"{book['dict']['book_id']}.json"
+
+
 def _tanakh_tokens(book_id: str, chapter: int, verse: int) -> list[tuple[str, str]]:
-    book = json.loads((TANAKH / f"{book_id}.json").read_text(encoding="utf-8"))
+    book = json.loads(_tanakh_file(book_id).read_text(encoding="utf-8"))
     row = book.get(str(chapter), {}).get(str(verse), {"words": []})
     return [(word["hebrew"], word["strong_number"]) for word in row["words"]]
 
