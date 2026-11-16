@@ -121,6 +121,49 @@ word that shares at most one letter with its lemma. `Hd/H1277` agrees with
 `remediate check` reverts the Strong number and the prefixes of each
 `corrected` record, so any other edit to the corpus still fails the check.
 
+### Root-letter prefixes outside the queue (#380)
+
+Some words outside the review queue tag a root letter as a prefix and build
+it into the Strong string as well, such as `בָּחַרְתָּ` stored as `Hb/H977`.
+The queue never flags them, because the Strong string and the prefixes agree.
+`review root-letter-prefixes` also scans every word outside the queue and
+writes `batches/root_letter_prefixes_outside_queue.json`. Its `decisions`
+remove the false prefixes from both the prefix list and the Strong string, so
+`Hb/H977` becomes `H977`. Its `unresolved` list gives every other match with
+its token, Strong string, prefixes, lemma, and reason. Apply the batch with
+`review apply root_letter_prefixes_outside_queue.json`, then run
+`review dispositions`.
+
+A match is corrected only when one of these is true:
+
+- `reviewed_strong`: the latest review decision before the correction,
+  `applied`, `already_applied`, or `skipped`, kept the same Strong number.
+  The #366 rule then decides the prefixes.
+- `lemma_check`: no review decision exists, the lemma has at least three
+  letters, the whole lemma follows the real prefixes, and a removed `Hd` does
+  not have the article's shape. Also, no stem that follows a removed prefix is
+  a lexicon lemma or starts with a lemma of three or more letters. The scan
+  checks the stem after each removed prefix, so `לְבָנִים` tagged `Hl/Hb`
+  stays unresolved, because `בָּנִים` after `לְ` reads as sons.
+
+Every other match stays as tagged. The reasons are `manual_review` (a
+`needs_manual_review` decision), `short_lemma`, `lemma_not_in_word`,
+`prefix_reading` (such as `בְּאֵשׁ` mapped to H888, which reads as `בְּ` and
+`אֵשׁ`, fire), and `article_shape` (such as `וְהַנֶּהֱנִים`). The
+`root_letter_prefix_outside_queue` rule recomputes the match from the
+decision's occurrence and raises an error when the decision does not agree
+with it. Each correction gets a ledger record with `source` set to
+`decision_log` in the `outside_queue` family. A later review decision that
+keeps the Strong number of an unresolved match lets a rerun of the scan
+correct it.
+
+When the rule changes and no longer finds an applied correction certain, the
+scan adds a `root_letter_prefix_withdrawn` decision to the batch. The decision
+restores the original Strong string and prefixes. Apply it with
+`review apply`. A withdrawn correction gets no ledger record, because the
+word again matches the validated plan, and the scan lists the word as
+unresolved. A withdrawal never counts as a review of the Strong number.
+
 ### Style-only prefixes (#364)
 
 Most prefix-only flags are style differences. The word's prefixes are real, and
