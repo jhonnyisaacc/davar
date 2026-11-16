@@ -1885,7 +1885,7 @@
     "en",
     "es"
    ],
-   "occurrences": 153,
+   "occurrences": 148,
    "source": "custom"
   },
   "D0275": {
@@ -1893,7 +1893,7 @@
     "en",
     "es"
    ],
-   "occurrences": 67,
+   "occurrences": 72,
    "source": "custom"
   },
   "D0276": {
@@ -3448,7 +3448,7 @@
     "en",
     "es"
    ],
-   "occurrences": 233,
+   "occurrences": 235,
    "source": "canonical_and_custom"
   },
   "H1571": {
@@ -4056,11 +4056,6 @@
    "occurrences": 1,
    "source": "canonical"
   },
-  "H1784": {
-   "languages": [],
-   "occurrences": 1,
-   "source": "canonical"
-  },
   "H1792": {
    "languages": [
     "en",
@@ -4345,7 +4340,7 @@
     "en",
     "es"
    ],
-   "occurrences": 3,
+   "occurrences": 4,
    "source": "canonical"
   },
   "H1865": {
@@ -12702,7 +12697,7 @@
     "en",
     "es"
    ],
-   "occurrences": 83,
+   "occurrences": 84,
    "source": "canonical_and_custom"
   },
   "H4562": {
@@ -21002,7 +20997,7 @@
     "en",
     "es"
    ],
-   "occurrences": 832,
+   "occurrences": 833,
    "source": "canonical_and_custom"
   },
   "H7205": {
@@ -25960,7 +25955,7 @@
     "en",
     "es"
    ],
-   "occurrences": 5,
+   "occurrences": 1,
    "source": "canonical"
   },
   "H995": {
@@ -26004,11 +25999,6 @@
     "occurrences": 5,
     "source": "canonical",
     "strong": "H1704"
-   },
-   {
-    "occurrences": 1,
-    "source": "canonical",
-    "strong": "H1784"
    },
    {
     "occurrences": 1,
@@ -26231,11 +26221,6 @@
     "occurrences": 5,
     "source": "canonical",
     "strong": "H1704"
-   },
-   {
-    "occurrences": 1,
-    "source": "canonical",
-    "strong": "H1784"
    },
    {
     "occurrences": 2,
@@ -26498,19 +26483,19 @@
  "schema_version": 1,
  "totals": {
   "by_source": {
-   "canonical": 2431,
+   "canonical": 2430,
    "canonical_and_custom": 592,
    "custom": 243
   },
-  "identifiers": 3266,
+  "identifiers": 3265,
   "missing_definitions": {
    "en": {
-    "identifiers": 43,
-    "occurrences": 156
+    "identifiers": 42,
+    "occurrences": 155
    },
    "es": {
-    "identifiers": 56,
-    "occurrences": 255
+    "identifiers": 55,
+    "occurrences": 254
    }
   },
   "missing_entries": 0,

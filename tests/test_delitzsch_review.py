@@ -581,20 +581,20 @@ def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
     committed = dispositions.read_ledger()
     assert committed == rebuilt
     summary = committed["summary"]
-    assert summary["total"] == 11528 + 16084 + 4965
+    assert summary["total"] == 11528 + 16084 + 4970
     assert summary["by_disposition"]["unresolved"] == 0
     assert summary["by_family"]["prefix_metadata"] == {
         "benign": 1386, "corrected": 3509, "already_reviewed": 348, "unresolved": 0, "blocked": 251, "superseded": 0,
     }
     assert summary["by_family"]["outside_queue"] == {
-        "benign": 0, "corrected": 4954, "already_reviewed": 0, "unresolved": 0, "blocked": 11, "superseded": 0,
+        "benign": 0, "corrected": 4959, "already_reviewed": 0, "unresolved": 0, "blocked": 11, "superseded": 0,
     }
     assert summary["benign_lexical_review"] == {"pending": 0, "reviewed": 1749}
     assert summary["by_family"]["legacy_assignment"] == {
-        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 7879, "superseded": 8205,
+        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 7876, "superseded": 8208,
     }
     assert {rule: summary["by_rule"][rule] for rule in ("legacy_without_candidate", "legacy_current_value", "legacy_blocked", "lexical_review")} == {
-        "legacy_without_candidate": 4360, "legacy_current_value": 3845, "legacy_blocked": 7879, "lexical_review": 2300,
+        "legacy_without_candidate": 4360, "legacy_current_value": 3848, "legacy_blocked": 7876, "lexical_review": 2300,
     }
 
 
@@ -772,6 +772,9 @@ def test_follow_up_lexical_review_maps_hebrew_letters_and_suffixed_prepositions_
     temptation = ledger_record("matthew.6.13.3")
     assert (temptation["disposition"], temptation["rule"], temptation["reviewer"]) == ("blocked", "lexical_review", "claude-delitzsch-review")
     assert parsed_verse("luke", 7, 6)["words"][17]["strong"] == "H994"
+    assert ledger_record("luke.4.34.3")["after"]["strong"] == "Hc/D0275"
+    assert ledger_record("acts.28.13.7")["after"]["strong"] == "H1864"
+    assert [ledger_record(location)["after"]["strong"] for location in ("luke.23.25.15", "john.14.17.10", "john.14.21.10")] == ["H4560", "H7200", "H157"]
     assert [w["strong"] for w in parsed_verse("thessalonians2", 3, 17)["words"] if w["strong"].endswith(("H104", "H107"))] == ["Hd/H107"]
 
 
@@ -916,6 +919,7 @@ def test_ledger_records_a_reviewed_strong_correction_outside_the_queue_and_rejec
         dict(valid, new_strong="Hd/H1277"),
         dict(valid, previous_strong="Hd/H1279"),
         dict(valid, new_prefixes=[]),
+        dict(valid, reason=None),
         dict(valid, evidence={key: value for key, value in evidence.items() if key != "context"}),
     ):
         with pytest.raises(ValueError, match="does not satisfy the reviewed Strong correction rule"):
@@ -964,6 +968,8 @@ def test_lexical_reviews_keep_correct_or_block_a_queued_occurrence():
     (lexical_reviewed("set_strong", "error", "Hl/H859"), "reviewed Strong correction rule"),
     (lexical_reviewed("set_strong", "applied", "Hl/H859", previous_strong="H3922"), "reviewed Strong correction rule"),
     (lexical_reviewed("set_strong", "applied", "Hl/H859", reviewer="rule:anything_v1"), "reviewed Strong correction rule"),
+    (lexical_reviewed("set_strong", "applied", "Hl/H859", reason=None), "reviewed Strong correction rule"),
+    (lexical_reviewed("set_strong", "applied", "Hl/H859", reason=""), "reviewed Strong correction rule"),
     (lexical_reviewed("set_strong", "applied", "Hl/H859", evidence=dict(lexicon="H859", grammar="suffix")), "reviewed Strong correction rule"),
 ])
 def test_ledger_rejects_a_lexical_review_the_rules_do_not_support(decision, rule):
