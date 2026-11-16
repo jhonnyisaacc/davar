@@ -116,7 +116,9 @@ def test_publication_status_comes_from_reviewed_decisions_only(tmp_path):
     rows=[{"action":"create_custom_entry","status":"applied","reviewer":"r","custom_key":"D1","definition":{"text_en":"Peter","text_es":"Pedro"}},
         {"action":"create_custom_entry","status":"applied","custom_key":"D2","definition":{"text_en":"Andrew","text_es":"Andrés"}},
         {"action":"create_custom_entry","status":"applied","reviewer":"r","custom_key":"D3","definition":{"text_en":"Titus","text_es":""}},
-        {"action":"needs_manual_review","status":"needs_manual_review","reviewer":"r","new_strong":"D4"}]
+        {"action":"needs_manual_review","status":"needs_manual_review","reviewer":"r","new_strong":"D4"},
+        {"action":"upsert_custom_definition","status":"applied","reviewer":"claude-delitzsch-review","strong":"D6","definition":{"text_en":"in you","text_es":"en ti"}},
+        {"action":"create_custom_entry","status":"applied","reviewer":"rule:style_only_prefix_v5","custom_key":"D7","definition":{"text_en":"Mark","text_es":"Marcos"}}]
     (tmp_path/"acts.jsonl").write_text("".join(json.dumps(row)+"\n" for row in rows))
     ledger=load_ledger(tmp_path)
     imported={"text_es":"Pedro","review_status":"imported"}
@@ -126,6 +128,8 @@ def test_publication_status_comes_from_reviewed_decisions_only(tmp_path):
     assert publication("D3",entry("Titus","Tito"),ledger)["evidence"]==["definition order 1 has no reviewed decision"]
     assert publication("D4",entry("x","y"),ledger)=={"status":"blocked","rule":"pending_manual_review","rule_version":1,"evidence":["acts.jsonl:4"]}
     assert publication("D5",{"definitions":[imported]},ledger)["status"]=="draft"
+    assert publication("D6",entry("in you","en ti"),ledger)["evidence"]==["acts.jsonl:5 claude-delitzsch-review"]
+    assert publication("D7",entry("Mark","Marcos"),ledger)["status"]=="draft"
 
 def test_unapproved_custom_entries_are_unpublished_not_gaps(tmp_path):
     from scripts.delitzsch.definition_coverage import build_report, check_errors, encoded, occurrence_counts

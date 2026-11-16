@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "pánico"
+      "text_es": "temblor"
     },
     {
       "text_en": "panic",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "volverse fresco"
+      "text_es": "pánico"
     }
   ],
   "sources": {

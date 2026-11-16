@@ -12,28 +12,28 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "Ajalón"
+      "text_es": "Ciervo"
     },
     {
       "text_en": "Aijalon",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "ciudad en Dan"
+      "text_es": "Ajalón"
     },
     {
       "text_en": "city in Dan",
       "source": "bdb",
       "order": 3,
       "sense": "1",
-      "text_es": "ciudad en Zabulón"
+      "text_es": "ciudad en Dan"
     },
     {
       "text_en": "city in Zebulun",
       "source": "bdb",
       "order": 4,
       "sense": "2",
-      "text_es": "bisabuelo de יְהוּדִי"
+      "text_es": "ciudad en Zabulón"
     }
   ],
   "sources": {

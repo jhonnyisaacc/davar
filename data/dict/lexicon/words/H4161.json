@@ -12,42 +12,42 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "acto de salir"
+      "text_es": "lugar"
     },
     {
       "text_en": "act of going forth",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "emisión"
+      "text_es": "acto de salir"
     },
     {
       "text_en": "issue",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "exportación"
+      "text_es": "emisión"
     },
     {
       "text_en": "export",
       "source": "bdb",
       "order": 4,
       "sense": "0",
-      "text_es": "fuente"
+      "text_es": "exportación"
     },
     {
       "text_en": "source",
       "source": "bdb",
       "order": 5,
       "sense": "0",
-      "text_es": "manantial"
+      "text_es": "fuente"
     },
     {
       "text_en": "spring",
       "source": "bdb",
       "order": 6,
       "sense": "0",
-      "text_es": "hijo de Caleb por Efa su concubina"
+      "text_es": "manantial"
     }
   ],
   "sources": {

@@ -12,119 +12,119 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "sentado"
+      "text_es": "asiento"
     },
     {
       "text_en": "assembly",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "lugar de morada"
+      "text_es": "asamblea"
     },
     {
       "text_en": "dwelling-place",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "morada"
+      "text_es": "lugar de morada"
     },
     {
       "text_en": "dwelling",
       "source": "bdb",
       "order": 4,
       "sense": "0",
-      "text_es": "= casa"
+      "text_es": "morada"
     },
     {
       "text_en": "dwellers",
       "source": "bdb",
       "order": 5,
       "sense": "0",
-      "text_es": "asiento"
+      "text_es": "moradores"
     },
     {
       "text_en": "seat",
       "source": "bdb",
       "order": 6,
       "sense": "1a",
-      "text_es": "sentado"
+      "text_es": "asiento"
     },
     {
       "text_en": "sitting",
       "source": "bdb",
       "order": 7,
       "sense": "1b",
-      "text_es": "los sentados"
+      "text_es": "sentado"
     },
     {
       "text_en": "those sitting",
       "source": "bdb",
       "order": 8,
       "sense": "1b",
-      "text_es": "compañía sentada"
+      "text_es": "los sentados"
     },
     {
       "text_en": "sitting company",
       "source": "bdb",
       "order": 9,
       "sense": "1b",
-      "text_es": "asamblea"
+      "text_es": "compañía sentada"
     },
     {
       "text_en": "assembly",
       "source": "bdb",
       "order": 10,
       "sense": "1b",
-      "text_es": "lugar de morada"
+      "text_es": "asamblea"
     },
     {
       "text_en": "dwelling-place",
       "source": "bdb",
       "order": 11,
       "sense": "2a",
-      "text_es": "morada"
+      "text_es": "lugar de morada"
     },
     {
       "text_en": "dwelling",
       "source": "bdb",
       "order": 12,
       "sense": "2b",
-      "text_es": "= casa"
+      "text_es": "morada"
     },
     {
       "text_en": "= house",
       "source": "bdb",
       "order": 13,
       "sense": "2c",
-      "text_es": "situación"
+      "text_es": "= casa"
     },
     {
       "text_en": "situation",
       "source": "bdb",
       "order": 14,
       "sense": "3",
-      "text_es": "ubicación"
+      "text_es": "situación"
     },
     {
       "text_en": "location",
       "source": "bdb",
       "order": 15,
       "sense": "3",
-      "text_es": "tiempo de morada"
+      "text_es": "ubicación"
     },
     {
       "text_en": "time of dwelling",
       "source": "bdb",
       "order": 16,
       "sense": "4",
-      "text_es": "los que moran"
+      "text_es": "tiempo de morada"
     },
     {
       "text_en": "those dwelling",
       "source": "bdb",
       "order": 17,
       "sense": "5",
-      "text_es": "Dios ha amado"
+      "text_es": "los que moran"
     }
   ],
   "sources": {

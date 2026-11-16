@@ -23,7 +23,7 @@ Preconditions:
 - **Open a verse.** Run `bun scripts/control/web.ts drive open /verse/Genesis/1/1`.
 - **Open Settings.** Run `bun scripts/control/web.ts drive click Settings`. The text contains `Dark theme`, `Text Sources`, and `Nikud`.
 - **Proof.** Run `bun scripts/control/web.ts evidence`.
-- **Switch language.** Not drivable. `Language` is a `<select>`, and `scripts/control/web.ts` has no select action. Report `settings-language` as not driven. Once the action exists, the panel heading becomes `Ajustes` in Spanish and `הגדרות` in Hebrew, Hebrew renders right to left, and the recipe sets the language back to English before the next feature.
+- **Switch language.** Run `bun scripts/control/web.ts drive select Language Español`. The tab bar reads `Calendario`, `Escrituras`, and `Ajustes`. Switch back with `drive select Idioma Inglés`. Hebrew is `עברית` from English and renders right to left. Set the language back to English before the next feature.
 - **Reading options and theme.** Not yet driven. Confirm on the first run whether each toggle is a control `drive click` can reach by its label, and update this file.
 
 ## Gotchas
@@ -32,4 +32,4 @@ Preconditions:
 - A cold `drive open /settings` can time out on the verse URL. Use the tab.
 - Settings persist in the browser profile until `stop` and `start`. A new `start` gives a new profile.
 - UI wording exists in English, Spanish, and Hebrew. A wording change has to be checked in all three.
-- Only `Open Settings` has been driven (2026-10-11).
+- `Open Settings` was driven on 2026-10-11. `Switch language` to Español and back, and `Gospel language` to Greek, were driven on 2026-11-15.

@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "justicia"
+      "text_es": "rectitud"
     },
     {
       "text_en": "righteousness",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "liberación"
+      "text_es": "justicia"
     },
     {
       "text_en": "what is right",
@@ -47,7 +47,7 @@
       "source": "bdb",
       "order": 6,
       "sense": "1",
-      "text_es": "justicia"
+      "text_es": "rectitud"
     },
     {
       "text_en": "justness",
@@ -61,14 +61,14 @@
       "source": "bdb",
       "order": 8,
       "sense": "2",
-      "text_es": "liberación"
+      "text_es": "justicia"
     },
     {
       "text_en": "righteousness",
       "source": "bdb",
       "order": 9,
       "sense": "3",
-      "text_es": "liberación"
+      "text_es": "justicia"
     },
     {
       "text_en": "justice",
@@ -82,49 +82,49 @@
       "source": "bdb",
       "order": 11,
       "sense": "4",
-      "text_es": "justicia"
+      "text_es": "rectitud"
     },
     {
       "text_en": "righteousness",
       "source": "bdb",
       "order": 12,
       "sense": "5",
-      "text_es": "liberación"
+      "text_es": "justicia"
     },
     {
       "text_en": "righteousness",
       "source": "bdb",
       "order": 13,
       "sense": "6",
-      "text_es": "liberación"
+      "text_es": "justicia"
     },
     {
       "text_en": "justification",
       "source": "bdb",
       "order": 14,
       "sense": "6",
-      "text_es": "victoria"
+      "text_es": "justificación"
     },
     {
       "text_en": "deliverance",
       "source": "bdb",
       "order": 15,
       "sense": "6",
-      "text_es": "prosperidad"
+      "text_es": "liberación"
     },
     {
       "text_en": "victory",
       "source": "bdb",
       "order": 16,
       "sense": "6",
-      "text_es": "hacer lo correcto"
+      "text_es": "victoria"
     },
     {
       "text_en": "prosperity",
       "source": "bdb",
       "order": 17,
       "sense": "6",
-      "text_es": "justicia"
+      "text_es": "prosperidad"
     }
   ],
   "sources": {

@@ -81,6 +81,7 @@ besorah:
   - tests/test_merge_strongs.py
   - tests/test_delitzsch_review.py
   - data/dict/lexicon/**
+  - shared/customEntryPublication.json
   - scripts/ci/**
   - .github/workflows/ci.yml
   - .github/ci/**
@@ -89,6 +90,7 @@ greek-source:
   - scripts/greek/**
   - scripts/dict/definition_hygiene.py
   - scripts/dict/import_tcysite.py
+  - scripts/dict/spanish_realignment.py
   - scripts/dict/validator.py
   - tests/test_greek_*.py
   - tests/test_definition_hygiene.py
@@ -103,6 +105,23 @@ hutter:
   - scripts/hutter/**
   - tests/test_hutter_transcription.py
   - data/hutter/**
+  - scripts/ci/**
+  - .github/workflows/ci.yml
+  - .github/ci/**
+
+relationships:
+  - scripts/relationships/**
+  - data/relationships/**
+  - shared/contextualRelationships.json
+  - tests/test_relationship_candidates.py
+  - scripts/books.py
+  - scripts/paths.py
+  - data/knowledge/registries/books.json
+  - data/tth/json/**
+  - data/delitzsch/parsed/**
+  - data/dict/books/**
+  - data/dict/lexicon/words/**
+  - data/greek/preview/greek/**
   - scripts/ci/**
   - .github/workflows/ci.yml
   - .github/ci/**

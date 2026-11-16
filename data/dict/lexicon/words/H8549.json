@@ -12,98 +12,98 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "entero"
+      "text_es": "completo"
     },
     {
       "text_en": "sound",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "saludable"
+      "text_es": "sano"
     },
     {
       "text_en": "complete",
       "source": "bdb",
       "order": 3,
       "sense": "1",
-      "text_es": "entero"
+      "text_es": "completo"
     },
     {
       "text_en": "whole",
       "source": "bdb",
       "order": 4,
       "sense": "1",
-      "text_es": "sano"
+      "text_es": "entero"
     },
     {
       "text_en": "entire",
       "source": "bdb",
       "order": 5,
       "sense": "1",
-      "text_es": "sano"
+      "text_es": "entero"
     },
     {
       "text_en": "whole",
       "source": "bdb",
       "order": 6,
       "sense": "2",
-      "text_es": "sano"
+      "text_es": "entero"
     },
     {
       "text_en": "sound",
       "source": "bdb",
       "order": 7,
       "sense": "2",
-      "text_es": "saludable"
+      "text_es": "sano"
     },
     {
       "text_en": "healthful",
       "source": "bdb",
       "order": 8,
       "sense": "2",
-      "text_es": "completo"
+      "text_es": "saludable"
     },
     {
       "text_en": "complete",
       "source": "bdb",
       "order": 9,
       "sense": "3",
-      "text_es": "entero"
+      "text_es": "completo"
     },
     {
       "text_en": "entire",
       "source": "bdb",
       "order": 10,
       "sense": "3",
-      "text_es": "sano"
+      "text_es": "entero"
     },
     {
       "text_en": "sound",
       "source": "bdb",
       "order": 11,
       "sense": "4",
-      "text_es": "saludable"
+      "text_es": "sano"
     },
     {
       "text_en": "wholesome",
       "source": "bdb",
       "order": 12,
       "sense": "4",
-      "text_es": "intacto"
+      "text_es": "saludable"
     },
     {
       "text_en": "unimpaired",
       "source": "bdb",
       "order": 13,
       "sense": "4",
-      "text_es": "inocente"
+      "text_es": "intacto"
     },
     {
       "text_en": "innocent",
       "source": "bdb",
       "order": 14,
       "sense": "4",
-      "text_es": "con integridad"
+      "text_es": "inocente"
     },
     {
       "text_en": "having integrity",

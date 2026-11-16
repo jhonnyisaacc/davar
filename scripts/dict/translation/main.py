@@ -194,8 +194,8 @@ def main():
             print(f"  Total batches processed: {mismatch_stats['total_batches']}")
             print(f"  Batches with mismatches: {mismatch_stats['mismatched_batches']}")
             if mismatch_stats['mismatched_batches'] > 0:
-                print(f"  Total padding applied: {mismatch_stats['total_padding']}")
-                print(f"  Total truncation applied: {mismatch_stats['total_truncation']}")
+                print(f"  Missing translations: {mismatch_stats['total_missing']}")
+                print(f"  Extra translations: {mismatch_stats['total_extra']}")
                 print(f"  Mismatch patterns: {mismatch_stats['mismatch_patterns']}")
 
         print("="*60)

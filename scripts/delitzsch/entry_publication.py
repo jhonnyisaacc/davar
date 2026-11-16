@@ -7,7 +7,8 @@ Rules, first match wins:
 - blocked (pending_manual_review): a needs_manual_review decision names the entry.
 - approved (reviewed_definition_decision): every definition that is not an import
   matches an applied create_custom_entry or upsert_custom_definition decision for
-  the entry that names its reviewer.
+  the entry that names a person or agent reviewer (#386). A rule: reviewer
+  approves nothing.
 - draft (unreviewed_definition): anything else.
 """
 from __future__ import annotations
@@ -38,18 +39,28 @@ def text_pair(definition: dict) -> tuple[str, str]:
     return ((definition.get("text_en") or "").strip(), (definition.get("text_es") or "").strip())
 
 
+def entry_key(decision: dict) -> str:
+    fields = ("custom_key", "strong", "new_strong") if decision["action"] in DEFINITION_ACTIONS else ("custom_key", "new_strong")
+    return next((decision[name] for name in fields if decision.get(name)), "").strip().upper()
+
+
+def approving_reviewer(decision: dict) -> bool:
+    reviewer = decision.get("reviewer") or ""
+    return bool(reviewer) and not reviewer.startswith("rule:")
+
+
 def load_ledger(decisions: Path = DECISIONS) -> Ledger:
     ledger = Ledger()
     for path in sorted(decisions.glob("*.jsonl")):
         for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
             decision = json.loads(line)
-            key = (decision.get("custom_key") or decision.get("new_strong") or "").strip().upper()
+            key = entry_key(decision)
             if not key.startswith("D"):
                 continue
             ref = f"{path.name}:{number}"
             if decision["action"] == "needs_manual_review":
                 ledger.pending.setdefault(key, ref)
-            elif decision["action"] in DEFINITION_ACTIONS and decision.get("status") in APPLIED and decision.get("reviewer"):
+            elif decision["action"] in DEFINITION_ACTIONS and decision.get("status") in APPLIED and approving_reviewer(decision):
                 ledger.reviewed[key].setdefault(text_pair(decision.get("definition") or {}), f"{ref} {decision['reviewer']}")
     return ledger
 

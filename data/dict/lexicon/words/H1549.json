@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "exilio"
+      "text_es": "mesa"
     },
     {
       "text_en": "tablet",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "mesa"
+      "text_es": "tablilla"
     }
   ],
   "sources": {

@@ -12,35 +12,35 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "maldición"
+      "text_es": "juramento"
     },
     {
       "text_en": "oath",
       "source": "bdb",
       "order": 2,
       "sense": "1",
-      "text_es": "maldición"
+      "text_es": "juramento"
     },
     {
       "text_en": "oath",
       "source": "bdb",
       "order": 3,
       "sense": "2",
-      "text_es": "maldición"
+      "text_es": "juramento"
     },
     {
       "text_en": "curse",
       "source": "bdb",
       "order": 4,
       "sense": "3",
-      "text_es": "execración"
+      "text_es": "maldición"
     },
     {
       "text_en": "execration",
       "source": "bdb",
       "order": 5,
       "sense": "4",
-      "text_es": "instrumento circular"
+      "text_es": "execración"
     }
   ],
   "sources": {

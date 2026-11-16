@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "sustento"
+      "text_es": "alimento"
     },
     {
       "text_en": "sustenance",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "alimento"
+      "text_es": "sustento"
     }
   ],
   "sources": {

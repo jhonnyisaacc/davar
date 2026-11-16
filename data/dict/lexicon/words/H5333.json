@@ -12,28 +12,28 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "prefecto"
+      "text_es": "pilar"
     },
     {
       "text_en": "prefect",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "guarnición"
+      "text_es": "prefecto"
     },
     {
       "text_en": "garrison",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "poste"
+      "text_es": "guarnición"
     },
     {
       "text_en": "post",
       "source": "bdb",
       "order": 4,
       "sense": "0",
-      "text_es": "preservado"
+      "text_es": "poste"
     }
   ],
   "sources": {

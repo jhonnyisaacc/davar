@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "gota"
+      "text_es": "punta"
     },
     {
       "text_en": "drop",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "limpio"
+      "text_es": "gota"
     }
   ],
   "sources": {

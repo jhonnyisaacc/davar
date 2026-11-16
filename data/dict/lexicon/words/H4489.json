@@ -12,14 +12,14 @@
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "tiempo"
+      "text_es": "número contado"
     },
     {
       "text_en": "time",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "parte"
+      "text_es": "tiempo"
     }
   ],
   "sources": {

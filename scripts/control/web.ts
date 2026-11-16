@@ -51,17 +51,21 @@ function commandExists(name: string): boolean {
 	return existsSync(join(process.env.HOME ?? "", ".bun", "bin", name));
 }
 
+function readState(page: Awaited<ReturnType<typeof connectPage>>): Promise<PageState> {
+	return evaluate<PageState>(
+		page,
+		`(() => ({
+			url: location.href,
+			title: document.title,
+			text: (document.body?.innerText ?? "").replace(/\\s+/g, " ").trim().slice(0, 500)
+		}))()`,
+	);
+}
+
 async function pageState(cdp: number): Promise<PageState> {
 	const page = await connectPage(cdp);
 	try {
-		return await evaluate<PageState>(
-			page,
-			`(() => ({
-				url: location.href,
-				title: document.title,
-				text: (document.body?.innerText ?? "").replace(/\\s+/g, " ").trim().slice(0, 500)
-			}))()`,
-		);
+		return await readState(page);
 	} finally {
 		page.close();
 	}
@@ -280,14 +284,7 @@ async function drive(args: string[]): Promise<never> {
 			}
 			await Bun.sleep(800);
 			rememberAction(app, `click ${name}`);
-			const state = await evaluate<PageState>(
-				page,
-				`(() => ({
-					url: location.href,
-					title: document.title,
-					text: (document.body?.innerText ?? "").replace(/\\s+/g, " ").trim().slice(0, 300)
-				}))()`,
-			);
+			const state = await readState(page);
 			finish(true, {
 				app,
 				command: "drive",
@@ -296,6 +293,37 @@ async function drive(args: string[]): Promise<never> {
 				url: state.url,
 				text: state.text,
 			});
+		}
+		if (action === "select") {
+			const name = (args[1] ?? "").trim();
+			const option = args.slice(2).join(" ").trim();
+			if (!name || !option) finish(false, { app, command: "drive", reason: "name-and-option-required" });
+			const selected = await evaluate<{ ok: boolean; reason?: string }>(
+				page,
+				`(() => {
+					const wanted = ${JSON.stringify(name)};
+					const optionLabel = ${JSON.stringify(option)};
+					const select = Array.from(document.querySelectorAll("select")).find(
+						(node) => (node.getAttribute("aria-label") || "").replace(/\\s+/g, " ").trim() === wanted,
+					);
+					if (!(select instanceof HTMLSelectElement)) return { ok: false, reason: "control-not-found" };
+					const match = Array.from(select.options).find(
+						(node) => node.textContent.replace(/\\s+/g, " ").trim() === optionLabel,
+					);
+					if (!match) return { ok: false, reason: "option-not-found" };
+					const setValue = Object.getOwnPropertyDescriptor(HTMLSelectElement.prototype, "value").set;
+					setValue.call(select, match.value);
+					select.dispatchEvent(new Event("change", { bubbles: true }));
+					return { ok: true };
+				})()`,
+			);
+			if (!selected.ok) {
+				finish(false, { app, command: "drive", reason: selected.reason ?? "control-not-found", name, option });
+			}
+			await Bun.sleep(800);
+			rememberAction(app, `select ${name} ${option}`);
+			const state = await readState(page);
+			finish(true, { app, command: "drive", action: "select", name, option, url: state.url, text: state.text });
 		}
 		finish(false, { app, command: "drive", reason: "unknown-action" });
 	} finally {

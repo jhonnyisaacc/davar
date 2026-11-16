@@ -82686,7 +82686,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "acts.jsonl:1844 jhonnyisaacc"
+        "acts.jsonl:1858 jhonnyisaacc"
       ]
     }
   },
@@ -82873,7 +82873,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "acts.jsonl:1845 jhonnyisaacc"
+        "acts.jsonl:1859 jhonnyisaacc"
       ]
     }
   },
@@ -82949,7 +82949,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "acts.jsonl:1846 jhonnyisaacc"
+        "acts.jsonl:1860 jhonnyisaacc"
       ]
     }
   },
@@ -83025,7 +83025,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "acts.jsonl:1847 jhonnyisaacc"
+        "acts.jsonl:1861 jhonnyisaacc"
       ]
     }
   },
@@ -83101,7 +83101,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "acts.jsonl:1848 jhonnyisaacc"
+        "acts.jsonl:1862 jhonnyisaacc"
       ]
     }
   },
@@ -83177,7 +83177,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "acts.jsonl:1849 jhonnyisaacc"
+        "acts.jsonl:1863 jhonnyisaacc"
       ]
     }
   },
@@ -83519,7 +83519,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "acts.jsonl:1850 jhonnyisaacc"
+        "acts.jsonl:1864 jhonnyisaacc"
       ]
     }
   },
@@ -83669,7 +83669,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "acts.jsonl:1851 jhonnyisaacc"
+        "acts.jsonl:1865 jhonnyisaacc"
       ]
     }
   },
@@ -84189,7 +84189,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "acts.jsonl:1852 jhonnyisaacc"
+        "acts.jsonl:1866 jhonnyisaacc"
       ]
     }
   },
@@ -84265,7 +84265,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "acts.jsonl:1853 jhonnyisaacc"
+        "acts.jsonl:1867 jhonnyisaacc"
       ]
     }
   },
@@ -84748,7 +84748,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "acts.jsonl:1854 jhonnyisaacc"
+        "acts.jsonl:1868 jhonnyisaacc"
       ]
     }
   },
@@ -84824,7 +84824,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "acts.jsonl:1855 jhonnyisaacc"
+        "acts.jsonl:1869 jhonnyisaacc"
       ]
     }
   },
@@ -84900,7 +84900,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "colossians.jsonl:86 jhonnyisaacc"
+        "colossians.jsonl:88 jhonnyisaacc"
       ]
     }
   },
@@ -85316,7 +85316,7 @@
       "rule_version": 1,
       "evidence": [
         "acts.jsonl:1229 codex-desktop",
-        "corinthians1.jsonl:281 jhonnyisaacc"
+        "corinthians1.jsonl:285 jhonnyisaacc"
       ]
     }
   },
@@ -85442,7 +85442,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "corinthians1.jsonl:282 jhonnyisaacc"
+        "corinthians1.jsonl:286 jhonnyisaacc"
       ]
     }
   },
@@ -85980,7 +85980,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "corinthians1.jsonl:283 jhonnyisaacc"
+        "corinthians1.jsonl:287 jhonnyisaacc"
       ]
     }
   },
@@ -86056,7 +86056,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "corinthians1.jsonl:284 jhonnyisaacc"
+        "corinthians1.jsonl:288 jhonnyisaacc"
       ]
     }
   },
@@ -86509,7 +86509,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "corinthians2.jsonl:167 jhonnyisaacc"
+        "corinthians2.jsonl:171 jhonnyisaacc"
       ]
     }
   },
@@ -87228,7 +87228,7 @@
       "rule_version": 1,
       "evidence": [
         "acts.jsonl:1406 codex-desktop",
-        "corinthians2.jsonl:168 jhonnyisaacc"
+        "corinthians2.jsonl:172 jhonnyisaacc"
       ]
     }
   },
@@ -87417,7 +87417,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "corinthians2.jsonl:169 jhonnyisaacc"
+        "corinthians2.jsonl:173 jhonnyisaacc"
       ]
     }
   },
@@ -87948,7 +87948,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "hebrews.jsonl:180 jhonnyisaacc"
+        "hebrews.jsonl:187 jhonnyisaacc"
       ]
     }
   },
@@ -88024,7 +88024,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "hebrews.jsonl:181 jhonnyisaacc"
+        "hebrews.jsonl:188 jhonnyisaacc"
       ]
     }
   },
@@ -89477,8 +89477,8 @@
       "evidence": [
         "acts.jsonl:1296 codex-desktop",
         "acts.jsonl:752 codex-desktop",
-        "john.jsonl:337 jhonnyisaacc",
-        "luke.jsonl:445 jhonnyisaacc"
+        "john.jsonl:343 jhonnyisaacc",
+        "luke.jsonl:450 jhonnyisaacc"
       ]
     }
   },
@@ -125315,7 +125315,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:3 claude-delitzsch-review"
+      ]
+    }
   },
   "D0211": {
     "strong_number": "D0211",
@@ -125354,7 +125362,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:4 claude-delitzsch-review"
+      ]
+    }
   },
   "D0212": {
     "strong_number": "D0212",
@@ -125384,7 +125400,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:5 claude-delitzsch-review"
+      ]
+    }
   },
   "D0213": {
     "strong_number": "D0213",
@@ -125414,7 +125438,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:6 claude-delitzsch-review"
+      ]
+    }
   },
   "D0214": {
     "strong_number": "D0214",
@@ -125507,7 +125539,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:7 claude-delitzsch-review"
+      ]
+    }
   },
   "D0217": {
     "strong_number": "D0217",
@@ -125840,7 +125880,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:8 claude-delitzsch-review"
+      ]
+    }
   },
   "D0224": {
     "strong_number": "D0224",
@@ -125930,7 +125978,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:9 claude-delitzsch-review"
+      ]
+    }
   },
   "D0227": {
     "strong_number": "D0227",
@@ -126237,7 +126293,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:10 claude-delitzsch-review"
+      ]
+    }
   },
   "D0237": {
     "strong_number": "D0237",
@@ -126267,7 +126331,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:11 claude-delitzsch-review"
+      ]
+    }
   },
   "D0238": {
     "strong_number": "D0238",
@@ -126357,7 +126429,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:12 claude-delitzsch-review"
+      ]
+    }
   },
   "D0241": {
     "strong_number": "D0241",
@@ -126478,7 +126558,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:13 claude-delitzsch-review"
+      ]
+    }
   },
   "D0245": {
     "strong_number": "D0245",
@@ -126539,7 +126627,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:14 claude-delitzsch-review"
+      ]
+    }
   },
   "D0247": {
     "strong_number": "D0247",
@@ -126599,7 +126695,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:15 claude-delitzsch-review"
+      ]
+    }
   },
   "D0249": {
     "strong_number": "D0249",
@@ -126779,7 +126883,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:16 claude-delitzsch-review"
+      ]
+    }
   },
   "D0255": {
     "strong_number": "D0255",
@@ -126809,7 +126921,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:17 claude-delitzsch-review"
+      ]
+    }
   },
   "D0256": {
     "strong_number": "D0256",
@@ -126870,7 +126990,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:18 claude-delitzsch-review"
+      ]
+    }
   },
   "D0258": {
     "strong_number": "D0258",
@@ -126961,7 +127089,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:19 claude-delitzsch-review"
+      ]
+    }
   },
   "D0261": {
     "strong_number": "D0261",
@@ -126992,7 +127128,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:20 claude-delitzsch-review"
+      ]
+    }
   },
   "D0262": {
     "strong_number": "D0262",
@@ -127022,7 +127166,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:21 claude-delitzsch-review"
+      ]
+    }
   },
   "D0263": {
     "strong_number": "D0263",
@@ -155948,7 +156100,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:22 claude-delitzsch-review"
+      ]
+    }
   },
   "D0274": {
     "strong_number": "D0274",
@@ -155979,7 +156139,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:23 claude-delitzsch-review"
+      ]
+    }
   },
   "D0275": {
     "strong_number": "D0275",
@@ -155990,10 +156158,10 @@
     "mapping_scope": "exact",
     "definitions": [
       {
-        "text_en": "to you; for you, preposition ל with second feminine singular suffix.",
-        "text_es": "a ti; para ti, preposición ל con sufijo femenino singular de segunda persona.",
-        "source": "hutter_image_review",
-        "order": 1
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "to you; for you, preposition ל with second person singular suffix (feminine, or masculine in pause).",
+        "text_es": "a ti; para ti, preposición ל con sufijo de segunda persona singular (femenino, o masculino en pausa)."
       }
     ],
     "root": "",
@@ -156010,7 +156178,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:1 claude-delitzsch-review"
+      ]
+    }
   },
   "D0276": {
     "strong_number": "D0276",
@@ -156041,7 +156217,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:24 claude-delitzsch-review"
+      ]
+    }
   },
   "D0277": {
     "strong_number": "D0277",
@@ -157857,7 +158041,7 @@
       "rule": "reviewed_definition_decision",
       "rule_version": 1,
       "evidence": [
-        "acts.jsonl:1856 jhonnyisaacc"
+        "acts.jsonl:1870 jhonnyisaacc"
       ]
     }
   },
@@ -157890,7 +158074,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:25 claude-delitzsch-review"
+      ]
+    }
   },
   "D0279": {
     "strong_number": "D0279",
@@ -157901,10 +158093,10 @@
     "mapping_scope": "exact",
     "definitions": [
       {
-        "text_en": "in you; by you, preposition ב with second feminine singular suffix.",
-        "text_es": "en ti; por ti, preposición ב con sufijo femenino singular de segunda persona.",
-        "source": "hutter_image_review",
-        "order": 1
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "in you; by you, preposition ב with second person singular suffix (feminine, or masculine in pause).",
+        "text_es": "en ti; por ti, preposición ב con sufijo de segunda persona singular (femenino, o masculino en pausa)."
       }
     ],
     "root": "",
@@ -157921,7 +158113,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:2 claude-delitzsch-review"
+      ]
+    }
   },
   "D0280": {
     "strong_number": "D0280",
@@ -157952,7 +158152,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:26 claude-delitzsch-review"
+      ]
+    }
   },
   "D0281": {
     "strong_number": "D0281",
@@ -158045,7 +158253,15 @@
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [],
-    "surface_instances": []
+    "surface_instances": [],
+    "publication": {
+      "status": "approved",
+      "rule": "reviewed_definition_decision",
+      "rule_version": 1,
+      "evidence": [
+        "lexicon.jsonl:27 claude-delitzsch-review"
+      ]
+    }
   },
   "D0284": {
     "strong_number": "D0284",
