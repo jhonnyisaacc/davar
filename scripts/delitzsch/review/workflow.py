@@ -395,9 +395,17 @@ def load_latest_decisions(
 ) -> dict[str, dict[str, Any]]:
     """Load the latest logged review decision for each stable occurrence."""
 
-    latest: dict[str, dict[str, Any]] = {}
+    return {key: entries[-1] for key, entries in load_decision_history(log_dir, keep).items()}
+
+
+def load_decision_history(
+    log_dir: Path, keep: Callable[[dict[str, Any]], bool] = lambda entry: True
+) -> dict[str, list[dict[str, Any]]]:
+    """Load every logged review decision for each stable occurrence, oldest first."""
+
+    history: dict[str, list[dict[str, Any]]] = {}
     if not log_dir.exists():
-        return latest
+        return history
     for log_file in sorted(log_dir.glob("*.jsonl")):
         with log_file.open("r", encoding="utf-8") as handle:
             for line in handle:
@@ -414,8 +422,8 @@ def load_latest_decisions(
                     )
                 except (KeyError, TypeError, ValueError):
                     continue
-                latest[key] = entry
-    return latest
+                history.setdefault(key, []).append(entry)
+    return history
 
 
 def issue_review_status(
@@ -723,16 +731,41 @@ def _add_custom_entry(
         entry["definitions"].append(definition)
 
     instance = _custom_instance_from_occurrence(occurrence)
-    if not any(
+    if not any(_same_instance(item, instance) for item in entry["nt_instances"]):
+        entry["nt_instances"].append(instance)
+
+    return key, created
+
+
+def _same_instance(item: dict[str, Any], instance: dict[str, Any]) -> bool:
+    return (
         item.get("book") == instance["book"]
         and int(item.get("chapter", -1)) == instance["chapter"]
         and int(item.get("verse", -1)) == instance["verse"]
         and int(item.get("word_index", -1)) == instance["word_index"]
-        for item in entry["nt_instances"]
-    ):
-        entry["nt_instances"].append(instance)
+    )
 
-    return key, created
+
+def _move_custom_instance(
+    lexicon: LexiconIndex, occurrence: dict[str, Any], previous_strong: str | None, new_strong: str
+) -> bool:
+    """Keep instances-only custom entries listing exactly the occurrences reviewed onto them."""
+
+    custom = lexicon.load_custom_entries()
+    instance = _custom_instance_from_occurrence(occurrence)
+    source = custom.get(lexicon.normalize_strong(previous_strong) or "")
+    target = custom.get(lexicon.normalize_strong(new_strong) or "")
+    changed = False
+    if source is not target and source and source.get("mapping_scope") == "instances_only":
+        kept = [item for item in source.get("nt_instances", []) if not _same_instance(item, instance)]
+        changed = len(kept) != len(source.get("nt_instances", []))
+        source["nt_instances"] = kept
+    if target and target.get("mapping_scope") == "instances_only":
+        listed = target.setdefault("nt_instances", [])
+        if not any(_same_instance(item, instance) for item in listed):
+            listed.append(instance)
+            changed = True
+    return changed
 
 
 def _upsert_custom_definition(
@@ -856,6 +889,8 @@ def apply_decisions(
                 if not lexicon.normalize_strong(new_strong):
                     raise ValueError(f"Invalid new_strong for {occurrence}: {new_strong!r}")
                 word["strong"] = new_strong
+                if _move_custom_instance(lexicon, occurrence, expected_previous, new_strong):
+                    changed_lexicon[lexicon.custom_definitions_path] = lexicon.load_custom_entries()
                 changed_chapters[chapter_file] = chapter_data
                 stats.word_updates += 1
                 append_decision_log(log_dir, decision, "applied", dry_run)
