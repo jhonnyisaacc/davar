@@ -23,7 +23,7 @@
     }
   ],
   "diagnostics": [],
-  "input_manifest_digest": "f6e24a8ff9393d3b060768237ff0452345cb8119606b32e253e6d5db8b5a632c",
+  "input_manifest_digest": "cb52ba498200e0354d0d2c646ede5220916970a0a7a8ed6f075a3d00b707c660",
   "records": {
     "concepts": [],
     "editions": [
@@ -336,7 +336,7 @@
         "path": "data/delitzsch/parsed/john/1.json",
         "repository": "https://github.com/jhonnyisaacc/davar",
         "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-        "sha256": "9472e153046563290651bddd20bbb8341d8c54fedad64587e43907d739a0a948",
+        "sha256": "5b4f11eac6abdb8a54f72f88be89a34d9210edddfed710f6476d8f4ba5b24181",
         "visibility": "public"
       },
       {

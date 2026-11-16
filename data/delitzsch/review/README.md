@@ -270,13 +270,53 @@ keeps that correction. The batch makes these changes:
 Apply it with `review apply definition_gaps_42.json`, then run
 `review dispositions`.
 
-The `reviewed_strong_correction` rule (version 2) records a `set_strong`
+`batches/definition_gaps_42_round_2.json` resolves the 677 occurrences that
+the lexical reviews blocked on an identifier that has a definition but names
+a different word. `python -m scripts.delitzsch.review.blocked_candidates
+<output>` lists each blocked occurrence with its verse, its SBLGNT content
+words, the entries whose lemma is the token or a prefix-stripped stem, and
+the identities that reviewed occurrences of the same stem use. The report
+proposes nothing. A reviewer judged each word from the pointed form, the
+verse, the Greek, and the lexicon. The batch makes these changes:
+
+- 372 `upsert_custom_definition` decisions create D0327 to D0698, with the
+  same fields as the first batch. Names include Hermes and Hermas, kept apart
+  by the Greek of each verse, Lydia, Cyprus, and Puteoli. Post-biblical words
+  include נִסָּיוֹן trial, מוֹכֵס tax collector, חֵרוּת freedom, and the verb
+  הִשְׁתַּמֵּשׁ use. A derived word gets its own entry, so עֲבֵרָה
+  transgression is not on עֲבָרָה, the place in John 1:28.
+- One decision adds the sense Rome to D0141 רוֹמִי, the exact form Delitzsch
+  uses for the city.
+- 685 `set_strong` lexical reviews move the occurrences. 663 go to the new
+  entries. The others go to an existing entry for the same word, such as
+  D0053 הִסְכִּים, D0167 אֵבָר, D0326 כָּרַךְ, and H1278 for `הַבְּרִיָּה`.
+  Eight of them move דִּבּוּר, יְכֹלֶת, and יְתֵרָה from H1697, H3201, and
+  H3502 to D0321, D0309, and D0324. Each decision's `evidence.greek` names the
+  SBLGNT word of the verse. Where the SBLGNT has no such word, as in Mark
+  16:18 or Luke 6:1, `evidence.greek_note` says why.
+
+A `set_strong` onto a custom entry whose `mapping_scope` is `instances_only`
+adds the occurrence to that entry's `nt_instances`, and removes it from the
+previous entry's list. Each such entry lists exactly the occurrences
+reviewed onto it.
+
+The `reviewed_strong_correction` rule (version 3) records a `set_strong`
 lexical review. It raises an error when the decision has no person or agent
 reviewer, when an evidence field or the reason is missing, when the previous Strong number
 differs from the queued one, when nothing changes, or when the Strong string
 does not carry the new prefixes. The `lexical_review` rule raises the same
 error for a `skip` that changes the Strong number. A lexical review outside
 the queue gets a record with `source` set to `decision_log`.
+
+A later reviewed correction supersedes an earlier one. The ledger reads every
+logged decision for the occurrence and links each applied correction to the
+one before it, when the earlier correction's new Strong number is the later
+one's previous Strong number. Decisions of other kinds between them do not
+break the link. The rule then checks every link, the first link against the
+queued Strong number, and that each link starts from the Strong number and
+prefixes the previous link left. The record keeps the queued `before` state,
+takes `after` from the latest correction, and lists the earlier links in
+`evidence.superseded`. The old decision lines stay as they were logged.
 
 ### Style-only prefixes (#364)
 

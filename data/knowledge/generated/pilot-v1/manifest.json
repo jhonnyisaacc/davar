@@ -3,23 +3,23 @@
   "files": [
     {
       "path": "bundles/daniel/7/13.json",
-      "sha256": "266954e8c4e526ecb90440f7d01a7f654a98cbc9ee4819367b8cbb0132e6605a"
+      "sha256": "5cd6bb413598ba7217c937fb502561dc6c17fda601a02077c49eeac577b1ea7c"
     },
     {
       "path": "bundles/john/1/1.json",
-      "sha256": "337494419f91cf8ae0ec01f613927f1982e123ecfe486a2d837072be007e4f5f"
+      "sha256": "b360f9e7f30e3809788ad8c840a5dec09fb9981ab0a0696f3915081b749ed09b"
     },
     {
       "path": "bundles/john/1/51.json",
-      "sha256": "02bc2ca2aa18ebf926e9c1a183a7fdefec5d4ea0677b920748a620484b58819a"
+      "sha256": "0d0d1049b87c7bc2fec585c321ff26389d049509961a8a49c77c9947c6aefbaf"
     },
     {
       "path": "records/records.json",
-      "sha256": "688f830bdc69c3cb17dd0a79f331bd01dc983cf6af0d195bcfc65f007cdc9230"
+      "sha256": "c7cc99dfdf1801810e553f615177bea4964bd80df9121be969e99166b0561616"
     }
   ],
   "generator_version": "1.0.0",
-  "input_manifest_digest": "f6e24a8ff9393d3b060768237ff0452345cb8119606b32e253e6d5db8b5a632c",
+  "input_manifest_digest": "cb52ba498200e0354d0d2c646ede5220916970a0a7a8ed6f075a3d00b707c660",
   "inputs": [
     {
       "id": "greek-lexicon",
@@ -43,7 +43,7 @@
       "path": "data/delitzsch/parsed/john/1.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-      "sha256": "9472e153046563290651bddd20bbb8341d8c54fedad64587e43907d739a0a948"
+      "sha256": "5b4f11eac6abdb8a54f72f88be89a34d9210edddfed710f6476d8f4ba5b24181"
     },
     {
       "id": "greek",
@@ -76,7 +76,7 @@
       "path": "data/dict/lexicon/custom_definitions.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-      "sha256": "d28e346dab400001b6a5ae4a19e82aeb84c6371135f11ca8f519f1fc2938408b"
+      "sha256": "c04f5f8bbdd3022a8acbebba11dce7f539a49b0741fc9eef002d7a0ec616286f"
     },
     {
       "fixture_path": "tests/fixtures/knowledge/shaul/knowledge/concepts/son-of-man.yml",
