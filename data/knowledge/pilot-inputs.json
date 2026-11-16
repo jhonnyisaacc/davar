@@ -23,7 +23,7 @@
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
       "path": "data/delitzsch/parsed/john/1.json",
-      "sha256": "ced03668cc9a31fbff83db095e648c8623fbd5202eb6047bd6e50369f29fb55e"
+      "sha256": "9472e153046563290651bddd20bbb8341d8c54fedad64587e43907d739a0a948"
     },
     {
       "id": "greek",
@@ -47,7 +47,7 @@
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
       "path": "data/dict/lexicon/words.json",
-      "sha256": "d7e4999adde002c4cb954e3aa8d2f0e5764377133468e30284ef7a853356a08b"
+      "sha256": "85fb192e5e2d61f9200e1a1efcbfe79546a28c7d3aacc244a3dd683805183150"
     },
     {
       "id": "custom",

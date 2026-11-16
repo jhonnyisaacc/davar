@@ -213,6 +213,21 @@ scan removes a false root-letter prefix, such as the `Hb` of `בֵּית` mapped
 H1004, and the ledger records it as `corrected` by the
 `root_letter_prefix_outside_queue` rule.
 
+`batches/lexical_review_368_followup.json` applies two conventions to the
+whole corpus, after `lexical_review_368.json`:
+
+- A preposition with a pronominal suffix uses the custom entry for its exact
+  form, such as `לְךָ` on D0274 and `בִּי` on D0267. Without one, it uses the
+  prefix and the independent pronoun, such as `בְּךָ` on `Hb/H859`. The
+  exception is `בִּי אֲדֹנִי`, "I pray, my lord", which stays on H994.
+- A Hebrew word uses the Hebrew entry, not the Aramaic entry of Ezra and
+  Daniel, such as `הָאִגְּרוֹת` on H107, not H104. An Aramaic entry stays when
+  the lexicon has no Hebrew entry for the word, such as `שָׁלְטָן` (H7985), or
+  in an Aramaic quotation, such as Mark 15:34.
+
+Apply it with `review apply lexical_review_368_followup.json`, then run
+`review dispositions`.
+
 The `reviewed_strong_correction` rule (version 2) records a `set_strong`
 lexical review. It raises an error when the decision has no person or agent
 reviewer, when an evidence field is missing, when the previous Strong number

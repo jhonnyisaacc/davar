@@ -8,11 +8,18 @@
   "translit_es": "tv",
   "definitions": [
     {
-      "text_en": "and I will sweep it with the besom of destruction",
+      "text_en": "sweep",
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "y la barreré con la escoba de la destrucción"
+      "text_es": "barrer"
+    },
+    {
+      "text_en": "sweep away",
+      "source": "bdb",
+      "order": 2,
+      "sense": "0",
+      "text_es": "barrer por completo"
     }
   ],
   "sources": {

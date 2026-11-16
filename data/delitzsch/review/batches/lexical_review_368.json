@@ -81583,10 +81583,10 @@
         ]
       },
       "previous_strong": "H1431",
-      "new_strong": "Hd/H104",
-      "reason": "The noun is אגרת letter",
+      "new_strong": "Hd/H107",
+      "reason": "The noun is אגרת letter, the Hebrew entry H107 as in 2 Cor 10:9; H104 is the Aramaic word of Ezra",
       "evidence": {
-        "lexicon": "H104 אִגְּרָא letter",
+        "lexicon": "H107 אִגֶּרֶת: letter; letter-missive",
         "grammar": "article ה + feminine plural noun אִגְּרוֹת",
         "context": "2 Cor 10:10 'his letters are weighty'",
         "kind": "prefix_metadata_and_lexical",
@@ -122288,10 +122288,10 @@
         ]
       },
       "previous_strong": "H4411",
-      "new_strong": "Hc/H3879",
-      "reason": "H4411 lodging is unrelated and ל is not a preposition",
+      "new_strong": "Hc/H3881",
+      "reason": "H4411 lodging is unrelated and ל is not a preposition; Levite is the Hebrew entry H3881, not the Aramaic H3879 of Ezra",
       "evidence": {
-        "lexicon": "H3879 לֵוִי Levite",
+        "lexicon": "H3881 לֵוִיִּי: Levite",
         "grammar": "ו + gentilic plural לְוִיִּם; ל is a root letter",
         "context": "John 1:19 'priests and Levites'",
         "kind": "prefix_metadata",
