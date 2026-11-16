@@ -1,4 +1,6 @@
 import json
+import re
+import unicodedata
 from collections import Counter
 from pathlib import Path
 
@@ -581,20 +583,20 @@ def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
     committed = dispositions.read_ledger()
     assert committed == rebuilt
     summary = committed["summary"]
-    assert summary["total"] == 11528 + 16084 + 4970
+    assert summary["total"] == 11528 + 16084 + 4990
     assert summary["by_disposition"]["unresolved"] == 0
     assert summary["by_family"]["prefix_metadata"] == {
-        "benign": 1386, "corrected": 3509, "already_reviewed": 348, "unresolved": 0, "blocked": 251, "superseded": 0,
+        "benign": 1386, "corrected": 3510, "already_reviewed": 347, "unresolved": 0, "blocked": 251, "superseded": 0,
     }
     assert summary["by_family"]["outside_queue"] == {
-        "benign": 0, "corrected": 4959, "already_reviewed": 0, "unresolved": 0, "blocked": 11, "superseded": 0,
+        "benign": 0, "corrected": 4979, "already_reviewed": 0, "unresolved": 0, "blocked": 11, "superseded": 0,
     }
     assert summary["benign_lexical_review"] == {"pending": 0, "reviewed": 1749}
     assert summary["by_family"]["legacy_assignment"] == {
-        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 7876, "superseded": 8208,
+        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 7886, "superseded": 8198,
     }
     assert {rule: summary["by_rule"][rule] for rule in ("legacy_without_candidate", "legacy_current_value", "legacy_blocked", "lexical_review")} == {
-        "legacy_without_candidate": 4360, "legacy_current_value": 3848, "legacy_blocked": 7876, "lexical_review": 2300,
+        "legacy_without_candidate": 4360, "legacy_current_value": 3838, "legacy_blocked": 7886, "lexical_review": 2300,
     }
 
 
@@ -743,6 +745,21 @@ def parsed_verse(book, chapter, verse):
     return next(v for v in (payload[0] if isinstance(payload, list) else payload)["verses"] if v["verse"] == verse)
 
 
+def test_suffixed_prepositions_use_the_exact_form_entry_with_or_without_a_conjunctive_dagesh():
+    entries = {"לִי": "D0265", "לוֹ": "D0266", "לְךָ": "D0274", "לָךְ": "D0275", "לָהּ": "D0276"}
+    found = Counter()
+    for path in (dispositions.ROOT / "data/delitzsch/parsed").glob("*/*.json"):
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        for verse in (payload[0] if isinstance(payload, list) else payload)["verses"]:
+            for word in verse["words"]:
+                pointed = unicodedata.normalize("NFC", re.sub(r"[^\u05b0-\u05bc\u05c1\u05c2\u05c7\u05d0-\u05ea]", "", word["text"]))
+                form = re.sub(r"^ל([\u05b0-\u05bb]*)\u05bc", r"ל\1", pointed)
+                if form in entries:
+                    found[(form, pointed != form, word["strong"])] += 1
+    assert {key for key in found if key[2] != entries[key[0]]} == set()
+    assert {(form, dotted) for form, dotted, _ in found} == {(form, dotted) for form in entries for dotted in (False, True)}
+
+
 def test_root_letter_prefixes_are_corrected_in_the_ledger_and_the_verse():
     chose = ledger_record("acts.1.2.12")
     assert (chose["disposition"], chose["rule"], chose["reviewer"]) == ("corrected", "root_letter_prefix", "rule:root_letter_prefix_v1")
@@ -773,7 +790,7 @@ def test_follow_up_lexical_review_maps_hebrew_letters_and_suffixed_prepositions_
     assert (temptation["disposition"], temptation["rule"], temptation["reviewer"]) == ("blocked", "lexical_review", "claude-delitzsch-review")
     assert parsed_verse("luke", 7, 6)["words"][17]["strong"] == "H994"
     assert ledger_record("luke.4.34.3")["after"]["strong"] == "Hc/D0275"
-    assert ledger_record("acts.28.13.7")["after"]["strong"] == "H1864"
+    assert [ledger_record(location)["after"]["strong"] for location in ("luke.18.41.4", "john.21.22.10", "luke.18.19.5", "acts.22.15.3")] == ["D0275", "D0274", "D0265", "D0266"]
     assert [ledger_record(location)["after"]["strong"] for location in ("luke.23.25.15", "john.14.17.10", "john.14.21.10")] == ["H4560", "H7200", "H157"]
     assert [w["strong"] for w in parsed_verse("thessalonians2", 3, 17)["words"] if w["strong"].endswith(("H104", "H107"))] == ["Hd/H107"]
 
