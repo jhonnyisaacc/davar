@@ -40,7 +40,11 @@
 				"transformation": "extracted"
 			},
 			"review": {
-				"status": "unreviewed"
+				"status": "approved",
+				"reviewer": {
+					"name": "Jhonny"
+				},
+				"reviewed_on": "2026-11-16"
 			}
 		},
 		{
@@ -208,7 +212,11 @@
 				"transformation": "extracted"
 			},
 			"review": {
-				"status": "unreviewed"
+				"status": "approved",
+				"reviewer": {
+					"name": "Jhonny"
+				},
+				"reviewed_on": "2026-11-16"
 			}
 		},
 		{
@@ -250,7 +258,11 @@
 				"transformation": "extracted"
 			},
 			"review": {
-				"status": "unreviewed"
+				"status": "approved",
+				"reviewer": {
+					"name": "Jhonny"
+				},
+				"reviewed_on": "2026-11-16"
 			}
 		},
 		{
@@ -334,7 +346,11 @@
 				"transformation": "extracted"
 			},
 			"review": {
-				"status": "unreviewed"
+				"status": "approved",
+				"reviewer": {
+					"name": "Jhonny"
+				},
+				"reviewed_on": "2026-11-16"
 			}
 		},
 		{
@@ -376,7 +392,11 @@
 				"transformation": "extracted"
 			},
 			"review": {
-				"status": "unreviewed"
+				"status": "approved",
+				"reviewer": {
+					"name": "Jhonny"
+				},
+				"reviewed_on": "2026-11-16"
 			}
 		},
 		{
@@ -418,7 +438,11 @@
 				"transformation": "extracted"
 			},
 			"review": {
-				"status": "unreviewed"
+				"status": "approved",
+				"reviewer": {
+					"name": "Jhonny"
+				},
+				"reviewed_on": "2026-11-16"
 			}
 		},
 		{

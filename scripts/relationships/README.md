@@ -33,7 +33,7 @@ The Greek side is checked against the TAGNT tagging in `data/greek/preview`. The
 
 ## Review procedure
 
-Jhonny, the repository owner, reviews candidates. He may name another person as reviewer in the pull request that records the decision. An agent may run the script and report the pre-checks. An agent never records a review.
+Jhonny, the repository owner, reviews candidates. He may name another person as reviewer in the pull request that records the decision. Only the reviewer decides. An agent may run the script and report the pre-checks, but it never approves or rejects a record on its own judgment. Anyone, an agent included, may record a decision that the reviewer stated. The commit that records it cites that decision: who made it, when, and which record ids it covers.
 
 For each record, the reviewer checks three things:
 

@@ -40,14 +40,20 @@ def test_rerun_on_its_own_output_changes_nothing(tmp_path):
 
 def test_generated_records_are_unreviewed_and_recorded_reviews_survive(tmp_path):
     committed = json.loads(lever.CATALOG.read_text(encoding="utf-8"))["relationships"]
+    reviews = {record["id"]: record["review"] for record in committed}
+    empty = _catalog(tmp_path, [])
+    generated = _relationships(lever.render(empty), empty)
+    assert set(generated) == set(reviews)
+    assert {record["review"]["status"] for record in generated.values()} == {"unreviewed"}
     reviewed = [
-        {**record, "review": APPROVAL} if record["id"] == "g3056-h1697-john-1-1" else record
+        {**record, "review": APPROVAL} if record["review"]["status"] == "unreviewed" else record
         for record in committed
     ]
     catalog = _catalog(tmp_path, reviewed)
-    records = _relationships(lever.render(catalog), catalog)
-    assert records.pop("g3056-h1697-john-1-1")["review"] == APPROVAL
-    assert {record["review"]["status"] for record in records.values()} == {"unreviewed"}
+    survived = _relationships(lever.render(catalog), catalog)
+    assert {key: record["review"] for key, record in survived.items()} == {
+        record["id"]: record["review"] for record in reviewed
+    }
 
 
 def test_reviewed_record_without_a_footnote_stops_the_run(tmp_path):
