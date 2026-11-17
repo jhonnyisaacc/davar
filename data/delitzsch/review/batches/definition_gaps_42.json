@@ -657,14 +657,35 @@
       "definition": {
         "order": 1,
         "source": "delitzsch_review",
-        "text_en": "Erastus; a co-worker of Paul, named as treasurer of the city of Corinth.",
-        "text_es": "Erasto; colaborador de Pablo, nombrado como tesorero de la ciudad de Corinto."
+        "text_en": "Erastus; a co-worker of Paul, sent into Macedonia and later left at Corinth.",
+        "text_es": "Erasto; colaborador de Pablo, enviado a Macedonia y que después se quedó en Corinto."
       },
       "reason": "אֲרַסְטוֹס has no entry of its own; its 3 reviewed occurrences need one",
       "evidence": {
         "lexicon": "NT personal name; no Strong entry",
-        "sense": "Erastus; a co-worker of Paul, named as treasurer of the city of Corinth.",
-        "spanish": "Erasto; colaborador de Pablo, nombrado como tesorero de la ciudad de Corinto.",
+        "sense": "Erastus; a co-worker of Paul, sent into Macedonia and later left at Corinth.",
+        "spanish": "Erasto; colaborador de Pablo, enviado a Macedonia y que después se quedó en Corinto.",
+        "greek": "Ἔραστος",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "D0299",
+      "definition": {
+        "order": 2,
+        "source": "delitzsch_review",
+        "text_en": "Erastus; the treasurer of the city of Corinth, who sent greetings to Rome.",
+        "text_es": "Erasto; tesorero de la ciudad de Corinto, que envió saludos a Roma."
+      },
+      "reason": "Romans 16:23 names Erastus the city treasurer; the text does not say he is the co-worker of Acts 19:22 and 2 Timothy 4:20",
+      "evidence": {
+        "lexicon": "NT personal name; no Strong entry",
+        "sense": "Erastus; the treasurer of the city of Corinth, who sent greetings to Rome.",
+        "spanish": "Erasto; tesorero de la ciudad de Corinto, que envió saludos a Roma.",
         "greek": "Ἔραστος",
         "issue": 42
       }
@@ -3456,9 +3477,9 @@
       "evidence": {
         "lexicon": "D0304 רָמָתַיִם Arimathea (Ramathaim); NT place name; D0191 is the gentilic Arimathean, and H7436 רָמָתַיִם צוֹפִים names Samuel's town without a definition",
         "grammar": "article ה + place name after מִן",
-        "context": "Luke 23:50, Greek Ἁριμαθαίας in verse 51",
-        "greek": "G0707 Ἀριμαθαία",
-        "issue": 42
+        "context": "Luke 23:50, Greek Ἁριμαθαία",
+        "issue": 42,
+        "greek_note": "the SBLGNT names Ἁριμαθαίας in verse 51; Delitzsch names the town in verse 50"
       }
     },
     {

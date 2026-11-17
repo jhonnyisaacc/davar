@@ -267,8 +267,8 @@ keeps that correction. The batch makes these changes:
   They also correct false prefix tags, such as the ל of לוּקָס. Each
   decision's `evidence.greek` names the SBLGNT word of the verse.
 
-Apply it with `review apply definition_gaps_42.json`, then run
-`review dispositions`.
+Apply it with `review apply definition_gaps_42.json`, then apply rounds 2 and
+3 in order and run `review dispositions`.
 
 `batches/definition_gaps_42_round_2.json` resolves the 677 occurrences that
 the lexical reviews blocked on an identifier that has a definition but names
@@ -279,21 +279,46 @@ the identities that reviewed occurrences of the same stem use. The report
 proposes nothing. A reviewer judged each word from the pointed form, the
 verse, the Greek, and the lexicon. The batch makes these changes:
 
-- 372 `upsert_custom_definition` decisions create D0327 to D0698, with the
-  same fields as the first batch. Names include Hermes and Hermas, kept apart
-  by the Greek of each verse, Lydia, Cyprus, and Puteoli. Post-biblical words
-  include נִסָּיוֹן trial, מוֹכֵס tax collector, חֵרוּת freedom, and the verb
-  הִשְׁתַּמֵּשׁ use. A derived word gets its own entry, so עֲבֵרָה
-  transgression is not on עֲבָרָה, the place in John 1:28.
+- 360 `upsert_custom_definition` decisions create entries between D0327 and
+  D0698, with the same fields as the first batch. Names include Lydia,
+  Cyprus, and Puteoli. Delitzsch follows the Textus Receptus order in Romans
+  16:14, so `וְהֶרְמָס` is Hermas (D0645) and `וְהֶרְמִיס` is Hermes (D0338),
+  the spelling of Acts 14:12. Post-biblical words include נִסָּיוֹן trial,
+  מוֹכֵס tax collector, חֵרוּת freedom, and the verb הִשְׁתַּמֵּשׁ use. A
+  derived word gets its own entry, so עֲבֵרָה transgression is not on
+  עֲבָרָה, the place in John 1:28.
+- A name borne by more than one person gets one sense per person. D0338
+  Hermes covers the god and the Christian in Rome, D0354 Sosthenes the
+  synagogue ruler and the co-sender of 1 Corinthians, D0573 Rufus the son of
+  Simon and the Christian in Rome. The first batch does the same for D0299
+  Erastus, the co-worker and the city treasurer.
+- A word that already has a canonical entry gets a sense on that entry, not
+  a new D entry. This covers a name the lexicon already has, such as
+  מְנַחֵם (H4505, Manaen) and זְכַרְיָה (H2148), and a post-biblical sense of
+  a biblical word, such as כָּפַר deny (H3722), סָתַר tear down (H5641),
+  קָבַע fix (H6906), פֶּרֶק season (H6563), צִיר joint (H6735), and צָבוּעַ
+  hypocritical (H6641). Eleven such senses replace D0333, D0402, D0413,
+  D0415, D0450, D0482, D0492, D0502, D0534, D0665, and D0690, and those
+  numbers stay unused. סַנְהֶדְרִין goes to the existing D0008.
 - One decision adds the sense Rome to D0141 רוֹמִי, the exact form Delitzsch
   uses for the city.
-- 685 `set_strong` lexical reviews move the occurrences. 663 go to the new
-  entries. The others go to an existing entry for the same word, such as
-  D0053 הִסְכִּים, D0167 אֵבָר, D0326 כָּרַךְ, and H1278 for `הַבְּרִיָּה`.
-  Eight of them move דִּבּוּר, יְכֹלֶת, and יְתֵרָה from H1697, H3201, and
-  H3502 to D0321, D0309, and D0324. Each decision's `evidence.greek` names the
-  SBLGNT word of the verse. Where the SBLGNT has no such word, as in Mark
-  16:18 or Luke 6:1, `evidence.greek_note` says why.
+- 684 `set_strong` lexical reviews move the occurrences, and one `skip`
+  keeps `הַמְשַׁמְּשִׁים` (1 Timothy 3:13) on H8120, which now carries the
+  sense. Some moves go to an existing entry for the same word, such as D0053
+  הִסְכִּים, D0167 אֵבָר, D0326 כָּרַךְ, and H1278 for `הַבְּרִיָּה`. Each
+  decision's `evidence.greek` names the SBLGNT word of the same verse. Where
+  the SBLGNT has no such word, `evidence.greek_note` says why: a verse
+  boundary that differs, as in Acts 24:3, a Textus Receptus reading, as in
+  Matthew 5:47 and 1 Peter 3:8, or a free rendering.
+
+`batches/definition_gaps_42_round_3.json` creates D0699 Melita and moves 206
+more occurrences. Most are occurrences of the round's own words that sat on
+another identifier, found by matching every inflected form of each reviewed
+word across the corpus, such as Artemis, Bethphage, Bethsaida, the
+publicans, Epaphroditus, Aeneas, Troas, Trophimus, Gennesaret, מִילָה
+circumcision, and אֲמִתִּי true. Acts 28:1 `מְלִיטִי` moves from D0254
+Miletus to D0699 and supersedes the #399 correction. A homograph stays where
+it is, such as `וּמָתַי` when in Matthew 25:38 and `בַּגָּלוּי` openly.
 
 A `set_strong` onto a custom entry whose `mapping_scope` is `instances_only`
 adds the occurrence to that entry's `nt_instances`, and removes it from the

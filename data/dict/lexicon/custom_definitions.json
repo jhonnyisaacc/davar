@@ -198988,6 +198988,12 @@
         "transliteration": "Menajen",
         "context": "Figura del pensamiento hebreo que describe al agente encargado de traer consolación operativa a Yisra'el, la cual se traduce directamente en restauración y cumplimiento profético.",
         "original_id": 810
+      },
+      {
+        "source": "delitzsch_review",
+        "text_en": "Manaen; a prophet at Antioch, brought up with Herod the tetrarch.",
+        "text_es": "Manaén; profeta de Antioquía, criado con Herodes el tetrarca.",
+        "order": 3
       }
     ]
   },
@@ -520407,8 +520413,14 @@
       {
         "order": 1,
         "source": "delitzsch_review",
-        "text_en": "Erastus; a co-worker of Paul, named as treasurer of the city of Corinth.",
-        "text_es": "Erasto; colaborador de Pablo, nombrado como tesorero de la ciudad de Corinto."
+        "text_en": "Erastus; a co-worker of Paul, sent into Macedonia and later left at Corinth.",
+        "text_es": "Erasto; colaborador de Pablo, enviado a Macedonia y que después se quedó en Corinto."
+      },
+      {
+        "order": 2,
+        "source": "delitzsch_review",
+        "text_en": "Erastus; the treasurer of the city of Corinth, who sent greetings to Rome.",
+        "text_es": "Erasto; tesorero de la ciudad de Corinto, que envió saludos a Roma."
       }
     ],
     "root": "",
@@ -521612,6 +521624,13 @@
         "verse": 23,
         "word_index": 9,
         "text": "תוֹבֵעַ"
+      },
+      {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 31,
+        "word_index": 5,
+        "text": "תָּבַע"
       }
     ]
   },
@@ -521856,7 +521875,8 @@
     "root": "",
     "root_strong": "H1442",
     "manual_instances": [],
-    "mapping_scope": "instances_only"
+    "mapping_scope": "instances_only",
+    "nt_instances": []
   },
   "H1861": {
     "strong_number": "H1861",
@@ -521932,7 +521952,8 @@
     "root": "",
     "root_strong": "",
     "manual_instances": [],
-    "mapping_scope": "instances_only"
+    "mapping_scope": "instances_only",
+    "nt_instances": []
   },
   "D0327": {
     "strong_number": "D0327",
@@ -521994,6 +522015,27 @@
         "verse": 3,
         "word_index": 4,
         "text": "וּמַתַּי"
+      },
+      {
+        "book": "luke",
+        "chapter": 6,
+        "verse": 15,
+        "word_index": 1,
+        "text": "מַתַּי"
+      },
+      {
+        "book": "mark",
+        "chapter": 3,
+        "verse": 18,
+        "word_index": 8,
+        "text": "מַתַּי"
+      },
+      {
+        "book": "matthew",
+        "chapter": 9,
+        "verse": 9,
+        "word_index": 10,
+        "text": "מַתָּי"
       }
     ]
   },
@@ -522151,34 +522193,6 @@
       }
     ]
   },
-  "D0333": {
-    "strong_number": "D0333",
-    "hebrew": "מְנַחֵם",
-    "transliteration_es": "Manaén",
-    "transliteration_en": "Manaen",
-    "is_custom": true,
-    "definitions": [
-      {
-        "order": 1,
-        "source": "delitzsch_review",
-        "text_en": "Manaen; a prophet at Antioch, brought up with Herod the tetrarch.",
-        "text_es": "Manaén; profeta de Antioquía, criado con Herodes el tetrarca."
-      }
-    ],
-    "root": "",
-    "root_strong": "",
-    "manual_instances": [],
-    "mapping_scope": "instances_only",
-    "nt_instances": [
-      {
-        "book": "acts",
-        "chapter": 13,
-        "verse": 1,
-        "word_index": 15,
-        "text": "וּמְנַחֵם"
-      }
-    ]
-  },
   "D0334": {
     "strong_number": "D0334",
     "hebrew": "פָּפוֹס",
@@ -522204,6 +522218,13 @@
         "verse": 13,
         "word_index": 5,
         "text": "מִפָּפוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 13,
+        "verse": 6,
+        "word_index": 4,
+        "text": "פָּפוֹס"
       }
     ]
   },
@@ -522267,6 +522288,20 @@
         "verse": 50,
         "word_index": 6,
         "text": "וְהַחֲשׁוּבוֹת"
+      },
+      {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 4,
+        "word_index": 14,
+        "text": "חֲשׁוּבוֹת"
+      },
+      {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 12,
+        "word_index": 6,
+        "text": "הַחֲשׁוּבוֹת"
       }
     ]
   },
@@ -522308,8 +522343,14 @@
       {
         "order": 1,
         "source": "delitzsch_review",
-        "text_en": "Hermes; the Greek god for whom the people of Lystra took Paul, and a Christian in Rome greeted by Paul.",
-        "text_es": "Hermes; el dios griego por quien los de Listra tomaron a Pablo, y un cristiano de Roma saludado por Pablo."
+        "text_en": "Hermes; the Greek god for whom the people of Lystra took Paul.",
+        "text_es": "Hermes; el dios griego por quien los de Listra tomaron a Pablo."
+      },
+      {
+        "order": 2,
+        "source": "delitzsch_review",
+        "text_en": "Hermes; a Christian in Rome greeted by Paul.",
+        "text_es": "Hermes; cristiano de Roma saludado por Pablo."
       }
     ],
     "root": "",
@@ -522328,8 +522369,8 @@
         "book": "romans",
         "chapter": 16,
         "verse": 14,
-        "word_index": 4,
-        "text": "וְהֶרְמָס"
+        "word_index": 6,
+        "text": "וְהֶרְמִיס"
       }
     ]
   },
@@ -522477,6 +522518,13 @@
         "verse": 8,
         "word_index": 1,
         "text": "מִמּוּסְיָא"
+      },
+      {
+        "book": "acts",
+        "chapter": 16,
+        "verse": 7,
+        "word_index": 2,
+        "text": "מוּסְיָא"
       }
     ]
   },
@@ -522533,6 +522581,13 @@
         "verse": 13,
         "word_index": 3,
         "text": "בִטְרוֹאַס"
+      },
+      {
+        "book": "acts",
+        "chapter": 16,
+        "verse": 11,
+        "word_index": 2,
+        "text": "טְרוֹאַס"
       }
     ]
   },
@@ -522833,6 +522888,12 @@
       {
         "order": 1,
         "source": "delitzsch_review",
+        "text_en": "Sosthenes; the ruler of the synagogue at Corinth, beaten before Gallio's tribunal.",
+        "text_es": "Sóstenes; principal de la sinagoga de Corinto, golpeado ante el tribunal de Galión."
+      },
+      {
+        "order": 2,
+        "source": "delitzsch_review",
         "text_en": "Sosthenes; a brother named with Paul as co-sender of 1 Corinthians.",
         "text_es": "Sóstenes; hermano nombrado con Pablo como coautor de 1 Corintios."
       }
@@ -522987,6 +523048,20 @@
         "chapter": 19,
         "verse": 35,
         "word_index": 21,
+        "text": "אַרְטְמִיס"
+      },
+      {
+        "book": "acts",
+        "chapter": 19,
+        "verse": 27,
+        "word_index": 13,
+        "text": "אַרְטְמִיס"
+      },
+      {
+        "book": "acts",
+        "chapter": 19,
+        "verse": 34,
+        "word_index": 13,
         "text": "אַרְטְמִיס"
       }
     ]
@@ -523170,6 +523245,41 @@
         "verse": 23,
         "word_index": 14,
         "text": "בְּסַכָּנָה׃"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 11,
+        "verse": 26,
+        "word_index": 13,
+        "text": "סַכָּנוֹת"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 11,
+        "verse": 26,
+        "word_index": 15,
+        "text": "סַכָּנוֹת"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 11,
+        "verse": 26,
+        "word_index": 17,
+        "text": "סַכָּנוֹת"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 11,
+        "verse": 26,
+        "word_index": 19,
+        "text": "סַכָּנוֹת"
+      },
+      {
+        "book": "romans",
+        "chapter": 8,
+        "verse": 35,
+        "word_index": 14,
+        "text": "סַכָּנָה"
       }
     ]
   },
@@ -523233,6 +523343,13 @@
         "verse": 7,
         "word_index": 6,
         "text": "לִידִיעַת"
+      },
+      {
+        "book": "philippians",
+        "chapter": 3,
+        "verse": 8,
+        "word_index": 8,
+        "text": "יְדִיעַת"
       }
     ]
   },
@@ -523282,6 +523399,48 @@
         "verse": 10,
         "word_index": 5,
         "text": "וְהִתְחַבְּרוּת"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 10,
+        "verse": 16,
+        "word_index": 7,
+        "text": "הִתְחַבְּרוּת"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 10,
+        "verse": 16,
+        "word_index": 16,
+        "text": "הִתְחַבְּרוּת"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 6,
+        "verse": 14,
+        "word_index": 16,
+        "text": "הִתְחַבְּרוּת"
+      },
+      {
+        "book": "john1",
+        "chapter": 1,
+        "verse": 6,
+        "word_index": 5,
+        "text": "הִתְחַבְּרוּת"
+      },
+      {
+        "book": "philemon",
+        "chapter": 1,
+        "verse": 6,
+        "word_index": 3,
+        "text": "הִתְחַבְּרוּת"
+      },
+      {
+        "book": "philippians",
+        "chapter": 2,
+        "verse": 1,
+        "word_index": 9,
+        "text": "הִתְחַבְּרוּת"
       }
     ]
   },
@@ -523324,6 +523483,41 @@
         "verse": 2,
         "word_index": 7,
         "text": "הַגְּלִילִים"
+      },
+      {
+        "book": "acts",
+        "chapter": 5,
+        "verse": 37,
+        "word_index": 4,
+        "text": "הַגְּלִילִי"
+      },
+      {
+        "book": "matthew",
+        "chapter": 26,
+        "verse": 69,
+        "word_index": 14,
+        "text": "הַגְּלִילִי׃"
+      },
+      {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 59,
+        "word_index": 17,
+        "text": "גְּלִילִי׃"
+      },
+      {
+        "book": "luke",
+        "chapter": 23,
+        "verse": 6,
+        "word_index": 10,
+        "text": "גְּלִילִי׃"
+      },
+      {
+        "book": "mark",
+        "chapter": 14,
+        "verse": 70,
+        "word_index": 15,
+        "text": "גְּלִילִי"
       }
     ]
   },
@@ -523532,6 +523726,13 @@
         "book": "timothy2",
         "chapter": 4,
         "verse": 20,
+        "word_index": 4,
+        "text": "טְרוֹפִימוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 21,
+        "verse": 29,
         "word_index": 4,
         "text": "טְרוֹפִימוֹס"
       }
@@ -523807,6 +524008,13 @@
         "verse": 64,
         "word_index": 9,
         "text": "מִיתָה"
+      },
+      {
+        "book": "matthew",
+        "chapter": 24,
+        "verse": 9,
+        "word_index": 5,
+        "text": "לְמִיתָה"
       }
     ]
   },
@@ -523989,6 +524197,13 @@
         "verse": 19,
         "word_index": 3,
         "text": "לְעוֹגִין"
+      },
+      {
+        "book": "acts",
+        "chapter": 27,
+        "verse": 30,
+        "word_index": 16,
+        "text": "עוֹגִינִים"
       }
     ]
   },
@@ -524241,6 +524456,13 @@
         "verse": 10,
         "word_index": 5,
         "text": "סִפְּקוּ"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 6,
+        "verse": 17,
+        "word_index": 17,
+        "text": "הַמְסַפֵּק"
       }
     ]
   },
@@ -524440,18 +524662,18 @@
       }
     ]
   },
-  "D0402": {
-    "strong_number": "D0402",
-    "hebrew": "שִׁמֵּשׁ",
-    "transliteration_es": "shimesh",
-    "transliteration_en": "shimmesh",
+  "H8120": {
+    "strong_number": "H8120",
+    "hebrew": "שְׁמַשׁ",
+    "transliteration_es": "shemash",
+    "transliteration_en": "shemash",
     "is_custom": true,
     "definitions": [
       {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "serve, minister; a post-biblical Hebrew verb.",
-        "text_es": "servir, ministrar; verbo hebreo posbíblico."
+        "text_es": "servir, ministrar; verbo hebreo posbíblico.",
+        "order": 1
       }
     ],
     "root": "",
@@ -524460,6 +524682,13 @@
     "mapping_scope": "instances_only",
     "nt_instances": [
       {
+        "book": "timothy1",
+        "chapter": 3,
+        "verse": 13,
+        "word_index": 1,
+        "text": "הַמְשַׁמְּשִׁים"
+      },
+      {
         "book": "acts",
         "chapter": 6,
         "verse": 2,
@@ -524467,11 +524696,11 @@
         "text": "וּנְשַׁמֵּשׁ"
       },
       {
-        "book": "timothy1",
-        "chapter": 3,
+        "book": "john",
+        "chapter": 18,
         "verse": 13,
-        "word_index": 1,
-        "text": "הַמְשַׁמְּשִׁים"
+        "word_index": 8,
+        "text": "שִׁמֵּשׁ"
       }
     ]
   },
@@ -524549,6 +524778,13 @@
         "verse": 6,
         "word_index": 9,
         "text": "בִּסְמִיכַת"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 4,
+        "verse": 14,
+        "word_index": 11,
+        "text": "סְמִיכַת"
       }
     ]
   },
@@ -524681,6 +524917,13 @@
         "chapter": 9,
         "verse": 34,
         "word_index": 3,
+        "text": "אֲנִיַּס"
+      },
+      {
+        "book": "acts",
+        "chapter": 9,
+        "verse": 33,
+        "word_index": 4,
         "text": "אֲנִיַּס"
       }
     ]
@@ -524822,6 +525065,48 @@
         "verse": 11,
         "word_index": 1,
         "text": "וּבָעִנּוּיִם"
+      },
+      {
+        "book": "revelation",
+        "chapter": 18,
+        "verse": 15,
+        "word_index": 8,
+        "text": "עִנּוּיָהּ"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 1,
+        "verse": 5,
+        "word_index": 2,
+        "text": "עִנּוּיֵי"
+      },
+      {
+        "book": "peter1",
+        "chapter": 1,
+        "verse": 11,
+        "word_index": 15,
+        "text": "עִנּוּיֵי"
+      },
+      {
+        "book": "peter1",
+        "chapter": 5,
+        "verse": 1,
+        "word_index": 9,
+        "text": "עִנּוּיֵי"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 10,
+        "verse": 32,
+        "word_index": 13,
+        "text": "עִנּוּיִם"
+      },
+      {
+        "book": "revelation",
+        "chapter": 14,
+        "verse": 11,
+        "word_index": 1,
+        "text": "עִנּוּיָם"
       }
     ]
   },
@@ -524857,6 +525142,160 @@
         "verse": 25,
         "word_index": 14,
         "text": "מִילָתְךָ"
+      },
+      {
+        "book": "romans",
+        "chapter": 2,
+        "verse": 26,
+        "word_index": 11,
+        "text": "לְמִילָה׃"
+      },
+      {
+        "book": "romans",
+        "chapter": 2,
+        "verse": 29,
+        "word_index": 6,
+        "text": "וּמִילָה"
+      },
+      {
+        "book": "acts",
+        "chapter": 10,
+        "verse": 45,
+        "word_index": 2,
+        "text": "הַמִּילָה"
+      },
+      {
+        "book": "acts",
+        "chapter": 11,
+        "verse": 2,
+        "word_index": 8,
+        "text": "הַמִּילָה"
+      },
+      {
+        "book": "acts",
+        "chapter": 7,
+        "verse": 8,
+        "word_index": 4,
+        "text": "הַמִּילָה"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 7,
+        "verse": 19,
+        "word_index": 1,
+        "text": "הַמִּילָה"
+      },
+      {
+        "book": "ephesians",
+        "chapter": 2,
+        "verse": 11,
+        "word_index": 12,
+        "text": "הַמִּילָה"
+      },
+      {
+        "book": "galatians",
+        "chapter": 2,
+        "verse": 12,
+        "word_index": 19,
+        "text": "הַמִּילָה׃"
+      },
+      {
+        "book": "galatians",
+        "chapter": 5,
+        "verse": 6,
+        "word_index": 5,
+        "text": "הַמִּילָה"
+      },
+      {
+        "book": "galatians",
+        "chapter": 5,
+        "verse": 11,
+        "word_index": 5,
+        "text": "הַמִּילָה"
+      },
+      {
+        "book": "galatians",
+        "chapter": 6,
+        "verse": 15,
+        "word_index": 4,
+        "text": "הַמִּילָה"
+      },
+      {
+        "book": "john",
+        "chapter": 7,
+        "verse": 22,
+        "word_index": 3,
+        "text": "הַמִּילָה"
+      },
+      {
+        "book": "philippians",
+        "chapter": 3,
+        "verse": 3,
+        "word_index": 3,
+        "text": "הַמִּילָה"
+      },
+      {
+        "book": "romans",
+        "chapter": 15,
+        "verse": 8,
+        "word_index": 8,
+        "text": "הַמִּילָה"
+      },
+      {
+        "book": "romans",
+        "chapter": 2,
+        "verse": 25,
+        "word_index": 1,
+        "text": "הַמִּילָה"
+      },
+      {
+        "book": "romans",
+        "chapter": 2,
+        "verse": 27,
+        "word_index": 13,
+        "text": "וְהַמִּילָה"
+      },
+      {
+        "book": "romans",
+        "chapter": 2,
+        "verse": 28,
+        "word_index": 11,
+        "text": "הַמִּילָה׃"
+      },
+      {
+        "book": "romans",
+        "chapter": 3,
+        "verse": 1,
+        "word_index": 8,
+        "text": "הַמִּילָה׃"
+      },
+      {
+        "book": "romans",
+        "chapter": 4,
+        "verse": 9,
+        "word_index": 4,
+        "text": "הַמִּילָה"
+      },
+      {
+        "book": "romans",
+        "chapter": 4,
+        "verse": 11,
+        "word_index": 1,
+        "text": "הַמִּילָה"
+      },
+      {
+        "book": "colossians",
+        "chapter": 2,
+        "verse": 11,
+        "word_index": 4,
+        "text": "מִילָה"
+      },
+      {
+        "book": "colossians",
+        "chapter": 3,
+        "verse": 11,
+        "word_index": 6,
+        "text": "מִילָה"
       }
     ]
   },
@@ -524892,25 +525331,32 @@
         "verse": 6,
         "word_index": 8,
         "text": "שְׁטָרְךָ"
+      },
+      {
+        "book": "luke",
+        "chapter": 16,
+        "verse": 7,
+        "word_index": 13,
+        "text": "שְׁטָרְךָ"
       }
     ]
   },
-  "D0413": {
-    "strong_number": "D0413",
+  "H6735": {
+    "strong_number": "H6735",
     "hebrew": "צִיר",
-    "transliteration_es": "tsir",
-    "transliteration_en": "tzir",
+    "transliteration_es": "tziyr",
+    "transliteration_en": "tziyr",
     "is_custom": true,
     "definitions": [
       {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "joint, ligament of the body; a post-biblical Hebrew sense.",
-        "text_es": "articulación, ligamento del cuerpo; sentido hebreo posbíblico."
+        "text_es": "articulación, ligamento del cuerpo; sentido hebreo posbíblico.",
+        "order": 1
       }
     ],
     "root": "",
-    "root_strong": "",
+    "root_strong": "H6696",
     "manual_instances": [],
     "mapping_scope": "instances_only",
     "nt_instances": [
@@ -524955,25 +525401,32 @@
         "verse": 26,
         "word_index": 10,
         "text": "הַתַּשְׁמִישׁ"
+      },
+      {
+        "book": "romans",
+        "chapter": 1,
+        "verse": 27,
+        "word_index": 5,
+        "text": "תַּשְׁמִישׁ"
       }
     ]
   },
-  "D0415": {
-    "strong_number": "D0415",
+  "H3928": {
+    "strong_number": "H3928",
     "hebrew": "לִמּוּד",
     "transliteration_es": "limud",
-    "transliteration_en": "limmud",
+    "transliteration_en": "limud",
     "is_custom": true,
     "definitions": [
       {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "teaching, instruction; a post-biblical Hebrew noun.",
-        "text_es": "enseñanza, instrucción; sustantivo hebreo posbíblico."
+        "text_es": "enseñanza, instrucción; sustantivo hebreo posbíblico.",
+        "order": 1
       }
     ],
     "root": "",
-    "root_strong": "",
+    "root_strong": "H3925",
     "manual_instances": [],
     "mapping_scope": "instances_only",
     "nt_instances": [
@@ -525053,6 +525506,13 @@
         "verse": 12,
         "word_index": 2,
         "text": "כְהֹגֶן"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 2,
+        "verse": 10,
+        "word_index": 3,
+        "text": "הָגוּן"
       }
     ]
   },
@@ -525144,6 +525604,13 @@
         "verse": 25,
         "word_index": 1,
         "text": "בִּנְמִיכוּת"
+      },
+      {
+        "book": "ephesians",
+        "chapter": 4,
+        "verse": 2,
+        "word_index": 1,
+        "text": "נְמִיכוּת"
       }
     ]
   },
@@ -525403,6 +525870,34 @@
         "verse": 7,
         "word_index": 9,
         "text": "לְהִתְגַּלּוּת"
+      },
+      {
+        "book": "romans",
+        "chapter": 8,
+        "verse": 19,
+        "word_index": 5,
+        "text": "לְהִתְגַּלּוּת"
+      },
+      {
+        "book": "peter1",
+        "chapter": 1,
+        "verse": 7,
+        "word_index": 14,
+        "text": "בְּהִתְגַּלּוֹת"
+      },
+      {
+        "book": "peter1",
+        "chapter": 1,
+        "verse": 13,
+        "word_index": 10,
+        "text": "בְּהִתְגַּלּוֹת"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 12,
+        "verse": 7,
+        "word_index": 5,
+        "text": "הִתְגַּלּוּת"
       }
     ]
   },
@@ -525550,6 +526045,20 @@
         "verse": 9,
         "word_index": 4,
         "text": "בְנִסָּיוֹן"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 10,
+        "verse": 13,
+        "word_index": 26,
+        "text": "הַנִּסָּיוֹן"
+      },
+      {
+        "book": "galatians",
+        "chapter": 6,
+        "verse": 1,
+        "word_index": 18,
+        "text": "נִסָּיוֹן"
       }
     ]
   },
@@ -525606,6 +526115,13 @@
         "verse": 13,
         "word_index": 8,
         "text": "בְּגִלּוּי"
+      },
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 25,
+        "word_index": 9,
+        "text": "גִּלּוּי"
       }
     ]
   },
@@ -526103,6 +526619,27 @@
         "verse": 23,
         "word_index": 10,
         "text": "הַנִּפְסָד"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 9,
+        "verse": 25,
+        "word_index": 9,
+        "text": "נִפְסָד"
+      },
+      {
+        "book": "peter1",
+        "chapter": 1,
+        "verse": 18,
+        "word_index": 4,
+        "text": "נִפְסָד"
+      },
+      {
+        "book": "romans",
+        "chapter": 1,
+        "verse": 23,
+        "word_index": 6,
+        "text": "נִפְסָד"
       }
     ]
   },
@@ -526138,6 +526675,13 @@
         "verse": 10,
         "word_index": 10,
         "text": "הַגַּזְלָנִים"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 5,
+        "verse": 11,
+        "word_index": 24,
+        "text": "גַזְלָן"
       }
     ]
   },
@@ -526187,6 +526731,27 @@
         "verse": 18,
         "word_index": 4,
         "text": "הִשְׁתַּעְבַּדְתֶּם"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 7,
+        "verse": 15,
+        "word_index": 11,
+        "text": "מְשֻׁעְבָּדִים"
+      },
+      {
+        "book": "galatians",
+        "chapter": 4,
+        "verse": 21,
+        "word_index": 5,
+        "text": "מְשֻׁעְבָּדִים"
+      },
+      {
+        "book": "romans",
+        "chapter": 6,
+        "verse": 22,
+        "word_index": 6,
+        "text": "וּמְשֻׁעְבָּדִים"
       }
     ]
   },
@@ -526278,6 +526843,13 @@
         "verse": 21,
         "word_index": 4,
         "text": "תְשֻׁחְרַר"
+      },
+      {
+        "book": "galatians",
+        "chapter": 5,
+        "verse": 1,
+        "word_index": 5,
+        "text": "שִׁחְרֵר"
       }
     ]
   },
@@ -526306,6 +526878,20 @@
         "verse": 31,
         "word_index": 0,
         "text": "וְהַנֶּהֱנִים"
+      },
+      {
+        "book": "mark",
+        "chapter": 7,
+        "verse": 11,
+        "word_index": 14,
+        "text": "נֶהֱנֶה"
+      },
+      {
+        "book": "matthew",
+        "chapter": 15,
+        "verse": 5,
+        "word_index": 10,
+        "text": "נֶהֱנֶה"
       }
     ]
   },
@@ -526372,22 +526958,22 @@
       }
     ]
   },
-  "D0450": {
-    "strong_number": "D0450",
-    "hebrew": "פֶּרֶק",
+  "H6563": {
+    "strong_number": "H6563",
+    "hebrew": "פֶּרֶק",
     "transliteration_es": "perek",
     "transliteration_en": "perek",
     "is_custom": true,
     "definitions": [
       {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "season of life, age of maturity; a post-biblical Hebrew sense.",
-        "text_es": "etapa de la vida, edad madura; sentido hebreo posbíblico."
+        "text_es": "etapa de la vida, edad madura; sentido hebreo posbíblico.",
+        "order": 1
       }
     ],
     "root": "",
-    "root_strong": "",
+    "root_strong": "H6561",
     "manual_instances": [],
     "mapping_scope": "instances_only",
     "nt_instances": [
@@ -526425,6 +527011,13 @@
         "verse": 8,
         "word_index": 1,
         "text": "הַפְּנוּיִם"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 7,
+        "verse": 5,
+        "word_index": 13,
+        "text": "פְּנוּיִם"
       }
     ]
   },
@@ -526515,6 +527108,13 @@
         "chapter": 8,
         "verse": 21,
         "word_index": 8,
+        "text": "חֵרוּת"
+      },
+      {
+        "book": "peter2",
+        "chapter": 2,
+        "verse": 19,
+        "word_index": 0,
         "text": "חֵרוּת"
       }
     ]
@@ -526810,6 +527410,27 @@
         "verse": 19,
         "word_index": 3,
         "text": "מִתְנַצְּלִים"
+      },
+      {
+        "book": "luke",
+        "chapter": 14,
+        "verse": 18,
+        "word_index": 4,
+        "text": "לְהִתְנַצֵּל"
+      },
+      {
+        "book": "john",
+        "chapter": 15,
+        "verse": 22,
+        "word_index": 11,
+        "text": "לְהִתְנַצֵּל"
+      },
+      {
+        "book": "romans",
+        "chapter": 1,
+        "verse": 20,
+        "word_index": 16,
+        "text": "לְהִתְנַצֵּל׃"
       }
     ]
   },
@@ -526936,6 +527557,13 @@
         "verse": 8,
         "word_index": 8,
         "text": "בִּשְׁקִידָה"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 8,
+        "verse": 17,
+        "word_index": 3,
+        "text": "וּבִשְׁקִידָתוֹ"
       }
     ]
   },
@@ -527496,6 +528124,13 @@
         "verse": 4,
         "word_index": 2,
         "text": "נִבּוּל"
+      },
+      {
+        "book": "ephesians",
+        "chapter": 4,
+        "verse": 29,
+        "word_index": 2,
+        "text": "נִבּוּל"
       }
     ]
   },
@@ -527527,18 +528162,18 @@
       }
     ]
   },
-  "D0482": {
-    "strong_number": "D0482",
+  "H5641": {
+    "strong_number": "H5641",
     "hebrew": "סָתַר",
     "transliteration_es": "satar",
     "transliteration_en": "satar",
     "is_custom": true,
     "definitions": [
       {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "tear down, demolish; a post-biblical Hebrew sense.",
-        "text_es": "derribar, demoler; sentido hebreo posbíblico."
+        "text_es": "derribar, demoler; sentido hebreo posbíblico.",
+        "order": 1
       }
     ],
     "root": "",
@@ -527842,22 +528477,22 @@
       }
     ]
   },
-  "D0492": {
-    "strong_number": "D0492",
-    "hebrew": "רִגְשָׁה",
-    "transliteration_es": "rigshá",
-    "transliteration_en": "rigshah",
+  "H7285": {
+    "strong_number": "H7285",
+    "hebrew": "רֶגֶשׁ",
+    "transliteration_es": "regesh",
+    "transliteration_en": "regesh",
     "is_custom": true,
     "definitions": [
       {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "feeling, awareness; a post-biblical Hebrew sense.",
-        "text_es": "sentimiento, conciencia; sentido hebreo posbíblico."
+        "text_es": "sentimiento, conciencia; sentido hebreo posbíblico.",
+        "order": 1
       }
     ],
     "root": "",
-    "root_strong": "",
+    "root_strong": "H7283",
     "manual_instances": [],
     "mapping_scope": "instances_only",
     "nt_instances": [
@@ -527930,6 +528565,13 @@
         "verse": 3,
         "word_index": 3,
         "text": "הַזְכָּרַת"
+      },
+      {
+        "book": "peter2",
+        "chapter": 3,
+        "verse": 1,
+        "word_index": 12,
+        "text": "הַזְכָּרָה"
       }
     ]
   },
@@ -528157,18 +528799,18 @@
       }
     ]
   },
-  "D0502": {
-    "strong_number": "D0502",
+  "H6906": {
+    "strong_number": "H6906",
     "hebrew": "קָבַע",
-    "transliteration_es": "kavá",
+    "transliteration_es": "kava",
     "transliteration_en": "kava",
     "is_custom": true,
     "definitions": [
       {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "fix, appoint, determine; a post-biblical Hebrew sense.",
-        "text_es": "fijar, señalar, determinar; sentido hebreo posbíblico."
+        "text_es": "fijar, señalar, determinar; sentido hebreo posbíblico.",
+        "order": 1
       }
     ],
     "root": "",
@@ -528182,6 +528824,13 @@
         "verse": 7,
         "word_index": 2,
         "text": "לִקְבוֹעַ"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 7,
+        "verse": 5,
+        "word_index": 11,
+        "text": "קָבוּעַ"
       }
     ]
   },
@@ -528294,6 +528943,13 @@
         "verse": 20,
         "word_index": 5,
         "text": "הַנִּצְחִי"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 9,
+        "verse": 14,
+        "word_index": 10,
+        "text": "נִצְחִי"
       }
     ]
   },
@@ -528405,6 +529061,13 @@
         "chapter": 1,
         "verse": 21,
         "word_index": 4,
+        "text": "טִנּוּף"
+      },
+      {
+        "book": "peter1",
+        "chapter": 3,
+        "verse": 21,
+        "word_index": 11,
         "text": "טִנּוּף"
       }
     ]
@@ -528595,6 +529258,34 @@
         "verse": 21,
         "word_index": 6,
         "text": "צַיְדָה"
+      },
+      {
+        "book": "john",
+        "chapter": 1,
+        "verse": 44,
+        "word_index": 3,
+        "text": "צָיְדָה"
+      },
+      {
+        "book": "luke",
+        "chapter": 9,
+        "verse": 10,
+        "word_index": 19,
+        "text": "צָיְדָה׃"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 45,
+        "word_index": 13,
+        "text": "צָיְדָה"
+      },
+      {
+        "book": "mark",
+        "chapter": 8,
+        "verse": 22,
+        "word_index": 3,
+        "text": "צָיְדָה"
       }
     ]
   },
@@ -528679,6 +529370,125 @@
         "verse": 9,
         "word_index": 17,
         "text": "וַאֲמִתִּי׃"
+      },
+      {
+        "book": "revelation",
+        "chapter": 3,
+        "verse": 14,
+        "word_index": 10,
+        "text": "וְהָאֲמִתִּי"
+      },
+      {
+        "book": "revelation",
+        "chapter": 6,
+        "verse": 10,
+        "word_index": 8,
+        "text": "וְהָאֲמִתִּי"
+      },
+      {
+        "book": "john1",
+        "chapter": 5,
+        "verse": 20,
+        "word_index": 11,
+        "text": "וּבָאֲמִתִּי"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 1,
+        "verse": 2,
+        "word_index": 3,
+        "text": "הָאֲמִתִּי"
+      },
+      {
+        "book": "titus",
+        "chapter": 1,
+        "verse": 4,
+        "word_index": 3,
+        "text": "הָאֲמִתִּי"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 8,
+        "verse": 2,
+        "word_index": 4,
+        "text": "הָאֲמִתִּי"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 9,
+        "verse": 24,
+        "word_index": 11,
+        "text": "הָאֲמִתִּי"
+      },
+      {
+        "book": "john",
+        "chapter": 1,
+        "verse": 9,
+        "word_index": 1,
+        "text": "הָאֲמִתִּי"
+      },
+      {
+        "book": "john",
+        "chapter": 6,
+        "verse": 32,
+        "word_index": 25,
+        "text": "הָאֲמִתִּי׃"
+      },
+      {
+        "book": "john",
+        "chapter": 7,
+        "verse": 28,
+        "word_index": 18,
+        "text": "אֲמִתִּי"
+      },
+      {
+        "book": "john1",
+        "chapter": 2,
+        "verse": 8,
+        "word_index": 17,
+        "text": "הָאֲמִתִּי"
+      },
+      {
+        "book": "john1",
+        "chapter": 5,
+        "verse": 20,
+        "word_index": 10,
+        "text": "הָאֲמִתִּי"
+      },
+      {
+        "book": "john1",
+        "chapter": 5,
+        "verse": 20,
+        "word_index": 19,
+        "text": "הָאֲמִתִּי"
+      },
+      {
+        "book": "luke",
+        "chapter": 16,
+        "verse": 11,
+        "word_index": 8,
+        "text": "הָאֲמִתִּי"
+      },
+      {
+        "book": "revelation",
+        "chapter": 21,
+        "verse": 5,
+        "word_index": 14,
+        "text": "אֲמִתִּים"
+      },
+      {
+        "book": "revelation",
+        "chapter": 22,
+        "verse": 6,
+        "word_index": 4,
+        "text": "אֲמִתִּים"
+      },
+      {
+        "book": "revelation",
+        "chapter": 3,
+        "verse": 7,
+        "word_index": 8,
+        "text": "הָאֲמִתִּי"
       }
     ]
   },
@@ -529162,6 +529972,34 @@
         "verse": 10,
         "word_index": 19,
         "text": "הַשְּׂרָרוֹת׃"
+      },
+      {
+        "book": "colossians",
+        "chapter": 1,
+        "verse": 16,
+        "word_index": 18,
+        "text": "שְׂרָרוֹת"
+      },
+      {
+        "book": "colossians",
+        "chapter": 2,
+        "verse": 10,
+        "word_index": 4,
+        "text": "שְׂרָרָה"
+      },
+      {
+        "book": "ephesians",
+        "chapter": 1,
+        "verse": 21,
+        "word_index": 2,
+        "text": "שְׂרָרָה"
+      },
+      {
+        "book": "romans",
+        "chapter": 8,
+        "verse": 38,
+        "word_index": 10,
+        "text": "שְׂרָרוֹת"
       }
     ]
   },
@@ -529193,18 +530031,18 @@
       }
     ]
   },
-  "D0534": {
-    "strong_number": "D0534",
+  "H2148": {
+    "strong_number": "H2148",
     "hebrew": "זְכַרְיָה",
-    "transliteration_es": "Zacarías",
-    "transliteration_en": "Zechariah",
+    "transliteration_es": "zejareyah",
+    "transliteration_en": "zechareyah",
     "is_custom": true,
     "definitions": [
       {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "Zechariah; the priest, father of John the Baptist.",
-        "text_es": "Zacarías; el sacerdote, padre de Juan el Bautista."
+        "text_es": "Zacarías; el sacerdote, padre de Juan el Bautista.",
+        "order": 1
       }
     ],
     "root": "",
@@ -529442,6 +530280,13 @@
         "verse": 29,
         "word_index": 4,
         "text": "בְּאִסָּר"
+      },
+      {
+        "book": "mark",
+        "chapter": 12,
+        "verse": 42,
+        "word_index": 9,
+        "text": "אִסָּר׃"
       }
     ]
   },
@@ -529589,6 +530434,13 @@
         "verse": 21,
         "word_index": 3,
         "text": "הַפֵּרוּרִים"
+      },
+      {
+        "book": "matthew",
+        "chapter": 15,
+        "verse": 27,
+        "word_index": 9,
+        "text": "מִפֵּרוּרִים"
       }
     ]
   },
@@ -529764,6 +530616,41 @@
         "verse": 11,
         "word_index": 7,
         "text": "הַמּוֹכְסִים"
+      },
+      {
+        "book": "luke",
+        "chapter": 15,
+        "verse": 1,
+        "word_index": 4,
+        "text": "הַמּוֹכְסִים"
+      },
+      {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 12,
+        "word_index": 2,
+        "text": "מוֹכְסִים"
+      },
+      {
+        "book": "mark",
+        "chapter": 2,
+        "verse": 15,
+        "word_index": 5,
+        "text": "מוֹכְסִים"
+      },
+      {
+        "book": "matthew",
+        "chapter": 11,
+        "verse": 19,
+        "word_index": 12,
+        "text": "מוֹכְסִים"
+      },
+      {
+        "book": "matthew",
+        "chapter": 10,
+        "verse": 3,
+        "word_index": 5,
+        "text": "הַמּוֹכֵס"
       }
     ]
   },
@@ -530184,6 +531071,20 @@
         "verse": 16,
         "word_index": 9,
         "text": "הַטְּלַאי"
+      },
+      {
+        "book": "luke",
+        "chapter": 5,
+        "verse": 36,
+        "word_index": 9,
+        "text": "טְלַאי"
+      },
+      {
+        "book": "mark",
+        "chapter": 2,
+        "verse": 21,
+        "word_index": 2,
+        "text": "טְלַאי"
       }
     ]
   },
@@ -530509,41 +531410,6 @@
       }
     ]
   },
-  "D0571": {
-    "strong_number": "D0571",
-    "hebrew": "סַנְהֶדְרִין",
-    "transliteration_es": "sanedrín",
-    "transliteration_en": "sanhedrin",
-    "is_custom": true,
-    "definitions": [
-      {
-        "order": 1,
-        "source": "delitzsch_review",
-        "text_en": "council, sanhedrin; a court of Jewish elders, a Greek loanword.",
-        "text_es": "concilio, sanedrín; tribunal de ancianos judíos, préstamo del griego."
-      }
-    ],
-    "root": "",
-    "root_strong": "",
-    "manual_instances": [],
-    "mapping_scope": "instances_only",
-    "nt_instances": [
-      {
-        "book": "mark",
-        "chapter": 13,
-        "verse": 9,
-        "word_index": 9,
-        "text": "לְסַנְהֶדְרִיּוֹת"
-      },
-      {
-        "book": "matthew",
-        "chapter": 10,
-        "verse": 17,
-        "word_index": 7,
-        "text": "לְסַנְהֶדְרִיּוֹת"
-      }
-    ]
-  },
   "D0572": {
     "strong_number": "D0572",
     "hebrew": "אִבּוּד",
@@ -530598,6 +531464,12 @@
         "source": "delitzsch_review",
         "text_en": "Rufus; a son of Simon of Cyrene.",
         "text_es": "Rufo; hijo de Simón de Cirene."
+      },
+      {
+        "order": 2,
+        "source": "delitzsch_review",
+        "text_en": "Rufus; a Christian in Rome greeted by Paul, chosen in the Lord.",
+        "text_es": "Rufo; cristiano de Roma saludado por Pablo, escogido en el Señor."
       }
     ],
     "root": "",
@@ -530653,6 +531525,13 @@
         "verse": 34,
         "word_index": 4,
         "text": "מָזוּג"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 12,
+        "verse": 24,
+        "word_index": 8,
+        "text": "מָזַג"
       }
     ]
   },
@@ -530686,6 +531565,13 @@
         "book": "matthew",
         "chapter": 27,
         "verse": 48,
+        "word_index": 5,
+        "text": "סְפוֹג"
+      },
+      {
+        "book": "john",
+        "chapter": 19,
+        "verse": 29,
         "word_index": 5,
         "text": "סְפוֹג"
       }
@@ -530842,6 +531728,13 @@
         "verse": 52,
         "word_index": 7,
         "text": "טִמְטוּם"
+      },
+      {
+        "book": "romans",
+        "chapter": 11,
+        "verse": 25,
+        "word_index": 13,
+        "text": "טִמְטוּם"
       }
     ]
   },
@@ -530870,6 +531763,20 @@
         "verse": 53,
         "word_index": 5,
         "text": "גִנֵּיסַר"
+      },
+      {
+        "book": "luke",
+        "chapter": 5,
+        "verse": 1,
+        "word_index": 14,
+        "text": "גִּנֵּיסָר׃"
+      },
+      {
+        "book": "matthew",
+        "chapter": 14,
+        "verse": 34,
+        "word_index": 5,
+        "text": "גִנֵּיסַר׃"
       }
     ]
   },
@@ -530954,6 +531861,13 @@
         "verse": 15,
         "word_index": 0,
         "text": "וֶאֱלִיהוּד"
+      },
+      {
+        "book": "matthew",
+        "chapter": 1,
+        "verse": 14,
+        "word_index": 11,
+        "text": "אֱלִיהוּד׃"
       }
     ]
   },
@@ -531010,6 +531924,13 @@
         "verse": 44,
         "word_index": 12,
         "text": "וּמְטֻאטָא"
+      },
+      {
+        "book": "luke",
+        "chapter": 11,
+        "verse": 25,
+        "word_index": 3,
+        "text": "מְטֻאטָא"
       }
     ]
   },
@@ -531073,6 +531994,13 @@
         "verse": 40,
         "word_index": 3,
         "text": "הַזּוּנִין"
+      },
+      {
+        "book": "matthew",
+        "chapter": 13,
+        "verse": 25,
+        "word_index": 8,
+        "text": "זוּנִין"
       }
     ]
   },
@@ -531143,6 +532071,13 @@
         "verse": 21,
         "word_index": 10,
         "text": "מַרְגָּלִית"
+      },
+      {
+        "book": "revelation",
+        "chapter": 21,
+        "verse": 21,
+        "word_index": 6,
+        "text": "מַרְגָּלִיּוֹת"
       }
     ]
   },
@@ -531317,6 +532252,20 @@
         "chapter": 21,
         "verse": 1,
         "word_index": 7,
+        "text": "פַּגֵּי"
+      },
+      {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 29,
+        "word_index": 4,
+        "text": "פַּגֵּי"
+      },
+      {
+        "book": "mark",
+        "chapter": 11,
+        "verse": 1,
+        "word_index": 6,
         "text": "פַּגֵּי"
       }
     ]
@@ -531542,6 +532491,41 @@
         "verse": 7,
         "word_index": 1,
         "text": "הָרַחֲמָנִים"
+      },
+      {
+        "book": "ephesians",
+        "chapter": 4,
+        "verse": 32,
+        "word_index": 5,
+        "text": "וְרַחֲמָנִים"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 2,
+        "verse": 17,
+        "word_index": 13,
+        "text": "רַחֲמָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 6,
+        "verse": 36,
+        "word_index": 2,
+        "text": "רַחֲמָנִים"
+      },
+      {
+        "book": "romans",
+        "chapter": 1,
+        "verse": 31,
+        "word_index": 7,
+        "text": "רַחֲמָנִים׃"
+      },
+      {
+        "book": "peter1",
+        "chapter": 3,
+        "verse": 8,
+        "word_index": 10,
+        "text": "רַחֲמָנִים"
       }
     ]
   },
@@ -531703,6 +532687,48 @@
         "verse": 15,
         "word_index": 12,
         "text": "כְנִכְנָס"
+      },
+      {
+        "book": "mark",
+        "chapter": 3,
+        "verse": 22,
+        "word_index": 8,
+        "text": "נִכְנַס"
+      },
+      {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 2,
+        "word_index": 1,
+        "text": "נִכְנַס"
+      },
+      {
+        "book": "acts",
+        "chapter": 21,
+        "verse": 18,
+        "word_index": 2,
+        "text": "נִכְנַס"
+      },
+      {
+        "book": "john",
+        "chapter": 20,
+        "verse": 6,
+        "word_index": 5,
+        "text": "נִכְנַס"
+      },
+      {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 3,
+        "word_index": 1,
+        "text": "נִכְנַס"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 4,
+        "verse": 12,
+        "word_index": 10,
+        "text": "וְנִכְנָס"
       }
     ]
   },
@@ -531731,6 +532757,13 @@
         "verse": 9,
         "word_index": 1,
         "text": "מְאָרְחִים"
+      },
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 23,
+        "word_index": 1,
+        "text": "הַמְאָרֵחַ"
       }
     ]
   },
@@ -531899,6 +532932,62 @@
         "verse": 12,
         "word_index": 12,
         "text": "וּבַחֲסִידוּת׃"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 3,
+        "verse": 5,
+        "word_index": 2,
+        "text": "חֲסִידוּת"
+      },
+      {
+        "book": "peter2",
+        "chapter": 1,
+        "verse": 6,
+        "word_index": 8,
+        "text": "הַחֲסִידוּת׃"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 3,
+        "verse": 16,
+        "word_index": 3,
+        "text": "הַחֲסִידוּת"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 4,
+        "verse": 8,
+        "word_index": 6,
+        "text": "הַחֲסִידוּת"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 6,
+        "verse": 3,
+        "word_index": 14,
+        "text": "הַחֲסִידוּת׃"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 6,
+        "verse": 5,
+        "word_index": 10,
+        "text": "הַחֲסִידוּת"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 6,
+        "verse": 6,
+        "word_index": 5,
+        "text": "הַחֲסִידוּת"
+      },
+      {
+        "book": "peter2",
+        "chapter": 1,
+        "verse": 3,
+        "word_index": 9,
+        "text": "וְלַחֲסִידוּת"
       }
     ]
   },
@@ -531962,6 +533051,20 @@
         "verse": 2,
         "word_index": 6,
         "text": "בְּפִילִפִּי"
+      },
+      {
+        "book": "acts",
+        "chapter": 16,
+        "verse": 12,
+        "word_index": 2,
+        "text": "פִילִפִּי"
+      },
+      {
+        "book": "acts",
+        "chapter": 20,
+        "verse": 6,
+        "word_index": 3,
+        "text": "פִילִפִּי"
       }
     ]
   },
@@ -532171,6 +533274,13 @@
         "chapter": 4,
         "verse": 18,
         "word_index": 14,
+        "text": "אֶפַּפְרוֹדִיטוֹס"
+      },
+      {
+        "book": "philippians",
+        "chapter": 2,
+        "verse": 25,
+        "word_index": 6,
         "text": "אֶפַּפְרוֹדִיטוֹס"
       }
     ]
@@ -532522,6 +533632,13 @@
         "verse": 12,
         "word_index": 10,
         "text": "בִּצְנִיעוּת"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 12,
+        "verse": 28,
+        "word_index": 16,
+        "text": "בִּצְנִיעוּת"
       }
     ]
   },
@@ -532578,6 +533695,13 @@
         "verse": 2,
         "word_index": 6,
         "text": "בְּצִוּוּי"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 8,
+        "verse": 8,
+        "word_index": 4,
+        "text": "צִוּוּי"
       }
     ]
   },
@@ -532884,8 +534008,8 @@
         "book": "romans",
         "chapter": 16,
         "verse": 14,
-        "word_index": 6,
-        "text": "וְהֶרְמִיס"
+        "word_index": 4,
+        "text": "וְהֶרְמָס"
       }
     ]
   },
@@ -533278,6 +534402,13 @@
         "verse": 4,
         "word_index": 4,
         "text": "וְהָעֲמִידָה"
+      },
+      {
+        "book": "romans",
+        "chapter": 5,
+        "verse": 4,
+        "word_index": 2,
+        "text": "עֲמִידָה"
       }
     ]
   },
@@ -533306,6 +534437,13 @@
         "verse": 8,
         "word_index": 8,
         "text": "חִמּוּד"
+      },
+      {
+        "book": "romans",
+        "chapter": 7,
+        "verse": 7,
+        "word_index": 22,
+        "text": "הַחִמּוּד"
       }
     ]
   },
@@ -533361,6 +534499,13 @@
         "chapter": 2,
         "verse": 3,
         "word_index": 4,
+        "text": "טָעוּת"
+      },
+      {
+        "book": "peter2",
+        "chapter": 3,
+        "verse": 17,
+        "word_index": 10,
         "text": "טָעוּת"
       }
     ]
@@ -533421,18 +534566,18 @@
       }
     ]
   },
-  "D0665": {
-    "strong_number": "D0665",
+  "H6641": {
+    "strong_number": "H6641",
     "hebrew": "צָבוּעַ",
-    "transliteration_es": "tsavúa",
+    "transliteration_es": "tzavua",
     "transliteration_en": "tzavua",
     "is_custom": true,
     "definitions": [
       {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "hypocritical, feigned; a post-biblical Hebrew adjective.",
-        "text_es": "hipócrita, fingido; adjetivo hebreo posbíblico."
+        "text_es": "hipócrita, fingido; adjetivo hebreo posbíblico.",
+        "order": 1
       }
     ],
     "root": "",
@@ -533446,6 +534591,20 @@
         "verse": 5,
         "word_index": 11,
         "text": "צְבוּעָה׃"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 6,
+        "verse": 6,
+        "word_index": 9,
+        "text": "צְבוּעָה׃"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 1,
+        "verse": 5,
+        "word_index": 6,
+        "text": "צְבוּעָה"
       }
     ]
   },
@@ -534135,18 +535294,18 @@
       }
     ]
   },
-  "D0690": {
-    "strong_number": "D0690",
-    "hebrew": "כָּפַר",
+  "H3722": {
+    "strong_number": "H3722",
+    "hebrew": "כָּפַר",
     "transliteration_es": "kafar",
     "transliteration_en": "kafar",
     "is_custom": true,
     "definitions": [
       {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "deny, renounce; a post-biblical Hebrew sense.",
-        "text_es": "negar, renegar; sentido hebreo posbíblico."
+        "text_es": "negar, renegar; sentido hebreo posbíblico.",
+        "order": 1
       }
     ],
     "root": "",
@@ -534300,6 +535459,27 @@
         "verse": 2,
         "word_index": 7,
         "text": "זְכוּת"
+      },
+      {
+        "book": "james",
+        "chapter": 3,
+        "verse": 17,
+        "word_index": 12,
+        "text": "זְכוּת"
+      },
+      {
+        "book": "romans",
+        "chapter": 5,
+        "verse": 18,
+        "word_index": 12,
+        "text": "זְכוּת"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 3,
+        "verse": 3,
+        "word_index": 4,
+        "text": "זְכוּת"
       }
     ]
   },
@@ -534384,6 +535564,48 @@
         "verse": 9,
         "word_index": 8,
         "text": "הַקְּטָטוֹת"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 3,
+        "verse": 3,
+        "word_index": 7,
+        "text": "קְטָטָה"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 2,
+        "verse": 23,
+        "word_index": 10,
+        "text": "קְטָטָה"
+      }
+    ]
+  },
+  "D0699": {
+    "strong_number": "D0699",
+    "hebrew": "מְלִיטִי",
+    "transliteration_es": "Melita",
+    "transliteration_en": "Melita",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Melita; the island of Malta, where Paul was shipwrecked.",
+        "text_es": "Melita; la isla de Malta, donde naufragó Pablo."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 28,
+        "verse": 1,
+        "word_index": 7,
+        "text": "מְלִיטִי׃"
       }
     ]
   }

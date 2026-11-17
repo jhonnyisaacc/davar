@@ -401,8 +401,6 @@ def load_latest_decisions(
 def load_decision_history(
     log_dir: Path, keep: Callable[[dict[str, Any]], bool] = lambda entry: True
 ) -> dict[str, list[dict[str, Any]]]:
-    """Load every logged review decision for each stable occurrence, oldest first."""
-
     history: dict[str, list[dict[str, Any]]] = {}
     if not log_dir.exists():
         return history
@@ -749,8 +747,6 @@ def _same_instance(item: dict[str, Any], instance: dict[str, Any]) -> bool:
 def _move_custom_instance(
     lexicon: LexiconIndex, occurrence: dict[str, Any], previous_strong: str | None, new_strong: str
 ) -> bool:
-    """Keep instances-only custom entries listing exactly the occurrences reviewed onto them."""
-
     custom = lexicon.load_custom_entries()
     instance = _custom_instance_from_occurrence(occurrence)
     source = custom.get(lexicon.normalize_strong(previous_strong) or "")

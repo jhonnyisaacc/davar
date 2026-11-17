@@ -295,36 +295,21 @@
       "issue_type": "definition_review",
       "reviewer": "claude-delitzsch-review",
       "confidence": 0.9,
-      "strong": "D0333",
-      "hebrew": "מְנַחֵם",
-      "transliteration_en": "Manaen",
-      "transliteration_es": "Manaén",
-      "root": "",
-      "root_strong": "",
-      "mapping_scope": "instances_only",
-      "nt_instances": [
-        {
-          "book": "acts",
-          "chapter": 13,
-          "verse": 1,
-          "word_index": 15,
-          "text": "וּמְנַחֵם"
-        }
-      ],
+      "strong": "H4505",
       "definition": {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "Manaen; a prophet at Antioch, brought up with Herod the tetrarch.",
         "text_es": "Manaén; profeta de Antioquía, criado con Herodes el tetrarca."
       },
-      "reason": "מְנַחֵם has no entry of its own; its 1 reviewed occurrence need one",
+      "reason": "H4505 מְנַחֵם needs this sense for its reviewed Delitzsch occurrences",
       "evidence": {
-        "lexicon": "post-biblical or New Testament word with no Strong or BDB entry",
+        "lexicon": "BDB מְנַחֵם Menahem, comforter; the same name, given in Acts 13:1 to Manaen",
         "sense": "Manaen; a prophet at Antioch, brought up with Herod the tetrarch.",
         "spanish": "Manaén; profeta de Antioquía, criado con Herodes el tetrarca.",
-        "greek": "Μαναήν",
-        "issue": 42
-      }
+        "issue": 42,
+        "greek": "Μαναήν"
+      },
+      "mapping_scope": "instances_only"
     },
     {
       "action": "upsert_custom_definition",
@@ -501,21 +486,42 @@
           "book": "romans",
           "chapter": 16,
           "verse": 14,
-          "word_index": 4,
-          "text": "וְהֶרְמָס"
+          "word_index": 6,
+          "text": "וְהֶרְמִיס"
         }
       ],
       "definition": {
         "order": 1,
         "source": "delitzsch_review",
-        "text_en": "Hermes; the Greek god for whom the people of Lystra took Paul, and a Christian in Rome greeted by Paul.",
-        "text_es": "Hermes; el dios griego por quien los de Listra tomaron a Pablo, y un cristiano de Roma saludado por Pablo."
+        "text_en": "Hermes; the Greek god for whom the people of Lystra took Paul.",
+        "text_es": "Hermes; el dios griego por quien los de Listra tomaron a Pablo."
       },
       "reason": "הֶרְמִיס has no entry of its own; its 2 reviewed occurrences need one",
       "evidence": {
         "lexicon": "post-biblical or New Testament word with no Strong or BDB entry",
-        "sense": "Hermes; the Greek god for whom the people of Lystra took Paul, and a Christian in Rome greeted by Paul.",
-        "spanish": "Hermes; el dios griego por quien los de Listra tomaron a Pablo, y un cristiano de Roma saludado por Pablo.",
+        "sense": "Hermes; the Greek god for whom the people of Lystra took Paul.",
+        "spanish": "Hermes; el dios griego por quien los de Listra tomaron a Pablo.",
+        "greek": "Ἑρμῆς",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "D0338",
+      "definition": {
+        "order": 2,
+        "source": "delitzsch_review",
+        "text_en": "Hermes; a Christian in Rome greeted by Paul.",
+        "text_es": "Hermes; cristiano de Roma saludado por Pablo."
+      },
+      "reason": "Romans 16:14 names a Christian Hermes, a different person from the god of Acts 14:12",
+      "evidence": {
+        "lexicon": "post-biblical or New Testament word with no Strong or BDB entry",
+        "sense": "Hermes; a Christian in Rome greeted by Paul.",
+        "spanish": "Hermes; cristiano de Roma saludado por Pablo.",
         "greek": "Ἑρμῆς",
         "issue": 42
       }
@@ -1161,10 +1167,31 @@
       "definition": {
         "order": 1,
         "source": "delitzsch_review",
+        "text_en": "Sosthenes; the ruler of the synagogue at Corinth, beaten before Gallio's tribunal.",
+        "text_es": "Sóstenes; principal de la sinagoga de Corinto, golpeado ante el tribunal de Galión."
+      },
+      "reason": "סוֹסְתְּנִיס has no entry of its own; its 2 reviewed occurrences need one",
+      "evidence": {
+        "lexicon": "post-biblical or New Testament word with no Strong or BDB entry",
+        "sense": "Sosthenes; the ruler of the synagogue at Corinth, beaten before Gallio's tribunal.",
+        "spanish": "Sóstenes; principal de la sinagoga de Corinto, golpeado ante el tribunal de Galión.",
+        "greek": "Σωσθένης",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "D0354",
+      "definition": {
+        "order": 2,
+        "source": "delitzsch_review",
         "text_en": "Sosthenes; a brother named with Paul as co-sender of 1 Corinthians.",
         "text_es": "Sóstenes; hermano nombrado con Pablo como coautor de 1 Corintios."
       },
-      "reason": "סוֹסְתְּנִיס has no entry of its own; its 2 reviewed occurrences need one",
+      "reason": "1 Corinthians 1:1 names Sosthenes as co-sender; the text does not say he is the synagogue ruler of Acts 18:17",
       "evidence": {
         "lexicon": "post-biblical or New Testament word with no Strong or BDB entry",
         "sense": "Sosthenes; a brother named with Paul as co-sender of 1 Corinthians.",
@@ -3136,21 +3163,22 @@
       "issue_type": "definition_review",
       "reviewer": "claude-delitzsch-review",
       "confidence": 0.9,
-      "strong": "D0402",
-      "hebrew": "שִׁמֵּשׁ",
-      "transliteration_en": "shimmesh",
-      "transliteration_es": "shimesh",
-      "root": "",
-      "root_strong": "",
+      "strong": "H8120",
+      "definition": {
+        "source": "delitzsch_review",
+        "text_en": "serve, minister; a post-biblical Hebrew verb.",
+        "text_es": "servir, ministrar; verbo hebreo posbíblico."
+      },
+      "reason": "H8120 שְׁמַשׁ needs this sense for its reviewed Delitzsch occurrences",
+      "evidence": {
+        "lexicon": "BDB Aramaic שְׁמַשׁ minister, serve; the lexicon has no Hebrew entry for the verb, so the Aramaic entry carries the post-biblical Hebrew piel",
+        "sense": "serve, minister; a post-biblical Hebrew verb.",
+        "spanish": "servir, ministrar; verbo hebreo posbíblico.",
+        "issue": 42,
+        "greek": "διακονέω"
+      },
       "mapping_scope": "instances_only",
       "nt_instances": [
-        {
-          "book": "acts",
-          "chapter": 6,
-          "verse": 2,
-          "word_index": 15,
-          "text": "וּנְשַׁמֵּשׁ"
-        },
         {
           "book": "timothy1",
           "chapter": 3,
@@ -3158,21 +3186,7 @@
           "word_index": 1,
           "text": "הַמְשַׁמְּשִׁים"
         }
-      ],
-      "definition": {
-        "order": 1,
-        "source": "delitzsch_review",
-        "text_en": "serve, minister; a post-biblical Hebrew verb.",
-        "text_es": "servir, ministrar; verbo hebreo posbíblico."
-      },
-      "reason": "שִׁמֵּשׁ has no entry of its own; its 2 reviewed occurrences need one",
-      "evidence": {
-        "lexicon": "post-biblical or New Testament word with no Strong or BDB entry",
-        "sense": "serve, minister; a post-biblical Hebrew verb.",
-        "spanish": "servir, ministrar; verbo hebreo posbíblico.",
-        "greek": "διακονέω",
-        "issue": 42
-      }
+      ]
     },
     {
       "action": "upsert_custom_definition",
@@ -3679,36 +3693,21 @@
       "issue_type": "definition_review",
       "reviewer": "claude-delitzsch-review",
       "confidence": 0.9,
-      "strong": "D0413",
-      "hebrew": "צִיר",
-      "transliteration_en": "tzir",
-      "transliteration_es": "tsir",
-      "root": "",
-      "root_strong": "",
-      "mapping_scope": "instances_only",
-      "nt_instances": [
-        {
-          "book": "colossians",
-          "chapter": 2,
-          "verse": 19,
-          "word_index": 9,
-          "text": "בְּצִירָיו"
-        }
-      ],
+      "strong": "H6735",
       "definition": {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "joint, ligament of the body; a post-biblical Hebrew sense.",
         "text_es": "articulación, ligamento del cuerpo; sentido hebreo posbíblico."
       },
-      "reason": "צִיר has no entry of its own; its 1 reviewed occurrence need one",
+      "reason": "H6735 צִיר needs this sense for its reviewed Delitzsch occurrences",
       "evidence": {
-        "lexicon": "post-biblical or New Testament word with no Strong or BDB entry",
+        "lexicon": "BDB צִיר hinge, pivot; the post-biblical sense joint of the body extends it",
         "sense": "joint, ligament of the body; a post-biblical Hebrew sense.",
         "spanish": "articulación, ligamento del cuerpo; sentido hebreo posbíblico.",
-        "greek": "ἁφή",
-        "issue": 42
-      }
+        "issue": 42,
+        "greek": "ἁφή"
+      },
+      "mapping_scope": "instances_only"
     },
     {
       "action": "upsert_custom_definition",
@@ -3758,36 +3757,21 @@
       "issue_type": "definition_review",
       "reviewer": "claude-delitzsch-review",
       "confidence": 0.9,
-      "strong": "D0415",
-      "hebrew": "לִמּוּד",
-      "transliteration_en": "limmud",
-      "transliteration_es": "limud",
-      "root": "",
-      "root_strong": "",
-      "mapping_scope": "instances_only",
-      "nt_instances": [
-        {
-          "book": "colossians",
-          "chapter": 2,
-          "verse": 22,
-          "word_index": 7,
-          "text": "וְלִמּוּדֵיהֶם׃"
-        }
-      ],
+      "strong": "H3928",
       "definition": {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "teaching, instruction; a post-biblical Hebrew noun.",
         "text_es": "enseñanza, instrucción; sustantivo hebreo posbíblico."
       },
-      "reason": "לִמּוּד has no entry of its own; its 1 reviewed occurrence need one",
+      "reason": "H3928 לִמּוּד needs this sense for its reviewed Delitzsch occurrences",
       "evidence": {
-        "lexicon": "post-biblical or New Testament word with no Strong or BDB entry",
+        "lexicon": "BDB לִמּוּד taught, discipled; the post-biblical noun teaching is the same word",
         "sense": "teaching, instruction; a post-biblical Hebrew noun.",
         "spanish": "enseñanza, instrucción; sustantivo hebreo posbíblico.",
-        "greek": "διδασκαλία",
-        "issue": 42
-      }
+        "issue": 42,
+        "greek": "διδασκαλία"
+      },
+      "mapping_scope": "instances_only"
     },
     {
       "action": "upsert_custom_definition",
@@ -5452,36 +5436,21 @@
       "issue_type": "definition_review",
       "reviewer": "claude-delitzsch-review",
       "confidence": 0.9,
-      "strong": "D0450",
-      "hebrew": "פֶּרֶק",
-      "transliteration_en": "perek",
-      "transliteration_es": "perek",
-      "root": "",
-      "root_strong": "",
-      "mapping_scope": "instances_only",
-      "nt_instances": [
-        {
-          "book": "corinthians1",
-          "chapter": 7,
-          "verse": 36,
-          "word_index": 9,
-          "text": "פִּרְקָהּ"
-        }
-      ],
+      "strong": "H6563",
       "definition": {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "season of life, age of maturity; a post-biblical Hebrew sense.",
         "text_es": "etapa de la vida, edad madura; sentido hebreo posbíblico."
       },
-      "reason": "פֶּרֶק has no entry of its own; its 1 reviewed occurrence need one",
+      "reason": "H6563 פֶּרֶק needs this sense for its reviewed Delitzsch occurrences",
       "evidence": {
-        "lexicon": "post-biblical or New Testament word with no Strong or BDB entry",
+        "lexicon": "BDB פֶּרֶק parting of ways; the post-biblical sense season of life is the same word",
         "sense": "season of life, age of maturity; a post-biblical Hebrew sense.",
         "spanish": "etapa de la vida, edad madura; sentido hebreo posbíblico.",
-        "greek": "ὑπέρακμος",
-        "issue": 42
-      }
+        "issue": 42,
+        "greek": "ὑπέρακμος"
+      },
+      "mapping_scope": "instances_only"
     },
     {
       "action": "upsert_custom_definition",
@@ -6863,36 +6832,21 @@
       "issue_type": "definition_review",
       "reviewer": "claude-delitzsch-review",
       "confidence": 0.9,
-      "strong": "D0482",
-      "hebrew": "סָתַר",
-      "transliteration_en": "satar",
-      "transliteration_es": "satar",
-      "root": "",
-      "root_strong": "",
-      "mapping_scope": "instances_only",
-      "nt_instances": [
-        {
-          "book": "galatians",
-          "chapter": 2,
-          "verse": 18,
-          "word_index": 6,
-          "text": "שֶּׁסָּתַרְתִּי"
-        }
-      ],
+      "strong": "H5641",
       "definition": {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "tear down, demolish; a post-biblical Hebrew sense.",
         "text_es": "derribar, demoler; sentido hebreo posbíblico."
       },
-      "reason": "סָתַר has no entry of its own; its 1 reviewed occurrence need one",
+      "reason": "H5641 סָתַר needs this sense for its reviewed Delitzsch occurrences",
       "evidence": {
-        "lexicon": "post-biblical or New Testament word with no Strong or BDB entry",
+        "lexicon": "BDB סָתַר; the post-biblical sense tear down is recorded on the same headword",
         "sense": "tear down, demolish; a post-biblical Hebrew sense.",
         "spanish": "derribar, demoler; sentido hebreo posbíblico.",
-        "greek": "καταλύω",
-        "issue": 42
-      }
+        "issue": 42,
+        "greek": "καταλύω"
+      },
+      "mapping_scope": "instances_only"
     },
     {
       "action": "upsert_custom_definition",
@@ -7258,36 +7212,21 @@
       "issue_type": "definition_review",
       "reviewer": "claude-delitzsch-review",
       "confidence": 0.9,
-      "strong": "D0492",
-      "hebrew": "רִגְשָׁה",
-      "transliteration_en": "rigshah",
-      "transliteration_es": "rigshá",
-      "root": "",
-      "root_strong": "",
-      "mapping_scope": "instances_only",
-      "nt_instances": [
-        {
-          "book": "hebrews",
-          "chapter": 10,
-          "verse": 2,
-          "word_index": 14,
-          "text": "רִגְשַׁת"
-        }
-      ],
+      "strong": "H7285",
       "definition": {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "feeling, awareness; a post-biblical Hebrew sense.",
         "text_es": "sentimiento, conciencia; sentido hebreo posbíblico."
       },
-      "reason": "רִגְשָׁה has no entry of its own; its 1 reviewed occurrence need one",
+      "reason": "H7285 רֶגֶשׁ needs this sense for its reviewed Delitzsch occurrences",
       "evidence": {
-        "lexicon": "post-biblical or New Testament word with no Strong or BDB entry",
+        "lexicon": "BDB רֶגֶשׁ, fem. רִגְשָׁה, throng; the post-biblical sense feeling is the same word",
         "sense": "feeling, awareness; a post-biblical Hebrew sense.",
         "spanish": "sentimiento, conciencia; sentido hebreo posbíblico.",
-        "greek": "συνείδησις",
-        "issue": 42
-      }
+        "issue": 42,
+        "greek": "συνείδησις"
+      },
+      "mapping_scope": "instances_only"
     },
     {
       "action": "upsert_custom_definition",
@@ -7653,36 +7592,21 @@
       "issue_type": "definition_review",
       "reviewer": "claude-delitzsch-review",
       "confidence": 0.9,
-      "strong": "D0502",
-      "hebrew": "קָבַע",
-      "transliteration_en": "kava",
-      "transliteration_es": "kavá",
-      "root": "",
-      "root_strong": "",
-      "mapping_scope": "instances_only",
-      "nt_instances": [
-        {
-          "book": "hebrews",
-          "chapter": 4,
-          "verse": 7,
-          "word_index": 2,
-          "text": "לִקְבוֹעַ"
-        }
-      ],
+      "strong": "H6906",
       "definition": {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "fix, appoint, determine; a post-biblical Hebrew sense.",
         "text_es": "fijar, señalar, determinar; sentido hebreo posbíblico."
       },
-      "reason": "קָבַע has no entry of its own; its 1 reviewed occurrence need one",
+      "reason": "H6906 קָבַע needs this sense for its reviewed Delitzsch occurrences",
       "evidence": {
-        "lexicon": "post-biblical or New Testament word with no Strong or BDB entry",
+        "lexicon": "BDB קָבַע; the post-biblical sense fix, appoint is recorded on the same headword",
         "sense": "fix, appoint, determine; a post-biblical Hebrew sense.",
         "spanish": "fijar, señalar, determinar; sentido hebreo posbíblico.",
-        "greek": "ὁρίζω",
-        "issue": 42
-      }
+        "issue": 42,
+        "greek": "ὁρίζω"
+      },
+      "mapping_scope": "instances_only"
     },
     {
       "action": "upsert_custom_definition",
@@ -8945,36 +8869,21 @@
       "issue_type": "definition_review",
       "reviewer": "claude-delitzsch-review",
       "confidence": 0.9,
-      "strong": "D0534",
-      "hebrew": "זְכַרְיָה",
-      "transliteration_en": "Zechariah",
-      "transliteration_es": "Zacarías",
-      "root": "",
-      "root_strong": "",
-      "mapping_scope": "instances_only",
-      "nt_instances": [
-        {
-          "book": "luke",
-          "chapter": 1,
-          "verse": 21,
-          "word_index": 3,
-          "text": "לִזְכַרְיָה"
-        }
-      ],
+      "strong": "H2148",
       "definition": {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "Zechariah; the priest, father of John the Baptist.",
         "text_es": "Zacarías; el sacerdote, padre de Juan el Bautista."
       },
-      "reason": "זְכַרְיָה has no entry of its own; its 1 reviewed occurrence need one",
+      "reason": "H2148 זְכַרְיָה needs this sense for its reviewed Delitzsch occurrences",
       "evidence": {
-        "lexicon": "post-biblical or New Testament word with no Strong or BDB entry",
+        "lexicon": "BDB זְכַרְיָה Zechariah; the same name, given in Luke 1 to the father of John the Baptist",
         "sense": "Zechariah; the priest, father of John the Baptist.",
         "spanish": "Zacarías; el sacerdote, padre de Juan el Bautista.",
-        "greek": "Ζαχαρίας",
-        "issue": 42
-      }
+        "issue": 42,
+        "greek": "Ζαχαρίας"
+      },
+      "mapping_scope": "instances_only"
     },
     {
       "action": "upsert_custom_definition",
@@ -10557,49 +10466,6 @@
       "issue_type": "definition_review",
       "reviewer": "claude-delitzsch-review",
       "confidence": 0.9,
-      "strong": "D0571",
-      "hebrew": "סַנְהֶדְרִין",
-      "transliteration_en": "sanhedrin",
-      "transliteration_es": "sanedrín",
-      "root": "",
-      "root_strong": "",
-      "mapping_scope": "instances_only",
-      "nt_instances": [
-        {
-          "book": "mark",
-          "chapter": 13,
-          "verse": 9,
-          "word_index": 9,
-          "text": "לְסַנְהֶדְרִיּוֹת"
-        },
-        {
-          "book": "matthew",
-          "chapter": 10,
-          "verse": 17,
-          "word_index": 7,
-          "text": "לְסַנְהֶדְרִיּוֹת"
-        }
-      ],
-      "definition": {
-        "order": 1,
-        "source": "delitzsch_review",
-        "text_en": "council, sanhedrin; a court of Jewish elders, a Greek loanword.",
-        "text_es": "concilio, sanedrín; tribunal de ancianos judíos, préstamo del griego."
-      },
-      "reason": "סַנְהֶדְרִין has no entry of its own; its 2 reviewed occurrences need one",
-      "evidence": {
-        "lexicon": "post-biblical or New Testament word with no Strong or BDB entry",
-        "sense": "council, sanhedrin; a court of Jewish elders, a Greek loanword.",
-        "spanish": "concilio, sanedrín; tribunal de ancianos judíos, préstamo del griego.",
-        "greek": "συνέδριον",
-        "issue": 42
-      }
-    },
-    {
-      "action": "upsert_custom_definition",
-      "issue_type": "definition_review",
-      "reviewer": "claude-delitzsch-review",
-      "confidence": 0.9,
       "strong": "D0572",
       "hebrew": "אִבּוּד",
       "transliteration_en": "ibbud",
@@ -10684,6 +10550,27 @@
         "lexicon": "post-biblical or New Testament word with no Strong or BDB entry",
         "sense": "Rufus; a son of Simon of Cyrene.",
         "spanish": "Rufo; hijo de Simón de Cirene.",
+        "greek": "Ῥοῦφος",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "D0573",
+      "definition": {
+        "order": 2,
+        "source": "delitzsch_review",
+        "text_en": "Rufus; a Christian in Rome greeted by Paul, chosen in the Lord.",
+        "text_es": "Rufo; cristiano de Roma saludado por Pablo, escogido en el Señor."
+      },
+      "reason": "Romans 16:13 greets a Rufus in Rome; the text does not say he is the son of Simon of Cyrene in Mark 15:21",
+      "evidence": {
+        "lexicon": "post-biblical or New Testament word with no Strong or BDB entry",
+        "sense": "Rufus; a Christian in Rome greeted by Paul, chosen in the Lord.",
+        "spanish": "Rufo; cristiano de Roma saludado por Pablo, escogido en el Señor.",
         "greek": "Ῥοῦφος",
         "issue": 42
       }
@@ -13513,8 +13400,8 @@
           "book": "romans",
           "chapter": 16,
           "verse": 14,
-          "word_index": 6,
-          "text": "וְהֶרְמִיס"
+          "word_index": 4,
+          "text": "וְהֶרְמָס"
         }
       ],
       "definition": {
@@ -14221,36 +14108,21 @@
       "issue_type": "definition_review",
       "reviewer": "claude-delitzsch-review",
       "confidence": 0.9,
-      "strong": "D0665",
-      "hebrew": "צָבוּעַ",
-      "transliteration_en": "tzavua",
-      "transliteration_es": "tsavúa",
-      "root": "",
-      "root_strong": "",
-      "mapping_scope": "instances_only",
-      "nt_instances": [
-        {
-          "book": "timothy1",
-          "chapter": 1,
-          "verse": 5,
-          "word_index": 11,
-          "text": "צְבוּעָה׃"
-        }
-      ],
+      "strong": "H6641",
       "definition": {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "hypocritical, feigned; a post-biblical Hebrew adjective.",
         "text_es": "hipócrita, fingido; adjetivo hebreo posbíblico."
       },
-      "reason": "צָבוּעַ has no entry of its own; its 1 reviewed occurrence need one",
+      "reason": "H6641 צָבוּעַ needs this sense for its reviewed Delitzsch occurrences",
       "evidence": {
-        "lexicon": "post-biblical or New Testament word with no Strong or BDB entry",
+        "lexicon": "BDB צָבוּעַ coloured; the post-biblical sense hypocritical is the same word",
         "sense": "hypocritical, feigned; a post-biblical Hebrew adjective.",
         "spanish": "hipócrita, fingido; adjetivo hebreo posbíblico.",
-        "greek": "ἀνυπόκριτος",
-        "issue": 42
-      }
+        "issue": 42,
+        "greek": "ἀνυπόκριτος"
+      },
+      "mapping_scope": "instances_only"
     },
     {
       "action": "upsert_custom_definition",
@@ -15135,36 +15007,21 @@
       "issue_type": "definition_review",
       "reviewer": "claude-delitzsch-review",
       "confidence": 0.9,
-      "strong": "D0690",
-      "hebrew": "כָּפַר",
-      "transliteration_en": "kafar",
-      "transliteration_es": "kafar",
-      "root": "",
-      "root_strong": "",
-      "mapping_scope": "instances_only",
-      "nt_instances": [
-        {
-          "book": "titus",
-          "chapter": 1,
-          "verse": 16,
-          "word_index": 7,
-          "text": "כּוֹפְרִים"
-        }
-      ],
+      "strong": "H3722",
       "definition": {
-        "order": 1,
         "source": "delitzsch_review",
         "text_en": "deny, renounce; a post-biblical Hebrew sense.",
         "text_es": "negar, renegar; sentido hebreo posbíblico."
       },
-      "reason": "כָּפַר has no entry of its own; its 1 reviewed occurrence need one",
+      "reason": "H3722 כָּפַר needs this sense for its reviewed Delitzsch occurrences",
       "evidence": {
-        "lexicon": "post-biblical or New Testament word with no Strong or BDB entry",
+        "lexicon": "BDB כָּפַר; the post-biblical sense deny is recorded on the same headword",
         "sense": "deny, renounce; a post-biblical Hebrew sense.",
         "spanish": "negar, renegar; sentido hebreo posbíblico.",
-        "greek": "ἀρνέομαι",
-        "issue": 42
-      }
+        "issue": 42,
+        "greek": "ἀρνέομαι"
+      },
+      "mapping_scope": "instances_only"
     },
     {
       "action": "upsert_custom_definition",
@@ -15553,8 +15410,8 @@
       "evidence": {
         "lexicon": "D0329 קַפְרוֹס Cyprus; an island in the eastern Mediterranean.",
         "grammar": "place name",
-        "context": "Acts 11:20, Greek Κύπρος",
-        "greek": "G2954 Κύπρος",
+        "context": "Acts 11:20, Greek Κύπριοι, men of Cyprus",
+        "greek": "G2953 Κύπριος",
         "issue": 42
       }
     },
@@ -15656,10 +15513,10 @@
         ]
       },
       "previous_strong": "H3642",
-      "new_strong": "Hc/D0333",
+      "new_strong": "Hc/H4505",
       "reason": "וּמְנַחֵם is Manaen; H3642 כָּמַהּ 'faint' is a different word",
       "evidence": {
-        "lexicon": "D0333 מְנַחֵם Manaen; a prophet at Antioch, brought up with Herod the tetrarch.",
+        "lexicon": "H4505 מְנַחֵם Manaen; a prophet at Antioch, brought up with Herod the tetrarch.",
         "grammar": "conjunction ו + personal name",
         "context": "Acts 13:1, Greek Μαναήν",
         "greek": "G3127 Μαναήν",
@@ -17486,9 +17343,9 @@
       "evidence": {
         "lexicon": "D0384 הַשְׁגָּחָה providence, oversight, care; a post-biblical Hebrew noun.",
         "grammar": "preposition ב + noun",
-        "context": "Acts 24:3, Greek πρόνοια",
-        "greek": "G4307 πρόνοια",
-        "issue": 42
+        "context": "Acts 24:3, Greek πρόνοια",
+        "issue": 42,
+        "greek_note": "the SBLGNT has διὰ τῆς σῆς προνοίας in verse 2; Delitzsch's verse 3 carries it"
       },
       "new_prefixes": [
         "Hb"
@@ -17514,9 +17371,9 @@
       "evidence": {
         "lexicon": "D0385 תַּקָּנָה improvement, reform; a post-biblical Hebrew noun.",
         "grammar": "noun",
-        "context": "Acts 24:3, Greek διόρθωσις",
-        "greek": "G1357 διόρθωσις",
-        "issue": 42
+        "context": "Acts 24:3, Greek διόρθωμα",
+        "issue": 42,
+        "greek_note": "the SBLGNT has διορθωμάτων in verse 2; Delitzsch's verse 3 carries it"
       }
     },
     {
@@ -18159,10 +18016,10 @@
         ]
       },
       "previous_strong": "H5115",
-      "new_strong": "Hc/D0402",
+      "new_strong": "Hc/H8120",
       "reason": "וּנְשַׁמֵּשׁ is serve, minister; H5115 נָוָה 'dwell' is a different word",
       "evidence": {
-        "lexicon": "D0402 שִׁמֵּשׁ serve, minister; a post-biblical Hebrew verb.",
+        "lexicon": "H8120 שְׁמַשׁ serve, minister; a post-biblical Hebrew verb.",
         "grammar": "conjunction ו + verb (piel)",
         "context": "Acts 6:2, Greek διακονέω",
         "greek": "G1247 διακονέω",
@@ -18472,10 +18329,10 @@
         ]
       },
       "previous_strong": "H3642",
-      "new_strong": "Hb/D0413",
+      "new_strong": "Hb/H6735",
       "reason": "בְּצִירָיו is joint, ligament of the body; H3642 כָּמַהּ 'faint' is a different word",
       "evidence": {
-        "lexicon": "D0413 צִיר joint, ligament of the body; a post-biblical Hebrew sense.",
+        "lexicon": "H6735 צִיר joint, ligament of the body; a post-biblical Hebrew sense.",
         "grammar": "preposition ב + noun",
         "context": "Colossians 2:19, Greek ἁφή",
         "greek": "G0860 ἁφή",
@@ -18527,10 +18384,10 @@
         ]
       },
       "previous_strong": "H8220",
-      "new_strong": "Hc/D0415",
+      "new_strong": "Hc/H3928",
       "reason": "וְלִמּוּדֵיהֶם׃ is teaching, instruction; H8220 שִׁפְלוּת 'sinking' is a different word",
       "evidence": {
-        "lexicon": "D0415 לִמּוּד teaching, instruction; a post-biblical Hebrew noun.",
+        "lexicon": "H3928 לִמּוּד teaching, instruction; a post-biblical Hebrew noun.",
         "grammar": "conjunction ו + noun",
         "context": "Colossians 2:22, Greek διδασκαλία",
         "greek": "G1319 διδασκαλία",
@@ -18562,7 +18419,7 @@
       "evidence": {
         "lexicon": "D0416 הָגוּן proper, fitting, decent; with כְּ, as is fitting, a post-biblical Hebrew word.",
         "grammar": "preposition כ + adjective",
-        "context": "Colossians 2:23, Greek τιμή",
+        "context": "Colossians 2:23, Greek οὐκ ἐν τιμῇ τινι, rendered freely as שֶׁלֹּא כְהֹגֶן, not as is fitting",
         "greek": "G5092 τιμή",
         "issue": 42
       }
@@ -19106,8 +18963,8 @@
       "evidence": {
         "lexicon": "D0416 הָגוּן proper, fitting, decent; with כְּ, as is fitting, a post-biblical Hebrew word.",
         "grammar": "article ה + adjective",
-        "context": "1 Corinthians 12:23, Greek εὐσχήμων",
-        "greek": "G2158 εὐσχήμων",
+        "context": "1 Corinthians 12:23, Greek εὐσχημοσύνη",
+        "greek": "G2157 εὐσχημοσύνη",
         "issue": 42
       }
     },
@@ -19849,8 +19706,8 @@
       "evidence": {
         "lexicon": "D0416 הָגוּן proper, fitting, decent; with כְּ, as is fitting, a post-biblical Hebrew word.",
         "grammar": "preposition כ + adjective",
-        "context": "1 Corinthians 7:36, Greek εὐσχήμων",
-        "greek": "G2158 εὐσχήμων",
+        "context": "1 Corinthians 7:36, Greek ἀσχημονέω, to act improperly, rendered שֶׁלֹּא כְהֹגֶן",
+        "greek": "G0807 ἀσχημονέω",
         "issue": 42
       }
     },
@@ -19869,10 +19726,10 @@
         "prefixes": []
       },
       "previous_strong": "H1584",
-      "new_strong": "D0450",
+      "new_strong": "H6563",
       "reason": "פִּרְקָהּ is season of life, age of maturity; H1584 גָּמַר 'end' is a different word",
       "evidence": {
-        "lexicon": "D0450 פֶּרֶק season of life, age of maturity; a post-biblical Hebrew sense.",
+        "lexicon": "H6563 פֶּרֶק season of life, age of maturity; a post-biblical Hebrew sense.",
         "grammar": "noun",
         "context": "1 Corinthians 7:36, Greek ὑπέρακμος",
         "greek": "G5230 ὑπέρακμος",
@@ -20926,9 +20783,9 @@
       "evidence": {
         "lexicon": "D0469 שִׁוּוּי equality, equalizing; a post-biblical Hebrew noun.",
         "grammar": "preposition ב + noun",
-        "context": "2 Corinthians 8:13, Greek ἰσότης",
-        "greek": "G2471 ἰσότης",
-        "issue": 42
+        "context": "2 Corinthians 8:13, Greek ἰσότης",
+        "issue": 42,
+        "greek_note": "the SBLGNT has ἐξ ἰσότητος at the start of verse 14; Delitzsch's verse 13 carries it"
       }
     },
     {
@@ -21611,10 +21468,10 @@
         "prefixes": []
       },
       "previous_strong": "H5982",
-      "new_strong": "D0482",
+      "new_strong": "H5641",
       "reason": "שֶּׁסָּתַרְתִּי is tear down, demolish; H5982 עַמּוּד 'pillar' is a different word",
       "evidence": {
-        "lexicon": "D0482 סָתַר tear down, demolish; a post-biblical Hebrew sense.",
+        "lexicon": "H5641 סָתַר tear down, demolish; a post-biblical Hebrew sense.",
         "grammar": "verb (perfect, with relative שֶׁ)",
         "context": "Galatians 2:18, Greek καταλύω",
         "greek": "G2647 καταλύω",
@@ -22093,10 +21950,10 @@
         "prefixes": []
       },
       "previous_strong": "H8144",
-      "new_strong": "D0492",
+      "new_strong": "H7285",
       "reason": "רִגְשַׁת is feeling, awareness; H8144 שָׁנִי 'scarlet' is a different word",
       "evidence": {
-        "lexicon": "D0492 רִגְשָׁה feeling, awareness; a post-biblical Hebrew sense.",
+        "lexicon": "H7285 רֶגֶשׁ feeling, awareness; a post-biblical Hebrew sense.",
         "grammar": "noun",
         "context": "Hebrews 10:2, Greek συνείδησις",
         "greek": "G4893 συνείδησις",
@@ -22530,10 +22387,10 @@
         ]
       },
       "previous_strong": "H5115",
-      "new_strong": "Hl/D0502",
+      "new_strong": "Hl/H6906",
       "reason": "לִקְבוֹעַ is fix, appoint, determine; H5115 נָוָה 'dwell' is a different word",
       "evidence": {
-        "lexicon": "D0502 קָבַע fix, appoint, determine; a post-biblical Hebrew sense.",
+        "lexicon": "H6906 קָבַע fix, appoint, determine; a post-biblical Hebrew sense.",
         "grammar": "preposition ל + verb (infinitive)",
         "context": "Hebrews 4:7, Greek ὁρίζω",
         "greek": "G3724 ὁρίζω",
@@ -24022,10 +23879,10 @@
         ]
       },
       "previous_strong": "H2144",
-      "new_strong": "Hl/D0534",
+      "new_strong": "Hl/H2148",
       "reason": "לִזְכַרְיָה is Zechariah; H2144 זֶכֶר 'male' is a different word",
       "evidence": {
-        "lexicon": "D0534 זְכַרְיָה Zechariah; the priest, father of John the Baptist.",
+        "lexicon": "H2148 זְכַרְיָה Zechariah; the priest, father of John the Baptist.",
         "grammar": "preposition ל + personal name",
         "context": "Luke 1:21, Greek Ζαχαρίας",
         "greek": "G2197H Ζαχαρίας",
@@ -25713,10 +25570,10 @@
         ]
       },
       "previous_strong": "H3519",
-      "new_strong": "Hl/D0571",
+      "new_strong": "Hl/D0008",
       "reason": "לְסַנְהֶדְרִיּוֹת is council, sanhedrin; H3519 כָּבוֹד 'abundance' is a different word",
       "evidence": {
-        "lexicon": "D0571 סַנְהֶדְרִין council, sanhedrin; a court of Jewish elders, a Greek loanword.",
+        "lexicon": "D0008 הַסַּנְהֶדְרִין Sanhedrin; Jewish council or court.",
         "grammar": "preposition ל + noun (loanword)",
         "context": "Mark 13:9, Greek συνέδριον",
         "greek": "G4892 συνέδριον",
@@ -26447,10 +26304,10 @@
         ]
       },
       "previous_strong": "H4372",
-      "new_strong": "Hl/D0571",
+      "new_strong": "Hl/D0008",
       "reason": "לְסַנְהֶדְרִיּוֹת is council, sanhedrin; H4372 מִכְסֶה 'covering' is a different word",
       "evidence": {
-        "lexicon": "D0571 סַנְהֶדְרִין council, sanhedrin; a court of Jewish elders, a Greek loanword.",
+        "lexicon": "D0008 הַסַּנְהֶדְרִין Sanhedrin; Jewish council or court.",
         "grammar": "preposition ל + noun (loanword)",
         "context": "Matthew 10:17, Greek συνέδριον",
         "greek": "G4892 συνέδριον",
@@ -27725,9 +27582,9 @@
       "evidence": {
         "lexicon": "D0547 מוֹכֵס tax collector, publican; a post-biblical Hebrew noun.",
         "grammar": "article ה + noun",
-        "context": "Matthew 5:47, Greek τελώνης",
-        "greek": "G5057 τελώνης",
-        "issue": 42
+        "context": "Matthew 5:47, Greek τελῶναι",
+        "issue": 42,
+        "greek_note": "the SBLGNT reads οἱ ἐθνικοί; Delitzsch follows the Textus Receptus οἱ τελῶναι"
       }
     },
     {
@@ -28146,10 +28003,10 @@
       "reason": "הַבְּרִיּוֹת is a creation; H1276 בֵּרִי 'Berites' is a different word",
       "evidence": {
         "lexicon": "H1278 בְּרִיאָה a creation",
-        "grammar": "article ה + article ה + noun בְּרִיָּה, the post-biblical spelling of בְּרִיאָה creation, creature; the #379 review put Mark 13:19 הַבְּרִיאָה (κτίσις) on H1278",
-        "context": "1 Peter 3:8, Greek φιλάδελφος",
-        "greek": "G5361 φιλάδελφος",
-        "issue": 42
+        "grammar": "article ה + noun בְּרִיָּה, the post-biblical spelling of בְּרִיאָה creation, creature; the #379 review put Mark 13:19 הַבְּרִיאָה (κτίσις) on H1278",
+        "context": "1 Peter 3:8, וּמִתְקַבְּלִים עַל־הַבְּרִיּוֹת, agreeable to people",
+        "issue": 42,
+        "greek_note": "the SBLGNT reads ταπεινόφρονες; Delitzsch renders the Textus Receptus φιλόφρονες, courteous"
       }
     },
     {
@@ -30324,13 +30181,13 @@
         ]
       },
       "previous_strong": "H7429",
-      "new_strong": "Hc/D0338",
-      "reason": "וְהֶרְמָס is Hermes; H7429 רָמַס 'trample' is a different word",
+      "new_strong": "Hc/D0645",
+      "reason": "וְהֶרְמָס is Hermas; H7429 רָמַס 'trample' is a different word",
       "evidence": {
-        "lexicon": "D0338 הֶרְמִיס Hermes; the Greek god for whom the people of Lystra took Paul, and a Christian in Rome greeted by Paul.",
-        "grammar": "conjunction ו + divine and personal name",
-        "context": "Romans 16:14, Greek Ἑρμῆς",
-        "greek": "G2060H Ἑρμῆς",
+        "lexicon": "D0645 הֶרְמָס Hermas; a Christian in Rome greeted by Paul.",
+        "grammar": "conjunction ו + personal name",
+        "context": "Romans 16:14, Greek Ἑρμᾶς; Delitzsch follows the Textus Receptus order Asyncritus, Phlegon, Hermas, Patrobas, Hermes",
+        "greek": "G2057 Ἑρμᾶς",
         "issue": 42
       }
     },
@@ -30379,13 +30236,13 @@
         ]
       },
       "previous_strong": "H7592",
-      "new_strong": "Hc/D0645",
-      "reason": "וְהֶרְמִיס is Hermas; H7592 שָׁאַל 'ask' is a different word",
+      "new_strong": "Hc/D0338",
+      "reason": "וְהֶרְמִיס is Hermes, spelled as in Acts 14:12; H7592 שָׁאַל 'ask' is a different word",
       "evidence": {
-        "lexicon": "D0645 הֶרְמָס Hermas; a Christian in Rome greeted by Paul.",
+        "lexicon": "D0338 הֶרְמִיס Hermes; a Christian in Rome greeted by Paul.",
         "grammar": "conjunction ו + personal name",
-        "context": "Romans 16:14, Greek Ἑρμᾶς",
-        "greek": "G2057 Ἑρμᾶς",
+        "context": "Romans 16:14, Greek Ἑρμῆς; Delitzsch follows the Textus Receptus order Asyncritus, Phlegon, Hermas, Patrobas, Hermes",
+        "greek": "G2060H Ἑρμῆς",
         "issue": 42
       },
       "new_prefixes": [
@@ -31439,10 +31296,10 @@
         "prefixes": []
       },
       "previous_strong": "H1921",
-      "new_strong": "D0665",
+      "new_strong": "H6641",
       "reason": "צְבוּעָה׃ is hypocritical, feigned; H1921 הָדַר 'swell' is a different word",
       "evidence": {
-        "lexicon": "D0665 צָבוּעַ hypocritical, feigned; a post-biblical Hebrew adjective.",
+        "lexicon": "H6641 צָבוּעַ hypocritical, feigned; a post-biblical Hebrew adjective.",
         "grammar": "adjective",
         "context": "1 Timothy 1:5, Greek ἀνυπόκριτος",
         "greek": "G0505 ἀνυπόκριτος",
@@ -31634,7 +31491,7 @@
       }
     },
     {
-      "action": "set_strong",
+      "action": "skip",
       "issue_type": "lexical_review",
       "reviewer": "claude-delitzsch-review",
       "confidence": 0.9,
@@ -31650,10 +31507,10 @@
         ]
       },
       "previous_strong": "H8120",
-      "new_strong": "Hd/D0402",
-      "reason": "הַמְשַׁמְּשִׁים is serve, minister; H8120 שְׁמַשׁ 'minister' is a different word",
+      "new_strong": "H8120",
+      "reason": "הַמְשַׁמְּשִׁים stays on H8120 שְׁמַשׁ, which now carries its post-biblical Hebrew sense",
       "evidence": {
-        "lexicon": "D0402 שִׁמֵּשׁ serve, minister; a post-biblical Hebrew verb.",
+        "lexicon": "H8120 שְׁמַשׁ serve, minister; a post-biblical Hebrew verb.",
         "grammar": "article ה + verb (piel)",
         "context": "1 Timothy 3:13, Greek διακονέω",
         "greek": "G1247 διακονέω",
@@ -32826,8 +32683,8 @@
       "evidence": {
         "lexicon": "D0434 הוֹרָאָה teaching, instruction; a post-biblical Hebrew noun.",
         "grammar": "conjunction ו + noun",
-        "context": "2 Timothy 4:2, Greek διδασκαλία",
-        "greek": "G1319 διδασκαλία",
+        "context": "2 Timothy 4:2, Greek διδαχή",
+        "greek": "G1322 διδαχή",
         "issue": 42
       },
       "new_prefixes": [
@@ -33120,10 +32977,10 @@
         ]
       },
       "previous_strong": "H5128",
-      "new_strong": "D0690",
+      "new_strong": "H3722",
       "reason": "כּוֹפְרִים is deny, renounce; H5128 נוּעַ 'quiver' is a different word",
       "evidence": {
-        "lexicon": "D0690 כָּפַר deny, renounce; a post-biblical Hebrew sense.",
+        "lexicon": "H3722 כָּפַר deny, renounce; a post-biblical Hebrew sense.",
         "grammar": "verb (participle)",
         "context": "Titus 1:16, Greek ἀρνέομαι",
         "greek": "G0720 ἀρνέομαι",

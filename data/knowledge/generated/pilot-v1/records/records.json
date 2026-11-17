@@ -1079,7 +1079,7 @@
       "path": "data/dict/lexicon/custom_definitions.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-      "sha256": "c04f5f8bbdd3022a8acbebba11dce7f539a49b0741fc9eef002d7a0ec616286f",
+      "sha256": "ecf46e00f9a8056aa8832bebb45dc9e133bdb310393ec17cd4043e58a2023ff7",
       "visibility": "public"
     },
     {
@@ -1089,7 +1089,7 @@
       "path": "data/delitzsch/parsed/john/1.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-      "sha256": "5b4f11eac6abdb8a54f72f88be89a34d9210edddfed710f6476d8f4ba5b24181",
+      "sha256": "9d165e016c6e35117ed97d2d8e3ca1578e3bc0462490e1f63d79ac6366570e46",
       "visibility": "public"
     },
     {

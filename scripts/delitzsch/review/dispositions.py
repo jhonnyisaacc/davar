@@ -223,8 +223,6 @@ def is_strong_correction(decision: dict[str, Any]) -> bool:
 
 
 def correction_chain(entries: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    """The latest correction preceded by each earlier correction it supersedes, oldest first."""
-
     chain = [entries[-1]]
     for entry in reversed(entries[:-1]):
         if not is_strong_correction(entry) or entry["status"] not in STRONG_CONFIRMED:

@@ -96,6 +96,28 @@ def test_single_word_synonyms_are_not_collapsed_to_single_word_lexical_gloss():
     assert [definition["text_en"] for definition in definitions] == ["confine", "bind", "besiege"]
 
 
+def test_a_gloss_that_breaks_off_keeps_the_inline_word_or_definition_that_completes_it():
+    bdb_root = ET.fromstring(
+        f"""
+        <bdb xmlns="{BDB_NS}">
+          <entry id="s.bk.ai">[<w>קִינֵן</w>] <pos>vb. denom</pos>. <stem>Pō‛l</stem>. <def>chant a</def> <w src="s.bk.ah">קִינָה</w></entry>
+          <entry id="u.ay.ac">[<w>שָׂטַן</w>] <pos>vb. denom</pos>. <def>be</def> or <def>act as adversary</def></entry>
+          <entry id="a.ab.aa"><w>אבב</w> (<def>fresh</def>, <def>bright</def>)</entry>
+          <entry id="h.cn.aa"><w>חָלָה</w> <sense><stem>Qal</stem> <def>be</def> or <def>become weak</def>, <def>sick</def></sense></entry>
+        </bdb>
+        """
+    )
+    lexical_index = {"strong_to_bdb": {"H6969": ["s.bk.ai"], "H7853": ["u.ay.ac"], "H3": ["a.ab.aa"], "H2470": ["h.cn.aa"]}}
+
+    def texts(strong, lemma):
+        return [d["text_en"] for d in extract_bdb_definitions_with_sense(strong, lemma, bdb_root, lexical_index)]
+
+    assert texts("H6969", "קִינֵן") == ["chant a קִינָה"]
+    assert texts("H7853", "שָׂטַן") == ["be or act as adversary"]
+    assert texts("H3", "אבב") == ["fresh", "bright"]
+    assert texts("H2470", "חָלָה") == ["be or become weak", "sick"]
+
+
 def test_validator_flags_fragmented_main_bdb_definitions(tmp_path, monkeypatch):
     roots_dir = tmp_path / "roots"
     words_dir = tmp_path / "words"

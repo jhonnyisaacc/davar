@@ -49,6 +49,32 @@ else:
     extract_from_bdb = _osb.extract_from_bdb
 
 NS = {'bdb': 'http://openscriptures.github.com/morphhb/namespace'}
+DEF_TAG = f"{{{NS['bdb']}}}def"
+GLOSS_CONTINUATION_TAGS = {DEF_TAG, f"{{{NS['bdb']}}}w"}
+INCOMPLETE_GLOSS_ENDINGS = {'a', 'an', 'the', 'be', 'of', 'to', 'in', 'at', 'on', 'with', 'as', 'is', 'may', 'will', 'from', 'for', 'by', 'into'}
+
+
+def def_glosses(parent: ET.Element) -> List[str]:
+    children = list(parent)
+    glosses, absorbed = [], set()
+    for index, child in enumerate(children):
+        if child.tag != DEF_TAG or index in absorbed or not child.text:
+            continue
+        text, cursor = child.text, index
+        while (
+            text.split() and text.split()[-1].lower() in INCOMPLETE_GLOSS_ENDINGS
+            and cursor + 1 < len(children)
+            and children[cursor + 1].tag in GLOSS_CONTINUATION_TAGS
+            and children[cursor + 1].text
+            and (children[cursor].tail or '').strip() in ('', 'or', 'and')
+        ):
+            connector = (children[cursor].tail or '').strip()
+            cursor += 1
+            text = f"{text} {connector} {children[cursor].text}" if connector else f"{text} {children[cursor].text}"
+            absorbed.add(cursor)
+        glosses.append(text)
+    return glosses
+
 
 LOG_MAPPING_MISMATCHES = os.getenv('DAVAR_LEXICON_LOG_MAPPING', '').lower() in {'1', 'true', 'yes'}
 
@@ -336,8 +362,7 @@ def extract_bdb_definitions_with_sense(
                     'senses': []
                 }
 
-                def_elements = bdb_entry.findall('./bdb:def', NS)
-                entry_data['definitions'] = [d.text for d in def_elements if d.text]
+                entry_data['definitions'] = def_glosses(bdb_entry)
 
                 def extract_text_from_element(elem: ET.Element) -> str:
                     """Extract text content from element, removing child element tags but keeping their text"""
@@ -374,7 +399,7 @@ def extract_bdb_definitions_with_sense(
 
                     if direct_defs:
                         # Extract from <def> elements
-                        sense_texts = [d.text for d in direct_defs if d.text and d.text.strip()]
+                        sense_texts = [text for text in def_glosses(sense_elem) if text.strip()]
                     elif not has_nested:
                         # Only extract text from sense element if it has NO nested senses
                         sense_text = extract_text_from_element(sense_elem)
