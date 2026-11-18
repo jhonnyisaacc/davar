@@ -34,7 +34,7 @@
     "#malaji_4_5: reference_system_not_verified",
     "#yeshayahu_40_3: reference_system_not_verified"
   ],
-  "input_manifest_digest": "f51f1a95b3e3fd6fbc6525b9d69d7ad05c43ffd068c2f9e21dcef3d0142011f5",
+  "input_manifest_digest": "7e20dbdf7341855f929b4c7da043b9aa526c73a49fba298fb7651e7d84066113",
   "records": {
     "concepts": [
       {
@@ -614,7 +614,7 @@
         "path": "data/delitzsch/parsed/john/1.json",
         "repository": "https://github.com/jhonnyisaacc/davar",
         "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-        "sha256": "d327db39f8e741f0953a77853c2f49bfed77a0d6f7b2936df775bee7feeda38b",
+        "sha256": "09e0776dcbe3c49c1b63e3d015cf92c939cf19a253dac85fc3491d4cae347cea",
         "visibility": "public"
       },
       {

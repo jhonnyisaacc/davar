@@ -105,6 +105,24 @@ def test_every_new_testament_occurrence_of_a_proper_noun_entry_shows_its_name_fi
     (("james", 1, 1, 0), "D0795", "James;", "Santiago;"),
     (("mark", 1, 9, 0), "H1961", "be; become", "ser; llegar a ser"),
     (("mark", 12, 19, 8), "H5800", "leave;", "dejar;"),
+    (("luke", 3, 25, 5), "D0902", "Nahum; an ancestor", "Nahúm; un antepasado"),
+    (("luke", 3, 29, 1), "D0906", "Jose; an ancestor", "Yosé; un antepasado"),
+    (("acts", 8, 5, 0), "D0903", "Philip; the evangelist", "Felipe; el evangelista"),
+    (("luke", 3, 1, 17), "D0904", "Philip; the tetrarch", "Felipe; el tetrarca"),
+    (("mark", 6, 17, 13), "D0905", "Philip; a son of Herod", "Felipe; un hijo de Herodes"),
+    (("john", 1, 43, 8), "D0069", "Philip; disciple", "Felipe;"),
+    (("philippians", 1, 18, 10), "H5046", "tell, declare", "contar, declarar"),
+    (("matthew", 20, 1, 8), "H7925", "rise early;", "madrugar;"),
+    (("luke", 17, 10, 18), "H5190", "lift, bear; lay upon", "levantar, llevar; imponer"),
+    (("john3", 1, 1, 2), "D0057", "Gaius; a name borne by believers", "Gayo; nombre de creyentes"),
+    (("corinthians1", 1, 16, 6), "D0907", "Stephanas;", "Estéfanas;"),
+    (("revelation", 18, 13, 10), "H4735", "cattle", "ganado"),
+    (("hebrews", 6, 8, 4), "D0908", "reject, despise;", "rechazar, despreciar;"),
+    (("john", 12, 28, 1), "D0909", "glorify, honour;", "glorificar, honrar;"),
+    (("john", 12, 28, 10), "D0909", "glorify, honour;", "glorificar, honrar;"),
+    (("john1", 2, 3, 3), "D0910", "recognize, know", "reconocer, conocer"),
+    (("hebrews", 5, 14, 3), "D0911", "solid, firm;", "sólido, firme;"),
+    (("revelation", 2, 14, 13), "H3384", "throw, shoot; in the hiphil, teach", "arrojar, disparar; en hifil, enseñar"),
 ])
 def test_a_reviewed_occurrence_shows_the_sense_the_pull_request_names(location, strong, english, spanish):
     shown = glosses_at(*location)
@@ -179,3 +197,78 @@ def test_every_instances_only_entry_lists_exactly_its_new_testament_occurrences(
             if listed != sorted(occurrences().get(strong, [])):
                 differing[strong] = (len(listed), len(occurrences().get(strong, [])))
     assert differing == {}
+
+
+def review_table(name):
+    return json.loads((ROOT / f"data/delitzsch/review/{name}.json").read_text(encoding="utf-8"))
+
+
+def greek_lemmas(book, chapter, verse, greek_cache):
+    return {unaccented(w["lemma"]) for w in greek_verse(book, chapter, verse, greek_cache)}
+
+
+def name_entries():
+    not_names = review_table("name_entry_referents")["not_names"]
+    return {strong for strong in occurrences() if strong.startswith("D") and lexicon().glosses(strong)[0].text[:1].isupper() and strong not in not_names}
+
+
+def exception_holds(exception, wanted, book, chapter, verse, greek_cache):
+    if exception["kind"] == "no_verse":
+        return not greek_verse(book, chapter, verse, greek_cache)
+    if exception["kind"] == "boundary":
+        return bool(wanted & (greek_lemmas(book, chapter, verse - 1, greek_cache) | greek_lemmas(book, chapter, verse + 1, greek_cache)))
+    return exception["kind"] in ("tr", "pronoun", "rendering", "source_gap") and bool(exception["note"])
+
+
+def test_every_name_entry_occurrence_renders_one_of_its_greek_names_or_is_a_reviewed_exception():
+    table, greek_cache, unmatched, wrong_exception = review_table("name_entry_referents"), {}, [], []
+    assert set(table["entries"]) == name_entries()
+    for strong, names in table["entries"].items():
+        wanted = {unaccented(name) for name in names}
+        for location in occurrences()[strong]:
+            book, chapter, verse, _ = location.split(".")
+            chapter, verse = int(chapter), int(verse)
+            exception = table["exceptions"].get(location)
+            if exception:
+                if exception["strong"] != strong or not exception_holds(exception, wanted, book, chapter, verse, greek_cache):
+                    wrong_exception.append(location)
+            elif not wanted & greek_lemmas(book, chapter, verse, greek_cache):
+                unmatched.append((location, strong, lexicon().glosses(strong)[0].text[:40]))
+    assert unmatched == []
+    assert wrong_exception == []
+    assert {location for location, exception in table["exceptions"].items() if location not in occurrences()[exception["strong"]]} == set()
+
+
+def test_entries_that_share_a_greek_name_name_one_referent_or_split_its_bearers_by_verse():
+    table = review_table("name_entry_referents")
+    sharing = defaultdict(set)
+    for strong, names in table["entries"].items():
+        for name in names:
+            sharing[unaccented(name)].add(strong)
+    reviewed = [set(group["entries"]) for group in table["same_referent"]] + [set(group) for group in table["distinct_referents"].values()]
+    assert [sorted(group) for group in sharing.values() if len(group) > 1 and not any(group <= known for known in reviewed)] == []
+    for name, bearers in table["distinct_referents"].items():
+        assert {strong for strong in bearers if unaccented(name) not in {unaccented(n) for n in table["entries"][strong]}} == set()
+        verses = {strong: {".".join(location.split(".")[:3]) for location in occurrences()[strong]} for strong in bearers}
+        assert verses == {strong: set(listed) for strong, listed in bearers.items()}
+        assert [(a, b) for a in bearers for b in bearers if a < b and verses[a] & verses[b]] == []
+
+
+def reviewed_moves():
+    moved = set()
+    for name in ("definition_gaps_42_round_5", "definition_gaps_42_round_7"):
+        decisions = json.loads((ROOT / f"data/delitzsch/review/batches/{name}.json").read_text(encoding="utf-8"))["decisions"]
+        created = {d["strong"] for d in decisions if d["action"] == "upsert_custom_definition" and d.get("mapping_scope")}
+        for d in decisions:
+            if d["action"] == "set_strong" and d["new_strong"].split("/")[-1] not in created:
+                o = d["occurrence"]
+                moved.add(f"{o['book']}.{o['chapter']}.{o['verse']}.{o['word_index']}")
+    return moved
+
+
+def test_every_round_5_and_round_7_move_onto_an_existing_entry_was_reviewed_against_the_gloss_the_reader_shows():
+    current = {".".join(map(str, location)): word["strong"].split("/")[-1] for location, word in corpus()}
+    rows = {row["location"]: row for row in review_table("move_gloss_review")["moves"]}
+    assert set(rows) == reviewed_moves()
+    assert {loc: (row["strong"], row["shown"]) for loc, row in rows.items()} == {loc: (current[loc], lexicon().glosses(current[loc])[0].text) for loc in rows}
+    assert {loc for loc, row in rows.items() if not row["verdict"].startswith(("fits: ", "fixed in round 7: "))} == set()

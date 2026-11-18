@@ -376,6 +376,39 @@ occurrences:
 occurrence shows an English and a Spanish first gloss from one record, and
 that every occurrence of a proper-noun H entry shows its name first.
 
+`batches/definition_gaps_42_round_7.json` creates D0902 to D0911, moves 145
+occurrences, and adds 30 `custom` records to H entries and one to D0057:
+
+- Each name entry names one referent. Philip splits into the apostle (D0069),
+  the evangelist (D0903, Acts 6 to 8 and 21:8), the tetrarch (D0904, Luke 3:1
+  and Caesarea Philippi), and Herod's brother, the husband of Herodias (D0905).
+  Luke 3:25 Nahum leaves D0186 Capernaum for D0902. Luke 3:29 leaves D0088
+  Joses for D0906 Jose. D0057 Gaius now names each Gaius, with the one 3 John
+  addresses. Stephanas, in 1 Corinthians 1:16, 16:15, and 16:17, leaves D0015
+  Stephen for D0907. Acts 4:6
+  Annas joins D0189. Revelation 18:13 וּמִקְנֶה, cattle, leaves D0192 Cana for
+  H4735.
+- A sense entry replaces an H entry whose first gloss gives a sense no custom
+  record could replace for the Tanakh: reject (D0908, from H3988 "flow"),
+  glorify and boast (D0909, from H6286 "go over the boughs"), recognize
+  (D0910, from H5234 "act"), and solid food (D0911, Hebrews 5:12 and 5:14, from
+  H1277 "fat").
+- 28 `custom` records give a first gloss that fits every Tanakh and New
+  Testament use, such as H3384 "throw, shoot; in the hiphil, teach", H5046
+  "tell, declare", H7925 "rise early", H5190 "lift, bear; lay upon", and H3381
+  "go down, come down". H758 Aram and H3568 Cush now name the other men of
+  that name.
+
+`name_entry_referents.json` lists, for each D entry whose first gloss is a
+name, the Greek names its occurrences render. Each occurrence's SBLGNT verse
+must hold one of them, or the occurrence is an exception with its kind: a
+Textus Receptus reading, a name in the next or previous verse, a verse the
+SBLGNT lacks, a pronoun, or a rendering. Entries that share a Greek name
+either name one referent, such as a city and its people, or list the verses
+of each bearer. `move_gloss_review.json` lists every round 5 and round 7 move
+onto an entry the review did not create, with the first gloss the reader
+shows and the Greek word of the verse. Tests pin both tables.
+
 A `set_strong` onto a custom entry whose `mapping_scope` is `instances_only`
 adds the occurrence to that entry's `nt_instances`, and removes it from the
 previous entry's list. Each such entry lists exactly the occurrences

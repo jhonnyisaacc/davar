@@ -1,0 +1,3709 @@
+{
+  "description": "Every round 5 and round 7 move onto an entry the review did not create, with the gloss the reader shows first and the Greek word of the verse. Each row was reviewed against that Greek word.",
+  "moves": [
+    {
+      "location": "acts.10.11.3",
+      "text": "נִפְתָּחִים",
+      "strong": "H6605",
+      "shown": "open",
+      "greek": "G0455 ἀνοίγω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.10.31.3",
+      "text": "תְפִלָּתְךָ",
+      "strong": "H8605",
+      "shown": "prayer",
+      "greek": "G4335 προσευχή",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.10.37.15",
+      "text": "יוֹחָנָן׃",
+      "strong": "D0708",
+      "shown": "John; Yohanan, a name borne in the New Testament by John the Baptist, the apostle John son of Zebedee, John Mark, and others.",
+      "greek": "G2491G Ἰωάννης",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.10.43.3",
+      "text": "מְעִידִים",
+      "strong": "H5749",
+      "shown": "bear witness",
+      "greek": "G3140 μαρτυρέω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.12.13.5",
+      "text": "נַעֲרָה",
+      "strong": "H5291",
+      "shown": "girl",
+      "greek": "G3814 παιδίσκη",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.13.10.2",
+      "text": "הַמָּלֵא",
+      "strong": "H4392",
+      "shown": "full",
+      "greek": "G4134 πλήρης",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.13.10.4",
+      "text": "מִרְמָה",
+      "strong": "H4820",
+      "shown": "deceit",
+      "greek": "G1388 δόλος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.13.31.8",
+      "text": "יְרוּשָׁלָיְמָה",
+      "strong": "H3389",
+      "shown": "Jerusalem",
+      "greek": "G2419 Ἱερουσαλήμ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.13.36.2",
+      "text": "גָּוַע",
+      "strong": "H1478",
+      "shown": "expire",
+      "greek": "G2837 κοιμάω",
+      "verdict": "fits: the Hebrew verb גָּוַע, expire, is Delitzsch's word for falling asleep in death"
+    },
+    {
+      "location": "acts.13.41.6",
+      "text": "פֹּעֵל",
+      "strong": "H6466",
+      "shown": "do",
+      "greek": "G2038 ἐργάζομαι",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.15.19.3",
+      "text": "דָן",
+      "strong": "H1777",
+      "shown": "judge",
+      "greek": "G2919 κρίνω",
+      "verdict": "fits: the Hebrew phrase דָּן לְכַף זְכוּת, judging favourably, is Delitzsch's rendering of not a striker"
+    },
+    {
+      "location": "acts.16.29.1",
+      "text": "נֵרוֹת",
+      "strong": "H5216",
+      "shown": "lamp",
+      "greek": "G5457 φῶς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.18.3.13",
+      "text": "יְרִיעוֹת",
+      "strong": "H3407",
+      "shown": "curtain",
+      "greek": "G4635 σκηνοποιός",
+      "verdict": "fits: the Hebrew phrase makers of curtains renders tentmakers"
+    },
+    {
+      "location": "acts.18.5.3",
+      "text": "מִמַּקְדּוֹנְיָא",
+      "strong": "D0062",
+      "shown": "Macedonia; a Roman province in northern Greece.",
+      "greek": "G3109 Μακεδονία",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.19.24.13",
+      "text": "מַשְׂכֹּרֶת",
+      "strong": "H4909",
+      "shown": "wages",
+      "greek": "G2039 ἐργασία",
+      "verdict": "fits: the Hebrew noun מַשְׂכֹּרֶת, wages, renders business"
+    },
+    {
+      "location": "acts.19.3.9",
+      "text": "יוֹחָנָן׃",
+      "strong": "D0708",
+      "shown": "John; Yohanan, a name borne in the New Testament by John the Baptist, the apostle John son of Zebedee, John Mark, and others.",
+      "greek": "G2491G Ἰωάννης",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.19.31.13",
+      "text": "יִמְלָאֵהוּ",
+      "strong": "H4390",
+      "shown": "be full",
+      "greek": "Delitzsch renders μὴ δοῦναι ἑαυτόν with the idiom 'his heart did not fill him', that is, he should not venture",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.20.8.0",
+      "text": "וְנֵרוֹת",
+      "strong": "H5216",
+      "shown": "lamp",
+      "greek": "G2985 λαμπάς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.23.21.9",
+      "text": "מֵאַרְבָּעִים",
+      "strong": "H705",
+      "shown": "forty",
+      "greek": "G5062 τεσσαράκοντα",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.23.24.1",
+      "text": "יָכִינוּ",
+      "strong": "H3559",
+      "shown": "be firm, be established; prepare, make ready, set up.",
+      "greek": "G3936 παρίστημι",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "acts.24.14.12",
+      "text": "כַּת",
+      "strong": "D0150",
+      "shown": "sect; party; religious faction.",
+      "greek": "G0139 αἵρεσις",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.24.15.12",
+      "text": "תְּחִיַּת",
+      "strong": "D0168",
+      "shown": "resurrection; coming back to life.",
+      "greek": "G0386 ἀνάστασις",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.24.26.1",
+      "text": "מְקַוֶּה",
+      "strong": "H6960",
+      "shown": "wait for",
+      "greek": "G1679 ἐλπίζω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.24.26.8",
+      "text": "יַתִּירֵהוּ",
+      "strong": "H5425",
+      "shown": "be free",
+      "greek": "the SBLGNT omits ὅπως λύσῃ αὐτόν; Delitzsch follows the Textus Receptus, 'that he might release him'",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.25.16.19",
+      "text": "הַשִּׂטְנָה׃",
+      "strong": "H7855",
+      "shown": "accusation",
+      "greek": "G1462 ἔγκλημα",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.25.27.5",
+      "text": "אַסִּיר",
+      "strong": "H615",
+      "shown": "prisoner, captive.",
+      "greek": "G1198 δέσμιος",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "acts.27.27.7",
+      "text": "אַדְרִיָּה",
+      "strong": "D0263",
+      "shown": "Adriatic Sea, the sea through which Paul's ship was driven.",
+      "greek": "G0099 Ἀδρίας",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.28.22.13",
+      "text": "יָרִיבוּ",
+      "strong": "H7378",
+      "shown": "strive",
+      "greek": "G0483 ἀντιλέγω",
+      "verdict": "fits: the Hebrew verb רִיב, strive, renders lawsuits"
+    },
+    {
+      "location": "acts.28.3.9",
+      "text": "הַחֹם",
+      "strong": "H2527",
+      "shown": "heat",
+      "greek": "G2329 θέρμη",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.4.6.0",
+      "text": "וְחָנָן",
+      "strong": "D0189",
+      "shown": "Annas; former high priest and father-in-law of Caiaphas.",
+      "greek": "G0452 Ἄννας",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.7.3.5",
+      "text": "וּמִמּוֹלַדְתֶּךָ",
+      "strong": "H4138",
+      "shown": "kindred",
+      "greek": "G4772 συγγένεια",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.7.43.16",
+      "text": "לְבָבֶל׃",
+      "strong": "H894",
+      "shown": "Babel",
+      "greek": "G0897 Βαβυλών",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.7.56.5",
+      "text": "נִפְתָּחִים",
+      "strong": "H6605",
+      "shown": "open",
+      "greek": "G1272 διανοίγω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.7.7.5",
+      "text": "דָּן",
+      "strong": "H1777",
+      "shown": "judge",
+      "greek": "G2919 κρίνω",
+      "verdict": "fits: the Hebrew phrase דָּן לְכַף זְכוּת, judging favourably, is Delitzsch's rendering of not a striker"
+    },
+    {
+      "location": "acts.9.1.2",
+      "text": "יְפֵחַ",
+      "strong": "H3307",
+      "shown": "breathing",
+      "greek": "G1709 ἐμπνέω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.9.14.2",
+      "text": "רִשְׁיוֹן",
+      "strong": "H7558",
+      "shown": "permission",
+      "greek": "G1849 ἐξουσία",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.9.9.0",
+      "text": "וַיֶּחְשְׁכוּ",
+      "strong": "H2821",
+      "shown": "be or grow dark",
+      "greek": "G0991 βλέπω",
+      "verdict": "fits: the Hebrew verb חָשַׁךְ, be dark, renders eyes darkened so as not to see"
+    },
+    {
+      "location": "colossians.1.17.4",
+      "text": "קַיָּם",
+      "strong": "H7011",
+      "shown": "enduring",
+      "greek": "G4921 συνίστημι, συνιστάω",
+      "verdict": "fits: the Hebrew adjective קַיָּם, enduring, renders abides and holds together"
+    },
+    {
+      "location": "colossians.2.15.6",
+      "text": "רָמָה",
+      "strong": "H7311",
+      "shown": "be high",
+      "greek": "G3954 παρρησία",
+      "verdict": "fits: the Hebrew phrase with a high hand renders openly and boldly"
+    },
+    {
+      "location": "colossians.2.20.2",
+      "text": "מַתֶּם",
+      "strong": "H4191",
+      "shown": "die",
+      "greek": "G0599 ἀποθνήσκω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "colossians.3.3.3",
+      "text": "צְפוּנִים",
+      "strong": "H6845",
+      "shown": "hide",
+      "greek": "G2928 κρύπτω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.1.20.5",
+      "text": "דֹּרֵשׁ",
+      "strong": "H1875",
+      "shown": "seek; inquire, require.",
+      "greek": "G4804 συζητητής",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.1.7.5",
+      "text": "מַתַּן",
+      "strong": "H4976",
+      "shown": "gift",
+      "greek": "G5486 χάρισμα",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.10.27.12",
+      "text": "מִכֹּל",
+      "strong": "H3605",
+      "shown": "the whole",
+      "greek": "G3956 πᾶς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.11.26.11",
+      "text": "הַזְכֵּר",
+      "strong": "H2142",
+      "shown": "remember",
+      "greek": "G2605 καταγγέλλω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.12.21.8",
+      "text": "אֶצְטָרֵךְ",
+      "strong": "D0063",
+      "shown": "need; require; be obliged.",
+      "greek": "G5532 χρεία",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.12.22.5",
+      "text": "רָפִים",
+      "strong": "H7504",
+      "shown": "slack",
+      "greek": "G0772G ἀσθενής",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.12.23.5",
+      "text": "נַלְבִּישׁ",
+      "strong": "H3847",
+      "shown": "put on",
+      "greek": "G4060 περιτίθημι",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.12.9.5",
+      "text": "מַתְּנוֹת",
+      "strong": "H4979",
+      "shown": "gift",
+      "greek": "G5486 χάρισμα",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.13.13.5",
+      "text": "וְהַתִּקְוָה",
+      "strong": "H8615",
+      "shown": "hope",
+      "greek": "G1680 ἐλπίς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.14.2.13",
+      "text": "יִשְׁמָעֵהוּ",
+      "strong": "H8085",
+      "shown": "hear",
+      "greek": "G0191 ἀκούω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.14.29.7",
+      "text": "יִבְחָנוּ׃",
+      "strong": "H974",
+      "shown": "examine",
+      "greek": "G1252 διακρίνω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.14.7.7",
+      "text": "חָלִיל",
+      "strong": "H2485",
+      "shown": "flute",
+      "greek": "G0836 αὐλός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.15.15.1",
+      "text": "נִמָּצֵא",
+      "strong": "H4672",
+      "shown": "find; attain to, come upon.",
+      "greek": "G2147 εὑρίσκω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.15.27.11",
+      "text": "שֶׁהַשָּׁת",
+      "strong": "H7896",
+      "shown": "put",
+      "greek": "G5293 ὑποτάσσω",
+      "verdict": "fits: the Hebrew verb שִׁית, put, renders put under"
+    },
+    {
+      "location": "corinthians1.15.3.1",
+      "text": "מָסַרְתִּי",
+      "strong": "D0083",
+      "shown": "deliver; hand over; betray.",
+      "greek": "G3860 παραδίδωμι",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.15.36.1",
+      "text": "הַסָּכָל",
+      "strong": "H5530",
+      "shown": "fool",
+      "greek": "G0878 ἄφρων",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.15.37.1",
+      "text": "שֶּׁתִּזְרַע",
+      "strong": "H2232",
+      "shown": "sow",
+      "greek": "G4687 σπείρω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.15.37.15",
+      "text": "שֶׁל־",
+      "strong": "D0163",
+      "shown": "of; belonging to; that of.",
+      "greek": "G3062 λοιπός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.15.46.11",
+      "text": "שֶׁל־",
+      "strong": "D0163",
+      "shown": "of; belonging to; that of.",
+      "greek": "G4152 πνευματικός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.15.6.13",
+      "text": "יָשֵׁנוּ׃",
+      "strong": "H3462",
+      "shown": "sleep",
+      "greek": "G2837 κοιμάω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.15.6.9",
+      "text": "רֻבָּם",
+      "strong": "H7230",
+      "shown": "multitude",
+      "greek": "G4119 πλείων, πλεῖον",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.16.1.2",
+      "text": "קִבּוּץ",
+      "strong": "H6910",
+      "shown": "a gathering",
+      "greek": "G3048 λογία",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.16.4.2",
+      "text": "הַטֹּרַח",
+      "strong": "H2960",
+      "shown": "burden",
+      "greek": "G0514 ἄξιος",
+      "verdict": "fits: the Hebrew noun טֹרַח, burden, renders the Greek phrase if it is fitting"
+    },
+    {
+      "location": "corinthians1.3.18.1",
+      "text": "יְרַמֶּה",
+      "strong": "H7411",
+      "shown": "beguile",
+      "greek": "G1818 ἐξαπατάω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.5.11.5",
+      "text": "הִתְעָרֵב",
+      "strong": "H6148",
+      "shown": "be surety, pledge; mix, mingle; in the hithpael, associate with, meddle.",
+      "greek": "G4874 συναναμίγνυμι",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "corinthians1.6.7.5",
+      "text": "שֶׁתָּרִיבוּ",
+      "strong": "H7378",
+      "shown": "strive",
+      "greek": "G2917 κρίμα",
+      "verdict": "fits: the Hebrew verb רִיב, strive, renders lawsuits"
+    },
+    {
+      "location": "corinthians1.7.11.1",
+      "text": "פָּרשׁ",
+      "strong": "H6567",
+      "shown": "make distinct",
+      "greek": "G5563 χωρίζω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.7.35.13",
+      "text": "נְכוֹנִים",
+      "strong": "H3559",
+      "shown": "be firm, be established; prepare, make ready, set up.",
+      "greek": "G2145 εὐπρόσεδρος, εὐπάρεδρος",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "corinthians1.7.36.1",
+      "text": "יַחֲשֹׁב",
+      "strong": "H2803",
+      "shown": "think",
+      "greek": "G3543 νομίζω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.9.11.12",
+      "text": "עִנְיְנֵי",
+      "strong": "H6045",
+      "shown": "occupation, business, matter.",
+      "greek": "G4559 σαρκικός",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "corinthians1.9.11.3",
+      "text": "עִנְיְנֵי",
+      "strong": "H6045",
+      "shown": "occupation, business, matter.",
+      "greek": "G4152 πνευματικός",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "corinthians1.9.18.10",
+      "text": "מְחִיר",
+      "strong": "H4242",
+      "shown": "price",
+      "greek": "G0077 ἀδάπανος",
+      "verdict": "fits: the Hebrew phrase without price renders freely"
+    },
+    {
+      "location": "corinthians1.9.19.3",
+      "text": "מִכֹּל",
+      "strong": "H3605",
+      "shown": "the whole",
+      "greek": "G3956 πᾶς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.9.24.3",
+      "text": "רָצֵי",
+      "strong": "H7323",
+      "shown": "run",
+      "greek": "G5143 τρέχω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.9.8.3",
+      "text": "שֶׁל־",
+      "strong": "D0163",
+      "shown": "of; belonging to; that of.",
+      "greek": "G2596 κατά",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians2.1.5.7",
+      "text": "נֶחָמָתֵנוּ",
+      "strong": "H5165",
+      "shown": "comfort",
+      "greek": "G3874 παράκλησις",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians2.11.7.12",
+      "text": "מְחִיר",
+      "strong": "H4242",
+      "shown": "price",
+      "greek": "G1432 δωρεάν",
+      "verdict": "fits: the Hebrew phrase without price renders freely"
+    },
+    {
+      "location": "corinthians2.12.1.1",
+      "text": "נִצְרַכְתִּי",
+      "strong": "H6878",
+      "shown": "need",
+      "greek": "G4851 συμφέρω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians2.3.12.4",
+      "text": "תִּקְוָה",
+      "strong": "H8615",
+      "shown": "hope",
+      "greek": "G1680 ἐλπίς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians2.4.8.7",
+      "text": "נוֹאָשִׁים׃",
+      "strong": "H2976",
+      "shown": "despair",
+      "greek": "G1820 ἐξαπορέω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians2.5.3.5",
+      "text": "עֲרֻמִּים׃",
+      "strong": "H6174",
+      "shown": "naked",
+      "greek": "G1131 γυμνός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians2.5.4.5",
+      "text": "נֵאָנַח",
+      "strong": "H584",
+      "shown": "sigh",
+      "greek": "G4727 στενάζω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians2.6.16.1",
+      "text": "דֶבֶק",
+      "strong": "H1694",
+      "shown": "joining",
+      "greek": "G4783 συγκατάθεσις",
+      "verdict": "fits: the Hebrew noun דֶּבֶק, joining, renders agreement"
+    },
+    {
+      "location": "corinthians2.7.15.13",
+      "text": "וּבַחֲרָדָה׃",
+      "strong": "H2731",
+      "shown": "trembling",
+      "greek": "G5156 τρόμος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians2.7.7.8",
+      "text": "נֻחַם",
+      "strong": "H5162",
+      "shown": "be sorry, repent; comfort, console; be comforted.",
+      "greek": "G3870 παρακαλέω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "corinthians2.8.12.5",
+      "text": "רְצוּיָה",
+      "strong": "H7521",
+      "shown": "be pleased with",
+      "greek": "G2144 εὐπρόσδεκτος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians2.8.14.5",
+      "text": "מַחְסוֹרְכֶם",
+      "strong": "H4270",
+      "shown": "need",
+      "greek": "G5303 ὑστέρημα",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians2.8.2.5",
+      "text": "שִׂמְחָתָם",
+      "strong": "H8057",
+      "shown": "joy",
+      "greek": "G5479 χαρά",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "corinthians2.8.20.6",
+      "text": "דִּבָּה",
+      "strong": "H1681",
+      "shown": "whispering",
+      "greek": "G3469 μωμάομαι",
+      "verdict": "fits: the Hebrew noun דִּבָּה, evil report, renders the blame the Greek verb names"
+    },
+    {
+      "location": "corinthians2.8.4.5",
+      "text": "חֲבֵרֵינוּ",
+      "strong": "H2270",
+      "shown": "companion, associate; united.",
+      "greek": "G2842 κοινωνία",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "ephesians.1.14.3",
+      "text": "יְרֻשָּׁתֵנוּ",
+      "strong": "H3425",
+      "shown": "a possession",
+      "greek": "G2817 κληρονομία",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "ephesians.1.19.9",
+      "text": "עֹצֶם",
+      "strong": "H6108",
+      "shown": "might",
+      "greek": "G3174 μέγεθος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "ephesians.2.12.11",
+      "text": "לִבְרִיתוֹת",
+      "strong": "H1285",
+      "shown": "Covenant, agreement, alliance",
+      "greek": "G1242 διαθήκη",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "ephesians.2.12.14",
+      "text": "תִּקְוָה",
+      "strong": "H8615",
+      "shown": "hope",
+      "greek": "G1680 ἐλπίς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "ephesians.3.13.4",
+      "text": "תֵחַתּוּ",
+      "strong": "H2865",
+      "shown": "be dismayed, be terrified; be shattered.",
+      "greek": "G1573 ἐκκακέω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "ephesians.5.23.12",
+      "text": "שֶׁל־",
+      "strong": "H7945",
+      "shown": "who",
+      "greek": "G3588 ὁ",
+      "verdict": "fits: the Hebrew relative ש renders the article and pronoun"
+    },
+    {
+      "location": "galatians.3.13.1",
+      "text": "פָּדָנוּ",
+      "strong": "H6299",
+      "shown": "ransom",
+      "greek": "G1805 ἐξαγοράζω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "galatians.5.21.4",
+      "text": "וְשִׁכָּרוֹן",
+      "strong": "H7943",
+      "shown": "drunkenness",
+      "greek": "G3178 μέθη",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "galatians.6.12.11",
+      "text": "צְלָב",
+      "strong": "D0058",
+      "shown": "cross; instrument of crucifixion.",
+      "greek": "G4716 σταυρός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "galatians.6.3.11",
+      "text": "מְרַמֶּה׃",
+      "strong": "H7411",
+      "shown": "beguile",
+      "greek": "G5422 φρεναπατάω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "hebrews.12.13.5",
+      "text": "תִטֶּה",
+      "strong": "H5186",
+      "shown": "stretch out, extend; turn aside, incline.",
+      "greek": "G1624 ἐκτρέπω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "hebrews.12.18.5",
+      "text": "נִמְשָׁשׁ",
+      "strong": "H4959",
+      "shown": "feel",
+      "greek": "G5584 ψηλαφάω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "hebrews.13.16.9",
+      "text": "יֶעֶרְבוּ",
+      "strong": "H6149",
+      "shown": "be sweet",
+      "greek": "G2100 εὐαρεστέω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "hebrews.13.17.12",
+      "text": "חֶשְׁבּוֹן",
+      "strong": "H2808",
+      "shown": "reckoning",
+      "greek": "G3056 λόγος",
+      "verdict": "fits: the Hebrew noun חֶשְׁבּוֹן, reckoning, renders λόγος in give an account"
+    },
+    {
+      "location": "hebrews.13.2.1",
+      "text": "אֹרְחִים",
+      "strong": "H732",
+      "shown": "travel, journey; wayfarer, traveller.",
+      "greek": "G5381 φιλοξενία",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "hebrews.3.10.5",
+      "text": "תֹּעֵי",
+      "strong": "H8582",
+      "shown": "err",
+      "greek": "G4105 πλανάω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "hebrews.3.18.5",
+      "text": "מְנוּחָתוֹ",
+      "strong": "H4496",
+      "shown": "resting-place",
+      "greek": "G2663 κατάπαυσις",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "hebrews.3.3.4",
+      "text": "נָחַל־",
+      "strong": "H5157",
+      "shown": "inherit, take possession; get as a possession; in the hiphil, give as an inheritance.",
+      "greek": "G0515 ἀξιόω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "hebrews.4.10.3",
+      "text": "מְנוּחָתוֹ",
+      "strong": "H4496",
+      "shown": "resting-place",
+      "greek": "G2663 κατάπαυσις",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "hebrews.4.12.22",
+      "text": "וּמְזִמּוֹתָיו׃",
+      "strong": "H4209",
+      "shown": "purpose",
+      "greek": "G1771 ἔννοια",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "hebrews.4.15.10",
+      "text": "חֳלָיֵינוּ",
+      "strong": "H2483",
+      "shown": "sickness",
+      "greek": "G0769G ἀσθένεια",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "hebrews.4.9.4",
+      "text": "מְנוּחַת",
+      "strong": "H4496",
+      "shown": "resting-place",
+      "greek": "G4520 σαββατισμός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "hebrews.5.12.21",
+      "text": "וְנִצְרַכְתֶּם",
+      "strong": "H6878",
+      "shown": "need",
+      "greek": "G5532 χρεία",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "hebrews.6.8.4",
+      "text": "נִמְאָסָה",
+      "strong": "D0908",
+      "shown": "reject, despise; be rejected; rejected, worthless, loathsome.",
+      "greek": "G0096 ἀδόκιμος",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "hebrews.7.12.4",
+      "text": "הַצֹּרֶךְ",
+      "strong": "H6878",
+      "shown": "need",
+      "greek": "G0318 ἀνάγκη",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "hebrews.7.19.8",
+      "text": "תִּקְוָה",
+      "strong": "H8615",
+      "shown": "hope",
+      "greek": "G1680 ἐλπίς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "hebrews.9.11.22",
+      "text": "הַבְּרִיאָה",
+      "strong": "H1278",
+      "shown": "a creation",
+      "greek": "G2937 κτίσις",
+      "verdict": "fits: the Hebrew is a new creation, בְּרִיאָה, which renders κτίσις and παλιγγενεσία"
+    },
+    {
+      "location": "hebrews.9.9.8",
+      "text": "מְנָחוֹת",
+      "strong": "H4503",
+      "shown": "gift",
+      "greek": "G1435 δῶρον",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "james.1.11.1",
+      "text": "זָרַח",
+      "strong": "H2224",
+      "shown": "rise",
+      "greek": "G0393 ἀνατέλλω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "james.1.26.9",
+      "text": "רֶסֶן",
+      "strong": "H7448",
+      "shown": "halter",
+      "greek": "G5468 χαλιναγωγέω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "james.1.3.6",
+      "text": "סַבְלָנוּת׃",
+      "strong": "D0104",
+      "shown": "patience; endurance; steadfastness under pressure.",
+      "greek": "G5281 ὑπομονή",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "james.3.10.3",
+      "text": "בְּרָכָה",
+      "strong": "H1293",
+      "shown": "blessing",
+      "greek": "G2129 εὐλογία",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "james.3.14.3",
+      "text": "וּמְרִיבָה",
+      "strong": "H4808",
+      "shown": "strife",
+      "greek": "G2052 ἐριθεία",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "james.3.16.3",
+      "text": "וּמְרִיבָה",
+      "strong": "H4808",
+      "shown": "strife",
+      "greek": "G2052 ἐριθεία",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "james.3.2.13",
+      "text": "רֶסֶן",
+      "strong": "H7448",
+      "shown": "halter",
+      "greek": "G5468 χαλιναγωγέω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "james.3.3.5",
+      "text": "הָרֶסֶן",
+      "strong": "H7448",
+      "shown": "halter",
+      "greek": "G5469 χαλινός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "james.4.11.16",
+      "text": "וְדָן",
+      "strong": "H1777",
+      "shown": "judge",
+      "greek": "G2919 κρίνω",
+      "verdict": "fits: the Hebrew phrase דָּן לְכַף זְכוּת, judging favourably, is Delitzsch's rendering of not a striker"
+    },
+    {
+      "location": "james.4.11.9",
+      "text": "וְדָן",
+      "strong": "H1777",
+      "shown": "judge",
+      "greek": "G2919 κρίνω",
+      "verdict": "fits: the Hebrew phrase דָּן לְכַף זְכוּת, judging favourably, is Delitzsch's rendering of not a striker"
+    },
+    {
+      "location": "james.4.14.9",
+      "text": "עָשָׁן",
+      "strong": "H6227",
+      "shown": "smoke",
+      "greek": "G0822 ἀτμίς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "james.4.17.5",
+      "text": "יַעֲשֶׂנּוּ",
+      "strong": "H6213",
+      "shown": "do",
+      "greek": "G4160G ποιέω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "james.5.3.3",
+      "text": "חֶלְאָה",
+      "strong": "H2457",
+      "shown": "rust",
+      "greek": "G2447 ἰός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "james.5.3.5",
+      "text": "חֶלְאָתָם",
+      "strong": "H2457",
+      "shown": "rust",
+      "greek": "G2447 ἰός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "james.5.4.8",
+      "text": "צֹעֵק",
+      "strong": "H6817",
+      "shown": "cry",
+      "greek": "G2896 κράζω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "james.5.7.8",
+      "text": "הָאִכָּר",
+      "strong": "H406",
+      "shown": "ploughman",
+      "greek": "G1092 γεωργός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.1.51.10",
+      "text": "נִפְתָּחִים",
+      "strong": "H6605",
+      "shown": "open",
+      "greek": "G0455 ἀνοίγω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.1.6.6",
+      "text": "יוֹחָנָן׃",
+      "strong": "D0708",
+      "shown": "John; Yohanan, a name borne in the New Testament by John the Baptist, the apostle John son of Zebedee, John Mark, and others.",
+      "greek": "G2491G Ἰωάννης",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.10.24.7",
+      "text": "תַּתְלֶה",
+      "strong": "H8518",
+      "shown": "hang",
+      "greek": "G0142 αἴρω",
+      "verdict": "fits: the Hebrew verb תָּלָה, hang, renders depend on"
+    },
+    {
+      "location": "john.10.40.3",
+      "text": "עֵבֶר",
+      "strong": "H5676",
+      "shown": "region across",
+      "greek": "G4008 πέραν",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.11.1.3",
+      "text": "לַעְזָר",
+      "strong": "D0229",
+      "shown": "Lazarus of Bethany, whom Jesus raised from the dead.",
+      "greek": "G2976H Λάζαρος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.11.11.6",
+      "text": "לַעְזָר",
+      "strong": "D0229",
+      "shown": "Lazarus of Bethany, whom Jesus raised from the dead.",
+      "greek": "G2976H Λάζαρος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.11.13.9",
+      "text": "הַשֵּׁנָה",
+      "strong": "H8142",
+      "shown": "sleep",
+      "greek": "G5258 ὕπνος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.11.14.7",
+      "text": "לַעְזָר",
+      "strong": "D0229",
+      "shown": "Lazarus of Bethany, whom Jesus raised from the dead.",
+      "greek": "G2976H Λάζαρος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.11.2.13",
+      "text": "לַעְזָר",
+      "strong": "D0229",
+      "shown": "Lazarus of Bethany, whom Jesus raised from the dead.",
+      "greek": "G2976H Λάζαρος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.11.30.12",
+      "text": "מָרְתָא׃",
+      "strong": "D0210",
+      "shown": "Martha; sister of Mary and Lazarus of Bethany.",
+      "greek": "G3136 Μάρθα",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.11.43.6",
+      "text": "לַעְזָר",
+      "strong": "D0229",
+      "shown": "Lazarus of Bethany, whom Jesus raised from the dead.",
+      "greek": "G2976H Λάζαρος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.11.5.7",
+      "text": "לַעְזָר׃",
+      "strong": "D0229",
+      "shown": "Lazarus of Bethany, whom Jesus raised from the dead.",
+      "greek": "G2976H Λάζαρος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.12.1.10",
+      "text": "לַעְזָר",
+      "strong": "D0229",
+      "shown": "Lazarus of Bethany, whom Jesus raised from the dead.",
+      "greek": "G2976H Λάζαρος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.12.10.6",
+      "text": "לַעְזָר׃",
+      "strong": "D0229",
+      "shown": "Lazarus of Bethany, whom Jesus raised from the dead.",
+      "greek": "G2976H Λάζαρος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.12.17.7",
+      "text": "לַעְזָר",
+      "strong": "D0229",
+      "shown": "Lazarus of Bethany, whom Jesus raised from the dead.",
+      "greek": "G2976H Λάζαρος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.12.2.7",
+      "text": "וְלַעְזָר",
+      "strong": "D0229",
+      "shown": "Lazarus of Bethany, whom Jesus raised from the dead.",
+      "greek": "G2976H Λάζαρος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.12.25.9",
+      "text": "יִנְצְרֶהָ",
+      "strong": "H5341",
+      "shown": "keep, guard, watch over.",
+      "greek": "G5442I φυλάσσω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "john.12.28.1",
+      "text": "פָּאֵר",
+      "strong": "D0909",
+      "shown": "glorify, honour; in the hithpael, be glorified, boast, glory in.",
+      "greek": "G1392 δοξάζω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "john.12.4.8",
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "greek": "G2469 Ἰσκαριώτης, Ἰσκαριώθ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.12.9.17",
+      "text": "לַעְזָר",
+      "strong": "D0229",
+      "shown": "Lazarus of Bethany, whom Jesus raised from the dead.",
+      "greek": "G2976H Λάζαρος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.13.11.3",
+      "text": "יִמְסְרֵהוּ",
+      "strong": "H4560",
+      "shown": "deliver up",
+      "greek": "G3860 παραδίδωμι",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.13.2.11",
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "greek": "G2469 Ἰσκαριώτης, Ἰσκαριώθ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.13.26.19",
+      "text": "קְרִיּוֹת׃",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "greek": "G2469 Ἰσκαριώτης, Ἰσκαριώθ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.13.30.5",
+      "text": "מִהֵר",
+      "strong": "H4116",
+      "shown": "hasten",
+      "greek": "G2112 εὐθέως",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.14.21.4",
+      "text": "וַיִּנְצְרֵן",
+      "strong": "H5341",
+      "shown": "keep, guard, watch over.",
+      "greek": "G5083G τηρέω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "john.14.22.6",
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "greek": "G2469 Ἰσκαριώτης, Ἰσκαριώθ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.14.24.16",
+      "text": "שֶׁל־",
+      "strong": "H7945",
+      "shown": "who",
+      "greek": "G3588 ὁ",
+      "verdict": "fits: the Hebrew relative ש renders the article and pronoun"
+    },
+    {
+      "location": "john.15.13.4",
+      "text": "מִתִּתּוֹ",
+      "strong": "H5414",
+      "shown": "give",
+      "greek": "G5087 τίθημι",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.16.21.12",
+      "text": "תִזְכֹּר",
+      "strong": "H2142",
+      "shown": "remember",
+      "greek": "G3421 μνημονεύω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.16.29.9",
+      "text": "מָשָׁל׃",
+      "strong": "H4912",
+      "shown": "proverb, parable; byword; discourse.",
+      "greek": "G3942 παροιμία",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "john.17.1.12",
+      "text": "פָּאֵר",
+      "strong": "D0909",
+      "shown": "glorify, honour; in the hithpael, be glorified, boast, glory in.",
+      "greek": "G1392 δοξάζω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "john.17.12.4",
+      "text": "נָצַרְתִּי",
+      "strong": "H5341",
+      "shown": "keep, guard, watch over.",
+      "greek": "G5083I τηρέω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "john.17.6.17",
+      "text": "נָצָרוּ׃",
+      "strong": "H5341",
+      "shown": "keep, guard, watch over.",
+      "greek": "G5083G τηρέω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "john.18.2.2",
+      "text": "מוֹסְרוֹ",
+      "strong": "D0083",
+      "shown": "deliver; hand over; betray.",
+      "greek": "G3860 παραδίδωμι",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.19.15.6",
+      "text": "מַלְכְּכֶם",
+      "strong": "H4428",
+      "shown": "king",
+      "greek": "G0935 βασιλεύς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.19.20.19",
+      "text": "עֵבֶר",
+      "strong": "H5680",
+      "shown": "Hebrew",
+      "greek": "G1447 Ἑβραϊστί",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.4.1.13",
+      "text": "מִיּוֹחָנָן׃",
+      "strong": "D0708",
+      "shown": "John; Yohanan, a name borne in the New Testament by John the Baptist, the apostle John son of Zebedee, John Mark, and others.",
+      "greek": "G2491G Ἰωάννης",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.4.46.5",
+      "text": "קָנָה",
+      "strong": "D0192",
+      "shown": "Cana; Galilean town associated with Nathanael and Jesus’ signs.",
+      "greek": "G2580 Κανᾶ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.5.45.11",
+      "text": "נֶגְדְכֶם",
+      "strong": "H5048",
+      "shown": "in front of, before, opposite; against.",
+      "greek": "G1473 ἐγώ",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "john.5.45.5",
+      "text": "נֶגְדְכֶם",
+      "strong": "H5048",
+      "shown": "in front of, before, opposite; against.",
+      "greek": "G1473 ἐγώ",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "john.6.1.6",
+      "text": "עֵבֶר",
+      "strong": "H5676",
+      "shown": "region across",
+      "greek": "G4008 πέραν",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.6.16.10",
+      "text": "עֵבֶר",
+      "strong": "H5676",
+      "shown": "region across",
+      "greek": "G2281 θάλασσα",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.6.44.7",
+      "text": "יִמְשְׁכֵהוּ",
+      "strong": "H4900",
+      "shown": "draw",
+      "greek": "G1670 ἕλκω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.6.71.7",
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "greek": "G2469 Ἰσκαριώτης, Ἰσκαριώθ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.7.22.6",
+      "text": "מִמּשֶׁה",
+      "strong": "H4872",
+      "shown": "Moses",
+      "greek": "G3475 Μωϋσῆς, Μωσῆς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.7.4.14",
+      "text": "הִגָּלֵה",
+      "strong": "H1540",
+      "shown": "uncover",
+      "greek": "G5319 φανερόω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john.8.48.1",
+      "text": "יַעֲנוּ",
+      "strong": "H6030",
+      "shown": "answer",
+      "greek": "G0611 ἀποκρίνω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john1.2.13.6",
+      "text": "הִכַּרְתֶּם",
+      "strong": "D0910",
+      "shown": "recognize, know, acknowledge; regard persons; in the piel, disown.",
+      "greek": "G1097 γινώσκω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "john1.2.3.3",
+      "text": "הִכַּרְנוּ",
+      "strong": "D0910",
+      "shown": "recognize, know, acknowledge; regard persons; in the piel, disown.",
+      "greek": "G1097 γινώσκω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "john1.3.20.8",
+      "text": "מִלְּבָבֵנוּ",
+      "strong": "H3824",
+      "shown": "inner man",
+      "greek": "G2588 καρδία",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john1.3.3.3",
+      "text": "תִּקְוָה",
+      "strong": "H8615",
+      "shown": "hope",
+      "greek": "G1680 ἐλπίς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "john2.1.12.18",
+      "text": "שִׂמְחָתֵנוּ",
+      "strong": "H8057",
+      "shown": "joy",
+      "greek": "G5479 χαρά",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "jude.1.6.10",
+      "text": "זְבֻלָם",
+      "strong": "H2073",
+      "shown": "lofty abode, habitation.",
+      "greek": "G3613 οἰκητήριον",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "luke.1.13.16",
+      "text": "יוֹחָנָן׃",
+      "strong": "D0708",
+      "shown": "John; Yohanan, a name borne in the New Testament by John the Baptist, the apostle John son of Zebedee, John Mark, and others.",
+      "greek": "G2491G Ἰωάννης",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.1.13.7",
+      "text": "נִשְׁמְעָה",
+      "strong": "H8085",
+      "shown": "hear",
+      "greek": "G1522 εἰσακούω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.1.54.0",
+      "text": "תָּמַךְ",
+      "strong": "H8551",
+      "shown": "grasp, hold; uphold, support.",
+      "greek": "G0482 ἀντιλαμβάνω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "luke.10.38.9",
+      "text": "מָרְתָא",
+      "strong": "D0210",
+      "shown": "Martha; sister of Mary and Lazarus of Bethany.",
+      "greek": "G3136 Μάρθα",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.10.40.19",
+      "text": "וְתַעֲזָר־",
+      "strong": "H5826",
+      "shown": "help",
+      "greek": "G4878 συναντιλαμβάνομαι",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.11.14.11",
+      "text": "הָאִלֵּם",
+      "strong": "H483",
+      "shown": "dumb",
+      "greek": "G2974 κωφός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.11.29.7",
+      "text": "דּוֹר",
+      "strong": "H1755",
+      "shown": "generation; age, period; dwelling.",
+      "greek": "G1074 γενεά",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.11.33.2",
+      "text": "נֵר",
+      "strong": "H5216",
+      "shown": "lamp",
+      "greek": "G3088 λύχνος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.11.34.0",
+      "text": "נֵר",
+      "strong": "H5216",
+      "shown": "lamp",
+      "greek": "G3088 λύχνος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.11.36.16",
+      "text": "הַנֵּר",
+      "strong": "H5216",
+      "shown": "lamp",
+      "greek": "G3088 λύχνος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.11.43.11",
+      "text": "שֶׁאֱלוֹת",
+      "strong": "H7596",
+      "shown": "request",
+      "greek": "G0783 ἀσπασμός",
+      "verdict": "fits: the Hebrew phrase asking of peace renders greeting"
+    },
+    {
+      "location": "luke.11.44.11",
+      "text": "מִתְהַלְּכִים",
+      "strong": "H1980",
+      "shown": "go",
+      "greek": "G4043 περιπατέω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.11.46.19",
+      "text": "בַּמַּשָּׂאוֹת",
+      "strong": "H4853",
+      "shown": "load, burden, lifting, bearing, tribute",
+      "greek": "G5413 φορτίον",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.11.5.19",
+      "text": "לָחֶם׃",
+      "strong": "H3899",
+      "shown": "bread",
+      "greek": "G0740 ἄρτος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.12.6.3",
+      "text": "תִּמָּכַרְנָה",
+      "strong": "H4376",
+      "shown": "sell",
+      "greek": "G4453 πωλέω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.13.18.7",
+      "text": "אַמְשִׁילֶנָּה׃",
+      "strong": "H4911",
+      "shown": "represent",
+      "greek": "G3666 ὁμοιόω",
+      "verdict": "fits: the Hebrew verb מָשַׁל, represent or liken, renders ὁμοιόω"
+    },
+    {
+      "location": "luke.13.19.3",
+      "text": "שֶׁל־",
+      "strong": "H7945",
+      "shown": "who",
+      "greek": "G3588 ὁ",
+      "verdict": "fits: the Hebrew relative ש renders the article and pronoun"
+    },
+    {
+      "location": "luke.14.26.17",
+      "text": "אַחְיֹתָיו",
+      "strong": "H269",
+      "shown": "sister",
+      "greek": "G0079 ἀδελφή",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.14.27.4",
+      "text": "צְלָבוֹ",
+      "strong": "D0058",
+      "shown": "cross; instrument of crucifixion.",
+      "greek": "G4716 σταυρός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.14.31.4",
+      "text": "הַקָּם",
+      "strong": "H6965",
+      "shown": "arise",
+      "greek": "G0935 βασιλεύς",
+      "verdict": "fits: the Hebrew verb קוּם, arise, renders rise against"
+    },
+    {
+      "location": "luke.14.9.6",
+      "text": "פַּנֵּה",
+      "strong": "H6437",
+      "shown": "turn",
+      "greek": "G1325 δίδωμι",
+      "verdict": "fits: the Hebrew verb פָּנָה, turn, in the piel clear, renders give place"
+    },
+    {
+      "location": "luke.15.14.12",
+      "text": "לָחֶם׃",
+      "strong": "H3899",
+      "shown": "bread",
+      "greek": "G3042 λιμός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.15.8.13",
+      "text": "נֵר",
+      "strong": "H5216",
+      "shown": "lamp",
+      "greek": "G3088 λύχνος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.16.2.9",
+      "text": "חֶשְׁבּוֹן",
+      "strong": "H2808",
+      "shown": "reckoning",
+      "greek": "G3056 λόγος",
+      "verdict": "fits: the Hebrew noun חֶשְׁבּוֹן, reckoning, renders λόγος in give an account"
+    },
+    {
+      "location": "luke.16.24.15",
+      "text": "קָרֵר",
+      "strong": "H7119",
+      "shown": "cool",
+      "greek": "G2711 καταψύχω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.16.26.13",
+      "text": "מִפֹּה",
+      "strong": "H6311",
+      "shown": "here",
+      "greek": "G6033 ἔνθεν",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.17.10.18",
+      "text": "הַמֻּטָּל",
+      "strong": "H5190",
+      "shown": "lift, bear; lay upon, impose.",
+      "greek": "G1299 διατάσσω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "luke.17.24.6",
+      "text": "וְיָאִיר",
+      "strong": "H215",
+      "shown": "be or become light",
+      "greek": "G2989 λάμπω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.18.1.1",
+      "text": "מָשָׁל",
+      "strong": "H4912",
+      "shown": "proverb, parable; byword; discourse.",
+      "greek": "G3850 παραβολή",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "luke.18.31.9",
+      "text": "יְרוּשָׁלָיְמָה",
+      "strong": "H3389",
+      "shown": "Jerusalem",
+      "greek": "G2419 Ἱερουσαλήμ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.19.11.7",
+      "text": "מָשָׁל",
+      "strong": "H4912",
+      "shown": "proverb, parable; byword; discourse.",
+      "greek": "G3850 παραβολή",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "luke.19.16.4",
+      "text": "מָנֶה",
+      "strong": "H4488",
+      "shown": "maneh",
+      "greek": "G3414 μνᾶ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.19.16.5",
+      "text": "שֶׁלְּךָ",
+      "strong": "D0163",
+      "shown": "of; belonging to; that of.",
+      "greek": "G4771 σύ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.19.18.4",
+      "text": "מָנֶה",
+      "strong": "H4488",
+      "shown": "maneh",
+      "greek": "G3414 μνᾶ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.19.18.5",
+      "text": "שֶׁלְּךָ",
+      "strong": "D0163",
+      "shown": "of; belonging to; that of.",
+      "greek": "G4771 σύ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.19.20.5",
+      "text": "מָנֶה",
+      "strong": "H4488",
+      "shown": "maneh",
+      "greek": "G3414 μνᾶ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.19.31.5",
+      "text": "תַתִּירֻהוּ",
+      "strong": "H5425",
+      "shown": "be free",
+      "greek": "G3089 λύω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.19.4.4",
+      "text": "שִׁקְמָה",
+      "strong": "H8256",
+      "shown": "sycomore tree",
+      "greek": "G4809 συκομωραία",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.2.34.15",
+      "text": "מְרִיבָה׃",
+      "strong": "H4808",
+      "shown": "strife",
+      "greek": "G0483 ἀντιλέγω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.2.35.5",
+      "text": "תִּגָּלֶינָה",
+      "strong": "H1540",
+      "shown": "uncover",
+      "greek": "G0601 ἀποκαλύπτω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.2.39.10",
+      "text": "עִירָם׃",
+      "strong": "H5892",
+      "shown": "city",
+      "greek": "G4172 πόλις",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.2.52.5",
+      "text": "וּבְחֵן",
+      "strong": "H2580",
+      "shown": "favour",
+      "greek": "G5485 χάρις",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.20.15.11",
+      "text": "הַכָּרֶם׃",
+      "strong": "H3754",
+      "shown": "vineyard",
+      "greek": "G0290 ἀμπελών",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.20.35.6",
+      "text": "תְּחִיַּת",
+      "strong": "D0168",
+      "shown": "resurrection; coming back to life.",
+      "greek": "G0386 ἀνάστασις",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.21.14.5",
+      "text": "דְאֹג",
+      "strong": "H1672",
+      "shown": "be anxious",
+      "greek": "G4304 προμελετάω",
+      "verdict": "fits: the Hebrew verb דָּאַג, be anxious, renders do not premeditate"
+    },
+    {
+      "location": "luke.21.2.7",
+      "text": "פְרוּטוֹת׃",
+      "strong": "D0540",
+      "shown": "perutah; the smallest copper coin, a mite.",
+      "greek": "G3016 λεπτός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.21.26.3",
+      "text": "מֵאֵימָה",
+      "strong": "H367",
+      "shown": "terror",
+      "greek": "G5401 φόβος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.21.29.2",
+      "text": "מָשָׁל",
+      "strong": "H4912",
+      "shown": "proverb, parable; byword; discourse.",
+      "greek": "G3850 παραβολή",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "luke.21.30.5",
+      "text": "פִּרְחָם",
+      "strong": "H6524",
+      "shown": "bud, sprout, shoot",
+      "greek": "G4261 προβάλλω",
+      "verdict": "fits: the Hebrew verb פָּרַח, bud, renders put forth leaves"
+    },
+    {
+      "location": "luke.21.34.7",
+      "text": "וּבְשִׁכָּרוֹן",
+      "strong": "H7943",
+      "shown": "drunkenness",
+      "greek": "G3178 μέθη",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.21.8.3",
+      "text": "תִּתָּעוּ",
+      "strong": "H8582",
+      "shown": "err",
+      "greek": "G4105 πλανάω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.22.3.5",
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "greek": "G2469 Ἰσκαριώτης, Ἰσκαριώθ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.22.6.3",
+      "text": "תּוֹאֲנָה",
+      "strong": "H8385",
+      "shown": "occasion",
+      "greek": "G2120 εὐκαιρία",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.23.38.8",
+      "text": "וְעִבְרִי",
+      "strong": "H5680",
+      "shown": "Hebrew",
+      "greek": "the SBLGNT lacks the three languages of the inscription; Delitzsch follows the Textus Receptus γράμμασιν Ἑλληνικοῖς καὶ Ῥωμαϊκοῖς καὶ Ἑβραϊκοῖς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.24.27.1",
+      "text": "מִמּשֶׁה",
+      "strong": "H4872",
+      "shown": "Moses",
+      "greek": "G3475 Μωϋσῆς, Μωσῆς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.24.39.15",
+      "text": "וַעֲצָמוֹת",
+      "strong": "H6106",
+      "shown": "bone",
+      "greek": "G3747 ὀστέον",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.24.42.6",
+      "text": "צוּף",
+      "strong": "H6688",
+      "shown": "comb",
+      "greek": "the SBLGNT lacks καὶ ἀπὸ μελισσίου κηρίου; Delitzsch follows the Textus Receptus",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.3.24.1",
+      "text": "מַתָּת",
+      "strong": "D0231",
+      "shown": "Matthat, an ancestor named in Luke's genealogy of Jesus.",
+      "greek": "G3158G Ματθάτ, Μαθθάτ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.3.29.7",
+      "text": "מַתָּת",
+      "strong": "D0231",
+      "shown": "Matthat, an ancestor named in Luke's genealogy of Jesus.",
+      "greek": "G3158H Ματθάτ, Μαθθάτ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.4.27.8",
+      "text": "טֹהַר",
+      "strong": "H2891",
+      "shown": "be clean",
+      "greek": "G2511 καθαρίζω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.4.29.12",
+      "text": "עִירָם",
+      "strong": "H5892",
+      "shown": "city",
+      "greek": "G4172 πόλις",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.4.35.8",
+      "text": "הַשֵּׁד",
+      "strong": "H7700",
+      "shown": "demon",
+      "greek": "G1140 δαιμόνιον",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.4.40.8",
+      "text": "חֳלָיִים",
+      "strong": "H2483",
+      "shown": "sickness",
+      "greek": "G3554 νόσος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.5.5.15",
+      "text": "אוֹרִיד",
+      "strong": "H3381",
+      "shown": "go down, come down, descend; in the hiphil, bring down, let down.",
+      "greek": "G5465 χαλάω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "luke.5.7.9",
+      "text": "וּלְעָזְרָם",
+      "strong": "H5826",
+      "shown": "help",
+      "greek": "G4815 συλλαμβάνω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.6.15.7",
+      "text": "חַלְפַי",
+      "strong": "D0113",
+      "shown": "Alphaeus; father of James named among the apostles.",
+      "greek": "G0256 Ἀλφαῖος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.6.16.7",
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "greek": "G2469 Ἰσκαριώτης, Ἰσκαριώθ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.6.17.22",
+      "text": "מֵחָלְיֵיהֶם׃",
+      "strong": "H2483",
+      "shown": "sickness",
+      "greek": "the SBLGNT places ἰαθῆναι ἀπὸ τῶν νόσων αὐτῶν in verse 18",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.6.49.19",
+      "text": "שֶׁבֶר",
+      "strong": "H7667",
+      "shown": "breaking",
+      "greek": "G4485 ῥῆγμα",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.7.22.6",
+      "text": "לְיוֹחָנָן",
+      "strong": "D0708",
+      "shown": "John; Yohanan, a name borne in the New Testament by John the Baptist, the apostle John son of Zebedee, John Mark, and others.",
+      "greek": "G2491G Ἰωάννης",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.7.28.9",
+      "text": "מִיּוֹחָנָן",
+      "strong": "D0708",
+      "shown": "John; Yohanan, a name borne in the New Testament by John the Baptist, the apostle John son of Zebedee, John Mark, and others.",
+      "greek": "G2491G Ἰωάννης",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.7.29.9",
+      "text": "יוֹחָנָן׃",
+      "strong": "D0708",
+      "shown": "John; Yohanan, a name borne in the New Testament by John the Baptist, the apostle John son of Zebedee, John Mark, and others.",
+      "greek": "G2491G Ἰωάννης",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.8.22.11",
+      "text": "עֵבֶר",
+      "strong": "H5676",
+      "shown": "region across",
+      "greek": "G4008 πέραν",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.8.29.11",
+      "text": "חָטַף",
+      "strong": "H2414",
+      "shown": "catch",
+      "greek": "G4884 συναρπάζω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.8.49.11",
+      "text": "תַּטְרִיחַ",
+      "strong": "H2959",
+      "shown": "toil",
+      "greek": "G4660 σκύλλω",
+      "verdict": "fits: the Hebrew verb טָרַח, toil, renders trouble"
+    },
+    {
+      "location": "luke.8.51.11",
+      "text": "וּלְיוֹחָנָן",
+      "strong": "D0708",
+      "shown": "John; Yohanan, a name borne in the New Testament by John the Baptist, the apostle John son of Zebedee, John Mark, and others.",
+      "greek": "G2491H Ἰωάννης",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.9.12.2",
+      "text": "לַעֲרֹב",
+      "strong": "H6150",
+      "shown": "become evening",
+      "greek": "G2827 κλίνω",
+      "verdict": "fits: the Hebrew verb עָרַב, become evening, renders the day began to decline"
+    },
+    {
+      "location": "luke.9.36.13",
+      "text": "מִכֹּל",
+      "strong": "H3605",
+      "shown": "the whole",
+      "greek": "G3762 οὐδείς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.9.38.5",
+      "text": "צֹעֵק",
+      "strong": "H6817",
+      "shown": "cry",
+      "greek": "G0994 βοάω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.9.41.4",
+      "text": "דּוֹר",
+      "strong": "H1755",
+      "shown": "generation; age, period; dwelling.",
+      "greek": "G1074 γενεά",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.9.42.5",
+      "text": "הַשֵּׁד",
+      "strong": "H7700",
+      "shown": "demon",
+      "greek": "G1140 δαιμόνιον",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "luke.9.58.5",
+      "text": "חוֹרֵי",
+      "strong": "H2356",
+      "shown": "hole",
+      "greek": "G5454 φωλεός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.1.34.5",
+      "text": "חֳלָיִים",
+      "strong": "H2483",
+      "shown": "sickness",
+      "greek": "G3554 νόσος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.1.8.5",
+      "text": "יִטְבֹּל",
+      "strong": "H2881",
+      "shown": "dip",
+      "greek": "G0907 βαπτίζω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.10.21.9",
+      "text": "מְכֹר",
+      "strong": "H4376",
+      "shown": "sell",
+      "greek": "G4453 πωλέω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.10.6.2",
+      "text": "הַבְּרִיאָה",
+      "strong": "H1278",
+      "shown": "a creation",
+      "greek": "G2937 κτίσις",
+      "verdict": "fits: the Hebrew is a new creation, בְּרִיאָה, which renders κτίσις and παλιγγενεσία"
+    },
+    {
+      "location": "mark.11.2.6",
+      "text": "מִמּוּלְכֶם",
+      "strong": "H4136",
+      "shown": "front; in front of, opposite; with מִן, from before or across from.",
+      "greek": "G2713 κατέναντι",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.11.5.11",
+      "text": "הָעָיִר׃",
+      "strong": "H5895",
+      "shown": "male ass",
+      "greek": "G4454 πῶλος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.12.1.13",
+      "text": "וַיִּבֶן",
+      "strong": "H1129",
+      "shown": "build",
+      "greek": "G3618 οἰκοδομέω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.12.2.9",
+      "text": "הַכָּרֶם׃",
+      "strong": "H3754",
+      "shown": "vineyard",
+      "greek": "G0290 ἀμπελών",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.12.9.4",
+      "text": "הַכָּרֶם",
+      "strong": "H3754",
+      "shown": "vineyard",
+      "greek": "G0290 ἀμπελών",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.13.18.5",
+      "text": "מְנוּסַתְכֶם",
+      "strong": "H4499",
+      "shown": "flight",
+      "greek": "the SBLGNT lacks ἡ φυγὴ ὑμῶν in Mark 13:18; Delitzsch follows the Textus Receptus",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.14.10.2",
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "greek": "G2469 Ἰσκαριώτης, Ἰσκαριώθ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.15.11.6",
+      "text": "פְּטֹר",
+      "strong": "H6362",
+      "shown": "set free, release, dismiss; separate, escape.",
+      "greek": "G0630G ἀπολύω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "mark.16.15.10",
+      "text": "הַבְּרִיאָה׃",
+      "strong": "H1278",
+      "shown": "a creation",
+      "greek": "the SBLGNT edition here lacks Mark 16:9-20; TR πάσῃ τῇ κτίσει",
+      "verdict": "fits: the Hebrew is a new creation, בְּרִיאָה, which renders κτίσις and παλιγγενεσία"
+    },
+    {
+      "location": "mark.16.20.8",
+      "text": "עֲזָרָם",
+      "strong": "H5826",
+      "shown": "help",
+      "greek": "the SBLGNT edition here lacks Mark 16:9-20; TR τοῦ κυρίου συνεργοῦντος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.3.18.14",
+      "text": "חַלְפַי",
+      "strong": "D0113",
+      "shown": "Alphaeus; father of James named among the apostles.",
+      "greek": "G0256 Ἀλφαῖος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.3.19.3",
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "greek": "G2469 Ἰσκαριώτης, Ἰσκαριώθ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.3.20.12",
+      "text": "לָחֶם׃",
+      "strong": "H3899",
+      "shown": "bread",
+      "greek": "G0740 ἄρτος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.4.30.8",
+      "text": "מָשָׁל",
+      "strong": "H4912",
+      "shown": "proverb, parable; byword; discourse.",
+      "greek": "G3850 παραβολή",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "mark.4.34.1",
+      "text": "מָשָׁל",
+      "strong": "H4912",
+      "shown": "proverb, parable; byword; discourse.",
+      "greek": "G3850 παραβολή",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "mark.4.35.8",
+      "text": "עֵבֶר",
+      "strong": "H5676",
+      "shown": "region across",
+      "greek": "G4008 πέραν",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.5.1.2",
+      "text": "עֵבֶר",
+      "strong": "H5676",
+      "shown": "region across",
+      "greek": "G4008 πέραν",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.5.11.0",
+      "text": "וְעֵדֶר",
+      "strong": "H5739",
+      "shown": "flock",
+      "greek": "G0034 ἀγέλη",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.5.21.5",
+      "text": "עֵבֶר",
+      "strong": "H5676",
+      "shown": "region across",
+      "greek": "G4008 πέραν",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.5.37.9",
+      "text": "וּלְיוֹחָנָן",
+      "strong": "D0708",
+      "shown": "John; Yohanan, a name borne in the New Testament by John the Baptist, the apostle John son of Zebedee, John Mark, and others.",
+      "greek": "G2491H Ἰωάννης",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.6.45.9",
+      "text": "עֵבֶר",
+      "strong": "H5676",
+      "shown": "region across",
+      "greek": "G4008 πέραν",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.7.12.1",
+      "text": "תַנִּיחוּ",
+      "strong": "H3240",
+      "shown": "lay down; place; leave.",
+      "greek": "G0863I ἀφίημι",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.8.13.7",
+      "text": "עֵבֶר",
+      "strong": "H5676",
+      "shown": "region across",
+      "greek": "G4008 πέραν",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.8.4.11",
+      "text": "לָחֶם׃",
+      "strong": "H3899",
+      "shown": "bread",
+      "greek": "G0740 ἄρτος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.9.19.4",
+      "text": "דּוֹר",
+      "strong": "H1755",
+      "shown": "generation; age, period; dwelling.",
+      "greek": "G1074 γενεά",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.9.24.10",
+      "text": "עֲזָר־",
+      "strong": "H5826",
+      "shown": "help",
+      "greek": "G0997 βοηθέω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "mark.9.43.8",
+      "text": "קִטֵּעַ",
+      "strong": "D0091",
+      "shown": "maimed; having a limb cut off.",
+      "greek": "G2948 κυλλός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.1.18.7",
+      "text": "אֹרְשָׂה",
+      "strong": "H781",
+      "shown": "betroth",
+      "greek": "G3423 μνηστεύω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.1.3.14",
+      "text": "רָם׃",
+      "strong": "H7410",
+      "shown": "Ram; son of Hezron, ancestor of David and of Jesus; also other men of this name.",
+      "greek": "G0689 Ἀράμ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.1.9.11",
+      "text": "יְחִזְקִיָּהוּ׃",
+      "strong": "H3169",
+      "shown": "Hezekiah; king of Judah in Matthew’s genealogy.",
+      "greek": "G1478 Ἐζεκίας",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.10.35.4",
+      "text": "מֵאָבִיו",
+      "strong": "H1",
+      "shown": "father",
+      "greek": "G3962 πατήρ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.10.4.4",
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "greek": "G2469 Ἰσκαριώτης, Ἰσκαριώθ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.11.11.10",
+      "text": "מִיּוֹחָנָן",
+      "strong": "D0708",
+      "shown": "John; Yohanan, a name borne in the New Testament by John the Baptist, the apostle John son of Zebedee, John Mark, and others.",
+      "greek": "G2491G Ἰωάννης",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.11.17.5",
+      "text": "קוֹנַנּוּ",
+      "strong": "H6969",
+      "shown": "to chant a dirge; to lament, wail.",
+      "greek": "G2354 θρηνέω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.11.17.9",
+      "text": "סְפַדְתֶּם׃",
+      "strong": "H5594",
+      "shown": "wail",
+      "greek": "G2875 κόπτω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.11.30.5",
+      "text": "מַשָּׂאִי׃",
+      "strong": "H4853",
+      "shown": "load, burden, lifting, bearing, tribute",
+      "greek": "G5413 φορτίον",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.11.4.6",
+      "text": "לְיוֹחָנָן",
+      "strong": "D0708",
+      "shown": "John; Yohanan, a name borne in the New Testament by John the Baptist, the apostle John son of Zebedee, John Mark, and others.",
+      "greek": "G2491G Ἰωάννης",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.12.16.4",
+      "text": "יְגַלֻּהוּ׃",
+      "strong": "H1540",
+      "shown": "uncover",
+      "greek": "G5318 φανερός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.12.18.1",
+      "text": "עַבְדִּי",
+      "strong": "H5650",
+      "shown": "slave",
+      "greek": "G3816 παῖς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.12.36.12",
+      "text": "חֶשְׁבּוֹן",
+      "strong": "H2808",
+      "shown": "reckoning",
+      "greek": "G3056 λόγος",
+      "verdict": "fits: the Hebrew noun חֶשְׁבּוֹן, reckoning, renders λόγος in give an account"
+    },
+    {
+      "location": "matthew.12.39.3",
+      "text": "דּוֹר",
+      "strong": "H1755",
+      "shown": "generation; age, period; dwelling.",
+      "greek": "G1074 γενεά",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.12.42.1",
+      "text": "תֵּימָן",
+      "strong": "H8486",
+      "shown": "south",
+      "greek": "G3558H νότος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.13.24.2",
+      "text": "מָשָׁל",
+      "strong": "H4912",
+      "shown": "proverb, parable; byword; discourse.",
+      "greek": "G3850 παραβολή",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "matthew.13.31.2",
+      "text": "מָשָׁל",
+      "strong": "H4912",
+      "shown": "proverb, parable; byword; discourse.",
+      "greek": "G3850 παραβολή",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "matthew.13.34.9",
+      "text": "מָשָׁל",
+      "strong": "H4912",
+      "shown": "proverb, parable; byword; discourse.",
+      "greek": "G3850 παραβολή",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "matthew.14.22.8",
+      "text": "עֵבֶר",
+      "strong": "H5676",
+      "shown": "region across",
+      "greek": "G4008 πέραν",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.15.14.2",
+      "text": "מְנַהֲלִים",
+      "strong": "H5095",
+      "shown": "lead",
+      "greek": "G3595 ὁδηγός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.15.2.13",
+      "text": "לָחֶם׃",
+      "strong": "H3899",
+      "shown": "bread",
+      "greek": "G0740 ἄρτος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.16.24.13",
+      "text": "צְלָבוֹ",
+      "strong": "D0058",
+      "shown": "cross; instrument of crucifixion.",
+      "greek": "G4716 σταυρός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.16.4.0",
+      "text": "דּוֹר",
+      "strong": "H1755",
+      "shown": "generation; age, period; dwelling.",
+      "greek": "G1074 γενεά",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.16.5.3",
+      "text": "עֵבֶר",
+      "strong": "H5676",
+      "shown": "region across",
+      "greek": "G4008 πέραν",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.16.5.8",
+      "text": "לָחֶם׃",
+      "strong": "H3899",
+      "shown": "bread",
+      "greek": "G0740 ἄρτος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.16.7.7",
+      "text": "לָחֶם׃",
+      "strong": "H3899",
+      "shown": "bread",
+      "greek": "G0740 ἄρτος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.16.8.13",
+      "text": "לָחֶם׃",
+      "strong": "H3899",
+      "shown": "bread",
+      "greek": "G0740 ἄρτος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.17.17.4",
+      "text": "דּוֹר",
+      "strong": "H1755",
+      "shown": "generation; age, period; dwelling.",
+      "greek": "G1074 γενεά",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.18.23.11",
+      "text": "חֶשְׁבּוֹן",
+      "strong": "H2808",
+      "shown": "reckoning",
+      "greek": "G3056 λόγος",
+      "verdict": "fits: the Hebrew noun חֶשְׁבּוֹן, reckoning, renders λόγος in give an account"
+    },
+    {
+      "location": "matthew.18.8.5",
+      "text": "קַצֵּץ",
+      "strong": "H7112",
+      "shown": "cut off",
+      "greek": "G1581 ἐκκόπτω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.18.9.3",
+      "text": "נַקֵּר",
+      "strong": "H5365",
+      "shown": "bore, pick out, gouge out.",
+      "greek": "G1807 ἐξαιρέω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "matthew.19.25.3",
+      "text": "הִשְׁתּוֹמְמוּ",
+      "strong": "H8074",
+      "shown": "be desolate; be appalled, be astonished.",
+      "greek": "G1605 ἐκπλήσσω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "matthew.19.28.11",
+      "text": "הַבְּרִיאָה",
+      "strong": "H1278",
+      "shown": "a creation",
+      "greek": "G3824 παλιγγενεσία",
+      "verdict": "fits: the Hebrew is a new creation, בְּרִיאָה, which renders κτίσις and παλιγγενεσία"
+    },
+    {
+      "location": "matthew.20.1.8",
+      "text": "הִשְׁכִּים",
+      "strong": "H7925",
+      "shown": "rise early; start early, do early.",
+      "greek": "G4404 πρωΐ",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "matthew.20.14.2",
+      "text": "שֶׁלְּךָ",
+      "strong": "H7945",
+      "shown": "who",
+      "greek": "G4771 σύ",
+      "verdict": "fits: the Hebrew relative ש renders the article and pronoun"
+    },
+    {
+      "location": "matthew.20.18.2",
+      "text": "יְרוּשָׁלָיְמָה",
+      "strong": "H3389",
+      "shown": "Jerusalem",
+      "greek": "G2414 Ἱεροσόλυμα",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.20.22.8",
+      "text": "הֲיָכֹל",
+      "strong": "H3201",
+      "shown": "be able",
+      "greek": "G1410 δύναμαι",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.21.12.18",
+      "text": "מֹכְרֵי",
+      "strong": "H4376",
+      "shown": "sell",
+      "greek": "G4453 πωλέω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.21.33.0",
+      "text": "מָשָׁל",
+      "strong": "H4912",
+      "shown": "proverb, parable; byword; discourse.",
+      "greek": "G3850 παραβολή",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "matthew.21.33.16",
+      "text": "וַיִּבֶן",
+      "strong": "H1129",
+      "shown": "build",
+      "greek": "G3618 οἰκοδομέω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.22.23.8",
+      "text": "תְּחִיַּת",
+      "strong": "D0168",
+      "shown": "resurrection; coming back to life.",
+      "greek": "G0386 ἀνάστασις",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.22.40.5",
+      "text": "תְּלוּיָה",
+      "strong": "H8518",
+      "shown": "hang",
+      "greek": "G2910 κρεμάω",
+      "verdict": "fits: the Hebrew verb תָּלָה, hang, renders depend on"
+    },
+    {
+      "location": "matthew.22.46.3",
+      "text": "לַעֲנוֹת",
+      "strong": "H6030",
+      "shown": "answer",
+      "greek": "G0611 ἀποκρίνω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.22.7.9",
+      "text": "עִירָם",
+      "strong": "H5892",
+      "shown": "city",
+      "greek": "G4172 πόλις",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.23.10.3",
+      "text": "מַנְהִיגִים",
+      "strong": "H5090",
+      "shown": "drive, lead, guide.",
+      "greek": "G2519 καθηγητής",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "matthew.23.32.3",
+      "text": "סְאַת",
+      "strong": "H5429",
+      "shown": "sᵉ’āh",
+      "greek": "G3358 μέτρον",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.23.4.6",
+      "text": "שְׁכֶם",
+      "strong": "H7926",
+      "shown": "shoulder",
+      "greek": "G5606 ὦμος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.24.20.3",
+      "text": "מְנוּסַתְכֶם",
+      "strong": "H4499",
+      "shown": "flight",
+      "greek": "G5437 φυγή",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.25.19.8",
+      "text": "חֶשְׁבּוֹן",
+      "strong": "H2808",
+      "shown": "reckoning",
+      "greek": "G3056 λόγος",
+      "verdict": "fits: the Hebrew noun חֶשְׁבּוֹן, reckoning, renders λόγος in give an account"
+    },
+    {
+      "location": "matthew.25.7.7",
+      "text": "נֵרוֹתֵיהֶן׃",
+      "strong": "H5216",
+      "shown": "lamp",
+      "greek": "G2985 λαμπάς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.26.14.7",
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "greek": "G2469 Ἰσκαριώτης, Ἰσκαριώθ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.26.36.8",
+      "text": "גַּת־",
+      "strong": "D0201",
+      "shown": "Gethsemane; place on the Mount of Olives where Jesus prayed before his arrest.",
+      "greek": "G1068 Γεθσημανῆ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.26.52.10",
+      "text": "אֹחֲזֵי",
+      "strong": "H270",
+      "shown": "grasp",
+      "greek": "G2983 λαμβάνω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.27.18.4",
+      "text": "מִקִּנְאָה",
+      "strong": "H7068",
+      "shown": "jealousy, envy, zeal; ardour.",
+      "greek": "G5355 φθόνος",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "matthew.27.6.14",
+      "text": "מְחִיר",
+      "strong": "H4242",
+      "shown": "price",
+      "greek": "G5092 τιμή",
+      "verdict": "fits: the Hebrew phrase without price renders freely"
+    },
+    {
+      "location": "matthew.27.60.4",
+      "text": "חָצַב־",
+      "strong": "H2672",
+      "shown": "hew",
+      "greek": "G2998 λατομέω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.28.6.7",
+      "text": "רְאֶינָה",
+      "strong": "H7200",
+      "shown": "To see, literally or figuratively (in numerous applications, direct and implied, transitive, intransitive and causative)",
+      "greek": "G1492H εἴδω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.3.7.10",
+      "text": "יַלְדֵי",
+      "strong": "H3206",
+      "shown": "child",
+      "greek": "G1081G γέννημα",
+      "verdict": "fits: the Hebrew noun יֶלֶד, child, renders brood"
+    },
+    {
+      "location": "matthew.4.15.6",
+      "text": "עֵבֶר",
+      "strong": "H5676",
+      "shown": "region across",
+      "greek": "G4008 πέραν",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.5.15.3",
+      "text": "נֵר",
+      "strong": "H5216",
+      "shown": "lamp",
+      "greek": "G3088 λύχνος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.5.19.14",
+      "text": "קָטוֹן",
+      "strong": "H6996",
+      "shown": "small, young, unimportant",
+      "greek": "G1646 ἐλάχιστος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.6.16.10",
+      "text": "צָמִים",
+      "strong": "H6684",
+      "shown": "abstain from food",
+      "greek": "G3522 νηστεύω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.6.22.0",
+      "text": "נֵר",
+      "strong": "H5216",
+      "shown": "lamp",
+      "greek": "G3088 λύχνος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.6.27.10",
+      "text": "אֶחַת׃",
+      "strong": "H259",
+      "shown": "one",
+      "greek": "G1520 εἷς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.8.18.11",
+      "text": "עֵבֶר",
+      "strong": "H5676",
+      "shown": "region across",
+      "greek": "G4008 πέραν",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.8.28.3",
+      "text": "עֵבֶר",
+      "strong": "H5676",
+      "shown": "region across",
+      "greek": "G4008 πέραν",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "matthew.8.30.0",
+      "text": "וְעֵדֶר",
+      "strong": "H5739",
+      "shown": "flock",
+      "greek": "G0034 ἀγέλη",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "peter1.1.21.16",
+      "text": "תִּקְוָה",
+      "strong": "H8615",
+      "shown": "hope",
+      "greek": "G1680 ἐλπίς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "peter1.1.4.3",
+      "text": "תִשָּׁחֵת",
+      "strong": "H7843",
+      "shown": "go to ruin",
+      "greek": "G0862 ἄφθαρτος",
+      "verdict": "fits: the Hebrew verb שָׁחַת, go to ruin, renders harm and corruption"
+    },
+    {
+      "location": "peter1.2.1.6",
+      "text": "מִרְמָה",
+      "strong": "H4820",
+      "shown": "deceit",
+      "greek": "G1388 δόλος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "peter1.2.22.5",
+      "text": "מִרְמָה",
+      "strong": "H4820",
+      "shown": "deceit",
+      "greek": "G1388 δόλος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "peter1.3.10.13",
+      "text": "מִרְמָה",
+      "strong": "H4820",
+      "shown": "deceit",
+      "greek": "G1388 δόλος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "peter1.3.15.16",
+      "text": "חֶשְׁבּוֹן",
+      "strong": "H2808",
+      "shown": "reckoning",
+      "greek": "G3056 λόγος",
+      "verdict": "fits: the Hebrew noun חֶשְׁבּוֹן, reckoning, renders λόγος in give an account"
+    },
+    {
+      "location": "peter1.4.12.11",
+      "text": "קָרָה",
+      "strong": "H7136",
+      "shown": "encounter, meet, befall",
+      "greek": "G4819 συμβαίνω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "peter1.4.5.2",
+      "text": "חֶשְׁבּוֹן",
+      "strong": "H2808",
+      "shown": "reckoning",
+      "greek": "G3056 λόγος",
+      "verdict": "fits: the Hebrew noun חֶשְׁבּוֹן, reckoning, renders λόγος in give an account"
+    },
+    {
+      "location": "peter2.1.19.14",
+      "text": "נֵר",
+      "strong": "H5216",
+      "shown": "lamp",
+      "greek": "G3088 λύχνος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "peter2.1.20.8",
+      "text": "תְלוּיָה",
+      "strong": "H8518",
+      "shown": "hang",
+      "greek": "G1955 ἐπίλυσις",
+      "verdict": "fits: the Hebrew verb תָּלָה, hang, renders depend on"
+    },
+    {
+      "location": "peter2.1.4.11",
+      "text": "יָדָן",
+      "strong": "H3027",
+      "shown": "hand",
+      "greek": "G5449 φύσις",
+      "verdict": "fits: the Hebrew phrase takes upon the hand, יָדָן, renders sharing in the divine nature"
+    },
+    {
+      "location": "peter2.1.4.16",
+      "text": "מִכִּלְיוֹן",
+      "strong": "H3631",
+      "shown": "failing",
+      "greek": "G5356 φθορά",
+      "verdict": "fits: the Hebrew noun כִּלָּיוֹן, failing or annihilation, renders corruption"
+    },
+    {
+      "location": "peter2.1.4.17",
+      "text": "הַתַּאֲוָה",
+      "strong": "H8378",
+      "shown": "desire",
+      "greek": "G1939 ἐπιθυμία",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "peter2.2.5.17",
+      "text": "דּוֹר",
+      "strong": "H1755",
+      "shown": "generation; age, period; dwelling.",
+      "greek": "G2889 κόσμος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "peter2.3.4.11",
+      "text": "הַבְּרִיאָה׃",
+      "strong": "H1278",
+      "shown": "a creation",
+      "greek": "G2937 κτίσις",
+      "verdict": "fits: the Hebrew is a new creation, בְּרִיאָה, which renders κτίσις and παλιγγενεσία"
+    },
+    {
+      "location": "philippians.1.13.3",
+      "text": "מוֹסְרוֹתַי",
+      "strong": "H4147",
+      "shown": "band",
+      "greek": "G1199 δεσμός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "philippians.1.16.13",
+      "text": "מוֹסֵרָי׃",
+      "strong": "H4147",
+      "shown": "band",
+      "greek": "the SBLGNT reads τοῖς δεσμοῖς μου in verse 17; Delitzsch follows the Textus Receptus order of verses 16 and 17",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "philippians.1.18.10",
+      "text": "יֻגַּד",
+      "strong": "H5046",
+      "shown": "tell, declare, make known; be told.",
+      "greek": "G2605 καταγγέλλω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "philippians.1.19.8",
+      "text": "וּבְעֶזְרַת",
+      "strong": "H5833",
+      "shown": "help",
+      "greek": "G2024 ἐπιχορηγία",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "philippians.2.15.10",
+      "text": "דּוֹר",
+      "strong": "H1755",
+      "shown": "generation; age, period; dwelling.",
+      "greek": "G1074 γενεά",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "philippians.2.15.11",
+      "text": "עִקֵּשׁ",
+      "strong": "H6141",
+      "shown": "twisted",
+      "greek": "G4646 σκολιός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "philippians.3.5.10",
+      "text": "עִבְרִי",
+      "strong": "H5680",
+      "shown": "Hebrew",
+      "greek": "G1445 Ἑβραῖος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "philippians.4.12.15",
+      "text": "לְהוֹתִיר",
+      "strong": "H3498",
+      "shown": "remain over",
+      "greek": "G4052 περισσεύω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "philippians.4.7.5",
+      "text": "יִנְצֹר",
+      "strong": "H5341",
+      "shown": "keep, guard, watch over.",
+      "greek": "G5432 φρουρέω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "revelation.1.1.21",
+      "text": "יוֹחָנָן׃",
+      "strong": "D0708",
+      "shown": "John; Yohanan, a name borne in the New Testament by John the Baptist, the apostle John son of Zebedee, John Mark, and others.",
+      "greek": "G2491H Ἰωάννης",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.14.19.12",
+      "text": "בְּגַת־",
+      "strong": "H1660",
+      "shown": "wine-press",
+      "greek": "G3025 ληνός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.14.8.16",
+      "text": "תַּזְנֻתָהּ׃",
+      "strong": "H8457",
+      "shown": "fornication",
+      "greek": "G4202 πορνεία",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.15.8.2",
+      "text": "עָשָׁן",
+      "strong": "H6227",
+      "shown": "smoke",
+      "greek": "G2586 καπνός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.16.12.17",
+      "text": "שָׁמֶשׁ׃",
+      "strong": "H8121",
+      "shown": "sun",
+      "greek": "G2246 ἥλιος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.18.13.10",
+      "text": "וּמִקְנֶה",
+      "strong": "H4735",
+      "shown": "cattle",
+      "greek": "G2934 κτῆνος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.18.17.1",
+      "text": "חֹבֵל",
+      "strong": "H2259",
+      "shown": "sailor",
+      "greek": "G2942 κυβερνήτης",
+      "verdict": "fits: the Hebrew noun חֹבֵל, sailor, renders the shipmaster"
+    },
+    {
+      "location": "revelation.18.18.7",
+      "text": "כָּעִיר",
+      "strong": "H5892",
+      "shown": "city",
+      "greek": "G4172 πόλις",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.18.23.1",
+      "text": "נֵר",
+      "strong": "H5216",
+      "shown": "lamp",
+      "greek": "G3088 λύχνος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.18.23.3",
+      "text": "יָאִיר",
+      "strong": "H215",
+      "shown": "be or become light",
+      "greek": "G5316 φαίνω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.19.17.15",
+      "text": "בִּמְרוֹם",
+      "strong": "H4791",
+      "shown": "height",
+      "greek": "G3321 μεσουράνημα",
+      "verdict": "fits: the Hebrew noun מָרוֹם, height, renders midheaven"
+    },
+    {
+      "location": "revelation.2.14.13",
+      "text": "הוֹרָה",
+      "strong": "H3384",
+      "shown": "throw, shoot; in the hiphil, teach, instruct, point out.",
+      "greek": "G1321 διδάσκω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "revelation.2.22.13",
+      "text": "מִמַּעֲשֵׂיהֶם׃",
+      "strong": "H4639",
+      "shown": "deed",
+      "greek": "G2041 ἔργον",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.20.12.10",
+      "text": "נִפְתָּחִים",
+      "strong": "H6605",
+      "shown": "open",
+      "greek": "G0455 ἀνοίγω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.21.23.12",
+      "text": "וְנֵרָהּ",
+      "strong": "H5216",
+      "shown": "lamp",
+      "greek": "G3088 λύχνος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.21.6.12",
+      "text": "מִמַּעְיַן",
+      "strong": "H4599",
+      "shown": "spring",
+      "greek": "G4077 πηγή",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.21.8.17",
+      "text": "הַבֹּעֵר",
+      "strong": "H1197",
+      "shown": "burn, kindle, consume; be brutish.",
+      "greek": "G2545 καίω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "revelation.22.19.13",
+      "text": "וּמֵעִיר",
+      "strong": "H5892",
+      "shown": "city",
+      "greek": "G4172 πόλις",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.22.5.10",
+      "text": "שָׁמֶשׁ",
+      "strong": "H8121",
+      "shown": "sun",
+      "greek": "G2246 ἥλιος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.22.5.15",
+      "text": "יָאִיר",
+      "strong": "H215",
+      "shown": "be or become light",
+      "greek": "G5461 φωτίζω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.22.5.8",
+      "text": "נֵר",
+      "strong": "H5216",
+      "shown": "lamp",
+      "greek": "G3088 λύχνος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.3.16.10",
+      "text": "אֲקִיאֲךָ",
+      "strong": "H6958",
+      "shown": "vomit up",
+      "greek": "G1692 ἐμέω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.3.4.10",
+      "text": "מַלְבּוּשֵׁיהֶם",
+      "strong": "H4403",
+      "shown": "raiment",
+      "greek": "G2440 ἱμάτιον",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.5.12.13",
+      "text": "וּבְרָכָה׃",
+      "strong": "H1293",
+      "shown": "blessing",
+      "greek": "G2129 εὐλογία",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.6.6.17",
+      "text": "תַּשְׁחֵת׃",
+      "strong": "H7843",
+      "shown": "go to ruin",
+      "greek": "G0091 ἀδικέω",
+      "verdict": "fits: the Hebrew verb שָׁחַת, go to ruin, renders harm and corruption"
+    },
+    {
+      "location": "revelation.7.16.7",
+      "text": "שֶׁמֶשׁ",
+      "strong": "H8121",
+      "shown": "sun",
+      "greek": "G2246 ἥλιος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.8.12.16",
+      "text": "יָאִיר",
+      "strong": "H215",
+      "shown": "be or become light",
+      "greek": "G5316 φαίνω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "revelation.9.2.5",
+      "text": "עָשָׁן",
+      "strong": "H6227",
+      "shown": "smoke",
+      "greek": "G2586 καπνός",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "romans.1.11.2",
+      "text": "נִכְסַפְתִּי",
+      "strong": "H3700",
+      "shown": "long",
+      "greek": "G1971 ἐπιποθέω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "romans.1.29.11",
+      "text": "וּמְרִיבָה",
+      "strong": "H4808",
+      "shown": "strife",
+      "greek": "G2054 ἔρις",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "romans.13.13.6",
+      "text": "וּבְשִׁכָּרוֹן",
+      "strong": "H7943",
+      "shown": "drunkenness",
+      "greek": "G3178 μέθη",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "romans.14.12.8",
+      "text": "חֶשְׁבּוֹן",
+      "strong": "H2808",
+      "shown": "reckoning",
+      "greek": "G3056 λόγος",
+      "verdict": "fits: the Hebrew noun חֶשְׁבּוֹן, reckoning, renders λόγος in give an account"
+    },
+    {
+      "location": "romans.14.20.1",
+      "text": "תַּהֲרוֹס",
+      "strong": "H2040",
+      "shown": "throw down",
+      "greek": "G2647 καταλύω",
+      "verdict": "fits: the Hebrew verb הָרַס, throw down, renders destroy"
+    },
+    {
+      "location": "romans.15.18.2",
+      "text": "אָעֵז",
+      "strong": "H5810",
+      "shown": "be strong, prevail; be bold.",
+      "greek": "G5111 τολμάω",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "romans.15.24.5",
+      "text": "מְקַוֶּה",
+      "strong": "H6960",
+      "shown": "wait for",
+      "greek": "G1679 ἐλπίζω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "romans.15.25.3",
+      "text": "יְרוּשָׁלָיְמָה",
+      "strong": "H3389",
+      "shown": "Jerusalem",
+      "greek": "G2419 Ἱερουσαλήμ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "romans.16.1.8",
+      "text": "מְשַׁמֶּשֶׁת",
+      "strong": "D0402",
+      "shown": "serve, minister; a post-biblical Hebrew verb.",
+      "greek": "G1249 διάκονος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "romans.16.2.5",
+      "text": "וְתַעְזְרוּ",
+      "strong": "H5826",
+      "shown": "help",
+      "greek": "G3936 παρίστημι",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "romans.16.21.1",
+      "text": "חֲבֵרִי",
+      "strong": "H2270",
+      "shown": "companion, associate; united.",
+      "greek": "G4904 συνεργός",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    },
+    {
+      "location": "romans.2.5.4",
+      "text": "תִּצְבֹּר",
+      "strong": "H6651",
+      "shown": "heap up",
+      "greek": "G2343 θησαυρίζω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "romans.4.18.2",
+      "text": "תִּקְוָה",
+      "strong": "H8615",
+      "shown": "hope",
+      "greek": "G1680 ἐλπίς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "romans.5.5.0",
+      "text": "וְהַתִּקְוָה",
+      "strong": "H8615",
+      "shown": "hope",
+      "greek": "G1680 ἐλπίς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "romans.8.19.1",
+      "text": "הַבְּרִיאָה",
+      "strong": "H1278",
+      "shown": "a creation",
+      "greek": "G2937 κτίσις",
+      "verdict": "fits: the Hebrew is a new creation, בְּרִיאָה, which renders κτίσις and παλιγγενεσία"
+    },
+    {
+      "location": "romans.8.20.2",
+      "text": "הַבְּרִיאָה",
+      "strong": "H1278",
+      "shown": "a creation",
+      "greek": "G2937 κτίσις",
+      "verdict": "fits: the Hebrew is a new creation, בְּרִיאָה, which renders κτίσις and παλιγγενεσία"
+    },
+    {
+      "location": "romans.8.21.1",
+      "text": "הַבְּרִיאָה",
+      "strong": "H1278",
+      "shown": "a creation",
+      "greek": "G2937 κτίσις",
+      "verdict": "fits: the Hebrew is a new creation, בְּרִיאָה, which renders κτίσις and παλιγγενεσία"
+    },
+    {
+      "location": "romans.8.22.3",
+      "text": "הַבְּרִיאָה",
+      "strong": "H1278",
+      "shown": "a creation",
+      "greek": "G2937 κτίσις",
+      "verdict": "fits: the Hebrew is a new creation, בְּרִיאָה, which renders κτίσις and παλιγγενεσία"
+    },
+    {
+      "location": "romans.8.31.9",
+      "text": "יָרִיב",
+      "strong": "H7378",
+      "shown": "strive",
+      "greek": "G2596 κατά",
+      "verdict": "fits: the Hebrew verb רִיב, strive, renders lawsuits"
+    },
+    {
+      "location": "romans.8.7.14",
+      "text": "יְכוֹלָה׃",
+      "strong": "H3201",
+      "shown": "be able",
+      "greek": "G1410 δύναμαι",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "romans.9.16.9",
+      "text": "הָרָץ",
+      "strong": "H7323",
+      "shown": "run",
+      "greek": "G5143 τρέχω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "romans.9.29.7",
+      "text": "הוֹתִיר",
+      "strong": "H3498",
+      "shown": "remain over",
+      "greek": "G1459 ἐγκαταλείπω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "romans.9.4.9",
+      "text": "וְהַבְּרִיתוֹת",
+      "strong": "H1285",
+      "shown": "Covenant, agreement, alliance",
+      "greek": "G1242 διαθήκη",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "thessalonians1.2.10.5",
+      "text": "בְקֹדֶשׁ",
+      "strong": "H6944",
+      "shown": "Holiness",
+      "greek": "G3743 ὁσίως",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "thessalonians1.2.19.4",
+      "text": "שִׂמְחָתֵנוּ",
+      "strong": "H8057",
+      "shown": "joy",
+      "greek": "G5479 χαρά",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "thessalonians1.3.6.14",
+      "text": "זֹכְרִים",
+      "strong": "H2142",
+      "shown": "remember",
+      "greek": "G3417 μνεία",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "thessalonians1.4.13.15",
+      "text": "תִּקְוָה׃",
+      "strong": "H8615",
+      "shown": "hope",
+      "greek": "G1680 ἐλπίς",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "thessalonians1.4.17.8",
+      "text": "בַּעֲנָנִים",
+      "strong": "H6051",
+      "shown": "cloud-mass",
+      "greek": "G3507 νεφέλη",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "thessalonians1.4.9.4",
+      "text": "צֹרֶךְ",
+      "strong": "D0063",
+      "shown": "need; require; be obliged.",
+      "greek": "G5532 χρεία",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "thessalonians1.5.3.11",
+      "text": "הֶהָרָה",
+      "strong": "H2030",
+      "shown": "pregnant",
+      "greek": "G1064 γαστήρ",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "thessalonians2.3.6.1",
+      "text": "מְצַוִּים",
+      "strong": "H6680",
+      "shown": "command; charge; appoint.",
+      "greek": "G3853 παραγγέλλω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "timothy1.1.16.2",
+      "text": "רֻחַמְתִּי",
+      "strong": "H7355",
+      "shown": "have compassion; show mercy; love.",
+      "greek": "G1653 ἐλεέω",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "timothy1.3.3.2",
+      "text": "דָּן",
+      "strong": "H1777",
+      "shown": "judge",
+      "greek": "G4131 πλήκτης",
+      "verdict": "fits: the Hebrew phrase דָּן לְכַף זְכוּת, judging favourably, is Delitzsch's rendering of not a striker"
+    },
+    {
+      "location": "timothy1.5.24.5",
+      "text": "גְּלוּיוֹת",
+      "strong": "H1540",
+      "shown": "uncover",
+      "greek": "G4271 πρόδηλος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "timothy1.5.7.5",
+      "text": "דֹפִי׃",
+      "strong": "H1848",
+      "shown": "blemish",
+      "greek": "G0423 ἀνεπίληπτος",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "timothy1.5.8.5",
+      "text": "קְרוֹבָיו",
+      "strong": "H7138",
+      "shown": "near",
+      "greek": "G2398 ἴδιος",
+      "verdict": "fits: the Hebrew noun קָרוֹב, near, renders kinsman"
+    },
+    {
+      "location": "timothy1.6.4.15",
+      "text": "וּמְרִיבָה",
+      "strong": "H4808",
+      "shown": "strife",
+      "greek": "G2054 ἔρις",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "timothy2.3.9.9",
+      "text": "קָרָה",
+      "strong": "H7136",
+      "shown": "encounter, meet, befall",
+      "greek": "G1096 γίνομαι",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "timothy2.4.17.3",
+      "text": "עֲזָרַנִי",
+      "strong": "H5826",
+      "shown": "help",
+      "greek": "G3936 παρίστημι",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "timothy2.4.5.3",
+      "text": "עֵר",
+      "strong": "H5782",
+      "shown": "rouse oneself",
+      "greek": "G3525 νήφω",
+      "verdict": "fits: the Hebrew verb עוּר, rouse oneself, renders be sober and awake"
+    },
+    {
+      "location": "titus.1.10.4",
+      "text": "מְדַבְּרֵי",
+      "strong": "H1696",
+      "shown": "speak",
+      "greek": "G3151 ματαιολόγος",
+      "verdict": "fits: the Hebrew verb is part of the phrase for empty talkers"
+    },
+    {
+      "location": "titus.1.12.4",
+      "text": "נְבִיאָם",
+      "strong": "H5030",
+      "shown": "Prophet, announcer, spokesperson",
+      "greek": "G4396 προφήτης",
+      "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "titus.1.6.4",
+      "text": "וּבַעַל־",
+      "strong": "H1167",
+      "shown": "owner, master, lord; husband; citizen.",
+      "greek": "G0435H ἀνήρ",
+      "verdict": "fixed in round 7: the first gloss now gives the sense the verse uses"
+    }
+  ]
+}

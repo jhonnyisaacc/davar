@@ -38927,34 +38927,6 @@
       "occurrence": {
         "book": "hebrews",
         "chapter": 5,
-        "verse": 12,
-        "word_index": 25,
-        "text": "בָּרִיא׃",
-        "strong": "Hb/H1277",
-        "prefixes": [
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hb/H1277",
-      "new_strong": "H1277",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters ב begin the lemma בריא of H1277, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "בריא",
-        "prefix_letters": "ב",
-        "lemma": "בריא",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "hebrews",
-        "chapter": 5,
         "verse": 14,
         "word_index": 13,
         "text": "בֵּין־",

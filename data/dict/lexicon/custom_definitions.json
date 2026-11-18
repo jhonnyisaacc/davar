@@ -69727,33 +69727,12 @@
         "verse": 20,
         "word_index": 2,
         "text": "אִסְטְפָנוֹס"
-      },
-      {
-        "book": "corinthians1",
-        "chapter": 1,
-        "verse": 16,
-        "word_index": 6,
-        "text": "אִסְטְפָנוֹס"
-      },
-      {
-        "book": "corinthians1",
-        "chapter": 16,
-        "verse": 15,
-        "word_index": 7,
-        "text": "אִסְטְפָנוֹס"
-      },
-      {
-        "book": "corinthians1",
-        "chapter": 16,
-        "verse": 17,
-        "word_index": 3,
-        "text": "אִסְטְפָנוֹס"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 10,
-    "instance_surface_count": 10,
+    "instance_total": 7,
+    "instance_surface_count": 7,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -69862,51 +69841,6 @@
           "text": "אִסְטְפָנוֹס"
         },
         "source_key": "[\"\",null,\"acts\",22,20,null]"
-      },
-      {
-        "book": "corinthians1",
-        "chapter": 1,
-        "verse": 16,
-        "word_index": 6,
-        "text": "אִסְטְפָנוֹס",
-        "source_payload": {
-          "book": "corinthians1",
-          "chapter": 1,
-          "verse": 16,
-          "word_index": 6,
-          "text": "אִסְטְפָנוֹס"
-        },
-        "source_key": "[\"\",null,\"corinthians1\",1,16,null]"
-      },
-      {
-        "book": "corinthians1",
-        "chapter": 16,
-        "verse": 15,
-        "word_index": 7,
-        "text": "אִסְטְפָנוֹס",
-        "source_payload": {
-          "book": "corinthians1",
-          "chapter": 16,
-          "verse": 15,
-          "word_index": 7,
-          "text": "אִסְטְפָנוֹס"
-        },
-        "source_key": "[\"\",null,\"corinthians1\",16,15,null]"
-      },
-      {
-        "book": "corinthians1",
-        "chapter": 16,
-        "verse": 17,
-        "word_index": 3,
-        "text": "אִסְטְפָנוֹס",
-        "source_payload": {
-          "book": "corinthians1",
-          "chapter": 16,
-          "verse": 17,
-          "word_index": 3,
-          "text": "אִסְטְפָנוֹס"
-        },
-        "source_key": "[\"\",null,\"corinthians1\",16,17,null]"
       }
     ],
     "surface_instances": [
@@ -70014,51 +69948,6 @@
           "text": "אִסְטְפָנוֹס"
         },
         "source_key": "[\"\",null,\"acts\",22,20,null]"
-      },
-      {
-        "book": "corinthians1",
-        "chapter": 1,
-        "verse": 16,
-        "word_index": 6,
-        "text": "אִסְטְפָנוֹס",
-        "source_payload": {
-          "book": "corinthians1",
-          "chapter": 1,
-          "verse": 16,
-          "word_index": 6,
-          "text": "אִסְטְפָנוֹס"
-        },
-        "source_key": "[\"\",null,\"corinthians1\",1,16,null]"
-      },
-      {
-        "book": "corinthians1",
-        "chapter": 16,
-        "verse": 15,
-        "word_index": 7,
-        "text": "אִסְטְפָנוֹס",
-        "source_payload": {
-          "book": "corinthians1",
-          "chapter": 16,
-          "verse": 15,
-          "word_index": 7,
-          "text": "אִסְטְפָנוֹס"
-        },
-        "source_key": "[\"\",null,\"corinthians1\",16,15,null]"
-      },
-      {
-        "book": "corinthians1",
-        "chapter": 16,
-        "verse": 17,
-        "word_index": 3,
-        "text": "אִסְטְפָנוֹס",
-        "source_payload": {
-          "book": "corinthians1",
-          "chapter": 16,
-          "verse": 17,
-          "word_index": 3,
-          "text": "אִסְטְפָנוֹס"
-        },
-        "source_key": "[\"\",null,\"corinthians1\",16,17,null]"
       }
     ]
   },
@@ -85215,10 +85104,10 @@
     "is_custom": true,
     "definitions": [
       {
-        "text_en": "Gaius; a believer associated with Paul.",
         "source": "custom",
-        "order": 1,
-        "text_es": "Gayo; creyente asociado con Pablo."
+        "text_en": "Gaius; a name borne by believers associated with Paul: Gaius of Corinth, his host, and his companions from Macedonia and Derbe; also the beloved believer to whom 3 John is addressed.",
+        "text_es": "Gayo; nombre de creyentes asociados con Pablo: Gayo de Corinto, su anfitrión, y sus compañeros de Macedonia y Derbe; también el creyente amado a quien se dirige 3 Juan.",
+        "order": 1
       },
       {
         "text_en": "Gaius; a believer associated with Paul and John.",
@@ -87965,144 +87854,11 @@
         "text": "פִילִפּוֹס"
       },
       {
-        "book": "luke",
-        "chapter": 3,
-        "verse": 19,
-        "word_index": 13,
-        "text": "פִילִפּוֹס"
-      },
-      {
-        "book": "matthew",
-        "chapter": 14,
-        "verse": 3,
-        "word_index": 12,
-        "text": "פִילִפּוֹס"
-      },
-      {
-        "book": "matthew",
-        "chapter": 16,
-        "verse": 13,
-        "word_index": 7,
-        "text": "פִילִפּוֹס"
-      },
-      {
-        "book": "acts",
-        "chapter": 6,
-        "verse": 5,
-        "word_index": 14,
-        "text": "פִילִפּוֹס"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 6,
-        "word_index": 7,
-        "text": "פִילִפּוֹס"
-      },
-      {
-        "book": "acts",
-        "chapter": 21,
-        "verse": 8,
-        "word_index": 11,
-        "text": "פִילִפּוֹס"
-      },
-      {
         "book": "acts",
         "chapter": 1,
         "verse": 13,
         "word_index": 13,
         "text": "פִילִפּוֹס"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 5,
-        "word_index": 0,
-        "text": "וּפִילִפּוֹס"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 12,
-        "word_index": 3,
-        "text": "לְפִילִפּוֹס"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 13,
-        "word_index": 6,
-        "text": "בְּפִילִפּוֹס"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 26,
-        "word_index": 4,
-        "text": "פִילִפּוֹס"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 29,
-        "word_index": 3,
-        "text": "פִילִפּוֹס"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 30,
-        "word_index": 1,
-        "text": "פִילִפּוֹס"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 31,
-        "word_index": 10,
-        "text": "פִילִפּוֹס"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 34,
-        "word_index": 4,
-        "text": "פִילִפּוֹס"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 35,
-        "word_index": 1,
-        "text": "פִילִפּוֹס"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 37,
-        "word_index": 1,
-        "text": "פִילִפּוֹס"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 38,
-        "word_index": 9,
-        "text": "פִילִפּוֹס"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 39,
-        "word_index": 9,
-        "text": "פִילִפּוֹס"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 40,
-        "word_index": 0,
-        "text": "וּפִילִפּוֹס"
       },
       {
         "book": "john",
@@ -88183,13 +87939,6 @@
       },
       {
         "book": "luke",
-        "chapter": 3,
-        "verse": 1,
-        "word_index": 17,
-        "text": "פִילִפּוֹס"
-      },
-      {
-        "book": "luke",
         "chapter": 6,
         "verse": 14,
         "word_index": 14,
@@ -88203,20 +87952,6 @@
         "text": "פִילִפּוֹס"
       },
       {
-        "book": "mark",
-        "chapter": 6,
-        "verse": 17,
-        "word_index": 13,
-        "text": "פִילִפּוֹס"
-      },
-      {
-        "book": "mark",
-        "chapter": 8,
-        "verse": 27,
-        "word_index": 8,
-        "text": "פִילִפּוֹס"
-      },
-      {
         "book": "matthew",
         "chapter": 10,
         "verse": 3,
@@ -88226,8 +87961,8 @@
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 37,
-    "instance_surface_count": 37,
+    "instance_total": 15,
+    "instance_surface_count": 15,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -88248,36 +87983,6 @@
         "source_key": "[\"\",null,\"matthew\",10,3,null]"
       },
       {
-        "book": "matthew",
-        "chapter": 14,
-        "verse": 3,
-        "word_index": 12,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "matthew",
-          "chapter": 14,
-          "verse": 3,
-          "word_index": 12,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"matthew\",14,3,null]"
-      },
-      {
-        "book": "matthew",
-        "chapter": 16,
-        "verse": 13,
-        "word_index": 7,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "matthew",
-          "chapter": 16,
-          "verse": 13,
-          "word_index": 7,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"matthew\",16,13,null]"
-      },
-      {
         "book": "mark",
         "chapter": 3,
         "verse": 18,
@@ -88291,66 +87996,6 @@
           "text": "פִילִפּוֹס"
         },
         "source_key": "[\"\",null,\"mark\",3,18,null]"
-      },
-      {
-        "book": "mark",
-        "chapter": 6,
-        "verse": 17,
-        "word_index": 13,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "mark",
-          "chapter": 6,
-          "verse": 17,
-          "word_index": 13,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"mark\",6,17,null]"
-      },
-      {
-        "book": "mark",
-        "chapter": 8,
-        "verse": 27,
-        "word_index": 8,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "mark",
-          "chapter": 8,
-          "verse": 27,
-          "word_index": 8,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"mark\",8,27,null]"
-      },
-      {
-        "book": "luke",
-        "chapter": 3,
-        "verse": 1,
-        "word_index": 17,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "luke",
-          "chapter": 3,
-          "verse": 1,
-          "word_index": 17,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"luke\",3,1,null]"
-      },
-      {
-        "book": "luke",
-        "chapter": 3,
-        "verse": 19,
-        "word_index": 13,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "luke",
-          "chapter": 3,
-          "verse": 19,
-          "word_index": 13,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"luke\",3,19,null]"
       },
       {
         "book": "luke",
@@ -88546,246 +88191,6 @@
           "text": "פִילִפּוֹס"
         },
         "source_key": "[\"\",null,\"acts\",1,13,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 6,
-        "verse": 5,
-        "word_index": 14,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 6,
-          "verse": 5,
-          "word_index": 14,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",6,5,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 5,
-        "word_index": 0,
-        "text": "וּפִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 5,
-          "word_index": 0,
-          "text": "וּפִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,5,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 6,
-        "word_index": 7,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 6,
-          "word_index": 7,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,6,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 12,
-        "word_index": 3,
-        "text": "לְפִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 12,
-          "word_index": 3,
-          "text": "לְפִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,12,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 13,
-        "word_index": 6,
-        "text": "בְּפִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 13,
-          "word_index": 6,
-          "text": "בְּפִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,13,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 26,
-        "word_index": 4,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 26,
-          "word_index": 4,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,26,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 29,
-        "word_index": 3,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 29,
-          "word_index": 3,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,29,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 30,
-        "word_index": 1,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 30,
-          "word_index": 1,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,30,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 31,
-        "word_index": 10,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 31,
-          "word_index": 10,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,31,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 34,
-        "word_index": 4,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 34,
-          "word_index": 4,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,34,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 35,
-        "word_index": 1,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 35,
-          "word_index": 1,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,35,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 37,
-        "word_index": 1,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 37,
-          "word_index": 1,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,37,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 38,
-        "word_index": 9,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 38,
-          "word_index": 9,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,38,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 39,
-        "word_index": 9,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 39,
-          "word_index": 9,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,39,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 40,
-        "word_index": 0,
-        "text": "וּפִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 40,
-          "word_index": 0,
-          "text": "וּפִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,40,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 21,
-        "verse": 8,
-        "word_index": 11,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 21,
-          "verse": 8,
-          "word_index": 11,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",21,8,null]"
       }
     ],
     "surface_instances": [
@@ -88805,36 +88210,6 @@
         "source_key": "[\"\",null,\"matthew\",10,3,null]"
       },
       {
-        "book": "matthew",
-        "chapter": 14,
-        "verse": 3,
-        "word_index": 12,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "matthew",
-          "chapter": 14,
-          "verse": 3,
-          "word_index": 12,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"matthew\",14,3,null]"
-      },
-      {
-        "book": "matthew",
-        "chapter": 16,
-        "verse": 13,
-        "word_index": 7,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "matthew",
-          "chapter": 16,
-          "verse": 13,
-          "word_index": 7,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"matthew\",16,13,null]"
-      },
-      {
         "book": "mark",
         "chapter": 3,
         "verse": 18,
@@ -88848,66 +88223,6 @@
           "text": "פִילִפּוֹס"
         },
         "source_key": "[\"\",null,\"mark\",3,18,null]"
-      },
-      {
-        "book": "mark",
-        "chapter": 6,
-        "verse": 17,
-        "word_index": 13,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "mark",
-          "chapter": 6,
-          "verse": 17,
-          "word_index": 13,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"mark\",6,17,null]"
-      },
-      {
-        "book": "mark",
-        "chapter": 8,
-        "verse": 27,
-        "word_index": 8,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "mark",
-          "chapter": 8,
-          "verse": 27,
-          "word_index": 8,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"mark\",8,27,null]"
-      },
-      {
-        "book": "luke",
-        "chapter": 3,
-        "verse": 1,
-        "word_index": 17,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "luke",
-          "chapter": 3,
-          "verse": 1,
-          "word_index": 17,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"luke\",3,1,null]"
-      },
-      {
-        "book": "luke",
-        "chapter": 3,
-        "verse": 19,
-        "word_index": 13,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "luke",
-          "chapter": 3,
-          "verse": 19,
-          "word_index": 13,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"luke\",3,19,null]"
       },
       {
         "book": "luke",
@@ -89103,246 +88418,6 @@
           "text": "פִילִפּוֹס"
         },
         "source_key": "[\"\",null,\"acts\",1,13,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 6,
-        "verse": 5,
-        "word_index": 14,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 6,
-          "verse": 5,
-          "word_index": 14,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",6,5,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 5,
-        "word_index": 0,
-        "text": "וּפִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 5,
-          "word_index": 0,
-          "text": "וּפִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,5,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 6,
-        "word_index": 7,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 6,
-          "word_index": 7,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,6,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 12,
-        "word_index": 3,
-        "text": "לְפִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 12,
-          "word_index": 3,
-          "text": "לְפִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,12,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 13,
-        "word_index": 6,
-        "text": "בְּפִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 13,
-          "word_index": 6,
-          "text": "בְּפִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,13,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 26,
-        "word_index": 4,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 26,
-          "word_index": 4,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,26,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 29,
-        "word_index": 3,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 29,
-          "word_index": 3,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,29,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 30,
-        "word_index": 1,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 30,
-          "word_index": 1,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,30,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 31,
-        "word_index": 10,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 31,
-          "word_index": 10,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,31,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 34,
-        "word_index": 4,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 34,
-          "word_index": 4,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,34,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 35,
-        "word_index": 1,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 35,
-          "word_index": 1,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,35,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 37,
-        "word_index": 1,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 37,
-          "word_index": 1,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,37,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 38,
-        "word_index": 9,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 38,
-          "word_index": 9,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,38,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 39,
-        "word_index": 9,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 39,
-          "word_index": 9,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,39,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 8,
-        "verse": 40,
-        "word_index": 0,
-        "text": "וּפִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 8,
-          "verse": 40,
-          "word_index": 0,
-          "text": "וּפִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",8,40,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 21,
-        "verse": 8,
-        "word_index": 11,
-        "text": "פִילִפּוֹס",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 21,
-          "verse": 8,
-          "word_index": 11,
-          "text": "פִילִפּוֹס"
-        },
-        "source_key": "[\"\",null,\"acts\",21,8,null]"
       }
     ],
     "term_language": "hebrew",
@@ -91042,13 +90117,6 @@
         "text": "יוֹסֵי"
       },
       {
-        "book": "luke",
-        "chapter": 3,
-        "verse": 29,
-        "word_index": 1,
-        "text": "יוֹסֵי"
-      },
-      {
         "book": "mark",
         "chapter": 6,
         "verse": 3,
@@ -91079,8 +90147,8 @@
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 6,
-    "instance_surface_count": 6,
+    "instance_total": 5,
+    "instance_surface_count": 5,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -91159,21 +90227,6 @@
           "text": "יוֹסֵי"
         },
         "source_key": "[\"\",null,\"mark\",15,47,null]"
-      },
-      {
-        "book": "luke",
-        "chapter": 3,
-        "verse": 29,
-        "word_index": 1,
-        "text": "יוֹסֵי",
-        "source_payload": {
-          "book": "luke",
-          "chapter": 3,
-          "verse": 29,
-          "word_index": 1,
-          "text": "יוֹסֵי"
-        },
-        "source_key": "[\"\",null,\"luke\",3,29,null]"
       }
     ],
     "surface_instances": [
@@ -91251,21 +90304,6 @@
           "text": "יוֹסֵי"
         },
         "source_key": "[\"\",null,\"mark\",15,47,null]"
-      },
-      {
-        "book": "luke",
-        "chapter": 3,
-        "verse": 29,
-        "word_index": 1,
-        "text": "יוֹסֵי",
-        "source_payload": {
-          "book": "luke",
-          "chapter": 3,
-          "verse": 29,
-          "word_index": 1,
-          "text": "יוֹסֵי"
-        },
-        "source_key": "[\"\",null,\"luke\",3,29,null]"
       }
     ]
   },
@@ -97045,56 +96083,16 @@
     "root": "",
     "root_strong": "",
     "manual_instances": [],
-    "nt_instances": [
-      {
-        "book": "acts",
-        "chapter": 4,
-        "verse": 6,
-        "word_index": 0,
-        "text": "וְחָנָן"
-      }
-    ],
+    "nt_instances": [],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 1,
-    "instance_surface_count": 1,
+    "instance_total": 0,
+    "instance_surface_count": 0,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
-    "instances": [
-      {
-        "book": "acts",
-        "chapter": 4,
-        "verse": 6,
-        "word_index": 0,
-        "text": "וְחָנָן",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 4,
-          "verse": 6,
-          "word_index": 0,
-          "text": "וְחָנָן"
-        },
-        "source_key": "[\"\",null,\"acts\",4,6,null]"
-      }
-    ],
-    "surface_instances": [
-      {
-        "book": "acts",
-        "chapter": 4,
-        "verse": 6,
-        "word_index": 0,
-        "text": "וְחָנָן",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 4,
-          "verse": 6,
-          "word_index": 0,
-          "text": "וְחָנָן"
-        },
-        "source_key": "[\"\",null,\"acts\",4,6,null]"
-      }
-    ]
+    "instances": [],
+    "surface_instances": []
   },
   "D0119": {
     "strong_number": "D0119",
@@ -100825,12 +99823,19 @@
         "verse": 5,
         "word_index": 16,
         "text": "כַּת"
+      },
+      {
+        "book": "acts",
+        "chapter": 24,
+        "verse": 14,
+        "word_index": 12,
+        "text": "כַּת"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 1,
-    "instance_surface_count": 1,
+    "instance_total": 2,
+    "instance_surface_count": 2,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -100849,6 +99854,21 @@
           "text": "כַּת"
         },
         "source_key": "[\"\",null,\"acts\",24,5,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 24,
+        "verse": 14,
+        "word_index": 12,
+        "text": "כַּת",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 24,
+          "verse": 14,
+          "word_index": 12,
+          "text": "כַּת"
+        },
+        "source_key": "[\"\",null,\"acts\",24,14,null]"
       }
     ],
     "surface_instances": [
@@ -100866,6 +99886,21 @@
           "text": "כַּת"
         },
         "source_key": "[\"\",null,\"acts\",24,5,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 24,
+        "verse": 14,
+        "word_index": 12,
+        "text": "כַּת",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 24,
+          "verse": 14,
+          "word_index": 12,
+          "text": "כַּת"
+        },
+        "source_key": "[\"\",null,\"acts\",24,14,null]"
       }
     ]
   },
@@ -101773,16 +100808,60 @@
         "verse": 8,
         "word_index": 3,
         "text": "שֶׁל־"
+      },
+      {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 16,
+        "word_index": 5,
+        "text": "שֶׁלְּךָ"
+      },
+      {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 18,
+        "word_index": 5,
+        "text": "שֶׁלְּךָ"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 4,
-    "instance_surface_count": 4,
+    "instance_total": 6,
+    "instance_surface_count": 6,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [
+      {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 16,
+        "word_index": 5,
+        "text": "שֶׁלְּךָ",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 19,
+          "verse": 16,
+          "word_index": 5,
+          "text": "שֶׁלְּךָ"
+        },
+        "source_key": "[\"\",null,\"luke\",19,16,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 18,
+        "word_index": 5,
+        "text": "שֶׁלְּךָ",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 19,
+          "verse": 18,
+          "word_index": 5,
+          "text": "שֶׁלְּךָ"
+        },
+        "source_key": "[\"\",null,\"luke\",19,18,null]"
+      },
       {
         "book": "corinthians1",
         "chapter": 3,
@@ -101845,6 +100924,36 @@
       }
     ],
     "surface_instances": [
+      {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 16,
+        "word_index": 5,
+        "text": "שֶׁלְּךָ",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 19,
+          "verse": 16,
+          "word_index": 5,
+          "text": "שֶׁלְּךָ"
+        },
+        "source_key": "[\"\",null,\"luke\",19,16,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 18,
+        "word_index": 5,
+        "text": "שֶׁלְּךָ",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 19,
+          "verse": 18,
+          "word_index": 5,
+          "text": "שֶׁלְּךָ"
+        },
+        "source_key": "[\"\",null,\"luke\",19,18,null]"
+      },
       {
         "book": "corinthians1",
         "chapter": 3,
@@ -102453,12 +101562,19 @@
         "verse": 23,
         "word_index": 8,
         "text": "תְּחִיַּת"
+      },
+      {
+        "book": "acts",
+        "chapter": 24,
+        "verse": 15,
+        "word_index": 12,
+        "text": "תְּחִיַּת"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 3,
-    "instance_surface_count": 3,
+    "instance_total": 4,
+    "instance_surface_count": 4,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -102492,6 +101608,21 @@
           "text": "תְּחִיַּת"
         },
         "source_key": "[\"\",null,\"luke\",20,35,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 24,
+        "verse": 15,
+        "word_index": 12,
+        "text": "תְּחִיַּת",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 24,
+          "verse": 15,
+          "word_index": 12,
+          "text": "תְּחִיַּת"
+        },
+        "source_key": "[\"\",null,\"acts\",24,15,null]"
       },
       {
         "book": "corinthians1",
@@ -102539,6 +101670,21 @@
           "text": "תְּחִיַּת"
         },
         "source_key": "[\"\",null,\"luke\",20,35,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 24,
+        "verse": 15,
+        "word_index": 12,
+        "text": "תְּחִיַּת",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 24,
+          "verse": 15,
+          "word_index": 12,
+          "text": "תְּחִיַּת"
+        },
+        "source_key": "[\"\",null,\"acts\",24,15,null]"
       },
       {
         "book": "corinthians1",
@@ -104040,13 +103186,6 @@
       },
       {
         "book": "luke",
-        "chapter": 3,
-        "verse": 25,
-        "word_index": 5,
-        "text": "נַחוּם"
-      },
-      {
-        "book": "luke",
         "chapter": 4,
         "verse": 23,
         "word_index": 17,
@@ -104125,8 +103264,8 @@
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 17,
-    "instance_surface_count": 17,
+    "instance_total": 16,
+    "instance_surface_count": 16,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -104235,21 +103374,6 @@
           "text": "נַחוּם"
         },
         "source_key": "[\"\",null,\"mark\",9,33,null]"
-      },
-      {
-        "book": "luke",
-        "chapter": 3,
-        "verse": 25,
-        "word_index": 5,
-        "text": "נַחוּם",
-        "source_payload": {
-          "book": "luke",
-          "chapter": 3,
-          "verse": 25,
-          "word_index": 5,
-          "text": "נַחוּם"
-        },
-        "source_key": "[\"\",null,\"luke\",3,25,null]"
       },
       {
         "book": "luke",
@@ -104492,21 +103616,6 @@
           "text": "נַחוּם"
         },
         "source_key": "[\"\",null,\"mark\",9,33,null]"
-      },
-      {
-        "book": "luke",
-        "chapter": 3,
-        "verse": 25,
-        "word_index": 5,
-        "text": "נַחוּם",
-        "source_payload": {
-          "book": "luke",
-          "chapter": 3,
-          "verse": 25,
-          "word_index": 5,
-          "text": "נַחוּם"
-        },
-        "source_key": "[\"\",null,\"luke\",3,25,null]"
       },
       {
         "book": "luke",
@@ -104900,12 +104009,19 @@
         "verse": 2,
         "word_index": 3,
         "text": "חָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 4,
+        "verse": 6,
+        "word_index": 0,
+        "text": "וְחָנָן"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 3,
-    "instance_surface_count": 3,
+    "instance_total": 4,
+    "instance_surface_count": 4,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -104954,6 +104070,21 @@
           "text": "חָנָן"
         },
         "source_key": "[\"\",null,\"john\",18,24,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 4,
+        "verse": 6,
+        "word_index": 0,
+        "text": "וְחָנָן",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 4,
+          "verse": 6,
+          "word_index": 0,
+          "text": "וְחָנָן"
+        },
+        "source_key": "[\"\",null,\"acts\",4,6,null]"
       }
     ],
     "surface_instances": [
@@ -105001,6 +104132,21 @@
           "text": "חָנָן"
         },
         "source_key": "[\"\",null,\"john\",18,24,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 4,
+        "verse": 6,
+        "word_index": 0,
+        "text": "וְחָנָן",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 4,
+          "verse": 6,
+          "word_index": 0,
+          "text": "וְחָנָן"
+        },
+        "source_key": "[\"\",null,\"acts\",4,6,null]"
       }
     ]
   },
@@ -105844,13 +104990,6 @@
         "text": "מִקָּנָה"
       },
       {
-        "book": "revelation",
-        "chapter": 18,
-        "verse": 13,
-        "word_index": 10,
-        "text": "וּמִקְנֶה"
-      },
-      {
         "book": "john",
         "chapter": 4,
         "verse": 46,
@@ -105860,8 +104999,8 @@
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 3,
-    "instance_surface_count": 3,
+    "instance_total": 2,
+    "instance_surface_count": 2,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -105895,21 +105034,6 @@
           "text": "מִקָּנָה"
         },
         "source_key": "[\"\",null,\"john\",21,2,null]"
-      },
-      {
-        "book": "revelation",
-        "chapter": 18,
-        "verse": 13,
-        "word_index": 10,
-        "text": "וּמִקְנֶה",
-        "source_payload": {
-          "book": "revelation",
-          "chapter": 18,
-          "verse": 13,
-          "word_index": 10,
-          "text": "וּמִקְנֶה"
-        },
-        "source_key": "[\"\",null,\"revelation\",18,13,null]"
       }
     ],
     "surface_instances": [
@@ -105942,21 +105066,6 @@
           "text": "מִקָּנָה"
         },
         "source_key": "[\"\",null,\"john\",21,2,null]"
-      },
-      {
-        "book": "revelation",
-        "chapter": 18,
-        "verse": 13,
-        "word_index": 10,
-        "text": "וּמִקְנֶה",
-        "source_payload": {
-          "book": "revelation",
-          "chapter": 18,
-          "verse": 13,
-          "word_index": 10,
-          "text": "וּמִקְנֶה"
-        },
-        "source_key": "[\"\",null,\"revelation\",18,13,null]"
       }
     ]
   },
@@ -109678,6 +108787,12 @@
         "transliteration": "Noheg",
         "context": "Término para referirse al que dirige el rebaño, proveyendo dirección y evitando peligros.",
         "original_id": 859
+      },
+      {
+        "source": "custom",
+        "text_en": "drive, lead, guide.",
+        "text_es": "conducir, guiar, llevar.",
+        "order": 4
       }
     ],
     "root": "",
@@ -112837,6 +111952,12 @@
         "text_es": "esposo; dueño; señor.",
         "source": "delitzsch_review",
         "order": 1
+      },
+      {
+        "source": "custom",
+        "text_en": "owner, master, lord; husband; citizen.",
+        "text_es": "dueño, amo, señor; esposo; ciudadano.",
+        "order": 2
       }
     ],
     "root": "",
@@ -167502,6 +166623,12 @@
         "transliteration": "Qin'áh",
         "context": "Fuerza infractora vinculada a la opresión, es el impulso insaciable de crecer a costa del prójimo arrebatando lo ajeno.",
         "original_id": 106
+      },
+      {
+        "source": "custom",
+        "text_en": "jealousy, envy, zeal; ardour.",
+        "text_es": "celos, envidia, celo; ardor.",
+        "order": 4
       }
     ]
   },
@@ -169615,8 +168742,8 @@
       },
       {
         "source": "custom",
-        "text_en": "Aram; Syria and Mesopotamia, the land of the Arameans, and Aram the son of Shem.",
-        "text_es": "Aram; Siria y Mesopotamia, la tierra de los arameos, y Aram hijo de Sem.",
+        "text_en": "Aram; Syria and Mesopotamia, the land of the Arameans; Aram the son of Shem, and other men of this name.",
+        "text_es": "Aram; Siria y Mesopotamia, la tierra de los arameos; Aram hijo de Sem, y otros hombres de este nombre.",
         "order": 2
       }
     ]
@@ -172046,8 +171173,8 @@
       },
       {
         "source": "custom",
-        "text_en": "Cush; the region south of Egypt (Nubia or Ethiopia), and Cush the son of Ham.",
-        "text_es": "Cus; la región al sur de Egipto (Nubia o Etiopía), y Cus hijo de Cam.",
+        "text_en": "Cush; the region south of Egypt (Nubia or Ethiopia), and Cush the son of Ham; also a Benjamite of this name.",
+        "text_es": "Cus; la región al sur de Egipto (Nubia o Etiopía), y Cus hijo de Cam; también un benjamita de este nombre.",
         "order": 3
       }
     ]
@@ -177872,6 +176999,12 @@
         "transliteration": "Yara', Yarah",
         "context": "Raíz etimológica de 'Torah' que implica lanzar o dirigir una enseñanza hacia un blanco específico. Raíz etimológica que da origen al término Torah, significando la orientación hacia un objetivo.",
         "original_id": 373
+      },
+      {
+        "source": "custom",
+        "text_en": "throw, shoot; in the hiphil, teach, instruct, point out.",
+        "text_es": "arrojar, disparar; en hifil, enseñar, instruir, señalar.",
+        "order": 2
       }
     ]
   },
@@ -555274,6 +554407,1481 @@
         "source": "custom",
         "text_en": "find; attain to, come upon.",
         "text_es": "hallar; alcanzar, encontrar.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "D0902": {
+    "strong_number": "D0902",
+    "hebrew": "נַחוּם",
+    "transliteration_es": "Najúm",
+    "transliteration_en": "Nachum",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Nahum; an ancestor of Jesus in Luke's genealogy.",
+        "text_es": "Nahúm; un antepasado de Jesús en la genealogía de Lucas."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 25,
+        "word_index": 5,
+        "text": "נַחוּם"
+      }
+    ]
+  },
+  "D0903": {
+    "strong_number": "D0903",
+    "hebrew": "פִילִפּוֹס",
+    "transliteration_es": "Filipos",
+    "transliteration_en": "Philippos",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Philip; the evangelist, one of the seven chosen in Jerusalem, who preached in Samaria and baptized the Ethiopian.",
+        "text_es": "Felipe; el evangelista, uno de los siete escogidos en Jerusalén, que predicó en Samaria y bautizó al etíope."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 6,
+        "verse": 5,
+        "word_index": 14,
+        "text": "פִילִפּוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 5,
+        "word_index": 0,
+        "text": "וּפִילִפּוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 6,
+        "word_index": 7,
+        "text": "פִילִפּוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 12,
+        "word_index": 3,
+        "text": "לְפִילִפּוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 13,
+        "word_index": 6,
+        "text": "בְּפִילִפּוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 26,
+        "word_index": 4,
+        "text": "פִילִפּוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 29,
+        "word_index": 3,
+        "text": "פִילִפּוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 30,
+        "word_index": 1,
+        "text": "פִילִפּוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 31,
+        "word_index": 10,
+        "text": "פִילִפּוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 34,
+        "word_index": 4,
+        "text": "פִילִפּוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 35,
+        "word_index": 1,
+        "text": "פִילִפּוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 37,
+        "word_index": 1,
+        "text": "פִילִפּוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 38,
+        "word_index": 9,
+        "text": "פִילִפּוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 39,
+        "word_index": 9,
+        "text": "פִילִפּוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 40,
+        "word_index": 0,
+        "text": "וּפִילִפּוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 21,
+        "verse": 8,
+        "word_index": 11,
+        "text": "פִילִפּוֹס"
+      }
+    ]
+  },
+  "D0904": {
+    "strong_number": "D0904",
+    "hebrew": "פִילִפּוֹס",
+    "transliteration_es": "Filipos",
+    "transliteration_en": "Philippos",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Philip; the tetrarch of Iturea and Trachonitis, son of Herod the Great, after whom Caesarea Philippi is named.",
+        "text_es": "Felipe; el tetrarca de Iturea y Traconite, hijo de Herodes el Grande, por quien se llama Cesarea de Filipo."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 1,
+        "word_index": 17,
+        "text": "פִילִפּוֹס"
+      },
+      {
+        "book": "mark",
+        "chapter": 8,
+        "verse": 27,
+        "word_index": 8,
+        "text": "פִילִפּוֹס"
+      },
+      {
+        "book": "matthew",
+        "chapter": 16,
+        "verse": 13,
+        "word_index": 7,
+        "text": "פִילִפּוֹס"
+      }
+    ]
+  },
+  "D0905": {
+    "strong_number": "D0905",
+    "hebrew": "פִילִפּוֹס",
+    "transliteration_es": "Filipos",
+    "transliteration_en": "Philippos",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Philip; a son of Herod the Great and the first husband of Herodias.",
+        "text_es": "Felipe; un hijo de Herodes el Grande y el primer esposo de Herodías."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 19,
+        "word_index": 13,
+        "text": "פִילִפּוֹס"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 17,
+        "word_index": 13,
+        "text": "פִילִפּוֹס"
+      },
+      {
+        "book": "matthew",
+        "chapter": 14,
+        "verse": 3,
+        "word_index": 12,
+        "text": "פִילִפּוֹס"
+      }
+    ]
+  },
+  "D0906": {
+    "strong_number": "D0906",
+    "hebrew": "יוֹסֵי",
+    "transliteration_es": "Yosé",
+    "transliteration_en": "Yose",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Jose; an ancestor of Jesus in Luke's genealogy.",
+        "text_es": "Yosé; un antepasado de Jesús en la genealogía de Lucas."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 29,
+        "word_index": 1,
+        "text": "יוֹסֵי"
+      }
+    ]
+  },
+  "D0908": {
+    "strong_number": "D0908",
+    "hebrew": "מָאַס",
+    "transliteration_es": "maas",
+    "transliteration_en": "maas",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "reject, despise; be rejected; rejected, worthless, loathsome.",
+        "text_es": "rechazar, despreciar; ser rechazado; rechazado, inútil, aborrecible."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 13,
+        "verse": 46,
+        "word_index": 19,
+        "text": "מְאַסְתֶּם"
+      },
+      {
+        "book": "acts",
+        "chapter": 4,
+        "verse": 11,
+        "word_index": 3,
+        "text": "מְאַסְתֶּם"
+      },
+      {
+        "book": "acts",
+        "chapter": 7,
+        "verse": 39,
+        "word_index": 9,
+        "text": "מָאֲסוּ"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 1,
+        "verse": 28,
+        "word_index": 4,
+        "text": "וּבַנִּמְאָס"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 13,
+        "verse": 5,
+        "word_index": 20,
+        "text": "נִמְאָסִים"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 13,
+        "verse": 6,
+        "word_index": 7,
+        "text": "נִמְאָסִים׃"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 13,
+        "verse": 7,
+        "word_index": 23,
+        "text": "כְּנִמְאָסִים׃"
+      },
+      {
+        "book": "galatians",
+        "chapter": 2,
+        "verse": 21,
+        "word_index": 1,
+        "text": "אֶמְאַס"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 12,
+        "verse": 5,
+        "word_index": 13,
+        "text": "תִּמְאָס"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 12,
+        "verse": 17,
+        "word_index": 4,
+        "text": "נִמְאַס"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 6,
+        "verse": 8,
+        "word_index": 4,
+        "text": "נִמְאָסָה"
+      },
+      {
+        "book": "luke",
+        "chapter": 17,
+        "verse": 25,
+        "word_index": 6,
+        "text": "וּלְהִמָּאֵס"
+      },
+      {
+        "book": "luke",
+        "chapter": 20,
+        "verse": 17,
+        "word_index": 8,
+        "text": "מָאֲסוּ"
+      },
+      {
+        "book": "luke",
+        "chapter": 9,
+        "verse": 22,
+        "word_index": 9,
+        "text": "וְיִמָּאֵס"
+      },
+      {
+        "book": "mark",
+        "chapter": 12,
+        "verse": 10,
+        "word_index": 6,
+        "text": "מָאֲסוּ"
+      },
+      {
+        "book": "mark",
+        "chapter": 8,
+        "verse": 31,
+        "word_index": 8,
+        "text": "וְיִמָּאֵס"
+      },
+      {
+        "book": "mark",
+        "chapter": 9,
+        "verse": 12,
+        "word_index": 19,
+        "text": "וְיִמָּאֵס׃"
+      },
+      {
+        "book": "matthew",
+        "chapter": 21,
+        "verse": 42,
+        "word_index": 9,
+        "text": "מָאֲסוּ"
+      },
+      {
+        "book": "peter1",
+        "chapter": 2,
+        "verse": 4,
+        "word_index": 7,
+        "text": "מָאֲסוּ־"
+      },
+      {
+        "book": "peter1",
+        "chapter": 2,
+        "verse": 7,
+        "word_index": 8,
+        "text": "מָאֲסוּ"
+      },
+      {
+        "book": "revelation",
+        "chapter": 18,
+        "verse": 2,
+        "word_index": 19,
+        "text": "וְנִמְאָס׃"
+      },
+      {
+        "book": "romans",
+        "chapter": 1,
+        "verse": 28,
+        "word_index": 1,
+        "text": "מָאֲסוּ"
+      },
+      {
+        "book": "romans",
+        "chapter": 1,
+        "verse": 28,
+        "word_index": 9,
+        "text": "נִמְאָסָה"
+      },
+      {
+        "book": "thessalonians1",
+        "chapter": 5,
+        "verse": 20,
+        "word_index": 3,
+        "text": "תִמְאָסוּ׃"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 1,
+        "verse": 19,
+        "word_index": 6,
+        "text": "מֹאֲסִים"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 3,
+        "verse": 8,
+        "word_index": 18,
+        "text": "וְנִמְאָסִים"
+      }
+    ]
+  },
+  "D0909": {
+    "strong_number": "D0909",
+    "hebrew": "פֵּאֵר",
+    "transliteration_es": "peer",
+    "transliteration_en": "peer",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "glorify, honour; in the hithpael, be glorified, boast, glory in.",
+        "text_es": "glorificar, honrar; en hitpael, ser glorificado, jactarse, gloriarse."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 3,
+        "verse": 13,
+        "word_index": 9,
+        "text": "פֵּאֵר"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 13,
+        "verse": 4,
+        "word_index": 10,
+        "text": "תִתְפָּאֵר"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 5,
+        "verse": 12,
+        "word_index": 10,
+        "text": "לְהִתְפָּאֵר"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 5,
+        "verse": 12,
+        "word_index": 13,
+        "text": "הַמִּתְפָּאֲרִים"
+      },
+      {
+        "book": "john",
+        "chapter": 12,
+        "verse": 23,
+        "word_index": 6,
+        "text": "שֶׁיְּפֹאַר"
+      },
+      {
+        "book": "john",
+        "chapter": 12,
+        "verse": 28,
+        "word_index": 1,
+        "text": "פָּאֵר"
+      },
+      {
+        "book": "john",
+        "chapter": 12,
+        "verse": 28,
+        "word_index": 10,
+        "text": "פֵּאַרְתִּי"
+      },
+      {
+        "book": "john",
+        "chapter": 12,
+        "verse": 28,
+        "word_index": 13,
+        "text": "לְפָאֵר׃"
+      },
+      {
+        "book": "john",
+        "chapter": 13,
+        "verse": 31,
+        "word_index": 5,
+        "text": "נִתְפָּאַר"
+      },
+      {
+        "book": "john",
+        "chapter": 13,
+        "verse": 31,
+        "word_index": 9,
+        "text": "נִתְפָּאַר"
+      },
+      {
+        "book": "john",
+        "chapter": 13,
+        "verse": 32,
+        "word_index": 2,
+        "text": "נִתְפָּאַר"
+      },
+      {
+        "book": "john",
+        "chapter": 13,
+        "verse": 32,
+        "word_index": 7,
+        "text": "יְפָאֲרֵהוּ"
+      },
+      {
+        "book": "john",
+        "chapter": 13,
+        "verse": 32,
+        "word_index": 10,
+        "text": "יְפָאֲרֵהוּ׃"
+      },
+      {
+        "book": "john",
+        "chapter": 16,
+        "verse": 14,
+        "word_index": 1,
+        "text": "יְפָאֲרֵנִי"
+      },
+      {
+        "book": "john",
+        "chapter": 17,
+        "verse": 1,
+        "word_index": 12,
+        "text": "פָּאֵר"
+      },
+      {
+        "book": "john",
+        "chapter": 17,
+        "verse": 1,
+        "word_index": 18,
+        "text": "יְפָאֲרֶךָּ׃"
+      },
+      {
+        "book": "john",
+        "chapter": 17,
+        "verse": 4,
+        "word_index": 1,
+        "text": "פֵּאַרְתִּיךָ"
+      },
+      {
+        "book": "john",
+        "chapter": 17,
+        "verse": 5,
+        "word_index": 1,
+        "text": "פָאֲרֵנִי"
+      },
+      {
+        "book": "john",
+        "chapter": 17,
+        "verse": 10,
+        "word_index": 7,
+        "text": "וְנִתְפָּאַרְתִּי"
+      },
+      {
+        "book": "john",
+        "chapter": 7,
+        "verse": 39,
+        "word_index": 18,
+        "text": "נִתְפָּאָר׃"
+      },
+      {
+        "book": "philippians",
+        "chapter": 3,
+        "verse": 3,
+        "word_index": 8,
+        "text": "וּמִתְפָּאֲרִים"
+      },
+      {
+        "book": "romans",
+        "chapter": 11,
+        "verse": 13,
+        "word_index": 12,
+        "text": "אֲפָאֵר׃"
+      },
+      {
+        "book": "romans",
+        "chapter": 11,
+        "verse": 18,
+        "word_index": 1,
+        "text": "תִּתְפָּאֵר"
+      },
+      {
+        "book": "romans",
+        "chapter": 11,
+        "verse": 18,
+        "word_index": 5,
+        "text": "תִּתְפָּאֵר"
+      },
+      {
+        "book": "romans",
+        "chapter": 8,
+        "verse": 30,
+        "word_index": 18,
+        "text": "פֵּאֵר׃"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 6,
+        "verse": 21,
+        "word_index": 2,
+        "text": "מִתְפָּאֲרִים"
+      },
+      {
+        "book": "titus",
+        "chapter": 2,
+        "verse": 10,
+        "word_index": 10,
+        "text": "יְפָאֲרוּ"
+      }
+    ]
+  },
+  "D0910": {
+    "strong_number": "D0910",
+    "hebrew": "הִכִּיר",
+    "transliteration_es": "hikkir",
+    "transliteration_en": "hikkir",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "recognize, know, acknowledge; regard persons; in the piel, disown.",
+        "text_es": "reconocer, conocer, admitir; hacer acepción de personas; en piel, desconocer."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 12,
+        "verse": 14,
+        "word_index": 0,
+        "text": "וַתַּכֵּר"
+      },
+      {
+        "book": "acts",
+        "chapter": 13,
+        "verse": 27,
+        "word_index": 7,
+        "text": "הִכִּירֻהוּ"
+      },
+      {
+        "book": "acts",
+        "chapter": 19,
+        "verse": 15,
+        "word_index": 6,
+        "text": "מַכִּיר"
+      },
+      {
+        "book": "acts",
+        "chapter": 19,
+        "verse": 34,
+        "word_index": 1,
+        "text": "כְּהַכִּירָם"
+      },
+      {
+        "book": "acts",
+        "chapter": 27,
+        "verse": 39,
+        "word_index": 3,
+        "text": "הִכִּירוּ"
+      },
+      {
+        "book": "acts",
+        "chapter": 3,
+        "verse": 10,
+        "word_index": 0,
+        "text": "וַיַּכִּירוּ"
+      },
+      {
+        "book": "acts",
+        "chapter": 3,
+        "verse": 16,
+        "word_index": 11,
+        "text": "וּמַכִּירִים"
+      },
+      {
+        "book": "acts",
+        "chapter": 4,
+        "verse": 13,
+        "word_index": 18,
+        "text": "וַיַּכִּירוּם"
+      },
+      {
+        "book": "colossians",
+        "chapter": 1,
+        "verse": 6,
+        "word_index": 15,
+        "text": "וְהִכַּרְתֶּם"
+      },
+      {
+        "book": "ephesians",
+        "chapter": 3,
+        "verse": 4,
+        "word_index": 2,
+        "text": "לְהַכִּיר"
+      },
+      {
+        "book": "john",
+        "chapter": 1,
+        "verse": 10,
+        "word_index": 8,
+        "text": "הִכִּירוֹ׃"
+      },
+      {
+        "book": "john",
+        "chapter": 17,
+        "verse": 8,
+        "word_index": 9,
+        "text": "וַיַּכִּירוּ"
+      },
+      {
+        "book": "john",
+        "chapter": 17,
+        "verse": 25,
+        "word_index": 9,
+        "text": "הִכִּירוּ"
+      },
+      {
+        "book": "john1",
+        "chapter": 2,
+        "verse": 3,
+        "word_index": 3,
+        "text": "הִכַּרְנוּ"
+      },
+      {
+        "book": "john1",
+        "chapter": 2,
+        "verse": 4,
+        "word_index": 1,
+        "text": "הִכַּרְתִּיו"
+      },
+      {
+        "book": "john1",
+        "chapter": 2,
+        "verse": 13,
+        "word_index": 6,
+        "text": "הִכַּרְתֶּם"
+      },
+      {
+        "book": "john1",
+        "chapter": 2,
+        "verse": 14,
+        "word_index": 5,
+        "text": "הִכַּרְתֶּם"
+      },
+      {
+        "book": "john1",
+        "chapter": 4,
+        "verse": 2,
+        "word_index": 1,
+        "text": "תַּכִּירוּ"
+      },
+      {
+        "book": "john1",
+        "chapter": 4,
+        "verse": 6,
+        "word_index": 15,
+        "text": "נַכִּיר"
+      },
+      {
+        "book": "luke",
+        "chapter": 20,
+        "verse": 23,
+        "word_index": 0,
+        "text": "וַיַּכֵּר"
+      },
+      {
+        "book": "luke",
+        "chapter": 24,
+        "verse": 16,
+        "word_index": 3,
+        "text": "יַכִּירֻהוּ׃"
+      },
+      {
+        "book": "luke",
+        "chapter": 24,
+        "verse": 31,
+        "word_index": 2,
+        "text": "וַיַּכִּירֻהוּ"
+      },
+      {
+        "book": "luke",
+        "chapter": 24,
+        "verse": 35,
+        "word_index": 9,
+        "text": "הִכִּירֻהוּ"
+      },
+      {
+        "book": "luke",
+        "chapter": 6,
+        "verse": 44,
+        "word_index": 3,
+        "text": "נִכַּר"
+      },
+      {
+        "book": "mark",
+        "chapter": 12,
+        "verse": 14,
+        "word_index": 15,
+        "text": "תַכִּיר"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 33,
+        "word_index": 4,
+        "text": "וַיַּכִּירֻהוּ"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 54,
+        "word_index": 5,
+        "text": "הִכִּירֻהוּ׃"
+      },
+      {
+        "book": "matthew",
+        "chapter": 11,
+        "verse": 27,
+        "word_index": 6,
+        "text": "מַכִּיר"
+      },
+      {
+        "book": "matthew",
+        "chapter": 11,
+        "verse": 27,
+        "word_index": 12,
+        "text": "מַכִּיר"
+      },
+      {
+        "book": "matthew",
+        "chapter": 12,
+        "verse": 33,
+        "word_index": 16,
+        "text": "נִכַּר"
+      },
+      {
+        "book": "matthew",
+        "chapter": 14,
+        "verse": 35,
+        "word_index": 0,
+        "text": "וַיַּכִּירוּ"
+      },
+      {
+        "book": "matthew",
+        "chapter": 17,
+        "verse": 12,
+        "word_index": 9,
+        "text": "הִכִּירֻהוּ"
+      },
+      {
+        "book": "matthew",
+        "chapter": 22,
+        "verse": 16,
+        "word_index": 24,
+        "text": "מַכִּיר"
+      },
+      {
+        "book": "matthew",
+        "chapter": 7,
+        "verse": 16,
+        "word_index": 0,
+        "text": "הַכֵּר"
+      },
+      {
+        "book": "matthew",
+        "chapter": 7,
+        "verse": 20,
+        "word_index": 2,
+        "text": "תַּכִּירוּ"
+      },
+      {
+        "book": "thessalonians1",
+        "chapter": 5,
+        "verse": 12,
+        "word_index": 4,
+        "text": "לְהַכִּיר"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 2,
+        "verse": 12,
+        "word_index": 9,
+        "text": "יְנַכֵּר"
+      }
+    ]
+  },
+  "D0911": {
+    "strong_number": "D0911",
+    "hebrew": "בָּרִיא",
+    "transliteration_es": "bari",
+    "transliteration_en": "bari",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "solid, firm; of food, the solid food of the mature.",
+        "text_es": "sólido, firme; del alimento, la comida sólida de los maduros."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "hebrews",
+        "chapter": 5,
+        "verse": 12,
+        "word_index": 25,
+        "text": "בָּרִיא׃"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 5,
+        "verse": 14,
+        "word_index": 3,
+        "text": "הַבָּרִיא"
+      }
+    ]
+  },
+  "D0907": {
+    "strong_number": "D0907",
+    "hebrew": "אִסְטְפָנוֹס",
+    "transliteration_es": "Istefanos",
+    "transliteration_en": "Istefanos",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Stephanas; a believer of Corinth whose household Paul baptized, the first converts of Achaia.",
+        "text_es": "Estéfanas; un creyente de Corinto cuya casa bautizó Pablo, las primicias de Acaya."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "corinthians1",
+        "chapter": 1,
+        "verse": 16,
+        "word_index": 6,
+        "text": "אִסְטְפָנוֹס"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 16,
+        "verse": 15,
+        "word_index": 7,
+        "text": "אִסְטְפָנוֹס"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 16,
+        "verse": 17,
+        "word_index": 3,
+        "text": "אִסְטְפָנוֹס"
+      }
+    ]
+  },
+  "H3381": {
+    "strong_number": "H3381",
+    "hebrew": "יָרַד",
+    "transliteration_es": "yarad",
+    "transliteration_en": "yarad",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "go down, come down, descend; in the hiphil, bring down, let down.",
+        "text_es": "bajar, descender; en hifil, hacer bajar, bajar algo.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H5046": {
+    "strong_number": "H5046",
+    "hebrew": "נָגַד",
+    "transliteration_es": "nagad",
+    "transliteration_en": "nagad",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "tell, declare, make known; be told.",
+        "text_es": "contar, declarar, dar a conocer; ser contado.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H7925": {
+    "strong_number": "H7925",
+    "hebrew": "שָׁכַם",
+    "transliteration_es": "shajam",
+    "transliteration_en": "shacham",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "rise early; start early, do early.",
+        "text_es": "madrugar; levantarse temprano, hacer temprano.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H5190": {
+    "strong_number": "H5190",
+    "hebrew": "נָטַל",
+    "transliteration_es": "natal",
+    "transliteration_en": "natal",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "lift, bear; lay upon, impose.",
+        "text_es": "levantar, llevar; imponer, poner sobre.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H5162": {
+    "strong_number": "H5162",
+    "hebrew": "נָחַם",
+    "transliteration_es": "najam",
+    "transliteration_en": "nacham",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "be sorry, repent; comfort, console; be comforted.",
+        "text_es": "arrepentirse, lamentar; consolar; ser consolado.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H3559": {
+    "strong_number": "H3559",
+    "hebrew": "כּוּן",
+    "transliteration_es": "kvn",
+    "transliteration_en": "kvn",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "be firm, be established; prepare, make ready, set up.",
+        "text_es": "estar firme, ser establecido; preparar, disponer, establecer.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H6362": {
+    "strong_number": "H6362",
+    "hebrew": "פָּטַר",
+    "transliteration_es": "patar",
+    "transliteration_en": "patar",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "set free, release, dismiss; separate, escape.",
+        "text_es": "liberar, soltar, despedir; separar, escapar.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H8074": {
+    "strong_number": "H8074",
+    "hebrew": "שָׁמֵם",
+    "transliteration_es": "shamem",
+    "transliteration_en": "shamem",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "be desolate; be appalled, be astonished.",
+        "text_es": "estar desolado; quedar pasmado, asombrarse.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H2270": {
+    "strong_number": "H2270",
+    "hebrew": "חָבֵר",
+    "transliteration_es": "javer",
+    "transliteration_en": "chaver",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "companion, associate; united.",
+        "text_es": "compañero, asociado; unido.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "H2266",
+    "manual_instances": []
+  },
+  "H4912": {
+    "strong_number": "H4912",
+    "hebrew": "מָשָׁל",
+    "transliteration_es": "mashal",
+    "transliteration_en": "mashal",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "proverb, parable; byword; discourse.",
+        "text_es": "proverbio, parábola; refrán; discurso.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "H4910",
+    "manual_instances": []
+  },
+  "H6045": {
+    "strong_number": "H6045",
+    "hebrew": "עִנְיָן",
+    "transliteration_es": "ineyan",
+    "transliteration_en": "ineyan",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "occupation, business, matter.",
+        "text_es": "ocupación, tarea, asunto.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "H6031",
+    "manual_instances": []
+  },
+  "H615": {
+    "strong_number": "H615",
+    "hebrew": "אָסִיר",
+    "transliteration_es": "asiyr",
+    "transliteration_en": "asiyr",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "prisoner, captive.",
+        "text_es": "preso, cautivo.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "H631",
+    "manual_instances": []
+  },
+  "H5186": {
+    "strong_number": "H5186",
+    "hebrew": "נָטָה",
+    "transliteration_es": "natah",
+    "transliteration_en": "natah",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "stretch out, extend; turn aside, incline.",
+        "text_es": "extender, tender; desviarse, inclinar.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H732": {
+    "strong_number": "H732",
+    "hebrew": "אָרַח",
+    "transliteration_es": "araj",
+    "transliteration_en": "arach",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "travel, journey; wayfarer, traveller.",
+        "text_es": "viajar, caminar; viajero, caminante.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H5341": {
+    "strong_number": "H5341",
+    "hebrew": "נָצַר",
+    "transliteration_es": "natzar",
+    "transliteration_en": "natzar",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "keep, guard, watch over.",
+        "text_es": "guardar, custodiar, vigilar.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H2865": {
+    "strong_number": "H2865",
+    "hebrew": "חָתַת",
+    "transliteration_es": "jatat",
+    "transliteration_en": "chatat",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "be dismayed, be terrified; be shattered.",
+        "text_es": "desmayar, aterrarse; ser quebrantado.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H8551": {
+    "strong_number": "H8551",
+    "hebrew": "תָּמַךְ",
+    "transliteration_es": "tamaje",
+    "transliteration_en": "tamache",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "grasp, hold; uphold, support.",
+        "text_es": "asir, sostener; apoyar, sustentar.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H5810": {
+    "strong_number": "H5810",
+    "hebrew": "עָזַז",
+    "transliteration_es": "azaz",
+    "transliteration_en": "azaz",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "be strong, prevail; be bold.",
+        "text_es": "ser fuerte, prevalecer; atreverse.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H5365": {
+    "strong_number": "H5365",
+    "hebrew": "נָקַר",
+    "transliteration_es": "nakar",
+    "transliteration_en": "nakar",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "bore, pick out, gouge out.",
+        "text_es": "perforar, sacar, arrancar.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H2073": {
+    "strong_number": "H2073",
+    "hebrew": "זְבוּל",
+    "transliteration_es": "zevul",
+    "transliteration_en": "zevul",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "lofty abode, habitation.",
+        "text_es": "morada excelsa, habitación.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "H2082",
+    "manual_instances": []
+  },
+  "H1197": {
+    "strong_number": "H1197",
+    "hebrew": "בָּעַר",
+    "transliteration_es": "baar",
+    "transliteration_en": "baar",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "burn, kindle, consume; be brutish.",
+        "text_es": "arder, encender, consumir; ser necio.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H5048": {
+    "strong_number": "H5048",
+    "hebrew": "נֶגֶד",
+    "transliteration_es": "neged",
+    "transliteration_en": "neged",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "in front of, before, opposite; against.",
+        "text_es": "delante de, ante, enfrente; contra.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "H5046",
+    "manual_instances": []
+  },
+  "H5157": {
+    "strong_number": "H5157",
+    "hebrew": "נָחַל",
+    "transliteration_es": "najal",
+    "transliteration_en": "nachal",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "inherit, take possession; get as a possession; in the hiphil, give as an inheritance.",
+        "text_es": "heredar, tomar posesión; obtener en posesión; en hifil, dar en herencia.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H6148": {
+    "strong_number": "H6148",
+    "hebrew": "עָרַב",
+    "transliteration_es": "arav",
+    "transliteration_en": "arav",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "be surety, pledge; mix, mingle; in the hithpael, associate with, meddle.",
+        "text_es": "ser fiador, dar en prenda; mezclar; en hitpael, asociarse, entremeterse.",
         "order": 1
       }
     ],

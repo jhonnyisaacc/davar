@@ -21,9 +21,9 @@
     },
     {
       "strong": "H758",
-      "text_en": "Aram; Syria and Mesopotamia, the land of the Arameans, and Aram the son of Shem.",
-      "text_es": "Aram; Siria y Mesopotamia, la tierra de los arameos, y Aram hijo de Sem.",
-      "ot_check": "fits: Aram as land and people (2 Sam 8:5), Aram-naharaim Mesopotamia (Gen 24:10), Aram son of Shem (Gen 10:22)"
+      "text_en": "Aram; Syria and Mesopotamia, the land of the Arameans; Aram the son of Shem, and other men of this name.",
+      "text_es": "Aram; Siria y Mesopotamia, la tierra de los arameos; Aram hijo de Sem, y otros hombres de este nombre.",
+      "ot_check": "fits: Aram as land and people (2 Sam 8:5), Aram-naharaim Mesopotamia (Gen 24:10), Aram son of Shem (Gen 10:22), and the other men named Aram (Gen 22:21, 1 Chr 7:34)"
     },
     {
       "strong": "H1254",
@@ -99,9 +99,9 @@
     },
     {
       "strong": "H3568",
-      "text_en": "Cush; the region south of Egypt (Nubia or Ethiopia), and Cush the son of Ham.",
-      "text_es": "Cus; la región al sur de Egipto (Nubia o Etiopía), y Cus hijo de Cam.",
-      "ot_check": "fits: the land of Cush south of Egypt (Isa 18:1, Esth 1:1) and Cush son of Ham (Gen 10:6)"
+      "text_en": "Cush; the region south of Egypt (Nubia or Ethiopia), and Cush the son of Ham; also a Benjamite of this name.",
+      "text_es": "Cus; la región al sur de Egipto (Nubia o Etiopía), y Cus hijo de Cam; también un benjamita de este nombre.",
+      "ot_check": "fits: the land of Cush south of Egypt (Isa 18:1, Esth 1:1), Cush son of Ham (Gen 10:6), and Cush the Benjamite (Ps 7:1)"
     },
     {
       "strong": "H4023",
@@ -252,6 +252,174 @@
       "text_en": "dragon; serpent, sea monster; jackal.",
       "text_es": "dragón; serpiente, monstruo marino; chacal.",
       "ot_check": "fits: sea monster (Gen 1:21), serpent (Exod 7:9), dragon (Isa 27:1); jackal covers the plural spelling (Mic 1:8 KJV)"
+    },
+    {
+      "strong": "H3381",
+      "text_en": "go down, come down, descend; in the hiphil, bring down, let down.",
+      "text_es": "bajar, descender; en hifil, hacer bajar, bajar algo.",
+      "ot_check": "fits: go down (Gen 12:10), come down (Exod 19:11), descend (Gen 28:12); the Hiphil bring down (Gen 44:21) and let down (Josh 2:15, Gen 24:18) are named"
+    },
+    {
+      "strong": "H5046",
+      "text_en": "tell, declare, make known; be told.",
+      "text_es": "contar, declarar, dar a conocer; ser contado.",
+      "ot_check": "fits: the Hiphil tell and declare (Gen 3:11, Isa 41:22), make known (Gen 41:24), and the Hophal be told (Josh 9:24, 1 Kgs 10:7)"
+    },
+    {
+      "strong": "H3384",
+      "text_en": "throw, shoot; in the hiphil, teach, instruct, point out.",
+      "text_es": "arrojar, disparar; en hifil, enseñar, instruir, señalar.",
+      "ot_check": "fits: throw (Exod 15:4), shoot arrows (1 Sam 20:36); the Hiphil teach and instruct (Exod 4:12, Deut 33:10) and point out (Gen 46:28) are named"
+    },
+    {
+      "strong": "H7925",
+      "text_en": "rise early; start early, do early.",
+      "text_es": "madrugar; levantarse temprano, hacer temprano.",
+      "ot_check": "fits: every use is the Hiphil, rise early (Gen 19:27, 22:3), and with another verb, do early or persistently (Jer 7:13)"
+    },
+    {
+      "strong": "H5190",
+      "text_en": "lift, bear; lay upon, impose.",
+      "text_es": "levantar, llevar; imponer, poner sobre.",
+      "ot_check": "fits: lift (Isa 40:15), bear (Isa 63:9), lay upon (2 Sam 24:12, Lam 3:28)"
+    },
+    {
+      "strong": "H1167",
+      "text_en": "owner, master, lord; husband; citizen.",
+      "text_es": "dueño, amo, señor; esposo; ciudadano.",
+      "ot_check": "fits: owner (Exod 21:28), lord (Isa 16:8), husband (Gen 20:3, Deut 24:4), citizens (Judg 9:2)"
+    },
+    {
+      "strong": "H5162",
+      "text_en": "be sorry, repent; comfort, console; be comforted.",
+      "text_es": "arrepentirse, lamentar; consolar; ser consolado.",
+      "ot_check": "fits: be sorry and repent (Gen 6:6, Exod 32:14), comfort (Gen 37:35, Isa 40:1), be comforted (Gen 24:67)"
+    },
+    {
+      "strong": "H3559",
+      "text_en": "be firm, be established; prepare, make ready, set up.",
+      "text_es": "estar firme, ser establecido; preparar, disponer, establecer.",
+      "ot_check": "fits: be firm and established (Ps 93:2, 1 Kgs 2:12), prepare and make ready (Gen 43:16, Josh 1:11), set up (Isa 45:18)"
+    },
+    {
+      "strong": "H6362",
+      "text_en": "set free, release, dismiss; separate, escape.",
+      "text_es": "liberar, soltar, despedir; separar, escapar.",
+      "ot_check": "fits: set free and dismiss (2 Chr 23:8), separate or open (1 Kgs 6:18), escape (1 Sam 19:10)"
+    },
+    {
+      "strong": "H8074",
+      "text_en": "be desolate; be appalled, be astonished.",
+      "text_es": "estar desolado; quedar pasmado, asombrarse.",
+      "ot_check": "fits: be desolate (Lev 26:22, Isa 54:1), be appalled and astonished (Lev 26:32, Job 17:8, Ezra 9:3)"
+    },
+    {
+      "strong": "H2270",
+      "text_en": "companion, associate; united.",
+      "text_es": "compañero, asociado; unido.",
+      "ot_check": "fits: companion (Ps 119:63, Song 1:7), associate (Isa 1:23), united (Judg 20:11)"
+    },
+    {
+      "strong": "H4912",
+      "text_en": "proverb, parable; byword; discourse.",
+      "text_es": "proverbio, parábola; refrán; discurso.",
+      "ot_check": "fits: proverb (1 Sam 10:12, Prov 1:1), parable (Ezek 17:2), byword (Deut 28:37), discourse (Num 23:7)"
+    },
+    {
+      "strong": "H5090",
+      "text_en": "drive, lead, guide.",
+      "text_es": "conducir, guiar, llevar.",
+      "ot_check": "fits: drive (Exod 3:1, 2 Sam 6:3), lead and guide (Ps 80:2, Isa 11:6)"
+    },
+    {
+      "strong": "H7068",
+      "text_en": "jealousy, envy, zeal; ardour.",
+      "text_es": "celos, envidia, celo; ardor.",
+      "ot_check": "fits: jealousy (Num 5:14), envy (Eccl 4:4, Prov 14:30), zeal (2 Kgs 10:16, Ps 69:10)"
+    },
+    {
+      "strong": "H6045",
+      "text_en": "occupation, business, matter.",
+      "text_es": "ocupación, tarea, asunto.",
+      "ot_check": "fits: the task and business of Ecclesiastes (Eccl 1:13, 2:23, 5:13)"
+    },
+    {
+      "strong": "H615",
+      "text_en": "prisoner, captive.",
+      "text_es": "preso, cautivo.",
+      "ot_check": "fits: prisoners (Gen 39:20, Ps 69:34, Isa 14:17)"
+    },
+    {
+      "strong": "H5186",
+      "text_en": "stretch out, extend; turn aside, incline.",
+      "text_es": "extender, tender; desviarse, inclinar.",
+      "ot_check": "fits: stretch out (Exod 14:21), extend (Gen 12:8), turn aside (Num 22:23), incline (Ps 119:36)"
+    },
+    {
+      "strong": "H732",
+      "text_en": "travel, journey; wayfarer, traveller.",
+      "text_es": "viajar, caminar; viajero, caminante.",
+      "ot_check": "fits: go and journey (Job 34:8), wayfarer (Judg 19:17, Jer 9:2)"
+    },
+    {
+      "strong": "H5341",
+      "text_en": "keep, guard, watch over.",
+      "text_es": "guardar, custodiar, vigilar.",
+      "ot_check": "fits: keep the covenant (Deut 33:9), guard (Prov 4:6), watchmen (2 Kgs 17:9)"
+    },
+    {
+      "strong": "H2865",
+      "text_en": "be dismayed, be terrified; be shattered.",
+      "text_es": "desmayar, aterrarse; ser quebrantado.",
+      "ot_check": "fits: be dismayed (Deut 31:8, Josh 1:9), be terrified (Jer 1:17), be shattered (Isa 7:8)"
+    },
+    {
+      "strong": "H8551",
+      "text_en": "grasp, hold; uphold, support.",
+      "text_es": "asir, sostener; apoyar, sustentar.",
+      "ot_check": "fits: grasp and hold (Gen 48:17, Prov 31:19), uphold (Isa 41:10, Exod 17:12)"
+    },
+    {
+      "strong": "H5810",
+      "text_en": "be strong, prevail; be bold.",
+      "text_es": "ser fuerte, prevalecer; atreverse.",
+      "ot_check": "fits: be strong and prevail (Judg 3:10, Ps 9:20), be bold or brazen (Prov 7:13, 21:29)"
+    },
+    {
+      "strong": "H5365",
+      "text_en": "bore, pick out, gouge out.",
+      "text_es": "perforar, sacar, arrancar.",
+      "ot_check": "fits: pick or gouge out eyes (Judg 16:21, 1 Sam 11:2, Prov 30:17), bore or hew (Isa 51:1)"
+    },
+    {
+      "strong": "H2073",
+      "text_en": "lofty abode, habitation.",
+      "text_es": "morada excelsa, habitación.",
+      "ot_check": "fits: lofty house (1 Kgs 8:13), habitation (Isa 63:15, Ps 49:15, Hab 3:11)"
+    },
+    {
+      "strong": "H1197",
+      "text_en": "burn, kindle, consume; be brutish.",
+      "text_es": "arder, encender, consumir; ser necio.",
+      "ot_check": "fits: burn (Exod 3:2), kindle (Exod 35:3), consume and purge (Deut 13:6), be brutish (Ps 94:8, Jer 10:8)"
+    },
+    {
+      "strong": "H5048",
+      "text_en": "in front of, before, opposite; against.",
+      "text_es": "delante de, ante, enfrente; contra.",
+      "ot_check": "fits: before (Ps 23:5, Gen 31:32), in front of (Exod 19:2), opposite (Neh 3:10), against (Judg 20:34)"
+    },
+    {
+      "strong": "H5157",
+      "text_en": "inherit, take possession; get as a possession; in the hiphil, give as an inheritance.",
+      "text_es": "heredar, tomar posesión; obtener en posesión; en hifil, dar en herencia.",
+      "ot_check": "fits: inherit and possess (Num 18:20, Ps 37:11), get as a possession (Prov 3:35), the Hiphil give as an inheritance (Deut 1:38, Josh 1:6)"
+    },
+    {
+      "strong": "H6148",
+      "text_en": "be surety, pledge; mix, mingle; in the hithpael, associate with, meddle.",
+      "text_es": "ser fiador, dar en prenda; mezclar; en hitpael, asociarse, entremeterse.",
+      "ot_check": "fits: be surety (Gen 43:9, Prov 6:1), mingle (Ps 106:35, Ezra 9:2), associate and meddle (Prov 20:19, 24:21)"
     }
   ]
 }

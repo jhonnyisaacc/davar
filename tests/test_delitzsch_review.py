@@ -583,20 +583,20 @@ def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
     committed = dispositions.read_ledger()
     assert committed == rebuilt
     summary = committed["summary"]
-    assert summary["total"] == 11528 + 16084 + 7366
+    assert summary["total"] == 11528 + 16084 + 7463
     assert summary["by_disposition"]["unresolved"] == 0
     assert summary["by_family"]["prefix_metadata"] == {
-        "benign": 1325, "corrected": 3838, "already_reviewed": 331, "unresolved": 0, "blocked": 0, "superseded": 0,
+        "benign": 1319, "corrected": 3847, "already_reviewed": 328, "unresolved": 0, "blocked": 0, "superseded": 0,
     }
     assert summary["by_family"]["outside_queue"] == {
-        "benign": 9, "corrected": 7357, "already_reviewed": 0, "unresolved": 0, "blocked": 0, "superseded": 0,
+        "benign": 9, "corrected": 7454, "already_reviewed": 0, "unresolved": 0, "blocked": 0, "superseded": 0,
     }
-    assert summary["benign_lexical_review"] == {"pending": 0, "reviewed": 1697}
+    assert summary["benign_lexical_review"] == {"pending": 0, "reviewed": 1691}
     assert summary["by_family"]["legacy_assignment"] == {
-        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 8213, "superseded": 7871,
+        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 8236, "superseded": 7848,
     }
     assert {rule: summary["by_rule"][rule] for rule in ("legacy_without_candidate", "legacy_current_value", "legacy_blocked", "lexical_review")} == {
-        "legacy_without_candidate": 4360, "legacy_current_value": 3511, "legacy_blocked": 8213, "lexical_review": 1462,
+        "legacy_without_candidate": 4360, "legacy_current_value": 3488, "legacy_blocked": 8236, "lexical_review": 1456,
     }
 
 
@@ -1187,7 +1187,7 @@ def definition_gaps_batch(name="definition_gaps_42"):
 
 @pytest.mark.parametrize("name, created_count", [
     ("definition_gaps_42", 44), ("definition_gaps_42_round_2", 375), ("definition_gaps_42_round_3", 1), ("definition_gaps_42_round_4", 20),
-    ("definition_gaps_42_round_5", 177),
+    ("definition_gaps_42_round_5", 177), ("definition_gaps_42_round_7", 10),
 ])
 def test_issue_42_entries_list_exactly_the_occurrences_reviewed_onto_them(name, created_count):
     custom = json.loads((dispositions.ROOT / "data/dict/lexicon/custom_definitions.json").read_text(encoding="utf-8"))
@@ -1214,6 +1214,7 @@ def test_issue_42_entries_list_exactly_the_occurrences_reviewed_onto_them(name, 
 @pytest.mark.parametrize("name, move_count, noted", [
     ("definition_gaps_42", 148, 1), ("definition_gaps_42_round_2", 685, 14), ("definition_gaps_42_round_3", 206, 6),
     ("definition_gaps_42_round_4", 417, 6), ("definition_gaps_42_round_5", 1866, 25),
+    ("definition_gaps_42_round_7", 145, 4),
 ])
 def test_issue_42_identity_evidence_names_a_greek_word_of_the_verse(name, move_count, noted):
     greek = dispositions.ROOT / "data/greek/preview/greek/releases/sblgnt/5de0a47f35f0fc13dfe1430d104e5db8a4285f9c/books"
@@ -1242,6 +1243,12 @@ def test_no_occurrence_stays_blocked_on_an_identifier_that_names_another_word():
     ("romans", 16, 14, 6, "D0702", "Hermes; a Christian in Rome greeted by Paul."),
     ("acts", 28, 1, 7, "D0699", "Melita; the island of Malta"),
     ("timothy1", 3, 13, 1, "D0402", "serve, minister"),
+    ("acts", 21, 8, 11, "D0903", "Philip; the evangelist"),
+    ("matthew", 16, 13, 7, "D0904", "Philip; the tetrarch"),
+    ("matthew", 14, 3, 12, "D0905", "Philip; a son of Herod the Great"),
+    ("corinthians1", 16, 15, 7, "D0907", "Stephanas; a believer of Corinth"),
+    ("john3", 1, 1, 2, "D0057", "Gaius; a name borne by believers"),
+    ("acts", 4, 6, 0, "D0189", "Annas;"),
 ])
 def test_a_reviewed_new_testament_referent_shows_its_own_gloss_first(book, chapter, verse, index, strong, gloss):
     custom = json.loads((dispositions.ROOT / "data/dict/lexicon/custom_definitions.json").read_text(encoding="utf-8"))
@@ -1310,7 +1317,7 @@ def test_reverting_restores_lexical_review_corrections_and_an_unrecorded_edit_st
 def test_committed_outside_queue_root_letter_batch_matches_its_generator():
     committed = json.loads(dispositions.OUTSIDE_ROOT_LETTER_BATCH.read_text(encoding="utf-8"))
     assert committed == dispositions.outside_root_letter_batch_from_disk()
-    assert Counter(item["evidence"]["basis"] for item in committed["decisions"]) == {"reviewed_strong": 2360, "lemma_check": 1519}
+    assert Counter(item["evidence"]["basis"] for item in committed["decisions"]) == {"reviewed_strong": 2360, "lemma_check": 1518}
     assert committed["unresolved"] == []
 
 
