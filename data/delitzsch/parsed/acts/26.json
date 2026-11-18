@@ -805,7 +805,7 @@
           },
           {
             "text": "הַנָּצְרִי",
-            "strong": "Hd/H5342",
+            "strong": "Hd/D0774",
             "prefixes": [
               "Hd"
             ]
@@ -1089,7 +1089,7 @@
           },
           {
             "text": "לְדַמָּשֶׂק",
-            "strong": "Hl/H1834",
+            "strong": "Hl/D0783",
             "prefixes": [
               "Hl"
             ],
@@ -1542,7 +1542,7 @@
         "words": [
           {
             "text": "בְּהַצִּילִי",
-            "strong": "Hb/H5337",
+            "strong": "Hb/D0734",
             "prefixes": [
               "Hb"
             ]
@@ -1843,7 +1843,7 @@
           },
           {
             "text": "דַּמֶּשֶׂק",
-            "strong": "H1834",
+            "strong": "D0783",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -1870,7 +1870,7 @@
           },
           {
             "text": "יְהוּדָה",
-            "strong": "H3063",
+            "strong": "D0797",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -2709,7 +2709,7 @@
           },
           {
             "text": "נָצְרִי׃",
-            "strong": "H5342",
+            "strong": "D0774",
             "prefixes": []
           }
         ]

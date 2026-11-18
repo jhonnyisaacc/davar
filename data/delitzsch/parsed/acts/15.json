@@ -21,7 +21,7 @@
           },
           {
             "text": "מִיהוּדָה",
-            "strong": "H3063",
+            "strong": "D0797",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -529,7 +529,7 @@
           },
           {
             "text": "חוֹבָה",
-            "strong": "H2327",
+            "strong": "D0748",
             "prefixes": []
           },
           {
@@ -589,7 +589,7 @@
         "words": [
           {
             "text": "וַיִּקָּהֲלוּ",
-            "strong": "Hc/H6950",
+            "strong": "Hc/D0729",
             "prefixes": [
               "Hc"
             ]
@@ -1270,7 +1270,7 @@
           },
           {
             "text": "יַעֲקֹב",
-            "strong": "H3290",
+            "strong": "D0795",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -1462,7 +1462,7 @@
           },
           {
             "text": "דָּוִיד",
-            "strong": "H1732",
+            "strong": "D0780",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -1652,7 +1652,7 @@
           },
           {
             "text": "דָן",
-            "strong": "H1835",
+            "strong": "H1777",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -2015,7 +2015,7 @@
           },
           {
             "text": "יְהוּדָה",
-            "strong": "H3063",
+            "strong": "D0796",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -2237,7 +2237,7 @@
           },
           {
             "text": "מְבַלְבְּלִים",
-            "strong": "H1101",
+            "strong": "D0763",
             "prefixes": []
           },
           {
@@ -2496,7 +2496,7 @@
           },
           {
             "text": "יְהוּדָה",
-            "strong": "H3063",
+            "strong": "D0796",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -2800,7 +2800,7 @@
           },
           {
             "text": "וַיַּקְהִילוּ",
-            "strong": "Hc/H6950",
+            "strong": "Hc/D0729",
             "prefixes": [
               "Hc"
             ]
@@ -2888,7 +2888,7 @@
         "words": [
           {
             "text": "וִיהוּדָה",
-            "strong": "Hc/H3063",
+            "strong": "Hc/D0796",
             "prefixes": [
               "Hc"
             ],

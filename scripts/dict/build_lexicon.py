@@ -16,7 +16,7 @@ import os
 import re
 import sys
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, NamedTuple, Optional, Tuple
 import xml.etree.ElementTree as ET
 
 
@@ -52,34 +52,62 @@ NS = {'bdb': 'http://openscriptures.github.com/morphhb/namespace'}
 DEF_TAG = f"{{{NS['bdb']}}}def"
 GLOSS_CONTINUATION_TAGS = {DEF_TAG, f"{{{NS['bdb']}}}w"}
 INCOMPLETE_GLOSS_ENDINGS = {'a', 'an', 'the', 'be', 'of', 'to', 'in', 'at', 'on', 'with', 'as', 'is', 'may', 'will', 'from', 'for', 'by', 'into'}
+DIVINE_NAME_ABBREVIATION = 'י׳'
+DIVINE_NAME = 'YHWH'
+PARENTHETICAL = re.compile(r'^\([^()]+\)$')
 
 
-def def_gloss_parts(parent: ET.Element) -> List[Tuple[str, List[str]]]:
+class GlossParts(NamedTuple):
+    text: str
+    defs: List[str]
+    stages: List[Tuple[str, int]]
+
+
+def gloss_connector(text: str, tail: Optional[str], in_aside: bool, following: str) -> Optional[str]:
+    tail = (tail or '').strip()
+    if tail in ('', 'or', 'and') or PARENTHETICAL.match(tail):
+        return tail
+    if tail in (', or', ', and'):
+        return tail[2:]
+    if tail == ',' and text.lower() == 'be' and len(following.split()) > 1:
+        return 'or'
+    if tail == ',' and in_aside:
+        return ''
+    return None
+
+
+def def_gloss_parts(parent: ET.Element) -> List[GlossParts]:
     children = list(parent)
     parts, absorbed = [], set()
     for index, child in enumerate(children):
         if child.tag != DEF_TAG or index in absorbed or not child.text:
             continue
         text, cursor, defs = child.text, index, [child.text]
-        while (
-            text.split() and text.split()[-1].lower() in INCOMPLETE_GLOSS_ENDINGS
-            and cursor + 1 < len(children)
-            and children[cursor + 1].tag in GLOSS_CONTINUATION_TAGS
-            and children[cursor + 1].text
-            and (children[cursor].tail or '').strip() in ('', 'or', 'and')
-        ):
-            connector = (children[cursor].tail or '').strip()
+        stages, in_aside = [(text, 1)], False
+        while cursor + 1 < len(children) and children[cursor + 1].tag in GLOSS_CONTINUATION_TAGS and children[cursor + 1].text:
+            after_divine_name = children[cursor].tag != DEF_TAG and children[cursor].text.endswith(DIVINE_NAME_ABBREVIATION)
+            if after_divine_name and children[cursor + 1].tag == DEF_TAG and not (children[cursor].tail or '').strip():
+                connector = ''
+            elif text.split() and text.split()[-1].lower() in INCOMPLETE_GLOSS_ENDINGS:
+                connector = gloss_connector(text, children[cursor].tail, in_aside, children[cursor + 1].text)
+            else:
+                connector = None
+            if connector is None:
+                break
+            in_aside = (children[cursor].tail or '').strip() in (', or', ', and')
             cursor += 1
-            text = f"{text} {connector} {children[cursor].text}" if connector else f"{text} {children[cursor].text}"
+            piece = children[cursor].text.replace(DIVINE_NAME_ABBREVIATION, DIVINE_NAME)
+            text = f"{text} {connector} {piece}" if connector else f"{text} {piece}"
             absorbed.add(cursor)
             if children[cursor].tag == DEF_TAG:
                 defs.append(children[cursor].text)
-        parts.append((text, defs))
+            stages.append((text, len(defs)))
+        parts.append(GlossParts(text, defs, stages))
     return parts
 
 
 def def_glosses(parent: ET.Element) -> List[str]:
-    return [text for text, _ in def_gloss_parts(parent)]
+    return [part.text for part in def_gloss_parts(parent)]
 
 
 LOG_MAPPING_MISMATCHES = os.getenv('DAVAR_LEXICON_LOG_MAPPING', '').lower() in {'1', 'true', 'yes'}

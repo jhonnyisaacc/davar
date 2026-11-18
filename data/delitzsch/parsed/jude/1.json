@@ -9,7 +9,7 @@
         "words": [
           {
             "text": "יְהוּדָה",
-            "strong": "H3063",
+            "strong": "D0796",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -40,7 +40,7 @@
           },
           {
             "text": "יַעֲקֹב",
-            "strong": "H3290",
+            "strong": "D0795",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -221,7 +221,7 @@
           },
           {
             "text": "חוֹבָה",
-            "strong": "H2327",
+            "strong": "D0748",
             "prefixes": []
           },
           {
@@ -257,7 +257,7 @@
           },
           {
             "text": "תִּלָּחֲמוּ",
-            "strong": "H3898",
+            "strong": "D0757",
             "prefixes": []
           },
           {
@@ -385,7 +385,7 @@
           },
           {
             "text": "לְזִמָּה",
-            "strong": "Hl/H2154",
+            "strong": "Hl/D0737",
             "prefixes": [
               "Hl"
             ]
@@ -629,7 +629,7 @@
           },
           {
             "text": "זְבֻלָם",
-            "strong": "H2083",
+            "strong": "H2073",
             "prefixes": []
           },
           {
@@ -1166,7 +1166,7 @@
           },
           {
             "text": "קַיִן",
-            "strong": "H7014",
+            "strong": "D0793",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -1217,7 +1217,7 @@
           },
           {
             "text": "קֹרַח",
-            "strong": "H7141",
+            "strong": "D0815",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -1302,7 +1302,7 @@
           },
           {
             "text": "וְרֹעִים",
-            "strong": "Hc/H7462",
+            "strong": "Hc/D0735",
             "prefixes": [
               "Hc"
             ]

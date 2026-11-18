@@ -38,7 +38,7 @@
           },
           {
             "text": "יְהוּדָה",
-            "strong": "H3063",
+            "strong": "D0797",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -57,7 +57,7 @@
           },
           {
             "text": "וַיִּקָּהֲלוּ",
-            "strong": "Hc/H6950",
+            "strong": "Hc/D0729",
             "prefixes": [
               "Hc"
             ]
@@ -1519,7 +1519,7 @@
           },
           {
             "text": "מְכֹר",
-            "strong": "H3372",
+            "strong": "H4376",
             "prefixes": []
           },
           {
@@ -2692,7 +2692,7 @@
           },
           {
             "text": "וִירֵאִים",
-            "strong": "H3372",
+            "strong": "Hc/D0733",
             "prefixes": [
               "Hc"
             ]
@@ -2745,7 +2745,7 @@
           },
           {
             "text": "וַיָּחֶל",
-            "strong": "Hc/H2490",
+            "strong": "Hc/D0772",
             "prefixes": [
               "Hc"
             ]
@@ -2993,7 +2993,7 @@
           },
           {
             "text": "יַעֲקֹב",
-            "strong": "H3290",
+            "strong": "D0795",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -3544,7 +3544,7 @@
           },
           {
             "text": "וַיָּחֵלּוּ",
-            "strong": "Hc/H2490",
+            "strong": "Hc/D0772",
             "prefixes": [
               "Hc"
             ]
@@ -3563,7 +3563,7 @@
           },
           {
             "text": "יַעֲקֹב",
-            "strong": "H3290",
+            "strong": "D0795",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -4095,14 +4095,14 @@
           },
           {
             "text": "הַנָּצְרִי",
-            "strong": "Hd/H5342",
+            "strong": "Hd/D0774",
             "prefixes": [
               "Hd"
             ]
           },
           {
             "text": "וַיָּחֶל",
-            "strong": "Hc/H2490",
+            "strong": "Hc/D0772",
             "prefixes": [
               "Hc"
             ]
@@ -4133,7 +4133,7 @@
           },
           {
             "text": "דָּוִד",
-            "strong": "H1732",
+            "strong": "D0780",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -4145,7 +4145,7 @@
           },
           {
             "text": "חָנֵּנִי׃",
-            "strong": "H2603",
+            "strong": "D0732",
             "prefixes": []
           }
         ]
@@ -4210,13 +4210,13 @@
           },
           {
             "text": "דָּוִד",
-            "strong": "H1732",
+            "strong": "D0780",
             "prefixes": [],
             "possible_proper_name": true
           },
           {
             "text": "חָנֵּנִי׃",
-            "strong": "H2603",
+            "strong": "D0732",
             "prefixes": []
           }
         ]

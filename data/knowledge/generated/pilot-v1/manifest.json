@@ -3,23 +3,23 @@
   "files": [
     {
       "path": "bundles/daniel/7/13.json",
-      "sha256": "09eaf04891611121fe21b4c0d4dfd22e715656bcb5418e0cb8c3e09969f1a496"
+      "sha256": "f926d9b8060f3481b905e880e87d86792db48100b118ccfa0fe23e733e85f911"
     },
     {
       "path": "bundles/john/1/1.json",
-      "sha256": "325f29e3f9c0dc14bc671d32d3424eff81631deeb83b704aacee1a60f70307fb"
+      "sha256": "199f002c313d11f840411b351b14d4dfaee1dbf2f7905b1930dc5b25b29dbe6f"
     },
     {
       "path": "bundles/john/1/51.json",
-      "sha256": "3e8c179030edea64260033c00a737df4e8c3099e703da08009e767f63345e46b"
+      "sha256": "17f11bda7c635b612b21bf4c1fec2050e2d1fbe77c99a377fef3648b747ec061"
     },
     {
       "path": "records/records.json",
-      "sha256": "df7e7049ef4b039a3605aced18f5bb9c704a274436acc2e8a40d8b1416845dea"
+      "sha256": "5907b139dfb5d9b9e8e9c63170141ca501005af029a04ff392d4e420880d643f"
     }
   ],
   "generator_version": "1.0.0",
-  "input_manifest_digest": "e86057a0a659a688f17227feee8fdc86df540899029fc8997613abd01b296bc8",
+  "input_manifest_digest": "033e22814048f6ef2f84aae723c72a0ee541e958d657e27db06c3af68ea2af29",
   "inputs": [
     {
       "id": "greek-lexicon",
@@ -43,7 +43,7 @@
       "path": "data/delitzsch/parsed/john/1.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-      "sha256": "4d143373faa24dbd42665c7be62ba15f6b516d0f630cfaefeaa93037b70c116c"
+      "sha256": "04e898d5d345167b59aa9aa2c2d1ce588b573ad4eb503efff06ca9a8e3eb2e35"
     },
     {
       "id": "greek",
@@ -67,7 +67,7 @@
       "path": "data/dict/lexicon/words.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-      "sha256": "65bb3ae34919f23509fd7c6368f5f0850fe2d249905354033de47303778e0ac2"
+      "sha256": "d577c846afc92560816b94c2bcd27682d450239437bd9b7134c531995b05d715"
     },
     {
       "id": "custom",
@@ -76,7 +76,7 @@
       "path": "data/dict/lexicon/custom_definitions.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-      "sha256": "89d78343e9ad9d1bbfcff256b925baacd2f05f79317a7786469da88a92545bc3"
+      "sha256": "1c7f95ba8b0bd51def60d7ea81c3422d585537164b2644dc48601f62dabd3c19"
     },
     {
       "fixture_path": "tests/fixtures/knowledge/shaul/knowledge/concepts/son-of-man.yml",

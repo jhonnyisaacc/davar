@@ -365,7 +365,7 @@
           },
           {
             "text": "יְהוּדָה",
-            "strong": "H3063",
+            "strong": "D0796",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -387,7 +387,7 @@
           },
           {
             "text": "קְרִיּוֹת",
-            "strong": "H7152",
+            "strong": "D0245",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -726,7 +726,7 @@
           },
           {
             "text": "בִּיהוּדָה",
-            "strong": "Hb/H3063",
+            "strong": "Hb/D0797",
             "prefixes": [
               "Hb"
             ],
@@ -1202,7 +1202,7 @@
           },
           {
             "text": "תִּירְאִי",
-            "strong": "H3372",
+            "strong": "D0733",
             "prefixes": []
           },
           {
@@ -1212,7 +1212,7 @@
           },
           {
             "text": "צִיּוֹן",
-            "strong": "H6726",
+            "strong": "D0788",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -1701,7 +1701,7 @@
           },
           {
             "text": "יְוָנִים׃",
-            "strong": "H3125",
+            "strong": "D0777",
             "prefixes": []
           }
         ]
@@ -1757,7 +1757,7 @@
           },
           {
             "text": "הַגָּלִיל",
-            "strong": "Hd/H1551",
+            "strong": "Hd/D0779",
             "prefixes": [
               "Hd"
             ],
@@ -2128,7 +2128,7 @@
           },
           {
             "text": "יִנְצְרֶהָ",
-            "strong": "H5342",
+            "strong": "H5341",
             "prefixes": []
           },
           {
@@ -3239,7 +3239,7 @@
           },
           {
             "text": "יְשַׁעְיָהוּ",
-            "strong": "H3470",
+            "strong": "D0782",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -3365,7 +3365,7 @@
           },
           {
             "text": "יְשַׁעְיָהוּ׃",
-            "strong": "H3470",
+            "strong": "D0782",
             "prefixes": [],
             "possible_proper_name": true
           }
@@ -3469,7 +3469,7 @@
           },
           {
             "text": "יְשַׁעְיָהוּ",
-            "strong": "H3470",
+            "strong": "D0782",
             "prefixes": [],
             "possible_proper_name": true
           },

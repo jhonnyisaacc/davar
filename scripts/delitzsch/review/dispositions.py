@@ -283,7 +283,7 @@ def valid_root_letter_link(decision: dict[str, Any], entry: Record) -> bool:
         and new_prefixes is not None
         and len(new_prefixes) < len(occurrence["prefixes"])
         and occurrence["prefixes"][:len(new_prefixes)] == new_prefixes
-        and decision["new_strong"] == "/".join([*new_prefixes, occurrence["strong"].split("/")[-1]])
+        and decision["new_strong"] in ("/".join([*new_prefixes, occurrence["strong"].split("/")[-1]]), occurrence["strong"].split("/")[-1])
         and bool(decision.get("reason"))
     )
 

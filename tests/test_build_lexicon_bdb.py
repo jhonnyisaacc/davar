@@ -4,6 +4,7 @@ from pathlib import Path
 
 
 from scripts.dict.build_lexicon import (
+    def_gloss_parts,
     extract_bdb_definitions_with_sense,
     preserve_existing_definition_metadata,
 )
@@ -147,6 +148,57 @@ def test_a_truncated_lexicon_gloss_is_completed_and_its_split_continuation_dropp
         ("be or act as adversary", "ser o actuar como adversario"), ("Satan", None),
     ]
     assert bdb_truncated_glosses.derive(lexicon, bdb_root, mapping) == []
+
+
+def test_a_gloss_continues_past_a_comma_and_an_abbreviated_divine_name():
+    bdb_root = ET.fromstring(
+        f"""
+        <bdb xmlns="{BDB_NS}">
+          <entry id="h.cn.aa"><w>חָלָה</w> <def>be</def>, <def>become weak</def></entry>
+          <entry id="g.aa.aa"><w>גְּאַלְיָה</w> <def>May</def> <w>י׳</w> <def>give joy!</def></entry>
+          <entry id="b.aa.aa"><w>בָּא</w> <def>go to</def>, or <def>in</def>, <def>the city</def></entry>
+          <entry id="k.aa.aa"><w>כִּי</w> <def>that</def>, <def>for</def></entry>
+        </bdb>
+        """
+    )
+    texts = {entry.get("id"): [part.text for part in def_gloss_parts(entry)] for entry in bdb_root}
+    assert texts == {
+        "h.cn.aa": ["be or become weak"],
+        "g.aa.aa": ["May YHWH give joy!"],
+        "b.aa.aa": ["go to or in the city"],
+        "k.aa.aa": ["that", "for"],
+    }
+
+
+def test_a_cut_off_gloss_stored_under_an_entry_whose_bdb_text_lacks_it_is_dropped():
+    bdb_root = ET.fromstring(
+        f"""
+        <bdb xmlns="{BDB_NS}">
+          <entry id="u.ay.ac">[<w>שָׂטַן</w>] <def>be</def> or <def>act as adversary</def></entry>
+          <entry id="r.aa.aa"><w>רוּם</w> <def>be high</def></entry>
+        </bdb>
+        """
+    )
+    lexicon = {"H7311": {"definitions": [
+        {"text_en": "be high", "source": "bdb", "order": 1},
+        {"text_en": "be", "text_es": "ser", "source": "bdb", "order": 2},
+    ]}}
+    repairs = bdb_truncated_glosses.derive(lexicon, bdb_root, {"H7311": ["r.aa.aa"]})
+    assert [(r.strong, r.order, r.after) for r in repairs] == [("H7311", 2, None)]
+    bdb_truncated_glosses.apply(lexicon["H7311"], repairs, {})
+    assert [d["text_en"] for d in lexicon["H7311"]["definitions"]] == ["be high"]
+
+
+def test_a_bdb_record_whose_english_is_in_the_spanish_table_takes_that_spanish():
+    lexicon = {"H8380": {"definitions": [
+        {"text_en": "twin", "source": "bdb", "order": 1},
+        {"text_en": "twin", "text_es": "gemelo", "source": "bdb", "order": 2},
+        {"text_en": "twin", "text_es": "mellizo", "source": "custom", "order": 3},
+    ]}}
+    drift = bdb_truncated_glosses.spanish_drift(lexicon, {"twin": "gemelo"})
+    assert [(r.strong, r.order) for r in drift] == [("H8380", 1)]
+    bdb_truncated_glosses.apply(lexicon["H8380"], drift, {"twin": "gemelo"})
+    assert [d.get("text_es") for d in lexicon["H8380"]["definitions"]] == ["gemelo", "gemelo", "mellizo"]
 
 
 def test_no_truncated_bdb_gloss_remains_in_the_lexicon():

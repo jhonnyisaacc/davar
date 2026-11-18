@@ -6617,7 +6617,8 @@
         "text_en": "redemption",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "redención"
       },
       {
         "text_en": "redeem",
@@ -36828,7 +36829,8 @@
         "text_en": "whirl, dance, writhe",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "girar, danzar, retorcerse"
       },
       {
         "text_en": "dance",
@@ -40909,7 +40911,7 @@
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "pasar adelante o pasar de largo"
+        "text_es": "pasar adelante o desaparecer"
       },
       {
         "text_en": "pass through",
@@ -47307,7 +47309,8 @@
         "text_en": "ban, devote, exterminate",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "anatematizar, consagrar, exterminar"
       },
       {
         "text_en": "ban",
@@ -48966,18 +48969,11 @@
     "translit_es": "jashaje",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or grow dark",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "grow dark",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "oscurecerse"
+        "text_es": "estar o volverse oscuro"
       }
     ],
     "sources": {
@@ -76740,17 +76736,11 @@
         "text_es": "y os reuniré"
       },
       {
-        "text_en": "and the covering is",
+        "text_en": "and the covering is (too) narrow when one gathers oneself together",
         "source": "bdb",
         "order": 4,
         "sense": "0",
-        "text_es": "y la cubierta es"
-      },
-      {
-        "text_en": "narrow when one gathers oneself together",
-        "source": "bdb",
-        "order": 5,
-        "sense": "0"
+        "text_es": "y la cubierta es (demasiado) estrecha para envolverse en ella"
       },
       {
         "text_en": "gather; assemble; assembly/synagogue context.",
@@ -81073,18 +81063,11 @@
         "text_es": "vestido con"
       },
       {
-        "text_en": "and the spirit of י׳",
+        "text_en": "and the spirit of YHWH clothed itself with Gideon",
         "source": "bdb",
         "order": 12,
         "sense": "1f",
-        "text_es": "y el espíritu de י׳"
-      },
-      {
-        "text_en": "clothed itself with Gideon",
-        "source": "bdb",
-        "order": 13,
-        "sense": "1f",
-        "text_es": "se revistió de Gedeón"
+        "text_es": "y el espíritu de YHWH se revistió de Gedeón"
       },
       {
         "text_en": "arrayed",
@@ -89414,11 +89397,11 @@
         "text_es": "ser circuncidado"
       },
       {
-        "text_en": "in the name of י׳",
+        "text_en": "in the name of YHWH",
         "source": "bdb",
         "order": 3,
         "sense": "0",
-        "text_es": "en el nombre de י׳"
+        "text_es": "en el nombre de YHWH"
       },
       {
         "text_en": "yea I will make them to be circumcised",
@@ -93114,18 +93097,11 @@
     "translit_es": "malaje",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or become king",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "become king",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "convertirse en rey"
+        "text_es": "ser o llegar a ser rey"
       },
       {
         "text_en": "queen",
@@ -103674,17 +103650,11 @@
         "sense": "4"
       },
       {
-        "text_en": "the breath of י׳",
+        "text_en": "the breath of YHWH driveth at it",
         "source": "bdb",
         "order": 10,
         "sense": "0",
-        "text_es": "el aliento de י׳"
-      },
-      {
-        "text_en": "driveth at it",
-        "source": "bdb",
-        "order": 11,
-        "sense": "0"
+        "text_es": "el aliento de YHWH lo empuja"
       },
       {
         "text_en": "driveth it on",
@@ -104818,7 +104788,8 @@
         "text_en": "dedicate, consecrate, separate",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "dedicar, consagrar, separar"
       },
       {
         "text_en": "devote",
@@ -109314,11 +109285,11 @@
         "text_es": "retroceder"
       },
       {
-        "text_en": "prove recreant to י׳",
+        "text_en": "prove recreant to YHWH",
         "source": "bdb",
         "order": 3,
         "sense": "0",
-        "text_es": "ser desleal a י׳"
+        "text_es": "ser desleal a YHWH"
       },
       {
         "text_en": "turn oneself away",
@@ -109627,18 +109598,11 @@
         "text_es": "arrancar"
       },
       {
-        "text_en": "the house of proud men will י׳",
+        "text_en": "the house of proud men will YHWH tear down",
         "source": "bdb",
         "order": 3,
         "sense": "0",
-        "text_es": "la casa de los soberbios י׳"
-      },
-      {
-        "text_en": "tear down",
-        "source": "bdb",
-        "order": 4,
-        "sense": "0",
-        "text_es": "derribar"
+        "text_es": "YHWH derribará la casa de los soberbios"
       },
       {
         "text_en": "and ye shall be torn away from off the land",
@@ -115881,17 +115845,11 @@
         "text_es": "soplar"
       },
       {
-        "text_en": "the breath of י׳",
+        "text_en": "the breath of YHWH has blown upon it",
         "source": "bdb",
         "order": 2,
         "sense": "0",
-        "text_es": "el aliento de י׳"
-      },
-      {
-        "text_en": "has blown upon it",
-        "source": "bdb",
-        "order": 3,
-        "sense": "0"
+        "text_es": "el aliento de YHWH ha soplado sobre ella"
       },
       {
         "text_en": "he causes",
@@ -121794,11 +121752,11 @@
         "text_es": "retroceder"
       },
       {
-        "text_en": "prove recreant to י׳",
+        "text_en": "prove recreant to YHWH",
         "source": "bdb",
         "order": 3,
         "sense": "0",
-        "text_es": "ser desleal a י׳"
+        "text_es": "ser desleal a YHWH"
       },
       {
         "text_en": "turn oneself away",
@@ -122113,17 +122071,11 @@
         "sense": "0"
       },
       {
-        "text_en": "cause to",
+        "text_en": "cause to (turn aside,) depart",
         "source": "bdb",
         "order": 7,
-        "sense": "1"
-      },
-      {
-        "text_en": "depart",
-        "source": "bdb",
-        "order": 8,
         "sense": "1",
-        "text_es": "partir"
+        "text_es": "hacer (desviarse,) apartarse"
       },
       {
         "text_en": "remove",
@@ -130470,7 +130422,8 @@
         "text_en": "count, recount, relate",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "contar, relatar, narrar"
       },
       {
         "text_en": "count",
@@ -136675,7 +136628,8 @@
         "text_en": "envelop oneself (Aramaism)",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "envolverse (arameísmo)"
       },
       {
         "text_en": "be feeble",
@@ -152288,7 +152242,8 @@
         "text_en": "scatterer",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "dispersador"
       },
       {
         "text_en": "disperser",
@@ -167238,7 +167193,8 @@
         "text_en": "vomit up",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "vomitar"
       },
       {
         "text_en": "spue out",
@@ -178087,10 +178043,11 @@
         "sense": "0"
       },
       {
-        "text_en": "thy cattle thou shalt not cause to",
+        "text_en": "thy cattle thou shalt not cause to (let) lie down",
         "source": "bdb",
         "order": 4,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "no harás (dejarás) que tu ganado se eche"
       },
       {
         "text_en": "two kinds",
@@ -179015,25 +178972,11 @@
     "translit_es": "radam",
     "definitions": [
       {
-        "text_en": "be in",
+        "text_en": "be in or fall into heavy sleep",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "estar en"
-      },
-      {
-        "text_en": "fall into",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "caer en"
-      },
-      {
-        "text_en": "heavy sleep",
-        "source": "bdb",
-        "order": 3,
-        "sense": "0",
-        "text_es": "sueño pesado"
+        "text_es": "estar o caer en sueño profundo"
       }
     ],
     "sources": {
@@ -186876,16 +186819,11 @@
         "sense": "0"
       },
       {
-        "text_en": "canst thou make with",
+        "text_en": "canst thou make with (= like) him a spreading for clouds",
         "source": "bdb",
         "order": 8,
-        "sense": "0"
-      },
-      {
-        "text_en": "him a spreading for clouds",
-        "source": "bdb",
-        "order": 9,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "¿puedes extender con él (= como él) las nubes?"
       }
     ],
     "sources": {
@@ -190164,18 +190102,11 @@
         "text_es": "ser alto"
       },
       {
-        "text_en": "be",
+        "text_en": "be (inaccessibly) high",
         "source": "bdb",
         "order": 2,
         "sense": "1",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "high",
-        "source": "bdb",
-        "order": 3,
-        "sense": "1",
-        "text_es": "alto"
+        "text_es": "ser (inaccesiblemente) alto"
       },
       {
         "text_en": "be high",
@@ -190192,18 +190123,11 @@
         "text_es": "ser alto"
       },
       {
-        "text_en": "be",
+        "text_en": "be (safely) set on high",
         "source": "bdb",
         "order": 6,
         "sense": "2",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "set on high",
-        "source": "bdb",
-        "order": 7,
-        "sense": "2",
-        "text_es": "poner en alto"
+        "text_es": "estar (a salvo) puesto en alto"
       },
       {
         "text_en": "be exalted",
@@ -193495,11 +193419,11 @@
         "text_es": "retroceder"
       },
       {
-        "text_en": "prove recreant to י׳",
+        "text_en": "prove recreant to YHWH",
         "source": "bdb",
         "order": 3,
         "sense": "0",
-        "text_es": "ser desleal a י׳"
+        "text_es": "ser desleal a YHWH"
       },
       {
         "text_en": "turn oneself away",
@@ -195917,25 +195841,11 @@
     "translit_es": "svr",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or act as prince",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "act as",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "actuar como"
-      },
-      {
-        "text_en": "prince",
-        "source": "bdb",
-        "order": 3,
-        "sense": "0",
-        "text_es": "príncipe"
+        "text_es": "ser o actuar como príncipe"
       },
       {
         "text_en": "rule",
@@ -202070,18 +201980,11 @@
         "text_es": "tranquilo"
       },
       {
-        "text_en": "be",
+        "text_en": "be (have) quiet",
         "source": "bdb",
         "order": 3,
         "sense": "1",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "quiet",
-        "source": "bdb",
-        "order": 4,
-        "sense": "1",
-        "text_es": "quieto"
+        "text_es": "estar (tener) tranquilo"
       },
       {
         "text_en": "be at ease",
@@ -202180,18 +202083,11 @@
         "text_es": "tranquilo"
       },
       {
-        "text_en": "be",
+        "text_en": "be (have) quiet",
         "source": "bdb",
         "order": 3,
         "sense": "1",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "quiet",
-        "source": "bdb",
-        "order": 4,
-        "sense": "1",
-        "text_es": "quieto"
+        "text_es": "estar (tener) tranquilo"
       },
       {
         "text_en": "be at ease",
@@ -205902,17 +205798,11 @@
         "sense": "2b"
       },
       {
-        "text_en": "all the days of",
+        "text_en": "all the days of (its) being desolate",
         "source": "bdb",
         "order": 13,
-        "sense": "0"
-      },
-      {
-        "text_en": "being desolate",
-        "source": "bdb",
-        "order": 14,
         "sense": "0",
-        "text_es": "estando desolado"
+        "text_es": "todos los días de (su) desolación"
       },
       {
         "text_en": "be appalled",
@@ -209403,7 +209293,8 @@
         "text_en": "repeat",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "repetir"
       },
       {
         "text_en": "do again",
@@ -213442,25 +213333,11 @@
     "translit_es": "sarar",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or act as prince",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "act as",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "actuar como"
-      },
-      {
-        "text_en": "prince",
-        "source": "bdb",
-        "order": 3,
-        "sense": "0",
-        "text_es": "príncipe"
+        "text_es": "ser o actuar como príncipe"
       },
       {
         "text_en": "rule",
@@ -214102,17 +213979,11 @@
         "sense": "0"
       },
       {
-        "text_en": "is",
+        "text_en": "is (may be) drunk",
         "source": "bdb",
         "order": 3,
-        "sense": "0"
-      },
-      {
-        "text_en": "drunk",
-        "source": "bdb",
-        "order": 4,
         "sense": "0",
-        "text_es": "ebrio"
+        "text_es": "es (puede ser) bebido"
       }
     ],
     "sources": {

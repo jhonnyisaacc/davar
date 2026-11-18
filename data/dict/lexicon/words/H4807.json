@@ -8,18 +8,11 @@
   "translit_es": "meriyvbaal",
   "definitions": [
     {
-      "text_en": "Baal is",
+      "text_en": "Baal is (our, my, his) advocate",
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "Baal es"
-    },
-    {
-      "text_en": "advocate",
-      "source": "bdb",
-      "order": 2,
-      "sense": "0",
-      "text_es": "abogado"
+      "text_es": "Baal es (nuestro, mi, su) defensor"
     },
     {
       "text_en": "son of Jonathan",

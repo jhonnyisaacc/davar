@@ -13,6 +13,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, Iterable
 
+from scripts.dict.apply_instance_policy import refresh_custom_instances
+
 
 LEXICON_KEY_RE = re.compile(r"([HGD])(\d+)")
 PREFIX_CODES = {"Hb", "Hl", "Hk", "Hc", "Hd", "Hm"}
@@ -752,16 +754,24 @@ def _move_custom_instance(
     source = custom.get(lexicon.normalize_strong(previous_strong) or "")
     target = custom.get(lexicon.normalize_strong(new_strong) or "")
     changed = False
-    if source is not target and source and source.get("mapping_scope") == "instances_only":
-        kept = [item for item in source.get("nt_instances", []) if not _same_instance(item, instance)]
-        changed = len(kept) != len(source.get("nt_instances", []))
-        source["nt_instances"] = kept
-    if target and target.get("mapping_scope") == "instances_only":
-        listed = target.setdefault("nt_instances", [])
-        if not any(_same_instance(item, instance) for item in listed):
-            listed.append(instance)
+    if source is not target and source and "nt_instances" in source:
+        kept = [item for item in source["nt_instances"] if not _same_instance(item, instance)]
+        if len(kept) != len(source["nt_instances"]):
+            source["nt_instances"] = kept
+            refresh_custom_instances(source)
             changed = True
+    if target and (target.get("mapping_scope") == "instances_only" or "nt_instances" in target):
+        changed = _list_custom_instances(target, [instance]) or changed
     return changed
+
+
+def _list_custom_instances(entry: dict[str, Any], instances: list[dict[str, Any]]) -> bool:
+    listed = entry.setdefault("nt_instances", [])
+    missing = [instance for instance in instances if not any(_same_instance(item, instance) for item in listed)]
+    listed.extend(missing)
+    if missing:
+        refresh_custom_instances(entry)
+    return bool(missing)
 
 
 def _upsert_custom_definition(
@@ -777,6 +787,8 @@ def _upsert_custom_definition(
 
     custom = lexicon.load_custom_entries()
     existing = lexicon.get(key) or {}
+    if key in custom and decision.get("nt_instances"):
+        _list_custom_instances(custom[key], [_custom_instance_from_occurrence(item) for item in decision["nt_instances"]])
     entry = custom.setdefault(
         key,
         {

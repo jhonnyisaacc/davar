@@ -49,17 +49,11 @@
       "sense": "0"
     },
     {
-      "text_en": "cause to",
+      "text_en": "cause to (turn aside,) depart",
       "source": "bdb",
       "order": 7,
-      "sense": "1"
-    },
-    {
-      "text_en": "depart",
-      "source": "bdb",
-      "order": 8,
       "sense": "1",
-      "text_es": "partir"
+      "text_es": "hacer (desviarse,) apartarse"
     },
     {
       "text_en": "remove",

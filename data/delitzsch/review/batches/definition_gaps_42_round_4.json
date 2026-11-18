@@ -2867,7 +2867,7 @@
       "evidence": {
         "lexicon": "D0707 זְכַרְיָה Zechariah; the prophet whose book tells of the thirty pieces of silver (Zechariah 11:12-13).",
         "grammar": "personal name",
-        "context": "Matthew 27:9, Greek Ζαχαρίας",
+        "context": "Matthew 27:9, Greek Ἰερεμίου",
         "issue": 42,
         "greek_note": "the SBLGNT reads διὰ Ἰερεμίου τοῦ προφήτου; Delitzsch names Zechariah, whose book holds the quoted words"
       }
@@ -3584,7 +3584,7 @@
       "evidence": {
         "lexicon": "D0708 יוֹחָנָן John; Yohanan, a name borne in the New Testament by John the Baptist, the apostle John son of Zebedee, John Mark, and others.",
         "grammar": "personal name",
-        "context": "John 1:29, Greek Ἰωάννης",
+        "context": "John 1:28, Greek Ἰωάννης",
         "issue": 42,
         "greek_note": "the SBLGNT names ὁ Ἰωάννης in verse 28; Delitzsch's verse 29 names him as the subject"
       }
@@ -4334,7 +4334,7 @@
       "evidence": {
         "lexicon": "D0708 יוֹחָנָן John; Yohanan, a name borne in the New Testament by John the Baptist, the apostle John son of Zebedee, John Mark, and others.",
         "grammar": "personal name",
-        "context": "Luke 7:19, Greek Ἰωάννης",
+        "context": "Luke 7:18, Greek Ἰωάννῃ",
         "issue": 42,
         "greek_note": "the SBLGNT names Ἰωάννῃ in verse 18; Delitzsch's verse 19 names him as the sender"
       }
@@ -6381,7 +6381,7 @@
       "evidence": {
         "lexicon": "D0710 שִׁמְעוֹן Simon; Shimon, a name borne in the New Testament by Simon Peter, Simon the Zealot, Simon of Cyrene, Simon the tanner, and others.",
         "grammar": "personal name",
-        "context": "John 12:4, Greek Σίμων",
+        "context": "John 12:4, Greek Ἰούδας",
         "issue": 42,
         "greek_note": "the SBLGNT reads Ἰούδας ὁ Ἰσκαριώτης; Delitzsch follows the Textus Receptus Ἰούδας Σίμωνος Ἰσκαριώτης"
       }
@@ -9022,7 +9022,7 @@
       "evidence": {
         "lexicon": "D0712 מִרְיָם Mary; Miriam, a name borne in the New Testament by Mary the mother of Jesus, Mary Magdalene, Mary of Bethany, and other women.",
         "grammar": "personal name",
-        "context": "Mark 16:9, Greek Μαρία",
+        "context": "Mark 16:9, Greek Μαρίᾳ, in the longer ending",
         "issue": 42,
         "greek_note": "the SBLGNT text used here has no Mark 16:9; Delitzsch renders the longer ending, Μαρίᾳ τῇ Μαγδαληνῇ"
       }
@@ -10440,7 +10440,7 @@
       "evidence": {
         "lexicon": "H7651 שֶׁבַע seven",
         "grammar": "numeral",
-        "context": "Revelation 1:13, Greek ἑπτά",
+        "context": "Revelation 1:13, Greek λυχνιῶν",
         "issue": 42,
         "greek_note": "the SBLGNT reads ἐν μέσῳ τῶν λυχνιῶν; Delitzsch follows the Textus Receptus τῶν ἑπτὰ λυχνιῶν"
       }

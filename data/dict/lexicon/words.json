@@ -10315,7 +10315,8 @@
         "text_en": "in",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "en"
       }
     ],
     "sources": {
@@ -23707,7 +23708,8 @@
         "text_en": "rosy",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "rojizo"
       },
       {
         "text_en": "red",
@@ -43832,7 +43834,8 @@
         "text_en": "revilings",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "injurias"
       },
       {
         "text_en": "reviling words",
@@ -79047,7 +79050,8 @@
         "text_en": "goad",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "aguijón"
       }
     ],
     "sources": {
@@ -128159,7 +128163,8 @@
         "text_en": "haste",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "prisa"
       },
       {
         "text_en": "make haste",
@@ -130134,7 +130139,8 @@
         "text_en": "manacle",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "grillete"
       },
       {
         "text_en": "manacles",
@@ -132223,11 +132229,11 @@
         "sense": "0"
       },
       {
-        "text_en": "to call on the name of י׳",
+        "text_en": "to call on the name of YHWH",
         "source": "bdb",
         "order": 17,
         "sense": "0",
-        "text_es": "invocar el nombre de י׳"
+        "text_es": "invocar el nombre de YHWH"
       },
       {
         "text_en": "play the pipe",
@@ -134624,11 +134630,11 @@
     "translit_es": "jilekiyah",
     "definitions": [
       {
-        "text_en": "my portion is י׳",
+        "text_en": "my portion is YHWH",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "mi porción es י׳"
+        "text_es": "mi porción es YHWH"
       },
       {
         "text_en": "father of Eliakim, Hezekiah’s officer",
@@ -197388,18 +197394,11 @@
     "translit_es": "yiziyah",
     "definitions": [
       {
-        "text_en": "may י׳",
+        "text_en": "may YHWH sprinkle",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "que י׳"
-      },
-      {
-        "text_en": "sprinkle",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "rociar"
+        "text_es": "que YHWH rocíe"
       }
     ],
     "sources": {
@@ -198476,18 +198475,11 @@
     "translit_es": "yejediyahu",
     "definitions": [
       {
-        "text_en": "May י׳",
+        "text_en": "May YHWH give joy!",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "Que י׳"
-      },
-      {
-        "text_en": "give joy!",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "¡dé gozo!"
+        "text_es": "¡Que YHWH dé alegría!"
       },
       {
         "text_en": "a Levite",
@@ -226022,7 +226014,8 @@
         "text_en": "remainder, excellence, excess",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "resto, excelencia, exceso"
       },
       {
         "text_en": "cord",
@@ -234856,7 +234849,8 @@
         "text_en": "that, for, when",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "que, porque, cuando"
       },
       {
         "text_en": "that",
@@ -333296,7 +333290,8 @@
         "text_en": "salt",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "sal"
       },
       {
         "text_en": "season",
@@ -337111,13 +337106,6 @@
     "translit_es": "meleje",
     "definitions": [
       {
-        "text_en": "be",
-        "source": "bdb",
-        "order": 1,
-        "sense": "0",
-        "text_es": "ser"
-      },
-      {
         "text_en": "become king",
         "source": "bdb",
         "order": 2,
@@ -337630,13 +337618,6 @@
     "translit_en": "moleche",
     "translit_es": "moleje",
     "definitions": [
-      {
-        "text_en": "be",
-        "source": "bdb",
-        "order": 1,
-        "sense": "0",
-        "text_es": "ser"
-      },
       {
         "text_en": "become king",
         "source": "bdb",
@@ -356421,11 +356402,11 @@
     "translit_es": "maasay",
     "definitions": [
       {
-        "text_en": "work of י׳",
+        "text_en": "work of YHWH",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "obra de י׳"
+        "text_es": "obra de YHWH"
       },
       {
         "text_en": "priest, Je.’s time",
@@ -356523,11 +356504,11 @@
     "translit_es": "maaseyah",
     "definitions": [
       {
-        "text_en": "work of י׳",
+        "text_en": "work of YHWH",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "obra de י׳"
+        "text_es": "obra de YHWH"
       },
       {
         "text_en": "priest, Je.’s time",
@@ -365847,11 +365828,11 @@
     "translit_es": "mikeneyahu",
     "definitions": [
       {
-        "text_en": "possession of י׳",
+        "text_en": "possession of YHWH",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "posesión de י׳"
+        "text_es": "posesión de YHWH"
       }
     ],
     "sources": {
@@ -370719,18 +370700,11 @@
     "translit_es": "meriyvbaal",
     "definitions": [
       {
-        "text_en": "Baal is",
+        "text_en": "Baal is (our, my, his) advocate",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "Baal es"
-      },
-      {
-        "text_en": "advocate",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "abogado"
+        "text_es": "Baal es (nuestro, mi, su) defensor"
       },
       {
         "text_en": "son of Jonathan",
@@ -398639,7 +398613,8 @@
         "text_en": "torrent, torrent-valley, wady",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "torrente, valle de torrente, uadi"
       },
       {
         "text_en": "palm-tree",
@@ -404705,17 +404680,11 @@
         "sense": "4"
       },
       {
-        "text_en": "the breath of י׳",
+        "text_en": "the breath of YHWH driveth at it",
         "source": "bdb",
         "order": 10,
         "sense": "0",
-        "text_es": "el aliento de י׳"
-      },
-      {
-        "text_en": "driveth at it",
-        "source": "bdb",
-        "order": 11,
-        "sense": "0"
+        "text_es": "el aliento de YHWH lo empuja"
       },
       {
         "text_en": "driveth it on",
@@ -423526,17 +423495,11 @@
         "sense": "0"
       },
       {
-        "text_en": "cause to",
+        "text_en": "cause to (turn aside,) depart",
         "source": "bdb",
         "order": 7,
-        "sense": "1"
-      },
-      {
-        "text_en": "depart",
-        "source": "bdb",
-        "order": 8,
         "sense": "1",
-        "text_es": "partir"
+        "text_es": "hacer (desviarse,) apartarse"
       },
       {
         "text_en": "remove",
@@ -428874,7 +428837,8 @@
         "text_en": "threshhold",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "umbral"
       },
       {
         "text_en": "sill",
@@ -432087,7 +432051,8 @@
         "text_en": "covering, hiding-place, secrecy",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "cubierta, escondite, secreto"
       },
       {
         "text_en": "shelter",
@@ -434451,11 +434416,11 @@
     "translit_es": "aveda",
     "definitions": [
       {
-        "text_en": "servant of י׳",
+        "text_en": "servant of YHWH",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "siervo de י׳"
+        "text_es": "siervo de YHWH"
       },
       {
         "text_en": "father of Adoniram",
@@ -435565,18 +435530,11 @@
     "translit_es": "avednego",
     "definitions": [
       {
-        "text_en": "servant of",
+        "text_en": "servant of (God) Nebo",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "siervo de"
-      },
-      {
-        "text_en": "Nebo",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "Nebo"
+        "text_es": "siervo del (dios) Nebo"
       }
     ],
     "sources": {
@@ -442810,7 +442768,8 @@
         "text_en": "luxury, dainty, delight",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "lujo, manjar, deleite"
       },
       {
         "text_en": "delight",
@@ -450607,11 +450566,11 @@
     "translit_es": "uziyah",
     "definitions": [
       {
-        "text_en": "my strength is י׳",
+        "text_en": "my strength is YHWH",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "mi fuerza es י׳"
+        "text_es": "mi fuerza es YHWH"
       },
       {
         "text_en": "king of Judah",
@@ -477376,7 +477335,8 @@
         "text_en": "toiling",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "que se afana"
       },
       {
         "text_en": "laborer",
@@ -550120,11 +550080,11 @@
     "translit_es": "kolayah",
     "definitions": [
       {
-        "text_en": "voice of י׳",
+        "text_en": "voice of YHWH",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "voz de י׳"
+        "text_es": "voz de YHWH"
       },
       {
         "text_en": "father of proph. Ahab",
@@ -552745,18 +552705,11 @@
         "text_es": "humo"
       },
       {
-        "text_en": "odour of",
+        "text_en": "odour of (burning) sacrifice",
         "source": "bdb",
         "order": 2,
         "sense": "0",
-        "text_es": "olor de"
-      },
-      {
-        "text_en": "sacrifice",
-        "source": "bdb",
-        "order": 3,
-        "sense": "0",
-        "text_es": "sacrificio"
+        "text_es": "olor de sacrificio (quemado)"
       },
       {
         "text_en": "incense",
@@ -553624,12 +553577,6 @@
     "translit_en": "keynan",
     "translit_es": "keynan",
     "definitions": [
-      {
-        "text_en": "chant a",
-        "source": "bdb",
-        "order": 1,
-        "sense": "0"
-      },
       {
         "text_en": "Cainan/Kenan; ancestor in the genealogy of Jesus in Luke 3.",
         "text_es": "Cainán/Quenán; antepasado en la genealogía de Jesús en Lucas 3.",
@@ -572845,10 +572792,11 @@
         "sense": "0"
       },
       {
-        "text_en": "thy cattle thou shalt not cause to",
+        "text_en": "thy cattle thou shalt not cause to (let) lie down",
         "source": "bdb",
         "order": 4,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "no harás (dejarás) que tu ganado se eche"
       },
       {
         "text_en": "two kinds",
@@ -601723,18 +601671,11 @@
         "text_es": "atarse con siete cosas"
       },
       {
-        "text_en": "those sworn with",
+        "text_en": "those sworn with (= who have sworn) oaths",
         "source": "bdb",
         "order": 4,
         "sense": "0",
-        "text_es": "los que juraron con"
-      },
-      {
-        "text_en": "oaths",
-        "source": "bdb",
-        "order": 5,
-        "sense": "0",
-        "text_es": "juramentos"
+        "text_es": "los juramentados (= que han hecho) juramentos"
       },
       {
         "text_en": "take an oath",
@@ -602893,13 +602834,6 @@
         "order": 3,
         "sense": "0",
         "text_es": "obligarse por siete cosas"
-      },
-      {
-        "text_en": "those sworn with",
-        "source": "bdb",
-        "order": 4,
-        "sense": "0",
-        "text_es": "los que juraron con"
       },
       {
         "text_en": "oaths",
@@ -618731,18 +618665,11 @@
     "translit_es": "shiyloh",
     "definitions": [
       {
-        "text_en": "he whose it is",
+        "text_en": "he whose it is or that which belongs to him",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "aquel a quien pertenece"
-      },
-      {
-        "text_en": "that which belongs to him",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "aquello que le pertenece"
+        "text_es": "aquel a quien pertenece o lo que le pertenece"
       }
     ],
     "sources": {
@@ -618783,12 +618710,6 @@
     "translit_en": "shiyloh",
     "translit_es": "shiyloh",
     "definitions": [
-      {
-        "text_en": "he whose it is",
-        "source": "bdb",
-        "order": 1,
-        "sense": "0"
-      },
       {
         "text_en": "that which belongs to him",
         "source": "bdb",
@@ -648176,7 +648097,8 @@
         "text_en": "satyr, demon, he-goat’s",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "sátiro, demonio, de macho cabrío"
       },
       {
         "text_en": "he-goat, buck, hairy",
@@ -659010,13 +658932,6 @@
     "translit_es": "sharar",
     "definitions": [
       {
-        "text_en": "be",
-        "source": "bdb",
-        "order": 1,
-        "sense": "0",
-        "text_es": "ser"
-      },
-      {
         "text_en": "act as",
         "source": "bdb",
         "order": 2,
@@ -667441,7 +667356,8 @@
         "text_en": "twin",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "gemelo"
       },
       {
         "text_en": "twin; twins.",
@@ -670972,11 +670888,11 @@
         "text_es": "acción de gracias"
       },
       {
-        "text_en": "give praise to י׳",
+        "text_en": "give praise to YHWH",
         "source": "bdb",
         "order": 2,
         "sense": "1",
-        "text_es": "dar alabanza a י׳"
+        "text_es": "dar alabanza a YHWH"
       },
       {
         "text_en": "thanksgiving in songs of liturgical worship",
@@ -672390,7 +672306,8 @@
         "text_en": "generations",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "generaciones"
       },
       {
         "text_en": "account of a man and his descendants",

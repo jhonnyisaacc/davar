@@ -1915,68 +1915,6 @@
       "occurrence": {
         "book": "acts",
         "chapter": 13,
-        "verse": 19,
-        "word_index": 4,
-        "text": "כְּנָעַן",
-        "strong": "Hk/H3667",
-        "prefixes": [
-          "Hk"
-        ]
-      },
-      "previous_strong": "Hk/H3667",
-      "new_strong": "H3667",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters כ begin the lemma כנען of H3667, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "כנענ",
-        "prefix_letters": "כ",
-        "lemma": "כנען",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "acts",
-        "chapter": 13,
-        "verse": 21,
-        "word_index": 11,
-        "text": "בִּנְיָמִין",
-        "strong": "Hb/H1144",
-        "prefixes": [
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hb/H1144",
-      "new_strong": "H1144",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters ב begin the lemma בנימין of H1144, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "reviewed_strong",
-        "consonants": "בנימינ",
-        "prefix_letters": "ב",
-        "lemma": "בנימין",
-        "strong_review": {
-          "reviewer": "codex-desktop",
-          "status": "skipped",
-          "new_strong": "Hb/H1144",
-          "reason": "Reviewed against local lemma/definition and Acts context; existing Strong assignment is acceptable for בִּנְיָמִין.",
-          "logged_at": "2026-05-29T17:50:08.945777+00:00"
-        }
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "acts",
-        "chapter": 13,
         "verse": 26,
         "word_index": 2,
         "text": "בְּנֵי",
@@ -13177,43 +13115,6 @@
       "occurrence": {
         "book": "acts",
         "chapter": 7,
-        "verse": 11,
-        "word_index": 6,
-        "text": "וּכְנַעַן",
-        "strong": "Hc/Hk/H3667",
-        "prefixes": [
-          "Hc",
-          "Hk"
-        ]
-      },
-      "previous_strong": "Hc/Hk/H3667",
-      "new_strong": "Hc/H3667",
-      "new_prefixes": [
-        "Hc"
-      ],
-      "reason": "The tagged prefix letters כ begin the lemma כנען of H3667, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "reviewed_strong",
-        "consonants": "וכנענ",
-        "prefix_letters": "וכ",
-        "lemma": "כנען",
-        "strong_review": {
-          "reviewer": "codex-desktop",
-          "status": "skipped",
-          "new_strong": "H3667",
-          "reason": "Reviewed against local lemma/definition and Acts context; existing Strong assignment is acceptable.",
-          "logged_at": "2026-05-29T17:29:58.191184+00:00"
-        }
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "acts",
-        "chapter": 7,
         "verse": 16,
         "word_index": 9,
         "text": "בְּנֵי־",
@@ -13744,43 +13645,6 @@
           "new_strong": "H3556",
           "reason": "Reviewed against local lemma/definition and Acts context; existing Strong assignment is acceptable.",
           "logged_at": "2026-05-29T17:31:23.510735+00:00"
-        }
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "acts",
-        "chapter": 7,
-        "verse": 43,
-        "word_index": 16,
-        "text": "לְבָבֶל׃",
-        "strong": "Hl/Hb/H895",
-        "prefixes": [
-          "Hl",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hl/Hb/H895",
-      "new_strong": "Hl/H895",
-      "new_prefixes": [
-        "Hl"
-      ],
-      "reason": "The tagged prefix letters ב begin the lemma בבל of H895, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "reviewed_strong",
-        "consonants": "לבבל",
-        "prefix_letters": "לב",
-        "lemma": "בבל",
-        "strong_review": {
-          "reviewer": "codex-desktop",
-          "status": "skipped",
-          "new_strong": "H895",
-          "reason": "Reviewed against local lemma/definition and Acts context; existing Strong assignment is acceptable.",
-          "logged_at": "2026-05-29T17:31:23.510828+00:00"
         }
       }
     },
@@ -42176,40 +42040,6 @@
       "occurrence": {
         "book": "james",
         "chapter": 3,
-        "verse": 10,
-        "word_index": 3,
-        "text": "בְּרָכָה",
-        "strong": "Hb/H1294",
-        "prefixes": [
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hb/H1294",
-      "new_strong": "H1294",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters ב begin the lemma ברכה of H1294, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "reviewed_strong",
-        "consonants": "ברכה",
-        "prefix_letters": "ב",
-        "lemma": "ברכה",
-        "strong_review": {
-          "reviewer": "claude-delitzsch-review",
-          "status": "skipped",
-          "new_strong": "Hb/H1294",
-          "reason": "H1294 fits; the Hb tag marks the root letter ב",
-          "logged_at": "2026-11-15T15:44:41.029378+00:00"
-        }
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "james",
-        "chapter": 3,
         "verse": 14,
         "word_index": 4,
         "text": "בִּלְבַבְכֶם",
@@ -62358,68 +62188,6 @@
       "occurrence": {
         "book": "luke",
         "chapter": 17,
-        "verse": 28,
-        "word_index": 3,
-        "text": "לוֹט",
-        "strong": "Hl/H3876",
-        "prefixes": [
-          "Hl"
-        ]
-      },
-      "previous_strong": "Hl/H3876",
-      "new_strong": "H3876",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters ל begin the lemma לוט of H3876, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "reviewed_strong",
-        "consonants": "לוט",
-        "prefix_letters": "ל",
-        "lemma": "לוט",
-        "strong_review": {
-          "reviewer": "codex-desktop",
-          "status": "skipped",
-          "new_strong": "H3876",
-          "reason": "Existing Strong assignment H3876 matches the Delitzsch form and local context.",
-          "logged_at": "2026-05-29T20:17:35.614496+00:00"
-        }
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "luke",
-        "chapter": 17,
-        "verse": 29,
-        "word_index": 4,
-        "text": "לוֹט",
-        "strong": "Hl/H3876",
-        "prefixes": [
-          "Hl"
-        ]
-      },
-      "previous_strong": "Hl/H3876",
-      "new_strong": "H3876",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters ל begin the lemma לוט of H3876, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "לוט",
-        "prefix_letters": "ל",
-        "lemma": "לוט",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "luke",
-        "chapter": 17,
         "verse": 29,
         "word_index": 13,
         "text": "כֻּלָּם׃",
@@ -62508,34 +62276,6 @@
         "consonants": "וכליו",
         "prefix_letters": "וכ",
         "lemma": "כלי",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "luke",
-        "chapter": 17,
-        "verse": 32,
-        "word_index": 3,
-        "text": "לוֹט׃",
-        "strong": "Hl/H3876",
-        "prefixes": [
-          "Hl"
-        ]
-      },
-      "previous_strong": "Hl/H3876",
-      "new_strong": "H3876",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters ל begin the lemma לוט of H3876, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "לוט",
-        "prefix_letters": "ל",
-        "lemma": "לוט",
         "strong_review": null
       }
     },
@@ -81096,34 +80836,6 @@
       "occurrence": {
         "book": "mark",
         "chapter": 7,
-        "verse": 26,
-        "word_index": 4,
-        "text": "כְּנַעַן",
-        "strong": "Hk/H3667",
-        "prefixes": [
-          "Hk"
-        ]
-      },
-      "previous_strong": "Hk/H3667",
-      "new_strong": "H3667",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters כ begin the lemma כנען of H3667, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "כנענ",
-        "prefix_letters": "כ",
-        "lemma": "כנען",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "mark",
-        "chapter": 7,
         "verse": 27,
         "word_index": 10,
         "text": "לָקַחַת",
@@ -82864,43 +82576,6 @@
         "prefix_letters": "ב",
         "lemma": "בין",
         "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "matthew",
-        "chapter": 1,
-        "verse": 5,
-        "word_index": 5,
-        "text": "וּבֹעַז",
-        "strong": "Hc/Hb/H1162",
-        "prefixes": [
-          "Hc",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hc/Hb/H1162",
-      "new_strong": "Hc/H1162",
-      "new_prefixes": [
-        "Hc"
-      ],
-      "reason": "The tagged prefix letters ב begin the lemma בעז of H1162, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "reviewed_strong",
-        "consonants": "ובעז",
-        "prefix_letters": "וב",
-        "lemma": "בעז",
-        "strong_review": {
-          "reviewer": "codex-desktop",
-          "status": "applied",
-          "new_strong": "H1162",
-          "reason": "וּבֹעַז is reliable as H1162; add the Matthew-context definition.",
-          "logged_at": "2026-05-29T20:57:01.982947+00:00"
-        }
       }
     },
     {
@@ -100685,34 +100360,6 @@
         "book": "peter2",
         "chapter": 2,
         "verse": 7,
-        "word_index": 2,
-        "text": "לוֹט",
-        "strong": "Hl/H3876",
-        "prefixes": [
-          "Hl"
-        ]
-      },
-      "previous_strong": "Hl/H3876",
-      "new_strong": "H3876",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters ל begin the lemma לוט of H3876, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "לוט",
-        "prefix_letters": "ל",
-        "lemma": "לוט",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "peter2",
-        "chapter": 2,
-        "verse": 7,
         "word_index": 7,
         "text": "בְלִיַּעַל",
         "strong": "Hb/Hl/H1100",
@@ -100932,40 +100579,6 @@
           "new_strong": "Hb/Hl/H1109",
           "reason": "the name is right; ב and ל are root letters and the later scan removes the tags",
           "logged_at": "2026-11-15T15:44:41.339605+00:00"
-        }
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "peter2",
-        "chapter": 2,
-        "verse": 15,
-        "word_index": 9,
-        "text": "בְּעוֹר",
-        "strong": "Hb/H1160",
-        "prefixes": [
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hb/H1160",
-      "new_strong": "H1160",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters ב begin the lemma בעור of H1160, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "reviewed_strong",
-        "consonants": "בעור",
-        "prefix_letters": "ב",
-        "lemma": "בעור",
-        "strong_review": {
-          "reviewer": "codex-desktop",
-          "status": "skipped",
-          "new_strong": "H1160",
-          "reason": "בְּעוֹר is Beor, father of Balaam; H1160 is the proper-name entry.",
-          "logged_at": "2026-05-30T13:48:06.920803+00:00"
         }
       }
     },
@@ -102786,34 +102399,6 @@
       "occurrence": {
         "book": "philippians",
         "chapter": 3,
-        "verse": 5,
-        "word_index": 9,
-        "text": "בִּנְיָמִין",
-        "strong": "Hb/H1144",
-        "prefixes": [
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hb/H1144",
-      "new_strong": "H1144",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters ב begin the lemma בנימין of H1144, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "בנימינ",
-        "prefix_letters": "ב",
-        "lemma": "בנימין",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "philippians",
-        "chapter": 3,
         "verse": 6,
         "word_index": 10,
         "text": "בְּלִי־",
@@ -103187,37 +102772,6 @@
         "consonants": "למדתי",
         "prefix_letters": "ל",
         "lemma": "למד",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "philippians",
-        "chapter": 4,
-        "verse": 12,
-        "word_index": 15,
-        "text": "לְהוֹתִיר",
-        "strong": "Hl/Hd/H1956",
-        "prefixes": [
-          "Hl",
-          "Hd"
-        ]
-      },
-      "previous_strong": "Hl/Hd/H1956",
-      "new_strong": "Hl/H1956",
-      "new_prefixes": [
-        "Hl"
-      ],
-      "reason": "The tagged prefix letters ה begin the lemma הותיר of H1956, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "להותיר",
-        "prefix_letters": "לה",
-        "lemma": "הותיר",
         "strong_review": null
       }
     },
@@ -105173,41 +104727,6 @@
         "prefix_letters": "כ",
         "lemma": "כלה",
         "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "revelation",
-        "chapter": 15,
-        "verse": 2,
-        "word_index": 3,
-        "text": "בָּלוּל",
-        "strong": "Hb/Hl/H1101",
-        "prefixes": [
-          "Hb",
-          "Hl"
-        ]
-      },
-      "previous_strong": "Hb/Hl/H1101",
-      "new_strong": "H1101",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters בל begin the lemma בלל of H1101, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "reviewed_strong",
-        "consonants": "בלול",
-        "prefix_letters": "בל",
-        "lemma": "בלל",
-        "strong_review": {
-          "reviewer": "codex-desktop",
-          "status": "skipped",
-          "new_strong": "H1101",
-          "reason": "בָּלוּל means mixed; H1101 בלל is correct.",
-          "logged_at": "2026-05-30T14:03:44.004503+00:00"
-        }
       }
     },
     {
@@ -108025,40 +107544,6 @@
         "book": "revelation",
         "chapter": 2,
         "verse": 14,
-        "word_index": 15,
-        "text": "בָּלָק",
-        "strong": "Hb/H1111",
-        "prefixes": [
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hb/H1111",
-      "new_strong": "H1111",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters ב begin the lemma בלק of H1111, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "reviewed_strong",
-        "consonants": "בלק",
-        "prefix_letters": "ב",
-        "lemma": "בלק",
-        "strong_review": {
-          "reviewer": "codex-desktop",
-          "status": "skipped",
-          "new_strong": "H1111",
-          "reason": "בָּלָק is Balak; H1111 is the proper-name entry.",
-          "logged_at": "2026-05-30T13:48:06.930051+00:00"
-        }
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "revelation",
-        "chapter": 2,
-        "verse": 14,
         "word_index": 19,
         "text": "בְנֵי",
         "strong": "Hb/H1121",
@@ -110542,43 +110027,6 @@
       "occurrence": {
         "book": "revelation",
         "chapter": 5,
-        "verse": 12,
-        "word_index": 13,
-        "text": "וּבְרָכָה׃",
-        "strong": "Hc/Hb/H1294",
-        "prefixes": [
-          "Hc",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hc/Hb/H1294",
-      "new_strong": "Hc/H1294",
-      "new_prefixes": [
-        "Hc"
-      ],
-      "reason": "The tagged prefix letters ב begin the lemma ברכה of H1294, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "reviewed_strong",
-        "consonants": "וברכה",
-        "prefix_letters": "וב",
-        "lemma": "ברכה",
-        "strong_review": {
-          "reviewer": "claude-delitzsch-review",
-          "status": "skipped",
-          "new_strong": "Hc/Hb/H1294",
-          "reason": "H1294 fits; the Hb tag marks the root letter ב",
-          "logged_at": "2026-11-15T15:44:41.363701+00:00"
-        }
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "revelation",
-        "chapter": 5,
         "verse": 13,
         "word_index": 14,
         "text": "כֻּלָּם",
@@ -110788,34 +110236,6 @@
         "consonants": "לוי",
         "prefix_letters": "ל",
         "lemma": "לוי",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "revelation",
-        "chapter": 7,
-        "verse": 8,
-        "word_index": 13,
-        "text": "בִּנְיָמִין",
-        "strong": "Hb/H1144",
-        "prefixes": [
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hb/H1144",
-      "new_strong": "H1144",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters ב begin the lemma בנימין of H1144, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "בנימינ",
-        "prefix_letters": "ב",
-        "lemma": "בנימין",
         "strong_review": null
       }
     },
@@ -112940,34 +112360,6 @@
       "occurrence": {
         "book": "romans",
         "chapter": 11,
-        "verse": 1,
-        "word_index": 17,
-        "text": "בִנְיָמִין׃",
-        "strong": "Hb/H1144",
-        "prefixes": [
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hb/H1144",
-      "new_strong": "H1144",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters ב begin the lemma בנימין of H1144, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "בנימינ",
-        "prefix_letters": "ב",
-        "lemma": "בנימין",
-        "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "romans",
-        "chapter": 11,
         "verse": 3,
         "word_index": 3,
         "text": "הָרְגוּ",
@@ -113090,43 +112482,6 @@
           "new_strong": "Hk/H3766",
           "reason": "Current lemma right; Hk is a root letter",
           "logged_at": "2026-11-15T15:44:41.420265+00:00"
-        }
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "romans",
-        "chapter": 11,
-        "verse": 4,
-        "word_index": 14,
-        "text": "לַבָּעַל׃",
-        "strong": "Hl/Hb/H1168",
-        "prefixes": [
-          "Hl",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hl/Hb/H1168",
-      "new_strong": "Hl/H1168",
-      "new_prefixes": [
-        "Hl"
-      ],
-      "reason": "The tagged prefix letters ב begin the lemma בעל of H1168, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "reviewed_strong",
-        "consonants": "לבעל",
-        "prefix_letters": "לב",
-        "lemma": "בעל",
-        "strong_review": {
-          "reviewer": "claude-delitzsch-review",
-          "status": "skipped",
-          "new_strong": "Hl/Hb/H1168",
-          "reason": "H1168 is the deity Baal; Hb marks root letter",
-          "logged_at": "2026-11-15T15:44:41.420300+00:00"
         }
       }
     },
@@ -119555,34 +118910,6 @@
           "reason": "Current lemma right; Hl is a root letter",
           "logged_at": "2026-11-15T15:44:41.418656+00:00"
         }
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "romans",
-        "chapter": 9,
-        "verse": 29,
-        "word_index": 7,
-        "text": "הוֹתִיר",
-        "strong": "Hd/H1956",
-        "prefixes": [
-          "Hd"
-        ]
-      },
-      "previous_strong": "Hd/H1956",
-      "new_strong": "H1956",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters ה begin the lemma הותיר of H1956, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "הותיר",
-        "prefix_letters": "ה",
-        "lemma": "הותיר",
-        "strong_review": null
       }
     },
     {
@@ -126192,43 +125519,6 @@
           "new_strong": "Hb/H1121",
           "reason": "the lexeme is בֵּן son; the ב is the first root letter, so the Hb tag is false and the later scan removes it",
           "logged_at": "2026-11-15T15:44:41.471403+00:00"
-        }
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "titus",
-        "chapter": 1,
-        "verse": 6,
-        "word_index": 4,
-        "text": "וּבַעַל־",
-        "strong": "Hc/Hb/H1168",
-        "prefixes": [
-          "Hc",
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hc/Hb/H1168",
-      "new_strong": "Hc/H1168",
-      "new_prefixes": [
-        "Hc"
-      ],
-      "reason": "The tagged prefix letters ב begin the lemma בעל of H1168, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "reviewed_strong",
-        "consonants": "ובעל",
-        "prefix_letters": "וב",
-        "lemma": "בעל",
-        "strong_review": {
-          "reviewer": "claude-delitzsch-review",
-          "status": "skipped",
-          "new_strong": "Hc/Hb/H1168",
-          "reason": "same-consonant homonym with a fitting gloss; Hb marks root letter",
-          "logged_at": "2026-11-15T15:44:41.471595+00:00"
         }
       }
     },

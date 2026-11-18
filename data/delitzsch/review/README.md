@@ -269,8 +269,8 @@ keeps that correction. The batch makes these changes:
   They also correct false prefix tags, such as the ל of לוּקָס. Each
   decision's `evidence.greek` names the SBLGNT word of the verse.
 
-Apply it with `review apply definition_gaps_42.json`, then apply rounds 2, 3,
-and 4 in order and run `review dispositions`.
+Apply it with `review apply definition_gaps_42.json`, then apply rounds 2 to 5
+in order, run `review root-letter-prefixes`, and run `review dispositions`.
 
 `batches/definition_gaps_42_round_2.json` resolves the 677 occurrences that
 the lexical reviews blocked on an identifier that has a definition but names
@@ -342,6 +342,39 @@ creates D0706 to D0725 and moves 417 occurrences:
   God on H1008 Bethel (14), בַּעַל owner or husband on H4807 (25, the ב is a
   root letter), and 22 others, such as חָם hot on H2526 Ham (Revelation
   3:16).
+
+`batches/definition_gaps_42_round_5.json` makes the reader's first gloss
+right for every New Testament occurrence. The reader takes the first gloss
+from `scripts/dict/reader_gloss.py`, which computes it the same way as
+`shared/lexiconAssets.ts`. The batch creates D0726 to D0862 and moves 1467
+occurrences:
+
+- 91 name entries, one for each New Testament referent whose H entry opens
+  with an etymology, another person, or a bare Old Testament name, such as
+  David (H1732 "pot"), Galilee (H1551 "cylinder"), Abraham, Nazareth and
+  Nazarene (H5342 "sprout"), Bethlehem, James (H3290 Jacob), Judas, and Judea
+  (H3063 Judah). The English and the Spanish first gloss name the referent,
+  and `evidence.greek` names the Greek name of the verse.
+- 46 sense entries for New Testament senses that the H entry's first gloss
+  does not give, such as different and change (H8138 "repeat", 1 Peter 1:6
+  goes to different), marry a dead brother's widow (H2992, Mark 12:19),
+  begin (H2490 "pollute"), fear (H3372), and God (H410, except the five
+  לְאֵל יָד idioms of power). John 11:13 שֵׁנָה goes to H8142 sleep.
+- 336 common words leave a name number, such as לֶחֶם bread on H1035
+  Bethlehem and נָצַר keep on H5342.
+- Romans 16:1 מְשַׁמֶּשֶׁת goes to D0402 serve. 13 Johns on H3110 go to D0708.
+  D0141 Roman lists Acts 22:25, John 19:20, and Luke 23:38.
+- 54 `upsert_custom_definition` decisions on H entries add a `custom` record,
+  because the reader ranks only the `custom` source above BDB. 39 replace a
+  reviewed `delitzsch_review` record whose BDB headline names another sense,
+  such as H1961 "be; become; come to pass" for "fall out". 15 fix an entry
+  whose English and Spanish first gloss came from different records, or
+  whose BDB headline does not fit its New Testament use, such as H5800
+  "leave" for "restore" and H7218 "head" for "Rôsh".
+
+`tests/test_delitzsch_reader_glosses.py` checks that every New Testament
+occurrence shows an English and a Spanish first gloss from one record, and
+that every occurrence of a proper-noun H entry shows its name first.
 
 A `set_strong` onto a custom entry whose `mapping_scope` is `instances_only`
 adds the occurrence to that entry's `nt_instances`, and removes it from the

@@ -90,7 +90,7 @@
           },
           {
             "text": "יָרְאוּ",
-            "strong": "H3372",
+            "strong": "D0733",
             "prefixes": []
           },
           {
@@ -125,7 +125,7 @@
           },
           {
             "text": "בִּיהוּדָה",
-            "strong": "Hb/H3063",
+            "strong": "Hb/D0796",
             "prefixes": [
               "Hb"
             ],
@@ -145,7 +145,7 @@
           },
           {
             "text": "קְרִיּוֹת",
-            "strong": "H7152",
+            "strong": "D0245",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -1594,7 +1594,7 @@
       {
         "chapter": 22,
         "verse": 23,
-        "hebrew": "וְ/הֵם הֵ/חֵלּוּ לַ/חֲקֹר אִישׁ אֶת־רֵעֵהוּ מִי־הוּא זֶה מֵהֶם אֲשֶׁר יַעֲשֶׂה־זֹּאת׃",
+        "hebrew": "וְ/הֵם הֵחֵלּוּ לַ/חֲקֹר אִישׁ אֶת־רֵעֵהוּ מִי־הוּא זֶה מֵהֶם אֲשֶׁר יַעֲשֶׂה־זֹּאת׃",
         "words": [
           {
             "text": "וְהֵם",
@@ -1605,10 +1605,8 @@
           },
           {
             "text": "הֵחֵלּוּ",
-            "strong": "Hd/H2490",
-            "prefixes": [
-              "Hd"
-            ]
+            "strong": "D0772",
+            "prefixes": []
           },
           {
             "text": "לַחֲקֹר",
@@ -1765,7 +1763,7 @@
           },
           {
             "text": "רוֹדִים",
-            "strong": "H7287",
+            "strong": "D0769",
             "prefixes": []
           },
           {
@@ -3530,7 +3528,7 @@
           },
           {
             "text": "יְהוּדָה",
-            "strong": "H3063",
+            "strong": "D0796",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -3566,7 +3564,7 @@
           },
           {
             "text": "לִנְשָׁק־",
-            "strong": "Hl/H5401",
+            "strong": "Hl/D0759",
             "prefixes": [
               "Hl"
             ]
@@ -3608,7 +3606,7 @@
           },
           {
             "text": "יְהוּדָה",
-            "strong": "H3063",
+            "strong": "D0796",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -4991,7 +4989,7 @@
           },
           {
             "text": "נִקְהֲלוּ",
-            "strong": "H6950",
+            "strong": "D0729",
             "prefixes": []
           },
           {
