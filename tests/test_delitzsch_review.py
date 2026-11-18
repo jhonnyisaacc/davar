@@ -583,20 +583,20 @@ def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
     committed = dispositions.read_ledger()
     assert committed == rebuilt
     summary = committed["summary"]
-    assert summary["total"] == 11528 + 16084 + 5375
+    assert summary["total"] == 11528 + 16084 + 5781
     assert summary["by_disposition"]["unresolved"] == 0
     assert summary["by_family"]["prefix_metadata"] == {
-        "benign": 1369, "corrected": 3784, "already_reviewed": 341, "unresolved": 0, "blocked": 0, "superseded": 0,
+        "benign": 1366, "corrected": 3788, "already_reviewed": 340, "unresolved": 0, "blocked": 0, "superseded": 0,
     }
     assert summary["by_family"]["outside_queue"] == {
-        "benign": 10, "corrected": 5365, "already_reviewed": 0, "unresolved": 0, "blocked": 0, "superseded": 0,
+        "benign": 10, "corrected": 5771, "already_reviewed": 0, "unresolved": 0, "blocked": 0, "superseded": 0,
     }
-    assert summary["benign_lexical_review"] == {"pending": 0, "reviewed": 1742}
+    assert summary["benign_lexical_review"] == {"pending": 0, "reviewed": 1739}
     assert summary["by_family"]["legacy_assignment"] == {
-        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 8081, "superseded": 8003,
+        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 8099, "superseded": 7985,
     }
     assert {rule: summary["by_rule"][rule] for rule in ("legacy_without_candidate", "legacy_current_value", "legacy_blocked", "lexical_review")} == {
-        "legacy_without_candidate": 4360, "legacy_current_value": 3643, "legacy_blocked": 8081, "lexical_review": 1502,
+        "legacy_without_candidate": 4360, "legacy_current_value": 3625, "legacy_blocked": 8099, "lexical_review": 1499,
     }
 
 
@@ -1111,7 +1111,9 @@ def definition_gaps_batch(name="definition_gaps_42"):
     return json.loads(path.read_text(encoding="utf-8"))["decisions"]
 
 
-@pytest.mark.parametrize("name, created_count", [("definition_gaps_42", 42), ("definition_gaps_42_round_2", 360), ("definition_gaps_42_round_3", 1)])
+@pytest.mark.parametrize("name, created_count", [
+    ("definition_gaps_42", 44), ("definition_gaps_42_round_2", 375), ("definition_gaps_42_round_3", 1), ("definition_gaps_42_round_4", 20),
+])
 def test_issue_42_entries_list_exactly_the_occurrences_reviewed_onto_them(name, created_count):
     custom = json.loads((dispositions.ROOT / "data/dict/lexicon/custom_definitions.json").read_text(encoding="utf-8"))
     corpus = Counter()
@@ -1135,7 +1137,8 @@ def test_issue_42_entries_list_exactly_the_occurrences_reviewed_onto_them(name, 
 
 
 @pytest.mark.parametrize("name, move_count, noted", [
-    ("definition_gaps_42", 148, 1), ("definition_gaps_42_round_2", 684, 14), ("definition_gaps_42_round_3", 206, 6),
+    ("definition_gaps_42", 148, 1), ("definition_gaps_42_round_2", 685, 14), ("definition_gaps_42_round_3", 206, 6),
+    ("definition_gaps_42_round_4", 417, 6),
 ])
 def test_issue_42_identity_evidence_names_a_greek_word_of_the_verse(name, move_count, noted):
     greek = dispositions.ROOT / "data/greek/preview/greek/releases/sblgnt/5de0a47f35f0fc13dfe1430d104e5db8a4285f9c/books"
@@ -1153,7 +1156,24 @@ def test_no_occurrence_stays_blocked_on_an_identifier_that_names_another_word():
     records = dispositions.read_ledger()["records"]
     assert [r["location"] for r in records if r["disposition"] == "blocked" and r["rule"] == "lexical_review"] == []
     hermas, hermes = ledger_record("romans.16.14.4"), ledger_record("romans.16.14.6")
-    assert (hermas["after"]["strong"], hermes["after"]["strong"]) == ("Hc/D0645", "Hc/" + ledger_record("acts.14.12.6")["after"]["strong"])
+    assert (hermas["after"]["strong"], hermes["after"]["strong"], ledger_record("acts.14.12.6")["after"]["strong"]) == ("Hc/D0645", "Hc/D0702", "D0338")
+
+
+@pytest.mark.parametrize("book, chapter, verse, index, strong, gloss", [
+    ("luke", 1, 21, 3, "D0534", "Zechariah; the priest, father of John the Baptist."),
+    ("luke", 1, 5, 6, "D0534", "Zechariah; the priest, father of John the Baptist."),
+    ("matthew", 23, 35, 13, "D0706", "Zechariah; the man killed between the sanctuary and the altar"),
+    ("acts", 13, 1, 15, "D0333", "Manaen; a prophet at Antioch"),
+    ("romans", 16, 14, 6, "D0702", "Hermes; a Christian in Rome greeted by Paul."),
+    ("acts", 28, 1, 7, "D0699", "Melita; the island of Malta"),
+    ("timothy1", 3, 13, 1, "D0402", "serve, minister"),
+])
+def test_a_reviewed_new_testament_referent_shows_its_own_gloss_first(book, chapter, verse, index, strong, gloss):
+    custom = json.loads((dispositions.ROOT / "data/dict/lexicon/custom_definitions.json").read_text(encoding="utf-8"))
+    words = json.loads((dispositions.ROOT / "data/dict/lexicon/words.json").read_text(encoding="utf-8"))
+    assert parsed_verse(book, chapter, verse)["words"][index]["strong"].split("/")[-1] == strong
+    entry = custom.get(strong) if strong.startswith("D") else words[strong]
+    assert entry["definitions"][0]["text_en"].startswith(gloss)
 
 
 def test_a_reviewed_identity_supersedes_the_earlier_correction_it_replaces():
@@ -1215,7 +1235,7 @@ def test_reverting_restores_lexical_review_corrections_and_an_unrecorded_edit_st
 def test_committed_outside_queue_root_letter_batch_matches_its_generator():
     committed = json.loads(dispositions.OUTSIDE_ROOT_LETTER_BATCH.read_text(encoding="utf-8"))
     assert committed == dispositions.outside_root_letter_batch_from_disk()
-    assert Counter(item["evidence"]["basis"] for item in committed["decisions"]) == {"reviewed_strong": 2377, "lemma_check": 1530}
+    assert Counter(item["evidence"]["basis"] for item in committed["decisions"]) == {"reviewed_strong": 2373, "lemma_check": 1530}
     assert committed["unresolved"] == []
 
 

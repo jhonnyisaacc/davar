@@ -217,13 +217,13 @@
           },
           {
             "text": "חֶצְרוֹן",
-            "strong": "H2696",
+            "strong": "D0716",
             "prefixes": [],
             "possible_proper_name": true
           },
           {
             "text": "וְחֶצְרוֹן",
-            "strong": "Hc/H2696",
+            "strong": "Hc/D0716",
             "prefixes": [
               "Hc"
             ],
@@ -1046,7 +1046,7 @@
           },
           {
             "text": "עַזּוּר׃",
-            "strong": "H5809",
+            "strong": "D0719",
             "prefixes": []
           }
         ]
@@ -1058,7 +1058,7 @@
         "words": [
           {
             "text": "וְעַזּוּר",
-            "strong": "H5809",
+            "strong": "Hc/D0719",
             "prefixes": [
               "Hc"
             ]
@@ -1218,7 +1218,7 @@
       {
         "chapter": 1,
         "verse": 16,
-        "hebrew": "וְ/יַעֲקֹב ה/וֹלִיד אֶת־יוֹסֵף בַּ/עַל מִרְיָם אֲשֶׁר מִמֶּנָּה נוֹלַד יֵשׁוּעַ הַ/נִּקְרָא מָשִׁיחַ׃",
+        "hebrew": "וְ/יַעֲקֹב ה/וֹלִיד אֶת־יוֹסֵף בַּעַל מִרְיָם אֲשֶׁר מִמֶּנָּה נוֹלַד יֵשׁוּעַ הַ/נִּקְרָא מָשִׁיחַ׃",
         "words": [
           {
             "text": "וְיַעֲקֹב",
@@ -1247,15 +1247,13 @@
           },
           {
             "text": "בַּעַל",
-            "strong": "Hb/H4807",
-            "prefixes": [
-              "Hb"
-            ],
+            "strong": "H1167",
+            "prefixes": [],
             "possible_proper_name": true
           },
           {
             "text": "מִרְיָם",
-            "strong": "H4813",
+            "strong": "D0712",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -1482,7 +1480,7 @@
           },
           {
             "text": "מִרְיָם",
-            "strong": "H4813",
+            "strong": "D0712",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -1744,7 +1742,7 @@
           },
           {
             "text": "מִרְיָם",
-            "strong": "H4813",
+            "strong": "D0712",
             "prefixes": [],
             "possible_proper_name": true
           },

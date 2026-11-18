@@ -259,16 +259,18 @@ keeps that correction. The batch makes these changes:
   include שֵׁרוּת service, יְכֹלֶת ability, רְדִיפָה persecution, and the
   adjective יָתֵר. A derived word gets its own entry and is not mapped to its
   root.
-- 7 more decisions add senses. D0076 gets the Ephesian silversmith Demetrius.
-  H1421, H1861, H4136, H5681, H6969, and H758 get the English or Spanish they
-  lacked.
+- 6 more decisions give H1421, H1861, H4136, H5681, H6969, and H758 the
+  English or Spanish they lacked. The first BDB gloss of each already fits its
+  New Testament occurrences, or the entry has no BDB gloss.
+- The Ephesian silversmith Demetrius gets D0700, and the city treasurer
+  Erastus gets D0701, because D0076 and D0299 name other people.
 - 148 `set_strong` lexical reviews move the occurrences to these entries, to
   D0282 (טַלְיְתָא), D0016 (the Alexandrian ships), and H3201 (Galatians 4:15).
   They also correct false prefix tags, such as the ל of לוּקָס. Each
   decision's `evidence.greek` names the SBLGNT word of the verse.
 
-Apply it with `review apply definition_gaps_42.json`, then apply rounds 2 and
-3 in order and run `review dispositions`.
+Apply it with `review apply definition_gaps_42.json`, then apply rounds 2, 3,
+and 4 in order and run `review dispositions`.
 
 `batches/definition_gaps_42_round_2.json` resolves the 677 occurrences that
 the lexical reviews blocked on an identifier that has a definition but names
@@ -287,24 +289,22 @@ verse, the Greek, and the lexicon. The batch makes these changes:
   מוֹכֵס tax collector, חֵרוּת freedom, and the verb הִשְׁתַּמֵּשׁ use. A
   derived word gets its own entry, so עֲבֵרָה transgression is not on
   עֲבָרָה, the place in John 1:28.
-- A name borne by more than one person gets one sense per person. D0338
-  Hermes covers the god and the Christian in Rome, D0354 Sosthenes the
-  synagogue ruler and the co-sender of 1 Corinthians, D0573 Rufus the son of
-  Simon and the Christian in Rome. The first batch does the same for D0299
-  Erastus, the co-worker and the city treasurer.
-- A word that already has a canonical entry gets a sense on that entry, not
-  a new D entry. This covers a name the lexicon already has, such as
-  מְנַחֵם (H4505, Manaen) and זְכַרְיָה (H2148), and a post-biblical sense of
-  a biblical word, such as כָּפַר deny (H3722), סָתַר tear down (H5641),
-  קָבַע fix (H6906), פֶּרֶק season (H6563), צִיר joint (H6735), and צָבוּעַ
-  hypocritical (H6641). Eleven such senses replace D0333, D0402, D0413,
-  D0415, D0450, D0482, D0492, D0502, D0534, D0665, and D0690, and those
-  numbers stay unused. סַנְהֶדְרִין goes to the existing D0008.
-- One decision adds the sense Rome to D0141 רוֹמִי, the exact form Delitzsch
-  uses for the city.
-- 684 `set_strong` lexical reviews move the occurrences, and one `skip`
-  keeps `הַמְשַׁמְּשִׁים` (1 Timothy 3:13) on H8120, which now carries the
-  sense. Some moves go to an existing entry for the same word, such as D0053
+- A name borne by more than one person gets one entry per person, so each
+  occurrence shows its own person first. D0338 is Hermes the god and D0702
+  the Christian in Rome, D0354 Sosthenes the synagogue ruler and D0703 the
+  co-sender of 1 Corinthians, D0573 Rufus the son of Simon and D0704 the
+  Christian in Rome.
+- A custom entry keeps its own gloss first. The reader ranks only the
+  `custom` source above BDB, so a `delitzsch_review` sense on an H entry shows
+  under More, after the BDB glosses. A sense goes on an H entry only for a
+  meaning that the entry's first BDB gloss already fits. A New Testament
+  person, a post-biblical sense, or a homograph gets a D entry of its own,
+  such as D0333 Manaen (H4505 opens with "comforter"), D0534 Zechariah the
+  father of John the Baptist (H2148 opens with the king of Israel), D0690
+  כָּפַר deny (H3722 opens with "cover over"), and D0402 שִׁמֵּשׁ serve.
+  סַנְהֶדְרִין goes to the existing D0008.
+- D0705 Rome takes `רוֹמִי` where it names the city. D0141 keeps Roman.
+- 685 `set_strong` lexical reviews move the occurrences. Some moves go to an existing entry for the same word, such as D0053
   הִסְכִּים, D0167 אֵבָר, D0326 כָּרַךְ, and H1278 for `הַבְּרִיָּה`. Each
   decision's `evidence.greek` names the SBLGNT word of the same verse. Where
   the SBLGNT has no such word, `evidence.greek_note` says why: a verse
@@ -319,6 +319,29 @@ publicans, Epaphroditus, Aeneas, Troas, Trophimus, Gennesaret, מִילָה
 circumcision, and אֲמִתִּי true. Acts 28:1 `מְלִיטִי` moves from D0254
 Miletus to D0699 and supersedes the #399 correction. A homograph stays where
 it is, such as `וּמָתַי` when in Matthew 25:38 and `בַּגָּלוּי` openly.
+
+`batches/definition_gaps_42_round_4.json` moves every New Testament
+occurrence that the reader would open with another referent's gloss. It
+creates D0706 to D0725 and moves 417 occurrences:
+
+- The father of John the Baptist goes to D0534 in Luke 1 and Luke 3:2. The
+  Zechariah killed between the sanctuary and the altar (Matthew 23:35, Luke
+  11:51), whom Delitzsch names son of Jehoiada, gets D0706. The prophet of
+  Matthew 27:9, whom Delitzsch names where the Greek has Jeremiah, gets D0707.
+- New Testament names on an H entry whose first BDB gloss names another
+  person get D entries: John (H3076 "a priest", 119), Simon and Simeon (H8095
+  "second son of Jacob and Leah", 82), Mary (H4813 "sister of Moses", 54),
+  Nathanael, Talmai in Bar-Talmai, Enoch, Hezron, Mattathias, Salome, Azor,
+  Lamech, Gog, Midian, Semein, Joanan, and Zeus, which Delitzsch writes בֵּל.
+  Revelation 7:7, the tribe of Simeon, stays on H8095. Annas goes to D0189.
+- The same words wherever they occur: שִׁמֵּשׁ serve (D0402), לִמּוּד
+  teaching (D0415), קָבַע fix (D0502), and כָּפַר deny (D0690). כָּפָר village
+  moves from H3722 to H3723, and כַּפֹּרֶת mercy seat to H3727. Mark 7:3
+  עַד־הַפֶּרֶק gets D0725, joint of the arm.
+- Common words that sat on a name: שֶׁבַע seven on H884 Beersheba (28), אֵל
+  God on H1008 Bethel (14), בַּעַל owner or husband on H4807 (25, the ב is a
+  root letter), and 22 others, such as חָם hot on H2526 Ham (Revelation
+  3:16).
 
 A `set_strong` onto a custom entry whose `mapping_scope` is `instances_only`
 adds the occurrence to that entry's `nt_instances`, and removes it from the
@@ -337,7 +360,9 @@ A later reviewed correction supersedes an earlier one. The ledger reads every
 logged decision for the occurrence and links each applied correction to the
 one before it, when the earlier correction's new Strong number is the later
 one's previous Strong number. Decisions of other kinds between them do not
-break the link. The rule then checks every link, the first link against the
+break the link. An outside-queue root-letter correction is also a link, so
+reverting the ledger still restores the remediation corpus. The rule then
+checks every link, the first link against the
 queued Strong number, and that each link starts from the Strong number and
 prefixes the previous link left. The record keeps the queued `before` state,
 takes `after` from the latest correction, and lists the earlier links in

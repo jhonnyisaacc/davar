@@ -215,7 +215,7 @@ def reviewed_evidence(decision: dict[str, Any]) -> bool:
 
 def corrected_prefixes(decision: dict[str, Any]) -> list[str]:
     prefixes = decision["occurrence"]["prefixes"]
-    return decision.get("new_prefixes", prefixes) if decision["issue_type"] == LEXICAL_ISSUE else prefixes
+    return decision.get("new_prefixes", prefixes) if decision["issue_type"] in (LEXICAL_ISSUE, ROOT_LETTER_ISSUE) else prefixes
 
 
 def is_strong_correction(decision: dict[str, Any]) -> bool:
@@ -225,7 +225,7 @@ def is_strong_correction(decision: dict[str, Any]) -> bool:
 def correction_chain(entries: list[dict[str, Any]]) -> list[dict[str, Any]]:
     chain = [entries[-1]]
     for entry in reversed(entries[:-1]):
-        if not is_strong_correction(entry) or entry["status"] not in STRONG_CONFIRMED:
+        if not (is_strong_correction(entry) or entry.get("issue_type") == ROOT_LETTER_ISSUE) or entry["status"] not in STRONG_CONFIRMED:
             continue
         if entry["new_strong"] != chain[0]["previous_strong"]:
             break
@@ -256,7 +256,8 @@ def reviewed_strong_correction(entry: Record, decision: dict[str, Any] | None, r
             later["occurrence"]["strong"] != earlier["new_strong"] or later["occurrence"]["prefixes"] != corrected_prefixes(earlier)
             for earlier, later in zip(chain, chain[1:])
         )
-        or any(not valid_correction(link, entry) for link in chain)
+        or not valid_correction(decision, entry)
+        or any(not (valid_correction(link, entry) or valid_root_letter_link(link, entry)) for link in chain[:-1])
     ):
         raise ValueError(f"{entry['location']}: Strong correction does not satisfy the reviewed Strong correction rule")
     evidence = dict(decision["evidence"], reason=decision["reason"], status=decision["status"], logged_at=decision["logged_at"])
@@ -269,6 +270,21 @@ def reviewed_strong_correction(entry: Record, decision: dict[str, Any] | None, r
         "corrected", decision["reviewer"], evidence,
         before=dict(prefixes=prefixes),
         after=dict(text=decision["occurrence"]["text"], strong=new_strong, prefixes=new_prefixes),
+    )
+
+
+def valid_root_letter_link(decision: dict[str, Any], entry: Record) -> bool:
+    occurrence, new_prefixes = decision["occurrence"], decision.get("new_prefixes")
+    return (
+        decision.get("issue_type") == ROOT_LETTER_ISSUE
+        and decision["status"] in STRONG_CONFIRMED
+        and occurrence["text"] == entry["text"]
+        and decision["previous_strong"] == occurrence["strong"]
+        and new_prefixes is not None
+        and len(new_prefixes) < len(occurrence["prefixes"])
+        and occurrence["prefixes"][:len(new_prefixes)] == new_prefixes
+        and decision["new_strong"] == "/".join([*new_prefixes, occurrence["strong"].split("/")[-1]])
+        and bool(decision.get("reason"))
     )
 
 

@@ -640,13 +640,6 @@
           "text": "אֲרִסְטוֹס"
         },
         {
-          "book": "romans",
-          "chapter": 16,
-          "verse": 23,
-          "word_index": 8,
-          "text": "אֲרַסְטוֹס"
-        },
-        {
           "book": "timothy2",
           "chapter": 4,
           "verse": 20,
@@ -674,21 +667,36 @@
       "issue_type": "definition_review",
       "reviewer": "claude-delitzsch-review",
       "confidence": 0.9,
-      "strong": "D0299",
+      "strong": "D0701",
       "definition": {
-        "order": 2,
+        "order": 1,
         "source": "delitzsch_review",
         "text_en": "Erastus; the treasurer of the city of Corinth, who sent greetings to Rome.",
         "text_es": "Erasto; tesorero de la ciudad de Corinto, que envió saludos a Roma."
       },
-      "reason": "Romans 16:23 names Erastus the city treasurer; the text does not say he is the co-worker of Acts 19:22 and 2 Timothy 4:20",
+      "reason": "Erastus here is a different referent from D0299 (Erastus; a co-worker of Paul); its own entry shows its own gloss first",
       "evidence": {
-        "lexicon": "NT personal name; no Strong entry",
+        "lexicon": "New Testament name with no Strong or BDB entry; D0299 names a different referent",
         "sense": "Erastus; the treasurer of the city of Corinth, who sent greetings to Rome.",
         "spanish": "Erasto; tesorero de la ciudad de Corinto, que envió saludos a Roma.",
         "greek": "Ἔραστος",
         "issue": 42
-      }
+      },
+      "hebrew": "אֲרַסְטוֹס",
+      "transliteration_en": "Erastus",
+      "transliteration_es": "Erasto",
+      "root": "",
+      "root_strong": "",
+      "mapping_scope": "instances_only",
+      "nt_instances": [
+        {
+          "book": "romans",
+          "chapter": 16,
+          "verse": 23,
+          "word_index": 8,
+          "text": "אֲרַסְטוֹס"
+        }
+      ]
     },
     {
       "action": "upsert_custom_definition",
@@ -2241,20 +2249,42 @@
       "issue_type": "definition_review",
       "reviewer": "claude-delitzsch-review",
       "confidence": 0.9,
-      "strong": "D0076",
+      "strong": "D0700",
       "definition": {
         "source": "delitzsch_review",
         "text_en": "Demetrius; the silversmith of Ephesus who made silver shrines of Artemis.",
         "text_es": "Demetrio; el platero de Éfeso que hacía templecillos de plata de Artemisa.",
-        "order": 2
+        "order": 1
       },
-      "reason": "D0076 needs this sense for its reviewed Delitzsch occurrences",
+      "reason": "Demetrius here is a different referent from D0076 (Demetrius; man commended in 3 John); its own entry shows its own gloss first",
       "evidence": {
-        "lexicon": "NT personal name; D0076 names the Demetrius of 3 John, so this sense names the Ephesian silversmith",
+        "lexicon": "New Testament name with no Strong or BDB entry; D0076 names a different referent",
         "sense": "Demetrius; the silversmith of Ephesus who made silver shrines of Artemis.",
         "spanish": "Demetrio; el platero de Éfeso que hacía templecillos de plata de Artemisa.",
         "issue": 42
-      }
+      },
+      "hebrew": "דְּמַטְרִיּוֹס",
+      "transliteration_en": "Demetrius",
+      "transliteration_es": "Demetrio",
+      "root": "",
+      "root_strong": "",
+      "mapping_scope": "instances_only",
+      "nt_instances": [
+        {
+          "book": "acts",
+          "chapter": 19,
+          "verse": 24,
+          "word_index": 4,
+          "text": "דְּמַטְרִיּוֹס"
+        },
+        {
+          "book": "acts",
+          "chapter": 19,
+          "verse": 38,
+          "word_index": 2,
+          "text": "לִדְמַטְרִיּוֹס"
+        }
+      ]
     },
     {
       "action": "upsert_custom_definition",
@@ -3211,10 +3241,10 @@
         "prefixes": []
       },
       "previous_strong": "H4383",
-      "new_strong": "D0299",
+      "new_strong": "D0701",
       "reason": "אֲרַסְטוֹס is Erastus; H4383 מִכְשׁוֹל 'a stumbling' is a different word",
       "evidence": {
-        "lexicon": "D0299 אֲרַסְטוֹס Erastus; NT personal name; no Strong entry",
+        "lexicon": "D0701 אֲרַסְטוֹס Erastus; the treasurer of the city of Corinth, who sent greetings to Rome.",
         "grammar": "personal name",
         "context": "Romans 16:23, Greek Ἔραστος",
         "greek": "G2037 Ἔραστος",
@@ -6149,10 +6179,10 @@
         "prefixes": []
       },
       "previous_strong": "H3229",
-      "new_strong": "D0076",
+      "new_strong": "D0700",
       "reason": "דְּמַטְרִיּוֹס is Demetrius; H3229 יִמְלָא, which has no definition, is a different word",
       "evidence": {
-        "lexicon": "D0076 דימטריוס Demetrius; NT personal name; D0076 names the Demetrius of 3 John, so this sense names the Ephesian silversmith",
+        "lexicon": "D0700 דְּמַטְרִיּוֹס Demetrius; the silversmith of Ephesus who made silver shrines of Artemis.",
         "grammar": "personal name",
         "context": "Acts 19:24, Greek Δημήτριος",
         "greek": "G1216 Δημήτριος",
@@ -6176,10 +6206,10 @@
         ]
       },
       "previous_strong": "H5532",
-      "new_strong": "Hl/D0076",
+      "new_strong": "Hl/D0700",
       "reason": "לִדְמַטְרִיּוֹס is Demetrius; H5532 סָכַן 'be of use' is a different word",
       "evidence": {
-        "lexicon": "D0076 דימטריוס Demetrius; NT personal name; D0076 names the Demetrius of 3 John, so this sense names the Ephesian silversmith",
+        "lexicon": "D0700 דְּמַטְרִיּוֹס Demetrius; the silversmith of Ephesus who made silver shrines of Artemis.",
         "grammar": "preposition ל + personal name",
         "context": "Acts 19:38, Greek Δημήτριος",
         "greek": "G1216 Δημήτριος",

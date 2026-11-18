@@ -54,10 +54,10 @@
         "prefixes": []
       },
       "previous_strong": "H7311",
-      "new_strong": "D0141",
-      "reason": "רוֹמִי׃ is Roman; H7311 רוּם 'be high' is a different word",
+      "new_strong": "D0705",
+      "reason": "רוֹמִי׃ is Rome; H7311 רוּם 'be high' is a different word",
       "evidence": {
-        "lexicon": "D0141 רומי Roman; pertaining to Rome or Roman citizenship.",
+        "lexicon": "D0705 רוֹמִי Rome; the capital of the Roman Empire.",
         "grammar": "place name",
         "context": "Acts 19:21, Greek Ῥώμη",
         "issue": 42,
@@ -154,10 +154,10 @@
         "prefixes": []
       },
       "previous_strong": "H4150",
-      "new_strong": "D0141",
-      "reason": "רוֹמִי is Roman; H4150 מוֹעֵד 'Appointed time, fixed hour' is a different word",
+      "new_strong": "D0705",
+      "reason": "רוֹמִי is Rome; H4150 מוֹעֵד 'Appointed time, fixed hour' is a different word",
       "evidence": {
-        "lexicon": "D0141 רומי Roman; pertaining to Rome or Roman citizenship.",
+        "lexicon": "D0705 רוֹמִי Rome; the capital of the Roman Empire.",
         "grammar": "place name",
         "context": "Acts 28:16, Greek Ῥώμη",
         "issue": 42,
@@ -1312,10 +1312,10 @@
         "prefixes": []
       },
       "previous_strong": "H336",
-      "new_strong": "H6641",
+      "new_strong": "D0665",
       "reason": "צְבוּעָה׃ is hypocritical, feigned; H336 אִי 'not' is a different word",
       "evidence": {
-        "lexicon": "H6641 צָבוּעַ hypocritical, feigned; a post-biblical Hebrew adjective.",
+        "lexicon": "D0665 צָבוּעַ hypocritical, feigned; a post-biblical Hebrew adjective.",
         "grammar": "adjective, feminine",
         "context": "2 Corinthians 6:6, Greek ἀνυπόκριτος",
         "issue": 42,
@@ -1337,10 +1337,10 @@
         "prefixes": []
       },
       "previous_strong": "H4176",
-      "new_strong": "H6641",
+      "new_strong": "D0665",
       "reason": "צְבוּעָה is hypocritical, feigned; H4176 מוֹרֶה 'teacher' is a different word",
       "evidence": {
-        "lexicon": "H6641 צָבוּעַ hypocritical, feigned; a post-biblical Hebrew adjective.",
+        "lexicon": "D0665 צָבוּעַ hypocritical, feigned; a post-biblical Hebrew adjective.",
         "grammar": "adjective, feminine",
         "context": "2 Timothy 1:5, Greek ἀνυπόκριτος",
         "issue": 42,
@@ -5165,10 +5165,10 @@
         "prefixes": []
       },
       "previous_strong": "H8451",
-      "new_strong": "H8120",
+      "new_strong": "D0402",
       "reason": "שִׁמֵּשׁ is serve, minister; H8451 תּוֹרָה 'Instruction, teaching' is a different word",
       "evidence": {
-        "lexicon": "H8120 שְׁמַשׁ serve, minister; a post-biblical Hebrew verb.",
+        "lexicon": "D0402 שִׁמֵּשׁ serve, minister; a post-biblical Hebrew verb.",
         "grammar": "piel perfect, served",
         "context": "John 18:13",
         "issue": 42,
@@ -5317,10 +5317,10 @@
         "prefixes": []
       },
       "previous_strong": "H5647",
-      "new_strong": "H6906",
+      "new_strong": "D0502",
       "reason": "קָבוּעַ is fix, appoint, determine; H5647 עָבַד 'serve' is a different word",
       "evidence": {
-        "lexicon": "H6906 קָבַע fix, appoint, determine; a post-biblical Hebrew sense.",
+        "lexicon": "D0502 קָבַע fix, appoint, determine; a post-biblical Hebrew sense.",
         "grammar": "qal passive participle, fixed",
         "context": "1 Corinthians 7:5, Greek καιρός",
         "issue": 42,

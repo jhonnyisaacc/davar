@@ -89503,12 +89503,6 @@
         "text_es": "Demetrio; hombre recomendado en 3 Juan.",
         "source": "custom",
         "order": 1
-      },
-      {
-        "source": "delitzsch_review",
-        "text_en": "Demetrius; the silversmith of Ephesus who made silver shrines of Artemis.",
-        "text_es": "Demetrio; el platero de Éfeso que hacía templecillos de plata de Artemisa.",
-        "order": 2
       }
     ],
     "root": "",
@@ -98912,12 +98906,6 @@
         "text_es": "romano; relativo a Roma o a la ciudadanía romana.",
         "source": "custom",
         "order": 2
-      },
-      {
-        "order": 2,
-        "source": "delitzsch_review",
-        "text_en": "Rome; the capital of the Roman Empire.",
-        "text_es": "Roma; la capital del Imperio romano."
       }
     ],
     "root": "",
@@ -198988,12 +198976,6 @@
         "transliteration": "Menajen",
         "context": "Figura del pensamiento hebreo que describe al agente encargado de traer consolación operativa a Yisra'el, la cual se traduce directamente en restauración y cumplimiento profético.",
         "original_id": 810
-      },
-      {
-        "source": "delitzsch_review",
-        "text_en": "Manaen; a prophet at Antioch, brought up with Herod the tetrarch.",
-        "text_es": "Manaén; profeta de Antioquía, criado con Herodes el tetrarca.",
-        "order": 3
       }
     ]
   },
@@ -520415,12 +520397,6 @@
         "source": "delitzsch_review",
         "text_en": "Erastus; a co-worker of Paul, sent into Macedonia and later left at Corinth.",
         "text_es": "Erasto; colaborador de Pablo, enviado a Macedonia y que después se quedó en Corinto."
-      },
-      {
-        "order": 2,
-        "source": "delitzsch_review",
-        "text_en": "Erastus; the treasurer of the city of Corinth, who sent greetings to Rome.",
-        "text_es": "Erasto; tesorero de la ciudad de Corinto, que envió saludos a Roma."
       }
     ],
     "root": "",
@@ -520436,17 +520412,38 @@
         "text": "אֲרִסְטוֹס"
       },
       {
-        "book": "romans",
-        "chapter": 16,
-        "verse": 23,
-        "word_index": 8,
-        "text": "אֲרַסְטוֹס"
-      },
-      {
         "book": "timothy2",
         "chapter": 4,
         "verse": 20,
         "word_index": 0,
+        "text": "אֲרַסְטוֹס"
+      }
+    ]
+  },
+  "D0701": {
+    "strong_number": "D0701",
+    "hebrew": "אֲרַסְטוֹס",
+    "transliteration_es": "Erasto",
+    "transliteration_en": "Erastus",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Erastus; the treasurer of the city of Corinth, who sent greetings to Rome.",
+        "text_es": "Erasto; tesorero de la ciudad de Corinto, que envió saludos a Roma."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 23,
+        "word_index": 8,
         "text": "אֲרַסְטוֹס"
       }
     ]
@@ -521858,6 +521855,41 @@
       }
     ]
   },
+  "D0700": {
+    "strong_number": "D0700",
+    "hebrew": "דְּמַטְרִיּוֹס",
+    "transliteration_es": "Demetrio",
+    "transliteration_en": "Demetrius",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "delitzsch_review",
+        "text_en": "Demetrius; the silversmith of Ephesus who made silver shrines of Artemis.",
+        "text_es": "Demetrio; el platero de Éfeso que hacía templecillos de plata de Artemisa.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 19,
+        "verse": 24,
+        "word_index": 4,
+        "text": "דְּמַטְרִיּוֹס"
+      },
+      {
+        "book": "acts",
+        "chapter": 19,
+        "verse": 38,
+        "word_index": 2,
+        "text": "לִדְמַטְרִיּוֹס"
+      }
+    ]
+  },
   "H1421": {
     "strong_number": "H1421",
     "hebrew": "גִּדּוּף",
@@ -521954,6 +521986,83 @@
     "manual_instances": [],
     "mapping_scope": "instances_only",
     "nt_instances": []
+  },
+  "D0705": {
+    "strong_number": "D0705",
+    "hebrew": "רוֹמִי",
+    "transliteration_es": "Roma",
+    "transliteration_en": "Rome",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Rome; the capital of the Roman Empire.",
+        "text_es": "Roma; la capital del Imperio romano."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 28,
+        "verse": 14,
+        "word_index": 12,
+        "text": "רוֹמִי׃"
+      },
+      {
+        "book": "romans",
+        "chapter": 1,
+        "verse": 15,
+        "word_index": 9,
+        "text": "בְּרוֹמִי׃"
+      },
+      {
+        "book": "romans",
+        "chapter": 1,
+        "verse": 7,
+        "word_index": 2,
+        "text": "בְּרוֹמִי"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 1,
+        "verse": 17,
+        "word_index": 3,
+        "text": "בְרוֹמִי"
+      },
+      {
+        "book": "acts",
+        "chapter": 19,
+        "verse": 21,
+        "word_index": 21,
+        "text": "רוֹמִי׃"
+      },
+      {
+        "book": "acts",
+        "chapter": 28,
+        "verse": 16,
+        "word_index": 3,
+        "text": "רוֹמִי"
+      },
+      {
+        "book": "acts",
+        "chapter": 18,
+        "verse": 2,
+        "word_index": 24,
+        "text": "רוֹמִי׃"
+      },
+      {
+        "book": "acts",
+        "chapter": 23,
+        "verse": 11,
+        "word_index": 16,
+        "text": "בְּרוֹמִי׃"
+      }
+    ]
   },
   "D0327": {
     "strong_number": "D0327",
@@ -522193,6 +522302,34 @@
       }
     ]
   },
+  "D0333": {
+    "strong_number": "D0333",
+    "hebrew": "מְנַחֵם",
+    "transliteration_es": "Manaén",
+    "transliteration_en": "Manaen",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Manaen; a prophet at Antioch, brought up with Herod the tetrarch.",
+        "text_es": "Manaén; profeta de Antioquía, criado con Herodes el tetrarca."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 13,
+        "verse": 1,
+        "word_index": 15,
+        "text": "וּמְנַחֵם"
+      }
+    ]
+  },
   "D0334": {
     "strong_number": "D0334",
     "hebrew": "פָּפוֹס",
@@ -522345,12 +522482,6 @@
         "source": "delitzsch_review",
         "text_en": "Hermes; the Greek god for whom the people of Lystra took Paul.",
         "text_es": "Hermes; el dios griego por quien los de Listra tomaron a Pablo."
-      },
-      {
-        "order": 2,
-        "source": "delitzsch_review",
-        "text_en": "Hermes; a Christian in Rome greeted by Paul.",
-        "text_es": "Hermes; cristiano de Roma saludado por Pablo."
       }
     ],
     "root": "",
@@ -522364,7 +522495,28 @@
         "verse": 12,
         "word_index": 6,
         "text": "הֶרְמִיס"
-      },
+      }
+    ]
+  },
+  "D0702": {
+    "strong_number": "D0702",
+    "hebrew": "הֶרְמִיס",
+    "transliteration_es": "Hermes",
+    "transliteration_en": "Hermes",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Hermes; a Christian in Rome greeted by Paul.",
+        "text_es": "Hermes; cristiano de Roma saludado por Pablo."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
       {
         "book": "romans",
         "chapter": 16,
@@ -522890,12 +523042,6 @@
         "source": "delitzsch_review",
         "text_en": "Sosthenes; the ruler of the synagogue at Corinth, beaten before Gallio's tribunal.",
         "text_es": "Sóstenes; principal de la sinagoga de Corinto, golpeado ante el tribunal de Galión."
-      },
-      {
-        "order": 2,
-        "source": "delitzsch_review",
-        "text_en": "Sosthenes; a brother named with Paul as co-sender of 1 Corinthians.",
-        "text_es": "Sóstenes; hermano nombrado con Pablo como coautor de 1 Corintios."
       }
     ],
     "root": "",
@@ -522909,7 +523055,28 @@
         "verse": 17,
         "word_index": 4,
         "text": "סוֹסְתְּנִיס"
-      },
+      }
+    ]
+  },
+  "D0703": {
+    "strong_number": "D0703",
+    "hebrew": "סוֹסְתְּנִיס",
+    "transliteration_es": "Sóstenes",
+    "transliteration_en": "Sosthenes",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Sosthenes; a brother named with Paul as co-sender of 1 Corinthians.",
+        "text_es": "Sóstenes; hermano nombrado con Pablo como coautor de 1 Corintios."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
       {
         "book": "corinthians1",
         "chapter": 1,
@@ -524662,18 +524829,18 @@
       }
     ]
   },
-  "H8120": {
-    "strong_number": "H8120",
-    "hebrew": "שְׁמַשׁ",
-    "transliteration_es": "shemash",
-    "transliteration_en": "shemash",
+  "D0402": {
+    "strong_number": "D0402",
+    "hebrew": "שִׁמֵּשׁ",
+    "transliteration_es": "shimesh",
+    "transliteration_en": "shimmesh",
     "is_custom": true,
     "definitions": [
       {
+        "order": 1,
         "source": "delitzsch_review",
         "text_en": "serve, minister; a post-biblical Hebrew verb.",
-        "text_es": "servir, ministrar; verbo hebreo posbíblico.",
-        "order": 1
+        "text_es": "servir, ministrar; verbo hebreo posbíblico."
       }
     ],
     "root": "",
@@ -524682,13 +524849,6 @@
     "mapping_scope": "instances_only",
     "nt_instances": [
       {
-        "book": "timothy1",
-        "chapter": 3,
-        "verse": 13,
-        "word_index": 1,
-        "text": "הַמְשַׁמְּשִׁים"
-      },
-      {
         "book": "acts",
         "chapter": 6,
         "verse": 2,
@@ -524696,11 +524856,39 @@
         "text": "וּנְשַׁמֵּשׁ"
       },
       {
+        "book": "timothy1",
+        "chapter": 3,
+        "verse": 13,
+        "word_index": 1,
+        "text": "הַמְשַׁמְּשִׁים"
+      },
+      {
         "book": "john",
         "chapter": 18,
         "verse": 13,
         "word_index": 8,
         "text": "שִׁמֵּשׁ"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 3,
+        "verse": 10,
+        "word_index": 6,
+        "text": "יְשַׁמְּשׁוּ"
+      },
+      {
+        "book": "romans",
+        "chapter": 13,
+        "verse": 4,
+        "word_index": 1,
+        "text": "מְשַׁמֶּשֶׁת"
+      },
+      {
+        "book": "romans",
+        "chapter": 13,
+        "verse": 4,
+        "word_index": 18,
+        "text": "מְשַׁמֶּשֶׁת"
       }
     ]
   },
@@ -525341,22 +525529,22 @@
       }
     ]
   },
-  "H6735": {
-    "strong_number": "H6735",
+  "D0413": {
+    "strong_number": "D0413",
     "hebrew": "צִיר",
-    "transliteration_es": "tziyr",
-    "transliteration_en": "tziyr",
+    "transliteration_es": "tsir",
+    "transliteration_en": "tzir",
     "is_custom": true,
     "definitions": [
       {
+        "order": 1,
         "source": "delitzsch_review",
         "text_en": "joint, ligament of the body; a post-biblical Hebrew sense.",
-        "text_es": "articulación, ligamento del cuerpo; sentido hebreo posbíblico.",
-        "order": 1
+        "text_es": "articulación, ligamento del cuerpo; sentido hebreo posbíblico."
       }
     ],
     "root": "",
-    "root_strong": "H6696",
+    "root_strong": "",
     "manual_instances": [],
     "mapping_scope": "instances_only",
     "nt_instances": [
@@ -525411,22 +525599,22 @@
       }
     ]
   },
-  "H3928": {
-    "strong_number": "H3928",
+  "D0415": {
+    "strong_number": "D0415",
     "hebrew": "לִמּוּד",
     "transliteration_es": "limud",
-    "transliteration_en": "limud",
+    "transliteration_en": "limmud",
     "is_custom": true,
     "definitions": [
       {
+        "order": 1,
         "source": "delitzsch_review",
         "text_en": "teaching, instruction; a post-biblical Hebrew noun.",
-        "text_es": "enseñanza, instrucción; sustantivo hebreo posbíblico.",
-        "order": 1
+        "text_es": "enseñanza, instrucción; sustantivo hebreo posbíblico."
       }
     ],
     "root": "",
-    "root_strong": "H3925",
+    "root_strong": "",
     "manual_instances": [],
     "mapping_scope": "instances_only",
     "nt_instances": [
@@ -525436,6 +525624,48 @@
         "verse": 22,
         "word_index": 7,
         "text": "וְלִמּוּדֵיהֶם׃"
+      },
+      {
+        "book": "acts",
+        "chapter": 26,
+        "verse": 24,
+        "word_index": 13,
+        "text": "הַלִּמּוּד"
+      },
+      {
+        "book": "ephesians",
+        "chapter": 4,
+        "verse": 14,
+        "word_index": 8,
+        "text": "הַלִּמּוּד"
+      },
+      {
+        "book": "matthew",
+        "chapter": 16,
+        "verse": 12,
+        "word_index": 10,
+        "text": "מִלִּמּוּד"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 1,
+        "verse": 4,
+        "word_index": 4,
+        "text": "וּלְלִמּוּדֵי"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 1,
+        "verse": 6,
+        "word_index": 6,
+        "text": "לִמּוּדֵי"
+      },
+      {
+        "book": "titus",
+        "chapter": 3,
+        "verse": 9,
+        "word_index": 5,
+        "text": "וּמִלִּמּוּדֵי"
       }
     ]
   },
@@ -526958,22 +527188,22 @@
       }
     ]
   },
-  "H6563": {
-    "strong_number": "H6563",
-    "hebrew": "פֶּרֶק",
+  "D0450": {
+    "strong_number": "D0450",
+    "hebrew": "פֶּרֶק",
     "transliteration_es": "perek",
     "transliteration_en": "perek",
     "is_custom": true,
     "definitions": [
       {
+        "order": 1,
         "source": "delitzsch_review",
         "text_en": "season of life, age of maturity; a post-biblical Hebrew sense.",
-        "text_es": "etapa de la vida, edad madura; sentido hebreo posbíblico.",
-        "order": 1
+        "text_es": "etapa de la vida, edad madura; sentido hebreo posbíblico."
       }
     ],
     "root": "",
-    "root_strong": "H6561",
+    "root_strong": "",
     "manual_instances": [],
     "mapping_scope": "instances_only",
     "nt_instances": [
@@ -528162,18 +528392,18 @@
       }
     ]
   },
-  "H5641": {
-    "strong_number": "H5641",
+  "D0482": {
+    "strong_number": "D0482",
     "hebrew": "סָתַר",
     "transliteration_es": "satar",
     "transliteration_en": "satar",
     "is_custom": true,
     "definitions": [
       {
+        "order": 1,
         "source": "delitzsch_review",
         "text_en": "tear down, demolish; a post-biblical Hebrew sense.",
-        "text_es": "derribar, demoler; sentido hebreo posbíblico.",
-        "order": 1
+        "text_es": "derribar, demoler; sentido hebreo posbíblico."
       }
     ],
     "root": "",
@@ -528477,22 +528707,22 @@
       }
     ]
   },
-  "H7285": {
-    "strong_number": "H7285",
-    "hebrew": "רֶגֶשׁ",
-    "transliteration_es": "regesh",
-    "transliteration_en": "regesh",
+  "D0492": {
+    "strong_number": "D0492",
+    "hebrew": "רִגְשָׁה",
+    "transliteration_es": "rigshá",
+    "transliteration_en": "rigshah",
     "is_custom": true,
     "definitions": [
       {
+        "order": 1,
         "source": "delitzsch_review",
         "text_en": "feeling, awareness; a post-biblical Hebrew sense.",
-        "text_es": "sentimiento, conciencia; sentido hebreo posbíblico.",
-        "order": 1
+        "text_es": "sentimiento, conciencia; sentido hebreo posbíblico."
       }
     ],
     "root": "",
-    "root_strong": "H7283",
+    "root_strong": "",
     "manual_instances": [],
     "mapping_scope": "instances_only",
     "nt_instances": [
@@ -528799,18 +529029,18 @@
       }
     ]
   },
-  "H6906": {
-    "strong_number": "H6906",
+  "D0502": {
+    "strong_number": "D0502",
     "hebrew": "קָבַע",
-    "transliteration_es": "kava",
+    "transliteration_es": "kavá",
     "transliteration_en": "kava",
     "is_custom": true,
     "definitions": [
       {
+        "order": 1,
         "source": "delitzsch_review",
         "text_en": "fix, appoint, determine; a post-biblical Hebrew sense.",
-        "text_es": "fijar, señalar, determinar; sentido hebreo posbíblico.",
-        "order": 1
+        "text_es": "fijar, señalar, determinar; sentido hebreo posbíblico."
       }
     ],
     "root": "",
@@ -528831,6 +529061,13 @@
         "verse": 5,
         "word_index": 11,
         "text": "קָבוּעַ"
+      },
+      {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 26,
+        "word_index": 13,
+        "text": "קְבוּעִים"
       }
     ]
   },
@@ -530031,18 +530268,18 @@
       }
     ]
   },
-  "H2148": {
-    "strong_number": "H2148",
+  "D0534": {
+    "strong_number": "D0534",
     "hebrew": "זְכַרְיָה",
-    "transliteration_es": "zejareyah",
-    "transliteration_en": "zechareyah",
+    "transliteration_es": "Zacarías",
+    "transliteration_en": "Zechariah",
     "is_custom": true,
     "definitions": [
       {
+        "order": 1,
         "source": "delitzsch_review",
         "text_en": "Zechariah; the priest, father of John the Baptist.",
-        "text_es": "Zacarías; el sacerdote, padre de Juan el Bautista.",
-        "order": 1
+        "text_es": "Zacarías; el sacerdote, padre de Juan el Bautista."
       }
     ],
     "root": "",
@@ -530056,6 +530293,62 @@
         "verse": 21,
         "word_index": 3,
         "text": "לִזְכַרְיָה"
+      },
+      {
+        "book": "luke",
+        "chapter": 1,
+        "verse": 5,
+        "word_index": 6,
+        "text": "זְכַרְיָה"
+      },
+      {
+        "book": "luke",
+        "chapter": 1,
+        "verse": 12,
+        "word_index": 1,
+        "text": "זְכַרְיָה"
+      },
+      {
+        "book": "luke",
+        "chapter": 1,
+        "verse": 13,
+        "word_index": 5,
+        "text": "זְכַרְיָהוּ"
+      },
+      {
+        "book": "luke",
+        "chapter": 1,
+        "verse": 18,
+        "word_index": 1,
+        "text": "זְכַרְיָה"
+      },
+      {
+        "book": "luke",
+        "chapter": 1,
+        "verse": 40,
+        "word_index": 2,
+        "text": "זְכַרְיָה"
+      },
+      {
+        "book": "luke",
+        "chapter": 1,
+        "verse": 59,
+        "word_index": 9,
+        "text": "זְכַרְיָה"
+      },
+      {
+        "book": "luke",
+        "chapter": 1,
+        "verse": 67,
+        "word_index": 1,
+        "text": "זְכַרְיָה"
+      },
+      {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 2,
+        "word_index": 11,
+        "text": "זְכַרְיָה"
       }
     ]
   },
@@ -531464,12 +531757,6 @@
         "source": "delitzsch_review",
         "text_en": "Rufus; a son of Simon of Cyrene.",
         "text_es": "Rufo; hijo de Simón de Cirene."
-      },
-      {
-        "order": 2,
-        "source": "delitzsch_review",
-        "text_en": "Rufus; a Christian in Rome greeted by Paul, chosen in the Lord.",
-        "text_es": "Rufo; cristiano de Roma saludado por Pablo, escogido en el Señor."
       }
     ],
     "root": "",
@@ -531483,7 +531770,28 @@
         "verse": 21,
         "word_index": 12,
         "text": "וְרוּפוֹס"
-      },
+      }
+    ]
+  },
+  "D0704": {
+    "strong_number": "D0704",
+    "hebrew": "רוּפוֹס",
+    "transliteration_es": "Rufo",
+    "transliteration_en": "Rufus",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Rufus; a Christian in Rome greeted by Paul, chosen in the Lord.",
+        "text_es": "Rufo; cristiano de Roma saludado por Pablo, escogido en el Señor."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
       {
         "book": "romans",
         "chapter": 16,
@@ -534566,18 +534874,18 @@
       }
     ]
   },
-  "H6641": {
-    "strong_number": "H6641",
+  "D0665": {
+    "strong_number": "D0665",
     "hebrew": "צָבוּעַ",
-    "transliteration_es": "tzavua",
+    "transliteration_es": "tsavúa",
     "transliteration_en": "tzavua",
     "is_custom": true,
     "definitions": [
       {
+        "order": 1,
         "source": "delitzsch_review",
         "text_en": "hypocritical, feigned; a post-biblical Hebrew adjective.",
-        "text_es": "hipócrita, fingido; adjetivo hebreo posbíblico.",
-        "order": 1
+        "text_es": "hipócrita, fingido; adjetivo hebreo posbíblico."
       }
     ],
     "root": "",
@@ -535294,18 +535602,18 @@
       }
     ]
   },
-  "H3722": {
-    "strong_number": "H3722",
-    "hebrew": "כָּפַר",
+  "D0690": {
+    "strong_number": "D0690",
+    "hebrew": "כָּפַר",
     "transliteration_es": "kafar",
     "transliteration_en": "kafar",
     "is_custom": true,
     "definitions": [
       {
+        "order": 1,
         "source": "delitzsch_review",
         "text_en": "deny, renounce; a post-biblical Hebrew sense.",
-        "text_es": "negar, renegar; sentido hebreo posbíblico.",
-        "order": 1
+        "text_es": "negar, renegar; sentido hebreo posbíblico."
       }
     ],
     "root": "",
@@ -535319,6 +535627,27 @@
         "verse": 16,
         "word_index": 7,
         "text": "כּוֹפְרִים"
+      },
+      {
+        "book": "jude",
+        "chapter": 1,
+        "verse": 4,
+        "word_index": 16,
+        "text": "וְכֹפְרִים"
+      },
+      {
+        "book": "luke",
+        "chapter": 20,
+        "verse": 27,
+        "word_index": 4,
+        "text": "הַכֹּפְרִים"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 5,
+        "verse": 8,
+        "word_index": 10,
+        "text": "כָּפַר"
       }
     ]
   },
@@ -535606,6 +535935,2442 @@
         "verse": 1,
         "word_index": 7,
         "text": "מְלִיטִי׃"
+      }
+    ]
+  },
+  "D0706": {
+    "strong_number": "D0706",
+    "hebrew": "זְכַרְיָה",
+    "transliteration_es": "Zacarías",
+    "transliteration_en": "Zechariah",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Zechariah; the man killed between the sanctuary and the altar, whom Delitzsch names son of Jehoiada (2 Chronicles 24:20-22).",
+        "text_es": "Zacarías; el hombre muerto entre el santuario y el altar, a quien Delitzsch llama hijo de Joiada (2 Crónicas 24:20-22)."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 11,
+        "verse": 51,
+        "word_index": 4,
+        "text": "זְכַרְיָהוּ"
+      },
+      {
+        "book": "matthew",
+        "chapter": 23,
+        "verse": 35,
+        "word_index": 13,
+        "text": "זְכַרְיָה"
+      }
+    ]
+  },
+  "D0707": {
+    "strong_number": "D0707",
+    "hebrew": "זְכַרְיָה",
+    "transliteration_es": "Zacarías",
+    "transliteration_en": "Zechariah",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Zechariah; the prophet whose book tells of the thirty pieces of silver (Zechariah 11:12-13).",
+        "text_es": "Zacarías; el profeta cuyo libro narra las treinta piezas de plata (Zacarías 11:12-13)."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "matthew",
+        "chapter": 27,
+        "verse": 9,
+        "word_index": 5,
+        "text": "זְכַרְיָה"
+      }
+    ]
+  },
+  "D0708": {
+    "strong_number": "D0708",
+    "hebrew": "יוֹחָנָן",
+    "transliteration_es": "Juan",
+    "transliteration_en": "John",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "John; Yohanan, a name borne in the New Testament by John the Baptist, the apostle John son of Zebedee, John Mark, and others.",
+        "text_es": "Juan; Yojanán, nombre que llevan en el Nuevo Testamento Juan el Bautista, el apóstol Juan hijo de Zebedeo, Juan Marcos y otros."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 1,
+        "verse": 5,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 1,
+        "verse": 13,
+        "word_index": 11,
+        "text": "וְיוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 1,
+        "verse": 22,
+        "word_index": 2,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 11,
+        "verse": 16,
+        "word_index": 6,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 12,
+        "verse": 2,
+        "word_index": 4,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 12,
+        "verse": 12,
+        "word_index": 9,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 12,
+        "verse": 25,
+        "word_index": 12,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 13,
+        "verse": 5,
+        "word_index": 15,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 13,
+        "verse": 13,
+        "word_index": 15,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 13,
+        "verse": 24,
+        "word_index": 4,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 13,
+        "verse": 25,
+        "word_index": 2,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 15,
+        "verse": 37,
+        "word_index": 6,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 18,
+        "verse": 25,
+        "word_index": 19,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 19,
+        "verse": 4,
+        "word_index": 2,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 3,
+        "verse": 1,
+        "word_index": 1,
+        "text": "וְיוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 3,
+        "verse": 3,
+        "word_index": 5,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 3,
+        "verse": 4,
+        "word_index": 4,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 3,
+        "verse": 11,
+        "word_index": 4,
+        "text": "וּבְיוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 4,
+        "verse": 6,
+        "word_index": 4,
+        "text": "וְיוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 4,
+        "verse": 13,
+        "word_index": 8,
+        "text": "וְיוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 4,
+        "verse": 19,
+        "word_index": 2,
+        "text": "וְיוֹחָנָן"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 14,
+        "word_index": 15,
+        "text": "יוֹחָנָן׃"
+      },
+      {
+        "book": "galatians",
+        "chapter": 2,
+        "verse": 9,
+        "word_index": 4,
+        "text": "וְיוֹחָנָן"
+      },
+      {
+        "book": "john",
+        "chapter": 1,
+        "verse": 15,
+        "word_index": 0,
+        "text": "וְיוֹחָנָן"
+      },
+      {
+        "book": "john",
+        "chapter": 1,
+        "verse": 19,
+        "word_index": 3,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "john",
+        "chapter": 1,
+        "verse": 26,
+        "word_index": 2,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "john",
+        "chapter": 1,
+        "verse": 28,
+        "word_index": 8,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "john",
+        "chapter": 1,
+        "verse": 29,
+        "word_index": 3,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "john",
+        "chapter": 1,
+        "verse": 32,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "john",
+        "chapter": 1,
+        "verse": 35,
+        "word_index": 3,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "john",
+        "chapter": 1,
+        "verse": 40,
+        "word_index": 6,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "john",
+        "chapter": 10,
+        "verse": 40,
+        "word_index": 10,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "john",
+        "chapter": 10,
+        "verse": 41,
+        "word_index": 5,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "john",
+        "chapter": 10,
+        "verse": 41,
+        "word_index": 13,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "john",
+        "chapter": 3,
+        "verse": 23,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "john",
+        "chapter": 3,
+        "verse": 24,
+        "word_index": 4,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "john",
+        "chapter": 3,
+        "verse": 25,
+        "word_index": 4,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "john",
+        "chapter": 3,
+        "verse": 26,
+        "word_index": 2,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "john",
+        "chapter": 3,
+        "verse": 27,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "john",
+        "chapter": 5,
+        "verse": 33,
+        "word_index": 3,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "john",
+        "chapter": 5,
+        "verse": 36,
+        "word_index": 6,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 1,
+        "verse": 60,
+        "word_index": 5,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 1,
+        "verse": 63,
+        "word_index": 5,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 11,
+        "verse": 1,
+        "word_index": 17,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 16,
+        "verse": 16,
+        "word_index": 3,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 20,
+        "verse": 4,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 20,
+        "verse": 6,
+        "word_index": 11,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 8,
+        "word_index": 4,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 2,
+        "word_index": 9,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 15,
+        "word_index": 9,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 16,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 20,
+        "word_index": 9,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 5,
+        "verse": 10,
+        "word_index": 5,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 5,
+        "verse": 33,
+        "word_index": 4,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 6,
+        "verse": 14,
+        "word_index": 12,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 7,
+        "verse": 18,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 7,
+        "verse": 19,
+        "word_index": 2,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 7,
+        "verse": 20,
+        "word_index": 4,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 7,
+        "verse": 24,
+        "word_index": 5,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 7,
+        "verse": 24,
+        "word_index": 13,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 7,
+        "verse": 33,
+        "word_index": 2,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 9,
+        "verse": 7,
+        "word_index": 16,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 9,
+        "verse": 9,
+        "word_index": 7,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 9,
+        "verse": 19,
+        "word_index": 2,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 9,
+        "verse": 28,
+        "word_index": 11,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 9,
+        "verse": 49,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "luke",
+        "chapter": 9,
+        "verse": 54,
+        "word_index": 2,
+        "text": "וְיוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 1,
+        "verse": 4,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 1,
+        "verse": 6,
+        "word_index": 0,
+        "text": "וְיוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 1,
+        "verse": 9,
+        "word_index": 11,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 1,
+        "verse": 14,
+        "word_index": 3,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 1,
+        "verse": 19,
+        "word_index": 10,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 1,
+        "verse": 29,
+        "word_index": 11,
+        "text": "וְיוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 10,
+        "verse": 35,
+        "word_index": 3,
+        "text": "וְיוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 10,
+        "verse": 41,
+        "word_index": 8,
+        "text": "וְיוֹחָנָן׃"
+      },
+      {
+        "book": "mark",
+        "chapter": 11,
+        "verse": 30,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 11,
+        "verse": 32,
+        "word_index": 11,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 13,
+        "verse": 3,
+        "word_index": 9,
+        "text": "וְיוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 14,
+        "verse": 33,
+        "word_index": 7,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 2,
+        "verse": 18,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 2,
+        "verse": 18,
+        "word_index": 10,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 3,
+        "verse": 17,
+        "word_index": 5,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 14,
+        "word_index": 8,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 16,
+        "word_index": 3,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 17,
+        "word_index": 6,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 18,
+        "word_index": 3,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 20,
+        "word_index": 4,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 24,
+        "word_index": 8,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 25,
+        "word_index": 15,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 8,
+        "verse": 28,
+        "word_index": 2,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 9,
+        "verse": 2,
+        "word_index": 10,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "mark",
+        "chapter": 9,
+        "verse": 38,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 10,
+        "verse": 2,
+        "word_index": 14,
+        "text": "וְיוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 11,
+        "verse": 2,
+        "word_index": 0,
+        "text": "וְיוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 11,
+        "verse": 7,
+        "word_index": 11,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 11,
+        "verse": 12,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 11,
+        "verse": 13,
+        "word_index": 5,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 11,
+        "verse": 18,
+        "word_index": 2,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 14,
+        "verse": 2,
+        "word_index": 5,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 14,
+        "verse": 3,
+        "word_index": 4,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 14,
+        "verse": 4,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 14,
+        "verse": 8,
+        "word_index": 13,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 14,
+        "verse": 10,
+        "word_index": 4,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 16,
+        "verse": 14,
+        "word_index": 3,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 17,
+        "verse": 1,
+        "word_index": 11,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 17,
+        "verse": 13,
+        "word_index": 5,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 21,
+        "verse": 25,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 21,
+        "verse": 26,
+        "word_index": 24,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 21,
+        "verse": 32,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 3,
+        "verse": 1,
+        "word_index": 3,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 3,
+        "verse": 4,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 3,
+        "verse": 13,
+        "word_index": 6,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 3,
+        "verse": 14,
+        "word_index": 0,
+        "text": "וְיוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 4,
+        "verse": 12,
+        "word_index": 5,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 4,
+        "verse": 21,
+        "word_index": 13,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 9,
+        "verse": 14,
+        "word_index": 3,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "revelation",
+        "chapter": 1,
+        "verse": 4,
+        "word_index": 0,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "revelation",
+        "chapter": 1,
+        "verse": 9,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      },
+      {
+        "book": "revelation",
+        "chapter": 22,
+        "verse": 8,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      }
+    ]
+  },
+  "D0709": {
+    "strong_number": "D0709",
+    "hebrew": "יוֹחָנָן",
+    "transliteration_es": "Joanán",
+    "transliteration_en": "Joanan",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Joanan; an ancestor of Jesus in Luke's genealogy.",
+        "text_es": "Joanán; antepasado de Jesús en la genealogía de Lucas."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 27,
+        "word_index": 1,
+        "text": "יוֹחָנָן"
+      }
+    ]
+  },
+  "D0710": {
+    "strong_number": "D0710",
+    "hebrew": "שִׁמְעוֹן",
+    "transliteration_es": "Simón",
+    "transliteration_en": "Simon",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Simon; Shimon, a name borne in the New Testament by Simon Peter, Simon the Zealot, Simon of Cyrene, Simon the tanner, and others.",
+        "text_es": "Simón; Shimón, nombre que llevan en el Nuevo Testamento Simón Pedro, Simón el Zelote, Simón de Cirene, Simón el curtidor y otros."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 1,
+        "verse": 13,
+        "word_index": 21,
+        "text": "וְשִׁמְעוֹן"
+      },
+      {
+        "book": "acts",
+        "chapter": 10,
+        "verse": 5,
+        "word_index": 9,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "acts",
+        "chapter": 10,
+        "verse": 6,
+        "word_index": 5,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "acts",
+        "chapter": 10,
+        "verse": 17,
+        "word_index": 15,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "acts",
+        "chapter": 10,
+        "verse": 18,
+        "word_index": 5,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "acts",
+        "chapter": 10,
+        "verse": 32,
+        "word_index": 7,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "acts",
+        "chapter": 10,
+        "verse": 32,
+        "word_index": 13,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "acts",
+        "chapter": 11,
+        "verse": 13,
+        "word_index": 17,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 9,
+        "word_index": 3,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 13,
+        "word_index": 1,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 18,
+        "word_index": 2,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 24,
+        "word_index": 1,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "acts",
+        "chapter": 9,
+        "verse": 43,
+        "word_index": 9,
+        "text": "שִׁמְעוֹן׃"
+      },
+      {
+        "book": "john",
+        "chapter": 1,
+        "verse": 40,
+        "word_index": 12,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 1,
+        "verse": 41,
+        "word_index": 4,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 1,
+        "verse": 42,
+        "word_index": 8,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 12,
+        "verse": 4,
+        "word_index": 6,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 13,
+        "verse": 2,
+        "word_index": 9,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 13,
+        "verse": 6,
+        "word_index": 2,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 13,
+        "verse": 9,
+        "word_index": 2,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 13,
+        "verse": 24,
+        "word_index": 2,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 13,
+        "verse": 26,
+        "word_index": 17,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 13,
+        "verse": 36,
+        "word_index": 2,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 18,
+        "verse": 10,
+        "word_index": 0,
+        "text": "וּלְשִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 18,
+        "verse": 15,
+        "word_index": 0,
+        "text": "וְשִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 18,
+        "verse": 25,
+        "word_index": 0,
+        "text": "וְשִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 20,
+        "verse": 2,
+        "word_index": 3,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 20,
+        "verse": 6,
+        "word_index": 1,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 21,
+        "verse": 2,
+        "word_index": 0,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 21,
+        "verse": 3,
+        "word_index": 2,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 21,
+        "verse": 7,
+        "word_index": 13,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 21,
+        "verse": 11,
+        "word_index": 1,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 21,
+        "verse": 15,
+        "word_index": 6,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 21,
+        "verse": 15,
+        "word_index": 8,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 21,
+        "verse": 16,
+        "word_index": 4,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 21,
+        "verse": 17,
+        "word_index": 4,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 6,
+        "verse": 8,
+        "word_index": 6,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 6,
+        "verse": 68,
+        "word_index": 2,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "john",
+        "chapter": 6,
+        "verse": 71,
+        "word_index": 5,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 31,
+        "word_index": 2,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 31,
+        "word_index": 3,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "luke",
+        "chapter": 23,
+        "verse": 26,
+        "word_index": 10,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "luke",
+        "chapter": 24,
+        "verse": 34,
+        "word_index": 8,
+        "text": "שִׁמְעוֹן׃"
+      },
+      {
+        "book": "luke",
+        "chapter": 4,
+        "verse": 38,
+        "word_index": 5,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "luke",
+        "chapter": 4,
+        "verse": 38,
+        "word_index": 7,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "luke",
+        "chapter": 5,
+        "verse": 3,
+        "word_index": 7,
+        "text": "לְשִׁמְעוֹן"
+      },
+      {
+        "book": "luke",
+        "chapter": 5,
+        "verse": 4,
+        "word_index": 4,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "luke",
+        "chapter": 5,
+        "verse": 5,
+        "word_index": 1,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "luke",
+        "chapter": 5,
+        "verse": 8,
+        "word_index": 2,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "luke",
+        "chapter": 5,
+        "verse": 10,
+        "word_index": 11,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "luke",
+        "chapter": 5,
+        "verse": 10,
+        "word_index": 15,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "luke",
+        "chapter": 6,
+        "verse": 14,
+        "word_index": 1,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "luke",
+        "chapter": 6,
+        "verse": 15,
+        "word_index": 9,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "luke",
+        "chapter": 7,
+        "verse": 40,
+        "word_index": 4,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "luke",
+        "chapter": 7,
+        "verse": 43,
+        "word_index": 1,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "luke",
+        "chapter": 7,
+        "verse": 44,
+        "word_index": 5,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "mark",
+        "chapter": 1,
+        "verse": 16,
+        "word_index": 8,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "mark",
+        "chapter": 1,
+        "verse": 16,
+        "word_index": 12,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "mark",
+        "chapter": 1,
+        "verse": 29,
+        "word_index": 7,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "mark",
+        "chapter": 1,
+        "verse": 30,
+        "word_index": 1,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "mark",
+        "chapter": 1,
+        "verse": 36,
+        "word_index": 2,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "mark",
+        "chapter": 14,
+        "verse": 3,
+        "word_index": 5,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "mark",
+        "chapter": 14,
+        "verse": 37,
+        "word_index": 6,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "mark",
+        "chapter": 15,
+        "verse": 21,
+        "word_index": 8,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "mark",
+        "chapter": 3,
+        "verse": 16,
+        "word_index": 6,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "mark",
+        "chapter": 3,
+        "verse": 18,
+        "word_index": 18,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 3,
+        "word_index": 10,
+        "text": "וְשִׁמְעוֹן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 10,
+        "verse": 2,
+        "word_index": 6,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 10,
+        "verse": 4,
+        "word_index": 0,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 13,
+        "verse": 55,
+        "word_index": 12,
+        "text": "וְשִׁמְעוֹן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 16,
+        "verse": 16,
+        "word_index": 1,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 16,
+        "verse": 17,
+        "word_index": 4,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 17,
+        "verse": 25,
+        "word_index": 10,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 26,
+        "verse": 6,
+        "word_index": 6,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 27,
+        "verse": 32,
+        "word_index": 6,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 4,
+        "verse": 18,
+        "word_index": 11,
+        "text": "שִׁמְעוֹן"
+      }
+    ]
+  },
+  "D0711": {
+    "strong_number": "D0711",
+    "hebrew": "שִׁמְעוֹן",
+    "transliteration_es": "Simeón",
+    "transliteration_en": "Simeon",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Simeon; a name borne in the New Testament by the righteous man who blessed the child Jesus, Simeon called Niger, an ancestor of Jesus, and Simon Peter.",
+        "text_es": "Simeón; nombre que llevan en el Nuevo Testamento el justo que bendijo al niño Jesús, Simeón llamado Níger, un antepasado de Jesús y Simón Pedro."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 13,
+        "verse": 1,
+        "word_index": 10,
+        "text": "וְשִׁמְעוֹן"
+      },
+      {
+        "book": "acts",
+        "chapter": 15,
+        "verse": 14,
+        "word_index": 0,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "luke",
+        "chapter": 2,
+        "verse": 25,
+        "word_index": 5,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "luke",
+        "chapter": 2,
+        "verse": 34,
+        "word_index": 2,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 30,
+        "word_index": 1,
+        "text": "שִׁמְעוֹן"
+      },
+      {
+        "book": "peter2",
+        "chapter": 1,
+        "verse": 1,
+        "word_index": 0,
+        "text": "שִׁמְעוֹן"
+      }
+    ]
+  },
+  "D0712": {
+    "strong_number": "D0712",
+    "hebrew": "מִרְיָם",
+    "transliteration_es": "María",
+    "transliteration_en": "Mary",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Mary; Miriam, a name borne in the New Testament by Mary the mother of Jesus, Mary Magdalene, Mary of Bethany, and other women.",
+        "text_es": "María; Miriam, nombre que llevan en el Nuevo Testamento María la madre de Jesús, María Magdalena, María de Betania y otras mujeres."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 1,
+        "verse": 14,
+        "word_index": 11,
+        "text": "וּמִרְיָם"
+      },
+      {
+        "book": "acts",
+        "chapter": 12,
+        "verse": 12,
+        "word_index": 7,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "john",
+        "chapter": 11,
+        "verse": 1,
+        "word_index": 8,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "john",
+        "chapter": 11,
+        "verse": 2,
+        "word_index": 1,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "john",
+        "chapter": 11,
+        "verse": 19,
+        "word_index": 6,
+        "text": "וּמִרְיָם"
+      },
+      {
+        "book": "john",
+        "chapter": 11,
+        "verse": 20,
+        "word_index": 8,
+        "text": "וּמִרְיָם"
+      },
+      {
+        "book": "john",
+        "chapter": 11,
+        "verse": 28,
+        "word_index": 6,
+        "text": "לְמִרְיָם"
+      },
+      {
+        "book": "john",
+        "chapter": 11,
+        "verse": 31,
+        "word_index": 8,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "john",
+        "chapter": 11,
+        "verse": 32,
+        "word_index": 1,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "john",
+        "chapter": 11,
+        "verse": 45,
+        "word_index": 6,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "john",
+        "chapter": 12,
+        "verse": 3,
+        "word_index": 1,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "john",
+        "chapter": 19,
+        "verse": 25,
+        "word_index": 8,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "john",
+        "chapter": 19,
+        "verse": 25,
+        "word_index": 11,
+        "text": "וּמִרְיָם"
+      },
+      {
+        "book": "john",
+        "chapter": 20,
+        "verse": 1,
+        "word_index": 8,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "john",
+        "chapter": 20,
+        "verse": 11,
+        "word_index": 0,
+        "text": "וּמִרְיָם"
+      },
+      {
+        "book": "john",
+        "chapter": 20,
+        "verse": 16,
+        "word_index": 3,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "john",
+        "chapter": 20,
+        "verse": 18,
+        "word_index": 1,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "luke",
+        "chapter": 1,
+        "verse": 27,
+        "word_index": 11,
+        "text": "מִרְיָם׃"
+      },
+      {
+        "book": "luke",
+        "chapter": 1,
+        "verse": 30,
+        "word_index": 5,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "luke",
+        "chapter": 1,
+        "verse": 34,
+        "word_index": 1,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "luke",
+        "chapter": 1,
+        "verse": 38,
+        "word_index": 1,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "luke",
+        "chapter": 1,
+        "verse": 39,
+        "word_index": 1,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "luke",
+        "chapter": 1,
+        "verse": 41,
+        "word_index": 5,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "luke",
+        "chapter": 1,
+        "verse": 46,
+        "word_index": 1,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "luke",
+        "chapter": 1,
+        "verse": 56,
+        "word_index": 1,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "luke",
+        "chapter": 10,
+        "verse": 39,
+        "word_index": 4,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "luke",
+        "chapter": 10,
+        "verse": 42,
+        "word_index": 5,
+        "text": "וּמִרְיָם"
+      },
+      {
+        "book": "luke",
+        "chapter": 2,
+        "verse": 5,
+        "word_index": 2,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "luke",
+        "chapter": 2,
+        "verse": 16,
+        "word_index": 4,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "luke",
+        "chapter": 2,
+        "verse": 19,
+        "word_index": 0,
+        "text": "וּמִרְיָם"
+      },
+      {
+        "book": "luke",
+        "chapter": 2,
+        "verse": 34,
+        "word_index": 5,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "luke",
+        "chapter": 24,
+        "verse": 10,
+        "word_index": 0,
+        "text": "וּמִרְיָם"
+      },
+      {
+        "book": "luke",
+        "chapter": 24,
+        "verse": 10,
+        "word_index": 3,
+        "text": "וּמִרְיָם"
+      },
+      {
+        "book": "luke",
+        "chapter": 8,
+        "verse": 2,
+        "word_index": 6,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "mark",
+        "chapter": 15,
+        "verse": 40,
+        "word_index": 8,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "mark",
+        "chapter": 15,
+        "verse": 40,
+        "word_index": 10,
+        "text": "וּמִרְיָם"
+      },
+      {
+        "book": "mark",
+        "chapter": 15,
+        "verse": 47,
+        "word_index": 0,
+        "text": "וּמִרְיָם"
+      },
+      {
+        "book": "mark",
+        "chapter": 15,
+        "verse": 47,
+        "word_index": 2,
+        "text": "וּמִרְיָם"
+      },
+      {
+        "book": "mark",
+        "chapter": 16,
+        "verse": 1,
+        "word_index": 6,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "mark",
+        "chapter": 16,
+        "verse": 1,
+        "word_index": 8,
+        "text": "וּמִרְיָם"
+      },
+      {
+        "book": "mark",
+        "chapter": 16,
+        "verse": 9,
+        "word_index": 10,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 3,
+        "word_index": 5,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "matthew",
+        "chapter": 1,
+        "verse": 16,
+        "word_index": 5,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "matthew",
+        "chapter": 1,
+        "verse": 18,
+        "word_index": 5,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "matthew",
+        "chapter": 1,
+        "verse": 20,
+        "word_index": 18,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "matthew",
+        "chapter": 13,
+        "verse": 55,
+        "word_index": 8,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "matthew",
+        "chapter": 2,
+        "verse": 11,
+        "word_index": 6,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "matthew",
+        "chapter": 27,
+        "verse": 56,
+        "word_index": 1,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "matthew",
+        "chapter": 27,
+        "verse": 56,
+        "word_index": 3,
+        "text": "וּמִרְיָם"
+      },
+      {
+        "book": "matthew",
+        "chapter": 27,
+        "verse": 61,
+        "word_index": 0,
+        "text": "וּמִרְיָם"
+      },
+      {
+        "book": "matthew",
+        "chapter": 27,
+        "verse": 61,
+        "word_index": 2,
+        "text": "וּמִרְיָם"
+      },
+      {
+        "book": "matthew",
+        "chapter": 28,
+        "verse": 1,
+        "word_index": 7,
+        "text": "מִרְיָם"
+      },
+      {
+        "book": "matthew",
+        "chapter": 28,
+        "verse": 1,
+        "word_index": 9,
+        "text": "וּמִרְיָם"
+      },
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 6,
+        "word_index": 2,
+        "text": "מִרְיָם"
+      }
+    ]
+  },
+  "D0713": {
+    "strong_number": "D0713",
+    "hebrew": "נְתַנְאֵל",
+    "transliteration_es": "Natanael",
+    "transliteration_en": "Nathanael",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Nathanael; a disciple from Cana in Galilee whom Philip brought to Jesus.",
+        "text_es": "Natanael; discípulo de Caná de Galilea a quien Felipe llevó a Jesús."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "john",
+        "chapter": 1,
+        "verse": 45,
+        "word_index": 3,
+        "text": "נְתַנְאֵל"
+      },
+      {
+        "book": "john",
+        "chapter": 1,
+        "verse": 46,
+        "word_index": 2,
+        "text": "נְתַנְאֵל"
+      },
+      {
+        "book": "john",
+        "chapter": 1,
+        "verse": 47,
+        "word_index": 3,
+        "text": "נְתַנְאֵל"
+      },
+      {
+        "book": "john",
+        "chapter": 1,
+        "verse": 48,
+        "word_index": 2,
+        "text": "נְתַנְאֵל"
+      },
+      {
+        "book": "john",
+        "chapter": 1,
+        "verse": 49,
+        "word_index": 1,
+        "text": "נְתַנְאֵל"
+      },
+      {
+        "book": "john",
+        "chapter": 21,
+        "verse": 2,
+        "word_index": 5,
+        "text": "וּנְתַנְאֵל"
+      }
+    ]
+  },
+  "D0714": {
+    "strong_number": "D0714",
+    "hebrew": "תַּלְמַי",
+    "transliteration_es": "Talmai",
+    "transliteration_en": "Talmai",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Talmai; the father's name in Bar-Talmai, Bartholomew, one of the twelve apostles.",
+        "text_es": "Talmai; el nombre del padre en Bar-Talmai, Bartolomé, uno de los doce apóstoles."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 1,
+        "verse": 13,
+        "word_index": 16,
+        "text": "תַּלְמַי"
+      },
+      {
+        "book": "luke",
+        "chapter": 6,
+        "verse": 14,
+        "word_index": 17,
+        "text": "תַּלְמָי׃"
+      },
+      {
+        "book": "mark",
+        "chapter": 3,
+        "verse": 18,
+        "word_index": 6,
+        "text": "תַּלְמַי"
+      },
+      {
+        "book": "matthew",
+        "chapter": 10,
+        "verse": 3,
+        "word_index": 2,
+        "text": "תַּלְמַי"
+      }
+    ]
+  },
+  "D0715": {
+    "strong_number": "D0715",
+    "hebrew": "חֲנוֹךְ",
+    "transliteration_es": "Enoc",
+    "transliteration_en": "Enoch",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Enoch; son of Jared and father of Methuselah, who walked with God and was taken up.",
+        "text_es": "Enoc; hijo de Jared y padre de Matusalén, que caminó con Dios y fue llevado."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "hebrews",
+        "chapter": 11,
+        "verse": 5,
+        "word_index": 2,
+        "text": "חֲנוֹךְ"
+      },
+      {
+        "book": "jude",
+        "chapter": 1,
+        "verse": 14,
+        "word_index": 1,
+        "text": "חֲנוֹךְ"
+      },
+      {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 37,
+        "word_index": 3,
+        "text": "חֲנוֹךְ"
+      }
+    ]
+  },
+  "D0716": {
+    "strong_number": "D0716",
+    "hebrew": "חֶצְרוֹן",
+    "transliteration_es": "Hesrón",
+    "transliteration_en": "Hezron",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Hezron; son of Perez and an ancestor of David and of Jesus.",
+        "text_es": "Hesrón; hijo de Fares y antepasado de David y de Jesús."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 33,
+        "word_index": 5,
+        "text": "חֶצְרוֹן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 1,
+        "verse": 3,
+        "word_index": 10,
+        "text": "חֶצְרוֹן"
+      },
+      {
+        "book": "matthew",
+        "chapter": 1,
+        "verse": 3,
+        "word_index": 11,
+        "text": "וְחֶצְרוֹן"
+      }
+    ]
+  },
+  "D0717": {
+    "strong_number": "D0717",
+    "hebrew": "מַתִּתְיָה",
+    "transliteration_es": "Matatías",
+    "transliteration_en": "Mattathias",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Mattathias; the name of two ancestors of Jesus in Luke's genealogy.",
+        "text_es": "Matatías; nombre de dos antepasados de Jesús en la genealogía de Lucas."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 25,
+        "word_index": 1,
+        "text": "מַתִּתְיָה"
+      },
+      {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 26,
+        "word_index": 3,
+        "text": "מַתִּתְיָה"
+      }
+    ]
+  },
+  "D0718": {
+    "strong_number": "D0718",
+    "hebrew": "שְׁלֹמִית",
+    "transliteration_es": "Salomé",
+    "transliteration_en": "Salome",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Salome; one of the women at the cross and at the empty tomb.",
+        "text_es": "Salomé; una de las mujeres junto a la cruz y en el sepulcro vacío."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "mark",
+        "chapter": 15,
+        "verse": 40,
+        "word_index": 17,
+        "text": "וּשְׁלֹמִית׃"
+      },
+      {
+        "book": "mark",
+        "chapter": 16,
+        "verse": 1,
+        "word_index": 11,
+        "text": "וּשְׁלֹמִית"
+      }
+    ]
+  },
+  "D0719": {
+    "strong_number": "D0719",
+    "hebrew": "עַזּוּר",
+    "transliteration_es": "Azor",
+    "transliteration_en": "Azor",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Azor; an ancestor of Jesus in Matthew's genealogy.",
+        "text_es": "Azor; antepasado de Jesús en la genealogía de Mateo."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "matthew",
+        "chapter": 1,
+        "verse": 13,
+        "word_index": 11,
+        "text": "עַזּוּר׃"
+      },
+      {
+        "book": "matthew",
+        "chapter": 1,
+        "verse": 14,
+        "word_index": 0,
+        "text": "וְעַזּוּר"
+      }
+    ]
+  },
+  "D0720": {
+    "strong_number": "D0720",
+    "hebrew": "לָמֶךְ",
+    "transliteration_es": "Lamec",
+    "transliteration_en": "Lamech",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Lamech; son of Methuselah and father of Noah.",
+        "text_es": "Lamec; hijo de Matusalén y padre de Noé."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 36,
+        "word_index": 9,
+        "text": "לָמֶךְ׃"
+      }
+    ]
+  },
+  "D0721": {
+    "strong_number": "D0721",
+    "hebrew": "גּוֹג",
+    "transliteration_es": "Gog",
+    "transliteration_en": "Gog",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Gog; with Magog, the nations Satan gathers for the last battle.",
+        "text_es": "Gog; con Magog, las naciones que Satanás reúne para la última batalla."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "revelation",
+        "chapter": 20,
+        "verse": 8,
+        "word_index": 8,
+        "text": "גּוֹג"
+      }
+    ]
+  },
+  "D0722": {
+    "strong_number": "D0722",
+    "hebrew": "מִדְיָן",
+    "transliteration_es": "Madián",
+    "transliteration_en": "Midian",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Midian; the land where Moses lived as an exile.",
+        "text_es": "Madián; la tierra donde Moisés vivió como exiliado."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 7,
+        "verse": 29,
+        "word_index": 8,
+        "text": "מִדְיָן"
+      }
+    ]
+  },
+  "D0723": {
+    "strong_number": "D0723",
+    "hebrew": "שִׁמְעִי",
+    "transliteration_es": "Semeí",
+    "transliteration_en": "Semein",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Semein; an ancestor of Jesus in Luke's genealogy.",
+        "text_es": "Semeí; antepasado de Jesús en la genealogía de Lucas."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 26,
+        "word_index": 5,
+        "text": "שִׁמְעִי"
+      }
+    ]
+  },
+  "D0724": {
+    "strong_number": "D0724",
+    "hebrew": "בֵּל",
+    "transliteration_es": "Bel",
+    "transliteration_en": "Bel",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Zeus; the chief Greek god, for whom the people of Lystra took Barnabas. Delitzsch names him Bel.",
+        "text_es": "Zeus; el dios principal de los griegos, por quien los de Listra tomaron a Bernabé. Delitzsch lo llama Bel."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 14,
+        "verse": 12,
+        "word_index": 3,
+        "text": "בֵּל"
+      },
+      {
+        "book": "acts",
+        "chapter": 14,
+        "verse": 13,
+        "word_index": 2,
+        "text": "בֵּל"
+      }
+    ]
+  },
+  "D0725": {
+    "strong_number": "D0725",
+    "hebrew": "פֶּרֶק",
+    "transliteration_es": "perek",
+    "transliteration_en": "perek",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "joint of the arm, the wrist or elbow; a post-biblical Hebrew sense.",
+        "text_es": "articulación del brazo, la muñeca o el codo; sentido hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "mark",
+        "chapter": 7,
+        "verse": 3,
+        "word_index": 12,
+        "text": "הַפֶּרֶק"
       }
     ]
   }

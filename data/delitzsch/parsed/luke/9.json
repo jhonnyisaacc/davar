@@ -599,7 +599,7 @@
           },
           {
             "text": "יוֹחָנָן",
-            "strong": "H3076",
+            "strong": "D0708",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -731,7 +731,7 @@
           },
           {
             "text": "יוֹחָנָן",
-            "strong": "H3076",
+            "strong": "D0708",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -1132,7 +1132,7 @@
           },
           {
             "text": "הַכְּפָרִים",
-            "strong": "Hd/H3722",
+            "strong": "Hd/H3723",
             "prefixes": [
               "Hd"
             ]
@@ -1792,7 +1792,7 @@
           },
           {
             "text": "יוֹחָנָן",
-            "strong": "H3076",
+            "strong": "D0708",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -2739,7 +2739,7 @@
           },
           {
             "text": "יוֹחָנָן",
-            "strong": "H3076",
+            "strong": "D0708",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -4535,7 +4535,7 @@
           },
           {
             "text": "יוֹחָנָן",
-            "strong": "H3076",
+            "strong": "D0708",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -4753,7 +4753,7 @@
       {
         "chapter": 9,
         "verse": 52,
-        "hebrew": "וַ/יִּשְׁלַח מַלְאָכִים לְ/פָנָיו וַ/יֵּלְכוּ וַ/יָּבֹאוּ אֶל־אֶחָד מִכְּפָרֵי הַ/שֹּׁמְרוֹנִים לְ/הָ/כִין לוֹ׃",
+        "hebrew": "וַ/יִּשְׁלַח מַלְאָכִים לְ/פָנָיו וַ/יֵּלְכוּ וַ/יָּבֹאוּ אֶל־אֶחָד מִ/כְּפָרֵי הַ/שֹּׁמְרוֹנִים לְ/הָ/כִין לוֹ׃",
         "words": [
           {
             "text": "וַיִּשְׁלַח",
@@ -4800,8 +4800,10 @@
           },
           {
             "text": "מִכְּפָרֵי",
-            "strong": "H3722",
-            "prefixes": []
+            "strong": "Hm/H3723",
+            "prefixes": [
+              "Hm"
+            ]
           },
           {
             "text": "הַשֹּׁמְרוֹנִים",
@@ -4900,7 +4902,7 @@
           },
           {
             "text": "וְיוֹחָנָן",
-            "strong": "Hc/H3076",
+            "strong": "Hc/D0708",
             "prefixes": [
               "Hc"
             ],

@@ -23,7 +23,7 @@
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
       "path": "data/delitzsch/parsed/john/1.json",
-      "sha256": "9d165e016c6e35117ed97d2d8e3ca1578e3bc0462490e1f63d79ac6366570e46"
+      "sha256": "4d143373faa24dbd42665c7be62ba15f6b516d0f630cfaefeaa93037b70c116c"
     },
     {
       "id": "greek",
@@ -47,7 +47,7 @@
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
       "path": "data/dict/lexicon/words.json",
-      "sha256": "64e1ca11da891761106251b99a11898029a7390156abb0dd574158aa6dcc42d5"
+      "sha256": "65bb3ae34919f23509fd7c6368f5f0850fe2d249905354033de47303778e0ac2"
     },
     {
       "id": "custom",
@@ -56,7 +56,7 @@
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
       "path": "data/dict/lexicon/custom_definitions.json",
-      "sha256": "ecf46e00f9a8056aa8832bebb45dc9e133bdb310393ec17cd4043e58a2023ff7"
+      "sha256": "89d78343e9ad9d1bbfcff256b925baacd2f05f79317a7786469da88a92545bc3"
     },
     {
       "id": "shaul-son-of-man",

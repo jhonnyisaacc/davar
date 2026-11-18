@@ -56098,43 +56098,6 @@
       "occurrence": {
         "book": "jude",
         "chapter": 1,
-        "verse": 4,
-        "word_index": 16,
-        "text": "וְכֹפְרִים",
-        "strong": "Hc/Hk/H3722",
-        "prefixes": [
-          "Hc",
-          "Hk"
-        ]
-      },
-      "previous_strong": "Hc/Hk/H3722",
-      "new_strong": "Hc/H3722",
-      "new_prefixes": [
-        "Hc"
-      ],
-      "reason": "The tagged prefix letters כ begin the lemma כפר of H3722, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "reviewed_strong",
-        "consonants": "וכפרימ",
-        "prefix_letters": "וכ",
-        "lemma": "כפר",
-        "strong_review": {
-          "reviewer": "claude-delitzsch-review",
-          "status": "skipped",
-          "new_strong": "Hc/Hk/H3722",
-          "reason": "H3722 is the right verb; the tagged כ is a root letter",
-          "logged_at": "2026-11-15T15:44:41.098619+00:00"
-        }
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "jude",
-        "chapter": 1,
         "verse": 5,
         "word_index": 7,
         "text": "כְּבָר",
@@ -67947,40 +67910,6 @@
         "prefix_letters": "ל",
         "lemma": "לוי",
         "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "luke",
-        "chapter": 3,
-        "verse": 36,
-        "word_index": 9,
-        "text": "לָמֶךְ׃",
-        "strong": "Hl/H3929",
-        "prefixes": [
-          "Hl"
-        ]
-      },
-      "previous_strong": "Hl/H3929",
-      "new_strong": "H3929",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters ל begin the lemma למך of H3929, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "reviewed_strong",
-        "consonants": "למכ",
-        "prefix_letters": "ל",
-        "lemma": "למך",
-        "strong_review": {
-          "reviewer": "codex-desktop",
-          "status": "applied",
-          "new_strong": "H3929",
-          "reason": "לָמֶךְ is reliable as H3929; add the Luke genealogy definition.",
-          "logged_at": "2026-05-29T20:07:46.132699+00:00"
-        }
       }
     },
     {
@@ -122606,40 +122535,6 @@
       "occurrence": {
         "book": "timothy1",
         "chapter": 1,
-        "verse": 6,
-        "word_index": 6,
-        "text": "לִמּוּדֵי",
-        "strong": "Hl/H3928",
-        "prefixes": [
-          "Hl"
-        ]
-      },
-      "previous_strong": "Hl/H3928",
-      "new_strong": "H3928",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters ל begin the lemma למוד of H3928, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "reviewed_strong",
-        "consonants": "למודי",
-        "prefix_letters": "ל",
-        "lemma": "למוד",
-        "strong_review": {
-          "reviewer": "claude-delitzsch-review",
-          "status": "skipped",
-          "new_strong": "Hl/H3928",
-          "reason": "H3928 is right; the ל tag is a root letter",
-          "logged_at": "2026-11-15T15:44:41.448282+00:00"
-        }
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "timothy1",
-        "chapter": 1,
         "verse": 7,
         "word_index": 1,
         "text": "לִהְיוֹת",
@@ -124158,40 +124053,6 @@
         "prefix_letters": "ב",
         "lemma": "בית",
         "strong_review": null
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "timothy1",
-        "chapter": 5,
-        "verse": 8,
-        "word_index": 10,
-        "text": "כָּפַר",
-        "strong": "Hk/H3722",
-        "prefixes": [
-          "Hk"
-        ]
-      },
-      "previous_strong": "Hk/H3722",
-      "new_strong": "H3722",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters כ begin the lemma כפר of H3722, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "reviewed_strong",
-        "consonants": "כפר",
-        "prefix_letters": "כ",
-        "lemma": "כפר",
-        "strong_review": {
-          "reviewer": "claude-delitzsch-review",
-          "status": "skipped",
-          "new_strong": "Hk/H3722",
-          "reason": "H3722 is the right verb; the tagged כ is a root letter",
-          "logged_at": "2026-11-15T15:44:41.456291+00:00"
-        }
       }
     },
     {
