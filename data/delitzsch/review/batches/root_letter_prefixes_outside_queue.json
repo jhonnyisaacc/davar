@@ -11677,40 +11677,6 @@
       "occurrence": {
         "book": "acts",
         "chapter": 4,
-        "verse": 10,
-        "word_index": 23,
-        "text": "בָּרִיא׃",
-        "strong": "Hb/H1277",
-        "prefixes": [
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hb/H1277",
-      "new_strong": "H1277",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters ב begin the lemma בריא of H1277, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "reviewed_strong",
-        "consonants": "בריא",
-        "prefix_letters": "ב",
-        "lemma": "בריא",
-        "strong_review": {
-          "reviewer": "codex-desktop",
-          "status": "applied",
-          "new_strong": "H1277",
-          "reason": "בָּרִיא means healthy/whole here; local H1277 only gives the older “fat/robust” sense.",
-          "logged_at": "2026-05-29T17:15:07.036467+00:00"
-        }
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "acts",
-        "chapter": 4,
         "verse": 12,
         "word_index": 9,
         "text": "לִבְנֵי",
@@ -125860,34 +125826,6 @@
           "reason": "H3602 is right; the Hk tag marks a root letter",
           "logged_at": "2026-11-15T15:44:41.474211+00:00"
         }
-      }
-    },
-    {
-      "action": "set_strong",
-      "issue_type": "root_letter_prefix",
-      "reviewer": "rule:root_letter_prefix_outside_queue_v1",
-      "confidence": 0.95,
-      "occurrence": {
-        "book": "titus",
-        "chapter": 2,
-        "verse": 8,
-        "word_index": 1,
-        "text": "בָּרִיא",
-        "strong": "Hb/H1277",
-        "prefixes": [
-          "Hb"
-        ]
-      },
-      "previous_strong": "Hb/H1277",
-      "new_strong": "H1277",
-      "new_prefixes": [],
-      "reason": "The tagged prefix letters ב begin the lemma בריא of H1277, so they are root letters, not prefixes.",
-      "evidence": {
-        "basis": "lemma_check",
-        "consonants": "בריא",
-        "prefix_letters": "ב",
-        "lemma": "בריא",
-        "strong_review": null
       }
     },
     {

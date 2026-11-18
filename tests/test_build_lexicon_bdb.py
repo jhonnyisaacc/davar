@@ -6,8 +6,10 @@ from pathlib import Path
 from scripts.dict.build_lexicon import (
     def_gloss_parts,
     extract_bdb_definitions_with_sense,
+    load_lexical_index,
     preserve_existing_definition_metadata,
 )
+from scripts.dict.utils import load_bdb_xml
 from scripts.dict.audit_missing_senses import gloss_matches, normalize_gloss
 from scripts.dict import bdb_truncated_glosses, validator
 
@@ -21,7 +23,7 @@ def test_extract_bdb_definitions_keeps_all_lexical_index_homonyms_and_senses():
         <bdb xmlns="{BDB_NS}">
           <entry id="t.ai.aa" type="root" mod="I">
             <w>רָבָה</w>
-            <def>be</def>, <def>become</def>, <def>much</def>, <def>many</def>, <def>great</def>
+            <def>be</def>, or <def>become</def>, <def>much</def>, <def>many</def>, <def>great</def>
             <sense><stem>Qal</stem>
               <sense n="1"><def>become many</def>, <def>numerous</def></sense>
               <sense n="2">
@@ -136,8 +138,8 @@ def test_a_truncated_lexicon_gloss_is_completed_and_its_split_continuation_dropp
         ]},
         "H6969": {"definitions": [{"text_en": "chant a", "source": "bdb", "order": 1, "sense": "0"}]},
     }
-    mapping = {"H7853": ["u.ay.ac"], "H6969": ["s.bk.ai"]}
-    repairs = bdb_truncated_glosses.derive(lexicon, bdb_root, mapping)
+    extract = bdb_truncated_glosses.extractor(bdb_root, {"strong_to_bdb": {"H7853": ["u.ay.ac"], "H6969": ["s.bk.ai"]}})
+    repairs = bdb_truncated_glosses.derive(lexicon, bdb_root, extract)
     assert [(r.strong, r.order, r.after, r.absorbed_orders) for r in repairs] == [
         ("H6969", 1, "chant a קִינָה", ()), ("H7853", 1, "be or act as adversary", (2,)),
     ]
@@ -147,7 +149,8 @@ def test_a_truncated_lexicon_gloss_is_completed_and_its_split_continuation_dropp
     assert [(d["text_en"], d.get("text_es")) for d in lexicon["H7853"]["definitions"]] == [
         ("be or act as adversary", "ser o actuar como adversario"), ("Satan", None),
     ]
-    assert bdb_truncated_glosses.derive(lexicon, bdb_root, mapping) == []
+    assert bdb_truncated_glosses.derive(lexicon, bdb_root, extract) == []
+    assert bdb_truncated_glosses.disagreements(lexicon, bdb_root, extract) == {}
 
 
 def test_a_gloss_continues_past_a_comma_and_an_abbreviated_divine_name():
@@ -183,7 +186,7 @@ def test_a_cut_off_gloss_stored_under_an_entry_whose_bdb_text_lacks_it_is_droppe
         {"text_en": "be high", "source": "bdb", "order": 1},
         {"text_en": "be", "text_es": "ser", "source": "bdb", "order": 2},
     ]}}
-    repairs = bdb_truncated_glosses.derive(lexicon, bdb_root, {"H7311": ["r.aa.aa"]})
+    repairs = bdb_truncated_glosses.derive(lexicon, bdb_root, bdb_truncated_glosses.extractor(bdb_root, {"strong_to_bdb": {"H7311": ["r.aa.aa"]}}))
     assert [(r.strong, r.order, r.after) for r in repairs] == [("H7311", 2, None)]
     bdb_truncated_glosses.apply(lexicon["H7311"], repairs, {})
     assert [d["text_en"] for d in lexicon["H7311"]["definitions"]] == ["be high"]
@@ -201,9 +204,21 @@ def test_a_bdb_record_whose_english_is_in_the_spanish_table_takes_that_spanish()
     assert [d.get("text_es") for d in lexicon["H8380"]["definitions"]] == ["gemelo", "gemelo", "mellizo"]
 
 
-def test_no_truncated_bdb_gloss_remains_in_the_lexicon():
-    _, repairs = bdb_truncated_glosses.lexicon_repairs()
-    assert repairs == []
+def test_no_truncated_bdb_gloss_remains_in_the_lexicon_and_a_rebuild_gives_the_same_completed_glosses():
+    repairs, disagreeing = bdb_truncated_glosses.lexicon_repairs()
+    assert (repairs, disagreeing) == ([], {})
+
+
+def test_a_comma_or_between_bare_verbs_keeps_the_lexical_index_gloss_of_the_real_bdb_entry():
+    bdb_root = load_bdb_xml()
+    lexical_index = load_lexical_index()
+    first = {
+        strong: extract_bdb_definitions_with_sense(strong, lemma, bdb_root, lexical_index)[0]["text_en"]
+        for strong, lemma in [("H7235", "רָבָה"), ("H7231", "רָבַב"), ("H7337", "רָחַב"), ("H7368", "רָחַק"), ("H7937", "שָׁכַר"), ("H6819", "צָעַר")]
+    }
+    assert first == {
+        "H7235": "be much", "H7231": "be many", "H7337": "be wide", "H7368": "be far", "H7937": "be drunk", "H6819": "be insignificant",
+    }
 
 
 def test_validator_flags_fragmented_main_bdb_definitions(tmp_path, monkeypatch):

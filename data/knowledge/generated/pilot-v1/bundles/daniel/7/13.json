@@ -23,7 +23,7 @@
     }
   ],
   "diagnostics": [],
-  "input_manifest_digest": "033e22814048f6ef2f84aae723c72a0ee541e958d657e27db06c3af68ea2af29",
+  "input_manifest_digest": "f51f1a95b3e3fd6fbc6525b9d69d7ad05c43ffd068c2f9e21dcef3d0142011f5",
   "records": {
     "concepts": [
       {
@@ -377,7 +377,7 @@
         "path": "data/dict/lexicon/words.json",
         "repository": "https://github.com/jhonnyisaacc/davar",
         "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-        "sha256": "d577c846afc92560816b94c2bcd27682d450239437bd9b7134c531995b05d715",
+        "sha256": "bfc879571b959718306fbad8b5fb40fd42bb2813078cbb8966647145fe312544",
         "visibility": "public"
       },
       {

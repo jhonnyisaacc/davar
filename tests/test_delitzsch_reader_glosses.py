@@ -1,11 +1,14 @@
 import json
+import unicodedata
 import xml.etree.ElementTree as ET
 from collections import defaultdict
+from difflib import SequenceMatcher
 from functools import cache
 from pathlib import Path
 
 import pytest
 
+from scripts.delitzsch.review.blocked_candidates import greek_verse
 from scripts.dict.reader_gloss import Lexicon
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,17 +27,33 @@ NAMES = {
     "H8286": "Serug", "H775": "Arphaxad", "H6005": "Immanuēl", "H4023": "Megiddon", "H348": "Jezebel", "H7205": "Reuben",
     "H3485": "Issachar", "H7259": "Rebekah",
 }
+HEBREW_SOUNDS = dict(zip("בגדזטכלמנספצקרשתךםןףץ", "BGDSTKLMNSPSKRSTKMNPS"))
+GREEK_SOUNDS = dict(zip("βγδζθκλμνξπρσςτφχψ", ["B", "G", "D", "S", "T", "K", "L", "M", "N", "KS", "P", "R", "S", "S", "T", "P", "K", "PS"]))
+FINAL_LETTERS = str.maketrans("ךםןףץ", "כמנפצ")
+GREEK_NAMES_FOR = {
+    "H3068": {"κυριος", "θεος"}, "H4714": {"αιγυπτος", "αιγυπτιος"}, "H6865": {"τυρος", "τυριος"}, "H763": {"μεσοποταμια"},
+    "H758": {"μεσοποταμια", "συρια", "συρος"}, "H5910": {"πτολεμαις"}, "H3568": {"αιθιοψ"}, "H795": {"αζωτος"},
+    "H6939": {"κεδρων"}, "H5680": {"εβραιος", "εβραις", "εβραιστι"},
+}
 
 
 @cache
-def occurrences():
-    found = defaultdict(list)
+def corpus():
+    found = []
     for path in sorted((ROOT / "data/delitzsch/parsed").glob("*/*.json")):
         for chapter in json.loads(path.read_text(encoding="utf-8")):
             for verse in chapter["verses"]:
                 for index, word in enumerate(verse["words"]):
                     if word.get("strong"):
-                        found[word["strong"].split("/")[-1]].append(f"{path.parent.name}.{chapter['chapter']}.{verse['verse']}.{index}")
+                        found.append(((path.parent.name, chapter["chapter"], verse["verse"], index), word))
+    return found
+
+
+@cache
+def occurrences():
+    found = defaultdict(list)
+    for location, word in corpus():
+        found[word["strong"].split("/")[-1]].append(".".join(map(str, location)))
     return found
 
 
@@ -90,3 +109,73 @@ def test_every_new_testament_occurrence_of_a_proper_noun_entry_shows_its_name_fi
 def test_a_reviewed_occurrence_shows_the_sense_the_pull_request_names(location, strong, english, spanish):
     shown = glosses_at(*location)
     assert (shown[0], shown[1].startswith(english), shown[2].startswith(spanish)) == (strong, True, True), shown
+
+
+def unaccented(text):
+    return "".join(c for c in unicodedata.normalize("NFD", text) if not unicodedata.combining(c)).lower()
+
+
+def squeezed(sounds):
+    return "".join(sound for index, sound in enumerate(sounds) if not index or sound != sounds[index - 1])
+
+
+def hebrew_sounds(text):
+    return squeezed("".join(HEBREW_SOUNDS.get(c, "") for c in unicodedata.normalize("NFD", text)))
+
+
+def greek_sounds(lemma):
+    text = unaccented(lemma)
+    return squeezed("".join(GREEK_SOUNDS.get(c, "") for c in (text[:-1] if text.endswith("ς") and len(text) > 3 else text)))
+
+
+def consonants(text):
+    return "".join(c for c in unicodedata.normalize("NFD", text) if "א" <= c <= "ת" and c not in "וי").translate(FINAL_LETTERS)
+
+
+def spelled_as_lemma(word, lemma):
+    text, target, prefixes = consonants(word["text"]), consonants(lemma), len(word.get("prefixes") or [])
+    while prefixes and text[:1] in "והבלכמש" and text != target:
+        text, prefixes = text[1:], prefixes - 1
+    return text == target
+
+
+def test_every_new_testament_occurrence_of_a_proper_noun_entry_matches_a_name_in_its_greek_verse():
+    greek_cache, unmatched = {}, []
+    for (book, chapter, verse, index), word in corpus():
+        strong = word["strong"].split("/")[-1]
+        if strong not in proper_nouns():
+            continue
+        lemma = (lexicon().words.get(strong) or lexicon().roots.get(strong))["lemma"]
+        greek = {unaccented(w["lemma"]): w["lemma"] for w in greek_verse(book, chapter, verse, greek_cache)}
+        names = [plain for plain, original in greek.items() if original[:1].isupper()]
+        if any(SequenceMatcher(None, hebrew_sounds(lemma), greek_sounds(name)).ratio() >= 0.66 for name in names):
+            continue
+        if GREEK_NAMES_FOR.get(strong, set()) & greek.keys() or spelled_as_lemma(word, lemma):
+            continue
+        unmatched.append((f"{book} {chapter}:{verse}.{index}", word["text"], strong, lemma))
+    assert unmatched == []
+
+
+def test_every_custom_record_the_review_adds_to_a_bdb_entry_was_checked_against_the_old_testament_and_is_used_in_the_new():
+    added = {
+        decision["strong"]
+        for path in sorted((ROOT / "data/delitzsch/review/batches").glob("definition_gaps_42*.json"))
+        for decision in json.loads(path.read_text(encoding="utf-8"))["decisions"]
+        if decision["action"] == "upsert_custom_definition" and decision["strong"].startswith("H") and decision["definition"].get("source") == "custom"
+    }
+    table = {row["strong"]: row for row in json.loads((ROOT / "data/delitzsch/review/h_entry_custom_records.json").read_text(encoding="utf-8"))["records"]}
+    shown = {strong: lexicon().glosses(strong) for strong in added}
+    assert set(table) == added
+    assert {strong: (row["text_en"], row["text_es"]) for strong, row in table.items()} == {strong: (en.text, es.text) for strong, (en, es) in shown.items()}
+    assert {strong for strong, row in table.items() if not row["ot_check"].startswith("fits: ")} == set()
+    assert {strong for strong in added if not occurrences().get(strong)} == set()
+
+
+def test_every_instances_only_entry_lists_exactly_its_new_testament_occurrences():
+    differing = {}
+    for strong, entry in lexicon().custom.items():
+        if entry.get("mapping_scope") == "instances_only":
+            listed = sorted(f"{x['book']}.{int(x['chapter'])}.{int(x['verse'])}.{int(x['word_index'])}" for x in entry.get("nt_instances") or [])
+            if listed != sorted(occurrences().get(strong, [])):
+                differing[strong] = (len(listed), len(occurrences().get(strong, [])))
+    assert differing == {}

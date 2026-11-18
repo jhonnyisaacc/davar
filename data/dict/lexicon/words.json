@@ -172353,11 +172353,11 @@
         "text_es": "espigas"
       },
       {
-        "text_en": "hand",
+        "text_en": "a (beckoning) hand",
         "source": "bdb",
         "order": 17,
         "sense": "4g",
-        "text_es": "mano"
+        "text_es": "una mano (que hace señas)"
       },
       {
         "text_en": "יַד with prep.",
@@ -299757,11 +299757,11 @@
         "text_es": "movimiento o dirección hacia"
       },
       {
-        "text_en": "unto",
+        "text_en": "to or unto",
         "source": "bdb",
         "order": 3,
         "sense": "1",
-        "text_es": "hacia"
+        "text_es": "a o hacia"
       },
       {
         "text_en": "into",
@@ -337106,11 +337106,11 @@
     "translit_es": "meleje",
     "definitions": [
       {
-        "text_en": "become king",
+        "text_en": "be or become king",
         "source": "bdb",
-        "order": 2,
+        "order": 1,
         "sense": "0",
-        "text_es": "llegar a ser rey"
+        "text_es": "ser o llegar a ser rey"
       },
       {
         "text_en": "queen",
@@ -337127,11 +337127,11 @@
         "text_es": "reinar"
       },
       {
-        "text_en": "king",
+        "text_en": "be (become) king",
         "source": "bdb",
         "order": 5,
         "sense": "0",
-        "text_es": "rey"
+        "text_es": "ser (llegar a ser) rey"
       },
       {
         "text_en": "make king",
@@ -337619,11 +337619,11 @@
     "translit_es": "moleje",
     "definitions": [
       {
-        "text_en": "become king",
+        "text_en": "be or become king",
         "source": "bdb",
-        "order": 2,
+        "order": 1,
         "sense": "0",
-        "text_es": "llegar a ser rey"
+        "text_es": "ser o llegar a ser rey"
       },
       {
         "text_en": "queen",
@@ -337640,11 +337640,11 @@
         "text_es": "reinar"
       },
       {
-        "text_en": "king",
+        "text_en": "be (become) king",
         "source": "bdb",
         "order": 5,
         "sense": "0",
-        "text_es": "rey"
+        "text_es": "ser (llegar a ser) rey"
       },
       {
         "text_en": "make king",
@@ -472783,11 +472783,11 @@
         "text_es": "contra"
       },
       {
-        "text_en": "towards",
+        "text_en": "with or towards",
         "source": "bdb",
         "order": 5,
         "sense": "1d",
-        "text_es": "hacia"
+        "text_es": "con o hacia"
       },
       {
         "text_en": "together with",
@@ -475024,11 +475024,11 @@
         "text_es": "contra"
       },
       {
-        "text_en": "towards",
+        "text_en": "with or towards",
         "source": "bdb",
         "order": 3,
         "sense": "1d",
-        "text_es": "hacia"
+        "text_es": "con o hacia"
       },
       {
         "text_en": "together with",
@@ -499249,11 +499249,11 @@
         "text_es": "completamente"
       },
       {
-        "text_en": "diligence",
+        "text_en": "with (all) diligence",
         "source": "bdb",
         "order": 2,
         "sense": "0",
-        "text_es": "diligencia"
+        "text_es": "con (toda) diligencia"
       }
     ],
     "sources": {
@@ -553578,6 +553578,13 @@
     "translit_es": "keynan",
     "definitions": [
       {
+        "text_en": "chant a קִינָה",
+        "source": "bdb",
+        "order": 1,
+        "sense": "0",
+        "text_es": "entonar una קִינָה"
+      },
+      {
         "text_en": "Cainan/Kenan; ancestor in the genealogy of Jesus in Luke 3.",
         "text_es": "Cainán/Quenán; antepasado en la genealogía de Jesús en Lucas 3.",
         "source": "delitzsch_review",
@@ -602836,11 +602843,11 @@
         "text_es": "obligarse por siete cosas"
       },
       {
-        "text_en": "oaths",
+        "text_en": "those sworn with (= who have sworn) oaths",
         "source": "bdb",
-        "order": 5,
+        "order": 4,
         "sense": "0",
-        "text_es": "juramentos"
+        "text_es": "los juramentados (= que han hecho) juramentos"
       },
       {
         "text_en": "take an oath",
@@ -618711,10 +618718,11 @@
     "translit_es": "shiyloh",
     "definitions": [
       {
-        "text_en": "that which belongs to him",
+        "text_en": "he whose it is or that which belongs to him",
         "source": "bdb",
-        "order": 2,
-        "sense": "0"
+        "order": 1,
+        "sense": "0",
+        "text_es": "aquel a quien pertenece o lo que le pertenece"
       }
     ],
     "sources": {
@@ -637134,11 +637142,11 @@
         "text_es": "un dejar caer"
       },
       {
-        "text_en": "remitting",
+        "text_en": "a (temporary) remitting",
         "source": "bdb",
         "order": 2,
         "sense": "0",
-        "text_es": "remisión"
+        "text_es": "una remisión (temporal)"
       }
     ],
     "sources": {
@@ -651408,10 +651416,11 @@
         "sense": "0"
       },
       {
-        "text_en": "vigour",
+        "text_en": "in (actual) vigour",
         "source": "bdb",
         "order": 4,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "en (pleno) vigor"
       }
     ],
     "sources": {
@@ -658932,18 +658941,11 @@
     "translit_es": "sharar",
     "definitions": [
       {
-        "text_en": "act as",
+        "text_en": "be or act as prince",
         "source": "bdb",
-        "order": 2,
+        "order": 1,
         "sense": "0",
-        "text_es": "actuar como"
-      },
-      {
-        "text_en": "prince",
-        "source": "bdb",
-        "order": 3,
-        "sense": "0",
-        "text_es": "príncipe"
+        "text_es": "ser o actuar como príncipe"
       },
       {
         "text_en": "rule",
@@ -660124,18 +660126,18 @@
         "text_es": "quien"
       },
       {
-        "text_en": "which",
+        "text_en": "in (that) which",
         "source": "bdb",
         "order": 2,
         "sense": "a",
-        "text_es": "que"
+        "text_es": "en (aquello) que"
       },
       {
-        "text_en": "where",
+        "text_en": "in (the place) where",
         "source": "bdb",
         "order": 3,
         "sense": "b",
-        "text_es": "donde"
+        "text_es": "en (el lugar) donde"
       },
       {
         "text_en": "in that",
@@ -660222,11 +660224,11 @@
         "text_es": "lo que"
       },
       {
-        "text_en": "that",
+        "text_en": "from (the fact) that",
         "source": "bdb",
         "order": 16,
         "sense": "c",
-        "text_es": "que"
+        "text_es": "por (el hecho de) que"
       },
       {
         "text_en": "since",

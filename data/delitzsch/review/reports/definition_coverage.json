@@ -493,7 +493,7 @@
     "en",
     "es"
    ],
-   "occurrences": 25,
+   "occurrences": 26,
    "source": "custom"
   },
   "D0063": {
@@ -501,7 +501,7 @@
     "en",
     "es"
    ],
-   "occurrences": 11,
+   "occurrences": 12,
    "source": "custom"
   },
   "D0064": {
@@ -901,7 +901,7 @@
     "en",
     "es"
    ],
-   "occurrences": 4,
+   "occurrences": 5,
    "source": "custom"
   },
   "D0114": {
@@ -1333,7 +1333,7 @@
     "en",
     "es"
    ],
-   "occurrences": 21,
+   "occurrences": 22,
    "source": "custom"
   },
   "D0169": {
@@ -1525,7 +1525,7 @@
     "en",
     "es"
    ],
-   "occurrences": 4,
+   "occurrences": 5,
    "source": "custom"
   },
   "D0193": {
@@ -1669,7 +1669,7 @@
     "en",
     "es"
    ],
-   "occurrences": 11,
+   "occurrences": 13,
    "source": "custom"
   },
   "D0211": {
@@ -1718,6 +1718,22 @@
     "es"
    ],
    "occurrences": 1,
+   "source": "custom"
+  },
+  "D0229": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 11,
+   "source": "custom"
+  },
+  "D0231": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 2,
    "source": "custom"
   },
   "D0232": {
@@ -1830,6 +1846,14 @@
     "es"
    ],
    "occurrences": 2,
+   "source": "custom"
+  },
+  "D0263": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
    "source": "custom"
   },
   "D0265": {
@@ -5573,7 +5597,7 @@
     "en",
     "es"
    ],
-   "occurrences": 21,
+   "occurrences": 22,
    "source": "custom"
   },
   "D0737": {
@@ -5645,7 +5669,7 @@
     "en",
     "es"
    ],
-   "occurrences": 1,
+   "occurrences": 46,
    "source": "custom"
   },
   "D0746": {
@@ -5917,7 +5941,7 @@
     "en",
     "es"
    ],
-   "occurrences": 65,
+   "occurrences": 66,
    "source": "custom"
   },
   "D0780": {
@@ -5957,7 +5981,7 @@
     "en",
     "es"
    ],
-   "occurrences": 13,
+   "occurrences": 36,
    "source": "custom"
   },
   "D0785": {
@@ -6077,7 +6101,7 @@
     "en",
     "es"
    ],
-   "occurrences": 1,
+   "occurrences": 2,
    "source": "custom"
   },
   "D0800": {
@@ -6101,7 +6125,7 @@
     "en",
     "es"
    ],
-   "occurrences": 1,
+   "occurrences": 2,
    "source": "custom"
   },
   "D0803": {
@@ -6125,7 +6149,7 @@
     "en",
     "es"
    ],
-   "occurrences": 2,
+   "occurrences": 4,
    "source": "custom"
   },
   "D0806": {
@@ -6533,7 +6557,7 @@
     "en",
     "es"
    ],
-   "occurrences": 2,
+   "occurrences": 3,
    "source": "custom"
   },
   "D0857": {
@@ -6582,6 +6606,318 @@
     "es"
    ],
    "occurrences": 1,
+   "source": "custom"
+  },
+  "D0863": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 4,
+   "source": "custom"
+  },
+  "D0864": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 12,
+   "source": "custom"
+  },
+  "D0865": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0866": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0867": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 100,
+   "source": "custom"
+  },
+  "D0868": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 8,
+   "source": "custom"
+  },
+  "D0869": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 9,
+   "source": "custom"
+  },
+  "D0870": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 4,
+   "source": "custom"
+  },
+  "D0871": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 2,
+   "source": "custom"
+  },
+  "D0872": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 2,
+   "source": "custom"
+  },
+  "D0873": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0874": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0875": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0876": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0877": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 2,
+   "source": "custom"
+  },
+  "D0878": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0879": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0880": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0881": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0882": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0883": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0884": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0885": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0886": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0887": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0888": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0889": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0890": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0891": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0892": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0893": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0894": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 2,
+   "source": "custom"
+  },
+  "D0895": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 4,
+   "source": "custom"
+  },
+  "D0896": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 3,
+   "source": "custom"
+  },
+  "D0897": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0898": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0899": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0900": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "custom"
+  },
+  "D0901": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 35,
    "source": "custom"
   },
   "H1": {
@@ -6909,7 +7245,7 @@
     "en",
     "es"
    ],
-   "occurrences": 396,
+   "occurrences": 387,
    "source": "canonical"
   },
   "H1204": {
@@ -7101,7 +7437,7 @@
     "en",
     "es"
    ],
-   "occurrences": 23,
+   "occurrences": 2,
    "source": "canonical_and_custom"
   },
   "H1278": {
@@ -7109,7 +7445,7 @@
     "en",
     "es"
    ],
-   "occurrences": 10,
+   "occurrences": 19,
    "source": "canonical_and_custom"
   },
   "H1285": {
@@ -7125,7 +7461,7 @@
     "en",
     "es"
    ],
-   "occurrences": 88,
+   "occurrences": 87,
    "source": "canonical"
   },
   "H1290": {
@@ -7253,7 +7589,7 @@
     "en",
     "es"
    ],
-   "occurrences": 40,
+   "occurrences": 39,
    "source": "canonical"
   },
   "H1324": {
@@ -7413,7 +7749,7 @@
     "en",
     "es"
    ],
-   "occurrences": 20,
+   "occurrences": 19,
    "source": "canonical_and_custom"
   },
   "H1369": {
@@ -7637,7 +7973,7 @@
     "en",
     "es"
    ],
-   "occurrences": 6,
+   "occurrences": 7,
    "source": "canonical"
   },
   "H1480": {
@@ -7805,7 +8141,7 @@
     "en",
     "es"
    ],
-   "occurrences": 105,
+   "occurrences": 106,
    "source": "canonical"
   },
   "H1546": {
@@ -8021,7 +8357,7 @@
     "en",
     "es"
    ],
-   "occurrences": 9,
+   "occurrences": 8,
    "source": "canonical"
   },
   "H1615": {
@@ -8133,7 +8469,7 @@
     "en",
     "es"
    ],
-   "occurrences": 24,
+   "occurrences": 25,
    "source": "canonical"
   },
   "H1674": {
@@ -8157,7 +8493,7 @@
     "en",
     "es"
    ],
-   "occurrences": 2,
+   "occurrences": 3,
    "source": "canonical"
   },
   "H1692": {
@@ -8173,7 +8509,7 @@
     "en",
     "es"
    ],
-   "occurrences": 2,
+   "occurrences": 3,
    "source": "canonical"
   },
   "H1695": {
@@ -8261,7 +8597,7 @@
     "en",
     "es"
    ],
-   "occurrences": 6,
+   "occurrences": 5,
    "source": "canonical"
   },
   "H1731": {
@@ -8621,7 +8957,7 @@
     "en",
     "es"
    ],
-   "occurrences": 4,
+   "occurrences": 5,
    "source": "canonical"
   },
   "H1849": {
@@ -8653,7 +8989,7 @@
     "en",
     "es"
    ],
-   "occurrences": 7,
+   "occurrences": 6,
    "source": "canonical"
   },
   "H1861": {
@@ -8781,7 +9117,7 @@
     "en",
     "es"
    ],
-   "occurrences": 18,
+   "occurrences": 14,
    "source": "canonical"
   },
   "H1894": {
@@ -8805,7 +9141,7 @@
     "en",
     "es"
    ],
-   "occurrences": 10,
+   "occurrences": 8,
    "source": "canonical"
   },
   "H1904": {
@@ -9245,7 +9581,7 @@
     "en",
     "es"
    ],
-   "occurrences": 16,
+   "occurrences": 17,
    "source": "canonical"
   },
   "H2048": {
@@ -9373,7 +9709,7 @@
     "en",
     "es"
    ],
-   "occurrences": 50,
+   "occurrences": 5,
    "source": "canonical"
   },
   "H2096": {
@@ -9583,14 +9919,6 @@
    ],
    "occurrences": 5,
    "source": "canonical"
-  },
-  "H2154": {
-   "languages": [
-    "en",
-    "es"
-   ],
-   "occurrences": 1,
-   "source": "canonical_and_custom"
   },
   "H216": {
    "languages": [
@@ -9885,7 +10213,7 @@
     "en",
     "es"
    ],
-   "occurrences": 4,
+   "occurrences": 3,
    "source": "canonical_and_custom"
   },
   "H2256": {
@@ -9901,7 +10229,7 @@
     "en",
     "es"
    ],
-   "occurrences": 2,
+   "occurrences": 3,
    "source": "canonical"
   },
   "H226": {
@@ -10781,7 +11109,7 @@
     "en",
     "es"
    ],
-   "occurrences": 4,
+   "occurrences": 3,
    "source": "canonical"
   },
   "H2545": {
@@ -11165,7 +11493,7 @@
     "en",
     "es"
    ],
-   "occurrences": 3,
+   "occurrences": 2,
    "source": "canonical"
   },
   "H2664": {
@@ -11197,7 +11525,7 @@
     "en",
     "es"
    ],
-   "occurrences": 4,
+   "occurrences": 5,
    "source": "canonical_and_custom"
   },
   "H2676": {
@@ -11573,7 +11901,7 @@
     "en",
     "es"
    ],
-   "occurrences": 2,
+   "occurrences": 3,
    "source": "canonical"
   },
   "H2822": {
@@ -12093,7 +12421,7 @@
     "en",
     "es"
    ],
-   "occurrences": 71,
+   "occurrences": 69,
    "source": "canonical_and_custom"
   },
   "H3045": {
@@ -12245,7 +12573,7 @@
     "en",
     "es"
    ],
-   "occurrences": 3,
+   "occurrences": 2,
    "source": "canonical"
   },
   "H3148": {
@@ -12349,7 +12677,7 @@
     "en",
     "es"
    ],
-   "occurrences": 247,
+   "occurrences": 248,
    "source": "canonical"
   },
   "H3204": {
@@ -12373,7 +12701,7 @@
     "en",
     "es"
    ],
-   "occurrences": 51,
+   "occurrences": 52,
    "source": "canonical"
   },
   "H3207": {
@@ -12493,7 +12821,7 @@
     "en",
     "es"
    ],
-   "occurrences": 119,
+   "occurrences": 96,
    "source": "canonical"
   },
   "H3256": {
@@ -12597,7 +12925,15 @@
     "en",
     "es"
    ],
-   "occurrences": 12,
+   "occurrences": 10,
+   "source": "canonical"
+  },
+  "H3307": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
    "source": "canonical"
   },
   "H331": {
@@ -12717,7 +13053,7 @@
     "en",
     "es"
    ],
-   "occurrences": 24,
+   "occurrences": 22,
    "source": "canonical"
   },
   "H3363": {
@@ -12797,7 +13133,7 @@
     "en",
     "es"
    ],
-   "occurrences": 161,
+   "occurrences": 162,
    "source": "canonical"
   },
   "H3383": {
@@ -12813,7 +13149,7 @@
     "en",
     "es"
    ],
-   "occurrences": 37,
+   "occurrences": 38,
    "source": "canonical_and_custom"
   },
   "H3389": {
@@ -12821,7 +13157,7 @@
     "en",
     "es"
    ],
-   "occurrences": 141,
+   "occurrences": 145,
    "source": "canonical"
   },
   "H339": {
@@ -12957,7 +13293,7 @@
     "en",
     "es"
    ],
-   "occurrences": 65,
+   "occurrences": 64,
    "source": "canonical_and_custom"
   },
   "H3425": {
@@ -12989,16 +13325,8 @@
     "en",
     "es"
    ],
-   "occurrences": 972,
+   "occurrences": 967,
    "source": "canonical"
-  },
-  "H3444": {
-   "languages": [
-    "en",
-    "es"
-   ],
-   "occurrences": 30,
-   "source": "canonical_and_custom"
   },
   "H3445": {
    "languages": [
@@ -13616,14 +13944,6 @@
    "occurrences": 3,
    "source": "canonical_and_custom"
   },
-  "H3642": {
-   "languages": [
-    "en",
-    "es"
-   ],
-   "occurrences": 47,
-   "source": "canonical"
-  },
   "H3644": {
    "languages": [
     "en",
@@ -13693,7 +14013,7 @@
     "en",
     "es"
    ],
-   "occurrences": 17,
+   "occurrences": 18,
    "source": "canonical"
   },
   "H3671": {
@@ -13941,7 +14261,7 @@
     "en",
     "es"
    ],
-   "occurrences": 1071,
+   "occurrences": 1070,
    "source": "canonical_and_custom"
   },
   "H3766": {
@@ -14189,7 +14509,7 @@
     "en",
     "es"
    ],
-   "occurrences": 4,
+   "occurrences": 3,
    "source": "canonical"
   },
   "H3852": {
@@ -14261,7 +14581,7 @@
     "en",
     "es"
    ],
-   "occurrences": 19,
+   "occurrences": 11,
    "source": "canonical"
   },
   "H3881": {
@@ -14637,7 +14957,7 @@
     "en",
     "es"
    ],
-   "occurrences": 2,
+   "occurrences": 1,
    "source": "canonical"
   },
   "H3998": {
@@ -14821,7 +15141,7 @@
     "en",
     "es"
    ],
-   "occurrences": 42,
+   "occurrences": 41,
    "source": "canonical_and_custom"
   },
   "H4058": {
@@ -14837,7 +15157,7 @@
     "en",
     "es"
    ],
-   "occurrences": 1,
+   "occurrences": 2,
    "source": "canonical"
   },
   "H4060": {
@@ -14973,7 +15293,7 @@
     "en",
     "es"
    ],
-   "occurrences": 15,
+   "occurrences": 14,
    "source": "canonical"
   },
   "H4106": {
@@ -15077,7 +15397,7 @@
     "en",
     "es"
    ],
-   "occurrences": 7,
+   "occurrences": 8,
    "source": "canonical_and_custom"
   },
   "H4138": {
@@ -15149,7 +15469,7 @@
     "en",
     "es"
    ],
-   "occurrences": 33,
+   "occurrences": 32,
    "source": "canonical_and_custom"
   },
   "H4161": {
@@ -15293,7 +15613,7 @@
     "en",
     "es"
    ],
-   "occurrences": 5,
+   "occurrences": 6,
    "source": "canonical_and_custom"
   },
   "H4210": {
@@ -15517,7 +15837,7 @@
     "en",
     "es"
    ],
-   "occurrences": 4,
+   "occurrences": 1,
    "source": "canonical"
   },
   "H4288": {
@@ -15749,7 +16069,7 @@
     "en",
     "es"
    ],
-   "occurrences": 34,
+   "occurrences": 36,
    "source": "canonical_and_custom"
   },
   "H4383": {
@@ -15781,7 +16101,7 @@
     "en",
     "es"
    ],
-   "occurrences": 147,
+   "occurrences": 146,
    "source": "canonical"
   },
   "H4392": {
@@ -15789,7 +16109,7 @@
     "en",
     "es"
    ],
-   "occurrences": 23,
+   "occurrences": 24,
    "source": "canonical"
   },
   "H4393": {
@@ -15933,7 +16253,7 @@
     "en",
     "es"
    ],
-   "occurrences": 133,
+   "occurrences": 131,
    "source": "canonical_and_custom"
   },
   "H4436": {
@@ -16061,7 +16381,7 @@
     "en",
     "es"
    ],
-   "occurrences": 6,
+   "occurrences": 8,
    "source": "canonical"
   },
   "H4490": {
@@ -16095,6 +16415,14 @@
    ],
    "occurrences": 15,
    "source": "canonical_and_custom"
+  },
+  "H4499": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 2,
+   "source": "canonical"
   },
   "H4501": {
    "languages": [
@@ -16253,7 +16581,7 @@
     "en",
     "es"
    ],
-   "occurrences": 79,
+   "occurrences": 80,
    "source": "canonical_and_custom"
   },
   "H4562": {
@@ -16509,7 +16837,7 @@
     "en",
     "es"
    ],
-   "occurrences": 181,
+   "occurrences": 182,
    "source": "canonical_and_custom"
   },
   "H4643": {
@@ -17093,7 +17421,7 @@
     "en",
     "es"
    ],
-   "occurrences": 78,
+   "occurrences": 80,
    "source": "canonical"
   },
   "H4878": {
@@ -17173,7 +17501,7 @@
     "en",
     "es"
    ],
-   "occurrences": 15,
+   "occurrences": 16,
    "source": "canonical"
   },
   "H4904": {
@@ -17221,7 +17549,7 @@
     "en",
     "es"
    ],
-   "occurrences": 13,
+   "occurrences": 14,
    "source": "canonical"
   },
   "H4912": {
@@ -17261,7 +17589,7 @@
     "en",
     "es"
    ],
-   "occurrences": 29,
+   "occurrences": 28,
    "source": "canonical_and_custom"
   },
   "H4931": {
@@ -17373,7 +17701,7 @@
     "en",
     "es"
    ],
-   "occurrences": 25,
+   "occurrences": 23,
    "source": "canonical"
   },
   "H4975": {
@@ -17413,7 +17741,7 @@
     "en",
     "es"
    ],
-   "occurrences": 6,
+   "occurrences": 4,
    "source": "canonical"
   },
   "H4992": {
@@ -17597,7 +17925,7 @@
     "en",
     "es"
    ],
-   "occurrences": 120,
+   "occurrences": 121,
    "source": "canonical"
   },
   "H5048": {
@@ -17725,7 +18053,7 @@
     "en",
     "es"
    ],
-   "occurrences": 13,
+   "occurrences": 12,
    "source": "canonical_and_custom"
   },
   "H5081": {
@@ -17789,7 +18117,7 @@
     "en",
     "es"
    ],
-   "occurrences": 29,
+   "occurrences": 30,
    "source": "canonical_and_custom"
   },
   "H5092": {
@@ -18013,7 +18341,7 @@
     "en",
     "es"
    ],
-   "occurrences": 34,
+   "occurrences": 35,
    "source": "canonical"
   },
   "H5165": {
@@ -18021,7 +18349,7 @@
     "en",
     "es"
    ],
-   "occurrences": 16,
+   "occurrences": 17,
    "source": "canonical_and_custom"
   },
   "H517": {
@@ -18101,7 +18429,7 @@
     "en",
     "es"
    ],
-   "occurrences": 1,
+   "occurrences": 2,
    "source": "canonical"
   },
   "H5193": {
@@ -18245,7 +18573,7 @@
     "en",
     "es"
    ],
-   "occurrences": 35,
+   "occurrences": 37,
    "source": "canonical"
   },
   "H5236": {
@@ -18592,6 +18920,14 @@
    "occurrences": 6,
    "source": "canonical"
   },
+  "H5365": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "canonical"
+  },
   "H5373": {
    "languages": [
     "en",
@@ -18717,7 +19053,7 @@
     "en",
     "es"
    ],
-   "occurrences": 559,
+   "occurrences": 560,
    "source": "canonical_and_custom"
   },
   "H5416": {
@@ -18749,7 +19085,7 @@
     "en",
     "es"
    ],
-   "occurrences": 2,
+   "occurrences": 3,
    "source": "canonical_and_custom"
   },
   "H543": {
@@ -18861,7 +19197,7 @@
     "en",
     "es"
    ],
-   "occurrences": 11,
+   "occurrences": 10,
    "source": "canonical"
   },
   "H5468": {
@@ -19229,7 +19565,7 @@
     "en",
     "es"
    ],
-   "occurrences": 7,
+   "occurrences": 8,
    "source": "canonical"
   },
   "H5596": {
@@ -19437,7 +19773,7 @@
     "en",
     "es"
    ],
-   "occurrences": 182,
+   "occurrences": 181,
    "source": "canonical"
   },
   "H5676": {
@@ -19469,7 +19805,7 @@
     "en",
     "es"
    ],
-   "occurrences": 10,
+   "occurrences": 11,
    "source": "canonical"
   },
   "H5686": {
@@ -19752,14 +20088,6 @@
    "occurrences": 1,
    "source": "canonical"
   },
-  "H579": {
-   "languages": [
-    "en",
-    "es"
-   ],
-   "occurrences": 1,
-   "source": "canonical_and_custom"
-  },
   "H5791": {
    "languages": [
     "en",
@@ -19773,7 +20101,7 @@
     "en",
     "es"
    ],
-   "occurrences": 9,
+   "occurrences": 7,
    "source": "canonical"
   },
   "H5795": {
@@ -19829,7 +20157,7 @@
     "en",
     "es"
    ],
-   "occurrences": 75,
+   "occurrences": 74,
    "source": "canonical"
   },
   "H5826": {
@@ -19837,7 +20165,7 @@
     "en",
     "es"
    ],
-   "occurrences": 33,
+   "occurrences": 39,
    "source": "canonical"
   },
   "H5828": {
@@ -19853,16 +20181,8 @@
     "en",
     "es"
    ],
-   "occurrences": 11,
+   "occurrences": 12,
    "source": "canonical_and_custom"
-  },
-  "H5835": {
-   "languages": [
-    "en",
-    "es"
-   ],
-   "occurrences": 22,
-   "source": "canonical"
   },
   "H584": {
    "languages": [
@@ -20341,7 +20661,7 @@
     "en",
     "es"
    ],
-   "occurrences": 258,
+   "occurrences": 260,
    "source": "canonical"
   },
   "H6031": {
@@ -20349,7 +20669,7 @@
     "en",
     "es"
    ],
-   "occurrences": 31,
+   "occurrences": 29,
    "source": "canonical_and_custom"
   },
   "H6035": {
@@ -20721,14 +21041,6 @@
    "source": "canonical"
   },
   "H6150": {
-   "languages": [
-    "en",
-    "es"
-   ],
-   "occurrences": 2,
-   "source": "canonical"
-  },
-  "H6152": {
    "languages": [
     "en",
     "es"
@@ -21157,7 +21469,7 @@
     "en",
     "es"
    ],
-   "occurrences": 26,
+   "occurrences": 28,
    "source": "canonical"
   },
   "H6287": {
@@ -21845,7 +22157,7 @@
     "en",
     "es"
    ],
-   "occurrences": 4,
+   "occurrences": 5,
    "source": "canonical"
   },
   "H6527": {
@@ -21936,14 +22248,6 @@
    "occurrences": 6,
    "source": "canonical"
   },
-  "H6556": {
-   "languages": [
-    "en",
-    "es"
-   ],
-   "occurrences": 3,
-   "source": "canonical"
-  },
   "H6561": {
    "languages": [
     "en",
@@ -21965,7 +22269,7 @@
     "en",
     "es"
    ],
-   "occurrences": 114,
+   "occurrences": 6,
    "source": "canonical"
   },
   "H6567": {
@@ -22229,7 +22533,7 @@
     "en",
     "es"
    ],
-   "occurrences": 4,
+   "occurrences": 2,
    "source": "canonical"
   },
   "H6662": {
@@ -22677,7 +22981,7 @@
     "en",
     "es"
    ],
-   "occurrences": 54,
+   "occurrences": 55,
    "source": "canonical_and_custom"
   },
   "H6818": {
@@ -23365,7 +23669,7 @@
     "en",
     "es"
    ],
-   "occurrences": 24,
+   "occurrences": 25,
    "source": "canonical_and_custom"
   },
   "H7069": {
@@ -23373,7 +23677,7 @@
     "en",
     "es"
    ],
-   "occurrences": 46,
+   "occurrences": 45,
    "source": "canonical_and_custom"
   },
   "H707": {
@@ -23517,7 +23821,7 @@
     "en",
     "es"
    ],
-   "occurrences": 6,
+   "occurrences": 7,
    "source": "canonical"
   },
   "H7114": {
@@ -23632,20 +23936,12 @@
    "occurrences": 25,
    "source": "canonical_and_custom"
   },
-  "H7135": {
-   "languages": [
-    "en",
-    "es"
-   ],
-   "occurrences": 2,
-   "source": "canonical_and_custom"
-  },
   "H7136": {
    "languages": [
     "en",
     "es"
    ],
-   "occurrences": 10,
+   "occurrences": 12,
    "source": "canonical"
   },
   "H7138": {
@@ -23653,7 +23949,7 @@
     "en",
     "es"
    ],
-   "occurrences": 49,
+   "occurrences": 50,
    "source": "canonical_and_custom"
   },
   "H7140": {
@@ -23693,7 +23989,7 @@
     "en",
     "es"
    ],
-   "occurrences": 2,
+   "occurrences": 1,
    "source": "canonical"
   },
   "H7161": {
@@ -24117,7 +24413,7 @@
     "en",
     "es"
    ],
-   "occurrences": 30,
+   "occurrences": 29,
    "source": "canonical"
   },
   "H732": {
@@ -24213,7 +24509,7 @@
     "en",
     "es"
    ],
-   "occurrences": 2,
+   "occurrences": 1,
    "source": "canonical"
   },
   "H7346": {
@@ -24261,7 +24557,7 @@
     "en",
     "es"
    ],
-   "occurrences": 19,
+   "occurrences": 15,
    "source": "canonical_and_custom"
   },
   "H7356": {
@@ -24453,7 +24749,7 @@
     "en",
     "es"
    ],
-   "occurrences": 2,
+   "occurrences": 3,
    "source": "canonical_and_custom"
   },
   "H7411": {
@@ -24461,7 +24757,7 @@
     "en",
     "es"
    ],
-   "occurrences": 2,
+   "occurrences": 3,
    "source": "canonical"
   },
   "H7423": {
@@ -24661,7 +24957,7 @@
     "en",
     "es"
    ],
-   "occurrences": 88,
+   "occurrences": 87,
    "source": "canonical_and_custom"
   },
   "H7499": {
@@ -24805,7 +25101,7 @@
     "en",
     "es"
    ],
-   "occurrences": 5,
+   "occurrences": 6,
    "source": "canonical"
   },
   "H7559": {
@@ -25261,7 +25557,7 @@
     "en",
     "es"
    ],
-   "occurrences": 3,
+   "occurrences": 2,
    "source": "canonical"
   },
   "H7703": {
@@ -25837,7 +26133,7 @@
     "en",
     "es"
    ],
-   "occurrences": 5,
+   "occurrences": 6,
    "source": "canonical"
   },
   "H7926": {
@@ -25909,7 +26205,7 @@
     "en",
     "es"
    ],
-   "occurrences": 106,
+   "occurrences": 110,
    "source": "canonical"
   },
   "H795": {
@@ -25981,7 +26277,7 @@
     "en",
     "es"
    ],
-   "occurrences": 380,
+   "occurrences": 379,
    "source": "canonical_and_custom"
   },
   "H7979": {
@@ -26085,7 +26381,7 @@
     "en",
     "es"
    ],
-   "occurrences": 33,
+   "occurrences": 31,
    "source": "canonical"
   },
   "H8005": {
@@ -26101,7 +26397,7 @@
     "en",
     "es"
    ],
-   "occurrences": 5,
+   "occurrences": 3,
    "source": "canonical"
   },
   "H802": {
@@ -26133,7 +26429,7 @@
     "en",
     "es"
    ],
-   "occurrences": 291,
+   "occurrences": 290,
    "source": "canonical"
   },
   "H8040": {
@@ -26157,7 +26453,7 @@
     "en",
     "es"
    ],
-   "occurrences": 5,
+   "occurrences": 1,
    "source": "canonical"
   },
   "H8050": {
@@ -26197,7 +26493,7 @@
     "en",
     "es"
    ],
-   "occurrences": 64,
+   "occurrences": 66,
    "source": "canonical_and_custom"
   },
   "H8058": {
@@ -26237,7 +26533,7 @@
     "en",
     "es"
    ],
-   "occurrences": 34,
+   "occurrences": 35,
    "source": "canonical"
   },
   "H8080": {
@@ -26744,6 +27040,14 @@
    "occurrences": 2,
    "source": "canonical"
   },
+  "H8256": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 1,
+   "source": "canonical"
+  },
   "H8257": {
    "languages": [
     "en",
@@ -26821,7 +27125,7 @@
     "en",
     "es"
    ],
-   "occurrences": 4,
+   "occurrences": 2,
    "source": "canonical"
   },
   "H8286": {
@@ -26853,7 +27157,7 @@
     "en",
     "es"
    ],
-   "occurrences": 5,
+   "occurrences": 4,
    "source": "canonical"
   },
   "H8299": {
@@ -27141,7 +27445,7 @@
     "en",
     "es"
    ],
-   "occurrences": 4,
+   "occurrences": 5,
    "source": "canonical"
   },
   "H8389": {
@@ -27269,7 +27573,7 @@
     "en",
     "es"
    ],
-   "occurrences": 5,
+   "occurrences": 4,
    "source": "canonical_and_custom"
   },
   "H8431": {
@@ -27373,7 +27677,7 @@
     "en",
     "es"
    ],
-   "occurrences": 4,
+   "occurrences": 5,
    "source": "canonical_and_custom"
   },
   "H8458": {
@@ -27533,7 +27837,7 @@
     "en",
     "es"
    ],
-   "occurrences": 10,
+   "occurrences": 12,
    "source": "canonical_and_custom"
   },
   "H8519": {
@@ -27661,7 +27965,7 @@
     "en",
     "es"
    ],
-   "occurrences": 4,
+   "occurrences": 5,
    "source": "canonical"
   },
   "H8552": {
@@ -27765,7 +28069,7 @@
     "en",
     "es"
    ],
-   "occurrences": 49,
+   "occurrences": 50,
    "source": "canonical_and_custom"
   },
   "H8587": {
@@ -28093,7 +28397,7 @@
     "en",
     "es"
    ],
-   "occurrences": 14,
+   "occurrences": 13,
    "source": "canonical"
   },
   "H894": {
@@ -28415,10 +28719,10 @@
  "totals": {
   "by_source": {
    "canonical": 2157,
-   "canonical_and_custom": 570,
-   "custom": 823
+   "canonical_and_custom": 566,
+   "custom": 865
   },
-  "identifiers": 3550,
+  "identifiers": 3588,
   "missing_definitions": {
    "en": {
     "identifiers": 0,

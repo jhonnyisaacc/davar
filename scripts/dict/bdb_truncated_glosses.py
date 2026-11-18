@@ -1,5 +1,7 @@
 """Complete the BDB glosses that the lexicon stored cut off, such as "be" for "be or act as adversary", and drop cut-off glosses stored under the wrong entry.
 
+The extractor's output on the real BDB XML decides each repair, so a rebuild of the lexicon gives the same completed glosses; --check also fails when they disagree.
+
     python -m scripts.dict.bdb_truncated_glosses --check
     python -m scripts.dict.bdb_truncated_glosses --write
 """
@@ -10,10 +12,20 @@ import argparse
 import json
 import sys
 import xml.etree.ElementTree as ET
+from collections.abc import Callable
 from dataclasses import dataclass
+from functools import cache
 from pathlib import Path
 
-from .build_lexicon import DIVINE_NAME, DIVINE_NAME_ABBREVIATION, INCOMPLETE_GLOSS_ENDINGS, NS, def_gloss_parts
+from .build_lexicon import (
+    DIVINE_NAME,
+    DIVINE_NAME_ABBREVIATION,
+    INCOMPLETE_GLOSS_ENDINGS,
+    NS,
+    def_gloss_parts,
+    extract_bdb_definitions_with_sense,
+    load_lexical_index,
+)
 from .config import config
 
 SPANISH_FILE = config.LEXICON_DIR / "bdb_completed_glosses_es.json"
@@ -39,27 +51,20 @@ class Repair:
 
 
 def bdb_completions(bdb_root: ET.Element) -> dict[str, list[Completion]]:
-    by_entry: dict[str, list[Completion]] = {}
+    by_gloss: dict[str, list[Completion]] = {}
     tag = f"{{{NS['bdb']}}}"
     for entry in bdb_root.iter(f"{tag}entry"):
         for parent in [entry, *entry.iter(f"{tag}sense")]:
             for part in def_gloss_parts(parent):
                 if len(part.stages) > 1:
-                    by_entry.setdefault(entry.get("id"), []).append(Completion(part.text, tuple(part.defs), tuple(part.stages)))
-    return by_entry
+                    completion = Completion(part.text, tuple(part.defs), tuple(part.stages))
+                    if completion not in by_gloss.setdefault(part.text, []):
+                        by_gloss[part.text].append(completion)
+    return by_gloss
 
 
 def stored_form(text: str) -> str:
     return text.strip().replace(DIVINE_NAME_ABBREVIATION, DIVINE_NAME)
-
-
-def entry_glosses(bdb_entry: ET.Element) -> set[str]:
-    tag = f"{{{NS['bdb']}}}"
-    glosses = {d.text.strip() for d in bdb_entry.iter(f"{tag}def") if d.text}
-    for parent in [bdb_entry, *bdb_entry.iter(f"{tag}sense")]:
-        for part in def_gloss_parts(parent):
-            glosses.update(stored_form(stage) for stage, _ in part.stages)
-    return glosses
 
 
 def is_truncated(text: str) -> bool:
@@ -67,48 +72,89 @@ def is_truncated(text: str) -> bool:
     return bool(words) and words[-1] in INCOMPLETE_GLOSS_ENDINGS and words != [words[-1]] or len(words) == 1 and words[0] in INCOMPLETE_GLOSS_ENDINGS - LONE_PREPOSITIONS
 
 
-def repairs_for(strong: str, entry: dict, found: list[Completion], own: set[str], foreign: set[str]) -> list[Repair]:
-    definitions = sorted((d for d in entry.get("definitions", []) if d.get("source") == "bdb"), key=lambda d: d.get("order", 0))
+def is_kept(text: str) -> bool:
+    return len(text.strip()) > 1 and text.strip().lower() not in LONE_PREPOSITIONS
+
+
+def bdb_glosses(entry: dict) -> list[dict]:
+    return sorted((d for d in entry.get("definitions", []) if d.get("source") == "bdb"), key=lambda d: d.get("order", 0))
+
+
+def stored_shapes(completions: list[Completion]) -> list[list[str]]:
+    shapes = []
+    for completion in completions:
+        for stage, consumed in completion.stages[:-1]:
+            rest = [stored_form(text) for text in completion.defs[consumed:] if is_kept(text)]
+            shapes.extend(shape for shape in ([stored_form(stage), *rest] if is_kept(stage) else [], rest) if shape and shape not in shapes)
+    return shapes
+
+
+def repairs_for(strong: str, entry: dict, extracted: list[str], completions: dict[str, list[Completion]], stages: set[str]) -> list[Repair]:
+    definitions = bdb_glosses(entry)
     texts = [stored_form(d.get("text_en") or "") for d in definitions]
     raw = [(d.get("text_en") or "").strip() for d in definitions]
     repairs: dict[int, Repair] = {}
-    for completion in found:
-        for stage, consumed in completion.stages:
-            rest = tuple(stored_form(text) for text in completion.defs[consumed:])
-            for index, text in enumerate(texts):
-                if text != stage or raw[index] == completion.after or tuple(texts[index + 1: index + 1 + len(rest)]) != rest:
-                    continue
-                order = definitions[index]["order"]
-                absorbed = tuple(definitions[index + 1 + offset]["order"] for offset in range(len(rest)))
-                repairs.setdefault(order, Repair(strong, order, raw[index], completion.after, absorbed))
-    afters: dict[str, set[str]] = {}
-    for completion in found:
-        afters.setdefault(stored_form(completion.defs[0]), set()).add(completion.after)
-    matched = {stored_form(repair.before) for repair in repairs.values()}
+    cursor = 0
+    for gloss in extracted:
+        present = next((index for index in range(cursor, len(texts)) if texts[index] == stored_form(gloss)), len(texts))
+        hits = [
+            (index, shape)
+            for shape in stored_shapes(completions.get(gloss, []))
+            for index in range(cursor, present)
+            if texts[index] == shape[0]
+        ]
+        if not hits:
+            cursor = present + 1 if present < len(texts) else cursor
+            continue
+        index, shape = min(hits, key=lambda hit: (hit[0], -len(hit[1])))
+        taken = 0
+        while taken < len(shape) - 1 and index + 1 + taken < len(texts) and texts[index + 1 + taken] == shape[1 + taken]:
+            taken += 1
+        absorbed = tuple(definitions[index + 1 + offset]["order"] for offset in range(taken))
+        repairs[definitions[index]["order"]] = Repair(strong, definitions[index]["order"], raw[index], gloss, absorbed)
+        cursor = index + 1 + taken
+    absorbed = {order for repair in repairs.values() for order in repair.absorbed_orders}
+    shown = {stored_form(gloss) for gloss in extracted}
     for index, text in enumerate(texts):
         order = definitions[index]["order"]
-        if order in repairs:
-            continue
-        if text in afters and text not in matched and len(afters[text]) == 1 and next(iter(afters[text])) not in raw:
-            repairs[order] = Repair(strong, order, raw[index], next(iter(afters[text])), ())
-        elif text not in own and text in foreign and is_truncated(text):
+        if order not in repairs and order not in absorbed and text in stages and text not in shown and is_truncated(text):
             repairs[order] = Repair(strong, order, raw[index], None, ())
     return sorted(repairs.values(), key=lambda repair: repair.order)
 
 
-def derive(lexicon: dict[str, dict], bdb_root: ET.Element, strong_to_bdb: dict[str, list[str]]) -> list[Repair]:
-    found = bdb_completions(bdb_root)
-    entries = {entry.get("id"): entry for entry in bdb_root.iter(f"{{{NS['bdb']}}}entry")}
-    foreign = {stored_form(stage) for completions in found.values() for completion in completions for stage, _ in completion.stages[:-1]}
+def touched(entry: dict, glosses: set[str]) -> bool:
+    return any(stored_form(d.get("text_en") or "") in glosses for d in bdb_glosses(entry))
+
+
+def glosses_in_completions(completions: dict[str, list[Completion]]) -> tuple[set[str], set[str]]:
+    found = [completion for group in completions.values() for completion in group]
+    stages = {stored_form(stage) for completion in found for stage, _ in completion.stages[:-1]}
+    pieces = {stored_form(text) for completion in found for text in completion.defs}
+    return stages, stages | pieces | set(completions)
+
+
+def derive(lexicon: dict[str, dict], bdb_root: ET.Element, extract: Callable[[str, dict], list[str]]) -> list[Repair]:
+    completions = bdb_completions(bdb_root)
+    stages, related = glosses_in_completions(completions)
     repairs = []
     for strong, entry in sorted(lexicon.items()):
-        bdb_ids = [bdb_id for bdb_id in strong_to_bdb.get(strong, []) if bdb_id in entries]
-        if not bdb_ids:
-            continue
-        own = set().union(*(entry_glosses(entries[bdb_id]) for bdb_id in bdb_ids))
-        candidates = [completion for bdb_id in bdb_ids for completion in found.get(bdb_id, [])]
-        repairs.extend(repairs_for(strong, entry, candidates, own, foreign))
+        if touched(entry, related):
+            repairs.extend(repairs_for(strong, entry, extract(strong, entry), completions, stages))
     return repairs
+
+
+def disagreements(lexicon: dict[str, dict], bdb_root: ET.Element, extract: Callable[[str, dict], list[str]]) -> dict[str, tuple[list[str], list[str]]]:
+    completions = bdb_completions(bdb_root)
+    _, related = glosses_in_completions(completions)
+    found = {}
+    for strong, entry in sorted(lexicon.items()):
+        if touched(entry, related):
+            stored = [text for text in (stored_form(d.get("text_en") or "") for d in bdb_glosses(entry)) if text in completions]
+            extracted = [text for text in map(stored_form, extract(strong, entry)) if text in completions]
+            remaining = iter(extracted)
+            if not all(text in remaining for text in stored):
+                found[strong] = (stored, extracted)
+    return found
 
 
 def apply(entry: dict, repairs: list[Repair], spanish: dict[str, str]) -> None:
@@ -135,12 +181,12 @@ def write_json(path: Path, data: dict) -> None:
     path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + ("\n" if trailing else ""), encoding="utf-8")
 
 
-def strong_to_bdb() -> dict[str, list[str]]:
-    mapping: dict[str, list[str]] = {}
-    for xref in ET.parse(config.LEXICAL_INDEX).getroot().iter(f"{{{NS['bdb']}}}xref"):
-        if xref.get("strong") and xref.get("bdb"):
-            mapping.setdefault(f"H{xref.get('strong')}", []).append(xref.get("bdb"))
-    return mapping
+def extractor(bdb_root: ET.Element, lexical_index: dict) -> Callable[[str, dict], list[str]]:
+    @cache
+    def extract(strong: str, lemma: str) -> list[str]:
+        return [d["text_en"] for d in extract_bdb_definitions_with_sense(strong, lemma, bdb_root, lexical_index)]
+
+    return lambda strong, entry: extract(strong, entry.get("lemma") or "")
 
 
 def spanish_drift(lexicon: dict[str, dict], spanish: dict[str, str]) -> list[Repair]:
@@ -152,16 +198,18 @@ def spanish_drift(lexicon: dict[str, dict], spanish: dict[str, str]) -> list[Rep
     ]
 
 
-def lexicon_repairs() -> tuple[dict[str, dict], list[Repair]]:
+def lexicon_repairs() -> tuple[list[Repair], dict[str, tuple[list[str], list[str]]]]:
     from .utils import load_bdb_xml
 
     lexicon = {}
     for name in LEXICON_FILES:
         lexicon.update(read_json(config.LEXICON_DIR / name))
-    repairs = derive(lexicon, load_bdb_xml(), strong_to_bdb())
+    bdb_root = load_bdb_xml()
+    extract = extractor(bdb_root, load_lexical_index())
+    repairs = derive(lexicon, bdb_root, extract)
     repaired = {(repair.strong, repair.order) for repair in repairs}
     drift = [repair for repair in spanish_drift(lexicon, read_json(SPANISH_FILE)) if (repair.strong, repair.order) not in repaired]
-    return lexicon, repairs + drift
+    return repairs + drift, disagreements(lexicon, bdb_root, extract)
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -172,7 +220,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     spanish = read_json(SPANISH_FILE)
-    _, repairs = lexicon_repairs()
+    repairs, disagreeing = lexicon_repairs()
     missing = sorted({repair.after for repair in repairs if repair.after} - set(spanish))
     for repair in repairs:
         print(f"{repair.strong}:{repair.order}\t{repair.before!r} -> {repair.after!r}\t{spanish.get(repair.after)!r}")
@@ -196,9 +244,11 @@ def main(argv: list[str] | None = None) -> int:
                     data = read_json(shard)
                     apply(data, rows, spanish)
                     write_json(shard, data)
-        _, repairs = lexicon_repairs()
-    print(f"{len(repairs)} truncated BDB glosses left in the lexicon")
-    return 1 if repairs else 0
+        repairs, disagreeing = lexicon_repairs()
+    for strong, (stored, extracted) in disagreeing.items():
+        print(f"{strong}\tlexicon {stored!r} != extractor {extracted!r}")
+    print(f"{len(repairs)} truncated BDB glosses left in the lexicon; {len(disagreeing)} entries whose completed glosses differ from the extractor's")
+    return 1 if repairs or disagreeing else 0
 
 
 if __name__ == "__main__":

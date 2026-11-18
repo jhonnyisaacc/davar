@@ -34,7 +34,7 @@
     "#malaji_4_5: reference_system_not_verified",
     "#yeshayahu_40_3: reference_system_not_verified"
   ],
-  "input_manifest_digest": "033e22814048f6ef2f84aae723c72a0ee541e958d657e27db06c3af68ea2af29",
+  "input_manifest_digest": "f51f1a95b3e3fd6fbc6525b9d69d7ad05c43ffd068c2f9e21dcef3d0142011f5",
   "records": {
     "concepts": [
       {
@@ -604,7 +604,7 @@
         "path": "data/dict/lexicon/words.json",
         "repository": "https://github.com/jhonnyisaacc/davar",
         "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-        "sha256": "d577c846afc92560816b94c2bcd27682d450239437bd9b7134c531995b05d715",
+        "sha256": "bfc879571b959718306fbad8b5fb40fd42bb2813078cbb8966647145fe312544",
         "visibility": "public"
       },
       {
@@ -614,7 +614,7 @@
         "path": "data/delitzsch/parsed/john/1.json",
         "repository": "https://github.com/jhonnyisaacc/davar",
         "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-        "sha256": "04e898d5d345167b59aa9aa2c2d1ce588b573ad4eb503efff06ca9a8e3eb2e35",
+        "sha256": "d327db39f8e741f0953a77853c2f49bfed77a0d6f7b2936df775bee7feeda38b",
         "visibility": "public"
       },
       {

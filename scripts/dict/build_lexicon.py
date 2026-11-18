@@ -65,10 +65,10 @@ class GlossParts(NamedTuple):
 
 def gloss_connector(text: str, tail: Optional[str], in_aside: bool, following: str) -> Optional[str]:
     tail = (tail or '').strip()
-    if tail in ('', 'or', 'and') or PARENTHETICAL.match(tail):
+    if tail == '' or PARENTHETICAL.match(tail):
         return tail
-    if tail in (', or', ', and'):
-        return tail[2:]
+    if tail in ('or', 'and', ', or', ', and'):
+        return None if text.lower() == 'be' and len(following.split()) == 1 else tail.removeprefix(', ')
     if tail == ',' and text.lower() == 'be' and len(following.split()) > 1:
         return 'or'
     if tail == ',' and in_aside:
@@ -397,6 +397,7 @@ def extract_bdb_definitions_with_sense(
                 }
 
                 entry_data['definitions'] = def_glosses(bdb_entry)
+                entry_data['fragments'] = [d.text for d in bdb_entry.findall('./bdb:def', NS) if d.text]
 
                 def extract_text_from_element(elem: ET.Element) -> str:
                     """Extract text content from element, removing child element tags but keeping their text"""
@@ -598,7 +599,7 @@ def extract_bdb_definitions_with_sense(
             # Use LexicalIndex gloss when BDB's top-level <def> values are
             # fragment tokens from one gloss (e.g. "be", "become", "much").
             if (
-                is_single_word_fragments(main_defs)
+                is_single_word_fragments(bdb_entry.get('fragments', main_defs))
                 and bdb_id
                 and bdb_id in bdb_to_def
                 and len(bdb_to_def[bdb_id].split()) > 1

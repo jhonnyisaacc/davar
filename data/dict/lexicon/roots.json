@@ -12355,10 +12355,11 @@
         "sense": "0"
       },
       {
-        "text_en": "roaring whirlwind",
+        "text_en": "a (sweeping) roaring whirlwind",
         "source": "bdb",
         "order": 5,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "un torbellino rugiente (arrasador)"
       }
     ],
     "sources": {
@@ -46166,10 +46167,11 @@
         "sense": "0"
       },
       {
-        "text_en": "the soles of my feet",
+        "text_en": "for (i.e. about) the soles of my feet",
         "source": "bdb",
         "order": 6,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "para (es decir, alrededor de) las plantas de mis pies"
       }
     ],
     "sources": {
@@ -46210,11 +46212,11 @@
     "translit_es": "jakak",
     "definitions": [
       {
-        "text_en": "cut in or on",
+        "text_en": "cut in",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "grabar en o sobre"
+        "text_es": "cortar en"
       },
       {
         "text_en": "inscribe",
@@ -46231,11 +46233,11 @@
         "text_es": "decretar"
       },
       {
-        "text_en": "cut in or on",
+        "text_en": "cut in",
         "source": "bdb",
         "order": 4,
         "sense": "1",
-        "text_es": "grabar en o sobre"
+        "text_es": "cortar en"
       },
       {
         "text_en": "cut in or on",
@@ -93118,11 +93120,11 @@
         "text_es": "reinar"
       },
       {
-        "text_en": "king",
+        "text_en": "be (become) king",
         "source": "bdb",
         "order": 5,
         "sense": "0",
-        "text_es": "rey"
+        "text_es": "ser (llegar a ser) rey"
       },
       {
         "text_en": "make king",
@@ -150887,10 +150889,11 @@
         "sense": "0"
       },
       {
-        "text_en": "heaps",
+        "text_en": "for (i.e. to be) heaps",
         "source": "bdb",
         "order": 4,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "para (es decir, para ser) montones"
       }
     ],
     "sources": {
@@ -190102,11 +190105,11 @@
         "text_es": "ser alto"
       },
       {
-        "text_en": "be (inaccessibly) high",
+        "text_en": "be (too) high",
         "source": "bdb",
         "order": 2,
         "sense": "1",
-        "text_es": "ser (inaccesiblemente) alto"
+        "text_es": "ser (demasiado) alto"
       },
       {
         "text_en": "be high",
