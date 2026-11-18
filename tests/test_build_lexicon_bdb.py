@@ -8,7 +8,7 @@ from scripts.dict.build_lexicon import (
     preserve_existing_definition_metadata,
 )
 from scripts.dict.audit_missing_senses import gloss_matches, normalize_gloss
-from scripts.dict import validator
+from scripts.dict import bdb_truncated_glosses, validator
 
 
 BDB_NS = "http://openscriptures.github.com/morphhb/namespace"
@@ -116,6 +116,42 @@ def test_a_gloss_that_breaks_off_keeps_the_inline_word_or_definition_that_comple
     assert texts("H7853", "שָׂטַן") == ["be or act as adversary"]
     assert texts("H3", "אבב") == ["fresh", "bright"]
     assert texts("H2470", "חָלָה") == ["be or become weak", "sick"]
+
+
+def test_a_truncated_lexicon_gloss_is_completed_and_its_split_continuation_dropped():
+    bdb_root = ET.fromstring(
+        f"""
+        <bdb xmlns="{BDB_NS}">
+          <entry id="u.ay.ac">[<w>שָׂטַן</w>] <def>be</def> or <def>act as adversary</def></entry>
+          <entry id="s.bk.ai">[<w>קִינֵן</w>] <def>chant a</def> <w>קִינָה</w></entry>
+        </bdb>
+        """
+    )
+    lexicon = {
+        "H7853": {"definitions": [
+            {"text_en": "be", "text_es": "ser", "source": "bdb", "order": 1, "sense": "0"},
+            {"text_en": "act as adversary", "text_es": "actuar como adversario", "source": "bdb", "order": 2, "sense": "0"},
+            {"text_en": "Satan", "source": "custom", "order": 3},
+        ]},
+        "H6969": {"definitions": [{"text_en": "chant a", "source": "bdb", "order": 1, "sense": "0"}]},
+    }
+    mapping = {"H7853": ["u.ay.ac"], "H6969": ["s.bk.ai"]}
+    repairs = bdb_truncated_glosses.derive(lexicon, bdb_root, mapping)
+    assert [(r.strong, r.order, r.after, r.absorbed_orders) for r in repairs] == [
+        ("H6969", 1, "chant a קִינָה", ()), ("H7853", 1, "be or act as adversary", (2,)),
+    ]
+    spanish = {"be or act as adversary": "ser o actuar como adversario", "chant a קִינָה": "entonar una קִינָה"}
+    for repair in repairs:
+        bdb_truncated_glosses.apply(lexicon[repair.strong], [repair], spanish)
+    assert [(d["text_en"], d.get("text_es")) for d in lexicon["H7853"]["definitions"]] == [
+        ("be or act as adversary", "ser o actuar como adversario"), ("Satan", None),
+    ]
+    assert bdb_truncated_glosses.derive(lexicon, bdb_root, mapping) == []
+
+
+def test_no_truncated_bdb_gloss_remains_in_the_lexicon():
+    _, repairs = bdb_truncated_glosses.lexicon_repairs()
+    assert repairs == []
 
 
 def test_validator_flags_fragmented_main_bdb_definitions(tmp_path, monkeypatch):

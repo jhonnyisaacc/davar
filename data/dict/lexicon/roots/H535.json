@@ -28,17 +28,11 @@
       "sense": "0"
     },
     {
-      "text_en": "be",
+      "text_en": "be or grow feeble",
       "source": "bdb",
       "order": 4,
       "sense": "0",
-      "text_es": "ser"
-    },
-    {
-      "text_en": "grow feeble",
-      "source": "bdb",
-      "order": 5,
-      "sense": "0"
+      "text_es": "estar o volverse endeble"
     }
   ],
   "sources": {

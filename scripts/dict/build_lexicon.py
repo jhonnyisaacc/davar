@@ -54,13 +54,13 @@ GLOSS_CONTINUATION_TAGS = {DEF_TAG, f"{{{NS['bdb']}}}w"}
 INCOMPLETE_GLOSS_ENDINGS = {'a', 'an', 'the', 'be', 'of', 'to', 'in', 'at', 'on', 'with', 'as', 'is', 'may', 'will', 'from', 'for', 'by', 'into'}
 
 
-def def_glosses(parent: ET.Element) -> List[str]:
+def def_gloss_parts(parent: ET.Element) -> List[Tuple[str, List[str]]]:
     children = list(parent)
-    glosses, absorbed = [], set()
+    parts, absorbed = [], set()
     for index, child in enumerate(children):
         if child.tag != DEF_TAG or index in absorbed or not child.text:
             continue
-        text, cursor = child.text, index
+        text, cursor, defs = child.text, index, [child.text]
         while (
             text.split() and text.split()[-1].lower() in INCOMPLETE_GLOSS_ENDINGS
             and cursor + 1 < len(children)
@@ -72,8 +72,14 @@ def def_glosses(parent: ET.Element) -> List[str]:
             cursor += 1
             text = f"{text} {connector} {children[cursor].text}" if connector else f"{text} {children[cursor].text}"
             absorbed.add(cursor)
-        glosses.append(text)
-    return glosses
+            if children[cursor].tag == DEF_TAG:
+                defs.append(children[cursor].text)
+        parts.append((text, defs))
+    return parts
+
+
+def def_glosses(parent: ET.Element) -> List[str]:
+    return [text for text, _ in def_gloss_parts(parent)]
 
 
 LOG_MAPPING_MISMATCHES = os.getenv('DAVAR_LEXICON_LOG_MAPPING', '').lower() in {'1', 'true', 'yes'}

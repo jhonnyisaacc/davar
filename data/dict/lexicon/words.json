@@ -104318,10 +104318,11 @@
         "text_es": "recordar"
       },
       {
-        "text_en": "think of",
+        "text_en": "think of or on",
         "source": "bdb",
         "order": 8,
-        "sense": "I5"
+        "sense": "I5",
+        "text_es": "pensar en o sobre"
       },
       {
         "text_en": "call to mind",
@@ -108130,18 +108131,11 @@
         "text_es": "ser ramera"
       },
       {
-        "text_en": "be",
+        "text_en": "be or act as a harlot",
         "source": "bdb",
         "order": 3,
         "sense": "1",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "act as a harlot",
-        "source": "bdb",
-        "order": 4,
-        "sense": "1",
-        "text_es": "actuar como ramera"
+        "text_es": "ser o actuar como ramera"
       },
       {
         "text_en": "of improper intercourse with foreign nations",
@@ -132229,10 +132223,11 @@
         "sense": "0"
       },
       {
-        "text_en": "to call on the name of",
+        "text_en": "to call on the name of י׳",
         "source": "bdb",
         "order": 17,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "invocar el nombre de י׳"
       },
       {
         "text_en": "play the pipe",
@@ -134629,11 +134624,11 @@
     "translit_es": "jilekiyah",
     "definitions": [
       {
-        "text_en": "my portion is",
+        "text_en": "my portion is י׳",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "mi porción es"
+        "text_es": "mi porción es י׳"
       },
       {
         "text_en": "father of Eliakim, Hezekiah’s officer",
@@ -170293,11 +170288,11 @@
     "translit_es": "yavam",
     "definitions": [
       {
-        "text_en": "do duty of",
+        "text_en": "do duty of יָבַם",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "cumplir el deber de"
+        "text_es": "cumplir el deber de יָבַם"
       }
     ],
     "sources": {
@@ -197393,11 +197388,11 @@
     "translit_es": "yiziyah",
     "definitions": [
       {
-        "text_en": "may",
+        "text_en": "may י׳",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "puede"
+        "text_es": "que י׳"
       },
       {
         "text_en": "sprinkle",
@@ -198481,11 +198476,11 @@
     "translit_es": "yejediyahu",
     "definitions": [
       {
-        "text_en": "May",
+        "text_en": "May י׳",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "Que"
+        "text_es": "Que י׳"
       },
       {
         "text_en": "give joy!",
@@ -203428,18 +203423,11 @@
     "translit_es": "yaman",
     "definitions": [
       {
-        "text_en": "go to",
+        "text_en": "go to or choose the right",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ir a"
-      },
-      {
-        "text_en": "choose the right",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "elegir la derecha"
+        "text_es": "ir a la derecha o escogerla"
       },
       {
         "text_en": "use the right hand",
@@ -299768,18 +299756,11 @@
     "translit_es": "el",
     "definitions": [
       {
-        "text_en": "motion to",
+        "text_en": "motion to or direction towards",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "movimiento hacia"
-      },
-      {
-        "text_en": "direction towards",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "dirección hacia"
+        "text_es": "movimiento o dirección hacia"
       },
       {
         "text_en": "unto",
@@ -356440,11 +356421,11 @@
     "translit_es": "maasay",
     "definitions": [
       {
-        "text_en": "work of",
+        "text_en": "work of י׳",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "obra de"
+        "text_es": "obra de י׳"
       },
       {
         "text_en": "priest, Je.’s time",
@@ -356542,11 +356523,11 @@
     "translit_es": "maaseyah",
     "definitions": [
       {
-        "text_en": "work of",
+        "text_en": "work of י׳",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "obra de"
+        "text_es": "obra de י׳"
       },
       {
         "text_en": "priest, Je.’s time",
@@ -365866,11 +365847,11 @@
     "translit_es": "mikeneyahu",
     "definitions": [
       {
-        "text_en": "possession of",
+        "text_en": "possession of י׳",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "posesión de"
+        "text_es": "posesión de י׳"
       }
     ],
     "sources": {
@@ -404724,10 +404705,11 @@
         "sense": "4"
       },
       {
-        "text_en": "the breath of",
+        "text_en": "the breath of י׳",
         "source": "bdb",
         "order": 10,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "el aliento de י׳"
       },
       {
         "text_en": "driveth at it",
@@ -408383,11 +408365,11 @@
         "text_es": "proveer con sandalias"
       },
       {
-        "text_en": "and I shod thee with",
+        "text_en": "and I shod thee with תחשׁ",
         "source": "bdb",
         "order": 3,
         "sense": "0",
-        "text_es": "y te calcé con"
+        "text_es": "y te calcé con תחשׁ"
       },
       {
         "text_en": "and gave them sandals",
@@ -418126,17 +418108,11 @@
     "translit_es": "aman",
     "definitions": [
       {
-        "text_en": "go to",
+        "text_en": "go to or choose the right",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
-      },
-      {
-        "text_en": "choose the right",
-        "source": "bdb",
-        "order": 2,
         "sense": "0",
-        "text_es": "escoger lo recto"
+        "text_es": "ir a la derecha o escogerla"
       },
       {
         "text_en": "use the right hand",
@@ -429645,18 +429621,11 @@
     "translit_es": "safaf",
     "definitions": [
       {
-        "text_en": "stand at",
+        "text_en": "stand at or guard",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "estar en"
-      },
-      {
-        "text_en": "guard",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "guardar"
+        "text_es": "estar junto a o custodiar"
       },
       {
         "text_en": "threshold",
@@ -434482,11 +434451,11 @@
     "translit_es": "aveda",
     "definitions": [
       {
-        "text_en": "servant of",
+        "text_en": "servant of י׳",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "siervo de"
+        "text_es": "siervo de י׳"
       },
       {
         "text_en": "father of Adoniram",
@@ -450638,11 +450607,11 @@
     "translit_es": "uziyah",
     "definitions": [
       {
-        "text_en": "my strength is",
+        "text_en": "my strength is י׳",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "mi fuerza es"
+        "text_es": "mi fuerza es י׳"
       },
       {
         "text_en": "king of Judah",
@@ -472834,18 +472803,11 @@
     "translit_es": "im",
     "definitions": [
       {
-        "text_en": "from with",
+        "text_en": "from with or beside",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "desde con"
-      },
-      {
-        "text_en": "beside",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "al lado de"
+        "text_es": "desde con o junto a"
       },
       {
         "text_en": "aid",
@@ -550158,11 +550120,11 @@
     "translit_es": "kolayah",
     "definitions": [
       {
-        "text_en": "voice of",
+        "text_en": "voice of י׳",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "voz de"
+        "text_es": "voz de י׳"
       },
       {
         "text_en": "father of proph. Ahab",
@@ -555314,10 +555276,11 @@
     "translit_es": "kalah",
     "definitions": [
       {
-        "text_en": "assemble as a",
+        "text_en": "assemble as a קָהָל",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "reunirse como un קָהָל"
       },
       {
         "text_en": "summon an assembly",
@@ -590473,17 +590436,11 @@
     "translit_es": "raanan",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or grow luxuriant",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "grow luxuriant",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0"
+        "text_es": "estar o volverse frondoso"
       },
       {
         "text_en": "fresh",
@@ -671015,11 +670972,11 @@
         "text_es": "acción de gracias"
       },
       {
-        "text_en": "give praise to",
+        "text_en": "give praise to י׳",
         "source": "bdb",
         "order": 2,
         "sense": "1",
-        "text_es": "dar alabanza a"
+        "text_es": "dar alabanza a י׳"
       },
       {
         "text_en": "thanksgiving in songs of liturgical worship",

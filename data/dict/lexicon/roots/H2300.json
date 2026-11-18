@@ -41,17 +41,11 @@
       "text_es": "ser afilado"
     },
     {
-      "text_en": "be",
+      "text_en": "be or grow sharp",
       "source": "bdb",
       "order": 6,
       "sense": "0",
-      "text_es": "ser"
-    },
-    {
-      "text_en": "grow sharp",
-      "source": "bdb",
-      "order": 7,
-      "sense": "0"
+      "text_es": "estar o volverse afilado"
     },
     {
       "text_en": "sharpen",

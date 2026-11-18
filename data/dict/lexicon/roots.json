@@ -16692,18 +16692,11 @@
         "sense": "0"
       },
       {
-        "text_en": "be",
+        "text_en": "be or grow dumb",
         "source": "bdb",
         "order": 2,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "grow dumb",
-        "source": "bdb",
-        "order": 3,
-        "sense": "0",
-        "text_es": "enmudecer"
+        "text_es": "estar o quedarse mudo"
       },
       {
         "text_en": "silent",
@@ -21793,18 +21786,11 @@
         "text_es": "continuar"
       },
       {
-        "text_en": "be in",
+        "text_en": "be in or at a place",
         "source": "bdb",
         "order": 39,
         "sense": "III3",
-        "text_es": "estar en"
-      },
-      {
-        "text_en": "at a place",
-        "source": "bdb",
-        "order": 40,
-        "sense": "III3",
-        "text_es": "en un lugar"
+        "text_es": "estar en o junto a un lugar"
       },
       {
         "text_en": "be situated",
@@ -32470,18 +32456,11 @@
     "translit_es": "or",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or become light",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "become light",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "volverse ligero"
+        "text_es": "ser o volverse luz"
       },
       {
         "text_en": "shine",
@@ -33105,18 +33084,11 @@
         "text_es": "ser una ramera"
       },
       {
-        "text_en": "be",
+        "text_en": "be or act as a harlot",
         "source": "bdb",
         "order": 3,
         "sense": "1",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "act as a harlot",
-        "source": "bdb",
-        "order": 4,
-        "sense": "1",
-        "text_es": "actuar como ramera"
+        "text_es": "ser o actuar como ramera"
       },
       {
         "text_en": "of improper intercourse with foreign nations",
@@ -33965,18 +33937,11 @@
     "translit_es": "zaken",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or become old",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "become old",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "envejecer"
+        "text_es": "ser o volverse viejo"
       },
       {
         "text_en": "become",
@@ -36233,17 +36198,11 @@
         "text_es": "ser afilado"
       },
       {
-        "text_en": "be",
+        "text_en": "be or grow sharp",
         "source": "bdb",
         "order": 6,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "grow sharp",
-        "source": "bdb",
-        "order": 7,
-        "sense": "0"
+        "text_es": "estar o volverse afilado"
       },
       {
         "text_en": "sharpen",
@@ -37330,18 +37289,11 @@
     "translit_es": "javar",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or grow white",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "grow white",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "volverse blanco"
+        "text_es": "estar o volverse blanco"
       },
       {
         "text_en": "pale",
@@ -37671,18 +37623,11 @@
     "translit_es": "jazak",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or grow firm",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "grow firm",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "fortalecerse"
+        "text_es": "estar o volverse firme"
       },
       {
         "text_en": "strong",
@@ -37699,17 +37644,11 @@
         "text_es": "fortalecer"
       },
       {
-        "text_en": "be",
+        "text_en": "be or grow strong",
         "source": "bdb",
         "order": 5,
         "sense": "I",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "grow strong",
-        "source": "bdb",
-        "order": 6,
-        "sense": "I"
+        "text_es": "ser o volverse fuerte"
       },
       {
         "text_en": "strengthened him not",
@@ -40194,18 +40133,11 @@
         "text_es": "ser sabio"
       },
       {
-        "text_en": "be",
+        "text_en": "be or become wise",
         "source": "bdb",
         "order": 2,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "become wise",
-        "source": "bdb",
-        "order": 3,
-        "sense": "0",
-        "text_es": "volverse sabio"
+        "text_es": "ser o volverse sabio"
       },
       {
         "text_en": "act wisely",
@@ -40506,18 +40438,11 @@
         "text_es": "enfermo"
       },
       {
-        "text_en": "be",
+        "text_en": "be or become weak",
         "source": "bdb",
         "order": 3,
         "sense": "1",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "become weak",
-        "source": "bdb",
-        "order": 4,
-        "sense": "1",
-        "text_es": "debilitarse"
+        "text_es": "ser o volverse débil"
       },
       {
         "text_en": "become sick",
@@ -40980,18 +40905,11 @@
     "translit_es": "jalaf",
     "definitions": [
       {
-        "text_en": "pass on",
+        "text_en": "pass on or away",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "pasar"
-      },
-      {
-        "text_en": "away",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "lejos"
+        "text_es": "pasar adelante o pasar de largo"
       },
       {
         "text_en": "pass through",
@@ -41271,17 +41189,11 @@
         "sense": "2"
       },
       {
-        "text_en": "be",
+        "text_en": "be or go equipped",
         "source": "bdb",
         "order": 16,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "go equipped",
-        "source": "bdb",
-        "order": 17,
-        "sense": "0"
+        "text_es": "estar o ir equipado"
       },
       {
         "text_en": "will brace up, invigorate, thy bones",
@@ -43233,31 +43145,18 @@
     "translit_es": "jamam",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or become warm",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
+        "text_es": "estar o ponerse caliente"
       },
       {
-        "text_en": "become warm",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "calentarse"
-      },
-      {
-        "text_en": "be",
+        "text_en": "be or grow warm",
         "source": "bdb",
         "order": 3,
         "sense": "1",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "grow warm",
-        "source": "bdb",
-        "order": 4,
-        "sense": "1"
+        "text_es": "estar o ponerse tibio"
       },
       {
         "text_en": "fig.",
@@ -46309,11 +46208,11 @@
     "translit_es": "jakak",
     "definitions": [
       {
-        "text_en": "cut in",
+        "text_en": "cut in or on",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "cortar en"
+        "text_es": "grabar en o sobre"
       },
       {
         "text_en": "inscribe",
@@ -46330,18 +46229,18 @@
         "text_es": "decretar"
       },
       {
-        "text_en": "cut in",
+        "text_en": "cut in or on",
         "source": "bdb",
         "order": 4,
         "sense": "1",
-        "text_es": "cortar en"
+        "text_es": "grabar en o sobre"
       },
       {
-        "text_en": "cut in",
+        "text_en": "cut in or on",
         "source": "bdb",
         "order": 5,
         "sense": "2",
-        "text_es": "cortar en"
+        "text_es": "grabar en o sobre"
       },
       {
         "text_en": "upon",
@@ -51323,18 +51222,11 @@
     "translit_es": "tame",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or become unclean",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "become unclean",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "volverse impuro"
+        "text_es": "ser o volverse impuro"
       },
       {
         "text_en": "defile oneself",
@@ -53762,18 +53654,11 @@
         "text_es": "ser dado a conocer"
       },
       {
-        "text_en": "be",
+        "text_en": "be or become known",
         "source": "bdb",
         "order": 25,
         "sense": "1",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "become known",
-        "source": "bdb",
-        "order": 26,
-        "sense": "1",
-        "text_es": "darse a conocer"
+        "text_es": "ser o llegar a ser conocido"
       },
       {
         "text_en": "make oneself known",
@@ -56316,11 +56201,11 @@
         "text_es": "estar bien colocado"
       },
       {
-        "text_en": "be well for",
+        "text_en": "be well for or with",
         "source": "bdb",
         "order": 8,
         "sense": "3",
-        "text_es": "irle bien a"
+        "text_es": "irle bien a o con"
       },
       {
         "text_en": "go well with",
@@ -62647,17 +62532,11 @@
         "text_es": "desfallecer"
       },
       {
-        "text_en": "be",
+        "text_en": "be or grow weary",
         "source": "bdb",
         "order": 3,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "grow weary",
-        "source": "bdb",
-        "order": 4,
-        "sense": "0"
+        "text_es": "estar o volverse cansado"
       },
       {
         "text_en": "be faint",
@@ -74036,18 +73915,11 @@
         "text_es": "reprender"
       },
       {
-        "text_en": "be",
+        "text_en": "be or grow dim",
         "source": "bdb",
         "order": 2,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "grow dim",
-        "source": "bdb",
-        "order": 3,
-        "sense": "0",
-        "text_es": "oscurecerse"
+        "text_es": "estar o volverse débil de vista"
       },
       {
         "text_en": "faint",
@@ -76669,18 +76541,11 @@
         "text_es": "tierno"
       },
       {
-        "text_en": "be",
+        "text_en": "be or grow hot",
         "source": "bdb",
         "order": 3,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "grow hot",
-        "source": "bdb",
-        "order": 4,
-        "sense": "0",
-        "text_es": "calentarse"
+        "text_es": "estar o ponerse caliente"
       }
     ],
     "sources": {
@@ -77630,18 +77495,11 @@
     "translit_es": "kasal",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or become stupid",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "become stupid",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "volverse estúpido"
+        "text_es": "ser o volverse necio"
       }
     ],
     "sources": {
@@ -81215,11 +81073,11 @@
         "text_es": "vestido con"
       },
       {
-        "text_en": "and the spirit of",
+        "text_en": "and the spirit of י׳",
         "source": "bdb",
         "order": 12,
         "sense": "1f",
-        "text_es": "y el espíritu de"
+        "text_es": "y el espíritu de י׳"
       },
       {
         "text_en": "clothed itself with Gideon",
@@ -89556,10 +89414,11 @@
         "text_es": "ser circuncidado"
       },
       {
-        "text_en": "in the name of",
+        "text_en": "in the name of י׳",
         "source": "bdb",
         "order": 3,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "en el nombre de י׳"
       },
       {
         "text_en": "yea I will make them to be circumcised",
@@ -94831,18 +94690,11 @@
     "translit_es": "maat",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or become small",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "become small",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "hacerse pequeño"
+        "text_es": "ser o volverse pequeño"
       },
       {
         "text_en": "diminished",
@@ -99066,10 +98918,11 @@
         "text_es": "considerar"
       },
       {
-        "text_en": "treat as a",
+        "text_en": "treat as a נָבָל",
         "source": "bdb",
         "order": 15,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "tratar como un נָבָל"
       },
       {
         "text_en": "with contumely",
@@ -103821,10 +103674,11 @@
         "sense": "4"
       },
       {
-        "text_en": "the breath of",
+        "text_en": "the breath of י׳",
         "source": "bdb",
         "order": 10,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "el aliento de י׳"
       },
       {
         "text_en": "driveth at it",
@@ -109460,10 +109314,11 @@
         "text_es": "retroceder"
       },
       {
-        "text_en": "prove recreant to",
+        "text_en": "prove recreant to י׳",
         "source": "bdb",
         "order": 3,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "ser desleal a י׳"
       },
       {
         "text_en": "turn oneself away",
@@ -109772,10 +109627,11 @@
         "text_es": "arrancar"
       },
       {
-        "text_en": "the house of proud men will",
+        "text_en": "the house of proud men will י׳",
         "source": "bdb",
         "order": 3,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "la casa de los soberbios י׳"
       },
       {
         "text_en": "tear down",
@@ -113582,17 +113438,11 @@
         "sense": "0"
       },
       {
-        "text_en": "be",
+        "text_en": "be or grow feeble",
         "source": "bdb",
         "order": 4,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "grow feeble",
-        "source": "bdb",
-        "order": 5,
-        "sense": "0"
+        "text_es": "estar o volverse endeble"
       }
     ],
     "sources": {
@@ -116031,10 +115881,11 @@
         "text_es": "soplar"
       },
       {
-        "text_en": "the breath of",
+        "text_en": "the breath of י׳",
         "source": "bdb",
         "order": 2,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "el aliento de י׳"
       },
       {
         "text_en": "has blown upon it",
@@ -121943,10 +121794,11 @@
         "text_es": "retroceder"
       },
       {
-        "text_en": "prove recreant to",
+        "text_en": "prove recreant to י׳",
         "source": "bdb",
         "order": 3,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "ser desleal a י׳"
       },
       {
         "text_en": "turn oneself away",
@@ -134133,18 +133985,11 @@
     "translit_es": "agan",
     "definitions": [
       {
-        "text_en": "shut oneself in",
+        "text_en": "shut oneself in or off",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "encerrarse"
-      },
-      {
-        "text_en": "off",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "fuera"
+        "text_es": "encerrarse o aislarse"
       }
     ],
     "sources": {
@@ -146700,18 +146545,11 @@
         "text_es": "ser astuto"
       },
       {
-        "text_en": "be",
+        "text_en": "be or become shrewd",
         "source": "bdb",
         "order": 5,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "become shrewd",
-        "source": "bdb",
-        "order": 6,
-        "sense": "0",
-        "text_es": "volverse astuto"
+        "text_es": "ser o volverse astuto"
       }
     ],
     "sources": {
@@ -150881,18 +150719,11 @@
     "translit_es": "ashar",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or become rich",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "become rich",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "enriquecerse"
+        "text_es": "ser o volverse rico"
       },
       {
         "text_en": "I have become rich",
@@ -162928,18 +162759,11 @@
     "translit_es": "tzalal",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or grow dark",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "grow dark",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "oscurecerse"
+        "text_es": "estar o volverse oscuro"
       },
       {
         "text_en": "the gates of Jerusalem grew dark",
@@ -167291,11 +167115,11 @@
     "translit_es": "kahal",
     "definitions": [
       {
-        "text_en": "assemble as a",
+        "text_en": "assemble as a קָהָל",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "reunirse como un"
+        "text_es": "reunirse como un קָהָל"
       },
       {
         "text_en": "summon an assembly",
@@ -169193,10 +169017,11 @@
     "translit_es": "kvn",
     "definitions": [
       {
-        "text_en": "chant a",
+        "text_en": "chant a קִינָה",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "entonar una קִינָה"
       }
     ],
     "sources": {
@@ -181617,18 +181442,11 @@
     "translit_es": "razah",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or grow lean",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "grow lean",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "adelgazar"
+        "text_es": "estar o volverse flaco"
       },
       {
         "text_en": "make lean",
@@ -193677,10 +193495,11 @@
         "text_es": "retroceder"
       },
       {
-        "text_en": "prove recreant to",
+        "text_en": "prove recreant to י׳",
         "source": "bdb",
         "order": 3,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "ser desleal a י׳"
       },
       {
         "text_en": "turn oneself away",
@@ -199471,18 +199290,11 @@
     "translit_es": "satan",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or act as adversary",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "act as adversary",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "actuar como adversario"
+        "text_es": "ser o actuar como adversario"
       }
     ],
     "sources": {
@@ -210214,18 +210026,11 @@
         "text_es": "un daño"
       },
       {
-        "text_en": "be",
+        "text_en": "be or become guilty",
         "source": "bdb",
         "order": 7,
         "sense": "2",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "become guilty",
-        "source": "bdb",
-        "order": 8,
-        "sense": "2",
-        "text_es": "hacerse culpable"
+        "text_es": "ser o volverse culpable"
       },
       {
         "text_en": "be held guilty",
@@ -211519,18 +211324,11 @@
     "translit_es": "shafel",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or become low",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "become low",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "volverse bajo"
+        "text_es": "ser o volverse bajo"
       },
       {
         "text_en": "be abased",

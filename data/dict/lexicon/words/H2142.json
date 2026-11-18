@@ -56,10 +56,11 @@
       "text_es": "recordar"
     },
     {
-      "text_en": "think of",
+      "text_en": "think of or on",
       "source": "bdb",
       "order": 8,
-      "sense": "I5"
+      "sense": "I5",
+      "text_es": "pensar en o sobre"
     },
     {
       "text_en": "call to mind",

@@ -8,18 +8,11 @@
   "translit_es": "im",
   "definitions": [
     {
-      "text_en": "from with",
+      "text_en": "from with or beside",
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "desde con"
-    },
-    {
-      "text_en": "beside",
-      "source": "bdb",
-      "order": 2,
-      "sense": "0",
-      "text_es": "al lado de"
+      "text_es": "desde con o junto a"
     },
     {
       "text_en": "aid",

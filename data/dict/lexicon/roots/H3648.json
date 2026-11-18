@@ -22,18 +22,11 @@
       "text_es": "tierno"
     },
     {
-      "text_en": "be",
+      "text_en": "be or grow hot",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "ser"
-    },
-    {
-      "text_en": "grow hot",
-      "source": "bdb",
-      "order": 4,
-      "sense": "0",
-      "text_es": "calentarse"
+      "text_es": "estar o ponerse caliente"
     }
   ],
   "sources": {

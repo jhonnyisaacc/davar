@@ -15,18 +15,11 @@
       "text_es": "ser sabio"
     },
     {
-      "text_en": "be",
+      "text_en": "be or become wise",
       "source": "bdb",
       "order": 2,
       "sense": "0",
-      "text_es": "ser"
-    },
-    {
-      "text_en": "become wise",
-      "source": "bdb",
-      "order": 3,
-      "sense": "0",
-      "text_es": "volverse sabio"
+      "text_es": "ser o volverse sabio"
     },
     {
       "text_en": "act wisely",

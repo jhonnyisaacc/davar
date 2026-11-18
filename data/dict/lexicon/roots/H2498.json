@@ -8,18 +8,11 @@
   "translit_es": "jalaf",
   "definitions": [
     {
-      "text_en": "pass on",
+      "text_en": "pass on or away",
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "pasar"
-    },
-    {
-      "text_en": "away",
-      "source": "bdb",
-      "order": 2,
-      "sense": "0",
-      "text_es": "lejos"
+      "text_es": "pasar adelante o pasar de largo"
     },
     {
       "text_en": "pass through",

@@ -8,18 +8,11 @@
   "translit_es": "el",
   "definitions": [
     {
-      "text_en": "motion to",
+      "text_en": "motion to or direction towards",
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "movimiento hacia"
-    },
-    {
-      "text_en": "direction towards",
-      "source": "bdb",
-      "order": 2,
-      "sense": "0",
-      "text_es": "dirección hacia"
+      "text_es": "movimiento o dirección hacia"
     },
     {
       "text_en": "unto",
