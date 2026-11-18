@@ -123,6 +123,14 @@ def test_every_new_testament_occurrence_of_a_proper_noun_entry_shows_its_name_fi
     (("john1", 2, 3, 3), "D0910", "recognize, know", "reconocer, conocer"),
     (("hebrews", 5, 14, 3), "D0911", "solid, firm;", "sólido, firme;"),
     (("revelation", 2, 14, 13), "H3384", "throw, shoot; in the hiphil, teach", "arrojar, disparar; en hifil, enseñar"),
+    (("james", 5, 7, 18), "H3138", "early rain", "lluvia temprana"),
+    (("philippians", 1, 27, 1), "H5090", "drive, lead, guide; in later Hebrew", "conducir, guiar, llevar; en hebreo posterior"),
+    (("mark", 7, 5, 7), "H5090", "drive, lead, guide; in later Hebrew, manage, govern, practise, be the custom", "conducir, guiar"),
+    (("corinthians1", 5, 13, 5), "H1197", "burn, kindle, consume; remove, purge, put away", "arder, encender, consumir; quitar, purgar"),
+    (("mark", 12, 34, 14), "H6148", "be surety, pledge; with the heart, dare", "ser fiador, dar en prenda; con el corazón, atreverse"),
+    (("acts", 16, 7, 8), "H3240", "lay down; place; leave; let, allow", "poner; colocar; dejar; permitir"),
+    (("john", 6, 19, 8), "D0912", "ris; a stadium", "ris; un estadio"),
+    (("luke", 19, 30, 18), "H5425", "be free", "ser libre"),
 ])
 def test_a_reviewed_occurrence_shows_the_sense_the_pull_request_names(location, strong, english, spanish):
     shown = glosses_at(*location)
@@ -174,7 +182,7 @@ def test_every_new_testament_occurrence_of_a_proper_noun_entry_matches_a_name_in
     assert unmatched == []
 
 
-def test_every_custom_record_the_review_adds_to_a_bdb_entry_was_checked_against_the_old_testament_and_is_used_in_the_new():
+def test_every_custom_record_the_review_adds_to_a_bdb_entry_was_checked_against_the_old_testament_and_every_new_testament_use():
     added = {
         decision["strong"]
         for path in sorted((ROOT / "data/delitzsch/review/batches").glob("definition_gaps_42*.json"))
@@ -187,6 +195,8 @@ def test_every_custom_record_the_review_adds_to_a_bdb_entry_was_checked_against_
     assert {strong: (row["text_en"], row["text_es"]) for strong, row in table.items()} == {strong: (en.text, es.text) for strong, (en, es) in shown.items()}
     assert {strong for strong, row in table.items() if not row["ot_check"].startswith("fits: ")} == set()
     assert {strong for strong in added if not occurrences().get(strong)} == set()
+    assert {strong for strong, row in table.items() if not row["nt_check"].startswith("fits: ")} == set()
+    assert {strong: row["nt_occurrences"] for strong, row in table.items()} == {strong: sorted(occurrences()[strong]) for strong in table}
 
 
 def test_every_instances_only_entry_lists_exactly_its_new_testament_occurrences():
@@ -256,7 +266,7 @@ def test_entries_that_share_a_greek_name_name_one_referent_or_split_its_bearers_
 
 def reviewed_moves():
     moved = set()
-    for name in ("definition_gaps_42_round_5", "definition_gaps_42_round_7"):
+    for name in ("definition_gaps_42_round_5", "definition_gaps_42_round_7", "definition_gaps_42_round_8"):
         decisions = json.loads((ROOT / f"data/delitzsch/review/batches/{name}.json").read_text(encoding="utf-8"))["decisions"]
         created = {d["strong"] for d in decisions if d["action"] == "upsert_custom_definition" and d.get("mapping_scope")}
         for d in decisions:
@@ -266,7 +276,7 @@ def reviewed_moves():
     return moved
 
 
-def test_every_round_5_and_round_7_move_onto_an_existing_entry_was_reviewed_against_the_gloss_the_reader_shows():
+def test_every_round_5_7_and_8_move_onto_an_existing_entry_was_reviewed_against_the_gloss_the_reader_shows():
     current = {".".join(map(str, location)): word["strong"].split("/")[-1] for location, word in corpus()}
     rows = {row["location"]: row for row in review_table("move_gloss_review")["moves"]}
     assert set(rows) == reviewed_moves()

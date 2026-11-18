@@ -99650,12 +99650,19 @@
         "verse": 1,
         "word_index": 7,
         "text": "הִצְטַדְּקוּתִי"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 9,
+        "verse": 3,
+        "word_index": 1,
+        "text": "הִצְטַדְּקוּתִי"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 1,
-    "instance_surface_count": 1,
+    "instance_total": 2,
+    "instance_surface_count": 2,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -99674,6 +99681,21 @@
           "text": "הִצְטַדְּקוּתִי"
         },
         "source_key": "[\"\",null,\"acts\",22,1,null]"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 9,
+        "verse": 3,
+        "word_index": 1,
+        "text": "הִצְטַדְּקוּתִי",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 9,
+          "verse": 3,
+          "word_index": 1,
+          "text": "הִצְטַדְּקוּתִי"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",9,3,null]"
       }
     ],
     "surface_instances": [
@@ -99691,6 +99713,21 @@
           "text": "הִצְטַדְּקוּתִי"
         },
         "source_key": "[\"\",null,\"acts\",22,1,null]"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 9,
+        "verse": 3,
+        "word_index": 1,
+        "text": "הִצְטַדְּקוּתִי",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 9,
+          "verse": 3,
+          "word_index": 1,
+          "text": "הִצְטַדְּקוּתִי"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",9,3,null]"
       }
     ]
   },
@@ -100822,12 +100859,19 @@
         "verse": 18,
         "word_index": 5,
         "text": "שֶׁלְּךָ"
+      },
+      {
+        "book": "john",
+        "chapter": 7,
+        "verse": 16,
+        "word_index": 6,
+        "text": "שֶׁלִּי"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 6,
-    "instance_surface_count": 6,
+    "instance_total": 7,
+    "instance_surface_count": 7,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -100861,6 +100905,21 @@
           "text": "שֶׁלְּךָ"
         },
         "source_key": "[\"\",null,\"luke\",19,18,null]"
+      },
+      {
+        "book": "john",
+        "chapter": 7,
+        "verse": 16,
+        "word_index": 6,
+        "text": "שֶׁלִּי",
+        "source_payload": {
+          "book": "john",
+          "chapter": 7,
+          "verse": 16,
+          "word_index": 6,
+          "text": "שֶׁלִּי"
+        },
+        "source_key": "[\"\",null,\"john\",7,16,null]"
       },
       {
         "book": "corinthians1",
@@ -100953,6 +101012,21 @@
           "text": "שֶׁלְּךָ"
         },
         "source_key": "[\"\",null,\"luke\",19,18,null]"
+      },
+      {
+        "book": "john",
+        "chapter": 7,
+        "verse": 16,
+        "word_index": 6,
+        "text": "שֶׁלִּי",
+        "source_payload": {
+          "book": "john",
+          "chapter": 7,
+          "verse": 16,
+          "word_index": 6,
+          "text": "שֶׁלִּי"
+        },
+        "source_key": "[\"\",null,\"john\",7,16,null]"
       },
       {
         "book": "corinthians1",
@@ -102135,12 +102209,19 @@
         "verse": 1,
         "word_index": 5,
         "text": "חֲבִיבִים׃"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 12,
+        "verse": 19,
+        "word_index": 14,
+        "text": "חֲבִיבַי"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 1,
-    "instance_surface_count": 1,
+    "instance_total": 2,
+    "instance_surface_count": 2,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -102159,6 +102240,21 @@
           "text": "חֲבִיבִים׃"
         },
         "source_key": "[\"\",null,\"ephesians\",5,1,null]"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 12,
+        "verse": 19,
+        "word_index": 14,
+        "text": "חֲבִיבַי",
+        "source_payload": {
+          "book": "corinthians2",
+          "chapter": 12,
+          "verse": 19,
+          "word_index": 14,
+          "text": "חֲבִיבַי"
+        },
+        "source_key": "[\"\",null,\"corinthians2\",12,19,null]"
       }
     ],
     "surface_instances": [
@@ -102176,6 +102272,21 @@
           "text": "חֲבִיבִים׃"
         },
         "source_key": "[\"\",null,\"ephesians\",5,1,null]"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 12,
+        "verse": 19,
+        "word_index": 14,
+        "text": "חֲבִיבַי",
+        "source_payload": {
+          "book": "corinthians2",
+          "chapter": 12,
+          "verse": 19,
+          "word_index": 14,
+          "text": "חֲבִיבַי"
+        },
+        "source_key": "[\"\",null,\"corinthians2\",12,19,null]"
       }
     ]
   },
@@ -105550,9 +105661,9 @@
     "definitions": [
       {
         "source": "custom",
-        "text_en": "lay down; place; leave.",
-        "text_es": "poner; colocar; dejar.",
-        "order": 1
+        "order": 1,
+        "text_en": "lay down; place; leave; let, allow, let alone.",
+        "text_es": "poner; colocar; dejar; permitir, dejar en paz."
       }
     ],
     "root": "",
@@ -108790,9 +108901,9 @@
       },
       {
         "source": "custom",
-        "text_en": "drive, lead, guide.",
-        "text_es": "conducir, guiar, llevar.",
-        "order": 4
+        "order": 4,
+        "text_en": "drive, lead, guide; in later Hebrew, manage, govern, practise, be the custom; in the hithpael, behave, conduct oneself.",
+        "text_es": "conducir, guiar, llevar; en hebreo posterior, administrar, gobernar, practicar, ser costumbre; en hitpael, comportarse, conducirse."
       }
     ],
     "root": "",
@@ -110841,9 +110952,9 @@
     "definitions": [
       {
         "source": "custom",
-        "text_en": "head; top, chief.",
-        "text_es": "cabeza; cima, jefe.",
-        "order": 1
+        "order": 1,
+        "text_en": "head; top, chief; beginning.",
+        "text_es": "cabeza; cima, jefe; principio."
       }
     ],
     "root": "",
@@ -111955,9 +112066,9 @@
       },
       {
         "source": "custom",
-        "text_en": "owner, master, lord; husband; citizen.",
-        "text_es": "dueño, amo, señor; esposo; ciudadano.",
-        "order": 2
+        "order": 2,
+        "text_en": "owner, master, lord; husband; citizen; with a noun, one who has it or is given to it.",
+        "text_es": "dueño, amo, señor; esposo; ciudadano; con un sustantivo, el que lo tiene o se da a ello."
       }
     ],
     "root": "",
@@ -177002,9 +177113,9 @@
       },
       {
         "source": "custom",
-        "text_en": "throw, shoot; in the hiphil, teach, instruct, point out.",
-        "text_es": "arrojar, disparar; en hifil, enseñar, instruir, señalar.",
-        "order": 2
+        "order": 2,
+        "text_en": "throw, shoot; in the hiphil, teach, instruct, point out; also rain, early rain, be watered.",
+        "text_es": "arrojar, disparar; en hifil, enseñar, instruir, señalar; también llover, lluvia temprana, ser regado."
       }
     ]
   },
@@ -540807,6 +540918,13 @@
         "verse": 16,
         "word_index": 6,
         "text": "הַמְשַׁנִּים"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 7,
+        "verse": 12,
+        "word_index": 5,
+        "text": "שֶׁתִּשְׁתַּנֶּה"
       }
     ]
   },
@@ -554369,9 +554487,9 @@
     "definitions": [
       {
         "source": "custom",
-        "text_en": "scatter, be dispersed; overflow, dash in pieces.",
-        "text_es": "dispersar, ser esparcido; desbordarse, despedazar.",
-        "order": 1
+        "order": 1,
+        "text_en": "scatter, be dispersed, spread abroad; overflow, dash in pieces.",
+        "text_es": "dispersar, ser esparcido, difundir; desbordarse, despedazar."
       }
     ],
     "root": "",
@@ -554405,9 +554523,9 @@
     "definitions": [
       {
         "source": "custom",
-        "text_en": "find; attain to, come upon.",
-        "text_es": "hallar; alcanzar, encontrar.",
-        "order": 1
+        "order": 1,
+        "text_en": "find; attain to, come upon; be found, be present; in the hiphil, present, deliver, provide.",
+        "text_es": "hallar; alcanzar, encontrar; ser hallado, estar presente; en hifil, presentar, entregar, proveer."
       }
     ],
     "root": "",
@@ -555520,9 +555638,9 @@
     "definitions": [
       {
         "source": "custom",
-        "text_en": "lift, bear; lay upon, impose.",
-        "text_es": "levantar, llevar; imponer, poner sobre.",
-        "order": 1
+        "order": 1,
+        "text_en": "lift, bear; lay upon, impose; in later Hebrew, take, and with the hands, wash them.",
+        "text_es": "levantar, llevar; imponer, poner sobre; en hebreo posterior, tomar, y con las manos, lavarlas."
       }
     ],
     "root": "",
@@ -555556,9 +555674,9 @@
     "definitions": [
       {
         "source": "custom",
-        "text_en": "be firm, be established; prepare, make ready, set up.",
-        "text_es": "estar firme, ser establecido; preparar, disponer, establecer.",
-        "order": 1
+        "order": 1,
+        "text_en": "be firm, be established; prepare, make ready, set up; be right, be certain; certainty.",
+        "text_es": "estar firme, ser establecido; preparar, disponer, establecer; ser recto, ser cierto; certeza."
       }
     ],
     "root": "",
@@ -555826,9 +555944,9 @@
     "definitions": [
       {
         "source": "custom",
-        "text_en": "burn, kindle, consume; be brutish.",
-        "text_es": "arder, encender, consumir; ser necio.",
-        "order": 1
+        "order": 1,
+        "text_en": "burn, kindle, consume; remove, purge, put away; be brutish.",
+        "text_es": "arder, encender, consumir; quitar, purgar, extirpar; ser necio."
       }
     ],
     "root": "",
@@ -555880,13 +555998,209 @@
     "definitions": [
       {
         "source": "custom",
-        "text_en": "be surety, pledge; mix, mingle; in the hithpael, associate with, meddle.",
-        "text_es": "ser fiador, dar en prenda; mezclar; en hitpael, asociarse, entremeterse.",
-        "order": 1
+        "order": 1,
+        "text_en": "be surety, pledge; with the heart, dare; mix, mingle; in the hithpael, associate with, meddle; also be pleasing.",
+        "text_es": "ser fiador, dar en prenda; con el corazón, atreverse; mezclar; en hitpael, asociarse, entremeterse; también ser agradable."
       }
     ],
     "root": "",
     "root_strong": "",
     "manual_instances": []
+  },
+  "D0912": {
+    "strong_number": "D0912",
+    "hebrew": "רִיס",
+    "transliteration_es": "ris",
+    "transliteration_en": "ris",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "ris; a stadium, the Greek measure of distance of about 185 metres.",
+        "text_es": "ris; un estadio, la medida griega de distancia de unos 185 metros."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "john",
+        "chapter": 6,
+        "verse": 19,
+        "word_index": 8,
+        "text": "רִיס"
+      },
+      {
+        "book": "john",
+        "chapter": 11,
+        "verse": 18,
+        "word_index": 8,
+        "text": "רִיס׃"
+      },
+      {
+        "book": "luke",
+        "chapter": 24,
+        "verse": 13,
+        "word_index": 13,
+        "text": "רִיס"
+      },
+      {
+        "book": "revelation",
+        "chapter": 14,
+        "verse": 20,
+        "word_index": 15,
+        "text": "רִיס׃"
+      },
+      {
+        "book": "revelation",
+        "chapter": 21,
+        "verse": 16,
+        "word_index": 13,
+        "text": "רִיס"
+      }
+    ]
+  },
+  "D0913": {
+    "strong_number": "D0913",
+    "hebrew": "קִילוֹרִית",
+    "transliteration_es": "kilorit",
+    "transliteration_en": "kilorit",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "eye-salve; a Greek loanword (κολλούριον).",
+        "text_es": "colirio; un préstamo griego (κολλούριον)."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "revelation",
+        "chapter": 3,
+        "verse": 18,
+        "word_index": 20,
+        "text": "קִילוֹרִית"
+      }
+    ]
+  },
+  "D0914": {
+    "strong_number": "D0914",
+    "hebrew": "יְרִידָה",
+    "transliteration_es": "yeridá",
+    "transliteration_en": "yeridah",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "a coming down, decline; loss, defeat, a post-biblical Hebrew noun.",
+        "text_es": "descenso, decadencia; pérdida, derrota, un sustantivo del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "corinthians1",
+        "chapter": 6,
+        "verse": 7,
+        "word_index": 2,
+        "text": "יְרִידָה"
+      }
+    ]
+  },
+  "D0915": {
+    "strong_number": "D0915",
+    "hebrew": "הִתְנַגֵּד",
+    "transliteration_es": "hitnagued",
+    "transliteration_en": "hitnagged",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "oppose, set oneself against; a post-biblical Hebrew verb.",
+        "text_es": "oponerse, ponerse en contra; un verbo del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "timothy2",
+        "chapter": 2,
+        "verse": 25,
+        "word_index": 4,
+        "text": "הַמִּתְנַגְּדִים"
+      }
+    ]
+  },
+  "D0916": {
+    "strong_number": "D0916",
+    "hebrew": "חָשַׁשׁ",
+    "transliteration_es": "jashash",
+    "transliteration_en": "chashash",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "be concerned, care about; fear, suspect, a post-biblical Hebrew verb.",
+        "text_es": "preocuparse, interesarse por; temer, sospechar, un verbo del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "corinthians1",
+        "chapter": 9,
+        "verse": 10,
+        "word_index": 1,
+        "text": "חוֹשֵׁשׁ"
+      }
+    ]
+  },
+  "D0917": {
+    "strong_number": "D0917",
+    "hebrew": "פָּרַשׁ",
+    "transliteration_es": "parash",
+    "transliteration_en": "parash",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "separate, depart, withdraw; a post-biblical Hebrew sense.",
+        "text_es": "separarse, apartarse, retirarse; un sentido del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "corinthians1",
+        "chapter": 7,
+        "verse": 10,
+        "word_index": 12,
+        "text": "תִפְרשׁ"
+      }
+    ]
   }
 }

@@ -399,15 +399,39 @@ occurrences, and adds 30 `custom` records to H entries and one to D0057:
   "go down, come down". H758 Aram and H3568 Cush now name the other men of
   that name.
 
+`batches/definition_gaps_42_round_8.json` creates D0912 to D0917, moves 40
+occurrences, and widens 11 `custom` records on H entries:
+
+- James 5:7 יוֹרֶה, early rain, leaves H3384 for H3138. The H3384 record adds
+  rain and be watered, the H3384 senses of Hosea 6:3 and 10:12 and of Proverbs
+  11:25.
+- Records add the senses their New Testament and Tanakh uses need: H5090 the
+  later Hebrew manage, practise, be the custom (Mark 7:5, John 19:40) and the
+  hithpael conduct oneself (Philippians 1:27), H1197 remove and purge (1
+  Corinthians 5:13, Deuteronomy 13:6), H6148 dare and be pleasing (Mark 12:34,
+  Hosea 9:4), H3240 let and allow, H1167 one who has a thing, H3559 right and
+  certain, H7218 beginning, H4672 be present and provide, H6327 spread abroad,
+  and H5190 wash the hands.
+- D0912 ris, the Greek stadium (5 occurrences), D0913 eye-salve, and four
+  post-biblical words: D0914 loss, D0915 oppose, D0916 be concerned, D0917
+  separate.
+- 30 wrong-entry occurrences move to their entries, such as Luke 23:53 הוּשַׂם
+  to H7760 and Hebrews 7:3 יַחַשׂ to H3188.
+
+`h_entry_custom_records.json` gives each record, besides its Old Testament
+check, a New Testament check and the list of its New Testament occurrences,
+each read with the Greek of its SBLGNT verse. A test pins the list to the
+corpus, so a later move onto the entry needs a new review.
+
 `name_entry_referents.json` lists, for each D entry whose first gloss is a
 name, the Greek names its occurrences render. Each occurrence's SBLGNT verse
 must hold one of them, or the occurrence is an exception with its kind: a
 Textus Receptus reading, a name in the next or previous verse, a verse the
 SBLGNT lacks, a pronoun, or a rendering. Entries that share a Greek name
 either name one referent, such as a city and its people, or list the verses
-of each bearer. `move_gloss_review.json` lists every round 5 and round 7 move
-onto an entry the review did not create, with the first gloss the reader
-shows and the Greek word of the verse. Tests pin both tables.
+of each bearer. `move_gloss_review.json` lists every round 5, round 7, and
+round 8 move onto an entry the review did not create, with the first gloss
+the reader shows and the Greek word of the verse. Tests pin both tables.
 
 A `set_strong` onto a custom entry whose `mapping_scope` is `instances_only`
 adds the occurrence to that entry's `nt_instances`, and removes it from the

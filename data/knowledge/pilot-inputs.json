@@ -23,7 +23,7 @@
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
       "path": "data/delitzsch/parsed/john/1.json",
-      "sha256": "09e0776dcbe3c49c1b63e3d015cf92c939cf19a253dac85fc3491d4cae347cea"
+      "sha256": "5108ab79bcbad53cc8b7af7bb6e17ff994707da23ac751f9ef76b4aa1e484b24"
     },
     {
       "id": "greek",
@@ -56,7 +56,7 @@
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
       "path": "data/dict/lexicon/custom_definitions.json",
-      "sha256": "a5ee29a8bf17e1d8fd3b0237c22ac41c5c20603a905c3a889ad5da8de8fb5ad1"
+      "sha256": "2a6f09923babcca7385e10aab800bdd391d54753953b35aa8a6e8f698bfd28a5"
     },
     {
       "id": "shaul-son-of-man",
