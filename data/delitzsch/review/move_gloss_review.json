@@ -1,5 +1,5 @@
 {
-  "description": "Every round 5, 7, 8, and 9 move onto an entry the review did not create, with the gloss the reader shows first and the Greek word of the verse. Each row was reviewed against that Greek word.",
+  "description": "Every round 5, 7, 8, 9, and 11 move onto an entry the review did not create, with the gloss the reader shows first and the Greek word of the verse. Each row was reviewed against that Greek word.",
   "moves": [
     {
       "location": "acts.1.19.11",
@@ -12048,6 +12048,94 @@
       "shown": "generations",
       "greek": "G1076 γενεαλογία",
       "verdict": "fits: the first gloss gives the sense of the aligned Greek word"
+    },
+    {
+      "location": "acts.15.29.14",
+      "text": "נַפְשֹׁתֵיכֶם",
+      "strong": "D0944",
+      "shown": "soul, life, self, person; living being",
+      "greek": "G1438 ἑαυτοῦ",
+      "verdict": "fits: the noun נֶפֶשׁ, soul or self, renders the aligned Greek word"
+    },
+    {
+      "location": "james.1.21.17",
+      "text": "נַפְשֹׁתֵיכֶם׃",
+      "strong": "D0944",
+      "shown": "soul, life, self, person; living being",
+      "greek": "G5590G ψυχή",
+      "verdict": "fits: the noun נֶפֶשׁ, soul or self, renders the aligned Greek word"
+    },
+    {
+      "location": "john.8.28.17",
+      "text": "מִנַּפְשִׁי",
+      "strong": "D0944",
+      "shown": "soul, life, self, person; living being",
+      "greek": "G1473 ἐγώ",
+      "verdict": "fits: the noun נֶפֶשׁ, soul or self, renders the aligned Greek word"
+    },
+    {
+      "location": "john1.1.8.9",
+      "text": "נַפְשֹׁתֵינוּ",
+      "strong": "D0944",
+      "shown": "soul, life, self, person; living being",
+      "greek": "G1438 ἑαυτοῦ",
+      "verdict": "fits: the noun נֶפֶשׁ, soul or self, renders the aligned Greek word"
+    },
+    {
+      "location": "luke.12.57.2",
+      "text": "מִנַּפְשְׁכֶם",
+      "strong": "D0944",
+      "shown": "soul, life, self, person; living being",
+      "greek": "G1438 ἑαυτοῦ",
+      "verdict": "fits: the noun נֶפֶשׁ, soul or self, renders the aligned Greek word"
+    },
+    {
+      "location": "peter1.1.22.2",
+      "text": "נַפְשֹׁתֵיכֶם",
+      "strong": "D0944",
+      "shown": "soul, life, self, person; living being",
+      "greek": "G5590G ψυχή",
+      "verdict": "fits: the noun נֶפֶשׁ, soul or self, renders the aligned Greek word"
+    },
+    {
+      "location": "peter1.2.25.13",
+      "text": "נַפְשֹׁתֵיכֶם׃",
+      "strong": "D0944",
+      "shown": "soul, life, self, person; living being",
+      "greek": "G5590G ψυχή",
+      "verdict": "fits: the noun נֶפֶשׁ, soul or self, renders the aligned Greek word"
+    },
+    {
+      "location": "philippians.2.12.22",
+      "text": "נַפְשֹׁתֵיכֶם",
+      "strong": "D0944",
+      "shown": "soul, life, self, person; living being",
+      "greek": "G1438 ἑαυτοῦ",
+      "verdict": "fits: the noun נֶפֶשׁ, soul or self, renders the aligned Greek word"
+    },
+    {
+      "location": "corinthians1.15.44.2",
+      "text": "נַפְשִׁי",
+      "strong": "D0440",
+      "shown": "natural, of the soul; unspiritual, a post-biblical Hebrew adjective.",
+      "greek": "G5591 ψυχικός",
+      "verdict": "fits: the adjective נַפְשִׁי, natural, renders ψυχικός"
+    },
+    {
+      "location": "corinthians1.15.44.8",
+      "text": "נַפְשִׁי",
+      "strong": "D0440",
+      "shown": "natural, of the soul; unspiritual, a post-biblical Hebrew adjective.",
+      "greek": "G5591 ψυχικός",
+      "verdict": "fits: the adjective נַפְשִׁי, natural, renders ψυχικός"
+    },
+    {
+      "location": "john.6.11.16",
+      "text": "נַפְשָׁם׃",
+      "strong": "D0944",
+      "shown": "soul, life, self, person; living being",
+      "greek": "G2309 θέλω",
+      "verdict": "fits: the noun נֶפֶשׁ, soul or self, renders the aligned Greek word"
     }
   ]
 }

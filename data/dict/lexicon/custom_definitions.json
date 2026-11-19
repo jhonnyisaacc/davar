@@ -533281,6 +533281,20 @@
         "verse": 19,
         "word_index": 6,
         "text": "נַפְשִׁיִּים"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 15,
+        "verse": 44,
+        "word_index": 2,
+        "text": "נַפְשִׁי"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 15,
+        "verse": 44,
+        "word_index": 8,
+        "text": "נַפְשִׁי"
       }
     ]
   },
@@ -562295,20 +562309,6 @@
       {
         "book": "corinthians1",
         "chapter": 15,
-        "verse": 44,
-        "word_index": 2,
-        "text": "נַפְשִׁי"
-      },
-      {
-        "book": "corinthians1",
-        "chapter": 15,
-        "verse": 44,
-        "word_index": 8,
-        "text": "נַפְשִׁי"
-      },
-      {
-        "book": "corinthians1",
-        "chapter": 15,
         "verse": 45,
         "word_index": 8,
         "text": "לְנֶפֶשׁ"
@@ -563901,6 +563901,69 @@
         "verse": 11,
         "word_index": 10,
         "text": "נַפְשׁוֹ׃"
+      },
+      {
+        "book": "acts",
+        "chapter": 15,
+        "verse": 29,
+        "word_index": 14,
+        "text": "נַפְשֹׁתֵיכֶם"
+      },
+      {
+        "book": "james",
+        "chapter": 1,
+        "verse": 21,
+        "word_index": 17,
+        "text": "נַפְשֹׁתֵיכֶם׃"
+      },
+      {
+        "book": "john",
+        "chapter": 8,
+        "verse": 28,
+        "word_index": 17,
+        "text": "מִנַּפְשִׁי"
+      },
+      {
+        "book": "john1",
+        "chapter": 1,
+        "verse": 8,
+        "word_index": 9,
+        "text": "נַפְשֹׁתֵינוּ"
+      },
+      {
+        "book": "luke",
+        "chapter": 12,
+        "verse": 57,
+        "word_index": 2,
+        "text": "מִנַּפְשְׁכֶם"
+      },
+      {
+        "book": "peter1",
+        "chapter": 1,
+        "verse": 22,
+        "word_index": 2,
+        "text": "נַפְשֹׁתֵיכֶם"
+      },
+      {
+        "book": "peter1",
+        "chapter": 2,
+        "verse": 25,
+        "word_index": 13,
+        "text": "נַפְשֹׁתֵיכֶם׃"
+      },
+      {
+        "book": "philippians",
+        "chapter": 2,
+        "verse": 12,
+        "word_index": 22,
+        "text": "נַפְשֹׁתֵיכֶם"
+      },
+      {
+        "book": "john",
+        "chapter": 6,
+        "verse": 11,
+        "word_index": 16,
+        "text": "נַפְשָׁם׃"
       }
     ]
   }

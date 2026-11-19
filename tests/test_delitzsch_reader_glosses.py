@@ -141,7 +141,12 @@ def test_every_new_testament_occurrence_of_a_proper_noun_entry_shows_its_name_fi
     (("luke", 7, 11, 6), "D0943", "Nain", "Naín"),
     (("matthew", 23, 5, 11), "D0941", "phylacteries", "filacterias"),
     (("matthew", 16, 25, 6), "D0944", "soul, life, self, person; living being", "alma, vida, uno mismo, persona; ser viviente"),
-    (("john", 6, 11, 16), "H5315", "Throat", "Garganta"),
+    (("john", 6, 11, 16), "D0944", "soul, life, self, person; living being", "alma, vida, uno mismo, persona; ser viviente"),
+    (("james", 1, 21, 17), "D0944", "soul, life, self, person; living being", "alma, vida, uno mismo, persona; ser viviente"),
+    (("john", 8, 28, 17), "D0944", "soul, life, self, person; living being", "alma, vida, uno mismo, persona; ser viviente"),
+    (("corinthians1", 15, 44, 2), "D0440", "natural, of the soul", "natural, del alma"),
+    (("corinthians1", 15, 44, 8), "D0440", "natural, of the soul", "natural, del alma"),
+    (("luke", 12, 19, 9), "H5314", "take breath", "tomar aliento"),
     (("colossians", 4, 15, 6), "D0923", "Nympha(s), a believer at Laodicea", "Ninfa(s), creyente de Laodicea"),
 ])
 def test_a_reviewed_occurrence_shows_the_sense_the_pull_request_names(location, strong, english, spanish):
@@ -219,6 +224,11 @@ def test_a_record_inserted_ahead_of_the_owner_records_shows_first_and_keeps_them
     assert [d["text_en"] for d in lexicon().custom["H5315"]["definitions"]][:1] == ["Throat"]
 
 
+def test_new_testament_nefesh_leaves_the_owner_record_and_the_verb_to_the_hebrew_bible_and_the_niphal():
+    assert (occurrences().get("H5315", []), sorted(occurrences()["H5314"])) == ([], ["luke.12.19.9", "romans.15.32.6"])
+    assert sorted(occurrences()["D0440"]) == ["corinthians1.15.44.2", "corinthians1.15.44.8", "corinthians1.2.14.2", "jude.1.19.6"]
+
+
 def test_every_instances_only_entry_lists_exactly_its_new_testament_occurrences():
     differing = {}
     for strong, entry in lexicon().custom.items():
@@ -286,17 +296,17 @@ def test_entries_that_share_a_greek_name_name_one_referent_or_split_its_bearers_
 
 def reviewed_moves():
     moved = set()
-    for name in ("definition_gaps_42_round_5", "definition_gaps_42_round_7", "definition_gaps_42_round_8", "definition_gaps_42_round_9"):
+    for name in ("definition_gaps_42_round_5", "definition_gaps_42_round_7", "definition_gaps_42_round_8", "definition_gaps_42_round_9", "definition_gaps_42_round_11"):
         decisions = json.loads((ROOT / f"data/delitzsch/review/batches/{name}.json").read_text(encoding="utf-8"))["decisions"]
         created = {d["strong"] for d in decisions if d["action"] == "upsert_custom_definition" and d.get("mapping_scope")}
         for d in decisions:
-            if d["action"] == "set_strong" and d["new_strong"].split("/")[-1] not in created:
+            if d["action"] == "set_strong" and d["new_strong"] != d["previous_strong"] and d["new_strong"].split("/")[-1] not in created:
                 o = d["occurrence"]
                 moved.add(f"{o['book']}.{o['chapter']}.{o['verse']}.{o['word_index']}")
     return moved
 
 
-def test_every_round_5_7_8_and_9_move_onto_an_existing_entry_was_reviewed_against_the_gloss_the_reader_shows():
+def test_every_round_5_7_8_9_and_11_move_onto_an_existing_entry_was_reviewed_against_the_gloss_the_reader_shows():
     current = {".".join(map(str, location)): word["strong"].split("/")[-1] for location, word in corpus()}
     rows = {row["location"]: row for row in review_table("move_gloss_review")["moves"]}
     assert set(rows) == reviewed_moves()

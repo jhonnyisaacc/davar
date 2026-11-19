@@ -702,8 +702,8 @@
       "text_en": "Throat",
       "text_es": "Garganta",
       "ot_check": "fits: Jhonny's own record, which he decided on 2026-11-19 to keep first for the Hebrew Bible; throat (Isa 5:14, Ps 69:2, Jonah 2:6, Ps 105:18), and through the throat, appetite and desire (Prov 23:2, Eccl 6:7, Hab 2:5); his records 2 and 3 give living being (Gen 2:7) and person (Gen 12:5)",
-      "nt_check": "fits: John 6:11 כְּאַוַּת נַפְשָׁם, as much as their appetite craved of the loaves and fish (Greek ὅσον ἤθελον), is the appetite sense; the other 267 New Testament uses, the ψυχή sense, moved to D0944 soul, life, self, person",
-      "nt_occurrences": ["john.6.11.16"]
+      "nt_check": "fits: no New Testament token is on H5315, so Jhonny's records show only in the Hebrew Bible. All 280 New Testament tokens spelled with נפש were read with their SBLGNT verse: 274 uses of the noun נֶפֶשׁ are on D0944 soul, life, self, person, including John 6:11 כְּאַוַּת נַפְשָׁם (ὅσον ἤθελον); the 4 uses of the adjective נַפְשִׁי, ψυχικός, are on D0440 natural (1 Cor 2:14, 15:44 twice, Jude 19); the 2 uses of the Niphal of נָפַשׁ stay on H5314 take breath (Luke 12:19, Rom 15:32)",
+      "nt_occurrences": []
     },
     {
       "strong": "H1288",
