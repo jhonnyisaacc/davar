@@ -148,6 +148,11 @@ def test_every_new_testament_occurrence_of_a_proper_noun_entry_shows_its_name_fi
     (("corinthians1", 15, 44, 8), "D0440", "natural, of the soul", "natural, del alma"),
     (("luke", 12, 19, 9), "H5314", "take breath", "tomar aliento"),
     (("colossians", 4, 15, 6), "D0923", "Nympha(s), a believer at Laodicea", "Ninfa(s), creyente de Laodicea"),
+    (("james", 3, 15, 11), "D0945", "inclination, impulse; the (evil) inclination", "inclinación, impulso; la (mala) inclinación"),
+    (("titus", 1, 8, 12), "D0945", "inclination, impulse", "inclinación, impulso"),
+    (("james", 5, 13, 1), "H3334", "be distressed, be in straits", "estar angustiado, estar en apuros"),
+    (("matthew", 27, 7, 5), "H3335", "form, fashion, shape; plan, devise; as a noun, potter", "formar, modelar, dar forma; planear, idear; como sustantivo, alfarero"),
+    (("romans", 9, 20, 10), "H3336", "form", "forma"),
 ])
 def test_a_reviewed_occurrence_shows_the_sense_the_pull_request_names(location, strong, english, spanish):
     shown = glosses_at(*location)
@@ -227,6 +232,21 @@ def test_a_record_inserted_ahead_of_the_owner_records_shows_first_and_keeps_them
 def test_new_testament_nefesh_leaves_the_owner_record_and_the_verb_to_the_hebrew_bible_and_the_niphal():
     assert (occurrences().get("H5315", []), sorted(occurrences()["H5314"])) == ([], ["luke.12.19.9", "romans.15.32.6"])
     assert sorted(occurrences()["D0440"]) == ["corinthians1.15.44.2", "corinthians1.15.44.8", "corinthians1.2.14.2", "jude.1.19.6"]
+
+
+def test_every_new_testament_yetser_token_sits_on_the_sense_its_greek_verse_renders():
+    family = ("D0945", "H3334", "H3335", "H3336")
+    letters = lambda text: "".join(c for c in unicodedata.normalize("NFD", text) if "א" <= c <= "ת").translate(FINAL_LETTERS)
+    found = {".".join(map(str, location)): word["strong"].split("/")[-1] for location, word in corpus() if "יצר" in letters(word["text"]) or word["strong"].split("/")[-1] in family}
+    assert {loc: strong for loc, strong in found.items() if strong not in family} == {
+        "matthew.13.6.3": "H6866", "mark.4.6.3": "H6866", "revelation.16.9.0": "H6866", "peter1.3.10.8": "H5341",
+    }
+    assert {strong: sorted(loc for loc, s in found.items() if s == strong) for strong in family} == {
+        "D0945": ["corinthians1.7.5.24", "james.3.15.11", "timothy1.5.11.7", "titus.1.8.12"],
+        "H3334": ["james.5.13.1", "luke.12.50.4", "mark.10.22.0"],
+        "H3335": ["ephesians.3.9.11", "galatians.4.19.9", "matthew.27.10.4", "matthew.27.7.5", "revelation.2.27.4", "romans.9.20.11", "romans.9.21.3", "timothy1.2.13.2"],
+        "H3336": ["romans.9.20.10"],
+    }
 
 
 def test_every_instances_only_entry_lists_exactly_its_new_testament_occurrences():

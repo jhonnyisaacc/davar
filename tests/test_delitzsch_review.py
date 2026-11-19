@@ -603,20 +603,20 @@ def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
     committed = dispositions.read_ledger()
     assert committed == rebuilt
     summary = committed["summary"]
-    assert summary["total"] == 11528 + 16084 + 8774
+    assert summary["total"] == 11528 + 16084 + 8778
     assert summary["by_disposition"]["unresolved"] == 0
     assert summary["by_family"]["prefix_metadata"] == {
         "benign": 1317, "corrected": 3858, "already_reviewed": 319, "unresolved": 0, "blocked": 0, "superseded": 0,
     }
     assert summary["by_family"]["outside_queue"] == {
-        "benign": 9, "corrected": 8765, "already_reviewed": 0, "unresolved": 0, "blocked": 0, "superseded": 0,
+        "benign": 9, "corrected": 8769, "already_reviewed": 0, "unresolved": 0, "blocked": 0, "superseded": 0,
     }
     assert summary["benign_lexical_review"] == {"pending": 0, "reviewed": 1689}
     assert summary["by_family"]["legacy_assignment"] == {
-        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 7926, "superseded": 8158,
+        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 7927, "superseded": 8157,
     }
     assert {rule: summary["by_rule"][rule] for rule in ("legacy_without_candidate", "legacy_current_value", "legacy_blocked", "lexical_review")} == {
-        "legacy_without_candidate": 4360, "legacy_current_value": 3798, "legacy_blocked": 7926, "lexical_review": 1456,
+        "legacy_without_candidate": 4360, "legacy_current_value": 3797, "legacy_blocked": 7927, "lexical_review": 1456,
     }
 
 
@@ -1208,7 +1208,7 @@ def definition_gaps_batch(name="definition_gaps_42"):
 
 @pytest.mark.parametrize("name, created_count", [
     ("definition_gaps_42", 44), ("definition_gaps_42_round_2", 375), ("definition_gaps_42_round_3", 1), ("definition_gaps_42_round_4", 20),
-    ("definition_gaps_42_round_5", 177), ("definition_gaps_42_round_7", 10),
+    ("definition_gaps_42_round_5", 177), ("definition_gaps_42_round_7", 10), ("definition_gaps_42_round_12", 1),
 ])
 def test_issue_42_entries_list_exactly_the_occurrences_reviewed_onto_them(name, created_count):
     custom = json.loads((dispositions.ROOT / "data/dict/lexicon/custom_definitions.json").read_text(encoding="utf-8"))
@@ -1236,6 +1236,7 @@ def test_issue_42_entries_list_exactly_the_occurrences_reviewed_onto_them(name, 
     ("definition_gaps_42", 148, 1), ("definition_gaps_42_round_2", 685, 14), ("definition_gaps_42_round_3", 206, 6),
     ("definition_gaps_42_round_4", 417, 6), ("definition_gaps_42_round_5", 1866, 25),
     ("definition_gaps_42_round_7", 145, 4), ("definition_gaps_42_round_10", 267, 2), ("definition_gaps_42_round_11", 15, 0),
+    ("definition_gaps_42_round_12", 4, 0),
 ])
 def test_issue_42_identity_evidence_names_a_greek_word_of_the_verse(name, move_count, noted):
     greek = dispositions.ROOT / "data/greek/preview/greek/releases/sblgnt/5de0a47f35f0fc13dfe1430d104e5db8a4285f9c/books"

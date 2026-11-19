@@ -563966,5 +563966,90 @@
         "text": "נַפְשָׁם׃"
       }
     ]
+  },
+  "D0945": {
+    "strong_number": "D0945",
+    "hebrew": "יֵצֶר",
+    "transliteration_es": "yétser",
+    "transliteration_en": "yetser",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "inclination, impulse; the (evil) inclination",
+        "text_es": "inclinación, impulso; la (mala) inclinación"
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "corinthians1",
+        "chapter": 7,
+        "verse": 5,
+        "word_index": 24,
+        "text": "יִצְרְכֶם׃"
+      },
+      {
+        "book": "james",
+        "chapter": 3,
+        "verse": 15,
+        "word_index": 11,
+        "text": "הַיֵּצֶר"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 5,
+        "verse": 11,
+        "word_index": 7,
+        "text": "יִצְרָן"
+      },
+      {
+        "book": "titus",
+        "chapter": 1,
+        "verse": 8,
+        "word_index": 12,
+        "text": "יִצְרוֹ׃"
+      }
+    ]
+  },
+  "H3334": {
+    "strong_number": "H3334",
+    "hebrew": "יָצַר",
+    "transliteration_es": "yatzar",
+    "transliteration_en": "yatzar",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "be distressed, be in straits; be narrow, cramped; in the hiphil, distress, press hard.",
+        "text_es": "estar angustiado, estar en apuros; ser estrecho, apretado; en hifil, angustiar, oprimir.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H3335": {
+    "strong_number": "H3335",
+    "hebrew": "יָצַר",
+    "transliteration_es": "yatzar",
+    "transliteration_en": "yatzar",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "form, fashion, shape; plan, devise; as a noun, potter.",
+        "text_es": "formar, modelar, dar forma; planear, idear; como sustantivo, alfarero.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "H3334",
+    "manual_instances": []
   }
 }

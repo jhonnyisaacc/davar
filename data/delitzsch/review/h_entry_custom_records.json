@@ -912,6 +912,22 @@
       "ot_check": "fits: salvation, deliverance, help in its 77 Tanakh uses (Gen 49:18, Exod 15:2, 1 Sam 2:1, Ps 3:9, Isa 12:2, Jonah 2:10); Jhonny decided on 2026-11-19 to show it first, ahead of his records YHVH saves and the rest, which stay as later senses",
       "nt_check": "fits: no New Testament token is on H3444; the New Testament uses of יְשׁוּעָה are on D0901 salvation",
       "nt_occurrences": []
+    },
+    {
+      "strong": "H3334",
+      "text_en": "be distressed, be in straits; be narrow, cramped; in the hiphil, distress, press hard.",
+      "text_es": "estar angustiado, estar en apuros; ser estrecho, apretado; en hifil, angustiar, oprimir.",
+      "ot_check": "fits: every Tanakh use tagged H3334; be distressed (Gen 32:8, Judg 2:15, 10:9, 1 Sam 30:6, 2 Sam 13:2), be in straits (Job 20:22), be narrow or cramped (Isa 49:19, Prov 4:12, Job 18:7), and the hiphil distress (Neh 9:27); the old first gloss bind fit none of them",
+      "nt_check": "fits: the 3 New Testament uses are distress, יֵצַר לְאִישׁ for κακοπαθεῖ (James 5:13), מַה־יֵּצַר לִי for συνέχομαι (Luke 12:50), and וַיֵּצֶר־לוֹ for στυγνάσας (Mark 10:22); the noun הַיֵּצֶר of James 3:15 moved to D0945 inclination",
+      "nt_occurrences": ["james.5.13.1", "luke.12.50.4", "mark.10.22.0"]
+    },
+    {
+      "strong": "H3335",
+      "text_en": "form, fashion, shape; plan, devise; as a noun, potter.",
+      "text_es": "formar, modelar, dar forma; planear, idear; como sustantivo, alfarero.",
+      "ot_check": "fits: every Tanakh use tagged H3335; form and fashion (Gen 2:7, Isa 43:1, 44:9-12, Jer 1:5, Ps 94:9), plan or devise (2 Kgs 19:25, Isa 22:11, 46:11, Jer 18:11, Ps 94:20), and the participle potter (2 Sam 17:28, Isa 29:16, 41:25, 45:9, 64:7, Jer 18:2-6, 19:1, Zech 11:13, Ps 2:9, Lam 4:2, 1 Chr 4:23)",
+      "nt_check": "fits: form renders κτίζω (Eph 3:9), μορφόω (Gal 4:19), and πλάσσω (Rom 9:20, 1 Tim 2:13); potter renders κεραμεύς (Matt 27:7, 27:10, Rom 9:21) and κεραμικός (Rev 2:27); the noun יִצְרוֹ of Titus 1:8 moved to D0945 inclination",
+      "nt_occurrences": ["ephesians.3.9.11", "galatians.4.19.9", "matthew.27.10.4", "matthew.27.7.5", "revelation.2.27.4", "romans.9.20.11", "romans.9.21.3", "timothy1.2.13.2"]
     }
   ]
 }
