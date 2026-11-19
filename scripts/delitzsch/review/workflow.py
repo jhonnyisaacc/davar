@@ -677,6 +677,10 @@ def _custom_instance_from_occurrence(occurrence: dict[str, Any]) -> dict[str, An
     }
 
 
+def _root_fields(decision: dict[str, Any]) -> dict[str, str]:
+    return {field: decision[field] for field in ("root", "root_strong") if decision.get(field)}
+
+
 def _add_custom_entry(
     lexicon: LexiconIndex,
     decision: dict[str, Any],
@@ -707,8 +711,7 @@ def _add_custom_entry(
             # after their own lexical review.
             "mapping_scope": decision.get("mapping_scope", "instances_only"),
             "definitions": [],
-            "root": decision.get("root", ""),
-            "root_strong": decision.get("root_strong", ""),
+            **_root_fields(decision),
             "manual_instances": [],
             "nt_instances": [],
         },
@@ -806,8 +809,7 @@ def _upsert_custom_definition(
             ),
             "is_custom": True,
             "definitions": [],
-            "root": decision.get("root", ""),
-            "root_strong": existing.get("root_ref") or existing.get("root_strong") or decision.get("root_strong", ""),
+            **_root_fields(decision),
             "manual_instances": [],
             **{field: decision[field] for field in ("mapping_scope", "nt_instances") if field in decision},
         },

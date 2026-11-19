@@ -2,6 +2,7 @@ import json
 import re
 import unicodedata
 from collections import Counter
+from functools import cache
 from pathlib import Path
 
 import pytest
@@ -337,6 +338,31 @@ def test_upsert_custom_definition_inserts_a_record_first_and_keeps_the_owner_rec
     definitions = json.loads(custom_path.read_text(encoding="utf-8"))["H3444"]["definitions"]
     assert [(d["text_en"], d["order"]) for d in definitions] == [("salvation", 1), ("YHVH saves", 2), ("YHVH is the possessor", 3)]
     assert [{k: v for k, v in d.items() if k != "order"} for d in definitions[1:]] == [{k: v for k, v in d.items() if k != "order"} for d in owner]
+
+
+def test_new_custom_entries_leave_root_fields_to_the_lexicon_unless_the_decision_names_them(tmp_path):
+    lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
+    custom_path = lexicon_dir.parent / "custom_definitions.json"
+    write_json(lexicon_dir / "H3335.json", {"strong_number": "H3335", "lemma": "יָצַר", "root_ref": "H3334", "definitions": []})
+    write_json(custom_path, {})
+    words = [{"text": "יוֹצֵר", "strong": None, "prefixes": []}, {"text": "יוֹצֵר", "strong": None, "prefixes": []}]
+    write_json(tmp_path / "parsed" / "romans" / "9.json", [{"chapter": 9, "verses": [{"chapter": 9, "verse": 21, "words": words}]}])
+    occurrence = {"book": "romans", "chapter": 9, "verse": 21, "text": "יוֹצֵר", "strong": None}
+    path = tmp_path / "batch.json"
+    write_json(path, {"decisions": [
+        {"action": "upsert_custom_definition", "strong": "H3335", "definition": {"text_en": "potter", "text_es": "alfarero"}},
+        {"action": "create_custom_entry", "custom_key": "D0001", "occurrence": {**occurrence, "word_index": 0}, "previous_strong": None,
+         "definition": {"text_en": "potter", "text_es": "alfarero"}},
+        {"action": "create_custom_entry", "custom_key": "D0002", "occurrence": {**occurrence, "word_index": 1}, "previous_strong": None,
+         "root": "יצר", "root_strong": "H3334", "definition": {"text_en": "potter", "text_es": "alfarero"}},
+    ]})
+
+    stats = apply_decisions(path, tmp_path / "parsed", LexiconIndex(lexicon_dir), tmp_path / "log")
+
+    custom = json.loads(custom_path.read_text(encoding="utf-8"))
+    assert stats.errors == 0
+    assert not {"root", "root_strong"} & (set(custom["H3335"]) | set(custom["D0001"]))
+    assert (custom["D0002"]["root"], custom["D0002"]["root_strong"]) == ("יצר", "H3334")
 
 
 def test_custom_entry_hebrew_is_available_as_normalized_lemma(tmp_path):
@@ -757,8 +783,16 @@ def test_style_only_rule_does_not_read_a_verb_stem_he_as_the_article():
     assert disposition("הִשְׁלִיכוּ", ["Hd"], "שלך", is_root=True) == "unresolved"
 
 
+@cache
+def ledger_by_location():
+    records = {}
+    for record in dispositions.read_ledger()["records"]:
+        records.setdefault(record["location"], record)
+    return records
+
+
 def ledger_record(location):
-    return next(r for r in dispositions.read_ledger()["records"] if r["location"] == location)
+    return ledger_by_location()[location]
 
 
 def parsed_verse(book, chapter, verse):
@@ -1206,18 +1240,28 @@ def definition_gaps_batch(name="definition_gaps_42"):
     return json.loads(path.read_text(encoding="utf-8"))["decisions"]
 
 
+@cache
+def locations_by_strong():
+    located = {}
+    for path in sorted((dispositions.ROOT / "data/delitzsch/parsed").glob("*/*.json")):
+        if path.stem.isdigit():
+            for verse in json.loads(path.read_text(encoding="utf-8"))[0]["verses"]:
+                for index, word in enumerate(verse["words"]):
+                    located.setdefault((word.get("strong") or "").split("/")[-1], set()).add(f"{path.parent.name}.{path.stem}.{verse['verse']}.{index}")
+    return located
+
+
+@cache
+def committed_custom():
+    return json.loads((dispositions.ROOT / "data/dict/lexicon/custom_definitions.json").read_text(encoding="utf-8"))
+
+
 @pytest.mark.parametrize("name, created_count", [
     ("definition_gaps_42", 44), ("definition_gaps_42_round_2", 375), ("definition_gaps_42_round_3", 1), ("definition_gaps_42_round_4", 20),
     ("definition_gaps_42_round_5", 177), ("definition_gaps_42_round_7", 10), ("definition_gaps_42_round_12", 1),
 ])
 def test_issue_42_entries_list_exactly_the_occurrences_reviewed_onto_them(name, created_count):
-    custom = json.loads((dispositions.ROOT / "data/dict/lexicon/custom_definitions.json").read_text(encoding="utf-8"))
-    corpus = Counter()
-    for path in sorted((dispositions.ROOT / "data/delitzsch/parsed").glob("*/*.json")):
-        if path.stem.isdigit():
-            for verse in json.loads(path.read_text(encoding="utf-8"))[0]["verses"]:
-                for index, word in enumerate(verse["words"]):
-                    corpus[(word.get("strong") or "").split("/")[-1], f"{path.parent.name}.{path.stem}.{verse['verse']}.{index}"] += 1
+    custom = committed_custom()
     created = [d for d in definition_gaps_batch(name) if "nt_instances" in d and d["strong"].startswith("D")]
     assert len(created) == created_count
     for decision in created:
@@ -1225,7 +1269,7 @@ def test_issue_42_entries_list_exactly_the_occurrences_reviewed_onto_them(name, 
         assert entry.get("mapping_scope") == decision.get("mapping_scope")
         assert all(d["text_en"] and d["text_es"] for d in entry["definitions"])
         listed = {f"{i['book']}.{i['chapter']}.{i['verse']}.{i['word_index']}" for i in entry["nt_instances"]}
-        assert listed == {location for strong, location in corpus if strong == decision["strong"]}
+        assert listed == locations_by_strong().get(decision["strong"], set())
         for location in listed if "mapping_scope" in decision else ():
             record = ledger_record(location)
             assert (record["disposition"], record["reviewer"], record["after"]["strong"].split("/")[-1]) == (

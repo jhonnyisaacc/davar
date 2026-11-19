@@ -342,3 +342,31 @@ def test_every_new_testament_token_whose_letters_miss_its_lemma_is_a_reviewed_ro
     assert {location: row["shown"] for location, row in reviewed.items()} == {location: lexicon().glosses(row["strong"])[0].text for location, row in reviewed.items()}
     assert {location for location, row in reviewed.items() if not row["note"]} == set()
     assert len(table["pending"]) == 1
+
+
+def first_present(*values):
+    return next((value for value in values if value is not None), None)
+
+
+def root_heading(strong):
+    words, roots, custom = lexicon().words, lexicon().roots, lexicon().custom
+    dictionary, entry = words.get(strong) or roots.get(strong) or {}, custom.get(strong, {})
+    root_strong = first_present(entry.get("root_strong"), dictionary.get("root_ref"), dictionary.get("root_strong"),
+                                strong if dictionary else None)
+    root_entry = (roots.get(root_strong) or words.get(root_strong) or custom.get(root_strong) or {}) if root_strong else {}
+    return first_present(entry.get("root"), root_entry.get("lemma"), root_entry.get("hebrew")), root_strong
+
+
+def test_no_custom_entry_blanks_the_root_the_reader_would_fall_back_to():
+    assert [(key, field) for key, entry in lexicon().custom.items() for field in ("root", "root_strong") if entry.get(field) == ""] == []
+
+
+@pytest.mark.parametrize("strong, root, root_strong", [
+    ("H3335", "יָצַר", "H3334"),
+    ("H3334", "יָצַר", "H3334"),
+    ("H376", "אִישׁ", "H376"),
+    ("H3444", "ישע", "H3467"),
+    ("H5315", "נפש", "H5314"),
+])
+def test_a_reviewed_bdb_entry_shows_the_root_heading_its_lexicon_entry_gives(strong, root, root_strong):
+    assert root_heading(strong) == (root, root_strong)
