@@ -106,7 +106,7 @@
           },
           {
             "text": "יוֹחָנָן",
-            "strong": "H3076",
+            "strong": "D0708",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -349,7 +349,7 @@
           },
           {
             "text": "נִסָּיוֹן",
-            "strong": "H4513",
+            "strong": "D0428",
             "prefixes": []
           },
           {
@@ -364,7 +364,7 @@
           },
           {
             "text": "הַצִּילֵנוּ",
-            "strong": "Hd/H5337",
+            "strong": "Hd/D0734",
             "prefixes": [
               "Hd"
             ]
@@ -384,7 +384,7 @@
       {
         "chapter": 11,
         "verse": 5,
-        "hebrew": "וַ/יֹּאמֶר אֲלֵיהֶם מִי בָ/כֶם אֲשֶׁר יִהְיֶה־לּוֹ אֹהֵב וְ/הָלַךְ וּ/בָא אֵלָיו בַּ/חֲצוֹת הַ/לַּיְלָה וְ/אָמַר אֵלָיו יְדִידִי הַלְוֵנִי שְׁלשֶׁת כִּכְּרוֹת־לָ/חֶם׃",
+        "hebrew": "וַ/יֹּאמֶר אֲלֵיהֶם מִי בָ/כֶם אֲשֶׁר יִהְיֶה־לּוֹ אֹהֵב וְ/הָלַךְ וּ/בָא אֵלָיו בַּ/חֲצוֹת הַ/לַּיְלָה וְ/אָמַר אֵלָיו יְדִידִי הַלְוֵנִי שְׁלשֶׁת כִּכְּרוֹת־לָחֶם׃",
         "words": [
           {
             "text": "וַיֹּאמֶר",
@@ -477,7 +477,7 @@
           },
           {
             "text": "יְדִידִי",
-            "strong": "H3027",
+            "strong": "H3039",
             "prefixes": []
           },
           {
@@ -497,10 +497,8 @@
           },
           {
             "text": "לָחֶם׃",
-            "strong": "Hl/H1035",
-            "prefixes": [
-              "Hl"
-            ],
+            "strong": "H3899",
+            "prefixes": [],
             "possible_proper_name": true
           }
         ]
@@ -785,7 +783,7 @@
           },
           {
             "text": "עַזּוּת",
-            "strong": "H4513",
+            "strong": "D0539",
             "prefixes": []
           },
           {
@@ -1299,7 +1297,7 @@
           },
           {
             "text": "הַשֵּׁד",
-            "strong": "H2778",
+            "strong": "H7700",
             "prefixes": []
           },
           {
@@ -1311,7 +1309,7 @@
           },
           {
             "text": "הָאִלֵּם",
-            "strong": "H864",
+            "strong": "H483",
             "prefixes": []
           },
           {
@@ -1865,7 +1863,7 @@
           },
           {
             "text": "מְזֻיָּן",
-            "strong": "H2026",
+            "strong": "D0536",
             "prefixes": []
           },
           {
@@ -2213,7 +2211,7 @@
           },
           {
             "text": "מְטֻאטָא",
-            "strong": "H7323",
+            "strong": "D0586",
             "prefixes": []
           },
           {
@@ -2251,7 +2249,7 @@
           },
           {
             "text": "שֶׁבַע",
-            "strong": "H884",
+            "strong": "H7651",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -2554,7 +2552,7 @@
           },
           {
             "text": "וַיָּחֶל",
-            "strong": "Hc/H2490",
+            "strong": "Hc/D0772",
             "prefixes": [
               "Hc"
             ]
@@ -2580,7 +2578,7 @@
           },
           {
             "text": "דּוֹר",
-            "strong": "H1756",
+            "strong": "H1755",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -2858,7 +2856,7 @@
           },
           {
             "text": "שְׁלֹמֹה",
-            "strong": "H8010",
+            "strong": "D0785",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -2886,7 +2884,7 @@
           },
           {
             "text": "מִשְּׁלֹמֹה׃",
-            "strong": "H8010",
+            "strong": "D0785",
             "prefixes": [],
             "possible_proper_name": true
           }
@@ -2995,7 +2993,7 @@
           },
           {
             "text": "מִיּוֹנָה׃",
-            "strong": "Hm/H3124",
+            "strong": "Hm/D0809",
             "prefixes": [
               "Hm"
             ]
@@ -3019,7 +3017,7 @@
           },
           {
             "text": "נֵר",
-            "strong": "H5369",
+            "strong": "H5216",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -3124,7 +3122,7 @@
         "words": [
           {
             "text": "נֵר",
-            "strong": "H5369",
+            "strong": "H5216",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -3379,7 +3377,7 @@
           },
           {
             "text": "הַנֵּר",
-            "strong": "H6107",
+            "strong": "H5216",
             "prefixes": []
           },
           {
@@ -3391,7 +3389,7 @@
           },
           {
             "text": "נָגְהוֹ׃",
-            "strong": "H5060",
+            "strong": "H5051",
             "prefixes": []
           }
         ]
@@ -3429,7 +3427,7 @@
           },
           {
             "text": "פָּרוּשׁ",
-            "strong": "H6566",
+            "strong": "D0867",
             "prefixes": []
           },
           {
@@ -3492,7 +3490,7 @@
           },
           {
             "text": "הַפָּרוּשׁ",
-            "strong": "Hd/H6566",
+            "strong": "Hd/D0867",
             "prefixes": [
               "Hd"
             ]
@@ -3585,14 +3583,14 @@
           },
           {
             "text": "הַפְּרוּשִׁים",
-            "strong": "Hd/H6566",
+            "strong": "Hd/D0867",
             "prefixes": [
               "Hd"
             ]
           },
           {
             "text": "מְטַהֲרִים",
-            "strong": "H2026",
+            "strong": "H2891",
             "prefixes": []
           },
           {
@@ -3804,7 +3802,7 @@
           },
           {
             "text": "הַפְּרוּשִׁים",
-            "strong": "Hd/H6566",
+            "strong": "Hd/D0867",
             "prefixes": [
               "Hd"
             ]
@@ -3826,7 +3824,7 @@
           },
           {
             "text": "הַמִּנְתָּא",
-            "strong": "H6006",
+            "strong": "Hd/D0537",
             "prefixes": [
               "Hd"
             ]
@@ -3840,7 +3838,7 @@
           },
           {
             "text": "הַפֵּיגַם",
-            "strong": "H2778",
+            "strong": "Hd/D0538",
             "prefixes": [
               "Hd"
             ]
@@ -3981,7 +3979,7 @@
           },
           {
             "text": "הַפְּרוּשִׁים",
-            "strong": "Hd/H6566",
+            "strong": "Hd/D0867",
             "prefixes": [
               "Hd"
             ]
@@ -4036,7 +4034,7 @@
           },
           {
             "text": "שֶׁאֱלוֹת",
-            "strong": "H864",
+            "strong": "H7596",
             "prefixes": []
           },
           {
@@ -4079,7 +4077,7 @@
           },
           {
             "text": "וְהַפְּרוּשִׁים",
-            "strong": "Hc/Hd/H6566",
+            "strong": "Hc/Hd/D0867",
             "prefixes": [
               "Hc",
               "Hd"
@@ -4132,7 +4130,7 @@
           },
           {
             "text": "מִתְהַלְּכִים",
-            "strong": "H864",
+            "strong": "H1980",
             "prefixes": []
           },
           {
@@ -4345,7 +4343,7 @@
           },
           {
             "text": "בַּמַּשָּׂאוֹת",
-            "strong": "H4852",
+            "strong": "Hb/H4853",
             "prefixes": [
               "Hb"
             ]
@@ -4622,7 +4620,7 @@
           },
           {
             "text": "יִדָּרֵשׁ",
-            "strong": "H1696",
+            "strong": "H1875",
             "prefixes": []
           },
           {
@@ -4702,7 +4700,7 @@
           },
           {
             "text": "הֶבֶל",
-            "strong": "H1892",
+            "strong": "D0870",
             "prefixes": []
           },
           {
@@ -4717,7 +4715,7 @@
           },
           {
             "text": "זְכַרְיָהוּ",
-            "strong": "H2148",
+            "strong": "D0706",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -4932,7 +4930,7 @@
           },
           {
             "text": "וַיָּחֵלּוּ",
-            "strong": "Hc/H2490",
+            "strong": "Hc/D0772",
             "prefixes": [
               "Hc"
             ]
@@ -4946,7 +4944,7 @@
           },
           {
             "text": "וְהַפְּרוּשִׁים",
-            "strong": "Hc/Hd/H6566",
+            "strong": "Hc/Hd/D0867",
             "prefixes": [
               "Hc",
               "Hd"

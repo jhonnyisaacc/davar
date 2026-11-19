@@ -50,18 +50,11 @@
       "text_es": "un daño"
     },
     {
-      "text_en": "be",
+      "text_en": "be or become guilty",
       "source": "bdb",
       "order": 7,
       "sense": "2",
-      "text_es": "ser"
-    },
-    {
-      "text_en": "become guilty",
-      "source": "bdb",
-      "order": 8,
-      "sense": "2",
-      "text_es": "hacerse culpable"
+      "text_es": "ser o volverse culpable"
     },
     {
       "text_en": "be held guilty",

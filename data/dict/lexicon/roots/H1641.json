@@ -34,10 +34,11 @@
       "sense": "0"
     },
     {
-      "text_en": "roaring whirlwind",
+      "text_en": "a (sweeping) roaring whirlwind",
       "source": "bdb",
       "order": 5,
-      "sense": "0"
+      "sense": "0",
+      "text_es": "un torbellino rugiente (arrasador)"
     }
   ],
   "sources": {

@@ -100,6 +100,24 @@ def test_a_delitzsch_repin_exempts_only_besorah_outputs_from_legacy_parity():
     assert legacy_generation_differences(expected, actual) == sorted(expected)
 
 
+def test_a_parsed_delitzsch_change_under_any_repin_exempts_only_besorah_outputs_from_legacy_parity():
+    lexicon = (("data/dict/lexicon/custom_definitions.json", "data/dict/lexicon/custom_definitions.json"),)
+    parsed = ("data/delitzsch/parsed/acts/17.json", "data/dict/lexicon/words/H31.json", "data/greek/preview/greek-sblgnt.json")
+    refreshed = refreshed_outputs(lexicon, parsed)
+    expected = {"besorah/acts/17.json": "old", "bundles/besorah.json": "old", "dict/words.json": "old", "greek/manifest.json": "old", "bundles/tanaj.json": "old"}
+    actual = {"besorah/acts/17.json": "new", "bundles/besorah.json": "new", "dict/words.json": "new", "greek/manifest.json": "new", "bundles/tanaj.json": "new"}
+    assert legacy_generation_differences(expected, actual, refreshed) == ["bundles/tanaj.json", "greek/manifest.json"]
+
+
+def test_a_parsed_delitzsch_change_without_a_repin_keeps_legacy_parity_strict():
+    refreshed = refreshed_outputs((), ("data/delitzsch/parsed/acts/17.json",))
+    assert refreshed == ()
+    expected = {"besorah/acts/17.json": "old", "bundles/besorah.json": "old"}
+    assert legacy_generation_differences(expected, {name: "new" for name in expected}, refreshed) == sorted(expected)
+    other = refreshed_outputs((("data/oe/old.json", "data/oe/daniel/7.json"),), ("data/delitzsch/review/README.md",))
+    assert other == ()
+
+
 def test_a_lexicon_repin_exempts_only_dictionary_outputs_from_legacy_parity():
     refreshed = refreshed_outputs((("data/dict/lexicon/words.json", "data/dict/lexicon/words.json"),))
     expected = {"dict/entries/H31.json": "old", "dict/words.json": "old", "bundles/dictionary.json": "old", "bundles/tanaj.json": "old"}

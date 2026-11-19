@@ -8,25 +8,11 @@
   "translit_es": "svr",
   "definitions": [
     {
-      "text_en": "be",
+      "text_en": "be or act as prince",
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "ser"
-    },
-    {
-      "text_en": "act as",
-      "source": "bdb",
-      "order": 2,
-      "sense": "0",
-      "text_es": "actuar como"
-    },
-    {
-      "text_en": "prince",
-      "source": "bdb",
-      "order": 3,
-      "sense": "0",
-      "text_es": "príncipe"
+      "text_es": "ser o actuar como príncipe"
     },
     {
       "text_en": "rule",

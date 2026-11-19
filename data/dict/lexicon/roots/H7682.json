@@ -15,18 +15,11 @@
       "text_es": "ser alto"
     },
     {
-      "text_en": "be",
+      "text_en": "be (too) high",
       "source": "bdb",
       "order": 2,
       "sense": "1",
-      "text_es": "ser"
-    },
-    {
-      "text_en": "high",
-      "source": "bdb",
-      "order": 3,
-      "sense": "1",
-      "text_es": "alto"
+      "text_es": "ser (demasiado) alto"
     },
     {
       "text_en": "be high",
@@ -43,18 +36,11 @@
       "text_es": "ser alto"
     },
     {
-      "text_en": "be",
+      "text_en": "be (safely) set on high",
       "source": "bdb",
       "order": 6,
       "sense": "2",
-      "text_es": "ser"
-    },
-    {
-      "text_en": "set on high",
-      "source": "bdb",
-      "order": 7,
-      "sense": "2",
-      "text_es": "poner en alto"
+      "text_es": "estar (a salvo) puesto en alto"
     },
     {
       "text_en": "be exalted",

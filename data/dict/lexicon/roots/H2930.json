@@ -8,18 +8,11 @@
   "translit_es": "tame",
   "definitions": [
     {
-      "text_en": "be",
+      "text_en": "be or become unclean",
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "ser"
-    },
-    {
-      "text_en": "become unclean",
-      "source": "bdb",
-      "order": 2,
-      "sense": "0",
-      "text_es": "volverse impuro"
+      "text_es": "ser o volverse impuro"
     },
     {
       "text_en": "defile oneself",

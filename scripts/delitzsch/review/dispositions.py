@@ -14,6 +14,7 @@ from scripts.delitzsch.review.workflow import (
     HEBREW_LETTERS,
     LexiconIndex,
     _refresh_verse_prefix_separators,
+    load_decision_history,
     load_latest_decisions,
     normalize_hebrew,
 )
@@ -212,32 +213,93 @@ def reviewed_evidence(decision: dict[str, Any]) -> bool:
     return not decision["reviewer"].startswith("rule:") and all(decision.get("evidence", {}).get(key) for key in EVIDENCE_KEYS)
 
 
+def corrected_prefixes(decision: dict[str, Any]) -> list[str]:
+    prefixes = decision["occurrence"]["prefixes"]
+    return decision.get("new_prefixes", prefixes) if decision["issue_type"] in (LEXICAL_ISSUE, ROOT_LETTER_ISSUE) else prefixes
+
+
+def is_strong_correction(decision: dict[str, Any]) -> bool:
+    return decision.get("issue_type") in (STRONG_ISSUE, LEXICAL_ISSUE) and decision.get("action") == "set_strong"
+
+
+def correction_chain(entries: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    chain = [entries[-1]]
+    for entry in reversed(entries[:-1]):
+        if not (is_strong_correction(entry) or entry.get("issue_type") == ROOT_LETTER_ISSUE) or entry["status"] not in STRONG_CONFIRMED:
+            continue
+        if entry["new_strong"] != chain[0]["previous_strong"]:
+            break
+        chain.insert(0, entry)
+    return chain
+
+
+def with_superseded(history: dict[str, list[dict[str, Any]]]) -> dict[str, dict[str, Any]]:
+    latest = {}
+    for location, entries in history.items():
+        chain = correction_chain(entries) if is_strong_correction(entries[-1]) else entries[-1:]
+        latest[location] = dict(chain[-1], superseded=chain[:-1]) if len(chain) > 1 else chain[-1]
+    return latest
+
+
 def reviewed_strong_correction(entry: Record, decision: dict[str, Any] | None, reading: Reading | None) -> Verdict | None:
     if decision is None or decision.get("issue_type") not in (STRONG_ISSUE, LEXICAL_ISSUE):
         return None
     if decision["issue_type"] == LEXICAL_ISSUE and decision.get("action") != "set_strong":
         return None
-    occurrence, new_strong = decision["occurrence"], decision["new_strong"]
-    prefixes = occurrence["prefixes"]
-    new_prefixes = decision.get("new_prefixes", prefixes) if decision["issue_type"] == LEXICAL_ISSUE else prefixes
+    chain = [*decision.get("superseded", ()), decision]
+    first, prefixes = chain[0]["occurrence"], chain[0]["occurrence"]["prefixes"]
+    new_strong, new_prefixes = decision["new_strong"], corrected_prefixes(decision)
     if (
-        decision["status"] not in STRONG_CONFIRMED
-        or decision["action"] != "set_strong"
-        or (decision["issue_type"] == STRONG_ISSUE and "new_prefixes" in decision)
-        or occurrence["text"] != entry["text"]
-        or not decision["previous_strong"] == occurrence["strong"] == entry["strong"]
+        not chain[0]["previous_strong"] == first["strong"] == entry["strong"]
         or (new_strong.split("/")[-1], new_prefixes) == (entry["strong"].split("/")[-1], prefixes)
-        or new_strong.split("/")[:-1] != new_prefixes
-        or not normalize_hebrew(entry["text"]).startswith(prefix_letters(new_prefixes))
-        or not decision.get("reason")
-        or not reviewed_evidence(decision)
+        or any(
+            later["occurrence"]["strong"] != earlier["new_strong"] or later["occurrence"]["prefixes"] != corrected_prefixes(earlier)
+            for earlier, later in zip(chain, chain[1:])
+        )
+        or not valid_correction(decision, entry)
+        or any(not (valid_correction(link, entry) or valid_root_letter_link(link, entry)) for link in chain[:-1])
     ):
         raise ValueError(f"{entry['location']}: Strong correction does not satisfy the reviewed Strong correction rule")
+    evidence = dict(decision["evidence"], reason=decision["reason"], status=decision["status"], logged_at=decision["logged_at"])
+    if decision.get("superseded"):
+        evidence["superseded"] = [
+            {key: link.get(key) for key in ("status", "previous_strong", "new_strong", "new_prefixes", "reason", "logged_at")}
+            for link in chain[:-1]
+        ]
     return Verdict(
-        "corrected", decision["reviewer"],
-        dict(decision["evidence"], reason=decision["reason"], status=decision["status"], logged_at=decision["logged_at"]),
+        "corrected", decision["reviewer"], evidence,
         before=dict(prefixes=prefixes),
-        after=dict(text=occurrence["text"], strong=new_strong, prefixes=new_prefixes),
+        after=dict(text=decision["occurrence"]["text"], strong=new_strong, prefixes=new_prefixes),
+    )
+
+
+def valid_root_letter_link(decision: dict[str, Any], entry: Record) -> bool:
+    occurrence, new_prefixes = decision["occurrence"], decision.get("new_prefixes")
+    return (
+        decision.get("issue_type") == ROOT_LETTER_ISSUE
+        and decision["status"] in STRONG_CONFIRMED
+        and occurrence["text"] == entry["text"]
+        and decision["previous_strong"] == occurrence["strong"]
+        and new_prefixes is not None
+        and len(new_prefixes) < len(occurrence["prefixes"])
+        and occurrence["prefixes"][:len(new_prefixes)] == new_prefixes
+        and decision["new_strong"] in ("/".join([*new_prefixes, occurrence["strong"].split("/")[-1]]), occurrence["strong"].split("/")[-1])
+        and bool(decision.get("reason"))
+    )
+
+
+def valid_correction(decision: dict[str, Any], entry: Record) -> bool:
+    occurrence, new_strong, new_prefixes = decision["occurrence"], decision["new_strong"], corrected_prefixes(decision)
+    return (
+        decision["status"] in STRONG_CONFIRMED
+        and is_strong_correction(decision)
+        and not (decision["issue_type"] == STRONG_ISSUE and "new_prefixes" in decision)
+        and occurrence["text"] == entry["text"]
+        and decision["previous_strong"] == occurrence["strong"]
+        and new_strong.split("/")[:-1] == new_prefixes
+        and normalize_hebrew(entry["text"]).startswith(prefix_letters(new_prefixes))
+        and bool(decision.get("reason"))
+        and reviewed_evidence(decision)
     )
 
 
@@ -296,7 +358,7 @@ def unadjudicated(entry: Record, decision: dict[str, Any] | None, reading: Readi
 RULES: tuple[Rule, ...] = (
     ("root_letter_prefix", 1, root_letter_correction),
     ("root_letter_prefix_outside_queue", 1, outside_root_letter_correction),
-    ("reviewed_strong_correction", 2, reviewed_strong_correction),
+    ("reviewed_strong_correction", 3, reviewed_strong_correction),
     ("lexical_review", 1, lexical_review),
     ("style_only_prefix", 5, style_only_prefix),
     ("prior_review_decision", 1, prior_review),
@@ -358,10 +420,11 @@ def legacy_matches(rows: list[Record], corpus: dict[str, Any], decisions: dict[s
 def outside_queue_entries(queue: list[Record], decisions: dict[str, dict[str, Any]]) -> list[Record]:
     queued = {entry["location"] for entry in queue}
     return [
-        dict(location=location, source=DECISION_SOURCE, text=decision["occurrence"]["text"], strong=decision["occurrence"]["strong"],
+        dict(location=location, source=DECISION_SOURCE, text=origin["text"], strong=origin["strong"],
              reasons=[], prior_review_status=None, evidence="not in review_queue")
         for location, decision in sorted(decisions.items())
         if location not in queued and decision.get("issue_type") in OUTSIDE_QUEUE_ISSUES
+        for origin in [[*decision.get("superseded", ()), decision][0]["occurrence"]]
     ]
 
 
@@ -422,7 +485,7 @@ def serialize(ledger: dict[str, Any]) -> bytes:
 def build_from_disk(report: Path = REPORT, decisions_dir: Path = REPORTS.parent / "decisions") -> dict[str, Any]:
     plan = json.loads(gzip.decompress(report.read_bytes()))
     queue, legacy = plan["review_queue"], plan[LEGACY_SOURCE]
-    corpus, decisions = load_corpus(), load_latest_decisions(decisions_dir)
+    corpus, decisions = load_corpus(), with_superseded(load_decision_history(decisions_dir))
     lexicon = LexiconIndex(ROOT / "data/dict/lexicon/words")
     readings = prefix_readings(queue, corpus, lexicon)
     readings |= outside_readings(outside_queue_entries(queue, decisions), decisions, strong_reviews(decisions_dir), lexicon)

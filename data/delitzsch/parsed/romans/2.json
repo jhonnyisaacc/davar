@@ -46,7 +46,7 @@
           },
           {
             "text": "הַדָּן",
-            "strong": "H4571",
+            "strong": "H1777",
             "prefixes": []
           },
           {
@@ -103,7 +103,7 @@
           },
           {
             "text": "נַפְשְׁךָ",
-            "strong": "H5315",
+            "strong": "D0944",
             "prefixes": []
           },
           {
@@ -219,7 +219,7 @@
           },
           {
             "text": "הַדָּן",
-            "strong": "H4176",
+            "strong": "H1777",
             "prefixes": []
           },
           {
@@ -416,7 +416,7 @@
           },
           {
             "text": "תִּצְבֹּר",
-            "strong": "H2490",
+            "strong": "H6651",
             "prefixes": []
           },
           {
@@ -723,7 +723,7 @@
           },
           {
             "text": "נֶפֶשׁ",
-            "strong": "H5315",
+            "strong": "D0944",
             "prefixes": []
           },
           {
@@ -780,7 +780,7 @@
           },
           {
             "text": "הַיְּוָנִי׃",
-            "strong": "H3125",
+            "strong": "Hd/D0777",
             "prefixes": [
               "Hd"
             ]
@@ -861,7 +861,7 @@
           },
           {
             "text": "לַיְּוָנִי׃",
-            "strong": "H3125",
+            "strong": "Hl/D0777",
             "prefixes": [
               "Hl"
             ]
@@ -885,7 +885,7 @@
           },
           {
             "text": "מַשּׂא",
-            "strong": "H4716",
+            "strong": "H4856",
             "prefixes": []
           },
           {
@@ -1034,7 +1034,7 @@
           },
           {
             "text": "שֹׁמְעֵי",
-            "strong": "H4716",
+            "strong": "H8085",
             "prefixes": []
           },
           {
@@ -1159,7 +1159,7 @@
           },
           {
             "text": "מֵאֲלֵיהֶם",
-            "strong": "H3820",
+            "strong": "D0939",
             "prefixes": []
           },
           {
@@ -1191,7 +1191,7 @@
           },
           {
             "text": "לְנַפְשָׁם׃",
-            "strong": "Hl/H5315",
+            "strong": "Hl/D0944",
             "prefixes": [
               "Hl"
             ]
@@ -1493,7 +1493,7 @@
           },
           {
             "text": "מְלֻמָּד",
-            "strong": "H4176",
+            "strong": "H3925",
             "prefixes": []
           },
           {
@@ -1541,7 +1541,7 @@
           },
           {
             "text": "בְנַפְשְׁךָ",
-            "strong": "Hb/H5315",
+            "strong": "Hb/D0944",
             "prefixes": [
               "Hb"
             ]
@@ -1699,7 +1699,7 @@
           },
           {
             "text": "נַפְשְׁךָ",
-            "strong": "H5315",
+            "strong": "D0944",
             "prefixes": []
           },
           {
@@ -1758,7 +1758,7 @@
           },
           {
             "text": "תִנְאָף",
-            "strong": "H4716",
+            "strong": "H5003",
             "prefixes": []
           },
           {
@@ -1799,7 +1799,7 @@
           },
           {
             "text": "גֹּזֵל",
-            "strong": "H3820",
+            "strong": "H1497",
             "prefixes": []
           },
           {
@@ -1940,14 +1940,14 @@
           },
           {
             "text": "הַמִּילָה",
-            "strong": "Hd/H4135",
+            "strong": "Hd/D0411",
             "prefixes": [
               "Hd"
             ]
           },
           {
             "text": "מוֹעִילָה",
-            "strong": "H4716",
+            "strong": "H3276",
             "prefixes": []
           },
           {
@@ -2011,7 +2011,7 @@
           },
           {
             "text": "מִילָתְךָ",
-            "strong": "H3125",
+            "strong": "D0411",
             "prefixes": []
           },
           {
@@ -2106,7 +2106,7 @@
           },
           {
             "text": "לְמִילָה׃",
-            "strong": "Hl/H4135",
+            "strong": "Hl/D0411",
             "prefixes": [
               "Hl"
             ]
@@ -2194,7 +2194,7 @@
           },
           {
             "text": "וְהַמִּילָה",
-            "strong": "Hc/Hd/H4135",
+            "strong": "Hc/Hd/D0411",
             "prefixes": [
               "Hc",
               "Hd"
@@ -2294,7 +2294,7 @@
           },
           {
             "text": "הַמִּילָה׃",
-            "strong": "Hd/H4135",
+            "strong": "Hd/D0411",
             "prefixes": [
               "Hd"
             ]
@@ -2341,7 +2341,7 @@
           },
           {
             "text": "וּמִילָה",
-            "strong": "Hc/H4135",
+            "strong": "Hc/D0411",
             "prefixes": [
               "Hc"
             ]

@@ -1,0 +1,151 @@
+{
+  "issue": 369,
+  "rule": "Custom entries that main began referencing after #402 get a reviewed definition decision, so the publication rule approves them.",
+  "reviewer": "claude-delitzsch-review",
+  "decisions": [
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0227",
+      "hebrew": "נריא",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Nereus, a believer greeted in Romans 16:15.",
+        "text_es": "Nereo, creyente saludado en Romanos 16:15."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0227 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0229",
+      "hebrew": "לעזר",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Lazarus of Bethany, whom Jesus raised from the dead.",
+        "text_es": "Lázaro de Betania, a quien Jesús resucitó de entre los muertos."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0229 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0231",
+      "hebrew": "מתתא",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Matthat, an ancestor named in Luke's genealogy of Jesus.",
+        "text_es": "Matata, antepasado nombrado en la genealogía de Jesús según Lucas."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0231 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0232",
+      "hebrew": "ספק",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Doubt; uncertainty.",
+        "text_es": "Duda; incertidumbre."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0232 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0245",
+      "hebrew": "אישכריות",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Iscariot, the designation of Judas who betrayed Jesus.",
+        "text_es": "Iscariote, designación de Judas que entregó a Jesús."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0245 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0249",
+      "hebrew": "אריטוס",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Aretas, the Nabataean king named in 2 Corinthians 11:32.",
+        "text_es": "Aretas, rey nabateo nombrado en 2 Corintios 11:32."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0249 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0263",
+      "hebrew": "הדריוס",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Adriatic Sea, the sea through which Paul's ship was driven.",
+        "text_es": "Mar Adriático, mar por el que fue llevada la nave de Pablo."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0263 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0282",
+      "hebrew": "טַלְיָא",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "girl or young maiden, the Aramaic address in Jesus' command to rise.",
+        "text_es": "niña o joven, vocativo arameo en el mandato de Jesús de levantarse."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0282 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    }
+  ]
+}
