@@ -2,13 +2,14 @@
   "summary": {
     "total": 7360,
     "by_proposal": {
-      "change": 1022,
-      "keep": 2844,
-      "review": 3494
+      "change": 1037,
+      "keep": 2885,
+      "reject": 37,
+      "review": 3401
     },
     "by_review_status": {
-      "auto_accepted": 3866,
-      "review": 3494
+      "auto_accepted": 3922,
+      "review": 3438
     }
   },
   "metadata": {
@@ -2519,7 +2520,7 @@
       "current_root_ref": "H1095",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"or בֵּלְאשַׁצַּרlemma בֵּלְאשַׁצּר missing vowel, corrected to בֵּלְאשַׁצַּר; of foreign origin (compare H1095 (בֵּלְטְשַׁאצַּר));\", \"strong\": \"H1112\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -5197,7 +5198,7 @@
       "current_root_ref": "H5561",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"from an unused root meaning to be fragrant; (compare H5561 (סַם))\", \"strong\": \"H1313\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -5691,7 +5692,7 @@
       "current_root_ref": "H1460",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"from an unused root meaning to hollow or curve; (compare H1460 (גֵּו) and H1479 (גּוּף))\", \"strong\": \"H1354\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -6861,11 +6862,11 @@
       "current_root_ref": "H1438",
       "root_lemma": "גָּדַע",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H1438 (גָּדַע); warlike (compare H1439 (גִּדְעוֹן));\", \"strong\": \"H1441\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H1438",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H1438 (גָּדַע); warlike (compare H1439 (גִּדְעוֹן));\", \"strong\": \"H1441\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H1444",
@@ -9071,11 +9072,11 @@
       "current_root_ref": "H1641",
       "root_lemma": "גָּרַר",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"or (shortened) גָּרֹן; from H1641 (גָּרַר); (compare H1621 (גַּרְגְּרוֹת))\", \"strong\": \"H1627\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H1641",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"or (shortened) גָּרֹן; from H1641 (גָּרַר); (compare H1621 (גַּרְגְּרוֹת))\", \"strong\": \"H1627\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H1628",
@@ -9656,7 +9657,7 @@
       "current_root_ref": "H1680",
       "root_lemma": "דָּבַב",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"from an unused root (compare H1680 (דָּבַב)) (probably meaning to be sluggish, i.e. restful);\", \"strong\": \"H1679\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -9812,7 +9813,7 @@
       "current_root_ref": "H2082",
       "root_lemma": "זָבַל",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"from an unused root (akin to H2082 (זָבַל)) probably meaning to press together;\", \"strong\": \"H1690\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -9968,11 +9969,11 @@
       "current_root_ref": "H1696",
       "root_lemma": "דָבַר",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"feminine active participle of H1696 (דָבַר) in the sense of driving (compare H1699 (דֹּבֶר));\", \"strong\": \"H1702\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H1696",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"feminine active participle of H1696 (דָבַר) in the sense of driving (compare H1699 (דֹּבֶר));\", \"strong\": \"H1702\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H1703",
@@ -10475,7 +10476,7 @@
       "current_root_ref": "H1820",
       "root_lemma": "דָּמָה",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"from an unused root meaning to be dumb (compare H1820 (דָּמָה));\", \"strong\": \"H1745\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -11034,7 +11035,7 @@
       "current_root_ref": "H1794",
       "root_lemma": "דָּכָה",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"from an unused root (compare H1794 (דָּכָה));\", \"strong\": \"H1790\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -11333,11 +11334,11 @@
       "current_root_ref": "H1826",
       "root_lemma": "דָּמַם",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H1826 (דָּמַם) (compare H119 (אָדַם));\", \"strong\": \"H1818\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H1826",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H1826 (דָּמַם) (compare H119 (אָדַם));\", \"strong\": \"H1818\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H182",
@@ -12321,7 +12322,7 @@
       "current_root_ref": "H1897",
       "root_lemma": "הָגָה",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"from an unused root akin to H1897 (הָגָה);\", \"strong\": \"H1901\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -12412,7 +12413,7 @@
       "current_root_ref": "H111",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"probably of foreign origin (compare H111 (אֲדַד));\", \"strong\": \"H1908\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -12865,26 +12866,26 @@
       "lemma": "הוֹי",
       "normalized": "הוי",
       "current_root_ref": "H1930",
-      "root_lemma": "",
+      "root_lemma": "אֲהָהּ",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"a prolonged form of H1930 (הוֹ) (akin to H188 (אוֹי));\", \"strong\": \"H1945\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H162",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"a prolonged form of H1930 (הוֹ) (akin to H188 (אוֹי));\", \"strong\": \"H1945\"}, {\"derivation\": \"by permutation from H1929 (הָהּ);\", \"strong\": \"H1930\"}, {\"derivation\": \"a shortened form of H162 (אֲהָהּ);\", \"strong\": \"H1929\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H1946",
       "lemma": "הוּךְ",
       "normalized": "הוכ",
       "current_root_ref": "H1981",
-      "root_lemma": "",
+      "root_lemma": "הָלַךְ",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to H1981 (הֲלַךְ);\", \"strong\": \"H1946\"}, {\"derivation\": \"(Aramaic) corresponding to H1980 (הָלַךְ) (compare H1946 (הוּךְ));\", \"strong\": \"H1981\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H1980",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to H1981 (הֲלַךְ);\", \"strong\": \"H1946\"}, {\"derivation\": \"(Aramaic) corresponding to H1980 (הָלַךְ) (compare H1946 (הוּךְ));\", \"strong\": \"H1981\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H1947",
@@ -13309,11 +13310,11 @@
       "current_root_ref": "H1980",
       "root_lemma": "הָלַךְ",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to H1980 (הָלַךְ) (compare H1946 (הוּךְ));\", \"strong\": \"H1981\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H1980",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to H1980 (הָלַךְ) (compare H1946 (הוּךְ));\", \"strong\": \"H1981\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H1982",
@@ -13333,13 +13334,13 @@
       "lemma": "הֲלָךְ",
       "normalized": "הלכ",
       "current_root_ref": "H1981",
-      "root_lemma": "",
+      "root_lemma": "הָלַךְ",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) from H1981 (הֲלַךְ);\", \"strong\": \"H1983\"}, {\"derivation\": \"(Aramaic) corresponding to H1980 (הָלַךְ) (compare H1946 (הוּךְ));\", \"strong\": \"H1981\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H1980",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"(Aramaic) from H1981 (הֲלַךְ);\", \"strong\": \"H1983\"}, {\"derivation\": \"(Aramaic) corresponding to H1980 (הָלַךְ) (compare H1946 (הוּךְ));\", \"strong\": \"H1981\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H1985",
@@ -13442,7 +13443,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"or (prolonged) הֵמָּה; masculine plural from H1981 (הֲלַךְ);\", \"strong\": \"H1992\"}, {\"derivation\": \"(Aramaic) corresponding to H1980 (הָלַךְ) (compare H1946 (הוּךְ));\", \"strong\": \"H1981\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"or (prolonged) הֵמָּה; masculine plural (a pronoun Strong's misprints as a plural of halak; BDB gives no root);\", \"strong\": \"H1992\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -13455,7 +13456,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) or (prolonged) הִמּוֹן; (Aramaic), corresponding to H1992 (הֵם);\", \"strong\": \"H1994\"}, {\"derivation\": \"or (prolonged) הֵמָּה; masculine plural from H1981 (הֲלַךְ);\", \"strong\": \"H1992\"}, {\"derivation\": \"(Aramaic) corresponding to H1980 (הָלַךְ) (compare H1946 (הוּךְ));\", \"strong\": \"H1981\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) or (prolonged) הִמּוֹן; (Aramaic), corresponding to H1992 (הֵם);\", \"strong\": \"H1994\"}, {\"derivation\": \"or (prolonged) הֵמָּה; masculine plural (a pronoun Strong's misprints as a plural of halak; BDB gives no root);\", \"strong\": \"H1992\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -14791,7 +14792,7 @@
       "current_root_ref": "H2122",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"probably from an unused root meaning to be prominent; properly, brightness (compare H2122 (זִיו)), i.e. (figuratively) the month of flowers;\", \"strong\": \"H2099\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -15155,7 +15156,7 @@
       "current_root_ref": "H2099",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"probably from an unused root (akin to H2099 (זִו));\", \"strong\": \"H2132\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -15857,7 +15858,7 @@
       "current_root_ref": "H6819",
       "root_lemma": "צָעַר",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"from an unused root (akin (by permutation) to H6819 (צָעַר)), meaning to dwindle;\", \"strong\": \"H2191\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -16104,11 +16105,11 @@
       "current_root_ref": "H2114",
       "root_lemma": "זוּר",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H2114 (זוּר) (in the sense of estrangement) (compare H2219 (זָרָה));\", \"strong\": \"H2214\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H2114",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H2114 (זוּר) (in the sense of estrangement) (compare H2219 (זָרָה));\", \"strong\": \"H2214\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H2216",
@@ -16858,7 +16859,7 @@
       "current_root_ref": "H4227",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"from an unused root probably meaning to cook (compare H4227 (מַחֲבַת));\", \"strong\": \"H2281\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -16884,7 +16885,7 @@
       "current_root_ref": "H2287",
       "root_lemma": "חָגַג",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"from an unused root meaning to revolve (compare H2287 (חָגַג));\", \"strong\": \"H2283\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -19019,7 +19020,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H2490 (חָלַל);\", \"strong\": \"H2455\"}, {\"derivation\": \"a primitive root (compare H2470 (חָלָה)); also  denominative (from H2485 (חָלִיל))\", \"strong\": \"H2490\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"from H2490 (חָלַל);\", \"strong\": \"H2455\"}, {\"derivation\": \"a primitive root (compare H2470 (חָלָה)); also  denominative (from H2485 (חָלִיל))\", \"strong\": \"H2490\"}, {\"derivation\": \"from H2490 (חָלַל);\", \"strong\": \"H2485\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -19214,7 +19215,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H2490 (חָלַל);\", \"strong\": \"H2471\"}, {\"derivation\": \"a primitive root (compare H2470 (חָלָה)); also  denominative (from H2485 (חָלִיל))\", \"strong\": \"H2490\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"from H2490 (חָלַל);\", \"strong\": \"H2471\"}, {\"derivation\": \"a primitive root (compare H2470 (חָלָה)); also  denominative (from H2485 (חָלִיל))\", \"strong\": \"H2490\"}, {\"derivation\": \"from H2490 (חָלַל);\", \"strong\": \"H2485\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -19396,7 +19397,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H2490 (חָלַל);\", \"strong\": \"H2485\"}, {\"derivation\": \"a primitive root (compare H2470 (חָלָה)); also  denominative (from H2485 (חָלִיל))\", \"strong\": \"H2490\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"from H2490 (חָלַל);\", \"strong\": \"H2485\"}, {\"derivation\": \"a primitive root (compare H2470 (חָלָה)); also  denominative (from H2485 (חָלִיל))\", \"strong\": \"H2490\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -19409,7 +19410,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"or חָלִלָה; a directive from H2490 (חָלַל);\", \"strong\": \"H2486\"}, {\"derivation\": \"a primitive root (compare H2470 (חָלָה)); also  denominative (from H2485 (חָלִיל))\", \"strong\": \"H2490\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"or חָלִלָה; a directive from H2490 (חָלַל);\", \"strong\": \"H2486\"}, {\"derivation\": \"a primitive root (compare H2470 (חָלָה)); also  denominative (from H2485 (חָלִיל))\", \"strong\": \"H2490\"}, {\"derivation\": \"from H2490 (חָלַל);\", \"strong\": \"H2485\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -19471,10 +19472,10 @@
       "current_root_ref": "H2470",
       "root_lemma": "חָלָה",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"a primitive root (compare H2470 (חָלָה)); also  denominative (from H2485 (חָלִיל))\", \"strong\": \"H2490\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"a primitive root (compare H2470 (חָלָה)); also  denominative (from H2485 (חָלִיל))\", \"strong\": \"H2490\"}, {\"derivation\": \"from H2490 (חָלַל);\", \"strong\": \"H2485\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -19487,7 +19488,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H2490 (חָלַל);\", \"strong\": \"H2491\"}, {\"derivation\": \"a primitive root (compare H2470 (חָלָה)); also  denominative (from H2485 (חָלִיל))\", \"strong\": \"H2490\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"from H2490 (חָלַל);\", \"strong\": \"H2491\"}, {\"derivation\": \"a primitive root (compare H2470 (חָלָה)); also  denominative (from H2485 (חָלִיל))\", \"strong\": \"H2490\"}, {\"derivation\": \"from H2490 (חָלַל);\", \"strong\": \"H2485\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -20397,7 +20398,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H2560 (חָמַר) (compare H2563 (חֹמֶר));\", \"strong\": \"H2565\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"from H2560 (חָמַר) (compare H2563 (חֹמֶר));\", \"strong\": \"H2565\"}, {\"derivation\": \"a primitive root; also  as denominative (from H2564 (חֵמָר))\", \"strong\": \"H2560\"}, {\"derivation\": \"from H2560 (חָמַר);\", \"strong\": \"H2564\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -21432,13 +21433,13 @@
       "lemma": "חֻפִּים",
       "normalized": "חפימ",
       "current_root_ref": "H2646",
-      "root_lemma": "",
+      "root_lemma": "חָפָה",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"plural of H2646 (חֻפָּה) (compare H2349 (חוּפָם));\", \"strong\": \"H2650\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H2645",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"plural of H2646 (חֻפָּה) (compare H2349 (חוּפָם));\", \"strong\": \"H2650\"}, {\"derivation\": \"from H2645 (חָפָה);\", \"strong\": \"H2646\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H2651",
@@ -21824,10 +21825,10 @@
       "current_root_ref": "H2673",
       "root_lemma": "חָצָה",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"a primitive root (compare H2673 (חָצָה)lemma חָעָה ayin, corrected to חָצָה); also as denominative from H2671 (חֵץ)\", \"strong\": \"H2686\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"a primitive root (compare H2673 (חָצָה)lemma חָעָה ayin, corrected to חָצָה); also as denominative from H2671 (חֵץ)\", \"strong\": \"H2686\"}, {\"derivation\": \"from H2686 (חָצַץ); also by interchange for H6086 (עֵץ)\", \"strong\": \"H2671\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -22201,11 +22202,11 @@
       "current_root_ref": "H2787",
       "root_lemma": "חָרַר",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"or (fully) חוֹר; from H2787 (חָרַר); (compare H2751 (חֹרִי))\", \"strong\": \"H2715\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H2787",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"or (fully) חוֹר; from H2787 (חָרַר); (compare H2751 (חֹרִי))\", \"strong\": \"H2715\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H2716",
@@ -22422,11 +22423,11 @@
       "current_root_ref": "H2729",
       "root_lemma": "חָרַד",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"patrial from a derivative of H2729 (חָרַד) (compare H5878 (עֵין חֲרֹד));\", \"strong\": \"H2733\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H2729",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"patrial from a derivative of H2729 (חָרַד) (compare H5878 (עֵין חֲרֹד));\", \"strong\": \"H2733\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H2735",
@@ -22747,11 +22748,11 @@
       "current_root_ref": "H2782",
       "root_lemma": "חָרַץ",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"or חֲרִץ; from H2782 (חָרַץ); (compare H2742 (חֲרוּץ))\", \"strong\": \"H2757\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H2782",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"or חֲרִץ; from H2782 (חָרַץ); (compare H2742 (חֲרוּץ))\", \"strong\": \"H2757\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H2758",
@@ -24864,13 +24865,13 @@
       "lemma": "טַעַם",
       "normalized": "טעמ",
       "current_root_ref": "H2939",
-      "root_lemma": "",
+      "root_lemma": "טָעַם",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) from H2939 (טְעַם); compare H2940 (טַעַם))\", \"strong\": \"H2941\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H2938",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"(Aramaic) from H2939 (טְעַם); compare H2940 (טַעַם))\", \"strong\": \"H2941\"}, {\"derivation\": \"(Aramaic) corresponding to H2938 (טָעַם);\", \"strong\": \"H2939\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H2942",
@@ -25841,7 +25842,7 @@
       "current_root_ref": "H3709",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"a primitive word; in distinction from H3709 (כַּף), the closed one); used (as noun, adverb, etc.) in a great variety of applications, both literally and figuratively, both proximate and remote (as follows)\", \"strong\": \"H3027\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -32942,7 +32943,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from the same as H3589 (כִּיד) (compare H3539 (כַּדְכֹּד));\", \"strong\": \"H3590\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from the same as H3589 (כִּיד) (compare H3539 (כַּדְכֹּד));\", \"strong\": \"H3590\"}, {\"derivation\": \"from a primitive root meaning to strike;\", \"strong\": \"H3589\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -33108,11 +33109,11 @@
       "current_root_ref": "H3787",
       "root_lemma": "כָּשֵׁר",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H3787 (כָּשֵׁר); compare H6418 (פֶּלֶךְ)\", \"strong\": \"H3601\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H3787",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H3787 (כָּשֵׁר); compare H6418 (פֶּלֶךְ)\", \"strong\": \"H3601\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H3602",
@@ -33457,13 +33458,13 @@
       "lemma": "כְּלִיא",
       "normalized": "כליא",
       "current_root_ref": "H3627",
-      "root_lemma": "",
+      "root_lemma": "כָּלָא",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"or כְּלוּא; from H3627 (כְּלִי) (compare H3608 (כֶּלֶא));\", \"strong\": \"H3628\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H3607",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"or כְּלוּא; from H3607 (כָּלָא) (compare H3608 (כֶּלֶא));\", \"strong\": \"H3628\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H3629",
@@ -33652,13 +33653,13 @@
       "lemma": "כְּמוֹ",
       "normalized": "כמו",
       "current_root_ref": "H3651",
-      "root_lemma": "כּוּן",
+      "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "change",
-      "proposed_root_ref": "H3559",
-      "confidence": 0.99,
-      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"or כָּמוֹ; (compare H3651 (כֵּן));\", \"strong\": \"H3644\"}, {\"derivation\": \"from H3559 (כּוּן);\", \"strong\": \"H3651\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "auto_accepted"
+      "proposal": "reject",
+      "proposed_root_ref": null,
+      "confidence": 0.0,
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"or כָּמוֹ; (compare H3651 (כֵּן));\", \"strong\": \"H3644\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "review"
     },
     {
       "strong": "H3645",
@@ -33847,13 +33848,13 @@
       "lemma": "כְּנֵמָא",
       "normalized": "כנמא",
       "current_root_ref": "H3644",
-      "root_lemma": "כּוּן",
+      "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "change",
-      "proposed_root_ref": "H3559",
-      "confidence": 0.99,
-      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to H3644 (כְּמוֹ);\", \"strong\": \"H3660\"}, {\"derivation\": \"or כָּמוֹ; (compare H3651 (כֵּן));\", \"strong\": \"H3644\"}, {\"derivation\": \"from H3559 (כּוּן);\", \"strong\": \"H3651\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "auto_accepted"
+      "proposal": "review",
+      "proposed_root_ref": null,
+      "confidence": 0.0,
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to H3644 (כְּמוֹ);\", \"strong\": \"H3660\"}, {\"derivation\": \"or כָּמוֹ; (compare H3651 (כֵּן));\", \"strong\": \"H3644\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "review"
     },
     {
       "strong": "H3662",
@@ -33888,11 +33889,11 @@
       "current_root_ref": "H3665",
       "root_lemma": "כָּנַע",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H3665 (כָּנַע) in the sense of folding (compare H3664 (כָּנַס));\", \"strong\": \"H3666\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H3665",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H3665 (כָּנַע) in the sense of folding (compare H3664 (כָּנַס));\", \"strong\": \"H3666\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H3667",
@@ -35526,7 +35527,7 @@
       "current_root_ref": "H3802",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"or כֻּתֹּנֶת; from an unused root meaning to cover (compare H3802 (כָּתֵף));\", \"strong\": \"H3801\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -35903,7 +35904,7 @@
       "current_root_ref": "H738",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"or (Ezekiel 19:2) לְבִיָּא; irregular masculine plural לְבָאִים; irregular feminine plural לְבָאוֹת; from an unused root meaning;  compare H738 (אֲרִי)\", \"strong\": \"H3833\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -36202,7 +36203,7 @@
       "current_root_ref": "H3851",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"from an unused root meaning to glow (compare H3851 (לַהַב)) or else to be earnest (compare H3854 (לַהַג));\", \"strong\": \"H3855\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -36566,10 +36567,10 @@
       "current_root_ref": "H403",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"akin to H403 (אָכֵן);\", \"strong\": \"H389\"}, {\"derivation\": \"from H3559 (כּוּן) (compare H3651 (כֵּן));\", \"strong\": \"H403\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"akin to H403 (אָכֵן);\", \"strong\": \"H389\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -38334,11 +38335,11 @@
       "current_root_ref": "H3559",
       "root_lemma": "כּוּן",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H3559 (כּוּן) (compare H3651 (כֵּן));\", \"strong\": \"H403\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H3559",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H3559 (כּוּן) (compare H3651 (כֵּן));\", \"strong\": \"H403\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H4030",
@@ -39010,10 +39011,10 @@
       "current_root_ref": "H3808",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"a negative particle (akin to H3808 (לֹא));\", \"strong\": \"H408\"}, {\"derivation\": \"or לוֹא; or לֹה; (Deuteronomy 3:11), a primitive particle;\", \"strong\": \"H3808\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"a negative particle (akin to H3808 (לֹא));\", \"strong\": \"H408\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -39156,7 +39157,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to H408 (אַל)\", \"strong\": \"H409\"}, {\"derivation\": \"a negative particle (akin to H3808 (לֹא));\", \"strong\": \"H408\"}, {\"derivation\": \"or לוֹא; or לֹה; (Deuteronomy 3:11), a primitive particle;\", \"strong\": \"H3808\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to H408 (אַל)\", \"strong\": \"H409\"}, {\"derivation\": \"a negative particle (akin to H3808 (לֹא));\", \"strong\": \"H408\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -40100,13 +40101,13 @@
       "lemma": "מוֹצָאָה",
       "normalized": "מוצאה",
       "current_root_ref": "H4161",
-      "root_lemma": "",
+      "root_lemma": "יָצָא",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"feminine of H4161 (מוֹצָא); (marg.; compare H6675 (צוֹאָה))\", \"strong\": \"H4163\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H3318",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"feminine of H4161 (מוֹצָא); (marg.; compare H6675 (צוֹאָה))\", \"strong\": \"H4163\"}, {\"derivation\": \"or מֹצָאxlit môtsâ corrected to môtsâʼ; from H3318 (יָצָא);\", \"strong\": \"H4161\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H4164",
@@ -41197,7 +41198,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H2490 (חָלַל);\", \"strong\": \"H4247\"}, {\"derivation\": \"a primitive root (compare H2470 (חָלָה)); also  denominative (from H2485 (חָלִיל))\", \"strong\": \"H2490\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"from H2490 (חָלַל);\", \"strong\": \"H4247\"}, {\"derivation\": \"a primitive root (compare H2470 (חָלָה)); also  denominative (from H2485 (חָלִיל))\", \"strong\": \"H2490\"}, {\"derivation\": \"from H2490 (חָלַל);\", \"strong\": \"H2485\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -42507,11 +42508,11 @@
       "current_root_ref": "H3498",
       "root_lemma": "יָתַר",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H3498 (יָתַר); (compare H3499 (יֶתֶר))\", \"strong\": \"H4340\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H3498",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H3498 (יָתַר); (compare H3499 (יֶתֶר))\", \"strong\": \"H4340\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H4341",
@@ -42572,11 +42573,11 @@
       "current_root_ref": "H3527",
       "root_lemma": "כָּבַר",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H3527 (כָּבַר) in the sense of covering (compare H3531 (כְּבָרָה));\", \"strong\": \"H4345\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H3527",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H3527 (כָּבַר) in the sense of covering (compare H3531 (כְּבָרָה));\", \"strong\": \"H4345\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H4346",
@@ -42585,11 +42586,11 @@
       "current_root_ref": "H3527",
       "root_lemma": "כָּבַר",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H3527 (כָּבַר) in the sense of covering; (compare H4345 (מַכְבֵּר))\", \"strong\": \"H4346\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H3527",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H3527 (כָּבַר) in the sense of covering; (compare H4345 (מַכְבֵּר))\", \"strong\": \"H4346\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H4347",
@@ -43675,13 +43676,13 @@
       "lemma": "מְלִילָה",
       "normalized": "מלילה",
       "current_root_ref": "H4449",
-      "root_lemma": "",
+      "root_lemma": "מָלַל",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H4449 (מְלַל) (in the sense of cropping (compare H4135 (מוּל)));\", \"strong\": \"H4425\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H4448",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H4449 (מְלַל) (in the sense of cropping (compare H4135 (מוּל)));\", \"strong\": \"H4425\"}, {\"derivation\": \"(Aramaic) corresponding to H4448 (מָלַל);\", \"strong\": \"H4449\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H4426",
@@ -44054,11 +44055,11 @@
       "current_root_ref": "H3953",
       "root_lemma": "לָקַשׁ",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H3953 (לָקַשׁ); (compare H3954 (לֶקֶשׁ))\", \"strong\": \"H4456\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H3953",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H3953 (לָקַשׁ); (compare H3954 (לֶקֶשׁ))\", \"strong\": \"H4456\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H4457",
@@ -45864,7 +45865,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H5774 (עוּף) in the sense of covering with shade (compare H4155 (מוּעָף));\", \"strong\": \"H4588\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"from H5774 (עוּף) in the sense of covering with shade (compare H4155 (מוּעָף));\", \"strong\": \"H4588\"}, {\"derivation\": \"a primitive root; to cover (with wings or obscurity); hence (as denominative from H5775 (עוֹף))\", \"strong\": \"H5774\"}, {\"derivation\": \"from H5774 (עוּף);\", \"strong\": \"H5775\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -45965,11 +45966,11 @@
       "current_root_ref": "H5753",
       "root_lemma": "עָוָה",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H5753 (עָוָה); (compare H5856 (עִי))\", \"strong\": \"H4596\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H5753",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H5753 (עָוָה); (compare H5856 (עִי))\", \"strong\": \"H4596\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H4597",
@@ -47684,7 +47685,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from the same as H5348 (נָקֹד) in the denominative sense of herding (compare H5349 (נֹקֵד)); fold;\", \"strong\": \"H4719\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"from the same as H5348 (נָקֹד) in the denominative sense of herding (compare H5349 (נֹקֵד)); fold;\", \"strong\": \"H4719\"}, {\"derivation\": \"from an unused root meaning to mark (by puncturing or branding);\", \"strong\": \"H5348\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -48308,7 +48309,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H7231 (רָבַב); increase;\", \"strong\": \"H4764\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"from H7231 (רָבַב); increase;\", \"strong\": \"H4764\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}, {\"derivation\": \"from H7231 (רָבַב);\", \"strong\": \"H7233\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -48864,11 +48865,11 @@
       "current_root_ref": "H4754",
       "root_lemma": "מָרָא",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H4754 (מָרָא) in the sense of grossness, through the idea of domineering (compare H4756 (מָרֵא));\", \"strong\": \"H4806\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H4754",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H4754 (מָרָא) in the sense of grossness, through the idea of domineering (compare H4756 (מָרֵא));\", \"strong\": \"H4806\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H4807",
@@ -50710,11 +50711,11 @@
       "current_root_ref": "H8192",
       "root_lemma": "שָׁפָה",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H8192 (שָׁפָה) (compare H8198 (שִׁפְחָה));\", \"strong\": \"H4940\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H8192",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H8192 (שָׁפָה) (compare H8198 (שִׁפְחָה));\", \"strong\": \"H4940\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H4941",
@@ -50942,13 +50943,13 @@
       "lemma": "מַשְׂרֵקָה",
       "normalized": "משרקה",
       "current_root_ref": "H7796",
-      "root_lemma": "",
+      "root_lemma": "שָׁרַק",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"a form for H7796 (שׂוֹרֵק) used denominatively; vineyard;\", \"strong\": \"H4957\"}, {\"derivation\": \"the same as H8321 (שֹׂרֵק); a vine;\", \"strong\": \"H7796\"}, {\"derivation\": \"or שׂוֹרֵק; and (feminine) שֹׂרֵקָה; from H8319 (שָׁרַק) in the sense of redness (compare H8320 (שָׂרֻק));\", \"strong\": \"H8321\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H8319",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"a form for H7796 (שׂוֹרֵק) used denominatively; vineyard;\", \"strong\": \"H4957\"}, {\"derivation\": \"the same as H8321 (שֹׂרֵק); a vine;\", \"strong\": \"H7796\"}, {\"derivation\": \"or שׂוֹרֵק; and (feminine) שֹׂרֵקָה; from H8319 (שָׁרַק) in the sense of redness (compare H8320 (שָׂרֻק));\", \"strong\": \"H8321\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H4958",
@@ -54662,11 +54663,11 @@
       "current_root_ref": "H5287",
       "root_lemma": "נָעַר",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H5287 (נָעַר); (compare H5288 (נַעַר))\", \"strong\": \"H5290\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H5287",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H5287 (נָעַר); (compare H5288 (נַעַר))\", \"strong\": \"H5290\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H5291",
@@ -59394,7 +59395,7 @@
       "current_root_ref": "H5710",
       "root_lemma": "עָדָה",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"from an unused root meaning to set a period (compare H5710 (עָדָה), H5749 (עוּד));\", \"strong\": \"H5708\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -60619,7 +60620,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) or (feminine) אִנִּיןlemma אֵנִּין first vowel, corrected to אִנִּין; (Aramaic), corresponding to H1992 (הֵם);\", \"strong\": \"H581\"}, {\"derivation\": \"or (prolonged) הֵמָּה; masculine plural from H1981 (הֲלַךְ);\", \"strong\": \"H1992\"}, {\"derivation\": \"(Aramaic) corresponding to H1980 (הָלַךְ) (compare H1946 (הוּךְ));\", \"strong\": \"H1981\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) or (feminine) אִנִּיןlemma אֵנִּין first vowel, corrected to אִנִּין; (Aramaic), corresponding to H1992 (הֵם);\", \"strong\": \"H581\"}, {\"derivation\": \"or (prolonged) הֵמָּה; masculine plural (a pronoun Strong's misprints as a plural of halak; BDB gives no root);\", \"strong\": \"H1992\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -62553,24 +62554,24 @@
       "current_root_ref": "H5956",
       "root_lemma": "עָלַם",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H5956 (עָלַם); (compare H5959 (עַלְמָה))\", \"strong\": \"H5958\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H5956",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H5956 (עָלַם); (compare H5959 (עַלְמָה))\", \"strong\": \"H5958\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H5959",
       "lemma": "עַלְמָה",
       "normalized": "עלמה",
       "current_root_ref": "H5958",
-      "root_lemma": "",
+      "root_lemma": "עָלַם",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"feminine of H5958 (עֶלֶם);\", \"strong\": \"H5959\"}, {\"derivation\": \"from H5956 (עָלַם); (compare H5959 (עַלְמָה))\", \"strong\": \"H5958\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H5956",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"feminine of H5958 (עֶלֶם);\", \"strong\": \"H5959\"}, {\"derivation\": \"from H5956 (עָלַם); (compare H5959 (עַלְמָה))\", \"strong\": \"H5958\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H5960",
@@ -62590,13 +62591,13 @@
       "lemma": "עֲלָמוֹת",
       "normalized": "עלמות",
       "current_root_ref": "H5959",
-      "root_lemma": "",
+      "root_lemma": "עָלַם",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"plural of H5959 (עַלְמָה);\", \"strong\": \"H5961\"}, {\"derivation\": \"feminine of H5958 (עֶלֶם);\", \"strong\": \"H5959\"}, {\"derivation\": \"from H5956 (עָלַם); (compare H5959 (עַלְמָה))\", \"strong\": \"H5958\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H5956",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"plural of H5959 (עַלְמָה);\", \"strong\": \"H5961\"}, {\"derivation\": \"feminine of H5958 (עֶלֶם);\", \"strong\": \"H5959\"}, {\"derivation\": \"from H5956 (עָלַם); (compare H5959 (עַלְמָה))\", \"strong\": \"H5958\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H5962",
@@ -66557,11 +66558,11 @@
       "current_root_ref": "H6280",
       "root_lemma": "עָתַר",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H6280 (עָתַר); also compare H6279 (עָתַר)\", \"strong\": \"H6282\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H6280",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H6280 (עָתַר); also compare H6279 (עָתַר)\", \"strong\": \"H6282\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H6283",
@@ -68481,11 +68482,11 @@
       "current_root_ref": "H6461",
       "root_lemma": "פָּסַס",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H6461 (פָּסַס); properly, the palm (of the hand) or sole (of the foot) (compare H6447 (פַּס)); by implication (plural)\", \"strong\": \"H6446\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H6461",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H6461 (פָּסַס); properly, the palm (of the hand) or sole (of the foot) (compare H6447 (פַּס)); by implication (plural)\", \"strong\": \"H6446\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H6447",
@@ -69261,11 +69262,11 @@
       "current_root_ref": "H6565",
       "root_lemma": "פָּרַר",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"passive participle of H6565 (פָּרַר) in the sense of spreading out (compare H6524 (פָּרַח));\", \"strong\": \"H6517\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H6565",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"passive participle of H6565 (פָּרַר) in the sense of spreading out (compare H6524 (פָּרַח));\", \"strong\": \"H6517\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H6518",
@@ -69898,11 +69899,11 @@
       "current_root_ref": "H6567",
       "root_lemma": "פָּרָשׁ",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H6567 (פָּרָשׁ); (compare H5483 (סוּס))\", \"strong\": \"H6571\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H6567",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H6567 (פָּרָשׁ); (compare H5483 (סוּס))\", \"strong\": \"H6571\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H6572",
@@ -70483,7 +70484,7 @@
       "current_root_ref": "H6597",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"from an unused root meaning to open (the eyes); (compare H6597 (פִּתְאוֹם))\", \"strong\": \"H6621\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -70951,11 +70952,11 @@
       "current_root_ref": "H6658",
       "root_lemma": "צָדָה",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H6658 (צָדָה); (compare H6656 (צְדָא))\", \"strong\": \"H6660\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H6658",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H6658 (צָדָה); (compare H6656 (צְדָא))\", \"strong\": \"H6660\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H6661",
@@ -71708,7 +71709,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from the same as H6723 (צִיָּה) in the sense of conspicuousness (compare H5329 (נָצַח));\", \"strong\": \"H6725\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"from the same as H6723 (צִיָּה) in the sense of conspicuousness (compare H5329 (נָצַח));\", \"strong\": \"H6725\"}, {\"derivation\": \"from an unused root meaning to parch;\", \"strong\": \"H6723\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -71721,7 +71722,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"the same (regularly) as H6725 (צִיּוּן)lemma צִיוּן missing dagesh, corrected to צִיּוּן;\", \"strong\": \"H6726\"}, {\"derivation\": \"from the same as H6723 (צִיָּה) in the sense of conspicuousness (compare H5329 (נָצַח));\", \"strong\": \"H6725\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"the same (regularly) as H6725 (צִיּוּן)lemma צִיוּן missing dagesh, corrected to צִיּוּן;\", \"strong\": \"H6726\"}, {\"derivation\": \"from the same as H6723 (צִיָּה) in the sense of conspicuousness (compare H5329 (נָצַח));\", \"strong\": \"H6725\"}, {\"derivation\": \"from an unused root meaning to parch;\", \"strong\": \"H6723\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -73343,11 +73344,11 @@
       "current_root_ref": "H6887",
       "root_lemma": "צָרַר",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"or צָר; from H6887 (צָרַר); compare as in H6864 (צֹר)\", \"strong\": \"H6862\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H6887",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"or צָר; from H6887 (צָרַר); compare as in H6864 (צֹר)\", \"strong\": \"H6862\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H6863",
@@ -73419,13 +73420,13 @@
       "lemma": "צָרָה",
       "normalized": "צרה",
       "current_root_ref": "H6862",
-      "root_lemma": "",
+      "root_lemma": "צָרַר",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"feminine of H6862 (צַר);\", \"strong\": \"H6869\"}, {\"derivation\": \"or צָר; from H6887 (צָרַר); compare as in H6864 (צֹר)\", \"strong\": \"H6862\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H6887",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"feminine of H6862 (צַר);\", \"strong\": \"H6869\"}, {\"derivation\": \"or צָר; from H6887 (צָרַר); compare as in H6864 (צֹר)\", \"strong\": \"H6862\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H687",
@@ -74474,11 +74475,11 @@
       "current_root_ref": "H6960",
       "root_lemma": "קָוָה",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"or קָו; from H6960 (קָוָה) (compare H6961 (קָוֶה));\", \"strong\": \"H6957\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H6960",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"or קָו; from H6960 (קָוָה) (compare H6961 (קָוֶה));\", \"strong\": \"H6957\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H6959",
@@ -74643,11 +74644,11 @@
       "current_root_ref": "H6962",
       "root_lemma": "קוּט",
       "similarity": 0.0,
-      "proposal": "keep",
-      "proposed_root_ref": "H6962",
-      "confidence": 0.99,
-      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"a primitive root (identical with through the idea of severing oneself from (compare H6962 (קוּט)));\", \"strong\": \"H6973\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "auto_accepted"
+      "proposal": "reject",
+      "proposed_root_ref": null,
+      "confidence": 0.0,
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"a primitive root (identical with through the idea of severing oneself from (compare H6962 (קוּט)));\", \"strong\": \"H6973\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "review"
     },
     {
       "strong": "H6974",
@@ -74656,11 +74657,11 @@
       "current_root_ref": "H3364",
       "root_lemma": "יָקַץ",
       "similarity": 0.0,
-      "proposal": "keep",
-      "proposed_root_ref": "H3364",
-      "confidence": 0.99,
-      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"a primitive root (identical with through the idea of abruptness in starting up from sleep (compare H3364 (יָקַץ)));\", \"strong\": \"H6974\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "auto_accepted"
+      "proposal": "reject",
+      "proposed_root_ref": null,
+      "confidence": 0.0,
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"a primitive root (identical with through the idea of abruptness in starting up from sleep (compare H3364 (יָקַץ)));\", \"strong\": \"H6974\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "review"
     },
     {
       "strong": "H6975",
@@ -74706,13 +74707,13 @@
       "lemma": "קַו־קַו",
       "normalized": "קוקו",
       "current_root_ref": "H6957",
-      "root_lemma": "",
+      "root_lemma": "קָוָה",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H6957 (קַו) (in the sense of a fastening);\", \"strong\": \"H6978\"}, {\"derivation\": \"or קָו; from H6960 (קָוָה) (compare H6961 (קָוֶה));\", \"strong\": \"H6957\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H6960",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H6957 (קַו) (in the sense of a fastening);\", \"strong\": \"H6978\"}, {\"derivation\": \"or קָו; from H6960 (קָוָה) (compare H6961 (קָוֶה));\", \"strong\": \"H6957\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H6979",
@@ -76099,24 +76100,24 @@
       "current_root_ref": "H7096",
       "root_lemma": "קָצָה",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"or (negative only) קֵצֶה; from H7096 (קָצָה); (used in a great variety of applications and idioms; compare H7093 (קֵץ))\", \"strong\": \"H7097\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H7096",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"or (negative only) קֵצֶה; from H7096 (קָצָה); (used in a great variety of applications and idioms; compare H7093 (קֵץ))\", \"strong\": \"H7097\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H7098",
       "lemma": "קָצָה",
       "normalized": "קצה",
       "current_root_ref": "H7097",
-      "root_lemma": "",
+      "root_lemma": "קָצָה",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"feminine of H7097 (קָצֶה); (used like H7097 (קָצֶה))\", \"strong\": \"H7098\"}, {\"derivation\": \"or (negative only) קֵצֶה; from H7096 (קָצָה); (used in a great variety of applications and idioms; compare H7093 (קֵץ))\", \"strong\": \"H7097\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H7096",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"feminine of H7097 (קָצֶה); (used like H7097 (קָצֶה))\", \"strong\": \"H7098\"}, {\"derivation\": \"or (negative only) קֵצֶה; from H7096 (קָצָה); (used in a great variety of applications and idioms; compare H7093 (קֵץ))\", \"strong\": \"H7097\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H7099",
@@ -77126,7 +77127,7 @@
       "current_root_ref": "H431",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"(Aramaic) probably akin to H431 (אֲלוּ);\", \"strong\": \"H718\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -77740,7 +77741,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"by contracted from H7231 (רָבַב);\", \"strong\": \"H7227\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"by contracted from H7231 (רָבַב);\", \"strong\": \"H7227\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}, {\"derivation\": \"from H7231 (רָבַב);\", \"strong\": \"H7233\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -77766,7 +77767,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to H7227 (רַב)\", \"strong\": \"H7229\"}, {\"derivation\": \"by contracted from H7231 (רָבַב);\", \"strong\": \"H7227\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to H7227 (רַב)\", \"strong\": \"H7229\"}, {\"derivation\": \"by contracted from H7231 (רָבַב);\", \"strong\": \"H7227\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}, {\"derivation\": \"from H7231 (רָבַב);\", \"strong\": \"H7233\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -77792,7 +77793,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H7231 (רָבַב);\", \"strong\": \"H7230\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"from H7231 (רָבַב);\", \"strong\": \"H7230\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}, {\"derivation\": \"from H7231 (רָבַב);\", \"strong\": \"H7233\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -77802,10 +77803,10 @@
       "current_root_ref": "H7241",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}, {\"derivation\": \"from H7231 (רָבַב);\", \"strong\": \"H7233\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -77818,7 +77819,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H7231 (רָבַב);\", \"strong\": \"H7233\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"from H7231 (רָבַב);\", \"strong\": \"H7233\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -77844,7 +77845,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"feminine of H7227 (רַב); great;\", \"strong\": \"H7237\"}, {\"derivation\": \"by contracted from H7231 (רָבַב);\", \"strong\": \"H7227\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"feminine of H7227 (רַב); great;\", \"strong\": \"H7237\"}, {\"derivation\": \"by contracted from H7231 (רָבַב);\", \"strong\": \"H7227\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}, {\"derivation\": \"from H7231 (רָבַב);\", \"strong\": \"H7233\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -77870,7 +77871,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H7231 (רָבַב); or רִבּוֹא from H7231 (רָבַב);\", \"strong\": \"H7239\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"from H7231 (רָבַב); or רִבּוֹא from H7231 (רָבַב);\", \"strong\": \"H7239\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}, {\"derivation\": \"from H7231 (רָבַב);\", \"strong\": \"H7233\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -77896,7 +77897,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to H7239 (רִבּוֹ)\", \"strong\": \"H7240\"}, {\"derivation\": \"from H7231 (רָבַב); or רִבּוֹא from H7231 (רָבַב);\", \"strong\": \"H7239\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to H7239 (רִבּוֹ)\", \"strong\": \"H7240\"}, {\"derivation\": \"from H7231 (רָבַב); or רִבּוֹא from H7231 (רָבַב);\", \"strong\": \"H7239\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}, {\"derivation\": \"from H7231 (רָבַב);\", \"strong\": \"H7233\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -77909,7 +77910,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H7231 (רָבַב);\", \"strong\": \"H7241\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"from H7231 (רָבַב);\", \"strong\": \"H7241\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}, {\"derivation\": \"from H7231 (רָבַב);\", \"strong\": \"H7233\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -77961,7 +77962,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H7231 (רָבַב); multitude;\", \"strong\": \"H7245\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"from H7231 (רָבַב); multitude;\", \"strong\": \"H7245\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}, {\"derivation\": \"from H7231 (רָבַב);\", \"strong\": \"H7233\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -78130,7 +78131,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) from H7229 (רַב);\", \"strong\": \"H7260\"}, {\"derivation\": \"(Aramaic) corresponding to H7227 (רַב)\", \"strong\": \"H7229\"}, {\"derivation\": \"by contracted from H7231 (רָבַב);\", \"strong\": \"H7227\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"(Aramaic) from H7229 (רַב);\", \"strong\": \"H7260\"}, {\"derivation\": \"(Aramaic) corresponding to H7227 (רַב)\", \"strong\": \"H7229\"}, {\"derivation\": \"by contracted from H7231 (רָבַב);\", \"strong\": \"H7227\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}, {\"derivation\": \"from H7231 (רָבַב);\", \"strong\": \"H7233\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -78143,7 +78144,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) from H7260 (רַבְרַב);\", \"strong\": \"H7261\"}, {\"derivation\": \"(Aramaic) from H7229 (רַב);\", \"strong\": \"H7260\"}, {\"derivation\": \"(Aramaic) corresponding to H7227 (רַב)\", \"strong\": \"H7229\"}, {\"derivation\": \"by contracted from H7231 (רָבַב);\", \"strong\": \"H7227\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"(Aramaic) from H7260 (רַבְרַב);\", \"strong\": \"H7261\"}, {\"derivation\": \"(Aramaic) from H7229 (רַב);\", \"strong\": \"H7260\"}, {\"derivation\": \"(Aramaic) corresponding to H7227 (רַב)\", \"strong\": \"H7229\"}, {\"derivation\": \"by contracted from H7231 (רָבַב);\", \"strong\": \"H7227\"}, {\"derivation\": \"a primitive root; (compare H7241 (רָבִיב)); also as denominative from H7233 (רְבָבָה);\", \"strong\": \"H7231\"}, {\"derivation\": \"from H7231 (רָבַב);\", \"strong\": \"H7233\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -79167,11 +79168,11 @@
       "current_root_ref": "H7355",
       "root_lemma": "רָחַם",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H7355 (רָחַם); (compare H7356 (רַחַם))\", \"strong\": \"H7358\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H7355",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H7355 (רָחַם); (compare H7356 (רַחַם))\", \"strong\": \"H7358\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H7359",
@@ -79830,11 +79831,11 @@
       "current_root_ref": "H7426",
       "root_lemma": "רָמַם",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H7426 (רָמַם) in the sense of breeding (compare H7311 (רוּם));\", \"strong\": \"H7415\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H7426",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H7426 (רָמַם) in the sense of breeding (compare H7311 (רוּם));\", \"strong\": \"H7415\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H7416",
@@ -81780,11 +81781,11 @@
       "current_root_ref": "H7750",
       "root_lemma": "שׂוּט",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"for active part of H7750 (שׂוּט) (compare H7589 (שְׁאָט));\", \"strong\": \"H7590\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H7750",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"for active part of H7750 (שׂוּט) (compare H7589 (שְׁאָט));\", \"strong\": \"H7590\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H7591",
@@ -82706,7 +82707,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to the root of H7733 (שׁוֹבֵק);\", \"strong\": \"H7662\"}, {\"derivation\": \"active participle from a primitive root meaning to leave (compare H7662 (שְׁבַק)); forsaking;\", \"strong\": \"H7733\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to the root of H7733 (שׁוֹבֵק);\", \"strong\": \"H7662\"}, {\"derivation\": \"active participle from a primitive root meaning to leave (compare H7662 (שְׁבַק)); forsaking;\", \"strong\": \"H7733\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -83366,7 +83367,7 @@
       "current_root_ref": "H5375",
       "root_lemma": "נָשָׂא",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"from an unused root (akin to H5375 (נָשָׂא) and H7722 (שׁוֹא)) meaning to rise;\", \"strong\": \"H7721\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -83522,10 +83523,10 @@
       "current_root_ref": "H7662",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"active participle from a primitive root meaning to leave (compare H7662 (שְׁבַק)); forsaking;\", \"strong\": \"H7733\"}, {\"derivation\": \"(Aramaic) corresponding to the root of H7733 (שׁוֹבֵק);\", \"strong\": \"H7662\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"active participle from a primitive root meaning to leave (compare H7662 (שְׁבַק)); forsaking;\", \"strong\": \"H7733\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -84170,13 +84171,13 @@
       "lemma": "שׂוֹרֵק",
       "normalized": "שורק",
       "current_root_ref": "H8321",
-      "root_lemma": "",
+      "root_lemma": "שָׁרַק",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"the same as H8321 (שֹׂרֵק); a vine;\", \"strong\": \"H7796\"}, {\"derivation\": \"or שׂוֹרֵק; and (feminine) שֹׂרֵקָה; from H8319 (שָׁרַק) in the sense of redness (compare H8320 (שָׂרֻק));\", \"strong\": \"H8321\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H8319",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"the same as H8321 (שֹׂרֵק); a vine;\", \"strong\": \"H7796\"}, {\"derivation\": \"or שׂוֹרֵק; and (feminine) שֹׂרֵקָה; from H8319 (שָׁרַק) in the sense of redness (compare H8320 (שָׂרֻק));\", \"strong\": \"H8321\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H7798",
@@ -85004,7 +85005,7 @@
       "current_root_ref": "H7736",
       "root_lemma": "שׁוּד",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"a primitive root probably meaning to boil up (compare H7736 (שׁוּד)); used only as denominative from H7875 (שִׂיד);\", \"strong\": \"H7874\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -85134,11 +85135,11 @@
       "current_root_ref": "H7751",
       "root_lemma": "שׁוּט",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H7751 (שׁוּט); also compare H7752 (שׁוֹט)\", \"strong\": \"H7885\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H7751",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H7751 (שׁוּט); also compare H7752 (שׁוֹט)\", \"strong\": \"H7885\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H7886",
@@ -87032,7 +87033,7 @@
       "current_root_ref": "H8064",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"a primitive word (perhaps rather from through the idea of definite and conspicuous position; compare H8064 (שָׁמַיִם));\", \"strong\": \"H8034\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -87165,7 +87166,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"for H8039 (שִׁמְאָה) (compare H38 (אֲבִיָּם));\", \"strong\": \"H8043\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"for H8039 (שִׁמְאָה) (compare H38 (אֲבִיָּם));\", \"strong\": \"H8043\"}, {\"derivation\": \"perhaps for H8093 (שִׁמְעָה);\", \"strong\": \"H8039\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -87630,11 +87631,11 @@
       "current_root_ref": "H784",
       "root_lemma": "אֵשׁ",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from the same as H784 (אֵשׁ) (in the sense of pressing down firmly; compare H803 (אֲשׁוּיָה));\", \"strong\": \"H808\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H784",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from the same as H784 (אֵשׁ) (in the sense of pressing down firmly; compare H803 (אֲשׁוּיָה));\", \"strong\": \"H808\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H8081",
@@ -87745,13 +87746,13 @@
       "lemma": "אֲשִׁישָׁה",
       "normalized": "אשישה",
       "current_root_ref": "H808",
-      "root_lemma": "",
+      "root_lemma": "אֵשׁ",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"feminine of H808 (אָשִׁישׁ);\", \"strong\": \"H809\"}, {\"derivation\": \"from the same as H784 (אֵשׁ) (in the sense of pressing down firmly; compare H803 (אֲשׁוּיָה));\", \"strong\": \"H808\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H784",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"feminine of H808 (אָשִׁישׁ);\", \"strong\": \"H809\"}, {\"derivation\": \"from the same as H784 (אֵשׁ) (in the sense of pressing down firmly; compare H803 (אֲשׁוּיָה));\", \"strong\": \"H808\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H8090",
@@ -88280,37 +88281,37 @@
       "current_root_ref": "H8150",
       "root_lemma": "שָׁנַן",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H8150 (שָׁנַן); compare  H8143 (שֶׁנְהַבִּים)\", \"strong\": \"H8127\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H8150",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H8150 (שָׁנַן); compare  H8143 (שֶׁנְהַבִּים)\", \"strong\": \"H8127\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H8128",
       "lemma": "שֵׁן",
       "normalized": "שנ",
       "current_root_ref": "H8127",
-      "root_lemma": "",
+      "root_lemma": "שָׁנַן",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to H8127 (שֵׁן);\", \"strong\": \"H8128\"}, {\"derivation\": \"from H8150 (שָׁנַן); compare  H8143 (שֶׁנְהַבִּים)\", \"strong\": \"H8127\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H8150",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to H8127 (שֵׁן);\", \"strong\": \"H8128\"}, {\"derivation\": \"from H8150 (שָׁנַן); compare  H8143 (שֶׁנְהַבִּים)\", \"strong\": \"H8127\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H8129",
       "lemma": "שֵׁן",
       "normalized": "שנ",
       "current_root_ref": "H8127",
-      "root_lemma": "",
+      "root_lemma": "שָׁנַן",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"the same as H8127 (שֵׁן); crag;\", \"strong\": \"H8129\"}, {\"derivation\": \"from H8150 (שָׁנַן); compare  H8143 (שֶׁנְהַבִּים)\", \"strong\": \"H8127\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H8150",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"the same as H8127 (שֵׁן); crag;\", \"strong\": \"H8129\"}, {\"derivation\": \"from H8150 (שָׁנַן); compare  H8143 (שֶׁנְהַבִּים)\", \"strong\": \"H8127\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H813",
@@ -88803,7 +88804,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"a primitive root; to split or open, i.e. (literally, but only as denominative from H8179 (שַׁעַר)); compare see H7778 (שׁוֹעֵר)\", \"strong\": \"H8176\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"a primitive root; to split or open, i.e. (literally, but only as denominative from H8179 (שַׁעַר)); compare see H7778 (שׁוֹעֵר)\", \"strong\": \"H8176\"}, {\"derivation\": \"from H8176 (שָׁעַר) in its original sense;\", \"strong\": \"H8179\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -88842,7 +88843,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H8176 (שָׁעַר) in its original sense;\", \"strong\": \"H8179\"}, {\"derivation\": \"a primitive root; to split or open, i.e. (literally, but only as denominative from H8179 (שַׁעַר)); compare see H7778 (שׁוֹעֵר)\", \"strong\": \"H8176\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"from H8176 (שָׁעַר) in its original sense;\", \"strong\": \"H8179\"}, {\"derivation\": \"a primitive root; to split or open, i.e. (literally, but only as denominative from H8179 (שַׁעַר)); compare see H7778 (שׁוֹעֵר)\", \"strong\": \"H8176\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -88868,7 +88869,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H8176 (שָׁעַר);\", \"strong\": \"H8180\"}, {\"derivation\": \"a primitive root; to split or open, i.e. (literally, but only as denominative from H8179 (שַׁעַר)); compare see H7778 (שׁוֹעֵר)\", \"strong\": \"H8176\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"from H8176 (שָׁעַר);\", \"strong\": \"H8180\"}, {\"derivation\": \"a primitive root; to split or open, i.e. (literally, but only as denominative from H8179 (שַׁעַר)); compare see H7778 (שׁוֹעֵר)\", \"strong\": \"H8176\"}, {\"derivation\": \"from H8176 (שָׁעַר) in its original sense;\", \"strong\": \"H8179\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -88894,7 +88895,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H8176 (שָׁעַר);\", \"strong\": \"H8182\"}, {\"derivation\": \"a primitive root; to split or open, i.e. (literally, but only as denominative from H8179 (שַׁעַר)); compare see H7778 (שׁוֹעֵר)\", \"strong\": \"H8176\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"from H8176 (שָׁעַר);\", \"strong\": \"H8182\"}, {\"derivation\": \"a primitive root; to split or open, i.e. (literally, but only as denominative from H8179 (שַׁעַר)); compare see H7778 (שׁוֹעֵר)\", \"strong\": \"H8176\"}, {\"derivation\": \"from H8176 (שָׁעַר) in its original sense;\", \"strong\": \"H8179\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -88985,7 +88986,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"dual of H8179 (שַׁעַר); double gates;\", \"strong\": \"H8189\"}, {\"derivation\": \"from H8176 (שָׁעַר) in its original sense;\", \"strong\": \"H8179\"}, {\"derivation\": \"a primitive root; to split or open, i.e. (literally, but only as denominative from H8179 (שַׁעַר)); compare see H7778 (שׁוֹעֵר)\", \"strong\": \"H8176\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"dual of H8179 (שַׁעַר); double gates;\", \"strong\": \"H8189\"}, {\"derivation\": \"from H8176 (שָׁעַר) in its original sense;\", \"strong\": \"H8179\"}, {\"derivation\": \"a primitive root; to split or open, i.e. (literally, but only as denominative from H8179 (שַׁעַר)); compare see H7778 (שׁוֹעֵר)\", \"strong\": \"H8176\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -89060,11 +89061,11 @@
       "current_root_ref": "H8192",
       "root_lemma": "שָׁפָה",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"or שְׁפִי; from H8192 (שָׁפָה); baldness (compare H8205 (שְׁפִי));\", \"strong\": \"H8195\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H8192",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"or שְׁפִי; from H8192 (שָׁפָה); baldness (compare H8205 (שְׁפִי));\", \"strong\": \"H8195\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H8196",
@@ -89840,11 +89841,11 @@
       "current_root_ref": "H8259",
       "root_lemma": "שָׁקַף",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"passive participle of H8259 (שָׁקַף); (compare H8260 (שֶׁקֶף))\", \"strong\": \"H8261\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H8259",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"passive participle of H8259 (שָׁקַף); (compare H8260 (שֶׁקֶף))\", \"strong\": \"H8261\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H8263",
@@ -89918,11 +89919,11 @@
       "current_root_ref": "H8324",
       "root_lemma": "שָׁרַר",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H8324 (שָׁרַר); (compare H8306 (שָׁרִיר))\", \"strong\": \"H8270\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H8324",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H8324 (שָׁרַר); (compare H8306 (שָׁרִיר))\", \"strong\": \"H8270\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H8271",
@@ -90163,13 +90164,13 @@
       "lemma": "שָׂרוּק",
       "normalized": "שרוק",
       "current_root_ref": "H8321",
-      "root_lemma": "",
+      "root_lemma": "שָׁרַק",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"passive participle from the same as H8321 (שֹׂרֵק);\", \"strong\": \"H8291\"}, {\"derivation\": \"or שׂוֹרֵק; and (feminine) שֹׂרֵקָה; from H8319 (שָׁרַק) in the sense of redness (compare H8320 (שָׂרֻק));\", \"strong\": \"H8321\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H8319",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"passive participle from the same as H8321 (שֹׂרֵק);\", \"strong\": \"H8291\"}, {\"derivation\": \"or שׂוֹרֵק; and (feminine) שֹׂרֵקָה; from H8319 (שָׁרַק) in the sense of redness (compare H8320 (שָׂרֻק));\", \"strong\": \"H8321\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H8292",
@@ -90358,13 +90359,13 @@
       "lemma": "שְׂרִיקָה",
       "normalized": "שריקה",
       "current_root_ref": "H8321",
-      "root_lemma": "",
+      "root_lemma": "שָׁרַק",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from the same as H8321 (שֹׂרֵק) in the original sense of piercing;\", \"strong\": \"H8305\"}, {\"derivation\": \"or שׂוֹרֵק; and (feminine) שֹׂרֵקָה; from H8319 (שָׁרַק) in the sense of redness (compare H8320 (שָׂרֻק));\", \"strong\": \"H8321\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H8319",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from the same as H8321 (שֹׂרֵק) in the original sense of piercing;\", \"strong\": \"H8305\"}, {\"derivation\": \"or שׂוֹרֵק; and (feminine) שֹׂרֵקָה; from H8319 (שָׁרַק) in the sense of redness (compare H8320 (שָׂרֻק));\", \"strong\": \"H8321\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H8306",
@@ -90529,11 +90530,11 @@
       "current_root_ref": "H8319",
       "root_lemma": "שָׁרַק",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"or שׂוֹרֵק; and (feminine) שֹׂרֵקָה; from H8319 (שָׁרַק) in the sense of redness (compare H8320 (שָׂרֻק));\", \"strong\": \"H8321\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H8319",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"or שׂוֹרֵק; and (feminine) שֹׂרֵקָה; from H8319 (שָׁרַק) in the sense of redness (compare H8320 (שָׂרֻק));\", \"strong\": \"H8321\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H8322",
@@ -90568,11 +90569,11 @@
       "current_root_ref": "H8324",
       "root_lemma": "שָׁרַר",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H8324 (שָׁרַר) in the sense of twisting (compare H8270 (שֹׁר));\", \"strong\": \"H8326\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H8324",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H8324 (שָׁרַר) in the sense of twisting (compare H8270 (שֹׁר));\", \"strong\": \"H8326\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H8328",
@@ -90646,11 +90647,11 @@
       "current_root_ref": "H8327",
       "root_lemma": "שָׁרַשׁ",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H8327 (שָׁרַשׁ) (compare H8331 (שַׁרְשָׁה));\", \"strong\": \"H8333\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H8327",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H8327 (שָׁרַשׁ) (compare H8331 (שַׁרְשָׁה));\", \"strong\": \"H8333\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H8335",
@@ -90685,11 +90686,11 @@
       "current_root_ref": "H7797",
       "root_lemma": "שׂוּשׂ",
       "similarity": 0.0,
-      "proposal": "keep",
-      "proposed_root_ref": "H7797",
-      "confidence": 0.99,
-      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"masculine שִׁשָּׁה; a primitive number; compare H7797 (שׂוּשׂ)\", \"strong\": \"H8337\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "auto_accepted"
+      "proposal": "reject",
+      "proposed_root_ref": null,
+      "confidence": 0.0,
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"masculine שִׁשָּׁה; a primitive number; compare H7797 (שׂוּשׂ)\", \"strong\": \"H8337\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "review"
     },
     {
       "strong": "H8339",
@@ -90735,13 +90736,13 @@
       "lemma": "שָׁשָׁה",
       "normalized": "ששה",
       "current_root_ref": "H8337",
-      "root_lemma": "שׂוּשׂ",
+      "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "change",
-      "proposed_root_ref": "H7797",
-      "confidence": 0.99,
-      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"a denominative from H8337 (שֵׁשׁ);\", \"strong\": \"H8341\"}, {\"derivation\": \"masculine שִׁשָּׁה; a primitive number; compare H7797 (שׂוּשׂ)\", \"strong\": \"H8337\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "auto_accepted"
+      "proposal": "review",
+      "proposed_root_ref": null,
+      "confidence": 0.0,
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"a denominative from H8337 (שֵׁשׁ);\", \"strong\": \"H8341\"}, {\"derivation\": \"masculine שִׁשָּׁה; a primitive number; compare H7797 (שׂוּשׂ)\", \"strong\": \"H8337\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "review"
     },
     {
       "strong": "H8342",
@@ -90787,26 +90788,26 @@
       "lemma": "שִׁשִּׁי",
       "normalized": "ששי",
       "current_root_ref": "H8337",
-      "root_lemma": "שׂוּשׂ",
+      "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "change",
-      "proposed_root_ref": "H7797",
-      "confidence": 0.99,
-      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H8337 (שֵׁשׁ);\", \"strong\": \"H8345\"}, {\"derivation\": \"masculine שִׁשָּׁה; a primitive number; compare H7797 (שׂוּשׂ)\", \"strong\": \"H8337\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "auto_accepted"
+      "proposal": "review",
+      "proposed_root_ref": null,
+      "confidence": 0.0,
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H8337 (שֵׁשׁ);\", \"strong\": \"H8345\"}, {\"derivation\": \"masculine שִׁשָּׁה; a primitive number; compare H7797 (שׂוּשׂ)\", \"strong\": \"H8337\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "review"
     },
     {
       "strong": "H8346",
       "lemma": "שִׁשִּׁים",
       "normalized": "ששימ",
       "current_root_ref": "H8337",
-      "root_lemma": "שׂוּשׂ",
+      "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "change",
-      "proposed_root_ref": "H7797",
-      "confidence": 0.99,
-      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"multiple of H8337 (שֵׁשׁ);\", \"strong\": \"H8346\"}, {\"derivation\": \"masculine שִׁשָּׁה; a primitive number; compare H7797 (שׂוּשׂ)\", \"strong\": \"H8337\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "auto_accepted"
+      "proposal": "review",
+      "proposed_root_ref": null,
+      "confidence": 0.0,
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"multiple of H8337 (שֵׁשׁ);\", \"strong\": \"H8346\"}, {\"derivation\": \"masculine שִׁשָּׁה; a primitive number; compare H7797 (שׂוּשׂ)\", \"strong\": \"H8337\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "review"
     },
     {
       "strong": "H8347",
@@ -90904,13 +90905,13 @@
       "lemma": "שֵׁת",
       "normalized": "שת",
       "current_root_ref": "H8337",
-      "root_lemma": "שׂוּשׂ",
+      "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "change",
-      "proposed_root_ref": "H7797",
-      "confidence": 0.99,
-      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"(Aramaic) or שִׁת; (Aramaic), corresponding to H8337 (שֵׁשׁ);\", \"strong\": \"H8353\"}, {\"derivation\": \"masculine שִׁשָּׁה; a primitive number; compare H7797 (שׂוּשׂ)\", \"strong\": \"H8337\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "auto_accepted"
+      "proposal": "review",
+      "proposed_root_ref": null,
+      "confidence": 0.0,
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) or שִׁת; (Aramaic), corresponding to H8337 (שֵׁשׁ);\", \"strong\": \"H8353\"}, {\"derivation\": \"masculine שִׁשָּׁה; a primitive number; compare H7797 (שׂוּשׂ)\", \"strong\": \"H8337\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "review"
     },
     {
       "strong": "H8355",
@@ -91013,7 +91014,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to H8346 (שִׁשִּׁים) (compare H8353 (שֵׁת));\", \"strong\": \"H8361\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to H8346 (שִׁשִּׁים) (compare H8353 (שֵׁת));\", \"strong\": \"H8361\"}, {\"derivation\": \"multiple of H8337 (שֵׁשׁ);\", \"strong\": \"H8346\"}, {\"derivation\": \"masculine שִׁשָּׁה; a primitive number; compare H7797 (שׂוּשׂ)\", \"strong\": \"H8337\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -91101,11 +91102,11 @@
       "current_root_ref": "H8374",
       "root_lemma": "תָּאַב",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H8374 (תָּאַב) (compare H15 (אָבֶה));\", \"strong\": \"H8375\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H8374",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H8374 (תָּאַב) (compare H15 (אָבֶה));\", \"strong\": \"H8375\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H8377",
@@ -92300,7 +92301,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H2490 (חָלַל) in the sense of opening;\", \"strong\": \"H8462\"}, {\"derivation\": \"a primitive root (compare H2470 (חָלָה)); also  denominative (from H2485 (חָלִיל))\", \"strong\": \"H2490\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"from H2490 (חָלַל) in the sense of opening;\", \"strong\": \"H8462\"}, {\"derivation\": \"a primitive root (compare H2470 (חָלָה)); also  denominative (from H2485 (חָלִיל))\", \"strong\": \"H2490\"}, {\"derivation\": \"from H2490 (חָלַל);\", \"strong\": \"H2485\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -94286,24 +94287,24 @@
       "current_root_ref": "H6960",
       "root_lemma": "קָוָה",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H6960 (קָוָה); (compare H6961 (קָוֶה))\", \"strong\": \"H8615\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H6960",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H6960 (קָוָה); (compare H6961 (קָוֶה))\", \"strong\": \"H8615\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H8616",
       "lemma": "תִּקְוָה",
       "normalized": "תקוה",
       "current_root_ref": "H8615",
-      "root_lemma": "",
+      "root_lemma": "קָוָה",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"the same as H8615 (תִּקְוָה);\", \"strong\": \"H8616\"}, {\"derivation\": \"from H6960 (קָוָה); (compare H6961 (קָוֶה))\", \"strong\": \"H8615\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "change",
+      "proposed_root_ref": "H6960",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"the same as H8615 (תִּקְוָה);\", \"strong\": \"H8616\"}, {\"derivation\": \"from H6960 (קָוָה); (compare H6961 (קָוֶה))\", \"strong\": \"H8615\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H8617",
@@ -94770,7 +94771,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to H8179 (שַׁעַר);\", \"strong\": \"H8651\"}, {\"derivation\": \"from H8176 (שָׁעַר) in its original sense;\", \"strong\": \"H8179\"}, {\"derivation\": \"a primitive root; to split or open, i.e. (literally, but only as denominative from H8179 (שַׁעַר)); compare see H7778 (שׁוֹעֵר)\", \"strong\": \"H8176\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"(Aramaic) corresponding to H8179 (שַׁעַר);\", \"strong\": \"H8651\"}, {\"derivation\": \"from H8176 (שָׁעַר) in its original sense;\", \"strong\": \"H8179\"}, {\"derivation\": \"a primitive root; to split or open, i.e. (literally, but only as denominative from H8179 (שַׁעַר)); compare see H7778 (שׁוֹעֵר)\", \"strong\": \"H8176\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -94783,7 +94784,7 @@
       "proposal": "review",
       "proposed_root_ref": null,
       "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"(Aramaic) from H8651 (תְּרַע);\", \"strong\": \"H8652\"}, {\"derivation\": \"(Aramaic) corresponding to H8179 (שַׁעַר);\", \"strong\": \"H8651\"}, {\"derivation\": \"from H8176 (שָׁעַר) in its original sense;\", \"strong\": \"H8179\"}, {\"derivation\": \"a primitive root; to split or open, i.e. (literally, but only as denominative from H8179 (שַׁעַר)); compare see H7778 (שׁוֹעֵר)\", \"strong\": \"H8176\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "reason": "{\"conclusion\": \"Cyclic derivation references require review.\", \"evidence\": [{\"derivation\": \"(Aramaic) from H8651 (תְּרַע);\", \"strong\": \"H8652\"}, {\"derivation\": \"(Aramaic) corresponding to H8179 (שַׁעַר);\", \"strong\": \"H8651\"}, {\"derivation\": \"from H8176 (שָׁעַר) in its original sense;\", \"strong\": \"H8179\"}, {\"derivation\": \"a primitive root; to split or open, i.e. (literally, but only as denominative from H8179 (שַׁעַר)); compare see H7778 (שׁוֹעֵר)\", \"strong\": \"H8176\"}], \"method\": \"unique_cited_derivation_v1\"}",
       "review_status": "review"
     },
     {
@@ -94858,7 +94859,7 @@
       "current_root_ref": "H8659",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"probably of foreign derivation (compare H8659 (תַּרְשִׁישׁ));\", \"strong\": \"H8658\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -95391,7 +95392,7 @@
       "current_root_ref": "H90",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"of uncertain derivation (compare H90 (אֲגַג));\", \"strong\": \"H89\"}], \"method\": \"unique_cited_derivation_v1\"}",
@@ -95521,11 +95522,11 @@
       "current_root_ref": "H6",
       "root_lemma": "אָבַד",
       "similarity": 0.0,
-      "proposal": "review",
-      "proposed_root_ref": null,
-      "confidence": 0.0,
-      "reason": "{\"conclusion\": \"No unique cited derivation: missing, compound or alternative roots.\", \"evidence\": [{\"derivation\": \"from H6 (אָבַד); Compare H10 (אֲבַדֹּה).\", \"strong\": \"H9\"}], \"method\": \"unique_cited_derivation_v1\"}",
-      "review_status": "review"
+      "proposal": "keep",
+      "proposed_root_ref": "H6",
+      "confidence": 0.99,
+      "reason": "{\"conclusion\": \"Unique source-supported chain to existing root.\", \"evidence\": [{\"derivation\": \"from H6 (אָבַד); Compare H10 (אֲבַדֹּה).\", \"strong\": \"H9\"}], \"method\": \"unique_cited_derivation_v1\"}",
+      "review_status": "auto_accepted"
     },
     {
       "strong": "H90",
@@ -95534,7 +95535,7 @@
       "current_root_ref": "H89",
       "root_lemma": "",
       "similarity": 0.0,
-      "proposal": "review",
+      "proposal": "reject",
       "proposed_root_ref": null,
       "confidence": 0.0,
       "reason": "{\"conclusion\": \"Source explicitly qualifies or leaves the derivation uncertain.\", \"evidence\": [{\"derivation\": \"or אֲגָג; of uncertain derivation (compare H89 (אָגֵא)); flame;\", \"strong\": \"H90\"}], \"method\": \"unique_cited_derivation_v1\"}",

@@ -30,8 +30,8 @@
   "root_ref": "H5956",
   "root_adjudication": {
     "method": "unique_cited_derivation_v1",
-    "status": "unresolved",
-    "confidence": 0.0,
+    "status": "accepted",
+    "confidence": 0.99,
     "original_root_ref": "H5956"
   }
 }
