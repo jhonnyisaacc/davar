@@ -45218,8 +45218,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H1438"
     }
   },
@@ -58539,8 +58539,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H1641"
     }
   },
@@ -61254,7 +61254,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H1680",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -62662,7 +62661,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H2082",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 5,
@@ -65306,8 +65304,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H1696"
     }
   },
@@ -69667,7 +69665,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H1820",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 2,
@@ -74020,7 +74017,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H1794",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 4,
@@ -76209,8 +76205,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H1826"
     }
   },
@@ -82889,7 +82885,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H1897",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 2,
@@ -85749,10 +85744,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H1930"
-    }
+    },
+    "root_ref": "H162"
   },
   "H1946": {
     "strong_number": "H1946",
@@ -85812,10 +85808,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H1981"
-    }
+    },
+    "root_ref": "H1980"
   },
   "H1947": {
     "strong_number": "H1947",
@@ -88013,8 +88010,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H1980"
     }
   },
@@ -88131,10 +88128,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H1981"
-    }
+    },
+    "root_ref": "H1980"
   },
   "H1985": {
     "strong_number": "H1985",
@@ -108486,7 +108484,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H6819",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 3,
@@ -110064,8 +110061,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H2114"
     }
   },
@@ -115190,7 +115187,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H2287",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -132608,7 +132604,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H2470",
     "instance_policy_version": "1.1",
     "instance_tier": "medium",
     "instance_total": 132,
@@ -146355,10 +146350,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H2646"
-    }
+    },
+    "root_ref": "H2645"
   },
   "H2651": {
     "strong_number": "H2651",
@@ -148557,7 +148553,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H2673",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 3,
@@ -151422,8 +151417,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H2787"
     }
   },
@@ -153431,8 +153426,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H2729"
     }
   },
@@ -154947,8 +154942,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H2782"
     }
   },
@@ -167477,10 +167472,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H2939"
-    }
+    },
+    "root_ref": "H2938"
   },
   "H2942": {
     "strong_number": "H2942",
@@ -240276,8 +240272,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H3787"
     }
   },
@@ -247614,10 +247610,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H3627"
-    }
+    },
+    "root_ref": "H3607"
   },
   "H3629": {
     "strong_number": "H3629",
@@ -248772,7 +248769,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3559",
     "instance_policy_version": "1.1",
     "instance_tier": "medium",
     "instance_total": 126,
@@ -248782,8 +248778,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3651"
     }
   },
@@ -251237,7 +251233,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3559",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 5,
@@ -251247,8 +251242,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3644"
     }
   },
@@ -251402,8 +251397,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H3665"
     }
   },
@@ -289013,8 +289008,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H3559"
     }
   },
@@ -307530,10 +307525,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H4161"
-    }
+    },
+    "root_ref": "H3318"
   },
   "H4164": {
     "strong_number": "H4164",
@@ -327556,8 +327552,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H3498"
     }
   },
@@ -327833,8 +327829,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H3527"
     }
   },
@@ -327886,8 +327882,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H3527"
     }
   },
@@ -334555,10 +334551,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H4449"
-    }
+    },
+    "root_ref": "H4448"
   },
   "H4426": {
     "strong_number": "H4426",
@@ -339283,8 +339280,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H3953"
     }
   },
@@ -351779,8 +351776,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H5753"
     }
   },
@@ -370667,8 +370664,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H4754"
     }
   },
@@ -381833,8 +381830,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8192"
     }
   },
@@ -383813,10 +383810,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H7796"
-    }
+    },
+    "root_ref": "H8319"
   },
   "H4958": {
     "strong_number": "H4958",
@@ -409806,8 +409804,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H5287"
     }
   },
@@ -440732,7 +440730,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H5710",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -469947,8 +469944,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H5956"
     }
   },
@@ -470004,10 +470001,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H5958"
-    }
+    },
+    "root_ref": "H5956"
   },
   "H5960": {
     "strong_number": "H5960",
@@ -470088,10 +470086,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H5959"
-    }
+    },
+    "root_ref": "H5956"
   },
   "H5962": {
     "strong_number": "H5962",
@@ -498688,8 +498687,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6280"
     }
   },
@@ -512727,8 +512726,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6461"
     }
   },
@@ -516944,8 +516943,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6565"
     }
   },
@@ -520649,8 +520648,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6567"
     }
   },
@@ -527353,8 +527352,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6658"
     }
   },
@@ -541475,8 +541474,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6887"
     }
   },
@@ -542020,10 +542019,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6862"
-    }
+    },
+    "root_ref": "H6887"
   },
   "H687": {
     "strong_number": "H687",
@@ -548954,8 +548954,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6960"
     }
   },
@@ -550793,7 +550793,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H6962",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 9,
@@ -550803,8 +550802,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H6962"
     }
   },
@@ -550881,7 +550880,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3364",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 22,
@@ -550891,8 +550889,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3364"
     }
   },
@@ -551120,10 +551118,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6957"
-    }
+    },
+    "root_ref": "H6960"
   },
   "H6979": {
     "strong_number": "H6979",
@@ -559051,8 +559050,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H7096"
     }
   },
@@ -559154,10 +559153,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H7097"
-    }
+    },
+    "root_ref": "H7096"
   },
   "H7099": {
     "strong_number": "H7099",
@@ -580662,8 +580662,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H7355"
     }
   },
@@ -584461,8 +584461,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H7426"
     }
   },
@@ -597201,8 +597201,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H7750"
     }
   },
@@ -607849,7 +607849,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H5375",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -614487,10 +614486,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8321"
-    }
+    },
+    "root_ref": "H8319"
   },
   "H7798": {
     "strong_number": "H7798",
@@ -618085,7 +618085,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H7736",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 2,
@@ -618639,8 +618638,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H7751"
     }
   },
@@ -639472,8 +639471,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H784"
     }
   },
@@ -640647,10 +640646,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H808"
-    }
+    },
+    "root_ref": "H784"
   },
   "H8090": {
     "strong_number": "H8090",
@@ -643604,8 +643604,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8150"
     }
   },
@@ -643653,10 +643653,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8127"
-    }
+    },
+    "root_ref": "H8150"
   },
   "H8129": {
     "strong_number": "H8129",
@@ -643704,10 +643705,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8127"
-    }
+    },
+    "root_ref": "H8150"
   },
   "H813": {
     "strong_number": "H813",
@@ -651105,8 +651107,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8192"
     }
   },
@@ -654753,8 +654755,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8259"
     }
   },
@@ -656131,8 +656133,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8324"
     }
   },
@@ -657230,10 +657232,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8321"
-    }
+    },
+    "root_ref": "H8319"
   },
   "H8292": {
     "strong_number": "H8292",
@@ -658139,10 +658142,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8321"
-    }
+    },
+    "root_ref": "H8319"
   },
   "H8306": {
     "strong_number": "H8306",
@@ -658850,8 +658854,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8319"
     }
   },
@@ -659025,8 +659029,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8324"
     }
   },
@@ -659420,8 +659424,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8327"
     }
   },
@@ -660037,7 +660041,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H7797",
     "instance_policy_version": "1.1",
     "instance_tier": "medium",
     "instance_total": 202,
@@ -660047,8 +660050,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H7797"
     }
   },
@@ -665256,7 +665259,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H7797",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -665266,8 +665268,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H8337"
     }
   },
@@ -665541,7 +665543,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H7797",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 26,
@@ -665551,8 +665552,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H8337"
     }
   },
@@ -665697,7 +665698,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H7797",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 56,
@@ -665707,8 +665707,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H8337"
     }
   },
@@ -666181,7 +666181,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H7797",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 2,
@@ -666191,8 +666190,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H8337"
     }
   },
@@ -667059,8 +667058,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8374"
     }
   },
@@ -696797,8 +696796,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6960"
     }
   },
@@ -696871,10 +696870,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8615"
-    }
+    },
+    "root_ref": "H6960"
   },
   "H8617": {
     "strong_number": "H8617",
@@ -703616,8 +703616,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6"
     }
   },

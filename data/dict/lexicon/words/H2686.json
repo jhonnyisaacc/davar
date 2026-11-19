@@ -65,7 +65,6 @@
     ]
   },
   "is_root": false,
-  "root_ref": "H2673",
   "root_adjudication": {
     "method": "unique_cited_derivation_v1",
     "status": "unresolved",
