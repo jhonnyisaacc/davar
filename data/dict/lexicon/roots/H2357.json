@@ -8,18 +8,11 @@
   "translit_es": "javar",
   "definitions": [
     {
-      "text_en": "be",
+      "text_en": "be or grow white",
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "ser"
-    },
-    {
-      "text_en": "grow white",
-      "source": "bdb",
-      "order": 2,
-      "sense": "0",
-      "text_es": "volverse blanco"
+      "text_es": "estar o volverse blanco"
     },
     {
       "text_en": "pale",

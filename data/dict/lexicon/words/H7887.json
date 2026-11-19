@@ -8,16 +8,11 @@
   "translit_es": "shiyloh",
   "definitions": [
     {
-      "text_en": "he whose it is",
+      "text_en": "he whose it is or that which belongs to him",
       "source": "bdb",
       "order": 1,
-      "sense": "0"
-    },
-    {
-      "text_en": "that which belongs to him",
-      "source": "bdb",
-      "order": 2,
-      "sense": "0"
+      "sense": "0",
+      "text_es": "aquel a quien pertenece o lo que le pertenece"
     }
   ],
   "sources": {

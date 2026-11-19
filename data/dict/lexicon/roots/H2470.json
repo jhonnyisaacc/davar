@@ -22,18 +22,11 @@
       "text_es": "enfermo"
     },
     {
-      "text_en": "be",
+      "text_en": "be or become weak",
       "source": "bdb",
       "order": 3,
       "sense": "1",
-      "text_es": "ser"
-    },
-    {
-      "text_en": "become weak",
-      "source": "bdb",
-      "order": 4,
-      "sense": "1",
-      "text_es": "debilitarse"
+      "text_es": "ser o volverse débil"
     },
     {
       "text_en": "become sick",

@@ -84,7 +84,7 @@
           },
           {
             "text": "נִסְיוֹן",
-            "strong": "H7971",
+            "strong": "D0428",
             "prefixes": []
           },
           {
@@ -101,12 +101,12 @@
           },
           {
             "text": "שִׂמְחָתָם",
-            "strong": "H2581",
+            "strong": "H8057",
             "prefixes": []
           },
           {
             "text": "וְדֹחַק",
-            "strong": "H3642",
+            "strong": "Hc/D0470",
             "prefixes": [
               "Hc"
             ]
@@ -237,12 +237,12 @@
           },
           {
             "text": "חֲבֵרֵינוּ",
-            "strong": "H2581",
+            "strong": "H2270",
             "prefixes": []
           },
           {
             "text": "בִּגְמִילוּת",
-            "strong": "H3642",
+            "strong": "Hb/D0471",
             "prefixes": [
               "Hb"
             ]
@@ -398,7 +398,7 @@
           },
           {
             "text": "הֵחֵל",
-            "strong": "H2490",
+            "strong": "D0772",
             "prefixes": []
           },
           {
@@ -432,7 +432,7 @@
           },
           {
             "text": "גְּמִילוּת",
-            "strong": "H1361",
+            "strong": "D0471",
             "prefixes": []
           },
           {
@@ -489,7 +489,7 @@
           },
           {
             "text": "וּבְדִבּוּר",
-            "strong": "H2581",
+            "strong": "Hc/Hb/D0321",
             "prefixes": [
               "Hc",
               "Hb"
@@ -513,7 +513,7 @@
           },
           {
             "text": "זְרִיזוּת",
-            "strong": "H157",
+            "strong": "D0465",
             "prefixes": []
           },
           {
@@ -589,7 +589,7 @@
           },
           {
             "text": "צִוּוּי",
-            "strong": "H3502",
+            "strong": "D0634",
             "prefixes": []
           },
           {
@@ -621,7 +621,7 @@
           },
           {
             "text": "זְרִיזוּת",
-            "strong": "H7964",
+            "strong": "D0465",
             "prefixes": []
           },
           {
@@ -641,12 +641,12 @@
           },
           {
             "text": "אֲמִתֻּת",
-            "strong": "H8244",
+            "strong": "D0516",
             "prefixes": []
           },
           {
             "text": "אַהֲבַתְכֶם׃",
-            "strong": "H3519",
+            "strong": "H160",
             "prefixes": []
           }
         ]
@@ -971,7 +971,7 @@
           },
           {
             "text": "יְכָלְתְּכֶם׃",
-            "strong": "H5674",
+            "strong": "D0309",
             "prefixes": []
           }
         ]
@@ -1012,7 +1012,7 @@
           },
           {
             "text": "רְצוּיָה",
-            "strong": "H2581",
+            "strong": "H7521",
             "prefixes": []
           },
           {
@@ -1147,7 +1147,7 @@
           },
           {
             "text": "בְּשִׁוּוּי",
-            "strong": "H7964",
+            "strong": "Hb/D0469",
             "prefixes": [
               "Hb"
             ]
@@ -1183,7 +1183,7 @@
           },
           {
             "text": "מַחְסוֹרָם׃",
-            "strong": "H905",
+            "strong": "H4270",
             "prefixes": []
           }
         ]
@@ -1224,7 +1224,7 @@
           },
           {
             "text": "מַחְסוֹרְכֶם",
-            "strong": "H2581",
+            "strong": "H4270",
             "prefixes": []
           },
           {
@@ -1351,7 +1351,7 @@
           },
           {
             "text": "בִּשְׁקִידָה",
-            "strong": "H157",
+            "strong": "Hb/D0464",
             "prefixes": [
               "Hb"
             ]
@@ -1389,7 +1389,7 @@
           },
           {
             "text": "וּבִשְׁקִידָתוֹ",
-            "strong": "H8245",
+            "strong": "Hc/Hb/D0464",
             "prefixes": [
               "Hc",
               "Hb"
@@ -1397,7 +1397,7 @@
           },
           {
             "text": "הַיְתֵרָה",
-            "strong": "H3502",
+            "strong": "Hd/D0324",
             "prefixes": [
               "Hd"
             ]
@@ -1419,7 +1419,7 @@
           },
           {
             "text": "נַפְשׁוֹ׃",
-            "strong": "H5315",
+            "strong": "D0944",
             "prefixes": []
           }
         ]
@@ -1567,7 +1567,7 @@
           },
           {
             "text": "הַגָּבוּי",
-            "strong": "H1361",
+            "strong": "Hd/D0323",
             "prefixes": [
               "Hd"
             ]
@@ -1652,7 +1652,7 @@
           },
           {
             "text": "דִּבָּה",
-            "strong": "H3642",
+            "strong": "H1681",
             "prefixes": []
           },
           {
@@ -1683,7 +1683,7 @@
           },
           {
             "text": "הַגְּבוּיָה",
-            "strong": "H942",
+            "strong": "Hd/D0323",
             "prefixes": [
               "Hd"
             ]
@@ -1828,7 +1828,7 @@
           },
           {
             "text": "שְׁקִידָתוֹ",
-            "strong": "H7522",
+            "strong": "D0464",
             "prefixes": []
           },
           {
@@ -2068,7 +2068,7 @@
           },
           {
             "text": "תְּהִלָּתֵנוּ",
-            "strong": "H7964",
+            "strong": "H8416",
             "prefixes": []
           },
           {

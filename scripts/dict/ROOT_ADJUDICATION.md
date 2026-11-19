@@ -22,13 +22,17 @@ evidence. Individual sources and consolidated output are updated together;
 subsequent lexicon builds use the same source-chain rule. Original links remain
 in adjudication metadata. Re-running application changes zero entries.
 
-Results: 1,041 links now reach a cited canonical root; 2,090 invalid canonical
+Results: 1,022 links now reach a cited canonical root; 2,090 invalid canonical
 links were removed, with explicit unresolved metadata. Missing root targets
-fall from 3,131 to zero. There are 3,475 unresolved semantic decisions, including
-2,961 entries without a canonical link. Existing valid but uncertain links are
+fall from 3,131 to zero. There are 3,494 unresolved semantic decisions, including
+2,980 entries without a canonical link. Existing valid but uncertain links are
 retained for review. Every one of 246 orphan roots is explicitly retained as a
 standalone canonical primitive lexeme; having no unambiguously derived child
-is not grounds for deleting a lexical entry.
+is not grounds for deleting a lexical entry. A word cited only "in distinction
+from" is a contrast, not a derivation, so יָד H3027 and the words derived from
+it (יָדָה, יְהוּדָה, יְהוּדִי, תּוֹדָה) no longer link to כָּפַף H3721. When an
+entry becomes unresolved, a link that only an earlier pass made is dropped;
+only the original link is retained.
 
 No definitions, instance sets, transliterations or other unrelated fields were
 changed. Static served root links match individual sources. The report does

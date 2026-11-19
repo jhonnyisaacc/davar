@@ -8,17 +8,11 @@
   "translit_es": "raanan",
   "definitions": [
     {
-      "text_en": "be",
+      "text_en": "be or grow luxuriant",
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "ser"
-    },
-    {
-      "text_en": "grow luxuriant",
-      "source": "bdb",
-      "order": 2,
-      "sense": "0"
+      "text_es": "estar o volverse frondoso"
     },
     {
       "text_en": "fresh",

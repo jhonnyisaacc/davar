@@ -15,16 +15,11 @@
       "text_es": "soplar"
     },
     {
-      "text_en": "the breath of",
+      "text_en": "the breath of YHWH has blown upon it",
       "source": "bdb",
       "order": 2,
-      "sense": "0"
-    },
-    {
-      "text_en": "has blown upon it",
-      "source": "bdb",
-      "order": 3,
-      "sense": "0"
+      "sense": "0",
+      "text_es": "el aliento de YHWH ha soplado sobre ella"
     },
     {
       "text_en": "he causes",

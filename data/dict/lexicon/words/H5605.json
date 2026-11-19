@@ -8,18 +8,11 @@
   "translit_es": "safaf",
   "definitions": [
     {
-      "text_en": "stand at",
+      "text_en": "stand at or guard",
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "estar en"
-    },
-    {
-      "text_en": "guard",
-      "source": "bdb",
-      "order": 2,
-      "sense": "0",
-      "text_es": "guardar"
+      "text_es": "estar junto a o custodiar"
     },
     {
       "text_en": "threshold",

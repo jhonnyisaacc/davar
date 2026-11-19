@@ -8,18 +8,11 @@
   "translit_es": "yiziyah",
   "definitions": [
     {
-      "text_en": "may",
+      "text_en": "may YHWH sprinkle",
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "puede"
-    },
-    {
-      "text_en": "sprinkle",
-      "source": "bdb",
-      "order": 2,
-      "sense": "0",
-      "text_es": "rociar"
+      "text_es": "que YHWH rocíe"
     }
   ],
   "sources": {

@@ -209,6 +209,32 @@ def test_source_chain_requires_unique_unqualified_evidence():
         assert decision.review_status == "review" and decision.proposed_root_ref is None
 
 
+def test_a_word_cited_only_in_contrast_is_not_its_root():
+    from scripts.dict.adjudicate_roots import audit_from_derivations
+    words = {"H3027": {"lemma": "יָד", "root_ref": "H3709"}, "H3034": {"lemma": "יָדָה", "root_ref": "H3027"}}
+    roots = {"H3721": {"lemma": "כָּפַף"}}
+    source = {
+        "H3027": {"derivation": "a primitive word; in distinction from H3709 (כַּף), the closed one);"},
+        "H3034": {"derivation": "a primitive root; used only as denominative from H3027 (יָד);"},
+        "H3709": {"derivation": "from H3721 (כָּפַף);"},
+    }
+    decisions = audit_from_derivations(words, roots, source)
+    assert [(item.strong, item.proposed_root_ref) for item in decisions] == [("H3027", None), ("H3034", None)]
+
+
+def test_unresolved_entry_drops_a_link_only_an_earlier_adjudication_made(tmp_path, monkeypatch):
+    import scripts.dict.adjudicate_roots as module
+    monkeypatch.setattr(module, "WORDS_PATH", tmp_path / "words.json")
+    words = {
+        "H3027": {"root_ref": "H3721", "root_adjudication": {"original_root_ref": "H3709"}},
+        "H50": {"root_ref": "H1", "root_adjudication": {"original_root_ref": "H1"}},
+    }
+    (tmp_path / "words.json").write_text(json.dumps(words))
+    decisions = module.audit_from_derivations(words, {"H1": {}, "H3721": {}}, {"H3027": {"derivation": "a primitive word"}, "H50": {"derivation": "perhaps from H1"}})
+    module.apply_source_adjudications(decisions, words, {"H1": {}, "H3721": {}})
+    assert "root_ref" not in words["H3027"] and words["H50"]["root_ref"] == "H1"
+
+
 def test_apply_rejects_missing_target_and_is_idempotent(tmp_path, monkeypatch):
     import pytest
     import scripts.dict.adjudicate_roots as module
