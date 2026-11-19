@@ -319,6 +319,26 @@ def test_apply_upsert_custom_definition_for_existing_strong(tmp_path):
     assert custom["H3442"]["definitions"][0]["text_es"] == "YHVH salva"
 
 
+def test_upsert_custom_definition_inserts_a_record_first_and_keeps_the_owner_records_text(tmp_path):
+    lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
+    custom_path = lexicon_dir.parent / "custom_definitions.json"
+    owner = [{"source": "custom", "text_es": "YHVH salva", "text_en": "YHVH saves", "order": 1},
+             {"source": "custom", "text_es": "YHVH es el poseedor", "text_en": "YHVH is the possessor", "order": 2}]
+    write_json(custom_path, {"H3444": {"strong_number": "H3444", "is_custom": True, "definitions": [dict(item) for item in owner]}})
+    path = tmp_path / "insert.json"
+    write_json(path, {"decisions": [{
+        "action": "upsert_custom_definition", "strong": "H3444", "insert_order": 1,
+        "definition": {"source": "custom", "text_en": "salvation", "text_es": "salvación"},
+    }]})
+
+    for _ in range(2):
+        apply_decisions(path, tmp_path / "parsed", LexiconIndex(lexicon_dir), tmp_path / "log")
+
+    definitions = json.loads(custom_path.read_text(encoding="utf-8"))["H3444"]["definitions"]
+    assert [(d["text_en"], d["order"]) for d in definitions] == [("salvation", 1), ("YHVH saves", 2), ("YHVH is the possessor", 3)]
+    assert [{k: v for k, v in d.items() if k != "order"} for d in definitions[1:]] == [{k: v for k, v in d.items() if k != "order"} for d in owner]
+
+
 def test_custom_entry_hebrew_is_available_as_normalized_lemma(tmp_path):
     lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
     write_json(
@@ -583,15 +603,15 @@ def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
     committed = dispositions.read_ledger()
     assert committed == rebuilt
     summary = committed["summary"]
-    assert summary["total"] == 11528 + 16084 + 8529
+    assert summary["total"] == 11528 + 16084 + 8765
     assert summary["by_disposition"]["unresolved"] == 0
     assert summary["by_family"]["prefix_metadata"] == {
-        "benign": 1319, "corrected": 3856, "already_reviewed": 319, "unresolved": 0, "blocked": 0, "superseded": 0,
+        "benign": 1317, "corrected": 3858, "already_reviewed": 319, "unresolved": 0, "blocked": 0, "superseded": 0,
     }
     assert summary["by_family"]["outside_queue"] == {
-        "benign": 9, "corrected": 8520, "already_reviewed": 0, "unresolved": 0, "blocked": 0, "superseded": 0,
+        "benign": 9, "corrected": 8756, "already_reviewed": 0, "unresolved": 0, "blocked": 0, "superseded": 0,
     }
-    assert summary["benign_lexical_review"] == {"pending": 0, "reviewed": 1691}
+    assert summary["benign_lexical_review"] == {"pending": 0, "reviewed": 1689}
     assert summary["by_family"]["legacy_assignment"] == {
         "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 7918, "superseded": 8166,
     }

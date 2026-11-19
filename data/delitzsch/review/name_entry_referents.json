@@ -1894,6 +1894,11 @@
       "kind": "no_verse",
       "note": "the SBLGNT does not have this verse; Delitzsch translates the Textus Receptus"
     },
+    "colossians.4.15.6": {
+      "strong": "D0923",
+      "kind": "tr",
+      "note": "the SBLGNT reads Νύμφαν … κατ᾽ οἶκον αὐτῆς, a woman; Delitzsch follows the Textus Receptus Νυμφᾶν … κατ᾽ οἶκον αὐτοῦ, a man"
+    },
     "corinthians1.1.23.8": {
       "strong": "D0777",
       "kind": "tr",

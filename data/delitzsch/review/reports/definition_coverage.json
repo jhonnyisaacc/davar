@@ -7264,6 +7264,14 @@
    "occurrences": 1,
    "source": "custom"
   },
+  "D0944": {
+   "languages": [
+    "en",
+    "es"
+   ],
+   "occurrences": 267,
+   "source": "custom"
+  },
   "H1": {
    "languages": [
     "en",
@@ -19141,7 +19149,7 @@
     "en",
     "es"
    ],
-   "occurrences": 268,
+   "occurrences": 1,
    "source": "canonical_and_custom"
   },
   "H5319": {
@@ -29088,9 +29096,9 @@
   "by_source": {
    "canonical": 2105,
    "canonical_and_custom": 621,
-   "custom": 908
+   "custom": 909
   },
-  "identifiers": 3634,
+  "identifiers": 3635,
   "missing_definitions": {
    "en": {
     "identifiers": 0,

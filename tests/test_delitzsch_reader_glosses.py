@@ -140,6 +140,9 @@ def test_every_new_testament_occurrence_of_a_proper_noun_entry_shows_its_name_fi
     (("john", 11, 1, 6), "D0926", "Bethany", "Betania"),
     (("luke", 7, 11, 6), "D0943", "Nain", "Naín"),
     (("matthew", 23, 5, 11), "D0941", "phylacteries", "filacterias"),
+    (("matthew", 16, 25, 6), "D0944", "soul, life, self, person; living being", "alma, vida, uno mismo, persona; ser viviente"),
+    (("john", 6, 11, 16), "H5315", "Throat", "Garganta"),
+    (("colossians", 4, 15, 6), "D0923", "Nympha(s), a believer at Laodicea", "Ninfa(s), creyente de Laodicea"),
 ])
 def test_a_reviewed_occurrence_shows_the_sense_the_pull_request_names(location, strong, english, spanish):
     shown = glosses_at(*location)
@@ -203,9 +206,17 @@ def test_every_custom_record_the_review_adds_to_a_bdb_entry_was_checked_against_
     assert set(table) == added
     assert {strong: (row["text_en"], row["text_es"]) for strong, row in table.items()} == {strong: (en.text, es.text) for strong, (en, es) in shown.items()}
     assert {strong for strong, row in table.items() if not row["ot_check"].startswith("fits: ")} == set()
-    assert {strong for strong in added if not occurrences().get(strong)} == set()
+    assert {strong for strong in added if not occurrences().get(strong) and not table[strong]["nt_check"].startswith("fits: no New Testament token")} == set()
     assert {strong for strong, row in table.items() if not row["nt_check"].startswith("fits: ")} == set()
     assert {strong: row["nt_occurrences"] for strong, row in table.items()} == {strong: sorted(occurrences()[strong]) for strong in table}
+
+
+def test_a_record_inserted_ahead_of_the_owner_records_shows_first_and_keeps_them_as_later_senses():
+    english, spanish = lexicon().glosses("H3444")
+    owner = [d["text_en"] for d in lexicon().custom["H3444"]["definitions"]]
+    assert (english.text, spanish.text) == ("salvation, deliverance, help", "salvación, liberación, ayuda")
+    assert owner[1:3] == ["YHVH saves", "YHVH is the possessor of salvation"]
+    assert [d["text_en"] for d in lexicon().custom["H5315"]["definitions"]][:1] == ["Throat"]
 
 
 def test_every_instances_only_entry_lists_exactly_its_new_testament_occurrences():

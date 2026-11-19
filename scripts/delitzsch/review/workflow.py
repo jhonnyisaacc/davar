@@ -826,6 +826,22 @@ def _upsert_custom_definition(
                 entry["definitions"][index] = definition
                 return key
 
+    insert_order = decision.get("insert_order")
+    if insert_order is not None and not any(
+        item.get("text_en") == definition.get("text_en") and item.get("text_es") == definition.get("text_es")
+        for item in entry["definitions"]
+    ):
+        definition["order"] = int(insert_order)
+        for item in entry["definitions"]:
+            if int(item.get("order", 0)) >= int(insert_order):
+                item["order"] = int(item["order"]) + 1
+        position = next(
+            (index for index, item in enumerate(entry["definitions"]) if int(item.get("order", 0)) > int(insert_order)),
+            len(entry["definitions"]),
+        )
+        entry["definitions"].insert(position, definition)
+        return key
+
     if not any(
         item.get("text_en") == definition.get("text_en")
         and item.get("text_es") == definition.get("text_es")
