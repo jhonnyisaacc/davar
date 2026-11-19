@@ -380,7 +380,7 @@ def audit_from_derivations(words, roots, derivations):
                 break
             source = derivations.get(node, {}).get("derivation", "")
             evidence.append({"strong": node, "derivation": source})
-            refs = sorted(set(re.findall(r"\bH\d+\b", source)))
+            refs = sorted(set(re.findall(r"\bH\d+\b", re.sub(r"in distinction from H\d+", "", source))))
             if re.search(r"perhaps|probably|uncertain|apparently|doubtful|unused|foreign", source, re.I):
                 reason = "Source explicitly qualifies or leaves the derivation uncertain."
                 break
@@ -409,9 +409,10 @@ def apply_source_adjudications(decisions, words, roots):
         if target and target not in roots:
             raise ValueError(f"Nonexistent canonical root {target}")
         metadata = {"method": "unique_cited_derivation_v1", "status": "accepted" if target else "unresolved", "confidence": decision.confidence, "original_root_ref": decision.current_root_ref}
+        retained = decision.current_root_ref if decision.current_root_ref in roots else None
         if target:
             entry["root_ref"] = target
-        elif entry.get("root_ref") not in roots:
+        elif entry.get("root_ref") != retained:
             entry.pop("root_ref", None)
         entry["root_adjudication"] = metadata
         source_path = WORDS_PATH.parent / "words" / (decision.strong + ".json")
@@ -419,7 +420,7 @@ def apply_source_adjudications(decisions, words, roots):
             source = json.loads(source_path.read_text())
             if target:
                 source["root_ref"] = target
-            elif source.get("root_ref") not in roots:
+            elif source.get("root_ref") != retained:
                 source.pop("root_ref", None)
             source["root_adjudication"] = metadata
             pending[source_path] = source

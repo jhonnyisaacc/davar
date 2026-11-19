@@ -111838,7 +111838,6 @@
         "order": 1
       }
     ],
-    "root_strong": "H4417",
     "manual_instances": [],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
@@ -112857,7 +112856,6 @@
         "order": 1
       }
     ],
-    "root_strong": "H2145",
     "manual_instances": [],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
@@ -114557,7 +114555,6 @@
         "order": 1
       }
     ],
-    "root_strong": "H3709",
     "manual_instances": [],
     "instance_policy_version": "1.1",
     "instance_tier": "low",

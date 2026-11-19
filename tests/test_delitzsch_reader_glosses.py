@@ -153,6 +153,12 @@ def test_every_new_testament_occurrence_of_a_proper_noun_entry_shows_its_name_fi
     (("james", 5, 13, 1), "H3334", "be distressed, be in straits", "estar angustiado, estar en apuros"),
     (("matthew", 27, 7, 5), "H3335", "form, fashion, shape; plan, devise; as a noun, potter", "formar, modelar, dar forma; planear, idear; como sustantivo, alfarero"),
     (("romans", 9, 20, 10), "H3336", "form", "forma"),
+    (("mark", 1, 11, 6), "H3039", "beloved", "amado"),
+    (("john", 15, 13, 8), "H3039", "beloved", "amado"),
+    (("ephesians", 1, 6, 6), "H3039", "beloved", "amado"),
+    (("luke", 17, 32, 0), "H2142", "remember", "recordar"),
+    (("mark", 1, 41, 5), "H3027", "hand", "mano"),
+    (("acts", 17, 28, 12), "H3211", "born", "nacido"),
 ])
 def test_a_reviewed_occurrence_shows_the_sense_the_pull_request_names(location, strong, english, spanish):
     shown = glosses_at(*location)
@@ -361,12 +367,23 @@ def test_no_custom_entry_blanks_the_root_the_reader_would_fall_back_to():
     assert [(key, field) for key, entry in lexicon().custom.items() for field in ("root", "root_strong") if entry.get(field) == ""] == []
 
 
+def test_no_primitive_word_shows_a_root_other_than_itself():
+    strongs = json.loads((ROOT / "data/dict/raw/strongs_hebrew_dict_en.json").read_text(encoding="utf-8"))
+    primitive = {key for key, item in strongs.items() if item.get("derivation", "").startswith("a primitive")}
+    assert [(key, root_heading(key)[1]) for key in sorted(primitive & set(lexicon().custom)) if root_heading(key)[1] != key] == []
+
+
 @pytest.mark.parametrize("strong, root, root_strong", [
     ("H3335", "יָצַר", "H3334"),
     ("H3334", "יָצַר", "H3334"),
     ("H376", "אִישׁ", "H376"),
     ("H3444", "ישע", "H3467"),
     ("H5315", "נפש", "H5314"),
+    ("H2142", "זָכַר", "H2142"),
+    ("H3027", "יָד", "H3027"),
+    ("H4414", "מָלַח", "H4414"),
+    ("H3064", "יְהוּדִי", "H3064"),
+    ("H3034", "יָדָה", "H3034"),
 ])
 def test_a_reviewed_bdb_entry_shows_the_root_heading_its_lexicon_entry_gives(strong, root, root_strong):
     assert root_heading(strong) == (root, root_strong)

@@ -85341,7 +85341,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 4,
@@ -85351,8 +85350,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3064"
     }
   },
@@ -174324,7 +174323,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "high",
     "instance_total": 1445,
@@ -174334,8 +174332,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3709"
     }
   },
@@ -174414,7 +174412,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 16,
@@ -174424,8 +174421,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3027"
     }
   },
@@ -174462,7 +174459,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 2,
@@ -174472,8 +174468,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3034"
     }
   },
@@ -174919,7 +174915,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "medium",
     "instance_total": 111,
@@ -174929,8 +174924,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3027"
     }
   },
@@ -174974,7 +174969,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 2,
@@ -174984,8 +174978,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3034"
     }
   },
@@ -175012,7 +175006,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -175022,8 +175015,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3034"
     }
   },
@@ -176246,7 +176239,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -176256,8 +176248,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3061"
     }
   },
@@ -176292,7 +176284,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -176302,8 +176293,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3061"
     }
   },
@@ -176382,7 +176373,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -176392,8 +176382,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3064"
     }
   },
@@ -176891,7 +176881,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 6,
@@ -176901,8 +176890,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3063"
     }
   },
@@ -176953,7 +176942,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 9,
@@ -176963,8 +176951,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3061"
     }
   },
@@ -178561,7 +178549,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "medium",
     "instance_total": 754,
@@ -178571,8 +178558,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3034"
     }
   },
@@ -178750,7 +178737,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 69,
@@ -178760,8 +178746,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3063"
     }
   },
@@ -178807,7 +178793,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 3,
@@ -178817,8 +178802,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3064"
     }
   },
@@ -178870,7 +178855,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 6,
@@ -178880,8 +178864,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3064"
     }
   },
@@ -178921,7 +178905,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -178931,8 +178914,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3066"
     }
   },
@@ -200574,7 +200557,6 @@
       "surface_references": []
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 0,
@@ -200584,8 +200566,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3027"
     }
   },
@@ -671011,7 +670993,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 30,
@@ -671021,8 +671002,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3034"
     }
   },

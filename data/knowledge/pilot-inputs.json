@@ -47,7 +47,7 @@
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
       "path": "data/dict/lexicon/words.json",
-      "sha256": "bfc879571b959718306fbad8b5fb40fd42bb2813078cbb8966647145fe312544"
+      "sha256": "44c185c1673c50ae327057b1dcfae7476f242dbfc8e7621f26b07054ad0c9ec4"
     },
     {
       "id": "custom",
@@ -56,7 +56,7 @@
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
       "path": "data/dict/lexicon/custom_definitions.json",
-      "sha256": "7a23e0561a8a018bc3afc9f50122eb646a15f6561d5c3384d95bdbc795c32a93"
+      "sha256": "d58c7dd9c76b886f4f019d2d690870d46d3bc0d13b32dd1d52eb55140e307993"
     },
     {
       "id": "shaul-son-of-man",
