@@ -8,18 +8,11 @@
   "translit_es": "avednego",
   "definitions": [
     {
-      "text_en": "servant of",
+      "text_en": "servant of (God) Nebo",
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "siervo de"
-    },
-    {
-      "text_en": "Nebo",
-      "source": "bdb",
-      "order": 2,
-      "sense": "0",
-      "text_es": "Nebo"
+      "text_es": "siervo del (dios) Nebo"
     }
   ],
   "sources": {

@@ -265,18 +265,11 @@
       "text_es": "continuar"
     },
     {
-      "text_en": "be in",
+      "text_en": "be in or at a place",
       "source": "bdb",
       "order": 39,
       "sense": "III3",
-      "text_es": "estar en"
-    },
-    {
-      "text_en": "at a place",
-      "source": "bdb",
-      "order": 40,
-      "sense": "III3",
-      "text_es": "en un lugar"
+      "text_es": "estar en o junto a un lugar"
     },
     {
       "text_en": "be situated",

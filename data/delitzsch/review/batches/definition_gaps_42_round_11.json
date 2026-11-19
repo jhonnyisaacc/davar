@@ -1,0 +1,382 @@
+{
+  "issue": 42,
+  "rule": "lexical_review",
+  "reviewer": "claude-delitzsch-review",
+  "decisions": [
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 15,
+        "verse": 29,
+        "word_index": 14,
+        "text": "נַפְשֹׁתֵיכֶם",
+        "strong": "H5314",
+        "prefixes": []
+      },
+      "previous_strong": "H5314",
+      "new_strong": "D0944",
+      "reason": "נַפְשֹׁתֵיכֶם is the noun נֶפֶשׁ with a suffix, soul or self, in Delitzsch's rendering of διατηροῦντες ἑαυτοὺς, keeping yourselves from these; H5314 is the verb נָפַשׁ, take breath, which fits only the Niphal of Luke 12:19 and Romans 15:32",
+      "evidence": {
+        "grammar": "noun",
+        "lexicon": "D0944 נֶפֶשׁ soul, life, self, person; living being",
+        "context": "Acts 15:29, Greek ἑαυτοὺς",
+        "greek": "G1438 ἑαυτοῦ",
+        "issue": 42
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "james",
+        "chapter": 1,
+        "verse": 21,
+        "word_index": 17,
+        "text": "נַפְשֹׁתֵיכֶם׃",
+        "strong": "H5314",
+        "prefixes": []
+      },
+      "previous_strong": "H5314",
+      "new_strong": "D0944",
+      "reason": "נַפְשֹׁתֵיכֶם׃ is the noun נֶפֶשׁ with a suffix, soul or self, in Delitzsch's rendering of τὰς ψυχὰς ὑμῶν, your souls, which the implanted word can save; H5314 is the verb נָפַשׁ, take breath, which fits only the Niphal of Luke 12:19 and Romans 15:32",
+      "evidence": {
+        "grammar": "noun",
+        "lexicon": "D0944 נֶפֶשׁ soul, life, self, person; living being",
+        "context": "James 1:21, Greek ψυχὰς",
+        "greek": "G5590G ψυχή",
+        "issue": 42
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 8,
+        "verse": 28,
+        "word_index": 17,
+        "text": "מִנַּפְשִׁי",
+        "strong": "H5314",
+        "prefixes": []
+      },
+      "previous_strong": "H5314",
+      "new_strong": "D0944",
+      "reason": "מִנַּפְשִׁי is the noun נֶפֶשׁ with a suffix, soul or self, in Delitzsch's rendering of ἀπ᾽ ἐμαυτοῦ ποιῶ οὐδέν, I do nothing of myself; H5314 is the verb נָפַשׁ, take breath, which fits only the Niphal of Luke 12:19 and Romans 15:32",
+      "evidence": {
+        "grammar": "noun",
+        "lexicon": "D0944 נֶפֶשׁ soul, life, self, person; living being",
+        "context": "John 8:28, Greek ἐμαυτοῦ",
+        "greek": "G1473 ἐγώ",
+        "issue": 42
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john1",
+        "chapter": 1,
+        "verse": 8,
+        "word_index": 9,
+        "text": "נַפְשֹׁתֵינוּ",
+        "strong": "H5314",
+        "prefixes": []
+      },
+      "previous_strong": "H5314",
+      "new_strong": "D0944",
+      "reason": "נַפְשֹׁתֵינוּ is the noun נֶפֶשׁ with a suffix, soul or self, in Delitzsch's rendering of ἑαυτοὺς πλανῶμεν, we deceive ourselves; H5314 is the verb נָפַשׁ, take breath, which fits only the Niphal of Luke 12:19 and Romans 15:32",
+      "evidence": {
+        "grammar": "noun",
+        "lexicon": "D0944 נֶפֶשׁ soul, life, self, person; living being",
+        "context": "1 John 1:8, Greek ἑαυτοὺς",
+        "greek": "G1438 ἑαυτοῦ",
+        "issue": 42
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 12,
+        "verse": 57,
+        "word_index": 2,
+        "text": "מִנַּפְשְׁכֶם",
+        "strong": "H5314",
+        "prefixes": []
+      },
+      "previous_strong": "H5314",
+      "new_strong": "D0944",
+      "reason": "מִנַּפְשְׁכֶם is the noun נֶפֶשׁ with a suffix, soul or self, in Delitzsch's rendering of ἀφ᾽ ἑαυτῶν, of yourselves; H5314 is the verb נָפַשׁ, take breath, which fits only the Niphal of Luke 12:19 and Romans 15:32",
+      "evidence": {
+        "grammar": "noun",
+        "lexicon": "D0944 נֶפֶשׁ soul, life, self, person; living being",
+        "context": "Luke 12:57, Greek ἑαυτῶν",
+        "greek": "G1438 ἑαυτοῦ",
+        "issue": 42
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "peter1",
+        "chapter": 1,
+        "verse": 22,
+        "word_index": 2,
+        "text": "נַפְשֹׁתֵיכֶם",
+        "strong": "H5314",
+        "prefixes": []
+      },
+      "previous_strong": "H5314",
+      "new_strong": "D0944",
+      "reason": "נַפְשֹׁתֵיכֶם is the noun נֶפֶשׁ with a suffix, soul or self, in Delitzsch's rendering of τὰς ψυχὰς ὑμῶν, your souls, purified by obedience to the truth; H5314 is the verb נָפַשׁ, take breath, which fits only the Niphal of Luke 12:19 and Romans 15:32",
+      "evidence": {
+        "grammar": "noun",
+        "lexicon": "D0944 נֶפֶשׁ soul, life, self, person; living being",
+        "context": "1 Peter 1:22, Greek ψυχὰς",
+        "greek": "G5590G ψυχή",
+        "issue": 42
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "peter1",
+        "chapter": 2,
+        "verse": 25,
+        "word_index": 13,
+        "text": "נַפְשֹׁתֵיכֶם׃",
+        "strong": "H5314",
+        "prefixes": []
+      },
+      "previous_strong": "H5314",
+      "new_strong": "D0944",
+      "reason": "נַפְשֹׁתֵיכֶם׃ is the noun נֶפֶשׁ with a suffix, soul or self, in Delitzsch's rendering of τῶν ψυχῶν ὑμῶν, the shepherd and overseer of your souls; H5314 is the verb נָפַשׁ, take breath, which fits only the Niphal of Luke 12:19 and Romans 15:32",
+      "evidence": {
+        "grammar": "noun",
+        "lexicon": "D0944 נֶפֶשׁ soul, life, self, person; living being",
+        "context": "1 Peter 2:25, Greek ψυχῶν",
+        "greek": "G5590G ψυχή",
+        "issue": 42
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "philippians",
+        "chapter": 2,
+        "verse": 12,
+        "word_index": 22,
+        "text": "נַפְשֹׁתֵיכֶם",
+        "strong": "H5314",
+        "prefixes": []
+      },
+      "previous_strong": "H5314",
+      "new_strong": "D0944",
+      "reason": "נַפְשֹׁתֵיכֶם is the noun נֶפֶשׁ with a suffix, soul or self, in Delitzsch's rendering of τὴν ἑαυτῶν σωτηρίαν, your own salvation; H5314 is the verb נָפַשׁ, take breath, which fits only the Niphal of Luke 12:19 and Romans 15:32",
+      "evidence": {
+        "grammar": "noun",
+        "lexicon": "D0944 נֶפֶשׁ soul, life, self, person; living being",
+        "context": "Philippians 2:12, Greek ἑαυτῶν",
+        "greek": "G1438 ἑαυτοῦ",
+        "issue": 42
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 15,
+        "verse": 44,
+        "word_index": 2,
+        "text": "נַפְשִׁי",
+        "strong": "D0944",
+        "prefixes": []
+      },
+      "previous_strong": "D0944",
+      "new_strong": "D0440",
+      "reason": "נַפְשִׁי in גּוּף נַפְשִׁי is the adjective natural, of the soul, in Delitzsch's rendering of σῶμα ψυχικόν, a natural body, against גּוּף רוּחָנִי, σῶμα πνευματικόν; it is not the noun soul, so it joins 1 Corinthians 2:14 and Jude 19 on D0440",
+      "evidence": {
+        "grammar": "adjective",
+        "lexicon": "D0440 נַפְשִׁי natural, of the soul; unspiritual",
+        "context": "1 Corinthians 15:44, Greek ψυχικόν",
+        "greek": "G5591 ψυχικός",
+        "issue": 42
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 15,
+        "verse": 44,
+        "word_index": 8,
+        "text": "נַפְשִׁי",
+        "strong": "D0944",
+        "prefixes": []
+      },
+      "previous_strong": "D0944",
+      "new_strong": "D0440",
+      "reason": "נַפְשִׁי in גּוּף נַפְשִׁי is the adjective natural, of the soul, in Delitzsch's rendering of σῶμα ψυχικόν, a natural body, against גּוּף רוּחָנִי, σῶμα πνευματικόν; it is not the noun soul, so it joins 1 Corinthians 2:14 and Jude 19 on D0440",
+      "evidence": {
+        "grammar": "adjective",
+        "lexicon": "D0440 נַפְשִׁי natural, of the soul; unspiritual",
+        "context": "1 Corinthians 15:44, Greek ψυχικόν",
+        "greek": "G5591 ψυχικός",
+        "issue": 42
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 6,
+        "verse": 11,
+        "word_index": 16,
+        "text": "נַפְשָׁם׃",
+        "strong": "H5315",
+        "prefixes": []
+      },
+      "previous_strong": "H5315",
+      "new_strong": "D0944",
+      "reason": "נַפְשָׁם in כְּאַוַּת נַפְשָׁם, as much as they wanted, renders ὅσον ἤθελον; it is the soul as the seat of desire, like נֶפֶשׁ with desire in Mark 10:35, Philippians 1:23, James 1:14, and 2 Peter 3:3, which are on D0944; H5315 keeps Jhonny's records for the Hebrew Bible",
+      "evidence": {
+        "grammar": "noun",
+        "lexicon": "D0944 נֶפֶשׁ soul, life, self, person; living being",
+        "context": "John 6:11, Greek ἤθελον",
+        "greek": "G2309 θέλω",
+        "issue": 42
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 20,
+        "verse": 28,
+        "word_index": 23,
+        "text": "נַפְשׁוֹ׃",
+        "strong": "D0944",
+        "prefixes": []
+      },
+      "previous_strong": "D0944",
+      "new_strong": "D0944",
+      "reason": "נַפְשׁוֹ׃ stays on D0944; this corrects the Greek word that round 10 cited, G1438 ἑαυτοῦ, to the word Delitzsch renders, ἰδίου",
+      "evidence": {
+        "lexicon": "D0944 נֶפֶשׁ soul, life, self, person; living being",
+        "grammar": "noun",
+        "context": "Acts 20:28, Greek ἰδίου",
+        "issue": 42,
+        "greek": "G2398 ἴδιος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 7,
+        "verse": 17,
+        "word_index": 11,
+        "text": "מִנַּפְשִׁי",
+        "strong": "D0944",
+        "prefixes": []
+      },
+      "previous_strong": "D0944",
+      "new_strong": "D0944",
+      "reason": "מִנַּפְשִׁי stays on D0944; this corrects the Greek word that round 10 cited, G0846 αὐτός, to the word Delitzsch renders, ἐμαυτοῦ",
+      "evidence": {
+        "lexicon": "D0944 נֶפֶשׁ soul, life, self, person; living being",
+        "grammar": "noun",
+        "context": "John 7:17, Greek ἐμαυτοῦ",
+        "issue": 42,
+        "greek": "G1473 ἐγώ"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 8,
+        "verse": 13,
+        "word_index": 3,
+        "text": "נַפְשְׁךָ",
+        "strong": "D0944",
+        "prefixes": []
+      },
+      "previous_strong": "D0944",
+      "new_strong": "D0944",
+      "reason": "נַפְשְׁךָ stays on D0944; this corrects the Greek word that round 10 cited, G0846 αὐτός, to the word Delitzsch renders, σεαυτοῦ",
+      "evidence": {
+        "lexicon": "D0944 נֶפֶשׁ soul, life, self, person; living being",
+        "grammar": "noun",
+        "context": "John 8:13, Greek σεαυτοῦ",
+        "issue": 42,
+        "greek": "G4771 σύ"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 8,
+        "verse": 14,
+        "word_index": 8,
+        "text": "נַפְשִׁי",
+        "strong": "D0944",
+        "prefixes": []
+      },
+      "previous_strong": "D0944",
+      "new_strong": "D0944",
+      "reason": "נַפְשִׁי stays on D0944; this corrects the Greek word that round 10 cited, G0846 αὐτός, to the word Delitzsch renders, ἐμαυτοῦ",
+      "evidence": {
+        "lexicon": "D0944 נֶפֶשׁ soul, life, self, person; living being",
+        "grammar": "noun",
+        "context": "John 8:14, Greek ἐμαυτοῦ",
+        "issue": 42,
+        "greek": "G1473 ἐγώ"
+      }
+    }
+  ]
+}

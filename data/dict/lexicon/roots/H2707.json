@@ -42,10 +42,11 @@
       "sense": "0"
     },
     {
-      "text_en": "the soles of my feet",
+      "text_en": "for (i.e. about) the soles of my feet",
       "source": "bdb",
       "order": 6,
-      "sense": "0"
+      "sense": "0",
+      "text_es": "para (es decir, alrededor de) las plantas de mis pies"
     }
   ],
   "sources": {

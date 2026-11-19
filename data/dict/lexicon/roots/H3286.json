@@ -22,17 +22,11 @@
       "text_es": "desfallecer"
     },
     {
-      "text_en": "be",
+      "text_en": "be or grow weary",
       "source": "bdb",
       "order": 3,
       "sense": "0",
-      "text_es": "ser"
-    },
-    {
-      "text_en": "grow weary",
-      "source": "bdb",
-      "order": 4,
-      "sense": "0"
+      "text_es": "estar o volverse cansado"
     },
     {
       "text_en": "be faint",

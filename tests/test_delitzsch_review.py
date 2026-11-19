@@ -2,6 +2,7 @@ import json
 import re
 import unicodedata
 from collections import Counter
+from functools import cache
 from pathlib import Path
 
 import pytest
@@ -319,6 +320,51 @@ def test_apply_upsert_custom_definition_for_existing_strong(tmp_path):
     assert custom["H3442"]["definitions"][0]["text_es"] == "YHVH salva"
 
 
+def test_upsert_custom_definition_inserts_a_record_first_and_keeps_the_owner_records_text(tmp_path):
+    lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
+    custom_path = lexicon_dir.parent / "custom_definitions.json"
+    owner = [{"source": "custom", "text_es": "YHVH salva", "text_en": "YHVH saves", "order": 1},
+             {"source": "custom", "text_es": "YHVH es el poseedor", "text_en": "YHVH is the possessor", "order": 2}]
+    write_json(custom_path, {"H3444": {"strong_number": "H3444", "is_custom": True, "definitions": [dict(item) for item in owner]}})
+    path = tmp_path / "insert.json"
+    write_json(path, {"decisions": [{
+        "action": "upsert_custom_definition", "strong": "H3444", "insert_order": 1,
+        "definition": {"source": "custom", "text_en": "salvation", "text_es": "salvación"},
+    }]})
+
+    for _ in range(2):
+        apply_decisions(path, tmp_path / "parsed", LexiconIndex(lexicon_dir), tmp_path / "log")
+
+    definitions = json.loads(custom_path.read_text(encoding="utf-8"))["H3444"]["definitions"]
+    assert [(d["text_en"], d["order"]) for d in definitions] == [("salvation", 1), ("YHVH saves", 2), ("YHVH is the possessor", 3)]
+    assert [{k: v for k, v in d.items() if k != "order"} for d in definitions[1:]] == [{k: v for k, v in d.items() if k != "order"} for d in owner]
+
+
+def test_new_custom_entries_leave_root_fields_to_the_lexicon_unless_the_decision_names_them(tmp_path):
+    lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
+    custom_path = lexicon_dir.parent / "custom_definitions.json"
+    write_json(lexicon_dir / "H3335.json", {"strong_number": "H3335", "lemma": "יָצַר", "root_ref": "H3334", "definitions": []})
+    write_json(custom_path, {})
+    words = [{"text": "יוֹצֵר", "strong": None, "prefixes": []}, {"text": "יוֹצֵר", "strong": None, "prefixes": []}]
+    write_json(tmp_path / "parsed" / "romans" / "9.json", [{"chapter": 9, "verses": [{"chapter": 9, "verse": 21, "words": words}]}])
+    occurrence = {"book": "romans", "chapter": 9, "verse": 21, "text": "יוֹצֵר", "strong": None}
+    path = tmp_path / "batch.json"
+    write_json(path, {"decisions": [
+        {"action": "upsert_custom_definition", "strong": "H3335", "definition": {"text_en": "potter", "text_es": "alfarero"}},
+        {"action": "create_custom_entry", "custom_key": "D0001", "occurrence": {**occurrence, "word_index": 0}, "previous_strong": None,
+         "definition": {"text_en": "potter", "text_es": "alfarero"}},
+        {"action": "create_custom_entry", "custom_key": "D0002", "occurrence": {**occurrence, "word_index": 1}, "previous_strong": None,
+         "root": "יצר", "root_strong": "H3334", "definition": {"text_en": "potter", "text_es": "alfarero"}},
+    ]})
+
+    stats = apply_decisions(path, tmp_path / "parsed", LexiconIndex(lexicon_dir), tmp_path / "log")
+
+    custom = json.loads(custom_path.read_text(encoding="utf-8"))
+    assert stats.errors == 0
+    assert not {"root", "root_strong"} & (set(custom["H3335"]) | set(custom["D0001"]))
+    assert (custom["D0002"]["root"], custom["D0002"]["root_strong"]) == ("יצר", "H3334")
+
+
 def test_custom_entry_hebrew_is_available_as_normalized_lemma(tmp_path):
     lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
     write_json(
@@ -583,20 +629,20 @@ def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
     committed = dispositions.read_ledger()
     assert committed == rebuilt
     summary = committed["summary"]
-    assert summary["total"] == 11528 + 16084 + 5173
+    assert summary["total"] == 11528 + 16084 + 8798
     assert summary["by_disposition"]["unresolved"] == 0
     assert summary["by_family"]["prefix_metadata"] == {
-        "benign": 1386, "corrected": 3512, "already_reviewed": 345, "unresolved": 0, "blocked": 251, "superseded": 0,
+        "benign": 1317, "corrected": 3858, "already_reviewed": 319, "unresolved": 0, "blocked": 0, "superseded": 0,
     }
     assert summary["by_family"]["outside_queue"] == {
-        "benign": 10, "corrected": 5142, "already_reviewed": 0, "unresolved": 0, "blocked": 21, "superseded": 0,
+        "benign": 9, "corrected": 8789, "already_reviewed": 0, "unresolved": 0, "blocked": 0, "superseded": 0,
     }
-    assert summary["benign_lexical_review"] == {"pending": 0, "reviewed": 1759}
+    assert summary["benign_lexical_review"] == {"pending": 0, "reviewed": 1689}
     assert summary["by_family"]["legacy_assignment"] == {
-        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 7904, "superseded": 8180,
+        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 7927, "superseded": 8157,
     }
     assert {rule: summary["by_rule"][rule] for rule in ("legacy_without_candidate", "legacy_current_value", "legacy_blocked", "lexical_review")} == {
-        "legacy_without_candidate": 4360, "legacy_current_value": 3820, "legacy_blocked": 7904, "lexical_review": 2322,
+        "legacy_without_candidate": 4360, "legacy_current_value": 3797, "legacy_blocked": 7927, "lexical_review": 1456,
     }
 
 
@@ -667,7 +713,7 @@ def test_benign_prefix_without_a_reviewed_strong_stays_pending_lexical_review():
     [record] = dispositions.build_ledger([entry], {}, readings)["records"]
     assert (record["disposition"], record["evidence"]["prior_decision"], record["lexical_review"]) == ("benign", None, "pending")
     matthew = ledger_record("acts.1.13.17")
-    assert (matthew["disposition"], matthew["rule"], matthew["reviewer"]) == ("blocked", "lexical_review", "claude-delitzsch-review")
+    assert (matthew["disposition"], matthew["rule"], matthew["after"]["strong"]) == ("corrected", "reviewed_strong_correction", "Hc/D0328")
     assert "lexical_review" not in ledger_record("acts.1.2.12")
 
 
@@ -675,7 +721,8 @@ def test_style_only_rule_leaves_unsettled_prefix_flags_alone():
     assert ledger_record("acts.13.15.14")["after"]["strong"] == "Hl/H859"
     assert ledger_record("acts.7.58.6")["after"]["strong"] == "Hc/Hd/H5707"
     assert {ledger_record(location)["rule"] for location in ("acts.13.15.14", "acts.7.58.6")} == {"reviewed_strong_correction"}
-    assert ledger_record("acts.10.11.14")["disposition"] == "already_reviewed"
+    assert ledger_record("acts.1.4.10")["disposition"] == "already_reviewed"
+    assert ledger_record("acts.10.11.14")["after"]["strong"] == "Hk/H3671"
     assert (ledger_record("corinthians1.1.4.9")["disposition"], ledger_record("corinthians1.1.4.9")["after"]["strong"]) == ("corrected", "Hl/H859")
     entry = queue_entry("acts.1.2.12", ["prefix_metadata_disagreement"])
     readings = {"acts.1.2.12": dispositions.Reading(["Hb"], "בחר")}
@@ -698,7 +745,7 @@ def test_style_only_rule_does_not_settle_a_prefix_letter_another_lemma_reads_as_
     assert (confidence["disposition"], confidence["rule"]) == ("corrected", "reviewed_strong_correction")
     assert (confidence["before"]["strong"], confidence["after"]["strong"], confidence["after"]["prefixes"]) == ("H2911", "H986", [])
     assert ledger_record("corinthians2.10.8.12")["after"]["strong"] == "Hl/H1129"
-    assert (ledger_record("luke.8.30.7")["disposition"], ledger_record("luke.8.30.7")["rule"]) == ("blocked", "lexical_review")
+    assert (ledger_record("luke.8.30.7")["after"]["strong"], ledger_record("luke.8.30.7")["after"]["prefixes"]) == ("D0567", [])
     entry = dict(queue_entry("acts.28.31.11", ["prefix_metadata_disagreement"]), text="בִּטְחוֹן", strong="H2911")
     reviewed = {"status": "applied", "new_strong": "H2911", "reviewer": "r", "reason": "x", "logged_at": "t"}
     readings = {"acts.28.31.11": dispositions.Reading(["Hb"], "טחון", False, True)}
@@ -736,8 +783,16 @@ def test_style_only_rule_does_not_read_a_verb_stem_he_as_the_article():
     assert disposition("הִשְׁלִיכוּ", ["Hd"], "שלך", is_root=True) == "unresolved"
 
 
+@cache
+def ledger_by_location():
+    records = {}
+    for record in dispositions.read_ledger()["records"]:
+        records.setdefault(record["location"], record)
+    return records
+
+
 def ledger_record(location):
-    return next(r for r in dispositions.read_ledger()["records"] if r["location"] == location)
+    return ledger_by_location()[location]
 
 
 def parsed_verse(book, chapter, verse):
@@ -787,7 +842,7 @@ def test_follow_up_lexical_review_maps_hebrew_letters_and_suffixed_prepositions_
     assert ledger_record("acts.10.5.2")["after"]["strong"] == "D0274"
     assert ledger_record("romans.14.6.19")["after"]["strong"] == "H3034"
     temptation = ledger_record("matthew.6.13.3")
-    assert (temptation["disposition"], temptation["rule"], temptation["reviewer"]) == ("blocked", "lexical_review", "claude-delitzsch-review")
+    assert (temptation["disposition"], temptation["reviewer"], temptation["after"]["strong"]) == ("corrected", "claude-delitzsch-review", "D0428")
     assert parsed_verse("luke", 7, 6)["words"][17]["strong"] == "H994"
     assert ledger_record("luke.4.34.3")["after"]["strong"] == "Hc/D0275"
     assert [ledger_record(location)["after"]["strong"] for location in ("luke.18.41.4", "john.21.22.10", "luke.18.19.5", "acts.22.15.3")] == ["D0275", "D0274", "D0265", "D0266"]
@@ -821,7 +876,7 @@ def test_root_letter_rule_needs_a_reviewed_strong_and_a_false_prefix():
 def test_committed_root_letter_batch_matches_its_generator():
     committed = json.loads(dispositions.ROOT_LETTER_BATCH.read_text(encoding="utf-8"))
     assert committed == dispositions.root_letter_batch_from_disk()
-    assert len(committed["decisions"]) == 70
+    assert len(committed["decisions"]) == 68
 
 
 def test_reverting_ledger_corrections_restores_the_validated_remediation_corpus():
@@ -967,7 +1022,7 @@ def test_lexical_reviews_keep_correct_or_block_a_queued_occurrence():
     blocked = lexical_ledger(lexical_reviewed("needs_manual_review", "needs_manual_review", "H5083"))
     assert (blocked["disposition"], blocked["evidence"]["reason"]) == ("blocked", "H5083 gift is unrelated")
     corrected = lexical_ledger(lexical_reviewed("set_strong", "applied", "Hl/H859"))
-    assert (corrected["disposition"], corrected["rule"], corrected["rule_version"]) == ("corrected", "reviewed_strong_correction", 2)
+    assert (corrected["disposition"], corrected["rule"], corrected["rule_version"]) == ("corrected", "reviewed_strong_correction", 3)
     assert (corrected["before"], corrected["after"]) == (
         {"text": "לָכֶם", "strong": "H5083", "prefixes": ["Hl"]}, {"text": "לָכֶם", "strong": "Hl/H859", "prefixes": ["Hl"]})
     dropped = lexical_ledger(lexical_reviewed("set_strong", "applied", "H3922", new_prefixes=[]))
@@ -992,6 +1047,154 @@ def test_lexical_reviews_keep_correct_or_block_a_queued_occurrence():
 def test_ledger_rejects_a_lexical_review_the_rules_do_not_support(decision, rule):
     with pytest.raises(ValueError, match=f"does not satisfy the {rule}"):
         lexical_ledger(decision)
+
+
+def recorrected(first, second_strong, **extra):
+    occurrence = dict(first["occurrence"], strong=first["new_strong"], prefixes=first.get("new_prefixes", first["occurrence"]["prefixes"]))
+    return {**first, "occurrence": occurrence, "previous_strong": first["new_strong"], "new_strong": second_strong,
+            "reason": "the first correction named the wrong word", "logged_at": "u", **extra}
+
+
+def test_a_later_reviewed_correction_supersedes_an_earlier_one():
+    first = lexical_reviewed("set_strong", "applied", "Hl/H859")
+    second = recorrected(first, "H3922", new_prefixes=[])
+    entry = dict(queue_entry("corinthians1.11.22.1", ["prefix_metadata_disagreement"]), text="לָכֶם", strong="H5083")
+    history = {entry["location"]: [first, lexical_reviewed("needs_manual_review", "needs_manual_review", "Hl/H859"), second]}
+    [record] = dispositions.build_ledger([entry], dispositions.with_superseded(history))["records"]
+    assert (record["disposition"], record["rule"], record["rule_version"]) == ("corrected", "reviewed_strong_correction", 3)
+    assert (record["before"], record["after"]) == (
+        {"text": "לָכֶם", "strong": "H5083", "prefixes": ["Hl"]}, {"text": "לָכֶם", "strong": "H3922", "prefixes": []})
+    assert [(link["previous_strong"], link["new_strong"]) for link in record["evidence"]["superseded"]] == [("H5083", "Hl/H859")]
+    assert history[entry["location"]][0] == first
+
+    creation = strong_corrected("mark.13.19.11", "הַבְּרִיאָה", "Hd/H1277", ["Hd"], "Hd/H1278")
+    [outside] = dispositions.build_ledger([], dispositions.with_superseded({"mark.13.19.11": [creation, recorrected(creation, "Hd/H1279")]}))["records"]
+    assert (outside["before"]["strong"], outside["after"]["strong"]) == ("Hd/H1277", "Hd/H1279")
+
+
+@pytest.mark.parametrize("second", [
+    recorrected(lexical_reviewed("set_strong", "applied", "Hl/H859"), "H3922", new_prefixes=[], previous_strong="Hl/H860"),
+    recorrected(lexical_reviewed("set_strong", "applied", "Hl/H859"), "H3922", new_prefixes=[], evidence=dict(lexicon="H3922")),
+    recorrected(lexical_reviewed("set_strong", "applied", "Hl/H859"), "H5083", new_prefixes=["Hl"]),
+])
+def test_a_later_correction_that_does_not_continue_the_earlier_one_is_rejected(second):
+    entry = dict(queue_entry("corinthians1.11.22.1", ["prefix_metadata_disagreement"]), text="לָכֶם", strong="H5083")
+    history = {entry["location"]: [lexical_reviewed("set_strong", "applied", "Hl/H859"), second]}
+    with pytest.raises(ValueError, match="does not satisfy the reviewed Strong correction rule"):
+        dispositions.build_ledger([entry], dispositions.with_superseded(history))
+
+
+def chain_histories():
+    first = lexical_reviewed("set_strong", "applied", "Hl/H859")
+    unreasoned = lexical_reviewed("set_strong", "applied", "Hl/H859", reason=None)
+    unsupported = lexical_reviewed("set_strong", "applied", "Hl/H859", evidence=dict(lexicon="H859"))
+    renamed = recorrected(first, "H3922", new_prefixes=[])
+    stale = recorrected(first, "Hl/H853", logged_at="v")
+    return {
+        "earlier link without a reason": [unreasoned, recorrected(unreasoned, "H3922", new_prefixes=[])],
+        "earlier link without evidence": [unsupported, recorrected(unsupported, "H3922", new_prefixes=[], evidence=first["evidence"])],
+        "later link starts from other prefixes": [first, dict(renamed, occurrence=dict(renamed["occurrence"], prefixes=[]))],
+        "later link logged against a superseded state": [first, renamed, stale],
+    }
+
+
+@pytest.mark.parametrize("case", list(chain_histories()))
+def test_a_correction_chain_is_rejected_unless_every_link_is_reviewed_and_continuous(case):
+    entry = dict(queue_entry("corinthians1.11.22.1", ["prefix_metadata_disagreement"]), text="לָכֶם", strong="H5083")
+    with pytest.raises(ValueError, match="does not satisfy the reviewed Strong correction rule"):
+        dispositions.build_ledger([entry], dispositions.with_superseded({entry["location"]: chain_histories()[case]}))
+
+
+def root_letter_link(prefixes, new_prefixes, **extra):
+    strong = "/".join([*prefixes, "H3922"])
+    link = root_letter_tagged("corinthians1.11.22.1", "לָכֶם", strong, prefixes, new_prefixes, "H3922")
+    return dict(link, **{"new_strong": "/".join([*new_prefixes, "H3922"]), "reason": "ל is a root letter", **extra})
+
+
+def corrected_after_root_letter(link):
+    kept = link["new_prefixes"] or []
+    later = lexical_reviewed("set_strong", "applied", "/".join([*kept, "H859"]), new_prefixes=kept)
+    occurrence = dict(later["occurrence"], strong=link["new_strong"], prefixes=kept)
+    return dict(later, occurrence=occurrence, previous_strong=link["new_strong"], superseded=[link])
+
+
+def root_letter_chain_record(link):
+    entry = dict(queue_entry("corinthians1.11.22.1", ["prefix_metadata_disagreement"]), text="לָכֶם", strong=link["previous_strong"])
+    return dispositions.build_ledger([entry], {entry["location"]: corrected_after_root_letter(link)})["records"][0]
+
+
+def test_a_root_letter_correction_is_a_link_in_a_reviewed_correction_chain():
+    record = root_letter_chain_record(root_letter_link(["Hl"], []))
+    assert (record["disposition"], record["before"]["strong"], record["after"]["strong"]) == ("corrected", "Hl/H3922", "H859")
+    assert [(link["previous_strong"], link["new_strong"]) for link in record["evidence"]["superseded"]] == [("Hl/H3922", "H3922")]
+
+
+@pytest.mark.parametrize("new_strong", ["Hl/H3922", "H3922"], ids=["prefixes in the new Strong", "bare Strong of an in-queue decision"])
+def test_a_root_letter_link_that_keeps_a_prefix_records_the_new_strong_either_way(new_strong):
+    record = root_letter_chain_record(root_letter_link(["Hl", "Hk"], ["Hl"], new_strong=new_strong))
+    assert (record["disposition"], record["before"]["strong"], record["after"]["strong"]) == ("corrected", "Hl/Hk/H3922", "Hl/H859")
+
+
+@pytest.mark.parametrize("link", [
+    root_letter_link(["Hl"], ["Hl"]),
+    root_letter_link(["Hb", "Hl"], ["Hl"]),
+    root_letter_link(["Hl"], [], status="needs_manual_review"),
+    root_letter_link(["Hl"], [], issue_type=dispositions.LEXICAL_ISSUE),
+    dict(root_letter_link(["Hl"], []), new_prefixes=None),
+    root_letter_link(["Hl"], [], new_strong="H859"),
+    root_letter_link(["Hl"], [], previous_strong="Hl/H5083"),
+    root_letter_link(["Hl"], [], reason=""),
+    dict(root_letter_link(["Hl"], []), occurrence=dict(root_letter_link(["Hl"], [])["occurrence"], text="לָהֶם")),
+], ids=["prefixes not shortened", "kept prefix not a leading prefix", "unconfirmed status", "not a root-letter decision",
+        "no kept prefixes recorded", "new Strong names another word", "previous Strong is not the tagged one", "no reason",
+        "logged against another word"])
+def test_a_chain_link_that_the_root_letter_rule_does_not_support_is_rejected(link):
+    with pytest.raises(ValueError, match="does not satisfy the reviewed Strong correction rule"):
+        root_letter_chain_record(link)
+
+
+def test_set_strong_moves_the_occurrence_between_instances_only_entries(tmp_path):
+    lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
+    custom_path = lexicon_dir.parent / "custom_definitions.json"
+    instance = {"book": "acts", "chapter": 1, "verse": 1, "word_index": 0, "text": "דִּבּוּר"}
+    write_json(custom_path, {
+        "D0900": {"strong_number": "D0900", "mapping_scope": "instances_only", "nt_instances": [instance], "definitions": [{"text_en": "a"}]},
+        "D0901": {"strong_number": "D0901", "mapping_scope": "instances_only", "nt_instances": [], "definitions": [{"text_en": "b"}]},
+    })
+    write_json(tmp_path / "parsed" / "acts" / "1.json", [{"verses": [{"verse": 1, "hebrew": "דִּבּוּר", "words": [{"text": "דִּבּוּר", "strong": "D0900"}]}]}])
+    write_json(tmp_path / "move.json", {"decisions": [{
+        "action": "set_strong", "issue_type": "lexical_review", "reviewer": "claude-delitzsch-review",
+        "occurrence": {**instance, "strong": "D0900", "prefixes": []}, "previous_strong": "D0900", "new_strong": "D0901",
+    }]})
+    apply_decisions(tmp_path / "move.json", tmp_path / "parsed", LexiconIndex(lexicon_dir), tmp_path / "log")
+    custom = json.loads(custom_path.read_text(encoding="utf-8"))
+    assert (custom["D0900"]["nt_instances"], custom["D0901"]["nt_instances"]) == ([], [instance])
+
+
+def test_every_custom_entry_that_lists_its_occurrences_keeps_the_list_exact(tmp_path):
+    lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
+    custom_path = lexicon_dir.parent / "custom_definitions.json"
+    moved = {"book": "acts", "chapter": 18, "verse": 2, "word_index": 0, "text": "רוֹמִי"}
+    missed = {"book": "acts", "chapter": 22, "verse": 25, "word_index": 0, "text": "רוֹמִי"}
+    stale_view = [{**moved, "source_key": "acts 18:2"}]
+    write_json(custom_path, {
+        "D0141": {"strong_number": "D0141", "nt_instances": [moved], "instances": stale_view, "surface_instances": stale_view,
+                  "definitions": [{"text_en": "Roman", "source": "custom", "order": 1}]},
+        "D0705": {"strong_number": "D0705", "nt_instances": [], "definitions": [{"text_en": "Rome", "order": 1}]},
+    })
+    write_json(tmp_path / "parsed" / "acts" / "18.json", [{"verses": [{"verse": 2, "hebrew": "רוֹמִי", "words": [{"text": "רוֹמִי", "strong": "D0141"}]}]}])
+    write_json(tmp_path / "parsed" / "acts" / "22.json", [{"verses": [{"verse": 25, "hebrew": "רוֹמִי", "words": [{"text": "רוֹמִי", "strong": "D0141"}]}]}])
+    write_json(tmp_path / "batch.json", {"decisions": [
+        {"action": "set_strong", "issue_type": "lexical_review", "reviewer": "claude-delitzsch-review",
+         "occurrence": {**moved, "strong": "D0141", "prefixes": []}, "previous_strong": "D0141", "new_strong": "D0705"},
+        {"action": "upsert_custom_definition", "strong": "D0141", "reviewer": "claude-delitzsch-review",
+         "definition": {"text_en": "Roman", "source": "custom", "order": 1}, "nt_instances": [missed]},
+    ]})
+    apply_decisions(tmp_path / "batch.json", tmp_path / "parsed", LexiconIndex(lexicon_dir), tmp_path / "log")
+    custom = json.loads(custom_path.read_text(encoding="utf-8"))
+    assert (custom["D0141"]["nt_instances"], custom["D0705"]["nt_instances"]) == ([missed], [moved])
+    assert [(i["book"], i["chapter"], i["verse"]) for i in custom["D0141"]["instances"]] == [("acts", 22, 25)]
+    assert len(custom["D0141"]["definitions"]) == 1
 
 
 def mark_13_19_words(corpus):
@@ -1025,10 +1228,128 @@ def test_identifiers_without_definitions_end_with_a_lexical_review():
     aram = ledger_record("acts.2.9.4")
     assert (aram["family"], aram["disposition"], aram["rule"], aram["lexical_review"]) == ("outside_queue", "benign", "lexical_review", "reviewed")
     ministry = ledger_record("corinthians2.6.3.7")
-    assert (ministry["disposition"], ministry["before"]["strong"]) == ("blocked", "H1122")
-    assert parsed_verse("corinthians2", 6, 3)["words"][7]["strong"] == "H1122"
+    assert (ministry["disposition"], ministry["before"]["strong"], ministry["after"]["strong"]) == ("corrected", "H1122", "D0308")
+    assert parsed_verse("corinthians2", 6, 3)["words"][7]["strong"] == "D0308"
     southern = ledger_record("acts.28.13.7")
-    assert (southern["disposition"], southern["rule"], southern["before"]["strong"]) == ("blocked", "lexical_review", "H1784")
+    assert (southern["disposition"], southern["rule"], southern["before"]["strong"], southern["after"]["strong"]) == (
+        "corrected", "reviewed_strong_correction", "H1784", "D0325")
+
+
+def definition_gaps_batch(name="definition_gaps_42"):
+    path = dispositions.ROOT / f"data/delitzsch/review/batches/{name}.json"
+    return json.loads(path.read_text(encoding="utf-8"))["decisions"]
+
+
+@cache
+def locations_by_strong():
+    located = {}
+    for path in sorted((dispositions.ROOT / "data/delitzsch/parsed").glob("*/*.json")):
+        if path.stem.isdigit():
+            for verse in json.loads(path.read_text(encoding="utf-8"))[0]["verses"]:
+                for index, word in enumerate(verse["words"]):
+                    located.setdefault((word.get("strong") or "").split("/")[-1], set()).add(f"{path.parent.name}.{path.stem}.{verse['verse']}.{index}")
+    return located
+
+
+@cache
+def committed_custom():
+    return json.loads((dispositions.ROOT / "data/dict/lexicon/custom_definitions.json").read_text(encoding="utf-8"))
+
+
+@pytest.mark.parametrize("name, created_count", [
+    ("definition_gaps_42", 44), ("definition_gaps_42_round_2", 375), ("definition_gaps_42_round_3", 1), ("definition_gaps_42_round_4", 20),
+    ("definition_gaps_42_round_5", 177), ("definition_gaps_42_round_7", 10), ("definition_gaps_42_round_12", 1),
+])
+def test_issue_42_entries_list_exactly_the_occurrences_reviewed_onto_them(name, created_count):
+    custom = committed_custom()
+    created = [d for d in definition_gaps_batch(name) if "nt_instances" in d and d["strong"].startswith("D")]
+    assert len(created) == created_count
+    for decision in created:
+        entry = custom[decision["strong"]]
+        assert entry.get("mapping_scope") == decision.get("mapping_scope")
+        assert all(d["text_en"] and d["text_es"] for d in entry["definitions"])
+        listed = {f"{i['book']}.{i['chapter']}.{i['verse']}.{i['word_index']}" for i in entry["nt_instances"]}
+        assert listed == locations_by_strong().get(decision["strong"], set())
+        for location in listed if "mapping_scope" in decision else ():
+            record = ledger_record(location)
+            assert (record["disposition"], record["reviewer"], record["after"]["strong"].split("/")[-1]) == (
+                "corrected", "claude-delitzsch-review", decision["strong"])
+
+
+@pytest.mark.parametrize("name, move_count, noted", [
+    ("definition_gaps_42", 148, 1), ("definition_gaps_42_round_2", 685, 14), ("definition_gaps_42_round_3", 206, 6),
+    ("definition_gaps_42_round_4", 417, 6), ("definition_gaps_42_round_5", 1866, 25),
+    ("definition_gaps_42_round_7", 145, 4), ("definition_gaps_42_round_10", 267, 2), ("definition_gaps_42_round_11", 15, 0),
+    ("definition_gaps_42_round_12", 4, 0), ("definition_gaps_42_round_14", 20, 1),
+])
+def test_issue_42_identity_evidence_names_a_greek_word_of_the_verse(name, move_count, noted):
+    greek = dispositions.ROOT / "data/greek/preview/greek/releases/sblgnt/5de0a47f35f0fc13dfe1430d104e5db8a4285f9c/books"
+    moves = [d for d in definition_gaps_batch(name) if d["action"] == "set_strong"]
+    assert len(moves) == move_count
+    assert sum("greek_note" in d["evidence"] for d in moves) == noted
+    for decision in moves:
+        occurrence = decision["occurrence"]
+        verses = json.loads((greek / occurrence["book"] / f"{occurrence['chapter']}.json").read_text(encoding="utf-8"))["verses"]
+        words = {f"{w['strong']} {w['lemma']}" for v in verses if v["verse"] == occurrence["verse"] for w in v["words"]}
+        assert decision["evidence"].get("greek_note") or decision["evidence"]["greek"] in words, occurrence
+
+
+def test_no_occurrence_stays_blocked_on_an_identifier_that_names_another_word():
+    records = dispositions.read_ledger()["records"]
+    assert [r["location"] for r in records if r["disposition"] == "blocked" and r["rule"] == "lexical_review"] == []
+    hermas, hermes = ledger_record("romans.16.14.4"), ledger_record("romans.16.14.6")
+    assert (hermas["after"]["strong"], hermes["after"]["strong"], ledger_record("acts.14.12.6")["after"]["strong"]) == ("Hc/D0645", "Hc/D0702", "D0338")
+
+
+@pytest.mark.parametrize("book, chapter, verse, index, strong, gloss", [
+    ("luke", 1, 21, 3, "D0534", "Zechariah; the priest, father of John the Baptist."),
+    ("luke", 1, 5, 6, "D0534", "Zechariah; the priest, father of John the Baptist."),
+    ("matthew", 23, 35, 13, "D0706", "Zechariah; the man killed between the sanctuary and the altar"),
+    ("acts", 13, 1, 15, "D0333", "Manaen; a prophet at Antioch"),
+    ("romans", 16, 14, 6, "D0702", "Hermes; a Christian in Rome greeted by Paul."),
+    ("acts", 28, 1, 7, "D0699", "Melita; the island of Malta"),
+    ("timothy1", 3, 13, 1, "D0402", "serve, minister"),
+    ("acts", 21, 8, 11, "D0903", "Philip; the evangelist"),
+    ("matthew", 16, 13, 7, "D0904", "Philip; the tetrarch"),
+    ("matthew", 14, 3, 12, "D0905", "Philip; a son of Herod the Great"),
+    ("corinthians1", 16, 15, 7, "D0907", "Stephanas; a believer of Corinth"),
+    ("john3", 1, 1, 2, "D0057", "Gaius; a name borne by believers"),
+    ("acts", 4, 6, 0, "D0189", "Annas;"),
+])
+def test_a_reviewed_new_testament_referent_shows_its_own_gloss_first(book, chapter, verse, index, strong, gloss):
+    custom = json.loads((dispositions.ROOT / "data/dict/lexicon/custom_definitions.json").read_text(encoding="utf-8"))
+    words = json.loads((dispositions.ROOT / "data/dict/lexicon/words.json").read_text(encoding="utf-8"))
+    assert parsed_verse(book, chapter, verse)["words"][index]["strong"].split("/")[-1] == strong
+    entry = custom.get(strong) if strong.startswith("D") else words[strong]
+    assert entry["definitions"][0]["text_en"].startswith(gloss)
+
+
+def test_a_reviewed_identity_supersedes_the_earlier_correction_it_replaces():
+    melita = ledger_record("acts.28.1.7")
+    assert (melita["disposition"], melita["before"]["strong"], melita["after"]["strong"]) == ("corrected", "H1784", "D0699")
+    assert [(link["previous_strong"], link["new_strong"]) for link in melita["evidence"]["superseded"]] == [("H1784", "D0254")]
+    assert parsed_verse("acts", 28, 1)["words"][7]["strong"] == "D0699"
+
+
+def test_upsert_custom_definition_sets_scope_and_instances_only_when_it_creates_the_entry(tmp_path):
+    lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
+    custom_path = lexicon_dir.parent / "custom_definitions.json"
+    write_json(custom_path, {})
+    instance = {"book": "acts", "chapter": 17, "verse": 1, "word_index": 7, "text": "תַּסְלוֹנִיקִי"}
+
+    def upsert(text_en, scope):
+        path = tmp_path / f"{text_en}.json"
+        write_json(path, {"decisions": [{
+            "action": "upsert_custom_definition", "strong": "D0900", "hebrew": "תַּסְלוֹנִיקִי", "reviewer": "claude-delitzsch-review",
+            "mapping_scope": scope, "nt_instances": [instance], "definition": {"text_en": text_en, "text_es": text_en},
+        }]})
+        apply_decisions(path, tmp_path / "parsed", LexiconIndex(lexicon_dir), tmp_path / "log")
+
+    upsert("Thessalonica", "instances_only")
+    upsert("Thessalonike", "exact")
+    entry = json.loads(custom_path.read_text(encoding="utf-8"))["D0900"]
+    assert (entry["mapping_scope"], entry["nt_instances"]) == ("instances_only", [instance])
+    assert [d["text_en"] for d in entry["definitions"]] == ["Thessalonica", "Thessalonike"]
     you = ledger_record("matthew.6.1.13")
     assert (you["family"], you["rule"], you["before"]["strong"], you["after"]["strong"]) == (
         "prefix_metadata", "reviewed_strong_correction", "H6889", "Hl/H859")
@@ -1062,8 +1383,8 @@ def test_reverting_restores_lexical_review_corrections_and_an_unrecorded_edit_st
 def test_committed_outside_queue_root_letter_batch_matches_its_generator():
     committed = json.loads(dispositions.OUTSIDE_ROOT_LETTER_BATCH.read_text(encoding="utf-8"))
     assert committed == dispositions.outside_root_letter_batch_from_disk()
-    assert Counter(item["evidence"]["basis"] for item in committed["decisions"]) == {"reviewed_strong": 2377, "lemma_check": 1530}
-    assert Counter(item["reason"] for item in committed["unresolved"]) == {"manual_review": 7}
+    assert Counter(item["evidence"]["basis"] for item in committed["decisions"]) == {"reviewed_strong": 2360, "lemma_check": 1518}
+    assert committed["unresolved"] == []
 
 
 def test_false_prefixes_outside_the_queue_leave_the_prefixes_and_the_strong_string():
@@ -1093,10 +1414,10 @@ def test_outside_queue_root_letter_matches_end_with_a_lexical_review():
         assert location not in unresolved
         assert ledger_record(location)["rule"] == rule
         assert parsed_verse(book, chapter, verse)["words"][index]["strong"] == strong
-    assert unresolved["corinthians1.7.31.0"] == "manual_review"
-    blocked = ledger_record("corinthians1.7.31.0")
-    assert (blocked["disposition"], blocked["rule"], blocked["before"]["strong"]) == ("blocked", "lexical_review", "Hc/Hd/H2008")
-    assert parsed_verse("corinthians1", 7, 31)["words"][0]["strong"] == "Hc/Hd/H2008"
+    assert "corinthians1.7.31.0" not in unresolved
+    enjoying = ledger_record("corinthians1.7.31.0")
+    assert (enjoying["disposition"], enjoying["before"]["strong"], enjoying["after"]["strong"]) == ("corrected", "Hc/Hd/H2008", "Hc/Hd/D0448")
+    assert parsed_verse("corinthians1", 7, 31)["words"][0]["strong"] == "Hc/Hd/D0448"
 
 
 @pytest.mark.parametrize("text, prefixes, strong, lemma, review, expected", [

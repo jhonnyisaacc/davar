@@ -113,10 +113,11 @@
       "sense": "0"
     },
     {
-      "text_en": "to call on the name of",
+      "text_en": "to call on the name of YHWH",
       "source": "bdb",
       "order": 17,
-      "sense": "0"
+      "sense": "0",
+      "text_es": "invocar el nombre de YHWH"
     },
     {
       "text_en": "play the pipe",

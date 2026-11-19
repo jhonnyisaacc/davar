@@ -8,18 +8,11 @@
   "translit_es": "yaman",
   "definitions": [
     {
-      "text_en": "go to",
+      "text_en": "go to or choose the right",
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "ir a"
-    },
-    {
-      "text_en": "choose the right",
-      "source": "bdb",
-      "order": 2,
-      "sense": "0",
-      "text_es": "elegir la derecha"
+      "text_es": "ir a la derecha o escogerla"
     },
     {
       "text_en": "use the right hand",

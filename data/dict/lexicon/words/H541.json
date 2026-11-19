@@ -8,17 +8,11 @@
   "translit_es": "aman",
   "definitions": [
     {
-      "text_en": "go to",
+      "text_en": "go to or choose the right",
       "source": "bdb",
       "order": 1,
-      "sense": "0"
-    },
-    {
-      "text_en": "choose the right",
-      "source": "bdb",
-      "order": 2,
       "sense": "0",
-      "text_es": "escoger lo recto"
+      "text_es": "ir a la derecha o escogerla"
     },
     {
       "text_en": "use the right hand",

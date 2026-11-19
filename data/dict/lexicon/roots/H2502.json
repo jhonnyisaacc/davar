@@ -111,17 +111,11 @@
       "sense": "2"
     },
     {
-      "text_en": "be",
+      "text_en": "be or go equipped",
       "source": "bdb",
       "order": 16,
       "sense": "0",
-      "text_es": "ser"
-    },
-    {
-      "text_en": "go equipped",
-      "source": "bdb",
-      "order": 17,
-      "sense": "0"
+      "text_es": "estar o ir equipado"
     },
     {
       "text_en": "will brace up, invigorate, thy bones",

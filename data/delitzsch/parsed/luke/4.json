@@ -502,7 +502,7 @@
           },
           {
             "text": "נִמְסְרָה",
-            "strong": "H1116",
+            "strong": "H4560",
             "prefixes": []
           },
           {
@@ -1021,7 +1021,7 @@
           },
           {
             "text": "הַגָּלִיל",
-            "strong": "Hd/H1551",
+            "strong": "Hd/D0779",
             "prefixes": [
               "Hd"
             ],
@@ -1122,7 +1122,7 @@
           },
           {
             "text": "נְצֶרֶת",
-            "strong": "H5342",
+            "strong": "D0773",
             "prefixes": []
           },
           {
@@ -1132,7 +1132,7 @@
           },
           {
             "text": "גֻּדַּל־",
-            "strong": "H481",
+            "strong": "H1431",
             "prefixes": []
           },
           {
@@ -1237,7 +1237,7 @@
           },
           {
             "text": "יְשַׁעְיָה",
-            "strong": "H3470",
+            "strong": "D0782",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -1475,7 +1475,7 @@
       {
         "chapter": 4,
         "verse": 20,
-        "hebrew": "וַ/יְהִי כַּ/אֲשֶׁר גָּלַל אֶת־הַ/סֵּפֶר וַ/יְשִׁיבֵהוּ אֶל־הַחַזָּן וַ/יֵּשֵׁב וְ/עֵינֵי כָּל־אֲשֶׁר בְּ/בֵית הַ/כְּנֵסֶת נְשֻׂאוֹת אֵלָיו׃",
+        "hebrew": "וַ/יְהִי כַּ/אֲשֶׁר גָּלַל אֶת־הַ/סֵּפֶר וַ/יְשִׁיבֵהוּ אֶל־הַ/חַזָּן וַ/יֵּשֵׁב וְ/עֵינֵי כָּל־אֲשֶׁר בְּ/בֵית הַ/כְּנֵסֶת נְשֻׂאוֹת אֵלָיו׃",
         "words": [
           {
             "text": "וַיְהִי",
@@ -1493,7 +1493,7 @@
           },
           {
             "text": "גָּלַל",
-            "strong": "H5115",
+            "strong": "H1556",
             "prefixes": []
           },
           {
@@ -1522,8 +1522,10 @@
           },
           {
             "text": "הַחַזָּן",
-            "strong": "H309",
-            "prefixes": []
+            "strong": "Hd/D0558",
+            "prefixes": [
+              "Hd"
+            ]
           },
           {
             "text": "וַיֵּשֵׁב",
@@ -1582,7 +1584,7 @@
         "words": [
           {
             "text": "וַיָּחֶל",
-            "strong": "Hc/H2490",
+            "strong": "Hc/D0772",
             "prefixes": [
               "Hc"
             ]
@@ -1608,7 +1610,7 @@
           },
           {
             "text": "נִתְמַלֵּא",
-            "strong": "H481",
+            "strong": "H4390",
             "prefixes": []
           },
           {
@@ -1715,7 +1717,7 @@
           },
           {
             "text": "יוֹסֵף׃",
-            "strong": "H3130",
+            "strong": "D0784",
             "prefixes": [],
             "possible_proper_name": true
           }
@@ -1994,7 +1996,7 @@
           },
           {
             "text": "אֵלִיָּהוּ",
-            "strong": "H452",
+            "strong": "D0781",
             "prefixes": []
           },
           {
@@ -2086,7 +2088,7 @@
           },
           {
             "text": "אֵלִיָּהוּ",
-            "strong": "H452",
+            "strong": "D0781",
             "prefixes": []
           },
           {
@@ -2111,7 +2113,7 @@
           },
           {
             "text": "צָרְפַתָה",
-            "strong": "H6886",
+            "strong": "D0811",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -2184,7 +2186,7 @@
           },
           {
             "text": "אֱלִישָׁע",
-            "strong": "H477",
+            "strong": "D0812",
             "prefixes": []
           },
           {
@@ -2203,7 +2205,7 @@
           },
           {
             "text": "טֹהַר",
-            "strong": "H2482",
+            "strong": "H2891",
             "prefixes": []
           },
           {
@@ -2223,7 +2225,7 @@
           },
           {
             "text": "נַעֲמָן",
-            "strong": "H5283",
+            "strong": "D0813",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -2371,7 +2373,7 @@
           },
           {
             "text": "עִירָם",
-            "strong": "H5902",
+            "strong": "H5892",
             "prefixes": []
           },
           {
@@ -2476,7 +2478,7 @@
           },
           {
             "text": "הַגָּלִיל",
-            "strong": "Hd/H1551",
+            "strong": "Hd/D0779",
             "prefixes": [
               "Hd"
             ],
@@ -2658,7 +2660,7 @@
           },
           {
             "text": "הַנָּצְרִי",
-            "strong": "Hd/H5342",
+            "strong": "Hd/D0774",
             "prefixes": [
               "Hd"
             ]
@@ -2768,7 +2770,7 @@
           },
           {
             "text": "הַשֵּׁד",
-            "strong": "H2482",
+            "strong": "H7700",
             "prefixes": []
           },
           {
@@ -3016,7 +3018,7 @@
           },
           {
             "text": "שִׁמְעוֹן",
-            "strong": "H8095",
+            "strong": "D0710",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -3029,7 +3031,7 @@
           },
           {
             "text": "שִׁמְעוֹן",
-            "strong": "H8095",
+            "strong": "D0710",
             "prefixes": [],
             "possible_proper_name": true
           },
@@ -3187,12 +3189,12 @@
           },
           {
             "text": "חֳלָיִים",
-            "strong": "H2482",
+            "strong": "H2483",
             "prefixes": []
           },
           {
             "text": "שׁוֹנִים",
-            "strong": "H8138",
+            "strong": "D0726",
             "prefixes": []
           },
           {
@@ -3632,7 +3634,7 @@
           },
           {
             "text": "בַּגָּלִיל׃",
-            "strong": "Hb/H1551",
+            "strong": "Hb/D0779",
             "prefixes": [
               "Hb"
             ],
