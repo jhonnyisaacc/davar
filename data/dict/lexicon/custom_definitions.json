@@ -5370,8 +5370,8 @@
     "definitions": [
       {
         "source": "custom",
-        "text_es": "Garganta",
-        "text_en": "Throat",
+        "text_en": "soul, life, self, person; living being; desire, appetite; also throat.",
+        "text_es": "alma, vida, uno mismo, persona; ser viviente; deseo, apetito; también garganta.",
         "order": 1
       },
       {
@@ -65222,12 +65222,19 @@
         "verse": 32,
         "word_index": 4,
         "text": "קוּרִינִי"
+      },
+      {
+        "book": "acts",
+        "chapter": 6,
+        "verse": 9,
+        "word_index": 9,
+        "text": "קוּרִינִים"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 6,
-    "instance_surface_count": 6,
+    "instance_total": 7,
+    "instance_surface_count": 7,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -65291,6 +65298,21 @@
           "text": "קוּרִינִי"
         },
         "source_key": "[\"\",null,\"acts\",2,10,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 6,
+        "verse": 9,
+        "word_index": 9,
+        "text": "קוּרִינִים",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 6,
+          "verse": 9,
+          "word_index": 9,
+          "text": "קוּרִינִים"
+        },
+        "source_key": "[\"\",null,\"acts\",6,9,null]"
       },
       {
         "book": "acts",
@@ -65383,6 +65405,21 @@
           "text": "קוּרִינִי"
         },
         "source_key": "[\"\",null,\"acts\",2,10,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 6,
+        "verse": 9,
+        "word_index": 9,
+        "text": "קוּרִינִים",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 6,
+          "verse": 9,
+          "word_index": 9,
+          "text": "קוּרִינִים"
+        },
+        "source_key": "[\"\",null,\"acts\",6,9,null]"
       },
       {
         "book": "acts",
@@ -65474,12 +65511,26 @@
         "verse": 6,
         "word_index": 10,
         "text": "הַנִּצְלָב"
+      },
+      {
+        "book": "mark",
+        "chapter": 15,
+        "verse": 14,
+        "word_index": 11,
+        "text": "הַצְלֵב"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 6,
+        "verse": 6,
+        "word_index": 5,
+        "text": "צָלְבוּ"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 5,
-    "instance_surface_count": 5,
+    "instance_total": 7,
+    "instance_surface_count": 7,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -65487,80 +65538,18 @@
       {
         "book": "mark",
         "chapter": 15,
-        "verse": 15,
-        "word_index": 16,
-        "text": "לְהִצָּלֵב׃",
+        "verse": 14,
+        "word_index": 11,
+        "text": "הַצְלֵב",
         "source_payload": {
           "book": "mark",
           "chapter": 15,
-          "verse": 15,
-          "word_index": 16,
-          "text": "לְהִצָּלֵב׃"
-        },
-        "source_key": "[\"\",null,\"mark\",15,15,null]"
-      },
-      {
-        "book": "mark",
-        "chapter": 16,
-        "verse": 6,
-        "word_index": 10,
-        "text": "הַנִּצְלָב",
-        "source_payload": {
-          "book": "mark",
-          "chapter": 16,
-          "verse": 6,
-          "word_index": 10,
-          "text": "הַנִּצְלָב"
-        },
-        "source_key": "[\"\",null,\"mark\",16,6,null]"
-      },
-      {
-        "book": "acts",
-        "chapter": 2,
-        "verse": 36,
-        "word_index": 15,
-        "text": "צְלַבְתֶּם׃",
-        "source_payload": {
-          "book": "acts",
-          "chapter": 2,
-          "verse": 36,
-          "word_index": 15,
-          "text": "צְלַבְתֶּם׃"
-        },
-        "source_key": "[\"\",null,\"acts\",2,36,null]"
-      },
-      {
-        "book": "galatians",
-        "chapter": 3,
-        "verse": 1,
-        "word_index": 17,
-        "text": "הַצָּלוּב",
-        "source_payload": {
-          "book": "galatians",
-          "chapter": 3,
-          "verse": 1,
-          "word_index": 17,
-          "text": "הַצָּלוּב"
-        },
-        "source_key": "[\"\",null,\"galatians\",3,1,null]"
-      },
-      {
-        "book": "galatians",
-        "chapter": 6,
-        "verse": 14,
-        "word_index": 15,
-        "text": "נִצְלָב",
-        "source_payload": {
-          "book": "galatians",
-          "chapter": 6,
           "verse": 14,
-          "word_index": 15,
-          "text": "נִצְלָב"
+          "word_index": 11,
+          "text": "הַצְלֵב"
         },
-        "source_key": "[\"\",null,\"galatians\",6,14,null]"
-      }
-    ],
-    "surface_instances": [
+        "source_key": "[\"\",null,\"mark\",15,14,null]"
+      },
       {
         "book": "mark",
         "chapter": 15,
@@ -65635,6 +65624,128 @@
           "text": "נִצְלָב"
         },
         "source_key": "[\"\",null,\"galatians\",6,14,null]"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 6,
+        "verse": 6,
+        "word_index": 5,
+        "text": "צָלְבוּ",
+        "source_payload": {
+          "book": "hebrews",
+          "chapter": 6,
+          "verse": 6,
+          "word_index": 5,
+          "text": "צָלְבוּ"
+        },
+        "source_key": "[\"\",null,\"hebrews\",6,6,null]"
+      }
+    ],
+    "surface_instances": [
+      {
+        "book": "mark",
+        "chapter": 15,
+        "verse": 14,
+        "word_index": 11,
+        "text": "הַצְלֵב",
+        "source_payload": {
+          "book": "mark",
+          "chapter": 15,
+          "verse": 14,
+          "word_index": 11,
+          "text": "הַצְלֵב"
+        },
+        "source_key": "[\"\",null,\"mark\",15,14,null]"
+      },
+      {
+        "book": "mark",
+        "chapter": 15,
+        "verse": 15,
+        "word_index": 16,
+        "text": "לְהִצָּלֵב׃",
+        "source_payload": {
+          "book": "mark",
+          "chapter": 15,
+          "verse": 15,
+          "word_index": 16,
+          "text": "לְהִצָּלֵב׃"
+        },
+        "source_key": "[\"\",null,\"mark\",15,15,null]"
+      },
+      {
+        "book": "mark",
+        "chapter": 16,
+        "verse": 6,
+        "word_index": 10,
+        "text": "הַנִּצְלָב",
+        "source_payload": {
+          "book": "mark",
+          "chapter": 16,
+          "verse": 6,
+          "word_index": 10,
+          "text": "הַנִּצְלָב"
+        },
+        "source_key": "[\"\",null,\"mark\",16,6,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 2,
+        "verse": 36,
+        "word_index": 15,
+        "text": "צְלַבְתֶּם׃",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 2,
+          "verse": 36,
+          "word_index": 15,
+          "text": "צְלַבְתֶּם׃"
+        },
+        "source_key": "[\"\",null,\"acts\",2,36,null]"
+      },
+      {
+        "book": "galatians",
+        "chapter": 3,
+        "verse": 1,
+        "word_index": 17,
+        "text": "הַצָּלוּב",
+        "source_payload": {
+          "book": "galatians",
+          "chapter": 3,
+          "verse": 1,
+          "word_index": 17,
+          "text": "הַצָּלוּב"
+        },
+        "source_key": "[\"\",null,\"galatians\",3,1,null]"
+      },
+      {
+        "book": "galatians",
+        "chapter": 6,
+        "verse": 14,
+        "word_index": 15,
+        "text": "נִצְלָב",
+        "source_payload": {
+          "book": "galatians",
+          "chapter": 6,
+          "verse": 14,
+          "word_index": 15,
+          "text": "נִצְלָב"
+        },
+        "source_key": "[\"\",null,\"galatians\",6,14,null]"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 6,
+        "verse": 6,
+        "word_index": 5,
+        "text": "צָלְבוּ",
+        "source_payload": {
+          "book": "hebrews",
+          "chapter": 6,
+          "verse": 6,
+          "word_index": 5,
+          "text": "צָלְבוּ"
+        },
+        "source_key": "[\"\",null,\"hebrews\",6,6,null]"
       }
     ]
   },
@@ -67693,12 +67804,19 @@
         "verse": 13,
         "word_index": 0,
         "text": "הִשְׁתַּתְּפוּ"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 5,
+        "verse": 22,
+        "word_index": 8,
+        "text": "תִשְׁתַּתֵּף"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 2,
-    "instance_surface_count": 2,
+    "instance_total": 3,
+    "instance_surface_count": 3,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -67732,6 +67850,21 @@
           "text": "הִשְׁתַּתְּפוּ"
         },
         "source_key": "[\"\",null,\"romans\",12,13,null]"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 5,
+        "verse": 22,
+        "word_index": 8,
+        "text": "תִשְׁתַּתֵּף",
+        "source_payload": {
+          "book": "timothy1",
+          "chapter": 5,
+          "verse": 22,
+          "word_index": 8,
+          "text": "תִשְׁתַּתֵּף"
+        },
+        "source_key": "[\"\",null,\"timothy1\",5,22,null]"
       }
     ],
     "surface_instances": [
@@ -67764,6 +67897,21 @@
           "text": "הִשְׁתַּתְּפוּ"
         },
         "source_key": "[\"\",null,\"romans\",12,13,null]"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 5,
+        "verse": 22,
+        "word_index": 8,
+        "text": "תִשְׁתַּתֵּף",
+        "source_payload": {
+          "book": "timothy1",
+          "chapter": 5,
+          "verse": 22,
+          "word_index": 8,
+          "text": "תִשְׁתַּתֵּף"
+        },
+        "source_key": "[\"\",null,\"timothy1\",5,22,null]"
       }
     ]
   },
@@ -71740,16 +71888,38 @@
         "verse": 24,
         "word_index": 0,
         "text": "וַיִּרְמָז־"
+      },
+      {
+        "book": "luke",
+        "chapter": 20,
+        "verse": 37,
+        "word_index": 2,
+        "text": "רָמַז"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 2,
-    "instance_surface_count": 2,
+    "instance_total": 3,
+    "instance_surface_count": 3,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [
+      {
+        "book": "luke",
+        "chapter": 20,
+        "verse": 37,
+        "word_index": 2,
+        "text": "רָמַז",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 20,
+          "verse": 37,
+          "word_index": 2,
+          "text": "רָמַז"
+        },
+        "source_key": "[\"\",null,\"luke\",20,37,null]"
+      },
       {
         "book": "john",
         "chapter": 13,
@@ -71782,6 +71952,21 @@
       }
     ],
     "surface_instances": [
+      {
+        "book": "luke",
+        "chapter": 20,
+        "verse": 37,
+        "word_index": 2,
+        "text": "רָמַז",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 20,
+          "verse": 37,
+          "word_index": 2,
+          "text": "רָמַז"
+        },
+        "source_key": "[\"\",null,\"luke\",20,37,null]"
+      },
       {
         "book": "john",
         "chapter": 13,
@@ -85397,12 +85582,54 @@
         "verse": 12,
         "word_index": 11,
         "text": "צְלָב"
+      },
+      {
+        "book": "john",
+        "chapter": 19,
+        "verse": 19,
+        "word_index": 6,
+        "text": "הַצְּלָב"
+      },
+      {
+        "book": "john",
+        "chapter": 19,
+        "verse": 25,
+        "word_index": 2,
+        "text": "צְלָב"
+      },
+      {
+        "book": "john",
+        "chapter": 19,
+        "verse": 31,
+        "word_index": 5,
+        "text": "הַצְּלָב"
+      },
+      {
+        "book": "luke",
+        "chapter": 9,
+        "verse": 23,
+        "word_index": 14,
+        "text": "צְלָבוֹ"
+      },
+      {
+        "book": "mark",
+        "chapter": 15,
+        "verse": 21,
+        "word_index": 15,
+        "text": "צְלָבוֹ׃"
+      },
+      {
+        "book": "ephesians",
+        "chapter": 2,
+        "verse": 16,
+        "word_index": 8,
+        "text": "צְלִיבָתוֹ"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 8,
-    "instance_surface_count": 8,
+    "instance_total": 14,
+    "instance_surface_count": 14,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -85453,6 +85680,36 @@
         "source_key": "[\"\",null,\"mark\",8,34,null]"
       },
       {
+        "book": "mark",
+        "chapter": 15,
+        "verse": 21,
+        "word_index": 15,
+        "text": "צְלָבוֹ׃",
+        "source_payload": {
+          "book": "mark",
+          "chapter": 15,
+          "verse": 21,
+          "word_index": 15,
+          "text": "צְלָבוֹ׃"
+        },
+        "source_key": "[\"\",null,\"mark\",15,21,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 9,
+        "verse": 23,
+        "word_index": 14,
+        "text": "צְלָבוֹ",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 9,
+          "verse": 23,
+          "word_index": 14,
+          "text": "צְלָבוֹ"
+        },
+        "source_key": "[\"\",null,\"luke\",9,23,null]"
+      },
+      {
         "book": "luke",
         "chapter": 14,
         "verse": 27,
@@ -85466,6 +85723,51 @@
           "text": "צְלָבוֹ"
         },
         "source_key": "[\"\",null,\"luke\",14,27,null]"
+      },
+      {
+        "book": "john",
+        "chapter": 19,
+        "verse": 19,
+        "word_index": 6,
+        "text": "הַצְּלָב",
+        "source_payload": {
+          "book": "john",
+          "chapter": 19,
+          "verse": 19,
+          "word_index": 6,
+          "text": "הַצְּלָב"
+        },
+        "source_key": "[\"\",null,\"john\",19,19,null]"
+      },
+      {
+        "book": "john",
+        "chapter": 19,
+        "verse": 25,
+        "word_index": 2,
+        "text": "צְלָב",
+        "source_payload": {
+          "book": "john",
+          "chapter": 19,
+          "verse": 25,
+          "word_index": 2,
+          "text": "צְלָב"
+        },
+        "source_key": "[\"\",null,\"john\",19,25,null]"
+      },
+      {
+        "book": "john",
+        "chapter": 19,
+        "verse": 31,
+        "word_index": 5,
+        "text": "הַצְּלָב",
+        "source_payload": {
+          "book": "john",
+          "chapter": 19,
+          "verse": 31,
+          "word_index": 5,
+          "text": "הַצְּלָב"
+        },
+        "source_key": "[\"\",null,\"john\",19,31,null]"
       },
       {
         "book": "galatians",
@@ -85496,6 +85798,21 @@
           "text": "צְלָב"
         },
         "source_key": "[\"\",null,\"galatians\",6,12,null]"
+      },
+      {
+        "book": "ephesians",
+        "chapter": 2,
+        "verse": 16,
+        "word_index": 8,
+        "text": "צְלִיבָתוֹ",
+        "source_payload": {
+          "book": "ephesians",
+          "chapter": 2,
+          "verse": 16,
+          "word_index": 8,
+          "text": "צְלִיבָתוֹ"
+        },
+        "source_key": "[\"\",null,\"ephesians\",2,16,null]"
       },
       {
         "book": "philippians",
@@ -85575,6 +85892,36 @@
         "source_key": "[\"\",null,\"mark\",8,34,null]"
       },
       {
+        "book": "mark",
+        "chapter": 15,
+        "verse": 21,
+        "word_index": 15,
+        "text": "צְלָבוֹ׃",
+        "source_payload": {
+          "book": "mark",
+          "chapter": 15,
+          "verse": 21,
+          "word_index": 15,
+          "text": "צְלָבוֹ׃"
+        },
+        "source_key": "[\"\",null,\"mark\",15,21,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 9,
+        "verse": 23,
+        "word_index": 14,
+        "text": "צְלָבוֹ",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 9,
+          "verse": 23,
+          "word_index": 14,
+          "text": "צְלָבוֹ"
+        },
+        "source_key": "[\"\",null,\"luke\",9,23,null]"
+      },
+      {
         "book": "luke",
         "chapter": 14,
         "verse": 27,
@@ -85588,6 +85935,51 @@
           "text": "צְלָבוֹ"
         },
         "source_key": "[\"\",null,\"luke\",14,27,null]"
+      },
+      {
+        "book": "john",
+        "chapter": 19,
+        "verse": 19,
+        "word_index": 6,
+        "text": "הַצְּלָב",
+        "source_payload": {
+          "book": "john",
+          "chapter": 19,
+          "verse": 19,
+          "word_index": 6,
+          "text": "הַצְּלָב"
+        },
+        "source_key": "[\"\",null,\"john\",19,19,null]"
+      },
+      {
+        "book": "john",
+        "chapter": 19,
+        "verse": 25,
+        "word_index": 2,
+        "text": "צְלָב",
+        "source_payload": {
+          "book": "john",
+          "chapter": 19,
+          "verse": 25,
+          "word_index": 2,
+          "text": "צְלָב"
+        },
+        "source_key": "[\"\",null,\"john\",19,25,null]"
+      },
+      {
+        "book": "john",
+        "chapter": 19,
+        "verse": 31,
+        "word_index": 5,
+        "text": "הַצְּלָב",
+        "source_payload": {
+          "book": "john",
+          "chapter": 19,
+          "verse": 31,
+          "word_index": 5,
+          "text": "הַצְּלָב"
+        },
+        "source_key": "[\"\",null,\"john\",19,31,null]"
       },
       {
         "book": "galatians",
@@ -85618,6 +86010,21 @@
           "text": "צְלָב"
         },
         "source_key": "[\"\",null,\"galatians\",6,12,null]"
+      },
+      {
+        "book": "ephesians",
+        "chapter": 2,
+        "verse": 16,
+        "word_index": 8,
+        "text": "צְלִיבָתוֹ",
+        "source_payload": {
+          "book": "ephesians",
+          "chapter": 2,
+          "verse": 16,
+          "word_index": 8,
+          "text": "צְלִיבָתוֹ"
+        },
+        "source_key": "[\"\",null,\"ephesians\",2,16,null]"
       },
       {
         "book": "philippians",
@@ -85675,16 +86082,60 @@
         "verse": 18,
         "word_index": 13,
         "text": "לַהֲנָאַת"
+      },
+      {
+        "book": "philemon",
+        "chapter": 1,
+        "verse": 20,
+        "word_index": 2,
+        "text": "אֵהָנֵה־"
+      },
+      {
+        "book": "romans",
+        "chapter": 15,
+        "verse": 1,
+        "word_index": 7,
+        "text": "הֲנָאַת"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 1,
-    "instance_surface_count": 1,
+    "instance_total": 3,
+    "instance_surface_count": 3,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [
+      {
+        "book": "romans",
+        "chapter": 15,
+        "verse": 1,
+        "word_index": 7,
+        "text": "הֲנָאַת",
+        "source_payload": {
+          "book": "romans",
+          "chapter": 15,
+          "verse": 1,
+          "word_index": 7,
+          "text": "הֲנָאַת"
+        },
+        "source_key": "[\"\",null,\"romans\",15,1,null]"
+      },
+      {
+        "book": "philemon",
+        "chapter": 1,
+        "verse": 20,
+        "word_index": 2,
+        "text": "אֵהָנֵה־",
+        "source_payload": {
+          "book": "philemon",
+          "chapter": 1,
+          "verse": 20,
+          "word_index": 2,
+          "text": "אֵהָנֵה־"
+        },
+        "source_key": "[\"\",null,\"philemon\",1,20,null]"
+      },
       {
         "book": "corinthians1",
         "chapter": 9,
@@ -85702,6 +86153,36 @@
       }
     ],
     "surface_instances": [
+      {
+        "book": "romans",
+        "chapter": 15,
+        "verse": 1,
+        "word_index": 7,
+        "text": "הֲנָאַת",
+        "source_payload": {
+          "book": "romans",
+          "chapter": 15,
+          "verse": 1,
+          "word_index": 7,
+          "text": "הֲנָאַת"
+        },
+        "source_key": "[\"\",null,\"romans\",15,1,null]"
+      },
+      {
+        "book": "philemon",
+        "chapter": 1,
+        "verse": 20,
+        "word_index": 2,
+        "text": "אֵהָנֵה־",
+        "source_payload": {
+          "book": "philemon",
+          "chapter": 1,
+          "verse": 20,
+          "word_index": 2,
+          "text": "אֵהָנֵה־"
+        },
+        "source_key": "[\"\",null,\"philemon\",1,20,null]"
+      },
       {
         "book": "corinthians1",
         "chapter": 9,
@@ -87024,17 +87505,456 @@
         "verse": 21,
         "word_index": 8,
         "text": "אֶצְטָרֵךְ"
+      },
+      {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 3,
+        "word_index": 4,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 12,
+        "verse": 24,
+        "word_index": 4,
+        "text": "צְרִיכִים"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 10,
+        "verse": 36,
+        "word_index": 1,
+        "text": "צְרִיכִים"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 11,
+        "verse": 6,
+        "word_index": 13,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 7,
+        "verse": 11,
+        "word_index": 17,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 7,
+        "verse": 27,
+        "word_index": 2,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 8,
+        "verse": 3,
+        "word_index": 11,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 9,
+        "verse": 16,
+        "word_index": 4,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 9,
+        "verse": 23,
+        "word_index": 5,
+        "text": "צְרִיכִים"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 9,
+        "verse": 23,
+        "word_index": 11,
+        "text": "צְרִיכִים"
+      },
+      {
+        "book": "john",
+        "chapter": 12,
+        "verse": 34,
+        "word_index": 16,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "john",
+        "chapter": 3,
+        "verse": 14,
+        "word_index": 7,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "john",
+        "chapter": 4,
+        "verse": 24,
+        "word_index": 5,
+        "text": "צְרִיכִים"
+      },
+      {
+        "book": "luke",
+        "chapter": 12,
+        "verse": 30,
+        "word_index": 11,
+        "text": "צְרִיכִים"
+      },
+      {
+        "book": "luke",
+        "chapter": 17,
+        "verse": 25,
+        "word_index": 2,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 5,
+        "word_index": 14,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 31,
+        "word_index": 12,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 34,
+        "word_index": 2,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 37,
+        "word_index": 5,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "luke",
+        "chapter": 24,
+        "verse": 7,
+        "word_index": 1,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "luke",
+        "chapter": 5,
+        "verse": 31,
+        "word_index": 6,
+        "text": "צְרִיכִים"
+      },
+      {
+        "book": "mark",
+        "chapter": 11,
+        "verse": 3,
+        "word_index": 9,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "mark",
+        "chapter": 2,
+        "verse": 17,
+        "word_index": 5,
+        "text": "צְרִיכִים"
+      },
+      {
+        "book": "mark",
+        "chapter": 8,
+        "verse": 31,
+        "word_index": 3,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "matthew",
+        "chapter": 14,
+        "verse": 16,
+        "word_index": 3,
+        "text": "צְרִיכִים"
+      },
+      {
+        "book": "matthew",
+        "chapter": 16,
+        "verse": 21,
+        "word_index": 9,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "matthew",
+        "chapter": 18,
+        "verse": 7,
+        "word_index": 6,
+        "text": "צְרִיכִים"
+      },
+      {
+        "book": "matthew",
+        "chapter": 21,
+        "verse": 3,
+        "word_index": 7,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "matthew",
+        "chapter": 3,
+        "verse": 14,
+        "word_index": 5,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "matthew",
+        "chapter": 6,
+        "verse": 32,
+        "word_index": 13,
+        "text": "צְרִיכִים"
+      },
+      {
+        "book": "matthew",
+        "chapter": 9,
+        "verse": 12,
+        "word_index": 7,
+        "text": "צְרִיכִים"
+      },
+      {
+        "book": "philippians",
+        "chapter": 1,
+        "verse": 24,
+        "word_index": 4,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 3,
+        "verse": 2,
+        "word_index": 2,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 3,
+        "verse": 7,
+        "word_index": 2,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "titus",
+        "chapter": 1,
+        "verse": 7,
+        "word_index": 3,
+        "text": "צָרִיךְ"
+      },
+      {
+        "book": "thessalonians1",
+        "chapter": 5,
+        "verse": 1,
+        "word_index": 5,
+        "text": "צֹרֶךְ"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 13,
+        "verse": 10,
+        "word_index": 10,
+        "text": "אֶצְטָרֵךְ"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 4,
-    "instance_surface_count": 4,
+    "instance_total": 40,
+    "instance_surface_count": 40,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [
       {
+        "book": "matthew",
+        "chapter": 3,
+        "verse": 14,
+        "word_index": 5,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 3,
+          "verse": 14,
+          "word_index": 5,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"matthew\",3,14,null]"
+      },
+      {
+        "book": "matthew",
+        "chapter": 6,
+        "verse": 32,
+        "word_index": 13,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 6,
+          "verse": 32,
+          "word_index": 13,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"matthew\",6,32,null]"
+      },
+      {
+        "book": "matthew",
+        "chapter": 9,
+        "verse": 12,
+        "word_index": 7,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 9,
+          "verse": 12,
+          "word_index": 7,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"matthew\",9,12,null]"
+      },
+      {
+        "book": "matthew",
+        "chapter": 14,
+        "verse": 16,
+        "word_index": 3,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 14,
+          "verse": 16,
+          "word_index": 3,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"matthew\",14,16,null]"
+      },
+      {
+        "book": "matthew",
+        "chapter": 16,
+        "verse": 21,
+        "word_index": 9,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 16,
+          "verse": 21,
+          "word_index": 9,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"matthew\",16,21,null]"
+      },
+      {
+        "book": "matthew",
+        "chapter": 18,
+        "verse": 7,
+        "word_index": 6,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 18,
+          "verse": 7,
+          "word_index": 6,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"matthew\",18,7,null]"
+      },
+      {
+        "book": "matthew",
+        "chapter": 21,
+        "verse": 3,
+        "word_index": 7,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 21,
+          "verse": 3,
+          "word_index": 7,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"matthew\",21,3,null]"
+      },
+      {
+        "book": "mark",
+        "chapter": 2,
+        "verse": 17,
+        "word_index": 5,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "mark",
+          "chapter": 2,
+          "verse": 17,
+          "word_index": 5,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"mark\",2,17,null]"
+      },
+      {
+        "book": "mark",
+        "chapter": 8,
+        "verse": 31,
+        "word_index": 3,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "mark",
+          "chapter": 8,
+          "verse": 31,
+          "word_index": 3,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"mark\",8,31,null]"
+      },
+      {
+        "book": "mark",
+        "chapter": 11,
+        "verse": 3,
+        "word_index": 9,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "mark",
+          "chapter": 11,
+          "verse": 3,
+          "word_index": 9,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"mark\",11,3,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 5,
+        "verse": 31,
+        "word_index": 6,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 5,
+          "verse": 31,
+          "word_index": 6,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"luke\",5,31,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 12,
+        "verse": 30,
+        "word_index": 11,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 12,
+          "verse": 30,
+          "word_index": 11,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"luke\",12,30,null]"
+      },
+      {
         "book": "luke",
         "chapter": 15,
         "verse": 7,
@@ -87048,6 +87968,291 @@
           "text": "יִצְטָרְכוּ"
         },
         "source_key": "[\"\",null,\"luke\",15,7,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 17,
+        "verse": 25,
+        "word_index": 2,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 17,
+          "verse": 25,
+          "word_index": 2,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"luke\",17,25,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 5,
+        "word_index": 14,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 19,
+          "verse": 5,
+          "word_index": 14,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"luke\",19,5,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 31,
+        "word_index": 12,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 19,
+          "verse": 31,
+          "word_index": 12,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"luke\",19,31,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 34,
+        "word_index": 2,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 19,
+          "verse": 34,
+          "word_index": 2,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"luke\",19,34,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 37,
+        "word_index": 5,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 22,
+          "verse": 37,
+          "word_index": 5,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"luke\",22,37,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 24,
+        "verse": 7,
+        "word_index": 1,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 24,
+          "verse": 7,
+          "word_index": 1,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"luke\",24,7,null]"
+      },
+      {
+        "book": "john",
+        "chapter": 3,
+        "verse": 14,
+        "word_index": 7,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "john",
+          "chapter": 3,
+          "verse": 14,
+          "word_index": 7,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"john\",3,14,null]"
+      },
+      {
+        "book": "john",
+        "chapter": 4,
+        "verse": 24,
+        "word_index": 5,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "john",
+          "chapter": 4,
+          "verse": 24,
+          "word_index": 5,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"john\",4,24,null]"
+      },
+      {
+        "book": "john",
+        "chapter": 12,
+        "verse": 34,
+        "word_index": 16,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "john",
+          "chapter": 12,
+          "verse": 34,
+          "word_index": 16,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"john\",12,34,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 3,
+        "word_index": 4,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 17,
+          "verse": 3,
+          "word_index": 4,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"acts\",17,3,null]"
+      },
+      {
+        "book": "philippians",
+        "chapter": 1,
+        "verse": 24,
+        "word_index": 4,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "philippians",
+          "chapter": 1,
+          "verse": 24,
+          "word_index": 4,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"philippians\",1,24,null]"
+      },
+      {
+        "book": "titus",
+        "chapter": 1,
+        "verse": 7,
+        "word_index": 3,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "titus",
+          "chapter": 1,
+          "verse": 7,
+          "word_index": 3,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"titus\",1,7,null]"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 7,
+        "verse": 11,
+        "word_index": 17,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "hebrews",
+          "chapter": 7,
+          "verse": 11,
+          "word_index": 17,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"hebrews\",7,11,null]"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 7,
+        "verse": 27,
+        "word_index": 2,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "hebrews",
+          "chapter": 7,
+          "verse": 27,
+          "word_index": 2,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"hebrews\",7,27,null]"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 8,
+        "verse": 3,
+        "word_index": 11,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "hebrews",
+          "chapter": 8,
+          "verse": 3,
+          "word_index": 11,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"hebrews\",8,3,null]"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 9,
+        "verse": 16,
+        "word_index": 4,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "hebrews",
+          "chapter": 9,
+          "verse": 16,
+          "word_index": 4,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"hebrews\",9,16,null]"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 9,
+        "verse": 23,
+        "word_index": 5,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "hebrews",
+          "chapter": 9,
+          "verse": 23,
+          "word_index": 5,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"hebrews\",9,23,null]"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 10,
+        "verse": 36,
+        "word_index": 1,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "hebrews",
+          "chapter": 10,
+          "verse": 36,
+          "word_index": 1,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"hebrews\",10,36,null]"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 11,
+        "verse": 6,
+        "word_index": 13,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "hebrews",
+          "chapter": 11,
+          "verse": 6,
+          "word_index": 13,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"hebrews\",11,6,null]"
       },
       {
         "book": "corinthians1",
@@ -87065,6 +88270,21 @@
         "source_key": "[\"\",null,\"corinthians1\",12,21,null]"
       },
       {
+        "book": "corinthians1",
+        "chapter": 12,
+        "verse": 24,
+        "word_index": 4,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 12,
+          "verse": 24,
+          "word_index": 4,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",12,24,null]"
+      },
+      {
         "book": "corinthians2",
         "chapter": 3,
         "verse": 1,
@@ -87080,6 +88300,21 @@
         "source_key": "[\"\",null,\"corinthians2\",3,1,null]"
       },
       {
+        "book": "corinthians2",
+        "chapter": 13,
+        "verse": 10,
+        "word_index": 10,
+        "text": "אֶצְטָרֵךְ",
+        "source_payload": {
+          "book": "corinthians2",
+          "chapter": 13,
+          "verse": 10,
+          "word_index": 10,
+          "text": "אֶצְטָרֵךְ"
+        },
+        "source_key": "[\"\",null,\"corinthians2\",13,10,null]"
+      },
+      {
         "book": "thessalonians1",
         "chapter": 4,
         "verse": 9,
@@ -87093,10 +88328,235 @@
           "text": "צֹרֶךְ"
         },
         "source_key": "[\"\",null,\"thessalonians1\",4,9,null]"
+      },
+      {
+        "book": "thessalonians1",
+        "chapter": 5,
+        "verse": 1,
+        "word_index": 5,
+        "text": "צֹרֶךְ",
+        "source_payload": {
+          "book": "thessalonians1",
+          "chapter": 5,
+          "verse": 1,
+          "word_index": 5,
+          "text": "צֹרֶךְ"
+        },
+        "source_key": "[\"\",null,\"thessalonians1\",5,1,null]"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 3,
+        "verse": 2,
+        "word_index": 2,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "timothy1",
+          "chapter": 3,
+          "verse": 2,
+          "word_index": 2,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"timothy1\",3,2,null]"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 3,
+        "verse": 7,
+        "word_index": 2,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "timothy1",
+          "chapter": 3,
+          "verse": 7,
+          "word_index": 2,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"timothy1\",3,7,null]"
       }
     ],
     "surface_instances": [
       {
+        "book": "matthew",
+        "chapter": 3,
+        "verse": 14,
+        "word_index": 5,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 3,
+          "verse": 14,
+          "word_index": 5,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"matthew\",3,14,null]"
+      },
+      {
+        "book": "matthew",
+        "chapter": 6,
+        "verse": 32,
+        "word_index": 13,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 6,
+          "verse": 32,
+          "word_index": 13,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"matthew\",6,32,null]"
+      },
+      {
+        "book": "matthew",
+        "chapter": 9,
+        "verse": 12,
+        "word_index": 7,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 9,
+          "verse": 12,
+          "word_index": 7,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"matthew\",9,12,null]"
+      },
+      {
+        "book": "matthew",
+        "chapter": 14,
+        "verse": 16,
+        "word_index": 3,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 14,
+          "verse": 16,
+          "word_index": 3,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"matthew\",14,16,null]"
+      },
+      {
+        "book": "matthew",
+        "chapter": 16,
+        "verse": 21,
+        "word_index": 9,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 16,
+          "verse": 21,
+          "word_index": 9,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"matthew\",16,21,null]"
+      },
+      {
+        "book": "matthew",
+        "chapter": 18,
+        "verse": 7,
+        "word_index": 6,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 18,
+          "verse": 7,
+          "word_index": 6,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"matthew\",18,7,null]"
+      },
+      {
+        "book": "matthew",
+        "chapter": 21,
+        "verse": 3,
+        "word_index": 7,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 21,
+          "verse": 3,
+          "word_index": 7,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"matthew\",21,3,null]"
+      },
+      {
+        "book": "mark",
+        "chapter": 2,
+        "verse": 17,
+        "word_index": 5,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "mark",
+          "chapter": 2,
+          "verse": 17,
+          "word_index": 5,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"mark\",2,17,null]"
+      },
+      {
+        "book": "mark",
+        "chapter": 8,
+        "verse": 31,
+        "word_index": 3,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "mark",
+          "chapter": 8,
+          "verse": 31,
+          "word_index": 3,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"mark\",8,31,null]"
+      },
+      {
+        "book": "mark",
+        "chapter": 11,
+        "verse": 3,
+        "word_index": 9,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "mark",
+          "chapter": 11,
+          "verse": 3,
+          "word_index": 9,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"mark\",11,3,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 5,
+        "verse": 31,
+        "word_index": 6,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 5,
+          "verse": 31,
+          "word_index": 6,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"luke\",5,31,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 12,
+        "verse": 30,
+        "word_index": 11,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 12,
+          "verse": 30,
+          "word_index": 11,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"luke\",12,30,null]"
+      },
+      {
         "book": "luke",
         "chapter": 15,
         "verse": 7,
@@ -87110,6 +88570,291 @@
           "text": "יִצְטָרְכוּ"
         },
         "source_key": "[\"\",null,\"luke\",15,7,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 17,
+        "verse": 25,
+        "word_index": 2,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 17,
+          "verse": 25,
+          "word_index": 2,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"luke\",17,25,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 5,
+        "word_index": 14,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 19,
+          "verse": 5,
+          "word_index": 14,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"luke\",19,5,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 31,
+        "word_index": 12,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 19,
+          "verse": 31,
+          "word_index": 12,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"luke\",19,31,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 34,
+        "word_index": 2,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 19,
+          "verse": 34,
+          "word_index": 2,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"luke\",19,34,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 37,
+        "word_index": 5,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 22,
+          "verse": 37,
+          "word_index": 5,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"luke\",22,37,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 24,
+        "verse": 7,
+        "word_index": 1,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 24,
+          "verse": 7,
+          "word_index": 1,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"luke\",24,7,null]"
+      },
+      {
+        "book": "john",
+        "chapter": 3,
+        "verse": 14,
+        "word_index": 7,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "john",
+          "chapter": 3,
+          "verse": 14,
+          "word_index": 7,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"john\",3,14,null]"
+      },
+      {
+        "book": "john",
+        "chapter": 4,
+        "verse": 24,
+        "word_index": 5,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "john",
+          "chapter": 4,
+          "verse": 24,
+          "word_index": 5,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"john\",4,24,null]"
+      },
+      {
+        "book": "john",
+        "chapter": 12,
+        "verse": 34,
+        "word_index": 16,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "john",
+          "chapter": 12,
+          "verse": 34,
+          "word_index": 16,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"john\",12,34,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 3,
+        "word_index": 4,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 17,
+          "verse": 3,
+          "word_index": 4,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"acts\",17,3,null]"
+      },
+      {
+        "book": "philippians",
+        "chapter": 1,
+        "verse": 24,
+        "word_index": 4,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "philippians",
+          "chapter": 1,
+          "verse": 24,
+          "word_index": 4,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"philippians\",1,24,null]"
+      },
+      {
+        "book": "titus",
+        "chapter": 1,
+        "verse": 7,
+        "word_index": 3,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "titus",
+          "chapter": 1,
+          "verse": 7,
+          "word_index": 3,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"titus\",1,7,null]"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 7,
+        "verse": 11,
+        "word_index": 17,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "hebrews",
+          "chapter": 7,
+          "verse": 11,
+          "word_index": 17,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"hebrews\",7,11,null]"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 7,
+        "verse": 27,
+        "word_index": 2,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "hebrews",
+          "chapter": 7,
+          "verse": 27,
+          "word_index": 2,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"hebrews\",7,27,null]"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 8,
+        "verse": 3,
+        "word_index": 11,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "hebrews",
+          "chapter": 8,
+          "verse": 3,
+          "word_index": 11,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"hebrews\",8,3,null]"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 9,
+        "verse": 16,
+        "word_index": 4,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "hebrews",
+          "chapter": 9,
+          "verse": 16,
+          "word_index": 4,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"hebrews\",9,16,null]"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 9,
+        "verse": 23,
+        "word_index": 5,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "hebrews",
+          "chapter": 9,
+          "verse": 23,
+          "word_index": 5,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"hebrews\",9,23,null]"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 10,
+        "verse": 36,
+        "word_index": 1,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "hebrews",
+          "chapter": 10,
+          "verse": 36,
+          "word_index": 1,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"hebrews\",10,36,null]"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 11,
+        "verse": 6,
+        "word_index": 13,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "hebrews",
+          "chapter": 11,
+          "verse": 6,
+          "word_index": 13,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"hebrews\",11,6,null]"
       },
       {
         "book": "corinthians1",
@@ -87127,6 +88872,21 @@
         "source_key": "[\"\",null,\"corinthians1\",12,21,null]"
       },
       {
+        "book": "corinthians1",
+        "chapter": 12,
+        "verse": 24,
+        "word_index": 4,
+        "text": "צְרִיכִים",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 12,
+          "verse": 24,
+          "word_index": 4,
+          "text": "צְרִיכִים"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",12,24,null]"
+      },
+      {
         "book": "corinthians2",
         "chapter": 3,
         "verse": 1,
@@ -87142,6 +88902,21 @@
         "source_key": "[\"\",null,\"corinthians2\",3,1,null]"
       },
       {
+        "book": "corinthians2",
+        "chapter": 13,
+        "verse": 10,
+        "word_index": 10,
+        "text": "אֶצְטָרֵךְ",
+        "source_payload": {
+          "book": "corinthians2",
+          "chapter": 13,
+          "verse": 10,
+          "word_index": 10,
+          "text": "אֶצְטָרֵךְ"
+        },
+        "source_key": "[\"\",null,\"corinthians2\",13,10,null]"
+      },
+      {
         "book": "thessalonians1",
         "chapter": 4,
         "verse": 9,
@@ -87155,6 +88930,51 @@
           "text": "צֹרֶךְ"
         },
         "source_key": "[\"\",null,\"thessalonians1\",4,9,null]"
+      },
+      {
+        "book": "thessalonians1",
+        "chapter": 5,
+        "verse": 1,
+        "word_index": 5,
+        "text": "צֹרֶךְ",
+        "source_payload": {
+          "book": "thessalonians1",
+          "chapter": 5,
+          "verse": 1,
+          "word_index": 5,
+          "text": "צֹרֶךְ"
+        },
+        "source_key": "[\"\",null,\"thessalonians1\",5,1,null]"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 3,
+        "verse": 2,
+        "word_index": 2,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "timothy1",
+          "chapter": 3,
+          "verse": 2,
+          "word_index": 2,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"timothy1\",3,2,null]"
+      },
+      {
+        "book": "timothy1",
+        "chapter": 3,
+        "verse": 7,
+        "word_index": 2,
+        "text": "צָרִיךְ",
+        "source_payload": {
+          "book": "timothy1",
+          "chapter": 3,
+          "verse": 7,
+          "word_index": 2,
+          "text": "צָרִיךְ"
+        },
+        "source_key": "[\"\",null,\"timothy1\",3,7,null]"
       }
     ]
   },
@@ -87620,12 +89440,19 @@
         "verse": 14,
         "word_index": 23,
         "text": "תַכְרִיחַ"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 12,
+        "verse": 11,
+        "word_index": 4,
+        "text": "הִכְרַחְתֶּם"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 1,
-    "instance_surface_count": 1,
+    "instance_total": 2,
+    "instance_surface_count": 2,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -87644,6 +89471,21 @@
           "text": "תַכְרִיחַ"
         },
         "source_key": "[\"\",null,\"galatians\",2,14,null]"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 12,
+        "verse": 11,
+        "word_index": 4,
+        "text": "הִכְרַחְתֶּם",
+        "source_payload": {
+          "book": "corinthians2",
+          "chapter": 12,
+          "verse": 11,
+          "word_index": 4,
+          "text": "הִכְרַחְתֶּם"
+        },
+        "source_key": "[\"\",null,\"corinthians2\",12,11,null]"
       }
     ],
     "surface_instances": [
@@ -87661,6 +89503,21 @@
           "text": "תַכְרִיחַ"
         },
         "source_key": "[\"\",null,\"galatians\",2,14,null]"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 12,
+        "verse": 11,
+        "word_index": 4,
+        "text": "הִכְרַחְתֶּם",
+        "source_payload": {
+          "book": "corinthians2",
+          "chapter": 12,
+          "verse": 11,
+          "word_index": 4,
+          "text": "הִכְרַחְתֶּם"
+        },
+        "source_key": "[\"\",null,\"corinthians2\",12,11,null]"
       }
     ]
   },
@@ -87688,12 +89545,26 @@
         "verse": 3,
         "word_index": 4,
         "text": "יֵשׁוּתוֹ"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 10,
+        "verse": 19,
+        "word_index": 4,
+        "text": "מַמָּשׁ"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 10,
+        "verse": 19,
+        "word_index": 8,
+        "text": "מַמָּשׁ"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 1,
-    "instance_surface_count": 1,
+    "instance_total": 2,
+    "instance_surface_count": 2,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -87712,6 +89583,21 @@
           "text": "יֵשׁוּתוֹ"
         },
         "source_key": "[\"\",null,\"hebrews\",1,3,null]"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 10,
+        "verse": 19,
+        "word_index": 8,
+        "text": "מַמָּשׁ",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 10,
+          "verse": 19,
+          "word_index": 8,
+          "text": "מַמָּשׁ"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",10,19,null]"
       }
     ],
     "surface_instances": [
@@ -87729,6 +89615,21 @@
           "text": "יֵשׁוּתוֹ"
         },
         "source_key": "[\"\",null,\"hebrews\",1,3,null]"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 10,
+        "verse": 19,
+        "word_index": 8,
+        "text": "מַמָּשׁ",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 10,
+          "verse": 19,
+          "word_index": 8,
+          "text": "מַמָּשׁ"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",10,19,null]"
       }
     ]
   },
@@ -88515,16 +90416,38 @@
         "verse": 38,
         "word_index": 15,
         "text": "הַתַּרְנְגֹל"
+      },
+      {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 34,
+        "word_index": 7,
+        "text": "תַרְנְגֹל"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 1,
-    "instance_surface_count": 1,
+    "instance_total": 2,
+    "instance_surface_count": 2,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [
+      {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 34,
+        "word_index": 7,
+        "text": "תַרְנְגֹל",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 22,
+          "verse": 34,
+          "word_index": 7,
+          "text": "תַרְנְגֹל"
+        },
+        "source_key": "[\"\",null,\"luke\",22,34,null]"
+      },
       {
         "book": "john",
         "chapter": 13,
@@ -88542,6 +90465,21 @@
       }
     ],
     "surface_instances": [
+      {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 34,
+        "word_index": 7,
+        "text": "תַרְנְגֹל",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 22,
+          "verse": 34,
+          "word_index": 7,
+          "text": "תַרְנְגֹל"
+        },
+        "source_key": "[\"\",null,\"luke\",22,34,null]"
+      },
       {
         "book": "john",
         "chapter": 13,
@@ -93139,16 +95077,45 @@
         "verse": 17,
         "word_index": 11,
         "text": "הִשְׁתַּדַּלְנוּ"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 14,
+        "verse": 39,
+        "word_index": 2,
+        "text": "הִשְׁתַּדְּלוּ"
+      },
+      {
+        "book": "titus",
+        "chapter": 3,
+        "verse": 8,
+        "word_index": 11,
+        "text": "יִשְׁתַּדְּלוּ"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 5,
-    "instance_surface_count": 5,
+    "instance_total": 7,
+    "instance_surface_count": 7,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [
+      {
+        "book": "titus",
+        "chapter": 3,
+        "verse": 8,
+        "word_index": 11,
+        "text": "יִשְׁתַּדְּלוּ",
+        "source_payload": {
+          "book": "titus",
+          "chapter": 3,
+          "verse": 8,
+          "word_index": 11,
+          "text": "יִשְׁתַּדְּלוּ"
+        },
+        "source_key": "[\"\",null,\"titus\",3,8,null]"
+      },
       {
         "book": "titus",
         "chapter": 3,
@@ -93163,6 +95130,21 @@
           "text": "הִשְׁתַּדֵּל"
         },
         "source_key": "[\"\",null,\"titus\",3,13,null]"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 14,
+        "verse": 39,
+        "word_index": 2,
+        "text": "הִשְׁתַּדְּלוּ",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 14,
+          "verse": 39,
+          "word_index": 2,
+          "text": "הִשְׁתַּדְּלוּ"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",14,39,null]"
       },
       {
         "book": "corinthians2",
@@ -93229,6 +95211,21 @@
       {
         "book": "titus",
         "chapter": 3,
+        "verse": 8,
+        "word_index": 11,
+        "text": "יִשְׁתַּדְּלוּ",
+        "source_payload": {
+          "book": "titus",
+          "chapter": 3,
+          "verse": 8,
+          "word_index": 11,
+          "text": "יִשְׁתַּדְּלוּ"
+        },
+        "source_key": "[\"\",null,\"titus\",3,8,null]"
+      },
+      {
+        "book": "titus",
+        "chapter": 3,
         "verse": 13,
         "word_index": 0,
         "text": "הִשְׁתַּדֵּל",
@@ -93240,6 +95237,21 @@
           "text": "הִשְׁתַּדֵּל"
         },
         "source_key": "[\"\",null,\"titus\",3,13,null]"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 14,
+        "verse": 39,
+        "word_index": 2,
+        "text": "הִשְׁתַּדְּלוּ",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 14,
+          "verse": 39,
+          "word_index": 2,
+          "text": "הִשְׁתַּדְּלוּ"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",14,39,null]"
       },
       {
         "book": "corinthians2",
@@ -93334,12 +95346,19 @@
         "verse": 3,
         "word_index": 6,
         "text": "סַבְלָנוּת׃"
+      },
+      {
+        "book": "revelation",
+        "chapter": 14,
+        "verse": 12,
+        "word_index": 1,
+        "text": "סַבְלָנוּת"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 2,
-    "instance_surface_count": 2,
+    "instance_total": 3,
+    "instance_surface_count": 3,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -93358,6 +95377,21 @@
           "text": "סַבְלָנוּת׃"
         },
         "source_key": "[\"\",null,\"james\",1,3,null]"
+      },
+      {
+        "book": "revelation",
+        "chapter": 14,
+        "verse": 12,
+        "word_index": 1,
+        "text": "סַבְלָנוּת",
+        "source_payload": {
+          "book": "revelation",
+          "chapter": 14,
+          "verse": 12,
+          "word_index": 1,
+          "text": "סַבְלָנוּת"
+        },
+        "source_key": "[\"\",null,\"revelation\",14,12,null]"
       },
       {
         "book": "thessalonians2",
@@ -93390,6 +95424,21 @@
           "text": "סַבְלָנוּת׃"
         },
         "source_key": "[\"\",null,\"james\",1,3,null]"
+      },
+      {
+        "book": "revelation",
+        "chapter": 14,
+        "verse": 12,
+        "word_index": 1,
+        "text": "סַבְלָנוּת",
+        "source_payload": {
+          "book": "revelation",
+          "chapter": 14,
+          "verse": 12,
+          "word_index": 1,
+          "text": "סַבְלָנוּת"
+        },
+        "source_key": "[\"\",null,\"revelation\",14,12,null]"
       },
       {
         "book": "thessalonians2",
@@ -94461,12 +96510,26 @@
         "verse": 4,
         "word_index": 11,
         "text": "לְהַבְטָחַת"
+      },
+      {
+        "book": "acts",
+        "chapter": 26,
+        "verse": 6,
+        "word_index": 8,
+        "text": "הִבְטִיחָהּ"
+      },
+      {
+        "book": "romans",
+        "chapter": 1,
+        "verse": 2,
+        "word_index": 1,
+        "text": "הִבְטִיחָהּ"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 1,
-    "instance_surface_count": 1,
+    "instance_total": 3,
+    "instance_surface_count": 3,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -94485,6 +96548,36 @@
           "text": "לְהַבְטָחַת"
         },
         "source_key": "[\"\",null,\"acts\",1,4,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 26,
+        "verse": 6,
+        "word_index": 8,
+        "text": "הִבְטִיחָהּ",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 26,
+          "verse": 6,
+          "word_index": 8,
+          "text": "הִבְטִיחָהּ"
+        },
+        "source_key": "[\"\",null,\"acts\",26,6,null]"
+      },
+      {
+        "book": "romans",
+        "chapter": 1,
+        "verse": 2,
+        "word_index": 1,
+        "text": "הִבְטִיחָהּ",
+        "source_payload": {
+          "book": "romans",
+          "chapter": 1,
+          "verse": 2,
+          "word_index": 1,
+          "text": "הִבְטִיחָהּ"
+        },
+        "source_key": "[\"\",null,\"romans\",1,2,null]"
       }
     ],
     "surface_instances": [
@@ -94502,6 +96595,36 @@
           "text": "לְהַבְטָחַת"
         },
         "source_key": "[\"\",null,\"acts\",1,4,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 26,
+        "verse": 6,
+        "word_index": 8,
+        "text": "הִבְטִיחָהּ",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 26,
+          "verse": 6,
+          "word_index": 8,
+          "text": "הִבְטִיחָהּ"
+        },
+        "source_key": "[\"\",null,\"acts\",26,6,null]"
+      },
+      {
+        "book": "romans",
+        "chapter": 1,
+        "verse": 2,
+        "word_index": 1,
+        "text": "הִבְטִיחָהּ",
+        "source_payload": {
+          "book": "romans",
+          "chapter": 1,
+          "verse": 2,
+          "word_index": 1,
+          "text": "הִבְטִיחָהּ"
+        },
+        "source_key": "[\"\",null,\"romans\",1,2,null]"
       }
     ]
   },
@@ -96322,12 +98445,19 @@
         "verse": 4,
         "word_index": 5,
         "text": "שִׁמּוּשׁ"
+      },
+      {
+        "book": "romans",
+        "chapter": 12,
+        "verse": 7,
+        "word_index": 2,
+        "text": "שִׁמּוּשׁ"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 1,
-    "instance_surface_count": 1,
+    "instance_total": 2,
+    "instance_surface_count": 2,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -96346,6 +98476,21 @@
           "text": "שִׁמּוּשׁ"
         },
         "source_key": "[\"\",null,\"acts\",6,4,null]"
+      },
+      {
+        "book": "romans",
+        "chapter": 12,
+        "verse": 7,
+        "word_index": 2,
+        "text": "שִׁמּוּשׁ",
+        "source_payload": {
+          "book": "romans",
+          "chapter": 12,
+          "verse": 7,
+          "word_index": 2,
+          "text": "שִׁמּוּשׁ"
+        },
+        "source_key": "[\"\",null,\"romans\",12,7,null]"
       }
     ],
     "surface_instances": [
@@ -96363,6 +98508,21 @@
           "text": "שִׁמּוּשׁ"
         },
         "source_key": "[\"\",null,\"acts\",6,4,null]"
+      },
+      {
+        "book": "romans",
+        "chapter": 12,
+        "verse": 7,
+        "word_index": 2,
+        "text": "שִׁמּוּשׁ",
+        "source_payload": {
+          "book": "romans",
+          "chapter": 12,
+          "verse": 7,
+          "word_index": 2,
+          "text": "שִׁמּוּשׁ"
+        },
+        "source_key": "[\"\",null,\"romans\",12,7,null]"
       }
     ]
   },
@@ -97841,16 +100001,38 @@
         "verse": 22,
         "word_index": 21,
         "text": "בַּר־"
+      },
+      {
+        "book": "acts",
+        "chapter": 1,
+        "verse": 23,
+        "word_index": 6,
+        "text": "שַׁבָּא"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 1,
-    "instance_surface_count": 1,
+    "instance_total": 2,
+    "instance_surface_count": 2,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [
+      {
+        "book": "acts",
+        "chapter": 1,
+        "verse": 23,
+        "word_index": 6,
+        "text": "שַׁבָּא",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 1,
+          "verse": 23,
+          "word_index": 6,
+          "text": "שַׁבָּא"
+        },
+        "source_key": "[\"\",null,\"acts\",1,23,null]"
+      },
       {
         "book": "acts",
         "chapter": 15,
@@ -97868,6 +100050,21 @@
       }
     ],
     "surface_instances": [
+      {
+        "book": "acts",
+        "chapter": 1,
+        "verse": 23,
+        "word_index": 6,
+        "text": "שַׁבָּא",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 1,
+          "verse": 23,
+          "word_index": 6,
+          "text": "שַׁבָּא"
+        },
+        "source_key": "[\"\",null,\"acts\",1,23,null]"
+      },
       {
         "book": "acts",
         "chapter": 15,
@@ -98014,12 +100211,19 @@
         "verse": 12,
         "word_index": 10,
         "text": "חוֹרִין"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 10,
+        "verse": 29,
+        "word_index": 14,
+        "text": "חֵרוּתִי"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 1,
-    "instance_surface_count": 1,
+    "instance_total": 2,
+    "instance_surface_count": 2,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -98038,6 +100242,21 @@
           "text": "חוֹרִין"
         },
         "source_key": "[\"\",null,\"acts\",16,12,null]"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 10,
+        "verse": 29,
+        "word_index": 14,
+        "text": "חֵרוּתִי",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 10,
+          "verse": 29,
+          "word_index": 14,
+          "text": "חֵרוּתִי"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",10,29,null]"
       }
     ],
     "surface_instances": [
@@ -98055,6 +100274,21 @@
           "text": "חוֹרִין"
         },
         "source_key": "[\"\",null,\"acts\",16,12,null]"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 10,
+        "verse": 29,
+        "word_index": 14,
+        "text": "חֵרוּתִי",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 10,
+          "verse": 29,
+          "word_index": 14,
+          "text": "חֵרוּתִי"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",10,29,null]"
       }
     ]
   },
@@ -99867,18 +102101,76 @@
         "verse": 14,
         "word_index": 12,
         "text": "כַּת"
+      },
+      {
+        "book": "acts",
+        "chapter": 15,
+        "verse": 5,
+        "word_index": 3,
+        "text": "מִכַּת"
+      },
+      {
+        "book": "acts",
+        "chapter": 26,
+        "verse": 5,
+        "word_index": 12,
+        "text": "הַכַּת"
+      },
+      {
+        "book": "acts",
+        "chapter": 28,
+        "verse": 22,
+        "word_index": 15,
+        "text": "הַכַּת"
+      },
+      {
+        "book": "acts",
+        "chapter": 23,
+        "verse": 9,
+        "word_index": 6,
+        "text": "מִכַּת"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 2,
-    "instance_surface_count": 2,
+    "instance_total": 6,
+    "instance_surface_count": 6,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [
       {
         "book": "acts",
+        "chapter": 15,
+        "verse": 5,
+        "word_index": 3,
+        "text": "מִכַּת",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 15,
+          "verse": 5,
+          "word_index": 3,
+          "text": "מִכַּת"
+        },
+        "source_key": "[\"\",null,\"acts\",15,5,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 23,
+        "verse": 9,
+        "word_index": 6,
+        "text": "מִכַּת",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 23,
+          "verse": 9,
+          "word_index": 6,
+          "text": "מִכַּת"
+        },
+        "source_key": "[\"\",null,\"acts\",23,9,null]"
+      },
+      {
+        "book": "acts",
         "chapter": 24,
         "verse": 5,
         "word_index": 16,
@@ -99906,11 +102198,71 @@
           "text": "כַּת"
         },
         "source_key": "[\"\",null,\"acts\",24,14,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 26,
+        "verse": 5,
+        "word_index": 12,
+        "text": "הַכַּת",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 26,
+          "verse": 5,
+          "word_index": 12,
+          "text": "הַכַּת"
+        },
+        "source_key": "[\"\",null,\"acts\",26,5,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 28,
+        "verse": 22,
+        "word_index": 15,
+        "text": "הַכַּת",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 28,
+          "verse": 22,
+          "word_index": 15,
+          "text": "הַכַּת"
+        },
+        "source_key": "[\"\",null,\"acts\",28,22,null]"
       }
     ],
     "surface_instances": [
       {
         "book": "acts",
+        "chapter": 15,
+        "verse": 5,
+        "word_index": 3,
+        "text": "מִכַּת",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 15,
+          "verse": 5,
+          "word_index": 3,
+          "text": "מִכַּת"
+        },
+        "source_key": "[\"\",null,\"acts\",15,5,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 23,
+        "verse": 9,
+        "word_index": 6,
+        "text": "מִכַּת",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 23,
+          "verse": 9,
+          "word_index": 6,
+          "text": "מִכַּת"
+        },
+        "source_key": "[\"\",null,\"acts\",23,9,null]"
+      },
+      {
+        "book": "acts",
         "chapter": 24,
         "verse": 5,
         "word_index": 16,
@@ -99938,6 +102290,36 @@
           "text": "כַּת"
         },
         "source_key": "[\"\",null,\"acts\",24,14,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 26,
+        "verse": 5,
+        "word_index": 12,
+        "text": "הַכַּת",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 26,
+          "verse": 5,
+          "word_index": 12,
+          "text": "הַכַּת"
+        },
+        "source_key": "[\"\",null,\"acts\",26,5,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 28,
+        "verse": 22,
+        "word_index": 15,
+        "text": "הַכַּת",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 28,
+          "verse": 22,
+          "word_index": 15,
+          "text": "הַכַּת"
+        },
+        "source_key": "[\"\",null,\"acts\",28,22,null]"
       }
     ]
   },
@@ -101374,16 +103756,226 @@
         "verse": 19,
         "word_index": 22,
         "text": "אֵבָרֵיכֶם"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 7,
+        "word_index": 14,
+        "text": "אֵבָרִים"
+      },
+      {
+        "book": "acts",
+        "chapter": 9,
+        "verse": 33,
+        "word_index": 14,
+        "text": "אֵבָרִים׃"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 12,
+        "verse": 12,
+        "word_index": 10,
+        "text": "אֵבָרֵי"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 12,
+        "verse": 12,
+        "word_index": 7,
+        "text": "אֵבָרִים"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 12,
+        "verse": 22,
+        "word_index": 2,
+        "text": "אֵבָרֵי"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 6,
+        "verse": 15,
+        "word_index": 10,
+        "text": "אֵבָרֵי"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 6,
+        "verse": 15,
+        "word_index": 4,
+        "text": "אֵבָרֵי"
+      },
+      {
+        "book": "ephesians",
+        "chapter": 4,
+        "verse": 25,
+        "word_index": 12,
+        "text": "אֵבָרִים"
+      },
+      {
+        "book": "ephesians",
+        "chapter": 5,
+        "verse": 30,
+        "word_index": 1,
+        "text": "אֵבָרֵי"
+      },
+      {
+        "book": "romans",
+        "chapter": 12,
+        "verse": 4,
+        "word_index": 6,
+        "text": "אֵבָרִים"
+      },
+      {
+        "book": "luke",
+        "chapter": 5,
+        "verse": 18,
+        "word_index": 7,
+        "text": "אֵבָרִים"
+      },
+      {
+        "book": "mark",
+        "chapter": 2,
+        "verse": 3,
+        "word_index": 6,
+        "text": "אֵבָרִים"
+      },
+      {
+        "book": "matthew",
+        "chapter": 4,
+        "verse": 24,
+        "word_index": 19,
+        "text": "אֵבָרִים"
+      },
+      {
+        "book": "matthew",
+        "chapter": 8,
+        "verse": 6,
+        "word_index": 8,
+        "text": "אֵבָרִים"
+      },
+      {
+        "book": "matthew",
+        "chapter": 9,
+        "verse": 2,
+        "word_index": 6,
+        "text": "אֵבָרִים"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 7,
-    "instance_surface_count": 7,
+    "instance_total": 20,
+    "instance_surface_count": 20,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [
+      {
+        "book": "matthew",
+        "chapter": 4,
+        "verse": 24,
+        "word_index": 19,
+        "text": "אֵבָרִים",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 4,
+          "verse": 24,
+          "word_index": 19,
+          "text": "אֵבָרִים"
+        },
+        "source_key": "[\"\",null,\"matthew\",4,24,null]"
+      },
+      {
+        "book": "matthew",
+        "chapter": 8,
+        "verse": 6,
+        "word_index": 8,
+        "text": "אֵבָרִים",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 8,
+          "verse": 6,
+          "word_index": 8,
+          "text": "אֵבָרִים"
+        },
+        "source_key": "[\"\",null,\"matthew\",8,6,null]"
+      },
+      {
+        "book": "matthew",
+        "chapter": 9,
+        "verse": 2,
+        "word_index": 6,
+        "text": "אֵבָרִים",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 9,
+          "verse": 2,
+          "word_index": 6,
+          "text": "אֵבָרִים"
+        },
+        "source_key": "[\"\",null,\"matthew\",9,2,null]"
+      },
+      {
+        "book": "mark",
+        "chapter": 2,
+        "verse": 3,
+        "word_index": 6,
+        "text": "אֵבָרִים",
+        "source_payload": {
+          "book": "mark",
+          "chapter": 2,
+          "verse": 3,
+          "word_index": 6,
+          "text": "אֵבָרִים"
+        },
+        "source_key": "[\"\",null,\"mark\",2,3,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 5,
+        "verse": 18,
+        "word_index": 7,
+        "text": "אֵבָרִים",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 5,
+          "verse": 18,
+          "word_index": 7,
+          "text": "אֵבָרִים"
+        },
+        "source_key": "[\"\",null,\"luke\",5,18,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 7,
+        "word_index": 14,
+        "text": "אֵבָרִים",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 8,
+          "verse": 7,
+          "word_index": 14,
+          "text": "אֵבָרִים"
+        },
+        "source_key": "[\"\",null,\"acts\",8,7,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 9,
+        "verse": 33,
+        "word_index": 14,
+        "text": "אֵבָרִים׃",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 9,
+          "verse": 33,
+          "word_index": 14,
+          "text": "אֵבָרִים׃"
+        },
+        "source_key": "[\"\",null,\"acts\",9,33,null]"
+      },
       {
         "book": "romans",
         "chapter": 6,
@@ -101430,6 +104022,51 @@
         "source_key": "[\"\",null,\"romans\",7,5,null]"
       },
       {
+        "book": "romans",
+        "chapter": 12,
+        "verse": 4,
+        "word_index": 6,
+        "text": "אֵבָרִים",
+        "source_payload": {
+          "book": "romans",
+          "chapter": 12,
+          "verse": 4,
+          "word_index": 6,
+          "text": "אֵבָרִים"
+        },
+        "source_key": "[\"\",null,\"romans\",12,4,null]"
+      },
+      {
+        "book": "ephesians",
+        "chapter": 4,
+        "verse": 25,
+        "word_index": 12,
+        "text": "אֵבָרִים",
+        "source_payload": {
+          "book": "ephesians",
+          "chapter": 4,
+          "verse": 25,
+          "word_index": 12,
+          "text": "אֵבָרִים"
+        },
+        "source_key": "[\"\",null,\"ephesians\",4,25,null]"
+      },
+      {
+        "book": "ephesians",
+        "chapter": 5,
+        "verse": 30,
+        "word_index": 1,
+        "text": "אֵבָרֵי",
+        "source_payload": {
+          "book": "ephesians",
+          "chapter": 5,
+          "verse": 30,
+          "word_index": 1,
+          "text": "אֵבָרֵי"
+        },
+        "source_key": "[\"\",null,\"ephesians\",5,30,null]"
+      },
+      {
         "book": "colossians",
         "chapter": 3,
         "verse": 5,
@@ -101461,6 +104098,36 @@
       },
       {
         "book": "corinthians1",
+        "chapter": 6,
+        "verse": 15,
+        "word_index": 10,
+        "text": "אֵבָרֵי",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 6,
+          "verse": 15,
+          "word_index": 10,
+          "text": "אֵבָרֵי"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",6,15,null]"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 12,
+        "verse": 12,
+        "word_index": 10,
+        "text": "אֵבָרֵי",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 12,
+          "verse": 12,
+          "word_index": 10,
+          "text": "אֵבָרֵי"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",12,12,null]"
+      },
+      {
+        "book": "corinthians1",
         "chapter": 12,
         "verse": 18,
         "word_index": 4,
@@ -101473,6 +104140,21 @@
           "text": "הָאֵבָרִים"
         },
         "source_key": "[\"\",null,\"corinthians1\",12,18,null]"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 12,
+        "verse": 22,
+        "word_index": 2,
+        "text": "אֵבָרֵי",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 12,
+          "verse": 22,
+          "word_index": 2,
+          "text": "אֵבָרֵי"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",12,22,null]"
       },
       {
         "book": "corinthians1",
@@ -101492,6 +104174,111 @@
     ],
     "surface_instances": [
       {
+        "book": "matthew",
+        "chapter": 4,
+        "verse": 24,
+        "word_index": 19,
+        "text": "אֵבָרִים",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 4,
+          "verse": 24,
+          "word_index": 19,
+          "text": "אֵבָרִים"
+        },
+        "source_key": "[\"\",null,\"matthew\",4,24,null]"
+      },
+      {
+        "book": "matthew",
+        "chapter": 8,
+        "verse": 6,
+        "word_index": 8,
+        "text": "אֵבָרִים",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 8,
+          "verse": 6,
+          "word_index": 8,
+          "text": "אֵבָרִים"
+        },
+        "source_key": "[\"\",null,\"matthew\",8,6,null]"
+      },
+      {
+        "book": "matthew",
+        "chapter": 9,
+        "verse": 2,
+        "word_index": 6,
+        "text": "אֵבָרִים",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 9,
+          "verse": 2,
+          "word_index": 6,
+          "text": "אֵבָרִים"
+        },
+        "source_key": "[\"\",null,\"matthew\",9,2,null]"
+      },
+      {
+        "book": "mark",
+        "chapter": 2,
+        "verse": 3,
+        "word_index": 6,
+        "text": "אֵבָרִים",
+        "source_payload": {
+          "book": "mark",
+          "chapter": 2,
+          "verse": 3,
+          "word_index": 6,
+          "text": "אֵבָרִים"
+        },
+        "source_key": "[\"\",null,\"mark\",2,3,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 5,
+        "verse": 18,
+        "word_index": 7,
+        "text": "אֵבָרִים",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 5,
+          "verse": 18,
+          "word_index": 7,
+          "text": "אֵבָרִים"
+        },
+        "source_key": "[\"\",null,\"luke\",5,18,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 8,
+        "verse": 7,
+        "word_index": 14,
+        "text": "אֵבָרִים",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 8,
+          "verse": 7,
+          "word_index": 14,
+          "text": "אֵבָרִים"
+        },
+        "source_key": "[\"\",null,\"acts\",8,7,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 9,
+        "verse": 33,
+        "word_index": 14,
+        "text": "אֵבָרִים׃",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 9,
+          "verse": 33,
+          "word_index": 14,
+          "text": "אֵבָרִים׃"
+        },
+        "source_key": "[\"\",null,\"acts\",9,33,null]"
+      },
+      {
         "book": "romans",
         "chapter": 6,
         "verse": 13,
@@ -101537,6 +104324,51 @@
         "source_key": "[\"\",null,\"romans\",7,5,null]"
       },
       {
+        "book": "romans",
+        "chapter": 12,
+        "verse": 4,
+        "word_index": 6,
+        "text": "אֵבָרִים",
+        "source_payload": {
+          "book": "romans",
+          "chapter": 12,
+          "verse": 4,
+          "word_index": 6,
+          "text": "אֵבָרִים"
+        },
+        "source_key": "[\"\",null,\"romans\",12,4,null]"
+      },
+      {
+        "book": "ephesians",
+        "chapter": 4,
+        "verse": 25,
+        "word_index": 12,
+        "text": "אֵבָרִים",
+        "source_payload": {
+          "book": "ephesians",
+          "chapter": 4,
+          "verse": 25,
+          "word_index": 12,
+          "text": "אֵבָרִים"
+        },
+        "source_key": "[\"\",null,\"ephesians\",4,25,null]"
+      },
+      {
+        "book": "ephesians",
+        "chapter": 5,
+        "verse": 30,
+        "word_index": 1,
+        "text": "אֵבָרֵי",
+        "source_payload": {
+          "book": "ephesians",
+          "chapter": 5,
+          "verse": 30,
+          "word_index": 1,
+          "text": "אֵבָרֵי"
+        },
+        "source_key": "[\"\",null,\"ephesians\",5,30,null]"
+      },
+      {
         "book": "colossians",
         "chapter": 3,
         "verse": 5,
@@ -101568,6 +104400,36 @@
       },
       {
         "book": "corinthians1",
+        "chapter": 6,
+        "verse": 15,
+        "word_index": 10,
+        "text": "אֵבָרֵי",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 6,
+          "verse": 15,
+          "word_index": 10,
+          "text": "אֵבָרֵי"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",6,15,null]"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 12,
+        "verse": 12,
+        "word_index": 10,
+        "text": "אֵבָרֵי",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 12,
+          "verse": 12,
+          "word_index": 10,
+          "text": "אֵבָרֵי"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",12,12,null]"
+      },
+      {
+        "book": "corinthians1",
         "chapter": 12,
         "verse": 18,
         "word_index": 4,
@@ -101580,6 +104442,21 @@
           "text": "הָאֵבָרִים"
         },
         "source_key": "[\"\",null,\"corinthians1\",12,18,null]"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 12,
+        "verse": 22,
+        "word_index": 2,
+        "text": "אֵבָרֵי",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 12,
+          "verse": 22,
+          "word_index": 2,
+          "text": "אֵבָרֵי"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",12,22,null]"
       },
       {
         "book": "corinthians1",
@@ -101643,12 +104520,61 @@
         "verse": 15,
         "word_index": 12,
         "text": "תְּחִיַּת"
+      },
+      {
+        "book": "acts",
+        "chapter": 24,
+        "verse": 21,
+        "word_index": 11,
+        "text": "תְּחִיַּת"
+      },
+      {
+        "book": "acts",
+        "chapter": 4,
+        "verse": 2,
+        "word_index": 11,
+        "text": "תְּחִיַּת"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 15,
+        "verse": 13,
+        "word_index": 2,
+        "text": "תְּחִיָּה"
+      },
+      {
+        "book": "matthew",
+        "chapter": 22,
+        "verse": 31,
+        "word_index": 2,
+        "text": "תְּחִיַּת"
+      },
+      {
+        "book": "philippians",
+        "chapter": 3,
+        "verse": 11,
+        "word_index": 4,
+        "text": "תְּחִיַּת"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 2,
+        "verse": 18,
+        "word_index": 6,
+        "text": "תְחִיַּת"
+      },
+      {
+        "book": "philippians",
+        "chapter": 3,
+        "verse": 10,
+        "word_index": 4,
+        "text": "תְּחִיָּתוֹ"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 4,
-    "instance_surface_count": 4,
+    "instance_total": 11,
+    "instance_surface_count": 11,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -101669,6 +104595,21 @@
         "source_key": "[\"\",null,\"matthew\",22,23,null]"
       },
       {
+        "book": "matthew",
+        "chapter": 22,
+        "verse": 31,
+        "word_index": 2,
+        "text": "תְּחִיַּת",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 22,
+          "verse": 31,
+          "word_index": 2,
+          "text": "תְּחִיַּת"
+        },
+        "source_key": "[\"\",null,\"matthew\",22,31,null]"
+      },
+      {
         "book": "luke",
         "chapter": 20,
         "verse": 35,
@@ -101682,6 +104623,21 @@
           "text": "תְּחִיַּת"
         },
         "source_key": "[\"\",null,\"luke\",20,35,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 4,
+        "verse": 2,
+        "word_index": 11,
+        "text": "תְּחִיַּת",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 4,
+          "verse": 2,
+          "word_index": 11,
+          "text": "תְּחִיַּת"
+        },
+        "source_key": "[\"\",null,\"acts\",4,2,null]"
       },
       {
         "book": "acts",
@@ -101699,6 +104655,66 @@
         "source_key": "[\"\",null,\"acts\",24,15,null]"
       },
       {
+        "book": "acts",
+        "chapter": 24,
+        "verse": 21,
+        "word_index": 11,
+        "text": "תְּחִיַּת",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 24,
+          "verse": 21,
+          "word_index": 11,
+          "text": "תְּחִיַּת"
+        },
+        "source_key": "[\"\",null,\"acts\",24,21,null]"
+      },
+      {
+        "book": "philippians",
+        "chapter": 3,
+        "verse": 10,
+        "word_index": 4,
+        "text": "תְּחִיָּתוֹ",
+        "source_payload": {
+          "book": "philippians",
+          "chapter": 3,
+          "verse": 10,
+          "word_index": 4,
+          "text": "תְּחִיָּתוֹ"
+        },
+        "source_key": "[\"\",null,\"philippians\",3,10,null]"
+      },
+      {
+        "book": "philippians",
+        "chapter": 3,
+        "verse": 11,
+        "word_index": 4,
+        "text": "תְּחִיַּת",
+        "source_payload": {
+          "book": "philippians",
+          "chapter": 3,
+          "verse": 11,
+          "word_index": 4,
+          "text": "תְּחִיַּת"
+        },
+        "source_key": "[\"\",null,\"philippians\",3,11,null]"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 15,
+        "verse": 13,
+        "word_index": 2,
+        "text": "תְּחִיָּה",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 15,
+          "verse": 13,
+          "word_index": 2,
+          "text": "תְּחִיָּה"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",15,13,null]"
+      },
+      {
         "book": "corinthians1",
         "chapter": 15,
         "verse": 21,
@@ -101712,6 +104728,21 @@
           "text": "תְּחִיַּת"
         },
         "source_key": "[\"\",null,\"corinthians1\",15,21,null]"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 2,
+        "verse": 18,
+        "word_index": 6,
+        "text": "תְחִיַּת",
+        "source_payload": {
+          "book": "timothy2",
+          "chapter": 2,
+          "verse": 18,
+          "word_index": 6,
+          "text": "תְחִיַּת"
+        },
+        "source_key": "[\"\",null,\"timothy2\",2,18,null]"
       }
     ],
     "surface_instances": [
@@ -101731,6 +104762,21 @@
         "source_key": "[\"\",null,\"matthew\",22,23,null]"
       },
       {
+        "book": "matthew",
+        "chapter": 22,
+        "verse": 31,
+        "word_index": 2,
+        "text": "תְּחִיַּת",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 22,
+          "verse": 31,
+          "word_index": 2,
+          "text": "תְּחִיַּת"
+        },
+        "source_key": "[\"\",null,\"matthew\",22,31,null]"
+      },
+      {
         "book": "luke",
         "chapter": 20,
         "verse": 35,
@@ -101744,6 +104790,21 @@
           "text": "תְּחִיַּת"
         },
         "source_key": "[\"\",null,\"luke\",20,35,null]"
+      },
+      {
+        "book": "acts",
+        "chapter": 4,
+        "verse": 2,
+        "word_index": 11,
+        "text": "תְּחִיַּת",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 4,
+          "verse": 2,
+          "word_index": 11,
+          "text": "תְּחִיַּת"
+        },
+        "source_key": "[\"\",null,\"acts\",4,2,null]"
       },
       {
         "book": "acts",
@@ -101761,6 +104822,66 @@
         "source_key": "[\"\",null,\"acts\",24,15,null]"
       },
       {
+        "book": "acts",
+        "chapter": 24,
+        "verse": 21,
+        "word_index": 11,
+        "text": "תְּחִיַּת",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 24,
+          "verse": 21,
+          "word_index": 11,
+          "text": "תְּחִיַּת"
+        },
+        "source_key": "[\"\",null,\"acts\",24,21,null]"
+      },
+      {
+        "book": "philippians",
+        "chapter": 3,
+        "verse": 10,
+        "word_index": 4,
+        "text": "תְּחִיָּתוֹ",
+        "source_payload": {
+          "book": "philippians",
+          "chapter": 3,
+          "verse": 10,
+          "word_index": 4,
+          "text": "תְּחִיָּתוֹ"
+        },
+        "source_key": "[\"\",null,\"philippians\",3,10,null]"
+      },
+      {
+        "book": "philippians",
+        "chapter": 3,
+        "verse": 11,
+        "word_index": 4,
+        "text": "תְּחִיַּת",
+        "source_payload": {
+          "book": "philippians",
+          "chapter": 3,
+          "verse": 11,
+          "word_index": 4,
+          "text": "תְּחִיַּת"
+        },
+        "source_key": "[\"\",null,\"philippians\",3,11,null]"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 15,
+        "verse": 13,
+        "word_index": 2,
+        "text": "תְּחִיָּה",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 15,
+          "verse": 13,
+          "word_index": 2,
+          "text": "תְּחִיָּה"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",15,13,null]"
+      },
+      {
         "book": "corinthians1",
         "chapter": 15,
         "verse": 21,
@@ -101774,6 +104895,21 @@
           "text": "תְּחִיַּת"
         },
         "source_key": "[\"\",null,\"corinthians1\",15,21,null]"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 2,
+        "verse": 18,
+        "word_index": 6,
+        "text": "תְחִיַּת",
+        "source_payload": {
+          "book": "timothy2",
+          "chapter": 2,
+          "verse": 18,
+          "word_index": 6,
+          "text": "תְחִיַּת"
+        },
+        "source_key": "[\"\",null,\"timothy2\",2,18,null]"
       }
     ]
   },
@@ -102216,16 +105352,110 @@
         "verse": 19,
         "word_index": 14,
         "text": "חֲבִיבַי"
+      },
+      {
+        "book": "colossians",
+        "chapter": 1,
+        "verse": 7,
+        "word_index": 5,
+        "text": "הֶחָבִיב"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 7,
+        "verse": 1,
+        "word_index": 1,
+        "text": "חֲבִיבָי"
+      },
+      {
+        "book": "philippians",
+        "chapter": 2,
+        "verse": 12,
+        "word_index": 1,
+        "text": "חֲבִיבַי"
+      },
+      {
+        "book": "philippians",
+        "chapter": 4,
+        "verse": 1,
+        "word_index": 11,
+        "text": "חֲבִיבָי׃"
+      },
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 5,
+        "word_index": 3,
+        "text": "חֲבִיבִי"
+      },
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 8,
+        "word_index": 3,
+        "text": "חֲבִיבִי"
+      },
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 9,
+        "word_index": 8,
+        "text": "חֲבִיבִי׃"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 2,
-    "instance_surface_count": 2,
+    "instance_total": 9,
+    "instance_surface_count": 9,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 5,
+        "word_index": 3,
+        "text": "חֲבִיבִי",
+        "source_payload": {
+          "book": "romans",
+          "chapter": 16,
+          "verse": 5,
+          "word_index": 3,
+          "text": "חֲבִיבִי"
+        },
+        "source_key": "[\"\",null,\"romans\",16,5,null]"
+      },
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 8,
+        "word_index": 3,
+        "text": "חֲבִיבִי",
+        "source_payload": {
+          "book": "romans",
+          "chapter": 16,
+          "verse": 8,
+          "word_index": 3,
+          "text": "חֲבִיבִי"
+        },
+        "source_key": "[\"\",null,\"romans\",16,8,null]"
+      },
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 9,
+        "word_index": 8,
+        "text": "חֲבִיבִי׃",
+        "source_payload": {
+          "book": "romans",
+          "chapter": 16,
+          "verse": 9,
+          "word_index": 8,
+          "text": "חֲבִיבִי׃"
+        },
+        "source_key": "[\"\",null,\"romans\",16,9,null]"
+      },
       {
         "book": "ephesians",
         "chapter": 5,
@@ -102240,6 +105470,66 @@
           "text": "חֲבִיבִים׃"
         },
         "source_key": "[\"\",null,\"ephesians\",5,1,null]"
+      },
+      {
+        "book": "philippians",
+        "chapter": 2,
+        "verse": 12,
+        "word_index": 1,
+        "text": "חֲבִיבַי",
+        "source_payload": {
+          "book": "philippians",
+          "chapter": 2,
+          "verse": 12,
+          "word_index": 1,
+          "text": "חֲבִיבַי"
+        },
+        "source_key": "[\"\",null,\"philippians\",2,12,null]"
+      },
+      {
+        "book": "philippians",
+        "chapter": 4,
+        "verse": 1,
+        "word_index": 11,
+        "text": "חֲבִיבָי׃",
+        "source_payload": {
+          "book": "philippians",
+          "chapter": 4,
+          "verse": 1,
+          "word_index": 11,
+          "text": "חֲבִיבָי׃"
+        },
+        "source_key": "[\"\",null,\"philippians\",4,1,null]"
+      },
+      {
+        "book": "colossians",
+        "chapter": 1,
+        "verse": 7,
+        "word_index": 5,
+        "text": "הֶחָבִיב",
+        "source_payload": {
+          "book": "colossians",
+          "chapter": 1,
+          "verse": 7,
+          "word_index": 5,
+          "text": "הֶחָבִיב"
+        },
+        "source_key": "[\"\",null,\"colossians\",1,7,null]"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 7,
+        "verse": 1,
+        "word_index": 1,
+        "text": "חֲבִיבָי",
+        "source_payload": {
+          "book": "corinthians2",
+          "chapter": 7,
+          "verse": 1,
+          "word_index": 1,
+          "text": "חֲבִיבָי"
+        },
+        "source_key": "[\"\",null,\"corinthians2\",7,1,null]"
       },
       {
         "book": "corinthians2",
@@ -102259,6 +105549,51 @@
     ],
     "surface_instances": [
       {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 5,
+        "word_index": 3,
+        "text": "חֲבִיבִי",
+        "source_payload": {
+          "book": "romans",
+          "chapter": 16,
+          "verse": 5,
+          "word_index": 3,
+          "text": "חֲבִיבִי"
+        },
+        "source_key": "[\"\",null,\"romans\",16,5,null]"
+      },
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 8,
+        "word_index": 3,
+        "text": "חֲבִיבִי",
+        "source_payload": {
+          "book": "romans",
+          "chapter": 16,
+          "verse": 8,
+          "word_index": 3,
+          "text": "חֲבִיבִי"
+        },
+        "source_key": "[\"\",null,\"romans\",16,8,null]"
+      },
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 9,
+        "word_index": 8,
+        "text": "חֲבִיבִי׃",
+        "source_payload": {
+          "book": "romans",
+          "chapter": 16,
+          "verse": 9,
+          "word_index": 8,
+          "text": "חֲבִיבִי׃"
+        },
+        "source_key": "[\"\",null,\"romans\",16,9,null]"
+      },
+      {
         "book": "ephesians",
         "chapter": 5,
         "verse": 1,
@@ -102272,6 +105607,66 @@
           "text": "חֲבִיבִים׃"
         },
         "source_key": "[\"\",null,\"ephesians\",5,1,null]"
+      },
+      {
+        "book": "philippians",
+        "chapter": 2,
+        "verse": 12,
+        "word_index": 1,
+        "text": "חֲבִיבַי",
+        "source_payload": {
+          "book": "philippians",
+          "chapter": 2,
+          "verse": 12,
+          "word_index": 1,
+          "text": "חֲבִיבַי"
+        },
+        "source_key": "[\"\",null,\"philippians\",2,12,null]"
+      },
+      {
+        "book": "philippians",
+        "chapter": 4,
+        "verse": 1,
+        "word_index": 11,
+        "text": "חֲבִיבָי׃",
+        "source_payload": {
+          "book": "philippians",
+          "chapter": 4,
+          "verse": 1,
+          "word_index": 11,
+          "text": "חֲבִיבָי׃"
+        },
+        "source_key": "[\"\",null,\"philippians\",4,1,null]"
+      },
+      {
+        "book": "colossians",
+        "chapter": 1,
+        "verse": 7,
+        "word_index": 5,
+        "text": "הֶחָבִיב",
+        "source_payload": {
+          "book": "colossians",
+          "chapter": 1,
+          "verse": 7,
+          "word_index": 5,
+          "text": "הֶחָבִיב"
+        },
+        "source_key": "[\"\",null,\"colossians\",1,7,null]"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 7,
+        "verse": 1,
+        "word_index": 1,
+        "text": "חֲבִיבָי",
+        "source_payload": {
+          "book": "corinthians2",
+          "chapter": 7,
+          "verse": 1,
+          "word_index": 1,
+          "text": "חֲבִיבָי"
+        },
+        "source_key": "[\"\",null,\"corinthians2\",7,1,null]"
       },
       {
         "book": "corinthians2",
@@ -103128,12 +106523,19 @@
         "verse": 38,
         "word_index": 13,
         "text": "רַבִּי"
+      },
+      {
+        "book": "john",
+        "chapter": 3,
+        "verse": 10,
+        "word_index": 4,
+        "text": "רַבָּן"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 1,
-    "instance_surface_count": 1,
+    "instance_total": 2,
+    "instance_surface_count": 2,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -103152,6 +106554,21 @@
           "text": "רַבִּי"
         },
         "source_key": "[\"\",null,\"john\",1,38,null]"
+      },
+      {
+        "book": "john",
+        "chapter": 3,
+        "verse": 10,
+        "word_index": 4,
+        "text": "רַבָּן",
+        "source_payload": {
+          "book": "john",
+          "chapter": 3,
+          "verse": 10,
+          "word_index": 4,
+          "text": "רַבָּן"
+        },
+        "source_key": "[\"\",null,\"john\",3,10,null]"
       }
     ],
     "surface_instances": [
@@ -103169,6 +106586,21 @@
           "text": "רַבִּי"
         },
         "source_key": "[\"\",null,\"john\",1,38,null]"
+      },
+      {
+        "book": "john",
+        "chapter": 3,
+        "verse": 10,
+        "word_index": 4,
+        "text": "רַבָּן",
+        "source_payload": {
+          "book": "john",
+          "chapter": 3,
+          "verse": 10,
+          "word_index": 4,
+          "text": "רַבָּן"
+        },
+        "source_key": "[\"\",null,\"john\",3,10,null]"
       }
     ],
     "term_language": "hebrew",
@@ -103889,16 +107321,38 @@
         "verse": 7,
         "word_index": 5,
         "text": "דִּינָר"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 37,
+        "word_index": 13,
+        "text": "דִּינַר"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 1,
-    "instance_surface_count": 1,
+    "instance_total": 2,
+    "instance_surface_count": 2,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 37,
+        "word_index": 13,
+        "text": "דִּינַר",
+        "source_payload": {
+          "book": "mark",
+          "chapter": 6,
+          "verse": 37,
+          "word_index": 13,
+          "text": "דִּינַר"
+        },
+        "source_key": "[\"\",null,\"mark\",6,37,null]"
+      },
       {
         "book": "john",
         "chapter": 6,
@@ -103916,6 +107370,21 @@
       }
     ],
     "surface_instances": [
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 37,
+        "word_index": 13,
+        "text": "דִּינַר",
+        "source_payload": {
+          "book": "mark",
+          "chapter": 6,
+          "verse": 37,
+          "word_index": 13,
+          "text": "דִּינַר"
+        },
+        "source_key": "[\"\",null,\"mark\",6,37,null]"
+      },
       {
         "book": "john",
         "chapter": 6,
@@ -105799,6 +109268,12 @@
         "text_es": "dar a luz; engendrar; producir.",
         "source": "delitzsch_review",
         "order": 1
+      },
+      {
+        "source": "custom",
+        "text_en": "bear, bring forth; beget; be born.",
+        "text_es": "dar a luz; engendrar; nacer.",
+        "order": 2
       }
     ],
     "root": "",
@@ -106047,16 +109522,82 @@
         "verse": 2,
         "word_index": 12,
         "text": "מֻתָּר"
+      },
+      {
+        "book": "matthew",
+        "chapter": 12,
+        "verse": 12,
+        "word_index": 6,
+        "text": "מֻתָּר"
+      },
+      {
+        "book": "matthew",
+        "chapter": 12,
+        "verse": 4,
+        "word_index": 11,
+        "text": "מֻתָּר"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 18,
+        "word_index": 9,
+        "text": "מֻתֶּרֶת"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 1,
-    "instance_surface_count": 1,
+    "instance_total": 4,
+    "instance_surface_count": 4,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [
+      {
+        "book": "matthew",
+        "chapter": 12,
+        "verse": 4,
+        "word_index": 11,
+        "text": "מֻתָּר",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 12,
+          "verse": 4,
+          "word_index": 11,
+          "text": "מֻתָּר"
+        },
+        "source_key": "[\"\",null,\"matthew\",12,4,null]"
+      },
+      {
+        "book": "matthew",
+        "chapter": 12,
+        "verse": 12,
+        "word_index": 6,
+        "text": "מֻתָּר",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 12,
+          "verse": 12,
+          "word_index": 6,
+          "text": "מֻתָּר"
+        },
+        "source_key": "[\"\",null,\"matthew\",12,12,null]"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 18,
+        "word_index": 9,
+        "text": "מֻתֶּרֶת",
+        "source_payload": {
+          "book": "mark",
+          "chapter": 6,
+          "verse": 18,
+          "word_index": 9,
+          "text": "מֻתֶּרֶת"
+        },
+        "source_key": "[\"\",null,\"mark\",6,18,null]"
+      },
       {
         "book": "luke",
         "chapter": 6,
@@ -106074,6 +109615,51 @@
       }
     ],
     "surface_instances": [
+      {
+        "book": "matthew",
+        "chapter": 12,
+        "verse": 4,
+        "word_index": 11,
+        "text": "מֻתָּר",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 12,
+          "verse": 4,
+          "word_index": 11,
+          "text": "מֻתָּר"
+        },
+        "source_key": "[\"\",null,\"matthew\",12,4,null]"
+      },
+      {
+        "book": "matthew",
+        "chapter": 12,
+        "verse": 12,
+        "word_index": 6,
+        "text": "מֻתָּר",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 12,
+          "verse": 12,
+          "word_index": 6,
+          "text": "מֻתָּר"
+        },
+        "source_key": "[\"\",null,\"matthew\",12,12,null]"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 18,
+        "word_index": 9,
+        "text": "מֻתֶּרֶת",
+        "source_payload": {
+          "book": "mark",
+          "chapter": 6,
+          "verse": 18,
+          "word_index": 9,
+          "text": "מֻתֶּרֶת"
+        },
+        "source_key": "[\"\",null,\"mark\",6,18,null]"
+      },
       {
         "book": "luke",
         "chapter": 6,
@@ -106866,6 +110452,12 @@
         "text_es": "mostrar favor; ser misericordioso; suplicar; implorar.",
         "source": "delitzsch_review",
         "order": 1
+      },
+      {
+        "source": "custom",
+        "text_en": "be gracious, show favour; in the hithpael, implore favour, plead; also be loathsome (Job 19:17).",
+        "text_es": "tener misericordia, mostrar favor; en hitpael, implorar, suplicar; también ser repugnante (Job 19:17).",
+        "order": 2
       }
     ],
     "root": "",
@@ -106959,33 +110551,81 @@
         "verse": 3,
         "word_index": 9,
         "text": "תַרְמִיל"
+      },
+      {
+        "book": "luke",
+        "chapter": 10,
+        "verse": 4,
+        "word_index": 4,
+        "text": "תַרְמִיל"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 8,
+        "word_index": 11,
+        "text": "תַרְמִיל"
+      },
+      {
+        "book": "matthew",
+        "chapter": 10,
+        "verse": 10,
+        "word_index": 1,
+        "text": "תַרְמִיל"
+      },
+      {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 35,
+        "word_index": 7,
+        "text": "וְתַרְמִיל"
+      },
+      {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 36,
+        "word_index": 11,
+        "text": "הַתַּרְמִיל"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 1,
-    "instance_surface_count": 1,
+    "instance_total": 6,
+    "instance_surface_count": 6,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
     "instances": [
       {
-        "book": "luke",
-        "chapter": 9,
-        "verse": 3,
-        "word_index": 9,
+        "book": "matthew",
+        "chapter": 10,
+        "verse": 10,
+        "word_index": 1,
         "text": "תַרְמִיל",
         "source_payload": {
-          "book": "luke",
-          "chapter": 9,
-          "verse": 3,
-          "word_index": 9,
+          "book": "matthew",
+          "chapter": 10,
+          "verse": 10,
+          "word_index": 1,
           "text": "תַרְמִיל"
         },
-        "source_key": "[\"\",null,\"luke\",9,3,null]"
-      }
-    ],
-    "surface_instances": [
+        "source_key": "[\"\",null,\"matthew\",10,10,null]"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 8,
+        "word_index": 11,
+        "text": "תַרְמִיל",
+        "source_payload": {
+          "book": "mark",
+          "chapter": 6,
+          "verse": 8,
+          "word_index": 11,
+          "text": "תַרְמִיל"
+        },
+        "source_key": "[\"\",null,\"mark\",6,8,null]"
+      },
       {
         "book": "luke",
         "chapter": 9,
@@ -107000,6 +110640,143 @@
           "text": "תַרְמִיל"
         },
         "source_key": "[\"\",null,\"luke\",9,3,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 10,
+        "verse": 4,
+        "word_index": 4,
+        "text": "תַרְמִיל",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 10,
+          "verse": 4,
+          "word_index": 4,
+          "text": "תַרְמִיל"
+        },
+        "source_key": "[\"\",null,\"luke\",10,4,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 35,
+        "word_index": 7,
+        "text": "וְתַרְמִיל",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 22,
+          "verse": 35,
+          "word_index": 7,
+          "text": "וְתַרְמִיל"
+        },
+        "source_key": "[\"\",null,\"luke\",22,35,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 36,
+        "word_index": 11,
+        "text": "הַתַּרְמִיל",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 22,
+          "verse": 36,
+          "word_index": 11,
+          "text": "הַתַּרְמִיל"
+        },
+        "source_key": "[\"\",null,\"luke\",22,36,null]"
+      }
+    ],
+    "surface_instances": [
+      {
+        "book": "matthew",
+        "chapter": 10,
+        "verse": 10,
+        "word_index": 1,
+        "text": "תַרְמִיל",
+        "source_payload": {
+          "book": "matthew",
+          "chapter": 10,
+          "verse": 10,
+          "word_index": 1,
+          "text": "תַרְמִיל"
+        },
+        "source_key": "[\"\",null,\"matthew\",10,10,null]"
+      },
+      {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 8,
+        "word_index": 11,
+        "text": "תַרְמִיל",
+        "source_payload": {
+          "book": "mark",
+          "chapter": 6,
+          "verse": 8,
+          "word_index": 11,
+          "text": "תַרְמִיל"
+        },
+        "source_key": "[\"\",null,\"mark\",6,8,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 9,
+        "verse": 3,
+        "word_index": 9,
+        "text": "תַרְמִיל",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 9,
+          "verse": 3,
+          "word_index": 9,
+          "text": "תַרְמִיל"
+        },
+        "source_key": "[\"\",null,\"luke\",9,3,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 10,
+        "verse": 4,
+        "word_index": 4,
+        "text": "תַרְמִיל",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 10,
+          "verse": 4,
+          "word_index": 4,
+          "text": "תַרְמִיל"
+        },
+        "source_key": "[\"\",null,\"luke\",10,4,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 35,
+        "word_index": 7,
+        "text": "וְתַרְמִיל",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 22,
+          "verse": 35,
+          "word_index": 7,
+          "text": "וְתַרְמִיל"
+        },
+        "source_key": "[\"\",null,\"luke\",22,35,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 36,
+        "word_index": 11,
+        "text": "הַתַּרְמִיל",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 22,
+          "verse": 36,
+          "word_index": 11,
+          "text": "הַתַּרְמִיל"
+        },
+        "source_key": "[\"\",null,\"luke\",22,36,null]"
       }
     ]
   },
@@ -107170,6 +110947,12 @@
         "text_es": "cerrar; encerrar; clausurar.",
         "source": "delitzsch_review",
         "order": 1
+      },
+      {
+        "source": "custom",
+        "text_en": "shut, close; in the hiphil, deliver up, surrender.",
+        "text_es": "cerrar, encerrar; en hifil, entregar, rendir.",
+        "order": 2
       }
     ],
     "root": "",
@@ -108810,12 +112593,19 @@
         "verse": 4,
         "word_index": 11,
         "text": "סְעוּדָתִי"
+      },
+      {
+        "book": "luke",
+        "chapter": 14,
+        "verse": 24,
+        "word_index": 12,
+        "text": "סְעוּדָתִי׃"
       }
     ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 1,
-    "instance_surface_count": 1,
+    "instance_total": 2,
+    "instance_surface_count": 2,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
@@ -108834,6 +112624,21 @@
           "text": "סְעוּדָתִי"
         },
         "source_key": "[\"\",null,\"matthew\",22,4,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 14,
+        "verse": 24,
+        "word_index": 12,
+        "text": "סְעוּדָתִי׃",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 14,
+          "verse": 24,
+          "word_index": 12,
+          "text": "סְעוּדָתִי׃"
+        },
+        "source_key": "[\"\",null,\"luke\",14,24,null]"
       }
     ],
     "surface_instances": [
@@ -108851,6 +112656,21 @@
           "text": "סְעוּדָתִי"
         },
         "source_key": "[\"\",null,\"matthew\",22,4,null]"
+      },
+      {
+        "book": "luke",
+        "chapter": 14,
+        "verse": 24,
+        "word_index": 12,
+        "text": "סְעוּדָתִי׃",
+        "source_payload": {
+          "book": "luke",
+          "chapter": 14,
+          "verse": 24,
+          "word_index": 12,
+          "text": "סְעוּדָתִי׃"
+        },
+        "source_key": "[\"\",null,\"luke\",14,24,null]"
       }
     ]
   },
@@ -108901,9 +112721,9 @@
       },
       {
         "source": "custom",
-        "order": 4,
-        "text_en": "drive, lead, guide; in later Hebrew, manage, govern, practise, be the custom; in the hithpael, behave, conduct oneself.",
-        "text_es": "conducir, guiar, llevar; en hebreo posterior, administrar, gobernar, practicar, ser costumbre; en hitpael, comportarse, conducirse."
+        "text_en": "drive, lead, guide; in later Hebrew, manage, govern, practise, be the custom; in the hithpael, behave, conduct oneself; also moan, of doves (Nahum 2:8).",
+        "text_es": "conducir, guiar, llevar; en hebreo posterior, administrar, gobernar, practicar, ser costumbre; en hitpael, comportarse, conducirse; también gemir, como palomas (Nahúm 2:8).",
+        "order": 4
       }
     ],
     "root": "",
@@ -124645,16 +128465,56 @@
       "Hutter Mark 12:28",
       "Hutter Luke 23:22"
     ],
-    "nt_instances": [],
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 23,
+        "verse": 34,
+        "word_index": 6,
+        "text": "מֵאֵיזֹה"
+      }
+    ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 0,
-    "instance_surface_count": 0,
+    "instance_total": 1,
+    "instance_surface_count": 1,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
-    "instances": [],
-    "surface_instances": []
+    "instances": [
+      {
+        "book": "acts",
+        "chapter": 23,
+        "verse": 34,
+        "word_index": 6,
+        "text": "מֵאֵיזֹה",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 23,
+          "verse": 34,
+          "word_index": 6,
+          "text": "מֵאֵיזֹה"
+        },
+        "source_key": "[\"\",null,\"acts\",23,34,null]"
+      }
+    ],
+    "surface_instances": [
+      {
+        "book": "acts",
+        "chapter": 23,
+        "verse": 34,
+        "word_index": 6,
+        "text": "מֵאֵיזֹה",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 23,
+          "verse": 34,
+          "word_index": 6,
+          "text": "מֵאֵיזֹה"
+        },
+        "source_key": "[\"\",null,\"acts\",23,34,null]"
+      }
+    ]
   },
   "D0217": {
     "strong_number": "D0217",
@@ -124978,16 +128838,204 @@
       "Hutter 1 Thessalonians 1:7",
       "Hutter 1 Thessalonians 1:8"
     ],
-    "nt_instances": [],
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 18,
+        "verse": 12,
+        "word_index": 5,
+        "text": "אֲכַיָּא"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 16,
+        "verse": 15,
+        "word_index": 10,
+        "text": "אֲכַיָּא"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 11,
+        "verse": 10,
+        "word_index": 15,
+        "text": "אֲכַיָּא׃"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 9,
+        "verse": 2,
+        "word_index": 13,
+        "text": "אֲכַיָּא"
+      },
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 5,
+        "word_index": 6,
+        "text": "אֲכַיָּא"
+      }
+    ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 0,
-    "instance_surface_count": 0,
+    "instance_total": 5,
+    "instance_surface_count": 5,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
-    "instances": [],
-    "surface_instances": []
+    "instances": [
+      {
+        "book": "acts",
+        "chapter": 18,
+        "verse": 12,
+        "word_index": 5,
+        "text": "אֲכַיָּא",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 18,
+          "verse": 12,
+          "word_index": 5,
+          "text": "אֲכַיָּא"
+        },
+        "source_key": "[\"\",null,\"acts\",18,12,null]"
+      },
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 5,
+        "word_index": 6,
+        "text": "אֲכַיָּא",
+        "source_payload": {
+          "book": "romans",
+          "chapter": 16,
+          "verse": 5,
+          "word_index": 6,
+          "text": "אֲכַיָּא"
+        },
+        "source_key": "[\"\",null,\"romans\",16,5,null]"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 16,
+        "verse": 15,
+        "word_index": 10,
+        "text": "אֲכַיָּא",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 16,
+          "verse": 15,
+          "word_index": 10,
+          "text": "אֲכַיָּא"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",16,15,null]"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 9,
+        "verse": 2,
+        "word_index": 13,
+        "text": "אֲכַיָּא",
+        "source_payload": {
+          "book": "corinthians2",
+          "chapter": 9,
+          "verse": 2,
+          "word_index": 13,
+          "text": "אֲכַיָּא"
+        },
+        "source_key": "[\"\",null,\"corinthians2\",9,2,null]"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 11,
+        "verse": 10,
+        "word_index": 15,
+        "text": "אֲכַיָּא׃",
+        "source_payload": {
+          "book": "corinthians2",
+          "chapter": 11,
+          "verse": 10,
+          "word_index": 15,
+          "text": "אֲכַיָּא׃"
+        },
+        "source_key": "[\"\",null,\"corinthians2\",11,10,null]"
+      }
+    ],
+    "surface_instances": [
+      {
+        "book": "acts",
+        "chapter": 18,
+        "verse": 12,
+        "word_index": 5,
+        "text": "אֲכַיָּא",
+        "source_payload": {
+          "book": "acts",
+          "chapter": 18,
+          "verse": 12,
+          "word_index": 5,
+          "text": "אֲכַיָּא"
+        },
+        "source_key": "[\"\",null,\"acts\",18,12,null]"
+      },
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 5,
+        "word_index": 6,
+        "text": "אֲכַיָּא",
+        "source_payload": {
+          "book": "romans",
+          "chapter": 16,
+          "verse": 5,
+          "word_index": 6,
+          "text": "אֲכַיָּא"
+        },
+        "source_key": "[\"\",null,\"romans\",16,5,null]"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 16,
+        "verse": 15,
+        "word_index": 10,
+        "text": "אֲכַיָּא",
+        "source_payload": {
+          "book": "corinthians1",
+          "chapter": 16,
+          "verse": 15,
+          "word_index": 10,
+          "text": "אֲכַיָּא"
+        },
+        "source_key": "[\"\",null,\"corinthians1\",16,15,null]"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 9,
+        "verse": 2,
+        "word_index": 13,
+        "text": "אֲכַיָּא",
+        "source_payload": {
+          "book": "corinthians2",
+          "chapter": 9,
+          "verse": 2,
+          "word_index": 13,
+          "text": "אֲכַיָּא"
+        },
+        "source_key": "[\"\",null,\"corinthians2\",9,2,null]"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 11,
+        "verse": 10,
+        "word_index": 15,
+        "text": "אֲכַיָּא׃",
+        "source_payload": {
+          "book": "corinthians2",
+          "chapter": 11,
+          "verse": 10,
+          "word_index": 15,
+          "text": "אֲכַיָּא׃"
+        },
+        "source_key": "[\"\",null,\"corinthians2\",11,10,null]"
+      }
+    ]
   },
   "D0224": {
     "strong_number": "D0224",
@@ -125098,16 +129146,56 @@
     "manual_instances": [
       "Hutter Romans 16:15"
     ],
-    "nt_instances": [],
+    "nt_instances": [
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 15,
+        "word_index": 4,
+        "text": "נִירְוַס"
+      }
+    ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 0,
-    "instance_surface_count": 0,
+    "instance_total": 1,
+    "instance_surface_count": 1,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
-    "instances": [],
-    "surface_instances": []
+    "instances": [
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 15,
+        "word_index": 4,
+        "text": "נִירְוַס",
+        "source_payload": {
+          "book": "romans",
+          "chapter": 16,
+          "verse": 15,
+          "word_index": 4,
+          "text": "נִירְוַס"
+        },
+        "source_key": "[\"\",null,\"romans\",16,15,null]"
+      }
+    ],
+    "surface_instances": [
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 15,
+        "word_index": 4,
+        "text": "נִירְוַס",
+        "source_payload": {
+          "book": "romans",
+          "chapter": 16,
+          "verse": 15,
+          "word_index": 4,
+          "text": "נִירְוַס"
+        },
+        "source_key": "[\"\",null,\"romans\",16,15,null]"
+      }
+    ]
   },
   "D0228": {
     "strong_number": "D0228",
@@ -126822,16 +130910,56 @@
     "manual_instances": [
       "Hutter 2 Corinthians 11:32"
     ],
-    "nt_instances": [],
+    "nt_instances": [
+      {
+        "book": "corinthians2",
+        "chapter": 11,
+        "verse": 32,
+        "word_index": 5,
+        "text": "אֲרֵטַס"
+      }
+    ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 0,
-    "instance_surface_count": 0,
+    "instance_total": 1,
+    "instance_surface_count": 1,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
-    "instances": [],
-    "surface_instances": []
+    "instances": [
+      {
+        "book": "corinthians2",
+        "chapter": 11,
+        "verse": 32,
+        "word_index": 5,
+        "text": "אֲרֵטַס",
+        "source_payload": {
+          "book": "corinthians2",
+          "chapter": 11,
+          "verse": 32,
+          "word_index": 5,
+          "text": "אֲרֵטַס"
+        },
+        "source_key": "[\"\",null,\"corinthians2\",11,32,null]"
+      }
+    ],
+    "surface_instances": [
+      {
+        "book": "corinthians2",
+        "chapter": 11,
+        "verse": 32,
+        "word_index": 5,
+        "text": "אֲרֵטַס",
+        "source_payload": {
+          "book": "corinthians2",
+          "chapter": 11,
+          "verse": 32,
+          "word_index": 5,
+          "text": "אֲרֵטַס"
+        },
+        "source_key": "[\"\",null,\"corinthians2\",11,32,null]"
+      }
+    ]
   },
   "D0250": {
     "strong_number": "D0250",
@@ -158121,16 +162249,56 @@
     "manual_instances": [
       "Hutter John 19:39"
     ],
-    "nt_instances": [],
+    "nt_instances": [
+      {
+        "book": "john",
+        "chapter": 3,
+        "verse": 1,
+        "word_index": 6,
+        "text": "נַקְדִּימוֹן"
+      }
+    ],
     "instance_policy_version": "1.1",
     "instance_tier": "low",
-    "instance_total": 0,
-    "instance_surface_count": 0,
+    "instance_total": 1,
+    "instance_surface_count": 1,
     "instance_omitted_count": 0,
     "instance_source_manifest_version": "1.1",
     "instance_signal_extractor_version": "unavailable-0",
-    "instances": [],
-    "surface_instances": []
+    "instances": [
+      {
+        "book": "john",
+        "chapter": 3,
+        "verse": 1,
+        "word_index": 6,
+        "text": "נַקְדִּימוֹן",
+        "source_payload": {
+          "book": "john",
+          "chapter": 3,
+          "verse": 1,
+          "word_index": 6,
+          "text": "נַקְדִּימוֹן"
+        },
+        "source_key": "[\"\",null,\"john\",3,1,null]"
+      }
+    ],
+    "surface_instances": [
+      {
+        "book": "john",
+        "chapter": 3,
+        "verse": 1,
+        "word_index": 6,
+        "text": "נַקְדִּימוֹן",
+        "source_payload": {
+          "book": "john",
+          "chapter": 3,
+          "verse": 1,
+          "word_index": 6,
+          "text": "נַקְדִּימוֹן"
+        },
+        "source_key": "[\"\",null,\"john\",3,1,null]"
+      }
+    ]
   },
   "D0281": {
     "strong_number": "D0281",
@@ -166602,6 +170770,12 @@
         "transliteration": "Yesh",
         "context": "Se señala como una alusión a la salvación (Yehoshúa) presente en un lugar específico.",
         "original_id": 273
+      },
+      {
+        "source": "custom",
+        "text_en": "there is, there are; being, substance.",
+        "text_es": "hay; ser, sustancia.",
+        "order": 2
       }
     ]
   },
@@ -170990,6 +175164,12 @@
         "transliteration": "Yacaj, Yajaj",
         "context": "Acción de dejar evidenciado o probado algo, usualmente en un contexto de reprensión. Proceso legal o espiritual donde se presentan pruebas que desbaratan los argumentos contrarios a la verdad.",
         "original_id": 143
+      },
+      {
+        "source": "custom",
+        "text_en": "reprove, rebuke, convict; decide, judge; argue, reason together.",
+        "text_es": "reprender, redargüir, convencer; decidir, juzgar; discutir.",
+        "order": 2
       }
     ]
   },
@@ -176935,6 +181115,12 @@
         "transliteration": "Lamed",
         "context": "Letra cuyo valor numérico equivale a 30, integrada en los cálculos del valor místico de los términos bíblicos.",
         "original_id": 315
+      },
+      {
+        "source": "custom",
+        "text_en": "learn; in the piel, teach; be trained.",
+        "text_es": "aprender; en piel, enseñar; ser adiestrado.",
+        "order": 6
       }
     ]
   },
@@ -178413,6 +182599,12 @@
         "transliteration": "Cóaj",
         "context": "Más que fuerza física, implica el empeño y el esmero total puesto en una labor o palabra. Capacidad de esmero y despliegue de poder ante un desafío, Hashem es abundante en este atributo.",
         "original_id": 414
+      },
+      {
+        "source": "custom",
+        "text_en": "strength, power, might; also a kind of lizard (Leviticus 11:30).",
+        "text_es": "fuerza, poder, potencia; también una especie de lagarto (Levítico 11:30).",
+        "order": 2
       }
     ]
   },
@@ -194143,6 +198335,12 @@
         "transliteration": "Mishmeret",
         "context": "Disposición legal de resguardo orientada a vigilar y custodiar la integridad de las ordenanzas divinas, preservando su debida observancia.",
         "original_id": 771
+      },
+      {
+        "source": "custom",
+        "text_en": "keeping, watch, guard; charge, duty, office; observance.",
+        "text_es": "custodia, guardia, vigilancia; encargo, deber, oficio; observancia.",
+        "order": 4
       }
     ]
   },
@@ -194719,6 +198917,12 @@
         "transliteration": "Yadah",
         "context": "Verbo que implica un reconocimiento profundo de la grandeza divina y la propia miseria espiritual. Verbo que implica admitir tanto la grandeza soberana de Dios como la propia miseria y limitación humana.",
         "original_id": 1060
+      },
+      {
+        "source": "custom",
+        "text_en": "give thanks, praise; confess, acknowledge.",
+        "text_es": "dar gracias, alabar; confesar, reconocer.",
+        "order": 2
       }
     ]
   },
@@ -207358,6 +211562,12 @@
         "transliteration": "Na'im",
         "context": "Alude al trato especial y al amor incondicional entre el Creador y Su pueblo. Es la suavidad de la relación íntima que no se basa en méritos.",
         "original_id": 97
+      },
+      {
+        "source": "custom",
+        "text_en": "pleasant, lovely, sweet; sweetly sounding.",
+        "text_es": "agradable, hermoso, dulce; de sonido dulce.",
+        "order": 2
       }
     ]
   },
@@ -247898,6 +252108,12 @@
         "transliteration": "Barar",
         "context": "Raíz verbal de la que deriva el concepto de hijo puro o grano limpio.",
         "original_id": 285
+      },
+      {
+        "source": "custom",
+        "text_en": "purify, choose, select; in later Hebrew, clear, plain.",
+        "text_es": "purificar, escoger; en hebreo posterior, claro, manifiesto.",
+        "order": 2
       }
     ]
   },
@@ -254758,6 +258974,12 @@
         "transliteration": "Tsarah",
         "context": "Lectura interpretativa de Tiro en Ezequiel; representa a la ciudad de la opresión o la Jerusalén terrenal.",
         "original_id": 264
+      },
+      {
+        "source": "custom",
+        "text_en": "distress, trouble, affliction; straits; rival.",
+        "text_es": "angustia, aflicción, tribulación; aprieto; rival.",
+        "order": 2
       }
     ]
   },
@@ -524050,6 +528272,20 @@
         "verse": 4,
         "word_index": 16,
         "text": "וְגִדּוּפִים"
+      },
+      {
+        "book": "luke",
+        "chapter": 5,
+        "verse": 21,
+        "word_index": 10,
+        "text": "גִּדּוּפִים"
+      },
+      {
+        "book": "revelation",
+        "chapter": 2,
+        "verse": 9,
+        "word_index": 11,
+        "text": "גִּדּוּף"
       }
     ]
   },
@@ -524482,6 +528718,13 @@
         "verse": 9,
         "word_index": 5,
         "text": "הִסְתַּכֵּל"
+      },
+      {
+        "book": "acts",
+        "chapter": 3,
+        "verse": 12,
+        "word_index": 14,
+        "text": "תִּסְתַּכְּלוּ"
       }
     ]
   },
@@ -528696,6 +532939,13 @@
         "verse": 16,
         "word_index": 3,
         "text": "לְעַרְעֵר"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 6,
+        "verse": 16,
+        "word_index": 10,
+        "text": "עִרְעוּר"
       }
     ]
   },
@@ -529228,6 +533478,13 @@
         "verse": 22,
         "word_index": 6,
         "text": "וּמְשֻׁעְבָּדִים"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 11,
+        "verse": 20,
+        "word_index": 3,
+        "text": "יַעֲבִיד"
       }
     ]
   },
@@ -529494,6 +533751,13 @@
         "verse": 5,
         "word_index": 13,
         "text": "פְּנוּיִם"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 7,
+        "verse": 40,
+        "word_index": 5,
+        "text": "פְּנוּיָה"
       }
     ]
   },
@@ -530187,6 +534451,13 @@
         "verse": 8,
         "word_index": 10,
         "text": "הִתְחָרַטְתִּי"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 7,
+        "verse": 8,
+        "word_index": 7,
+        "text": "מִתְחָרֵט"
       }
     ]
   },
@@ -530719,6 +534990,13 @@
         "verse": 8,
         "word_index": 9,
         "text": "בְּעַצְמוּתָם"
+      },
+      {
+        "book": "romans",
+        "chapter": 1,
+        "verse": 20,
+        "word_index": 1,
+        "text": "מַהוּתוֹ"
       }
     ]
   },
@@ -531972,6 +536250,13 @@
         "verse": 7,
         "word_index": 8,
         "text": "הָאֲמִתִּי"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 8,
+        "verse": 8,
+        "word_index": 14,
+        "text": "אֲמִתֻּת"
       }
     ]
   },
@@ -532105,6 +536390,13 @@
         "verse": 33,
         "word_index": 4,
         "text": "גָּלְגָּלְתָּא"
+      },
+      {
+        "book": "matthew",
+        "chapter": 27,
+        "verse": 33,
+        "word_index": 7,
+        "text": "גֻּלְגֹּלֶת׃"
       }
     ]
   },
@@ -532791,6 +537083,13 @@
         "verse": 2,
         "word_index": 7,
         "text": "פְרוּטוֹת׃"
+      },
+      {
+        "book": "mark",
+        "chapter": 12,
+        "verse": 42,
+        "word_index": 5,
+        "text": "פְרוּטוֹת"
       }
     ]
   },
@@ -533911,6 +538210,13 @@
         "verse": 14,
         "word_index": 13,
         "text": "בַּשּׁוּרָה׃"
+      },
+      {
+        "book": "luke",
+        "chapter": 9,
+        "verse": 14,
+        "word_index": 11,
+        "text": "שׁוּרוֹת"
       }
     ]
   },
@@ -534163,6 +538469,13 @@
         "verse": 18,
         "word_index": 8,
         "text": "יַזִּיקֵם"
+      },
+      {
+        "book": "luke",
+        "chapter": 10,
+        "verse": 19,
+        "word_index": 14,
+        "text": "יַזִּיק"
       }
     ]
   },
@@ -534996,6 +539309,13 @@
         "verse": 8,
         "word_index": 2,
         "text": "וַיִּתְרָעֲמוּ"
+      },
+      {
+        "book": "mark",
+        "chapter": 14,
+        "verse": 4,
+        "word_index": 2,
+        "text": "מִתְרָעֲמִים"
       }
     ]
   },
@@ -537397,6 +541717,13 @@
         "verse": 4,
         "word_index": 17,
         "text": "וַחֲשָׁד"
+      },
+      {
+        "book": "acts",
+        "chapter": 25,
+        "verse": 18,
+        "word_index": 10,
+        "text": "חשֵׁד"
       }
     ]
   },
@@ -543116,6 +547443,13 @@
         "verse": 24,
         "word_index": 13,
         "text": "קֹצֵר"
+      },
+      {
+        "book": "revelation",
+        "chapter": 14,
+        "verse": 16,
+        "word_index": 7,
+        "text": "נִקְצָרָה׃"
       }
     ]
   },
@@ -543298,6 +547632,13 @@
         "verse": 5,
         "word_index": 8,
         "text": "הַהֹוֶה"
+      },
+      {
+        "book": "hebrews",
+        "chapter": 9,
+        "verse": 9,
+        "word_index": 4,
+        "text": "הַהֹוָה"
       }
     ]
   },
@@ -543423,6 +547764,13 @@
         "chapter": 19,
         "verse": 24,
         "word_index": 9,
+        "text": "נֶקֶב"
+      },
+      {
+        "book": "mark",
+        "chapter": 10,
+        "verse": 25,
+        "word_index": 4,
         "text": "נֶקֶב"
       }
     ]
@@ -544075,6 +548423,13 @@
         "verse": 40,
         "word_index": 21,
         "text": "וַתִּתְעוֹדָד׃"
+      },
+      {
+        "book": "luke",
+        "chapter": 21,
+        "verse": 28,
+        "word_index": 4,
+        "text": "הִתְעוֹדְדוּ"
       }
     ]
   },
@@ -544418,6 +548773,13 @@
         "verse": 12,
         "word_index": 0,
         "text": "הִלָּחֵם"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 4,
+        "verse": 7,
+        "word_index": 2,
+        "text": "נִלְחָמְתִּי"
       }
     ]
   },
@@ -544810,6 +549172,13 @@
         "verse": 12,
         "word_index": 11,
         "text": "תִדּוֹם׃"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 14,
+        "verse": 28,
+        "word_index": 4,
+        "text": "יִדֹּם"
       }
     ]
   },
@@ -546266,6 +550635,20 @@
         "verse": 11,
         "word_index": 11,
         "text": "יָוָן׃"
+      },
+      {
+        "book": "galatians",
+        "chapter": 2,
+        "verse": 3,
+        "word_index": 7,
+        "text": "יְוָנִי"
+      },
+      {
+        "book": "luke",
+        "chapter": 23,
+        "verse": 38,
+        "word_index": 6,
+        "text": "יְוָנִי"
       }
     ]
   },
@@ -555005,6 +559388,20 @@
         "verse": 8,
         "word_index": 18,
         "text": "וְנִמְאָסִים"
+      },
+      {
+        "book": "corinthians2",
+        "chapter": 4,
+        "verse": 2,
+        "word_index": 2,
+        "text": "מָאַסְנוּ"
+      },
+      {
+        "book": "romans",
+        "chapter": 11,
+        "verse": 15,
+        "word_index": 2,
+        "text": "מְאִיסָתָם"
       }
     ]
   },
@@ -555215,6 +559612,13 @@
         "verse": 10,
         "word_index": 10,
         "text": "יְפָאֲרוּ"
+      },
+      {
+        "book": "john",
+        "chapter": 12,
+        "verse": 16,
+        "word_index": 9,
+        "text": "נִתְפָּאַר"
       }
     ]
   },
@@ -555495,6 +559899,20 @@
         "verse": 12,
         "word_index": 9,
         "text": "יְנַכֵּר"
+      },
+      {
+        "book": "timothy2",
+        "chapter": 2,
+        "verse": 12,
+        "word_index": 6,
+        "text": "נְנַכֵּר"
+      },
+      {
+        "book": "matthew",
+        "chapter": 7,
+        "verse": 16,
+        "word_index": 1,
+        "text": "תַּכִּירוּ"
       }
     ]
   },
@@ -556172,6 +560590,20 @@
         "verse": 10,
         "word_index": 1,
         "text": "חוֹשֵׁשׁ"
+      },
+      {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 21,
+        "word_index": 8,
+        "text": "חָשׁוּ"
+      },
+      {
+        "book": "galatians",
+        "chapter": 2,
+        "verse": 6,
+        "word_index": 8,
+        "text": "חוֹשֵׁשׁ"
       }
     ]
   },
@@ -556200,7 +560632,1380 @@
         "verse": 10,
         "word_index": 12,
         "text": "תִפְרשׁ"
+      },
+      {
+        "book": "galatians",
+        "chapter": 2,
+        "verse": 12,
+        "word_index": 14,
+        "text": "וּפוֹרֵשׁ"
       }
     ]
+  },
+  "D0918": {
+    "strong_number": "D0918",
+    "hebrew": "עִסָּה",
+    "transliteration_es": "isá",
+    "transliteration_en": "isah",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "dough, a lump of dough; a post-biblical Hebrew noun.",
+        "text_es": "masa, una masa de harina; un sustantivo del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "corinthians1",
+        "chapter": 5,
+        "verse": 6,
+        "word_index": 11,
+        "text": "הָעִסָּה׃"
+      },
+      {
+        "book": "corinthians1",
+        "chapter": 5,
+        "verse": 7,
+        "word_index": 6,
+        "text": "עִסָּה"
+      },
+      {
+        "book": "galatians",
+        "chapter": 5,
+        "verse": 9,
+        "word_index": 6,
+        "text": "הָעִסָּה׃"
+      },
+      {
+        "book": "romans",
+        "chapter": 11,
+        "verse": 16,
+        "word_index": 5,
+        "text": "הָעִסָּה"
+      }
+    ]
+  },
+  "D0919": {
+    "strong_number": "D0919",
+    "hebrew": "חֲקַל",
+    "transliteration_es": "jacal",
+    "transliteration_en": "haqal",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "field; an Aramaic noun, in Akeldama, the Field of Blood.",
+        "text_es": "campo; un sustantivo arameo, en Acéldama, el Campo de Sangre."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 1,
+        "verse": 19,
+        "word_index": 10,
+        "text": "חֲקַל"
+      }
+    ]
+  },
+  "D0920": {
+    "strong_number": "D0920",
+    "hebrew": "סַרְגִיּוֹס",
+    "transliteration_es": "sergiyós",
+    "transliteration_en": "sergiyos",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Sergius Paulus, the Roman proconsul of Cyprus.",
+        "text_es": "Sergio Paulo, el procónsul romano de Chipre."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 13,
+        "verse": 7,
+        "word_index": 3,
+        "text": "סַרְגִיּוֹס"
+      }
+    ]
+  },
+  "D0921": {
+    "strong_number": "D0921",
+    "hebrew": "סָמוֹס",
+    "transliteration_es": "samos",
+    "transliteration_en": "samos",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Samos, an island of the Aegean Sea off Asia Minor.",
+        "text_es": "Samos, una isla del mar Egeo frente a Asia Menor."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 20,
+        "verse": 15,
+        "word_index": 12,
+        "text": "סָמוֹס"
+      }
+    ]
+  },
+  "D0922": {
+    "strong_number": "D0922",
+    "hebrew": "אַנְטִפַּטְרִיס",
+    "transliteration_es": "antipatris",
+    "transliteration_en": "antipatris",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Antipatris, a town between Jerusalem and Caesarea.",
+        "text_es": "Antípatris, una ciudad entre Jerusalén y Cesarea."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "acts",
+        "chapter": 23,
+        "verse": 31,
+        "word_index": 10,
+        "text": "אַנְטִפַּטְרִיס׃"
+      }
+    ]
+  },
+  "D0923": {
+    "strong_number": "D0923",
+    "hebrew": "נוּמְפָס",
+    "transliteration_es": "numpás",
+    "transliteration_en": "numpas",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Nymphas, a believer of Laodicea in whose house the church met.",
+        "text_es": "Ninfas, un creyente de Laodicea en cuya casa se reunía la iglesia."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "colossians",
+        "chapter": 4,
+        "verse": 15,
+        "word_index": 6,
+        "text": "נוּמְפָס"
+      }
+    ]
+  },
+  "D0924": {
+    "strong_number": "D0924",
+    "hebrew": "אַבְהוֹדִיָּה",
+    "transliteration_es": "avhodiyá",
+    "transliteration_en": "avhodiyah",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Euodia, a woman of the church at Philippi.",
+        "text_es": "Evodia, una mujer de la iglesia de Filipos."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "philippians",
+        "chapter": 4,
+        "verse": 2,
+        "word_index": 1,
+        "text": "אַבְהוֹדִיָּה"
+      }
+    ]
+  },
+  "D0925": {
+    "strong_number": "D0925",
+    "hebrew": "אֲרִיסְטוֹבְלוֹס",
+    "transliteration_es": "aristovlós",
+    "transliteration_en": "aristovlos",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Aristobulus, whose household Paul greets at Rome.",
+        "text_es": "Aristóbulo, a cuya casa saluda Pablo en Roma."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 10,
+        "word_index": 10,
+        "text": "אֲרִיסְטוֹבְלוֹס׃"
+      }
+    ]
+  },
+  "D0926": {
+    "strong_number": "D0926",
+    "hebrew": "הִינִי",
+    "transliteration_es": "jiní",
+    "transliteration_en": "hini",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Bethany (with בֵּית), the village of Lazarus, Mary and Martha near Jerusalem.",
+        "text_es": "Betania (con בֵּית), la aldea de Lázaro, María y Marta cerca de Jerusalén."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "john",
+        "chapter": 11,
+        "verse": 1,
+        "word_index": 6,
+        "text": "הִינִי"
+      },
+      {
+        "book": "john",
+        "chapter": 11,
+        "verse": 18,
+        "word_index": 1,
+        "text": "הִינִי"
+      },
+      {
+        "book": "john",
+        "chapter": 12,
+        "verse": 1,
+        "word_index": 8,
+        "text": "הִינִי"
+      },
+      {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 29,
+        "word_index": 6,
+        "text": "הִינִי"
+      },
+      {
+        "book": "luke",
+        "chapter": 24,
+        "verse": 50,
+        "word_index": 5,
+        "text": "הִינִי"
+      },
+      {
+        "book": "mark",
+        "chapter": 11,
+        "verse": 1,
+        "word_index": 8,
+        "text": "הִינִי"
+      },
+      {
+        "book": "mark",
+        "chapter": 11,
+        "verse": 11,
+        "word_index": 16,
+        "text": "הִינִי"
+      },
+      {
+        "book": "mark",
+        "chapter": 11,
+        "verse": 12,
+        "word_index": 4,
+        "text": "הִינִי"
+      },
+      {
+        "book": "mark",
+        "chapter": 14,
+        "verse": 3,
+        "word_index": 3,
+        "text": "הִינִי"
+      },
+      {
+        "book": "matthew",
+        "chapter": 21,
+        "verse": 17,
+        "word_index": 6,
+        "text": "הִינִי"
+      },
+      {
+        "book": "matthew",
+        "chapter": 26,
+        "verse": 6,
+        "word_index": 4,
+        "text": "הִינִי"
+      }
+    ]
+  },
+  "D0927": {
+    "strong_number": "D0927",
+    "hebrew": "מָרַן",
+    "transliteration_es": "marán",
+    "transliteration_en": "maran",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "our Lord; an Aramaic word, in Maranatha, Our Lord, come.",
+        "text_es": "nuestro Señor; una palabra aramea, en Maranata, Señor nuestro, ven."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "corinthians1",
+        "chapter": 16,
+        "verse": 22,
+        "word_index": 8,
+        "text": "מָרַן"
+      }
+    ]
+  },
+  "D0928": {
+    "strong_number": "D0928",
+    "hebrew": "צִיֵּר",
+    "transliteration_es": "tsiyer",
+    "transliteration_en": "tsiyer",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "paint, portray; in the pual, be portrayed; a post-biblical Hebrew verb.",
+        "text_es": "pintar, retratar; en el pual, ser retratado; un verbo del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "galatians",
+        "chapter": 3,
+        "verse": 1,
+        "word_index": 13,
+        "text": "צֻיַּר"
+      }
+    ]
+  },
+  "D0929": {
+    "strong_number": "D0929",
+    "hebrew": "סָתַר",
+    "transliteration_es": "satar",
+    "transliteration_en": "satar",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "contradict, oppose; a post-biblical Hebrew sense.",
+        "text_es": "contradecir, oponerse; un sentido del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "galatians",
+        "chapter": 3,
+        "verse": 21,
+        "word_index": 3,
+        "text": "סֹתֶרֶת"
+      }
+    ]
+  },
+  "D0930": {
+    "strong_number": "D0930",
+    "hebrew": "קִפֵּל",
+    "transliteration_es": "quipel",
+    "transliteration_en": "qipel",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "fold, roll up; a post-biblical Hebrew verb.",
+        "text_es": "doblar, enrollar; un verbo del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "john",
+        "chapter": 20,
+        "verse": 7,
+        "word_index": 11,
+        "text": "מְקֻפֶּלֶת"
+      }
+    ]
+  },
+  "D0931": {
+    "strong_number": "D0931",
+    "hebrew": "הִצְטַעֵר",
+    "transliteration_es": "hitstaer",
+    "transliteration_en": "hitstaer",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "be grieved, be in anguish, suffer; a post-biblical Hebrew verb.",
+        "text_es": "afligirse, estar angustiado, sufrir; un verbo del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 16,
+        "verse": 25,
+        "word_index": 17,
+        "text": "תִּצְטָעָר׃"
+      }
+    ]
+  },
+  "D0932": {
+    "strong_number": "D0932",
+    "hebrew": "תּוּת",
+    "transliteration_es": "tut",
+    "transliteration_en": "tut",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "mulberry tree, sycamine; a post-biblical Hebrew noun.",
+        "text_es": "morera, sicómoro; un sustantivo del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 17,
+        "verse": 6,
+        "word_index": 11,
+        "text": "הַתּוּת"
+      }
+    ]
+  },
+  "D0933": {
+    "strong_number": "D0933",
+    "hebrew": "יוֹרָה",
+    "transliteration_es": "yorá",
+    "transliteration_en": "yorah",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "kettle, cauldron, pot; a post-biblical Hebrew noun.",
+        "text_es": "caldero, olla; un sustantivo del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "mark",
+        "chapter": 7,
+        "verse": 4,
+        "word_index": 19,
+        "text": "וְיוֹרוֹת"
+      }
+    ]
+  },
+  "D0934": {
+    "strong_number": "D0934",
+    "hebrew": "גִּיֵּר",
+    "transliteration_es": "guiyer",
+    "transliteration_en": "giyer",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "make a proselyte; in the hithpael, become a proselyte; a post-biblical Hebrew verb.",
+        "text_es": "hacer prosélito; en el hitpael, hacerse prosélito; un verbo del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "matthew",
+        "chapter": 23,
+        "verse": 15,
+        "word_index": 15,
+        "text": "יִתְגַּיַּר"
+      },
+      {
+        "book": "matthew",
+        "chapter": 23,
+        "verse": 15,
+        "word_index": 11,
+        "text": "גַּיֵּר"
+      }
+    ]
+  },
+  "D0935": {
+    "strong_number": "D0935",
+    "hebrew": "יוֹד",
+    "transliteration_es": "yod",
+    "transliteration_en": "yod",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "yod, the smallest letter of the Hebrew alphabet; a post-biblical Hebrew noun.",
+        "text_es": "yod, la letra más pequeña del alfabeto hebreo; un sustantivo del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "matthew",
+        "chapter": 5,
+        "verse": 18,
+        "word_index": 12,
+        "text": "יוֹד"
+      }
+    ]
+  },
+  "D0936": {
+    "strong_number": "D0936",
+    "hebrew": "מִיל",
+    "transliteration_es": "mil",
+    "transliteration_en": "mil",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "mile, a Roman mile; a post-biblical Hebrew noun.",
+        "text_es": "milla, una milla romana; un sustantivo del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "matthew",
+        "chapter": 5,
+        "verse": 41,
+        "word_index": 5,
+        "text": "מִיל"
+      }
+    ]
+  },
+  "D0937": {
+    "strong_number": "D0937",
+    "hebrew": "נוֹחַ",
+    "transliteration_es": "nóaj",
+    "transliteration_en": "noach",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "gentle, easy, agreeable; a post-biblical Hebrew adjective.",
+        "text_es": "amable, apacible, agradable; un adjetivo del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "timothy2",
+        "chapter": 2,
+        "verse": 24,
+        "word_index": 6,
+        "text": "נוֹחַ"
+      }
+    ]
+  },
+  "D0938": {
+    "strong_number": "D0938",
+    "hebrew": "קְלָף",
+    "transliteration_es": "quelaf",
+    "transliteration_en": "qelaf",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "parchment; a post-biblical Hebrew noun.",
+        "text_es": "pergamino; un sustantivo del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "timothy2",
+        "chapter": 4,
+        "verse": 13,
+        "word_index": 16,
+        "text": "קְלָף׃"
+      }
+    ]
+  },
+  "D0939": {
+    "strong_number": "D0939",
+    "hebrew": "מֵאֵלָיו",
+    "transliteration_es": "meelav",
+    "transliteration_en": "meelav",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "of itself, of one's own accord; a post-biblical Hebrew phrase.",
+        "text_es": "por sí mismo, por propia iniciativa; una expresión del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "romans",
+        "chapter": 2,
+        "verse": 14,
+        "word_index": 9,
+        "text": "מֵאֲלֵיהֶם"
+      }
+    ]
+  },
+  "D0940": {
+    "strong_number": "D0940",
+    "hebrew": "הִפְרִיז",
+    "transliteration_es": "hifriz",
+    "transliteration_en": "hifriz",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "exaggerate, overstate, go too far; a post-biblical Hebrew verb.",
+        "text_es": "exagerar, ir demasiado lejos; un verbo del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "corinthians2",
+        "chapter": 2,
+        "verse": 5,
+        "word_index": 11,
+        "text": "אַפְרִיז"
+      }
+    ]
+  },
+  "D0941": {
+    "strong_number": "D0941",
+    "hebrew": "תְּפִלִּין",
+    "transliteration_es": "tefilín",
+    "transliteration_en": "tefillin",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "phylacteries, tefillin; a post-biblical Hebrew noun.",
+        "text_es": "filacterias, tefilín; un sustantivo del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "matthew",
+        "chapter": 23,
+        "verse": 5,
+        "word_index": 11,
+        "text": "תְּפִלֵּיהֶם"
+      }
+    ]
+  },
+  "D0942": {
+    "strong_number": "D0942",
+    "hebrew": "שֶׁבֶת",
+    "transliteration_es": "shevet",
+    "transliteration_en": "shevet",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "dill; a post-biblical Hebrew noun.",
+        "text_es": "eneldo; un sustantivo del hebreo posbíblico."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "matthew",
+        "chapter": 23,
+        "verse": 23,
+        "word_index": 11,
+        "text": "הַשֶּׁבֶת"
+      }
+    ]
+  },
+  "D0943": {
+    "strong_number": "D0943",
+    "hebrew": "נָעִים",
+    "transliteration_es": "naím",
+    "transliteration_en": "naim",
+    "is_custom": true,
+    "definitions": [
+      {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Nain, a town of Galilee where Jesus raised a widow's son.",
+        "text_es": "Naín, una ciudad de Galilea donde Jesús resucitó al hijo de una viuda."
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": [],
+    "mapping_scope": "instances_only",
+    "nt_instances": [
+      {
+        "book": "luke",
+        "chapter": 7,
+        "verse": 11,
+        "word_index": 6,
+        "text": "נָעִים"
+      }
+    ]
+  },
+  "H6965": {
+    "strong_number": "H6965",
+    "hebrew": "קוּם",
+    "transliteration_es": "kvm",
+    "transliteration_en": "kvm",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "arise, stand; in the hiphil, raise up, set up, establish; in the piel, confirm, ratify, fulfil.",
+        "text_es": "levantarse, estar en pie; en hifil, levantar, erigir, establecer; en piel, confirmar, ratificar, cumplir.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H6862": {
+    "strong_number": "H6862",
+    "hebrew": "צַר",
+    "transliteration_es": "tzar",
+    "transliteration_en": "tzar",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "narrow, tight; distress, trouble; adversary, foe; also flint (Isaiah 5:28).",
+        "text_es": "estrecho, apretado; angustia, aflicción; adversario, enemigo; también pedernal (Isaías 5:28).",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "H6887",
+    "manual_instances": []
+  },
+  "H1984": {
+    "strong_number": "H1984",
+    "hebrew": "הָלַל",
+    "transliteration_es": "halal",
+    "transliteration_en": "halal",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "praise, boast; in the hithpael, glory, boast; in the poel, make a fool of, act madly; also shine (Job 29:3, 31:26).",
+        "text_es": "alabar, jactarse; en hitpael, gloriarse, jactarse; en poel, entontecer, actuar como loco; también brillar (Job 29:3, 31:26).",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H6419": {
+    "strong_number": "H6419",
+    "hebrew": "פָּלַל",
+    "transliteration_es": "palal",
+    "transliteration_en": "palal",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "pray, intercede; in the piel, judge, mediate, intervene.",
+        "text_es": "orar, interceder; en piel, juzgar, mediar, intervenir.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H8173": {
+    "strong_number": "H8173",
+    "hebrew": "שָׁעַע",
+    "transliteration_es": "shaa",
+    "transliteration_en": "shaa",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "be smeared over, be blinded; play, sport; delight in, take delight.",
+        "text_es": "estar embadurnado, cegarse; jugar, retozar; deleitarse, complacerse.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H6601": {
+    "strong_number": "H6601",
+    "hebrew": "פָּתָה",
+    "transliteration_es": "patah",
+    "transliteration_en": "patah",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "entice, persuade, deceive; be simple; in the hiphil, make room (Genesis 9:27).",
+        "text_es": "seducir, persuadir, engañar; ser simple; en hifil, dar amplitud (Génesis 9:27).",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H539": {
+    "strong_number": "H539",
+    "hebrew": "אָמַן",
+    "transliteration_es": "aman",
+    "transliteration_en": "aman",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "be firm, sure, faithful; support, nurse; in the hiphil, believe, trust.",
+        "text_es": "ser firme, seguro, fiel; sostener, criar; en hifil, creer, confiar.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H7945": {
+    "strong_number": "H7945",
+    "hebrew": "שֶׁל",
+    "transliteration_es": "shel",
+    "transliteration_en": "shel",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "who, which, that; with ל (שֶׁל), of, belonging to.",
+        "text_es": "que, el cual, quien; con ל (שֶׁל), de, perteneciente a.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H2007": {
+    "strong_number": "H2007",
+    "hebrew": "הֵנָּה",
+    "transliteration_es": "henah",
+    "transliteration_en": "henah",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "they, these (feminine).",
+        "text_es": "ellas, estas (femenino).",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "H1931",
+    "manual_instances": []
+  },
+  "H5750": {
+    "strong_number": "H5750",
+    "hebrew": "עוֹד",
+    "transliteration_es": "od",
+    "transliteration_en": "od",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "still, yet, again; more, besides; continuance.",
+        "text_es": "todavía, aún, de nuevo; más, además; continuidad.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "H5749",
+    "manual_instances": []
+  },
+  "H8102": {
+    "strong_number": "H8102",
+    "hebrew": "שֶׁמֶץ",
+    "transliteration_es": "shemetz",
+    "transliteration_en": "shemetz",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "a whisper; a little, a trace.",
+        "text_es": "un susurro; un poco, un rastro.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H7626": {
+    "strong_number": "H7626",
+    "hebrew": "שֵׁבֶט",
+    "transliteration_es": "shevet",
+    "transliteration_en": "shevet",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "rod, staff, sceptre; tribe.",
+        "text_es": "vara, bastón, cetro; tribu.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H1921": {
+    "strong_number": "H1921",
+    "hebrew": "הָדַר",
+    "transliteration_es": "hadar",
+    "transliteration_en": "hadar",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "honour, adorn; in the niphal, be honoured; also swell (Isaiah 45:2).",
+        "text_es": "honrar, adornar; en el nifal, ser honrado; también hincharse (Isaías 45:2).",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H1288": {
+    "strong_number": "H1288",
+    "hebrew": "בָרַךְ",
+    "transliteration_es": "varaje",
+    "transliteration_en": "varache",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "bless; kneel.",
+        "text_es": "bendecir; arrodillarse.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H5437": {
+    "strong_number": "H5437",
+    "hebrew": "סָבַב",
+    "transliteration_es": "savav",
+    "transliteration_en": "savav",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "turn, go around, surround; sit around a table, recline.",
+        "text_es": "volverse, rodear; sentarse alrededor de la mesa, reclinarse.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H6106": {
+    "strong_number": "H6106",
+    "hebrew": "עֶצֶם",
+    "transliteration_es": "etzem",
+    "transliteration_en": "etzem",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "bone; substance, self, the very thing.",
+        "text_es": "hueso; sustancia, uno mismo, lo mismo.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H7043": {
+    "strong_number": "H7043",
+    "hebrew": "קָלַל",
+    "transliteration_es": "kalal",
+    "transliteration_en": "kalal",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "be slight, swift, trifling; be easy; be lightly esteemed; in the piel, curse.",
+        "text_es": "ser ligero, veloz, insignificante; ser fácil; ser menospreciado; en piel, maldecir.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H2465": {
+    "strong_number": "H2465",
+    "hebrew": "חֶלֶד",
+    "transliteration_es": "jeled",
+    "transliteration_en": "cheled",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "the world; lifetime, duration of life.",
+        "text_es": "el mundo; vida, duración de la vida.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H5470": {
+    "strong_number": "H5470",
+    "hebrew": "סֹהַר",
+    "transliteration_es": "sohar",
+    "transliteration_en": "sohar",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "prison (בֵּית הַסֹּהַר); roundness.",
+        "text_es": "cárcel (בֵּית הַסֹּהַר); redondez.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H6924": {
+    "strong_number": "H6924",
+    "hebrew": "קֶדֶם",
+    "transliteration_es": "kedem",
+    "transliteration_en": "kedem",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "before, of old, aforetime; front, east.",
+        "text_es": "antes, antiguamente; frente, oriente.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "H6923",
+    "manual_instances": []
+  },
+  "H4856": {
+    "strong_number": "H4856",
+    "hebrew": "מַשֹּׂא",
+    "transliteration_es": "maso",
+    "transliteration_en": "maso",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "partiality (מַשֹּׂא פָנִים); lifting up.",
+        "text_es": "parcialidad (מַשֹּׂא פָנִים); acción de levantar.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "H5375",
+    "manual_instances": []
+  },
+  "H2135": {
+    "strong_number": "H2135",
+    "hebrew": "זָכָה",
+    "transliteration_es": "zajah",
+    "transliteration_en": "zachah",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "be clean, pure, clear; in later Hebrew, be worthy, be granted.",
+        "text_es": "ser limpio, puro; en hebreo posterior, ser digno, obtener.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H5532": {
+    "strong_number": "H5532",
+    "hebrew": "סָכַן",
+    "transliteration_es": "sajan",
+    "transliteration_en": "sachan",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "be of use, benefit; be accustomed; steward (Isaiah 22:15).",
+        "text_es": "ser útil, beneficiar; acostumbrar; mayordomo (Isaías 22:15).",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H5849": {
+    "strong_number": "H5849",
+    "hebrew": "עָטַר",
+    "transliteration_es": "atar",
+    "transliteration_en": "atar",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "crown; surround.",
+        "text_es": "coronar; rodear.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H1564": {
+    "strong_number": "H1564",
+    "hebrew": "גֹּלֶם",
+    "transliteration_es": "golem",
+    "transliteration_en": "golem",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "embryo, unformed substance; in later Hebrew, a lump.",
+        "text_es": "embrión, sustancia informe; en hebreo posterior, una masa.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "H1563",
+    "manual_instances": []
+  },
+  "H5401": {
+    "strong_number": "H5401",
+    "hebrew": "נָשַׁק",
+    "transliteration_es": "nashak",
+    "transliteration_en": "nashak",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "kiss; handle, be equipped with.",
+        "text_es": "besar; manejar, estar armado de.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H5352": {
+    "strong_number": "H5352",
+    "hebrew": "נָקָה",
+    "transliteration_es": "nakah",
+    "transliteration_en": "nakah",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "be clean, innocent, free; hold guiltless, acquit; be emptied.",
+        "text_es": "ser limpio, inocente, libre; tener por inocente; ser vaciado.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H4448": {
+    "strong_number": "H4448",
+    "hebrew": "מָלַל",
+    "transliteration_es": "malal",
+    "transliteration_en": "malal",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "speak, utter, say; also rub, scrape.",
+        "text_es": "hablar, decir; también frotar, raspar.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H5068": {
+    "strong_number": "H5068",
+    "hebrew": "נָדַב",
+    "transliteration_es": "nadav",
+    "transliteration_en": "nadav",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "volunteer, offer freely; incite, impel.",
+        "text_es": "ofrecerse, dar voluntariamente; incitar, impulsar.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
+  },
+  "H1826": {
+    "strong_number": "H1826",
+    "hebrew": "דָּמַם",
+    "transliteration_es": "damam",
+    "transliteration_en": "damam",
+    "is_custom": true,
+    "definitions": [
+      {
+        "source": "custom",
+        "text_en": "be silent, be still; wait in silence; be struck dumb; also wail.",
+        "text_es": "callar, estar quieto; esperar en silencio; quedar mudo; también lamentarse.",
+        "order": 1
+      }
+    ],
+    "root": "",
+    "root_strong": "",
+    "manual_instances": []
   }
 }

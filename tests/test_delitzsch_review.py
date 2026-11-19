@@ -583,20 +583,20 @@ def test_committed_disposition_ledger_is_current_and_rerun_is_byte_identical():
     committed = dispositions.read_ledger()
     assert committed == rebuilt
     summary = committed["summary"]
-    assert summary["total"] == 11528 + 16084 + 7500
+    assert summary["total"] == 11528 + 16084 + 8529
     assert summary["by_disposition"]["unresolved"] == 0
     assert summary["by_family"]["prefix_metadata"] == {
-        "benign": 1319, "corrected": 3847, "already_reviewed": 328, "unresolved": 0, "blocked": 0, "superseded": 0,
+        "benign": 1319, "corrected": 3856, "already_reviewed": 319, "unresolved": 0, "blocked": 0, "superseded": 0,
     }
     assert summary["by_family"]["outside_queue"] == {
-        "benign": 9, "corrected": 7491, "already_reviewed": 0, "unresolved": 0, "blocked": 0, "superseded": 0,
+        "benign": 9, "corrected": 8520, "already_reviewed": 0, "unresolved": 0, "blocked": 0, "superseded": 0,
     }
     assert summary["benign_lexical_review"] == {"pending": 0, "reviewed": 1691}
     assert summary["by_family"]["legacy_assignment"] == {
-        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 8233, "superseded": 7851,
+        "benign": 0, "corrected": 0, "already_reviewed": 0, "unresolved": 0, "blocked": 7918, "superseded": 8166,
     }
     assert {rule: summary["by_rule"][rule] for rule in ("legacy_without_candidate", "legacy_current_value", "legacy_blocked", "lexical_review")} == {
-        "legacy_without_candidate": 4360, "legacy_current_value": 3491, "legacy_blocked": 8233, "lexical_review": 1456,
+        "legacy_without_candidate": 4360, "legacy_current_value": 3806, "legacy_blocked": 7918, "lexical_review": 1456,
     }
 
 
@@ -675,7 +675,8 @@ def test_style_only_rule_leaves_unsettled_prefix_flags_alone():
     assert ledger_record("acts.13.15.14")["after"]["strong"] == "Hl/H859"
     assert ledger_record("acts.7.58.6")["after"]["strong"] == "Hc/Hd/H5707"
     assert {ledger_record(location)["rule"] for location in ("acts.13.15.14", "acts.7.58.6")} == {"reviewed_strong_correction"}
-    assert ledger_record("acts.10.11.14")["disposition"] == "already_reviewed"
+    assert ledger_record("acts.1.4.10")["disposition"] == "already_reviewed"
+    assert ledger_record("acts.10.11.14")["after"]["strong"] == "Hk/H3671"
     assert (ledger_record("corinthians1.1.4.9")["disposition"], ledger_record("corinthians1.1.4.9")["after"]["strong"]) == ("corrected", "Hl/H859")
     entry = queue_entry("acts.1.2.12", ["prefix_metadata_disagreement"])
     readings = {"acts.1.2.12": dispositions.Reading(["Hb"], "בחר")}

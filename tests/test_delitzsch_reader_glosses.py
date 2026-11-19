@@ -9,6 +9,7 @@ from pathlib import Path
 import pytest
 
 from scripts.delitzsch.review.blocked_candidates import greek_verse
+from scripts.delitzsch.review.root_mismatch import mismatches
 from scripts.dict.reader_gloss import Lexicon
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,7 +26,7 @@ NAMES = {
     "H3568": "Cush", "H795": "Ashdod", "H8289": "Sharon", "H1439": "Gideon", "H8123": "Samson", "H3316": "Jephthah", "H347": "Job",
     "H669": "Ephraim", "H6939": "Kidron", "H2584": "Anna", "H3195": "Iturea", "H531": "Amoz/Amos", "H4992": "Mattatha", "H5416": "Nathan",
     "H8286": "Serug", "H775": "Arphaxad", "H6005": "Immanuēl", "H4023": "Megiddon", "H348": "Jezebel", "H7205": "Reuben",
-    "H3485": "Issachar", "H7259": "Rebekah",
+    "H3485": "Issachar", "H7259": "Rebekah", "H7327": "Ruth",
 }
 HEBREW_SOUNDS = dict(zip("בגדזטכלמנספצקרשתךםןףץ", "BGDSTKLMNSPSKRSTKMNPS"))
 GREEK_SOUNDS = dict(zip("βγδζθκλμνξπρσςτφχψ", ["B", "G", "D", "S", "T", "K", "L", "M", "N", "KS", "P", "R", "S", "S", "T", "P", "K", "PS"]))
@@ -131,6 +132,14 @@ def test_every_new_testament_occurrence_of_a_proper_noun_entry_shows_its_name_fi
     (("acts", 16, 7, 8), "H3240", "lay down; place; leave; let, allow", "poner; colocar; dejar; permitir"),
     (("john", 6, 19, 8), "D0912", "ris; a stadium", "ris; un estadio"),
     (("luke", 19, 30, 18), "H5425", "be free", "ser libre"),
+    (("john", 6, 39, 15), "H6965", "arise, stand; in the hiphil, raise up", "levantarse, estar en pie; en hifil, levantar"),
+    (("corinthians1", 1, 8, 2), "H6965", "arise, stand; in the hiphil, raise up, set up, establish; in the piel, confirm", "levantarse"),
+    (("romans", 15, 8, 12), "H6965", "arise, stand; in the hiphil, raise up, set up, establish; in the piel, confirm", "levantarse"),
+    (("acts", 26, 5, 12), "D0150", "sect;", "secta;"),
+    (("john", 1, 13, 13), "H3205", "bear, bring forth; beget; be born.", "dar a luz; engendrar; nacer."),
+    (("john", 11, 1, 6), "D0926", "Bethany", "Betania"),
+    (("luke", 7, 11, 6), "D0943", "Nain", "Naín"),
+    (("matthew", 23, 5, 11), "D0941", "phylacteries", "filacterias"),
 ])
 def test_a_reviewed_occurrence_shows_the_sense_the_pull_request_names(location, strong, english, spanish):
     shown = glosses_at(*location)
@@ -266,7 +275,7 @@ def test_entries_that_share_a_greek_name_name_one_referent_or_split_its_bearers_
 
 def reviewed_moves():
     moved = set()
-    for name in ("definition_gaps_42_round_5", "definition_gaps_42_round_7", "definition_gaps_42_round_8"):
+    for name in ("definition_gaps_42_round_5", "definition_gaps_42_round_7", "definition_gaps_42_round_8", "definition_gaps_42_round_9"):
         decisions = json.loads((ROOT / f"data/delitzsch/review/batches/{name}.json").read_text(encoding="utf-8"))["decisions"]
         created = {d["strong"] for d in decisions if d["action"] == "upsert_custom_definition" and d.get("mapping_scope")}
         for d in decisions:
@@ -276,9 +285,19 @@ def reviewed_moves():
     return moved
 
 
-def test_every_round_5_7_and_8_move_onto_an_existing_entry_was_reviewed_against_the_gloss_the_reader_shows():
+def test_every_round_5_7_8_and_9_move_onto_an_existing_entry_was_reviewed_against_the_gloss_the_reader_shows():
     current = {".".join(map(str, location)): word["strong"].split("/")[-1] for location, word in corpus()}
     rows = {row["location"]: row for row in review_table("move_gloss_review")["moves"]}
     assert set(rows) == reviewed_moves()
     assert {loc: (row["strong"], row["shown"]) for loc, row in rows.items()} == {loc: (current[loc], lexicon().glosses(current[loc])[0].text) for loc in rows}
     assert {loc for loc, row in rows.items() if not row["verdict"].startswith(("fits: ", "fixed in round 7: "))} == set()
+
+
+def test_every_new_testament_token_whose_letters_miss_its_lemma_is_a_reviewed_row():
+    table = review_table("root_mismatch_review")
+    found = mismatches(lexicon())
+    reviewed = {**table["accepted"], **table["pending"]}
+    assert {location: (text, strong) for location, (text, strong) in found.items()} == {location: (row["text"], row["strong"]) for location, row in reviewed.items()}
+    assert {location: row["shown"] for location, row in reviewed.items()} == {location: lexicon().glosses(row["strong"])[0].text for location, row in reviewed.items()}
+    assert {location for location, row in reviewed.items() if not row["note"]} == set()
+    assert len(table["pending"]) == 1

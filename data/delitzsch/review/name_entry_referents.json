@@ -421,6 +421,9 @@
     "D0226": [
       "Ἰαμβρῆς"
     ],
+    "D0227": [
+      "Νηρεύς"
+    ],
     "D0229": [
       "Λάζαρος"
     ],
@@ -447,6 +450,9 @@
     ],
     "D0248": [
       "Ἐπαφρᾶς"
+    ],
+    "D0249": [
+      "Ἁρέτας"
     ],
     "D0254": [
       "Μίλητος"
@@ -1399,6 +1405,30 @@
     ],
     "D0907": [
       "Στεφανᾶς"
+    ],
+    "D0920": [
+      "Σέργιος"
+    ],
+    "D0921": [
+      "Σάμος"
+    ],
+    "D0922": [
+      "Ἀντιπατρίς"
+    ],
+    "D0923": [
+      "Νυμφᾶς"
+    ],
+    "D0924": [
+      "Εὐοδία"
+    ],
+    "D0925": [
+      "Ἀριστόβουλος"
+    ],
+    "D0926": [
+      "Βηθανία"
+    ],
+    "D0943": [
+      "Ναΐν"
     ]
   },
   "same_referent": [
@@ -1944,6 +1974,11 @@
       "kind": "rendering",
       "note": "the SBLGNT reads Κρανίον; Delitzsch renders the place of the skull with its Aramaic name"
     },
+    "luke.23.38.6": {
+      "strong": "D0777",
+      "kind": "tr",
+      "note": "the SBLGNT omits the languages of the inscription; Delitzsch follows the Textus Receptus γράμμασιν Ἑλληνικοῖς"
+    },
     "luke.23.38.7": {
       "strong": "D0141",
       "kind": "tr",
@@ -2033,6 +2068,11 @@
       "strong": "D0114",
       "kind": "tr",
       "note": "the SBLGNT omits ταῖς ἐν Ἀσίᾳ; Delitzsch follows the Textus Receptus"
+    },
+    "romans.16.5.6": {
+      "strong": "D0223",
+      "kind": "tr",
+      "note": "the SBLGNT reads τῆς Ἀσίας; Delitzsch follows the Textus Receptus τῆς Ἀχαΐας"
     }
   }
 }
