@@ -36,6 +36,30 @@ REPORT_DIR = PROJECT_ROOT / "data" / "dict" / "lexicon" / "adjudication"
 HEBREW_LETTERS = set(range(0x05D0, 0x05EB))
 FINAL_TO_REGULAR = {"ך": "כ", "ם": "מ", "ן": "נ", "ף": "פ", "ץ": "צ"}
 STRONG_RE = re.compile(r"[HGD](\d+)")
+_CITED_REF = r"H\d+(?:\s*\([^()]*\))?"
+NOT_A_DERIVATION_RE = re.compile(
+    rf"\b(?:in distinction from|compare(?:\s+(?:also|see|as in))?|akin(?:\s*\([^()]*\))?\s+to)\s+{_CITED_REF}(?:\s*(?:,|and|or)\s*{_CITED_REF})*",
+    re.I,
+)
+SOURCE_ERRATA = {
+    "H1992": ("from H1981 (הֲלַךְ)", "(a pronoun Strong's misprints as a plural of halak; BDB gives no root)"),
+    "H3628": ("from H3627 (כְּלִי)", "from H3607 (כָּלָא)"),
+}
+
+
+def derivation_source(strong: str, derivations: dict) -> str:
+    source = derivations.get(strong, {}).get("derivation", "")
+    wrong, right = SOURCE_ERRATA.get(strong, ("", ""))
+    return source.replace(wrong, right) if wrong else source
+
+
+def derivation_refs(source: str) -> list[str]:
+    return sorted(set(re.findall(r"\bH\d+\b", NOT_A_DERIVATION_RE.sub("", source))))
+
+
+def refs_cited_in_passing(source: str) -> set[str]:
+    passing = {ref for clause in NOT_A_DERIVATION_RE.finditer(source) for ref in re.findall(r"\bH\d+\b", clause.group(0))}
+    return passing - set(derivation_refs(source))
 
 
 def normalize_hebrew(value: str) -> str:
@@ -378,9 +402,9 @@ def audit_from_derivations(words, roots, derivations):
             if node != strong and node in roots:
                 target = node
                 break
-            source = derivations.get(node, {}).get("derivation", "")
+            source = derivation_source(node, derivations)
             evidence.append({"strong": node, "derivation": source})
-            refs = sorted(set(re.findall(r"\bH\d+\b", re.sub(r"in distinction from H\d+", "", source))))
+            refs = derivation_refs(source)
             if re.search(r"perhaps|probably|uncertain|apparently|doubtful|unused|foreign", source, re.I):
                 reason = "Source explicitly qualifies or leaves the derivation uncertain."
                 break
@@ -390,7 +414,8 @@ def audit_from_derivations(words, roots, derivations):
             node = refs[0]
         else:
             reason = "Cyclic derivation references require review."
-        proposal = "keep" if target == current else "change" if target else "review"
+        passing = current in refs_cited_in_passing(derivation_source(strong, derivations))
+        proposal = "keep" if target == current else "change" if target else "reject" if passing else "review"
         results.append(Adjudication(strong, entry.get("lemma", ""), normalize_hebrew(entry.get("lemma", "")), current,
             roots.get(target or current, {}).get("lemma", ""), 0.0, proposal, target, 0.99 if target else 0.0,
             json.dumps({"method": "unique_cited_derivation_v1", "conclusion": "Unique source-supported chain to existing root." if target else reason,
@@ -409,7 +434,7 @@ def apply_source_adjudications(decisions, words, roots):
         if target and target not in roots:
             raise ValueError(f"Nonexistent canonical root {target}")
         metadata = {"method": "unique_cited_derivation_v1", "status": "accepted" if target else "unresolved", "confidence": decision.confidence, "original_root_ref": decision.current_root_ref}
-        retained = decision.current_root_ref if decision.current_root_ref in roots else None
+        retained = decision.current_root_ref if decision.current_root_ref in roots and decision.proposal != "reject" else None
         if target:
             entry["root_ref"] = target
         elif entry.get("root_ref") != retained:
