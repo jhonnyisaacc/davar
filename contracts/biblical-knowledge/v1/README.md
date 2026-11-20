@@ -242,3 +242,7 @@ knowledge tests. AI, dictionary population, translations, LXX ingestion, applica
 integration, Rails and database migrations are outside this foundation.
 
 `manifest.artifacts` optionally carries independently versioned text/definition publication metadata. `artifact.schema.json` uses existing edition IDs and review/publication vocabulary. A published artifact requires approved review and explicit public distribution permission; AI processing permission is independent. Existing manifests without artifacts remain valid. Fixtures contain metadata only and grant no source license.
+
+## Evidence alignment overlay
+
+The "Evidence alignment" handoff row above is met by `../evidence-alignment/v1/README.md`. That overlay reads a Romans 1:16-17 build of this contract through `build.artifacts()` and adds evidence categories, token, phrase, verse and lexical-concept units, many-to-one and one-to-many alignments, and a Davar/Shaul source inventory. It changes no v1 schema, pilot artifact or adapter.

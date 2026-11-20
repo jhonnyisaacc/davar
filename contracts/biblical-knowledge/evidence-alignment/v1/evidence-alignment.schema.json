@@ -1,0 +1,287 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://davar.bible/contracts/biblical-knowledge/evidence-alignment/v1/evidence-alignment.schema.json",
+  "title": "Translation evidence alignment overlay",
+  "type": "object",
+  "properties": {
+    "contract_version": {"const": "1.0.0"},
+    "generator_version": {"type": "string", "minLength": 1},
+    "scope": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/reference.schema.json"},
+    "through_stage": {"$ref": "#/$defs/stage"},
+    "foundation": {
+      "type": "object",
+      "properties": {
+        "profile": {"type": "string", "minLength": 1},
+        "input_manifest_digest": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/digest"},
+        "records_sha256": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/digest"}
+      },
+      "required": ["profile", "input_manifest_digest", "records_sha256"],
+      "additionalProperties": false
+    },
+    "authored": {"$ref": "#/$defs/fileVersion"},
+    "schema_sha256": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/digest"},
+    "sources": {"type": "array", "items": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/source.schema.json"}},
+    "units": {"type": "array", "items": {"$ref": "#/$defs/unit"}},
+    "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}},
+    "alignments": {"type": "array", "items": {"$ref": "#/$defs/alignment"}},
+    "inventory": {"type": "array", "items": {"$ref": "#/$defs/inventoryRow"}}
+  },
+  "required": ["contract_version", "generator_version", "scope", "through_stage", "foundation", "authored", "schema_sha256", "sources", "units", "evidence", "alignments", "inventory"],
+  "additionalProperties": false,
+  "$defs": {
+    "stage": {
+      "enum": ["source_unit", "lexical_evidence", "existing_translation_evidence", "commentary_evidence", "candidate_options", "structured_decision", "review_result"]
+    },
+    "category": {
+      "enum": ["SOURCE_TEXT", "LEXICAL_DATA", "EXISTING_TRANSLATION", "ANCIENT_TEXTUAL_WITNESS", "COMMENTARY_TEACHING", "AI_GENERATED_CANDIDATE", "HUMAN_REVIEWED_DECISION"]
+    },
+    "status": {"enum": ["authored", "imported", "generated", "inferred", "reviewed"]},
+    "fileVersion": {
+      "type": "object",
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/digest"}
+      },
+      "required": ["path", "sha256"],
+      "additionalProperties": false
+    },
+    "recordMember": {
+      "type": "object",
+      "properties": {
+        "kind": {"enum": ["passage", "token"]},
+        "id": {"type": "string", "minLength": 1}
+      },
+      "required": ["kind", "id"],
+      "additionalProperties": false
+    },
+    "references": {
+      "type": "array",
+      "items": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/reference.schema.json"}
+    },
+    "unit": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "id": {"type": "string", "pattern": "^unit:verse:"},
+            "level": {"const": "verse"},
+            "edition_id": {"type": "string", "minLength": 1},
+            "language": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/sourceLanguage"},
+            "references": {"$ref": "#/$defs/references"},
+            "members": {
+              "type": "array",
+              "items": {"allOf": [{"$ref": "#/$defs/recordMember"}, {"properties": {"kind": {"const": "passage"}}}]},
+              "minItems": 1,
+              "maxItems": 1
+            }
+          },
+          "required": ["id", "level", "edition_id", "language", "references", "members"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {"type": "string", "pattern": "^unit:token:"},
+            "level": {"const": "token"},
+            "edition_id": {"type": "string", "minLength": 1},
+            "language": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/sourceLanguage"},
+            "references": {"$ref": "#/$defs/references"},
+            "members": {
+              "type": "array",
+              "items": {"allOf": [{"$ref": "#/$defs/recordMember"}, {"properties": {"kind": {"const": "token"}}}]},
+              "minItems": 1,
+              "maxItems": 1
+            },
+            "surface": {"type": "array", "items": {"type": "string"}, "minItems": 1, "maxItems": 1},
+            "lexical_unit_ids": {"type": "array", "items": {"type": "string", "pattern": "^unit:lexical:"}},
+            "verse_unit_id": {"type": "string", "pattern": "^unit:verse:"}
+          },
+          "required": ["id", "level", "edition_id", "language", "references", "members", "surface", "lexical_unit_ids", "verse_unit_id"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {"type": "string", "pattern": "^unit:phrase:"},
+            "level": {"const": "phrase"},
+            "edition_id": {"type": "string", "minLength": 1},
+            "language": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/sourceLanguage"},
+            "references": {"$ref": "#/$defs/references"},
+            "members": {
+              "type": "array",
+              "items": {"allOf": [{"$ref": "#/$defs/recordMember"}, {"properties": {"kind": {"const": "token"}}}]},
+              "minItems": 2
+            },
+            "surface": {"type": "array", "items": {"type": "string"}, "minItems": 2},
+            "verse_unit_id": {"type": "string", "pattern": "^unit:verse:"}
+          },
+          "required": ["id", "level", "edition_id", "language", "references", "members", "surface", "verse_unit_id"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "id": {"type": "string", "pattern": "^unit:lexical:"},
+            "level": {"const": "lexical_concept"},
+            "members": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "kind": {"const": "external_lexical"},
+                  "reference": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/externalLexicalReference"}
+                },
+                "required": ["kind", "reference"],
+                "additionalProperties": false
+              },
+              "minItems": 1
+            }
+          },
+          "required": ["id", "level", "members"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "string", "pattern": "^aev:"},
+        "category": {"$ref": "#/$defs/category"},
+        "role": {"type": "string", "minLength": 1},
+        "status": {"$ref": "#/$defs/status"},
+        "unit_ids": {"type": "array", "items": {"type": "string", "pattern": "^unit:"}, "minItems": 1, "uniqueItems": true},
+        "record": {
+          "type": "object",
+          "properties": {
+            "collection": {"enum": ["passages", "evidence"]},
+            "id": {"type": "string", "minLength": 1}
+          },
+          "required": ["collection", "id"],
+          "additionalProperties": false
+        },
+        "version": {
+          "type": "object",
+          "properties": {
+            "source_id": {"type": "string", "minLength": 1},
+            "repository": {"type": "string", "minLength": 1},
+            "revision": {"type": "string", "minLength": 1},
+            "path": {"type": "string", "minLength": 1},
+            "sha256": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/digest"}
+          },
+          "required": ["source_id", "repository", "revision", "path", "sha256"],
+          "additionalProperties": false
+        },
+        "context": {
+          "type": "object",
+          "properties": {
+            "work": {"type": "string", "minLength": 1},
+            "locator": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/locator"}
+          },
+          "required": ["work", "locator"]
+        },
+        "provenance": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/provenance"}
+      },
+      "required": ["id", "category", "role", "status", "unit_ids", "record", "version", "context", "provenance"],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {"properties": {"category": {"const": "SOURCE_TEXT"}}},
+          "then": {"properties": {"role": {"enum": ["source_language_text", "quoted_source_text"]}, "status": {"const": "imported"}}}
+        },
+        {
+          "if": {"properties": {"category": {"const": "LEXICAL_DATA"}}},
+          "then": {"properties": {"role": {"enum": ["lexicon_entry", "custom_definition"]}, "status": {"enum": ["imported", "authored"]}}}
+        },
+        {
+          "if": {"properties": {"category": {"const": "EXISTING_TRANSLATION"}}},
+          "then": {"properties": {"role": {"enum": ["baseline_reference_candidate", "comparison_reference", "hebrew_translation"]}, "status": {"const": "imported"}}}
+        },
+        {
+          "if": {"properties": {"category": {"const": "ANCIENT_TEXTUAL_WITNESS"}}},
+          "then": {"properties": {"role": {"enum": ["ancient_witness"]}, "status": {"const": "imported"}}}
+        },
+        {
+          "if": {"properties": {"category": {"const": "COMMENTARY_TEACHING"}}},
+          "then": {
+            "properties": {
+              "role": {"enum": ["translator_note", "study_note", "contextual_dictionary", "transcript_segment"]},
+              "status": {"enum": ["imported", "authored"]},
+              "context": {"required": ["work", "locator", "author"]}
+            }
+          }
+        },
+        {
+          "if": {"properties": {"category": {"const": "AI_GENERATED_CANDIDATE"}}},
+          "then": {
+            "properties": {
+              "role": {"enum": ["generated_candidate"]},
+              "status": {"const": "generated"},
+              "context": {"required": ["work", "locator", "generator"]}
+            }
+          },
+          "else": {"properties": {"status": {"not": {"const": "generated"}}}}
+        },
+        {
+          "if": {"properties": {"category": {"const": "HUMAN_REVIEWED_DECISION"}}},
+          "then": {
+            "properties": {
+              "role": {"enum": ["review_decision"]},
+              "status": {"const": "reviewed"},
+              "context": {"required": ["work", "locator", "reviewer"]}
+            }
+          },
+          "else": {"properties": {"status": {"not": {"const": "reviewed"}}}}
+        }
+      ]
+    },
+    "alignment": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "string", "pattern": "^alignment:"},
+        "relation": {"enum": ["translation_correspondence", "quotation_of"]},
+        "granularity": {"enum": ["token", "verse"]},
+        "source": {"type": "array", "items": {"type": "string", "pattern": "^unit:"}, "minItems": 1, "uniqueItems": true},
+        "target": {"type": "array", "items": {"type": "string", "pattern": "^unit:"}, "minItems": 1, "uniqueItems": true},
+        "counts": {"type": "array", "items": {"type": "integer", "minimum": 1}, "minItems": 2, "maxItems": 2},
+        "shape": {"enum": ["one_to_one", "one_to_many", "many_to_one", "many_to_many"]},
+        "evidence_ids": {"type": "array", "items": {"type": "string", "pattern": "^aev:"}, "uniqueItems": true},
+        "status": {"enum": ["authored", "imported", "inferred", "reviewed"]},
+        "provenance": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/provenance"},
+        "version": {"$ref": "#/$defs/fileVersion"}
+      },
+      "required": ["id", "relation", "granularity", "source", "target", "counts", "shape", "evidence_ids", "status", "provenance", "version"],
+      "additionalProperties": false
+    },
+    "inventoryRow": {
+      "type": "object",
+      "properties": {
+        "id": {"type": "string", "pattern": "^inventory:"},
+        "status": {"enum": ["available", "missing_connector", "not_available", "deferred", "excluded", "gap"]},
+        "subject": {"type": "string", "minLength": 1},
+        "category": {"$ref": "#/$defs/category"},
+        "categories": {"type": "array", "items": {"$ref": "#/$defs/category"}, "minItems": 1},
+        "role": {"type": "string", "minLength": 1},
+        "reason": {"type": "string", "minLength": 1},
+        "evidence_count": {"type": "integer", "minimum": 1},
+        "unit_ids": {"type": "array", "items": {"type": "string", "pattern": "^unit:"}, "minItems": 1},
+        "paths": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+        "absent_paths": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+        "covers": {
+          "type": "object",
+          "properties": {
+            "input_id": {"type": "string", "minLength": 1},
+            "namespace": {"type": "string", "minLength": 1}
+          },
+          "minProperties": 1,
+          "maxProperties": 1,
+          "additionalProperties": false
+        }
+      },
+      "required": ["id", "status", "subject"],
+      "additionalProperties": false,
+      "if": {"properties": {"status": {"const": "available"}}},
+      "then": {"required": ["categories", "evidence_count"], "not": {"required": ["reason"]}},
+      "else": {"required": ["category", "reason"], "not": {"required": ["evidence_count"]}}
+    }
+  }
+}

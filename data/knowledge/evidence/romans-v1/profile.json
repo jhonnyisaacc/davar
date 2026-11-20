@@ -1,0 +1,379 @@
+{
+  "authored": {},
+  "contract_version": "1.0.0",
+  "coverage": [
+    {
+      "edition_id": "delitzsch",
+      "reason": "Pinned Romans evidence passage",
+      "reference": {
+        "book_id": "romans",
+        "chapter": 1,
+        "kind": "verse",
+        "system_id": "davar-v1",
+        "verse": 16
+      },
+      "status": "present"
+    },
+    {
+      "edition_id": "oe",
+      "reason": "Outside the Romans evidence selection",
+      "reference": {
+        "book_id": "romans",
+        "chapter": 1,
+        "kind": "verse",
+        "system_id": "davar-v1",
+        "verse": 16
+      },
+      "status": "not_requested"
+    },
+    {
+      "edition_id": "sblgnt-tagnt",
+      "reason": "Pinned Romans evidence passage",
+      "reference": {
+        "book_id": "romans",
+        "chapter": 1,
+        "kind": "verse",
+        "system_id": "davar-v1",
+        "verse": 16
+      },
+      "status": "present"
+    },
+    {
+      "edition_id": "tth-es",
+      "reason": "Pinned Romans evidence passage",
+      "reference": {
+        "book_id": "romans",
+        "chapter": 1,
+        "kind": "verse",
+        "system_id": "davar-v1",
+        "verse": 16
+      },
+      "status": "present"
+    },
+    {
+      "edition_id": "delitzsch",
+      "reason": "Pinned Romans evidence passage",
+      "reference": {
+        "book_id": "romans",
+        "chapter": 1,
+        "kind": "verse",
+        "system_id": "davar-v1",
+        "verse": 17
+      },
+      "status": "present"
+    },
+    {
+      "edition_id": "oe",
+      "reason": "Outside the Romans evidence selection",
+      "reference": {
+        "book_id": "romans",
+        "chapter": 1,
+        "kind": "verse",
+        "system_id": "davar-v1",
+        "verse": 17
+      },
+      "status": "not_requested"
+    },
+    {
+      "edition_id": "sblgnt-tagnt",
+      "reason": "Pinned Romans evidence passage",
+      "reference": {
+        "book_id": "romans",
+        "chapter": 1,
+        "kind": "verse",
+        "system_id": "davar-v1",
+        "verse": 17
+      },
+      "status": "present"
+    },
+    {
+      "edition_id": "tth-es",
+      "reason": "Pinned Romans evidence passage",
+      "reference": {
+        "book_id": "romans",
+        "chapter": 1,
+        "kind": "verse",
+        "system_id": "davar-v1",
+        "verse": 17
+      },
+      "status": "present"
+    },
+    {
+      "edition_id": "delitzsch",
+      "reason": "Outside the Romans evidence selection",
+      "reference": {
+        "book_id": "habakkuk",
+        "chapter": 2,
+        "kind": "verse",
+        "system_id": "davar-v1",
+        "verse": 4
+      },
+      "status": "not_requested"
+    },
+    {
+      "edition_id": "oe",
+      "reason": "Pinned Romans evidence passage",
+      "reference": {
+        "book_id": "habakkuk",
+        "chapter": 2,
+        "kind": "verse",
+        "system_id": "davar-v1",
+        "verse": 4
+      },
+      "status": "present"
+    },
+    {
+      "edition_id": "sblgnt-tagnt",
+      "reason": "Outside the Romans evidence selection",
+      "reference": {
+        "book_id": "habakkuk",
+        "chapter": 2,
+        "kind": "verse",
+        "system_id": "davar-v1",
+        "verse": 4
+      },
+      "status": "not_requested"
+    },
+    {
+      "edition_id": "tth-es",
+      "reason": "Outside the Romans evidence selection",
+      "reference": {
+        "book_id": "habakkuk",
+        "chapter": 2,
+        "kind": "verse",
+        "system_id": "davar-v1",
+        "verse": 4
+      },
+      "status": "not_requested"
+    }
+  ],
+  "input_manifest": "data/knowledge/evidence/romans-v1/inputs.json",
+  "lexical": [
+    {
+      "codes": [
+        "H1309",
+        "H1369",
+        "H1571",
+        "H2009",
+        "H3064",
+        "H3588",
+        "H3605",
+        "H3651",
+        "H369",
+        "H3808",
+        "H413",
+        "H430",
+        "H4899",
+        "H530",
+        "H5315",
+        "H6662",
+        "H6666",
+        "H7223",
+        "H834",
+        "H8668"
+      ],
+      "id_namespace": "bdb",
+      "input_id": "bdb-words"
+    },
+    {
+      "codes": [
+        "H1540",
+        "H1931",
+        "H2421",
+        "H3474",
+        "H3789",
+        "H539",
+        "H6075",
+        "H954"
+      ],
+      "id_namespace": "bdb-root",
+      "input_id": "bdb-roots"
+    },
+    {
+      "codes": [
+        "G0601",
+        "G0846",
+        "G1063",
+        "G1125",
+        "G1161",
+        "G1342",
+        "G1343",
+        "G1411",
+        "G1510",
+        "G1519",
+        "G1537",
+        "G1672",
+        "G1722",
+        "G1870",
+        "G2098",
+        "G2198",
+        "G2316",
+        "G2453",
+        "G2531",
+        "G2532",
+        "G3588",
+        "G3756",
+        "G3956",
+        "G4100",
+        "G4102G",
+        "G4413G",
+        "G4991",
+        "G5037"
+      ],
+      "id_namespace": "tagnt",
+      "input_id": "greek-lexicon"
+    }
+  ],
+  "reference_mappings": "data/knowledge/evidence/romans-v1/reference-mappings.json",
+  "scripture": [
+    {
+      "adapter": "greek",
+      "book_id": "romans",
+      "edition_id": "sblgnt-tagnt",
+      "input_id": "greek-romans-1",
+      "passages": [
+        {
+          "chapter": 1,
+          "verse_label": "16"
+        },
+        {
+          "chapter": 1,
+          "verse_label": "17"
+        }
+      ]
+    },
+    {
+      "adapter": "delitzsch",
+      "book_id": "romans",
+      "edition_id": "delitzsch",
+      "input_id": "delitzsch-romans-1",
+      "passages": [
+        {
+          "chapter": 1,
+          "verse_label": "16"
+        },
+        {
+          "chapter": 1,
+          "verse_label": "17"
+        }
+      ]
+    },
+    {
+      "adapter": "tth",
+      "book_id": "romans",
+      "edition_id": "tth-es",
+      "input_id": "tth-romanos",
+      "passages": [
+        {
+          "chapter": 1,
+          "verse_label": "16"
+        },
+        {
+          "chapter": 1,
+          "verse_label": "17"
+        }
+      ]
+    },
+    {
+      "adapter": "oe",
+      "book_id": "habakkuk",
+      "edition_id": "oe",
+      "input_id": "oe-habakkuk-2",
+      "passages": [
+        {
+          "chapter": 2,
+          "verse_label": "4"
+        }
+      ]
+    }
+  ],
+  "shaul": [
+    {
+      "adapter": "note",
+      "heading": "La potencia de la Besorah y la justicia revelada",
+      "id": "shaul:evidence:romanos_1_potencia_besorah_justificacion_ira:justicia-revelada",
+      "input_id": "shaul-romanos_1_potencia_besorah_justificacion_ira",
+      "targets": [
+        {
+          "kind": "reference",
+          "reference": {
+            "book_id": "romans",
+            "chapter": 1,
+            "kind": "verse",
+            "system_id": "davar-v1",
+            "verse": 16
+          }
+        },
+        {
+          "kind": "reference",
+          "reference": {
+            "book_id": "romans",
+            "chapter": 1,
+            "kind": "verse",
+            "system_id": "davar-v1",
+            "verse": 17
+          }
+        }
+      ],
+      "upstream_id": "content/besorah/romanos_1_potencia_besorah_justificacion_ira"
+    },
+    {
+      "adapter": "note",
+      "heading": "Hoja léxica",
+      "id": "shaul:evidence:romanos_1_potencia_besorah_justificacion_ira:hoja-lexica",
+      "input_id": "shaul-romanos_1_potencia_besorah_justificacion_ira",
+      "targets": [
+        {
+          "kind": "reference",
+          "reference": {
+            "book_id": "romans",
+            "chapter": 1,
+            "kind": "verse",
+            "system_id": "davar-v1",
+            "verse": 16
+          }
+        },
+        {
+          "kind": "reference",
+          "reference": {
+            "book_id": "romans",
+            "chapter": 1,
+            "kind": "verse",
+            "system_id": "davar-v1",
+            "verse": 17
+          }
+        }
+      ],
+      "upstream_id": "content/besorah/romanos_1_potencia_besorah_justificacion_ira"
+    },
+    {
+      "adapter": "note",
+      "heading": "Pendiente de verificar",
+      "id": "shaul:evidence:romanos_1_potencia_besorah_justificacion_ira:pendiente",
+      "input_id": "shaul-romanos_1_potencia_besorah_justificacion_ira",
+      "targets": [
+        {
+          "kind": "reference",
+          "reference": {
+            "book_id": "romans",
+            "chapter": 1,
+            "kind": "verse",
+            "system_id": "davar-v1",
+            "verse": 16
+          }
+        },
+        {
+          "kind": "reference",
+          "reference": {
+            "book_id": "romans",
+            "chapter": 1,
+            "kind": "verse",
+            "system_id": "davar-v1",
+            "verse": 17
+          }
+        }
+      ],
+      "upstream_id": "content/besorah/romanos_1_potencia_besorah_justificacion_ira"
+    }
+  ]
+}

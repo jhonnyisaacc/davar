@@ -1,0 +1,96 @@
+{
+  "passages": [
+    {
+      "book_id": "romans",
+      "chapter": 1,
+      "edition_id": "sblgnt-tagnt",
+      "target": {
+        "book_id": "romans",
+        "chapter": 1,
+        "kind": "verse",
+        "system_id": "davar-v1",
+        "verse": 16
+      },
+      "verse_label": "16"
+    },
+    {
+      "book_id": "romans",
+      "chapter": 1,
+      "edition_id": "sblgnt-tagnt",
+      "target": {
+        "book_id": "romans",
+        "chapter": 1,
+        "kind": "verse",
+        "system_id": "davar-v1",
+        "verse": 17
+      },
+      "verse_label": "17"
+    },
+    {
+      "book_id": "romans",
+      "chapter": 1,
+      "edition_id": "delitzsch",
+      "target": {
+        "book_id": "romans",
+        "chapter": 1,
+        "kind": "verse",
+        "system_id": "davar-v1",
+        "verse": 16
+      },
+      "verse_label": "16"
+    },
+    {
+      "book_id": "romans",
+      "chapter": 1,
+      "edition_id": "delitzsch",
+      "target": {
+        "book_id": "romans",
+        "chapter": 1,
+        "kind": "verse",
+        "system_id": "davar-v1",
+        "verse": 17
+      },
+      "verse_label": "17"
+    },
+    {
+      "book_id": "romans",
+      "chapter": 1,
+      "edition_id": "tth-es",
+      "target": {
+        "book_id": "romans",
+        "chapter": 1,
+        "kind": "verse",
+        "system_id": "davar-v1",
+        "verse": 16
+      },
+      "verse_label": "16"
+    },
+    {
+      "book_id": "romans",
+      "chapter": 1,
+      "edition_id": "tth-es",
+      "target": {
+        "book_id": "romans",
+        "chapter": 1,
+        "kind": "verse",
+        "system_id": "davar-v1",
+        "verse": 17
+      },
+      "verse_label": "17"
+    },
+    {
+      "book_id": "habakkuk",
+      "chapter": 2,
+      "edition_id": "oe",
+      "target": {
+        "book_id": "habakkuk",
+        "chapter": 2,
+        "kind": "verse",
+        "system_id": "davar-v1",
+        "verse": 4
+      },
+      "verse_label": "4"
+    }
+  ],
+  "shaul_verified": []
+}

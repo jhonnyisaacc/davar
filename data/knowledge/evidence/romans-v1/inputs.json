@@ -1,0 +1,96 @@
+{
+  "contract_version": "1.0.0",
+  "inputs": [
+    {
+      "id": "greek-romans-1",
+      "owner": "davar",
+      "path": "data/greek/preview/greek/releases/sblgnt/5de0a47f35f0fc13dfe1430d104e5db8a4285f9c/books/romans/1.json",
+      "repository": "https://github.com/jhonnyisaacc/davar",
+      "revision": "70bae365fc5b1717f3758caae208c2603e2524be",
+      "sha256": "8c20e41297558fbf556a0274e44cb85a763a0183acd4a90414440097f31e4b4c"
+    },
+    {
+      "id": "greek-lexicon",
+      "owner": "davar",
+      "path": "data/greek/preview/greek/releases/sblgnt/5de0a47f35f0fc13dfe1430d104e5db8a4285f9c/lexicon.json",
+      "repository": "https://github.com/jhonnyisaacc/davar",
+      "revision": "70bae365fc5b1717f3758caae208c2603e2524be",
+      "sha256": "05f541841c245761e8f8c45f9598675bef745b5d5574b02404e300486e2293ef"
+    },
+    {
+      "id": "delitzsch-romans-1",
+      "owner": "davar",
+      "path": "data/delitzsch/parsed/romans/1.json",
+      "repository": "https://github.com/jhonnyisaacc/davar",
+      "revision": "70bae365fc5b1717f3758caae208c2603e2524be",
+      "sha256": "0dd4a152b2553f1e97daaa30c72fcb359a725667779bc65870984b4363e26c17"
+    },
+    {
+      "id": "tth-romanos",
+      "owner": "davar",
+      "path": "data/tth/json/romanos.json",
+      "repository": "https://github.com/jhonnyisaacc/davar",
+      "revision": "70bae365fc5b1717f3758caae208c2603e2524be",
+      "sha256": "8aa2a94c383f0d37fd546bbca221179b642da8f0eeaf8ba4476f0ea2472844db"
+    },
+    {
+      "id": "oe-habakkuk-2",
+      "owner": "davar",
+      "path": "data/oe/habakkuk/2.json",
+      "repository": "https://github.com/jhonnyisaacc/davar",
+      "revision": "70bae365fc5b1717f3758caae208c2603e2524be",
+      "sha256": "77e1f0cfee2b09677a64bcb43152804a996b9e5072cf6e8f3acfb0a2ab2aac71"
+    },
+    {
+      "id": "bdb-words",
+      "owner": "davar",
+      "path": "data/dict/lexicon/words.json",
+      "repository": "https://github.com/jhonnyisaacc/davar",
+      "revision": "70bae365fc5b1717f3758caae208c2603e2524be",
+      "sha256": "8d68705c3406b3d96ba87795475ad7cbba49ef8ac8e060d70a66db2aa2e15a78"
+    },
+    {
+      "id": "bdb-roots",
+      "owner": "davar",
+      "path": "data/dict/lexicon/roots.json",
+      "repository": "https://github.com/jhonnyisaacc/davar",
+      "revision": "70bae365fc5b1717f3758caae208c2603e2524be",
+      "sha256": "a44ebb4c645ca90c1b0b3d27f1ade1bed4647996b028d5f80a66058ec0e04340"
+    },
+    {
+      "id": "custom",
+      "kind": "lexicon",
+      "owner": "davar",
+      "path": "data/dict/lexicon/custom_definitions.json",
+      "repository": "https://github.com/jhonnyisaacc/davar",
+      "revision": "70bae365fc5b1717f3758caae208c2603e2524be",
+      "sha256": "d58c7dd9c76b886f4f019d2d690870d46d3bc0d13b32dd1d52eb55140e307993"
+    },
+    {
+      "fixture_path": "tests/fixtures/knowledge/shaul/content/besorah/romanos_1_potencia_besorah_justificacion_ira.md",
+      "id": "shaul-romanos_1_potencia_besorah_justificacion_ira",
+      "owner": "shaul",
+      "path": "content/besorah/romanos_1_potencia_besorah_justificacion_ira.md",
+      "repository": "https://github.com/jhonnyisaacc/shaul",
+      "revision": "8c94b0fe9eca817e22340430309801d0ef76125b",
+      "sha256": "df13496eac3b79fb7527b9bb7110163f8d2e5ddf311bc1fa051093a7f8b8469d"
+    }
+  ],
+  "pilots": [
+    [
+      "romans",
+      1,
+      16
+    ],
+    [
+      "romans",
+      1,
+      17
+    ],
+    [
+      "habakkuk",
+      2,
+      4
+    ]
+  ]
+}

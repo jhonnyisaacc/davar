@@ -1,0 +1,208 @@
+{
+  "contract_version": "1.0.0",
+  "profile": "data/knowledge/evidence/romans-v1/profile.json",
+  "scope": {
+    "system_id": "davar-v1",
+    "book_id": "romans",
+    "kind": "range",
+    "start": {"chapter": 1, "verse": 16},
+    "end": {"chapter": 1, "verse": 17}
+  },
+  "through_stage": "commentary_evidence",
+  "roles": [
+    {
+      "source_id": "source:greek-romans-1",
+      "collection": "passages",
+      "category": "SOURCE_TEXT",
+      "role": "source_language_text",
+      "context": {"work": "SBLGNT with STEPBible TAGNT tagging"}
+    },
+    {
+      "source_id": "source:oe-habakkuk-2",
+      "collection": "passages",
+      "category": "SOURCE_TEXT",
+      "role": "quoted_source_text",
+      "context": {"work": "OE Hebrew Tanakh"}
+    },
+    {
+      "source_id": "source:delitzsch-romans-1",
+      "collection": "passages",
+      "category": "EXISTING_TRANSLATION",
+      "role": "hebrew_translation",
+      "context": {"work": "Delitzsch Hebrew New Testament, Davar parsed edition", "translated_from": "grc"}
+    },
+    {
+      "source_id": "source:tth-romanos",
+      "collection": "passages",
+      "category": "EXISTING_TRANSLATION",
+      "role": "baseline_reference_candidate",
+      "context": {"work": "Traducción Textual del Hebreo", "translator": "Natanael Doldan"}
+    },
+    {
+      "source_id": "source:tth-romanos",
+      "collection": "evidence",
+      "kind": "footnote",
+      "category": "COMMENTARY_TEACHING",
+      "role": "translator_note",
+      "context": {"work": "Traducción Textual del Hebreo footnote", "author": "Natanael Doldan"}
+    },
+    {
+      "source_id": "source:shaul-romanos_1_potencia_besorah_justificacion_ira",
+      "collection": "evidence",
+      "kind": "note",
+      "category": "COMMENTARY_TEACHING",
+      "role": "study_note",
+      "context": {"work": "Shaul study note on a recorded class", "author": "Eric de Jesús Rodríguez Mendoza", "organized_by": "shaul"}
+    },
+    {
+      "source_id": "source:bdb-words",
+      "collection": "evidence",
+      "kind": "lexical_entry",
+      "category": "LEXICAL_DATA",
+      "role": "lexicon_entry",
+      "context": {"work": "Davar BDB derived-word lexicon"}
+    },
+    {
+      "source_id": "source:bdb-roots",
+      "collection": "evidence",
+      "kind": "lexical_entry",
+      "category": "LEXICAL_DATA",
+      "role": "lexicon_entry",
+      "context": {"work": "Davar BDB root lexicon"}
+    },
+    {
+      "source_id": "source:greek-lexicon",
+      "collection": "evidence",
+      "kind": "lexical_entry",
+      "category": "LEXICAL_DATA",
+      "role": "lexicon_entry",
+      "context": {"work": "Davar Greek lexicon from STEPBible TBESG and UBS"}
+    }
+  ],
+  "units": [
+    {"key": "grc-1-16-kai", "edition_id": "sblgnt-tagnt", "book_id": "romans", "chapter": 1, "verse_label": "16", "ordinals": [18], "expected_texts": ["καὶ"]},
+    {"key": "he-1-16-vechen-gam", "edition_id": "delitzsch", "book_id": "romans", "chapter": 1, "verse_label": "16", "ordinals": [15, 16], "expected_texts": ["וְכֵן", "גַּם־"]},
+    {"key": "grc-1-17-dikaiosyne", "edition_id": "sblgnt-tagnt", "book_id": "romans", "chapter": 1, "verse_label": "17", "ordinals": [1], "expected_texts": ["δικαιοσύνη"]},
+    {"key": "he-1-17-tsidqat", "edition_id": "delitzsch", "book_id": "romans", "chapter": 1, "verse_label": "17", "ordinals": [4], "expected_texts": ["צִדְקַת"]},
+    {"key": "grc-1-17-ek-pisteos", "edition_id": "sblgnt-tagnt", "book_id": "romans", "chapter": 1, "verse_label": "17", "ordinals": [7, 8], "expected_texts": ["ἐκ", "πίστεως"]},
+    {"key": "he-1-17-meemunah", "edition_id": "delitzsch", "book_id": "romans", "chapter": 1, "verse_label": "17", "ordinals": [6], "expected_texts": ["מֵאֱמוּנָה"]},
+    {"key": "grc-1-17-ho-de-dikaios", "edition_id": "sblgnt-tagnt", "book_id": "romans", "chapter": 1, "verse_label": "17", "ordinals": [13, 14, 15], "expected_texts": ["ὁ", "δὲ", "δίκαιος"]},
+    {"key": "he-1-17-vetsaddiq", "edition_id": "delitzsch", "book_id": "romans", "chapter": 1, "verse_label": "17", "ordinals": [10], "expected_texts": ["וְצַדִּיק"]},
+    {"key": "grc-1-17-quotation", "edition_id": "sblgnt-tagnt", "book_id": "romans", "chapter": 1, "verse_label": "17", "ordinals": [13, 14, 15, 16, 17, 18], "expected_texts": ["ὁ", "δὲ", "δίκαιος", "ἐκ", "πίστεως", "ζήσεται."]},
+    {"key": "he-1-17-quotation", "edition_id": "delitzsch", "book_id": "romans", "chapter": 1, "verse_label": "17", "ordinals": [10, 11, 12], "expected_texts": ["וְצַדִּיק", "בֶּאֱמוּנָתוֹ", "יִחְיֶה׃"]},
+    {"key": "oe-hab-2-4-quoted", "edition_id": "oe", "book_id": "habakkuk", "chapter": 2, "verse_label": "4", "ordinals": [7, 8, 9], "expected_texts": ["וְ/צַדִּ֖יק", "בֶּ/אֱמוּנָת֥/וֹ", "יִחְיֶֽה"]}
+  ],
+  "alignments": [
+    {"id": "alignment:romans-1-16:kai", "relation": "translation_correspondence", "source": ["grc-1-16-kai"], "target": ["he-1-16-vechen-gam"]},
+    {"id": "alignment:romans-1-17:dikaiosyne", "relation": "translation_correspondence", "source": ["grc-1-17-dikaiosyne"], "target": ["he-1-17-tsidqat"]},
+    {"id": "alignment:romans-1-17:ek-pisteos", "relation": "translation_correspondence", "source": ["grc-1-17-ek-pisteos"], "target": ["he-1-17-meemunah"]},
+    {"id": "alignment:romans-1-17:ho-de-dikaios", "relation": "translation_correspondence", "source": ["grc-1-17-ho-de-dikaios"], "target": ["he-1-17-vetsaddiq"]},
+    {"id": "alignment:romans-1-17:quotation-greek", "relation": "quotation_of", "source": ["grc-1-17-quotation"], "target": ["oe-hab-2-4-quoted"], "evidence_ids": ["evidence:passage:tth-es:romans:1:b9239da22130ce8686c0a8e98c6e12766360832851740760e5b941cc5f22531a:footnote:0"]},
+    {"id": "alignment:romans-1-17:quotation-delitzsch", "relation": "quotation_of", "source": ["he-1-17-quotation"], "target": ["oe-hab-2-4-quoted"], "evidence_ids": ["evidence:passage:tth-es:romans:1:b9239da22130ce8686c0a8e98c6e12766360832851740760e5b941cc5f22531a:footnote:0"]},
+    {"id": "alignment:romans-1-16:verse-delitzsch", "relation": "translation_correspondence", "source": ["verse:sblgnt-tagnt:romans:1:16"], "target": ["verse:delitzsch:romans:1:16"]},
+    {"id": "alignment:romans-1-16:verse-tth", "relation": "translation_correspondence", "source": ["verse:sblgnt-tagnt:romans:1:16"], "target": ["verse:tth-es:romans:1:16"]},
+    {"id": "alignment:romans-1-17:verse-delitzsch", "relation": "translation_correspondence", "source": ["verse:sblgnt-tagnt:romans:1:17"], "target": ["verse:delitzsch:romans:1:17"]},
+    {"id": "alignment:romans-1-17:verse-tth", "relation": "translation_correspondence", "source": ["verse:sblgnt-tagnt:romans:1:17"], "target": ["verse:tth-es:romans:1:17"]}
+  ],
+  "inventory": [
+    {
+      "id": "inventory:ts2009",
+      "status": "missing_connector",
+      "subject": "TS2009 English (The Scriptures 2009)",
+      "category": "EXISTING_TRANSLATION",
+      "role": "comparison_reference",
+      "reason": "Licensed text is served from Supabase Storage and never committed. The knowledge foundation has no TS2009 adapter and does not distribute licensed TS2009 text.",
+      "absent_paths": ["data/ts2009"]
+    },
+    {
+      "id": "inventory:lxx",
+      "status": "not_available",
+      "subject": "Septuagint (LXX), including Habakkuk 2:4",
+      "category": "ANCIENT_TEXTUAL_WITNESS",
+      "role": "ancient_witness",
+      "reason": "Neither Davar nor Shaul has an LXX dataset or connector. Romans 1:17 quotes Habakkuk 2:4, where the LXX would be the relevant witness.",
+      "applies_to": ["grc-1-17-quotation", "oe-hab-2-4-quoted"],
+      "absent_paths": ["data/lxx"]
+    },
+    {
+      "id": "inventory:custom-definitions",
+      "status": "missing_connector",
+      "subject": "Davar custom definitions, including Eric's TCY (tcysite-eric) and TCY Greek definitions",
+      "category": "LEXICAL_DATA",
+      "role": "custom_definition",
+      "reason": "custom_definitions.json entries carry definitions without a lemma field, and the foundation lexical adapter copies only lemmas. Its tcysite-eric definitions are Eric's contextual teaching material and belong to COMMENTARY_TEACHING once a connector exists.",
+      "paths": ["data/dict/lexicon/custom_definitions.json"],
+      "covers": {"input_id": "custom"}
+    },
+    {
+      "id": "inventory:prefix-particles",
+      "status": "missing_connector",
+      "subject": "Davar Hebrew prefix particles (Hb, Hc, Hd, Hk, Hl)",
+      "category": "LEXICAL_DATA",
+      "role": "lexicon_entry",
+      "reason": "Prefix particles are listed in prefixes.json with entries under data/dict/prefixes/entries, and the foundation lexical adapter cannot select them.",
+      "paths": ["data/dict/prefixes/prefixes.json", "data/dict/prefixes/entries"],
+      "covers": {"namespace": "davar-prefix"}
+    },
+    {
+      "id": "inventory:eric-tcy-romans",
+      "status": "not_available",
+      "subject": "Eric's TCY contextual dictionary for Romans",
+      "category": "COMMENTARY_TEACHING",
+      "role": "contextual_dictionary",
+      "reason": "The TCY import has per-book Eric files only for parashot, salmos, qohelet, shir_hashirim, juan, 1-2 tesalonicenses, efesios and apocalipsis.",
+      "absent_paths": ["data/dict/raw/tcysite/eric/romanos.json", "data/dict/raw/tcysite/eric/romanos_1.json"]
+    },
+    {
+      "id": "inventory:shaul-transcripts",
+      "status": "excluded",
+      "subject": "Shaul class transcripts",
+      "category": "COMMENTARY_TEACHING",
+      "role": "transcript_segment",
+      "reason": "Shaul keeps class transcripts under private paths, which the foundation never reads. The Romans 1 study note names its class as youtube:irpXnhj4cMI but has no timestamped segment, so no media locator is asserted."
+    },
+    {
+      "id": "inventory:shaul-romans-notes",
+      "status": "deferred",
+      "subject": "Other public Shaul Romans study notes",
+      "category": "COMMENTARY_TEACHING",
+      "role": "study_note",
+      "reason": "Shaul has 43 public Romans notes at the pinned revision. Only the note covering Romans 1:16-17 is selected for this fixture."
+    },
+    {
+      "id": "inventory:shaul-emunah-concept",
+      "status": "deferred",
+      "subject": "Shaul concept emunah and expression emunah-he",
+      "category": "LEXICAL_DATA",
+      "role": "lexical_concept",
+      "reason": "Shaul records the concept, but no verified mapping joins emunah-he to Strong H530, so no concept unit is asserted for the H530 tokens."
+    },
+    {
+      "id": "inventory:contextual-relationships",
+      "status": "deferred",
+      "subject": "Contextual Greek-Hebrew relationship catalog",
+      "category": "LEXICAL_DATA",
+      "role": "contextual_relationship",
+      "reason": "The catalog has no record scoped to Romans 1:16-17. Its Romans records (11:5, 14:14) are unreviewed and outside this slice.",
+      "paths": ["shared/contextualRelationships.json"]
+    },
+    {
+      "id": "inventory:bes",
+      "status": "missing_connector",
+      "subject": "BES Spanish (SPABES) Romans",
+      "category": "EXISTING_TRANSLATION",
+      "role": "comparison_reference",
+      "reason": "Davar has the text, but the foundation has no BES scripture adapter.",
+      "paths": ["data/bes/json/romans.json"]
+    },
+    {
+      "id": "inventory:hutter",
+      "status": "missing_connector",
+      "subject": "Hutter 1599 Hebrew Romans",
+      "category": "EXISTING_TRANSLATION",
+      "role": "hebrew_translation",
+      "reason": "Davar has staged transcription output, but the foundation has no Hutter adapter.",
+      "paths": ["data/hutter/staging/output/romans.json"]
+    }
+  ]
+}
