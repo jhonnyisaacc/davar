@@ -1,12 +1,26 @@
 import json
+import re
 import shutil
+import sqlite3
+import zipfile
 
 import pytest
 
+from scripts.delitzsch.sqlite_loader import SQLiteLoader
 from scripts.knowledge.core import ROOT, digest, read_json
 from scripts.knowledge.corpus.__main__ import check, compare, regenerate
-from scripts.knowledge.corpus.engine import SNAPSHOTS, PinDrift, Snapshot, discover, pin
+from scripts.knowledge.corpus.engine import (
+    SNAPSHOTS,
+    PinDrift,
+    Snapshot,
+    input_digest,
+    new_tally,
+    newest_snapshot,
+    pin,
+    render,
+)
 from scripts.knowledge.corpus.families import Reason
+from scripts.knowledge.validate import Validator
 
 FIXTURE = ROOT / "tests/fixtures/knowledge/corpus"
 
@@ -24,7 +38,7 @@ def corpus(tmp_path):
 
 
 def run(root, roots, pins=None):
-    snap = Snapshot.load(root, "fixture")
+    snap = Snapshot.load(root, "fixture", roots)
     shards = {}
     files = regenerate(
         root,
@@ -86,6 +100,12 @@ def test_withheld_and_private_content_never_reaches_artifacts(corpus):
     assert all(
         not t["lexical_refs"] and not t["annotations"] for t in delitzsch["tokens"]
     )
+    source = read_json(corpus[0] / "data/delitzsch/parsed/john/1.json")[0]["verses"]
+    assert all("/" in v["hebrew"] for v in source)
+    assert sorted(p["text"] for p in delitzsch["passages"]) == sorted(
+        v["hebrew"].replace("/", "") for v in source
+    )
+    assert "/" not in "".join(t["text"] for t in delitzsch["tokens"])
     shaul = shards["records/shaul.json"].decode()
     note = next(e for e in json.loads(shaul)["evidence"] if e["kind"] == "note")
     assert note["content"]["sections"] and all(
@@ -125,6 +145,35 @@ def test_withheld_and_private_content_never_reaches_artifacts(corpus):
             lambda v: v["verses"][0]["words"][0].update(position=9),
             "position",
         ),
+        (
+            "data/bes/json/genesis.json",
+            lambda v: v["chapters"][0]["verses"].append(
+                dict(v["chapters"][0]["verses"][1], bes="Otra lectura.")
+            ),
+            "Native reference repeated: bes-es:genesis:1:2",
+        ),
+        (
+            "data/bes/json/genesis.json",
+            lambda v: v["chapters"].append(v["chapters"][0]),
+            "Native reference repeated: bes-es:genesis:1:",
+        ),
+        (
+            "data/bes/json/genesis.json",
+            lambda v: v["chapters"][0].update(
+                notes=[{"verse": 4, "bes": "Fuera del recorrido.", "footnotes": []}]
+            ),
+            "holds 4 source records but 3 were read",
+        ),
+        (
+            "data/delitzsch/parsed/john/1.json",
+            lambda v: v[0]["verses"][1].update(words=[]),
+            "Delitzsch verse has no words",
+        ),
+        (
+            "data/delitzsch/parsed/john/1.json",
+            lambda v: v[0]["verses"][0]["words"][1].update(text="הָיְתָה"),
+            "Delitzsch words differ from the verse text",
+        ),
     ],
 )
 def test_malformed_input_fails_validation(corpus, path, change, message):
@@ -136,12 +185,30 @@ def test_malformed_input_fails_validation(corpus, path, change, message):
         run(root, roots)
 
 
-def test_pin_drift_and_unpinned_files_fail(corpus):
+def write_words(root, change):
+    path = root / "data/dict/lexicon/words.json"
+    words = read_json(path)
+    change(words["H606"])
+    path.write_text(json.dumps(words, ensure_ascii=False))
+
+
+def test_pins_follow_what_the_corpus_reads(corpus):
     root, roots = corpus
-    snap = Snapshot.load(root, "fixture")
+    committed_fixture(root, roots)
+    write_words(root, lambda entry: entry.update(definitions=["changed"]))
+    check(root, "fixture", roots)
+    write_words(root, lambda entry: entry.update(lemma="changed"))
+    with pytest.raises(ValueError, match="stale"):
+        check(root, "fixture", roots)
+
+
+def test_shaul_drift_and_unpinned_files_fail(corpus):
+    root, roots = corpus
+    snap = Snapshot.load(root, "fixture", roots)
     pins = pin(root, snap, "fixture-revision", roots)
-    (root / "data/dict/lexicon/words.json").write_text("{}")
-    with pytest.raises(PinDrift, match="words.json"):
+    note = roots["shaul"] / "content/besorah/juan_1_testigo_cordero.md"
+    note.write_text(note.read_text() + "\n")
+    with pytest.raises(PinDrift, match="juan_1_testigo_cordero.md"):
         run(root, roots, pins)
     pins = pin(root, snap, "fixture-revision", roots)
     (roots["shaul"] / "knowledge/concepts/new.yml").write_text(
@@ -151,12 +218,36 @@ def test_pin_drift_and_unpinned_files_fail(corpus):
         run(root, roots, pins)
 
 
-def test_inventory_requires_a_disposition_for_every_source_directory(corpus):
-    root, _ = corpus
-    (root / "data/lxx").mkdir()
-    (root / "data/lxx/genesis.json").write_text("[]")
-    with pytest.raises(ValueError, match="data/lxx"):
-        Snapshot.load(root, "fixture")
+@pytest.mark.parametrize(
+    "origin, path, message",
+    [
+        ("davar", "data/greek/lxx/genesis.json", "without a disposition: davar:data/greek/lxx"),
+        ("davar", "data/oe/daniel/notes.txt", "without a disposition: davar:data/oe/daniel"),
+        ("shaul", "content/estudios/ruth.md", "without a disposition: shaul:content/estudios"),
+        ("shaul", "knowledge/concepts/new.yaml", "without a disposition: shaul:knowledge"),
+        ("davar", "data/dict/lexicon/.DS_Store", None),
+    ],
+)
+def test_every_source_file_needs_a_disposition(corpus, origin, path, message):
+    root, roots = corpus
+    target = (root if origin == "davar" else roots["shaul"]) / path
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text("{}")
+    if message is None:
+        Snapshot.load(root, "fixture", roots)
+        return
+    with pytest.raises(ValueError, match=message):
+        Snapshot.load(root, "fixture", roots)
+
+
+def test_a_source_file_with_two_dispositions_fails(corpus):
+    root, roots = corpus
+    path = root / SNAPSHOTS / "fixture/inventory.json"
+    inventory = read_json(path)
+    inventory["not_sources"].append({"paths": ["data/oe/**"], "reason": "Overlap."})
+    path.write_text(json.dumps(inventory))
+    with pytest.raises(ValueError, match="several dispositions: davar:data/oe/daniel/7.json"):
+        Snapshot.load(root, "fixture", roots)
 
 
 @pytest.mark.parametrize(
@@ -169,6 +260,7 @@ def test_inventory_requires_a_disposition_for_every_source_directory(corpus):
             "outside file",
         ),
         (lambda f: f[9]["include"].update(root="private"), "public root"),
+        (lambda f: f[11].update(paths=[]), "path patterns"),
     ],
 )
 def test_inventory_rejects_invalid_rows(corpus, change, message):
@@ -182,7 +274,7 @@ def test_inventory_rejects_invalid_rows(corpus, change, message):
 
 
 def committed_fixture(root, roots, name="fixture"):
-    snap = Snapshot.load(root, name)
+    snap = Snapshot.load(root, name, roots)
     files = regenerate(root, snap, pin(root, snap, "fixture-revision", roots), roots)
     for path, data in files.items():
         target = root / SNAPSHOTS / name / path
@@ -201,12 +293,8 @@ def test_check_detects_stale_snapshot_and_compare_names_changes(corpus):
     inventory_path.write_text(json.dumps(inventory))
     for name in ("manifest.json", "reports/coverage.json"):
         (root / SNAPSHOTS / "next" / name).unlink()
-    words = read_json(root / "data/dict/lexicon/words.json")
-    words["H606"]["lemma"] = "changed"
-    (root / "data/dict/lexicon/words.json").write_text(
-        json.dumps(words, ensure_ascii=False)
-    )
-    with pytest.raises(PinDrift):
+    write_words(root, lambda entry: entry.update(lemma="changed"))
+    with pytest.raises(ValueError, match="records/hebrew-lexicon/words.json"):
         check(root, "fixture", roots)
     committed_fixture(root, roots, "next")
     diff = compare(root, "fixture", "next")
@@ -217,22 +305,70 @@ def test_check_detects_stale_snapshot_and_compare_names_changes(corpus):
         check(root, "next", roots)
 
 
-def test_committed_v1_snapshot_pins_current_davar_sources():
-    snap = Snapshot.load(ROOT, "v1")
-    manifest = read_json(ROOT / SNAPSHOTS / "v1/manifest.json")
-    davar = [i for i in manifest["inputs"] if i["owner"] == "davar"]
-    assert all(digest((ROOT / i["path"]).read_bytes()) == i["sha256"] for i in davar)
-    for family in snap.included():
-        if family.include.origin == "davar":
-            found = discover(ROOT / family.include.root, family.include)
-            pinned = sorted(
-                i["id"].split("/", 1)[1]
-                for i in davar
-                if i["id"].startswith(family.id + "/")
-            )
-            assert found == pinned, family.id
-    assert {i["owner"] for i in manifest["inputs"]} == {"davar", "shaul"}
+def test_newest_snapshot_matches_current_davar_sources():
+    name = newest_snapshot(ROOT)
+    snap = Snapshot.load(ROOT, name)
+    manifest = read_json(ROOT / SNAPSHOTS / name / "manifest.json")
+    assert input_digest(snap, manifest["inputs"]) == manifest["input_manifest_digest"]
+    davar = {f.id for f in snap.included() if f.origin == "davar"}
+    expected = {
+        f["path"]: f["sha256"]
+        for f in manifest["files"]
+        if f["path"].split("/")[1] in davar
+    }
+    sampled, actual = {}, {}
+    for path, data in render(
+        ROOT,
+        snap,
+        manifest["inputs"],
+        {},
+        new_tally(snap),
+        select=davar,
+        schema=False,
+    ):
+        actual[path] = digest(data)
+        sampled.setdefault(path.split("/")[1], data)
+    stale = sorted(p for p in expected.keys() | actual.keys() if expected.get(p) != actual.get(p))
+    assert not stale, f"Snapshot {name} is stale; create a new snapshot: {stale[:10]}"
+    validator = Validator(ROOT)
+    for data in sampled.values():
+        validator.records(json.loads(data), public=True)
     assert not any(
         i["path"].startswith(("private/", "data/tth", "data/dss"))
         for i in manifest["inputs"]
     )
+
+
+def dhnt_verses():
+    with zipfile.ZipFile(ROOT / "data/delitzsch/raw/DHNT'85+.zip") as archive:
+        module = archive.read(".SQLite3")
+    db = sqlite3.connect(":memory:")
+    db.deserialize(module)
+    books = SQLiteLoader.BOOK_MAPPINGS
+    return {
+        (books[number], chapter, verse): re.sub(r"<S>[^<]*</S>", "", text)
+        for number, chapter, verse, text in db.execute(
+            "select book_number, chapter, verse, text from verses"
+        )
+        if number in books
+    }
+
+
+
+
+def test_delitzsch_passage_text_reproduces_the_dhnt_module():
+    module = dhnt_verses()
+    snap = Snapshot.load(ROOT, newest_snapshot(ROOT))
+    manifest = read_json(ROOT / SNAPSHOTS / snap.name / "manifest.json")
+    pins = [i for i in manifest["inputs"] if i["id"].startswith("delitzsch-text/")]
+    passages = {}
+    for _, data in render(
+        ROOT, snap, pins, {}, new_tally(snap), select={"delitzsch-text"}, schema=False
+    ):
+        for p in json.loads(data)["passages"]:
+            native = p["native_reference"]
+            key = (p["book_id"], native["chapter"], int(native["verse_label"]))
+            passages[key] = p["text"]
+    assert len(passages) == 7956
+    printed = {key: module[key].replace("־ ", "־").strip() for key in passages}
+    assert printed == passages

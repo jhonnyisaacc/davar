@@ -1,15 +1,18 @@
 {
   "checks": [
-    "pins_match_bytes_and_discovery",
+    "pins_match_discovery_and_shaul_bytes",
+    "every_source_file_has_exactly_one_disposition",
     "inventory_dispositions_and_evidence",
     "record_schema_and_domain_integrity_per_shard",
     "provenance_locators_resolve_in_pinned_bytes",
     "identity_unique_across_shards",
+    "native_reference_unique_per_edition",
     "passage_language_matches_edition",
-    "withheld_token_fields_absent",
+    "withheld_token_fields_and_segmentation_absent",
+    "source_record_count_matches_native_structure",
     "every_source_record_normalized_or_unresolved"
   ],
-  "input_manifest_digest": "a3b14def6f72ef4c457ccaa22e2eb758d93d41daa66fb6419d14289002bcaebc",
+  "input_manifest_digest": "92c56470e52c7e07afaef303d4b81d88d9727161aeb1aa3f02ca25aaf13e52b2",
   "records": {
     "concepts": 52,
     "editions": 1515,

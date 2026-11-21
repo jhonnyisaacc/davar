@@ -18,6 +18,9 @@ from ..core import (
 )
 
 
+SEGMENTATION = "/"
+
+
 class Reason(StrEnum):
     ENTITY_KIND_OUTSIDE_CONTRACT = "entity_kind_outside_contract"
     PREDICATE_OUTSIDE_CONTRACT = "predicate_outside_contract"
@@ -92,6 +95,7 @@ class Adapter:
     shard: str
     source_kind: str
     book: Callable[[str, list], str | None]
+    count: Callable[[object], int]
     bare_tokens: bool = False
 
     @property
@@ -184,14 +188,20 @@ def oe_unit(unit: Unit, ctx: Context) -> Outcome:
 
 
 def delitzsch_unit(unit: Unit, ctx: Context) -> Outcome:
-    verse = unit.value
+    verse, where = unit.value, unit.input.id + unit.pointer
+    text = verse["hebrew"].replace(SEGMENTATION, "")
+    words = [{"text": word["text"]} for word in verse["words"]]
+    if not words:
+        raise ValueError("Delitzsch verse has no words: " + where)
+    if "".join(text.split()) != "".join(w["text"] for w in words):
+        raise ValueError("Delitzsch words differ from the verse text: " + where)
     passage, tokens = make_passage(
         ctx.edition_id,
         ctx.book_id,
         same_chapter(verse, ctx),
         str(verse["verse"]),
-        verse["hebrew"],
-        [{"text": word["text"]} for word in verse["words"]],
+        text,
+        words,
         unit.input.source_id,
         unit.pointer,
         ctx.mappings,
@@ -367,27 +377,49 @@ def shaul_note_unit(unit: Unit, ctx: Context) -> Outcome:
     return Normalized({"evidence": [evidence]}, unresolved)
 
 
-def scripture(normalize, book, pattern) -> Adapter:
+def objects_with(key: str) -> Callable[[object], int]:
+    def count(node) -> int:
+        if isinstance(node, dict):
+            return (key in node) + sum(count(v) for v in node.values())
+        if isinstance(node, list):
+            return sum(count(v) for v in node)
+        return 0
+
+    return count
+
+
+def one(parsed) -> int:
+    return 1
+
+
+def scripture(normalize, book, pattern, key="verse", bare=False) -> Adapter:
     return Adapter(
-        json.loads, pattern, normalize, "records/{family}/{relpath}", "dataset", book
+        json.loads,
+        pattern,
+        normalize,
+        "records/{family}/{relpath}",
+        "dataset",
+        book,
+        objects_with(key),
+        bare,
     )
 
 
 ADAPTERS: dict[str, Adapter] = {
     "oe": scripture(oe_unit, book_by_oe_directory, "/*"),
-    "delitzsch": Adapter(
-        json.loads,
-        "/*/verses/*",
-        delitzsch_unit,
-        "records/{family}/{relpath}",
-        "dataset",
-        book_by_directory,
-        bare_tokens=True,
+    "delitzsch": scripture(
+        delitzsch_unit, book_by_directory, "/*/verses/*", bare=True
     ),
-    "greek": scripture(greek_unit, book_by_directory, "/verses/*"),
+    "greek": scripture(greek_unit, book_by_directory, "/verses/*", "verse_id"),
     "bes": scripture(bes_unit, book_by_stem, "/chapters/*/verses/*"),
     "lexicon": Adapter(
-        json.loads, "/*", lexicon_unit, "records/{family}/{relpath}", "lexicon", no_book
+        json.loads,
+        "/*",
+        lexicon_unit,
+        "records/{family}/{relpath}",
+        "lexicon",
+        no_book,
+        len,
     ),
     "shaul-record": Adapter(
         adapters.load_yaml,
@@ -396,8 +428,15 @@ ADAPTERS: dict[str, Adapter] = {
         "records/shaul.json",
         "knowledge_record",
         no_book,
+        one,
     ),
     "shaul-note": Adapter(
-        bytes, "", shaul_note_unit, "records/shaul.json", "published_note", no_book
+        bytes,
+        "",
+        shaul_note_unit,
+        "records/shaul.json",
+        "published_note",
+        no_book,
+        one,
     ),
 }

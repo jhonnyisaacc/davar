@@ -9,7 +9,7 @@ from pathlib import Path
 
 from ..build import output_guard
 from ..core import ROOT, SOURCES, cli_dest, contained, encoded, read_json, resolve_roots
-from .engine import REPORTS, SNAPSHOTS, Snapshot, generate, pin
+from .engine import REPORTS, SNAPSHOTS, Snapshot, generate, newest_snapshot, pin
 
 
 def git(cwd: Path, *args: str) -> str:
@@ -52,7 +52,7 @@ def regenerate(
 
 
 def snapshot(root: Path, name: str, external_roots: dict):
-    snap = Snapshot.load(root, name)
+    snap = Snapshot.load(root, name, external_roots)
     revision = require_clean(root, snap, external_roots)
     files = regenerate(
         root, snap, pin(root, snap, revision, external_roots), external_roots
@@ -71,7 +71,7 @@ def snapshot(root: Path, name: str, external_roots: dict):
 
 
 def check(root: Path, name: str, external_roots: dict):
-    snap = Snapshot.load(root, name)
+    snap = Snapshot.load(root, name, external_roots)
     expected = committed(root, name)
     pins = json.loads(expected["manifest.json"])["inputs"]
     actual = regenerate(root, snap, pins, external_roots)
@@ -79,12 +79,19 @@ def check(root: Path, name: str, external_roots: dict):
         p for p in actual.keys() | expected.keys() if actual.get(p) != expected.get(p)
     )
     if stale:
-        raise ValueError(f"Snapshot {name} is stale: {stale}")
+        before, after = (
+            {f["path"]: f["sha256"] for f in json.loads(files["manifest.json"])["files"]}
+            for files in (expected, actual)
+        )
+        changed = sorted(
+            p for p in before.keys() | after.keys() if before.get(p) != after.get(p)
+        )
+        raise ValueError(f"Snapshot {name} is stale: {changed or stale}")
 
 
 def build(root: Path, name: str, output: Path, external_roots: dict):
     output_guard(output, root)
-    snap = Snapshot.load(root, name)
+    snap = Snapshot.load(root, name, external_roots)
     pins = read_json(root / SNAPSHOTS / name / "manifest.json")["inputs"]
 
     def write(path, data):
@@ -152,6 +159,8 @@ def main():
             }
         ).items()
     }
+    if args.snapshot == "newest":
+        args.snapshot = newest_snapshot(root)
     if args.command == "compare":
         if args.other is None:
             parser.error("compare needs two snapshot names")

@@ -267,1043 +267,1043 @@
     },
     {
       "path": "records/delitzsch-text/acts/1.json",
-      "sha256": "8068743928e76b8940671da3e94e3e444019af2232e89045ca8701308a8a8dcf"
+      "sha256": "264d15ab169a2c0ca93240744789d3605c477de7cc704527db5027cf2b0b159d"
     },
     {
       "path": "records/delitzsch-text/acts/10.json",
-      "sha256": "4ceeef7462ce94e030666962e48b8f68ec1fdc2830fc8abfbcc06951f4b25550"
+      "sha256": "33d43615590d3a6f1d1033f5fe322c0bda4e2ea6d07f4fffba61414a77a15367"
     },
     {
       "path": "records/delitzsch-text/acts/11.json",
-      "sha256": "30dd093d4a3b334a5328994cbc685ba0bdf93c70ce1539063158eea3ae81bd56"
+      "sha256": "923ddb272e2ad0aec995504c93ec1e2369a18360f31b757dc2ff20487ac82add"
     },
     {
       "path": "records/delitzsch-text/acts/12.json",
-      "sha256": "d2ea33828d3c7b84fc5e7108c26342f3db61148087d049b2656e11083e5dd168"
+      "sha256": "280216ad71e98a541cd961e93e702609413efb99bc6d8569a19b326021438fa0"
     },
     {
       "path": "records/delitzsch-text/acts/13.json",
-      "sha256": "1f7bccdd367464f6a2bfe0d9094de3224a04c1b9a2b77562e2cd48008bb897fe"
+      "sha256": "71998235d0291161950bad9946cc3a2091256b1b609ce4c08fdc3fe34ca2bb0a"
     },
     {
       "path": "records/delitzsch-text/acts/14.json",
-      "sha256": "869d5c633f595d5069b025475af79ff73d6d494fc0aba9c6a6ad1fdb641ea67f"
+      "sha256": "bd6b946453ce60384cae63b28568388ab743a2b6678431230eb41dbf179962c3"
     },
     {
       "path": "records/delitzsch-text/acts/15.json",
-      "sha256": "f93d87333d1ed0f92be3fa086040b583bd6ae91b4cdb575062c62275ffa6119a"
+      "sha256": "129366e2862f8f03131fc640b636ed6c35839d76aee80866f96ddb19baffdda7"
     },
     {
       "path": "records/delitzsch-text/acts/16.json",
-      "sha256": "25d59c98ed85cbd3b23b64a3711716ac4c5fa1bff54c8e4d8c466411e32b6b13"
+      "sha256": "e8e06c9570b5afe758219e14b5589bb4ad6e4a02f7992b28af034f189a00c767"
     },
     {
       "path": "records/delitzsch-text/acts/17.json",
-      "sha256": "0ffb65c765d1edecf294feb390287a30b97dd94a1f17ee3c9197407d0e6fd5ad"
+      "sha256": "96536d3f2935ad83d25e73f8fe63e5b9e17b3fd0f11eaaccb4e311e51f26b914"
     },
     {
       "path": "records/delitzsch-text/acts/18.json",
-      "sha256": "bd6fe488cec59a0f68db68ef999c2a1a3e6eb557457b3f7b498a2ff5c179fdd8"
+      "sha256": "defa9401582df6d47fdc4c0143cecbcb495593f48b277b26481eed565c6e965a"
     },
     {
       "path": "records/delitzsch-text/acts/19.json",
-      "sha256": "e171886ab6eab0cb992630c68e3da9d5c4090be7979206b6d45c411887df19ad"
+      "sha256": "8c51d20fd087dedbc9f2406d3f969ecf3d19604eb3552539c1a33b9f4a11c3a1"
     },
     {
       "path": "records/delitzsch-text/acts/2.json",
-      "sha256": "b69469d1593dfc3eec5ea2eb3491a1c5cd7705f2342e97685ebf2eb68d168431"
+      "sha256": "1137be9d6d67b77700943e90ba3d85afb7da1a9db262ee653fa12d8d32eace81"
     },
     {
       "path": "records/delitzsch-text/acts/20.json",
-      "sha256": "7a9426766c438fb0ba3fa0f2da29ec7eac85398ce710fb73f86d77b9d7f077d2"
+      "sha256": "f0a1c3d406519231a16f4d68f8cf811e05b5ca5c98bbcae1debbe490c83d3246"
     },
     {
       "path": "records/delitzsch-text/acts/21.json",
-      "sha256": "4a722aa737e18421b5ce6fad5fe4d8316795926739097e96aebe2014ef071e82"
+      "sha256": "4cdc1322bff39e2b46abaf1439996be51c1d1159bc3f2b0050f3cdc139eeaf2f"
     },
     {
       "path": "records/delitzsch-text/acts/22.json",
-      "sha256": "1ea39292025a7fd098739e52a510df245b97029909e76557c905dafcf202db8a"
+      "sha256": "74dea3666b3ca8d000dd3c153d34236e0ac5e74bd5c594e11ec01865e73a4d46"
     },
     {
       "path": "records/delitzsch-text/acts/23.json",
-      "sha256": "f1600733ad97d82405f5f4071684cb7fc40781ed06548b0f28def0fcc854633c"
+      "sha256": "659435579d7db007955013d2e43be595cb397b72b4dbe2a14b1e639e3f0cfad9"
     },
     {
       "path": "records/delitzsch-text/acts/24.json",
-      "sha256": "6cba4eb7276902928eaf00e7ebc77f0c1ff59b6aa6676f3d884bc68a31608c56"
+      "sha256": "596aa361c094c51d264165b820a051c6081351f5bdab217c4c7751ebc41b483b"
     },
     {
       "path": "records/delitzsch-text/acts/25.json",
-      "sha256": "c18cfd739ba9b7b2c76e5eea8b68a625c9c02c4733ab73073d9b5d016a8076bb"
+      "sha256": "c5f8742c6a7b427317fdbca25071e780261509a2db07af7284b85392768be7ca"
     },
     {
       "path": "records/delitzsch-text/acts/26.json",
-      "sha256": "e49e8a1fda795f11708c0660073ab60d04935b688848b7fb7bd0cc2d4b72c6bb"
+      "sha256": "97b6c6593ffcf43a64496288cfcc47890a72a6d7491d2c86d71c15fc4b774ef9"
     },
     {
       "path": "records/delitzsch-text/acts/27.json",
-      "sha256": "c71abe772d24781ec1d079f0f1774332930229988a11e712a12d1ab82b7bba1f"
+      "sha256": "6f00f10e60e4c91f5c43b366141bfd086ffd12b82e6d54078adc9fbfe23b304a"
     },
     {
       "path": "records/delitzsch-text/acts/28.json",
-      "sha256": "f3294eb88f7d8e6756de4cad7fdd246386dd008981d4ec865427ccef271ff281"
+      "sha256": "7d30dd63613fa5c99802a2b9fe9ee9fa449fd68208d2d018d0add5863a9d9cdf"
     },
     {
       "path": "records/delitzsch-text/acts/3.json",
-      "sha256": "64b494b8b1fc8e4a9fa29ec961b0801e6f205ac47023ea3fd8655d66d745b09c"
+      "sha256": "18596ebca60426f24e26de5bd8a3c53a789fcde60e2aa324eec9443df801ff40"
     },
     {
       "path": "records/delitzsch-text/acts/4.json",
-      "sha256": "e07341e94ebfe5852f2454087a31c31a6251d2228da8c0600e578ce5678befd6"
+      "sha256": "6868b129c33ba26dc9467569153ff3c0019b78b589e90eb73040f40586a37f8d"
     },
     {
       "path": "records/delitzsch-text/acts/5.json",
-      "sha256": "46fa3969bba14ecf792e89d8c75604ae9d4b6753c658b2378c8c370f094c71c2"
+      "sha256": "712b60b03830ba8822f70ea9d6f0f10d2ab65244ffef80cd6fcb56602e183cc7"
     },
     {
       "path": "records/delitzsch-text/acts/6.json",
-      "sha256": "0621fbd0da61e6b60b38e825acf4e08acc6a715681f45d2a12520b6adf3d0cd1"
+      "sha256": "3776f882588f633ff32df5685ebf32803f57d215845ad82b2b58bb53b9ac34b0"
     },
     {
       "path": "records/delitzsch-text/acts/7.json",
-      "sha256": "3ff3b7960aa35ea25d03e896cd68ae1d953edcc003216611493f365fb57e3320"
+      "sha256": "f90ffc78c761e2aa68cdb988ed37a17c670a8fc2328987e3bc8f2b511f2ca803"
     },
     {
       "path": "records/delitzsch-text/acts/8.json",
-      "sha256": "30d67e4c40e8db845fe4135a42da46ed70e513a67c2132535bc7eac94825d7d3"
+      "sha256": "0b6edbe3dcb12ccb092018103d54f4e759396a6c81239e19a908be119ebf6b33"
     },
     {
       "path": "records/delitzsch-text/acts/9.json",
-      "sha256": "f3a1c6d103235133dc40898e47cf88ed6fafb3c1d29d2e4c2ad86a98260becd6"
+      "sha256": "7f7bbb0057695183d9b3bb897fb07f858e6d797be142f0ab261b88d3af3faa96"
     },
     {
       "path": "records/delitzsch-text/colossians/1.json",
-      "sha256": "442e481759f3971d53d0dc5ed31479a24b98b9dc9022a2cd936879320d7bc74a"
+      "sha256": "e5415f95cb2f285cfd78ea23e3eb3b7f76c07e32f3fe6e4fbdb44cee8d0f3007"
     },
     {
       "path": "records/delitzsch-text/colossians/2.json",
-      "sha256": "1d3302fd8256e51eeb177d1535b1457dd29d15de891f47bd260e46b306acb125"
+      "sha256": "95c20a388e9afa761206082b78f0f367189e815e89b3d08d2a99e07383f13af7"
     },
     {
       "path": "records/delitzsch-text/colossians/3.json",
-      "sha256": "19b1c3f39defdb32638e9e54e9c073a4283bb8675ddd0d141ab8bbe12905c71d"
+      "sha256": "335989b271f034a645beee45791129ed6ccec55cad90ef397c917b43df6dd4f2"
     },
     {
       "path": "records/delitzsch-text/colossians/4.json",
-      "sha256": "dec431621ad590686147f4606bf1c54dc0610546f79be47bac325cb6aa976411"
+      "sha256": "775aebfdfc28865939275230176fe1d164a4042372d182e28d335273c434fb27"
     },
     {
       "path": "records/delitzsch-text/corinthians1/1.json",
-      "sha256": "f46511ebff70205e8294825d5207d8a2f46b72a3cd9e3b590c2342a48917436a"
+      "sha256": "0fa9bdba6bb3fa97815023478ad962a868c06e47d6e3c60f1c4854178bdf4e5d"
     },
     {
       "path": "records/delitzsch-text/corinthians1/10.json",
-      "sha256": "ee74ab06faa9d667fb6171d7cc662eedbb67b1bedfee0b4ac5d8a634e6cfcffd"
+      "sha256": "e7952a72f48e545a9ab2aa8ffb993217eef8b54651c7f9a63ad1b17b3b3f9b05"
     },
     {
       "path": "records/delitzsch-text/corinthians1/11.json",
-      "sha256": "87db7f2a3d0635e851261929240ceb9d4865933174b7917540f95719e87012e0"
+      "sha256": "5d200a4bb0bbe23141b81264029d64d49f540512d297caa8e6958ebd1000da3f"
     },
     {
       "path": "records/delitzsch-text/corinthians1/12.json",
-      "sha256": "d1387927af4ef13647d4c13df0278f0db214107d4892b48b1c1db4f4e74b2b3f"
+      "sha256": "e1d029bad8b9573c045239bc27713562f2fcccfd467d60ef2fef51d926e661e2"
     },
     {
       "path": "records/delitzsch-text/corinthians1/13.json",
-      "sha256": "9cc10c50d101fb5cddd13d4f930d0732db783a0196b58b77aa4b52b8dd0696bc"
+      "sha256": "bfc6da0cbc5c8404334342b4f2b55861b3c335a5b762ff5ae7b282b55a7bb5ff"
     },
     {
       "path": "records/delitzsch-text/corinthians1/14.json",
-      "sha256": "460cd87af5e6b61958571eefeb72803593847357fee95d289a67cdcff6459822"
+      "sha256": "46e24bbfb0f0dcfa64f0ac48187533c6ce6924bf8b8639030019a16e773e7232"
     },
     {
       "path": "records/delitzsch-text/corinthians1/15.json",
-      "sha256": "c89f89f79bdac151f77c90df1a859e154110e9237764eb1fce5f920dfd1ef2ed"
+      "sha256": "00ded54248ecd6c55be2471cc984fdc7612abafc21100a10fb72b619b891b5b9"
     },
     {
       "path": "records/delitzsch-text/corinthians1/16.json",
-      "sha256": "9332872a4fb724ab5882e3901ac8bd508e68111b24761827fd9a2f9add843f71"
+      "sha256": "560425f179cbca47511750c1f0a4ee9e498a56a39b3946ec1ff42adf8d2e4ea6"
     },
     {
       "path": "records/delitzsch-text/corinthians1/2.json",
-      "sha256": "aef91561620aa79a03d80daf5d825e8d691b309b9d886a834a37b34d4a2fa892"
+      "sha256": "265122861fadb267ae32419deadd6ea65c3c7ece1924e2af89cce4cb992db6d6"
     },
     {
       "path": "records/delitzsch-text/corinthians1/3.json",
-      "sha256": "27608d9eafa4e661f6f40197707e0c4d0f943aea0551ce3040b987c901fc1162"
+      "sha256": "dc0fd791f3da10ecf7baf9605aa521354c4a05f2f2b21dd4da522cf86d045e12"
     },
     {
       "path": "records/delitzsch-text/corinthians1/4.json",
-      "sha256": "89ec22b81a45fcf8367b7a1cda4a45828dd6d2d1785e518bb62634ee4f25188b"
+      "sha256": "6fb3371e831ccd22772b6110bd342b4fdb8c2c7181fc439ae4fb346ea5bae906"
     },
     {
       "path": "records/delitzsch-text/corinthians1/5.json",
-      "sha256": "7aeffe90aa15619bb36bf8617af0faeefa9a1284a5060e65babae4a9f63fd8b3"
+      "sha256": "6990c3cc01282fa7fdcabc7b9c8bc0649e86757a77dc4d80bf8cb19af60082fa"
     },
     {
       "path": "records/delitzsch-text/corinthians1/6.json",
-      "sha256": "042abdb0817080662952832cc381d8621571f52a90d5393cd7285758ace859d5"
+      "sha256": "f102c32c12c5946f18c61096b1c180d715194ff0c9d312d8970a551a11ee8e19"
     },
     {
       "path": "records/delitzsch-text/corinthians1/7.json",
-      "sha256": "3b9847fd2490ef1deacf7d922dfdddcc58ecc93d5b27f16e0e32b2351a46aca7"
+      "sha256": "40836a5a85bae0dc22c61b5d5b38def115b4c88dcef10576fd069a5aac41d348"
     },
     {
       "path": "records/delitzsch-text/corinthians1/8.json",
-      "sha256": "bca3fbc05831cb835bc58067800cc1d5f70d4343789ea94b844a12ffb4ff9eb7"
+      "sha256": "fa6de8ac871da63640528ac80f2e8efbd1b0a74eac12a70508f709cc879ffedc"
     },
     {
       "path": "records/delitzsch-text/corinthians1/9.json",
-      "sha256": "b5740a2820a0c0946825bd74b6d28b2d937c2a5e963c0d7bedd8cdd7ba4710cc"
+      "sha256": "0d4f16c006efff7052859644ff27d13cb49c2bfb82439cc9c4de1c75499e4c11"
     },
     {
       "path": "records/delitzsch-text/corinthians2/1.json",
-      "sha256": "4384b08a19428cb2b9a75ad94151befcd134cae9bce0bbdfd288d0eefc173e0d"
+      "sha256": "392cef6a3091072a7614eb08b28cbb5cf8e37c0848dc399882dd74747e8e2554"
     },
     {
       "path": "records/delitzsch-text/corinthians2/10.json",
-      "sha256": "50eb5604425f9fcbead5cd993ad6e968cdf94fd7ae5215a17424a6957d4984b8"
+      "sha256": "d320adb70c3f207438dcc9ad50a07dd5901b6f7edf38d65b9618a3b8a78f9439"
     },
     {
       "path": "records/delitzsch-text/corinthians2/11.json",
-      "sha256": "6f758bf59bdcac4b5176df72f21750a268e4267608f65cbae375d24102e8d751"
+      "sha256": "ea998643947e46c57fb833ab50a3faed5666bce10d41068e75e724b95adaef69"
     },
     {
       "path": "records/delitzsch-text/corinthians2/12.json",
-      "sha256": "38bf41161ec16c5bfc28a971353ea897a5de3f14ba387d8900400bf48baaaaff"
+      "sha256": "2f4b3ad200a97b556752ed18a422f0feb92138865f329fe571fa6d8c05adb28b"
     },
     {
       "path": "records/delitzsch-text/corinthians2/13.json",
-      "sha256": "3dc9b8836aa2036606ca1687bd038580a5aeccc6e85e07b7a3838202712aabb4"
+      "sha256": "4e60c7ebf3a6fe7683ae47fe0f868c502183b747aa0c2de663a517af4b313529"
     },
     {
       "path": "records/delitzsch-text/corinthians2/2.json",
-      "sha256": "02d9131d272ed2d715a62c00878e78398b75f42dd4fb16aef78de1dd4ff1c713"
+      "sha256": "8ee293507fa3b7ac919d79602b8f0314b256585be7c91bff91047d82fdce6e19"
     },
     {
       "path": "records/delitzsch-text/corinthians2/3.json",
-      "sha256": "79b762c8e7f9452c561aa77f46e8d013a6864728d1e2962970d6759d17ca2dbc"
+      "sha256": "234af7a249af99c3d52eca4bcb7bbf311cac39bc67c1311275437db39bdc2500"
     },
     {
       "path": "records/delitzsch-text/corinthians2/4.json",
-      "sha256": "fe5b1101068c0ba4a574be286c38925c765e3f82b148ce18fd816ae32f98ede3"
+      "sha256": "e0f64bbad67857d59d67fbcf9054c2d80aaa1f8e83e59102a8f311da4810d1d8"
     },
     {
       "path": "records/delitzsch-text/corinthians2/5.json",
-      "sha256": "7a8078e50bed9781b999b7ef005d6687f20fbcda437a6630309681efc08fdadb"
+      "sha256": "6739e8745bc4b5313c1de71d18a5d99c50f9e418e4e6be7b8c0b1cbf9dd2ae01"
     },
     {
       "path": "records/delitzsch-text/corinthians2/6.json",
-      "sha256": "8265d8d47bf13488323dd7088532e8b04fa66143573aef07ac88d7b67d326f42"
+      "sha256": "e40c2c4b1cb7ad84386502c01421234d7d5424a25d8c21b4762d278ea4fc3102"
     },
     {
       "path": "records/delitzsch-text/corinthians2/7.json",
-      "sha256": "48daac32bbdac11eeffcc026bc2c3e1af9505536e5d9a00bb764dcf5aa69a09d"
+      "sha256": "37d49d63b9dab32ec102c7c315e519183c72048926d96c5d43a4457642704e22"
     },
     {
       "path": "records/delitzsch-text/corinthians2/8.json",
-      "sha256": "a20688184f5fc26fc100aa59bc0eaa809fc0329ea493a6bf895d0ae4516ff893"
+      "sha256": "af1b6fc575e7ab2cc7bd26c03d75bcba11bcbd2a5763797e2408bf452e569dd7"
     },
     {
       "path": "records/delitzsch-text/corinthians2/9.json",
-      "sha256": "7ee0d00845a48af924f3f7db8845a1d67b6c14f0be6a5f2a191a6326ec863710"
+      "sha256": "612f29d4d00a3da701a3603c2b588d2298025af93aa19d497da4c1e5097846d2"
     },
     {
       "path": "records/delitzsch-text/ephesians/1.json",
-      "sha256": "0f59d95632d82bc555116c2b31029e47ba12c429e570eef67014ff29a494fefc"
+      "sha256": "23359410c0b27ede9f1d0580b2fad6903554b3112a5e36539f33988a074c5329"
     },
     {
       "path": "records/delitzsch-text/ephesians/2.json",
-      "sha256": "69e58c3b2e2afc06bf76c37c6f11ca637cb639a5966b823b918736d7e26a5753"
+      "sha256": "11deab1d11a3aa321b4f2eddc1900dc327d60710e4ebd84f1fa3fba07f2c97bd"
     },
     {
       "path": "records/delitzsch-text/ephesians/3.json",
-      "sha256": "bc05ff179ac70ea652407414cad727e7cb212a97847aa6cdc50414dfd1504a82"
+      "sha256": "f3210a6713a7d9f270607821803e37ae949008319c1f7bc5c253b0ecda2cd95f"
     },
     {
       "path": "records/delitzsch-text/ephesians/4.json",
-      "sha256": "c7608f0f4a36526e8493efa18041bd43fc246f04e36ffbbeee301f1629758dfc"
+      "sha256": "5c27e853cd9560ecb2f593f3592c7ba0b977c70e0619f8509d46a6ab561ff383"
     },
     {
       "path": "records/delitzsch-text/ephesians/5.json",
-      "sha256": "0033766966f062a4c1ee14413b52aa0d012f91de6bc559c53d5d1894d3ede3bd"
+      "sha256": "a4b206e46ebfa77ef70896004ca23e23dbe9565829e5df2babb928141714d545"
     },
     {
       "path": "records/delitzsch-text/ephesians/6.json",
-      "sha256": "99f7c43f78c9cff24210f7bdb24a98cbc84cc858a7945954caa764284d2cbbc9"
+      "sha256": "e9d4fe3dff7f881122555438bfabdec58396219acd6a2395606db867cdd978dc"
     },
     {
       "path": "records/delitzsch-text/galatians/1.json",
-      "sha256": "d8522bff531d09aa68c6ad8f25a800470a44ad4277477a258fc0b6046e908c77"
+      "sha256": "77c6f34fe3fe46cedf25356002212090cde46a2fd7ead01e83943fe812b37fa1"
     },
     {
       "path": "records/delitzsch-text/galatians/2.json",
-      "sha256": "4f0d1bbe4a4795cc776d1315e518121d8792c4d64ac594da33f8b64e3d87c170"
+      "sha256": "1ed8c23cbafddb8e7313e20130a94126e5dc0a91c0d32586167d375255ee2c0b"
     },
     {
       "path": "records/delitzsch-text/galatians/3.json",
-      "sha256": "b95e34d2d3eaebaa85f8c507a1e35b2f56473e5ec03e50cdedbc22b0d6ce4d46"
+      "sha256": "8a7d230e908483518acdbf774a153cea5ca43bf90d6197f5ce1b89993c937a99"
     },
     {
       "path": "records/delitzsch-text/galatians/4.json",
-      "sha256": "4672c62e24c546b25f9eaa0ac08533db7c2c3917f86114362b2c545e1c969cc6"
+      "sha256": "06e92f9757b99ff4d59a0b1ef1f53ab8ab9eab2e7e0cad8f7e9f7bc1f8c1de35"
     },
     {
       "path": "records/delitzsch-text/galatians/5.json",
-      "sha256": "c29f2d140cc2321c1cb1e48f8191aa9e923d56d877ae56159012e34b8ff4c0ab"
+      "sha256": "850f2b50c51286e777692894342e6c25468cf0aecfa1d2e1f02e0dbb7d0e24ee"
     },
     {
       "path": "records/delitzsch-text/galatians/6.json",
-      "sha256": "21d365792cf5a479606a970211279f38acb48ddf4368a1454cb6c35e5549a354"
+      "sha256": "c75448c27256ded6cd2dcf7653be8c5b2d3e288916fa44c7ca36692b2a0930c1"
     },
     {
       "path": "records/delitzsch-text/hebrews/1.json",
-      "sha256": "7a13880dd94a9bd38ab7beadaaea7d1358d96050d1546221e967043a199c3492"
+      "sha256": "ad4deaa30a0a58d06b80e388293865146473013d8e5bf7f0f8b3a4581d3d78a0"
     },
     {
       "path": "records/delitzsch-text/hebrews/10.json",
-      "sha256": "f420474e576c5c012429c2ec240c070f794c440b995ba51fa902306b23a15469"
+      "sha256": "6e10aecda094b62fa3f47ea60902a9e8308371dcdccc6cdca2d0c422ecc57352"
     },
     {
       "path": "records/delitzsch-text/hebrews/11.json",
-      "sha256": "cfb22a8253fcd099a6bd0af09d5005ceb51f42ed4cf52ca31fb9e8b003e14e3d"
+      "sha256": "97abb55ece0efd124fb5a02869643a2fb14648c828de267b782d192cfd731ea8"
     },
     {
       "path": "records/delitzsch-text/hebrews/12.json",
-      "sha256": "17ad5928cc45c583329099beb4b2709f2f3f0b75cc1a3b7b6a7c0fcc921b10dc"
+      "sha256": "3c8498932662cf659037d2b8caedddeccbceeb92626985ac77bc56e048c63b8c"
     },
     {
       "path": "records/delitzsch-text/hebrews/13.json",
-      "sha256": "79b79e13623287383abcb6132af3319f498f846567e1f0810f134f1f3ea2ecdf"
+      "sha256": "76651bc60a45beb8436a57640faf59fdbc7b73cfcfe1110b0e599c0dd98b785a"
     },
     {
       "path": "records/delitzsch-text/hebrews/2.json",
-      "sha256": "69ce584f5df5913574b1886b16194bacb76e5f9d598360fbf04410f45b4d7153"
+      "sha256": "c2d98954356a1539f15d991926a8aa7d2f2246f178fd111d1578bfd7b802ffcb"
     },
     {
       "path": "records/delitzsch-text/hebrews/3.json",
-      "sha256": "7f74ec7ced37462807b9effd0d456a6f1c29dfe4d2558da30cd78266387f221a"
+      "sha256": "cb6b7ae75e3b52f76c7780810ee82c2ee0ae1e66d20a69eb32fd8cfb661e7eb1"
     },
     {
       "path": "records/delitzsch-text/hebrews/4.json",
-      "sha256": "e3deeed3d2397fc06f22b52a1cd9fd540c84d02bd35fbc41c022807a0315038d"
+      "sha256": "6e04849c21f0da0495d752b57fcf56330d78689571f554310f578dcb6b5a0c9a"
     },
     {
       "path": "records/delitzsch-text/hebrews/5.json",
-      "sha256": "558e075256e10ab46aba3d9cfa3af292e8faf69356477a38749e2faf9663e1a1"
+      "sha256": "0c1bfe31f8346028f7111a502de4ab1eb524faaa81c6f25b3bf50da544e60083"
     },
     {
       "path": "records/delitzsch-text/hebrews/6.json",
-      "sha256": "54f7ddb297d360fb6982500b8ae61eefeff401c41368be354343fa4357250830"
+      "sha256": "b02dbfc66c2a40042127b3777beab115715746bc6a0fc44299929c80b642e1e6"
     },
     {
       "path": "records/delitzsch-text/hebrews/7.json",
-      "sha256": "60edb3669839ed52d347cad78bbe4fa44ec490a5911741187e9332cf2d7fbc81"
+      "sha256": "006b97a61a3cbb7e145c38eded76398263d73380eebfc6df7ceb9057fbc8701e"
     },
     {
       "path": "records/delitzsch-text/hebrews/8.json",
-      "sha256": "cf4575816d836753ef3a0b751c640e87634e30ff6598eb4dbceb9b45f25bde53"
+      "sha256": "3f19739872d485373113d332d14bbccc161252585ed212dbf8b2d84cfcd70750"
     },
     {
       "path": "records/delitzsch-text/hebrews/9.json",
-      "sha256": "7cd72bad7fb939306f88eb4eb314fb291a9bb183b164704b8af37d00358d886b"
+      "sha256": "dd1f7825c85548ffddfcbebfeb756d63d4945e9db35f17f29f078c374f54c323"
     },
     {
       "path": "records/delitzsch-text/james/1.json",
-      "sha256": "c6a4eb10dd89717843249522e2a28e0cdba8317267e3927dd8e7aa127f2f023c"
+      "sha256": "85fa39e9aafbc17f278163b220b96ed5f2f98854a58e6d8c87a42722a0d4ce11"
     },
     {
       "path": "records/delitzsch-text/james/2.json",
-      "sha256": "ac8cbe51b065747ce3278dbc2cc93f3fd30e7e0cad9e9ca9a5d6798625809c1d"
+      "sha256": "5a332e982ef8de5982691905e929e12b500ada715a36dc0ccc17fdc26cb5abf8"
     },
     {
       "path": "records/delitzsch-text/james/3.json",
-      "sha256": "d5795758020e05ad297757e4faf68d969d817e4d230d775e82d398fb4d8d19e2"
+      "sha256": "1d554ed50705eb7554ea02498a84b151be0468f3ca3ff477a7a8c365a93ecd4c"
     },
     {
       "path": "records/delitzsch-text/james/4.json",
-      "sha256": "373909127b0fd5a49b63152acf32812fbdddbb42d05bc77936a7084b282d8945"
+      "sha256": "869c5a5cf7e7d6619d041f2a366f9e39061e8140883a495a9f248d2fc8602b56"
     },
     {
       "path": "records/delitzsch-text/james/5.json",
-      "sha256": "7e0d99dc5da85b431d1356ce6c4721e9d89915f9d741fc5fb70b35c8ab91b21b"
+      "sha256": "1837ffb0386285e4d7aff20bde43625dc33fa931fed1e2bd4a53bdb40104da8f"
     },
     {
       "path": "records/delitzsch-text/john/1.json",
-      "sha256": "e880bbb2cdd694964e50f78166160d16986a09443b75564ff959fb5ee8d6b9cb"
+      "sha256": "599a40a95c8b1514853088c34a017e972951a52efdd9f08b2621c1dfbf1e17b0"
     },
     {
       "path": "records/delitzsch-text/john/10.json",
-      "sha256": "49882292ce6a6e193901d62cede9dc9291275fb366f539f4cb571b3e4247011c"
+      "sha256": "286f56b9be5da054caa948303c84c7d1fc6ef06f0650bedb578343da5f317f79"
     },
     {
       "path": "records/delitzsch-text/john/11.json",
-      "sha256": "872e5f3857937f82ff8ebbebb10091a1ba3faeac6e7d2ed1158104b7237f4d6e"
+      "sha256": "bea35a3b83b86dde2cbf5793f11a84f56c7801f6de21f3926f80020bf90232d4"
     },
     {
       "path": "records/delitzsch-text/john/12.json",
-      "sha256": "3c4bc3953ef3369ab5f4b961e08bcd9106a8ba1af565081cf9cae1de689d756e"
+      "sha256": "58d4ca9e6c841081df08e1f4af239ff636ffd757bbcee9446cebf89559c6aac5"
     },
     {
       "path": "records/delitzsch-text/john/13.json",
-      "sha256": "07e310bec25abe82ebb956bf5d7ffc44fe6cda5530128cbebb745b8421cbac9f"
+      "sha256": "1338538653db180f25c137e8c4fbc5bf8b0837b83f119347742cee170ac60cef"
     },
     {
       "path": "records/delitzsch-text/john/14.json",
-      "sha256": "4a2ad7fc355b90341cd2846cd6342abd0e40dba7da57d82bec9f5c9cd3f703b6"
+      "sha256": "3e6e27c8f4394542e032772e1692083ac5b7ab0bffca52b1d13f768e02c2177c"
     },
     {
       "path": "records/delitzsch-text/john/15.json",
-      "sha256": "2241253db90060e90b460573da27513708599ad2bd67ac27ce7319bf46dd0f29"
+      "sha256": "94f5199bcabd34acf6f10a8234454387ca8f70f950d1b7a778ee73de8773ea1b"
     },
     {
       "path": "records/delitzsch-text/john/16.json",
-      "sha256": "33ed7a22be46524c26de6a147123f0580ea79e48cb867c96f92edbe19eeee6cf"
+      "sha256": "d87637f59f5961bdbf609be12a2e17a44e878bf86c15987409d424dae131fe07"
     },
     {
       "path": "records/delitzsch-text/john/17.json",
-      "sha256": "e6460b89f21f01ebae18e7276c912495587f608183219b4f6313c581e29899fa"
+      "sha256": "706430404436a3ac9490996f3e19b96d9072e9dbbe15a1d92c150e3aee1173d6"
     },
     {
       "path": "records/delitzsch-text/john/18.json",
-      "sha256": "09c10cbfca9e7a6727139a4230db0fea4c9c904befef21ca4ff3781ce85a6ad1"
+      "sha256": "97eb02ea6131a20b20793dda238e2953c0573b51c1c04d09d98d96d2c528bffe"
     },
     {
       "path": "records/delitzsch-text/john/19.json",
-      "sha256": "4c4918dbec9c440b363d9795f8b300057038e35c780d69cd9a41284ca6da48d9"
+      "sha256": "b103056527dfa844bd1d2f23378f45d62aa961def808b781ba6adf905a308d71"
     },
     {
       "path": "records/delitzsch-text/john/2.json",
-      "sha256": "9a952baee55b480811dcfd403815c006662cf3effdaaeb49efc537a04fba4652"
+      "sha256": "afc15b5751519461126fc97bf42e72d025063b761e459ff80e436772924003e0"
     },
     {
       "path": "records/delitzsch-text/john/20.json",
-      "sha256": "b09b8b0fef23e8c61f119e6394f0fb07ceb847ed7d4e4fe4ef41e889017caeb2"
+      "sha256": "e4662ede84f632d8a3f51e92f669b0304c1e5d0fd5c8fed276ba6e99a8058aaa"
     },
     {
       "path": "records/delitzsch-text/john/21.json",
-      "sha256": "5cba48ed3878e79c0b89b30a57064349bf6c6d54e7516f16e07844fc119d747b"
+      "sha256": "84765191a1fdc4d6778f81da76e1dd80bb7a38816593f366edc060fb60faf19f"
     },
     {
       "path": "records/delitzsch-text/john/3.json",
-      "sha256": "8315cc3956f2bdbb5c2706393ca3167959219c6e888a821c1bdea5c113ef9e15"
+      "sha256": "3dbe203e99b4cf0e9ed3ab0396576909d83c52fa1739de157da0300b6f2789f9"
     },
     {
       "path": "records/delitzsch-text/john/4.json",
-      "sha256": "c10aa6fc0c71d938dfb1ed8bd75a38ff6437078edfbb5fad2f311e1e336cba73"
+      "sha256": "1fef5bcb509fd0a874483a48c12734a9c0bb3447d18b0da67b7028490b14edfc"
     },
     {
       "path": "records/delitzsch-text/john/5.json",
-      "sha256": "1badffde24bf1da4380ebd99770d0abb1017f7ecad5db9cb32323da9bd4229bf"
+      "sha256": "d5a2eb07072939368011e6513d26b18164177aa68866826fd1a46d07df26be43"
     },
     {
       "path": "records/delitzsch-text/john/6.json",
-      "sha256": "7fe78f3f0c817c8a3afdd75273eadc61c94e94e6e13ca8a59cbf0e0a8d536dcb"
+      "sha256": "b96d73d9b65957fe1f3708e23c1719103171991ed7ceb0ffe94d7f740ad95858"
     },
     {
       "path": "records/delitzsch-text/john/7.json",
-      "sha256": "99d2c7852a20ba2ae0cb57dc145bb6cd43396969d7ac4acf1239d59f2b86ea83"
+      "sha256": "b5d74eafa603846c6043c58a5fa81239aa53571434c9f071e89811c0c2032fda"
     },
     {
       "path": "records/delitzsch-text/john/8.json",
-      "sha256": "21e1c9b77ab6101c68daf82625850536496343f97b9cdff1ebc619abdf705e64"
+      "sha256": "871e8a7313a63f39086bd5bd6d10a30ccb6371e2454f7b94a6433b44a4083222"
     },
     {
       "path": "records/delitzsch-text/john/9.json",
-      "sha256": "df2370e00502b51d7c76143ca3cad5a239809eded36220541293f40b0715963f"
+      "sha256": "1e7a7548e81a05ffd0c99323c0ec25cf2c25eabdb27fc2ba8799fedf8bd2df0d"
     },
     {
       "path": "records/delitzsch-text/john1/1.json",
-      "sha256": "b3a9e1d9715d935e4017610faa8a608db7ea79bbd68f77ad924204ae73ba42ab"
+      "sha256": "119f8f4be76e52b1dc4449e5b287a7d8cd970fb01450f06c86b86b26b8bd494b"
     },
     {
       "path": "records/delitzsch-text/john1/2.json",
-      "sha256": "4105db85bdb0d8fe2545b76d4eb58a75052a50d2d2caae7415ed085cffbba074"
+      "sha256": "f01f77a59936d58af0f2b007b3d489bca5d41ef2cc19355f0bc50cfce2f3c955"
     },
     {
       "path": "records/delitzsch-text/john1/3.json",
-      "sha256": "1ea7de1967af98f117699f1c1c3e23dc391d1bacfcdf12e7edd24214f3b70c1d"
+      "sha256": "75dd98c534eae306d37bad4e79ebb6e0f7459686e43079d507fc25fb97a396ce"
     },
     {
       "path": "records/delitzsch-text/john1/4.json",
-      "sha256": "72d6188689941f237cb6cc8f21d826821234b03ec0db914b00a23493ef73be62"
+      "sha256": "33aa21a13bb244dea74a64fe2ca745947730536050dc2803df2b7edf92874648"
     },
     {
       "path": "records/delitzsch-text/john1/5.json",
-      "sha256": "dda370fb931a9af2579579d7977dbc58e0e0b25006333e207fa7a37536074e59"
+      "sha256": "36c84d043ac0053d40461741dd7ef3386c521c31af5a6e8cbc93d26f9b41ecf3"
     },
     {
       "path": "records/delitzsch-text/john2/1.json",
-      "sha256": "3eed7524d43830ef25079cfcee50a37e4ac579d52a56ae6fe93c07a36cb51a5f"
+      "sha256": "6febd5f2f111a266a306cd8915463d399c92cc67a6e229ef0dfa4a13705c50b4"
     },
     {
       "path": "records/delitzsch-text/john3/1.json",
-      "sha256": "8633231161da67efb72b42bd3cdafcde3f53cd5a6327455f937f9d9c4a25632a"
+      "sha256": "c8e747124e727a6ccbc8e248055ded4b68c3f41f448c276fa4499643999954c8"
     },
     {
       "path": "records/delitzsch-text/jude/1.json",
-      "sha256": "ab71e0bc356a11fd2e9a4c6f000603b29be10055a746c4f704b72d2c8db2b9bb"
+      "sha256": "91936f3037fce56e66e5851a205bfad41562fad91138c58ac70e0a60ed8f37e8"
     },
     {
       "path": "records/delitzsch-text/luke/1.json",
-      "sha256": "d216745c1cffe920a9228d54b8ebe734e0f3abee5ad6d95693c149e4a9d5f806"
+      "sha256": "43814e0f25649f8b3cf80b7b5531b7d83fc81bcb137448abbb322cd3698efff5"
     },
     {
       "path": "records/delitzsch-text/luke/10.json",
-      "sha256": "beaef4da9c1bbbf76633c18fe447768d1024abed9f580551650e3a0b2c15691e"
+      "sha256": "8b4138689abda475c8f5a7b159cdd88124c2a7f331649f90673fb177b3358f7f"
     },
     {
       "path": "records/delitzsch-text/luke/11.json",
-      "sha256": "1abe943be1853eea51cb02db4cf79a16d2101366d97047b1616fbf8cf326318d"
+      "sha256": "0176a2ba296961f95d5cfb1ec9d62af2da5128f82163cc5ff8174bf12bda35af"
     },
     {
       "path": "records/delitzsch-text/luke/12.json",
-      "sha256": "d7677bf65008d972caaf437e0a77be7953a5cfd4e80dc60dce949843cbe58b25"
+      "sha256": "07ec0e2a4e8d69065ac8e2614cd5469b4d49ae50c0d8fd7f8eebb9b2aa20e8e7"
     },
     {
       "path": "records/delitzsch-text/luke/13.json",
-      "sha256": "ff397ae28356b1e06f9bb2f117f1a676564f912885ff3c03037e8e82155b42e4"
+      "sha256": "1175cba2e9cdd532e17c2cdacd30a3e8e2e4842931594b9cd9db3ef012410122"
     },
     {
       "path": "records/delitzsch-text/luke/14.json",
-      "sha256": "c42d475bd09bd81b3163b25542ecc34e153d3f1aede5e116e23ed53d4ed52b3e"
+      "sha256": "1d4e8badc0adbb6eb762626abd6c3e8ff69abed2159ceafa7c37dc6b0339a150"
     },
     {
       "path": "records/delitzsch-text/luke/15.json",
-      "sha256": "fb2f99f054df6eebf04831faba2ec4232362755e3c88aa2b25e07e5d3d61472b"
+      "sha256": "dd5cab4239aeabe493bd83c891fc97facf29f0d833716d410dec57e7b1c9fd5c"
     },
     {
       "path": "records/delitzsch-text/luke/16.json",
-      "sha256": "a4fb9da1ed9a9e5cb60eae9880674f3443821ecb0313cd54b0aa127ae3943212"
+      "sha256": "5bfa7d2b6d3ea6c9ef5306dca597b8b9ea4ed90ca968011467c3b4827a8b9509"
     },
     {
       "path": "records/delitzsch-text/luke/17.json",
-      "sha256": "de62c8415fe2525fcdcdb557cc7151673ca6369edf9b937125aa5923c6cab463"
+      "sha256": "c5e3f50f939a8c19f7a8886080fe8c8c899e0806f02a60a389360100bcdf374f"
     },
     {
       "path": "records/delitzsch-text/luke/18.json",
-      "sha256": "d4d923c5bccfc47561b5ef0cd2d431b38fa2e16a151e56d81eda4a9a76d225ee"
+      "sha256": "5c0c7225534fb1a33d6d7bb21a6222bcc6e199a10c9a26159862a021cd1376ee"
     },
     {
       "path": "records/delitzsch-text/luke/19.json",
-      "sha256": "d9b6d7c59ba9a4acc073567e65a5ed42d3c7947e4a83507ca87cdb4e787c748b"
+      "sha256": "04da98532ef4c56f13b192051f2a036cdff9e60058415ec1718a89fe88c7c5b3"
     },
     {
       "path": "records/delitzsch-text/luke/2.json",
-      "sha256": "b29ffdd00f9023b6ffe34b7f1bf5b5c540ca2f76a6d507f8cb9cc322ef982d27"
+      "sha256": "5ce58836bb1ab0c6edef39ba5dfd875ea9f7686844dfaa25b032cbaec7c91acf"
     },
     {
       "path": "records/delitzsch-text/luke/20.json",
-      "sha256": "18218c7b134f5d0e84b7989c37440ca0a70d2638ad167c1aab391f66fcb27e95"
+      "sha256": "e1da36a44792bb7e1aa761a0cdd31f2248a7a275fdc3065ce0f3dc02f16b211d"
     },
     {
       "path": "records/delitzsch-text/luke/21.json",
-      "sha256": "58e1c1b71166d79b3b88992280b75cd1badf89a5c4d13ecdc6b0ee94a3761beb"
+      "sha256": "b9a3f323f660d6e7fe354ee0831c8eea0decd47ac7c153ececc93d42cd73c84a"
     },
     {
       "path": "records/delitzsch-text/luke/22.json",
-      "sha256": "917a1e8eca116c5cac538ba145b0e6a3f8f58bbcf157c1050c4a606bbc06559d"
+      "sha256": "9ce38d3eb931cbec1670c2cdc7f04e038db5acfd0837b9b03cc551cab1f4b702"
     },
     {
       "path": "records/delitzsch-text/luke/23.json",
-      "sha256": "e2817baa5f9b0bdb54f882c2d31bf3898d56d9511fd104fbd234b569c21a712c"
+      "sha256": "83ce30156c52b78649d9f2e812727ddb7c494b4b40b2da9dc2710103a06ab8f3"
     },
     {
       "path": "records/delitzsch-text/luke/24.json",
-      "sha256": "bef8fbaee117fa0bcf34ef1a56077907da99d0a99df83a8e8af5d8a498de2b40"
+      "sha256": "72ce6f68c39e3461d83ad7d61edf1745924fc0055a1189948c9695d4b9b9941f"
     },
     {
       "path": "records/delitzsch-text/luke/3.json",
-      "sha256": "2bbdec82447f44a16596e41081aca668b7afc24c7262bfbe409b27a879ee8961"
+      "sha256": "ca09794f1537ca3c97da269d7ebb906e2c29b3c035260679924af6fc184d4681"
     },
     {
       "path": "records/delitzsch-text/luke/4.json",
-      "sha256": "9589806302dbe74a6f7023bbb8d06845f4271c8ab915b7a26ae12096e1f21c5e"
+      "sha256": "0dc10587ad102a133013710aa68bd563b7c8c866db3ff1ccd482348f45b57c18"
     },
     {
       "path": "records/delitzsch-text/luke/5.json",
-      "sha256": "a88a4c4829fea2f9a8dad6c7505c9f69aadeb0d29ccb3b26be5c87a76710531f"
+      "sha256": "6675b29f7df6af54d5e36219f1d6d617fac6d69a6b1a81c4b685493338ecd325"
     },
     {
       "path": "records/delitzsch-text/luke/6.json",
-      "sha256": "e861b04f953bab8c206a41322bd747ac3fdc5adc1708eee43fee4eb3d7a9e1e9"
+      "sha256": "79637d939809be807ad85b7b32b38f7177449a8b6300e3511443f8867a800b02"
     },
     {
       "path": "records/delitzsch-text/luke/7.json",
-      "sha256": "8a560a49a04c703c54d5af12009ec971249ba478404e3a92b27269008cfa8340"
+      "sha256": "fc73897ab0a15cb5f29e15c4f1ca8ddc70f835711956b8d3e257511f208bf5ae"
     },
     {
       "path": "records/delitzsch-text/luke/8.json",
-      "sha256": "4f0b98deb0ea32b4a0effad284b0c62a8a1172d470496a2e0ae6abcd5c30060c"
+      "sha256": "579ad3e97dabc27d801b4553079561a65bd6a6407b71b272bab695975a30903c"
     },
     {
       "path": "records/delitzsch-text/luke/9.json",
-      "sha256": "e7222718869dd69ea0fcb8478c52194bde17a5850a3e2603b03947d79c713b36"
+      "sha256": "eb5a305da536f0622af24638426dacc39d551b0984511b6e388659ef58283019"
     },
     {
       "path": "records/delitzsch-text/mark/1.json",
-      "sha256": "ceffb8db17142afbc6f4e6334fe5ba2de5d2e6cd23ac441a8ba9c1b72a47b2eb"
+      "sha256": "f303efd8a98c8c1b7345a6b923436ea7191e1aa95fc132995182fec72130e802"
     },
     {
       "path": "records/delitzsch-text/mark/10.json",
-      "sha256": "09bbe4bb4494aeff8c5ac688b10a99987ffd4333f6b73e8b2d83834410e71f49"
+      "sha256": "eeed02d97107419f493a255a8a0fdc0c32d9c7c0d2cd4e8c6fec5d9f10db45c3"
     },
     {
       "path": "records/delitzsch-text/mark/11.json",
-      "sha256": "20cb84a17efb1ac7a23e8a919a4049682636d1aff6c704c50ae68d8c89f3fd19"
+      "sha256": "97e1abe51f6d2ab74ecb24077bf6c4b44849bf77d7fcc72aae75ec3978bcb571"
     },
     {
       "path": "records/delitzsch-text/mark/12.json",
-      "sha256": "3c89d1bcce58be2722cdaddf6d1fb0219605d7534014756e7fc1f91a22bafd0a"
+      "sha256": "730de6352edee50ccb457e8d6c639fbb99c24576ba9fd0dfc40f524cd98c1590"
     },
     {
       "path": "records/delitzsch-text/mark/13.json",
-      "sha256": "e224a3a0856ebcbe12c6032b395316fa563befe12bc94d661407ff58a346f34d"
+      "sha256": "c3d328c27fe90884f72440f2e3b6a740b73e23345d1a6736c429bf78e1764d79"
     },
     {
       "path": "records/delitzsch-text/mark/14.json",
-      "sha256": "2aba3ede5fae58beffae0d3fa1d12699e91023ba771fc307f4c6f789e649a528"
+      "sha256": "25f8d4f72a64b5c20b3fbd833aa5bde2d2c5c087072795948ac4d0265a076204"
     },
     {
       "path": "records/delitzsch-text/mark/15.json",
-      "sha256": "86d150920fa4cdf457aa675e5a04e03a86f004f0774d3fd0cbac94f6b6605211"
+      "sha256": "ceca8f317101d1186253cb8e5208eda2ef868920ad3a24de681eeedc6fa8aad7"
     },
     {
       "path": "records/delitzsch-text/mark/16.json",
-      "sha256": "65468d36e59231924062159e05983af12f3509c568182f30ece875a24044f842"
+      "sha256": "3209801f5c83c692ea4801e0d3f881dd694ae63049705bbfa7efcab1126dfe36"
     },
     {
       "path": "records/delitzsch-text/mark/2.json",
-      "sha256": "08ca98e4d8fb0c42b0ac39cee40e7e5cdc32f6d8300367e6097da3e803b61473"
+      "sha256": "65cdcdf2e81db5fc624cc631fe6d09b7255575bcadd699ebd099deeb55a02a88"
     },
     {
       "path": "records/delitzsch-text/mark/3.json",
-      "sha256": "282f11064bc9f745d9fa44c46dbcd0e7b00c3c9fa862a605d7ea15848dafcccc"
+      "sha256": "e228a4356a33c41803e61cd81703fd0abd29a0ddf5754742e59c7f3f5248616b"
     },
     {
       "path": "records/delitzsch-text/mark/4.json",
-      "sha256": "695cd2e0ab8ba0a771ba583bf39cbd364fd5c6b9fc64d1f3afce1a6a5618a936"
+      "sha256": "0794c23c56a4b66a7f997830903d2e21269be6b9cdc42d39dbe1b3efa6376930"
     },
     {
       "path": "records/delitzsch-text/mark/5.json",
-      "sha256": "d540bf2dab59934052d5909464c78d5a596d622a2311a38c1fe052435e82c422"
+      "sha256": "5c3dc481aeff9108689ee4295515a02d37e3bb6a2967bede4962086024b568c6"
     },
     {
       "path": "records/delitzsch-text/mark/6.json",
-      "sha256": "2dd0966adbafc116d421019397a83d39eeede53a1e83411a6ad7721ec2655c79"
+      "sha256": "5c98d7023d138293881718c642233ddafbc1db0f03d22e93e5a3975e4287552d"
     },
     {
       "path": "records/delitzsch-text/mark/7.json",
-      "sha256": "b998ecb44c1a0a15567ea62a5885897b79709193abac1c2e1ea63ac84eb8da37"
+      "sha256": "ab4677d46429cef1db9bc43d05f9d9be0895f11576d240e50bf19af49e38e2a8"
     },
     {
       "path": "records/delitzsch-text/mark/8.json",
-      "sha256": "ad3048a81403bdfa88cf632a8956affa3379ee7515b3600cb8b64b0df0a46c6f"
+      "sha256": "9bacae57889ce81d067ea4c5f9a728a3621940eb6aad2185507eee9497bebabe"
     },
     {
       "path": "records/delitzsch-text/mark/9.json",
-      "sha256": "2cbe562da26c50cfb734db330d8e71e83fb724939556b67b25ed5a75f00a8b76"
+      "sha256": "26d6e254c781185530d63928bce30a2a9d051930b29dd9820d02676200124d98"
     },
     {
       "path": "records/delitzsch-text/matthew/1.json",
-      "sha256": "afa885759d3fae67b1042bab0236cf81927c4a63e5dd3a32ab9d760057aa3440"
+      "sha256": "7e00cd5643f1e0361cbe35d1bcfb29af7b06122e545625d87ddebaaabb816772"
     },
     {
       "path": "records/delitzsch-text/matthew/10.json",
-      "sha256": "51fb6432728fe9adc22430c656d150a8a8e7d04497adad3c6199b71c40a45a0e"
+      "sha256": "0edeba581ae6d21f14e0478efc5cedc390cb2287fa4a4e0d8da71ace852f484e"
     },
     {
       "path": "records/delitzsch-text/matthew/11.json",
-      "sha256": "d1941ce3a366e65b433853b1906a91120371de4092f87eb7ad1d86efd0f7687d"
+      "sha256": "06891ea51db7391a34086eb401715a9b2b9e2e8839f3279ea13a10e9728aaad5"
     },
     {
       "path": "records/delitzsch-text/matthew/12.json",
-      "sha256": "aa515093ba970aca6448a34584fcbecd9c06fb43ec9f94da73f2739fa5974aa4"
+      "sha256": "49ebdbacec761385a704627c28c4d5b7d9fe06cb0e0ba106a01bcf8233d19fec"
     },
     {
       "path": "records/delitzsch-text/matthew/13.json",
-      "sha256": "685b8e4be0c6585bd02f7c3ddd9d1633027aad4df727ab2a0d5f379566ef7096"
+      "sha256": "5e94ea370ab66272f5d5b9021c4ca3123333ccebfa27376f9760b2d725f53aa7"
     },
     {
       "path": "records/delitzsch-text/matthew/14.json",
-      "sha256": "3837b470e68aa66f6d25ed7f639e8539b7b206c13f7093c91a1b7a94e1f2890a"
+      "sha256": "3e52ca263a0bb80f5a139eae81a7cdf22e876f892fead6f37eea1515452873fa"
     },
     {
       "path": "records/delitzsch-text/matthew/15.json",
-      "sha256": "0de39f88137d675da068182843237e7c45c51f71ec7d3d5c24aa0820e8513b2a"
+      "sha256": "173179d36ee89b6a5f24b22d43c5ea2cd8283e8cd40f2fdd1fc3a875e7103d75"
     },
     {
       "path": "records/delitzsch-text/matthew/16.json",
-      "sha256": "bcb13275e908800d7f28ee99a44da01435be22accfd671452b6c97d07a4b58ac"
+      "sha256": "4cc5eac845fab628df4d56b4a01b3cc1f710c1f397a5f57bf2105e7faa4d0f4d"
     },
     {
       "path": "records/delitzsch-text/matthew/17.json",
-      "sha256": "1637adb6ccab1beab4ae445dde166e32a606fa91065e661431b5508679d612ba"
+      "sha256": "ea1b2281791773a847f7aae00d6593813b1a731ec5d0ee4bb2eab16ab255e38d"
     },
     {
       "path": "records/delitzsch-text/matthew/18.json",
-      "sha256": "c2de0bd0ddf5b965c7f00465a58f4119c6e7c62f1af3d641cfc5683a4b562262"
+      "sha256": "73af2707b7e6ee7f518c9ebc0268ebc10140f64d210af6e924438441ab813a9e"
     },
     {
       "path": "records/delitzsch-text/matthew/19.json",
-      "sha256": "4fa84385444c88ee04948f2892d16ccfd2f60809457ae53547bb34eeddc09fc3"
+      "sha256": "6d4a1c43bca063b5ccb2bcaf710c92b0b9dc5c43e42c4ce3e3d6540a842fad18"
     },
     {
       "path": "records/delitzsch-text/matthew/2.json",
-      "sha256": "4c74b5025c449bb60b9923272e0390f1d98fcb656c87e1dd5598390e4cd8ade9"
+      "sha256": "19b2c5cb191ffd80130628382c216759afd5f39ed0c3c14ae6b09f787cdfff8b"
     },
     {
       "path": "records/delitzsch-text/matthew/20.json",
-      "sha256": "b5db4e9ec0e48d1d8894fbc72349cfd0628ab0633ca785fddac969ab5fce4e9e"
+      "sha256": "df35acb5a7946bca8da4e2d98eac7fb159c550f5c8c2010905cd30a6f772f35e"
     },
     {
       "path": "records/delitzsch-text/matthew/21.json",
-      "sha256": "18f2df00f9e81958740f57b07e939889fbcdd98797134bb9d4c91e2aea35fbcd"
+      "sha256": "553a420cdf4a6430bd2912e0ca9605e045512ef795af6a7777b0ba23c6221df4"
     },
     {
       "path": "records/delitzsch-text/matthew/22.json",
-      "sha256": "e049d500a155084be8182fe4a93955be1220dc6110d62e5302aa8bf8548258de"
+      "sha256": "982ef667955687897bc0feeef4ed2990c07fd6c285145295294c1e6e4c19fb6e"
     },
     {
       "path": "records/delitzsch-text/matthew/23.json",
-      "sha256": "ffa29ba83800e3d993ea3fd1df64eb9fc73f4e815cf8190130264b8783dfc12f"
+      "sha256": "7870855165119b636f567f7c605982cccfba7db2b2ebf94ffc45aa4e1c35d2b7"
     },
     {
       "path": "records/delitzsch-text/matthew/24.json",
-      "sha256": "1fdf83663edd8764d29b755d6460fe90dad0d47a8de38b1aca51bdc4c1b9b294"
+      "sha256": "968ca1bd68b501faba2363e5b6cd7b14a80a56adadda63f82f5ef6bd08284e42"
     },
     {
       "path": "records/delitzsch-text/matthew/25.json",
-      "sha256": "c0ca54b681975f53c77d30a7ececf379435355fe08d61034004918234ee8d200"
+      "sha256": "f9eec6e218af308bc6f9efccf185517e06eb01f5c25138d31da8630fa8294b5b"
     },
     {
       "path": "records/delitzsch-text/matthew/26.json",
-      "sha256": "82f5458a998dbd4a8ae14aeabe5eaa1c45673335ee1231de8b27aa6173d56380"
+      "sha256": "914b0c2221a1c3be9913fe97d1d1d9ab698be2cca7c8f614150f8023fedeec4f"
     },
     {
       "path": "records/delitzsch-text/matthew/27.json",
-      "sha256": "cd1efccdc37e2f196087a12295a1fc19877deb0e8d69060d233aa0e2b70f9c33"
+      "sha256": "5c5cf4675fbe40cbb15e67c518def5c31db8e8da74b20cfc4c2973088842e661"
     },
     {
       "path": "records/delitzsch-text/matthew/28.json",
-      "sha256": "2283ebd1a6bff8b068b2a1810cb03c1b572c38f8c2de9a3e377f423f755b24f1"
+      "sha256": "1747be63e09c1eea21ea78404add0b0c183346434fe15109a6738887e29c1555"
     },
     {
       "path": "records/delitzsch-text/matthew/3.json",
-      "sha256": "e32b64f58ccc6a7453c17bbf7d48a962b9714f05740ade325437e1edfe3ec0fe"
+      "sha256": "734b2c5d046237cd261cb926a24b2f022e50ebaaf26b57d5de71123fb34ed86d"
     },
     {
       "path": "records/delitzsch-text/matthew/4.json",
-      "sha256": "2b1bd732c240fcea842b9552716bb0807c8f4202e71398bec90b1e5dfe737c06"
+      "sha256": "edc8028bc2d3ed0d3f13f76c3c0c2f93d4fa60d590fc50748825e0d00b569f0a"
     },
     {
       "path": "records/delitzsch-text/matthew/5.json",
-      "sha256": "a257379d060d5c20cf586435ec315c65953e4439c511166ff4d66df90ef28170"
+      "sha256": "74175576faa3243ab35b4c9efde77998caf8745216522c8c34dee51328b6f8f3"
     },
     {
       "path": "records/delitzsch-text/matthew/6.json",
-      "sha256": "cc607271b0f5c0709660d4592fdd1a5e25b14f0a687f86e4a2e2ffdd1fa461e3"
+      "sha256": "5b20a0d0e10ad171809e3960b772ee23919886378a95010e1f1041d53b601f6d"
     },
     {
       "path": "records/delitzsch-text/matthew/7.json",
-      "sha256": "d4a7347d76b0e1400777b4dd6d017b095b38908864ab4767432f2b7449a0a240"
+      "sha256": "e40d46d834075b12bb6ee354d8ce9524373004185ec7e4334c999f2f95b3c87d"
     },
     {
       "path": "records/delitzsch-text/matthew/8.json",
-      "sha256": "5030ed0e64585a4ccd1420601857f9f30f53eecb67889114250593b56e6c95fd"
+      "sha256": "cc64bb4627939ed7abc73c7821fed78302f389b2feb910fbabe1bf1edbe4734a"
     },
     {
       "path": "records/delitzsch-text/matthew/9.json",
-      "sha256": "bfb92d41d5f34f2db7bf337de567c4b89f6511b05b10aa9436dd5abb9f065f3c"
+      "sha256": "bf6c0eb328d10e01256b8a06db1b4dfda281890d18cd601c8a8a558f7c34bbbc"
     },
     {
       "path": "records/delitzsch-text/peter1/1.json",
-      "sha256": "1e2b8c87254fbe7175c6c1c774eea6246bcf187e09679eaebeb8515f96d336ed"
+      "sha256": "733793f19264324a428c3d119f66b15e4649d74ce7a19a03a8dd4337cd147db7"
     },
     {
       "path": "records/delitzsch-text/peter1/2.json",
-      "sha256": "99933a11c31dcf7d65b8161ac71ed3cde7e72821edca1ea87c1d195a6e0b6201"
+      "sha256": "2b3950cdc428097f81241fc496214ca7bbe6668fc67adbedea6f5fe211aac423"
     },
     {
       "path": "records/delitzsch-text/peter1/3.json",
-      "sha256": "0182775f6de0d95f476d9ec9098bf01ef5f21a600950c62546b175ac0f63fd13"
+      "sha256": "4e4ec66479140c9b7c31fc9e22911aeb58f161ed3388ec3906c0644cbd02d8be"
     },
     {
       "path": "records/delitzsch-text/peter1/4.json",
-      "sha256": "34a5d3f17d67dde8a0b47e4a964bc681ebdf85457a26ac3b8ac9efc5f2321109"
+      "sha256": "b2794c9f32f24c6921921d967bc5d25abc688474ae412978f3fe68dfa9ae9b21"
     },
     {
       "path": "records/delitzsch-text/peter1/5.json",
-      "sha256": "aa96f4b85800cc0af52174ce28b5d3d443fe72e4b6fdd842f0950849f8e717c3"
+      "sha256": "64952e1488cfb6f7092851dcae70a325cd254a2f0fcba67b3ff1f065f8e03247"
     },
     {
       "path": "records/delitzsch-text/peter2/1.json",
-      "sha256": "3d65a562f15dfe295b08958c403ba3ac40036fc54beae9bb194082cab85054ee"
+      "sha256": "6f92129383c10f8a4b37846d26dd17c79223e023456bf05e2376efb937b82ff8"
     },
     {
       "path": "records/delitzsch-text/peter2/2.json",
-      "sha256": "d0be5cde4814464f73a85b5e992b11971b37b6863da62adb4d723cc9b72e0813"
+      "sha256": "b4d5819c7a1ec08d7a8dbf3b2ad03d32cd6bc54fd349ea6ad214baf7b1f48d16"
     },
     {
       "path": "records/delitzsch-text/peter2/3.json",
-      "sha256": "8d9c549fa62abe08e030739f41921bca50fef29fd021fde98d64025b0ea690f4"
+      "sha256": "e72db76cb323baba2099fabc8485b34446266f85051ffc0be92fa9d92a471e53"
     },
     {
       "path": "records/delitzsch-text/philemon/1.json",
-      "sha256": "fcdfe24084c172139036df375d9920993c4a6a82fb4888aa6fba6a463b6d1a43"
+      "sha256": "3536914101d28eeb19a5b6b61b7316aa96521ff6bf532e75cfa031ed7bebe341"
     },
     {
       "path": "records/delitzsch-text/philippians/1.json",
-      "sha256": "c251a498a5a86d748f78765765b5668bcc556db1337553659a6d33b117bc23fa"
+      "sha256": "f7a8d0764955cd1071f9fbeec051705e6ba5ffb2ae19043b76af1d1c7a0fd909"
     },
     {
       "path": "records/delitzsch-text/philippians/2.json",
-      "sha256": "2893996c1536b75712501bbd7832ca3d2cce790df3a40c57f601bace84046a73"
+      "sha256": "e8e4bfd97f832c30877b300b633d2a27f96509e6c3e5125951465a70b1b54938"
     },
     {
       "path": "records/delitzsch-text/philippians/3.json",
-      "sha256": "876ff4c339cd01c2c7dd26b90ffeabc3d9808458f8d3322e84b1f8814cdb1b62"
+      "sha256": "8ab300eef206e09cef3528be395607d8fe09360a13ed7d8f8dfffe0a6311a5ce"
     },
     {
       "path": "records/delitzsch-text/philippians/4.json",
-      "sha256": "a08b22d9245d01d2a78fb9cfd849771d9d58136ac2f7faaa2c82da9040b3a91b"
+      "sha256": "96a50288387660fc080c4d411026b8be725b4120fec903569abc8e3cbf4a3163"
     },
     {
       "path": "records/delitzsch-text/revelation/1.json",
-      "sha256": "e092dbec7d1a03364e124109dc895323882f99d25c88580eeeaeb0531bd87006"
+      "sha256": "493f346ea5921525597fdb4ef4d4f20e46a24e2880bd96aa719a343c08072820"
     },
     {
       "path": "records/delitzsch-text/revelation/10.json",
-      "sha256": "b0af16d55b1a1733f07e0f182d9e59b34f8fbc920f4bb0940b3e1749953b4c10"
+      "sha256": "eb7125d8c19e1286d22edab49559434206d9a2b9b1e2d0c9268bae71dd6c67f3"
     },
     {
       "path": "records/delitzsch-text/revelation/11.json",
-      "sha256": "3bebcf8d274abbd5dd086e008c01a8984d223f37ac60a5539262cc4c97d97d82"
+      "sha256": "18b6ac39e480b216b63f0e94aa73a280dc7f36323c5613a6de31bd3a483e3487"
     },
     {
       "path": "records/delitzsch-text/revelation/12.json",
-      "sha256": "3931ccccc370c14bc37a066a90e731bf8069371fc2331b9113f7687c957af27d"
+      "sha256": "cab12a63ea679f306a6e88f24f6307ba34dd459cfcecc96146d4ce6680c8b0bd"
     },
     {
       "path": "records/delitzsch-text/revelation/13.json",
-      "sha256": "a4eb6b036b305d062b38d5cd5e90d69cac96bd620db3a7eea054899850e67dec"
+      "sha256": "53be807f54e40133233952a0ed3b99e9006105fdb3c712754122c33bb05f94e6"
     },
     {
       "path": "records/delitzsch-text/revelation/14.json",
-      "sha256": "6218dd2e9780edd0c4a9253039aa9d2a779976352ac7ca658dc0459e339cbd17"
+      "sha256": "970eac600f34e9ac85c3196903c118ce5c7d77341334c1b384d83e3412afebc9"
     },
     {
       "path": "records/delitzsch-text/revelation/15.json",
-      "sha256": "21170d6fb14799fb79ab70dcf4598b817cee16b8ed02fc1a86ec944f6d5a41da"
+      "sha256": "ca65c53ea8eb699cad7f4b474e13dca328c181d1a8f4428bd6af4f30360cdf84"
     },
     {
       "path": "records/delitzsch-text/revelation/16.json",
-      "sha256": "cf397f30c57422b278d81005f9a7e67f469ab5e432d3046aec0da226527904d2"
+      "sha256": "14ed152e715fc3c228f974be3de58f966aa0e0ea03ef62494a4ff2f4203f61d3"
     },
     {
       "path": "records/delitzsch-text/revelation/17.json",
-      "sha256": "6fcb040d5c8e657e4ac7c9b795f2bf64aba921dfa250d7a8d330b3827fbf9203"
+      "sha256": "3e56509b3fc97afce2469ad615d670b802f175e8aa3f12bee4d63dfe28b3f9e7"
     },
     {
       "path": "records/delitzsch-text/revelation/18.json",
-      "sha256": "79b0d92da73e0682b8102600be161b6686e0d291814c06221f75d96733a3ccbe"
+      "sha256": "9740cf42ad56afa84d9f71916715137934411c9645383808bddede14c9f7ba7f"
     },
     {
       "path": "records/delitzsch-text/revelation/19.json",
-      "sha256": "9f0992949941821d218833a5fa00d19055454ff4f5e3082d304911c3da4136d8"
+      "sha256": "b4da4680b73cb7a3f3e45ff0436c2e8855bf9f32c17b2783aa77b57104f5fd95"
     },
     {
       "path": "records/delitzsch-text/revelation/2.json",
-      "sha256": "8ce2e1e4e8119ba9bc890468de90c1044e4631120b6307d3c93c50fe0b685166"
+      "sha256": "d35a5a6f2c94e32f6504e52e4dc13a910e8de82486722201eb35257c27fb10b8"
     },
     {
       "path": "records/delitzsch-text/revelation/20.json",
-      "sha256": "5e9c95e37d2b927985a98b42b157dc29dbc0debcca1d35aad1b1654b387152c5"
+      "sha256": "85cb407e31a04fb2764fde3893e28b7b5824be3fe923a32fb6327a1809f7f384"
     },
     {
       "path": "records/delitzsch-text/revelation/21.json",
-      "sha256": "a312b4066298f79b165922d8c4933e1c2743874e5e6edebba891b45a51b64cc5"
+      "sha256": "0a3f1ab440eeeda2da29a3c9b4a5a4c5c24c0beeadf1e00843a293a130df2bbe"
     },
     {
       "path": "records/delitzsch-text/revelation/22.json",
-      "sha256": "23e2e6c7de76922aeece6cd7855f0d8ae1477e55cee93c79eb67d28b2f8af98d"
+      "sha256": "364f1cb3384da021610d53ba9c40d5798b1555f2427090e9c9adaa79ee3a176a"
     },
     {
       "path": "records/delitzsch-text/revelation/3.json",
-      "sha256": "5cb262e6bf35bb791b6c34f8f0b9f4086b520a88b8a107a19bc2668b31f68285"
+      "sha256": "c13ceb6e8e7ea50026961e6b6d7fb73ac63695559c1b1b6525473d1a42f80b13"
     },
     {
       "path": "records/delitzsch-text/revelation/4.json",
-      "sha256": "011fa6e11eef3fb19ba7bfa0611b619709437fd597d0b967968e4d14e860f615"
+      "sha256": "0a7616944c4a0b96b1182711b6df2340a8a55a1e0c067c325fc1524249033c82"
     },
     {
       "path": "records/delitzsch-text/revelation/5.json",
-      "sha256": "ef2fe7622910f1193f09c931c4b57f27c72d78a8f45979436bfe55f169bd9a69"
+      "sha256": "359d74af08ee3f485d9312f340bb66d4b3b39466d21ed8a8b3a46769171db8d2"
     },
     {
       "path": "records/delitzsch-text/revelation/6.json",
-      "sha256": "85b6e0eb888552dba648dfabc25d30c0e62e48af8baa73ff10fee76b7d5656d7"
+      "sha256": "d16d3431919c09364d6dd5ae4993c5b1595551ba226760ddc3975140ac4d67f1"
     },
     {
       "path": "records/delitzsch-text/revelation/7.json",
-      "sha256": "a3e2b1681160e0634c977444e0397d9518dccf2da9f1a2f964ff680c94e2ed77"
+      "sha256": "77fa7067064aa0ca5f6047cc427df446c0f902e6ad3437917c2728ed23b527fa"
     },
     {
       "path": "records/delitzsch-text/revelation/8.json",
-      "sha256": "a2775ddd8ecb9ec4902d8b3066e6b3f6d01cf1ca0d3dc7ec435ec31be68b6c09"
+      "sha256": "bfb7c0d272b4758c98602bf4da692293b52271ea22a0e146fce31d860c190589"
     },
     {
       "path": "records/delitzsch-text/revelation/9.json",
-      "sha256": "6acf7293ac6daaafe74c67a795a822de7fcc7cc68d463fffba179626c98a3620"
+      "sha256": "67369d876513e6bf432f2856c707f7c70f20cb9f019500a8c56bc86d952d3866"
     },
     {
       "path": "records/delitzsch-text/romans/1.json",
-      "sha256": "56abb16dc9fd7468df4a94b4168a6de1248f40102b93aae08a893f00ab36cade"
+      "sha256": "b3ca40b52f5db45b8898b680cab69b22db5fe650960fc4aa8c692079d3765ba0"
     },
     {
       "path": "records/delitzsch-text/romans/10.json",
-      "sha256": "0cdba6213aad964a60edd39e13c10a368c004927b68991cea4550529072a07ec"
+      "sha256": "08b070fe294b67c60e3ffbba48e3eeda2946fb33c1f81562cac9f377e8baec28"
     },
     {
       "path": "records/delitzsch-text/romans/11.json",
-      "sha256": "35ab382deec5c3c3d06251e78a163c95334d318368578b6f16b4a878e632ebe5"
+      "sha256": "1cb3adfc5de3693ff6bd020ef8f26ce4c5a6e1d667b04477df21a48577964991"
     },
     {
       "path": "records/delitzsch-text/romans/12.json",
-      "sha256": "784dc96dfb5d6ecfc11f24dfcd59fa6a6233436fbafeb089a65081de79e2643e"
+      "sha256": "4767bab2cc71790c1c2a20759552f8b0e7ddaba8105784be6fe647131ba25865"
     },
     {
       "path": "records/delitzsch-text/romans/13.json",
-      "sha256": "1fd1249e699ee548e5bae44a902c08604773823137e9a9ad37f1f45c34962933"
+      "sha256": "dcf581863545394cf4e05b6bce9523c6a315b1e771bf1de9c633a17ae87a3eda"
     },
     {
       "path": "records/delitzsch-text/romans/14.json",
-      "sha256": "62cadb74a4bb5b35ab01a02f18c9117f40db2bc4f44d9a1a3f7254097f5c482a"
+      "sha256": "4b4d78d334986b08f4b457c523b2a1e7cf772c81dfc6c666f4f3bd92213207a9"
     },
     {
       "path": "records/delitzsch-text/romans/15.json",
-      "sha256": "834dfe59d96681f7e71d2a9a51c1a85bad640460e2a9c8b1069a1da2f8414bf4"
+      "sha256": "cba276fc04dbdbcd0de0d719023574e377867e24c7f5deef832b0d90378f984c"
     },
     {
       "path": "records/delitzsch-text/romans/16.json",
-      "sha256": "1993df495c3704db98ee97cd1280dc5db90d5e483d6fcc294cd233bd70a67111"
+      "sha256": "65f67387d439b8cfffccd9fce253b895b672eda31ae8b57586e6a543d1373f59"
     },
     {
       "path": "records/delitzsch-text/romans/2.json",
-      "sha256": "63c1578f741135f9f0021755062aca91c1a17d87a0e55c6f38ca15ce0734fff8"
+      "sha256": "eb305587c94206a1679b5d5e1cb67d979707ef4ab9c4ac26d2fbb816f133744d"
     },
     {
       "path": "records/delitzsch-text/romans/3.json",
-      "sha256": "27b71a7237024c4407e9276d0b34267e07c258c1cda62488f3493497f3b0a204"
+      "sha256": "13bf94d72fb8c3e485d299ece472c3ffdc782b1f8a034b006ec58a281430decf"
     },
     {
       "path": "records/delitzsch-text/romans/4.json",
-      "sha256": "a297ee78d942595ce10d5759f5db7ab1ff5c5f735bb66cde351294646c3b2a2e"
+      "sha256": "59aeff87bc1029b3158e116844806566dd3184fdc303e0a2ffedbce2aeeff148"
     },
     {
       "path": "records/delitzsch-text/romans/5.json",
-      "sha256": "8ac22bc788a75e39e8510f2f4cc5a314b3441b62bda35e1a7dfc39a69ca48bfe"
+      "sha256": "5616207d02628d228ec74172b3532711b8d58d351abcfa576c3ab37f82753d85"
     },
     {
       "path": "records/delitzsch-text/romans/6.json",
-      "sha256": "fbc6ddc9d44177a0b0c704aaed80d52a87c37a0c7bfa9d42f9cd53ea24601f91"
+      "sha256": "1b1a31e936b9b831b3dd03682ea1155f536e75693e6d49b545b1e5f76be92cd2"
     },
     {
       "path": "records/delitzsch-text/romans/7.json",
-      "sha256": "452cb598b61915cd7ef262bbda1dccee4f24953ec43995345dce2c66b1cdef4f"
+      "sha256": "6b5c6f7a0c72b16eb616433ea2c7a35fd8a0be27559a3351ea52bf71eabeb58c"
     },
     {
       "path": "records/delitzsch-text/romans/8.json",
-      "sha256": "5b0040a9deb3197ca8bc3240c8357fc71848f9321d7be14b74384e30b789a227"
+      "sha256": "89dabc2f5b36983a2bba746c2f09371668ee5e792e1e959090b9b503ca55162c"
     },
     {
       "path": "records/delitzsch-text/romans/9.json",
-      "sha256": "4655ab4354a56fcec99eb33fd890c92b5d081649e9b106213711b9a1d65e93e3"
+      "sha256": "c1312f0560a79e1f82f068d69b69c4f7103ac44de64ef32cb75a51e72ef41bc4"
     },
     {
       "path": "records/delitzsch-text/thessalonians1/1.json",
-      "sha256": "2584ba455a0fa77999dfa8645ab7f74604c58f94f08f5292dc0e3273f9aa93db"
+      "sha256": "6aecf396d45171e9aff48d16dc4e8512cea3bff31b01b42b76a210d46cee9f1a"
     },
     {
       "path": "records/delitzsch-text/thessalonians1/2.json",
-      "sha256": "d0a22b7c89118a3ac7469bc66e129a9bca3d9946c1a9eaf5b1c60833f108cd6f"
+      "sha256": "25eff3bd46367be80e44175ae973d770d7e0c05a4a854f58b633e086ddcaa51a"
     },
     {
       "path": "records/delitzsch-text/thessalonians1/3.json",
-      "sha256": "08be56b15056c4ae0304827ab65c363eb8c796c2ea14d583e651ddea939af355"
+      "sha256": "cf499482cba54a4926d0601afc7c07809a4659055594a02b65b19efe9c9a589b"
     },
     {
       "path": "records/delitzsch-text/thessalonians1/4.json",
-      "sha256": "2a2273731f3bf4e32336bf486d314521d8e2c28c697bb0c8ee7dcb917a580759"
+      "sha256": "fb5458dd3375b76a8f5f0b66886ab97fadb5772aa2eb25b1cf976bda4a7b869f"
     },
     {
       "path": "records/delitzsch-text/thessalonians1/5.json",
-      "sha256": "df457423b988ae3d79d898ae9f070336ff7369ac2c43e3eb80d34ae4989c7f42"
+      "sha256": "910b1e6562031beb148a1113c256d1b6f366221f2a9cbc7ff91b4c62c4984ffb"
     },
     {
       "path": "records/delitzsch-text/thessalonians2/1.json",
-      "sha256": "65f94055ee4f41356bf8d64445a6577052b8bbbc74d4419dff4a5534fc555e5f"
+      "sha256": "c01c2227b955cd44c89ad9ff5b1aa51701bb859504fbb75087ddf15c8029cf1c"
     },
     {
       "path": "records/delitzsch-text/thessalonians2/2.json",
-      "sha256": "ac55f9103209d58f9272f75bdf89fe9863d4c92322e6a368f3840fe7f8accd2a"
+      "sha256": "39be999520a2ebb37a8cbd4f3f4534ef5cb3f61c00f0527c27c9bf05401d45a6"
     },
     {
       "path": "records/delitzsch-text/thessalonians2/3.json",
-      "sha256": "ec21546620d7d6cc429b20aeb0888c7a04cbf2d1ce955e2cf8a0008ea10f2743"
+      "sha256": "4dbc37621bd6883183a49004f8eb0be264b06ab6fefc4ee7954c63a079301a0a"
     },
     {
       "path": "records/delitzsch-text/timothy1/1.json",
-      "sha256": "0c1bbf55c722782d5844a9d53804783d31830c39bbc9f382cc4b2ec01932525b"
+      "sha256": "f5f67c14b3295c04df622c77a9a70eedd2ded2e0a6032468369880948ba85da9"
     },
     {
       "path": "records/delitzsch-text/timothy1/2.json",
-      "sha256": "5f2be2075c52aef3f75c2bebec1d22aea4bcf2fa40aab76f69d964a21d16c9f0"
+      "sha256": "d6bd2660976a36beb138fc43d387869c30e0148c160fef220dbaa9aba25a25a1"
     },
     {
       "path": "records/delitzsch-text/timothy1/3.json",
-      "sha256": "d9fe036a9fe216904980bfceac399d8c8ec3e3b9e5251c5d6bc94bded3231b4f"
+      "sha256": "f78051b021fd51adae9b65ad1664979bb08cc78b69502c1e5c6c143d5d029bab"
     },
     {
       "path": "records/delitzsch-text/timothy1/4.json",
-      "sha256": "c50234b6f6947d7cbbc44f06877533b0608fa0b045565e255f57284176d352ef"
+      "sha256": "7e5ed04a62f574a1227955a12ed3a839faa09f9899cd360a649d396736ffc6d7"
     },
     {
       "path": "records/delitzsch-text/timothy1/5.json",
-      "sha256": "52062f1f09b0718d3ba24e49570fad31f88e9d35fe37514370d31fc16db8ee68"
+      "sha256": "7be8551ff87152c7d69c7eac0bed836e0434c81cea678637f06d267922cd5305"
     },
     {
       "path": "records/delitzsch-text/timothy1/6.json",
-      "sha256": "1904accde510b0229fc3ae3f2744541cb65fdc6d251b6272c1fa478414d94840"
+      "sha256": "47ba2df4a82f3c371d11f4d7b9383f9335f09826c6d5a3958631d950fab6484b"
     },
     {
       "path": "records/delitzsch-text/timothy2/1.json",
-      "sha256": "6f07062a00599c9dc8625904974fb1617bbd4627b4fa245f67e8375155ad37a2"
+      "sha256": "5e42728da134b1563ff047d0d49b03737cc25c44132badc550e87820f25745c3"
     },
     {
       "path": "records/delitzsch-text/timothy2/2.json",
-      "sha256": "7a7175a0b13e921ceb7e88d47b3afac0f49d4ce7a82d67de53268280ad3d36c9"
+      "sha256": "9774d0900c7d776b44b036383cac25d92fcb3d6b4041fca4b30980d018696d64"
     },
     {
       "path": "records/delitzsch-text/timothy2/3.json",
-      "sha256": "6ed7c013e95403e12abbe1aa4a42531df59668356ae048e5dffcb53f8a04973d"
+      "sha256": "ad994f23842e957c22328862deea1e2232eb42a9041f318b0769877103dc5610"
     },
     {
       "path": "records/delitzsch-text/timothy2/4.json",
-      "sha256": "31c08557ca13a344b3a51c8a5bd3a9c7524b63c48579d5a7d5b2d30762705d9c"
+      "sha256": "63d5569043d028d02fb325af94427c60346cceae4015a712fee6e49bd1093f3e"
     },
     {
       "path": "records/delitzsch-text/titus/1.json",
-      "sha256": "2ccc1b20eb700fc8bf3343619d9180bd1c08168ac6e98117c61007dd7603605a"
+      "sha256": "c2762008b9f42d09fe561a49ded6847874283c8f2ca92e183c43fdf17d1e9c1b"
     },
     {
       "path": "records/delitzsch-text/titus/2.json",
-      "sha256": "dbd922864f792eefc3e37368fa606c67e050fa48a15e3ba1d1ae0df9571c035c"
+      "sha256": "4f3777b825dd0837321b025e23d696406e09ef90f9b080b279f19940e5ef224c"
     },
     {
       "path": "records/delitzsch-text/titus/3.json",
-      "sha256": "a8ff7197dcbffbcc6d0792ddfc9a677a976348106c5e37a43931a7b37f270f7f"
+      "sha256": "92de16bc82da361b6ec676a9690d3004d9d37ad6bd546f71d8b1d5d4c215960e"
     },
     {
       "path": "records/greek-lexicon/lexicon.json",
@@ -6075,7 +6075,7 @@
     },
     {
       "path": "reports/coverage.json",
-      "sha256": "42650e70c6977c898c58a4c45c2a5b49fac53596fe5e1c61c8c06c13498d912a"
+      "sha256": "beea0def46e91d850948ba376885bab983ca41ec44c66dd1b5b46556b72033e2"
     },
     {
       "path": "reports/unresolved.json",
@@ -6083,11 +6083,11 @@
     },
     {
       "path": "reports/validation.json",
-      "sha256": "8533721a6262fe567ccc7227462b141e634ee3c3f65ff138f82b12fc89dcce3c"
+      "sha256": "61998cce97d3ff88eefe4215b4ebe349473241426fa60c462f97a8c01ec28e96"
     }
   ],
   "generator_version": "1.0.0",
-  "input_manifest_digest": "a3b14def6f72ef4c457ccaa22e2eb758d93d41daa66fb6419d14289002bcaebc",
+  "input_manifest_digest": "92c56470e52c7e07afaef303d4b81d88d9727161aeb1aa3f02ca25aaf13e52b2",
   "inputs": [
     {
       "id": "oe/amos/1.json",

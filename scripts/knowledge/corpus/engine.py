@@ -1,10 +1,11 @@
 from __future__ import annotations
 
-import fnmatch
+import os
+import re
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Callable
+from typing import Callable, Iterator
 
 from ..build import source_record
 from ..core import (
@@ -16,9 +17,10 @@ from ..core import (
     encoded,
     read_json,
 )
-from ..validate import SCHEMAS, Validator, validate_locators
+from ..validate import Validator, validate_locators
 from .families import (
     ADAPTERS,
+    SEGMENTATION,
     Context,
     Input,
     Normalized,
@@ -31,25 +33,69 @@ from .families import (
     chapter_of,
 )
 
-NORMALIZER = "corpus-1"
+NORMALIZER = "corpus-2"
 SNAPSHOTS = KNOWLEDGE / "corpus"
 DAVAR_REPOSITORY = "https://github.com/jhonnyisaacc/davar"
+DAVAR_SCOPE = "data"
 DISPOSITIONS = ("included", "unavailable", "restricted", "deferred")
 REPORTS = ("coverage", "unresolved", "validation")
 CHECKS = (
-    "pins_match_bytes_and_discovery",
+    "pins_match_discovery_and_shaul_bytes",
+    "every_source_file_has_exactly_one_disposition",
     "inventory_dispositions_and_evidence",
     "record_schema_and_domain_integrity_per_shard",
     "provenance_locators_resolve_in_pinned_bytes",
     "identity_unique_across_shards",
+    "native_reference_unique_per_edition",
     "passage_language_matches_edition",
-    "withheld_token_fields_absent",
+    "withheld_token_fields_and_segmentation_absent",
+    "source_record_count_matches_native_structure",
     "every_source_record_normalized_or_unresolved",
 )
 
 
 class PinDrift(ValueError):
     pass
+
+
+def glob_regex(pattern: str) -> str:
+    out, i = [], 0
+    while i < len(pattern):
+        if pattern.startswith("**/", i):
+            out.append("(?:.*/)?")
+            i += 3
+        elif pattern.startswith("**", i):
+            out.append(".*")
+            i += 2
+        else:
+            out.append({"*": "[^/]*", "?": "[^/]"}.get(pattern[i], re.escape(pattern[i])))
+            i += 1
+    return "".join(out)
+
+
+@dataclass(frozen=True)
+class PathSet:
+    include: re.Pattern
+    exclude: re.Pattern
+
+    @classmethod
+    def of(cls, patterns, exclude=(), prefix: str = "") -> "PathSet":
+        def union(items):
+            return re.compile(
+                "|".join(glob_regex(prefix + p) for p in items) or "(?!)"
+            )
+
+        return cls(union(patterns), union(exclude))
+
+    def __contains__(self, path: str) -> bool:
+        return bool(self.include.fullmatch(path)) and not self.exclude.fullmatch(path)
+
+
+def tree(base: Path) -> Iterator[str]:
+    for directory, dirs, files in os.walk(base):
+        dirs[:] = sorted(d for d in dirs if d != ".git")
+        for name in sorted(files):
+            yield (Path(directory) / name).relative_to(base).as_posix()
 
 
 @dataclass(frozen=True)
@@ -64,6 +110,9 @@ class Include:
     repository: str | None = None
     revision: str | None = None
 
+    def files(self) -> PathSet:
+        return PathSet.of(self.patterns, self.exclude)
+
 
 @dataclass(frozen=True)
 class Family:
@@ -71,7 +120,8 @@ class Family:
     disposition: str
     reason: str
     evidence: tuple[str, ...]
-    paths: tuple[str, ...]
+    origin: str
+    files: PathSet
     include: Include | None
 
 
@@ -83,7 +133,9 @@ class Snapshot:
     editions: list
 
     @classmethod
-    def load(cls, root: Path, name: str) -> "Snapshot":
+    def load(
+        cls, root: Path, name: str, external_roots: dict | None = None
+    ) -> "Snapshot":
         directory = contained(root, (SNAPSHOTS / name).as_posix())
         inventory = read_json(directory / "inventory.json")
         editions = read_json(directory / "editions.json")
@@ -107,7 +159,13 @@ class Snapshot:
         for family in families:
             if family.include and family.include.edition_id not in (None, *known):
                 raise ValueError("Unknown edition for family " + family.id)
-        require_complete(root, families, inventory.get("not_sources", []))
+        scopes = {"davar": (root, DAVAR_SCOPE)}
+        scopes.update(
+            (origin, (path, ""))
+            for origin, path in (external_roots or {}).items()
+            if any(f.origin == origin for f in families)
+        )
+        require_complete(root, families, inventory, scopes)
         return cls(name, inventory, families, editions)
 
     def included(self) -> tuple[Family, ...]:
@@ -124,6 +182,8 @@ def parse_family(root: Path, row: dict) -> Family:
     include = row.get("include")
     if (include is not None) != (row["disposition"] == "included"):
         raise ValueError("Only included families carry an include rule: " + row["id"])
+    if include is None and not row.get("paths"):
+        raise ValueError("Every excluded family needs path patterns: " + row["id"])
     if include is not None:
         include = Include(
             **{
@@ -144,12 +204,18 @@ def parse_family(root: Path, row: dict) -> Family:
             raise ValueError(
                 "External families need a public root, repository and revision"
             )
+        origin = include.origin
+        files = PathSet.of(include.patterns, include.exclude, include.root + "/")
+    else:
+        origin = row.get("origin", "davar")
+        files = PathSet.of(row["paths"], row.get("exclude", ()))
     return Family(
         row["id"],
         row["disposition"],
         row["reason"],
         tuple(row["evidence"]),
-        tuple(row.get("paths", ())),
+        origin,
+        files,
         include,
     )
 
@@ -165,18 +231,32 @@ def require_evidence(root: Path, item: str):
             raise ValueError("Evidence line outside file: " + item)
 
 
-def require_complete(root: Path, families, not_sources: list):
-    covered = [n["path"] for n in not_sources]
-    for family in families:
-        covered += list(family.paths)
-        if family.include and family.include.origin == "davar":
-            covered.append(family.include.root)
-    for child in sorted(
-        p for p in (root / "data").iterdir() if not p.name.startswith(".")
-    ):
-        name = child.relative_to(root).as_posix()
-        if not any(name == c or c.startswith(name + "/") for c in covered):
-            raise ValueError("Source directory without a disposition: " + name)
+def require_complete(root: Path, families, inventory: dict, scopes: dict):
+    rows = [(f.id, f.origin, f.files) for f in families]
+    for n, row in enumerate(inventory.get("not_sources", [])):
+        for item in row.get("evidence", []):
+            require_evidence(root, item)
+        rows.append(
+            (
+                f"not_sources[{n}]",
+                row.get("origin", "davar"),
+                PathSet.of(row["paths"], row.get("exclude", ())),
+            )
+        )
+    ignored = PathSet.of([i["pattern"] for i in inventory.get("ignore", [])])
+    for origin, (checkout, scope) in sorted(scopes.items()):
+        prefix = scope + "/" if scope else ""
+        for path in tree(checkout / scope):
+            path = prefix + path
+            if path in ignored:
+                continue
+            owners = [i for i, o, files in rows if o == origin and path in files]
+            if not owners:
+                raise ValueError(f"Source file without a disposition: {origin}:{path}")
+            if len(owners) > 1:
+                raise ValueError(
+                    f"Source file with several dispositions: {origin}:{path} {owners}"
+                )
 
 
 def base_directory(root: Path, include: Include, external_roots: dict) -> Path:
@@ -189,15 +269,8 @@ def base_directory(root: Path, include: Include, external_roots: dict) -> Path:
 
 
 def discover(base: Path, include: Include) -> list[str]:
-    found = {
-        p.relative_to(base).as_posix()
-        for pattern in include.patterns
-        for p in base.glob(pattern)
-        if p.is_file()
-    }
-    return sorted(
-        r for r in found if not any(fnmatch.fnmatch(r, x) for x in include.exclude)
-    )
+    files = include.files()
+    return [path for path in tree(base) if path in files]
 
 
 def pin(root: Path, snap: Snapshot, revision: str, external_roots: dict) -> list[dict]:
@@ -221,7 +294,7 @@ def pin(root: Path, snap: Snapshot, revision: str, external_roots: dict) -> list
 
 
 def load_inputs(
-    root: Path, snap: Snapshot, pins: list[dict], external_roots: dict
+    root: Path, snap: Snapshot, pins: list[dict], external_roots: dict, select=None
 ) -> list[tuple[Family, Input]]:
     by_family = defaultdict(dict)
     for item in pins:
@@ -229,8 +302,10 @@ def load_inputs(
         by_family[family_id][relpath] = item
     inputs = []
     for family in snap.included():
-        base = base_directory(root, family.include, external_roots)
         pinned = by_family.pop(family.id, {})
+        if select is not None and family.id not in select:
+            continue
+        base = base_directory(root, family.include, external_roots)
         found = discover(base, family.include)
         if found != sorted(pinned):
             extra = sorted(set(found) - set(pinned))
@@ -238,7 +313,7 @@ def load_inputs(
             raise PinDrift(f"{family.id}: unpinned {extra[:5]} missing {missing[:5]}")
         for relpath in found:
             data = (base / relpath).read_bytes()
-            if digest(data) != pinned[relpath]["sha256"]:
+            if family.origin != "davar" and digest(data) != pinned[relpath]["sha256"]:
                 raise PinDrift("Pinned input drift: " + pinned[relpath]["path"])
             inputs.append((family, Input(family.id, relpath, pinned[relpath], data)))
     if by_family:
@@ -259,30 +334,45 @@ class Tally:
 
 
 class Checks:
-    def __init__(self, root: Path, editions: dict):
+    def __init__(self, root: Path, editions: dict, schema: bool = True):
         self.validator = Validator(root)
         self.editions = editions
+        self.schema = schema
         self.seen: set[str] = set()
+        self.references: set[tuple] = set()
 
     def shard(self, records: dict, payloads: dict, bare_sources: set, normalized: dict):
-        self.validator.records(records, public=True)
-        validate_locators(records, payloads)
-        for collection in ("passages", "spans", "evidence", "concepts", "relations"):
-            for record in records[collection]:
-                if record["id"] in self.seen:
-                    raise ValueError("Identity repeated across shards: " + record["id"])
-                self.seen.add(record["id"])
         for passage in records["passages"]:
+            native = passage["native_reference"]
+            key = (
+                passage["edition_id"],
+                passage["book_id"],
+                native["chapter"],
+                native["verse_label"],
+            )
+            if key in self.references:
+                raise ValueError("Native reference repeated: " + ":".join(map(str, key)))
+            self.references.add(key)
             language = self.editions[passage["edition_id"]]["language"]
             if language != "mul" and passage["language"] != language:
                 raise ValueError(
                     "Passage language differs from its edition: " + passage["id"]
                 )
-        for token in records["tokens"]:
-            if token["provenance"]["source_id"] in bare_sources and (
-                token["lexical_refs"] or token["annotations"]
-            ):
-                raise ValueError("Withheld token fields present: " + token["id"])
+        if self.schema:
+            self.validator.records(records, public=True)
+        validate_locators(records, payloads)
+        for collection in ("passages", "spans", "evidence", "concepts", "relations"):
+            for record in records[collection]:
+                if record["id"] in self.seen:
+                    raise ValueError("Identity repeated across records: " + record["id"])
+                self.seen.add(record["id"])
+        for record in records["passages"] + records["tokens"]:
+            if record["provenance"]["source_id"] not in bare_sources:
+                continue
+            if SEGMENTATION in record["text"]:
+                raise ValueError("Withheld segmentation present: " + record["id"])
+            if "ordinal" in record and (record["lexical_refs"] or record["annotations"]):
+                raise ValueError("Withheld token fields present: " + record["id"])
         derived = {
             (
                 r["provenance"]["source_id"],
@@ -325,6 +415,66 @@ def close_references(outcomes: dict) -> None:
             evidence["targets"] = kept
 
 
+def input_digest(snap: Snapshot, pins: list[dict]) -> str:
+    return digest(
+        encoded(
+            dict(
+                normalizer=NORMALIZER,
+                inventory=snap.inventory,
+                editions=snap.editions,
+                inputs=pins,
+            )
+        )
+    )
+
+
+def newest_snapshot(root: Path) -> str:
+    names = [
+        p.name
+        for p in (root / SNAPSHOTS).iterdir()
+        if re.fullmatch(r"v[1-9][0-9]*", p.name)
+    ]
+    return max(names, key=lambda n: int(n[1:]))
+
+
+def render(
+    root: Path,
+    snap: Snapshot,
+    pins: list[dict],
+    external_roots: dict,
+    tally: Tally,
+    *,
+    select=None,
+    schema: bool = True,
+) -> Iterator[tuple[str, bytes]]:
+    registries = {
+        p.stem: read_json(p)
+        for p in sorted((root / KNOWLEDGE / "registries").glob("*.json"))
+    }
+    editions = {e["id"]: e for e in registries["editions"] + snap.editions}
+    shards = defaultdict(list)
+    for family, item in load_inputs(root, snap, pins, external_roots, select):
+        adapter = ADAPTERS[family.include.adapter]
+        shards[adapter.shard.format(family=family.id, relpath=item.relpath)].append(
+            (family, item)
+        )
+    checks = Checks(root, editions, schema)
+    for path in sorted(shards):
+        records = shard_records(shards[path], registries, editions, checks, tally)
+        tally.shards += 1
+        yield path, encoded(records)
+
+
+def new_tally(snap: Snapshot) -> Tally:
+    return Tally(
+        {f.id: Counter() for f in snap.included()},
+        defaultdict(lambda: defaultdict(Counter)),
+        [],
+        [],
+        Counter(),
+    )
+
+
 def generate(
     root: Path,
     snap: Snapshot,
@@ -336,50 +486,18 @@ def generate(
         p.stem: read_json(p)
         for p in sorted((root / KNOWLEDGE / "registries").glob("*.json"))
     }
-    editions = {e["id"]: e for e in registries["editions"] + snap.editions}
-    schemas = {
-        p.name: digest(p.read_bytes()) for p in sorted((root / SCHEMAS).glob("*.json"))
-    }
-    input_digest = digest(
-        encoded(
-            dict(
-                normalizer=NORMALIZER,
-                inventory=snap.inventory,
-                editions=snap.editions,
-                inputs=pins,
-                registries=registries,
-                schemas=schemas,
-            )
-        )
-    )
-    inputs = load_inputs(root, snap, pins, external_roots)
-    shards = defaultdict(list)
-    for family, item in inputs:
-        adapter = ADAPTERS[family.include.adapter]
-        shards[adapter.shard.format(family=family.id, relpath=item.relpath)].append(
-            (family, item)
-        )
-    checks = Checks(root, editions)
-    tally = Tally(
-        {f.id: Counter() for f in snap.included()},
-        defaultdict(lambda: defaultdict(Counter)),
-        [],
-        [],
-        Counter(),
-    )
+    digest_of_inputs = input_digest(snap, pins)
+    tally = new_tally(snap)
     files = []
-    for path in sorted(shards):
-        records = shard_records(shards[path], registries, editions, checks, tally)
-        data = encoded(records)
+    for path, data in render(root, snap, pins, external_roots, tally):
         sink(path, data)
         files.append(dict(path=path, sha256=digest(data)))
-        tally.shards += 1
     reports = dict(
-        coverage=coverage_report(snap, tally, registries["books"], input_digest),
+        coverage=coverage_report(snap, tally, registries["books"], digest_of_inputs),
         unresolved=unresolved_report(snap, tally),
         validation=dict(
             snapshot=snap.name,
-            input_manifest_digest=input_digest,
+            input_manifest_digest=digest_of_inputs,
             shards=tally.shards,
             records=dict(sorted(tally.records.items())),
             checks=list(CHECKS),
@@ -393,11 +511,11 @@ def generate(
     manifest = dict(
         contract_version="1.0.0",
         generator_version="1.0.0",
-        input_manifest_digest=input_digest,
+        input_manifest_digest=digest_of_inputs,
         inputs=pins,
         files=sorted(files, key=lambda f: f["path"]),
     )
-    checks.validator.schema("manifest", manifest)
+    Validator(root).schema("manifest", manifest)
     sink("manifest.json", encoded(manifest))
     return manifest, reports
 
@@ -424,6 +542,11 @@ def shard_records(members, registries, editions, checks: Checks, tally: Tally) -
         units = list(walk(parsed, adapter.pattern))
         if not units:
             raise ValueError("Input has no source records: " + item.id)
+        native = adapter.count(parsed)
+        if native != len(units):
+            raise ValueError(
+                f"{item.id} holds {native} source records but {len(units)} were read"
+            )
         for pointer, value, ancestors in units:
             key = (item.source_id, pointer)
             if key in outcomes:
