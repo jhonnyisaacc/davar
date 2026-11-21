@@ -72,7 +72,7 @@
       "expo-image",
       "expo-status-bar"
     ],
-    "runtimeVersion": "1.0.4",
+    "runtimeVersion": "1.0.5",
     "updates": {
       "url": "https://u.expo.dev/232e7627-d0c9-4b88-976e-b4855beb322e",
       "enabled": true,
