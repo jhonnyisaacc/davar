@@ -117,6 +117,20 @@ describe("patchExpoModulesJsi", () => {
     rmSync(mobileRoot, { recursive: true, force: true });
   });
 
+  test("leaves the 57.1.3 build script that ships the fix untouched", () => {
+    const mobileRoot = mkdtempSync(join(tmpdir(), "jsi-upstream-"));
+    const upstream = String.raw`sed -E '/^extension __ObjC(\.|::)/,/^}/d;/^@usableFromInline$/{N;/_ConstraintThatIsNotPartOfTheAPIOfThisLibrary/d;};/^@available\(\*, unavailable\)$/{N;/_ConstraintThatIsNotPartOfTheAPIOfThisLibrary/d;};/_ConstraintThatIsNotPartOfTheAPIOfThisLibrary/d' "$swiftinterface" > "$stripped_swiftinterface"
+`;
+    const script = writeScript(
+      mobileRoot,
+      "node_modules/expo-modules-jsi/apple/scripts/build-xcframework.sh",
+      upstream,
+    );
+    expect(patchInstalledExpoModulesJsi(mobileRoot)).toBe("current");
+    expect(readFileSync(script, "utf8")).toBe(upstream);
+    rmSync(mobileRoot, { recursive: true, force: true });
+  });
+
   test("does nothing when expo-modules-jsi is absent", () => {
     const mobileRoot = mkdtempSync(join(tmpdir(), "jsi-missing-"));
     expect(patchInstalledExpoModulesJsi(mobileRoot)).toBe("missing");

@@ -372,7 +372,6 @@ export default function CalendarScreen() {
               <Caption>{t("calendar.searchUnavailable")}</Caption>
             ) : null}
           </View>
-          <Caption>{t("calendar.cityHint")}</Caption>
         </View>
       </Page>
     );
