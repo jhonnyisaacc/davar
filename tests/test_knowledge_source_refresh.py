@@ -218,3 +218,67 @@ def test_an_edition_revision_must_follow_a_repinned_input(tmp_path, edition):
     write(repo, "data/knowledge/registries/editions.json", [edition])
     with pytest.raises(ValueError, match="Non-additive or out-of-scope change"):
         boundary(base, repo)
+
+
+LEXICON_REFRESH = refreshed_outputs((("data/dict/lexicon/custom_definitions.json", "data/dict/lexicon/custom_definitions.json"),))
+
+
+def legacy_bundle_files(root: Path, versions: dict, manifest_bundles: dict):
+    from scripts.knowledge.core import encoded
+
+    (root / "bundles").mkdir(parents=True, exist_ok=True)
+    (root / "bundles/versions.json").write_bytes(encoded(versions))
+    bundles = {**manifest_bundles, "versions": {"size": 50, "checksum": json.dumps(versions, sort_keys=True)}}
+    (root / "manifest.json").write_bytes(encoded({"version": "clock", "bundles": bundles}))
+
+
+def legacy_differences(tmp_path: Path, refreshed, after_versions: dict, after_bundles: dict):
+    from scripts.knowledge.compatibility import tree
+
+    before_bundles = {"dictionary": {"checksum": "old"}, "tanaj": {"checksum": "same"}}
+    base, candidate = tmp_path / "base", tmp_path / "candidate"
+    legacy_bundle_files(base, {"tanaj": 1, "dictionary": 3}, before_bundles)
+    legacy_bundle_files(candidate, after_versions, after_bundles)
+    return legacy_generation_differences(
+        tree(base, legacy_clock=True, refreshed=refreshed),
+        tree(candidate, legacy_clock=True, refreshed=refreshed),
+        refreshed,
+    )
+
+
+def test_a_lexicon_repin_allows_the_dictionary_bundle_version_bump(tmp_path):
+    after_bundles = {"dictionary": {"checksum": "new"}, "tanaj": {"checksum": "same"}}
+    assert legacy_differences(tmp_path, LEXICON_REFRESH, {"tanaj": 1, "dictionary": 4}, after_bundles) == []
+
+
+@pytest.mark.parametrize(
+    "after_versions",
+    [{"tanaj": 2, "dictionary": 4}, {"tanaj": 1, "dictionary": 4, "dss": 1}, {"dictionary": 4}],
+)
+def test_a_lexicon_repin_keeps_every_other_bundle_version_strict(tmp_path, after_versions):
+    after_bundles = {"dictionary": {"checksum": "new"}, "tanaj": {"checksum": "same"}}
+    assert legacy_differences(tmp_path, LEXICON_REFRESH, after_versions, after_bundles) == ["bundles/versions.json"]
+
+
+@pytest.mark.parametrize(
+    ("refreshed", "expected"),
+    [
+        ((), ["bundles/versions.json", "manifest.json"]),
+        (refreshed_outputs((("data/greek/preview/old", "data/greek/preview/new"),)), ["bundles/versions.json"]),
+    ],
+)
+def test_a_dictionary_version_bump_without_a_lexicon_repin_fails(tmp_path, refreshed, expected):
+    after_bundles = {"dictionary": {"checksum": "old"}, "tanaj": {"checksum": "same"}}
+    assert legacy_differences(tmp_path, refreshed, {"tanaj": 1, "dictionary": 4}, after_bundles) == expected
+
+
+@pytest.mark.parametrize(
+    "after_bundles",
+    [
+        {"dictionary": {"checksum": "new"}, "tanaj": {"checksum": "changed"}},
+        {"dictionary": {"checksum": "new"}, "tanaj": {"checksum": "same"}, "dss": {"checksum": "added"}},
+        {"dictionary": {"checksum": "new"}},
+    ],
+)
+def test_a_lexicon_repin_keeps_every_other_manifest_entry_strict(tmp_path, after_bundles):
+    assert legacy_differences(tmp_path, LEXICON_REFRESH, {"tanaj": 1, "dictionary": 4}, after_bundles) == ["manifest.json"]

@@ -15,7 +15,7 @@ export const BUNDLE_VERSIONS: Record<string, number> = {
   tanaj: 1,
   besorah: 1,
   dss: 1,
-  dictionary: 3,
+  dictionary: 4,
   tth: 1,
   ts2009: 1,
   hutter: 1,

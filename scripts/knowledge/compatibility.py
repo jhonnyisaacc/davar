@@ -397,8 +397,13 @@ def prepare_legacy_digest(name: str, payload: dict, refreshed: tuple[str, ...] =
                 payload.pop(key)
         if name == "manifest.json":
             payload.get("bundles", {}).get("versions", {}).pop("checksum", None)
-    if "bundles/dictionary" in refreshed and name == "manifest.json":
-        payload.get("bundles", {}).pop("dictionary", None)
+    if "bundles/dictionary" in refreshed:
+        if name == "bundles/versions.json":
+            payload.pop("dictionary", None)
+        if name == "manifest.json":
+            bundles = payload.get("bundles", {})
+            bundles.pop("dictionary", None)
+            bundles.pop("versions", None)
     if "bundles/besorah" in refreshed and name == "manifest.json":
         payload.get("bundles", {}).pop("besorah", None)
 
