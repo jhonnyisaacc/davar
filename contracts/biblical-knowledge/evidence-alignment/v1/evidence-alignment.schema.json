@@ -238,6 +238,7 @@
             "properties": {
               "role": {"enum": ["review_decision"]},
               "status": {"const": "reviewed_decision"},
+              "review": {"enum": ["approved", "rejected"]},
               "context": {"required": ["work", "locator", "reviewer"]}
             }
           }

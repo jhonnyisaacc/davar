@@ -40,7 +40,7 @@ CATEGORY_STAGE = {
 
 
 def status(provenance: dict, category: str | None = None) -> str:
-    if category == "HUMAN_REVIEWED_DECISION":
+    if category == "HUMAN_REVIEWED_DECISION" and provenance["review"] in ("approved", "rejected"):
         return "reviewed_decision"
     if provenance["transformation"] in ("generated", "inferred"):
         return provenance["transformation"]

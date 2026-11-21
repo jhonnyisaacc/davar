@@ -37,7 +37,7 @@ python -m pytest -q tests/test_knowledge_alignment.py
 | `ANCIENT_TEXTUAL_WITNESS` | existing translation evidence | `ancient_witness` (LXX) | imported |
 | `COMMENTARY_TEACHING` | commentary evidence | `translator_note` (TTH footnotes by Natanael Doldan), `study_note` (Shaul notes, here on Eric's classes), `contextual_dictionary` (Eric's TCY entries), `transcript_segment` | imported, authored, inferred |
 | `AI_GENERATED_CANDIDATE` | candidate options | `generated_candidate`; requires `context.generator` | generated |
-| `HUMAN_REVIEWED_DECISION` | structured decision | `review_decision`; requires `context.reviewer` | reviewed_decision |
+| `HUMAN_REVIEWED_DECISION` | structured decision | `review_decision`; requires `context.reviewer` and review `approved` or `rejected` | reviewed_decision |
 
 The schema binds each role to one category and lists the legal statuses of each category in one rule per category, the same table as above. `generated` is legal only for `AI_GENERATED_CANDIDATE`, and `reviewed_decision` only for `HUMAN_REVIEWED_DECISION`, so generated material and review decisions can never pass as authored or imported evidence. No record has an override, rank or supersedes field. Commentary sits beside lexical evidence in its own category and cannot replace it.
 
@@ -49,12 +49,12 @@ Category and role are never written per record. The generator looks them up in t
 
 `status` says where a record came from. It is derived, never authored:
 
-1. `reviewed_decision` when the category is `HUMAN_REVIEWED_DECISION`.
+1. `reviewed_decision` when the category is `HUMAN_REVIEWED_DECISION` and the v1 `review` is `approved` or `rejected`. An unreviewed decision has no legal status, so the schema and validation both reject it.
 2. `generated` or `inferred` when the v1 `transformation` says so.
 3. `authored` when the v1 `origin` is `authored`. Shaul notes are authored upstream by Shaul.
 4. `imported` otherwise.
 
-`review` is a separate field, copied from the v1 provenance: `unreviewed`, `approved` or `rejected`. A review state never changes `status` or category. An approved BDB entry stays `LEXICAL_DATA` with status `imported` and review `approved`, and a rejected one stays labeled as rejected rather than reviewed.
+`review` is a separate field, copied from the v1 provenance: `unreviewed`, `approved` or `rejected`. Outside `HUMAN_REVIEWED_DECISION`, a review state never changes `status` or category. An approved BDB entry stays `LEXICAL_DATA` with status `imported` and review `approved`, and a rejected one stays labeled as rejected rather than reviewed.
 
 Alignments and authored inventory rows are Davar-authored editorial assertions in `authored.json`. Each carries `status: authored`, `review`, a provenance locator that points at its JSON pointer in `authored.json`, and that file's `version`. They stay `unreviewed` until a named reviewer approves them.
 

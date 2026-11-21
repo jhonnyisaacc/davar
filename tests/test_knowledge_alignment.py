@@ -266,6 +266,26 @@ def test_schema_accepts_a_human_reviewed_decision(built):
     assert not validator.is_valid(dict(decision, category="EXISTING_TRANSLATION", role="baseline_reference_candidate"))
 
 
+def test_an_unreviewed_human_reviewed_decision_is_rejected(built):
+    value, records = built
+    decision = dict(
+        copy.deepcopy(next(e for e in value["evidence"] if e["role"] == "baseline_reference_candidate")),
+        id="aev:decision:unreviewed",
+        category="HUMAN_REVIEWED_DECISION",
+        role="review_decision",
+        status="reviewed_decision",
+        review="unreviewed",
+    )
+    decision["context"]["reviewer"] = "example-reviewer"
+    decision["provenance"] = dict(decision["provenance"], origin="authored", review="unreviewed")
+    assert not alignment.schema_validator(definition="evidence").is_valid(decision)
+    assert alignment.status(decision["provenance"], decision["category"]) != "reviewed_decision"
+    broken = copy.deepcopy(value)
+    broken["evidence"].append(decision)
+    with pytest.raises(ValidationError):
+        alignment.validate(broken, records)
+
+
 def test_later_stage_records_are_representable_but_outside_this_fixture(built):
     value, records = built
     candidate = dict(
