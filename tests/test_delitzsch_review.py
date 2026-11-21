@@ -320,6 +320,29 @@ def test_apply_upsert_custom_definition_for_existing_strong(tmp_path):
     assert custom["H3442"]["definitions"][0]["text_es"] == "YHVH salva"
 
 
+def test_apply_remove_custom_definition_drops_only_the_named_sense(tmp_path):
+    lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
+    custom_path = lexicon_dir.parent / "custom_definitions.json"
+    log_dir = tmp_path / "data" / "delitzsch" / "review" / "decisions"
+    kept = [
+        {"text_en": "Romans", "text_es": "Romanos", "order": 1},
+        {"text_en": "Romans", "text_es": "Romanos", "order": 2},
+    ]
+    duplicate = {"text_en": "Romans", "text_es": "romanos", "order": 2}
+    write_json(custom_path, {"D0035": {"strong_number": "D0035", "definitions": [kept[0], duplicate, kept[1]]}})
+    decisions_path = tmp_path / "remove.json"
+    write_json(
+        decisions_path,
+        {"decisions": [{"action": "remove_custom_definition", "custom_key": "D0035", "book": "acts", "definition": duplicate}]},
+    )
+
+    for status in ("applied", "already_applied"):
+        apply_decisions(decisions_path, tmp_path, LexiconIndex(lexicon_dir), log_dir, dry_run=False)
+        custom = json.loads(custom_path.read_text(encoding="utf-8"))
+        assert custom["D0035"]["definitions"] == kept
+        assert json.loads((log_dir / "acts.jsonl").read_text().splitlines()[-1])["status"] == status
+
+
 def test_upsert_custom_definition_inserts_a_record_first_and_keeps_the_owner_records_text(tmp_path):
     lexicon_dir = tmp_path / "data" / "dict" / "lexicon" / "words"
     custom_path = lexicon_dir.parent / "custom_definitions.json"

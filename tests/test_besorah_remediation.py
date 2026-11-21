@@ -95,10 +95,10 @@ def test_definition_coverage_separates_sources_languages_and_missing_entries(tmp
     words=[{"text":"א","strong":s} for s in ["Hc/Hd/H1","H1","D2","H3","H4"]]
     chapter.write_text(json.dumps([{"chapter":1,"verses":[{"verse":1,"words":words}]}]))
     sources={"words":{"H1":{"definitions":[{"text_en":"father"}]}},"roots":{"H4":{"definitions":[{"text_en":" ","text_es":"raíz"}]}},
-        "custom_definitions":{"D2":{"definitions":[{"text_en":"in her","text_es":"en ella"}]},"H1":{"definitions":[{"text_es":"padre"}]}}}
+        "custom_definitions":{"D2":{"definitions":[{"text_en":"in her","text_es":"en ella"}],"publication":{"status":"approved"}},"H1":{"definitions":[{"text_es":"padre"}]}}}
     report=build_report(occurrence_counts(tmp_path),sources)
     assert report["identifiers"]=={"H1":{"source":"canonical_and_custom","languages":["en","es"],"occurrences":2},
-        "D2":{"source":"custom","languages":["en","es"],"occurrences":1},"H4":{"source":"canonical","languages":["es"],"occurrences":1}}
+        "D2":{"source":"custom","languages":["en","es"],"status":"approved","occurrences":1},"H4":{"source":"canonical","languages":["es"],"occurrences":1}}
     assert report["missing_entries"]==[{"strong":"H3","occurrences":1}]
     assert report["missing_definitions"]=={"en":[{"strong":"H4","source":"canonical","occurrences":1}],"es":[]}
     errors=check_errors(report,encoded(report),{"en":["H4","H9"],"es":[]})
@@ -110,3 +110,42 @@ def test_committed_definition_coverage_is_current_and_gaps_only_shrink():
     from scripts.delitzsch.definition_coverage import BASELINE, REPORT, build_report, check_errors, load_lexicon, occurrence_counts
     report=build_report(occurrence_counts(),load_lexicon())
     assert check_errors(report,REPORT.read_text(encoding="utf-8"),json.loads(BASELINE.read_text(encoding="utf-8")))==[]
+
+def test_publication_status_comes_from_reviewed_decisions_only(tmp_path):
+    from scripts.delitzsch.entry_publication import load_ledger, publication
+    rows=[{"action":"create_custom_entry","status":"applied","reviewer":"r","custom_key":"D1","definition":{"text_en":"Peter","text_es":"Pedro"}},
+        {"action":"create_custom_entry","status":"applied","custom_key":"D2","definition":{"text_en":"Andrew","text_es":"Andrés"}},
+        {"action":"create_custom_entry","status":"applied","reviewer":"r","custom_key":"D3","definition":{"text_en":"Titus","text_es":""}},
+        {"action":"needs_manual_review","status":"needs_manual_review","reviewer":"r","new_strong":"D4"},
+        {"action":"upsert_custom_definition","status":"applied","reviewer":"claude-delitzsch-review","strong":"D6","definition":{"text_en":"in you","text_es":"en ti"}},
+        {"action":"create_custom_entry","status":"applied","reviewer":"rule:style_only_prefix_v5","custom_key":"D7","definition":{"text_en":"Mark","text_es":"Marcos"}}]
+    (tmp_path/"acts.jsonl").write_text("".join(json.dumps(row)+"\n" for row in rows))
+    ledger=load_ledger(tmp_path)
+    imported={"text_es":"Pedro","review_status":"imported"}
+    entry=lambda en,es:{"definitions":[{"text_en":en,"text_es":es,"order":1},imported]}
+    assert publication("D1",entry("Peter","Pedro"),ledger)=={"status":"approved","rule":"reviewed_definition_decision","rule_version":1,"evidence":["acts.jsonl:1 r"]}
+    assert publication("D2",entry("Andrew","Andrés"),ledger)["status"]=="draft"
+    assert publication("D3",entry("Titus","Tito"),ledger)["evidence"]==["definition order 1 has no reviewed decision"]
+    assert publication("D4",entry("x","y"),ledger)=={"status":"blocked","rule":"pending_manual_review","rule_version":1,"evidence":["acts.jsonl:4"]}
+    assert publication("D5",{"definitions":[imported]},ledger)["status"]=="draft"
+    assert publication("D6",entry("in you","en ti"),ledger)["evidence"]==["acts.jsonl:5 claude-delitzsch-review"]
+    assert publication("D7",entry("Mark","Marcos"),ledger)["status"]=="draft"
+
+def test_unapproved_custom_entries_are_unpublished_not_gaps(tmp_path):
+    from scripts.delitzsch.definition_coverage import build_report, check_errors, encoded, occurrence_counts
+    chapter=tmp_path/"jude"/"1.json"; chapter.parent.mkdir(parents=True)
+    chapter.write_text(json.dumps([{"chapter":1,"verses":[{"verse":1,"words":[{"strong":s} for s in ["D1","D2","D2","D3"]]}]}]))
+    defs=[{"text_en":"a","text_es":"b"}]
+    sources={"words":{},"roots":{},"custom_definitions":{"D1":{"definitions":defs,"publication":{"status":"approved"}},
+        "D2":{"definitions":defs,"publication":{"status":"draft"}},"D3":{"definitions":defs}}}
+    report=build_report(occurrence_counts(tmp_path),sources)
+    assert report["unpublished"]==[{"strong":"D2","status":"draft","occurrences":2}]
+    assert report["missing_definitions"]=={"en":[],"es":[]}
+    assert report["identifiers"]["D2"]["languages"]==[]
+    assert check_errors(report,encoded(report),{"en":[],"es":[]})==["D3 has no valid publication status; run python -m scripts.delitzsch.entry_publication write"]
+
+def test_committed_publication_status_is_current():
+    from scripts.delitzsch.definition_coverage import occurrence_counts
+    from scripts.delitzsch.entry_publication import CUSTOM, apply, load_ledger, referenced_custom_keys
+    custom=json.loads(CUSTOM.read_text(encoding="utf-8"))
+    assert apply(custom,referenced_custom_keys(custom,occurrence_counts()),load_ledger())==[]

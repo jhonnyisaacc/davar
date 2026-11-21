@@ -1,0 +1,5 @@
+{
+	"schema": "davar-custom-entry-publication-v1",
+	"statuses": ["approved", "draft", "blocked"],
+	"published": "approved"
+}

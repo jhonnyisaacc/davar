@@ -1,0 +1,457 @@
+{
+  "issue": 369,
+  "rule": "Custom entries that main began referencing after #399 and #400 get a reviewed definition decision, so the publication rule approves them.",
+  "reviewer": "claude-delitzsch-review",
+  "decisions": [
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0210",
+      "hebrew": "מרתה",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Martha; sister of Mary and Lazarus of Bethany.",
+        "text_es": "Marta; hermana de María y Lázaro de Betania."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0210 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0211",
+      "hebrew": "קיסר",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Caesar; title of the Roman emperor.",
+        "text_es": "César; título del emperador romano."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0211 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0212",
+      "hebrew": "ארטמא",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Artemas; a coworker whom Paul considered sending to Titus.",
+        "text_es": "Artemas; colaborador que Pablo consideró enviar a Tito."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0212 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0213",
+      "hebrew": "ניקופוליס",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Nicopolis; the city where Paul intended to spend the winter.",
+        "text_es": "Nicópolis; la ciudad donde Pablo pensaba pasar el invierno."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0213 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0216",
+      "hebrew": "איזה",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Which? What? An interrogative pronoun used to select or identify.",
+        "text_es": "¿Cuál? ¿Qué? Pronombre interrogativo usado para seleccionar o identificar."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0216 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0223",
+      "hebrew": "אכאיה",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Achaia, the Roman province in southern Greece.",
+        "text_es": "Acaya, la provincia romana del sur de Grecia."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0223 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0226",
+      "hebrew": "ימבריס",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Jambres, an opponent of Moses named in 2 Timothy 3:8.",
+        "text_es": "Jambres, adversario de Moisés nombrado en 2 Timoteo 3:8."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0226 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0236",
+      "hebrew": "אבניקא",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Eunice, Timothy's mother.",
+        "text_es": "Eunice, madre de Timoteo."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0236 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0237",
+      "hebrew": "אגב",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Agabus, a New Testament prophet.",
+        "text_es": "Ágabo, profeta del Nuevo Testamento."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0237 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0240",
+      "hebrew": "אילוריקון",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Illyricum, a Roman province east of the Adriatic.",
+        "text_es": "Ilírico, provincia romana al este del Adriático."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0240 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0244",
+      "hebrew": "איספניא",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Spain, the western destination Paul intended to visit.",
+        "text_es": "España, destino occidental que Pablo pensaba visitar."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0244 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0246",
+      "hebrew": "אלימשיח",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Elymas, the magician who opposed Paul and Barnabas in Cyprus.",
+        "text_es": "Elimas, mago que se opuso a Pablo y Bernabé en Chipre."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0246 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0248",
+      "hebrew": "אפפרא",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Epaphras, Paul's fellow prisoner and coworker.",
+        "text_es": "Epafras, compañero de prisión y colaborador de Pablo."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0248 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0254",
+      "hebrew": "מיליט",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Miletus, an ancient coastal city of Asia Minor.",
+        "text_es": "Mileto, antigua ciudad costera de Asia Menor."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0254 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0255",
+      "hebrew": "סמותראקי",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Samothrace, an island in the northern Aegean Sea.",
+        "text_es": "Samotracia, isla del norte del mar Egeo."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0255 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0257",
+      "hebrew": "קנכראס",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Cenchreae, the eastern harbor of Corinth.",
+        "text_es": "Cencreas, puerto oriental de Corinto."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0257 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0260",
+      "hebrew": "מגים",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Magi; eastern wise men or astrologers.",
+        "text_es": "Magos; sabios o astrólogos orientales."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0260 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0261",
+      "hebrew": "גזירות",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Decrees; received regulations or traditions.",
+        "text_es": "Decretos; reglamentos o tradiciones recibidas."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0261 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0262",
+      "hebrew": "הומנאוס",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Hymenaeus, a teacher opposed by Paul.",
+        "text_es": "Himeneo, maestro al que Pablo se opuso."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0262 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0273",
+      "hebrew": "לָנוּ",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "to us; for us, preposition ל with first common plural suffix.",
+        "text_es": "a nosotros; para nosotros, preposición ל con sufijo común plural de primera persona."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0273 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0274",
+      "hebrew": "לְךָ",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "to you; for you, preposition ל with second masculine singular suffix.",
+        "text_es": "a ti; para ti, preposición ל con sufijo masculino singular de segunda persona."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0274 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0276",
+      "hebrew": "לָהּ",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "to her; for her, preposition ל with third feminine singular suffix.",
+        "text_es": "a ella; para ella, preposición ל con sufijo femenino singular de tercera persona."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0276 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0278",
+      "hebrew": "בָּם",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "in them; among them, preposition ב with third masculine plural suffix.",
+        "text_es": "en ellos; entre ellos, preposición ב con sufijo masculino plural de tercera persona."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0278 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0280",
+      "hebrew": "נִיקְדֵם",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Nicodemus, a Pharisee and member of the Jewish council who came to Jesus by night.",
+        "text_es": "Nicodemo, fariseo y miembro del consejo judío que vino a Jesús de noche."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0280 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "strong": "D0283",
+      "hebrew": "קֵיסַרִיָּה",
+      "definition": {
+        "order": 1,
+        "source": "hutter_image_review",
+        "text_en": "Caesarea, here Caesarea Philippi, a city near Mount Hermon.",
+        "text_es": "Cesarea, aquí Cesarea de Filipo, ciudad cercana al monte Hermón."
+      },
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "reason": "Shipped English and Spanish text for D0283 matches its Delitzsch occurrences; agent review per #386 for the #369 publication rule.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    }
+  ]
+}
