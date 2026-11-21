@@ -1,0 +1,198 @@
+{
+  "snapshot": "v1",
+  "families": [
+    {
+      "id": "oe",
+      "disposition": "included",
+      "reason": "OE Hebrew/Aramaic chapter files: morphhb lemma and morphology CC BY 4.0, WLC text public domain, hebrew-bible text GPL-3.0. Attribution travels in the oe edition record.",
+      "evidence": ["docs/terms.md:65-67", "README.md:121-123"],
+      "include": {"adapter": "oe", "origin": "davar", "root": "data/oe", "patterns": ["*/*.json"], "exclude": ["raw/*"], "edition_id": "oe"}
+    },
+    {
+      "id": "oe-raw",
+      "disposition": "deferred",
+      "reason": "Per-book raw OE files are the source of the included chapter files; normalizing both would duplicate every passage.",
+      "evidence": ["data/oe/raw/genesis.json"],
+      "paths": ["data/oe/raw"]
+    },
+    {
+      "id": "delitzsch-text",
+      "disposition": "included",
+      "reason": "Delitzsch Hebrew New Testament text is public domain. Word surfaces are kept; Strong's codes and prefix segmentation are withheld (see delitzsch-strongs).",
+      "evidence": ["docs/terms.md:74", "docs/decisions/0015-knowledge-corpus-inventory.md:16"],
+      "include": {"adapter": "delitzsch", "origin": "davar", "root": "data/delitzsch/parsed", "patterns": ["*/*.json"], "exclude": ["strongs/*"], "edition_id": "delitzsch"}
+    },
+    {
+      "id": "delitzsch-strongs",
+      "disposition": "restricted",
+      "reason": "The per-word Strong's mapping in the parsed Delitzsch files originates from ph4.org, whose license is unclear (site copyright 2005-2026 Ph4).",
+      "evidence": ["docs/terms.md:74", "README.md:125", "web/ATTRIBUTIONS.md:7"],
+      "paths": ["data/delitzsch/parsed/strongs"]
+    },
+    {
+      "id": "delitzsch-unparsed",
+      "disposition": "deferred",
+      "reason": "The raw archive and per-book unparsed files are the inputs of the included parsed chapters; normalizing them would duplicate passages.",
+      "evidence": ["data/delitzsch/john.json", "scripts/delitzsch/README.md:9"],
+      "paths": ["data/delitzsch/raw", "data/delitzsch/*.json"]
+    },
+    {
+      "id": "delitzsch-review",
+      "disposition": "deferred",
+      "reason": "Review decisions are lexical adjudication and dictionary work, which this normalization excludes.",
+      "evidence": ["contracts/biblical-knowledge/v1/README.md:94", "data/delitzsch/review/README.md:3"],
+      "paths": ["data/delitzsch/review"]
+    },
+    {
+      "id": "greek-sblgnt-tagnt",
+      "disposition": "included",
+      "reason": "Committed SBLGNT reading with STEPBible TAGNT tags, both CC BY 4.0 with required notices that travel in the sblgnt-tagnt edition record.",
+      "evidence": ["docs/terms.md:71-72", "docs/greek-besorah-source-licenses.md:9-38"],
+      "include": {"adapter": "greek", "origin": "davar", "root": "data/greek/preview/greek/releases/sblgnt/5de0a47f35f0fc13dfe1430d104e5db8a4285f9c/books", "patterns": ["*/*.json"], "edition_id": "sblgnt-tagnt"}
+    },
+    {
+      "id": "greek-lexicon",
+      "disposition": "included",
+      "reason": "TBESG / UBS lexicon of the committed Greek release. Only entry identifiers and lemmas are normalized; definitions are never copied.",
+      "evidence": ["docs/terms.md:72-73", "docs/greek-besorah-source-licenses.md:36"],
+      "include": {"adapter": "lexicon", "origin": "davar", "root": "data/greek/preview/greek/releases/sblgnt/5de0a47f35f0fc13dfe1430d104e5db8a4285f9c", "patterns": ["lexicon.json"], "id_namespace": "tagnt"}
+    },
+    {
+      "id": "greek-preview-bundles",
+      "disposition": "deferred",
+      "reason": "Runtime bundle copies, lexicon shards and occurrence indexes derived from the same Greek release; the release chapters and lexicon are normalized directly.",
+      "evidence": ["data/greek/README.md"],
+      "paths": ["data/greek/preview/greek-sblgnt", "data/greek/preview/greek-sblgnt.json", "data/greek/preview/greek/manifest.json", "data/greek/README.md"]
+    },
+    {
+      "id": "greek-downloads",
+      "disposition": "unavailable",
+      "reason": "Official STEPBible/UBS downloads and importer outputs are ignored by Git and are not inputs.",
+      "evidence": [".gitignore:12-17", "contracts/biblical-knowledge/v1/README.md:104"],
+      "paths": ["data/greek/source", "data/greek/sblgnt-tagnt", "data/greek/definitions"]
+    },
+    {
+      "id": "hebrew-lexicon",
+      "disposition": "included",
+      "reason": "Open Scriptures Hebrew Lexicon CC BY 4.0 with public-domain BDB/Strong's. Only entry identifiers and lemmas are normalized; definitions are never copied.",
+      "evidence": ["docs/terms.md:66", "README.md:122"],
+      "include": {"adapter": "lexicon", "origin": "davar", "root": "data/dict/lexicon", "patterns": ["words.json"], "id_namespace": "bdb"}
+    },
+    {
+      "id": "tcy-definitions",
+      "disposition": "restricted",
+      "reason": "Torah con Yehoshua' Hamashiaj definitions were given to the project owner as permission to use, not to redistribute.",
+      "evidence": ["data/dict/raw/tcysite/source_manifest.json:5"],
+      "paths": ["data/dict/raw/tcysite", "data/dict/lexicon/custom_definitions.json"]
+    },
+    {
+      "id": "dictionary-derived",
+      "disposition": "deferred",
+      "reason": "Raw lexicon sources, per-book word lists, prefixes, roots, translations and reports are dictionary population and adjudication inputs, which this normalization excludes.",
+      "evidence": ["contracts/biblical-knowledge/v1/README.md:94", "contracts/biblical-knowledge/v1/README.md:241"],
+      "paths": ["data/dict"]
+    },
+    {
+      "id": "bes",
+      "disposition": "included",
+      "reason": "SPABES Spanish Bible, CC BY 4.0 with attribution in the bes-es edition record. Native verse labels are kept; no mapping is inferred.",
+      "evidence": ["docs/terms.md:70", "README.md:124"],
+      "include": {"adapter": "bes", "origin": "davar", "root": "data/bes/json", "patterns": ["*.json"], "edition_id": "bes-es"}
+    },
+    {
+      "id": "bes-raw",
+      "disposition": "deferred",
+      "reason": "The USFX file is the source of the included per-book JSON; normalizing both would duplicate passages.",
+      "evidence": ["data/bes/raw/spa-bes.usfx.xml"],
+      "paths": ["data/bes/raw"]
+    },
+    {
+      "id": "tth",
+      "disposition": "restricted",
+      "reason": "Licensed TTH translation, restricted pending the Doldan agreement. The existing pilot inputs stay unchanged; no new normalized TTH artifacts are produced.",
+      "evidence": ["docs/terms.md:69", "docs/decisions/0015-knowledge-corpus-inventory.md:15"],
+      "paths": ["data/tth"]
+    },
+    {
+      "id": "ts2009",
+      "disposition": "restricted",
+      "reason": "Licensed ISR text, served from Supabase Storage and ignored by Git; not present in the repository.",
+      "evidence": ["docs/terms.md:68", ".gitignore:8-10", "AGENTS.md:7"],
+      "paths": ["data/ts2009"]
+    },
+    {
+      "id": "dss",
+      "disposition": "restricted",
+      "reason": "Qumran data has no stated license and docs/terms.md treats it as non-redistributable; a .gitignore comment claims CC BY-SA 4.0. The conflict is unresolved.",
+      "evidence": ["docs/terms.md:75", ".gitignore:19-21"],
+      "paths": ["data/dss"]
+    },
+    {
+      "id": "hutter",
+      "disposition": "deferred",
+      "reason": "The contract lists the Hutter connector as not implemented, and the committed data is a staging transcription pipeline rather than a reviewed edition.",
+      "evidence": ["contracts/biblical-knowledge/v1/README.md:102-103"],
+      "paths": ["data/hutter"]
+    },
+    {
+      "id": "translit",
+      "disposition": "deferred",
+      "reason": "Transliteration is a second annotation layer over OE and Delitzsch tokens; contract v1 has no record kind for it. DSS transliterations also inherit the dss restriction.",
+      "evidence": ["docs/decisions/0015-knowledge-corpus-inventory.md:17"],
+      "paths": ["data/translit"]
+    },
+    {
+      "id": "relationships",
+      "disposition": "deferred",
+      "reason": "The contextual relationship catalog is owned by #184.",
+      "evidence": ["contracts/biblical-knowledge/v1/README.md:99"],
+      "paths": ["data/relationships"]
+    },
+    {
+      "id": "commentary-generated",
+      "disposition": "unavailable",
+      "reason": "The Shaul commentary search corpus is generated and ignored by Git; its public source notes are normalized directly as shaul-notes.",
+      "evidence": [".gitignore:178-179"],
+      "paths": ["data/commentary/generated"]
+    },
+    {
+      "id": "shaul-knowledge",
+      "disposition": "included",
+      "reason": "Public Shaul knowledge records at the pinned revision.",
+      "evidence": ["docs/decisions/0015-knowledge-corpus-inventory.md:9", "scripts/knowledge/compatibility.py:38"],
+      "include": {"adapter": "shaul-record", "origin": "shaul", "root": "knowledge", "patterns": ["*/*.yml"], "repository": "https://github.com/jhonnyisaacc/shaul", "revision": "8c94b0fe9eca817e22340430309801d0ef76125b"}
+    },
+    {
+      "id": "shaul-notes",
+      "disposition": "included",
+      "reason": "Public Shaul notes under content/besorah, content/tanaj and content/temas at the pinned revision.",
+      "evidence": ["docs/decisions/0015-knowledge-corpus-inventory.md:9", "docs/decisions/0015-knowledge-corpus-inventory.md:14"],
+      "include": {"adapter": "shaul-note", "origin": "shaul", "root": "content", "patterns": ["besorah/**/*.md", "tanaj/**/*.md", "temas/**/*.md"], "repository": "https://github.com/jhonnyisaacc/shaul", "revision": "8c94b0fe9eca817e22340430309801d0ef76125b"}
+    },
+    {
+      "id": "shaul-site-pages",
+      "disposition": "deferred",
+      "reason": "Shaul navigation pages and authoring templates are not notes.",
+      "evidence": ["docs/decisions/0015-knowledge-corpus-inventory.md:11"],
+      "paths": []
+    },
+    {
+      "id": "shaul-derived",
+      "disposition": "deferred",
+      "reason": "Shaul generated/ graphs and data/ authoring inventories are derived metadata, not source records.",
+      "evidence": ["docs/decisions/0015-knowledge-corpus-inventory.md:12"],
+      "paths": []
+    },
+    {
+      "id": "shaul-private",
+      "disposition": "restricted",
+      "reason": "Private transcripts and local-only Shaul records are excluded entirely.",
+      "evidence": ["contracts/biblical-knowledge/v1/README.md:104-105", "docs/decisions/0015-knowledge-corpus-inventory.md:10"],
+      "paths": []
+    }
+  ],
+  "not_sources": [
+    {"path": "data/fonts", "reason": "Font files are rendering assets, not source records.", "evidence": "docs/terms.md:76-79"},
+    {"path": "data/knowledge", "reason": "Knowledge foundation registries, pilot and corpus snapshots."}
+  ]
+}
