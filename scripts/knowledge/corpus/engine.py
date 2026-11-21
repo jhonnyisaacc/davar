@@ -17,7 +17,7 @@ from ..core import (
     encoded,
     read_json,
 )
-from ..validate import Validator, validate_locators
+from ..validate import SCHEMAS, Validator, validate_locators
 from .families import (
     ADAPTERS,
     SEGMENTATION,
@@ -39,6 +39,7 @@ DAVAR_REPOSITORY = "https://github.com/jhonnyisaacc/davar"
 DAVAR_SCOPE = "data"
 DISPOSITIONS = ("included", "unavailable", "restricted", "deferred")
 REPORTS = ("coverage", "unresolved", "validation")
+FAMILY_COUNTS = ("inputs", "units", "normalized", "unresolved", "records")
 CHECKS = (
     "pins_match_discovery_and_shaul_bytes",
     "every_source_file_has_exactly_one_disposition",
@@ -415,7 +416,17 @@ def close_references(outcomes: dict) -> None:
             evidence["targets"] = kept
 
 
-def input_digest(snap: Snapshot, pins: list[dict]) -> str:
+def contract_digests(root: Path) -> dict[str, str]:
+    paths = [
+        *sorted((root / KNOWLEDGE / "registries").glob("*.json")),
+        *sorted((root / SCHEMAS).glob("*.schema.json")),
+    ]
+    return {
+        p.relative_to(root).as_posix(): digest(encoded(read_json(p))) for p in paths
+    }
+
+
+def input_digest(root: Path, snap: Snapshot, pins: list[dict]) -> str:
     return digest(
         encoded(
             dict(
@@ -423,6 +434,7 @@ def input_digest(snap: Snapshot, pins: list[dict]) -> str:
                 inventory=snap.inventory,
                 editions=snap.editions,
                 inputs=pins,
+                contract=contract_digests(root),
             )
         )
     )
@@ -482,28 +494,13 @@ def generate(
     external_roots: dict,
     sink: Callable[[str, bytes], None],
 ):
-    registries = {
-        p.stem: read_json(p)
-        for p in sorted((root / KNOWLEDGE / "registries").glob("*.json"))
-    }
-    digest_of_inputs = input_digest(snap, pins)
+    digest_of_inputs = input_digest(root, snap, pins)
     tally = new_tally(snap)
     files = []
     for path, data in render(root, snap, pins, external_roots, tally):
         sink(path, data)
         files.append(dict(path=path, sha256=digest(data)))
-    reports = dict(
-        coverage=coverage_report(snap, tally, registries["books"], digest_of_inputs),
-        unresolved=unresolved_report(snap, tally),
-        validation=dict(
-            snapshot=snap.name,
-            input_manifest_digest=digest_of_inputs,
-            shards=tally.shards,
-            records=dict(sorted(tally.records.items())),
-            checks=list(CHECKS),
-            status="passed",
-        ),
-    )
+    reports = build_reports(root, snap, tally, digest_of_inputs)
     for name in REPORTS:
         data = encoded(reports[name])
         sink(f"reports/{name}.json", data)
@@ -518,6 +515,71 @@ def generate(
     Validator(root).schema("manifest", manifest)
     sink("manifest.json", encoded(manifest))
     return manifest, reports
+
+
+def build_reports(root: Path, snap: Snapshot, tally: Tally, input_digest: str) -> dict:
+    books = read_json(root / KNOWLEDGE / "registries/books.json")
+    return dict(
+        coverage=coverage_report(snap, tally, books, input_digest),
+        unresolved=unresolved_report(snap, tally),
+        validation=dict(
+            snapshot=snap.name,
+            input_manifest_digest=input_digest,
+            shards=tally.shards,
+            records=dict(sorted(tally.records.items())),
+            checks=list(CHECKS),
+            status="passed",
+        ),
+    )
+
+
+def davar_reports(snap: Snapshot, reports: dict) -> dict:
+    external = {f.id for f in snap.included() if f.origin != "davar"}
+    editions = {
+        f.include.edition_id for f in snap.included() if f.origin == "davar"
+    }
+
+    def from_davar(row):
+        return row["source_id"].removeprefix("source:").split("/")[0] not in external
+
+    coverage, unresolved = reports["coverage"], reports["unresolved"]
+    units = [u for u in unresolved["units"] if from_davar(u)]
+    references = [r for r in unresolved["references"] if from_davar(r)]
+    return dict(
+        coverage=dict(
+            coverage,
+            families=[
+                {k: v for k, v in row.items() if k not in FAMILY_COUNTS}
+                if row["id"] in external
+                else row
+                for row in coverage["families"]
+            ],
+            editions=[e for e in coverage["editions"] if e["edition_id"] in editions],
+        ),
+        unresolved=dict(
+            unresolved,
+            units_by_reason=by_reason(u["reason"] for u in units),
+            references_by_reason=by_reason(
+                reason for r in references for _, reason in r["unresolved"]
+            ),
+            units=units,
+            references=references,
+            passage_mappings=[
+                m
+                for m in unresolved["passage_mappings"]
+                if m["edition_id"] in editions
+            ],
+        ),
+        validation={
+            k: v
+            for k, v in reports["validation"].items()
+            if k not in ("shards", "records")
+        },
+    )
+
+
+def by_reason(reasons) -> dict:
+    return dict(sorted(Counter(reasons).items()))
 
 
 def shard_records(members, registries, editions, checks: Checks, tally: Tally) -> dict:
@@ -677,10 +739,8 @@ def unresolved_report(snap: Snapshot, tally: Tally) -> dict:
     ]
     return dict(
         snapshot=snap.name,
-        units_by_reason=dict(sorted(Counter(u["reason"] for u in units).items())),
-        references_by_reason=dict(
-            sorted(Counter(r["reason"] for r in tally.references).items())
-        ),
+        units_by_reason=by_reason(u["reason"] for u in units),
+        references_by_reason=by_reason(r["reason"] for r in tally.references),
         units=units,
         references=references,
         passage_mappings=mappings,

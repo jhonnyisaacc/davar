@@ -274,20 +274,31 @@ in memory and compares the manifest and reports byte for byte. `build` writes th
 tree to a new temporary directory and fails unless it matches the committed snapshot.
 `newest` names the highest-numbered snapshot.
 
+A corpus manifest's `input_manifest_digest` covers the normalizer version, the
+inventory, the corpus-only editions, the input pins, and the parsed content of every
+file in `registries/` and every record schema. The corpus has no authored mappings
+outside the registries.
+
 Staleness follows what the corpus reads, not whole-file bytes:
 
 - A Davar source file may change at HEAD while its pin keeps the SHA-256 of the pinned
   revision. The snapshot stays current while every regenerated shard and report is
   unchanged. A lexicon definition edit leaves it current; a lemma edit makes it stale.
-- A registry or generator change that alters any shard makes the snapshot stale,
-  because the shard digests in `manifest.files` change. A schema change that the
-  shards no longer satisfy fails validation.
+- A change to the content of any file in `registries/` or any record schema changes the
+  input digest and makes the snapshot stale, even when no shard changes. A generator
+  change that alters a shard or report makes it stale because the digests in
+  `manifest.files` change.
 - Shaul is pinned by revision and file hash. The checkout must be a clean clone at the
   pinned revision, and any byte change fails.
-- `tests/test_knowledge_corpus.py` regenerates the Davar shards of the newest snapshot
-  without a Shaul checkout, schema-validates one shard per family, and fails when any
-  shard digest differs. Shaul-only effects, such as an alias change that alters a note
-  reference, need `check` with `--shaul-root`.
+- `tests/test_knowledge_corpus.py` checks the newest snapshot without a Shaul checkout.
+  It regenerates the Davar shards, recomputes the input digest and the Davar-derived
+  parts of the three reports, and schema-validates one shard per family. It fails when a
+  Davar shard, the input digest, or a Davar part of a report differs, so a registry or
+  schema change fails it. The Davar parts are every report field except the counts of
+  Shaul families, Shaul unresolved records and references, and the shard and record
+  totals of `validation.json`. Davar shard digests already fix the Davar share of those
+  totals. A generator change that alters only the Shaul shard needs `check` with
+  `--shaul-root`.
 
 Rules the generator enforces:
 
@@ -301,8 +312,8 @@ Rules the generator enforces:
   A Delitzsch verse needs words, and its words must spell the verse text.
 - Passage mappings come only from `registries/reference-mappings.json`. No identity
   mapping is inferred, so most passages stay `unresolved` and are counted per book.
-- Delitzsch passage text drops the parser's prefix-segmentation slashes, which
-  reproduces the DHNT'85+ module text, and tokens keep surfaces only. Strong's codes,
+- Delitzsch passage text drops the parser's prefix-segmentation slashes. The result
+  equals the DHNT'85+ module verse text after its `<S>` Strong's tags are removed, each maqaf-space pair (`־ `) is closed to the maqaf alone, and leading and trailing whitespace is trimmed. Tokens keep surfaces only. Strong's codes,
   prefixes and segmentation are withheld, and validation rejects a slash in any
   Delitzsch passage or token.
   Lexicons keep entry identifiers and lemmas only. Shaul notes keep frontmatter,

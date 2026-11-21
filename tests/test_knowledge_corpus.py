@@ -10,9 +10,12 @@ from scripts.delitzsch.sqlite_loader import SQLiteLoader
 from scripts.knowledge.core import ROOT, digest, read_json
 from scripts.knowledge.corpus.__main__ import check, compare, regenerate
 from scripts.knowledge.corpus.engine import (
+    REPORTS,
     SNAPSHOTS,
     PinDrift,
     Snapshot,
+    build_reports,
+    davar_reports,
     input_digest,
     new_tally,
     newest_snapshot,
@@ -202,6 +205,31 @@ def test_pins_follow_what_the_corpus_reads(corpus):
         check(root, "fixture", roots)
 
 
+@pytest.mark.parametrize(
+    "path, change",
+    [
+        (
+            "data/knowledge/registries/aliases.json",
+            lambda aliases: aliases.append(dict(aliases[0], alias="Genesis-x")),
+        ),
+        (
+            "contracts/biblical-knowledge/v1/concept.schema.json",
+            lambda schema: schema.update(title="changed"),
+        ),
+    ],
+)
+def test_registry_and_schema_changes_make_the_snapshot_stale(corpus, path, change):
+    root, roots = corpus
+    committed_fixture(root, roots)
+    value = read_json(root / path)
+    (root / path).write_text(json.dumps(value, indent=4))
+    check(root, "fixture", roots)
+    change(value)
+    (root / path).write_text(json.dumps(value))
+    with pytest.raises(ValueError, match="stale: .*reports/validation.json"):
+        check(root, "fixture", roots)
+
+
 def test_shaul_drift_and_unpinned_files_fail(corpus):
     root, roots = corpus
     snap = Snapshot.load(root, "fixture", roots)
@@ -308,27 +336,34 @@ def test_check_detects_stale_snapshot_and_compare_names_changes(corpus):
 def test_newest_snapshot_matches_current_davar_sources():
     name = newest_snapshot(ROOT)
     snap = Snapshot.load(ROOT, name)
-    manifest = read_json(ROOT / SNAPSHOTS / name / "manifest.json")
-    assert input_digest(snap, manifest["inputs"]) == manifest["input_manifest_digest"]
+    directory = ROOT / SNAPSHOTS / name
+    manifest = read_json(directory / "manifest.json")
     davar = {f.id for f in snap.included() if f.origin == "davar"}
     expected = {
         f["path"]: f["sha256"]
         for f in manifest["files"]
         if f["path"].split("/")[1] in davar
     }
-    sampled, actual = {}, {}
+    tally, sampled, actual = new_tally(snap), {}, {}
     for path, data in render(
-        ROOT,
-        snap,
-        manifest["inputs"],
-        {},
-        new_tally(snap),
-        select=davar,
-        schema=False,
+        ROOT, snap, manifest["inputs"], {}, tally, select=davar, schema=False
     ):
         actual[path] = digest(data)
         sampled.setdefault(path.split("/")[1], data)
-    stale = sorted(p for p in expected.keys() | actual.keys() if expected.get(p) != actual.get(p))
+    stale = sorted(
+        p for p in expected.keys() | actual.keys() if expected.get(p) != actual.get(p)
+    )
+    digest_of_inputs = input_digest(ROOT, snap, manifest["inputs"])
+    if digest_of_inputs != manifest["input_manifest_digest"]:
+        stale.append("input_manifest_digest")
+    committed, regenerated = (
+        davar_reports(snap, reports)
+        for reports in (
+            {r: read_json(directory / f"reports/{r}.json") for r in REPORTS},
+            build_reports(ROOT, snap, tally, digest_of_inputs),
+        )
+    )
+    stale += [f"reports/{r}.json" for r in REPORTS if committed[r] != regenerated[r]]
     assert not stale, f"Snapshot {name} is stale; create a new snapshot: {stale[:10]}"
     validator = Validator(ROOT)
     for data in sampled.values():
