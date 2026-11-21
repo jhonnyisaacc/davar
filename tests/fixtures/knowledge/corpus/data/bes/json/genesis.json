@@ -1,0 +1,34 @@
+{
+  "book_info": {
+    "book_id": "genesis",
+    "tth_name": "Génesis",
+    "hebrew_name": "בראשית",
+    "english_name": "Genesis",
+    "spanish_name": "Génesis",
+    "section": "torah",
+    "total_chapters": 50,
+    "total_verses": 1533
+  },
+  "chapters": [
+    {
+      "chapter": 1,
+      "verses": [
+        {
+          "verse": 1,
+          "bes": "Al principio Dios hizo el cielo y la tierra.",
+          "footnotes": []
+        },
+        {
+          "verse": 2,
+          "bes": "Y la tierra estaba desordenada y sin forma; y estaba oscuro sobre la faz del abismo: y el Espíritu de Dios se movía sobre la faz de las aguas.",
+          "footnotes": []
+        },
+        {
+          "verse": 3,
+          "bes": " ",
+          "footnotes": []
+        }
+      ]
+    }
+  ]
+}
