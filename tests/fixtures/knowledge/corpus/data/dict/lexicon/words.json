@@ -1,0 +1,148 @@
+{
+  "H1247": {
+    "strong_number": "H1247",
+    "lemma": "בַּר",
+    "normalized": "בר",
+    "pronunciation": "bar",
+    "transliteration": "bar",
+    "translit_en": "bar",
+    "translit_es": "bar",
+    "definitions": [
+      {
+        "text_en": "son",
+        "source": "bdb",
+        "order": 1,
+        "sense": "0",
+        "text_es": "hijo"
+      }
+    ],
+    "sources": {
+      "strongs": false,
+      "bdb": true
+    },
+    "occurrences": {
+      "total": 7,
+      "references": [
+        "dan.3.25",
+        "dan.5.22",
+        "dan.6.1",
+        "dan.7.13",
+        "ezra.5.1",
+        "ezra.5.2",
+        "ezra.6.14"
+      ],
+      "surface_references": [
+        "dan.3.25",
+        "dan.5.22",
+        "dan.6.1",
+        "dan.7.13",
+        "ezra.5.1",
+        "ezra.5.2",
+        "ezra.6.14"
+      ]
+    },
+    "is_root": false,
+    "root_ref": "H1129",
+    "instance_policy_version": "1.1",
+    "instance_tier": "low",
+    "instance_total": 7,
+    "instance_surface_count": 7,
+    "instance_omitted_count": 0,
+    "instance_source_manifest_version": "1.1",
+    "instance_signal_extractor_version": "unavailable-0",
+    "root_adjudication": {
+      "method": "unique_cited_derivation_v1",
+      "status": "accepted",
+      "confidence": 0.99,
+      "original_root_ref": "H1121"
+    }
+  },
+  "H606": {
+    "strong_number": "H606",
+    "lemma": "אֱנָשׁ",
+    "normalized": "אנש",
+    "pronunciation": "en-awsh'",
+    "transliteration": "ʼĕnâsh",
+    "translit_en": "enash",
+    "translit_es": "enash",
+    "definitions": [
+      {
+        "text_en": "man",
+        "source": "bdb",
+        "order": 1,
+        "sense": "0",
+        "text_es": "hombre"
+      },
+      {
+        "text_en": "mankind",
+        "source": "bdb",
+        "order": 2,
+        "sense": "0",
+        "text_es": "humanidad"
+      }
+    ],
+    "sources": {
+      "strongs": false,
+      "bdb": true
+    },
+    "occurrences": {
+      "total": 19,
+      "references": [
+        "dan.2.10",
+        "dan.2.38",
+        "dan.2.43",
+        "dan.3.10",
+        "dan.4.13",
+        "dan.4.14",
+        "dan.4.22",
+        "dan.4.29",
+        "dan.4.30",
+        "dan.5.5",
+        "dan.5.7",
+        "dan.5.21",
+        "dan.6.8",
+        "dan.6.13",
+        "dan.7.4",
+        "dan.7.8",
+        "dan.7.13",
+        "ezra.4.11",
+        "ezra.6.11"
+      ],
+      "surface_references": [
+        "dan.2.10",
+        "dan.2.38",
+        "dan.2.43",
+        "dan.3.10",
+        "dan.4.13",
+        "dan.4.14",
+        "dan.4.22",
+        "dan.4.29",
+        "dan.4.30",
+        "dan.5.5",
+        "dan.5.7",
+        "dan.5.21",
+        "dan.6.8",
+        "dan.6.13",
+        "dan.7.4",
+        "dan.7.8",
+        "dan.7.13",
+        "ezra.4.11",
+        "ezra.6.11"
+      ]
+    },
+    "is_root": false,
+    "instance_policy_version": "1.1",
+    "instance_tier": "low",
+    "instance_total": 19,
+    "instance_surface_count": 19,
+    "instance_omitted_count": 0,
+    "instance_source_manifest_version": "1.1",
+    "instance_signal_extractor_version": "unavailable-0",
+    "root_adjudication": {
+      "method": "unique_cited_derivation_v1",
+      "status": "unresolved",
+      "confidence": 0.0,
+      "original_root_ref": "H582"
+    }
+  }
+}
