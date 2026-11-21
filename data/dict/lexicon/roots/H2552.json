@@ -8,31 +8,18 @@
   "translit_es": "jamam",
   "definitions": [
     {
-      "text_en": "be",
+      "text_en": "be or become warm",
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "ser"
+      "text_es": "estar o ponerse caliente"
     },
     {
-      "text_en": "become warm",
-      "source": "bdb",
-      "order": 2,
-      "sense": "0",
-      "text_es": "calentarse"
-    },
-    {
-      "text_en": "be",
+      "text_en": "be or grow warm",
       "source": "bdb",
       "order": 3,
       "sense": "1",
-      "text_es": "ser"
-    },
-    {
-      "text_en": "grow warm",
-      "source": "bdb",
-      "order": 4,
-      "sense": "1"
+      "text_es": "estar o ponerse tibio"
     },
     {
       "text_en": "fig.",

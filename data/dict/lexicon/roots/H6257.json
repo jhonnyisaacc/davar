@@ -28,10 +28,11 @@
       "sense": "0"
     },
     {
-      "text_en": "heaps",
+      "text_en": "for (i.e. to be) heaps",
       "source": "bdb",
       "order": 4,
-      "sense": "0"
+      "sense": "0",
+      "text_es": "para (es decir, para ser) montones"
     }
   ],
   "sources": {

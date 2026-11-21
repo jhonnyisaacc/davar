@@ -22,7 +22,7 @@ import type { TranslationRow } from "@/src/services/database";
 import {
   deleteTranslationBookEntries,
   deleteHebrewBookEntries,
-  insertLexiconEntries,
+  replaceLexiconEntries,
   insertTranslationVerses,
   insertHebrewVerses,
   insertDssVariants,
@@ -185,7 +185,7 @@ export const downloadDictionaryBundle = async (remoteVersion?: number) => {
 
     // Insert lexicon entries
     const entries = buildLexiconEntries(bundle);
-    await insertLexiconEntries(entries);
+    await replaceLexiconEntries(entries);
 
     // Insert prefix entries (previously discarded)
     if (bundle.prefixes && Object.keys(bundle.prefixes).length > 0) {

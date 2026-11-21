@@ -1,0 +1,5331 @@
+{
+  "issue": 42,
+  "rule": "lexical_review",
+  "reviewer": "claude-delitzsch-review",
+  "decisions": [
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "D0699",
+      "hebrew": "מְלִיטִי",
+      "transliteration_en": "Melita",
+      "transliteration_es": "Melita",
+      "root": "",
+      "root_strong": "",
+      "mapping_scope": "instances_only",
+      "nt_instances": [
+        {
+          "book": "acts",
+          "chapter": 28,
+          "verse": 1,
+          "word_index": 7,
+          "text": "מְלִיטִי׃"
+        }
+      ],
+      "definition": {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "Melita; the island of Malta, where Paul was shipwrecked.",
+        "text_es": "Melita; la isla de Malta, donde naufragó Pablo."
+      },
+      "reason": "מְלִיטִי has no entry of its own; D0254 is Miletus, a different place",
+      "evidence": {
+        "lexicon": "New Testament place name with no Strong or BDB entry",
+        "sense": "Melita; the island of Malta, where Paul was shipwrecked.",
+        "spanish": "Melita; la isla de Malta, donde naufragó Pablo.",
+        "greek": "Μελίτη",
+        "issue": 42
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 19,
+        "verse": 21,
+        "word_index": 21,
+        "text": "רוֹמִי׃",
+        "strong": "H7311",
+        "prefixes": []
+      },
+      "previous_strong": "H7311",
+      "new_strong": "D0705",
+      "reason": "רוֹמִי׃ is Rome; H7311 רוּם 'be high' is a different word",
+      "evidence": {
+        "lexicon": "D0705 רוֹמִי Rome; the capital of the Roman Empire.",
+        "grammar": "place name",
+        "context": "Acts 19:21, Greek Ῥώμη",
+        "issue": 42,
+        "greek": "G4516 Ῥώμη"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 22,
+        "verse": 26,
+        "word_index": 17,
+        "text": "רוֹמִי",
+        "strong": "H7311",
+        "prefixes": []
+      },
+      "previous_strong": "H7311",
+      "new_strong": "D0141",
+      "reason": "רוֹמִי is Roman; H7311 רוּם 'be high' is a different word",
+      "evidence": {
+        "lexicon": "D0141 רומי Roman; pertaining to Rome or Roman citizenship.",
+        "grammar": "gentilic adjective",
+        "context": "Acts 22:26, Greek Ῥωμαῖος",
+        "issue": 42,
+        "greek": "G4514 Ῥωμαῖος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 22,
+        "verse": 29,
+        "word_index": 13,
+        "text": "רוֹמִי",
+        "strong": "H7311",
+        "prefixes": []
+      },
+      "previous_strong": "H7311",
+      "new_strong": "D0141",
+      "reason": "רוֹמִי is Roman; H7311 רוּם 'be high' is a different word",
+      "evidence": {
+        "lexicon": "D0141 רומי Roman; pertaining to Rome or Roman citizenship.",
+        "grammar": "gentilic adjective",
+        "context": "Acts 22:29, Greek Ῥωμαῖος",
+        "issue": 42,
+        "greek": "G4514 Ῥωμαῖος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 23,
+        "verse": 27,
+        "word_index": 15,
+        "text": "רוֹמִי",
+        "strong": "H7311",
+        "prefixes": []
+      },
+      "previous_strong": "H7311",
+      "new_strong": "D0141",
+      "reason": "רוֹמִי is Roman; H7311 רוּם 'be high' is a different word",
+      "evidence": {
+        "lexicon": "D0141 רומי Roman; pertaining to Rome or Roman citizenship.",
+        "grammar": "gentilic adjective",
+        "context": "Acts 23:27, Greek Ῥωμαῖος",
+        "issue": 42,
+        "greek": "G4514 Ῥωμαῖος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 28,
+        "verse": 16,
+        "word_index": 3,
+        "text": "רוֹמִי",
+        "strong": "H4150",
+        "prefixes": []
+      },
+      "previous_strong": "H4150",
+      "new_strong": "D0705",
+      "reason": "רוֹמִי is Rome; H4150 מוֹעֵד 'Appointed time, fixed hour' is a different word",
+      "evidence": {
+        "lexicon": "D0705 רוֹמִי Rome; the capital of the Roman Empire.",
+        "grammar": "place name",
+        "context": "Acts 28:16, Greek Ῥώμη",
+        "issue": 42,
+        "greek": "G4516 Ῥώμη"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 16,
+        "verse": 11,
+        "word_index": 2,
+        "text": "טְרוֹאַס",
+        "strong": "H8269",
+        "prefixes": []
+      },
+      "previous_strong": "H8269",
+      "new_strong": "D0344",
+      "reason": "טְרוֹאַס is Troas; H8269 שַׂר 'chieftain' is a different word",
+      "evidence": {
+        "lexicon": "D0344 טְרוֹאָס Troas; a port of Mysia on the Aegean coast.",
+        "grammar": "place name",
+        "context": "Acts 16:11, Greek Τρωάς",
+        "issue": 42,
+        "greek": "G5174 Τρωάς"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 19,
+        "verse": 27,
+        "word_index": 13,
+        "text": "אַרְטְמִיס",
+        "strong": "H4116",
+        "prefixes": []
+      },
+      "previous_strong": "H4116",
+      "new_strong": "D0358",
+      "reason": "אַרְטְמִיס is Artemis; H4116 מָהַר 'hasten' is a different word",
+      "evidence": {
+        "lexicon": "D0358 אַרְטְמִיס Artemis; the goddess worshipped at Ephesus.",
+        "grammar": "divine name",
+        "context": "Acts 19:27, Greek Ἄρτεμις",
+        "issue": 42,
+        "greek": "G0735 Ἄρτεμις"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 19,
+        "verse": 34,
+        "word_index": 13,
+        "text": "אַרְטְמִיס",
+        "strong": "H4116",
+        "prefixes": []
+      },
+      "previous_strong": "H4116",
+      "new_strong": "D0358",
+      "reason": "אַרְטְמִיס is Artemis; H4116 מָהַר 'hasten' is a different word",
+      "evidence": {
+        "lexicon": "D0358 אַרְטְמִיס Artemis; the goddess worshipped at Ephesus.",
+        "grammar": "divine name",
+        "context": "Acts 19:34, Greek Ἄρτεμις",
+        "issue": 42,
+        "greek": "G0735 Ἄρτεμις"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 21,
+        "verse": 29,
+        "word_index": 4,
+        "text": "טְרוֹפִימוֹס",
+        "strong": "H3541",
+        "prefixes": []
+      },
+      "previous_strong": "H3541",
+      "new_strong": "D0373",
+      "reason": "טְרוֹפִימוֹס is Trophimus; H3541 כֹּה 'thus' is a different word",
+      "evidence": {
+        "lexicon": "D0373 טְרוֹפִימוֹס Trophimus; an Ephesian companion of Paul.",
+        "grammar": "personal name",
+        "context": "Acts 21:29, Greek Τρόφιμος",
+        "issue": 42,
+        "greek": "G5161 Τρόφιμος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 27,
+        "verse": 30,
+        "word_index": 16,
+        "text": "עוֹגִינִים",
+        "strong": "H1554",
+        "prefixes": []
+      },
+      "previous_strong": "H1554",
+      "new_strong": "D0386",
+      "reason": "עוֹגִינִים is anchor; H1554 גַּלִּים 'heaps' is a different word",
+      "evidence": {
+        "lexicon": "D0386 עוֹגֵן anchor; a post-biblical Hebrew noun.",
+        "grammar": "plural noun",
+        "context": "Acts 27:30, Greek ἄγκυρα",
+        "issue": 42,
+        "greek": "G0045 ἄγκυρα"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 9,
+        "verse": 33,
+        "word_index": 4,
+        "text": "אֲנִיַּס",
+        "strong": "H5211",
+        "prefixes": []
+      },
+      "previous_strong": "H5211",
+      "new_strong": "D0408",
+      "reason": "אֲנִיַּס is Aeneas; H5211 נִיס 'flee' is a different word",
+      "evidence": {
+        "lexicon": "D0408 אֲנִיַּס Aeneas; a paralyzed man of Lydda healed through Peter.",
+        "grammar": "personal name",
+        "context": "Acts 9:33, Greek Αἰνέας",
+        "issue": 42,
+        "greek": "G0132 Αἰνέας"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 18,
+        "verse": 15,
+        "word_index": 8,
+        "text": "עִנּוּיָהּ",
+        "strong": "H8144",
+        "prefixes": []
+      },
+      "previous_strong": "H8144",
+      "new_strong": "D0410",
+      "reason": "עִנּוּיָהּ is affliction, suffering, torment; H8144 שָׁנִי 'scarlet' is a different word",
+      "evidence": {
+        "lexicon": "D0410 עִנּוּי affliction, suffering, torment; a post-biblical Hebrew noun.",
+        "grammar": "noun with 3fs suffix",
+        "context": "Revelation 18:15, Greek βασανισμός",
+        "issue": 42,
+        "greek": "G0929 βασανισμός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians2",
+        "chapter": 1,
+        "verse": 5,
+        "word_index": 2,
+        "text": "עִנּוּיֵי",
+        "strong": "H6039",
+        "prefixes": []
+      },
+      "previous_strong": "H6039",
+      "new_strong": "D0410",
+      "reason": "עִנּוּיֵי is affliction, suffering, torment; H6039 עֱנוּת 'affliction' is a different word",
+      "evidence": {
+        "lexicon": "D0410 עִנּוּי affliction, suffering, torment; a post-biblical Hebrew noun.",
+        "grammar": "plural construct noun",
+        "context": "2 Corinthians 1:5, Greek πάθημα",
+        "issue": 42,
+        "greek": "G3804 πάθημα"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "peter1",
+        "chapter": 1,
+        "verse": 11,
+        "word_index": 15,
+        "text": "עִנּוּיֵי",
+        "strong": "H6040",
+        "prefixes": []
+      },
+      "previous_strong": "H6040",
+      "new_strong": "D0410",
+      "reason": "עִנּוּיֵי is affliction, suffering, torment; H6040 עֳנִי 'affliction' is a different word",
+      "evidence": {
+        "lexicon": "D0410 עִנּוּי affliction, suffering, torment; a post-biblical Hebrew noun.",
+        "grammar": "plural construct noun",
+        "context": "1 Peter 1:11, Greek πάθημα",
+        "issue": 42,
+        "greek": "G3804 πάθημα"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "peter1",
+        "chapter": 5,
+        "verse": 1,
+        "word_index": 9,
+        "text": "עִנּוּיֵי",
+        "strong": "H6040",
+        "prefixes": []
+      },
+      "previous_strong": "H6040",
+      "new_strong": "D0410",
+      "reason": "עִנּוּיֵי is affliction, suffering, torment; H6040 עֳנִי 'affliction' is a different word",
+      "evidence": {
+        "lexicon": "D0410 עִנּוּי affliction, suffering, torment; a post-biblical Hebrew noun.",
+        "grammar": "plural construct noun",
+        "context": "1 Peter 5:1, Greek πάθημα",
+        "issue": 42,
+        "greek": "G3804 πάθημα"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "hebrews",
+        "chapter": 10,
+        "verse": 32,
+        "word_index": 13,
+        "text": "עִנּוּיִם",
+        "strong": "H7075",
+        "prefixes": []
+      },
+      "previous_strong": "H7075",
+      "new_strong": "D0410",
+      "reason": "עִנּוּיִם is affliction, suffering, torment; H7075 קִנְיָן 'thing got' is a different word",
+      "evidence": {
+        "lexicon": "D0410 עִנּוּי affliction, suffering, torment; a post-biblical Hebrew noun.",
+        "grammar": "plural noun",
+        "context": "Hebrews 10:32, Greek πάθημα",
+        "issue": 42,
+        "greek": "G3804 πάθημα"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 14,
+        "verse": 11,
+        "word_index": 1,
+        "text": "עִנּוּיָם",
+        "strong": "H1897",
+        "prefixes": []
+      },
+      "previous_strong": "H1897",
+      "new_strong": "D0410",
+      "reason": "עִנּוּיָם is affliction, suffering, torment; H1897 הָגָה 'moan' is a different word",
+      "evidence": {
+        "lexicon": "D0410 עִנּוּי affliction, suffering, torment; a post-biblical Hebrew noun.",
+        "grammar": "noun with 3mp suffix",
+        "context": "Revelation 14:11, Greek βασανισμός",
+        "issue": 42,
+        "greek": "G0929 βασανισμός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 16,
+        "verse": 7,
+        "word_index": 13,
+        "text": "שְׁטָרְךָ",
+        "strong": "H4644",
+        "prefixes": []
+      },
+      "previous_strong": "H4644",
+      "new_strong": "D0412",
+      "reason": "שְׁטָרְךָ is bond, written note of debt; H4644 מֹף 'Memphis' is a different word",
+      "evidence": {
+        "lexicon": "D0412 שְׁטָר bond, written note of debt; a post-biblical Hebrew noun.",
+        "grammar": "noun with 2ms suffix",
+        "context": "Luke 16:7, Greek γράμμα",
+        "issue": 42,
+        "greek": "G1121 γράμμα"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 8,
+        "verse": 19,
+        "word_index": 5,
+        "text": "לְהִתְגַּלּוּת",
+        "strong": "Hl/H1540",
+        "prefixes": [
+          "Hl"
+        ]
+      },
+      "previous_strong": "Hl/H1540",
+      "new_strong": "Hl/D0427",
+      "reason": "לְהִתְגַּלּוּת is revelation, appearing; H1540 גָּלָה 'uncover' is a different word",
+      "evidence": {
+        "lexicon": "D0427 הִתְגַּלּוּת revelation, appearing; a post-biblical Hebrew noun.",
+        "grammar": "preposition ל + noun",
+        "context": "Romans 8:19, Greek ἀποκάλυψις",
+        "issue": 42,
+        "greek": "G0602 ἀποκάλυψις"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 10,
+        "verse": 13,
+        "word_index": 26,
+        "text": "הַנִּסָּיוֹן",
+        "strong": "H5254",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "H5254",
+      "new_strong": "Hd/D0428",
+      "reason": "הַנִּסָּיוֹן is trial, testing; H5254 נָסָה 'test' is a different word",
+      "evidence": {
+        "lexicon": "D0428 נִסָּיוֹן trial, testing; temptation, a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "1 Corinthians 10:13, Greek πειρασμός",
+        "issue": 42,
+        "greek": "G3986G πειρασμός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "galatians",
+        "chapter": 6,
+        "verse": 1,
+        "word_index": 18,
+        "text": "נִסָּיוֹן",
+        "strong": "H5510",
+        "prefixes": []
+      },
+      "previous_strong": "H5510",
+      "new_strong": "D0428",
+      "reason": "נִסָּיוֹן is trial, testing; H5510 סִיוָן 'Sîwān' is a different word",
+      "evidence": {
+        "lexicon": "D0428 נִסָּיוֹן trial, testing; temptation, a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "Galatians 6:1, Greek πειράζω",
+        "issue": 42,
+        "greek": "G3985G πειράζω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 9,
+        "verse": 25,
+        "word_index": 9,
+        "text": "נִפְסָד",
+        "strong": "H5921",
+        "prefixes": []
+      },
+      "previous_strong": "H5921",
+      "new_strong": "D0442",
+      "reason": "נִפְסָד is spoil, perish; H5921 עַל 'forasmuch as' is a different word",
+      "evidence": {
+        "lexicon": "D0442 פָּסַד spoil, perish; nifal, be perishable; hiphil, lose, suffer loss, a post-biblical Hebrew verb.",
+        "grammar": "nifal participle",
+        "context": "1 Corinthians 9:25, Greek φθαρτός",
+        "issue": 42,
+        "greek": "G5349 φθαρτός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "peter1",
+        "chapter": 1,
+        "verse": 18,
+        "word_index": 4,
+        "text": "נִפְסָד",
+        "strong": "H7945",
+        "prefixes": []
+      },
+      "previous_strong": "H7945",
+      "new_strong": "D0442",
+      "reason": "נִפְסָד is spoil, perish; H7945 שֶׁל 'who' is a different word",
+      "evidence": {
+        "lexicon": "D0442 פָּסַד spoil, perish; nifal, be perishable; hiphil, lose, suffer loss, a post-biblical Hebrew verb.",
+        "grammar": "nifal participle",
+        "context": "1 Peter 1:18, Greek φθαρτός",
+        "issue": 42,
+        "greek": "G5349 φθαρτός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 1,
+        "verse": 23,
+        "word_index": 6,
+        "text": "נִפְסָד",
+        "strong": "H2086",
+        "prefixes": []
+      },
+      "previous_strong": "H2086",
+      "new_strong": "D0442",
+      "reason": "נִפְסָד is spoil, perish; H2086 זֵד 'insolent' is a different word",
+      "evidence": {
+        "lexicon": "D0442 פָּסַד spoil, perish; nifal, be perishable; hiphil, lose, suffer loss, a post-biblical Hebrew verb.",
+        "grammar": "nifal participle",
+        "context": "Romans 1:23, Greek ἄφθαρτος",
+        "issue": 42,
+        "greek": "G0862 ἄφθαρτος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 7,
+        "verse": 15,
+        "word_index": 11,
+        "text": "מְשֻׁעְבָּדִים",
+        "strong": "H5647",
+        "prefixes": []
+      },
+      "previous_strong": "H5647",
+      "new_strong": "D0444",
+      "reason": "מְשֻׁעְבָּדִים is enslave, subjugate; H5647 עָבַד 'serve' is a different word",
+      "evidence": {
+        "lexicon": "D0444 שִׁעְבֵּד enslave, subjugate; hitpael, become enslaved, a post-biblical Hebrew verb.",
+        "grammar": "pual participle",
+        "context": "1 Corinthians 7:15, Greek δουλόω",
+        "issue": 42,
+        "greek": "G1402 δουλόω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "galatians",
+        "chapter": 4,
+        "verse": 21,
+        "word_index": 5,
+        "text": "מְשֻׁעְבָּדִים",
+        "strong": "H2670",
+        "prefixes": []
+      },
+      "previous_strong": "H2670",
+      "new_strong": "D0444",
+      "reason": "מְשֻׁעְבָּדִים is enslave, subjugate; H2670 חׇפְשִׁי 'free' is a different word",
+      "evidence": {
+        "lexicon": "D0444 שִׁעְבֵּד enslave, subjugate; hitpael, become enslaved, a post-biblical Hebrew verb.",
+        "grammar": "pual participle",
+        "context": "Galatians 4:21",
+        "issue": 42,
+        "greek_note": "the Greek has ὑπὸ νόμον, under the law; Delitzsch renders it enslaved to the law"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "peter2",
+        "chapter": 2,
+        "verse": 19,
+        "word_index": 0,
+        "text": "חֵרוּת",
+        "strong": "H2715",
+        "prefixes": []
+      },
+      "previous_strong": "H2715",
+      "new_strong": "D0452",
+      "reason": "חֵרוּת is freedom, liberty; H2715 חֹר 'noble' is a different word",
+      "evidence": {
+        "lexicon": "D0452 חֵרוּת freedom, liberty; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "2 Peter 2:19, Greek ἐλευθερία",
+        "issue": 42,
+        "greek": "G1657 ἐλευθερία"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "ephesians",
+        "chapter": 4,
+        "verse": 29,
+        "word_index": 2,
+        "text": "נִבּוּל",
+        "strong": "H944",
+        "prefixes": []
+      },
+      "previous_strong": "H944",
+      "new_strong": "D0480",
+      "reason": "נִבּוּל is foulness; H944 בּוּל 'produce' is a different word",
+      "evidence": {
+        "lexicon": "D0480 נִבּוּל foulness; נִבּוּל פֶּה, obscene speech, a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "Ephesians 4:29, Greek σαπρός",
+        "issue": 42,
+        "greek": "G4550 σαπρός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "peter1",
+        "chapter": 3,
+        "verse": 21,
+        "word_index": 11,
+        "text": "טִנּוּף",
+        "strong": "H5130",
+        "prefixes": []
+      },
+      "previous_strong": "H5130",
+      "new_strong": "D0509",
+      "reason": "טִנּוּף is filth, defilement; H5130 נוּף 'move to and fro' is a different word",
+      "evidence": {
+        "lexicon": "D0509 טִנּוּף filth, defilement; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "1 Peter 3:21, Greek ῥύπος",
+        "issue": 42,
+        "greek": "G4509 ῥύπος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 1,
+        "verse": 44,
+        "word_index": 3,
+        "text": "צָיְדָה",
+        "strong": "H6720",
+        "prefixes": []
+      },
+      "previous_strong": "H6720",
+      "new_strong": "D0514",
+      "reason": "צָיְדָה is Saida; H6720 צֵידָה 'provision' is a different word",
+      "evidence": {
+        "lexicon": "D0514 צַיְדָה Saida; in בֵּית צַיְדָה, Bethsaida, a town by the Sea of Galilee.",
+        "grammar": "place name",
+        "context": "John 1:44, Greek Βηθσαϊδά",
+        "issue": 42,
+        "greek": "G0966 Βηθσαϊδά"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 9,
+        "verse": 10,
+        "word_index": 19,
+        "text": "צָיְדָה׃",
+        "strong": "H453",
+        "prefixes": []
+      },
+      "previous_strong": "H453",
+      "new_strong": "D0514",
+      "reason": "צָיְדָה׃ is Saida; H453 אֱלִיהוּ 'Yah' is a different word",
+      "evidence": {
+        "lexicon": "D0514 צַיְדָה Saida; in בֵּית צַיְדָה, Bethsaida, a town by the Sea of Galilee.",
+        "grammar": "place name",
+        "context": "Luke 9:10, Greek Βηθσαϊδά",
+        "issue": 42,
+        "greek": "G0966 Βηθσαϊδά"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 6,
+        "verse": 45,
+        "word_index": 13,
+        "text": "צָיְדָה",
+        "strong": "H6720",
+        "prefixes": []
+      },
+      "previous_strong": "H6720",
+      "new_strong": "D0514",
+      "reason": "צָיְדָה is Saida; H6720 צֵידָה 'provision' is a different word",
+      "evidence": {
+        "lexicon": "D0514 צַיְדָה Saida; in בֵּית צַיְדָה, Bethsaida, a town by the Sea of Galilee.",
+        "grammar": "place name",
+        "context": "Mark 6:45, Greek Βηθσαϊδά",
+        "issue": 42,
+        "greek": "G0966 Βηθσαϊδά"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 8,
+        "verse": 22,
+        "word_index": 3,
+        "text": "צָיְדָה",
+        "strong": "H6720",
+        "prefixes": []
+      },
+      "previous_strong": "H6720",
+      "new_strong": "D0514",
+      "reason": "צָיְדָה is Saida; H6720 צֵידָה 'provision' is a different word",
+      "evidence": {
+        "lexicon": "D0514 צַיְדָה Saida; in בֵּית צַיְדָה, Bethsaida, a town by the Sea of Galilee.",
+        "grammar": "place name",
+        "context": "Mark 8:22, Greek Βηθσαϊδά",
+        "issue": 42,
+        "greek": "G0966 Βηθσαϊδά"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 15,
+        "verse": 1,
+        "word_index": 4,
+        "text": "הַמּוֹכְסִים",
+        "strong": "H4371",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "H4371",
+      "new_strong": "Hd/D0547",
+      "reason": "הַמּוֹכְסִים is tax collector, publican; H4371 מֶכֶס 'computation' is a different word",
+      "evidence": {
+        "lexicon": "D0547 מוֹכֵס tax collector, publican; a post-biblical Hebrew noun.",
+        "grammar": "article ה + plural noun",
+        "context": "Luke 15:1, Greek τελώνης",
+        "issue": 42,
+        "greek": "G5057 τελώνης"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 12,
+        "word_index": 2,
+        "text": "מוֹכְסִים",
+        "strong": "H4371",
+        "prefixes": []
+      },
+      "previous_strong": "H4371",
+      "new_strong": "D0547",
+      "reason": "מוֹכְסִים is tax collector, publican; H4371 מֶכֶס 'computation' is a different word",
+      "evidence": {
+        "lexicon": "D0547 מוֹכֵס tax collector, publican; a post-biblical Hebrew noun.",
+        "grammar": "plural noun",
+        "context": "Luke 3:12, Greek τελώνης",
+        "issue": 42,
+        "greek": "G5057 τελώνης"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 2,
+        "verse": 15,
+        "word_index": 5,
+        "text": "מוֹכְסִים",
+        "strong": "H4371",
+        "prefixes": []
+      },
+      "previous_strong": "H4371",
+      "new_strong": "D0547",
+      "reason": "מוֹכְסִים is tax collector, publican; H4371 מֶכֶס 'computation' is a different word",
+      "evidence": {
+        "lexicon": "D0547 מוֹכֵס tax collector, publican; a post-biblical Hebrew noun.",
+        "grammar": "plural noun",
+        "context": "Mark 2:15, Greek τελώνης",
+        "issue": 42,
+        "greek": "G5057 τελώνης"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 11,
+        "verse": 19,
+        "word_index": 12,
+        "text": "מוֹכְסִים",
+        "strong": "H4371",
+        "prefixes": []
+      },
+      "previous_strong": "H4371",
+      "new_strong": "D0547",
+      "reason": "מוֹכְסִים is tax collector, publican; H4371 מֶכֶס 'computation' is a different word",
+      "evidence": {
+        "lexicon": "D0547 מוֹכֵס tax collector, publican; a post-biblical Hebrew noun.",
+        "grammar": "plural noun",
+        "context": "Matthew 11:19, Greek τελώνης",
+        "issue": 42,
+        "greek": "G5057 τελώνης"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 5,
+        "verse": 36,
+        "word_index": 9,
+        "text": "טְלַאי",
+        "strong": "H2921",
+        "prefixes": []
+      },
+      "previous_strong": "H2921",
+      "new_strong": "D0560",
+      "reason": "טְלַאי is patch; H2921 טָלָא 'patch' is a different word",
+      "evidence": {
+        "lexicon": "D0560 טְלַאי patch; a piece of cloth sewn on, a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "Luke 5:36, Greek ἐπίβλημα",
+        "issue": 42,
+        "greek": "G1915 ἐπίβλημα"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 2,
+        "verse": 21,
+        "word_index": 2,
+        "text": "טְלַאי",
+        "strong": "H2921",
+        "prefixes": []
+      },
+      "previous_strong": "H2921",
+      "new_strong": "D0560",
+      "reason": "טְלַאי is patch; H2921 טָלָא 'patch' is a different word",
+      "evidence": {
+        "lexicon": "D0560 טְלַאי patch; a piece of cloth sewn on, a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "Mark 2:21, Greek ἐπίβλημα",
+        "issue": 42,
+        "greek": "G1915 ἐπίβλημα"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 19,
+        "verse": 29,
+        "word_index": 5,
+        "text": "סְפוֹג",
+        "strong": "H1588",
+        "prefixes": []
+      },
+      "previous_strong": "H1588",
+      "new_strong": "D0575",
+      "reason": "סְפוֹג is sponge; H1588 גַּן 'enclosure' is a different word",
+      "evidence": {
+        "lexicon": "D0575 סְפוֹג sponge; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "John 19:29, Greek σπόγγος",
+        "issue": 42,
+        "greek": "G4699 σπόγγος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 11,
+        "verse": 25,
+        "word_index": 13,
+        "text": "טִמְטוּם",
+        "strong": "H7945",
+        "prefixes": []
+      },
+      "previous_strong": "H7945",
+      "new_strong": "D0580",
+      "reason": "טִמְטוּם is dullness, hardening of the heart; H7945 שֶׁל 'who' is a different word",
+      "evidence": {
+        "lexicon": "D0580 טִמְטוּם dullness, hardening of the heart; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "Romans 11:25, Greek πώρωσις",
+        "issue": 42,
+        "greek": "G4457 πώρωσις"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 5,
+        "verse": 1,
+        "word_index": 14,
+        "text": "גִּנֵּיסָר׃",
+        "strong": "H589",
+        "prefixes": []
+      },
+      "previous_strong": "H589",
+      "new_strong": "D0581",
+      "reason": "גִּנֵּיסָר׃ is Gennesaret; H589 אֲנִי 'I' is a different word",
+      "evidence": {
+        "lexicon": "D0581 גִּנֵּיסַר Gennesaret; the plain and lake on the west shore of the Sea of Galilee.",
+        "grammar": "place name",
+        "context": "Luke 5:1, Greek Γεννησαρέτ",
+        "issue": 42,
+        "greek": "G1082 Γεννησαρέτ"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 14,
+        "verse": 34,
+        "word_index": 5,
+        "text": "גִנֵּיסַר׃",
+        "strong": "H6626",
+        "prefixes": []
+      },
+      "previous_strong": "H6626",
+      "new_strong": "D0581",
+      "reason": "גִנֵּיסַר׃ is Gennesaret; H6626 פָּתַת 'break up' is a different word",
+      "evidence": {
+        "lexicon": "D0581 גִּנֵּיסַר Gennesaret; the plain and lake on the west shore of the Sea of Galilee.",
+        "grammar": "place name",
+        "context": "Matthew 14:34, Greek Γεννησαρέτ",
+        "issue": 42,
+        "greek": "G1082 Γεννησαρέτ"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 21,
+        "verse": 21,
+        "word_index": 6,
+        "text": "מַרְגָּלִיּוֹת",
+        "strong": "H7273",
+        "prefixes": []
+      },
+      "previous_strong": "H7273",
+      "new_strong": "D0589",
+      "reason": "מַרְגָּלִיּוֹת is pearl; H7273 רַגְלִי 'on foot' is a different word",
+      "evidence": {
+        "lexicon": "D0589 מַרְגָּלִית pearl; a post-biblical Hebrew noun.",
+        "grammar": "plural noun",
+        "context": "Revelation 21:21, Greek μαργαρίτης",
+        "issue": 42,
+        "greek": "G3135 μαργαρίτης"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 29,
+        "word_index": 4,
+        "text": "פַּגֵּי",
+        "strong": "H3642",
+        "prefixes": []
+      },
+      "previous_strong": "H3642",
+      "new_strong": "D0595",
+      "reason": "פַּגֵּי is Phage; H3642 כָּמַהּ 'faint' is a different word",
+      "evidence": {
+        "lexicon": "D0595 פַּגֵּי Phage; in בֵּית פַּגֵּי, Bethphage, a village on the Mount of Olives.",
+        "grammar": "place name",
+        "context": "Luke 19:29, Greek Βηθφαγή",
+        "issue": 42,
+        "greek": "G0967 Βηθφαγή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 11,
+        "verse": 1,
+        "word_index": 6,
+        "text": "פַּגֵּי",
+        "strong": "H3642",
+        "prefixes": []
+      },
+      "previous_strong": "H3642",
+      "new_strong": "D0595",
+      "reason": "פַּגֵּי is Phage; H3642 כָּמַהּ 'faint' is a different word",
+      "evidence": {
+        "lexicon": "D0595 פַּגֵּי Phage; in בֵּית פַּגֵּי, Bethphage, a village on the Mount of Olives.",
+        "grammar": "place name",
+        "context": "Mark 11:1, Greek Βηθφαγή",
+        "issue": 42,
+        "greek": "G0967 Βηθφαγή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "timothy2",
+        "chapter": 3,
+        "verse": 5,
+        "word_index": 2,
+        "text": "חֲסִידוּת",
+        "strong": "H5211",
+        "prefixes": []
+      },
+      "previous_strong": "H5211",
+      "new_strong": "D0612",
+      "reason": "חֲסִידוּת is piety, godliness; H5211 נִיס 'flee' is a different word",
+      "evidence": {
+        "lexicon": "D0612 חֲסִידוּת piety, godliness; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "2 Timothy 3:5, Greek εὐσέβεια",
+        "issue": 42,
+        "greek": "G2150 εὐσέβεια"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "philippians",
+        "chapter": 2,
+        "verse": 25,
+        "word_index": 6,
+        "text": "אֶפַּפְרוֹדִיטוֹס",
+        "strong": "H7024",
+        "prefixes": []
+      },
+      "previous_strong": "H7024",
+      "new_strong": "D0621",
+      "reason": "אֶפַּפְרוֹדִיטוֹס is Epaphroditus; H7024 קִיר 'wall' is a different word",
+      "evidence": {
+        "lexicon": "D0621 אֶפַּפְרוֹדִיטוֹס Epaphroditus; a messenger of the church at Philippi to Paul.",
+        "grammar": "personal name",
+        "context": "Philippians 2:25, Greek Ἐπαφρόδιτος",
+        "issue": 42,
+        "greek": "G1891 Ἐπαφρόδιτος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "hebrews",
+        "chapter": 12,
+        "verse": 28,
+        "word_index": 16,
+        "text": "בִּצְנִיעוּת",
+        "strong": "H6800",
+        "prefixes": [
+          "Hb"
+        ]
+      },
+      "previous_strong": "H6800",
+      "new_strong": "Hb/D0632",
+      "reason": "בִּצְנִיעוּת is modesty, decency; H6800 צָנַע 'modest' is a different word",
+      "evidence": {
+        "lexicon": "D0632 צְנִיעוּת modesty, decency; a post-biblical Hebrew noun.",
+        "grammar": "preposition ב + noun",
+        "context": "Hebrews 12:28, Greek εὐλάβεια",
+        "issue": 42,
+        "greek": "G2124 εὐλάβεια"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "peter2",
+        "chapter": 3,
+        "verse": 17,
+        "word_index": 10,
+        "text": "טָעוּת",
+        "strong": "H2937",
+        "prefixes": []
+      },
+      "previous_strong": "H2937",
+      "new_strong": "D0662",
+      "reason": "טָעוּת is error, mistake; H2937 טָעָה 'wander' is a different word",
+      "evidence": {
+        "lexicon": "D0662 טָעוּת error, mistake; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "2 Peter 3:17, Greek πλάνη",
+        "issue": 42,
+        "greek": "G4106 πλάνη"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians2",
+        "chapter": 6,
+        "verse": 6,
+        "word_index": 9,
+        "text": "צְבוּעָה׃",
+        "strong": "H336",
+        "prefixes": []
+      },
+      "previous_strong": "H336",
+      "new_strong": "D0665",
+      "reason": "צְבוּעָה׃ is hypocritical, feigned; H336 אִי 'not' is a different word",
+      "evidence": {
+        "lexicon": "D0665 צָבוּעַ hypocritical, feigned; a post-biblical Hebrew adjective.",
+        "grammar": "adjective, feminine",
+        "context": "2 Corinthians 6:6, Greek ἀνυπόκριτος",
+        "issue": 42,
+        "greek": "G0505 ἀνυπόκριτος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "timothy2",
+        "chapter": 1,
+        "verse": 5,
+        "word_index": 6,
+        "text": "צְבוּעָה",
+        "strong": "H4176",
+        "prefixes": []
+      },
+      "previous_strong": "H4176",
+      "new_strong": "D0665",
+      "reason": "צְבוּעָה is hypocritical, feigned; H4176 מוֹרֶה 'teacher' is a different word",
+      "evidence": {
+        "lexicon": "D0665 צָבוּעַ hypocritical, feigned; a post-biblical Hebrew adjective.",
+        "grammar": "adjective, feminine",
+        "context": "2 Timothy 1:5, Greek ἀνυπόκριτος",
+        "issue": 42,
+        "greek": "G0505 ἀνυπόκριτος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "james",
+        "chapter": 3,
+        "verse": 17,
+        "word_index": 12,
+        "text": "זְכוּת",
+        "strong": "H2134",
+        "prefixes": []
+      },
+      "previous_strong": "H2134",
+      "new_strong": "D0695",
+      "reason": "זְכוּת is merit, innocence; H2134 זַךְ 'pure' is a different word",
+      "evidence": {
+        "lexicon": "D0695 זְכוּת merit, innocence; favor in judgment, a post-biblical Hebrew noun.",
+        "grammar": "noun; לְכַף־זְכוּת, favorably",
+        "context": "James 3:17, Greek ἐπιεικής",
+        "issue": 42,
+        "greek": "G1933 ἐπιεικής"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 5,
+        "verse": 18,
+        "word_index": 12,
+        "text": "זְכוּת",
+        "strong": "H2134",
+        "prefixes": []
+      },
+      "previous_strong": "H2134",
+      "new_strong": "D0695",
+      "reason": "זְכוּת is merit, innocence; H2134 זַךְ 'pure' is a different word",
+      "evidence": {
+        "lexicon": "D0695 זְכוּת merit, innocence; favor in judgment, a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "Romans 5:18, Greek δικαίωμα",
+        "issue": 42,
+        "greek": "G1345 δικαίωμα"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "timothy1",
+        "chapter": 3,
+        "verse": 3,
+        "word_index": 4,
+        "text": "זְכוּת",
+        "strong": "H2134",
+        "prefixes": []
+      },
+      "previous_strong": "H2134",
+      "new_strong": "D0695",
+      "reason": "זְכוּת is merit, innocence; H2134 זַךְ 'pure' is a different word",
+      "evidence": {
+        "lexicon": "D0695 זְכוּת merit, innocence; favor in judgment, a post-biblical Hebrew noun.",
+        "grammar": "noun; לְכַף־זְכוּת, favorably",
+        "context": "1 Timothy 3:3, Greek ἐπιεικής",
+        "issue": 42,
+        "greek": "G1933 ἐπιεικής"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 20,
+        "verse": 3,
+        "word_index": 20,
+        "text": "מִצְעָר׃",
+        "strong": "H4706",
+        "prefixes": []
+      },
+      "previous_strong": "H4706",
+      "new_strong": "H4705",
+      "reason": "מִצְעָר׃ is a small thing; H4706 מִצְעָר 'a small thing' is a different word",
+      "evidence": {
+        "lexicon": "H4705 מִצְעָר a small thing",
+        "grammar": "noun, a little (time)",
+        "context": "Revelation 20:3, Greek μικρός",
+        "issue": 42,
+        "greek": "G3398 μικρός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 28,
+        "verse": 1,
+        "word_index": 7,
+        "text": "מְלִיטִי׃",
+        "strong": "D0254",
+        "prefixes": []
+      },
+      "previous_strong": "D0254",
+      "new_strong": "D0699",
+      "reason": "מְלִיטִי׃ is Melita; D0254 מיליט 'Miletus, an ancient coastal city of Asia Minor' is a different word",
+      "evidence": {
+        "lexicon": "D0699 מְלִיטִי Melita; the island of Malta, where Paul was shipwrecked.",
+        "grammar": "place name",
+        "context": "Acts 28:1, Greek Μελίτη",
+        "issue": 42,
+        "greek": "G3194 Μελίτη"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 7,
+        "verse": 10,
+        "word_index": 1,
+        "text": "מַתִּי",
+        "strong": "H4672",
+        "prefixes": []
+      },
+      "previous_strong": "H4672",
+      "new_strong": "H4191",
+      "reason": "מַתִּי is die; H4672 מָצָא 'attain to' is a different word",
+      "evidence": {
+        "lexicon": "H4191 מוּת die",
+        "grammar": "qal perfect 1cs",
+        "context": "Romans 7:10",
+        "issue": 42,
+        "greek_note": "the SBLGNT has ἐγὼ δὲ ἀπέθανον at the end of verse 9; Delitzsch's verse 10 carries it"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 25,
+        "word_index": 9,
+        "text": "גִּלּוּי",
+        "strong": "H1540",
+        "prefixes": []
+      },
+      "previous_strong": "H1540",
+      "new_strong": "D0430",
+      "reason": "גִּלּוּי is uncovering, disclosure; H1540 גָּלָה 'uncover' is a different word",
+      "evidence": {
+        "lexicon": "D0430 גִּלּוּי uncovering, disclosure; a post-biblical Hebrew noun.",
+        "grammar": "construct noun",
+        "context": "Romans 16:25",
+        "issue": 42,
+        "greek_note": "the SBLGNT text used here has no Romans 16:25; Delitzsch renders the doxology's κατὰ ἀποκάλυψιν μυστηρίου"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 3,
+        "verse": 14,
+        "word_index": 10,
+        "text": "וְהָאֲמִתִּי",
+        "strong": "H573",
+        "prefixes": [
+          "Hc",
+          "Hd"
+        ]
+      },
+      "previous_strong": "H573",
+      "new_strong": "Hc/Hd/D0516",
+      "reason": "וְהָאֲמִתִּי is true, genuine; H573 אֲמִתַּי 'true' is a different word",
+      "evidence": {
+        "lexicon": "D0516 אֲמִתִּי true, genuine; a post-biblical Hebrew adjective.",
+        "grammar": "conjunction ו + article ה + adjective",
+        "context": "Revelation 3:14, Greek ἀληθινός",
+        "issue": 42,
+        "greek": "G0228 ἀληθινός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 6,
+        "verse": 10,
+        "word_index": 8,
+        "text": "וְהָאֲמִתִּי",
+        "strong": "H573",
+        "prefixes": [
+          "Hc",
+          "Hd"
+        ]
+      },
+      "previous_strong": "H573",
+      "new_strong": "Hc/Hd/D0516",
+      "reason": "וְהָאֲמִתִּי is true, genuine; H573 אֲמִתַּי 'true' is a different word",
+      "evidence": {
+        "lexicon": "D0516 אֲמִתִּי true, genuine; a post-biblical Hebrew adjective.",
+        "grammar": "conjunction ו + article ה + adjective",
+        "context": "Revelation 6:10, Greek ἀληθινός",
+        "issue": 42,
+        "greek": "G0228 ἀληθινός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john1",
+        "chapter": 5,
+        "verse": 20,
+        "word_index": 11,
+        "text": "וּבָאֲמִתִּי",
+        "strong": "H573",
+        "prefixes": [
+          "Hc",
+          "Hb"
+        ]
+      },
+      "previous_strong": "H573",
+      "new_strong": "Hc/Hb/D0516",
+      "reason": "וּבָאֲמִתִּי is true, genuine; H573 אֲמִתַּי 'true' is a different word",
+      "evidence": {
+        "lexicon": "D0516 אֲמִתִּי true, genuine; a post-biblical Hebrew adjective.",
+        "grammar": "conjunction ו + preposition ב + adjective",
+        "context": "1 John 5:20, Greek ἀληθινός",
+        "issue": 42,
+        "greek": "G0228 ἀληθινός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 2,
+        "verse": 26,
+        "word_index": 11,
+        "text": "לְמִילָה׃",
+        "strong": "Hl/H4135",
+        "prefixes": [
+          "Hl"
+        ]
+      },
+      "previous_strong": "Hl/H4135",
+      "new_strong": "Hl/D0411",
+      "reason": "לְמִילָה׃ is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "preposition ל + noun",
+        "context": "Romans 2:26, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 2,
+        "verse": 29,
+        "word_index": 6,
+        "text": "וּמִילָה",
+        "strong": "Hc/H4135",
+        "prefixes": [
+          "Hc"
+        ]
+      },
+      "previous_strong": "Hc/H4135",
+      "new_strong": "Hc/D0411",
+      "reason": "וּמִילָה is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "conjunction ו + noun",
+        "context": "Romans 2:29, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "timothy1",
+        "chapter": 1,
+        "verse": 2,
+        "word_index": 3,
+        "text": "הָאֲמִתִּי",
+        "strong": "Hd/H519",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H519",
+      "new_strong": "Hd/D0516",
+      "reason": "הָאֲמִתִּי is true, genuine; H519 אָמָה 'maid' is a different word",
+      "evidence": {
+        "lexicon": "D0516 אֲמִתִּי true, genuine; a post-biblical Hebrew adjective.",
+        "grammar": "article ה + adjective",
+        "context": "1 Timothy 1:2, Greek γνήσιος",
+        "issue": 42,
+        "greek": "G1103 γνήσιος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "titus",
+        "chapter": 1,
+        "verse": 4,
+        "word_index": 3,
+        "text": "הָאֲמִתִּי",
+        "strong": "Hd/H519",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H519",
+      "new_strong": "Hd/D0516",
+      "reason": "הָאֲמִתִּי is true, genuine; H519 אָמָה 'maid' is a different word",
+      "evidence": {
+        "lexicon": "D0516 אֲמִתִּי true, genuine; a post-biblical Hebrew adjective.",
+        "grammar": "article ה + adjective",
+        "context": "Titus 1:4, Greek γνήσιος",
+        "issue": 42,
+        "greek": "G1103 γνήσιος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 15,
+        "verse": 27,
+        "word_index": 9,
+        "text": "מִפֵּרוּרִים",
+        "strong": "H6517",
+        "prefixes": []
+      },
+      "previous_strong": "H6517",
+      "new_strong": "Hm/D0545",
+      "reason": "מִפֵּרוּרִים is crumb; H6517 פָּרוּר 'pot' is a different word",
+      "evidence": {
+        "lexicon": "D0545 פֵּרוּר crumb; a post-biblical Hebrew noun.",
+        "grammar": "preposition מ + plural noun",
+        "context": "Matthew 15:27, Greek ψιχίον, ψίξ",
+        "issue": 42,
+        "greek": "G5589 ψιχίον, ψίξ"
+      },
+      "new_prefixes": [
+        "Hm"
+      ]
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 3,
+        "verse": 22,
+        "word_index": 8,
+        "text": "נִכְנַס",
+        "strong": "H3664",
+        "prefixes": []
+      },
+      "previous_strong": "H3664",
+      "new_strong": "D0608",
+      "reason": "נִכְנַס is enter; H3664 כָּנַס 'gather' is a different word",
+      "evidence": {
+        "lexicon": "D0608 נִכְנַס enter; intrude, a post-biblical Hebrew verb.",
+        "grammar": "nifal perfect",
+        "context": "Mark 3:22",
+        "issue": 42,
+        "greek_note": "the Greek has Βεελζεβοὺλ ἔχει, he has Beelzebul; Delitzsch renders it Baal-zebub has entered him"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "titus",
+        "chapter": 3,
+        "verse": 13,
+        "word_index": 0,
+        "text": "הִשְׁתַּדֵּל",
+        "strong": "H3925",
+        "prefixes": []
+      },
+      "previous_strong": "H3925",
+      "new_strong": "D0103",
+      "reason": "הִשְׁתַּדֵּל is make an effort; H3925 לָמַד 'exercise in' is a different word",
+      "evidence": {
+        "lexicon": "D0103 השתדל make an effort; strive; endeavor.",
+        "grammar": "hitpael infinitive",
+        "context": "Titus 3:13, Greek σπουδαίως",
+        "issue": 42,
+        "greek": "G4709 σπουδαίως"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 2,
+        "verse": 10,
+        "word_index": 10,
+        "text": "מֵרוֹמִי",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "Hm/D0141",
+      "reason": "מֵרוֹמִי is Roman; H3027 יָד 'hand' is a different word",
+      "evidence": {
+        "lexicon": "D0141 רומי Roman; pertaining to Rome or Roman citizenship.",
+        "grammar": "preposition מ + gentilic adjective",
+        "context": "Acts 2:10, Greek Ῥωμαῖος",
+        "issue": 42,
+        "greek": "G4514 Ῥωμαῖος"
+      },
+      "new_prefixes": [
+        "Hm"
+      ]
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "colossians",
+        "chapter": 3,
+        "verse": 5,
+        "word_index": 4,
+        "text": "אֵבָרֵיכֶם",
+        "strong": "H1288",
+        "prefixes": []
+      },
+      "previous_strong": "H1288",
+      "new_strong": "D0167",
+      "reason": "אֵבָרֵיכֶם is body member; H1288 בָרַךְ 'kneel' is a different word",
+      "evidence": {
+        "lexicon": "D0167 איבר body member; limb; organ.",
+        "grammar": "plural noun with suffix",
+        "context": "Colossians 3:5, Greek μέλος",
+        "issue": 42,
+        "greek": "G3196 μέλος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "james",
+        "chapter": 3,
+        "verse": 6,
+        "word_index": 4,
+        "text": "אֵבָרֵינוּ",
+        "strong": "H1288",
+        "prefixes": []
+      },
+      "previous_strong": "H1288",
+      "new_strong": "D0167",
+      "reason": "אֵבָרֵינוּ is body member; H1288 בָרַךְ 'kneel' is a different word",
+      "evidence": {
+        "lexicon": "D0167 איבר body member; limb; organ.",
+        "grammar": "plural noun with suffix",
+        "context": "James 3:6, Greek μέλος",
+        "issue": 42,
+        "greek": "G3196 μέλος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 6,
+        "verse": 13,
+        "word_index": 4,
+        "text": "אֵבָרֵיכֶם",
+        "strong": "H1288",
+        "prefixes": []
+      },
+      "previous_strong": "H1288",
+      "new_strong": "D0167",
+      "reason": "אֵבָרֵיכֶם is body member; H1288 בָרַךְ 'kneel' is a different word",
+      "evidence": {
+        "lexicon": "D0167 איבר body member; limb; organ.",
+        "grammar": "plural noun with suffix",
+        "context": "Romans 6:13, Greek μέλος",
+        "issue": 42,
+        "greek": "G3196 μέλος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 6,
+        "verse": 19,
+        "word_index": 13,
+        "text": "אֵבָרֵיכֶם",
+        "strong": "H1288",
+        "prefixes": []
+      },
+      "previous_strong": "H1288",
+      "new_strong": "D0167",
+      "reason": "אֵבָרֵיכֶם is body member; H1288 בָרַךְ 'kneel' is a different word",
+      "evidence": {
+        "lexicon": "D0167 איבר body member; limb; organ.",
+        "grammar": "plural noun with suffix",
+        "context": "Romans 6:19, Greek μέλος",
+        "issue": 42,
+        "greek": "G3196 μέλος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 6,
+        "verse": 19,
+        "word_index": 22,
+        "text": "אֵבָרֵיכֶם",
+        "strong": "H1288",
+        "prefixes": []
+      },
+      "previous_strong": "H1288",
+      "new_strong": "D0167",
+      "reason": "אֵבָרֵיכֶם is body member; H1288 בָרַךְ 'kneel' is a different word",
+      "evidence": {
+        "lexicon": "D0167 איבר body member; limb; organ.",
+        "grammar": "plural noun with suffix",
+        "context": "Romans 6:19, Greek μέλος",
+        "issue": 42,
+        "greek": "G3196 μέλος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 31,
+        "word_index": 5,
+        "text": "תָּבַע",
+        "strong": "H5953",
+        "prefixes": []
+      },
+      "previous_strong": "H5953",
+      "new_strong": "D0322",
+      "reason": "תָּבַע is to demand; H5953 עָלַל 'act' is a different word",
+      "evidence": {
+        "lexicon": "D0322 תָּבַע to demand; to claim or collect what is owed, a post-biblical Hebrew verb.",
+        "grammar": "verb",
+        "context": "Luke 22:31, Greek ἐξαιτέω",
+        "issue": 42,
+        "greek": "G1809 ἐξαιτέω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 6,
+        "verse": 15,
+        "word_index": 1,
+        "text": "מַתַּי",
+        "strong": "H2654",
+        "prefixes": []
+      },
+      "previous_strong": "H2654",
+      "new_strong": "D0328",
+      "reason": "מַתַּי is Matthew; H2654 חָפֵץ 'delight in' is a different word",
+      "evidence": {
+        "lexicon": "D0328 מַתַּי Matthew; the tax collector who became one of the twelve apostles.",
+        "grammar": "personal name",
+        "context": "Luke 6:15, Greek Ματθαῖος",
+        "issue": 42,
+        "greek": "G3156 Ματθαῖος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 3,
+        "verse": 18,
+        "word_index": 8,
+        "text": "מַתַּי",
+        "strong": "H269",
+        "prefixes": []
+      },
+      "previous_strong": "H269",
+      "new_strong": "D0328",
+      "reason": "מַתַּי is Matthew; H269 אָחוֹת 'sister' is a different word",
+      "evidence": {
+        "lexicon": "D0328 מַתַּי Matthew; the tax collector who became one of the twelve apostles.",
+        "grammar": "personal name",
+        "context": "Mark 3:18, Greek Ματθαῖος",
+        "issue": 42,
+        "greek": "G3156 Ματθαῖος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 9,
+        "verse": 9,
+        "word_index": 10,
+        "text": "מַתָּי",
+        "strong": "H6629",
+        "prefixes": []
+      },
+      "previous_strong": "H6629",
+      "new_strong": "D0328",
+      "reason": "מַתָּי is Matthew; H6629 צֹאן 'small cattle' is a different word",
+      "evidence": {
+        "lexicon": "D0328 מַתַּי Matthew; the tax collector who became one of the twelve apostles.",
+        "grammar": "personal name",
+        "context": "Matthew 9:9, Greek Ματθαῖος",
+        "issue": 42,
+        "greek": "G3156 Ματθαῖος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "galatians",
+        "chapter": 2,
+        "verse": 19,
+        "word_index": 1,
+        "text": "מַתִּי",
+        "strong": "H4970",
+        "prefixes": []
+      },
+      "previous_strong": "H4970",
+      "new_strong": "H4191",
+      "reason": "מַתִּי is die; H4970 מָתַי 'when' is a different word",
+      "evidence": {
+        "lexicon": "H4191 מוּת die",
+        "grammar": "qal perfect 1cs",
+        "context": "Galatians 2:19, Greek ἀποθνήσκω",
+        "issue": 42,
+        "greek": "G0599 ἀποθνήσκω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 5,
+        "verse": 14,
+        "word_index": 3,
+        "text": "יֹתֵר",
+        "strong": "H3289",
+        "prefixes": []
+      },
+      "previous_strong": "H3289",
+      "new_strong": "H3148",
+      "reason": "יֹתֵר is more, further; H3289 יָעַץ 'advise' is a different word",
+      "evidence": {
+        "lexicon": "H3148 יוֹתֵר more, further",
+        "grammar": "adverb, more",
+        "context": "Acts 5:14, Greek μᾶλλον",
+        "issue": 42,
+        "greek": "G3123G μᾶλλον"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "philippians",
+        "chapter": 1,
+        "verse": 24,
+        "word_index": 5,
+        "text": "יֹתֵר",
+        "strong": "H3498",
+        "prefixes": []
+      },
+      "previous_strong": "H3498",
+      "new_strong": "H3148",
+      "reason": "יֹתֵר is more, further; H3498 יָתַר 'remain' is a different word",
+      "evidence": {
+        "lexicon": "H3148 יוֹתֵר more, further",
+        "grammar": "adverb, more",
+        "context": "Philippians 1:24, Greek ἀναγκαῖος",
+        "issue": 42,
+        "greek": "G0316 ἀναγκαῖος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "philippians",
+        "chapter": 2,
+        "verse": 12,
+        "word_index": 14,
+        "text": "יֹתֵר",
+        "strong": "H2637",
+        "prefixes": []
+      },
+      "previous_strong": "H2637",
+      "new_strong": "H3148",
+      "reason": "יֹתֵר is more, further; H2637 חָסֵר 'lack' is a different word",
+      "evidence": {
+        "lexicon": "H3148 יוֹתֵר more, further",
+        "grammar": "adverb, more",
+        "context": "Philippians 2:12, Greek μᾶλλον",
+        "issue": 42,
+        "greek": "G3123G μᾶλλον"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 20,
+        "verse": 3,
+        "word_index": 18,
+        "text": "יֻתַּר",
+        "strong": "H3498",
+        "prefixes": []
+      },
+      "previous_strong": "H3498",
+      "new_strong": "H5425",
+      "reason": "יֻתַּר is be loosed, set free; H3498 יָתַר 'remain' is a different word",
+      "evidence": {
+        "lexicon": "H5425 נָתַר be loosed, set free",
+        "grammar": "pual, be loosed",
+        "context": "Revelation 20:3, Greek λύω",
+        "issue": 42,
+        "greek": "G3089 λύω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 20,
+        "verse": 7,
+        "word_index": 4,
+        "text": "יֻתַּר",
+        "strong": "H98",
+        "prefixes": []
+      },
+      "previous_strong": "H98",
+      "new_strong": "H5425",
+      "reason": "יֻתַּר is be loosed, set free; H98 אֲגַם 'troubled pool' is a different word",
+      "evidence": {
+        "lexicon": "H5425 נָתַר be loosed, set free",
+        "grammar": "pual, be loosed",
+        "context": "Revelation 20:7, Greek λύω",
+        "issue": 42,
+        "greek": "G3089 λύω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 13,
+        "verse": 6,
+        "word_index": 4,
+        "text": "פָּפוֹס",
+        "strong": "H3642",
+        "prefixes": []
+      },
+      "previous_strong": "H3642",
+      "new_strong": "D0334",
+      "reason": "פָּפוֹס is Paphos; H3642 כָּמַהּ 'faint' is a different word",
+      "evidence": {
+        "lexicon": "D0334 פָּפוֹס Paphos; a city on the west coast of Cyprus.",
+        "grammar": "place name",
+        "context": "Acts 13:6, Greek Πάφος",
+        "issue": 42,
+        "greek": "G3974 Πάφος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 4,
+        "word_index": 14,
+        "text": "חֲשׁוּבוֹת",
+        "strong": "H2815",
+        "prefixes": []
+      },
+      "previous_strong": "H2815",
+      "new_strong": "D0336",
+      "reason": "חֲשׁוּבוֹת is esteemed, prominent, of high standing; H2815 חַשּׁוּב 'considerate' is a different word",
+      "evidence": {
+        "lexicon": "D0336 חָשׁוּב esteemed, prominent, of high standing; a post-biblical Hebrew adjective.",
+        "grammar": "adjective, feminine plural",
+        "context": "Acts 17:4, Greek πρῶτος",
+        "issue": 42,
+        "greek": "G4413J πρῶτος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 12,
+        "word_index": 6,
+        "text": "הַחֲשׁוּבוֹת",
+        "strong": "Hd/H2803",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H2803",
+      "new_strong": "Hd/D0336",
+      "reason": "הַחֲשׁוּבוֹת is esteemed, prominent, of high standing; H2803 חָשַׁב 'think' is a different word",
+      "evidence": {
+        "lexicon": "D0336 חָשׁוּב esteemed, prominent, of high standing; a post-biblical Hebrew adjective.",
+        "grammar": "article ה + adjective, feminine plural",
+        "context": "Acts 17:12, Greek εὐσχήμων",
+        "issue": 42,
+        "greek": "G2158 εὐσχήμων"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 16,
+        "verse": 7,
+        "word_index": 2,
+        "text": "מוּסְיָא",
+        "strong": "H8269",
+        "prefixes": []
+      },
+      "previous_strong": "H8269",
+      "new_strong": "D0343",
+      "reason": "מוּסְיָא is Mysia; H8269 שַׂר 'chieftain' is a different word",
+      "evidence": {
+        "lexicon": "D0343 מוּסְיָא Mysia; a region of northwestern Asia Minor.",
+        "grammar": "place name",
+        "context": "Acts 16:7, Greek Μυσία",
+        "issue": 42,
+        "greek": "G3465 Μυσία"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians2",
+        "chapter": 11,
+        "verse": 26,
+        "word_index": 13,
+        "text": "סַכָּנוֹת",
+        "strong": "H5532",
+        "prefixes": []
+      },
+      "previous_strong": "H5532",
+      "new_strong": "D0362",
+      "reason": "סַכָּנוֹת is danger, peril; H5532 סָכַן 'be of use' is a different word",
+      "evidence": {
+        "lexicon": "D0362 סַכָּנָה danger, peril; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "2 Corinthians 11:26, Greek κίνδυνος",
+        "issue": 42,
+        "greek": "G2794 κίνδυνος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians2",
+        "chapter": 11,
+        "verse": 26,
+        "word_index": 15,
+        "text": "סַכָּנוֹת",
+        "strong": "H5532",
+        "prefixes": []
+      },
+      "previous_strong": "H5532",
+      "new_strong": "D0362",
+      "reason": "סַכָּנוֹת is danger, peril; H5532 סָכַן 'be of use' is a different word",
+      "evidence": {
+        "lexicon": "D0362 סַכָּנָה danger, peril; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "2 Corinthians 11:26, Greek κίνδυνος",
+        "issue": 42,
+        "greek": "G2794 κίνδυνος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians2",
+        "chapter": 11,
+        "verse": 26,
+        "word_index": 17,
+        "text": "סַכָּנוֹת",
+        "strong": "H5532",
+        "prefixes": []
+      },
+      "previous_strong": "H5532",
+      "new_strong": "D0362",
+      "reason": "סַכָּנוֹת is danger, peril; H5532 סָכַן 'be of use' is a different word",
+      "evidence": {
+        "lexicon": "D0362 סַכָּנָה danger, peril; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "2 Corinthians 11:26, Greek κίνδυνος",
+        "issue": 42,
+        "greek": "G2794 κίνδυνος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians2",
+        "chapter": 11,
+        "verse": 26,
+        "word_index": 19,
+        "text": "סַכָּנוֹת",
+        "strong": "H5532",
+        "prefixes": []
+      },
+      "previous_strong": "H5532",
+      "new_strong": "D0362",
+      "reason": "סַכָּנוֹת is danger, peril; H5532 סָכַן 'be of use' is a different word",
+      "evidence": {
+        "lexicon": "D0362 סַכָּנָה danger, peril; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "2 Corinthians 11:26, Greek κίνδυνος",
+        "issue": 42,
+        "greek": "G2794 κίνδυνος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 8,
+        "verse": 35,
+        "word_index": 14,
+        "text": "סַכָּנָה",
+        "strong": "H1942",
+        "prefixes": []
+      },
+      "previous_strong": "H1942",
+      "new_strong": "D0362",
+      "reason": "סַכָּנָה is danger, peril; H1942 הַוָּה 'desire' is a different word",
+      "evidence": {
+        "lexicon": "D0362 סַכָּנָה danger, peril; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "Romans 8:35, Greek κίνδυνος",
+        "issue": 42,
+        "greek": "G2794 κίνδυνος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "philippians",
+        "chapter": 3,
+        "verse": 8,
+        "word_index": 8,
+        "text": "יְדִיעַת",
+        "strong": "H7945",
+        "prefixes": []
+      },
+      "previous_strong": "H7945",
+      "new_strong": "D0364",
+      "reason": "יְדִיעַת is knowledge; H7945 שֶׁל 'who' is a different word",
+      "evidence": {
+        "lexicon": "D0364 יְדִיעָה knowledge; with God as subject, foreknowledge, a post-biblical Hebrew noun.",
+        "grammar": "construct noun",
+        "context": "Philippians 3:8, Greek γνῶσις",
+        "issue": 42,
+        "greek": "G1108 γνῶσις"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 10,
+        "verse": 16,
+        "word_index": 7,
+        "text": "הִתְחַבְּרוּת",
+        "strong": "H2266",
+        "prefixes": []
+      },
+      "previous_strong": "H2266",
+      "new_strong": "D0365",
+      "reason": "הִתְחַבְּרוּת is fellowship, association; H2266 חָבַר 'unite' is a different word",
+      "evidence": {
+        "lexicon": "D0365 הִתְחַבְּרוּת fellowship, association; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "1 Corinthians 10:16, Greek κοινωνία",
+        "issue": 42,
+        "greek": "G2842 κοινωνία"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 10,
+        "verse": 16,
+        "word_index": 16,
+        "text": "הִתְחַבְּרוּת",
+        "strong": "H2266",
+        "prefixes": []
+      },
+      "previous_strong": "H2266",
+      "new_strong": "D0365",
+      "reason": "הִתְחַבְּרוּת is fellowship, association; H2266 חָבַר 'unite' is a different word",
+      "evidence": {
+        "lexicon": "D0365 הִתְחַבְּרוּת fellowship, association; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "1 Corinthians 10:16, Greek κοινωνία",
+        "issue": 42,
+        "greek": "G2842 κοινωνία"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians2",
+        "chapter": 6,
+        "verse": 14,
+        "word_index": 16,
+        "text": "הִתְחַבְּרוּת",
+        "strong": "H2266",
+        "prefixes": []
+      },
+      "previous_strong": "H2266",
+      "new_strong": "D0365",
+      "reason": "הִתְחַבְּרוּת is fellowship, association; H2266 חָבַר 'unite' is a different word",
+      "evidence": {
+        "lexicon": "D0365 הִתְחַבְּרוּת fellowship, association; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "2 Corinthians 6:14, Greek κοινωνία",
+        "issue": 42,
+        "greek": "G2842 κοινωνία"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john1",
+        "chapter": 1,
+        "verse": 6,
+        "word_index": 5,
+        "text": "הִתְחַבְּרוּת",
+        "strong": "H2266",
+        "prefixes": []
+      },
+      "previous_strong": "H2266",
+      "new_strong": "D0365",
+      "reason": "הִתְחַבְּרוּת is fellowship, association; H2266 חָבַר 'unite' is a different word",
+      "evidence": {
+        "lexicon": "D0365 הִתְחַבְּרוּת fellowship, association; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "1 John 1:6, Greek κοινωνία",
+        "issue": 42,
+        "greek": "G2842 κοινωνία"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "philemon",
+        "chapter": 1,
+        "verse": 6,
+        "word_index": 3,
+        "text": "הִתְחַבְּרוּת",
+        "strong": "H2266",
+        "prefixes": []
+      },
+      "previous_strong": "H2266",
+      "new_strong": "D0365",
+      "reason": "הִתְחַבְּרוּת is fellowship, association; H2266 חָבַר 'unite' is a different word",
+      "evidence": {
+        "lexicon": "D0365 הִתְחַבְּרוּת fellowship, association; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "Philemon 1:6, Greek κοινωνία",
+        "issue": 42,
+        "greek": "G2842 κοινωνία"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "philippians",
+        "chapter": 2,
+        "verse": 1,
+        "word_index": 9,
+        "text": "הִתְחַבְּרוּת",
+        "strong": "H2266",
+        "prefixes": []
+      },
+      "previous_strong": "H2266",
+      "new_strong": "D0365",
+      "reason": "הִתְחַבְּרוּת is fellowship, association; H2266 חָבַר 'unite' is a different word",
+      "evidence": {
+        "lexicon": "D0365 הִתְחַבְּרוּת fellowship, association; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "Philippians 2:1, Greek κοινωνία",
+        "issue": 42,
+        "greek": "G2842 κοινωνία"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 5,
+        "verse": 37,
+        "word_index": 4,
+        "text": "הַגְּלִילִי",
+        "strong": "H1551",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "H1551",
+      "new_strong": "Hd/D0366",
+      "reason": "הַגְּלִילִי is Galilean; H1551 גָּלִיל 'cylinder' is a different word",
+      "evidence": {
+        "lexicon": "D0366 גְּלִילִי Galilean; a man of Galilee.",
+        "grammar": "article ה + gentilic adjective",
+        "context": "Acts 5:37, Greek Γαλιλαῖος",
+        "issue": 42,
+        "greek": "G1057 Γαλιλαῖος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 26,
+        "verse": 69,
+        "word_index": 14,
+        "text": "הַגְּלִילִי׃",
+        "strong": "H1551",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "H1551",
+      "new_strong": "Hd/D0366",
+      "reason": "הַגְּלִילִי׃ is Galilean; H1551 גָּלִיל 'cylinder' is a different word",
+      "evidence": {
+        "lexicon": "D0366 גְּלִילִי Galilean; a man of Galilee.",
+        "grammar": "article ה + gentilic adjective",
+        "context": "Matthew 26:69, Greek Γαλιλαῖος",
+        "issue": 42,
+        "greek": "G1057 Γαλιλαῖος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 59,
+        "word_index": 17,
+        "text": "גְּלִילִי׃",
+        "strong": "H5115",
+        "prefixes": []
+      },
+      "previous_strong": "H5115",
+      "new_strong": "D0366",
+      "reason": "גְּלִילִי׃ is Galilean; H5115 נָוָה 'dwell' is a different word",
+      "evidence": {
+        "lexicon": "D0366 גְּלִילִי Galilean; a man of Galilee.",
+        "grammar": "gentilic adjective",
+        "context": "Luke 22:59, Greek Γαλιλαῖος",
+        "issue": 42,
+        "greek": "G1057 Γαλιλαῖος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 23,
+        "verse": 6,
+        "word_index": 10,
+        "text": "גְּלִילִי׃",
+        "strong": "H183",
+        "prefixes": []
+      },
+      "previous_strong": "H183",
+      "new_strong": "D0366",
+      "reason": "גְּלִילִי׃ is Galilean; H183 אָוָה 'desire' is a different word",
+      "evidence": {
+        "lexicon": "D0366 גְּלִילִי Galilean; a man of Galilee.",
+        "grammar": "gentilic adjective",
+        "context": "Luke 23:6, Greek Γαλιλαῖος",
+        "issue": 42,
+        "greek": "G1057 Γαλιλαῖος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 14,
+        "verse": 70,
+        "word_index": 15,
+        "text": "גְּלִילִי",
+        "strong": "H1551",
+        "prefixes": []
+      },
+      "previous_strong": "H1551",
+      "new_strong": "D0366",
+      "reason": "גְּלִילִי is Galilean; H1551 גָּלִיל 'cylinder' is a different word",
+      "evidence": {
+        "lexicon": "D0366 גְּלִילִי Galilean; a man of Galilee.",
+        "grammar": "gentilic adjective",
+        "context": "Mark 14:70, Greek Γαλιλαῖος",
+        "issue": 42,
+        "greek": "G1057 Γαλιλαῖος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 24,
+        "verse": 9,
+        "word_index": 5,
+        "text": "לְמִיתָה",
+        "strong": "H4194",
+        "prefixes": [
+          "Hl"
+        ]
+      },
+      "previous_strong": "H4194",
+      "new_strong": "Hl/D0381",
+      "reason": "לְמִיתָה is death, manner of death; H4194 מָוֶת 'Death' is a different word",
+      "evidence": {
+        "lexicon": "D0381 מִיתָה death, manner of death; a post-biblical Hebrew noun.",
+        "grammar": "preposition ל + noun",
+        "context": "Matthew 24:9",
+        "issue": 42,
+        "greek_note": "Delitzsch renders παραδώσουσιν ὑμᾶς ... καὶ ἀποκτενοῦσιν ὑμᾶς as handing over to death, לְמִיתָה"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 11,
+        "verse": 23,
+        "word_index": 17,
+        "text": "סָפֵק",
+        "strong": "H336",
+        "prefixes": []
+      },
+      "previous_strong": "H336",
+      "new_strong": "D0232",
+      "reason": "סָפֵק is Doubt; H336 אִי 'not' is a different word",
+      "evidence": {
+        "lexicon": "D0232 ספק Doubt; uncertainty.",
+        "grammar": "noun",
+        "context": "Mark 11:23, Greek διακρίνω",
+        "issue": 42,
+        "greek": "G1252 διακρίνω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 21,
+        "verse": 21,
+        "word_index": 13,
+        "text": "סָפֵק",
+        "strong": "H336",
+        "prefixes": []
+      },
+      "previous_strong": "H336",
+      "new_strong": "D0232",
+      "reason": "סָפֵק is Doubt; H336 אִי 'not' is a different word",
+      "evidence": {
+        "lexicon": "D0232 ספק Doubt; uncertainty.",
+        "grammar": "noun",
+        "context": "Matthew 21:21, Greek διακρίνω",
+        "issue": 42,
+        "greek": "G1252 διακρίνω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "james",
+        "chapter": 1,
+        "verse": 6,
+        "word_index": 4,
+        "text": "סָפֵק",
+        "strong": "H8096",
+        "prefixes": []
+      },
+      "previous_strong": "H8096",
+      "new_strong": "D0232",
+      "reason": "סָפֵק is Doubt; H8096 שִׁמְעִי 'in Benj' is a different word",
+      "evidence": {
+        "lexicon": "D0232 ספק Doubt; uncertainty.",
+        "grammar": "noun",
+        "context": "James 1:6, Greek διακρίνω",
+        "issue": 42,
+        "greek": "G1252 διακρίνω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "james",
+        "chapter": 1,
+        "verse": 6,
+        "word_index": 7,
+        "text": "סָפֵק",
+        "strong": "H892",
+        "prefixes": []
+      },
+      "previous_strong": "H892",
+      "new_strong": "D0232",
+      "reason": "סָפֵק is Doubt; H892 בָּבָה 'the apple of his eye' is a different word",
+      "evidence": {
+        "lexicon": "D0232 ספק Doubt; uncertainty.",
+        "grammar": "noun",
+        "context": "James 1:6, Greek διακρίνω",
+        "issue": 42,
+        "greek": "G1252 διακρίνω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 14,
+        "verse": 23,
+        "word_index": 2,
+        "text": "סָפֵק",
+        "strong": "H5606",
+        "prefixes": []
+      },
+      "previous_strong": "H5606",
+      "new_strong": "D0232",
+      "reason": "סָפֵק is Doubt; H5606 סָפַק 'slap' is a different word",
+      "evidence": {
+        "lexicon": "D0232 ספק Doubt; uncertainty.",
+        "grammar": "noun",
+        "context": "Romans 14:23, Greek διακρίνω",
+        "issue": 42,
+        "greek": "G1252 διακρίνω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "timothy1",
+        "chapter": 6,
+        "verse": 17,
+        "word_index": 17,
+        "text": "הַמְסַפֵּק",
+        "strong": "H5606",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "H5606",
+      "new_strong": "Hd/D0395",
+      "reason": "הַמְסַפֵּק is supply, provide; H5606 סָפַק 'slap' is a different word",
+      "evidence": {
+        "lexicon": "D0395 סִפֵּק supply, provide; a post-biblical Hebrew verb.",
+        "grammar": "article ה + piel participle",
+        "context": "1 Timothy 6:17, Greek παρέχω",
+        "issue": 42,
+        "greek": "G3930 παρέχω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "timothy1",
+        "chapter": 4,
+        "verse": 14,
+        "word_index": 11,
+        "text": "סְמִיכַת",
+        "strong": "H5564",
+        "prefixes": []
+      },
+      "previous_strong": "H5564",
+      "new_strong": "D0404",
+      "reason": "סְמִיכַת is laying on, as of hands; H5564 סָמַךְ 'lean' is a different word",
+      "evidence": {
+        "lexicon": "D0404 סְמִיכָה laying on, as of hands; a post-biblical Hebrew noun.",
+        "grammar": "construct noun",
+        "context": "1 Timothy 4:14, Greek ἐπίθεσις",
+        "issue": 42,
+        "greek": "G1936 ἐπίθεσις"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 10,
+        "verse": 45,
+        "word_index": 2,
+        "text": "הַמִּילָה",
+        "strong": "Hd/H4135",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H4135",
+      "new_strong": "Hd/D0411",
+      "reason": "הַמִּילָה is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "Acts 10:45, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 11,
+        "verse": 2,
+        "word_index": 8,
+        "text": "הַמִּילָה",
+        "strong": "Hd/H4135",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H4135",
+      "new_strong": "Hd/D0411",
+      "reason": "הַמִּילָה is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "Acts 11:2, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 7,
+        "verse": 8,
+        "word_index": 4,
+        "text": "הַמִּילָה",
+        "strong": "Hd/H4135",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H4135",
+      "new_strong": "Hd/D0411",
+      "reason": "הַמִּילָה is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "Acts 7:8, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 7,
+        "verse": 19,
+        "word_index": 1,
+        "text": "הַמִּילָה",
+        "strong": "Hd/H4135",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H4135",
+      "new_strong": "Hd/D0411",
+      "reason": "הַמִּילָה is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "1 Corinthians 7:19, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "ephesians",
+        "chapter": 2,
+        "verse": 11,
+        "word_index": 12,
+        "text": "הַמִּילָה",
+        "strong": "Hd/H4135",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H4135",
+      "new_strong": "Hd/D0411",
+      "reason": "הַמִּילָה is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "Ephesians 2:11, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "galatians",
+        "chapter": 2,
+        "verse": 12,
+        "word_index": 19,
+        "text": "הַמִּילָה׃",
+        "strong": "Hd/H4135",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H4135",
+      "new_strong": "Hd/D0411",
+      "reason": "הַמִּילָה׃ is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "Galatians 2:12, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "galatians",
+        "chapter": 5,
+        "verse": 6,
+        "word_index": 5,
+        "text": "הַמִּילָה",
+        "strong": "Hd/H4135",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H4135",
+      "new_strong": "Hd/D0411",
+      "reason": "הַמִּילָה is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "Galatians 5:6, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "galatians",
+        "chapter": 5,
+        "verse": 11,
+        "word_index": 5,
+        "text": "הַמִּילָה",
+        "strong": "Hd/H4135",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H4135",
+      "new_strong": "Hd/D0411",
+      "reason": "הַמִּילָה is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "Galatians 5:11, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "galatians",
+        "chapter": 6,
+        "verse": 15,
+        "word_index": 4,
+        "text": "הַמִּילָה",
+        "strong": "Hd/H4135",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H4135",
+      "new_strong": "Hd/D0411",
+      "reason": "הַמִּילָה is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "Galatians 6:15, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 7,
+        "verse": 22,
+        "word_index": 3,
+        "text": "הַמִּילָה",
+        "strong": "Hd/H4135",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H4135",
+      "new_strong": "Hd/D0411",
+      "reason": "הַמִּילָה is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "John 7:22, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "philippians",
+        "chapter": 3,
+        "verse": 3,
+        "word_index": 3,
+        "text": "הַמִּילָה",
+        "strong": "Hd/H4135",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H4135",
+      "new_strong": "Hd/D0411",
+      "reason": "הַמִּילָה is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "Philippians 3:3, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 15,
+        "verse": 8,
+        "word_index": 8,
+        "text": "הַמִּילָה",
+        "strong": "Hd/H4135",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H4135",
+      "new_strong": "Hd/D0411",
+      "reason": "הַמִּילָה is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "Romans 15:8, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 2,
+        "verse": 25,
+        "word_index": 1,
+        "text": "הַמִּילָה",
+        "strong": "Hd/H4135",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H4135",
+      "new_strong": "Hd/D0411",
+      "reason": "הַמִּילָה is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "Romans 2:25, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 2,
+        "verse": 27,
+        "word_index": 13,
+        "text": "וְהַמִּילָה",
+        "strong": "Hc/Hd/H4135",
+        "prefixes": [
+          "Hc",
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hc/Hd/H4135",
+      "new_strong": "Hc/Hd/D0411",
+      "reason": "וְהַמִּילָה is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "conjunction ו + article ה + noun",
+        "context": "Romans 2:27, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 2,
+        "verse": 28,
+        "word_index": 11,
+        "text": "הַמִּילָה׃",
+        "strong": "Hd/H4135",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H4135",
+      "new_strong": "Hd/D0411",
+      "reason": "הַמִּילָה׃ is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "Romans 2:28, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 3,
+        "verse": 1,
+        "word_index": 8,
+        "text": "הַמִּילָה׃",
+        "strong": "Hd/H4135",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H4135",
+      "new_strong": "Hd/D0411",
+      "reason": "הַמִּילָה׃ is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "Romans 3:1, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 4,
+        "verse": 9,
+        "word_index": 4,
+        "text": "הַמִּילָה",
+        "strong": "Hd/H4135",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H4135",
+      "new_strong": "Hd/D0411",
+      "reason": "הַמִּילָה is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "Romans 4:9, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 4,
+        "verse": 11,
+        "word_index": 1,
+        "text": "הַמִּילָה",
+        "strong": "Hd/H4135",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H4135",
+      "new_strong": "Hd/D0411",
+      "reason": "הַמִּילָה is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "Romans 4:11, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "colossians",
+        "chapter": 2,
+        "verse": 11,
+        "word_index": 4,
+        "text": "מִילָה",
+        "strong": "H4135",
+        "prefixes": []
+      },
+      "previous_strong": "H4135",
+      "new_strong": "D0411",
+      "reason": "מִילָה is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "Colossians 2:11, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "colossians",
+        "chapter": 3,
+        "verse": 11,
+        "word_index": 6,
+        "text": "מִילָה",
+        "strong": "H4135",
+        "prefixes": []
+      },
+      "previous_strong": "H4135",
+      "new_strong": "D0411",
+      "reason": "מִילָה is circumcision; H4135 מוּל 'circumcise' is a different word",
+      "evidence": {
+        "lexicon": "D0411 מִילָה circumcision; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "Colossians 3:11, Greek περιτομή",
+        "issue": 42,
+        "greek": "G4061 περιτομή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 1,
+        "verse": 27,
+        "word_index": 5,
+        "text": "תַּשְׁמִישׁ",
+        "strong": "H8085",
+        "prefixes": []
+      },
+      "previous_strong": "H8085",
+      "new_strong": "D0414",
+      "reason": "תַּשְׁמִישׁ is use, usage; H8085 שָׁמַע 'hear' is a different word",
+      "evidence": {
+        "lexicon": "D0414 תַּשְׁמִישׁ use, usage; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "Romans 1:27, Greek χρῆσις",
+        "issue": 42,
+        "greek": "G5540 χρῆσις"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "timothy1",
+        "chapter": 2,
+        "verse": 10,
+        "word_index": 3,
+        "text": "הָגוּן",
+        "strong": "H3867",
+        "prefixes": []
+      },
+      "previous_strong": "H3867",
+      "new_strong": "D0416",
+      "reason": "הָגוּן is proper, fitting, decent; H3867 לָוָה 'borrow' is a different word",
+      "evidence": {
+        "lexicon": "D0416 הָגוּן proper, fitting, decent; with כְּ, as is fitting, a post-biblical Hebrew word.",
+        "grammar": "adjective",
+        "context": "1 Timothy 2:10, Greek πρέπω",
+        "issue": 42,
+        "greek": "G4241 πρέπω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "ephesians",
+        "chapter": 4,
+        "verse": 2,
+        "word_index": 1,
+        "text": "נְמִיכוּת",
+        "strong": "H4814",
+        "prefixes": []
+      },
+      "previous_strong": "H4814",
+      "new_strong": "D0419",
+      "reason": "נְמִיכוּת is lowliness, meekness; H4814 מְרִירוּת 'bitterness' is a different word",
+      "evidence": {
+        "lexicon": "D0419 נְמִיכוּת lowliness, meekness; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "Ephesians 4:2, Greek ταπεινοφροσύνη",
+        "issue": 42,
+        "greek": "G5012 ταπεινοφροσύνη"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 16,
+        "verse": 4,
+        "word_index": 1,
+        "text": "שֹׁוֶה",
+        "strong": "H3665",
+        "prefixes": []
+      },
+      "previous_strong": "H3665",
+      "new_strong": "H7737",
+      "reason": "שֹׁוֶה is be worth, be equivalent; H3665 כָּנַע 'be humble' is a different word",
+      "evidence": {
+        "lexicon": "H7737 שָׁוָה be worth, be equivalent",
+        "grammar": "qal participle, worth",
+        "context": "1 Corinthians 16:4, Greek ἄξιος",
+        "issue": 42,
+        "greek": "G0514 ἄξιος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 10,
+        "verse": 7,
+        "word_index": 7,
+        "text": "שֹׁוֶה",
+        "strong": "H3867",
+        "prefixes": []
+      },
+      "previous_strong": "H3867",
+      "new_strong": "H7737",
+      "reason": "שֹׁוֶה is be worth, be equivalent; H3867 לָוָה 'borrow' is a different word",
+      "evidence": {
+        "lexicon": "H7737 שָׁוָה be worth, be equivalent",
+        "grammar": "qal participle, worth",
+        "context": "Luke 10:7, Greek ἄξιος",
+        "issue": 42,
+        "greek": "G0514 ἄξιος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 10,
+        "verse": 10,
+        "word_index": 11,
+        "text": "שֹׁוֶה",
+        "strong": "H3120",
+        "prefixes": []
+      },
+      "previous_strong": "H3120",
+      "new_strong": "H7737",
+      "reason": "שֹׁוֶה is be worth, be equivalent; H3120 יָוָן 'Ionia' is a different word",
+      "evidence": {
+        "lexicon": "H7737 שָׁוָה be worth, be equivalent",
+        "grammar": "qal participle, worth",
+        "context": "Matthew 10:10, Greek ἄξιος",
+        "issue": 42,
+        "greek": "G0514 ἄξιος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "peter1",
+        "chapter": 1,
+        "verse": 7,
+        "word_index": 14,
+        "text": "בְּהִתְגַּלּוֹת",
+        "strong": "Hb/H1540",
+        "prefixes": [
+          "Hb"
+        ]
+      },
+      "previous_strong": "Hb/H1540",
+      "new_strong": "Hb/D0427",
+      "reason": "בְּהִתְגַּלּוֹת is revelation, appearing; H1540 גָּלָה 'uncover' is a different word",
+      "evidence": {
+        "lexicon": "D0427 הִתְגַּלּוּת revelation, appearing; a post-biblical Hebrew noun.",
+        "grammar": "preposition ב + construct noun",
+        "context": "1 Peter 1:7, Greek ἀποκάλυψις",
+        "issue": 42,
+        "greek": "G0602 ἀποκάλυψις"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "peter1",
+        "chapter": 1,
+        "verse": 13,
+        "word_index": 10,
+        "text": "בְּהִתְגַּלּוֹת",
+        "strong": "Hb/H1540",
+        "prefixes": [
+          "Hb"
+        ]
+      },
+      "previous_strong": "Hb/H1540",
+      "new_strong": "Hb/D0427",
+      "reason": "בְּהִתְגַּלּוֹת is revelation, appearing; H1540 גָּלָה 'uncover' is a different word",
+      "evidence": {
+        "lexicon": "D0427 הִתְגַּלּוּת revelation, appearing; a post-biblical Hebrew noun.",
+        "grammar": "preposition ב + construct noun",
+        "context": "1 Peter 1:13, Greek ἀποκάλυψις",
+        "issue": 42,
+        "greek": "G0602 ἀποκάλυψις"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 12,
+        "verse": 7,
+        "word_index": 5,
+        "text": "הִתְגַּלּוּת",
+        "strong": "H8129",
+        "prefixes": []
+      },
+      "previous_strong": "H8129",
+      "new_strong": "D0427",
+      "reason": "הִתְגַּלּוּת is revelation, appearing; H8129 שֵׁן 'tooth' is a different word",
+      "evidence": {
+        "lexicon": "D0427 הִתְגַּלּוּת revelation, appearing; a post-biblical Hebrew noun.",
+        "grammar": "construct noun",
+        "context": "1 Corinthians 12:7, Greek φανέρωσις",
+        "issue": 42,
+        "greek": "G5321 φανέρωσις"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 5,
+        "verse": 11,
+        "word_index": 24,
+        "text": "גַזְלָן",
+        "strong": "H1497",
+        "prefixes": []
+      },
+      "previous_strong": "H1497",
+      "new_strong": "D0443",
+      "reason": "גַזְלָן is robber, extortioner; H1497 גָּזַל 'tear away' is a different word",
+      "evidence": {
+        "lexicon": "D0443 גַּזְלָן robber, extortioner; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "1 Corinthians 5:11, Greek ἅρπαξ",
+        "issue": 42,
+        "greek": "G0727 ἅρπαξ"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 6,
+        "verse": 22,
+        "word_index": 6,
+        "text": "וּמְשֻׁעְבָּדִים",
+        "strong": "H5647",
+        "prefixes": [
+          "Hc"
+        ]
+      },
+      "previous_strong": "H5647",
+      "new_strong": "Hc/D0444",
+      "reason": "וּמְשֻׁעְבָּדִים is enslave, subjugate; H5647 עָבַד 'serve' is a different word",
+      "evidence": {
+        "lexicon": "D0444 שִׁעְבֵּד enslave, subjugate; hitpael, become enslaved, a post-biblical Hebrew verb.",
+        "grammar": "conjunction ו + pual participle",
+        "context": "Romans 6:22, Greek δουλόω",
+        "issue": 42,
+        "greek": "G1402 δουλόω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "galatians",
+        "chapter": 5,
+        "verse": 1,
+        "word_index": 5,
+        "text": "שִׁחְרֵר",
+        "strong": "H4390",
+        "prefixes": []
+      },
+      "previous_strong": "H4390",
+      "new_strong": "D0447",
+      "reason": "שִׁחְרֵר is set free, emancipate; H4390 מָלֵא 'be full' is a different word",
+      "evidence": {
+        "lexicon": "D0447 שִׁחְרֵר set free, emancipate; a post-biblical Hebrew verb.",
+        "grammar": "piel perfect",
+        "context": "Galatians 5:1, Greek ἐλευθερόω",
+        "issue": 42,
+        "greek": "G1659 ἐλευθερόω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 7,
+        "verse": 11,
+        "word_index": 14,
+        "text": "נֶהֱנֶה",
+        "strong": "H481",
+        "prefixes": []
+      },
+      "previous_strong": "H481",
+      "new_strong": "D0448",
+      "reason": "נֶהֱנֶה is enjoy, benefit from; H481 אָלַם 'bind' is a different word",
+      "evidence": {
+        "lexicon": "D0448 נֶהֱנָה enjoy, benefit from; a post-biblical Hebrew verb.",
+        "grammar": "nifal participle",
+        "context": "Mark 7:11, Greek ὠφελέω",
+        "issue": 42,
+        "greek": "G5623 ὠφελέω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 15,
+        "verse": 5,
+        "word_index": 10,
+        "text": "נֶהֱנֶה",
+        "strong": "H7495",
+        "prefixes": []
+      },
+      "previous_strong": "H7495",
+      "new_strong": "D0448",
+      "reason": "נֶהֱנֶה is enjoy, benefit from; H7495 רָפָא 'heal' is a different word",
+      "evidence": {
+        "lexicon": "D0448 נֶהֱנָה enjoy, benefit from; a post-biblical Hebrew verb.",
+        "grammar": "nifal participle",
+        "context": "Matthew 15:5, Greek ὠφελέω",
+        "issue": 42,
+        "greek": "G5623 ὠφελέω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 7,
+        "verse": 5,
+        "word_index": 13,
+        "text": "פְּנוּיִם",
+        "strong": "H5225",
+        "prefixes": []
+      },
+      "previous_strong": "H5225",
+      "new_strong": "D0451",
+      "reason": "פְּנוּיִם is unmarried, free; H5225 נָכוֹן 'blow' is a different word",
+      "evidence": {
+        "lexicon": "D0451 פָּנוּי unmarried, free; a post-biblical Hebrew adjective.",
+        "grammar": "adjective, plural",
+        "context": "1 Corinthians 7:5, Greek σχολάζω",
+        "issue": 42,
+        "greek": "G4980 σχολάζω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 14,
+        "verse": 18,
+        "word_index": 4,
+        "text": "לְהִתְנַצֵּל",
+        "strong": "H5337",
+        "prefixes": [
+          "Hl"
+        ]
+      },
+      "previous_strong": "H5337",
+      "new_strong": "Hl/D0461",
+      "reason": "לְהִתְנַצֵּל is excuse oneself, make a defense; H5337 נָצַל 'strip' is a different word",
+      "evidence": {
+        "lexicon": "D0461 הִתְנַצֵּל excuse oneself, make a defense; a post-biblical Hebrew verb.",
+        "grammar": "preposition ל + hitpael infinitive",
+        "context": "Luke 14:18, Greek παραιτέομαι",
+        "issue": 42,
+        "greek": "G3868 παραιτέομαι"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 15,
+        "verse": 22,
+        "word_index": 11,
+        "text": "לְהִתְנַצֵּל",
+        "strong": "H5337",
+        "prefixes": [
+          "Hl"
+        ]
+      },
+      "previous_strong": "H5337",
+      "new_strong": "Hl/D0461",
+      "reason": "לְהִתְנַצֵּל is excuse oneself, make a defense; H5337 נָצַל 'strip' is a different word",
+      "evidence": {
+        "lexicon": "D0461 הִתְנַצֵּל excuse oneself, make a defense; a post-biblical Hebrew verb.",
+        "grammar": "preposition ל + hitpael infinitive",
+        "context": "John 15:22, Greek πρόφασις",
+        "issue": 42,
+        "greek": "G4392 πρόφασις"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 1,
+        "verse": 20,
+        "word_index": 16,
+        "text": "לְהִתְנַצֵּל׃",
+        "strong": "H5337",
+        "prefixes": [
+          "Hl"
+        ]
+      },
+      "previous_strong": "H5337",
+      "new_strong": "Hl/D0461",
+      "reason": "לְהִתְנַצֵּל׃ is excuse oneself, make a defense; H5337 נָצַל 'strip' is a different word",
+      "evidence": {
+        "lexicon": "D0461 הִתְנַצֵּל excuse oneself, make a defense; a post-biblical Hebrew verb.",
+        "grammar": "preposition ל + hitpael infinitive",
+        "context": "Romans 1:20, Greek ἀναπολόγητος",
+        "issue": 42,
+        "greek": "G0379 ἀναπολόγητος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians2",
+        "chapter": 8,
+        "verse": 17,
+        "word_index": 3,
+        "text": "וּבִשְׁקִידָתוֹ",
+        "strong": "H8245",
+        "prefixes": [
+          "Hc",
+          "Hb"
+        ]
+      },
+      "previous_strong": "H8245",
+      "new_strong": "Hc/Hb/D0464",
+      "reason": "וּבִשְׁקִידָתוֹ is diligence, watchfulness; H8245 שָׁקַד 'watch' is a different word",
+      "evidence": {
+        "lexicon": "D0464 שְׁקִידָה diligence, watchfulness; a post-biblical Hebrew noun.",
+        "grammar": "conjunction ו + preposition ב + noun with 3ms suffix",
+        "context": "2 Corinthians 8:17, Greek σπουδαῖος",
+        "issue": 42,
+        "greek": "G4705 σπουδαῖος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 12,
+        "verse": 35,
+        "word_index": 4,
+        "text": "לְמִצְעָר",
+        "strong": "H4706",
+        "prefixes": [
+          "Hl"
+        ]
+      },
+      "previous_strong": "H4706",
+      "new_strong": "Hl/H4705",
+      "reason": "לְמִצְעָר is a small thing; H4706 מִצְעָר 'a small thing' is a different word",
+      "evidence": {
+        "lexicon": "H4705 מִצְעָר a small thing",
+        "grammar": "preposition ל + noun, a little (time)",
+        "context": "John 12:35, Greek μικρός",
+        "issue": 42,
+        "greek": "G3398 μικρός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "peter2",
+        "chapter": 3,
+        "verse": 1,
+        "word_index": 12,
+        "text": "הַזְכָּרָה",
+        "strong": "H2142",
+        "prefixes": []
+      },
+      "previous_strong": "H2142",
+      "new_strong": "D0494",
+      "reason": "הַזְכָּרָה is remembrance, mention; H2142 זָכַר 'remember' is a different word",
+      "evidence": {
+        "lexicon": "D0494 הַזְכָּרָה remembrance, mention; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "2 Peter 3:1, Greek ὑπόμνησις",
+        "issue": 42,
+        "greek": "G5280 ὑπόμνησις"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "hebrews",
+        "chapter": 9,
+        "verse": 14,
+        "word_index": 10,
+        "text": "נִצְחִי",
+        "strong": "H5331",
+        "prefixes": []
+      },
+      "previous_strong": "H5331",
+      "new_strong": "D0505",
+      "reason": "נִצְחִי is eternal, everlasting; H5331 נֶצַח 'eminence' is a different word",
+      "evidence": {
+        "lexicon": "D0505 נִצְחִי eternal, everlasting; a post-biblical Hebrew adjective.",
+        "grammar": "adjective",
+        "context": "Hebrews 9:14, Greek αἰώνιος",
+        "issue": 42,
+        "greek": "G0166 αἰώνιος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "hebrews",
+        "chapter": 8,
+        "verse": 2,
+        "word_index": 4,
+        "text": "הָאֲמִתִּי",
+        "strong": "Hd/H519",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H519",
+      "new_strong": "Hd/D0516",
+      "reason": "הָאֲמִתִּי is true, genuine; H519 אָמָה 'maid' is a different word",
+      "evidence": {
+        "lexicon": "D0516 אֲמִתִּי true, genuine; a post-biblical Hebrew adjective.",
+        "grammar": "article ה + adjective",
+        "context": "Hebrews 8:2, Greek ἀληθινός",
+        "issue": 42,
+        "greek": "G0228 ἀληθινός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "hebrews",
+        "chapter": 9,
+        "verse": 24,
+        "word_index": 11,
+        "text": "הָאֲמִתִּי",
+        "strong": "Hd/H519",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H519",
+      "new_strong": "Hd/D0516",
+      "reason": "הָאֲמִתִּי is true, genuine; H519 אָמָה 'maid' is a different word",
+      "evidence": {
+        "lexicon": "D0516 אֲמִתִּי true, genuine; a post-biblical Hebrew adjective.",
+        "grammar": "article ה + adjective",
+        "context": "Hebrews 9:24, Greek ἀληθινός",
+        "issue": 42,
+        "greek": "G0228 ἀληθινός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 1,
+        "verse": 9,
+        "word_index": 1,
+        "text": "הָאֲמִתִּי",
+        "strong": "Hd/H519",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H519",
+      "new_strong": "Hd/D0516",
+      "reason": "הָאֲמִתִּי is true, genuine; H519 אָמָה 'maid' is a different word",
+      "evidence": {
+        "lexicon": "D0516 אֲמִתִּי true, genuine; a post-biblical Hebrew adjective.",
+        "grammar": "article ה + adjective",
+        "context": "John 1:9, Greek ἀληθινός",
+        "issue": 42,
+        "greek": "G0228 ἀληθινός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 6,
+        "verse": 32,
+        "word_index": 25,
+        "text": "הָאֲמִתִּי׃",
+        "strong": "Hd/H519",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H519",
+      "new_strong": "Hd/D0516",
+      "reason": "הָאֲמִתִּי׃ is true, genuine; H519 אָמָה 'maid' is a different word",
+      "evidence": {
+        "lexicon": "D0516 אֲמִתִּי true, genuine; a post-biblical Hebrew adjective.",
+        "grammar": "article ה + adjective",
+        "context": "John 6:32, Greek ἀληθινός",
+        "issue": 42,
+        "greek": "G0228 ἀληθινός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 7,
+        "verse": 28,
+        "word_index": 18,
+        "text": "אֲמִתִּי",
+        "strong": "H571",
+        "prefixes": []
+      },
+      "previous_strong": "H571",
+      "new_strong": "D0516",
+      "reason": "אֲמִתִּי is true, genuine; H571 אֶמֶת 'Truth' is a different word",
+      "evidence": {
+        "lexicon": "D0516 אֲמִתִּי true, genuine; a post-biblical Hebrew adjective.",
+        "grammar": "adjective",
+        "context": "John 7:28, Greek ἀληθινός",
+        "issue": 42,
+        "greek": "G0228 ἀληθινός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john1",
+        "chapter": 2,
+        "verse": 8,
+        "word_index": 17,
+        "text": "הָאֲמִתִּי",
+        "strong": "Hd/H519",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H519",
+      "new_strong": "Hd/D0516",
+      "reason": "הָאֲמִתִּי is true, genuine; H519 אָמָה 'maid' is a different word",
+      "evidence": {
+        "lexicon": "D0516 אֲמִתִּי true, genuine; a post-biblical Hebrew adjective.",
+        "grammar": "article ה + adjective",
+        "context": "1 John 2:8, Greek ἀληθινός",
+        "issue": 42,
+        "greek": "G0228 ἀληθινός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john1",
+        "chapter": 5,
+        "verse": 20,
+        "word_index": 10,
+        "text": "הָאֲמִתִּי",
+        "strong": "Hd/H519",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H519",
+      "new_strong": "Hd/D0516",
+      "reason": "הָאֲמִתִּי is true, genuine; H519 אָמָה 'maid' is a different word",
+      "evidence": {
+        "lexicon": "D0516 אֲמִתִּי true, genuine; a post-biblical Hebrew adjective.",
+        "grammar": "article ה + adjective",
+        "context": "1 John 5:20, Greek ἀληθινός",
+        "issue": 42,
+        "greek": "G0228 ἀληθινός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john1",
+        "chapter": 5,
+        "verse": 20,
+        "word_index": 19,
+        "text": "הָאֲמִתִּי",
+        "strong": "Hd/H519",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H519",
+      "new_strong": "Hd/D0516",
+      "reason": "הָאֲמִתִּי is true, genuine; H519 אָמָה 'maid' is a different word",
+      "evidence": {
+        "lexicon": "D0516 אֲמִתִּי true, genuine; a post-biblical Hebrew adjective.",
+        "grammar": "article ה + adjective",
+        "context": "1 John 5:20, Greek ἀληθινός",
+        "issue": 42,
+        "greek": "G0228 ἀληθινός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 16,
+        "verse": 11,
+        "word_index": 8,
+        "text": "הָאֲמִתִּי",
+        "strong": "Hd/H519",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H519",
+      "new_strong": "Hd/D0516",
+      "reason": "הָאֲמִתִּי is true, genuine; H519 אָמָה 'maid' is a different word",
+      "evidence": {
+        "lexicon": "D0516 אֲמִתִּי true, genuine; a post-biblical Hebrew adjective.",
+        "grammar": "article ה + adjective",
+        "context": "Luke 16:11, Greek ἀληθινός",
+        "issue": 42,
+        "greek": "G0228 ἀληθινός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 21,
+        "verse": 5,
+        "word_index": 14,
+        "text": "אֲמִתִּים",
+        "strong": "H571",
+        "prefixes": []
+      },
+      "previous_strong": "H571",
+      "new_strong": "D0516",
+      "reason": "אֲמִתִּים is true, genuine; H571 אֶמֶת 'Truth' is a different word",
+      "evidence": {
+        "lexicon": "D0516 אֲמִתִּי true, genuine; a post-biblical Hebrew adjective.",
+        "grammar": "adjective",
+        "context": "Revelation 21:5, Greek ἀληθινός",
+        "issue": 42,
+        "greek": "G0228 ἀληθινός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 22,
+        "verse": 6,
+        "word_index": 4,
+        "text": "אֲמִתִּים",
+        "strong": "H571",
+        "prefixes": []
+      },
+      "previous_strong": "H571",
+      "new_strong": "D0516",
+      "reason": "אֲמִתִּים is true, genuine; H571 אֶמֶת 'Truth' is a different word",
+      "evidence": {
+        "lexicon": "D0516 אֲמִתִּי true, genuine; a post-biblical Hebrew adjective.",
+        "grammar": "adjective",
+        "context": "Revelation 22:6, Greek ἀληθινός",
+        "issue": 42,
+        "greek": "G0228 ἀληθινός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 3,
+        "verse": 7,
+        "word_index": 8,
+        "text": "הָאֲמִתִּי",
+        "strong": "Hd/H519",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H519",
+      "new_strong": "Hd/D0516",
+      "reason": "הָאֲמִתִּי is true, genuine; H519 אָמָה 'maid' is a different word",
+      "evidence": {
+        "lexicon": "D0516 אֲמִתִּי true, genuine; a post-biblical Hebrew adjective.",
+        "grammar": "article ה + adjective",
+        "context": "Revelation 3:7, Greek ἀληθινός",
+        "issue": 42,
+        "greek": "G0228 ἀληθινός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "colossians",
+        "chapter": 1,
+        "verse": 16,
+        "word_index": 18,
+        "text": "שְׂרָרוֹת",
+        "strong": "H8323",
+        "prefixes": []
+      },
+      "previous_strong": "H8323",
+      "new_strong": "D0532",
+      "reason": "שְׂרָרוֹת is dominion, authority; H8323 שָׂרַר 'be' is a different word",
+      "evidence": {
+        "lexicon": "D0532 שְׂרָרָה dominion, authority; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "Colossians 1:16, Greek ἀρχή",
+        "issue": 42,
+        "greek": "G0746 ἀρχή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "colossians",
+        "chapter": 2,
+        "verse": 10,
+        "word_index": 4,
+        "text": "שְׂרָרָה",
+        "strong": "H1741",
+        "prefixes": []
+      },
+      "previous_strong": "H1741",
+      "new_strong": "D0532",
+      "reason": "שְׂרָרָה is dominion, authority; H1741 דְּוַי 'illness' is a different word",
+      "evidence": {
+        "lexicon": "D0532 שְׂרָרָה dominion, authority; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "Colossians 2:10, Greek ἀρχή",
+        "issue": 42,
+        "greek": "G0746 ἀρχή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "ephesians",
+        "chapter": 1,
+        "verse": 21,
+        "word_index": 2,
+        "text": "שְׂרָרָה",
+        "strong": "H8323",
+        "prefixes": []
+      },
+      "previous_strong": "H8323",
+      "new_strong": "D0532",
+      "reason": "שְׂרָרָה is dominion, authority; H8323 שָׂרַר 'be' is a different word",
+      "evidence": {
+        "lexicon": "D0532 שְׂרָרָה dominion, authority; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "Ephesians 1:21, Greek ἀρχή",
+        "issue": 42,
+        "greek": "G0746 ἀρχή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 8,
+        "verse": 38,
+        "word_index": 10,
+        "text": "שְׂרָרוֹת",
+        "strong": "H8323",
+        "prefixes": []
+      },
+      "previous_strong": "H8323",
+      "new_strong": "D0532",
+      "reason": "שְׂרָרוֹת is dominion, authority; H8323 שָׂרַר 'be' is a different word",
+      "evidence": {
+        "lexicon": "D0532 שְׂרָרָה dominion, authority; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "Romans 8:38, Greek ἀρχή",
+        "issue": 42,
+        "greek": "G0746 ἀρχή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 22,
+        "verse": 4,
+        "word_index": 7,
+        "text": "אֹסֵר",
+        "strong": "H7853",
+        "prefixes": []
+      },
+      "previous_strong": "H7853",
+      "new_strong": "H631",
+      "reason": "אֹסֵר is tie, bind, imprison; H7853 שָׂטַן 'act as adversary' is a different word",
+      "evidence": {
+        "lexicon": "H631 אָסַר tie, bind, imprison",
+        "grammar": "qal participle",
+        "context": "Acts 22:4, Greek δεσμεύω",
+        "issue": 42,
+        "greek": "G1195 δεσμεύω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 12,
+        "verse": 42,
+        "word_index": 9,
+        "text": "אִסָּר׃",
+        "strong": "H632",
+        "prefixes": []
+      },
+      "previous_strong": "H632",
+      "new_strong": "D0541",
+      "reason": "אִסָּר׃ is assarion; H632 אֱסָר 'bond' is a different word",
+      "evidence": {
+        "lexicon": "D0541 אִסָּר assarion; a small Roman copper coin.",
+        "grammar": "noun; רֶבַע אִסָּר, a quarter of an assarion",
+        "context": "Mark 12:42, Greek κοδράντης",
+        "issue": 42,
+        "greek": "G2835 κοδράντης"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 10,
+        "verse": 3,
+        "word_index": 5,
+        "text": "הַמּוֹכֵס",
+        "strong": "H4371",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "H4371",
+      "new_strong": "Hd/D0547",
+      "reason": "הַמּוֹכֵס is tax collector, publican; H4371 מֶכֶס 'computation' is a different word",
+      "evidence": {
+        "lexicon": "D0547 מוֹכֵס tax collector, publican; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "Matthew 10:3, Greek τελώνης",
+        "issue": 42,
+        "greek": "G5057 τελώνης"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 12,
+        "verse": 24,
+        "word_index": 8,
+        "text": "מָזַג",
+        "strong": "H8129",
+        "prefixes": []
+      },
+      "previous_strong": "H8129",
+      "new_strong": "D0574",
+      "reason": "מָזַג is mix, mingle wine; H8129 שֵׁן 'tooth' is a different word",
+      "evidence": {
+        "lexicon": "D0574 מָזַג mix, mingle wine; a post-biblical Hebrew verb.",
+        "grammar": "qal perfect",
+        "context": "1 Corinthians 12:24, Greek συγκεράννυμι",
+        "issue": 42,
+        "greek": "G4786 συγκεράννυμι"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 1,
+        "verse": 14,
+        "word_index": 11,
+        "text": "אֱלִיהוּד׃",
+        "strong": "H7976",
+        "prefixes": []
+      },
+      "previous_strong": "H7976",
+      "new_strong": "D0584",
+      "reason": "אֱלִיהוּד׃ is Eliud; H7976 שִׁלֻּחָה 'shoot' is a different word",
+      "evidence": {
+        "lexicon": "D0584 אֱלִיהוּד Eliud; an ancestor of Jesus in the genealogy of Matthew.",
+        "grammar": "personal name",
+        "context": "Matthew 1:14, Greek Ἐλιούδ",
+        "issue": 42,
+        "greek": "G1664 Ἐλιούδ"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 11,
+        "verse": 25,
+        "word_index": 3,
+        "text": "מְטֻאטָא",
+        "strong": "H7323",
+        "prefixes": []
+      },
+      "previous_strong": "H7323",
+      "new_strong": "D0586",
+      "reason": "מְטֻאטָא is sweep; H7323 רוּץ 'run' is a different word",
+      "evidence": {
+        "lexicon": "D0586 טֵאטֵא sweep; a Hebrew verb.",
+        "grammar": "pual participle",
+        "context": "Luke 11:25, Greek σαρόω",
+        "issue": 42,
+        "greek": "G4563 σαρόω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 13,
+        "verse": 25,
+        "word_index": 8,
+        "text": "זוּנִין",
+        "strong": "H8147",
+        "prefixes": []
+      },
+      "previous_strong": "H8147",
+      "new_strong": "D0587",
+      "reason": "זוּנִין is darnel, tares; H8147 שְׁנַיִם 'two' is a different word",
+      "evidence": {
+        "lexicon": "D0587 זוּנִין darnel, tares; a weed that resembles wheat, a post-biblical Hebrew noun.",
+        "grammar": "plural noun",
+        "context": "Matthew 13:25, Greek ζιζάνιον",
+        "issue": 42,
+        "greek": "G2215 ζιζάνιον"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "ephesians",
+        "chapter": 4,
+        "verse": 32,
+        "word_index": 5,
+        "text": "וְרַחֲמָנִים",
+        "strong": "Hc/H7362",
+        "prefixes": [
+          "Hc"
+        ]
+      },
+      "previous_strong": "Hc/H7362",
+      "new_strong": "Hc/D0603",
+      "reason": "וְרַחֲמָנִים is merciful, compassionate; H7362 רַחְמָנִי 'compassionate women' is a different word",
+      "evidence": {
+        "lexicon": "D0603 רַחֲמָן merciful, compassionate; a post-biblical Hebrew adjective.",
+        "grammar": "conjunction ו + adjective, plural",
+        "context": "Ephesians 4:32, Greek εὔσπλαγχνος",
+        "issue": 42,
+        "greek": "G2155 εὔσπλαγχνος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "hebrews",
+        "chapter": 2,
+        "verse": 17,
+        "word_index": 13,
+        "text": "רַחֲמָן",
+        "strong": "H2553",
+        "prefixes": []
+      },
+      "previous_strong": "H2553",
+      "new_strong": "D0603",
+      "reason": "רַחֲמָן is merciful, compassionate; H2553 חַמָּן 'sun-pillar' is a different word",
+      "evidence": {
+        "lexicon": "D0603 רַחֲמָן merciful, compassionate; a post-biblical Hebrew adjective.",
+        "grammar": "adjective",
+        "context": "Hebrews 2:17, Greek ἐλεήμων",
+        "issue": 42,
+        "greek": "G1655 ἐλεήμων"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 6,
+        "verse": 36,
+        "word_index": 2,
+        "text": "רַחֲמָנִים",
+        "strong": "H7362",
+        "prefixes": []
+      },
+      "previous_strong": "H7362",
+      "new_strong": "D0603",
+      "reason": "רַחֲמָנִים is merciful, compassionate; H7362 רַחְמָנִי 'compassionate women' is a different word",
+      "evidence": {
+        "lexicon": "D0603 רַחֲמָן merciful, compassionate; a post-biblical Hebrew adjective.",
+        "grammar": "adjective",
+        "context": "Luke 6:36, Greek οἰκτίρμων",
+        "issue": 42,
+        "greek": "G3629 οἰκτίρμων"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 1,
+        "verse": 31,
+        "word_index": 7,
+        "text": "רַחֲמָנִים׃",
+        "strong": "H2553",
+        "prefixes": []
+      },
+      "previous_strong": "H2553",
+      "new_strong": "D0603",
+      "reason": "רַחֲמָנִים׃ is merciful, compassionate; H2553 חַמָּן 'sun-pillar' is a different word",
+      "evidence": {
+        "lexicon": "D0603 רַחֲמָן merciful, compassionate; a post-biblical Hebrew adjective.",
+        "grammar": "adjective",
+        "context": "Romans 1:31, Greek ἀνελεήμων",
+        "issue": 42,
+        "greek": "G0415 ἀνελεήμων"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "peter1",
+        "chapter": 3,
+        "verse": 8,
+        "word_index": 10,
+        "text": "רַחֲמָנִים",
+        "strong": "H5518",
+        "prefixes": []
+      },
+      "previous_strong": "H5518",
+      "new_strong": "D0603",
+      "reason": "רַחֲמָנִים is merciful, compassionate; H5518 סִיר 'thorn' is a different word",
+      "evidence": {
+        "lexicon": "D0603 רַחֲמָן merciful, compassionate; a post-biblical Hebrew adjective.",
+        "grammar": "adjective, plural",
+        "context": "1 Peter 3:8, Greek εὔσπλαγχνος",
+        "issue": 42,
+        "greek": "G2155 εὔσπλαγχνος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 2,
+        "word_index": 1,
+        "text": "נִכְנַס",
+        "strong": "H3664",
+        "prefixes": []
+      },
+      "previous_strong": "H3664",
+      "new_strong": "D0608",
+      "reason": "נִכְנַס is enter; H3664 כָּנַס 'gather' is a different word",
+      "evidence": {
+        "lexicon": "D0608 נִכְנַס enter; intrude, a post-biblical Hebrew verb.",
+        "grammar": "nifal",
+        "context": "Acts 17:2, Greek εἰσέρχομαι",
+        "issue": 42,
+        "greek": "G1525 εἰσέρχομαι"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 21,
+        "verse": 18,
+        "word_index": 2,
+        "text": "נִכְנַס",
+        "strong": "H3664",
+        "prefixes": []
+      },
+      "previous_strong": "H3664",
+      "new_strong": "D0608",
+      "reason": "נִכְנַס is enter; H3664 כָּנַס 'gather' is a different word",
+      "evidence": {
+        "lexicon": "D0608 נִכְנַס enter; intrude, a post-biblical Hebrew verb.",
+        "grammar": "nifal",
+        "context": "Acts 21:18, Greek εἴσειμι",
+        "issue": 42,
+        "greek": "G1524 εἴσειμι"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 20,
+        "verse": 6,
+        "word_index": 5,
+        "text": "נִכְנַס",
+        "strong": "H3664",
+        "prefixes": []
+      },
+      "previous_strong": "H3664",
+      "new_strong": "D0608",
+      "reason": "נִכְנַס is enter; H3664 כָּנַס 'gather' is a different word",
+      "evidence": {
+        "lexicon": "D0608 נִכְנַס enter; intrude, a post-biblical Hebrew verb.",
+        "grammar": "nifal",
+        "context": "John 20:6, Greek εἰσέρχομαι",
+        "issue": 42,
+        "greek": "G1525 εἰσέρχομαι"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 22,
+        "verse": 3,
+        "word_index": 1,
+        "text": "נִכְנַס",
+        "strong": "H3664",
+        "prefixes": []
+      },
+      "previous_strong": "H3664",
+      "new_strong": "D0608",
+      "reason": "נִכְנַס is enter; H3664 כָּנַס 'gather' is a different word",
+      "evidence": {
+        "lexicon": "D0608 נִכְנַס enter; intrude, a post-biblical Hebrew verb.",
+        "grammar": "nifal",
+        "context": "Luke 22:3, Greek εἰσέρχομαι",
+        "issue": 42,
+        "greek": "G1525 εἰσέρχομαι"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "hebrews",
+        "chapter": 4,
+        "verse": 12,
+        "word_index": 10,
+        "text": "וְנִכְנָס",
+        "strong": "Hc/H3664",
+        "prefixes": [
+          "Hc"
+        ]
+      },
+      "previous_strong": "Hc/H3664",
+      "new_strong": "Hc/D0608",
+      "reason": "וְנִכְנָס is enter; H3664 כָּנַס 'gather' is a different word",
+      "evidence": {
+        "lexicon": "D0608 נִכְנַס enter; intrude, a post-biblical Hebrew verb.",
+        "grammar": "conjunction ו + nifal participle",
+        "context": "Hebrews 4:12, Greek διϊκνέομαι",
+        "issue": 42,
+        "greek": "G1338 διϊκνέομαι"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 16,
+        "verse": 23,
+        "word_index": 1,
+        "text": "הַמְאָרֵחַ",
+        "strong": "H732",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "H732",
+      "new_strong": "Hd/D0609",
+      "reason": "הַמְאָרֵחַ is host, receive as a guest; H732 אָרַח 'wander' is a different word",
+      "evidence": {
+        "lexicon": "D0609 אֵרַח host, receive as a guest; a post-biblical Hebrew verb.",
+        "grammar": "article ה + piel participle",
+        "context": "Romans 16:23, Greek ξένος",
+        "issue": 42,
+        "greek": "G3581 ξένος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "peter2",
+        "chapter": 1,
+        "verse": 6,
+        "word_index": 8,
+        "text": "הַחֲסִידוּת׃",
+        "strong": "Hd/H2623",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H2623",
+      "new_strong": "Hd/D0612",
+      "reason": "הַחֲסִידוּת׃ is piety, godliness; H2623 חָסִיד 'kind' is a different word",
+      "evidence": {
+        "lexicon": "D0612 חֲסִידוּת piety, godliness; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "2 Peter 1:6, Greek εὐσέβεια",
+        "issue": 42,
+        "greek": "G2150 εὐσέβεια"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "timothy1",
+        "chapter": 3,
+        "verse": 16,
+        "word_index": 3,
+        "text": "הַחֲסִידוּת",
+        "strong": "Hd/H2623",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H2623",
+      "new_strong": "Hd/D0612",
+      "reason": "הַחֲסִידוּת is piety, godliness; H2623 חָסִיד 'kind' is a different word",
+      "evidence": {
+        "lexicon": "D0612 חֲסִידוּת piety, godliness; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "1 Timothy 3:16, Greek εὐσέβεια",
+        "issue": 42,
+        "greek": "G2150 εὐσέβεια"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "timothy1",
+        "chapter": 4,
+        "verse": 8,
+        "word_index": 6,
+        "text": "הַחֲסִידוּת",
+        "strong": "Hd/H2623",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H2623",
+      "new_strong": "Hd/D0612",
+      "reason": "הַחֲסִידוּת is piety, godliness; H2623 חָסִיד 'kind' is a different word",
+      "evidence": {
+        "lexicon": "D0612 חֲסִידוּת piety, godliness; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "1 Timothy 4:8, Greek εὐσέβεια",
+        "issue": 42,
+        "greek": "G2150 εὐσέβεια"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "timothy1",
+        "chapter": 6,
+        "verse": 3,
+        "word_index": 14,
+        "text": "הַחֲסִידוּת׃",
+        "strong": "Hd/H2623",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H2623",
+      "new_strong": "Hd/D0612",
+      "reason": "הַחֲסִידוּת׃ is piety, godliness; H2623 חָסִיד 'kind' is a different word",
+      "evidence": {
+        "lexicon": "D0612 חֲסִידוּת piety, godliness; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "1 Timothy 6:3, Greek εὐσέβεια",
+        "issue": 42,
+        "greek": "G2150 εὐσέβεια"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "timothy1",
+        "chapter": 6,
+        "verse": 5,
+        "word_index": 10,
+        "text": "הַחֲסִידוּת",
+        "strong": "Hd/H2623",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H2623",
+      "new_strong": "Hd/D0612",
+      "reason": "הַחֲסִידוּת is piety, godliness; H2623 חָסִיד 'kind' is a different word",
+      "evidence": {
+        "lexicon": "D0612 חֲסִידוּת piety, godliness; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "1 Timothy 6:5, Greek εὐσέβεια",
+        "issue": 42,
+        "greek": "G2150 εὐσέβεια"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "timothy1",
+        "chapter": 6,
+        "verse": 6,
+        "word_index": 5,
+        "text": "הַחֲסִידוּת",
+        "strong": "Hd/H2623",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H2623",
+      "new_strong": "Hd/D0612",
+      "reason": "הַחֲסִידוּת is piety, godliness; H2623 חָסִיד 'kind' is a different word",
+      "evidence": {
+        "lexicon": "D0612 חֲסִידוּת piety, godliness; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "1 Timothy 6:6, Greek εὐσέβεια",
+        "issue": 42,
+        "greek": "G2150 εὐσέβεια"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "peter2",
+        "chapter": 1,
+        "verse": 3,
+        "word_index": 9,
+        "text": "וְלַחֲסִידוּת",
+        "strong": "H2617",
+        "prefixes": [
+          "Hc",
+          "Hl"
+        ]
+      },
+      "previous_strong": "H2617",
+      "new_strong": "Hc/Hl/D0612",
+      "reason": "וְלַחֲסִידוּת is piety, godliness; H2617 חֵסֵד 'Loving-kindness' is a different word",
+      "evidence": {
+        "lexicon": "D0612 חֲסִידוּת piety, godliness; a post-biblical Hebrew noun.",
+        "grammar": "conjunction ו + preposition ל + noun",
+        "context": "2 Peter 1:3, Greek εὐσέβεια",
+        "issue": 42,
+        "greek": "G2150 εὐσέβεια"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 16,
+        "verse": 12,
+        "word_index": 2,
+        "text": "פִילִפִּי",
+        "strong": "H8269",
+        "prefixes": []
+      },
+      "previous_strong": "H8269",
+      "new_strong": "D0614",
+      "reason": "פִילִפִּי is Philippi; H8269 שַׂר 'chieftain' is a different word",
+      "evidence": {
+        "lexicon": "D0614 פִילִפִּי Philippi; a Roman colony and city of Macedonia.",
+        "grammar": "place name",
+        "context": "Acts 16:12, Greek Φίλιπποι",
+        "issue": 42,
+        "greek": "G5375 Φίλιπποι"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 20,
+        "verse": 6,
+        "word_index": 3,
+        "text": "פִילִפִּי",
+        "strong": "H4560",
+        "prefixes": []
+      },
+      "previous_strong": "H4560",
+      "new_strong": "D0614",
+      "reason": "פִילִפִּי is Philippi; H4560 מָסַר 'deliver over' is a different word",
+      "evidence": {
+        "lexicon": "D0614 פִילִפִּי Philippi; a Roman colony and city of Macedonia.",
+        "grammar": "place name",
+        "context": "Acts 20:6, Greek Φίλιπποι",
+        "issue": 42,
+        "greek": "G5375 Φίλιπποι"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 18,
+        "verse": 13,
+        "word_index": 8,
+        "text": "שִׁמֵּשׁ",
+        "strong": "H8451",
+        "prefixes": []
+      },
+      "previous_strong": "H8451",
+      "new_strong": "D0402",
+      "reason": "שִׁמֵּשׁ is serve, minister; H8451 תּוֹרָה 'Instruction, teaching' is a different word",
+      "evidence": {
+        "lexicon": "D0402 שִׁמֵּשׁ serve, minister; a post-biblical Hebrew verb.",
+        "grammar": "piel perfect, served",
+        "context": "John 18:13",
+        "issue": 42,
+        "greek_note": "Delitzsch renders ἦν ἀρχιερεύς as שִׁמֵּשׁ בִּכְהֻנָּה גְדוֹלָה, served in the high priesthood"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians2",
+        "chapter": 8,
+        "verse": 8,
+        "word_index": 4,
+        "text": "צִוּוּי",
+        "strong": "H3502",
+        "prefixes": []
+      },
+      "previous_strong": "H3502",
+      "new_strong": "D0634",
+      "reason": "צִוּוּי is command, ordinance; H3502 יִתְרָה 'abundance' is a different word",
+      "evidence": {
+        "lexicon": "D0634 צִוּוּי command, ordinance; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "2 Corinthians 8:8, Greek ἐπιταγή",
+        "issue": 42,
+        "greek": "G2003 ἐπιταγή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 5,
+        "verse": 4,
+        "word_index": 2,
+        "text": "עֲמִידָה",
+        "strong": "H4805",
+        "prefixes": []
+      },
+      "previous_strong": "H4805",
+      "new_strong": "D0659",
+      "reason": "עֲמִידָה is standing firm, endurance; H4805 מְרִי 'rebellion' is a different word",
+      "evidence": {
+        "lexicon": "D0659 עֲמִידָה standing firm, endurance; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "Romans 5:4, Greek δοκιμή",
+        "issue": 42,
+        "greek": "G1382 δοκιμή"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 7,
+        "verse": 7,
+        "word_index": 22,
+        "text": "הַחִמּוּד",
+        "strong": "Hd/H2530",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H2530",
+      "new_strong": "Hd/D0660",
+      "reason": "הַחִמּוּד is coveting, desire; H2530 חָמַד 'desire' is a different word",
+      "evidence": {
+        "lexicon": "D0660 חִמּוּד coveting, desire; a post-biblical Hebrew noun.",
+        "grammar": "article ה + noun",
+        "context": "Romans 7:7, Greek ἐπιθυμία",
+        "issue": 42,
+        "greek": "G1939 ἐπιθυμία"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "timothy1",
+        "chapter": 3,
+        "verse": 3,
+        "word_index": 7,
+        "text": "קְטָטָה",
+        "strong": "H6663",
+        "prefixes": []
+      },
+      "previous_strong": "H6663",
+      "new_strong": "D0698",
+      "reason": "קְטָטָה is quarrel, strife; H6663 צָדַק 'be right' is a different word",
+      "evidence": {
+        "lexicon": "D0698 קְטָטָה quarrel, strife; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "1 Timothy 3:3, Greek ἄμαχος",
+        "issue": 42,
+        "greek": "G0269 ἄμαχος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "timothy2",
+        "chapter": 2,
+        "verse": 23,
+        "word_index": 10,
+        "text": "קְטָטָה",
+        "strong": "H1970",
+        "prefixes": []
+      },
+      "previous_strong": "H1970",
+      "new_strong": "D0698",
+      "reason": "קְטָטָה is quarrel, strife; H1970 הָכַר 'ye cause me to wonder' is a different word",
+      "evidence": {
+        "lexicon": "D0698 קְטָטָה quarrel, strife; a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "2 Timothy 2:23, Greek μάχη",
+        "issue": 42,
+        "greek": "G3163 μάχη"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 7,
+        "verse": 5,
+        "word_index": 11,
+        "text": "קָבוּעַ",
+        "strong": "H5647",
+        "prefixes": []
+      },
+      "previous_strong": "H5647",
+      "new_strong": "D0502",
+      "reason": "קָבוּעַ is fix, appoint, determine; H5647 עָבַד 'serve' is a different word",
+      "evidence": {
+        "lexicon": "D0502 קָבַע fix, appoint, determine; a post-biblical Hebrew sense.",
+        "grammar": "qal passive participle, fixed",
+        "context": "1 Corinthians 7:5, Greek καιρός",
+        "issue": 42,
+        "greek": "G2540 καιρός"
+      }
+    }
+  ]
+}

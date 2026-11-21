@@ -45,6 +45,7 @@ REFRESH_OUTPUTS = {
     "data/dict/lexicon/": ("dict/", "bundles/dictionary"),
     "data/delitzsch/parsed/": ("besorah/", "bundles/besorah"),
 }
+CHANGE_REFRESHED = ("data/delitzsch/parsed/",)
 KNOWLEDGE_CODE = "scripts/knowledge/"
 KNOWLEDGE_TESTS = "tests/test_knowledge_"
 MOVED_PYTEST = frozenset(
@@ -130,10 +131,14 @@ def repinned_editions(
         return False
 
 
-def source_refresh(base: str, root: Path) -> tuple[tuple[str, str], ...]:
-    changed = subprocess.check_output(
+def changed_files(base: str, root: Path) -> list[str]:
+    return subprocess.check_output(
         ["git", "diff", "--name-status", base, "--"], cwd=root, text=True
     ).splitlines()
+
+
+def source_refresh(base: str, root: Path) -> tuple[tuple[str, str], ...]:
+    changed = changed_files(base, root)
     builder_edits = any(
         path.startswith(KNOWLEDGE_CODE) and path != KNOWLEDGE_CODE + "compatibility.py"
         for path in (line.split("\t")[-1] for line in changed)
@@ -144,11 +149,16 @@ def source_refresh(base: str, root: Path) -> tuple[tuple[str, str], ...]:
     return repinned_inputs(before, (root / PILOT_INPUTS).read_bytes())
 
 
-def refreshed_outputs(repinned: tuple[tuple[str, str], ...]) -> tuple[str, ...]:
+def refreshed_outputs(
+    repinned: tuple[tuple[str, str], ...], changed: tuple[str, ...] = ()
+) -> tuple[str, ...]:
+    sources = [new_path for _, new_path in repinned]
+    if repinned:
+        sources += [path for path in changed if path.startswith(CHANGE_REFRESHED)]
     return tuple(
         output
         for prefix, outputs in REFRESH_OUTPUTS.items()
-        if any(new_path.startswith(prefix) for _, new_path in repinned)
+        if any(source.startswith(prefix) for source in sources)
         for output in outputs
     )
 
@@ -387,8 +397,13 @@ def prepare_legacy_digest(name: str, payload: dict, refreshed: tuple[str, ...] =
                 payload.pop(key)
         if name == "manifest.json":
             payload.get("bundles", {}).get("versions", {}).pop("checksum", None)
-    if "bundles/dictionary" in refreshed and name == "manifest.json":
-        payload.get("bundles", {}).pop("dictionary", None)
+    if "bundles/dictionary" in refreshed:
+        if name == "bundles/versions.json":
+            payload.pop("dictionary", None)
+        if name == "manifest.json":
+            bundles = payload.get("bundles", {})
+            bundles.pop("dictionary", None)
+            bundles.pop("versions", None)
     if "bundles/besorah" in refreshed and name == "manifest.json":
         payload.get("bundles", {}).pop("besorah", None)
 
@@ -424,7 +439,8 @@ def archive(root: Path, revision: str, destination: Path):
 
 def legacy(base: str, root=ROOT):
     boundary(base, root)
-    refreshed = refreshed_outputs(source_refresh(base, root))
+    changed = tuple(line.split("\t")[-1] for line in changed_files(base, root))
+    refreshed = refreshed_outputs(source_refresh(base, root), changed)
     env = {
         k: v
         for k, v in os.environ.items()

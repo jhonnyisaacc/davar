@@ -12,6 +12,7 @@ import {
   offlineLexiconSources,
   type OfflineLexiconSources,
 } from "../../shared/lexiconAssets";
+import { publishedCustomEntries } from "../../shared/customEntryPublication";
 import { ts2009BookLookupPaths } from "../../shared/scripturePaths";
 import { TS2009_BOOK_FILE_MAP } from "../../shared/ts2009BookFileMap";
 import {
@@ -407,8 +408,10 @@ const generateDictionary = async (): Promise<{
   lexiconShards: number;
   lexiconInstances: number;
 }> => {
-  const customDefinitions = await readJson<JsonValue>(
-    join(DATA_ROOT, "dict", "lexicon", "custom_definitions.json"),
+  const customDefinitions = publishedCustomEntries(
+    await readJson<Record<string, { publication?: unknown }>>(
+      join(DATA_ROOT, "dict", "lexicon", "custom_definitions.json"),
+    ),
   );
   const roots = await readJson<JsonValue>(
     join(DATA_ROOT, "dict", "lexicon", "roots.json"),

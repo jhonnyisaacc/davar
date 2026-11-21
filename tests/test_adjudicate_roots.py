@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-
+from pathlib import Path
 
 from scripts.dict.adjudicate_roots import (
     Adjudication,
@@ -209,6 +209,32 @@ def test_source_chain_requires_unique_unqualified_evidence():
         assert decision.review_status == "review" and decision.proposed_root_ref is None
 
 
+def test_a_word_cited_only_in_contrast_is_not_its_root():
+    from scripts.dict.adjudicate_roots import audit_from_derivations
+    words = {"H3027": {"lemma": "יָד", "root_ref": "H3709"}, "H3034": {"lemma": "יָדָה", "root_ref": "H3027"}}
+    roots = {"H3721": {"lemma": "כָּפַף"}}
+    source = {
+        "H3027": {"derivation": "a primitive word; in distinction from H3709 (כַּף), the closed one);"},
+        "H3034": {"derivation": "a primitive root; used only as denominative from H3027 (יָד);"},
+        "H3709": {"derivation": "from H3721 (כָּפַף);"},
+    }
+    decisions = audit_from_derivations(words, roots, source)
+    assert [(item.strong, item.proposed_root_ref) for item in decisions] == [("H3027", None), ("H3034", None)]
+
+
+def test_unresolved_entry_drops_a_link_only_an_earlier_adjudication_made(tmp_path, monkeypatch):
+    import scripts.dict.adjudicate_roots as module
+    monkeypatch.setattr(module, "WORDS_PATH", tmp_path / "words.json")
+    words = {
+        "H3027": {"root_ref": "H3721", "root_adjudication": {"original_root_ref": "H3709"}},
+        "H50": {"root_ref": "H1", "root_adjudication": {"original_root_ref": "H1"}},
+    }
+    (tmp_path / "words.json").write_text(json.dumps(words))
+    decisions = module.audit_from_derivations(words, {"H1": {}, "H3721": {}}, {"H3027": {"derivation": "a primitive word"}, "H50": {"derivation": "perhaps from H1"}})
+    module.apply_source_adjudications(decisions, words, {"H1": {}, "H3721": {}})
+    assert "root_ref" not in words["H3027"] and words["H50"]["root_ref"] == "H1"
+
+
 def test_apply_rejects_missing_target_and_is_idempotent(tmp_path, monkeypatch):
     import pytest
     import scripts.dict.adjudicate_roots as module
@@ -222,3 +248,53 @@ def test_apply_rejects_missing_target_and_is_idempotent(tmp_path, monkeypatch):
     decision.proposed_root_ref = "H1"
     assert module.apply_decisions([decision]) == 1
     assert module.apply_decisions([decision]) == 0
+
+
+def test_a_word_cited_only_for_comparison_is_not_its_root():
+    from scripts.dict.adjudicate_roots import audit_from_derivations
+    words = {
+        "H3644": {"lemma": "כְּמוֹ", "root_ref": "H3651"},
+        "H389": {"lemma": "אַךְ", "root_ref": "H403"},
+        "H9": {"lemma": "אֲבֵדָה", "root_ref": "H6"},
+        "H1981": {"lemma": "הֲלַךְ", "root_ref": "H1980"},
+    }
+    roots = {"H3559": {}, "H6": {}, "H1980": {}}
+    source = {
+        "H3644": {"derivation": "or כָּמוֹ; (compare H3651 (כֵּן));"},
+        "H3651": {"derivation": "from H3559 (כּוּן);"},
+        "H389": {"derivation": "akin to H403 (אָכֵן);"},
+        "H403": {"derivation": "from H3559 (כּוּן) (compare H3651 (כֵּן));"},
+        "H9": {"derivation": "from H6 (אָבַד); Compare H10 (אֲבַדֹּה)."},
+        "H1981": {"derivation": "(Aramaic) corresponding to H1980 (הָלַךְ) (compare H1946 (הוּךְ));"},
+    }
+    decisions = {item.strong: item.proposed_root_ref for item in audit_from_derivations(words, roots, source)}
+    assert decisions == {"H3644": None, "H389": None, "H9": "H6", "H1981": "H1980"}
+
+
+def test_unresolved_entry_drops_an_original_link_the_source_only_compares(tmp_path, monkeypatch):
+    import scripts.dict.adjudicate_roots as module
+    monkeypatch.setattr(module, "WORDS_PATH", tmp_path / "words.json")
+    words = {
+        "H8337": {"root_ref": "H7797", "root_adjudication": {"original_root_ref": "H7797"}},
+        "H8345": {"root_ref": "H7797", "root_adjudication": {"original_root_ref": "H8337"}},
+        "H50": {"root_ref": "H1", "root_adjudication": {"original_root_ref": "H1"}},
+    }
+    (tmp_path / "words.json").write_text(json.dumps(words))
+    roots = {"H1": {}, "H7797": {}}
+    source = {
+        "H8337": {"derivation": "masculine שִׁשָּׁה; a primitive number; compare H7797 (שׂוּשׂ)"},
+        "H8345": {"derivation": "from H8337 (שֵׁשׁ);"},
+        "H50": {"derivation": "perhaps from H1"},
+    }
+    module.apply_source_adjudications(module.audit_from_derivations(words, roots, source), words, roots)
+    assert {key: entry.get("root_ref") for key, entry in words.items()} == {"H8337": None, "H8345": None, "H50": "H1"}
+
+
+def test_source_errata_are_read_as_strongs_cites_them():
+    from scripts.dict.adjudicate_roots import SOURCE_ERRATA, audit_from_derivations
+    raw = json.loads((Path(__file__).resolve().parents[1] / "data/dict/raw/strongs_hebrew_dict_en.json").read_text(encoding="utf-8"))
+    assert all(wrong in raw[strong]["derivation"] for strong, (wrong, _) in SOURCE_ERRATA.items())
+    words = {"H3628": {"lemma": "כְּלִיא", "root_ref": "H3627"}, "H1992": {"lemma": "הֵם", "root_ref": "H1981"}}
+    roots = {"H3607": {}, "H3615": {}, "H1980": {}}
+    decisions = {item.strong: item.proposed_root_ref for item in audit_from_derivations(words, roots, raw)}
+    assert decisions == {"H3628": "H3607", "H1992": None}

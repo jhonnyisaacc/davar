@@ -10315,7 +10315,8 @@
         "text_en": "in",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "en"
       }
     ],
     "sources": {
@@ -23707,7 +23708,8 @@
         "text_en": "rosy",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "rojizo"
       },
       {
         "text_en": "red",
@@ -43832,7 +43834,8 @@
         "text_en": "revilings",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "injurias"
       },
       {
         "text_en": "reviling words",
@@ -45215,8 +45218,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H1438"
     }
   },
@@ -58536,8 +58539,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H1641"
     }
   },
@@ -61251,7 +61254,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H1680",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -62659,7 +62661,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H2082",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 5,
@@ -65303,8 +65304,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H1696"
     }
   },
@@ -69664,7 +69665,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H1820",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 2,
@@ -74017,7 +74017,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H1794",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 4,
@@ -76206,8 +76205,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H1826"
     }
   },
@@ -79047,7 +79046,8 @@
         "text_en": "goad",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "aguijón"
       }
     ],
     "sources": {
@@ -82885,7 +82885,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H1897",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 2,
@@ -85337,7 +85336,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 4,
@@ -85347,8 +85345,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3064"
     }
   },
@@ -85746,10 +85744,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H1930"
-    }
+    },
+    "root_ref": "H162"
   },
   "H1946": {
     "strong_number": "H1946",
@@ -85809,10 +85808,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H1981"
-    }
+    },
+    "root_ref": "H1980"
   },
   "H1947": {
     "strong_number": "H1947",
@@ -88010,8 +88010,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H1980"
     }
   },
@@ -88128,10 +88128,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H1981"
-    }
+    },
+    "root_ref": "H1980"
   },
   "H1985": {
     "strong_number": "H1985",
@@ -104318,10 +104319,11 @@
         "text_es": "recordar"
       },
       {
-        "text_en": "think of",
+        "text_en": "think of or on",
         "source": "bdb",
         "order": 8,
-        "sense": "I5"
+        "sense": "I5",
+        "text_es": "pensar en o sobre"
       },
       {
         "text_en": "call to mind",
@@ -108130,18 +108132,11 @@
         "text_es": "ser ramera"
       },
       {
-        "text_en": "be",
+        "text_en": "be or act as a harlot",
         "source": "bdb",
         "order": 3,
         "sense": "1",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "act as a harlot",
-        "source": "bdb",
-        "order": 4,
-        "sense": "1",
-        "text_es": "actuar como ramera"
+        "text_es": "ser o actuar como ramera"
       },
       {
         "text_en": "of improper intercourse with foreign nations",
@@ -108489,7 +108484,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H6819",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 3,
@@ -110067,8 +110061,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H2114"
     }
   },
@@ -115193,7 +115187,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H2287",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -128165,7 +128158,8 @@
         "text_en": "haste",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "prisa"
       },
       {
         "text_en": "make haste",
@@ -130140,7 +130134,8 @@
         "text_en": "manacle",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "grillete"
       },
       {
         "text_en": "manacles",
@@ -132229,10 +132224,11 @@
         "sense": "0"
       },
       {
-        "text_en": "to call on the name of",
+        "text_en": "to call on the name of YHWH",
         "source": "bdb",
         "order": 17,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "invocar el nombre de YHWH"
       },
       {
         "text_en": "play the pipe",
@@ -132608,7 +132604,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H2470",
     "instance_policy_version": "1.1",
     "instance_tier": "medium",
     "instance_total": 132,
@@ -134629,11 +134624,11 @@
     "translit_es": "jilekiyah",
     "definitions": [
       {
-        "text_en": "my portion is",
+        "text_en": "my portion is YHWH",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "mi porción es"
+        "text_es": "mi porción es YHWH"
       },
       {
         "text_en": "father of Eliakim, Hezekiah’s officer",
@@ -146355,10 +146350,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H2646"
-    }
+    },
+    "root_ref": "H2645"
   },
   "H2651": {
     "strong_number": "H2651",
@@ -148557,7 +148553,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H2673",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 3,
@@ -151422,8 +151417,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H2787"
     }
   },
@@ -153431,8 +153426,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H2729"
     }
   },
@@ -154947,8 +154942,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H2782"
     }
   },
@@ -167477,10 +167472,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H2939"
-    }
+    },
+    "root_ref": "H2938"
   },
   "H2942": {
     "strong_number": "H2942",
@@ -170293,11 +170289,11 @@
     "translit_es": "yavam",
     "definitions": [
       {
-        "text_en": "do duty of",
+        "text_en": "do duty of יָבַם",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "cumplir el deber de"
+        "text_es": "cumplir el deber de יָבַם"
       }
     ],
     "sources": {
@@ -172352,11 +172348,11 @@
         "text_es": "espigas"
       },
       {
-        "text_en": "hand",
+        "text_en": "a (beckoning) hand",
         "source": "bdb",
         "order": 17,
         "sense": "4g",
-        "text_es": "mano"
+        "text_es": "una mano (que hace señas)"
       },
       {
         "text_en": "יַד with prep.",
@@ -174323,7 +174319,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "high",
     "instance_total": 1445,
@@ -174333,8 +174328,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3709"
     }
   },
@@ -174413,7 +174408,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 16,
@@ -174423,8 +174417,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3027"
     }
   },
@@ -174461,7 +174455,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 2,
@@ -174471,8 +174464,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3034"
     }
   },
@@ -174918,7 +174911,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "medium",
     "instance_total": 111,
@@ -174928,8 +174920,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3027"
     }
   },
@@ -174973,7 +174965,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 2,
@@ -174983,8 +174974,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3034"
     }
   },
@@ -175011,7 +175002,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -175021,8 +175011,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3034"
     }
   },
@@ -176245,7 +176235,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -176255,8 +176244,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3061"
     }
   },
@@ -176291,7 +176280,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -176301,8 +176289,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3061"
     }
   },
@@ -176381,7 +176369,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -176391,8 +176378,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3064"
     }
   },
@@ -176890,7 +176877,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 6,
@@ -176900,8 +176886,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3063"
     }
   },
@@ -176952,7 +176938,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 9,
@@ -176962,8 +176947,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3061"
     }
   },
@@ -178560,7 +178545,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "medium",
     "instance_total": 754,
@@ -178570,8 +178554,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3034"
     }
   },
@@ -178749,7 +178733,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 69,
@@ -178759,8 +178742,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3063"
     }
   },
@@ -178806,7 +178789,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 3,
@@ -178816,8 +178798,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3064"
     }
   },
@@ -178869,7 +178851,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 6,
@@ -178879,8 +178860,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3064"
     }
   },
@@ -178920,7 +178901,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -178930,8 +178910,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3066"
     }
   },
@@ -197393,18 +197373,11 @@
     "translit_es": "yiziyah",
     "definitions": [
       {
-        "text_en": "may",
+        "text_en": "may YHWH sprinkle",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "puede"
-      },
-      {
-        "text_en": "sprinkle",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "rociar"
+        "text_es": "que YHWH rocíe"
       }
     ],
     "sources": {
@@ -198481,18 +198454,11 @@
     "translit_es": "yejediyahu",
     "definitions": [
       {
-        "text_en": "May",
+        "text_en": "May YHWH give joy!",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "Que"
-      },
-      {
-        "text_en": "give joy!",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "¡dé gozo!"
+        "text_es": "¡Que YHWH dé alegría!"
       },
       {
         "text_en": "a Levite",
@@ -200587,7 +200553,6 @@
       "surface_references": []
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 0,
@@ -200597,8 +200562,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3027"
     }
   },
@@ -203428,18 +203393,11 @@
     "translit_es": "yaman",
     "definitions": [
       {
-        "text_en": "go to",
+        "text_en": "go to or choose the right",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ir a"
-      },
-      {
-        "text_en": "choose the right",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "elegir la derecha"
+        "text_es": "ir a la derecha o escogerla"
       },
       {
         "text_en": "use the right hand",
@@ -226034,7 +225992,8 @@
         "text_en": "remainder, excellence, excess",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "resto, excelencia, exceso"
       },
       {
         "text_en": "cord",
@@ -234868,7 +234827,8 @@
         "text_en": "that, for, when",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "que, porque, cuando"
       },
       {
         "text_en": "that",
@@ -240312,8 +240272,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H3787"
     }
   },
@@ -247650,10 +247610,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H3627"
-    }
+    },
+    "root_ref": "H3607"
   },
   "H3629": {
     "strong_number": "H3629",
@@ -248808,7 +248769,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3559",
     "instance_policy_version": "1.1",
     "instance_tier": "medium",
     "instance_total": 126,
@@ -248818,8 +248778,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3651"
     }
   },
@@ -251273,7 +251233,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3559",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 5,
@@ -251283,8 +251242,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3644"
     }
   },
@@ -251438,8 +251397,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H3665"
     }
   },
@@ -289049,8 +289008,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H3559"
     }
   },
@@ -299768,25 +299727,18 @@
     "translit_es": "el",
     "definitions": [
       {
-        "text_en": "motion to",
+        "text_en": "motion to or direction towards",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "movimiento hacia"
+        "text_es": "movimiento o dirección hacia"
       },
       {
-        "text_en": "direction towards",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "dirección hacia"
-      },
-      {
-        "text_en": "unto",
+        "text_en": "to or unto",
         "source": "bdb",
         "order": 3,
         "sense": "1",
-        "text_es": "hacia"
+        "text_es": "a o hacia"
       },
       {
         "text_en": "into",
@@ -307573,10 +307525,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H4161"
-    }
+    },
+    "root_ref": "H3318"
   },
   "H4164": {
     "strong_number": "H4164",
@@ -327599,8 +327552,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H3498"
     }
   },
@@ -327876,8 +327829,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H3527"
     }
   },
@@ -327929,8 +327882,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H3527"
     }
   },
@@ -333315,7 +333268,8 @@
         "text_en": "salt",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "sal"
       },
       {
         "text_en": "season",
@@ -334597,10 +334551,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H4449"
-    }
+    },
+    "root_ref": "H4448"
   },
   "H4426": {
     "strong_number": "H4426",
@@ -337130,18 +337085,11 @@
     "translit_es": "meleje",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or become king",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "become king",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "llegar a ser rey"
+        "text_es": "ser o llegar a ser rey"
       },
       {
         "text_en": "queen",
@@ -337158,11 +337106,11 @@
         "text_es": "reinar"
       },
       {
-        "text_en": "king",
+        "text_en": "be (become) king",
         "source": "bdb",
         "order": 5,
         "sense": "0",
-        "text_es": "rey"
+        "text_es": "ser (llegar a ser) rey"
       },
       {
         "text_en": "make king",
@@ -337650,18 +337598,11 @@
     "translit_es": "moleje",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or become king",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "become king",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "llegar a ser rey"
+        "text_es": "ser o llegar a ser rey"
       },
       {
         "text_en": "queen",
@@ -337678,11 +337619,11 @@
         "text_es": "reinar"
       },
       {
-        "text_en": "king",
+        "text_en": "be (become) king",
         "source": "bdb",
         "order": 5,
         "sense": "0",
-        "text_es": "rey"
+        "text_es": "ser (llegar a ser) rey"
       },
       {
         "text_en": "make king",
@@ -339339,8 +339280,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H3953"
     }
   },
@@ -351835,8 +351776,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H5753"
     }
   },
@@ -356440,11 +356381,11 @@
     "translit_es": "maasay",
     "definitions": [
       {
-        "text_en": "work of",
+        "text_en": "work of YHWH",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "obra de"
+        "text_es": "obra de YHWH"
       },
       {
         "text_en": "priest, Je.’s time",
@@ -356542,11 +356483,11 @@
     "translit_es": "maaseyah",
     "definitions": [
       {
-        "text_en": "work of",
+        "text_en": "work of YHWH",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "obra de"
+        "text_es": "obra de YHWH"
       },
       {
         "text_en": "priest, Je.’s time",
@@ -365866,11 +365807,11 @@
     "translit_es": "mikeneyahu",
     "definitions": [
       {
-        "text_en": "possession of",
+        "text_en": "possession of YHWH",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "posesión de"
+        "text_es": "posesión de YHWH"
       }
     ],
     "sources": {
@@ -370723,8 +370664,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H4754"
     }
   },
@@ -370738,18 +370679,11 @@
     "translit_es": "meriyvbaal",
     "definitions": [
       {
-        "text_en": "Baal is",
+        "text_en": "Baal is (our, my, his) advocate",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "Baal es"
-      },
-      {
-        "text_en": "advocate",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "abogado"
+        "text_es": "Baal es (nuestro, mi, su) defensor"
       },
       {
         "text_en": "son of Jonathan",
@@ -381896,8 +381830,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8192"
     }
   },
@@ -383876,10 +383810,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H7796"
-    }
+    },
+    "root_ref": "H8319"
   },
   "H4958": {
     "strong_number": "H4958",
@@ -398658,7 +398593,8 @@
         "text_en": "torrent, torrent-valley, wady",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "torrente, valle de torrente, uadi"
       },
       {
         "text_en": "palm-tree",
@@ -404724,16 +404660,11 @@
         "sense": "4"
       },
       {
-        "text_en": "the breath of",
+        "text_en": "the breath of YHWH driveth at it",
         "source": "bdb",
         "order": 10,
-        "sense": "0"
-      },
-      {
-        "text_en": "driveth at it",
-        "source": "bdb",
-        "order": 11,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "el aliento de YHWH lo empuja"
       },
       {
         "text_en": "driveth it on",
@@ -408383,11 +408314,11 @@
         "text_es": "proveer con sandalias"
       },
       {
-        "text_en": "and I shod thee with",
+        "text_en": "and I shod thee with תחשׁ",
         "source": "bdb",
         "order": 3,
         "sense": "0",
-        "text_es": "y te calcé con"
+        "text_es": "y te calcé con תחשׁ"
       },
       {
         "text_en": "and gave them sandals",
@@ -409873,8 +409804,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H5287"
     }
   },
@@ -418126,17 +418057,11 @@
     "translit_es": "aman",
     "definitions": [
       {
-        "text_en": "go to",
+        "text_en": "go to or choose the right",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
-      },
-      {
-        "text_en": "choose the right",
-        "source": "bdb",
-        "order": 2,
         "sense": "0",
-        "text_es": "escoger lo recto"
+        "text_es": "ir a la derecha o escogerla"
       },
       {
         "text_en": "use the right hand",
@@ -423550,17 +423475,11 @@
         "sense": "0"
       },
       {
-        "text_en": "cause to",
+        "text_en": "cause to (turn aside,) depart",
         "source": "bdb",
         "order": 7,
-        "sense": "1"
-      },
-      {
-        "text_en": "depart",
-        "source": "bdb",
-        "order": 8,
         "sense": "1",
-        "text_es": "partir"
+        "text_es": "hacer (desviarse,) apartarse"
       },
       {
         "text_en": "remove",
@@ -428898,7 +428817,8 @@
         "text_en": "threshhold",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "umbral"
       },
       {
         "text_en": "sill",
@@ -429645,18 +429565,11 @@
     "translit_es": "safaf",
     "definitions": [
       {
-        "text_en": "stand at",
+        "text_en": "stand at or guard",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "estar en"
-      },
-      {
-        "text_en": "guard",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "guardar"
+        "text_es": "estar junto a o custodiar"
       },
       {
         "text_en": "threshold",
@@ -432118,7 +432031,8 @@
         "text_en": "covering, hiding-place, secrecy",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "cubierta, escondite, secreto"
       },
       {
         "text_en": "shelter",
@@ -434482,11 +434396,11 @@
     "translit_es": "aveda",
     "definitions": [
       {
-        "text_en": "servant of",
+        "text_en": "servant of YHWH",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "siervo de"
+        "text_es": "siervo de YHWH"
       },
       {
         "text_en": "father of Adoniram",
@@ -435596,18 +435510,11 @@
     "translit_es": "avednego",
     "definitions": [
       {
-        "text_en": "servant of",
+        "text_en": "servant of (God) Nebo",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "siervo de"
-      },
-      {
-        "text_en": "Nebo",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "Nebo"
+        "text_es": "siervo del (dios) Nebo"
       }
     ],
     "sources": {
@@ -440823,7 +440730,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H5710",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -442841,7 +442747,8 @@
         "text_en": "luxury, dainty, delight",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "lujo, manjar, deleite"
       },
       {
         "text_en": "delight",
@@ -450638,11 +450545,11 @@
     "translit_es": "uziyah",
     "definitions": [
       {
-        "text_en": "my strength is",
+        "text_en": "my strength is YHWH",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "mi fuerza es"
+        "text_es": "mi fuerza es YHWH"
       },
       {
         "text_en": "king of Judah",
@@ -470037,8 +469944,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H5956"
     }
   },
@@ -470094,10 +470001,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H5958"
-    }
+    },
+    "root_ref": "H5956"
   },
   "H5960": {
     "strong_number": "H5960",
@@ -470178,10 +470086,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H5959"
-    }
+    },
+    "root_ref": "H5956"
   },
   "H5962": {
     "strong_number": "H5962",
@@ -472834,18 +472743,11 @@
     "translit_es": "im",
     "definitions": [
       {
-        "text_en": "from with",
+        "text_en": "from with or beside",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "desde con"
-      },
-      {
-        "text_en": "beside",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "al lado de"
+        "text_es": "desde con o junto a"
       },
       {
         "text_en": "aid",
@@ -472862,11 +472764,11 @@
         "text_es": "contra"
       },
       {
-        "text_en": "towards",
+        "text_en": "with or towards",
         "source": "bdb",
         "order": 5,
         "sense": "1d",
-        "text_es": "hacia"
+        "text_es": "con o hacia"
       },
       {
         "text_en": "together with",
@@ -475103,11 +475005,11 @@
         "text_es": "contra"
       },
       {
-        "text_en": "towards",
+        "text_en": "with or towards",
         "source": "bdb",
         "order": 3,
         "sense": "1d",
-        "text_es": "hacia"
+        "text_es": "con o hacia"
       },
       {
         "text_en": "together with",
@@ -477414,7 +477316,8 @@
         "text_en": "toiling",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "que se afana"
       },
       {
         "text_en": "laborer",
@@ -498784,8 +498687,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6280"
     }
   },
@@ -499327,11 +499230,11 @@
         "text_es": "completamente"
       },
       {
-        "text_en": "diligence",
+        "text_en": "with (all) diligence",
         "source": "bdb",
         "order": 2,
         "sense": "0",
-        "text_es": "diligencia"
+        "text_es": "con (toda) diligencia"
       }
     ],
     "sources": {
@@ -512823,8 +512726,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6461"
     }
   },
@@ -517040,8 +516943,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6565"
     }
   },
@@ -520745,8 +520648,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6567"
     }
   },
@@ -527449,8 +527352,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6658"
     }
   },
@@ -541571,8 +541474,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6887"
     }
   },
@@ -542116,10 +542019,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6862"
-    }
+    },
+    "root_ref": "H6887"
   },
   "H687": {
     "strong_number": "H687",
@@ -549050,8 +548954,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6960"
     }
   },
@@ -550158,11 +550062,11 @@
     "translit_es": "kolayah",
     "definitions": [
       {
-        "text_en": "voice of",
+        "text_en": "voice of YHWH",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "voz de"
+        "text_es": "voz de YHWH"
       },
       {
         "text_en": "father of proph. Ahab",
@@ -550889,7 +550793,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H6962",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 9,
@@ -550899,8 +550802,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H6962"
     }
   },
@@ -550977,7 +550880,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3364",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 22,
@@ -550987,8 +550889,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3364"
     }
   },
@@ -551216,10 +551118,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6957"
-    }
+    },
+    "root_ref": "H6960"
   },
   "H6979": {
     "strong_number": "H6979",
@@ -552783,18 +552686,11 @@
         "text_es": "humo"
       },
       {
-        "text_en": "odour of",
+        "text_en": "odour of (burning) sacrifice",
         "source": "bdb",
         "order": 2,
         "sense": "0",
-        "text_es": "olor de"
-      },
-      {
-        "text_en": "sacrifice",
-        "source": "bdb",
-        "order": 3,
-        "sense": "0",
-        "text_es": "sacrificio"
+        "text_es": "olor de sacrificio (quemado)"
       },
       {
         "text_en": "incense",
@@ -553663,10 +553559,11 @@
     "translit_es": "keynan",
     "definitions": [
       {
-        "text_en": "chant a",
+        "text_en": "chant a קִינָה",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "entonar una קִינָה"
       },
       {
         "text_en": "Cainan/Kenan; ancestor in the genealogy of Jesus in Luke 3.",
@@ -555314,10 +555211,11 @@
     "translit_es": "kalah",
     "definitions": [
       {
-        "text_en": "assemble as a",
+        "text_en": "assemble as a קָהָל",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "reunirse como un קָהָל"
       },
       {
         "text_en": "summon an assembly",
@@ -559152,8 +559050,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H7096"
     }
   },
@@ -559255,10 +559153,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H7097"
-    }
+    },
+    "root_ref": "H7096"
   },
   "H7099": {
     "strong_number": "H7099",
@@ -572882,10 +572781,11 @@
         "sense": "0"
       },
       {
-        "text_en": "thy cattle thou shalt not cause to",
+        "text_en": "thy cattle thou shalt not cause to (let) lie down",
         "source": "bdb",
         "order": 4,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "no harás (dejarás) que tu ganado se eche"
       },
       {
         "text_en": "two kinds",
@@ -580762,8 +580662,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H7355"
     }
   },
@@ -584561,8 +584461,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H7426"
     }
   },
@@ -590473,17 +590373,11 @@
     "translit_es": "raanan",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or grow luxuriant",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "grow luxuriant",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0"
+        "text_es": "estar o volverse frondoso"
       },
       {
         "text_en": "fresh",
@@ -597307,8 +597201,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H7750"
     }
   },
@@ -601766,18 +601660,11 @@
         "text_es": "atarse con siete cosas"
       },
       {
-        "text_en": "those sworn with",
+        "text_en": "those sworn with (= who have sworn) oaths",
         "source": "bdb",
         "order": 4,
         "sense": "0",
-        "text_es": "los que juraron con"
-      },
-      {
-        "text_en": "oaths",
-        "source": "bdb",
-        "order": 5,
-        "sense": "0",
-        "text_es": "juramentos"
+        "text_es": "los juramentados (= que han hecho) juramentos"
       },
       {
         "text_en": "take an oath",
@@ -602938,18 +602825,11 @@
         "text_es": "obligarse por siete cosas"
       },
       {
-        "text_en": "those sworn with",
+        "text_en": "those sworn with (= who have sworn) oaths",
         "source": "bdb",
         "order": 4,
         "sense": "0",
-        "text_es": "los que juraron con"
-      },
-      {
-        "text_en": "oaths",
-        "source": "bdb",
-        "order": 5,
-        "sense": "0",
-        "text_es": "juramentos"
+        "text_es": "los juramentados (= que han hecho) juramentos"
       },
       {
         "text_en": "take an oath",
@@ -607969,7 +607849,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H5375",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -614607,10 +614486,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8321"
-    }
+    },
+    "root_ref": "H8319"
   },
   "H7798": {
     "strong_number": "H7798",
@@ -618205,7 +618085,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H7736",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 2,
@@ -618759,8 +618638,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H7751"
     }
   },
@@ -618774,18 +618653,11 @@
     "translit_es": "shiyloh",
     "definitions": [
       {
-        "text_en": "he whose it is",
+        "text_en": "he whose it is or that which belongs to him",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "aquel a quien pertenece"
-      },
-      {
-        "text_en": "that which belongs to him",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "aquello que le pertenece"
+        "text_es": "aquel a quien pertenece o lo que le pertenece"
       }
     ],
     "sources": {
@@ -618827,16 +618699,11 @@
     "translit_es": "shiyloh",
     "definitions": [
       {
-        "text_en": "he whose it is",
+        "text_en": "he whose it is or that which belongs to him",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
-      },
-      {
-        "text_en": "that which belongs to him",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "aquel a quien pertenece o lo que le pertenece"
       }
     ],
     "sources": {
@@ -637256,11 +637123,11 @@
         "text_es": "un dejar caer"
       },
       {
-        "text_en": "remitting",
+        "text_en": "a (temporary) remitting",
         "source": "bdb",
         "order": 2,
         "sense": "0",
-        "text_es": "remisión"
+        "text_es": "una remisión (temporal)"
       }
     ],
     "sources": {
@@ -639604,8 +639471,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H784"
     }
   },
@@ -640779,10 +640646,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H808"
-    }
+    },
+    "root_ref": "H784"
   },
   "H8090": {
     "strong_number": "H8090",
@@ -643736,8 +643604,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8150"
     }
   },
@@ -643785,10 +643653,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8127"
-    }
+    },
+    "root_ref": "H8150"
   },
   "H8129": {
     "strong_number": "H8129",
@@ -643836,10 +643705,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8127"
-    }
+    },
+    "root_ref": "H8150"
   },
   "H813": {
     "strong_number": "H813",
@@ -648219,7 +648089,8 @@
         "text_en": "satyr, demon, he-goat’s",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "sátiro, demonio, de macho cabrío"
       },
       {
         "text_en": "he-goat, buck, hairy",
@@ -651236,8 +651107,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8192"
     }
   },
@@ -651529,10 +651400,11 @@
         "sense": "0"
       },
       {
-        "text_en": "vigour",
+        "text_en": "in (actual) vigour",
         "source": "bdb",
         "order": 4,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "en (pleno) vigor"
       }
     ],
     "sources": {
@@ -654883,8 +654755,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8259"
     }
   },
@@ -656261,8 +656133,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8324"
     }
   },
@@ -657360,10 +657232,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8321"
-    }
+    },
+    "root_ref": "H8319"
   },
   "H8292": {
     "strong_number": "H8292",
@@ -658269,10 +658142,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8321"
-    }
+    },
+    "root_ref": "H8319"
   },
   "H8306": {
     "strong_number": "H8306",
@@ -658980,8 +658854,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8319"
     }
   },
@@ -659053,25 +658927,11 @@
     "translit_es": "sharar",
     "definitions": [
       {
-        "text_en": "be",
+        "text_en": "be or act as prince",
         "source": "bdb",
         "order": 1,
         "sense": "0",
-        "text_es": "ser"
-      },
-      {
-        "text_en": "act as",
-        "source": "bdb",
-        "order": 2,
-        "sense": "0",
-        "text_es": "actuar como"
-      },
-      {
-        "text_en": "prince",
-        "source": "bdb",
-        "order": 3,
-        "sense": "0",
-        "text_es": "príncipe"
+        "text_es": "ser o actuar como príncipe"
       },
       {
         "text_en": "rule",
@@ -659169,8 +659029,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8324"
     }
   },
@@ -659564,8 +659424,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8327"
     }
   },
@@ -660181,7 +660041,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H7797",
     "instance_policy_version": "1.1",
     "instance_tier": "medium",
     "instance_total": 202,
@@ -660191,8 +660050,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H7797"
     }
   },
@@ -660252,18 +660111,18 @@
         "text_es": "quien"
       },
       {
-        "text_en": "which",
+        "text_en": "in (that) which",
         "source": "bdb",
         "order": 2,
         "sense": "a",
-        "text_es": "que"
+        "text_es": "en (aquello) que"
       },
       {
-        "text_en": "where",
+        "text_en": "in (the place) where",
         "source": "bdb",
         "order": 3,
         "sense": "b",
-        "text_es": "donde"
+        "text_es": "en (el lugar) donde"
       },
       {
         "text_en": "in that",
@@ -660350,11 +660209,11 @@
         "text_es": "lo que"
       },
       {
-        "text_en": "that",
+        "text_en": "from (the fact) that",
         "source": "bdb",
         "order": 16,
         "sense": "c",
-        "text_es": "que"
+        "text_es": "por (el hecho de) que"
       },
       {
         "text_en": "since",
@@ -665400,7 +665259,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H7797",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 1,
@@ -665410,8 +665268,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H8337"
     }
   },
@@ -665685,7 +665543,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H7797",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 26,
@@ -665695,8 +665552,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H8337"
     }
   },
@@ -665841,7 +665698,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H7797",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 56,
@@ -665851,8 +665707,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H8337"
     }
   },
@@ -666325,7 +666181,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H7797",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 2,
@@ -666335,8 +666190,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H8337"
     }
   },
@@ -667203,8 +667058,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8374"
     }
   },
@@ -667484,7 +667339,8 @@
         "text_en": "twin",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "gemelo"
       },
       {
         "text_en": "twin; twins.",
@@ -671015,11 +670871,11 @@
         "text_es": "acción de gracias"
       },
       {
-        "text_en": "give praise to",
+        "text_en": "give praise to YHWH",
         "source": "bdb",
         "order": 2,
         "sense": "1",
-        "text_es": "dar alabanza a"
+        "text_es": "dar alabanza a YHWH"
       },
       {
         "text_en": "thanksgiving in songs of liturgical worship",
@@ -671136,7 +670992,6 @@
       ]
     },
     "is_root": false,
-    "root_ref": "H3721",
     "instance_policy_version": "1.1",
     "instance_tier": "low",
     "instance_total": 30,
@@ -671146,8 +671001,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "accepted",
-      "confidence": 0.99,
+      "status": "unresolved",
+      "confidence": 0.0,
       "original_root_ref": "H3034"
     }
   },
@@ -672433,7 +672288,8 @@
         "text_en": "generations",
         "source": "bdb",
         "order": 1,
-        "sense": "0"
+        "sense": "0",
+        "text_es": "generaciones"
       },
       {
         "text_en": "account of a man and his descendants",
@@ -696940,8 +696796,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6960"
     }
   },
@@ -697014,10 +696870,11 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H8615"
-    }
+    },
+    "root_ref": "H6960"
   },
   "H8617": {
     "strong_number": "H8617",
@@ -703759,8 +703616,8 @@
     "instance_signal_extractor_version": "unavailable-0",
     "root_adjudication": {
       "method": "unique_cited_derivation_v1",
-      "status": "unresolved",
-      "confidence": 0.0,
+      "status": "accepted",
+      "confidence": 0.99,
       "original_root_ref": "H6"
     }
   },

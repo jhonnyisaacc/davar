@@ -13,6 +13,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, Iterable
 
+from scripts.dict.apply_instance_policy import refresh_custom_instances
+
 
 LEXICON_KEY_RE = re.compile(r"([HGD])(\d+)")
 PREFIX_CODES = {"Hb", "Hl", "Hk", "Hc", "Hd", "Hm"}
@@ -395,9 +397,15 @@ def load_latest_decisions(
 ) -> dict[str, dict[str, Any]]:
     """Load the latest logged review decision for each stable occurrence."""
 
-    latest: dict[str, dict[str, Any]] = {}
+    return {key: entries[-1] for key, entries in load_decision_history(log_dir, keep).items()}
+
+
+def load_decision_history(
+    log_dir: Path, keep: Callable[[dict[str, Any]], bool] = lambda entry: True
+) -> dict[str, list[dict[str, Any]]]:
+    history: dict[str, list[dict[str, Any]]] = {}
     if not log_dir.exists():
-        return latest
+        return history
     for log_file in sorted(log_dir.glob("*.jsonl")):
         with log_file.open("r", encoding="utf-8") as handle:
             for line in handle:
@@ -414,8 +422,8 @@ def load_latest_decisions(
                     )
                 except (KeyError, TypeError, ValueError):
                     continue
-                latest[key] = entry
-    return latest
+                history.setdefault(key, []).append(entry)
+    return history
 
 
 def issue_review_status(
@@ -543,7 +551,7 @@ def generate_batch(
         "instructions": (
             "Edit decisions in this file, then run review apply. Supported actions: "
             "set_strong, add_definition, upsert_custom_definition, "
-            "create_custom_entry, needs_manual_review, skip."
+            "remove_custom_definition, create_custom_entry, needs_manual_review, skip."
         ),
         "decisions": [issue_to_decision_stub(issue) for issue in selected],
     }
@@ -669,6 +677,10 @@ def _custom_instance_from_occurrence(occurrence: dict[str, Any]) -> dict[str, An
     }
 
 
+def _root_fields(decision: dict[str, Any]) -> dict[str, str]:
+    return {field: decision[field] for field in ("root", "root_strong") if decision.get(field)}
+
+
 def _add_custom_entry(
     lexicon: LexiconIndex,
     decision: dict[str, Any],
@@ -699,8 +711,7 @@ def _add_custom_entry(
             # after their own lexical review.
             "mapping_scope": decision.get("mapping_scope", "instances_only"),
             "definitions": [],
-            "root": decision.get("root", ""),
-            "root_strong": decision.get("root_strong", ""),
+            **_root_fields(decision),
             "manual_instances": [],
             "nt_instances": [],
         },
@@ -723,16 +734,47 @@ def _add_custom_entry(
         entry["definitions"].append(definition)
 
     instance = _custom_instance_from_occurrence(occurrence)
-    if not any(
+    if not any(_same_instance(item, instance) for item in entry["nt_instances"]):
+        entry["nt_instances"].append(instance)
+
+    return key, created
+
+
+def _same_instance(item: dict[str, Any], instance: dict[str, Any]) -> bool:
+    return (
         item.get("book") == instance["book"]
         and int(item.get("chapter", -1)) == instance["chapter"]
         and int(item.get("verse", -1)) == instance["verse"]
         and int(item.get("word_index", -1)) == instance["word_index"]
-        for item in entry["nt_instances"]
-    ):
-        entry["nt_instances"].append(instance)
+    )
 
-    return key, created
+
+def _move_custom_instance(
+    lexicon: LexiconIndex, occurrence: dict[str, Any], previous_strong: str | None, new_strong: str
+) -> bool:
+    custom = lexicon.load_custom_entries()
+    instance = _custom_instance_from_occurrence(occurrence)
+    source = custom.get(lexicon.normalize_strong(previous_strong) or "")
+    target = custom.get(lexicon.normalize_strong(new_strong) or "")
+    changed = False
+    if source is not target and source and "nt_instances" in source:
+        kept = [item for item in source["nt_instances"] if not _same_instance(item, instance)]
+        if len(kept) != len(source["nt_instances"]):
+            source["nt_instances"] = kept
+            refresh_custom_instances(source)
+            changed = True
+    if target and (target.get("mapping_scope") == "instances_only" or "nt_instances" in target):
+        changed = _list_custom_instances(target, [instance]) or changed
+    return changed
+
+
+def _list_custom_instances(entry: dict[str, Any], instances: list[dict[str, Any]]) -> bool:
+    listed = entry.setdefault("nt_instances", [])
+    missing = [instance for instance in instances if not any(_same_instance(item, instance) for item in listed)]
+    listed.extend(missing)
+    if missing:
+        refresh_custom_instances(entry)
+    return bool(missing)
 
 
 def _upsert_custom_definition(
@@ -748,6 +790,8 @@ def _upsert_custom_definition(
 
     custom = lexicon.load_custom_entries()
     existing = lexicon.get(key) or {}
+    if key in custom and decision.get("nt_instances"):
+        _list_custom_instances(custom[key], [_custom_instance_from_occurrence(item) for item in decision["nt_instances"]])
     entry = custom.setdefault(
         key,
         {
@@ -765,9 +809,9 @@ def _upsert_custom_definition(
             ),
             "is_custom": True,
             "definitions": [],
-            "root": decision.get("root", ""),
-            "root_strong": existing.get("root_ref") or existing.get("root_strong") or decision.get("root_strong", ""),
+            **_root_fields(decision),
             "manual_instances": [],
+            **{field: decision[field] for field in ("mapping_scope", "nt_instances") if field in decision},
         },
     )
     entry.setdefault("strong_number", key)
@@ -784,6 +828,22 @@ def _upsert_custom_definition(
                 entry["definitions"][index] = definition
                 return key
 
+    insert_order = decision.get("insert_order")
+    if insert_order is not None and not any(
+        item.get("text_en") == definition.get("text_en") and item.get("text_es") == definition.get("text_es")
+        for item in entry["definitions"]
+    ):
+        definition["order"] = int(insert_order)
+        for item in entry["definitions"]:
+            if int(item.get("order", 0)) >= int(insert_order):
+                item["order"] = int(item["order"]) + 1
+        position = next(
+            (index for index, item in enumerate(entry["definitions"]) if int(item.get("order", 0)) > int(insert_order)),
+            len(entry["definitions"]),
+        )
+        entry["definitions"].insert(position, definition)
+        return key
+
     if not any(
         item.get("text_en") == definition.get("text_en")
         and item.get("text_es") == definition.get("text_es")
@@ -791,6 +851,24 @@ def _upsert_custom_definition(
     ):
         entry["definitions"].append(definition)
     return key
+
+
+def _remove_custom_definition(lexicon: LexiconIndex, decision: dict[str, Any]) -> int:
+    key = lexicon.normalize_strong(decision.get("custom_key") or decision.get("strong"))
+    entry = lexicon.load_custom_entries().get(key)
+    if not entry:
+        raise FileNotFoundError(f"Custom entry not found for {key}")
+    target = decision.get("definition") or {}
+    if "order" not in target or not (target.get("text_en") or target.get("text_es")):
+        raise ValueError("remove_custom_definition requires definition.order and its text")
+    before = entry.get("definitions") or []
+    entry["definitions"] = [
+        item
+        for item in before
+        if (item.get("order"), item.get("text_en"), item.get("text_es"))
+        != (target["order"], target.get("text_en"), target.get("text_es"))
+    ]
+    return len(before) - len(entry["definitions"])
 
 
 def apply_decisions(
@@ -855,6 +933,8 @@ def apply_decisions(
                 if not lexicon.normalize_strong(new_strong):
                     raise ValueError(f"Invalid new_strong for {occurrence}: {new_strong!r}")
                 word["strong"] = new_strong
+                if _move_custom_instance(lexicon, occurrence, expected_previous, new_strong):
+                    changed_lexicon[lexicon.custom_definitions_path] = lexicon.load_custom_entries()
                 changed_chapters[chapter_file] = chapter_data
                 stats.word_updates += 1
                 append_decision_log(log_dir, decision, "applied", dry_run)
@@ -941,6 +1021,17 @@ def apply_decisions(
                 changed_lexicon[lexicon.custom_definitions_path] = lexicon.load_custom_entries()
                 stats.definition_updates += 1
                 append_decision_log(log_dir, {**decision, "strong": key}, "applied", dry_run)
+                stats.log_entries += 0 if dry_run else 1
+                continue
+
+            if action == "remove_custom_definition":
+                removed = _remove_custom_definition(lexicon, decision)
+                if removed:
+                    changed_lexicon[lexicon.custom_definitions_path] = lexicon.load_custom_entries()
+                    stats.definition_updates += removed
+                else:
+                    stats.skipped += 1
+                append_decision_log(log_dir, decision, "applied" if removed else "already_applied", dry_run)
                 stats.log_entries += 0 if dry_run else 1
                 continue
 

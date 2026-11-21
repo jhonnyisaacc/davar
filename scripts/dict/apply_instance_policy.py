@@ -8,6 +8,23 @@ from .instance_policy import process_instances, MANIFEST
 
 ROOT = Path(__file__).resolve().parents[2]
 
+def stamp(entry: dict, records: list) -> dict:
+    result = process_instances(records)
+    for target, source in (("instance_policy_version", "policy_version"), ("instance_tier", "tier"), ("instance_total", "instance_total"), ("instance_surface_count", "instance_surface_count"), ("instance_omitted_count", "omitted_count")):
+        entry[target] = result[source]
+    entry["instance_source_manifest_version"] = MANIFEST["version"]
+    entry["instance_signal_extractor_version"] = MANIFEST["linguistic_signal_extractor_version"]
+    return result
+
+
+def refresh_custom_instances(entry: dict) -> None:
+    if "instances" not in entry:
+        return
+    result = stamp(entry, [*entry.get("oe_instances", []), *entry.get("nt_instances", [])])
+    entry["instances"] = result["instances"]
+    entry["surface_instances"] = result["surface_instances"]
+
+
 def apply(root: Path = ROOT, write: bool = False):
     report = {"policy_version": MANIFEST["version"], "manifest_version": MANIFEST["version"], "linguistic_signal_extractor_version": MANIFEST["linguistic_signal_extractor_version"], "entries": {}, "errors": 0}
     outputs = []
@@ -19,13 +36,9 @@ def apply(root: Path = ROOT, write: bool = False):
             source_file = path.parent / name / (key + ".json")
             if name != "custom_definitions" and source_file.exists():
                 records = json.loads(source_file.read_text()).get("occurrences", {}).get("references", [])
-            result = process_instances(records)
+            result = stamp(entry, records)
             report["entries"][f"{name}/{key}"] = {k: result[k] for k in ("tier", "instance_total", "instance_surface_count", "omitted_count", "findings", "is_valid")}
             report["errors"] += len(result["validation_errors"])
-            for target, source in (("instance_policy_version", "policy_version"), ("instance_tier", "tier"), ("instance_total", "instance_total"), ("instance_surface_count", "instance_surface_count"), ("instance_omitted_count", "omitted_count")):
-                entry[target] = result[source]
-            entry["instance_source_manifest_version"] = MANIFEST["version"]
-            entry["instance_signal_extractor_version"] = MANIFEST["linguistic_signal_extractor_version"]
             if name == "custom_definitions":
                 entry["instances"] = result["instances"]
                 entry["surface_instances"] = result["surface_instances"]

@@ -16,7 +16,7 @@ import os
 import re
 import sys
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, NamedTuple, Optional, Tuple
 import xml.etree.ElementTree as ET
 
 
@@ -49,6 +49,66 @@ else:
     extract_from_bdb = _osb.extract_from_bdb
 
 NS = {'bdb': 'http://openscriptures.github.com/morphhb/namespace'}
+DEF_TAG = f"{{{NS['bdb']}}}def"
+GLOSS_CONTINUATION_TAGS = {DEF_TAG, f"{{{NS['bdb']}}}w"}
+INCOMPLETE_GLOSS_ENDINGS = {'a', 'an', 'the', 'be', 'of', 'to', 'in', 'at', 'on', 'with', 'as', 'is', 'may', 'will', 'from', 'for', 'by', 'into'}
+DIVINE_NAME_ABBREVIATION = 'י׳'
+DIVINE_NAME = 'YHWH'
+PARENTHETICAL = re.compile(r'^\([^()]+\)$')
+
+
+class GlossParts(NamedTuple):
+    text: str
+    defs: List[str]
+    stages: List[Tuple[str, int]]
+
+
+def gloss_connector(text: str, tail: Optional[str], in_aside: bool, following: str) -> Optional[str]:
+    tail = (tail or '').strip()
+    if tail == '' or PARENTHETICAL.match(tail):
+        return tail
+    if tail in ('or', 'and', ', or', ', and'):
+        return None if text.lower() == 'be' and len(following.split()) == 1 else tail.removeprefix(', ')
+    if tail == ',' and text.lower() == 'be' and len(following.split()) > 1:
+        return 'or'
+    if tail == ',' and in_aside:
+        return ''
+    return None
+
+
+def def_gloss_parts(parent: ET.Element) -> List[GlossParts]:
+    children = list(parent)
+    parts, absorbed = [], set()
+    for index, child in enumerate(children):
+        if child.tag != DEF_TAG or index in absorbed or not child.text:
+            continue
+        text, cursor, defs = child.text, index, [child.text]
+        stages, in_aside = [(text, 1)], False
+        while cursor + 1 < len(children) and children[cursor + 1].tag in GLOSS_CONTINUATION_TAGS and children[cursor + 1].text:
+            after_divine_name = children[cursor].tag != DEF_TAG and children[cursor].text.endswith(DIVINE_NAME_ABBREVIATION)
+            if after_divine_name and children[cursor + 1].tag == DEF_TAG and not (children[cursor].tail or '').strip():
+                connector = ''
+            elif text.split() and text.split()[-1].lower() in INCOMPLETE_GLOSS_ENDINGS:
+                connector = gloss_connector(text, children[cursor].tail, in_aside, children[cursor + 1].text)
+            else:
+                connector = None
+            if connector is None:
+                break
+            in_aside = (children[cursor].tail or '').strip() in (', or', ', and')
+            cursor += 1
+            piece = children[cursor].text.replace(DIVINE_NAME_ABBREVIATION, DIVINE_NAME)
+            text = f"{text} {connector} {piece}" if connector else f"{text} {piece}"
+            absorbed.add(cursor)
+            if children[cursor].tag == DEF_TAG:
+                defs.append(children[cursor].text)
+            stages.append((text, len(defs)))
+        parts.append(GlossParts(text, defs, stages))
+    return parts
+
+
+def def_glosses(parent: ET.Element) -> List[str]:
+    return [part.text for part in def_gloss_parts(parent)]
+
 
 LOG_MAPPING_MISMATCHES = os.getenv('DAVAR_LEXICON_LOG_MAPPING', '').lower() in {'1', 'true', 'yes'}
 
@@ -336,8 +396,8 @@ def extract_bdb_definitions_with_sense(
                     'senses': []
                 }
 
-                def_elements = bdb_entry.findall('./bdb:def', NS)
-                entry_data['definitions'] = [d.text for d in def_elements if d.text]
+                entry_data['definitions'] = def_glosses(bdb_entry)
+                entry_data['fragments'] = [d.text for d in bdb_entry.findall('./bdb:def', NS) if d.text]
 
                 def extract_text_from_element(elem: ET.Element) -> str:
                     """Extract text content from element, removing child element tags but keeping their text"""
@@ -374,7 +434,7 @@ def extract_bdb_definitions_with_sense(
 
                     if direct_defs:
                         # Extract from <def> elements
-                        sense_texts = [d.text for d in direct_defs if d.text and d.text.strip()]
+                        sense_texts = [text for text in def_glosses(sense_elem) if text.strip()]
                     elif not has_nested:
                         # Only extract text from sense element if it has NO nested senses
                         sense_text = extract_text_from_element(sense_elem)
@@ -539,7 +599,7 @@ def extract_bdb_definitions_with_sense(
             # Use LexicalIndex gloss when BDB's top-level <def> values are
             # fragment tokens from one gloss (e.g. "be", "become", "much").
             if (
-                is_single_word_fragments(main_defs)
+                is_single_word_fragments(bdb_entry.get('fragments', main_defs))
                 and bdb_id
                 and bdb_id in bdb_to_def
                 and len(bdb_to_def[bdb_id].split()) > 1
@@ -921,7 +981,7 @@ def build_lexicon_entry(strong_number: str, bdb_root, update_existing: bool = Fa
         decision = audit_from_derivations({strong_number: entry}, root_index, strongs_data)[0]
         if decision.proposed_root_ref:
             entry["root_ref"] = decision.proposed_root_ref
-        elif entry.get("root_ref") not in root_index:
+        elif entry.get("root_ref") not in root_index or decision.proposal == "reject":
             entry.pop("root_ref", None)
         entry["root_adjudication"] = {"method": "unique_cited_derivation_v1", "status": "accepted" if decision.proposed_root_ref else "unresolved", "confidence": decision.confidence, "original_root_ref": decision.current_root_ref}
     return apply_transliteration_policy(entry)

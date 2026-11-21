@@ -8,25 +8,11 @@
   "translit_es": "radam",
   "definitions": [
     {
-      "text_en": "be in",
+      "text_en": "be in or fall into heavy sleep",
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "estar en"
-    },
-    {
-      "text_en": "fall into",
-      "source": "bdb",
-      "order": 2,
-      "sense": "0",
-      "text_es": "caer en"
-    },
-    {
-      "text_en": "heavy sleep",
-      "source": "bdb",
-      "order": 3,
-      "sense": "0",
-      "text_es": "sueño pesado"
+      "text_es": "estar o caer en sueño profundo"
     }
   ],
   "sources": {

@@ -41,7 +41,7 @@ export default defineConfig([
   {
     files: ["**/*.test.ts"],
     settings: {
-      "import/core-modules": ["bun:test"],
+      "import/core-modules": ["bun:test", "bun:sqlite"],
     },
   },
   {

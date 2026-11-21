@@ -1069,7 +1069,7 @@
       "path": "data/dict/lexicon/words.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-      "sha256": "64e1ca11da891761106251b99a11898029a7390156abb0dd574158aa6dcc42d5",
+      "sha256": "8d68705c3406b3d96ba87795475ad7cbba49ef8ac8e060d70a66db2aa2e15a78",
       "visibility": "public"
     },
     {
@@ -1079,7 +1079,7 @@
       "path": "data/dict/lexicon/custom_definitions.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-      "sha256": "f5c39d16c90b4c25ed45d6dadfc40fdc24f597323c8721b601b72074def4f9d4",
+      "sha256": "335cc0f40abd1f0c589022055a3d7a85fba67170600140374191efcce7fe8fd2",
       "visibility": "public"
     },
     {
@@ -1089,7 +1089,7 @@
       "path": "data/delitzsch/parsed/john/1.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
       "revision": "ff2e1ad93eb2cea7407d5e93e14b5a532d16f602",
-      "sha256": "9472e153046563290651bddd20bbb8341d8c54fedad64587e43907d739a0a948",
+      "sha256": "d1771fa121b0f9c600abff7ad4e72107a596c1e5897ac42fde63b6d209852c80",
       "visibility": "public"
     },
     {
@@ -1323,7 +1323,7 @@
       "id": "token:passage:delitzsch:john:1:3d0bd4820a717d7a86cbca691e035cdcd9fcc3e474fbde7d239c5142bc25b07e:11",
       "lexical_refs": [
         {
-          "code": "H5320",
+          "code": "H6605",
           "namespace": "strong"
         }
       ],

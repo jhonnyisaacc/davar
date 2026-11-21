@@ -15,11 +15,11 @@
       "text_es": "acción de gracias"
     },
     {
-      "text_en": "give praise to",
+      "text_en": "give praise to YHWH",
       "source": "bdb",
       "order": 2,
       "sense": "1",
-      "text_es": "dar alabanza a"
+      "text_es": "dar alabanza a YHWH"
     },
     {
       "text_en": "thanksgiving in songs of liturgical worship",
@@ -104,11 +104,10 @@
     ]
   },
   "is_root": false,
-  "root_ref": "H3721",
   "root_adjudication": {
     "method": "unique_cited_derivation_v1",
-    "status": "accepted",
-    "confidence": 0.99,
+    "status": "unresolved",
+    "confidence": 0.0,
     "original_root_ref": "H3034"
   }
 }

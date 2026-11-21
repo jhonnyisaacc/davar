@@ -262,12 +262,35 @@ describe("static data integrity", () => {
 		}
 	});
 
-	test("targeted proper names resolve to custom definitions", async () => {
+	test("built custom definitions publish approved entries and withhold the rest", async () => {
+		const source = await Bun.file(
+			new URL(
+				"../../../../data/dict/lexicon/custom_definitions.json",
+				import.meta.url,
+			),
+		).json();
+		const built = await readJson("data/dict/custom_definitions.json");
+		const statuses = Object.entries(source).filter(
+			([, entry]) => entry.publication !== undefined,
+		);
+		const published = statuses
+			.filter(([, entry]) => entry.publication.status === "approved")
+			.map(([key]) => key);
+		const withheld = statuses
+			.filter(([, entry]) => entry.publication.status !== "approved")
+			.map(([key]) => key);
+
+		expect(published.length > 0).toBe(true);
+		expect(published.filter((key) => !(key in built))).toEqual([]);
+		expect(withheld.filter((key) => key in built)).toEqual([]);
+		for (const key of published) {
+			expect(built[key]).toEqual(source[key]);
+		}
+	});
+
+	test("targeted proper names keep their custom Strong mapping", async () => {
 		const john3Chapter = await readJson("data/besorah/john3/1.json");
 		const ephesiansChapter = await readJson("data/besorah/ephesians/1.json");
-		const customDefinitions = await readJson(
-			"data/dict/custom_definitions.json",
-		);
 
 		const john3Verse = john3Chapter.find(
 			(item) => item.chapter === 1 && item.verse === 1,
@@ -284,10 +307,6 @@ describe("static data integrity", () => {
 			text: "פּוֹלוֹס",
 			strong: "D0024",
 		});
-		expect(customDefinitions.D0057.definitions[0].text_en).toContain("Gaius");
-		expect(customDefinitions.D0057.definitions[0].text_es).toContain("Gayo");
-		expect(customDefinitions.D0024.definitions[0].text_en).toContain("Paul");
-		expect(customDefinitions.D0024.definitions[0].text_es).toContain("Pablo");
 	});
 
 	test("Spanish Psalms superscriptions use chapter titles and keep later verses aligned", async () => {

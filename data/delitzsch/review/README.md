@@ -64,8 +64,29 @@ with no reviewer approves nothing.
 identifier separately from mapping coverage. `check` fails when that report is
 stale, an identifier has no lexicon entry, or a missing English or Spanish
 definition is not listed in `definition_gaps_baseline.json`. The baseline only
-shrinks. Remove an identifier from it when its definition lands, and route a
-gap caused by a wrong identity to #159.
+shrinks, and #42 emptied it: every identifier the corpus references has an
+English and a Spanish definition. A new gap fails the check. Add the
+definition, or fix a wrong identity with a lexical review.
+
+## Publication status (issue #369)
+
+Each custom `D` entry that the Delitzsch text references carries a
+`publication` object: a `status` from `shared/customEntryPublication.json`
+(`approved`, `draft`, or `blocked`), the `rule` and `rule_version` that set it,
+and the decision-log lines that prove it. `python -m
+scripts.delitzsch.entry_publication write` sets it, and `check` fails when it
+is stale. Reruns write identical bytes.
+
+- `blocked`: a `needs_manual_review` decision names the entry.
+- `approved`: every definition that is not an import matches, in English and
+  Spanish, an applied `create_custom_entry` or `upsert_custom_definition`
+  decision for the entry that names a person or agent reviewer, per #386. A
+  `rule:` reviewer approves nothing.
+- `draft`: anything else.
+
+The static-data build publishes only approved custom entries, so web, mobile
+online, and mobile offline read the same set. To publish a draft entry, log a
+reviewed decision for its definitions and rerun `write`.
 
 ## Disposition ledger (issue #159)
 
@@ -203,7 +224,8 @@ reviewer and gives `lexicon`, `grammar`, and `context` evidence and a
 
 `batches/lexical_review_367.json` reviews the same way every remaining
 occurrence whose identifier has no English or Spanish definition (#367). A
-blocked one keeps its identifier and stays in `definition_gaps_baseline.json`.
+blocked one kept its identifier until `definition_gaps_42.json` gave the word
+an entry of its own.
 
 Apply each batch with `review apply`, for example
 `review apply lexical_review_368.json`. Then run
@@ -243,13 +265,218 @@ D0266). It also rewords D0275 and D0279 to "second person singular
 with `review apply lexical_review_368_corrections.json`, then run
 `review dispositions`.
 
-The `reviewed_strong_correction` rule (version 2) records a `set_strong`
+`batches/definition_gaps_42.json` resolves the occurrences that #367 and #368
+blocked on identifiers with no English or Spanish definition (#42). Most were
+names and post-biblical words with no entry of their own. The batch covers
+every occurrence of the same words that was blocked or never reviewed, such as
+Thessalonica on H2803 "think". An occurrence that an earlier review corrected
+keeps that correction. The batch makes these changes:
+
+- 42 `upsert_custom_definition` decisions create custom entries D0285 to
+  D0326. Each entry has an English and a Spanish sense, a transliteration,
+  `mapping_scope` set to `instances_only`, and the `nt_instances` it covers.
+  Names include Thessalonica, Athens, Luke, and Alexander. Post-biblical words
+  include שֵׁרוּת service, יְכֹלֶת ability, רְדִיפָה persecution, and the
+  adjective יָתֵר. A derived word gets its own entry and is not mapped to its
+  root.
+- 6 more decisions give H1421, H1861, H4136, H5681, H6969, and H758 the
+  English or Spanish they lacked. The first BDB gloss of each already fits its
+  New Testament occurrences, or the entry has no BDB gloss.
+- The Ephesian silversmith Demetrius gets D0700, and the city treasurer
+  Erastus gets D0701, because D0076 and D0299 name other people.
+- 148 `set_strong` lexical reviews move the occurrences to these entries, to
+  D0282 (טַלְיְתָא), D0016 (the Alexandrian ships), and H3201 (Galatians 4:15).
+  They also correct false prefix tags, such as the ל of לוּקָס. Each
+  decision's `evidence.greek` names the SBLGNT word of the verse.
+
+Apply it with `review apply definition_gaps_42.json`, then apply rounds 2 to 5
+in order, run `review root-letter-prefixes`, and run `review dispositions`.
+
+`batches/definition_gaps_42_round_2.json` resolves the 677 occurrences that
+the lexical reviews blocked on an identifier that has a definition but names
+a different word. `python -m scripts.delitzsch.review.blocked_candidates
+<output>` lists each blocked occurrence with its verse, its SBLGNT content
+words, the entries whose lemma is the token or a prefix-stripped stem, and
+the identities that reviewed occurrences of the same stem use. The report
+proposes nothing. A reviewer judged each word from the pointed form, the
+verse, the Greek, and the lexicon. The batch makes these changes:
+
+- 360 `upsert_custom_definition` decisions create entries between D0327 and
+  D0698, with the same fields as the first batch. Names include Lydia,
+  Cyprus, and Puteoli. Delitzsch follows the Textus Receptus order in Romans
+  16:14, so `וְהֶרְמָס` is Hermas (D0645) and `וְהֶרְמִיס` is Hermes (D0338),
+  the spelling of Acts 14:12. Post-biblical words include נִסָּיוֹן trial,
+  מוֹכֵס tax collector, חֵרוּת freedom, and the verb הִשְׁתַּמֵּשׁ use. A
+  derived word gets its own entry, so עֲבֵרָה transgression is not on
+  עֲבָרָה, the place in John 1:28.
+- A name borne by more than one person gets one entry per person, so each
+  occurrence shows its own person first. D0338 is Hermes the god and D0702
+  the Christian in Rome, D0354 Sosthenes the synagogue ruler and D0703 the
+  co-sender of 1 Corinthians, D0573 Rufus the son of Simon and D0704 the
+  Christian in Rome.
+- A custom entry keeps its own gloss first. The reader ranks only the
+  `custom` source above BDB, so a `delitzsch_review` sense on an H entry shows
+  under More, after the BDB glosses. A sense goes on an H entry only for a
+  meaning that the entry's first BDB gloss already fits. A New Testament
+  person, a post-biblical sense, or a homograph gets a D entry of its own,
+  such as D0333 Manaen (H4505 opens with "comforter"), D0534 Zechariah the
+  father of John the Baptist (H2148 opens with the king of Israel), D0690
+  כָּפַר deny (H3722 opens with "cover over"), and D0402 שִׁמֵּשׁ serve.
+  סַנְהֶדְרִין goes to the existing D0008.
+- D0705 Rome takes `רוֹמִי` where it names the city. D0141 keeps Roman.
+- 685 `set_strong` lexical reviews move the occurrences. Some moves go to an existing entry for the same word, such as D0053
+  הִסְכִּים, D0167 אֵבָר, D0326 כָּרַךְ, and H1278 for `הַבְּרִיָּה`. Each
+  decision's `evidence.greek` names the SBLGNT word of the same verse. Where
+  the SBLGNT has no such word, `evidence.greek_note` says why: a verse
+  boundary that differs, as in Acts 24:3, a Textus Receptus reading, as in
+  Matthew 5:47 and 1 Peter 3:8, or a free rendering.
+
+`batches/definition_gaps_42_round_3.json` creates D0699 Melita and moves 206
+more occurrences. Most are occurrences of the round's own words that sat on
+another identifier, found by matching every inflected form of each reviewed
+word across the corpus, such as Artemis, Bethphage, Bethsaida, the
+publicans, Epaphroditus, Aeneas, Troas, Trophimus, Gennesaret, מִילָה
+circumcision, and אֲמִתִּי true. Acts 28:1 `מְלִיטִי` moves from D0254
+Miletus to D0699 and supersedes the #399 correction. A homograph stays where
+it is, such as `וּמָתַי` when in Matthew 25:38 and `בַּגָּלוּי` openly.
+
+`batches/definition_gaps_42_round_4.json` moves every New Testament
+occurrence that the reader would open with another referent's gloss. It
+creates D0706 to D0725 and moves 417 occurrences:
+
+- The father of John the Baptist goes to D0534 in Luke 1 and Luke 3:2. The
+  Zechariah killed between the sanctuary and the altar (Matthew 23:35, Luke
+  11:51), whom Delitzsch names son of Jehoiada, gets D0706. The prophet of
+  Matthew 27:9, whom Delitzsch names where the Greek has Jeremiah, gets D0707.
+- New Testament names on an H entry whose first BDB gloss names another
+  person get D entries: John (H3076 "a priest", 119), Simon and Simeon (H8095
+  "second son of Jacob and Leah", 82), Mary (H4813 "sister of Moses", 54),
+  Nathanael, Talmai in Bar-Talmai, Enoch, Hezron, Mattathias, Salome, Azor,
+  Lamech, Gog, Midian, Semein, Joanan, and Zeus, which Delitzsch writes בֵּל.
+  Revelation 7:7, the tribe of Simeon, stays on H8095. Annas goes to D0189.
+- The same words wherever they occur: שִׁמֵּשׁ serve (D0402), לִמּוּד
+  teaching (D0415), קָבַע fix (D0502), and כָּפַר deny (D0690). כָּפָר village
+  moves from H3722 to H3723, and כַּפֹּרֶת mercy seat to H3727. Mark 7:3
+  עַד־הַפֶּרֶק gets D0725, joint of the arm.
+- Common words that sat on a name: שֶׁבַע seven on H884 Beersheba (28), אֵל
+  God on H1008 Bethel (14), בַּעַל owner or husband on H4807 (25, the ב is a
+  root letter), and 22 others, such as חָם hot on H2526 Ham (Revelation
+  3:16).
+
+`batches/definition_gaps_42_round_5.json` makes the reader's first gloss
+right for every New Testament occurrence. The reader takes the first gloss
+from `scripts/dict/reader_gloss.py`, which computes it the same way as
+`shared/lexiconAssets.ts`. The batch creates D0726 to D0862 and moves 1467
+occurrences:
+
+- 91 name entries, one for each New Testament referent whose H entry opens
+  with an etymology, another person, or a bare Old Testament name, such as
+  David (H1732 "pot"), Galilee (H1551 "cylinder"), Abraham, Nazareth and
+  Nazarene (H5342 "sprout"), Bethlehem, James (H3290 Jacob), Judas, and Judea
+  (H3063 Judah). The English and the Spanish first gloss name the referent,
+  and `evidence.greek` names the Greek name of the verse.
+- 46 sense entries for New Testament senses that the H entry's first gloss
+  does not give, such as different and change (H8138 "repeat", 1 Peter 1:6
+  goes to different), marry a dead brother's widow (H2992, Mark 12:19),
+  begin (H2490 "pollute"), fear (H3372), and God (H410, except the five
+  לְאֵל יָד idioms of power). John 11:13 שֵׁנָה goes to H8142 sleep.
+- 336 common words leave a name number, such as לֶחֶם bread on H1035
+  Bethlehem and נָצַר keep on H5342.
+- Romans 16:1 מְשַׁמֶּשֶׁת goes to D0402 serve. 13 Johns on H3110 go to D0708.
+  D0141 Roman lists Acts 22:25, John 19:20, and Luke 23:38.
+- 54 `upsert_custom_definition` decisions on H entries add a `custom` record,
+  because the reader ranks only the `custom` source above BDB. 39 replace a
+  reviewed `delitzsch_review` record whose BDB headline names another sense,
+  such as H1961 "be; become; come to pass" for "fall out". 15 fix an entry
+  whose English and Spanish first gloss came from different records, or
+  whose BDB headline does not fit its New Testament use, such as H5800
+  "leave" for "restore" and H7218 "head" for "Rôsh".
+
+`tests/test_delitzsch_reader_glosses.py` checks that every New Testament
+occurrence shows an English and a Spanish first gloss from one record, and
+that every occurrence of a proper-noun H entry shows its name first.
+
+`batches/definition_gaps_42_round_7.json` creates D0902 to D0911, moves 145
+occurrences, and adds 30 `custom` records to H entries and one to D0057:
+
+- Each name entry names one referent. Philip splits into the apostle (D0069),
+  the evangelist (D0903, Acts 6 to 8 and 21:8), the tetrarch (D0904, Luke 3:1
+  and Caesarea Philippi), and Herod's brother, the husband of Herodias (D0905).
+  Luke 3:25 Nahum leaves D0186 Capernaum for D0902. Luke 3:29 leaves D0088
+  Joses for D0906 Jose. D0057 Gaius now names each Gaius, with the one 3 John
+  addresses. Stephanas, in 1 Corinthians 1:16, 16:15, and 16:17, leaves D0015
+  Stephen for D0907. Acts 4:6
+  Annas joins D0189. Revelation 18:13 וּמִקְנֶה, cattle, leaves D0192 Cana for
+  H4735.
+- A sense entry replaces an H entry whose first gloss gives a sense no custom
+  record could replace for the Tanakh: reject (D0908, from H3988 "flow"),
+  glorify and boast (D0909, from H6286 "go over the boughs"), recognize
+  (D0910, from H5234 "act"), and solid food (D0911, Hebrews 5:12 and 5:14, from
+  H1277 "fat").
+- 28 `custom` records give a first gloss that fits every Tanakh and New
+  Testament use, such as H3384 "throw, shoot; in the hiphil, teach", H5046
+  "tell, declare", H7925 "rise early", H5190 "lift, bear; lay upon", and H3381
+  "go down, come down". H758 Aram and H3568 Cush now name the other men of
+  that name.
+
+`batches/definition_gaps_42_round_8.json` creates D0912 to D0917, moves 40
+occurrences, and widens 11 `custom` records on H entries:
+
+- James 5:7 יוֹרֶה, early rain, leaves H3384 for H3138. The H3384 record adds
+  rain and be watered, the H3384 senses of Hosea 6:3 and 10:12 and of Proverbs
+  11:25.
+- Records add the senses their New Testament and Tanakh uses need: H5090 the
+  later Hebrew manage, practise, be the custom (Mark 7:5, John 19:40) and the
+  hithpael conduct oneself (Philippians 1:27), H1197 remove and purge (1
+  Corinthians 5:13, Deuteronomy 13:6), H6148 dare and be pleasing (Mark 12:34,
+  Hosea 9:4), H3240 let and allow, H1167 one who has a thing, H3559 right and
+  certain, H7218 beginning, H4672 be present and provide, H6327 spread abroad,
+  and H5190 wash the hands.
+- D0912 ris, the Greek stadium (5 occurrences), D0913 eye-salve, and four
+  post-biblical words: D0914 loss, D0915 oppose, D0916 be concerned, D0917
+  separate.
+- 30 wrong-entry occurrences move to their entries, such as Luke 23:53 הוּשַׂם
+  to H7760 and Hebrews 7:3 יַחַשׂ to H3188.
+
+`h_entry_custom_records.json` gives each record, besides its Old Testament
+check, a New Testament check and the list of its New Testament occurrences,
+each read with the Greek of its SBLGNT verse. A test pins the list to the
+corpus, so a later move onto the entry needs a new review.
+
+`name_entry_referents.json` lists, for each D entry whose first gloss is a
+name, the Greek names its occurrences render. Each occurrence's SBLGNT verse
+must hold one of them, or the occurrence is an exception with its kind: a
+Textus Receptus reading, a name in the next or previous verse, a verse the
+SBLGNT lacks, a pronoun, or a rendering. Entries that share a Greek name
+either name one referent, such as a city and its people, or list the verses
+of each bearer. `move_gloss_review.json` lists every round 5, round 7, and
+round 8 move onto an entry the review did not create, with the first gloss
+the reader shows and the Greek word of the verse. Tests pin both tables.
+
+A `set_strong` onto a custom entry whose `mapping_scope` is `instances_only`
+adds the occurrence to that entry's `nt_instances`, and removes it from the
+previous entry's list. Each such entry lists exactly the occurrences
+reviewed onto it.
+
+The `reviewed_strong_correction` rule (version 3) records a `set_strong`
 lexical review. It raises an error when the decision has no person or agent
 reviewer, when an evidence field or the reason is missing, when the previous Strong number
 differs from the queued one, when nothing changes, or when the Strong string
 does not carry the new prefixes. The `lexical_review` rule raises the same
 error for a `skip` that changes the Strong number. A lexical review outside
 the queue gets a record with `source` set to `decision_log`.
+
+A later reviewed correction supersedes an earlier one. The ledger reads every
+logged decision for the occurrence and links each applied correction to the
+one before it, when the earlier correction's new Strong number is the later
+one's previous Strong number. Decisions of other kinds between them do not
+break the link. An outside-queue root-letter correction is also a link, so
+reverting the ledger still restores the remediation corpus. The rule then
+checks every link, the first link against the
+queued Strong number, and that each link starts from the Strong number and
+prefixes the previous link left. The record keeps the queued `before` state,
+takes `after` from the latest correction, and lists the earlier links in
+`evidence.superseded`. The old decision lines stay as they were logged.
 
 ### Style-only prefixes (#364)
 

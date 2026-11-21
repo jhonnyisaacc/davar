@@ -7,7 +7,9 @@ import re
 
 import yaml
 
-from .core import lexical_refs, make_passage, normalize_tag, provenance
+from .core import ROOT, lexical_refs, make_passage, normalize_tag, provenance
+
+PUBLICATION = json.loads((ROOT / "shared/customEntryPublication.json").read_text(encoding="utf-8"))
 
 
 class SourceLoader(yaml.SafeLoader):
@@ -158,6 +160,15 @@ def scripture(blobs: dict, mappings: dict, selections: list):
     return passages, tokens, evidence
 
 
+def published(code: str, entry: dict) -> bool:
+    if "publication" not in entry:
+        return True
+    status = (entry["publication"] or {}).get("status")
+    if status not in PUBLICATION["statuses"]:
+        raise ValueError(f"{code} has an invalid publication status: {entry['publication']!r}")
+    return status == PUBLICATION["published"]
+
+
 def lexical(blobs: dict, selections: list):
     records = []
     for spec in selections:
@@ -166,6 +177,8 @@ def lexical(blobs: dict, selections: list):
             if code not in entries:
                 raise ValueError("Requested lexical entry missing: " + code)
             entry = entries[code]
+            if not published(code, entry):
+                continue
             refs = lexical_refs(code)
             if len(refs) != 1:
                 raise ValueError("Lexical selection must identify one entry")

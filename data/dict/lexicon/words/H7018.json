@@ -8,10 +8,11 @@
   "translit_es": "keynan",
   "definitions": [
     {
-      "text_en": "chant a",
+      "text_en": "chant a קִינָה",
       "source": "bdb",
       "order": 1,
-      "sense": "0"
+      "sense": "0",
+      "text_es": "entonar una קִינָה"
     },
     {
       "text_en": "Cainan/Kenan; ancestor in the genealogy of Jesus in Luke 3.",

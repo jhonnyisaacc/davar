@@ -1,0 +1,163 @@
+{
+  "description": "Every New Testament occurrence whose letters do not contain the letters of its entry's lemma, as scripts.delitzsch.review.root_mismatch finds them. Each accepted row was read with its Greek verse and keeps an entry whose first gloss fits; each pending row still needs a fix. A new mismatch fails the test.",
+  "accepted": {
+    "acts.13.8.2": {
+      "text": "אַלִּימָא",
+      "strong": "D0246",
+      "shown": "Elymas, the magician who opposed Paul and Barnabas in Cyprus.",
+      "note": "Elymas, spelled with letters the entry headword does not share one for one"
+    },
+    "acts.18.18.20": {
+      "text": "בְּקַנְכְּרַי",
+      "strong": "D0257",
+      "shown": "Cenchreae, the eastern harbor of Corinth.",
+      "note": "Cenchreae, spelled with letters the entry headword does not share one for one"
+    },
+    "acts.20.2.2": {
+      "text": "הָהֵן",
+      "strong": "H1992",
+      "shown": "they",
+      "note": "הָהֵן, those, the feminine of the pronoun the entry glosses"
+    },
+    "acts.27.27.7": {
+      "text": "אַדְרִיָּה",
+      "strong": "D0263",
+      "shown": "Adriatic Sea, the sea through which Paul's ship was driven.",
+      "note": "the Adriatic, spelled with letters the entry headword does not share one for one"
+    },
+    "acts.9.18.5": {
+      "text": "קַשְׂקַשִּׂים",
+      "strong": "H7193",
+      "shown": "scale",
+      "note": "קַשְׂקַשִּׂים, scales, the plural of קַשְׂקֶשֶׂת; its doubled letters break the letter match"
+    },
+    "john.11.16.3": {
+      "text": "דִידוּמוֹס",
+      "strong": "D0002",
+      "shown": "Thomas",
+      "note": "Didymus, the Greek byname of Thomas, renders Δίδυμος; the Thomas entry names him"
+    },
+    "john.12.4.8": {
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "note": "Iscariot is written אִישׁ קְרִיּוֹת, man of Kerioth; this token is the second word of the name the entry glosses"
+    },
+    "john.13.2.11": {
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "note": "Iscariot is written אִישׁ קְרִיּוֹת, man of Kerioth; this token is the second word of the name the entry glosses"
+    },
+    "john.13.26.19": {
+      "text": "קְרִיּוֹת׃",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "note": "Iscariot is written אִישׁ קְרִיּוֹת, man of Kerioth; this token is the second word of the name the entry glosses"
+    },
+    "john.14.22.6": {
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "note": "Iscariot is written אִישׁ קְרִיּוֹת, man of Kerioth; this token is the second word of the name the entry glosses"
+    },
+    "john.19.39.12": {
+      "text": "וַאֲהָלוֹת",
+      "strong": "H174",
+      "shown": "aloe",
+      "note": "אֲהָלוֹת, aloes, the plural of אֲהָלִים"
+    },
+    "john.20.24.5": {
+      "text": "דִידוּמוֹס",
+      "strong": "D0002",
+      "shown": "Thomas",
+      "note": "Didymus, the Greek byname of Thomas, renders Δίδυμος; the Thomas entry names him"
+    },
+    "john.21.2.4": {
+      "text": "דִידוּמוֹס",
+      "strong": "D0002",
+      "shown": "Thomas",
+      "note": "Didymus, the Greek byname of Thomas, renders Δίδυμος; the Thomas entry names him"
+    },
+    "john.6.71.7": {
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "note": "Iscariot is written אִישׁ קְרִיּוֹת, man of Kerioth; this token is the second word of the name the entry glosses"
+    },
+    "luke.2.36.18": {
+      "text": "בְתוּלֶיהָ׃",
+      "strong": "H1331",
+      "shown": "virginity",
+      "note": "בְּתוּלֶיהָ, her virginity, the plural of בְּתוּלִים"
+    },
+    "luke.22.3.5": {
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "note": "Iscariot is written אִישׁ קְרִיּוֹת, man of Kerioth; this token is the second word of the name the entry glosses"
+    },
+    "luke.6.16.7": {
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "note": "Iscariot is written אִישׁ קְרִיּוֹת, man of Kerioth; this token is the second word of the name the entry glosses"
+    },
+    "mark.14.10.2": {
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "note": "Iscariot is written אִישׁ קְרִיּוֹת, man of Kerioth; this token is the second word of the name the entry glosses"
+    },
+    "mark.3.19.3": {
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "note": "Iscariot is written אִישׁ קְרִיּוֹת, man of Kerioth; this token is the second word of the name the entry glosses"
+    },
+    "matthew.10.4.4": {
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "note": "Iscariot is written אִישׁ קְרִיּוֹת, man of Kerioth; this token is the second word of the name the entry glosses"
+    },
+    "matthew.26.14.7": {
+      "text": "קְרִיּוֹת",
+      "strong": "D0245",
+      "shown": "Iscariot, the designation of Judas who betrayed Jesus.",
+      "note": "Iscariot is written אִישׁ קְרִיּוֹת, man of Kerioth; this token is the second word of the name the entry glosses"
+    },
+    "philemon.1.20.2": {
+      "text": "אֵהָנֵה־",
+      "strong": "D0059",
+      "shown": "benefit; profit; advantage or use enjoyed from something.",
+      "note": "אֵהָנֶה, may I have benefit, the post-biblical niphal of the verb whose noun the entry glosses"
+    },
+    "romans.1.20.1": {
+      "text": "מַהוּתוֹ",
+      "strong": "D0484",
+      "shown": "essence, very nature; a post-biblical Hebrew noun.",
+      "note": "מַהוּת, essence, a post-biblical synonym of the entry headword עַצְמוּת"
+    },
+    "romans.16.1.11": {
+      "text": "בְּקַנְכְּרָי׃",
+      "strong": "D0257",
+      "shown": "Cenchreae, the eastern harbor of Corinth.",
+      "note": "Cenchreae, spelled with letters the entry headword does not share one for one"
+    },
+    "timothy2.4.19.2": {
+      "text": "פְּרִיסְקָה",
+      "strong": "D0037",
+      "shown": "Priscilla",
+      "note": "Prisca, the short form of the name Priscilla the entry glosses"
+    }
+  },
+  "pending": {
+    "luke.8.14.15": {
+      "text": "יְשַׁוּוּ",
+      "strong": "H1766",
+      "shown": "thrust",
+      "note": "יְשַׁוּוּ renders τελεσφορέω, bring fruit to maturity; no entry with these letters gives that sense, and the reading needs a Hebrew source check"
+    }
+  }
+}

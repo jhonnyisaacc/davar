@@ -8,18 +8,11 @@
   "translit_es": "agan",
   "definitions": [
     {
-      "text_en": "shut oneself in",
+      "text_en": "shut oneself in or off",
       "source": "bdb",
       "order": 1,
       "sense": "0",
-      "text_es": "encerrarse"
-    },
-    {
-      "text_en": "off",
-      "source": "bdb",
-      "order": 2,
-      "sense": "0",
-      "text_es": "fuera"
+      "text_es": "encerrarse o aislarse"
     }
   ],
   "sources": {

@@ -1,0 +1,510 @@
+{
+  "issue": 42,
+  "rule": "lexical_review",
+  "reviewer": "claude-delitzsch-review",
+  "decisions": [
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "ephesians",
+        "chapter": 1,
+        "verse": 6,
+        "word_index": 6,
+        "text": "בִּידִידוֹ׃",
+        "strong": "Hb/H3027",
+        "prefixes": [
+          "Hb"
+        ]
+      },
+      "previous_strong": "Hb/H3027",
+      "new_strong": "Hb/H3039",
+      "reason": "בִּידִידוֹ׃ is the noun יְדִיד, beloved, rendering ἀγαπάω; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3039 יְדִיד beloved",
+        "grammar": "noun",
+        "context": "ephesians 1:6, Greek ἀγαπάω",
+        "issue": 42,
+        "greek": "G0025 ἀγαπάω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "hebrews",
+        "chapter": 6,
+        "verse": 9,
+        "word_index": 1,
+        "text": "יְדִידַי",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "H3039",
+      "reason": "יְדִידַי is the noun יְדִיד, beloved, rendering ἀγαπητός; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3039 יְדִיד beloved",
+        "grammar": "noun",
+        "context": "hebrews 6:9, Greek ἀγαπητός",
+        "issue": 42,
+        "greek": "G0027 ἀγαπητός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "john",
+        "chapter": 11,
+        "verse": 11,
+        "word_index": 7,
+        "text": "יְדִידֵנוּ",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "H3039",
+      "reason": "יְדִידֵנוּ is the noun יְדִיד, friend, rendering φίλος; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3039 יְדִיד beloved",
+        "grammar": "noun",
+        "context": "john 11:11, Greek φίλος",
+        "issue": 42,
+        "greek": "G5384 φίλος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "john",
+        "chapter": 15,
+        "verse": 13,
+        "word_index": 8,
+        "text": "יְדִידָיו׃",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "H3039",
+      "reason": "יְדִידָיו׃ is the noun יְדִיד, friend, rendering φίλος; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3039 יְדִיד beloved",
+        "grammar": "noun",
+        "context": "john 15:13, Greek φίλος",
+        "issue": 42,
+        "greek": "G5384 φίλος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "john",
+        "chapter": 15,
+        "verse": 14,
+        "word_index": 1,
+        "text": "יְדִידַי",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "H3039",
+      "reason": "יְדִידַי is the noun יְדִיד, friend, rendering φίλος; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3039 יְדִיד beloved",
+        "grammar": "noun",
+        "context": "john 15:14, Greek φίλος",
+        "issue": 42,
+        "greek": "G5384 φίλος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "john",
+        "chapter": 15,
+        "verse": 15,
+        "word_index": 16,
+        "text": "יְדִידַי",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "H3039",
+      "reason": "יְדִידַי is the noun יְדִיד, friend, rendering φίλος; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3039 יְדִיד beloved",
+        "grammar": "noun",
+        "context": "john 15:15, Greek φίλος",
+        "issue": 42,
+        "greek": "G5384 φίλος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 11,
+        "verse": 5,
+        "word_index": 15,
+        "text": "יְדִידִי",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "H3039",
+      "reason": "יְדִידִי is the noun יְדִיד, friend, rendering φίλος; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3039 יְדִיד beloved",
+        "grammar": "noun",
+        "context": "luke 11:5, Greek φίλος",
+        "issue": 42,
+        "greek": "G5384 φίλος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 12,
+        "verse": 4,
+        "word_index": 3,
+        "text": "יְדִידָי",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "H3039",
+      "reason": "יְדִידָי is the noun יְדִיד, friend, rendering φίλος; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3039 יְדִיד beloved",
+        "grammar": "noun",
+        "context": "luke 12:4, Greek φίλος",
+        "issue": 42,
+        "greek": "G5384 φίλος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 20,
+        "verse": 13,
+        "word_index": 9,
+        "text": "יְדִידִי",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "H3039",
+      "reason": "יְדִידִי is the noun יְדִיד, beloved, rendering ἀγαπητός; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3039 יְדִיד beloved",
+        "grammar": "noun",
+        "context": "luke 20:13, Greek ἀγαπητός",
+        "issue": 42,
+        "greek": "G0027 ἀγαπητός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 3,
+        "verse": 22,
+        "word_index": 14,
+        "text": "יְדִידִי",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "H3039",
+      "reason": "יְדִידִי is the noun יְדִיד, beloved, rendering ἀγαπητός; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3039 יְדִיד beloved",
+        "grammar": "noun",
+        "context": "luke 3:22, Greek ἀγαπητός",
+        "issue": 42,
+        "greek": "G0027 ἀγαπητός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 9,
+        "verse": 35,
+        "word_index": 7,
+        "text": "יְדִידִי",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "H3039",
+      "reason": "יְדִידִי is the noun יְדִיד, beloved, rendering the reading ἀγαπητός; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3039 יְדִיד beloved",
+        "grammar": "noun",
+        "context": "luke 9:35, Greek ἐκλέγω",
+        "issue": 42,
+        "greek": "G1586 ἐκλέγω",
+        "greek_note": "SBLGNT reads ὁ ἐκλελεγμένος, the chosen one; Delitzsch renders the reading ὁ ἀγαπητός, the beloved, as יְדִידִי"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 1,
+        "verse": 11,
+        "word_index": 6,
+        "text": "יְדִידִי",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "H3039",
+      "reason": "יְדִידִי is the noun יְדִיד, beloved, rendering ἀγαπητός; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3039 יְדִיד beloved",
+        "grammar": "noun",
+        "context": "mark 1:11, Greek ἀγαπητός",
+        "issue": 42,
+        "greek": "G0027 ἀγαπητός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 9,
+        "verse": 7,
+        "word_index": 11,
+        "text": "יְדִידִי",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "H3039",
+      "reason": "יְדִידִי is the noun יְדִיד, beloved, rendering ἀγαπητός; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3039 יְדִיד beloved",
+        "grammar": "noun",
+        "context": "mark 9:7, Greek ἀγαπητός",
+        "issue": 42,
+        "greek": "G0027 ἀγαπητός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 12,
+        "verse": 18,
+        "word_index": 4,
+        "text": "יְדִידִי",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "H3039",
+      "reason": "יְדִידִי is the noun יְדִיד, beloved, rendering ἀγαπητός; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3039 יְדִיד beloved",
+        "grammar": "noun",
+        "context": "matthew 12:18, Greek ἀγαπητός",
+        "issue": 42,
+        "greek": "G0027 ἀγαπητός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 17,
+        "verse": 5,
+        "word_index": 14,
+        "text": "יְדִידִי",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "H3039",
+      "reason": "יְדִידִי is the noun יְדִיד, beloved, rendering ἀγαπητός; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3039 יְדִיד beloved",
+        "grammar": "noun",
+        "context": "matthew 17:5, Greek ἀγαπητός",
+        "issue": 42,
+        "greek": "G0027 ἀγαπητός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 3,
+        "verse": 17,
+        "word_index": 7,
+        "text": "יְדִידִי",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "H3039",
+      "reason": "יְדִידִי is the noun יְדִיד, beloved, rendering ἀγαπητός; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3039 יְדִיד beloved",
+        "grammar": "noun",
+        "context": "matthew 3:17, Greek ἀγαπητός",
+        "issue": 42,
+        "greek": "G0027 ἀγαπητός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "peter2",
+        "chapter": 1,
+        "verse": 17,
+        "word_index": 16,
+        "text": "יְדִידִי",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "H3039",
+      "reason": "יְדִידִי is the noun יְדִיד, beloved, rendering ἀγαπητός; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3039 יְדִיד beloved",
+        "grammar": "noun",
+        "context": "peter2 1:17, Greek ἀγαπητός",
+        "issue": 42,
+        "greek": "G0027 ἀγαπητός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 1,
+        "verse": 7,
+        "word_index": 3,
+        "text": "יְדִידֵי",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "H3039",
+      "reason": "יְדִידֵי is the noun יְדִיד, beloved, rendering ἀγαπητός; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3039 יְדִיד beloved",
+        "grammar": "noun",
+        "context": "romans 1:7, Greek ἀγαπητός",
+        "issue": 42,
+        "greek": "G0027 ἀγαπητός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 12,
+        "verse": 19,
+        "word_index": 3,
+        "text": "יְדִידַי",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "H3039",
+      "reason": "יְדִידַי is the noun יְדִיד, beloved, rendering ἀγαπητός; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3039 יְדִיד beloved",
+        "grammar": "noun",
+        "context": "romans 12:19, Greek ἀγαπητός",
+        "issue": 42,
+        "greek": "G0027 ἀγαπητός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.95,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 17,
+        "verse": 28,
+        "word_index": 12,
+        "text": "יְלִידָיו",
+        "strong": "H3027",
+        "prefixes": []
+      },
+      "previous_strong": "H3027",
+      "new_strong": "H3211",
+      "reason": "יְלִידָיו is יָלִיד, one born, in אַף־יְלִידָיו אֲנָחְנוּ, we too are his offspring, rendering γένος; H3027 shows hand, which misleads here",
+      "evidence": {
+        "lexicon": "H3211 יָלִיד born",
+        "grammar": "noun",
+        "context": "acts 17:28, Greek γένος",
+        "issue": 42,
+        "greek": "G1085G γένος"
+      }
+    }
+  ]
+}

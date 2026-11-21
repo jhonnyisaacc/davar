@@ -175,18 +175,11 @@
       "text_es": "ser dado a conocer"
     },
     {
-      "text_en": "be",
+      "text_en": "be or become known",
       "source": "bdb",
       "order": 25,
       "sense": "1",
-      "text_es": "ser"
-    },
-    {
-      "text_en": "become known",
-      "source": "bdb",
-      "order": 26,
-      "sense": "1",
-      "text_es": "darse a conocer"
+      "text_es": "ser o llegar a ser conocido"
     },
     {
       "text_en": "make oneself known",

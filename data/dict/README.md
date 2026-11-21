@@ -137,6 +137,23 @@ python scripts/dict/build_lexicon.py lexicon_100_percent_list.json --update
 
 # Testing mode (1% sample)
 python scripts/dict/build_lexicon.py lexicon_100_percent_list.json --testing
+```
+
+A BDB `<def>` that breaks off on a word such as "be" or "of" takes the next
+`<def>` or inline `<w>` that completes it, so "be" or "act as adversary"
+becomes "be or act as adversary". The gloss also continues after a comma when
+"be" is followed by a gloss of more than one word ("be", "become weak"), after
+", or" and ", and", and after the abbreviated divine name י׳, which it writes
+as YHWH ("May YHWH give joy!"). `python -m scripts.dict.bdb_truncated_glosses
+--write` completes the glosses that the committed lexicon stored cut off,
+without rebuilding any other field. It drops a cut-off gloss that an entry
+holds but whose BDB entry does not have it. It takes the Spanish of each
+completed gloss from `lexicon/bdb_completed_glosses_es.json`, and gives that
+Spanish to every BDB record whose English is in the file. `--check` fails
+while a truncated gloss or a different Spanish remains.
+
+`python -m scripts.dict.reader_gloss <strong>...` prints the first English and
+Spanish gloss that the reader shows for an entry.
 
 ### 3. Quality Assurance (`scripts/dict/qa.py`)
 

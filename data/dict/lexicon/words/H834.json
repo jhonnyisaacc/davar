@@ -15,18 +15,18 @@
       "text_es": "quien"
     },
     {
-      "text_en": "which",
+      "text_en": "in (that) which",
       "source": "bdb",
       "order": 2,
       "sense": "a",
-      "text_es": "que"
+      "text_es": "en (aquello) que"
     },
     {
-      "text_en": "where",
+      "text_en": "in (the place) where",
       "source": "bdb",
       "order": 3,
       "sense": "b",
-      "text_es": "donde"
+      "text_es": "en (el lugar) donde"
     },
     {
       "text_en": "in that",
@@ -113,11 +113,11 @@
       "text_es": "lo que"
     },
     {
-      "text_en": "that",
+      "text_en": "from (the fact) that",
       "source": "bdb",
       "order": 16,
       "sense": "c",
-      "text_es": "que"
+      "text_es": "por (el hecho de) que"
     },
     {
       "text_en": "since",

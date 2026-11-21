@@ -26,10 +26,11 @@
       "sense": "0"
     },
     {
-      "text_en": "vigour",
+      "text_en": "in (actual) vigour",
       "source": "bdb",
       "order": 4,
-      "sense": "0"
+      "sense": "0",
+      "text_es": "en (pleno) vigor"
     }
   ],
   "sources": {

@@ -22,13 +22,28 @@ evidence. Individual sources and consolidated output are updated together;
 subsequent lexicon builds use the same source-chain rule. Original links remain
 in adjudication metadata. Re-running application changes zero entries.
 
-Results: 1,041 links now reach a cited canonical root; 2,090 invalid canonical
+Results: 1,037 links now reach a cited canonical root; 2,090 invalid canonical
 links were removed, with explicit unresolved metadata. Missing root targets
-fall from 3,131 to zero. There are 3,475 unresolved semantic decisions, including
-2,961 entries without a canonical link. Existing valid but uncertain links are
+fall from 3,131 to zero. There are 3,438 unresolved semantic decisions, including
+2,980 entries without a canonical link. Existing valid but uncertain links are
 retained for review. Every one of 246 orphan roots is explicitly retained as a
 standalone canonical primitive lexeme; having no unambiguously derived child
-is not grounds for deleting a lexical entry.
+is not grounds for deleting a lexical entry. A word cited only "in distinction
+from" is a contrast, not a derivation, so יָד H3027 and the words derived from
+it (יָדָה, יְהוּדָה, יְהוּדִי, תּוֹדָה) no longer link to כָּפַף H3721. When an
+entry becomes unresolved, a link that only an earlier pass made is dropped;
+only the original link is retained.
+
+A word cited after "compare" or "akin to" is a comparison, not a derivation,
+and is not followed either. So כְּמוֹ H3644 "like, as" and כְּנֵמָא no longer
+link to כּוּן H3559 through "compare H3651", and שֵׁשׁ H8337 "six" and the
+words built on it no longer link to שׂוּשׂ H7797 "exult". An unresolved entry
+whose original link was such a comparison drops it too, so a primitive word
+like קוּץ H6973 and H6974 shows itself as its root. Entries cited "from H…;
+compare H…" now accept their derivation. Two source errata are corrected
+before the chain is read: Strong's prints הֵם H1992 "they" as a plural of
+H1981 "walk", which would root the pronouns in הָלַךְ, and the dataset cites
+H3627 for כְּלִיא H3628 "prison" where Strong's cites H3607 כָּלָא.
 
 No definitions, instance sets, transliterations or other unrelated fields were
 changed. Static served root links match individual sources. The report does

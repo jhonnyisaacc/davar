@@ -1,0 +1,1489 @@
+{
+  "issue": 42,
+  "rule": "lexical_review",
+  "reviewer": "claude-delitzsch-review",
+  "decisions": [
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "D0912",
+      "hebrew": "רִיס",
+      "transliteration_en": "ris",
+      "transliteration_es": "ris",
+      "root": "",
+      "root_strong": "",
+      "mapping_scope": "instances_only",
+      "nt_instances": [
+        {
+          "book": "john",
+          "chapter": 6,
+          "verse": 19,
+          "word_index": 8,
+          "text": "רִיס"
+        },
+        {
+          "book": "john",
+          "chapter": 11,
+          "verse": 18,
+          "word_index": 8,
+          "text": "רִיס׃"
+        },
+        {
+          "book": "luke",
+          "chapter": 24,
+          "verse": 13,
+          "word_index": 13,
+          "text": "רִיס"
+        },
+        {
+          "book": "revelation",
+          "chapter": 14,
+          "verse": 20,
+          "word_index": 15,
+          "text": "רִיס׃"
+        },
+        {
+          "book": "revelation",
+          "chapter": 21,
+          "verse": 16,
+          "word_index": 13,
+          "text": "רִיס"
+        }
+      ],
+      "definition": {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "ris; a stadium, the Greek measure of distance of about 185 metres.",
+        "text_es": "ris; un estadio, la medida griega de distancia de unos 185 metros."
+      },
+      "reason": "רִיס needs an entry whose first gloss gives the sense the New Testament verses use",
+      "evidence": {
+        "lexicon": "New Testament word; no entry holds this word, so this entry carries the sense the verse uses",
+        "sense": "ris; a stadium, the Greek measure of distance of about 185 metres.",
+        "spanish": "ris; un estadio, la medida griega de distancia de unos 185 metros.",
+        "greek": "στάδιος",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "D0913",
+      "hebrew": "קִילוֹרִית",
+      "transliteration_en": "kilorit",
+      "transliteration_es": "kilorit",
+      "root": "",
+      "root_strong": "",
+      "mapping_scope": "instances_only",
+      "nt_instances": [
+        {
+          "book": "revelation",
+          "chapter": 3,
+          "verse": 18,
+          "word_index": 20,
+          "text": "קִילוֹרִית"
+        }
+      ],
+      "definition": {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "eye-salve; a Greek loanword (κολλούριον).",
+        "text_es": "colirio; un préstamo griego (κολλούριον)."
+      },
+      "reason": "קִילוֹרִית needs an entry whose first gloss gives the sense the New Testament verses use",
+      "evidence": {
+        "lexicon": "New Testament word; no entry holds this word, so this entry carries the sense the verse uses",
+        "sense": "eye-salve; a Greek loanword (κολλούριον).",
+        "spanish": "colirio; un préstamo griego (κολλούριον).",
+        "greek": "κολλούριον",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "D0914",
+      "hebrew": "יְרִידָה",
+      "transliteration_en": "yeridah",
+      "transliteration_es": "yeridá",
+      "root": "",
+      "root_strong": "",
+      "mapping_scope": "instances_only",
+      "nt_instances": [
+        {
+          "book": "corinthians1",
+          "chapter": 6,
+          "verse": 7,
+          "word_index": 2,
+          "text": "יְרִידָה"
+        }
+      ],
+      "definition": {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "a coming down, decline; loss, defeat, a post-biblical Hebrew noun.",
+        "text_es": "descenso, decadencia; pérdida, derrota, un sustantivo del hebreo posbíblico."
+      },
+      "reason": "יְרִידָה needs an entry whose first gloss gives the sense the New Testament verses use",
+      "evidence": {
+        "lexicon": "New Testament word; no entry holds this word, so this entry carries the sense the verse uses",
+        "sense": "a coming down, decline; loss, defeat, a post-biblical Hebrew noun.",
+        "spanish": "descenso, decadencia; pérdida, derrota, un sustantivo del hebreo posbíblico.",
+        "greek": "ἥττημα",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "D0915",
+      "hebrew": "הִתְנַגֵּד",
+      "transliteration_en": "hitnagged",
+      "transliteration_es": "hitnagued",
+      "root": "",
+      "root_strong": "",
+      "mapping_scope": "instances_only",
+      "nt_instances": [
+        {
+          "book": "timothy2",
+          "chapter": 2,
+          "verse": 25,
+          "word_index": 4,
+          "text": "הַמִּתְנַגְּדִים"
+        }
+      ],
+      "definition": {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "oppose, set oneself against; a post-biblical Hebrew verb.",
+        "text_es": "oponerse, ponerse en contra; un verbo del hebreo posbíblico."
+      },
+      "reason": "הִתְנַגֵּד needs an entry whose first gloss gives the sense the New Testament verses use",
+      "evidence": {
+        "lexicon": "New Testament word; no entry holds this word, so this entry carries the sense the verse uses",
+        "sense": "oppose, set oneself against; a post-biblical Hebrew verb.",
+        "spanish": "oponerse, ponerse en contra; un verbo del hebreo posbíblico.",
+        "greek": "ἀντιδιατίθημι",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "D0916",
+      "hebrew": "חָשַׁשׁ",
+      "transliteration_en": "chashash",
+      "transliteration_es": "jashash",
+      "root": "",
+      "root_strong": "",
+      "mapping_scope": "instances_only",
+      "nt_instances": [
+        {
+          "book": "corinthians1",
+          "chapter": 9,
+          "verse": 10,
+          "word_index": 1,
+          "text": "חוֹשֵׁשׁ"
+        }
+      ],
+      "definition": {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "be concerned, care about; fear, suspect, a post-biblical Hebrew verb.",
+        "text_es": "preocuparse, interesarse por; temer, sospechar, un verbo del hebreo posbíblico."
+      },
+      "reason": "חָשַׁשׁ needs an entry whose first gloss gives the sense the New Testament verses use",
+      "evidence": {
+        "lexicon": "New Testament word; no entry holds this word, so this entry carries the sense the verse uses",
+        "sense": "be concerned, care about; fear, suspect, a post-biblical Hebrew verb.",
+        "spanish": "preocuparse, interesarse por; temer, sospechar, un verbo del hebreo posbíblico.",
+        "greek": "μέλω",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "D0917",
+      "hebrew": "פָּרַשׁ",
+      "transliteration_en": "parash",
+      "transliteration_es": "parash",
+      "root": "",
+      "root_strong": "",
+      "mapping_scope": "instances_only",
+      "nt_instances": [
+        {
+          "book": "corinthians1",
+          "chapter": 7,
+          "verse": 10,
+          "word_index": 12,
+          "text": "תִפְרשׁ"
+        }
+      ],
+      "definition": {
+        "order": 1,
+        "source": "delitzsch_review",
+        "text_en": "separate, depart, withdraw; a post-biblical Hebrew sense.",
+        "text_es": "separarse, apartarse, retirarse; un sentido del hebreo posbíblico."
+      },
+      "reason": "פָּרַשׁ needs an entry whose first gloss gives the sense the New Testament verses use",
+      "evidence": {
+        "lexicon": "New Testament word; no entry holds this word, so this entry carries the sense the verse uses",
+        "sense": "separate, depart, withdraw; a post-biblical Hebrew sense.",
+        "spanish": "separarse, apartarse, retirarse; un sentido del hebreo posbíblico.",
+        "greek": "χωρίζω",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "H3384",
+      "replace_order": 2,
+      "definition": {
+        "source": "custom",
+        "order": 2,
+        "text_en": "throw, shoot; in the hiphil, teach, instruct, point out; also rain, early rain, be watered.",
+        "text_es": "arrojar, disparar; en hifil, enseñar, instruir, señalar; también llover, lluvia temprana, ser regado."
+      },
+      "reason": "the H3384 record gave no rain sense, but the Tanakh tags Hosea 6:3 and 10:12 'rain' and Proverbs 11:25 'be watered' H3384",
+      "evidence": {
+        "lexicon": "H3384 first gloss",
+        "sense": "throw, shoot; in the hiphil, teach, instruct, point out; also rain, early rain, be watered.",
+        "spanish": "arrojar, disparar; en hifil, enseñar, instruir, señalar; también llover, lluvia temprana, ser regado.",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "H5090",
+      "replace_order": 4,
+      "definition": {
+        "source": "custom",
+        "order": 4,
+        "text_en": "drive, lead, guide; in later Hebrew, manage, govern, practise, be the custom; in the hithpael, behave, conduct oneself.",
+        "text_es": "conducir, guiar, llevar; en hebreo posterior, administrar, gobernar, practicar, ser costumbre; en hitpael, comportarse, conducirse."
+      },
+      "reason": "the H5090 record gave only drive, lead, guide; its New Testament hithpael occurrences mean conduct oneself, and Mark 7:5 and John 19:40 mean be the custom",
+      "evidence": {
+        "lexicon": "H5090 first gloss",
+        "sense": "drive, lead, guide; in later Hebrew, manage, govern, practise, be the custom; in the hithpael, behave, conduct oneself.",
+        "spanish": "conducir, guiar, llevar; en hebreo posterior, administrar, gobernar, practicar, ser costumbre; en hitpael, comportarse, conducirse.",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "H1197",
+      "replace_order": 1,
+      "definition": {
+        "source": "custom",
+        "order": 1,
+        "text_en": "burn, kindle, consume; remove, purge, put away; be brutish.",
+        "text_es": "arder, encender, consumir; quitar, purgar, extirpar; ser necio."
+      },
+      "reason": "the H1197 record lacked remove, purge, put away, the sense of Deuteronomy 13:6 and of 1 Corinthians 5:7 and 5:13",
+      "evidence": {
+        "lexicon": "H1197 first gloss",
+        "sense": "burn, kindle, consume; remove, purge, put away; be brutish.",
+        "spanish": "arder, encender, consumir; quitar, purgar, extirpar; ser necio.",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "H6148",
+      "replace_order": 1,
+      "definition": {
+        "source": "custom",
+        "order": 1,
+        "text_en": "be surety, pledge; with the heart, dare; mix, mingle; in the hithpael, associate with, meddle; also be pleasing.",
+        "text_es": "ser fiador, dar en prenda; con el corazón, atreverse; mezclar; en hitpael, asociarse, entremeterse; también ser agradable."
+      },
+      "reason": "the H6148 record lacked dare (Jeremiah 30:21, Mark 12:34, Matthew 22:46) and be pleasing (Hosea 9:4, tagged H6148)",
+      "evidence": {
+        "lexicon": "H6148 first gloss",
+        "sense": "be surety, pledge; with the heart, dare; mix, mingle; in the hithpael, associate with, meddle; also be pleasing.",
+        "spanish": "ser fiador, dar en prenda; con el corazón, atreverse; mezclar; en hitpael, asociarse, entremeterse; también ser agradable.",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "H3240",
+      "replace_order": 1,
+      "definition": {
+        "source": "custom",
+        "order": 1,
+        "text_en": "lay down; place; leave; let, allow, let alone.",
+        "text_es": "poner; colocar; dejar; permitir, dejar en paz."
+      },
+      "reason": "the H3240 record lacked let and allow, the sense of most of its New Testament occurrences (ἐπιτρέπω, ἐάω, ἀφίημι) and of Exodus 32:10",
+      "evidence": {
+        "lexicon": "H3240 first gloss",
+        "sense": "lay down; place; leave; let, allow, let alone.",
+        "spanish": "poner; colocar; dejar; permitir, dejar en paz.",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "H1167",
+      "replace_order": 2,
+      "definition": {
+        "source": "custom",
+        "order": 2,
+        "text_en": "owner, master, lord; husband; citizen; with a noun, one who has it or is given to it.",
+        "text_es": "dueño, amo, señor; esposo; ciudadano; con un sustantivo, el que lo tiene o se da a ello."
+      },
+      "reason": "the H1167 record lacked the construct sense one who has a thing, as in master of dreams (Genesis 37:19, Jude 1:8) and those of the law (Luke 10:25)",
+      "evidence": {
+        "lexicon": "H1167 first gloss",
+        "sense": "owner, master, lord; husband; citizen; with a noun, one who has it or is given to it.",
+        "spanish": "dueño, amo, señor; esposo; ciudadano; con un sustantivo, el que lo tiene o se da a ello.",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "H3559",
+      "replace_order": 1,
+      "definition": {
+        "source": "custom",
+        "order": 1,
+        "text_en": "be firm, be established; prepare, make ready, set up; be right, be certain; certainty.",
+        "text_es": "estar firme, ser establecido; preparar, disponer, establecer; ser recto, ser cierto; certeza."
+      },
+      "reason": "the H3559 record lacked נָכוֹן right and certain, the sense of 'is it lawful' (ἔξεστιν) and 'the certainty' (τὸ ἀσφαλές) in the New Testament and of 1 Samuel 23:23",
+      "evidence": {
+        "lexicon": "H3559 first gloss",
+        "sense": "be firm, be established; prepare, make ready, set up; be right, be certain; certainty.",
+        "spanish": "estar firme, ser establecido; preparar, disponer, establecer; ser recto, ser cierto; certeza.",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "H7218",
+      "replace_order": 1,
+      "definition": {
+        "source": "custom",
+        "order": 1,
+        "text_en": "head; top, chief; beginning.",
+        "text_es": "cabeza; cima, jefe; principio."
+      },
+      "reason": "the H7218 record lacked beginning, the sense of מֵרֹאשׁ 'from the beginning' (ἀπ᾽ ἀρχῆς) in the New Testament and in Isaiah 40:21",
+      "evidence": {
+        "lexicon": "H7218 first gloss",
+        "sense": "head; top, chief; beginning.",
+        "spanish": "cabeza; cima, jefe; principio.",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "H4672",
+      "replace_order": 1,
+      "definition": {
+        "source": "custom",
+        "order": 1,
+        "text_en": "find; attain to, come upon; be found, be present; in the hiphil, present, deliver, provide.",
+        "text_es": "hallar; alcanzar, encontrar; ser hallado, estar presente; en hifil, presentar, entregar, proveer."
+      },
+      "reason": "the H4672 record lacked the niphal be present (Romans 13:1) and the hiphil provide (Acts 19:24, Hebrews 5:9, Leviticus 9:12)",
+      "evidence": {
+        "lexicon": "H4672 first gloss",
+        "sense": "find; attain to, come upon; be found, be present; in the hiphil, present, deliver, provide.",
+        "spanish": "hallar; alcanzar, encontrar; ser hallado, estar presente; en hifil, presentar, entregar, proveer.",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "H6327",
+      "replace_order": 1,
+      "definition": {
+        "source": "custom",
+        "order": 1,
+        "text_en": "scatter, be dispersed, spread abroad; overflow, dash in pieces.",
+        "text_es": "dispersar, ser esparcido, difundir; desbordarse, despedazar."
+      },
+      "reason": "the H6327 record lacked spread abroad, the sense of Acts 26:23 and 2 Corinthians 4:6 and of Job 37:11",
+      "evidence": {
+        "lexicon": "H6327 first gloss",
+        "sense": "scatter, be dispersed, spread abroad; overflow, dash in pieces.",
+        "spanish": "dispersar, ser esparcido, difundir; desbordarse, despedazar.",
+        "issue": 42
+      }
+    },
+    {
+      "action": "upsert_custom_definition",
+      "issue_type": "definition_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "strong": "H5190",
+      "replace_order": 1,
+      "definition": {
+        "source": "custom",
+        "order": 1,
+        "text_en": "lift, bear; lay upon, impose; in later Hebrew, take, and with the hands, wash them.",
+        "text_es": "levantar, llevar; imponer, poner sobre; en hebreo posterior, tomar, y con las manos, lavarlas."
+      },
+      "reason": "the H5190 record lacked the later Hebrew נָטַל יָדַיִם, wash the hands, the sense of Luke 11:38",
+      "evidence": {
+        "lexicon": "H5190 first gloss",
+        "sense": "lift, bear; lay upon, impose; in later Hebrew, take, and with the hands, wash them.",
+        "spanish": "levantar, llevar; imponer, poner sobre; en hebreo posterior, tomar, y con las manos, lavarlas.",
+        "issue": 42
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "james",
+        "chapter": 5,
+        "verse": 7,
+        "word_index": 18,
+        "text": "יוֹרֶה",
+        "strong": "H3384",
+        "prefixes": []
+      },
+      "previous_strong": "H3384",
+      "new_strong": "H3138",
+      "reason": "יוֹרֶה is early rain; H3384 יָרָה 'throw, shoot' is a different word",
+      "evidence": {
+        "lexicon": "H3138 יוֹרֶה early rain",
+        "grammar": "word",
+        "context": "James 5:7, Greek πρώϊμος",
+        "issue": 42,
+        "greek": "G4406 πρώϊμος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 23,
+        "verse": 53,
+        "word_index": 10,
+        "text": "הוּשַׂם־",
+        "strong": "H183",
+        "prefixes": []
+      },
+      "previous_strong": "H183",
+      "new_strong": "H7760",
+      "reason": "הוּשַׂם־ is put, place, set; H183 אָוָה 'desire' is a different word",
+      "evidence": {
+        "lexicon": "H7760 שׂוּם put, place, set",
+        "grammar": "word",
+        "context": "Luke 23:53, Greek κεῖμαι",
+        "issue": 42,
+        "greek": "G2749 κεῖμαι"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 12,
+        "verse": 27,
+        "word_index": 5,
+        "text": "טֹוֺת",
+        "strong": "H2505",
+        "prefixes": []
+      },
+      "previous_strong": "H2505",
+      "new_strong": "H2901",
+      "reason": "טֹוֺת is spin; H2505 חָלַק 'divide, share, distribute' is a different word",
+      "evidence": {
+        "lexicon": "H2901 טָוָה spin",
+        "grammar": "word",
+        "context": "Luke 12:27, Greek νήθω",
+        "issue": 42,
+        "greek": "G3514 νήθω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 19,
+        "verse": 30,
+        "word_index": 18,
+        "text": "הַתִּירוּ",
+        "strong": "H5800",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "H5800",
+      "new_strong": "H5425",
+      "reason": "הַתִּירוּ is be free; H5800 עָזַב 'leave' is a different word; the tagged Hd prefix is the hiphil ה of the imperative הַתִּירוּ, not the article",
+      "evidence": {
+        "lexicon": "H5425 נָתַר be free",
+        "grammar": "word",
+        "context": "Luke 19:30, Greek λύω",
+        "issue": 42,
+        "greek": "G3089 λύω"
+      },
+      "new_prefixes": []
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 11,
+        "verse": 4,
+        "word_index": 10,
+        "text": "וַיַּתִּירוּהוּ׃",
+        "strong": "H5800",
+        "prefixes": [
+          "Hc"
+        ]
+      },
+      "previous_strong": "H5800",
+      "new_strong": "Hc/H5425",
+      "reason": "וַיַּתִּירוּהוּ׃ is be free; H5800 עָזַב 'leave' is a different word",
+      "evidence": {
+        "lexicon": "H5425 נָתַר be free",
+        "grammar": "conjunction ו + word",
+        "context": "Mark 11:4, Greek λύω",
+        "issue": 42,
+        "greek": "G3089 λύω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 23,
+        "verse": 33,
+        "word_index": 2,
+        "text": "יַלְדֵי",
+        "strong": "H5800",
+        "prefixes": []
+      },
+      "previous_strong": "H5800",
+      "new_strong": "H3206",
+      "reason": "יַלְדֵי is child; H5800 עָזַב 'leave' is a different word",
+      "evidence": {
+        "lexicon": "H3206 יֶלֶד child",
+        "grammar": "word",
+        "context": "Matthew 23:33, Greek γέννημα",
+        "issue": 42,
+        "greek": "G1081G γέννημα"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 23,
+        "verse": 34,
+        "word_index": 2,
+        "text": "שֹׁלֵחַ",
+        "strong": "H5800",
+        "prefixes": []
+      },
+      "previous_strong": "H5800",
+      "new_strong": "H7971",
+      "reason": "שֹׁלֵחַ is send; H5800 עָזַב 'leave' is a different word",
+      "evidence": {
+        "lexicon": "H7971 שָׁלַח send",
+        "grammar": "word",
+        "context": "Matthew 23:34, Greek ἀποστέλλω",
+        "issue": 42,
+        "greek": "G0649 ἀποστέλλω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "acts",
+        "chapter": 25,
+        "verse": 5,
+        "word_index": 10,
+        "text": "יַעֲנוּ",
+        "strong": "H6031",
+        "prefixes": []
+      },
+      "previous_strong": "H6031",
+      "new_strong": "H6030",
+      "reason": "יַעֲנוּ is answer; H6031 עָנָה 'afflict, humble' is a different word",
+      "evidence": {
+        "lexicon": "H6030 עָנָה answer",
+        "grammar": "word",
+        "context": "Acts 25:5, Greek κατηγορέω",
+        "issue": 42,
+        "greek": "G2723 κατηγορέω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 19,
+        "verse": 21,
+        "word_index": 8,
+        "text": "מְכֹר",
+        "strong": "H6087",
+        "prefixes": []
+      },
+      "previous_strong": "H6087",
+      "new_strong": "H4376",
+      "reason": "מְכֹר is sell; H6087 עָצַב 'grieve' is a different word",
+      "evidence": {
+        "lexicon": "H4376 מָכַר sell",
+        "grammar": "word",
+        "context": "Matthew 19:21, Greek πωλέω",
+        "issue": 42,
+        "greek": "G4453 πωλέω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 21,
+        "verse": 15,
+        "word_index": 4,
+        "text": "קְנֵה",
+        "strong": "H7069",
+        "prefixes": []
+      },
+      "previous_strong": "H7069",
+      "new_strong": "H7070",
+      "reason": "קְנֵה is stalk; H7069 קָנָה 'buy' is a different word",
+      "evidence": {
+        "lexicon": "H7070 קָנֶה stalk",
+        "grammar": "word",
+        "context": "Revelation 21:15, Greek κάλαμος",
+        "issue": 42,
+        "greek": "G2563 κάλαμος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians2",
+        "chapter": 13,
+        "verse": 8,
+        "word_index": 3,
+        "text": "יְכוֹלִים",
+        "strong": "H3559",
+        "prefixes": []
+      },
+      "previous_strong": "H3559",
+      "new_strong": "H3201",
+      "reason": "יְכוֹלִים is be able; H3559 כּוּן 'be firm, be established' is a different word",
+      "evidence": {
+        "lexicon": "H3201 יָכֹל be able",
+        "grammar": "word",
+        "context": "2 Corinthians 13:8, Greek δύναμαι",
+        "issue": 42,
+        "greek": "G1410 δύναμαι"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "galatians",
+        "chapter": 4,
+        "verse": 9,
+        "word_index": 7,
+        "text": "שֶׁנּוֹדַעְתֶּם",
+        "strong": "H5046",
+        "prefixes": []
+      },
+      "previous_strong": "H5046",
+      "new_strong": "H3045",
+      "reason": "שֶׁנּוֹדַעְתֶּם is know; H5046 נָגַד 'tell, declare, make known' is a different word",
+      "evidence": {
+        "lexicon": "H3045 יָדַע know",
+        "grammar": "word",
+        "context": "Galatians 4:9, Greek γινώσκω",
+        "issue": 42,
+        "greek": "G1097 γινώσκω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 9,
+        "verse": 50,
+        "word_index": 9,
+        "text": "נֶגְדֵּנוּ",
+        "strong": "H5046",
+        "prefixes": []
+      },
+      "previous_strong": "H5046",
+      "new_strong": "H5048",
+      "reason": "נֶגְדֵּנוּ is in front of, before, opposite; H5046 נָגַד 'tell, declare, make known' is a different word",
+      "evidence": {
+        "lexicon": "H5048 נֶגֶד in front of, before, opposite; against.",
+        "grammar": "word",
+        "context": "Luke 9:50, Greek κατά",
+        "issue": 42,
+        "greek": "G2596 κατά"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "mark",
+        "chapter": 15,
+        "verse": 27,
+        "word_index": 3,
+        "text": "פָרִיצִים",
+        "strong": "H3381",
+        "prefixes": []
+      },
+      "previous_strong": "H3381",
+      "new_strong": "H6530",
+      "reason": "פָרִיצִים is violent one; H3381 יָרַד 'go down, come down, descend' is a different word",
+      "evidence": {
+        "lexicon": "H6530 פְּרִיץ violent one",
+        "grammar": "word",
+        "context": "Mark 15:27, Greek λῃστής",
+        "issue": 42,
+        "greek": "G3027 λῃστής"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians2",
+        "chapter": 12,
+        "verse": 19,
+        "word_index": 14,
+        "text": "חֲבִיבַי",
+        "strong": "H4672",
+        "prefixes": []
+      },
+      "previous_strong": "H4672",
+      "new_strong": "D0175",
+      "reason": "חֲבִיבַי is beloved; H4672 מָצָא 'find' is a different word",
+      "evidence": {
+        "lexicon": "D0175 חביב beloved; dear; cherished.",
+        "grammar": "word",
+        "context": "2 Corinthians 12:19, Greek ἀγαπητός",
+        "issue": 42,
+        "greek": "G0027 ἀγαπητός"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "romans",
+        "chapter": 7,
+        "verse": 9,
+        "word_index": 1,
+        "text": "חָיִיתִי",
+        "strong": "H4672",
+        "prefixes": []
+      },
+      "previous_strong": "H4672",
+      "new_strong": "H2421",
+      "reason": "חָיִיתִי is live; H4672 מָצָא 'find' is a different word",
+      "evidence": {
+        "lexicon": "H2421 חָיָה live",
+        "grammar": "word",
+        "context": "Romans 7:9, Greek ζάω",
+        "issue": 42,
+        "greek": "G2198 ζάω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 9,
+        "verse": 2,
+        "word_index": 9,
+        "text": "חוֹתַם",
+        "strong": "H5921",
+        "prefixes": []
+      },
+      "previous_strong": "H5921",
+      "new_strong": "H2368",
+      "reason": "חוֹתַם is seal; H5921 עַל 'upon' is a different word",
+      "evidence": {
+        "lexicon": "H2368 חוֹתָם seal",
+        "grammar": "word",
+        "context": "1 Corinthians 9:2, Greek σφραγίς",
+        "issue": 42,
+        "greek": "G4973 σφραγίς"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 9,
+        "verse": 6,
+        "word_index": 9,
+        "text": "מִמְּלָאכָה׃",
+        "strong": "H5921",
+        "prefixes": []
+      },
+      "previous_strong": "H5921",
+      "new_strong": "H4399",
+      "reason": "מִמְּלָאכָה׃ is occupation; H5921 עַל 'upon' is a different word",
+      "evidence": {
+        "lexicon": "H4399 מְלָאכָה occupation",
+        "grammar": "word",
+        "context": "1 Corinthians 9:6, Greek ἐργάζομαι",
+        "issue": 42,
+        "greek": "G2038 ἐργάζομαι"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 9,
+        "verse": 16,
+        "word_index": 9,
+        "text": "מֻטֶּלֶת",
+        "strong": "H5921",
+        "prefixes": []
+      },
+      "previous_strong": "H5921",
+      "new_strong": "H5190",
+      "reason": "מֻטֶּלֶת is lift, bear; H5921 עַל 'upon' is a different word",
+      "evidence": {
+        "lexicon": "H5190 נָטַל lift, bear; lay upon, impose.",
+        "grammar": "word",
+        "context": "1 Corinthians 9:16, Greek ἐπίκειμαι",
+        "issue": 42,
+        "greek": "G1945 ἐπίκειμαι"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "matthew",
+        "chapter": 7,
+        "verse": 10,
+        "word_index": 4,
+        "text": "הֲיִתֶּן־",
+        "strong": "H5921",
+        "prefixes": []
+      },
+      "previous_strong": "H5921",
+      "new_strong": "H5414",
+      "reason": "הֲיִתֶּן־ is give; H5921 עַל 'upon' is a different word",
+      "evidence": {
+        "lexicon": "H5414 נָתַן give",
+        "grammar": "word",
+        "context": "Matthew 7:10, Greek ἐπιδίδωμι",
+        "issue": 42,
+        "greek": "G1929 ἐπιδίδωμι"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 7,
+        "verse": 16,
+        "word_index": 6,
+        "text": "שֶׁלִּי",
+        "strong": "H376",
+        "prefixes": []
+      },
+      "previous_strong": "H376",
+      "new_strong": "D0163",
+      "reason": "שֶׁלִּי is of; H376 אִישׁ 'man' is a different word",
+      "evidence": {
+        "lexicon": "D0163 של of; belonging to; that of.",
+        "grammar": "word",
+        "context": "John 7:16, Greek ἐγώ",
+        "issue": 42,
+        "greek": "G1473 ἐγώ"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 7,
+        "verse": 31,
+        "word_index": 12,
+        "text": "תֹּאַר",
+        "strong": "H1961",
+        "prefixes": []
+      },
+      "previous_strong": "H1961",
+      "new_strong": "H8389",
+      "reason": "תֹּאַר is outline; H1961 הָיָה 'be' is a different word",
+      "evidence": {
+        "lexicon": "H8389 תֹּאַר outline",
+        "grammar": "word",
+        "context": "1 Corinthians 7:31, Greek σχῆμα",
+        "issue": 42,
+        "greek": "G4976 σχῆμα"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 7,
+        "verse": 34,
+        "word_index": 12,
+        "text": "דֹּאֶגֶת",
+        "strong": "H1961",
+        "prefixes": []
+      },
+      "previous_strong": "H1961",
+      "new_strong": "H1672",
+      "reason": "דֹּאֶגֶת is be anxious; H1961 הָיָה 'be' is a different word",
+      "evidence": {
+        "lexicon": "H1672 דָּאַג be anxious",
+        "grammar": "word",
+        "context": "1 Corinthians 7:34, Greek μεριμνάω",
+        "issue": 42,
+        "greek": "G3309 μεριμνάω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 9,
+        "verse": 3,
+        "word_index": 1,
+        "text": "הִצְטַדְּקוּתִי",
+        "strong": "H1961",
+        "prefixes": []
+      },
+      "previous_strong": "H1961",
+      "new_strong": "D0148",
+      "reason": "הִצְטַדְּקוּתִי is defense; H1961 הָיָה 'be' is a different word",
+      "evidence": {
+        "lexicon": "D0148 הצטדקות defense; vindication; justification.",
+        "grammar": "word",
+        "context": "1 Corinthians 9:3, Greek ἀπολογία",
+        "issue": 42,
+        "greek": "G0627 ἀπολογία"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 9,
+        "verse": 11,
+        "word_index": 1,
+        "text": "זָרַעְנוּ",
+        "strong": "H1961",
+        "prefixes": []
+      },
+      "previous_strong": "H1961",
+      "new_strong": "H2232",
+      "reason": "זָרַעְנוּ is sow; H1961 הָיָה 'be' is a different word",
+      "evidence": {
+        "lexicon": "H2232 זָרַע sow",
+        "grammar": "word",
+        "context": "1 Corinthians 9:11, Greek σπείρω",
+        "issue": 42,
+        "greek": "G4687 σπείρω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "hebrews",
+        "chapter": 7,
+        "verse": 2,
+        "word_index": 5,
+        "text": "מִכֹּל",
+        "strong": "H1961",
+        "prefixes": []
+      },
+      "previous_strong": "H1961",
+      "new_strong": "H3605",
+      "reason": "מִכֹּל is the whole; H1961 הָיָה 'be' is a different word",
+      "evidence": {
+        "lexicon": "H3605 כֹּל the whole",
+        "grammar": "word",
+        "context": "Hebrews 7:2, Greek πᾶς",
+        "issue": 42,
+        "greek": "G3956 πᾶς"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "hebrews",
+        "chapter": 7,
+        "verse": 3,
+        "word_index": 5,
+        "text": "יַחַשׂ",
+        "strong": "H1961",
+        "prefixes": []
+      },
+      "previous_strong": "H1961",
+      "new_strong": "H3188",
+      "reason": "יַחַשׂ is genealogy; H1961 הָיָה 'be' is a different word",
+      "evidence": {
+        "lexicon": "H3188 יַחַשׂ genealogy",
+        "grammar": "word",
+        "context": "Hebrews 7:3, Greek ἀγενεαλόγητος",
+        "issue": 42,
+        "greek": "G0035 ἀγενεαλόγητος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "hebrews",
+        "chapter": 7,
+        "verse": 12,
+        "word_index": 5,
+        "text": "שֶׁתִּשְׁתַּנֶּה",
+        "strong": "H1961",
+        "prefixes": []
+      },
+      "previous_strong": "H1961",
+      "new_strong": "D0727",
+      "reason": "שֶׁתִּשְׁתַּנֶּה is change; H1961 הָיָה 'be' is a different word",
+      "evidence": {
+        "lexicon": "D0727 שִׁנָּה change; be changed, be transformed.",
+        "grammar": "word",
+        "context": "Hebrews 7:12, Greek μετατίθημι",
+        "issue": 42,
+        "greek": "G3346 μετατίθημι"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "hebrews",
+        "chapter": 7,
+        "verse": 15,
+        "word_index": 5,
+        "text": "יוּקַם",
+        "strong": "H1961",
+        "prefixes": []
+      },
+      "previous_strong": "H1961",
+      "new_strong": "H6965",
+      "reason": "יוּקַם is arise; H1961 הָיָה 'be' is a different word",
+      "evidence": {
+        "lexicon": "H6965 קוּם arise",
+        "grammar": "word",
+        "context": "Hebrews 7:15, Greek ἀνίστημι",
+        "issue": 42,
+        "greek": "G0450 ἀνίστημι"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 1,
+        "verse": 13,
+        "word_index": 13,
+        "text": "נוֹלָדוּ׃",
+        "strong": "H1961",
+        "prefixes": []
+      },
+      "previous_strong": "H1961",
+      "new_strong": "H3205",
+      "reason": "נוֹלָדוּ׃ is bear; H1961 הָיָה 'be' is a different word",
+      "evidence": {
+        "lexicon": "H3205 יָלַד bear",
+        "grammar": "word",
+        "context": "John 1:13, Greek γεννάω",
+        "issue": 42,
+        "greek": "G1080 γεννάω"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 6,
+        "verse": 19,
+        "word_index": 8,
+        "text": "רִיס",
+        "strong": "H3381",
+        "prefixes": []
+      },
+      "previous_strong": "H3381",
+      "new_strong": "D0912",
+      "reason": "רִיס is ris; H3381 יָרַד 'go down, come down, descend' is a different word",
+      "evidence": {
+        "lexicon": "D0912 רִיס ris; a stadium, the Greek measure of distance of about 185 metres.",
+        "grammar": "noun",
+        "context": "John 6:19, Greek στάδιος",
+        "issue": 42,
+        "greek": "G4712 στάδιος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "john",
+        "chapter": 11,
+        "verse": 18,
+        "word_index": 8,
+        "text": "רִיס׃",
+        "strong": "H1540",
+        "prefixes": []
+      },
+      "previous_strong": "H1540",
+      "new_strong": "D0912",
+      "reason": "רִיס׃ is ris; H1540 גָּלָה 'uncover' is a different word",
+      "evidence": {
+        "lexicon": "D0912 רִיס ris; a stadium, the Greek measure of distance of about 185 metres.",
+        "grammar": "noun",
+        "context": "John 11:18, Greek στάδιος",
+        "issue": 42,
+        "greek": "G4712 στάδιος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "luke",
+        "chapter": 24,
+        "verse": 13,
+        "word_index": 13,
+        "text": "רִיס",
+        "strong": "H5115",
+        "prefixes": []
+      },
+      "previous_strong": "H5115",
+      "new_strong": "D0912",
+      "reason": "רִיס is ris; H5115 נָוָה 'dwell' is a different word",
+      "evidence": {
+        "lexicon": "D0912 רִיס ris; a stadium, the Greek measure of distance of about 185 metres.",
+        "grammar": "noun",
+        "context": "Luke 24:13, Greek στάδιος",
+        "issue": 42,
+        "greek": "G4712 στάδιος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 14,
+        "verse": 20,
+        "word_index": 15,
+        "text": "רִיס׃",
+        "strong": "H3913",
+        "prefixes": []
+      },
+      "previous_strong": "H3913",
+      "new_strong": "D0912",
+      "reason": "רִיס׃ is ris; H3913 לָטַשׁ 'hammer' is a different word",
+      "evidence": {
+        "lexicon": "D0912 רִיס ris; a stadium, the Greek measure of distance of about 185 metres.",
+        "grammar": "noun",
+        "context": "Revelation 14:20, Greek στάδιος",
+        "issue": 42,
+        "greek": "G4712 στάδιος"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 21,
+        "verse": 16,
+        "word_index": 13,
+        "text": "רִיס",
+        "strong": "H7945",
+        "prefixes": []
+      },
+      "previous_strong": "H7945",
+      "new_strong": "D0912",
+      "reason": "רִיס is ris; H7945 שֶׁל 'who' is a different word",
+      "evidence": {
+        "lexicon": "D0912 רִיס ris; a stadium, the Greek measure of distance of about 185 metres.",
+        "grammar": "noun",
+        "context": "Revelation 21:16, Greek σταδίων",
+        "issue": 42,
+        "greek_note": "the Greek source of this verse drops σταδίων from ἐπὶ σταδίων δώδεκα χιλιάδων; Delitzsch renders twelve thousand ris"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "revelation",
+        "chapter": 3,
+        "verse": 18,
+        "word_index": 20,
+        "text": "קִילוֹרִית",
+        "strong": "H3381",
+        "prefixes": []
+      },
+      "previous_strong": "H3381",
+      "new_strong": "D0913",
+      "reason": "קִילוֹרִית is eye-salve; H3381 יָרַד 'go down, come down, descend' is a different word",
+      "evidence": {
+        "lexicon": "D0913 קִילוֹרִית eye-salve; a Greek loanword (κολλούριον).",
+        "grammar": "noun",
+        "context": "Revelation 3:18, Greek κολλούριον",
+        "issue": 42,
+        "greek": "G2854 κολλούριον"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 6,
+        "verse": 7,
+        "word_index": 2,
+        "text": "יְרִידָה",
+        "strong": "H3381",
+        "prefixes": []
+      },
+      "previous_strong": "H3381",
+      "new_strong": "D0914",
+      "reason": "יְרִידָה is a coming down, decline; H3381 יָרַד 'go down, come down, descend' is a different word",
+      "evidence": {
+        "lexicon": "D0914 יְרִידָה a coming down, decline; loss, defeat, a post-biblical Hebrew noun.",
+        "grammar": "noun",
+        "context": "1 Corinthians 6:7, Greek ἥττημα",
+        "issue": 42,
+        "greek": "G2275 ἥττημα"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "timothy2",
+        "chapter": 2,
+        "verse": 25,
+        "word_index": 4,
+        "text": "הַמִּתְנַגְּדִים",
+        "strong": "Hd/H5046",
+        "prefixes": [
+          "Hd"
+        ]
+      },
+      "previous_strong": "Hd/H5046",
+      "new_strong": "Hd/D0915",
+      "reason": "הַמִּתְנַגְּדִים is oppose, set oneself against; H5046 נָגַד 'tell, declare, make known' is a different word",
+      "evidence": {
+        "lexicon": "D0915 הִתְנַגֵּד oppose, set oneself against; a post-biblical Hebrew verb.",
+        "grammar": "article ה + verb",
+        "context": "2 Timothy 2:25, Greek ἀντιδιατίθημι",
+        "issue": 42,
+        "greek": "G0475 ἀντιδιατίθημι"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 9,
+        "verse": 10,
+        "word_index": 1,
+        "text": "חוֹשֵׁשׁ",
+        "strong": "H1961",
+        "prefixes": []
+      },
+      "previous_strong": "H1961",
+      "new_strong": "D0916",
+      "reason": "חוֹשֵׁשׁ is be concerned, care about; H1961 הָיָה 'be' is a different word",
+      "evidence": {
+        "lexicon": "D0916 חָשַׁשׁ be concerned, care about; fear, suspect, a post-biblical Hebrew verb.",
+        "grammar": "verb",
+        "context": "1 Corinthians 9:10, Greek μέλει (9:9)",
+        "issue": 42,
+        "greek_note": "the SBLGNT ends 9:9 with μὴ τῶν βοῶν μέλει τῷ θεῷ; Delitzsch opens 9:10 with it, 'does God care for oxen'"
+      }
+    },
+    {
+      "action": "set_strong",
+      "issue_type": "lexical_review",
+      "reviewer": "claude-delitzsch-review",
+      "confidence": 0.9,
+      "occurrence": {
+        "book": "corinthians1",
+        "chapter": 7,
+        "verse": 10,
+        "word_index": 12,
+        "text": "תִפְרשׁ",
+        "strong": "H1961",
+        "prefixes": []
+      },
+      "previous_strong": "H1961",
+      "new_strong": "D0917",
+      "reason": "תִפְרשׁ is separate, depart, withdraw; H1961 הָיָה 'be' is a different word",
+      "evidence": {
+        "lexicon": "D0917 פָּרַשׁ separate, depart, withdraw; a post-biblical Hebrew sense.",
+        "grammar": "verb",
+        "context": "1 Corinthians 7:10, Greek χωρίζω",
+        "issue": 42,
+        "greek": "G5563 χωρίζω"
+      }
+    }
+  ]
+}

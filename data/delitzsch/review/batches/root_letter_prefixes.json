@@ -997,42 +997,6 @@
       "action": "set_strong",
       "confidence": 0.95,
       "evidence": {
-        "consonants": "וברק",
-        "lemma": "ברק",
-        "prefix_letters": "וב",
-        "strong_review": {
-          "logged_at": "2026-05-29T19:21:02.401046+00:00",
-          "new_strong": "H1301",
-          "reason": "וּבָרָק is Barak the judge; H1301 proper-name entry fits better than H1300 lightning.",
-          "reviewer": "codex-desktop",
-          "status": "applied"
-        }
-      },
-      "issue_type": "root_letter_prefix",
-      "new_prefixes": [
-        "Hc"
-      ],
-      "new_strong": "H1301",
-      "occurrence": {
-        "book": "hebrews",
-        "chapter": 11,
-        "prefixes": [
-          "Hc",
-          "Hb"
-        ],
-        "strong": "H1301",
-        "text": "וּבָרָק",
-        "verse": 32,
-        "word_index": 11
-      },
-      "previous_strong": "H1301",
-      "reason": "The tagged prefix letters ב begin the lemma ברק of the reviewed Strong H1301, so they are root letters, not prefixes.",
-      "reviewer": "rule:root_letter_prefix_v1"
-    },
-    {
-      "action": "set_strong",
-      "confidence": 0.95,
-      "evidence": {
         "consonants": "בעל",
         "lemma": "בעל",
         "prefix_letters": "ב",
@@ -1162,39 +1126,6 @@
       },
       "previous_strong": "H3947",
       "reason": "The tagged prefix letters ל begin the lemma לקח of the reviewed Strong H3947, so they are root letters, not prefixes.",
-      "reviewer": "rule:root_letter_prefix_v1"
-    },
-    {
-      "action": "set_strong",
-      "confidence": 0.95,
-      "evidence": {
-        "consonants": "בחלתי",
-        "lemma": "בחל",
-        "prefix_letters": "ב",
-        "strong_review": {
-          "logged_at": "2026-05-29T14:49:52.287706+00:00",
-          "new_strong": "H973",
-          "reason": "בחלתי means “I rejected/loathed,” from בחל.",
-          "reviewer": "codex-delitzsch-review",
-          "status": "applied"
-        }
-      },
-      "issue_type": "root_letter_prefix",
-      "new_prefixes": [],
-      "new_strong": "H973",
-      "occurrence": {
-        "book": "hebrews",
-        "chapter": 8,
-        "prefixes": [
-          "Hb"
-        ],
-        "strong": "H973",
-        "text": "בָּחַלְתִּי",
-        "verse": 9,
-        "word_index": 18
-      },
-      "previous_strong": "H973",
-      "reason": "The tagged prefix letters ב begin the lemma בחל of the reviewed Strong H973, so they are root letters, not prefixes.",
       "reviewer": "rule:root_letter_prefix_v1"
     },
     {
