@@ -21,6 +21,7 @@
         "visibility": "public"
       },
       "relation": "translation_correspondence",
+      "review": "unreviewed",
       "shape": "one_to_many",
       "source": [
         "unit:token:passage:sblgnt-tagnt:romans:1:5208683ba6288c5d3d1859339ead0878f1f188f00998985dbc5f3840fd33b858:18"
@@ -31,7 +32,7 @@
       ],
       "version": {
         "path": "data/knowledge/evidence/romans-v1/authored.json",
-        "sha256": "9fea5ef1cb1305a26621cca122d6d4edfba4ccc07763cb95df4a2256065f1552"
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
       }
     },
     {
@@ -55,6 +56,7 @@
         "visibility": "public"
       },
       "relation": "translation_correspondence",
+      "review": "unreviewed",
       "shape": "one_to_one",
       "source": [
         "unit:verse:sblgnt-tagnt:romans:1:16"
@@ -65,7 +67,7 @@
       ],
       "version": {
         "path": "data/knowledge/evidence/romans-v1/authored.json",
-        "sha256": "9fea5ef1cb1305a26621cca122d6d4edfba4ccc07763cb95df4a2256065f1552"
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
       }
     },
     {
@@ -89,6 +91,7 @@
         "visibility": "public"
       },
       "relation": "translation_correspondence",
+      "review": "unreviewed",
       "shape": "one_to_one",
       "source": [
         "unit:verse:sblgnt-tagnt:romans:1:16"
@@ -99,7 +102,7 @@
       ],
       "version": {
         "path": "data/knowledge/evidence/romans-v1/authored.json",
-        "sha256": "9fea5ef1cb1305a26621cca122d6d4edfba4ccc07763cb95df4a2256065f1552"
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
       }
     },
     {
@@ -123,6 +126,7 @@
         "visibility": "public"
       },
       "relation": "translation_correspondence",
+      "review": "unreviewed",
       "shape": "one_to_one",
       "source": [
         "unit:token:passage:sblgnt-tagnt:romans:1:28cc92fd5bdb8b2f0784e1878ab89fc70007a0d83755b7918d19b590ca46be3b:1"
@@ -133,7 +137,7 @@
       ],
       "version": {
         "path": "data/knowledge/evidence/romans-v1/authored.json",
-        "sha256": "9fea5ef1cb1305a26621cca122d6d4edfba4ccc07763cb95df4a2256065f1552"
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
       }
     },
     {
@@ -157,6 +161,7 @@
         "visibility": "public"
       },
       "relation": "translation_correspondence",
+      "review": "unreviewed",
       "shape": "many_to_one",
       "source": [
         "unit:phrase:passage:sblgnt-tagnt:romans:1:28cc92fd5bdb8b2f0784e1878ab89fc70007a0d83755b7918d19b590ca46be3b:7+8"
@@ -167,7 +172,7 @@
       ],
       "version": {
         "path": "data/knowledge/evidence/romans-v1/authored.json",
-        "sha256": "9fea5ef1cb1305a26621cca122d6d4edfba4ccc07763cb95df4a2256065f1552"
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
       }
     },
     {
@@ -191,6 +196,7 @@
         "visibility": "public"
       },
       "relation": "translation_correspondence",
+      "review": "unreviewed",
       "shape": "many_to_one",
       "source": [
         "unit:phrase:passage:sblgnt-tagnt:romans:1:28cc92fd5bdb8b2f0784e1878ab89fc70007a0d83755b7918d19b590ca46be3b:13+14+15"
@@ -201,7 +207,7 @@
       ],
       "version": {
         "path": "data/knowledge/evidence/romans-v1/authored.json",
-        "sha256": "9fea5ef1cb1305a26621cca122d6d4edfba4ccc07763cb95df4a2256065f1552"
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
       }
     },
     {
@@ -227,6 +233,7 @@
         "visibility": "public"
       },
       "relation": "quotation_of",
+      "review": "unreviewed",
       "shape": "many_to_many",
       "source": [
         "unit:phrase:passage:delitzsch:romans:1:3317113069ff2781ffd8354ab1dbd9b420345fab616f073e495bb3c6572a59cf:10+11+12"
@@ -237,7 +244,7 @@
       ],
       "version": {
         "path": "data/knowledge/evidence/romans-v1/authored.json",
-        "sha256": "9fea5ef1cb1305a26621cca122d6d4edfba4ccc07763cb95df4a2256065f1552"
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
       }
     },
     {
@@ -263,6 +270,7 @@
         "visibility": "public"
       },
       "relation": "quotation_of",
+      "review": "unreviewed",
       "shape": "many_to_many",
       "source": [
         "unit:phrase:passage:sblgnt-tagnt:romans:1:28cc92fd5bdb8b2f0784e1878ab89fc70007a0d83755b7918d19b590ca46be3b:13+14+15+16+17+18"
@@ -273,7 +281,7 @@
       ],
       "version": {
         "path": "data/knowledge/evidence/romans-v1/authored.json",
-        "sha256": "9fea5ef1cb1305a26621cca122d6d4edfba4ccc07763cb95df4a2256065f1552"
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
       }
     },
     {
@@ -297,6 +305,7 @@
         "visibility": "public"
       },
       "relation": "translation_correspondence",
+      "review": "unreviewed",
       "shape": "one_to_one",
       "source": [
         "unit:verse:sblgnt-tagnt:romans:1:17"
@@ -307,7 +316,7 @@
       ],
       "version": {
         "path": "data/knowledge/evidence/romans-v1/authored.json",
-        "sha256": "9fea5ef1cb1305a26621cca122d6d4edfba4ccc07763cb95df4a2256065f1552"
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
       }
     },
     {
@@ -331,6 +340,7 @@
         "visibility": "public"
       },
       "relation": "translation_correspondence",
+      "review": "unreviewed",
       "shape": "one_to_one",
       "source": [
         "unit:verse:sblgnt-tagnt:romans:1:17"
@@ -341,13 +351,13 @@
       ],
       "version": {
         "path": "data/knowledge/evidence/romans-v1/authored.json",
-        "sha256": "9fea5ef1cb1305a26621cca122d6d4edfba4ccc07763cb95df4a2256065f1552"
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
       }
     }
   ],
   "authored": {
     "path": "data/knowledge/evidence/romans-v1/authored.json",
-    "sha256": "9fea5ef1cb1305a26621cca122d6d4edfba4ccc07763cb95df4a2256065f1552"
+    "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
   },
   "contract_version": "1.0.0",
   "evidence": [
@@ -377,6 +387,7 @@
         "collection": "evidence",
         "id": "evidence:bdb-root:H1540"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -416,6 +427,7 @@
         "collection": "evidence",
         "id": "evidence:bdb-root:H1931"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -455,6 +467,7 @@
         "collection": "evidence",
         "id": "evidence:bdb-root:H2421"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -494,6 +507,7 @@
         "collection": "evidence",
         "id": "evidence:bdb-root:H3474"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -533,6 +547,7 @@
         "collection": "evidence",
         "id": "evidence:bdb-root:H3789"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -572,6 +587,7 @@
         "collection": "evidence",
         "id": "evidence:bdb-root:H539"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -611,6 +627,7 @@
         "collection": "evidence",
         "id": "evidence:bdb-root:H6075"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -650,6 +667,7 @@
         "collection": "evidence",
         "id": "evidence:bdb-root:H954"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -689,6 +707,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H1309"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -728,6 +747,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H1369"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -767,6 +787,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H1571"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -806,6 +827,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H2009"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -845,6 +867,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H3064"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -884,6 +907,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H3588"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -923,6 +947,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H3605"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -962,6 +987,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H3651"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1001,6 +1027,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H369"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1040,6 +1067,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H3808"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1079,6 +1107,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H413"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1118,6 +1147,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H430"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1157,6 +1187,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H4899"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1196,6 +1227,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H530"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1235,6 +1267,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H5315"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1274,6 +1307,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H6662"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1313,6 +1347,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H6666"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1352,6 +1387,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H7223"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1391,6 +1427,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H834"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1430,6 +1467,7 @@
         "collection": "evidence",
         "id": "evidence:bdb:H8668"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1470,6 +1508,7 @@
         "collection": "evidence",
         "id": "evidence:passage:tth-es:romans:1:b9239da22130ce8686c0a8e98c6e12766360832851740760e5b941cc5f22531a:footnote:0"
       },
+      "review": "unreviewed",
       "role": "translator_note",
       "status": "imported",
       "unit_ids": [
@@ -1510,6 +1549,7 @@
         "collection": "evidence",
         "id": "evidence:passage:tth-es:romans:1:c67a5327c5a2663711bfb03db9f920d0d7f10d949426451ed4299e7e55d91e38:footnote:0"
       },
+      "review": "unreviewed",
       "role": "translator_note",
       "status": "imported",
       "unit_ids": [
@@ -1549,6 +1589,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G0601"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1588,6 +1629,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G0846"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1627,6 +1669,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G1063"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1666,6 +1709,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G1125"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1705,6 +1749,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G1161"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1744,6 +1789,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G1342"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1783,6 +1829,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G1343"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1822,6 +1869,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G1411"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1861,6 +1909,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G1510"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1900,6 +1949,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G1519"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1939,6 +1989,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G1537"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -1978,6 +2029,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G1672"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -2017,6 +2069,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G1722"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -2056,6 +2109,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G1870"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -2095,6 +2149,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G2098"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -2134,6 +2189,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G2198"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -2173,6 +2229,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G2316"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -2212,6 +2269,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G2453"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -2251,6 +2309,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G2531"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -2290,6 +2349,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G2532"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -2329,6 +2389,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G3588"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -2368,6 +2429,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G3756"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -2407,6 +2469,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G3956"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -2446,6 +2509,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G4100"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -2485,6 +2549,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G4102G"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -2524,6 +2589,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G4413G"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -2563,6 +2629,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G4991"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -2602,6 +2669,7 @@
         "collection": "evidence",
         "id": "evidence:tagnt:G5037"
       },
+      "review": "unreviewed",
       "role": "lexicon_entry",
       "status": "imported",
       "unit_ids": [
@@ -2653,6 +2721,7 @@
         "collection": "passages",
         "id": "passage:delitzsch:romans:1:3317113069ff2781ffd8354ab1dbd9b420345fab616f073e495bb3c6572a59cf"
       },
+      "review": "unreviewed",
       "role": "hebrew_translation",
       "status": "imported",
       "unit_ids": [
@@ -2704,6 +2773,7 @@
         "collection": "passages",
         "id": "passage:delitzsch:romans:1:c2fbb42cfc8d3403162963773c18a96c12866a6dca891e6e4e73a53bcb8cbee7"
       },
+      "review": "unreviewed",
       "role": "hebrew_translation",
       "status": "imported",
       "unit_ids": [
@@ -2754,6 +2824,7 @@
         "collection": "passages",
         "id": "passage:oe:habakkuk:2:488ff6ede626d42c6dd4f0ae7831038dc21f79cc2a10b1c0553fa2350dc5b318"
       },
+      "review": "unreviewed",
       "role": "quoted_source_text",
       "status": "imported",
       "unit_ids": [
@@ -2804,6 +2875,7 @@
         "collection": "passages",
         "id": "passage:sblgnt-tagnt:romans:1:28cc92fd5bdb8b2f0784e1878ab89fc70007a0d83755b7918d19b590ca46be3b"
       },
+      "review": "unreviewed",
       "role": "source_language_text",
       "status": "imported",
       "unit_ids": [
@@ -2854,6 +2926,7 @@
         "collection": "passages",
         "id": "passage:sblgnt-tagnt:romans:1:5208683ba6288c5d3d1859339ead0878f1f188f00998985dbc5f3840fd33b858"
       },
+      "review": "unreviewed",
       "role": "source_language_text",
       "status": "imported",
       "unit_ids": [
@@ -2905,6 +2978,7 @@
         "collection": "passages",
         "id": "passage:tth-es:romans:1:b9239da22130ce8686c0a8e98c6e12766360832851740760e5b941cc5f22531a"
       },
+      "review": "unreviewed",
       "role": "baseline_reference_candidate",
       "status": "imported",
       "unit_ids": [
@@ -2956,6 +3030,7 @@
         "collection": "passages",
         "id": "passage:tth-es:romans:1:c67a5327c5a2663711bfb03db9f920d0d7f10d949426451ed4299e7e55d91e38"
       },
+      "review": "unreviewed",
       "role": "baseline_reference_candidate",
       "status": "imported",
       "unit_ids": [
@@ -2979,12 +3054,14 @@
         },
         "organized_by": "shaul",
         "teaching_source_ids": [
-          "youtube:irpXnhj4cMI"
+          "youtube:VwtpBX1Q444",
+          "youtube:XpT2I9DGotI",
+          "youtube:5yDcBBBWTkY"
         ],
         "transcript_segment": null,
         "work": "Shaul study note on a recorded class"
       },
-      "id": "aev:shaul:evidence:romanos_1_potencia_besorah_justificacion_ira:hoja-lexica",
+      "id": "aev:shaul:evidence:romanos_1_evangelio_justicia_responsabilidad_humana:hoja-lexica",
       "provenance": {
         "locator": {
           "heading": "Hoja léxica",
@@ -2993,14 +3070,15 @@
         "origin": "authored",
         "publication": "draft",
         "review": "unreviewed",
-        "source_id": "source:shaul-romanos_1_potencia_besorah_justificacion_ira",
+        "source_id": "source:shaul-romanos_1_evangelio_justicia_responsabilidad_humana",
         "transformation": "normalized",
         "visibility": "public"
       },
       "record": {
         "collection": "evidence",
-        "id": "shaul:evidence:romanos_1_potencia_besorah_justificacion_ira:hoja-lexica"
+        "id": "shaul:evidence:romanos_1_evangelio_justicia_responsabilidad_humana:hoja-lexica"
       },
+      "review": "unreviewed",
       "role": "study_note",
       "status": "authored",
       "unit_ids": [
@@ -3012,11 +3090,11 @@
         "unit:verse:tth-es:romans:1:17"
       ],
       "version": {
-        "path": "content/besorah/romanos_1_potencia_besorah_justificacion_ira.md",
+        "path": "content/besorah/romanos_1_evangelio_justicia_responsabilidad_humana.md",
         "repository": "https://github.com/jhonnyisaacc/shaul",
         "revision": "8c94b0fe9eca817e22340430309801d0ef76125b",
-        "sha256": "df13496eac3b79fb7527b9bb7110163f8d2e5ddf311bc1fa051093a7f8b8469d",
-        "source_id": "source:shaul-romanos_1_potencia_besorah_justificacion_ira"
+        "sha256": "b258d4de9bd1c3c92eea09266f6d2960e9118486f80c7238aaf72127ad6c05a2",
+        "source_id": "source:shaul-romanos_1_evangelio_justicia_responsabilidad_humana"
       }
     },
     {
@@ -3024,33 +3102,36 @@
       "context": {
         "author": "Eric de Jesús Rodríguez Mendoza",
         "locator": {
-          "heading": "La potencia de la Besorah y la justicia revelada",
+          "heading": "Evangelio y justicia revelada",
           "kind": "markdown"
         },
         "organized_by": "shaul",
         "teaching_source_ids": [
-          "youtube:irpXnhj4cMI"
+          "youtube:VwtpBX1Q444",
+          "youtube:XpT2I9DGotI",
+          "youtube:5yDcBBBWTkY"
         ],
         "transcript_segment": null,
         "work": "Shaul study note on a recorded class"
       },
-      "id": "aev:shaul:evidence:romanos_1_potencia_besorah_justificacion_ira:justicia-revelada",
+      "id": "aev:shaul:evidence:romanos_1_evangelio_justicia_responsabilidad_humana:justicia-revelada",
       "provenance": {
         "locator": {
-          "heading": "La potencia de la Besorah y la justicia revelada",
+          "heading": "Evangelio y justicia revelada",
           "kind": "markdown"
         },
         "origin": "authored",
         "publication": "draft",
         "review": "unreviewed",
-        "source_id": "source:shaul-romanos_1_potencia_besorah_justificacion_ira",
+        "source_id": "source:shaul-romanos_1_evangelio_justicia_responsabilidad_humana",
         "transformation": "normalized",
         "visibility": "public"
       },
       "record": {
         "collection": "evidence",
-        "id": "shaul:evidence:romanos_1_potencia_besorah_justificacion_ira:justicia-revelada"
+        "id": "shaul:evidence:romanos_1_evangelio_justicia_responsabilidad_humana:justicia-revelada"
       },
+      "review": "unreviewed",
       "role": "study_note",
       "status": "authored",
       "unit_ids": [
@@ -3062,11 +3143,11 @@
         "unit:verse:tth-es:romans:1:17"
       ],
       "version": {
-        "path": "content/besorah/romanos_1_potencia_besorah_justificacion_ira.md",
+        "path": "content/besorah/romanos_1_evangelio_justicia_responsabilidad_humana.md",
         "repository": "https://github.com/jhonnyisaacc/shaul",
         "revision": "8c94b0fe9eca817e22340430309801d0ef76125b",
-        "sha256": "df13496eac3b79fb7527b9bb7110163f8d2e5ddf311bc1fa051093a7f8b8469d",
-        "source_id": "source:shaul-romanos_1_potencia_besorah_justificacion_ira"
+        "sha256": "b258d4de9bd1c3c92eea09266f6d2960e9118486f80c7238aaf72127ad6c05a2",
+        "source_id": "source:shaul-romanos_1_evangelio_justicia_responsabilidad_humana"
       }
     },
     {
@@ -3074,33 +3155,36 @@
       "context": {
         "author": "Eric de Jesús Rodríguez Mendoza",
         "locator": {
-          "heading": "Pendiente de verificar",
+          "heading": "Reparación desarrollada: del evangelio anunciado al juicio de la idolatría",
           "kind": "markdown"
         },
         "organized_by": "shaul",
         "teaching_source_ids": [
-          "youtube:irpXnhj4cMI"
+          "youtube:VwtpBX1Q444",
+          "youtube:XpT2I9DGotI",
+          "youtube:5yDcBBBWTkY"
         ],
         "transcript_segment": null,
         "work": "Shaul study note on a recorded class"
       },
-      "id": "aev:shaul:evidence:romanos_1_potencia_besorah_justificacion_ira:pendiente",
+      "id": "aev:shaul:evidence:romanos_1_evangelio_justicia_responsabilidad_humana:reparacion-evangelio-anunciado",
       "provenance": {
         "locator": {
-          "heading": "Pendiente de verificar",
+          "heading": "Reparación desarrollada: del evangelio anunciado al juicio de la idolatría",
           "kind": "markdown"
         },
         "origin": "authored",
         "publication": "draft",
         "review": "unreviewed",
-        "source_id": "source:shaul-romanos_1_potencia_besorah_justificacion_ira",
+        "source_id": "source:shaul-romanos_1_evangelio_justicia_responsabilidad_humana",
         "transformation": "normalized",
         "visibility": "public"
       },
       "record": {
         "collection": "evidence",
-        "id": "shaul:evidence:romanos_1_potencia_besorah_justificacion_ira:pendiente"
+        "id": "shaul:evidence:romanos_1_evangelio_justicia_responsabilidad_humana:reparacion-evangelio-anunciado"
       },
+      "review": "unreviewed",
       "role": "study_note",
       "status": "authored",
       "unit_ids": [
@@ -3112,44 +3196,81 @@
         "unit:verse:tth-es:romans:1:17"
       ],
       "version": {
-        "path": "content/besorah/romanos_1_potencia_besorah_justificacion_ira.md",
+        "path": "content/besorah/romanos_1_evangelio_justicia_responsabilidad_humana.md",
         "repository": "https://github.com/jhonnyisaacc/shaul",
         "revision": "8c94b0fe9eca817e22340430309801d0ef76125b",
-        "sha256": "df13496eac3b79fb7527b9bb7110163f8d2e5ddf311bc1fa051093a7f8b8469d",
-        "source_id": "source:shaul-romanos_1_potencia_besorah_justificacion_ira"
+        "sha256": "b258d4de9bd1c3c92eea09266f6d2960e9118486f80c7238aaf72127ad6c05a2",
+        "source_id": "source:shaul-romanos_1_evangelio_justicia_responsabilidad_humana"
       }
     }
   ],
   "foundation": {
-    "input_manifest_digest": "42635f91ba7b968a2657fc7c8209d040b65f03c157127bfcb5341bf266994244",
+    "input_manifest_digest": "52434efd6da96bf395ee758f6defa628a48fe69f52ef6fe9989204996fad721e",
     "profile": "data/knowledge/evidence/romans-v1/profile.json",
-    "records_sha256": "f534eaa4620501a2a59f75902b788cd910159515c2b4e2aba3b5bc2cf84d6047"
+    "records_sha256": "8e335a6dd504cfe0046b59fad1c15b60090d57bcba2ae1ee8e03609686172bf8"
   },
   "generator_version": "1.0.0",
   "inventory": [
     {
+      "availability": "missing_connector",
       "category": "EXISTING_TRANSLATION",
       "id": "inventory:bes",
       "paths": [
         "data/bes/json/romans.json"
       ],
+      "provenance": {
+        "locator": {
+          "kind": "json",
+          "pointer": "/inventory/9"
+        },
+        "origin": "authored",
+        "publication": "draft",
+        "review": "unreviewed",
+        "source_id": "source:authored-evidence-alignment",
+        "transformation": "normalized",
+        "visibility": "public"
+      },
       "reason": "Davar has the text, but the foundation has no BES scripture adapter.",
+      "review": "unreviewed",
       "role": "comparison_reference",
-      "status": "missing_connector",
-      "subject": "BES Spanish (SPABES) Romans"
+      "status": "authored",
+      "subject": "BES Spanish (SPABES) Romans",
+      "version": {
+        "path": "data/knowledge/evidence/romans-v1/authored.json",
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
+      }
     },
     {
+      "availability": "deferred",
       "category": "LEXICAL_DATA",
       "id": "inventory:contextual-relationships",
       "paths": [
         "shared/contextualRelationships.json"
       ],
+      "provenance": {
+        "locator": {
+          "kind": "json",
+          "pointer": "/inventory/8"
+        },
+        "origin": "authored",
+        "publication": "draft",
+        "review": "unreviewed",
+        "source_id": "source:authored-evidence-alignment",
+        "transformation": "normalized",
+        "visibility": "public"
+      },
       "reason": "The catalog has no record scoped to Romans 1:16-17. Its Romans records (11:5, 14:14) are unreviewed and outside this slice.",
+      "review": "unreviewed",
       "role": "contextual_relationship",
-      "status": "deferred",
-      "subject": "Contextual Greek-Hebrew relationship catalog"
+      "status": "authored",
+      "subject": "Contextual Greek-Hebrew relationship catalog",
+      "version": {
+        "path": "data/knowledge/evidence/romans-v1/authored.json",
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
+      }
     },
     {
+      "availability": "missing_connector",
       "category": "LEXICAL_DATA",
       "covers": {
         "input_id": "custom"
@@ -3158,120 +3279,192 @@
       "paths": [
         "data/dict/lexicon/custom_definitions.json"
       ],
+      "provenance": {
+        "locator": {
+          "kind": "json",
+          "pointer": "/inventory/2"
+        },
+        "origin": "authored",
+        "publication": "draft",
+        "review": "unreviewed",
+        "source_id": "source:authored-evidence-alignment",
+        "transformation": "normalized",
+        "visibility": "public"
+      },
       "reason": "custom_definitions.json entries carry definitions without a lemma field, and the foundation lexical adapter copies only lemmas. Its tcysite-eric definitions are Eric's contextual teaching material and belong to COMMENTARY_TEACHING once a connector exists.",
+      "review": "unreviewed",
       "role": "custom_definition",
-      "status": "missing_connector",
-      "subject": "Davar custom definitions, including Eric's TCY (tcysite-eric) and TCY Greek definitions"
+      "status": "authored",
+      "subject": "Davar custom definitions, including Eric's TCY (tcysite-eric) and TCY Greek definitions",
+      "version": {
+        "path": "data/knowledge/evidence/romans-v1/authored.json",
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
+      }
     },
     {
       "absent_paths": [
         "data/dict/raw/tcysite/eric/romanos.json",
         "data/dict/raw/tcysite/eric/romanos_1.json"
       ],
+      "availability": "not_available",
       "category": "COMMENTARY_TEACHING",
       "id": "inventory:eric-tcy-romans",
+      "provenance": {
+        "locator": {
+          "kind": "json",
+          "pointer": "/inventory/4"
+        },
+        "origin": "authored",
+        "publication": "draft",
+        "review": "unreviewed",
+        "source_id": "source:authored-evidence-alignment",
+        "transformation": "normalized",
+        "visibility": "public"
+      },
       "reason": "The TCY import has per-book Eric files only for parashot, salmos, qohelet, shir_hashirim, juan, 1-2 tesalonicenses, efesios and apocalipsis.",
+      "review": "unreviewed",
       "role": "contextual_dictionary",
-      "status": "not_available",
-      "subject": "Eric's TCY contextual dictionary for Romans"
+      "status": "authored",
+      "subject": "Eric's TCY contextual dictionary for Romans",
+      "version": {
+        "path": "data/knowledge/evidence/romans-v1/authored.json",
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
+      }
     },
     {
+      "availability": "gap",
       "category": "LEXICAL_DATA",
       "id": "inventory:gap:davar-custom:D0271",
       "reason": "No selectable lexicon entry; data without a connector: inventory:custom-definitions",
-      "status": "gap",
       "subject": "D0271",
       "unit_ids": [
         "unit:lexical:davar-custom:D0271"
       ]
     },
     {
+      "availability": "gap",
       "category": "LEXICAL_DATA",
       "id": "inventory:gap:davar-custom:D0777",
       "reason": "No selectable lexicon entry; data without a connector: inventory:custom-definitions",
-      "status": "gap",
       "subject": "D0777",
       "unit_ids": [
         "unit:lexical:davar-custom:D0777"
       ]
     },
     {
+      "availability": "gap",
       "category": "LEXICAL_DATA",
       "id": "inventory:gap:davar-prefix:Hb",
       "reason": "No selectable lexicon entry; data without a connector: inventory:prefix-particles",
-      "status": "gap",
       "subject": "Hb",
       "unit_ids": [
         "unit:lexical:davar-prefix:Hb"
       ]
     },
     {
+      "availability": "gap",
       "category": "LEXICAL_DATA",
       "id": "inventory:gap:davar-prefix:Hc",
       "reason": "No selectable lexicon entry; data without a connector: inventory:prefix-particles",
-      "status": "gap",
       "subject": "Hc",
       "unit_ids": [
         "unit:lexical:davar-prefix:Hc"
       ]
     },
     {
+      "availability": "gap",
       "category": "LEXICAL_DATA",
       "id": "inventory:gap:davar-prefix:Hd",
       "reason": "No selectable lexicon entry; data without a connector: inventory:prefix-particles",
-      "status": "gap",
       "subject": "Hd",
       "unit_ids": [
         "unit:lexical:davar-prefix:Hd"
       ]
     },
     {
+      "availability": "gap",
       "category": "LEXICAL_DATA",
       "id": "inventory:gap:davar-prefix:Hk",
       "reason": "No selectable lexicon entry; data without a connector: inventory:prefix-particles",
-      "status": "gap",
       "subject": "Hk",
       "unit_ids": [
         "unit:lexical:davar-prefix:Hk"
       ]
     },
     {
+      "availability": "gap",
       "category": "LEXICAL_DATA",
       "id": "inventory:gap:davar-prefix:Hl",
       "reason": "No selectable lexicon entry; data without a connector: inventory:prefix-particles",
-      "status": "gap",
       "subject": "Hl",
       "unit_ids": [
         "unit:lexical:davar-prefix:Hl"
       ]
     },
     {
+      "availability": "missing_connector",
       "category": "EXISTING_TRANSLATION",
       "id": "inventory:hutter",
       "paths": [
         "data/hutter/staging/output/romans.json"
       ],
+      "provenance": {
+        "locator": {
+          "kind": "json",
+          "pointer": "/inventory/10"
+        },
+        "origin": "authored",
+        "publication": "draft",
+        "review": "unreviewed",
+        "source_id": "source:authored-evidence-alignment",
+        "transformation": "normalized",
+        "visibility": "public"
+      },
       "reason": "Davar has staged transcription output, but the foundation has no Hutter adapter.",
+      "review": "unreviewed",
       "role": "hebrew_translation",
-      "status": "missing_connector",
-      "subject": "Hutter 1599 Hebrew Romans"
+      "status": "authored",
+      "subject": "Hutter 1599 Hebrew Romans",
+      "version": {
+        "path": "data/knowledge/evidence/romans-v1/authored.json",
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
+      }
     },
     {
       "absent_paths": [
         "data/lxx"
       ],
+      "availability": "not_available",
       "category": "ANCIENT_TEXTUAL_WITNESS",
       "id": "inventory:lxx",
+      "provenance": {
+        "locator": {
+          "kind": "json",
+          "pointer": "/inventory/1"
+        },
+        "origin": "authored",
+        "publication": "draft",
+        "review": "unreviewed",
+        "source_id": "source:authored-evidence-alignment",
+        "transformation": "normalized",
+        "visibility": "public"
+      },
       "reason": "Neither Davar nor Shaul has an LXX dataset or connector. Romans 1:17 quotes Habakkuk 2:4, where the LXX would be the relevant witness.",
+      "review": "unreviewed",
       "role": "ancient_witness",
-      "status": "not_available",
+      "status": "authored",
       "subject": "Septuagint (LXX), including Habakkuk 2:4",
       "unit_ids": [
         "unit:phrase:passage:oe:habakkuk:2:488ff6ede626d42c6dd4f0ae7831038dc21f79cc2a10b1c0553fa2350dc5b318:7+8+9",
         "unit:phrase:passage:sblgnt-tagnt:romans:1:28cc92fd5bdb8b2f0784e1878ab89fc70007a0d83755b7918d19b590ca46be3b:13+14+15+16+17+18"
-      ]
+      ],
+      "version": {
+        "path": "data/knowledge/evidence/romans-v1/authored.json",
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
+      }
     },
     {
+      "availability": "missing_connector",
       "category": "LEXICAL_DATA",
       "covers": {
         "namespace": "davar-prefix"
@@ -3281,121 +3474,210 @@
         "data/dict/prefixes/prefixes.json",
         "data/dict/prefixes/entries"
       ],
+      "provenance": {
+        "locator": {
+          "kind": "json",
+          "pointer": "/inventory/3"
+        },
+        "origin": "authored",
+        "publication": "draft",
+        "review": "unreviewed",
+        "source_id": "source:authored-evidence-alignment",
+        "transformation": "normalized",
+        "visibility": "public"
+      },
       "reason": "Prefix particles are listed in prefixes.json with entries under data/dict/prefixes/entries, and the foundation lexical adapter cannot select them.",
+      "review": "unreviewed",
       "role": "lexicon_entry",
-      "status": "missing_connector",
-      "subject": "Davar Hebrew prefix particles (Hb, Hc, Hd, Hk, Hl)"
+      "status": "authored",
+      "subject": "Davar Hebrew prefix particles (Hb, Hc, Hd, Hk, Hl)",
+      "version": {
+        "path": "data/knowledge/evidence/romans-v1/authored.json",
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
+      }
     },
     {
+      "availability": "deferred",
       "category": "LEXICAL_DATA",
       "id": "inventory:shaul-emunah-concept",
+      "provenance": {
+        "locator": {
+          "kind": "json",
+          "pointer": "/inventory/7"
+        },
+        "origin": "authored",
+        "publication": "draft",
+        "review": "unreviewed",
+        "source_id": "source:authored-evidence-alignment",
+        "transformation": "normalized",
+        "visibility": "public"
+      },
       "reason": "Shaul records the concept, but no verified mapping joins emunah-he to Strong H530, so no concept unit is asserted for the H530 tokens.",
+      "review": "unreviewed",
       "role": "lexical_concept",
-      "status": "deferred",
-      "subject": "Shaul concept emunah and expression emunah-he"
+      "status": "authored",
+      "subject": "Shaul concept emunah and expression emunah-he",
+      "version": {
+        "path": "data/knowledge/evidence/romans-v1/authored.json",
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
+      }
     },
     {
+      "availability": "deferred",
       "category": "COMMENTARY_TEACHING",
       "id": "inventory:shaul-romans-notes",
-      "reason": "Shaul has 43 public Romans notes at the pinned revision. Only the note covering Romans 1:16-17 is selected for this fixture.",
+      "provenance": {
+        "locator": {
+          "kind": "json",
+          "pointer": "/inventory/6"
+        },
+        "origin": "authored",
+        "publication": "draft",
+        "review": "unreviewed",
+        "source_id": "source:authored-evidence-alignment",
+        "transformation": "normalized",
+        "visibility": "public"
+      },
+      "reason": "Shaul has 43 public Romans notes at the pinned revision. Only the canonical Romans 1 note is selected. The other note on Romans 1:16-17, romanos_1_potencia_besorah_justificacion_ira, quotes TTH text, whose redistribution terms are undecided.",
+      "review": "unreviewed",
       "role": "study_note",
-      "status": "deferred",
-      "subject": "Other public Shaul Romans study notes"
+      "status": "authored",
+      "subject": "Other public Shaul Romans study notes",
+      "version": {
+        "path": "data/knowledge/evidence/romans-v1/authored.json",
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
+      }
     },
     {
+      "availability": "excluded",
       "category": "COMMENTARY_TEACHING",
       "id": "inventory:shaul-transcripts",
-      "reason": "Shaul keeps class transcripts under private paths, which the foundation never reads. The Romans 1 study note names its class as youtube:irpXnhj4cMI but has no timestamped segment, so no media locator is asserted.",
+      "provenance": {
+        "locator": {
+          "kind": "json",
+          "pointer": "/inventory/5"
+        },
+        "origin": "authored",
+        "publication": "draft",
+        "review": "unreviewed",
+        "source_id": "source:authored-evidence-alignment",
+        "transformation": "normalized",
+        "visibility": "public"
+      },
+      "reason": "Shaul keeps class transcripts under private paths, which the foundation never reads. The Romans 1 study note names its classes as youtube:VwtpBX1Q444, youtube:XpT2I9DGotI and youtube:5yDcBBBWTkY but has no timestamped segment, so no media locator is asserted.",
+      "review": "unreviewed",
       "role": "transcript_segment",
-      "status": "excluded",
-      "subject": "Shaul class transcripts"
+      "status": "authored",
+      "subject": "Shaul class transcripts",
+      "version": {
+        "path": "data/knowledge/evidence/romans-v1/authored.json",
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
+      }
     },
     {
+      "availability": "available",
       "categories": [
         "LEXICAL_DATA"
       ],
       "evidence_count": 8,
       "id": "inventory:source:bdb-roots",
-      "status": "available",
       "subject": "data/dict/lexicon/roots.json"
     },
     {
+      "availability": "available",
       "categories": [
         "LEXICAL_DATA"
       ],
       "evidence_count": 20,
       "id": "inventory:source:bdb-words",
-      "status": "available",
       "subject": "data/dict/lexicon/words.json"
     },
     {
+      "availability": "available",
       "categories": [
         "EXISTING_TRANSLATION"
       ],
       "evidence_count": 2,
       "id": "inventory:source:delitzsch-romans-1",
-      "status": "available",
       "subject": "data/delitzsch/parsed/romans/1.json"
     },
     {
+      "availability": "available",
       "categories": [
         "LEXICAL_DATA"
       ],
       "evidence_count": 28,
       "id": "inventory:source:greek-lexicon",
-      "status": "available",
       "subject": "data/greek/preview/greek/releases/sblgnt/5de0a47f35f0fc13dfe1430d104e5db8a4285f9c/lexicon.json"
     },
     {
+      "availability": "available",
       "categories": [
         "SOURCE_TEXT"
       ],
       "evidence_count": 2,
       "id": "inventory:source:greek-romans-1",
-      "status": "available",
       "subject": "data/greek/preview/greek/releases/sblgnt/5de0a47f35f0fc13dfe1430d104e5db8a4285f9c/books/romans/1.json"
     },
     {
+      "availability": "available",
       "categories": [
         "SOURCE_TEXT"
       ],
       "evidence_count": 1,
       "id": "inventory:source:oe-habakkuk-2",
-      "status": "available",
       "subject": "data/oe/habakkuk/2.json"
     },
     {
+      "availability": "available",
       "categories": [
         "COMMENTARY_TEACHING"
       ],
       "evidence_count": 3,
-      "id": "inventory:source:shaul-romanos_1_potencia_besorah_justificacion_ira",
-      "status": "available",
-      "subject": "content/besorah/romanos_1_potencia_besorah_justificacion_ira.md"
+      "id": "inventory:source:shaul-romanos_1_evangelio_justicia_responsabilidad_humana",
+      "subject": "content/besorah/romanos_1_evangelio_justicia_responsabilidad_humana.md"
     },
     {
+      "availability": "available",
       "categories": [
         "COMMENTARY_TEACHING",
         "EXISTING_TRANSLATION"
       ],
       "evidence_count": 4,
       "id": "inventory:source:tth-romanos",
-      "status": "available",
       "subject": "data/tth/json/romanos.json"
     },
     {
       "absent_paths": [
         "data/ts2009"
       ],
+      "availability": "missing_connector",
       "category": "EXISTING_TRANSLATION",
       "id": "inventory:ts2009",
+      "provenance": {
+        "locator": {
+          "kind": "json",
+          "pointer": "/inventory/0"
+        },
+        "origin": "authored",
+        "publication": "draft",
+        "review": "unreviewed",
+        "source_id": "source:authored-evidence-alignment",
+        "transformation": "normalized",
+        "visibility": "public"
+      },
       "reason": "Licensed text is served from Supabase Storage and never committed. The knowledge foundation has no TS2009 adapter and does not distribute licensed TS2009 text.",
+      "review": "unreviewed",
       "role": "comparison_reference",
-      "status": "missing_connector",
-      "subject": "TS2009 English (The Scriptures 2009)"
+      "status": "authored",
+      "subject": "TS2009 English (The Scriptures 2009)",
+      "version": {
+        "path": "data/knowledge/evidence/romans-v1/authored.json",
+        "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670"
+      }
     }
   ],
-  "schema_sha256": "9b710c5a522bf00e8787fdfcbdaac79bc9636fdc337d33827a0225b67881136c",
+  "schema_sha256": "251f0241d1f19ed66f9aa823818451e4a5b7af5b728974cf4502954b3b1db29a",
   "scope": {
     "book_id": "romans",
     "end": {
@@ -3416,8 +3698,8 @@
       "owner": "davar",
       "path": "data/knowledge/evidence/romans-v1/authored.json",
       "repository": "https://github.com/jhonnyisaacc/davar",
-      "revision": "sha256:9fea5ef1cb1305a26621cca122d6d4edfba4ccc07763cb95df4a2256065f1552",
-      "sha256": "9fea5ef1cb1305a26621cca122d6d4edfba4ccc07763cb95df4a2256065f1552",
+      "revision": "sha256:3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670",
+      "sha256": "3ebc8bec48fe95f78f6a1986947669cc266d23a3737ee3639802f476c00f9670",
       "visibility": "public"
     },
     {
@@ -3491,13 +3773,13 @@
       "visibility": "public"
     },
     {
-      "id": "source:shaul-romanos_1_potencia_besorah_justificacion_ira",
+      "id": "source:shaul-romanos_1_evangelio_justicia_responsabilidad_humana",
       "kind": "published_note",
       "owner": "shaul",
-      "path": "content/besorah/romanos_1_potencia_besorah_justificacion_ira.md",
+      "path": "content/besorah/romanos_1_evangelio_justicia_responsabilidad_humana.md",
       "repository": "https://github.com/jhonnyisaacc/shaul",
       "revision": "8c94b0fe9eca817e22340430309801d0ef76125b",
-      "sha256": "df13496eac3b79fb7527b9bb7110163f8d2e5ddf311bc1fa051093a7f8b8469d",
+      "sha256": "b258d4de9bd1c3c92eea09266f6d2960e9118486f80c7238aaf72127ad6c05a2",
       "visibility": "public"
     },
     {

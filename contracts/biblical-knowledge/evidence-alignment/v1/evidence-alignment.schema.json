@@ -35,7 +35,18 @@
     "category": {
       "enum": ["SOURCE_TEXT", "LEXICAL_DATA", "EXISTING_TRANSLATION", "ANCIENT_TEXTUAL_WITNESS", "COMMENTARY_TEACHING", "AI_GENERATED_CANDIDATE", "HUMAN_REVIEWED_DECISION"]
     },
-    "status": {"enum": ["authored", "imported", "generated", "inferred", "reviewed"]},
+    "status": {"enum": ["authored", "imported", "generated", "inferred", "reviewed_decision"]},
+    "review": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/provenance/properties/review"},
+    "authoredRecord": {
+      "type": "object",
+      "properties": {
+        "status": {"const": "authored"},
+        "review": {"$ref": "#/$defs/review"},
+        "provenance": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/provenance"},
+        "version": {"$ref": "#/$defs/fileVersion"}
+      },
+      "required": ["status", "review", "provenance", "version"]
+    },
     "fileVersion": {
       "type": "object",
       "properties": {
@@ -149,6 +160,7 @@
         "category": {"$ref": "#/$defs/category"},
         "role": {"type": "string", "minLength": 1},
         "status": {"$ref": "#/$defs/status"},
+        "review": {"$ref": "#/$defs/review"},
         "unit_ids": {"type": "array", "items": {"type": "string", "pattern": "^unit:"}, "minItems": 1, "uniqueItems": true},
         "record": {
           "type": "object",
@@ -181,7 +193,7 @@
         },
         "provenance": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/provenance"}
       },
-      "required": ["id", "category", "role", "status", "unit_ids", "record", "version", "context", "provenance"],
+      "required": ["id", "category", "role", "status", "review", "unit_ids", "record", "version", "context", "provenance"],
       "additionalProperties": false,
       "allOf": [
         {
@@ -190,7 +202,7 @@
         },
         {
           "if": {"properties": {"category": {"const": "LEXICAL_DATA"}}},
-          "then": {"properties": {"role": {"enum": ["lexicon_entry", "custom_definition"]}, "status": {"enum": ["imported", "authored"]}}}
+          "then": {"properties": {"role": {"enum": ["lexicon_entry", "custom_definition"]}, "status": {"enum": ["imported", "authored", "inferred"]}}}
         },
         {
           "if": {"properties": {"category": {"const": "EXISTING_TRANSLATION"}}},
@@ -205,7 +217,7 @@
           "then": {
             "properties": {
               "role": {"enum": ["translator_note", "study_note", "contextual_dictionary", "transcript_segment"]},
-              "status": {"enum": ["imported", "authored"]},
+              "status": {"enum": ["imported", "authored", "inferred"]},
               "context": {"required": ["work", "locator", "author"]}
             }
           }
@@ -218,19 +230,17 @@
               "status": {"const": "generated"},
               "context": {"required": ["work", "locator", "generator"]}
             }
-          },
-          "else": {"properties": {"status": {"not": {"const": "generated"}}}}
+          }
         },
         {
           "if": {"properties": {"category": {"const": "HUMAN_REVIEWED_DECISION"}}},
           "then": {
             "properties": {
               "role": {"enum": ["review_decision"]},
-              "status": {"const": "reviewed"},
+              "status": {"const": "reviewed_decision"},
               "context": {"required": ["work", "locator", "reviewer"]}
             }
-          },
-          "else": {"properties": {"status": {"not": {"const": "reviewed"}}}}
+          }
         }
       ]
     },
@@ -245,18 +255,19 @@
         "counts": {"type": "array", "items": {"type": "integer", "minimum": 1}, "minItems": 2, "maxItems": 2},
         "shape": {"enum": ["one_to_one", "one_to_many", "many_to_one", "many_to_many"]},
         "evidence_ids": {"type": "array", "items": {"type": "string", "pattern": "^aev:"}, "uniqueItems": true},
-        "status": {"enum": ["authored", "imported", "inferred", "reviewed"]},
+        "status": {"enum": ["authored", "imported", "inferred"]},
+        "review": {"$ref": "#/$defs/review"},
         "provenance": {"$ref": "https://davar.bible/contracts/biblical-knowledge/v1/common.schema.json#/$defs/provenance"},
         "version": {"$ref": "#/$defs/fileVersion"}
       },
-      "required": ["id", "relation", "granularity", "source", "target", "counts", "shape", "evidence_ids", "status", "provenance", "version"],
+      "required": ["id", "relation", "granularity", "source", "target", "counts", "shape", "evidence_ids", "status", "review", "provenance", "version"],
       "additionalProperties": false
     },
     "inventoryRow": {
       "type": "object",
       "properties": {
         "id": {"type": "string", "pattern": "^inventory:"},
-        "status": {"enum": ["available", "missing_connector", "not_available", "deferred", "excluded", "gap"]},
+        "availability": {"enum": ["available", "missing_connector", "not_available", "deferred", "excluded", "gap"]},
         "subject": {"type": "string", "minLength": 1},
         "category": {"$ref": "#/$defs/category"},
         "categories": {"type": "array", "items": {"$ref": "#/$defs/category"}, "minItems": 1},
@@ -266,6 +277,10 @@
         "unit_ids": {"type": "array", "items": {"type": "string", "pattern": "^unit:"}, "minItems": 1},
         "paths": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
         "absent_paths": {"type": "array", "items": {"type": "string", "minLength": 1}, "minItems": 1},
+        "status": true,
+        "review": true,
+        "provenance": true,
+        "version": true,
         "covers": {
           "type": "object",
           "properties": {
@@ -277,11 +292,20 @@
           "additionalProperties": false
         }
       },
-      "required": ["id", "status", "subject"],
+      "required": ["id", "availability", "subject"],
       "additionalProperties": false,
-      "if": {"properties": {"status": {"const": "available"}}},
-      "then": {"required": ["categories", "evidence_count"], "not": {"required": ["reason"]}},
-      "else": {"required": ["category", "reason"], "not": {"required": ["evidence_count"]}}
+      "allOf": [
+        {
+          "if": {"properties": {"availability": {"const": "available"}}},
+          "then": {"required": ["categories", "evidence_count"], "not": {"required": ["reason"]}},
+          "else": {"required": ["category", "reason"], "not": {"required": ["evidence_count"]}}
+        },
+        {
+          "if": {"properties": {"availability": {"enum": ["available", "gap"]}}},
+          "then": {"not": {"anyOf": [{"required": ["status"]}, {"required": ["review"]}, {"required": ["provenance"]}, {"required": ["version"]}]}},
+          "else": {"$ref": "#/$defs/authoredRecord"}
+        }
+      ]
     }
   }
 }

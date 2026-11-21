@@ -4,13 +4,14 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 
 from jsonschema import Draft202012Validator
 from referencing import Resource
 
 from .build import artifacts
-from .core import ROOT, contained, digest, encoded, pinned_inputs, read_json
+from .core import ROOT, contained, digest, encoded, pinned_inputs, read_json, provenance as v1_provenance
 from .validate import Validator
 
 AUTHORED = "data/knowledge/evidence/romans-v1/authored.json"
@@ -38,12 +39,22 @@ CATEGORY_STAGE = {
 }
 
 
-def status(provenance: dict) -> str:
-    if provenance["review"] != "unreviewed":
-        return "reviewed"
+def status(provenance: dict, category: str | None = None) -> str:
+    if category == "HUMAN_REVIEWED_DECISION":
+        return "reviewed_decision"
     if provenance["transformation"] in ("generated", "inferred"):
         return provenance["transformation"]
     return "authored" if provenance["origin"] == "authored" else "imported"
+
+
+def authored_record(pointer: str, authored_sha256: str) -> dict:
+    record = v1_provenance(AUTHORED_SOURCE, pointer, authored=True)
+    return dict(
+        status=status(record),
+        review=record["review"],
+        provenance=record,
+        version={"path": AUTHORED, "sha256": authored_sha256},
+    )
 
 
 def shape(left: int, right: int) -> str:
@@ -187,7 +198,8 @@ def evidence(records: dict, roles: list[dict], units: list[dict]) -> list[dict]:
                 id="aev:" + record["id"],
                 category=role["category"],
                 role=role["role"],
-                status=status(provenance),
+                status=status(provenance, role["category"]),
+                review=provenance["review"],
                 unit_ids=sorted(set(unit_ids)),
                 record={"collection": collection, "id": record["id"]},
                 version={k: source[k] for k in ("repository", "revision", "path", "sha256")} | {"source_id": source["id"]},
@@ -214,15 +226,6 @@ def alignments(specs: list[dict], keys: dict, units: list[dict], authored_sha256
         def count(ids):
             return len(ids) if granularity == "verse" else sum(len(by_id[u]["members"]) for u in ids)
 
-        provenance = dict(
-            source_id=AUTHORED_SOURCE,
-            locator={"kind": "json", "pointer": f"/alignments/{index}"},
-            origin="authored",
-            transformation="normalized",
-            review="unreviewed",
-            publication="draft",
-            visibility="public",
-        )
         result.append(
             dict(
                 id=spec["id"],
@@ -233,16 +236,13 @@ def alignments(specs: list[dict], keys: dict, units: list[dict], authored_sha256
                 counts=[count(source), count(target)],
                 shape=shape(count(source), count(target)),
                 evidence_ids=["aev:" + e for e in spec.get("evidence_ids", [])],
-                status=status(provenance),
-                provenance=provenance,
-                version={"path": AUTHORED, "sha256": authored_sha256},
             )
+            | authored_record(f"/alignments/{index}", authored_sha256)
         )
     return result
 
 
 def inventory(
-    root: Path,
     records: dict,
     declared: list[dict],
     items: list[dict],
@@ -250,24 +250,19 @@ def inventory(
     keys: dict,
     blobs: dict,
     manifest: dict,
+    authored_sha256: str,
 ) -> list[dict]:
-    for row in declared:
-        for path in row.get("paths", []):
-            if not contained(root, path).exists():
-                raise ValueError("Inventory names a missing path: " + path)
-        for path in row.get("absent_paths", []):
-            if contained(root, path).exists():
-                raise ValueError("Inventory calls an existing path absent: " + path)
     rows = [
         {k: v for k, v in row.items() if k != "applies_to"}
         | ({"unit_ids": sorted(keys[k] for k in row["applies_to"])} if "applies_to" in row else {})
-        for row in declared
+        | authored_record(f"/inventory/{index}", authored_sha256)
+        for index, row in enumerate(declared)
     ]
     for source in records["sources"]:
         owned = [e["id"] for e in items if e["version"]["source_id"] == source["id"]]
         if owned:
             categories = sorted({e["category"] for e in items if e["version"]["source_id"] == source["id"]})
-            rows.append(dict(id="inventory:" + source["id"], status="available", subject=source["path"], categories=categories, evidence_count=len(owned)))
+            rows.append(dict(id="inventory:" + source["id"], availability="available", subject=source["path"], categories=categories, evidence_count=len(owned)))
         elif not any(r.get("covers", {}).get("input_id") == source["id"].removeprefix("source:") for r in declared):
             raise ValueError("Pinned source has neither evidence nor an inventory row: " + source["id"])
     lexical = {u["id"]: u["members"][0]["reference"] for u in units if u["level"] == "lexical_concept"}
@@ -298,7 +293,7 @@ def inventory(
         rows.append(
             dict(
                 id=f"inventory:gap:{namespace}:{code}",
-                status="gap",
+                availability="gap",
                 subject=code,
                 category="LEXICAL_DATA",
                 unit_ids=[lexical_unit_id({"namespace": namespace, "code": code})],
@@ -322,7 +317,7 @@ def fixture(root: Path = ROOT) -> bytes:
     units, keys = text_units(records, authored["units"])
     items = evidence(records, authored["roles"], units)
     authored_sha256 = digest(authored_bytes)
-    rows = inventory(root, records, authored["inventory"], items, units, keys, blobs, manifest)
+    rows = inventory(records, authored["inventory"], items, units, keys, blobs, manifest, authored_sha256)
     value = dict(
         contract_version="1.0.0",
         generator_version=GENERATOR_VERSION,
@@ -360,12 +355,18 @@ def fixture(root: Path = ROOT) -> bytes:
     return encoded(value)
 
 
-def validate(value: dict, records: dict, root: Path = ROOT) -> None:
-    base = Validator(root)
+def schema_validator(root: Path = ROOT, definition: str | None = None) -> Draft202012Validator:
     schema = read_json(contained(root, SCHEMA))
-    registry = base.registry.with_resource(schema["$id"], Resource.from_contents(schema))
-    Draft202012Validator(schema, registry=registry).validate(value)
-    known = {r["id"]: r for collection in ("passages", "tokens", "evidence") for r in records[collection]}
+    registry = Validator(root).registry.with_resource(schema["$id"], Resource.from_contents(schema))
+    target = {"$ref": f"{schema['$id']}#/$defs/{definition}"} if definition else schema
+    return Draft202012Validator(target, registry=registry)
+
+
+def validate(value: dict, records: dict, root: Path = ROOT) -> None:
+    schema_validator(root).validate(value)
+    roles = read_json(contained(root, AUTHORED))["roles"]
+    foundation = {c: {r["id"]: r for r in records[c]} for c in ("passages", "tokens", "evidence")}
+    known = foundation["passages"] | foundation["tokens"] | foundation["evidence"]
     units = {u["id"]: u for u in value["units"]}
     ids = [u["id"] for u in value["units"]] + [e["id"] for e in value["evidence"]] + [a["id"] for a in value["alignments"]] + [r["id"] for r in value["inventory"]]
     if len(ids) != len(set(ids)):
@@ -381,17 +382,24 @@ def validate(value: dict, records: dict, root: Path = ROOT) -> None:
             if unit_id not in units:
                 raise ValueError("Unit links an unknown unit: " + unit_id)
     sources = {s["id"] for s in value["sources"]}
-    for record in value["evidence"] + value["alignments"]:
+    authored = value["alignments"] + [r for r in value["inventory"] if "provenance" in r]
+    for record, category in [(e, e["category"]) for e in value["evidence"]] + [(r, None) for r in authored]:
         if record["provenance"]["source_id"] not in sources:
             raise ValueError("Provenance source is not listed: " + record["id"])
-        if record["status"] != status(record["provenance"]):
+        if record["status"] != status(record["provenance"], category):
             raise ValueError("Status contradicts provenance: " + record["id"])
+        if record["review"] != record["provenance"]["review"]:
+            raise ValueError("Review state contradicts provenance: " + record["id"])
     for item in value["evidence"]:
         if STAGES.index(CATEGORY_STAGE[item["category"]]) > limit:
             raise ValueError("Evidence category is beyond this fixture's stage: " + item["id"])
-        record = known.get(item["record"]["id"])
+        collection = item["record"]["collection"]
+        record = foundation[collection].get(item["record"]["id"])
         if record is None or record["provenance"] != item["provenance"]:
             raise ValueError("Evidence provenance differs from its foundation record: " + item["id"])
+        role = role_for(roles, record["provenance"]["source_id"], collection, record.get("kind") if collection == "evidence" else None)
+        if (item["category"], item["role"]) != (role["category"], role["role"]):
+            raise ValueError("Evidence category or role differs from the role registry: " + item["id"])
         if not set(item["unit_ids"]) <= units.keys():
             raise ValueError("Evidence targets an unknown unit: " + item["id"])
     evidence_ids = {e["id"] for e in value["evidence"]}
@@ -405,6 +413,13 @@ def validate(value: dict, records: dict, root: Path = ROOT) -> None:
     for row in value["inventory"]:
         if not set(row.get("unit_ids", [])) <= units.keys():
             raise ValueError("Inventory row names an unknown unit: " + row["id"])
+
+
+def drift(value: dict, root: Path = ROOT) -> list[str]:
+    return sorted(
+        [f"missing: {p}" for r in value["inventory"] for p in r.get("paths", []) if not contained(root, p).exists()]
+        + [f"present: {p}" for r in value["inventory"] for p in r.get("absent_paths", []) if contained(root, p).exists()]
+    )
 
 
 def load(root: Path = ROOT) -> dict:
@@ -462,6 +477,8 @@ def main():
         path.write_bytes(data)
     elif not path.is_file() or path.read_bytes() != data:
         raise ValueError("Committed evidence alignment fixture is stale")
+    for line in drift(json.loads(data), root):
+        print("warning: inventory path claim differs from the checkout, " + line, file=sys.stderr)
     print(f"evidence alignment {args.command}: OK")
 
 

@@ -18,13 +18,13 @@ python -m scripts.knowledge.alignment build
 python -m pytest -q tests/test_knowledge_alignment.py
 ```
 
-`check` rebuilds the fixture in memory and fails unless the result is byte-identical to `data/knowledge/generated/evidence-romans-v1/evidence.json`. `build` rewrites only that file. Both run offline. The build calls the existing `build.artifacts()` with the Romans profile, so input pinning, digest checks and v1 validation are the foundation's own.
+`check` rebuilds the fixture in memory and fails unless the result is byte-identical to `data/knowledge/generated/evidence-romans-v1/evidence.json`. `build` rewrites only that file. Both run offline. The build calls the existing `build.artifacts()` with the Romans profile, so input pinning, digest checks and v1 validation are the foundation's own. Both commands also print a warning for each inventory path claim that the checkout no longer matches. See [Inventory](#inventory).
 
 ## Files
 
 - `data/knowledge/evidence/romans-v1/profile.json`, `inputs.json` and `reference-mappings.json` form an ordinary v1 build profile for Romans 1:16-17 and Habakkuk 2:4.
 - `data/knowledge/evidence/romans-v1/authored.json` is the only hand-written overlay data. It holds the role registry, the phrase unit specs, the alignments and the non-available inventory rows.
-- `tests/fixtures/knowledge/shaul/content/besorah/romanos_1_potencia_besorah_justificacion_ira.md` is the public Shaul note at the pinned Shaul revision.
+- `tests/fixtures/knowledge/shaul/content/besorah/romanos_1_evangelio_justicia_responsabilidad_humana.md` is the public canonical Shaul note on Romans 1 at the pinned Shaul revision, byte-exact. Its comparison text is Delitzsch. It quotes no TTH text.
 - `scripts/knowledge/alignment.py` derives, validates and traces the fixture.
 
 ## Evidence categories
@@ -32,29 +32,31 @@ python -m pytest -q tests/test_knowledge_alignment.py
 | Category | Stage | Roles | Status |
 | --- | --- | --- | --- |
 | `SOURCE_TEXT` | source unit | `source_language_text` (SBLGNT Greek for the Besorah), `quoted_source_text` (OE Hebrew quoted in the Besorah) | imported |
-| `LEXICAL_DATA` | lexical evidence | `lexicon_entry` (BDB words and roots, Greek lexicon), `custom_definition` | imported, authored |
+| `LEXICAL_DATA` | lexical evidence | `lexicon_entry` (BDB words and roots, Greek lexicon), `custom_definition` | imported, authored, inferred |
 | `EXISTING_TRANSLATION` | existing translation evidence | `baseline_reference_candidate` (TTH), `comparison_reference` (TS2009, BES), `hebrew_translation` (Delitzsch, Hutter) | imported |
 | `ANCIENT_TEXTUAL_WITNESS` | existing translation evidence | `ancient_witness` (LXX) | imported |
-| `COMMENTARY_TEACHING` | commentary evidence | `translator_note` (TTH footnotes by Natanael Doldan), `study_note` (Shaul notes, here on Eric's class), `contextual_dictionary` (Eric's TCY entries), `transcript_segment` | imported, authored |
+| `COMMENTARY_TEACHING` | commentary evidence | `translator_note` (TTH footnotes by Natanael Doldan), `study_note` (Shaul notes, here on Eric's classes), `contextual_dictionary` (Eric's TCY entries), `transcript_segment` | imported, authored, inferred |
 | `AI_GENERATED_CANDIDATE` | candidate options | `generated_candidate`; requires `context.generator` | generated |
-| `HUMAN_REVIEWED_DECISION` | structured decision | `review_decision`; requires `context.reviewer` | reviewed |
+| `HUMAN_REVIEWED_DECISION` | structured decision | `review_decision`; requires `context.reviewer` | reviewed_decision |
 
-The schema binds each role to one category. `generated` status is legal only for `AI_GENERATED_CANDIDATE`, and `reviewed` only for `HUMAN_REVIEWED_DECISION`, so generated or reviewed material can never pass as authored or imported evidence. No record has an override, rank or supersedes field. Commentary sits beside lexical evidence in its own category and cannot replace it.
+The schema binds each role to one category and lists the legal statuses of each category in one rule per category, the same table as above. `generated` is legal only for `AI_GENERATED_CANDIDATE`, and `reviewed_decision` only for `HUMAN_REVIEWED_DECISION`, so generated material and review decisions can never pass as authored or imported evidence. No record has an override, rank or supersedes field. Commentary sits beside lexical evidence in its own category and cannot replace it.
 
 Delitzsch is a Hebrew translation of the Greek New Testament, so it is `EXISTING_TRANSLATION` with role `hebrew_translation`, even though Davar reads it as its Hebrew Besorah. Its Strong tags still give its tokens lexical units.
 
-Category and role are never written per record. The generator looks them up in the role registry by source, v1 collection and v1 evidence kind. A v1 record without exactly one registry row fails the build.
+Category and role are never written per record. The generator looks them up in the role registry by source, v1 collection and v1 evidence kind. A v1 record without exactly one registry row fails the build, and validation rejects a record whose category or role differs from its registry row.
 
 ## Status
 
-`status` is derived from the v1 provenance, never authored:
+`status` says where a record came from. It is derived, never authored:
 
-1. `reviewed` when `review` is not `unreviewed`.
-2. `generated` or `inferred` when `transformation` says so.
-3. `authored` when `origin` is `authored`. Shaul notes are authored upstream by Shaul.
+1. `reviewed_decision` when the category is `HUMAN_REVIEWED_DECISION`.
+2. `generated` or `inferred` when the v1 `transformation` says so.
+3. `authored` when the v1 `origin` is `authored`. Shaul notes are authored upstream by Shaul.
 4. `imported` otherwise.
 
-Alignments are Davar-authored editorial assertions in `authored.json`. They stay `unreviewed` until a named reviewer approves them.
+`review` is a separate field, copied from the v1 provenance: `unreviewed`, `approved` or `rejected`. A review state never changes `status` or category. An approved BDB entry stays `LEXICAL_DATA` with status `imported` and review `approved`, and a rejected one stays labeled as rejected rather than reviewed.
+
+Alignments and authored inventory rows are Davar-authored editorial assertions in `authored.json`. Each carries `status: authored`, `review`, a provenance locator that points at its JSON pointer in `authored.json`, and that file's `version`. They stay `unreviewed` until a named reviewer approves them.
 
 ## Units
 
@@ -78,17 +80,22 @@ Each evidence record carries:
 - `record`, the v1 collection and record ID it projects.
 - `version`, the source ID, repository, revision, path and SHA-256 of the pinned input.
 - `context`, the registry context plus the exact locator and, for passages, edition, language and canonical references. Shaul notes add `teaching_source_ids` from the note frontmatter and `transcript_segment: null`, because no timestamped segment exists.
+- `status` and `review`, described in [Status](#status).
 - `provenance`, copied byte-for-byte from the v1 record.
 
 ## Inventory
 
 `inventory` lists every source the fixture knows about:
 
+Each row has an `availability`:
+
 - `available` rows are generated, one per pinned source with evidence, with the categories and evidence count it supplies.
-- `missing_connector`, `not_available`, `deferred` and `excluded` rows are authored with a reason. A row that names `paths` fails the build when a path is missing. A row that names `absent_paths` fails the build when one exists.
+- `missing_connector`, `not_available`, `deferred` and `excluded` rows are authored with a reason and carry the authored provenance described in [Status](#status). `paths` names where the data lives in the checkout, and `absent_paths` names where it would live.
 - `gap` rows are generated, one per token lexical reference with no lexical entry. The build fails when the code exists in a selected lexicon, so an omission cannot pass as a gap. A gap names the connector-less data that holds the code, through the `covers` field of an inventory row.
 
 A pinned source with no evidence needs an inventory row that `covers` it. No inventory row creates an evidence record.
+
+The build never reads `paths` or `absent_paths`. Most of them sit outside the CI path filter of the knowledge job, so a build that asserted them would let a change elsewhere, such as adding an Eric file for Romans, break the next knowledge run on `main`. `alignment.drift(value, root)` compares the claims with a checkout when it is called, and `build` and `check` print each difference as a warning. A warning means an authored row needs an update.
 
 ## Trace
 
@@ -96,10 +103,10 @@ A pinned source with no evidence needs an inventory row that `covers` it. No inv
 
 ## Romans fixture inventory
 
-Available: SBLGNT Greek Romans 1, Delitzsch Romans 1, TTH Romanos, OE Habakkuk 2, the BDB word and root lexicons, the Greek lexicon, and the public Shaul note on Romans 1 (three sections).
+Available: SBLGNT Greek Romans 1, Delitzsch Romans 1, TTH Romanos, OE Habakkuk 2, the BDB word and root lexicons, the Greek lexicon, and the canonical public Shaul note on Romans 1 (three sections on 1:16-17).
 
 Missing connectors: TS2009 (licensed, served from Supabase Storage, never committed), BES Spanish, Hutter 1599 Hebrew, Davar custom definitions including Eric's `tcysite-eric` entries, and the Hebrew prefix particles.
 
 Not available: LXX (no dataset in Davar or Shaul, though Romans 1:17 quotes Habakkuk 2:4) and an Eric TCY file for Romans.
 
-Deferred or excluded: the other 42 public Shaul Romans notes, the Shaul emunah concept (no verified Strong mapping), the contextual relationship catalog (no Romans 1:16-17 record), and Shaul class transcripts (private, never read).
+Deferred or excluded: the other 42 public Shaul Romans notes (one of them, on 1:16-17, quotes TTH text), the Shaul emunah concept (no verified Strong mapping), the contextual relationship catalog (no Romans 1:16-17 record), and Shaul class transcripts (private, never read).

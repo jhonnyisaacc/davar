@@ -290,9 +290,9 @@
   "shaul": [
     {
       "adapter": "note",
-      "heading": "La potencia de la Besorah y la justicia revelada",
-      "id": "shaul:evidence:romanos_1_potencia_besorah_justificacion_ira:justicia-revelada",
-      "input_id": "shaul-romanos_1_potencia_besorah_justificacion_ira",
+      "heading": "Evangelio y justicia revelada",
+      "id": "shaul:evidence:romanos_1_evangelio_justicia_responsabilidad_humana:justicia-revelada",
+      "input_id": "shaul-romanos_1_evangelio_justicia_responsabilidad_humana",
       "targets": [
         {
           "kind": "reference",
@@ -315,13 +315,13 @@
           }
         }
       ],
-      "upstream_id": "content/besorah/romanos_1_potencia_besorah_justificacion_ira"
+      "upstream_id": "content/besorah/romanos_1_evangelio_justicia_responsabilidad_humana"
     },
     {
       "adapter": "note",
       "heading": "Hoja léxica",
-      "id": "shaul:evidence:romanos_1_potencia_besorah_justificacion_ira:hoja-lexica",
-      "input_id": "shaul-romanos_1_potencia_besorah_justificacion_ira",
+      "id": "shaul:evidence:romanos_1_evangelio_justicia_responsabilidad_humana:hoja-lexica",
+      "input_id": "shaul-romanos_1_evangelio_justicia_responsabilidad_humana",
       "targets": [
         {
           "kind": "reference",
@@ -344,13 +344,13 @@
           }
         }
       ],
-      "upstream_id": "content/besorah/romanos_1_potencia_besorah_justificacion_ira"
+      "upstream_id": "content/besorah/romanos_1_evangelio_justicia_responsabilidad_humana"
     },
     {
       "adapter": "note",
-      "heading": "Pendiente de verificar",
-      "id": "shaul:evidence:romanos_1_potencia_besorah_justificacion_ira:pendiente",
-      "input_id": "shaul-romanos_1_potencia_besorah_justificacion_ira",
+      "heading": "Reparación desarrollada: del evangelio anunciado al juicio de la idolatría",
+      "id": "shaul:evidence:romanos_1_evangelio_justicia_responsabilidad_humana:reparacion-evangelio-anunciado",
+      "input_id": "shaul-romanos_1_evangelio_justicia_responsabilidad_humana",
       "targets": [
         {
           "kind": "reference",
@@ -373,7 +373,7 @@
           }
         }
       ],
-      "upstream_id": "content/besorah/romanos_1_potencia_besorah_justificacion_ira"
+      "upstream_id": "content/besorah/romanos_1_evangelio_justicia_responsabilidad_humana"
     }
   ]
 }

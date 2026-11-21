@@ -47,7 +47,7 @@
       "context": {"work": "Traducción Textual del Hebreo footnote", "author": "Natanael Doldan"}
     },
     {
-      "source_id": "source:shaul-romanos_1_potencia_besorah_justificacion_ira",
+      "source_id": "source:shaul-romanos_1_evangelio_justicia_responsabilidad_humana",
       "collection": "evidence",
       "kind": "note",
       "category": "COMMENTARY_TEACHING",
@@ -107,7 +107,7 @@
   "inventory": [
     {
       "id": "inventory:ts2009",
-      "status": "missing_connector",
+      "availability": "missing_connector",
       "subject": "TS2009 English (The Scriptures 2009)",
       "category": "EXISTING_TRANSLATION",
       "role": "comparison_reference",
@@ -116,7 +116,7 @@
     },
     {
       "id": "inventory:lxx",
-      "status": "not_available",
+      "availability": "not_available",
       "subject": "Septuagint (LXX), including Habakkuk 2:4",
       "category": "ANCIENT_TEXTUAL_WITNESS",
       "role": "ancient_witness",
@@ -126,7 +126,7 @@
     },
     {
       "id": "inventory:custom-definitions",
-      "status": "missing_connector",
+      "availability": "missing_connector",
       "subject": "Davar custom definitions, including Eric's TCY (tcysite-eric) and TCY Greek definitions",
       "category": "LEXICAL_DATA",
       "role": "custom_definition",
@@ -136,7 +136,7 @@
     },
     {
       "id": "inventory:prefix-particles",
-      "status": "missing_connector",
+      "availability": "missing_connector",
       "subject": "Davar Hebrew prefix particles (Hb, Hc, Hd, Hk, Hl)",
       "category": "LEXICAL_DATA",
       "role": "lexicon_entry",
@@ -146,7 +146,7 @@
     },
     {
       "id": "inventory:eric-tcy-romans",
-      "status": "not_available",
+      "availability": "not_available",
       "subject": "Eric's TCY contextual dictionary for Romans",
       "category": "COMMENTARY_TEACHING",
       "role": "contextual_dictionary",
@@ -155,23 +155,23 @@
     },
     {
       "id": "inventory:shaul-transcripts",
-      "status": "excluded",
+      "availability": "excluded",
       "subject": "Shaul class transcripts",
       "category": "COMMENTARY_TEACHING",
       "role": "transcript_segment",
-      "reason": "Shaul keeps class transcripts under private paths, which the foundation never reads. The Romans 1 study note names its class as youtube:irpXnhj4cMI but has no timestamped segment, so no media locator is asserted."
+      "reason": "Shaul keeps class transcripts under private paths, which the foundation never reads. The Romans 1 study note names its classes as youtube:VwtpBX1Q444, youtube:XpT2I9DGotI and youtube:5yDcBBBWTkY but has no timestamped segment, so no media locator is asserted."
     },
     {
       "id": "inventory:shaul-romans-notes",
-      "status": "deferred",
+      "availability": "deferred",
       "subject": "Other public Shaul Romans study notes",
       "category": "COMMENTARY_TEACHING",
       "role": "study_note",
-      "reason": "Shaul has 43 public Romans notes at the pinned revision. Only the note covering Romans 1:16-17 is selected for this fixture."
+      "reason": "Shaul has 43 public Romans notes at the pinned revision. Only the canonical Romans 1 note is selected. The other note on Romans 1:16-17, romanos_1_potencia_besorah_justificacion_ira, quotes TTH text, whose redistribution terms are undecided."
     },
     {
       "id": "inventory:shaul-emunah-concept",
-      "status": "deferred",
+      "availability": "deferred",
       "subject": "Shaul concept emunah and expression emunah-he",
       "category": "LEXICAL_DATA",
       "role": "lexical_concept",
@@ -179,7 +179,7 @@
     },
     {
       "id": "inventory:contextual-relationships",
-      "status": "deferred",
+      "availability": "deferred",
       "subject": "Contextual Greek-Hebrew relationship catalog",
       "category": "LEXICAL_DATA",
       "role": "contextual_relationship",
@@ -188,7 +188,7 @@
     },
     {
       "id": "inventory:bes",
-      "status": "missing_connector",
+      "availability": "missing_connector",
       "subject": "BES Spanish (SPABES) Romans",
       "category": "EXISTING_TRANSLATION",
       "role": "comparison_reference",
@@ -197,7 +197,7 @@
     },
     {
       "id": "inventory:hutter",
-      "status": "missing_connector",
+      "availability": "missing_connector",
       "subject": "Hutter 1599 Hebrew Romans",
       "category": "EXISTING_TRANSLATION",
       "role": "hebrew_translation",

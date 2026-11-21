@@ -63,7 +63,19 @@ def test_schema_documents_all_seven_categories():
     assert conditioned == CATEGORIES
     assert set(alignment.CATEGORY_STAGE) == CATEGORIES
     readme = (ROOT / alignment.SCHEMA).with_name("README.md").read_text(encoding="utf-8")
-    assert all(f"`{c}`" in readme for c in CATEGORIES)
+    documented = {
+        cells[0].strip("` "): set(cells[-1].strip().split(", "))
+        for cells in (line.strip("|").split("|") for line in readme.splitlines())
+        if cells[0].strip("` ") in CATEGORIES
+    }
+    statuses = {
+        rule["if"]["properties"]["category"]["const"]: set(
+            rule["then"]["properties"]["status"].get("enum", [rule["then"]["properties"]["status"].get("const")])
+        )
+        for rule in schema["$defs"]["evidence"]["allOf"]
+    }
+    assert documented == statuses
+    assert set().union(*statuses.values()) == set(schema["$defs"]["status"]["enum"])
 
 
 def test_alignments_keep_real_many_to_one_and_one_to_many_shapes(built):
@@ -107,14 +119,20 @@ def test_trace_reaches_each_available_category_and_reports_the_lxx_gap(built):
 def test_every_record_carries_source_version_context_and_provenance(built):
     value, _ = built
     sources = by_id(value["sources"])
-    for record in value["evidence"] + value["alignments"]:
-        assert record["status"] == alignment.status(record["provenance"])
+    authored_rows = [r for r in value["inventory"] if r["availability"] not in ("available", "gap")]
+    for record in value["evidence"] + value["alignments"] + authored_rows:
+        assert record["review"] == record["provenance"]["review"]
         assert record["provenance"]["source_id"] in sources
         assert record["version"]["sha256"] == sources[record["provenance"]["source_id"]]["sha256"]
     for item in value["evidence"]:
         assert item["context"]["work"] and item["context"]["locator"] == item["provenance"]["locator"]
-    assert {a["status"] for a in value["alignments"]} == {"authored"}
-    assert {a["provenance"]["review"] for a in value["alignments"]} == {"unreviewed"}
+    assert {a["status"] for a in value["alignments"] + authored_rows} == {"authored"}
+    assert {a["review"] for a in value["alignments"] + authored_rows} == {"unreviewed"}
+    authored = read_json(ROOT / alignment.AUTHORED)
+    for row in authored_rows:
+        pointer = row["provenance"]["locator"]["pointer"]
+        assert row["version"]["path"] == alignment.AUTHORED
+        assert authored["inventory"][int(pointer.removeprefix("/inventory/"))]["id"] == row["id"]
 
 
 def test_sources_are_labeled_by_their_actual_role(built):
@@ -132,30 +150,72 @@ def test_sources_are_labeled_by_their_actual_role(built):
     assert len(notes) == 3
     for note in notes:
         assert note["category"] == "COMMENTARY_TEACHING"
-        assert note["context"]["teaching_source_ids"] == ["youtube:irpXnhj4cMI"]
+        assert note["context"]["teaching_source_ids"] == ["youtube:VwtpBX1Q444", "youtube:XpT2I9DGotI", "youtube:5yDcBBBWTkY"]
         assert note["context"]["transcript_segment"] is None
         assert note["context"]["locator"]["kind"] == "markdown"
     inventory = by_id(value["inventory"])
     assert inventory["inventory:ts2009"]["role"] == "comparison_reference"
     assert inventory["inventory:lxx"]["category"] == "ANCIENT_TEXTUAL_WITNESS"
-    assert inventory["inventory:shaul-transcripts"]["status"] == "excluded"
+    assert inventory["inventory:shaul-transcripts"]["availability"] == "excluded"
 
 
 def test_inventory_accounts_for_every_source_and_verified_gap(built):
     value, records = built
     inventory = value["inventory"]
-    available = {r["id"] for r in inventory if r["status"] == "available"}
+    available = {r["id"] for r in inventory if r["availability"] == "available"}
     pinned = {s["id"] for s in records["sources"]}
     assert available | {"inventory:source:custom"} == {"inventory:" + s for s in pinned}
-    assert all(r.get("reason") for r in inventory if r["status"] != "available")
-    gaps = {r["subject"] for r in inventory if r["status"] == "gap"}
+    assert all(r.get("reason") for r in inventory if r["availability"] != "available")
+    gaps = {r["subject"] for r in inventory if r["availability"] == "gap"}
     assert gaps == {"D0271", "D0777", "Hb", "Hc", "Hd", "Hk", "Hl"}
     lexicons = [read_json(ROOT / p) for p in ("data/dict/lexicon/words.json", "data/dict/lexicon/roots.json")]
     assert all(not any(code in lexicon for lexicon in lexicons) for code in gaps)
     assert "H2421" in lexicons[1]
-    for row in inventory:
-        for path in row.get("absent_paths", []):
-            assert not (ROOT / path).exists()
+
+
+def test_inventory_path_claims_are_observed_at_read_time_not_frozen(built, tmp_path):
+    value, _ = built
+    claimed = sorted(p for r in value["inventory"] for p in r.get("paths", []))
+    absent = sorted(p for r in value["inventory"] for p in r.get("absent_paths", []))
+    assert claimed and absent
+    assert alignment.drift(value, tmp_path) == sorted("missing: " + p for p in claimed)
+    (tmp_path / absent[0]).mkdir(parents=True)
+    assert "present: " + absent[0] in alignment.drift(value, tmp_path)
+
+
+def rederived(value, records, collection, record_id, **provenance):
+    records = copy.deepcopy(records)
+    next(r for r in records[collection] if r["id"] == record_id)["provenance"].update(provenance)
+    roles = read_json(ROOT / alignment.AUTHORED)["roles"]
+    rebuilt = dict(value, evidence=alignment.evidence(records, roles, value["units"]))
+    alignment.validate(rebuilt, records)
+    return by_id(rebuilt["evidence"])["aev:" + record_id]
+
+
+@pytest.mark.parametrize(
+    "provenance, status, review",
+    [
+        ({"transformation": "inferred"}, "inferred", "unreviewed"),
+        ({"review": "approved"}, "imported", "approved"),
+        ({"review": "rejected"}, "imported", "rejected"),
+    ],
+)
+def test_review_state_is_carried_apart_from_origin_status(built, provenance, status, review):
+    value, records = built
+    item = rederived(value, records, "evidence", "evidence:bdb-root:H2421", **provenance)
+    assert (item["category"], item["role"], item["status"], item["review"]) == (
+        "LEXICAL_DATA",
+        "lexicon_entry",
+        status,
+        review,
+    )
+
+
+def test_inferred_status_is_rejected_where_a_category_cannot_hold_it(built):
+    value, records = built
+    passage = next(e for e in value["evidence"] if e["role"] == "source_language_text")["record"]["id"]
+    with pytest.raises(ValidationError):
+        rederived(value, records, "passages", passage, transformation="inferred")
 
 
 @pytest.mark.parametrize(
@@ -167,7 +227,9 @@ def test_inventory_accounts_for_every_source_and_verified_gap(built):
         lambda v: v["evidence"][0].update(category="HUMAN_REVIEWED_DECISION", role="review_decision"),
         lambda v: v["alignments"][0].update(shape="one_to_one"),
         lambda v: next(u for u in v["units"] if u["level"] == "token")["surface"].__setitem__(0, "x"),
-        lambda v: v["inventory"][0].update(status="available"),
+        lambda v: v["inventory"][0].update(availability="available"),
+        lambda v: next(r for r in v["inventory"] if "provenance" in r).pop("version"),
+        lambda v: v["evidence"][0].update(review="approved"),
     ],
 )
 def test_validation_rejects_mislabeled_or_inconsistent_records(built, mutate):
@@ -176,6 +238,32 @@ def test_validation_rejects_mislabeled_or_inconsistent_records(built, mutate):
     mutate(broken)
     with pytest.raises((ValidationError, ValueError)):
         alignment.validate(broken, records)
+
+
+def test_validation_rejects_a_role_the_registry_does_not_assign(built):
+    value, records = built
+    broken = copy.deepcopy(value)
+    next(e for e in broken["evidence"] if e["role"] == "baseline_reference_candidate").update(role="comparison_reference")
+    with pytest.raises(ValueError, match="role registry"):
+        alignment.validate(broken, records)
+
+
+def test_schema_accepts_a_human_reviewed_decision(built):
+    value, _ = built
+    decision = dict(
+        copy.deepcopy(next(e for e in value["evidence"] if e["role"] == "baseline_reference_candidate")),
+        id="aev:decision:example",
+        category="HUMAN_REVIEWED_DECISION",
+        role="review_decision",
+        status="reviewed_decision",
+        review="approved",
+    )
+    decision["context"]["reviewer"] = "example-reviewer"
+    decision["provenance"] = dict(decision["provenance"], origin="authored", review="approved")
+    validator = alignment.schema_validator(definition="evidence")
+    validator.validate(decision)
+    assert not validator.is_valid(dict(decision, status="imported"))
+    assert not validator.is_valid(dict(decision, category="EXISTING_TRANSLATION", role="baseline_reference_candidate"))
 
 
 def test_later_stage_records_are_representable_but_outside_this_fixture(built):
