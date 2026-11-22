@@ -1,8 +1,11 @@
 import {
-  type ContextualRelatedEntry,
   contextualRelationships,
   formatRelatedReference,
+  loadedEntries,
+  type RelatedLoad,
+  relatedRequest,
   type VerseRef,
+  watchRelated,
 } from "@davar/shared/contextualRelationships";
 import { formatDefinitionMeaningForDisplay } from "@davar/shared/definitionMeanings";
 import React, { useEffect, useMemo, useState } from "react";
@@ -81,31 +84,26 @@ export function ContextualRelatedSection({
   const { t } = useTranslation();
   const themeMode = useAppStore((state: AppState) => state.themeMode);
   const styles = useMemo(() => createStyles(getColors(themeMode)), [themeMode]);
-  const [loaded, setLoaded] = useState<{
-    key: string;
-    entries: ContextualRelatedEntry[];
-  } | null>(null);
-  const bookId = verse?.book_id ?? null;
-  const chapter = verse?.chapter ?? 0;
-  const verseNumber = verse?.verse ?? 0;
-  const selectionKey = `${strong ?? ""}|${bookId ?? ""}.${chapter}.${verseNumber}|${language}`;
+  const [loaded, setLoaded] = useState<RelatedLoad | null>(null);
+  const {
+    bookId,
+    chapter,
+    verse: verseNumber,
+    key,
+  } = relatedRequest(strong, verse, language);
 
-  useEffect(() => {
-    let cancelled = false;
-    const selectedVerse = bookId
-      ? { book_id: bookId, chapter, verse: verseNumber }
-      : null;
-    void contextualRelationships
-      .loadRelated({ strong, verse: selectedVerse, language }, loadRelatedGloss)
-      .then((next) => {
-        if (!cancelled) setLoaded({ key: selectionKey, entries: next });
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [bookId, chapter, language, selectionKey, strong, verseNumber]);
+  useEffect(
+    () =>
+      watchRelated(
+        contextualRelationships,
+        { strong, bookId, chapter, verse: verseNumber, language },
+        loadRelatedGloss,
+        setLoaded,
+      ),
+    [bookId, chapter, language, strong, verseNumber],
+  );
 
-  const entries = loaded?.key === selectionKey ? loaded.entries : [];
+  const entries = loadedEntries(loaded, key);
   if (entries.length === 0) return null;
 
   return (

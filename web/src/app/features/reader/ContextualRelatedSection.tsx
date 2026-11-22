@@ -1,10 +1,13 @@
 import {
-	type ContextualRelatedEntry,
-	contextualRelationships,
 	type ContextualRelationships,
+	contextualRelationships,
 	formatRelatedReference,
+	loadedEntries,
 	type RelatedGlossSource,
+	type RelatedLoad,
+	relatedRequest,
 	type VerseRef,
+	watchRelated,
 } from "@davar/shared/contextualRelationships";
 import { formatDefinitionMeaningForDisplay } from "@davar/shared/definitionMeanings";
 import { type CSSProperties, useEffect, useState } from "react";
@@ -41,40 +44,26 @@ export function ContextualRelatedSection({
 	glossSource?: RelatedGlossSource;
 }) {
 	const { t } = useTranslation(language);
-	const [loaded, setLoaded] = useState<{
-		key: string;
-		entries: ContextualRelatedEntry[];
-	} | null>(null);
-	const bookId = verse?.book_id ?? null;
-	const chapter = verse?.chapter ?? 0;
-	const verseNumber = verse?.verse ?? 0;
-	const selectionKey = `${strong ?? ""}|${bookId ?? ""}.${chapter}.${verseNumber}|${language}`;
-
-	useEffect(() => {
-		let cancelled = false;
-		const selectedVerse = bookId
-			? { book_id: bookId, chapter, verse: verseNumber }
-			: null;
-		void catalog
-			.loadRelated({ strong, verse: selectedVerse, language }, glossSource)
-			.then((next) => {
-				if (!cancelled) setLoaded({ key: selectionKey, entries: next });
-			});
-		return () => {
-			cancelled = true;
-		};
-	}, [
+	const [loaded, setLoaded] = useState<RelatedLoad | null>(null);
+	const {
 		bookId,
-		catalog,
 		chapter,
-		glossSource,
-		language,
-		selectionKey,
-		strong,
-		verseNumber,
-	]);
+		verse: verseNumber,
+		key,
+	} = relatedRequest(strong, verse, language);
 
-	const entries = loaded?.key === selectionKey ? loaded.entries : [];
+	useEffect(
+		() =>
+			watchRelated(
+				catalog,
+				{ strong, bookId, chapter, verse: verseNumber, language },
+				glossSource,
+				setLoaded,
+			),
+		[bookId, catalog, chapter, glossSource, language, strong, verseNumber],
+	);
+
+	const entries = loadedEntries(loaded, key);
 	if (entries.length === 0) return null;
 
 	return (
