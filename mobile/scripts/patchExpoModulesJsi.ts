@@ -6,7 +6,7 @@ export const publishedSwiftInterfaceSed = String.raw`/^extension __ObjC\./,/^}/d
 export const patchedSwiftInterfaceSed = String.raw`/^extension __ObjC(\.|::)/,/^}/d;/^@usableFromInline$/{N;/_ConstraintThatIsNotPartOfTheAPIOfThisLibrary/d;};/_ConstraintThatIsNotPartOfTheAPIOfThisLibrary/d`;
 
 const publishedInvocation = `sed '${publishedSwiftInterfaceSed}'`;
-const patchedInvocation = `sed -E '${patchedSwiftInterfaceSed}'`;
+const fixedExtensionPattern = String.raw`/^extension __ObjC(\.|::)/`;
 
 export type PatchStatus = "patched" | "current" | "missing";
 
@@ -14,14 +14,17 @@ export function patchBuildScript(source: string): {
   source: string;
   status: "patched" | "current" | "unrecognized";
 } {
-  if (source.includes(patchedInvocation)) {
+  if (source.includes(fixedExtensionPattern)) {
     return { source, status: "current" };
   }
   if (!source.includes(publishedInvocation)) {
     return { source, status: "unrecognized" };
   }
   return {
-    source: source.replaceAll(publishedInvocation, patchedInvocation),
+    source: source.replaceAll(
+      publishedInvocation,
+      `sed -E '${patchedSwiftInterfaceSed}'`,
+    ),
     status: "patched",
   };
 }

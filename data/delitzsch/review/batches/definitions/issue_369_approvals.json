@@ -1,0 +1,518 @@
+{
+  "schema_version": 1,
+  "decisions": [
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0042",
+      "strong": "D0042",
+      "book": "acts",
+      "hebrew": "טורנוס",
+      "definition": {
+        "text_en": "Tyrannus; owner or teacher associated with the lecture hall in Ephesus where Paul taught.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "Tirano; dueño o maestro asociado con la escuela de Éfeso donde Pablo enseñaba."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391211+00:00",
+      "reason": "Shipped English and Spanish text for D0042; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0043",
+      "strong": "D0043",
+      "book": "acts",
+      "hebrew": "דרבי",
+      "definition": {
+        "text_en": "Derbe; a city of Lycaonia in Asia Minor.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "Derbe; ciudad de Licaonia en Asia Menor."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391335+00:00",
+      "reason": "Shipped English and Spanish text for D0043; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0044",
+      "strong": "D0044",
+      "book": "acts",
+      "hebrew": "לן",
+      "definition": {
+        "text_en": "lodge; spend the night.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "alojarse; pasar la noche."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391339+00:00",
+      "reason": "Shipped English and Spanish text for D0044; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0045",
+      "strong": "D0045",
+      "book": "acts",
+      "hebrew": "רודוס",
+      "definition": {
+        "text_en": "Rhodes; an island in the eastern Mediterranean.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "Rodas; isla del Mediterráneo oriental."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391341+00:00",
+      "reason": "Shipped English and Spanish text for D0045; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0046",
+      "strong": "D0046",
+      "book": "acts",
+      "hebrew": "ברך",
+      "definition": {
+        "text_en": "knee; the part of the leg bent when kneeling.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "rodilla; parte de la pierna que se dobla al arrodillarse."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391343+00:00",
+      "reason": "Shipped English and Spanish text for D0046; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0047",
+      "strong": "D0047",
+      "book": "acts",
+      "hebrew": "דקדוק",
+      "definition": {
+        "text_en": "exactness; strict detail or precision.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "exactitud; detalle estricto o precisión."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391346+00:00",
+      "reason": "Shipped English and Spanish text for D0047; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0048",
+      "strong": "D0048",
+      "book": "acts",
+      "hebrew": "פליקס",
+      "definition": {
+        "text_en": "Felix; Roman governor of Judea before whom Paul was tried.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "Félix; gobernador romano de Judea ante quien Pablo fue juzgado."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391347+00:00",
+      "reason": "Shipped English and Spanish text for D0048; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0049",
+      "strong": "D0049",
+      "book": "acts",
+      "hebrew": "לוסיאס",
+      "definition": {
+        "text_en": "Lysias; Claudius Lysias, the Roman commander in Acts.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "Lisias; Claudio Lisias, comandante romano en Hechos."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391349+00:00",
+      "reason": "Shipped English and Spanish text for D0049; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0050",
+      "strong": "D0050",
+      "book": "acts",
+      "hebrew": "פסטוס",
+      "definition": {
+        "text_en": "Festus; Porcius Festus, Roman governor of Judea after Felix.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "Festo; Porcio Festo, gobernador romano de Judea después de Félix."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391352+00:00",
+      "reason": "Shipped English and Spanish text for D0050; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0051",
+      "strong": "D0051",
+      "book": "acts",
+      "hebrew": "ברניקה",
+      "definition": {
+        "text_en": "Bernice; member of the Herodian dynasty who visited Festus with Agrippa.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "Berenice; miembro de la dinastía herodiana que visitó a Festo con Agripa."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391354+00:00",
+      "reason": "Shipped English and Spanish text for D0051; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0052",
+      "strong": "D0052",
+      "book": "acts",
+      "hebrew": "אגריפס",
+      "definition": {
+        "text_en": "Agrippa; Herod Agrippa II, ruler who heard Paul before Festus.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "Agripa; Herodes Agripa II, gobernante que oyó a Pablo ante Festo."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391356+00:00",
+      "reason": "Shipped English and Spanish text for D0052; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0053",
+      "strong": "D0053",
+      "book": "acts",
+      "hebrew": "הסכים",
+      "definition": {
+        "text_en": "agree; consent; approve.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "estar de acuerdo; consentir; aprobar."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391357+00:00",
+      "reason": "Shipped English and Spanish text for D0053; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0054",
+      "strong": "D0054",
+      "book": "colossians",
+      "hebrew": "רשות",
+      "definition": {
+        "text_en": "authority; dominion; jurisdiction.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "autoridad; dominio; jurisdicción."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391359+00:00",
+      "reason": "Shipped English and Spanish text for D0054; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0055",
+      "strong": "D0055",
+      "book": "corinthians1",
+      "hebrew": "אפולוס",
+      "definition": {
+        "text_en": "Apollos; an Alexandrian Jewish teacher and early emissary among the assemblies.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "Apolos; maestro judío alejandrino y emisario temprano entre las congregaciones."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391361+00:00",
+      "reason": "Shipped English and Spanish text for D0055; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0056",
+      "strong": "D0056",
+      "book": "corinthians1",
+      "hebrew": "כיפא",
+      "definition": {
+        "text_en": "Cephas; Aramaic name of Peter, meaning rock.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "Cefas; nombre arameo de Pedro, que significa roca."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391364+00:00",
+      "reason": "Shipped English and Spanish text for D0056; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0059",
+      "strong": "D0059",
+      "book": "corinthians1",
+      "hebrew": "הנאה",
+      "definition": {
+        "text_en": "benefit; profit; advantage or use enjoyed from something.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "beneficio; provecho; ventaja o uso obtenido de algo."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391368+00:00",
+      "reason": "Shipped English and Spanish text for D0059; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0060",
+      "strong": "D0060",
+      "book": "corinthians1",
+      "hebrew": "עוקץ",
+      "definition": {
+        "text_en": "sting; pointed power to wound, as in “sting of death.”",
+        "source": "custom",
+        "order": 1,
+        "text_es": "aguijón; poder punzante para herir, como en “aguijón de la muerte”."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391370+00:00",
+      "reason": "Shipped English and Spanish text for D0060; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0061",
+      "strong": "D0061",
+      "book": "corinthians2",
+      "hebrew": "טיטוס",
+      "definition": {
+        "text_en": "Titus; Paul’s coworker and messenger.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "Tito; colaborador y mensajero de Pablo."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391372+00:00",
+      "reason": "Shipped English and Spanish text for D0061; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0062",
+      "strong": "D0062",
+      "book": "corinthians2",
+      "hebrew": "מקדוניא",
+      "definition": {
+        "text_en": "Macedonia; a Roman province in northern Greece.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "Macedonia; provincia romana en el norte de Grecia."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391374+00:00",
+      "reason": "Shipped English and Spanish text for D0062; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0064",
+      "strong": "D0064",
+      "book": "corinthians2",
+      "hebrew": "כילות",
+      "definition": {
+        "text_en": "stinginess; grudging reluctance; miserliness.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "tacañería; renuencia mezquina; avaricia."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391376+00:00",
+      "reason": "Shipped English and Spanish text for D0064; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0065",
+      "strong": "D0065",
+      "book": "galatians",
+      "hebrew": "סוריא",
+      "definition": {
+        "text_en": "Syria; Roman province/region north of Judea.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "Siria; provincia o región romana al norte de Judea."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391378+00:00",
+      "reason": "Shipped English and Spanish text for D0065; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0066",
+      "strong": "D0066",
+      "book": "galatians",
+      "hebrew": "הכריח",
+      "definition": {
+        "text_en": "force; compel; coerce.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "forzar; obligar; coaccionar."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391381+00:00",
+      "reason": "Shipped English and Spanish text for D0066; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0067",
+      "strong": "D0067",
+      "book": "hebrews",
+      "hebrew": "ישות",
+      "definition": {
+        "text_en": "being; substance; essential nature.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "ser; sustancia; naturaleza esencial."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391383+00:00",
+      "reason": "Shipped English and Spanish text for D0067; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0068",
+      "strong": "D0068",
+      "book": "hebrews",
+      "hebrew": "פסק",
+      "definition": {
+        "text_en": "cease; stop; come to an end.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "cesar; detenerse; llegar a su fin."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391385+00:00",
+      "reason": "Shipped English and Spanish text for D0068; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0069",
+      "strong": "D0069",
+      "book": "john",
+      "hebrew": "פיליפוס",
+      "definition": {
+        "text_en": "Philip; disciple of Jesus who invited Nathanael to come and see.",
+        "source": "custom",
+        "order": 1,
+        "text_es": "Felipe; discípulo de Jesús que invitó a Natanael a venir y ver."
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391386+00:00",
+      "reason": "Shipped English and Spanish text for D0069; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0209",
+      "strong": "D0209",
+      "book": "john1",
+      "hebrew": "בנו",
+      "definition": {
+        "text_en": "in us; among us; with us, preposition ב with first common plural suffix.",
+        "text_es": "en nosotros; entre nosotros; con nosotros, preposición ב con sufijo común plural de primera persona.",
+        "source": "delitzsch_review",
+        "order": 1
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391391+00:00",
+      "reason": "Shipped English and Spanish text for D0209; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    },
+    {
+      "action": "upsert_custom_definition",
+      "custom_key": "D0277",
+      "strong": "D0277",
+      "book": "acts",
+      "hebrew": "בָּהֶם",
+      "definition": {
+        "text_en": "in them; among them, preposition ב with third masculine plural suffix.",
+        "text_es": "en ellos; entre ellos, preposición ב con sufijo masculino plural de tercera persona.",
+        "source": "hutter_image_review",
+        "order": 1
+      },
+      "reviewer": "jhonnyisaacc",
+      "reviewed_at": "2026-11-15T10:07:00.391394+00:00",
+      "reason": "Shipped English and Spanish text for D0277; approved by Jhonny in the #369 review.",
+      "evidence": [
+        "review packet: Delitzsch occurrences, Hebrew form, shipped definition text"
+      ]
+    }
+  ]
+}
