@@ -121,7 +121,7 @@ def test_publication_status_comes_from_reviewed_decisions_only(tmp_path):
         {"action":"create_custom_entry","status":"applied","reviewer":"rule:style_only_prefix_v5","custom_key":"D7","definition":{"text_en":"Mark","text_es":"Marcos"}}]
     (tmp_path/"acts.jsonl").write_text("".join(json.dumps(row)+"\n" for row in rows))
     ledger=load_ledger(tmp_path)
-    imported={"text_es":"Pedro","review_status":"imported"}
+    imported={"source":"tcysite-eric","text_es":"Pedro","review_status":"approved"}
     entry=lambda en,es:{"definitions":[{"text_en":en,"text_es":es,"order":1},imported]}
     assert publication("D1",entry("Peter","Pedro"),ledger)=={"status":"approved","rule":"reviewed_definition_decision","rule_version":1,"evidence":["acts.jsonl:1 r"]}
     assert publication("D2",entry("Andrew","Andrés"),ledger)["status"]=="draft"
