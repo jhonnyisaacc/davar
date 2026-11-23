@@ -246,6 +246,25 @@ def test_shaul_drift_and_unpinned_files_fail(corpus):
         run(root, roots, pins)
 
 
+def test_shaul_alludes_to_relation_normalizes(corpus):
+    root, roots = corpus
+    (roots["shaul"] / "knowledge/relations/son-of-man-alludes.yml").write_text(
+        "id: son-of-man-alludes\nsource: concept:son-of-man\n"
+        "target: word:bar-enash-ar\ntype: alludes_to\nstatus: proposed\n"
+    )
+    shards, files = run(root, roots)
+    relations = [
+        r
+        for data in shards.values()
+        for r in json.loads(data).get("relations", [])
+        if r.get("upstream_id") == "son-of-man-alludes"
+    ]
+    assert [(r["predicate"], r["subject"]["id"], r["object"]["id"]) for r in relations] == [
+        ("alludes_to", "shaul:concept:son-of-man", "shaul:expression:bar-enash-ar")
+    ]
+    assert files["reports/validation.json"]["status"] == "passed"
+
+
 @pytest.mark.parametrize(
     "origin, path, message",
     [

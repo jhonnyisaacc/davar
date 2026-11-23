@@ -238,6 +238,9 @@ def shaul_target(raw: str):
     return {"kind": kind, "id": f"shaul:{kind}:{key}"}
 
 
+SHAUL_PREDICATES = {"expresses": "expresses_concept", "alludes_to": "alludes_to"}
+
+
 def shaul(blobs: dict, aliases: list, mappings: dict, selections: list):
     concepts, evidence, relations = [], [], []
     for spec in selections:
@@ -289,14 +292,14 @@ def shaul(blobs: dict, aliases: list, mappings: dict, selections: list):
                 )
             )
         elif adapter == "relation":
-            if data["type"] != "expresses":
+            if data["type"] not in SHAUL_PREDICATES:
                 raise ValueError("Unsupported Shaul relation type: " + data["type"])
             relations.append(
                 dict(
                     id="shaul:relation:" + data["id"],
                     owner="shaul",
                     subject=shaul_target(data["source"]),
-                    predicate="expresses_concept",
+                    predicate=SHAUL_PREDICATES[data["type"]],
                     object=shaul_target(data["target"]),
                     evidence_ids=spec["evidence_ids"],
                     upstream_id=data["id"],
