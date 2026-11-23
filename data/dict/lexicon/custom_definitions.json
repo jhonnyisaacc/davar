@@ -58865,12 +58865,12 @@
         "text_en": "Peter; apostle of Jesus, also called Simon Peter.",
         "text_es": "Pedro; apóstol de Jesús, también llamado Simón Pedro.",
         "source": "custom",
-        "order": 2
+        "order": 3
       },
       {
         "source": "tcysite-eric",
         "text_es": "padre, garante",
-        "order": 3,
+        "order": 4,
         "review_status": "imported",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
@@ -64445,7 +64445,7 @@
         "text_en": "Didymus; Greek byname of Thomas, meaning twin.",
         "text_es": "Dídimo; sobrenombre griego de Tomás, que significa gemelo.",
         "source": "custom",
-        "order": 2
+        "order": 3
       }
     ],
     "manual_instances": [],
@@ -65819,7 +65819,7 @@
         "text_en": "Pilate; Roman prefect who judged Jesus.",
         "text_es": "Pilato; prefecto romano que juzgó a Jesús.",
         "source": "custom",
-        "order": 2
+        "order": 3
       }
     ],
     "manual_instances": [],
@@ -68000,7 +68000,7 @@
         "text_en": "Sanhedrin; Jewish ruling council.",
         "text_es": "Sanedrín; consejo gobernante judío.",
         "source": "custom",
-        "order": 2
+        "order": 3
       }
     ],
     "manual_instances": [],
@@ -74026,7 +74026,7 @@
         "text_en": "Paul; apostle to the nations.",
         "text_es": "Pablo; apóstol a las naciones.",
         "source": "custom",
-        "order": 2
+        "order": 3
       }
     ],
     "manual_instances": [],
@@ -90155,12 +90155,12 @@
         "text_en": "Philip; evangelist and one of the seven.",
         "text_es": "Felipe; evangelista y uno de los siete.",
         "source": "custom",
-        "order": 2
+        "order": 3
       },
       {
         "source": "tcysite-eric",
         "text_es": "Felipe",
-        "order": 3,
+        "order": 4,
         "review_status": "imported",
         "license": "Permission-based use; see data/dict/raw/tcysite/source_manifest.json",
         "term_language": "hebrew",
@@ -90174,7 +90174,7 @@
         "original_id": 204
       },
       {
-        "order": 3,
+        "order": 5,
         "source": "custom",
         "text_en": "Philip; son of Herod the Great, named in Luke 3:1, 3:19, Mark 6:17, and Matthew 14:3; also in the place name Caesarea Philippi.",
         "text_es": "Felipe; hijo de Herodes el Grande, mencionado en Lucas 3:1, 3:19, Marcos 6:17 y Mateo 14:3; también en el nombre del lugar Cesarea de Filipo."
