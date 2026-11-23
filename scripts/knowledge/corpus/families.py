@@ -31,6 +31,7 @@ class Reason(StrEnum):
     CONTAINS_HOST_PATH = "contains_host_path"
     EMPTY_TEXT = "empty_text"
     UNSUPPORTED_LEXICAL_CODE = "unsupported_lexical_code"
+    UNPUBLISHED_ENTRY = "unpublished_entry"
 
 
 @dataclass(frozen=True)
@@ -258,6 +259,8 @@ def lexicon_unit(unit: Unit, ctx: Context) -> Outcome:
     code = unescape(unit.pointer[1:])
     if len(lexical_refs(code)) != 1:
         return Unresolved(Reason.UNSUPPORTED_LEXICAL_CODE)
+    if not adapters.published(code, unit.value):
+        return Unresolved(Reason.UNPUBLISHED_ENTRY)
     spec = dict(input_id=unit.input.id, id_namespace=ctx.id_namespace, codes=[code])
     blob = {unit.input.id: encoded({code: unit.value})}
     return Normalized({"evidence": adapters.lexical(blob, [spec])})
@@ -315,7 +318,7 @@ def shaul_record_unit(unit: Unit, ctx: Context) -> Outcome:
     return Normalized({"relations": relations})
 
 
-HOST_PATH = re.compile(r"/Users/|/home/|[A-Za-z]:\\")
+HOST_PATH = re.compile(r"(?<![\w.-])(?:/Users/|/home/)|(?<![A-Za-z0-9])[A-Za-z]:\\")
 
 
 def note_sections(data: bytes) -> list[dict]:

@@ -265,6 +265,28 @@ def test_shaul_alludes_to_relation_normalizes(corpus):
     assert files["reports/validation.json"]["status"] == "passed"
 
 
+def test_a_note_that_only_links_a_home_url_is_normalized(corpus):
+    root, roots = corpus
+    note = roots["shaul"] / "content/besorah/juan_1_testigo_cordero.md"
+    note.write_text(note.read_text() + "\nVer https://example.org/home/juan.\n")
+    _, files = run(root, roots)
+    reasons = files["reports/unresolved.json"]["units_by_reason"]
+    assert reasons[Reason.CONTAINS_HOST_PATH] == 1
+
+
+def test_an_unpublished_lexicon_entry_is_unresolved(corpus):
+    root, roots = corpus
+    path = root / "data/dict/lexicon/words.json"
+    words = json.loads(path.read_text())
+    code = next(iter(words))
+    words[code]["publication"] = {"status": "draft"}
+    path.write_text(json.dumps(words))
+    _, files = run(root, roots)
+    reasons = files["reports/unresolved.json"]["units_by_reason"]
+    assert reasons[Reason.UNPUBLISHED_ENTRY] == 1
+    assert files["reports/validation.json"]["status"] == "passed"
+
+
 @pytest.mark.parametrize(
     "origin, path, message",
     [
