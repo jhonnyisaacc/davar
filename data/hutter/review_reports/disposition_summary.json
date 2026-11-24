@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "issue": 157,
+  "by_class": {
+    "multi_page_extraction_review": {
+      "findings": {
+        "verified_current": 0,
+        "historical_variant": 0,
+        "corrected": 0,
+        "blocked": 0,
+        "requires_review": 2
+      },
+      "verses": {
+        "verified_current": 0,
+        "historical_variant": 0,
+        "corrected": 0,
+        "blocked": 0,
+        "requires_review": 2
+      }
+    },
+    "ocr_disagreement": {
+      "findings": {
+        "verified_current": 0,
+        "historical_variant": 0,
+        "corrected": 0,
+        "blocked": 0,
+        "requires_review": 7476
+      },
+      "verses": {
+        "verified_current": 0,
+        "historical_variant": 0,
+        "corrected": 0,
+        "blocked": 0,
+        "requires_review": 7476
+      }
+    },
+    "pointing_punctuation_or_segmentation_disagreement": {
+      "findings": {
+        "verified_current": 0,
+        "historical_variant": 0,
+        "corrected": 0,
+        "blocked": 0,
+        "requires_review": 419
+      },
+      "verses": {
+        "verified_current": 0,
+        "historical_variant": 0,
+        "corrected": 0,
+        "blocked": 0,
+        "requires_review": 419
+      }
+    },
+    "possible_duplicated_verse": {
+      "findings": {
+        "verified_current": 0,
+        "historical_variant": 0,
+        "corrected": 0,
+        "blocked": 0,
+        "requires_review": 2
+      },
+      "verses": {
+        "verified_current": 0,
+        "historical_variant": 0,
+        "corrected": 0,
+        "blocked": 0,
+        "requires_review": 2
+      }
+    },
+    "possible_duplicated_word": {
+      "findings": {
+        "verified_current": 0,
+        "historical_variant": 0,
+        "corrected": 0,
+        "blocked": 0,
+        "requires_review": 181
+      },
+      "verses": {
+        "verified_current": 0,
+        "historical_variant": 0,
+        "corrected": 0,
+        "blocked": 0,
+        "requires_review": 181
+      }
+    }
+  },
+  "overall": {
+    "findings": {
+      "verified_current": 0,
+      "historical_variant": 0,
+      "corrected": 0,
+      "blocked": 0,
+      "requires_review": 8080
+    },
+    "verses": {
+      "verified_current": 0,
+      "historical_variant": 0,
+      "corrected": 0,
+      "blocked": 0,
+      "requires_review": 7897
+    }
+  }
+}

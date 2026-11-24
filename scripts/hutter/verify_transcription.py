@@ -5,7 +5,7 @@ from scripts.hutter.audit_transcription import audit,write,ROOT
 base='2fdb23cad'
 with tempfile.TemporaryDirectory(prefix='davar-hutter-baseline-',dir='/tmp') as td:
  t=Path(td);h=t/'data/hutter';(h/'staging/output').mkdir(parents=True)
- for name in ['strong_mappings','manifests','api_results_gpt55']:(h/name).symlink_to(ROOT/'data/hutter'/name,target_is_directory=True)
+ for name in ['strong_mappings','manifests','api_results_gpt55','image_index.json','transcription_corrections.json']:(h/name).symlink_to(ROOT/'data/hutter'/name,target_is_directory=True)
  (h/'staging/data').symlink_to(ROOT/'data/hutter/staging/data',target_is_directory=True)
  for f in (ROOT/'data/hutter/strong_mappings').glob('*.json'):
   path='data/hutter/staging/output/'+f.name
