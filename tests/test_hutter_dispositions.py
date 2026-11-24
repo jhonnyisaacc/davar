@@ -95,6 +95,16 @@ def test_uncorrected_dispositions_become_the_finding_status(tmp_path, dispositio
     assert {f["status"] for f in report["findings"] if f["error_class"] != "ocr_disagreement"} == {"requires_review"}
 
 
+def test_a_crop_without_an_output_image_does_not_block_validation(tmp_path):
+    fixture(tmp_path)
+    manifest = tmp_path / "data/hutter/manifests/john_verse_images.json"
+    entries = read(manifest)["entries"]
+    entries.append({**entries[0], "output_image": None, "status": "duplicate_source_image"})
+    write(manifest, {"entries": entries})
+    write_dispositions(tmp_path, [row_for(ocr_finding(audit(tmp_path)))])
+    assert ocr_finding(audit(tmp_path))["status"] == "verified_current"
+
+
 def test_corrected_disposition_needs_the_applied_correction_and_may_outlive_its_finding(tmp_path):
     fixture(tmp_path)
     finding = ocr_finding(audit(tmp_path))

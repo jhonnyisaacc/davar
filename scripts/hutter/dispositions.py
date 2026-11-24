@@ -116,7 +116,7 @@ def validate(rows, findings, texts, corrections, index):
         image = row.get("image") or {}
         if image.get("path") not in index or index[image["path"]]["sha256"] != image.get("sha256"):
             errors.append(f"{where}: image hash does not match the image index")
-        elif finding and image["path"] not in {image_key(c["output_image"]) for c in finding["crops"]} | {
+        elif finding and image["path"] not in {image_key(c["output_image"]) for c in finding["crops"] if c.get("output_image")} | {
                 image_key(p) for p in finding["page_images"]}:
             errors.append(f"{where}: image is not evidence for this verse")
         reference = row.get("correction")
