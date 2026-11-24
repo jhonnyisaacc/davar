@@ -1,0 +1,113 @@
+[
+  {
+    "chapter": 1,
+    "verses": [
+      {
+        "chapter": 1,
+        "verse": 1,
+        "hebrew": "בְּ/רֵאשִׁית הָיָה הַ/דָּבָר וְ/הַ/דָּבָר הָיָה אֵת הָ/אֱלֹהִים וֵ/אלֹהִים הָיָה הַ/דָּבָר׃",
+        "words": [
+          {
+            "text": "בְּרֵאשִׁית",
+            "strong": "Hb/H7225",
+            "prefixes": [
+              "Hb"
+            ]
+          },
+          {
+            "text": "הָיָה",
+            "strong": "H1961",
+            "prefixes": []
+          },
+          {
+            "text": "הַדָּבָר",
+            "strong": "Hd/H1697",
+            "prefixes": [
+              "Hd"
+            ]
+          },
+          {
+            "text": "וְהַדָּבָר",
+            "strong": "Hc/Hd/H1697",
+            "prefixes": [
+              "Hc",
+              "Hd"
+            ]
+          },
+          {
+            "text": "הָיָה",
+            "strong": "H1961",
+            "prefixes": []
+          },
+          {
+            "text": "אֵת",
+            "strong": "H853",
+            "prefixes": []
+          },
+          {
+            "text": "הָאֱלֹהִים",
+            "strong": "Hd/H430",
+            "prefixes": [
+              "Hd"
+            ]
+          },
+          {
+            "text": "וֵאלֹהִים",
+            "strong": "Hc/H430",
+            "prefixes": [
+              "Hc"
+            ]
+          },
+          {
+            "text": "הָיָה",
+            "strong": "H1961",
+            "prefixes": []
+          },
+          {
+            "text": "הַדָּבָר׃",
+            "strong": "Hd/H1697",
+            "prefixes": [
+              "Hd"
+            ]
+          }
+        ]
+      },
+      {
+        "chapter": 1,
+        "verse": 2,
+        "hebrew": "הוּא הָיָה בְ/רֵאשִׁית אֵצֶל הָ/אֱלֹהִים׃",
+        "words": [
+          {
+            "text": "הוּא",
+            "strong": "H1931",
+            "prefixes": []
+          },
+          {
+            "text": "הָיָה",
+            "strong": "H1961",
+            "prefixes": []
+          },
+          {
+            "text": "בְרֵאשִׁית",
+            "strong": "H7225",
+            "prefixes": [
+              "Hb"
+            ]
+          },
+          {
+            "text": "אֵצֶל",
+            "strong": "H681",
+            "prefixes": []
+          },
+          {
+            "text": "הָאֱלֹהִים׃",
+            "strong": "Hd/H430",
+            "prefixes": [
+              "Hd"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

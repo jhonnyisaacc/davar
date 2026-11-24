@@ -1,0 +1,25 @@
+{
+  "snapshot": "fixture",
+  "families": [
+    {"id": "oe", "disposition": "included", "reason": "Fixture OE chapter.", "evidence": ["data/oe/daniel/7.json"], "include": {"adapter": "oe", "origin": "davar", "root": "data/oe", "patterns": ["*/*.json"], "exclude": ["raw/**"], "edition_id": "oe"}},
+    {"id": "oe-raw", "disposition": "deferred", "reason": "Raw source of the chapter files.", "evidence": ["data/oe/raw/daniel.json"], "paths": ["data/oe/raw/**"]},
+    {"id": "delitzsch-text", "disposition": "included", "reason": "Fixture Delitzsch chapter.", "evidence": ["data/delitzsch/parsed/john/1.json:1"], "include": {"adapter": "delitzsch", "origin": "davar", "root": "data/delitzsch/parsed", "patterns": ["*/*.json"], "edition_id": "delitzsch"}},
+    {"id": "greek-sblgnt-tagnt", "disposition": "included", "reason": "Fixture Greek chapter.", "evidence": ["data/greek/books/john/1.json"], "include": {"adapter": "greek", "origin": "davar", "root": "data/greek/books", "patterns": ["*/*.json"], "edition_id": "sblgnt-tagnt"}},
+    {"id": "greek-lexicon", "disposition": "included", "reason": "Fixture Greek lexicon.", "evidence": ["data/greek/lexicon.json"], "include": {"adapter": "lexicon", "origin": "davar", "root": "data/greek", "patterns": ["lexicon.json"], "id_namespace": "tagnt"}},
+    {"id": "hebrew-lexicon", "disposition": "included", "reason": "Fixture Hebrew lexicon.", "evidence": ["data/dict/lexicon/words.json"], "include": {"adapter": "lexicon", "origin": "davar", "root": "data/dict/lexicon", "patterns": ["words.json"], "id_namespace": "bdb"}},
+    {"id": "dictionary-derived", "disposition": "deferred", "reason": "Dictionary population.", "evidence": ["data/dict/lexicon/words.json"], "paths": ["data/dict/**"], "exclude": ["data/dict/lexicon/words.json"]},
+    {"id": "bes", "disposition": "included", "reason": "Fixture BES book.", "evidence": ["data/bes/json/genesis.json"], "include": {"adapter": "bes", "origin": "davar", "root": "data/bes/json", "patterns": ["*.json"], "edition_id": "bes-es"}},
+    {"id": "tth", "disposition": "restricted", "reason": "Restricted translation.", "evidence": ["data/tth/json/iojanan.json"], "paths": ["data/tth/**"]},
+    {"id": "shaul-knowledge", "disposition": "included", "reason": "Fixture Shaul knowledge.", "evidence": ["data/oe/daniel/7.json"], "include": {"adapter": "shaul-record", "origin": "shaul", "root": "knowledge", "patterns": ["*/*.yml"], "repository": "https://github.com/jhonnyisaacc/shaul", "revision": "8c94b0fe9eca817e22340430309801d0ef76125b"}},
+    {"id": "shaul-notes", "disposition": "included", "reason": "Fixture Shaul notes.", "evidence": ["data/oe/daniel/7.json"], "include": {"adapter": "shaul-note", "origin": "shaul", "root": "content", "patterns": ["besorah/**/*.md", "temas/**/*.md"], "repository": "https://github.com/jhonnyisaacc/shaul", "revision": "8c94b0fe9eca817e22340430309801d0ef76125b"}},
+    {"id": "shaul-private", "disposition": "restricted", "reason": "Private transcripts.", "evidence": ["data/oe/daniel/7.json"], "paths": ["private/**"], "origin": "shaul"},
+    {"id": "shaul-site-pages", "disposition": "deferred", "reason": "Navigation pages.", "evidence": ["data/oe/daniel/7.json"], "origin": "shaul", "paths": ["content/index.md"]}
+  ],
+  "not_sources": [
+    {"paths": ["data/fonts/**"], "reason": "Rendering assets."},
+    {"paths": ["data/knowledge/**"], "reason": "Foundation data."}
+  ],
+  "ignore": [
+    {"pattern": "**/.DS_Store", "reason": "Finder metadata."}
+  ]
+}
