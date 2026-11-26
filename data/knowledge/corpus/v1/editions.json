@@ -1,0 +1,12 @@
+[
+  {
+    "attribution": "SPABES Spanish Bible, AudioBiblia.org / Irma Flores (info@audiobiblia.org), CC BY 4.0, https://ebible.org/spabes/. Normalized without textual changes.",
+    "id": "bes-es",
+    "language": "es",
+    "name": "SPABES Spanish",
+    "owner": "davar",
+    "reference_system_id": "translation-legacy",
+    "source_kind": "translation",
+    "source_revision": "70bae365fc5b1717f3758caae208c2603e2524be"
+  }
+]

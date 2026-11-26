@@ -551,7 +551,8 @@ def generate_batch(
         "instructions": (
             "Edit decisions in this file, then run review apply. Supported actions: "
             "set_strong, add_definition, upsert_custom_definition, "
-            "remove_custom_definition, create_custom_entry, needs_manual_review, skip."
+            "remove_custom_definition, renumber_custom_definitions, create_custom_entry, "
+            "needs_manual_review, skip."
         ),
         "decisions": [issue_to_decision_stub(issue) for issue in selected],
     }
@@ -725,7 +726,7 @@ def _add_custom_entry(
     entry.setdefault("nt_instances", [])
 
     definition.setdefault("source", "custom")
-    definition.setdefault("order", len(entry["definitions"]) + 1)
+    definition.setdefault("order", max((int(item.get("order", 0)) for item in entry["definitions"]), default=0) + 1)
     if not any(
         item.get("text_en") == definition.get("text_en")
         and item.get("text_es") == definition.get("text_es")
@@ -818,7 +819,7 @@ def _upsert_custom_definition(
     entry.setdefault("is_custom", True)
     entry.setdefault("definitions", [])
     definition.setdefault("source", "custom")
-    definition.setdefault("order", len(entry["definitions"]) + 1)
+    definition.setdefault("order", max((int(item.get("order", 0)) for item in entry["definitions"]), default=0) + 1)
 
     replace_order = decision.get("replace_order")
     if replace_order is not None:
@@ -869,6 +870,39 @@ def _remove_custom_definition(lexicon: LexiconIndex, decision: dict[str, Any]) -
         != (target["order"], target.get("text_en"), target.get("text_es"))
     ]
     return len(before) - len(entry["definitions"])
+
+
+def _definition_identity(decision: dict[str, Any]) -> tuple[str, Any, Any, Any]:
+    target = decision.get("definition") or {}
+    key = (decision.get("custom_key") or decision.get("strong") or "").strip().upper()
+    return key, target.get("order"), target.get("text_en"), target.get("text_es")
+
+
+def _removal_logged(log_dir: Path, decision: dict[str, Any]) -> bool:
+    identity = _definition_identity(decision)
+    for path in sorted(log_dir.glob("*.jsonl")):
+        for line in path.read_text(encoding="utf-8").splitlines():
+            row = json.loads(line)
+            if (
+                row.get("action") == "remove_custom_definition"
+                and row.get("status") == "applied"
+                and _definition_identity(row) == identity
+            ):
+                return True
+    return False
+
+
+def _renumber_custom_definitions(lexicon: LexiconIndex, decision: dict[str, Any]) -> int:
+    key = lexicon.normalize_strong(decision.get("custom_key") or decision.get("strong"))
+    entry = lexicon.load_custom_entries().get(key)
+    if not entry:
+        raise FileNotFoundError(f"Custom entry not found for {key}")
+    changed = 0
+    for position, definition in enumerate(entry.get("definitions") or [], start=1):
+        if definition.get("order") != position:
+            definition["order"] = position
+            changed += 1
+    return changed
 
 
 def apply_decisions(
@@ -1029,9 +1063,26 @@ def apply_decisions(
                 if removed:
                     changed_lexicon[lexicon.custom_definitions_path] = lexicon.load_custom_entries()
                     stats.definition_updates += removed
+                elif _removal_logged(log_dir, decision):
+                    stats.skipped += 1
+                else:
+                    key, order, text_en, text_es = _definition_identity(decision)
+                    raise ValueError(
+                        f"remove_custom_definition matched no {key} definition with order {order}, "
+                        f"text_en {text_en!r}, and text_es {text_es!r}"
+                    )
+                append_decision_log(log_dir, decision, "applied" if removed else "already_applied", dry_run)
+                stats.log_entries += 0 if dry_run else 1
+                continue
+
+            if action == "renumber_custom_definitions":
+                renumbered = _renumber_custom_definitions(lexicon, decision)
+                if renumbered:
+                    changed_lexicon[lexicon.custom_definitions_path] = lexicon.load_custom_entries()
+                    stats.definition_updates += renumbered
                 else:
                     stats.skipped += 1
-                append_decision_log(log_dir, decision, "applied" if removed else "already_applied", dry_run)
+                append_decision_log(log_dir, decision, "applied" if renumbered else "already_applied", dry_run)
                 stats.log_entries += 0 if dry_run else 1
                 continue
 

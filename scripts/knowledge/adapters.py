@@ -195,14 +195,15 @@ def lexical(blobs: dict, selections: list):
     return records
 
 
-def public_note(data: bytes, heading: str):
+def note_parts(data: bytes):
     text = data.decode("utf-8")
     if not text.startswith("---\n"):
         raise ValueError("Public note needs YAML frontmatter")
     header, body = text[4:].split("\n---", 1)
-    metadata = load_yaml(header)
-    # Match complete second-level headings, not prefixes or headings in fenced code.
-    lines = body.splitlines(keepends=True)
+    return load_yaml(header), body
+
+
+def unfenced_level_two_headings(lines: list[str]) -> list[tuple[int, str]]:
     headings, fence = [], None
     for i, line in enumerate(lines):
         match = re.match(r"^\s{0,3}(`{3,}|~{3,})", line)
@@ -214,6 +215,13 @@ def public_note(data: bytes, heading: str):
                 fence = None
         elif fence is None and line.startswith("## "):
             headings.append((i, line[3:].strip()))
+    return headings
+
+
+def public_note(data: bytes, heading: str):
+    metadata, body = note_parts(data)
+    lines = body.splitlines(keepends=True)
+    headings = unfenced_level_two_headings(lines)
     matches = [i for i, title in headings if title == heading]
     if len(matches) != 1:
         raise ValueError("Requested Markdown section missing or ambiguous")
@@ -228,6 +236,9 @@ def shaul_target(raw: str):
         raise ValueError("Unsupported Shaul entity reference: " + raw)
     kind = "expression" if kind == "word" else kind
     return {"kind": kind, "id": f"shaul:{kind}:{key}"}
+
+
+SHAUL_PREDICATES = {"expresses": "expresses_concept", "alludes_to": "alludes_to"}
 
 
 def shaul(blobs: dict, aliases: list, mappings: dict, selections: list):
@@ -281,14 +292,14 @@ def shaul(blobs: dict, aliases: list, mappings: dict, selections: list):
                 )
             )
         elif adapter == "relation":
-            if data["type"] != "expresses":
+            if data["type"] not in SHAUL_PREDICATES:
                 raise ValueError("Unsupported Shaul relation type: " + data["type"])
             relations.append(
                 dict(
                     id="shaul:relation:" + data["id"],
                     owner="shaul",
                     subject=shaul_target(data["source"]),
-                    predicate="expresses_concept",
+                    predicate=SHAUL_PREDICATES[data["type"]],
                     object=shaul_target(data["target"]),
                     evidence_ids=spec["evidence_ids"],
                     upstream_id=data["id"],
