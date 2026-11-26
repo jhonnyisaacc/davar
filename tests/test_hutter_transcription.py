@@ -109,5 +109,5 @@ def test_review_ledger_spans_all_27_books_and_keeps_verifiable_provenance():
         source = dict(verses(read(ROOT / SOURCE / f"{book}.json")))
         assert source[(chapter, verse)]["text_nikud"] == row["after"]
     flagged = {(f["book"], f["chapter"], f["verse"]) for f in audit(ROOT)["findings"]
-               if f["error_class"] == "pointing_unverified" and f["status"] == "requires_review"}
+               if f["error_class"] == "pointing_unverified"}
     assert flagged == {key for key, row in governing.items() if row["review_status"] == "letters_confirmed"}

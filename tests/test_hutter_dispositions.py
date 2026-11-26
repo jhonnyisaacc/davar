@@ -131,7 +131,7 @@ INVALID = {
     "foreign image": (replace(image={"path": OTHER_CROP, "sha256": sha(b"other")}), "not evidence for this verse"),
     "reference on uncorrected": (replace(correction=0), "exactly when disposition is corrected"),
     "corrected without reference": (replace(disposition="corrected"), "exactly when disposition is corrected"),
-    "unknown correction": (replace(disposition="corrected", correction=7), "not a reviewed correction"),
+    "unknown correction": (replace(disposition="corrected", correction=7), "not an image-confirmed correction"),
     "correction not applied": (replace(disposition="corrected", correction=0), "not the correction's after text"),
     "duplicate": (lambda row: [row, row], "duplicate finding_id"),
 }
@@ -190,3 +190,15 @@ def test_committed_audit_index_and_summary_agree():
     assert len({f["finding_id"] for f in report["findings"]}) == len(report["findings"])
     summary = disp.summarize(report["findings"], disp.load_dispositions(ROOT)[0])
     assert read(ROOT / disp.SUMMARY) == summary
+
+
+def test_a_letters_only_correction_cannot_close_a_finding_as_corrected(tmp_path):
+    fixture(tmp_path)
+    ledger = read(tmp_path / LEDGER)
+    ledger["corrections"][0]["review_status"] = "letters_confirmed"
+    write(tmp_path / LEDGER, ledger)
+    apply_ledger(tmp_path)
+    finding = ocr_finding(audit(tmp_path))
+    write_dispositions(tmp_path, [row_for(finding, "corrected", correction=0)])
+    with pytest.raises(ValueError, match="not an image-confirmed correction"):
+        audit(tmp_path)

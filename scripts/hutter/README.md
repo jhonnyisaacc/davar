@@ -179,7 +179,7 @@ survives a correction, and a `text_sha256` of the current verse. Reviews go in
 `data/hutter/dispositions/<book>.json`, one file per book. A disposition is
 `verified_current`, `historical_variant`, `corrected` or `blocked`. Each row
 records the verse text hash, the image path and hash, a rationale and the
-reviewer. A `corrected` row also gives the index of a reviewed entry in
+reviewer. A `corrected` row also gives the index of an image-confirmed entry in
 `transcription_corrections.json`. The audit fails when a row is stale: the
 finding is gone (only a `corrected` row may outlive its finding), the verse text
 or image hash changed, or the correction is not applied. Each finding's
@@ -195,6 +195,9 @@ counts per class and status.
 `--fetch` downloads only the verse crops of findings that still require review
 into the ignored `data/hutter/verse_images/`. It skips files that already match
 the index and fails when a download does not match it.
+The 2 John crops on Hugging Face predate the #411 crop overrides. Until they
+are regenerated and the index revision moves, `--fetch john2` replaces the local
+crops cut from the current manifest with the old ones.
 
 ## API morphology review (audit-only)
 
