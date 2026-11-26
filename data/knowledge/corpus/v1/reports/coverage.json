@@ -1,0 +1,2424 @@
+{
+  "editions": [
+    {
+      "books": [
+        {
+          "book_id": "genesis",
+          "chapters_expected": 50,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 50,
+          "languages": {
+            "es": 1533
+          },
+          "mapped": 0,
+          "passages": 1533,
+          "unmapped": 1533
+        },
+        {
+          "book_id": "exodus",
+          "chapters_expected": 40,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 40,
+          "languages": {
+            "es": 1213
+          },
+          "mapped": 0,
+          "passages": 1213,
+          "unmapped": 1213
+        },
+        {
+          "book_id": "leviticus",
+          "chapters_expected": 27,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 27,
+          "languages": {
+            "es": 859
+          },
+          "mapped": 0,
+          "passages": 859,
+          "unmapped": 859
+        },
+        {
+          "book_id": "numbers",
+          "chapters_expected": 36,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 36,
+          "languages": {
+            "es": 1288
+          },
+          "mapped": 0,
+          "passages": 1288,
+          "unmapped": 1288
+        },
+        {
+          "book_id": "deuteronomy",
+          "chapters_expected": 34,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 34,
+          "languages": {
+            "es": 959
+          },
+          "mapped": 0,
+          "passages": 959,
+          "unmapped": 959
+        },
+        {
+          "book_id": "joshua",
+          "chapters_expected": 24,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 24,
+          "languages": {
+            "es": 658
+          },
+          "mapped": 0,
+          "passages": 658,
+          "unmapped": 658
+        },
+        {
+          "book_id": "judges",
+          "chapters_expected": 21,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 21,
+          "languages": {
+            "es": 618
+          },
+          "mapped": 0,
+          "passages": 618,
+          "unmapped": 618
+        },
+        {
+          "book_id": "samuel1",
+          "chapters_expected": 31,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 31,
+          "languages": {
+            "es": 810
+          },
+          "mapped": 0,
+          "passages": 810,
+          "unmapped": 810
+        },
+        {
+          "book_id": "samuel2",
+          "chapters_expected": 24,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 24,
+          "languages": {
+            "es": 695
+          },
+          "mapped": 0,
+          "passages": 695,
+          "unmapped": 695
+        },
+        {
+          "book_id": "kings1",
+          "chapters_expected": 22,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 22,
+          "languages": {
+            "es": 816
+          },
+          "mapped": 0,
+          "passages": 816,
+          "unmapped": 816
+        },
+        {
+          "book_id": "kings2",
+          "chapters_expected": 25,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 25,
+          "languages": {
+            "es": 719
+          },
+          "mapped": 0,
+          "passages": 719,
+          "unmapped": 719
+        },
+        {
+          "book_id": "isaiah",
+          "chapters_expected": 66,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 66,
+          "languages": {
+            "es": 1292
+          },
+          "mapped": 0,
+          "passages": 1292,
+          "unmapped": 1292
+        },
+        {
+          "book_id": "jeremiah",
+          "chapters_expected": 52,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 52,
+          "languages": {
+            "es": 1364
+          },
+          "mapped": 0,
+          "passages": 1364,
+          "unmapped": 1364
+        },
+        {
+          "book_id": "ezekiel",
+          "chapters_expected": 48,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 48,
+          "languages": {
+            "es": 1273
+          },
+          "mapped": 0,
+          "passages": 1273,
+          "unmapped": 1273
+        },
+        {
+          "book_id": "hosea",
+          "chapters_expected": 14,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 14,
+          "languages": {
+            "es": 197
+          },
+          "mapped": 0,
+          "passages": 197,
+          "unmapped": 197
+        },
+        {
+          "book_id": "joel",
+          "chapters_expected": 4,
+          "chapters_missing": [
+            4
+          ],
+          "chapters_outside_registry": [],
+          "chapters_present": 3,
+          "languages": {
+            "es": 73
+          },
+          "mapped": 0,
+          "passages": 73,
+          "unmapped": 73
+        },
+        {
+          "book_id": "amos",
+          "chapters_expected": 9,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 9,
+          "languages": {
+            "es": 146
+          },
+          "mapped": 0,
+          "passages": 146,
+          "unmapped": 146
+        },
+        {
+          "book_id": "obadiah",
+          "chapters_expected": 1,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 1,
+          "languages": {
+            "es": 21
+          },
+          "mapped": 0,
+          "passages": 21,
+          "unmapped": 21
+        },
+        {
+          "book_id": "jonah",
+          "chapters_expected": 4,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 4,
+          "languages": {
+            "es": 48
+          },
+          "mapped": 0,
+          "passages": 48,
+          "unmapped": 48
+        },
+        {
+          "book_id": "micah",
+          "chapters_expected": 7,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 7,
+          "languages": {
+            "es": 105
+          },
+          "mapped": 0,
+          "passages": 105,
+          "unmapped": 105
+        },
+        {
+          "book_id": "nahum",
+          "chapters_expected": 3,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 3,
+          "languages": {
+            "es": 47
+          },
+          "mapped": 0,
+          "passages": 47,
+          "unmapped": 47
+        },
+        {
+          "book_id": "habakkuk",
+          "chapters_expected": 3,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 3,
+          "languages": {
+            "es": 56
+          },
+          "mapped": 0,
+          "passages": 56,
+          "unmapped": 56
+        },
+        {
+          "book_id": "zephaniah",
+          "chapters_expected": 3,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 3,
+          "languages": {
+            "es": 53
+          },
+          "mapped": 0,
+          "passages": 53,
+          "unmapped": 53
+        },
+        {
+          "book_id": "haggai",
+          "chapters_expected": 2,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 2,
+          "languages": {
+            "es": 38
+          },
+          "mapped": 0,
+          "passages": 38,
+          "unmapped": 38
+        },
+        {
+          "book_id": "zechariah",
+          "chapters_expected": 14,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 14,
+          "languages": {
+            "es": 211
+          },
+          "mapped": 0,
+          "passages": 211,
+          "unmapped": 211
+        },
+        {
+          "book_id": "malachi",
+          "chapters_expected": 3,
+          "chapters_missing": [],
+          "chapters_outside_registry": [
+            4
+          ],
+          "chapters_present": 4,
+          "languages": {
+            "es": 55
+          },
+          "mapped": 0,
+          "passages": 55,
+          "unmapped": 55
+        },
+        {
+          "book_id": "psalms",
+          "chapters_expected": 150,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 150,
+          "languages": {
+            "es": 2461
+          },
+          "mapped": 0,
+          "passages": 2461,
+          "unmapped": 2461
+        },
+        {
+          "book_id": "proverbs",
+          "chapters_expected": 31,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 31,
+          "languages": {
+            "es": 915
+          },
+          "mapped": 0,
+          "passages": 915,
+          "unmapped": 915
+        },
+        {
+          "book_id": "job",
+          "chapters_expected": 42,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 42,
+          "languages": {
+            "es": 1070
+          },
+          "mapped": 0,
+          "passages": 1070,
+          "unmapped": 1070
+        },
+        {
+          "book_id": "songofsolomon",
+          "chapters_expected": 8,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 8,
+          "languages": {
+            "es": 117
+          },
+          "mapped": 0,
+          "passages": 117,
+          "unmapped": 117
+        },
+        {
+          "book_id": "ruth",
+          "chapters_expected": 4,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 4,
+          "languages": {
+            "es": 85
+          },
+          "mapped": 0,
+          "passages": 85,
+          "unmapped": 85
+        },
+        {
+          "book_id": "lamentations",
+          "chapters_expected": 5,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 5,
+          "languages": {
+            "es": 154
+          },
+          "mapped": 0,
+          "passages": 154,
+          "unmapped": 154
+        },
+        {
+          "book_id": "ecclesiastes",
+          "chapters_expected": 12,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 12,
+          "languages": {
+            "es": 221
+          },
+          "mapped": 0,
+          "passages": 221,
+          "unmapped": 221
+        },
+        {
+          "book_id": "esther",
+          "chapters_expected": 10,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 10,
+          "languages": {
+            "es": 167
+          },
+          "mapped": 0,
+          "passages": 167,
+          "unmapped": 167
+        },
+        {
+          "book_id": "daniel",
+          "chapters_expected": 12,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 12,
+          "languages": {
+            "es": 357
+          },
+          "mapped": 0,
+          "passages": 357,
+          "unmapped": 357
+        },
+        {
+          "book_id": "ezra",
+          "chapters_expected": 10,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 10,
+          "languages": {
+            "es": 280
+          },
+          "mapped": 0,
+          "passages": 280,
+          "unmapped": 280
+        },
+        {
+          "book_id": "nehemiah",
+          "chapters_expected": 13,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 13,
+          "languages": {
+            "es": 406
+          },
+          "mapped": 0,
+          "passages": 406,
+          "unmapped": 406
+        },
+        {
+          "book_id": "chronicles1",
+          "chapters_expected": 29,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 29,
+          "languages": {
+            "es": 942
+          },
+          "mapped": 0,
+          "passages": 942,
+          "unmapped": 942
+        },
+        {
+          "book_id": "chronicles2",
+          "chapters_expected": 36,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 36,
+          "languages": {
+            "es": 822
+          },
+          "mapped": 0,
+          "passages": 822,
+          "unmapped": 822
+        },
+        {
+          "book_id": "matthew",
+          "chapters_expected": 28,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 28,
+          "languages": {
+            "es": 1071
+          },
+          "mapped": 0,
+          "passages": 1071,
+          "unmapped": 1071
+        },
+        {
+          "book_id": "mark",
+          "chapters_expected": 16,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 16,
+          "languages": {
+            "es": 678
+          },
+          "mapped": 0,
+          "passages": 678,
+          "unmapped": 678
+        },
+        {
+          "book_id": "luke",
+          "chapters_expected": 24,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 24,
+          "languages": {
+            "es": 1151
+          },
+          "mapped": 0,
+          "passages": 1151,
+          "unmapped": 1151
+        },
+        {
+          "book_id": "john",
+          "chapters_expected": 21,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 21,
+          "languages": {
+            "es": 879
+          },
+          "mapped": 0,
+          "passages": 879,
+          "unmapped": 879
+        },
+        {
+          "book_id": "acts",
+          "chapters_expected": 28,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 28,
+          "languages": {
+            "es": 1007
+          },
+          "mapped": 0,
+          "passages": 1007,
+          "unmapped": 1007
+        },
+        {
+          "book_id": "romans",
+          "chapters_expected": 16,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 16,
+          "languages": {
+            "es": 433
+          },
+          "mapped": 0,
+          "passages": 433,
+          "unmapped": 433
+        },
+        {
+          "book_id": "corinthians1",
+          "chapters_expected": 16,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 16,
+          "languages": {
+            "es": 437
+          },
+          "mapped": 0,
+          "passages": 437,
+          "unmapped": 437
+        },
+        {
+          "book_id": "corinthians2",
+          "chapters_expected": 13,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 13,
+          "languages": {
+            "es": 257
+          },
+          "mapped": 0,
+          "passages": 257,
+          "unmapped": 257
+        },
+        {
+          "book_id": "galatians",
+          "chapters_expected": 6,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 6,
+          "languages": {
+            "es": 149
+          },
+          "mapped": 0,
+          "passages": 149,
+          "unmapped": 149
+        },
+        {
+          "book_id": "ephesians",
+          "chapters_expected": 6,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 6,
+          "languages": {
+            "es": 155
+          },
+          "mapped": 0,
+          "passages": 155,
+          "unmapped": 155
+        },
+        {
+          "book_id": "philippians",
+          "chapters_expected": 4,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 4,
+          "languages": {
+            "es": 104
+          },
+          "mapped": 0,
+          "passages": 104,
+          "unmapped": 104
+        },
+        {
+          "book_id": "colossians",
+          "chapters_expected": 4,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 4,
+          "languages": {
+            "es": 95
+          },
+          "mapped": 0,
+          "passages": 95,
+          "unmapped": 95
+        },
+        {
+          "book_id": "thessalonians1",
+          "chapters_expected": 5,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 5,
+          "languages": {
+            "es": 89
+          },
+          "mapped": 0,
+          "passages": 89,
+          "unmapped": 89
+        },
+        {
+          "book_id": "thessalonians2",
+          "chapters_expected": 3,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 3,
+          "languages": {
+            "es": 47
+          },
+          "mapped": 0,
+          "passages": 47,
+          "unmapped": 47
+        },
+        {
+          "book_id": "timothy1",
+          "chapters_expected": 6,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 6,
+          "languages": {
+            "es": 113
+          },
+          "mapped": 0,
+          "passages": 113,
+          "unmapped": 113
+        },
+        {
+          "book_id": "timothy2",
+          "chapters_expected": 4,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 4,
+          "languages": {
+            "es": 83
+          },
+          "mapped": 0,
+          "passages": 83,
+          "unmapped": 83
+        },
+        {
+          "book_id": "titus",
+          "chapters_expected": 3,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 3,
+          "languages": {
+            "es": 46
+          },
+          "mapped": 0,
+          "passages": 46,
+          "unmapped": 46
+        },
+        {
+          "book_id": "philemon",
+          "chapters_expected": 1,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 1,
+          "languages": {
+            "es": 25
+          },
+          "mapped": 0,
+          "passages": 25,
+          "unmapped": 25
+        },
+        {
+          "book_id": "hebrews",
+          "chapters_expected": 13,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 13,
+          "languages": {
+            "es": 303
+          },
+          "mapped": 0,
+          "passages": 303,
+          "unmapped": 303
+        },
+        {
+          "book_id": "james",
+          "chapters_expected": 5,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 5,
+          "languages": {
+            "es": 108
+          },
+          "mapped": 0,
+          "passages": 108,
+          "unmapped": 108
+        },
+        {
+          "book_id": "peter1",
+          "chapters_expected": 5,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 5,
+          "languages": {
+            "es": 105
+          },
+          "mapped": 0,
+          "passages": 105,
+          "unmapped": 105
+        },
+        {
+          "book_id": "peter2",
+          "chapters_expected": 3,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 3,
+          "languages": {
+            "es": 61
+          },
+          "mapped": 0,
+          "passages": 61,
+          "unmapped": 61
+        },
+        {
+          "book_id": "john1",
+          "chapters_expected": 5,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 5,
+          "languages": {
+            "es": 105
+          },
+          "mapped": 0,
+          "passages": 105,
+          "unmapped": 105
+        },
+        {
+          "book_id": "john2",
+          "chapters_expected": 1,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 1,
+          "languages": {
+            "es": 13
+          },
+          "mapped": 0,
+          "passages": 13,
+          "unmapped": 13
+        },
+        {
+          "book_id": "john3",
+          "chapters_expected": 1,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 1,
+          "languages": {
+            "es": 14
+          },
+          "mapped": 0,
+          "passages": 14,
+          "unmapped": 14
+        },
+        {
+          "book_id": "jude",
+          "chapters_expected": 1,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 1,
+          "languages": {
+            "es": 25
+          },
+          "mapped": 0,
+          "passages": 25,
+          "unmapped": 25
+        },
+        {
+          "book_id": "revelation",
+          "chapters_expected": 22,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 22,
+          "languages": {
+            "es": 404
+          },
+          "mapped": 0,
+          "passages": 404,
+          "unmapped": 404
+        }
+      ],
+      "books_missing": [],
+      "edition_id": "bes-es"
+    },
+    {
+      "books": [
+        {
+          "book_id": "matthew",
+          "chapters_expected": 28,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 28,
+          "languages": {
+            "he": 1071
+          },
+          "mapped": 0,
+          "passages": 1071,
+          "unmapped": 1071
+        },
+        {
+          "book_id": "mark",
+          "chapters_expected": 16,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 16,
+          "languages": {
+            "he": 678
+          },
+          "mapped": 0,
+          "passages": 678,
+          "unmapped": 678
+        },
+        {
+          "book_id": "luke",
+          "chapters_expected": 24,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 24,
+          "languages": {
+            "he": 1151
+          },
+          "mapped": 0,
+          "passages": 1151,
+          "unmapped": 1151
+        },
+        {
+          "book_id": "john",
+          "chapters_expected": 21,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 21,
+          "languages": {
+            "he": 879
+          },
+          "mapped": 2,
+          "passages": 879,
+          "unmapped": 877
+        },
+        {
+          "book_id": "acts",
+          "chapters_expected": 28,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 28,
+          "languages": {
+            "he": 1007
+          },
+          "mapped": 0,
+          "passages": 1007,
+          "unmapped": 1007
+        },
+        {
+          "book_id": "romans",
+          "chapters_expected": 16,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 16,
+          "languages": {
+            "he": 433
+          },
+          "mapped": 0,
+          "passages": 433,
+          "unmapped": 433
+        },
+        {
+          "book_id": "corinthians1",
+          "chapters_expected": 16,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 16,
+          "languages": {
+            "he": 437
+          },
+          "mapped": 0,
+          "passages": 437,
+          "unmapped": 437
+        },
+        {
+          "book_id": "corinthians2",
+          "chapters_expected": 13,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 13,
+          "languages": {
+            "he": 256
+          },
+          "mapped": 0,
+          "passages": 256,
+          "unmapped": 256
+        },
+        {
+          "book_id": "galatians",
+          "chapters_expected": 6,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 6,
+          "languages": {
+            "he": 149
+          },
+          "mapped": 0,
+          "passages": 149,
+          "unmapped": 149
+        },
+        {
+          "book_id": "ephesians",
+          "chapters_expected": 6,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 6,
+          "languages": {
+            "he": 155
+          },
+          "mapped": 0,
+          "passages": 155,
+          "unmapped": 155
+        },
+        {
+          "book_id": "philippians",
+          "chapters_expected": 4,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 4,
+          "languages": {
+            "he": 104
+          },
+          "mapped": 0,
+          "passages": 104,
+          "unmapped": 104
+        },
+        {
+          "book_id": "colossians",
+          "chapters_expected": 4,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 4,
+          "languages": {
+            "he": 95
+          },
+          "mapped": 0,
+          "passages": 95,
+          "unmapped": 95
+        },
+        {
+          "book_id": "thessalonians1",
+          "chapters_expected": 5,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 5,
+          "languages": {
+            "he": 89
+          },
+          "mapped": 0,
+          "passages": 89,
+          "unmapped": 89
+        },
+        {
+          "book_id": "thessalonians2",
+          "chapters_expected": 3,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 3,
+          "languages": {
+            "he": 47
+          },
+          "mapped": 0,
+          "passages": 47,
+          "unmapped": 47
+        },
+        {
+          "book_id": "timothy1",
+          "chapters_expected": 6,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 6,
+          "languages": {
+            "he": 113
+          },
+          "mapped": 0,
+          "passages": 113,
+          "unmapped": 113
+        },
+        {
+          "book_id": "timothy2",
+          "chapters_expected": 4,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 4,
+          "languages": {
+            "he": 83
+          },
+          "mapped": 0,
+          "passages": 83,
+          "unmapped": 83
+        },
+        {
+          "book_id": "titus",
+          "chapters_expected": 3,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 3,
+          "languages": {
+            "he": 46
+          },
+          "mapped": 0,
+          "passages": 46,
+          "unmapped": 46
+        },
+        {
+          "book_id": "philemon",
+          "chapters_expected": 1,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 1,
+          "languages": {
+            "he": 25
+          },
+          "mapped": 0,
+          "passages": 25,
+          "unmapped": 25
+        },
+        {
+          "book_id": "hebrews",
+          "chapters_expected": 13,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 13,
+          "languages": {
+            "he": 303
+          },
+          "mapped": 0,
+          "passages": 303,
+          "unmapped": 303
+        },
+        {
+          "book_id": "james",
+          "chapters_expected": 5,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 5,
+          "languages": {
+            "he": 108
+          },
+          "mapped": 0,
+          "passages": 108,
+          "unmapped": 108
+        },
+        {
+          "book_id": "peter1",
+          "chapters_expected": 5,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 5,
+          "languages": {
+            "he": 105
+          },
+          "mapped": 0,
+          "passages": 105,
+          "unmapped": 105
+        },
+        {
+          "book_id": "peter2",
+          "chapters_expected": 3,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 3,
+          "languages": {
+            "he": 61
+          },
+          "mapped": 0,
+          "passages": 61,
+          "unmapped": 61
+        },
+        {
+          "book_id": "john1",
+          "chapters_expected": 5,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 5,
+          "languages": {
+            "he": 105
+          },
+          "mapped": 0,
+          "passages": 105,
+          "unmapped": 105
+        },
+        {
+          "book_id": "john2",
+          "chapters_expected": 1,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 1,
+          "languages": {
+            "he": 13
+          },
+          "mapped": 0,
+          "passages": 13,
+          "unmapped": 13
+        },
+        {
+          "book_id": "john3",
+          "chapters_expected": 1,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 1,
+          "languages": {
+            "he": 14
+          },
+          "mapped": 0,
+          "passages": 14,
+          "unmapped": 14
+        },
+        {
+          "book_id": "jude",
+          "chapters_expected": 1,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 1,
+          "languages": {
+            "he": 25
+          },
+          "mapped": 0,
+          "passages": 25,
+          "unmapped": 25
+        },
+        {
+          "book_id": "revelation",
+          "chapters_expected": 22,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 22,
+          "languages": {
+            "he": 404
+          },
+          "mapped": 0,
+          "passages": 404,
+          "unmapped": 404
+        }
+      ],
+      "books_missing": [],
+      "edition_id": "delitzsch"
+    },
+    {
+      "books": [
+        {
+          "book_id": "genesis",
+          "chapters_expected": 50,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 50,
+          "languages": {
+            "he": 1532,
+            "mul": 1
+          },
+          "mapped": 0,
+          "passages": 1533,
+          "unmapped": 1533
+        },
+        {
+          "book_id": "exodus",
+          "chapters_expected": 40,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 40,
+          "languages": {
+            "he": 1213
+          },
+          "mapped": 0,
+          "passages": 1213,
+          "unmapped": 1213
+        },
+        {
+          "book_id": "leviticus",
+          "chapters_expected": 27,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 27,
+          "languages": {
+            "he": 859
+          },
+          "mapped": 0,
+          "passages": 859,
+          "unmapped": 859
+        },
+        {
+          "book_id": "numbers",
+          "chapters_expected": 36,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 36,
+          "languages": {
+            "he": 1289
+          },
+          "mapped": 0,
+          "passages": 1289,
+          "unmapped": 1289
+        },
+        {
+          "book_id": "deuteronomy",
+          "chapters_expected": 34,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 34,
+          "languages": {
+            "he": 959
+          },
+          "mapped": 0,
+          "passages": 959,
+          "unmapped": 959
+        },
+        {
+          "book_id": "joshua",
+          "chapters_expected": 24,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 24,
+          "languages": {
+            "he": 658
+          },
+          "mapped": 0,
+          "passages": 658,
+          "unmapped": 658
+        },
+        {
+          "book_id": "judges",
+          "chapters_expected": 21,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 21,
+          "languages": {
+            "he": 618
+          },
+          "mapped": 0,
+          "passages": 618,
+          "unmapped": 618
+        },
+        {
+          "book_id": "samuel1",
+          "chapters_expected": 31,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 31,
+          "languages": {
+            "he": 811
+          },
+          "mapped": 0,
+          "passages": 811,
+          "unmapped": 811
+        },
+        {
+          "book_id": "samuel2",
+          "chapters_expected": 24,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 24,
+          "languages": {
+            "he": 695
+          },
+          "mapped": 0,
+          "passages": 695,
+          "unmapped": 695
+        },
+        {
+          "book_id": "kings1",
+          "chapters_expected": 22,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 22,
+          "languages": {
+            "he": 817
+          },
+          "mapped": 0,
+          "passages": 817,
+          "unmapped": 817
+        },
+        {
+          "book_id": "kings2",
+          "chapters_expected": 25,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 25,
+          "languages": {
+            "he": 719
+          },
+          "mapped": 0,
+          "passages": 719,
+          "unmapped": 719
+        },
+        {
+          "book_id": "isaiah",
+          "chapters_expected": 66,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 66,
+          "languages": {
+            "he": 1291
+          },
+          "mapped": 0,
+          "passages": 1291,
+          "unmapped": 1291
+        },
+        {
+          "book_id": "jeremiah",
+          "chapters_expected": 52,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 52,
+          "languages": {
+            "arc": 1,
+            "he": 1363
+          },
+          "mapped": 0,
+          "passages": 1364,
+          "unmapped": 1364
+        },
+        {
+          "book_id": "ezekiel",
+          "chapters_expected": 48,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 48,
+          "languages": {
+            "he": 1273
+          },
+          "mapped": 0,
+          "passages": 1273,
+          "unmapped": 1273
+        },
+        {
+          "book_id": "hosea",
+          "chapters_expected": 14,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 14,
+          "languages": {
+            "he": 197
+          },
+          "mapped": 0,
+          "passages": 197,
+          "unmapped": 197
+        },
+        {
+          "book_id": "joel",
+          "chapters_expected": 4,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 4,
+          "languages": {
+            "he": 73
+          },
+          "mapped": 0,
+          "passages": 73,
+          "unmapped": 73
+        },
+        {
+          "book_id": "amos",
+          "chapters_expected": 9,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 9,
+          "languages": {
+            "he": 146
+          },
+          "mapped": 0,
+          "passages": 146,
+          "unmapped": 146
+        },
+        {
+          "book_id": "obadiah",
+          "chapters_expected": 1,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 1,
+          "languages": {
+            "he": 21
+          },
+          "mapped": 0,
+          "passages": 21,
+          "unmapped": 21
+        },
+        {
+          "book_id": "jonah",
+          "chapters_expected": 4,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 4,
+          "languages": {
+            "he": 48
+          },
+          "mapped": 0,
+          "passages": 48,
+          "unmapped": 48
+        },
+        {
+          "book_id": "micah",
+          "chapters_expected": 7,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 7,
+          "languages": {
+            "he": 105
+          },
+          "mapped": 0,
+          "passages": 105,
+          "unmapped": 105
+        },
+        {
+          "book_id": "nahum",
+          "chapters_expected": 3,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 3,
+          "languages": {
+            "he": 47
+          },
+          "mapped": 0,
+          "passages": 47,
+          "unmapped": 47
+        },
+        {
+          "book_id": "habakkuk",
+          "chapters_expected": 3,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 3,
+          "languages": {
+            "he": 56
+          },
+          "mapped": 0,
+          "passages": 56,
+          "unmapped": 56
+        },
+        {
+          "book_id": "zephaniah",
+          "chapters_expected": 3,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 3,
+          "languages": {
+            "he": 53
+          },
+          "mapped": 0,
+          "passages": 53,
+          "unmapped": 53
+        },
+        {
+          "book_id": "haggai",
+          "chapters_expected": 2,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 2,
+          "languages": {
+            "he": 38
+          },
+          "mapped": 0,
+          "passages": 38,
+          "unmapped": 38
+        },
+        {
+          "book_id": "zechariah",
+          "chapters_expected": 14,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 14,
+          "languages": {
+            "he": 211
+          },
+          "mapped": 0,
+          "passages": 211,
+          "unmapped": 211
+        },
+        {
+          "book_id": "malachi",
+          "chapters_expected": 3,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 3,
+          "languages": {
+            "he": 55
+          },
+          "mapped": 0,
+          "passages": 55,
+          "unmapped": 55
+        },
+        {
+          "book_id": "psalms",
+          "chapters_expected": 150,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 150,
+          "languages": {
+            "he": 2527
+          },
+          "mapped": 0,
+          "passages": 2527,
+          "unmapped": 2527
+        },
+        {
+          "book_id": "proverbs",
+          "chapters_expected": 31,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 31,
+          "languages": {
+            "he": 915
+          },
+          "mapped": 0,
+          "passages": 915,
+          "unmapped": 915
+        },
+        {
+          "book_id": "job",
+          "chapters_expected": 42,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 42,
+          "languages": {
+            "he": 1070
+          },
+          "mapped": 0,
+          "passages": 1070,
+          "unmapped": 1070
+        },
+        {
+          "book_id": "songofsolomon",
+          "chapters_expected": 8,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 8,
+          "languages": {
+            "he": 117
+          },
+          "mapped": 0,
+          "passages": 117,
+          "unmapped": 117
+        },
+        {
+          "book_id": "ruth",
+          "chapters_expected": 4,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 4,
+          "languages": {
+            "he": 85
+          },
+          "mapped": 0,
+          "passages": 85,
+          "unmapped": 85
+        },
+        {
+          "book_id": "lamentations",
+          "chapters_expected": 5,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 5,
+          "languages": {
+            "he": 154
+          },
+          "mapped": 0,
+          "passages": 154,
+          "unmapped": 154
+        },
+        {
+          "book_id": "ecclesiastes",
+          "chapters_expected": 12,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 12,
+          "languages": {
+            "he": 222
+          },
+          "mapped": 0,
+          "passages": 222,
+          "unmapped": 222
+        },
+        {
+          "book_id": "esther",
+          "chapters_expected": 10,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 10,
+          "languages": {
+            "he": 167
+          },
+          "mapped": 0,
+          "passages": 167,
+          "unmapped": 167
+        },
+        {
+          "book_id": "daniel",
+          "chapters_expected": 12,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 12,
+          "languages": {
+            "arc": 199,
+            "he": 157,
+            "mul": 1
+          },
+          "mapped": 1,
+          "passages": 357,
+          "unmapped": 356
+        },
+        {
+          "book_id": "ezra",
+          "chapters_expected": 10,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 10,
+          "languages": {
+            "arc": 67,
+            "he": 213
+          },
+          "mapped": 0,
+          "passages": 280,
+          "unmapped": 280
+        },
+        {
+          "book_id": "nehemiah",
+          "chapters_expected": 13,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 13,
+          "languages": {
+            "he": 405
+          },
+          "mapped": 0,
+          "passages": 405,
+          "unmapped": 405
+        },
+        {
+          "book_id": "chronicles1",
+          "chapters_expected": 29,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 29,
+          "languages": {
+            "he": 943
+          },
+          "mapped": 0,
+          "passages": 943,
+          "unmapped": 943
+        },
+        {
+          "book_id": "chronicles2",
+          "chapters_expected": 36,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 36,
+          "languages": {
+            "he": 822
+          },
+          "mapped": 0,
+          "passages": 822,
+          "unmapped": 822
+        }
+      ],
+      "books_missing": [],
+      "edition_id": "oe"
+    },
+    {
+      "books": [
+        {
+          "book_id": "matthew",
+          "chapters_expected": 28,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 28,
+          "languages": {
+            "grc": 1071
+          },
+          "mapped": 0,
+          "passages": 1071,
+          "unmapped": 1071
+        },
+        {
+          "book_id": "mark",
+          "chapters_expected": 16,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 16,
+          "languages": {
+            "grc": 664
+          },
+          "mapped": 0,
+          "passages": 664,
+          "unmapped": 664
+        },
+        {
+          "book_id": "luke",
+          "chapters_expected": 24,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 24,
+          "languages": {
+            "grc": 1152
+          },
+          "mapped": 0,
+          "passages": 1152,
+          "unmapped": 1152
+        },
+        {
+          "book_id": "john",
+          "chapters_expected": 21,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 21,
+          "languages": {
+            "grc": 866
+          },
+          "mapped": 2,
+          "passages": 866,
+          "unmapped": 864
+        },
+        {
+          "book_id": "acts",
+          "chapters_expected": 28,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 28,
+          "languages": {
+            "grc": 1010
+          },
+          "mapped": 0,
+          "passages": 1010,
+          "unmapped": 1010
+        },
+        {
+          "book_id": "romans",
+          "chapters_expected": 16,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 16,
+          "languages": {
+            "grc": 434
+          },
+          "mapped": 0,
+          "passages": 434,
+          "unmapped": 434
+        },
+        {
+          "book_id": "corinthians1",
+          "chapters_expected": 16,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 16,
+          "languages": {
+            "grc": 437
+          },
+          "mapped": 0,
+          "passages": 437,
+          "unmapped": 437
+        },
+        {
+          "book_id": "corinthians2",
+          "chapters_expected": 13,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 13,
+          "languages": {
+            "grc": 260
+          },
+          "mapped": 0,
+          "passages": 260,
+          "unmapped": 260
+        },
+        {
+          "book_id": "galatians",
+          "chapters_expected": 6,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 6,
+          "languages": {
+            "grc": 150
+          },
+          "mapped": 0,
+          "passages": 150,
+          "unmapped": 150
+        },
+        {
+          "book_id": "ephesians",
+          "chapters_expected": 6,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 6,
+          "languages": {
+            "grc": 158
+          },
+          "mapped": 0,
+          "passages": 158,
+          "unmapped": 158
+        },
+        {
+          "book_id": "philippians",
+          "chapters_expected": 4,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 4,
+          "languages": {
+            "grc": 105
+          },
+          "mapped": 0,
+          "passages": 105,
+          "unmapped": 105
+        },
+        {
+          "book_id": "colossians",
+          "chapters_expected": 4,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 4,
+          "languages": {
+            "grc": 97
+          },
+          "mapped": 0,
+          "passages": 97,
+          "unmapped": 97
+        },
+        {
+          "book_id": "thessalonians1",
+          "chapters_expected": 5,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 5,
+          "languages": {
+            "grc": 92
+          },
+          "mapped": 0,
+          "passages": 92,
+          "unmapped": 92
+        },
+        {
+          "book_id": "thessalonians2",
+          "chapters_expected": 3,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 3,
+          "languages": {
+            "grc": 48
+          },
+          "mapped": 0,
+          "passages": 48,
+          "unmapped": 48
+        },
+        {
+          "book_id": "timothy1",
+          "chapters_expected": 6,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 6,
+          "languages": {
+            "grc": 114
+          },
+          "mapped": 0,
+          "passages": 114,
+          "unmapped": 114
+        },
+        {
+          "book_id": "timothy2",
+          "chapters_expected": 4,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 4,
+          "languages": {
+            "grc": 83
+          },
+          "mapped": 0,
+          "passages": 83,
+          "unmapped": 83
+        },
+        {
+          "book_id": "titus",
+          "chapters_expected": 3,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 3,
+          "languages": {
+            "grc": 46
+          },
+          "mapped": 0,
+          "passages": 46,
+          "unmapped": 46
+        },
+        {
+          "book_id": "philemon",
+          "chapters_expected": 1,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 1,
+          "languages": {
+            "grc": 25
+          },
+          "mapped": 0,
+          "passages": 25,
+          "unmapped": 25
+        },
+        {
+          "book_id": "hebrews",
+          "chapters_expected": 13,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 13,
+          "languages": {
+            "grc": 306
+          },
+          "mapped": 0,
+          "passages": 306,
+          "unmapped": 306
+        },
+        {
+          "book_id": "james",
+          "chapters_expected": 5,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 5,
+          "languages": {
+            "grc": 108
+          },
+          "mapped": 0,
+          "passages": 108,
+          "unmapped": 108
+        },
+        {
+          "book_id": "peter1",
+          "chapters_expected": 5,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 5,
+          "languages": {
+            "grc": 106
+          },
+          "mapped": 0,
+          "passages": 106,
+          "unmapped": 106
+        },
+        {
+          "book_id": "peter2",
+          "chapters_expected": 3,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 3,
+          "languages": {
+            "grc": 61
+          },
+          "mapped": 0,
+          "passages": 61,
+          "unmapped": 61
+        },
+        {
+          "book_id": "john1",
+          "chapters_expected": 5,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 5,
+          "languages": {
+            "grc": 106
+          },
+          "mapped": 0,
+          "passages": 106,
+          "unmapped": 106
+        },
+        {
+          "book_id": "john2",
+          "chapters_expected": 1,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 1,
+          "languages": {
+            "grc": 13
+          },
+          "mapped": 0,
+          "passages": 13,
+          "unmapped": 13
+        },
+        {
+          "book_id": "john3",
+          "chapters_expected": 1,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 1,
+          "languages": {
+            "grc": 15
+          },
+          "mapped": 0,
+          "passages": 15,
+          "unmapped": 15
+        },
+        {
+          "book_id": "jude",
+          "chapters_expected": 1,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 1,
+          "languages": {
+            "grc": 25
+          },
+          "mapped": 0,
+          "passages": 25,
+          "unmapped": 25
+        },
+        {
+          "book_id": "revelation",
+          "chapters_expected": 22,
+          "chapters_missing": [],
+          "chapters_outside_registry": [],
+          "chapters_present": 22,
+          "languages": {
+            "grc": 407
+          },
+          "mapped": 0,
+          "passages": 407,
+          "unmapped": 407
+        }
+      ],
+      "books_missing": [],
+      "edition_id": "sblgnt-tagnt"
+    }
+  ],
+  "families": [
+    {
+      "disposition": "included",
+      "evidence": [
+        "docs/terms.md:65-67",
+        "README.md:121-123"
+      ],
+      "id": "oe",
+      "inputs": 929,
+      "normalized": 23213,
+      "reason": "OE Hebrew/Aramaic chapter files: morphhb lemma and morphology CC BY 4.0, WLC text public domain, hebrew-bible text GPL-3.0. Attribution travels in the oe edition record.",
+      "records": {
+        "passages": 23213,
+        "tokens": 306784
+      },
+      "units": 23213,
+      "unresolved": 0
+    },
+    {
+      "disposition": "deferred",
+      "evidence": [
+        "data/oe/raw/genesis.json"
+      ],
+      "id": "oe-raw",
+      "reason": "Per-book raw OE files are the source of the included chapter files; normalizing both would duplicate every passage."
+    },
+    {
+      "disposition": "included",
+      "evidence": [
+        "data/delitzsch/raw/DHNT'85+.zip",
+        "scripts/delitzsch/config.py:33",
+        "scripts/delitzsch/matcher_runner.py:77",
+        "docs/decisions/0015-knowledge-corpus-inventory.md:16"
+      ],
+      "id": "delitzsch-text",
+      "inputs": 260,
+      "normalized": 7956,
+      "reason": "Delitzsch 1885 Hebrew New Testament as carried by the DHNT'85+ module in data/delitzsch/raw, the source the parser reads. The module's info table states 'Copyright Public Domain. Delitzsch, Franz, 1885'; that self-declaration is the only license evidence in the repository, and docs/terms.md has no row for the Delitzsch text. Passage text is the parsed verse with prefix-segmentation slashes removed. For all 7,956 verses it equals the module verse text after its <S> Strong's tags are removed, each maqaf-space pair is closed to the maqaf alone, and leading and trailing whitespace is trimmed. Word surfaces are kept; Strong's codes and prefixes are withheld (see delitzsch-strongs).",
+      "records": {
+        "passages": 7956,
+        "tokens": 109767
+      },
+      "units": 7956,
+      "unresolved": 0
+    },
+    {
+      "disposition": "restricted",
+      "evidence": [
+        "docs/terms.md:74",
+        "README.md:125",
+        "web/ATTRIBUTIONS.md:7"
+      ],
+      "id": "delitzsch-strongs",
+      "reason": "The per-word Strong's mapping in the parsed Delitzsch files originates from ph4.org, whose license is unclear (site copyright 2005-2026 Ph4)."
+    },
+    {
+      "disposition": "deferred",
+      "evidence": [
+        "scripts/delitzsch/config.py:33",
+        "scripts/delitzsch/sqlite_loader.py:1-5"
+      ],
+      "id": "delitzsch-module",
+      "reason": "The DHNT'85+ SQLite module is the source of the included parsed chapters. Its text is normalized through them; its embedded Strong's tags fall under delitzsch-strongs."
+    },
+    {
+      "disposition": "deferred",
+      "evidence": [
+        "data/delitzsch/john.json",
+        "scripts/delitzsch/book_processor.py:106-126"
+      ],
+      "id": "delitzsch-1877-books",
+      "reason": "Per-book files of a different Delitzsch edition (metadata publication_year 1877) read only by the legacy parser path. With segmentation removed and both texts NFC-normalized, 6,209 of 7,956 verses differ from the parsed 1885 text. Contract v1 has one Delitzsch edition, so this edition is deferred."
+    },
+    {
+      "disposition": "deferred",
+      "evidence": [
+        "contracts/biblical-knowledge/v1/README.md:94",
+        "data/delitzsch/review/README.md:3"
+      ],
+      "id": "delitzsch-review",
+      "reason": "Review decisions are lexical adjudication and dictionary work, which this normalization excludes."
+    },
+    {
+      "disposition": "included",
+      "evidence": [
+        "docs/terms.md:71-72",
+        "docs/greek-besorah-source-licenses.md:9-38"
+      ],
+      "id": "greek-sblgnt-tagnt",
+      "inputs": 260,
+      "normalized": 7959,
+      "reason": "Committed SBLGNT reading with STEPBible TAGNT tags, both CC BY 4.0 with required notices that travel in the sblgnt-tagnt edition record.",
+      "records": {
+        "passages": 7959,
+        "tokens": 137209
+      },
+      "units": 7959,
+      "unresolved": 0
+    },
+    {
+      "disposition": "included",
+      "evidence": [
+        "docs/terms.md:72-73",
+        "docs/greek-besorah-source-licenses.md:36"
+      ],
+      "id": "greek-lexicon",
+      "inputs": 1,
+      "normalized": 11040,
+      "reason": "TBESG / UBS lexicon of the committed Greek release. Only entry identifiers and lemmas are normalized; definitions are never copied.",
+      "records": {
+        "evidence": 11040
+      },
+      "units": 11040,
+      "unresolved": 0
+    },
+    {
+      "disposition": "deferred",
+      "evidence": [
+        "data/greek/README.md"
+      ],
+      "id": "greek-preview-bundles",
+      "reason": "Runtime bundle copies, lexicon shards, occurrence indexes and release metadata derived from the same Greek release; the release chapters and lexicon are normalized directly."
+    },
+    {
+      "disposition": "unavailable",
+      "evidence": [
+        ".gitignore:12-17",
+        "contracts/biblical-knowledge/v1/README.md:104"
+      ],
+      "id": "greek-downloads",
+      "reason": "Official STEPBible/UBS downloads and importer outputs are ignored by Git and are not inputs."
+    },
+    {
+      "disposition": "included",
+      "evidence": [
+        "docs/terms.md:66",
+        "README.md:122"
+      ],
+      "id": "hebrew-lexicon",
+      "inputs": 1,
+      "normalized": 7360,
+      "reason": "Open Scriptures Hebrew Lexicon CC BY 4.0 with public-domain BDB/Strong's. Only entry identifiers and lemmas are normalized; definitions are never copied.",
+      "records": {
+        "evidence": 7360
+      },
+      "units": 7360,
+      "unresolved": 0
+    },
+    {
+      "disposition": "restricted",
+      "evidence": [
+        "data/dict/raw/tcysite/source_manifest.json:5"
+      ],
+      "id": "tcy-definitions",
+      "reason": "Torah con Yehoshua' Hamashiaj definitions were given to the project owner as permission to use, not to redistribute."
+    },
+    {
+      "disposition": "deferred",
+      "evidence": [
+        "contracts/biblical-knowledge/v1/README.md:94",
+        "contracts/biblical-knowledge/v1/README.md:241"
+      ],
+      "id": "dictionary-derived",
+      "reason": "Raw lexicon sources, per-book word lists, prefixes, roots, translations and reports are dictionary population and adjudication inputs, which this normalization excludes."
+    },
+    {
+      "disposition": "included",
+      "evidence": [
+        "docs/terms.md:70",
+        "README.md:124"
+      ],
+      "id": "bes",
+      "inputs": 66,
+      "normalized": 31101,
+      "reason": "SPABES Spanish Bible, CC BY 4.0 with attribution in the bes-es edition record. Native verse labels are kept; no mapping is inferred.",
+      "records": {
+        "passages": 31101
+      },
+      "units": 31101,
+      "unresolved": 0
+    },
+    {
+      "disposition": "deferred",
+      "evidence": [
+        "data/bes/raw/spa-bes.usfx.xml"
+      ],
+      "id": "bes-raw",
+      "reason": "The USFX file is the source of the included per-book JSON; normalizing both would duplicate passages."
+    },
+    {
+      "disposition": "restricted",
+      "evidence": [
+        "docs/terms.md:69",
+        "docs/decisions/0015-knowledge-corpus-inventory.md:15"
+      ],
+      "id": "tth",
+      "reason": "Licensed TTH translation, restricted pending the Doldan agreement. The existing pilot inputs stay unchanged; no new normalized TTH artifacts are produced."
+    },
+    {
+      "disposition": "restricted",
+      "evidence": [
+        "docs/terms.md:68",
+        ".gitignore:8-10",
+        "AGENTS.md:7"
+      ],
+      "id": "ts2009",
+      "reason": "Licensed ISR text, served from Supabase Storage and ignored by Git; not present in the repository."
+    },
+    {
+      "disposition": "restricted",
+      "evidence": [
+        "docs/terms.md:75",
+        ".gitignore:19-21"
+      ],
+      "id": "dss",
+      "reason": "Qumran data has no stated license and docs/terms.md treats it as non-redistributable; a .gitignore comment claims CC BY-SA 4.0. The conflict is unresolved."
+    },
+    {
+      "disposition": "deferred",
+      "evidence": [
+        "contracts/biblical-knowledge/v1/README.md:102-103"
+      ],
+      "id": "hutter",
+      "reason": "The contract lists the Hutter connector as not implemented, and the committed data is a staging transcription pipeline rather than a reviewed edition."
+    },
+    {
+      "disposition": "deferred",
+      "evidence": [
+        "docs/decisions/0015-knowledge-corpus-inventory.md:17"
+      ],
+      "id": "translit",
+      "reason": "Transliteration is a second annotation layer over OE and Delitzsch tokens; contract v1 has no record kind for it. DSS transliterations also inherit the dss restriction."
+    },
+    {
+      "disposition": "deferred",
+      "evidence": [
+        "contracts/biblical-knowledge/v1/README.md:99"
+      ],
+      "id": "relationships",
+      "reason": "The contextual relationship catalog is owned by #184."
+    },
+    {
+      "disposition": "unavailable",
+      "evidence": [
+        ".gitignore:178-179"
+      ],
+      "id": "commentary-generated",
+      "reason": "The Shaul commentary search corpus is generated and ignored by Git; its public source notes are normalized directly as shaul-notes."
+    },
+    {
+      "disposition": "included",
+      "evidence": [
+        "docs/decisions/0015-knowledge-corpus-inventory.md:9",
+        "scripts/knowledge/compatibility.py:38"
+      ],
+      "id": "shaul-knowledge",
+      "inputs": 113,
+      "normalized": 79,
+      "reason": "Public Shaul knowledge records at the pinned revision.",
+      "records": {
+        "concepts": 52,
+        "evidence": 9,
+        "relations": 18
+      },
+      "units": 113,
+      "unresolved": 34
+    },
+    {
+      "disposition": "included",
+      "evidence": [
+        "docs/decisions/0015-knowledge-corpus-inventory.md:9",
+        "docs/decisions/0015-knowledge-corpus-inventory.md:14"
+      ],
+      "id": "shaul-notes",
+      "inputs": 735,
+      "normalized": 731,
+      "reason": "Public Shaul notes under content/besorah, content/tanaj and content/temas at the pinned revision.",
+      "records": {
+        "evidence": 731
+      },
+      "units": 735,
+      "unresolved": 4
+    },
+    {
+      "disposition": "deferred",
+      "evidence": [
+        "docs/decisions/0015-knowledge-corpus-inventory.md:11"
+      ],
+      "id": "shaul-site-pages",
+      "reason": "Shaul navigation pages, the content placeholder and authoring templates are not notes."
+    },
+    {
+      "disposition": "deferred",
+      "evidence": [
+        "docs/decisions/0015-knowledge-corpus-inventory.md:12"
+      ],
+      "id": "shaul-derived",
+      "reason": "Shaul generated/ graphs and data/ authoring inventories are derived metadata, not source records."
+    },
+    {
+      "disposition": "restricted",
+      "evidence": [
+        "contracts/biblical-knowledge/v1/README.md:104-105",
+        "docs/decisions/0015-knowledge-corpus-inventory.md:10"
+      ],
+      "id": "shaul-private",
+      "reason": "Private transcripts and local-only Shaul records are excluded entirely."
+    },
+    {
+      "disposition": "restricted",
+      "evidence": [
+        "docs/decisions/0015-knowledge-corpus-inventory.md:12",
+        "docs/decisions/0015-knowledge-corpus-inventory.md:15"
+      ],
+      "id": "shaul-scripture-mirrors",
+      "reason": "Shaul docs/scriptures mirrors Davar OE, Delitzsch and TTH files for local verse sheets. It carries TTH, which is restricted; the OE and Delitzsch copies are normalized from Davar directly."
+    }
+  ],
+  "input_manifest_digest": "4f18d857bef23d3f6aa687467e1c4739c1b0d17073e31e92f82b5e57b20137ad",
+  "snapshot": "v1"
+}

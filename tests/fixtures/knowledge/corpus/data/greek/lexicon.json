@@ -1,0 +1,64 @@
+{
+  "G0001G": {
+    "definitions": {
+      "en": {
+        "fuller": "Α, α, ἄλφα (which see), τό, indecl.,\nalpha, the first letter of the Greek alphabet. As a numeral, ά = 1, α = 1000. As a prefix, it appears to have at least two and perhaps three distinct senses:\n1. ἀ- (before a vowel, ἀν-) negative, as in ἄ-γνωστος, ἄ-δικος.\n2. ἀ-, ἁ- copulative, indicating community and fellowship, as in ἁ-πλοῦς, ἀ-κολουθέω, ἀ-δελφός.\n3. An intensive force (LS, s. α), as in ἀ-τενίζω is sometimes assumed (but see Boisacq, see word).\n(AS)",
+        "license": "CC-BY-4.0",
+        "review_status": "approved",
+        "short": "Alpha",
+        "source": "stepbible-tbesg"
+      },
+      "es": {
+        "fuller": "Α, α, ἄλφα (ver), τό, indecl.,\nalfa, la primera letra del alfabeto griego. Como numeral, ά = 1, α = 1000. Como prefijo, parece tener al menos dos y quizás tres sentidos distintos:\n1. ἀ- (ante vocal, ἀν-) negativo, como en ἄ-γνωστος, ἄ-δικος.\n2. ἀ-, ἁ- copulativo, que indica comunidad y participación, como en ἁ-πλοῦς, ἀ-κολουθέω, ἀ-δελφός.\n3. Una fuerza intensiva (LS, s. α), como en ἀ-τενίζω a veces se asume (pero ver Boisacq, ver palabra).\n(AS)",
+        "license": "CC-BY-4.0",
+        "review_status": "draft",
+        "short": "Alfa",
+        "source": "openrouter-tbesg"
+      },
+      "he": {
+        "fuller": "Α, α, ἄλφα (ר' ערך), τό, בלתי-נוטה,\nאלפא, האות הראשונה באלפבית היווני. כמספר, ά = 1, α = 1000. כתחילית, נראה שיש לו לפחות שתיים ואולי שלוש משמעויות נפרדות:\n1. ἀ- (לפני תנועה ἀν-) שלילית, כמו ἄ-γνωστος, ἄ-δικος.\n2. ἀ-, ἁ- מחברת, המציינת קהילה ואחווה, כמו ἁ-πλοῦς, ἀ-κολουθέω, ἀ-δελφός.\n3. לעיתים משוער כוח מעצים (LS, תחת α), כמו ἀ-τενίζω (אך ראה Boisacq, ר' ערך).\n(AS)",
+        "license": "CC-BY-4.0",
+        "review_status": "draft",
+        "short": "אלפא",
+        "source": "openrouter-tbesg"
+      }
+    },
+    "lemma": "α, Ἀλφα",
+    "occurrences_count": 3,
+    "strong": "G0001G",
+    "translit_en": "Alpha",
+    "translit_es": "a alfa",
+    "translit_he": "א אלפא"
+  },
+  "G0002": {
+    "definitions": {
+      "en": {
+        "fuller": "Ἀαρών (Heb. אַהֲרוֹן), indecl. (in FlJ, -ῶνος),\nAaron (Exo.4:14, al.): Luk.1:5, Act.7:40, Heb.5:4, 7:11, 9:4.†\n(AS)",
+        "license": "CC-BY-4.0",
+        "review_status": "approved",
+        "short": "Aaron",
+        "source": "stepbible-tbesg"
+      },
+      "es": {
+        "fuller": "el hermano mayor de Moisés y primer sumo sacerdote de Israel",
+        "license": "CC-BY-SA-4.0",
+        "review_status": "imported",
+        "short": "Aarón",
+        "source": "ubs-es"
+      },
+      "he": {
+        "fuller": "Ἀαρών (עברית: אַהֲרוֹן), בלתי-נוטה (אצל פלביוס, -ῶνος),\nאהרן (שמות ד:14, ועוד): לוקס א:5, מעשי השליחים ז:40, עברים ה:4, ז:11, ט:4.†\n(AS)",
+        "license": "CC-BY-4.0",
+        "review_status": "draft",
+        "short": "אַהֲרוֹן",
+        "source": "openrouter-tbesg"
+      }
+    },
+    "lemma": "Ἀαρών",
+    "occurrences_count": 5,
+    "strong": "G0002",
+    "translit_en": "Aarōn",
+    "translit_es": "Aaron",
+    "translit_he": "אארון"
+  }
+}
