@@ -114,10 +114,16 @@ const parseSide = (value: unknown, label: string): LexicalSide => {
 		["language", "strong", "lemma", "transliteration"],
 		label,
 	);
-	const language = oneOf(side.language, ["greek", "hebrew"], `${label}.language`);
+	const language = oneOf(
+		side.language,
+		["greek", "hebrew"],
+		`${label}.language`,
+	);
 	const strong = text(side.strong, `${label}.strong`);
 	if (!CANONICAL_STRONG[language].test(strong)) {
-		return invalid(`${label}.strong ${strong} is not a canonical ${language} Strong`);
+		return invalid(
+			`${label}.strong ${strong} is not a canonical ${language} Strong`,
+		);
 	}
 	return {
 		language,
@@ -136,7 +142,8 @@ const parseVerse = (value: unknown): VerseRef => {
 	oneOf(scope.system_id, ["davar-v1"], "scope.system_id");
 	oneOf(scope.kind, ["verse"], "scope.kind");
 	const bookId = text(scope.book_id, "scope.book_id");
-	if (!BOOK_IDS.has(bookId)) return invalid(`scope.book_id ${bookId} is unknown`);
+	if (!BOOK_IDS.has(bookId))
+		return invalid(`scope.book_id ${bookId} is unknown`);
 	if (!isPositiveInteger(scope.chapter) || !isPositiveInteger(scope.verse)) {
 		return invalid("scope chapter and verse must be positive integers");
 	}
@@ -186,7 +193,11 @@ const parseReview = (value: unknown): Review => {
 		["status", "reviewer", "reviewed_on"],
 		"review",
 	);
-	const status = oneOf(review.status, ["approved", "rejected"], "review.status");
+	const status = oneOf(
+		review.status,
+		["approved", "rejected"],
+		"review.status",
+	);
 	const reviewer = exactObject(review.reviewer, ["name"], "review.reviewer");
 	const reviewedOn = text(review.reviewed_on, "review.reviewed_on");
 	if (!/^\d{4}-\d{2}-\d{2}$/.test(reviewedOn)) {
@@ -249,7 +260,11 @@ const parseRelationship = (value: unknown): Relationship => {
 			source_id: text(provenance.source_id, "provenance.source_id"),
 			path: text(provenance.path, "provenance.path"),
 			json_pointer: text(provenance.json_pointer, "provenance.json_pointer"),
-			origin: oneOf(provenance.origin, ["source", "authored"], "provenance.origin"),
+			origin: oneOf(
+				provenance.origin,
+				["source", "authored"],
+				"provenance.origin",
+			),
 			transformation: oneOf(
 				provenance.transformation,
 				["extracted", "imported"],
@@ -419,6 +434,65 @@ export const createContextualRelationships = (
 };
 
 export const contextualRelationships = createContextualRelationships(raw);
+
+export type RelatedRequest = {
+	strong: string | null | undefined;
+	bookId: string | null;
+	chapter: number;
+	verse: number;
+	language: Language;
+};
+export type RelatedLoad = { key: string; entries: ContextualRelatedEntry[] };
+
+const relatedKey = (request: RelatedRequest): string =>
+	`${request.strong ?? ""}|${request.bookId ?? ""}.${request.chapter}.${request.verse}|${request.language}`;
+
+export const relatedRequest = (
+	strong: string | null | undefined,
+	verse: VerseRef | null,
+	language: Language,
+): RelatedRequest & { key: string } => {
+	const request = {
+		strong,
+		bookId: verse?.book_id ?? null,
+		chapter: verse?.chapter ?? 0,
+		verse: verse?.verse ?? 0,
+		language,
+	};
+	return { ...request, key: relatedKey(request) };
+};
+
+export const loadedEntries = (
+	load: RelatedLoad | null,
+	key: string,
+): ContextualRelatedEntry[] => (load?.key === key ? load.entries : []);
+
+export const watchRelated = (
+	catalog: ContextualRelationships,
+	request: RelatedRequest,
+	glossSource: RelatedGlossSource,
+	onLoad: (load: RelatedLoad) => void,
+): (() => void) => {
+	let cancelled = false;
+	const verse = request.bookId
+		? {
+				book_id: request.bookId,
+				chapter: request.chapter,
+				verse: request.verse,
+			}
+		: null;
+	void catalog
+		.loadRelated(
+			{ strong: request.strong, verse, language: request.language },
+			glossSource,
+		)
+		.then((entries) => {
+			if (!cancelled) onLoad({ key: relatedKey(request), entries });
+		});
+	return () => {
+		cancelled = true;
+	};
+};
 
 export const verseRef = (
 	book: string,
