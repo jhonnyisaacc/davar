@@ -6,8 +6,8 @@ when a custom entry repeats a definition order.
 
 Rules, first match wins:
 - blocked (pending_manual_review): a needs_manual_review decision names the entry.
-- approved (reviewed_definition_decision): every definition that is not an import
-  matches an applied create_custom_entry or upsert_custom_definition decision for
+- approved (reviewed_definition_decision): every definition that is not a TCY
+  import (its verdict lives in scripts/dict/tcysite_review.py) matches an applied create_custom_entry or upsert_custom_definition decision for
   the entry that names a person or agent reviewer (#386). A rule: reviewer
   approves nothing.
 - draft (unreviewed_definition): anything else.
@@ -75,7 +75,7 @@ def publication(key: str, entry: dict, ledger: Ledger) -> dict:
     if key in ledger.pending:
         return status("blocked", "pending_manual_review", [ledger.pending[key]])
     reviewed = ledger.reviewed.get(key, {})
-    own = [definition for definition in entry.get("definitions") or [] if definition.get("review_status") != "imported"]
+    own = [definition for definition in entry.get("definitions") or [] if not str(definition.get("source", "")).startswith("tcysite-")]
     refs = [reviewed.get(text_pair(definition)) for definition in own]
     if own and all(refs):
         return status("approved", "reviewed_definition_decision", sorted(set(refs)))

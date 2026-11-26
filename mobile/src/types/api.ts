@@ -59,7 +59,7 @@ export type DefinitionItem = {
   text: string;
   source: string;
   language: string;
-  review_status?: "approved" | "imported" | "draft";
+  review_status?: "approved" | "imported" | "draft" | "blocked";
   license?: string;
   sense?: string;
   definition_kind?: string;
