@@ -33,7 +33,7 @@
         "whitespace_threshold:31",
         "content_y:427-1994",
         "cut_lines:724,1078,1377,1691",
-        "manual_cut_override:725,900,1210,1530"
+        "manual_cut_override:725,912,1212,1530"
       ]
     },
     {
@@ -47,7 +47,7 @@
         "left": 111,
         "top": 707,
         "right": 661,
-        "bottom": 918
+        "bottom": 930
       },
       "status": "cropped",
       "notes": [
@@ -64,7 +64,7 @@
         "whitespace_threshold:31",
         "content_y:427-1994",
         "cut_lines:724,1078,1377,1691",
-        "manual_cut_override:725,900,1210,1530"
+        "manual_cut_override:725,912,1212,1530"
       ]
     },
     {
@@ -76,9 +76,9 @@
       "output_image": "data/hutter/verse_images/john2/001_003_000002.png",
       "crop_box": {
         "left": 111,
-        "top": 882,
+        "top": 894,
         "right": 661,
-        "bottom": 1228
+        "bottom": 1230
       },
       "status": "cropped",
       "notes": [
@@ -95,7 +95,7 @@
         "whitespace_threshold:31",
         "content_y:427-1994",
         "cut_lines:724,1078,1377,1691",
-        "manual_cut_override:725,900,1210,1530"
+        "manual_cut_override:725,912,1212,1530"
       ]
     },
     {
@@ -107,7 +107,7 @@
       "output_image": "data/hutter/verse_images/john2/001_004_000002.png",
       "crop_box": {
         "left": 111,
-        "top": 1192,
+        "top": 1194,
         "right": 661,
         "bottom": 1548
       },
@@ -126,7 +126,7 @@
         "whitespace_threshold:31",
         "content_y:427-1994",
         "cut_lines:724,1078,1377,1691",
-        "manual_cut_override:725,900,1210,1530"
+        "manual_cut_override:725,912,1212,1530"
       ]
     },
     {
@@ -157,7 +157,7 @@
         "whitespace_threshold:31",
         "content_y:427-1994",
         "cut_lines:724,1078,1377,1691",
-        "manual_cut_override:725,900,1210,1530"
+        "manual_cut_override:725,912,1212,1530"
       ]
     },
     {
@@ -169,9 +169,9 @@
       "output_image": "data/hutter/verse_images/john2/001_006_000004.png",
       "crop_box": {
         "left": 72,
-        "top": 43,
+        "top": 152,
         "right": 623,
-        "bottom": 392
+        "bottom": 501
       },
       "status": "cropped",
       "notes": [
@@ -185,7 +185,8 @@
         "dark_threshold:160",
         "whitespace_threshold:18",
         "content_y:61-1999",
-        "cut_lines:374,691,1001,1328,1621"
+        "cut_lines:374,691,1001,1328,1621",
+        "manual_cut_override:483,795,999,1331,1624"
       ]
     },
     {
@@ -197,9 +198,9 @@
       "output_image": "data/hutter/verse_images/john2/001_007_000004.png",
       "crop_box": {
         "left": 72,
-        "top": 356,
+        "top": 465,
         "right": 623,
-        "bottom": 709
+        "bottom": 813
       },
       "status": "cropped",
       "notes": [
@@ -213,7 +214,8 @@
         "dark_threshold:160",
         "whitespace_threshold:18",
         "content_y:61-1999",
-        "cut_lines:374,691,1001,1328,1621"
+        "cut_lines:374,691,1001,1328,1621",
+        "manual_cut_override:483,795,999,1331,1624"
       ]
     },
     {
@@ -225,9 +227,9 @@
       "output_image": "data/hutter/verse_images/john2/001_008_000004.png",
       "crop_box": {
         "left": 72,
-        "top": 673,
+        "top": 777,
         "right": 623,
-        "bottom": 1019
+        "bottom": 1017
       },
       "status": "cropped",
       "notes": [
@@ -241,7 +243,8 @@
         "dark_threshold:160",
         "whitespace_threshold:18",
         "content_y:61-1999",
-        "cut_lines:374,691,1001,1328,1621"
+        "cut_lines:374,691,1001,1328,1621",
+        "manual_cut_override:483,795,999,1331,1624"
       ]
     },
     {
@@ -253,9 +256,9 @@
       "output_image": "data/hutter/verse_images/john2/001_009_000004.png",
       "crop_box": {
         "left": 72,
-        "top": 983,
+        "top": 981,
         "right": 623,
-        "bottom": 1346
+        "bottom": 1349
       },
       "status": "cropped",
       "notes": [
@@ -269,7 +272,8 @@
         "dark_threshold:160",
         "whitespace_threshold:18",
         "content_y:61-1999",
-        "cut_lines:374,691,1001,1328,1621"
+        "cut_lines:374,691,1001,1328,1621",
+        "manual_cut_override:483,795,999,1331,1624"
       ]
     },
     {
@@ -281,9 +285,9 @@
       "output_image": "data/hutter/verse_images/john2/001_010_000004.png",
       "crop_box": {
         "left": 72,
-        "top": 1310,
+        "top": 1313,
         "right": 623,
-        "bottom": 1639
+        "bottom": 1642
       },
       "status": "cropped",
       "notes": [
@@ -297,7 +301,8 @@
         "dark_threshold:160",
         "whitespace_threshold:18",
         "content_y:61-1999",
-        "cut_lines:374,691,1001,1328,1621"
+        "cut_lines:374,691,1001,1328,1621",
+        "manual_cut_override:483,795,999,1331,1624"
       ]
     },
     {
@@ -309,9 +314,9 @@
       "output_image": "data/hutter/verse_images/john2/001_011_000004.png",
       "crop_box": {
         "left": 72,
-        "top": 1603,
+        "top": 1606,
         "right": 623,
-        "bottom": 2017
+        "bottom": 1938
       },
       "status": "cropped",
       "notes": [
@@ -325,7 +330,8 @@
         "dark_threshold:160",
         "whitespace_threshold:18",
         "content_y:61-1999",
-        "cut_lines:374,691,1001,1328,1621"
+        "cut_lines:374,691,1001,1328,1621",
+        "manual_cut_override:483,795,999,1331,1624"
       ]
     },
     {
@@ -337,9 +343,9 @@
       "output_image": "data/hutter/verse_images/john2/001_012_000006.png",
       "crop_box": {
         "left": 123,
-        "top": 132,
+        "top": 137,
         "right": 672,
-        "bottom": 578
+        "bottom": 589
       },
       "status": "cropped",
       "notes": [
@@ -356,7 +362,7 @@
         "whitespace_threshold:12",
         "content_y:46-727",
         "cut_lines:366",
-        "manual_cut_override:560",
+        "manual_cut_override:571",
         "First word unclear - appears to be לִבְחֻרֶת",
         "Multiple words difficult to parse due to print quality",
         "Vowel marks inconsistent or unclear in several positions"
@@ -371,9 +377,9 @@
       "output_image": "data/hutter/verse_images/john2/001_013_000006.png",
       "crop_box": {
         "left": 123,
-        "top": 542,
+        "top": 553,
         "right": 672,
-        "bottom": 778
+        "bottom": 773
       },
       "status": "cropped",
       "notes": [
@@ -390,7 +396,7 @@
         "whitespace_threshold:12",
         "content_y:46-727",
         "cut_lines:366",
-        "manual_cut_override:560",
+        "manual_cut_override:571",
         "Very short verse - appears incomplete or fragmentary",
         "Print quality degraded"
       ]

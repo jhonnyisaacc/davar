@@ -1,8 +1,11 @@
 {
   "baseline_ref": "2fdb23cad",
   "books_image_reviewed": 27,
-  "image_confirmed_corrected_verses": 25,
-  "crop_pages_corrected": 4,
+  "corrected_verses_by_review_status": {
+    "image_confirmed": 24,
+    "letters_confirmed": 13
+  },
+  "crop_pages_corrected": 6,
   "before": {
     "totals": {
       "hebrew_letters": 418576,
@@ -23,15 +26,16 @@
   },
   "after": {
     "totals": {
-      "hebrew_letters": 418588,
+      "hebrew_letters": 418776,
       "non_nfc_verses": 316,
-      "tokens": 107730,
+      "tokens": 107779,
       "verses": 7943
     },
     "finding_counts": {
       "multi_page_extraction_review": 2,
-      "ocr_disagreement": 7476,
+      "ocr_disagreement": 7475,
       "pointing_punctuation_or_segmentation_disagreement": 419,
+      "pointing_unverified": 13,
       "possible_duplicated_verse": 2,
       "possible_duplicated_word": 181
     }
@@ -60,26 +64,27 @@
   },
   "mapping_after": {
     "book_count": 27,
-    "word_count": 107730,
-    "mapped_count": 104007,
-    "unresolved_count": 3723,
-    "coverage": 0.9654413812308549,
+    "word_count": 107779,
+    "mapped_count": 106329,
+    "unresolved_count": 1450,
+    "coverage": 0.9865465443175386,
     "mapping_method_counts": {
       "aligned_custom_name": 3,
-      "aligned_spelling_variant": 3274,
-      "attested_pointed_surface": 74536,
-      "attested_prefixed_form": 9221,
-      "attested_surface": 8715,
+      "aligned_spelling_variant": 3158,
+      "attested_pointed_surface": 74471,
+      "attested_prefixed_form": 9212,
+      "attested_surface": 8711,
       "contextual_custom_variant": 31,
-      "exact_custom_lemma": 2158,
-      "lexicon_lemma": 2128,
-      "manual_override": 2952,
-      "ocr_crosscheck": 606,
-      "same_verse_spelling": 189,
-      "unresolved": 3723,
+      "exact_custom_lemma": 2161,
+      "lexicon_lemma": 2126,
+      "manual_override": 2956,
+      "morphology_api_override": 2561,
+      "ocr_crosscheck": 578,
+      "same_verse_spelling": 167,
+      "unresolved": 1450,
       "verse_context_custom": 194
     }
   },
-  "static_and_offline_verified_verses": 25,
+  "static_and_offline_verified_verses": 37,
   "transcription_accuracy": "Not measured: samples are selected for review and are not a representative gold corpus."
 }

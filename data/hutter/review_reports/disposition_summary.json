@@ -24,14 +24,14 @@
         "historical_variant": 0,
         "corrected": 0,
         "blocked": 0,
-        "requires_review": 7476
+        "requires_review": 7475
       },
       "verses": {
         "verified_current": 0,
         "historical_variant": 0,
         "corrected": 0,
         "blocked": 0,
-        "requires_review": 7476
+        "requires_review": 7475
       }
     },
     "pointing_punctuation_or_segmentation_disagreement": {
@@ -48,6 +48,22 @@
         "corrected": 0,
         "blocked": 0,
         "requires_review": 419
+      }
+    },
+    "pointing_unverified": {
+      "findings": {
+        "verified_current": 0,
+        "historical_variant": 0,
+        "corrected": 0,
+        "blocked": 0,
+        "requires_review": 13
+      },
+      "verses": {
+        "verified_current": 0,
+        "historical_variant": 0,
+        "corrected": 0,
+        "blocked": 0,
+        "requires_review": 13
       }
     },
     "possible_duplicated_verse": {
@@ -89,7 +105,7 @@
       "historical_variant": 0,
       "corrected": 0,
       "blocked": 0,
-      "requires_review": 8080
+      "requires_review": 8092
     },
     "verses": {
       "verified_current": 0,
