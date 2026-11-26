@@ -548,7 +548,11 @@ def import_data(source_root: Path) -> dict[str, Any]:
     stats["output_entries"] = len(output)
     stats["fallback_rows_reported"] = len(fallback_rows)
 
+    from .tcysite_review import REPORT_PATH as REVIEW_REPORT_PATH, apply_reviews, load_decisions
+
+    review_report = apply_reviews(output, load_decisions())
     write_json(CUSTOM_PATH, output)
+    write_json(REVIEW_REPORT_PATH, review_report)
     report = {
         "schema_version": 1,
         "generated_at": manifest.get("retrieved_at"),
