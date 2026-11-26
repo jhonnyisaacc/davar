@@ -40,6 +40,16 @@ DISPOSITIONS = {
 STATUSES = (*DISPOSITIONS, REQUIRES_REVIEW)
 
 
+class Review(NamedTuple):
+    pointing_verified: bool
+
+
+LEDGER_REVIEWS = {
+    "image_confirmed": Review(pointing_verified=True),
+    "letters_confirmed": Review(pointing_verified=False),
+}
+
+
 def sha256_text(text):
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
@@ -61,6 +71,12 @@ def local_path(key):
 def load_index(root):
     path = root / IMAGE_INDEX
     return json.loads(path.read_text(encoding="utf-8"))["files"] if path.exists() else {}
+
+
+def require_indexed(index, path, sha256):
+    entry = index.get(image_key(path))
+    if entry is None or entry["sha256"] != sha256:
+        raise ValueError(f"Source image changed: {path}")
 
 
 def assign_ids(findings):
@@ -124,8 +140,8 @@ def validate(rows, findings, texts, corrections, index):
             errors.append(f"{where}: correction reference is required exactly when disposition is corrected")
         if reference is not None:
             fix = corrections[reference] if isinstance(reference, int) and 0 <= reference < len(corrections) else {}
-            if fix.get("review_status") != "image_confirmed" or (fix["book"], fix["chapter"], fix["verse"]) != verse:
-                errors.append(f"{where}: correction {reference!r} is not an image-confirmed correction of this verse")
+            if fix.get("review_status") not in LEDGER_REVIEWS or (fix["book"], fix["chapter"], fix["verse"]) != verse:
+                errors.append(f"{where}: correction {reference!r} is not a reviewed correction of this verse")
             elif fix["after"] != text:
                 errors.append(f"{where}: verse text is not the correction's after text")
     return errors

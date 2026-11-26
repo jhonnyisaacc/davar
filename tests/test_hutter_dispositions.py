@@ -17,12 +17,9 @@ def sha(data):
 
 
 def fixture(root, index=True):
-    page = root / "pages/000002.png"
-    page.parent.mkdir()
-    page.write_bytes(b"fixture page evidence")
     write(root / LEDGER, {"corrections": [
-        {"book": "john", "chapter": 1, "verse": 1, "source_image": "pages/000002.png",
-         "source_image_sha256": sha(page.read_bytes()), "before": "אב", "after": "אבא",
+        {"book": "john", "chapter": 1, "verse": 1, "source_image": disp.local_path(PAGE),
+         "source_image_sha256": sha(b"page"), "before": "אב", "after": "אבא",
          "review_status": "image_confirmed", "evidence": "fixture"}]})
     write(root / SOURCE / "john.json", {"chapters": [{"number": 1, "verses": [
         {"number": 1, "text_nikud": "אב", "source_files": ["000002.png"]},
@@ -134,7 +131,7 @@ INVALID = {
     "foreign image": (replace(image={"path": OTHER_CROP, "sha256": sha(b"other")}), "not evidence for this verse"),
     "reference on uncorrected": (replace(correction=0), "exactly when disposition is corrected"),
     "corrected without reference": (replace(disposition="corrected"), "exactly when disposition is corrected"),
-    "unknown correction": (replace(disposition="corrected", correction=7), "not an image-confirmed correction"),
+    "unknown correction": (replace(disposition="corrected", correction=7), "not a reviewed correction"),
     "correction not applied": (replace(disposition="corrected", correction=0), "not the correction's after text"),
     "duplicate": (lambda row: [row, row], "duplicate finding_id"),
 }

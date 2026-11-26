@@ -135,6 +135,14 @@ bun run --cwd web generate-data
 `transcription_corrections.json` stores exact before/after verses, reviewed spans,
 page/crop locations, image SHA-256 hashes and evidence. Apply validates all image
 and text preconditions before writing; repeat application changes nothing.
+Each row has a `review_status`. `image_confirmed` means the letters and the
+pointing were checked against the page. `letters_confirmed` means the letters,
+word order and punctuation were checked, and the pointing is an unverified best
+reading. The audit keeps every verse whose text comes from a `letters_confirmed`
+row in the queue as a `pointing_unverified` finding. Rows apply in order, so a
+later row for the same verse supersedes an earlier one; its `before` is the
+earlier row's `after`. Apply and `map_strongs` check each page hash against
+`data/hutter/image_index.json`, so no local page images are needed.
 The report is gzip-compressed with a fixed timestamp for deterministic bytes;
 inspect it using `gzip -dc data/hutter/review_reports/transcription_audit.json.gz`.
 `transcription_summary.json` records the before/after metrics and export checks.
@@ -151,8 +159,12 @@ Historical defective spellings are not normalized to Delitzsch.
 The verifier compares the pre-pass snapshot `2fdb23cad` with this ledger, checks
 that other verses are unchanged, and checks all repaired verses in mappings,
 web chapter JSON and the mobile offline Hutter bundle. Generated bundles are
-not tracked; regenerate them before running the verifier. Source images are
-local archive assets and are needed for applying corrections, not CI fixture tests.
+not tracked; regenerate them before running the verifier.
+
+`map_strongs --write` regenerates every book and refuses a coverage drop. To
+replace only the reviewed verses of issues 127 and 411 and keep every other
+published mapping, run
+`.venv/bin/python -m scripts.hutter.map_strongs --reviewed-transcriptions-only --write`.
 
 ### Finding dispositions (#157)
 
@@ -167,7 +179,7 @@ survives a correction, and a `text_sha256` of the current verse. Reviews go in
 `data/hutter/dispositions/<book>.json`, one file per book. A disposition is
 `verified_current`, `historical_variant`, `corrected` or `blocked`. Each row
 records the verse text hash, the image path and hash, a rationale and the
-reviewer. A `corrected` row also gives the index of an image-confirmed entry in
+reviewer. A `corrected` row also gives the index of a reviewed entry in
 `transcription_corrections.json`. The audit fails when a row is stale: the
 finding is gone (only a `corrected` row may outlive its finding), the verse text
 or image hash changed, or the correction is not applied. Each finding's

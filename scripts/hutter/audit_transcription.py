@@ -52,15 +52,14 @@ def verses(payload):
 
 def apply_ledger(root=ROOT, ledger_path=LEDGER):
     """Validate every precondition before any write; repeated application is inert."""
-    ledger = read(root / ledger_path)
+    rows = read(root / ledger_path)["corrections"]
+    index = disp.load_index(root)
     pending = {}
     changed = 0
-    for row in ledger["corrections"]:
-        if row.get("review_status") != "image_confirmed" or not row.get("evidence"):
-            raise ValueError("Only explicit image-confirmed decisions can be applied")
-        image = root / row["source_image"]
-        if digest(image) != row["source_image_sha256"]:
-            raise ValueError(f"Source image changed: {image}")
+    for position, row in enumerate(rows):
+        if row.get("review_status") not in disp.LEDGER_REVIEWS or not row.get("evidence"):
+            raise ValueError("Only explicit image-reviewed decisions can be applied")
+        disp.require_indexed(index, row["source_image"], row["source_image_sha256"])
         book = row["book"]
         payload = pending.setdefault(book, read(root / SOURCE / f"{book}.json"))
         matches = [v for key, v in verses(payload) if key == (row["chapter"], row["verse"])]
@@ -69,7 +68,9 @@ def apply_ledger(root=ROOT, ledger_path=LEDGER):
         verse = matches[0]
         if Path(row["source_image"]).name not in verse.get("source_files", []):
             raise ValueError("Correction image is not assigned to this verse")
-        if verse["text_nikud"] == row["after"]:
+        superseding = {r["after"] for r in rows[position + 1:]
+                       if (r["book"], r["chapter"], r["verse"]) == (book, row["chapter"], row["verse"])}
+        if verse["text_nikud"] == row["after"] or verse["text_nikud"] in superseding:
             continue
         if verse["text_nikud"] != row["before"]:
             raise ValueError(f"Stale transcription precondition: {book} {row['chapter']}:{row['verse']}")
@@ -89,6 +90,8 @@ def audit(root=ROOT):
     hashes = {}
     texts = {}
     index = disp.load_index(root)
+    corrections = read(root / LEDGER)["corrections"]
+    governing = {(r["book"], r["chapter"], r["verse"]): r for r in corrections}
     for book in books:
         source = root / SOURCE / f"{book}.json"
         hashes[str(SOURCE / source.name)] = digest(source)
@@ -150,6 +153,9 @@ def audit(root=ROOT):
                 marks = re.findall(r"[\u05b0-\u05bc\u05c1\u05c2]+", unicodedata.normalize("NFD", token))
                 if any(len(m) != len(set(m)) for m in marks):
                     add("duplicated_niqqud", f"Repeated identical combining mark in {token}")
+            review = governing.get((book, *key))
+            if review and review["after"] == text and not disp.LEDGER_REVIEWS[review["review_status"]].pointing_verified:
+                add("pointing_unverified", "Letters, word order and punctuation match the page image; pointing is unverified")
             tokens = text.split()
             if any(letters(a) == letters(b) and letters(a) for a, b in zip(tokens, tokens[1:])):
                 add("possible_duplicated_word", "Adjacent repeated form; may be genuine rhetoric")
@@ -170,7 +176,7 @@ def audit(root=ROOT):
                 add("multi_page_extraction_review", "Do not compare a partial-page OCR result to a whole verse")
     disp.assign_ids(findings)
     rows, errors = disp.load_dispositions(root)
-    errors += disp.validate(rows, findings, texts, read(root / LEDGER)["corrections"], index)
+    errors += disp.validate(rows, findings, texts, corrections, index)
     if errors:
         raise ValueError("Invalid #157 dispositions:\n" + "\n".join(errors))
     status = {row["finding_id"]: row["disposition"] for row in rows}
@@ -196,7 +202,7 @@ def main():
         print(f"Indexed {len(index['files'])} images at {index['revision']}")
         return
     if args.apply_reviewed:
-        print(f"Applied {apply_ledger()} image-confirmed verse corrections")
+        print(f"Applied {apply_ledger()} image-reviewed verse corrections")
     report = audit()
     if args.fetch:
         wanted = set(args.finding)
