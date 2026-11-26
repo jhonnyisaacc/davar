@@ -15,6 +15,8 @@ from pathlib import Path
 import re
 import unicodedata
 
+from scripts.hutter import dispositions as disp
+
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = Path("data/hutter/staging/output")
 LEDGER = Path("data/hutter/transcription_corrections.json")
@@ -85,6 +87,8 @@ def audit(root=ROOT):
     findings = []
     totals = Counter()
     hashes = {}
+    texts = {}
+    index = disp.load_index(root)
     for book in books:
         source = root / SOURCE / f"{book}.json"
         hashes[str(SOURCE / source.name)] = digest(source)
@@ -107,6 +111,7 @@ def audit(root=ROOT):
         previous = {}
         for key, verse in verses(payload):
             text = verse.get("text_nikud", "")
+            texts[(book, *key)] = text
             totals["verses"] += 1
             totals["tokens"] += sum(bool(letters(p)) for word in text.split() for p in word.split("־"))
             totals["hebrew_letters"] += len(letters(text))
@@ -125,7 +130,7 @@ def audit(root=ROOT):
             seen.add(key)
             if not letters(text):
                 add("incomplete_extraction", "No Hebrew letters", confidence="high")
-            if not refs or any(not (root / p).is_file() for p in base["page_images"]):
+            if not refs or any(disp.image_key(p) not in index for p in base["page_images"]):
                 add("missing_page_evidence", "Source-page reference absent or unavailable")
             if not contexts[key]:
                 add("missing_crop", "No verse crop manifest entry")
@@ -159,9 +164,18 @@ def audit(root=ROOT):
                     add("ocr_disagreement", {"alternate_ocr_id": rows[0]["id"], "similarity": round(similarity, 6),
                          "note": "May be wrong/dropped/duplicated letters or words, order, or a bad crop. Neither OCR nor Delitzsch is authoritative."}, other)
                 elif letters(other) and unicodedata.normalize("NFC", other) != unicodedata.normalize("NFC", text):
-                    add("pointing_punctuation_or_segmentation_disagreement", "Same consonants; compare marks, punctuation and boundaries with image", other)
+                    add("pointing_punctuation_or_segmentation_disagreement", {"alternate_ocr_id": rows[0]["id"],
+                         "note": "Same consonants; compare marks, punctuation and boundaries with image"}, other)
             elif rows:
                 add("multi_page_extraction_review", "Do not compare a partial-page OCR result to a whole verse")
+    disp.assign_ids(findings)
+    rows, errors = disp.load_dispositions(root)
+    errors += disp.validate(rows, findings, texts, read(root / LEDGER)["corrections"], index)
+    if errors:
+        raise ValueError("Invalid #157 dispositions:\n" + "\n".join(errors))
+    status = {row["finding_id"]: row["disposition"] for row in rows}
+    for finding in findings:
+        finding["status"] = status.get(finding["finding_id"], disp.REQUIRES_REVIEW)
     return {"schema_version": 1, "books": books, "totals": dict(sorted(totals.items())),
             "finding_counts": dict(sorted(Counter(r["error_class"] for r in findings).items())),
             "source_sha256": hashes, "findings": findings,
@@ -172,11 +186,29 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--apply-reviewed", action="store_true")
     parser.add_argument("--output", type=Path, default=ROOT / "data/hutter/review_reports/transcription_audit.json")
+    parser.add_argument("--build-index", action="store_true", help="Rewrite the image index from Hugging Face metadata")
+    parser.add_argument("--fetch", metavar="BOOK", help="Download verse crops for this book's findings awaiting review")
+    parser.add_argument("--finding", action="append", default=[], help="Limit --fetch to these finding ids")
     args = parser.parse_args()
+    if args.build_index:
+        index = disp.build_index()
+        write(ROOT / disp.IMAGE_INDEX, index)
+        print(f"Indexed {len(index['files'])} images at {index['revision']}")
+        return
     if args.apply_reviewed:
         print(f"Applied {apply_ledger()} image-confirmed verse corrections")
     report = audit()
+    if args.fetch:
+        wanted = set(args.finding)
+        findings = [f for f in report["findings"] if f["book"] == args.fetch and f["status"] == disp.REQUIRES_REVIEW
+                    and (not wanted or f["finding_id"] in wanted)]
+        if missing := wanted - {f["finding_id"] for f in findings}:
+            raise SystemExit(f"Not awaiting review in {args.fetch}: {sorted(missing)}")
+        count = disp.fetch(ROOT, findings, disp.load_index(ROOT), disp.download_from_hub)
+        print(f"Fetched {count} verse crops for {len(findings)} findings")
+        return
     write(args.output, report)
+    write(ROOT / disp.SUMMARY, disp.summarize(report["findings"], disp.load_dispositions(ROOT)[0]))
     print(json.dumps({k: report[k] for k in ("totals", "finding_counts")}, indent=2))
 
 

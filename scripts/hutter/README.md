@@ -154,6 +154,36 @@ web chapter JSON and the mobile offline Hutter bundle. Generated bundles are
 not tracked; regenerate them before running the verifier. Source images are
 local archive assets and are needed for applying corrections, not CI fixture tests.
 
+### Finding dispositions (#157)
+
+The page images live in the Hugging Face dataset `jhonnyisaacc/hutter` at a
+pinned revision. `data/hutter/image_index.json` records the SHA-256 and size of
+every page and verse crop there. The audit checks page evidence against this
+index, not against the local disk. Rebuild the index from metadata only with
+`--build-index`.
+
+Every finding has a `finding_id` that does not depend on verse text, so it
+survives a correction, and a `text_sha256` of the current verse. Reviews go in
+`data/hutter/dispositions/<book>.json`, one file per book. A disposition is
+`verified_current`, `historical_variant`, `corrected` or `blocked`. Each row
+records the verse text hash, the image path and hash, a rationale and the
+reviewer. A `corrected` row also gives the index of an image-confirmed entry in
+`transcription_corrections.json`. The audit fails when a row is stale: the
+finding is gone (only a `corrected` row may outlive its finding), the verse text
+or image hash changed, or the correction is not applied. Each finding's
+`status` is its disposition, or `requires_review`. The audit also writes
+`review_reports/disposition_summary.json` with finding and distinct-verse
+counts per class and status.
+
+```bash
+.venv/bin/python -m scripts.hutter.audit_transcription --fetch philemon
+.venv/bin/python -m scripts.hutter.audit_transcription --fetch philemon --finding hutter:6d78c612ca4dde61
+```
+
+`--fetch` downloads only the verse crops of findings that still require review
+into the ignored `data/hutter/verse_images/`. It skips files that already match
+the index and fails when a download does not match it.
+
 ## API morphology review (audit-only)
 
 The deterministic queue can be sent to an OpenAI-compatible endpoint for a
