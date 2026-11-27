@@ -1,5 +1,6 @@
-"""Release audit for image-confirmed Hutter repairs; run from repository root after static generation."""
+"""Release audit for image-reviewed Hutter repairs; run from repository root after static generation."""
 import json,hashlib,subprocess,tempfile,gzip
+from collections import Counter
 from pathlib import Path
 from scripts.hutter.audit_transcription import audit,write,ROOT
 base='2fdb23cad'
@@ -16,7 +17,8 @@ ledger=json.load(open('data/hutter/transcription_corrections.json'))
 old=json.loads(subprocess.check_output(['git','show',base+':data/hutter/review_reports/strong_mapping_report.json']))
 new=json.load(open('data/hutter/review_reports/strong_mapping_report.json'))
 bundle=json.load(open('web/public/data/bundles/hutter.json'))
-for row in ledger['corrections']:
+governing={(r['book'],r['chapter'],r['verse']):r for r in ledger['corrections']}
+for row in governing.values():
  b,c,v=row['book'],row['chapter'],row['verse']
  mapping=json.load(open(f'data/hutter/strong_mappings/{b}.json'))
  mv=next(vv for cc in mapping['chapters'] if cc['chapter']==c for vv in cc['verses'] if vv['verse']==v)
@@ -34,6 +36,6 @@ for f in (ROOT/'data/hutter/strong_mappings').glob('*.json'):
  for ca,cb in zip(a['chapters'],b['chapters'],strict=True):
   for va,vb in zip(ca['verses'],cb['verses'],strict=True):
    if va!=vb:assert (f.stem,ca['number'],va['number']) in allowed
-summary={'baseline_ref':base,'books_image_reviewed':len(ledger['representative_reviews']),'image_confirmed_corrected_verses':len(ledger['corrections']),'crop_pages_corrected':4,'before':{k:before[k] for k in ['totals','finding_counts']},'after':{k:after[k] for k in ['totals','finding_counts']},'mapping_before':old['totals'],'mapping_after':new['totals'],'static_and_offline_verified_verses':len(ledger['corrections']),'transcription_accuracy':'Not measured: samples are selected for review and are not a representative gold corpus.'}
+summary={'baseline_ref':base,'books_image_reviewed':len(ledger['representative_reviews']),'corrected_verses_by_review_status':dict(sorted(Counter(r['review_status'] for r in governing.values()).items())),'crop_pages_corrected':sum('review_note' in page for pages in json.load(open('data/hutter/crop_overrides.json')).values() for page in pages.values()),'before':{k:before[k] for k in ['totals','finding_counts']},'after':{k:after[k] for k in ['totals','finding_counts']},'mapping_before':old['totals'],'mapping_after':new['totals'],'static_and_offline_verified_verses':len(governing),'transcription_accuracy':'Not measured: samples are selected for review and are not a representative gold corpus.'}
 write(Path('data/hutter/review_reports/transcription_summary.json'),summary)
 print(json.dumps(summary,ensure_ascii=False,indent=2))

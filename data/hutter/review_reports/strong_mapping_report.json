@@ -284,25 +284,26 @@
     {
       "book": "john2",
       "verse_count": 13,
-      "word_count": 153,
-      "mapped_count": 150,
-      "unresolved_count": 3,
-      "coverage": 0.9803921568627451,
+      "word_count": 202,
+      "mapped_count": 198,
+      "unresolved_count": 4,
+      "coverage": 0.9801980198019802,
       "confidence_counts": {
-        "high": 136,
-        "medium": 14,
-        "unresolved": 3
+        "high": 190,
+        "medium": 8,
+        "unresolved": 4
       },
       "mapping_method_counts": {
         "aligned_spelling_variant": 3,
-        "attested_pointed_surface": 107,
-        "attested_prefixed_form": 18,
-        "attested_surface": 13,
-        "exact_custom_lemma": 3,
-        "lexicon_lemma": 2,
-        "manual_override": 1,
-        "morphology_api_override": 3,
-        "unresolved": 3
+        "attested_pointed_surface": 158,
+        "attested_prefixed_form": 14,
+        "attested_surface": 8,
+        "exact_custom_lemma": 6,
+        "manual_override": 5,
+        "morphology_api_override": 1,
+        "ocr_crosscheck": 2,
+        "same_verse_spelling": 1,
+        "unresolved": 4
       }
     },
     {
@@ -571,8 +572,8 @@
       "mapping_method_counts": {
         "aligned_spelling_variant": 193,
         "attested_pointed_surface": 4644,
-        "attested_prefixed_form": 488,
-        "attested_surface": 535,
+        "attested_prefixed_form": 487,
+        "attested_surface": 536,
         "contextual_custom_variant": 3,
         "exact_custom_lemma": 123,
         "lexicon_lemma": 111,
@@ -754,24 +755,24 @@
   ],
   "totals": {
     "book_count": 27,
-    "word_count": 107730,
-    "mapped_count": 106281,
-    "unresolved_count": 1449,
-    "coverage": 0.9865497076023392,
+    "word_count": 107779,
+    "mapped_count": 106329,
+    "unresolved_count": 1450,
+    "coverage": 0.9865465443175386,
     "mapping_method_counts": {
       "aligned_custom_name": 3,
       "aligned_spelling_variant": 3158,
-      "attested_pointed_surface": 74420,
-      "attested_prefixed_form": 9217,
-      "attested_surface": 8715,
+      "attested_pointed_surface": 74471,
+      "attested_prefixed_form": 9212,
+      "attested_surface": 8711,
       "contextual_custom_variant": 31,
-      "exact_custom_lemma": 2158,
-      "lexicon_lemma": 2128,
-      "manual_override": 2952,
-      "morphology_api_override": 2563,
-      "ocr_crosscheck": 576,
-      "same_verse_spelling": 166,
-      "unresolved": 1449,
+      "exact_custom_lemma": 2161,
+      "lexicon_lemma": 2126,
+      "manual_override": 2956,
+      "morphology_api_override": 2561,
+      "ocr_crosscheck": 578,
+      "same_verse_spelling": 167,
+      "unresolved": 1450,
       "verse_context_custom": 194
     }
   },
@@ -8067,25 +8068,11 @@
       "book": "john2",
       "chapter": 1,
       "verse": 1,
-      "position": 3,
-      "text": "בְּחֵידִיד",
-      "normalized": "בחידיד",
+      "position": 7,
+      "text": "אוֹהֲבֵם",
+      "normalized": "אוהבמ",
       "aligned_delitzsch_word": null,
       "reason": "No reliable attested form, lexicon lemma, custom verse-context match, or aligned Delitzsch token; automatic assignment would be unsupported."
-    },
-    {
-      "book": "john2",
-      "chapter": 1,
-      "verse": 3,
-      "position": 11,
-      "text": "זָאב",
-      "normalized": "זאב",
-      "aligned_delitzsch_word": {
-        "text": "הָאָב",
-        "strong": "H1",
-        "prefixes": []
-      },
-      "reason": "The available Delitzsch token is not a sufficiently similar spelling; positional borrowing was rejected because wording or word order may differ."
     },
     {
       "book": "john2",
@@ -8094,6 +8081,30 @@
       "position": 4,
       "text": "מִתְחַבֵּר",
       "normalized": "מתחבר",
+      "aligned_delitzsch_word": {
+        "text": "הוּא",
+        "strong": "H1931",
+        "prefixes": []
+      },
+      "reason": "The available Delitzsch token is not a sufficiently similar spelling; positional borrowing was rejected because wording or word order may differ."
+    },
+    {
+      "book": "john2",
+      "chapter": 1,
+      "verse": 11,
+      "position": 10,
+      "text": "לָכֶם",
+      "normalized": "לכמ",
+      "aligned_delitzsch_word": null,
+      "reason": "No reliable attested form, lexicon lemma, custom verse-context match, or aligned Delitzsch token; automatic assignment would be unsupported."
+    },
+    {
+      "book": "john2",
+      "chapter": 1,
+      "verse": 11,
+      "position": 13,
+      "text": "תֵּבוֹשׁוּ",
+      "normalized": "תבושו",
       "aligned_delitzsch_word": null,
       "reason": "No reliable attested form, lexicon lemma, custom verse-context match, or aligned Delitzsch token; automatic assignment would be unsupported."
     },
@@ -17559,6 +17570,20 @@
       "first_occurrence": "matthew 7:23#2"
     },
     {
+      "normalized": "אוהבמ",
+      "forms": [
+        "אוֹהֲבֵם"
+      ],
+      "occurrence_count": 1,
+      "books": [
+        "john2"
+      ],
+      "reason_counts": {
+        "No reliable attested form, lexicon lemma, custom verse-context match, or aligned Delitzsch token; automatic assignment would be unsupported.": 1
+      },
+      "first_occurrence": "john2 1:1#7"
+    },
+    {
       "normalized": "אוזנ",
       "forms": [
         "אוֹזֵן"
@@ -18425,20 +18450,6 @@
         "No reliable attested form, lexicon lemma, custom verse-context match, or aligned Delitzsch token; automatic assignment would be unsupported.": 1
       },
       "first_occurrence": "john 8:11#16"
-    },
-    {
-      "normalized": "בחידיד",
-      "forms": [
-        "בְּחֵידִיד"
-      ],
-      "occurrence_count": 1,
-      "books": [
-        "john2"
-      ],
-      "reason_counts": {
-        "No reliable attested form, lexicon lemma, custom verse-context match, or aligned Delitzsch token; automatic assignment would be unsupported.": 1
-      },
-      "first_occurrence": "john2 1:1#3"
     },
     {
       "normalized": "בחנגו",
@@ -26547,20 +26558,6 @@
       "first_occurrence": "luke 6:10#15"
     },
     {
-      "normalized": "זאב",
-      "forms": [
-        "זָאב"
-      ],
-      "occurrence_count": 1,
-      "books": [
-        "john2"
-      ],
-      "reason_counts": {
-        "The available Delitzsch token is not a sufficiently similar spelling; positional borrowing was rejected because wording or word order may differ.": 1
-      },
-      "first_occurrence": "john2 1:3#11"
-    },
-    {
       "normalized": "זאבימ",
       "forms": [
         "זֵאבִים"
@@ -30019,6 +30016,20 @@
       "first_occurrence": "john 19:13#15"
     },
     {
+      "normalized": "לכמ",
+      "forms": [
+        "לָכֶם"
+      ],
+      "occurrence_count": 1,
+      "books": [
+        "john2"
+      ],
+      "reason_counts": {
+        "No reliable attested form, lexicon lemma, custom verse-context match, or aligned Delitzsch token; automatic assignment would be unsupported.": 1
+      },
+      "first_occurrence": "john2 1:11#10"
+    },
+    {
       "normalized": "ללה",
       "forms": [
         "לֹלָה"
@@ -31722,7 +31733,7 @@
         "john2"
       ],
       "reason_counts": {
-        "No reliable attested form, lexicon lemma, custom verse-context match, or aligned Delitzsch token; automatic assignment would be unsupported.": 1
+        "The available Delitzsch token is not a sufficiently similar spelling; positional borrowing was rejected because wording or word order may differ.": 1
       },
       "first_occurrence": "john2 1:11#4"
     },
@@ -36499,6 +36510,20 @@
         "No reliable attested form, lexicon lemma, custom verse-context match, or aligned Delitzsch token; automatic assignment would be unsupported.": 1
       },
       "first_occurrence": "john 1:38#19"
+    },
+    {
+      "normalized": "תבושו",
+      "forms": [
+        "תֵּבוֹשׁוּ"
+      ],
+      "occurrence_count": 1,
+      "books": [
+        "john2"
+      ],
+      "reason_counts": {
+        "No reliable attested form, lexicon lemma, custom verse-context match, or aligned Delitzsch token; automatic assignment would be unsupported.": 1
+      },
+      "first_occurrence": "john2 1:11#13"
     },
     {
       "normalized": "תגל",

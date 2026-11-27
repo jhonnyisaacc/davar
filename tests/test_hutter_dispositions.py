@@ -17,12 +17,9 @@ def sha(data):
 
 
 def fixture(root, index=True):
-    page = root / "pages/000002.png"
-    page.parent.mkdir()
-    page.write_bytes(b"fixture page evidence")
     write(root / LEDGER, {"corrections": [
-        {"book": "john", "chapter": 1, "verse": 1, "source_image": "pages/000002.png",
-         "source_image_sha256": sha(page.read_bytes()), "before": "אב", "after": "אבא",
+        {"book": "john", "chapter": 1, "verse": 1, "source_image": disp.local_path(PAGE),
+         "source_image_sha256": sha(b"page"), "before": "אב", "after": "אבא",
          "review_status": "image_confirmed", "evidence": "fixture"}]})
     write(root / SOURCE / "john.json", {"chapters": [{"number": 1, "verses": [
         {"number": 1, "text_nikud": "אב", "source_files": ["000002.png"]},
@@ -193,3 +190,15 @@ def test_committed_audit_index_and_summary_agree():
     assert len({f["finding_id"] for f in report["findings"]}) == len(report["findings"])
     summary = disp.summarize(report["findings"], disp.load_dispositions(ROOT)[0])
     assert read(ROOT / disp.SUMMARY) == summary
+
+
+def test_a_letters_only_correction_cannot_close_a_finding_as_corrected(tmp_path):
+    fixture(tmp_path)
+    ledger = read(tmp_path / LEDGER)
+    ledger["corrections"][0]["review_status"] = "letters_confirmed"
+    write(tmp_path / LEDGER, ledger)
+    apply_ledger(tmp_path)
+    finding = ocr_finding(audit(tmp_path))
+    write_dispositions(tmp_path, [row_for(finding, "corrected", correction=0)])
+    with pytest.raises(ValueError, match="not an image-confirmed correction"):
+        audit(tmp_path)

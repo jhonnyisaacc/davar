@@ -650,6 +650,383 @@
           "evidence": "The four printed Hebrew lines read ויוליכני במדבר ברוח וראיתי / את־אשה היושבת על־בהמת / ארגמן מלאה שמות קללה והיו / לה שבעה ראשים ועשר קרנות. In particular the page says ארגמן, not the alternate OCR אדמה, and וראיתי rather than its ואראה. The source supports replacing the corrupted extraction, not substituting Delitzsch wording."
         }
       ]
+    },
+    {
+      "issue": 411,
+      "book": "john2",
+      "chapter": 1,
+      "verse": 1,
+      "source_image": "data/hutter/staging/data/images/hebrew_images/john2/000002.png",
+      "output_image": "data/hutter/verse_images/john2/001_001_000002.png",
+      "crop_box": {
+        "left": 111,
+        "top": 407,
+        "right": 661,
+        "bottom": 743
+      },
+      "source_image_sha256": "7355a24feeda514ff1061dc4725d97f5931415e7d0ede88c6c6d4ea4e7ccdd02",
+      "before": "בְּחֵירֵי לְלַבְּכֶם בְּחֵידִיד כִּי אָהַבְתִּי אֲנִי אוֹתְכֶם בְּאֱמֶת וְלֹא אֲנִי לְבַדִּי אִם כָּל־יֹדְעֵי אֱמֶת",
+      "after": "הַזָּקֵן לַגְּבִירָה בְּחִירָה וְלִבְנֶיהָ אֲשֶׁר אֲנִי אוֹהֲבֵם בֶּאֱמֶת וְלֹא אֲנִי לְבַדִּי כִּי־אִם כָּל־יוֹדְעֵי אֱמֶת׃",
+      "review_status": "letters_confirmed",
+      "confidence": "high",
+      "evidence": [
+        {
+          "error_class": "wrong_letters",
+          "evidence": "The transcribed letters and words of 2 John 1:1 differ from the printed page."
+        },
+        {
+          "error_class": "pointing_unverified",
+          "evidence": "Pointing is the reviewer's best reading and is not verified against the page."
+        }
+      ]
+    },
+    {
+      "issue": 411,
+      "book": "john2",
+      "chapter": 1,
+      "verse": 2,
+      "source_image": "data/hutter/staging/data/images/hebrew_images/john2/000002.png",
+      "output_image": "data/hutter/verse_images/john2/001_002_000002.png",
+      "crop_box": {
+        "left": 111,
+        "top": 707,
+        "right": 661,
+        "bottom": 930
+      },
+      "source_image_sha256": "7355a24feeda514ff1061dc4725d97f5931415e7d0ede88c6c6d4ea4e7ccdd02",
+      "before": "בְּעֲבוּר אֲשֶׁר עֹמֶדֶת בָּנוּ וְהָיְתָה עִמָּנוּ לְעוֹלָם",
+      "after": "בַּעֲבוּר אֱמֶת אֲשֶׁר עוֹמֶדֶת בָּנוּ וְתִהְיֶה עִמָּנוּ לְעוֹלָם׃",
+      "review_status": "letters_confirmed",
+      "confidence": "high",
+      "evidence": [
+        {
+          "error_class": "wrong_letters",
+          "evidence": "The transcribed letters and words of 2 John 1:2 differ from the printed page."
+        },
+        {
+          "error_class": "pointing_unverified",
+          "evidence": "Pointing is the reviewer's best reading and is not verified against the page."
+        }
+      ]
+    },
+    {
+      "issue": 411,
+      "book": "john2",
+      "chapter": 1,
+      "verse": 3,
+      "source_image": "data/hutter/staging/data/images/hebrew_images/john2/000002.png",
+      "output_image": "data/hutter/verse_images/john2/001_003_000002.png",
+      "crop_box": {
+        "left": 111,
+        "top": 894,
+        "right": 661,
+        "bottom": 1230
+      },
+      "source_image_sha256": "7355a24feeda514ff1061dc4725d97f5931415e7d0ede88c6c6d4ea4e7ccdd02",
+      "before": "הֲרֵי עִמְּכֶם חֶסֶד בְּרַחֲמִים שָׁלוֹם בֵּאלֹהִים וּבְאַדֹנֵינוּ יֵשׁוּעַ הַמָּשִׁיחַ בֶּן־זָאב בֶּאֱמֶת וְאַהֲבָה",
+      "after": "תְּהִי־עִמָּכֶם חֶסֶד רַחֲמִים שָׁלוֹם מֵאֱלֹהִים הָאָב וּמֵאֲדֹנֵינוּ יֵשׁוּעַ הַמָּשִׁיחַ בֶּן־הָאָב בֶּאֱמֶת וְאַהֲבָה׃",
+      "review_status": "letters_confirmed",
+      "confidence": "high",
+      "evidence": [
+        {
+          "error_class": "wrong_letters",
+          "evidence": "The transcribed letters and words of 2 John 1:3 differ from the printed page."
+        },
+        {
+          "error_class": "pointing_unverified",
+          "evidence": "Pointing is the reviewer's best reading and is not verified against the page."
+        }
+      ]
+    },
+    {
+      "issue": 411,
+      "book": "john2",
+      "chapter": 1,
+      "verse": 4,
+      "source_image": "data/hutter/staging/data/images/hebrew_images/john2/000002.png",
+      "output_image": "data/hutter/verse_images/john2/001_004_000002.png",
+      "crop_box": {
+        "left": 111,
+        "top": 1194,
+        "right": 661,
+        "bottom": 1548
+      },
+      "source_image_sha256": "7355a24feeda514ff1061dc4725d97f5931415e7d0ede88c6c6d4ea4e7ccdd02",
+      "before": "שָׂמַחְתִּי מְאֹד כִּי־מָצָאתִי מִבָּנֶיךָ כִּי־מִתְהַלְּכִים בֶּאֱמֶת כְּמוֹ לָקַחְנוּ אֶת־הַמִּצְוָה מִן־הָאָב",
+      "after": "שָׂמַחְתִּי מְאוֹד כִּי־מָצָאתִי מִבָּנַיִךְ כִּי־מִתְהַלְּכִים בֶּאֱמֶת כְּמוֹנוּ לָקַחְנוּ אֶת־הַמִּצְוָה מִן־הָאָב׃",
+      "review_status": "letters_confirmed",
+      "confidence": "high",
+      "evidence": [
+        {
+          "error_class": "wrong_letters",
+          "evidence": "Supersedes the earlier image_confirmed row for this verse, whose after text has letter errors. The page prints מאוד where it has מאד, and כמונו where it has כמו."
+        },
+        {
+          "error_class": "pointing_unverified",
+          "evidence": "Pointing is the reviewer's best reading and is not verified against the page."
+        }
+      ]
+    },
+    {
+      "issue": 411,
+      "book": "john2",
+      "chapter": 1,
+      "verse": 5,
+      "source_image": "data/hutter/staging/data/images/hebrew_images/john2/000002.png",
+      "output_image": "data/hutter/verse_images/john2/001_005_000002.png",
+      "crop_box": {
+        "left": 111,
+        "top": 1512,
+        "right": 661,
+        "bottom": 1938
+      },
+      "source_image_sha256": "7355a24feeda514ff1061dc4725d97f5931415e7d0ede88c6c6d4ea4e7ccdd02",
+      "before": "וּבַעֲנוּת שֹׁאֵל אֲנִי מִמֵּךְ הַבְּחִירָה לֹא כַּמָּה לִכְתֹּב אֶלָיִךְ אֶת־הַעֲצָה תְּרוּשָׁה כִּי אִם־אוֹתָהּ שֶׁהָיְתָה לָנוּ מֵרֹאשִׁית אֲשֶׁר נֵאֱהַב אִישׁ אֶת־לְבָבוֹ",
+      "after": "וּמֵעַתָּה שׁוֹאֵל אֲנִי מִמֵּךְ הַגְּבִירָה לֹא־כְּמוֹ לִכְתֹּב אֵלַיִךְ אֶת־מִצְוָה חֲדָשָׁה כִּי־אִם אוֹתָהּ שֶׁהָיְתָה לָּנוּ מֵרֵאשִׁית אֲשֶׁר נֶאֱהַב אִישׁ אֶת רֵעֵהוּ׃",
+      "review_status": "letters_confirmed",
+      "confidence": "high",
+      "evidence": [
+        {
+          "error_class": "wrong_letters",
+          "evidence": "The transcribed letters and words of 2 John 1:5 differ from the printed page."
+        },
+        {
+          "error_class": "pointing_unverified",
+          "evidence": "Pointing is the reviewer's best reading and is not verified against the page."
+        }
+      ]
+    },
+    {
+      "issue": 411,
+      "book": "john2",
+      "chapter": 1,
+      "verse": 6,
+      "source_image": "data/hutter/staging/data/images/hebrew_images/john2/000004.png",
+      "output_image": "data/hutter/verse_images/john2/001_006_000004.png",
+      "crop_box": {
+        "left": 72,
+        "top": 152,
+        "right": 623,
+        "bottom": 501
+      },
+      "source_image_sha256": "a767b6f8ea79ded68dc79a60b3cf5a2cc0cc7100a6177bef977029b3102c6cee",
+      "before": "הָיָה אִישׁ אֲשֶׁר נִשְׁלַח מֵאֵת אֱלֹהִים שְׁמוֹ יוֹחָנָן׃",
+      "after": "וְזֹאת הִיא הָאַהֲבָה אֲשֶׁר נִתְהַלֵּךְ כְּמִצְוֹתָיו כִּי־זֹאת הִיא הַמִּצְוָה כְּמוֹכֶם שְׁמַעְתֶּם מֵרֵאשִׁית אֲשֶׁר בָּהּ תִּתְהַלֵּכוּן׃",
+      "review_status": "letters_confirmed",
+      "confidence": "high",
+      "evidence": [
+        {
+          "error_class": "wrong_book_text",
+          "evidence": "The transcription held the text of John 1:6. The printed page shows 2 John 1:6."
+        },
+        {
+          "error_class": "pointing_unverified",
+          "evidence": "Pointing is the reviewer's best reading and is not verified against the page."
+        }
+      ]
+    },
+    {
+      "issue": 411,
+      "book": "john2",
+      "chapter": 1,
+      "verse": 7,
+      "source_image": "data/hutter/staging/data/images/hebrew_images/john2/000004.png",
+      "output_image": "data/hutter/verse_images/john2/001_007_000004.png",
+      "crop_box": {
+        "left": 72,
+        "top": 465,
+        "right": 623,
+        "bottom": 813
+      },
+      "source_image_sha256": "a767b6f8ea79ded68dc79a60b3cf5a2cc0cc7100a6177bef977029b3102c6cee",
+      "before": "זֶה בָּא לְעֵדוּת לְהָעִיד עַל הָאוֹר לְמַעַן יַאֲמִינוּ כֻלָּם עַל־יָדוֹ׃",
+      "after": "כִּי־מַתְעִים רַבִּים יָצְאוּ בָּעוֹלָם אֲשֶׁר לֹא מְתוֹדִים אֶת יֵשׁוּעַ הַמָּשִׁיחַ כִּי־בָא בְּבָשָׂר זֶה הוּא הַמַּתְעֶה וְאוֹיֵב הַמָּשִׁיחַ׃",
+      "review_status": "letters_confirmed",
+      "confidence": "high",
+      "evidence": [
+        {
+          "error_class": "wrong_book_text",
+          "evidence": "The transcription held the text of John 1:7. The printed page shows 2 John 1:7."
+        },
+        {
+          "error_class": "pointing_unverified",
+          "evidence": "Pointing is the reviewer's best reading and is not verified against the page."
+        }
+      ]
+    },
+    {
+      "issue": 411,
+      "book": "john2",
+      "chapter": 1,
+      "verse": 8,
+      "source_image": "data/hutter/staging/data/images/hebrew_images/john2/000004.png",
+      "output_image": "data/hutter/verse_images/john2/001_008_000004.png",
+      "crop_box": {
+        "left": 72,
+        "top": 777,
+        "right": 623,
+        "bottom": 1017
+      },
+      "source_image_sha256": "a767b6f8ea79ded68dc79a60b3cf5a2cc0cc7100a6177bef977029b3102c6cee",
+      "before": "לֹא הָיָה הוּא הָאוֹר כִּי אִם שֶׁנִּשְׁלַח לְהָעִיד עַל הָאוֹר׃",
+      "after": "הִשָּׁמְרוּ לָכֶם פֶּן־נְאַבֵּד מַה־פָּעַלְנוּ כִּי־אִם שָׂכָר מָלֵא נִקַּח׃",
+      "review_status": "letters_confirmed",
+      "confidence": "high",
+      "evidence": [
+        {
+          "error_class": "wrong_book_text",
+          "evidence": "The transcription held the text of John 1:8. The printed page shows 2 John 1:8."
+        },
+        {
+          "error_class": "pointing_unverified",
+          "evidence": "Pointing is the reviewer's best reading and is not verified against the page."
+        }
+      ]
+    },
+    {
+      "issue": 411,
+      "book": "john2",
+      "chapter": 1,
+      "verse": 9,
+      "source_image": "data/hutter/staging/data/images/hebrew_images/john2/000004.png",
+      "output_image": "data/hutter/verse_images/john2/001_009_000004.png",
+      "crop_box": {
+        "left": 72,
+        "top": 981,
+        "right": 623,
+        "bottom": 1349
+      },
+      "source_image_sha256": "a767b6f8ea79ded68dc79a60b3cf5a2cc0cc7100a6177bef977029b3102c6cee",
+      "before": "הָאוֹר הָאֲמִתִּי הַמֵּאִיר לְכָל־אָדָם בָּא לָעוֹלָם׃",
+      "after": "כָּל־אֲשֶׁר עוֹבֵר וְלֹא מְעוֹדֵד בְּתוֹרַת הַמָּשִׁיחַ לֹא יֶשׁ־לוֹ אֱלֹהִים הַמְּעוֹדֵד בְּתוֹרַת הַמָּשִׁיחַ גַּם הוּא יֶשׁ־לוֹ הָאָב וְגַם הַבֵּן׃",
+      "review_status": "letters_confirmed",
+      "confidence": "high",
+      "evidence": [
+        {
+          "error_class": "wrong_book_text",
+          "evidence": "The transcription held the text of John 1:9. The printed page shows 2 John 1:9."
+        },
+        {
+          "error_class": "pointing_unverified",
+          "evidence": "Pointing is the reviewer's best reading and is not verified against the page."
+        }
+      ]
+    },
+    {
+      "issue": 411,
+      "book": "john2",
+      "chapter": 1,
+      "verse": 10,
+      "source_image": "data/hutter/staging/data/images/hebrew_images/john2/000004.png",
+      "output_image": "data/hutter/verse_images/john2/001_010_000004.png",
+      "crop_box": {
+        "left": 72,
+        "top": 1313,
+        "right": 623,
+        "bottom": 1642
+      },
+      "source_image_sha256": "a767b6f8ea79ded68dc79a60b3cf5a2cc0cc7100a6177bef977029b3102c6cee",
+      "before": "בָּעוֹלָם הָיָה וְהָעוֹלָם נַעֲשָׂה עַל־יָדוֹ וְהָעוֹלָם לֹא יְדָעוֹ׃",
+      "after": "אִם־יָבוֹא אִישׁ אֲלֵיכֶם וְלֹא יָבִיא אֲלֵיכֶם אֶת־הַתּוֹרָה הַזֹּאת לֹא תִקָּחוּהוּ הַבַּיְתָה וְלִשְׁלוֹמוֹ לֹא שְׁאָלוּ׃",
+      "review_status": "letters_confirmed",
+      "confidence": "high",
+      "evidence": [
+        {
+          "error_class": "wrong_book_text",
+          "evidence": "The transcription held the text of John 1:10. The printed page shows 2 John 1:10."
+        },
+        {
+          "error_class": "pointing_unverified",
+          "evidence": "Pointing is the reviewer's best reading and is not verified against the page."
+        }
+      ]
+    },
+    {
+      "issue": 411,
+      "book": "john2",
+      "chapter": 1,
+      "verse": 11,
+      "source_image": "data/hutter/staging/data/images/hebrew_images/john2/000004.png",
+      "output_image": "data/hutter/verse_images/john2/001_011_000004.png",
+      "crop_box": {
+        "left": 72,
+        "top": 1606,
+        "right": 623,
+        "bottom": 1938
+      },
+      "source_image_sha256": "a767b6f8ea79ded68dc79a60b3cf5a2cc0cc7100a6177bef977029b3102c6cee",
+      "before": "כִּי הַשּׁוֹאֵל בִּשְׁלוֹמוֹ מִתְחַבֵּר הוּא לְמַעֲשָׂיו הָרָעִים׃",
+      "after": "כִּי־הַשּׁוֹאֵל לִשְׁלוֹמוֹ מִתְחַבֵּר עִם מַעֲשָׂיו הָרָעִים (הִנֵּה אָמַרְתִּי לָכֶם מִקֶּדֶם פֶּן תֵּבוֹשׁוּ בְּיוֹם יְהוָה׃)",
+      "review_status": "letters_confirmed",
+      "confidence": "high",
+      "evidence": [
+        {
+          "error_class": "wrong_letters",
+          "evidence": "The transcribed letters and words of 2 John 1:11 differ from the printed page."
+        },
+        {
+          "error_class": "pointing_unverified",
+          "evidence": "Pointing is the reviewer's best reading and is not verified against the page."
+        }
+      ]
+    },
+    {
+      "issue": 411,
+      "book": "john2",
+      "chapter": 1,
+      "verse": 12,
+      "source_image": "data/hutter/staging/data/images/hebrew_images/john2/000006.png",
+      "output_image": "data/hutter/verse_images/john2/001_012_000006.png",
+      "crop_box": {
+        "left": 123,
+        "top": 137,
+        "right": 672,
+        "bottom": 589
+      },
+      "source_image_sha256": "9c528a98e90fd1acb0bf984a2a8cbaae313abd4fd39f1cbcfdda9ee9337d6f53",
+      "before": "לִבְחֻרֶת הַיָּה לוֹ עֶבֶד אֵלֹהִים לְבָנוֹ נִבְדָּלוּ כִּי לְמַעַן וְהוּא אֱלֹהִים אֵלָיו לְבָא אֵלֹהִים אֶת־מִשְׁפַּט אַנִי לָבוֹא אֱלֹהִים אֵל בַּת לָהֶם אֵידַע הַמֵלֵא שַׁהֲרְהוּ",
+      "after": "רַבּוֹת הָיוּ לִי לִכְתֹּב אֲלֵיכֶם אַךְ לֹא אֶכְתֹּב בִּמְגִלָּה וּבִדְיוֹ כִּי־אִם מְשַׂבֵּר אֲנִי לָבוֹא אֲלֵיכֶם וּמִפֶּה אֶל־פֶּה לְדַבֵּר אֲשֶׁר תִּמָּלֵא שִׂמְחָתֵנוּ׃",
+      "review_status": "letters_confirmed",
+      "confidence": "high",
+      "evidence": [
+        {
+          "error_class": "wrong_letters",
+          "evidence": "The transcribed letters and words of 2 John 1:12 differ from the printed page."
+        },
+        {
+          "error_class": "pointing_unverified",
+          "evidence": "Pointing is the reviewer's best reading and is not verified against the page."
+        }
+      ]
+    },
+    {
+      "issue": 411,
+      "book": "john2",
+      "chapter": 1,
+      "verse": 13,
+      "source_image": "data/hutter/staging/data/images/hebrew_images/john2/000006.png",
+      "output_image": "data/hutter/verse_images/john2/001_013_000006.png",
+      "crop_box": {
+        "left": 123,
+        "top": 553,
+        "right": 672,
+        "bottom": 773
+      },
+      "source_image_sha256": "9c528a98e90fd1acb0bf984a2a8cbaae313abd4fd39f1cbcfdda9ee9337d6f53",
+      "before": "אֲשֶׁר שַׁלְוְבֶן בֶּן אַחֲרוֹן",
+      "after": "שֹׁאֲלוּ לִשְׁלוֹמֵךְ בְּנֵי אֲחוֹתֵךְ הַבְּחִירָה אָמֵן׃",
+      "review_status": "letters_confirmed",
+      "confidence": "high",
+      "evidence": [
+        {
+          "error_class": "wrong_letters",
+          "evidence": "The transcribed letters and words of 2 John 1:13 differ from the printed page."
+        },
+        {
+          "error_class": "pointing_unverified",
+          "evidence": "Pointing is the reviewer's best reading and is not verified against the page."
+        }
+      ]
     }
   ],
   "representative_reviews": [

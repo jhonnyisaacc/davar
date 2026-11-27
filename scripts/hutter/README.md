@@ -135,6 +135,14 @@ bun run --cwd web generate-data
 `transcription_corrections.json` stores exact before/after verses, reviewed spans,
 page/crop locations, image SHA-256 hashes and evidence. Apply validates all image
 and text preconditions before writing; repeat application changes nothing.
+Each row has a `review_status`. `image_confirmed` means the letters and the
+pointing were checked against the page. `letters_confirmed` means the letters,
+word order and punctuation were checked, and the pointing is an unverified best
+reading. The audit keeps every verse whose text comes from a `letters_confirmed`
+row in the queue as a `pointing_unverified` finding. Rows apply in order, so a
+later row for the same verse supersedes an earlier one; its `before` is the
+earlier row's `after`. Apply and `map_strongs` check each page hash against
+`data/hutter/image_index.json`, so no local page images are needed.
 The report is gzip-compressed with a fixed timestamp for deterministic bytes;
 inspect it using `gzip -dc data/hutter/review_reports/transcription_audit.json.gz`.
 `transcription_summary.json` records the before/after metrics and export checks.
@@ -151,8 +159,12 @@ Historical defective spellings are not normalized to Delitzsch.
 The verifier compares the pre-pass snapshot `2fdb23cad` with this ledger, checks
 that other verses are unchanged, and checks all repaired verses in mappings,
 web chapter JSON and the mobile offline Hutter bundle. Generated bundles are
-not tracked; regenerate them before running the verifier. Source images are
-local archive assets and are needed for applying corrections, not CI fixture tests.
+not tracked; regenerate them before running the verifier.
+
+`map_strongs --write` regenerates every book and refuses a coverage drop. To
+replace only the reviewed verses of issues 127 and 411 and keep every other
+published mapping, run
+`.venv/bin/python -m scripts.hutter.map_strongs --reviewed-transcriptions-only --write`.
 
 ### Finding dispositions (#157)
 
@@ -183,6 +195,9 @@ counts per class and status.
 `--fetch` downloads only the verse crops of findings that still require review
 into the ignored `data/hutter/verse_images/`. It skips files that already match
 the index and fails when a download does not match it.
+The 2 John crops on Hugging Face predate the #411 crop overrides. Until they
+are regenerated and the index revision moves, `--fetch john2` replaces the local
+crops cut from the current manifest with the old ones.
 
 ## API morphology review (audit-only)
 

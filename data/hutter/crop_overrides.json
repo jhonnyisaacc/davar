@@ -225,14 +225,20 @@
     }
   },
   "john2": {
-    "000006.png": {
-      "content_y": [150, 760],
-      "cut_lines": [560]
-    },
     "000002.png": {
       "content_y": [425, 1920],
-      "cut_lines": [725, 900, 1210, 1530],
-      "review_note": "Printed verse labels and full page boundaries inspected for issue #155; previous equal-height crops clipped or selected wrong verses."
+      "cut_lines": [725, 912, 1212, 1530],
+      "review_note": "Verse bands measured on the printed page for issue #411; each crop holds one Hebrew verse and its Spanish gloss."
+    },
+    "000004.png": {
+      "content_y": [170, 1920],
+      "cut_lines": [483, 795, 999, 1331, 1624],
+      "review_note": "Verse bands measured on the printed page for issue #411; each crop holds one Hebrew verse and its Spanish gloss."
+    },
+    "000006.png": {
+      "content_y": [155, 755],
+      "cut_lines": [571],
+      "review_note": "Verse bands measured on the printed page for issue #411; each crop holds one Hebrew verse and its Spanish gloss."
     }
   },
   "john3": {

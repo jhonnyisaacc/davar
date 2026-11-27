@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import re
 import unicodedata
@@ -15,7 +14,9 @@ from typing import Any, Iterable, TypeVar
 T = TypeVar("T")
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+REVIEWED_ISSUES = frozenset({127, 411})
 
+from scripts.hutter.dispositions import LEDGER_REVIEWS, load_index, require_indexed
 from scripts.translit.local_translit import LocalTransliterator
 
 
@@ -97,7 +98,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--report", type=Path, default=DEFAULT_REPORT_PATH)
     parser.add_argument(
         "--reviewed-transcriptions-only", action="store_true",
-        help="Regenerate only issue-127 image-reviewed verses; preserve other published mappings.",
+        help="Regenerate only image-reviewed verses of issues 127 and 411; preserve other published mappings.",
     )
     parser.add_argument(
         "--write",
@@ -1261,7 +1262,7 @@ def replace_reviewed_verses(old: dict[str, Any], new: dict[str, Any],
                            corrections: list[dict[str, Any]]) -> set[tuple[int, int]]:
     """Replace only ledger-authorized verses after checking the published baseline."""
     reviews = {(r["chapter"], r["verse"]): r for r in corrections
-               if r["book"] == old["book"] and r.get("issue") == 127}
+               if r["book"] == old["book"] and r.get("issue") in REVIEWED_ISSUES}
     replacements = {(c["chapter"], v["verse"]): v for c in new["chapters"] for v in c["verses"]}
     seen = set()
     for chapter in old["chapters"]:
@@ -1270,7 +1271,7 @@ def replace_reviewed_verses(old: dict[str, Any], new: dict[str, Any],
             if key not in reviews:
                 continue
             review = reviews[key]
-            if (review.get("review_status") != "image_confirmed"
+            if (review.get("review_status") not in LEDGER_REVIEWS
                     or verse["hebrew"] not in (review["before"], review["after"])
                     or replacements.get(key, {}).get("hebrew") != review["after"]):
                 raise ValueError(f"Stale or unreviewed verse replacement: {old['book']} {key}")
@@ -1289,20 +1290,20 @@ def annotate_image_review(payload: dict[str, Any], corrections: list[dict[str, A
     can supply that more detailed parse explicitly.
     """
     by_verse = {(r["chapter"], r["verse"]): r for r in corrections
-                if r["book"] == payload["book"] and r.get("issue") == 127}
+                if r["book"] == payload["book"] and r.get("issue") in REVIEWED_ISSUES}
     for chapter in payload["chapters"]:
         for verse in chapter["verses"]:
             review = by_verse.get((chapter["chapter"], verse["verse"]))
             if not review:
                 continue
-            if review.get("review_status") != "image_confirmed" or verse["hebrew"] != review["after"]:
-                raise ValueError("Mapping text does not match its image-confirmed correction")
+            if review.get("review_status") not in LEDGER_REVIEWS or verse["hebrew"] != review["after"]:
+                raise ValueError("Mapping text does not match its image-reviewed correction")
             verse["transcription_review"] = {
                 "ledger": "data/hutter/transcription_corrections.json",
                 "source_image": review["source_image"],
                 "source_image_sha256": review["source_image_sha256"],
                 "crop_image": review["output_image"],
-                "status": "image_confirmed",
+                "status": review["review_status"],
             }
             for word in verse["words"]:
                 if word.get("strong") and "mapping_parse" not in word:
@@ -1349,11 +1350,10 @@ def main() -> int:
     pending_payloads: dict[str, dict[str, Any]] = {}
     correction_path = REPO_ROOT / "data/hutter/transcription_corrections.json"
     corrections = load_json(correction_path).get("corrections", []) if correction_path.exists() else []
+    image_index = load_index(REPO_ROOT)
     for review in corrections:
-        if review.get("issue") == 127:
-            image = REPO_ROOT / review["source_image"]
-            if hashlib.sha256(image.read_bytes()).hexdigest() != review["source_image_sha256"]:
-                raise ValueError(f"Reviewed source image changed: {image}")
+        if review.get("issue") in REVIEWED_ISSUES:
+            require_indexed(image_index, review["source_image"], review["source_image_sha256"])
     prior_report = load_json(report_path) if args.reviewed_transcriptions_only else None
 
     for book in books:
